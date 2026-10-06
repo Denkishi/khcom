@@ -104,19 +104,19 @@ static WarpIcon sWarpIcons[13] = {
 
 static WorldSelectDef sWorldSelectDefs[14] = {
     {NULL, 0, NULL, 0, NULL, NULL},
-    {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, LOCALIZED(gWorldNameAgrabah)},
-    {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, LOCALIZED(gWorldNameAtlantica)},
-    {gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, LOCALIZED(gWorldNameOlympusColiseum)},
-    {gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, LOCALIZED(gWorldNameWonderland)},
-    {gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, LOCALIZED(gWorldNameMonstro)},
-    {gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, LOCALIZED(gWorldNameHalloweenTown)},
-    {gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, LOCALIZED(gWorldNameNeverLand)},
-    {gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, LOCALIZED(gWorldNameHollowBastion)},
-    {gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, LOCALIZED(gWorldNameDestinyIslands)},
-    {gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, LOCALIZED(gWorldNameTraverseTown)},
-    {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, LOCALIZED(gWorldNameTwilightTown)},
-    {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, LOCALIZED(gWorldNameCastleOblivion)},
-    {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, LOCALIZED(gWorldName100AcreWood)},
+    {gWorldIconAgrabahPalette, sizeof(gWorldIconAgrabahPalette), gWorldIconAgrabahTiles, sizeof(gWorldIconAgrabahTiles), gWorldIconAgrabahFrame0, LOCALIZED(gWorldNameAgrabah)},
+    {gWorldIconAtlanticaPalette, sizeof(gWorldIconAtlanticaPalette), gWorldIconAtlanticaTiles, sizeof(gWorldIconAtlanticaTiles), gWorldIconAtlanticaFrame0, LOCALIZED(gWorldNameAtlantica)},
+    {gWorldIconOlympusColiseumPalette, sizeof(gWorldIconOlympusColiseumPalette), gWorldIconOlympusColiseumTiles, sizeof(gWorldIconOlympusColiseumTiles), gWorldIconOlympusColiseumFrame0, LOCALIZED(gWorldNameOlympusColiseum)},
+    {gWorldIconWonderlandPalette, sizeof(gWorldIconWonderlandPalette), gWorldIconWonderlandTiles, sizeof(gWorldIconWonderlandTiles), gWorldIconWonderlandFrame0, LOCALIZED(gWorldNameWonderland)},
+    {gWorldIconMonstroPalette, sizeof(gWorldIconMonstroPalette), gWorldIconMonstroTiles, sizeof(gWorldIconMonstroTiles), gWorldIconMonstroFrame0, LOCALIZED(gWorldNameMonstro)},
+    {gWorldIconHalloweenTownPalette, sizeof(gWorldIconHalloweenTownPalette), gWorldIconHalloweenTownTiles, sizeof(gWorldIconHalloweenTownTiles), gWorldIconHalloweenTownFrame0, LOCALIZED(gWorldNameHalloweenTown)},
+    {gWorldIconNeverLandPalette, sizeof(gWorldIconNeverLandPalette), gWorldIconNeverLandTiles, sizeof(gWorldIconNeverLandTiles), gWorldIconNeverLandFrame0, LOCALIZED(gWorldNameNeverLand)},
+    {gWorldIconHollowBastionPalette, sizeof(gWorldIconHollowBastionPalette), gWorldIconHollowBastionTiles, sizeof(gWorldIconHollowBastionTiles), gWorldIconHollowBastionFrame0, LOCALIZED(gWorldNameHollowBastion)},
+    {gWorldIconDestinyIslandsPalette, sizeof(gWorldIconDestinyIslandsPalette), gWorldIconDestinyIslandsTiles, sizeof(gWorldIconDestinyIslandsTiles), gWorldIconDestinyIslandsFrame0, LOCALIZED(gWorldNameDestinyIslands)},
+    {gWorldIconTraverseTownPalette, sizeof(gWorldIconTraverseTownPalette), gWorldIconTraverseTownTiles, sizeof(gWorldIconTraverseTownTiles), gWorldIconTraverseTownFrame0, LOCALIZED(gWorldNameTraverseTown)},
+    {gWorldIconTwilightTownPalette, sizeof(gWorldIconTwilightTownPalette), gWorldIconTwilightTownTiles, sizeof(gWorldIconTwilightTownTiles), gWorldIconTwilightTownFrame0, LOCALIZED(gWorldNameTwilightTown)},
+    {gWorldIconCastleOblivionPalette, sizeof(gWorldIconCastleOblivionPalette), gWorldIconCastleOblivionTiles, sizeof(gWorldIconCastleOblivionTiles), gWorldIconCastleOblivionFrame0, LOCALIZED(gWorldNameCastleOblivion)},
+    {gWorldIcon100AcreWoodPalette, sizeof(gWorldIcon100AcreWoodPalette), gWorldIcon100AcreWoodTiles, sizeof(gWorldIcon100AcreWoodTiles), gWorldIcon100AcreWoodFrame0, LOCALIZED(gWorldName100AcreWood)},
 };
 
 void WorldWarpSetTilemapRectPalette(u8 pal, u16 w, s16 h, u16* map, s16 x, s16 y) {

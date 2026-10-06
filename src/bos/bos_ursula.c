@@ -40,7 +40,7 @@
 static const EmyKind sBosUrsulaEmyKind = { ENEMY_URSULA, 0, 32, 24, 0, 0, 0 };
 
 static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
-    gBosUrsulaBgTiles, 0x7000, gBosUrsulaBgPalettes, 0xe0, { gBosUrsulaBgMap0, gBosUrsulaBgMap1, gBosUrsulaBgMap2, gBosUrsulaBgMap3 }
+    gBosUrsulaBgTiles, 0x7000, gBosUrsulaBgPalettes, sizeof(gBosUrsulaBgPalettes), { gBosUrsulaBgMap0, gBosUrsulaBgMap1, gBosUrsulaBgMap2, gBosUrsulaBgMap3 }
 };
 
 static const u16* sBosUrsulaMapBlocksLeft[12] = {

@@ -70,23 +70,23 @@ static u16* sMooglePackItemMixedMapsByLanguage[5] = {
 
 static const MooglePackMenuEntry sMooglePackMenuEntries[4] = {
 #ifdef VERSION_EU
-    {MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_ROW_LIST, 1, 67, 16, gMooglePackSelectionTopLeftMap, 1280, 5, 3, 40, 24, {{sMooglePackAttackMagicMapsByLanguage, 0, 0}, {sMooglePackAttackMagicMapsByLanguage, 0, 16}, {sMooglePackItemMixedMapsByLanguage, 0, 0}, {sMooglePackItemMixedMapsByLanguage, 0, 16}}},
-    {MOOGLE_PACK_ENTRY_NONE, 3, 0, MOOGLE_PACK_ENTRY_NONE, 163, 16, gMooglePackSelectionTopRightMap, 1280, 17, 3, 136, 24, {{sMooglePackAttackMagicMapsByLanguage, 12, 0}, {sMooglePackAttackMagicMapsByLanguage, 12, 16}, {sMooglePackItemMixedMapsByLanguage, 12, 0}, {sMooglePackItemMixedMapsByLanguage, 12, 16}}},
-    {0, MOOGLE_PACK_ENTRY_NONE, MOOGLE_PACK_ENTRY_ROW_LIST, 3, 67, 80, gMooglePackSelectionBottomLeftMap, 1280, 5, 11, 40, 88, {{sMooglePackAttackMagicMapsByLanguage, 0, 8}, {sMooglePackAttackMagicMapsByLanguage, 0, 24}, {sMooglePackItemMixedMapsByLanguage, 0, 8}, {sMooglePackItemMixedMapsByLanguage, 0, 24}}},
-    {1, MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_NONE, 163, 80, gMooglePackSelectionBottomRightMap, 1280, 17, 11, 136, 88, {{sMooglePackAttackMagicMapsByLanguage, 12, 8}, {sMooglePackAttackMagicMapsByLanguage, 12, 24}, {sMooglePackItemMixedMapsByLanguage, 12, 8}, {sMooglePackItemMixedMapsByLanguage, 12, 24}}},
+    {MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_ROW_LIST, 1, 67, 16, gMooglePackSelectionTopLeftMap, sizeof(gMooglePackSelectionTopLeftMap), 5, 3, 40, 24, {{sMooglePackAttackMagicMapsByLanguage, 0, 0}, {sMooglePackAttackMagicMapsByLanguage, 0, 16}, {sMooglePackItemMixedMapsByLanguage, 0, 0}, {sMooglePackItemMixedMapsByLanguage, 0, 16}}},
+    {MOOGLE_PACK_ENTRY_NONE, 3, 0, MOOGLE_PACK_ENTRY_NONE, 163, 16, gMooglePackSelectionTopRightMap, sizeof(gMooglePackSelectionTopRightMap), 17, 3, 136, 24, {{sMooglePackAttackMagicMapsByLanguage, 12, 0}, {sMooglePackAttackMagicMapsByLanguage, 12, 16}, {sMooglePackItemMixedMapsByLanguage, 12, 0}, {sMooglePackItemMixedMapsByLanguage, 12, 16}}},
+    {0, MOOGLE_PACK_ENTRY_NONE, MOOGLE_PACK_ENTRY_ROW_LIST, 3, 67, 80, gMooglePackSelectionBottomLeftMap, sizeof(gMooglePackSelectionBottomLeftMap), 5, 11, 40, 88, {{sMooglePackAttackMagicMapsByLanguage, 0, 8}, {sMooglePackAttackMagicMapsByLanguage, 0, 24}, {sMooglePackItemMixedMapsByLanguage, 0, 8}, {sMooglePackItemMixedMapsByLanguage, 0, 24}}},
+    {1, MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_NONE, 163, 80, gMooglePackSelectionBottomRightMap, sizeof(gMooglePackSelectionBottomRightMap), 17, 11, 136, 88, {{sMooglePackAttackMagicMapsByLanguage, 12, 8}, {sMooglePackAttackMagicMapsByLanguage, 12, 24}, {sMooglePackItemMixedMapsByLanguage, 12, 8}, {sMooglePackItemMixedMapsByLanguage, 12, 24}}},
 #else
-    {MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_ROW_LIST, 1, 67, 16, gMooglePackSelectionTopLeftMap, 1280, 5, 3, 40, 24, {{gMooglePackAttackMagicMap, 0, 0}, {gMooglePackAttackMagicMap, 0, 16}, {gMooglePackItemMixedMap, 0, 0}, {gMooglePackItemMixedMap, 0, 16}}},
-    {MOOGLE_PACK_ENTRY_NONE, 3, 0, MOOGLE_PACK_ENTRY_NONE, 163, 16, gMooglePackSelectionTopRightMap, 1280, 17, 3, 136, 24, {{gMooglePackAttackMagicMap, 12, 0}, {gMooglePackAttackMagicMap, 12, 16}, {gMooglePackItemMixedMap, 12, 0}, {gMooglePackItemMixedMap, 12, 16}}},
-    {0, MOOGLE_PACK_ENTRY_NONE, MOOGLE_PACK_ENTRY_ROW_LIST, 3, 67, 80, gMooglePackSelectionBottomLeftMap, 1280, 5, 11, 40, 88, {{gMooglePackAttackMagicMap, 0, 8}, {gMooglePackAttackMagicMap, 0, 24}, {gMooglePackItemMixedMap, 0, 8}, {gMooglePackItemMixedMap, 0, 24}}},
-    {1, MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_NONE, 163, 80, gMooglePackSelectionBottomRightMap, 1280, 17, 11, 136, 88, {{gMooglePackAttackMagicMap, 12, 8}, {gMooglePackAttackMagicMap, 12, 24}, {gMooglePackItemMixedMap, 12, 8}, {gMooglePackItemMixedMap, 12, 24}}},
+    {MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_ROW_LIST, 1, 67, 16, gMooglePackSelectionTopLeftMap, sizeof(gMooglePackSelectionTopLeftMap), 5, 3, 40, 24, {{gMooglePackAttackMagicMap, 0, 0}, {gMooglePackAttackMagicMap, 0, 16}, {gMooglePackItemMixedMap, 0, 0}, {gMooglePackItemMixedMap, 0, 16}}},
+    {MOOGLE_PACK_ENTRY_NONE, 3, 0, MOOGLE_PACK_ENTRY_NONE, 163, 16, gMooglePackSelectionTopRightMap, sizeof(gMooglePackSelectionTopRightMap), 17, 3, 136, 24, {{gMooglePackAttackMagicMap, 12, 0}, {gMooglePackAttackMagicMap, 12, 16}, {gMooglePackItemMixedMap, 12, 0}, {gMooglePackItemMixedMap, 12, 16}}},
+    {0, MOOGLE_PACK_ENTRY_NONE, MOOGLE_PACK_ENTRY_ROW_LIST, 3, 67, 80, gMooglePackSelectionBottomLeftMap, sizeof(gMooglePackSelectionBottomLeftMap), 5, 11, 40, 88, {{gMooglePackAttackMagicMap, 0, 8}, {gMooglePackAttackMagicMap, 0, 24}, {gMooglePackItemMixedMap, 0, 8}, {gMooglePackItemMixedMap, 0, 24}}},
+    {1, MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_NONE, 163, 80, gMooglePackSelectionBottomRightMap, sizeof(gMooglePackSelectionBottomRightMap), 17, 11, 136, 88, {{gMooglePackAttackMagicMap, 12, 8}, {gMooglePackAttackMagicMap, 12, 24}, {gMooglePackItemMixedMap, 12, 8}, {gMooglePackItemMixedMap, 12, 24}}},
 #endif
 };
 
 static const MooglePackSpriteDef sMooglePackSpriteDefs[4] = {
-    {gMooglePackTier0Palette, 32, gMooglePackTier0Tiles, 800, gMooglePackTier0Frame0, 10, 12},
-    {gMooglePackTier1Palette, 32, gMooglePackTier1Tiles, 608, gMooglePackTier1Frame0, 12, 13},
-    {gMooglePackTier2Palette, 32, gMooglePackTier2Tiles, 608, gMooglePackTier2Frame0, 12, 13},
-    {gMooglePackTier3Palette, 32, gMooglePackTier3Tiles, 896, gMooglePackTier3Frame0, 9, 7},
+    {gMooglePackTier0Palette, sizeof(gMooglePackTier0Palette), gMooglePackTier0Tiles, sizeof(gMooglePackTier0Tiles), gMooglePackTier0Frame0, 10, 12},
+    {gMooglePackTier1Palette, sizeof(gMooglePackTier1Palette), gMooglePackTier1Tiles, sizeof(gMooglePackTier1Tiles), gMooglePackTier1Frame0, 12, 13},
+    {gMooglePackTier2Palette, sizeof(gMooglePackTier2Palette), gMooglePackTier2Tiles, sizeof(gMooglePackTier2Tiles), gMooglePackTier2Frame0, 12, 13},
+    {gMooglePackTier3Palette, sizeof(gMooglePackTier3Palette), gMooglePackTier3Tiles, sizeof(gMooglePackTier3Tiles), gMooglePackTier3Frame0, 9, 7},
 };
 
 static const u16 sMoogleCardValueWeights[10] = {

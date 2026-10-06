@@ -47,7 +47,7 @@ static const GaEntryDef sGaEntryDefs[6] = {
 };
 
 static const BosMapConfig sBosMapConfig =
-{gBosGaBgTiles, 16352, gBosGaBgPalette, 320, {gBosGaBgTopLeftMap, gBosGaBgTopRightMap, gBosGaBgBottomLeftMap, gBosGaBgBottomRightMap}}
+{gBosGaBgTiles, 16352, gBosGaBgPalette, sizeof(gBosGaBgPalette), {gBosGaBgTopLeftMap, gBosGaBgTopRightMap, gBosGaBgBottomLeftMap, gBosGaBgBottomRightMap}}
 ;
 
 static const s32 sBosGaTanTable[32] = {

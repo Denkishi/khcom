@@ -97,8 +97,8 @@ static u8 sMsTopMessageStarted;
 static s16 sMsTopIntroIndex;
 
 static const WarpDef sWarpDefs[2] = {
-    {&gModeMsShop, gMsTopRoomBgMap, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gMsTopPacksPalette, 32, gMsTopPacksTiles, 832, gMsTopPacksAnims, gMsTopPacksFrames, 0}, {192, 84, gMoguPalette, 32, gMsChargeMoogleTiles, 2368, gMsChargeMoogleAnims, gMsChargeMoogleFrames, 1}}},
-    {&gModeMsCharge, gMsTopSpotlightBgMap, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gMsTopPacksDimPalette, 32, gMsTopPacksDimTiles, 832, gMsTopPacksDimAnims, gMsTopPacksDimFrames, 0}, {160, 84, gMsTopMoogleDimPalette, 32, gMsChargeMoogleTiles, 2368, gMsChargeMoogleAnims, gMsChargeMoogleFrames, 0}}},
+    {&gModeMsShop, gMsTopRoomBgMap, sizeof(gMsTopRoomBgMap), 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gMsTopPacksPalette, sizeof(gMsTopPacksPalette), gMsTopPacksTiles, sizeof(gMsTopPacksTiles), gMsTopPacksAnims, gMsTopPacksFrames, 0}, {192, 84, gMoguPalette, sizeof(gMoguPalette), gMsChargeMoogleTiles, sizeof(gMsChargeMoogleTiles), gMsChargeMoogleAnims, gMsChargeMoogleFrames, 1}}},
+    {&gModeMsCharge, gMsTopSpotlightBgMap, sizeof(gMsTopSpotlightBgMap), 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gMsTopPacksDimPalette, sizeof(gMsTopPacksDimPalette), gMsTopPacksDimTiles, sizeof(gMsTopPacksDimTiles), gMsTopPacksDimAnims, gMsTopPacksDimFrames, 0}, {160, 84, gMsTopMoogleDimPalette, sizeof(gMsTopMoogleDimPalette), gMsChargeMoogleTiles, sizeof(gMsChargeMoogleTiles), gMsChargeMoogleAnims, gMsChargeMoogleFrames, 0}}},
 };
 
 static const u16 sMsTopIntroMessages[3] = {

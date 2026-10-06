@@ -25,7 +25,7 @@ s16 gBosTmActorY EWRAM_COMMON(4);
 s16 gBosTmBossY EWRAM_COMMON(4);
 
 static const BattleBackgroundDef sBosTmBattleBackgroundDef = {
-    gBosTmBgTiles, 0x8000, gBosTmBgPalette, 0x140, { gBosTmBgMap, gBosTmBgMap, gBosTmBgMap, gBosTmBgMap }
+    gBosTmBgTiles, sizeof(gBosTmBgTiles), gBosTmBgPalette, sizeof(gBosTmBgPalette), { gBosTmBgMap, gBosTmBgMap, gBosTmBgMap, gBosTmBgMap }
 };
 
 TaskDesc gTaskDescBosTm = {

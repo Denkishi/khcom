@@ -35,7 +35,7 @@
 static const EmyKind sBosLstEmyKind = { ENEMY_MARLUXIA_2, 256, 8, 8, 0, 128, 0 };
 
 static const BattleBackgroundDef sBosLstBattleBackgroundDef = {
-    gBosLstBgTiles, 0x8000, gBosLstBgPalette, 0x140, { gBosLstBgMap, gBosLstBgMap, gBosLstBgMap, gBosLstBgMap }
+    gBosLstBgTiles, sizeof(gBosLstBgTiles), gBosLstBgPalette, 0x140, { gBosLstBgMap, gBosLstBgMap, gBosLstBgMap, gBosLstBgMap }
 };
 
 static const LstAnimDef sLstAnimDefs[8] = {

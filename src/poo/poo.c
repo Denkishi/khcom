@@ -7746,7 +7746,7 @@ TaskDesc gTaskDescPooPooh = {
 };
 
 const PooMapBgDesc gPooMapBgDesc = {
-    gPooMapBgTiles, 32768, gPooMapBgPalette, 512, gPooMapBgTiles2, 16032, 16, 9
+    gPooMapBgTiles, sizeof(gPooMapBgTiles), gPooMapBgPalette, sizeof(gPooMapBgPalette), gPooMapBgTiles2, sizeof(gPooMapBgTiles2), 16, 9
 };
 
 const PooSpawn gPooSpawns[85] = {

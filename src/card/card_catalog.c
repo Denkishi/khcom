@@ -4317,9 +4317,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4338,9 +4338,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4359,9 +4359,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4384,9 +4384,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4409,9 +4409,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4434,9 +4434,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4459,9 +4459,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4484,9 +4484,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4509,9 +4509,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4534,9 +4534,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4559,9 +4559,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4588,9 +4588,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4609,9 +4609,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4630,9 +4630,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4651,9 +4651,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4676,9 +4676,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4701,9 +4701,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4726,9 +4726,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4751,9 +4751,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4776,9 +4776,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4801,9 +4801,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4826,9 +4826,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4851,9 +4851,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4872,9 +4872,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4897,9 +4897,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4922,9 +4922,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4951,9 +4951,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -4976,9 +4976,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5001,9 +5001,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5026,9 +5026,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5051,9 +5051,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5076,9 +5076,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5101,9 +5101,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5122,9 +5122,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5143,9 +5143,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5168,9 +5168,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5193,9 +5193,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5218,9 +5218,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5243,9 +5243,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5268,9 +5268,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5293,9 +5293,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5318,9 +5318,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5343,9 +5343,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5368,9 +5368,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5393,9 +5393,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5418,9 +5418,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5443,9 +5443,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5468,9 +5468,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5493,9 +5493,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5518,9 +5518,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5539,9 +5539,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5564,9 +5564,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5589,9 +5589,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5614,9 +5614,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU
@@ -5639,9 +5639,9 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #ifndef VERSION_EU
 #if defined(VERSION_JP)
-        28032,
+        sizeof(gHcEffectNameTiles),
 #elif defined(VERSION_US)
-        24704,
+        sizeof(gHcEffectNameTiles),
 #endif
 #endif
 #ifdef VERSION_EU

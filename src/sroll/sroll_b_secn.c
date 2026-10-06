@@ -92,41 +92,41 @@ void task_sroll_b_secn_3(SrollBSecnWork* work) {
 }
 
 const SrollSecnSprite gSrollSecnSprites[] = {
-    { gSrollSecnScenarioTiles, 27 * 32, gSrollSecnScenarioAnims, gSrollSecnScenarioFrames },
-    { gSrollSecn2DArtTiles, 24 * 32, gSrollSecn2DArtAnims, gSrollSecn2DArtFrames },
-    { gSrollSecn3DAnimationTiles, 37 * 32, gSrollSecn3DAnimationAnims, gSrollSecn3DAnimationFrames },
-    { gSrollSecnPlanningTiles, 27 * 32, gSrollSecnPlanningAnims, gSrollSecnPlanningFrames },
-    { gSrollSecnEventCreationTiles, 39 * 32, gSrollSecnEventCreationAnims, gSrollSecnEventCreationFrames },
-    { gSrollSecnProgrammingTiles, 35 * 32, gSrollSecnProgrammingAnims, gSrollSecnProgrammingFrames },
-    { gSrollSecnGraphicDesignTiles, 41 * 32, gSrollSecnGraphicDesignAnims, gSrollSecnGraphicDesignFrames },
-    { gSrollSecnSoundTiles, 21 * 32, gSrollSecnSoundAnims, gSrollSecnSoundFrames },
-    { gSrollSecnEndingThemeTiles, 39 * 32, gSrollSecnEndingThemeAnims, gSrollSecnEndingThemeFrames },
-    { gSrollSecnBuenaVistaGamesJapanTiles, 61 * 32, gSrollSecnBuenaVistaGamesJapanAnims, gSrollSecnBuenaVistaGamesJapanFrames },
-    { gSrollSecnBuenaVistaGamesTiles, 47 * 32, gSrollSecnBuenaVistaGamesAnims, gSrollSecnBuenaVistaGamesFrames },
+    { gSrollSecnScenarioTiles, sizeof(gSrollSecnScenarioTiles), gSrollSecnScenarioAnims, gSrollSecnScenarioFrames },
+    { gSrollSecn2DArtTiles, sizeof(gSrollSecn2DArtTiles), gSrollSecn2DArtAnims, gSrollSecn2DArtFrames },
+    { gSrollSecn3DAnimationTiles, sizeof(gSrollSecn3DAnimationTiles), gSrollSecn3DAnimationAnims, gSrollSecn3DAnimationFrames },
+    { gSrollSecnPlanningTiles, sizeof(gSrollSecnPlanningTiles), gSrollSecnPlanningAnims, gSrollSecnPlanningFrames },
+    { gSrollSecnEventCreationTiles, sizeof(gSrollSecnEventCreationTiles), gSrollSecnEventCreationAnims, gSrollSecnEventCreationFrames },
+    { gSrollSecnProgrammingTiles, sizeof(gSrollSecnProgrammingTiles), gSrollSecnProgrammingAnims, gSrollSecnProgrammingFrames },
+    { gSrollSecnGraphicDesignTiles, sizeof(gSrollSecnGraphicDesignTiles), gSrollSecnGraphicDesignAnims, gSrollSecnGraphicDesignFrames },
+    { gSrollSecnSoundTiles, sizeof(gSrollSecnSoundTiles), gSrollSecnSoundAnims, gSrollSecnSoundFrames },
+    { gSrollSecnEndingThemeTiles, sizeof(gSrollSecnEndingThemeTiles), gSrollSecnEndingThemeAnims, gSrollSecnEndingThemeFrames },
+    { gSrollSecnBuenaVistaGamesJapanTiles, sizeof(gSrollSecnBuenaVistaGamesJapanTiles), gSrollSecnBuenaVistaGamesJapanAnims, gSrollSecnBuenaVistaGamesJapanFrames },
+    { gSrollSecnBuenaVistaGamesTiles, sizeof(gSrollSecnBuenaVistaGamesTiles), gSrollSecnBuenaVistaGamesAnims, gSrollSecnBuenaVistaGamesFrames },
 #ifdef VERSION_EU
-    { gSrollSecnBuenaVistaGamesEmeaTiles, 61 * 32, gSrollSecnBuenaVistaGamesEmeaAnims, gSrollSecnBuenaVistaGamesEmeaFrames },
+    { gSrollSecnBuenaVistaGamesEmeaTiles, sizeof(gSrollSecnBuenaVistaGamesEmeaTiles), gSrollSecnBuenaVistaGamesEmeaAnims, gSrollSecnBuenaVistaGamesEmeaFrames },
 #endif
-    { gSrollSecnVoiceTalentsTiles, 61 * 32, gSrollSecnVoiceTalentsAnims, gSrollSecnVoiceTalentsFrames },
+    { gSrollSecnVoiceTalentsTiles, sizeof(gSrollSecnVoiceTalentsTiles), gSrollSecnVoiceTalentsAnims, gSrollSecnVoiceTalentsFrames },
 #ifdef VERSION_JP
-    { gSrollSecnVoiceRecordingTiles, 41 * 32, gSrollSecnVoiceRecordingAnims, gSrollSecnVoiceRecordingFrames },
+    { gSrollSecnVoiceRecordingTiles, sizeof(gSrollSecnVoiceRecordingTiles), gSrollSecnVoiceRecordingAnims, gSrollSecnVoiceRecordingFrames },
 #endif
-    { gSrollSecnOutsideContractorsTiles, 50 * 32, gSrollSecnOutsideContractorsAnims, gSrollSecnOutsideContractorsFrames },
-    { gSrollSecnManagementTiles, 35 * 32, gSrollSecnManagementAnims, gSrollSecnManagementFrames },
-    { gSrollSecnQualityAssuranceTiles, 47 * 32, gSrollSecnQualityAssuranceAnims, gSrollSecnQualityAssuranceFrames },
+    { gSrollSecnOutsideContractorsTiles, sizeof(gSrollSecnOutsideContractorsTiles), gSrollSecnOutsideContractorsAnims, gSrollSecnOutsideContractorsFrames },
+    { gSrollSecnManagementTiles, sizeof(gSrollSecnManagementTiles), gSrollSecnManagementAnims, gSrollSecnManagementFrames },
+    { gSrollSecnQualityAssuranceTiles, sizeof(gSrollSecnQualityAssuranceTiles), gSrollSecnQualityAssuranceAnims, gSrollSecnQualityAssuranceFrames },
 #ifdef VERSION_JP
-    { gSrollSecnRatingProofreadingTiles, 57 * 32, gSrollSecnRatingProofreadingAnims, gSrollSecnRatingProofreadingFrames },
-    { gSrollSecnInformationTechnologyTiles, 83 * 32, gSrollSecnInformationTechnologyAnims, gSrollSecnInformationTechnologyFrames },
-    { gSrollSecnPublicityTeamTiles, 41 * 32, gSrollSecnPublicityTeamAnims, gSrollSecnPublicityTeamFrames },
-    { gSrollSecnSalesMarketingTiles, 71 * 32, gSrollSecnSalesMarketingAnims, gSrollSecnSalesMarketingFrames },
-    { gSrollSecnSalesAdministrationTiles, 77 * 32, gSrollSecnSalesAdministrationAnims, gSrollSecnSalesAdministrationFrames },
+    { gSrollSecnRatingProofreadingTiles, sizeof(gSrollSecnRatingProofreadingTiles), gSrollSecnRatingProofreadingAnims, gSrollSecnRatingProofreadingFrames },
+    { gSrollSecnInformationTechnologyTiles, sizeof(gSrollSecnInformationTechnologyTiles), gSrollSecnInformationTechnologyAnims, gSrollSecnInformationTechnologyFrames },
+    { gSrollSecnPublicityTeamTiles, sizeof(gSrollSecnPublicityTeamTiles), gSrollSecnPublicityTeamAnims, gSrollSecnPublicityTeamFrames },
+    { gSrollSecnSalesMarketingTiles, sizeof(gSrollSecnSalesMarketingTiles), gSrollSecnSalesMarketingAnims, gSrollSecnSalesMarketingFrames },
+    { gSrollSecnSalesAdministrationTiles, sizeof(gSrollSecnSalesAdministrationTiles), gSrollSecnSalesAdministrationAnims, gSrollSecnSalesAdministrationFrames },
 #endif
-    { gSrollSecnLegalAffairsTiles, 79 * 32, gSrollSecnLegalAffairsAnims, gSrollSecnLegalAffairsFrames },
+    { gSrollSecnLegalAffairsTiles, sizeof(gSrollSecnLegalAffairsTiles), gSrollSecnLegalAffairsAnims, gSrollSecnLegalAffairsFrames },
 #ifndef VERSION_JP
-    { gSrollSecnLocalizationTeamTiles, 48 * 32, gSrollSecnLocalizationTeamAnims, gSrollSecnLocalizationTeamFrames },
-    { gSrollSecnSquareEnixIncTiles, 44 * 32, gSrollSecnSquareEnixIncAnims, gSrollSecnSquareEnixIncFrames },
+    { gSrollSecnLocalizationTeamTiles, sizeof(gSrollSecnLocalizationTeamTiles), gSrollSecnLocalizationTeamAnims, gSrollSecnLocalizationTeamFrames },
+    { gSrollSecnSquareEnixIncTiles, sizeof(gSrollSecnSquareEnixIncTiles), gSrollSecnSquareEnixIncAnims, gSrollSecnSquareEnixIncFrames },
 #endif
-    { gSrollSecnSpecialThanksTiles, 41 * 32, gSrollSecnSpecialThanksAnims, gSrollSecnSpecialThanksFrames },
-    { gSrollSecnJupiterCorporationTiles, 50 * 32, gSrollSecnJupiterCorporationAnims, gSrollSecnJupiterCorporationFrames },
+    { gSrollSecnSpecialThanksTiles, sizeof(gSrollSecnSpecialThanksTiles), gSrollSecnSpecialThanksAnims, gSrollSecnSpecialThanksFrames },
+    { gSrollSecnJupiterCorporationTiles, sizeof(gSrollSecnJupiterCorporationTiles), gSrollSecnJupiterCorporationAnims, gSrollSecnJupiterCorporationFrames },
 };
 
 TaskDesc gTaskDescSrollBSecn = {

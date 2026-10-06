@@ -27,295 +27,295 @@
 #include "gba/io_reg.h"
 
 static const BgAnimationChunk sBgAnimationChunks[108] = {
-    { gBgAnimCure00Tiles, 29696 },
-    { gBgAnimFire00Tiles0, 31168 },
-    { gBgAnimFire00Tiles1, 3008 },
-    { gBgAnimFire01Tiles, 17408 },
-    { gBgAnimFire02Tiles, 21312 },
-    { gBgAnimExplosionTiles, 16640 },
-    { gBgAnimFlashTiles, 4416 },
-    { gBgAnimSoraHitTiles, 9472 },
-    { gBgAnimLimitTiles, 16064 },
-    { gBgAnimDashRingTiles, 23680 },
-    { gBgAnimEnemyHitTiles, 9152 },
-    { gBgAnimPotionTiles, 26240 },
-    { gBgAnimBlizzard00Tiles0, 29568 },
-    { gBgAnimBlizzard00Tiles1, 11840 },
-    { gBgAnimBlizzard01Tiles, 11648 },
-    { gBgAnimBlizzard02Tiles, 18368 },
-    { gBgAnimBlizzard03Tiles0, 31040 },
-    { gBgAnimBlizzard03Tiles1, 24832 },
-    { gBgAnimThunder00Tiles, 29056 },
-    { gBgAnimThunder01Tiles, 11200 },
-    { gBgAnimThunder02Tiles0, 28160 },
-    { gBgAnimThunder02Tiles1, 28416 },
-    { gBgAnimThunder02Tiles2, 7104 },
-    { gBgAnimThunder03Tiles0, 29504 },
-    { gBgAnimThunder03Tiles1, 29952 },
-    { gBgAnimThunder03Tiles2, 28928 },
-    { gBgAnimCharaDefeatEndTiles, 10752 },
-    { gBgAnimEnemyDeathTiles, 19904 },
-    { gBgAnimDarkDeathTiles, 20160 },
-    { gBgAnimCure02Tiles0, 30336 },
-    { gBgAnimCure02Tiles1, 19776 },
-    { gBgAnimCure01Tiles0, 30656 },
-    { gBgAnimCure01Tiles1, 14848 },
-    { gBgAnimFire03Tiles0, 30464 },
-    { gBgAnimFire03Tiles1, 8064 },
-    { gBgAnimFriendHitTiles, 19520 },
-    { gBgAnimStop00Tiles, 12224 },
-    { gBgAnimStop01Tiles, 19712 },
-    { gBgAnimStop02Tiles0, 28416 },
-    { gBgAnimStop02Tiles1, 17280 },
-    { gBgAnimSummonTiles0, 31104 },
-    { gBgAnimSummonTiles1, 9920 },
-    { gBgAnimGroundImpactTiles0, 32256 },
-    { gBgAnimGroundImpactTiles1, 4608 },
-    { gBgAnimBtlStartTiles0, 22656 },
-    { gBgAnimBtlStartTiles1, 22656 },
-    { gBgAnimBtlStartTiles2, 22656 },
-    { gBgAnimBtlStartTiles3, 22656 },
-    { gBgAnimBtlStartTiles4, 22656 },
-    { gBgAnimBtlStartTiles5, 11328 },
-    { gBgAnimGuardTiles, 15616 },
-    { gBgAnimCharaDefeatTiles0, 30848 },
-    { gBgAnimCharaDefeatTiles1, 17664 },
-    { gBgAnimHumDefeatTiles0, 32640 },
-    { gBgAnimHumDefeatTiles1, 21184 },
-    { gBgAnimGravity00Tiles, 23616 },
-    { gBgAnimGravity01Tiles0, 31936 },
-    { gBgAnimGravity01Tiles1, 21760 },
-    { gBgAnimPremireChanceTiles0, 30720 },
-    { gBgAnimPremireChanceTiles1, 24256 },
-    { gBgAnimGasTiles, 18688 },
-    { gBgAnimEnemySpawnTiles, 11776 },
-    { gBgAnimBoogieKaihukuTiles, 8640 },
-    { gBgAnimPcShotTiles, 9216 },
-    { gBgAnimGlowTiles, 7808 },
-    { gBgAnimBossDeathTiles0, 29632 },
-    { gBgAnimBossDeathTiles1, 3904 },
-    { gBgAnimDumboSplashTiles, 19392 },
-    { gBgAnimTrinityLimitTiles, 6720 },
-    { gBgAnimTrinityLimitChargeTiles0, 31104 },
-    { gBgAnimTrinityLimitChargeTiles1, 31104 },
-    { gBgAnimTrinityLimitBlastTiles, 7232 },
-    { gBgAnimRagnarokChargeTiles, 12288 },
-    { gBgAnimRagnarokShotTiles0, 30400 },
-    { gBgAnimRagnarokShotTiles1, 11392 },
-    { gBgAnimUrsulaBeamTiles, 31232 },
-    { gBgAnimJfMajinBeamTiles, 15744 },
-    { gBgAnimAnsemRushTiles, 4736 },
-    { gBgAnimAnsemWaveTiles, 14400 },
-    { gBgAnimStunImpactTiles, 18176 },
-    { gBgAnimUrsulaThunderTiles, 11520 },
-    { gBgAnimWorldSelectTiles, 32448 },
-    { gBgAnimWorldStartTiles0, 29760 },
-    { gBgAnimWorldStartTiles1, 29760 },
-    { gBgAnimXmasTiles0, 32640 },
-    { gBgAnimXmasTiles1, 8064 },
-    { gBgAnimLightPillarTiles, 7360 },
-    { gBgAnimTornadoTiles, 15168 },
-    { gBgAnimAxcelFireWallTiles0, 27648 },
-    { gBgAnimAxcelFireWallTiles1, 9216 },
-    { gBgAnimMahluxiaGroundTiles0, 28224 },
-    { gBgAnimMahluxiaGroundTiles1, 8896 },
-    { gBgAnimHanabiraTiles, 3776 },
-    { gBgAnimKamaTiles, 4288 },
-    { gBgAnimDragonFireTiles0, 30016 },
-    { gBgAnimDragonFireTiles1, 12032 },
-    { gBgAnimLaxeneBeamTiles0, 28928 },
-    { gBgAnimLaxeneBeamTiles1, 13952 },
-    { gBgAnimAeroTiles, 29824 },
-    { gBgAnimRikuHitTiles, 12032 },
-    { gBgAnimRikuDarkModeFlashTiles0, 28416 },
-    { gBgAnimRikuDarkModeFlashTiles1, 4736 },
-    { gBgAnimLstCtrTiles0, 27648 },
-    { gBgAnimLstCtrTiles1, 26496 },
-    { gBgAnimLstCtrTiles2, 26944 },
-    { gBgAnimDsdTransitionTiles, 32448 },
-    { gBgAnimRikuLimitFinishTiles, 24512 },
-    { gBgAnimRikuDiveHitTiles, 20160 },
+    { gBgAnimCure00Tiles, sizeof(gBgAnimCure00Tiles) },
+    { gBgAnimFire00Tiles0, sizeof(gBgAnimFire00Tiles0) },
+    { gBgAnimFire00Tiles1, sizeof(gBgAnimFire00Tiles1) },
+    { gBgAnimFire01Tiles, sizeof(gBgAnimFire01Tiles) },
+    { gBgAnimFire02Tiles, sizeof(gBgAnimFire02Tiles) },
+    { gBgAnimExplosionTiles, sizeof(gBgAnimExplosionTiles) },
+    { gBgAnimFlashTiles, sizeof(gBgAnimFlashTiles) },
+    { gBgAnimSoraHitTiles, sizeof(gBgAnimSoraHitTiles) },
+    { gBgAnimLimitTiles, sizeof(gBgAnimLimitTiles) },
+    { gBgAnimDashRingTiles, sizeof(gBgAnimDashRingTiles) },
+    { gBgAnimEnemyHitTiles, sizeof(gBgAnimEnemyHitTiles) },
+    { gBgAnimPotionTiles, sizeof(gBgAnimPotionTiles) },
+    { gBgAnimBlizzard00Tiles0, sizeof(gBgAnimBlizzard00Tiles0) },
+    { gBgAnimBlizzard00Tiles1, sizeof(gBgAnimBlizzard00Tiles1) },
+    { gBgAnimBlizzard01Tiles, sizeof(gBgAnimBlizzard01Tiles) },
+    { gBgAnimBlizzard02Tiles, sizeof(gBgAnimBlizzard02Tiles) },
+    { gBgAnimBlizzard03Tiles0, sizeof(gBgAnimBlizzard03Tiles0) },
+    { gBgAnimBlizzard03Tiles1, sizeof(gBgAnimBlizzard03Tiles1) },
+    { gBgAnimThunder00Tiles, sizeof(gBgAnimThunder00Tiles) },
+    { gBgAnimThunder01Tiles, sizeof(gBgAnimThunder01Tiles) },
+    { gBgAnimThunder02Tiles0, sizeof(gBgAnimThunder02Tiles0) },
+    { gBgAnimThunder02Tiles1, sizeof(gBgAnimThunder02Tiles1) },
+    { gBgAnimThunder02Tiles2, sizeof(gBgAnimThunder02Tiles2) },
+    { gBgAnimThunder03Tiles0, sizeof(gBgAnimThunder03Tiles0) },
+    { gBgAnimThunder03Tiles1, sizeof(gBgAnimThunder03Tiles1) },
+    { gBgAnimThunder03Tiles2, sizeof(gBgAnimThunder03Tiles2) },
+    { gBgAnimCharaDefeatEndTiles, sizeof(gBgAnimCharaDefeatEndTiles) },
+    { gBgAnimEnemyDeathTiles, sizeof(gBgAnimEnemyDeathTiles) },
+    { gBgAnimDarkDeathTiles, sizeof(gBgAnimDarkDeathTiles) },
+    { gBgAnimCure02Tiles0, sizeof(gBgAnimCure02Tiles0) },
+    { gBgAnimCure02Tiles1, sizeof(gBgAnimCure02Tiles1) },
+    { gBgAnimCure01Tiles0, sizeof(gBgAnimCure01Tiles0) },
+    { gBgAnimCure01Tiles1, sizeof(gBgAnimCure01Tiles1) },
+    { gBgAnimFire03Tiles0, sizeof(gBgAnimFire03Tiles0) },
+    { gBgAnimFire03Tiles1, sizeof(gBgAnimFire03Tiles1) },
+    { gBgAnimFriendHitTiles, sizeof(gBgAnimFriendHitTiles) },
+    { gBgAnimStop00Tiles, sizeof(gBgAnimStop00Tiles) },
+    { gBgAnimStop01Tiles, sizeof(gBgAnimStop01Tiles) },
+    { gBgAnimStop02Tiles0, sizeof(gBgAnimStop02Tiles0) },
+    { gBgAnimStop02Tiles1, sizeof(gBgAnimStop02Tiles1) },
+    { gBgAnimSummonTiles0, sizeof(gBgAnimSummonTiles0) },
+    { gBgAnimSummonTiles1, sizeof(gBgAnimSummonTiles1) },
+    { gBgAnimGroundImpactTiles0, sizeof(gBgAnimGroundImpactTiles0) },
+    { gBgAnimGroundImpactTiles1, sizeof(gBgAnimGroundImpactTiles1) },
+    { gBgAnimBtlStartTiles0, sizeof(gBgAnimBtlStartTiles0) },
+    { gBgAnimBtlStartTiles1, sizeof(gBgAnimBtlStartTiles1) },
+    { gBgAnimBtlStartTiles2, sizeof(gBgAnimBtlStartTiles2) },
+    { gBgAnimBtlStartTiles3, sizeof(gBgAnimBtlStartTiles3) },
+    { gBgAnimBtlStartTiles4, sizeof(gBgAnimBtlStartTiles4) },
+    { gBgAnimBtlStartTiles5, sizeof(gBgAnimBtlStartTiles5) },
+    { gBgAnimGuardTiles, sizeof(gBgAnimGuardTiles) },
+    { gBgAnimCharaDefeatTiles0, sizeof(gBgAnimCharaDefeatTiles0) },
+    { gBgAnimCharaDefeatTiles1, sizeof(gBgAnimCharaDefeatTiles1) },
+    { gBgAnimHumDefeatTiles0, sizeof(gBgAnimHumDefeatTiles0) },
+    { gBgAnimHumDefeatTiles1, sizeof(gBgAnimHumDefeatTiles1) },
+    { gBgAnimGravity00Tiles, sizeof(gBgAnimGravity00Tiles) },
+    { gBgAnimGravity01Tiles0, sizeof(gBgAnimGravity01Tiles0) },
+    { gBgAnimGravity01Tiles1, sizeof(gBgAnimGravity01Tiles1) },
+    { gBgAnimPremireChanceTiles0, sizeof(gBgAnimPremireChanceTiles0) },
+    { gBgAnimPremireChanceTiles1, sizeof(gBgAnimPremireChanceTiles1) },
+    { gBgAnimGasTiles, sizeof(gBgAnimGasTiles) },
+    { gBgAnimEnemySpawnTiles, sizeof(gBgAnimEnemySpawnTiles) },
+    { gBgAnimBoogieKaihukuTiles, sizeof(gBgAnimBoogieKaihukuTiles) },
+    { gBgAnimPcShotTiles, sizeof(gBgAnimPcShotTiles) },
+    { gBgAnimGlowTiles, sizeof(gBgAnimGlowTiles) },
+    { gBgAnimBossDeathTiles0, sizeof(gBgAnimBossDeathTiles0) },
+    { gBgAnimBossDeathTiles1, sizeof(gBgAnimBossDeathTiles1) },
+    { gBgAnimDumboSplashTiles, sizeof(gBgAnimDumboSplashTiles) },
+    { gBgAnimTrinityLimitTiles, sizeof(gBgAnimTrinityLimitTiles) },
+    { gBgAnimTrinityLimitChargeTiles0, sizeof(gBgAnimTrinityLimitChargeTiles0) },
+    { gBgAnimTrinityLimitChargeTiles1, sizeof(gBgAnimTrinityLimitChargeTiles1) },
+    { gBgAnimTrinityLimitBlastTiles, sizeof(gBgAnimTrinityLimitBlastTiles) },
+    { gBgAnimRagnarokChargeTiles, sizeof(gBgAnimRagnarokChargeTiles) },
+    { gBgAnimRagnarokShotTiles0, sizeof(gBgAnimRagnarokShotTiles0) },
+    { gBgAnimRagnarokShotTiles1, sizeof(gBgAnimRagnarokShotTiles1) },
+    { gBgAnimUrsulaBeamTiles, sizeof(gBgAnimUrsulaBeamTiles) },
+    { gBgAnimJfMajinBeamTiles, sizeof(gBgAnimJfMajinBeamTiles) },
+    { gBgAnimAnsemRushTiles, sizeof(gBgAnimAnsemRushTiles) },
+    { gBgAnimAnsemWaveTiles, sizeof(gBgAnimAnsemWaveTiles) },
+    { gBgAnimStunImpactTiles, sizeof(gBgAnimStunImpactTiles) },
+    { gBgAnimUrsulaThunderTiles, sizeof(gBgAnimUrsulaThunderTiles) },
+    { gBgAnimWorldSelectTiles, sizeof(gBgAnimWorldSelectTiles) },
+    { gBgAnimWorldStartTiles0, sizeof(gBgAnimWorldStartTiles0) },
+    { gBgAnimWorldStartTiles1, sizeof(gBgAnimWorldStartTiles1) },
+    { gBgAnimXmasTiles0, sizeof(gBgAnimXmasTiles0) },
+    { gBgAnimXmasTiles1, sizeof(gBgAnimXmasTiles1) },
+    { gBgAnimLightPillarTiles, sizeof(gBgAnimLightPillarTiles) },
+    { gBgAnimTornadoTiles, sizeof(gBgAnimTornadoTiles) },
+    { gBgAnimAxcelFireWallTiles0, sizeof(gBgAnimAxcelFireWallTiles0) },
+    { gBgAnimAxcelFireWallTiles1, sizeof(gBgAnimAxcelFireWallTiles1) },
+    { gBgAnimMahluxiaGroundTiles0, sizeof(gBgAnimMahluxiaGroundTiles0) },
+    { gBgAnimMahluxiaGroundTiles1, sizeof(gBgAnimMahluxiaGroundTiles1) },
+    { gBgAnimHanabiraTiles, sizeof(gBgAnimHanabiraTiles) },
+    { gBgAnimKamaTiles, sizeof(gBgAnimKamaTiles) },
+    { gBgAnimDragonFireTiles0, sizeof(gBgAnimDragonFireTiles0) },
+    { gBgAnimDragonFireTiles1, sizeof(gBgAnimDragonFireTiles1) },
+    { gBgAnimLaxeneBeamTiles0, sizeof(gBgAnimLaxeneBeamTiles0) },
+    { gBgAnimLaxeneBeamTiles1, sizeof(gBgAnimLaxeneBeamTiles1) },
+    { gBgAnimAeroTiles, sizeof(gBgAnimAeroTiles) },
+    { gBgAnimRikuHitTiles, sizeof(gBgAnimRikuHitTiles) },
+    { gBgAnimRikuDarkModeFlashTiles0, sizeof(gBgAnimRikuDarkModeFlashTiles0) },
+    { gBgAnimRikuDarkModeFlashTiles1, sizeof(gBgAnimRikuDarkModeFlashTiles1) },
+    { gBgAnimLstCtrTiles0, sizeof(gBgAnimLstCtrTiles0) },
+    { gBgAnimLstCtrTiles1, sizeof(gBgAnimLstCtrTiles1) },
+    { gBgAnimLstCtrTiles2, sizeof(gBgAnimLstCtrTiles2) },
+    { gBgAnimDsdTransitionTiles, sizeof(gBgAnimDsdTransitionTiles) },
+    { gBgAnimRikuLimitFinishTiles, sizeof(gBgAnimRikuLimitFinishTiles) },
+    { gBgAnimRikuDiveHitTiles, sizeof(gBgAnimRikuDiveHitTiles) },
 };
 
-BgAnimationDef gBgAnimDefCure00 = { &sBgAnimationChunks[0], gBgAnimCure00Map, gBgAnimCure00Palette, 192, 58, 16, 16, 8, 6 };
+BgAnimationDef gBgAnimDefCure00 = { &sBgAnimationChunks[0], gBgAnimCure00Map, gBgAnimCure00Palette, sizeof(gBgAnimCure00Palette), 58, 16, 16, 8, 6 };
 
-BgAnimationDef gBgAnimDefFire00 = { &sBgAnimationChunks[1], gBgAnimFire00Map, gBgAnimFire00Palette, 192, 56, 21, 16, 10, 3 };
+BgAnimationDef gBgAnimDefFire00 = { &sBgAnimationChunks[1], gBgAnimFire00Map, gBgAnimFire00Palette, sizeof(gBgAnimFire00Palette), 56, 21, 16, 10, 3 };
 
-BgAnimationDef gBgAnimDefRikuFire00 = { &sBgAnimationChunks[1], gBgAnimFire00Map, gBgAnimRikuFire00Palette, 192, 56, 21, 16, 10, 3 };
+BgAnimationDef gBgAnimDefRikuFire00 = { &sBgAnimationChunks[1], gBgAnimFire00Map, gBgAnimRikuFire00Palette, sizeof(gBgAnimRikuFire00Palette), 56, 21, 16, 10, 3 };
 
-BgAnimationDef gBgAnimDefFlame = { &sBgAnimationChunks[1], gBgAnimFire00Map, gBgAnimFire00Palette, 192, 56, 12, 16, 3, 4 };
+BgAnimationDef gBgAnimDefFlame = { &sBgAnimationChunks[1], gBgAnimFire00Map, gBgAnimFire00Palette, sizeof(gBgAnimFire00Palette), 56, 12, 16, 3, 4 };
 
-BgAnimationDef gBgAnimDefFire01 = { &sBgAnimationChunks[3], gBgAnimFire01Map, gBgAnimFire01Palette, 192, 41, 16, 16, 7, 4 };
+BgAnimationDef gBgAnimDefFire01 = { &sBgAnimationChunks[3], gBgAnimFire01Map, gBgAnimFire01Palette, sizeof(gBgAnimFire01Palette), 41, 16, 16, 7, 4 };
 
-static BgAnimationDef sBgAnimDefFireHit = { &sBgAnimationChunks[3], gBgAnimFire01Map, gBgAnimFire01Palette, 192, 41, 16, 16, 7, 2 };
+static BgAnimationDef sBgAnimDefFireHit = { &sBgAnimationChunks[3], gBgAnimFire01Map, gBgAnimFire01Palette, sizeof(gBgAnimFire01Palette), 41, 16, 16, 7, 2 };
 
-BgAnimationDef gBgAnimDefFire02 = { &sBgAnimationChunks[4], gBgAnimFire02Map, gBgAnimFire02Palette, 192, 48, 16, 16, 7, 4 };
+BgAnimationDef gBgAnimDefFire02 = { &sBgAnimationChunks[4], gBgAnimFire02Map, gBgAnimFire02Palette, sizeof(gBgAnimFire02Palette), 48, 16, 16, 7, 4 };
 
-BgAnimationDef gBgAnimDefExplosion = { &sBgAnimationChunks[5], gBgAnimExplosionMap, gBgAnimExplosionPalette, 192, 33, 16, 16, 8, 6 };
+BgAnimationDef gBgAnimDefExplosion = { &sBgAnimationChunks[5], gBgAnimExplosionMap, gBgAnimExplosionPalette, sizeof(gBgAnimExplosionPalette), 33, 16, 16, 8, 6 };
 
-BgAnimationDef gBgAnimDefFlash = { &sBgAnimationChunks[6], gBgAnimFlashMap, gBgAnimFlashPalette, 192, 69, 16, 16, 1, 65535 };
+BgAnimationDef gBgAnimDefFlash = { &sBgAnimationChunks[6], gBgAnimFlashMap, gBgAnimFlashPalette, sizeof(gBgAnimFlashPalette), 69, 16, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefSoraHit = { &sBgAnimationChunks[7], gBgAnimSoraHitMap, gBgAnimSoraHitPalette, 192, 37, 16, 16, 4, 3 };
+BgAnimationDef gBgAnimDefSoraHit = { &sBgAnimationChunks[7], gBgAnimSoraHitMap, gBgAnimSoraHitPalette, sizeof(gBgAnimSoraHitPalette), 37, 16, 16, 4, 3 };
 
-BgAnimationDef gBgAnimDefLimit = { &sBgAnimationChunks[8], gBgAnimLimitMap, gBgAnimLimitPalette, 192, 42, 16, 16, 6, 3 };
+BgAnimationDef gBgAnimDefLimit = { &sBgAnimationChunks[8], gBgAnimLimitMap, gBgAnimLimitPalette, sizeof(gBgAnimLimitPalette), 42, 16, 16, 6, 3 };
 
-BgAnimationDef gBgAnimDefDashRing = { &sBgAnimationChunks[9], gBgAnimDashRingMap, gBgAnimDashRingPalette, 192, 74, 16, 16, 5, 3 };
+BgAnimationDef gBgAnimDefDashRing = { &sBgAnimationChunks[9], gBgAnimDashRingMap, gBgAnimDashRingPalette, sizeof(gBgAnimDashRingPalette), 74, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefEnemyHit = { &sBgAnimationChunks[10], gBgAnimEnemyHitMap, gBgAnimEnemyHitPalette, 192, 36, 16, 16, 4, 4 };
+BgAnimationDef gBgAnimDefEnemyHit = { &sBgAnimationChunks[10], gBgAnimEnemyHitMap, gBgAnimEnemyHitPalette, sizeof(gBgAnimEnemyHitPalette), 36, 16, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefEnemyHitGreen = { &sBgAnimationChunks[10], gBgAnimEnemyHitMap, gBgAnimEnemyHitGreenPalette, 192, 36, 16, 16, 4, 4 };
+BgAnimationDef gBgAnimDefEnemyHitGreen = { &sBgAnimationChunks[10], gBgAnimEnemyHitMap, gBgAnimEnemyHitGreenPalette, sizeof(gBgAnimEnemyHitGreenPalette), 36, 16, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefEnemyHitRed = { &sBgAnimationChunks[10], gBgAnimEnemyHitMap, gBgAnimEnemyHitRedPalette, 192, 36, 16, 16, 4, 4 };
+BgAnimationDef gBgAnimDefEnemyHitRed = { &sBgAnimationChunks[10], gBgAnimEnemyHitMap, gBgAnimEnemyHitRedPalette, sizeof(gBgAnimEnemyHitRedPalette), 36, 16, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefPotion = { &sBgAnimationChunks[11], gBgAnimPotionMap, gBgAnimPotionPalette, 192, 46, 16, 16, 9, 5 };
+BgAnimationDef gBgAnimDefPotion = { &sBgAnimationChunks[11], gBgAnimPotionMap, gBgAnimPotionPalette, sizeof(gBgAnimPotionPalette), 46, 16, 16, 9, 5 };
 
-BgAnimationDef gBgAnimDefBlizzard00 = { &sBgAnimationChunks[12], gBgAnimBlizzard00Map, gBgAnimBlizzard00Palette, 192, 66, 21, 16, 10, 3 };
+BgAnimationDef gBgAnimDefBlizzard00 = { &sBgAnimationChunks[12], gBgAnimBlizzard00Map, gBgAnimBlizzard00Palette, sizeof(gBgAnimBlizzard00Palette), 66, 21, 16, 10, 3 };
 
-BgAnimationDef gBgAnimDefFrost = { &sBgAnimationChunks[12], gBgAnimBlizzard00Map, gBgAnimBlizzard00Palette, 192, 66, 12, 16, 3, 4 };
+BgAnimationDef gBgAnimDefFrost = { &sBgAnimationChunks[12], gBgAnimBlizzard00Map, gBgAnimBlizzard00Palette, sizeof(gBgAnimBlizzard00Palette), 66, 12, 16, 3, 4 };
 
-BgAnimationDef gBgAnimDefBlizzard01 = { &sBgAnimationChunks[14], gBgAnimBlizzard01Map, gBgAnimBlizzard01Palette, 192, 37, 16, 16, 5, 7 };
+BgAnimationDef gBgAnimDefBlizzard01 = { &sBgAnimationChunks[14], gBgAnimBlizzard01Map, gBgAnimBlizzard01Palette, sizeof(gBgAnimBlizzard01Palette), 37, 16, 16, 5, 7 };
 
-static BgAnimationDef sBgAnimDefBlizzardHit = { &sBgAnimationChunks[14], gBgAnimBlizzard01Map, gBgAnimBlizzard01Palette, 192, 37, 16, 16, 5, 3 };
+static BgAnimationDef sBgAnimDefBlizzardHit = { &sBgAnimationChunks[14], gBgAnimBlizzard01Map, gBgAnimBlizzard01Palette, sizeof(gBgAnimBlizzard01Palette), 37, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefBlizzard02 = { &sBgAnimationChunks[15], gBgAnimBlizzard02Map, gBgAnimBlizzard02Palette, 192, 48, 16, 16, 6, 8 };
+BgAnimationDef gBgAnimDefBlizzard02 = { &sBgAnimationChunks[15], gBgAnimBlizzard02Map, gBgAnimBlizzard02Palette, sizeof(gBgAnimBlizzard02Palette), 48, 16, 16, 6, 8 };
 
-BgAnimationDef gBgAnimDefBlizzard03 = { &sBgAnimationChunks[16], gBgAnimBlizzard03Map, gBgAnimBlizzard03Palette, 192, 97, 16, 16, 9, 7 };
+BgAnimationDef gBgAnimDefBlizzard03 = { &sBgAnimationChunks[16], gBgAnimBlizzard03Map, gBgAnimBlizzard03Palette, sizeof(gBgAnimBlizzard03Palette), 97, 16, 16, 9, 7 };
 
-BgAnimationDef gBgAnimDefThunder00 = { &sBgAnimationChunks[18], gBgAnimThunder00Map, gBgAnimThunder00Palette, 192, 57, 16, 16, 8, 4 };
+BgAnimationDef gBgAnimDefThunder00 = { &sBgAnimationChunks[18], gBgAnimThunder00Map, gBgAnimThunder00Palette, sizeof(gBgAnimThunder00Palette), 57, 16, 16, 8, 4 };
 
-static BgAnimationDef sBgAnimDefThunderHit = { &sBgAnimationChunks[18], gBgAnimThunder00Map, gBgAnimThunder00Palette, 192, 57, 16, 16, 8, 2 };
+static BgAnimationDef sBgAnimDefThunderHit = { &sBgAnimationChunks[18], gBgAnimThunder00Map, gBgAnimThunder00Palette, sizeof(gBgAnimThunder00Palette), 57, 16, 16, 8, 2 };
 
-BgAnimationDef gBgAnimDefThunder01 = { &sBgAnimationChunks[19], gBgAnimThunder01Map, gBgAnimThunder01Palette, 192, 36, 16, 21, 5, 5 };
+BgAnimationDef gBgAnimDefThunder01 = { &sBgAnimationChunks[19], gBgAnimThunder01Map, gBgAnimThunder01Palette, sizeof(gBgAnimThunder01Palette), 36, 16, 21, 5, 5 };
 
-BgAnimationDef gBgAnimDefThunder02 = { &sBgAnimationChunks[20], gBgAnimThunder02Map, gBgAnimThunder02Palette, 192, 111, 16, 19, 9, 5 };
+BgAnimationDef gBgAnimDefThunder02 = { &sBgAnimationChunks[20], gBgAnimThunder02Map, gBgAnimThunder02Palette, sizeof(gBgAnimThunder02Palette), 111, 16, 19, 9, 5 };
 
-BgAnimationDef gBgAnimDefThunder03 = { &sBgAnimationChunks[23], gBgAnimThunder03Map, gBgAnimThunder03Palette, 192, 117, 16, 19, 12, 6 };
+BgAnimationDef gBgAnimDefThunder03 = { &sBgAnimationChunks[23], gBgAnimThunder03Map, gBgAnimThunder03Palette, sizeof(gBgAnimThunder03Palette), 117, 16, 19, 12, 6 };
 
-BgAnimationDef gBgAnimDefCharaDefeatEnd = { &sBgAnimationChunks[26], gBgAnimCharaDefeatEndMap, gBgAnimCharaDefeatEndPalette, 192, 21, 16, 16, 8, 8 };
+BgAnimationDef gBgAnimDefCharaDefeatEnd = { &sBgAnimationChunks[26], gBgAnimCharaDefeatEndMap, gBgAnimCharaDefeatEndPalette, sizeof(gBgAnimCharaDefeatEndPalette), 21, 16, 16, 8, 8 };
 
-BgAnimationDef gBgAnimDefEnemyDeath = { &sBgAnimationChunks[27], gBgAnimEnemyDeathMap, gBgAnimEnemyDeathPalette, 192, 61, 16, 21, 5, 2 };
+BgAnimationDef gBgAnimDefEnemyDeath = { &sBgAnimationChunks[27], gBgAnimEnemyDeathMap, gBgAnimEnemyDeathPalette, sizeof(gBgAnimEnemyDeathPalette), 61, 16, 21, 5, 2 };
 
-BgAnimationDef gBgAnimDefDarkDeath = { &sBgAnimationChunks[28], gBgAnimDarkDeathMap, gBgAnimDarkDeathPalette, 64, 64, 8, 8, 5, 3 };
+BgAnimationDef gBgAnimDefDarkDeath = { &sBgAnimationChunks[28], gBgAnimDarkDeathMap, gBgAnimDarkDeathPalette, sizeof(gBgAnimDarkDeathPalette), 64, 8, 8, 5, 3 };
 
-BgAnimationDef gBgAnimDefCure02 = { &sBgAnimationChunks[29], gBgAnimCure02Map, gBgAnimCure02Palette, 192, 79, 16, 16, 10, 6 };
+BgAnimationDef gBgAnimDefCure02 = { &sBgAnimationChunks[29], gBgAnimCure02Map, gBgAnimCure02Palette, sizeof(gBgAnimCure02Palette), 79, 16, 16, 10, 6 };
 
-BgAnimationDef gBgAnimDefCure01 = { &sBgAnimationChunks[31], gBgAnimCure01Map, gBgAnimCure01Palette, 192, 80, 16, 16, 9, 6 };
+BgAnimationDef gBgAnimDefCure01 = { &sBgAnimationChunks[31], gBgAnimCure01Map, gBgAnimCure01Palette, sizeof(gBgAnimCure01Palette), 80, 16, 16, 9, 6 };
 
-BgAnimationDef gBgAnimDefFire03 = { &sBgAnimationChunks[33], gBgAnimFire03Map, gBgAnimFire03Palette, 192, 68, 16, 16, 9, 6 };
+BgAnimationDef gBgAnimDefFire03 = { &sBgAnimationChunks[33], gBgAnimFire03Map, gBgAnimFire03Palette, sizeof(gBgAnimFire03Palette), 68, 16, 16, 9, 6 };
 
-BgAnimationDef gBgAnimDefRikuFire03 = { &sBgAnimationChunks[33], gBgAnimFire03Map, gBgAnimRikuFire03Palette, 192, 68, 16, 16, 9, 6 };
+BgAnimationDef gBgAnimDefRikuFire03 = { &sBgAnimationChunks[33], gBgAnimFire03Map, gBgAnimRikuFire03Palette, sizeof(gBgAnimRikuFire03Palette), 68, 16, 16, 9, 6 };
 
-BgAnimationDef gBgAnimDefFriendHit = { &sBgAnimationChunks[35], gBgAnimFriendHitMap, gBgAnimFriendHitPalette, 192, 61, 16, 16, 5, 3 };
+BgAnimationDef gBgAnimDefFriendHit = { &sBgAnimationChunks[35], gBgAnimFriendHitMap, gBgAnimFriendHitPalette, sizeof(gBgAnimFriendHitPalette), 61, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefStop00 = { &sBgAnimationChunks[36], gBgAnimStop00Map, gBgAnimStop00Palette, 192, 33, 16, 16, 6, 5 };
+BgAnimationDef gBgAnimDefStop00 = { &sBgAnimationChunks[36], gBgAnimStop00Map, gBgAnimStop00Palette, sizeof(gBgAnimStop00Palette), 33, 16, 16, 6, 5 };
 
-BgAnimationDef gBgAnimDefStop01 = { &sBgAnimationChunks[37], gBgAnimStop01Map, gBgAnimStop01Palette, 192, 52, 16, 16, 6, 5 };
+BgAnimationDef gBgAnimDefStop01 = { &sBgAnimationChunks[37], gBgAnimStop01Map, gBgAnimStop01Palette, sizeof(gBgAnimStop01Palette), 52, 16, 16, 6, 5 };
 
-BgAnimationDef gBgAnimDefStop02 = { &sBgAnimationChunks[38], gBgAnimStop02Map, gBgAnimStop02Palette, 192, 90, 16, 16, 8, 5 };
+BgAnimationDef gBgAnimDefStop02 = { &sBgAnimationChunks[38], gBgAnimStop02Map, gBgAnimStop02Palette, sizeof(gBgAnimStop02Palette), 90, 16, 16, 8, 5 };
 
-BgAnimationDef gBgAnimDefSummon = { &sBgAnimationChunks[40], gBgAnimSummonMap, gBgAnimSummonPalette, 192, 81, 16, 16, 8, 3 };
+BgAnimationDef gBgAnimDefSummon = { &sBgAnimationChunks[40], gBgAnimSummonMap, gBgAnimSummonPalette, sizeof(gBgAnimSummonPalette), 81, 16, 16, 8, 3 };
 
-BgAnimationDef gBgAnimDefGroundImpact = { &sBgAnimationChunks[42], gBgAnimGroundImpactMap, gBgAnimGroundImpactPalette, 192, 72, 16, 16, 8, 3 };
+BgAnimationDef gBgAnimDefGroundImpact = { &sBgAnimationChunks[42], gBgAnimGroundImpactMap, gBgAnimGroundImpactPalette, sizeof(gBgAnimGroundImpactPalette), 72, 16, 16, 8, 3 };
 
-BgAnimationDef gBgAnimDefBtlStart = { &sBgAnimationChunks[44], gBgAnimBtlStartMap, gBgAnimBtlStartPalette, 192, 177, 16, 11, 11, 4 };
+BgAnimationDef gBgAnimDefBtlStart = { &sBgAnimationChunks[44], gBgAnimBtlStartMap, gBgAnimBtlStartPalette, sizeof(gBgAnimBtlStartPalette), 177, 16, 11, 11, 4 };
 
-BgAnimationDef gBgAnimDefGuard = { &sBgAnimationChunks[50], gBgAnimGuardMap, gBgAnimGuardPalette, 192, 41, 16, 16, 6, 3 };
+BgAnimationDef gBgAnimDefGuard = { &sBgAnimationChunks[50], gBgAnimGuardMap, gBgAnimGuardPalette, sizeof(gBgAnimGuardPalette), 41, 16, 16, 6, 3 };
 
-BgAnimationDef gBgAnimDefCharaDefeat = { &sBgAnimationChunks[51], gBgAnimCharaDefeatMap, gBgAnimCharaDefeatPalette, 192, 69, 16, 16, 11, 5 };
+BgAnimationDef gBgAnimDefCharaDefeat = { &sBgAnimationChunks[51], gBgAnimCharaDefeatMap, gBgAnimCharaDefeatPalette, sizeof(gBgAnimCharaDefeatPalette), 69, 16, 16, 11, 5 };
 
-BgAnimationDef gBgAnimDefHumDefeat = { &sBgAnimationChunks[53], gBgAnimHumDefeatMap, gBgAnimHumDefeatPalette, 192, 85, 16, 16, 10, 5 };
+BgAnimationDef gBgAnimDefHumDefeat = { &sBgAnimationChunks[53], gBgAnimHumDefeatMap, gBgAnimHumDefeatPalette, sizeof(gBgAnimHumDefeatPalette), 85, 16, 16, 10, 5 };
 
-BgAnimationDef gBgAnimDefGravity00 = { &sBgAnimationChunks[55], gBgAnimGravity00Map, gBgAnimGravity00Palette, 192, 41, 16, 16, 9, 2 };
+BgAnimationDef gBgAnimDefGravity00 = { &sBgAnimationChunks[55], gBgAnimGravity00Map, gBgAnimGravity00Palette, sizeof(gBgAnimGravity00Palette), 41, 16, 16, 9, 2 };
 
-BgAnimationDef gBgAnimDefGravity01 = { &sBgAnimationChunks[56], gBgAnimGravity01Map, gBgAnimGravity01Palette, 192, 85, 16, 22, 10, 6 };
+BgAnimationDef gBgAnimDefGravity01 = { &sBgAnimationChunks[56], gBgAnimGravity01Map, gBgAnimGravity01Palette, sizeof(gBgAnimGravity01Palette), 85, 16, 22, 10, 6 };
 
-BgAnimationDef gBgAnimDefPremireChance = { &sBgAnimationChunks[58], gBgAnimPremireChanceMap, gBgAnimPremireChancePalette, 192, 96, 12, 14, 9, 5 };
+BgAnimationDef gBgAnimDefPremireChance = { &sBgAnimationChunks[58], gBgAnimPremireChanceMap, gBgAnimPremireChancePalette, sizeof(gBgAnimPremireChancePalette), 96, 12, 14, 9, 5 };
 
-BgAnimationDef gBgAnimDefGas = { &sBgAnimationChunks[60], gBgAnimGasMap, gBgAnimGasPalette, 192, 73, 16, 16, 4, 5 };
+BgAnimationDef gBgAnimDefGas = { &sBgAnimationChunks[60], gBgAnimGasMap, gBgAnimGasPalette, sizeof(gBgAnimGasPalette), 73, 16, 16, 4, 5 };
 
-BgAnimationDef gBgAnimDefEnemySpawn = { &sBgAnimationChunks[61], gBgAnimEnemySpawnMap, gBgAnimEnemySpawnPalette, 192, 46, 16, 16, 4, 2 };
+BgAnimationDef gBgAnimDefEnemySpawn = { &sBgAnimationChunks[61], gBgAnimEnemySpawnMap, gBgAnimEnemySpawnPalette, sizeof(gBgAnimEnemySpawnPalette), 46, 16, 16, 4, 2 };
 
-BgAnimationDef gBgAnimDefBoogieKaihuku = { &sBgAnimationChunks[62], gBgAnimBoogieKaihukuMap, gBgAnimBoogieKaihukuPalette, 192, 45, 16, 9, 3, 6 };
+BgAnimationDef gBgAnimDefBoogieKaihuku = { &sBgAnimationChunks[62], gBgAnimBoogieKaihukuMap, gBgAnimBoogieKaihukuPalette, sizeof(gBgAnimBoogieKaihukuPalette), 45, 16, 9, 3, 6 };
 
-BgAnimationDef gBgAnimDefPcShot = { &sBgAnimationChunks[63], gBgAnimPcShotMap, gBgAnimPcShotPalette, 192, 48, 16, 16, 3, 8 };
+BgAnimationDef gBgAnimDefPcShot = { &sBgAnimationChunks[63], gBgAnimPcShotMap, gBgAnimPcShotPalette, sizeof(gBgAnimPcShotPalette), 48, 16, 16, 3, 8 };
 
-BgAnimationDef gBgAnimDefGlow = { &sBgAnimationChunks[64], gBgAnimGlowMap, gBgAnimGlowPalette, 192, 122, 16, 16, 1, 65535 };
+BgAnimationDef gBgAnimDefGlow = { &sBgAnimationChunks[64], gBgAnimGlowMap, gBgAnimGlowPalette, sizeof(gBgAnimGlowPalette), 122, 16, 16, 1, 65535 };
 
-static BgAnimationDef sBgAnimDefDarkGlow = { &sBgAnimationChunks[64], gBgAnimGlowMap, gBgAnimDarkGlowPalette, 192, 122, 16, 16, 1, 65535 };
+static BgAnimationDef sBgAnimDefDarkGlow = { &sBgAnimationChunks[64], gBgAnimGlowMap, gBgAnimDarkGlowPalette, sizeof(gBgAnimDarkGlowPalette), 122, 16, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefBossDeath = { &sBgAnimationChunks[65], gBgAnimBossDeathMap, gBgAnimBossDeathPalette, 192, 67, 16, 16, 8, 5 };
+BgAnimationDef gBgAnimDefBossDeath = { &sBgAnimationChunks[65], gBgAnimBossDeathMap, gBgAnimBossDeathPalette, sizeof(gBgAnimBossDeathPalette), 67, 16, 16, 8, 5 };
 
-BgAnimationDef gBgAnimDefDumboSplash = { &sBgAnimationChunks[67], gBgAnimDumboSplashMap, gBgAnimDumboSplashPalette, 192, 77, 26, 16, 4, 4 };
+BgAnimationDef gBgAnimDefDumboSplash = { &sBgAnimationChunks[67], gBgAnimDumboSplashMap, gBgAnimDumboSplashPalette, sizeof(gBgAnimDumboSplashPalette), 77, 26, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefTrinityLimit = { &sBgAnimationChunks[68], gBgAnimTrinityLimitMap, gBgAnimTrinityLimitPalette, 192, 105, 16, 15, 1, 65535 };
+BgAnimationDef gBgAnimDefTrinityLimit = { &sBgAnimationChunks[68], gBgAnimTrinityLimitMap, gBgAnimTrinityLimitPalette, sizeof(gBgAnimTrinityLimitPalette), 105, 16, 15, 1, 65535 };
 
-BgAnimationDef gBgAnimDefTrinityLimitCharge = { &sBgAnimationChunks[69], gBgAnimTrinityLimitChargeMap, gBgAnimTrinityLimitChargePalette, 192, 122, 16, 22, 8, 4 };
+BgAnimationDef gBgAnimDefTrinityLimitCharge = { &sBgAnimationChunks[69], gBgAnimTrinityLimitChargeMap, gBgAnimTrinityLimitChargePalette, sizeof(gBgAnimTrinityLimitChargePalette), 122, 16, 22, 8, 4 };
 
-BgAnimationDef gBgAnimDefTrinityLimitBlast = { &sBgAnimationChunks[71], gBgAnimTrinityLimitBlastMap, gBgAnimTrinityLimitBlastPalette, 192, 113, 15, 15, 1, 65535 };
+BgAnimationDef gBgAnimDefTrinityLimitBlast = { &sBgAnimationChunks[71], gBgAnimTrinityLimitBlastMap, gBgAnimTrinityLimitBlastPalette, sizeof(gBgAnimTrinityLimitBlastPalette), 113, 15, 15, 1, 65535 };
 
-BgAnimationDef gBgAnimDefRagnarokCharge = { &sBgAnimationChunks[72], gBgAnimRagnarokChargeMap, gBgAnimRagnarokChargePalette, 192, 64, 10, 16, 3, 8 };
+BgAnimationDef gBgAnimDefRagnarokCharge = { &sBgAnimationChunks[72], gBgAnimRagnarokChargeMap, gBgAnimRagnarokChargePalette, sizeof(gBgAnimRagnarokChargePalette), 64, 10, 16, 3, 8 };
 
-static BgAnimationDef sBgAnimDefRagnarokChargePurple = { &sBgAnimationChunks[72], gBgAnimRagnarokChargeMap, gBgAnimRagnarokChargePurplePalette, 192, 86, 10, 16, 6, 3 };
+static BgAnimationDef sBgAnimDefRagnarokChargePurple = { &sBgAnimationChunks[72], gBgAnimRagnarokChargeMap, gBgAnimRagnarokChargePurplePalette, sizeof(gBgAnimRagnarokChargePurplePalette), 86, 10, 16, 6, 3 };
 
-BgAnimationDef gBgAnimDefRagnarokShot = { &sBgAnimationChunks[73], gBgAnimRagnarokShotMap, gBgAnimRagnarokShotPalette, 192, 95, 10, 16, 7, 3 };
+BgAnimationDef gBgAnimDefRagnarokShot = { &sBgAnimationChunks[73], gBgAnimRagnarokShotMap, gBgAnimRagnarokShotPalette, sizeof(gBgAnimRagnarokShotPalette), 95, 10, 16, 7, 3 };
 
-BgAnimationDef gBgAnimDefUrsulaBeam = { &sBgAnimationChunks[75], gBgAnimUrsulaBeamMap, gBgAnimUrsulaBeamPalette, 192, 122, 24, 8, 4, 8 };
+BgAnimationDef gBgAnimDefUrsulaBeam = { &sBgAnimationChunks[75], gBgAnimUrsulaBeamMap, gBgAnimUrsulaBeamPalette, sizeof(gBgAnimUrsulaBeamPalette), 122, 24, 8, 4, 8 };
 
-BgAnimationDef gBgAnimDefJfMajinBeam = { &sBgAnimationChunks[76], gBgAnimJfMajinBeamMap, gBgAnimJfMajinBeamPalette, 192, 82, 16, 27, 3, 8 };
+BgAnimationDef gBgAnimDefJfMajinBeam = { &sBgAnimationChunks[76], gBgAnimJfMajinBeamMap, gBgAnimJfMajinBeamPalette, sizeof(gBgAnimJfMajinBeamPalette), 82, 16, 27, 3, 8 };
 
-BgAnimationDef gBgAnimDefAnsemRush = { &sBgAnimationChunks[77], gBgAnimAnsemRushMap, gBgAnimAnsemRushPalette, 192, 74, 17, 16, 1, 65535 };
+BgAnimationDef gBgAnimDefAnsemRush = { &sBgAnimationChunks[77], gBgAnimAnsemRushMap, gBgAnimAnsemRushPalette, sizeof(gBgAnimAnsemRushPalette), 74, 17, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefAnsemWave = { &sBgAnimationChunks[78], gBgAnimAnsemWaveMap, gBgAnimAnsemWavePalette, 192, 75, 16, 26, 3, 3 };
+BgAnimationDef gBgAnimDefAnsemWave = { &sBgAnimationChunks[78], gBgAnimAnsemWaveMap, gBgAnimAnsemWavePalette, sizeof(gBgAnimAnsemWavePalette), 75, 16, 26, 3, 3 };
 
-BgAnimationDef gBgAnimDefStunImpact = { &sBgAnimationChunks[79], gBgAnimStunImpactMap, gBgAnimStunImpactPalette, 192, 74, 16, 18, 4, 5 };
+BgAnimationDef gBgAnimDefStunImpact = { &sBgAnimationChunks[79], gBgAnimStunImpactMap, gBgAnimStunImpactPalette, sizeof(gBgAnimStunImpactPalette), 74, 16, 18, 4, 5 };
 
-BgAnimationDef gBgAnimDefUrsulaThunder = { &sBgAnimationChunks[80], gBgAnimUrsulaThunderMap, gBgAnimUrsulaThunderPalette, 192, 45, 16, 16, 4, 5 };
+BgAnimationDef gBgAnimDefUrsulaThunder = { &sBgAnimationChunks[80], gBgAnimUrsulaThunderMap, gBgAnimUrsulaThunderPalette, sizeof(gBgAnimUrsulaThunderPalette), 45, 16, 16, 4, 5 };
 
-BgAnimationDef gBgAnimDefWorldSelect = { &sBgAnimationChunks[81], gBgAnimWorldSelectMap, gBgAnimWorldSelectPalette, 192, 64, 20, 7, 8, 6 };
+BgAnimationDef gBgAnimDefWorldSelect = { &sBgAnimationChunks[81], gBgAnimWorldSelectMap, gBgAnimWorldSelectPalette, sizeof(gBgAnimWorldSelectPalette), 64, 20, 7, 8, 6 };
 
-BgAnimationDef gBgAnimDefWorldStart = { &sBgAnimationChunks[82], gBgAnimWorldStartMap, gBgAnimWorldStartPalette, 192, 155, 16, 16, 6, 4 };
+BgAnimationDef gBgAnimDefWorldStart = { &sBgAnimationChunks[82], gBgAnimWorldStartMap, gBgAnimWorldStartPalette, sizeof(gBgAnimWorldStartPalette), 155, 16, 16, 6, 4 };
 
-BgAnimationDef gBgAnimDefXmas = { &sBgAnimationChunks[84], gBgAnimXmasMap, gBgAnimXmasPalette, 192, 64, 32, 32, 10, 8 };
+BgAnimationDef gBgAnimDefXmas = { &sBgAnimationChunks[84], gBgAnimXmasMap, gBgAnimXmasPalette, sizeof(gBgAnimXmasPalette), 64, 32, 32, 10, 8 };
 
-BgAnimationDef gBgAnimDefVixenIceFall = { &sBgAnimationChunks[84], gBgAnimXmasMap, gBgAnimXmasPalette, 192, 64, 32, 32, 10, 2 };
+BgAnimationDef gBgAnimDefVixenIceFall = { &sBgAnimationChunks[84], gBgAnimXmasMap, gBgAnimXmasPalette, sizeof(gBgAnimXmasPalette), 64, 32, 32, 10, 2 };
 
-BgAnimationDef gBgAnimDefLightPillar = { &sBgAnimationChunks[86], gBgAnimLightPillarMap, gBgAnimLightPillarPalette, 192, 115, 16, 27, 1, 65535 };
+BgAnimationDef gBgAnimDefLightPillar = { &sBgAnimationChunks[86], gBgAnimLightPillarMap, gBgAnimLightPillarPalette, sizeof(gBgAnimLightPillarPalette), 115, 16, 27, 1, 65535 };
 
-BgAnimationDef gBgAnimDefTornado = { &sBgAnimationChunks[87], gBgAnimTornadoMap, gBgAnimTornadoPalette, 192, 79, 16, 23, 3, 6 };
+BgAnimationDef gBgAnimDefTornado = { &sBgAnimationChunks[87], gBgAnimTornadoMap, gBgAnimTornadoPalette, sizeof(gBgAnimTornadoPalette), 79, 16, 23, 3, 6 };
 
-BgAnimationDef gBgAnimDefLimitGreen = { &sBgAnimationChunks[8], gBgAnimLimitMap, gBgAnimLimitGreenPalette, 192, 42, 16, 16, 6, 3 };
+BgAnimationDef gBgAnimDefLimitGreen = { &sBgAnimationChunks[8], gBgAnimLimitMap, gBgAnimLimitGreenPalette, sizeof(gBgAnimLimitGreenPalette), 42, 16, 16, 6, 3 };
 
-BgAnimationDef gBgAnimDefDashRingPurple = { &sBgAnimationChunks[9], gBgAnimDashRingMap, gBgAnimDashRingPurplePalette, 192, 74, 16, 16, 5, 3 };
+BgAnimationDef gBgAnimDefDashRingPurple = { &sBgAnimationChunks[9], gBgAnimDashRingMap, gBgAnimDashRingPurplePalette, sizeof(gBgAnimDashRingPurplePalette), 74, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefAxcelFireWall = { &sBgAnimationChunks[88], gBgAnimAxcelFireWallMap, gBgAnimAxcelFireWallPalette, 192, 144, 20, 30, 4, 6 };
+BgAnimationDef gBgAnimDefAxcelFireWall = { &sBgAnimationChunks[88], gBgAnimAxcelFireWallMap, gBgAnimAxcelFireWallPalette, sizeof(gBgAnimAxcelFireWallPalette), 144, 20, 30, 4, 6 };
 
-BgAnimationDef gBgAnimDefMahluxiaGround = { &sBgAnimationChunks[90], gBgAnimMahluxiaGroundMap, gBgAnimMahluxiaGroundPalette, 192, 74, 16, 16, 8, 6 };
+BgAnimationDef gBgAnimDefMahluxiaGround = { &sBgAnimationChunks[90], gBgAnimMahluxiaGroundMap, gBgAnimMahluxiaGroundPalette, sizeof(gBgAnimMahluxiaGroundPalette), 74, 16, 16, 8, 6 };
 
-static BgAnimationDef sBgAnimDefLexceusGround = { &sBgAnimationChunks[90], gBgAnimMahluxiaGroundMap, gBgAnimLexceusGroundPalette, 192, 74, 16, 16, 8, 4 };
+static BgAnimationDef sBgAnimDefLexceusGround = { &sBgAnimationChunks[90], gBgAnimMahluxiaGroundMap, gBgAnimLexceusGroundPalette, sizeof(gBgAnimLexceusGroundPalette), 74, 16, 16, 8, 4 };
 
-static BgAnimationDef sBgAnimDefRikuLimit = { &sBgAnimationChunks[90], gBgAnimMahluxiaGroundMap, gBgAnimMahluxiaGroundPalette, 192, 74, 16, 16, 8, 3 };
+static BgAnimationDef sBgAnimDefRikuLimit = { &sBgAnimationChunks[90], gBgAnimMahluxiaGroundMap, gBgAnimMahluxiaGroundPalette, sizeof(gBgAnimMahluxiaGroundPalette), 74, 16, 16, 8, 3 };
 
-BgAnimationDef gBgAnimDefHanabira = { &sBgAnimationChunks[92], gBgAnimHanabiraMap, gBgAnimHanabiraPalette, 192, 64, 32, 32, 1, 65535 };
+BgAnimationDef gBgAnimDefHanabira = { &sBgAnimationChunks[92], gBgAnimHanabiraMap, gBgAnimHanabiraPalette, sizeof(gBgAnimHanabiraPalette), 64, 32, 32, 1, 65535 };
 
-BgAnimationDef gBgAnimDefKama = { &sBgAnimationChunks[93], gBgAnimKamaMap, gBgAnimKamaPalette, 192, 67, 16, 16, 1, 65535 };
+BgAnimationDef gBgAnimDefKama = { &sBgAnimationChunks[93], gBgAnimKamaMap, gBgAnimKamaPalette, sizeof(gBgAnimKamaPalette), 67, 16, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefDragonFire = { &sBgAnimationChunks[94], gBgAnimDragonFireMap, gBgAnimDragonFirePalette, 192, 96, 13, 24, 5, 6 };
+BgAnimationDef gBgAnimDefDragonFire = { &sBgAnimationChunks[94], gBgAnimDragonFireMap, gBgAnimDragonFirePalette, sizeof(gBgAnimDragonFirePalette), 96, 13, 24, 5, 6 };
 
-BgAnimationDef gBgAnimDefLaxeneBeam = { &sBgAnimationChunks[96], gBgAnimLaxeneBeamMap, gBgAnimLaxeneBeamPalette, 192, 117, 8, 16, 6, 5 };
+BgAnimationDef gBgAnimDefLaxeneBeam = { &sBgAnimationChunks[96], gBgAnimLaxeneBeamMap, gBgAnimLaxeneBeamPalette, sizeof(gBgAnimLaxeneBeamPalette), 117, 8, 16, 6, 5 };
 
-BgAnimationDef gBgAnimDefAero = { &sBgAnimationChunks[98], gBgAnimAeroMap, gBgAnimAeroPalette, 192, 81, 16, 22, 6, 6 };
+BgAnimationDef gBgAnimDefAero = { &sBgAnimationChunks[98], gBgAnimAeroMap, gBgAnimAeroPalette, sizeof(gBgAnimAeroPalette), 81, 16, 22, 6, 6 };
 
-BgAnimationDef gBgAnimDefRikuHit = { &sBgAnimationChunks[99], gBgAnimRikuHitMap, gBgAnimRikuHitPalette, 192, 48, 16, 16, 4, 4 };
+BgAnimationDef gBgAnimDefRikuHit = { &sBgAnimationChunks[99], gBgAnimRikuHitMap, gBgAnimRikuHitPalette, sizeof(gBgAnimRikuHitPalette), 48, 16, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefRikuDarkModeFlash = { &sBgAnimationChunks[100], gBgAnimRikuDarkModeFlashMap, gBgAnimRikuDarkModeFlashPalette, 192, 74, 16, 21, 7, 5 };
+BgAnimationDef gBgAnimDefRikuDarkModeFlash = { &sBgAnimationChunks[100], gBgAnimRikuDarkModeFlashMap, gBgAnimRikuDarkModeFlashPalette, sizeof(gBgAnimRikuDarkModeFlashPalette), 74, 16, 21, 7, 5 };
 
-BgAnimationDef gBgAnimDefLstCtr = { &sBgAnimationChunks[102], gBgAnimLstCtrMap, gBgAnimLstCtrPalette, 192, 108, 16, 16, 12, 7 };
+BgAnimationDef gBgAnimDefLstCtr = { &sBgAnimationChunks[102], gBgAnimLstCtrMap, gBgAnimLstCtrPalette, sizeof(gBgAnimLstCtrPalette), 108, 16, 16, 12, 7 };
 
-BgAnimationDef gBgAnimDefDsdTransition = { &sBgAnimationChunks[105], gBgAnimDsdTransitionMap, gBgAnimDsdTransitionPalette, 192, 64, 16, 16, 8, 6 };
+BgAnimationDef gBgAnimDefDsdTransition = { &sBgAnimationChunks[105], gBgAnimDsdTransitionMap, gBgAnimDsdTransitionPalette, sizeof(gBgAnimDsdTransitionPalette), 64, 16, 16, 8, 6 };
 
-BgAnimationDef gBgAnimDefRikuLimitFinish = { &sBgAnimationChunks[106], gBgAnimRikuLimitFinishMap, gBgAnimRikuLimitFinishPalette, 192, 64, 30, 30, 6, 7 };
+BgAnimationDef gBgAnimDefRikuLimitFinish = { &sBgAnimationChunks[106], gBgAnimRikuLimitFinishMap, gBgAnimRikuLimitFinishPalette, sizeof(gBgAnimRikuLimitFinishPalette), 64, 30, 30, 6, 7 };
 
-BgAnimationDef gBgAnimDefRikuDiveHit = { &sBgAnimationChunks[107], gBgAnimRikuDiveHitMap, gBgAnimRikuDiveHitPalette, 192, 64, 16, 16, 5, 5 };
+BgAnimationDef gBgAnimDefRikuDiveHit = { &sBgAnimationChunks[107], gBgAnimRikuDiveHitMap, gBgAnimRikuDiveHitPalette, sizeof(gBgAnimRikuDiveHitPalette), 64, 16, 16, 5, 5 };
 
 static BgFx* sBgFx;
 

@@ -46,9 +46,9 @@ typedef struct LstSnpArg {
     s16 facing;
 } LstSnpArg;
 
-void BosLstFldSetBgMode(struct Task* t, s32 mode, s32 scrollDir);
-void BosLstFldSetCameraMode(struct Task* t, s32 mode);
-void BosLstFldSetScrollSpeed(struct Task* t, s32 speed);
+void BosLstFldSetBgMode(struct Task* task, s32 mode, s32 scrollDir);
+void BosLstFldSetCameraMode(struct Task* task, s32 mode);
+void BosLstFldSetScrollSpeed(struct Task* task, s32 speed);
 u8 BosLstBitIsAlive(struct Task* task);
 u8 BosLstBitHasShots(struct Task* task);
 s16 BosLstBitMarkFirstAlive(struct Task* task, s16 found);

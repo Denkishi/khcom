@@ -440,8 +440,8 @@ s32 BosLstFldGetShake() {
     return sBosLstFldShakeOffset;
 }
 
-void BosLstFldSetBgMode(Task* t, s32 mode, s32 scrollDir) {
-    LstFldWork* w = t->work;
+void BosLstFldSetBgMode(Task* task, s32 mode, s32 scrollDir) {
+    LstFldWork* w = task->work;
 
     if (mode != w->nextBgMode) {
         w->nextBgMode = mode;
@@ -450,14 +450,14 @@ void BosLstFldSetBgMode(Task* t, s32 mode, s32 scrollDir) {
     }
 }
 
-void BosLstFldSetCameraMode(Task* t, s32 mode) {
-    LstFldWork* w = t->work;
+void BosLstFldSetCameraMode(Task* task, s32 mode) {
+    LstFldWork* w = task->work;
 
     w->cameraMode = mode;
 }
 
-void BosLstFldSetScrollSpeed(Task* t, s32 speed) {
-    LstFldWork* w = t->work;
+void BosLstFldSetScrollSpeed(Task* task, s32 speed) {
+    LstFldWork* w = task->work;
 
     w->scrollSpeed = ((speed >> 8) * 5 >> 2) + 2;
 }

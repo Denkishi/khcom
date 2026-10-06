@@ -381,7 +381,7 @@ void BosPcLoadPaletteCycle(PcWork* work);
 s32 BosPcFldGetShake();
 void BosPcFldResetPaletteCycle(PcFldWork* work);
 void BosPcFldStopPaletteCycle(PcFldWork* work);
-void BosPcAcdSetOff(Task* task, u8 v);
+void BosPcAcdSetOff(Task* task, u8 off);
 void BosLstSetMode(BosLstWork* work, u16 moveMode, u16 attackKind);
 void BosLstRequestCardUse(BosLstWork* work);
 void task_bos_pc_2(PcWork* work);
@@ -396,7 +396,7 @@ s32 BosPcAcdSquare2(s32 x);
 s32 BosLstSquare(s32 x);
 s32 BosLstSquare2(s32 x);
 
-void BosPcFldSetPaletteCycle(Task* task, u8 v);
+void BosPcFldSetPaletteCycle(Task* task, u8 on);
 
 void BosPcSetAnim(PcWork* work, s32 anim);
 void BosPcUpdateAnim(PcWork* work);

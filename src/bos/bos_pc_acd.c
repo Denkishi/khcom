@@ -33,10 +33,10 @@ s32 BosPcAcdSquare2(s32 x) {
     return x * x;
 }
 
-void BosPcAcdSetOff(Task* task, u8 v) {
+void BosPcAcdSetOff(Task* task, u8 off) {
     PcAcdWork* work = task->work;
 
-    work->acdOff = v;
+    work->acdOff = off;
 }
 
 void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {

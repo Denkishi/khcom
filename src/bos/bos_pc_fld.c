@@ -55,10 +55,10 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void BosPcFldSetPaletteCycle(Task* task, u8 v) {
+void BosPcFldSetPaletteCycle(Task* task, u8 on) {
     PcFldWork* work = task->work;
 
-    work->paletteCycle = v;
+    work->paletteCycle = on;
 }
 
 void BosPcFldEnableObject(Task* task, u8 on) {

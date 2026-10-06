@@ -1015,7 +1015,7 @@ u8 IsFldPosBlocked(FldPos* pos) {
         return 1;
     }
 
-    if (cell->upperZ >= pos->z && cell->lowerZ != 0x100000) {
+    if (cell->upperZ >= pos->z && cell->lowerZ != MAP_Z_BOTTOM) {
         return 0;
     }
 

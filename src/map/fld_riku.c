@@ -1678,7 +1678,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
 
         ground = FldRikuGetGround(work);
 
-        if (act->fieldPosition.ground == 0x100000) {
+        if (act->fieldPosition.ground == MAP_Z_BOTTOM) {
             act->fieldPosition.ground = act->fieldPosition.z;
         } else if (ground != act->fieldPosition.z) {
             act->speed >>= 2;

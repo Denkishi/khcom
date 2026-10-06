@@ -188,6 +188,9 @@ typedef struct MapCell {
     u16* bg1Map;
 } MapCell;
 
+#define MAP_Z_TOP (-0x100000)
+#define MAP_Z_BOTTOM 0x100000
+
 #define EVENT_KEY_LIST_NONE 0xFF
 
 enum EventDoorKind {

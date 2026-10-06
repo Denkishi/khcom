@@ -87,7 +87,7 @@ s32 GetFldPosGround(FldPos* pos) {
 }
 
 s32 GetFldPosFloor(FldPos* pos) {
-    return FieldGroundAt(pos->x, pos->y + pos->z, -0x100000);
+    return FieldGroundAt(pos->x, pos->y + pos->z, MAP_Z_TOP);
 }
 
 void FldPosInitGround(FldPos* pos) {
@@ -823,7 +823,7 @@ void MapFindPlatformStairs(MapPlatform* platform) {
             cell = MapGetCell(x, y);
 
             if (cell->type == MAP_CELL_TYPE_LEFT_WALL_BASE || cell->type == MAP_CELL_TYPE_RIGHT_WALL_BASE) {
-                if (cell->upperZ != -0x100000 && platform->z == cell->lowerZ) {
+                if (cell->upperZ != MAP_Z_TOP && platform->z == cell->lowerZ) {
                     rise = ((platform->z - cell->upperZ) >> 8) / 16;
 
                     if (FldPosHeightExceeds((FldPos*)cell, 3)) {
@@ -867,13 +867,13 @@ void MapPlacePlatformStairs() {
     for (i = 11; i >= 0; i--) {
         MapPlatform* platform = &sMapPlatforms[i];
 
-        if (platform->z != 0x100000) {
+        if (platform->z != MAP_Z_BOTTOM) {
             MapFindPlatformStairs(platform);
         }
 
         if (platform->hasStairs) {
             MapBuildStairs(platform->x, platform->y);
-        } else if (platform->spotLowerZ != 0x100000) {
+        } else if (platform->spotLowerZ != MAP_Z_BOTTOM) {
             MapMarkJumpSpot(platform);
         }
     }
@@ -1042,11 +1042,11 @@ void MapMarkFloorVariants() {
                 floorZ = cell->lowerZ;
                 break;
             default:
-                floorZ = 0x100000;
+                floorZ = MAP_Z_BOTTOM;
                 break;
             }
 
-            if (floorZ == 0x100000) {
+            if (floorZ == MAP_Z_BOTTOM) {
                 continue;
             }
 
@@ -1054,7 +1054,7 @@ void MapMarkFloorVariants() {
 
             for (k = 11; k >= 0; k--) {
                 if (sMapPlatforms[k].z != floorZ) {
-                    if (sMapPlatforms[k].z != 0x100000) {
+                    if (sMapPlatforms[k].z != MAP_Z_BOTTOM) {
                         ok = FALSE;
                     }
                 } else {
@@ -1362,7 +1362,7 @@ void MapCellSetBg1Piece(s16 x, s16 y, u8 piece) {
 u8 MapCellIsUnbounded(s16 x, s16 y) {
     MapCell* cell = MapGetCell(x, y);
 
-    if (cell == NULL || cell->upperZ == -0x100000 || cell->lowerZ == 0x100000) {
+    if (cell == NULL || cell->upperZ == MAP_Z_TOP || cell->lowerZ == MAP_Z_BOTTOM) {
         return TRUE;
     }
 
@@ -1382,7 +1382,7 @@ u8 MapCellHasType(s16 x, s16 y, u8 type) {
 void MapAssignWallTopPieces(s16 x, s16 y) {
     MapCell* cell = MapGetCell(x, y + 7);
 
-    if (cell->upperZ == -0x100000) {
+    if (cell->upperZ == MAP_Z_TOP) {
         switch (cell->type) {
         case MAP_CELL_TYPE_LEFT_WALL_BASE:
             if (!MapCellIsUnbounded(x + 1, y + 6)) {
@@ -1446,7 +1446,7 @@ void MapAssignWallTopPieces(s16 x, s16 y) {
 void MapAssignLedgePieces(s16 x, s16 y) {
     MapCell* cell = MapGetCell(x, y);
 
-    if (cell->lowerZ == 0x100000 && cell->bg1Piece == 0) {
+    if (cell->lowerZ == MAP_Z_BOTTOM && cell->bg1Piece == 0) {
         switch (cell->type) {
         case MAP_CELL_TYPE_LEFT_WALL_TOP:
             MapCellSetBg1Piece(x, y, 12);
@@ -1614,7 +1614,7 @@ void MapComputeCellHeights() {
     MapCell* cell;
 
     for (i = 0; i < sMapCols; i++) {
-        z = 0x100000;
+        z = MAP_Z_BOTTOM;
 
         for (j = sMapRows - 1; j >= 0; j--) {
             cell = MapGetCell(i, j);
@@ -1646,7 +1646,7 @@ void MapComputeCellHeights() {
     }
 
     for (i = 0; i < sMapCols; i++) {
-        z = -0x100000;
+        z = MAP_Z_TOP;
 
         for (j = 0; j < sMapRows; j++) {
             cell = MapGetCell(i, j);
@@ -1695,7 +1695,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
             for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 cell = MapGetCell(x, y);
 
-                if (cell->type == MAP_CELL_TYPE_RIGHT_WALL_BASE && cell->lowerZ == platform->z && cell->upperZ == -0x100000 && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
+                if (cell->type == MAP_CELL_TYPE_RIGHT_WALL_BASE && cell->lowerZ == platform->z && cell->upperZ == MAP_Z_TOP && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
                     door->cellX = x;
                     door->cellY = y;
                     cell->flags |= MAP_CELL_FLAG_KEEP_CLEAR;
@@ -1721,7 +1721,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
             for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 cell = MapGetCell(x, y);
 
-                if (cell->type == MAP_CELL_TYPE_LEFT_WALL_TOP && cell->upperZ == platform->z && cell->lowerZ == 0x100000 && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
+                if (cell->type == MAP_CELL_TYPE_LEFT_WALL_TOP && cell->upperZ == platform->z && cell->lowerZ == MAP_Z_BOTTOM && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
                     door->cellX = x;
                     door->cellY = y;
                     MapGetCell(x, y)->flags |= MAP_CELL_FLAG_KEEP_CLEAR;
@@ -1743,7 +1743,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
             for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 cell = MapGetCell(x, y);
 
-                if (cell->type == MAP_CELL_TYPE_RIGHT_WALL_TOP && cell->upperZ == platform->z && cell->lowerZ == 0x100000 && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
+                if (cell->type == MAP_CELL_TYPE_RIGHT_WALL_TOP && cell->upperZ == platform->z && cell->lowerZ == MAP_Z_BOTTOM && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
                     door->cellX = x;
                     door->cellY = y;
                     MapGetCell(x, y)->flags |= MAP_CELL_FLAG_KEEP_CLEAR;
@@ -1765,7 +1765,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
             for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 cell = MapGetCell(x, y);
 
-                if (cell->type == MAP_CELL_TYPE_LEFT_WALL_BASE && cell->lowerZ == platform->z && cell->upperZ == -0x100000 && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
+                if (cell->type == MAP_CELL_TYPE_LEFT_WALL_BASE && cell->lowerZ == platform->z && cell->upperZ == MAP_Z_TOP && (cell->flags & MAP_CELL_FLAG_STAIRS) == 0) {
                     door->cellX = x;
                     door->cellY = y;
                     cell->flags |= MAP_CELL_FLAG_KEEP_CLEAR;
@@ -1789,7 +1789,7 @@ s32 MapPlaceLastPlatformDoor() {
     s32 side = MAP_DOOR_SIDE_NONE;
     MapPlatform* platform = &sMapPlatforms[11];
 
-    while (platform->z == 0x100000) {
+    while (platform->z == MAP_Z_BOTTOM) {
         platform--;
     }
 
@@ -1868,7 +1868,7 @@ void MapPlaceLeftPlatformDoor(u8 side) {
 void MapPlaceDoorsOnLastPlatform() {
     MapPlatform* platform = &sMapPlatforms[11];
 
-    while (platform->z == 0x100000) {
+    while (platform->z == MAP_Z_BOTTOM) {
         platform--;
     }
 
@@ -2069,7 +2069,7 @@ s32 GetTopEdgeTypeBelowLedge(u8 index, s16 x, s16 y) {
 }
 
 void MapSetPlatform(u8 index, u16 left, u16 right, s16 z) {
-    if (sMapPlatforms[index].z == 0x100000) {
+    if (sMapPlatforms[index].z == MAP_Z_BOTTOM) {
         sMapPlatforms[index].left = left;
         sMapPlatforms[index].right = right;
         sMapPlatforms[index].z = z << 12;
@@ -2805,13 +2805,13 @@ void MapGenerateRoom(u16 cols, u16 rows) {
         for (i = 0; i < 12; i++) {
             sMapPlatforms[i].left = 0;
             sMapPlatforms[i].right = 0;
-            sMapPlatforms[i].z = 0x100000;
+            sMapPlatforms[i].z = MAP_Z_BOTTOM;
             sMapPlatforms[i].hasStairs = FALSE;
             sMapPlatforms[i].x = 0;
             sMapPlatforms[i].y = 0;
             sMapPlatforms[i].spotType = MAP_CELL_TYPE_UNSET;
-            sMapPlatforms[i].spotUpperZ = -0x100000;
-            sMapPlatforms[i].spotLowerZ = 0x100000;
+            sMapPlatforms[i].spotUpperZ = MAP_Z_TOP;
+            sMapPlatforms[i].spotLowerZ = MAP_Z_BOTTOM;
         }
 
         MapGenerateLayout();
@@ -3223,17 +3223,17 @@ void MapFixLoadCellTypes(const u8* src) {
             case MAP_CELL_TYPE_LEFT_WALL_TOP:
             case MAP_CELL_TYPE_RIGHT_WALL_TOP:
                 cell->upperZ = 0;
-                cell->lowerZ = 0x100000;
+                cell->lowerZ = MAP_Z_BOTTOM;
                 break;
             case MAP_CELL_TYPE_BACK_WALL_BASE:
             case MAP_CELL_TYPE_LEFT_WALL_BASE:
             case MAP_CELL_TYPE_RIGHT_WALL_BASE:
-                cell->upperZ = -0x100000;
+                cell->upperZ = MAP_Z_TOP;
                 cell->lowerZ = 0;
                 break;
             default:
-                cell->upperZ = -0x100000;
-                cell->lowerZ = 0x100000;
+                cell->upperZ = MAP_Z_TOP;
+                cell->lowerZ = MAP_Z_BOTTOM;
                 break;
             }
         }

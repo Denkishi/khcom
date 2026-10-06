@@ -905,7 +905,7 @@ void MapEnm01Fly(MapEnmWork* work) {
     if (ground < obj->fieldPosition.z) {
         obj->fieldPosition = prevPos;
         work->targetY = obj->fieldPosition.y + 0x1000;
-    } else if (ground == 0x100000) {
+    } else if (ground == MAP_Z_BOTTOM) {
         obj->fieldPosition = prevPos;
         work->targetY = obj->fieldPosition.y - 0x1000;
     } else {
@@ -1199,7 +1199,7 @@ void MapEnm03Charge(MapEnmWork* work) {
     if (ground < obj->fieldPosition.z) {
         obj->fieldPosition = prevPos;
         work->targetY = obj->fieldPosition.y + 0x1000;
-    } else if (ground == 0x100000) {
+    } else if (ground == MAP_Z_BOTTOM) {
         obj->fieldPosition = prevPos;
         work->targetY = obj->fieldPosition.y - 0x1000;
     } else {
@@ -1235,7 +1235,7 @@ void MapEnm03Return(MapEnmWork* work) {
     if (ground < obj->fieldPosition.z) {
         obj->fieldPosition = save;
         work->targetY = obj->fieldPosition.y + 0x1000;
-    } else if (ground == 0x100000) {
+    } else if (ground == MAP_Z_BOTTOM) {
         obj->fieldPosition = save;
         work->targetY = obj->fieldPosition.y - 0x1000;
     } else {
@@ -1463,7 +1463,7 @@ void MapEnm04Fly(MapEnmWork* work) {
     if (ground < obj->fieldPosition.z) {
         obj->fieldPosition = prevPos;
         work->targetY = obj->fieldPosition.y + 0x1000;
-    } else if (ground == 0x100000) {
+    } else if (ground == MAP_Z_BOTTOM) {
         obj->fieldPosition = prevPos;
         work->targetY = obj->fieldPosition.y - 0x1000;
     } else {

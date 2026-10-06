@@ -794,7 +794,7 @@ s32 MapGmkIsAreaSparse(s16 x, s16 y) {
 u8 MapCellIsFreeOfType(s16 x, s16 y, u8 type) {
     MapCell* cell = MapCellAt(x, y);
 
-    if (cell != NULL && cell->lowerZ != 0x100000 && cell->type == type && (cell->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
+    if (cell != NULL && cell->lowerZ != MAP_Z_BOTTOM && cell->type == type && (cell->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
         return TRUE;
     }
 
@@ -1467,7 +1467,7 @@ void MapGmkReserveJump() {
     for (i = 0; i < 12; i++) {
         MapPlatform* platform = GetMapPlatform(i);
 
-        if (!platform->hasStairs && platform->spotLowerZ != 0x100000) {
+        if (!platform->hasStairs && platform->spotLowerZ != MAP_Z_BOTTOM) {
             sMapGmkTileCount += 0x4C;
             sMapGmkPaletteCount++;
             break;
@@ -1752,7 +1752,7 @@ void MapGmkCreateTasks() {
     for (i = 0; i < 12; i++) {
         platform = GetMapPlatform(i);
 
-        if (!platform->hasStairs && platform->spotLowerZ != 0x100000) {
+        if (!platform->hasStairs && platform->spotLowerZ != MAP_Z_BOTTOM) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkJump, platform);
         }
     }
@@ -1874,7 +1874,7 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* pattern) {
         // @bug MapCellAt returns NULL past the room edge (NULL read).
         cell = MapCellAt(x + pattern->dx, y + pattern->dy);
 
-        if (cell->lowerZ == 0x100000) {
+        if (cell->lowerZ == MAP_Z_BOTTOM) {
             return FALSE;
         }
 

@@ -58,64 +58,64 @@ TaskDesc gTaskDescBosUrsulaThunder = {
 };
 
 u16 BosUrsulaSpawnThreeBubbles(UrsulaBubbleWork* work) {
-    s8 v = 0x60;
+    s8 angle = 0x60;
 
     if (BosUrsulaIsFacingLeft() != 0) {
-        v = -v;
+        angle = -angle;
     }
 
-    work->bubbles[0] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
-    v = 0x20;
+    work->bubbles[0] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &angle);
+    angle = 0x20;
 
     if (BosUrsulaIsFacingLeft() != 0) {
-        v = -v;
+        angle = -angle;
     }
 
-    work->bubbles[1] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
-    v = 0x40;
+    work->bubbles[1] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &angle);
+    angle = 0x40;
 
     if (BosUrsulaIsFacingLeft() != 0) {
-        v = -v;
+        angle = -angle;
     }
 
-    work->bubbles[2] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
+    work->bubbles[2] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &angle);
 
     return 3;
 }
 
 u16 BosUrsulaSpawnSixBubbles(UrsulaBubbleWork* work) {
-    s8 v;
+    s8 angle;
     s32 i;
-    u8 a = 14;
+    u8 baseAngle = 14;
 
     for (i = 0; i <= 5; i++) {
-        v = a;
+        angle = baseAngle;
 
         if (BosUrsulaIsFacingLeft() != 0) {
-            v = -v;
+            angle = -angle;
         }
 
-        work->bubbles[i] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
-        a += 20;
+        work->bubbles[i] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &angle);
+        baseAngle += 20;
     }
 
     return i;
 }
 
 u16 BosUrsulaSpawnTenBubbles(UrsulaBubbleWork* work) {
-    s8 v;
+    s8 angle;
     s32 i;
-    u8 a = 240;
+    u8 baseAngle = 240;
 
     for (i = 0; i <= 9; i++) {
-        v = a;
+        angle = baseAngle;
 
         if (BosUrsulaIsFacingLeft() != 0) {
-            v = -v;
+            angle = -angle;
         }
 
-        work->bubbles[i] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
-        a += 16;
+        work->bubbles[i] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &angle);
+        baseAngle += 16;
     }
 
     return i;
@@ -238,7 +238,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
 }
 
 u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
-    BtlObj* p = &work->obj;
+    BtlObj* obj = &work->obj;
 
     work->speed -= 12;
 
@@ -247,12 +247,12 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
     }
 
     if (work->state == BOS_URSULA_BUBBLE_SINGLE_STATE_LAUNCH) {
-        p->x += gSineTable[(u8)work->angle] * work->speed >> 8;
-        p->z += -gSineTable[(u8)work->angle + 0x40] * work->speed >> 8;
+        obj->x += gSineTable[(u8)work->angle] * work->speed >> 8;
+        obj->z += -gSineTable[(u8)work->angle + 0x40] * work->speed >> 8;
         work->timer--;
 
-        if (p->z >= 0) {
-            p->z = 0;
+        if (obj->z >= 0) {
+            obj->z = 0;
             work->timer = 0;
         }
 
@@ -263,17 +263,17 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
     }
 
     if (work->state == BOS_URSULA_BUBBLE_SINGLE_STATE_HOMING && work->timer != 0) {
-        work->targetAngle = GetAngle(p->x, p->z,
+        work->targetAngle = GetAngle(obj->x, obj->z,
             gBtlWork->actor->x, gBtlWork->actor->z);
         ApproachAngle(&work->angle, work->targetAngle, 4);
-        p->x += gSineTable[(u8)work->angle] * work->speed >> 8;
-        p->z += -gSineTable[(u8)work->angle + 0x40] * work->speed >> 8;
+        obj->x += gSineTable[(u8)work->angle] * work->speed >> 8;
+        obj->z += -gSineTable[(u8)work->angle + 0x40] * work->speed >> 8;
 
         if (work->timer <= 169) {
-            ApproachValue(&p->y, gBtlWork->actor->y, 30);
+            ApproachValue(&obj->y, gBtlWork->actor->y, 30);
         }
 
-        if ((u32)p->x > 0x20800 || p->y > 0x20800) {
+        if ((u32)obj->x > 0x20800 || obj->y > 0x20800) {
             return 0;
         }
 
@@ -294,7 +294,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 #else
     if (AnimGetId(&work->anim) == 0
 #endif
-            && ApplyAttackBox(0xF2, p->x, p->y, p->z, 1, 1, 1) == 1) {
+            && ApplyAttackBox(0xF2, obj->x, obj->y, obj->z, 1, 1, 1) == 1) {
         m4aSongNumStart(SONG_EF_UR_BUBBHIT);
 
         return 0;
@@ -312,25 +312,25 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 
     AnimUpdate(&work->anim);
 #endif
-    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
+    ColliderSetPosition(&obj->collider, obj->x, obj->y, obj->z);
 
     return 1;
 }
 
 void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work) {
-    BtlObj* p = &work->obj;
+    BtlObj* obj = &work->obj;
     void* pal;
-    u16 v;
+    u16 flags;
     s16 x;
     s16 y;
 
-    v = GetBattleSpritePriorityFlags(p->y);
-    pal = StepHitFlash(p) ? work->palette2 : work->palette;
-    WorldToScreen(&x, &y, p->x, p->y, p->z);
+    flags = GetBattleSpritePriorityFlags(obj->y);
+    pal = StepHitFlash(obj) ? work->palette2 : work->palette;
+    WorldToScreen(&x, &y, obj->x, obj->y, obj->z);
 #ifdef VERSION_EU
-    DrawSprite(x, y, BosUrsulaBubbleAnimGetGfx(), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
+    DrawSprite(x, y, BosUrsulaBubbleAnimGetGfx(), work->tiles, pal, NULL, flags, -0x1004 - (obj->y >> 8) * 4);
 #else
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, flags, -0x1004 - (obj->y >> 8) * 4);
 #endif
 }
 
@@ -361,11 +361,11 @@ void BosUrsulaBubblePop(UrsulaBubbleSingleWork* work) {
 }
 
 void task_bos_ursula_thunder_0(UrsulaThunderWork* work) {
-    BtlObj* p = gBtlWork->actor;
+    BtlObj* player = gBtlWork->actor;
 
-    work->x = p->x;
-    work->y = p->y;
-    work->z = p->z - 0x6000;
+    work->x = player->x;
+    work->y = player->y;
+    work->z = player->z - 0x6000;
     BgFxStartUrsulaThunder(work->x, work->y, work->z);
     work->strikeStarted = 0;
 }
@@ -424,9 +424,9 @@ u8 BosMapanimeUpdate(BosMapanimeState* anim, const BosMapanimeDef* def, u8 defer
 }
 
 u8 BosMapanimeIsAtEnd(BosMapanimeState* anim) {
-    const BosMapanimeDef* q = anim->def;
+    const BosMapanimeDef* def = anim->def;
 
-    if (anim->timer + 1 > q->frames[anim->frameIndex].duration && anim->frameIndex + 1 >= q->frameCount) {
+    if (anim->timer + 1 > def->frames[anim->frameIndex].duration && anim->frameIndex + 1 >= def->frameCount) {
         return 1;
     }
 

@@ -236,7 +236,7 @@ u8 BosUrsulaIsGuarded(UrsulaWork* work) {
 }
 
 void task_bos_ursula_0(UrsulaWork* work) {
-    u8 v;
+    u8 isLeft;
 
     sUrsulaWork = work;
     gBosUrsulaActive = 1;
@@ -267,18 +267,18 @@ void task_bos_ursula_0(UrsulaWork* work) {
     gBtlWork->bossY = work->obj.y;
     gBtlWork->bossZ = work->obj.z;
     TaskPoolInit(&work->tasks, 5);
-    v = 1;
-    work->tako = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &v);
-    v = 0;
-    work->tako2 = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &v);
+    isLeft = 1;
+    work->tako = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &isLeft);
+    isLeft = 0;
+    work->tako2 = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &isLeft);
     TaskCreate(&work->tasks, &sTaskDescBosUrsulaMapanime, NULL);
-    v = 1;
-    TaskCreate(&work->tasks, &sTaskDescBosUrsulaBacktako, &v);
+    isLeft = 1;
+    TaskCreate(&work->tasks, &sTaskDescBosUrsulaBacktako, &isLeft);
     work->gimmickDelay = 0;
 }
 
 void BosUrsulaUpdateBob(UrsulaWork* work) {
-    BtlObj* p = &work->obj;
+    BtlObj* obj = &work->obj;
 
     if ((s16)work->bobTimer == 0) {
         work->bobTimer = 32;
@@ -291,27 +291,27 @@ void BosUrsulaUpdateBob(UrsulaWork* work) {
     }
 
     ApproachValue(&work->bobZ, work->bobTarget, work->bobTimer);
-    p->z = gBosUrsulaBaseZ + work->bobZ;
+    obj->z = gBosUrsulaBaseZ + work->bobZ;
     work->bobTimer--;
 }
 
 u8 BosUrsulaMoveForward(UrsulaWork* work) {
-    BtlObj* p = &work->obj;
+    BtlObj* obj = &work->obj;
 
     BosUrsulaUpdateBob(work);
 
     if (BosUrsulaIsFacingLeft() != 0) {
-        p->x -= 0x100;
+        obj->x -= 0x100;
 
-        if (p->x <= -0x9800) {
-            p->x = -0x9800;
+        if (obj->x <= -0x9800) {
+            obj->x = -0x9800;
             return 0;
         }
     } else {
-        p->x += 0x100;
+        obj->x += 0x100;
 
-        if (p->x >= 0x28000) {
-            p->x = 0x28000;
+        if (obj->x >= 0x28000) {
+            obj->x = 0x28000;
             return 0;
         }
     }
@@ -320,9 +320,9 @@ u8 BosUrsulaMoveForward(UrsulaWork* work) {
 }
 
 s32 BosUrsulaChooseAttackPhase0(UrsulaWork* work) {
-    BtlObj* p = gBtlWork->actor;
+    BtlObj* player = gBtlWork->actor;
 
-    if (p->x < work->obj.x - 0x5000 || work->obj.x + 0x5000 < p->x) {
+    if (player->x < work->obj.x - 0x5000 || work->obj.x + 0x5000 < player->x) {
         return BOS_URSULA_ATTACK_BUBBLE;
     }
 
@@ -403,12 +403,12 @@ u16 BosUrsulaGetCardInterval() {
 }
 
 u8 task_bos_ursula_1(UrsulaWork* work) {
-    BtlObj* p = &work->obj;
+    BtlObj* obj = &work->obj;
     PrizeCardArg pos;
     s32 x;
     u16 chance;
 
-    switch (UpdateBtlObjReaction(p)) {
+    switch (UpdateBtlObjReaction(obj)) {
     case BTL_REACTION_CARD_ACTION:
         work->state = BOS_URSULA_STATE_ATTACK;
         work->timer = 0;
@@ -501,20 +501,20 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             }
 
             if (!BosUrsulaIsAttacking()) {
-                ClearBtlObjActionFlags(p);
+                ClearBtlObjActionFlags(obj);
                 work->state = BOS_URSULA_STATE_IDLE;
             }
         }
 
         break;
     case BOS_URSULA_STATE_CANCEL:
-        ClearBtlObjActionFlags(p);
+        ClearBtlObjActionFlags(obj);
         work->state = BOS_URSULA_STATE_IDLE;
         BosUrsulaStartAttack(BOS_URSULA_ATTACK_NONE);
         break;
     case BOS_URSULA_STATE_HURT:
         if (work->timer > 20) {
-            ClearBtlObjActionFlags(p);
+            ClearBtlObjActionFlags(obj);
 
             if (BosUrsulaGetHpPhase() == BOS_URSULA_HP_PHASE_MID && !BosUrsulaIsGimmickActive()) {
                 work->state = BOS_URSULA_STATE_MOVE;
@@ -530,19 +530,19 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
         break;
     case BOS_URSULA_STATE_DEFEATED:
         if (work->timer == 0) {
-            BeginBossDefeat(p);
+            BeginBossDefeat(obj);
             BosUrsulaUpdateMapBlocks(work);
             work->timer++;
         } else if (work->timer == 1) {
             work->timer++;
         } else if (work->timer == 2) {
             if (BosUrsulaIsFacingLeft()) {
-                x = p->x + 0x1400;
+                x = obj->x + 0x1400;
             } else {
-                x = p->x - 0x1C00;
+                x = obj->x - 0x1C00;
             }
 
-            BgFxStartBossDeath(x, p->y + p->z + 0x1C00);
+            BgFxStartBossDeath(x, obj->y + obj->z + 0x1C00);
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             work->timer++;
         } else if (work->timer == 3) {
@@ -556,7 +556,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
                 BgFxStartBossDeathFlash();
             }
         } else if (!BgFxIsActive()) {
-            pos.x = p->x;
+            pos.x = obj->x;
 
             if (pos.x < 0x2000) {
                 pos.x = 0x2000;
@@ -567,10 +567,10 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             }
 
             pos.y = 0x1A800;
-            pos.z = p->z;
+            pos.z = obj->z;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &pos);
             EndBossDefeat();
-            DropBossPrizes(p);
+            DropBossPrizes(obj);
             DisableBg(0);
             gBosUrsulaActive = 0;
             return 0;
@@ -579,9 +579,9 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
         break;
     case BOS_URSULA_STATE_IDLE:
         if (work->obj.x > gBtlWork->actor->x) {
-            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
+            obj->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+            obj->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
 
         if (!BosUrsulaIsGimmickActive()) {
@@ -593,12 +593,12 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
                 }
             }
 
-            if ((u32)p->x > 0x20000) {
+            if ((u32)obj->x > 0x20000) {
                 work->state = BOS_URSULA_STATE_MOVE;
             }
 
             if (BosUrsulaGetHpPhase() == BOS_URSULA_HP_PHASE_LOW) {
-                if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) > 0x6800) {
+                if (((obj->x - gBtlWork->actor->x) >= 0 ? obj->x - gBtlWork->actor->x : -(obj->x - gBtlWork->actor->x)) > 0x6800) {
                     work->state = BOS_URSULA_STATE_MOVE;
                 }
             }
@@ -611,17 +611,17 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             BosUrsulaUpdateBob(work);
         } else {
             if (!BosUrsulaMoveForward(work)) {
-                p->flags ^= BTLOBJ_FLAG_FACING_LEFT;
+                obj->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             }
 
-            if (BosUrsulaGetHpPhase() == BOS_URSULA_HP_PHASE_LOW && p->x > 0x6800 && p->x < 0x19800) {
-                if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) < 0x6800 && BosUrsulaIsGuarded(work)) {
+            if (BosUrsulaGetHpPhase() == BOS_URSULA_HP_PHASE_LOW && obj->x > 0x6800 && obj->x < 0x19800) {
+                if (((obj->x - gBtlWork->actor->x) >= 0 ? obj->x - gBtlWork->actor->x : -(obj->x - gBtlWork->actor->x)) < 0x6800 && BosUrsulaIsGuarded(work)) {
                     RequestEnemyCardUse(&work->obj);
                     work->state = BOS_URSULA_STATE_IDLE;
                 }
             }
 
-            if ((!(p->flags & BTLOBJ_FLAG_FACING_LEFT) && p->x == 0x6800) || ((p->flags & BTLOBJ_FLAG_FACING_LEFT) && p->x == 0x19800)) {
+            if ((!(obj->flags & BTLOBJ_FLAG_FACING_LEFT) && obj->x == 0x6800) || ((obj->flags & BTLOBJ_FLAG_FACING_LEFT) && obj->x == 0x19800)) {
                 work->state = BOS_URSULA_STATE_IDLE;
             }
         }
@@ -634,30 +634,30 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
     }
 
     if (BosUrsulaIsGuarded(work)) {
-        ColliderSetPosition(&p->collider, p->x, p->y, p->z);
+        ColliderSetPosition(&obj->collider, obj->x, obj->y, obj->z);
     } else {
-        ColliderSetPosition(&p->collider, p->x, p->y + 0x1000, p->z - 0x1000);
+        ColliderSetPosition(&obj->collider, obj->x, obj->y + 0x1000, obj->z - 0x1000);
     }
 
-    gBtlWork->bossX = p->x;
-    gBtlWork->bossY = p->y;
-    gBtlWork->bossZ = p->z;
+    gBtlWork->bossX = obj->x;
+    gBtlWork->bossY = obj->y;
+    gBtlWork->bossZ = obj->z;
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
 void task_bos_ursula_2(UrsulaWork* work) {
-    BtlObj* p = &work->obj;
-    s32 d = 0;
+    BtlObj* obj = &work->obj;
+    s32 offsetX = 0;
 
     if (BosUrsulaIsFacingLeft() != 0 && work->mapBlocks == sBosUrsulaMapBlocksHurtRight) {
-        d = -0x1000;
+        offsetX = -0x1000;
     } else if (BosUrsulaIsFacingLeft() == 0 && work->mapBlocks == sBosUrsulaMapBlocksHurtLeft) {
-        d = 0x1000;
+        offsetX = 0x1000;
     }
 
-    ScrollBgMapTo(0, (gBtlWork->viewX - (p->x - 0x12000) + d) >> 8,
-        (gBtlWork->viewY - (p->y + p->z - 0x12000)) >> 8);
+    ScrollBgMapTo(0, (gBtlWork->viewX - (obj->x - 0x12000) + offsetX) >> 8,
+        (gBtlWork->viewY - (obj->y + obj->z - 0x12000)) >> 8);
     TaskPoolDraw(&work->tasks);
 }
 
@@ -680,17 +680,17 @@ u8 BosUrsulaIsGimmickActive() {
 }
 
 u8 BosUrsulaObjectsGone() {
-    BtlObj* p;
-    u8 r = 1;
+    BtlObj* obj;
+    u8 gone = 1;
 
-    for (p = ListPoolFirst(&gBtlWork->pool); p != NULL; p = ListPoolNext(&p->node)) {
-        if (p->kind == 0x23) {
-            r = 0;
+    for (obj = ListPoolFirst(&gBtlWork->pool); obj != NULL; obj = ListPoolNext(&obj->node)) {
+        if (obj->kind == 0x23) {
+            gone = 0;
             break;
         }
     }
 
-    return r;
+    return gone;
 }
 
 u8 BosUrsulaIsGimmickStarting() {
@@ -764,32 +764,32 @@ void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg) {
 }
 
 u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
-    s32 a;
-    s32 b;
-    u8 v;
+    s32 dx;
+    s32 dy;
+    u8 top;
 
     if (BosUrsulaIsGimmickStarting()) {
         return 1;
     }
 
     BtlMapUpdateShake();
-    a = (gBtlWork->x2 - gBtlWork->x) >> 3;
-    b = (gBtlWork->y2 - gBtlWork->y) >> 3;
+    dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
+    dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
 
-    if (a > 0x500) {
-        a = 0x500;
-    } else if (a < -0x500) {
-        a = -0x500;
+    if (dx > 0x500) {
+        dx = 0x500;
+    } else if (dx < -0x500) {
+        dx = -0x500;
     }
 
-    if (b > 0x500) {
-        b = 0x500;
-    } else if (b < -0x500) {
-        b = -0x500;
+    if (dy > 0x500) {
+        dy = 0x500;
+    } else if (dy < -0x500) {
+        dy = -0x500;
     }
 
-    gBtlWork->x += a;
-    gBtlWork->y += b;
+    gBtlWork->x += dx;
+    gBtlWork->y += dy;
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
@@ -820,13 +820,13 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
 
     gBtlWork->viewY += BtlMapGetShake();
     ScrollBgMapTo(1, (gBtlWork->viewX >> 8) - 0x78, (gBtlWork->viewY >> 8) - 0x50);
-    v = -0x18 - (gBtlWork->viewY >> 8);
+    top = -0x18 - (gBtlWork->viewY >> 8);
 
-    if (v > 0xA0 || !gBosUrsulaActive) {
+    if (top > 0xA0 || !gBosUrsulaActive) {
         gDispCnt &= ~DISPCNT_WIN0_ON;
     } else {
         gDispCnt |= DISPCNT_WIN0_ON;
-        gWin0V = (v << 8) | 0xA0;
+        gWin0V = (top << 8) | 0xA0;
     }
 
     return 1;
@@ -846,16 +846,16 @@ s32 task_bos_ursula_border_1() {
 }
 
 void task_bos_ursula_border_2(UrsulaBorderWork* work) {
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
+    s16 leftX;
+    s16 leftY;
+    s16 rightX;
+    s16 rightY;
 
     GetBattleSpritePriorityFlags(0x19800);
-    WorldToScreen(&a, &b, 0x8000, 0x19800, -0x800);
-    WorldToScreen(&c, &d, 0x18000, 0x19800, -0x800);
-    DrawSprite(a, b, gBosUrsulaBorderFrame0, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0xFB00);
-    DrawSprite(c, d, gUnk_0979D8B8, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0xFB00);
+    WorldToScreen(&leftX, &leftY, 0x8000, 0x19800, -0x800);
+    WorldToScreen(&rightX, &rightY, 0x18000, 0x19800, -0x800);
+    DrawSprite(leftX, leftY, gBosUrsulaBorderFrame0, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0xFB00);
+    DrawSprite(rightX, rightY, gUnk_0979D8B8, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0xFB00);
 }
 
 void task_bos_ursula_border_3(UrsulaBorderWork* work) {
@@ -864,8 +864,8 @@ void task_bos_ursula_border_3(UrsulaBorderWork* work) {
 }
 
 void BosUrsulaTakoGetPosition(s32* x, s32* y, s32* z, UrsulaTakoWork* work) {
-    s32* p;
-    s32 t;
+    s32* bossZ;
+    s32 dz;
 
     *x = gBtlWork->bossX + work->offsetX;
 
@@ -884,9 +884,9 @@ void BosUrsulaTakoGetPosition(s32* x, s32* y, s32* z, UrsulaTakoWork* work) {
     }
 
     *y = gBtlWork->bossY;
-    p = &gBtlWork->bossZ;
-    t = work->offsetZ + 0x5000;
-    *z = *p + t;
+    bossZ = &gBtlWork->bossZ;
+    dz = work->offsetZ + 0x5000;
+    *z = *bossZ + dz;
 }
 
 s32 BosUrsulaGetTakoPlatformRadius(u8 isLeft) {
@@ -941,7 +941,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
 }
 
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
-    BtlObj* p = &work->obj;
+    BtlObj* obj = &work->obj;
     s32 x;
     s32 y;
     s32 z;
@@ -949,16 +949,16 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     s32 dz;
 
     if (BosUrsulaIsGimmickActive()) {
-        SetBtlObjUnhittable(p, 1);
+        SetBtlObjUnhittable(obj, 1);
     } else if (work->state <= BOS_URSULA_TAKO_STATE_HURT) {
-        SetBtlObjUnhittable(p, 0);
+        SetBtlObjUnhittable(obj, 0);
     }
 
     if (BosUrsulaIsDefeated()) {
         return 1;
     }
 
-    switch (UpdateBtlObjReaction(p)) {
+    switch (UpdateBtlObjReaction(obj)) {
     case BTL_REACTION_CARD_ACTION:
         work->state = BOS_URSULA_TAKO_STATE_ATTACK;
         work->timer = 0;
@@ -976,7 +976,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         work->timer = 0;
         break;
     case BTL_REACTION_CARD_BROKEN:
-        ClearBtlObjActionFlags(p);
+        ClearBtlObjActionFlags(obj);
         work->state = BOS_URSULA_TAKO_STATE_IDLE;
         RequestBossCardRandom();
         break;
@@ -994,7 +994,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         work->timer++;
 
         if (AnimIsFinished(&work->anim)) {
-            ClearBtlObjActionFlags(p);
+            ClearBtlObjActionFlags(obj);
             work->state = BOS_URSULA_TAKO_STATE_IDLE;
             work->timer = 0;
         }
@@ -1004,15 +1004,15 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         if (AnimGetId(&work->anim) == (s16)work->animBase + 4) {
             if (AnimGetFrame(&work->anim) == 0 && AnimIsFrameEnding(&work->anim)) {
                 AnimStart(&work->anim, work->animBase + 5, ANIM_FLAG_LOOP);
-                SetBtlObjUnhittable(p, 1);
+                SetBtlObjUnhittable(obj, 1);
 
                 if ((u16)(GetRandom() % 100) <= 19) {
-                    DropGimmickCard(0, p->x, p->y, p->z);
+                    DropGimmickCard(0, obj->x, obj->y, obj->z);
                 }
             }
         } else if (AnimGetId(&work->anim) == (s16)work->animBase + 5) {
             if (AnimIsFinished(&work->anim)) {
-                ClearBtlObjActionFlags(p);
+                ClearBtlObjActionFlags(obj);
                 work->state = BOS_URSULA_TAKO_STATE_DOWN;
                 work->timer = 0;
             }
@@ -1087,7 +1087,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         if (AnimIsFinished(&work->anim) || BosUrsulaIsGimmickActive()) {
             work->state = BOS_URSULA_TAKO_STATE_IDLE;
             AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
-            ClearBtlObjActionFlags(p);
+            ClearBtlObjActionFlags(obj);
         } else {
             if (AnimGetFrame(&work->anim) == 1) {
                 dx = 0x800;
@@ -1115,7 +1115,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
                 dz = -0x3800;
             }
 
-            if (ApplyAttackBox(241, p->x + dx, p->y + 0x1000, p->z + dz, 24, 16, 8) == 1) {
+            if (ApplyAttackBox(241, obj->x + dx, obj->y + 0x1000, obj->z + dz, 24, 16, 8) == 1) {
                 m4aSongNumStart(SONG_BTL_HANE_HIT);
             }
         }
@@ -1124,7 +1124,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     }
 
     AnimUpdate(&work->anim);
-    BosUrsulaTakoGetPosition(&p->x, &p->y, &p->z, work);
+    BosUrsulaTakoGetPosition(&obj->x, &obj->y, &obj->z, work);
 
     if (work->state - 3 <= 4 && gBtlWork->actor->z < -0x5000 && !BosUrsulaIsGimmickActive()) {
         ColliderSetDisabled(&work->collider, 0);
@@ -1144,14 +1144,14 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
 }
 
 void task_bos_ursula_tako_2(UrsulaTakoWork* work) {
-    BtlObj* p = &work->obj;
+    BtlObj* obj = &work->obj;
     void* pal;
     s16 x;
     s16 y;
 
     if (work->state != BOS_URSULA_TAKO_STATE_SUBMERGED && !BosUrsulaIsGimmickActive()) {
-        pal = StepHitFlash(p) ? work->palette2 : work->palette;
-        WorldToScreen(&x, &y, p->x, p->y, p->z);
+        pal = StepHitFlash(obj) ? work->palette2 : work->palette;
+        WorldToScreen(&x, &y, obj->x, obj->y, obj->z);
         DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, SPRITE_PRIORITY(2), 0xFC00);
     }
 }
@@ -1189,8 +1189,8 @@ u8 BosUrsulaTakoIsStoodOn(UrsulaTakoWork* work) {
 }
 
 void BosUrsulaBacktakoGetPosition(s32* x, s32* y, s32* z, UrsulaBacktakoWork* work) {
-    s32* p;
-    s32 t;
+    s32* bossZ;
+    s32 dz;
 
     *x = gBtlWork->bossX + work->offsetX;
 
@@ -1209,9 +1209,9 @@ void BosUrsulaBacktakoGetPosition(s32* x, s32* y, s32* z, UrsulaBacktakoWork* wo
     }
 
     *y = gBtlWork->bossY + 0x800;
-    p = &gBtlWork->bossZ;
-    t = work->offsetZ + 0x5000;
-    *z = *p + t;
+    bossZ = &gBtlWork->bossZ;
+    dz = work->offsetZ + 0x5000;
+    *z = *bossZ + dz;
 }
 
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
@@ -1251,9 +1251,9 @@ u8 task_bos_ursula_backtako_1(UrsulaBacktakoWork* work) {
 void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work) {
     s16 x;
     s16 y;
-    u8 f = BosUrsulaIsGimmickActive();
+    u8 gimmickActive = BosUrsulaIsGimmickActive();
 
-    if (f) {
+    if (gimmickActive) {
         return;
     }
 
@@ -1279,7 +1279,7 @@ void task_bos_ursula_mapanime_0(UrsulaMapanimeWork* work) {
 }
 
 u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
-    s32 d;
+    s32 offsetX;
 
     BosMapanimeUpdate(&work->anim, work->anim.def, 0);
 
@@ -1312,8 +1312,8 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
                 gBtlWork->bossZ);
         }
 
-        d = BosUrsulaIsFacingLeft() != 0 ? -0x5000 : 0x5000;
-        ApplyAttackBox(0xF3, gBtlWork->bossX + d, 0x1C400, 0, 0x18, 0x38, 0x50);
+        offsetX = BosUrsulaIsFacingLeft() != 0 ? -0x5000 : 0x5000;
+        ApplyAttackBox(0xF3, gBtlWork->bossX + offsetX, 0x1C400, 0, 0x18, 0x38, 0x50);
     }
 
     if (work->anim.def == &sBosUrsulaMapanimeBubble && BosMapanimeGetFrameIndex(&work->anim) == 2

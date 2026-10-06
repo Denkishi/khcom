@@ -27,7 +27,7 @@
 #include "sprite_palettes.h"
 #include "text_types.h"
 
-void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
+void Deck_Equip_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;
@@ -67,11 +67,11 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
 #endif
     work->unk_790 = 0;
     work->unk_7A4 = 0;
-    work->active = a;
-    *a = 1;
+    work->active = active;
+    *active = 1;
 }
 
-void DeckErrorCpInit(DeckConfirmWork* work, u8* a) {
+void DeckErrorCpInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;
@@ -101,11 +101,11 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* a) {
 #endif
     work->unk_790 = 0;
     work->unk_7A4 = 0;
-    work->active = a;
-    a[0] = 1;
+    work->active = active;
+    active[0] = 1;
 }
 
-void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* a) {
+void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     InitTextSlots(work->textSlots, 0x50);
@@ -134,11 +134,11 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* a) {
     work->y2 = 62;
     work->unk_790 = 0;
     work->unk_7A4 = 0;
-    work->active = a;
-    a[0] = 1;
+    work->active = active;
+    active[0] = 1;
 }
 
-void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* a) {
+void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     InitTextSlots(work->textSlots, 0x50);
@@ -165,11 +165,11 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* a) {
 #endif
     work->unk_790 = 0;
     work->unk_7A4 = 0;
-    work->active = a;
-    a[0] = 1;
+    work->active = active;
+    active[0] = 1;
 }
 
-void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* a) {
+void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     InitTextSlots(work->textSlots, 0x50);
@@ -196,8 +196,8 @@ void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* a) {
 #endif
     work->unk_7A4 = 0;
     work->unk_790 = 0;
-    work->active = a;
-    a[0] = 1;
+    work->active = active;
+    active[0] = 1;
 }
 
 s32 DeckConfirmUpdate() {
@@ -234,7 +234,7 @@ void DeckConfirmDestroy(DeckConfirmWork* work) {
 #define DECK_PROMPT_RIGHT_DX 20
 #define DECK_CLEAR_TEXT_Y 61
 #endif
-void Deck_Yes_No_0(DeckConfirmWork* work, u8* a) {
+void Deck_Yes_No_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     InitTextSlots(work->textSlots, 0x50);
@@ -254,8 +254,8 @@ void Deck_Yes_No_0(DeckConfirmWork* work, u8* a) {
     work->y3 = 88;
     work->unk_790 = 0;
     work->unk_7A4 = 0;
-    work->active = a;
-    a[0] = 1;
+    work->active = active;
+    active[0] = 1;
 }
 
 s32 DeckConfirmYesNoUpdate() {
@@ -266,7 +266,7 @@ s32 DeckConfirmYesNoUpdate() {
     return 1;
 }
 
-void Deck_Clear_0(DeckConfirmWork* work, u8* a) {
+void Deck_Clear_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     InitTextSlots(work->textSlots, 0x50);
@@ -286,61 +286,61 @@ void Deck_Clear_0(DeckConfirmWork* work, u8* a) {
     work->y = DECK_CLEAR_TEXT_Y;
     work->unk_790 = 0;
     work->unk_7A4 = 0;
-    work->active = a;
-    a[0] = 1;
+    work->active = active;
+    active[0] = 1;
 }
 
-void WriteCardSaveSlice(SaveLargeSlice* p) {
+void WriteCardSaveSlice(SaveLargeSlice* out) {
     s32 i;
 
     for (i = 0; i < 270; i++) {
-        p->mapCardCounts[i] = gMapCardCounts[i];
+        out->mapCardCounts[i] = gMapCardCounts[i];
     }
 
     for (i = 0; i < 999; i++) {
-        p->cards[i] = gCardCollection[i];
+        out->cards[i] = gCardCollection[i];
     }
 
     for (i = 0; i < 3; i++) {
-        memcpy(&p->decks[i], &gDecks[i], sizeof(Deck));
+        memcpy(&out->decks[i], &gDecks[i], sizeof(Deck));
     }
 
-    p->cardCount = gCardCount;
-    p->activeDeck = GetActiveDeckIndex();
+    out->cardCount = gCardCount;
+    out->activeDeck = GetActiveDeckIndex();
 }
 
-void ReadCardSaveSlice(SaveLargeSlice* p) {
+void ReadCardSaveSlice(SaveLargeSlice* in) {
     u16 i;
 
     for (i = 0; i < 0x10E; i++) {
-        gMapCardCounts[i] = p->mapCardCounts[i];
+        gMapCardCounts[i] = in->mapCardCounts[i];
     }
 
     for (i = 0; i < 0x3E7; i++) {
-        gCardCollection[i] = p->cards[i];
+        gCardCollection[i] = in->cards[i];
     }
 
     for (i = 0; i < 3; i++) {
-        gDecks[i] = p->decks[i];
+        gDecks[i] = in->decks[i];
     }
 
-    gCardCount = p->cardCount;
-    SetActiveDeckIndex(p->activeDeck);
+    gCardCount = in->cardCount;
+    SetActiveDeckIndex(in->activeDeck);
 }
 
-void CopyMapCardInventory(SaveSmallSlice* p) {
+void CopyMapCardInventory(SaveSmallSlice* out) {
     s32 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        p->mapCardCounts[i] = gMapCardCounts[i];
+        out->mapCardCounts[i] = gMapCardCounts[i];
     }
 }
 
-void RestoreMapCardInventory(SaveSmallSlice* p) {
+void RestoreMapCardInventory(SaveSmallSlice* in) {
     u16 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        gMapCardCounts[i] = p->mapCardCounts[i];
+        gMapCardCounts[i] = in->mapCardCounts[i];
     }
 }
 

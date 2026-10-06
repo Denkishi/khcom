@@ -4,22 +4,22 @@
 #include "card.h"
 #include "types.h"
 
-u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a);
-u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* a);
-u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* a);
-u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a);
-u8 UpdateDeckExchangeClose(DeckExchangeWork* work, void* a);
+u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* task);
+u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* task);
+u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* task);
+u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task);
+u8 UpdateDeckExchangeClose(DeckExchangeWork* work, void* task);
 u8 UpdateDeckExchangeFadeOut(DeckExchangeWork* work);
 void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind);
-s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 c);
-s32 GetCardIdForKind(s32 a);
+s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 excludeBossCards);
+s32 GetCardIdForKind(s32 kind);
 void ClearDeckExchangeCardGrid(DeckExchangeWork* work);
 void DrawDeckExchangeEquipMarker(u8 a);
 void DrawDeckExchangeCardTotals();
 void ShowDeckExchangeCardPreview(DeckExchangeWork* work);
 void ReleaseDeckExchangeCardPreview(DeckExchangeWork* work);
 void DrawDeckExchangeValueCpCost(DeckExchangeWork* work);
-void DrawDeckExchangeCpCost(u8 a);
+void DrawDeckExchangeCpCost(u8 cpCost);
 s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key);
 void FreeDeckExchangeCollectionEntries(DeckExchangeWork* work);
 s32 TakeTradeCard(DeckExchangeWork* work);

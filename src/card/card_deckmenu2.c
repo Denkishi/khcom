@@ -533,8 +533,8 @@ void CountCardsNotInDeckByCategory(u8 mode, u16* out) {
     }
 }
 
-void ClearCardCollectionSlot(u16* p) {
-    *p = CARD_ID_MASK;
+void ClearCardCollectionSlot(u16* slot) {
+    *slot = CARD_ID_MASK;
 }
 
 void RemoveUnequippedCardById(u16 id) {
@@ -709,25 +709,25 @@ void RemoveCardFromActiveDeck(u16 slot) {
     cards[slot] = 0xFFFF;
 }
 
-void RemoveCardFromDeck(u16* p, u8 deck) {
+void RemoveCardFromDeck(u16* slot, u8 deck) {
     u16 v;
 
     switch (deck) {
     case 0:
-        gCardCollection[*p] &= ~0x1000;
+        gCardCollection[*slot] &= ~0x1000;
         break;
     case 1:
-        gCardCollection[*p] &= ~0x2000;
+        gCardCollection[*slot] &= ~0x2000;
         break;
     case 2:
-        gCardCollection[*p] &= ~0x4000;
+        gCardCollection[*slot] &= ~0x4000;
         break;
     }
 
-    v = GetCardCpCost(gCardCollection[*p]);
+    v = GetCardCpCost(gCardCollection[*slot]);
     gDecks[deck].cpCost -= v;
     gDecks[deck].cardCount--;
-    *p = 0xFFFF;
+    *slot = 0xFFFF;
 }
 
 void RecalculateInactiveDeckCpCosts() {
@@ -919,7 +919,7 @@ s16 CountActiveDeckCards(s32 index) {
     return count;
 }
 
-s16 CountDeckCards(s32 mode, const Deck* d) {
+s16 CountDeckCards(s32 mode, const Deck* deck) {
     s16 count;
     s16 i;
 
@@ -927,16 +927,16 @@ s16 CountDeckCards(s32 mode, const Deck* d) {
 
     switch (mode) {
     case 0:
-        for (i = 0; i < d->cardCount; i++) {
-            if (gCardDefs[d->cards[i] & CARD_ID_MASK].category <= 2) {
+        for (i = 0; i < deck->cardCount; i++) {
+            if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category <= 2) {
                 count++;
             }
         }
 
         break;
     case 1:
-        for (i = 0; i < d->cardCount; i++) {
-            if (gCardDefs[d->cards[i] & CARD_ID_MASK].category == 3) {
+        for (i = 0; i < deck->cardCount; i++) {
+            if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category == 3) {
                 count++;
             }
         }
@@ -947,13 +947,13 @@ s16 CountDeckCards(s32 mode, const Deck* d) {
     return count;
 }
 
-void CopyActiveDeckCards(s32 a, u16* out) {
+void CopyActiveDeckCards(s32 index, u16* out) {
     u16* cards;
     u16 i;
 
     cards = GetActiveDeck()->cards;
 
-    switch (a) {
+    switch (index) {
     case 0:
         for (i = 0; i < 99; i++) {
             if (cards[i] != 0xFFFF) {
@@ -1086,14 +1086,14 @@ void InitDebugDecks() {
 #endif
 }
 
-void InitRikuDeckForWorld(u8 a) {
+void InitRikuDeckForWorld(u8 world) {
     u8 n = 0;
 
     InitCardCollection();
     InitDecks();
     SetActiveDeckIndex(0);
 
-    switch (a) {
+    switch (world) {
     case 2:
         n = 1;
         break;
@@ -1137,17 +1137,17 @@ void InitRikuDeckForWorld(u8 a) {
     BuildRikuDeck(n);
 }
 
-void BuildRikuDeck(u8 a) {
+void BuildRikuDeck(u8 deck) {
     s32 i;
     s32 j;
 
-    for (i = 0, j = 0; i < gRikuDeckCardCounts[a]; i++, j++) {
-        ObtainCard(gRikuDeckCards[a][i]);
+    for (i = 0, j = 0; i < gRikuDeckCardCounts[deck]; i++, j++) {
+        ObtainCard(gRikuDeckCards[deck][i]);
         AddCardToActiveDeck(i);
     }
 
-    for (i = 0; i < gRikuDeckEnemyCardCounts[a]; j++, i++) {
-        ObtainCard(gRikuDeckEnemyCards[a][i]);
+    for (i = 0; i < gRikuDeckEnemyCardCounts[deck]; j++, i++) {
+        ObtainCard(gRikuDeckEnemyCards[deck][i]);
         AddCardToActiveDeck(j);
     }
 
@@ -1259,8 +1259,8 @@ static const PromptChoiceLayout sDeckPromptChoiceLayout = { { 94, 151 } };
 static const PromptChoiceLayout sDeckPromptChoiceLayout = { { 102, 148 } };
 #endif
 
-static void Deckmenu2_0(DeckMenuWork* work, void* a) {
-    work->resultOut = a;
+static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
+    work->resultOut = resultOut;
     SetBgMode0();
     SetBackdropColor(0, 0, 0);
 #ifdef VERSION_EU
@@ -1371,7 +1371,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* a) {
     work->result = 0;
 }
 
-static u8 Deckmenu2_1(DeckMenuWork* work, void* a) {
+static u8 Deckmenu2_1(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 
     if (work->step == 0) {
@@ -1410,13 +1410,13 @@ static u8 Deckmenu2_1(DeckMenuWork* work, void* a) {
 
     if (work->step == 8) {
         work->step = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuLoadBgs);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuLoadBgs);
     }
 
     return 1;
 }
 
-u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (work->step) {
@@ -1491,7 +1491,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
         SetBgScroll(1, (u16)-88, (u16)-64);
         SetBgScroll(2, (u16)-88, (u16)-112);
         work->step = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuLoadDeckInfo);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuLoadDeckInfo);
         return 1;
     }
 
@@ -1499,7 +1499,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (work->step) {
@@ -1535,7 +1535,7 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a) {
         work->x2 = 0x4800;
         work->y2 = 0x2800;
         work->cursorRow = work->deckIndex;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuSlideIn);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuSlideIn);
         work->view = 1;
         SetDeckMenuHandAnim(work);
         LoadDeckNameTexts(work);
@@ -1562,7 +1562,7 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
     work->gfx2 = AnimUpdate(&work->anim3);
 
@@ -1592,7 +1592,7 @@ u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* a) {
                 work->palette3 = NULL;
                 work->handVisible = 1;
                 LoadBgMap(3, gDeckReviewGridMap, 0x800);
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
             }
 
             break;
@@ -1602,7 +1602,7 @@ u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuEnterDeckGrid(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuEnterDeckGrid(DeckMenuWork* work, void* task) {
     LoadDeckNameTexts(work);
     ApproachValueHalf(&work->x, gDeckGridColumnX[work->cursorCol] << 8);
     ApproachValueHalf(&work->y, gDeckGridRowY[work->cursorRow] << 8);
@@ -1611,13 +1611,13 @@ u8 UpdateDeckMenuEnterDeckGrid(DeckMenuWork* work, void* a) {
     if (work->timer == 0) {
         work->view = 0;
         SetDeckMenuHandAnim(work);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
     }
 
     return 1;
 }
 
-u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
     work->gfx2 = AnimUpdate(&work->anim3);
 
@@ -1655,7 +1655,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -1679,7 +1679,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
                     work->prevView = work->view;
                     work->view = 2;
                     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
-                    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
                     DrawCpCost(0);
                     return 1;
                 }
@@ -1733,7 +1733,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
                 work->view = 1;
                 SetDeckMenuHandAnim(work);
                 m4aSongNumStart(SONG_SYS_CLICK);
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
                 return 1;
             }
         } else {
@@ -1755,7 +1755,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
             work->view = 1;
             SetDeckMenuHandAnim(work);
             m4aSongNumStart(SONG_SYS_CLICK);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
             return 1;
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
@@ -1789,7 +1789,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->result = 7;
@@ -1800,14 +1800,14 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
         m4aSongNumStart(SONG_SYS_CANSEL);
         work->holding = 0;
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
         return 1;
     case R_BUTTON:
         FreeCollectionEntries(work);
         m4aSongNumStart(SONG_SYS_CANSEL);
         work->holding = 0;
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
         return 1;
     }
 
@@ -1825,7 +1825,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
         TaskPoolUpdate(&work->taskpool);
         TaskPoolUpdate(&work->cardpool);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
         DrawCpCost(0);
         return 1;
     }
@@ -1846,7 +1846,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
 
     if (work->popupActive != 0) {
@@ -1866,7 +1866,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -1912,13 +1912,13 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* a) {
 
         if (work->view == 2) {
             work->view = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuEnterDeckGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuEnterDeckGrid);
         }
 
         if (work->view == 8) {
             work->view = 7;
             ShowDeckCardPreview(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuRemoveGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuRemoveGrid);
         }
 
         work->x2 = 0x4800;
@@ -1928,20 +1928,20 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* a) {
     case R_BUTTON:
         FreeCollectionEntries(work);
         work->unk_8CA = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     case L_BUTTON:
         if (work->view == 2) {
             m4aSongNumStart(SONG_SYS_CANSEL);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
         }
 
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 16);
             work->result = 7;
         }
@@ -1956,7 +1956,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* task) {
     PromptChoiceLayout table = sDeckPromptChoiceLayout;
 
     work->gfx = AnimUpdate(&work->anim2);
@@ -1985,7 +1985,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* a) {
             work->timer = 1;
             work->view = 11;
             SetDeckMenuHandAnim(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
             TaskPoolUpdate(&work->taskpool);
             TaskPoolUpdate(&work->cardpool);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -2029,7 +2029,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* a) {
                 ShowCollectionCardPreview(work);
                 work->view = 9;
                 SetDeckMenuHandAnim(work);
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
                 TaskPoolUpdate(&work->taskpool);
                 TaskPoolUpdate(&work->cardpool);
                 return 1;
@@ -2039,7 +2039,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* a) {
                 work->timer = 1;
                 work->view = 10;
                 SetDeckMenuHandAnim(work);
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
                 work->gridEntryCount = 0;
                 TaskPoolUpdate(&work->taskpool);
                 TaskPoolUpdate(&work->cardpool);
@@ -2049,7 +2049,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* a) {
             DrawSelectedValueCpCost(work);
             work->view = 11;
             SetDeckMenuHandAnim(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
             TaskPoolUpdate(&work->taskpool);
             TaskPoolUpdate(&work->cardpool);
             return 1;
@@ -2059,7 +2059,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* a) {
         work->view = 11;
         SetDeckMenuHandAnim(work);
         m4aSongNumStart(SONG_SYS_CANSEL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
         TaskPoolUpdate(&work->taskpool);
         TaskPoolUpdate(&work->cardpool);
         return 1;
@@ -2072,7 +2072,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* a) {
     }
 }
 
-u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
     s8 n;
     s16 v;
 
@@ -2091,7 +2091,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -2182,7 +2182,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* a) {
         ShowCollectionCardPreview(work);
         work->view = 9;
         m4aSongNumStart(SONG_SYS_CLOSE);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
         return 1;
     case A_BUTTON:
         if (work->inputDelay > 0) {
@@ -2195,7 +2195,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* a) {
 
         TaskCreate(&work->cardpool, &gTaskDescDeckYesNo, &work->popupActive);
         work->promptChoice = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeletePrompt);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeletePrompt);
         work->timer = 1;
         work->view = 12;
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -2203,7 +2203,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* a) {
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->result = 7;
@@ -2275,7 +2275,7 @@ void RemoveEmptyCollectionEntry(DeckMenuWork* work, u8 mode) {
     UpdateGridScrollBar(work);
 }
 
-u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
     s8 n;
 
     if (work->popupActive != 0) {
@@ -2292,7 +2292,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -2383,7 +2383,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* a) {
         ShowCollectionCardPreview(work);
         DrawCpCost(0);
         work->view = 4;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case A_BUTTON:
@@ -2431,14 +2431,14 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* a) {
                     work->y = gCollectionGridRowY[work->cursorRow] << 8;
                     ShowCollectionCardPreview(work);
                     work->view = 4;
-                    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
                     return 1;
                 } else {
                     SetDeckMenuFrameCursor(work, 0);
                     work->cursorCol = work->categoryFilter;
                     work->timer = 1;
                     work->view = 6;
-                    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
                     work->gridEntryCount = 0;
                     return 1;
                 }
@@ -2454,12 +2454,12 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* a) {
         break;
     case L_BUTTON:
         FreeCollectionEntries(work);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->result = 7;
@@ -2475,7 +2475,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* task) {
     u16 i;
     u16 n;
 
@@ -2497,7 +2497,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -2561,12 +2561,12 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a) {
 
             if (work->view == 6) {
                 work->view = 4;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
             }
 
             if (work->view == 10) {
                 work->view = 9;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
             }
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
@@ -2586,22 +2586,22 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a) {
 
             if (work->view == 6) {
                 work->view = 4;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
             }
 
             if (work->view == 10) {
                 work->view = 9;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
             }
         } else {
             m4aSongNumStart(SONG_SYS_CANSEL);
 
             if (work->view == 6) {
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseAddMode);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseAddMode);
             }
 
             if (work->view == 10) {
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseDeleteMode);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseDeleteMode);
             }
         }
 
@@ -2613,7 +2613,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a) {
         if (work->view == 6) {
             FadeStartIn(FADE_MODE_BLACK, 1);
             FreeCollectionEntries(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -2621,7 +2621,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a) {
         break;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->result = 7;
@@ -2637,7 +2637,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuClearPrompt(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuClearPrompt(DeckMenuWork* work, void* task) {
     PromptChoiceLayout tbl;
 
     tbl = sDeckPromptChoiceLayout;
@@ -2667,7 +2667,7 @@ u8 UpdateDeckMenuClearPrompt(DeckMenuWork* work, void* a) {
             work->timer = 1;
             work->view = 3;
             SetDeckMenuHandAnim(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCommands);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCommands);
             TaskPoolUpdate(&work->taskpool);
             TaskPoolUpdate(&work->cardpool);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -2693,7 +2693,7 @@ u8 UpdateDeckMenuClearPrompt(DeckMenuWork* work, void* a) {
         work->timer = 1;
         work->view = 3;
         SetDeckMenuHandAnim(work);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCommands);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCommands);
     }
 
     if (GetKeysPressed() & B_BUTTON) {
@@ -2701,7 +2701,7 @@ u8 UpdateDeckMenuClearPrompt(DeckMenuWork* work, void* a) {
         work->view = 3;
         SetDeckMenuHandAnim(work);
         m4aSongNumStart(SONG_SYS_CANSEL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCommands);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCommands);
         TaskPoolUpdate(&work->taskpool);
         TaskPoolUpdate(&work->cardpool);
         return 1;
@@ -2714,7 +2714,7 @@ u8 UpdateDeckMenuClearPrompt(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
     work->gfx2 = AnimUpdate(&work->anim3);
 
@@ -2748,7 +2748,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -2804,7 +2804,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
 
         work->cursorCol = 2;
         work->timer = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuEnterDeckGrid);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuEnterDeckGrid);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     }
@@ -2814,7 +2814,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
         work->timer = 1;
         work->prevView = work->view;
         m4aSongNumStart(SONG_SYS_CANSEL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenCommands);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenCommands);
         return 1;
     case SELECT_BUTTON:
 #ifndef VERSION_EU
@@ -2827,7 +2827,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
         break;
     case B_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuStartSlideOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuStartSlideOut);
             work->result = 8;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
@@ -2835,7 +2835,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->result = 7;
@@ -2845,12 +2845,12 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
     case L_BUTTON:
         FreeCollectionEntries(work);
         m4aSongNumStart(SONG_SYS_CANSEL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
         return 1;
     case R_BUTTON:
         FreeCollectionEntries(work);
         m4aSongNumStart(SONG_SYS_CANSEL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
         return 1;
     }
 
@@ -2862,7 +2862,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* task) {
     u8* p;
     u8 z;
 
@@ -2877,20 +2877,20 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* a) {
     z = 0;
     *p = 3;
     work->commandCursor = z;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCommands);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCommands);
     TaskPoolUpdate(&work->taskpool);
     TaskPoolUpdate(&work->cardpool);
     return 1;
 }
 
-u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
     work->gfx2 = AnimUpdate(&work->anim3);
 
     if (work->popupActive != 0) {
         work->view = 1;
         SetDeckMenuHandAnim(work);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
     }
 
     switch (GetKeysRepeat()) {
@@ -2925,13 +2925,13 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a) {
             SetDeckMenuHandAnim(work);
             SetDeckMenuFrameCursor(work, 0);
             m4aSongNumStart(SONG_SYS_CLOSE);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
             ReleaseCommandMenuGfx(work);
         } else {
             work->view = 1;
             SetDeckMenuHandAnim(work);
             m4aSongNumStart(SONG_SYS_CLOSE);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
         }
 
         break;
@@ -2944,11 +2944,11 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a) {
             SetDeckMenuHandAnim(work);
             SetDeckMenuFrameCursor(work, 0);
             m4aSongNumStart(SONG_SYS_CLOSE);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
             ReleaseCommandMenuGfx(work);
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
             work->result = 7;
         }
 
@@ -2960,7 +2960,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a) {
             DrawDeckEquipMarker(work->deckIndex);
             TaskCreate(&work->cardpool, &gTaskDescDeckEquip, &work->popupActive);
             m4aSongNumStart(SONG_SYS_DECKSET);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
             return 1;
         case 1:
             m4aSongNumStart(SONG_SYS_KETTEI);
@@ -2970,26 +2970,26 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a) {
 #ifdef VERSION_EU
             FadeStartIn(FADE_MODE_BLACK, 16);
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenKeyboard);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenKeyboard);
             break;
         case 2:
             m4aSongNumStart(SONG_SYS_KETTEI);
             work->view = 15;
             TaskCreate(&work->cardpool, &gTaskDescDeckClear, &work->popupActive);
             work->promptChoice = 1;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuClearPrompt);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuClearPrompt);
             return 1;
         case 3:
             m4aSongNumStart(SONG_SYS_KETTEI);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
             break;
         case 4:
             m4aSongNumStart(SONG_SYS_KETTEI);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
             break;
         case 5:
             m4aSongNumStart(SONG_SYS_KETTEI);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenDeleteMode);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenDeleteMode);
             break;
         }
 
@@ -3026,7 +3026,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
     work->gfx2 = AnimUpdate(&work->anim3);
     ReleaseCommandMenuGfx(work);
@@ -3043,11 +3043,11 @@ u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* a) {
             work->view = 0;
             SetDeckMenuHandAnim(work);
             work->timer = 4;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
         } else {
             work->view = 1;
             work->timer = 4;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
         }
 
         break;
@@ -3058,7 +3058,7 @@ u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 4);
 
     switch (work->deckIndex) {
@@ -3140,13 +3140,13 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
     DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[3], 3);
     work->step = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuBuildAddList);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuBuildAddList);
     TaskPoolUpdate(&work->taskpool);
     TaskPoolUpdate(&work->cardpool);
     return 1;
 }
 
-u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* task) {
     u16 i;
     u16 n;
     u16 m;
@@ -3211,12 +3211,12 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* a) {
 
         if (work->gridEntryCount != 0) {
             work->step = 4;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
         } else {
             work->cursorCol = *p;
             work->timer = 1;
             work->view = 6;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
         }
 
         break;
@@ -3228,7 +3228,7 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* task) {
     u16 i;
 
 #ifdef VERSION_EU
@@ -3254,7 +3254,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -3283,7 +3283,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a) {
                         DrawValueCount(0, i);
                     }
 
-                    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
                     return 1;
                 }
             }
@@ -3347,7 +3347,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a) {
                     work->view = 5;
                     work->x = sValueGridX[work->cursorCol] << 8;
                     work->y = sValueGridY[work->cursorRow] << 8;
-                    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuAddValueSelect);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuAddValueSelect);
                     return 1;
                 } else {
                     work->cursorCol = work->savedCol;
@@ -3361,18 +3361,18 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a) {
             }
         case B_BUTTON:
             FadeStartIn(FADE_MODE_BLACK, 1);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseAddMode);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseAddMode);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         case L_BUTTON:
             FadeStartIn(FADE_MODE_BLACK, 1);
             FreeCollectionEntries(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         case START_BUTTON:
             if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
                 FadeStartOut(FADE_MODE_BLACK, 4);
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 work->result = 7;
@@ -3398,7 +3398,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a) {
 
             TaskPoolUpdate(&work->taskpool);
             TaskPoolUpdate(&work->cardpool);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
             return 1;
         }
     } else {
@@ -3412,7 +3412,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* task) {
     u8* q;
 
     FadeStartIn(FADE_MODE_BLACK, 4);
@@ -3446,7 +3446,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a) {
     SetDeckMenuHandAnim(work);
     ApproachValueHalf(&work->x, sDeckTabPointerX[work->cursorCol] << 8);
     ApproachValueHalf(&work->y, sDeckTabPointerY[work->cursorRow] << 8);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(gDeckMenuTextPalette,
                 (void*)(work->palette4->index * 32 +
                         OBJ_PLTT),
@@ -3456,7 +3456,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 4);
 
     switch (work->deckIndex) {
@@ -3532,13 +3532,13 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
         break;
     }
 
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuBuildRemoveGrid);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuBuildRemoveGrid);
     TaskPoolUpdate(&work->taskpool);
     TaskPoolUpdate(&work->cardpool);
     return 1;
 }
 
-u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* task) {
     work->descriptionX = 94;
     work->descriptionY = 130;
     work->view = 7;
@@ -3555,13 +3555,13 @@ u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* a) {
     work->y = gDeckGridRowY[work->cursorRow] << 8;
     ShowDeckCardPreview(work);
     work->mode = 1;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuRemoveGrid);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuRemoveGrid);
     TaskPoolUpdate(&work->taskpool);
     TaskPoolUpdate(&work->cardpool);
     return 1;
 }
 
-u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* task) {
     u8 v;
 
     work->gfx = AnimUpdate(&work->anim2);
@@ -3587,7 +3587,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -3626,7 +3626,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a) {
             work->timer = 1;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
             work->view = 8;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
             DrawCpCost(0);
             return 1;
         }
@@ -3665,14 +3665,14 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a) {
     case B_BUTTON:
         work->unk_8CA = 0;
         FadeStartIn(FADE_MODE_BLACK, 1);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseRemoveMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseRemoveMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     case R_BUTTON:
         work->unk_8CA = 1;
         FreeCollectionEntries(work);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     case START_BUTTON:
@@ -3684,7 +3684,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a) {
             return 1;
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
         FadeStartOut(FADE_MODE_BLACK, 4);
         m4aSongNumStart(SONG_SYS_CLOSE);
         work->result = 7;
@@ -3704,7 +3704,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a) {
         work->view = 8;
         TaskPoolUpdate(&work->taskpool);
         TaskPoolUpdate(&work->cardpool);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
         DrawCpCost(0);
         return 1;
     }
@@ -3716,7 +3716,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 4);
     work->removeLabelX = 95;
     ReleaseCardPreview(work);
@@ -3746,7 +3746,7 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a) {
     SetDeckMenuHandAnim(work);
     ApproachValueHalf(&work->x, sDeckTabPointerX[work->cursorCol] << 8);
     ApproachValueHalf(&work->y, sDeckTabPointerY[work->cursorRow] << 8);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(gDeckMenuTextPalette,
                 (void*)(work->palette4->index * 32 +
                         OBJ_PLTT),
@@ -3756,7 +3756,7 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* work, void* task) {
     u8 z;
     u8* q;
 
@@ -3784,13 +3784,13 @@ u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* work, void* a) {
     SetDeckMenuFrameCursor(work, 0);
     ClearCardGrid(work);
     work->step = z;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuBuildDeleteList);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuBuildDeleteList);
     TaskPoolUpdate(&work->taskpool);
     TaskPoolUpdate(&work->cardpool);
     return 1;
 }
 
-u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* task) {
     u16 i;
 
     FadeStartIn(FADE_MODE_BLACK, 4);
@@ -3837,10 +3837,10 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* a) {
         ShowCollectionCardPreview(work);
 
         if (work->gridEntryCount != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteGrid);
         } else {
             work->view = 10;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
             work->cursorCol = work->categoryFilter;
             work->timer = 1;
         }
@@ -3854,7 +3854,7 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* task) {
     u16 i;
 
     work->gfx = AnimUpdate(&work->anim2);
@@ -3874,7 +3874,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -3902,7 +3902,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a) {
                     DrawValueCount(0, i);
                 }
 
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
                 return 1;
             }
         }
@@ -3966,7 +3966,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a) {
                 work->view = 11;
                 work->x = sValueGridX[work->cursorCol] << 8;
                 work->y = (sValueGridY[work->cursorRow] - 16) << 8;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
                 return 1;
             } else {
                 work->cursorCol = work->savedCol;
@@ -3982,12 +3982,12 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a) {
         }
     case B_BUTTON:
         FadeStartIn(FADE_MODE_BLACK, 1);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseDeleteMode);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseDeleteMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(work) && (u8)CheckDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->result = 7;
@@ -4012,7 +4012,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a) {
 
         TaskPoolUpdate(&work->taskpool);
         TaskPoolUpdate(&work->cardpool);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCollectionFilter);
         return 1;
     }
 
@@ -4023,7 +4023,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* task) {
     u8* q;
 
     FadeStartIn(FADE_MODE_BLACK, 4);
@@ -4057,7 +4057,7 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* a) {
     SetDeckMenuHandAnim(work);
     ApproachValueHalf(&work->x, sDeckTabPointerX[work->cursorCol] << 8);
     ApproachValueHalf(&work->y, sDeckTabPointerY[work->cursorRow] << 8);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(gDeckMenuTextPalette,
                 (void*)(work->palette4->index * 32 +
                         OBJ_PLTT),
@@ -4077,7 +4077,7 @@ u8 UpdateDeckMenuFadeOut(DeckMenuWork* work) {
     return 1;
 }
 
-u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* task) {
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
 
 #ifdef VERSION_EU
@@ -4102,11 +4102,11 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a) {
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
     work->handVisible = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuSlideOut);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuSlideOut);
     return 1;
 }
 
-u8 UpdateDeckMenuSlideOut(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuSlideOut(DeckMenuWork* work, void* task) {
     if ((s8)work->bannerSlideTimer > 0) {
         ApproachValue(&work->x7, -0x8000, (s8)work->bannerSlideTimer);
         work->bannerSlideTimer--;
@@ -4116,7 +4116,7 @@ u8 UpdateDeckMenuSlideOut(DeckMenuWork* work, void* a) {
         work->barSlideTimer--;
     } else {
         FadeStartOut(FADE_MODE_BLACK, 4);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
     }
 
     return 1;
@@ -4499,7 +4499,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
     SetGridRowCount(work, 99);
 }
 
-s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 c) {
+s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) {
     DeckCard2Args args;
     u16 i;
     u16 count;
@@ -4510,7 +4510,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 c) {
     y = 0;
     count = 0;
 
-    if (!c) {
+    if (!excludeBossCards) {
         for (i = 0; i < work->entryCount; i++) {
             if (kind == 5) {
                 if (work->entries[i].count != 0) {
@@ -4598,15 +4598,15 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 c) {
     return count;
 }
 
-s32 GetCardIdForKindEntry(s32 a) {
+s32 GetCardIdForKindEntry(s32 kind) {
     u32 i;
 
     for (i = 0; i < 950; i++) {
-        if (gCardDefs[i].kind == a) {
+        if (gCardDefs[i].kind == kind) {
             return i;
         }
 
-        if (gCardDefs[i].kind + 143 == a) {
+        if (gCardDefs[i].kind + 143 == kind) {
             return i | 0x8000;
         }
     }
@@ -4681,12 +4681,12 @@ void ScrollGridDown(DeckMenuWork* work) {
     }
 }
 
-u8 ScrollGridUp(DeckMenuWork* work, u8 a) {
+u8 ScrollGridUp(DeckMenuWork* work, u8 playSound) {
     DeckCard2Work* n;
     u8 b;
     u16 t;
 
-    b = a;
+    b = playSound;
     n = ListPoolFirst(&work->pool);
 
     if (work->scrollRowEnd <= 4) {
@@ -4707,7 +4707,7 @@ u8 ScrollGridUp(DeckMenuWork* work, u8 a) {
             return 0;
         }
 
-        if (a) {
+        if (playSound) {
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
     } else {
@@ -4755,40 +4755,40 @@ DeckCard2Work* GetCardAtCursor(DeckMenuWork* work) {
     return NULL;
 }
 
-void DrawDeckCategoryCount(u8 a, u8 b) {
+void DrawDeckCategoryCount(u8 count, u8 category) {
     u8 d[2];
     u8* base;
 
-    if (a == 0) {
+    if (count == 0) {
         base = GetBgCharBase(3);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 64 + 0x360), 32);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 64 + 0x360) + 32, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 64 + 0x360), 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 64 + 0x360) + 32, 32);
     } else {
-        d[0] = a / 10;
-        d[1] = a - (u8)(a / 10) * 10;
+        d[0] = count / 10;
+        d[1] = count - (u8)(count / 10) * 10;
         base = GetBgCharBase(3);
-        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
-        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (category * 64 + 0x360), 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (category * 64 + 0x360) + 32, 32);
     }
 }
 
-void DrawCollectionCategoryCount(u16 a, u8 b) {
+void DrawCollectionCategoryCount(u16 count, u8 category) {
     u8 d[3];
     u8* base;
 
-    if (a == 0) {
+    if (count == 0) {
         base = GetBgCharBase(3);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 96 + 0x120), 32);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 96 + 0x120) + 32, 32);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 96 + 0x120) + 64, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120), 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120) + 32, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120) + 64, 32);
     } else {
-        d[0] = a / 100;
-        d[1] = a / 10 - d[0] * 10;
-        d[2] = a - d[0] * 100 - d[1] * 10;
+        d[0] = count / 100;
+        d[1] = count / 10 - d[0] * 10;
+        d[2] = count - d[0] * 100 - d[1] * 10;
         base = GetBgCharBase(3);
-        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (b * 96 + 0x120), 32);
-        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (b * 96 + 0x120) + 32, 32);
-        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[2] + 1) * 32], base + (b * 96 + 0x120) + 64, 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (category * 96 + 0x120), 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (category * 96 + 0x120) + 32, 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[2] + 1) * 32], base + (category * 96 + 0x120) + 64, 32);
     }
 }
 
@@ -4820,10 +4820,10 @@ void SetDeckMenuHandAnim(DeckMenuWork* work) {
     }
 }
 
-void HighlightDeckTab(DeckMenuWork* work, u8 b) {
+void HighlightDeckTab(DeckMenuWork* work, u8 deckIndex) {
     void* dst;
 
-    switch (b) {
+    switch (deckIndex) {
     case 0:
         dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckTabHighlightPalette, dst, 32);
@@ -5373,25 +5373,25 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
     }
 }
 
-void DrawValueCount(u8 a, u16 b) {
+void DrawValueCount(u8 count, u16 value) {
     u8 v[2];
     u8* base;
 
     base = GetBgCharBase(3);
 
-    if (a != 0) {
+    if (count != 0) {
         u8* dst;
 
-        v[0] = a / 10;
-        v[1] = a - v[0] * 10;
-        RequestDma3Copy(&gDeckValueDigitTiles[(v[0] + 3) * 32], dst = base + (b * 64 + 0xD20), 32);
+        v[0] = count / 10;
+        v[1] = count - v[0] * 10;
+        RequestDma3Copy(&gDeckValueDigitTiles[(v[0] + 3) * 32], dst = base + (value * 64 + 0xD20), 32);
         RequestDma3Copy(&gDeckValueDigitTiles[(v[1] + 3) * 32], dst += 32, 32);
     } else {
         u8* dst;
 
-        RequestDma3Copy(gDeckValueZeroTiles, dst = base + (b * 64 + 0xD20), 32);
+        RequestDma3Copy(gDeckValueZeroTiles, dst = base + (value * 64 + 0xD20), 32);
         RequestDma3Copy(gDeckValueZeroTiles, dst += 32, 32);
-        LoadPalette(gUnk_09614406, (void*)(b * 2 + BG_PLTT + 11 * PLTT_SIZE_4BPP + 0xC), 2);
+        LoadPalette(gUnk_09614406, (void*)(value * 2 + BG_PLTT + 11 * PLTT_SIZE_4BPP + 0xC), 2);
     }
 }
 
@@ -5402,15 +5402,15 @@ void DrawSelectedValueCpCost(DeckMenuWork* work) {
     DrawCpCost(GetCardCpCost(t + work->cursorCol * 5 + (u16)work->cursorRow));
 }
 
-void DrawCpCost(u8 a) {
+void DrawCpCost(u8 cpCost) {
     u8 d[2];
     u8* base;
 
     base = GetBgCharBase(3);
 
-    if (a != 0) {
-        d[0] = a / 10;
-        d[1] = a - d[0] * 10;
+    if (cpCost != 0) {
+        d[0] = cpCost / 10;
+        d[1] = cpCost - d[0] * 10;
         RequestDma3Copy(&gDeckValueDigitTiles[(d[0] + 3) * 32], base + 0xCE0, 32);
         RequestDma3Copy(&gDeckValueDigitTiles[(d[1] + 3) * 32], base + 0xD00, 32);
     } else {
@@ -5968,13 +5968,13 @@ s32 IsCardAtCursor(DeckMenuWork* work) {
     return 0;
 }
 
-u8 IsCardAt(DeckMenuWork* work, s16 a, s16 b) {
+u8 IsCardAt(DeckMenuWork* work, s16 col, s16 row) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
-        if (node->args.col == a && node->args.row == b) {
+        if (node->args.col == col && node->args.row == row) {
             return 1;
         }
 
@@ -6536,11 +6536,11 @@ u8 func_eu_0808E94C(DeckMenuWork* work, u16 keys) {
 }
 #endif
 
-void DrawKeyboardDeckNumber(u8 a) {
+void DrawKeyboardDeckNumber(u8 deckIndex) {
     u8* base;
 
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gDeckKeyboardDeckNumberTiles[a * 64], base + 32, 64);
+    RequestDma3Copy(&gDeckKeyboardDeckNumberTiles[deckIndex * 64], base + 32, 64);
 }
 
 void CopyDeckNameToBuffer(DeckMenuWork* work) {
@@ -6838,7 +6838,7 @@ void func_jp_0808F34C(DeckMenuWork* work) {
 }
 #endif
 
-u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 
 #ifdef VERSION_EU
@@ -6935,7 +6935,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a) {
         LoadBgPalette(3, gDeckKeyboardPalettes, 0xA0);
         break;
     case 6:
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuKeyboard);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuKeyboard);
         work->x9 = gKeyboardKeyX[0] << 8;
         work->y8 = gKeyboardKeyY[0] << 8;
         work->keyCursorSteps = 4;
@@ -6957,7 +6957,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a) {
 }
 
 #if defined(VERSION_JP) || defined(VERSION_EU)
-u8 func_jp_0808F638(DeckMenuWork* work, void* a) {
+u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
     u8* mode = &work->keyboardPage;
     work->handVisible = 1;
@@ -6999,7 +6999,7 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* a) {
     case SELECT_BUTTON:
     case DPAD_DOWN:
         work->keyCursorSteps = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuKeyboard);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuKeyboard);
         work->view = 13;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
 #ifdef VERSION_EU
@@ -7044,7 +7044,7 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* a) {
 }
 #endif
 
-u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
     u8 mode = work->keyboardPage;
     s32 bottom = 6;
@@ -7134,7 +7134,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* a) {
         if (work->cursor.parts.y < 0) {
             work->keyCursorSteps = 1;
             work->cursor.parts.y = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_jp_0808F638);
+            SetTaskUpdate(task, (TaskUpdateFunc)func_jp_0808F638);
             m4aSongNumStart(SONG_SYS_CLICKI04B);
             return 1;
         }
@@ -7219,7 +7219,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* a) {
         if (work->cursor.packed == 0x6000E) {
 #endif
             SaveDeckNameFromBuffer(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseKeyboard);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseKeyboard);
             m4aSongNumStart(SONG_SYS_KETTEI);
             FadeStartIn(FADE_MODE_BLACK, 16);
         } else {
@@ -7296,7 +7296,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* a) {
         work->x = (gKeyboardPageTabXEu[work->keyboardPage] + 8) << 8;
         work->y = 0x1A00;
 #endif
-        SetTaskUpdate(a, (TaskUpdateFunc)func_jp_0808F638);
+        SetTaskUpdate(task, (TaskUpdateFunc)func_jp_0808F638);
 #ifdef VERSION_JP
         return 1;
 #else
@@ -7342,7 +7342,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckMenuCloseKeyboard(DeckMenuWork* work, void* a) {
+u8 UpdateDeckMenuCloseKeyboard(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
     work->view = 0;
     SetDeckMenuFrameCursor(work, 0);
@@ -7352,7 +7352,7 @@ u8 UpdateDeckMenuCloseKeyboard(DeckMenuWork* work, void* a) {
     ReleaseObjTiles(work->tiles13);
     ReleaseObjPalette(work->palette7);
     work->step = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuLoadBgs);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuLoadBgs);
     CreateDeckGridCards(work, 0);
 
 #ifdef VERSION_EU

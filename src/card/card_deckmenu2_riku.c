@@ -58,10 +58,10 @@ const s16 gRikuDeckValueGridY[5] = { 80, 88, 96, 104, 112 };
 
 static const u16 sRikuDeckRowY[4] = { 45, 93, 141, 30 };
 
-static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
+static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     u16 v;
 
-    work->resultOut = a;
+    work->resultOut = resultOut;
     SetBgMode0();
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 0, 31, 0);
@@ -179,7 +179,7 @@ void LoadRikuCardDescriptionText(RikuDeckMenuWork* work, u16 card) {
     work->textSlotCount5 = LoadTextSlots(LANGSTR(s), work->textSlots5);
 }
 
-u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
+u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
     LoadBgTiles(3, gDeckMenuTiles, 0x5400);
 
@@ -212,11 +212,11 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
     LoadBgMap(2, gDefaultBgMap, 0x800);
     SetBgScroll(0, (u16)-88, (u16)-108);
     SetBgScroll(1, (u16)-88, (u16)-16);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuLoadDeckInfo);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuLoadDeckInfo);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a) {
+u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* task) {
     u8* base;
     u16* pal;
 
@@ -246,11 +246,11 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a) {
     LoadRikuDeckNameTexts(work);
     work->step = 0;
     work->timer = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuSlideIn);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuSlideIn);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* a) {
+u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
     u8 n;
 
     if (!FadeIsActive()) {
@@ -278,7 +278,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* a) {
                 work->tiles6 = NULL;
                 ReleaseObjPalette(work->palette3);
                 work->palette3 = NULL;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuEnterDeckGrid);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuEnterDeckGrid);
             }
 
             break;
@@ -288,18 +288,18 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateRikuDeckMenuEnterDeckGrid(RikuDeckMenuWork* work, void* a) {
+u8 UpdateRikuDeckMenuEnterDeckGrid(RikuDeckMenuWork* work, void* task) {
     work->x = gDeckGridColumnX[work->cursorCol] << 8;
     work->y = gDeckGridRowY[work->cursorRow] << 8;
     work->view = 0;
     SetRikuDeckMenuHandAnim(work);
     ShowRikuDeckCardPreview(work);
     work->handVisible = 1;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuDeckGrid);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuDeckGrid);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* a) {
+u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
     u16 x;
 
     work->gfx = AnimUpdate(&work->anim2);
@@ -338,7 +338,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* a) {
 
     if (work->exitRequested) {
         if (CheckRikuDeckCpCost(work) && CheckRikuDeckHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -400,12 +400,12 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* a) {
         work->result = 7;
         m4aSongNumStart(SONG_SYS_CANSEL);
         FadeStartOut(FADE_MODE_BLACK, 4);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
         return 1;
     case B_BUTTON:
         work->result = 8;
         m4aSongNumStart(SONG_SYS_CANSEL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuStartSlideOut);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuStartSlideOut);
         return 1;
     }
 
@@ -437,7 +437,7 @@ s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* work) {
     return 1;
 }
 
-u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* a) {
+u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTilesByLanguage[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
@@ -454,11 +454,11 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* a) {
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
     work->handVisible = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuSlideOut);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuSlideOut);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* a) {
+u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* task) {
     u8* p;
 
     p = &work->bannerSlideTimer;
@@ -475,7 +475,7 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* a) {
             (*p)--;
         } else {
             FadeStartOut(FADE_MODE_BLACK, 4);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
         }
     }
 
@@ -714,15 +714,15 @@ DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* work) {
     return NULL;
 }
 
-void DrawRikuDeckCategoryCount(u8 a, u8 b) {
+void DrawRikuDeckCategoryCount(u8 count, u8 category) {
     u8 d[2];
     u8* base;
 
-    d[0] = a / 10;
-    d[1] = a - (u8)(a / 10) * 10;
+    d[0] = count / 10;
+    d[1] = count - (u8)(count / 10) * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
-    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
+    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (category * 64 + 0x360), 32);
+    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (category * 64 + 0x360) + 32, 32);
 }
 
 void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* work) {
@@ -940,15 +940,15 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
     }
 }
 
-void DrawRikuCpCost(u8 a) {
+void DrawRikuCpCost(u8 cpCost) {
     u8 v[2];
     u8* base;
 
     base = GetBgCharBase(3);
 
-    if (a != 0) {
-        v[0] = a / 10;
-        v[1] = a - v[0] * 10;
+    if (cpCost != 0) {
+        v[0] = cpCost / 10;
+        v[1] = cpCost - v[0] * 10;
         RequestDma3Copy(&gDeckValueDigitTiles[(v[0] + 3) * 32], base + 0xCE0, 32);
         RequestDma3Copy(&gDeckValueDigitTiles[(v[1] + 3) * 32], base + 0xD00, 32);
     } else {

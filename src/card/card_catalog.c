@@ -7559,17 +7559,17 @@ void* gStockNameWorldBossTilesByLanguage[5] = { gStockNameWorldBossTiles, gStock
 void** gStockNameWorldBossSpritesByLanguage[5] = { gStockNameWorldBossFrames, gStockNameWorldBossFrenchFrames, gStockNameWorldBossGermanFrames, gStockNameWorldBossItalianFrames, gStockNameWorldBossSpanishFrames };
 #endif
 
-u16 GetCardCpCost(u16 a) {
+u16 GetCardCpCost(u16 cardId) {
     s32 n;
     u16 v;
     CardStat* stat;
 
-    if (a & 0x8000) {
-        return gCardDefs[a & 0x0FFF].cpCost;
+    if (cardId & 0x8000) {
+        return gCardDefs[cardId & 0x0FFF].cpCost;
     }
 
-    if ((a & 0x0FFF) <= 0x1C1) {
-        stat = (CardStat*)&gCardDefs[a & 0x0FFF].kind;
+    if ((cardId & 0x0FFF) <= 0x1C1) {
+        stat = (CardStat*)&gCardDefs[cardId & 0x0FFF].kind;
         n = stat->value;
 
         if (n == 0) {
@@ -7582,16 +7582,16 @@ u16 GetCardCpCost(u16 a) {
         return v;
     }
 
-    return gCardDefs[a & 0x0FFF].cpCost;
+    return gCardDefs[cardId & 0x0FFF].cpCost;
 }
 
-u16 GetCardMooglePointValue(u16 a) {
+u16 GetCardMooglePointValue(u16 cardId) {
     u16 v;
 
-    if ((a & 0x8000) == 0) {
-        v = GetCardCpCost(a) / 5 * 2;
+    if ((cardId & 0x8000) == 0) {
+        v = GetCardCpCost(cardId) / 5 * 2;
     } else {
-        v = GetCardCpCost(a & 0x0FFF) / 5 * 2 + 10;
+        v = GetCardCpCost(cardId & 0x0FFF) / 5 * 2 + 10;
     }
 
     return v;

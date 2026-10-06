@@ -24,8 +24,8 @@ const s16 gCollectionGridColumnX[3] = { 181, 204, 227 };
 
 const s16 gCollectionGridRowY[4] = { 47, 73, 99, 125 };
 
-void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* a) {
-    work->args = *a;
+void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
+    work->args = *args;
     work->tiles = NULL;
     work->palette = NULL;
     work->tiles2 = NULL;

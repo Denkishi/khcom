@@ -57,7 +57,7 @@ static const s16 sDeckExchangeValueGridY[5] = { 80, 88, 96, 104, 112 };
 
 static const u16 sDeckExchangeRowY[4] = { 45, 93, 141, 30 };
 
-void deckexchange_0(DeckExchangeWork* work, void* a) {
+void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     u16 n;
 
     CpuFill32(0, work, sizeof(DeckExchangeWork));
@@ -74,7 +74,7 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->cursorCard = NULL;
     work->prevCursorCard = NULL;
     work->entries = NULL;
-    work->resultOut = a;
+    work->resultOut = resultOut;
     SetBgMode0();
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 3, 31, 0);
@@ -150,7 +150,7 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     InitTextSlots(work->textSlots5, 90);
 }
 
-u8 deckexchange_1(DeckExchangeWork* work, void* a) {
+u8 deckexchange_1(DeckExchangeWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (work->step) {
@@ -202,14 +202,14 @@ u8 deckexchange_1(DeckExchangeWork* work, void* a) {
     case 15:
         RequestDma3Clear(GetBgCharBase(3) + 0x3000, 0x1000);
         work->step = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeLoadBgs);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeLoadBgs);
         return 1;
     }
 
     work->step++;
 }
 
-u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (work->step) {
@@ -251,7 +251,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
         break;
     case 12:
         work->step = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeLoadDeckInfo);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeLoadDeckInfo);
         return 1;
     }
 
@@ -262,7 +262,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* task) {
     s32 v;
 
     FadeStartIn(FADE_MODE_BLACK, 16);
@@ -306,7 +306,7 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* a) {
         work->cursorRow = v;
         ApproachValue(&work->x2, sDeckExchangeTabPointerX[work->cursorCol] << 8, work->timer);
         ApproachValue(&work->y2, sDeckExchangeTabPointerY[work->cursorRow] << 8, work->timer);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeOpenCollection);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeOpenCollection);
         work->view = 1;
         SetDeckExchangeHandAnim(work);
         LoadDeckExchangeDeckNameTexts(work);
@@ -317,7 +317,7 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
     s8 n;
     s32 m;
 
@@ -334,7 +334,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckExchangeCpCost(work) && CheckDeckExchangeHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -416,7 +416,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* a) {
         work->y2 = gCollectionGridRowY[work->cursorRow] << 8;
         ShowDeckExchangeCardPreview(work);
         work->view = 9;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeGrid);
         return 1;
     case A_BUTTON:
         if (!(u8)TakeTradeCard(work)) {
@@ -429,13 +429,13 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* a) {
         DrawCollectionCategoryCount(work->collectionCategoryCounts[1], 1);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[3], 3);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeClose);
         DrawDeckExchangeValueCpCost(work);
         work->timer = 4;
         break;
     case START_BUTTON:
         if ((u8)CheckDeckExchangeCpCost(work) && CheckDeckExchangeHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
@@ -454,7 +454,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
     s32 i;
 
     work->gfx = AnimUpdate(&work->anim);
@@ -500,7 +500,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* a) {
             m4aSongNumStart(SONG_SYS_CLICKI04B);
             ShowDeckExchangeCardPreview(work);
             work->view = 9;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeGrid);
             work->x = 0xA000;
             work->y = 0x2800;
             work->scrollRowEnd = 4;
@@ -517,19 +517,19 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* a) {
             m4aSongNumStart(SONG_SYS_CLICKI04B);
             ShowDeckExchangeCardPreview(work);
             work->view = 9;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeGrid);
             work->x = 0xA000;
             work->y = 0x2800;
             work->scrollRowEnd = 4;
             return 1;
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeClose);
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckExchangeCpCost(work) && CheckDeckExchangeHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
@@ -548,7 +548,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 4);
     SetupBg(3, 0, 30, 0);
     SetupBg(2, 0, 15, 0);
@@ -570,7 +570,7 @@ u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* a) {
     SetDeckExchangeFrameCursor(work, 0);
     ClearDeckExchangeCardGrid(work);
     work->step = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeBuildList);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeBuildList);
     work->unk_6C4 = 0xFFFE;
     work->unk_6C6 = 142;
     work->unk_6C8 = 142;
@@ -580,7 +580,7 @@ u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* task) {
     u16 i;
     u16 j;
     u16 n;
@@ -637,12 +637,12 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* a) {
         ShowDeckExchangeCardPreview(work);
 
         if (work->gridEntryCount != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeGrid);
         } else {
             work->cursorCol = work->categoryFilter;
             work->timer = 4;
             work->view = 10;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
         }
 
         break;
@@ -654,7 +654,7 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
     s32 i;
 
     work->gfx = AnimUpdate(&work->anim);
@@ -673,7 +673,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a) {
 
     if (work->exitRequested) {
         if ((u8)CheckDeckExchangeCpCost(work) && CheckDeckExchangeHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
@@ -702,7 +702,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a) {
                     DrawValueCount(0, i);
                 }
 
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
                 return 1;
             }
 
@@ -765,7 +765,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a) {
                 DrawDeckExchangeValueCpCost(work);
                 work->x2 = sDeckExchangeValueGridX[work->cursorCol] << 8;
                 work->y2 = (sDeckExchangeValueGridY[work->cursorRow] - 16) << 8;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeValueSelect);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeValueSelect);
                 return 1;
             }
 
@@ -780,12 +780,12 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a) {
         m4aSongNumStart(SONG_SYS_BEEP);
         return 1;
     case B_BUTTON:
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeClose);
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckExchangeCpCost(work) && CheckDeckExchangeHasAttackCard(work)) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
@@ -802,7 +802,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a) {
         work->scrollRowEnd = 4;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
         work->view = 10;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
         return 1;
     }
 
@@ -817,10 +817,10 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateDeckExchangeClose(DeckExchangeWork* work, void* a) {
+u8 UpdateDeckExchangeClose(DeckExchangeWork* work, void* task) {
     FadeStartOut(FADE_MODE_BLACK, 16);
     work->categoryFilter = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
     TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&work->tasks2);
     return 1;
@@ -837,8 +837,8 @@ u8 UpdateDeckExchangeFadeOut(DeckExchangeWork* work) {
     return 1;
 }
 
-void DrawDeckExchangeDeckNames(DeckExchangeWork* work, u8 b) {
-    if (!b) {
+void DrawDeckExchangeDeckNames(DeckExchangeWork* work, u8 selectedOnly) {
+    if (!selectedOnly) {
         switch (work->deckIndex) {
         case 0:
             DrawTextSlots(work->x4, work->y4, work->textSlots, work->palette, 20, work->textSlotCount);
@@ -1081,7 +1081,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
     SetDeckExchangeGridRowCount(work, y * 3 + x);
 }
 
-s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 c) {
+s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 excludeBossCards) {
     DeckCard2Args args;
     u16 i;
     s8 x;
@@ -1128,11 +1128,11 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 c)
     SetDeckExchangeGridRowCount(work, y * 3 + x);
 }
 
-s32 GetCardIdForKind(s32 a) {
+s32 GetCardIdForKind(s32 kind) {
     u32 i;
 
     for (i = 0; i < 950; i++) {
-        if (gCardDefs[i].kind == a) {
+        if (gCardDefs[i].kind == kind) {
             return i;
         }
     }
@@ -1252,10 +1252,10 @@ void SetDeckExchangeHandAnim(DeckExchangeWork* work) {
     }
 }
 
-void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
+void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
     u16* pal;
 
-    switch (b) {
+    switch (deckIndex) {
     case 0:
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckTabHighlightPalette, pal, 32);
@@ -1599,15 +1599,15 @@ void DrawDeckExchangeValueCpCost(DeckExchangeWork* work) {
         work->cursorCol * 5 + (u16)work->cursorRow));
 }
 
-void DrawDeckExchangeCpCost(u8 a) {
+void DrawDeckExchangeCpCost(u8 cpCost) {
     u8 d[2];
     u8* base;
 
     base = GetBgCharBase(3);
 
-    if (a != 0) {
-        d[0] = a / 10;
-        d[1] = a - d[0] * 10;
+    if (cpCost != 0) {
+        d[0] = cpCost / 10;
+        d[1] = cpCost - d[0] * 10;
         RequestDma3Copy(&gDeckValueDigitTiles[(d[0] + 3) * 32], base + 0xCE0, 32);
         RequestDma3Copy(&gDeckValueDigitTiles[(d[1] + 3) * 32], base + 0xD00, 32);
     } else {

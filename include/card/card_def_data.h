@@ -17,7 +17,7 @@ extern const u8* gBlackStarTextPtr;
 extern const u8* gWhiteCircleTextPtr;
 extern const u8* gBlackCircleTextPtr;
 
-u16 GetCardCpCost(u16 a);
-u16 GetCardMooglePointValue(u16 a);
+u16 GetCardCpCost(u16 cardId);
+u16 GetCardMooglePointValue(u16 cardId);
 
 #endif

@@ -5471,8 +5471,8 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->tiles = LoadObjTiles(gBosPcLayerTiles, 0xAA0);
     work->tiles2[0] = AllocObjTiles(0x400, gBosPcStandaloneTiles);
     work->tiles2[1] = AllocObjTiles(0x400, gBosPcStandaloneTiles);
-    work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 0x20);
+    work->palette = LoadObjPalette(gBosPcObjPalette, sizeof(gBosPcObjPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     SetBtlPaletteFadeExcluded(0, TRUE);
     work->flt[0] = NULL;
     work->flt[1] = NULL;

@@ -3182,7 +3182,7 @@ void mode_StaffRoll_0() {
     *workPtr = work;
     SetBackdropColor(0, 0, 0);
     SpriteReset();
-    work->palette = LoadObjPalette(gSrollSecnPalettes, 0x100);
+    work->palette = LoadObjPalette(gSrollSecnPalettes, sizeof(gSrollSecnPalettes));
     work->unk_000 = 1;
     work->unk_001 = 1;
     work->phase = STAFF_ROLL_PHASE_WAIT_START;

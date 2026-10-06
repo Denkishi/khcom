@@ -106,7 +106,7 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     body->y = work->actor->y;
     body->z = -0x5000;
     body->groundZ = 0;
-    work->palette = LoadObjPalette(gAladdinPalette, 32);
+    work->palette = LoadObjPalette(gAladdinPalette, sizeof(gAladdinPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);

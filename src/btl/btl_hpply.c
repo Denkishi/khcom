@@ -27,18 +27,18 @@ enum BtlHpplyGaugeMode {
 
 void task_btl_hpply_0(BtlHpplyWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        work->palette = LoadObjPalette(gRikuPalette, 0x20);
+        work->palette = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
         work->tiles = AllocObjTiles(0x280, gBtlHpRikuFaceTiles);
         work->gfx = gBtlHpRikuFaceFrame0;
         AnimInit(&work->anim, gBtlHpRikuFaceAnims, gBtlHpRikuFaceFrames);
     } else {
-        work->palette = LoadObjPalette(gSoraPalette, 0x20);
+        work->palette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
         work->tiles = AllocObjTiles(0x280, gBtlHpSoraFaceTiles);
         work->gfx = gBtlHpSoraFaceFrame0;
         AnimInit(&work->anim, gBtlHpSoraFaceAnims, gBtlHpSoraFaceFrames);
     }
 
-    work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->tiles2 = AllocObjTiles(0x280, gBHpgagTiles);
     work->tiles3 = AllocObjTiles(0x120, gBHpgagTiles);
     work->tiles4 = AllocObjTiles(0x80, gBHpgagTiles);

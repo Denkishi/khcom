@@ -142,7 +142,7 @@ enum BtlExpState {
 void task_btl_exp_0(BtlExpWork* work) {
     s32 i;
 
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
 #if defined(VERSION_EU)
     work->tiles = AllocObjTiles(0xC0, gBtlExpNextLvTiles);
 #elif defined(VERSION_JP)

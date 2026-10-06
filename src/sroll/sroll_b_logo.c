@@ -25,11 +25,11 @@ void task_sroll_b_logo_0(SrollBLogoWork* work, SrollBLogoArg* arg) {
     work->scrollY = arg->scrollY;
     work->scrollSpeed = arg->scrollSpeed;
 #ifdef VERSION_EU
-    work->palette = LoadObjPalette(gSrollLogoPalettes, 64);
+    work->palette = LoadObjPalette(gSrollLogoPalettes, sizeof(gSrollLogoPalettes));
     work->tiles = LoadObjTiles(gSrollLogoTiles, 94 * 32);
 #else
     work->tiles = LoadObjTiles(gSrollLogoTiles, 94 * 32);
-    work->palette = LoadObjPalette(gSrollLogoPalettes, 64);
+    work->palette = LoadObjPalette(gSrollLogoPalettes, sizeof(gSrollLogoPalettes));
 #endif
     anim = &work->anim;
     AnimInit(anim, gSrollLogoAnims, gSrollLogoFrames);

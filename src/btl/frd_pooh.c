@@ -104,7 +104,7 @@ void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
     work->state = FRD_POOH_STATE_WANDER;
     work->targetX = work->actor->x;
     work->targetY = work->actor->y;
-    work->palette = LoadObjPalette(gPoohPalette, 32);
+    work->palette = LoadObjPalette(gPoohPalette, sizeof(gPoohPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 0, 0, work->tiles);
     ColliderInit(&body->collider, 3, 10, 32);

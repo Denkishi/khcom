@@ -69,7 +69,7 @@ void Task_MapMickey_0(MapMickeyWork* work) {
     work->visible = TRUE;
     work->update = MapMickeyCheckTalk;
     work->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);
-    work->palette = LoadObjPalette(gMickeyPalette, 32);
+    work->palette = LoadObjPalette(gMickeyPalette, sizeof(gMickeyPalette));
     AnimInit(&work->anim, gMickeyFl00Anims, gMickeyFl00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&work->collider, 4, 16, 48);

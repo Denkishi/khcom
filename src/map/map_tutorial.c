@@ -65,7 +65,7 @@ void MapTutorialDropBarrel(MapTutorialWork* work) {
         work->obj.height = 24;
         work->obj.speed = 2;
         work->tiles = AllocObjTiles(0x400, gMapGmkBarrelTiles);
-        work->palette = LoadObjPalette(gMapGmkBarrelPalette, 32);
+        work->palette = LoadObjPalette(gMapGmkBarrelPalette, sizeof(gMapGmkBarrelPalette));
         anim = &work->anim;
         AnimInit(anim, gMapGmkBarrelAnims, gMapGmkBarrelFrames);
         AnimStart(anim, 0, ANIM_FLAG_LOOP);
@@ -145,7 +145,7 @@ void MapTutorialSpawnEnemy(MapTutorialWork* work) {
 
         work->flip = flip;
         work->tiles = AllocObjTiles(0x400, gEmy00L06Tiles);
-        work->palette = LoadObjPalette(gEmy00Palette, 32);
+        work->palette = LoadObjPalette(gEmy00Palette, sizeof(gEmy00Palette));
         anim = &work->anim;
         AnimInit(anim, gEmy00L06Anims, gEmy00L06Frames);
         AnimStart(anim, 0, ANIM_FLAG_LOOP);

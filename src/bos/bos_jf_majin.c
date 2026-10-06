@@ -121,8 +121,8 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
     LoadBgTiles(1, gBosJfMajinFrame8Tiles, 0x2700);
     SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
     work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
-    work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gBosJfObjPalette, sizeof(gBosJfObjPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     work->spriteVisible = TRUE;
     work->unk_30 = 0x2A200;
     work->unk_34 = 0x12600;
@@ -1583,12 +1583,12 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->throwTimer = 0;
     work->state = BOS_JF_ROCK_STATE_RISE;
     work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
-    work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
+    work->palette = LoadObjPalette(gBosJfObjPalette, sizeof(gBosJfObjPalette));
     AnimInit(&work->anim, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim, gBosJfRockAnims[work->animIndex], 0);
     work->gfx = AnimGetGfx(&work->anim);
     work->tiles2 = LoadObjTiles(gBosJfObjTiles, 0x2800);
-    work->palette2 = LoadObjPalette(gBosJfObjPalette, 0x60);
+    work->palette2 = LoadObjPalette(gBosJfObjPalette, sizeof(gBosJfObjPalette));
     work->gfx2 = gBosJfObjFrames[gBosJfRockGfx2Frames[work->gfx2Index]];
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosJfShadow, &work->body);
@@ -1899,7 +1899,7 @@ void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
     work->unk_0B4 = 0;
     work->wide = 0;
     work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
-    work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
+    work->palette = LoadObjPalette(gBosJfObjPalette, sizeof(gBosJfObjPalette));
     AnimInit(&work->anim, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim, 27, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);

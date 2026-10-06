@@ -88,7 +88,7 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* arg) {
 #else
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
 #endif
-    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 }
 
 s32 Lvup_msg_1(LvupMsgWork* work, void* task) {

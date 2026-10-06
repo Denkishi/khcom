@@ -80,7 +80,7 @@ void Task_MapNamine_0(MapNamineWork* work) {
     work->visible = TRUE;
     work->update = MapNamineCheckTalk;
     work->tiles = AllocObjTiles(0x300, gNamiF00Tiles);
-    work->palette = LoadObjPalette(gNaminePalette, 32);
+    work->palette = LoadObjPalette(gNaminePalette, sizeof(gNaminePalette));
     AnimInit(&work->anim, gNamiF00Anims, gNamiF00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&work->collider, 4, 16, 48);

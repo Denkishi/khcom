@@ -18,7 +18,7 @@
 
 void task_btl_vslockon_0(BtlVslockonWork* work) {
     work->tiles = LoadObjTiles(gBtlLockonTiles, 0x180);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gBtlLockonAnims, gBtlLockonFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);

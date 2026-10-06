@@ -61,7 +61,7 @@ void CardName_0(CardNameWork* work) {
 #endif
 #endif
 #ifndef VERSION_JP
-    work->palette = LoadObjPalette(gTextYellowPalette, 32);
+    work->palette = LoadObjPalette(gTextYellowPalette, sizeof(gTextYellowPalette));
 #endif
 
 #ifdef VERSION_EU
@@ -107,7 +107,7 @@ void CardName_0(CardNameWork* work) {
     work->messageX = x;
 #endif
     work->tiles = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
-    pal = LoadObjPalette(gCard00Palette, 32);
+    pal = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->palette2 = pal;
     FadeSetPaletteExcluded(pal->index + 16, TRUE);
     FadeSetPaletteExcluded(work->textPalette->index + 16, TRUE);
@@ -152,7 +152,7 @@ void CardName_3(CardNameWork* work) {
 
 void PremireEffectInit(PremiumCardEffectWork* work, s16* arg) {
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gCardSparklePalette, 32);
+    work->palette = LoadObjPalette(gCardSparklePalette, sizeof(gCardSparklePalette));
     SetObjTileSource(work->tiles, gCardSparkleTiles);
     AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
@@ -172,7 +172,7 @@ void PremireEffectInit(PremiumCardEffectWork* work, s16* arg) {
 
 void PremireEffectConvergeInit(PremiumCardEffectWork* work, s16* arg) {
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gCardSparklePalette, 32);
+    work->palette = LoadObjPalette(gCardSparklePalette, sizeof(gCardSparklePalette));
     SetObjTileSource(work->tiles, gCardSparkleTiles);
     AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);

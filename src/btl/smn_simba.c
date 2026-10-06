@@ -72,7 +72,7 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
     }
 
     work->variant = args->variant;
-    work->palette = LoadObjPalette(gShinbaPalette, 32);
+    work->palette = LoadObjPalette(gShinbaPalette, sizeof(gShinbaPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(&sSmnSimbaAnimDef, &work->anim, 0, 0, work->tiles);
     work->state = SMN_SIMBA_STATE_APPEAR;

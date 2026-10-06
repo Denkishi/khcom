@@ -23,11 +23,11 @@ enum BtlHpothGaugeMode {
 };
 
 void task_btl_hpoth_0(BtlHpothWork* work) {
-    work->palette = LoadObjPalette(gBtlOtherSidePalette, 32);
+    work->palette = LoadObjPalette(gBtlOtherSidePalette, sizeof(gBtlOtherSidePalette));
     work->tiles = AllocObjTiles(0x280, gBtlHpSoraFaceTiles);
     work->gfx = gBtlHpSoraFaceFrame0;
     AnimInit(&work->anim, gBtlHpSoraFaceAnims, gBtlHpSoraFaceFrames);
-    work->palette2 = LoadObjPalette(gBStatesPalette, 32);
+    work->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->tiles2 = AllocObjTiles(0x280, gBHpgagTiles);
     work->tiles3 = AllocObjTiles(0x120, gBHpgagTiles);
     work->tiles4 = AllocObjTiles(0x80, gBHpgagTiles);

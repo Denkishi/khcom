@@ -123,7 +123,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* arg) {
     work->side = arg[0];
     work->timer = 0;
     work->blinkInterval = 32;
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->tiles2 = AllocSpriteFrameTiles(0x3C0);
     work->tiles3 = AllocSpriteFrameTiles(32);
     work->randomIndex = 0;
@@ -394,7 +394,7 @@ void HCEffectName_3(HcEffectNameWork* work) {
 void NumberPlus_0(NumberPlusWork* work, NumberPlusArgs* args) {
     work->args = *args;
     work->tiles = LoadObjTiles(gNumberPlusTiles, 128);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->x = work->args.x >> 8;
     work->y = (work->args.y >> 8) - 20;
     work->steps = 16;

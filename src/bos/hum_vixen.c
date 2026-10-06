@@ -775,7 +775,7 @@ void task_hum_vixen_3(VixenWork* work) {
 }
 
 void task_hum_vixen_ndl_0(VixenNdlWork* work, VixenNdlArgs* args) {
-    work->palette = LoadObjPalette(gVixEPalette, 0x20);
+    work->palette = LoadObjPalette(gVixEPalette, sizeof(gVixEPalette));
     work->tiles = args->tiles;
     AnimInit(&work->anim, gVixenE1Anims, gVixenE1Frames);
     AnimStart(&work->anim, 0, 0);
@@ -852,7 +852,7 @@ enum HumVixenIceState {
 };
 
 void task_hum_vixen_ice_0(VixenIceWork* work, VixenSub* args) {
-    work->palette = LoadObjPalette(gVixEPalette, 0x20);
+    work->palette = LoadObjPalette(gVixEPalette, sizeof(gVixEPalette));
     work->tiles = LoadObjTiles(gVixenE2Tiles, 0x800);
     work->sub = args;
     work->state = HUM_VIXEN_ICE_STATE_INACTIVE;
@@ -996,7 +996,7 @@ enum HumVixenFrzState {
 };
 
 void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
-    work->palette = LoadObjPalette(gVixEPalette, 0x20);
+    work->palette = LoadObjPalette(gVixEPalette, sizeof(gVixEPalette));
     work->tiles = gBtlWork->tiles2;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -1208,7 +1208,7 @@ void task_hum_vixen_frg_0(VixenFrgWork* work, VixenNdlArgs* args) {
 
     InitObjTilesAtSlot(&work->tilesSlot, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenReitouHahenTiles, 0x4C0);
     work->tiles = &work->tilesSlot;
-    work->palette = LoadObjPalette(gVixEPalette, 0x20);
+    work->palette = LoadObjPalette(gVixEPalette, sizeof(gVixEPalette));
     work->timer = 0;
     work->blinking = FALSE;
 

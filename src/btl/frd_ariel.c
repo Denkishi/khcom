@@ -79,7 +79,7 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     body->groundZ = 0;
     work->hoverZ = -0x1000;
     body->z = -0x1000;
-    work->palette = LoadObjPalette(gArielPalette, 32);
+    work->palette = LoadObjPalette(gArielPalette, sizeof(gArielPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 1, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);

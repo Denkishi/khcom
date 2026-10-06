@@ -51,7 +51,7 @@ TaskDesc gTaskDescEmy08 = {
 
 void task_emy_08_0(Emy08Work* work, void* obj) {
     EmyInit(&work->base, &sEmy08Def, obj);
-    work->palette = LoadObjPalette(gEmy07mPalette, 0x20);
+    work->palette = LoadObjPalette(gEmy07mPalette, sizeof(gEmy07mPalette));
     work->basePalette = work->base.palette;
     work->flags = 0;
 }

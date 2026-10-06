@@ -155,7 +155,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     body->y = work->actor->y;
     body->z = -0x5000;
     body->groundZ = 0;
-    work->palette = LoadObjPalette(gDonaldPalette, 32);
+    work->palette = LoadObjPalette(gDonaldPalette, sizeof(gDonaldPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
 

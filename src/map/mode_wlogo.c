@@ -222,7 +222,7 @@ void WLogoInitWorldSelect() {
 #else
     *lengthPtr = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
-    sWLogoNamePalette = LoadObjPalette(gNameTextPalettes[0], 32);
+    sWLogoNamePalette = LoadObjPalette(gNameTextPalettes[0], sizeof(gNameTextPalettes[0]));
 }
 
 void WLogoStartLogo(u8 world) {

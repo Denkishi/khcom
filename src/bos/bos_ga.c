@@ -2850,8 +2850,8 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
 
     SetBtlObjUnhittable(&torso->actor, TRUE);
     SetBtlObjUnhittable(&work->entries[1].actor, TRUE);
-    work->palette = LoadObjPalette(gBoss01objPalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gBoss01objPalette, sizeof(gBoss01objPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     SetBtlPaletteFadeExcluded(work->palette->index + 16, TRUE);
     SetBtlPaletteFadeExcluded(work->palette2->index + 16, TRUE);
     RequestBossCardValue(GetRandom() % 4 + 1);

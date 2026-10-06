@@ -28,8 +28,8 @@ void task_btl_badstatus_0(BtlBadStatusWork* work, BtlObj* obj) {
     work->status = BAD_STATUS_NONE;
     work->actor = obj;
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
-    work->palette2 = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
+    work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->palette3 = work->palette;
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);

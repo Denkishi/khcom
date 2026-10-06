@@ -96,7 +96,7 @@ void menu_0(MenuWork* work) {
     work->cursor = 0;
     work->state = MENU_STATE_SLIDE_IN;
     work->tiles = LoadObjTiles(gMenuTiles, 0x2E80);
-    work->palette = LoadObjPalette(gMenuPalette, 0x20);
+    work->palette = LoadObjPalette(gMenuPalette, sizeof(gMenuPalette));
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
 

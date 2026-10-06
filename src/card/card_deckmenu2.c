@@ -1293,7 +1293,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->handY = sDeckTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
-    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
 #ifdef VERSION_EU
     work->tiles5 = LoadObjTiles(gDeckButtonLabelTilesByLanguage[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
 #else
@@ -1308,9 +1308,9 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
 #endif
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
-    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
+    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, sizeof(gDeckMenuTextPalette));
     gCardUiSpriteState.tiles = AllocObjTiles(0x100, NULL);
-    gCardUiSpriteState.palette = LoadObjPalette(gCard00Palette, 32);
+    gCardUiSpriteState.palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     SetObjTileSource(gCardUiSpriteState.tiles, gCardPremiumSmallTiles);
     AnimInit(&gCardUiSpriteState.anim, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&gCardUiSpriteState.anim, 0, ANIM_FLAG_LOOP);
@@ -1554,7 +1554,7 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* task) {
 #else
         work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
-        work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
+        work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
         work->step = DECK_MENU_SLIDE_IN_STEP_VERTICAL;
         work->timer = 16;
         return 1;
@@ -2872,7 +2872,7 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* task) {
 #else
     work->tiles3 = LoadObjTiles(gDeckCommandMenuTiles, 0x1800);
 #endif
-    work->palette2 = LoadObjPalette(gDeckCommandMenuPalette, 32);
+    work->palette2 = LoadObjPalette(gDeckCommandMenuPalette, sizeof(gDeckCommandMenuPalette));
     SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_ROW);
     view = &work->view;
     z = 0;
@@ -4093,7 +4093,7 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* task) {
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
 
-    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
+    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
     LoadBgMap(3, gDeckMenuMap, 0x800);
     work->topBarX = 0x7800;
     work->topBarY = 0;
@@ -5223,7 +5223,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
         work->tiles7 = LoadObjTiles(gCardBacks[def->category].tiles, 0x300);
         work->tiles8 = LoadObjTiles(def->tiles, 0x200);
         work->palette6 = LoadObjPalette(def->palette, 32);
-        work->palette5 = LoadObjPalette(gCard00Palette, 32);
+        work->palette5 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
         work->gfx4 = gCardBacks[def->category].gfx;
         work->gfx5 = def->gfx;
 
@@ -5355,7 +5355,7 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
         work->tiles7 = LoadObjTiles(gCardBacks[def->category].tiles, 768);
         work->tiles8 = LoadObjTiles(def->tiles, 512);
         work->palette6 = LoadObjPalette(def->palette, 32);
-        work->palette5 = LoadObjPalette(gCard00Palette, 32);
+        work->palette5 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
         work->gfx4 = gCardBacks[def->category].gfx;
         work->gfx5 = def->gfx;
 
@@ -6859,7 +6859,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
 #else
         work->tiles11 = AllocObjTiles(0x200, NULL);
 #endif
-        work->palette7 = LoadObjPalette(gDeckKeyboardCursorPalette, 32);
+        work->palette7 = LoadObjPalette(gDeckKeyboardCursorPalette, sizeof(gDeckKeyboardCursorPalette));
         work->tiles13 = AllocSpriteFrameTiles(0x80);
 #ifdef VERSION_EU
         SetObjTileSource(work->tiles11, gDeckKeyboardCursorTilesByLanguage[gLanguage]);

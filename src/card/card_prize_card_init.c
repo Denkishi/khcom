@@ -1008,7 +1008,7 @@ void DispCardname_0(DispCardnameWork* work, u16* text) {
     FadeSetPaletteExcluded(textPalette->index + 16, TRUE);
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
-    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_JP
     x = (DISPLAY_WIDTH - work->textSlotCount * 10) / 2;
 #else
@@ -1077,7 +1077,7 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->palette2 = LoadObjPalette(work->cardBack->palette, work->cardBack->paletteSize);
     work->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette3 = LoadObjPalette(gCommonObjPalette, 32);
+    work->palette3 = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->posX = args[0];
     work->posY = args[1];
     work->posZ = 0;
@@ -1815,12 +1815,12 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
     card->sprite.tiles = NULL;
     card->sprite.palette = NULL;
     card->sprite.gfx = NULL;
-    card->sprite.palette3 = LoadObjPalette(gDoorCardPalette, 32);
+    card->sprite.palette3 = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
 
     if (card->sprite.tiles2 == NULL) {
         cardBack = &gCardBacks[4];
         card->sprite.tiles2 = LoadObjTiles(cardBack->tiles2, 0x300);
-        card->sprite.palette2 = LoadObjPalette(gDoorCardPalette, 32);
+        card->sprite.palette2 = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
         card->sprite.gfx2 = cardBack->gfx2;
     }
 }

@@ -78,7 +78,7 @@ void Task_MapGoofy_0(MapGoofyWork* work) {
     work->visible = TRUE;
     work->update = MapGoofyCheckTalk;
     work->tiles = AllocObjTiles(0x400, gGoofyFl00Tiles);
-    work->palette = LoadObjPalette(gGoofyPalette, 32);
+    work->palette = LoadObjPalette(gGoofyPalette, sizeof(gGoofyPalette));
     AnimInit(&work->anim, gGoofyFl00Anims, gGoofyFl00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&work->collider, 4, 16, 48);

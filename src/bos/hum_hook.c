@@ -799,7 +799,7 @@ void task_hum_hook_3(HookWork* work) {
 void task_hum_hook_moon_0(HookMoonWork* work) {
     work->tiles = LoadObjTiles(gHumHookMoonTiles, 0xC00);
     PushPaletteEffect(0);
-    work->palette = LoadObjPalette(gHumHookMoonPalette, 0x20);
+    work->palette = LoadObjPalette(gHumHookMoonPalette, sizeof(gHumHookMoonPalette));
     PopPaletteEffect();
     SetBtlPaletteFadeExcluded(work->palette->index + 16, FALSE);
     work->backdropSet = FALSE;
@@ -891,7 +891,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
         work->facingLeft = FALSE;
     }
 
-    work->palette = LoadObjPalette(gPBakudanPalette, 0x20);
+    work->palette = LoadObjPalette(gPBakudanPalette, sizeof(gPBakudanPalette));
     work->tiles = AllocObjTiles(0x280, gPBakudanTiles);
     AnimInit(&work->anim, gPBakudanAnims, gPBakudanFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -926,7 +926,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
     }
 
     work->tiles2 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
-    work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->visible = TRUE;
 }
 

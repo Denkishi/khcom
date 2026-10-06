@@ -265,8 +265,8 @@ void CreateCardBattleState() {
     gCardBattleState->tiles5 = LoadObjTiles(gCardValueDigitTiles, 320);
     gCardBattleState->tiles6 = LoadObjTiles(gCardPremiumValueDigitTiles, 320);
     gCardBattleState->tiles7 = LoadObjTiles(gCardModifiedValueDigitTiles, 320);
-    gCardBattleState->palette = LoadObjPalette(gCard00Palette, 32);
-    gCardBattleState->palette2 = LoadObjPalette(gBStatesPalette, 32);
+    gCardBattleState->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
+    gCardBattleState->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     FadeSetPaletteExcluded(((ObjPaletteHeader*)gCardBattleState->palette)->index + 16, TRUE);
     LoadPremiumCardGfx(gCardBattleState);
 }
@@ -525,7 +525,7 @@ static void cardbattle_0(CardBattleWork* work) {
     ResetBossCardValue();
     ClearSoraCardPlayFlags();
     work->tiles = AllocSpriteFrameTiles(128);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles);
     TaskPoolInit(&work->tasks, 30);
     work->stockCount = 0;

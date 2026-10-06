@@ -662,7 +662,7 @@ static void cardbattle_0(CardBattleWork* work) {
     CpuFill32(0, work, sizeof(CardBattleWork));
     gCardBattleState->rikuWork = work;
     work->tiles = AllocSpriteFrameTiles(0x80);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles);
     TaskPoolInit(&work->tasks, 30);
     work->stockCount = 0;

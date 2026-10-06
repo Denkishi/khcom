@@ -89,11 +89,11 @@ void TitleLogoLoadSprites(TitleLogoWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
         work->sprites[1].tiles = LoadObjTiles(gTitleLogoReverseRebirthTiles, 0x43C0);
         work->sprites[1].gfx = gTitleLogoReverseRebirthFrames[0];
-        work->sprites[1].palette = LoadObjPalette(gTitleLogoReverseRebirthPalette, 0x20);
+        work->sprites[1].palette = LoadObjPalette(gTitleLogoReverseRebirthPalette, sizeof(gTitleLogoReverseRebirthPalette));
     } else {
         work->sprites[1].tiles = LoadObjTiles(gTitleLogoKanaTiles, 0xE0);
         work->sprites[1].gfx = gTitleLogoKanaFrames[0];
-        work->sprites[1].palette = LoadObjPalette(gTitleLogoKanaPalette, 0x20);
+        work->sprites[1].palette = LoadObjPalette(gTitleLogoKanaPalette, sizeof(gTitleLogoKanaPalette));
     }
 
     work->sprites[2].tiles = LoadObjTiles(gTitleLogoChainOfMemoriesTiles, 0x380);
@@ -104,10 +104,10 @@ void TitleLogoLoadSprites(TitleLogoWork* work) {
     work->sprites[4].gfx = gTitleLogoKingdomHeartsFrames[0];
     work->sprites[5].tiles = LoadObjTiles(gTitleLogoHeartTiles, 0x1140);
     work->sprites[5].gfx = gTitleLogoHeartFrames[0];
-    work->sprites[0].palette = LoadObjPalette(gTitleLogoDisneySquareEnixPalette, 0x20);
-    work->sprites[2].palette = LoadObjPalette(gTitleLogoChainOfMemoriesPalette, 0x20);
-    work->sprites[3].palette = LoadObjPalette(gTitleLogoChainOfMemoriesPalette, 0x20);
-    work->sprites[4].palette = LoadObjPalette(gTitleLogoKingdomHeartsPalette, 0x20);
+    work->sprites[0].palette = LoadObjPalette(gTitleLogoDisneySquareEnixPalette, sizeof(gTitleLogoDisneySquareEnixPalette));
+    work->sprites[2].palette = LoadObjPalette(gTitleLogoChainOfMemoriesPalette, sizeof(gTitleLogoChainOfMemoriesPalette));
+    work->sprites[3].palette = LoadObjPalette(gTitleLogoChainOfMemoriesPalette, sizeof(gTitleLogoChainOfMemoriesPalette));
+    work->sprites[4].palette = LoadObjPalette(gTitleLogoKingdomHeartsPalette, sizeof(gTitleLogoKingdomHeartsPalette));
     work->sprites[5].palette = LoadObjPalette(gTitleLogoHeartPalette, 0x20);
     work->scale = 0;
     work->unk_48 = 0xC00;
@@ -207,7 +207,7 @@ void task_title_obj_0(TitleObjWork* work) {
 
     paletteOffset = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
 #ifdef VERSION_EU
-    work->sprites[0].palette = LoadObjPalette(gTitleLogoKingdomHeartsPalette, 0x20);
+    work->sprites[0].palette = LoadObjPalette(gTitleLogoKingdomHeartsPalette, sizeof(gTitleLogoKingdomHeartsPalette));
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -236,7 +236,7 @@ void task_title_obj_0(TitleObjWork* work) {
     }
 #else
     work->sprites[0].tiles = LoadObjTiles(gTitleDevelopedByTiles, 0x3C0);
-    work->sprites[0].palette = LoadObjPalette(gTitleLogoKingdomHeartsPalette, 0x20);
+    work->sprites[0].palette = LoadObjPalette(gTitleLogoKingdomHeartsPalette, sizeof(gTitleLogoKingdomHeartsPalette));
     work->sprites[0].gfx = gTitleDevelopedByFrames[0];
 #endif
 
@@ -429,7 +429,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* choice) {
     work->tiles = LoadObjTiles(gTitleMenuEntryTiles, 0x1600);
 #endif
 #endif
-    work->palette = LoadObjPalette(gTitleMenuEntryPalette, 0x20);
+    work->palette = LoadObjPalette(gTitleMenuEntryPalette, sizeof(gTitleMenuEntryPalette));
     TitleCopyToPaletteBuffer(work->palette->index + 16, gTitleMenuEntryPalette, 0x20);
     work->tiles2[0] = LoadObjTiles(gTitleMenuCursorTiles, 0x280);
 #ifdef VERSION_EU
@@ -776,7 +776,7 @@ void task_title_lumichange_0(TitleLumiChangeWork* work) {
 #else
         work->tiles = LoadObjTiles(gTitleRikuLumiTiles, 0x840);
 #endif
-        work->palette = LoadObjPalette(gTitleRikuLumiPalette, 0x20);
+        work->palette = LoadObjPalette(gTitleRikuLumiPalette, sizeof(gTitleRikuLumiPalette));
     } else {
 #ifdef VERSION_EU
         switch (gLanguage) {
@@ -802,7 +802,7 @@ void task_title_lumichange_0(TitleLumiChangeWork* work) {
 #else
         work->tiles = LoadObjTiles(gTitleSoraLumiTiles, 0x940);
 #endif
-        work->palette = LoadObjPalette(gTitleSoraLumiPalette, 0x20);
+        work->palette = LoadObjPalette(gTitleSoraLumiPalette, sizeof(gTitleSoraLumiPalette));
     }
 }
 

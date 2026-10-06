@@ -407,7 +407,7 @@ void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg) {
     AnimState* anim;
 
     work->tiles = LoadObjTiles(gBosPcFltTiles, 0xDC0);
-    work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
+    work->palette = LoadObjPalette(gBosPcObjPalette, sizeof(gBosPcObjPalette));
     anim = &work->anim;
     AnimInit(anim, gBosPcFltAnims, gBosPcFltFrames);
     AnimStart(anim, 1, 0);

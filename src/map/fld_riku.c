@@ -298,7 +298,7 @@ void task_fld_riku_0(FldWork* work) {
 
     act = &gFieldState->actor;
     work->tiles = AllocObjTiles(0xA00, NULL);
-    work->palette = LoadObjPalette(gRikuPalette, 32);
+    work->palette = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
     act->height = 16;
     work->onCollider = FALSE;
     work->unk_9C = 0;

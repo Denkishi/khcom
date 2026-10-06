@@ -24,7 +24,7 @@ void WorldSel_Before_0(WorldSelBeforeWork* work, WorldSelBeforeArgs* args) {
     FadeToAmount(FADE_MODE_BLACK, 16, 8);
     work->pos = *args;
     work->tiles = LoadObjTiles(gWorldSelBeforeCardTiles, 0xC0);
-    work->palette = LoadObjPalette(gWorldSelBeforeCardPalette, 32);
+    work->palette = LoadObjPalette(gWorldSelBeforeCardPalette, sizeof(gWorldSelBeforeCardPalette));
     work->tiles2 = LoadObjTiles(gWorldSelBeforeRingTiles, 0x4A0);
     work->palette2 = AllocObjPalette(32);
     work->spriteCount = 6;

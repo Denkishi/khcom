@@ -839,7 +839,7 @@ void task_bos_ursula_map_3() {
 
 void task_bos_ursula_border_0(UrsulaBorderWork* work) {
     work->tiles = LoadObjTiles(gBosUrsulaBorderTiles, 0x800);
-    work->palette = LoadObjPalette(gBosUrsulaBorderPalette, 0x20);
+    work->palette = LoadObjPalette(gBosUrsulaBorderPalette, sizeof(gBosUrsulaBorderPalette));
     SetBtlPaletteFadeExcluded(work->palette->index + 16, FALSE);
 }
 
@@ -932,8 +932,8 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     }
 
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosUrsulaTakoFrames, 6), gBosUrsulaTakoTiles);
-    work->palette = LoadObjPalette(gBosUrsulaTakoPalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gBosUrsulaTakoPalette, sizeof(gBosUrsulaTakoPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gBosUrsulaTakoAnims, gBosUrsulaTakoFrames);
     AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
     work->state = BOS_URSULA_TAKO_STATE_IDLE;
@@ -1232,7 +1232,7 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
     }
 
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosUrsulaTakoFrames, 8), gBosUrsulaTakoTiles);
-    work->palette = LoadObjPalette(gBosUrsulaTakoPalette, 32);
+    work->palette = LoadObjPalette(gBosUrsulaTakoPalette, sizeof(gBosUrsulaTakoPalette));
     AnimInit(&work->anim, gBosUrsulaTakoAnims, gBosUrsulaTakoFrames);
     AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
     AnimSetFrame(&work->anim, GetRandom() % work->anim.frameCount + 1);

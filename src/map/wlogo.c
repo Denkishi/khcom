@@ -61,7 +61,7 @@ void task_wlogo_mons_0(WlogoMonsWork* work) {
     LoadBgTiles(0, gWlogoMonsTiles, 0xC80);
     LoadBgMap(0, gWlogoMonsNoEyeMap, 0x800);
     work->tiles = LoadObjTiles(gWlogoMonsEyeTiles, 0x500);
-    work->palette = LoadObjPalette(gWlogoMonsPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoMonsPalette, sizeof(gWlogoMonsPalette));
     work->x = 64;
     work->y = 64;
     work->paletteStep = 0;
@@ -303,7 +303,7 @@ void task_wlogo_hwt_3(WlogoHwtWork* work) {
 void task_wlogo_hwt_obj_0(WlogoHwtObjWork* work, s32 id) {
     work->id = id;
     work->tiles = LoadObjTiles(gWlogoHwtGhostTiles, 0xF20);
-    work->palette = LoadObjPalette(gWlogoHwtPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoHwtPalette, sizeof(gWlogoHwtPalette));
     AnimInit(&work->anim, gWlogoHwtGhostAnims, gWlogoHwtGhostFrames);
     AnimStart(&work->anim, gWlogoHwtObjStarts[work->id].animId, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
@@ -365,7 +365,7 @@ void task_wlogo_won_0(WlogoWonWork* work) {
     LoadBgTiles(0, gWlogoWonTiles, 0xC00);
     LoadBgMap(0, gWlogoWonMap, 0x800);
     work->tiles = LoadObjTiles(gWlogoWonCardTiles, 0x1800);
-    work->palette = LoadObjPalette(gWlogoWonPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoWonPalette, sizeof(gWlogoWonPalette));
 
     for (i = 0; i < 10; i++) {
         work->gfx[i] = gWlogoWonCardFrames[i];
@@ -729,7 +729,7 @@ void task_wlogo_nvl_mov_0(WlogoNvlMovWork* work) {
     work->done = 0;
     work->visible = TRUE;
     work->tiles = LoadObjTiles(gWlogoNvlSparkleTiles, 0x600);
-    work->palette = LoadObjPalette(gWlogoNvlPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoNvlPalette, sizeof(gWlogoNvlPalette));
     work->animId = 3;
     AnimInit(&work->anim, gWlogoNvlSparkleAnims, gWlogoNvlSparkleFrames);
     AnimStart(&work->anim, work->animId, 0);
@@ -812,7 +812,7 @@ void task_wlogo_nvl_obj_0(WlogoNvlObjWork* work, WlogoNvlObjArg* arg) {
     work->y = arg->y;
     work->animId = arg->animId;
     work->tiles = LoadObjTiles(gWlogoNvlSparkleTiles, 0x600);
-    work->palette = LoadObjPalette(gWlogoNvlPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoNvlPalette, sizeof(gWlogoNvlPalette));
     AnimInit(&work->anim, gWlogoNvlSparkleAnims, gWlogoNvlSparkleFrames);
     AnimStart(&work->anim, work->animId, 0);
     work->gfx = AnimGetGfx(&work->anim);
@@ -850,7 +850,7 @@ void task_wlogo_col_0(WlogoColWork* work) {
     LoadBgMap(0, gWlogoColMap, 0x800);
     RequestDma3Copy(gWlogoColTiles, GetBgCharBase(0), 0x620);
     work->tiles = LoadObjTiles(gWlogoColSparkleTiles, 0x1140);
-    work->palette = LoadObjPalette(gWlogoColPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoColPalette, sizeof(gWlogoColPalette));
     work->x = gWlogoColSparkleAnim0.originX;
     work->y = gWlogoColSparkleAnim0.originY;
     work->timer = 0;
@@ -1043,7 +1043,7 @@ void task_wlogo_dil_0(WlogoDilWork* work) {
     LoadBgTiles(0, gWlogoDilTiles, 0x17A0);
     LoadBgMap(0, gWlogoDilIslandMap, 0x800);
     work->tiles = LoadObjTiles(gWlogoDilIslandObjTiles, 0xE20);
-    work->palette = LoadObjPalette(gWlogoDilPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoDilPalette, sizeof(gWlogoDilPalette));
     work->gfx = gWlogoDilIslandObjFrames[0];
     work->x = 64;
     work->y = 64;
@@ -1164,7 +1164,7 @@ void task_wlogo_agr_0(WlogoAgrWork* work, s32 arg) {
     LoadBgMap(0, gWlogoAgrLampMap, 0x800);
     LoadBgTiles(0, gWlogoAgrTiles, 0xC00);
     work->tiles = LoadObjTiles(gWlogoAgrObjTiles, 0x1DE0);
-    work->palette = LoadObjPalette(gWlogoAgrPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoAgrPalette, sizeof(gWlogoAgrPalette));
     work->gfx = gWlogoAgrObjFrames[11];
     work->x = 64;
     work->y = 64;
@@ -1357,7 +1357,7 @@ void task_wlogo_agr_smoke_0(WlogoAgrSmokeWork* work, WlogoAgrEntry* arg) {
     work->unk_032 = 0;
     work->unk_034 = 30;
     work->tiles = LoadObjTiles(gWlogoAgrObjTiles, 0x1DE0);
-    work->palette = LoadObjPalette(gWlogoAgrPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoAgrPalette, sizeof(gWlogoAgrPalette));
     AnimInit(&work->anim, gWlogoAgrObjAnims, gWlogoAgrObjFrames);
     AnimStart(&work->anim, work->animId, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
@@ -1386,7 +1386,7 @@ void task_wlogo_agr_flash0_0(WlogoAgrFlashWork* work) {
     work->x = 64;
     work->y = 64;
     work->tiles = LoadObjTiles(gWlogoAgrObjTiles, 0x1DE0);
-    work->palette = LoadObjPalette(gWlogoAgrPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoAgrPalette, sizeof(gWlogoAgrPalette));
     AnimInit(&work->anim, gWlogoAgrObjAnims, gWlogoAgrObjFrames);
     AnimStart(&work->anim, work->animId, 0);
     work->gfx = AnimGetGfx(&work->anim);
@@ -1415,7 +1415,7 @@ void task_wlogo_agr_flash1_0(WlogoAgrFlashWork* work, WlogoAgrEntry* arg) {
     work->x = arg->flashX;
     work->y = arg->flashY;
     work->tiles = LoadObjTiles(gWlogoAgrObjTiles, 0x1DE0);
-    work->palette = LoadObjPalette(gWlogoAgrPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoAgrPalette, sizeof(gWlogoAgrPalette));
     AnimInit(&work->anim, gWlogoAgrObjAnims, gWlogoAgrObjFrames);
     AnimStart(&work->anim, work->animId, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
@@ -1454,7 +1454,7 @@ void task_wlogo_tvt_0(WlogoTvtWork* work) {
     LoadBgMap(0, gWlogoTvtMap, 0x800);
     RequestDma3Copy(gWlogoTvtLightTiles, (u8*)GetBgCharBase(0) + 32, 0x300);
     work->tiles = AllocObjTiles(0x780, gWlogoTvtNameTiles);
-    work->palette = LoadObjPalette(gWlogoTvtPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoTvtPalette, sizeof(gWlogoTvtPalette));
     work->x = 64;
     work->y = 64;
     work->timer = 0;
@@ -1670,7 +1670,7 @@ void task_wlogo_poo_3(WlogoPooWork* work) {
 void task_wlogo_poo_obj_0(WlogoPooObjWork* work, s32 id) {
     work->id = id;
     work->tiles = LoadObjTiles(gWlogoPooBeeTiles, 0x380);
-    work->palette = LoadObjPalette(gWlogoPooPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoPooPalette, sizeof(gWlogoPooPalette));
     work->x = 0x8200;
     work->y = 0x4000;
     work->vx = gWlogoPooObjSteps[work->id][0].vx;
@@ -1763,7 +1763,7 @@ void task_wlogo_tt_0(WlogoTtWork* work) {
     work->tiles3 = AllocObjTiles(0x200, gWlogoTtGlowTiles);
     work->tiles4 = AllocObjTiles(0x3C0, gWlogoTtGlowTiles);
     work->tiles5 = LoadObjTiles(gWlogoTtObjTiles, 0x7C0);
-    work->palette = LoadObjPalette(gWlogoTtPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoTtPalette, sizeof(gWlogoTtPalette));
     LoadObjPaletteBank(work->palette->index, gWlogoTtPalettes[work->paletteStep]);
     AnimInit(&work->anim[0], gWlogoTtGlowAnims, gWlogoTtGlowFrames);
     AnimStart(&work->anim[0], 1, 0);
@@ -2111,7 +2111,7 @@ void task_wlogo_tt_obj_0(WlogoTtObjWork* work, WlogoTtObjArg* arg) {
     work->unk_02C = 0;
     work->unk_02E = 0;
     work->tiles = LoadObjTiles(gWlogoTtObjTiles, 0x7C0);
-    work->palette = LoadObjPalette(gWlogoTtPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoTtPalette, sizeof(gWlogoTtPalette));
     AnimInit(&work->anim, gWlogoTtObjAnims, gWlogoTtObjFrames);
     AnimStart(&work->anim, 1, 0);
     work->gfx = AnimGetGfx(&work->anim);
@@ -2216,7 +2216,7 @@ void task_wlogo_bks_0(WlogoBksWork* work) {
     SetBgBlend(0, 16 - work->blend, work->blend);
     TaskPoolInit(&work->tasks, 15);
     work->tiles = AllocObjTiles(0x580, gWlogoBksNameTiles);
-    work->palette = LoadObjPalette(gWlogoBksPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoBksPalette, sizeof(gWlogoBksPalette));
     AnimInit(&work->anim, gWlogoBksNameAnims, gWlogoBksNameFrames);
     AnimStart(&work->anim, 12, 0);
     work->gfx = AnimGetGfx(&work->anim);
@@ -2405,7 +2405,7 @@ void task_wlogo_bks_obj_0(WlogoBksObjWork* work, s32 id) {
     work->state = WLOGO_BKS_OBJ_STATE_MOVE;
     work->scaleIndex = 10;
     work->tiles = LoadObjTiles(gWlogoBksNameTiles, 0x800);
-    work->palette = LoadObjPalette(gWlogoBksPalette, 0x20);
+    work->palette = LoadObjPalette(gWlogoBksPalette, sizeof(gWlogoBksPalette));
     work->gfx = gWlogoBksNameFrames[gWlogoBksObjFrames[work->id]];
     work->priority = gWlogoBksObjPriorities[work->id];
     work->unk_044 = 0;

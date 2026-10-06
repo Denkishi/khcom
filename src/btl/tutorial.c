@@ -157,7 +157,7 @@ void task_tutorial_0(TutorialWork* work, s32 kind) {
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_STOCK_USE;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_LIST_SWITCH;
     work->tiles = AllocObjTiles(0x100, gTutorialArrowTiles);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gTutorialArrowAnims, gTutorialArrowFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     SeedRandom(2);

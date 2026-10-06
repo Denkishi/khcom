@@ -92,7 +92,7 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     body->groundZ = 0;
     work->hoverZ = -0x2000;
     body->z = -0x2000;
-    work->palette = LoadObjPalette(gPeterPalette, 32);
+    work->palette = LoadObjPalette(gPeterPalette, sizeof(gPeterPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 15);

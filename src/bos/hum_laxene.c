@@ -863,7 +863,7 @@ enum HumLaxeneKnfState {
 };
 
 void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
-    work->palette = LoadObjPalette(gLaxinePalette, 0x20);
+    work->palette = LoadObjPalette(gLaxinePalette, sizeof(gLaxinePalette));
     work->tiles = LoadObjTiles(gLaxineKnifeTiles, 0x2C0);
     AnimInit(&work->anim, gLaxineKnifeAnims, gLaxineKnifeFrames);
     AnimStart(&work->anim, 0, 0);

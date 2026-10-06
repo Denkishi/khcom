@@ -25,7 +25,7 @@ static s32 sTestFrame;
 void mode_test_0() {
     sTestFrame = 0;
     sTestTiles = LoadObjTiles(gBHpgagETiles, 0x7C0);
-    sTestPalette = LoadObjPalette(gBStatesPalette, 0x20);
+    sTestPalette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
 }
 #endif
 

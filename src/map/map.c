@@ -3897,29 +3897,29 @@ void Mode_MenuNew_0() {
     LoadBgPalette(0, gMenuNewBgPalette, 0x200);
     LoadBgMap(0, gMenuNewMsgWinMap, 0x800);
     SetBgScroll(0, 0, 0xFFFC);
-    sNewGameSlotMenuWork->palette2 = LoadObjPalette(gSaveMenuTitlePalette, 32);
+    sNewGameSlotMenuWork->palette2 = LoadObjPalette(gSaveMenuTitlePalette, sizeof(gSaveMenuTitlePalette));
     sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
     sNewGameSlotMenuWork->y = -0x800;
     sNewGameSlotMenuWork->y2 = 0xA000;
     sNewGameSlotMenuWork->tiles4 = AllocObjTiles(0x340, gSor1ff00Tiles);
-    sNewGameSlotMenuWork->palette4 = LoadObjPalette(gSoraPalette, 32);
+    sNewGameSlotMenuWork->palette4 = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     sNewGameSlotMenuWork->tiles5 = AllocObjTiles(0x280, gDona2Fl00Tiles);
-    sNewGameSlotMenuWork->palette5 = LoadObjPalette(gDonald2Palette, 32);
+    sNewGameSlotMenuWork->palette5 = LoadObjPalette(gDonald2Palette, sizeof(gDonald2Palette));
     sNewGameSlotMenuWork->tiles6 = AllocObjTiles(0x400, gGoofy2Fl00Tiles);
-    sNewGameSlotMenuWork->palette6 = LoadObjPalette(gGoofy2Palette, 32);
+    sNewGameSlotMenuWork->palette6 = LoadObjPalette(gGoofy2Palette, sizeof(gGoofy2Palette));
     sNewGameSlotMenuWork->tiles7 = AllocObjTiles(0x400, gRikuFf00Tiles);
-    sNewGameSlotMenuWork->palette7 = LoadObjPalette(gRikuPalette, 32);
-    sNewGameSlotMenuWork->palette3 = LoadObjPalette(gFileMenuWindowPalette, 32);
+    sNewGameSlotMenuWork->palette7 = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
+    sNewGameSlotMenuWork->palette3 = LoadObjPalette(gFileMenuWindowPalette, sizeof(gFileMenuWindowPalette));
     sNewGameSlotMenuWork->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, 0x4C0);
-    sNewGameSlotMenuWork->palette = LoadObjPalette(gFileMenuCursorPalette, 32);
+    sNewGameSlotMenuWork->palette = LoadObjPalette(gFileMenuCursorPalette, sizeof(gFileMenuCursorPalette));
     sNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gSaveSlotCursorTiles);
     AnimInit(&sNewGameSlotMenuWork->anim, gSaveSlotCursorAnims, gSaveSlotCursorFrames);
     AnimStart(&sNewGameSlotMenuWork->anim, 0, ANIM_FLAG_LOOP);
-    sNewGameSlotMenuWork->palette8 = LoadObjPalette(gSaveFloorSoraPalette, 32);
+    sNewGameSlotMenuWork->palette8 = LoadObjPalette(gSaveFloorSoraPalette, sizeof(gSaveFloorSoraPalette));
     sNewGameSlotMenuWork->textSlotCount = 0;
     InitTextSlots(sNewGameSlotMenuWork->textSlots, ARRAY_COUNT(sNewGameSlotMenuWork->textSlots));
     InitTextSlots(sNewGameSlotMenuWork->textSlots2, ARRAY_COUNT(sNewGameSlotMenuWork->textSlots2));
-    sNewGameSlotMenuWork->palette9 = LoadObjPalette(gFileMenuCursorPalette, 32);
+    sNewGameSlotMenuWork->palette9 = LoadObjPalette(gFileMenuCursorPalette, sizeof(gFileMenuCursorPalette));
     sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNewGameSlotMenuText), sNewGameSlotMenuWork->textSlots2);
 
     if (sNewGameSlotMenuWork->isRiku != 0) {
@@ -4519,7 +4519,7 @@ void Mode_MenuLoad_0(s32 arg) {
         SetBgScroll(1, 0, 0xFFFD);
     }
 
-    sLoadGameMenuWork->palette2 = LoadObjPalette(gLoadMenuTitlePalette, 32);
+    sLoadGameMenuWork->palette2 = LoadObjPalette(gLoadMenuTitlePalette, sizeof(gLoadMenuTitlePalette));
 
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -4547,18 +4547,18 @@ void Mode_MenuLoad_0(s32 arg) {
     sLoadGameMenuWork->y2 = 0xA000;
     sLoadGameMenuWork->x = -0x8000;
     sLoadGameMenuWork->tiles3 = AllocObjTiles(0x340, gSor1ff00Tiles);
-    sLoadGameMenuWork->palette3 = LoadObjPalette(gSoraPalette, 32);
+    sLoadGameMenuWork->palette3 = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     sLoadGameMenuWork->tiles4 = AllocObjTiles(0x280, gDonaFl00Tiles);
-    sLoadGameMenuWork->palette4 = LoadObjPalette(gDonaldPalette, 32);
+    sLoadGameMenuWork->palette4 = LoadObjPalette(gDonaldPalette, sizeof(gDonaldPalette));
     sLoadGameMenuWork->tiles5 = AllocObjTiles(0x400, gGoofyFl00Tiles);
-    sLoadGameMenuWork->palette5 = LoadObjPalette(gGoofyPalette, 32);
+    sLoadGameMenuWork->palette5 = LoadObjPalette(gGoofyPalette, sizeof(gGoofyPalette));
     sLoadGameMenuWork->tiles6 = AllocObjTiles(0x400, gRikuFf00Tiles);
-    sLoadGameMenuWork->palette6 = LoadObjPalette(gRikuPalette, 32);
-    sLoadGameMenuWork->palette = LoadObjPalette(gFileMenuCursorPalette, 32);
+    sLoadGameMenuWork->palette6 = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
+    sLoadGameMenuWork->palette = LoadObjPalette(gFileMenuCursorPalette, sizeof(gFileMenuCursorPalette));
     sLoadGameMenuWork->tiles = AllocObjTiles(0x120, gSaveSlotCursorTiles);
     AnimInit(&sLoadGameMenuWork->anim, gSaveSlotCursorAnims, gSaveSlotCursorFrames);
     AnimStart(&sLoadGameMenuWork->anim, 0, ANIM_FLAG_LOOP);
-    sLoadGameMenuWork->palette7 = LoadObjPalette(gSaveFloorSoraPalette, 32);
+    sLoadGameMenuWork->palette7 = LoadObjPalette(gSaveFloorSoraPalette, sizeof(gSaveFloorSoraPalette));
     sLoadGameMenuWork->textSlotCount = 0;
     InitTextSlots(sLoadGameMenuWork->textSlots, ARRAY_COUNT(sLoadGameMenuWork->textSlots));
 
@@ -5024,7 +5024,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
     obj->kind = 3;
     work->tiles = AllocSpriteFrameTiles(0x400);
     work->palette = LoadObjPalette(doorGfx->palette, 32);
-    work->palette2 = LoadObjPalette(gMapDoorEmblemPalette, 32);
+    work->palette2 = LoadObjPalette(gMapDoorEmblemPalette, sizeof(gMapDoorEmblemPalette));
     work->tiles2 = AllocSpriteFrameTiles(0x100);
 
     switch (door->side) {
@@ -5225,7 +5225,7 @@ void MapMenuFreeConfirm(MapMenuWork* work) {
 }
 
 s32 MapMenuOpen(MapMenuWork* work) {
-    work->palette2 = LoadObjPalette(gMapMenuBarPalette, 32);
+    work->palette2 = LoadObjPalette(gMapMenuBarPalette, sizeof(gMapMenuBarPalette));
     work->tiles2 = LoadObjTiles(gMapMenuBarsTiles, 0x80);
     work->y = -0x800;
     work->y2 = 0xA000;
@@ -5237,7 +5237,7 @@ s32 MapMenuOpen(MapMenuWork* work) {
     }
 
     work->tiles7 = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette7 = LoadObjPalette(gCommonObjPalette, 32);
+    work->palette7 = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->playerStartX = gFieldState->actor.fieldPosition.x - gFieldState->x;
     work->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
     work->x8 = work->playerStartX;
@@ -5290,7 +5290,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 #else
         work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, 0x1BC0);
 #endif
-        work->palette3 = LoadObjPalette(gMapMenuStatusPalette, 32);
+        work->palette3 = LoadObjPalette(gMapMenuStatusPalette, sizeof(gMapMenuStatusPalette));
         work->x3 = 0x11800;
         work->x4 = 0xF000;
         work->x5 = 0x10000;
@@ -5304,8 +5304,8 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
             MapMenuWriteDigits5(work->tiles5, 9, gGameState.progression.mooglePoints);
         }
 
-        work->palette4 = LoadObjPalette(gMapMenuHighlightPalette, 32);
-        work->palette5 = LoadObjPalette(gMapMenuPanelPalette, 32);
+        work->palette4 = LoadObjPalette(gMapMenuHighlightPalette, sizeof(gMapMenuHighlightPalette));
+        work->palette5 = LoadObjPalette(gMapMenuPanelPalette, sizeof(gMapMenuPanelPalette));
 
 #ifdef VERSION_EU
         switch (gLanguage) {
@@ -5360,7 +5360,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 #endif
 
         work->x6 = -0x7800;
-        work->palette = LoadObjPalette(gMapMenuCursorPalette, 32);
+        work->palette = LoadObjPalette(gMapMenuCursorPalette, sizeof(gMapMenuCursorPalette));
         work->tiles = AllocObjTiles(0x120, gMapMenuCursorTiles);
         AnimInit(&work->anim, gMapMenuCursorAnims, gMapMenuCursorFrames);
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
@@ -5660,9 +5660,9 @@ void Task_MapMenu_0(MapMenuWork* work) {
     gFieldState->flags |= FIELD_FLAG_MENU_OPEN;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        work->palette6 = LoadObjPalette(gRikuPalette, 32);
+        work->palette6 = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
     } else {
-        work->palette6 = LoadObjPalette(gSoraPalette, 32);
+        work->palette6 = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     }
 
     FadeSetPaletteExcluded(work->palette6->index + 0x10, TRUE);
@@ -6194,9 +6194,9 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         work->steps -= 1;
     } else {
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-            work->palette4 = LoadObjPalette(gSaveFloorSoraPalette, 32);
+            work->palette4 = LoadObjPalette(gSaveFloorSoraPalette, sizeof(gSaveFloorSoraPalette));
         } else {
-            work->palette4 = LoadObjPalette(gSaveFloorRikuPalette, 32);
+            work->palette4 = LoadObjPalette(gSaveFloorRikuPalette, sizeof(gSaveFloorRikuPalette));
         }
 
         work->textSlotCount = 0;
@@ -6256,9 +6256,9 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         SetBgScroll(0, 0, 0xFFFB);
         work->tiles5 = AllocObjTiles(0x280, gDonaFl00Tiles);
         work->tiles6 = AllocObjTiles(0x400, gGoofyFl00Tiles);
-        work->palette3 = LoadObjPalette(gFileMenuWindowPalette, 32);
+        work->palette3 = LoadObjPalette(gFileMenuWindowPalette, sizeof(gFileMenuWindowPalette));
         work->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, 0x4C0);
-        work->palette = LoadObjPalette(gMapMenuCursorPalette, 32);
+        work->palette = LoadObjPalette(gMapMenuCursorPalette, sizeof(gMapMenuCursorPalette));
         work->tiles = AllocObjTiles(0x120, gMapMenuCursorTiles);
         AnimInit(&work->anim, gMapMenuCursorAnims, gMapMenuCursorFrames);
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
@@ -6401,9 +6401,9 @@ void Task_MapSave_0(MapSaveWork* work) {
         break;
     }
 
-    work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, 32);
+    work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, sizeof(gSaveMenuTitlePalette));
 #else
-    work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, 32);
+    work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, sizeof(gSaveMenuTitlePalette));
     work->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
 #endif
     work->y = -0x800;
@@ -6412,14 +6412,14 @@ void Task_MapSave_0(MapSaveWork* work) {
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         work->tiles4 = AllocObjTiles(0x400, gRikuFf00Tiles);
-        work->palette5 = LoadObjPalette(gRikuPalette, 32);
+        work->palette5 = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
     } else {
         work->tiles4 = AllocObjTiles(0x340, gSor1ff00Tiles);
-        work->palette5 = LoadObjPalette(gSoraPalette, 32);
+        work->palette5 = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     }
 
-    work->palette6 = LoadObjPalette(gDonaldPalette, 32);
-    work->palette7 = LoadObjPalette(gGoofyPalette, 32);
+    work->palette6 = LoadObjPalette(gDonaldPalette, sizeof(gDonaldPalette));
+    work->palette7 = LoadObjPalette(gGoofyPalette, sizeof(gGoofyPalette));
     work->playerStartX = gFieldState->actor.fieldPosition.x - gFieldState->x;
     work->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
     work->x3 = work->playerStartX;

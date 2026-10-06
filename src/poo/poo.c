@@ -2126,7 +2126,7 @@ void task_poo_sora_0(PooSoraWork* work) {
     gPooSoraNode = &work->node;
     sPooSoraWork = work;
     work->tiles = AllocObjTiles(0xA00, NULL);
-    work->palette = LoadObjPalette(gSoraPalette, 32);
+    work->palette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     actor->height = 16;
     work->onCollider = 0;
     work->timer = 0;
@@ -2854,7 +2854,7 @@ void task_poo_trap_0(PooTrapWork* work, PooPos* pos) {
     work->y = pos->y;
     work->z = 0;
     work->tiles = LoadObjTiles(gPooTrapTiles, 0x100);
-    work->palette = LoadObjPalette(gPooTrapPalette, 0x20);
+    work->palette = LoadObjPalette(gPooTrapPalette, sizeof(gPooTrapPalette));
     work->gfx = gPooTrapFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->colliderActive = FALSE;
@@ -2942,12 +2942,12 @@ void task_poo_balloon_0(PooBalloonObjWork* work, PooPos* pos) {
 
     if (pos->x == 0x3FD00 && pos->y == 0x21B00) {
         work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gPooBalloonFrames, ARRAY_COUNT(gPooBalloonFrames)), gPooBalloonTiles);
-        work->palette = LoadObjPalette(gPooBalloonPalette, 0x20);
+        work->palette = LoadObjPalette(gPooBalloonPalette, sizeof(gPooBalloonPalette));
         AnimInit(&work->anim, gPooBalloonAnims, gPooBalloonFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     } else {
         work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gTrap0006Frames, ARRAY_COUNT(gTrap0006Frames)), gTrap0006Tiles);
-        work->palette = LoadObjPalette(gPooTrapBalloonPalette, 0x20);
+        work->palette = LoadObjPalette(gPooTrapBalloonPalette, sizeof(gPooTrapBalloonPalette));
         AnimInit(&work->anim, gTrap0006Anims, gTrap0006Frames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     }
@@ -3005,7 +3005,7 @@ void task_poo_shadowdodai_0(PooShadowWork* work, PooShadowArgs* args) {
     work->x = work->pos->x;
     work->y = work->pos->y;
     work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette = LoadObjPalette(gCommonObjPalette, 0x20);
+    work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     AnimInit(&work->anim, gBtlShadowAnims, gBtlShadowFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimUpdate(&work->anim);
@@ -3055,7 +3055,7 @@ void task_poo_shadowscale_0(PooScaleWork* work, PooShadowArgs* args) {
     work->y = work->pos->y;
     work->scale = args->scale;
     work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette = LoadObjPalette(gCommonObjPalette, 0x20);
+    work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     AnimInit(&work->anim, gBtlShadowAnims, gBtlShadowFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimUpdate(&work->anim);
@@ -3109,12 +3109,12 @@ void task_poo_freeballoon_0(PooFreeBalloonWork* work, PooPos* pos) {
     work->pos5 = *pos;
     work->pos = pos;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gTrap0004Frames, 4), gTrap0004Tiles);
-    work->palette = LoadObjPalette(gTrap0004Palette, 0x20);
+    work->palette = LoadObjPalette(gTrap0004Palette, sizeof(gTrap0004Palette));
     AnimInit(&work->anim, gTrap0004Anims, gTrap0004Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gTrap0005Frames, 4), gTrap0005Tiles);
-    work->palette2 = LoadObjPalette(gPooFreeBalloonPalette, 0x20);
+    work->palette2 = LoadObjPalette(gPooFreeBalloonPalette, sizeof(gPooFreeBalloonPalette));
     AnimInit(&work->anim2, gTrap0005Anims, gTrap0005Frames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
@@ -3218,7 +3218,7 @@ s32 GetPooGaugeFrame(u16 timer) {
 void task_poo_gauge_0(PooGaugeWork* work) {
     work->blinkTimer = 0;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gPooGaugeFrames, 4), gPooGaugeTiles);
-    work->palette = LoadObjPalette(gPoohGaugePalette, 0x20);
+    work->palette = LoadObjPalette(gPoohGaugePalette, sizeof(gPoohGaugePalette));
     work->paletteSrc = gPoohGaugePalette;
     work->gfx = gPooGaugeFrames[GetPooGaugeFrame(work->blinkTimer)];
     work->warning = FALSE;
@@ -3353,7 +3353,7 @@ void task_poo_trapballoon_2(PooBalloonWork* work) {
         } else {
             if (work->palette == NULL) {
                 work->tiles = AllocObjTiles(work->tileBytes, gTrap0006Tiles);
-                work->palette = LoadObjPalette(gPooTrapBalloonPalette, 0x20);
+                work->palette = LoadObjPalette(gPooTrapBalloonPalette, sizeof(gPooTrapBalloonPalette));
                 ColliderInit(&work->collider, 10, 8, 16);
                 AddPooNode(&work->node, 0x400, &work->pos);
             }
@@ -3422,7 +3422,7 @@ void task_poo_owlballoon_2(PooOwlBalloonWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gPooBalloonTiles);
-            work->palette = LoadObjPalette(gPooBalloonPalette, 0x20);
+            work->palette = LoadObjPalette(gPooBalloonPalette, sizeof(gPooBalloonPalette));
             ColliderInit(&work->collider, 10, 8, 16);
         }
 
@@ -3670,7 +3670,7 @@ void task_poo_honey_2(PooHoneyWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gPoohHoneyTiles);
-            work->palette = LoadObjPalette(gPoohGaugePalette, 0x20);
+            work->palette = LoadObjPalette(gPoohGaugePalette, sizeof(gPoohGaugePalette));
             ColliderInit(&work->collider, 10, 8, 16);
             AddPooNode(&work->node, 0x1FA4, &work->pos2);
         }
@@ -3872,7 +3872,7 @@ void task_poo_pile_2(PooPileWork* work) {
 
         if (work->palette == NULL) {
             work->tiles = LoadObjTiles(gPooPileTiles, 0x300);
-            work->palette = LoadObjPalette(gPooPilePalette, 0x20);
+            work->palette = LoadObjPalette(gPooPilePalette, sizeof(gPooPilePalette));
         }
 
         if (work->stage != POO_PILE_STAGE_FLAT) {
@@ -3954,7 +3954,7 @@ void task_poo_tigerstump_2(PooStumpWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = LoadObjTiles(gPooTigerStumpTiles, 0x400);
-            work->palette = LoadObjPalette(gPooStumpPalette, 0x20);
+            work->palette = LoadObjPalette(gPooStumpPalette, sizeof(gPooStumpPalette));
             ColliderInit(&work->collider, 7, 15, 24);
         }
 
@@ -4008,7 +4008,7 @@ void task_poo_poohstump_2(PooStumpWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = LoadObjTiles(gPooPoohStumpTiles, 0x280);
-            work->palette = LoadObjPalette(gPooStumpPalette, 0x20);
+            work->palette = LoadObjPalette(gPooStumpPalette, sizeof(gPooStumpPalette));
             ColliderInit(&work->collider, 7, 7, 14);
         }
 
@@ -4222,7 +4222,7 @@ void task_poo_piglet_2(PooPigletWork* work) {
         TaskPoolUpdate(&work->tasks);
 
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gPigletPalette, 0x20);
+            work->palette = LoadObjPalette(gPigletPalette, sizeof(gPigletPalette));
 
             if (IsPooEventDone(POO_EVENT_PIGLET)) {
                 ColliderInit(&work->collider, 10, 4, 16);
@@ -4351,7 +4351,7 @@ void task_poo_eeyore_2(PooEeyoreWork* work) {
         work->gfx = AnimUpdate(&work->anim);
 
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gEeyorePalette, 0x20);
+            work->palette = LoadObjPalette(gEeyorePalette, sizeof(gEeyorePalette));
             work->tiles = AllocObjTiles(work->tileBytes, gEeyoreFl00Tiles);
         }
 
@@ -4456,7 +4456,7 @@ void task_poo_owl_2(PooOwlWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gOwlFl00Tiles);
-            work->palette = LoadObjPalette(gOwlPalette, 0x20);
+            work->palette = LoadObjPalette(gOwlPalette, sizeof(gOwlPalette));
         }
 
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - ((work->pos.y + work->pos.z) >> 8) * 4);
@@ -4909,10 +4909,10 @@ void task_poo_tiggerroo_2(PooTiggerWork* work) {
     } else {
         if (work->palette == NULL) {
             if (work->isTigger) {
-                work->palette = LoadObjPalette(gTiggerPalette, 0x20);
+                work->palette = LoadObjPalette(gTiggerPalette, sizeof(gTiggerPalette));
                 ColliderInit(&work->collider, 4, 8, 8);
             } else {
-                work->palette = LoadObjPalette(gRooPalette, 0x20);
+                work->palette = LoadObjPalette(gRooPalette, sizeof(gRooPalette));
                 work->tiles = AllocObjTiles(work->tileBytes, gRooFl00Tiles);
                 ColliderInit(&work->collider, 4, 8, 8);
             }
@@ -4999,7 +4999,7 @@ void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
     gStockMesDispWork = work;
     work->srcPos = pos;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gRooFl00Frames, 8), gRooFl00Tiles);
-    work->palette = LoadObjPalette(gRooPalette, 0x20);
+    work->palette = LoadObjPalette(gRooPalette, sizeof(gRooPalette));
     AnimInit(&work->anim, gRooFl00Anims, gRooFl00Frames);
 
     if (IsPooEventDone(POO_EVENT_ROO)) {
@@ -5153,7 +5153,7 @@ void task_poo_roo_footmark_2(PooFootmarkWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gRoFootmarkPalette, 0x20);
+            work->palette = LoadObjPalette(gRoFootmarkPalette, sizeof(gRoFootmarkPalette));
             node = &work->node;
             AddPooNode(node, 0x240, &work->x);
 
@@ -5224,7 +5224,7 @@ void task_poo_leaf_2(PooLeafWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gPooLeafTiles);
-            work->palette = LoadObjPalette(gPooLeafPalette, 0x20);
+            work->palette = LoadObjPalette(gPooLeafPalette, sizeof(gPooLeafPalette));
             ColliderInit(&work->collider, 6, 28, 0);
         }
 
@@ -5305,7 +5305,7 @@ void task_poo_tanpopo_2(PooTanpopoWork* work) {
         if (work->palette == NULL) {
             work->tiles = LoadObjTiles(gPooTanpopoTiles, 0x800);
             work->tiles2 = LoadObjTiles(gPooTanpopoSeedTiles, 0x1800);
-            work->palette = LoadObjPalette(gPooTanpopoPalette, 0x20);
+            work->palette = LoadObjPalette(gPooTanpopoPalette, sizeof(gPooTanpopoPalette));
             ColliderInit(&work->collider, 6, 24, 0);
         }
 
@@ -5369,7 +5369,7 @@ void task_poo_ti_board_2(PooBoardWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gPooTiBoardPalette, 0x20);
+            work->palette = LoadObjPalette(gPooTiBoardPalette, sizeof(gPooTiBoardPalette));
             ColliderInit(&work->collider, 7, 8, 16);
         }
 
@@ -5435,7 +5435,7 @@ void task_poo_eeyoretail_2(PooEeyoreTailWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gEeyoreFl00Tiles);
-            work->palette = LoadObjPalette(gEeyorePalette, 0x20);
+            work->palette = LoadObjPalette(gEeyorePalette, sizeof(gEeyorePalette));
         }
 
         if (IsPooEeyoreTailLanded()) {
@@ -5557,7 +5557,7 @@ void task_poo_honeycomb_2(PooHoneycombWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gEeHoneycombPalette, 0x20);
+            work->palette = LoadObjPalette(gEeHoneycombPalette, sizeof(gEeHoneycombPalette));
             work->tiles = AllocObjTiles(work->tileBytes, gEeHoneycombTiles);
         }
 
@@ -5629,7 +5629,7 @@ void task_poo_vegetable_2(PooVegetableWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gRaVegetablesTiles);
-            work->palette = LoadObjPalette(gRaVegetablesPalette, 0x20);
+            work->palette = LoadObjPalette(gRaVegetablesPalette, sizeof(gRaVegetablesPalette));
             ColliderInit(&work->collider, 7, 0x26, 12);
         }
 
@@ -5997,7 +5997,7 @@ void task_poo_wagon_2(PooWagonWork* work) {
         work->tiles = AllocObjTiles(0x560, gRaWagonTiles);
         work->tiles2 = AllocObjTiles(0x4C0, gRaWagonTiles);
         work->tiles3 = AllocObjTiles(160, gRaWagonTiles);
-        work->palette = LoadObjPalette(gRaWagonPalette, 32);
+        work->palette = LoadObjPalette(gRaWagonPalette, sizeof(gRaWagonPalette));
     }
 
     soraPriority = GetPooSoraPriority();
@@ -6135,7 +6135,7 @@ void task_poo_wagonwheel_2(PooWheelWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gRaWagonTiles);
-            work->palette = LoadObjPalette(gRaWagonPalette, 0x20);
+            work->palette = LoadObjPalette(gRaWagonPalette, sizeof(gRaWagonPalette));
         }
 
         if (!IsPooEventDone(POO_EVENT_WAGON)) {
@@ -6163,7 +6163,7 @@ void task_poo_wagonwheel_3(PooWheelWork* work) {
 void task_poo_spark_0(PooSparkWork* work, PooPos* pos) {
     work->pos = *pos;
     work->tiles = AllocObjTiles(0x200, gMapSparkTiles);
-    work->palette = LoadObjPalette(gCommonObjPalette, 0x20);
+    work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     AnimInit(&work->anim, gMapSparkAnims, gMapSparkFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
@@ -6301,7 +6301,7 @@ void task_poo_bee_2(PooBeeWork* work) {
     }
 
     if (work->palette == NULL) {
-        work->palette = LoadObjPalette(gEeBeePalette, 32);
+        work->palette = LoadObjPalette(gEeBeePalette, sizeof(gEeBeePalette));
         work->tiles = LoadObjTiles(gEeBeeTiles, 0x180);
     }
 
@@ -6368,7 +6368,7 @@ void task_poo_beeAfterEvent_2(PooBeeAfterEventWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gEeBeePalette, 0x20);
+            work->palette = LoadObjPalette(gEeBeePalette, sizeof(gEeBeePalette));
             work->tiles = LoadObjTiles(gEeBeeTiles, 0x180);
             work->tiles2 = LoadObjTiles(gEeBeeTiles, 0x180);
             m4aSongNumStart(SONG_SND_386);
@@ -6580,7 +6580,7 @@ void task_poo_cabbage_2(PooCabbageWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = LoadObjTiles(gRaVegetablesTiles, 0x1D20);
-            work->palette = LoadObjPalette(gRaVegetablesPalette, 32);
+            work->palette = LoadObjPalette(gRaVegetablesPalette, sizeof(gRaVegetablesPalette));
         }
 
         if (work->animating) {
@@ -6900,7 +6900,7 @@ void task_poo_prize_0(PooPrizeWork* work, PoohPrizeArgs* args) {
     work->speed = GetRandom() % 155 + 153;
     work->angle = GetRandom();
     work->tiles = LoadObjTiles(gMapPrizeTiles, 0x160);
-    work->palette = LoadObjPalette(gCommonObjPalette, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->kind = args->kind;
 
     switch (work->kind) {
@@ -6988,7 +6988,7 @@ void task_poo_prize_3(PooPrizeWork* work) {
 void task_poo_zzz_0(PooZzzWork* work, u8* arg) {
     work->pos = gPoohPos;
     work->tiles = AllocObjTiles(0x100, gPoohFl05Tiles);
-    work->palette = LoadObjPalette(gPoohPalette, 0x20);
+    work->palette = LoadObjPalette(gPoohPalette, sizeof(gPoohPalette));
     AnimInit(&work->anim, gPoohFl05Anims, gPoohFl05Frames);
 
     if (*arg != 0) {
@@ -7092,7 +7092,7 @@ void task_poo_butterfly_0(PooButterflyWork* work, PooPos* pos) {
     work->x = pos->x;
     work->y = pos->y;
     work->z = pos->z - 0xE00;
-    work->palette = LoadObjPalette(gTrap0100Palette, 0x20);
+    work->palette = LoadObjPalette(gTrap0100Palette, sizeof(gTrap0100Palette));
     work->parts[0].x = work->x - 0x1000;
     work->parts[0].y = work->y;
     work->parts[0].z = work->z;
@@ -7199,7 +7199,7 @@ void task_poo_mapbee_0(PooMapBeeWork* work, PooPos* pos) {
     work->y = pos->y;
     work->z = 0;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gPooMapbeeFrames, 1), gPooMapbeeTiles);
-    work->palette = LoadObjPalette(gPooMapbeePalette, 0x20);
+    work->palette = LoadObjPalette(gPooMapbeePalette, sizeof(gPooMapbeePalette));
     AnimInit(&work->anim, gPooMapbeeAnims, gPooMapbeeFrames);
     AnimStart(&work->anim, 0, 0);
     work->gfx = AnimGetGfx(&work->anim);
@@ -7327,7 +7327,7 @@ void task_poo_mapbutterfly_0(PooMapButterflyWork* work, PooPos* pos) {
     work->y = pos->y;
     work->z = 0;
     work->tiles = AllocObjTiles(0x40, gPooMapbutterflyTiles);
-    work->palette = LoadObjPalette(gPooMapbutterflyPalette, 0x20);
+    work->palette = LoadObjPalette(gPooMapbutterflyPalette, sizeof(gPooMapbutterflyPalette));
     AnimInit(&work->anim, gPooMapbutterflyAnims, gPooMapbutterflyFrames);
     AnimStart(&work->anim, 0, 0);
     work->gfx = AnimGetGfx(&work->anim);
@@ -7523,7 +7523,7 @@ void task_poo_cabbageAfterEvent_2(PooCabbageAfterEventWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gRaVegetablesPalette, 0x20);
+            work->palette = LoadObjPalette(gRaVegetablesPalette, sizeof(gRaVegetablesPalette));
             work->tiles = AllocObjTiles(work->tileBytes, gRaVegetablesTiles);
         }
 

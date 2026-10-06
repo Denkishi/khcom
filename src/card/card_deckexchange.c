@@ -100,10 +100,10 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->handY = sDeckExchangeTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles3 = LoadObjTiles(gDeckScrollThumbTiles, 32);
-    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_CARD);
-    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
+    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, sizeof(gDeckMenuTextPalette));
     work->step = 0;
     work->cursorCol = 0;
     work->cursorRow = 0;
@@ -1533,7 +1533,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
         work->tiles4 = LoadObjTiles(gCardBacks[def->category].tiles, 0x300);
         work->tiles5 = LoadObjTiles(def->tiles, 0x200);
         work->palette3 = LoadObjPalette(def->palette, 32);
-        work->palette2 = LoadObjPalette(gCard00Palette, 32);
+        work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
         work->gfx3 = gCardBacks[def->category].gfx;
         work->gfx4 = def->gfx;
 

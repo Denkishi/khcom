@@ -24,7 +24,7 @@ void task_btl_pause_0(BtlPauseWork* work) {
 #ifdef VERSION_EU
     void** frames;
 
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
 
     if (gLanguage <= LANGUAGE_GERMAN) {
         work->tiles = LoadObjTiles(gBtlPauseTiles, 0x180);
@@ -38,7 +38,7 @@ void task_btl_pause_0(BtlPauseWork* work) {
     work->gfx2 = frames[1];
 #else
     work->tiles = LoadObjTiles(gBtlPauseTiles, 0x180);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->gfx = gBtlPauseFrames[0];
     work->gfx2 = gBtlPauseFrames[1];
 #endif

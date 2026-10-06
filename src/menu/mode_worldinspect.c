@@ -352,7 +352,7 @@ void WorldInspectHandleInput() {
             ReleaseObjPalette(sWorldInspectBarPalette);
             sWorldInspectBarPalette = NULL;
 #endif
-            sWorldInspectDetailPalettes[0] = LoadObjPalette(gWorldselectCardPalette, 32);
+            sWorldInspectDetailPalettes[0] = LoadObjPalette(gWorldselectCardPalette, sizeof(gWorldselectCardPalette));
             sWorldInspectDetailTiles[0] = LoadObjTiles(gWorldselectCardTiles, 0xC40);
             sWorldInspectDetailSprites[0] = gWorldselectCardFrame0;
 
@@ -373,7 +373,7 @@ void WorldInspectHandleInput() {
             }
 
             if (sWorldInspectWorlds[sWorldInspectCursor] == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
-                sWorldInspectDetailPalettes[1] = LoadObjPalette(gPooAltImagePalettes, 64);
+                sWorldInspectDetailPalettes[1] = LoadObjPalette(gPooAltImagePalettes, sizeof(gPooAltImagePalettes));
                 sWorldInspectDetailTiles[1] = LoadObjTiles(gPooAltImageTiles, 0x1000);
                 sWorldInspectDetailSprites[1] = gPooAltImageFrame0;
             } else {
@@ -398,7 +398,7 @@ void WorldInspectHandleInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         LoadBgMap(0, gWorldInspectBgMap, 0x500);
 #ifndef VERSION_EU
-        sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
+        sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 #endif
         sWorldInspectReturnToMenu = TRUE;
         sWorldInspectSteps = 16;
@@ -407,7 +407,7 @@ void WorldInspectHandleInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         LoadBgMap(0, gWorldInspectBgMap, 0x500);
 #ifndef VERSION_EU
-        sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
+        sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 #endif
         sWorldInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -506,13 +506,13 @@ void WorldInspectHandleDetailInput() {
         sWorldInspectDetailOpen = 0;
 
 #ifdef VERSION_EU
-        sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
+        sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 #endif
 
         if (keys & START_BUTTON) {
             LoadBgMap(0, gWorldInspectBgMap, 0x500);
 #ifndef VERSION_EU
-            sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
+            sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 #endif
             sWorldInspectReturnToMenu = FALSE;
             FadeStartOut(FADE_MODE_BLACK, 16);
@@ -808,18 +808,18 @@ void mode_worldinspect_0() {
     LoadBgMap(2, gWorldInspectShadeMap, 0x500);
     LoadBgMap(3, gWorldInspectDetailMap, 0x500);
     WorldInspectLoadFloorTiles(sWorldInspectCursor);
-    sWorldInspectHighlightPalette = LoadObjPalette(gWorldInspectHighlightPalette, 0x20);
+    sWorldInspectHighlightPalette = LoadObjPalette(gWorldInspectHighlightPalette, sizeof(gWorldInspectHighlightPalette));
     sWorldInspectHighlightTiles = LoadObjTiles(gWorldInspectHighlightTiles, 0x400);
     AnimInit(&sWorldInspectHighlightAnim, gWorldInspectHighlightAnims, gWorldInspectHighlightFrames);
     AnimStart(&sWorldInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
-    sWorldInspectCursorPalette = LoadObjPalette(gWorldInspectCursorPalette, 0x20);
+    sWorldInspectCursorPalette = LoadObjPalette(gWorldInspectCursorPalette, sizeof(gWorldInspectCursorPalette));
     sWorldInspectCursorTiles = LoadObjTiles(gWorldInspectCursorTiles, 0xC0);
     AnimInit(&sWorldInspectCursorAnim, gWorldInspectCursorAnims, gWorldInspectCursorFrames);
     AnimStart(&sWorldInspectCursorAnim, 0, ANIM_FLAG_LOOP);
     InitTextSlots(sWorldInspectNameText, ARRAY_COUNT(sWorldInspectNameText));
     sWorldInspectNameTextCount = WorldInspectLoadName(sWorldInspectWorlds[sWorldInspectCursor]);
     InitTextSlots(sWorldInspectDescText, ARRAY_COUNT(sWorldInspectDescText));
-    sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 0x20);
+    sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 
 #ifdef VERSION_EU
     switch (gLanguage) {

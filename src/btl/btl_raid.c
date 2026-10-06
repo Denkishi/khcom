@@ -108,12 +108,12 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         work->mainSide = TRUE;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gBtlWork->actor;
-        work->palette = LoadObjPalette(gSoraPalette, 32);
+        work->palette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     } else {
         work->mainSide = FALSE;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gRikuBtlWork->actor;
-        work->palette = LoadObjPalette(gBtlOtherSidePalette, 32);
+        work->palette = LoadObjPalette(gBtlOtherSidePalette, sizeof(gBtlOtherSidePalette));
     }
 
     AnimInit(&work->anim, NULL, NULL);
@@ -190,7 +190,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     }
 
     work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
-    work->palette2 = LoadObjPalette(gBStatesPalette, 32);
+    work->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     m4aSongNumStart(SONG_BTL_LT2_SW);
 }
 

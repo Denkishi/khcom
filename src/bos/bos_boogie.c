@@ -154,8 +154,8 @@ void task_bos_boogie_0(BoogieWork* work) {
     work->vx = 0;
     work->vy = 0;
     work->vz = 0;
-    work->palette = LoadObjPalette(gBoss02objPalette, 0x20);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 0x20);
+    work->palette = LoadObjPalette(gBoss02objPalette, sizeof(gBoss02objPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     size = 0;
 
     for (i = 0; i <= 5; i++) {

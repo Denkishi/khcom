@@ -465,13 +465,13 @@ void InitMooglePackOpening(s16 x, s16 y) {
         sMooglePackCards[i].timer = 0;
     }
 
-    sMooglePackCard00Palette = LoadObjPalette(gCard00Palette, 0x20);
+    sMooglePackCard00Palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     FadeSetPaletteExcluded(sMooglePackCard00Palette->index + 0x10, TRUE);
     sMooglePackValueTiles = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
-    sMooglePackPremiumValuePalette = LoadObjPalette(gBStatesPalette, 0x20);
+    sMooglePackPremiumValuePalette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     FadeSetPaletteExcluded(sMooglePackPremiumValuePalette->index + 0x10, TRUE);
     sMooglePackPremiumValueTiles = LoadObjTiles(gCardPremiumValueDigitTiles, 0x140);
-    sMooglePackCursorPalette = LoadObjPalette(gMoogleShopCursorPalette, 0x20);
+    sMooglePackCursorPalette = LoadObjPalette(gMoogleShopCursorPalette, sizeof(gMoogleShopCursorPalette));
     sMooglePackCursorTiles = LoadObjTiles(gMoogleShopCursorTiles, 0x1C0);
     AnimInit(&sMooglePackCursorAnim, gMoogleShopCursorAnims, gMoogleShopCursorFrames);
     AnimStart(&sMooglePackCursorAnim, 0, ANIM_FLAG_LOOP);
@@ -639,7 +639,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                 if (AnimGetFrame(&sMooglePackCards[i].anim) == 3 || AnimGetFrame(&sMooglePackCards[i].anim) == 8) {
                     ReleaseObjPalette(sMooglePackCards[i].palette2);
                     ReleaseObjTiles(sMooglePackCards[i].tiles2);
-                    sMooglePackCards[i].palette2 = LoadObjPalette(gCard00Palette, 0x20);
+                    sMooglePackCards[i].palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
                     FadeSetPaletteExcluded(sMooglePackCards[i].palette2->index + 0x10, TRUE);
                     sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].tiles, 0x300);
                     sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].gfx;
@@ -694,7 +694,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                 if (AnimGetFrame(&sMooglePackCards[i].anim) == 3 || AnimGetFrame(&sMooglePackCards[i].anim) == 8) {
                     ReleaseObjPalette(sMooglePackCards[i].palette2);
                     ReleaseObjTiles(sMooglePackCards[i].tiles2);
-                    sMooglePackCards[i].palette2 = LoadObjPalette(gCard00Palette, 0x20);
+                    sMooglePackCards[i].palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
                     FadeSetPaletteExcluded(sMooglePackCards[i].palette2->index + 0x10, TRUE);
                     sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].tiles, 0x300);
                     sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].gfx;
@@ -1184,7 +1184,7 @@ void mode_ms_shop_0() {
 
     DrawMoogleShopPacks(sMoogleShopRowCursor);
     LoadBgMap(3, gMooglePackCardInfoMap, size);
-    sMoogleShopCursorPalette = LoadObjPalette(gMoogleShopCursorPalette, 0x20);
+    sMoogleShopCursorPalette = LoadObjPalette(gMoogleShopCursorPalette, sizeof(gMoogleShopCursorPalette));
     sMoogleShopCursorTiles = LoadObjTiles(gMoogleShopCursorTiles, 0x1C0);
     AnimInit(&sMoogleShopCursorAnim, gMoogleShopCursorAnims, gMoogleShopCursorFrames);
     AnimStart(&sMoogleShopCursorAnim, 0, ANIM_FLAG_LOOP);

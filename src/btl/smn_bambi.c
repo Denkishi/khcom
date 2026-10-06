@@ -89,7 +89,7 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     }
 
     work->variant = args->variant;
-    work->palette = LoadObjPalette(gBanbPalette, 32);
+    work->palette = LoadObjPalette(gBanbPalette, sizeof(gBanbPalette));
     work->vz = 0;
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(&sSmnBambiAnimDef, &work->anim, 0, 0, work->tiles);

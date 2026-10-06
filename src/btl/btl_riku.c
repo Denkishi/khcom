@@ -318,7 +318,7 @@ void LoadBtlRikuPalette(BtlRikuWork* work) {
     if (work->mainSide) {
         work->palette = LoadObjPalette(work->paletteData, 0x20);
     } else {
-        work->palette = LoadObjPalette(gBtlOtherSidePalette, 0x20);
+        work->palette = LoadObjPalette(gBtlOtherSidePalette, sizeof(gBtlOtherSidePalette));
     }
 }
 

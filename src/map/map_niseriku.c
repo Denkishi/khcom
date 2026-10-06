@@ -124,7 +124,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
     case 27:
         work->update = MapNiserikuCheckTalk;
         work->tiles = AllocObjTiles(0x680, gNiseFl00Tiles);
-        work->palette = LoadObjPalette(gNiserikuPalette, 32);
+        work->palette = LoadObjPalette(gNiserikuPalette, sizeof(gNiserikuPalette));
         AnimInit(&work->anim, gNiseFl00Anims, gNiseFl00Frames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         ColliderInit(&work->collider, 4, 16, 48);
@@ -134,7 +134,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
     case 23:
         work->update = MapNiserikuWaitApproach;
         work->tiles = AllocObjTiles(0x320, gNiserikuHizaFTiles);
-        work->palette = LoadObjPalette(gNiserikuPalette, 32);
+        work->palette = LoadObjPalette(gNiserikuPalette, sizeof(gNiserikuPalette));
         AnimInit(&work->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         ColliderInit(&work->collider, 4, 16, 48);
@@ -147,7 +147,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
     default:
         work->update = NULL;
         work->tiles = AllocObjTiles(0x300, gNiserikuDownFTiles);
-        work->palette = LoadObjPalette(gNiserikuPalette, 32);
+        work->palette = LoadObjPalette(gNiserikuPalette, sizeof(gNiserikuPalette));
         AnimInit(&work->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
         AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         ColliderInit(&work->collider, 4, 36, 48);

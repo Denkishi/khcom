@@ -78,7 +78,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     }
 
     work->variant = args->variant;
-    work->palette = LoadObjPalette(gMushuPalette, 32);
+    work->palette = LoadObjPalette(gMushuPalette, sizeof(gMushuPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->state = SMN_MUSHU_STATE_APPEAR;

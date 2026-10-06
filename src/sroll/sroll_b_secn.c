@@ -35,14 +35,14 @@ void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* arg) {
 #else
         work->tiles = LoadObjTiles(gSrollSecnThemeSongTiles, 606 * 32);
 #endif
-        work->palette = LoadObjPalette(gSrollSecnThemeSongPalette, 32);
+        work->palette = LoadObjPalette(gSrollSecnThemeSongPalette, sizeof(gSrollSecnThemeSongPalette));
         AnimInit(&work->anim, gSrollSecnThemeSongAnims, gSrollSecnThemeSongFrames);
         AnimStart(&work->anim, 0, 0);
         AnimInit(&work->anim2, gSrollSecnThemeSongAnims, gSrollSecnThemeSongFrames);
         AnimStart(&work->anim2, 0, 0);
     } else {
         work->tiles = LoadObjTiles(gSrollSecnSprites[arg->index].tiles, gSrollSecnSprites[arg->index].tileSize);
-        work->palette = LoadObjPalette(gSrollSecnPalettes, 256);
+        work->palette = LoadObjPalette(gSrollSecnPalettes, sizeof(gSrollSecnPalettes));
         AnimInit(&work->anim, gSrollSecnSprites[arg->index].anims, gSrollSecnSprites[arg->index].gfxTable);
         AnimStart(&work->anim, 0, 0);
         AnimInit(&work->anim2, gSrollSecnSprites[arg->index].anims, gSrollSecnSprites[arg->index].gfxTable);

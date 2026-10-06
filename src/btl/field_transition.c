@@ -51,7 +51,7 @@ void FieldTransitionUpdate() {
         sFieldTransitionWork->tiles = AllocObjTiles(0xA00, NULL);
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            sFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, 0x20);
+            sFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
             AnimInit(&sFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {
@@ -92,7 +92,7 @@ void FieldTransitionUpdate() {
                 break;
             }
         } else {
-            sFieldTransitionWork->palette = LoadObjPalette(gSoraPalette, 0x20);
+            sFieldTransitionWork->palette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
             AnimInit(&sFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {

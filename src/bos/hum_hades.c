@@ -112,7 +112,7 @@ void task_hum_hades_0(HadesWork* work) {
     work->tiles = AllocObjTiles(0x80, gHadesFramespreadHiTiles);
     work->tiles2 = AllocObjTiles(0x280, gHadesFramespreadHiTiles);
     work->tiles3 = AllocObjTiles(0x3A0, gHadesFramespreadHiTiles);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gHadesFramespreadHiAnims, gHadesFramespreadHiFrames);
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
     AnimInit(&work->anim2, gHadesFramespreadHiAnims, gHadesFramespreadHiFrames);

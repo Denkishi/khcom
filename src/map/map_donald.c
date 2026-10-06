@@ -78,7 +78,7 @@ void Task_MapDonald_0(MapDonaldWork* work) {
     work->visible = TRUE;
     work->update = MapDonaldCheckTalk;
     work->tiles = AllocObjTiles(0x400, gDonaFl00Tiles);
-    work->palette = LoadObjPalette(gDonaldPalette, 32);
+    work->palette = LoadObjPalette(gDonaldPalette, sizeof(gDonaldPalette));
     AnimInit(&work->anim, gDonaFl00Anims, gDonaFl00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&work->collider, 4, 16, 48);

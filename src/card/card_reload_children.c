@@ -43,7 +43,7 @@ static const s16 sReloadChildOffsetY[4] = { 0, 0, 0, 24 };
 void RELOAD_CHILDREN_0(ReloadChildWork* work, ReloadChildArgs* args) {
     work->args = *args;
     work->tiles = LoadObjTiles(gReloadChildTiles[work->args.listIndex], 128);
-    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->tiles2 = NULL;
 
     switch (work->args.side) {
@@ -205,7 +205,7 @@ void REV_COUNT_0(RevCountWork* work, RevCountArgs* args) {
     idx = work->args.list;
     work->list = idx;
     work->tiles = AllocSpriteFrameTiles(320);
-    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 
     if (work->list == 0) {
         count = work->args.count;
@@ -448,7 +448,7 @@ void CreateREVCOUNTTask(void* pool, u8* shownList, s16* count, u8* visible, u8 s
 
 void RELOAD_0(ReloadWork* work, ReloadArgs* args) {
     work->tiles = AllocObjTiles(0xA0, NULL);
-    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->args = *args;
     SetObjTileSource(work->tiles, gReloadTiles[work->args.listIndex]);
     AnimInit(&work->anim, gReloadAnims[work->args.listIndex], gReloadFrames[work->args.listIndex]);
@@ -540,10 +540,10 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     back = &gCardBacks[def->category];
     work->tiles2 = LoadObjTiles(back->tiles, 0x280);
     work->tiles3 = LoadObjTiles(back->tiles3, 0x600);
-    work->palette2 = LoadObjPalette(gCard00Palette, 32);
+    work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette3 = LoadObjPalette(gBStatesPalette, 32);
+    work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->posX = args->x;
     work->posY = args->y;
     work->posZ = args->z;
@@ -878,7 +878,7 @@ void Card_EFFECT_0(CardEffectWork* work, CardEffectArgs* args) {
     }
 
     work->tiles = AllocObjTiles(0x80, NULL);
-    work->palette = LoadObjPalette(gCardSparklePalette, 32);
+    work->palette = LoadObjPalette(gCardSparklePalette, sizeof(gCardSparklePalette));
     SetObjTileSource(work->tiles, gCardSparkleTiles);
     AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, 0);

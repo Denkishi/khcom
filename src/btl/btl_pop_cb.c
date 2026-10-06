@@ -17,7 +17,7 @@
 
 void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
 #ifdef VERSION_EU
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -177,7 +177,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     }
 #else
     work->tiles = AllocObjTiles(0x200, gBtlPopCbTiles);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
 
     switch (src->number) {
     case 0:

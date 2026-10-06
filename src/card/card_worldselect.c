@@ -141,12 +141,12 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
         }
 
         work->tiles2 = LoadObjTiles(gCardBacks[4].tiles2, 0x300);
-        work->palette = LoadObjPalette(gDoorCardPalette, 32);
+        work->palette = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     } else {
         work->tiles4 = NULL;
         work->tiles2 = NULL;
-        work->palette = LoadObjPalette(gDoorCardPalette, 32);
+        work->palette = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     }
 
@@ -156,13 +156,13 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     AnimStart(&gMapCardUiResources.anim, 0, ANIM_FLAG_LOOP);
     gMapCardUiResources.gfx = AnimGetGfx(&gMapCardUiResources.anim);
     work->tiles = AllocObjTiles(0x3C0, NULL);
-    work->palette2 = LoadObjPalette(gCardSelectBoxPalette, 32);
+    work->palette2 = LoadObjPalette(gCardSelectBoxPalette, sizeof(gCardSelectBoxPalette));
     SetObjTileSource(work->tiles, gCardSelectBoxTiles);
     AnimInit(&work->anim, gCardSelectBoxAnims, gCardSelectBoxFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->tiles5 = AllocObjTiles(0x120, NULL);
-    work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
+    work->palette3 = LoadObjPalette(gSmallHandCursorPalette, sizeof(gSmallHandCursorPalette));
     SetObjTileSource(work->tiles5, gSmallHandCursorTiles);
     AnimInit(&work->anim2, gSmallHandCursorAnims, gSmallHandCursorFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
@@ -2336,7 +2336,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* arg) {
     SetObjTileSource(work->tiles4, gReloadCardTiles[1]);
     InitReloadGageAnims(work->reloadGauge, work, work->args.listIndex);
     work->tiles = LoadObjTiles(gAButtonIconTiles, 0x80);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->tiles5 = AllocObjTiles(0x100, NULL);
     SetObjTileSource(work->tiles5, gReloadCounterTiles[work->args.listIndex]);
     InitReloadGageCounterAnim(work->reloadGauge, work->tiles5, work->args.listIndex, gauge->reloadCounter);

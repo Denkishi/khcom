@@ -97,7 +97,7 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
     switch (work->args.mode) {
     case CARD_MESSAGE_MODE_BG_WINDOW:
         work->tiles3 = AllocObjTiles(0x40, NULL);
-        work->palette = LoadObjPalette(gBStatesPalette, 32);
+        work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         SetObjTileSource(work->tiles3, gFEventTiles);
         AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
@@ -110,7 +110,7 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
         break;
     case CARD_MESSAGE_MODE_SPRITE_WINDOW:
         work->tiles3 = AllocObjTiles(0x40, NULL);
-        work->palette = LoadObjPalette(gBStatesPalette, 32);
+        work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         SetObjTileSource(work->tiles3, gFEventTiles);
         AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
@@ -172,7 +172,7 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
             work->fallbackFrame = FALSE;
         }
 
-        work->palette4 = LoadObjPalette(gCard00Palette, 32);
+        work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
         FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
         break;
     }
@@ -242,7 +242,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* task) {
             work->textPalette = LoadTextPalette(1);
             work->choiceVisible = TRUE;
             work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
-            work->palette3 = LoadObjPalette(gCard00Palette, 32);
+            work->palette3 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_EU
             FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
 #else
@@ -594,7 +594,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
         }
 
         work->tiles2 = LoadObjTiles(gDialogBoxTiles, 0xC00);
-        work->palette4 = LoadObjPalette(gCard00Palette, 32);
+        work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
         FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
         break;
     }
@@ -630,7 +630,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* task) {
     work->textPalette = LoadTextPalette(1);
     work->choiceVisible = TRUE;
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
-    work->palette3 = LoadObjPalette(gCard00Palette, 32);
+    work->palette3 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_EU
     FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
 #else

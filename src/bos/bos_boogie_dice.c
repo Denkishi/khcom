@@ -243,8 +243,8 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     work->obj.flags |= BTLOBJ_FLAG_HIT_LOCKED;
 #endif
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosBoogieDiceFrames, ARRAY_COUNT(gBosBoogieDiceFrames)), gBosBoogieDiceTiles);
-    work->palette = LoadObjPalette(gBosBoogieDicePalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gBosBoogieDicePalette, sizeof(gBosBoogieDicePalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gBosBoogieDiceAnims, gBosBoogieDiceFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     roll = GetRandom();
@@ -649,8 +649,8 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
     work->obj.z = -0xA000;
     ColliderInit(&work->obj.collider, 8, sBosBoogieExplosiondiceEmyKind.radius, sBosBoogieExplosiondiceEmyKind.height);
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosBoogieExplosiondiceFrames, ARRAY_COUNT(gBosBoogieExplosiondiceFrames)), gBosBoogieExplosiondiceTiles);
-    work->palette = LoadObjPalette(gBosBoogieDicePalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gBosBoogieDicePalette, sizeof(gBosBoogieDicePalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gBosBoogieExplosiondiceAnims, gBosBoogieExplosiondiceFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     TaskPoolInit(&work->tasks, 1);
@@ -729,7 +729,7 @@ u8 BosBoogieIsActorPastSaku() {
 void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
     work->boogie = arg;
     work->tiles = LoadObjTiles(gSakuTiles, 0x2E0);
-    work->palette = LoadObjPalette(gBoss02objPalette, 32);
+    work->palette = LoadObjPalette(gBoss02objPalette, sizeof(gBoss02objPalette));
     AnimInit(&work->anim, gSakuAnims, gSakuFrames);
     AnimStart(&work->anim, 0, 0);
     work->openTimer = 0;
@@ -970,8 +970,8 @@ void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg) {
     InitEnemyBtlObj(&work->obj, &sBosBoogieDiskEmyKind, x, y, z);
     work->obj.flags |= 0x400;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gNokogiriFrames, ARRAY_COUNT(gNokogiriFrames)), gNokogiriTiles);
-    work->palette = LoadObjPalette(gKaifukuPalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gKaifukuPalette, sizeof(gKaifukuPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gNokogiriAnims, gNokogiriFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     TaskPoolInit(&work->tasks, 1);
@@ -1147,8 +1147,8 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     work->obj.x = *arg;
     ColliderInit(&work->obj.collider, 8, sBosBoogieKnifeEmyKind.radius, sBosBoogieKnifeEmyKind.height);
     work->tiles = LoadObjTiles(gKnifeTiles, 0xC40);
-    work->palette = LoadObjPalette(gKnifePalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gKnifePalette, sizeof(gKnifePalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gKnifeAnims, gKnifeFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
@@ -1426,8 +1426,8 @@ void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg) {
     InitEnemyBtlObj(&work->obj, &sBosBoogieKaihukuEmyKind, x, y, z);
     work->obj.flags |= 0x400;
     work->tiles = LoadObjTiles(gKaifukuTiles, 0x400);
-    work->palette = LoadObjPalette(gKaifukuPalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gKaifukuPalette, sizeof(gKaifukuPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gKaifukuAnims, gKaifukuFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     RequestEnemyCardUse(&work->obj);

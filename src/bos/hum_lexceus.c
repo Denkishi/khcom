@@ -626,7 +626,7 @@ enum HumLexTmhState {
 };
 
 void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
-    work->palette = LoadObjPalette(gRexeusPalette, 0x20);
+    work->palette = LoadObjPalette(gRexeusPalette, sizeof(gRexeusPalette));
     work->tiles = AllocObjTiles(0x400, gRexeusTmhAxTiles);
     AnimInit(&work->anim, gRexeusTmhAxAnims, gRexeusTmhAxFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -647,7 +647,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     work->done = FALSE;
     work->vz = -0x980;
     work->tiles2 = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     m4aSongNumStart(SONG_BTL_LEC_THRSW);
 }
 
@@ -768,7 +768,7 @@ void task_hum_lex_tmh_3(LexTmhWork* work) {
 }
 
 void task_hum_lex_tmh0_0(LexTmh0Work* work, VixenNdlArgs* args) {
-    work->palette = LoadObjPalette(gRexeusPalette, 0x20);
+    work->palette = LoadObjPalette(gRexeusPalette, sizeof(gRexeusPalette));
     work->tiles = AllocObjTiles(0x400, gRexeusTmhTiles);
     AnimInit(&work->anim, gRexeusTmhAnims, gRexeusTmhFrames);
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
@@ -861,7 +861,7 @@ void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     work->state = HUM_LEX_ROCK_STATE_EMERGE;
     work->rockCount = 0;
     work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->blinking = FALSE;
 }
 
@@ -878,7 +878,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
     switch (work->state) {
     case HUM_LEX_ROCK_STATE_EMERGE:
         work->rockCount = 1;
-        work->palette2 = LoadObjPalette(gRexeusRock01Palette, 0x20);
+        work->palette2 = LoadObjPalette(gRexeusRock01Palette, sizeof(gRexeusRock01Palette));
         work->tiles2[0] = AllocObjTiles(0xDC0, gRexeusRock01Tiles);
         AnimInit(&work->anim[0], gRexeusRock01Anims, gRexeusRock01Frames);
         AnimStart(&work->anim[0], 0, 0);
@@ -895,7 +895,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         ReleaseObjTiles(work->tiles2[0]);
         ReleaseObjPalette(work->palette2);
         work->rockCount = 1;
-        work->palette2 = LoadObjPalette(gRexeusRock02Palette, 0x20);
+        work->palette2 = LoadObjPalette(gRexeusRock02Palette, sizeof(gRexeusRock02Palette));
         work->tiles2[0] = AllocObjTiles(0xDC0, gRexeusRock02Tiles);
         AnimInit(&work->anim[0], gRexeusRock02Anims, gRexeusRock02Frames);
         AnimStart(&work->anim[0], 0, 0);

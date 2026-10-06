@@ -480,7 +480,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->sub[0].tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosLstScythe0Frames, 16), gBosLstScythe0Tiles);
     work->sub[1].tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosLstScythe1Frames, 16), gBosLstScythe1Tiles);
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosLstMarluxiaFrames, 0x62), gBosLstMarluxiaTiles);
-    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
+    work->palette = LoadObjPalette(gBosLstObjPalette, sizeof(gBosLstObjPalette));
     i = 0;
     obj = &work->body;
     anim = &work->anim;

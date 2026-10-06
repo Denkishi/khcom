@@ -124,7 +124,7 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
         break;
     }
 
-    work->palette = LoadObjPalette(gBeastPalette, 32);
+    work->palette = LoadObjPalette(gBeastPalette, sizeof(gBeastPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);

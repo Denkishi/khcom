@@ -310,7 +310,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* task) {
 
             if (work->tiles4 == NULL) {
                 work->tiles4 = AllocObjTiles(0x40, NULL);
-                work->palette2 = LoadObjPalette(gCommonObjPalette, 32);
+                work->palette2 = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
                 SetObjTileSource(work->tiles4, gFEventTiles);
                 AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
                 AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
@@ -376,7 +376,7 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* task) {
             AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
             work->gfx3 = AnimGetGfx(&work->anim3);
             work->tiles2 = LoadObjTiles(gMsgBoxTiles, 0xFC0);
-            work->palette4 = LoadObjPalette(gCard00Palette, 32);
+            work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
             work->choice = 0;
             work->cursorX = 0x5800;
             work->cursorY = gMsgwaitYesnoCursorY[work->choice];

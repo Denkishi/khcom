@@ -54,7 +54,7 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     work->def = def;
     work->tiles = AllocObjTiles(tileCount * 32, NULL);
     work->palette = LoadObjPalette(def->palette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     work->idleState = EMY_STATE_IDLE;
     work->state = EMY_STATE_SPAWN;
     work->stateTimer = 0;

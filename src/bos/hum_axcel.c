@@ -163,7 +163,7 @@ void task_hum_axcel_0(AxcelWork* work) {
     work->sub.flags |= HUM_SUB_FLAG_HIDDEN;
     work->sub2.flags |= HUM_SUB_FLAG_HIDDEN;
     work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     TaskPoolInit(&work->tasks, 16);
 }
 
@@ -993,7 +993,7 @@ void task_hum_axcel_ptc_0(AxcelPtcWork* work, s32* args) {
     work->y = args[1];
     work->z = args[2];
     work->tiles = LoadObjTiles(gHumAxcelPtcTiles, 0x300);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gHumAxcelPtcAnims, gHumAxcelPtcFrames);
 
     switch (GetRandom() % 3) {

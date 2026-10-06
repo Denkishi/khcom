@@ -1186,7 +1186,7 @@ void mode_mapinspect_0() {
     MapInspectDrawCardTotal();
     MapInspectDrawCategoryCounts();
     MapInspectDrawValueCounts();
-    sMapInspectBarPalette = LoadObjPalette(gMapInspectBarPalette, 0x20);
+    sMapInspectBarPalette = LoadObjPalette(gMapInspectBarPalette, sizeof(gMapInspectBarPalette));
 #ifdef VERSION_EU
     sMapInspectBarTiles = LoadObjTiles(sMapInspectBarTilesByLanguage[gLanguage], sMapInspectBarTileSizesByLanguage[gLanguage]);
     AnimInit(&sMapInspectCursorAnim, sMapInspectCursorAnimsByLanguage[gLanguage], sMapInspectCursorFramesByLanguage[gLanguage]);
@@ -1202,7 +1202,7 @@ void mode_mapinspect_0() {
     sMapInspectHighlightTiles = LoadObjTiles(gMapInspectHighlightTiles, 0xD60);
     AnimInit(&sMapInspectHighlightAnim, gMapInspectHighlightAnims, gMapInspectHighlightFrames);
     AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
-    sMapInspectBarPalette2 = LoadObjPalette(gMapInspectBarPalette, 0x20);
+    sMapInspectBarPalette2 = LoadObjPalette(gMapInspectBarPalette, sizeof(gMapInspectBarPalette));
     sMapInspectPremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
     AnimInit(&sMapInspectPremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMapInspectPremiumAnim, 0, ANIM_FLAG_LOOP);

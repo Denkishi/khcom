@@ -765,11 +765,11 @@ void mode_worldselect_0() {
         sWorldselectBgAnimActive = TRUE;
     }
 
-    sWorldselectCardPalettes[0] = LoadObjPalette(gWorldselectCardPalette, 32);
+    sWorldselectCardPalettes[0] = LoadObjPalette(gWorldselectCardPalette, sizeof(gWorldselectCardPalette));
     sWorldselectCardTiles[0] = LoadObjTiles(gWorldselectCardTiles, 0xC40);
-    sWorldselectCardPalettes[1] = LoadObjPalette(gWorldselectCardFlipPalette, 32);
+    sWorldselectCardPalettes[1] = LoadObjPalette(gWorldselectCardFlipPalette, sizeof(gWorldselectCardFlipPalette));
     sWorldselectCardTiles[1] = LoadObjTiles(gWorldselectCardFlipTiles, 0x1340);
-    sWorldselectOverlayPalette = LoadObjPalette(gWorldselectOverlayPalette, 32);
+    sWorldselectOverlayPalette = LoadObjPalette(gWorldselectOverlayPalette, sizeof(gWorldselectOverlayPalette));
 #ifdef VERSION_EU
     sWorldselectTitleTiles = LoadObjTiles(sWorldselectTitleTileData[gLanguage], sWorldselectTitleTileSizes.sizes[gLanguage]);
 #else

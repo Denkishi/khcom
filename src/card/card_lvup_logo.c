@@ -76,7 +76,7 @@ void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* arg) {
 #else
     work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
-    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 
     for (i = 0; i < 4; i++) {
         work->centerX[i] = (work->targetX << 8) + gLvupEffectStartOffsetX[i];
@@ -277,7 +277,7 @@ void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* args) {
 #else
     work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
-    LoadObjPalette(gCard00Palette, 32);
+    LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->tiles = args->tiles;
     work->palette = args->palette;
     FadeSetPaletteExcluded(args->palette->index + 16, TRUE);

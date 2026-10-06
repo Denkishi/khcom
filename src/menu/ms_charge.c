@@ -1216,7 +1216,7 @@ void mode_ms_charge_0() {
     MsChargeDrawCardCounts();
     MsChargeDrawCategoryCounts();
     MsChargeDrawValueCounts();
-    sMsChargeCard00Palette = LoadObjPalette(gCard00Palette, 32);
+    sMsChargeCard00Palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     sMsChargePremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
     AnimInit(&sMsChargePremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMsChargePremiumAnim, 0, ANIM_FLAG_LOOP);
@@ -1224,13 +1224,13 @@ void mode_ms_charge_0() {
     AnimInit(&sMsChargeGridPremiumAnim, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&sMsChargeGridPremiumAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeScrollbarTiles = LoadObjTiles(gMsChargeScrollbarTiles, 32);
-    sMsChargeCategoryPalette = LoadObjPalette(gMsChargeCategoryPalettes, 32);
+    sMsChargeCategoryPalette = LoadObjPalette(gMsChargeCategoryPalettes, sizeof(gMsChargeCategoryPalettes));
     sMsChargeHighlightTiles = LoadObjTiles(gMsChargeHighlightTiles, 0xFE0);
     AnimInit(&sMsChargeArrowAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeArrowAnim, 1, ANIM_FLAG_LOOP);
     AnimInit(&sMsChargeHighlightAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
-    sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, 32);
+    sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, sizeof(gMoguPalette));
     sMsChargeMoogleTiles = LoadObjTiles(gMsChargeMoogleTiles, 0x940);
     AnimInit(&sMsChargeCursorAnim,
         gMsChargeMoogleAnims
@@ -1244,7 +1244,7 @@ void mode_ms_charge_0() {
         gMsChargeMoogleFrames
     );
     AnimStart(&sMsChargeMoogleAnim, 0, ANIM_FLAG_LOOP);
-    sMsChargeConfirmCursorPalette = LoadObjPalette(gMoguPalette, 32);
+    sMsChargeConfirmCursorPalette = LoadObjPalette(gMoguPalette, sizeof(gMoguPalette));
     sMsChargeConfirmCursorTiles = LoadObjTiles(gMoguFl00Tiles, 0xC00);
     AnimInit(&sMsChargeConfirmCursorAnim, gMoguFl00Anims, gMoguFl00Frames);
 

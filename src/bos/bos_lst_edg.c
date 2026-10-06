@@ -61,7 +61,7 @@ void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
     work->homeY = arg->y;
     work->homeZ = arg->z;
     work->tiles = AllocObjTiles(0x80, gBosLstEdgTiles);
-    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
+    work->palette = LoadObjPalette(gBosLstObjPalette, sizeof(gBosLstObjPalette));
     AnimInit(&work->anim, gBosLstEdgAnims, gBosLstEdgFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }

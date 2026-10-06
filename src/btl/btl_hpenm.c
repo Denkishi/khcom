@@ -28,7 +28,7 @@ void task_btl_hpenm_0(BtlHpenmWork* work) {
     work->tiles = AllocObjTiles(0x140, gBHpgagETiles);
     work->tiles2 = AllocObjTiles(0x80, gBHpgagETiles);
     work->tiles3 = AllocObjTiles(0x20, gBHpgagETiles);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->visible = FALSE;
     work->hpRatio = Q_8_8(1);
     work->actor = NULL;

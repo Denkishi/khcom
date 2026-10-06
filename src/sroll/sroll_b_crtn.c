@@ -38,7 +38,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* arg) {
         work->x = arg->x;
         work->y = arg->y + 0xFFFFE000;
         work->tiles = AllocObjTiles(128, gFEventTiles);
-        work->palette = LoadObjPalette(gCommonObjPalette, 32);
+        work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
         anim = &work->anim;
         AnimInit(anim, gFEventAnims, gFEventFrames);
         AnimStart(anim, work->kind, 0);
@@ -47,7 +47,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* arg) {
         work->x = arg->x;
         work->y = arg->y + 0xFFFFD000;
         work->tiles = AllocObjTiles(128, gFEventTiles);
-        work->palette = LoadObjPalette(gCommonObjPalette, 32);
+        work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
         anim = &work->anim;
         AnimInit(anim, gFEventAnims, gFEventFrames);
         AnimStart(anim, 0, 0);
@@ -58,7 +58,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* arg) {
         offset = GetSrollCurtainOffset();
         work->y = arg->y + offset;
         work->tiles = AllocObjTiles(128, gSmnTinkEffTiles);
-        work->palette = LoadObjPalette(gCommonObjPalette, 32);
+        work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
         anim = &work->anim;
         AnimInit(anim, gSmnTinkEffAnims, gSmnTinkEffFrames);
         AnimStart(anim, work->kind, 0);

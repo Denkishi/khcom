@@ -1349,7 +1349,7 @@ void mode_chkobj_0() {
     sChkObjWork->animId = 0;
     sChkObjWork->category = 0;
     sChkObjWork->tiles = AllocObjTiles(0x2000, NULL);
-    sChkObjWork->palette = LoadObjPalette(gSoraPalette, 0x20);
+    sChkObjWork->palette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     sChkObjWork->gfx = gSor1ff00Frame0;
     sChkObjWork->paused = FALSE;
     sChkObjWork->angle = 0x80A0;

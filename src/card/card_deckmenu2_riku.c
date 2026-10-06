@@ -96,11 +96,11 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->handY = sRikuDeckTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
-    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
     work->handVisible = FALSE;
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetRikuDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
-    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
+    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, sizeof(gDeckMenuTextPalette));
     work->tiles10 = NULL;
     work->tiles7 = NULL;
     work->tiles8 = NULL;
@@ -142,7 +142,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
-    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
+    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
     work->unk_4BC = 79;
     rowY = sRikuDeckRowY[work->deckIndex];
     work->unk_4BE = rowY;
@@ -445,7 +445,7 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task) {
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
-    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
+    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     work->topBarX = 0x7800;
     work->topBarY = 0;
@@ -920,7 +920,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
         work->tiles7 = LoadObjTiles(gCardBacks[def->category].tiles, 768);
         work->tiles8 = LoadObjTiles(def->tiles, 512);
         work->palette6 = LoadObjPalette(def->palette, 32);
-        work->palette5 = LoadObjPalette(gCard00Palette, 32);
+        work->palette5 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
         work->gfx4 = gCardBacks[def->category].gfx;
         work->gfx5 = def->gfx;
 

@@ -42,7 +42,7 @@ void task_sroll_tmr_0(SrollTmrWork* work, void* arg) {
     work->visible = 0;
     work->frameCount = 0;
     work->tiles = LoadObjTiles(gSrollTimerTiles, 352);
-    work->palette = LoadObjPalette(gSrollTimerPalette, 32);
+    work->palette = LoadObjPalette(gSrollTimerPalette, sizeof(gSrollTimerPalette));
 }
 
 u8 task_sroll_tmr_1(SrollTmrWork* work) {

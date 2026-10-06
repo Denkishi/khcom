@@ -2004,7 +2004,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
     }
 
     work->jumpHeight = arg->spotLowerZ - arg->spotUpperZ;
-    work->palette = LoadObjPalette(gMapGmkJumpPalette, 32);
+    work->palette = LoadObjPalette(gMapGmkJumpPalette, sizeof(gMapGmkJumpPalette));
     work->tiles = LoadObjTiles(gMapGmkJumpTiles, 0x980);
     anim = &work->anim;
     AnimInit(anim, gMapGmkJumpAnims, gMapGmkJumpFrames);
@@ -2081,13 +2081,13 @@ void Task_MapGmk_Enm_0(MapGmkEnmWork* work, FldPos* arg) {
 
     if (gMapFloorState.world != WORLD_ATLANTICA) {
         work->tiles = AllocObjTiles(0x220, gEmy01L00Tiles);
-        work->palette = LoadObjPalette(gEmy01Palette, 32);
+        work->palette = LoadObjPalette(gEmy01Palette, sizeof(gEmy01Palette));
         an = &work->anim;
         anim = gEmy01L00Anims;
         frames = gEmy01L00Frames;
     } else {
         work->tiles = AllocObjTiles(0x440, gEmy0600Tiles);
-        work->palette = LoadObjPalette(gEmy06Palette, 32);
+        work->palette = LoadObjPalette(gEmy06Palette, sizeof(gEmy06Palette));
         an = &work->anim;
         anim = gEmy0600Anims;
         frames = gEmy0600Frames;
@@ -2231,7 +2231,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
     work->obj.fieldPosition.y -= work->obj.fieldPosition.ground;
     work->obj.angle = 0xAD;
     work->obj.height = 32;
-    work->palette = LoadObjPalette(gMapDoorTraverseTownPalette, 32);
+    work->palette = LoadObjPalette(gMapDoorTraverseTownPalette, sizeof(gMapDoorTraverseTownPalette));
     work->tiles = AllocSpriteFrameTiles(0x400);
     UpdateSpriteFrameTiles(work->tiles, gMapDoorSide0Frame0, gMapDoorTraverseTownSide0ClosedTiles);
     ColliderInit(&work->collider, 6, 16, 0);
@@ -2298,7 +2298,7 @@ void Task_MapGmk_Spider_0(MapGmkSpiderWork* work, MapGmkPlacement* arg) {
     work->obj.fieldPosition = arg->pos;
     work->obj.height = 24;
     work->tiles = AllocObjTiles(0x720, gEmy2103Tiles);
-    work->palette = LoadObjPalette(gEmy21Palette, 32);
+    work->palette = LoadObjPalette(gEmy21Palette, sizeof(gEmy21Palette));
     AnimInit(&work->anim, gEmy2103Anims, gEmy2103Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
@@ -4104,7 +4104,7 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     work->speed = GetRandom() % 155 + 153;
     work->angle = GetRandom();
     work->tiles = LoadObjTiles(gMapPrizeTiles, 0x160);
-    work->palette = LoadObjPalette(gCommonObjPalette, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->kind = arg->id;
 
     switch (work->kind) {
@@ -4379,10 +4379,10 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* arg) {
     work->palette = LoadObjPalette(def->palette, 32);
     work->stat = *(CardStat*)&def->kind;
     back = &gCardBacks[work->stat.category];
-    work->palette2 = LoadObjPalette(gCard00Palette, 32);
+    work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->tiles2 = LoadObjTiles(back->tiles, 0x280);
     work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
-    work->palette3 = LoadObjPalette(gCommonObjPalette, 32);
+    work->palette3 = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->posX = arg->x;
     work->posY = arg->y;
@@ -4581,7 +4581,7 @@ void Task_MapSpark_0(MapSparkWork* work, FldObj* obj) {
 
     work->obj = obj;
     work->tiles = AllocObjTiles(0x200, gMapSparkTiles);
-    work->palette = LoadObjPalette(gCommonObjPalette, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     anim = &work->anim;
     AnimInit(anim, gMapSparkAnims, gMapSparkFrames);
 
@@ -4627,7 +4627,7 @@ void Task_MapSpark_3(MapSparkWork* work) {
 void Task_MapTalk_0(MapTalkWork* work, FldObj* obj) {
     work->obj = obj;
     work->tiles = AllocObjTiles(0x200, &gMapSparkTiles[0x1028]);
-    work->palette = LoadObjPalette(gCommonObjPalette, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     AnimInit(&work->anim, gMapTalkAnims, gMapTalkFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->playerOnRight = FALSE;

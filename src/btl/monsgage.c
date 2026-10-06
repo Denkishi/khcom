@@ -80,7 +80,7 @@ enum MonsgageState {
 void task_monsgage_0(MonsgageWork* work) {
     work->tiles = AllocObjTiles(0x200, gMonsgageTiles);
     work->tiles2 = AllocObjTiles(0x80, gMonsgageTiles);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->shownValue = 0;
     work->value = 0;
     work->gfx = gMonsgageFrame0;

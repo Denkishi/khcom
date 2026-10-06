@@ -112,7 +112,7 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     body->z = -0x5000;
     body->groundZ = 0;
     work->rotation = 0;
-    work->palette = LoadObjPalette(gJackPalette, 32);
+    work->palette = LoadObjPalette(gJackPalette, sizeof(gJackPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
 

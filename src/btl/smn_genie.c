@@ -81,7 +81,7 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
     body->z = actor->originZ - 0x2800;
     body->groundZ = actor->originZ;
     work->variant = args->variant;
-    work->palette = LoadObjPalette(gGeniePalette, 32);
+    work->palette = LoadObjPalette(gGeniePalette, sizeof(gGeniePalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = SMN_GENIE_STATE_APPEAR;

@@ -1068,9 +1068,9 @@ void task_bos_md_0(MdWork* work, void* arg) {
     LoadPalette(gBosMdPalette, (void*)PLTT, 32);
     SetBtlPaletteFadeExcluded(0, TRUE);
     work->bgPalette = gBosMdPalette;
-    work->palette = LoadObjPalette(gBosMdPalette, 32);
+    work->palette = LoadObjPalette(gBosMdPalette, sizeof(gBosMdPalette));
     SetBtlPaletteFadeExcluded(work->palette->index + 16, TRUE);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     SetBtlPaletteFadeExcluded(work->palette2->index + 16, TRUE);
     TaskPoolInit(&work->tasks, 6);
     TaskPoolInit(&work->tasks2, 1);
@@ -1496,8 +1496,8 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->sub.hp = 20;
     work->sub.maxHp = 20;
     SetBtlObjUnhittable(&work->sub, TRUE);
-    work->palette = LoadObjPalette(gBosMdFirePalette, 32);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
+    work->palette = LoadObjPalette(gBosMdFirePalette, sizeof(gBosMdFirePalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     work->tiles = LoadObjTiles(gBosMdFireTiles, 0x800);
     AnimInit(&work->anim, gBosMdFireAnims, gBosMdFireFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -1599,7 +1599,7 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     ColliderInit(collider, 7, 24, 24);
     ColliderSetPosition(collider, work->x, work->y, work->z);
     ColliderSetDisabled(collider, TRUE);
-    work->palette = LoadObjPalette(gBosMdDaiPalette, 32);
+    work->palette = LoadObjPalette(gBosMdDaiPalette, sizeof(gBosMdDaiPalette));
     work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
 }
 
@@ -1731,7 +1731,7 @@ void task_bos_md_hahen_0(MdHahenWork* work, s32* src) {
     work->vy = gSineTable[angle] * speed >> 8;
     work->vz = -((GetRandom() & 0x1FF) + 0x100);
     work->timer = 3;
-    work->palette = LoadObjPalette(gBosMdDaiPalette, 32);
+    work->palette = LoadObjPalette(gBosMdDaiPalette, sizeof(gBosMdDaiPalette));
     work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
     work->gfx = gBosMdDaiFrames[GetRandom() % 2];
 }

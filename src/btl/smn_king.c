@@ -64,7 +64,7 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
     body->groundZ = 0;
     body->flags = actor->flags & BTLOBJ_FLAG_FACING_LEFT;
     work->variant = args->variant;
-    work->palette = LoadObjPalette(gMickeyPalette, 32);
+    work->palette = LoadObjPalette(gMickeyPalette, sizeof(gMickeyPalette));
     work->vz = 0;
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 0, 0, work->tiles);

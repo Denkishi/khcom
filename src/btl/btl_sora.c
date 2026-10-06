@@ -328,9 +328,9 @@ void LoadBtlSoraPalette(BtlSoraWork* work) {
     work->tiles = work->actor.btl->tiles;
 
     if (work->mainSide) {
-        work->palette = LoadObjPalette(gSoraPalette, 0x20);
+        work->palette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     } else {
-        work->palette = LoadObjPalette(gBtlOtherSidePalette, 0x20);
+        work->palette = LoadObjPalette(gBtlOtherSidePalette, sizeof(gBtlOtherSidePalette));
     }
 }
 

@@ -187,7 +187,7 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
         work->facingLeft = FALSE;
     }
 
-    work->palette = LoadObjPalette(gEmy16Palette, 0x20);
+    work->palette = LoadObjPalette(gEmy16Palette, sizeof(gEmy16Palette));
     work->tiles = AllocObjTiles(0x80, gEmy1611bTiles);
     AnimInit(&work->anim, gEmy1611bAnims, gEmy1611bFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -338,7 +338,7 @@ void task_emy_16_p_0(Emy16pWork* work, EmySpawn* spawn) {
         work->facingLeft = FALSE;
     }
 
-    work->palette = LoadObjPalette(gEmy16Palette, 0x20);
+    work->palette = LoadObjPalette(gEmy16Palette, sizeof(gEmy16Palette));
     work->tiles = AllocObjTiles(0x80, gEmy1610bTiles);
     AnimInit(&work->anim, gEmy1610bAnims, gEmy1610bFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);

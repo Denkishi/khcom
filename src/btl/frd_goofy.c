@@ -113,7 +113,7 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     body->y = work->actor->y;
     body->z = -0x5000;
     body->groundZ = 0;
-    work->palette = LoadObjPalette(gGoofyPalette, 32);
+    work->palette = LoadObjPalette(gGoofyPalette, sizeof(gGoofyPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);

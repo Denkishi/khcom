@@ -210,7 +210,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
 #endif
 
     work->gfx = AnimGetGfx(&work->anim);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->x = src->x;
     work->y = src->y;
     work->z = src->z;

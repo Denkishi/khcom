@@ -76,7 +76,7 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
     }
 
     work->variant = args->variant;
-    work->palette = LoadObjPalette(gDamboPalette, 32);
+    work->palette = LoadObjPalette(gDamboPalette, sizeof(gDamboPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = SMN_DUMBO_STATE_APPEAR;

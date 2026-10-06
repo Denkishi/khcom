@@ -44,7 +44,7 @@ void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
 
     work->unk_000 = 0;
     work->tiles = AllocObjTiles(0x300, gBosPcAcdTiles);
-    work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
+    work->palette = LoadObjPalette(gBosPcObjPalette, sizeof(gBosPcObjPalette));
     work->x = -1;
     work->y = -1;
     work->z = -1;

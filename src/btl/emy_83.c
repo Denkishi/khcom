@@ -232,7 +232,7 @@ enum Emy83bState {
 
 void task_emy_83_b_0(Emy83bWork* work, EmySpawn* spawn) {
     work->state = EMY83B_STATE_EMERGE;
-    work->palette = LoadObjPalette(gEmy83Palette, 0x20);
+    work->palette = LoadObjPalette(gEmy83Palette, sizeof(gEmy83Palette));
     work->tiles = AllocObjTiles(0x80, gEmy8310bTiles);
     AnimInit(&work->anim, gEmy8310bAnims, gEmy8310bFrames);
     AnimStart(&work->anim, 0, 0);
@@ -316,7 +316,7 @@ void task_emy_83_b_3(Emy83bWork* work) {
 }
 
 void task_emy_83_s_0(Emy83sWork* work, EmySpawn* spawn) {
-    work->palette = LoadObjPalette(gEmy83Palette, 0x20);
+    work->palette = LoadObjPalette(gEmy83Palette, sizeof(gEmy83Palette));
     work->tiles = LoadObjTiles(gEmy8311bTiles, 0x40);
     work->x = spawn->x;
     work->y = spawn->y;

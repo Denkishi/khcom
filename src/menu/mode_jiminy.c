@@ -1578,19 +1578,19 @@ void mode_jiminy_0() {
 #else
     sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, 0x880);
 #endif
-    sJiminyWork->palette = LoadObjPalette(gJiminyTitlePalette, 0x20);
+    sJiminyWork->palette = LoadObjPalette(gJiminyTitlePalette, sizeof(gJiminyTitlePalette));
     FadeSetPaletteExcluded(sJiminyWork->palette->index + 0x10, TRUE);
     sJiminyWork->tiles2 = LoadObjTiles(gJiminyBinderRingTiles, 0x40);
-    sJiminyWork->palette2 = LoadObjPalette(gJiminyBinderRingPalette, 0x20);
-    sJiminyWork->palette3 = LoadObjPalette(gJiminyRootListPalette, 0x20);
+    sJiminyWork->palette2 = LoadObjPalette(gJiminyBinderRingPalette, sizeof(gJiminyBinderRingPalette));
+    sJiminyWork->palette3 = LoadObjPalette(gJiminyRootListPalette, sizeof(gJiminyRootListPalette));
     sJiminyWork->tiles5 = LoadObjTiles(gJiminyScrollArrowTiles, 0x140);
-    sJiminyWork->palette6 = LoadObjPalette(gJiminyScrollArrowPalette, 0x20);
+    sJiminyWork->palette6 = LoadObjPalette(gJiminyScrollArrowPalette, sizeof(gJiminyScrollArrowPalette));
 #ifdef VERSION_EU
     sJiminyWork->tiles6 = LoadObjTiles(gJiminyRowMarkTiles, 0x340);
 #else
     sJiminyWork->tiles6 = LoadObjTiles(gJiminyRowMarkTiles, 0x1C0);
 #endif
-    sJiminyWork->palette7 = LoadObjPalette(gJiminyListPalette, 0x20);
+    sJiminyWork->palette7 = LoadObjPalette(gJiminyListPalette, sizeof(gJiminyListPalette));
     sJiminyWork->x3 = -0x8000;
     sJiminyWork->y3 = -0x800;
     sJiminyWork->y4 = 0xA000;
@@ -1602,31 +1602,31 @@ void mode_jiminy_0() {
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         sJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk2700Tiles);
-        sJiminyWork->palette4 = LoadObjPalette(gTalk2700Palette, 0x20);
+        sJiminyWork->palette4 = LoadObjPalette(gTalk2700Palette, sizeof(gTalk2700Palette));
         AnimInit(&sJiminyWork->anim, gTalk2700Anims, gTalk2700Frames);
         AnimStart(&sJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     } else {
         sJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk0600Tiles);
-        sJiminyWork->palette4 = LoadObjPalette(gTalk0600Palette, 0x20);
+        sJiminyWork->palette4 = LoadObjPalette(gTalk0600Palette, sizeof(gTalk0600Palette));
         AnimInit(&sJiminyWork->anim, gTalk0600Anims, gTalk0600Frames);
         AnimStart(&sJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     }
 
     if (!FadeIsActive()) {
         sJiminyWork->tiles4 = AllocObjTiles(0x200, gJiminyCursorTiles);
-        sJiminyWork->palette5 = LoadObjPalette(gJiminyCursorPalette, 0x20);
+        sJiminyWork->palette5 = LoadObjPalette(gJiminyCursorPalette, sizeof(gJiminyCursorPalette));
         AnimInit(&sJiminyWork->anim2, gJiminyCursorAnims, gJiminyCursorFrames);
         AnimStart(&sJiminyWork->anim2, 2, ANIM_FLAG_LOOP);
     }
 
     sJiminyWork->tiles7 = AllocObjTiles(0x2000, NULL);
 #ifdef VERSION_EU
-    sJiminyWork->palette8 = LoadObjPalette(gPooAltImagePalettes, 0x40);
+    sJiminyWork->palette8 = LoadObjPalette(gPooAltImagePalettes, sizeof(gPooAltImagePalettes));
 #else
-    sJiminyWork->palette8 = LoadObjPalette(gWorldImageWonderlandPalette, 0x20);
+    sJiminyWork->palette8 = LoadObjPalette(gWorldImageWonderlandPalette, sizeof(gWorldImageWonderlandPalette));
 #endif
     sJiminyWork->tiles8 = AllocObjTiles(0x800, NULL);
-    sJiminyWork->palette9 = LoadObjPalette(gCard00Palette, 0x20);
+    sJiminyWork->palette9 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     sJiminyWork->detailTimer = 0;
     sJiminyWork->unk_D38 = 0x100;
     FadeStartIn(FADE_MODE_BLACK, 0x10);

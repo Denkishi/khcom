@@ -91,7 +91,7 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     }
 
     work->variant = args->variant;
-    work->palette = LoadObjPalette(gTinkPalette, 32);
+    work->palette = LoadObjPalette(gTinkPalette, sizeof(gTinkPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->state = SMN_TINK_STATE_APPEAR;
@@ -405,7 +405,7 @@ void task_smn_tinkeff_0(SmnTinkeffWork* work, BtlObj* args) {
     work->z = args->z;
     work->vz = (u16)(GetRandom() % 0xE8) + 0x4C;
     work->tiles = LoadObjTiles(gSmnTinkEffTiles, 0x200);
-    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gSmnTinkEffAnims, gSmnTinkEffFrames);
 
     switch ((u16)(GetRandom() % 3)) {

@@ -39,7 +39,7 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     angle = GetRandom();
 
     work->tiles = LoadObjTiles(gBPuraizuTiles, 0x340);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->timer = 0;
     work->gfx2 = gBPuraizuFrame0;
     work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW);

@@ -109,7 +109,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->tiles5[1] = AllocSpriteFrameTiles(0x500);
     work->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
-    work->tilesPalettes[7] = LoadObjPalette(gLevelUpHeaderPalette, 32);
+    work->tilesPalettes[7] = LoadObjPalette(gLevelUpHeaderPalette, sizeof(gLevelUpHeaderPalette));
     FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, TRUE);
     work->tiles2 = LoadObjTiles(gLevelUpBarTiles, 0x3C0);
     TaskPoolInit(&work->pool, 10);
@@ -436,8 +436,8 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gLevelUpSoraBonusPalette, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gLevelUpSoraBonusSelectedPalette, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpSoraBonusPalette, sizeof(gLevelUpSoraBonusPalette));
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpSoraBonusSelectedPalette, sizeof(gLevelUpSoraBonusSelectedPalette));
             } else {
                 work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
                 work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
@@ -457,8 +457,8 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gLevelUpRikuBonusPalette, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gLevelUpRikuBonusSelectedPalette, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpRikuBonusPalette, sizeof(gLevelUpRikuBonusPalette));
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpRikuBonusSelectedPalette, sizeof(gLevelUpRikuBonusSelectedPalette));
             }
 
 #ifdef VERSION_EU
@@ -485,12 +485,12 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 #else
             work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
-            work->palette4 = LoadObjPalette(gCard00Palette, 32);
+            work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, TRUE);
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, TRUE);
             FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
             work->tiles = AllocObjTiles(0x3C0, NULL);
-            work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
+            work->palette3 = LoadObjPalette(gSmallHandCursorPalette, sizeof(gSmallHandCursorPalette));
             FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
             SetObjTileSource(work->tiles, gSmallHandCursorTiles);
             AnimInit(&work->anim, gSmallHandCursorAnims, gSmallHandCursorFrames);
@@ -645,8 +645,8 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 #endif
                         }
 
-                        work->palette = LoadObjPalette(gLevelUpSoraOptionSelectedPalette, 32);
-                        work->palette2 = LoadObjPalette(gLevelUpSoraOptionPalette, 32);
+                        work->palette = LoadObjPalette(gLevelUpSoraOptionSelectedPalette, sizeof(gLevelUpSoraOptionSelectedPalette));
+                        work->palette2 = LoadObjPalette(gLevelUpSoraOptionPalette, sizeof(gLevelUpSoraOptionPalette));
                     } else {
                         if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
@@ -707,8 +707,8 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 #endif
                         }
 
-                        work->palette = LoadObjPalette(gLevelUpRikuOptionSelectedPalette, 32);
-                        work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, 32);
+                        work->palette = LoadObjPalette(gLevelUpRikuOptionSelectedPalette, sizeof(gLevelUpRikuOptionSelectedPalette));
+                        work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, sizeof(gLevelUpRikuOptionPalette));
                     }
 
                     FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
@@ -818,7 +818,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
         ReleaseObjTiles(work->tiles);
         ReleaseObjPalette(work->palette3);
         work->tiles = AllocObjTiles(128, NULL);
-        work->palette3 = LoadObjPalette(gLevelUpChosenCursorPalette, 32);
+        work->palette3 = LoadObjPalette(gLevelUpChosenCursorPalette, sizeof(gLevelUpChosenCursorPalette));
         FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
         SetObjTileSource(work->tiles, gLevelUpChosenCursorTiles);
         AnimInit(&work->anim, gLevelUpChosenCursorAnims, gLevelUpChosenCursorFrames);
@@ -1464,8 +1464,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gLevelUpSoraBonusPalette, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gLevelUpSoraBonusSelectedPalette, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpSoraBonusPalette, sizeof(gLevelUpSoraBonusPalette));
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpSoraBonusSelectedPalette, sizeof(gLevelUpSoraBonusSelectedPalette));
             } else {
                 work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
                 work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
@@ -1485,8 +1485,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gLevelUpRikuBonusPalette, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gLevelUpRikuBonusSelectedPalette, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpRikuBonusPalette, sizeof(gLevelUpRikuBonusPalette));
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpRikuBonusSelectedPalette, sizeof(gLevelUpRikuBonusSelectedPalette));
             }
 
 #ifdef VERSION_EU
@@ -1513,12 +1513,12 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
 #else
             work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
-            work->palette4 = LoadObjPalette(gCard00Palette, 32);
+            work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, TRUE);
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, TRUE);
             FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
             work->tiles = AllocObjTiles(0x3C0, NULL);
-            work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
+            work->palette3 = LoadObjPalette(gSmallHandCursorPalette, sizeof(gSmallHandCursorPalette));
             FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
             SetObjTileSource(work->tiles, gSmallHandCursorTiles);
             AnimInit(&work->anim, gSmallHandCursorAnims, gSmallHandCursorFrames);
@@ -1636,8 +1636,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
 #endif
             }
 
-            work->palette = LoadObjPalette(gLevelUpSoraOptionSelectedPalette, 32);
-            work->palette2 = LoadObjPalette(gLevelUpSoraOptionPalette, 32);
+            work->palette = LoadObjPalette(gLevelUpSoraOptionSelectedPalette, sizeof(gLevelUpSoraOptionSelectedPalette));
+            work->palette2 = LoadObjPalette(gLevelUpSoraOptionPalette, sizeof(gLevelUpSoraOptionPalette));
         } else {
             if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
@@ -1698,8 +1698,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
 #endif
             }
 
-            work->palette = LoadObjPalette(gLevelUpRikuOptionSelectedPalette, 32);
-            work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, 32);
+            work->palette = LoadObjPalette(gLevelUpRikuOptionSelectedPalette, sizeof(gLevelUpRikuOptionSelectedPalette));
+            work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, sizeof(gLevelUpRikuOptionPalette));
         }
 
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);

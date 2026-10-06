@@ -374,8 +374,8 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     work->scaleX = 2;
     work->scaleY = 2;
     work->tiles = LoadObjTiles(gBosLstBitTiles, 0x900);
-    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
-    work->palette2 = LoadObjPalette(gHitFlashPalette, 0x20);
+    work->palette = LoadObjPalette(gBosLstObjPalette, sizeof(gBosLstObjPalette));
+    work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gBosLstBitAnims, gBosLstBitFrames);
     AnimStart(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
     InitEnemyBtlObj(&work->obj, &sBosLstBitEmyKind, work->x, work->y, work->z);

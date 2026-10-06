@@ -24,7 +24,7 @@ void task_btl_escape_0(BtlEscapeWork* work) {
 
     work->progressMax = 0x5A00;
 #ifdef VERSION_EU
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -51,7 +51,7 @@ void task_btl_escape_0(BtlEscapeWork* work) {
     }
 #else
     work->tiles = LoadObjTiles(gBtlEscapeTiles, 0x240);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     frames = gBtlEscapeFrames;
 #endif
     work->gfx = frames[0];

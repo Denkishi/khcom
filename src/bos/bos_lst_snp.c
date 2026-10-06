@@ -42,7 +42,7 @@ void task_bos_lst_snp_0(LstSnpWork* work, LstSnpArg* arg) {
     work->vx = (GetRandom() % 0x181 + 0x80) * arg->facing;
     work->vz = -(GetRandom() % 0x201 + 0x400);
     work->tiles = LoadObjTiles(gBosLstSnpTiles, 0x240);
-    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
+    work->palette = LoadObjPalette(gBosLstObjPalette, sizeof(gBosLstObjPalette));
     m4aSongNumStart(SONG_SND_707);
     AnimInit(&work->anim, gBosLstSnpAnims, gBosLstSnpFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);

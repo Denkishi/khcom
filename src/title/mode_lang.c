@@ -44,7 +44,7 @@ void mode_lang_0(s32 arg) {
     LoadBgMapLz77(0, gLanguageSelectMenuMap);
     LoadBgMapLz77(1, gLanguageSelectBgMap);
     sLangWork->tiles = LoadObjTiles(gLanguageSelectCursorTiles, 0x1A0);
-    sLangWork->palette = LoadObjPalette(gLanguageSelectCursorPalette, 32);
+    sLangWork->palette = LoadObjPalette(gLanguageSelectCursorPalette, sizeof(gLanguageSelectCursorPalette));
     sLangWork->timer = 0;
     sLangWork->state = LANG_STATE_FADE_IN;
     sLangWork->flags = 0;

@@ -300,7 +300,7 @@ void task_fld_sora_0(FldWork* work) {
 
     act = &gFieldState->actor;
     work->tiles = AllocObjTiles(0x500, NULL);
-    work->palette = LoadObjPalette(gSoraPalette, 32);
+    work->palette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
     act->height = 16;
     work->onCollider = FALSE;
     work->unk_9C = 0;

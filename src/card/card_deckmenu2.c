@@ -46,6 +46,7 @@
 #include "card_map_anim.h"
 #include "ui_text.h"
 #include "default_bg_map.h"
+#include "world_types.h"
 
 const u16 gRikuDeckCards0[21] = {
     CARD_ID(CARD_SOUL_EATER, 7),
@@ -1094,42 +1095,42 @@ void InitRikuDeckForWorld(u8 world) {
     SetActiveDeckIndex(0);
 
     switch (world) {
-    case 2:
+    case WORLD_ATLANTICA:
         n = 1;
         break;
-    case 3:
+    case WORLD_OLYMPUS_COLISEUM:
         n = 2;
         break;
-    case 4:
+    case WORLD_WONDERLAND:
         n = 3;
         break;
-    case 5:
+    case WORLD_MONSTRO:
         n = 4;
         break;
-    case 6:
+    case WORLD_HALLOWEEN_TOWN:
         n = 5;
         break;
-    case 7:
+    case WORLD_NEVER_LAND:
         n = 6;
         break;
-    case 8:
+    case WORLD_HOLLOW_BASTION:
         n = 7;
         break;
-    case 9:
+    case WORLD_DESTINY_ISLANDS:
         n = 8;
         break;
-    case 10:
+    case WORLD_TRAVERSE_TOWN:
         n = 9;
         break;
-    case 11:
+    case WORLD_TWILIGHT_TOWN:
         n = 10;
         break;
     case 0:
-    case 12:
+    case WORLD_CASTLE_OBLIVION:
         n = 11;
         break;
-    case 1:
-    case 13:
+    case WORLD_AGRABAH:
+    case WORLD_100_ACRE_WOOD:
         n = 0;
         break;
     }

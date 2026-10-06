@@ -188,6 +188,6 @@ const EventSequenceDef gEvent053 = {
     { 0, 0 },
     65535,
     0,
-    9,
+    WORLD_DESTINY_ISLANDS,
     255,
 };

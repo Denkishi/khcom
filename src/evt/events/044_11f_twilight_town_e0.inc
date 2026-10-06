@@ -206,6 +206,6 @@ const EventSequenceDef gEvent044 = {
     { 0, 0 },
     65535,
     0,
-    11,
+    WORLD_TWILIGHT_TOWN,
     255,
 };

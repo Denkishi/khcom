@@ -26,6 +26,7 @@
 #include "types.h"
 #include "obj.h"
 #include "sprite_palettes.h"
+#include "world_types.h"
 
 static u8* sWorldNames[13] = {
 #if defined(VERSION_US)
@@ -74,19 +75,19 @@ static u8* sWorldNames[13] = {
 };
 
 static u8 sWLogoWorldIds[13] = {
-    4,
-    5,
-    6,
-    2,
-    7,
-    3,
-    8,
-    9,
-    1,
-    10,
+    WORLD_WONDERLAND,
+    WORLD_MONSTRO,
+    WORLD_HALLOWEEN_TOWN,
+    WORLD_ATLANTICA,
+    WORLD_NEVER_LAND,
+    WORLD_OLYMPUS_COLISEUM,
+    WORLD_HOLLOW_BASTION,
+    WORLD_DESTINY_ISLANDS,
+    WORLD_AGRABAH,
+    WORLD_TRAVERSE_TOWN,
     0,
-    11,
-    12,
+    WORLD_TWILIGHT_TOWN,
+    WORLD_CASTLE_OBLIVION,
 };
 
 enum WLogoModeState {
@@ -236,7 +237,7 @@ void WLogoStartLogo(u8 world) {
     TaskPoolInit(&sModeWLogoTasks, 2);
 
     switch (world) {
-    case 4:
+    case WORLD_WONDERLAND:
         LoadBgTiles(2, gBtlBgWonderlandTiles, 0x4000);
         LoadBgPalette(2, gBtlBgWonderlandPalette, 0xC0);
 #ifdef VERSION_EU
@@ -246,7 +247,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoWon, NULL);
         break;
-    case 5:
+    case WORLD_MONSTRO:
         LoadBgTiles(2, gBtlBgMonstroTiles, 0x4000);
         LoadBgPalette(2, gBtlBgMonstroPalette, 0x100);
 #ifdef VERSION_EU
@@ -256,7 +257,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoMons, NULL);
         break;
-    case 6:
+    case WORLD_HALLOWEEN_TOWN:
         LoadBgTiles(2, gBtlBgHalloweenTownTiles, 0x4000);
         LoadBgPalette(2, gBtlBgHalloweenTownPalette, 0xE0);
 #ifdef VERSION_EU
@@ -266,7 +267,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHwt, NULL);
         break;
-    case 2:
+    case WORLD_ATLANTICA:
         LoadBgTiles(2, gBtlBgAtlanticaTiles, 0x4000);
         LoadBgPalette(2, gBtlBgAtlanticaPalette, 0xC0);
 #ifdef VERSION_EU
@@ -276,7 +277,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAtl, NULL);
         break;
-    case 7:
+    case WORLD_NEVER_LAND:
         LoadBgTiles(2, gBtlBgNeverLandTiles, 0x3EC0);
         LoadBgPalette(2, gBtlBgNeverLandPalette, 0x140);
 #ifdef VERSION_EU
@@ -286,7 +287,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoNvl, NULL);
         break;
-    case 3:
+    case WORLD_OLYMPUS_COLISEUM:
         LoadBgTiles(2, gBtlBgOlympusColiseumTiles, 0x4000);
         LoadBgPalette(2, gBtlBgOlympusColiseumPalette, 0xE0);
 #ifdef VERSION_EU
@@ -296,7 +297,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoCol, NULL);
         break;
-    case 8:
+    case WORLD_HOLLOW_BASTION:
         LoadBgTiles(2, gBtlBgHollowBastionTiles, 0x4000);
         LoadBgPalette(2, gBtlBgHollowBastionPalette, 0xE0);
 #ifdef VERSION_EU
@@ -306,7 +307,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHlw, NULL);
         break;
-    case 9:
+    case WORLD_DESTINY_ISLANDS:
         LoadBgTiles(2, gBtlBgDestinyIslandsTiles, 0x4000);
         LoadBgPalette(2, gBtlBgDestinyIslandsPalette, 0x120);
 #ifdef VERSION_EU
@@ -316,7 +317,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoDil, NULL);
         break;
-    case 1:
+    case WORLD_AGRABAH:
         LoadBgTiles(2, gBtlBgAgrabahTiles, 0x4000);
         LoadBgPalette(2, gBtlBgAgrabahPalette, 0x100);
 #ifdef VERSION_EU
@@ -326,7 +327,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAgr, NULL);
         break;
-    case 10:
+    case WORLD_TRAVERSE_TOWN:
         LoadBgTiles(2, gBtlBgTraverseTownTiles, 0x4000);
         LoadBgPalette(2, gBtlBgTraverseTownPalette, 0xC0);
 #ifdef VERSION_EU
@@ -346,7 +347,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoPoo, NULL);
         break;
-    case 11:
+    case WORLD_TWILIGHT_TOWN:
         LoadBgTiles(2, gBtlBgTwilightTownTiles, 0x4000);
         LoadBgPalette(2, gBtlBgTwilightTownPalette, 0x140);
 #ifdef VERSION_EU
@@ -356,7 +357,7 @@ void WLogoStartLogo(u8 world) {
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTt, NULL);
         break;
-    case 12:
+    case WORLD_CASTLE_OBLIVION:
         LoadBgTiles(2, gBtlBgCastleOblivionTiles, 0x4000);
         LoadBgPalette(2, gBtlBgCastleOblivionPalette, 0xE0);
 #ifdef VERSION_EU
@@ -378,43 +379,43 @@ void task_wLogo_0(WLogoTaskWork* work, u8 world) {
     TaskPoolInit(&sTaskWLogoTasks, 2);
 
     switch (work->worldId) {
-    case 4:
+    case WORLD_WONDERLAND:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoWon, NULL);
         break;
-    case 5:
+    case WORLD_MONSTRO:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoMons, NULL);
         break;
-    case 6:
+    case WORLD_HALLOWEEN_TOWN:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHwt, NULL);
         break;
-    case 2:
+    case WORLD_ATLANTICA:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAtl, NULL);
         break;
-    case 7:
+    case WORLD_NEVER_LAND:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoNvl, NULL);
         break;
-    case 3:
+    case WORLD_OLYMPUS_COLISEUM:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoCol, NULL);
         break;
-    case 8:
+    case WORLD_HOLLOW_BASTION:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHlw, NULL);
         break;
-    case 1:
+    case WORLD_AGRABAH:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAgr, NULL);
         break;
-    case 9:
+    case WORLD_DESTINY_ISLANDS:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoDil, NULL);
         break;
-    case 10:
+    case WORLD_TRAVERSE_TOWN:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTvt, NULL);
         break;
     case 0:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoPoo, NULL);
         break;
-    case 11:
+    case WORLD_TWILIGHT_TOWN:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTt, NULL);
         break;
-    case 12:
+    case WORLD_CASTLE_OBLIVION:
         sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoBks, NULL);
         break;
     default:

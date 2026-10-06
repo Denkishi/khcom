@@ -143,6 +143,6 @@ const EventSequenceDef gEvent061 = {
     { 0, 0 },
     65535,
     0,
-    12,
+    WORLD_CASTLE_OBLIVION,
     255,
 };

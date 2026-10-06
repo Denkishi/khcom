@@ -2027,35 +2027,35 @@ void SetPooSoraAnimation(PooSoraWork* work, s32 animAction, u16 flags) {
     s32 dir;
 
     switch (gPooActor.angle) {
-    case 0x2D:
+    case FLD_ANGLE_UP_RIGHT:
         dir = 4;
         work->flags |= POO_SORA_FLAG_FLIP_X;
         break;
-    case 0x40:
+    case FLD_ANGLE_RIGHT:
         dir = 3;
         work->flags |= POO_SORA_FLAG_FLIP_X;
         break;
-    case 0x53:
+    case FLD_ANGLE_DOWN_RIGHT:
         dir = 2;
         work->flags |= POO_SORA_FLAG_FLIP_X;
         break;
-    case 0x80:
+    case FLD_ANGLE_DOWN:
         dir = 1;
         work->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
-    case 0xAD:
+    case FLD_ANGLE_DOWN_LEFT:
         dir = 2;
         work->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
-    case 0xC0:
+    case FLD_ANGLE_LEFT:
         dir = 3;
         work->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
-    case 0xD3:
+    case FLD_ANGLE_UP_LEFT:
         dir = 4;
         work->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
-    case 0x00:
+    case FLD_ANGLE_UP:
     default:
         dir = 0;
         work->flags &= ~POO_SORA_FLAG_FLIP_X;
@@ -2077,20 +2077,20 @@ void SetPooSoraAttackPoint(PooActor* actor) {
     s32 y;
 
     switch (actor->angle) {
-    case 0x2D:
-    case 0xD3:
+    case FLD_ANGLE_UP_RIGHT:
+    case FLD_ANGLE_UP_LEFT:
         x = actor->pos.x + gSineTable[actor->angle] * 12;
         y = actor->pos.y + -gSineTable[actor->angle + 0x40] * 12;
         break;
-    case 0x40:
-    case 0xC0:
+    case FLD_ANGLE_RIGHT:
+    case FLD_ANGLE_LEFT:
         x = actor->pos.x + gSineTable[actor->angle] * 27;
         y = actor->pos.y + -gSineTable[actor->angle + 0x40] * 27;
         break;
-    case 0x00:
-    case 0x53:
-    case 0x80:
-    case 0xAD:
+    case FLD_ANGLE_UP:
+    case FLD_ANGLE_DOWN_RIGHT:
+    case FLD_ANGLE_DOWN:
+    case FLD_ANGLE_DOWN_LEFT:
     default:
         x = actor->pos.x + gSineTable[actor->angle] * 20;
         y = actor->pos.y + -gSineTable[actor->angle + 0x40] * 20;
@@ -2381,7 +2381,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
 
         if (work->anim.timer == 0) {
             switch (actor->angle) {
-            case 0xAD:
+            case FLD_ANGLE_DOWN_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.x -= 0x500;
@@ -2396,7 +2396,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
                 }
 
                 break;
-            case 0x53:
+            case FLD_ANGLE_DOWN_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.x += 0x500;
@@ -2411,7 +2411,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
                 }
 
                 break;
-            case 0xD3:
+            case FLD_ANGLE_UP_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.x -= 0x500;
@@ -2426,7 +2426,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
                 }
 
                 break;
-            case 0x2D:
+            case FLD_ANGLE_UP_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.x += 0x500;
@@ -2441,7 +2441,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
                 }
 
                 break;
-            case 0x80:
+            case FLD_ANGLE_DOWN:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.x -= 0x300;
@@ -2460,7 +2460,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
                 }
 
                 break;
-            case 0x40:
+            case FLD_ANGLE_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.x += 0x700;
@@ -2475,7 +2475,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
                 }
 
                 break;
-            case 0xC0:
+            case FLD_ANGLE_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.x -= 0x700;
@@ -2490,7 +2490,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
                 }
 
                 break;
-            case 0:
+            case FLD_ANGLE_UP:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     actor->pos.y -= 0x400;
@@ -2517,22 +2517,22 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
 
         if (AnimIsFinished(&work->anim)) {
             switch (actor->angle) {
-            case 0xAD:
+            case FLD_ANGLE_DOWN_LEFT:
                 actor->pos.x -= 0x200;
                 actor->pos.y += 0x200;
                 break;
-            case 0x53:
+            case FLD_ANGLE_DOWN_RIGHT:
                 actor->pos.x += 0x200;
                 actor->pos.y += 0x200;
                 break;
-            case 0xD3:
-            case 0x2D:
+            case FLD_ANGLE_UP_LEFT:
+            case FLD_ANGLE_UP_RIGHT:
                 actor->pos.y -= 0x400;
                 break;
-            case 0x80:
+            case FLD_ANGLE_DOWN:
                 actor->pos.y += 0x200;
                 break;
-            case 0:
+            case FLD_ANGLE_UP:
                 actor->pos.y -= 0x200;
                 break;
             }
@@ -4657,19 +4657,19 @@ void SetPooTiggerrooAnimation(PooTiggerWork* work, u16 flags) {
 
     if (work->mode == POO_TIGGER_MODE_HOP) {
         switch (work->heading) {
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             animIndex = 2;
             work->flipped = FALSE;
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             animIndex = 2;
             work->flipped = TRUE;
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             animIndex = 3;
             work->flipped = FALSE;
             break;
-        case 0x00:
+        case FLD_ANGLE_UP:
         default:
             animIndex = 3;
             work->flipped = TRUE;
@@ -4696,19 +4696,19 @@ void SetPooTiggerAnimation(PooTiggerWork* work, u16 flags) {
         animIndex = 1;
     } else if (work->mode == POO_TIGGER_MODE_HOP) {
         switch (work->heading) {
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             animIndex = 2;
             work->flipped = FALSE;
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             animIndex = 2;
             work->flipped = TRUE;
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             animIndex = 3;
             work->flipped = FALSE;
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
         default:
             animIndex = 3;
             work->flipped = TRUE;
@@ -4754,17 +4754,17 @@ u16 GetPooTiggerAnimDuration(PooTiggerWork* work) {
 void StartPooTiggerHop(PooTiggerWork* work) {
     work->hopTimer = GetPooTiggerAnimDuration(work);
 
-    if (work->heading == 0xAD) {
+    if (work->heading == FLD_ANGLE_DOWN_LEFT) {
         work->x = gPooTiggerHopCorners[0];
         work->y = gPooTiggerHopCorners[1];
         work->targetX = gPooTiggerHopCorners[2];
         work->targetY = gPooTiggerHopCorners[3];
-    } else if (work->heading == 0x53) {
+    } else if (work->heading == FLD_ANGLE_DOWN_RIGHT) {
         work->x = gPooTiggerHopCorners[2];
         work->y = gPooTiggerHopCorners[3];
         work->targetX = gPooTiggerHopCorners[4];
         work->targetY = gPooTiggerHopCorners[5];
-    } else if (work->heading == 0x2D) {
+    } else if (work->heading == FLD_ANGLE_UP_RIGHT) {
         work->x = gPooTiggerHopCorners[4];
         work->y = gPooTiggerHopCorners[5];
         work->targetX = gPooTiggerHopCorners[6];
@@ -4804,7 +4804,7 @@ void task_poo_tigger_0(PooTiggerWork* work) {
     u8 i;
 
     work->mode = POO_TIGGER_MODE_HOP;
-    work->heading = 0xAD;
+    work->heading = FLD_ANGLE_DOWN_LEFT;
     work->isTigger = TRUE;
     work->palette = NULL;
     maxBytes = 0;
@@ -4846,17 +4846,17 @@ u8 task_poo_tiggerroo_1(PooTiggerWork* work) {
             }
         } else {
             switch (work->heading) {
-            case 0xAD:
-                work->heading = 0x53;
+            case FLD_ANGLE_DOWN_LEFT:
+                work->heading = FLD_ANGLE_DOWN_RIGHT;
                 break;
-            case 0x53:
-                work->heading = 0x2D;
+            case FLD_ANGLE_DOWN_RIGHT:
+                work->heading = FLD_ANGLE_UP_RIGHT;
                 break;
-            case 0x2D:
-                work->heading = 0xD3;
+            case FLD_ANGLE_UP_RIGHT:
+                work->heading = FLD_ANGLE_UP_LEFT;
                 break;
-            case 0xD3:
-                work->heading = 0xAD;
+            case FLD_ANGLE_UP_LEFT:
+                work->heading = FLD_ANGLE_DOWN_LEFT;
                 break;
             }
 
@@ -4964,7 +4964,7 @@ void task_poo_tiggerroo_0(PooTiggerWork* work) {
     PooShadowArgs args;
 
     work->mode = POO_TIGGER_MODE_HOP;
-    work->heading = 0x2D;
+    work->heading = FLD_ANGLE_UP_RIGHT;
     work->isTigger = FALSE;
     work->palette = NULL;
     work->tiles = NULL;

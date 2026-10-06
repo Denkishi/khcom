@@ -2167,7 +2167,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* card) {
 
     key = GetEventKey(0);
 
-    if (key->kind != 0xFF) {
+    if (key->kind != MAP_CARD_NONE) {
         if (key->kind != card->kind) {
             return 0;
         }

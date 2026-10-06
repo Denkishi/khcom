@@ -687,7 +687,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                 *(PrizeCardArgs*)args = work->args;
                 args[8] = PickPrizeMapCardKindForWorld(gGameState.world, 1);
 
-                if (args[8] != 0xFFFF) {
+                if (args[8] != MAP_CARD_ID_NONE) {
                     CreatePrizeMapCardTask(&work->tasks, args);
                 } else {
                     return 0;
@@ -696,7 +696,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                 *(PrizeCardArgs*)args = work->args;
                 args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
 
-                if (args[8] != 0xFFFF) {
+                if (args[8] != MAP_CARD_ID_NONE) {
                     CreatePrizeMapCardTask(&work->tasks, args);
                 } else {
                     return 0;
@@ -714,7 +714,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                         if (CountRegularMapCards() <= 98) {
                             args[8] = MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, GetRandom() % 10);
                         } else {
-                            args[8] = 0xFFFF;
+                            args[8] = MAP_CARD_ID_NONE;
                         }
 #else
                         args[8] = MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, GetRandom() % 10);
@@ -724,7 +724,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                         args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                     }
 
-                    if (args[8] != 0xFFFF) {
+                    if (args[8] != MAP_CARD_ID_NONE) {
                         CreatePrizeMapCardTask(&work->tasks, args);
                     } else {
                         return 0;
@@ -733,7 +733,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                     *(PrizeCardArgs*)args = work->args;
                     args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
 
-                    if (args[8] != 0xFFFF) {
+                    if (args[8] != MAP_CARD_ID_NONE) {
                         CreatePrizeMapCardTask(&work->tasks, args);
                     } else {
                         return 0;
@@ -776,7 +776,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                     args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                 }
 
-                if (args[8] != 0xFFFF) {
+                if (args[8] != MAP_CARD_ID_NONE) {
                     CreatePrizeMapCardTask(&work->tasks, args);
                 } else {
                     return 0;
@@ -936,7 +936,7 @@ u16 PickPrizeMapCardKind(const PrizeMapCardGroup* groups, u16 groupCount) {
             }
         }
     } else {
-        return 0xFFFF;
+        return MAP_CARD_ID_NONE;
     }
 }
 
@@ -980,7 +980,7 @@ u16 PickPrizeMapCardForWorld(u16 world, s32 b) {
         base = PickPrizeMapCardKind(tiles, sSoraPrizeMapCardGroups[world].size);
     }
 
-    if (base != 0xFFFF) {
+    if (base != MAP_CARD_ID_NONE) {
         do {
             off = PickPrizeMapCardValue();
         } while (gMapCardCounts[base + off] == 9);
@@ -1680,7 +1680,7 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
 
     CpuFill32(0, card, sizeof(EventKeyCard));
 
-    if (key->kind != 255) {
+    if (key->kind != MAP_CARD_NONE) {
         def = &gMapCardDefs[key->kind * 10];
         backDef = &gMapCardBackDefs[def->backIndex];
         card->sprite.tiles = LoadObjTiles(def->tiles, def->tilesSize);

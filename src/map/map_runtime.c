@@ -30,6 +30,7 @@
 #include "text_types.h"
 #include "event_ids.h"
 #include "jiminy_records_index_data.h"
+#include "card_ids.h"
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
@@ -565,7 +566,7 @@ u8 GetEventStepKeyKind() {
     list += *event;
     key = list->keys;
 
-    while (key->kind == 0xFF) {
+    while (key->kind == MAP_CARD_NONE) {
         key++;
     }
 
@@ -577,7 +578,7 @@ u8 GetCurrentEventDoorKeyKind() {
         return GetEventKey(0)->kind;
     }
 
-    return 0xFF;
+    return MAP_CARD_NONE;
 }
 
 u8 SelectCurrentEventDoor() {

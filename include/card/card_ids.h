@@ -287,7 +287,8 @@ enum MapCardKind {
     MAP_CARD_KEY_OF_BEGINNINGS,
     MAP_CARD_KEY_OF_GUIDANCE,
     MAP_CARD_KEY_TO_TRUTH,
-    MAP_CARD_KEY_TO_REWARDS
+    MAP_CARD_KEY_TO_REWARDS,
+    MAP_CARD_NONE = 0xFF
 };
 
 enum MapCardGroup {
@@ -320,5 +321,6 @@ enum MapCardGroup {
 };
 
 #define MAP_CARD_ID(group, value) ((group) * 10 + (value))
+#define MAP_CARD_ID_NONE 0xFFFF
 
 #endif

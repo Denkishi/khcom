@@ -1562,7 +1562,7 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* task) {
     work->mosaicTimer++;
     work->frame++;
 
-    if (work->args->closeMode != 0) {
+    if (work->args->closeMode != SELMAP_EVENT_KEY_CLOSE_NONE) {
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateSelmapEventKeyClose);
     }
 
@@ -1604,8 +1604,8 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
     s32 i;
 
     switch (work->args->closeMode) {
-    case 0:
-    case 2:
+    case SELMAP_EVENT_KEY_CLOSE_NONE:
+    case SELMAP_EVENT_KEY_CLOSE_CANCELLED:
         if (work->mosaicX == 15) {
             return;
         }

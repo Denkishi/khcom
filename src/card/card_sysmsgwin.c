@@ -94,7 +94,7 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
     work->shownChars = work->charCount;
 
     switch (work->args.mode) {
-    case 0:
+    case CARD_MESSAGE_MODE_BG_WINDOW:
         work->tiles3 = AllocObjTiles(0x40, NULL);
         work->palette = LoadObjPalette(gBStatesPalette, 32);
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -104,10 +104,10 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
         work->gfx4 = AnimGetGfx(&work->anim2);
         SetBgPriority(work->args.bg, 0);
         break;
-    case 1:
+    case CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT:
         SetBgPriority(work->args.bg, 0);
         break;
-    case 2:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW:
         work->tiles3 = AllocObjTiles(0x40, NULL);
         work->palette = LoadObjPalette(gBStatesPalette, 32);
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -125,8 +125,8 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
     void* pal;
 
     switch (work->args.mode) {
-    case 0:
-    case 1:
+    case CARD_MESSAGE_MODE_BG_WINDOW:
+    case CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT:
         pal = &gUnk_050001C0[0x20];
         LoadBgTiles(work->args.bg, gSysMsgWinTiles, 0x140);
         LoadBgMap(work->args.bg, gSysMsgWinMap, 0x800);
@@ -147,8 +147,8 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
         }
 
         break;
-    case 2:
-    case 3:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         switch (work->messageDef->positionIndex) {
         case 0:
         case 2:
@@ -177,12 +177,12 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
     }
 
     switch (work->args.mode) {
-    case 0:
-    case 2:
+    case CARD_MESSAGE_MODE_BG_WINDOW:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW:
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinWaitInput);
         break;
-    case 1:
-    case 3:
+    case CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinPersistent);
         break;
     }
@@ -316,8 +316,8 @@ void sysmsgwin_2(SysMsgWinWork* work) {
     DrawCardMsgGlyphs(work->shownChars);
 
     switch (work->args.mode) {
-    case 2:
-    case 3:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         if (work->tiles2 != NULL) {
             if (work->fallbackFrame != 0) {
                 DrawSprite(work->frameX >> 8, work->frameY >> 8, gSysMsgWinFallbackFrames[0],
@@ -353,7 +353,7 @@ void sysmsgwin_2(SysMsgWinWork* work) {
 }
 
 void sysmsgwin_3(SysMsgWinWork* work) {
-    if (work->args.mode <= 1) {
+    if (work->args.mode <= CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT) {
         DisableBg(work->args.bg);
     }
 
@@ -555,8 +555,8 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
     void* pal;
 
     switch (work->args.mode) {
-    case 0:
-    case 1:
+    case CARD_MESSAGE_MODE_BG_WINDOW:
+    case CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT:
         pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
         LoadBgTiles(work->args.bg, gConfirmWinTiles, 0x140);
         LoadBgMap(work->args.bg, gConfirmWinMap, 0x800);
@@ -577,8 +577,8 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
         }
 
         break;
-    case 2:
-    case 3:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         switch (work->messageDef->positionIndex) {
         case 0:
         case 2:
@@ -598,7 +598,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
         break;
     }
 
-    if (work->args.mode == 0 || work->args.mode == 2) {
+    if (work->args.mode == CARD_MESSAGE_MODE_BG_WINDOW || work->args.mode == CARD_MESSAGE_MODE_SPRITE_WINDOW) {
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoiceSetup);
     }
 
@@ -713,8 +713,8 @@ void sysmsgwinChoice_2(SysMsgWinWork* work) {
     DrawCardMsgGlyphs(work->shownChars);
 
     switch (work->args.mode) {
-    case 2:
-    case 3:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         if (work->tiles2 != NULL) {
             DrawSprite(work->frameX >> 8, work->frameY >> 8, gDialogBoxFrames[0], work->tiles2, work->palette4, NULL, 0, 20);
         }
@@ -735,7 +735,7 @@ void sysmsgwinChoice_2(SysMsgWinWork* work) {
 }
 
 void sysmsgwinChoice_3(SysMsgWinWork* work) {
-    if (work->args.mode <= 1) {
+    if (work->args.mode <= CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT) {
         DisableBg(work->args.bg);
     }
 

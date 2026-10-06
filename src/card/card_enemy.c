@@ -62,7 +62,7 @@ void card_enemy_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->tiles2 = NULL;
     work->tiles3 = NULL;
     work->palette = NULL;
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->args = *args;
     work->flags = 0;
     work->priority = 0x50;
@@ -231,7 +231,7 @@ u8 EnemyCardDeal(CardDisplayWork* work, void* task) {
 }
 
 u8 EnemyCardClosed(CardDisplayWork* work, void* task) {
-    if (work->command == 7) {
+    if (work->command == CARD_DISP_COMMAND_REMOVE) {
         return 0;
     }
 
@@ -301,7 +301,7 @@ u8 EnemyCardShrinkAway(CardDisplayWork* work) {
 }
 
 u8 EnemyCardFlyOff(CardDisplayWork* work) {
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->y -= work->ringRadius;
     work->ringRadius -= (s16)work->timer;
     work->timer++;
@@ -360,17 +360,17 @@ void EnemyCardSlideOut(CardDisplayWork* work, void* task) {
 
 void DispatchEnemyCardCommand(CardDisplayWork* work, void* task) {
     switch (work->command) {
-    case 5:
+    case CARD_DISP_COMMAND_PLAY:
         work->timer = 16;
         work->priority -= 4;
         SetTaskUpdate(task, (TaskUpdateFunc)EnemyUsecard_1);
         break;
-    case 6:
+    case CARD_DISP_COMMAND_STOCK:
         work->timer = 8;
         work->priority -= 4;
         SetTaskUpdate(task, (TaskUpdateFunc)EnemyStockMoveToSlot);
         break;
-    case 8:
+    case CARD_DISP_COMMAND_FLY_OFF:
         work->priority -= 4;
         work->ringRadius = 0x500;
         work->timer = 0x100;
@@ -378,18 +378,18 @@ void DispatchEnemyCardCommand(CardDisplayWork* work, void* task) {
         work->spinSpeed = GetRandom() % 5 + 254;
         SetTaskUpdate(task, (TaskUpdateFunc)EnemyCardFlyOff);
         break;
-    case 7:
+    case CARD_DISP_COMMAND_REMOVE:
         work->ringRadius = 0x500;
         work->timer = 0x100;
         work->ringAngle = (u16)(GetRandom() % 33) - 16;
         work->spinSpeed = GetRandom() % 5 + 254;
         SetTaskUpdate(task, (TaskUpdateFunc)EnemyCardFlyOff);
         break;
-    case 9:
+    case CARD_DISP_COMMAND_SLIDE_OUT:
         work->spinSpeed = 0;
         work->priority -= 4;
         SetTaskUpdate(task, (TaskUpdateFunc)EnemyCardSlideOut);
-        work->command = 0;
+        work->command = CARD_DISP_COMMAND_NONE;
         break;
     }
 }
@@ -418,7 +418,7 @@ u8 EnemyStockMoveToSlot(CardDisplayWork* work, void* task) {
         work->flags |= CARD_DISP_FLAG_SETTLED;
     }
 
-    if (work->command == 5) {
+    if (work->command == CARD_DISP_COMMAND_PLAY) {
         if (!(gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) && work->stockIndex == 0) {
             gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         }
@@ -442,7 +442,7 @@ u8 EnemyStockMoveToSlot(CardDisplayWork* work, void* task) {
 }
 
 u8 EnemyCardBreakFall(CardDisplayWork* work, void* task) {
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->y -= work->ringRadius;
     work->ringRadius -= (s16)work->timer >> 1;
     work->timer++;
@@ -497,7 +497,7 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->palette2 = NULL;
     work->palette = NULL;
     work->children = NULL;
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->args = *args;
     work->flags = 0;
     work->priority = 50;
@@ -576,7 +576,7 @@ void EnemyUsecardByIndexInit(CardDisplayWork* work, CardDisplayArgs* args) {
     work->tiles2 = NULL;
     work->tiles3 = NULL;
     work->palette = NULL;
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->args = *args;
     work->flags = 0;
     work->priority = 50;
@@ -619,7 +619,7 @@ void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* args) {
     work->tiles2 = NULL;
     work->tiles3 = NULL;
     work->palette = NULL;
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->args = *args;
     work->flags = 0;
     work->priority = 50;

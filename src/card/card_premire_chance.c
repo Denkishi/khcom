@@ -50,7 +50,7 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     UpdatePremireChanceCardPos(work);
     ListNodeInit(&work->node, &gCardListWork->cards, work);
     ListPoolAppend(&work->node, &gCardListWork->cards);
-    work->state = 0;
+    work->state = PREMIRE_CHANCE_CARD_STATE_DEAL;
     work->scaleX = 0x100;
     work->scaleY = 0x100;
     work->x2 = 0;
@@ -91,13 +91,13 @@ u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* task) {
     }
 
     switch (work->state) {
-    case 2:
+    case PREMIRE_CHANCE_CARD_STATE_TO_CENTER:
         gCardListWork->unk_29 = 0;
         work->steps = 8;
         fn = UpdatePremireChanceCardToCenter;
         SetTaskUpdate(task, (TaskUpdateFunc)fn);
         return fn(work, task);
-    case 3:
+    case PREMIRE_CHANCE_CARD_STATE_MOVE_AWAY:
         work->steps = 10;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceCardMoveAway);
         break;
@@ -122,7 +122,7 @@ u8 PremireChanceCard_1(PremireChanceCardWork* work, void* task) {
     }
 
     if (work->steps == 0) {
-        work->state = 1;
+        work->state = PREMIRE_CHANCE_CARD_STATE_SPIN;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceCardSpin);
     }
 
@@ -132,7 +132,7 @@ u8 PremireChanceCard_1(PremireChanceCardWork* work, void* task) {
 void PremireChanceCard_2(PremireChanceCardWork* work) {
     ObjAffine* affine;
 
-    if (work->state == 0xFF) {
+    if (work->state == PREMIRE_CHANCE_CARD_STATE_HIDDEN) {
         return;
     }
 
@@ -152,7 +152,7 @@ void PremireChanceCard_2(PremireChanceCardWork* work) {
         }
     }
 
-    if (work->state == 2 && work->tiles4 != NULL) {
+    if (work->state == PREMIRE_CHANCE_CARD_STATE_TO_CENTER && work->tiles4 != NULL) {
         DrawSprite(work->x + work->x2, work->y + work->y2, work->gfx, work->tiles4, work->palette3, NULL, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[work->position] + 67);
     }

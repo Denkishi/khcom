@@ -91,6 +91,12 @@ void WORLDSELECT_2() {
     TaskPoolDestroy(&sModeWorldselectTasks);
 }
 
+enum MapSelectPageScroll {
+    MAP_SELECT_PAGE_SCROLL_NONE,
+    MAP_SELECT_PAGE_SCROLL_NEXT,
+    MAP_SELECT_PAGE_SCROLL_PREV
+};
+
 void MapSelect_0(MapSelectWork* work, u8* status) {
     s32 n;
 
@@ -100,7 +106,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     *status = 0;
     work->messageTimer = 0;
     work->cancelled = 0;
-    work->pageScroll = 0;
+    work->pageScroll = MAP_SELECT_PAGE_SCROLL_NONE;
     work->card2 = NULL;
     sMapCardDelivered = 0;
     work->valueColumn = 0;
@@ -286,7 +292,7 @@ u8 UpdateMapSelectSetup(MapSelectWork* work, void* task) {
         }
 
         work->eventKeyArgs.palette = work->palette3;
-        work->eventKeyArgs.closeMode = 0;
+        work->eventKeyArgs.closeMode = SELMAP_EVENT_KEY_CLOSE_NONE;
         work->eventKey =
             TaskCreate(&work->tasks, &gTaskDescSELMAPEVKEY, &work->eventKeyArgs)->work;
     }
@@ -679,7 +685,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
                                 work->barSteps = 16;
                                 work->lastPage = 0;
                                 work->page = 0;
-                                work->eventKeyArgs.closeMode = 1;
+                                work->eventKeyArgs.closeMode = SELMAP_EVENT_KEY_CLOSE_ACCEPTED;
                                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectClose);
                                 return 1;
                             }
@@ -724,7 +730,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
             sSelectedMapCard = NULL;
             work->lastPage = 0;
             work->page = 0;
-            work->eventKeyArgs.closeMode = 2;
+            work->eventKeyArgs.closeMode = SELMAP_EVENT_KEY_CLOSE_CANCELLED;
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
@@ -734,7 +740,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
 
     HandleMapSelectKindCursor(work);
 
-    if (work->pageScroll == 0) {
+    if (work->pageScroll == MAP_SELECT_PAGE_SCROLL_NONE) {
         if (work->card != work->prevCard) {
             if (work->card != NULL) {
                 work->textSlotCounts[0] = LoadTextSlots(GetRoomName(gMapCardDefs[work->card->args.baseCardId].kind), work->textSlots);
@@ -956,7 +962,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
     MapcardWork* c;
     s8 cnt;
 
-    if (work->pageScroll != 0) {
+    if (work->pageScroll != MAP_SELECT_PAGE_SCROLL_NONE) {
         return;
     }
 
@@ -1024,7 +1030,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
 
         if (found != NULL) {
             work->card2 = found;
-            work->pageScroll = 1;
+            work->pageScroll = MAP_SELECT_PAGE_SCROLL_NEXT;
 
             if (a != NULL) {
                 do {
@@ -1067,7 +1073,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
 
         if (ListPoolPrev(&a->node) != NULL) {
             work->card2 = ListPoolPrev(&a->node);
-            work->pageScroll = 2;
+            work->pageScroll = MAP_SELECT_PAGE_SCROLL_PREV;
 
             if (b != NULL) {
                 c = b;
@@ -1110,9 +1116,9 @@ void ApplyMapSelectPageScroll(MapSelectWork* work) {
     s8 i;
 
     switch (work->pageScroll) {
-    case 0:
+    case MAP_SELECT_PAGE_SCROLL_NONE:
         break;
-    case 1:
+    case MAP_SELECT_PAGE_SCROLL_NEXT:
         node = work->card2;
         i = 0;
 
@@ -1126,7 +1132,7 @@ void ApplyMapSelectPageScroll(MapSelectWork* work) {
             node = ListPoolNext(&node->node);
         }
 
-        work->pageScroll = 0;
+        work->pageScroll = MAP_SELECT_PAGE_SCROLL_NONE;
         SelectNearestMapSelectCard(work);
 
         if (work->card != NULL) {
@@ -1136,7 +1142,7 @@ void ApplyMapSelectPageScroll(MapSelectWork* work) {
 
         work->page++;
         break;
-    case 2:
+    case MAP_SELECT_PAGE_SCROLL_PREV:
         node = work->card2;
         i = 5;
 
@@ -1150,7 +1156,7 @@ void ApplyMapSelectPageScroll(MapSelectWork* work) {
             node = ListPoolPrev(&node->node);
         }
 
-        work->pageScroll = 0;
+        work->pageScroll = MAP_SELECT_PAGE_SCROLL_NONE;
         SelectNearestMapSelectCard(work);
 
         if (work->card != NULL) {
@@ -2266,7 +2272,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* arg) {
     work->tiles3 = NULL;
     work->tiles5 = NULL;
     work->palette = NULL;
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->args = *arg;
     work->flags = 0;
     work->timer = 16;
@@ -2553,7 +2559,7 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
 }
 
 u8 UpdateReloadGageIdle(CardDisplayWork* work, void* task) {
-    if (work->command == 7) {
+    if (work->command == CARD_DISP_COMMAND_REMOVE) {
         return 0;
     }
 

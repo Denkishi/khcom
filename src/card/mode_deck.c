@@ -23,12 +23,13 @@
 #include "types.h"
 #include "mode_sio.h"
 #include "sprite_palettes.h"
+#include "card.h"
 
 static TaskPool sModeDeckTasks;
 static u8 sModeDeckResult;
 
 void Mode_Deck_0() {
-    sModeDeckResult = 0;
+    sModeDeckResult = DECK_MENU_RESULT_NONE;
     TaskPoolInit(&sModeDeckTasks, 1);
 
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
@@ -52,7 +53,7 @@ void Mode_Deck_1() {
     TaskPoolUpdate(&sModeDeckTasks);
     TaskPoolDraw(&sModeDeckTasks);
 
-    if (sModeDeckResult == 7) {
+    if (sModeDeckResult == DECK_MENU_RESULT_RETURN_TO_MAP) {
         if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
@@ -62,7 +63,7 @@ void Mode_Deck_1() {
         }
     }
 
-    if (sModeDeckResult == 8) {
+    if (sModeDeckResult == DECK_MENU_RESULT_RETURN_TO_MENU) {
         if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
@@ -77,6 +78,15 @@ void Mode_Deck_2() {
     TaskPoolDestroy(&sModeDeckTasks);
 }
 
+enum MenuState {
+    MENU_STATE_SLIDE_IN,
+    MENU_STATE_MAIN,
+    MENU_STATE_SUBMENU,
+    MENU_STATE_UNUSED,
+    MENU_STATE_EXIT,
+    MENU_STATE_CLOSE
+};
+
 void menu_0(MenuWork* work) {
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
@@ -84,7 +94,7 @@ void menu_0(MenuWork* work) {
     work->x = 0xF000;
     work->y = 0x4800;
     work->cursor = 0;
-    work->state = 0;
+    work->state = MENU_STATE_SLIDE_IN;
     work->tiles = LoadObjTiles(gMenuTiles, 0x2E80);
     work->palette = LoadObjPalette(gMenuPalette, 0x20);
     m4aSongNumStart(SONG_SYS_CANSEL);
@@ -92,19 +102,19 @@ void menu_0(MenuWork* work) {
 
 u8 menu_1(MenuWork* work) {
     switch (work->state) {
-    case 0:
+    case MENU_STATE_SLIDE_IN:
         work->x += (0xBC00 - work->x) >> 1;
 
         if ((work->x >> 8) == 0xBC) {
-            work->state = 1;
+            work->state = MENU_STATE_MAIN;
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            work->state = 4;
+            work->state = MENU_STATE_EXIT;
         }
 
         break;
-    case 1:
+    case MENU_STATE_MAIN:
         if (GetKeysRepeat() & DPAD_UP) {
             if (work->cursor != 0) {
                 work->cursor--;
@@ -128,14 +138,14 @@ u8 menu_1(MenuWork* work) {
         if (GetKeysPressed() & A_BUTTON) {
             switch (work->cursor) {
             case 0:
-                work->state = 2;
+                work->state = MENU_STATE_SUBMENU;
                 work->cursor = 6;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             case 2:
                 RequestFieldResume();
                 FadeStartOut(FADE_MODE_BLACK, 32);
-                work->state = 4;
+                work->state = MENU_STATE_EXIT;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 1:
@@ -150,12 +160,12 @@ u8 menu_1(MenuWork* work) {
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            work->state = 5;
+            work->state = MENU_STATE_CLOSE;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
 
         break;
-    case 2:
+    case MENU_STATE_SUBMENU:
         if (GetKeysRepeat() & DPAD_UP) {
             if (work->cursor > 6) {
                 work->cursor--;
@@ -177,7 +187,7 @@ u8 menu_1(MenuWork* work) {
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            work->state = 1;
+            work->state = MENU_STATE_MAIN;
             work->cursor = 0;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
@@ -186,30 +196,30 @@ u8 menu_1(MenuWork* work) {
             switch (work->cursor) {
             case 6:
                 work->cursor = 0;
-                work->state = 1;
+                work->state = MENU_STATE_MAIN;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 7:
                 work->cursor = 0;
-                work->state = 1;
+                work->state = MENU_STATE_MAIN;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 8:
                 work->cursor = 0;
-                work->state = 1;
+                work->state = MENU_STATE_MAIN;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 9:
                 RequestFieldResume();
                 FadeStartOut(FADE_MODE_BLACK, 32);
-                work->state = 4;
+                work->state = MENU_STATE_EXIT;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             }
         }
 
         break;
-    case 4:
+    case MENU_STATE_EXIT:
         work->x += (0x11800 - work->x) >> 1;
 
         if ((work->x >> 8) > 274) {
@@ -222,12 +232,12 @@ u8 menu_1(MenuWork* work) {
                     ModeRequest(&gModeAllmap, 0);
                 }
 
-                work->state = 5;
+                work->state = MENU_STATE_CLOSE;
             }
         }
 
         break;
-    case 5:
+    case MENU_STATE_CLOSE:
         work->x += (0x11800 - work->x) >> 1;
 
         if ((work->x >> 8) > 274) {
@@ -235,7 +245,7 @@ u8 menu_1(MenuWork* work) {
         }
 
         break;
-    case 3:
+    case MENU_STATE_UNUSED:
     default:
         break;
     }

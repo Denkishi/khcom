@@ -1158,7 +1158,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
             n = ListPoolFirst(&gCardListWork->cards);
 
             while (n != NULL) {
-                n->state |= 0xFF;
+                n->state |= PREMIRE_CHANCE_CARD_STATE_HIDDEN;
                 work->resultPending = 0;
                 n = ListPoolNext(&n->node);
             }
@@ -1226,7 +1226,7 @@ u8 Premire_Chance_1(PremireChanceWork* work, void* task) {
 
     n = ListPoolFirst(&gCardListWork->cards);
 
-    if (n != NULL && n->state == 1) {
+    if (n != NULL && n->state == PREMIRE_CHANCE_CARD_STATE_SPIN) {
         SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceSpin);
     }
 
@@ -1317,10 +1317,10 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
         while (n != NULL) {
             if (n->steps == 0) {
                 if (n->position == 3) {
-                    n->state = 2;
+                    n->state = PREMIRE_CHANCE_CARD_STATE_TO_CENTER;
                     ConvertActiveDeckCardToPremium(n->deckIndex);
                 } else {
-                    n->state = 3;
+                    n->state = PREMIRE_CHANCE_CARD_STATE_MOVE_AWAY;
                 }
 
                 work->resultPending = 0;

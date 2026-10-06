@@ -76,6 +76,22 @@ enum CardDisplayFlag {
     CARD_DISP_FLAG_STOCK_NAMED = 0x10000000
 };
 
+enum CardDisplayCommand {
+    CARD_DISP_COMMAND_NONE,
+    CARD_DISP_COMMAND_PLAY = 5,
+    CARD_DISP_COMMAND_STOCK,
+    CARD_DISP_COMMAND_REMOVE,
+    CARD_DISP_COMMAND_FLY_OFF,
+    CARD_DISP_COMMAND_SLIDE_OUT,
+    CARD_DISP_COMMAND_HEARTLESS,
+    CARD_DISP_COMMAND_GIMMICK
+};
+
+enum CardStockPhase {
+    CARD_STOCK_PHASE_RISE,
+    CARD_STOCK_PHASE_DROP
+};
+
 typedef struct CardDisplayWork {
     void* tiles;
     void* tiles2;
@@ -318,6 +334,13 @@ extern WorldSelAnim gWorldSelAnims[30];
 extern const s32 gSysmsgwinChoiceCursorX[];
 extern u8 gDeckClearConfirmText[];
 
+enum CardMessageMode {
+    CARD_MESSAGE_MODE_BG_WINDOW,
+    CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT,
+    CARD_MESSAGE_MODE_SPRITE_WINDOW,
+    CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT
+};
+
 typedef struct CardMessageArgs {
     u32 bg;
     u32 messageId : 16;
@@ -356,6 +379,14 @@ typedef struct DeckCard2Work {
     u8 premium;
 } DeckCard2Work;
 
+enum PremireChanceCardState {
+    PREMIRE_CHANCE_CARD_STATE_DEAL,
+    PREMIRE_CHANCE_CARD_STATE_SPIN,
+    PREMIRE_CHANCE_CARD_STATE_TO_CENTER,
+    PREMIRE_CHANCE_CARD_STATE_MOVE_AWAY,
+    PREMIRE_CHANCE_CARD_STATE_HIDDEN = 0xFF
+};
+
 typedef struct PremireChanceCardWork {
     const CardDef* cardDef;
     const CardBack* cardBack;
@@ -386,6 +417,43 @@ typedef struct PremireChanceCardWork {
     u16 y2;
     u8 premium;
 } PremireChanceCardWork;
+
+enum DeckMenuView {
+    DECK_MENU_VIEW_DECK_GRID,
+    DECK_MENU_VIEW_DECK_SELECT,
+    DECK_MENU_VIEW_DECK_FILTER,
+    DECK_MENU_VIEW_COMMANDS,
+    DECK_MENU_VIEW_ADD_GRID,
+    DECK_MENU_VIEW_ADD_VALUE_SELECT,
+    DECK_MENU_VIEW_ADD_FILTER,
+    DECK_MENU_VIEW_REMOVE_GRID,
+    DECK_MENU_VIEW_REMOVE_FILTER,
+    DECK_MENU_VIEW_DELETE_GRID,
+    DECK_MENU_VIEW_DELETE_FILTER,
+    DECK_MENU_VIEW_DELETE_VALUE_SELECT,
+    DECK_MENU_VIEW_DELETE_PROMPT,
+    DECK_MENU_VIEW_KEYBOARD,
+    DECK_MENU_VIEW_CLEAR_PROMPT = 15
+};
+
+enum DeckMenuMode {
+    DECK_MENU_MODE_NONE,
+    DECK_MENU_MODE_REMOVE,
+    DECK_MENU_MODE_ADD,
+    DECK_MENU_MODE_DELETE
+};
+
+enum DeckMenuResult {
+    DECK_MENU_RESULT_NONE,
+    DECK_MENU_RESULT_CLOSED = 6,
+    DECK_MENU_RESULT_RETURN_TO_MAP,
+    DECK_MENU_RESULT_RETURN_TO_MENU
+};
+
+enum DeckMenuSlideInStep {
+    DECK_MENU_SLIDE_IN_STEP_VERTICAL,
+    DECK_MENU_SLIDE_IN_STEP_HORIZONTAL
+};
 
 typedef struct DeckExchangeWork {
     ObjTiles* tiles;
@@ -1211,6 +1279,12 @@ typedef struct EventMapObjectDef {
     EventMapObjectPlacement* placements;
     u16 placementCount;
 } EventMapObjectDef;
+
+enum SelmapEventKeyCloseMode {
+    SELMAP_EVENT_KEY_CLOSE_NONE,
+    SELMAP_EVENT_KEY_CLOSE_ACCEPTED,
+    SELMAP_EVENT_KEY_CLOSE_CANCELLED
+};
 
 typedef struct SelmapEventKeyArgs {
     ObjPalette* palette;

@@ -58,15 +58,15 @@ const StockKeys gSoraEmptyKeys = {
 };
 
 void RequestSoraKingReload0() {
-    sSoraCardReloadRequest = 14;
+    sSoraCardReloadRequest = CARD_REQUEST_KING_RELOAD_0;
 }
 
 void RequestSoraKingReload1() {
-    sSoraCardReloadRequest = 15;
+    sSoraCardReloadRequest = CARD_REQUEST_KING_RELOAD_1;
 }
 
 void RequestSoraKingReload2() {
-    sSoraCardReloadRequest = 16;
+    sSoraCardReloadRequest = CARD_REQUEST_KING_RELOAD_2;
 }
 
 u8 GetSoraListIndex() {
@@ -74,93 +74,93 @@ u8 GetSoraListIndex() {
 }
 
 void RequestSoraPotion() {
-    sSoraCardReloadRequest = 17;
+    sSoraCardReloadRequest = CARD_REQUEST_POTION;
 }
 
 void RequestSoraHiPotion() {
-    sSoraCardReloadRequest = 18;
+    sSoraCardReloadRequest = CARD_REQUEST_HI_POTION;
 }
 
 void RequestSoraMegaPotion() {
-    sSoraCardReloadRequest = 19;
+    sSoraCardReloadRequest = CARD_REQUEST_MEGA_POTION;
 }
 
 void RequestSoraEther() {
-    sSoraCardReloadRequest = 21;
+    sSoraCardReloadRequest = CARD_REQUEST_ETHER;
 }
 
 void RequestSoraMegaEther() {
-    sSoraCardReloadRequest = 22;
+    sSoraCardReloadRequest = CARD_REQUEST_MEGA_ETHER;
 }
 
 void RequestSoraElixir() {
-    sSoraCardReloadRequest = 23;
+    sSoraCardReloadRequest = CARD_REQUEST_ELIXIR;
 }
 
 void RequestSoraMegalixir() {
-    sSoraCardReloadRequest = 24;
+    sSoraCardReloadRequest = CARD_REQUEST_MEGALIXIR;
 }
 
 void RequestSoraRemoveItemCards() {
-    sSoraCardReloadRequest = 20;
+    sSoraCardReloadRequest = CARD_REQUEST_REMOVE_ITEM_CARDS;
 }
 
 void RequestSoraNextCard() {
-    sSoraCardRequest = 1;
+    sSoraCardRequest = CARD_REQUEST_NEXT_CARD;
 }
 
 void RequestSoraPrevCard() {
-    sSoraCardRequest = 2;
+    sSoraCardRequest = CARD_REQUEST_PREV_CARD;
 }
 
 void RequestSoraCardUse() {
-    sSoraCardRequest = 3;
+    sSoraCardRequest = CARD_REQUEST_USE_CARD;
 }
 
 void RequestSoraCardStock() {
-    sSoraCardRequest = 4;
+    sSoraCardRequest = CARD_REQUEST_STOCK_CARD;
 }
 
 void RequestSoraStockUse() {
-    sSoraCardRequest = 5;
+    sSoraCardRequest = CARD_REQUEST_USE_STOCK;
 }
 
 void func_08076354() {
-    sSoraCardRequest = 8;
+    sSoraCardRequest = CARD_REQUEST_NOP;
 }
 
 void RequestOpenCards() {
-    sSoraCardRequest = 6;
+    sSoraCardRequest = CARD_REQUEST_OPEN_CARDS;
     RequestOpenRikuCards();
 }
 
 void RequestCloseCards() {
-    sSoraCardRequest = 7;
+    sSoraCardRequest = CARD_REQUEST_CLOSE_CARDS;
     RequestCloseRikuCards();
 }
 
 void RequestCycleSoraCardList() {
-    sSoraCardRequest = 9;
+    sSoraCardRequest = CARD_REQUEST_CYCLE_LIST;
 }
 
 void RequestSwitchSoraCardList() {
-    sSoraCardRequest = 10;
+    sSoraCardRequest = CARD_REQUEST_SWITCH_LIST;
 }
 
 void RequestSoraAutoCycle60() {
-    sSoraCardRequest = 11;
+    sSoraCardRequest = CARD_REQUEST_AUTO_CYCLE_60;
 }
 
 void RequestSoraAutoCycle180() {
-    sSoraCardRequest = 12;
+    sSoraCardRequest = CARD_REQUEST_AUTO_CYCLE_180;
 }
 
 void RequestSoraAutoCycle300() {
-    sSoraCardRequest = 13;
+    sSoraCardRequest = CARD_REQUEST_AUTO_CYCLE_300;
 }
 
 void ClearSoraCardRequest() {
-    sSoraCardRequest = 0;
+    sSoraCardRequest = CARD_REQUEST_NONE;
 }
 
 u8 IsSoraReloadCardSelected() {
@@ -580,8 +580,8 @@ static void cardbattle_0(CardBattleWork* work) {
     ListPoolInit(&work->cardDisplays[2]);
     ListPoolInit(&work->cardDisplays[3]);
     CreateSoraCardRing(work, work->listIndex);
-    sSoraCardRequest = 0;
-    sSoraCardReloadRequest = 0;
+    sSoraCardRequest = CARD_REQUEST_NONE;
+    sSoraCardReloadRequest = CARD_REQUEST_NONE;
     CreateBosscardTask(&work->tasks);
     work->actionTaken = 0;
 
@@ -681,16 +681,16 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                 work->cardsLeft[work->listIndex] = 0;
                 work->reloadPending[work->listIndex] = 1;
                 sSoraSelectedCard = NULL;
-                sSoraCardRequest = 0;
+                sSoraCardRequest = CARD_REQUEST_NONE;
             }
             }
         }
 
         switch (sSoraCardRequest) {
-        case 0:
+        case CARD_REQUEST_NONE:
             break;
-        case 1:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_NEXT_CARD:
+            sSoraCardRequest = CARD_REQUEST_NONE;
 
             if (work->cardsLeft[work->listIndex] > 2) {
                 if (sSoraSelectedCard->flags & CARD_DISP_FLAG_SETTLED) {
@@ -701,8 +701,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             }
 
             break;
-        case 2:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_PREV_CARD:
+            sSoraCardRequest = CARD_REQUEST_NONE;
 
             if (work->cardsLeft[work->listIndex] > 2) {
                 if (sSoraSelectedCard->flags & CARD_DISP_FLAG_SETTLED) {
@@ -713,8 +713,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             }
 
             break;
-        case 4:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_STOCK_CARD:
+            sSoraCardRequest = CARD_REQUEST_NONE;
 
             if (!(sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
                 if (work->stockCount == 3) {
@@ -742,8 +742,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             work->actionTaken = 1;
             break;
-        case 3:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_USE_CARD:
+            sSoraCardRequest = CARD_REQUEST_NONE;
 
             if (sSoraSelectedCard->cardDef->category != 3 && !(sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
                 if (work->reloadPending[work->listIndex] == 0) {
@@ -771,8 +771,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             work->actionTaken = 1;
             break;
-        case 5:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_USE_STOCK:
+            sSoraCardRequest = CARD_REQUEST_NONE;
 
             if (work->stockCount != 0) {
                 UseSoraStock(work);
@@ -782,51 +782,51 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             work->actionTaken = 1;
             break;
-        case 6:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_OPEN_CARDS:
+            sSoraCardRequest = CARD_REQUEST_NONE;
             OpenSoraCards(work);
             break;
-        case 7:
+        case CARD_REQUEST_CLOSE_CARDS:
             work->revCountShown[work->listIndex] = 0;
             work->reloadShown = 0;
             CloseSoraCards(work);
             break;
-        case 8:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_NOP:
+            sSoraCardRequest = CARD_REQUEST_NONE;
             break;
-        case 9:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_CYCLE_LIST:
+            sSoraCardRequest = CARD_REQUEST_NONE;
             CycleSoraCardList(work);
             work->actionTaken = 1;
             break;
-        case 10:
-            sSoraCardRequest = 0;
+        case CARD_REQUEST_SWITCH_LIST:
+            sSoraCardRequest = CARD_REQUEST_NONE;
             SwitchSoraCardList(work);
             work->actionTaken = 1;
             break;
-        case 11:
+        case CARD_REQUEST_AUTO_CYCLE_60:
             work->timer = 60;
-            sSoraCardRequest = 0;
+            sSoraCardRequest = CARD_REQUEST_NONE;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraAutoCycle);
             break;
-        case 12:
+        case CARD_REQUEST_AUTO_CYCLE_180:
             work->timer = 180;
-            sSoraCardRequest = 0;
+            sSoraCardRequest = CARD_REQUEST_NONE;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraAutoCycle);
             break;
-        case 13:
+        case CARD_REQUEST_AUTO_CYCLE_300:
             work->timer = 300;
-            sSoraCardRequest = 0;
+            sSoraCardRequest = CARD_REQUEST_NONE;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraAutoCycle);
             break;
         default:
-            sSoraCardRequest = 0;
+            sSoraCardRequest = CARD_REQUEST_NONE;
             break;
         }
 
         switch (sSoraCardReloadRequest) {
-        case 14:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_KING_RELOAD_0:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
 
             if (work->listIndex == 0) {
                 RemoveSoraCardDisplays(work);
@@ -850,8 +850,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             }
 
             break;
-        case 15:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_KING_RELOAD_1:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
 
             if (work->listIndex == 0) {
                 RemoveSoraCardDisplays(work);
@@ -875,8 +875,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             work->cardsLeft[0] = 0;
             work->reloadPending[0] = 1;
             break;
-        case 16:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_KING_RELOAD_2:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
 
             if (work->listIndex == 0) {
                 RemoveSoraCardDisplays(work);
@@ -900,8 +900,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             work->cardsLeft[0] = 0;
             work->reloadPending[0] = 1;
             break;
-        case 17:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_POTION:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RestoreCardsForPotion(work);
 
             if (work->listIndex == 0) {
@@ -928,8 +928,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             TickSoraHcEffectOnReload();
             break;
-        case 18:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_HI_POTION:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RestoreCardsForHiPotion(work);
 
             if (work->listIndex == 0) {
@@ -956,8 +956,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             TickSoraHcEffectOnReload();
             break;
-        case 19:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_MEGA_POTION:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RestoreCardsForMegaPotion(work);
             work->reloadCounts[0] = 0;
             ResetSoraReloadGauge(work);
@@ -986,8 +986,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             TickSoraHcEffectOnReload();
             break;
-        case 21:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_ETHER:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RestoreCardsForEther(work);
 
             if (work->listIndex == 0) {
@@ -1014,8 +1014,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             TickSoraHcEffectOnReload();
             break;
-        case 22:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_MEGA_ETHER:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RestoreCardsForMegaEther(work);
             work->reloadCounts[0] = 0;
             ResetSoraReloadGauge(work);
@@ -1044,8 +1044,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             TickSoraHcEffectOnReload();
             break;
-        case 23:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_ELIXIR:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RestoreCardsForElixir(work);
 
             if (work->listIndex == 0) {
@@ -1072,8 +1072,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             TickSoraHcEffectOnReload();
             break;
-        case 24:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_MEGALIXIR:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RestoreCardsForElixir(work);
             work->reloadCounts[0] = 0;
             ResetSoraReloadGauge(work);
@@ -1102,8 +1102,8 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             TickSoraHcEffectOnReload();
             break;
-        case 20:
-            sSoraCardReloadRequest = 0;
+        case CARD_REQUEST_REMOVE_ITEM_CARDS:
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             RemoveItemCards(work);
 
             if (work->listIndex == 0) {
@@ -1130,7 +1130,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             work->reloadPending[0] = 1;
             break;
         default:
-            sSoraCardReloadRequest = 0;
+            sSoraCardReloadRequest = CARD_REQUEST_NONE;
             break;
         }
 
@@ -1169,7 +1169,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             }
         } else if (sSoraSelectedCard != NULL && (sSoraSelectedCard->flags & (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED)) == (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED) && CountAvailableCards(work, work->listIndex) != 0) {
             work->reloadPending[work->listIndex] = 1;
-            sSoraSelectedCard->command = 7;
+            sSoraSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
             actor = gBtlWork->actor;
 
             if (actor->hp > 3) {
@@ -1448,12 +1448,12 @@ s32 UpdateSoraReloadDeal(CardBattleWork* work, Task* task) {
             gBtlWork->flags &= ~0x100;
             work->reloadShown = 0;
             m4aSongNumStop(SONG_SYS_RELOAD);
-            sSoraCardRequest = 0;
+            sSoraCardRequest = CARD_REQUEST_NONE;
             SetTaskUpdate(task, (TaskUpdateFunc)cardbattleSora_1);
         }
     }
 
-    if (sSoraCardRequest == 7) {
+    if (sSoraCardRequest == CARD_REQUEST_CLOSE_CARDS) {
         work->revCountShown[work->listIndex] = 0;
         work->reloadShown = 0;
         CloseSoraCards(work);
@@ -1933,7 +1933,7 @@ void AddPickedCardToSoraDeck(CardBattleWork* work) {
         node = ListPoolFirst(&work->cardDisplays[0]);
 
         while (node != NULL) {
-            node->command = 7;
+            node->command = CARD_DISP_COMMAND_REMOVE;
             node = ListPoolNext(&node->node);
         }
 
@@ -2415,7 +2415,7 @@ s32 UseSoraCard(CardBattleWork* work) {
     }
 
     work->playedCards[0] = sSoraSelectedCard;
-    sSoraSelectedCard->command = 5;
+    sSoraSelectedCard->command = CARD_DISP_COMMAND_PLAY;
     sSoraSelectedCard->priority = 50;
     sSoraSelectedCard->args.slot->used = 1;
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
@@ -2554,7 +2554,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
     }
 
     sSoraSelectedCard->args.slot->removed = 1;
-    sSoraSelectedCard->command = 10;
+    sSoraSelectedCard->command = CARD_DISP_COMMAND_HEARTLESS;
     sSoraSelectedCard->args.slot->used = 1;
     sSoraSelectedCard->priority = 50;
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
@@ -2677,7 +2677,7 @@ s32 UseSoraGimmickCard(CardBattleWork* work) {
     gBtlWork->flags |= BTL_FLAG_GIMMICK_CARD_ACTIVE;
     m4aSongNumStart(SONG_SYS_CLICKI04);
     sSoraSelectedCard->args.slot->removed = 1;
-    sSoraSelectedCard->command = 11;
+    sSoraSelectedCard->command = CARD_DISP_COMMAND_GIMMICK;
     sSoraSelectedCard->args.slot->used = 1;
     sSoraSelectedCard->priority = 50;
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
@@ -2794,7 +2794,7 @@ s32 StockSoraCard(CardBattleWork* work) {
     m4aSongNumStart(SONG_SYS_KETEI2);
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
     sSoraSelectedCard->flags |= CARD_DISP_FLAG_STOCKED;
-    sSoraSelectedCard->command = 6;
+    sSoraSelectedCard->command = CARD_DISP_COMMAND_STOCK;
     sSoraSelectedCard->stockIndex = work->stockCount;
     sSoraSelectedCard->priority = 50 - (3 - work->stockCount) * 4;
     work->stock[work->stockCount] = sSoraSelectedCard;
@@ -2955,8 +2955,8 @@ void RemoveSoraCardDisplays(CardBattleWork* work) {
         node = ListPoolFirst(&work->cardDisplays[i]);
 
         while (node != NULL) {
-            if (node->command < 5 || node->command > 6) {
-                node->command = 7;
+            if (node->command < CARD_DISP_COMMAND_PLAY || node->command > CARD_DISP_COMMAND_STOCK) {
+                node->command = CARD_DISP_COMMAND_REMOVE;
             }
 
             node = ListPoolNext(&node->node);
@@ -2976,8 +2976,8 @@ void RemoveIdleSoraCardDisplays(CardBattleWork* work) {
         node = ListPoolFirst(&work->cardDisplays[i]);
 
         while (node != NULL) {
-            if (node->command == 0) {
-                node->command = 7;
+            if (node->command == CARD_DISP_COMMAND_NONE) {
+                node->command = CARD_DISP_COMMAND_REMOVE;
             }
 
             node = ListPoolNext(&node->node);
@@ -3289,7 +3289,7 @@ void UseSoraStock(CardBattleWork* work) {
             p = NULL;
             n = i;
             work->playedCards[n] = work->stock[n];
-            work->stock[n]->command = 5;
+            work->stock[n]->command = CARD_DISP_COMMAND_PLAY;
             work->stock[n] = p;
             i = ++n;
         } while (i < work->stockCount);
@@ -3377,7 +3377,7 @@ void SwitchSoraCardList(CardBattleWork* work) {
         while (node != NULL) {
             node->swingSteps = 4;
             node->swingAngleTarget = gSoraCardSwingAngles[3];
-            node->command = 7;
+            node->command = CARD_DISP_COMMAND_REMOVE;
             node->flags &= ~CARD_DISP_FLAG_SELECTED;
             node = ListPoolNext(&node->node);
         }
@@ -3450,7 +3450,7 @@ void CycleSoraCardList(CardBattleWork* work) {
         while (node != NULL) {
             node->swingSteps = 12;
             node->swingAngleTarget = gSoraCardSwingAngles[1];
-            node->command = 7;
+            node->command = CARD_DISP_COMMAND_REMOVE;
             node = ListPoolNext(&node->node);
         }
     } else {
@@ -4016,10 +4016,10 @@ void SoraCardInit(CardDisplayWork* work, CardDisplayArgs* args) {
     work->ringRadiusTarget = 0;
     work->swingAngle = 0;
     work->swingAngleTarget = 0;
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->priority = 60;
     work->timer = 4;
-    work->phase = 0;
+    work->phase = CARD_STOCK_PHASE_RISE;
     work->ringRadius = 0;
     work->ringRadiusTarget = 0x2400;
     work->swingSteps = 0;
@@ -4201,7 +4201,7 @@ void SoraCardDestroy(CardDisplayWork* work) {
 }
 
 void SyncCardDisplayGfx(CardDisplayWork* work) {
-    if (work->command != 6) {
+    if (work->command != CARD_DISP_COMMAND_STOCK) {
         if (IsCardDisplayOffScreen(work)) {
             if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {
                 ReleaseCardDisplayGfx(work);
@@ -4410,7 +4410,7 @@ u8 SoraStockHold(CardDisplayWork* work, void* task) {
         return 1;
     }
 
-    if (work->command == 5) {
+    if (work->command == CARD_DISP_COMMAND_PLAY) {
         if (work->flags & CARD_DISP_FLAG_UNOPPOSED) {
             work->timer = 15;
             work->ringRadiusTarget = 0x800;
@@ -4445,21 +4445,21 @@ u8 SoraStockHold(CardDisplayWork* work, void* task) {
 
     if (work->flags & CARD_DISP_FLAG_OPEN) {
         switch (work->phase) {
-        case 0:
+        case CARD_STOCK_PHASE_RISE:
             work->y -= 0x80;
 
             if (work->y <= gSoraCardLayout[3 - work->stockIndex][1] - 0x200) {
                 work->y = gSoraCardLayout[3 - work->stockIndex][1] - 0x200;
-                work->phase = 1;
+                work->phase = CARD_STOCK_PHASE_DROP;
             }
 
             break;
-        case 1:
+        case CARD_STOCK_PHASE_DROP:
             work->y += 0x200;
 
             if (work->y >= gSoraCardLayout[3 - work->stockIndex][1]) {
                 work->y = gSoraCardLayout[3 - work->stockIndex][1];
-                work->phase = 0;
+                work->phase = CARD_STOCK_PHASE_RISE;
                 work->timer = 16;
             }
 
@@ -4518,7 +4518,7 @@ u8 SoraStockMoveToSlot(CardDisplayWork* work, void* task) {
         return 1;
     }
 
-    if (work->command == 5) {
+    if (work->command == CARD_DISP_COMMAND_PLAY) {
         if (work->flags & CARD_DISP_FLAG_UNOPPOSED) {
             work->timer = 15;
             work->ringRadiusTarget = 0x800;
@@ -4580,7 +4580,7 @@ u8 SoraCardDeal(CardDisplayWork* work, void* task) {
 u8 SoraCardClosed(CardDisplayWork* work, void* task) {
     u8 (*f)(CardDisplayWork*, void*);
 
-    if (work->command == 7) {
+    if (work->command == CARD_DISP_COMMAND_REMOVE) {
         return 0;
     }
 
@@ -4732,7 +4732,7 @@ u8 IsCardDisplayOffScreen(CardDisplayWork* work) {
 }
 
 u8 SoraCardFlyOff(CardDisplayWork* work) {
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->y -= work->ringRadius;
     work->ringRadius -= (s16)work->timer;
     work->timer++;
@@ -4832,7 +4832,7 @@ void UpdateSoraPlayedCardPosition(CardDisplayWork* work) {
 
 u8 DispatchSoraCardCommand(CardDisplayWork* work, void* task) {
     switch (work->command) {
-    case 5:
+    case CARD_DISP_COMMAND_PLAY:
         if (!(work->flags & CARD_DISP_FLAG_GFX_LOADED)) {
             LoadCardDisplayGfx(work);
             work->flags |= CARD_DISP_FLAG_GFX_LOADED;
@@ -4844,7 +4844,7 @@ u8 DispatchSoraCardCommand(CardDisplayWork* work, void* task) {
         ListPoolRemove(&work->node, work->args.pool);
         SetTaskUpdate(task, (TaskUpdateFunc)SoraCardMoveToPlay);
         return 1;
-    case 6:
+    case CARD_DISP_COMMAND_STOCK:
         if (!(work->flags & CARD_DISP_FLAG_GFX_LOADED)) {
             LoadCardDisplayGfx(work);
             work->flags |= CARD_DISP_FLAG_GFX_LOADED;
@@ -4858,7 +4858,7 @@ u8 DispatchSoraCardCommand(CardDisplayWork* work, void* task) {
         ListPoolRemove(&work->node, work->args.pool);
         SetTaskUpdate(task, (TaskUpdateFunc)SoraStockMoveToSlot);
         return 1;
-    case 8:
+    case CARD_DISP_COMMAND_FLY_OFF:
         work->priority -= 4;
         work->ringRadius = 0x500;
         work->timer = 0x100;
@@ -4866,18 +4866,18 @@ u8 DispatchSoraCardCommand(CardDisplayWork* work, void* task) {
         work->spinSpeed = 0xFF;
         SetTaskUpdate(task, (TaskUpdateFunc)SoraCardFlyOff);
         break;
-    case 7:
+    case CARD_DISP_COMMAND_REMOVE:
         work->ringRadius = 0x500;
         work->timer = 0x100;
         ListPoolRemove(&work->node, work->args.pool);
         return 0;
-    case 10:
+    case CARD_DISP_COMMAND_HEARTLESS:
         work->timer = 10;
         work->priority -= 4;
         ListPoolRemove(&work->node, work->args.pool);
         SetTaskUpdate(task, (TaskUpdateFunc)SoraHeartlessCardShow);
         return 1;
-    case 11:
+    case CARD_DISP_COMMAND_GIMMICK:
         work->timer = 10;
         work->priority -= 4;
         ListPoolRemove(&work->node, work->args.pool);
@@ -4915,7 +4915,7 @@ void LinkSoraCardDisplay(CardDisplayWork* work) {
 }
 
 u8 SoraCardBreakFall(CardDisplayWork* work, void* task) {
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->y -= work->ringRadius;
     work->ringRadius -= (s16)work->timer >> 1;
     work->timer++;
@@ -4985,7 +4985,7 @@ void RefreshSoraCardDisplayGfx(CardDisplayWork* work) {
 u8 SoraHeartlessCardShow(CardDisplayWork* work) {
     u8 arg;
 
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     ApproachValue(&work->x, 0x1800, work->timer);
     ApproachValue(&work->scaleY, 0x99, work->timer);
     ApproachValue(&work->y, 0x6400, work->timer);
@@ -5144,7 +5144,7 @@ void card_reload_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->ringAngleTarget = 0;
     work->swingAngle = 0;
     work->swingAngleTarget = 0;
-    work->command = 0;
+    work->command = CARD_DISP_COMMAND_NONE;
     work->priority = 60;
     work->timer = 4;
     work->phase = 0;
@@ -5163,7 +5163,7 @@ void card_reload_0(CardDisplayWork* work, CardDisplayArgs* args) {
 u8 SoraReloadCardClosed(CardDisplayWork* work, void* task) {
     u8 (*f)(CardDisplayWork*, void*);
 
-    if (work->command == 7) {
+    if (work->command == CARD_DISP_COMMAND_REMOVE) {
         return 0;
     }
 

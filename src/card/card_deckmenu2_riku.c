@@ -116,8 +116,8 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->commandCursor = 0;
     work->cursorCard = NULL;
     work->prevCursorCard = NULL;
-    work->mode = 0;
-    work->view = 0;
+    work->mode = DECK_MENU_MODE_NONE;
+    work->view = DECK_MENU_VIEW_DECK_GRID;
     work->deckAttackCount = CountActiveDeckCardsOfCategory(0);
     work->deckMagicCount = CountActiveDeckCardsOfCategory(1);
     work->deckItemCount = CountActiveDeckCardsOfCategory(2);
@@ -154,7 +154,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;
     work->textSlotCount4 = 0;
-    work->result = 0;
+    work->result = DECK_MENU_RESULT_NONE;
     InitTextSlots(work->textSlots, 8);
     InitTextSlots(work->textSlots2, 8);
     InitTextSlots(work->textSlots3, 8);
@@ -241,10 +241,10 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* task) {
     work->cursorRow = work->deckIndex;
     ApproachValue(&work->x, sRikuDeckTabPointerX[work->cursorCol] << 8, work->timer);
     ApproachValue(&work->y, sRikuDeckTabPointerY[work->cursorRow] << 8, work->timer);
-    work->view = 1;
+    work->view = DECK_MENU_VIEW_DECK_SELECT;
     SetRikuDeckMenuHandAnim(work);
     LoadRikuDeckNameTexts(work);
-    work->step = 0;
+    work->step = DECK_MENU_SLIDE_IN_STEP_VERTICAL;
     work->timer = 16;
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuSlideIn);
     return 1;
@@ -255,7 +255,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
 
     if (!FadeIsActive()) {
         switch (work->step) {
-        case 0:
+        case DECK_MENU_SLIDE_IN_STEP_VERTICAL:
             ApproachValue(&work->y5, 0, work->timer);
             ApproachValue(&work->y6, 0x9800, work->timer);
             work->timer--;
@@ -266,7 +266,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
             }
 
             break;
-        case 1:
+        case DECK_MENU_SLIDE_IN_STEP_HORIZONTAL:
             ApproachValue(&work->x7, 0, work->timer);
             n = --work->timer;
 
@@ -291,7 +291,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
 u8 UpdateRikuDeckMenuEnterDeckGrid(RikuDeckMenuWork* work, void* task) {
     work->x = gDeckGridColumnX[work->cursorCol] << 8;
     work->y = gDeckGridRowY[work->cursorRow] << 8;
-    work->view = 0;
+    work->view = DECK_MENU_VIEW_DECK_GRID;
     SetRikuDeckMenuHandAnim(work);
     ShowRikuDeckCardPreview(work);
     work->handVisible = 1;
@@ -397,13 +397,13 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
         ShowRikuDeckCardPreview(work);
         break;
     case START_BUTTON:
-        work->result = 7;
+        work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
         m4aSongNumStart(SONG_SYS_CANSEL);
         FadeStartOut(FADE_MODE_BLACK, 4);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
         return 1;
     case B_BUTTON:
-        work->result = 8;
+        work->result = DECK_MENU_RESULT_RETURN_TO_MENU;
         m4aSongNumStart(SONG_SYS_CANSEL);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuStartSlideOut);
         return 1;
@@ -729,21 +729,21 @@ void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* work) {
     u16 t;
 
     switch (work->view) {
-    case 0:
-    case 2:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
+    case DECK_MENU_VIEW_DECK_GRID:
+    case DECK_MENU_VIEW_DECK_FILTER:
+    case DECK_MENU_VIEW_ADD_GRID:
+    case DECK_MENU_VIEW_ADD_VALUE_SELECT:
+    case DECK_MENU_VIEW_ADD_FILTER:
+    case DECK_MENU_VIEW_REMOVE_GRID:
+    case DECK_MENU_VIEW_REMOVE_FILTER:
+    case DECK_MENU_VIEW_DELETE_GRID:
+    case DECK_MENU_VIEW_DELETE_FILTER:
+    case DECK_MENU_VIEW_DELETE_VALUE_SELECT:
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
         work->handFlags &= ~SPRITE_FLAG_HFLIP;
         break;
-    case 1:
-    case 3:
+    case DECK_MENU_VIEW_DECK_SELECT:
+    case DECK_MENU_VIEW_COMMANDS:
         AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
         t = work->handFlags | SPRITE_FLAG_HFLIP;
         work->handFlags = t;

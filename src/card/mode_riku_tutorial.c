@@ -30,11 +30,16 @@ static s32 sRikuTutorialModeArg;
 
 u8 gRikuDeckTutorialState EWRAM_COMMON(4);
 
+enum RikuDeckTutorialState {
+    RIKU_DECK_TUTORIAL_STATE_SHOW_MESSAGE,
+    RIKU_DECK_TUTORIAL_STATE_WAIT_MESSAGE
+};
+
 void RikuTutorialModeInit(s32 arg) {
     FadeStartIn(FADE_MODE_BLACK, 16);
     sRikuTutorialModeArg = arg;
     TaskPoolInit(&sRikuTutorialTasks, 1);
-    gRikuDeckTutorialState = 0;
+    gRikuDeckTutorialState = RIKU_DECK_TUTORIAL_STATE_SHOW_MESSAGE;
 }
 
 void Mode_riku_btlTutorial_1() {
@@ -50,14 +55,14 @@ void Mode_riku_btlTutorial_1() {
 void Mode_riku_deckTutorial_1() {
     if (!FadeIsActive()) {
         switch (gRikuDeckTutorialState) {
-        case 0:
-            if (!IsMessageWindowOpen() && gRikuDeckTutorialState == 0) {
+        case RIKU_DECK_TUTORIAL_STATE_SHOW_MESSAGE:
+            if (!IsMessageWindowOpen() && gRikuDeckTutorialState == RIKU_DECK_TUTORIAL_STATE_SHOW_MESSAGE) {
                 CreateSysmsgwinTask(&sRikuTutorialTasks, 0xB1);
-                gRikuDeckTutorialState = 1;
+                gRikuDeckTutorialState = RIKU_DECK_TUTORIAL_STATE_WAIT_MESSAGE;
             }
 
             break;
-        case 1:
+        case RIKU_DECK_TUTORIAL_STATE_WAIT_MESSAGE:
             if (!IsMessageWindowOpen()) {
                 gGameState.progression.tutorialFlags |= 0x800;
                 ModeRequest(&gModeDeck, sRikuTutorialModeArg);

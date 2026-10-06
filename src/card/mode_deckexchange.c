@@ -34,7 +34,7 @@ static u8 sModeDeckExchangeResult;
 
 #ifndef VERSION_EU
 void Mode_DeckExchange_0() {
-    sModeDeckExchangeResult = 0;
+    sModeDeckExchangeResult = DECK_MENU_RESULT_NONE;
     gSioTradeCardId = 2048;
     TaskPoolInit(&sModeDeckExchangeTasks, 1);
     TaskCreate(&sModeDeckExchangeTasks, &gTaskDescDeckexchange, &sModeDeckExchangeResult);
@@ -50,7 +50,7 @@ void Mode_DeckExchange_1() {
     TaskPoolUpdate(&sModeDeckExchangeTasks);
     TaskPoolDraw(&sModeDeckExchangeTasks);
 
-    if (sModeDeckExchangeResult == 6) {
+    if (sModeDeckExchangeResult == DECK_MENU_RESULT_CLOSED) {
         ModeRequest(&gModeSioChgCard, gSioTradeCardId);
     }
 }

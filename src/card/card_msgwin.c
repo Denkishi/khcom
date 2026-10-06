@@ -103,12 +103,12 @@ static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* args) {
     SetBgScroll(work->args.bg, 0, 0);
 
     switch (work->args.mode) {
-    case 0:
-    case 1:
+    case CARD_MESSAGE_MODE_BG_WINDOW:
+    case CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT:
         SetBgPriority(work->args.bg, 0);
         break;
-    case 2:
-    case 3:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW:
+    case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         break;
     }
 
@@ -133,10 +133,10 @@ u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* task) {
         }
 
         switch (work->args.mode) {
-        case 0:
+        case CARD_MESSAGE_MODE_BG_WINDOW:
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinTyping);
             break;
-        case 1:
+        case CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT:
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinTypingPersistent);
             break;
         }
@@ -523,7 +523,7 @@ void CreateCardMessageTask(void* pool, u32 bg, u16 message) {
 
     args.bg = bg;
     args.messageId = message;
-    args.mode = 0;
+    args.mode = CARD_MESSAGE_MODE_BG_WINDOW;
 
     if (gCardMessageDefs[message].portraitId == 62) {
         if (gCardMessageDefs[message].flags & CARD_MSG_FLAG_CHOICE_WINDOW) {
@@ -541,7 +541,7 @@ void CreateSysmsgwinTask(void* pool, u16 message) {
 
     args.bg = 0;
     args.messageId = message;
-    args.mode = 2;
+    args.mode = CARD_MESSAGE_MODE_SPRITE_WINDOW;
 
     if (gCardMessageDefs[message].flags & CARD_MSG_FLAG_CHOICE_WINDOW) {
         TaskCreate(pool, &gTaskDescSysmsgwinChoice, &args);
@@ -556,7 +556,7 @@ void CreatePersistentSysmsgwinTask(void* pool, u16 message) {
     IsMessageWindowOpen();
     args.bg = 0;
     args.messageId = message;
-    args.mode = 3;
+    args.mode = CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT;
     TaskCreate(pool, &gTaskDescSysmsgwin, &args);
 }
 
@@ -565,7 +565,7 @@ void ShowPersistentCardMessage(void* pool, u32 bg, u16 message) {
 
     args.bg = bg;
     args.messageId = message;
-    args.mode = 1;
+    args.mode = CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT;
 
     if (IsMessageWindowOpen()) {
         if (!(u8)ReplaceCardMsgwinMessage(&args)) {

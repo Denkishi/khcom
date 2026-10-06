@@ -57,6 +57,13 @@ static const s16 sLevelUpCursorY[3] = { 30, 78, 128 };
 
 static const s16 sLevelUpApLevels[20] = { 2, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95 };
 
+enum LevelUpState {
+    LEVEL_UP_STATE_SLIDE_IN,
+    LEVEL_UP_STATE_SELECT,
+    LEVEL_UP_STATE_RESULT,
+    LEVEL_UP_STATE_SLIDE_OUT
+};
+
 void Level_Up_0(LevelUpWork* work) {
     s16 x;
     s16 y;
@@ -217,7 +224,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->statsOffsetX = 256;
     work->x3 = 132;
     work->y3 = sLevelUpCursorY[0];
-    work->state = 0;
+    work->state = LEVEL_UP_STATE_SLIDE_IN;
     work->cursor = 0;
     work->applied = 0;
     LevelUpSplitDigits3(gGameState.progression.level, work->levelDigits);
@@ -574,7 +581,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                         LoadBgMap(1, gLevelUpBonusAMap, mapSize);
                     }
 
-                    work->state = 1;
+                    work->state = LEVEL_UP_STATE_SELECT;
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         if (gGameState.progression.maxHp > 559) {
@@ -794,7 +801,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
     }
 
     while (GetKeysRepeat() & A_BUTTON) {
-        work->state = 2;
+        work->state = LEVEL_UP_STATE_RESULT;
 
         if (gBtlWork->battleId == 151) {
             LoadBgMap(0, gLevelUpChosenMap, mapSize);
@@ -980,7 +987,7 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
             work->slideSteps = 16;
             work->optionSteps[work->cursor] = 16;
             work->barSteps = 16;
-            work->state = 3;
+            work->state = LEVEL_UP_STATE_SLIDE_OUT;
             work->blinkOn = 0;
             work->messageActive = 0;
             gBtlWork->pendingLevelUps--;
@@ -1071,7 +1078,7 @@ void Level_Up_2(LevelUpWork* work) {
 
     if (work->loaded[0] != 0) {
         switch (work->state) {
-        case 0:
+        case LEVEL_UP_STATE_SLIDE_IN:
             DrawSprite(work->x6, 0,
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage][10],
@@ -1119,7 +1126,7 @@ void Level_Up_2(LevelUpWork* work) {
             DrawSprite(work->x, work->y >> 8, gLevelUpBarFrames[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             DrawSprite(work->x2, work->y2 >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
-        case 1:
+        case LEVEL_UP_STATE_SELECT:
             for (; i < 3; i++) {
                 if (i == work->cursor) {
 #ifdef VERSION_EU
@@ -1140,7 +1147,7 @@ void Level_Up_2(LevelUpWork* work) {
 
             DrawSprite(work->x3, work->y3, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
             break;
-        case 2:
+        case LEVEL_UP_STATE_RESULT:
             for (; i < 3; i++) {
                 if (i == work->cursor) {
 #ifdef VERSION_EU
@@ -1173,7 +1180,7 @@ void Level_Up_2(LevelUpWork* work) {
 
             DrawSprite(work->x3, work->y3, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
             break;
-        case 3:
+        case LEVEL_UP_STATE_SLIDE_OUT:
 #ifdef VERSION_EU
             DrawSprite(work->x5[work->cursor] + 2, work->y5[work->cursor] - 1, NULL, work->tiles5[work->cursor], work->palette, NULL, 0, 40);
 #else
@@ -1565,7 +1572,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
             LoadBgMap(1, gLevelUpBonusAMap, mapSize);
         }
 
-        work->state = 1;
+        work->state = LEVEL_UP_STATE_SELECT;
 
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             if (gGameState.progression.maxHp > 559) {
@@ -1831,7 +1838,7 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
             }
 
             work->loaded[0] = 0;
-            work->state = 0;
+            work->state = LEVEL_UP_STATE_SLIDE_IN;
             work->effectShown = 0;
             work->timer = 0;
             work->applied = 0;

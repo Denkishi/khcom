@@ -4,6 +4,7 @@
 #include "types.h"
 #include "fld_types.h"
 #include "taskpool.h"
+#include "macros.h"
 
 enum FieldFlag {
     FIELD_FLAG_NO_LOCKON = 0x1,
@@ -45,7 +46,7 @@ typedef struct FieldState {
     u8 spawnAngle;
 } FieldState;
 
-typedef char FieldState_size[(sizeof(FieldState) == 0xE8) ? 1 : -1];
+STATIC_ASSERT(sizeof(FieldState) == 0xE8, FieldStateSize);
 
 extern FieldState* gFieldState;
 

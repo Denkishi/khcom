@@ -6,6 +6,7 @@
 #include "taskpool.h"
 #include "card.h"
 #include "card_types.h"
+#include "macros.h"
 
 struct CardDisplayWork;
 struct CardSlot;
@@ -112,7 +113,7 @@ typedef struct CardBattleState {
     u8 reloadGaugeFull[0x04];
 } CardBattleState;
 
-typedef char CardBattleState_size[(sizeof(CardBattleState) == 0x10C) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardBattleState) == 0x10C, CardBattleStateSize);
 
 extern CardBattleState* gCardBattleState;
 

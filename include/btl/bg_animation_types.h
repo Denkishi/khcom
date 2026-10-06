@@ -2,6 +2,7 @@
 #define GUARD_BG_ANIMATION_TYPES_H
 
 #include "types.h"
+#include "macros.h"
 
 typedef struct BgAnimationChunk {
     void* data;
@@ -20,7 +21,7 @@ typedef struct BgAnimationDef {
     u16 frameDuration;
 } BgAnimationDef;
 
-typedef char BgAnimationDef_size[(sizeof(BgAnimationDef) == 0x18) ? 1 : -1];
-typedef char BgAnimationChunk_size[(sizeof(BgAnimationChunk) == 0x08) ? 1 : -1];
+STATIC_ASSERT(sizeof(BgAnimationDef) == 0x18, BgAnimationDefSize);
+STATIC_ASSERT(sizeof(BgAnimationChunk) == 0x08, BgAnimationChunkSize);
 
 #endif

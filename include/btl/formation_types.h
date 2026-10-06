@@ -2,6 +2,7 @@
 #define GUARD_FORMATION_TYPES_H
 
 #include "types.h"
+#include "macros.h"
 
 typedef struct BtlFormStep {
     u32 id;
@@ -23,8 +24,8 @@ typedef struct BtlFormList {
     s16 threshold;
 } BtlFormList;
 
-typedef char BtlFormStep_size[(sizeof(BtlFormStep) == 12) ? 1 : -1];
-typedef char BtlFormEntry_size[(sizeof(BtlFormEntry) == 12) ? 1 : -1];
-typedef char BtlFormList_size[(sizeof(BtlFormList) == 12) ? 1 : -1];
+STATIC_ASSERT(sizeof(BtlFormStep) == 12, BtlFormStepSize);
+STATIC_ASSERT(sizeof(BtlFormEntry) == 12, BtlFormEntrySize);
+STATIC_ASSERT(sizeof(BtlFormList) == 12, BtlFormListSize);
 
 #endif

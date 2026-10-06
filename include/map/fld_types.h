@@ -7,6 +7,7 @@
 #include "taskpool.h"
 #include "obj.h"
 #include "battle_actor_types.h"
+#include "macros.h"
 
 typedef struct FldPos {
     s32 x;
@@ -49,8 +50,8 @@ typedef struct FldObj {
     s32 shadowZ;
 } FldObj;
 
-typedef char FldActor_size[(sizeof(FldActor) == 0x50) ? 1 : -1];
-typedef char FldObj_size[(sizeof(FldObj) == 0x40) ? 1 : -1];
+STATIC_ASSERT(sizeof(FldActor) == 0x50, FldActorSize);
+STATIC_ASSERT(sizeof(FldObj) == 0x40, FldObjSize);
 
 enum FldFlag {
     FLD_FLAG_HFLIP = 0x2,
@@ -106,6 +107,6 @@ typedef struct FldWork {
     u8 onCollider;
 } FldWork;
 
-typedef char FldWork_size[(sizeof(FldWork) == 0xC0) ? 1 : -1];
+STATIC_ASSERT(sizeof(FldWork) == 0xC0, FldWorkSize);
 
 #endif

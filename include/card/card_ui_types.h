@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "anim.h"
+#include "macros.h"
 
 struct ObjTiles;
 struct ObjPalette;
@@ -24,8 +25,8 @@ typedef struct MapCardUiResources {
     AnimState anim;
 } MapCardUiResources;
 
-typedef char CardUiSpriteState_size[(sizeof(CardUiSpriteState) == 0x24) ? 1 : -1];
-typedef char MapCardUiResources_size[(sizeof(MapCardUiResources) == 0x30) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardUiSpriteState) == 0x24, CardUiSpriteStateSize);
+STATIC_ASSERT(sizeof(MapCardUiResources) == 0x30, MapCardUiResourcesSize);
 
 typedef struct LayeredCardSprite {
     struct ObjTiles* tiles;
@@ -49,7 +50,7 @@ typedef struct EventKeyCard {
     u8 color;
 } EventKeyCard;
 
-typedef char EventKeyCard_size[(sizeof(EventKeyCard) == 0x34) ? 1 : -1];
+STATIC_ASSERT(sizeof(EventKeyCard) == 0x34, EventKeyCardSize);
 
 typedef struct SpriteFrameResourceDef {
 #ifdef VERSION_EU

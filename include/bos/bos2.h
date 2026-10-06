@@ -7,6 +7,7 @@
 #include "anim.h"
 #include "taskpool.h"
 #include "obj.h"
+#include "macros.h"
 
 extern void* gBosJfMajinFrameMaps[49];
 extern void* gBosJfMajinFrameTiles[49];
@@ -403,7 +404,7 @@ typedef struct JfBorderlineWork {
     u8 wide;
 } JfBorderlineWork;
 
-typedef char JfWork_size[(sizeof(JfWork) == 0x26C) ? 1 : -1];
+STATIC_ASSERT(sizeof(JfWork) == 0x26C, JfWorkSize);
 
 extern const EmyKind gBosDsdEmyKind;
 extern const s16 gBosDsdCircleOffsetsX[9];

@@ -11,6 +11,7 @@
 #include "obj.h"
 #include "bos4_api.h"
 #include "battle_actor_types.h"
+#include "macros.h"
 typedef struct PooHit {
     Collider* collider;
     u16 message;
@@ -102,7 +103,7 @@ typedef struct PooNode {
     ListNode node;
 } PooNode;
 
-typedef char PooNode_size[(sizeof(PooNode) == 0x20) ? 1 : -1];
+STATIC_ASSERT(sizeof(PooNode) == 0x20, PooNodeSize);
 
 typedef struct PooFrame {
     u16 duration;

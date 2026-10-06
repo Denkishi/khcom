@@ -18,6 +18,7 @@
 #include "mode.h"
 #include "event_background_types.h"
 #include "map_animation_types.h"
+#include "macros.h"
 
 typedef struct PrizeMapCardBackAnimStep {
     u8 sprite;
@@ -40,7 +41,7 @@ typedef struct CardSlot {
     u8 unk_0B;
 } CardSlot;
 
-typedef char CardSlot_size[(sizeof(CardSlot) == 0xC) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardSlot) == 0xC, CardSlotSize);
 
 #define CARD_SLOT_NONE 0xFFFF
 
@@ -53,7 +54,7 @@ typedef struct CardDisplayArgs {
     u8 reloadCount;
 } CardDisplayArgs;
 
-typedef char CardDisplayArgs_size[(sizeof(CardDisplayArgs) == 0x10) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardDisplayArgs) == 0x10, CardDisplayArgsSize);
 
 enum CardDisplayFlag {
     CARD_DISP_FLAG_FACE_DOWN = 0x1,
@@ -138,7 +139,7 @@ typedef struct CardDisplayWork {
     u8 valueModified;
 } CardDisplayWork;
 
-typedef char CardDisplayWork_size[(sizeof(CardDisplayWork) == 0xA8) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardDisplayWork) == 0xA8, CardDisplayWorkSize);
 
 enum DeckCardSet {
     DECK_CARD_SET_MAIN,
@@ -174,7 +175,7 @@ typedef struct CardBattleWork {
     u8 cardsClosed;
 } CardBattleWork;
 
-typedef char CardBattleWork_size[(sizeof(CardBattleWork) == 0xCC) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardBattleWork) == 0xCC, CardBattleWorkSize);
 
 typedef struct CardListWork {
     ListPool cards;
@@ -184,7 +185,7 @@ typedef struct CardListWork {
     u8 unk_29;
 } CardListWork;
 
-typedef char CardListWork_size[(sizeof(CardListWork) == 0x2C) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardListWork) == 0x2C, CardListWorkSize);
 
 extern u8 gUnk_05000160[];
 extern void* gLvupEffectSprites[];
@@ -250,7 +251,7 @@ typedef struct PrizeMapCardWork {
     u8 backFrame;
 } PrizeMapCardWork;
 
-typedef char PrizeMapCardWork_sizechk[(sizeof(struct PrizeMapCardWork) == 0xEC) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct PrizeMapCardWork) == 0xEC, PrizeMapCardWorkSize);
 
 typedef struct PickupCardWork {
     void* tiles;
@@ -294,9 +295,9 @@ typedef struct PickupCardWork {
     u16 spriteFlags;
 } PickupCardWork;
 
-typedef char PickupCardWork_sizechk[(sizeof(struct PickupCardWork) == 0x1D4) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct PickupCardWork) == 0x1D4, PickupCardWorkSize);
 
-typedef char CardStat_sizechk[(sizeof(struct CardStat) == 0x18) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct CardStat) == 0x18, CardStatSize);
 
 typedef struct UnkStruct_080993D4 {
     u8 unk_000[0xE4];
@@ -324,7 +325,7 @@ typedef struct RevCountWork {
     s32 y;
 } RevCountWork;
 
-typedef char RevCountWork_sizechk[(sizeof(struct RevCountWork) == 0x44) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct RevCountWork) == 0x44, RevCountWorkSize);
 
 extern const s32 gLvupEffectStartOffsetX[];
 extern const s32 gLvupEffectStartOffsetY[];
@@ -570,7 +571,7 @@ typedef struct DeckExchangeWork {
     u16 gridEntryCount;
 } DeckExchangeWork;
 
-typedef char DeckExchangeWork_size[(sizeof(DeckExchangeWork) == 0x718) ? 1 : -1];
+STATIC_ASSERT(sizeof(DeckExchangeWork) == 0x718, DeckExchangeWorkSize);
 
 typedef struct CardKindEntry {
     u16 valueCounts[0x0A];
@@ -886,7 +887,7 @@ typedef struct ReloadChildWork {
     u8 retractTimer;
 } ReloadChildWork;
 
-typedef char ReloadChildWork_sizechk[(sizeof(struct ReloadChildWork) == 0x48) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct ReloadChildWork) == 0x48, ReloadChildWorkSize);
 
 typedef struct PremiumCardEffectWork {
     void* tiles;
@@ -907,7 +908,7 @@ typedef struct PremiumCardEffectWork {
     s32 fallSpeed;
 } PremiumCardEffectWork;
 
-typedef char PremiumCardEffectWork_sizechk[(sizeof(struct PremiumCardEffectWork) == 0x54) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct PremiumCardEffectWork) == 0x54, PremiumCardEffectWorkSize);
 
 typedef struct CardNameWork {
     void* tiles;
@@ -934,9 +935,9 @@ typedef struct PrintWork {
 } PrintWork;
 
 #ifdef VERSION_EU
-typedef char CardNameWork_sizechk[(sizeof(struct CardNameWork) == 0x31C) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct CardNameWork) == 0x31C, CardNameWorkSize);
 #else
-typedef char CardNameWork_sizechk[(sizeof(struct CardNameWork) == 0x22C) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct CardNameWork) == 0x22C, CardNameWorkSize);
 #endif
 
 typedef struct DarkPointWork {
@@ -950,7 +951,7 @@ typedef struct DarkPointWork {
     u8 ones;
 } DarkPointWork;
 
-typedef char DarkPointWork_sizechk[(sizeof(struct DarkPointWork) == 0x10) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct DarkPointWork) == 0x10, DarkPointWorkSize);
 
 typedef struct MapcardArgs {
     u8 baseCardId;
@@ -962,7 +963,7 @@ typedef struct MapcardArgs {
     u8 unk_0C[0x0C];
 } MapcardArgs;
 
-typedef char MapcardArgs_size[(sizeof(MapcardArgs) == 0x18) ? 1 : -1];
+STATIC_ASSERT(sizeof(MapcardArgs) == 0x18, MapcardArgsSize);
 
 enum MapcardFlag {
     MAPCARD_FLAG_GFX_LOADED = 0x1,
@@ -1004,7 +1005,7 @@ typedef struct MapcardWork {
     u8 value;
 } MapcardWork;
 
-typedef char MapcardWork_size[(sizeof(MapcardWork) == 0x78) ? 1 : -1];
+STATIC_ASSERT(sizeof(MapcardWork) == 0x78, MapcardWorkSize);
 
 typedef struct ReloadGauge {
     s16 sine;
@@ -1022,7 +1023,7 @@ typedef struct ReloadGauge {
     u8 chargeTick;
 } ReloadGauge;
 
-typedef char ReloadGauge_size[(sizeof(ReloadGauge) == 0x68) ? 1 : -1];
+STATIC_ASSERT(sizeof(ReloadGauge) == 0x68, ReloadGaugeSize);
 
 typedef struct PrintLine {
     u8 length;
@@ -1090,7 +1091,7 @@ typedef struct ScrollBarWork {
     u8 unk_17;
 } ScrollBarWork;
 
-typedef char ScrollBarWork_sizechk[(sizeof(struct ScrollBarWork) == 0x18) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct ScrollBarWork) == 0x18, ScrollBarWorkSize);
 
 typedef struct PrizeCardWork {
     ObjTiles* tiles;
@@ -1190,7 +1191,7 @@ typedef struct DispCardnameWork {
     u8 textSlotCount;
 } DispCardnameWork;
 
-typedef char DispCardnameWork_size[(sizeof(DispCardnameWork) == 0x110) ? 1 : -1];
+STATIC_ASSERT(sizeof(DispCardnameWork) == 0x110, DispCardnameWorkSize);
 
 typedef struct VersionWork {
     void* tiles;
@@ -1199,7 +1200,7 @@ typedef struct VersionWork {
     u8 textLength;
 } VersionWork;
 
-typedef char VersionWork_size[(sizeof(VersionWork) == 0x2C) ? 1 : -1];
+STATIC_ASSERT(sizeof(VersionWork) == 0x2C, VersionWorkSize);
 
 typedef struct CardEffectArgs {
     s32 x;
@@ -1268,7 +1269,7 @@ typedef struct BossPrizeWork {
     u8 effectTimer;
 } BossPrizeWork;
 
-typedef char BossPrizeWork_sizechk[(sizeof(struct BossPrizeWork) == 0xF0) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct BossPrizeWork) == 0xF0, BossPrizeWorkSize);
 
 typedef struct EventMapObjectPlacement {
     s32 x : 24;
@@ -1373,7 +1374,7 @@ typedef struct MapSelectWork {
     MapSelectKindEntry* kindEntries;
 } MapSelectWork;
 
-typedef char MapSelectWork_size[(sizeof(struct MapSelectWork) == 0x2E4) ? 1 : -1];
+STATIC_ASSERT(sizeof(struct MapSelectWork) == 0x2E4, MapSelectWorkSize);
 
 typedef struct LvupMsgWork {
     TextSlot textSlots[20];
@@ -1601,7 +1602,7 @@ typedef struct SysMsgWinWork {
     u8 fallbackFrame;
 } SysMsgWinWork;
 
-typedef char SysMsgWinWork_size[(sizeof(SysMsgWinWork) == 0x148) ? 1 : -1];
+STATIC_ASSERT(sizeof(SysMsgWinWork) == 0x148, SysMsgWinWorkSize);
 
 typedef struct CardMsgWinWork {
     ObjTiles* tiles3;
@@ -1647,7 +1648,7 @@ typedef struct CardMsgWinWork {
     u8 keepOpen;
 } CardMsgWinWork;
 
-typedef char CardMsgWinWork_size[(sizeof(CardMsgWinWork) == 0x150) ? 1 : -1];
+STATIC_ASSERT(sizeof(CardMsgWinWork) == 0x150, CardMsgWinWorkSize);
 
 typedef struct BossCardWork {
     const CardDef* cardDef;
@@ -1959,7 +1960,7 @@ typedef struct SelmapEventKeyWork {
     u8 unk_123;
 } SelmapEventKeyWork;
 
-typedef char SelmapEventKeyWork_size[(sizeof(SelmapEventKeyWork) == 0x124) ? 1 : -1];
+STATIC_ASSERT(sizeof(SelmapEventKeyWork) == 0x124, SelmapEventKeyWorkSize);
 
 typedef struct KeyboardLineLayout {
     const s16* positions;

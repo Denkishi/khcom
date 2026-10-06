@@ -6,6 +6,7 @@
 #include "battle_bounds.h"
 #include "battle_actor_types.h"
 #include "listpool.h"
+#include "macros.h"
 
 enum BtlFlag {
     BTL_FLAG_ENEMY_FRAME_CHANGED = 0x1,
@@ -167,7 +168,7 @@ typedef struct BtlWork {
     u16 listSwitchTimer;
 } BtlWork;
 
-typedef char BtlWork_size[(sizeof(BtlWork) == 0x1D0) ? 1 : -1];
+STATIC_ASSERT(sizeof(BtlWork) == 0x1D0, BtlWorkSize);
 
 extern BtlWork* gBtlWork;
 extern BtlWork* gRikuBtlWork;

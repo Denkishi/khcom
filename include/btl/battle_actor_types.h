@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "listpool.h"
+#include "macros.h"
 
 struct BtlWork;
 
@@ -235,7 +236,7 @@ typedef struct BtlObj {
     s32 vy;
 } BtlObj;
 
-typedef char Collider_size[(sizeof(Collider) == 0x5C) ? 1 : -1];
-typedef char BtlObj_size[(sizeof(BtlObj) == 0x110) ? 1 : -1];
+STATIC_ASSERT(sizeof(Collider) == 0x5C, ColliderSize);
+STATIC_ASSERT(sizeof(BtlObj) == 0x110, BtlObjSize);
 
 #endif

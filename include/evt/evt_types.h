@@ -2,6 +2,7 @@
 #define GUARD_EVT_TYPES_H
 
 #include "types.h"
+#include "macros.h"
 
 typedef struct EvtObjRes {
     u16 tileCount;
@@ -27,9 +28,9 @@ typedef struct EvtObjResTable {
     u8 unk_0C[0x04];
 } EvtObjResTable;
 
-typedef char EvtAnimDef_size[(sizeof(EvtAnimDef) == 12) ? 1 : -1];
-typedef char EvtObjAnim_size[(sizeof(EvtObjAnim) == 16) ? 1 : -1];
-typedef char EvtObjResTable_size[(sizeof(EvtObjResTable) == 16) ? 1 : -1];
+STATIC_ASSERT(sizeof(EvtAnimDef) == 12, EvtAnimDefSize);
+STATIC_ASSERT(sizeof(EvtObjAnim) == 16, EvtObjAnimSize);
+STATIC_ASSERT(sizeof(EvtObjResTable) == 16, EvtObjResTableSize);
 
 struct EvtObj;
 struct Task;

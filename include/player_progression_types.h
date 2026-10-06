@@ -2,6 +2,7 @@
 #define GUARD_PLAYER_PROGRESSION_TYPES_H
 
 #include "types.h"
+#include "macros.h"
 
 enum FriendFlag {
     FRIEND_FLAG_GOOFY = 0x1,
@@ -36,6 +37,6 @@ typedef struct PlayerProgression {
     u16 savedFriendFlags;
 } PlayerProgression;
 
-typedef char PlayerProgression_size[(sizeof(PlayerProgression) == 0x88) ? 1 : -1];
+STATIC_ASSERT(sizeof(PlayerProgression) == 0x88, PlayerProgressionSize);
 
 #endif

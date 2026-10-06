@@ -4,6 +4,7 @@
 #include "types.h"
 #include "anim.h"
 #include "fld_types.h"
+#include "macros.h"
 
 typedef struct FldShadowWork {
     s32 x;
@@ -14,7 +15,7 @@ typedef struct FldShadowWork {
     AnimState anim;
 } FldShadowWork;
 
-typedef char FldShadowWork_size[(sizeof(FldShadowWork) == 0x2C) ? 1 : -1];
+STATIC_ASSERT(sizeof(FldShadowWork) == 0x2C, FldShadowWorkSize);
 
 void FldRikuSetAnim(FldWork* work, s32 index, u16 flags);
 

@@ -5,6 +5,7 @@
 #include "anim.h"
 #include "obj.h"
 #include "text_types.h"
+#include "macros.h"
 
 #ifdef VERSION_US
 typedef u16 JiminyTextChar;
@@ -20,8 +21,8 @@ typedef struct JiminyLocalizedText {
     u16 lineCounts[5];
 } JiminyLocalizedText;
 
-typedef char JiminyLocalizedName_size[(sizeof(JiminyLocalizedName) == 20) ? 1 : -1];
-typedef char JiminyLocalizedText_size[(sizeof(JiminyLocalizedText) == 32) ? 1 : -1];
+STATIC_ASSERT(sizeof(JiminyLocalizedName) == 20, JiminyLocalizedNameSize);
+STATIC_ASSERT(sizeof(JiminyLocalizedText) == 32, JiminyLocalizedTextSize);
 #endif
 
 typedef struct JiminyPair {

@@ -2,6 +2,7 @@
 #define GUARD_LISTPOOL_H
 
 #include "types.h"
+#include "macros.h"
 
 enum ListNodeFlag {
     LIST_NODE_FLAG_ACTIVE = 0x1,
@@ -23,8 +24,8 @@ typedef struct ListPool {
     ListNode* activeTail;
 } ListPool;
 
-typedef char ListNode_size[(sizeof(ListNode) == 0x14) ? 1 : -1];
-typedef char ListPool_size[(sizeof(ListPool) == 0x10) ? 1 : -1];
+STATIC_ASSERT(sizeof(ListNode) == 0x14, ListNodeSize);
+STATIC_ASSERT(sizeof(ListPool) == 0x10, ListPoolSize);
 
 void ListPoolInit(void* pool);
 void ListPoolAddFree(void* node, void* pool, void* owner);

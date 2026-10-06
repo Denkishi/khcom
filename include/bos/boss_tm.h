@@ -6,6 +6,7 @@
 #include "anim.h"
 #include "taskpool.h"
 #include "obj.h"
+#include "macros.h"
 
 typedef struct TmArmSrc {
     s32 x;
@@ -228,9 +229,9 @@ typedef struct TmFootWork {
     u32 unk_480;
 } TmFootWork;
 
-typedef char TmArmWork_size[(sizeof(TmArmWork) == 0x258) ? 1 : -1];
+STATIC_ASSERT(sizeof(TmArmWork) == 0x258, TmArmWorkSize);
 
-typedef char TmFootWork_size[(sizeof(TmFootWork) == 0x484) ? 1 : -1];
+STATIC_ASSERT(sizeof(TmFootWork) == 0x484, TmFootWorkSize);
 
 typedef struct TmBodyStep {
     s16 dx;
@@ -268,8 +269,8 @@ typedef struct TmFootStep {
     u8 unk_1C[0x4];
 } TmFootStep;
 
-typedef char TmWork_size[(sizeof(TmWork) == 0x64) ? 1 : -1];
-typedef char TmBodyWork_size[(sizeof(TmBodyWork) == 0x494) ? 1 : -1];
+STATIC_ASSERT(sizeof(TmWork) == 0x64, TmWorkSize);
+STATIC_ASSERT(sizeof(TmBodyWork) == 0x494, TmBodyWorkSize);
 
 void BosTmBodyResetTimers(TmBodyWork* work);
 void BosTmBodyInitEnemy(BtlObj* obj, s16 x, s16 y, s16 z);

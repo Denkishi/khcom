@@ -2,6 +2,7 @@
 #define GUARD_SIO_TYPES_H
 
 #include "types.h"
+#include "macros.h"
 
 typedef struct SioWork {
     u8 isParent;
@@ -33,6 +34,6 @@ typedef struct SioWork {
     u8 unk_322[0x02];
 } SioWork;
 
-typedef char SioWork_size[(sizeof(SioWork) == 0x324) ? 1 : -1];
+STATIC_ASSERT(sizeof(SioWork) == 0x324, SioWorkSize);
 
 #endif

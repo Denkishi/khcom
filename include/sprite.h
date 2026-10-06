@@ -5,6 +5,7 @@
 #include "engine.h"
 #include "listpool.h"
 #include "obj.h"
+#include "macros.h"
 
 typedef struct ObjListPool {
     ListPool head;
@@ -38,12 +39,12 @@ struct SpriteWork {
     u8 mosaicEnabled;
 };
 
-typedef char SpriteWork_size[(sizeof(SpriteWork) == 0x2BB0) ? 1 : -1];
-typedef char ObjTiles_size[(sizeof(ObjTiles) == 0x30) ? 1 : -1];
-typedef char ObjPalette_size[(sizeof(ObjPalette) == 0x28) ? 1 : -1];
-typedef char ObjListPool_size[(sizeof(ObjListPool) == 0x14) ? 1 : -1];
-typedef char SpriteEntry_size[(sizeof(SpriteEntry) == 0x18) ? 1 : -1];
-typedef char ObjAffine_size[(sizeof(ObjAffine) == 0x18) ? 1 : -1];
+STATIC_ASSERT(sizeof(SpriteWork) == 0x2BB0, SpriteWorkSize);
+STATIC_ASSERT(sizeof(ObjTiles) == 0x30, ObjTilesSize);
+STATIC_ASSERT(sizeof(ObjPalette) == 0x28, ObjPaletteSize);
+STATIC_ASSERT(sizeof(ObjListPool) == 0x14, ObjListPoolSize);
+STATIC_ASSERT(sizeof(SpriteEntry) == 0x18, SpriteEntrySize);
+STATIC_ASSERT(sizeof(ObjAffine) == 0x18, ObjAffineSize);
 
 void SpriteInit();
 void SpriteFree();

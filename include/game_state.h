@@ -7,6 +7,7 @@
 #include "fld_types.h"
 #include "player_progression_types.h"
 #include "listpool.h"
+#include "macros.h"
 
 enum GameFlag {
     GAME_FLAG_MAP_ENEMY_BATTLE = 0x2,
@@ -91,9 +92,9 @@ typedef struct GameState {
     u64 linkPartnerLearnedStocks2;
 } GameState;
 
-typedef char GameState_size[(sizeof(GameState) == 0x210) ? 1 : -1];
-typedef char GameState_progression_offset[(offsetof(GameState, progression) == 0xF8) ? 1 : -1];
-typedef char MapEnmCache_size[(sizeof(MapEnmCache) == 0x38) ? 1 : -1];
+STATIC_ASSERT(sizeof(GameState) == 0x210, GameStateSize);
+STATIC_ASSERT(offsetof(GameState, progression) == 0xF8, GameStateProgressionOffset);
+STATIC_ASSERT(sizeof(MapEnmCache) == 0x38, MapEnmCacheSize);
 
 extern GameState gGameState;
 

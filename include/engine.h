@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "obj.h"
+#include "macros.h"
 
 struct SpriteWork;
 
@@ -97,8 +98,8 @@ typedef struct FadeWork {
     u16 flags;
 } FadeWork;
 
-typedef char FadeWork_size[(sizeof(FadeWork) == 0x598) ? 1 : -1];
-typedef char PaletteSlot_size[(sizeof(PaletteSlot) == 0x2C) ? 1 : -1];
+STATIC_ASSERT(sizeof(FadeWork) == 0x598, FadeWorkSize);
+STATIC_ASSERT(sizeof(PaletteSlot) == 0x2C, PaletteSlotSize);
 
 typedef struct Spline2D {
     s16 pointCount;
@@ -111,7 +112,7 @@ typedef struct Spline2D {
     s32* yValues;
 } Spline2D;
 
-typedef char Spline2D_size[(sizeof(Spline2D) == 0x20) ? 1 : -1];
+STATIC_ASSERT(sizeof(Spline2D) == 0x20, Spline2DSize);
 
 void SplineBuildAxisCoefficients(Spline2D* spline, s32* knots, s32* values, s32* coefficients);
 s32 SplineEvaluateAxis(s16* pointCount, s32 position, s32* knots, s32* values, s32* coefficients);

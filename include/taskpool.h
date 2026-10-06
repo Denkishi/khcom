@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "listpool.h"
+#include "macros.h"
 
 typedef struct TaskPool {
     ListPool head;
@@ -33,8 +34,8 @@ typedef struct Task {
     TaskUpdateFunc update;
 } Task;
 
-typedef char TaskPool_size[(sizeof(TaskPool) == 0x14) ? 1 : -1];
-typedef char Task_size[(sizeof(Task) == 0x24) ? 1 : -1];
+STATIC_ASSERT(sizeof(TaskPool) == 0x14, TaskPoolSize);
+STATIC_ASSERT(sizeof(Task) == 0x24, TaskSize);
 
 Task* TaskCreate(TaskPool* pool, TaskDesc* desc, const void* arg);
 Task* TaskDestroy(TaskPool* pool, Task* task);

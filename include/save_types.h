@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "card_types.h"
+#include "macros.h"
 
 #define SAVE_FILES 4
 #define SAVE_CARDS 999
@@ -59,7 +60,7 @@ typedef struct GameFloor {
     u8 eventStep;
 } GameFloor;
 
-typedef char GameFloor_size[(sizeof(GameFloor) == 4) ? 1 : -1];
+STATIC_ASSERT(sizeof(GameFloor) == 4, GameFloorSize);
 
 typedef struct MapProgress {
     u8 world;

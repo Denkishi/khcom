@@ -2,6 +2,7 @@
 #define GUARD_PC_SPRITE_TYPES_H
 
 #include "types.h"
+#include "macros.h"
 
 typedef struct PcSpriteDef {
     u16 count;
@@ -10,6 +11,6 @@ typedef struct PcSpriteDef {
     u16 attr2;
 } PcSpriteDef;
 
-typedef char PcSpriteDef_size[(sizeof(PcSpriteDef) == 8) ? 1 : -1];
+STATIC_ASSERT(sizeof(PcSpriteDef) == 8, PcSpriteDefSize);
 
 #endif

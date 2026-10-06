@@ -2,6 +2,7 @@
 #define GUARD_ANIM_H
 
 #include "types.h"
+#include "macros.h"
 
 typedef struct AnimDef {
     void* gfxTable;
@@ -22,8 +23,8 @@ typedef struct AnimHeader {
     AnimFrame frames[0];
 } __attribute__((packed, aligned(2))) AnimHeader;
 
-typedef char AnimHeader_size[(sizeof(AnimHeader) == 6) ? 1 : -1];
-typedef char AnimFrame_size[(sizeof(AnimFrame) == 4) ? 1 : -1];
+STATIC_ASSERT(sizeof(AnimHeader) == 6, AnimHeaderSize);
+STATIC_ASSERT(sizeof(AnimFrame) == 4, AnimFrameSize);
 
 enum AnimFlag {
     ANIM_FLAG_LOOP = 0x1,

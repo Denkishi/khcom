@@ -26,6 +26,7 @@
 #include "ui_text.h"
 #include "sprite_palettes.h"
 #include "text_types.h"
+#include "gba/defines.h"
 
 void Deck_Equip_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
@@ -48,9 +49,9 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* active) {
     work->x2 = (243 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->y2 = 82;
 #else
-    work->x = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    work->x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
 #ifdef VERSION_EU
-    work->x2 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
 
     if (gLanguage - 1 <= 1) {
         work->y = 66;
@@ -61,7 +62,7 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* active) {
     }
 #else
     work->y = 82;
-    work->x2 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->y2 = 66;
 #endif
 #endif
@@ -93,10 +94,10 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* active) {
     work->x2 = (207 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->y2 = 62;
 #elif defined(VERSION_EU)
-    work->x2 = (240 - GetTextSlotsMaxLineWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsMaxLineWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->y2 = 68;
 #else
-    work->x2 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->y2 = 68;
 #endif
     work->unk_790 = 0;
@@ -127,9 +128,9 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* active) {
 #ifdef VERSION_JP
     work->x2 = (219 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
 #elif defined(VERSION_EU)
-    work->x2 = (240 - GetTextSlotsMaxLineWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsMaxLineWidth(work->textSlots2, work->textSlotCount2)) / 2;
 #else
-    work->x2 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
 #endif
     work->y2 = 62;
     work->unk_790 = 0;
@@ -246,11 +247,11 @@ void Deck_Yes_No_0(DeckConfirmWork* work, u8* active) {
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
-    work->x = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    work->x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 66;
-    work->x2 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;
     work->y2 = 88;
-    work->x3 = (240 - GetTextSlotsWidth(work->textSlots3, work->textSlotCount3)) / 2 + DECK_PROMPT_RIGHT_DX;
+    work->x3 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots3, work->textSlotCount3)) / 2 + DECK_PROMPT_RIGHT_DX;
     work->y3 = 88;
     work->unk_790 = 0;
     work->unk_7A4 = 0;
@@ -278,10 +279,10 @@ void Deck_Clear_0(DeckConfirmWork* work, u8* active) {
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
-    work->x = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
-    work->x2 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;
+    work->x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    work->x2 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;
     work->y2 = 88;
-    work->x3 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount3)) / 2 + DECK_PROMPT_RIGHT_DX;
+    work->x3 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount3)) / 2 + DECK_PROMPT_RIGHT_DX;
     work->y3 = 88;
     work->y = DECK_CLEAR_TEXT_Y;
     work->unk_790 = 0;

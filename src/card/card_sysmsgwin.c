@@ -345,9 +345,9 @@ void sysmsgwin_2(SysMsgWinWork* work) {
 
     if (work->choiceVisible) {
         DrawSprite(120, 75, gMsgBoxFrames[1], work->tiles, work->palette3, NULL, 0, 10);
-        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 62, work->textSlots,
+        DrawTextSlots((DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 62, work->textSlots,
                       work->textPalette, 0, work->textSlotCount);
-        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 77, work->textSlots2,
+        DrawTextSlots((DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 77, work->textSlots2,
                       work->textPalette, 0, work->textSlotCount2);
     }
 }

@@ -51,6 +51,7 @@
 #include "event_ids.h"
 #include "jiminy_records_index_data.h"
 #include "songs.h"
+#include "gba/defines.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);
@@ -87,8 +88,8 @@ void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz) {
     }
 
     if (gBtlWork->rotation == 0) {
-        *outX = x + 120;
-        *outY = y + 80;
+        *outX = x + DISPLAY_WIDTH / 2;
+        *outY = y + DISPLAY_HEIGHT / 2;
     } else {
         angle = -gBtlWork->rotation;
         sine = gSineTable;
@@ -98,8 +99,8 @@ void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz) {
         rotY = sine[idx += 64] * x;
         rotX += sine[angle] * y;
         rotY += sine[cosIndex] * y;
-        *outX = (rotX >> 8) + 120;
-        *outY = (rotY >> 8) + 80;
+        *outX = (rotX >> 8) + DISPLAY_WIDTH / 2;
+        *outY = (rotY >> 8) + DISPLAY_HEIGHT / 2;
     }
 }
 

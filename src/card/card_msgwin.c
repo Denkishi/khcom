@@ -38,6 +38,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "card_msgwin.h"
+#include "gba/defines.h"
 
 static CardMsgWinWork* sActiveCardMsgwin;
 
@@ -236,8 +237,8 @@ static void msgwin_2(CardMsgWinWork* work) {
     if (work->tiles2 != NULL) {
         frames = gMsgBoxFrames;
         DrawSprite(120, 80, frames[1], work->tiles2, work->palette4, NULL, 0, 10);
-        DrawTextSlots((240 - work->textSlotCounts[0] * 10) >> 1, 67, work->textSlots, work->textPalette, 0, work->textSlotCounts[0]);
-        DrawTextSlots((240 - work->textSlotCounts[1] * 10) >> 1, 82, work->textSlots2, work->textPalette, 0, work->textSlotCounts[1]);
+        DrawTextSlots((DISPLAY_WIDTH - work->textSlotCounts[0] * 10) >> 1, 67, work->textSlots, work->textPalette, 0, work->textSlotCounts[0]);
+        DrawTextSlots((DISPLAY_WIDTH - work->textSlotCounts[1] * 10) >> 1, 82, work->textSlots2, work->textPalette, 0, work->textSlotCounts[1]);
     }
 }
 

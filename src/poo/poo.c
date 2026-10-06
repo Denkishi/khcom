@@ -49,6 +49,7 @@
 #include "card_message_data.h"
 #include "event_ids.h"
 #include "jiminy_records_index_data.h"
+#include "gba/defines.h"
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);
@@ -626,7 +627,7 @@ u8 IsPoohNearScreenEdge() {
     x = (gPoohPos->x >> 8) - gPooScrollX;
     y = (gPoohPos->y >> 8) + (gPoohPos->z >> 8) - gPooScrollY;
 
-    if (x < gPoohHitBox.radius * 2 || 240 - gPoohHitBox.radius * 2 < x || y < gPoohHitBox.height * 2 || y > 152) {
+    if (x < gPoohHitBox.radius * 2 || DISPLAY_WIDTH - gPoohHitBox.radius * 2 < x || y < gPoohHitBox.height * 2 || y > 152) {
         return 1;
     }
 
@@ -1621,8 +1622,8 @@ void task_poo_map_0(PooMapWork* work) {
     gPoohPos = &poohPos;
     UpdatePooCameraCenter();
     sPooCameraMaxY = gPooCameraY;
-    gPooScrollX = (gPooCameraX >> 8) - 120;
-    gPooScrollY = (gPooCameraY >> 8) - 80;
+    gPooScrollX = (gPooCameraX >> 8) - DISPLAY_WIDTH / 2;
+    gPooScrollY = (gPooCameraY >> 8) - DISPLAY_HEIGHT / 2;
     gFieldState->x = gPooScrollX << 8;
     gFieldState->y = gPooScrollY << 8;
     work->mapWidth = gPooMapBgDesc.mapWidth;
@@ -1819,8 +1820,8 @@ u8 GetPooScreenOverflow(s16 x, s16 y, s16 h, s16 vy, s16 w, s16 vx, s32* ox, s32
     if (edge >= 0) {
         edge = x - w;
 
-        if (edge > 0xF0) {
-            edge -= 0xF0;
+        if (edge > DISPLAY_WIDTH) {
+            edge -= DISPLAY_WIDTH;
             *ox = edge << 8;
             overflowed = 1;
         }
@@ -1834,8 +1835,8 @@ u8 GetPooScreenOverflow(s16 x, s16 y, s16 h, s16 vy, s16 w, s16 vx, s32* ox, s32
     if (edge >= 0) {
         edge = y - h;
 
-        if (edge > 0xA0) {
-            edge -= 0xA0;
+        if (edge > DISPLAY_HEIGHT) {
+            edge -= DISPLAY_HEIGHT;
             *oy = edge << 8;
             overflowed = 1;
         }
@@ -1903,8 +1904,8 @@ void MovePooCamera(s32 dx, s32 dy) {
         gPooCameraY = sPooCameraMaxY;
     }
 
-    gPooScrollX = (gPooCameraX >> 8) - 120;
-    gPooScrollY = (gPooCameraY >> 8) - 80;
+    gPooScrollX = (gPooCameraX >> 8) - DISPLAY_WIDTH / 2;
+    gPooScrollY = (gPooCameraY >> 8) - DISPLAY_HEIGHT / 2;
     gFieldState->x = gPooScrollX << 8;
     gFieldState->y = gPooScrollY << 8;
     ScrollBgMapTo(3, gPooScrollX, gPooScrollY);

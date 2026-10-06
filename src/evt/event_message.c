@@ -7100,8 +7100,8 @@ void msgwait_yesno_2(MsgWaitWork* work) {
     case 1:
         DrawSprite(120, 80, gMsgBoxFrames[1], work->tiles3, work->palette3, NULL, 0, 10);
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_FLAG_HFLIP, 9);
-        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 67, work->textSlots, work->palette4, 0, work->textSlotCount);
-        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 82, work->textSlots2, work->palette4, 0, work->textSlotCount2);
+        DrawTextSlots((DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 67, work->textSlots, work->palette4, 0, work->textSlotCount);
+        DrawTextSlots((DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 82, work->textSlots2, work->palette4, 0, work->textSlotCount2);
         break;
     }
 }
@@ -7122,7 +7122,7 @@ void HBlankIntrEventScanlineScroll() {
     line = REG_VCOUNT;
     line = (line + 1) % 228;
 
-    if (line < 160) {
+    if (line < DISPLAY_HEIGHT) {
         if (gEventScanlineScroll->enabled == 1) {
             REG_BG2HOFS = gEventScanlineScroll->scrollX[line];
             REG_BG3HOFS = gEventScanlineScroll->scrollX[line];
@@ -7614,7 +7614,7 @@ void UpdateEventScanlineWave(EventCameraWork* work) {
     s32 wave;
 
     if (work->scanline.enabled == 1) {
-        for (i = 0; i < 160; i++) {
+        for (i = 0; i < DISPLAY_HEIGHT; i++) {
             work->scanline.scrollX[i] = (gEventState->x >> 8) + (wave = (u8)SIN((i + work->wavePhase) * 2)) / 32;
         }
 

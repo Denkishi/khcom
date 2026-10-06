@@ -628,7 +628,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
             work->scanlineBuf[work->frameCount & 1][i] = ((u32)work->scrollX * 9 / 16) & 0x1FF;
         }
 
-        for (; i <= 159; i++) {
+        for (; i <= DISPLAY_HEIGHT - 1; i++) {
             work->scanlineBuf[work->frameCount & 1][i] = work->scrollX & 0x1FF;
         }
 
@@ -653,7 +653,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
             work->scanlineBuf[work->frameCount & 1][i] = work->scrollY & 0x1FF;
         }
 
-        for (; i <= 159; i++) {
+        for (; i <= DISPLAY_HEIGHT - 1; i++) {
             dx = ~(i * 2 - 256);
             work->scanlineBuf[work->frameCount & 1][i] = (work->scrollY + dx) & 0x1FF;
         }

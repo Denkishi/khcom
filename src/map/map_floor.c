@@ -20,6 +20,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "text_types.h"
+#include "gba/defines.h"
 
 extern const MapNameText* gFloorNames[13];
 extern const MapNameText* gBasementFloorNames[12];
@@ -54,7 +55,7 @@ void Task_MapFloor_0(MapFloorWork* work) {
 #endif
     work->palette2 = LoadTextPalette(1);
     work->textSlotCount = LoadTextSlots(GetFloorName(), work->textSlots);
-    work->textX = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    work->textX = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
 }
 
 s32 Task_MapFloor_1(MapFloorWork* work) {

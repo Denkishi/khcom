@@ -34,6 +34,7 @@
 #include "sprite_palettes.h"
 #include "default_bg_map.h"
 #include "enemy_ids.h"
+#include "gba/defines.h"
 
 static const EmyKind sBosUrsulaEmyKind = { ENEMY_URSULA, 0, 32, 24, 0, 0, 0 };
 
@@ -755,8 +756,8 @@ void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg) {
     BtlMapResetShake();
     ScrollBgMapTo(1, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
     gDispCnt |= DISPCNT_WIN0_ON;
-    gWin0H = WIN_RANGE(0, 240);
-    gWin0V = WIN_RANGE(80, 160);
+    gWin0H = WIN_RANGE(0, DISPLAY_WIDTH);
+    gWin0V = WIN_RANGE(80, DISPLAY_HEIGHT);
     gWinIn = (WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     gWinOut = (WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
     work->viewYMax = 0x1E000;
@@ -820,14 +821,14 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
     }
 
     gBtlWork->viewY += BtlMapGetShake();
-    ScrollBgMapTo(1, (gBtlWork->viewX >> 8) - 0x78, (gBtlWork->viewY >> 8) - 0x50);
+    ScrollBgMapTo(1, (gBtlWork->viewX >> 8) - DISPLAY_WIDTH / 2, (gBtlWork->viewY >> 8) - DISPLAY_HEIGHT / 2);
     top = -0x18 - (gBtlWork->viewY >> 8);
 
-    if (top > 0xA0 || !gBosUrsulaActive) {
+    if (top > DISPLAY_HEIGHT || !gBosUrsulaActive) {
         gDispCnt &= ~DISPCNT_WIN0_ON;
     } else {
         gDispCnt |= DISPCNT_WIN0_ON;
-        gWin0V = (top << 8) | 0xA0;
+        gWin0V = (top << 8) | DISPLAY_HEIGHT;
     }
 
     return 1;

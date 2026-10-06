@@ -2795,7 +2795,7 @@ void task_bos_lst_2(BosLstWork* work) {
 
         if (sy < 0) {
             CpuFastFill(0, work->bgMap, ((-sy) >> 3) * 64);
-        } else if (sy <= 159) {
+        } else if (sy <= DISPLAY_HEIGHT - 1) {
             CpuFastFill(0, work->bgMap + ((20 - (sy >> 3)) << 6), ((sy >> 3) + 12) * 64);
         }
 

@@ -26,6 +26,7 @@
 #include "ui_text.h"
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
+#include "gba/defines.h"
 
 static PrintLine* sPrintLines;
 
@@ -76,7 +77,7 @@ void CardName_0(CardNameWork* work) {
         work->nameX = x;
         suffixX = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
         work->suffixX = suffixX;
-        x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
         work->messageX = x;
         break;
     case LANGUAGE_FRENCH:
@@ -85,7 +86,7 @@ void CardName_0(CardNameWork* work) {
         work->nameX = x;
         suffixX = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
         work->suffixX = suffixX;
-        x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
         work->messageX = x;
         break;
     case LANGUAGE_SPANISH:
@@ -93,7 +94,7 @@ void CardName_0(CardNameWork* work) {
         x = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
         work->nameX = x;
         work->suffixX = x - 3;
-        x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
         work->messageX = x;
         break;
     default:
@@ -105,7 +106,7 @@ void CardName_0(CardNameWork* work) {
     work->nameX = x;
     suffixX = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
     work->suffixX = suffixX;
-    x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->messageX = x;
 #endif
     work->tiles = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);

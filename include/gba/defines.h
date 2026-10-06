@@ -24,6 +24,9 @@
 
 #define OAM 0x07000000
 
+#define DISPLAY_WIDTH 240
+#define DISPLAY_HEIGHT 160
+
 #define TILE_SIZE_4BPP 32
 #define PLTT_SIZE_4BPP 32
 

@@ -14,6 +14,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "gba/defines.h"
 
 static s32 Square(s32 x) {
     return x * x;
@@ -64,7 +65,7 @@ u8 task_sroll_b_secn_1(SrollBSecnWork* work) {
         alive = 0;
     }
 
-    if (y <= 159) {
+    if (y <= DISPLAY_HEIGHT - 1) {
         ApproachValueHalfSteps(&work->x, 0x7800, 20);
 
         if (abs(work->x - 0x7800) <= 255) {

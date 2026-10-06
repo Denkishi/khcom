@@ -3610,7 +3610,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         tildeWidth = SrollTextMeasureWidth(&work->text, sStaffRollTildeText);
                         spaceWidth = SrollTextMeasureWidth(&work->text, sStaffRollSpaceText);
                         width = lineWidth - tildeWidth + spaceWidth * 3;
-                        x = (240 - width) >> 1;
+                        x = (DISPLAY_WIDTH - width) >> 1;
                         SrollTextSetColors(&work->text, 7, 5, 0, 6);
 
                         for (n = 0; line[n] != '~'; n++) {
@@ -3635,7 +3635,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         loop = 0;
                         break;
                     case '=':
-                        SrollTextDrawStringAtPixelX(&work->text, (240 - SrollTextMeasureWidth(&work->text, line + 1)) >> 1, (row + 20) & 31, line + 1, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, (DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line + 1)) >> 1, (row + 20) & 31, line + 1, 1);
                         loop = 0;
                         break;
                     case '-':
@@ -3643,11 +3643,11 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         loop = 0;
                         break;
                     case '+':
-                        SrollTextDrawStringAtPixelX(&work->text, 240 - SrollTextMeasureWidth(&work->text, line + 1), (row + 20) & 31, line + 1, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line + 1), (row + 20) & 31, line + 1, 1);
                         loop = 0;
                         break;
                     default:
-                        SrollTextDrawStringAtPixelX(&work->text, (240 - SrollTextMeasureWidth(&work->text, line)) >> 1, (row + 20) & 31, line, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, (DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line)) >> 1, (row + 20) & 31, line, 1);
                         loop = 0;
                         break;
                     }

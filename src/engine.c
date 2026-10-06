@@ -871,7 +871,7 @@ void UpdateSpriteOam() {
             x += (s16)entry->x;
             y += (s16)entry->y;
 
-            if (x > 239 || x <= -width || y > 159 || y <= -height) {
+            if (x > DISPLAY_WIDTH - 1 || x <= -width || y > DISPLAY_HEIGHT - 1 || y <= -height) {
                 if (((ObjTiles*)entry->tiles)->allocated) {
                     tileOffset += GetObjTileCount(attr0, attr1);
                 }
@@ -974,7 +974,7 @@ u8 IsRectOutsideScreen(s16 x, s16 y, s32 topExtent, s32 bottomExtent, s32 leftEx
         return 1;
     }
 
-    if (x - (s16)left > 0xF0) {
+    if (x - (s16)left > DISPLAY_WIDTH) {
         return 1;
     }
 
@@ -982,7 +982,7 @@ u8 IsRectOutsideScreen(s16 x, s16 y, s32 topExtent, s32 bottomExtent, s32 leftEx
         return 1;
     }
 
-    if (y - (s16)top > 0xA0) {
+    if (y - (s16)top > DISPLAY_HEIGHT) {
         return 1;
     }
 
@@ -1088,7 +1088,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
         break;
     }
 
-        if (x <= 239 && x > -w && y <= 159 && y > -h) {
+        if (x <= DISPLAY_WIDTH - 1 && x > -w && y <= DISPLAY_HEIGHT - 1 && y > -h) {
             return 0;
         }
     }
@@ -2445,8 +2445,8 @@ void SetBgAffine(s32 bg, u8 rot, s32 sx, s32 sy, s32 dx, s32 dy) {
 
     src.texX = 0;
     src.texY = 0;
-    src.scrX = 0x78;
-    src.scrY = 0x50;
+    src.scrX = DISPLAY_WIDTH / 2;
+    src.scrY = DISPLAY_HEIGHT / 2;
     src.sx = 0x10000 / sx;
     src.sy = 0x10000 / sy;
     src.alpha = -rot << 8;

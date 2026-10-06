@@ -51,6 +51,7 @@
 #include "map_room_tables.h"
 #include "sprite_palettes.h"
 #include "card_message_data.h"
+#include "gba/defines.h"
 
 static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0 },
@@ -1915,14 +1916,14 @@ s32 Task_MapDbg_1(MapDbgWork* work) {
 void Task_MapDbg_2(MapDbgWork* work) {
 #ifndef VERSION_EU
     if (work->visible) {
-        DrawSmallFontString(240 - work->seedTextLength * 8, 0x8E, work->seedText, work->tiles, work->palette, 0, work->seedTextLength);
-        DrawSmallFontString(240 - work->codeTextLength * 8, 0x96, work->codeText, work->tiles, work->palette, 0, work->codeTextLength);
+        DrawSmallFontString(DISPLAY_WIDTH - work->seedTextLength * 8, 0x8E, work->seedText, work->tiles, work->palette, 0, work->seedTextLength);
+        DrawSmallFontString(DISPLAY_WIDTH - work->codeTextLength * 8, 0x96, work->codeText, work->tiles, work->palette, 0, work->codeTextLength);
 
         if (*work->editing != 0) {
             if (work->update == MapDbgEditSeed) {
-                DrawSmallFontString(240 - (work->seedCursor + 1) * 8, 0x90, &work->cursorText, work->tiles, work->palette, 0, work->cursorTextLength);
+                DrawSmallFontString(DISPLAY_WIDTH - (work->seedCursor + 1) * 8, 0x90, &work->cursorText, work->tiles, work->palette, 0, work->cursorTextLength);
             } else {
-                DrawSmallFontString(240 - (work->codeCursor + 1) * 8, 0x98, &work->cursorText, work->tiles, work->palette, 0, work->cursorTextLength);
+                DrawSmallFontString(DISPLAY_WIDTH - (work->codeCursor + 1) * 8, 0x98, &work->cursorText, work->tiles, work->palette, 0, work->cursorTextLength);
             }
         }
     }
@@ -4542,7 +4543,7 @@ void MapMsgInit(MapMsgWork* work, void* text) {
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
     work->palette = LoadTextPalette(1);
     FadeSetPaletteExcluded(work->palette->index + 16, 1);
-    work->textX = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    work->textX = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->timer = 0;
 }
 

@@ -40,6 +40,7 @@
 #include "debug_font.h"
 #include "event_ids.h"
 #include "songs.h"
+#include "gba/defines.h"
 
 static const s16 sSoraEventIds[147] = {
     EVENT_000_1F_ENTRANCE_PART1,
@@ -1021,19 +1022,19 @@ void SetEventSoundPosition(u16 song, s16 x, s16 y) {
     player = gSongTable[song].ms;
     m4aMPlayImmInit(gMPlayTable[player].info);
 
-    if ((u16)x > 240) {
+    if ((u16)x > DISPLAY_WIDTH) {
         gEventSoundMix[player].pan = total;
         gEventSoundMix[player].volume = total;
     }
 
-    if ((u16)y > 160) {
+    if ((u16)y > DISPLAY_HEIGHT) {
         gEventSoundMix[player].pan = total;
         gEventSoundMix[player].volume = total;
     }
 
     sx = x;
     dx = sx;
-    dx -= 120;
+    dx -= DISPLAY_WIDTH / 2;
     pan = dx;
 
     if (pan > 127) {
@@ -1046,8 +1047,8 @@ void SetEventSoundPosition(u16 song, s16 x, s16 y) {
 
     gEventSoundMix[player].pan = pan;
 
-    if (120 - sx >= 0) {
-        axisDist = 120 - sx;
+    if (DISPLAY_WIDTH / 2 - sx >= 0) {
+        axisDist = DISPLAY_WIDTH / 2 - sx;
     } else {
         axisDist = dx;
     }

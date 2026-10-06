@@ -37,6 +37,7 @@
 #include <stddef.h>
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
+#include "gba/defines.h"
 
 #define sAllmapState ((AllmapState*)gSharedModeWork)
 
@@ -198,7 +199,7 @@ void task_allmap_room_2(AllmapRoomWork* work) {
         priority = 80;
     }
 
-    if (x < -32 || x > 240) {
+    if (x < -32 || x > DISPLAY_WIDTH) {
         return;
     }
 
@@ -206,7 +207,7 @@ void task_allmap_room_2(AllmapRoomWork* work) {
         return;
     }
 
-    if (y > 160) {
+    if (y > DISPLAY_HEIGHT) {
         return;
     }
 
@@ -996,7 +997,7 @@ void InitAllmap() {
     sAllmapState->scrollX = 0;
     sAllmapState->scrollY = 0;
     AllmapSetBounds(sAllmapState->minX, sAllmapState->maxX, sAllmapState->minY, sAllmapState->maxY);
-    sAllmapState->introScrollY = (sAllmapState->scrollY + 160) << 8;
+    sAllmapState->introScrollY = (sAllmapState->scrollY + DISPLAY_HEIGHT) << 8;
     sAllmapState->introTargetY = sAllmapState->scrollY << 8;
     gAllmapCameraX = sAllmapState->originX + sAllmapState->scrollX;
     gAllmapCameraY = sAllmapState->originY + sAllmapState->scrollY;
@@ -1156,10 +1157,10 @@ void AllmapCenterOnRoom() {
     room = sAllmapState->roomTasks[gAllmapCursorRoom]->work;
     sAllmapState->scrollY = room->y * 24 - sAllmapState->originY - 69;
 
-    if (sAllmapState->scrollY < 0 || sAllmapState->height <= 159) {
+    if (sAllmapState->scrollY < 0 || sAllmapState->height <= DISPLAY_HEIGHT - 1) {
         sAllmapState->scrollY = 0;
-    } else if (sAllmapState->scrollY > sAllmapState->height - 160) {
-        sAllmapState->scrollY = sAllmapState->height - 160;
+    } else if (sAllmapState->scrollY > sAllmapState->height - DISPLAY_HEIGHT) {
+        sAllmapState->scrollY = sAllmapState->height - DISPLAY_HEIGHT;
     }
 
     if ((s16)(room->y * 24 - sAllmapState->originY) <= 15) {
@@ -1168,10 +1169,10 @@ void AllmapCenterOnRoom() {
 
     sAllmapState->scrollX = room->x * 24 - sAllmapState->originX - 104;
 
-    if (sAllmapState->scrollX < 0 || sAllmapState->width <= 239) {
+    if (sAllmapState->scrollX < 0 || sAllmapState->width <= DISPLAY_WIDTH - 1) {
         sAllmapState->scrollX = 0;
-    } else if (sAllmapState->scrollX > sAllmapState->width - 240) {
-        sAllmapState->scrollX = sAllmapState->width - 240;
+    } else if (sAllmapState->scrollX > sAllmapState->width - DISPLAY_WIDTH) {
+        sAllmapState->scrollX = sAllmapState->width - DISPLAY_WIDTH;
     }
 }
 
@@ -1315,16 +1316,16 @@ void AllmapSetBounds(u16 minX, u16 maxX, u16 minY, u16 maxY) {
 
     sAllmapState->height = (maxY - minY) * 24 + 32;
 
-    if (sAllmapState->height <= 159) {
-        dy = (160 - sAllmapState->height) / 2;
+    if (sAllmapState->height <= DISPLAY_HEIGHT - 1) {
+        dy = (DISPLAY_HEIGHT - sAllmapState->height) / 2;
     } else {
         dy = 0;
     }
 
     sAllmapState->width = (maxX - minX) * 24 + 32;
 
-    if (sAllmapState->width <= 239) {
-        dx = (240 - sAllmapState->width) / 2;
+    if (sAllmapState->width <= DISPLAY_WIDTH - 1) {
+        dx = (DISPLAY_WIDTH - sAllmapState->width) / 2;
     } else {
         dx = 0;
     }

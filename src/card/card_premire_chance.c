@@ -18,6 +18,7 @@
 #include <stddef.h>
 #include "card_premire_chance.h"
 #include "sprite_palettes.h"
+#include "gba/defines.h"
 
 static const s16 sPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 90 };
 
@@ -173,9 +174,9 @@ void UpdatePremireChanceCardPos(PremireChanceCardWork* work) {
 
 u8 IsPremireChanceCardOnScreen(PremireChanceCardWork* work) {
     if (work->x >= 0) {
-        if (work->x <= 240) {
+        if (work->x <= DISPLAY_WIDTH) {
             if (work->y >= 0) {
-                if (work->y <= 160) {
+                if (work->y <= DISPLAY_HEIGHT) {
                     return 1;
                 }
             }

@@ -3758,7 +3758,7 @@ void NewGameSlotMenuDraw() {
     DrawTextSlots(100, slotOffset + (sNewGameSlotMenuWork->slotBaseY + 22), sNewGameSlotMenuWork->textSlots,
         sNewGameSlotMenuWork->palette8, 50, sNewGameSlotMenuWork->textSlotCount);
     DrawTextSlots(
-        (240 - GetTextSlotsWidth(sNewGameSlotMenuWork->textSlots2, sNewGameSlotMenuWork->textSlotCount2)) / 2, 134,
+        (DISPLAY_WIDTH - GetTextSlotsWidth(sNewGameSlotMenuWork->textSlots2, sNewGameSlotMenuWork->textSlotCount2)) / 2, 134,
         sNewGameSlotMenuWork->textSlots2, sNewGameSlotMenuWork->palette9, 50, sNewGameSlotMenuWork->textSlotCount2);
 }
 
@@ -5977,7 +5977,7 @@ void Task_MapMenu_2(MapMenuWork* work) {
 #ifdef VERSION_EU
                 120 - (GetTextSlotsWidth(work->textSlots2, work->textSlotCount2) >> 1),
 #else
-                (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2,
+                (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2,
 #endif
                 64, work->textSlots2,
                 work->confirmPalette, 70, work->textSlotCount2);

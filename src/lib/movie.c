@@ -78,9 +78,9 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
     s32 y;
 
     MovieGetSize(gMoviePlayer, &w, &h);
-    x = (240 - w) >> 1;
-    y = (160 - h) >> 1;
-    MovieDrawFrame(gMoviePlayer, (u16*)VRAM + (y * 240 + x));
+    x = (DISPLAY_WIDTH - w) >> 1;
+    y = (DISPLAY_HEIGHT - h) >> 1;
+    MovieDrawFrame(gMoviePlayer, (u16*)VRAM + (y * DISPLAY_WIDTH + x));
     MovieAdvanceFrame(gMoviePlayer);
     SndStreamStart();
     channels = MovieGetChannels(gMoviePlayer);
@@ -95,7 +95,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
         while (!MovieSyncFrame(gMoviePlayer)) {
         }
 
-        MovieDrawFrame(gMoviePlayer, (u16*)VRAM + (y * 240 + x));
+        MovieDrawFrame(gMoviePlayer, (u16*)VRAM + (y * DISPLAY_WIDTH + x));
 
         if (!MovieAdvanceFrame(gMoviePlayer)) {
             break;
@@ -161,7 +161,7 @@ u8* MovieGetTicks() {
     REG_IME = 0;
     vc = REG_VCOUNT;
 
-    if (vc > 159) {
+    if (vc > DISPLAY_HEIGHT - 1) {
         t = gMovieHeap.ticks + (vc - MOVIE_TICKS_PER_FRAME);
     } else {
         t = gMovieHeap.ticks + vc;

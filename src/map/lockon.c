@@ -18,6 +18,7 @@
 #include <stddef.h>
 #include "lockon.h"
 #include "sprite_palettes.h"
+#include "gba/defines.h"
 
 void task_lockon_0(LockonWork* work) {
     s32 i;
@@ -157,8 +158,8 @@ void task_lockon_2(LockonWork* work) {
     y = (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->height;
     y2.coord = y - 8;
 
-    CLAMP_LABEL(x2.coord, x + 60, 240, 192);
-    CLAMP_LABEL(y2.coord, y, 160, 152);
+    CLAMP_LABEL(x2.coord, x + 60, DISPLAY_WIDTH, 192);
+    CLAMP_LABEL(y2.coord, y, DISPLAY_HEIGHT, 152);
 
     x2.counter = work->timer++;
     y2.counter = x2.counter;

@@ -24,6 +24,7 @@
 #include "title_types.h"
 #include "types.h"
 #include "mode_title.h"
+#include "gba/defines.h"
 
 #ifdef VERSION_EU
 extern void** gTitleLumiSpritesEu[5];
@@ -871,7 +872,7 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
         work->gfx = frames[2];
     }
 
-    x = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 240 : 0;
+    x = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? DISPLAY_WIDTH : 0;
     DrawSprite(x, 0x8F, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 100);
 }
 

@@ -1009,9 +1009,9 @@ void DispCardname_0(DispCardnameWork* work, u16* text) {
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
     work->palette = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
-    x = (240 - work->textSlotCount * 10) / 2;
+    x = (DISPLAY_WIDTH - work->textSlotCount * 10) / 2;
 #else
-    x = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
 #endif
     work->x = x;
 }
@@ -1536,7 +1536,7 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* task) {
     u8 n;
 
     work->gfx = AnimUpdate(&work->anim);
-    work->rowTargetX = ((240 - (work->keyCount - work->paidCount) * 32) << 7) + 0x1000;
+    work->rowTargetX = ((DISPLAY_WIDTH - (work->keyCount - work->paidCount) * 32) << 7) + 0x1000;
     ApproachValue(&work->rowX, work->rowTargetX, work->slideSteps);
 
     if (work->slideSteps != 0) {

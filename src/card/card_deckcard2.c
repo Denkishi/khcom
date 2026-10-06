@@ -15,6 +15,7 @@
 #include <stddef.h>
 #include "card_deckcard2.h"
 #include "sprite_palettes.h"
+#include "gba/defines.h"
 
 const s16 gDeckGridColumnX[3] = { 13, 36, 59 };
 
@@ -178,7 +179,7 @@ u8 DeckCard2IsOnScreen(DeckCard2Work* work) {
         return 0;
     }
 
-    if (x > 240) {
+    if (x > DISPLAY_WIDTH) {
         return 0;
     }
 
@@ -186,7 +187,7 @@ u8 DeckCard2IsOnScreen(DeckCard2Work* work) {
         return 0;
     }
 
-    if (y > 160) {
+    if (y > DISPLAY_HEIGHT) {
         return 0;
     }
 

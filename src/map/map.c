@@ -100,43 +100,43 @@ static LoadGameMenuWork* sLoadGameMenuWork;
 static MenuMsgWork* sMenuMsgWork;
 
 void MapEnmPlaceInView(MapEnmArgs* arg) {
-    FldPos* q = &arg->pos;
-    s32 t;
+    FldPos* pos = &arg->pos;
+    s32 ground;
 
-    MapPickFreeFloorPosInView(q, &q->y);
-    q->z = 0;
-    t = GetFldPosFloor(q);
-    q->ground = t;
-    q->y -= t;
-    q->z = t;
+    MapPickFreeFloorPosInView(pos, &pos->y);
+    pos->z = 0;
+    ground = GetFldPosFloor(pos);
+    pos->ground = ground;
+    pos->y -= ground;
+    pos->z = ground;
 }
 
 void MapEnmPlaceInViewAbove(MapEnmArgs* arg) {
-    FldPos* q = &arg->pos;
-    s32 t;
+    FldPos* pos = &arg->pos;
+    s32 ground;
 
-    MapPickFreeFloorPosInView(q, &q->y);
-    q->z = 0;
-    t = GetFldPosFloor(q);
-    q->ground = t;
-    q->y -= t;
-    q->z = -0xA000;
+    MapPickFreeFloorPosInView(pos, &pos->y);
+    pos->z = 0;
+    ground = GetFldPosFloor(pos);
+    pos->ground = ground;
+    pos->y -= ground;
+    pos->z = -0xA000;
 }
 
 s32 MapEnmPlaceInRoom(MapEnmArgs* arg) {
-    FldPos* q = &arg->pos;
-    s32 t;
+    FldPos* pos = &arg->pos;
+    s32 ground;
     s32 i;
 
-    if (MapPickFreeFloorPos(q, &q->y)) {
-        q->z = 0;
-        t = GetFldPosFloor(q);
-        q->ground = t;
-        q->z = t;
-        q->y -= t;
+    if (MapPickFreeFloorPos(pos, &pos->y)) {
+        pos->z = 0;
+        ground = GetFldPosFloor(pos);
+        pos->ground = ground;
+        pos->z = ground;
+        pos->y -= ground;
 
         for (i = 0; i < sMapEnmCount; i++) {
-            if (sMapEnmSpawnPositions[i].x >> 8 == q->x >> 8 && sMapEnmSpawnPositions[i].y >> 8 == q->y >> 8) {
+            if (sMapEnmSpawnPositions[i].x >> 8 == pos->x >> 8 && sMapEnmSpawnPositions[i].y >> 8 == pos->y >> 8) {
                 return 0;
             }
         }
@@ -148,9 +148,9 @@ s32 MapEnmPlaceInRoom(MapEnmArgs* arg) {
 }
 
 u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
-    FldPos* d = &arg->pos;
-    MapPlatform* q = GetMapPlatform(1);
-    u16 wd = q->right - q->left - 2;
+    FldPos* pos = &arg->pos;
+    MapPlatform* platform = GetMapPlatform(1);
+    u16 wd = platform->right - platform->left - 2;
     u16 ht = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     s32 i;
 
@@ -159,31 +159,31 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
         s32 j;
 
         for (j = 0; j < wd; j++) {
-            s32 x = (s16)(q->left + j);
-            MapCell* e = MapCellAt(x, y);
+            s32 x = (s16)(platform->left + j);
+            MapCell* cell = MapCellAt(x, y);
 
-            if (e->lowerZ == q->z && (e->flags & MAP_CELL_FLAG_STAIRS)) {
-                s32 t;
-                s32 v;
+            if (cell->lowerZ == platform->z && (cell->flags & MAP_CELL_FLAG_STAIRS)) {
+                s32 ground;
+                s32 coord;
 
-                if (e->type == 4) {
+                if (cell->type == 4) {
                     arg->angle = 0x53;
-                    v = (x << 13) + 0x1800;
-                } else if (e->type == 6) {
+                    coord = (x << 13) + 0x1800;
+                } else if (cell->type == 6) {
                     arg->angle = 0xAD;
-                    v = (x << 13) + 0x800;
+                    coord = (x << 13) + 0x800;
                 } else {
                     continue;
                 }
 
-                d->x = v;
-                v = y << 12;
-                d->y = v + 0x1800;
-                d->z = 0;
-                t = GetFldPosFloor(d);
-                d->ground = t;
-                d->z = t;
-                d->y -= t;
+                pos->x = coord;
+                coord = y << 12;
+                pos->y = coord + 0x1800;
+                pos->z = 0;
+                ground = GetFldPosFloor(pos);
+                pos->ground = ground;
+                pos->z = ground;
+                pos->y -= ground;
                 return 1;
             }
         }
@@ -193,9 +193,9 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
 }
 
 u8 MapEnmPlaceAboveGmk01(MapEnmArgs* arg) {
-    FldPos* d = &arg->pos;
-    MapPlatform* q = GetMapPlatform(0);
-    u16 wd = q->right - q->left - 2;
+    FldPos* pos = &arg->pos;
+    MapPlatform* platform = GetMapPlatform(0);
+    u16 wd = platform->right - platform->left - 2;
     u16 ht = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     s32 i;
 
@@ -204,18 +204,18 @@ u8 MapEnmPlaceAboveGmk01(MapEnmArgs* arg) {
         s32 j;
 
         for (j = 0; j < wd; j++) {
-            s32 x = (s16)(q->left + j);
+            s32 x = (s16)(platform->left + j);
 
             if (MapCellAt(x, y)->flags & MAP_CELL_FLAG_CHEST) {
-                s32 t;
+                s32 ground;
 
-                d->x = x << 13;
-                d->y = y << 12;
-                d->z = 0;
-                t = GetFldPosFloor(d);
-                d->ground = t;
-                d->y -= t;
-                d->z = t - 0x2000;
+                pos->x = x << 13;
+                pos->y = y << 12;
+                pos->z = 0;
+                ground = GetFldPosFloor(pos);
+                pos->ground = ground;
+                pos->y -= ground;
+                pos->z = ground - 0x2000;
                 return 1;
             }
         }
@@ -254,23 +254,23 @@ void MapEnmSetupArgs(MapEnmArgs* arg, const MapEnmDef* def) {
 }
 
 void MapEnmSpawnFixed(MapEnmArgs* arg, u8 kind, u8 place) {
-    const u8* t;
-    MapFloorRoom* e;
-    const MapEnmDef* d;
+    const u8* shape;
+    MapFloorRoom* floorRoom;
+    const MapEnmDef* def;
     u8 ok;
 
-    t = gMapRoomShapes[gMapRoomState->roomType];
-    e = GetMapFloorRoom(gMapFloorState.room);
+    shape = gMapRoomShapes[gMapRoomState->roomType];
+    floorRoom = GetMapFloorRoom(gMapFloorState.room);
 
-    if (sMapEnmCount >= t[1]) {
+    if (sMapEnmCount >= shape[1]) {
         return;
     }
 
-    if (e->enemiesLeft - sMapEnmCount <= 0) {
+    if (floorRoom->enemiesLeft - sMapEnmCount <= 0) {
         return;
     }
 
-    d = gMapEnmDefs[kind];
+    def = gMapEnmDefs[kind];
 
     switch (place) {
     case 2:
@@ -289,9 +289,9 @@ void MapEnmSpawnFixed(MapEnmArgs* arg, u8 kind, u8 place) {
     if (ok) {
         sMapEnmSpawnPositions[sMapEnmCount] = arg->pos;
         arg->speed = 0;
-        arg->def = d;
+        arg->def = def;
         arg->update = NULL;
-        TaskCreate(&gFieldState->tasks4, d->desc, arg);
+        TaskCreate(&gFieldState->tasks4, def->desc, arg);
     }
 }
 
@@ -317,29 +317,29 @@ void MapEnmApplyRoomFlags(MapEnmWork* work) {
 }
 
 void MapEnmSetAnim(MapEnmWork* work, u8 index, u16 flags) {
-    const AnimDef* q = work->def->animDef;
+    const AnimDef* animDef = work->def->animDef;
 
     switch (work->obj.angle >> 6) {
     case 0:
-        q += index * 2;
+        animDef += index * 2;
         work->flags |= MAP_ENM_FLAG_HFLIP;
         break;
     case 1:
-        q += index * 2 + 1;
+        animDef += index * 2 + 1;
         work->flags |= MAP_ENM_FLAG_HFLIP;
         break;
     case 2:
-        q += index * 2 + 1;
+        animDef += index * 2 + 1;
         work->flags &= ~MAP_ENM_FLAG_HFLIP;
         break;
     default:
-        q += index * 2;
+        animDef += index * 2;
         work->flags &= ~MAP_ENM_FLAG_HFLIP;
         break;
     }
 
-    AnimChangeWithTables(&work->anim, q->animId, flags, q->anims, q->gfxTable);
-    SetObjTileSource(work->tiles, q->tiles);
+    AnimChangeWithTables(&work->anim, animDef->animId, flags, animDef->anims, animDef->gfxTable);
+    SetObjTileSource(work->tiles, animDef->tiles);
 }
 
 void MapEnmUpdateAnim(MapEnmWork* work) {
@@ -357,14 +357,14 @@ void MapEnmUpdateAnim(MapEnmWork* work) {
 }
 
 u8 GetRandomBattleId() {
-    const u8* q = gMapRoomShapes[gMapRoomState->roomType];
-    u8 v = q[3] + GetRandom() % (q[4] - q[3] + 1);
+    const u8* shape = gMapRoomShapes[gMapRoomState->roomType];
+    u8 battleIndex = shape[3] + GetRandom() % (shape[4] - shape[3] + 1);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return v + gRikuWorldBattleBase[gMapFloorState.world];
+        return battleIndex + gRikuWorldBattleBase[gMapFloorState.world];
     }
 
-    return v + gSoraWorldBattleBase[gMapFloorState.world];
+    return battleIndex + gSoraWorldBattleBase[gMapFloorState.world];
 }
 
 void MapEnmStartBattle(MapEnmWork* work) {
@@ -420,35 +420,35 @@ s32 MapEnmCheckAttacked(MapEnmWork* work) {
 }
 
 void MapEnmSaveToCache(MapEnmWork* work) {
-    MapEnmCache* q = ListPoolFirstFree(&gGameState.enemyCachePool);
+    MapEnmCache* cache = ListPoolFirstFree(&gGameState.enemyCachePool);
 
-    if (q != NULL) {
-        q->def = work->def;
-        q->update = work->update;
-        q->pos = work->obj.fieldPosition;
-        q->angle = work->obj.angle;
-        q->speed = work->obj.speed;
-        ListPoolActivate(&q->node, &gGameState.enemyCachePool);
+    if (cache != NULL) {
+        cache->def = work->def;
+        cache->update = work->update;
+        cache->pos = work->obj.fieldPosition;
+        cache->angle = work->obj.angle;
+        cache->speed = work->obj.speed;
+        ListPoolActivate(&cache->node, &gGameState.enemyCachePool);
     }
 }
 
 void MapEnmRestoreFromCache() {
-    MapEnmCache* q;
-    MapEnmArgs w;
-    const MapEnmDef* d;
+    MapEnmCache* cache;
+    MapEnmArgs args;
+    const MapEnmDef* def;
     s32 i;
 
-    q = ListPoolFirst(&gGameState.enemyCachePool);
+    cache = ListPoolFirst(&gGameState.enemyCachePool);
 
-    while (q != NULL) {
-        d = q->def;
-        w.def = d;
-        w.update = q->update;
-        w.pos = q->pos;
-        w.angle = q->angle;
-        w.speed = q->speed;
-        TaskCreate(&gFieldState->tasks4, d->desc, &w);
-        q = ListPoolNext(&q->node);
+    while (cache != NULL) {
+        def = cache->def;
+        args.def = def;
+        args.update = cache->update;
+        args.pos = cache->pos;
+        args.angle = cache->angle;
+        args.speed = cache->speed;
+        TaskCreate(&gFieldState->tasks4, def->desc, &args);
+        cache = ListPoolNext(&cache->node);
     }
 
     ListPoolInit(&gGameState.enemyCachePool);
@@ -459,22 +459,22 @@ void MapEnmRestoreFromCache() {
 }
 
 void MapEnmSpawnRoomSet() {
-    MapEnmArgs w;
+    MapEnmArgs args;
     s32 i;
 
     switch (gMapRoomState->roomType) {
     case 3:
-        MapEnmSpawnFixed(&w, 3, 3);
-        MapEnmSpawnFixed(&w, 2, 2);
+        MapEnmSpawnFixed(&args, 3, 3);
+        MapEnmSpawnFixed(&args, 2, 2);
         break;
     case 5:
         for (i = 0; i < 3; i++) {
             if (gMapFloorState.world == WORLD_ATLANTICA) {
-                MapEnmSpawnFixed(&w, 4, 0);
+                MapEnmSpawnFixed(&args, 4, 0);
             } else if (GetRandom() % 2) {
-                MapEnmSpawnFixed(&w, 0, 0);
+                MapEnmSpawnFixed(&args, 0, 0);
             } else {
-                MapEnmSpawnFixed(&w, 1, 0);
+                MapEnmSpawnFixed(&args, 1, 0);
             }
         }
 
@@ -483,10 +483,10 @@ void MapEnmSpawnRoomSet() {
 }
 
 void MapEnmInitRoom() {
-    MapEnmCache* q;
-    MapEnmArgs w;
-    const MapEnmDef* d;
-    MapFloorRoom* e;
+    MapEnmCache* cache;
+    MapEnmArgs args;
+    const MapEnmDef* def;
+    MapFloorRoom* floorRoom;
     s32 i;
 
     sMapEnmCount = 0;
@@ -494,27 +494,27 @@ void MapEnmInitRoom() {
     sMapEnmSpawnTimer = 46;
 
     if (gGameState.fieldResume) {
-        q = ListPoolFirst(&gGameState.enemyCachePool);
+        cache = ListPoolFirst(&gGameState.enemyCachePool);
 
-        while (q != NULL) {
-            d = q->def;
-            w.def = d;
-            w.update = q->update;
-            w.pos = q->pos;
-            w.angle = q->angle;
-            w.speed = q->speed;
-            TaskCreate(&gFieldState->tasks4, d->desc, &w);
-            q = ListPoolNext(&q->node);
+        while (cache != NULL) {
+            def = cache->def;
+            args.def = def;
+            args.update = cache->update;
+            args.pos = cache->pos;
+            args.angle = cache->angle;
+            args.speed = cache->speed;
+            TaskCreate(&gFieldState->tasks4, def->desc, &args);
+            cache = ListPoolNext(&cache->node);
         }
 
         if (gGameState.flags & GAME_FLAG_MAP_ENEMY_BATTLE) {
             gGameState.flags &= ~GAME_FLAG_MAP_ENEMY_BATTLE;
 
             if ((gGameState.flags & GAME_FLAG_BATTLE_NOT_WON) == 0) {
-                e = GetMapFloorRoom(gMapFloorState.room);
+                floorRoom = GetMapFloorRoom(gMapFloorState.room);
 
-                if (e->enemiesLeft != 0) {
-                    e->enemiesLeft--;
+                if (floorRoom->enemiesLeft != 0) {
+                    floorRoom->enemiesLeft--;
                 }
             }
         }
@@ -530,12 +530,12 @@ void MapEnmInitRoom() {
 }
 
 void MapEnmUpdateSpawner() {
-    const u8* t;
-    MapFloorRoom* e;
-    const MapEnmDef* d;
-    MapEnmArgs w;
+    const u8* shape;
+    MapFloorRoom* floorRoom;
+    const MapEnmDef* def;
+    MapEnmArgs args;
 
-    t = gMapRoomShapes[gMapRoomState->roomType];
+    shape = gMapRoomShapes[gMapRoomState->roomType];
     gFieldState->flags &= ~FIELD_FLAG_ENEMY_FRAME_CHANGED;
 
     if (sMapEnmSpawnTimer != 0) {
@@ -543,13 +543,13 @@ void MapEnmUpdateSpawner() {
         return;
     }
 
-    e = GetMapFloorRoom(gMapFloorState.room);
+    floorRoom = GetMapFloorRoom(gMapFloorState.room);
 
-    if (sMapEnmCount >= t[1]) {
+    if (sMapEnmCount >= shape[1]) {
         return;
     }
 
-    if (e->enemiesLeft - sMapEnmCount <= 0) {
+    if (floorRoom->enemiesLeft - sMapEnmCount <= 0) {
         return;
     }
 
@@ -563,124 +563,124 @@ void MapEnmUpdateSpawner() {
 
     switch (gMapRoomState->roomType) {
     case 20:
-        d = gMapEnmDefs[5];
+        def = gMapEnmDefs[5];
         break;
     case 21:
-        d = gMapEnmDefs[6];
+        def = gMapEnmDefs[6];
         break;
     default:
         if (gMapFloorState.world == WORLD_ATLANTICA) {
-            d = gMapEnmDefs[4];
+            def = gMapEnmDefs[4];
         } else if (GetRandom() % 3) {
-            d = gMapEnmDefs[0];
+            def = gMapEnmDefs[0];
         } else {
-            d = gMapEnmDefs[1];
+            def = gMapEnmDefs[1];
         }
 
         break;
     }
 
-    if (sMapEnmTileCount + d->tileCount > 256) {
+    if (sMapEnmTileCount + def->tileCount > 256) {
         return;
     }
 
     sMapEnmSpawnTimer = 30;
-    MapEnmSetupArgs(&w, d);
-    TaskCreate(&gFieldState->tasks4, d->desc, &w);
+    MapEnmSetupArgs(&args, def);
+    TaskCreate(&gFieldState->tasks4, def->desc, &args);
 }
 
 void MapEnmInit(MapEnmWork* work, MapEnmArgs* arg) {
-    FldObj* e = &work->obj;
-    const MapEnmDef* d = arg->def;
+    FldObj* obj = &work->obj;
+    const MapEnmDef* def = arg->def;
 
-    work->def = d;
+    work->def = def;
     work->update = arg->update;
     work->flags = 0;
     work->colliderDelay = 30;
-    e->fieldPosition = arg->pos;
-    e->angle = arg->angle;
-    e->speed = arg->speed;
-    e->height = d->height;
-    e->unk_34 = 0;
-    e->kind = 1;
-    work->radius = d->radius;
-    work->height = d->height;
+    obj->fieldPosition = arg->pos;
+    obj->angle = arg->angle;
+    obj->speed = arg->speed;
+    obj->height = def->height;
+    obj->unk_34 = 0;
+    obj->kind = 1;
+    work->radius = def->radius;
+    work->height = def->height;
     work->timer = 0;
     work->unk_D2 = 0;
-    work->targetX = e->fieldPosition.x;
-    work->targetY = e->fieldPosition.y;
-    work->targetZ = e->fieldPosition.z;
+    work->targetX = obj->fieldPosition.x;
+    work->targetY = obj->fieldPosition.y;
+    work->targetZ = obj->fieldPosition.z;
     sMapEnmCount++;
-    sMapEnmTileCount += d->tileCount;
-    work->tiles = AllocObjTiles(d->tileCount * 32, NULL);
-    work->palette = LoadObjPalette(d->palette, 32);
+    sMapEnmTileCount += def->tileCount;
+    work->tiles = AllocObjTiles(def->tileCount * 32, NULL);
+    work->palette = LoadObjPalette(def->palette, 32);
     work->gfx = NULL;
     AnimInit(&work->anim, NULL, NULL);
     TaskPoolInit(&work->tasks, 2);
 
-    if ((d->flags & MAP_ENM_DEF_FLAG_NO_SHADOW) == 0) {
-        TaskCreate(&work->tasks, &gTaskDescFldShadow, e);
+    if ((def->flags & MAP_ENM_DEF_FLAG_NO_SHADOW) == 0) {
+        TaskCreate(&work->tasks, &gTaskDescFldShadow, obj);
     }
 
-    if (d->flags & MAP_ENM_DEF_FLAG_GUARD) {
+    if (def->flags & MAP_ENM_DEF_FLAG_GUARD) {
         work->flags |= MAP_ENM_FLAG_PERSISTENT;
-        ColliderInit(&work->collider, 11, d->radius, d->height);
+        ColliderInit(&work->collider, 11, def->radius, def->height);
     } else {
-        ColliderInit(&work->collider, 3, d->radius, d->height);
+        ColliderInit(&work->collider, 3, def->radius, def->height);
     }
 
-    ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+    ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     ColliderSetDisabled(&work->collider, 1);
     MapEnmApplyRoomFlags(work);
 }
 
 void MapEnmDraw(MapEnmWork* work) {
-    FldObj* q = &work->obj;
+    FldObj* obj = &work->obj;
     u16 flags;
-    u16 v;
-    s32 k;
+    u16 priority;
+    s32 pixelY;
     s32 x;
     s32 y;
     s32 z;
-    s32 t;
+    s32 drawFlags;
 
     if (work->gfx == NULL) {
         return;
     }
 
-    t = work->flags & MAP_ENM_FLAG_HFLIP;
+    drawFlags = work->flags & MAP_ENM_FLAG_HFLIP;
     flags = SPRITE_PRIORITY(2);
 
-    if (t) {
+    if (drawFlags) {
         flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
     }
 
-    k = q->fieldPosition.y >> 8;
-    v = -0x1004 - k * 4;
-    q->shadowZ = q->fieldPosition.ground;
-    q->shadowPriority = v + 1;
+    pixelY = obj->fieldPosition.y >> 8;
+    priority = -0x1004 - pixelY * 4;
+    obj->shadowZ = obj->fieldPosition.ground;
+    obj->shadowPriority = priority + 1;
     z = 0;
     x = (work->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
-    t = flags;
-    y = k + (q->fieldPosition.z >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, t, v);
+    drawFlags = flags;
+    y = pixelY + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, drawFlags, priority);
     TaskPoolDraw(&work->tasks);
 }
 
 void MapEnmDestroy(MapEnmWork* work) {
-    MapEnmCache* q;
+    MapEnmCache* cache;
 
     if (gGameState.fieldResume && (work->flags & MAP_ENM_FLAG_REMOVED) == 0 &&
         ((gMapRoomState->flags & ROOM_FLAG_START_BATTLE) == 0 || (work->flags & MAP_ENM_FLAG_PERSISTENT))) {
-        q = ListPoolFirstFree(&gGameState.enemyCachePool);
+        cache = ListPoolFirstFree(&gGameState.enemyCachePool);
 
-        if (q != NULL) {
-            q->def = work->def;
-            q->update = work->update;
-            q->pos = work->obj.fieldPosition;
-            q->angle = work->obj.angle;
-            q->speed = work->obj.speed;
-            ListPoolActivate(&q->node, &gGameState.enemyCachePool);
+        if (cache != NULL) {
+            cache->def = work->def;
+            cache->update = work->update;
+            cache->pos = work->obj.fieldPosition;
+            cache->angle = work->obj.angle;
+            cache->speed = work->obj.speed;
+            ListPoolActivate(&cache->node, &gGameState.enemyCachePool);
         }
     }
 
@@ -693,71 +693,71 @@ void MapEnmDestroy(MapEnmWork* work) {
 }
 
 u8 GetRandomMapGmkIndex(u8 slot) {
-    u8 r;
+    u8 index;
 
     switch (gMapFloorState.world) {
     case WORLD_AGRABAH:
-        r = GetRandom() % 12 + 2;
+        index = GetRandom() % 12 + 2;
         break;
     case WORLD_ATLANTICA:
-        r = GetRandom() % 2;
+        index = GetRandom() % 2;
         break;
     case WORLD_WONDERLAND:
-        r = GetRandom() % 3 + 14;
+        index = GetRandom() % 3 + 14;
         break;
     case WORLD_MONSTRO:
-        r = GetRandom() % 5 + 17;
+        index = GetRandom() % 5 + 17;
         break;
     case WORLD_OLYMPUS_COLISEUM:
-        r = GetRandom() % 5 + 35;
+        index = GetRandom() % 5 + 35;
         break;
     case WORLD_HOLLOW_BASTION:
-        r = GetRandom() % 5 + 40;
+        index = GetRandom() % 5 + 40;
         break;
     case WORLD_NEVER_LAND:
-        r = GetRandom() % 7 + 45;
+        index = GetRandom() % 7 + 45;
         break;
     case WORLD_DESTINY_ISLANDS:
-        r = GetRandom() % 5 + 52;
+        index = GetRandom() % 5 + 52;
         break;
     case WORLD_TRAVERSE_TOWN:
-        r = GetRandom() % 2 + 57;
+        index = GetRandom() % 2 + 57;
         break;
     case WORLD_CASTLE_OBLIVION:
-        r = GetRandom() % 2 + 63;
+        index = GetRandom() % 2 + 63;
         break;
     case WORLD_HALLOWEEN_TOWN:
         if (slot <= 7) {
             switch (GetRandom() % 5) {
             case 2:
             case 3:
-                r = GetRandom() % 3 != 0 ? 31 : 34;
+                index = GetRandom() % 3 != 0 ? 31 : 34;
                 break;
             case 0:
             case 1:
-                r = GetRandom() % 3 != 0 ? 30 : 33;
+                index = GetRandom() % 3 != 0 ? 30 : 33;
                 break;
             default:
-                r = GetRandom() % 3 != 0 ? 29 : 32;
+                index = GetRandom() % 3 != 0 ? 29 : 32;
                 break;
             }
         } else {
-            r = GetRandom() % 7 + 22;
+            index = GetRandom() % 7 + 22;
         }
 
         break;
     default:
-        r = GetRandom() % 3 + 59;
+        index = GetRandom() % 3 + 59;
         break;
     }
 
-    return r;
+    return index;
 }
 
 MapCell* MapCellAtPos(s32 x, s32 y) {
-    u16 a = x / 0x2000;
-    u16 b = y / 0x1000;
-    return MapCellAt(a, b);
+    u16 cellX = x / 0x2000;
+    u16 cellY = y / 0x1000;
+    return MapCellAt(cellX, cellY);
 }
 
 s32 MapGmkIsAreaSparse(s16 x, s16 y) {
@@ -785,9 +785,9 @@ s32 MapGmkIsAreaSparse(s16 x, s16 y) {
 }
 
 u8 MapCellIsFreeOfType(s16 x, s16 y, u8 type) {
-    MapCell* p = MapCellAt(x, y);
+    MapCell* cell = MapCellAt(x, y);
 
-    if (p != NULL && p->lowerZ != 0x100000 && p->type == type && (p->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
+    if (cell != NULL && cell->lowerZ != 0x100000 && cell->type == type && (cell->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
         return 1;
     }
 
@@ -810,10 +810,10 @@ s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 type) {
 }
 
 s32 MapCellHeightExceeds(s16 x, s16 y, u8 limit) {
-    u16 d;
-    MapCell* p = MapCellAt(x, y);
-    d = (p->lowerZ - p->upperZ) >> 8;
-    return d > (limit << 4);
+    u16 height;
+    MapCell* cell = MapCellAt(x, y);
+    height = (cell->lowerZ - cell->upperZ) >> 8;
+    return height > (limit << 4);
 }
 
 void MapReserveArea(s16 x, s16 y, u8 w, u8 h) {
@@ -832,13 +832,13 @@ s16 MapRowsToWallBase(s16 x, s16 y) {
     s32 i;
 
     for (i = 0; i < n; i++) {
-        MapCell* p = MapCellAt(x, y + i);
+        MapCell* cell = MapCellAt(x, y + i);
 
-        if (p->flags & MAP_CELL_FLAG_GMK_RESERVED) {
+        if (cell->flags & MAP_CELL_FLAG_GMK_RESERVED) {
             return 0;
         }
 
-        if (p->type == 0 || p->type == 4 || p->type == 2 || p->type == 6) {
+        if (cell->type == 0 || cell->type == 4 || cell->type == 2 || cell->type == 6) {
             return i;
         }
     }
@@ -848,22 +848,22 @@ s16 MapRowsToWallBase(s16 x, s16 y) {
 
 s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 width) {
     s32 i;
-    u16 h;
+    u16 height;
     s32 j;
-    MapCell* q;
+    MapCell* cell;
     s32 mask;
 
-    h = gMapRoomState->rows - y;
+    height = gMapRoomState->rows - y;
 
     for (j = 0; j < width; j++) {
-        for (i = 0; i < h; i++) {
-            q = MapCellAt(x + j, y - i);
+        for (i = 0; i < height; i++) {
+            cell = MapCellAt(x + j, y - i);
 
-            if (q->flags & MAP_CELL_FLAG_GMK_RESERVED) {
+            if (cell->flags & MAP_CELL_FLAG_GMK_RESERVED) {
                 return 0;
             }
 
-            if (q->type < 7 || q->type > 9) {
+            if (cell->type < 7 || cell->type > 9) {
                 break;
             }
         }
@@ -949,20 +949,20 @@ u8 MapGmkFindLeftWallBase1x4(FldPos* pos) {
     s16 x;
     s16 y;
     s16 cy;
-    u16 n;
-    u16 m;
+    u16 colRange;
+    u16 rowRange;
     s32 i;
     s32 j;
 
-    n = gMapRoomState->cols - 1;
-    m = gMapRoomState->bottomRow - gMapRoomState->topRow - 4;
-    x = GetRandom() % n;
-    y = GetRandom() % m;
+    colRange = gMapRoomState->cols - 1;
+    rowRange = gMapRoomState->bottomRow - gMapRoomState->topRow - 4;
+    x = GetRandom() % colRange;
+    y = GetRandom() % rowRange;
 
-    for (i = 0; i < m; i++) {
+    for (i = 0; i < rowRange; i++) {
         cy = gMapRoomState->topRow + y;
 
-        for (j = 0; j < n; j++) {
+        for (j = 0; j < colRange; j++) {
             if ((u8)MapGmkIsAreaSparse(x, cy)) {
                 if (MapCellIsFreeOfType(x, cy, 4)) {
                     if (MapCellIsFreeOfType(x, cy + 1, 0)) {
@@ -980,10 +980,10 @@ u8 MapGmkFindLeftWallBase1x4(FldPos* pos) {
             }
 
             x++;
-            x %= n;
+            x %= colRange;
         }
 
-        y = (y != 0 ? y : m) - 1;
+        y = (y != 0 ? y : rowRange) - 1;
     }
 
     return 0;
@@ -1054,20 +1054,20 @@ u8 MapGmkFindLeftWallFace3x3(FldPos* pos) {
 
         for (i = 0; i < w; i++) {
             if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 8)) {
-                u16 a;
-                u16 b;
+                u16 leftRows;
+                u16 rightRows;
 
                 if (!(u8)MapWallFaceIsUnreserved(rx, sy, 3)) {
                     continue;
                 }
 
-                a = MapRowsToWallBase(rx, sy + 2);
-                b = MapRowsToWallBase(rx + 2, sy);
+                leftRows = MapRowsToWallBase(rx, sy + 2);
+                rightRows = MapRowsToWallBase(rx + 2, sy);
 
-                if (a == b && a > 8) {
+                if (leftRows == rightRows && leftRows > 8) {
                     MapReserveArea(rx, sy, 3, 3);
-                    FldPosPlaceAtCell(pos, rx, a + sy, 3, 3);
-                    pos->z -= a << 12;
+                    FldPosPlaceAtCell(pos, rx, leftRows + sy, 3, 3);
+                    pos->z -= leftRows << 12;
                     return 1;
                 }
             }
@@ -1100,20 +1100,20 @@ u8 MapGmkFindRightWallFace3x3(FldPos* pos) {
 
         for (i = 0; i < w; i++) {
             if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 9)) {
-                u16 a;
-                u16 b;
+                u16 leftRows;
+                u16 rightRows;
 
                 if (!(u8)MapWallFaceIsUnreserved(rx, sy, 3)) {
                     continue;
                 }
 
-                a = MapRowsToWallBase(rx, sy);
-                b = MapRowsToWallBase(rx + 2, sy + 2);
+                leftRows = MapRowsToWallBase(rx, sy);
+                rightRows = MapRowsToWallBase(rx + 2, sy + 2);
 
-                if (a == b && a > 8) {
+                if (leftRows == rightRows && leftRows > 8) {
                     MapReserveArea(rx, sy, 3, 3);
-                    FldPosPlaceAtCell(pos, rx, a + sy, 3, 3);
-                    pos->z -= a << 12;
+                    FldPosPlaceAtCell(pos, rx, leftRows + sy, 3, 3);
+                    pos->z -= leftRows << 12;
                     return 1;
                 }
             }
@@ -1149,13 +1149,13 @@ u8 MapGmkFindLeftWallTop2x2(FldPos* pos) {
                 if (MapCellIsFreeOfType(rx, sy + 1, 3)) {
                     if (MapCellIsFreeOfType(rx + 1, sy, 3) &&
                         MapCellIsFreeOfType(rx + 1, sy + 1, 8)) {
-                        u16 a = MapRowsToWallBase(rx, sy + 1);
-                        u16 b = MapRowsToWallBase(rx + 1, sy);
+                        u16 leftRows = MapRowsToWallBase(rx, sy + 1);
+                        u16 rightRows = MapRowsToWallBase(rx + 1, sy);
 
-                        if (a == b && a > 8) {
+                        if (leftRows == rightRows && leftRows > 8) {
                             MapReserveArea(rx, sy, 2, 2);
-                            FldPosPlaceAtCell(pos, rx, a + sy, 2, 2);
-                            pos->z -= a << 12;
+                            FldPosPlaceAtCell(pos, rx, leftRows + sy, 2, 2);
+                            pos->z -= leftRows << 12;
                             return 1;
                         }
                     }
@@ -1175,30 +1175,30 @@ u8 MapGmkFindBackWallTop1x2(FldPos* pos) {
     s16 x;
     s16 y;
     s16 cy;
-    u16 n;
-    u16 m;
-    u16 h;
+    u16 colRange;
+    u16 rowRange;
+    u16 wallRows;
     s32 i;
     s32 j;
 
-    n = gMapRoomState->cols - 1;
-    m = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
-    x = GetRandom() % n;
-    y = GetRandom() % m;
+    colRange = gMapRoomState->cols - 1;
+    rowRange = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
+    x = GetRandom() % colRange;
+    y = GetRandom() % rowRange;
 
-    for (i = 0; i < m; i++) {
+    for (i = 0; i < rowRange; i++) {
         cy = gMapRoomState->topRow + y;
 
-        for (j = 0; j < n; j++) {
+        for (j = 0; j < colRange; j++) {
             if ((u8)MapGmkIsAreaSparse(x, cy)) {
                 if (MapCellIsFreeOfType(x, cy, 1)) {
                     if (MapCellIsFreeOfType(x, cy + 1, 7)) {
-                        h = MapRowsToWallBase(x, cy);
+                        wallRows = MapRowsToWallBase(x, cy);
 
-                        if (h > 8) {
+                        if (wallRows > 8) {
                             MapReserveArea(x, cy, 1, 2);
-                            FldPosPlaceAtCell(pos, x, h + cy, 1, 2);
-                            pos->z -= h << 12;
+                            FldPosPlaceAtCell(pos, x, wallRows + cy, 1, 2);
+                            pos->z -= wallRows << 12;
                             return 1;
                         }
                     }
@@ -1206,10 +1206,10 @@ u8 MapGmkFindBackWallTop1x2(FldPos* pos) {
             }
 
             x++;
-            x %= n;
+            x %= colRange;
         }
 
-        y = (y != 0 ? y : m) - 1;
+        y = (y != 0 ? y : rowRange) - 1;
     }
 
     return 0;
@@ -1239,13 +1239,13 @@ u8 MapGmkFindRightWallTop2x2(FldPos* pos) {
                 if (MapCellIsFreeOfType(rx, y1, 9)) {
                     if (MapCellIsFreeOfType(rx + 1, sy, 0) &&
                         MapCellIsFreeOfType(rx + 1, y1, 5)) {
-                        u16 a = MapRowsToWallBase(rx, sy);
-                        u16 b = MapRowsToWallBase(rx + 1, y1);
+                        u16 leftRows = MapRowsToWallBase(rx, sy);
+                        u16 rightRows = MapRowsToWallBase(rx + 1, y1);
 
-                        if (a == b && a > 8) {
+                        if (leftRows == rightRows && leftRows > 8) {
                             MapReserveArea(rx, sy, 2, 2);
-                            FldPosPlaceAtCell(pos, rx, a + sy, 2, 2);
-                            pos->z -= a << 12;
+                            FldPosPlaceAtCell(pos, rx, leftRows + sy, 2, 2);
+                            pos->z -= leftRows << 12;
                             return 1;
                         }
                     }
@@ -1389,8 +1389,8 @@ u8 MapGmkFindFloor5x5(FldPos* pos) {
 }
 
 u8 MapGmkFindBaseFloor2x2(FldPos* pos) {
-    MapPlatform* e = GetMapPlatform(0);
-    u16 w = e->right - e->left - 2;
+    MapPlatform* platform = GetMapPlatform(0);
+    u16 w = platform->right - platform->left - 2;
     u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     s16 rx = GetRandom() % w;
     s16 ry = GetRandom() % h;
@@ -1401,9 +1401,9 @@ u8 MapGmkFindBaseFloor2x2(FldPos* pos) {
         s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            s32 sx = (s16)(e->left + rx);
+            s32 sx = (s16)(platform->left + rx);
 
-            if ((u8)MapAreaIsFreeOfType(sx, sy, 2, 2, 0) && e->z == MapCellAt(sx, sy)->lowerZ) {
+            if ((u8)MapAreaIsFreeOfType(sx, sy, 2, 2, 0) && platform->z == MapCellAt(sx, sy)->lowerZ) {
                 MapReserveArea(sx, sy, 2, 2);
                 FldPosPlaceAtCell(pos, sx, sy, 2, 2);
                 return 1;
@@ -1454,9 +1454,9 @@ void MapGmkReserveJump() {
     s32 i;
 
     for (i = 0; i < 12; i++) {
-        MapPlatform* p = GetMapPlatform(i);
+        MapPlatform* platform = GetMapPlatform(i);
 
-        if (!p->hasStairs && p->spotLowerZ != 0x100000) {
+        if (!platform->hasStairs && platform->spotLowerZ != 0x100000) {
             sMapGmkTileCount += 0x4C;
             sMapGmkPaletteCount++;
             break;
@@ -1465,71 +1465,71 @@ void MapGmkReserveJump() {
 }
 
 void MapGmkPlaceGmk01() {
-    FldPos w;
-    MapFloorRoom* e;
-    const MapGmkDef* q;
+    FldPos pos;
+    MapFloorRoom* floorRoom;
+    const MapGmkDef* def;
     s32 i;
 
-    e = GetMapFloorRoom(gMapFloorState.room);
+    floorRoom = GetMapFloorRoom(gMapFloorState.room);
 
     if (gMapRoomState->roomType == 10) {
-        u8* n;
+        u8* count;
 
-        q = &gMapGmk01Def;
-        n = &sMapGmkCount;
+        def = &gMapGmk01Def;
+        count = &sMapGmkCount;
 
         for (i = 1; i >= 0; i--) {
             s32 size;
 
-            MapGmkFindSpot(&w, q->spotFinder);
+            MapGmkFindSpot(&pos, def->spotFinder);
 
-            if (e->flags & FLOOR_ROOM_FLAG_CHEST_OPENED) {
-                gMapGmkPlacements[*n].flags = (GMK_FLAG_USED | GMK_FLAG_HAS_ENEMY);
+            if (floorRoom->flags & FLOOR_ROOM_FLAG_CHEST_OPENED) {
+                gMapGmkPlacements[*count].flags = (GMK_FLAG_USED | GMK_FLAG_HAS_ENEMY);
             } else {
-                gMapGmkPlacements[*n].flags = GMK_FLAG_HAS_ENEMY;
+                gMapGmkPlacements[*count].flags = GMK_FLAG_HAS_ENEMY;
             }
 
-            gMapGmkPlacements[*n].def = q;
-            gMapGmkPlacements[*n].pos = w;
-            sMapGmkTileCount += (size = q->tilesSize) / 32;
+            gMapGmkPlacements[*count].def = def;
+            gMapGmkPlacements[*count].pos = pos;
+            sMapGmkTileCount += (size = def->tilesSize) / 32;
             sMapGmkPaletteCount++;
-            (*n)++;
+            (*count)++;
         }
     }
 
     if (gMapRoomState->roomType == 3 || gMapRoomState->roomType == 9 || gMapRoomState->roomType == 10 ||
         gMapRoomState->roomType == 22) {
-        MapCell* p;
-        u16 v;
+        MapCell* cell;
+        u16 opened;
 
-        q = &gMapGmk01Def;
-        MapGmkFindSpot(&w, q->spotFinder);
-        v = e->flags & FLOOR_ROOM_FLAG_CHEST_OPENED;
+        def = &gMapGmk01Def;
+        MapGmkFindSpot(&pos, def->spotFinder);
+        opened = floorRoom->flags & FLOOR_ROOM_FLAG_CHEST_OPENED;
 
-        if (v != 0) {
+        if (opened != 0) {
             gMapGmkPlacements[sMapGmkCount].flags = GMK_FLAG_USED;
         } else {
             gMapGmkPlacements[sMapGmkCount].flags = 0;
         }
 
-        gMapGmkPlacements[sMapGmkCount].def = q;
-        gMapGmkPlacements[sMapGmkCount].pos = w;
-        sMapGmkTileCount += q->tilesSize >> 5;
+        gMapGmkPlacements[sMapGmkCount].def = def;
+        gMapGmkPlacements[sMapGmkCount].pos = pos;
+        sMapGmkTileCount += def->tilesSize >> 5;
         sMapGmkPaletteCount++;
         sMapGmkCount++;
-        p = MapCellAtPos(w.x, w.y + w.z);
-        p->flags |= MAP_CELL_FLAG_CHEST;
+        cell = MapCellAtPos(pos.x, pos.y + pos.z);
+        cell->flags |= MAP_CELL_FLAG_CHEST;
     }
 }
 
 void MapGmkPlaceGmk04() {
-    FldPos w;
+    FldPos pos;
 
     if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 0x17) {
-        MapGmkFindSpot(&w, gMapGmk04Def.spotFinder);
+        MapGmkFindSpot(&pos, gMapGmk04Def.spotFinder);
         gMapGmkPlacements[sMapGmkCount].flags = 0;
         gMapGmkPlacements[sMapGmkCount].def = &gMapGmk04Def;
-        gMapGmkPlacements[sMapGmkCount].pos = w;
+        gMapGmkPlacements[sMapGmkCount].pos = pos;
         sMapGmkTileCount += gMapGmk04Def.tilesSize >> 5;
         sMapGmkPaletteCount++;
         sMapGmkCount++;
@@ -1537,13 +1537,13 @@ void MapGmkPlaceGmk04() {
 }
 
 void MapGmkPlaceMoogle() {
-    FldPos w;
+    FldPos pos;
 
     if (gMapRoomState->roomType == 11) {
-        MapGmkFindSpot(&w, gMapGmk05Def.spotFinder);
+        MapGmkFindSpot(&pos, gMapGmk05Def.spotFinder);
         gMapGmkPlacements[sMapGmkCount].flags = 0;
         gMapGmkPlacements[sMapGmkCount].def = &gMapGmk05Def;
-        gMapGmkPlacements[sMapGmkCount].pos = w;
+        gMapGmkPlacements[sMapGmkCount].pos = pos;
         sMapGmkTileCount += gMapGmk05Def.tilesSize >> 5;
         sMapGmkPaletteCount++;
         sMapGmkCount++;
@@ -1551,10 +1551,10 @@ void MapGmkPlaceMoogle() {
 }
 
 void MapGmkPlaceWorldGimmicks() {
-    FldPos w;
-    const MapGmkDef* t;
+    FldPos pos;
+    const MapGmkDef* def;
     s32 i;
-    s32 f;
+    s32 newPalette;
 
     if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 9 || gMapRoomState->roomType == 11 ||
         gMapRoomState->roomType == 22 || gMapRoomState->roomType == 23) {
@@ -1564,49 +1564,49 @@ void MapGmkPlaceWorldGimmicks() {
     for (i = sMapGmkCount; i <= 15; i++) {
         switch (gMapFloorState.world) {
         case WORLD_TRAVERSE_TOWN:
-            t = &gWorldMapGmkDefs[0];
+            def = &gWorldMapGmkDefs[0];
             break;
         case WORLD_WONDERLAND:
-            t = &gWorldMapGmkDefs[1];
+            def = &gWorldMapGmkDefs[1];
             break;
         case WORLD_ATLANTICA:
-            t = &gWorldMapGmkDefs[2];
+            def = &gWorldMapGmkDefs[2];
             break;
         case WORLD_HALLOWEEN_TOWN:
-            t = &gWorldMapGmkDefs[3];
+            def = &gWorldMapGmkDefs[3];
             break;
         case WORLD_HOLLOW_BASTION:
-            t = GetRandom() % 2 ? &gWorldMapGmkDefs[4] : &gWorldMapGmkDefs[5];
+            def = GetRandom() % 2 ? &gWorldMapGmkDefs[4] : &gWorldMapGmkDefs[5];
             break;
         case WORLD_CASTLE_OBLIVION:
-            t = &gWorldMapGmkDefs[6];
+            def = &gWorldMapGmkDefs[6];
             break;
         default:
-            t = &gMapGmkBarrelDef;
+            def = &gMapGmkBarrelDef;
             break;
         }
 
-        if (sMapGmkTileCount + t->tilesSize / 32 > 0x200) {
+        if (sMapGmkTileCount + def->tilesSize / 32 > 0x200) {
             return;
         }
 
-        f = (u8)MapGmkIsPaletteUnused(t->palette);
+        newPalette = (u8)MapGmkIsPaletteUnused(def->palette);
 
-        if (f && sMapGmkPaletteCount > 5) {
+        if (newPalette && sMapGmkPaletteCount > 5) {
             return;
         }
 
-        if (MapGmkFindSpot(&w, t->spotFinder) == 0) {
+        if (MapGmkFindSpot(&pos, def->spotFinder) == 0) {
             return;
         }
 
         gMapGmkPlacements[sMapGmkCount].flags = 0;
-        gMapGmkPlacements[sMapGmkCount].def = t;
-        gMapGmkPlacements[sMapGmkCount].pos = w;
-        sMapGmkTileCount += t->tilesSize >> 5;
+        gMapGmkPlacements[sMapGmkCount].def = def;
+        gMapGmkPlacements[sMapGmkCount].pos = pos;
+        sMapGmkTileCount += def->tilesSize >> 5;
         sMapGmkCount++;
 
-        if (f) {
+        if (newPalette) {
             sMapGmkPaletteCount++;
         }
     }
@@ -1616,39 +1616,39 @@ void MapGmkPlaceRandomGimmicks() {
     s32 i;
 
     for (i = sMapGmkCount; i < 16; i++) {
-        FldPos w;
-        const MapGmkDef* e = &gMapGmkDefs[GetRandomMapGmkIndex(i)];
-        u8 f = MapGmkNeedsTiles(e->ownTiles, e->tiles);
-        u8 g;
+        FldPos pos;
+        const MapGmkDef* def = &gMapGmkDefs[GetRandomMapGmkIndex(i)];
+        u8 needsTiles = MapGmkNeedsTiles(def->ownTiles, def->tiles);
+        u8 newPalette;
 
-        if (f) {
-            if ((e->tilesSize >> 5) + sMapGmkTileCount > 512) {
+        if (needsTiles) {
+            if ((def->tilesSize >> 5) + sMapGmkTileCount > 512) {
                 continue;
             }
         }
 
-        g = MapGmkIsPaletteUnused(e->palette);
+        newPalette = MapGmkIsPaletteUnused(def->palette);
 
-        if (g) {
+        if (newPalette) {
             if (sMapGmkPaletteCount > 5) {
                 continue;
             }
         }
 
-        if (MapGmkFindSpot(&w, e->spotFinder) == 0) {
+        if (MapGmkFindSpot(&pos, def->spotFinder) == 0) {
             continue;
         }
 
         gMapGmkPlacements[sMapGmkCount].flags = 0;
-        gMapGmkPlacements[sMapGmkCount].def = e;
-        gMapGmkPlacements[sMapGmkCount].pos = w;
+        gMapGmkPlacements[sMapGmkCount].def = def;
+        gMapGmkPlacements[sMapGmkCount].pos = pos;
         sMapGmkCount++;
 
-        if (f) {
-            sMapGmkTileCount += e->tilesSize >> 5;
+        if (needsTiles) {
+            sMapGmkTileCount += def->tilesSize >> 5;
         }
 
-        if (g) {
+        if (newPalette) {
             sMapGmkPaletteCount++;
         }
     }
@@ -1670,32 +1670,32 @@ u16 MapGmkGetFreeTiles() {
 }
 
 void CreateRandomMapPrizes(s32 x, s32 y, s32 z) {
-    u16 r;
+    u16 roll;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        r = GetRandom() % 10000;
+        roll = GetRandom() % 10000;
 
-        if (r < 2500) {
+        if (roll < 2500) {
             CreateMapPrizeTasks(0, 2, x, y, z);
-        } else if (r < 6500) {
+        } else if (roll < 6500) {
             CreateMapPrizeTasks(0, 5, x, y, z);
-        } else if (r < 9000) {
+        } else if (roll < 9000) {
             CreateMapPrizeTasks(1, 3, x, y, z);
         } else {
             CreateMapPrizeTasks(1, 5, x, y, z);
         }
     } else {
-        r = GetRandom() % 10000;
+        roll = GetRandom() % 10000;
 
-        if (r < 2000) {
+        if (roll < 2000) {
             CreateMapPrizeTasks(0, 2, x, y, z);
-        } else if (r < 4000) {
+        } else if (roll < 4000) {
             CreateMapPrizeTasks(0, 5, x, y, z);
-        } else if (r < 6000) {
+        } else if (roll < 6000) {
             CreateMapPrizeTasks(1, 3, x, y, z);
-        } else if (r < 6500) {
+        } else if (roll < 6500) {
             CreateMapPrizeTasks(1, 5, x, y, z);
-        } else if (r < 8000) {
+        } else if (roll < 8000) {
             CreateMapPrizeTasks(2, 5, x, y, z);
         } else {
             CreateMapPrizeTasks(3, 5, x, y, z);
@@ -1704,13 +1704,13 @@ void CreateRandomMapPrizes(s32 x, s32 y, s32 z) {
 }
 
 void DropMapGmkPrize(FldPos* pos) {
-    u16 r = GetRandom() % 10000;
+    u16 roll = GetRandom() % 10000;
 
-    if (r <= 0x5DB) {
+    if (roll <= 0x5DB) {
         if (TryCreateRandomPrzCard(0, pos->x, pos->y, pos->z) != 1) {
             CreateRandomMapPrizes(pos->x, pos->y, pos->z);
         }
-    } else if (r <= 0x1D4B) {
+    } else if (roll <= 0x1D4B) {
         CreateRandomMapPrizes(pos->x, pos->y, pos->z);
     }
 }
@@ -1734,22 +1734,22 @@ void MapGmkInitRoom() {
 
 void MapGmkCreateTasks() {
     s32 i;
-    MapPlatform* p;
-    const MapGmkDef* d;
+    MapPlatform* platform;
+    const MapGmkDef* def;
 
     for (i = 0; i < 12; i++) {
-        p = GetMapPlatform(i);
+        platform = GetMapPlatform(i);
 
-        if (!p->hasStairs && p->spotLowerZ != 0x100000) {
-            TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkJump, p);
+        if (!platform->hasStairs && platform->spotLowerZ != 0x100000) {
+            TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkJump, platform);
         }
     }
 
     for (i = 0; i < sMapGmkCount; i++) {
-        d = gMapGmkPlacements[i].def;
+        def = gMapGmkPlacements[i].def;
 
         if ((gMapGmkPlacements[i].flags & GMK_FLAG_DESTROYED) == 0) {
-            TaskCreate(&gFieldState->tasks, d->desc, &gMapGmkPlacements[i]);
+            TaskCreate(&gFieldState->tasks, def->desc, &gMapGmkPlacements[i]);
         }
     }
 
@@ -1763,9 +1763,9 @@ void MapGmkFree() {
 }
 
 const u8* GetCellMaskBlock(void* maskTable, u16 x, u16 y) {
-    u8* p = maskTable;
+    u8* blockIds = maskTable;
 
-    return gCellMasks[p[(u8)(x >> 3) + (u8)(y >> 3) * 4]];
+    return gCellMasks[blockIds[(u8)(x >> 3) + (u8)(y >> 3) * 4]];
 }
 
 void* GetCellMaskTable(u8 type) {
@@ -1804,7 +1804,7 @@ u8 MapCellMaskBitAt(MapCell* cell, s32 x, s32 y) {
     u16 cy;
     u8 bx;
     u8 by;
-    const u8* t;
+    const u8* mask;
 
     if (cell == NULL) {
         return 1;
@@ -1812,22 +1812,22 @@ u8 MapCellMaskBitAt(MapCell* cell, s32 x, s32 y) {
 
     cx = (x >> 8) % 32;
     cy = (y >> 8) % 16;
-    t = GetCellMaskBlock(cell->maskTable, cx, cy);
+    mask = GetCellMaskBlock(cell->maskTable, cx, cy);
     bx = cx & 7;
     by = cy & 7;
-    return (t[by] >> (7 - bx)) & 1;
+    return (mask[by] >> (7 - bx)) & 1;
 }
 
 void MapPlaceLayer1DecorPiece(s16 x, s16 y, const u8* pieces, u16* base) {
     s32 i;
     s32 j;
     s32 off;
-    u8 v;
-    MapCell* q;
+    u8 roll;
+    MapCell* cell;
 
-    v = GetRandom() % 100;
+    roll = GetRandom() % 100;
 
-    while (v >= pieces[0]) {
+    while (roll >= pieces[0]) {
         pieces += 8;
     }
 
@@ -1835,55 +1835,55 @@ void MapPlaceLayer1DecorPiece(s16 x, s16 y, const u8* pieces, u16* base) {
         for (i = 0; i < pieces[4]; i++) {
             switch (pieces[5]) {
             case 1:
-                q = MapCellAt(x + j, y + i + (pieces[3] - 1 - j));
+                cell = MapCellAt(x + j, y + i + (pieces[3] - 1 - j));
                 break;
             case 2:
-                q = MapCellAt(x + j, y + i + j);
+                cell = MapCellAt(x + j, y + i + j);
                 break;
             case 0:
             default:
-                q = MapCellAt(x + j, y + i);
+                cell = MapCellAt(x + j, y + i);
                 break;
             }
 
             off = (pieces[2] + i) * 64 + (pieces[1] + j) * 4;
-            // @bug q is NULL where the pattern reaches past the room edge (NULL write).
-            q->bg2Piece = 50;
-            q->bg2Map = base + off;
+            // @bug cell is NULL where the pattern reaches past the room edge (NULL write).
+            cell->bg2Piece = 50;
+            cell->bg2Map = base + off;
         }
     }
 }
 
 u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* pattern) {
-    MapCell* q;
-    s32 v;
+    MapCell* cell;
+    s32 flags;
 
     while (pattern->bg3Piece != 0xFF) {
         // @bug MapCellAt returns NULL past the room edge (NULL read).
-        q = MapCellAt(x + pattern->dx, y + pattern->dy);
+        cell = MapCellAt(x + pattern->dx, y + pattern->dy);
 
-        if (q->lowerZ == 0x100000) {
+        if (cell->lowerZ == 0x100000) {
             return 0;
         }
 
-        if (pattern->bg3Piece != 7 && q->bg3Piece != pattern->bg3Piece) {
+        if (pattern->bg3Piece != 7 && cell->bg3Piece != pattern->bg3Piece) {
             return 0;
         }
 
-        if (q->bg2Piece != pattern->bg2Piece) {
+        if (cell->bg2Piece != pattern->bg2Piece) {
             return 0;
         }
 
-        v = 0x520;
+        flags = 0x520;
 
-        if ((q->flags & v) != 0) {
+        if ((cell->flags & flags) != 0) {
             return 0;
         }
 
-        v = q->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT);
-        v = v & ~pattern->edgeIgnoreMask;
+        flags = cell->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT);
+        flags = flags & ~pattern->edgeIgnoreMask;
 
-        if (v != pattern->edgeFlags) {
+        if (flags != pattern->edgeFlags) {
             return 0;
         }
 
@@ -1926,22 +1926,22 @@ void MapPlaceLayer2DecorPiece(s16 x, s16 y, const u8* pieces, u16* base) {
     s32 i;
     s32 j;
     s32 off;
-    u8 v;
-    MapCell* q;
+    u8 roll;
+    MapCell* cell;
 
-    v = GetRandom() % 100;
+    roll = GetRandom() % 100;
 
-    while (v >= pieces[0]) {
+    while (roll >= pieces[0]) {
         pieces += 8;
     }
 
     for (j = 0; j < pieces[3]; j++) {
         for (i = 0; i < pieces[4]; i++) {
-            q = MapCellAt(x + j, y + i);
+            cell = MapCellAt(x + j, y + i);
             off = (pieces[2] + i) * 64 + (pieces[1] + j) * 4;
-            // @bug q is NULL where the pattern reaches past the room edge (NULL write).
-            q->bg1Piece = 38;
-            q->bg1Map = base + off;
+            // @bug cell is NULL where the pattern reaches past the room edge (NULL write).
+            cell->bg1Piece = 38;
+            cell->bg1Map = base + off;
         }
     }
 }
@@ -1989,10 +1989,10 @@ void MapApplyLayer2DecorRules(MapDecorRule* rules) {
 
 void MapApplyRoomDecor() {
     if (!gGameState.fieldResume) {
-        MapRoomDef* p = gMapRoomDefs[gMapFloorState.world];
+        MapRoomDef* roomDef = gMapRoomDefs[gMapFloorState.world];
 
-        MapApplyLayer1DecorRules(p->layer1DecorRules);
-        MapApplyLayer2DecorRules(p->layer2DecorRules);
+        MapApplyLayer1DecorRules(roomDef->layer1DecorRules);
+        MapApplyLayer2DecorRules(roomDef->layer2DecorRules);
     }
 }
 
@@ -2006,22 +2006,22 @@ void MapAnmSetupSlot(MapAnmSlot* slot, const MapAnmEntry* entry) {
 }
 
 void MapAnmStepScript(MapAnmSlot* slot) {
-    s16* q;
-    u8 (*f)(MapAnmSlot*);
+    s16* cmd;
+    u8 (*handler)(MapAnmSlot*);
 
     if (slot->script == NULL) {
         return;
     }
 
     do {
-        q = slot->scriptPos;
+        cmd = slot->scriptPos;
 
-        if (*q & 0x8000) {
-            f = gMapAnmCmds[*(u8*)q];
+        if (*cmd & 0x8000) {
+            handler = gMapAnmCmds[*(u8*)cmd];
         } else {
-            f = MapAnmCmdFrame;
+            handler = MapAnmCmdFrame;
         }
-    } while (f(slot));
+    } while (handler(slot));
 }
 
 void MapAnmFlushSlot(MapAnmSlot* slot) {
@@ -2052,23 +2052,23 @@ u8 MapAnmCmdEnd(MapAnmSlot* slot) {
 }
 
 u8 MapAnmCmdFrame(MapAnmSlot* slot) {
-    MapAnmSlot* w = slot;
-    s16* q;
-    s16 n;
+    MapAnmSlot* anmSlot = slot;
+    s16* cmd;
+    s16 duration;
 
     if (slot->timer == 0) {
         slot->pending = (u8*)slot->tiles + slot->frameSize * slot->scriptPos[1];
     }
 
-    q = w->scriptPos;
-    n = *(u16*)q & 0x7FFF;
+    cmd = anmSlot->scriptPos;
+    duration = *(u16*)cmd & 0x7FFF;
 
-    if (n != 0) {
-        w->timer++;
+    if (duration != 0) {
+        anmSlot->timer++;
 
-        if (w->timer >= n) {
-            w->timer = 0;
-            w->scriptPos = q + 2;
+        if (anmSlot->timer >= duration) {
+            anmSlot->timer = 0;
+            anmSlot->scriptPos = cmd + 2;
         }
     }
 
@@ -2081,27 +2081,27 @@ u8 MapAnmCmdLoop(MapAnmSlot* slot) {
 }
 
 u8 IsEventDoor(u8 room, u8 side) {
-    MapEventDoor* p;
+    MapEventDoor* door;
 
     if ((s32)gMapRoomState->flags < 0) {
         return 0;
     }
 
-    p = GetMapEventDoor(0);
+    door = GetMapEventDoor(0);
 
-    while (p->kind != 5) {
-        if (p->keyList != 0xFF && p->room == room && p->side == side) {
+    while (door->kind != 5) {
+        if (door->keyList != 0xFF && door->room == room && door->side == side) {
             return 1;
         }
 
-        p++;
+        door++;
     }
 
     return 0;
 }
 
 u8 SelectEventDoor(u8 room, u8 side) {
-    MapEventDoor* p;
+    MapEventDoor* door;
     u8 i;
 
     if ((s32)gMapRoomState->flags < 0) {
@@ -2109,17 +2109,17 @@ u8 SelectEventDoor(u8 room, u8 side) {
     }
 
     i = 0;
-    p = GetMapEventDoor(0);
+    door = GetMapEventDoor(0);
 
-    while (p->kind != 5) {
-        if (p->keyList != 0xFF && p->room == room && p->side == side) {
-            sEventKeyList = &gEventKeyLists[p->keyList];
+    while (door->kind != 5) {
+        if (door->keyList != 0xFF && door->room == room && door->side == side) {
+            sEventKeyList = &gEventKeyLists[door->keyList];
             sEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
             return 1;
         }
 
         i++;
-        p++;
+        door++;
     }
 
     return 0;
@@ -2130,12 +2130,12 @@ u8 CountRemainingEventKeys() {
 }
 
 EventKey* GetEventKey(u8 index) {
-    EventKey* p = &sEventKeyList->keys[sEventKeyProgress->paid];
-    EventKey* q = &p[index];
+    EventKey* keys = &sEventKeyList->keys[sEventKeyProgress->paid];
+    EventKey* key = &keys[index];
 
-    sEventKey = *q;
+    sEventKey = *key;
 
-    if (index == 0 && q->rule == 4 && sEventKeyProgress->remaining != 0) {
+    if (index == 0 && key->rule == 4 && sEventKeyProgress->remaining != 0) {
         sEventKey.value = sEventKeyProgress->remaining;
     }
 
@@ -2143,44 +2143,44 @@ EventKey* GetEventKey(u8 index) {
 }
 
 u8 DoorAcceptsMapCard(MapCardAttributes* card) {
-    EventKey* q;
-    u8 n;
+    EventKey* key;
+    u8 roomValue;
 
     if (!IsEventDoor(gMapRoomState->doorRoom, gMapRoomState->doorSide)) {
         if (card->kind > 21) {
             return 0;
         }
 
-        n = GetMapRoomCardValue(gMapFloorState.room);
+        roomValue = GetMapRoomCardValue(gMapFloorState.room);
 
         if (card->value == 0) {
             return 1;
         }
 
-        return card->value > n;
+        return card->value > roomValue;
     }
 
-    q = GetEventKey(0);
+    key = GetEventKey(0);
 
-    if (q->kind != 0xFF) {
-        if (q->kind != card->kind) {
+    if (key->kind != 0xFF) {
+        if (key->kind != card->kind) {
             return 0;
         }
     } else if (card->kind > 21) {
         return 0;
     }
 
-    if (q->color != 0 && q->color != card->color) {
+    if (key->color != 0 && key->color != card->color) {
         return 0;
     }
 
-    switch (q->rule) {
+    switch (key->rule) {
     case 1:
-        return card->value >= q->value;
+        return card->value >= key->value;
     case 2:
-        return card->value <= q->value;
+        return card->value <= key->value;
     case 3:
-        return card->value == q->value;
+        return card->value == key->value;
     case 4:
         return card->value != 0;
     }
@@ -2204,32 +2204,32 @@ s32 PayEventKey(MapCardAttributes* card) {
 }
 
 const PrizeEntry* PickRandomPrzCard(u8 worldPrize) {
-    u16 v = GetRandom() % 10000;
-    PrzCardChance** t = gWorldPrzCardChances;
-    PrzCardChance* p = t[gGameState.world];
+    u16 roll = GetRandom() % 10000;
+    PrzCardChance** chanceTables = gWorldPrzCardChances;
+    PrzCardChance* chance = chanceTables[gGameState.world];
 
-    while (p->cardIndex != 41) {
-        const PrizeEntry* q = &gPrzCardKinds[p->cardIndex];
-        u16 n = worldPrize != 0 ? p->weight2 : p->weight;
+    while (chance->cardIndex != 41) {
+        const PrizeEntry* prize = &gPrzCardKinds[chance->cardIndex];
+        u16 weight = worldPrize != 0 ? chance->weight2 : chance->weight;
 
-        if (v < n) {
-            if (IsCardKindObtained(q->unk_00[0])) {
-                return q;
+        if (roll < weight) {
+            if (IsCardKindObtained(prize->unk_00[0])) {
+                return prize;
             }
 
-            if (p->cardIndex <= 16) {
+            if (chance->cardIndex <= 16) {
                 return &gPrzCardKinds[0];
             }
 
-            if (p->cardIndex <= 30) {
+            if (chance->cardIndex <= 30) {
                 return &gPrzCardKinds[20];
             }
 
             return &gPrzCardKinds[31];
         }
 
-        v -= n;
-        p++;
+        roll -= weight;
+        chance++;
     }
 
     return NULL;
@@ -2237,14 +2237,14 @@ const PrizeEntry* PickRandomPrzCard(u8 worldPrize) {
 
 u8 RollCardValue() {
     u16 acc = 0;
-    u16 r = GetRandom() % 10000;
+    u16 roll = GetRandom() % 10000;
     s32 i;
-    const u16* p = gCardValueWeights;
+    const u16* weights = gCardValueWeights;
 
     for (i = 0; i < 10; i++) {
-        acc += p[i];
+        acc += weights[i];
 
-        if (r < acc) {
+        if (roll < acc) {
             return i;
         }
     }
@@ -2253,20 +2253,20 @@ u8 RollCardValue() {
 }
 
 s32 CreateMapPrzCardTask(const PrizeEntry* prize, u8 worldPrize, s32 x, s32 y, s32 z) {
-    MapPrizeArgs w;
+    MapPrizeArgs args;
 
-    w.worldPrize = worldPrize;
-    w.x = x;
-    w.y = y;
-    w.z = z;
-    w.id = prize->unk_02;
+    args.worldPrize = worldPrize;
+    args.x = x;
+    args.y = y;
+    args.z = z;
+    args.id = prize->unk_02;
 
-    if (w.id <= 0x1B8) {
-        w.id += RollCardValue();
+    if (args.id <= 0x1B8) {
+        args.id += RollCardValue();
     }
 
-    if (CountCardsById(w.id) <= 0x62) {
-        TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzCard, &w);
+    if (CountCardsById(args.id) <= 0x62) {
+        TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzCard, &args);
         return 1;
     }
 
@@ -2274,7 +2274,7 @@ s32 CreateMapPrzCardTask(const PrizeEntry* prize, u8 worldPrize, s32 x, s32 y, s
 }
 
 u8 TryCreateRandomPrzCard(u8 worldPrize, s32 x, s32 y, s32 z) {
-    const PrizeEntry* q;
+    const PrizeEntry* prize;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return 0;
@@ -2296,76 +2296,76 @@ u8 TryCreateRandomPrzCard(u8 worldPrize, s32 x, s32 y, s32 z) {
         return 0;
     }
 
-    q = PickRandomPrzCard(worldPrize);
+    prize = PickRandomPrzCard(worldPrize);
 
-    if (q == NULL) {
+    if (prize == NULL) {
         return 0;
     }
 
-    return CreateMapPrzCardTask(q, 0, x, y, z);
+    return CreateMapPrzCardTask(prize, 0, x, y, z);
 }
 
 void CreateMapPrizeTasks(u8 id, u8 count, s32 x, s32 y, s32 z) {
-    MapPrizeArgs w;
+    MapPrizeArgs args;
     s32 i;
 
-    w.x = x;
-    w.y = y;
-    w.z = z;
-    w.id = id;
+    args.x = x;
+    args.y = y;
+    args.z = z;
+    args.id = id;
 
     for (i = 0; i < count; i++) {
-        TaskCreate(&gFieldState->tasks3, &gTaskDescMapPrize, &w);
+        TaskCreate(&gFieldState->tasks3, &gTaskDescMapPrize, &args);
     }
 }
 
 void CreateWorldPrize(s32 x, s32 y, s32 z) {
-    PrizeEntry* p = gWorldPrizeLists[gGameState.world];
-    const PrizeEntry* e;
+    PrizeEntry* entry = gWorldPrizeLists[gGameState.world];
+    const PrizeEntry* prize;
 
-    for (; p->unk_00[0] != 4; p++) {
-        switch (p->unk_00[0]) {
+    for (; entry->unk_00[0] != 4; entry++) {
+        switch (entry->unk_00[0]) {
         case 0:
             if (gMapRoomState->roomType == 22) {
                 break;
             }
 
-            e = &gPrzCardKinds[p->unk_00[1]];
+            prize = &gPrzCardKinds[entry->unk_00[1]];
 
-            if (IsCardKindObtained(e->unk_00[0]) == 1) {
+            if (IsCardKindObtained(prize->unk_00[0]) == 1) {
                 break;
             }
 
-            SetCardKindObtained(e->unk_00[0]);
-            CreateMapPrzCardTask(e, 1, x, y, z);
+            SetCardKindObtained(prize->unk_00[0]);
+            CreateMapPrzCardTask(prize, 1, x, y, z);
             return;
         case 1:
             if (gMapRoomState->roomType == 22) {
                 break;
             }
 
-            e = &gPrzStocks[p->unk_00[1]];
+            prize = &gPrzStocks[entry->unk_00[1]];
 
-            if (IsStockLearned(e->unk_00[0]) == 1) {
+            if (IsStockLearned(prize->unk_00[0]) == 1) {
                 break;
             }
 
-            LearnStock(e->unk_00[0]);
-            TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, e);
+            LearnStock(prize->unk_00[0]);
+            TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, prize);
             return;
         case 2:
             if (gMapRoomState->roomType != 22) {
                 break;
             }
 
-            e = &gPrzCardKinds[p->unk_00[1]];
+            prize = &gPrzCardKinds[entry->unk_00[1]];
 
-            if (IsCardKindObtained(e->unk_00[0]) == 1) {
+            if (IsCardKindObtained(prize->unk_00[0]) == 1) {
                 break;
             }
 
-            SetCardKindObtained(e->unk_00[0]);
-            CreateMapPrzCardTask(e, 1, x, y, z);
+            SetCardKindObtained(prize->unk_00[0]);
+            CreateMapPrzCardTask(prize, 1, x, y, z);
             gMapFloorState.flags |= FLOOR_FLAG_CHAMBER_PRIZE_TAKEN;
             return;
         case 3:
@@ -2373,11 +2373,11 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
                 break;
             }
 
-            e = &gPrzStocks[p->unk_00[1]];
+            prize = &gPrzStocks[entry->unk_00[1]];
 
-            if (IsStockLearned(e->unk_00[0]) != 1) {
-                LearnStock(e->unk_00[0]);
-                TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, e);
+            if (IsStockLearned(prize->unk_00[0]) != 1) {
+                LearnStock(prize->unk_00[0]);
+                TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, prize);
                 gMapFloorState.flags |= FLOOR_FLAG_CHAMBER_PRIZE_TAKEN;
                 return;
             }
@@ -2387,64 +2387,64 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU_CLEAR) && gGameState.world == WORLD_CASTLE_OBLIVION && IsCardKindObtained(16)) {
-        e = &gPrzCardKinds[14];
+        prize = &gPrzCardKinds[14];
 
-        if (IsCardKindObtained(e->unk_00[0]) != 1) {
-            SetCardKindObtained(e->unk_00[0]);
-            CreateMapPrzCardTask(e, 1, x, y, z);
+        if (IsCardKindObtained(prize->unk_00[0]) != 1) {
+            SetCardKindObtained(prize->unk_00[0]);
+            CreateMapPrzCardTask(prize, 1, x, y, z);
             return;
         }
 
-        e += 24;
+        prize += 24;
 
-        if (IsCardKindObtained(e->unk_00[0]) != 1) {
-            SetCardKindObtained(e->unk_00[0]);
-            CreateMapPrzCardTask(e, 1, x, y, z);
+        if (IsCardKindObtained(prize->unk_00[0]) != 1) {
+            SetCardKindObtained(prize->unk_00[0]);
+            CreateMapPrzCardTask(prize, 1, x, y, z);
             return;
         }
 
-        e++;
+        prize++;
 
-        if (IsCardKindObtained(e->unk_00[0]) != 1) {
-            SetCardKindObtained(e->unk_00[0]);
-            CreateMapPrzCardTask(e, 1, x, y, z);
+        if (IsCardKindObtained(prize->unk_00[0]) != 1) {
+            SetCardKindObtained(prize->unk_00[0]);
+            CreateMapPrzCardTask(prize, 1, x, y, z);
             return;
         }
     }
 
-    e = PickRandomPrzCard(1);
+    prize = PickRandomPrzCard(1);
 
-    if (e != NULL) {
-        CreateMapPrzCardTask(e, 1, x, y, z);
+    if (prize != NULL) {
+        CreateMapPrzCardTask(prize, 1, x, y, z);
     }
 }
 
 u8 AreWorldPrizesCollected() {
     s32 i;
-    u8* p;
+    u8* entry;
 
     for (i = 1; i <= 11; i++) {
-        PrizeEntry** t = gWorldPrizeLists;
+        PrizeEntry** lists = gWorldPrizeLists;
 
-        p = (u8*)t[i];
+        entry = (u8*)lists[i];
 
-        while (p[0] != 4) {
-            switch (p[0]) {
+        while (entry[0] != 4) {
+            switch (entry[0]) {
             case 2:
-                if (IsCardKindObtained((gPrzCardKinds + p[1])->unk_00[0]) != 1) {
+                if (IsCardKindObtained((gPrzCardKinds + entry[1])->unk_00[0]) != 1) {
                     return 0;
                 }
 
                 break;
             case 3:
-                if (IsStockLearned((gPrzStocks + p[1])->unk_00[0]) != 1) {
+                if (IsStockLearned((gPrzStocks + entry[1])->unk_00[0]) != 1) {
                     return 0;
                 }
 
                 break;
             }
 
-            p += 4;
+            entry += 4;
         }
     }
 
@@ -2495,8 +2495,8 @@ void MapDbgSetUpdateAndRun(ModeFunc update) {
 void MapDbgFreeCameraInput() {
     s32 y = 0;
     s32 x = 0;
-    u16 m1 = DISPCNT_BG1_ON;
-    u16 m2 = DISPCNT_OBJ_ON;
+    u16 bg1Mask = DISPCNT_BG1_ON;
+    u16 objMask = DISPCNT_OBJ_ON;
 
     if (GetKeysHeld() & DPAD_LEFT) {
         x = -1024;
@@ -2517,11 +2517,11 @@ void MapDbgFreeCameraInput() {
     MapMoveCameraTarget(x, y);
 
     if (GetKeysPressed() & A_BUTTON) {
-        gDispCnt = (gDispCnt & ~DISPCNT_BG1_ON) | (m1 & ~gDispCnt);
+        gDispCnt = (gDispCnt & ~DISPCNT_BG1_ON) | (bg1Mask & ~gDispCnt);
     }
 
     if (GetKeysPressed() & B_BUTTON) {
-        gDispCnt = (gDispCnt & ~DISPCNT_OBJ_ON) | (m2 & ~gDispCnt);
+        gDispCnt = (gDispCnt & ~DISPCNT_OBJ_ON) | (objMask & ~gDispCnt);
     }
 }
 
@@ -2649,7 +2649,7 @@ void MapDbgWaitRoomCreate() {
 }
 
 void Mode_MapDbg_0() {
-    MapRoomDef* p;
+    MapRoomDef* roomDef;
 
     gFieldState = EwramAlloc(sizeof(FieldState));
     gMapRoomState = EwramAlloc(sizeof(MapRoomState));
@@ -2673,9 +2673,9 @@ void Mode_MapDbg_0() {
     MapApplyRoomDecor();
     SpawnMapPlayer();
 
-    p = gMapRoomDefs[gMapFloorState.world];
+    roomDef = gMapRoomDefs[gMapFloorState.world];
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, NULL);
-    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->tileAnims);
+    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, roomDef->tileAnims);
     sMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
     MapDbgSetUpdate(MapDbgMain);
 
@@ -2688,7 +2688,7 @@ void Mode_MapDbg_0() {
     MapSnapCamera();
     ClearFieldResume();
     SeedRandom(gFrameCounter);
-    m4aSongNumStartOrContinue(p->song);
+    m4aSongNumStartOrContinue(roomDef->song);
     TaskPoolInit(&sMapDbgTasks, 1);
     TaskCreate(&sMapDbgTasks, &gTaskDescMapDbg, &sMapDbgEditing);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapDmg, NULL);
@@ -2797,16 +2797,16 @@ void StartWorldBossBattle() {
 }
 
 void MapFldShowWorldLogo() {
-    u8 r = IsTaskActive(sMapFldWorldLogoTask);
+    u8 active = IsTaskActive(sMapFldWorldLogoTask);
 
-    if (r) {
+    if (active) {
         TaskPoolUpdate(&gMapRoomState->tasks);
         TaskPoolDraw(&gMapRoomState->tasks);
         TaskPoolUpdate(&gFieldState->tasks);
         DrawMapField();
     } else {
-        u16 t = gMapFloorState.flags | FLOOR_FLAG_LOGO_SHOWN;
-        gMapFloorState.flags = t;
+        u16 flags = gMapFloorState.flags | FLOOR_FLAG_LOGO_SHOWN;
+        gMapFloorState.flags = flags;
         sMapFldWorldLogoTask = NULL;
         sMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         gFieldState->flags &= ~FIELD_FLAG_NO_ENEMY_SPAWN;
@@ -2867,14 +2867,14 @@ void MapFldMain() {
 }
 
 void MapFldExitRoom() {
-    u8 r;
-    u8* e;
-    MapEventDoor* d;
+    u8 fading;
+    u8* roomEvent;
+    MapEventDoor* door;
 
     DrawMapField();
-    r = FadeIsActive();
+    fading = FadeIsActive();
 
-    if (r) {
+    if (fading) {
         return;
     }
 
@@ -2888,31 +2888,31 @@ void MapFldExitRoom() {
         return;
     }
 
-    e = GetMapRoomEvent(gMapFloorState.eventStep);
+    roomEvent = GetMapRoomEvent(gMapFloorState.eventStep);
 
-    if (e[0] == 0xFF) {
+    if (roomEvent[0] == 0xFF) {
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
         return;
     }
 
-    d = GetMapEventDoor(e[0]);
+    door = GetMapEventDoor(roomEvent[0]);
 
-    if (d->room != gMapRoomState->doorRoom || d->side != gMapRoomState->doorSide) {
+    if (door->room != gMapRoomState->doorRoom || door->side != gMapRoomState->doorSide) {
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
         return;
     }
 
-    gGameState.roomEffect = r;
+    gGameState.roomEffect = fading;
 
-    switch (d->kind) {
+    switch (door->kind) {
     case 1:
     case 3:
-        if (e[1] == 0x51 && (gGameState.flags & GAME_FLAG_MONSGAGE_BATTLE)) {
+        if (roomEvent[1] == 0x51 && (gGameState.flags & GAME_FLAG_MONSGAGE_BATTLE)) {
             RequestEventMode(0x55);
         } else {
-            RequestEventMode(e[1]);
+            RequestEventMode(roomEvent[1]);
         }
 
         break;
@@ -2967,7 +2967,7 @@ void MapFldWaitMenu() {
 }
 
 void MapFldWaitRoomCreate() {
-    u16 t;
+    u16 tutorialFlags;
 
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -2975,8 +2975,8 @@ void MapFldWaitRoomCreate() {
         MapFldSetUpdateAndRun(MapFldExitRoom);
 
         if ((gGameState.progression.tutorialFlags & 0x200) == 0) {
-            t = gGameState.progression.tutorialFlags | 0x200;
-            gGameState.progression.tutorialFlags = t;
+            tutorialFlags = gGameState.progression.tutorialFlags | 0x200;
+            gGameState.progression.tutorialFlags = tutorialFlags;
         }
     } else if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         gBldCnt = 0;
@@ -3000,7 +3000,7 @@ void MapFldRestart() {
 }
 
 void Mode_MapFld_0() {
-    MapRoomDef* p;
+    MapRoomDef* roomDef;
 
     if ((gMapFloorState.flags & FLOOR_FLAG_LOGO_SHOWN) && !gGameState.fieldResume) {
         switch (gMapFloorState.entrySide) {
@@ -3044,9 +3044,9 @@ void Mode_MapFld_0() {
     MapApplyRoomDecor();
     SpawnMapPlayer();
 
-    p = gMapRoomDefs[gMapFloorState.world];
+    roomDef = gMapRoomDefs[gMapFloorState.world];
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, NULL);
-    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->tileAnims);
+    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, roomDef->tileAnims);
 
     if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapTutorial, NULL);
@@ -3078,7 +3078,7 @@ void Mode_MapFld_0() {
     MapSnapCamera();
     ClearFieldResume();
     SeedRandom(gFrameCounter);
-    m4aSongNumStartOrContinue(p->song);
+    m4aSongNumStartOrContinue(roomDef->song);
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
@@ -3333,8 +3333,8 @@ void MapFixLeaveEntranceHall() {
 }
 
 void MapFixLeaveExitHall() {
-    u8 v;
-    u16 t;
+    u8 eventId;
+    u16 flags;
 
     DrawMapField();
 
@@ -3354,16 +3354,16 @@ void MapFixLeaveExitHall() {
         return;
     }
 
-    v = GetFloorEventId();
+    eventId = GetFloorEventId();
 
-    if (v != 0xFF) {
-        RequestEventMode(v);
+    if (eventId != 0xFF) {
+        RequestEventMode(eventId);
         return;
     }
 
     if ((gMapFloorState.flags & FLOOR_FLAG_CLEARED) == 0) {
-        t = gMapFloorState.flags | FLOOR_FLAG_CLEARED;
-        gMapFloorState.flags = t;
+        flags = gMapFloorState.flags | FLOOR_FLAG_CLEARED;
+        gMapFloorState.flags = flags;
         SetFloorJiminyFlags();
         gMapFloorState.progress++;
     }
@@ -3422,8 +3422,8 @@ void MapFixWaitRoomCreate() {
 }
 
 void Mode_MapFix_0() {
-    MapFixedDef* p;
-    u16 t;
+    MapFixedDef* fixedDef;
+    u16 flags;
 
     gFieldState = EwramAlloc(sizeof(FieldState));
     gMapRoomState = EwramAlloc(sizeof(MapRoomState));
@@ -3454,9 +3454,9 @@ void Mode_MapFix_0() {
     gMapRoomState->nameId = 26;
     gMapRoomState->roomType = 0;
 
-    p = GetMapFixedDef();
-    TaskCreate(&gFieldState->tasks, &gTaskDescMapFix, p);
-    MapFixCreateGimmicks(p->gimmicks);
+    fixedDef = GetMapFixedDef();
+    TaskCreate(&gFieldState->tasks, &gTaskDescMapFix, fixedDef);
+    MapFixCreateGimmicks(fixedDef->gimmicks);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         TaskCreate(&gFieldState->tasks2, &gTaskDescFldRiku, NULL);
@@ -3467,8 +3467,8 @@ void Mode_MapFix_0() {
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, NULL);
 
     if (gMapFloorState.flags & FLOOR_FLAG_SHOW_FLOOR_NAME) {
-        t = gMapFloorState.flags & ~FLOOR_FLAG_SHOW_FLOOR_NAME;
-        gMapFloorState.flags = t;
+        flags = gMapFloorState.flags & ~FLOOR_FLAG_SHOW_FLOOR_NAME;
+        gMapFloorState.flags = flags;
         TaskCreate(&gFieldState->tasks, &gTaskDescMapFloor, NULL);
     }
 
@@ -3496,11 +3496,11 @@ void Mode_MapFix_0() {
     MapFixSnapCamera();
     ClearFieldResume();
     SeedRandom(gFrameCounter);
-    m4aSongNumStartOrContinue(p->song);
+    m4aSongNumStartOrContinue(fixedDef->song);
 
     if (gMapFloorState.flags & FLOOR_FLAG_WARP_IN) {
-        t = gMapFloorState.flags & ~FLOOR_FLAG_WARP_IN;
-        gMapFloorState.flags = t;
+        flags = gMapFloorState.flags & ~FLOOR_FLAG_WARP_IN;
+        gMapFloorState.flags = flags;
         MosaicStartIn(16, 15);
         FadeStartIn(FADE_MODE_BLACK, 16);
     } else {
@@ -3629,62 +3629,62 @@ void NewGameSlotMenuLoadFloorTiles(u8 slot, u8 selected, u8 floor) {
 }
 
 void NewGameSlotMenuLoadLevelTiles(u8 slot, u16 level) {
-    u16 d[4];
+    u16 digits[4];
     s32 off;
-    u16* q;
+    u16* digit;
     s32 i;
 
     slot &= 1;
-    d[0] = level / 100;
-    d[1] = level / 10 - d[0] * 10;
-    d[2] = level - d[0] * 100 - d[1] * 10;
+    digits[0] = level / 100;
+    digits[1] = level / 10 - digits[0] * 10;
+    digits[2] = level - digits[0] * 100 - digits[1] * 10;
     i = 1;
     off = slot * 608 + 32;
-    q = &d[1];
+    digit = &digits[1];
 
     while (i <= 2) {
-        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
-        q++;
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*digit * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        digit++;
         i++;
     }
 }
 
 void NewGameSlotMenuLoadTimeTiles(u8 slot, u32 playTime) {
-    u16 d[6];
+    u16 digits[6];
     s32 off;
-    u16* q;
+    u16* digit;
     s32 i;
-    u32 t;
+    u32 part;
 
     slot &= 1;
-    t = playTime / 3600;
-    d[0] = t / 10;
-    d[1] = t - d[0] * 10;
-    playTime -= t * 3600;
-    t = playTime / 60;
-    d[2] = t / 10;
-    d[3] = t - d[2] * 10;
-    playTime -= t * 60;
-    d[4] = playTime / 10;
-    d[5] = playTime - d[4] * 10;
+    part = playTime / 3600;
+    digits[0] = part / 10;
+    digits[1] = part - digits[0] * 10;
+    playTime -= part * 3600;
+    part = playTime / 60;
+    digits[2] = part / 10;
+    digits[3] = part - digits[2] * 10;
+    playTime -= part * 60;
+    digits[4] = playTime / 10;
+    digits[5] = playTime - digits[4] * 10;
     i = 0;
     off = slot * 608 + 128;
-    q = &d[0];
+    digit = &digits[0];
 
     while (i <= 5) {
-        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
-        q++;
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*digit * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        digit++;
         i++;
     }
 }
 
 s32 NewGameSlotMenuShowSummary(u8 slot) {
-    SaveFileSummary* p = &gGameState.fileSummaries[slot];
+    SaveFileSummary* summary = &gGameState.fileSummaries[slot];
 
-    if (p->level != 0) {
-        NewGameSlotMenuLoadLevelTiles(slot, p->level);
-        NewGameSlotMenuLoadTimeTiles(slot, p->playTime);
-        NewGameSlotMenuLoadFloorTiles(slot, 0, p->floor);
+    if (summary->level != 0) {
+        NewGameSlotMenuLoadLevelTiles(slot, summary->level);
+        NewGameSlotMenuLoadTimeTiles(slot, summary->playTime);
+        NewGameSlotMenuLoadFloorTiles(slot, 0, summary->floor);
         return 1;
     }
 
@@ -3693,13 +3693,13 @@ s32 NewGameSlotMenuShowSummary(u8 slot) {
 }
 
 void NewGameSlotMenuSelectSlot(u8 slot) {
-    SaveFileSummary* e;
-    u8 i = sNewGameSlotMenuWork->isRiku != 0 ? slot + 2 : slot;
-    e = &gGameState.fileSummaries[i];
+    SaveFileSummary* summary;
+    u8 fileIndex = sNewGameSlotMenuWork->isRiku != 0 ? slot + 2 : slot;
+    summary = &gGameState.fileSummaries[fileIndex];
 
-    if (e->level != 0) {
-        NewGameSlotMenuLoadFloorTiles(i, 1, e->floor);
-        sNewGameSlotMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), sNewGameSlotMenuWork->textSlots);
+    if (summary->level != 0) {
+        NewGameSlotMenuLoadFloorTiles(fileIndex, 1, summary->floor);
+        sNewGameSlotMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(summary->world), sNewGameSlotMenuWork->textSlots);
 
         if (sNewGameSlotMenuWork->isRiku == 0) {
             LoadObjPaletteBank(sNewGameSlotMenuWork->palette8->index, gSaveFloorSoraPalette);
@@ -3707,7 +3707,7 @@ void NewGameSlotMenuSelectSlot(u8 slot) {
             LoadObjPaletteBank(sNewGameSlotMenuWork->palette8->index, gSaveFloorRikuPalette);
         }
     } else {
-        NewGameSlotMenuLoadFloorTiles(i, 1, 13);
+        NewGameSlotMenuLoadFloorTiles(fileIndex, 1, 13);
         sNewGameSlotMenuWork->textSlotCount = 0;
     }
 
@@ -3731,21 +3731,21 @@ void NewGameSlotMenuSelectSlot(u8 slot) {
 }
 
 void NewGameSlotMenuDeselectSlot(u8 slot) {
-    u8 idx = sNewGameSlotMenuWork->isRiku != 0 ? slot + 2 : slot;
-    SaveFileSummary* e = &gGameState.fileSummaries[idx];
+    u8 fileIndex = sNewGameSlotMenuWork->isRiku != 0 ? slot + 2 : slot;
+    SaveFileSummary* summary = &gGameState.fileSummaries[fileIndex];
 
-    if (e->level != 0) {
-        NewGameSlotMenuLoadFloorTiles(idx, 0, e->floor);
+    if (summary->level != 0) {
+        NewGameSlotMenuLoadFloorTiles(fileIndex, 0, summary->floor);
     } else {
-        NewGameSlotMenuLoadFloorTiles(idx, 0, 13);
+        NewGameSlotMenuLoadFloorTiles(fileIndex, 0, 13);
     }
 
     sNewGameSlotMenuWork->textSlotCount = 0;
 }
 
 void NewGameSlotMenuDraw() {
-    s32 t;
-    s32 u;
+    s32 spacing;
+    s32 slotOffset;
 
     DrawSprite(128, sNewGameSlotMenuWork->y >> 8, gMenuLoadTitleFrames[1], sNewGameSlotMenuWork->tiles2,
         sNewGameSlotMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
@@ -3765,12 +3765,12 @@ void NewGameSlotMenuDraw() {
     }
 
     DrawSprite(0, 16, gSaveSlotCharaWinFrame0, sNewGameSlotMenuWork->tiles3, sNewGameSlotMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 90);
-    t = 45;
-    u = sNewGameSlotMenuWork->selectedSlot * t;
-    ApproachValueHalf(&sNewGameSlotMenuWork->y3, (sNewGameSlotMenuWork->slotBaseY + u) << 8);
+    spacing = 45;
+    slotOffset = sNewGameSlotMenuWork->selectedSlot * spacing;
+    ApproachValueHalf(&sNewGameSlotMenuWork->y3, (sNewGameSlotMenuWork->slotBaseY + slotOffset) << 8);
     DrawSprite(76, sNewGameSlotMenuWork->y3 >> 8, AnimGetGfx(&sNewGameSlotMenuWork->anim),
         sNewGameSlotMenuWork->tiles, sNewGameSlotMenuWork->palette, NULL, 0, 70);
-    DrawTextSlots(100, u + (sNewGameSlotMenuWork->slotBaseY + 22), sNewGameSlotMenuWork->textSlots,
+    DrawTextSlots(100, slotOffset + (sNewGameSlotMenuWork->slotBaseY + 22), sNewGameSlotMenuWork->textSlots,
         sNewGameSlotMenuWork->palette8, 50, sNewGameSlotMenuWork->textSlotCount);
     DrawTextSlots(
         (240 - GetTextSlotsWidth(sNewGameSlotMenuWork->textSlots2, sNewGameSlotMenuWork->textSlotCount2)) / 2, 134,
@@ -3867,8 +3867,8 @@ void NewGameSlotMenuExit(NewGameSlotMenuWork* work) {
 }
 
 void Mode_MenuNew_0() {
-    u8 v;
-    u8 u;
+    u8 firstUsed;
+    u8 secondUsed;
 
     sNewGameSlotMenuWork = EwramAlloc(sizeof(NewGameSlotMenuWork));
     sNewGameSlotMenuWork->confirmed = 0;
@@ -3941,15 +3941,15 @@ void Mode_MenuNew_0() {
     sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNewGameSlotMenuText), sNewGameSlotMenuWork->textSlots2);
 
     if (sNewGameSlotMenuWork->isRiku != 0) {
-        v = NewGameSlotMenuShowSummary(2);
-        u = NewGameSlotMenuShowSummary(3);
+        firstUsed = NewGameSlotMenuShowSummary(2);
+        secondUsed = NewGameSlotMenuShowSummary(3);
     } else {
-        v = NewGameSlotMenuShowSummary(0);
-        u = NewGameSlotMenuShowSummary(1);
+        firstUsed = NewGameSlotMenuShowSummary(0);
+        secondUsed = NewGameSlotMenuShowSummary(1);
     }
 
-    if (v) {
-        sNewGameSlotMenuWork->selectedSlot = !u ? 1 : 0;
+    if (firstUsed) {
+        sNewGameSlotMenuWork->selectedSlot = !secondUsed ? 1 : 0;
     } else {
         sNewGameSlotMenuWork->selectedSlot = 0;
     }
@@ -4133,71 +4133,71 @@ void LoadGameMenuLoadFloorTiles(u8 slot, u8 selected, u8 floor) {
 }
 
 void LoadGameMenuLoadLevelTiles(u8 slot, u16 level) {
-    u16 d[4];
+    u16 digits[4];
     s32 off;
-    u16* q;
+    u16* digit;
     s32 i;
 
-    d[0] = level / 100;
-    d[1] = level / 10 - d[0] * 10;
-    d[2] = level - d[0] * 100 - d[1] * 10;
+    digits[0] = level / 100;
+    digits[1] = level / 10 - digits[0] * 10;
+    digits[2] = level - digits[0] * 100 - digits[1] * 10;
     i = 1;
     off = slot * 608 + 32;
-    q = &d[1];
+    digit = &digits[1];
 
     while (i <= 2) {
-        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
-        q++;
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*digit * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        digit++;
         i++;
     }
 }
 
 void LoadGameMenuLoadTimeTiles(u8 slot, u32 playTime) {
-    u16 d[6];
+    u16 digits[6];
     s32 off;
-    u16* q;
+    u16* digit;
     s32 i;
-    u32 t;
+    u32 part;
 
-    t = playTime / 3600;
-    d[0] = t / 10;
-    d[1] = t - d[0] * 10;
-    playTime -= t * 3600;
-    t = playTime / 60;
-    d[2] = t / 10;
-    d[3] = t - d[2] * 10;
-    playTime -= t * 60;
-    d[4] = playTime / 10;
-    d[5] = playTime - d[4] * 10;
+    part = playTime / 3600;
+    digits[0] = part / 10;
+    digits[1] = part - digits[0] * 10;
+    playTime -= part * 3600;
+    part = playTime / 60;
+    digits[2] = part / 10;
+    digits[3] = part - digits[2] * 10;
+    playTime -= part * 60;
+    digits[4] = playTime / 10;
+    digits[5] = playTime - digits[4] * 10;
     i = 0;
     off = slot * 608 + 128;
-    q = d;
+    digit = digits;
 
     while (i <= 5) {
-        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
-        q++;
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*digit * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        digit++;
         i++;
     }
 }
 
 void LoadGameMenuShowSummary(u8 slot) {
-    SaveFileSummary* e = &gGameState.fileSummaries[slot];
+    SaveFileSummary* summary = &gGameState.fileSummaries[slot];
 
-    if (e->level != 0) {
-        LoadGameMenuLoadLevelTiles(slot, e->level);
-        LoadGameMenuLoadTimeTiles(slot, e->playTime);
-        LoadGameMenuLoadFloorTiles(slot, 0, e->floor);
+    if (summary->level != 0) {
+        LoadGameMenuLoadLevelTiles(slot, summary->level);
+        LoadGameMenuLoadTimeTiles(slot, summary->playTime);
+        LoadGameMenuLoadFloorTiles(slot, 0, summary->floor);
     } else {
         LoadGameMenuLoadFloorTiles(slot, 0, 13);
     }
 }
 
 void LoadGameMenuSelectSlot(u8 slot) {
-    SaveFileSummary* e = &gGameState.fileSummaries[slot];
+    SaveFileSummary* summary = &gGameState.fileSummaries[slot];
 
-    if (e->level != 0) {
-        LoadGameMenuLoadFloorTiles(slot, 1, e->floor);
-        sLoadGameMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), sLoadGameMenuWork->textSlots);
+    if (summary->level != 0) {
+        LoadGameMenuLoadFloorTiles(slot, 1, summary->floor);
+        sLoadGameMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(summary->world), sLoadGameMenuWork->textSlots);
 
         if (slot <= 1) {
             LoadObjPaletteBank(sLoadGameMenuWork->palette7->index, gSaveFloorSoraPalette);
@@ -4211,10 +4211,10 @@ void LoadGameMenuSelectSlot(u8 slot) {
 }
 
 void LoadGameMenuDeselectSlot(u8 slot) {
-    SaveFileSummary* e = &gGameState.fileSummaries[slot];
+    SaveFileSummary* summary = &gGameState.fileSummaries[slot];
 
-    if (e->level != 0) {
-        LoadGameMenuLoadFloorTiles(slot, 0, e->floor);
+    if (summary->level != 0) {
+        LoadGameMenuLoadFloorTiles(slot, 0, summary->floor);
     } else {
         LoadGameMenuLoadFloorTiles(slot, 0, 13);
     }
@@ -4223,8 +4223,8 @@ void LoadGameMenuDeselectSlot(u8 slot) {
 }
 
 void LoadGameMenuDraw() {
-    s32 t;
-    s32 u;
+    s32 spacing;
+    s32 slotOffset;
 
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -4292,16 +4292,16 @@ void LoadGameMenuDraw() {
     }
 
     if (sLoadGameMenuWork->showRikuSlots != 0) {
-        t = 32;
+        spacing = 32;
     } else {
-        t = 45;
+        spacing = 45;
     }
 
-    u = t * sLoadGameMenuWork->selectedSlot;
-    ApproachValueHalf(&sLoadGameMenuWork->y3, (sLoadGameMenuWork->slotBaseY + u) << 8);
+    slotOffset = spacing * sLoadGameMenuWork->selectedSlot;
+    ApproachValueHalf(&sLoadGameMenuWork->y3, (sLoadGameMenuWork->slotBaseY + slotOffset) << 8);
     DrawSprite(76, sLoadGameMenuWork->y3 >> 8, AnimGetGfx(&sLoadGameMenuWork->anim),
         sLoadGameMenuWork->tiles, sLoadGameMenuWork->palette, NULL, SPRITE_PRIORITY(1), 70);
-    DrawTextSlots(100, u + (sLoadGameMenuWork->slotBaseY + 22), sLoadGameMenuWork->textSlots,
+    DrawTextSlots(100, slotOffset + (sLoadGameMenuWork->slotBaseY + 22), sLoadGameMenuWork->textSlots,
         sLoadGameMenuWork->palette7, 50, sLoadGameMenuWork->textSlotCount);
 }
 
@@ -4436,7 +4436,7 @@ void LoadGameMenuSlideOutY(LoadGameMenuWork* work) {
 
 void LoadGameMenuExit(LoadGameMenuWork* work) {
 #ifdef VERSION_EU
-    SaveFileSummary* e = &gGameState.fileSummaries[work->selectedSlot];
+    SaveFileSummary* summary = &gGameState.fileSummaries[work->selectedSlot];
 #endif
 
     if (FadeIsActive()) {
@@ -4451,7 +4451,7 @@ void LoadGameMenuExit(LoadGameMenuWork* work) {
         }
     } else if (work->loaded) {
 #ifdef VERSION_EU
-        if (e->world != WORLD_100_ACRE_WOOD) {
+        if (summary->world != WORLD_100_ACRE_WOOD) {
 #else
         if (gMapFloorState.world != WORLD_100_ACRE_WOOD) {
 #endif
@@ -4680,16 +4680,16 @@ void Mode_MenuMsg_2() {
 }
 
 void Task_MapRnd_0(MapRndWork* work) {
-    MapRoomDef* r = gMapRoomDefs[gMapFloorState.world];
+    MapRoomDef* roomDef = gMapRoomDefs[gMapFloorState.world];
     s32 i;
 
     TaskPoolInit(&work->tasks, 4);
-    LoadBgTiles(3, r->tiles, r->tilesSize);
-    LoadBgTiles(2, r->tiles, r->tilesSize);
-    LoadBgTiles(1, r->tiles2, r->tilesSize2);
-    LoadBgPalette(3, r->palette, r->paletteSize);
-    LoadBgPalette(2, r->palette, r->paletteSize);
-    LoadBgPalette(1, r->palette, r->paletteSize);
+    LoadBgTiles(3, roomDef->tiles, roomDef->tilesSize);
+    LoadBgTiles(2, roomDef->tiles, roomDef->tilesSize);
+    LoadBgTiles(1, roomDef->tiles2, roomDef->tilesSize2);
+    LoadBgPalette(3, roomDef->palette, roomDef->paletteSize);
+    LoadBgPalette(2, roomDef->palette, roomDef->paletteSize);
+    LoadBgPalette(1, roomDef->palette, roomDef->paletteSize);
     gMapRoomState->cols = GetRandomMapWidth();
     gMapRoomState->rows = 64;
     gFieldState->tileCols = gMapRoomState->cols * 4;
@@ -4697,11 +4697,11 @@ void Task_MapRnd_0(MapRndWork* work) {
     MapGenerateRoom(gMapRoomState->cols, gMapRoomState->rows);
 
     for (i = 0; i < 4; i++) {
-        MapDoor* e = GetMapDoor(i);
+        MapDoor* door = GetMapDoor(i);
 
-        if (e->flags & DOOR_FLAG_PRESENT) {
-            if ((e->flags & DOOR_FLAG_SEALED) == 0) {
-                TaskCreate(&work->tasks, &gTaskDescMapDoor, e);
+        if (door->flags & DOOR_FLAG_PRESENT) {
+            if ((door->flags & DOOR_FLAG_SEALED) == 0) {
+                TaskCreate(&work->tasks, &gTaskDescMapDoor, door);
             }
         }
     }
@@ -4746,7 +4746,7 @@ void MapFixInitColliders(MapFixWork* work, MapFixedCollider* collider) {
 }
 
 void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
-    FldObj v;
+    FldObj stair;
 
     switch (gMapFloorState.entrySide) {
     case 0:
@@ -4835,16 +4835,16 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
     gMapRoomState->rows = gFieldState->tileRows / 2;
     MapFixInitCells(def);
     TaskPoolInit(&work->tasks, 2);
-    v.fieldPosition.x = def->stairX;
-    v.fieldPosition.y = def->stairY;
-    v.angle = 45;
-    TaskCreate(&work->tasks, &gTaskDescMapStair, &v);
+    stair.fieldPosition.x = def->stairX;
+    stair.fieldPosition.y = def->stairY;
+    stair.angle = 45;
+    TaskCreate(&work->tasks, &gTaskDescMapStair, &stair);
 
     if (def->stair2X != 0 || def->stair2Y != 0) {
-        v.fieldPosition.x = def->stair2X;
-        v.fieldPosition.y = def->stair2Y;
-        v.angle = 173;
-        TaskCreate(&work->tasks, &gTaskDescMapStair, &v);
+        stair.fieldPosition.x = def->stair2X;
+        stair.fieldPosition.y = def->stair2Y;
+        stair.angle = 173;
+        TaskCreate(&work->tasks, &gTaskDescMapStair, &stair);
     }
 
     MapFixInitColliders(work, def->colliders);
@@ -4924,25 +4924,25 @@ void MapDoorShowClosed(MapDoorWork* work) {
 }
 
 u8 MapDoorWaitHit(MapDoorWork* work) {
-    MapDoor* flags = work->door;
-    FldObj* e = &work->obj;
+    MapDoor* door = work->door;
+    FldObj* obj = &work->obj;
 
     if (!(gFieldState->flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & (ROOM_FLAG_ENEMY_STRUCK | ROOM_FLAG_TUTORIAL_ACTIVE)) &&
-        (u8)(flags->room + 3) > 1 && (flags->flags & (DOOR_FLAG_OPEN | DOOR_FLAG_EVENT)) != (DOOR_FLAG_OPEN | DOOR_FLAG_EVENT) &&
-        IsHitByMapAttack(&e->fieldPosition, 0, 8) && !(gFieldState->flags & FIELD_FLAG_PLAYER_JUMPING) &&
+        (u8)(door->room + 3) > 1 && (door->flags & (DOOR_FLAG_OPEN | DOOR_FLAG_EVENT)) != (DOOR_FLAG_OPEN | DOOR_FLAG_EVENT) &&
+        IsHitByMapAttack(&obj->fieldPosition, 0, 8) && !(gFieldState->flags & FIELD_FLAG_PLAYER_JUMPING) &&
         gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
         TaskPool* pool;
 
         m4aSongNumStart(SONG_SND_220);
         pool = &work->tasks;
-        TaskCreate(pool, &gTaskDescMapSpark, e);
+        TaskCreate(pool, &gTaskDescMapSpark, obj);
         gMapRoomState->flags |= ROOM_FLAG_ATTACK_HIT;
-        gFieldState->lockonTarget = e;
-        gMapRoomState->door = e;
+        gFieldState->lockonTarget = obj;
+        gMapRoomState->door = obj;
         work->triggered = 1;
         work->update = MapDoorWaitCard;
-        gMapRoomState->doorRoom = flags->room;
-        gMapRoomState->doorSide = flags->side;
+        gMapRoomState->doorRoom = door->room;
+        gMapRoomState->doorSide = door->side;
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
         FadeSetPaletteExcluded(work->palette2->index + 16, 1);
         TaskCreate(pool, &gTaskDescRoomcreate, NULL);
@@ -4952,14 +4952,14 @@ u8 MapDoorWaitHit(MapDoorWork* work) {
 }
 
 u8 MapDoorWaitCard(MapDoorWork* work) {
-    MapDoor* flags = work->door;
-    void* t = GetSelectedMapCard();
+    MapDoor* door = work->door;
+    void* card = GetSelectedMapCard();
 
-    if (t != NULL) {
-        if (flags->flags & DOOR_FLAG_EVENT) {
-            CreateMapRoom(flags->room, NULL);
+    if (card != NULL) {
+        if (door->flags & DOOR_FLAG_EVENT) {
+            CreateMapRoom(door->room, NULL);
         } else {
-            CreateMapRoom(flags->room, t);
+            CreateMapRoom(door->room, card);
         }
 
         work->update = MapDoorWaitOpen;
@@ -4976,13 +4976,13 @@ u8 MapDoorWaitCard(MapDoorWork* work) {
 }
 
 u8 MapDoorWaitOpen(MapDoorWork* work) {
-    MapDoor* flags = work->door;
-    u16 v;
+    MapDoor* door = work->door;
+    u16 doorFlags;
 
     if (gFieldState->flags & FIELD_FLAG_DOOR_OPENED) {
         MapDoorShowOpen(work);
-        v = flags->flags | DOOR_FLAG_OPEN;
-        flags->flags = v;
+        doorFlags = door->flags | DOOR_FLAG_OPEN;
+        door->flags = doorFlags;
         work->update = MapDoorIdle;
     }
 
@@ -4994,9 +4994,9 @@ u8 MapDoorIdle(MapDoorWork* work) {
 }
 
 void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
-    FldObj* e = &work->obj;
-    FldPos* v = &e->fieldPosition;
-    const MapDoorGfx* q = &gWorldMapDoorGfx[gMapFloorState.world];
+    FldObj* obj = &work->obj;
+    FldPos* pos = &obj->fieldPosition;
+    const MapDoorGfx* doorGfx = &gWorldMapDoorGfx[gMapFloorState.world];
 
     work->door = door;
     work->triggered = 0;
@@ -5005,47 +5005,47 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
     switch (door->side) {
     case 0:
         work->sprite = gMapDoorSide0Frame0;
-        work->openSrc = q->side0Open;
-        work->closedSrc = q->side0Closed;
-        e->angle = 173;
+        work->openSrc = doorGfx->side0Open;
+        work->closedSrc = doorGfx->side0Closed;
+        obj->angle = 173;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
-        e->fieldPosition.y = (door->cellY << 4) + 10;
+        obj->fieldPosition.y = (door->cellY << 4) + 10;
         break;
     case 1:
         work->sprite = gMapDoorSide1Frame0;
-        work->openSrc = q->side1Open;
-        work->closedSrc = q->side1Closed;
-        e->angle = 45;
+        work->openSrc = doorGfx->side1Open;
+        work->closedSrc = doorGfx->side1Closed;
+        obj->angle = 45;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
-        e->fieldPosition.y = (door->cellY << 4) + 6;
+        obj->fieldPosition.y = (door->cellY << 4) + 6;
         break;
     case 2:
         work->sprite = gMapDoorSide2Frame0;
-        work->openSrc = q->side2Open;
-        work->closedSrc = q->side2Closed;
-        e->angle = 211;
+        work->openSrc = doorGfx->side2Open;
+        work->closedSrc = doorGfx->side2Closed;
+        obj->angle = 211;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
-        e->fieldPosition.y = (door->cellY << 4) + 6;
+        obj->fieldPosition.y = (door->cellY << 4) + 6;
         break;
     case 3:
         work->sprite = gMapDoorSide3Frame0;
-        work->openSrc = q->side3Open;
-        work->closedSrc = q->side3Closed;
-        e->angle = 83;
+        work->openSrc = doorGfx->side3Open;
+        work->closedSrc = doorGfx->side3Closed;
+        obj->angle = 83;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
-        e->fieldPosition.y = (door->cellY << 4) + 10;
+        obj->fieldPosition.y = (door->cellY << 4) + 10;
         break;
     }
 
-    v->x <<= 8;
-    v->y <<= 8;
-    v->z = 0;
-    v->z = v->ground = GetFldPosFloor(v);
-    v->y -= v->z;
-    e->height = 32;
-    e->kind = 3;
+    pos->x <<= 8;
+    pos->y <<= 8;
+    pos->z = 0;
+    pos->z = pos->ground = GetFldPosFloor(pos);
+    pos->y -= pos->z;
+    obj->height = 32;
+    obj->kind = 3;
     work->tiles = AllocSpriteFrameTiles(0x400);
-    work->palette = LoadObjPalette(q->palette, 32);
+    work->palette = LoadObjPalette(doorGfx->palette, 32);
     work->palette2 = LoadObjPalette(gMapDoorEmblemPalette, 32);
     work->tiles2 = AllocSpriteFrameTiles(0x100);
 
@@ -5096,44 +5096,44 @@ s32 Task_MapDoor_1(MapDoorWork* work) {
 }
 
 void Task_MapDoor_2(MapDoorWork* work) {
-    MapDoor* f = work->door;
+    MapDoor* door = work->door;
     u16 sx;
     u16 sy;
-    u16 v;
-    u16 t;
-    s32 k;
+    u16 priority;
+    u16 drawFlags;
+    s32 pixelY;
 
     if (work->visible == 1) {
         sx = (work->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
-        k = work->obj.fieldPosition.y >> 8;
-        sy = k + (work->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
+        pixelY = work->obj.fieldPosition.y >> 8;
+        sy = pixelY + (work->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
-        switch (f->side) {
+        switch (door->side) {
         case 0:
         case 3:
-            v = -0xFE4 - (work->obj.fieldPosition.y >> 8) * 4;
+            priority = -0xFE4 - (work->obj.fieldPosition.y >> 8) * 4;
             break;
         case 1:
         case 2:
-            v = -0x1024 - k * 4;
+            priority = -0x1024 - pixelY * 4;
             break;
         default:
-            v = 0;
+            priority = 0;
             break;
         }
 
-        t = 0x800;
-        DrawSprite(sx, sy, NULL, work->tiles, work->palette, NULL, t, v);
+        drawFlags = 0x800;
+        DrawSprite(sx, sy, NULL, work->tiles, work->palette, NULL, drawFlags, priority);
 
-        if (f->flags & DOOR_FLAG_EVENT) {
-            switch (f->side) {
+        if (door->flags & DOOR_FLAG_EVENT) {
+            switch (door->side) {
             case 0:
             case 2:
-                DrawSprite(sx, sy, NULL, work->tiles2, work->palette2, NULL, t, v - 1);
+                DrawSprite(sx, sy, NULL, work->tiles2, work->palette2, NULL, drawFlags, priority - 1);
                 break;
             case 1:
             case 3:
-                DrawSprite(sx, sy, NULL, work->tiles2, work->palette2, NULL, t, v - 1);
+                DrawSprite(sx, sy, NULL, work->tiles2, work->palette2, NULL, drawFlags, priority - 1);
                 break;
             }
         }
@@ -5173,41 +5173,41 @@ void MapMenuSetCharaPalettesExcluded(MapMenuWork* work, u8 excluded) {
 }
 
 void MapMenuWriteDigits3(ObjTiles* tiles, u8 offset, u16 value) {
-    u16 d[3];
-    u16* q;
+    u16 digits[3];
+    u16* digit;
     s32 i;
 
-    d[0] = value / 100;
-    d[1] = value / 10 - d[0] * 10;
-    d[2] = value - d[0] * 100 - d[1] * 10;
+    digits[0] = value / 100;
+    digits[1] = value / 10 - digits[0] * 10;
+    digits[2] = value - digits[0] * 100 - digits[1] * 10;
 
-    for (i = 0, q = d; i < 3; i++) {
-        RequestDma3Copy((void*)&gMapMenuDigitTiles[*q * 32], (void*)(OBJ_VRAM0 + (tiles->index + offset + i) * 32), 0x20);
-        q++;
+    for (i = 0, digit = digits; i < 3; i++) {
+        RequestDma3Copy((void*)&gMapMenuDigitTiles[*digit * 32], (void*)(OBJ_VRAM0 + (tiles->index + offset + i) * 32), 0x20);
+        digit++;
     }
 }
 
 void MapMenuWriteDigits5(ObjTiles* tiles, u8 offset, u32 value) {
-    u16 d[5];
-    u16* q;
+    u16 digits[5];
+    u16* digit;
     s32 i;
 
-    d[0] = value / 10000;
-    d[1] = value / 1000 - d[0] * 10;
-    d[2] = value / 100 - d[0] * 100 - d[1] * 10;
-    d[3] = value / 10 - d[0] * 1000 - d[1] * 100 - d[2] * 10;
-    d[4] = value - d[0] * 10000 - d[1] * 1000 - d[2] * 100 - d[3] * 10;
+    digits[0] = value / 10000;
+    digits[1] = value / 1000 - digits[0] * 10;
+    digits[2] = value / 100 - digits[0] * 100 - digits[1] * 10;
+    digits[3] = value / 10 - digits[0] * 1000 - digits[1] * 100 - digits[2] * 10;
+    digits[4] = value - digits[0] * 10000 - digits[1] * 1000 - digits[2] * 100 - digits[3] * 10;
 
-    for (i = 0, q = d; i < 5; i++) {
-        RequestDma3Copy((void*)&gMapMenuDigitTiles[*q * 32], (void*)(OBJ_VRAM0 + (tiles->index + offset + i) * 32), 0x20);
-        q++;
+    for (i = 0, digit = digits; i < 5; i++) {
+        RequestDma3Copy((void*)&gMapMenuDigitTiles[*digit * 32], (void*)(OBJ_VRAM0 + (tiles->index + offset + i) * 32), 0x20);
+        digit++;
     }
 }
 
 void MapMenuInitConfirm(MapMenuWork* work) {
-    TextSlot* p1;
-    TextSlot* p2;
-    TextSlot* p3;
+    TextSlot* promptSlots;
+    TextSlot* yesSlots;
+    TextSlot* noSlots;
 
     LoadBgTiles(0, gConfirmWinTiles, 0x140);
     LoadBgMap(0, gConfirmWinMap, 0x800);
@@ -5215,25 +5215,25 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     FadeSetPaletteExcluded(15, 1);
     SetBgScroll(0, 0, 0);
     work->confirmPalette = LoadTextPalette(1);
-    p1 = work->textSlots2;
+    promptSlots = work->textSlots2;
 #ifdef VERSION_EU
-    InitTextSlots(p1, 66);
-    p2 = work->textSlots3;
-    InitTextSlots(p2, 6);
-    p3 = work->textSlots4;
-    InitTextSlots(p3, 9);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapQuickSaveConfirmTextByLanguage), p1);
-    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), p2);
-    work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), p3);
+    InitTextSlots(promptSlots, 66);
+    yesSlots = work->textSlots3;
+    InitTextSlots(yesSlots, 6);
+    noSlots = work->textSlots4;
+    InitTextSlots(noSlots, 9);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapQuickSaveConfirmTextByLanguage), promptSlots);
+    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), yesSlots);
+    work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), noSlots);
 #else
-    InitTextSlots(p1, 33);
-    p2 = work->textSlots3;
-    InitTextSlots(p2, 6);
-    p3 = work->textSlots4;
-    InitTextSlots(p3, 9);
-    work->textSlotCount2 = LoadTextSlots(gMapQuickSaveConfirmText, p1);
-    work->textSlotCount3 = LoadTextSlots(gYesChoiceText, p2);
-    work->textSlotCount4 = LoadTextSlots(gNoChoiceText, p3);
+    InitTextSlots(promptSlots, 33);
+    yesSlots = work->textSlots3;
+    InitTextSlots(yesSlots, 6);
+    noSlots = work->textSlots4;
+    InitTextSlots(noSlots, 9);
+    work->textSlotCount2 = LoadTextSlots(gMapQuickSaveConfirmText, promptSlots);
+    work->textSlotCount3 = LoadTextSlots(gYesChoiceText, yesSlots);
+    work->textSlotCount4 = LoadTextSlots(gNoChoiceText, noSlots);
 #endif
 }
 
@@ -5679,7 +5679,7 @@ s32 MapMenuResume(MapMenuWork* work) {
 }
 
 void Task_MapMenu_0(MapMenuWork* work) {
-    s8 v;
+    s8 cursor;
 
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
@@ -5692,9 +5692,9 @@ void Task_MapMenu_0(MapMenuWork* work) {
     }
 
     FadeSetPaletteExcluded(work->palette6->index + 0x10, 1);
-    v = gGameState.mapMenuCursor;
+    cursor = gGameState.mapMenuCursor;
 
-    if (v != -1) {
+    if (cursor != -1) {
         work->reopened = 1;
     } else {
         gGameState.mapMenuCursor = 0;
@@ -5724,7 +5724,7 @@ s32 Task_MapMenu_1(MapMenuWork* work) {
 
 void Task_MapMenu_2(MapMenuWork* work) {
     s32 i;
-    s32 k;
+    s32 iconOffset;
 
     DrawSprite(128, work->y >> 8, gMapMenuBarsFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
     DrawSprite(128, work->y2 >> 8, gMapMenuBarsFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
@@ -5856,10 +5856,10 @@ void Task_MapMenu_2(MapMenuWork* work) {
 #endif
 
             for (i = 0; i < 3; i++) {
-                k = i * 20 + 14;
+                iconOffset = i * 20 + 14;
 
                 if (work->tiles9[i] != NULL) {
-                    DrawSprite((work->x4 >> 8) + k, 124, work->gfx[i], work->tiles9[i],
+                    DrawSprite((work->x4 >> 8) + iconOffset, 124, work->gfx[i], work->tiles9[i],
                         work->palette9[i], NULL, SPRITE_PRIORITY(1), 80);
                 }
             }
@@ -6123,66 +6123,66 @@ void MapSaveLoadFloorTiles(u8 floor) {
 }
 
 void MapSaveLoadLevelTiles(u16 level) {
-    u16 d[4];
+    u16 digits[4];
     s32 off;
-    u16* q;
+    u16* digit;
     s32 i;
 
-    d[0] = level / 100;
-    d[1] = level / 10 - d[0] * 10;
-    d[2] = level - d[0] * 100 - d[1] * 10;
+    digits[0] = level / 100;
+    digits[1] = level / 10 - digits[0] * 10;
+    digits[2] = level - digits[0] * 100 - digits[1] * 10;
     off = 0x40;
-    q = &d[1];
+    digit = &digits[1];
 
     for (i = 0; i < 2; i++) {
-        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*digit * 32], (u8*)GetBgCharBase(0) + off, 0x20);
 
         // fakematch
         do {
             off += 0x20;
         } while (0);
 
-        q++;
+        digit++;
     }
 }
 
 void MapSaveLoadTimeTiles(u32 playTime) {
-    u16 d[6];
+    u16 digits[6];
     s32 off;
-    u16* q;
+    u16* digit;
     s32 i;
-    u32 v;
+    u32 part;
 
-    v = playTime / 3600;
-    d[0] = v / 10;
-    d[1] = v - d[0] * 10;
-    playTime -= v * 3600;
-    v = playTime / 60;
-    d[2] = v / 10;
-    d[3] = v - d[2] * 10;
-    playTime -= v * 60;
-    d[4] = playTime / 10;
-    d[5] = playTime - d[4] * 10;
+    part = playTime / 3600;
+    digits[0] = part / 10;
+    digits[1] = part - digits[0] * 10;
+    playTime -= part * 3600;
+    part = playTime / 60;
+    digits[2] = part / 10;
+    digits[3] = part - digits[2] * 10;
+    playTime -= part * 60;
+    digits[4] = playTime / 10;
+    digits[5] = playTime - digits[4] * 10;
     off = 128;
-    q = d;
+    digit = digits;
 
     for (i = 0; i < 6; i++) {
-        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*digit * 32], (u8*)GetBgCharBase(0) + off, 0x20);
         off += 0x20;
-        q++;
+        digit++;
     }
 }
 
 void MapSaveShowSummary(MapSaveWork* work, u8 slot) {
-    SaveFileSummary* e = &gGameState.fileSummaries[slot];
+    SaveFileSummary* summary = &gGameState.fileSummaries[slot];
 
-    if (e->level == 0) {
+    if (summary->level == 0) {
         work->textSlotCount = 0;
     } else {
-        MapSaveLoadFloorTiles(e->floor);
-        MapSaveLoadLevelTiles(e->level);
-        MapSaveLoadTimeTiles(e->playTime);
-        work->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), work->textSlots);
+        MapSaveLoadFloorTiles(summary->floor);
+        MapSaveLoadLevelTiles(summary->level);
+        MapSaveLoadTimeTiles(summary->playTime);
+        work->textSlotCount = LoadTextSlots(GetMapWorldName(summary->world), work->textSlots);
     }
 }
 
@@ -6202,9 +6202,9 @@ s32 MapSaveSlideInY(MapSaveWork* work) {
 }
 
 s32 MapSaveSlideInX(MapSaveWork* work) {
-    TextSlot* p1;
-    TextSlot* p2;
-    TextSlot* p3;
+    TextSlot* promptSlots;
+    TextSlot* yesSlots;
+    TextSlot* noSlots;
 
     if (work->steps != 0) {
         ApproachValue(&work->x, 0, work->steps);
@@ -6289,19 +6289,19 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         AnimInit(&work->anim, gMapMenuCursorAnims, gMapMenuCursorFrames);
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         work->palette8 = LoadTextPalette(1);
-        p1 = work->textSlots2;
+        promptSlots = work->textSlots2;
 #ifdef VERSION_EU
-        InitTextSlots(p1, 54);
+        InitTextSlots(promptSlots, 54);
 #else
-        InitTextSlots(p1, 27);
+        InitTextSlots(promptSlots, 27);
 #endif
-        p2 = work->textSlots3;
-        InitTextSlots(p2, 6);
-        p3 = work->textSlots4;
-        InitTextSlots(p3, 9);
-        work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gMapSaveConfirmText), p1);
-        work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), p2);
-        work->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), p3);
+        yesSlots = work->textSlots3;
+        InitTextSlots(yesSlots, 6);
+        noSlots = work->textSlots4;
+        InitTextSlots(noSlots, 9);
+        work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gMapSaveConfirmText), promptSlots);
+        work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), yesSlots);
+        work->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), noSlots);
         MapSaveSetPanelPalettesExcluded(work, 1);
         work->dialogVisible = 1;
         work->confirmCursor = 2;
@@ -6573,7 +6573,7 @@ void Task_MapSave_2(MapSaveWork* work) {
 }
 
 void Task_MapSave_3(MapSaveWork* work) {
-    u32 f;
+    u32 roomFlags;
 
     MapSaveSetCharaPalettesExcluded(work, 0);
     ReleaseObjPalette(work->palette2);
@@ -6598,32 +6598,32 @@ void Task_MapSave_3(MapSaveWork* work) {
 #endif
     FreeTextSlots(work->textSlots3, 6);
     FreeTextSlots(work->textSlots4, 9);
-    f = gMapRoomState->flags & ~ROOM_FLAG_ATTACK_HIT;
-    gMapRoomState->flags = f;
+    roomFlags = gMapRoomState->flags & ~ROOM_FLAG_ATTACK_HIT;
+    gMapRoomState->flags = roomFlags;
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_ENEMIES;
-    gMapRoomState->flags = f & ~ROOM_FLAG_SAVE_MENU_OPEN;
+    gMapRoomState->flags = roomFlags & ~ROOM_FLAG_SAVE_MENU_OPEN;
     TaskPoolDestroy(&work->tasks);
 }
 
 void Task_MapAnm_0(MapAnmWork* work, MapAnmEntry* list) {
-    MapAnmSlot* e;
+    MapAnmSlot* slot;
     s32 i;
 
-    e = work->slots;
+    slot = work->slots;
 
     for (i = 0; i < 8; i++) {
-        MapAnmResetSlot(e);
-        e++;
+        MapAnmResetSlot(slot);
+        slot++;
     }
 
     if (list != NULL) {
         if (list->script != NULL) {
-            e = work->slots;
+            slot = work->slots;
 
             do {
-                MapAnmSetupSlot(e, list);
-                e++;
+                MapAnmSetupSlot(slot, list);
+                slot++;
                 list++;
             } while (list->script != NULL);
         }

@@ -106,6 +106,12 @@ enum HumHookState {
     HUM_HOOK_STATE_BOMB_BARRAGE
 };
 
+enum HumHookBombVariant {
+    HUM_HOOK_BOMB_AIMED,
+    HUM_HOOK_BOMB_SCATTER,
+    HUM_HOOK_BOMB_BARRAGE
+};
+
 void HookJumpOffset(CloudWork* work, s16 distance, s32 speed) {
     HumWork* base = &work->base;
     BtlObj* act = &base->actor;
@@ -438,13 +444,13 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
                     args.facingLeft = 1;
-                    args.variant = 1;
+                    args.variant = HUM_HOOK_BOMB_SCATTER;
                 } else {
                     args.x = act->x + 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
                     args.facingLeft = 0;
-                    args.variant = 1;
+                    args.variant = HUM_HOOK_BOMB_SCATTER;
                 }
 
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
@@ -490,13 +496,13 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
                     args.facingLeft = 1;
-                    args.variant = 0;
+                    args.variant = HUM_HOOK_BOMB_AIMED;
                 } else {
                     args.x = act->x + 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
                     args.facingLeft = 0;
-                    args.variant = 0;
+                    args.variant = HUM_HOOK_BOMB_AIMED;
                 }
 
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
@@ -541,13 +547,13 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
                     args.facingLeft = 1;
-                    args.variant = 2;
+                    args.variant = HUM_HOOK_BOMB_BARRAGE;
                 } else {
                     args.x = act->x + 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
                     args.facingLeft = 0;
-                    args.variant = 2;
+                    args.variant = HUM_HOOK_BOMB_BARRAGE;
                 }
 
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
@@ -906,19 +912,19 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
     work->vz = -(GetRandom() % 0x201 + 0x100);
 
     switch (work->variant) {
-    case 0:
+    case HUM_HOOK_BOMB_AIMED:
         work->angle = GetAngle(work->x, work->y,
             gBtlWork->targetX, gBtlWork->targetY);
         work->maxBounces = GetRandom() % 3 + 1;
         work->state = HUM_HOOK_BOMB_STATE_BOUNCE;
         break;
-    case 2:
+    case HUM_HOOK_BOMB_BARRAGE:
         work->angle = GetAngle(work->x, work->y,
             gBtlWork->targetX, gBtlWork->targetY);
         work->maxBounces = 0;
         work->state = HUM_HOOK_BOMB_STATE_EXPLODE;
         break;
-    case 1:
+    case HUM_HOOK_BOMB_SCATTER:
     default:
         work->angle = GetRandom();
         work->maxBounces = GetRandom() % 5 + 4;
@@ -954,7 +960,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
 
             work->vz = -(GetRandom() % 0x301 + 0x200);
 
-            if (work->variant == 0) {
+            if (work->variant == HUM_HOOK_BOMB_AIMED) {
                 work->angle = GetAngle(work->x, work->y,
                     gBtlWork->targetX, gBtlWork->targetY);
             } else {

@@ -2063,7 +2063,7 @@ void SetPooSoraAnimation(PooSoraWork* work, s32 animAction, u16 flags) {
     }
 
     if (work->animAction == animAction) {
-        flags |= 4;
+        flags |= ANIM_FLAG_KEEP_FRAME;
     }
 
     work->animAction = animAction;

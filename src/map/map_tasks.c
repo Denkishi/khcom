@@ -3697,7 +3697,7 @@ void MapGmk04CheckFirstTalk(MapGmk04Work* work) {
         work->update = MapGmk04WaitFirstTalkEnd;
     } else if (gFieldState->lockonTarget == &work->obj) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-        gMapRoomState->flags = state | 0x4000;
+        gMapRoomState->flags = state | ROOM_FLAG_TUTORIAL_ACTIVE;
         CreateCardMessageTask(&work->tasks, 0, CARD_MSG_SAVE_POINT_TUTORIAL);
         work->update = MapGmk04WaitMessage;
     }

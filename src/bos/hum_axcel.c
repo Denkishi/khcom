@@ -127,13 +127,13 @@ void AxcelScaleTo(AxcelWork* work, s32 scaleX, s32 scaleY, u16 steps) {
 
 void AxcelHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
-    s32 t;
+    s32 bobZ;
 
     if (hoverZ != 0) {
         act = &work->actor;
-        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
+        bobZ = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
         work->vz = 0;
-        act->z += (t - act->z) >> 4;
+        act->z += (bobZ - act->z) >> 4;
     }
 }
 
@@ -446,27 +446,27 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         case 4:
         case 5:
             {
-                s32 t = act->z + 0x1000;
-                act->z += (act->originZ - t) >> 4;
+                s32 lowZ = act->z + 0x1000;
+                act->z += (act->originZ - lowZ) >> 4;
             }
 
             break;
         case 6:
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 {
-                s32 t = act->x - 0x800;
-                act->x += (act->originX - t) >> 3;
+                s32 frontX = act->x - 0x800;
+                act->x += (act->originX - frontX) >> 3;
             }
             } else {
                 {
-                s32 t = act->x + 0x800;
-                act->x += (act->originX - t) >> 3;
+                s32 frontX = act->x + 0x800;
+                act->x += (act->originX - frontX) >> 3;
             }
             }
 
             {
-                s32 t = act->z + 0x1400;
-                act->z += (act->originZ - t) >> 3;
+                s32 lowZ = act->z + 0x1400;
+                act->z += (act->originZ - lowZ) >> 3;
             }
 
             break;
@@ -496,7 +496,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         break;
     case HUM_AXCEL_STATE_CHAKRAM_SWEEP: {
-        s32 t;
+        s32 targetX;
 
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
@@ -521,15 +521,15 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 d = (work->base.stateTimer << 9) + 0x5A00;
-            t = act->x - d;
+            s32 dist = (work->base.stateTimer << 9) + 0x5A00;
+            targetX = act->x - dist;
         } else {
-            s32 d = (work->base.stateTimer << 9) + 0x5A00;
-            t = act->x + d;
+            s32 dist = (work->base.stateTimer << 9) + 0x5A00;
+            targetX = act->x + dist;
         }
 
-        sub->x += (t - sub->x) >> 3;
-        sub2->x += (t - sub2->x) >> 3;
+        sub->x += (targetX - sub->x) >> 3;
+        sub2->x += (targetX - sub2->x) >> 3;
         sub->y += (act->y + SIN((u16)work->base.stateTimer * 4) * 55 - sub->y) >> 2;
         sub2->y += (act->y - SIN((u16)work->base.stateTimer * 4) * 55 - sub2->y) >> 2;
 
@@ -537,13 +537,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             s32* ground = &gBtlWork->targetZ;
 
             {
-                s32 t = sub->z + 0x1800;
-                sub->z += (*ground - t) >> 2;
+                s32 lowZ = sub->z + 0x1800;
+                sub->z += (*ground - lowZ) >> 2;
             }
 
             {
-                s32 t = sub2->z + 0x1800;
-                sub2->z += (*ground - t) >> 3;
+                s32 lowZ = sub2->z + 0x1800;
+                sub2->z += (*ground - lowZ) >> 3;
             }
         }
 
@@ -752,11 +752,11 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         case 2:
         case 3:
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 t = act->x + 0x3000;
-                act->x += (act->originX - t) >> 3;
+                s32 backX = act->x + 0x3000;
+                act->x += (act->originX - backX) >> 3;
             } else {
-                s32 t = act->x - 0x3000;
-                act->x += (act->originX - t) >> 3;
+                s32 backX = act->x - 0x3000;
+                act->x += (act->originX - backX) >> 3;
             }
 
             break;
@@ -794,11 +794,11 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         if (AnimGetFrame(&work->base.anim) == 1) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 t = act->x + 0x2800;
-                act->x += (act->originX - t) >> 3;
+                s32 backX = act->x + 0x2800;
+                act->x += (act->originX - backX) >> 3;
             } else {
-                s32 t = act->x - 0x2800;
-                act->x += (act->originX - t) >> 3;
+                s32 backX = act->x - 0x2800;
+                act->x += (act->originX - backX) >> 3;
             }
         }
 
@@ -844,7 +844,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         break;
     case HUM_AXCEL_STATE_FIRE_WALL: {
-        s32 a, b, c;
+        s32 wallX, wallY, wallZ;
 
         if (work->base.stateTimer == 0) {
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -869,9 +869,9 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             BgFxAddPosition(76, 0, 0);
         }
 
-        BgFxGetPosition(&a, &b, &c);
+        BgFxGetPosition(&wallX, &wallY, &wallZ);
 
-        if (!BgFxIsActive() || a < ((gBtlWork->xMin - 64) << 8) || a > ((gBtlWork->xMax + 64) << 8)) {
+        if (!BgFxIsActive() || wallX < ((gBtlWork->xMin - 64) << 8) || wallX > ((gBtlWork->xMax + 64) << 8)) {
             m4aSongNumStop(SONG_EF_AKL_FIREWALL);
             work->base.state = HUM_AXCEL_STATE_FIRE_WALL_END;
             work->base.stateTimer = 0;
@@ -944,7 +944,7 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
     s16 y;
     ObjAffine* affine;
     s32 scale;
-    s32 f;
+    s32 doubleSize;
 
     if ((sub->flags & HUM_SUB_FLAG_HIDDEN) == 0) {
         if (sub->z >= 0) {
@@ -956,13 +956,13 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
                 scale = 128;
             }
 
-            f = 0;
+            doubleSize = 0;
 
             if (scale > 0x100) {
-                f = 1;
+                doubleSize = 1;
             }
 
-            affine = AllocObjAffine(0, scale, scale, f);
+            affine = AllocObjAffine(0, scale, scale, doubleSize);
         }
 
         WorldToScreen(&x, &y, sub->x, sub->y, 0);

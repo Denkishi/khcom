@@ -105,8 +105,8 @@ enum HumHookState {
 };
 
 void HookJumpOffset(CloudWork* work, s16 distance, s32 speed) {
-    HumWork* w = &work->base;
-    BtlObj* act = &w->actor;
+    HumWork* base = &work->base;
+    BtlObj* act = &base->actor;
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->base.targetX = act->x - (distance << 8);
@@ -114,9 +114,9 @@ void HookJumpOffset(CloudWork* work, s16 distance, s32 speed) {
         work->base.targetX = act->x + (distance << 8);
     }
 
-    w->targetY = act->y;
-    w->state = HUM_HOOK_STATE_JUMP_CROUCH;
-    w->stateTimer = 0;
+    base->targetY = act->y;
+    base->state = HUM_HOOK_STATE_JUMP_CROUCH;
+    base->stateTimer = 0;
     work->speed = -speed;
 }
 
@@ -131,9 +131,9 @@ void HookJumpTo(CloudWork* work, s32 x, s32 y) {
 u8 HookTryJumpAway(CloudWork* work) {
     s32 x;
     s32 y;
-    BtlObj* c;
+    BtlObj* player;
 
-    c = gBtlWork->actor;
+    player = gBtlWork->actor;
     GetEnemyTargetPosition(&work->base.actor, &x, &y, NULL);
     HumFaceTarget(&work->base, 1);
 
@@ -141,7 +141,7 @@ u8 HookTryJumpAway(CloudWork* work) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             HookJumpOffset(work, -99, 0x280);
         } else if (GetRandom() & 1) {
-            if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
+            if (player->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 HookJumpTo(work, x + 0x2800, y);
             } else {
                 HookJumpTo(work, x - 0x2800, y);
@@ -180,17 +180,17 @@ void task_hum_hook_0(HookWork* work, void* arg) {
 u8 task_hum_hook_1(HookWork* work) {
     HookWork* w;
     BtlObj* act;
-    BtlObj* c;
+    BtlObj* player;
     VixenNdlArgs args;
     s32 x;
     s32 y;
     s32 z;
-    u16 f;
-    u8 a;
+    u16 frame;
+    u8 angle;
 
     w = work;
     act = &work->base.actor;
-    c = gBtlWork->actor;
+    player = gBtlWork->actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
     if (HumUpdateReaction(&work->base) == BTL_REACTION_CARD_ACTION) {
@@ -233,7 +233,7 @@ u8 task_hum_hook_1(HookWork* work) {
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case HUM_STATE_RELOAD: {
-        s32 d;
+        s32 dx;
 
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
@@ -243,9 +243,9 @@ u8 task_hum_hook_1(HookWork* work) {
             }
         }
 
-        d = act->x - x;
+        dx = act->x - x;
 
-        if ((d >= 0) ? d <= 0x3FFF : (d = x - act->x) <= 0x3FFF) {
+        if ((dx >= 0) ? dx <= 0x3FFF : (dx = x - act->x) <= 0x3FFF) {
             if (x <= 0xFFFF) {
                 HookJumpTo((CloudWork*)w, (gBtlWork->xMax - 40) << 8,
                     (gBtlWork->yMin + gBtlWork->yMax) << 7);
@@ -346,11 +346,11 @@ u8 task_hum_hook_1(HookWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 d = act->x - 0x1000;
-            act->x += (x - d) >> 4;
+            s32 frontX = act->x - 0x1000;
+            act->x += (x - frontX) >> 4;
         } else {
-            s32 d = act->x + 0x1000;
-            act->x += (x - d) >> 4;
+            s32 frontX = act->x + 0x1000;
+            act->x += (x - frontX) >> 4;
         }
 
         act->y += (y - act->y) >> 4;
@@ -390,11 +390,11 @@ u8 task_hum_hook_1(HookWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 d = act->x - 0x1000;
-            act->x += (x - d) >> 4;
+            s32 frontX = act->x - 0x1000;
+            act->x += (x - frontX) >> 4;
         } else {
-            s32 d = act->x + 0x1000;
-            act->x += (x - d) >> 4;
+            s32 frontX = act->x + 0x1000;
+            act->x += (x - frontX) >> 4;
         }
 
         act->y += (y - act->y) >> 4;
@@ -576,19 +576,19 @@ u8 task_hum_hook_1(HookWork* work) {
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
 
-        f = AnimGetFrame(&work->base.anim);
+        frame = AnimGetFrame(&work->base.anim);
 
-        if (f > 1) {
+        if (frame > 1) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 d = act->x + 0x1400;
-                act->x += (act->originX - d) >> 3;
+                s32 backX = act->x + 0x1400;
+                act->x += (act->originX - backX) >> 3;
             } else {
-                s32 d = act->x - 0x1400;
-                act->x += (act->originX - d) >> 3;
+                s32 backX = act->x - 0x1400;
+                act->x += (act->originX - backX) >> 3;
             }
         }
 
-        if (f == 2) {
+        if (frame == 2) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x115, act->x - 0x2000, act->y, act->z, 16, 16, 50)
                 : ApplyAttackBox(0x115, act->x + 0x2000, act->y, act->z, 16, 16, 50)) {
@@ -609,19 +609,19 @@ u8 task_hum_hook_1(HookWork* work) {
             m4aSongNumStart(SONG_VO_HO_VOICE01);
         }
 
-        f = AnimGetFrame(&work->base.anim);
+        frame = AnimGetFrame(&work->base.anim);
 
-        if (f >= 3 && f <= 5) {
+        if (frame >= 3 && frame <= 5) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 d = act->x + 0x4000;
-                act->x += (act->originX - d) >> 3;
+                s32 backX = act->x + 0x4000;
+                act->x += (act->originX - backX) >> 3;
             } else {
-                s32 d = act->x - 0x4000;
-                act->x += (act->originX - d) >> 3;
+                s32 backX = act->x - 0x4000;
+                act->x += (act->originX - backX) >> 3;
             }
         }
 
-        switch (f) {
+        switch (frame) {
         case 4:
         case 5:
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
@@ -648,9 +648,9 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         HumFaceTarget(&work->base, 1);
-        f = AnimGetFrame(&work->base.anim);
+        frame = AnimGetFrame(&work->base.anim);
 
-        switch (f) {
+        switch (frame) {
         case 2:
         case 6:
             if (work->base.anim.timer == 0) {
@@ -660,9 +660,9 @@ u8 task_hum_hook_1(HookWork* work) {
                     m4aSongNumStart(SONG_VO_HO_VOICE01);
                 }
 
-                a = GetAngle(act->x, act->y, x, y);
-                work->base.targetX = act->x + gSineTable[a] * 50;
-                work->base.targetY = act->y + -gSineTable[a + 64] * 50;
+                angle = GetAngle(act->x, act->y, x, y);
+                work->base.targetX = act->x + gSineTable[angle] * 50;
+                work->base.targetY = act->y + -gSineTable[angle + 64] * 50;
                 MakeOpponentsHittable();
             }
 
@@ -702,19 +702,19 @@ u8 task_hum_hook_1(HookWork* work) {
 
         break;
     case HUM_HOOK_STATE_JUMP_AIR: {
-        s32 d;
+        s32 vz;
 
         act->x += (work->base.targetX - act->x) >> 4;
         act->y += (work->base.targetY - act->y) >> 4;
-        d = work->base.vz;
+        vz = work->base.vz;
 
-        if (d < 0) {
-            if (d > -0x200) {
+        if (vz < 0) {
+            if (vz > -0x200) {
                 AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             } else {
                 AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             }
-        } else if (d <= 0x1FF) {
+        } else if (vz <= 0x1FF) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
         } else {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
@@ -749,12 +749,12 @@ u8 task_hum_hook_1(HookWork* work) {
         gBtlWork->rotation = (SIN(w->angle / 2) * sHumHookRollAmplitudes[w->rollLevel]) >> 8;
 
         {
-            s32 t;
+            s32 rollAngle;
 
-            t = w->angle + 1;
-            w->angle = t;
+            rollAngle = w->angle + 1;
+            w->angle = rollAngle;
 
-            if ((t & 511) == 0) {
+            if ((rollAngle & 511) == 0) {
                 w->rollLevel++;
 
                 if (w->rollLevel > 7) {
@@ -763,10 +763,10 @@ u8 task_hum_hook_1(HookWork* work) {
             }
         }
 
-        if (c->z >= c->groundZ && c->hp > 0 && c->badStatus != BAD_STATUS_STOP &&
-            !(c->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
+        if (player->z >= player->groundZ && player->hp > 0 && player->badStatus != BAD_STATUS_STOP &&
+            !(player->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
             w->playerSlide += ((GetAngleDiff(0, gBtlWork->rotation) << 6) - w->playerSlide) >> 4;
-            c->x -= w->playerSlide;
+            player->x -= w->playerSlide;
         } else {
             w->playerSlide = 0;
         }
@@ -813,63 +813,63 @@ u8 task_hum_hook_moon_1(HookMoonWork* work) {
 void task_hum_hook_moon_2(HookMoonWork* work) {
     s16 x;
     s16 y;
-    u16 v;
-    u16 t;
-    s32 s;
+    u16 fade;
+    u16 blue;
+    s32 bob;
 
     x = 248 - (gBtlWork->viewX >> 9);
     y = 208 - (gBtlWork->viewY >> 9);
-    s = gSineTable[(u8)work->angle];
-    y += s >> 5;
+    bob = gSineTable[(u8)work->angle];
+    y += bob >> 5;
     DrawSprite(x + 64, y - 28, gHumHookMoonFrame0, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFF);
     DrawSprite(x - 144, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
     DrawSprite(x - 88, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
     DrawSprite(x - 32, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
     DrawSprite(x + 24, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
     DrawSprite(x + 80, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
-    v = FadeGetAmount();
+    fade = FadeGetAmount();
 
-    if (v != 0) {
+    if (fade != 0) {
         switch (FadeGetColor()) {
         case 0:
-            t = 9 - v;
+            blue = 9 - fade;
 
-            if ((s16)t < 0) {
-                t = 0;
+            if ((s16)blue < 0) {
+                blue = 0;
             }
 
-            SetBackdropColor(0, 0, t);
+            SetBackdropColor(0, 0, blue);
             break;
         case 0x7FFF:
-            t = v + 9;
+            blue = fade + 9;
 
-            if ((s16)t > 31) {
-                t = 31;
+            if ((s16)blue > 31) {
+                blue = 31;
             }
 
-            SetBackdropColor(v, v, t);
+            SetBackdropColor(fade, fade, blue);
             break;
         case 31:
-            SetBackdropColor(v, 0, 9);
+            SetBackdropColor(fade, 0, 9);
             break;
         case 0x7C00:
-            t = v + 9;
+            blue = fade + 9;
 
-            if ((s16)t > 31) {
-                t = 31;
+            if ((s16)blue > 31) {
+                blue = 31;
             }
 
-            SetBackdropColor(0, 0, t);
+            SetBackdropColor(0, 0, blue);
             break;
         case 0x3E0:
-            SetBackdropColor(0, v, 9);
+            SetBackdropColor(0, fade, 9);
             break;
         }
 
         work->backdropSet = 1;
     } else if (work->backdropSet) {
         SetBackdropColor(0, 0, 9);
-        work->backdropSet = v;
+        work->backdropSet = fade;
     }
 }
 

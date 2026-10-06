@@ -71,13 +71,13 @@ static TaskDesc sTaskDescHumLaxeneKnf = {
 
 void LaxeneHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
-    s32 t;
+    s32 bobZ;
 
     if (hoverZ != 0) {
         act = &work->actor;
-        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 6;
+        bobZ = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 6;
         work->vz = 0;
-        act->z += (t - act->z) >> 3;
+        act->z += (bobZ - act->z) >> 3;
     }
 }
 
@@ -130,8 +130,8 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    s16 d;
-    s32 u;
+    s16 step;
+    s32 dy;
 
     w = work;
     act = &work->base.actor;
@@ -320,9 +320,9 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             }
         }
 
-        u = (y - act->y) >> 3;
-        act->y += u;
-        BgFxAddPosition(0, u, 0);
+        dy = (y - act->y) >> 3;
+        act->y += dy;
+        BgFxAddPosition(0, dy, 0);
 
         if (BgFxIsActive()) {
             work->base.stateTimer++;
@@ -454,41 +454,41 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (work->base.anim.timer == 0) {
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
-                d = 13;
+                step = 13;
                 break;
             case 3:
-                d = -1;
+                step = -1;
                 break;
             case 4:
-                d = -4;
+                step = -4;
                 break;
             case 5:
-                d = -3;
+                step = -3;
                 break;
             case 9:
-                d = -2;
+                step = -2;
                 break;
             case 10:
-                d = -3;
+                step = -3;
                 break;
             default:
-                d = 0;
+                step = 0;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= d << 8;
+                act->x -= step << 8;
             } else {
-                act->x += d << 8;
+                act->x += step << 8;
             }
         }
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 v = act->x - 0x1000;
-            act->x += (x - v) >> 4;
+            s32 frontX = act->x - 0x1000;
+            act->x += (x - frontX) >> 4;
         } else {
-            s32 v = act->x + 0x1000;
-            act->x += (x - v) >> 4;
+            s32 frontX = act->x + 0x1000;
+            act->x += (x - frontX) >> 4;
         }
 
         if (work->base.anim.timer == 0) {
@@ -552,41 +552,41 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (work->base.anim.timer == 0) {
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
-                d = 13;
+                step = 13;
                 break;
             case 3:
-                d = -1;
+                step = -1;
                 break;
             case 4:
-                d = -4;
+                step = -4;
                 break;
             case 5:
-                d = -3;
+                step = -3;
                 break;
             case 9:
-                d = -2;
+                step = -2;
                 break;
             case 10:
-                d = -3;
+                step = -3;
                 break;
             default:
-                d = 0;
+                step = 0;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= d << 8;
+                act->x -= step << 8;
             } else {
-                act->x += d << 8;
+                act->x += step << 8;
             }
         }
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 v = act->x - 0x1000;
-            act->x += (x - v) >> 3;
+            s32 frontX = act->x - 0x1000;
+            act->x += (x - frontX) >> 3;
         } else {
-            s32 v = act->x + 0x1000;
-            act->x += (x - v) >> 3;
+            s32 frontX = act->x + 0x1000;
+            act->x += (x - frontX) >> 3;
         }
 
         if (work->base.anim.timer == 0) {
@@ -651,16 +651,16 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 t = ((GetRandom() % 57) << 8) + 0x1800;
-                act->x = x + t;
+                s32 dist = ((GetRandom() % 57) << 8) + 0x1800;
+                act->x = x + dist;
             } else {
-                s32 t = ((GetRandom() % 57) << 8) + 0x1800;
-                act->x = x - t;
+                s32 dist = ((GetRandom() % 57) << 8) + 0x1800;
+                act->x = x - dist;
             }
 
             {
-                s32 t = ((GetRandom() % 27) << 8) - 0xD00;
-                act->y = y + t;
+                s32 offsetY = ((GetRandom() % 27) << 8) - 0xD00;
+                act->y = y + offsetY;
             }
 
             act->z = 0;
@@ -682,41 +682,41 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (work->base.anim.timer == 0) {
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
-                d = 13;
+                step = 13;
                 break;
             case 3:
-                d = -1;
+                step = -1;
                 break;
             case 4:
-                d = -4;
+                step = -4;
                 break;
             case 5:
-                d = -3;
+                step = -3;
                 break;
             case 9:
-                d = -2;
+                step = -2;
                 break;
             case 10:
-                d = -3;
+                step = -3;
                 break;
             default:
-                d = 0;
+                step = 0;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= d << 8;
+                act->x -= step << 8;
             } else {
-                act->x += d << 8;
+                act->x += step << 8;
             }
         }
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 v = act->x - 0x1000;
-            act->x += (x - v) >> 3;
+            s32 frontX = act->x - 0x1000;
+            act->x += (x - frontX) >> 3;
         } else {
-            s32 v = act->x + 0x1000;
-            act->x += (x - v) >> 3;
+            s32 frontX = act->x + 0x1000;
+            act->x += (x - frontX) >> 3;
         }
 
         if (work->base.anim.timer == 0) {
@@ -771,16 +771,16 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 t = ((GetRandom() % 41) << 8) + 0x5000;
-                act->x = x + t;
+                s32 dist = ((GetRandom() % 41) << 8) + 0x5000;
+                act->x = x + dist;
             } else {
-                s32 t = ((GetRandom() % 41) << 8) + 0x5000;
-                act->x = x - t;
+                s32 dist = ((GetRandom() % 41) << 8) + 0x5000;
+                act->x = x - dist;
             }
 
             {
-                s32 t = ((GetRandom() % 49) << 8) - 0x1800;
-                act->y = y + t;
+                s32 offsetY = ((GetRandom() % 49) << 8) - 0x1800;
+                act->y = y + offsetY;
             }
 
             act->z = 0;
@@ -885,7 +885,7 @@ void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
 }
 
 u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
-    BtlObj* c;
+    BtlObj* player;
 
     if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
@@ -918,10 +918,10 @@ u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
             AnimStart(&work->anim, 1, 0);
         }
 
-        c = gBtlWork->actor;
-        work->x += c->x - work->playerPrevX;
-        work->y += c->y - work->playerPrevY;
-        work->z += c->z - work->playerPrevZ;
+        player = gBtlWork->actor;
+        work->x += player->x - work->playerPrevX;
+        work->y += player->y - work->playerPrevY;
+        work->z += player->z - work->playerPrevZ;
 
         if ((s16)work->timer > 30) {
             return 0;

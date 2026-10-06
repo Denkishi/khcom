@@ -40,11 +40,11 @@ static const u8 sHumReloadPaletteCycle[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
 void HumInit(HumWork* work, const HumDef* def) {
     BtlObj* actor = &work->actor;
 
-    s32 a = 0x14000;
-    s32 b = 0x18100;
+    s32 x = 0x14000;
+    s32 y = 0x18100;
     s32 z = 0;
 
-    InitEnemyBtlObj(actor, &def->kind, a, b, z);
+    InitEnemyBtlObj(actor, &def->kind, x, y, z);
     actor->attackOffset = 0;
     actor->attackRangeX = 0;
     actor->attackRangeY = 0;
@@ -131,13 +131,13 @@ void HumStartKnockback(HumWork* work) {
 
 s32 HumUpdateReaction(HumWork* work) {
     BtlObj* actor = &work->actor;
-    s32 r;
+    s32 reaction;
 
     actor->prevX = actor->x;
     actor->prevY = actor->y;
-    r = UpdateBtlObjReaction(actor);
+    reaction = UpdateBtlObjReaction(actor);
 
-    switch (r) {
+    switch (reaction) {
     case BTL_REACTION_CARD_ACTION:
         work->flags |= HUM_FLAG_PASS_THROUGH;
         gRikuBtlWork->flags &= ~BTL_FLAG_DISMISS_SUMMONS;
@@ -195,7 +195,7 @@ s32 HumUpdateReaction(HumWork* work) {
         break;
     }
 
-    return r;
+    return reaction;
 }
 
 void HumSubUpdateAnimation(HumSub* sub) {
@@ -461,7 +461,7 @@ s32 HumUpdate(HumWork* work) {
         break;
     case HUM_STATE_DROP_PRIZES:
         if (work->stateTimer == 0) {
-            PrizeCardArg arg;
+            PrizeCardArg prize;
 
             FadeStartIn(FADE_MODE_ADD_WHITE, 60);
             FadeLock();
@@ -469,10 +469,10 @@ s32 HumUpdate(HumWork* work) {
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             EndBossDefeat();
             DropBossPrizes(actor);
-            arg.x = actor->x;
-            arg.y = actor->y;
-            arg.z = -0x4600;
-            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &arg);
+            prize.x = actor->x;
+            prize.y = actor->y;
+            prize.z = -0x4600;
+            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
             return 0;
         } else {
             work->stateTimer++;
@@ -501,17 +501,17 @@ s32 HumUpdate(HumWork* work) {
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
 
         if (!BgFxIsActive()) {
-            PrizeCardArg arg2;
+            PrizeCardArg prize;
 
             EndBossDefeat();
 #ifdef VERSION_EU
             ClampBattlePosition(&actor->x, &actor->y, (s16)(work->boundsMargin - 8), -16);
 #endif
             DropBossPrizes(actor);
-            arg2.x = actor->x;
-            arg2.y = actor->y;
-            arg2.z = -0x4600;
-            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &arg2);
+            prize.x = actor->x;
+            prize.y = actor->y;
+            prize.z = -0x4600;
+            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
             return 0;
         }
 
@@ -623,7 +623,7 @@ s32 HumUpdate(HumWork* work) {
 void HumDrawSub(HumWork* work, HumSub* sub) {
     s16 x;
     s16 y;
-    BtlObj* c;
+    BtlObj* actor;
     u16 attr;
     ObjAffine* affine;
     u16 prio;
@@ -638,10 +638,10 @@ void HumDrawSub(HumWork* work, HumSub* sub) {
         return;
     }
 
-    c = &work->actor;
+    actor = &work->actor;
     attr = GetBattleSpritePriorityFlags(sub->y);
 
-    if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sy = gBtlWork->scale;
         sx = sy;
     } else {
@@ -666,9 +666,9 @@ void HumDrawSub(HumWork* work, HumSub* sub) {
     if (sub->flags & HUM_SUB_FLAG_OWN_DEPTH) {
         prio = (-0x1004 - (sub->y >> 8) * 4) | 3;
     } else if (sub->flags & HUM_SUB_FLAG_IN_FRONT) {
-        prio = ((-0x1004 - (c->y >> 8) * 4) | 3) - 1;
+        prio = ((-0x1004 - (actor->y >> 8) * 4) | 3) - 1;
     } else {
-        prio = ((-0x1004 - (c->y >> 8) * 4) | 3) + 1;
+        prio = ((-0x1004 - (actor->y >> 8) * 4) | 3) + 1;
     }
 
     WorldToScreen(&x, &y, sub->x, sub->y, sub->z);
@@ -678,24 +678,24 @@ void HumDrawSub(HumWork* work, HumSub* sub) {
 void HumDraw(HumWork* work) {
     s16 x;
     s16 y;
-    BtlObj* c = &work->actor;
+    BtlObj* actor = &work->actor;
     u16 attr;
     ObjAffine* affine;
     s32 sx;
     s32 sy;
-    s32 g;
+    s32 scale;
     s16 idx;
 
     if (work->flags & HUM_FLAG_BEHIND_BG_FX) {
         attr = 0x800;
     } else {
-        attr = GetBattleSpritePriorityFlags(c->y);
+        attr = GetBattleSpritePriorityFlags(actor->y);
     }
 
-    WorldToScreen(&x, &y, c->x, c->y, c->z);
+    WorldToScreen(&x, &y, actor->x, actor->y, actor->z);
 
     if (work->scaleX == 0x100 && work->scaleY == 0x100) {
-        if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sy = gBtlWork->scale;
             sx = sy;
         } else {
@@ -709,14 +709,14 @@ void HumDraw(HumWork* work) {
             }
         }
     } else {
-        if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sx = (gBtlWork->scale * work->scaleX >> 8);
-            g = gBtlWork->scale;
-            sy = g * work->scaleY >> 8;
+            scale = gBtlWork->scale;
+            sy = scale * work->scaleY >> 8;
         } else {
             sx = -(gBtlWork->scale * work->scaleX >> 8);
-            g = gBtlWork->scale;
-            sy = g * work->scaleY >> 8;
+            scale = gBtlWork->scale;
+            sy = scale * work->scaleY >> 8;
         }
     }
 
@@ -738,7 +738,7 @@ void HumDraw(HumWork* work) {
             work->flags &= ~HUM_FLAG_FLASH_PALETTE;
             LoadObjPaletteBank(work->palette->index, work->paletteData);
         }
-    } else if (StepHitFlash(c)) {
+    } else if (StepHitFlash(actor)) {
         work->flags |= HUM_FLAG_FLASH_PALETTE;
         LoadObjPaletteBank(work->palette->index, gHitFlashPalette);
     } else if (work->flags & HUM_FLAG_FLASH_PALETTE) {
@@ -746,25 +746,25 @@ void HumDraw(HumWork* work) {
         LoadObjPaletteBank(work->palette->index, work->paletteData);
     }
 
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, attr, (-0x1004 - (c->y >> 8) * 4) | 3);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, attr, (-0x1004 - (actor->y >> 8) * 4) | 3);
     HumDrawSub(work, work->sub);
     HumDrawSub(work, work->sub2);
     TaskPoolDraw(&work->tasks);
 }
 
 void HandleRikuAiCardInput() {
-    BtlObj* c = gRikuBtlWork->actor;
+    BtlObj* actor = gRikuBtlWork->actor;
     u8 keys;
-    u16 t;
+    u16 timer;
 
     if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
         return;
     }
 
-    t = gRikuBtlWork->listSwitchTimer;
+    timer = gRikuBtlWork->listSwitchTimer;
 
-    if ((s16)t > 0) {
-        gRikuBtlWork->listSwitchTimer = t - 1;
+    if ((s16)timer > 0) {
+        gRikuBtlWork->listSwitchTimer = timer - 1;
 
         if (gRikuBtlWork->listSwitchTimer == 0) {
             RequestSwitchRikuCardList();
@@ -788,7 +788,7 @@ void HandleRikuAiCardInput() {
         RequestSwitchRikuCardList();
     }
 
-    if (c->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
+    if (actor->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -804,7 +804,7 @@ void HandleRikuAiCardInput() {
         return;
     }
 
-    if (c->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+    if (actor->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
@@ -827,12 +827,12 @@ void HandleRikuAiCardInput() {
 
 #ifdef VERSION_EU
 void HandleRikuTutorialCardInput() {
-    BtlObj* c = gRikuBtlWork->actor;
+    BtlObj* actor = gRikuBtlWork->actor;
     u8 keys;
     keys = gBtlWork->rikuKeys;
     gBtlWork->rikuKeys = 0;
 
-    if (c->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
+    if (actor->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -848,7 +848,7 @@ void HandleRikuTutorialCardInput() {
         return;
     }
 
-    if (c->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+    if (actor->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
@@ -859,11 +859,11 @@ void HandleRikuTutorialCardInput() {
 #endif
 
 void HumFaceTarget(HumWork* work, u16 interval) {
-    s32 v;
-    GetEnemyTargetPosition(&work->actor, &v, NULL, NULL);
+    s32 x;
+    GetEnemyTargetPosition(&work->actor, &x, NULL, NULL);
 
     if (GetRandom() % interval == 0) {
-        if (work->actor.x > v) {
+        if (work->actor.x > x) {
             work->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
             work->actor.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -889,42 +889,42 @@ u8 HumMoveToward(HumWork* work, s32 x, s32 y, s32 spd) {
 }
 
 u8 HumIsTargetInReach(HumWork* work, s16 offset, u16 width, u16 depth) {
-    s32 v0;
-    s32 v1;
-    BtlObj* c = &work->actor;
-    s32 d;
-    s32 t;
-    s32 bb;
-    s32 rr;
+    s32 x;
+    s32 y;
+    BtlObj* actor = &work->actor;
+    s32 dy;
+    s32 centerX;
+    s32 maxDx;
+    s32 maxDy;
 
-    GetEnemyTargetPosition(c, &v0, &v1, NULL);
-    rr = depth << 8;
-    d = c->y - v1;
+    GetEnemyTargetPosition(actor, &x, &y, NULL);
+    maxDy = depth << 8;
+    dy = actor->y - y;
 
-    if (d >= 0 ? d > rr : v1 - c->y > rr) {
+    if (dy >= 0 ? dy > maxDy : y - actor->y > maxDy) {
         return 0;
     }
 
-    if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        t = c->x - (offset << 8);
-        bb = width << 8;
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        centerX = actor->x - (offset << 8);
+        maxDx = width << 8;
 
-        if (t - bb > v0) {
+        if (centerX - maxDx > x) {
             return 0;
         }
 
-        if (t + bb < v0) {
+        if (centerX + maxDx < x) {
             return 0;
         }
     } else {
-        t = c->x + (offset << 8);
-        bb = width << 8;
+        centerX = actor->x + (offset << 8);
+        maxDx = width << 8;
 
-        if (t + bb < v0) {
+        if (centerX + maxDx < x) {
             return 0;
         }
 
-        if (t - bb > v0) {
+        if (centerX - maxDx > x) {
             return 0;
         }
     }
@@ -945,43 +945,43 @@ u8 HumIsNearAreaEdge(HumWork* work, u16 margin) {
 }
 
 u8 HumIsInPlayerReach(HumWork* work, s16 offset, u16 width, u16 depth) {
-    s32 v0;
-    s32 v1;
-    BtlObj* c = &work->actor;
-    BtlObj* o = gBtlWork->actor;
-    s32 d;
-    s32 t;
-    s32 bb;
-    s32 rr;
+    s32 x;
+    s32 y;
+    BtlObj* actor = &work->actor;
+    BtlObj* player = gBtlWork->actor;
+    s32 dy;
+    s32 centerX;
+    s32 maxDx;
+    s32 maxDy;
 
-    GetEnemyTargetPosition(c, &v0, &v1, NULL);
-    rr = depth << 8;
-    d = c->y - v1;
+    GetEnemyTargetPosition(actor, &x, &y, NULL);
+    maxDy = depth << 8;
+    dy = actor->y - y;
 
-    if (d >= 0 ? d > rr : v1 - c->y > rr) {
+    if (dy >= 0 ? dy > maxDy : y - actor->y > maxDy) {
         return 0;
     }
 
-    if (o->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        t = v0 - (offset << 8);
-        bb = width << 8;
+    if (player->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        centerX = x - (offset << 8);
+        maxDx = width << 8;
 
-        if (t - bb > c->x) {
+        if (centerX - maxDx > actor->x) {
             return 0;
         }
 
-        if (t + bb < c->x) {
+        if (centerX + maxDx < actor->x) {
             return 0;
         }
     } else {
-        t = v0 + (offset << 8);
-        bb = width << 8;
+        centerX = x + (offset << 8);
+        maxDx = width << 8;
 
-        if (t + bb < c->x) {
+        if (centerX + maxDx < actor->x) {
             return 0;
         }
 
-        if (t - bb > c->x) {
+        if (centerX - maxDx > actor->x) {
             return 0;
         }
     }
@@ -1106,8 +1106,8 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
 }
 
 s32 HumResolveCardMove(HumWork* work) {
-    s32 buf[6];
-    s32 id = ResolveActiveCardsMove(buf);
+    s32 moves[6];
+    s32 id = ResolveActiveCardsMove(moves);
 
     if (id == 145) {
         if (!(gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE)) {
@@ -1115,7 +1115,7 @@ s32 HumResolveCardMove(HumWork* work) {
             gRikuBtlWork->stockMove = 0;
         }
 
-        id = buf[gRikuBtlWork->stockMove];
+        id = moves[gRikuBtlWork->stockMove];
         gRikuBtlWork->stockMove++;
     }
 

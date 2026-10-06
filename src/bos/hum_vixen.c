@@ -145,46 +145,46 @@ static TaskDesc sTaskDescHumVixenFrg = {
 };
 
 void VixenPlaceGroundIce(VixenWork* work) {
-    VixenSub* p;
+    VixenSub* ice;
     s32 i;
 
     m4aSongNumStart(SONG_BTL_VIC_GROUNDICE);
-    p = work->sub;
+    ice = work->sub;
 
     for (i = 0; i < 3; i++) {
-        p[i].pending = p[i].active = 1;
-        p[i].x = (gBtlWork->xMin + 32 +
+        ice[i].pending = ice[i].active = 1;
+        ice[i].x = (gBtlWork->xMin + 32 +
             GetRandom() % (gBtlWork->xMax - gBtlWork->xMin - 0x3F)) << 8;
-        p[i].y = (gBtlWork->yMin + 16 +
+        ice[i].y = (gBtlWork->yMin + 16 +
             GetRandom() % (gBtlWork->yMax - gBtlWork->yMin - 0x1F)) << 8;
     }
 }
 
 void VixenCreateIceTasks(VixenWork* work) {
-    VixenSub* p;
+    VixenSub* ice;
     s32 i;
-    u8 z;
+    u8 zero;
 
-    z = 0;
-    p = work->sub;
+    zero = 0;
+    ice = work->sub;
 
     for (i = 0; i < 3; i++) {
-        p->active = z;
-        p->pending = z;
+        ice->active = zero;
+        ice->pending = zero;
         TaskCreate(&work->tasks, &sTaskDescHumVixenIce, &work->sub[i]);
-        p++;
+        ice++;
     }
 }
 
 void VixenHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
-    s32 t;
+    s32 bobZ;
 
     if (hoverZ != 0) {
         act = &work->actor;
-        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
+        bobZ = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
         work->vz = 0;
-        act->z += (t - act->z) >> 4;
+        act->z += (bobZ - act->z) >> 4;
     }
 }
 
@@ -229,14 +229,14 @@ u8 task_hum_vixen_1(VixenWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    s32 s;
+    s32 speed;
     u8 ang;
-    s32 d;
-    s32 v;
-    s32 cx;
-    s32 ax;
-    u16 t;
-    u8 r;
+    s32 dx;
+    s32 zero;
+    s32 playerX;
+    s32 bossX;
+    u16 hp;
+    u8 alive;
 
     w = work;
     act = &work->base.actor;
@@ -389,9 +389,9 @@ u8 task_hum_vixen_1(VixenWork* work) {
             act->y -= work->slideSpeed;
         }
 
-        d = act->x - w->base.targetX;
+        dx = act->x - w->base.targetX;
 
-        if ((d >= 0) ? d <= 0xBFF : w->base.targetX - act->x <= 0xBFF) {
+        if ((dx >= 0) ? dx <= 0xBFF : w->base.targetX - act->x <= 0xBFF) {
             w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
@@ -414,11 +414,11 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimGetFrame(&w->base.anim) == 3) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 d = act->x + 0x3200;
-                act->x += (act->originX - d) >> 2;
+                s32 backX = act->x + 0x3200;
+                act->x += (act->originX - backX) >> 2;
             } else {
-                s32 d = act->x - 0x3200;
-                act->x += (act->originX - d) >> 2;
+                s32 backX = act->x - 0x3200;
+                act->x += (act->originX - backX) >> 2;
             }
 
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
@@ -446,13 +446,13 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (AnimIsFinished(&w->base.anim)) {
             w->base.flags &= ~HUM_FLAG_PASS_THROUGH;
             act->btl->hcEffectCount--;
-            v = 0;
+            zero = 0;
             act->hp = act->maxHp / 4;
             act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(act);
             CreateBtlPopTask(act, 10);
-            w->base.state = v;
-            w->base.stateTimer = v;
+            w->base.state = zero;
+            w->base.stateTimer = zero;
         } else {
             w->base.stateTimer++;
         }
@@ -544,10 +544,10 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (AnimGetFrame(&w->base.anim) > 2) {
             ang = GetAngle(work->needleX, work->needleY, x, y);
             ApproachAngle(&work->angle, ang, 3);
-            s = abs(SIN((u16)w->base.stateTimer * 2));
-            s += 384;
-            work->needleX += (gSineTable[(u8)work->angle] * s) >> 8;
-            work->needleY += (-gSineTable[(u8)work->angle + 64] * s) >> 8;
+            speed = abs(SIN((u16)w->base.stateTimer * 2));
+            speed += 384;
+            work->needleX += (gSineTable[(u8)work->angle] * speed) >> 8;
+            work->needleY += (-gSineTable[(u8)work->angle + 64] * speed) >> 8;
             ClampBattlePosition(&work->needleX, &work->needleY, 0, 0);
             HumFaceTarget(&w->base, 1);
 
@@ -594,10 +594,10 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         if (w->base.stateTimer % 15 == 0) {
-            t = gBtlWork->actor->hp;
+            hp = gBtlWork->actor->hp;
 
-            if ((s16)t > 1) {
-                gBtlWork->actor->hp = t - 1;
+            if ((s16)hp > 1) {
+                gBtlWork->actor->hp = hp - 1;
             }
         }
 
@@ -743,18 +743,18 @@ u8 task_hum_vixen_1(VixenWork* work) {
         VixenHover(&w->base, work->hoverZ);
     }
 
-    r = HumUpdate(&w->base);
-    cx = gBtlWork->actor->x;
-    ax = act->x;
+    alive = HumUpdate(&w->base);
+    playerX = gBtlWork->actor->x;
+    bossX = act->x;
 
-    if ((cx < ax && (act->flags & BTLOBJ_FLAG_FACING_LEFT)) || (cx > ax && !(act->flags & BTLOBJ_FLAG_FACING_LEFT))) {
+    if ((playerX < bossX && (act->flags & BTLOBJ_FLAG_FACING_LEFT)) || (playerX > bossX && !(act->flags & BTLOBJ_FLAG_FACING_LEFT))) {
         act->flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
     } else {
         act->flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
     }
 
     TaskPoolUpdate(&work->tasks);
-    return r;
+    return alive;
 }
 
 void task_hum_vixen_2(VixenWork* work) {
@@ -958,18 +958,18 @@ void task_hum_vixen_ice_2(VixenIceWork* work) {
     s16 x;
     s16 y;
     void* gfx;
-    s32 s;
+    s32 scale;
     ObjAffine* affine;
 
     if (work->sub->active != 0) {
         gfx = AnimGetGfx(&work->anim);
         WorldToScreen(&x, &y, work->sub->x, work->sub->y, 0);
-        s = work->scale * gBtlWork->scale >> 8;
+        scale = work->scale * gBtlWork->scale >> 8;
 
-        if (gBtlWork->rotation != 0 || s > 0x100) {
-            affine = AllocObjAffine(gBtlWork->rotation, s, s, 1);
+        if (gBtlWork->rotation != 0 || scale > 0x100) {
+            affine = AllocObjAffine(gBtlWork->rotation, scale, scale, 1);
         } else {
-            affine = AllocObjAffine(gBtlWork->rotation, s, s, 0);
+            affine = AllocObjAffine(gBtlWork->rotation, scale, scale, 0);
         }
 
         DrawSprite(x, y, gfx, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFF);
@@ -1024,7 +1024,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
 
 u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
     VixenNdlArgs args;
-    VixenNdlArgs args2;
+    VixenNdlArgs missArgs;
 
     if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
@@ -1154,10 +1154,10 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            args2.x = work->x;
-            args2.y = work->y;
-            args2.z = work->z;
-            TaskCreate(&gBtlWork->taskPools[0], &sTaskDescHumVixenFrg, &args2);
+            missArgs.x = work->x;
+            missArgs.y = work->y;
+            missArgs.z = work->z;
+            TaskCreate(&gBtlWork->taskPools[0], &sTaskDescHumVixenFrg, &missArgs);
             work->state = HUM_VIXEN_FRZ_STATE_DONE;
             work->timer = 0;
         } else {
@@ -1198,10 +1198,10 @@ void task_hum_vixen_frz_3(VixenFrzWork* work) {
 }
 
 void task_hum_vixen_frg_0(VixenFrgWork* work, VixenNdlArgs* args) {
-    VixenFrgSub* e;
+    VixenFrgSub* shard;
     s32 i;
-    s32 a;
-    s32 b;
+    s32 angle;
+    s32 speed;
 
     InitObjTilesAtSlot(&work->tilesSlot, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenReitouHahenTiles, 0x4C0);
     work->tiles = &work->tilesSlot;
@@ -1210,25 +1210,25 @@ void task_hum_vixen_frg_0(VixenFrgWork* work, VixenNdlArgs* args) {
     work->blinking = 0;
 
     for (i = 0; i < 15; i++) {
-        const VixenFrgDef* d = &sVixenFrgDefs[i];
-        e = &work->sub[i];
-        e->x = args->x + (d->x << 8);
-        e->y = args->y;
-        e->z = args->z + (d->z << 8);
-        e->spriteFlags = d->spriteFlags;
-        e->gfx = gVixenReitouHahenFrames[d->frame];
-        e->vz = GetRandom() % 0x401 - 0x500;
-        a = (u8)GetRandom();
-        b = GetRandom() % 0x380;
-        e->vx = gSineTable[a] * b >> 8;
-        e->vy = -gSineTable[a + 64] * (b >> 1) >> 8;
+        const VixenFrgDef* def = &sVixenFrgDefs[i];
+        shard = &work->sub[i];
+        shard->x = args->x + (def->x << 8);
+        shard->y = args->y;
+        shard->z = args->z + (def->z << 8);
+        shard->spriteFlags = def->spriteFlags;
+        shard->gfx = gVixenReitouHahenFrames[def->frame];
+        shard->vz = GetRandom() % 0x401 - 0x500;
+        angle = (u8)GetRandom();
+        speed = GetRandom() % 0x380;
+        shard->vx = gSineTable[angle] * speed >> 8;
+        shard->vy = -gSineTable[angle + 64] * (speed >> 1) >> 8;
     }
 
     m4aSongNumStart(SONG_EF_VIC_ICEBREAK);
 }
 
 u8 task_hum_vixen_frg_1(VixenFrgWork* work) {
-    VixenFrgSub* e;
+    VixenFrgSub* shard;
     s32 i;
 
     if (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) {
@@ -1236,20 +1236,20 @@ u8 task_hum_vixen_frg_1(VixenFrgWork* work) {
     }
 
     for (i = 0; i < 15; i++) {
-        e = &work->sub[i];
-        e->x += e->vx;
-        e->y += e->vy;
-        e->z += e->vz;
-        e->vz += gBtlWork->gravity;
+        shard = &work->sub[i];
+        shard->x += shard->vx;
+        shard->y += shard->vy;
+        shard->z += shard->vz;
+        shard->vz += gBtlWork->gravity;
 
-        if (e->z > 0) {
-            e->z = 0;
-            e->vz = -(e->vz >> 1);
-            e->vx = e->vx >> 1;
-            e->vy = e->vy >> 1;
+        if (shard->z > 0) {
+            shard->z = 0;
+            shard->vz = -(shard->vz >> 1);
+            shard->vx = shard->vx >> 1;
+            shard->vy = shard->vy >> 1;
         }
 
-        ClampBattlePosition(&e->x, &e->y, 0, 0);
+        ClampBattlePosition(&shard->x, &shard->y, 0, 0);
     }
 
     work->timer++;
@@ -1266,7 +1266,7 @@ u8 task_hum_vixen_frg_1(VixenFrgWork* work) {
 }
 
 void task_hum_vixen_frg_2(VixenFrgWork* work) {
-    VixenFrgSub* p;
+    VixenFrgSub* shards;
     s16 x;
     s16 y;
     u16 attr;
@@ -1278,13 +1278,13 @@ void task_hum_vixen_frg_2(VixenFrgWork* work) {
         }
     }
 
-    p = work->sub;
+    shards = work->sub;
 
     for (i = 0; i < 15; i++) {
-        attr = GetBattleSpritePriorityFlags(p[i].y) | p[i].spriteFlags;
-        WorldToScreen(&x, &y, p[i].x, p[i].y, p[i].z);
-        DrawSprite(x, y, p[i].gfx, work->tiles, work->palette, NULL, attr,
-            -0x1004 - (p[i].y >> 8) * 4);
+        attr = GetBattleSpritePriorityFlags(shards[i].y) | shards[i].spriteFlags;
+        WorldToScreen(&x, &y, shards[i].x, shards[i].y, shards[i].z);
+        DrawSprite(x, y, shards[i].gfx, work->tiles, work->palette, NULL, attr,
+            -0x1004 - (shards[i].y >> 8) * 4);
     }
 }
 

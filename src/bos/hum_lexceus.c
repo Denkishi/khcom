@@ -84,13 +84,13 @@ static TaskDesc sTaskDescHumLexRock = {
 
 void LexceusHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
-    s32 t;
+    s32 bobZ;
 
     if (hoverZ != 0) {
         act = &work->actor;
-        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
+        bobZ = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
         work->vz = 0;
-        act->z += (t - act->z) >> 4;
+        act->z += (bobZ - act->z) >> 4;
     }
 }
 
@@ -120,9 +120,9 @@ enum HumLexceusState {
 u8 task_hum_lexceus_1(LexceusWork* work) {
     LexceusWork* w;
     BtlObj* act;
-    BtlObj* p;
-    VixenNdlArgs a1;
-    VixenNdlArgs a2;
+    BtlObj* player;
+    VixenNdlArgs args;
+    VixenNdlArgs recallArgs;
     s32 x;
     s32 y;
     s32 z;
@@ -131,7 +131,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
     w = work;
     act = &work->base.actor;
-    p = gBtlWork->actor;
+    player = gBtlWork->actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
     switch (HumUpdateReaction(&work->base)) {
@@ -249,16 +249,16 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         case 3:
             if (work->base.anim.timer == 0) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    a1.x = act->x - 0x2000;
-                    a1.facingLeft = 1;
+                    args.x = act->x - 0x2000;
+                    args.facingLeft = 1;
                 } else {
-                    a1.x = act->x + 0x2000;
-                    a1.facingLeft = 0;
+                    args.x = act->x + 0x2000;
+                    args.facingLeft = 0;
                 }
 
-                a1.y = act->y;
-                a1.z = 0;
-                w->task = TaskCreate(&w->tasks, &sTaskDescHumLexRock, &a1);
+                args.y = act->y;
+                args.z = 0;
+                w->task = TaskCreate(&w->tasks, &sTaskDescHumLexRock, &args);
             }
 
             break;
@@ -302,17 +302,17 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         if (AnimGetFrame(&work->base.anim) == 3) {
             if (work->base.anim.timer == 2) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    a1.x = act->x - 0x1800;
-                    a1.facingLeft = 1;
+                    args.x = act->x - 0x1800;
+                    args.facingLeft = 1;
                 } else {
-                    a1.x = act->x + 0x1800;
-                    a1.facingLeft = 0;
+                    args.x = act->x + 0x1800;
+                    args.facingLeft = 0;
                 }
 
-                a1.y = act->y;
-                a1.z = act->z - 0x6000;
+                args.y = act->y;
+                args.z = act->z - 0x6000;
                 w->flags |= LEXCEUS_FLAG_WEAPON_THROWN;
-                w->task = TaskCreate(&w->tasks, &sTaskDescHumLexTmh, &a1);
+                w->task = TaskCreate(&w->tasks, &sTaskDescHumLexTmh, &args);
             }
         }
 
@@ -334,16 +334,16 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         if (AnimGetFrame(&work->base.anim) == 2) {
             if (work->base.anim.timer == 10) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    a2.x = act->x - 0x700;
-                    a2.facingLeft = 1;
+                    recallArgs.x = act->x - 0x700;
+                    recallArgs.facingLeft = 1;
                 } else {
-                    a2.x = act->x + 0x700;
-                    a2.facingLeft = 0;
+                    recallArgs.x = act->x + 0x700;
+                    recallArgs.facingLeft = 0;
                 }
 
-                a2.y = act->y;
-                a2.z = act->z;
-                TaskCreate(&w->tasks, &sTaskDescHumLexTmh0, &a2);
+                recallArgs.y = act->y;
+                recallArgs.z = act->z;
+                TaskCreate(&w->tasks, &sTaskDescHumLexTmh0, &recallArgs);
             }
         }
 
@@ -590,9 +590,9 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
     gBtlWork->rotation = w->tilt >> 8;
 
-    if (p->z >= p->groundZ && p->hp > 0 && p->badStatus != BAD_STATUS_STOP && !(p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
+    if (player->z >= player->groundZ && player->hp > 0 && player->badStatus != BAD_STATUS_STOP && !(player->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         w->tiltSlide += (GetAngleDiff(0, gBtlWork->rotation) * 64 - w->tiltSlide) >> 4;
-        p->x -= w->tiltSlide;
+        player->x -= w->tiltSlide;
     } else {
         w->tiltSlide = 0;
     }
@@ -802,26 +802,26 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
     void* gfx;
     u16 attr;
     s32 sx;
-    s32 h;
+    s32 scale;
     ObjAffine* affine;
     s16 x;
     s16 y;
 
     gfx = AnimGetGfx(&work->anim);
     attr = GetBattleSpritePriorityFlags(work->y);
-    h = work->scale;
+    scale = work->scale;
 
-    if (h == 0x100) {
+    if (scale == 0x100) {
         if (!work->facingLeft) {
             attr |= 1;
         }
 
-        sx = h;
+        sx = scale;
     } else {
         if (work->facingLeft) {
-            sx = h;
+            sx = scale;
         } else {
-            sx = -h;
+            sx = -scale;
         }
     }
 
@@ -866,8 +866,8 @@ void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
 u8 task_hum_lex_rock_1(LexRockWork* work) {
     s32 i;
     s32 range;
-    LexRockSub* e;
-    u32 v;
+    LexRockSub* piece;
+    u32 edge;
 
     if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
@@ -919,27 +919,27 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         ReleaseObjTiles(work->tiles2[0]);
 
         for (i = 0; i < 12; i++) {
-            e = &work->sub[i];
+            piece = &work->sub[i];
             work->tiles2[i] = AllocObjTiles(0xC0, gRexeusRock02Tiles);
             AnimInit(&work->anim[i], gRexeusRock02Anims, gRexeusRock02Frames);
             AnimStart(&work->anim[i], GetRandom() % 5 + 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START);
 
             if (work->facingLeft) {
-                e->vx = -(GetRandom() % 0x501 + 0x300);
+                piece->vx = -(GetRandom() % 0x501 + 0x300);
             } else {
-                e->vx = GetRandom() % 0x501 + 0x300;
+                piece->vx = GetRandom() % 0x501 + 0x300;
             }
 
-            e->vy = GetRandom() % 0x801 - 0x400;
-            e->x = work->x + ((GetRandom() % 17 - 8) << 8);
-            e->y = work->y + ((GetRandom() % 17 - 8) << 8);
-            e->z = work->z + ((GetRandom() % 17 - 8) << 8);
-            e->hasHit = 0;
+            piece->vy = GetRandom() % 0x801 - 0x400;
+            piece->x = work->x + ((GetRandom() % 17 - 8) << 8);
+            piece->y = work->y + ((GetRandom() % 17 - 8) << 8);
+            piece->z = work->z + ((GetRandom() % 17 - 8) << 8);
+            piece->hasHit = 0;
 
             if (GetRandom() % 2) {
-                e->vz = -(GetRandom() % 0x701 + 0x100);
+                piece->vz = -(GetRandom() % 0x701 + 0x100);
             } else {
-                e->vz = GetRandom() % 1 + 0x300;
+                piece->vz = GetRandom() % 1 + 0x300;
             }
         }
 
@@ -951,34 +951,34 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
             MakeOpponentsHittable();
 
             for (i = 0; i < 12; i++) {
-                e = &work->sub[i];
-                e->x += e->vx;
-                e->y += e->vy;
-                e->z += e->vz;
-                e->vz += 64;
+                piece = &work->sub[i];
+                piece->x += piece->vx;
+                piece->y += piece->vy;
+                piece->z += piece->vz;
+                piece->vz += 64;
 
-                if (e->z > 0) {
-                    e->z = 0;
-                    e->vz = -(e->vz >> 1);
+                if (piece->z > 0) {
+                    piece->z = 0;
+                    piece->vz = -(piece->vz >> 1);
                 }
 
-                v = ClampBattlePosition(&e->x, &e->y, 0, 0);
+                edge = ClampBattlePosition(&piece->x, &piece->y, 0, 0);
 
-                switch (v) {
+                switch (edge) {
                 case 3:
                 case 4:
-                    e->vy = -e->vy;
+                    piece->vy = -piece->vy;
                     break;
                 case 1:
                 case 2:
-                    e->vx = -e->vx;
+                    piece->vx = -piece->vx;
                     break;
                 }
 
-                if (!e->hasHit) {
-                    if (ApplyAttackBox(0x148, e->x, e->y, e->z, 4, 4, 4)) {
+                if (!piece->hasHit) {
+                    if (ApplyAttackBox(0x148, piece->x, piece->y, piece->z, 4, 4, 4)) {
                         m4aSongNumStart(SONG_BTL_MON_HIT02);
-                        e->hasHit = 1;
+                        piece->hasHit = 1;
                     }
                 }
             }
@@ -1009,7 +1009,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
     s16 x;
     s16 y;
     s32 i;
-    LexRockSub* e;
+    LexRockSub* piece;
 
     if (work->blinking && (work->timer & 1)) {
         return;
@@ -1029,20 +1029,20 @@ void task_hum_lex_rock_2(LexRockWork* work) {
             -0x1006 - (work->y >> 8) * 4);
     } else if (work->rockCount == 12) {
         for (i = 0; i < work->rockCount; i++) {
-            e = &work->sub[i];
+            piece = &work->sub[i];
             gfx = AnimGetGfx(&work->anim[i]);
 
             if (work->facingLeft) {
-                attr = GetBattleSpritePriorityFlags(e->y);
+                attr = GetBattleSpritePriorityFlags(piece->y);
             } else {
-                attr = GetBattleSpritePriorityFlags(e->y) | 1;
+                attr = GetBattleSpritePriorityFlags(piece->y) | 1;
             }
 
-            WorldToScreen(&x, &y, e->x, e->y,
-                e->z);
+            WorldToScreen(&x, &y, piece->x, piece->y,
+                piece->z);
             DrawSprite(x, y, gfx, work->tiles2[i], work->palette2, NULL, attr,
-                -0x1006 - (e->y >> 8) * 4);
-            WorldToScreen(&x, &y, e->x, e->y, 0);
+                -0x1006 - (piece->y >> 8) * 4);
+            WorldToScreen(&x, &y, piece->x, piece->y, 0);
             DrawSprite(x, y, gBtlShadowSmallFrame0, work->tiles, work->palette, NULL, attr, 0xFFFE);
         }
     }

@@ -35,7 +35,7 @@ u8 task_hum_robe_1(RobeWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    u8 r;
+    u8 alive;
 
     if (HumUpdateReaction(&work->base) == BTL_REACTION_HURT) {
         work->base.stateTimer = 1;
@@ -55,11 +55,11 @@ u8 task_hum_robe_1(RobeWork* work) {
     x = act->x;
     y = act->y;
     z = act->z;
-    r = HumUpdate(&work->base);
+    alive = HumUpdate(&work->base);
     act->x = x;
     act->y = y;
     act->z = z;
-    return r;
+    return alive;
 }
 
 void task_hum_robe_2(HumWork* work) {

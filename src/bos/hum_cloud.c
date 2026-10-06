@@ -119,9 +119,9 @@ void CloudLeapTo(CloudWork* work, s32 x, s32 y) {
 s32 CloudTryJumpAway(CloudWork* work) {
     s32 x;
     s32 y;
-    BtlObj* obj;
+    BtlObj* player;
 
-    obj = gBtlWork->actor;
+    player = gBtlWork->actor;
 
     if (GetRandom() % 60 == 0) {
         GetEnemyTargetPosition(&work->base.actor, &x, &y, NULL);
@@ -131,7 +131,7 @@ s32 CloudTryJumpAway(CloudWork* work) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
                 CloudJumpOffset(work, -0x63, 0x280);
             } else if (GetRandom() & 1) {
-                if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+                if (player->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     CloudJumpTo(work, x + 0x2800, y);
                 } else {
                     CloudJumpTo(work, x - 0x2800, y);
@@ -164,7 +164,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    u8 ret;
+    u8 arrived;
 
     w = work;
     act = &work->base.actor;
@@ -367,19 +367,19 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     case HUM_CLOUD_STATE_JUMP_AIR: {
-        s32 d;
+        s32 vz;
 
         act->x += (work->base.targetX - act->x) >> 4;
         act->y += (work->base.targetY - act->y) >> 4;
-        d = work->base.vz;
+        vz = work->base.vz;
 
-        if (d < 0) {
-            if (d <= -0x200) {
+        if (vz < 0) {
+            if (vz <= -0x200) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             } else {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             }
-        } else if (d <= 0x1FF) {
+        } else if (vz <= 0x1FF) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
         } else {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
@@ -409,16 +409,16 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     case HUM_CLOUD_STATE_LEAP_RISE: {
-        s32 d;
+        s32 vz;
 
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x500;
         }
 
-        d = work->base.vz;
+        vz = work->base.vz;
 
-        if (d < 0) {
-            if (d > -0x200) {
+        if (vz < 0) {
+            if (vz > -0x200) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             } else {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -435,7 +435,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         break;
     }
     case HUM_CLOUD_STATE_LEAP_FLY: {
-        s32 d;
+        s32 dist;
 
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
@@ -443,9 +443,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.targetZ = act->z;
         }
 
-        ret = HumMoveToward(&work->base, work->base.targetX, work->base.targetY, w->speed);
+        arrived = HumMoveToward(&work->base, work->base.targetX, work->base.targetY, w->speed);
 
-        if (ret) {
+        if (arrived) {
             work->base.state = HUM_CLOUD_STATE_JUMP_AIR;
             w->nextState = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
@@ -456,20 +456,20 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 w->speed = 0x800;
             }
 
-            d = (work->base.targetX - act->x) >> 3;
+            dist = (work->base.targetX - act->x) >> 3;
 
-            if (d < 0) {
-                d = -d;
+            if (dist < 0) {
+                dist = -dist;
             }
 
-            if (d < (s32)w->speed) {
-                w->speed = d;
+            if (dist < (s32)w->speed) {
+                w->speed = dist;
             }
 
             {
-                s32 v = work->base.targetZ + SIN(gFrameCounter * 4) * 12;
+                s32 bobZ = work->base.targetZ + SIN(gFrameCounter * 4) * 12;
             work->base.vz = 0;
-            act->z += (v - act->z) >> 3;
+            act->z += (bobZ - act->z) >> 3;
             }
 
             if (act->x < work->base.targetX) {
@@ -484,21 +484,21 @@ u8 task_hum_cloud_1(CloudWork* work) {
         break;
     }
     case HUM_CLOUD_STATE_AIR_FOLLOW: {
-        s32 d;
+        s32 lowZ;
 
         if (work->base.stateTimer == 0) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
         }
 
-        act->z += (gSineTable[gFrameCounter % 256] * 10 - (d = act->z + 0x2C00)) >> 3;
+        act->z += (gSineTable[gFrameCounter % 256] * 10 - (lowZ = act->z + 0x2C00)) >> 3;
 
         if (act->x < x) {
-            s32 d = act->x + 0x2100;
-            act->x += (x - d) >> 3;
+            s32 frontX = act->x + 0x2100;
+            act->x += (x - frontX) >> 3;
         } else {
-            s32 d = act->x - 0x2100;
-            act->x += (x - d) >> 3;
+            s32 frontX = act->x - 0x2100;
+            act->x += (x - frontX) >> 3;
         }
 
         act->y += (y - act->y) >> 4;
@@ -564,8 +564,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
         break;
     case HUM_CLOUD_STATE_CROSS_SLASH_START:
         if (act->z >= act->groundZ) {
-            s32 v;
-            work->base.targetX = x + (v = ((u16)(GetRandom() % 41) << 8) - 0x1400);
+            s32 offset;
+            work->base.targetX = x + (offset = ((u16)(GetRandom() % 41) << 8) - 0x1400);
             work->base.targetY = y;
             work->base.state = HUM_CLOUD_STATE_JUMP_CROUCH;
             work->base.stateTimer = 0;
@@ -575,7 +575,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     case HUM_CLOUD_STATE_CROSS_SLASH: {
-        s32 d;
+        s32 focusZ;
 
         if (work->base.stateTimer == 0) {
             w->attackPhase = HUM_CLOUD_ATTACK_PHASE_OPENER;
@@ -607,9 +607,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
+                            SetBattleZoom(6, 0x133, act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         } else {
-                            SetBattleZoom(6, 0x133, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
+                            SetBattleZoom(6, 0x133, act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         }
                     }
 
@@ -633,9 +633,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
+                            SetBattleZoom(6, 0x133, act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         } else {
-                            SetBattleZoom(6, 0x133, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
+                            SetBattleZoom(6, 0x133, act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         }
                     }
 
@@ -656,9 +656,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 50);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x200, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
+                            SetBattleZoom(6, 0x200, act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         } else {
-                            SetBattleZoom(6, 0x200, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
+                            SetBattleZoom(6, 0x200, act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         }
                     }
 
@@ -674,16 +674,16 @@ u8 task_hum_cloud_1(CloudWork* work) {
         break;
     }
     case HUM_CLOUD_STATE_OMNISLASH_RISE: {
-        s32 d;
+        s32 vz;
 
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x500;
         }
 
-        d = work->base.vz;
+        vz = work->base.vz;
 
-        if (d < 0) {
-            if (d > -0x200) {
+        if (vz < 0) {
+            if (vz > -0x200) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             } else {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -720,18 +720,18 @@ u8 task_hum_cloud_1(CloudWork* work) {
         act->y += (work->base.targetY - act->y) >> 4;
 
         {
-            s32 v;
-        v = (work->base.targetZ - act->z) >> 3;
+            s32 dz;
+        dz = (work->base.targetZ - act->z) >> 3;
 
-        if (v > (s32)w->speed) {
-            v = w->speed;
+        if (dz > (s32)w->speed) {
+            dz = w->speed;
         }
 
-        if (v < -(s32)w->speed) {
-            v = -w->speed;
+        if (dz < -(s32)w->speed) {
+            dz = -w->speed;
         }
 
-        act->z += v;
+        act->z += dz;
         }
 
         w->speed += 0x80;

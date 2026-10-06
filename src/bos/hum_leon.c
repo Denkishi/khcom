@@ -60,14 +60,14 @@ u8 task_hum_leon_1(LeonWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    s32 a;
-    s32 b;
-    s32 c;
-    u8 r;
+    s32 targetX;
+    s32 targetY;
+    s32 targetZ;
+    u8 alive;
 
     w = work;
     act = &work->base.actor;
-    GetEnemyTargetPosition(act, &a, &b, &c);
+    GetEnemyTargetPosition(act, &targetX, &targetY, &targetZ);
 
     switch (HumUpdateReaction(&work->base)) {
     case BTL_REACTION_CARD_BROKEN:
@@ -162,11 +162,11 @@ u8 task_hum_leon_1(LeonWork* work) {
     x = act->x;
     y = act->y;
     z = act->z;
-    r = HumUpdate(&work->base);
+    alive = HumUpdate(&work->base);
     act->x = x;
     act->y = y;
     act->z = z;
-    return r;
+    return alive;
 }
 
 void task_hum_leon_2(HumWork* work) {

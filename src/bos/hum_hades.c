@@ -75,12 +75,12 @@ TaskDesc gTaskDescHumHades = {
 
 void HadesHover(HumWork* work, s32 hoverZ) {
     BtlObj* act = &work->actor;
-    s32 t;
+    s32 bobZ;
 
     if (hoverZ != 0) {
-        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 4;
+        bobZ = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 4;
         work->vz = 0;
-        act->z += (t - act->z) >> 4;
+        act->z += (bobZ - act->z) >> 4;
     }
 }
 
@@ -137,13 +137,13 @@ u8 task_hum_hades_1(HadesWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    s16 p;
-    s16 q;
-    s16 r;
-    s16 s;
+    s16 farX;
+    s16 farZ;
+    s16 nearX;
+    s16 nearZ;
     u16 frame;
-    u8 t;
-    u8 ret;
+    u8 angle;
+    u8 alive;
 
     w = work;
     act = &work->base.actor;
@@ -206,9 +206,9 @@ u8 task_hum_hades_1(HadesWork* work) {
         break;
     case HUM_STATE_IDLE:
     case HUM_STATE_MOVE:
-        t = -((u8)work->base.stateTimer * 2);
-        work->base.targetX = x + gSineTable[t] * 90;
-        work->base.targetY = y + (-gSineTable[t + 64]) * 45;
+        angle = -((u8)work->base.stateTimer * 2);
+        work->base.targetX = x + gSineTable[angle] * 90;
+        work->base.targetY = y + (-gSineTable[angle + 64]) * 45;
 
         if (w->flags & HADES_FLAG_ANGRY) {
             HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 0x333);
@@ -415,110 +415,110 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (w->flags & HADES_FLAG_FLAMES_ACTIVE) {
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
-                p = 44;
-                q = -50;
-                r = 2;
-                s = -44;
+                farX = 44;
+                farZ = -50;
+                nearX = 2;
+                nearZ = -44;
                 break;
             case 3:
-                p = 44;
-                q = -39;
-                r = 33;
-                s = -32;
+                farX = 44;
+                farZ = -39;
+                nearX = 33;
+                nearZ = -32;
                 break;
             case 4:
-                p = 46;
-                q = -42;
-                r = 21;
-                s = -32;
+                farX = 46;
+                farZ = -42;
+                nearX = 21;
+                nearZ = -32;
                 break;
             case 5:
-                p = 46;
-                q = -50;
-                r = -3;
-                s = -30;
+                farX = 46;
+                farZ = -50;
+                nearX = -3;
+                nearZ = -30;
                 break;
             case 6:
-                p = 48;
-                q = -43;
-                r = -2;
-                s = -30;
+                farX = 48;
+                farZ = -43;
+                nearX = -2;
+                nearZ = -30;
                 break;
             case 7:
-                p = 45;
-                q = -43;
-                r = 2;
-                s = -31;
+                farX = 45;
+                farZ = -43;
+                nearX = 2;
+                nearZ = -31;
                 break;
             case 8:
-                p = 42;
-                q = -48;
-                r = 19;
-                s = -34;
+                farX = 42;
+                farZ = -48;
+                nearX = 19;
+                nearZ = -34;
                 break;
             case 9:
             default:
-                p = 33;
-                q = -49;
-                r = 20;
-                s = -41;
+                farX = 33;
+                farZ = -49;
+                nearX = 20;
+                nearZ = -41;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                w->sub2[0].x += (act->x - (p << 8) - w->sub2[0].x) >> 1;
-                w->sub2[1].x += (act->x - (r << 8) - w->sub2[1].x) >> 1;
+                w->sub2[0].x += (act->x - (farX << 8) - w->sub2[0].x) >> 1;
+                w->sub2[1].x += (act->x - (nearX << 8) - w->sub2[1].x) >> 1;
             } else {
-                w->sub2[0].x += (act->x + (p << 8) - w->sub2[0].x) >> 1;
-                w->sub2[1].x += (act->x + (r << 8) - w->sub2[1].x) >> 1;
+                w->sub2[0].x += (act->x + (farX << 8) - w->sub2[0].x) >> 1;
+                w->sub2[1].x += (act->x + (nearX << 8) - w->sub2[1].x) >> 1;
             }
 
             w->sub2[0].y += (act->y - w->sub2[0].y) >> 1;
             w->sub2[1].y += (act->y - w->sub2[1].y) >> 1;
-            w->sub2[0].z += (act->z + (q << 8) - w->sub2[0].z) >> 1;
-            w->sub2[1].z += (act->z + (s << 8) - w->sub2[1].z) >> 1;
+            w->sub2[0].z += (act->z + (farZ << 8) - w->sub2[0].z) >> 1;
+            w->sub2[1].z += (act->z + (nearZ << 8) - w->sub2[1].z) >> 1;
 
             {
-                s32 v = w->scale;
-                p = p + (v * 14 >> 8);
-                q = q + (v * 10 >> 8);
-                r = r + (v * 8 >> 8);
-                s = s + (v * 12 >> 8);
+                s32 scale = w->scale;
+                farX = farX + (scale * 14 >> 8);
+                farZ = farZ + (scale * 10 >> 8);
+                nearX = nearX + (scale * 8 >> 8);
+                nearZ = nearZ + (scale * 12 >> 8);
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                w->sub2[0].x2 += (act->x - (p << 8) - w->sub2[0].x2) >> 3;
-                w->sub2[1].x2 += (act->x - (r << 8) - w->sub2[1].x2) >> 3;
+                w->sub2[0].x2 += (act->x - (farX << 8) - w->sub2[0].x2) >> 3;
+                w->sub2[1].x2 += (act->x - (nearX << 8) - w->sub2[1].x2) >> 3;
             } else {
-                w->sub2[0].x2 += (act->x + (p << 8) - w->sub2[0].x2) >> 3;
-                w->sub2[1].x2 += (act->x + (r << 8) - w->sub2[1].x2) >> 3;
+                w->sub2[0].x2 += (act->x + (farX << 8) - w->sub2[0].x2) >> 3;
+                w->sub2[1].x2 += (act->x + (nearX << 8) - w->sub2[1].x2) >> 3;
             }
 
             w->sub2[0].y2 += (act->y - w->sub2[0].y2) >> 3;
             w->sub2[1].y2 += (act->y - w->sub2[1].y2) >> 3;
-            w->sub2[0].z2 += (act->z + (q << 8) - w->sub2[0].z2) >> 3;
-            w->sub2[1].z2 += (act->z + (s << 8) - w->sub2[1].z2) >> 3;
+            w->sub2[0].z2 += (act->z + (farZ << 8) - w->sub2[0].z2) >> 3;
+            w->sub2[1].z2 += (act->z + (nearZ << 8) - w->sub2[1].z2) >> 3;
 
             {
-                s32 v = w->scale;
-                p = p + (v * 24 >> 8);
-                q = q + (v * 20 >> 8);
-                r = r + (v * 10 >> 8);
-                s = s + (v * 20 >> 8);
+                s32 scale = w->scale;
+                farX = farX + (scale * 24 >> 8);
+                farZ = farZ + (scale * 20 >> 8);
+                nearX = nearX + (scale * 10 >> 8);
+                nearZ = nearZ + (scale * 20 >> 8);
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                w->sub2[0].x3 += (act->x - (p << 8) - w->sub2[0].x3) >> 4;
-                w->sub2[1].x3 += (act->x - (r << 8) - w->sub2[1].x3) >> 4;
+                w->sub2[0].x3 += (act->x - (farX << 8) - w->sub2[0].x3) >> 4;
+                w->sub2[1].x3 += (act->x - (nearX << 8) - w->sub2[1].x3) >> 4;
             } else {
-                w->sub2[0].x3 += (act->x + (p << 8) - w->sub2[0].x3) >> 4;
-                w->sub2[1].x3 += (act->x + (r << 8) - w->sub2[1].x3) >> 4;
+                w->sub2[0].x3 += (act->x + (farX << 8) - w->sub2[0].x3) >> 4;
+                w->sub2[1].x3 += (act->x + (nearX << 8) - w->sub2[1].x3) >> 4;
             }
 
             w->sub2[0].y3 += (act->y - w->sub2[0].y3) >> 4;
             w->sub2[1].y3 += (act->y - w->sub2[1].y3) >> 4;
-            w->sub2[0].z3 += (act->z + (q << 8) - w->sub2[0].z3) >> 4;
-            w->sub2[1].z3 += (act->z + (s << 8) - w->sub2[1].z3) >> 4;
+            w->sub2[0].z3 += (act->z + (farZ << 8) - w->sub2[0].z3) >> 4;
+            w->sub2[1].z3 += (act->z + (nearZ << 8) - w->sub2[1].z3) >> 4;
         }
 
 #ifndef VERSION_EU
@@ -682,13 +682,13 @@ u8 task_hum_hades_1(HadesWork* work) {
         AnimUpdate(&w->anim3);
     }
 
-    ret = HumUpdate(&work->base);
-    return ret;
+    alive = HumUpdate(&work->base);
+    return alive;
 }
 
 void task_hum_hades_2(HadesWork* work) {
     BtlObj* act;
-    HadesSub* e;
+    HadesSub* flame;
     void* gfx;
     u16 attr;
     s32 sx;
@@ -706,8 +706,8 @@ void task_hum_hades_2(HadesWork* work) {
     act = &work->base.actor;
 
     for (i = 0; i < 2; i++) {
-        e = &work->sub2[i];
-        attr = GetBattleSpritePriorityFlags(e->groundY);
+        flame = &work->sub2[i];
+        attr = GetBattleSpritePriorityFlags(flame->groundY);
 
         if (work->scale == 0x100) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
@@ -725,17 +725,17 @@ void task_hum_hades_2(HadesWork* work) {
 
         affine = AllocObjAffine(0, sx, work->scale, 0);
         gfx = AnimGetGfx(&work->anim);
-        WorldToScreen(&x, &y, e->x, e->y, e->z);
+        WorldToScreen(&x, &y, flame->x, flame->y, flame->z);
         DrawSprite(x, y, gfx, work->tiles, work->palette, affine, attr,
-            -0x1005 - (e->groundY >> 8) * 4);
+            -0x1005 - (flame->groundY >> 8) * 4);
         gfx = AnimGetGfx(&work->anim2);
-        WorldToScreen(&x, &y, e->x2, e->y2, e->z2);
+        WorldToScreen(&x, &y, flame->x2, flame->y2, flame->z2);
         DrawSprite(x, y, gfx, work->tiles2, work->palette, affine, attr,
-            -0x1006 - (e->groundY >> 8) * 4);
+            -0x1006 - (flame->groundY >> 8) * 4);
         gfx = AnimGetGfx(&work->anim3);
-        WorldToScreen(&x, &y, e->x3, e->y3, e->z3);
+        WorldToScreen(&x, &y, flame->x3, flame->y3, flame->z3);
         DrawSprite(x, y, gfx, work->tiles3, work->palette, affine, attr,
-            -0x1007 - (e->groundY >> 8) * 4);
+            -0x1007 - (flame->groundY >> 8) * 4);
     }
 }
 

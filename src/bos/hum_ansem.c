@@ -71,12 +71,12 @@ TaskDesc gTaskDescHumAnsem = {
 
 void AnsemHover(HumWork* work, s32 hoverZ) {
     BtlObj* act = &work->actor;
-    s32 t;
+    s32 bobZ;
 
     if (hoverZ != 0) {
-        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 8;
+        bobZ = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 8;
         work->vz = 0;
-        act->z += (t - act->z) >> 4;
+        act->z += (bobZ - act->z) >> 4;
     }
 }
 
@@ -122,10 +122,10 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     BtlObj* act;
     s32 x;
     s32 y;
-    s32 a;
-    s32 b;
-    s32 c;
-    s32 d;
+    s32 prevX;
+    s32 prevY;
+    s32 prevZ;
+    s32 offset;
 
     w = work;
     act = &work->base.actor;
@@ -279,11 +279,11 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 d = act->x - 0x2800;
-            act->x = act->x + ((x - d) >> 4);
+            s32 frontX = act->x - 0x2800;
+            act->x = act->x + ((x - frontX) >> 4);
         } else {
-            s32 d = act->x + 0x2800;
-            act->x = act->x + ((x - d) >> 4);
+            s32 frontX = act->x + 0x2800;
+            act->x = act->x + ((x - frontX) >> 4);
         }
 
         act->y += (y - act->y) >> 4;
@@ -379,7 +379,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 4, 0, w->base.sub->tiles);
             w->subRiseSpeed = 0x800;
-            w->sub.x = x + (d = ((u16)(GetRandom() % 65) << 8) - 0x2000);
+            w->sub.x = x + (offset = ((u16)(GetRandom() % 65) << 8) - 0x2000);
             w->sub.y = y;
             w->sub.z = 0;
             w->sub.flags |= HUM_SUB_FLAG_OWN_DEPTH;
@@ -492,11 +492,11 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             act->flags |= (BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 d = act->x - 0x1000;
-                act->x = act->x + ((act->originX - d) >> 2);
+                s32 frontX = act->x - 0x1000;
+                act->x = act->x + ((act->originX - frontX) >> 2);
             } else {
-                s32 d = act->x + 0x1000;
-                act->x = act->x + ((act->originX - d) >> 2);
+                s32 frontX = act->x + 0x1000;
+                act->x = act->x + ((act->originX - frontX) >> 2);
             }
 
             w->subOffsetX += (0 - w->subOffsetX) >> 2;
@@ -557,9 +557,9 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 w->sub.z - 0x2100, act->flags & BTLOBJ_FLAG_FACING_LEFT);
         }
 
-        a = w->sub.x;
-        b = w->sub.y;
-        c = w->sub.z;
+        prevX = w->sub.x;
+        prevY = w->sub.y;
+        prevZ = w->sub.z;
 
         if (w->steps > 0) {
             ApproachValue(&act->x, work->base.targetX, w->steps);
@@ -590,7 +590,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             m4aSongNumStart(SONG_BTL_MON_HIT02);
         }
 
-        BgFxAddPosition(w->sub.x - a, w->sub.y - b, w->sub.z - c);
+        BgFxAddPosition(w->sub.x - prevX, w->sub.y - prevY, w->sub.z - prevZ);
 
         if (w->steps <= 0) {
             w->sub.flags &= ~HUM_SUB_FLAG_IN_FRONT;

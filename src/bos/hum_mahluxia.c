@@ -84,26 +84,26 @@ enum HumMahluxiaState {
 };
 
 void MahluxiaJumpOffset(MahluxiaWork* work, s16 distance) {
-    HumWork* w = &work->base;
-    BtlObj* act = &w->actor;
-    s32 v;
+    HumWork* base = &work->base;
+    BtlObj* act = &base->actor;
+    s32 x;
 
-    GetEnemyTargetPosition(act, &v, NULL, NULL);
+    GetEnemyTargetPosition(act, &x, NULL, NULL);
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        w->targetX = act->x - (distance << 8);
+        base->targetX = act->x - (distance << 8);
     } else {
-        w->targetX = act->x + (distance << 8);
+        base->targetX = act->x + (distance << 8);
     }
 
-    w->state = HUM_MAHLUXIA_STATE_RETREAT;
-    w->stateTimer = 0;
+    base->state = HUM_MAHLUXIA_STATE_RETREAT;
+    base->stateTimer = 0;
     work->hoverZ = -0x300;
 
-    if (act->y < v) {
-        w->targetY = (gBtlWork->yMin + 16) << 8;
+    if (act->y < x) {
+        base->targetY = (gBtlWork->yMin + 16) << 8;
     } else {
-        w->targetY = (gBtlWork->yMax - 16) << 8;
+        base->targetY = (gBtlWork->yMax - 16) << 8;
     }
 }
 
@@ -115,21 +115,21 @@ void MahluxiaSwingTo(MahluxiaWork* work, s32 x, u16 amplitude) {
 }
 
 u8 MahluxiaTryJumpAway(MahluxiaWork* work) {
-    s32 v;
-    BtlObj* c;
+    s32 x;
+    BtlObj* player;
 
-    c = gBtlWork->actor;
-    GetEnemyTargetPosition(&work->base.actor, &v, NULL, NULL);
+    player = gBtlWork->actor;
+    GetEnemyTargetPosition(&work->base.actor, &x, NULL, NULL);
     HumFaceTarget(&work->base, 1);
 
     if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             MahluxiaJumpOffset(work, -128);
         } else if (GetRandom() & 1) {
-            if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                MahluxiaSwingTo(work, v + 0x2800, 48);
+            if (player->flags & BTLOBJ_FLAG_FACING_LEFT) {
+                MahluxiaSwingTo(work, x + 0x2800, 48);
             } else {
-                MahluxiaSwingTo(work, v - 0x2800, 48);
+                MahluxiaSwingTo(work, x - 0x2800, 48);
             }
         } else {
             MahluxiaJumpOffset(work, -128);
@@ -211,13 +211,13 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* spawn) {
 
 void MahluxiaHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
-    s32 t;
+    s32 bobZ;
 
     if (hoverZ != 0) {
         act = &work->actor;
-        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
+        bobZ = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
         work->vz = 0;
-        act->z += (t - act->z) >> 4;
+        act->z += (bobZ - act->z) >> 4;
     }
 }
 
@@ -266,7 +266,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    u16 n;
+    u16 timer;
 
     w = work;
     act = &work->base.actor;
@@ -474,15 +474,15 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
 
         act->y += (y - act->y) >> 2;
-        n = work->base.stateTimer;
+        timer = work->base.stateTimer;
 
-        if ((s16)n > 60) {
+        if ((s16)timer > 60) {
             work->base.state = HUM_MAHLUXIA_STATE_KAMA_RELEASE;
             work->base.stateTimer = 0;
             break;
         }
 
-        work->base.stateTimer = n + 1;
+        work->base.stateTimer = timer + 1;
         break;
     case HUM_MAHLUXIA_STATE_KAMA_RELEASE:
         if (work->base.stateTimer == 0) {
@@ -578,15 +578,15 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             }
         }
 
-        n = work->base.stateTimer;
+        timer = work->base.stateTimer;
 
-        if ((s16)n > 60) {
+        if ((s16)timer > 60) {
             work->base.state = HUM_MAHLUXIA_STATE_DASH_END;
             work->base.stateTimer = 0;
             break;
         }
 
-        work->base.stateTimer = n + 1;
+        work->base.stateTimer = timer + 1;
         break;
     case HUM_MAHLUXIA_STATE_DASH_END:
         if (work->base.stateTimer == 0) {

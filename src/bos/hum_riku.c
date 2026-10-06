@@ -92,8 +92,8 @@ enum HumRikuState {
 };
 
 void RikuJumpOffset(RikuWork* work, s16 distance, s32 speed) {
-    HumWork* w = &work->base;
-    BtlObj* act = &w->actor;
+    HumWork* base = &work->base;
+    BtlObj* act = &base->actor;
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->base.targetX = act->x - (distance << 8);
@@ -101,9 +101,9 @@ void RikuJumpOffset(RikuWork* work, s16 distance, s32 speed) {
         work->base.targetX = act->x + (distance << 8);
     }
 
-    w->targetY = act->y;
-    w->state = HUM_RIKU_STATE_JUMP_CROUCH;
-    w->stateTimer = 0;
+    base->targetY = act->y;
+    base->state = HUM_RIKU_STATE_JUMP_CROUCH;
+    base->stateTimer = 0;
     work->unk_1C4 = -speed;
     work->state = 0;
 }
@@ -117,24 +117,24 @@ void RikuJumpTo(RikuWork* work, s32 x, s32 y) {
 }
 
 u8 RikuTryJumpAway(RikuWork* work) {
-    s32 v;
-    s32 w;
-    BtlObj* c;
+    s32 x;
+    s32 y;
+    BtlObj* player;
 
-    c = gBtlWork->actor;
+    player = gBtlWork->actor;
 
     if (GetRandom() % 30 == 0) {
-        GetEnemyTargetPosition(&work->base.actor, &v, &w, NULL);
+        GetEnemyTargetPosition(&work->base.actor, &x, &y, NULL);
         HumFaceTarget(&work->base, 1);
 
         if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
                 RikuJumpOffset(work, -99, 0x280);
             } else if (GetRandom() & 1) {
-                if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    RikuJumpTo(work, v + 0x2800, w);
+                if (player->flags & BTLOBJ_FLAG_FACING_LEFT) {
+                    RikuJumpTo(work, x + 0x2800, y);
                 } else {
-                    RikuJumpTo(work, v - 0x2800, w);
+                    RikuJumpTo(work, x - 0x2800, y);
                 }
             } else {
                 RikuJumpOffset(work, -80, 0x500);
@@ -446,11 +446,11 @@ u8 task_hum_riku_1(RikuWork* work) {
         w->flags |= RIKU_FLAG_AFTERIMAGE;
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            s32 t = act->x - 0x3000;
-            act->x += (act->originX - t) >> 3;
+            s32 frontX = act->x - 0x3000;
+            act->x += (act->originX - frontX) >> 3;
         } else {
-            s32 t = act->x + 0x3000;
-            act->x += (act->originX - t) >> 3;
+            s32 frontX = act->x + 0x3000;
+            act->x += (act->originX - frontX) >> 3;
         }
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -641,11 +641,11 @@ u8 task_hum_riku_1(RikuWork* work) {
         case 2:
         case 3: {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 t = act->x + 0x3200;
-                act->x += (act->originX - t) >> 3;
+                s32 backX = act->x + 0x3200;
+                act->x += (act->originX - backX) >> 3;
             } else {
-                s32 t = act->x - 0x3200;
-                act->x += (act->originX - t) >> 3;
+                s32 backX = act->x - 0x3200;
+                act->x += (act->originX - backX) >> 3;
             }
 
             break;
@@ -670,54 +670,54 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         if (w->flags & RIKU_FLAG_FIRE_LAUNCHED) {
-            BtlObj* p = gBtlWork->actor;
+            BtlObj* player = gBtlWork->actor;
 
-            if (p != NULL) {
+            if (player != NULL) {
                 s32 follow = 0;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    if (p->x < act->x - 0x2000) {
+                    if (player->x < act->x - 0x2000) {
                         follow = 1;
                     }
                 } else {
-                    if (p->x > act->x + 0x2000) {
+                    if (player->x > act->x + 0x2000) {
                         follow = 1;
                     }
                 }
 
                 if (follow) {
-                    BgFxSetTarget(p->x, p->y, p->z - (p->centerHeight << 8));
+                    BgFxSetTarget(player->x, player->y, player->z - (player->centerHeight << 8));
                 }
             }
         }
 
         if (!(w->flags & RIKU_FLAG_FIRE_LAUNCHED) && work->base.anim.timer == 0) {
-            s16 d = 0;
+            s16 step = 0;
             s32 spawn = 0;
 
             switch (AnimGetFrame(&work->base.anim)) {
             case 0:
-                d = -10;
+                step = -10;
                 break;
             case 1:
-                d = -24;
+                step = -24;
                 break;
             case 4:
-                d = 12;
+                step = 12;
                 break;
             case 5:
-                d = 15;
+                step = 15;
                 break;
             case 6:
-                d = 7;
+                step = 7;
                 spawn = 1;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= d << 8;
+                act->x -= step << 8;
             } else {
-                act->x += d << 8;
+                act->x += step << 8;
             }
 
             if (spawn) {
@@ -753,40 +753,40 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         if (work->base.anim.timer == 0) {
-            s32 d = 0;
+            s32 step = 0;
             s32 hit = 0;
 
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
-                d = 4;
+                step = 4;
                 break;
             case 3:
-                d = 16;
+                step = 16;
                 hit = 1;
                 break;
             case 4:
-                d = 5;
+                step = 5;
                 break;
             case 6:
-                d = 1;
+                step = 1;
                 break;
             case 7:
-                d = 4;
+                step = 4;
                 hit = 1;
                 break;
             case 8:
-                d = 6;
+                step = 6;
                 break;
             case 9:
             case 10:
-                d = 2;
+                step = 2;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= d << 8;
+                act->x -= step << 8;
             } else {
-                act->x += d << 8;
+                act->x += step << 8;
             }
 
             if (hit) {
@@ -836,54 +836,54 @@ u8 task_hum_riku_1(RikuWork* work) {
             w->flags |= RIKU_FLAG_AFTERIMAGE;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                s32 t = act->x + 0x5800;
-                act->x += (act->originX - t) >> 2;
+                s32 backX = act->x + 0x5800;
+                act->x += (act->originX - backX) >> 2;
             } else {
-                s32 t = act->x - 0x5800;
-                act->x += (act->originX - t) >> 2;
+                s32 backX = act->x - 0x5800;
+                act->x += (act->originX - backX) >> 2;
             }
         }
 
         if (work->base.anim.timer == 0) {
-            s16 d = 0;
+            s16 step = 0;
             s32 hit = 0;
             s32 attack = 290;
 
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 1:
-                d = 15;
+                step = 15;
                 break;
             case 2:
-                d = 5;
+                step = 5;
                 hit = 1;
                 attack = 290;
                 break;
             case 4:
-                d = -5;
+                step = -5;
                 break;
             case 5:
-                d = 10;
+                step = 10;
                 break;
             case 6:
-                d = 20;
+                step = 20;
                 hit = 1;
                 attack = 291;
                 break;
             case 7:
-                d = -9;
+                step = -9;
                 break;
             case 8:
-                d = 6;
+                step = 6;
                 break;
             case 9:
-                d = 1;
+                step = 1;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= d << 8;
+                act->x -= step << 8;
             } else {
-                act->x += d << 8;
+                act->x += step << 8;
             }
 
             if (hit) {

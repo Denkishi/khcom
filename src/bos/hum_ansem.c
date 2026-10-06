@@ -132,7 +132,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     GetEnemyTargetPosition(act, &x, &y, NULL);
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
         act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
         MakeOpponentsHittable();
@@ -157,7 +157,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
         work->sub.flags &= ~(HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_OWN_DEPTH);
         break;

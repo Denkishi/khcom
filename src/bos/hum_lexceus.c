@@ -135,7 +135,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     GetEnemyTargetPosition(act, &x, &y, &z);
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
         work->base.steps = 0;
 
@@ -156,7 +156,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->base.scaleX = work->targetScaleX = 0x100;
         work->base.scaleY = work->targetScaleY = 0x100;
         work->scaleSteps = 0;

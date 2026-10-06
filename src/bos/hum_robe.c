@@ -37,7 +37,7 @@ u8 task_hum_robe_1(RobeWork* work) {
     s32 z;
     u8 r;
 
-    if (HumUpdateReaction(&work->base) == 1) {
+    if (HumUpdateReaction(&work->base) == BTL_REACTION_HURT) {
         work->base.stateTimer = 1;
     }
 

@@ -243,7 +243,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
     GetEnemyTargetPosition(act, &x, &y, &z);
 
     switch ((u32)HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
@@ -270,11 +270,11 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         m4aSongNumStop(SONG_BTL_VIC_ICEFALL);
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         if (act->btl->hcEffect == 27) {
             w->base.state = HUM_VIXEN_STATE_REVIVE;
             w->base.stateTimer = 0;

@@ -251,7 +251,7 @@ u8 task_hum_riku_1(RikuWork* work) {
     work->flags &= ~RIKU_FLAG_AFTERIMAGE;
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
@@ -276,7 +276,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->base.flags &= ~HUM_FLAG_IGNORE_BOUNDS;
         work->base.scaleX = 256;
         break;

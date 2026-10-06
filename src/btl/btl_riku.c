@@ -956,7 +956,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     p = &work->actor;
 
-    if (gBtlWork->phase == 4 && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
+    if (gBtlWork->phase == BTL_PHASE_END && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         switch (work->state) {
         case BTL_RIKU_STATE_SUMMON_TAKEOFF:
         case BTL_RIKU_STATE_SUMMON_EXIT:
@@ -2991,7 +2991,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         SetBtlRikuAnimation(work, 0, 1);
 
-        if (gBtlWork->phase == 0) {
+        if (gBtlWork->phase == BTL_PHASE_START) {
             break;
         }
 
@@ -4795,7 +4795,7 @@ void task_btl_riku_3(BtlRikuWork* work) {
 
     p = &work->actor;
 
-    if (gBtlWork->phase == 3) {
+    if (gBtlWork->phase == BTL_PHASE_GAME_OVER) {
         gGameState.hp = gGameState.progression.maxHp;
     } else {
         gGameState.hp = p->hp;

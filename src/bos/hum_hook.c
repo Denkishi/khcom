@@ -193,7 +193,7 @@ u8 task_hum_hook_1(HookWork* work) {
     c = gBtlWork->actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
-    if (HumUpdateReaction(&work->base) == 5) {
+    if (HumUpdateReaction(&work->base) == BTL_REACTION_CARD_ACTION) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {

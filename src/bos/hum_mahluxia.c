@@ -274,7 +274,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     work->flags &= ~MAHLUXIA_FLAG_AFTERIMAGE;
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
         w->hoverZ = 0;
 
@@ -298,7 +298,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
         break;
     }

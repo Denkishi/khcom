@@ -325,7 +325,7 @@ void BosJfMajinUpdateIdle(JfMajinWork* work) {
         work->gfx = AnimUpdate(&work->anim);
         work->y = gBosJfMajinIdleOffsets[work->idleStep];
 
-        if (gBtlWork->phase != 0) {
+        if (gBtlWork->phase != BTL_PHASE_START) {
             if (GetRandom() % 80 == 0) {
                 BosJfMajinChooseAttack(work);
                 work->jf->stateStep = 0;

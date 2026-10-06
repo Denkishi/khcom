@@ -179,7 +179,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     GetEnemyTargetPosition(act, &x, &y, NULL);
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
@@ -203,7 +203,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         w->targetScaleX = work->base.scaleX = 0x100;
         w->targetScaleY = work->base.scaleY = 0x100;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->base.flags &= ~HUM_FLAG_BEHIND_BG_FX;
 #ifdef VERSION_EU
         act->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;

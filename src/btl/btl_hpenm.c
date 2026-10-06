@@ -38,7 +38,7 @@ void task_btl_hpenm_0(BtlHpenmWork* work) {
 s32 task_btl_hpenm_1(BtlHpenmWork* work) {
     BtlObj* actor;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         return 0;
     }
 

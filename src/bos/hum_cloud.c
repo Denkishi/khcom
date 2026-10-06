@@ -171,7 +171,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
     GetEnemyTargetPosition(act, &x, &y, &z);
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
@@ -202,7 +202,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->nextState = HUM_STATE_IDLE;
         break;
     }

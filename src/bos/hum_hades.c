@@ -150,7 +150,7 @@ u8 task_hum_hades_1(HadesWork* work) {
     GetEnemyTargetPosition(act, &x, &y, &z);
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
@@ -184,7 +184,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->sub.flags |= HUM_SUB_FLAG_HIDDEN;
         work->flags &= ~HADES_FLAG_FLAMES_ACTIVE;
         break;

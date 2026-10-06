@@ -848,7 +848,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     p = &work->actor;
 
-    if (gBtlWork->phase == 4 && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
+    if (gBtlWork->phase == BTL_PHASE_END && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         switch (work->state) {
         case BTL_SORA_STATE_SUMMON_TAKEOFF:
         case BTL_SORA_STATE_SUMMON_EXIT:
@@ -2107,7 +2107,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         SetBtlSoraAnimation(work, 1, 1);
 
-        if (gBtlWork->phase == 0) {
+        if (gBtlWork->phase == BTL_PHASE_START) {
             break;
         }
 
@@ -6271,7 +6271,7 @@ void task_btl_sora_3(BtlSoraWork* work) {
     m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
 
     if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
-        if (gBtlWork->phase == 3) {
+        if (gBtlWork->phase == BTL_PHASE_GAME_OVER) {
             gGameState.hp = gGameState.progression.maxHp;
         } else {
             gGameState.hp = p->hp;

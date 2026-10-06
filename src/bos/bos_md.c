@@ -516,7 +516,7 @@ u8 BosMdUpdateIdle(MdWork* work) {
             MdAnimStart(work, 1);
         }
 
-        if (gBtlWork->phase != 0) {
+        if (gBtlWork->phase != BTL_PHASE_START) {
             work->timer--;
 
             if (work->timer <= 0) {

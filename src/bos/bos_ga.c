@@ -637,7 +637,7 @@ u8 BosGaUpdateIdle(GaWork* work) {
         work->timer = 15;
         break;
     case BOS_GA_PHASE_UPDATE:
-        if (gBtlWork->phase == 0) {
+        if (gBtlWork->phase == BTL_PHASE_START) {
             break;
         }
 

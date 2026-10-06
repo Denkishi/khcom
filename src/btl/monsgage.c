@@ -90,8 +90,8 @@ void task_monsgage_0(MonsgageWork* work) {
 }
 
 s32 task_monsgage_1(MonsgageWork* work) {
-    if (gBtlWork->phase != 0) {
-        if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase != BTL_PHASE_START) {
+        if (gBtlWork->phase == BTL_PHASE_END) {
             return 0;
         }
 
@@ -200,7 +200,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
 void task_monsgage_2(MonsgageWork* work) {
     ObjAffine* affine;
 
-    if (gBtlWork->phase != 0) {
+    if (gBtlWork->phase != BTL_PHASE_START) {
         DrawSprite(172, 12, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 3);
 
         if (work->visible) {

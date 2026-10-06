@@ -138,7 +138,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     GetEnemyTargetPosition(act, &x, &y, &z);
 
     switch (HumUpdateReaction(&work->base)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.stateTimer = 0;
         work->base.steps = 0;
 
@@ -169,7 +169,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         }
 
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         m4aSongNumStop(SONG_EF_RAC_BEEM);
         work->base.scaleX = 256;
         work->base.scaleY = 256;

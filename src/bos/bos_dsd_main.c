@@ -279,7 +279,7 @@ void BosDsdMainUpdateIdleFrames(DsdMainWork* work) {
 void BosDsdMainUpdateIdle(DsdMainWork* work) {
     BosDsdMainUpdateIdleFrames(work);
 
-    if (gBtlWork->phase != 0) {
+    if (gBtlWork->phase != BTL_PHASE_START) {
         if (GetRandom() % 80 == 0) {
             BosDsdMainChooseAttack(work);
         }

@@ -70,9 +70,9 @@ u8 task_hum_leon_1(LeonWork* work) {
     GetEnemyTargetPosition(act, &a, &b, &c);
 
     switch (HumUpdateReaction(&work->base)) {
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         break;
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->base.state = HUM_LEON_STATE_CARD_ACTION;
         work->base.stateTimer = 0;
         break;

@@ -713,7 +713,7 @@ void task_hum_hades_2(HadesWork* work) {
 
         if (work->scale == Q_8_8(1)) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
-                attr |= 1;
+                attr |= SPRITE_FLAG_HFLIP;
             }
 
             sx = work->scale;

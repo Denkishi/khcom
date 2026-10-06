@@ -650,7 +650,7 @@ void HumDrawSub(HumWork* work, HumSub* sub) {
 
         if (sy == Q_8_8(1)) {
             sx = sy;
-            attr |= 1;
+            attr |= SPRITE_FLAG_HFLIP;
         } else {
             sx = -sy;
         }
@@ -704,7 +704,7 @@ void HumDraw(HumWork* work) {
 
             if (sy == Q_8_8(1)) {
                 sx = sy;
-                attr |= 1;
+                attr |= SPRITE_FLAG_HFLIP;
             } else {
                 sx = -sy;
             }

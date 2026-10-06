@@ -6191,7 +6191,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
 
             if (sy == Q_8_8(1)) {
                 sx = sy;
-                attr |= 1;
+                attr |= SPRITE_FLAG_HFLIP;
             } else {
                 sx = -sy;
             }

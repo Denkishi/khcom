@@ -257,7 +257,7 @@ void task_emy_00_2(EmyWork* work) {
             } else if (gBtlWork->scale == scaleY) {
                 sy = scaleY;
                 sx = sy;
-                flags |= 1;
+                flags |= SPRITE_FLAG_HFLIP;
             } else {
                 sx = -gBtlWork->scale;
                 sy = gBtlWork->scale;

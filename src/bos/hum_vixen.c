@@ -123,19 +123,19 @@ static TaskDesc sTaskDescHumVixenFrz = {
 static const VixenFrgDef sVixenFrgDefs[15] = {
     { 12, -29, 3, 0 },
     { 5, -37, 0, 0 },
-    { -16, -24, 3, 2 },
-    { -18, -6, 0, 1 },
+    { -16, -24, 3, SPRITE_FLAG_VFLIP },
+    { -18, -6, 0, SPRITE_FLAG_HFLIP },
     { 14, -4, 5, 0 },
     { 17, -5, 4, 0 },
-    { -12, -44, 5, 1 },
+    { -12, -44, 5, SPRITE_FLAG_HFLIP },
     { -16, -40, 2, 0 },
     { 8, 0, 1, 0 },
-    { 0, -13, 2, 2 },
+    { 0, -13, 2, SPRITE_FLAG_VFLIP },
     { -4, -24, 5, 0 },
     { 8, -12, 5, 0 },
-    { 4, -48, 5, 3 },
-    { -7, -39, 4, 1 },
-    { 3, -54, 1, 1 },
+    { 4, -48, 5, SPRITE_FLAG_HFLIP | SPRITE_FLAG_VFLIP },
+    { -7, -39, 4, SPRITE_FLAG_HFLIP },
+    { 3, -54, 1, SPRITE_FLAG_HFLIP },
 };
 
 static TaskDesc sTaskDescHumVixenFrg = {
@@ -832,7 +832,7 @@ void task_hum_vixen_ndl_2(VixenNdlWork* work) {
     attr = GetBattleSpritePriorityFlags(work->y);
 
     if (work->flipped) {
-        attr |= 1;
+        attr |= SPRITE_FLAG_HFLIP;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
@@ -1016,7 +1016,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
     if (gBtlWork->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->flipped = 0;
     } else {
-        work->flipped = 1;
+        work->flipped = SPRITE_FLAG_HFLIP;
     }
 
     m4aSongNumStart(SONG_EF_BURIZA02);

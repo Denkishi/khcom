@@ -14,6 +14,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "obj.h"
 
 static const LstFalAnim sBosLstFalAnims[8] = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 } };
 
@@ -132,7 +133,7 @@ void task_bos_lst_fal_2(LstFalWork* work) {
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     gfx = AnimGetGfx(&work->anim);
-    prio = GetBattleSpritePriorityFlags(work->y) | 4;
+    prio = GetBattleSpritePriorityFlags(work->y) | SPRITE_FLAG_BLEND;
     DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio,
                -0x1004 - (work->y >> 8) * 4);
 }

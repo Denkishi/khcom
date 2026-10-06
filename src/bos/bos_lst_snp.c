@@ -79,7 +79,7 @@ void task_bos_lst_snp_2(LstSnpWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     affine = AllocObjAffineAngle(work->angle, TRUE);
     gfx = AnimGetGfx(&work->anim);
-    prio = GetBattleSpritePriorityFlags(work->y) | 4;
+    prio = GetBattleSpritePriorityFlags(work->y) | SPRITE_FLAG_BLEND;
     DrawSprite(x, y, gfx, work->tiles, work->palette, affine, prio,
                -0x1004 - (work->y >> 8) * 4);
 }

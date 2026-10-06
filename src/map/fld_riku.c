@@ -31,6 +31,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "obj.h"
 
 static const AnimDef sFldRikuAnimDefs[15][5] = {
     { { gRikuBb00Frames, gRikuBb00Anims, gRikuBb00Tiles, 0 }, { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles, 0 }, { gRikuFl00Frames, gRikuFl00Anims, gRikuFl00Tiles, 0 }, { gRikuLl00Frames, gRikuLl00Anims, gRikuLl00Tiles, 0 }, { gRikuBl00Frames, gRikuBl00Anims, gRikuBl00Tiles, 0 } },
@@ -1708,7 +1709,7 @@ void task_fld_riku_2(FldWork* work) {
     s32 z;
 
     act = &gFieldState->actor;
-    pri = (work->flags & FLD_FLAG_HFLIP) ? 0x801 : 0x800;
+    pri = (work->flags & FLD_FLAG_HFLIP) ? (SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP) : SPRITE_PRIORITY(2);
 
     if (work->onCollider) {
         depth = -0x1006 - (work->collider.platformY >> 8) * 4;

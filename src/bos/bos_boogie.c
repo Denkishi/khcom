@@ -32,6 +32,7 @@
 #include "default_bg_map.h"
 #include "enemy_ids.h"
 #include "macros.h"
+#include "obj.h"
 
 static BoogieWork* sBoogieWork;
 
@@ -528,7 +529,7 @@ void task_bos_boogie_2(BoogieWork* work) {
     flags = GetBattleSpritePriorityFlags(actor->y);
 
     if (!(actor->flags & BTLOBJ_FLAG_FACING_LEFT)) {
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     }
 
     if (StepHitFlash(actor) && work->state != BOS_BOOGIE_STATE_DEFEATED) {

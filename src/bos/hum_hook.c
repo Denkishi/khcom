@@ -1028,7 +1028,7 @@ void task_hum_hook_bomb_2(HookBombWork* work) {
     attr = GetBattleSpritePriorityFlags(work->y);
 
     if (!work->facingLeft) {
-        attr |= 1;
+        attr |= SPRITE_FLAG_HFLIP;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);

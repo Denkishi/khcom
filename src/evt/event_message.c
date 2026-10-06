@@ -3755,7 +3755,7 @@ u8 EventCharaFadeOut(void* work, void* task) {
     }
 
     z = chara->obj.drawFlags;
-    z |= 4;
+    z |= SPRITE_FLAG_BLEND;
     EvtObjSetDrawFlags(&chara->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     gBldAlpha = 16;
@@ -3807,7 +3807,7 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* work, void* task) {
         {
             u16 z = work->obj.drawFlags;
 
-            z &= 0xFFFB;
+            z &= ~SPRITE_FLAG_BLEND;
             EvtObjSetDrawFlags(&work->obj, z);
         }
     }
@@ -3838,7 +3838,7 @@ u8 EventCharaFadeIn(void* work, void* task) {
     }
 
     z = chara->obj.drawFlags;
-    z |= 4;
+    z |= SPRITE_FLAG_BLEND;
     EvtObjSetDrawFlags(&chara->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     gBldAlpha = 0x1000;
@@ -3890,7 +3890,7 @@ u8 EventCharaFadeInUpdate(EventCharaWork* work, void* task) {
         {
             u16 z = work->obj.drawFlags;
 
-            z &= 0xFFFB;
+            z &= ~SPRITE_FLAG_BLEND;
             EvtObjSetDrawFlags(&work->obj, z);
         }
     }
@@ -3920,7 +3920,7 @@ u8 EventCharaBlendUp(void* work, void* task) {
     }
 
     z = chara->obj.drawFlags;
-    z |= 4;
+    z |= SPRITE_FLAG_BLEND;
     EvtObjSetDrawFlags(&chara->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     gBldAlpha = 16;
@@ -3986,7 +3986,7 @@ u8 EventCharaBlendDown(void* work, void* task) {
     }
 
     z = chara->obj.drawFlags;
-    z |= 4;
+    z |= SPRITE_FLAG_BLEND;
     EvtObjSetDrawFlags(&chara->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     gBldAlpha = 0x1010;
@@ -4262,7 +4262,7 @@ u8 EventCharaFadeToBlack(void* work, void* task) {
     }
 
     z = chara->obj.drawFlags;
-    z |= 4;
+    z |= SPRITE_FLAG_BLEND;
     EvtObjSetDrawFlags(&chara->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     gBldAlpha = 16;
@@ -4328,7 +4328,7 @@ u8 EventCharaBlendDown2(void* work, void* task) {
     }
 
     z = chara->obj.drawFlags;
-    z |= 4;
+    z |= SPRITE_FLAG_BLEND;
     EvtObjSetDrawFlags(&chara->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     gBldAlpha = 0;
@@ -4454,18 +4454,18 @@ void SetEventCharaMoveAnim(EventCharaWork* work, s32 animId) {
 
     switch (work->angle) {
     case 0xD3:
-        flags &= 0xFFFE;
+        flags &= ~SPRITE_FLAG_HFLIP;
         break;
     case 0x2D:
     case 0x40:
     case 0x53:
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
         break;
     case 0x00:
     case 0x80:
     case 0xAD:
     case 0xC0:
-        flags &= 0xFFFE;
+        flags &= ~SPRITE_FLAG_HFLIP;
         break;
     }
 

@@ -737,7 +737,7 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
     if (work->facingLeft) {
         attr = GetBattleSpritePriorityFlags(work->y);
     } else {
-        attr = GetBattleSpritePriorityFlags(work->y) | 1;
+        attr = GetBattleSpritePriorityFlags(work->y) | SPRITE_FLAG_HFLIP;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
@@ -815,7 +815,7 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
 
     if (scale == Q_8_8(1)) {
         if (!work->facingLeft) {
-            attr |= 1;
+            attr |= SPRITE_FLAG_HFLIP;
         }
 
         sx = scale;
@@ -1023,7 +1023,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
         if (work->facingLeft) {
             attr = GetBattleSpritePriorityFlags(work->y);
         } else {
-            attr = GetBattleSpritePriorityFlags(work->y) | 1;
+            attr = GetBattleSpritePriorityFlags(work->y) | SPRITE_FLAG_HFLIP;
         }
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
@@ -1037,7 +1037,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
             if (work->facingLeft) {
                 attr = GetBattleSpritePriorityFlags(piece->y);
             } else {
-                attr = GetBattleSpritePriorityFlags(piece->y) | 1;
+                attr = GetBattleSpritePriorityFlags(piece->y) | SPRITE_FLAG_HFLIP;
             }
 
             WorldToScreen(&x, &y, piece->x, piece->y,

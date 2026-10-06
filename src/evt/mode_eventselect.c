@@ -575,7 +575,7 @@ void EffectDrawObj(EffectWork* work) {
     flags = work->actor->obj.drawFlags;
 
     if (!work->followFlip) {
-        flags &= 0xFFFE;
+        flags &= ~SPRITE_FLAG_HFLIP;
     }
 
     DrawSprite((work->x >> 8) - (gEventState->x >> 8),
@@ -668,7 +668,7 @@ void TinkerbellParticleDraw(EffectWork* work) {
     flags = work->actor->obj.drawFlags;
 
     if (!work->followFlip) {
-        flags &= 0xFFFE;
+        flags &= ~SPRITE_FLAG_HFLIP;
     }
 
     DrawSprite((work->x >> 8) - (gEventState->x >> 8),

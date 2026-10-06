@@ -238,7 +238,7 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
     WorldToScreen(&x, &y, work->curX + work->offsetX, work->curY + work->offsetY,
                   work->curZ + work->offsetZ);
     affine = NULL;
-    prio = GetBattleSpritePriorityFlags(work->curY + work->offsetY) | 4;
+    prio = GetBattleSpritePriorityFlags(work->curY + work->offsetY) | SPRITE_FLAG_BLEND;
     depth = -0x1004 - ((work->curY + work->offsetY) >> 8) * 4;
 
     switch (work->state) {
@@ -263,7 +263,7 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
         break;
     default:
         if (work->curX + work->offsetX > work->x2) {
-            prio |= 1;
+            prio |= SPRITE_FLAG_HFLIP;
         }
 
         break;

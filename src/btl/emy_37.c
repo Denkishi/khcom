@@ -378,7 +378,7 @@ void task_emy_37_2(Emy37Work* work) {
             } else if (work->rotation == 0 && gBtlWork->scale == scaleY) {
                 sy = scaleY;
                 sx = sy;
-                flags |= 1;
+                flags |= SPRITE_FLAG_HFLIP;
             } else {
                 sx = -gBtlWork->scale;
                 sy = gBtlWork->scale;

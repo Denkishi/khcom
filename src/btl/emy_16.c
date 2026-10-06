@@ -312,7 +312,7 @@ void task_emy_16_b_2(Emy16bWork* work) {
             affine = NULL;
 
             if (!work->facingLeft) {
-                flags |= 1;
+                flags |= SPRITE_FLAG_HFLIP;
             }
         } else if (!work->facingLeft) {
             affine = AllocObjAffine(0, -scale, scale, TRUE);

@@ -228,7 +228,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
             flags = GetBattleSpritePriorityFlags(jf->body.y);
         } else {
             flags = GetBattleSpritePriorityFlags(jf->body.y);
-            flags |= 1;
+            flags |= SPRITE_FLAG_HFLIP;
         }
 
         WorldToScreen(&x, &y, jf->body.x, jf->body.y, jf->body.z);
@@ -1838,7 +1838,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
             flags = SPRITE_PRIORITY(1);
         } else {
             flags = SPRITE_PRIORITY(1);
-            flags |= 1;
+            flags |= SPRITE_FLAG_HFLIP;
         }
 
         WorldToScreen(&x, &y, work->x2, work->y2, work->z2);

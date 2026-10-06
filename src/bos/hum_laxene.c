@@ -28,6 +28,7 @@
 #include "battle_ids.h"
 #include "card_label_data.h"
 #include "enemy_ids.h"
+#include "obj.h"
 
 static const u32 sHumLaxeneStockMoves[2][3] = {
     { 36, 38, 38 },
@@ -952,7 +953,7 @@ void task_hum_laxene_knf_2(LaxeneKnfWork* work) {
     if (work->facingLeft) {
         attr = GetBattleSpritePriorityFlags(work->y);
     } else {
-        attr = GetBattleSpritePriorityFlags(work->y) | 1;
+        attr = GetBattleSpritePriorityFlags(work->y) | SPRITE_FLAG_HFLIP;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);

@@ -917,7 +917,7 @@ void EmyDraw(EmyWork* work) {
             } else if (gBtlWork->scale == Q_8_8(1)) {
                 sy = gBtlWork->scale;
                 sx = sy;
-                flags |= 1;
+                flags |= SPRITE_FLAG_HFLIP;
             } else {
                 sy = gBtlWork->scale;
                 sx = -sy;

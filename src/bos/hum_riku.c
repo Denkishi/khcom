@@ -197,7 +197,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* spawn) {
     } else if (spawn->scale == Q_8_8(1)) {
         sy = spawn->scale;
         sx = sy;
-        attr |= 1;
+        attr |= SPRITE_FLAG_HFLIP;
     } else {
         sx = -gBtlWork->scale;
         sy = gBtlWork->scale;

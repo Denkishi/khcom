@@ -4234,7 +4234,7 @@ void task_poo_piglet_2(PooPigletWork* work) {
         }
 
         ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-        flags = work->flipped ? 0x801 : 0x800;
+        flags = work->flipped ? (SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP) : SPRITE_PRIORITY(2);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, -0x1004 - (work->y >> 8) * 4);
         TaskPoolDraw(&work->tasks);
     }
@@ -4635,7 +4635,7 @@ void task_poo_rabbit_2(PooRabbitWork* work) {
         }
 
         ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-        flags = work->flipped ? 0x801 : 0x800;
+        flags = work->flipped ? (SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP) : SPRITE_PRIORITY(2);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, -0x1004 - (work->y >> 8) * 4);
         TaskPoolDraw(pool);
     }
@@ -4919,7 +4919,7 @@ void task_poo_tiggerroo_2(PooTiggerWork* work) {
         }
 
         ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-        flags = work->flipped ? 0x801 : 0x800;
+        flags = work->flipped ? (SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP) : SPRITE_PRIORITY(2);
         onCollider = work->onCollider;
 
         if (onCollider != 0) {
@@ -5096,7 +5096,7 @@ void task_poo_roo_2(PooRooWork* work) {
     x = (work->pos.x >> 8) - gPooScrollX;
     baseY = work->pos.y >> 8;
     y = baseY + (work->pos.z >> 8) - gPooScrollY;
-    flags = work->flipped ? 0x801 : 0x800;
+    flags = work->flipped ? (SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP) : SPRITE_PRIORITY(2);
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, -0x1006 - baseY * 4);
 
     if (work->state != POO_ROO_STATE_TRAPPED) {
@@ -7154,7 +7154,7 @@ u8 PooBflyPartDraw(PooBflyPart* part, void* pal) {
         return FALSE;
     }
 
-    flags = part->flipped ? 0x801 : 0x800;
+    flags = part->flipped ? (SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP) : SPRITE_PRIORITY(2);
     PooBflyPartSetAnimation(part);
     DrawSprite(x, y, part->gfx, part->tiles, pal, NULL, flags, -0x1004 - (part->y >> 8) * 4);
     return TRUE;

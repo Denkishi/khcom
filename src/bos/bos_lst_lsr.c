@@ -247,7 +247,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         affine = AllocObjAffine(0, Q_8_8(1) - work->timer * 8, work->timer * 16 + Q_8_8(1), TRUE);
         gfx = AnimGetGfx(&work->anim);
         DrawSprite(x1, y1, gfx, work->tiles, work->palette,
-                   affine, prio | 4, depth);
+                   affine, prio | SPRITE_FLAG_BLEND, depth);
         break;
     }
 }

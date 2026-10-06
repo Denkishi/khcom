@@ -415,7 +415,7 @@ void BosGaEntryDraw(GaWork* work, GaEntryWork* entry) {
     flags = GetBattleSpritePriorityFlags(entry->actor.y);
 
     if (work->flipped == TRUE) {
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     }
 
     if (StepHitFlash(&entry->actor)) {

@@ -3100,7 +3100,7 @@ void StaffRollRunScript(StaffRollWork* work) {
             break;
         case STAFF_ROLL_SCRIPT_OP_SET_DRAW_FLAGS:
             obj = StaffRollGetScriptObj(work);
-            EvtObjSetDrawFlags(obj, work->script[work->scriptPos + 4] | 0x400);
+            EvtObjSetDrawFlags(obj, work->script[work->scriptPos + 4] | SPRITE_PRIORITY(1));
             break;
         case STAFF_ROLL_SCRIPT_OP_SET_POS:
             obj = StaffRollGetScriptObj(work);

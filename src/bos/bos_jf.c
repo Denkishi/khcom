@@ -914,9 +914,9 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
     flags = GetBattleSpritePriorityFlags(sub->y);
 
     if (sub->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        flags &= 0xFFFE;
+        flags &= ~SPRITE_FLAG_HFLIP;
     } else {
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     }
 
     if (!gBtlWork->paused && (work->jf->flags & JF_FLAG_HURT) && (gFrameCounter & 1)) {

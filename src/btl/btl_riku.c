@@ -4708,7 +4708,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
 
             if (sy == Q_8_8(1)) {
                 sx = sy;
-                attr |= 1;
+                attr |= SPRITE_FLAG_HFLIP;
             } else {
                 sx = -sy;
             }

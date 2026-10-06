@@ -94,36 +94,36 @@ void BosBoogieApplyDiceFace(BoogieWork* work) {
     }
 }
 
-void SetBoogieAnimation(BoogieWork* work, s32 a, u16 b) {
-    if (work->animationIndex != a) {
-        work->animationIndex = a;
-        AnimChangeWithTables(&work->anim, sBosBoogieAnimDefs[a].animId, b, sBosBoogieAnimDefs[a].anims, sBosBoogieAnimDefs[a].gfxTable);
-        SetObjTileSource(work->tiles, sBosBoogieAnimDefs[a].tiles);
+void SetBoogieAnimation(BoogieWork* work, s32 index, u16 flags) {
+    if (work->animationIndex != index) {
+        work->animationIndex = index;
+        AnimChangeWithTables(&work->anim, sBosBoogieAnimDefs[index].animId, flags, sBosBoogieAnimDefs[index].anims, sBosBoogieAnimDefs[index].gfxTable);
+        SetObjTileSource(work->tiles, sBosBoogieAnimDefs[index].tiles);
     }
 }
 
-u8 ClampBoogiePosition(s32* a, s32* b) {
+u8 ClampBoogiePosition(s32* x, s32* y) {
     u8 r;
 
     r = 0;
 
-    if (*a < 0xA000) {
-        *a = 0xA000;
+    if (*x < 0xA000) {
+        *x = 0xA000;
         r = 1;
     }
 
-    if (*a > 0x15000) {
-        *a = 0x15000;
+    if (*x > 0x15000) {
+        *x = 0x15000;
         r = 1;
     }
 
-    if (*b < 0x22800) {
-        *b = 0x22800;
+    if (*y < 0x22800) {
+        *y = 0x22800;
         r = 1;
     }
 
-    if (*b > 0x22800) {
-        *b = 0x22800;
+    if (*y > 0x22800) {
+        *y = 0x22800;
         r = 1;
     }
 

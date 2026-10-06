@@ -37,31 +37,31 @@ const void* gBosJfMajinMapBlocks EWRAM_COMMON(4);
 u8 gUnk_0203B504[12] EWRAM_COMMON(4);
 u8 gBosJfMajinMapBuffer[0x800] EWRAM_COMMON(16);
 
-void BosJfMajinSetBgFrame(u8 a, u16 b, JfMajinWork* work) {
-    BosJfMajinCopyBgMap(a, work);
+void BosJfMajinSetBgFrame(u8 frame, u16 tileCount, JfMajinWork* work) {
+    BosJfMajinCopyBgMap(frame, work);
     SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
-    LoadBgTiles(1, gBosJfMajinFrameTiles[a], b * 32);
+    LoadBgTiles(1, gBosJfMajinFrameTiles[frame], tileCount * 32);
     work->jf->flags &= ~JF_FLAG_NEEDS_BG_CLIP;
 }
 
-void BosJfMajinCopyBgMap(u8 a, JfMajinWork* work) {
+void BosJfMajinCopyBgMap(u8 frame, JfMajinWork* work) {
     s16 n;
 
     if (work->jf->body.z < -0x8000) {
-        RequestDma3Copy(gBosJfMajinFrameMaps[a], gBosJfMajinMapBuffer, 0x800);
+        RequestDma3Copy(gBosJfMajinFrameMaps[frame], gBosJfMajinMapBuffer, 0x800);
     } else {
         n = ((work->jf->body.z >> 8) + 0x88) / 8 + work->extraClipRows;
 
         if (n > 0x20) {
             RequestDma3Clear(gBosJfMajinMapBuffer, 0x800);
         } else {
-            RequestDma3Copy(gBosJfMajinFrameMaps[a], gBosJfMajinMapBuffer, (0x20 - n) * 64);
+            RequestDma3Copy(gBosJfMajinFrameMaps[frame], gBosJfMajinMapBuffer, (0x20 - n) * 64);
             RequestDma3Clear(gBosJfMajinMapBuffer + (0x20 - n) * 64, n * 64);
         }
     }
 }
 
-void BosJfMajinUpdateBgClip(u8 a, JfMajinWork* work) {
+void BosJfMajinUpdateBgClip(u8 frame, JfMajinWork* work) {
     s16 n;
 
     if (work->jf->body.z >= -0x8000) {
@@ -70,7 +70,7 @@ void BosJfMajinUpdateBgClip(u8 a, JfMajinWork* work) {
         if (n > 0x20) {
             RequestDma3Clear(gBosJfMajinMapBuffer, 0x800);
         } else {
-            RequestDma3Copy(gBosJfMajinFrameMaps[a], gBosJfMajinMapBuffer, (0x20 - n) * 64);
+            RequestDma3Copy(gBosJfMajinFrameMaps[frame], gBosJfMajinMapBuffer, (0x20 - n) * 64);
             RequestDma3Clear(gBosJfMajinMapBuffer + (0x20 - n) * 64, n * 64);
         }
 
@@ -83,8 +83,8 @@ void BosJfMajinUpdateBgClip(u8 a, JfMajinWork* work) {
     (out_y) = (actor)->y; \
     (out_z) = (actor)->z; \
 } while (0)
-void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
-    JfWork* arg = p;
+void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
+    JfWork* arg = jf;
     s32 x;
     union {
         s32 coordinate;
@@ -1183,22 +1183,22 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
     }
 }
 
-u8 BosJfStepPillarLevel(u16* p, s16 b, u8 c, u8 d) {
-    if ((s16)*p == b) {
+u8 BosJfStepPillarLevel(u16* level, s16 target, u8 actorPillar, u8 pillar) {
+    if ((s16)*level == target) {
         return 1;
     }
 
-    if ((s16)*p > b) {
-        *p = *p - 1;
+    if ((s16)*level > target) {
+        *level = *level - 1;
     } else {
         BtlObj* q;
         s32 v;
 
-        *p = *p + 1;
+        *level = *level + 1;
 
-        if (c == d) {
+        if (actorPillar == pillar) {
             q = gBtlWork->actor;
-            v = -(((s16)*p + 1) << 11);
+            v = -(((s16)*level + 1) << 11);
 
             if (q->z >= v) {
                 q->z = v;
@@ -1788,14 +1788,14 @@ void task_bos_jf_rock_3(JfRockWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 BosJfRockTestPillars(s32 a, s32 b, s32 c) {
+u8 BosJfRockTestPillars(s32 x, s32 y, s32 z) {
     s32 t0 = -((gBosJfLeftPillarLevel + 1) << 11);
     s32 t1 = -((gBosJfMiddlePillarLevel + 1) << 11);
     s32 t2 = -((gBosJfRightPillarLevel + 1) << 11);
-    s32 hi = a + 0x1C00;
-    s32 lo = a - 0x1C00;
-    s32 zh = c + 0x1C00;
-    s32 zl = c - 0x1C00;
+    s32 hi = x + 0x1C00;
+    s32 lo = x - 0x1C00;
+    s32 zh = z + 0x1C00;
+    s32 zl = z - 0x1C00;
 
     if (zh >= t0 && hi > 0x1B200 && lo < 0x1EA00) {
         return 1;

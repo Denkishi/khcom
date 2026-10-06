@@ -43,9 +43,9 @@ void BosDsdSetBgMap(u8 index) {
     SetBgMapBlocks(1, gBosDsdFrameMaps[index], 2, 2);
 }
 
-void BosDsdSetBgFrame(u8 index, u16 a) {
+void BosDsdSetBgFrame(u8 index, u16 tileCount) {
     SetBgMapBlocks(1, gBosDsdFrameMaps[index], 2, 2);
-    LoadBgTiles(1, gBosDsdFrameTiles[index], a * 32);
+    LoadBgTiles(1, gBosDsdFrameTiles[index], tileCount * 32);
 }
 
 void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {

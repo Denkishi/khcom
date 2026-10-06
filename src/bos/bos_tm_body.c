@@ -99,26 +99,26 @@ void BosTmBodyResetTimers(TmBodyWork* work) {
     work->tm->stateTimer = 0;
 }
 
-void BosTmBodyInitEnemy(BtlObj* p, s16 a, s16 b, s16 c) {
-    p->x = a << 8;
-    p->y = b << 8;
-    p->z = (c << 8) + 0x1900;
-    InitEnemyBtlObj(p, &sBosTmEmyKind, p->x, p->y, p->z);
-    p->radiusX = 14;
-    p->radiusY = 40;
-    p->height = 28;
-    p->flags |= 0x400;
-    p->flags |= BTLOBJ_FLAG_FACING_LEFT;
+void BosTmBodyInitEnemy(BtlObj* obj, s16 x, s16 y, s16 z) {
+    obj->x = x << 8;
+    obj->y = y << 8;
+    obj->z = (z << 8) + 0x1900;
+    InitEnemyBtlObj(obj, &sBosTmEmyKind, obj->x, obj->y, obj->z);
+    obj->radiusX = 14;
+    obj->radiusY = 40;
+    obj->height = 28;
+    obj->flags |= 0x400;
+    obj->flags |= BTLOBJ_FLAG_FACING_LEFT;
 }
 
-void BosTmBodySetObjPos(BtlObj* p, s16 a, s16 b, s16 c) {
-    p->x = a << 8;
-    p->y = b << 8;
-    p->z = c << 8;
+void BosTmBodySetObjPos(BtlObj* obj, s16 x, s16 y, s16 z) {
+    obj->x = x << 8;
+    obj->y = y << 8;
+    obj->z = z << 8;
 }
 
-void BosTmBodyReleaseEnemy(BtlObj* a) {
-    ReleaseEnemyBtlObj(a);
+void BosTmBodyReleaseEnemy(BtlObj* obj) {
+    ReleaseEnemyBtlObj(obj);
 }
 
 void BosTmBodyUpdateAngle(TmBodyWork* work) {
@@ -235,32 +235,32 @@ void BosTmBodySetBreakPose(TmBodyWork* work) {
     work->body4.z = work->tm->z2 - 0x1C00;
 }
 
-void BosTmBodyApplyThrowStep(TmBodyWork* work, s16 a) {
+void BosTmBodyApplyThrowStep(TmBodyWork* work, s16 step) {
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
-        work->angle += sBosTmBodyThrowSteps[a].dAngle;
-        work->angle2 += sBosTmBodyThrowSteps[a].dAngle2;
-        work->body.x += sBosTmBodyThrowSteps[a].dx << 8;
-        work->body2.x += sBosTmBodyThrowSteps[a].dx2 << 8;
-        work->body3.x += sBosTmBodyThrowSteps[a].dx3 << 8;
-        work->body4.x += sBosTmBodyThrowSteps[a].dx4 << 8;
-        work->tm->x2 += sBosTmBodyThrowSteps[a].dx3 << 8;
+        work->angle += sBosTmBodyThrowSteps[step].dAngle;
+        work->angle2 += sBosTmBodyThrowSteps[step].dAngle2;
+        work->body.x += sBosTmBodyThrowSteps[step].dx << 8;
+        work->body2.x += sBosTmBodyThrowSteps[step].dx2 << 8;
+        work->body3.x += sBosTmBodyThrowSteps[step].dx3 << 8;
+        work->body4.x += sBosTmBodyThrowSteps[step].dx4 << 8;
+        work->tm->x2 += sBosTmBodyThrowSteps[step].dx3 << 8;
     } else {
-        work->angle += sBosTmBodyThrowSteps[a].dAngle;
-        work->angle2 += sBosTmBodyThrowSteps[a].dAngle2;
-        work->body.x -= sBosTmBodyThrowSteps[a].dx << 8;
-        work->body2.x -= sBosTmBodyThrowSteps[a].dx2 << 8;
-        work->body3.x -= sBosTmBodyThrowSteps[a].dx3 << 8;
-        work->body4.x -= sBosTmBodyThrowSteps[a].dx4 << 8;
-        work->tm->x2 -= sBosTmBodyThrowSteps[a].dx3 << 8;
+        work->angle += sBosTmBodyThrowSteps[step].dAngle;
+        work->angle2 += sBosTmBodyThrowSteps[step].dAngle2;
+        work->body.x -= sBosTmBodyThrowSteps[step].dx << 8;
+        work->body2.x -= sBosTmBodyThrowSteps[step].dx2 << 8;
+        work->body3.x -= sBosTmBodyThrowSteps[step].dx3 << 8;
+        work->body4.x -= sBosTmBodyThrowSteps[step].dx4 << 8;
+        work->tm->x2 -= sBosTmBodyThrowSteps[step].dx3 << 8;
     }
 
-    work->body.z += sBosTmBodyThrowSteps[a].dz << 8;
-    work->body2.z += sBosTmBodyThrowSteps[a].dz2 << 8;
-    work->body3.z += sBosTmBodyThrowSteps[a].dz3 << 8;
-    work->body4.z += sBosTmBodyThrowSteps[a].dz4 << 8;
-    work->tm->z2 += sBosTmBodyThrowSteps[a].dz2 << 8;
-    work->gfx3 = gBosTmBodyPart2Frames[sBosTmBodyThrowSteps[a].gfx3Index];
-    work->gfx4 = gBosTmBodyPart3Frames[sBosTmBodyThrowSteps[a].gfx4Index];
+    work->body.z += sBosTmBodyThrowSteps[step].dz << 8;
+    work->body2.z += sBosTmBodyThrowSteps[step].dz2 << 8;
+    work->body3.z += sBosTmBodyThrowSteps[step].dz3 << 8;
+    work->body4.z += sBosTmBodyThrowSteps[step].dz4 << 8;
+    work->tm->z2 += sBosTmBodyThrowSteps[step].dz2 << 8;
+    work->gfx3 = gBosTmBodyPart2Frames[sBosTmBodyThrowSteps[step].gfx3Index];
+    work->gfx4 = gBosTmBodyPart3Frames[sBosTmBodyThrowSteps[step].gfx4Index];
 }
 
 void BosTmBodySetWalkPose(TmBodyWork* work) {
@@ -377,41 +377,41 @@ void BosTmBodyUpdateRecoil(TmBodyWork* work) {
     }
 }
 
-void BosTmBodyApplySpinStep(TmBodyWork* work, s16 a) {
+void BosTmBodyApplySpinStep(TmBodyWork* work, s16 step) {
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
-        work->angle += sBosTmBodySpinSteps[a].dAngle;
-        work->angle2 += sBosTmBodySpinSteps[a].dAngle2;
-        work->body.x += sBosTmBodySpinSteps[a].dx << 8;
-        work->body2.x += sBosTmBodySpinSteps[a].dx2 << 8;
-        work->body3.x += sBosTmBodySpinSteps[a].dx3 << 8;
-        work->body4.x += sBosTmBodySpinSteps[a].dx4 << 8;
-        work->tm->x2 += sBosTmBodySpinSteps[a].dx3 << 8;
+        work->angle += sBosTmBodySpinSteps[step].dAngle;
+        work->angle2 += sBosTmBodySpinSteps[step].dAngle2;
+        work->body.x += sBosTmBodySpinSteps[step].dx << 8;
+        work->body2.x += sBosTmBodySpinSteps[step].dx2 << 8;
+        work->body3.x += sBosTmBodySpinSteps[step].dx3 << 8;
+        work->body4.x += sBosTmBodySpinSteps[step].dx4 << 8;
+        work->tm->x2 += sBosTmBodySpinSteps[step].dx3 << 8;
     } else {
-        work->angle += sBosTmBodySpinSteps[a].dAngle;
-        work->angle2 += sBosTmBodySpinSteps[a].dAngle2;
-        work->body.x -= sBosTmBodySpinSteps[a].dx << 8;
-        work->body2.x -= sBosTmBodySpinSteps[a].dx2 << 8;
-        work->body3.x -= sBosTmBodySpinSteps[a].dx3 << 8;
-        work->body4.x -= sBosTmBodySpinSteps[a].dx4 << 8;
-        work->tm->x2 -= sBosTmBodySpinSteps[a].dx3 << 8;
+        work->angle += sBosTmBodySpinSteps[step].dAngle;
+        work->angle2 += sBosTmBodySpinSteps[step].dAngle2;
+        work->body.x -= sBosTmBodySpinSteps[step].dx << 8;
+        work->body2.x -= sBosTmBodySpinSteps[step].dx2 << 8;
+        work->body3.x -= sBosTmBodySpinSteps[step].dx3 << 8;
+        work->body4.x -= sBosTmBodySpinSteps[step].dx4 << 8;
+        work->tm->x2 -= sBosTmBodySpinSteps[step].dx3 << 8;
     }
 
-    work->body.z += sBosTmBodySpinSteps[a].dz << 8;
-    work->body2.z += sBosTmBodySpinSteps[a].dz2 << 8;
-    work->body3.z += sBosTmBodySpinSteps[a].dz3 << 8;
-    work->body4.z += sBosTmBodySpinSteps[a].dz4 << 8;
-    work->tm->z2 += sBosTmBodySpinSteps[a].dz2 << 8;
-    work->gfx3 = gBosTmBodyPart2Frames[sBosTmBodySpinSteps[a].gfx3Index];
-    work->gfx4 = gBosTmBodyPart3Frames[sBosTmBodySpinSteps[a].gfx4Index];
+    work->body.z += sBosTmBodySpinSteps[step].dz << 8;
+    work->body2.z += sBosTmBodySpinSteps[step].dz2 << 8;
+    work->body3.z += sBosTmBodySpinSteps[step].dz3 << 8;
+    work->body4.z += sBosTmBodySpinSteps[step].dz4 << 8;
+    work->tm->z2 += sBosTmBodySpinSteps[step].dz2 << 8;
+    work->gfx3 = gBosTmBodyPart2Frames[sBosTmBodySpinSteps[step].gfx3Index];
+    work->gfx4 = gBosTmBodyPart3Frames[sBosTmBodySpinSteps[step].gfx4Index];
 }
 
-s32 GetAbsoluteDifference(s32 a, s32 b) {
-    if (a > b) {
-        return a - b;
+s32 GetAbsoluteDifference(s32 x0, s32 x1) {
+    if (x0 > x1) {
+        return x0 - x1;
     }
 
-    if (a < b) {
-        return b - a;
+    if (x0 < x1) {
+        return x1 - x0;
     }
 
     return 0;
@@ -566,20 +566,20 @@ void BosTmBodyChooseAction(TmBodyWork* work) {
     }
 }
 
-void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* work) {
+void BosTmBodyUpdateReaction(BtlObj* obj, TmBodyWork* work) {
     u16 t;
 
-    if (a->hp <= 0) {
+    if (obj->hp <= 0) {
         return;
     }
 
     if (work->tm->baseX < 0x8E00 || work->tm->baseX > 0x16F00) {
-        a->flags |= BTLOBJ_FLAG_INTANGIBLE;
+        obj->flags |= BTLOBJ_FLAG_INTANGIBLE;
     } else {
-        a->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
+        obj->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
     }
 
-    switch (UpdateBtlObjReaction(a)) {
+    switch (UpdateBtlObjReaction(obj)) {
     case BTL_REACTION_CARD_ACTION:
         BosTmBodyResetTimers(work);
         BosTmBodyRollBossCard(work);
@@ -593,7 +593,7 @@ void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* work) {
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
-        work->hp = a->hp;
+        work->hp = obj->hp;
         work->tm->flags |= TM_FLAG_HURT;
         work->tm->hitCount++;
 
@@ -609,7 +609,7 @@ void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* work) {
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        BeginBossDefeat(a);
+        BeginBossDefeat(obj);
         work->tm->step = 0;
         work->tm->state = 13;
         break;
@@ -621,7 +621,7 @@ void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* work) {
         if (work->tm->hurtTimer <= 0) {
             work->tm->hitCount = 0;
             work->tm->flags &= ~TM_FLAG_HURT;
-            ClearBtlObjActionFlags(a);
+            ClearBtlObjActionFlags(obj);
 
             if (work->tm->flags & TM_FLAG_HURT_NO_RECOIL) {
                 work->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
@@ -640,7 +640,7 @@ void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* work) {
         }
     }
 
-    work->prevHp = a->hp;
+    work->prevHp = obj->hp;
 }
 
 void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {

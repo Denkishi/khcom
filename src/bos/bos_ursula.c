@@ -846,34 +846,34 @@ void task_bos_ursula_border_3(UrsulaBorderWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* work) {
+void BosUrsulaTakoGetPosition(s32* x, s32* y, s32* z, UrsulaTakoWork* work) {
     s32* p;
     s32 t;
 
-    *a = gBtlWork->bossX + work->offsetX;
+    *x = gBtlWork->bossX + work->offsetX;
 
     if (work->isLeft != 0) {
         if (BosUrsulaIsFacingLeft() != 0) {
-            *a += -0x2200;
+            *x += -0x2200;
         } else {
-            *a += -0x3600;
+            *x += -0x3600;
         }
     } else {
         if (BosUrsulaIsFacingLeft() != 0) {
-            *a += 0x3600;
+            *x += 0x3600;
         } else {
-            *a += 0x2200;
+            *x += 0x2200;
         }
     }
 
-    *b = gBtlWork->bossY;
+    *y = gBtlWork->bossY;
     p = &gBtlWork->bossZ;
     t = work->offsetZ + 0x5000;
-    *c = *p + t;
+    *z = *p + t;
 }
 
-s32 BosUrsulaGetTakoPlatformRadius(u8 a) {
-    if (a == BosUrsulaIsFacingLeft()) {
+s32 BosUrsulaGetTakoPlatformRadius(u8 isLeft) {
+    if (isLeft == BosUrsulaIsFacingLeft()) {
         return 12;
     }
 
@@ -1160,30 +1160,30 @@ u8 BosUrsulaTakoIsStoodOn(UrsulaTakoWork* work) {
     return 0;
 }
 
-void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* work) {
+void BosUrsulaBacktakoGetPosition(s32* x, s32* y, s32* z, UrsulaBacktakoWork* work) {
     s32* p;
     s32 t;
 
-    *a = gBtlWork->bossX + work->offsetX;
+    *x = gBtlWork->bossX + work->offsetX;
 
     if (work->isLeft != 0) {
         if (BosUrsulaIsFacingLeft() != 0) {
-            *a += -0x4A00;
+            *x += -0x4A00;
         } else {
-            *a += -0x5E00;
+            *x += -0x5E00;
         }
     } else {
         if (BosUrsulaIsFacingLeft() != 0) {
-            *a += 0x5E00;
+            *x += 0x5E00;
         } else {
-            *a += 0x4A00;
+            *x += 0x4A00;
         }
     }
 
-    *b = gBtlWork->bossY + 0x800;
+    *y = gBtlWork->bossY + 0x800;
     p = &gBtlWork->bossZ;
     t = work->offsetZ + 0x5000;
-    *c = *p + t;
+    *z = *p + t;
 }
 
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
@@ -1307,7 +1307,7 @@ void task_bos_ursula_mapanime_3(UrsulaMapanimeWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void BosUrsulaStartAttack(s32 a) {
+void BosUrsulaStartAttack(s32 attack) {
     if (IsTaskActive(sUrsulaMapanimeWork->task)) {
         if (strcmp(GetTaskName(sUrsulaMapanimeWork->task), "task_bos_ursula_bubble") == 0) {
             BosUrsulaPopBubbles(sUrsulaMapanimeWork->task->work);
@@ -1316,12 +1316,12 @@ void BosUrsulaStartAttack(s32 a) {
         }
     }
 
-    if (a == 3) {
+    if (attack == 3) {
         sUrsulaMapanimeWork->task = TaskCreate(&sUrsulaMapanimeWork->tasks, &gTaskDescBosUrsulaThunder, NULL);
-    } else if (sUrsulaMapanimeWork->attack != a) {
-        sUrsulaMapanimeWork->attack = a;
+    } else if (sUrsulaMapanimeWork->attack != attack) {
+        sUrsulaMapanimeWork->attack = attack;
 
-        if (a == 0) {
+        if (attack == 0) {
             BosMapanimeInit(&sUrsulaMapanimeWork->anim, &sBosUrsulaMapanimeRecover);
             sUrsulaMapanimeWork->attackSpawned = 1;
         } else {

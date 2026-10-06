@@ -61,21 +61,21 @@ void BosPcFldSetPaletteCycle(Task* task, u8 v) {
     work->paletteCycle = v;
 }
 
-void BosPcFldEnableObject(Task* task, u8 a) {
+void BosPcFldEnableObject(Task* task, u8 on) {
     PcFldWork* work;
     ObjPalette* pal;
 
     work = task->work;
 
-    if (a == 1) {
-        a = 0;
+    if (on == 1) {
+        on = 0;
     } else {
-        a = 1;
+        on = 1;
     }
 
-    ColliderSetDisabled(&work->collider, a);
+    ColliderSetDisabled(&work->collider, on);
 
-    if (!a) {
+    if (!on) {
         if (work->tiles == NULL) {
             work->tiles = LoadObjTiles(gBosPcFldTiles, 0x200);
         }
@@ -95,9 +95,9 @@ void BosPcFldResetShake() {
     sBosPcFldShakeOffset = 0;
 }
 
-void BosPcFldStartShake(s16 a) {
+void BosPcFldStartShake(s16 pattern) {
     sBosPcFldShakeActive = 1;
-    sBosPcFldShakePattern = a;
+    sBosPcFldShakePattern = pattern;
     sBosPcFldShakeStep = 0;
     sBosPcFldShakeOffset = 0;
 }

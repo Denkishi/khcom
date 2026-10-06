@@ -101,12 +101,12 @@ void BosLstAdvanceEventStep(Task* task) {
     work->eventStep = 1;
 }
 
-void BosLstSetMode(BosLstWork* work, u16 a, u16 b) {
+void BosLstSetMode(BosLstWork* work, u16 moveMode, u16 attackKind) {
     u16 zero;
 
     zero = 0;
-    work->moveMode = a;
-    work->attackKind = b;
+    work->moveMode = moveMode;
+    work->attackKind = attackKind;
     work->cardRequests = zero;
     work->breakCount = zero;
 }
@@ -128,7 +128,7 @@ void BosLstDestroyTasks(BosLstWork* work) {
     }
 }
 
-u8 BosLstSpawnFal(BosLstWork* work, s32 a) {
+u8 BosLstSpawnFal(BosLstWork* work, s32 kind) {
     LstFalArg s;
     u8 r;
     TaskPool* pool;
@@ -144,14 +144,14 @@ u8 BosLstSpawnFal(BosLstWork* work, s32 a) {
     r = 0;
 
     if (!work->hidden) {
-        s.kind = a;
+        s.kind = kind;
         s.facing = work->facing;
         s.falCount = &work->falCount;
         s.x = work->x;
         s.y = work->y + 0x400;
         s.z = work->z - 0x1400;
 
-        switch (a) {
+        switch (kind) {
         default:
             s.x += work->facing << 12;
             d1 = (GetRandom() % 21 << 8) + 0x800;
@@ -187,11 +187,11 @@ u8 BosLstSpawnFal(BosLstWork* work, s32 a) {
     return r;
 }
 
-void BosLstSetAnim(BosLstWork* work, u16 a, u16 b, u8 c) {
+void BosLstSetAnim(BosLstWork* work, u16 animId, u16 flags, u8 change) {
     u16 id;
     u16 v;
 
-    id = a;
+    id = animId;
     v = id * 2;
 
     if (work->facing < 0) {
@@ -202,35 +202,35 @@ void BosLstSetAnim(BosLstWork* work, u16 a, u16 b, u8 c) {
         v ^= 1;
     }
 
-    switch (sBosLstAnimSheets[a]) {
+    switch (sBosLstAnimSheets[animId]) {
     case 0:
         SetObjTileSource(work->tiles, gBosLstMarluxiaTiles);
-        AnimChangeWithTables(&work->anim, v, b, gBosLstMarluxiaAnims, gBosLstMarluxiaFrames);
+        AnimChangeWithTables(&work->anim, v, flags, gBosLstMarluxiaAnims, gBosLstMarluxiaFrames);
         break;
     case 1:
         v -= 14;
         SetObjTileSource(work->tiles, gBosLstMarluxiaDashTiles);
-        AnimChangeWithTables(&work->anim, v, b, gBosLstMarluxiaDashAnims, gBosLstMarluxiaDashFrames);
+        AnimChangeWithTables(&work->anim, v, flags, gBosLstMarluxiaDashAnims, gBosLstMarluxiaDashFrames);
         break;
     }
 
-    if (c == 1) {
-        AnimChange(&work->anim, v, b);
+    if (change == 1) {
+        AnimChange(&work->anim, v, flags);
     } else {
         AnimReset(&work->anim);
-        AnimStart(&work->anim, v, b);
+        AnimStart(&work->anim, v, flags);
     }
 
     work->animId = id;
-    work->animFlags = b;
+    work->animFlags = flags;
     work->animFacing = work->facing;
 }
 
-void BosLstSetFacing(BosLstWork* work, s16 a) {
+void BosLstSetFacing(BosLstWork* work, s16 facing) {
     u8 f;
 
-    if (work->facing != a) {
-        work->facing = a;
+    if (work->facing != facing) {
+        work->facing = facing;
         BosLstSetAnim(work, work->animId, work->animFlags, 1);
         f = 1;
 
@@ -266,7 +266,7 @@ s16 BosLstFindActiveSub(BosLstWork* work) {
     return r;
 }
 
-u8 BosLstSetSubAnim(BosLstWork* work, u16 a) {
+u8 BosLstSetSubAnim(BosLstWork* work, u16 animId) {
     s16 i;
     u8 r;
 
@@ -276,7 +276,7 @@ u8 BosLstSetSubAnim(BosLstWork* work, u16 a) {
         work->sub[0].animId = 2;
         work->sub[1].animId = 2;
     } else {
-        if (a == 0) {
+        if (animId == 0) {
             i = 0;
 
             if (work->sub[i].defeated == 1) {
@@ -297,7 +297,7 @@ u8 BosLstSetSubAnim(BosLstWork* work, u16 a) {
             work->sub[i].restartAnim = 1;
         } else {
             i = BosLstFindActiveSub(work);
-            work->sub[i].animId = a;
+            work->sub[i].animId = animId;
             i = i ^ 1;
 
             if (work->sub[i].defeated == 1) {
@@ -486,28 +486,28 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     g->bossPriorityOffset = -16;
 }
 
-s32 BosLstApproachValue(s32 a, s32 b, s32 c, s32 d, s32 e) {
-    if (c == 0) {
-        c = Sqrt8((abs(a - b) << 8) / 768);
+s32 BosLstApproachValue(s32 value, s32 target, s32 speed, s32 minSpeed, s32 maxSpeed) {
+    if (speed == 0) {
+        speed = Sqrt8((abs(value - target) << 8) / 768);
 
-        if (c < d) {
-            c = d;
+        if (speed < minSpeed) {
+            speed = minSpeed;
         }
 
-        if (c > e) {
-            c = e;
+        if (speed > maxSpeed) {
+            speed = maxSpeed;
         }
     }
 
-    if (abs(a - b) < c) {
-        a = b;
-    } else if (a < b) {
-        a += c;
+    if (abs(value - target) < speed) {
+        value = target;
+    } else if (value < target) {
+        value += speed;
     } else {
-        a -= c;
+        value -= speed;
     }
 
-    return a;
+    return value;
 }
 
 void BosLstMoveMode0(BosLstWork* work) {
@@ -867,7 +867,7 @@ void BosLstHoverBits(BosLstWork* work) {
     }
 }
 
-u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 a) {
+u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 shots) {
     s32 i;
     u8 r;
 
@@ -876,13 +876,13 @@ u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 a) {
     if (idx < 0) {
         for (i = 0; i < work->lstTaskCount; i++) {
             if (BosLstBitIsAlive(work->lstTasks[i]) == 1) {
-                BosLstBitStartFiring(work->lstTasks[i], a);
+                BosLstBitStartFiring(work->lstTasks[i], shots);
                 r = 1;
             }
         }
     } else if (idx < work->lstTaskCount) {
         if (BosLstBitIsAlive(work->lstTasks[idx]) == 1) {
-            BosLstBitStartFiring(work->lstTasks[idx], a);
+            BosLstBitStartFiring(work->lstTasks[idx], shots);
             r = 1;
         }
     }
@@ -2213,30 +2213,30 @@ u8 BosLstUpdateEvent(BosLstWork* work) {
     return 1;
 }
 
-void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
+void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
     LstSnpArg s;
     BtlObj* obj;
     u8 f;
 
-    obj = &p->body;
+    obj = &sub->body;
 
-    if (p->restartAnim == 1) {
-        p->anim.animId = 0xFFFF;
-        p->curAnimId = -1;
-        p->restartAnim = 0;
+    if (sub->restartAnim == 1) {
+        sub->anim.animId = 0xFFFF;
+        sub->curAnimId = -1;
+        sub->restartAnim = 0;
     }
 
-    if (p->animId == p->curAnimId) {
-        switch (p->animId) {
+    if (sub->animId == sub->curAnimId) {
+        switch (sub->animId) {
         case 3:
         case 4:
             break;
         default:
-            if (AnimIsFinished(&p->anim) == 1) {
-                if (p->defeated == 1) {
-                    p->animId = 2;
+            if (AnimIsFinished(&sub->anim) == 1) {
+                if (sub->defeated == 1) {
+                    sub->animId = 2;
                 } else {
-                    p->animId = 0;
+                    sub->animId = 0;
                 }
             }
 
@@ -2246,7 +2246,7 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
 
     f = 1;
 
-    switch (p->animId) {
+    switch (sub->animId) {
     case 1:
     case 3:
     case 4:
@@ -2256,23 +2256,23 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
     }
 
     if (work->facing > 0) {
-        if (p->unk_001 == 1) {
-            AnimChangeWithTables(&p->anim, p->animId * 2, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
+        if (sub->unk_001 == 1) {
+            AnimChangeWithTables(&sub->anim, sub->animId * 2, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
         } else {
-            AnimChangeWithTables(&p->anim, p->animId * 2, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
+            AnimChangeWithTables(&sub->anim, sub->animId * 2, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
         }
     } else {
-        if (p->unk_001 == 1) {
-            AnimChangeWithTables(&p->anim, p->animId * 2 + 1, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
+        if (sub->unk_001 == 1) {
+            AnimChangeWithTables(&sub->anim, sub->animId * 2 + 1, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
         } else {
-            AnimChangeWithTables(&p->anim, p->animId * 2 + 1, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
+            AnimChangeWithTables(&sub->anim, sub->animId * 2 + 1, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
         }
     }
 
-    p->curAnimId = p->animId;
-    AnimUpdate(&p->anim);
+    sub->curAnimId = sub->animId;
+    AnimUpdate(&sub->anim);
 
-    switch (p->animId) {
+    switch (sub->animId) {
     default:
         SetBtlObjUnhittable(obj, 1);
         break;
@@ -2286,52 +2286,52 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
 
     switch (UpdateBtlObjReaction(obj)) {
     case BTL_REACTION_CARD_ACTION:
-        p->state = 1;
-        p->timer = 0;
+        sub->state = 1;
+        sub->timer = 0;
         break;
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
         work->cardDelay = work->cardDelay * 3;
         work->cardDelay = work->cardDelay / 4;
-        p->hurtTimer = 20;
+        sub->hurtTimer = 20;
         work->hurtTimer = 20;
 
-        if (p->state == 5) {
+        if (sub->state == 5) {
             ClearBtlObjActionFlags(obj);
         } else {
-            p->state = 3;
-            p->timer = 0;
+            sub->state = 3;
+            sub->timer = 0;
         }
 
         break;
     case BTL_REACTION_DEFEATED:
-        p->state = 4;
-        p->timer = 0;
-        p->restartAnim = 1;
-        p->animId = 6;
-        s.x = p->body.x;
-        s.y = p->body.y;
-        s.z = p->body.z;
+        sub->state = 4;
+        sub->timer = 0;
+        sub->restartAnim = 1;
+        sub->animId = 6;
+        s.x = sub->body.x;
+        s.y = sub->body.y;
+        s.z = sub->body.z;
         s.facing = work->facing;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstSnp, &s);
         break;
     case BTL_REACTION_CARD_BROKEN:
-        p->state = 2;
-        p->timer = 0;
+        sub->state = 2;
+        sub->timer = 0;
         break;
     }
 
-    switch (p->state) {
+    switch (sub->state) {
     case 0:
         break;
     case 3:
-        p->timer += 1;
+        sub->timer += 1;
 
-        if (p->timer > 20) {
+        if (sub->timer > 20) {
             ClearBtlObjActionFlags(obj);
-            p->state = 0;
-            p->timer = 0;
+            sub->state = 0;
+            sub->timer = 0;
         }
 
         break;
@@ -2339,12 +2339,12 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
     case 2:
     case 5:
         ClearBtlObjActionFlags(obj);
-        p->state = 0;
-        p->timer = 0;
+        sub->state = 0;
+        sub->timer = 0;
         break;
     case 4:
-        p->defeated = 1;
-        p->hurtTimer = 0;
+        sub->defeated = 1;
+        sub->hurtTimer = 0;
         break;
     }
 }

@@ -33,7 +33,7 @@ typedef struct UrsulaWork {
     u8 takoRecoverPending;
 } UrsulaWork;
 
-void BosUrsulaStartAttack(s32 a);
+void BosUrsulaStartAttack(s32 attack);
 u8 BosUrsulaIsAttacking();
 u8 BosUrsulaIsCharging();
 u16 BosUrsulaGetCardInterval();
@@ -116,7 +116,7 @@ u8 BosUrsulaIsGimmickStarting();
 u8 BosUrsulaIsGimmickInProgress();
 u32 BosUrsulaGetHpPhase();
 u8 BosUrsulaIsDefeated();
-s32 BosUrsulaGetTakoPlatformRadius(u8 a);
+s32 BosUrsulaGetTakoPlatformRadius(u8 isLeft);
 void task_bos_ursula_border_0(UrsulaBorderWork* work);
 void task_bos_ursula_border_3(UrsulaBorderWork* work);
 u8 task_bos_ursula_backtako_1(UrsulaBacktakoWork* work);
@@ -134,8 +134,8 @@ void task_bos_ursula_0(UrsulaWork* work);
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg);
 void task_bos_ursula_border_2(UrsulaBorderWork* work);
 void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work);
-void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* work);
-void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* work);
+void BosUrsulaTakoGetPosition(s32* x, s32* y, s32* z, UrsulaTakoWork* work);
+void BosUrsulaBacktakoGetPosition(s32* x, s32* y, s32* z, UrsulaBacktakoWork* work);
 s32 BosUrsulaChooseAttackPhase2(UrsulaWork* work);
 u8 task_bos_ursula_1(UrsulaWork* work);
 

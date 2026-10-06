@@ -94,23 +94,23 @@ TaskDesc gTaskDescBosGa = {
 
 static GaWork* sGaWork;
 
-u16 BosGaAtan(s32 a) {
+u16 BosGaAtan(s32 ratio) {
     u16 i;
 
-    if (a == 0x100) {
+    if (ratio == 0x100) {
         return 0x20;
     }
 
     i = 0;
 
-    if (a >= sBosGaTanTable[0]) {
+    if (ratio >= sBosGaTanTable[0]) {
         do {
             i++;
 
             if (i > 0x3F) {
                 break;
             }
-        } while (a >= sBosGaTanTable[i]);
+        } while (ratio >= sBosGaTanTable[i]);
     }
 
     return i;
@@ -294,7 +294,7 @@ void BosGaUpdateFacing(GaWork* work) {
     }
 }
 
-void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
+void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
     GaEntryWork* e;
     void* p;
 
@@ -314,7 +314,7 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     e->unk_138 = 0;
     e->orbitAngle = 0;
 
-    if (c != 0) {
+    if (assemble != 0) {
         if (i != 1) {
             e->baseX -= (GetRandom() & 0x1F) << 8;
             e->baseY -= (GetRandom() & 0x1F) << 8;
@@ -375,7 +375,7 @@ void BosGaReleaseBody() {
     BosGaEntryRelease(&sGaWork->entries[0]);
 }
 
-void BosGaEntryDraw(GaWork* work, GaEntryWork* e) {
+void BosGaEntryDraw(GaWork* work, GaEntryWork* entry) {
     ObjAffine* f;
     u16 g;
     void* pal;
@@ -383,34 +383,34 @@ void BosGaEntryDraw(GaWork* work, GaEntryWork* e) {
     u16 sy;
     GaEntryWork* q;
 
-    if (e->flags & GA_ENTRY_FLAG_RELEASED) {
+    if (entry->flags & GA_ENTRY_FLAG_RELEASED) {
         return;
     }
 
-    f = AllocObjAffineAngle(e->rotation, 1);
-    q = e;
-    g = GetBattleSpritePriorityFlags(e->actor.y);
+    f = AllocObjAffineAngle(entry->rotation, 1);
+    q = entry;
+    g = GetBattleSpritePriorityFlags(entry->actor.y);
 
     if (work->flipped == 1) {
         g |= 1;
     }
 
-    if (StepHitFlash(&e->actor)) {
+    if (StepHitFlash(&entry->actor)) {
         pal = work->palette2;
     } else {
         pal = work->palette;
     }
 
     WorldToScreen(&sx, &sy, q->actor.x, q->actor.y, q->actor.z);
-    DrawSprite(sx + e->x2, sy + e->y2, e->gfx, e->tiles, pal, f, g,
+    DrawSprite(sx + entry->x2, sy + entry->y2, entry->gfx, entry->tiles, pal, f, g,
                0xEFFC - ((q->actor.y >> 8) << 2));
 
-    if (e->index == 0 && work->state != 7 && work->state != 8 && work->state != 9) {
-        DrawSprite(sx + e->x2, sy + e->y2, work->gfx, work->tiles, pal, f, g,
+    if (entry->index == 0 && work->state != 7 && work->state != 8 && work->state != 9) {
+        DrawSprite(sx + entry->x2, sy + entry->y2, work->gfx, work->tiles, pal, f, g,
                    0xEFFC - ((q->actor.y >> 8) << 2));
     }
 
-    TaskPoolDraw(&e->tasks);
+    TaskPoolDraw(&entry->tasks);
 }
 
 u8 BosGaUpdateAssemble(GaWork* work) {
@@ -2414,27 +2414,27 @@ u8 BosGaUpdateDefeat(GaWork* work) {
     return result;
 }
 
-void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
+void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
     s32 d1;
     s32 d2;
     s32 flag;
     s32 v;
     u16 t;
 
-    if (e->flags & GA_ENTRY_FLAG_RELEASED) {
+    if (entry->flags & GA_ENTRY_FLAG_RELEASED) {
         return;
     }
 
-    switch (UpdateBtlObjReaction(&e->actor)) {
+    switch (UpdateBtlObjReaction(&entry->actor)) {
     case BTL_REACTION_CARD_ACTION:
         work->cardActionSeen = 1;
 
         if (work->state == 10 || work->nextState == 10) {
-            ClearBtlObjActionFlags(&e->actor);
+            ClearBtlObjActionFlags(&entry->actor);
         } else {
-            d1 = gBtlWork->actor->x - e->baseX;
+            d1 = gBtlWork->actor->x - entry->baseX;
             d1 = (d1 * d1) >> 8;
-            d2 = gBtlWork->actor->y - e->baseY;
+            d2 = gBtlWork->actor->y - entry->baseY;
             d2 = (d2 * d2) >> 8;
 
             if (work->entries[2].flags & work->entries[3].flags & work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) {
@@ -2590,10 +2590,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
-        e->flags |= GA_ENTRY_FLAG_HURT;
-        e->flashTimer = 0;
+        entry->flags |= GA_ENTRY_FLAG_HURT;
+        entry->flashTimer = 0;
 
-        if (e->index == 0) {
+        if (entry->index == 0) {
             work->entries[1].flags |= GA_ENTRY_FLAG_HURT;
             work->entries[1].flashTimer = 0;
         }
@@ -2601,19 +2601,19 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        SetBtlObjUnhittable(&e->actor, 1);
-        e->flags |= GA_ENTRY_FLAG_DESTROYED;
+        SetBtlObjUnhittable(&entry->actor, 1);
+        entry->flags |= GA_ENTRY_FLAG_DESTROYED;
 
-        if (e->index == 0) {
-            BeginBossDefeat(&e->actor);
-            e->mode = 0;
-            e->counter = 0;
+        if (entry->index == 0) {
+            BeginBossDefeat(&entry->actor);
+            entry->mode = 0;
+            entry->counter = 0;
             work->entries[1].mode = 0;
             work->entries[1].counter = 0;
             BosGaRequestState(work, 11);
         } else {
-            e->mode = 3;
-            e->counter = 0;
+            entry->mode = 3;
+            entry->counter = 0;
 
             if (work->state != 10 && work->nextState != 10) {
                 if (work->cardActionSeen) {
@@ -2628,19 +2628,19 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
     case BTL_REACTION_CARD_BROKEN:
         if (work->state != 10 && work->nextState != 10) {
             if (GetRandom() % 100 < 30) {
-                DropGimmickCard(0, e->baseX, e->baseY, e->baseZ);
+                DropGimmickCard(0, entry->baseX, entry->baseY, entry->baseZ);
             }
 
             BosGaRequestState(work, 1);
         }
 
-        ClearBtlObjActionFlags(&e->actor);
+        ClearBtlObjActionFlags(&entry->actor);
         break;
     }
 
-    switch ((u32)e->mode) {
+    switch ((u32)entry->mode) {
     case 0:
-        v = (e->baseX - e->actor.x) >> 1;
+        v = (entry->baseX - entry->actor.x) >> 1;
 
         if (v > 0x600) {
             v = 0x600;
@@ -2648,8 +2648,8 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
             v = -0x600;
         }
 
-        e->actor.x += v;
-        v = (e->baseY - e->actor.y) >> 1;
+        entry->actor.x += v;
+        v = (entry->baseY - entry->actor.y) >> 1;
 
         if (v > 0x600) {
             v = 0x600;
@@ -2657,8 +2657,8 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
             v = -0x600;
         }
 
-        e->actor.y += v;
-        v = ((e->baseZ + e->bobZ) - e->actor.z) >> 1;
+        entry->actor.y += v;
+        v = ((entry->baseZ + entry->bobZ) - entry->actor.z) >> 1;
 
         if (v > 0x600) {
             v = 0x600;
@@ -2666,67 +2666,67 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
             v = -0x600;
         }
 
-        e->actor.z += v;
-        t = e->rotation;
+        entry->actor.z += v;
+        t = entry->rotation;
         ApproachAngle(&t, 0, 3);
-        e->rotation = t;
+        entry->rotation = t;
 
-        if (e->flags & GA_ENTRY_FLAG_NO_BOB) {
+        if (entry->flags & GA_ENTRY_FLAG_NO_BOB) {
             break;
         }
 
-        e->bobZ = gSineTable[e->bobAngle] << 2;
-        e->bobAngle += 4;
+        entry->bobZ = gSineTable[entry->bobAngle] << 2;
+        entry->bobAngle += 4;
         break;
     case 1:
-        BosGaEntryUpdateFall(e);
+        BosGaEntryUpdateFall(entry);
         break;
     case 3:
-        if (e->counter == 0) {
-            e->flags |= GA_ENTRY_FLAG_HURT;
-            e->flashTimer = 0;
+        if (entry->counter == 0) {
+            entry->flags |= GA_ENTRY_FLAG_HURT;
+            entry->flashTimer = 0;
 
             if (!BgFxIsActive()) {
-                BgFxStartEnemyDeath(e->actor.x, e->actor.y + e->actor.z, 0, 0x100);
-                e->counter++;
+                BgFxStartEnemyDeath(entry->actor.x, entry->actor.y + entry->actor.z, 0, 0x100);
+                entry->counter++;
             }
-        } else if (e->counter > 0) {
+        } else if (entry->counter > 0) {
             if (work->entries[2].flags & work->entries[3].flags & work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) {
                 SetBtlObjUnhittable(&work->entries[0].actor, 0);
             }
 
-            ClearBtlObjActionFlags(&e->actor);
-            BosGaEntryRelease(e);
+            ClearBtlObjActionFlags(&entry->actor);
+            BosGaEntryRelease(entry);
             return;
         }
 
-        BosGaEntryUpdateFall(e);
+        BosGaEntryUpdateFall(entry);
         break;
     }
 
-    if (e->flags & GA_ENTRY_FLAG_HURT) {
-        e->flashTimer++;
+    if (entry->flags & GA_ENTRY_FLAG_HURT) {
+        entry->flashTimer++;
 
-        if (e->flashTimer > 30) {
-            ClearBtlObjActionFlags(&e->actor);
-            e->flags &= ~GA_ENTRY_FLAG_HURT;
-            e->flashTimer = 0;
+        if (entry->flashTimer > 30) {
+            ClearBtlObjActionFlags(&entry->actor);
+            entry->flags &= ~GA_ENTRY_FLAG_HURT;
+            entry->flashTimer = 0;
         }
     }
 
-    e->gfx = AnimUpdate(&e->anim);
+    entry->gfx = AnimUpdate(&entry->anim);
 
-    if (e->index == 0) {
+    if (entry->index == 0) {
         work->gfx = AnimUpdate(&work->anim);
     }
 
-    if (e->actor.collider.colliding) {
-        e->actor.x += e->actor.collider.pushX;
-        e->actor.y += e->actor.collider.pushY;
+    if (entry->actor.collider.colliding) {
+        entry->actor.x += entry->actor.collider.pushX;
+        entry->actor.y += entry->actor.collider.pushY;
     }
 
-    ColliderSetPosition(&e->actor.collider, e->actor.x, e->actor.y, e->actor.z + e->bobZ);
-    TaskPoolUpdate(&e->tasks);
+    ColliderSetPosition(&entry->actor.collider, entry->actor.x, entry->actor.y, entry->actor.z + entry->bobZ);
+    TaskPoolUpdate(&entry->tasks);
 }
 
 void task_bos_ga_0(GaWork* work, s32 arg) {

@@ -210,7 +210,7 @@ void BosMdEndHurt(MdWork* work);
 void BosMdHandleReaction(MdWork* work);
 u8 BosMdUpdateDefeat(MdWork* work);
 void BosMdChooseAttack(MdWork* work);
-void task_bos_md_map_0(MdMapWork* work, MdMapData* p);
+void task_bos_md_map_0(MdMapWork* work, MdMapData* arg);
 s32 task_bos_md_map_1(MdMapWork* work);
 
 #endif /* GUARD_BOS_MD_H */

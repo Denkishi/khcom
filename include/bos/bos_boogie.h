@@ -62,8 +62,8 @@ typedef struct StatusAnimDef {
 } StatusAnimDef;
 
 void BosBoogieApplyDiceFace(BoogieWork* work);
-void SetBoogieAnimation(BoogieWork* work, s32 a, u16 b);
-u8 ClampBoogiePosition(s32* a, s32* b);
+void SetBoogieAnimation(BoogieWork* work, s32 index, u16 flags);
+u8 ClampBoogiePosition(s32* x, s32* y);
 void task_bos_boogie_0(BoogieWork* work);
 u8 task_bos_boogie_1(BoogieWork* work);
 void task_bos_boogie_2(BoogieWork* work);

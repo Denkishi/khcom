@@ -46,16 +46,16 @@ typedef struct LstSnpArg {
     s16 facing;
 } LstSnpArg;
 
-void BosLstFldSetBgMode(struct Task* t, s32 a, s32 b);
-void BosLstFldSetCameraMode(struct Task* t, s32 a);
-void BosLstFldSetScrollSpeed(struct Task* t, s32 a);
+void BosLstFldSetBgMode(struct Task* t, s32 mode, s32 scrollDir);
+void BosLstFldSetCameraMode(struct Task* t, s32 mode);
+void BosLstFldSetScrollSpeed(struct Task* t, s32 speed);
 u8 BosLstBitIsAlive(struct Task* task);
 u8 BosLstBitHasShots(struct Task* task);
-s16 BosLstBitMarkFirstAlive(struct Task* task, s16 a);
+s16 BosLstBitMarkFirstAlive(struct Task* task, s16 found);
 void BosLstBitStartHover(struct Task* task);
-void BosLstBitStartFiring(struct Task* task, s16 a);
+void BosLstBitStartFiring(struct Task* task, s16 shots);
 void BosLstBitStartReturn(struct Task* task);
-u8 BosLstBitInterrupt(struct Task* task, u8 a);
+u8 BosLstBitInterrupt(struct Task* task, u8 destroy);
 u8 BosLstCtrIsActive(struct Task* task);
 
 #endif

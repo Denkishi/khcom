@@ -134,17 +134,17 @@ u8 BosLstBitIsScaling(Task* task) {
 }
 #endif
 
-s16 BosLstBitMarkFirstAlive(Task* task, s16 a) {
+s16 BosLstBitMarkFirstAlive(Task* task, s16 found) {
     LstState* s;
 
     s = task->work;
 
-    if (BosLstBitIsAlive(task) == 1 && a == 0) {
-        s->index = a;
-        a = 1;
+    if (BosLstBitIsAlive(task) == 1 && found == 0) {
+        s->index = found;
+        found = 1;
     }
 
-    return a;
+    return found;
 }
 
 void BosLstBitStartHover(Task* task) {
@@ -159,7 +159,7 @@ void BosLstBitStartHover(Task* task) {
     s->delay = zero;
 }
 
-void BosLstBitStartFiring(Task* task, s16 a) {
+void BosLstBitStartFiring(Task* task, s16 shots) {
     LstState* s;
     u16 zero;
 
@@ -169,7 +169,7 @@ void BosLstBitStartFiring(Task* task, s16 a) {
     s->step = zero;
     s->timer = zero;
     s->delay = zero;
-    s->shots = a;
+    s->shots = shots;
 }
 
 void BosLstBitStartReturn(Task* task) {
@@ -191,7 +191,7 @@ void BosLstBitStartReturn(Task* task) {
 #endif
 }
 
-u8 BosLstBitInterrupt(Task* task, u8 a) {
+u8 BosLstBitInterrupt(Task* task, u8 destroy) {
     LstState* s;
     u8 result;
 
@@ -206,7 +206,7 @@ u8 BosLstBitInterrupt(Task* task, u8 a) {
         return 0;
     }
 
-    if (a == 1 && s->index == 0) {
+    if (destroy == 1 && s->index == 0) {
         s->obj.hp = 0;
         SetBtlObjUnhittable(&s->obj, 1);
         BosLstBitSpawnFal(s, 0);
@@ -240,16 +240,16 @@ u8 BosLstBitInterrupt(Task* task, u8 a) {
     return result;
 }
 
-s32 BosLstBitAtanLookup(s32 a, s32 b) {
+s32 BosLstBitAtanLookup(s32 x, s32 y) {
     s32 v;
     s32 step;
     s32 i;
 
-    if (a == 0 || b == 0) {
+    if (x == 0 || y == 0) {
         return 0;
     }
 
-    v = (b << 8) / a;
+    v = (y << 8) / x;
 
     if (v <= sBosLstBitTanTable[0]) {
         return 0;
@@ -303,11 +303,11 @@ s32 BosLstBitAngleBetween(s32 x0, s32 y0, s32 x1, s32 y1) {
     return a & 255;
 }
 
-s32 BosLstBitAngleDiff(u8 a, u8 b) {
+s32 BosLstBitAngleDiff(u8 from, u8 to) {
     s32 d;
 
-    if (a > b) {
-        d = a - b;
+    if (from > to) {
+        d = from - to;
 
         if (d > 128) {
             d = d - 256;
@@ -316,7 +316,7 @@ s32 BosLstBitAngleDiff(u8 a, u8 b) {
         return -d;
     }
 
-    d = b - a;
+    d = to - from;
 
     if (d > 128) {
         d = d - 256;

@@ -320,21 +320,21 @@ static const TmAnimFrame sBosTmArm0SpinRightFrames[5] = {
 
 static const u16 sBosTmArmSegmentLengths[6] = { 24, 26, 28, 30, 28, 26 };
 
-void BosTmFootInitPart(BtlObj* work, s16 x, s16 y, s16 z, s16 a, s16 b, s32 c, s16 d) {
+void BosTmFootInitPart(BtlObj* work, s16 x, s16 y, s16 z, s16 radius, s16 height, s32 inEvent, s16 part) {
     work->x = x << 8;
     work->y = y << 8;
     work->z = z << 8;
 
-    if (d >= 6 && d <= 7) {
-        ColliderInit(&work->collider, 8, a, b);
+    if (part >= 6 && part <= 7) {
+        ColliderInit(&work->collider, 8, radius, height);
         ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     }
 }
 
-void BosTmFootSetPartPos(BtlObj* p, s32 a, s32 b, s32 c) {
-    p->x = (s16)a << 8;
-    p->y = (s16)b << 8;
-    p->z = (s16)c << 8;
+void BosTmFootSetPartPos(BtlObj* obj, s32 x, s32 y, s32 z) {
+    obj->x = (s16)x << 8;
+    obj->y = (s16)y << 8;
+    obj->z = (s16)z << 8;
 }
 
 void BosTmFootReleasePart(BtlObj* work) {
@@ -417,11 +417,11 @@ void BosTmFootSetBreakPose(TmFootWork* work) {
     }
 }
 
-void BosTmFootApplyThrowStep(TmFootWork* work, s16 a) {
-    work->gfx = gBosTmFootFrames[sBosTmFootThrowSteps[a].gfxIndex];
-    work->gfx2 = gBosTmFootFrames[sBosTmFootThrowSteps[a].gfx2Index];
-    work->body.z += sBosTmFootThrowSteps[a].dz << 8;
-    work->body2.z += sBosTmFootThrowSteps[a].dz2 << 8;
+void BosTmFootApplyThrowStep(TmFootWork* work, s16 step) {
+    work->gfx = gBosTmFootFrames[sBosTmFootThrowSteps[step].gfxIndex];
+    work->gfx2 = gBosTmFootFrames[sBosTmFootThrowSteps[step].gfx2Index];
+    work->body.z += sBosTmFootThrowSteps[step].dz << 8;
+    work->body2.z += sBosTmFootThrowSteps[step].dz2 << 8;
 }
 
 void BosTmFootSetWalkPose(TmFootWork* work) {
@@ -510,11 +510,11 @@ void BosTmFootWalk(TmFootWork* work) {
     }
 }
 
-void BosTmFootApplySpinStep(TmFootWork* work, s16 a) {
-    work->gfx = gBosTmFootFrames[sBosTmFootSpinSteps[a].gfxIndex];
-    work->gfx2 = gBosTmFootFrames[sBosTmFootSpinSteps[a].gfx2Index];
-    work->body.z += sBosTmFootSpinSteps[a].dz << 8;
-    work->body2.z += sBosTmFootSpinSteps[a].dz2 << 8;
+void BosTmFootApplySpinStep(TmFootWork* work, s16 step) {
+    work->gfx = gBosTmFootFrames[sBosTmFootSpinSteps[step].gfxIndex];
+    work->gfx2 = gBosTmFootFrames[sBosTmFootSpinSteps[step].gfx2Index];
+    work->body.z += sBosTmFootSpinSteps[step].dz << 8;
+    work->body2.z += sBosTmFootSpinSteps[step].dz2 << 8;
 }
 
 void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
@@ -784,45 +784,45 @@ void task_bos_tm_foot_3(TmFootWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-void CreateBosTmClbTask(TaskPool* pool, TmClbArg* p, TmArmPos* a) {
-    p->src = a;
-    p->moveMode = 0;
-    p->spinMode = 1;
-    p->vz = 0;
-    TaskCreate(pool, &sTaskDescBosTmClb, p);
+void CreateBosTmClbTask(TaskPool* pool, TmClbArg* clb, TmArmPos* tip) {
+    clb->src = tip;
+    clb->moveMode = 0;
+    clb->spinMode = 1;
+    clb->vz = 0;
+    TaskCreate(pool, &sTaskDescBosTmClb, clb);
 }
 
-void BosTmClbThrow(TmClbArg* p, TmArmPos* a, s32 b) {
-    p->src = a;
-    p->vz = b;
-    p->moveMode = 4;
-    p->spinMode = 0;
+void BosTmClbThrow(TmClbArg* clb, TmArmPos* tip, s32 vz) {
+    clb->src = tip;
+    clb->vz = vz;
+    clb->moveMode = 4;
+    clb->spinMode = 0;
 }
 
-void BosTmClbHoldSpinning(TmClbArg* p, TmArmPos* a) {
-    p->src = a;
-    p->vz = 0;
-    p->moveMode = 0;
-    p->spinMode = 0;
+void BosTmClbHoldSpinning(TmClbArg* clb, TmArmPos* tip) {
+    clb->src = tip;
+    clb->vz = 0;
+    clb->moveMode = 0;
+    clb->spinMode = 0;
 }
 
-void BosTmClbHold(TmClbArg* p, TmArmPos* a, u8 mode) {
-    p->src = a;
-    p->vz = 0;
-    p->spinMode = 2;
+void BosTmClbHold(TmClbArg* clb, TmArmPos* tip, u8 mode) {
+    clb->src = tip;
+    clb->vz = 0;
+    clb->spinMode = 2;
 
     switch (mode) {
     case 0:
-        p->moveMode = 1;
+        clb->moveMode = 1;
         break;
     case 1:
-        p->moveMode = 1;
+        clb->moveMode = 1;
         break;
     case 2:
-        p->moveMode = 2;
+        clb->moveMode = 2;
         break;
     case 3:
-        p->moveMode = 3;
+        clb->moveMode = 3;
         break;
     }
 }
@@ -926,12 +926,12 @@ void BosTmArmSetTargetAngles(TmArmJoint* joints, const u8* src) {
     } while (--i >= 0);
 }
 
-void BosTmArmStartJointAnim(TmAnim* anim, const TmAnimFrame* src, u16 a, TmArmJoint* joints) {
+void BosTmArmStartJointAnim(TmAnim* anim, const TmAnimFrame* src, u16 frameCount, TmArmJoint* joints) {
     if (anim->frames != src) {
         anim->frames = src;
         anim->timer = 0;
         anim->frame = 0;
-        anim->frameCount = a;
+        anim->frameCount = frameCount;
         BosTmArmSetTargetAngles(joints, src->angles);
     }
 }
@@ -977,7 +977,7 @@ void BosTmArmComputeJointPositions(TmArmJoint* joints) {
     p->y = y;
 }
 
-void BosTmArmUpdateJoints(TmArmJoint* joints, u16 a) {
+void BosTmArmUpdateJoints(TmArmJoint* joints, u16 shift) {
     s32 i;
     u8* q;
     TmArmJoint* p;
@@ -986,7 +986,7 @@ void BosTmArmUpdateJoints(TmArmJoint* joints, u16 a) {
         p = &joints[i];
 
         q = &p->angle;
-        ApproachAngle((u16*)q, p->targetAngle, a);
+        ApproachAngle((u16*)q, p->targetAngle, shift);
     }
 
     BosTmArmComputeJointPositions(joints);
@@ -999,19 +999,19 @@ void BosTmArmUpdateJoints(TmArmJoint* joints, u16 a) {
     }
 }
 
-void BosTmArmStepJointAnim(TmArmJoint* joints, TmAnim* a) {
-    if (a->timer >= a->frames[a->frame].duration) {
-        a->timer = 0;
-        a->frame++;
+void BosTmArmStepJointAnim(TmArmJoint* joints, TmAnim* anim) {
+    if (anim->timer >= anim->frames[anim->frame].duration) {
+        anim->timer = 0;
+        anim->frame++;
 
-        if (a->frame >= a->frameCount) {
-            a->frame = 0;
+        if (anim->frame >= anim->frameCount) {
+            anim->frame = 0;
         }
 
-        BosTmArmSetTargetAngles(joints, a->frames[a->frame].angles);
+        BosTmArmSetTargetAngles(joints, anim->frames[anim->frame].angles);
     }
 
-    a->timer++;
+    anim->timer++;
     BosTmArmUpdateJoints(joints, 1);
 }
 

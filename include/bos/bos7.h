@@ -223,7 +223,7 @@ extern const EmyKind gBosLstCtrEmyKind;
 
 void BosLstFldUpdateShake();
 void BosLstFldResetShake();
-void BosLstFldSetShake(s16 a);
+void BosLstFldSetShake(s16 pattern);
 s32 BosLstFldGetShake();
 
 void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg);
@@ -278,15 +278,15 @@ u8 BosLstLsrIsFiring(Task* task);
 s32 BosLstLsrSqrt(s32 n);
 s32 BosLstCtrSqrt(s32 n);
 u8 BosLstBitSpawnFal(LstState* work, s32 kind);
-s32 BosLstBitAtanLookup(s32 a, s32 b);
+s32 BosLstBitAtanLookup(s32 x, s32 y);
 s32 BosLstBitAngleBetween(s32 x0, s32 y0, s32 x1, s32 y1);
-s32 BosLstBitAngleDiff(u8 a, u8 b);
+s32 BosLstBitAngleDiff(u8 from, u8 to);
 void BosLstFldDarkenPalette(u16* dst, u16* src, s32 count, s32 level);
 void task_bos_lst_bit_0(LstState* work, LstBitArg* arg);
 u8 task_bos_lst_bit_1(LstState* work);
 void task_bos_lst_bit_2(LstState* work);
 void BosLstBitHandleHit(LstState* work);
-void BosLstLsrFire(Task* task, Vec3* a, Vec3* b, s32 c, u16 d);
+void BosLstLsrFire(Task* task, Vec3* origin, Vec3* target, s32 angle, u16 delay);
 void BosLstLsrStop(Task* task);
 
 #ifdef VERSION_EU

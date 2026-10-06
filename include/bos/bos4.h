@@ -53,7 +53,7 @@ typedef struct UrsulaThunderWork {
 } UrsulaThunderWork;
 
 u8 BosBoogieExplosiondiceIsHeld(BoogieExplosiondiceWork* work);
-u8 BosMapanimeIsAtEnd(BosMapanimeState* p);
+u8 BosMapanimeIsAtEnd(BosMapanimeState* anim);
 void task_bos_boogie_explosiondice_3(BoogieExplosiondiceWork* work);
 void task_bos_boogie_disk_3(BoogieDiskWork* work);
 void task_bos_boogie_mapanime_0(BoogieMapanimeWork* work);
@@ -104,7 +104,7 @@ typedef struct BoogieMapWork {
 
 void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg);
 
-u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 w, s16 h, s32 z);
+u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 marginX, s16 offsetY, s32 z);
 void task_bos_boogie_dice_3(BoogieDiceWork* work);
 
 u16 BosUrsulaSpawnThreeBubbles(UrsulaBubbleWork* work);
@@ -156,10 +156,10 @@ typedef struct BoogieKaihukuWork {
     BoogieWork* boogie;
 } BoogieKaihukuWork;
 
-u16 BosMapanimeGetFrameIndex(BosMapanimeState* p);
+u16 BosMapanimeGetFrameIndex(BosMapanimeState* anim);
 u8 BosBoogieIsActorPastSaku();
 u8 BosBoogieKnifeIsLanded(BoogieKnifeWork* work);
-void BosBoogieSakuDrawAt(BoogieSakuWork* work, s32 a, u16 b);
+void BosBoogieSakuDrawAt(BoogieSakuWork* work, s32 px, u16 flags);
 void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg);
 void task_bos_boogie_saku_3(BoogieSakuWork* work);
 void task_bos_boogie_knife_3(BoogieKnifeWork* work);
@@ -188,7 +188,7 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work);
 
 void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg);
 u8 task_bos_boogie_dice_1(BoogieDiceWork* work);
-u8 ClampBoogieDicePosition(s32* a, s32* b, s16 c, u16 d);
+u8 ClampBoogieDicePosition(s32* x, s32* y, s16 marginX, u16 marginY);
 void BosBoogieDiceGrow(BoogieDiceWork* work);
 
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work);

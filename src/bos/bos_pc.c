@@ -5145,9 +5145,9 @@ const PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
     return sBosPcSpriteCmdLists[step->cmdList];
 }
 
-void BosPcSetAnim(PcWork* work, s32 a) {
-    if (work->animSteps != sBosPcAnims[a]) {
-        work->animSteps = sBosPcAnims[a];
+void BosPcSetAnim(PcWork* work, s32 anim) {
+    if (work->animSteps != sBosPcAnims[anim]) {
+        work->animSteps = sBosPcAnims[anim];
         work->animIndex = 0;
         work->animTimer = 0;
         work->animFrame = 0;
@@ -5205,12 +5205,12 @@ void BosPcUpdateAnim(PcWork* work) {
     }
 }
 
-u16 BosPcGetSpritePriority(PcWork* work, s32 a) {
-    return GetBattleSpritePriorityFlags(a);
+u16 BosPcGetSpritePriority(PcWork* work, s32 y) {
+    return GetBattleSpritePriorityFlags(y);
 }
 
-u16 BosPcGetSpriteDepth(PcWork* work, s32 a, s32 b) {
-    return (0xEFFC - ((a >> 8) << 2)) | b;
+u16 BosPcGetSpriteDepth(PcWork* work, s32 y, s32 order) {
+    return (0xEFFC - ((y >> 8) << 2)) | order;
 }
 
 static inline u16* PcOamGfx(PcOam* oam) {
@@ -5388,16 +5388,16 @@ void BosPcStopPaletteCycle(PcWork* work) {
     work->paletteCycle = 0;
 }
 
-void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e) {
+void CreateBosPcFltTask(PcWork* work, u16 angle, s32 x, s32 y, s32 z, u8 index) {
     PcFltInit arg;
 
-    arg.index = e;
-    arg.angle = a << 8;
-    arg.x = b;
-    arg.y = c;
-    arg.z = d;
+    arg.index = index;
+    arg.angle = angle << 8;
+    arg.x = x;
+    arg.y = y;
+    arg.z = z;
     arg.shared = &work->shared;
-    work->flt[e] = TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPcFlt, &arg);
+    work->flt[index] = TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPcFlt, &arg);
 }
 
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool) {

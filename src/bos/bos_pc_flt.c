@@ -85,13 +85,13 @@ s32 BosPcFltSquare2(s32 x) {
     return x * x;
 }
 
-void BosPcFltGetPosition(Task* task, s32* a, s32* b, s32* c) {
+void BosPcFltGetPosition(Task* task, s32* x, s32* y, s32* z) {
     PcFltWork* work;
 
     work = task->work;
-    *a = work->x;
-    *b = work->y;
-    *c = work->z;
+    *x = work->x;
+    *y = work->y;
+    *z = work->z;
 }
 
 u8 BosPcFltIsSubmerged(Task* task) {

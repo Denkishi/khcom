@@ -191,8 +191,8 @@ void BosUrsulaPopBubbles(UrsulaBubbleWork* work) {
 }
 
 #ifdef VERSION_EU
-void BosUrsulaBubbleAnimChange(u16 a, u16 b) {
-    AnimChange(&sUrsulaBubbleWork->anim, a, b);
+void BosUrsulaBubbleAnimChange(u16 animId, u16 flags) {
+    AnimChange(&sUrsulaBubbleWork->anim, animId, flags);
 }
 
 u16 BosUrsulaBubbleAnimGetId() {
@@ -383,52 +383,52 @@ void task_bos_ursula_thunder_2() {
 void task_bos_ursula_thunder_3() {
 }
 
-void BosMapanimeInit(BosMapanimeState* p, const BosMapanimeDef* q) {
-    p->timer = 0;
-    p->frameIndex = 0;
-    p->uploadPending = 1;
-    p->def = q;
+void BosMapanimeInit(BosMapanimeState* anim, const BosMapanimeDef* def) {
+    anim->timer = 0;
+    anim->frameIndex = 0;
+    anim->uploadPending = 1;
+    anim->def = def;
 }
 
-u8 BosMapanimeUpdate(BosMapanimeState* p, const BosMapanimeDef* q, u8 a) {
-    if (!p->uploadPending) {
-        p->timer++;
+u8 BosMapanimeUpdate(BosMapanimeState* anim, const BosMapanimeDef* def, u8 defer) {
+    if (!anim->uploadPending) {
+        anim->timer++;
 
-        if (p->timer > q->frames[p->frameIndex].duration) {
-            p->timer = 0;
-            p->frameIndex++;
+        if (anim->timer > def->frames[anim->frameIndex].duration) {
+            anim->timer = 0;
+            anim->frameIndex++;
 
-            if (p->frameIndex >= q->frameCount) {
-                p->frameIndex = 0;
+            if (anim->frameIndex >= def->frameCount) {
+                anim->frameIndex = 0;
             }
         }
     }
 
-    if (!a) {
-        if (p->timer == 0 || p->uploadPending) {
-            RequestDma3Copy((u8*)q->tiles + q->frameSize * q->frames[p->frameIndex].frame,
-                (u8*)GetBgCharBase(q->bg) + q->destOffset, q->copySize);
-            p->uploadPending = 0;
+    if (!defer) {
+        if (anim->timer == 0 || anim->uploadPending) {
+            RequestDma3Copy((u8*)def->tiles + def->frameSize * def->frames[anim->frameIndex].frame,
+                (u8*)GetBgCharBase(def->bg) + def->destOffset, def->copySize);
+            anim->uploadPending = 0;
         }
-    } else if (p->timer == 0) {
-        p->uploadPending = 1;
+    } else if (anim->timer == 0) {
+        anim->uploadPending = 1;
     }
 
-    return a;
+    return defer;
 }
 
-u8 BosMapanimeIsAtEnd(BosMapanimeState* p) {
-    const BosMapanimeDef* q = p->def;
+u8 BosMapanimeIsAtEnd(BosMapanimeState* anim) {
+    const BosMapanimeDef* q = anim->def;
 
-    if (p->timer + 1 > q->frames[p->frameIndex].duration && p->frameIndex + 1 >= q->frameCount) {
+    if (anim->timer + 1 > q->frames[anim->frameIndex].duration && anim->frameIndex + 1 >= q->frameCount) {
         return 1;
     }
 
     return 0;
 }
 
-u16 BosMapanimeGetFrameIndex(BosMapanimeState* p) {
-    return p->frameIndex;
+u16 BosMapanimeGetFrameIndex(BosMapanimeState* anim) {
+    return anim->frameIndex;
 }
 
 void ResetPooState() {

@@ -1185,10 +1185,10 @@ void task_bos_md_3(MdWork* work) {
     TaskPoolDestroy(t);
 }
 
-void task_bos_md_map_0(MdMapWork* work, MdMapData* p) {
-    LoadBgTiles(0, p->tiles, p->tilesSize);
-    LoadBgPalette(0, p->palette, p->paletteSize);
-    SetBgMapBlocks(0, &p->map, 2, 2);
+void task_bos_md_map_0(MdMapWork* work, MdMapData* arg) {
+    LoadBgTiles(0, arg->tiles, arg->tilesSize);
+    LoadBgPalette(0, arg->palette, arg->paletteSize);
+    SetBgMapBlocks(0, &arg->map, 2, 2);
     gBtlWork->scale = 256;
     gBtlWork->zoomScale = 256;
     gBtlWork->x = 0x10000;

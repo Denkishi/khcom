@@ -224,8 +224,8 @@ typedef struct PcWork {
     PcOam oam[24];
 } PcWork;
 
-u16 BosPcGetSpritePriority(PcWork* work, s32 a);
-u16 BosPcGetSpriteDepth(PcWork* work, s32 a, s32 b);
+u16 BosPcGetSpritePriority(PcWork* work, s32 y);
+u16 BosPcGetSpriteDepth(PcWork* work, s32 y, s32 order);
 
 typedef struct PcAcdWork {
     u32 unk_000;
@@ -382,7 +382,7 @@ s32 BosPcFldGetShake();
 void BosPcFldResetPaletteCycle(PcFldWork* work);
 void BosPcFldStopPaletteCycle(PcFldWork* work);
 void BosPcAcdSetOff(Task* task, u8 v);
-void BosLstSetMode(BosLstWork* work, u16 a, u16 b);
+void BosLstSetMode(BosLstWork* work, u16 moveMode, u16 attackKind);
 void BosLstRequestCardUse(BosLstWork* work);
 void task_bos_pc_2(PcWork* work);
 void task_bos_pc_acd_3(PcAcdWork* work);
@@ -398,11 +398,11 @@ s32 BosLstSquare2(s32 x);
 
 void BosPcFldSetPaletteCycle(Task* task, u8 v);
 
-void BosPcSetAnim(PcWork* work, s32 a);
+void BosPcSetAnim(PcWork* work, s32 anim);
 void BosPcUpdateAnim(PcWork* work);
 u8 BosPcFltIsSubmerged(Task* task);
 u8 BosPcFltIsPlayerOn(Task* task);
-void BosPcFltGetPosition(Task* task, s32* a, s32* b, s32* c);
+void BosPcFltGetPosition(Task* task, s32* x, s32* y, s32* z);
 
 void BosLstDestroyTasks(BosLstWork* work);
 s16 BosLstFindActiveSub(BosLstWork* work);
@@ -411,7 +411,7 @@ void BosLstHoverBits(BosLstWork* work);
 void BosLstReturnBits(BosLstWork* work);
 
 void BosPcFldResetShake();
-void BosPcFldStartShake(s16 a);
+void BosPcFldStartShake(s16 pattern);
 void BosPcFldUpdateShake();
 void BosPcFldUpdatePaletteCycle(PcFldWork* work);
 
@@ -436,16 +436,16 @@ typedef struct PcFltFrameDef {
 extern u8 gUnk_05000220[];
 
 void BosPcStopPaletteCycle(PcWork* work);
-void BosLstSetAnim(BosLstWork* work, u16 a, u16 b, u8 c);
+void BosLstSetAnim(BosLstWork* work, u16 animId, u16 flags, u8 change);
 
-void BosPcFldEnableObject(Task* task, u8 a);
+void BosPcFldEnableObject(Task* task, u8 on);
 u8 BosLstUpdateHurt(BosLstWork* work);
 u8 BosLstUpdateState5(BosLstWork* work);
 void BosLstInterruptBits(BosLstWork* work);
 
 u8 BosPcIsAnimDone(PcWork* work);
 
-s32 BosLstApproachValue(s32 a, s32 b, s32 c, s32 d, s32 e);
+s32 BosLstApproachValue(s32 value, s32 target, s32 speed, s32 minSpeed, s32 maxSpeed);
 u8 BosPcUpdateReaction(PcWork* work, Task* task);
 u8 BosLstAnyBitFiring(BosLstWork* work, s32 idx);
 
@@ -456,12 +456,12 @@ void BosLstMoveMode0(BosLstWork* work);
 
 s32 BosLstGetPlatformY(BosLstWork* work);
 
-u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 a);
+u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 shots);
 u8 task_bos_pc_flt_1(PcFltWork* work);
 void BosPcFltUpdateMotion(PcFltWork* work);
 
 void BosLstMoveMode2(BosLstWork* work);
-void BosLstSetFacing(BosLstWork* work, s16 a);
+void BosLstSetFacing(BosLstWork* work, s16 facing);
 
 void task_bos_pc_fld_2(PcFldWork* work);
 
@@ -471,7 +471,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task);
 u8 task_bos_pc_1(PcWork* work, Task* task);
 void task_bos_pc_0(PcWork* work, TaskPool* pool);
 void BosPcStartPaletteCycle(PcWork* work);
-void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e);
+void CreateBosPcFltTask(PcWork* work, u16 angle, s32 x, s32 y, s32 z, u8 index);
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool);
 
 void task_bos_lst_0(BosLstWork* work, TaskPool* pool);
@@ -529,7 +529,7 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg);
 
 u8 task_bos_pc_fld_1(PcFldWork* work);
 
-u8 BosLstSetSubAnim(BosLstWork* work, u16 a);
+u8 BosLstSetSubAnim(BosLstWork* work, u16 animId);
 u8 BosLstUpdateMove(BosLstWork* work);
 void BosLstMoveMode1(BosLstWork* work);
 void BosLstMoveDash(BosLstWork* work);
@@ -548,7 +548,7 @@ u8 BosLstAttackHanabira(BosLstWork* work);
 u8 BosPcUpdateIdle(PcWork* work, Task* task);
 void BosPcFltUpdateFloat(PcFltWork* work);
 
-u8 BosLstSpawnFal(BosLstWork* work, s32 a);
+u8 BosLstSpawnFal(BosLstWork* work, s32 kind);
 
 u8 BosPcUpdateDefeat(PcWork* work, Task* task);
 
@@ -563,7 +563,7 @@ typedef struct LstSpawn3 {
     u8 unk_14[0xC];
 } LstSpawn3;
 
-void BosLstUpdateSub(BosLstWork* work, LstSub* p);
+void BosLstUpdateSub(BosLstWork* work, LstSub* sub);
 
 u8 BosLstUpdateBreak(BosLstWork* work);
 

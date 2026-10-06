@@ -49,7 +49,7 @@ s16 gBosJfPillarShape EWRAM_COMMON(4);
 s32 gBosJfShakeOffset EWRAM_COMMON(4);
 u32 gUnk_0203B4EC EWRAM_COMMON(4);
 
-void task_bos_jf_0(JfWork* work, s32 a) {
+void task_bos_jf_0(JfWork* work, s32 arg) {
     BtlObj* sub;
     BtlWork* q;
     s32 v1;
@@ -60,7 +60,7 @@ void task_bos_jf_0(JfWork* work, s32 a) {
     gBosJfActorZ = 0;
     work->flags = 0;
 
-    if (a != 0) {
+    if (arg != 0) {
         work->flags = JF_FLAG_IN_EVENT;
     }
 
@@ -261,7 +261,7 @@ void task_bos_jf_3(JfWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
+u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
     s32 v1;
     s32 v2;
     s32 v3;
@@ -280,7 +280,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
         if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
             gBosJfPillarShape = 0;
-            x = *p;
+            x = *px;
 
             if (x > hi) {
                 *out = v3;
@@ -288,42 +288,42 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             }
 
             if (x > lo) {
-                if (*a <= v2) {
+                if (*pz <= v2) {
                     *out = v2;
 
                     if (x > hi - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v3;
-                    *p = hi;
+                    *px = hi;
                     return 1;
                 }
             } else {
-                if (*a <= v1) {
+                if (*pz <= v1) {
                     *out = v1;
 
                     if (x > lo - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
-                    *p = lo;
+                    *px = lo;
                     return 1;
                 }
             }
         } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
             gBosJfPillarShape = 1;
-            x = *p;
+            x = *px;
 
             if (x <= lo) {
-                if (*a <= v1) {
+                if (*pz <= v1) {
                     *out = v1;
 
                     if (x > lo - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
-                    *p = lo;
+                    *px = lo;
                     return 1;
                 }
             } else {
@@ -332,34 +332,34 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                     return 0;
                 }
 
-                if (*a <= v3) {
+                if (*pz <= v3) {
                     *out = v3;
 
                     if (x < hi + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
-                    *p = hi;
+                    *px = hi;
                     return 1;
                 }
             }
         } else {
             gBosJfPillarShape = 2;
-            x = *p;
+            x = *px;
 
             if (x > lo) {
                 *out = v2;
                 return 0;
             }
 
-            if (*a <= v1) {
+            if (*pz <= v1) {
                 *out = v1;
 
                 if (x > lo - 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v2;
-                *p = lo;
+                *px = lo;
                 return 1;
             }
         }
@@ -369,7 +369,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
         if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
             gBosJfPillarShape = 3;
-            x = *p;
+            x = *px;
 
             if (x < lo) {
                 *out = v1;
@@ -381,7 +381,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                 return 0;
             }
 
-            if (*a <= v2) {
+            if (*pz <= v2) {
                 *out = v2;
 
                 if ((x < lo + 0x1000) || (x > hi - 0x1000))
@@ -389,18 +389,18 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             } else {
                 if (x <= 0x205FF) {
                     *out = v1;
-                    *p = lo;
+                    *px = lo;
                     return 1;
                 }
 
                 *out = v3;
-                *p = hi;
+                *px = hi;
                 return 1;
             }
         } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
             gBosJfPillarShape = 4;
-            x = *p;
+            x = *px;
 
             if (x < lo) {
                 *out = v1;
@@ -408,45 +408,45 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             }
 
             if (x < hi) {
-                if (*a <= v2) {
+                if (*pz <= v2) {
                     *out = v2;
 
                     if (x < lo + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v1;
-                    *p = lo;
+                    *px = lo;
                     return 1;
                 }
             } else {
-                if (*a <= v3) {
+                if (*pz <= v3) {
                     *out = v3;
 
                     if (x < hi + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
-                    *p = hi;
+                    *px = hi;
                     return 1;
                 }
             }
         } else {
             gBosJfPillarShape = 5;
-            x = *p;
+            x = *px;
 
             if (x < lo) {
                 *out = v1;
                 return 0;
             }
 
-            if (*a <= v2) {
+            if (*pz <= v2) {
                 *out = v2;
 
                 if (x < lo + 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v1;
-                *p = lo;
+                *px = lo;
                 return 1;
             }
         }
@@ -454,41 +454,41 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
         if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
             gBosJfPillarShape = 6;
-            x = *p;
+            x = *px;
 
             if (x > hi) {
                 *out = v3;
                 return 0;
             }
 
-            if (*a <= v2) {
+            if (*pz <= v2) {
                 *out = v2;
 
                 if (x > hi - 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v3;
-                *p = hi;
+                *px = hi;
                 return 1;
             }
         } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
             gBosJfPillarShape = 7;
-            x = *p;
+            x = *px;
 
             if (x < hi) {
                 *out = v2;
                 return 0;
             }
 
-            if (*a <= v3) {
+            if (*pz <= v3) {
                 *out = v3;
 
                 if (x < hi + 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v2;
-                *p = hi;
+                *px = hi;
                 return 1;
             }
         } else {
@@ -502,7 +502,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
     return 0;
 }
 
-u8 BosJfGetGroundZ(s32* p, s32* a, s32* b, s32* out) {
+u8 BosJfGetGroundZ(s32* px, s32* py, s32* pz, s32* out) {
     s32 v1;
     s32 v2;
     s32 v3;
@@ -511,52 +511,52 @@ u8 BosJfGetGroundZ(s32* p, s32* a, s32* b, s32* out) {
     v2 = -((gBosJfMiddlePillarLevel + 1) << 11);
     v3 = -((gBosJfRightPillarLevel + 1) << 11);
 
-    if (*p <= 0x259FF) {
-        if (*p <= 0x221FF) {
-            if (*p <= 0x1E9FF) {
-                if (*p <= 0x1B1FF) {
+    if (*px <= 0x259FF) {
+        if (*px <= 0x221FF) {
+            if (*px <= 0x1E9FF) {
+                if (*px <= 0x1B1FF) {
                     *out = 0;
 
-                    if (*p > 0x1AE00) {
+                    if (*px > 0x1AE00) {
                         return 0;
                     }
                 } else {
                     *out = v1;
 
-                    if (*p <= 0x1B5FF) {
+                    if (*px <= 0x1B5FF) {
                         return 0;
                     }
 
-                    if (*p > 0x1E600 && v1 != v2) {
+                    if (*px > 0x1E600 && v1 != v2) {
                         return 0;
                     }
                 }
             } else {
                 *out = v2;
 
-                if (*p <= 0x1EDFF && v1 != v2) {
+                if (*px <= 0x1EDFF && v1 != v2) {
                     return 0;
                 }
 
-                if (*p > 0x21E00 && v2 != v3) {
+                if (*px > 0x21E00 && v2 != v3) {
                     return 0;
                 }
             }
         } else {
             *out = v3;
 
-            if (*p <= 0x225FF && v2 != v3) {
+            if (*px <= 0x225FF && v2 != v3) {
                 return 0;
             }
 
-            if (*p > 0x25600) {
+            if (*px > 0x25600) {
                 return 0;
             }
         }
     } else {
         *out = 0;
 
-        if (*p <= 0x25DFF) {
+        if (*px <= 0x25DFF) {
             return 0;
         }
     }
@@ -650,11 +650,11 @@ void BosJfDrawPillars() {
     SetBgMapBlocks(0, gBosJfMapBlocks, 2, 2);
 }
 
-void BosJfStartShake(s16 a) {
+void BosJfStartShake(s16 duration) {
     gBosJfShakeActive = 1;
     gBosJfShakeStep = 0;
     gBosJfShakeTimer = 0;
-    gBosJfShakeDuration = a;
+    gBosJfShakeDuration = duration;
     gBosJfShakeOffset = 0;
 }
 

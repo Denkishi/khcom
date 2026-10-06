@@ -206,11 +206,11 @@ void BosDsdItaUpdateLifetime(DsdItaWork* work) {
     }
 }
 
-void BosDsdItaMoveToward(s32* p, s32 target) {
+void BosDsdItaMoveToward(s32* value, s32 target) {
     s32 cur;
     s32 delta;
 
-    cur = *p;
+    cur = *value;
     delta = (target - cur) >> 1;
 
     if (target > cur) {
@@ -225,7 +225,7 @@ void BosDsdItaMoveToward(s32* p, s32 target) {
         return;
     }
 
-    *p = cur + delta;
+    *value = cur + delta;
 }
 
 void task_bos_dsd_rock_0(DsdRockWork* work, DsdWork* arg) {

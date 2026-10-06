@@ -415,8 +415,8 @@ void BosLstFldResetShake() {
     sBosLstFldShakeOffset = 0;
 }
 
-void BosLstFldSetShake(s16 a) {
-    sBosLstFldShakePattern = a;
+void BosLstFldSetShake(s16 pattern) {
+    sBosLstFldShakePattern = pattern;
     sBosLstFldShakeStep = 0;
     sBosLstFldShakeOffset = 0;
 }
@@ -440,26 +440,26 @@ s32 BosLstFldGetShake() {
     return sBosLstFldShakeOffset;
 }
 
-void BosLstFldSetBgMode(Task* t, s32 a, s32 b) {
+void BosLstFldSetBgMode(Task* t, s32 mode, s32 scrollDir) {
     LstFldWork* w = t->work;
 
-    if (a != w->nextBgMode) {
-        w->nextBgMode = a;
+    if (mode != w->nextBgMode) {
+        w->nextBgMode = mode;
         w->fadeStep = 0;
-        w->nextScrollDir = b;
+        w->nextScrollDir = scrollDir;
     }
 }
 
-void BosLstFldSetCameraMode(Task* t, s32 a) {
+void BosLstFldSetCameraMode(Task* t, s32 mode) {
     LstFldWork* w = t->work;
 
-    w->cameraMode = a;
+    w->cameraMode = mode;
 }
 
-void BosLstFldSetScrollSpeed(Task* t, s32 a) {
+void BosLstFldSetScrollSpeed(Task* t, s32 speed) {
     LstFldWork* w = t->work;
 
-    w->scrollSpeed = ((a >> 8) * 5 >> 2) + 2;
+    w->scrollSpeed = ((speed >> 8) * 5 >> 2) + 2;
 }
 
 void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {

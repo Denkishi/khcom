@@ -77,7 +77,7 @@ u8 BosLstLsrIsFiring(Task* task) {
     return result;
 }
 
-void BosLstLsrFire(Task* task, Vec3* a, Vec3* b, s32 c, u16 d) {
+void BosLstLsrFire(Task* task, Vec3* origin, Vec3* target, s32 angle, u16 delay) {
     LstLsrWork* s;
     s16 x1;
     s16 y1;
@@ -86,10 +86,10 @@ void BosLstLsrFire(Task* task, Vec3* a, Vec3* b, s32 c, u16 d) {
 
     s = task->work;
     s->state = 1;
-    s->angle = c;
-    s->delay = d;
-    s->pos = *a;
-    s->pos2 = *b;
+    s->angle = angle;
+    s->delay = delay;
+    s->pos = *origin;
+    s->pos2 = *target;
     WorldToScreen(&x1, &y1, s->pos.x, s->pos.y, s->pos.z);
     WorldToScreen(&x2, &y2, s->pos2.x, s->pos2.y, s->pos2.z);
     s->duration = (s16)BosLstLsrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 16;

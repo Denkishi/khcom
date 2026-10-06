@@ -159,28 +159,28 @@ TaskDesc gTaskDescBosBoogieKaihuku = {
     sizeof(BoogieKaihukuWork),
 };
 
-u8 ClampBoogieDicePosition(s32* a, s32* b, s16 c, u16 d) {
+u8 ClampBoogieDicePosition(s32* x, s32* y, s16 marginX, u16 marginY) {
     u8 r;
 
     r = 0;
 
-    if (*a < (128 - c) << 8) {
-        *a = (128 - c) << 8;
+    if (*x < (128 - marginX) << 8) {
+        *x = (128 - marginX) << 8;
         r = 1;
     }
 
-    if (*a > (c + 368) << 8) {
-        *a = (c + 368) << 8;
+    if (*x > (marginX + 368) << 8) {
+        *x = (marginX + 368) << 8;
         r = 1;
     }
 
-    if (*b < (576 - (s16)d) << 8) {
-        *b = (576 - (s16)d) << 8;
+    if (*y < (576 - (s16)marginY) << 8) {
+        *y = (576 - (s16)marginY) << 8;
         r = 1;
     }
 
-    if (*b > ((s16)d + 632) << 8) {
-        *b = ((s16)d + 632) << 8;
+    if (*y > ((s16)marginY + 632) << 8) {
+        *y = ((s16)marginY + 632) << 8;
         r = 1;
     }
 
@@ -793,12 +793,12 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
     return 1;
 }
 
-void BosBoogieSakuDrawAt(BoogieSakuWork* work, s32 a, u16 b) {
+void BosBoogieSakuDrawAt(BoogieSakuWork* work, s32 px, u16 flags) {
     s16 x;
     s16 y;
 
-    WorldToScreen(&x, &y, a, 0x23F00, -0x2000);
-    DrawSprite(x, y + 1, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, b, 0xE700);
+    WorldToScreen(&x, &y, px, 0x23F00, -0x2000);
+    DrawSprite(x, y + 1, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, flags, 0xE700);
     TaskPoolDraw(&work->tasks);
 }
 
@@ -896,26 +896,26 @@ void task_bos_boogie_mapanime_2() {
 void task_bos_boogie_mapanime_3() {
 }
 
-u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 w, s16 h, s32 z) {
+u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 marginX, s16 offsetY, s32 z) {
     u8 r = 0;
 
-    if (*x < (0x80 - w) << 8) {
-        *x = (0x80 - w) << 8;
+    if (*x < (0x80 - marginX) << 8) {
+        *x = (0x80 - marginX) << 8;
         r = 1;
     }
 
-    if (*x > (w + 0x170) << 8) {
-        *x = (w + 0x170) << 8;
+    if (*x > (marginX + 0x170) << 8) {
+        *x = (marginX + 0x170) << 8;
         r = 1;
     }
 
-    if (*y < (0x240 - h) << 8) {
-        *y = (0x240 - h) << 8;
+    if (*y < (0x240 - offsetY) << 8) {
+        *y = (0x240 - offsetY) << 8;
         r = 1;
     }
 
-    if (*y > (0x278 - h) << 8) {
-        *y = (0x278 - h) << 8;
+    if (*y > (0x278 - offsetY) << 8) {
+        *y = (0x278 - offsetY) << 8;
         r = 1;
     }
 

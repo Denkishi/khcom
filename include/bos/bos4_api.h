@@ -25,8 +25,8 @@ typedef struct BosMapanimeState {
     const BosMapanimeDef* def;
 } BosMapanimeState;
 
-void BosMapanimeInit(struct BosMapanimeState* p, const struct BosMapanimeDef* q);
-u8 BosMapanimeUpdate(struct BosMapanimeState* p, const struct BosMapanimeDef* q, u8 a);
+void BosMapanimeInit(struct BosMapanimeState* anim, const struct BosMapanimeDef* def);
+u8 BosMapanimeUpdate(struct BosMapanimeState* anim, const struct BosMapanimeDef* def, u8 defer);
 void ResetPooState();
 void SavePooState(void* state);
 void LoadPooState(const void* state);

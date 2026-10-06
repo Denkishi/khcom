@@ -19,6 +19,7 @@
 #include "system_state.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "fld_types.h"
 
 static FieldTransitionWork* sFieldTransitionWork;
 
@@ -55,34 +56,34 @@ void FieldTransitionUpdate() {
             AnimInit(&sFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {
-            case 0:
+            case FLD_ANGLE_UP:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bb01Anims, gRik1bb01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1bb01Tiles);
                 break;
-            case 45:
+            case FLD_ANGLE_UP_RIGHT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bl01Anims, gRik1bl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1bl01Tiles);
                 sFieldTransitionWork->flipped = TRUE;
                 break;
-            case 64:
+            case FLD_ANGLE_RIGHT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ll01Anims, gRik1ll01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1ll01Tiles);
                 sFieldTransitionWork->flipped = TRUE;
                 break;
-            case 83:
+            case FLD_ANGLE_DOWN_RIGHT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1fl01Tiles);
                 sFieldTransitionWork->flipped = TRUE;
                 break;
-            case 128:
+            case FLD_ANGLE_DOWN:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ff01Anims, gRik1ff01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1ff01Tiles);
                 break;
-            case 173:
+            case FLD_ANGLE_DOWN_LEFT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1fl01Tiles);
                 break;
-            case 192:
+            case FLD_ANGLE_LEFT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ll01Anims, gRik1ll01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1ll01Tiles);
                 break;
@@ -96,34 +97,34 @@ void FieldTransitionUpdate() {
             AnimInit(&sFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {
-            case 0:
+            case FLD_ANGLE_UP:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bb01Anims, gSor1bb01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1bb01Tiles);
                 break;
-            case 45:
+            case FLD_ANGLE_UP_RIGHT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bl01Anims, gSor1bl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1bl01Tiles);
                 sFieldTransitionWork->flipped = TRUE;
                 break;
-            case 64:
+            case FLD_ANGLE_RIGHT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ll01Anims, gSor1ll01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1ll01Tiles);
                 sFieldTransitionWork->flipped = TRUE;
                 break;
-            case 83:
+            case FLD_ANGLE_DOWN_RIGHT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1fl01Anims, gSor1fl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1fl01Tiles);
                 sFieldTransitionWork->flipped = TRUE;
                 break;
-            case 128:
+            case FLD_ANGLE_DOWN:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ff01Anims, gSor1ff01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1ff01Tiles);
                 break;
-            case 173:
+            case FLD_ANGLE_DOWN_LEFT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1fl01Anims, gSor1fl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1fl01Tiles);
                 break;
-            case 192:
+            case FLD_ANGLE_LEFT:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ll01Anims, gSor1ll01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1ll01Tiles);
                 break;

@@ -49,7 +49,7 @@ void RequestBossCardRandom();
 u8 GetBossCardShownValue();
 s16 ObtainCard(u16 cardId);
 u8* GetDeckName(u8 index);
-s16 CountActiveDeckCards(s32 index);
+s16 CountActiveDeckCards(s32 cardSet);
 u16 GetDeckCardCount(u8 index);
 void InitSoraDecks();
 void InitDebugDecks();

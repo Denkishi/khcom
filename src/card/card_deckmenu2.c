@@ -886,7 +886,7 @@ u16 CountDeckCardsOfCategory(u8 slot, u8 deckIndex) {
     return count;
 }
 
-s16 CountActiveDeckCards(s32 index) {
+s16 CountActiveDeckCards(s32 cardSet) {
     u16 count;
     s16 i;
     u16* cards;
@@ -894,8 +894,8 @@ s16 CountActiveDeckCards(s32 index) {
     count = 0;
     cards = GetActiveDeck()->cards;
 
-    switch (index) {
-    case 0:
+    switch (cardSet) {
+    case DECK_CARD_SET_MAIN:
         for (i = 0; i <= 98; i++) {
             if (cards[i] != 0xFFFF) {
                 if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category <= 2) {
@@ -905,7 +905,7 @@ s16 CountActiveDeckCards(s32 index) {
         }
 
         break;
-    case 1:
+    case DECK_CARD_SET_ENEMY:
         for (i = 0; i <= 98; i++) {
             if (cards[i] != 0xFFFF) {
                 if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == 3) {
@@ -920,14 +920,14 @@ s16 CountActiveDeckCards(s32 index) {
     return count;
 }
 
-s16 CountDeckCards(s32 mode, const Deck* deck) {
+s16 CountDeckCards(s32 cardSet, const Deck* deck) {
     s16 count;
     s16 i;
 
     count = 0;
 
-    switch (mode) {
-    case 0:
+    switch (cardSet) {
+    case DECK_CARD_SET_MAIN:
         for (i = 0; i < deck->cardCount; i++) {
             if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category <= 2) {
                 count++;
@@ -935,7 +935,7 @@ s16 CountDeckCards(s32 mode, const Deck* deck) {
         }
 
         break;
-    case 1:
+    case DECK_CARD_SET_ENEMY:
         for (i = 0; i < deck->cardCount; i++) {
             if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category == 3) {
                 count++;
@@ -948,14 +948,14 @@ s16 CountDeckCards(s32 mode, const Deck* deck) {
     return count;
 }
 
-void CopyActiveDeckCards(s32 index, u16* out) {
+void CopyActiveDeckCards(s32 cardSet, u16* out) {
     u16* cards;
     u16 i;
 
     cards = GetActiveDeck()->cards;
 
-    switch (index) {
-    case 0:
+    switch (cardSet) {
+    case DECK_CARD_SET_MAIN:
         for (i = 0; i < 99; i++) {
             if (cards[i] != 0xFFFF) {
                 if (gCardDefs[gCardCollection[cards[i]] & 0xFFF].category <= 2) {
@@ -965,7 +965,7 @@ void CopyActiveDeckCards(s32 index, u16* out) {
         }
 
         break;
-    case 1:
+    case DECK_CARD_SET_ENEMY:
         for (i = 0; i < 99; i++) {
             if (cards[i] != 0xFFFF) {
                 if (gCardDefs[gCardCollection[cards[i]] & 0xFFF].category == 3) {

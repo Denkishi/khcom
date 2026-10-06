@@ -561,16 +561,16 @@ static void cardbattle_0(CardBattleWork* work) {
         work->slotCounts[3] = work->cardsLeft[3] = 0;
         work->slotCounts[2] = work->cardsLeft[2] = 0;
         work->slotCounts[1] = work->cardsLeft[1] = 0;
-        InitSoraTutorialCardList(work, 0);
-        InitSoraTutorialCardList(work, 1);
+        InitSoraTutorialCardList(work, DECK_CARD_SET_MAIN);
+        InitSoraTutorialCardList(work, DECK_CARD_SET_ENEMY);
     } else {
-        work->slotCounts[0] = CountActiveDeckCards(0) + 15;
-        work->cardsLeft[0] = CountActiveDeckCards(0) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountActiveDeckCards(1);
+        work->slotCounts[0] = CountActiveDeckCards(DECK_CARD_SET_MAIN) + 15;
+        work->cardsLeft[0] = CountActiveDeckCards(DECK_CARD_SET_MAIN) + 1;
+        work->slotCounts[3] = work->cardsLeft[3] = CountActiveDeckCards(DECK_CARD_SET_ENEMY);
         work->slotCounts[2] = work->cardsLeft[2] = 0;
         work->slotCounts[1] = work->cardsLeft[1] = 0;
-        InitSoraCardList(work, 0);
-        InitSoraCardList(work, 1);
+        InitSoraCardList(work, DECK_CARD_SET_MAIN);
+        InitSoraCardList(work, DECK_CARD_SET_ENEMY);
     }
 
     work->reloadCounts[2] = work->reloadCounts[1] = work->reloadCounts[0] = 0;
@@ -1578,15 +1578,15 @@ void ClearSoraCardPlayFlags() {
     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
 }
 
-void LoadActiveDeckCardSlots(CardSlot* slots, s32 deckIndex) {
+void LoadActiveDeckCardSlots(CardSlot* slots, s32 cardSet) {
     u16* cardIds;
     u16 n;
     u16 i;
 
-    n = CountActiveDeckCards(deckIndex);
+    n = CountActiveDeckCards(cardSet);
     cardIds = EwramAlloc(n * 2);
     CpuFill16(0, cardIds, n * 2);
-    CopyActiveDeckCards(deckIndex, cardIds);
+    CopyActiveDeckCards(cardSet, cardIds);
 
     for (i = 0; i < n; i++) {
         slots[i].unk_06 = 0;
@@ -1597,7 +1597,7 @@ void LoadActiveDeckCardSlots(CardSlot* slots, s32 deckIndex) {
         slots[i].restoreOnReload = 0;
     }
 
-    if (deckIndex == 0) {
+    if (cardSet == DECK_CARD_SET_MAIN) {
         slots[n].unk_06 = 0;
         slots[n].stocked = 0;
         slots[n].removed = 0;
@@ -1652,11 +1652,11 @@ void ShuffleCardSlots(CardSlot* slots, u8 count) {
     }
 }
 
-void InitSoraTutorialCardList(CardBattleWork* work, s32 mode) {
+void InitSoraTutorialCardList(CardBattleWork* work, s32 cardSet) {
     u16 n = gTutorialDeck.cardCount;
 
-    switch (mode) {
-    case 0: {
+    switch (cardSet) {
+    case DECK_CARD_SET_MAIN: {
         CardSlot* slots;
         u16 i;
 
@@ -1682,7 +1682,7 @@ void InitSoraTutorialCardList(CardBattleWork* work, s32 mode) {
         work->cursors[0] = 0;
         break;
     }
-    case 1: {
+    case DECK_CARD_SET_ENEMY: {
         CardSlot* slot;
         u16* cursor;
         s32 k;
@@ -1699,11 +1699,11 @@ void InitSoraTutorialCardList(CardBattleWork* work, s32 mode) {
     }
 }
 
-void InitSoraCardList(CardBattleWork* work, s32 mode) {
-    u16 n = CountActiveDeckCards(mode);
+void InitSoraCardList(CardBattleWork* work, s32 cardSet) {
+    u16 n = CountActiveDeckCards(cardSet);
 
-    switch (mode) {
-    case 0:
+    switch (cardSet) {
+    case DECK_CARD_SET_MAIN:
         if (n != 0) {
             CardSlot* slots;
             u8 i;
@@ -1728,7 +1728,7 @@ void InitSoraCardList(CardBattleWork* work, s32 mode) {
                 work->slots[0][i].used = 1;
             }
 
-            LoadActiveDeckCardSlots(work->slots[0], 0);
+            LoadActiveDeckCardSlots(work->slots[0], DECK_CARD_SET_MAIN);
             work->cursors[0] = 0;
         } else {
             CardSlot* slot;
@@ -1745,7 +1745,7 @@ void InitSoraCardList(CardBattleWork* work, s32 mode) {
         }
 
         break;
-    case 1:
+    case DECK_CARD_SET_ENEMY:
         if (n != 0) {
             CardSlot* slots;
             u8 i;
@@ -1761,7 +1761,7 @@ void InitSoraCardList(CardBattleWork* work, s32 mode) {
                 work->slots[3][i].used = 0;
             }
 
-            LoadActiveDeckCardSlots(work->slots[3], 1);
+            LoadActiveDeckCardSlots(work->slots[3], DECK_CARD_SET_ENEMY);
             work->cursors[3] = 0;
         } else {
             CardSlot* slot;

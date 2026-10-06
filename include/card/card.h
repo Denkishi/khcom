@@ -138,6 +138,11 @@ typedef struct CardDisplayWork {
 
 typedef char CardDisplayWork_size[(sizeof(CardDisplayWork) == 0xA8) ? 1 : -1];
 
+enum DeckCardSet {
+    DECK_CARD_SET_MAIN,
+    DECK_CARD_SET_ENEMY
+};
+
 typedef struct CardBattleWork {
     TaskPool tasks;
     void* tiles;
@@ -1681,7 +1686,7 @@ u16 CountAvailableCardSlots(CardBattleWork* work, u8 listIndex);
 u8 UpdatePremireChanceResult(struct PremireChanceWork* work, void* task);
 u8 SoraCardUpdateLoaded(CardDisplayWork* work, void* task);
 u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* task);
-void LoadActiveDeckCardSlots(CardSlot* slots, s32 deckIndex);
+void LoadActiveDeckCardSlots(CardSlot* slots, s32 cardSet);
 u8 SoraCardClosed(CardDisplayWork* work, void* task);
 u8 SoraReloadCardClosed(CardDisplayWork* work, void* task);
 u8 UpdateMapcardToCenter(MapcardWork* work, void* task);
@@ -1793,7 +1798,7 @@ u8 card_reload_1(CardDisplayWork* work, void* task);
 void ResetGridScroll(DeckMenuWork* work);
 u8 UpdateMapcardMoveToFront(MapcardWork* work, void* task);
 u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task);
-s16 CountDeckCards(s32 mode, const Deck* deck);
+s16 CountDeckCards(s32 cardSet, const Deck* deck);
 u8 UpdateCardMsgwinClose(CardMsgWinWork* work);
 u8 UpdateReloadChildRetracted(ReloadChildWork* work, void* task);
 void DeckCard2_2(DeckCard2Work* work);
@@ -1839,7 +1844,7 @@ u8 FindDeckExchangeCardInDirection(DeckExchangeWork* work, s16 x, s16 y, u16 dir
 u8 EnemyCardWaitPlayEnd(CardDisplayWork* work, void* task);
 u8 AddCardToActiveDeck(u16 card);
 void SetRikuCardKindObtained(u16 kind);
-void CopyActiveDeckCards(s32 index, u16* out);
+void CopyActiveDeckCards(s32 cardSet, u16* out);
 void DeckConfirmDraw(DeckConfirmWork* work);
 void DeckConfirmDestroy(DeckConfirmWork* work);
 u8 ScrollGridUp(DeckMenuWork* work, u8 playSound);
@@ -2431,8 +2436,8 @@ u16 GetNextRandomHcEffect(u16* index);
 u16 GetRandomHcEffect();
 u8 HasMapCard(u16 cardId);
 void IncrementReloadCount(CardBattleWork* work);
-void InitSoraCardList(CardBattleWork* work, s32 mode);
-void InitSoraTutorialCardList(CardBattleWork* work, s32 mode);
+void InitSoraCardList(CardBattleWork* work, s32 cardSet);
+void InitSoraTutorialCardList(CardBattleWork* work, s32 cardSet);
 u8 IsCardDisplayOffScreen(CardDisplayWork* work);
 u8 IsLevelUpStockUnlocked();
 u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCount, void* p);

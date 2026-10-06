@@ -23,14 +23,14 @@
 static FieldTransitionWork* sFieldTransitionWork;
 
 void FieldTransitionInit() {
-    FieldTransitionWork* p;
-    FieldTransitionWork** pp = &sFieldTransitionWork;
-    p = EwramAlloc(sizeof(FieldTransitionWork));
-    *pp = p;
-    p->initialized = 0;
-    p->tiles = NULL;
-    p->palette = NULL;
-    p->flipped = 0;
+    FieldTransitionWork* work;
+    FieldTransitionWork** slot = &sFieldTransitionWork;
+    work = EwramAlloc(sizeof(FieldTransitionWork));
+    *slot = work;
+    work->initialized = 0;
+    work->tiles = NULL;
+    work->palette = NULL;
+    work->flipped = 0;
 }
 
 void FieldTransitionUpdate() {

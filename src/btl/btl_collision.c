@@ -356,17 +356,17 @@ static ListPool sColliderPoolPlayerOnly;
 static ListPool sColliderPoolObstacle;
 
 u8 CanAttackBoxHitBtlObj(BtlObj* obj, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
-    BtlObj* q = obj->parent;
-    u64 f;
+    BtlObj* owner = obj->parent;
+    u64 flags;
 
-    if (q != NULL) {
-        f = q->flags | obj->flags;
+    if (owner != NULL) {
+        flags = owner->flags | obj->flags;
     } else {
-        f = obj->flags;
-        q = obj;
+        flags = obj->flags;
+        owner = obj;
     }
 
-    if (f & (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_UNHITTABLE)) {
+    if (flags & (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_UNHITTABLE)) {
         return 0;
     }
 
@@ -394,7 +394,7 @@ u8 CanAttackBoxHitBtlObj(BtlObj* obj, s32 x, s32 y, s32 z, s16 halfX, s16 halfY,
         return 0;
     }
 
-    if (q->invincibleTimer > 0) {
+    if (owner->invincibleTimer > 0) {
         return 0;
     }
 
@@ -779,7 +779,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 }
 
 u8 TestAttackBox(s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
-    BtlObj* o;
+    BtlObj* opponent;
 
     gBtlWork->areaUpdated = 1;
     gBtlWork->x3 = x;
@@ -791,30 +791,30 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-            o = gRikuBtlWork->actor;
+            opponent = gRikuBtlWork->actor;
         } else {
-            o = gBtlWork->actor;
+            opponent = gBtlWork->actor;
         }
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
+        if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
             return 1;
         }
     } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-        o = ListPoolFirst(&gBtlWork->pool);
+        opponent = ListPoolFirst(&gBtlWork->pool);
 
-        while (o != NULL) {
-            if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
+        while (opponent != NULL) {
+            if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
                 return 1;
             }
 
-            o = ListPoolNext(&o->node);
+            opponent = ListPoolNext(&opponent->node);
         }
 
         return 0;
     } else {
-        o = gBtlWork->actor;
+        opponent = gBtlWork->actor;
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
+        if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
             return 1;
         }
     }
@@ -827,20 +827,20 @@ s32 ApplyAttackToBtlObj(s32 attack, BtlObj* obj) {
 }
 
 s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
-    const BattleAttackDef* t;
-    BtlObj* o;
-    s32 sx;
-    s32 sy;
-    s32 sz;
-    s16 cnt;
-    s32 flag;
+    const BattleAttackDef* def;
+    BtlObj* opponent;
+    s32 sumX;
+    s32 sumY;
+    s32 sumZ;
+    s16 hitCount;
+    s32 blocked;
     s32 n;
-    s32 res;
-    s32 r2;
+    s32 result;
+    s32 enemyResult;
 
-    t = &sBattleAttackDefs[attack];
-    cnt = 0;
-    flag = 0;
+    def = &sBattleAttackDefs[attack];
+    hitCount = 0;
+    blocked = 0;
     gBtlWork->areaUpdated = 1;
     gBtlWork->x3 = x;
     gBtlWork->y3 = y;
@@ -851,81 +851,81 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-            o = gRikuBtlWork->actor;
+            opponent = gRikuBtlWork->actor;
         } else {
-            o = gBtlWork->actor;
+            opponent = gBtlWork->actor;
         }
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
-            res = ResolveAttackHit(o, attack);
+        if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
+            result = ResolveAttackHit(opponent, attack);
 
-            if (res == 1) {
-                if (t->hitEffect != NULL) {
-                    t->hitEffect(o->x, o->y, o->z);
+            if (result == 1) {
+                if (def->hitEffect != NULL) {
+                    def->hitEffect(opponent->x, opponent->y, opponent->z);
                 }
             }
 
-            return res;
+            return result;
         }
     } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-        o = ListPoolFirst(&gBtlWork->pool);
-        sz = 0;
-        sy = 0;
-        sx = 0;
+        opponent = ListPoolFirst(&gBtlWork->pool);
+        sumZ = 0;
+        sumY = 0;
+        sumX = 0;
 
-        while (o != NULL) {
-            if (!CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
-                o = ListPoolNext(&o->node);
+        while (opponent != NULL) {
+            if (!CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
+                opponent = ListPoolNext(&opponent->node);
                 continue;
             }
 
-            r2 = ResolveAttackHit(o, attack);
+            enemyResult = ResolveAttackHit(opponent, attack);
 
-            if (r2 == 1) {
-                sx += o->x;
-                sy += o->y;
-                sz += o->z;
-                cnt++;
+            if (enemyResult == 1) {
+                sumX += opponent->x;
+                sumY += opponent->y;
+                sumZ += opponent->z;
+                hitCount++;
 
-                if (t->flags & ATTACK_FLAG_SINGLE_TARGET) {
+                if (def->flags & ATTACK_FLAG_SINGLE_TARGET) {
                     break;
                 }
-            } else if (r2 == 2) {
-                flag = 1;
+            } else if (enemyResult == 2) {
+                blocked = 1;
             }
 
-            o = ListPoolNext(&o->node);
+            opponent = ListPoolNext(&opponent->node);
         }
 
-        if (flag) {
+        if (blocked) {
             return 2;
         }
 
-        n = cnt;
+        n = hitCount;
 
         if (n > 0) {
-            if (t->hitEffect != NULL) {
-                sx /= n;
-                sy /= n;
-                sz /= n;
-                t->hitEffect(sx, sy, sz);
+            if (def->hitEffect != NULL) {
+                sumX /= n;
+                sumY /= n;
+                sumZ /= n;
+                def->hitEffect(sumX, sumY, sumZ);
             }
 
             return 1;
         }
     } else {
-        o = gBtlWork->actor;
+        opponent = gBtlWork->actor;
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
-            res = ResolveAttackHit(o, attack);
+        if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
+            result = ResolveAttackHit(opponent, attack);
 
-            if (res == 1) {
-                if (t->hitEffect != NULL) {
-                    t->hitEffect(o->x, o->y, o->z);
+            if (result == 1) {
+                if (def->hitEffect != NULL) {
+                    def->hitEffect(opponent->x, opponent->y, opponent->z);
                 }
             }
 
-            return res;
+            return result;
         }
     }
 
@@ -1009,10 +1009,10 @@ void ColliderInit(Collider* collider, u32 type, u16 radius, u16 height) {
 }
 
 void ColliderUnregister(Collider* collider) {
-    Collider* q = collider->self;
+    Collider* self = collider->self;
 
-    if (q == collider) {
-        ListPoolRemove(&q->node, ColliderGetPool(q->type));
+    if (self == collider) {
+        ListPoolRemove(&self->node, ColliderGetPool(self->type));
     }
 }
 
@@ -1023,129 +1023,129 @@ void ColliderSetPosition(Collider* collider, s32 x, s32 y, s32 z) {
 }
 
 void ColliderClearPoolContacts(ListPool* pool) {
-    Collider* p = ListPoolFirst(pool);
+    Collider* collider = ListPoolFirst(pool);
 
-    while (p != NULL) {
-        p->colliding = 0;
-        p->touchedTypes = 0;
-        p->standFlags = 0;
-        p = ListPoolNext(&p->node);
+    while (collider != NULL) {
+        collider->colliding = 0;
+        collider->touchedTypes = 0;
+        collider->standFlags = 0;
+        collider = ListPoolNext(&collider->node);
     }
 }
 
 void ColliderCheckPoolPairs(ListPool* poolA, ListPool* poolB) {
-    Collider* p;
-    Collider* q;
-    s32 sum;
+    Collider* colliderA;
+    Collider* colliderB;
+    s32 radiusSum;
     s32 dx;
     s32 dy;
-    s32 pen;
+    s32 penetration;
     s32 dz;
-    s32 t;
+    s32 pushX;
     u8 angle;
 
-    p = ListPoolFirst(poolA);
+    colliderA = ListPoolFirst(poolA);
 
-    while (p != NULL) {
-        q = ListPoolLast(poolB);
+    while (colliderA != NULL) {
+        colliderB = ListPoolLast(poolB);
 
-        while (q != NULL && p != q) {
-            sum = p->radius + q->radius;
-            dx = p->x - q->x;
+        while (colliderB != NULL && colliderA != colliderB) {
+            radiusSum = colliderA->radius + colliderB->radius;
+            dx = colliderA->x - colliderB->x;
 
             if (dx < 0) {
-                dx = q->x - p->x;
+                dx = colliderB->x - colliderA->x;
             }
 
-            dy = p->y - q->y;
+            dy = colliderA->y - colliderB->y;
 
             if (dy < 0) {
-                dy = q->y - p->y;
+                dy = colliderB->y - colliderA->y;
             }
 
-            if (dx < sum && dy < sum) {
-                pen = sum - Sqrt8(((dx * dx) >> 8) + ((dy * dy) >> 8));
+            if (dx < radiusSum && dy < radiusSum) {
+                penetration = radiusSum - Sqrt8(((dx * dx) >> 8) + ((dy * dy) >> 8));
 
-                if (pen > 0) {
-                    dz = p->z - q->z;
+                if (penetration > 0) {
+                    dz = colliderA->z - colliderB->z;
 
-                    if (dz < p->height && -dz < q->height) {
-                        q->colliding = 1;
-                        p->colliding = 1;
-                        p->otherType = q->type;
-                        q->otherType = p->type;
-                        p->touchedTypes |= 1 << q->type;
-                        q->touchedTypes |= 1 << p->type;
-                        angle = GetAngle(p->x, p->y, q->x, q->y);
-                        t = (pen * gSineTable[angle]) >> 8;
-                        p->pushX = -t;
-                        p->pushY = -((pen * -gSineTable[angle + 64]) >> 8);
-                        p->other = q;
-                        q->pushX = t;
-                        q->pushY = -p->pushY;
-                        q->other = p;
+                    if (dz < colliderA->height && -dz < colliderB->height) {
+                        colliderB->colliding = 1;
+                        colliderA->colliding = 1;
+                        colliderA->otherType = colliderB->type;
+                        colliderB->otherType = colliderA->type;
+                        colliderA->touchedTypes |= 1 << colliderB->type;
+                        colliderB->touchedTypes |= 1 << colliderA->type;
+                        angle = GetAngle(colliderA->x, colliderA->y, colliderB->x, colliderB->y);
+                        pushX = (penetration * gSineTable[angle]) >> 8;
+                        colliderA->pushX = -pushX;
+                        colliderA->pushY = -((penetration * -gSineTable[angle + 64]) >> 8);
+                        colliderA->other = colliderB;
+                        colliderB->pushX = pushX;
+                        colliderB->pushY = -colliderA->pushY;
+                        colliderB->other = colliderA;
 
-                        if (q->flags & COLLIDER_FLAG_IS_PLATFORM) {
-                            p->platformZ = q->z - q->height;
-                            p->penetration = pen;
-                            p->platformY = q->y >> 1;
-                            p->platformX = q->x;
+                        if (colliderB->flags & COLLIDER_FLAG_IS_PLATFORM) {
+                            colliderA->platformZ = colliderB->z - colliderB->height;
+                            colliderA->penetration = penetration;
+                            colliderA->platformY = colliderB->y >> 1;
+                            colliderA->platformX = colliderB->x;
                         }
 
-                        if (p->flags & COLLIDER_FLAG_IS_PLATFORM) {
-                            q->platformZ = p->z - p->height;
-                            q->penetration = pen;
-                            q->platformY = p->y >> 1;
-                            q->platformX = p->x;
+                        if (colliderA->flags & COLLIDER_FLAG_IS_PLATFORM) {
+                            colliderB->platformZ = colliderA->z - colliderA->height;
+                            colliderB->penetration = penetration;
+                            colliderB->platformY = colliderA->y >> 1;
+                            colliderB->platformX = colliderA->x;
                         }
                     } else {
-                        if (q->flags & COLLIDER_FLAG_IS_PLATFORM) {
-                            if (q->z - q->height >= p->z) {
-                                p->standFlags |= COLLIDER_STAND_OVER_PLATFORM;
+                        if (colliderB->flags & COLLIDER_FLAG_IS_PLATFORM) {
+                            if (colliderB->z - colliderB->height >= colliderA->z) {
+                                colliderA->standFlags |= COLLIDER_STAND_OVER_PLATFORM;
 
-                                if (q->z - q->height == p->z) {
-                                    q->standFlags |= COLLIDER_STAND_STOOD_ON;
-                                    p->touchedTypes |= 1 << q->type;
-                                    q->touchedTypes |= 1 << p->type;
+                                if (colliderB->z - colliderB->height == colliderA->z) {
+                                    colliderB->standFlags |= COLLIDER_STAND_STOOD_ON;
+                                    colliderA->touchedTypes |= 1 << colliderB->type;
+                                    colliderB->touchedTypes |= 1 << colliderA->type;
                                 }
 
-                                p->platformZ = q->z - q->height;
-                                p->penetration = pen;
-                                p->platformY = q->y >> 1;
-                                p->platformX = q->x;
-                                p->other = q;
-                                p->otherType = q->type;
-                                q->otherType = p->type;
+                                colliderA->platformZ = colliderB->z - colliderB->height;
+                                colliderA->penetration = penetration;
+                                colliderA->platformY = colliderB->y >> 1;
+                                colliderA->platformX = colliderB->x;
+                                colliderA->other = colliderB;
+                                colliderA->otherType = colliderB->type;
+                                colliderB->otherType = colliderA->type;
                             }
                         }
 
-                        if (p->flags & COLLIDER_FLAG_IS_PLATFORM) {
-                            if (p->z - p->height >= q->z) {
-                                q->standFlags |= COLLIDER_STAND_OVER_PLATFORM;
+                        if (colliderA->flags & COLLIDER_FLAG_IS_PLATFORM) {
+                            if (colliderA->z - colliderA->height >= colliderB->z) {
+                                colliderB->standFlags |= COLLIDER_STAND_OVER_PLATFORM;
 
-                                if (p->z - p->height == q->z) {
-                                    p->standFlags |= COLLIDER_STAND_STOOD_ON;
-                                    p->touchedTypes |= 1 << q->type;
-                                    q->touchedTypes |= 1 << p->type;
+                                if (colliderA->z - colliderA->height == colliderB->z) {
+                                    colliderA->standFlags |= COLLIDER_STAND_STOOD_ON;
+                                    colliderA->touchedTypes |= 1 << colliderB->type;
+                                    colliderB->touchedTypes |= 1 << colliderA->type;
                                 }
 
-                                q->platformZ = p->z - p->height;
-                                q->penetration = pen;
-                                q->platformY = p->y >> 1;
-                                q->platformX = p->x;
-                                q->other = p;
-                                p->otherType = q->type;
-                                q->otherType = p->type;
+                                colliderB->platformZ = colliderA->z - colliderA->height;
+                                colliderB->penetration = penetration;
+                                colliderB->platformY = colliderA->y >> 1;
+                                colliderB->platformX = colliderA->x;
+                                colliderB->other = colliderA;
+                                colliderA->otherType = colliderB->type;
+                                colliderB->otherType = colliderA->type;
                             }
                         }
                     }
                 }
             }
 
-            q = ListPoolPrev(&q->node);
+            colliderB = ListPoolPrev(&colliderB->node);
         }
 
-        p = ListPoolNext(&p->node);
+        colliderA = ListPoolNext(&colliderA->node);
     }
 }
 

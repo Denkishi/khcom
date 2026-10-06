@@ -57,20 +57,20 @@ void SetBattleZoom(u16 steps, s32 scale, s32 x, s32 y) {
 }
 
 void AnimChangeWithDef(const AnimDef* defs, void* anim, u16 index, u16 flags, void* tiles) {
-    const AnimDef* e = &defs[index];
-    AnimChangeWithTables(anim, e->animId, flags, e->anims, e->gfxTable);
-    SetObjTileSource(tiles, e->tiles);
+    const AnimDef* def = &defs[index];
+    AnimChangeWithTables(anim, def->animId, flags, def->anims, def->gfxTable);
+    SetObjTileSource(tiles, def->tiles);
 }
 
 void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz) {
     s16 x;
     s16 y;
-    u8 ang;
-    s32 c;
+    u8 angle;
+    s32 cosIndex;
     s16 idx;
     const s16* sine;
-    s32 u;
-    s32 v;
+    s32 rotX;
+    s32 rotY;
 
     if (gBtlWork->scale == 0x100) {
         x = (px >> 8) - (gBtlWork->viewX >> 8);
@@ -84,85 +84,85 @@ void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz) {
         *outX = x + 120;
         *outY = y + 80;
     } else {
-        ang = -gBtlWork->rotation;
+        angle = -gBtlWork->rotation;
         sine = gSineTable;
-        c = ang + 64;
-        idx = c & 255;
-        u = sine[idx] * x;
-        v = sine[idx += 64] * x;
-        u += sine[ang] * y;
-        v += sine[c] * y;
-        *outX = (u >> 8) + 120;
-        *outY = (v >> 8) + 80;
+        cosIndex = angle + 64;
+        idx = cosIndex & 255;
+        rotX = sine[idx] * x;
+        rotY = sine[idx += 64] * x;
+        rotX += sine[angle] * y;
+        rotY += sine[cosIndex] * y;
+        *outX = (rotX >> 8) + 120;
+        *outY = (rotY >> 8) + 80;
     }
 }
 
 void CreateBtlPopTask(BtlObj* obj, s16 kind) {
-    BtlPrizeSrc a;
-    s16* t;
+    BtlPrizeSrc src;
+    s16* cooldown;
 
     if (kind != 9) {
         if (obj->parent != NULL) {
-            t = &obj->parent->popCooldown;
+            cooldown = &obj->parent->popCooldown;
         } else {
-            t = &obj->popCooldown;
+            cooldown = &obj->popCooldown;
         }
 
-        if (*t > 0) {
+        if (*cooldown > 0) {
             return;
         }
 
-        *t = 50;
+        *cooldown = 50;
     }
 
-    a.x = obj->x;
-    a.y = obj->y;
-    a.z = obj->z - ((obj->height / 2) << 8);
+    src.x = obj->x;
+    src.y = obj->y;
+    src.z = obj->z - ((obj->height / 2) << 8);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (kind == 9) {
-            a.kind = abs(gBtlWork->breakDifference);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPopCb, &a);
+            src.kind = abs(gBtlWork->breakDifference);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPopCb, &src);
             return;
         }
 
-        a.kind = kind;
-        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
+        src.kind = kind;
+        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &src);
         return;
     }
 
-    a.kind = kind;
+    src.kind = kind;
 
     if (kind == 9) {
         if (obj->flags & BTLOBJ_FLAG_NO_BREAK_POP) {
             return;
         }
 
-        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
+        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &src);
         return;
     }
 
-    TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
+    TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &src);
 }
 
 void BtlWorkInit() {
-    u8* d;
-    u8* p;
+    u8* dest;
+    u8* src;
     CpuFill32(0, gBtlWork, sizeof(BtlWork));
     gBtlWork->phase = BTL_PHASE_START;
     gBtlWork->fadeExcludedPalettes = 0xFFFF0000;
     gBtlWork->gravity = 0x42;
     gBtlWork->fadeAmount = 10;
-    d = gBtlWork->savedProgression;
-    p = (u8*)&gGameState;
-    p += offsetof(GameState, progression);
-    memcpy(d, p, 0x88);
+    dest = gBtlWork->savedProgression;
+    src = (u8*)&gGameState;
+    src += offsetof(GameState, progression);
+    memcpy(dest, src, 0x88);
     ListPoolInit(&gBtlWork->pool);
     ListPoolInit(&gBtlWork->pool2);
 }
 
 void UpdateEnemyCardUse() {
-    BtlObj* p;
+    BtlObj* enemy;
 
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         return;
@@ -176,33 +176,33 @@ void UpdateEnemyCardUse() {
         return;
     }
 
-    p = gBtlWork->actor4;
+    enemy = gBtlWork->actor4;
 
-    if (p == NULL) {
+    if (enemy == NULL) {
         return;
     }
 
-    if (p->flags & BTLOBJ_FLAGS_NO_CARD_USE) {
+    if (enemy->flags & BTLOBJ_FLAGS_NO_CARD_USE) {
         return;
     }
 
-    gBtlWork->actor3 = p;
-    UseEnemyCard(p->kind);
+    gBtlWork->actor3 = enemy;
+    UseEnemyCard(enemy->kind);
 }
 
 void HandleSoraCardInput() {
-    BtlObj* p;
-    u16 t;
-    u16 a;
+    BtlObj* player;
+    u16 timer;
+    u16 chord;
 
     if (gBtlWork->flags & BTL_FLAG_GIMMICK_CARD_ACTIVE) {
         return;
     }
 
-    t = gBtlWork->listSwitchTimer;
+    timer = gBtlWork->listSwitchTimer;
 
-    if ((s16)t > 0) {
-        gBtlWork->listSwitchTimer = t - 1;
+    if ((s16)timer > 0) {
+        gBtlWork->listSwitchTimer = timer - 1;
 
         if (gBtlWork->listSwitchTimer == 0) {
             RequestSwitchSoraCardList();
@@ -225,9 +225,9 @@ void HandleSoraCardInput() {
         return;
     }
 
-    a = ReadKeyChord(L_BUTTON, R_BUTTON);
+    chord = ReadKeyChord(L_BUTTON, R_BUTTON);
 
-    switch (a) {
+    switch (chord) {
     case L_BUTTON:
         RequestSoraNextCard();
         break;
@@ -269,9 +269,9 @@ void HandleSoraCardInput() {
         RequestSoraPrevCard();
     }
 
-    p = gBtlWork->actor;
+    player = gBtlWork->actor;
 
-    if (p->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
+    if (player->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -287,11 +287,11 @@ void HandleSoraCardInput() {
         return;
     }
 
-    if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+    if (player->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
-    if (a == (L_BUTTON | R_BUTTON)) {
+    if (chord == (L_BUTTON | R_BUTTON)) {
         if (GetSoraStockCount() > 2) {
             RequestSoraStockUse();
         } else {
@@ -311,18 +311,18 @@ void HandleSoraCardInput() {
 }
 
 void HandleRikuCardInput() {
-    BtlObj* p;
-    u16 t;
-    u16 a;
+    BtlObj* riku;
+    u16 timer;
+    u16 chord;
 
     if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
         return;
     }
 
-    t = gRikuBtlWork->listSwitchTimer;
+    timer = gRikuBtlWork->listSwitchTimer;
 
-    if ((s16)t > 0) {
-        gRikuBtlWork->listSwitchTimer = t - 1;
+    if ((s16)timer > 0) {
+        gRikuBtlWork->listSwitchTimer = timer - 1;
 
         if (gRikuBtlWork->listSwitchTimer == 0) {
             RequestSwitchRikuCardList();
@@ -331,9 +331,9 @@ void HandleRikuCardInput() {
         return;
     }
 
-    a = ReadKeyChord(L_BUTTON, R_BUTTON);
+    chord = ReadKeyChord(L_BUTTON, R_BUTTON);
 
-    switch (a) {
+    switch (chord) {
     case L_BUTTON:
         RequestRikuNextCard();
         break;
@@ -375,9 +375,9 @@ void HandleRikuCardInput() {
         RequestRikuPrevCard();
     }
 
-    p = gRikuBtlWork->actor;
+    riku = gRikuBtlWork->actor;
 
-    if (p->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
+    if (riku->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -393,11 +393,11 @@ void HandleRikuCardInput() {
         return;
     }
 
-    if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+    if (riku->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
-    if (a == (L_BUTTON | R_BUTTON)) {
+    if (chord == (L_BUTTON | R_BUTTON)) {
         if (GetRikuStockCount() > 2) {
             RequestRikuStockUse();
         } else {
@@ -417,8 +417,8 @@ void HandleRikuCardInput() {
 }
 
 void HandleTutorialCardInput() {
-    BtlObj* p;
-    u16 a;
+    BtlObj* player;
+    u16 chord;
     u16 pressed;
     u16 held;
 
@@ -438,12 +438,12 @@ void HandleTutorialCardInput() {
         return;
     }
 
-    a = ReadKeyChord(L_BUTTON, R_BUTTON);
+    chord = ReadKeyChord(L_BUTTON, R_BUTTON);
     pressed = GetKeysPressed();
     held = GetKeysHeld();
 
     if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL_NO_CARD_SELECT)) {
-        switch (a) {
+        switch (chord) {
         case L_BUTTON:
             RequestSoraNextCard();
             break;
@@ -490,9 +490,9 @@ void HandleTutorialCardInput() {
         RequestSoraPrevCard();
     }
 
-    p = gBtlWork->actor;
+    player = gBtlWork->actor;
 
-    if (p->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
+    if (player->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -508,11 +508,11 @@ void HandleTutorialCardInput() {
         return;
     }
 
-    if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+    if (player->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
-    if (a == (L_BUTTON | R_BUTTON)) {
+    if (chord == (L_BUTTON | R_BUTTON)) {
         if (GetSoraStockCount() > 2) {
             if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL_NO_STOCK_USE)) {
                 RequestSoraStockUse();
@@ -532,34 +532,34 @@ void HandleTutorialCardInput() {
 }
 
 void MakeOpponentsHittable() {
-    BtlWork* w = gBtlWork;
-    BtlObj* p;
+    BtlWork* btl = gBtlWork;
+    BtlObj* opponent;
 
-    if (w->flags & BTL_FLAG_VS_BATTLE) {
-        if (w->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-            p = gRikuBtlWork->actor;
-            p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
+    if (btl->flags & BTL_FLAG_VS_BATTLE) {
+        if (btl->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
+            opponent = gRikuBtlWork->actor;
+            opponent->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
             return;
         }
-    } else if (w->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-        p = ListPoolFirst(&w->pool);
+    } else if (btl->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
+        opponent = ListPoolFirst(&btl->pool);
 
-        while (p != NULL) {
-            p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
-            p->invincibleTimer = 0;
-            p = ListPoolNext(&p->node);
+        while (opponent != NULL) {
+            opponent->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
+            opponent->invincibleTimer = 0;
+            opponent = ListPoolNext(&opponent->node);
         }
 
         return;
     }
 
-    p = w->actor;
-    p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
+    opponent = btl->actor;
+    opponent->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
 }
 
 void DropFriendCard(s32 x, s32 y, s32 z) {
     u16 flags;
-    s16 v;
+    s16 friendIndex;
 
     flags = gGameState.progression.friendFlags;
 
@@ -576,41 +576,41 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
         return;
     }
 
-    v = -1;
+    friendIndex = -1;
 
     if (GetRandom() % 4 != 0) {
         switch (gGameState.world) {
         case WORLD_AGRABAH:
             if (flags & FRIEND_FLAG_ALADDIN) {
-                v = 2;
+                friendIndex = 2;
                 SetJiminyFlag(159);
             }
 
             break;
         case WORLD_ATLANTICA:
             if (flags & FRIEND_FLAG_ARIEL) {
-                v = 3;
+                friendIndex = 3;
                 SetJiminyFlag(160);
             }
 
             break;
         case WORLD_HALLOWEEN_TOWN:
             if (flags & FRIEND_FLAG_JACK) {
-                v = 4;
+                friendIndex = 4;
                 SetJiminyFlag(161);
             }
 
             break;
         case WORLD_NEVER_LAND:
             if (flags & FRIEND_FLAG_PETER_PAN) {
-                v = 5;
+                friendIndex = 5;
                 SetJiminyFlag(162);
             }
 
             break;
         case WORLD_HOLLOW_BASTION:
             if (flags & FRIEND_FLAG_THE_BEAST) {
-                v = 6;
+                friendIndex = 6;
                 SetJiminyFlag(163);
             }
 
@@ -618,22 +618,22 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
         }
     }
 
-    if (v == -1) {
+    if (friendIndex == -1) {
         if (GetRandom() % 2 != 0) {
             if (flags & FRIEND_FLAG_GOOFY) {
-                v = 0;
+                friendIndex = 0;
                 SetJiminyFlag(158);
             }
         } else {
             if (flags & FRIEND_FLAG_DONALD_DUCK) {
-                v = 1;
+                friendIndex = 1;
                 SetJiminyFlag(157);
             }
         }
     }
 
-    if (v != -1) {
-        CreateFriendCardTask(gBtlWork->taskPools, x >> 8, y >> 8, z >> 8, v);
+    if (friendIndex != -1) {
+        CreateFriendCardTask(gBtlWork->taskPools, x >> 8, y >> 8, z >> 8, friendIndex);
     }
 }
 
@@ -1101,42 +1101,42 @@ void UpdateBattleState() {
 u32 ClampBattlePosition(s32* px, s32* py, s32 radiusX, s32 radiusY) {
     s16 rx = radiusX;
     s16 ry = radiusY;
-    u8 r = 0;
+    u8 edge = 0;
 
     if (*py < (gBtlWork->yMin - ry) << 8) {
         *py = (gBtlWork->yMin - ry) << 8;
-        r = 3;
+        edge = 3;
     }
 
     if (*py > (gBtlWork->yMax + ry) << 8) {
         *py = (gBtlWork->yMax + ry) << 8;
-        r = 4;
+        edge = 4;
     }
 
     if (*px < (gBtlWork->xMin - rx) << 8) {
         *px = (gBtlWork->xMin - rx) << 8;
-        r = 1;
+        edge = 1;
     }
 
     if (*px > (gBtlWork->xMax + rx) << 8) {
         *px = (gBtlWork->xMax + rx) << 8;
-        r = 2;
+        edge = 2;
     }
 
-    return r;
+    return edge;
 }
 
 void SetBattleBounds(s32 xMin, s32 xMax, s32 yMin, s32 yMax) {
-    u16 a = xMin;
-    u16 b = xMax;
-    u16 c = yMin;
-    u16 d = yMax;
+    u16 x0 = xMin;
+    u16 x1 = xMax;
+    u16 y0 = yMin;
+    u16 y1 = yMax;
 
-    gBtlWork->xMin = a;
-    gBtlWork->xMax = b;
-    gBtlWork->yMin = c;
-    gBtlWork->yMax = d;
-    SetGimmickTarget(((s16)a + (s16)b) << 7, ((s16)c + (s16)d) << 7, -0x2000);
+    gBtlWork->xMin = x0;
+    gBtlWork->xMax = x1;
+    gBtlWork->yMin = y0;
+    gBtlWork->yMax = y1;
+    SetGimmickTarget(((s16)x0 + (s16)x1) << 7, ((s16)y0 + (s16)y1) << 7, -0x2000);
 }
 
 s32 ApplyBtlObjHit(BtlObj* obj) {
@@ -1270,9 +1270,9 @@ s32 ApplyBtlObjHit(BtlObj* obj) {
 }
 
 u8 TryStartCardAction(BtlObj* obj) {
-    u64 f = obj->flags;
+    u64 flags = obj->flags;
 
-    if (f & BTLOBJ_FLAG_CARD_ACTION_PENDING) {
+    if (flags & BTLOBJ_FLAG_CARD_ACTION_PENDING) {
         obj->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_HEAL_PENDING | BTLOBJ_FLAG_HURT | BTLOBJ_FLAG_STUN_PENDING | BTLOBJ_FLAG_GRAVITY_PENDING);
         obj->flags |= (BTLOBJ_FLAG_IN_CARD_ACTION | BTLOBJ_FLAG_HIT_LOCKED);
         obj->originX = obj->x;
@@ -1285,9 +1285,9 @@ u8 TryStartCardAction(BtlObj* obj) {
 }
 
 s32 UpdateBtlObjReaction(BtlObj* obj) {
-    u16 t;
-    u16 u;
-    u16 v;
+    u16 delayed;
+    u16 invincible;
+    u16 cooldown;
 
     if (obj->badStatus == BAD_STATUS_STOP) {
         if (obj->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
@@ -1298,10 +1298,10 @@ s32 UpdateBtlObjReaction(BtlObj* obj) {
             obj->delayedDamage += obj->damage;
         }
     } else {
-        t = obj->delayedDamage;
+        delayed = obj->delayedDamage;
 
         if ((s16)obj->delayedDamage > 0) {
-            obj->damage = t;
+            obj->damage = delayed;
             obj->delayedDamage = 0;
             gBtlWork->pendingHitStop = 0;
             obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
@@ -1312,16 +1312,16 @@ s32 UpdateBtlObjReaction(BtlObj* obj) {
         }
     }
 
-    u = obj->invincibleTimer;
+    invincible = obj->invincibleTimer;
 
     if (obj->invincibleTimer > 0) {
-        obj->invincibleTimer = u - 1;
+        obj->invincibleTimer = invincible - 1;
     }
 
-    v = obj->popCooldown;
+    cooldown = obj->popCooldown;
 
     if (obj->popCooldown > 0) {
-        obj->popCooldown = v - 1;
+        obj->popCooldown = cooldown - 1;
     }
 
     if (obj->flags & BTLOBJ_FLAG_CARD_BREAK_PENDING) {
@@ -1353,7 +1353,7 @@ u16 GetBattleSpritePriorityFlags(s32 y) {
 }
 
 void BeginBossDefeat(BtlObj* actor) {
-    BtlObj* p;
+    BtlObj* enemy;
 
     gBtlWork->flags |= BTL_FLAG_BOSS_DEFEATING;
     gBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
@@ -1362,11 +1362,11 @@ void BeginBossDefeat(BtlObj* actor) {
     m4aMPlayFadeOut(gMPlayTable[gSongTable[3].ms].info, 12);
     FadeStartIn(FADE_MODE_ADD_WHITE, 20);
     FadeLock();
-    p = ListPoolFirst(&gBtlWork->pool);
+    enemy = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != NULL) {
-        p->node.flags |= LIST_NODE_FLAG_SKIP;
-        p = ListPoolNext(&p->node);
+    while (enemy != NULL) {
+        enemy->node.flags |= LIST_NODE_FLAG_SKIP;
+        enemy = ListPoolNext(&enemy->node);
     }
 
     gBtlWork->enemyCount = 0;
@@ -1475,7 +1475,7 @@ void SetEnemyKindFlags(BtlObj* obj) {
 }
 
 void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
-    const EnemyBaseStats* e;
+    const EnemyBaseStats* stats;
     enum EmyId {
         EMY_ID_32 = 32,
         EMY_ID_33 = 33,
@@ -1493,17 +1493,17 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
         EMY_ID_51 = 51,
         EMY_ID_52 = 52,
         EMY_ID_53 = 53
-    } v;
-    s32 a;
-    s32 b;
-    s32 c;
+    } id;
+    s32 hpRate;
+    s32 attackRate;
+    s32 expRate;
 
-    e = GetEnemyBaseStats(kind->id);
+    stats = GetEnemyBaseStats(kind->id);
 
-    if (e != NULL) {
-        v = kind->id;
+    if (stats != NULL) {
+        id = kind->id;
 
-        switch (v) {
+        switch (id) {
         case EMY_ID_45:
         case EMY_ID_48:
         case EMY_ID_49:
@@ -1609,25 +1609,25 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
             }
         default:
             if (gGameState.floor <= 9) {
-                a = 25;
-                b = 102;
-                c = 384;
+                hpRate = 25;
+                attackRate = 102;
+                expRate = 384;
             } else {
-                a = 51;
-                b = 76;
-                c = 640;
+                hpRate = 51;
+                attackRate = 76;
+                expRate = 640;
             }
 
-            obj->maxHp = ((gGameState.floor * a + 256) * e->hp) >> 8;
-            obj->attack = ((gGameState.floor * b + 256) * e->attack) >> 8;
-            obj->exp = ((c * gGameState.floor + 256) * (u16)e->exp) >> 8;
+            obj->maxHp = ((gGameState.floor * hpRate + 256) * stats->hp) >> 8;
+            obj->attack = ((gGameState.floor * attackRate + 256) * stats->attack) >> 8;
+            obj->exp = ((expRate * gGameState.floor + 256) * (u16)stats->exp) >> 8;
             break;
         }
     } else {
         obj->maxHp = kind->maxHp;
         obj->attack = 0;
         obj->exp = 1;
-        v = kind->id;
+        id = kind->id;
     }
 
     obj->attackOffset = 80;
@@ -1647,7 +1647,7 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
     obj->centerOffsetX = 0;
     obj->radiusX = kind->radius;
     obj->radiusY = kind->radius >> 1;
-    obj->kind = v;
+    obj->kind = id;
     obj->damage = 0;
     obj->floorZ = 0;
     obj->parent = NULL;
@@ -1664,7 +1664,7 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
     obj->vy = 0;
     obj->popCooldown = 0;
 
-    switch (v) {
+    switch (id) {
     case EMY_ID_32:
     case EMY_ID_33:
     case EMY_ID_34:
@@ -1703,13 +1703,13 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
 }
 
 void ReleaseEnemyBtlObj(BtlObj* obj) {
-    BtlObj* p = obj->self;
+    BtlObj* self = obj->self;
 
-    if (p == obj) {
-        ListPoolRemove(&p->node, &gBtlWork->pool);
+    if (self == obj) {
+        ListPoolRemove(&self->node, &gBtlWork->pool);
 
-        if (!(p->kindFlags & EMY_KIND_FLAG_NO_COLLIDER)) {
-            ColliderUnregister(&p->collider);
+        if (!(self->kindFlags & EMY_KIND_FLAG_NO_COLLIDER)) {
+            ColliderUnregister(&self->collider);
         }
 
         gBtlWork->enemyCount--;
@@ -1718,12 +1718,12 @@ void ReleaseEnemyBtlObj(BtlObj* obj) {
 
 u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaining, s16* cnt) {
     s16 i;
-    s16 lim;
+    s16 count;
 
-    lim = *remaining / value;
+    count = *remaining / value;
     src->kind = kind;
 
-    for (i = 0; i < lim; i++) {
+    for (i = 0; i < count; i++) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, src);
 
         if (++(*cnt) > 2) {
@@ -1737,11 +1737,11 @@ u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaini
 
 void CreateBtlPrizeTasks(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaining) {
     s16 i;
-    s16 lim;
-    lim = *remaining / value;
+    s16 count;
+    count = *remaining / value;
     src->kind = kind;
 
-    for (i = 0; i < lim; i++) {
+    for (i = 0; i < count; i++) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, src);
     }
 
@@ -1749,46 +1749,46 @@ void CreateBtlPrizeTasks(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaining) 
 }
 
 void DropBossPrizes(BtlObj* obj) {
-    BtlPrizeSrc a;
-    s16 n;
-    a.x = obj->x;
-    a.y = obj->y;
-    a.z = obj->z;
-    a.noTimeout = 1;
-    n = obj->exp;
-    CreateBtlPrizeTasks(&a, 0, 0x578, &n);
-    CreateBtlPrizeTasks(&a, 8, 199, &n);
-    CreateBtlPrizeTasks(&a, 5, 60, &n);
-    CreateBtlPrizeTasks(&a, 7, 30, &n);
-    CreateBtlPrizeTasks(&a, 4, 10, &n);
-    CreateBtlPrizeTasks(&a, 6, 5, &n);
-    CreateBtlPrizeTasks(&a, 3, 1, &n);
+    BtlPrizeSrc src;
+    s16 remaining;
+    src.x = obj->x;
+    src.y = obj->y;
+    src.z = obj->z;
+    src.noTimeout = 1;
+    remaining = obj->exp;
+    CreateBtlPrizeTasks(&src, 0, 0x578, &remaining);
+    CreateBtlPrizeTasks(&src, 8, 199, &remaining);
+    CreateBtlPrizeTasks(&src, 5, 60, &remaining);
+    CreateBtlPrizeTasks(&src, 7, 30, &remaining);
+    CreateBtlPrizeTasks(&src, 4, 10, &remaining);
+    CreateBtlPrizeTasks(&src, 6, 5, &remaining);
+    CreateBtlPrizeTasks(&src, 3, 1, &remaining);
 }
 
 void DropEnemyPrizes(BtlObj* obj) {
-    BtlPrizeSrc a;
-    BtlPrizeSrc b;
-    s16 n;
+    BtlPrizeSrc src;
+    BtlPrizeSrc cardSrc;
+    s16 remaining;
     s16 cnt;
-    s32 flag;
+    s32 enemyCard;
     s32 hit;
-    s32 v;
-    s32 r;
+    s32 chance;
+    s32 roll;
 
     if (gBtlWork->flags & BTL_FLAG_NO_ENEMY_DROPS) {
         return;
     }
 
-    a.x = obj->x;
-    a.y = obj->y;
-    a.z = obj->z;
-    a.noTimeout = 0;
-    n = obj->exp;
+    src.x = obj->x;
+    src.y = obj->y;
+    src.z = obj->z;
+    src.noTimeout = 0;
+    remaining = obj->exp;
     cnt = 0;
 
     if (gBtlWork->enemyCount == 1 && gBtlWork->pendingEnemies <= 0) {
         if (CountRegularMapCards() <= 4) {
-            flag = 0;
+            enemyCard = 0;
         } else {
             switch (obj->kind) {
             case 10:
@@ -1797,7 +1797,7 @@ void DropEnemyPrizes(BtlObj* obj) {
             case 26:
             case 27:
             case 31:
-                v = 2;
+                chance = 2;
                 break;
             case 0:
             case 5:
@@ -1812,7 +1812,7 @@ void DropEnemyPrizes(BtlObj* obj) {
             case 22:
             case 28:
             case 29:
-                v = 4;
+                chance = 4;
                 break;
             case 1:
             case 2:
@@ -1826,79 +1826,79 @@ void DropEnemyPrizes(BtlObj* obj) {
             case 23:
             case 24:
             case 30:
-                v = 3;
+                chance = 3;
                 break;
             default:
-                v = 0;
+                chance = 0;
                 break;
             }
 
-            if (v > 99) {
-                flag = 1;
-            } else if (v == 0) {
-                flag = 0;
+            if (chance > 99) {
+                enemyCard = 1;
+            } else if (chance == 0) {
+                enemyCard = 0;
             } else {
                 if (gGameState.roomEffect == 1 || gGameState.roomEffect == 10) {
-                    v = (v * 5 * 128) >> 8;
+                    chance = (chance * 5 * 128) >> 8;
                 }
 
-                v = 100 / v;
-                r = GetRandom();
+                chance = 100 / chance;
+                roll = GetRandom();
                 hit = 0;
 
-                if ((u16)r % v == 0) {
+                if ((u16)roll % chance == 0) {
                     hit = 1;
                 }
 
-                flag = hit;
+                enemyCard = hit;
             }
         }
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            flag = 0;
+            enemyCard = 0;
         }
 
         if (gBtlWork->battleId != 120 && gBtlWork->battleId != 124) {
-            if (flag) {
+            if (enemyCard) {
                 CreateHeartlessCardTask(&gBtlWork->taskPools[0], obj->x >> 8, obj->y >> 8, obj->z >> 8, obj->kind);
             } else {
-                b.x = obj->x;
-                b.y = obj->y;
-                b.z = obj->z;
-                CreatePrizeCardTask(&gBtlWork->taskPools[0], &b);
+                cardSrc.x = obj->x;
+                cardSrc.y = obj->y;
+                cardSrc.z = obj->z;
+                CreatePrizeCardTask(&gBtlWork->taskPools[0], &cardSrc);
             }
         }
     }
 
-    if (CreateBtlPrizeTasksCapped(&a, 0, 0x578, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, 0, 0x578, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&a, 8, 199, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, 8, 199, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&a, 5, 60, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, 5, 60, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&a, 7, 30, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, 7, 30, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&a, 4, 10, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, 4, 10, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&a, 6, 5, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, 6, 5, &remaining, &cnt)) {
         return;
     }
 
-    CreateBtlPrizeTasksCapped(&a, 3, 1, &n, &cnt);
+    CreateBtlPrizeTasksCapped(&src, 3, 1, &remaining, &cnt);
 }
 
 void TryDropPremireCard(BtlObj* obj) {
-    BtlPrizeSrc a;
+    BtlPrizeSrc src;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return;
@@ -1925,11 +1925,11 @@ void TryDropPremireCard(BtlObj* obj) {
     }
 
     gBtlWork->flags |= BTL_FLAG_PREMIRE_DROPPED;
-    a.x = obj->x;
-    a.y = obj->y;
-    a.z = obj->z;
-    a.noTimeout = 0;
-    TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPremire, &a);
+    src.x = obj->x;
+    src.y = obj->y;
+    src.z = obj->z;
+    src.noTimeout = 0;
+    TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPremire, &src);
 }
 
 u8 IsPlayerOnPlatform(Collider* platform) {
@@ -2015,144 +2015,144 @@ void SetBtlObjParent(BtlObj* obj, BtlObj* parent) {
 }
 
 u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
-    EnemySpawnRequest s;
+    EnemySpawnRequest request;
     s32 born;
 
     born = 1;
-    s.flags = 0;
+    request.flags = 0;
 
     switch (id) {
     case 0:
-        s.desc = &gTaskDescEmy00;
+        request.desc = &gTaskDescEmy00;
         born = 0;
         break;
     case 1:
-        s.desc = &gTaskDescEmy01;
+        request.desc = &gTaskDescEmy01;
         break;
     case 2:
-        s.desc = &gTaskDescEmy02;
+        request.desc = &gTaskDescEmy02;
         break;
     case 3:
-        s.desc = &gTaskDescEmy03;
+        request.desc = &gTaskDescEmy03;
         break;
     case 4:
-        s.desc = &gTaskDescEmy04;
+        request.desc = &gTaskDescEmy04;
         break;
     case 5:
-        s.desc = &gTaskDescEmy06;
+        request.desc = &gTaskDescEmy06;
         break;
     case 6:
-        s.desc = &gTaskDescEmy07;
+        request.desc = &gTaskDescEmy07;
         break;
     case 7:
-        s.desc = &gTaskDescEmy08;
+        request.desc = &gTaskDescEmy08;
         break;
     case 9:
-        s.desc = &gTaskDescEmy14;
+        request.desc = &gTaskDescEmy14;
         break;
     case 10:
-        s.desc = &gTaskDescEmy15;
+        request.desc = &gTaskDescEmy15;
         break;
     case 11:
-        s.desc = &gTaskDescEmy16;
+        request.desc = &gTaskDescEmy16;
         break;
     case 12:
-        s.desc = &gTaskDescEmy18;
+        request.desc = &gTaskDescEmy18;
         break;
     case 13:
-        s.desc = &gTaskDescEmy19;
+        request.desc = &gTaskDescEmy19;
         break;
     case 14:
-        s.desc = &gTaskDescEmy21;
+        request.desc = &gTaskDescEmy21;
         break;
     case 15:
-        s.desc = &gTaskDescEmy22;
+        request.desc = &gTaskDescEmy22;
         break;
     case 16:
-        s.desc = &gTaskDescEmy23;
+        request.desc = &gTaskDescEmy23;
         break;
     case 17:
-        s.desc = &gTaskDescEmy25;
+        request.desc = &gTaskDescEmy25;
         break;
     case 18:
-        s.desc = &gTaskDescEmy26;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy26;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 19:
-        s.desc = &gTaskDescEmy27;
+        request.desc = &gTaskDescEmy27;
         break;
     case 20:
-        s.desc = &gTaskDescEmy28;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy28;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 21:
-        s.desc = &gTaskDescEmy29;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy29;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 22:
-        s.desc = &gTaskDescEmy30;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy30;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 23:
-        s.desc = &gTaskDescEmy31;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy31;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 24:
-        s.desc = &gTaskDescEmy37;
+        request.desc = &gTaskDescEmy37;
         born = 0;
         break;
     case 25:
-        s.desc = &gTaskDescEmy38;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy38;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 26:
-        s.desc = &gTaskDescEmy39;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy39;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 27:
-        s.desc = &gTaskDescEmy41;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy41;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 28:
-        s.desc = &gTaskDescEmy44;
-        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
+        request.desc = &gTaskDescEmy44;
+        request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 29:
-        s.desc = &gTaskDescEmy81;
+        request.desc = &gTaskDescEmy81;
         break;
     case 30:
-        s.desc = &gTaskDescEmy82;
+        request.desc = &gTaskDescEmy82;
         break;
     case 31:
-        s.desc = &gTaskDescEmy83;
+        request.desc = &gTaskDescEmy83;
         break;
     case 47:
-        s.desc = &gTaskDescEmyTrumpH;
+        request.desc = &gTaskDescEmyTrumpH;
         born = 0;
         break;
     case 46:
-        s.desc = &gTaskDescEmyTrumpS;
+        request.desc = &gTaskDescEmyTrumpS;
         born = 0;
         break;
     default:
-        s.desc = &gTaskDescEmy00;
+        request.desc = &gTaskDescEmy00;
         break;
     }
 
-    s.x = x;
-    s.y = y;
-    s.z = z;
-    s.tileCount = gEnemyTileCounts[id];
+    request.x = x;
+    request.y = y;
+    request.z = z;
+    request.tileCount = gEnemyTileCounts[id];
 
     if (born) {
-        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlBorn, &s);
+        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlBorn, &request);
     } else {
-        if (!CanAllocObjTiles(s.tileCount) || !CanAllocObjPalette(1)) {
+        if (!CanAllocObjTiles(request.tileCount) || !CanAllocObjPalette(1)) {
             gBtlWork->pendingEnemies--;
             return 0;
         }
 
-        TaskCreate(&gBtlWork->taskPools[0], s.desc, &s.x);
+        TaskCreate(&gBtlWork->taskPools[0], request.desc, &request.x);
     }
 
     return 1;
@@ -2197,16 +2197,16 @@ void SetGimmickFlag(u8 index) {
 }
 
 u8 ConsumeGimmickFlag(u8 index) {
-    u8 m;
+    u8 mask;
 
     if (index > 4) {
         return 0;
     }
 
-    m = 1 << index;
+    mask = 1 << index;
 
-    if (gBtlWork->gimmickFlags & m) {
-        gBtlWork->gimmickFlags &= ~m;
+    if (gBtlWork->gimmickFlags & mask) {
+        gBtlWork->gimmickFlags &= ~mask;
         return 1;
     }
 
@@ -2471,7 +2471,7 @@ u8 ApplyBattleBounds(s32* x, s32* y, s32* z, s32* floor) {
 }
 
 void GetEnemyTargetPosition(BtlObj* obj, s32* x, s32* y, s32* z) {
-    u16 n;
+    u16 roll;
 
     if (obj->badStatus == BAD_STATUS_CONFUSE) {
         if (x != NULL) {
@@ -2486,9 +2486,9 @@ void GetEnemyTargetPosition(BtlObj* obj, s32* x, s32* y, s32* z) {
             *z = obj->confuseTargetZ;
         }
 
-        n = GetRandom() % 6;
+        roll = GetRandom() % 6;
 
-        if (n == 0) {
+        if (roll == 0) {
             if (x != NULL) {
                 *x = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
             }
@@ -2498,7 +2498,7 @@ void GetEnemyTargetPosition(BtlObj* obj, s32* x, s32* y, s32* z) {
             }
 
             if (z != NULL) {
-                *z = n;
+                *z = roll;
             }
         }
     } else {
@@ -2517,11 +2517,11 @@ void GetEnemyTargetPosition(BtlObj* obj, s32* x, s32* y, s32* z) {
 }
 
 void SetEnemyHpFromStats(BtlObj* obj, s32 id, s32 hpScale) {
-    u16 b = id;
-    const EnemyBaseStats* e = GetEnemyBaseStats(b);
+    u16 enemyId = id;
+    const EnemyBaseStats* stats = GetEnemyBaseStats(enemyId);
 
-    if (e != NULL) {
-        obj->maxHp = (e->hp * hpScale) >> 8;
+    if (stats != NULL) {
+        obj->maxHp = (stats->hp * hpScale) >> 8;
 
         if (obj->maxHp <= 0) {
             obj->maxHp = 1;

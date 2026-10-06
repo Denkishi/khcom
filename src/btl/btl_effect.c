@@ -350,11 +350,11 @@ u8 BgFxIsBlocked(u8 priority) {
 }
 
 void BgFxReleaseEarly(s16 frames) {
-    u16 b;
-    u16 c;
-    BgAnimGetFrameState(&b, &c);
+    u16 frame;
+    u16 frameTimer;
+    BgAnimGetFrameState(&frame, &frameTimer);
 
-    if (BgAnimGetDuration(BgAnimGetCurrent()) - b * c <= frames) {
+    if (BgAnimGetDuration(BgAnimGetCurrent()) - frame * frameTimer <= frames) {
         sBgFx->flags &= ~BGFX_FLAG_ACTIVE;
         sBgFx->priority = 2;
 
@@ -468,10 +468,10 @@ void BgFxUpdateBase() {
     if (sBgFx->flags & BGFX_FLAG_IGNORE_ZOOM) {
         BgAnimSetTransform(sBgFx->angle + gBtlWork->rotation, sBgFx->scaleX, sBgFx->scaleY);
     } else {
-        s32 a = sBgFx->scaleX * gBtlWork->scale >> 8;
-        s32 b = sBgFx->scaleY * gBtlWork->scale >> 8;
+        s32 scaleX = sBgFx->scaleX * gBtlWork->scale >> 8;
+        s32 scaleY = sBgFx->scaleY * gBtlWork->scale >> 8;
 
-        BgAnimSetTransform(sBgFx->angle + gBtlWork->rotation, a, b);
+        BgAnimSetTransform(sBgFx->angle + gBtlWork->rotation, scaleX, scaleY);
     }
 }
 
@@ -535,29 +535,29 @@ void BgFxUpdateFadeOut() {
 }
 
 void BgFxUpdateFire() {
-    u16 a;
-    u16 b;
-    u16 ang;
+    u16 frame;
+    u16 frameTimer;
+    u16 angle;
     s16 sx;
     s16 sy;
     s32 dx;
 
-    BgAnimGetFrameState(&a, &b);
+    BgAnimGetFrameState(&frame, &frameTimer);
     dx = 0;
 
     if (sBgFx->timer > 0) {
-        if (a > 7) {
-            ang = sBgFx->angle;
+        if (frame > 7) {
+            angle = sBgFx->angle;
 
             if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-                ApproachAngle(&ang, GetAngle(sBgFx->x, sBgFx->y,
-                                             sBgFx->targetX, sBgFx->targetY) + 64, 5);
+                ApproachAngle(&angle, GetAngle(sBgFx->x, sBgFx->y,
+                                               sBgFx->targetX, sBgFx->targetY) + 64, 5);
             } else {
-                ApproachAngle(&ang, GetAngle(sBgFx->x, sBgFx->y,
-                                             sBgFx->targetX, sBgFx->targetY) - 64, 5);
+                ApproachAngle(&angle, GetAngle(sBgFx->x, sBgFx->y,
+                                               sBgFx->targetX, sBgFx->targetY) - 64, 5);
             }
 
-            sBgFx->angle = ang;
+            sBgFx->angle = angle;
             ApproachValue(&sBgFx->x, sBgFx->targetX, sBgFx->timer);
             ApproachValue(&sBgFx->y, sBgFx->targetY, sBgFx->timer);
             ApproachValue(&sBgFx->z, sBgFx->targetZ, sBgFx->timer);
@@ -568,13 +568,13 @@ void BgFxUpdateFire() {
             } else {
                 sBgFx->timer--;
             }
-        } else if (a > 2) {
+        } else if (frame > 2) {
             if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-                dx = ((7 - a) << 8) * 7;
+                dx = ((7 - frame) << 8) * 7;
             } else {
-                s32 t = 7 - a;
-                t *= 256;
-                dx = t * -7;
+                s32 framesLeft = 7 - frame;
+                framesLeft *= 256;
+                dx = framesLeft * -7;
             }
 
             if (ApplyAttackBox(sBgFx->attack, sBgFx->x + dx,
@@ -701,18 +701,18 @@ void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 flip, s32 unused, s32 attack,
 }
 
 void BgFxUpdateBlizzard() {
-    u16 a;
-    u16 b;
+    u16 frame;
+    u16 frameTimer;
     u16 angle;
     s16 sx;
     s16 sy;
     s32 dx;
 
-    BgAnimGetFrameState(&a, &b);
+    BgAnimGetFrameState(&frame, &frameTimer);
     dx = 0;
 
     if (sBgFx->timer > 0) {
-        if (a > 7) {
+        if (frame > 7) {
             angle = sBgFx->angle;
 
             if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
@@ -737,13 +737,13 @@ void BgFxUpdateBlizzard() {
             } else {
                 sBgFx->timer--;
             }
-        } else if (a > 2) {
+        } else if (frame > 2) {
             if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-                dx = ((7 - a) << 8) * 7;
+                dx = ((7 - frame) << 8) * 7;
             } else {
-                s32 t = 7 - a;
-                t *= 256;
-                dx = t * -7;
+                s32 framesLeft = 7 - frame;
+                framesLeft *= 256;
+                dx = framesLeft * -7;
             }
 
             if (TestAttackBox(sBgFx->x + dx, sBgFx->y, sBgFx->z, 8, 16, 16)) {
@@ -860,10 +860,10 @@ void BgFxUpdateFlash() {
     BgFxUpdateBase();
 
     if (sBgFx->timer > 5) {
-        s16 t = sBgFx->timer - 5;
-        SetBlendAlpha(16, 16 - t);
+        s16 fade = sBgFx->timer - 5;
+        SetBlendAlpha(16, 16 - fade);
 
-        if (t > 15) {
+        if (fade > 15) {
             BgAnimStop();
         }
     }
@@ -896,14 +896,14 @@ void BgFxStartFlash(s32 x, s32 y, s32 z) {
 }
 
 void BgFxUpdateFlashHit() {
-    s16 t = sBgFx->timer;
+    s16 timer = sBgFx->timer;
 
     sBgFx->angle += 4;
     sBgFx->scaleX += sBgFx->targetX;
     sBgFx->scaleY += sBgFx->targetY;
-    SetBlendAlpha(16, 16 - t);
+    SetBlendAlpha(16, 16 - timer);
 
-    if (t > 15) {
+    if (timer > 15) {
         BgAnimStop();
     }
 
@@ -1189,11 +1189,11 @@ void BgFxUpdateWideThunder() {
 
         sBgFx->timer = BGFX_WIDE_THUNDER_PHASE_STRIKE;
     } else if (sBgFx->timer == BGFX_WIDE_THUNDER_PHASE_STRIKE) {
-        s32 t;
+        s32 height;
 
         WorldToScreen(&sx2, &sy2, sBgFx->x, sBgFx->y, sBgFx->z);
-        t = sy2 << 8;
-        sBgFx->scaleY = t / 40;
+        height = sy2 << 8;
+        sBgFx->scaleY = height / 40;
 
         if (sBgFx->scaleY < 384) {
             sBgFx->scaleY = 384;
@@ -1227,10 +1227,10 @@ void BgFxStartWideThunder(u16 variant, s32 x, s32 y, s32 z, s32 groundZ, s32 att
 }
 
 void BgFxUpdateEnemyDeath() {
-    u16 a;
-    BgAnimGetFrameState(&a, NULL);
+    u16 frame;
+    BgAnimGetFrameState(&frame, NULL);
 
-    if (a > 3) {
+    if (frame > 3) {
         sBgFx->scaleX += 12;
         sBgFx->scaleY += 12;
         SetBlendAlpha(sBgFx->timer, 16 - sBgFx->timer);
@@ -1406,10 +1406,10 @@ void BgFxStartFriendHit(s32 x, s32 y, s32 z) {
 }
 
 void BgFxUpdateFollowActor() {
-    BtlObj* p = sBgFx->actor;
-    sBgFx->x = p->x;
-    sBgFx->y = p->y;
-    sBgFx->z = p->z - 0x800;
+    BtlObj* actor = sBgFx->actor;
+    sBgFx->x = actor->x;
+    sBgFx->y = actor->y;
+    sBgFx->z = actor->z - 0x800;
     BgFxUpdateBase();
 }
 
@@ -1583,8 +1583,8 @@ void func_080144D8(s32 x, s32 y, s32 z, s32 scale, u16 steps, u16 spinSpeed) {
 }
 
 void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 scale, s32 steps, s32 spinSpeed) {
-    u16 a = steps;
-    u16 b = spinSpeed;
+    u16 chargeSteps = steps;
+    u16 spin = spinSpeed;
     s16 sx;
     s16 sy;
 
@@ -1607,25 +1607,25 @@ void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 scale, s32 steps, s32 spinSpeed
     BgAnimStart(&sBgAnimDefDarkGlow, sx, sy);
     BgAnimSetLoopStartFrame(0);
     sBgFx->update = BgFxUpdateDsdEnergy;
-    sBgFx->steps = a;
-    sBgFx->unk_0C = b;
+    sBgFx->steps = chargeSteps;
+    sBgFx->unk_0C = spin;
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     sBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
 void func_08014654() {
-    u16 t;
-    s16 u;
+    u16 timer;
+    s16 fade;
     sBgFx->scaleX += 25;
     sBgFx->scaleY += 25;
     BgFxUpdateBase();
-    t = sBgFx->timer;
+    timer = sBgFx->timer;
 
     if (sBgFx->timer > 3) {
-        u = t - 3;
-        SetBlendAlpha(16, 16 - u);
+        fade = timer - 3;
+        SetBlendAlpha(16, 16 - fade);
 
-        if (u > 15) {
+        if (fade > 15) {
             BgAnimStop();
         }
     }
@@ -1857,15 +1857,15 @@ enum BgFxGravityPhase {
 void BgFxUpdateGravity() {
     s16 sx;
     s16 sy;
-    s16 t;
-    u8 r;
+    s16 pulse;
+    u8 hit;
 
-    t = sBgFx->timer % 8;
+    pulse = sBgFx->timer % 8;
 
-    if (t <= 3) {
-        SetBlendAlpha(t, 16);
+    if (pulse <= 3) {
+        SetBlendAlpha(pulse, 16);
     } else {
-        SetBlendAlpha(8 - t, 16);
+        SetBlendAlpha(8 - pulse, 16);
     }
 
     if (sBgFx->steps == BGFX_GRAVITY_PHASE_CAST && BgAnimIsStopped()) {
@@ -1910,18 +1910,18 @@ void BgFxUpdateGravity() {
         if (sBgFx->timer == 35) {
             switch (sBgFx->state) {
             case 0:
-                r = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 24, 12, 256);
+                hit = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 24, 12, 256);
                 break;
             case 1:
-                r = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 40, 20, 256);
+                hit = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 40, 20, 256);
                 break;
             case 2:
             default:
-                r = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 80, 40, 256);
+                hit = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 80, 40, 256);
                 break;
             }
 
-            if (r) {
+            if (hit) {
                 m4aSongNumStart(SONG_EF_GRABI02);
             }
         }
@@ -1964,12 +1964,12 @@ void BgFxStartGravity(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY
 }
 
 void BgFxUpdateGravityStrike() {
-    s16 t = sBgFx->timer % 8;
+    s16 pulse = sBgFx->timer % 8;
 
-    if (t <= 3) {
-        SetBlendAlpha(t, 16);
+    if (pulse <= 3) {
+        SetBlendAlpha(pulse, 16);
     } else {
-        SetBlendAlpha(8 - t, 16);
+        SetBlendAlpha(8 - pulse, 16);
     }
 
     if (sBgFx->timer == 0x23) {
@@ -2226,17 +2226,17 @@ enum BgFxPcShotState {
 };
 
 void BgFxUpdatePcShot() {
-    s16 t;
-    s16 u;
+    s16 timer;
+    s16 halfSize;
 
     switch (sBgFx->state) {
     case BGFX_PC_SHOT_STATE_GROW:
-        t = sBgFx->timer;
-        SetBlendAlpha(16, t);
-        ApproachValueHalfSteps(&sBgFx->scaleX, 0x100, 17 - t);
+        timer = sBgFx->timer;
+        SetBlendAlpha(16, timer);
+        ApproachValueHalfSteps(&sBgFx->scaleX, 0x100, 17 - timer);
         sBgFx->scaleY = sBgFx->scaleX;
 
-        if (t > 15) {
+        if (timer > 15) {
             sBgFx->timer = sBgFx->steps;
             sBgFx->state = BGFX_PC_SHOT_STATE_FLY;
         } else {
@@ -2250,12 +2250,12 @@ void BgFxUpdatePcShot() {
         ApproachValue(&sBgFx->z, sBgFx->targetZ, sBgFx->timer);
         ApproachValue(&sBgFx->scaleX, sBgFx->unk_3C, sBgFx->timer);
         sBgFx->scaleY = sBgFx->scaleX;
-        u = (sBgFx->scaleX * 3) >> 6;
+        halfSize = (sBgFx->scaleX * 3) >> 6;
 
         if (sBgFx->timer <= 0) {
             sBgFx->timer = 0;
             sBgFx->state = BGFX_PC_SHOT_STATE_FADE_OUT;
-        } else if (ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, u, u, u)) {
+        } else if (ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, halfSize, halfSize, halfSize)) {
             m4aSongNumStart(SONG_BTL_AN_WAVEHIT);
             sBgFx->timer = 0;
             sBgFx->state = BGFX_PC_SHOT_STATE_FADE_OUT;
@@ -2265,10 +2265,10 @@ void BgFxUpdatePcShot() {
 
         break;
     case BGFX_PC_SHOT_STATE_FADE_OUT:
-        t = sBgFx->timer;
-        SetBlendAlpha(16, 16 - t);
+        timer = sBgFx->timer;
+        SetBlendAlpha(16, 16 - timer);
 
-        if (t > 15) {
+        if (timer > 15) {
             BgAnimStop();
         } else {
             sBgFx->scaleX += 7;
@@ -2316,7 +2316,7 @@ void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ,
 void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 attack) {
     s16 sx;
     s16 sy;
-    s32 t;
+    s32 height;
 
     if (BgFxIsBlocked(0)) {
         return;
@@ -2327,9 +2327,9 @@ void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 attack) {
     sBgFx->y = y;
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
-    t = sy << 8;
+    height = sy << 8;
     sBgFx->scaleX = 384;
-    sBgFx->scaleY = t / 40;
+    sBgFx->scaleY = height / 40;
 
     if (sBgFx->scaleY < 384) {
         sBgFx->scaleY = 384;
@@ -2390,11 +2390,11 @@ void BgFxUpdateThunder() {
 
         sBgFx->timer = BGFX_THUNDER_PHASE_STRIKE;
     } else if (sBgFx->timer == BGFX_THUNDER_PHASE_STRIKE) {
-        s32 t;
+        s32 height;
 
         WorldToScreen(&sx2, &sy2, sBgFx->x, sBgFx->y, sBgFx->z);
-        t = sy2 << 8;
-        sBgFx->scaleY = t / 40;
+        height = sy2 << 8;
+        sBgFx->scaleY = height / 40;
 
         if (sBgFx->scaleY < 384) {
             sBgFx->scaleY = 384;
@@ -2437,8 +2437,8 @@ enum BgFxDumboSplashState {
 };
 
 void BgFxUpdateDumboSplash() {
-    s32 t;
-    u16 v;
+    s32 reach;
+    u16 timer;
 
     switch (sBgFx->state) {
     case BGFX_DUMBO_SPLASH_STATE_EXTEND:
@@ -2451,20 +2451,20 @@ void BgFxUpdateDumboSplash() {
         ApproachValue(&sBgFx->scaleY, 0x100, sBgFx->steps);
         ApproachValue(&sBgFx->angleFixed, 0, sBgFx->steps);
         sBgFx->angle = sBgFx->angleFixed >> 8;
-        t = sBgFx->scaleX;
+        reach = sBgFx->scaleX;
 
-        if (t < 0) {
-            t = -t;
+        if (reach < 0) {
+            reach = -reach;
         }
 
-        t *= 44;
+        reach *= 44;
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            ApplyAttackBox(sBgFx->attack, sBgFx->x + t, sBgFx->y,
-                sBgFx->z, t << 8 >> 16, 24, 24);
+            ApplyAttackBox(sBgFx->attack, sBgFx->x + reach, sBgFx->y,
+                sBgFx->z, reach << 8 >> 16, 24, 24);
         } else {
-            ApplyAttackBox(sBgFx->attack, sBgFx->x - t, sBgFx->y,
-                sBgFx->z, t << 8 >> 16, 24, 24);
+            ApplyAttackBox(sBgFx->attack, sBgFx->x - reach, sBgFx->y,
+                sBgFx->z, reach << 8 >> 16, 24, 24);
         }
 
         SetBlendAlpha(16, sBgFx->unk_3C >> 8);
@@ -2478,7 +2478,7 @@ void BgFxUpdateDumboSplash() {
 
         break;
     case BGFX_DUMBO_SPLASH_STATE_SWAY:
-        v = sBgFx->timer;
+        timer = sBgFx->timer;
 
         if (sBgFx->timer > 50) {
             sBgFx->timer = 0;
@@ -2486,22 +2486,22 @@ void BgFxUpdateDumboSplash() {
             break;
         }
 
-        t = sBgFx->scaleX;
+        reach = sBgFx->scaleX;
 
-        if (t < 0) {
-            t = -t;
+        if (reach < 0) {
+            reach = -reach;
         }
 
-        t *= 44;
+        reach *= 44;
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            sBgFx->angleFixed = -SIN(v * 4) * 6;
-            ApplyAttackBox(sBgFx->attack, sBgFx->x + t, sBgFx->y,
-                sBgFx->z, t << 8 >> 16, 24, 24);
+            sBgFx->angleFixed = -SIN(timer * 4) * 6;
+            ApplyAttackBox(sBgFx->attack, sBgFx->x + reach, sBgFx->y,
+                sBgFx->z, reach << 8 >> 16, 24, 24);
         } else {
-            sBgFx->angleFixed = SIN(v * 4) * 6;
-            ApplyAttackBox(sBgFx->attack, sBgFx->x - t, sBgFx->y,
-                sBgFx->z, t << 8 >> 16, 24, 24);
+            sBgFx->angleFixed = SIN(timer * 4) * 6;
+            ApplyAttackBox(sBgFx->attack, sBgFx->x - reach, sBgFx->y,
+                sBgFx->z, reach << 8 >> 16, 24, 24);
         }
 
         sBgFx->angle = sBgFx->angleFixed >> 8;
@@ -2674,10 +2674,10 @@ enum BgFxTrinityLimitBlastState {
 void BgFxUpdateTrinityLimitBlast() {
     switch (sBgFx->state) {
     case BGFX_TRINITY_LIMIT_BLAST_STATE_FADE_IN: {
-        s16 t = sBgFx->timer;
+        s16 timer = sBgFx->timer;
 
-        if (t <= 64) {
-            SetBlendAlpha(16, t >> 2);
+        if (timer <= 64) {
+            SetBlendAlpha(16, timer >> 2);
             sBgFx->timer++;
         } else {
             sBgFx->timer = 0;
@@ -2689,29 +2689,29 @@ void BgFxUpdateTrinityLimitBlast() {
         break;
     }
     case BGFX_TRINITY_LIMIT_BLAST_STATE_EXPAND: {
-        u16 t;
+        u16 timer;
 
         sBgFx->scaleX += 0x100;
         sBgFx->scaleY += 0x100;
-        t = sBgFx->timer;
+        timer = sBgFx->timer;
 
-        if ((s16)t > 32) {
+        if ((s16)timer > 32) {
             ApplyAttackBox(87, sBgFx->x, sBgFx->y, 0, 0x100, 0x100, 0x100);
             SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
             FadeStartIn(FADE_MODE_ADD_WHITE, 60);
             sBgFx->timer = 0;
             sBgFx->state++;
         } else {
-            sBgFx->timer = t + 1;
+            sBgFx->timer = timer + 1;
         }
 
         break;
     }
     case BGFX_TRINITY_LIMIT_BLAST_STATE_FADE_OUT: {
-        u16 t = sBgFx->timer;
+        u16 timer = sBgFx->timer;
 
-        if ((s16)t <= 15) {
-            SetBlendAlpha(16, 16 - t);
+        if ((s16)timer <= 15) {
+            SetBlendAlpha(16, 16 - timer);
             sBgFx->timer++;
         } else {
             BgAnimStop();
@@ -2790,24 +2790,24 @@ enum BgFxRagnarokShotState {
 };
 
 void BgFxUpdateRagnarokShot() {
-    u16 k;
-    u16 v;
-    s16 t;
+    u16 frame;
+    u16 frameTimer;
+    s16 alpha;
 
-    BgAnimGetFrameState(&k, &v);
+    BgAnimGetFrameState(&frame, &frameTimer);
 
-    switch (k) {
+    switch (frame) {
     case 4:
         ApplyAttackBox(91, sBgFx->x + sBgFx->scaleX * 40, sBgFx->y, sBgFx->z, 32, 32, 50);
         break;
     case 5:
-        if (v == 0) {
+        if (frameTimer == 0) {
             sBgFx->state = BGFX_RAGNAROK_SHOT_STATE_FLY;
         }
 
         break;
     case 6:
-        if (v == 0) {
+        if (frameTimer == 0) {
             sBgFx->state = BGFX_RAGNAROK_SHOT_STATE_STRETCH;
         }
 
@@ -2839,10 +2839,10 @@ void BgFxUpdateRagnarokShot() {
         ApplyAttackBox(91, sBgFx->x + sBgFx->scaleX * 40, sBgFx->y, sBgFx->z, 32, 32, 50);
 
         if (sBgFx->timer > 20) {
-            t = 36 - sBgFx->timer;
-            SetBlendAlpha(16, t);
+            alpha = 36 - sBgFx->timer;
+            SetBlendAlpha(16, alpha);
 
-            if (t <= 0) {
+            if (alpha <= 0) {
                 BgAnimStop();
             }
         }
@@ -2917,7 +2917,7 @@ BtlObj* BgFxGetSyncTarget() {
 }
 
 void BgFxApplySyncHp(s16 hp) {
-    BtlObj* o;
+    BtlObj* obj;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (GetRandom() % 5) {
@@ -2927,35 +2927,35 @@ void BgFxApplySyncHp(s16 hp) {
                 CreateBtlPopTask(gRikuBtlWork->actor, 2);
             }
         } else {
-            o = gRikuBtlWork->actor;
-            o->hp = hp;
+            obj = gRikuBtlWork->actor;
+            obj->hp = hp;
 
-            if (hp > o->maxHp) {
-                o->hp = o->maxHp;
+            if (hp > obj->maxHp) {
+                obj->hp = obj->maxHp;
             }
 
-            o = gBtlWork->actor;
-            o->hp = hp;
+            obj = gBtlWork->actor;
+            obj->hp = hp;
 
-            if (hp > o->maxHp) {
-                o->hp = o->maxHp;
+            if (hp > obj->maxHp) {
+                obj->hp = obj->maxHp;
             }
         }
     } else {
-        o = ListPoolFirst(&gBtlWork->pool);
+        obj = ListPoolFirst(&gBtlWork->pool);
 
-        while (o != NULL) {
-            if (o->flags & BTLOBJ_FLAG_BOSS) {
-                CreateBtlPopTask(o, 0);
+        while (obj != NULL) {
+            if (obj->flags & BTLOBJ_FLAG_BOSS) {
+                CreateBtlPopTask(obj, 0);
             } else {
-                o->hp = hp;
+                obj->hp = hp;
 
-                if (hp > o->maxHp) {
-                    o->hp = o->maxHp;
+                if (hp > obj->maxHp) {
+                    obj->hp = obj->maxHp;
                 }
             }
 
-            o = ListPoolNext(&o->node);
+            obj = ListPoolNext(&obj->node);
         }
     }
 }
@@ -2968,7 +2968,7 @@ enum BgFxSyncState {
 };
 
 void BgFxUpdateSync() {
-    BtlObj* o;
+    BtlObj* target;
 
     switch (sBgFx->state) {
     case BGFX_SYNC_STATE_RISE:
@@ -2995,22 +2995,22 @@ void BgFxUpdateSync() {
         break;
     case BGFX_SYNC_STATE_APPROACH:
         sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + 89;
-        o = BgFxGetSyncTarget();
+        target = BgFxGetSyncTarget();
 
-        if (o != NULL) {
-            ApproachValueHalfSteps(&sBgFx->x, o->x, sBgFx->steps);
-            ApproachValueHalfSteps(&sBgFx->y, o->y, sBgFx->steps);
-            ApproachValueHalfSteps(&sBgFx->z, o->z - (o->centerHeight << 8), sBgFx->steps);
+        if (target != NULL) {
+            ApproachValueHalfSteps(&sBgFx->x, target->x, sBgFx->steps);
+            ApproachValueHalfSteps(&sBgFx->y, target->y, sBgFx->steps);
+            ApproachValueHalfSteps(&sBgFx->z, target->z - (target->centerHeight << 8), sBgFx->steps);
         }
 
         sBgFx->steps--;
 
-        if (o != NULL) {
+        if (target != NULL) {
             if (sBgFx->steps > 0) {
                 break;
             }
 
-            BgFxApplySyncHp(o->hp);
+            BgFxApplySyncHp(target->hp);
         }
 
         sBgFx->state = BGFX_SYNC_STATE_BURST;
@@ -3085,10 +3085,10 @@ void BgFxUpdateZantetsuken() {
     BgFxUpdateBase();
 
     if (sBgFx->timer > 5) {
-        s16 t = sBgFx->timer - 5;
-        SetBlendAlpha(16, 16 - t);
+        s16 fade = sBgFx->timer - 5;
+        SetBlendAlpha(16, 16 - fade);
 
-        if (t > 15) {
+        if (fade > 15) {
             BgAnimStop();
         }
     }
@@ -3323,29 +3323,29 @@ void BgFxStartJfMajinBeam(s32 x, s32 y, s32 z, s32 scaleY, u8 angle, u16 steps) 
 }
 
 void BgFxUpdateFireBurst() {
-    u16 a;
-    u16 b;
-    u16 ang;
+    u16 frame;
+    u16 frameTimer;
+    u16 angle;
     s16 sx;
     s16 sy;
     s32 dx;
 
-    BgAnimGetFrameState(&a, &b);
+    BgAnimGetFrameState(&frame, &frameTimer);
     dx = 0;
 
     if (sBgFx->timer > 0) {
-        if (a > 7) {
-            ang = sBgFx->angle;
+        if (frame > 7) {
+            angle = sBgFx->angle;
 
             if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-                ApproachAngle(&ang, GetAngle(sBgFx->x, sBgFx->y,
-                                             sBgFx->targetX, sBgFx->targetY) + 64, 5);
+                ApproachAngle(&angle, GetAngle(sBgFx->x, sBgFx->y,
+                                               sBgFx->targetX, sBgFx->targetY) + 64, 5);
             } else {
-                ApproachAngle(&ang, GetAngle(sBgFx->x, sBgFx->y,
-                                             sBgFx->targetX, sBgFx->targetY) - 64, 5);
+                ApproachAngle(&angle, GetAngle(sBgFx->x, sBgFx->y,
+                                               sBgFx->targetX, sBgFx->targetY) - 64, 5);
             }
 
-            sBgFx->angle = ang;
+            sBgFx->angle = angle;
             ApproachValue(&sBgFx->x, sBgFx->targetX, sBgFx->timer);
             ApproachValue(&sBgFx->y, sBgFx->targetY, sBgFx->timer);
             ApproachValue(&sBgFx->z, sBgFx->targetZ, sBgFx->timer);
@@ -3356,13 +3356,13 @@ void BgFxUpdateFireBurst() {
             } else {
                 sBgFx->timer--;
             }
-        } else if (a > 2) {
+        } else if (frame > 2) {
             if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-                dx = ((7 - a) << 8) * 7;
+                dx = ((7 - frame) << 8) * 7;
             } else {
-                s32 t = 7 - a;
-                t *= 256;
-                dx = t * -7;
+                s32 framesLeft = 7 - frame;
+                framesLeft *= 256;
+                dx = framesLeft * -7;
             }
 
             if (TestAttackBox(sBgFx->x + dx, sBgFx->y,
@@ -3518,11 +3518,11 @@ void BgFxStartXmas(u16 steps) {
 }
 
 void BgFxUpdateVixenIceFall() {
-    u16 t;
-    s32 w;
-    t = (SIN(sBgFx->unk_0C / 3) * 10240) >> 16;
-    w = ((abs(gSineTable[(u8)sBgFx->unk_0C]) >> 1) + 0x100) * 0x133 >> 8;
-    BgAnimSetTransform(t + 15, 0x133, w);
+    u16 wobble;
+    s32 scaleY;
+    wobble = (SIN(sBgFx->unk_0C / 3) * 10240) >> 16;
+    scaleY = ((abs(gSineTable[(u8)sBgFx->unk_0C]) >> 1) + 0x100) * 0x133 >> 8;
+    BgAnimSetTransform(wobble + 15, 0x133, scaleY);
     BgFxUpdateFullscreen();
     sBgFx->unk_0C++;
 }
@@ -3624,47 +3624,47 @@ void BgFxUpdateHoly() {
 
     switch (sBgFx->state) {
     case BGFX_HOLY_STATE_FADE_IN: {
-        u16 t;
+        u16 timer;
 
         SetBlendAlpha(16, sBgFx->timer);
-        t = sBgFx->timer;
+        timer = sBgFx->timer;
 
-        if ((s16)t > 15) {
+        if ((s16)timer > 15) {
             sBgFx->timer = 0;
             sBgFx->state = BGFX_HOLY_STATE_ATTACK;
         } else {
-            sBgFx->timer = t + 1;
+            sBgFx->timer = timer + 1;
         }
 
         break;
     }
     case BGFX_HOLY_STATE_ATTACK: {
-        u16 t;
+        u16 timer;
 
         ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 32, 16, 256);
-        t = sBgFx->timer;
+        timer = sBgFx->timer;
 
-        if ((s16)t > sBgFx->steps) {
+        if ((s16)timer > sBgFx->steps) {
             sBgFx->timer = 0;
             sBgFx->state = BGFX_HOLY_STATE_FADE_OUT;
         } else {
-            sBgFx->timer = t + 1;
+            sBgFx->timer = timer + 1;
         }
 
         break;
     }
     case BGFX_HOLY_STATE_FADE_OUT: {
-        u16 a = sBgFx->timer;
-        u16 t;
+        u16 fade = sBgFx->timer;
+        u16 timer;
 
-        SetBlendAlpha(16, 16 - ((s16)a >> 1));
+        SetBlendAlpha(16, 16 - ((s16)fade >> 1));
         ApproachValue(&sBgFx->scaleX, 10, 33 - sBgFx->timer);
-        t = sBgFx->timer;
+        timer = sBgFx->timer;
 
-        if ((s16)t > 31) {
+        if ((s16)timer > 31) {
             BgAnimStop();
         } else {
-            sBgFx->timer = t + 1;
+            sBgFx->timer = timer + 1;
         }
 
         break;
@@ -3701,12 +3701,12 @@ void BgFxStartHoly(s32 x, s32 y, s32 z, s32 attack) {
 }
 
 void BgFxTornadoLiftBtlObj(BtlObj* source, BtlObj* target, u8 spin, u8 init) {
-    s32 h;
+    s32 liftZ;
     s32 dx;
     s32 dy;
-    s32 t;
-    s32 nx;
-    s32 ny;
+    s32 radius;
+    s32 orbitX;
+    s32 orbitY;
 
     if (init) {
         target->angle = GetAngle(source->x, source->y, target->x, target->y);
@@ -3720,57 +3720,57 @@ void BgFxTornadoLiftBtlObj(BtlObj* source, BtlObj* target, u8 spin, u8 init) {
 
         if (dy >= 0 ? dy <= 0x27FF : sBgFx->y - target->y <= 0x27FF) {
             if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-                h = target->knockbackSpeed - ((sBgFx->x - target->x) >> 1);
+                liftZ = target->knockbackSpeed - ((sBgFx->x - target->x) >> 1);
             } else {
-                h = target->knockbackSpeed + ((sBgFx->x - target->x) >> 1);
+                liftZ = target->knockbackSpeed + ((sBgFx->x - target->x) >> 1);
             }
 
-            if (h > 0) {
-                h = 0;
+            if (liftZ > 0) {
+                liftZ = 0;
             }
 
-            t = -(h >> 9);
-            nx = sBgFx->x + SIN(target->angle + spin) * (s16)t;
-            ny = sBgFx->y + -COS(target->angle + spin) * ((s16)t >> 1);
+            radius = -(liftZ >> 9);
+            orbitX = sBgFx->x + SIN(target->angle + spin) * (s16)radius;
+            orbitY = sBgFx->y + -COS(target->angle + spin) * ((s16)radius >> 1);
 
-            if (target->x < nx) {
+            if (target->x < orbitX) {
                 target->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 target->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
-            target->x += (nx - target->x) >> 3;
-            target->y += (ny - target->y) >> 3;
-            target->z += (h - target->z) >> 2;
+            target->x += (orbitX - target->x) >> 3;
+            target->y += (orbitY - target->y) >> 3;
+            target->z += (liftZ - target->z) >> 2;
             target->knockbackSpeed -= 110;
         }
     }
 }
 
 void BgFxTornadoLiftOpponents(u8 spin, u8 init) {
-    BtlObj* p;
-    BtlObj* o;
+    BtlObj* source;
+    BtlObj* target;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-            p = gBtlWork->actor;
-            o = gRikuBtlWork->actor;
+            source = gBtlWork->actor;
+            target = gRikuBtlWork->actor;
         } else {
-            p = gRikuBtlWork->actor;
-            o = gBtlWork->actor;
+            source = gRikuBtlWork->actor;
+            target = gBtlWork->actor;
         }
 
-        BgFxTornadoLiftBtlObj(p, o, spin, init);
+        BgFxTornadoLiftBtlObj(source, target, spin, init);
     } else {
-        p = gBtlWork->actor;
-        o = ListPoolFirst(&gBtlWork->pool);
+        source = gBtlWork->actor;
+        target = ListPoolFirst(&gBtlWork->pool);
 
-        while (o != NULL) {
-            if (!(o->flags & BTLOBJ_FLAG_BOSS) && o->kind != 31) {
-                BgFxTornadoLiftBtlObj(p, o, spin, init);
+        while (target != NULL) {
+            if (!(target->flags & BTLOBJ_FLAG_BOSS) && target->kind != 31) {
+                BgFxTornadoLiftBtlObj(source, target, spin, init);
             }
 
-            o = ListPoolNext(&o->node);
+            target = ListPoolNext(&target->node);
         }
     }
 }
@@ -3784,7 +3784,7 @@ enum BgFxTornadoState {
 void BgFxUpdateTornado() {
     u16 alpha;
     s16 v;
-    u32 u;
+    u32 timer;
 
     switch (sBgFx->state) {
     case BGFX_TORNADO_STATE_GROW:
@@ -3808,20 +3808,20 @@ void BgFxUpdateTornado() {
 
         break;
     case BGFX_TORNADO_STATE_LIFT:
-        u = (u16)sBgFx->timer;
+        timer = (u16)sBgFx->timer;
         sBgFx->scaleY = abs(gSineTable[(u8)sBgFx->timer] >> 1) + 0x100;
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            if ((u16)u == 0) {
-                BgFxTornadoLiftOpponents(-u * 8, 1);
+            if ((u16)timer == 0) {
+                BgFxTornadoLiftOpponents(-timer * 8, 1);
             } else {
-                BgFxTornadoLiftOpponents(-u * 8, 0);
+                BgFxTornadoLiftOpponents(-timer * 8, 0);
             }
         } else {
-            if ((u16)u == 0) {
-                BgFxTornadoLiftOpponents(u * 8, 1);
+            if ((u16)timer == 0) {
+                BgFxTornadoLiftOpponents(timer * 8, 1);
             } else {
-                BgFxTornadoLiftOpponents(u * 8, 0);
+                BgFxTornadoLiftOpponents(timer * 8, 0);
             }
         }
 
@@ -3838,14 +3838,14 @@ void BgFxUpdateTornado() {
     case BGFX_TORNADO_STATE_FADE_OUT:
         alpha = 16;
         v = sBgFx->timer;
-        u = v;
-        alpha -= u;
+        timer = v;
+        alpha -= timer;
         SetBlendAlpha(16, alpha);
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            ApproachValue(&sBgFx->scaleX, -10, 17 - u);
+            ApproachValue(&sBgFx->scaleX, -10, 17 - timer);
         } else {
-            ApproachValue(&sBgFx->scaleX, 10, 17 - u);
+            ApproachValue(&sBgFx->scaleX, 10, 17 - timer);
         }
 
         ApproachValue(&sBgFx->scaleY, 768, 17 - v);
@@ -3912,8 +3912,8 @@ enum BgFxBindState {
 };
 
 void BgFxUpdateBind() {
-    s16 v;
-    s16 w;
+    s16 timer;
+    s16 fade;
 
     switch (sBgFx->state) {
     case BGFX_BIND_STATE_WIDEN:
@@ -3928,10 +3928,10 @@ void BgFxUpdateBind() {
 
         break;
     case BGFX_BIND_STATE_FLASH:
-        v = sBgFx->timer;
-        SetBlendAlpha(16, v + 8);
+        timer = sBgFx->timer;
+        SetBlendAlpha(16, timer + 8);
 
-        if (v > 7) {
+        if (timer > 7) {
 #ifdef VERSION_EU
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y + 0x1000, 0, 0x100, 0x100, 0x100);
 #else
@@ -3945,10 +3945,10 @@ void BgFxUpdateBind() {
 
         break;
     case BGFX_BIND_STATE_FADE_OUT:
-        w = sBgFx->timer >> 2;
-        SetBlendAlpha(16, 16 - w);
+        fade = sBgFx->timer >> 2;
+        SetBlendAlpha(16, 16 - fade);
 
-        if (w > 15) {
+        if (fade > 15) {
             BgAnimStop();
         } else {
             sBgFx->timer++;
@@ -4086,17 +4086,17 @@ void BgFxStartAxcelFireWall(s32 x, u8 facingLeft, s32 attack) {
 }
 
 void BgFxUpdateGround() {
-    u16 k;
-    u16 t;
+    u16 frame;
+    u16 halfSize;
     ApproachValue(&sBgFx->scaleX, 0x300, sBgFx->steps);
     sBgFx->scaleY = sBgFx->scaleX;
     sBgFx->steps--;
-    BgAnimGetFrameState(&k, NULL);
+    BgAnimGetFrameState(&frame, NULL);
 
-    if (k <= 4) {
-        t = (sBgFx->scaleX * 5) >> 5;
+    if (frame <= 4) {
+        halfSize = (sBgFx->scaleX * 5) >> 5;
 
-        if (ApplyAttackBox(0x13D, sBgFx->x, sBgFx->y, sBgFx->z, t, (s16)t >> 1, 1)) {
+        if (ApplyAttackBox(0x13D, sBgFx->x, sBgFx->y, sBgFx->z, halfSize, (s16)halfSize >> 1, 1)) {
             m4aSongNumStart(SONG_BTL_MARL_GROUNDHIT);
         }
     }
@@ -4287,7 +4287,7 @@ void BgFxUpdateKama() {
 void BgFxStartKama(s32 x, s32 y, s32 z, s32 dx, s32 attack) {
     s16 sx;
     s16 sy;
-    s32 d;
+    s32 radius;
 
     if (BgFxIsBlocked(0)) {
         return;
@@ -4309,10 +4309,10 @@ void BgFxStartKama(s32 x, s32 y, s32 z, s32 dx, s32 attack) {
 
     sBgFx->targetX = x;
     sBgFx->targetZ = z;
-    d = abs(dx);
-    sBgFx->unk_3C = d;
-    sBgFx->x = x + ((gSineTable[0] * d) >> 8);
-    sBgFx->z = z + ((-gSineTable[64] * d) >> 8);
+    radius = abs(dx);
+    sBgFx->unk_3C = radius;
+    sBgFx->x = x + ((gSineTable[0] * radius) >> 8);
+    sBgFx->z = z + ((-gSineTable[64] * radius) >> 8);
     sBgFx->y = y;
     sBgFx->scaleY = 0x180;
     SetBlendAlpha(16, 0);
@@ -4326,10 +4326,10 @@ void BgFxStartKama(s32 x, s32 y, s32 z, s32 dx, s32 attack) {
 }
 
 void BgFxUpdateRikuLimit() {
-    s16 t = sBgFx->timer >> 1;
-    SetBlendAlpha(16, 16 - t);
+    s16 fade = sBgFx->timer >> 1;
+    SetBlendAlpha(16, 16 - fade);
 
-    if (t > 15) {
+    if (fade > 15) {
         BgAnimStop();
     }
 
@@ -4386,9 +4386,9 @@ void BgFxUpdateLaxeneBeam() {
     s32 x;
     s32 y;
     s32 z;
-    s16 r;
-    u8 ang;
-    BtlObj* o;
+    s16 reach;
+    u8 angle;
+    BtlObj* player;
 
     switch (sBgFx->state) {
     case BGFX_LAXENE_BEAM_STATE_EXTEND:
@@ -4420,24 +4420,24 @@ void BgFxUpdateLaxeneBeam() {
         break;
     }
 
-    r = (abs(sBgFx->scaleX) * 5) >> 4;
+    reach = (abs(sBgFx->scaleX) * 5) >> 4;
 
     if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-        ang = sBgFx->angle + 192;
+        angle = sBgFx->angle + 192;
     } else {
-        ang = sBgFx->angle + 64;
+        angle = sBgFx->angle + 64;
     }
 
-    x = sBgFx->x + gSineTable[ang] * r;
-    z = sBgFx->z + -gSineTable[ang + 64] * r;
+    x = sBgFx->x + gSineTable[angle] * reach;
+    z = sBgFx->z + -gSineTable[angle + 64] * reach;
     y = sBgFx->y;
     ApplyAttackBox(sBgFx->attack, x, y, z, 32, 16, 16);
-    o = gBtlWork->actor;
+    player = gBtlWork->actor;
 
-    if (o->flags & BTLOBJ_FLAG_HURT) {
-        o->x += (x - o->x) >> 2;
-        o->y += (y - o->y) >> 2;
-        o->z += (z - o->z) >> 1;
+    if (player->flags & BTLOBJ_FLAG_HURT) {
+        player->x += (x - player->x) >> 2;
+        player->y += (y - player->y) >> 2;
+        player->z += (z - player->z) >> 1;
     }
 
     BgFxUpdateBase();
@@ -4489,7 +4489,7 @@ void BgFxStartLaxeneBeam(s32 x, s32 y, s32 z, u8 flip, s32 attack) {
 }
 
 void BgFxUpdateAero() {
-    s16 t;
+    s16 halfSize;
 
     switch (sBgFx->state) {
     case 0:
@@ -4507,9 +4507,9 @@ void BgFxUpdateAero() {
     }
 
     if (sBgFx->timer == 10) {
-        t = (sBgFx->scaleX * 3) >> 4;
+        halfSize = (sBgFx->scaleX * 3) >> 4;
 
-        if (ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, t, t, 100)) {
+        if (ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, halfSize, halfSize, 100)) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
     }

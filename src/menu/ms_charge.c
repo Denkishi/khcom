@@ -375,7 +375,7 @@ void MsChargeDrawValueCounts() {
     if (sMsChargeMenuState == MS_CHARGE_MENU_STATE_TAB) {
         for (i = 0; i < 10; i++) {
             LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-            LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
+            LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), sizeof(gMsChargeValueEmptyPalette[0]));
         }
     } else if (card->category == 3) {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
@@ -391,14 +391,14 @@ void MsChargeDrawValueCounts() {
 
             if (count != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
                 LoadDecimalDigitTiles(count, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
-                LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
+                LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), sizeof(gMsChargeValueOwnedPalette[0]));
                 break;
             }
         }
 
         if (i > 9) {
             LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
-            LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
+            LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), sizeof(gMsChargeValueEmptyPalette[0]));
         }
     } else {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
@@ -414,10 +414,10 @@ void MsChargeDrawValueCounts() {
 
             if (count != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
                 LoadDecimalDigitTiles(count, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-                LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
+                LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), sizeof(gMsChargeValueOwnedPalette[0]));
             } else {
                 LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-                LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
+                LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), sizeof(gMsChargeValueEmptyPalette[0]));
             }
         }
     }

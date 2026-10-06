@@ -412,7 +412,7 @@ void MapInspectDrawValueCounts() {
     if (sMapInspectMenuState == MAP_INSPECT_MENU_STATE_TAB) {
         for (i = 0; i <= 9; i++) {
             LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-            LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), 2);
+            LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), sizeof(gMapInspectValueZeroPalette[0]));
         }
     } else if (entry->category == 3) {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
@@ -424,14 +424,14 @@ void MapInspectDrawValueCounts() {
 
             if (count != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
                 LoadDecimalDigitTiles(count, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
-                LoadPalette(gMapInspectValueDigitPalette, (void*)(BG_PLTT + 0xC), 2);
+                LoadPalette(gMapInspectValueDigitPalette, (void*)(BG_PLTT + 0xC), sizeof(gMapInspectValueDigitPalette[0]));
                 break;
             }
         }
 
         if (i > 9) {
             LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
-            LoadPalette(gMapInspectValueZeroPalette, (void*)(BG_PLTT + 0xC), 2);
+            LoadPalette(gMapInspectValueZeroPalette, (void*)(BG_PLTT + 0xC), sizeof(gMapInspectValueZeroPalette[0]));
         }
     } else {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
@@ -443,10 +443,10 @@ void MapInspectDrawValueCounts() {
 
             if (count != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
                 LoadDecimalDigitTiles(count, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-                LoadPalette(gMapInspectValueDigitPalette, (void*)(PLTT + (i + 6) * 2), 2);
+                LoadPalette(gMapInspectValueDigitPalette, (void*)(PLTT + (i + 6) * 2), sizeof(gMapInspectValueDigitPalette[0]));
             } else {
                 LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-                LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), 2);
+                LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), sizeof(gMapInspectValueZeroPalette[0]));
             }
         }
     }

@@ -5392,7 +5392,7 @@ void DrawValueCount(u8 count, u16 value) {
 
         RequestDma3Copy(gDeckValueZeroTiles, dst = base + (value * 64 + 0xD20), 32);
         RequestDma3Copy(gDeckValueZeroTiles, dst += 32, 32);
-        LoadPalette(gUnk_09614406, (void*)(value * 2 + BG_PLTT + 11 * PLTT_SIZE_4BPP + 0xC), 2);
+        LoadPalette(gUnk_09614406, (void*)(value * 2 + BG_PLTT + 11 * PLTT_SIZE_4BPP + 0xC), sizeof(gUnk_09614406[0]));
     }
 }
 

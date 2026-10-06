@@ -715,6 +715,17 @@ enum SioWorldChangeState {
     SIO_WORLD_CHANGE_STATE_DONE
 };
 
+enum SioBtlCommand {
+    SIO_CMD_BTL_OPEN_MENU = 0x1F20,
+    SIO_CMD_BTL_LEAVE = 0xC2F0,
+    SIO_CMD_BTL_PLAYER1_READY = 0x2FCF,
+    SIO_CMD_BTL_PLAYER2_READY = 0x6AD6,
+    SIO_CMD_BTL_CONFIRM = 0xA926,
+    SIO_CMD_BTL_CANCEL = 0xDD42,
+    SIO_CMD_BTL_SYNC_START = 0x7CD2,
+    SIO_CMD_BTL_CARDGET_CONTINUE = 0x45FC
+};
+
 void mode_sio_btl_option_0(s32 arg) {
     sSioBtlOptionWork = EwramAlloc(sizeof(SioBtlOptionWork));
     SetBgMode1();
@@ -1105,12 +1116,12 @@ void SioBtlOptionHandleIdle() {
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
 #endif
-    gSioCommandSend[1] |= 5;
+    gSioCommandSend[1] |= SIO_BTL_OPTION_STATE_IDLE;
 
     if (GetKeysPressed() & A_BUTTON) {
-        gSioCommandSend[1] |= 0x1F20;
+        gSioCommandSend[1] |= SIO_CMD_BTL_OPEN_MENU;
     } else if (GetKeysPressed() & B_BUTTON) {
-        gSioCommandSend[1] |= 0xC2F0;
+        gSioCommandSend[1] |= SIO_CMD_BTL_LEAVE;
     }
 
     if (GetKeysPressed() & L_BUTTON) {
@@ -1143,15 +1154,15 @@ void SioBtlOptionHandleIdle() {
         gSioCommandSend[2] &= 0xFFF0;
     }
 
-    if ((gSioCommandRecv[1][0] & 0xFFF0) == 0xC2F0 || (gSioCommandRecv[1][1] & 0xFFF0) == 0xC2F0) {
-        if ((gSioCommandRecv[1][0] & 15) == 5 && (gSioCommandRecv[1][1] & 15) == 5 && sSioBtlOptionWork->leaveDelay == 0) {
+    if ((gSioCommandRecv[1][0] & 0xFFF0) == SIO_CMD_BTL_LEAVE || (gSioCommandRecv[1][1] & 0xFFF0) == SIO_CMD_BTL_LEAVE) {
+        if ((gSioCommandRecv[1][0] & 15) == SIO_BTL_OPTION_STATE_IDLE && (gSioCommandRecv[1][1] & 15) == SIO_BTL_OPTION_STATE_IDLE && sSioBtlOptionWork->leaveDelay == 0) {
             SioLinkClose();
             m4aMPlayAllStop();
             gSioWinCount = 0;
             gSioLoseCount = 0;
             ModeRequest(&gModeSioBtlConnect, 0);
         }
-    } else if ((gSioCommandRecv[1][0] & 0xFFF0) == 0x1F20) {
+    } else if ((gSioCommandRecv[1][0] & 0xFFF0) == SIO_CMD_BTL_OPEN_MENU) {
         sSioBtlOptionWork->leaveDelay = 10;
 
         if (gSioPlayerId == 0) {
@@ -1159,7 +1170,7 @@ void SioBtlOptionHandleIdle() {
             sSioBtlOptionWork->menuOpen = 1;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
-    } else if ((gSioCommandRecv[1][1] & 0xFFF0) == 0x1F20) {
+    } else if ((gSioCommandRecv[1][1] & 0xFFF0) == SIO_CMD_BTL_OPEN_MENU) {
         sSioBtlOptionWork->leaveDelay = 10;
 
         if (gSioPlayerId == 1) {
@@ -1243,7 +1254,7 @@ void SioBtlOptionHandleMenu() {
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
 #endif
-    gSioCommandSend[1] = 6;
+    gSioCommandSend[1] = SIO_BTL_OPTION_STATE_MENU;
 
     if (GetKeysPressed() & DPAD_UP) {
         m4aSongNumStart(SONG_SYS_CLICK);
@@ -1297,9 +1308,9 @@ void SioBtlOptionHandleMenu() {
         switch (sSioBtlOptionWork->cursor) {
         case 0:
             if (gSioPlayerId == 0) {
-                gSioCommandSend[1] = 0x2FCF;
+                gSioCommandSend[1] = SIO_CMD_BTL_PLAYER1_READY;
             } else {
-                gSioCommandSend[1] = 0x6AD6;
+                gSioCommandSend[1] = SIO_CMD_BTL_PLAYER2_READY;
             }
 
             sSioBtlOptionWork->menuOpen = 0;
@@ -1598,9 +1609,9 @@ void SioBtlOptionWaitReady() {
     if (!gSioDebugMode) {
 #endif
         if (gSioPlayerId == 0) {
-            gSioCommandSend[1] = 0x2FCF;
+            gSioCommandSend[1] = SIO_CMD_BTL_PLAYER1_READY;
         } else {
-            gSioCommandSend[1] = 0x6AD6;
+            gSioCommandSend[1] = SIO_CMD_BTL_PLAYER2_READY;
         }
 
 #ifdef VERSION_EU
@@ -1632,12 +1643,12 @@ void SioBtlOptionConfirm() {
     if (!gSioDebugMode) {
 #endif
     if (GetKeysPressed() & A_BUTTON) {
-        gSioCommandSend[1] = 0xA926;
+        gSioCommandSend[1] = SIO_CMD_BTL_CONFIRM;
     } else if (GetKeysPressed() & B_BUTTON) {
-        gSioCommandSend[1] = 0xDD42;
+        gSioCommandSend[1] = SIO_CMD_BTL_CANCEL;
     }
 
-    if (gSioCommandRecv[1][0] == 0xA926 || gSioCommandRecv[1][1] == 0xA926) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_BTL_CONFIRM || gSioCommandRecv[1][1] == SIO_CMD_BTL_CONFIRM) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioBtlOptionWork->timer = 0;
         sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlSendingDeckText), sSioBtlOptionWork->textSlots4);
@@ -1648,7 +1659,7 @@ void SioBtlOptionConfirm() {
 #endif
         sSioBtlOptionWork->y2 = 124;
         sSioBtlOptionWork->state++;
-    } else if (gSioCommandRecv[1][0] == 0xDD42 || gSioCommandRecv[1][1] == 0xDD42) {
+    } else if (gSioCommandRecv[1][0] == SIO_CMD_BTL_CANCEL || gSioCommandRecv[1][1] == SIO_CMD_BTL_CANCEL) {
         sSioBtlOptionWork->leaveDelay = 10;
         m4aSongNumStart(SONG_SYS_CLOSE);
         sSioBtlOptionWork->timer = 0;
@@ -1751,9 +1762,9 @@ void SioBtlOptionSyncStart() {
     sSioBtlOptionWork->timer++;
 
     if (sSioBtlOptionWork->timer > 20) {
-        gSioCommandSend[1] = 0x7CD2;
+        gSioCommandSend[1] = SIO_CMD_BTL_SYNC_START;
 
-        if (gSioCommandRecv[1][0] == 0x7CD2 && gSioCommandRecv[1][1] == 0x7CD2) {
+        if (gSioCommandRecv[1][0] == SIO_CMD_BTL_SYNC_START && gSioCommandRecv[1][1] == SIO_CMD_BTL_SYNC_START) {
             sSioBtlOptionWork->timer = 0;
             gSystemFlags &= ~SYSTEM_FLAG_DMA3_FLUSH_CPU;
             sSioBtlOptionWork->state++;
@@ -1816,7 +1827,7 @@ void SioBtlOptionCheckReady() {
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
 #endif
-    if (gSioCommandRecv[1][0] == 0x2FCF) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_BTL_PLAYER1_READY) {
         RequestDma3Copy(gSioBtlOptionReadyTiles + 0xC0, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
 
         if (!sSioBtlOptionWork->player1Ready) {
@@ -1826,7 +1837,7 @@ void SioBtlOptionCheckReady() {
         sSioBtlOptionWork->player1Ready = 1;
     }
 
-    if (gSioCommandRecv[1][1] == 0x6AD6) {
+    if (gSioCommandRecv[1][1] == SIO_CMD_BTL_PLAYER2_READY) {
         RequestDma3Copy(gSioBtlOptionReadyTiles + 0x4C0, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
 
         if (!sSioBtlOptionWork->player2Ready) {
@@ -2513,10 +2524,10 @@ void mode_sio_btl_cardget_1() {
         if (!gSioDebugMode) {
 #endif
         if (GetKeysPressed() & (A_BUTTON | B_BUTTON | START_BUTTON)) {
-            gSioCommandSend[1] = 0x45FC;
+            gSioCommandSend[1] = SIO_CMD_BTL_CARDGET_CONTINUE;
         }
 
-        if (gSioCommandRecv[1][0] == 0x45FC || gSioCommandRecv[1][1] == 0x45FC) {
+        if (gSioCommandRecv[1][0] == SIO_CMD_BTL_CARDGET_CONTINUE || gSioCommandRecv[1][1] == SIO_CMD_BTL_CARDGET_CONTINUE) {
             m4aSongNumStart(SONG_SYS_ITEMGET);
             sSioBtlCardgetWork->timer = 0;
             sSioBtlCardgetWork->state++;
@@ -2871,6 +2882,23 @@ enum SioChgCardState {
     SIO_CHG_CARD_STATE_RESTART
 };
 
+enum SioTradeCommand {
+    SIO_CMD_TRADE_READY = 0x1AC7,
+    SIO_CMD_TRADE_NOT_READY = 0x2B9A,
+    SIO_CMD_TRADE_LEAVE = 0xA4CA,
+    SIO_CMD_TRADE_PICK_CARD = 0x1D58,
+    SIO_CMD_TRADE_CONFIRM = 0xEF01,
+    SIO_CMD_TRADE_CANCEL = 0x58FA,
+    SIO_CMD_TRADE_RECEIVE_OK = 0xEF23,
+    SIO_CMD_TRADE_RECEIVE_FAILED = 0x1269,
+    SIO_CMD_TRADE_RESTART = 0x25FD
+};
+
+enum SioTradeScreen {
+    SIO_TRADE_SCREEN_SELECT = 0x5000,
+    SIO_TRADE_SCREEN_PICK_CARD = 0x6000
+};
+
 void mode_sio_chg_card_0(s32 arg) {
     sSioChgCardWork = EwramAlloc(sizeof(SioChgCardWork));
     SetBgMode0();
@@ -3080,17 +3108,17 @@ void SioChgCardWaitStart() {
 }
 
 void SioChgCardSelect() {
-    gSioCommandSend[2] = (GetKeysPressed() & 0x0FFF) | 0x5000;
+    gSioCommandSend[2] = (GetKeysPressed() & 0x0FFF) | SIO_TRADE_SCREEN_SELECT;
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((sSioChgCardWork->offeredCard + 1) & 0x0FFF);
 
     if (!sSioChgCardWork->ready) {
         SioChgCardHandleInput();
     } else {
         func_080B3DF8();
-        gSioCommandSend[1] = 0x1AC7;
+        gSioCommandSend[1] = SIO_CMD_TRADE_READY;
     }
 
-    if (gSioCommandRecv[1][0] == 0x1AC7) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_READY) {
         if (gSioChgCardReady[0] == 0) {
             SetSioChgCardAnimation(0, 1, 0);
             m4aSongNumStart(SONG_SYS_KETTEI);
@@ -3098,7 +3126,7 @@ void SioChgCardSelect() {
 
         RequestDma3Copy(gSioChgCardReadyTiles + 0xC0, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[0] = 1;
-    } else if (gSioCommandRecv[1][0] == 0x2B9A) {
+    } else if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_NOT_READY) {
         if (gSioChgCardReady[0] == 1) {
             SetSioChgCardAnimation(0, 0, 0);
             m4aSongNumStart(SONG_SYS_CLOSE);
@@ -3109,7 +3137,7 @@ void SioChgCardSelect() {
         gSioChgCardReady[0] = 0;
     }
 
-    if (gSioCommandRecv[1][1] == 0x1AC7) {
+    if (gSioCommandRecv[1][1] == SIO_CMD_TRADE_READY) {
         if (gSioChgCardReady[1] == 0) {
             SetSioChgCardAnimation(1, 1, 0);
             m4aSongNumStart(SONG_SYS_KETTEI);
@@ -3117,7 +3145,7 @@ void SioChgCardSelect() {
 
         RequestDma3Copy(gSioChgCardReadyTiles + 0x4C0, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[1] = 1;
-    } else if (gSioCommandRecv[1][1] == 0x2B9A) {
+    } else if (gSioCommandRecv[1][1] == SIO_CMD_TRADE_NOT_READY) {
         if (gSioChgCardReady[1] == 1) {
             SetSioChgCardAnimation(1, 0, 0);
             m4aSongNumStart(SONG_SYS_CLOSE);
@@ -3137,14 +3165,14 @@ void SioChgCardSelect() {
         sSioChgCardWork->state++;
     }
 
-    if (gSioCommandRecv[1][0] == 0xA4CA || gSioCommandRecv[1][1] == 0xA4CA) {
-        if ((gSioCommandRecv[2][0] & 0xF000) == 0x5000 && (gSioCommandRecv[2][1] & 0xF000) == 0x5000 && sSioChgCardWork->leaveDelay == 0) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_LEAVE || gSioCommandRecv[1][1] == SIO_CMD_TRADE_LEAVE) {
+        if ((gSioCommandRecv[2][0] & 0xF000) == SIO_TRADE_SCREEN_SELECT && (gSioCommandRecv[2][1] & 0xF000) == SIO_TRADE_SCREEN_SELECT && sSioChgCardWork->leaveDelay == 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             SioChgCardReturnOwnCards();
             SioLinkClose();
             ModeRequest(&gModeSioChgConnect, 3);
         }
-    } else if (gSioCommandRecv[1][0] == 0x1D58) {
+    } else if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_PICK_CARD) {
         sSioChgCardWork->leaveDelay = 10;
 
         if (gSioPlayerId == 0) {
@@ -3152,7 +3180,7 @@ void SioChgCardSelect() {
             gSioChgCardCursor = sSioChgCardWork->cursor;
             ModeRequest(&gModeDeckExchange, 0);
         }
-    } else if (gSioCommandRecv[1][1] == 0x1D58) {
+    } else if (gSioCommandRecv[1][1] == SIO_CMD_TRADE_PICK_CARD) {
         sSioChgCardWork->leaveDelay = 10;
 
         if (gSioPlayerId == 1) {
@@ -3172,12 +3200,12 @@ void SioChgCardSelect() {
 
 void SioChgCardConfirm() {
     if (GetKeysPressed() & A_BUTTON) {
-        gSioCommandSend[1] = 0xEF01;
+        gSioCommandSend[1] = SIO_CMD_TRADE_CONFIRM;
     } else if (GetKeysPressed() & B_BUTTON) {
-        gSioCommandSend[1] = 0x58FA;
+        gSioCommandSend[1] = SIO_CMD_TRADE_CANCEL;
     }
 
-    if (gSioCommandRecv[1][0] == 0xEF01 || gSioCommandRecv[1][1] == 0xEF01) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_CONFIRM || gSioCommandRecv[1][1] == SIO_CMD_TRADE_CONFIRM) {
         sSioChgCardWork->timer = 0;
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwappingText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 71;
@@ -3185,7 +3213,7 @@ void SioChgCardConfirm() {
         sSioChgCardWork->state++;
     }
 
-    if (gSioCommandRecv[1][0] == 0x58FA || gSioCommandRecv[1][1] == 0x58FA) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_CANCEL || gSioCommandRecv[1][1] == SIO_CMD_TRADE_CANCEL) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sSioChgCardWork->timer = 0;
         SioChgCardCancelReady();
@@ -3201,9 +3229,9 @@ void SioChgCardTryTrade() {
     sSioChgCardWork->receiveOk = SioChgCardReceiveCards();
 
     if (sSioChgCardWork->receiveOk == 1) {
-        gSioCommandSend[1] = 0xEF23;
+        gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_OK;
     } else {
-        gSioCommandSend[1] = 0x1269;
+        gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_FAILED;
     }
 
     sSioChgCardWork->state++;
@@ -3211,19 +3239,19 @@ void SioChgCardTryTrade() {
 
 void SioChgCardWaitTradeResult() {
     if (sSioChgCardWork->receiveOk == 1) {
-        gSioCommandSend[1] = 0xEF23;
+        gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_OK;
     } else {
-        gSioCommandSend[1] = 0x1269;
+        gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_FAILED;
     }
 
-    if (gSioCommandRecv[1][0] == 0xEF23 && gSioCommandRecv[1][1] == 0xEF23) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_RECEIVE_OK && gSioCommandRecv[1][1] == SIO_CMD_TRADE_RECEIVE_OK) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioChgCardWork->timer = 0;
         gGameState.progression.obtainedCardKinds = sSioChgCardWork->obtainedCardKindsBackup;
         sSioChgCardWork->state = SIO_CHG_CARD_STATE_START_MOVE;
     }
 
-    if (gSioCommandRecv[1][0] == 0x1269 || gSioCommandRecv[1][1] == 0x1269) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_RECEIVE_FAILED || gSioCommandRecv[1][1] == SIO_CMD_TRADE_RECEIVE_FAILED) {
         m4aSongNumStart(SONG_SYS_BEEP);
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgFailedFullText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 63;
@@ -3313,9 +3341,9 @@ void SioChgCardHideMessage() {
 
 void SioChgCardRestart() {
     s32 i;
-    gSioCommandSend[1] = 0x25FD;
+    gSioCommandSend[1] = SIO_CMD_TRADE_RESTART;
 
-    if (gSioCommandRecv[1][0] == 0x25FD || gSioCommandRecv[1][1] == 0x25FD) {
+    if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_RESTART || gSioCommandRecv[1][1] == SIO_CMD_TRADE_RESTART) {
         if (gSioPlayerId == 0) {
             gSioChgCardCursor = 0;
         } else {
@@ -3442,7 +3470,7 @@ void SioChgCardSetSlot(u16 command) {
 }
 
 void SioChgCardRecvSlotIds() {
-    gSioCommandSend[2] = 0x6000;
+    gSioCommandSend[2] = SIO_TRADE_SCREEN_PICK_CARD;
 
     if (gSioCommandRecv[0][0] == SIO_CMD_DATA) {
         SioChgCardSetSlotId(gSioCommandRecv[3][0]);
@@ -3576,7 +3604,7 @@ void SioChgCardHandleInput() {
                 }
             } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == 0x800) {
                 if (owner == 0) {
-                    gSioCommandSend[1] = 0x1D58;
+                    gSioCommandSend[1] = SIO_CMD_TRADE_PICK_CARD;
                 }
             } else if (!sSioChgCardWork->cardInfoVisible) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
@@ -3584,7 +3612,7 @@ void SioChgCardHandleInput() {
             }
         } else if (player1Pressed & B_BUTTON) {
             if (SioChgCardSlotsEmpty() == 1) {
-                gSioCommandSend[1] = 0xA4CA;
+                gSioCommandSend[1] = SIO_CMD_TRADE_LEAVE;
             } else if (owner == 0) {
                 if (gSioChgCardSlots[sSioChgCardWork->cursor] != 0x800) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
@@ -3636,7 +3664,7 @@ void SioChgCardHandleInput() {
                 }
             } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == 0x800) {
                 if (owner == 1) {
-                    gSioCommandSend[1] = 0x1D58;
+                    gSioCommandSend[1] = SIO_CMD_TRADE_PICK_CARD;
                 }
             } else if (!sSioChgCardWork->cardInfoVisible) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
@@ -3644,7 +3672,7 @@ void SioChgCardHandleInput() {
             }
         } else if (player2Pressed & B_BUTTON) {
             if (SioChgCardSlotsEmpty() == 1) {
-                gSioCommandSend[1] = 0xA4CA;
+                gSioCommandSend[1] = SIO_CMD_TRADE_LEAVE;
             } else if (owner == 1) {
                 if (gSioChgCardSlots[sSioChgCardWork->cursor] != 0x800) {
                     m4aSongNumStart(SONG_SYS_CLOSE);

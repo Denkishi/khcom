@@ -4,26 +4,26 @@
 #include "card.h"
 #include "types.h"
 
-u8 FindStockPairsInCombo(s32* a, u8* b);
-s32 GetStockMove(s32 a);
-s32 IsThreeDistinctAttackCards(CardDisplayWork** p, u8 b);
-s32 IsThreeAttackCardsNoMove18(CardDisplayWork** p, u8 b);
-s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** p, u8 b);
-s32 IsKindPairThenNonSummonOfCategory(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e);
-s32 IsKindPairThenSummon(CardDisplayWork** p, u8 b, u16 c, u16 d);
-s32 IsKindThenTwoAttackCards(CardDisplayWork** p, u16 c, u8 b);
-s32 IsKindThenTwoOfCategory(CardDisplayWork** p, u16 c, u8 e, u8 b);
-s32 IsFireMushuAttack(CardDisplayWork** p, u8 b);
-s32 IsTwoSummonsThenKind(CardDisplayWork** p, u8 b, u16 c);
-s32 IsSimbaMushuItem(CardDisplayWork** p, u8 b);
-s32 IsSummonMagicJackOrBambiBlizzardItem(CardDisplayWork** p, u8 b);
-s32 IsGenieTinkerBellSummon(CardDisplayWork** p, u8 b);
-s32 IsMegaEtherMegalixirItem(CardDisplayWork** p, u8 b);
-s32 IsFireDonaldMagic(CardDisplayWork** p, u8 b);
-s32 IsCloudStopAttack(CardDisplayWork** p, u8 b);
-s32 IsAeroFireMagic(CardDisplayWork** p, u8 b);
-s32 IsAeroBlizzardMagic(CardDisplayWork** p, u8 b);
-s32 IsTwoMagicThenPeterPan(CardDisplayWork** p, u8 b);
-u8 IsLinkSideStockLearned(s32 a, s32 b);
+u8 FindStockPairsInCombo(s32* keys, u8* found);
+s32 GetStockMove(s32 stock);
+s32 IsThreeDistinctAttackCards(CardDisplayWork** cards, u8 count);
+s32 IsThreeAttackCardsNoMove18(CardDisplayWork** cards, u8 count);
+s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** cards, u8 count);
+s32 IsKindPairThenNonSummonOfCategory(CardDisplayWork** cards, u8 count, u16 firstKind, u16 secondKind, u8 category);
+s32 IsKindPairThenSummon(CardDisplayWork** cards, u8 count, u16 firstKind, u16 secondKind);
+s32 IsKindThenTwoAttackCards(CardDisplayWork** cards, u16 kind, u8 count);
+s32 IsKindThenTwoOfCategory(CardDisplayWork** cards, u16 kind, u8 category, u8 count);
+s32 IsFireMushuAttack(CardDisplayWork** cards, u8 count);
+s32 IsTwoSummonsThenKind(CardDisplayWork** cards, u8 count, u16 kind);
+s32 IsSimbaMushuItem(CardDisplayWork** cards, u8 count);
+s32 IsSummonMagicJackOrBambiBlizzardItem(CardDisplayWork** cards, u8 count);
+s32 IsGenieTinkerBellSummon(CardDisplayWork** cards, u8 count);
+s32 IsMegaEtherMegalixirItem(CardDisplayWork** cards, u8 count);
+s32 IsFireDonaldMagic(CardDisplayWork** cards, u8 count);
+s32 IsCloudStopAttack(CardDisplayWork** cards, u8 count);
+s32 IsAeroFireMagic(CardDisplayWork** cards, u8 count);
+s32 IsAeroBlizzardMagic(CardDisplayWork** cards, u8 count);
+s32 IsTwoMagicThenPeterPan(CardDisplayWork** cards, u8 count);
+u8 IsLinkSideStockLearned(s32 stock, s32 side);
 
 #endif

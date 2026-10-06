@@ -84,7 +84,7 @@ u8 IsMessageWindowAnswerYes();
 u8 CloseMessageWindow();
 s32 ResolveActiveCardsMove(s32* out);
 s32 LookupStockName(struct CardDisplayWork** cards, u8 count, u8 kind, struct StockKeys* arr, u8* flag);
-s32 LookupLinkStockName(struct CardDisplayWork** cards, u8 count, u8 kind, struct StockKeys* arr, u8* flag, s32 b);
+s32 LookupLinkStockName(struct CardDisplayWork** cards, u8 count, u8 kind, struct StockKeys* arr, u8* flag, s32 side);
 s32 LookupStockPairName(struct StockKeys* cards, u8* output, u8 count);
 
 struct CardListWork;

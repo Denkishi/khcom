@@ -544,21 +544,21 @@ u8 GetRandomPieceVariant(u8 piece) {
     return GetRandom() % p[3];
 }
 
-void MapCellSetBg3Piece(MapCell* cell, s32 n) {
+void MapCellSetBg3Piece(MapCell* cell, s32 piece) {
     if (cell != NULL) {
         u16* base = sMapRoomDef->map3;
-        const u8* q = gMapCellBg3Pieces[n];
+        const u8* q = gMapCellBg3Pieces[piece];
         u8 m = GetRandom() % q[3];
         s32 u = ((m & 7) + q[1]) * 4;
         s32 v = (m >> 3) + q[2];
-        cell->bg3Piece = n;
+        cell->bg3Piece = piece;
         cell->bg3Map = base + (v * 64 + u);
     }
 }
 
-void MapCellSetBg2Piece(MapCell* cell, u8 n, u8 v) {
+void MapCellSetBg2Piece(MapCell* cell, u8 piece, u8 variant) {
     if (cell != NULL) {
-        const u8* q = gMapCellBg2Pieces[n];
+        const u8* q = gMapCellBg2Pieces[piece];
         u16* base;
         u16 t;
 
@@ -572,7 +572,7 @@ void MapCellSetBg2Piece(MapCell* cell, u8 n, u8 v) {
             break;
         }
 
-        t = ((v & 7) + q[1]) * 4 + ((v >> 3) + q[2]) * 64;
+        t = ((variant & 7) + q[1]) * 4 + ((variant >> 3) + q[2]) * 64;
 
         if (cell->flags & MAP_CELL_FLAG_EDGE_LEFT) {
             t = t + q[3] * 4;
@@ -582,7 +582,7 @@ void MapCellSetBg2Piece(MapCell* cell, u8 n, u8 v) {
             t = t + q[3] * 8;
         }
 
-        cell->bg2Piece = n;
+        cell->bg2Piece = piece;
         cell->bg2Map = base + t;
     }
 }
@@ -597,7 +597,7 @@ void MapCellSetFloorBg3Piece(MapCell* cell) {
     }
 }
 
-void MapCellSetBg2EdgePiece(MapCell* cell, s32 n) {
+void MapCellSetBg2EdgePiece(MapCell* cell, s32 piece) {
     u16* base;
     const u8* t;
     u8 r;
@@ -609,12 +609,12 @@ void MapCellSetBg2EdgePiece(MapCell* cell, s32 n) {
     }
 
     if ((cell->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT)) == 0) {
-        cell->bg2Piece = n;
+        cell->bg2Piece = piece;
         return;
     }
 
     base = sMapRoomDef->map3;
-    t = gMapCellBg2Pieces[n];
+    t = gMapCellBg2Pieces[piece];
     r = GetRandom() % t[3];
     off = (r % 8 + t[1]) * 4 + (r / 8 + t[2]) * 64;
 
@@ -627,11 +627,11 @@ void MapCellSetBg2EdgePiece(MapCell* cell, s32 n) {
         }
     }
 
-    cell->bg2Piece = n;
+    cell->bg2Piece = piece;
     cell->bg2Map = base + off;
 }
 
-void MapCellSetBg2CornerPiece(MapCell* cell, s32 n) {
+void MapCellSetBg2CornerPiece(MapCell* cell, s32 piece) {
     const u8* t;
     u16* base;
     u16 off;
@@ -640,11 +640,11 @@ void MapCellSetBg2CornerPiece(MapCell* cell, s32 n) {
         return;
     }
 
-    t = gMapCellBg2Pieces[n];
+    t = gMapCellBg2Pieces[piece];
     off = t[1] * 4 + t[2] * 64;
     base = sMapRoomDef->map2;
 
-    switch (n) {
+    switch (piece) {
     case 26:
     case 27:
     case 28:
@@ -669,22 +669,22 @@ void MapCellSetBg2CornerPiece(MapCell* cell, s32 n) {
         break;
     }
 
-    cell->bg2Piece = n;
+    cell->bg2Piece = piece;
     cell->bg2Map = base + off;
 }
 
-void MapCellSetBg2PieceVariant(MapCell* cell, s32 n, u8 v) {
+void MapCellSetBg2PieceVariant(MapCell* cell, s32 piece, u8 variant) {
     if (cell != NULL) {
         u16* base = sMapRoomDef->map2;
-        const u8* q = gMapCellBg2Pieces[n];
+        const u8* q = gMapCellBg2Pieces[piece];
         s32 t;
 
-        if (v == 0xFF) {
-            v = GetRandom() % q[3];
+        if (variant == 0xFF) {
+            variant = GetRandom() % q[3];
         }
 
-        t = ((v & 7) + q[1]) * 4 + ((v >> 3) + q[2]) * 64;
-        cell->bg2Piece = n;
+        t = ((variant & 7) + q[1]) * 4 + ((variant >> 3) + q[2]) * 64;
+        cell->bg2Piece = piece;
         cell->bg2Map = base + t;
     }
 }
@@ -1344,14 +1344,14 @@ void MapAssignCellPieces() {
     }
 }
 
-void MapCellSetBg1Piece(s16 x, s16 y, u8 n) {
+void MapCellSetBg1Piece(s16 x, s16 y, u8 piece) {
     MapCell* p = MapGetCell(x, y);
 
     if (p != NULL) {
         u16* base = sMapRoomDef->map;
-        const u8* q = gMapCellBg1Pieces[n];
+        const u8* q = gMapCellBg1Pieces[piece];
         s32 t = q[1] * 4 + q[2] * 64;
-        p->bg1Piece = n;
+        p->bg1Piece = piece;
         p->bg1Map = base + t;
     }
 }
@@ -1366,10 +1366,10 @@ u8 MapCellIsUnbounded(s16 x, s16 y) {
     return 0;
 }
 
-u8 MapCellHasType(s16 x, s16 y, u8 n) {
+u8 MapCellHasType(s16 x, s16 y, u8 type) {
     MapCell* p = MapGetCell(x, y);
 
-    if (p != NULL && p->type == n) {
+    if (p != NULL && p->type == type) {
         return 1;
     }
 
@@ -1564,16 +1564,16 @@ void MapAssignLeftBorderPiece(s16 y) {
     }
 }
 
-void MapAssignRightBorderPiece(s16 j) {
+void MapAssignRightBorderPiece(s16 y) {
     s16 x = sMapCols - 1;
-    MapCell* q = MapGetCell(x, j);
+    MapCell* q = MapGetCell(x, y);
 
     switch (q->bg1Piece) {
     case 12:
-        MapCellSetBg1Piece(x, j, 17);
+        MapCellSetBg1Piece(x, y, 17);
         break;
     case 8:
-        MapCellSetBg1Piece(x, j, 15);
+        MapCellSetBg1Piece(x, y, 15);
         break;
     case 0:
     case 9:
@@ -1582,7 +1582,7 @@ void MapAssignRightBorderPiece(s16 j) {
     case 21:
     case 24:
     case 25:
-        MapCellSetBg1Piece(x, j, 3);
+        MapCellSetBg1Piece(x, y, 3);
         break;
     }
 }
@@ -2065,15 +2065,15 @@ s32 GetTopEdgeTypeBelowLedge(u8 index, s16 x, s16 y) {
     return 0xB;
 }
 
-void MapSetPlatform(u8 i, u16 left, u16 right, s16 z) {
-    if (sMapPlatforms[i].z == 0x100000) {
-        sMapPlatforms[i].left = left;
-        sMapPlatforms[i].right = right;
-        sMapPlatforms[i].z = z << 12;
+void MapSetPlatform(u8 index, u16 left, u16 right, s16 z) {
+    if (sMapPlatforms[index].z == 0x100000) {
+        sMapPlatforms[index].left = left;
+        sMapPlatforms[index].right = right;
+        sMapPlatforms[index].z = z << 12;
     }
 }
 
-void MapTracePlatformLeftToRight(u8 i, s16 left, s16 right, s16 startY, u8 edgeMode) {
+void MapTracePlatformLeftToRight(u8 index, s16 left, s16 right, s16 startY, u8 edgeMode) {
     s16 x;
     s16 y;
     s16 yn;
@@ -2087,7 +2087,7 @@ void MapTracePlatformLeftToRight(u8 i, s16 left, s16 right, s16 startY, u8 edgeM
     MapCell* q;
     s32 m;
 
-    v = sMapPlatforms[i].z;
+    v = sMapPlatforms[index].z;
     buf = EwramAlloc(96);
     y = startY;
     k = 4;
@@ -2098,12 +2098,12 @@ void MapTracePlatformLeftToRight(u8 i, s16 left, s16 right, s16 startY, u8 edgeM
     *w++ = y;
 
     for (x = left + 1; x < right - 1; x++) {
-        t = GetTopEdgeTypeBelowLedge(i, x, y);
+        t = GetTopEdgeTypeBelowLedge(index, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 6;
-            } else if (i == 0) {
+            } else if (index == 0) {
                 if (edgeMode == 2) {
                     t = PickEdgeTypeByHalf(left, right, x, 1);
                 } else if (edgeMode == 3) {
@@ -2177,7 +2177,7 @@ void MapTracePlatformLeftToRight(u8 i, s16 left, s16 right, s16 startY, u8 edgeM
     EwramFree(buf);
 }
 
-void MapTracePlatformRightToLeft(u8 i, s16 left, s16 right, s16 startY, u8 edgeMode) {
+void MapTracePlatformRightToLeft(u8 index, s16 left, s16 right, s16 startY, u8 edgeMode) {
     s16 x;
     s16 yn;
     s16 n;
@@ -2191,7 +2191,7 @@ void MapTracePlatformRightToLeft(u8 i, s16 left, s16 right, s16 startY, u8 edgeM
     MapCell* q;
     s32 m;
 
-    v = sMapPlatforms[i].z;
+    v = sMapPlatforms[index].z;
     buf = EwramAlloc(96);
     y = startY;
     k = 6;
@@ -2202,12 +2202,12 @@ void MapTracePlatformRightToLeft(u8 i, s16 left, s16 right, s16 startY, u8 edgeM
     *w++ = y;
 
     for (x = right - 2; x > left; x--) {
-        t = GetTopEdgeTypeBelowLedge(i, x, y);
+        t = GetTopEdgeTypeBelowLedge(index, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 4;
-            } else if (i == 0) {
+            } else if (index == 0) {
                 if (edgeMode == 2) {
                     t = PickEdgeTypeByHalf(left, right, x, 1);
                 } else if (edgeMode == 3) {
@@ -2281,7 +2281,7 @@ void MapTracePlatformRightToLeft(u8 i, s16 left, s16 right, s16 startY, u8 edgeM
     EwramFree(buf);
 }
 
-void MapTracePlatformOutward(u8 i, s16 left, s16 right, s16 startX, s16 startY, u8 edgeMode) {
+void MapTracePlatformOutward(u8 index, s16 left, s16 right, s16 startX, s16 startY, u8 edgeMode) {
     s16 x;
     s16 yn;
     s16 n;
@@ -2295,23 +2295,23 @@ void MapTracePlatformOutward(u8 i, s16 left, s16 right, s16 startX, s16 startY, 
     MapCell* q;
     s32 m;
 
-    v = sMapPlatforms[i].z;
+    v = sMapPlatforms[index].z;
     buf = EwramAlloc(96);
     w = buf + startX;
     y = startY;
-    t = GetTopEdgeTypeBelowLedge(i, startX, y);
+    t = GetTopEdgeTypeBelowLedge(index, startX, y);
     k = t;
     q = MapGetCell(startX, y);
     MapCellSetType(q, t, v);
     *w++ = y;
 
     for (x = startX + 1; x < right - 1; x++) {
-        s32 t = (u8)GetTopEdgeTypeBelowLedge(i, x, y);
+        s32 t = (u8)GetTopEdgeTypeBelowLedge(index, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 6;
-            } else if (i == 0) {
+            } else if (index == 0) {
                 if (edgeMode == 2) {
                     t = (u8)PickEdgeTypeByHalf(left, right, x, 1);
                 } else if (edgeMode == 3) {
@@ -2338,17 +2338,17 @@ void MapTracePlatformOutward(u8 i, s16 left, s16 right, s16 startX, s16 startY, 
     *w = y;
     w = buf + startX;
     y = startY;
-    t = GetTopEdgeTypeBelowLedge(i, startX, y);
+    t = GetTopEdgeTypeBelowLedge(index, startX, y);
     k = t;
     w--;
 
     for (x = startX - 1; x > left; x--) {
-        s32 t = (u8)GetTopEdgeTypeBelowLedge(i, x, y);
+        s32 t = (u8)GetTopEdgeTypeBelowLedge(index, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 4;
-            } else if (i == 0) {
+            } else if (index == 0) {
                 if (edgeMode == 2) {
                     t = (u8)PickEdgeTypeByHalf(left, right, x, 1);
                 } else if (edgeMode == 3) {

@@ -371,8 +371,8 @@ void WLogoStartLogo(u8 world) {
     SetBgAffine(2, 0, 256, 256, 0x10000, 0x16800);
 }
 
-void task_wLogo_0(WLogoTaskWork* work, u8 arg) {
-    work->worldId = arg;
+void task_wLogo_0(WLogoTaskWork* work, u8 world) {
+    work->worldId = world;
     work->cameraOffsetY = -0x5A00;
     work->timer = 0;
     TaskPoolInit(&sTaskWLogoTasks, 2);

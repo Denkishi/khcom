@@ -671,8 +671,8 @@ void MapEnm00Stand(MapEnmWork* work) {
     }
 }
 
-void Task_MapEnm00_0(MapEnmWork* work, MapEnmArgs* q) {
-    MapEnmInit(work, q);
+void Task_MapEnm00_0(MapEnmWork* work, MapEnmArgs* arg) {
+    MapEnmInit(work, arg);
 
     if (work->update == NULL) {
         if (work->flags & MAP_ENM_FLAG_ASLEEP) {
@@ -940,10 +940,10 @@ void MapEnm01Stand(MapEnmWork* work) {
     }
 }
 
-void Task_MapEnm01_0(MapEnmWork* work, MapEnmArgs* q) {
+void Task_MapEnm01_0(MapEnmWork* work, MapEnmArgs* arg) {
     MapEnm01Work* w = (MapEnm01Work*)work;
 
-    MapEnmInit(work, q);
+    MapEnmInit(work, arg);
 
     if (work->flags & MAP_ENM_FLAG_ASLEEP) {
         work->update = MapEnm01Stand;
@@ -1009,8 +1009,8 @@ void MapEnm02Idle(MapEnmWork* work) {
     MapEnmCheckContact(work);
 }
 
-void Task_MapEnm02_0(MapEnmWork* work, MapEnmArgs* q) {
-    MapEnmInit(work, q);
+void Task_MapEnm02_0(MapEnmWork* work, MapEnmArgs* arg) {
+    MapEnmInit(work, arg);
     work->update = MapEnm02Idle;
     MapEnmSetAnim(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
@@ -1498,10 +1498,10 @@ void MapEnm04Stand(MapEnmWork* work) {
     }
 }
 
-void Task_MapEnm04_0(MapEnmWork* work, MapEnmArgs* q) {
+void Task_MapEnm04_0(MapEnmWork* work, MapEnmArgs* arg) {
     MapEnm01Work* w = (MapEnm01Work*)work;
 
-    MapEnmInit(work, q);
+    MapEnmInit(work, arg);
 
     if (work->flags & MAP_ENM_FLAG_ASLEEP) {
         work->update = MapEnm04Stand;
@@ -1624,8 +1624,8 @@ void MapEnm05Hit(MapEnmWork* work) {
     }
 }
 
-void Task_MapEnm05_0(MapEnmWork* work, MapEnmArgs* q) {
-    MapEnmInit(work, q);
+void Task_MapEnm05_0(MapEnmWork* work, MapEnmArgs* arg) {
+    MapEnmInit(work, arg);
 
     if (work->update == NULL) {
         work->update = MapEnm05Appear;
@@ -1744,8 +1744,8 @@ void MapEnm06Hit(MapEnmWork* work) {
     }
 }
 
-void Task_MapEnm06_0(MapEnmWork* work, MapEnmArgs* q) {
-    MapEnmInit(work, q);
+void Task_MapEnm06_0(MapEnmWork* work, MapEnmArgs* arg) {
+    MapEnmInit(work, arg);
 
     if (work->update == NULL) {
         work->update = MapEnm06Appear;

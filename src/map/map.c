@@ -147,8 +147,8 @@ s32 MapEnmPlaceInRoom(MapEnmArgs* arg) {
     return 0;
 }
 
-u8 MapEnmPlaceAtStairs(MapEnmArgs* w) {
-    FldPos* d = &w->pos;
+u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
+    FldPos* d = &arg->pos;
     MapPlatform* q = GetMapPlatform(1);
     u16 wd = q->right - q->left - 2;
     u16 ht = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
@@ -167,10 +167,10 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* w) {
                 s32 v;
 
                 if (e->type == 4) {
-                    w->angle = 0x53;
+                    arg->angle = 0x53;
                     v = (x << 13) + 0x1800;
                 } else if (e->type == 6) {
-                    w->angle = 0xAD;
+                    arg->angle = 0xAD;
                     v = (x << 13) + 0x800;
                 } else {
                     continue;
@@ -192,8 +192,8 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* w) {
     return 0;
 }
 
-u8 MapEnmPlaceAboveGmk01(MapEnmArgs* w) {
-    FldPos* d = &w->pos;
+u8 MapEnmPlaceAboveGmk01(MapEnmArgs* arg) {
+    FldPos* d = &arg->pos;
     MapPlatform* q = GetMapPlatform(0);
     u16 wd = q->right - q->left - 2;
     u16 ht = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
@@ -224,10 +224,10 @@ u8 MapEnmPlaceAboveGmk01(MapEnmArgs* w) {
     return 0;
 }
 
-void MapEnmSetupArgs(MapEnmArgs* arg, const MapEnmDef* q) {
-    if (q->flags & MAP_ENM_DEF_FLAG_SPAWN_ANYWHERE) {
+void MapEnmSetupArgs(MapEnmArgs* arg, const MapEnmDef* def) {
+    if (def->flags & MAP_ENM_DEF_FLAG_SPAWN_ANYWHERE) {
         MapEnmPlaceInRoom(arg);
-    } else if (q->flags & MAP_ENM_DEF_FLAG_AIRBORNE) {
+    } else if (def->flags & MAP_ENM_DEF_FLAG_AIRBORNE) {
         MapEnmPlaceInViewAbove(arg);
     } else {
         MapEnmPlaceInView(arg);
@@ -249,11 +249,11 @@ void MapEnmSetupArgs(MapEnmArgs* arg, const MapEnmDef* q) {
     }
 
     arg->speed = 0;
-    arg->def = q;
+    arg->def = def;
     arg->update = NULL;
 }
 
-void MapEnmSpawnFixed(MapEnmArgs* w, u8 kind, u8 place) {
+void MapEnmSpawnFixed(MapEnmArgs* arg, u8 kind, u8 place) {
     const u8* t;
     MapFloorRoom* e;
     const MapEnmDef* d;
@@ -274,24 +274,24 @@ void MapEnmSpawnFixed(MapEnmArgs* w, u8 kind, u8 place) {
 
     switch (place) {
     case 2:
-        ok = MapEnmPlaceAtStairs(w);
+        ok = MapEnmPlaceAtStairs(arg);
         break;
     case 3:
-        ok = MapEnmPlaceAboveGmk01(w);
+        ok = MapEnmPlaceAboveGmk01(arg);
         break;
     case 0:
     default:
-        ok = MapEnmPlaceInRoom(w);
-        w->angle = GetAngle(w->pos.x, w->pos.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
+        ok = MapEnmPlaceInRoom(arg);
+        arg->angle = GetAngle(arg->pos.x, arg->pos.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
         break;
     }
 
     if (ok) {
-        sMapEnmSpawnPositions[sMapEnmCount] = w->pos;
-        w->speed = 0;
-        w->def = d;
-        w->update = NULL;
-        TaskCreate(&gFieldState->tasks4, d->desc, w);
+        sMapEnmSpawnPositions[sMapEnmCount] = arg->pos;
+        arg->speed = 0;
+        arg->def = d;
+        arg->update = NULL;
+        TaskCreate(&gFieldState->tasks4, d->desc, arg);
     }
 }
 
@@ -316,24 +316,24 @@ void MapEnmApplyRoomFlags(MapEnmWork* work) {
     }
 }
 
-void MapEnmSetAnim(MapEnmWork* work, u8 n, u16 flags) {
+void MapEnmSetAnim(MapEnmWork* work, u8 index, u16 flags) {
     const AnimDef* q = work->def->animDef;
 
     switch (work->obj.angle >> 6) {
     case 0:
-        q += n * 2;
+        q += index * 2;
         work->flags |= MAP_ENM_FLAG_HFLIP;
         break;
     case 1:
-        q += n * 2 + 1;
+        q += index * 2 + 1;
         work->flags |= MAP_ENM_FLAG_HFLIP;
         break;
     case 2:
-        q += n * 2 + 1;
+        q += index * 2 + 1;
         work->flags &= ~MAP_ENM_FLAG_HFLIP;
         break;
     default:
-        q += n * 2;
+        q += index * 2;
         work->flags &= ~MAP_ENM_FLAG_HFLIP;
         break;
     }
@@ -589,17 +589,17 @@ void MapEnmUpdateSpawner() {
     TaskCreate(&gFieldState->tasks4, d->desc, &w);
 }
 
-void MapEnmInit(MapEnmWork* work, MapEnmArgs* q) {
+void MapEnmInit(MapEnmWork* work, MapEnmArgs* arg) {
     FldObj* e = &work->obj;
-    const MapEnmDef* d = q->def;
+    const MapEnmDef* d = arg->def;
 
     work->def = d;
-    work->update = q->update;
+    work->update = arg->update;
     work->flags = 0;
     work->colliderDelay = 30;
-    e->fieldPosition = q->pos;
-    e->angle = q->angle;
-    e->speed = q->speed;
+    e->fieldPosition = arg->pos;
+    e->angle = arg->angle;
+    e->speed = arg->speed;
     e->height = d->height;
     e->unk_34 = 0;
     e->kind = 1;
@@ -784,23 +784,23 @@ s32 MapGmkIsAreaSparse(s16 x, s16 y) {
     return 1;
 }
 
-u8 MapCellIsFreeOfType(s16 x, s16 y, u8 n) {
+u8 MapCellIsFreeOfType(s16 x, s16 y, u8 type) {
     MapCell* p = MapCellAt(x, y);
 
-    if (p != NULL && p->lowerZ != 0x100000 && p->type == n && (p->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
+    if (p != NULL && p->lowerZ != 0x100000 && p->type == type && (p->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
         return 1;
     }
 
     return 0;
 }
 
-s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 n) {
+s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 type) {
     s32 i;
     s32 j;
 
     for (i = 0; i < w; i++) {
         for (j = 0; j < h; j++) {
-            if (!MapCellIsFreeOfType(x + i, y + j, n)) {
+            if (!MapCellIsFreeOfType(x + i, y + j, type)) {
                 return 0;
             }
         }
@@ -846,7 +846,7 @@ s16 MapRowsToWallBase(s16 x, s16 y) {
     return 0;
 }
 
-s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 n) {
+s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 width) {
     s32 i;
     u16 h;
     s32 j;
@@ -855,7 +855,7 @@ s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 n) {
 
     h = gMapRoomState->rows - y;
 
-    for (j = 0; j < n; j++) {
+    for (j = 0; j < width; j++) {
         for (i = 0; i < h; i++) {
             q = MapCellAt(x + j, y - i);
 
@@ -1996,13 +1996,13 @@ void MapApplyRoomDecor() {
     }
 }
 
-void MapAnmSetupSlot(MapAnmSlot* slot, const MapAnmEntry* q) {
-    slot->tiles = q->tiles;
-    slot->frameSize = q->frameSize;
-    slot->dest += q->tileOffset << 5;
+void MapAnmSetupSlot(MapAnmSlot* slot, const MapAnmEntry* entry) {
+    slot->tiles = entry->tiles;
+    slot->frameSize = entry->frameSize;
+    slot->dest += entry->tileOffset << 5;
     slot->timer = 0;
-    slot->script = q->script;
-    slot->scriptPos = q->script;
+    slot->script = entry->script;
+    slot->scriptPos = entry->script;
 }
 
 void MapAnmStepScript(MapAnmSlot* slot) {
@@ -3628,16 +3628,16 @@ void NewGameSlotMenuLoadFloorTiles(u8 slot, u8 selected, u8 floor) {
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(1) + (slot * 608 + 320), 320);
 }
 
-void NewGameSlotMenuLoadLevelTiles(u8 slot, u16 v) {
+void NewGameSlotMenuLoadLevelTiles(u8 slot, u16 level) {
     u16 d[4];
     s32 off;
     u16* q;
     s32 i;
 
     slot &= 1;
-    d[0] = v / 100;
-    d[1] = v / 10 - d[0] * 10;
-    d[2] = v - d[0] * 100 - d[1] * 10;
+    d[0] = level / 100;
+    d[1] = level / 10 - d[0] * 10;
+    d[2] = level - d[0] * 100 - d[1] * 10;
     i = 1;
     off = slot * 608 + 32;
     q = &d[1];
@@ -3678,17 +3678,17 @@ void NewGameSlotMenuLoadTimeTiles(u8 slot, u32 playTime) {
     }
 }
 
-s32 NewGameSlotMenuShowSummary(u8 i) {
-    SaveFileSummary* p = &gGameState.fileSummaries[i];
+s32 NewGameSlotMenuShowSummary(u8 slot) {
+    SaveFileSummary* p = &gGameState.fileSummaries[slot];
 
     if (p->level != 0) {
-        NewGameSlotMenuLoadLevelTiles(i, p->level);
-        NewGameSlotMenuLoadTimeTiles(i, p->playTime);
-        NewGameSlotMenuLoadFloorTiles(i, 0, p->floor);
+        NewGameSlotMenuLoadLevelTiles(slot, p->level);
+        NewGameSlotMenuLoadTimeTiles(slot, p->playTime);
+        NewGameSlotMenuLoadFloorTiles(slot, 0, p->floor);
         return 1;
     }
 
-    NewGameSlotMenuLoadFloorTiles(i, 0, 13);
+    NewGameSlotMenuLoadFloorTiles(slot, 0, 13);
     return 0;
 }
 
@@ -4132,15 +4132,15 @@ void LoadGameMenuLoadFloorTiles(u8 slot, u8 selected, u8 floor) {
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(1) + (slot * 608 + 320), 320);
 }
 
-void LoadGameMenuLoadLevelTiles(u8 slot, u16 v) {
+void LoadGameMenuLoadLevelTiles(u8 slot, u16 level) {
     u16 d[4];
     s32 off;
     u16* q;
     s32 i;
 
-    d[0] = v / 100;
-    d[1] = v / 10 - d[0] * 10;
-    d[2] = v - d[0] * 100 - d[1] * 10;
+    d[0] = level / 100;
+    d[1] = level / 10 - d[0] * 10;
+    d[2] = level - d[0] * 100 - d[1] * 10;
     i = 1;
     off = slot * 608 + 32;
     q = &d[1];
@@ -4152,23 +4152,23 @@ void LoadGameMenuLoadLevelTiles(u8 slot, u16 v) {
     }
 }
 
-void LoadGameMenuLoadTimeTiles(u8 slot, u32 v) {
+void LoadGameMenuLoadTimeTiles(u8 slot, u32 playTime) {
     u16 d[6];
     s32 off;
     u16* q;
     s32 i;
     u32 t;
 
-    t = v / 3600;
+    t = playTime / 3600;
     d[0] = t / 10;
     d[1] = t - d[0] * 10;
-    v -= t * 3600;
-    t = v / 60;
+    playTime -= t * 3600;
+    t = playTime / 60;
     d[2] = t / 10;
     d[3] = t - d[2] * 10;
-    v -= t * 60;
-    d[4] = v / 10;
-    d[5] = v - d[4] * 10;
+    playTime -= t * 60;
+    d[4] = playTime / 10;
+    d[5] = playTime - d[4] * 10;
     i = 0;
     off = slot * 608 + 128;
     q = d;
@@ -4722,24 +4722,24 @@ void Task_MapRnd_3(MapRndWork* work) {
     MapFreeRoom();
 }
 
-void MapFixInitColliders(MapFixWork* work, MapFixedCollider* q) {
+void MapFixInitColliders(MapFixWork* work, MapFixedCollider* collider) {
     s32 i;
 
     work->colliderCount = 0;
 
-    if (q != NULL) {
+    if (collider != NULL) {
         i = 0;
 
         do {
-            if (q->radius != 0) {
-                ColliderInit(&work->colliders[i], 6, q->radius, 0xA0);
-                ColliderSetPosition(&work->colliders[i], q->x, q->y, 0);
+            if (collider->radius != 0) {
+                ColliderInit(&work->colliders[i], 6, collider->radius, 0xA0);
+                ColliderSetPosition(&work->colliders[i], collider->x, collider->y, 0);
                 work->colliderCount++;
             } else {
                 break;
             }
 
-            q++;
+            collider++;
             i++;
         } while (i < 5);
     }
@@ -5172,14 +5172,14 @@ void MapMenuSetCharaPalettesExcluded(MapMenuWork* work, u8 excluded) {
     FadeSetPaletteExcluded(work->palette7->index + 0x10, excluded);
 }
 
-void MapMenuWriteDigits3(ObjTiles* tiles, u8 offset, u16 v) {
+void MapMenuWriteDigits3(ObjTiles* tiles, u8 offset, u16 value) {
     u16 d[3];
     u16* q;
     s32 i;
 
-    d[0] = v / 100;
-    d[1] = v / 10 - d[0] * 10;
-    d[2] = v - d[0] * 100 - d[1] * 10;
+    d[0] = value / 100;
+    d[1] = value / 10 - d[0] * 10;
+    d[2] = value - d[0] * 100 - d[1] * 10;
 
     for (i = 0, q = d; i < 3; i++) {
         RequestDma3Copy((void*)&gMapMenuDigitTiles[*q * 32], (void*)(OBJ_VRAM0 + (tiles->index + offset + i) * 32), 0x20);
@@ -5187,16 +5187,16 @@ void MapMenuWriteDigits3(ObjTiles* tiles, u8 offset, u16 v) {
     }
 }
 
-void MapMenuWriteDigits5(ObjTiles* tiles, u8 offset, u32 v) {
+void MapMenuWriteDigits5(ObjTiles* tiles, u8 offset, u32 value) {
     u16 d[5];
     u16* q;
     s32 i;
 
-    d[0] = v / 10000;
-    d[1] = v / 1000 - d[0] * 10;
-    d[2] = v / 100 - d[0] * 100 - d[1] * 10;
-    d[3] = v / 10 - d[0] * 1000 - d[1] * 100 - d[2] * 10;
-    d[4] = v - d[0] * 10000 - d[1] * 1000 - d[2] * 100 - d[3] * 10;
+    d[0] = value / 10000;
+    d[1] = value / 1000 - d[0] * 10;
+    d[2] = value / 100 - d[0] * 100 - d[1] * 10;
+    d[3] = value / 10 - d[0] * 1000 - d[1] * 100 - d[2] * 10;
+    d[4] = value - d[0] * 10000 - d[1] * 1000 - d[2] * 100 - d[3] * 10;
 
     for (i = 0, q = d; i < 5; i++) {
         RequestDma3Copy((void*)&gMapMenuDigitTiles[*q * 32], (void*)(OBJ_VRAM0 + (tiles->index + offset + i) * 32), 0x20);
@@ -6122,15 +6122,15 @@ void MapSaveLoadFloorTiles(u8 floor) {
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(0) + 320, 320);
 }
 
-void MapSaveLoadLevelTiles(u16 v) {
+void MapSaveLoadLevelTiles(u16 level) {
     u16 d[4];
     s32 off;
     u16* q;
     s32 i;
 
-    d[0] = v / 100;
-    d[1] = v / 10 - d[0] * 10;
-    d[2] = v - d[0] * 100 - d[1] * 10;
+    d[0] = level / 100;
+    d[1] = level / 10 - d[0] * 10;
+    d[2] = level - d[0] * 100 - d[1] * 10;
     off = 0x40;
     q = &d[1];
 
@@ -6146,23 +6146,23 @@ void MapSaveLoadLevelTiles(u16 v) {
     }
 }
 
-void MapSaveLoadTimeTiles(u32 t) {
+void MapSaveLoadTimeTiles(u32 playTime) {
     u16 d[6];
     s32 off;
     u16* q;
     s32 i;
     u32 v;
 
-    v = t / 3600;
+    v = playTime / 3600;
     d[0] = v / 10;
     d[1] = v - d[0] * 10;
-    t -= v * 3600;
-    v = t / 60;
+    playTime -= v * 3600;
+    v = playTime / 60;
     d[2] = v / 10;
     d[3] = v - d[2] * 10;
-    t -= v * 60;
-    d[4] = t / 10;
-    d[5] = t - d[4] * 10;
+    playTime -= v * 60;
+    d[4] = playTime / 10;
+    d[5] = playTime - d[4] * 10;
     off = 128;
     q = d;
 
@@ -6173,8 +6173,8 @@ void MapSaveLoadTimeTiles(u32 t) {
     }
 }
 
-void MapSaveShowSummary(MapSaveWork* work, u8 i) {
-    SaveFileSummary* e = &gGameState.fileSummaries[i];
+void MapSaveShowSummary(MapSaveWork* work, u8 slot) {
+    SaveFileSummary* e = &gGameState.fileSummaries[slot];
 
     if (e->level == 0) {
         work->textSlotCount = 0;

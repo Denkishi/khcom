@@ -300,8 +300,8 @@ void task_wlogo_hwt_3(WlogoHwtWork* work) {
     TaskPoolDestroy(&sWlogoHwtTaskPool);
 }
 
-void task_wlogo_hwt_obj_0(WlogoHwtObjWork* work, s32 arg) {
-    work->id = arg;
+void task_wlogo_hwt_obj_0(WlogoHwtObjWork* work, s32 id) {
+    work->id = id;
     work->tiles = LoadObjTiles(gWlogoHwtGhostTiles, 0xF20);
     work->palette = LoadObjPalette(gWlogoHwtPalette, 0x20);
     AnimInit(&work->anim, gWlogoHwtGhostAnims, gWlogoHwtGhostFrames);
@@ -1667,8 +1667,8 @@ void task_wlogo_poo_3(WlogoPooWork* work) {
     TaskPoolDestroy(&sWlogoPooTaskPool);
 }
 
-void task_wlogo_poo_obj_0(WlogoPooObjWork* work, s32 arg) {
-    work->id = arg;
+void task_wlogo_poo_obj_0(WlogoPooObjWork* work, s32 id) {
+    work->id = id;
     work->tiles = LoadObjTiles(gWlogoPooBeeTiles, 0x380);
     work->palette = LoadObjPalette(gWlogoPooPalette, 0x20);
     work->x = 0x8200;
@@ -2392,8 +2392,8 @@ enum WlogoBksObjState {
     WLOGO_BKS_OBJ_STATE_HOLD
 };
 
-void task_wlogo_bks_obj_0(WlogoBksObjWork* work, s32 arg) {
-    work->id = arg;
+void task_wlogo_bks_obj_0(WlogoBksObjWork* work, s32 id) {
+    work->id = id;
     work->x = gWlogoBksObjStarts[work->id][0] << 8;
     work->y = gWlogoBksObjStarts[work->id][1] << 8;
     work->targetX = gWlogoBksObjTargets[work->id][0] << 8;

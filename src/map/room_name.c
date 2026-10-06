@@ -57,11 +57,11 @@ enum RoomNameState {
     ROOM_NAME_STATE_CLOSE
 };
 
-void task_room_name_0(RoomNameWork* work, s32 arg) {
+void task_room_name_0(RoomNameWork* work, s32 nameId) {
     work->tiles = LoadObjTiles(gMapNameBarTiles, 0x800);
     work->palette = LoadObjPalette(gMapFloorNamePalette, 0x20);
     work->gfx = gMapNameBarFrames[0];
-    work->nameId = arg;
+    work->nameId = nameId;
     work->x2 = 0x5C00;
     work->y2 = 0x8A00;
     work->x = 0x7800;

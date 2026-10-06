@@ -12,9 +12,9 @@
 #include "types.h"
 #include <stddef.h>
 
-void task_romcri_eff_0(RomcriEffWork* work, s32 arg) {
+void task_romcri_eff_0(RomcriEffWork* work, s32 angle) {
     SetupBg(1, 0, 23, 12);
-    work->angle = arg;
+    work->angle = angle;
     work->timer = 0;
     DisableBg(1);
     PushPaletteEffect(0);
@@ -185,11 +185,11 @@ void task_romcri_eff_3() {
     DisableBg(1);
 }
 
-void task_romcri_eff2_0(RomcriEff2Work* work, s32 arg) {
+void task_romcri_eff2_0(RomcriEff2Work* work, s32 angle) {
     SetupBg(1, 0, 23, 12);
     work->timer = 0;
     work->frame = 0;
-    work->angle = arg;
+    work->angle = angle;
     DisableBg(1);
     PushPaletteEffect(0);
     LoadBgPalette(1, gRomcriEff2Palette, 0x20);

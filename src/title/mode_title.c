@@ -114,15 +114,8 @@ void TitleShowLogo(u16 frames) {
     EnableBg(0);
     DisableBg(1);
     DisableBg(2);
-
-    if (!IsTaskActive(sTitleLogoTask)) {
-        sTitleLogoTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleLogo, NULL);
-    }
-
-    if (!IsTaskActive(sTitleObjTask)) {
-        sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, NULL);
-    }
-
+    TASK_CREATE_IF_INACTIVE(sTitleLogoTask, &sTitleTaskPool, &gTaskDescTitleLogo, NULL);
+    TASK_CREATE_IF_INACTIVE(sTitleObjTask, &sTitleTaskPool, &gTaskDescTitleObj, NULL);
     FadeStartIn(FADE_MODE_ADD_WHITE, frames);
 }
 

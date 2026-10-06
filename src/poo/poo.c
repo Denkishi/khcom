@@ -320,10 +320,7 @@ void SetPoohAction(PoohWork* work, u32 action) {
 
     if (action >= POOH_ACTION_BALLOON && action <= POOH_ACTION_OWL_BALLOON) {
         work->balloonTimer = 0;
-
-        if (!IsTaskActive(work->task)) {
-            work->task = TaskCreate(&work->tasks, &gTaskDescPooBalloon, &work->pos);
-        }
+        TASK_CREATE_IF_INACTIVE(work->task, &work->tasks, &gTaskDescPooBalloon, &work->pos);
     }
 
     if (action == POOH_ACTION_THINK || action == POOH_ACTION_SIT || action == POOH_ACTION_WALK_AWAY ||
@@ -341,12 +338,9 @@ void SetPoohAction(PoohWork* work, u32 action) {
         m4aSongNumStart(SONG_SYS_PO_FALL);
     } else if (action == POOH_ACTION_OWL_BALLOON || action == POOH_ACTION_OWL_DESCENT ||
                (action >= POOH_ACTION_SIT_FOR_HONEY && action <= POOH_ACTION_EAT_HONEY_3)) {
-        // fakematch
-        do {
-            work->angle = 0xAD;
-            work->lookAngle = 0xAD;
-            work->lookColumn = work->angle;
-        } while (0);
+        work->angle = 0xAD;
+        work->lookAngle = 0xAD;
+        work->lookColumn = work->angle;
     }
 
     if (action > POOH_ACTION_EAT_HONEY_3) {
@@ -1175,9 +1169,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
             break;
         }
 
-        if (!IsTaskActive(work->zzzTask)) {
-            work->zzzTask = TaskCreate(&work->tasks, &gTaskDescPooZzz, &work->flipped);
-        }
+        TASK_CREATE_IF_INACTIVE(work->zzzTask, &work->tasks, &gTaskDescPooZzz, &work->flipped);
 
         if (gPoohGauge == 0) {
             work->sleepTimer++;

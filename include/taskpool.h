@@ -51,4 +51,11 @@ void TaskPoolDraw(TaskPool* pool);
 void TaskPoolDestroy(TaskPool* pool);
 s32 func_08000F90();
 
+#define TASK_CREATE_IF_INACTIVE(task, pool, desc, arg) \
+    do { \
+        if (!IsTaskActive(task)) { \
+            (task) = TaskCreate(pool, desc, arg); \
+        } \
+    } while (0)
+
 #endif

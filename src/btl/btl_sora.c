@@ -2818,7 +2818,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         s32 attack;
         s32 dy;
 
-        hit = 0;
+        hit = ATTACK_RESULT_NONE;
         FocusBtlSoraCameraOnTarget(work);
         memcpy(hitFrames, sBtlSoraSwingHitFrames, sizeof(hitFrames));
 
@@ -2939,7 +2939,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
             }
 
-            if (hit == 1) {
+            if (hit == ATTACK_RESULT_HIT) {
                 m4aSongNumStart(swing->hitSound);
 
                 if (swing->flags & COMBO_FLAG_ZOOM_ON_HIT) {
@@ -2966,7 +2966,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (hit == 2) {
+        if (hit == ATTACK_RESULT_BLOCKED) {
             SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             SetBtlSoraState(work, BTL_SORA_STATE_GUARDED);
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
@@ -3909,7 +3909,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     case BTL_SORA_STATE_SONIC_BLADE: {
         s32 elapsed;
 
-        hit = 0;
+        hit = ATTACK_RESULT_NONE;
         FocusBtlSoraCameraOnTarget(work);
         elapsed = work->stateTimer;
 
@@ -3961,7 +3961,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
             }
 
-            if (hit == 1) {
+            if (hit == ATTACK_RESULT_HIT) {
                 m4aSongNumStart(SONG_BTL_LT_HIT00);
             }
 
@@ -3984,7 +3984,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (hit == 2) {
+        if (hit == ATTACK_RESULT_BLOCKED) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, BTL_SORA_STATE_GUARDED);
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
@@ -4578,14 +4578,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             if (work->comboCount == 1) {
                 if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
-                    ? ApplyAttackBox(89, act->x - 5120, act->y, act->z, 16, 16, 48) != 0
-                    : ApplyAttackBox(89, act->x + 5120, act->y, act->z, 16, 16, 48) != 0) {
+                    ? ApplyAttackBox(89, act->x - 5120, act->y, act->z, 16, 16, 48) != ATTACK_RESULT_NONE
+                    : ApplyAttackBox(89, act->x + 5120, act->y, act->z, 16, 16, 48) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_SR_ATT01);
                 }
             } else {
                 if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
-                    ? ApplyAttackBox(88, act->x - 5120, act->y, act->z, 16, 16, 48) != 0
-                    : ApplyAttackBox(88, act->x + 5120, act->y, act->z, 16, 16, 48) != 0) {
+                    ? ApplyAttackBox(88, act->x - 5120, act->y, act->z, 16, 16, 48) != ATTACK_RESULT_NONE
+                    : ApplyAttackBox(88, act->x + 5120, act->y, act->z, 16, 16, 48) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_SR_ATT00);
                 }
             }
@@ -4745,8 +4745,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
-                ? ApplyAttackBox(94, act->x - 6400, act->y, act->z, 10, 12, 32) != 0
-                : ApplyAttackBox(94, act->x + 6400, act->y, act->z, 10, 12, 32) != 0) {
+                ? ApplyAttackBox(94, act->x - 6400, act->y, act->z, 10, 12, 32) != ATTACK_RESULT_NONE
+                : ApplyAttackBox(94, act->x + 6400, act->y, act->z, 10, 12, 32) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_BTL_LT_HIT00);
             }
         }
@@ -4788,8 +4788,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
-            ? ApplyAttackBox(94, act->x - 6400, act->y, act->z, 10, 12, 12) != 0
-            : ApplyAttackBox(94, act->x + 6400, act->y, act->z, 10, 12, 12) != 0) {
+            ? ApplyAttackBox(94, act->x - 6400, act->y, act->z, 10, 12, 12) != ATTACK_RESULT_NONE
+            : ApplyAttackBox(94, act->x + 6400, act->y, act->z, 10, 12, 12) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(SONG_BTL_LT_HIT00);
         }
 
@@ -4924,8 +4924,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FadeStartIn(FADE_MODE_RED, 10);
 
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
-                ? ApplyAttackBox(95, act->x - 6400, act->y, act->z, 10, 12, 12) != 0
-                : ApplyAttackBox(95, act->x + 6400, act->y, act->z, 10, 12, 12) != 0) {
+                ? ApplyAttackBox(95, act->x - 6400, act->y, act->z, 10, 12, 12) != ATTACK_RESULT_NONE
+                : ApplyAttackBox(95, act->x + 6400, act->y, act->z, 10, 12, 12) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_EF_ZANTETSU);
                 SetBtlSoraAnimation(work, 76, 0);
                 work->state = BTL_SORA_STATE_ZANTETSUKEN_END;
@@ -5041,7 +5041,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                if (ApplyAttackBox(93, act->x - 8192, act->y, act->z - 8192, 20, 25, 32) != 0) {
+                if (ApplyAttackBox(93, act->x - 8192, act->y, act->z - 8192, 20, 25, 32) != ATTACK_RESULT_NONE) {
                     if (work->comboCount == 0) {
                         m4aSongNumStart(SONG_BTL_LT_HIT00);
                     } else {
@@ -5049,7 +5049,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     }
                 }
             } else {
-                if (ApplyAttackBox(93, act->x + 8192, act->y, act->z - 8192, 20, 25, 32) != 0) {
+                if (ApplyAttackBox(93, act->x + 8192, act->y, act->z - 8192, 20, 25, 32) != ATTACK_RESULT_NONE) {
                     if (work->comboCount == 0) {
                         m4aSongNumStart(SONG_BTL_LT_HIT00);
                     } else {
@@ -5124,8 +5124,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 MakeOpponentsHittable();
 
                 if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
-                    ? ApplyAttackBox(90, act->x - 1024, act->y, act->z, 32, 24, 32) != 0
-                    : ApplyAttackBox(90, act->x + 1024, act->y, act->z, 32, 24, 32) != 0) {
+                    ? ApplyAttackBox(90, act->x - 1024, act->y, act->z, 32, 24, 32) != ATTACK_RESULT_NONE
+                    : ApplyAttackBox(90, act->x + 1024, act->y, act->z, 32, 24, 32) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_SR_ATT02);
 
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {

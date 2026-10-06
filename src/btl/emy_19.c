@@ -118,7 +118,7 @@ u8 task_emy_19_1(Emy19Work* work) {
             work->base.vz = -0x500;
         }
 
-        if (ApplyAttackBox(0xBB, act->x, act->y, act->z, 10, 10, 10) != 0) {
+        if (ApplyAttackBox(0xBB, act->x, act->y, act->z, 10, 10, 10) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(SONG_BTL_MON_SWORD03);
             w->dashSpeed = -w->dashSpeed;
             work->base.vz = -0x500;
@@ -167,8 +167,8 @@ u8 task_emy_19_1(Emy19Work* work) {
             }
 
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
-                    ? ApplyAttackBox(0xBC, act->x - 0x1000, act->y, act->z, 16, 16, 32) != 0
-                    : ApplyAttackBox(0xBC, act->x + 0x1000, act->y, act->z, 16, 16, 32) != 0) {
+                    ? ApplyAttackBox(0xBC, act->x - 0x1000, act->y, act->z, 16, 16, 32) != ATTACK_RESULT_NONE
+                    : ApplyAttackBox(0xBC, act->x + 0x1000, act->y, act->z, 16, 16, 32) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD02);
             }
 

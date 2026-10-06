@@ -239,7 +239,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         if (work->vz > 0) {
             MakeOpponentsHittable();
 
-            if (ApplyAttackBox(0x76, body->x, body->y, body->z - 0x400, 8, 8, 2) != 0) {
+            if (ApplyAttackBox(0x76, body->x, body->y, body->z - 0x400, 8, 8, 2) != ATTACK_RESULT_NONE) {
                 BgFxStartFriendHit(body->x, body->y, body->z);
                 AnimStart(&work->anim, 0, 0);
                 work->vz = -0x400;

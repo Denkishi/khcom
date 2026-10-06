@@ -359,7 +359,7 @@ u8 task_emy_16_p_1(Emy16pWork* work) {
         work->x += 0x400;
     }
 
-    if (ApplyAttackBox(0xB7, work->x, work->y, work->z, 4, 4, 4) != 0) {
+    if (ApplyAttackBox(0xB7, work->x, work->y, work->z, 4, 4, 4) != ATTACK_RESULT_NONE) {
         m4aSongNumStart(SONG_BTL_BW_PACHIN);
     }
 

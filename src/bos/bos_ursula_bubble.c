@@ -296,7 +296,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 #else
     if (AnimGetId(&work->anim) == 0
 #endif
-            && ApplyAttackBox(0xF2, obj->x, obj->y, obj->z, 1, 1, 1) == 1) {
+            && ApplyAttackBox(0xF2, obj->x, obj->y, obj->z, 1, 1, 1) == ATTACK_RESULT_HIT) {
         m4aSongNumStart(SONG_EF_UR_BUBBHIT);
 
         return 0;

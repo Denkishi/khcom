@@ -1743,7 +1743,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             work->visible2 = FALSE;
         }
 
-        if (ApplyAttackBox(231, work->body.x, work->body.y, work->body.z - 0x2000, 28, 28, 28) == 1) {
+        if (ApplyAttackBox(231, work->body.x, work->body.y, work->body.z - 0x2000, 28, 28, 28) == ATTACK_RESULT_HIT) {
             m4aSongNumStart(SONG_EF_JF_BALLHIT);
             BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
             work->shadowVisible = FALSE;

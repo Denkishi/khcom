@@ -5687,7 +5687,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
         case 5:
             BosPcGetAnimStep(work);
 
-            if (ApplyAttackBox(0xF8, work->body2.x - 0x2000, work->body2.y, work->body2.z, 20, 16, 24) != 0) {
+            if (ApplyAttackBox(0xF8, work->body2.x - 0x2000, work->body2.y, work->body2.z, 20, 16, 24) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
             }
 

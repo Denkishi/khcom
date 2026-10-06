@@ -1122,7 +1122,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
                 dz = -0x3800;
             }
 
-            if (ApplyAttackBox(241, obj->x + dx, obj->y + 0x1000, obj->z + dz, 24, 16, 8) == 1) {
+            if (ApplyAttackBox(241, obj->x + dx, obj->y + 0x1000, obj->z + dz, 24, 16, 8) == ATTACK_RESULT_HIT) {
                 m4aSongNumStart(SONG_BTL_HANE_HIT);
             }
         }

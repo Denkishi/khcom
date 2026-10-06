@@ -164,7 +164,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->delay = 0;
         }
 
-        if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 1, 4) != 0) {
+        if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 1, 4) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
 
@@ -210,7 +210,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 
         work->curZ = work->z2 - ((work->timer >> 2) << 8);
 
-        if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 4, 4) != 0) {
+        if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 4, 4) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
 

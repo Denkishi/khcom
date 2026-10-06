@@ -197,7 +197,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
         break;
     }
 
-    if (ApplyAttackBox(0x102, work->x, work->y, work->z, 16, 16, 16) == 1) {
+    if (ApplyAttackBox(0x102, work->x, work->y, work->z, 16, 16, 16) == ATTACK_RESULT_HIT) {
         BgFxSignalEnd(0);
         m4aSongNumStart(SONG_EF_RAC_BEEMENTRY);
         work->visible = FALSE;
@@ -412,7 +412,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         BgFxAddPosition(0, 0, work->vz);
         work->z += work->vz;
 
-        if (ApplyAttackBox(0x104, work->x, work->y, work->z, 16, 16, 16) == 1) {
+        if (ApplyAttackBox(0x104, work->x, work->y, work->z, 16, 16, 16) == ATTACK_RESULT_HIT) {
             m4aSongNumStart(SONG_BTL_RK_LIMITENTRY);
             BgFxSignalEnd(0);
             work->visible = FALSE;

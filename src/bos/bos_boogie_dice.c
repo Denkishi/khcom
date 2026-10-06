@@ -1030,7 +1030,7 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
             return 0;
         }
 
-        if (ApplyAttackBox(0x105, obj->x, obj->y, obj->z, 0x20, 0x10, 1) == 1) {
+        if (ApplyAttackBox(0x105, obj->x, obj->y, obj->z, 0x20, 0x10, 1) == ATTACK_RESULT_HIT) {
             gBosBoogieAttackHit = TRUE;
             m4aSongNumStart(SONG_BTL_MON_SWORD01);
         }
@@ -1107,7 +1107,7 @@ void BosBoogieKnifeAttack(BoogieKnifeWork* work) {
         offsetX = -0x2000;
     }
 
-    if (ApplyAttackBox(0x106, obj->x - offsetX, obj->y, obj->z - 0x1000, 4, 0x1C, 0x10) == 1) {
+    if (ApplyAttackBox(0x106, obj->x - offsetX, obj->y, obj->z - 0x1000, 4, 0x1C, 0x10) == ATTACK_RESULT_HIT) {
         gBosBoogieAttackHit = TRUE;
         m4aSongNumStart(SONG_EF_KU_ATT04);
     }

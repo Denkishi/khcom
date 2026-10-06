@@ -1658,7 +1658,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         act->x += gSineTable[(u8)work->unk_194] * 12;
         act->y += -gSineTable[(u8)work->unk_194 + 64] * 12;
 
-        if (ApplyAttackBox(9, act->x, act->y, act->z, 24, 16, 24) != 0) {
+        if (ApplyAttackBox(9, act->x, act->y, act->z, 24, 16, 24) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(SONG_BTL_RK_HIT03);
         }
 
@@ -1727,7 +1727,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         case 2:
         case 3:
-            if (ApplyAttackBox(7, act->x, act->y, act->z - 12288, 24, 20, 16) != 0) {
+            if (ApplyAttackBox(7, act->x, act->y, act->z - 12288, 24, 20, 16) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_BTL_RK_HIT00);
             }
 
@@ -1742,11 +1742,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                if (ApplyAttackBox(7, act->x - 8192, act->y, act->z - 8192, 20, 25, 32) != 0) {
+                if (ApplyAttackBox(7, act->x - 8192, act->y, act->z - 8192, 20, 25, 32) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_RK_HIT00);
                 }
             } else {
-                if (ApplyAttackBox(7, act->x + 8192, act->y, act->z - 8192, 20, 25, 32) != 0) {
+                if (ApplyAttackBox(7, act->x + 8192, act->y, act->z - 8192, 20, 25, 32) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_RK_HIT00);
                 }
             }
@@ -1969,12 +1969,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (frame >= 1 && frame <= 9) {
             if (act->btl->hcEffect == HC_EFFECT_WIDE_ATTACK_2) {
-                if (ApplyAttackBox(6, act->x, act->y, act->z - 5120, 65, 30, 12) != 0) {
+                if (ApplyAttackBox(6, act->x, act->y, act->z - 5120, 65, 30, 12) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
                     work->flags |= BTL_RIKU_FLAG_SWING_HIT;
                 }
             } else {
-                if (ApplyAttackBox(6, act->x, act->y, act->z - 5120, 45, 20, 12) != 0) {
+                if (ApplyAttackBox(6, act->x, act->y, act->z - 5120, 45, 20, 12) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
                     work->flags |= BTL_RIKU_FLAG_SWING_HIT;
                 }
@@ -2442,7 +2442,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (AnimGetFrame(&work->anim) > 1) {
-            if (ApplyAttackBox(8, act->x, act->y, act->z, 32, 16, 24) != 0) {
+            if (ApplyAttackBox(8, act->x, act->y, act->z, 32, 16, 24) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_BTL_RK_HIT02);
                 work->flags |= BTL_RIKU_FLAG_SWING_HIT;
                 BgFxStartRikuDiveHit(act->x, act->y, act->z);
@@ -3716,7 +3716,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case BTL_RIKU_STATE_COMBO: {
         s32 attack;
         s32 dy;
-        hit = 0;
+        hit = ATTACK_RESULT_NONE;
         FocusBtlRikuCameraOnTarget(work);
 
         if (act->btl->hcEffect == HC_EFFECT_COMBO_PLUS) {
@@ -3837,7 +3837,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 gBtlWork->damageScale = 0;
             }
 
-            if (hit == 1) {
+            if (hit == ATTACK_RESULT_HIT) {
                 m4aSongNumStart(swing->song);
 
                 if (swing->flags & COMBO_FLAG_ZOOM_ON_HIT) {
@@ -3865,7 +3865,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if (hit == 2) {
+        if (hit == ATTACK_RESULT_BLOCKED) {
             SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             SetBtlRikuState(work, BTL_RIKU_STATE_GUARDED);
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;

@@ -498,13 +498,13 @@ void BosTmFootWalk(TmFootWork* work) {
     }
 
     if (work->tm->step == 2) {
-        if (ApplyAttackBox(239, work->body3.x, work->body3.y - 0x500, 0, 20, 16, 20) == 1) {
+        if (ApplyAttackBox(239, work->body3.x, work->body3.y - 0x500, 0, 20, 16, 20) == ATTACK_RESULT_HIT) {
             m4aSongNumStart(SONG_BTL_MON_HIT03);
         }
     }
 
     if (work->tm->step == 7) {
-        if (ApplyAttackBox(239, work->body4.x, work->body4.y - 0x500, 0, 20, 16, 20) == 1) {
+        if (ApplyAttackBox(239, work->body4.x, work->body4.y - 0x500, 0, 20, 16, 20) == ATTACK_RESULT_HIT) {
             m4aSongNumStart(SONG_BTL_MON_HIT03);
         }
     }
@@ -1427,7 +1427,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         if (work->timer == 21) {
             if (ApplyAttackBox(240, work->src->tm->baseX, work->src->tm->baseY,
-                              work->tips[1].z, 36, 32, 32) == 1) {
+                              work->tips[1].z, 36, 32, 32) == ATTACK_RESULT_HIT) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
             }
         }

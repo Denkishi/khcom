@@ -102,7 +102,7 @@ void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz) {
             halfZ = 0x0A;
         }
 
-        if (ApplyAttackBox(0x84, x, y, z, halfX, halfY, halfZ) != 0) {
+        if (ApplyAttackBox(0x84, x, y, z, halfX, halfY, halfZ) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(SONG_EF_FIRE01);
         }
     }

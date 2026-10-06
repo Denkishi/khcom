@@ -1502,7 +1502,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
     case BOS_LST_KAMA_STEP_SLASH:
         switch (work->timer) {
         case 0:
-            if (ApplyAttackBox(0x10A, sub->x - (work->facing << 13), work->kamaTargetY, sub->z, 48, 12, 64) != 0) {
+            if (ApplyAttackBox(0x10A, sub->x - (work->facing << 13), work->kamaTargetY, sub->z, 48, 12, 64) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_BTL_MARL_EFEHIT);
             }
         case 1:
@@ -1603,7 +1603,7 @@ u8 BosLstAttackDash(BosLstWork* work) {
 
         work->z += work->dashVz;
 
-        if (ApplyAttackBox(0x10B, work->x, work->y, work->z + 0x4000, 12, 32, 64) != 0) {
+        if (ApplyAttackBox(0x10B, work->x, work->y, work->z + 0x4000, 12, 32, 64) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(SONG_BTL_MON_HIT06);
         }
 

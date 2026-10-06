@@ -4,6 +4,12 @@
 #include "battle_actor_types.h"
 #include "types.h"
 
+enum AttackResult {
+    ATTACK_RESULT_NONE,
+    ATTACK_RESULT_HIT,
+    ATTACK_RESULT_BLOCKED
+};
+
 s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ);
 void ColliderPoolsInit();
 void ColliderInit(Collider* collider, u32 type, u16 radius, u16 height);

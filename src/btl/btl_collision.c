@@ -18,6 +18,7 @@
 #include <stddef.h>
 #include "card_label_data.h"
 #include "enemy_ids.h"
+#include "btl_collision.h"
 
 static const BattleAttackDef sBattleAttackDefs[330] = {
     { 256, 204, 0, 3, BgFxStartRikuHit, ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_ELEMENT_PHYSICAL },
@@ -428,13 +429,13 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_WARP) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         }
 
         if (attack->flags & ATTACK_FLAG_NO_EXP) target->exp = 0;
 
         target->flags |= BTLOBJ_FLAG_WARP_PENDING;
-        return 0;
+        return ATTACK_RESULT_NONE;
     }
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
@@ -582,7 +583,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_PHYSICAL) {
             scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_PHYSICAL) {
@@ -608,7 +609,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_NEUTRAL) {
             scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_NEUTRAL) {
@@ -621,13 +622,13 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     } else if (attack->flags & ATTACK_FLAG_ELEMENT_FIRE) {
         if (hit->flags & BTLOBJ_FLAG_ABSORB_FIRE) {
             AbsorbAttack(target, source, attack);
-            return 1;
+            return ATTACK_RESULT_HIT;
         }
 
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_FIRE) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_FIRE) {
             scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_FIRE) {
@@ -640,13 +641,13 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     } else if (attack->flags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
         if (hit->flags & BTLOBJ_FLAG_ABSORB_BLIZZARD) {
             AbsorbAttack(target, source, attack);
-            return 1;
+            return ATTACK_RESULT_HIT;
         }
 
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_BLIZZARD) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_BLIZZARD) {
             scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_BLIZZARD) {
@@ -659,13 +660,13 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     } else if (attack->flags & ATTACK_FLAG_ELEMENT_THUNDER) {
         if (hit->flags & BTLOBJ_FLAG_ABSORB_THUNDER) {
             AbsorbAttack(target, source, attack);
-            return 1;
+            return ATTACK_RESULT_HIT;
         }
 
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_THUNDER) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_THUNDER) {
             scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_THUNDER) {
@@ -679,7 +680,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_STOP) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         }
 
         hit->flags |= BTLOBJ_FLAG_STOP_PENDING;
@@ -689,14 +690,14 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 
         gBtlWork->pendingHitStop = (u8)attack->hitStop;
         hit->invincibleTimer = 30;
-        return 1;
+        return ATTACK_RESULT_HIT;
     }
 
     if (hit->flags & BTLOBJ_FLAG_INVULNERABLE) {
         CreateBtlPopTask(hit, BTL_POP_GUARD);
         hit->invincibleTimer = 30;
         gBtlWork->hitStop = (u8)attack->hitStop;
-        return 1;
+        return ATTACK_RESULT_HIT;
     }
 
     if (attack->flags & ATTACK_FLAG_INFLICT_STUN) {
@@ -705,7 +706,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_TERROR) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         }
 
         target->flags |= BTLOBJ_FLAG_TERROR_PENDING;
@@ -713,7 +714,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_CONFUSE) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         }
 
         target->flags |= BTLOBJ_FLAG_CONFUSE_PENDING;
@@ -721,7 +722,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_BIND) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         }
 
         target->flags |= BTLOBJ_FLAG_BIND_PENDING;
@@ -731,7 +732,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_GRAVITY) {
             CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         }
 
         target->flags |= BTLOBJ_FLAG_GRAVITY_PENDING;
@@ -777,7 +778,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         target->angle = GetAngle(source->x, source->y, target->x, target->y);
     }
 
-    return 1;
+    return ATTACK_RESULT_HIT;
 }
 
 u8 TestAttackBox(s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
@@ -861,7 +862,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
         if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
             result = ResolveAttackHit(opponent, attack);
 
-            if (result == 1) {
+            if (result == ATTACK_RESULT_HIT) {
                 if (def->hitEffect != NULL) {
                     def->hitEffect(opponent->x, opponent->y, opponent->z);
                 }
@@ -883,7 +884,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
 
             enemyResult = ResolveAttackHit(opponent, attack);
 
-            if (enemyResult == 1) {
+            if (enemyResult == ATTACK_RESULT_HIT) {
                 sumX += opponent->x;
                 sumY += opponent->y;
                 sumZ += opponent->z;
@@ -892,7 +893,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
                 if (def->flags & ATTACK_FLAG_SINGLE_TARGET) {
                     break;
                 }
-            } else if (enemyResult == 2) {
+            } else if (enemyResult == ATTACK_RESULT_BLOCKED) {
                 blocked = TRUE;
             }
 
@@ -900,7 +901,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
         }
 
         if (blocked) {
-            return 2;
+            return ATTACK_RESULT_BLOCKED;
         }
 
         n = hitCount;
@@ -913,7 +914,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
                 def->hitEffect(sumX, sumY, sumZ);
             }
 
-            return 1;
+            return ATTACK_RESULT_HIT;
         }
     } else {
         opponent = gBtlWork->actor;
@@ -921,7 +922,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
         if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
             result = ResolveAttackHit(opponent, attack);
 
-            if (result == 1) {
+            if (result == ATTACK_RESULT_HIT) {
                 if (def->hitEffect != NULL) {
                     def->hitEffect(opponent->x, opponent->y, opponent->z);
                 }
@@ -931,7 +932,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
         }
     }
 
-    return 0;
+    return ATTACK_RESULT_NONE;
 }
 
 s32 ApplyAttackAt(s32 attack, s32 x, s32 y, s32 z) {

@@ -345,7 +345,7 @@ u8 task_emy_83_s_1(Emy83sWork* work) {
         work->y = y;
 
         if (work->frameCount % 3 == work->hitPhase) {
-            if (ApplyAttackBox(0xE1, x, y, work->z, 2, 2, 2) != 0) {
+            if (ApplyAttackBox(0xE1, x, y, work->z, 2, 2, 2) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(SONG_BTL_KAMITUKI);
             }
         }

@@ -613,7 +613,7 @@ u8 BosMdUpdateBite(MdWork* work) {
             case 36:
             case 37:
                 if (ApplyAttackBox(251, work->sub[0].x, work->sub[0].y,
-                                  work->sub[0].z, 40, 20, 24) != 0) {
+                                  work->sub[0].z, 40, 20, 24) != ATTACK_RESULT_NONE) {
                     m4aSongNumStart(SONG_BTL_DRGN_BITE);
                 }
 
@@ -768,7 +768,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
                     break;
                 case BOS_MD_FIRE_BREATH_STEP_BREATHE:
                     if (ApplyAttackBox(253, work->sub[0].x,
-                                      work->sub[0].y + 0x1800, 0, 72, 48, 1) != 0) {
+                                      work->sub[0].y + 0x1800, 0, 72, 48, 1) != ATTACK_RESULT_NONE) {
                         m4aSongNumStart(SONG_SND_714);
                     }
 

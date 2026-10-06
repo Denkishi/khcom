@@ -254,7 +254,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
             work->y += (obj->y - work->y) >> 3;
 
-            if (ApplyAttackBox(work->attack, work->x, work->y, work->z, 8, 8, 8) != 0) {
+            if (ApplyAttackBox(work->attack, work->x, work->y, work->z, 8, 8, 8) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(work->song);
 
                 if (obj->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
@@ -291,7 +291,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             break;
         }
 
-        if (ApplyAttackBox(work->attack, work->x, work->y, work->z, 8, 8, 32) != 0) {
+        if (ApplyAttackBox(work->attack, work->x, work->y, work->z, 8, 8, 32) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(work->song);
         }
 
@@ -340,7 +340,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             }
         } else {
             if (ApplyAttackBox(work->attack, work->x, work->y, work->z,
-                              work->hitHalfSize, work->hitHalfSize, 32) != 0) {
+                              work->hitHalfSize, work->hitHalfSize, 32) != ATTACK_RESULT_NONE) {
                 m4aSongNumStart(work->song);
             }
         }
@@ -377,7 +377,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         }
 
         if (ApplyAttackBox(work->attack, work->x, work->y, work->z,
-                          work->hitHalfSize, work->hitHalfSize, 32) != 0) {
+                          work->hitHalfSize, work->hitHalfSize, 32) != ATTACK_RESULT_NONE) {
             m4aSongNumStart(work->song);
         }
 

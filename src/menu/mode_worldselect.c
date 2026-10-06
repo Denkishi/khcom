@@ -33,6 +33,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "card_ids.h"
 #include "card_message_data.h"
 #include "event_ids.h"
 
@@ -918,7 +919,7 @@ void mode_worldselect_1() {
                 RequestEventMode(eventId);
             } else {
                 if (gGameState.flags & GAME_FLAG_RIKU) {
-                    AddMapCard(221);
+                    AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_BEGINNINGS, 1));
                 }
 
                 EnterFloorWorld();

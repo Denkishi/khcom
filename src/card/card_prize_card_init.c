@@ -51,14 +51,14 @@
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
 static const PrizeMapCardEntry sSoraPrizeTraverseTownTier0[1] = {
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeTraverseTownTier1[4] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeTraverseTownTiers[2] = {
@@ -67,29 +67,29 @@ static const PrizeMapCardGroup sSoraPrizeTraverseTownTiers[2] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeAgrabahTier0[2] = {
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeAgrabahTier1[7] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeAgrabahTier2[8] = {
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeAgrabahTiers[3] = {
@@ -99,29 +99,29 @@ static const PrizeMapCardGroup sSoraPrizeAgrabahTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeHalloweenTownTier0[2] = {
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeHalloweenTownTier1[7] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeHalloweenTownTier2[8] = {
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeHalloweenTownTiers[3] = {
@@ -131,28 +131,28 @@ static const PrizeMapCardGroup sSoraPrizeHalloweenTownTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeMonstroTier0[2] = {
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeMonstroTier1[7] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeMonstroTier2[7] = {
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeMonstroTiers[3] = {
@@ -162,29 +162,29 @@ static const PrizeMapCardGroup sSoraPrizeMonstroTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeOlympusColiseumTier0[2] = {
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeOlympusColiseumTier1[7] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeOlympusColiseumTier2[8] = {
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeOlympusColiseumTiers[3] = {
@@ -194,29 +194,29 @@ static const PrizeMapCardGroup sSoraPrizeOlympusColiseumTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeWonderlandTier0[2] = {
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeWonderlandTier1[7] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeWonderlandTier2[8] = {
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeWonderlandTiers[3] = {
@@ -226,27 +226,27 @@ static const PrizeMapCardGroup sSoraPrizeWonderlandTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeAtlanticaTier0[1] = {
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeAtlanticaTier1[5] = {
-    { CARD_ID(CARD_FIRE, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_BLIZZARD, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_GUARDED_TROVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FALSE_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeAtlanticaTier2[9] = {
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeAtlanticaTiers[3] = {
@@ -256,27 +256,27 @@ static const PrizeMapCardGroup sSoraPrizeAtlanticaTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeNeverLandTier0[1] = {
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeNeverLandTier1[5] = {
-    { CARD_ID(CARD_FIRE, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_BLIZZARD, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_GUARDED_TROVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FALSE_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeNeverLandTier2[9] = {
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeNeverLandTiers[3] = {
@@ -286,27 +286,27 @@ static const PrizeMapCardGroup sSoraPrizeNeverLandTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeHollowBastionTier0[1] = {
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeHollowBastionTier1[5] = {
-    { CARD_ID(CARD_FIRE, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_BLIZZARD, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_GUARDED_TROVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FALSE_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeHollowBastionTier2[9] = {
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeHollowBastionTiers[3] = {
@@ -316,27 +316,27 @@ static const PrizeMapCardGroup sSoraPrizeHollowBastionTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeTwilightTownTier0[1] = {
-    { CARD_ID(CARD_CURE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeTwilightTownTier1[6] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeTwilightTownTier2[8] = {
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeTwilightTownTiers[3] = {
@@ -346,22 +346,22 @@ static const PrizeMapCardGroup sSoraPrizeTwilightTownTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeDestinyIslandsTier0[1] = {
-    { CARD_ID(CARD_CURE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeDestinyIslandsTier1[4] = {
-    { CARD_ID(CARD_FIRE, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_BLIZZARD, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_GUARDED_TROVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FALSE_BOUNTY, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeDestinyIslandsTier2[5] = {
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeDestinyIslandsTiers[3] = {
@@ -371,21 +371,21 @@ static const PrizeMapCardGroup sSoraPrizeDestinyIslandsTiers[3] = {
 };
 
 static const PrizeMapCardEntry sSoraPrizeCastleOblivionTier0[9] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FIRE, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
-    { CARD_ID(CARD_BLIZZARD, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_GUARDED_TROVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FALSE_BOUNTY, 0), 0 },
 };
 
 static const PrizeMapCardEntry sSoraPrizeCastleOblivionTier1[3] = {
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
 };
 
 static const PrizeMapCardGroup sSoraPrizeCastleOblivionTiers[2] = {
@@ -413,17 +413,17 @@ static const PrizeMapCardGroupList sSoraPrizeMapCardGroups[14] = {
 const u16 gUnk_09035E3C[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
 static const PrizeMapCardEntry sRikuPrizeTraverseTownCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeTraverseTownTiers[1] = {
@@ -431,17 +431,17 @@ static const PrizeMapCardGroup sRikuPrizeTraverseTownTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeAgrabahCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeAgrabahTiers[1] = {
@@ -449,17 +449,17 @@ static const PrizeMapCardGroup sRikuPrizeAgrabahTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeHalloweenTownCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeHalloweenTownTiers[1] = {
@@ -467,17 +467,17 @@ static const PrizeMapCardGroup sRikuPrizeHalloweenTownTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeMonstroCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeMonstroTiers[1] = {
@@ -485,17 +485,17 @@ static const PrizeMapCardGroup sRikuPrizeMonstroTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeOlympusColiseumCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeOlympusColiseumTiers[1] = {
@@ -503,17 +503,17 @@ static const PrizeMapCardGroup sRikuPrizeOlympusColiseumTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeWonderlandCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeWonderlandTiers[1] = {
@@ -521,17 +521,17 @@ static const PrizeMapCardGroup sRikuPrizeWonderlandTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeAtlanticaCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeAtlanticaTiers[1] = {
@@ -539,17 +539,17 @@ static const PrizeMapCardGroup sRikuPrizeAtlanticaTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeNeverLandCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeNeverLandTiers[1] = {
@@ -558,28 +558,28 @@ static const PrizeMapCardGroup sRikuPrizeNeverLandTiers[1] = {
 
 #ifdef VERSION_EU
 static const PrizeMapCardEntry sRikuPrizeHollowBastionCards[9] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 #else
 static const PrizeMapCardEntry sRikuPrizeHollowBastionCards[10] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 #endif
 
@@ -594,17 +594,17 @@ static const PrizeMapCardGroup sRikuPrizeHollowBastionTiers[1] = {
 #endif
 
 static const PrizeMapCardEntry sRikuPrizeTwilightTownCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeTwilightTownTiers[1] = {
@@ -612,17 +612,17 @@ static const PrizeMapCardGroup sRikuPrizeTwilightTownTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeDestinyIslandsCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeDestinyIslandsTiers[1] = {
@@ -630,17 +630,17 @@ static const PrizeMapCardGroup sRikuPrizeDestinyIslandsTiers[1] = {
 };
 
 static const PrizeMapCardEntry sRikuPrizeCastleOblivionCards[11] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_WISHING_STAR, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
-    { CARD_ID(CARD_CURE, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0), 0 },
+    { MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0), 0 },
 };
 
 static const PrizeMapCardGroup sRikuPrizeCastleOblivionTiers[1] = {
@@ -679,7 +679,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
     if (!work->spawned) {
         if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
             *(PrizeCardArgs*)args = work->args;
-            args[8] = 2;
+            args[8] = MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 2);
             CreatePrizeMapCardTask(&work->tasks, args);
             gGameState.progression.tutorialFlags |= 0x20;
         } else if (gGameState.floor == 0) {
@@ -712,12 +712,12 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
 
 #ifdef VERSION_EU
                         if (CountRegularMapCards() <= 98) {
-                            args[8] = CARD_ID(CARD_GRAVITY, GetRandom() % 10);
+                            args[8] = MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, GetRandom() % 10);
                         } else {
                             args[8] = 0xFFFF;
                         }
 #else
-                        args[8] = CARD_ID(CARD_GRAVITY, GetRandom() % 10);
+                        args[8] = MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, GetRandom() % 10);
 #endif
                     } else {
                         *(PrizeCardArgs*)args = work->args;
@@ -743,23 +743,23 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
 #ifdef VERSION_EU
                 if (CountRegularMapCards() <= 98) {
                     *(PrizeCardArgs*)args = work->args;
-                    args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
+                    args[8] = MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, GetRandom() % 10);
                     CreatePrizeMapCardTask(&work->tasks, args);
                 }
 #else
                 *(PrizeCardArgs*)args = work->args;
-                args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
+                args[8] = MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, GetRandom() % 10);
                 CreatePrizeMapCardTask(&work->tasks, args);
 #endif
             } else {
                 *(PrizeCardArgs*)args = work->args;
 
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                    if (!HasMapCard(0xFB)) {
+                    if (!HasMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_TO_REWARDS, 1))) {
                         if (!AreWorldPrizesCollected()) {
                             if (sKeyToRewardsChances[gGameState.world] != 0) {
                                 if (GetRandom() % 100 <= sKeyToRewardsChances[gGameState.world]) {
-                                    args[8] = 0xFB;
+                                    args[8] = MAP_CARD_ID(MAP_CARD_GROUP_KEY_TO_REWARDS, 1);
                                 } else {
                                     args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                                 }

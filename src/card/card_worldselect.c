@@ -662,7 +662,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
     switch (keys & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON | L_BUTTON | R_BUTTON)) {
     case A_BUTTON:
         if (work->card != NULL) {
-            if (work->card->args.baseCardId >= 220) {
+            if (work->card->args.baseCardId >= MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_BEGINNINGS, 0)) {
                 if (DoorAcceptsMapCard((struct MapCardAttributes*)&gMapCardDefs[work->card->args.baseCardId + 1].kind) == 1) {
                     if (gMapCardCounts[work->card->args.baseCardId + 1] != 0) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
@@ -1410,8 +1410,8 @@ void InitMapCardInventory() {
 #ifdef VERSION_EU
         s32 i;
 
-        AddMapCard(211);
-        AddMapCard(191);
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 1));
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 1));
 
         for (i = 0; i <= 219; i += 10) {
             if (CountMapCards() <= 98) {
@@ -1419,13 +1419,13 @@ void InitMapCardInventory() {
             }
         }
 
-        AddMapCard(221);
-        AddMapCard(231);
-        AddMapCard(241);
-        AddMapCard(251);
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_BEGINNINGS, 1));
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_GUIDANCE, 1));
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_TO_TRUTH, 1));
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_TO_REWARDS, 1));
 #endif
     } else {
-        AddMapCard(191);
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 1));
     }
 }
 

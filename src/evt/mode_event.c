@@ -772,7 +772,7 @@ void GrantRewardsAfterEvent() {
     case EVENT_177_RIKU_B3F_E0:
     case EVENT_186_RIKU_B2F_E0:
     case EVENT_192_RIKU_B1F_E0:
-        AddMapCard(221);
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_BEGINNINGS, 1));
         break;
     case EVENT_004_1F_TRAVERSE_TOWN_E1_1:
     case EVENT_054_12F_DESTINY_ISLAND_E1:
@@ -786,7 +786,7 @@ void GrantRewardsAfterEvent() {
     case EVENT_130_HOLLOWBASTION_E1:
     case EVENT_152_RIKU_B12F_E1:
     case EVENT_188_RIKU_B2F_E1_2:
-        AddMapCard(231);
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_GUIDANCE, 1));
         break;
     case EVENT_006_1F_TRAVERSE_TOWN_E2:
     case EVENT_080_MONSTORO_E2_5:
@@ -798,7 +798,7 @@ void GrantRewardsAfterEvent() {
     case EVENT_123_COLISEUM_E2_2:
     case EVENT_131_HOLLOWBASTION_E2:
     case EVENT_153_RIKU_B12F_E2:
-        AddMapCard(241);
+        AddMapCard(MAP_CARD_ID(MAP_CARD_GROUP_KEY_TO_TRUTH, 1));
         break;
     case EVENT_114_AGRABAH_END:
         ObtainCard(CARD_ID(CARD_GENIE, 6));

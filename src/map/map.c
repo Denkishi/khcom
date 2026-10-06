@@ -73,6 +73,7 @@
 #include "mode_movie.h"
 #include "macros.h"
 #include "mode_sio_api.h"
+#include "card_ui_types.h"
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];
@@ -2182,7 +2183,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* card) {
         return 0;
     }
 
-    if (key->color != 0 && key->color != card->color) {
+    if (key->color != MAP_CARD_COLOR_NONE && key->color != card->color) {
         return 0;
     }
 

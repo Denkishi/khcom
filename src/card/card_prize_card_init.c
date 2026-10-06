@@ -1730,12 +1730,12 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
     color = &card->color;
     *color = (empty = NULL, n);
 
-    if (key->rule == 0) {
+    if (key->rule == EVENT_KEY_RULE_NONE) {
         return;
     }
 
     switch (key->rule) {
-    case 1:
+    case EVENT_KEY_RULE_AT_LEAST:
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
@@ -1752,7 +1752,7 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         }
 
         break;
-    case 2:
+    case EVENT_KEY_RULE_AT_MOST:
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
@@ -1769,7 +1769,7 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         }
 
         break;
-    case 3:
+    case EVENT_KEY_RULE_EXACT:
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
@@ -1786,7 +1786,7 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         }
 
         break;
-    case 4:
+    case EVENT_KEY_RULE_TOTAL:
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x80);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[0], gMapSelectRequirementTiles);

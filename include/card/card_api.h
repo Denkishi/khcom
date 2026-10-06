@@ -68,6 +68,17 @@ struct ObjTiles* AllocKeyValueTiles(u8 value);
 void InitEventKeyCard(EventKeyCard* card, struct EventKey* key);
 u8 GetRoomCardBackIndex(u16 kind);
 void CreateREVCOUNTTask(void* pool, u8* shownList, s16* count, u8* visible, u8 side);
+enum FriendCard {
+    FRIEND_CARD_GOOFY,
+    FRIEND_CARD_DONALD_DUCK,
+    FRIEND_CARD_ALADDIN,
+    FRIEND_CARD_ARIEL,
+    FRIEND_CARD_JACK,
+    FRIEND_CARD_PETER_PAN,
+    FRIEND_CARD_THE_BEAST,
+    FRIEND_CARD_THE_KING
+};
+
 void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx);
 void PrintString(u8 x, u8 y, u8 color, const u8* text);
 void PrintNumber(u16 x, u16 y, u16 color, s32 value);

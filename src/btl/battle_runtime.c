@@ -580,7 +580,7 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (flags & FRIEND_FLAG_THE_KING) {
             SetJiminyFlag(JIMINY_RECORD_RIKU_CARD_KING);
-            CreateFriendCardTask(gBtlWork->taskPools, x >> 8, y >> 8, z >> 8, 7);
+            CreateFriendCardTask(gBtlWork->taskPools, x >> 8, y >> 8, z >> 8, FRIEND_CARD_THE_KING);
         }
 
         return;
@@ -592,35 +592,35 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
         switch (gGameState.world) {
         case WORLD_AGRABAH:
             if (flags & FRIEND_FLAG_ALADDIN) {
-                friendIndex = 2;
+                friendIndex = FRIEND_CARD_ALADDIN;
                 SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_ALADDIN);
             }
 
             break;
         case WORLD_ATLANTICA:
             if (flags & FRIEND_FLAG_ARIEL) {
-                friendIndex = 3;
+                friendIndex = FRIEND_CARD_ARIEL;
                 SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_ARIEL);
             }
 
             break;
         case WORLD_HALLOWEEN_TOWN:
             if (flags & FRIEND_FLAG_JACK) {
-                friendIndex = 4;
+                friendIndex = FRIEND_CARD_JACK;
                 SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_JACK);
             }
 
             break;
         case WORLD_NEVER_LAND:
             if (flags & FRIEND_FLAG_PETER_PAN) {
-                friendIndex = 5;
+                friendIndex = FRIEND_CARD_PETER_PAN;
                 SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_PETER_PAN);
             }
 
             break;
         case WORLD_HOLLOW_BASTION:
             if (flags & FRIEND_FLAG_THE_BEAST) {
-                friendIndex = 6;
+                friendIndex = FRIEND_CARD_THE_BEAST;
                 SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_BEAST);
             }
 
@@ -631,12 +631,12 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
     if (friendIndex == -1) {
         if (GetRandom() % 2 != 0) {
             if (flags & FRIEND_FLAG_GOOFY) {
-                friendIndex = 0;
+                friendIndex = FRIEND_CARD_GOOFY;
                 SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_GOOFY);
             }
         } else {
             if (flags & FRIEND_FLAG_DONALD_DUCK) {
-                friendIndex = 1;
+                friendIndex = FRIEND_CARD_DONALD_DUCK;
                 SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_DONALD_DUCK);
             }
         }

@@ -1789,7 +1789,7 @@ void TryRikuCardBreak(CardBattleWork* work) {
 
     hcEffect = gRikuBtlWork->hcEffect;
 
-    if (hcEffect == 1) {
+    if (hcEffect == HC_EFFECT_INCREMENTOR) {
         valueToRaise = sRikuSelectedCard->value;
         n = valueToRaise + 1;
 
@@ -1803,7 +1803,7 @@ void TryRikuCardBreak(CardBattleWork* work) {
 
         sRikuSelectedCard->value = n;
         sRikuSelectedCard->valueModified = 1;
-    } else if (hcEffect == 21) {
+    } else if (hcEffect == HC_EFFECT_DECREMENTOR) {
         valueToLower = sRikuSelectedCard->value;
 
         if (valueToLower != 0) {

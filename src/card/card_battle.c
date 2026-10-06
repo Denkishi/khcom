@@ -3656,7 +3656,7 @@ void ApplySoraHcEffect(CardBattleWork* work) {
 
         hcEffect = &gBtlWork->hcEffect;
 
-        if (*hcEffect == 41) {
+        if (*hcEffect == HC_EFFECT_DISPEL) {
 #ifdef VERSION_EU
             if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT && (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION)) {
                 gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
@@ -3672,7 +3672,7 @@ void ApplySoraHcEffect(CardBattleWork* work) {
 
         soraHcEffect = &gCardBattleState->soraHcEffect;
 
-        if (*soraHcEffect == 45) {
+        if (*soraHcEffect == HC_EFFECT_MIMIC) {
             if (gRikuBtlWork->hcEffect != HC_EFFECT_NONE) {
                 gBtlWork->hcEffect = gRikuBtlWork->hcEffect;
                 gCardBattleState->soraHcEffect = gCardBattleState->rikuHcEffect;

@@ -10,6 +10,7 @@
 #include "text_types.h"
 #include "taskpool.h"
 
+#define MSG_CODE_END 0
 #ifdef VERSION_EU
 #define MSG_CODE_NL 0x1F
 #define MSG_CODE_HIGHLIGHT 0x1D

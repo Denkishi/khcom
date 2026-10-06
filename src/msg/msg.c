@@ -389,7 +389,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* text, u8 slot, u8 useAlternatePal
     sSpriteTextLines[slot].unk_53 = i;
     sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         u16 code;
         code = *(u16*)text;
         code = (code >> 8) | (code << 8);
@@ -984,7 +984,7 @@ void SetBgTextLineNumber(u8 x, u8 y, u8 glyphHeight, u8 value, u8 slot, u8 palet
     buf[1] += 0x4F;
     buf[2] = 0x82;
     buf[3] += 0x4F;
-    buf[4] = 0;
+    buf[4] = MSG_CODE_END;
     SetBgTextLine(x, y, glyphHeight, buf, slot, paletteIndex);
 }
 #endif
@@ -1016,7 +1016,7 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteInde
     sBgTextLines[slot].dirty = 1;
     sBgTextLines[slot].paletteIndex = paletteIndex;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         code = *(u16*)text;
         code = (code >> 8) | (code << 8);
         text += 2;
@@ -1442,7 +1442,7 @@ s32 GetMsgTextWidth(const TextChar* text) {
 
     sum = 0;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         glyph = 0;
 
         if (*text != 10) {
@@ -1523,7 +1523,7 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText
 
     sTextEntryCount = 0;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         s32 glyph = 0;
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
@@ -1649,7 +1649,7 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
 
     sTextEntryCount = 0;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         s32 glyph = 0;
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
@@ -1773,7 +1773,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
 
     sTextEntryCount = 0;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         u16 code;
         glyph = 0;
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
@@ -2042,11 +2042,11 @@ u16 LoadTwoDigitTextTileArray(u8 value, void** out) {
         buf[1] += 0x4F;
         buf[2] = 0x82;
         buf[3] += 0x4F;
-        buf[4] = 0;
+        buf[4] = MSG_CODE_END;
     } else {
         buf[1] = value + 0x4F;
         buf[0] = 0x82;
-        buf[2] = 0;
+        buf[2] = MSG_CODE_END;
     }
 
     return LoadTextTileArray((TextChar*)buf, out);
@@ -2088,11 +2088,11 @@ u16 LoadTwoDigitTextSlots(u8 value, TextSlot* out) {
         buf[1] += 0x4F;
         buf[2] = 0x82;
         buf[3] += 0x4F;
-        buf[4] = 0;
+        buf[4] = MSG_CODE_END;
     } else {
         buf[1] = value + 0x4F;
         buf[0] = 0x82;
-        buf[2] = 0;
+        buf[2] = MSG_CODE_END;
     }
 #else
     TextChar buf[4];
@@ -2103,13 +2103,13 @@ u16 LoadTwoDigitTextSlots(u8 value, TextSlot* out) {
     if (value > 9) {
         cursor = buf;
         tensDigit = value / 10 + '0';
-        terminator = 0;
+        terminator = MSG_CODE_END;
         cursor[0] = tensDigit;
         buf[1] = value - (u8)(value / 10) * 10 + '0';
         buf[2] = terminator;
     } else {
         buf[0] = value + '0';
-        buf[1] = 0;
+        buf[1] = MSG_CODE_END;
     }
 #endif
 
@@ -2209,7 +2209,7 @@ s32 GetTextLength(const void* text) {
     const u16* cursor = text;
 #endif
 
-    while (MSG_CHAR(cursor) != 0) {
+    while (MSG_CHAR(cursor) != MSG_CODE_END) {
         n++;
         cursor++;
     }
@@ -2231,7 +2231,7 @@ s32 LoadLatinTextSlots(const u16* text, TextSlot* slots) {
     zero = 0;
     sTextEntryCount = zero;
 
-    while (MSG_CHAR(text) != 0) {
+    while (MSG_CHAR(text) != MSG_CODE_END) {
         s32 glyph = 0;
 
         if (MSG_CHAR(text) == MSG_CODE_NL) {
@@ -2345,7 +2345,7 @@ s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
     bank = 0;
     n = 0;
 
-    while (MSG_CHAR(text) != 0) {
+    while (MSG_CHAR(text) != MSG_CODE_END) {
         u16 code;
 
 #ifdef VERSION_JP
@@ -2555,7 +2555,7 @@ s32 LoadTextTileArray(TextChar* text, void** tiles) {
     bank = 0;
     n = 0;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         u16 code;
 
         buf[0] = text[0];
@@ -6294,7 +6294,7 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** next
 
     sTextEntryCount = 0;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         s32 glyph;
 
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
@@ -6427,7 +6427,7 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
 
     sTextEntryCount = 0;
 
-    while (*text != 0) {
+    while (*text != MSG_CODE_END) {
         u16 code;
         glyph = 0;
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
@@ -6616,7 +6616,7 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
         }
 
         if (cy > 0x1800) {
-            if (*text != 0) {
+            if (*text != MSG_CODE_END) {
                 code = *(u16*)text;
 
                 if ((u16)((code / 256) | (code << 8)) == 0x8142) {
@@ -6737,7 +6737,7 @@ s32 CopySjisGlyphsToVram(const TextChar* str) {
     bank = 0;
     n = 0;
 
-    while (*str != 0) {
+    while (*str != MSG_CODE_END) {
         u16 code;
         buf[0] = str[0];
         buf[1] = str[1];
@@ -6921,7 +6921,7 @@ s32 CopySjisGlyphsToVramAt(const TextChar* str, u16 tile) {
     bank = 0;
     n = 0;
 
-    while (*str != 0) {
+    while (*str != MSG_CODE_END) {
         u16 code;
         buf[0] = str[0];
         buf[1] = str[1];
@@ -7098,7 +7098,7 @@ u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile) {
     sTextEntryCount = 0;
     *widths = 0;
 
-    while (*str != 0) {
+    while (*str != MSG_CODE_END) {
         s32 glyph = 0;
 
         if (*str == MSG_CODE_NL) {

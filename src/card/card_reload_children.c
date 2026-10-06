@@ -591,7 +591,7 @@ u8 PrizeBoss_1(BossPrizeWork* work, void* task) {
 
     ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
     WorldToScreen(&work->x, &work->y, work->posX, work->posY, work->posZ);
-    WorldToScreen(&work->x2, &work->y2, work->posX, work->posY, work->groundZ);
+    WorldToScreen(&work->shadowX, &work->shadowY, work->posX, work->posY, work->groundZ);
     work->priority = -0x1004 - (work->posY >> 8) * 4;
     UpdateBossPrizeScale(work);
     work->flipAngleX += 2;
@@ -657,7 +657,7 @@ void PrizeBoss_2(BossPrizeWork* work) {
             shadowScale = 2;
         }
 
-        DrawSprite(work->x2, work->y2, gBtlShadowFrames[0], work->tiles5, work->palette3,
+        DrawSprite(work->shadowX, work->shadowY, gBtlShadowFrames[0], work->tiles5, work->palette3,
                    AllocObjAffine(0, shadowScale, shadowScale, FALSE), pal, work->priority + 2);
     }
 
@@ -816,9 +816,9 @@ u8 UpdateBossPrizeShow(BossPrizeWork* work, void* task) {
 
 u8 UpdateBossPrizeShrink(BossPrizeWork* work) {
     work->rotation += 32;
-    WorldToScreen(&work->x3, &work->y3, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-    work->x += (work->x3 - work->x) >> 3;
-    work->y += (work->y3 - work->y) >> 3;
+    WorldToScreen(&work->targetX, &work->targetY, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
+    work->x += (work->targetX - work->x) >> 3;
+    work->y += (work->targetY - work->y) >> 3;
     work->scaleX -= 10;
     work->scaleY -= 10;
 

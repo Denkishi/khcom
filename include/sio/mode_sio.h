@@ -14,8 +14,8 @@ typedef struct SioBattleWork {
     u16 slideTimer;
     u16 stateFrames;
     s32 x;
-    s32 y;
-    s32 y2;
+    s32 topBarY;
+    s32 bottomBarY;
     void* tiles;
     void* palette;
     void* gfx2[3];
@@ -132,8 +132,8 @@ typedef struct SioChgCardWork {
     AnimState anim3;
     s8 ready;
     s8 cardVisible[10];
-    s32 x2[10];
-    s32 y2[10];
+    s32 cardX[10];
+    s32 cardY[10];
     void* tiles3[10];
     void* palette3[10];
     void* gfx4[10];
@@ -155,8 +155,8 @@ typedef struct SioChgCardWork {
     s16 receiveOk;
     u16 collectionBackup[0x3E7];
     u64 obtainedCardKindsBackup;
-    s16 x3;
-    s16 y3;
+    s16 messageX;
+    s16 messageY;
     s8 leaveDelay;
     TaskPool tasks;
 } SioChgCardWork;
@@ -218,7 +218,7 @@ typedef struct SioBtlOptionWork {
     void* palette2;
     void* gfx2;
     AnimState anim;
-    s32 y;
+    s32 cursorY;
     s8 cursorVisible;
     void* tiles4;
     void* palette4;
@@ -246,8 +246,8 @@ typedef struct SioBtlOptionWork {
 #endif
     void* palette6;
     s8 worldChangeState;
-    s16 x;
-    s16 y2;
+    s16 messageX;
+    s16 messageY;
     s8 leaveDelay;
     s8 worldEntry;
     u16 unk_418;

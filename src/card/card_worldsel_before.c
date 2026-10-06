@@ -37,9 +37,9 @@ void WorldSel_Before_0(WorldSelBeforeWork* work, WorldSelBeforeArgs* args) {
 
     for (i = 0; i < work->spriteCount; i++) {
         work->angle[i] = 0x80;
-        work->z2[i] = 0;
-        work->x2[i] = gSineTable[work->angle[i]] * 24 + work->pos.x;
-        work->y2[i] = -gSineTable[work->angle[i] + 64] * 12 + work->pos.y;
+        work->cardZ[i] = 0;
+        work->cardX[i] = gSineTable[work->angle[i]] * 24 + work->pos.x;
+        work->cardY[i] = -gSineTable[work->angle[i] + 64] * 12 + work->pos.y;
     }
 
     m4aSongNumStart(SONG_SND_212);
@@ -49,16 +49,16 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* work) {
     u8 i;
 
     if (work->risenCount < work->spriteCount) {
-        work->z2[work->risenCount] -= (s32)(24.0f / (256.0f / (float)work->spriteCount * 0.25f) * 256.0f);
+        work->cardZ[work->risenCount] -= (s32)(24.0f / (256.0f / (float)work->spriteCount * 0.25f) * 256.0f);
 
-        if (work->z2[work->risenCount] <= -6144) {
+        if (work->cardZ[work->risenCount] <= -6144) {
             work->risenCount++;
         }
     }
 
     for (i = 0; i < work->risenCount; i++) {
-        work->x2[i] = gSineTable[work->angle[i]] * 24 + work->pos.x;
-        work->y2[i] = -gSineTable[work->angle[i] + 64] * 12 + work->pos.y;
+        work->cardX[i] = gSineTable[work->angle[i]] * 24 + work->pos.x;
+        work->cardY[i] = -gSineTable[work->angle[i] + 64] * 12 + work->pos.y;
         work->angle[i] += 4;
     }
 
@@ -79,10 +79,10 @@ void WorldSel_Before_2(WorldSelBeforeWork* work) {
     u8 i;
 
     for (i = 0; i < work->spriteCount; i++) {
-        DrawSprite((work->x2[i] >> 8) - (gFieldState->x >> 8),
-                   (work->y2[i] >> 8) + ((work->pos.z + work->z2[i]) >> 8) - (gFieldState->y >> 8),
+        DrawSprite((work->cardX[i] >> 8) - (gFieldState->x >> 8),
+                   (work->cardY[i] >> 8) + ((work->pos.z + work->cardZ[i]) >> 8) - (gFieldState->y >> 8),
                    gWorldSelBeforeCardFrames[0], work->tiles, work->palette, NULL, SPRITE_PRIORITY(2),
-                   -0x1004 - (work->y2[i] >> 8) * 4);
+                   -0x1004 - (work->cardY[i] >> 8) * 4);
     }
 
     DrawSprite((work->pos.x >> 8) - (gFieldState->x >> 8) - 32,

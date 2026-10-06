@@ -136,9 +136,9 @@ static u8 PrizeCard_1(PrizeCardWork* work, void* task) {
 
     ColliderSetPosition(&work->collider, work->pos.x, work->pos.y, work->pos.z);
     work->x = (work->pos.x >> 8) - (gFieldState->x >> 8);
-    work->y2 = (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8);
-    work->x2 = (work->pos.x >> 8) - (gFieldState->x >> 8);
-    work->y = (work->pos.y >> 8) + (work->pos.ground >> 8) - (gFieldState->y >> 8);
+    work->y = (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8);
+    work->shadowX = (work->pos.x >> 8) - (gFieldState->x >> 8);
+    work->shadowY = (work->pos.y >> 8) + (work->pos.ground >> 8) - (gFieldState->y >> 8);
     work->priority = -0x1004 - (work->pos.y >> 8) * 4;
     UpdateFieldPrizeCardScale(work);
     work->flipAngleX += 2;
@@ -208,7 +208,7 @@ u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* task) {
     }
 
     work->x = work->pos.x >> 8;
-    work->y2 = work->pos.y >> 8;
+    work->y = work->pos.y >> 8;
     UpdateFieldPrizeCardScale(work);
 
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
@@ -239,7 +239,7 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* task) {
     }
 
     work->x = work->pos.x >> 8;
-    work->y2 = work->pos.y >> 8;
+    work->y = work->pos.y >> 8;
     UpdateFieldPrizeCardScale(work);
     work->holdTimer++;
 
@@ -268,7 +268,7 @@ u8 UpdateFieldPrizeCardShrink(PrizeCardWork* work) {
     work->targetY = (gFieldState->actor.fieldPosition.y >> 8) + (gFieldState->actor.fieldPosition.z >> 8) -
                 (gFieldState->y >> 8);
     work->x += (work->targetX - work->x) >> 3;
-    work->y2 += (work->targetY - work->y2) >> 3;
+    work->y += (work->targetY - work->y) >> 3;
     work->scaleX -= 10;
     work->scaleY -= 10;
 
@@ -302,13 +302,13 @@ static void PrizeCard_2(PrizeCardWork* work) {
     }
 
     def = &gCardDefs[work->cardId];
-    DrawSprite(work->x, (u16)work->y2 - 8, def->gfx, work->tiles, work->palette,
+    DrawSprite(work->x, (u16)work->y - 8, def->gfx, work->tiles, work->palette,
                affine, pal, work->priority + 1);
     back = &gCardBacks[work->stat.category];
-    DrawSprite(work->x, (u16)work->y2 - 8, back->gfx, work->tiles2, work->palette2,
+    DrawSprite(work->x, (u16)work->y - 8, back->gfx, work->tiles2, work->palette2,
                affine, pal, work->priority);
     gfx = gCardValueDigitFrames[work->stat.value];
-    DrawSprite(work->x, (u16)work->y2 - 8, gfx, work->tiles4, work->palette2, affine,
+    DrawSprite(work->x, (u16)work->y - 8, gfx, work->tiles4, work->palette2, affine,
                pal, work->priority - 1);
 
     if (work->collected[0] == 0) {
@@ -318,7 +318,7 @@ static void PrizeCard_2(PrizeCardWork* work) {
             shadowScale = 2;
         }
 
-        DrawSprite(work->x2, work->y, gBtlShadowFrames[0],
+        DrawSprite(work->shadowX, work->shadowY, gBtlShadowFrames[0],
                    work->tiles5, work->palette3, AllocObjAffine(0, shadowScale, shadowScale, FALSE), pal,
                    work->priority + 2);
     }

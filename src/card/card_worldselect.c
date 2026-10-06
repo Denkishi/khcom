@@ -168,8 +168,8 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
     work->tiles7 = LoadObjTiles(gMapSelectBarTiles, sizeof(gMapSelectBarTiles));
-    work->y3 = -0x800;
-    work->y4 = 0xA000;
+    work->topBarY = -0x800;
+    work->bottomBarY = 0xA000;
     work->barSteps = 16;
     work->slideSteps = 16;
     work->kindCount = CountOwnedMapCardKinds();
@@ -196,8 +196,8 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     work->prevCard = NULL;
     m4aSongNumStart(SONG_SYS_CLICKI02);
     sSelectedMapCard = NULL;
-    work->x2 = 0x1600;
-    work->y2 = 0x16400;
+    work->handX = 0x1600;
+    work->handY = 0x16400;
     work->unk_28D[0] = 0;
     work->unk_260 = 0;
     work->cursorTargetX = 0x1600;
@@ -214,7 +214,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
         work->y = -0x6400;
     }
 
-    work->x3 = -0xA000;
+    work->titleX = -0xA000;
     work->titleY = 0;
     work->palette4 = LoadTextPalette(1);
     work->textSlotCounts[0] = 0;
@@ -311,12 +311,12 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task) {
     MapcardWork* node;
 
     if (work->barSteps != 0) {
-        ApproachValue(&work->y3, 0, work->barSteps);
-        ApproachValue(&work->y4, 0x9800, work->barSteps);
+        ApproachValue(&work->topBarY, 0, work->barSteps);
+        ApproachValue(&work->bottomBarY, 0x9800, work->barSteps);
         work->barSteps--;
     } else {
         ApproachValue(&work->bgScrollY, 0x10000, work->slideSteps);
-        ApproachValue(&work->x3, 0, work->slideSteps);
+        ApproachValue(&work->titleX, 0, work->slideSteps);
         ScrollBgMapTo(1, 0, (u32)work->bgScrollY >> 8);
 
         if (work->slideSteps != 0) {
@@ -353,7 +353,7 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task) {
 #endif
                 }
 
-                work->y2 = 0x6400;
+                work->handY = 0x6400;
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
@@ -401,8 +401,8 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* task) {
         AnimInit(&work->anim, gMapSelectValueBoxAnims, gMapSelectValueBoxFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(&work->anim);
-        work->savedCursorX = work->x2 >> 8;
-        work->savedCursorY = work->y2 >> 8;
+        work->savedCursorX = work->handX >> 8;
+        work->savedCursorY = work->handY >> 8;
 
         if (firstValue > 4) {
             work->valueColumn = firstValue - 5;
@@ -614,8 +614,8 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* task) {
         AnimInit(&work->anim, gCardSelectBoxAnims, gCardSelectBoxFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(&work->anim);
-        work->x2 = work->savedCursorX << 8;
-        work->y2 = work->savedCursorY << 8;
+        work->handX = work->savedCursorX << 8;
+        work->handY = work->savedCursorY << 8;
         work->x = work->card->x;
         work->y = work->card->y;
         work->scrollBarVisible = TRUE;
@@ -777,8 +777,8 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
 
 u8 UpdateMapSelectClose(MapSelectWork* work) {
     ApproachValue(&work->bgScrollY, 0, work->slideSteps);
-    ApproachValue(&work->x3, -0xA000, work->slideSteps);
-    ApproachValue(&work->y2, 0x16400, work->slideSteps);
+    ApproachValue(&work->titleX, -0xA000, work->slideSteps);
+    ApproachValue(&work->handY, 0x16400, work->slideSteps);
     ApproachValue(&work->y, 0x17A00, work->slideSteps);
     ApproachValue(&work->nameY, 0x19100, work->slideSteps);
     ScrollBgMapTo(1, 0, (u32)work->bgScrollY >> 8);
@@ -797,8 +797,8 @@ u8 UpdateMapSelectClose(MapSelectWork* work) {
     if (work->slideSteps != 0) {
         work->slideSteps--;
     } else if (work->barSteps != 0) {
-        ApproachValue(&work->y3, -0x800, work->barSteps);
-        ApproachValue(&work->y4, 0xA000, work->barSteps);
+        ApproachValue(&work->topBarY, -0x800, work->barSteps);
+        ApproachValue(&work->bottomBarY, 0xA000, work->barSteps);
         work->barSteps--;
     } else {
         if (work->cancelled || (work->card->flags & MAPCARD_FLAG_DELIVERED)) {
@@ -812,7 +812,7 @@ u8 UpdateMapSelectClose(MapSelectWork* work) {
 
 void MapSelect_2(MapSelectWork* work) {
     if (work->tiles3 != NULL && work->palette3 != NULL) {
-        DrawSprite(work->x3 >> 8, work->titleY >> 8,
+        DrawSprite(work->titleX >> 8, work->titleY >> 8,
 #ifdef VERSION_EU
                    gMapSelectTitleSpritesByLanguage[gLanguage][0],
 #else
@@ -841,7 +841,7 @@ void MapSelect_2(MapSelectWork* work) {
 
     if (!IsMessageWindowOpen()) {
         DrawSprite((work->x >> 8) - 23, (work->y >> 8) - 27, work->gfx, work->tiles, work->palette2, NULL, 0, 41);
-        DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 12, work->gfx2, work->tiles5, work->palette3, NULL, 0, 40);
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 12, work->gfx2, work->tiles5, work->palette3, NULL, 0, 40);
     }
 
     if (work->scrollBarVisible) {
@@ -859,8 +859,8 @@ void MapSelect_2(MapSelectWork* work) {
         DrawSprite(120, 56, gCardBacks[CARD_BACK_WHITE].gfx2, work->tiles2, work->palette, NULL, SPRITE_FLAG_MOSAIC, 60);
     }
 
-    DrawSprite(128, work->y3 >> 8, gMapSelectBarFrames[0], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
-    DrawSprite(128, work->y4 >> 8, gMapSelectBarFrames[1], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, work->topBarY >> 8, gMapSelectBarFrames[0], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, work->bottomBarY >> 8, gMapSelectBarFrames[1], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
     DrawTextSlots(16, work->nameY >> 8, work->textSlots, work->palette4, 50, work->textSlotCounts[0]);
     TaskPoolDraw(&work->tasks);
 }
@@ -1109,7 +1109,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
         break;
     }
 
-    ApproachValue(&work->x2, work->cursorTargetX, work->steps2);
+    ApproachValue(&work->handX, work->cursorTargetX, work->steps2);
 
     if (work->steps2 != 0) {
         work->steps2--;
@@ -1189,7 +1189,7 @@ s32 SelectNearestMapSelectCard(MapSelectWork* work) {
 
     while (node != NULL) {
         if (node->x != -0x6400) {
-            dx = (node->x >> 8) - (work->x2 >> 8);
+            dx = (node->x >> 8) - (work->handX >> 8);
             r = Sqrt(dx * dx);
 
             if (best > r) {
@@ -1208,7 +1208,7 @@ s32 SelectNearestMapSelectCard(MapSelectWork* work) {
         r = *(u16*)card | MAPCARD_FLAG_CURSOR;
         *(u16*)card = r;
 
-        return (work->card->x - work->x2) >> 8;
+        return (work->card->x - work->handX) >> 8;
     }
 
     return 0;
@@ -1706,8 +1706,8 @@ void HandleMapSelectValueCursor(MapSelectWork* work) {
         m4aSongNumStart(SONG_SYS_CLICKI04B);
     }
 
-    ApproachValue(&work->x2, gMapSelectValueColumnX[work->valueColumn] << 8, work->steps2);
-    ApproachValue(&work->y2, gMapSelectValueRowY[work->valueRow] << 8, work->steps2);
+    ApproachValue(&work->handX, gMapSelectValueColumnX[work->valueColumn] << 8, work->steps2);
+    ApproachValue(&work->handY, gMapSelectValueRowY[work->valueRow] << 8, work->steps2);
     ApproachValue(&work->x, gMapSelectValueColumnX[work->valueColumn] << 8, work->steps);
     ApproachValue(&work->y, (gMapSelectValueRowY[work->valueRow] + 34) << 8,
                   work->steps);
@@ -1764,7 +1764,7 @@ u8 UpdateMapSelectTutorial(MapSelectWork* work, void* task) {
                     work->lastPage = lastPage;
                 }
 
-                work->y2 = 0x6400;
+                work->handY = 0x6400;
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
@@ -1849,7 +1849,7 @@ u8 UpdateMapSelectEventDoorTutorial(MapSelectWork* work, void* task) {
                     work->lastPage = pages;
                 }
 
-                work->y2 = 0x6400;
+                work->handY = 0x6400;
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);

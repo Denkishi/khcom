@@ -55,8 +55,8 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     work->state = PREMIRE_CHANCE_CARD_STATE_DEAL;
     work->scaleX = Q_8_8(1);
     work->scaleY = Q_8_8(1);
-    work->x2 = 0;
-    work->y2 = 0;
+    work->offsetX = 0;
+    work->offsetY = 0;
     work->steps = 32;
     work->premium = FALSE;
 }
@@ -140,22 +140,22 @@ void PremireChanceCard_2(PremireChanceCardWork* work) {
 
     if (work->gfxLoaded) {
         affine = AllocObjAffine(0, work->scaleX, work->scaleY, TRUE);
-        DrawSprite(work->x + work->x2, work->y + work->y2, work->cardDef->gfx, work->tiles, work->palette2, affine, SPRITE_PRIORITY(1),
+        DrawSprite(work->x + work->offsetX, work->y + work->offsetY, work->cardDef->gfx, work->tiles, work->palette2, affine, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[work->position] + 70);
-        DrawSprite(work->x + work->x2, work->y + work->y2, work->cardBack->gfx, work->tiles2, work->palette3, affine, SPRITE_PRIORITY(1),
+        DrawSprite(work->x + work->offsetX, work->y + work->offsetY, work->cardBack->gfx, work->tiles2, work->palette3, affine, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[work->position] + 69);
 
         if (!work->premium) {
-            DrawSprite(work->x + work->x2, work->y + work->y2, gCardValueDigitFrames[work->cardDef->value], work->tiles3, work->palette3,
+            DrawSprite(work->x + work->offsetX, work->y + work->offsetY, gCardValueDigitFrames[work->cardDef->value], work->tiles3, work->palette3,
                        affine, SPRITE_PRIORITY(1), sPremireChanceCardPriorities[work->position] + 68);
         } else {
-            DrawSprite(work->x + work->x2, work->y + work->y2, gCardPremiumValueDigitFrames[work->cardDef->value], work->tiles5, work->palette,
+            DrawSprite(work->x + work->offsetX, work->y + work->offsetY, gCardPremiumValueDigitFrames[work->cardDef->value], work->tiles5, work->palette,
                        affine, SPRITE_PRIORITY(1), sPremireChanceCardPriorities[work->position] + 68);
         }
     }
 
     if (work->state == PREMIRE_CHANCE_CARD_STATE_TO_CENTER && work->tiles4 != NULL) {
-        DrawSprite(work->x + work->x2, work->y + work->y2, work->gfx, work->tiles4, work->palette3, NULL, SPRITE_PRIORITY(1),
+        DrawSprite(work->x + work->offsetX, work->y + work->offsetY, work->gfx, work->tiles4, work->palette3, NULL, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[work->position] + 67);
     }
 }

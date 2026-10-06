@@ -161,8 +161,8 @@ void mode_sio_battle_0(s32 arg) {
     sSioBattleWork->slideTimer = 0;
     sSioBattleWork->stateFrames = 0;
     sSioBattleWork->x = -0x8000;
-    sSioBattleWork->y = -0x800;
-    sSioBattleWork->y2 = 0xA000;
+    sSioBattleWork->topBarY = -0x800;
+    sSioBattleWork->bottomBarY = 0xA000;
     sSioBattleWork->tiles = LoadObjTiles(gSioBattleLinkTiles, sizeof(gSioBattleLinkTiles));
     sSioBattleWork->palette = LoadObjPalette(gSioBattleLinkPalette, sizeof(gSioBattleLinkPalette));
 
@@ -348,8 +348,8 @@ void mode_sio_battle_1() {
             sSioBattleWork->slideTimer = 16;
         }
 
-        ApproachValue(&sSioBattleWork->y, 0, sSioBattleWork->slideTimer);
-        ApproachValue(&sSioBattleWork->y2, 0x9800, sSioBattleWork->slideTimer);
+        ApproachValue(&sSioBattleWork->topBarY, 0, sSioBattleWork->slideTimer);
+        ApproachValue(&sSioBattleWork->bottomBarY, 0x9800, sSioBattleWork->slideTimer);
         sSioBattleWork->slideTimer--;
 
         if ((s16)sSioBattleWork->slideTimer > 0) {
@@ -473,8 +473,8 @@ void mode_sio_battle_1() {
             sSioBattleWork->slideTimer = 16;
         }
 
-        ApproachValue(&sSioBattleWork->y, -0x800, sSioBattleWork->slideTimer);
-        ApproachValue(&sSioBattleWork->y2, 0xA000, sSioBattleWork->slideTimer);
+        ApproachValue(&sSioBattleWork->topBarY, -0x800, sSioBattleWork->slideTimer);
+        ApproachValue(&sSioBattleWork->bottomBarY, 0xA000, sSioBattleWork->slideTimer);
         sSioBattleWork->slideTimer--;
 
         if ((s16)sSioBattleWork->slideTimer > 0) {
@@ -489,8 +489,8 @@ void mode_sio_battle_1() {
 
     sSioBattleWork->gfx = AnimUpdate(&sSioBattleWork->anim);
     DrawSprite(sSioBattleWork->x >> 8, 0, sSioBattleWork->gfx2[0], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -16);
-    DrawSprite(128, sSioBattleWork->y >> 8, sSioBattleWork->gfx2[1], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -1);
-    DrawSprite(128, sSioBattleWork->y2 >> 8, sSioBattleWork->gfx2[2], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -1);
+    DrawSprite(128, sSioBattleWork->topBarY >> 8, sSioBattleWork->gfx2[1], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -1);
+    DrawSprite(128, sSioBattleWork->bottomBarY >> 8, sSioBattleWork->gfx2[2], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -1);
     DrawSprite(72, 48, sSioBattleWork->gfx3, sSioBattleWork->tiles2, sSioBattleWork->palette2, NULL, SPRITE_PRIORITY(1), -32);
     DrawSprite(72, 48, sSioBattleWork->gfx4, sSioBattleWork->tiles3, sSioBattleWork->palette3, NULL, SPRITE_PRIORITY(1), -32);
     ApproachValueHalf(&sSioBattleWork->cursorY, sSioBattleWork->cursor * 7 * 1024 + 0x3300);
@@ -833,11 +833,11 @@ void SioBtlOptionInitObjs() {
     if (sSioBtlOptionWork->modeArg == SIO_BTL_OPTION_ENTRY_FROM_DECK_MENU) {
         sSioBtlOptionWork->menuOpen = TRUE;
         sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_REVIEW_DECKS;
-        sSioBtlOptionWork->y = sSioBtlOptionWork->cursor * 4608 + 10752;
+        sSioBtlOptionWork->cursorY = sSioBtlOptionWork->cursor * 4608 + 10752;
     } else {
         sSioBtlOptionWork->menuOpen = FALSE;
         sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_OK;
-        sSioBtlOptionWork->y = 10752;
+        sSioBtlOptionWork->cursorY = 10752;
     }
 
     sSioBtlOptionWork->fadeLevel = 0;
@@ -914,11 +914,11 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlWaitingText, sSioBtlOptionWork->textSlots4);
 #endif
 #ifdef VERSION_JP
-    sSioBtlOptionWork->x = 68;
+    sSioBtlOptionWork->messageX = 68;
 #else
-    sSioBtlOptionWork->x = 65;
+    sSioBtlOptionWork->messageX = 65;
 #endif
-    sSioBtlOptionWork->y2 = 124;
+    sSioBtlOptionWork->messageY = 124;
     sSioBtlOptionWork->palette6 = LoadObjPalette(gSioCursorPalette, sizeof(gSioCursorPalette));
     sSioBtlOptionWork->tiles4 = LoadObjTiles(gSioBtlOptionLrTiles, sizeof(gSioBtlOptionLrTiles));
     sSioBtlOptionWork->palette4 = LoadObjPalette(gSioBtlOptionLrPalette, sizeof(gSioBtlOptionLrPalette));
@@ -1066,8 +1066,8 @@ void SioBtlOptionDraw() {
         DrawSprite(72, 38, sSioBtlOptionWork->gfx, sSioBtlOptionWork->tiles, sSioBtlOptionWork->palette, NULL, 0, 0x200);
 
         if (sSioBtlOptionWork->cursorVisible == TRUE) {
-            ApproachValueHalf(&sSioBtlOptionWork->y, sSioBtlOptionWork->cursor * 4608 + 10752);
-            DrawSprite(64, sSioBtlOptionWork->y >> 8, sSioBtlOptionWork->gfx2, sSioBtlOptionWork->tiles2, sSioBtlOptionWork->palette2, NULL, 0, 0x100);
+            ApproachValueHalf(&sSioBtlOptionWork->cursorY, sSioBtlOptionWork->cursor * 4608 + 10752);
+            DrawSprite(64, sSioBtlOptionWork->cursorY >> 8, sSioBtlOptionWork->gfx2, sSioBtlOptionWork->tiles2, sSioBtlOptionWork->palette2, NULL, 0, 0x100);
         }
     }
 
@@ -1090,7 +1090,7 @@ void SioBtlOptionDraw() {
             DrawTextSlots(120 - (width >> 1), 124, sSioBtlOptionWork->textSlots4, sSioBtlOptionWork->palette6, 20, sSioBtlOptionWork->textSlotCount4);
         }
 #else
-        DrawTextSlots(sSioBtlOptionWork->x, sSioBtlOptionWork->y2, sSioBtlOptionWork->textSlots4, sSioBtlOptionWork->palette6, 20, sSioBtlOptionWork->textSlotCount4);
+        DrawTextSlots(sSioBtlOptionWork->messageX, sSioBtlOptionWork->messageY, sSioBtlOptionWork->textSlots4, sSioBtlOptionWork->palette6, 20, sSioBtlOptionWork->textSlotCount4);
 #endif
     }
 
@@ -1330,11 +1330,11 @@ void SioBtlOptionHandleMenu() {
             sSioBtlOptionWork->messageVisible = TRUE;
             sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlWaitingText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
-            sSioBtlOptionWork->x = 68;
+            sSioBtlOptionWork->messageX = 68;
 #else
-            sSioBtlOptionWork->x = 65;
+            sSioBtlOptionWork->messageX = 65;
 #endif
-            sSioBtlOptionWork->y2 = 124;
+            sSioBtlOptionWork->messageY = 124;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_WAIT_READY;
             break;
         case SIO_BTL_OPTION_MENU_REVIEW_DECKS:
@@ -1428,9 +1428,9 @@ void SioBtlOptionHandleMenu() {
 #ifdef VERSION_JP
                 sSioBtlOptionWork->x = 68;
 #else
-                sSioBtlOptionWork->x = 65;
+                sSioBtlOptionWork->messageX = 65;
 #endif
-                sSioBtlOptionWork->y2 = 124;
+                sSioBtlOptionWork->messageY = 124;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_WAIT_READY;
                 break;
             case SIO_BTL_OPTION_MENU_REVIEW_DECKS:
@@ -1637,11 +1637,11 @@ void SioBtlOptionWaitReady() {
         sSioBtlOptionWork->timer = 0;
         sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlReadyText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
-        sSioBtlOptionWork->x = 61;
+        sSioBtlOptionWork->messageX = 61;
 #else
-        sSioBtlOptionWork->x = 68;
+        sSioBtlOptionWork->messageX = 68;
 #endif
-        sSioBtlOptionWork->y2 = 119;
+        sSioBtlOptionWork->messageY = 119;
         sSioBtlOptionWork->state++;
     }
 
@@ -1666,11 +1666,11 @@ void SioBtlOptionConfirm() {
         sSioBtlOptionWork->timer = 0;
         sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlSendingDeckText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
-        sSioBtlOptionWork->x = 74;
+        sSioBtlOptionWork->messageX = 74;
 #else
-        sSioBtlOptionWork->x = 72;
+        sSioBtlOptionWork->messageX = 72;
 #endif
-        sSioBtlOptionWork->y2 = 124;
+        sSioBtlOptionWork->messageY = 124;
         sSioBtlOptionWork->state++;
     } else if (gSioCommandRecv[1][0] == SIO_CMD_BTL_CANCEL || gSioCommandRecv[1][1] == SIO_CMD_BTL_CANCEL) {
         sSioBtlOptionWork->leaveDelay = 10;
@@ -1684,8 +1684,8 @@ void SioBtlOptionConfirm() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioBtlOptionWork->timer = 0;
         sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlSendingDeckTextByLanguage), sSioBtlOptionWork->textSlots4);
-        sSioBtlOptionWork->x = 72;
-        sSioBtlOptionWork->y2 = 124;
+        sSioBtlOptionWork->messageX = 72;
+        sSioBtlOptionWork->messageY = 124;
         sSioBtlOptionWork->state++;
     }
 #endif
@@ -2986,8 +2986,8 @@ void SioChgCardInitObjs() {
     for (i = 0; i < 10; i++) {
         if (gSioChgCardSlots[i] == SIO_TRADE_CARD_NONE) {
             sSioChgCardWork->cardVisible[i] = 0;
-            sSioChgCardWork->x2[i] = gSioChgCardSlotPos[i].x << 8;
-            sSioChgCardWork->y2[i] = gSioChgCardSlotPos[i].y << 8;
+            sSioChgCardWork->cardX[i] = gSioChgCardSlotPos[i].x << 8;
+            sSioChgCardWork->cardY[i] = gSioChgCardSlotPos[i].y << 8;
             sSioChgCardWork->tiles3[i] = LoadObjTiles(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].tiles2, 0x200);
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].palette2, 32);
             sSioChgCardWork->gfx4[i] = gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].gfx2;
@@ -2997,8 +2997,8 @@ void SioChgCardInitObjs() {
             sSioChgCardWork->angle[i] = 0;
         } else {
             sSioChgCardWork->cardVisible[i] = 1;
-            sSioChgCardWork->x2[i] = gSioChgCardSlotPos[i].x << 8;
-            sSioChgCardWork->y2[i] = gSioChgCardSlotPos[i].y << 8;
+            sSioChgCardWork->cardX[i] = gSioChgCardSlotPos[i].x << 8;
+            sSioChgCardWork->cardY[i] = gSioChgCardSlotPos[i].y << 8;
             n = gSioChgCardSlots[i];
             sSioChgCardWork->tiles3[i] = LoadObjTiles(gCardDefs[n].tiles2, 0x200);
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[n].palette2, 32);
@@ -3017,8 +3017,8 @@ void SioChgCardInitObjs() {
     sSioChgCardWork->messageVisible = FALSE;
     InitTextSlots(sSioChgCardWork->textSlots, ARRAY_COUNT(sSioChgCardWork->textSlots));
     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
-    sSioChgCardWork->x3 = 68;
-    sSioChgCardWork->y3 = 124;
+    sSioChgCardWork->messageX = 68;
+    sSioChgCardWork->messageY = 124;
     InitTextSlots(sSioChgCardWork->textSlots2, ARRAY_COUNT(sSioChgCardWork->textSlots2));
     sSioChgCardWork->textSlotCount2 = LoadTextSlots(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].name, sSioChgCardWork->textSlots2);
     sSioChgCardWork->cardInfoVisible = FALSE;
@@ -3153,8 +3153,8 @@ void SioChgCardSelect() {
         sSioChgCardWork->timer = 0;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwapConfirmText, sSioChgCardWork->textSlots);
-        sSioChgCardWork->x3 = 64;
-        sSioChgCardWork->y3 = 114;
+        sSioChgCardWork->messageX = 64;
+        sSioChgCardWork->messageY = 114;
         sSioChgCardWork->state++;
     }
 
@@ -3201,8 +3201,8 @@ void SioChgCardConfirm() {
     if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_CONFIRM || gSioCommandRecv[1][1] == SIO_CMD_TRADE_CONFIRM) {
         sSioChgCardWork->timer = 0;
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwappingText, sSioChgCardWork->textSlots);
-        sSioChgCardWork->x3 = 71;
-        sSioChgCardWork->y3 = 124;
+        sSioChgCardWork->messageX = 71;
+        sSioChgCardWork->messageY = 124;
         sSioChgCardWork->state++;
     }
 
@@ -3247,8 +3247,8 @@ void SioChgCardWaitTradeResult() {
     if (gSioCommandRecv[1][0] == SIO_CMD_TRADE_RECEIVE_FAILED || gSioCommandRecv[1][1] == SIO_CMD_TRADE_RECEIVE_FAILED) {
         m4aSongNumStart(SONG_SYS_BEEP);
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgFailedFullText, sSioChgCardWork->textSlots);
-        sSioChgCardWork->x3 = 63;
-        sSioChgCardWork->y3 = 118;
+        sSioChgCardWork->messageX = 63;
+        sSioChgCardWork->messageY = 118;
         SioChgCardRestoreCollection();
         sSioChgCardWork->timer = 0;
         sSioChgCardWork->state = SIO_CHG_CARD_STATE_TRADE_FAILED;
@@ -3304,8 +3304,8 @@ void SioChgCardWaitMove() {
         sSioChgCardWork->timer = 0;
         sSioChgCardWork->messageVisible = TRUE;
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwapCompleteText, sSioChgCardWork->textSlots);
-        sSioChgCardWork->x3 = 70;
-        sSioChgCardWork->y3 = 119;
+        sSioChgCardWork->messageX = 70;
+        sSioChgCardWork->messageY = 119;
         sSioChgCardWork->state++;
     }
 }
@@ -3316,8 +3316,8 @@ void SioChgCardShowSecondMessage() {
     if (sSioChgCardWork->timer > 119) {
         sSioChgCardWork->timer = 0;
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSaveCompleteText, sSioChgCardWork->textSlots);
-        sSioChgCardWork->x3 = 83;
-        sSioChgCardWork->y3 = 124;
+        sSioChgCardWork->messageX = 83;
+        sSioChgCardWork->messageY = 124;
         sSioChgCardWork->state++;
     }
 }
@@ -3396,17 +3396,17 @@ void SioChgCardDraw() {
     for (i = 0; i < 10; i++) {
         if (sSioChgCardWork->cardVisible[i] == 1) {
             affine = AllocObjAffine(sSioChgCardWork->angle[i], sSioChgCardWork->scaleX[i], sSioChgCardWork->scaleY[i], TRUE);
-            DrawSprite((sSioChgCardWork->x2[i] >> 8) + 16, (sSioChgCardWork->y2[i] >> 8) + 20, sSioChgCardWork->gfx4[i], sSioChgCardWork->tiles3[i], sSioChgCardWork->palette3[i], affine, SPRITE_PRIORITY(1), 0xFFF0);
+            DrawSprite((sSioChgCardWork->cardX[i] >> 8) + 16, (sSioChgCardWork->cardY[i] >> 8) + 20, sSioChgCardWork->gfx4[i], sSioChgCardWork->tiles3[i], sSioChgCardWork->palette3[i], affine, SPRITE_PRIORITY(1), 0xFFF0);
 
             if (gCardDefs[gSioChgCardSlots[i]].category != CARD_CATEGORY_ENEMY) {
-                DrawSprite((sSioChgCardWork->x2[i] >> 8) + 13, (sSioChgCardWork->y2[i] >> 8) + 16, sSioChgCardWork->gfx5[i], sSioChgCardWork->tiles4, sSioChgCardWork->palette4, affine, SPRITE_PRIORITY(1), 0xFFE0);
+                DrawSprite((sSioChgCardWork->cardX[i] >> 8) + 13, (sSioChgCardWork->cardY[i] >> 8) + 16, sSioChgCardWork->gfx5[i], sSioChgCardWork->tiles4, sSioChgCardWork->palette4, affine, SPRITE_PRIORITY(1), 0xFFE0);
             }
         }
     }
 
     if (sSioChgCardWork->messageVisible == TRUE) {
         DrawSprite(120, 131, sSioChgCardWork->gfx6, sSioChgCardWork->tiles5, sSioChgCardWork->palette4, NULL, 0, 0xFF00);
-        DrawTextSlots(sSioChgCardWork->x3, sSioChgCardWork->y3, sSioChgCardWork->textSlots, sSioChgCardWork->palette2, 20, sSioChgCardWork->textSlotCount);
+        DrawTextSlots(sSioChgCardWork->messageX, sSioChgCardWork->messageY, sSioChgCardWork->textSlots, sSioChgCardWork->palette2, 20, sSioChgCardWork->textSlotCount);
     }
 
     if (sSioChgCardWork->cardInfoVisible == TRUE) {
@@ -3589,8 +3589,8 @@ void SioChgCardHandleInput() {
                 if (SioChgCardHasOwnCards() == TRUE) {
                     sSioChgCardWork->ready = TRUE;
                     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
-                    sSioChgCardWork->x3 = 68;
-                    sSioChgCardWork->y3 = 124;
+                    sSioChgCardWork->messageX = 68;
+                    sSioChgCardWork->messageY = 124;
                     sSioChgCardWork->messageVisible = TRUE;
                 } else {
                     m4aSongNumStart(SONG_SYS_BEEP);
@@ -3649,8 +3649,8 @@ void SioChgCardHandleInput() {
                 if (SioChgCardHasOwnCards() == TRUE) {
                     sSioChgCardWork->ready = TRUE;
                     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
-                    sSioChgCardWork->x3 = 68;
-                    sSioChgCardWork->y3 = 124;
+                    sSioChgCardWork->messageX = 68;
+                    sSioChgCardWork->messageY = 124;
                     sSioChgCardWork->messageVisible = TRUE;
                 } else {
                     m4aSongNumStart(SONG_SYS_BEEP);
@@ -3793,8 +3793,8 @@ void SioChgCardCreateMoveTasks() {
 
     for (i = 0; i < 5; i++) {
         if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
-            arg.x = &sSioChgCardWork->x2[i];
-            arg.y = &sSioChgCardWork->y2[i];
+            arg.x = &sSioChgCardWork->cardX[i];
+            arg.y = &sSioChgCardWork->cardY[i];
             arg.scaleX = &sSioChgCardWork->scaleX[i];
             arg.scaleY = &sSioChgCardWork->scaleY[i];
             arg.angle = &sSioChgCardWork->angle[i];
@@ -3808,8 +3808,8 @@ void SioChgCardCreateMoveTasks() {
 
     for (i = 5; i < 10; i++) {
         if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
-            arg.x = &sSioChgCardWork->x2[i];
-            arg.y = &sSioChgCardWork->y2[i];
+            arg.x = &sSioChgCardWork->cardX[i];
+            arg.y = &sSioChgCardWork->cardY[i];
             arg.scaleX = &sSioChgCardWork->scaleX[i];
             arg.scaleY = &sSioChgCardWork->scaleY[i];
             arg.angle = &sSioChgCardWork->angle[i];

@@ -117,7 +117,7 @@ entries:
     address: 0x09800EE4
   eu:
     address: 0x09828DA4
-- name: gMapFloorRooms13
+- name: gMapFloorEventDoors13
   record: MapEventDoor
   declare: false
   elements:
@@ -149,7 +149,7 @@ entries:
     address: 0x09800F00
   eu:
     address: 0x09828DC0
-- name: gMapFloorRooms00
+- name: gMapFloorEventDoors00
   record: MapEventDoor
   declare: false
   elements:
@@ -183,7 +183,7 @@ entries:
     address: 0x09800F54
   eu:
     address: 0x09828E14
-- name: gMapFloorRooms01
+- name: gMapFloorEventDoors01
   record: MapEventDoor
   declare: false
   elements:
@@ -218,7 +218,7 @@ entries:
     address: 0x09800FA0
   eu:
     address: 0x09828E60
-- name: gMapFloorRooms02
+- name: gMapFloorEventDoors02
   record: MapEventDoor
   declare: false
   elements:
@@ -254,7 +254,7 @@ entries:
     address: 0x09800FF0
   eu:
     address: 0x09828EB0
-- name: gMapFloorRooms03
+- name: gMapFloorEventDoors03
   record: MapEventDoor
   declare: false
   elements:
@@ -291,7 +291,7 @@ entries:
     address: 0x09801044
   eu:
     address: 0x09828F04
-- name: gMapFloorRooms04
+- name: gMapFloorEventDoors04
   record: MapEventDoor
   declare: false
   elements:
@@ -329,7 +329,7 @@ entries:
     address: 0x0980109C
   eu:
     address: 0x09828F5C
-- name: gMapFloorRooms05
+- name: gMapFloorEventDoors05
   record: MapEventDoor
   declare: false
   elements:
@@ -368,7 +368,7 @@ entries:
     address: 0x098010F8
   eu:
     address: 0x09828FB8
-- name: gMapFloorRooms06
+- name: gMapFloorEventDoors06
   record: MapEventDoor
   declare: false
   elements:
@@ -407,7 +407,7 @@ entries:
     address: 0x09801158
   eu:
     address: 0x09829018
-- name: gMapFloorRooms07
+- name: gMapFloorEventDoors07
   record: MapEventDoor
   declare: false
   elements:
@@ -447,7 +447,7 @@ entries:
     address: 0x098011B8
   eu:
     address: 0x09829078
-- name: gMapFloorRooms08
+- name: gMapFloorEventDoors08
   record: MapEventDoor
   declare: false
   elements:
@@ -489,7 +489,7 @@ entries:
     address: 0x0980121C
   eu:
     address: 0x098290DC
-- name: gMapFloorRooms09
+- name: gMapFloorEventDoors09
   record: MapEventDoor
   declare: false
   elements:
@@ -524,7 +524,7 @@ entries:
     address: 0x09801288
   eu:
     address: 0x09829148
-- name: gMapFloorRooms10
+- name: gMapFloorEventDoors10
   record: MapEventDoor
   declare: false
   elements:
@@ -558,7 +558,7 @@ entries:
     address: 0x098012C8
   eu:
     address: 0x09829188
-- name: gMapFloorRooms11
+- name: gMapFloorEventDoors11
   record: MapEventDoor
   declare: false
   elements:
@@ -600,7 +600,7 @@ entries:
     address: 0x09801314
   eu:
     address: 0x098291D4
-- name: gMapFloorRooms12
+- name: gMapFloorEventDoors12
   record: MapEventDoor
   declare: false
   elements:
@@ -617,20 +617,20 @@ entries:
 - name: gMapFloorDefs
   record: MapFloorDef
   elements:
-  - [1, 7, 0, 0, gMapFloorLinks00, gMapFloorRooms00]
-  - [1, 5, 0, 0, gMapFloorLinks01, gMapFloorRooms01]
-  - [2, 8, 0, 0, gMapFloorLinks02, gMapFloorRooms02]
-  - [0, 7, 0, 0, gMapFloorLinks03, gMapFloorRooms03]
-  - [2, 10, 0, 0, gMapFloorLinks04, gMapFloorRooms04]
-  - [5, 6, 0, 0, gMapFloorLinks05, gMapFloorRooms05]
-  - [4, 12, 0, 0, gMapFloorLinks06, gMapFloorRooms06]
-  - [4, 12, 0, 0, gMapFloorLinks07, gMapFloorRooms07]
-  - [2, 5, 0, 0, gMapFloorLinks08, gMapFloorRooms08]
-  - [3, 15, 0, 0, gMapFloorLinks09, gMapFloorRooms09]
-  - [4, 5, 0, 0, gMapFloorLinks10, gMapFloorRooms10]
-  - [0, 9, 0, 0, gMapFloorLinks11, gMapFloorRooms11]
-  - [3, 13, 0, 0, gMapFloorLinks12, gMapFloorRooms12]
-  - [2, 2, 0, 0, gMapFloorLinks13, gMapFloorRooms13]
+  - [1, 7, 0, 0, gMapFloorLinks00, gMapFloorEventDoors00]
+  - [1, 5, 0, 0, gMapFloorLinks01, gMapFloorEventDoors01]
+  - [2, 8, 0, 0, gMapFloorLinks02, gMapFloorEventDoors02]
+  - [0, 7, 0, 0, gMapFloorLinks03, gMapFloorEventDoors03]
+  - [2, 10, 0, 0, gMapFloorLinks04, gMapFloorEventDoors04]
+  - [5, 6, 0, 0, gMapFloorLinks05, gMapFloorEventDoors05]
+  - [4, 12, 0, 0, gMapFloorLinks06, gMapFloorEventDoors06]
+  - [4, 12, 0, 0, gMapFloorLinks07, gMapFloorEventDoors07]
+  - [2, 5, 0, 0, gMapFloorLinks08, gMapFloorEventDoors08]
+  - [3, 15, 0, 0, gMapFloorLinks09, gMapFloorEventDoors09]
+  - [4, 5, 0, 0, gMapFloorLinks10, gMapFloorEventDoors10]
+  - [0, 9, 0, 0, gMapFloorLinks11, gMapFloorEventDoors11]
+  - [3, 13, 0, 0, gMapFloorLinks12, gMapFloorEventDoors12]
+  - [2, 2, 0, 0, gMapFloorLinks13, gMapFloorEventDoors13]
   us:
     address: 0x0984C868
   jp:
@@ -657,7 +657,7 @@ entries:
     address: 0x09801424
   eu:
     address: 0x098292E4
-- name: gRikuMapFloorRooms00
+- name: gRikuMapFloorEventDoors00
   record: MapEventDoor
   declare: false
   elements:
@@ -688,7 +688,7 @@ entries:
     address: 0x0980146C
   eu:
     address: 0x0982932C
-- name: gRikuMapFloorRooms01
+- name: gRikuMapFloorEventDoors01
   record: MapEventDoor
   declare: false
   elements:
@@ -717,7 +717,7 @@ entries:
     address: 0x09801498
   eu:
     address: 0x09829358
-- name: gRikuMapFloorRooms02
+- name: gRikuMapFloorEventDoors02
   record: MapEventDoor
   declare: false
   elements:
@@ -748,7 +748,7 @@ entries:
     address: 0x098014C4
   eu:
     address: 0x09829384
-- name: gRikuMapFloorRooms03
+- name: gRikuMapFloorEventDoors03
   record: MapEventDoor
   declare: false
   elements:
@@ -782,7 +782,7 @@ entries:
     address: 0x098014F8
   eu:
     address: 0x098293B8
-- name: gRikuMapFloorRooms04
+- name: gRikuMapFloorEventDoors04
   record: MapEventDoor
   declare: false
   elements:
@@ -816,7 +816,7 @@ entries:
     address: 0x09801538
   eu:
     address: 0x098293F8
-- name: gRikuMapFloorRooms05
+- name: gRikuMapFloorEventDoors05
   record: MapEventDoor
   declare: false
   elements:
@@ -848,7 +848,7 @@ entries:
     address: 0x09801578
   eu:
     address: 0x09829438
-- name: gRikuMapFloorRooms06
+- name: gRikuMapFloorEventDoors06
   record: MapEventDoor
   declare: false
   elements:
@@ -881,7 +881,7 @@ entries:
     address: 0x098015B0
   eu:
     address: 0x09829470
-- name: gRikuMapFloorRooms07
+- name: gRikuMapFloorEventDoors07
   record: MapEventDoor
   declare: false
   elements:
@@ -918,7 +918,7 @@ entries:
     address: 0x098015EC
   eu:
     address: 0x098294AC
-- name: gRikuMapFloorRooms08
+- name: gRikuMapFloorEventDoors08
   record: MapEventDoor
   declare: false
   elements:
@@ -951,7 +951,7 @@ entries:
     address: 0x09801638
   eu:
     address: 0x098294F8
-- name: gRikuMapFloorRooms09
+- name: gRikuMapFloorEventDoors09
   record: MapEventDoor
   declare: false
   elements:
@@ -986,7 +986,7 @@ entries:
     address: 0x09801674
   eu:
     address: 0x09829534
-- name: gRikuMapFloorRooms10
+- name: gRikuMapFloorEventDoors10
   record: MapEventDoor
   declare: false
   elements:
@@ -1014,7 +1014,7 @@ entries:
     address: 0x098016C0
   eu:
     address: 0x09829580
-- name: gRikuMapFloorRooms11
+- name: gRikuMapFloorEventDoors11
   record: MapEventDoor
   declare: false
   elements:
@@ -1029,20 +1029,20 @@ entries:
 - name: gRikuMapFloorDefs
   record: MapFloorDef
   elements:
-  - [0, 9, 0, 0, gRikuMapFloorLinks00, gRikuMapFloorRooms00]
-  - [0, 6, 0, 0, gRikuMapFloorLinks01, gRikuMapFloorRooms01]
-  - [0, 6, 0, 0, gRikuMapFloorLinks02, gRikuMapFloorRooms02]
-  - [0, 7, 0, 0, gRikuMapFloorLinks03, gRikuMapFloorRooms03]
-  - [0, 11, 0, 0, gRikuMapFloorLinks04, gRikuMapFloorRooms04]
-  - [0, 11, 0, 0, gRikuMapFloorLinks05, gRikuMapFloorRooms05]
-  - [0, 9, 0, 0, gRikuMapFloorLinks06, gRikuMapFloorRooms06]
-  - [0, 9, 0, 0, gRikuMapFloorLinks07, gRikuMapFloorRooms07]
-  - [0, 14, 0, 0, gRikuMapFloorLinks08, gRikuMapFloorRooms08]
-  - [0, 10, 0, 0, gRikuMapFloorLinks09, gRikuMapFloorRooms09]
-  - [0, 11, 0, 0, gRikuMapFloorLinks10, gRikuMapFloorRooms10]
-  - [0, 4, 0, 0, gRikuMapFloorLinks11, gRikuMapFloorRooms11]
-  - [0, 4, 0, 0, gRikuMapFloorLinks11, gRikuMapFloorRooms11]
-  - [0, 4, 0, 0, gRikuMapFloorLinks11, gRikuMapFloorRooms11]
+  - [0, 9, 0, 0, gRikuMapFloorLinks00, gRikuMapFloorEventDoors00]
+  - [0, 6, 0, 0, gRikuMapFloorLinks01, gRikuMapFloorEventDoors01]
+  - [0, 6, 0, 0, gRikuMapFloorLinks02, gRikuMapFloorEventDoors02]
+  - [0, 7, 0, 0, gRikuMapFloorLinks03, gRikuMapFloorEventDoors03]
+  - [0, 11, 0, 0, gRikuMapFloorLinks04, gRikuMapFloorEventDoors04]
+  - [0, 11, 0, 0, gRikuMapFloorLinks05, gRikuMapFloorEventDoors05]
+  - [0, 9, 0, 0, gRikuMapFloorLinks06, gRikuMapFloorEventDoors06]
+  - [0, 9, 0, 0, gRikuMapFloorLinks07, gRikuMapFloorEventDoors07]
+  - [0, 14, 0, 0, gRikuMapFloorLinks08, gRikuMapFloorEventDoors08]
+  - [0, 10, 0, 0, gRikuMapFloorLinks09, gRikuMapFloorEventDoors09]
+  - [0, 11, 0, 0, gRikuMapFloorLinks10, gRikuMapFloorEventDoors10]
+  - [0, 4, 0, 0, gRikuMapFloorLinks11, gRikuMapFloorEventDoors11]
+  - [0, 4, 0, 0, gRikuMapFloorLinks11, gRikuMapFloorEventDoors11]
+  - [0, 4, 0, 0, gRikuMapFloorLinks11, gRikuMapFloorEventDoors11]
   us:
     address: 0x0984CBD0
   jp:

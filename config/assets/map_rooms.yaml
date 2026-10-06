@@ -50,7 +50,7 @@ types:
       type: u8
   MapRoomEvent:
     fields:
-    - name: room
+    - name: door
       type: u8
     - name: event
       type: u8

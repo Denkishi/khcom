@@ -144,6 +144,9 @@ typedef struct EventBgEffectEntry {
     u16 flags;
 } EventBgEffectEntry;
 
+#define EVENT_EXIT_NONE 0xFFFF
+#define POOH_LEVEL_NONE 0xFF
+
 typedef struct EventSequenceDef {
     u8 charaCount;
     const EventCharaTrack* charaTracks;

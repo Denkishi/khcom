@@ -39,6 +39,7 @@
 #include "sprite_palettes.h"
 #include "debug_font.h"
 #include "event_ids.h"
+#include "songs.h"
 
 static const s16 sSoraEventIds[147] = {
     EVENT_000_1F_ENTRANCE_PART1,
@@ -187,7 +188,7 @@ static const s16 sSoraEventIds[147] = {
     EVENT_146_100ACREWOOD_END_NO,
     EVENT_147_100ACREWOOD_END_COMPCOMP,
     EVENT_148_100ACREWOOD_END_SORAONLY,
-    -1,
+    EVENT_END,
 };
 
 static const s16 sRikuEventIds[49] = {
@@ -239,7 +240,7 @@ static const s16 sRikuEventIds[49] = {
     EVENT_194_RIKU_B1F_LAST2,
     EVENT_195_RIKU_ENDING,
     EVENT_196_DAMI_JUUJIRO,
-    -1,
+    EVENT_END,
 };
 
 static const char sEventSelectCursorText[] = "\x81\xa8";
@@ -267,13 +268,13 @@ s16 GetEventListLength(u8 list) {
 
     switch (list) {
     case EVENT_SELECT_LIST_SORA:
-        while (sSoraEventIds[n] != -1) {
+        while (sSoraEventIds[n] != EVENT_END) {
             n++;
         }
 
         break;
     case EVENT_SELECT_LIST_RIKU:
-        while (sRikuEventIds[n] != -1) {
+        while (sRikuEventIds[n] != EVENT_END) {
             n++;
         }
 
@@ -933,7 +934,7 @@ s32 EV_SOUND_1(EvSoundWork* work) {
     cue = &work->soundCues[work->cue];
 
     if (gEventState->frame == cue->frame) {
-        if (cue->song != 0xFFFF) {
+        if (cue->song != SONG_NONE) {
             if ((cue->flags & EV_SOUND_FLAG_STOP) == 0) {
                 m4aSongNumStartOrContinue(cue->song);
                 player = gSongTable[cue->song].ms;

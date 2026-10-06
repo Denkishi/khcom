@@ -7156,7 +7156,7 @@ void view_0(EventCameraWork* work, u8* arg) {
     keyframe = seqDef->keyframes;
     work->keyframes = keyframe;
 
-    if (keyframe->target != 255) {
+    if (keyframe->target != EVENT_CHARA_NONE) {
         targetIndex = FindEventCameraTarget(work);
         obj = gEventState->charaObjs[targetIndex];
         work->targetX = obj->x;
@@ -7240,7 +7240,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
         }
 
         if ((keyframe->flags & CAMERA_KEYFRAME_MODE_MASK) != CAMERA_MODE_KEEP) {
-            if (keyframe->target == 255) {
+            if (keyframe->target == EVENT_CHARA_NONE) {
                 work->targetX = keyframe->x;
                 work->targetY = keyframe->y;
             } else {

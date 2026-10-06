@@ -36,6 +36,7 @@
 #include "event_ids.h"
 #include "jiminy_records_index_data.h"
 #include "mode_movie.h"
+#include "world_types.h"
 
 static TaskPool sEventTaskPool;
 static u8 sEventPaused;
@@ -209,7 +210,7 @@ void EventUpdate() {
         return;
     }
 
-    if (seqDef->nextEvent != 0xFFFF) {
+    if (seqDef->nextEvent != EVENT_NONE) {
         switch (seqDef->nextEvent) {
         case EVENT_012_2F_ENTRANCE:
         case EVENT_014_2F_DEMO:
@@ -282,7 +283,7 @@ void EventUpdate() {
         return;
     }
 
-    if (seqDef->exitCode != 0xFFFF) {
+    if (seqDef->exitCode != EVENT_EXIT_NONE) {
         switch (seqDef->exitCode) {
         case 2:
             ModeRequest(&gModeBattle, BATTLE_TUTORIAL_0);
@@ -323,10 +324,10 @@ void EventUpdate() {
     if (seqDef->unk_2A != 0) {
         AdvanceFloorStory();
         RequestMapMode();
-    } else if (seqDef->world != 255) {
+    } else if (seqDef->world != WORLD_NONE) {
         AdvanceFloorStory();
         RequestMapMode();
-    } else if (seqDef->poohLevel != 255) {
+    } else if (seqDef->poohLevel != POOH_LEVEL_NONE) {
         if (seqDef->poohLevel == 0) {
             AdvanceFloorStory();
             ModeRequest(&gModePooh, 0);

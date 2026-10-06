@@ -637,7 +637,8 @@ enum SongId {
     SONG_SND_967,
     SONG_SND_968,
     SONG_SND_969,
-    SONG_SND_970
+    SONG_SND_970,
+    SONG_NONE = 0xFFFF
 };
 
 #endif

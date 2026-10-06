@@ -15,6 +15,7 @@
 #include "gba/macro.h"
 #include "mode_chkbtl_api.h"
 #include "world_types.h"
+#include "jiminy_records_index_data.h"
 
 void InitGameState() {
     CpuFill32(0, &gGameState, sizeof(GameState));
@@ -132,24 +133,24 @@ void SetupRikuNewGame() {
     InitRikuDeckForWorld(0);
     gGameState.flags |= GAME_FLAG_RIKU;
     gGameState.flags |= GAME_FLAG_DARK_POINTS_LOCKED;
-    SetJiminyFlag(0);
-    SetJiminyFlag(0x15);
-    SetJiminyFlag(0xED);
-    SetJiminyFlag(0x11);
-    SetJiminyFlag(0x16);
-    SetJiminyFlag(0xEF);
-    SetJiminyFlag(0xF3);
+    SetJiminyFlag(JIMINY_RECORD_STORY_TALE_1);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_RIKU);
+    SetJiminyFlag(JIMINY_RECORD_RIKU_CHARACTER_KING);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_SORA);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_KAIRI);
+    SetJiminyFlag(JIMINY_RECORD_RIKU_CHARACTER_ANSEM);
+    SetJiminyFlag(JIMINY_RECORD_RIKU_CARD_SOUL_EATER);
 }
 
 void SetupSoraNewGame() {
     gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
     InitSoraDecks();
     gGameState.flags &= ~GAME_FLAG_RIKU;
-    SetJiminyFlag(0x11);
-    SetJiminyFlag(0x12);
-    SetJiminyFlag(0x13);
-    SetJiminyFlag(0x14);
-    SetJiminyFlag(0x15);
-    SetJiminyFlag(0x16);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_SORA);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_DONALD_DUCK);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_GOOFY);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_JIMINY_CRICKET);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_RIKU);
+    SetJiminyFlag(JIMINY_RECORD_CHARACTER_KAIRI);
     InitStartFloor(0, 10);
 }

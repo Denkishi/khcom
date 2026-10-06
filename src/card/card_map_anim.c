@@ -23,6 +23,7 @@
 #include <stddef.h>
 #include "card_deckmenu2.h"
 #include "card_ids.h"
+#include "jiminy_records_index_data.h"
 
 Deck gDecks[3] EWRAM_COMMON(16);
 
@@ -334,266 +335,266 @@ void ExpandCardCollectionForNewCard(u16 cardId) {
 
     switch (kind) {
     case 0:
-        jiminyFlag = 119;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_KINGDOM_KEY;
         break;
     case 8:
-        jiminyFlag = 127;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_OLYMPIA;
         break;
     case 1:
-        jiminyFlag = 120;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_THREE_WISHES;
         break;
     case 2:
-        jiminyFlag = 121;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_CRABCLAW;
         break;
     case 3:
-        jiminyFlag = 122;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_PUMPKINHEAD;
         break;
     case 4:
-        jiminyFlag = 123;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_FAIRY_HARP;
         break;
     case 5:
-        jiminyFlag = 124;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_WISHING_STAR;
         break;
     case 6:
-        jiminyFlag = 125;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_SPELLBINDER;
         break;
     case 7:
-        jiminyFlag = 126;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_METAL_CHOCOBO;
         break;
     case 9:
-        jiminyFlag = 128;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_LIONHEART;
         break;
     case 10:
-        jiminyFlag = 129;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_LADY_LUCK;
         break;
     case 11:
-        jiminyFlag = 130;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_DIVINE_ROSE;
         break;
     case 12:
-        jiminyFlag = 131;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_OATHKEEPER;
         break;
     case 13:
-        jiminyFlag = 132;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_OBLIVION;
         break;
     case 16:
-        jiminyFlag = 133;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_ULTIMA_WEAPON;
         break;
     case 14:
-        jiminyFlag = 134;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_DIAMOND_DUST;
         break;
     case 15:
-        jiminyFlag = 135;
+        jiminyFlag = JIMINY_RECORD_ATTACK_CARD_ONE_WINGED_ANGEL;
         break;
     case 18:
-        jiminyFlag = 136;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_FIRE;
         break;
     case 19:
-        jiminyFlag = 137;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_BLIZZARD;
         break;
     case 20:
-        jiminyFlag = 138;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_THUNDER;
         break;
     case 21:
-        jiminyFlag = 139;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_CURE;
         break;
     case 22:
-        jiminyFlag = 140;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_GRAVITY;
         break;
     case 23:
-        jiminyFlag = 141;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_STOP;
         break;
     case 24:
-        jiminyFlag = 142;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_AERO;
         break;
     case 25:
-        jiminyFlag = 143;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_SIMBA;
         break;
     case 26:
-        jiminyFlag = 144;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_GENIE;
         break;
     case 27:
-        jiminyFlag = 145;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_BAMBI;
         break;
     case 28:
-        jiminyFlag = 146;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_DUMBO;
         break;
     case 29:
-        jiminyFlag = 147;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_TINKER_BELL;
         break;
     case 30:
-        jiminyFlag = 148;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_MUSHU;
         break;
     case 31:
-        jiminyFlag = 149;
+        jiminyFlag = JIMINY_RECORD_MAGIC_CARD_CLOUD;
         break;
     case 32:
-        jiminyFlag = 150;
+        jiminyFlag = JIMINY_RECORD_ITEM_CARD_POTION;
         break;
     case 33:
-        jiminyFlag = 151;
+        jiminyFlag = JIMINY_RECORD_ITEM_CARD_HI_POTION;
         break;
     case 34:
-        jiminyFlag = 152;
+        jiminyFlag = JIMINY_RECORD_ITEM_CARD_MEGA_POTION;
         break;
     case 35:
-        jiminyFlag = 153;
+        jiminyFlag = JIMINY_RECORD_ITEM_CARD_ETHER;
         break;
     case 36:
-        jiminyFlag = 154;
+        jiminyFlag = JIMINY_RECORD_ITEM_CARD_MEGA_ETHER;
         break;
     case 37:
-        jiminyFlag = 155;
+        jiminyFlag = JIMINY_RECORD_ITEM_CARD_ELIXIR;
         break;
     case 38:
-        jiminyFlag = 156;
+        jiminyFlag = JIMINY_RECORD_ITEM_CARD_MEGALIXIR;
         break;
     case 47:
-        jiminyFlag = 164;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SHADOW;
         break;
     case 50:
-        jiminyFlag = 165;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_RED_NOCTURNE;
         break;
     case 51:
-        jiminyFlag = 166;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BLUE_RHAPSODY;
         break;
     case 52:
-        jiminyFlag = 167;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_YELLOW_OPERA;
         break;
     case 53:
-        jiminyFlag = 168;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_GREEN_REQUIEM;
         break;
     case 61:
-        jiminyFlag = 169;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SEA_NEON;
         break;
     case 73:
-        jiminyFlag = 170;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WHITE_MUSHROOM;
         break;
     case 74:
-        jiminyFlag = 171;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BLACK_FUNGUS;
         break;
     case 48:
-        jiminyFlag = 172;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SOLDIER;
         break;
     case 54:
-        jiminyFlag = 173;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_POWERWILD;
         break;
     case 55:
-        jiminyFlag = 174;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BOUNCYWILD;
         break;
     case 56:
-        jiminyFlag = 175;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AIR_SOLDIER;
         break;
     case 57:
-        jiminyFlag = 176;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BANDIT;
         break;
     case 59:
-        jiminyFlag = 177;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BARREL_SPIDER;
         break;
     case 60:
-        jiminyFlag = 178;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SEARCH_GHOST;
         break;
     case 62:
-        jiminyFlag = 179;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SCREWDIVER;
         break;
     case 64:
-        jiminyFlag = 180;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WIGHT_KNIGHT;
         break;
     case 65:
-        jiminyFlag = 181;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_GARGOYLE;
         break;
     case 66:
-        jiminyFlag = 182;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_PIRATE;
         break;
     case 67:
-        jiminyFlag = 183;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AIR_PIRATE;
         break;
     case 68:
-        jiminyFlag = 184;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DARKBALL;
         break;
     case 70:
-        jiminyFlag = 185;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WYVERN;
         break;
     case 71:
-        jiminyFlag = 186;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WIZARD;
         break;
     case 72:
-        jiminyFlag = 187;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_NEOSHADOW;
         break;
     case 49:
-        jiminyFlag = 188;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_LARGE_BODY;
         break;
     case 58:
-        jiminyFlag = 189;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_FAT_BANDIT;
         break;
     case 63:
-        jiminyFlag = 190;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AQUATANK;
         break;
     case 69:
-        jiminyFlag = 191;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DEFENDER;
         break;
     case 76:
-        jiminyFlag = 192;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_TORNADO_STEP;
         break;
     case 77:
-        jiminyFlag = 193;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_CRESCENDO;
         break;
     case 75:
-        jiminyFlag = 194;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_CREEPER_PLANT;
         break;
     case 81:
-        jiminyFlag = 204;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DARKSIDE;
         break;
     case 78:
-        jiminyFlag = 195;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_GUARD_ARMOR;
         break;
     case 86:
-        jiminyFlag = 200;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_OOGIE_BOOGIE;
         break;
     case 80:
-        jiminyFlag = 197;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_TRICKMASTER;
         break;
     case 79:
-        jiminyFlag = 201;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_PARASITE_CAGE;
         break;
     case 85:
-        jiminyFlag = 198;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_JAFAR;
         break;
     case 87:
-        jiminyFlag = 199;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_URSULA;
         break;
     case 89:
-        jiminyFlag = 203;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DRAGON_MALEFICENT;
         break;
     case 88:
-        jiminyFlag = 202;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_HOOK;
         break;
     case 84:
-        jiminyFlag = 196;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_HADES;
         break;
     case 90:
-        jiminyFlag = 247;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_RIKU;
         break;
     case 91:
-        jiminyFlag = 206;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AXEL;
         break;
     case 92:
-        jiminyFlag = 205;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_LARXENE;
         break;
     case 93:
-        jiminyFlag = 207;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_VEXEN;
         break;
     case 94:
-        jiminyFlag = 208;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_MARLUXIA;
         break;
     case 82:
     case 83:
-        jiminyFlag = 246;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_CARD_SOLDIER;
         break;
     case 96:
-        jiminyFlag = 248;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_LEXAEUS;
         break;
     case 97:
-        jiminyFlag = 249;
+        jiminyFlag = JIMINY_RECORD_ENEMY_CARD_ANSEM;
         break;
     default:
         if (gCardCount > 999) {
@@ -638,330 +639,330 @@ s16 ObtainCard(u16 cardId) {
     switch (gCardDefs[cardId & CARD_ID_MASK].kind) {
     case CARD_KIND_KINGDOM_KEY:
         SetCardKindObtained(OBTAINED_CARD_KINGDOM_KEY);
-        SetJiminyFlag(119);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_KINGDOM_KEY);
         break;
     case CARD_KIND_OLYMPIA:
         SetCardKindObtained(OBTAINED_CARD_OLYMPIA);
-        SetJiminyFlag(127);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_OLYMPIA);
         break;
     case CARD_KIND_THREE_WISHES:
         SetCardKindObtained(OBTAINED_CARD_THREE_WISHES);
-        SetJiminyFlag(120);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_THREE_WISHES);
         break;
     case CARD_KIND_CRABCLAW:
         SetCardKindObtained(OBTAINED_CARD_CRABCLAW);
-        SetJiminyFlag(121);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_CRABCLAW);
         break;
     case CARD_KIND_PUMPKINHEAD:
         SetCardKindObtained(OBTAINED_CARD_PUMPKINHEAD);
-        SetJiminyFlag(122);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_PUMPKINHEAD);
         break;
     case CARD_KIND_FAIRY_HARP:
         SetCardKindObtained(OBTAINED_CARD_FAIRY_HARP);
-        SetJiminyFlag(123);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_FAIRY_HARP);
         break;
     case CARD_KIND_WISHING_STAR:
         SetCardKindObtained(OBTAINED_CARD_WISHING_STAR);
-        SetJiminyFlag(124);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_WISHING_STAR);
         break;
     case CARD_KIND_SPELLBINDER:
         SetCardKindObtained(OBTAINED_CARD_SPELLBINDER);
-        SetJiminyFlag(125);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_SPELLBINDER);
         break;
     case CARD_KIND_METAL_CHOCOBO:
         SetCardKindObtained(OBTAINED_CARD_METAL_CHOCOBO);
-        SetJiminyFlag(126);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_METAL_CHOCOBO);
         break;
     case CARD_KIND_LIONHEART:
         SetCardKindObtained(OBTAINED_CARD_LIONHEART);
-        SetJiminyFlag(128);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_LIONHEART);
         break;
     case CARD_KIND_LADY_LUCK:
         SetCardKindObtained(OBTAINED_CARD_LADY_LUCK);
-        SetJiminyFlag(129);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_LADY_LUCK);
         break;
     case CARD_KIND_DIVINE_ROSE:
         SetCardKindObtained(OBTAINED_CARD_DIVINE_ROSE);
-        SetJiminyFlag(130);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_DIVINE_ROSE);
         break;
     case CARD_KIND_OATHKEEPER:
         SetCardKindObtained(OBTAINED_CARD_OATHKEEPER);
-        SetJiminyFlag(131);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_OATHKEEPER);
         break;
     case CARD_KIND_OBLIVION:
         SetCardKindObtained(OBTAINED_CARD_OBLIVION);
-        SetJiminyFlag(132);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_OBLIVION);
         break;
     case CARD_KIND_ULTIMA_WEAPON:
         SetCardKindObtained(OBTAINED_CARD_ULTIMA_WEAPON);
-        SetJiminyFlag(133);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_ULTIMA_WEAPON);
         break;
     case CARD_KIND_DIAMOND_DUST:
         SetCardKindObtained(OBTAINED_CARD_DIAMOND_DUST);
-        SetJiminyFlag(134);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_DIAMOND_DUST);
         break;
     case CARD_KIND_ONE_WINGED_ANGEL:
         SetCardKindObtained(OBTAINED_CARD_ONE_WINGED_ANGEL);
-        SetJiminyFlag(135);
+        SetJiminyFlag(JIMINY_RECORD_ATTACK_CARD_ONE_WINGED_ANGEL);
         break;
     case CARD_KIND_FIRE:
         SetCardKindObtained(OBTAINED_CARD_FIRE);
         LearnStock(LEARNED_STOCK_FIRA);
         LearnStock(LEARNED_STOCK_FIRAGA);
-        SetJiminyFlag(136);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_FIRE);
         break;
     case CARD_KIND_BLIZZARD:
         SetCardKindObtained(OBTAINED_CARD_BLIZZARD);
         LearnStock(LEARNED_STOCK_BLIZZARA);
         LearnStock(LEARNED_STOCK_BLIZZAGA);
-        SetJiminyFlag(137);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_BLIZZARD);
         break;
     case CARD_KIND_THUNDER:
         SetCardKindObtained(OBTAINED_CARD_THUNDER);
         LearnStock(LEARNED_STOCK_THUNDARA);
         LearnStock(LEARNED_STOCK_THUNDAGA);
-        SetJiminyFlag(138);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_THUNDER);
         break;
     case CARD_KIND_CURE:
         SetCardKindObtained(OBTAINED_CARD_CURE);
         LearnStock(LEARNED_STOCK_CURA);
         LearnStock(LEARNED_STOCK_CURAGA);
-        SetJiminyFlag(139);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_CURE);
         break;
     case CARD_KIND_GRAVITY:
         SetCardKindObtained(OBTAINED_CARD_GRAVITY);
         LearnStock(LEARNED_STOCK_GRAVIRA);
         LearnStock(LEARNED_STOCK_GRAVIGA);
-        SetJiminyFlag(140);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_GRAVITY);
         break;
     case CARD_KIND_STOP:
         SetCardKindObtained(OBTAINED_CARD_STOP);
         LearnStock(LEARNED_STOCK_STOPRA);
         LearnStock(LEARNED_STOCK_STOPGA);
-        SetJiminyFlag(141);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_STOP);
         break;
     case CARD_KIND_AERO:
         SetCardKindObtained(OBTAINED_CARD_AERO);
         LearnStock(LEARNED_STOCK_AERORA);
         LearnStock(LEARNED_STOCK_AEROGA);
-        SetJiminyFlag(142);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_AERO);
         break;
     case CARD_KIND_SIMBA:
         SetCardKindObtained(OBTAINED_CARD_SIMBA);
         LearnStock(LEARNED_STOCK_PROUD_ROAR);
-        SetJiminyFlag(143);
-        SetJiminyFlag(23);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_SIMBA);
+        SetJiminyFlag(JIMINY_RECORD_CHARACTER_SIMBA);
         break;
     case CARD_KIND_GENIE:
         SetCardKindObtained(OBTAINED_CARD_GENIE);
         LearnStock(LEARNED_STOCK_SHOWTIME);
-        SetJiminyFlag(144);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_GENIE);
         break;
     case CARD_KIND_BAMBI:
         SetCardKindObtained(OBTAINED_CARD_BAMBI);
         LearnStock(LEARNED_STOCK_PARADISE);
         LearnStock(LEARNED_STOCK_IDYLL_ROMP);
-        SetJiminyFlag(145);
-        SetJiminyFlag(25);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_BAMBI);
+        SetJiminyFlag(JIMINY_RECORD_CHARACTER_BAMBI);
         break;
     case CARD_KIND_DUMBO:
         SetCardKindObtained(OBTAINED_CARD_DUMBO);
         LearnStock(LEARNED_STOCK_SPLASH);
-        SetJiminyFlag(146);
-        SetJiminyFlag(24);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_DUMBO);
+        SetJiminyFlag(JIMINY_RECORD_CHARACTER_DUMBO);
         break;
     case CARD_KIND_TINKER_BELL:
         SetCardKindObtained(OBTAINED_CARD_TINKER_BELL);
         LearnStock(LEARNED_STOCK_TWINKLE);
-        SetJiminyFlag(147);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_TINKER_BELL);
         break;
     case CARD_KIND_MUSHU:
         SetCardKindObtained(OBTAINED_CARD_MUSHU);
         LearnStock(LEARNED_STOCK_FLARE_BREATH);
-        SetJiminyFlag(148);
-        SetJiminyFlag(26);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_MUSHU);
+        SetJiminyFlag(JIMINY_RECORD_CHARACTER_MUSHU);
         break;
     case CARD_KIND_CLOUD:
         SetCardKindObtained(OBTAINED_CARD_CLOUD);
         LearnStock(LEARNED_STOCK_CROSS_SLASH);
         LearnStock(LEARNED_STOCK_OMNISLASH);
-        SetJiminyFlag(149);
+        SetJiminyFlag(JIMINY_RECORD_MAGIC_CARD_CLOUD);
         break;
     case CARD_KIND_POTION:
         SetCardKindObtained(OBTAINED_CARD_POTION);
-        SetJiminyFlag(150);
+        SetJiminyFlag(JIMINY_RECORD_ITEM_CARD_POTION);
         break;
     case CARD_KIND_HI_POTION:
         SetCardKindObtained(OBTAINED_CARD_HI_POTION);
-        SetJiminyFlag(151);
+        SetJiminyFlag(JIMINY_RECORD_ITEM_CARD_HI_POTION);
         break;
     case CARD_KIND_MEGA_POTION:
         SetCardKindObtained(OBTAINED_CARD_MEGA_POTION);
-        SetJiminyFlag(152);
+        SetJiminyFlag(JIMINY_RECORD_ITEM_CARD_MEGA_POTION);
         break;
     case CARD_KIND_ETHER:
         SetCardKindObtained(OBTAINED_CARD_ETHER);
-        SetJiminyFlag(153);
+        SetJiminyFlag(JIMINY_RECORD_ITEM_CARD_ETHER);
         break;
     case CARD_KIND_MEGA_ETHER:
         SetCardKindObtained(OBTAINED_CARD_MEGA_ETHER);
-        SetJiminyFlag(154);
+        SetJiminyFlag(JIMINY_RECORD_ITEM_CARD_MEGA_ETHER);
         break;
     case CARD_KIND_ELIXIR:
         SetCardKindObtained(OBTAINED_CARD_ELIXIR);
-        SetJiminyFlag(155);
+        SetJiminyFlag(JIMINY_RECORD_ITEM_CARD_ELIXIR);
         break;
     case CARD_KIND_MEGALIXIR:
         SetCardKindObtained(OBTAINED_CARD_MEGALIXIR);
-        SetJiminyFlag(156);
+        SetJiminyFlag(JIMINY_RECORD_ITEM_CARD_MEGALIXIR);
         break;
     case CARD_KIND_SHADOW:
-        SetJiminyFlag(164);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_SHADOW);
         break;
     case CARD_KIND_RED_NOCTURNE:
-        SetJiminyFlag(165);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_RED_NOCTURNE);
         break;
     case CARD_KIND_BLUE_RHAPSODY:
-        SetJiminyFlag(166);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_BLUE_RHAPSODY);
         break;
     case CARD_KIND_YELLOW_OPERA:
-        SetJiminyFlag(167);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_YELLOW_OPERA);
         break;
     case CARD_KIND_GREEN_REQUIEM:
-        SetJiminyFlag(168);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_GREEN_REQUIEM);
         break;
     case CARD_KIND_SEA_NEON:
-        SetJiminyFlag(169);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_SEA_NEON);
         break;
     case CARD_KIND_WHITE_MUSHROOM:
-        SetJiminyFlag(170);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_WHITE_MUSHROOM);
         break;
     case CARD_KIND_BLACK_FUNGUS:
-        SetJiminyFlag(171);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_BLACK_FUNGUS);
         break;
     case CARD_KIND_SOLDIER:
-        SetJiminyFlag(172);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_SOLDIER);
         break;
     case CARD_KIND_POWERWILD:
-        SetJiminyFlag(173);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_POWERWILD);
         break;
     case CARD_KIND_BOUNCYWILD:
-        SetJiminyFlag(174);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_BOUNCYWILD);
         break;
     case CARD_KIND_AIR_SOLDIER:
-        SetJiminyFlag(175);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_AIR_SOLDIER);
         break;
     case CARD_KIND_BANDIT:
-        SetJiminyFlag(176);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_BANDIT);
         break;
     case CARD_KIND_BARREL_SPIDER:
-        SetJiminyFlag(177);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_BARREL_SPIDER);
         break;
     case CARD_KIND_SEARCH_GHOST:
-        SetJiminyFlag(178);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_SEARCH_GHOST);
         break;
     case CARD_KIND_SCREWDIVER:
-        SetJiminyFlag(179);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_SCREWDIVER);
         break;
     case CARD_KIND_WIGHT_KNIGHT:
-        SetJiminyFlag(180);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_WIGHT_KNIGHT);
         break;
     case CARD_KIND_GARGOYLE:
-        SetJiminyFlag(181);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_GARGOYLE);
         break;
     case CARD_KIND_PIRATE:
-        SetJiminyFlag(182);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_PIRATE);
         break;
     case CARD_KIND_AIR_PIRATE:
-        SetJiminyFlag(183);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_AIR_PIRATE);
         break;
     case CARD_KIND_DARKBALL:
-        SetJiminyFlag(184);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_DARKBALL);
         break;
     case CARD_KIND_WYVERN:
-        SetJiminyFlag(185);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_WYVERN);
         break;
     case CARD_KIND_WIZARD:
-        SetJiminyFlag(186);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_WIZARD);
         break;
     case CARD_KIND_NEOSHADOW:
-        SetJiminyFlag(187);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_NEOSHADOW);
         break;
     case CARD_KIND_LARGE_BODY:
-        SetJiminyFlag(188);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_LARGE_BODY);
         break;
     case CARD_KIND_FAT_BANDIT:
-        SetJiminyFlag(189);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_FAT_BANDIT);
         break;
     case CARD_KIND_AQUATANK:
-        SetJiminyFlag(190);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_AQUATANK);
         break;
     case CARD_KIND_DEFENDER:
-        SetJiminyFlag(191);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_DEFENDER);
         break;
     case CARD_KIND_TORNADO_STEP:
-        SetJiminyFlag(192);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_TORNADO_STEP);
         break;
     case CARD_KIND_CRESCENDO:
-        SetJiminyFlag(193);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_CRESCENDO);
         break;
     case CARD_KIND_CREEPER_PLANT:
-        SetJiminyFlag(194);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_CREEPER_PLANT);
         break;
     case CARD_KIND_DARKSIDE:
-        SetJiminyFlag(204);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_DARKSIDE);
         break;
     case CARD_KIND_GUARD_ARMOR:
-        SetJiminyFlag(195);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_GUARD_ARMOR);
         break;
     case CARD_KIND_OOGIE_BOOGIE:
-        SetJiminyFlag(200);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_OOGIE_BOOGIE);
         break;
     case CARD_KIND_TRICKMASTER:
-        SetJiminyFlag(197);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_TRICKMASTER);
         break;
     case CARD_KIND_PARASITE_CAGE:
-        SetJiminyFlag(201);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_PARASITE_CAGE);
         break;
     case CARD_KIND_JAFAR:
-        SetJiminyFlag(198);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_JAFAR);
         break;
     case CARD_KIND_URSULA:
-        SetJiminyFlag(199);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_URSULA);
         break;
     case CARD_KIND_DRAGON_MALEFICENT:
-        SetJiminyFlag(203);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_DRAGON_MALEFICENT);
         break;
     case CARD_KIND_HOOK:
-        SetJiminyFlag(202);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_HOOK);
         break;
     case CARD_KIND_HADES:
-        SetJiminyFlag(196);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_HADES);
         break;
     case CARD_KIND_RIKU:
-        SetJiminyFlag(247);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_RIKU);
         break;
     case CARD_KIND_AXEL:
-        SetJiminyFlag(206);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_AXEL);
         break;
     case CARD_KIND_LARXENE:
-        SetJiminyFlag(205);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_LARXENE);
         break;
     case CARD_KIND_VEXEN:
-        SetJiminyFlag(207);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_VEXEN);
         break;
     case CARD_KIND_MARLUXIA:
-        SetJiminyFlag(208);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_MARLUXIA);
         break;
     case CARD_KIND_CARD_SOLDIER_HEART:
     case CARD_KIND_CARD_SOLDIER_SPADE:
-        SetJiminyFlag(246);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_CARD_SOLDIER);
         break;
     case CARD_KIND_LEXAEUS:
-        SetJiminyFlag(248);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_LEXAEUS);
         break;
     case CARD_KIND_ANSEM:
-        SetJiminyFlag(249);
+        SetJiminyFlag(JIMINY_RECORD_ENEMY_CARD_ANSEM);
         break;
     }
 

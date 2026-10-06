@@ -24,6 +24,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "jiminy_records_index_data.h"
 
 static const AnimDef sEmy07CommonAnimDefs[3] = {
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0 },
@@ -233,7 +234,7 @@ u8 task_emy_07_1(Emy07Work* work) {
                 work->base.stateTimer = 0;
                 work->base.state = EMY07_STATE_VANISH;
                 w->rewarded = 1;
-                SetJiminyFlag(110);
+                SetJiminyFlag(JIMINY_RECORD_HEARTLESS_WHITE_MUSHROOM);
             } else {
                 work->base.stateTimer = 0;
                 work->base.state = EMY07_STATE_IDLE;

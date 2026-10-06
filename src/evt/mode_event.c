@@ -34,6 +34,7 @@
 #include "battle_ids.h"
 #include "card_message_data.h"
 #include "event_ids.h"
+#include "jiminy_records_index_data.h"
 #include "mode_movie.h"
 
 static TaskPool sEventTaskPool;
@@ -961,10 +962,10 @@ void EnterExitHallAfterEvent() {
 void SetJiminyFlagsAfterEvent() {
     switch (sEventId) {
     case EVENT_067_13F_CASTLE_OBLIVION_LAST2:
-        SetJiminyFlag(16);
+        SetJiminyFlag(JIMINY_RECORD_STORY_CASTLE_OBLIVION);
         break;
     case EVENT_063_13F_CASTLE_OBLIVION_E1:
-        SetJiminyFlag(41);
+        SetJiminyFlag(JIMINY_RECORD_CHARACTER_MARLUXIA);
         break;
     }
 }

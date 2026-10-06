@@ -46,6 +46,7 @@
 #include <stddef.h>
 #include "lockon.h"
 #include "card_friend_card.h"
+#include "jiminy_records_index_data.h"
 
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
 
@@ -1286,7 +1287,7 @@ void Premire_Chance_3(PremireChanceWork* work) {
     ReleaseObjPalette(work->palette3);
     ReleaseObjPalette(work->palette4);
     ReleaseObjPalette(work->palette);
-    SetJiminyFlag(0xF5);
+    SetJiminyFlag(JIMINY_RECORD_PREMIUM_CARDS);
     TaskPoolDestroy(&work->tasks);
 }
 

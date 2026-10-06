@@ -49,6 +49,7 @@
 #include "card_label_data.h"
 #include "enemy_ids.h"
 #include "event_ids.h"
+#include "jiminy_records_index_data.h"
 #include "songs.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
@@ -574,7 +575,7 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (flags & FRIEND_FLAG_THE_KING) {
-            SetJiminyFlag(244);
+            SetJiminyFlag(JIMINY_RECORD_RIKU_CARD_KING);
             CreateFriendCardTask(gBtlWork->taskPools, x >> 8, y >> 8, z >> 8, 7);
         }
 
@@ -588,35 +589,35 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
         case WORLD_AGRABAH:
             if (flags & FRIEND_FLAG_ALADDIN) {
                 friendIndex = 2;
-                SetJiminyFlag(159);
+                SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_ALADDIN);
             }
 
             break;
         case WORLD_ATLANTICA:
             if (flags & FRIEND_FLAG_ARIEL) {
                 friendIndex = 3;
-                SetJiminyFlag(160);
+                SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_ARIEL);
             }
 
             break;
         case WORLD_HALLOWEEN_TOWN:
             if (flags & FRIEND_FLAG_JACK) {
                 friendIndex = 4;
-                SetJiminyFlag(161);
+                SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_JACK);
             }
 
             break;
         case WORLD_NEVER_LAND:
             if (flags & FRIEND_FLAG_PETER_PAN) {
                 friendIndex = 5;
-                SetJiminyFlag(162);
+                SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_PETER_PAN);
             }
 
             break;
         case WORLD_HOLLOW_BASTION:
             if (flags & FRIEND_FLAG_THE_BEAST) {
                 friendIndex = 6;
-                SetJiminyFlag(163);
+                SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_BEAST);
             }
 
             break;
@@ -627,12 +628,12 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
         if (GetRandom() % 2 != 0) {
             if (flags & FRIEND_FLAG_GOOFY) {
                 friendIndex = 0;
-                SetJiminyFlag(158);
+                SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_GOOFY);
             }
         } else {
             if (flags & FRIEND_FLAG_DONALD_DUCK) {
                 friendIndex = 1;
-                SetJiminyFlag(157);
+                SetJiminyFlag(JIMINY_RECORD_FRIEND_CARD_DONALD_DUCK);
             }
         }
     }
@@ -2507,109 +2508,109 @@ void SetEnemyHpFromStats(BtlObj* obj, s32 id, s32 hpScale) {
 void SetEnemyJiminyFlag(BtlObj* obj) {
     switch (obj->kind) {
     case ENEMY_SHADOW:
-        SetJiminyFlag(84);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_SHADOW);
         break;
     case ENEMY_RED_NOCTURNE:
-        SetJiminyFlag(87);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_RED_NOCTURNE);
         break;
     case ENEMY_BLUE_RHAPSODY:
-        SetJiminyFlag(88);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_BLUE_RHAPSODY);
         break;
     case ENEMY_YELLOW_OPERA:
-        SetJiminyFlag(89);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_YELLOW_OPERA);
         break;
     case ENEMY_GREEN_REQUIEM:
-        SetJiminyFlag(90);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_GREEN_REQUIEM);
         break;
     case ENEMY_SEA_NEON:
-        SetJiminyFlag(98);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_SEA_NEON);
         break;
     case ENEMY_WHITE_MUSHROOM:
-        SetJiminyFlag(110);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_WHITE_MUSHROOM);
         break;
     case ENEMY_BLACK_FUNGUS:
-        SetJiminyFlag(111);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_BLACK_FUNGUS);
         break;
     case ENEMY_SOLDIER:
-        SetJiminyFlag(85);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_SOLDIER);
         break;
     case ENEMY_POWERWILD:
-        SetJiminyFlag(91);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_POWERWILD);
         break;
     case ENEMY_BOUNCYWILD:
-        SetJiminyFlag(92);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_BOUNCYWILD);
         break;
     case ENEMY_AIR_SOLDIER:
-        SetJiminyFlag(93);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_AIR_SOLDIER);
         break;
     case ENEMY_BANDIT:
-        SetJiminyFlag(94);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_BANDIT);
         break;
     case ENEMY_BARREL_SPIDER:
-        SetJiminyFlag(96);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_BARREL_SPIDER);
         break;
     case ENEMY_SEARCH_GHOST:
-        SetJiminyFlag(97);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_SEARCH_GHOST);
         break;
     case ENEMY_SCREWDIVER:
-        SetJiminyFlag(99);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_SCREWDIVER);
         break;
     case ENEMY_WIGHT_KNIGHT:
-        SetJiminyFlag(101);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_WIGHT_KNIGHT);
         break;
     case ENEMY_GARGOYLE:
-        SetJiminyFlag(102);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_GARGOYLE);
         break;
     case ENEMY_PIRATE:
-        SetJiminyFlag(103);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_PIRATE);
         break;
     case ENEMY_AIR_PIRATE:
-        SetJiminyFlag(104);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_AIR_PIRATE);
         break;
     case ENEMY_DARKBALL:
-        SetJiminyFlag(105);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_DARKBALL);
         break;
     case ENEMY_WYVERN:
-        SetJiminyFlag(107);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_WYVERN);
         break;
     case ENEMY_WIZARD:
-        SetJiminyFlag(108);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_WIZARD);
         break;
     case ENEMY_NEOSHADOW:
-        SetJiminyFlag(109);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_NEOSHADOW);
         break;
     case ENEMY_LARGE_BODY:
-        SetJiminyFlag(86);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_LARGE_BODY);
         break;
     case ENEMY_FAT_BANDIT:
-        SetJiminyFlag(95);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_FAT_BANDIT);
         break;
     case ENEMY_AQUATANK:
-        SetJiminyFlag(100);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_AQUATANK);
         break;
     case ENEMY_DEFENDER:
-        SetJiminyFlag(106);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_DEFENDER);
         break;
     case ENEMY_TORNADO_STEP:
-        SetJiminyFlag(113);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_TORNADO_STEP);
         break;
     case ENEMY_CRESCENDO:
-        SetJiminyFlag(114);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_CRESCENDO);
         break;
     case ENEMY_CREEPER_PLANT:
-        SetJiminyFlag(112);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_CREEPER_PLANT);
         break;
     case ENEMY_GUARD_ARMOR:
-        SetJiminyFlag(115);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_GUARD_ARMOR);
         break;
     case ENEMY_TRICKMASTER:
-        SetJiminyFlag(117);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_TRICKMASTER);
         break;
     case ENEMY_PARASITE_CAGE:
-        SetJiminyFlag(116);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_PARASITE_CAGE);
         break;
     case ENEMY_DARKSIDE:
-        SetJiminyFlag(118);
+        SetJiminyFlag(JIMINY_RECORD_HEARTLESS_DARKSIDE);
         break;
     }
 }

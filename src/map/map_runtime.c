@@ -29,6 +29,7 @@
 #include "map_room_tables.h"
 #include "text_types.h"
 #include "event_ids.h"
+#include "jiminy_records_index_data.h"
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
@@ -335,101 +336,101 @@ void SetWorldJiminyFlags() {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.world) {
         case WORLD_AGRABAH:
-            SetJiminyFlag(57);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_JAFAR_GENIE);
             break;
         case WORLD_ATLANTICA:
-            SetJiminyFlag(67);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_URSULA);
             break;
         case WORLD_OLYMPUS_COLISEUM:
-            SetJiminyFlag(50);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_HADES);
             break;
         case WORLD_HALLOWEEN_TOWN:
-            SetJiminyFlag(61);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_OOGIE_BOOGIE);
             break;
         case WORLD_NEVER_LAND:
-            SetJiminyFlag(72);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_HOOK);
             break;
         case WORLD_HOLLOW_BASTION:
-            SetJiminyFlag(75);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_MALEFICENT);
             break;
         }
     } else {
         switch (gGameState.world) {
         case WORLD_TRAVERSE_TOWN:
-            SetJiminyFlag(4);
-            SetJiminyFlag(28);
-            SetJiminyFlag(29);
-            SetJiminyFlag(30);
-            SetJiminyFlag(31);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TRAVERSE_TOWN);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_LEON);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_YUFFIE);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_AERITH);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_CID);
             break;
         case WORLD_WONDERLAND:
-            SetJiminyFlag(5);
-            SetJiminyFlag(42);
-            SetJiminyFlag(43);
-            SetJiminyFlag(44);
-            SetJiminyFlag(45);
-            SetJiminyFlag(46);
-            SetJiminyFlag(47);
+            SetJiminyFlag(JIMINY_RECORD_STORY_WONDERLAND);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_ALICE);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_QUEEN_OF_HEARTS);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_WHITE_RABBIT);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_CARD_OF_HEARTS);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_CARD_OF_SPADES);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_CHESHIRE_CAT);
             break;
         case WORLD_OLYMPUS_COLISEUM:
-            SetJiminyFlag(6);
-            SetJiminyFlag(32);
-            SetJiminyFlag(48);
-            SetJiminyFlag(49);
-            SetJiminyFlag(50);
+            SetJiminyFlag(JIMINY_RECORD_STORY_OLYMPUS_COLISEUM);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_CLOUD);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_HERCULES);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_PHILOCTETES);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_HADES);
             break;
         case WORLD_AGRABAH:
-            SetJiminyFlag(7);
-            SetJiminyFlag(51);
-            SetJiminyFlag(52);
+            SetJiminyFlag(JIMINY_RECORD_STORY_AGRABAH);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_ALADDIN);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_GENIE);
             SetJiminyFlag(53);
-            SetJiminyFlag(54);
-            SetJiminyFlag(55);
-            SetJiminyFlag(56);
-            SetJiminyFlag(57);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_JASMINE);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_IAGO);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_JAFAR);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_JAFAR_GENIE);
             break;
         case WORLD_HALLOWEEN_TOWN:
-            SetJiminyFlag(8);
-            SetJiminyFlag(58);
-            SetJiminyFlag(59);
-            SetJiminyFlag(60);
-            SetJiminyFlag(61);
+            SetJiminyFlag(JIMINY_RECORD_STORY_HALLOWEEN_TOWN);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_JACK);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_SALLY);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_DR_FINKELSTEIN);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_OOGIE_BOOGIE);
             break;
         case WORLD_MONSTRO:
-            SetJiminyFlag(9);
-            SetJiminyFlag(62);
-            SetJiminyFlag(63);
+            SetJiminyFlag(JIMINY_RECORD_STORY_MONSTRO);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_PINOCCHIO);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_GEPPETTO);
             break;
         case WORLD_ATLANTICA:
-            SetJiminyFlag(10);
-            SetJiminyFlag(64);
-            SetJiminyFlag(65);
-            SetJiminyFlag(66);
-            SetJiminyFlag(67);
+            SetJiminyFlag(JIMINY_RECORD_STORY_ATLANTICA);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_ARIEL);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_SEBASTIAN);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_FLOUNDER);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_URSULA);
             SetJiminyFlag(68);
             break;
         case WORLD_NEVER_LAND:
-            SetJiminyFlag(11);
-            SetJiminyFlag(69);
-            SetJiminyFlag(70);
-            SetJiminyFlag(71);
-            SetJiminyFlag(72);
+            SetJiminyFlag(JIMINY_RECORD_STORY_NEVER_LAND);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_PETER_PAN);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_TINKER_BELL);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_WENDY);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_HOOK);
             break;
         case WORLD_HOLLOW_BASTION:
-            SetJiminyFlag(12);
-            SetJiminyFlag(73);
-            SetJiminyFlag(74);
-            SetJiminyFlag(75);
-            SetJiminyFlag(76);
+            SetJiminyFlag(JIMINY_RECORD_STORY_HOLLOW_BASTION);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_BEAST);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_BELLE);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_MALEFICENT);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_DRAGON_MALEFICENT);
             break;
         case WORLD_TWILIGHT_TOWN:
-            SetJiminyFlag(14);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TWILIGHT_TOWN);
             break;
         case WORLD_DESTINY_ISLANDS:
-            SetJiminyFlag(15);
-            SetJiminyFlag(33);
-            SetJiminyFlag(34);
-            SetJiminyFlag(35);
+            SetJiminyFlag(JIMINY_RECORD_STORY_DESTINY_ISLANDS);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_TIDUS);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_WAKKA);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_SELPHIE);
             break;
         }
     }
@@ -439,52 +440,52 @@ void SetFloorJiminyFlags() {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.floor) {
         case 0:
-            SetJiminyFlag(1);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_2);
             break;
         case 2:
-            SetJiminyFlag(0x28);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_VEXEN);
             break;
         case 4:
-            SetJiminyFlag(2);
-            SetJiminyFlag(0xEE);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_3);
+            SetJiminyFlag(JIMINY_RECORD_RIKU_CHARACTER_RIKU_REPLICA);
             break;
         case 8:
-            SetJiminyFlag(3);
-            SetJiminyFlag(0xF0);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_4);
+            SetJiminyFlag(JIMINY_RECORD_RIKU_CHARACTER_LEXAEUS);
             break;
         case 9:
-            SetJiminyFlag(0xEB);
-            SetJiminyFlag(0xF1);
+            SetJiminyFlag(JIMINY_RECORD_RIKU_STORY_TALE_5);
+            SetJiminyFlag(JIMINY_RECORD_RIKU_CHARACTER_ZEXION);
             break;
         case 10:
-            SetJiminyFlag(0xEC);
-            SetJiminyFlag(0x24);
-            SetJiminyFlag(0x26);
-            SetJiminyFlag(0x29);
-            SetJiminyFlag(0x27);
-            SetJiminyFlag(0xF2);
+            SetJiminyFlag(JIMINY_RECORD_RIKU_STORY_TALE_6);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_NAMINE);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_AXEL);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_MARLUXIA);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_LARXENE);
+            SetJiminyFlag(JIMINY_RECORD_RIKU_CHARACTER_DIZ);
             break;
         }
     } else {
         switch (gGameState.floor) {
         case 0:
-            SetJiminyFlag(0);
-            SetJiminyFlag(0x26);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_1);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_AXEL);
             break;
         case 5:
-            SetJiminyFlag(1);
-            SetJiminyFlag(0x27);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_2);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_LARXENE);
             break;
         case 8:
-            SetJiminyFlag(2);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_3);
             break;
         case 9:
-            SetJiminyFlag(0x28);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_VEXEN);
             break;
         case 11:
-            SetJiminyFlag(3);
-            SetJiminyFlag(0x24);
-            SetJiminyFlag(0x25);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_4);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_NAMINE);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_RIKU_REPLICA);
             break;
         }
     }

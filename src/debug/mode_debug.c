@@ -29,6 +29,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "debug_text.h"
+#include "jiminy_records_index_data.h"
 #include "mode_movie.h"
 
 static DebugWork* sDebugWork;
@@ -230,13 +231,13 @@ void mode_debug_1() {
         break;
     case 12:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            SetJiminyFlag(0);
-            SetJiminyFlag(17);
-            SetJiminyFlag(18);
-            SetJiminyFlag(19);
-            SetJiminyFlag(20);
-            SetJiminyFlag(21);
-            SetJiminyFlag(22);
+            SetJiminyFlag(JIMINY_RECORD_STORY_TALE_1);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_SORA);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_DONALD_DUCK);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_GOOFY);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_JIMINY_CRICKET);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_RIKU);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_KAIRI);
             ModeRequest(&gModeBackupstat, 0);
         }
 

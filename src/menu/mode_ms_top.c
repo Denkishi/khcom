@@ -37,6 +37,7 @@
 #include "card_msgwin.h"
 #include "sprite_palettes.h"
 #include "card_message_data.h"
+#include "jiminy_records_index_data.h"
 
 enum MsTopState {
     MS_TOP_STATE_BARS_IN,
@@ -532,7 +533,7 @@ void mode_ms_top_1() {
         QueueMsTopIntroMessage();
 
         if (sMsTopIntroIndex > 2 && sMsTopPendingMessage < 0 && !IsMessageWindowOpen()) {
-            SetJiminyFlag(27);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_MOOGLES);
             gGameState.progression.tutorialFlags |= 0x80;
             sMsTopState = MS_TOP_STATE_CHECK_FREE_PACK;
         }

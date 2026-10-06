@@ -48,6 +48,7 @@
 #include "sprite_palettes.h"
 #include "card_message_data.h"
 #include "event_ids.h"
+#include "jiminy_records_index_data.h"
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);
@@ -575,7 +576,7 @@ void UpdatePoohStumpCircle(PoohWork* work) {
             if (!IsPooEventDone(1)) {
                 ExitPoohMode(EVENT_141_100ACREWOOD_LV5);
                 SetPooEventDone(1);
-                SetJiminyFlag(0x52);
+                SetJiminyFlag(JIMINY_RECORD_CHARACTER_TIGGER);
             }
         }
     } else {
@@ -911,7 +912,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
         if (!IsPooEventDone(3)) {
             ExitPoohMode(EVENT_137_100ACREWOOD_LV2);
             SetPooEventDone(3);
-            SetJiminyFlag(79);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_OWL);
         } else {
             ExitPoohMode(EVENT_138_100ACREWOOD_LV2_RETRY);
         }
@@ -2814,7 +2815,7 @@ u16 CheckPooSoraExit(PooPos* pos) {
     if (exitId == 1) {
         OpenPoohModeMessage(0xFFFE);
     } else if (exitId == 2) {
-        SetJiminyFlag(13);
+        SetJiminyFlag(JIMINY_RECORD_STORY_100_ACRE_WOOD);
 
         if (!IsPoohOffScreen()) {
             SetPooFlag(3);
@@ -2825,16 +2826,16 @@ u16 CheckPooSoraExit(PooPos* pos) {
                 } else if (!IsPooFlagSet(0)) {
                     SetPooFlag(0);
                     SetPooFlag(1);
-                    SetJiminyFlag(77);
+                    SetJiminyFlag(JIMINY_RECORD_CHARACTER_WINNIE_THE_POOH);
                     ExitPoohMode(EVENT_143_100ACREWOOD_END_1ST_COMP);
                 } else {
                     SetPooFlag(1);
-                    SetJiminyFlag(77);
+                    SetJiminyFlag(JIMINY_RECORD_CHARACTER_WINNIE_THE_POOH);
                     ExitPoohMode(EVENT_145_100ACREWOOD_END_COMP);
                 }
             } else if (!IsPooFlagSet(0)) {
                 SetPooFlag(0);
-                SetJiminyFlag(77);
+                SetJiminyFlag(JIMINY_RECORD_CHARACTER_WINNIE_THE_POOH);
                 ExitPoohMode(EVENT_144_100ACREWOOD_END_1ST_NO);
             } else {
                 ExitPoohMode(EVENT_146_100ACREWOOD_END_NO);
@@ -4095,7 +4096,7 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
         gPoohRequest = POOH_REQUEST_PIGLET;
         ExitPoohMode(EVENT_136_100ACREWOOD_LV1);
         SetPooEventDone(0);
-        SetJiminyFlag(78);
+        SetJiminyFlag(JIMINY_RECORD_CHARACTER_PIGLET);
     }
 
     switch (work->state) {
@@ -4309,7 +4310,7 @@ u8 task_poo_eeyore_1(PooEeyoreWork* work) {
         if (work->moveTimer == 0) {
             ExitPoohMode(EVENT_140_100ACREWOOD_LV4);
             SetPooEventDone(2);
-            SetJiminyFlag(0x51);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_EEYORE);
             work->animId = 1;
             AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         }
@@ -5071,7 +5072,7 @@ u8 task_poo_roo_1(PooRooWork* work) {
         if (work->srcPos->z >= 0) {
             ExitPoohMode(EVENT_139_100ACREWOOD_LV3);
             SetPooEventDone(5);
-            SetJiminyFlag(80);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_ROO);
         }
 
         break;
@@ -6527,7 +6528,7 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
         if (!IsPooEventDone(4) && work->stackIndex == 13) {
             ExitPoohMode(EVENT_142_100ACREWOOD_LV6);
             SetPooEventDone(4);
-            SetJiminyFlag(83);
+            SetJiminyFlag(JIMINY_RECORD_CHARACTER_RABBIT);
         }
 
         if (AnimIsFinished(&work->anim)) {

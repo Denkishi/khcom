@@ -56,6 +56,7 @@
 #include "default_bg_map.h"
 #include "card_ids.h"
 #include "card_label_data.h"
+#include "jiminy_records_index_data.h"
 
 static TaskPool sModeWorldselectTasks;
 
@@ -1231,82 +1232,82 @@ s32 AddMapCard(u16 cardId) {
 
             switch (gMapCardDefs[cardId].kind) {
             case MAP_CARD_TEEMING_DARKNESS:
-                SetJiminyFlag(209);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_TEEMING_DARKNESS);
                 break;
             case MAP_CARD_TRANQUIL_DARKNESS:
-                SetJiminyFlag(210);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_TRANQUIL_DARKNESS);
                 break;
             case MAP_CARD_GUARDED_TROVE:
-                SetJiminyFlag(211);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_GUARDED_TROVE);
                 break;
             case MAP_CARD_LOOMING_DARKNESS:
-                SetJiminyFlag(212);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_LOOMING_DARKNESS);
                 break;
             case MAP_CARD_SLEEPING_DARKNESS:
-                SetJiminyFlag(213);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_SLEEPING_DARKNESS);
                 break;
             case MAP_CARD_MOMENTS_REPRIEVE:
-                SetJiminyFlag(214);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_MOMENTS_REPRIEVE);
                 break;
             case MAP_CARD_FEEBLE_DARKNESS:
-                SetJiminyFlag(215);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_FEEBLE_DARKNESS);
                 break;
             case MAP_CARD_ALMIGHTY_DARKNESS:
-                SetJiminyFlag(216);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_ALMIGHTY_DARKNESS);
                 break;
             case MAP_CARD_CALM_BOUNTY:
-                SetJiminyFlag(217);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_CALM_BOUNTY);
                 break;
             case MAP_CARD_FALSE_BOUNTY:
-                SetJiminyFlag(218);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_FALSE_BOUNTY);
                 break;
             case MAP_CARD_MOOGLE_ROOM:
-                SetJiminyFlag(219);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_MOOGLE_ROOM);
                 break;
             case MAP_CARD_SORCEROUS_WAKING:
-                SetJiminyFlag(220);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_SORCEROUS_WAKING);
                 break;
             case MAP_CARD_MARTIAL_WAKING:
-                SetJiminyFlag(221);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_MARTIAL_WAKING);
                 break;
             case MAP_CARD_ALCHEMIC_WAKING:
-                SetJiminyFlag(222);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_ALCHEMIC_WAKING);
                 break;
             case MAP_CARD_MEETING_GROUND:
-                SetJiminyFlag(223);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_MEETING_GROUND);
                 break;
             case MAP_CARD_MINGLING_WORLDS:
-                SetJiminyFlag(224);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_MINGLING_WORLDS);
                 break;
             case MAP_CARD_STRONG_INITIATIVE:
-                SetJiminyFlag(225);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_STRONG_INITIATIVE);
                 break;
             case MAP_CARD_LASTING_DAZE:
-                SetJiminyFlag(226);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_LASTING_DAZE);
                 break;
             case MAP_CARD_STAGNANT_SPACE:
-                SetJiminyFlag(227);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_STAGNANT_SPACE);
                 break;
             case MAP_CARD_PREMIUM_ROOM:
-                SetJiminyFlag(228);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_PREMIUM_ROOM);
                 break;
             case MAP_CARD_WHITE_ROOM:
-                SetJiminyFlag(229);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_WHITE_ROOM);
                 break;
             case MAP_CARD_BLACK_ROOM:
-                SetJiminyFlag(230);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_BLACK_ROOM);
                 break;
             case MAP_CARD_KEY_OF_BEGINNINGS:
-                SetJiminyFlag(231);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_OF_BEGINNINGS);
                 break;
             case MAP_CARD_KEY_OF_GUIDANCE:
-                SetJiminyFlag(232);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_OF_GUIDANCE);
                 break;
             case MAP_CARD_KEY_TO_TRUTH:
-                SetJiminyFlag(233);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_TO_TRUTH);
                 break;
             case MAP_CARD_KEY_TO_REWARDS:
-                SetJiminyFlag(234);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_TO_REWARDS);
                 break;
             }
 
@@ -1318,16 +1319,16 @@ s32 AddMapCard(u16 cardId) {
 
             switch (gMapCardDefs[cardId].kind) {
             case MAP_CARD_KEY_OF_BEGINNINGS:
-                SetJiminyFlag(231);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_OF_BEGINNINGS);
                 break;
             case MAP_CARD_KEY_OF_GUIDANCE:
-                SetJiminyFlag(232);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_OF_GUIDANCE);
                 break;
             case MAP_CARD_KEY_TO_TRUTH:
-                SetJiminyFlag(233);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_TO_TRUTH);
                 break;
             case MAP_CARD_KEY_TO_REWARDS:
-                SetJiminyFlag(234);
+                SetJiminyFlag(JIMINY_RECORD_MAP_CARD_KEY_TO_REWARDS);
                 break;
             }
 

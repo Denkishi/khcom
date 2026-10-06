@@ -183,7 +183,7 @@ void SioInit() {
     gSioPlayerCount = 0;
     gSioHandshake = 0;
     gSioHandshakeRequest = SIO_REQUEST_NONE;
-    gSioLinkResult = 0;
+    gSioLinkResult = SIO_LINK_RESULT_NONE;
     sSioAutoStartDone = 0;
     sSioChecksumReady = 0;
     sSioSendNonzero = 0;

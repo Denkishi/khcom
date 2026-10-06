@@ -357,12 +357,12 @@ u8 SioConnectUpdate() {
                 gSioErrorFrameCount++;
 
                 if (gSioErrorFrameCount > 180) {
-                    gSioLinkResult = 1;
+                    gSioLinkResult = SIO_LINK_RESULT_ERROR;
                 }
             }
         }
 
-        if (gSioLinkResult == 1) {
+        if (gSioLinkResult == SIO_LINK_RESULT_ERROR) {
             gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
             gSioErrorStatus = gSioStatus;
             ModeRequest(&gModeSioError, 0);
@@ -415,7 +415,7 @@ u8 SioLinkUpdate() {
                     gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
                     gSioErrorStatus = gSioStatus;
                     ModeRequest(&gModeSioError, 0);
-                    gSioLinkResult = 1;
+                    gSioLinkResult = SIO_LINK_RESULT_ERROR;
                 }
             }
         }
@@ -445,12 +445,12 @@ u8 SioConnectUpdateAuto() {
                 gSioErrorFrameCount++;
 
                 if (gSioErrorFrameCount > 180) {
-                    gSioLinkResult = 1;
+                    gSioLinkResult = SIO_LINK_RESULT_ERROR;
                 }
             }
         }
 
-        if (gSioLinkResult == 1) {
+        if (gSioLinkResult == SIO_LINK_RESULT_ERROR) {
             gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
             gSioErrorStatus = gSioStatus;
             ModeRequest(&gModeSioError, 0);
@@ -681,12 +681,12 @@ s32 SioConnectRecv() {
             gSioConnectRetries++;
 
             if (gSioConnectRetries > 10) {
-                return 1;
+                return SIO_LINK_RESULT_ERROR;
             }
         }
     }
 
-    return 0;
+    return SIO_LINK_RESULT_NONE;
 }
 
 s32 SioConnectSendAuto() {
@@ -723,12 +723,12 @@ s32 SioConnectRecvAuto() {
             gSioConnectRetries++;
 
             if (gSioConnectRetries > 10) {
-                return 1;
+                return SIO_LINK_RESULT_ERROR;
             }
         }
     }
 
-    return 0;
+    return SIO_LINK_RESULT_NONE;
 }
 
 void SioCommandReset() {
@@ -780,7 +780,7 @@ s32 SioCommandRecv() {
         gSioCommandRecv[3][1] = gSioRecvFrame[3][1];
     }
 
-    return 0;
+    return SIO_LINK_RESULT_NONE;
 }
 
 void SioSetLinkCallbacks(s32 (*send)(), s32 (*recv)()) {
@@ -793,7 +793,7 @@ void SioSetLinkCallbacks(s32 (*send)(), s32 (*recv)()) {
 
     gSioConnectRetries = 0;
     gSioErrorStatus = 0;
-    gSioLinkResult = 0;
+    gSioLinkResult = SIO_LINK_RESULT_NONE;
     sendCallback = &gSioLinkSendCallback;
     recvCallback = &gSioLinkRecvCallback;
     relayKeysA = &gSioRelayKeysA;
@@ -858,7 +858,7 @@ s32 SioKeySyncRecv() {
         }
     }
 
-    return 0;
+    return SIO_LINK_RESULT_NONE;
 }
 
 void SioPrepareDeckExchange() {
@@ -929,7 +929,7 @@ s32 SioExchangeRecv() {
     } else if (gSioPlayerId == 0) {
         if (gSioRecvFrame[1][1] != 0xDDDD && gSioRecvFrame[1][1] > 3) {
             if (gSioRecvFrame[1][1] > gSioExchangeSeqEnd) {
-                return 2;
+                return SIO_LINK_RESULT_EXCHANGE_DONE;
             }
 
             n = gSioRecvFrame[1][1] - 3;
@@ -939,7 +939,7 @@ s32 SioExchangeRecv() {
     } else {
         if (gSioRecvFrame[1][0] != 0xDDDD && gSioRecvFrame[1][0] > 3) {
             if (gSioRecvFrame[1][0] > gSioExchangeSeqEnd) {
-                return 2;
+                return SIO_LINK_RESULT_EXCHANGE_DONE;
             }
 
             n = gSioRecvFrame[1][0] - 3;
@@ -948,7 +948,7 @@ s32 SioExchangeRecv() {
         }
     }
 
-    return 0;
+    return SIO_LINK_RESULT_NONE;
 }
 
 #ifdef VERSION_EU
@@ -1043,7 +1043,7 @@ s32 SioSyncRecv() {
         }
     }
 
-    return 0;
+    return SIO_LINK_RESULT_NONE;
 }
 
 #ifdef VERSION_EU
@@ -1110,7 +1110,7 @@ s32 SioRandomPartnerRecv() {
 
     SioKeyStateUpdateA(held);
     SioKeyStateUpdateB(keys);
-    return 0;
+    return SIO_LINK_RESULT_NONE;
 }
 #endif
 

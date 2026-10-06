@@ -27,6 +27,12 @@
 #define SIO_STAT_ERROR_TIMEOUT_SHIFT 20
 #define SIO_STAT_ERROR_INVALID_ID 0x400000
 
+enum SioLinkResult {
+    SIO_LINK_RESULT_NONE,
+    SIO_LINK_RESULT_ERROR,
+    SIO_LINK_RESULT_EXCHANGE_DONE
+};
+
 void SioReset();
 u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]);
 u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]);

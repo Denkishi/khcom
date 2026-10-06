@@ -574,7 +574,7 @@ void mode_sio_btl_connect_1() {
 
         break;
     case SIO_BTL_CONNECT_STATE_EXCHANGE:
-        if (gSioLinkResult == 2) {
+        if (gSioLinkResult == SIO_LINK_RESULT_EXCHANGE_DONE) {
             sSioBtlConnectWork->timer = 0;
             SioInitWorldList();
             sSioBtlConnectWork->state++;
@@ -1701,7 +1701,7 @@ void SioBtlOptionStartDeckExchange() {
 void SioBtlOptionWaitDeckExchange() {
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
-        if (gSioLinkResult == 2) {
+        if (gSioLinkResult == SIO_LINK_RESULT_EXCHANGE_DONE) {
             sSioBtlOptionWork->timer = 0;
             sSioBtlOptionWork->state++;
         }
@@ -1720,7 +1720,7 @@ void SioBtlOptionWaitDeckExchange() {
         }
     }
 #else
-    if (gSioLinkResult == 2) {
+    if (gSioLinkResult == SIO_LINK_RESULT_EXCHANGE_DONE) {
         sSioBtlOptionWork->timer = 0;
         sSioBtlOptionWork->state++;
     }
@@ -2559,7 +2559,7 @@ void mode_sio_btl_cardget_1() {
 #ifdef VERSION_EU
         if (!gSioDebugMode) {
 #endif
-        if (gSioLinkResult == 2) {
+        if (gSioLinkResult == SIO_LINK_RESULT_EXCHANGE_DONE) {
             sSioBtlCardgetWork->timer = 0;
             sSioBtlCardgetWork->state++;
         }

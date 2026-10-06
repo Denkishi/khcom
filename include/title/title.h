@@ -54,7 +54,7 @@ void task_title_obj_0(TitleObjWork* work);
 u8 task_title_obj_1(TitleObjWork* work);
 void task_title_obj_2(TitleObjWork* work);
 void task_title_obj_3(TitleObjWork* work);
-void task_title_menu_0(TitleMenuWork* work, s16* arg);
+void task_title_menu_0(TitleMenuWork* work, s16* choice);
 s16 TitleMenuChoiceRow(s16 choice);
 void TitleMenuMoveBasic(s16* choice);
 void TitleMenuMoveOrdered(s16* choice, s16 count);

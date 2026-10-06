@@ -377,22 +377,22 @@ enum TitleMenuLayout {
     TITLE_MENU_LAYOUT_NEW_GAME
 };
 
-void task_title_menu_0(TitleMenuWork* work, s16* arg) {
+void task_title_menu_0(TitleMenuWork* work, s16* choice) {
     s32 t;
     u8* pal;
     u8* pal2;
 
     t = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
-    work->choice = arg;
+    work->choice = choice;
 
-    if (arg[0] == TITLE_MENU_NEW_GAME) {
+    if (choice[0] == TITLE_MENU_NEW_GAME) {
         if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
             work->layout = TITLE_MENU_LAYOUT_NEW_GAME;
-            arg[0] = TITLE_MENU_NEW_GAME_SORA;
+            choice[0] = TITLE_MENU_NEW_GAME_SORA;
         } else {
             work->layout = TITLE_MENU_LAYOUT_SINGLE_NEW_GAME;
         }
-    } else if (arg[0] == TITLE_MENU_RESUME) {
+    } else if (choice[0] == TITLE_MENU_RESUME) {
         work->layout = TITLE_MENU_LAYOUT_SINGLE_RESUME;
     } else if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
         work->layout = TITLE_MENU_LAYOUT_FULL;

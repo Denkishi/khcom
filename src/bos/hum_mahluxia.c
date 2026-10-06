@@ -68,7 +68,7 @@ TaskDesc gTaskDescHumMahluxia = {
     sizeof(MahluxiaWork),
 };
 
-void MahluxiaJumpOffset(MahluxiaWork* work, s16 a) {
+void MahluxiaJumpOffset(MahluxiaWork* work, s16 distance) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
     s32 v;
@@ -76,9 +76,9 @@ void MahluxiaJumpOffset(MahluxiaWork* work, s16 a) {
     GetEnemyTargetPosition(act, &v, NULL, NULL);
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        w->targetX = act->x - (a << 8);
+        w->targetX = act->x - (distance << 8);
     } else {
-        w->targetX = act->x + (a << 8);
+        w->targetX = act->x + (distance << 8);
     }
 
     w->state = 20;
@@ -92,9 +92,9 @@ void MahluxiaJumpOffset(MahluxiaWork* work, s16 a) {
     }
 }
 
-void MahluxiaSwingTo(MahluxiaWork* work, s32 a, u16 b) {
-    work->base.targetX = a;
-    work->swingAmplitude = b;
+void MahluxiaSwingTo(MahluxiaWork* work, s32 x, u16 amplitude) {
+    work->base.targetX = x;
+    work->swingAmplitude = amplitude;
     work->base.state = 19;
     work->base.stateTimer = 0;
 }
@@ -144,7 +144,7 @@ void MahluxiaSaveAfterimage(MahluxiaWork* work, RikuSpawn* dst) {
     dst->scale = gBtlWork->scale;
 }
 
-void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* p) {
+void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* spawn) {
     BtlObj* act;
     HumSub* sub;
     void* gfx;
@@ -157,7 +157,7 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* p) {
     u16 pri;
 
     sub = work->base.sub;
-    gfx = AnimGetGfx(&p->anim);
+    gfx = AnimGetGfx(&spawn->anim);
     act = &work->base.actor;
 
     if (!BgFxIsActive()) {
@@ -168,11 +168,11 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* p) {
         attr = GetBattleSpritePriorityFlags(act->y);
     }
 
-    if (p->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
-        sy = p->scale;
+    if (spawn->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
+        sy = spawn->scale;
         sx = sy;
-    } else if (p->scale == 0x100) {
-        sy = p->scale;
+    } else if (spawn->scale == 0x100) {
+        sy = spawn->scale;
         sx = sy;
         attr |= 1;
     } else {
@@ -189,18 +189,18 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* p) {
     }
 
     pri = 0xFFF0;
-    WorldToScreen(&x, &y, p->x, p->y, p->z);
-    SetObjTileSource(sub->tiles, p->tileSrc);
+    WorldToScreen(&x, &y, spawn->x, spawn->y, spawn->z);
+    SetObjTileSource(sub->tiles, spawn->tileSrc);
     DrawSprite(x, y, gfx, sub->tiles, work->base.palette, affine, attr, pri);
 }
 
-void MahluxiaHover(HumWork* work, s32 a) {
+void MahluxiaHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
     s32 t;
 
-    if (a != 0) {
+    if (hoverZ != 0) {
         act = &work->actor;
-        t = a + gSineTable[gFrameCounter * 4 % 256] * 3;
+        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
         work->vz = 0;
         act->z += (t - act->z) >> 4;
     }

@@ -69,31 +69,31 @@ static TaskDesc sTaskDescHumLaxeneKnf = {
     sizeof(LaxeneKnfWork),
 };
 
-void LaxeneHover(HumWork* work, s32 a) {
+void LaxeneHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
     s32 t;
 
-    if (a != 0) {
+    if (hoverZ != 0) {
         act = &work->actor;
-        t = a + gSineTable[gFrameCounter * 4 % 256] * 6;
+        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 6;
         work->vz = 0;
         act->z += (t - act->z) >> 3;
     }
 }
 
-void CreateHumLaxeneKnfTask(LaxeneWork* work, s16 a, s16 b) {
+void CreateHumLaxeneKnfTask(LaxeneWork* work, s16 dx, s16 dz) {
     BtlObj* act = &work->base.actor;
     VixenNdlArgs args;
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        args.x = act->x + (a << 8);
+        args.x = act->x + (dx << 8);
         args.facingLeft = 1;
     } else {
-        args.x = act->x - (a << 8);
+        args.x = act->x - (dx << 8);
         args.facingLeft = 0;
     }
 
-    args.z = act->z + (b << 8);
+    args.z = act->z + (dz << 8);
     args.y = act->y;
     TaskCreate(&work->tasks, &sTaskDescHumLaxeneKnf, &args);
 }

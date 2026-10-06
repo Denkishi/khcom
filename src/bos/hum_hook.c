@@ -90,25 +90,25 @@ static TaskDesc sTaskDescHumHookBomb = {
     sizeof(HookBombWork),
 };
 
-void HookJumpOffset(CloudWork* work, s16 a, s32 b) {
+void HookJumpOffset(CloudWork* work, s16 distance, s32 speed) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        work->base.targetX = act->x - (a << 8);
+        work->base.targetX = act->x - (distance << 8);
     } else {
-        work->base.targetX = act->x + (a << 8);
+        work->base.targetX = act->x + (distance << 8);
     }
 
     w->targetY = act->y;
     w->state = 0x16;
     w->stateTimer = 0;
-    work->speed = -b;
+    work->speed = -speed;
 }
 
-void HookJumpTo(CloudWork* work, s32 a, s32 b) {
-    work->base.targetX = a;
-    work->base.targetY = b;
+void HookJumpTo(CloudWork* work, s32 x, s32 y) {
+    work->base.targetX = x;
+    work->base.targetY = y;
     work->base.state = 0x16;
     work->base.stateTimer = 0;
     work->speed = -0x680;

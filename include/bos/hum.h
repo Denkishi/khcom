@@ -443,15 +443,15 @@ typedef struct RobeWork {
 
 extern TaskDesc gTaskDescHumMahluxiaFlw;
 
-void CloudJumpOffset(CloudWork* work, s16 a, s32 b);
-void CloudJumpTo(CloudWork* work, s32 a, s32 b);
-void CloudLeapTo(CloudWork* work, s32 a, s32 b);
+void CloudJumpOffset(CloudWork* work, s16 distance, s32 speed);
+void CloudJumpTo(CloudWork* work, s32 x, s32 y);
+void CloudLeapTo(CloudWork* work, s32 x, s32 y);
 s32 CloudTryJumpAway(CloudWork* work);
 void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub);
-void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p);
+void RikuDrawAfterimage(RikuWork* work, RikuSpawn* spawn);
 void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst);
 void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 facingLeft, s32 w);
-void LexceusHover(HumWork* work, s32 a);
+void LexceusHover(HumWork* work, s32 hoverZ);
 s32 __modsi3(s32 a, s32 b);
 u16 GetJiminyTextLength(const u16* p);
 void JiminyLoadHiddenRow(s32 a, const u16* const* b);

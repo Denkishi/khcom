@@ -93,26 +93,26 @@ static TaskDesc sTaskDescHumAxcelPtc = {
     sizeof(AxcelPtcWork),
 };
 
-void AxcelMoveTo(HumWork* work, s32 a, s32 b) {
-    work->targetX = a;
-    work->targetY = b;
+void AxcelMoveTo(HumWork* work, s32 x, s32 y) {
+    work->targetX = x;
+    work->targetY = y;
     work->state = 19;
     work->stateTimer = 0;
 }
 
-void AxcelScaleTo(AxcelWork* work, s32 a, s32 b, u16 c) {
-    work->scaleSteps = c;
-    work->targetScaleX = a;
-    work->targetScaleY = b;
+void AxcelScaleTo(AxcelWork* work, s32 scaleX, s32 scaleY, u16 steps) {
+    work->scaleSteps = steps;
+    work->targetScaleX = scaleX;
+    work->targetScaleY = scaleY;
 }
 
-void AxcelHover(HumWork* work, s32 a) {
+void AxcelHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
     s32 t;
 
-    if (a != 0) {
+    if (hoverZ != 0) {
         act = &work->actor;
-        t = a + gSineTable[gFrameCounter * 4 % 256] * 3;
+        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
         work->vz = 0;
         act->z += (t - act->z) >> 4;
     }

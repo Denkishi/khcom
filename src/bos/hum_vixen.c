@@ -176,13 +176,13 @@ void VixenCreateIceTasks(VixenWork* work) {
     }
 }
 
-void VixenHover(HumWork* work, s32 a) {
+void VixenHover(HumWork* work, s32 hoverZ) {
     BtlObj* act;
     s32 t;
 
-    if (a != 0) {
+    if (hoverZ != 0) {
         act = &work->actor;
-        t = a + gSineTable[gFrameCounter * 4 % 256] * 3;
+        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 3;
         work->vz = 0;
         act->z += (t - act->z) >> 4;
     }

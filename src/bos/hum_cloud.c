@@ -64,35 +64,35 @@ TaskDesc gTaskDescHumCloud = {
     sizeof(CloudWork),
 };
 
-void CloudJumpOffset(CloudWork* work, s16 a, s32 b) {
+void CloudJumpOffset(CloudWork* work, s16 distance, s32 speed) {
     CloudWork* w = work;
     BtlObj* obj = &work->base.actor;
 
     if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        work->base.targetX = obj->x - (a << 8);
+        work->base.targetX = obj->x - (distance << 8);
     } else {
-        work->base.targetX = obj->x + (a << 8);
+        work->base.targetX = obj->x + (distance << 8);
     }
 
     w->base.targetY = obj->y;
     w->base.state = 0x19;
     w->base.stateTimer = 0;
-    work->speed = -b;
+    work->speed = -speed;
     work->state = 0;
 }
 
-void CloudJumpTo(CloudWork* work, s32 a, s32 b) {
-    work->base.targetX = a;
-    work->base.targetY = b;
+void CloudJumpTo(CloudWork* work, s32 x, s32 y) {
+    work->base.targetX = x;
+    work->base.targetY = y;
     work->base.state = 0x19;
     work->base.stateTimer = 0;
     work->speed = -0x500;
     work->nextState = 0;
 }
 
-void CloudLeapTo(CloudWork* work, s32 a, s32 b) {
-    work->base.targetX = a;
-    work->base.targetY = b;
+void CloudLeapTo(CloudWork* work, s32 x, s32 y) {
+    work->base.targetX = x;
+    work->base.targetY = y;
     work->base.state = 0x21;
     work->base.stateTimer = 0;
 }

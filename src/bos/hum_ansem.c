@@ -69,12 +69,12 @@ TaskDesc gTaskDescHumAnsem = {
     sizeof(AnsemWork),
 };
 
-void AnsemHover(HumWork* work, s32 a) {
+void AnsemHover(HumWork* work, s32 hoverZ) {
     BtlObj* act = &work->actor;
     s32 t;
 
-    if (a != 0) {
-        t = a + gSineTable[gFrameCounter * 4 % 256] * 8;
+    if (hoverZ != 0) {
+        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 8;
         work->vz = 0;
         act->z += (t - act->z) >> 4;
     }

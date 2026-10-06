@@ -73,12 +73,12 @@ TaskDesc gTaskDescHumHades = {
     sizeof(HadesWork),
 };
 
-void HadesHover(HumWork* work, s32 a) {
+void HadesHover(HumWork* work, s32 hoverZ) {
     BtlObj* act = &work->actor;
     s32 t;
 
-    if (a != 0) {
-        t = a + gSineTable[gFrameCounter * 4 % 256] * 4;
+    if (hoverZ != 0) {
+        t = hoverZ + gSineTable[gFrameCounter * 4 % 256] * 4;
         work->vz = 0;
         act->z += (t - act->z) >> 4;
     }

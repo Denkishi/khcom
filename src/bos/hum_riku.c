@@ -71,26 +71,26 @@ TaskDesc gTaskDescHumRiku = {
     sizeof(RikuWork),
 };
 
-void RikuJumpOffset(RikuWork* work, s16 a, s32 b) {
+void RikuJumpOffset(RikuWork* work, s16 distance, s32 speed) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        work->base.targetX = act->x - (a << 8);
+        work->base.targetX = act->x - (distance << 8);
     } else {
-        work->base.targetX = act->x + (a << 8);
+        work->base.targetX = act->x + (distance << 8);
     }
 
     w->targetY = act->y;
     w->state = 19;
     w->stateTimer = 0;
-    work->unk_1C4 = -b;
+    work->unk_1C4 = -speed;
     work->state = 0;
 }
 
-void RikuJumpTo(RikuWork* work, s32 a, s32 b) {
-    work->base.targetX = a;
-    work->base.targetY = b;
+void RikuJumpTo(RikuWork* work, s32 x, s32 y) {
+    work->base.targetX = x;
+    work->base.targetY = y;
     work->base.state = 19;
     work->base.stateTimer = 0;
     work->unk_1C4 = -0x500;
@@ -145,7 +145,7 @@ void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst) {
     dst->scale = gBtlWork->scale;
 }
 
-void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
+void RikuDrawAfterimage(RikuWork* work, RikuSpawn* spawn) {
     BtlObj* act;
     HumSub* sub;
     void* gfx;
@@ -158,7 +158,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
     u16 pri;
 
     sub = work->base.sub;
-    gfx = AnimGetGfx(&p->anim);
+    gfx = AnimGetGfx(&spawn->anim);
     act = &work->base.actor;
 
     if (!BgFxIsActive()) {
@@ -169,11 +169,11 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
         attr = GetBattleSpritePriorityFlags(act->y);
     }
 
-    if (p->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
-        sy = p->scale;
+    if (spawn->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
+        sy = spawn->scale;
         sx = sy;
-    } else if (p->scale == 0x100) {
-        sy = p->scale;
+    } else if (spawn->scale == 0x100) {
+        sy = spawn->scale;
         sx = sy;
         attr |= 1;
     } else {
@@ -190,8 +190,8 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
     }
 
     pri = 0xFFF0;
-    WorldToScreen(&x, &y, p->x, p->y, p->z);
-    SetObjTileSource(sub->tiles, p->tileSrc);
+    WorldToScreen(&x, &y, spawn->x, spawn->y, spawn->z);
+    SetObjTileSource(sub->tiles, spawn->tileSrc);
     DrawSprite(x, y, gfx, sub->tiles, work->base.palette, affine, attr, pri);
 }
 

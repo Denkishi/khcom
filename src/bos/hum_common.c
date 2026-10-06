@@ -888,7 +888,7 @@ u8 HumMoveToward(HumWork* work, s32 x, s32 y, s32 spd) {
     return 1;
 }
 
-u8 HumIsTargetInReach(HumWork* work, s16 a, u16 b, u16 r) {
+u8 HumIsTargetInReach(HumWork* work, s16 offset, u16 width, u16 r) {
     s32 v0;
     s32 v1;
     BtlObj* c = &work->actor;
@@ -906,8 +906,8 @@ u8 HumIsTargetInReach(HumWork* work, s16 a, u16 b, u16 r) {
     }
 
     if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        t = c->x - (a << 8);
-        bb = b << 8;
+        t = c->x - (offset << 8);
+        bb = width << 8;
 
         if (t - bb > v0) {
             return 0;
@@ -917,8 +917,8 @@ u8 HumIsTargetInReach(HumWork* work, s16 a, u16 b, u16 r) {
             return 0;
         }
     } else {
-        t = c->x + (a << 8);
-        bb = b << 8;
+        t = c->x + (offset << 8);
+        bb = width << 8;
 
         if (t + bb < v0) {
             return 0;
@@ -932,19 +932,19 @@ u8 HumIsTargetInReach(HumWork* work, s16 a, u16 b, u16 r) {
     return 1;
 }
 
-u8 HumIsNearAreaEdge(HumWork* work, u16 b) {
-    if (work->actor.x < (gBtlWork->xMin + b) << 8) {
+u8 HumIsNearAreaEdge(HumWork* work, u16 margin) {
+    if (work->actor.x < (gBtlWork->xMin + margin) << 8) {
         return 1;
     }
 
-    if (work->actor.x > (gBtlWork->xMax - b) << 8) {
+    if (work->actor.x > (gBtlWork->xMax - margin) << 8) {
         return 1;
     }
 
     return 0;
 }
 
-u8 HumIsInPlayerReach(HumWork* work, s16 a, u16 b, u16 r) {
+u8 HumIsInPlayerReach(HumWork* work, s16 offset, u16 width, u16 r) {
     s32 v0;
     s32 v1;
     BtlObj* c = &work->actor;
@@ -963,8 +963,8 @@ u8 HumIsInPlayerReach(HumWork* work, s16 a, u16 b, u16 r) {
     }
 
     if (o->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        t = v0 - (a << 8);
-        bb = b << 8;
+        t = v0 - (offset << 8);
+        bb = width << 8;
 
         if (t - bb > c->x) {
             return 0;
@@ -974,8 +974,8 @@ u8 HumIsInPlayerReach(HumWork* work, s16 a, u16 b, u16 r) {
             return 0;
         }
     } else {
-        t = v0 + (a << 8);
-        bb = b << 8;
+        t = v0 + (offset << 8);
+        bb = width << 8;
 
         if (t + bb < c->x) {
             return 0;

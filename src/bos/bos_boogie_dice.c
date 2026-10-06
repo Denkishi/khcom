@@ -590,24 +590,24 @@ void RollBoogieDice(BoogieDiceWork* work) {
 
     switch (GetRandom() % 4) {
     case 0:
-        face = 5;
+        face = BOS_BOOGIE_DICE_FACE_HEAL;
         break;
     case 1:
-        face = 3;
+        face = BOS_BOOGIE_DICE_FACE_KNIVES;
         break;
     case 2:
-        face = 0;
+        face = BOS_BOOGIE_DICE_FACE_DISK;
         break;
     default:
         switch (GetRandom() % 3) {
         case 0:
-            face = 1;
+            face = BOS_BOOGIE_DICE_FACE_GARGOYLES;
             break;
         case 1:
-            face = 2;
+            face = BOS_BOOGIE_DICE_FACE_WIGHT_KNIGHTS;
             break;
         default:
-            face = 4;
+            face = BOS_BOOGIE_DICE_FACE_SEARCH_GHOSTS;
             break;
         }
 

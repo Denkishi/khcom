@@ -69,23 +69,23 @@ void BosBoogieApplyDiceFace(BoogieWork* work) {
         gBosBoogieAttackHit = FALSE;
         gBosBoogieTaskKnockedDown = FALSE;
 
-        if (gBosBoogieDiceFace == 0) {
+        if (gBosBoogieDiceFace == BOS_BOOGIE_DICE_FACE_DISK) {
             work->state = BOS_BOOGIE_STATE_WAIT_TASK;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieDisk, &work->actor);
-        } else if (gBosBoogieDiceFace == 1) {
+        } else if (gBosBoogieDiceFace == BOS_BOOGIE_DICE_FACE_GARGOYLES) {
             work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
             SpawnEnemy(ENEMY_GARGOYLE, 0xA000, 0x24000, 0);
             SpawnEnemy(ENEMY_GARGOYLE, 0x15000, 0x24000, 0);
-        } else if (gBosBoogieDiceFace == 2) {
+        } else if (gBosBoogieDiceFace == BOS_BOOGIE_DICE_FACE_WIGHT_KNIGHTS) {
             work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
             SpawnEnemy(ENEMY_WIGHT_KNIGHT, 0xA000, 0x24000, 0);
             SpawnEnemy(ENEMY_WIGHT_KNIGHT, 0x15000, 0x24000, 0);
-        } else if (gBosBoogieDiceFace == 3) {
+        } else if (gBosBoogieDiceFace == BOS_BOOGIE_DICE_FACE_KNIVES) {
             work->state = BOS_BOOGIE_STATE_WAIT_TASK;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnifereader, NULL);
-        } else if (gBosBoogieDiceFace == 4) {
+        } else if (gBosBoogieDiceFace == BOS_BOOGIE_DICE_FACE_SEARCH_GHOSTS) {
             work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
             SpawnEnemy(ENEMY_SEARCH_GHOST, 0xA000, 0x24000, 0);

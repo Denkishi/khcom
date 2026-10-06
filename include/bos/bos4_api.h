@@ -34,6 +34,15 @@ void LoadPooState(const void* state);
 struct BtlObj;
 
 extern u16 gBosBoogieSakuOpenTime;
+enum BosBoogieDiceFace {
+    BOS_BOOGIE_DICE_FACE_DISK,
+    BOS_BOOGIE_DICE_FACE_GARGOYLES,
+    BOS_BOOGIE_DICE_FACE_WIGHT_KNIGHTS,
+    BOS_BOOGIE_DICE_FACE_KNIVES,
+    BOS_BOOGIE_DICE_FACE_SEARCH_GHOSTS,
+    BOS_BOOGIE_DICE_FACE_HEAL
+};
+
 extern u8 gBosBoogieDiceFace;
 extern struct BtlObj* gBosBoogieActor;
 extern u16 gBosBoogieDiceBreakCount;

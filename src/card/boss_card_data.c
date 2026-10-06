@@ -174,51 +174,51 @@ static const s32 sOogieBoogieCardIds[10] = {
     585, 586, 587, 588, 589, 590, 591, 592, 593, 594,
 };
 
-static const s32 sMarluxiaCardIds[10] = {
+static const s32 sMarluxia2CardIds[10] = {
     645, 646, 647, 648, 649, 650, 651, 652, 653, 654,
 };
 
-static const s32 sEnemyKind41CardIds[10] = {
+static const s32 sLeonCardIds[10] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603, 604,
 };
 
-static const s32 sEnemyKind42CardIds[9] = {
+static const s32 sHookCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind43CardIds[9] = {
+static const s32 sCloudCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind44CardIds[9] = {
+static const s32 sHadesCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind45CardIds[9] = {
+static const s32 sRikuReplicaCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind48CardIds[9] = {
+static const s32 sAxelCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind49CardIds[9] = {
+static const s32 sLarxeneCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind50CardIds[9] = {
+static const s32 sVexenCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind51CardIds[9] = {
+static const s32 sMarluxiaCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind52CardIds[9] = {
+static const s32 sAnsemCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sEnemyKind53CardIds[9] = {
+static const s32 sLexaeusCardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
@@ -263,20 +263,20 @@ const s32* gEnemyCardIds[54] = {
     sDragonMaleficentCardIds,
     sDarksideCardIds,
     sOogieBoogieCardIds,
-    sMarluxiaCardIds,
-    sEnemyKind41CardIds,
-    sEnemyKind42CardIds,
-    sEnemyKind43CardIds,
-    sEnemyKind44CardIds,
-    sEnemyKind45CardIds,
+    sMarluxia2CardIds,
+    sLeonCardIds,
+    sHookCardIds,
+    sCloudCardIds,
+    sHadesCardIds,
+    sRikuReplicaCardIds,
     sCardSoldierSpadeCardIds,
     sCardSoldierHeartCardIds,
-    sEnemyKind48CardIds,
-    sEnemyKind49CardIds,
-    sEnemyKind50CardIds,
-    sEnemyKind51CardIds,
-    sEnemyKind52CardIds,
-    sEnemyKind53CardIds,
+    sAxelCardIds,
+    sLarxeneCardIds,
+    sVexenCardIds,
+    sMarluxiaCardIds,
+    sAnsemCardIds,
+    sLexaeusCardIds,
 };
 
 const u8 gEnemyCardCounts[54] = {

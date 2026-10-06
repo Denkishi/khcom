@@ -118,7 +118,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette
     u16 base;
 
     if (palette == NULL || sprite == NULL) {
-        return 0;
+        return FALSE;
     }
 
     work = gSpriteWork;
@@ -152,14 +152,14 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette
     sortWork = gSpriteWork;
     sortWork->sortPtrs[sortWork->entryCount] = &sortWork->entries[sortWork->entryCount];
     sortWork->entryCount += 1;
-    return 1;
+    return TRUE;
 }
 
 u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority) {
     SpriteWork* work;
 
     if (palette == NULL || ((ObjTiles*)obj)->src == NULL) {
-        return 0;
+        return FALSE;
     }
 
     {
@@ -176,7 +176,7 @@ u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* palette, ObjAffine* affin
         work->entryCount += 1;
     }
 
-    return 1;
+    return TRUE;
 }
 
 enum ObjTilesType {
@@ -197,7 +197,7 @@ u8 DrawSprite(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* a
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void DrawSpriteUnsorted(s16 x, s16 y, void* sprite, void* tiles, void* palette, u16 flags) {
@@ -285,7 +285,7 @@ ObjTiles* LoadObjTiles(const void* src, u16 size) {
     node->src = src;
     node->refCount = 0;
     node->sprite = NULL;
-    node->allocated = 0;
+    node->allocated = FALSE;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
 
@@ -403,7 +403,7 @@ ObjTiles* AllocObjTiles(u16 size, const void* owner) {
     node->src = owner;
     node->refCount = 0;
     node->sprite = NULL;
-    node->allocated = 1;
+    node->allocated = TRUE;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
 
@@ -971,22 +971,22 @@ u8 IsRectOutsideScreen(s16 x, s16 y, s32 topExtent, s32 bottomExtent, s32 leftEx
     s16 right = rightExtent;
 
     if (x + right < 0) {
-        return 1;
+        return TRUE;
     }
 
     if (x - (s16)left > DISPLAY_WIDTH) {
-        return 1;
+        return TRUE;
     }
 
     if (y + (s16)bottom < 0) {
-        return 1;
+        return TRUE;
     }
 
     if (y - (s16)top > DISPLAY_HEIGHT) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
@@ -1089,11 +1089,11 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
     }
 
         if (x <= DISPLAY_WIDTH - 1 && x > -w && y <= DISPLAY_HEIGHT - 1 && y > -h) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void InitObjTilesAtSlot(ObjTiles* tiles, u16 slot, void* src, u16 size) {
@@ -1103,7 +1103,7 @@ void InitObjTilesAtSlot(ObjTiles* tiles, u16 slot, void* src, u16 size) {
         tiles->src = src;
         tiles->refCount = 0;
         tiles->sprite = NULL;
-        tiles->allocated = 0;
+        tiles->allocated = FALSE;
         tiles->index = slot;
         RequestDma3Copy(src, (void*)(OBJ_VRAM0 + tiles->index * TILE_SIZE_4BPP), size);
     }
@@ -1116,7 +1116,7 @@ void InitDynamicObjTilesAtSlot(ObjTiles* tiles, u16 slot, u16 size, void* src) {
         tiles->src = src;
         tiles->refCount = 0;
         tiles->sprite = NULL;
-        tiles->allocated = 1;
+        tiles->allocated = TRUE;
         tiles->index = slot;
     }
 }
@@ -1169,11 +1169,11 @@ u8 UpdateSpriteFrameTiles(ObjTiles* tiles, u16* sprite, void* src) {
                 } while (j != 0);
             }
 
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 ObjPalette* AllocObjPalette(u16 size) {
@@ -1254,13 +1254,13 @@ u8 CanAllocObjTiles(u16 count) {
     cur = ListPoolFirst(&gSpriteWork->tilePool);
 
     if (cur == NULL) {
-        return 1;
+        return TRUE;
     }
 
     pos = gSpriteWork->tilePool.rangeStart;
 
     if (count <= (s16)(cur->index - pos)) {
-        return 1;
+        return TRUE;
     }
 
     for (;;) {
@@ -1282,13 +1282,13 @@ u8 CanAllocObjTiles(u16 count) {
         }
 
         if (count <= gap) {
-            return 1;
+            return TRUE;
         }
 
         cur = next;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 CanAllocObjPalette(u16 count) {
@@ -1300,13 +1300,13 @@ u8 CanAllocObjPalette(u16 count) {
     cur = ListPoolFirst(&gSpriteWork->palettePool);
 
     if (cur == NULL) {
-        return 1;
+        return TRUE;
     }
 
     pos = gSpriteWork->palettePool.rangeStart;
 
     if (count <= (s16)(cur->index - pos)) {
-        return 1;
+        return TRUE;
     }
 
     for (;;) {
@@ -1328,13 +1328,13 @@ u8 CanAllocObjPalette(u16 count) {
         }
 
         if (count <= gap) {
-            return 1;
+            return TRUE;
         }
 
         cur = next;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void GetObjSize(u16 attr0, u16 attr1, u16* w, u16* h) {
@@ -1646,13 +1646,13 @@ u8 RequestDma3Copy(const void* src, void* dst, u16 size) {
     Dma3Queue* queue;
 
     if (size == 0) {
-        return 0;
+        return FALSE;
     }
 
     queue = gDma3Requests;
 
     if (queue->requestCount > 255) {
-        return 0;
+        return FALSE;
     }
 
     if ((gSystemFlags & SYSTEM_FLAG_DMA3_IMMEDIATE) == 0) {
@@ -1664,7 +1664,7 @@ u8 RequestDma3Copy(const void* src, void* dst, u16 size) {
         DmaCopy16(3, src, dst, size);
     }
 
-    return 1;
+    return TRUE;
 }
 
 #ifdef VERSION_EU
@@ -1673,7 +1673,7 @@ u8 RequestLz77UnCompVram(void* src, void* dst) {
     u16 flags;
 
     if (queue->lz77RequestCount > 31) {
-        return 0;
+        return FALSE;
     }
 
     flags = gSystemFlags & SYSTEM_FLAG_DMA3_IMMEDIATE;
@@ -1687,7 +1687,7 @@ u8 RequestLz77UnCompVram(void* src, void* dst) {
         LZ77UnCompVram(src, dst);
     }
 
-    return 1;
+    return TRUE;
 }
 #endif
 
@@ -1695,23 +1695,23 @@ u8 RequestDma3Clear(void* dst, u16 size) {
     Dma3Queue* queue = gDma3Requests;
 
     if (queue->count > 3) {
-        return 0;
+        return FALSE;
     }
 
     queue->pending[queue->count].dst = dst;
     queue->pending[queue->count].size = size;
     queue->count = queue->count + 1;
 
-    return 1;
+    return TRUE;
 }
 
 u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 dstX, u8 dstY, s8 sw, s8 sh) {
     if (gDma3Requests->blitCount > 63) {
-        return 0;
+        return FALSE;
     }
 
     if (sw <= 0 || sh <= 0) {
-        return 0;
+        return FALSE;
     }
 
     gDma3Requests->blits[gDma3Requests->blitCount].src = src;
@@ -1723,12 +1723,12 @@ u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 dstX, u8 dstY, s8
     gDma3Requests->blits[gDma3Requests->blitCount].width = sw;
     gDma3Requests->blits[gDma3Requests->blitCount].height = sh;
     gDma3Requests->blitCount = gDma3Requests->blitCount + 1;
-    return 1;
+    return TRUE;
 }
 
 u8 RequestTilemapStripCopy(void* src, void* dst, u8 x, u8 y, u8 vertical) {
     if (gDma3Requests->fillCount > 7) {
-        return 0;
+        return FALSE;
     }
 
     gDma3Requests->fills[gDma3Requests->fillCount].src = src;
@@ -1738,20 +1738,20 @@ u8 RequestTilemapStripCopy(void* src, void* dst, u8 x, u8 y, u8 vertical) {
     gDma3Requests->fills[gDma3Requests->fillCount].vertical = vertical;
     gDma3Requests->fillCount = gDma3Requests->fillCount + 1;
 
-    return 1;
+    return TRUE;
 }
 
 u8 QueueVTransCallback(void (*callback)()) {
     Dma3Queue* queue = gDma3Requests;
 
     if (queue->callbackCount > 7) {
-        return 0;
+        return FALSE;
     }
 
     queue->callbacks[queue->callbackCount] = callback;
     queue->callbackCount = queue->callbackCount + 1;
 
-    return 1;
+    return TRUE;
 }
 
 u32 GetVTransTransferredBytes() {
@@ -2199,7 +2199,7 @@ void SetBgMapBlocks(s32 bg, const void* src, u8 w, u8 h) {
     gBgWork->entries[bg].height = h;
     gBgWork->entries[bg].x = 0;
     gBgWork->entries[bg].y = 0;
-    gBgWork->entries[bg].dirty = 1;
+    gBgWork->entries[bg].dirty = TRUE;
 }
 
 void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
@@ -2213,7 +2213,7 @@ void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
     entry->y = y;
     CopyBgMapRect(x, y, entry, (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + VRAM), 0, 0, 0x1F, 0x15);
     SetBgScroll(bg, x & 7, y & 7);
-    entry->dirty = 0;
+    entry->dirty = FALSE;
 }
 
 void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
@@ -2528,27 +2528,27 @@ u8 SetBgMapBlocksLz77(s32 bg, const void* src, u8 w, u8 h) {
     s32 i;
 
     if ((gDispCnt & DISPCNT_MODE_MASK) != 0 && (bg == 2 || bg == 3)) {
-        return 0;
+        return FALSE;
     }
 
     entry = &gBgWork->entries[bg];
 
     if (entry->decompressedMap != NULL) {
-        return 0;
+        return FALSE;
     }
 
     count = w * h;
     entry->decompressedMap = EwramAlloc(count * sizeof(void*));
 
     if (entry->decompressedMap == NULL) {
-        return 0;
+        return FALSE;
     }
 
     for (i = 0; i < count; i++) {
         entry->decompressedMap[i] = EwramAlloc(Lz77GetUncompSize(((u32**)src)[i]));
 
         if (entry->decompressedMap[i] == NULL) {
-            return 0;
+            return FALSE;
         }
 
         LZ77UnCompWram(((u32**)src)[i], entry->decompressedMap[i]);
@@ -2560,8 +2560,8 @@ u8 SetBgMapBlocksLz77(s32 bg, const void* src, u8 w, u8 h) {
     entry->height = h;
     entry->x = 0;
     entry->y = 0;
-    entry->dirty = 1;
-    return 1;
+    entry->dirty = TRUE;
+    return TRUE;
 }
 
 void FreeBgDecompressedMap(s32 bg) {
@@ -2780,20 +2780,20 @@ void* AnimUpdate(AnimState* anim) {
 
 u8 AnimIsFrameEnding(AnimState* anim) {
     if (anim->frames == NULL) {
-        return 0;
+        return FALSE;
     }
 
     if (!(anim->flags & ANIM_FLAG_LOOP)) {
         if (anim->flags & ANIM_FLAG_FINISHED) {
-            return 0;
+            return FALSE;
         }
     }
 
     if (anim->timer + 1 >= anim->frames[anim->frame].duration) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void* AnimGetGfx(AnimState* anim) {
@@ -2810,10 +2810,10 @@ void* AnimGetGfx(AnimState* anim) {
 
 u8 AnimIsFinished(AnimState* anim) {
     if (anim->flags & ANIM_FLAG_FINISHED) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u16 AnimGetId(AnimState* anim) {
@@ -2870,7 +2870,7 @@ void LoadPalette(const void* src, void* dst, u16 size) {
     for (i = 0; i < count; i++) {
         base[idx + i].src = (u8*)src + i * 32;
         base[idx + i].dst = (u8*)dst + i * 32;
-        base[idx + i].dirty = 1;
+        base[idx + i].dirty = TRUE;
     }
 }
 
@@ -2915,7 +2915,7 @@ void FadeUpdate() {
             }
 
             if (slot->dirty) {
-                slot->dirty = 0;
+                slot->dirty = FALSE;
             } else if (!changed) {
                 continue;
             }
@@ -3180,10 +3180,10 @@ void FadeSetPaletteExcluded(u16 slot, u8 value) {
 
 u8 FadeIsActive() {
     if (gFadeWork->flags & FADE_FLAG_ACTIVE) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u16 FadeGetColor() {
@@ -3227,7 +3227,7 @@ void MosaicReset() {
     sMosaicSize = 0;
     sMosaicTarget = 0;
     sMosaicTimer = 0;
-    sMosaicActive = 0;
+    sMosaicActive = FALSE;
 }
 
 void MosaicUpdate() {
@@ -3241,8 +3241,8 @@ void MosaicUpdate() {
         SetBgMosaicSize(size, size);
         SetObjMosaicSize(size, size);
     } else if (sMosaicActive) {
-        sMosaicActive = 0;
-        SetSpriteMosaicEnabled(0);
+        sMosaicActive = FALSE;
+        SetSpriteMosaicEnabled(FALSE);
     }
 }
 
@@ -3250,24 +3250,24 @@ void MosaicStartIn(u16 frames, u16 size) {
     sMosaicTimer = frames;
     sMosaicSize = size << 8;
     sMosaicTarget = 0;
-    sMosaicActive = 1;
-    SetBgMosaic(0, 1);
-    SetBgMosaic(1, 1);
-    SetBgMosaic(2, 1);
-    SetBgMosaic(3, 1);
-    SetSpriteMosaicEnabled(1);
+    sMosaicActive = TRUE;
+    SetBgMosaic(0, TRUE);
+    SetBgMosaic(1, TRUE);
+    SetBgMosaic(2, TRUE);
+    SetBgMosaic(3, TRUE);
+    SetSpriteMosaicEnabled(TRUE);
 }
 
 void MosaicStartOut(u16 frames, u16 size) {
     sMosaicTimer = frames;
     sMosaicSize = 0;
     sMosaicTarget = size << 8;
-    sMosaicActive = 1;
-    SetBgMosaic(0, 1);
-    SetBgMosaic(1, 1);
-    SetBgMosaic(2, 1);
-    SetBgMosaic(3, 1);
-    SetSpriteMosaicEnabled(1);
+    sMosaicActive = TRUE;
+    SetBgMosaic(0, TRUE);
+    SetBgMosaic(1, TRUE);
+    SetBgMosaic(2, TRUE);
+    SetBgMosaic(3, TRUE);
+    SetSpriteMosaicEnabled(TRUE);
 }
 
 u8 MosaicIsActive() {

@@ -114,10 +114,10 @@ void InitSystem() {
 
     if (gSoftResetMarker[0] == SOFT_RESET_MAGIC) {
         ClearSystemMemory();
-        softReset = 1;
+        softReset = TRUE;
     } else {
         ClearSystemMemory();
-        softReset = 0;
+        softReset = FALSE;
     }
 #else
     RegisterRamReset(RESET_ALL);

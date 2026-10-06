@@ -399,7 +399,7 @@ void WorldInspectHandleInput() {
 #ifndef VERSION_EU
         sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
 #endif
-        sWorldInspectReturnToMenu = 1;
+        sWorldInspectReturnToMenu = TRUE;
         sWorldInspectSteps = 16;
         sWorldInspectState = WORLD_INSPECT_STATE_TITLE_OUT;
     } else if (keys & START_BUTTON) {
@@ -408,7 +408,7 @@ void WorldInspectHandleInput() {
 #ifndef VERSION_EU
         sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
 #endif
-        sWorldInspectReturnToMenu = 0;
+        sWorldInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
         sWorldInspectState = WORLD_INSPECT_STATE_EXIT;
     } else if (keys & DPAD_UP) {
@@ -501,7 +501,7 @@ void WorldInspectHandleDetailInput() {
         gBldCnt = 0;
         DisableBg(2);
         DisableBg(3);
-        sWorldInspectReturnToMenu = 1;
+        sWorldInspectReturnToMenu = TRUE;
         sWorldInspectDetailOpen = 0;
 
 #ifdef VERSION_EU
@@ -513,7 +513,7 @@ void WorldInspectHandleDetailInput() {
 #ifndef VERSION_EU
             sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
 #endif
-            sWorldInspectReturnToMenu = 0;
+            sWorldInspectReturnToMenu = FALSE;
             FadeStartOut(FADE_MODE_BLACK, 16);
             sWorldInspectState = WORLD_INSPECT_STATE_EXIT;
         }

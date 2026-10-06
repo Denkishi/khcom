@@ -148,7 +148,7 @@ void SpriteReset() {
     gSpriteWork->sortLo = 0;
     SetObjMosaicSize(0, 0);
     gSpriteWork->oamUpdatesPaused = 0;
-    gSpriteWork->mosaicEnabled = 0;
+    gSpriteWork->mosaicEnabled = FALSE;
     SetObjTileRange(0, 0x400);
     SetObjPaletteRange(0, 0x10);
 }
@@ -168,8 +168,8 @@ u8 DrawSpriteSharedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette, O
         work->entries[work->entryCount].sprite = sprite;
         work->sortPtrs[work->entryCount] = &work->entries[work->entryCount];
         work->entryCount += 1;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }

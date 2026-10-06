@@ -132,18 +132,18 @@ void func_08000F30(TaskPool* pool) {
 
 u8 IsTaskActive(Task* task) {
     if (task == NULL || (task->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 IsTaskActiveNamed(Task* task, const char* name) {
     if (task == NULL || name == NULL || task->desc->name != name || (task->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 const char* GetTaskName(Task* task) {

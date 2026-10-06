@@ -339,7 +339,7 @@ void* InitSpriteTextSlots(s32 mode) {
         sSpriteTextLines[i].y = 0;
         sSpriteTextLines[i].palette = NULL;
         sSpriteTextLines[i].length = 0;
-        sSpriteTextLines[i].visible = 0;
+        sSpriteTextLines[i].visible = FALSE;
         sSpriteTextLines[i].unk_53 = 0;
 
         for (j = 0; j < 16; j++) {
@@ -385,7 +385,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* text, u8 slot, u8 useAlternatePal
     sSpriteTextLines[slot].x = x;
     sSpriteTextLines[slot].y = y;
     sSpriteTextLines[slot].font = 1;
-    sSpriteTextLines[slot].visible = 1;
+    sSpriteTextLines[slot].visible = TRUE;
     sSpriteTextLines[slot].unk_53 = i;
     sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
 
@@ -828,7 +828,7 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* str, u8 slot, u8 useAlternatePalet
     sSpriteTextLines[slot].x = x;
     sSpriteTextLines[slot].y = y;
     sSpriteTextLines[slot].font = 2;
-    sSpriteTextLines[slot].visible = 1;
+    sSpriteTextLines[slot].visible = TRUE;
     sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
     len = GetStringLength(str);
 
@@ -885,7 +885,7 @@ void DrawSpriteTextSlots() {
     u8 dx;
 
     for (i = 0; i < 24; i++) {
-        if (sSpriteTextLines[i].visible != 1) {
+        if (sSpriteTextLines[i].visible != TRUE) {
             continue;
         }
 
@@ -914,12 +914,12 @@ void DrawSpriteTextSlots() {
 
 #ifndef VERSION_EU
 void HideSpriteTextSlot(u8 i) {
-    sSpriteTextLines[i].visible = 0;
+    sSpriteTextLines[i].visible = FALSE;
 }
 
 void ShowSpriteTextSlot(u8 i) {
     if (sSpriteTextLines[i].length != 0) {
-        sSpriteTextLines[i].visible = 1;
+        sSpriteTextLines[i].visible = TRUE;
     }
 }
 
@@ -941,7 +941,7 @@ void FreeSpriteTextSlots() {
             }
         }
 
-        FadeSetPaletteExcluded(sSpriteTextLines[i].palette->index, 0);
+        FadeSetPaletteExcluded(sSpriteTextLines[i].palette->index, FALSE);
         ReleaseObjPalette(sSpriteTextLines[i].palette);
     }
 
@@ -964,14 +964,14 @@ void InitBgTextLines(u8 bg) {
         sBgTextLines[i].length = 0;
         sBgTextLines[i].bg = bg;
         sBgTextLines[i].glyphHeight = 16;
-        sBgTextLines[i].dirty = 0;
+        sBgTextLines[i].dirty = FALSE;
 
         for (j = 0; j < 16; j++) {
             sBgTextLines[i].glyphs[j] = 0;
         }
     }
 
-    sBgTextDrawQueued = 0;
+    sBgTextDrawQueued = FALSE;
 }
 #endif
 
@@ -1013,7 +1013,7 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteInde
     sBgTextLines[slot].x = x;
     sBgTextLines[slot].y = y;
     sBgTextLines[slot].glyphHeight = glyphHeight;
-    sBgTextLines[slot].dirty = 1;
+    sBgTextLines[slot].dirty = TRUE;
     sBgTextLines[slot].paletteIndex = paletteIndex;
 
     while (*text != MSG_CODE_END) {
@@ -1104,7 +1104,7 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteInde
 
     if (!sBgTextDrawQueued) {
         QueueVTransCallback(DrawBgTextLines);
-        sBgTextDrawQueued = 1;
+        sBgTextDrawQueued = TRUE;
     }
 }
 #endif
@@ -1131,11 +1131,11 @@ void DrawBgTextLines() {
     u16 tile;
 
     for (n = 0; n < 10; n++) {
-        if (sBgTextLines[n].dirty != 1) {
+        if (sBgTextLines[n].dirty != TRUE) {
             continue;
         }
 
-        sBgTextLines[n].dirty = 0;
+        sBgTextLines[n].dirty = FALSE;
 
         for (k = 0; k < sBgTextLines[n].length; k++) {
             glyph = sBgTextLines[n].glyphs[k];
@@ -1322,7 +1322,7 @@ void DrawBgTextLines() {
         }
     }
 
-    sBgTextDrawQueued = 0;
+    sBgTextDrawQueued = FALSE;
 }
 #endif
 
@@ -1344,8 +1344,8 @@ u16 InitMsgGlyphSprites(s32 mode) {
         sMsgGlyphSprites[i].tiles = NULL;
         sMsgGlyphSprites[i].palette = NULL;
         sMsgGlyphSprites[i].alternatePalette = NULL;
-        sMsgGlyphSprites[i].visible = 0;
-        sMsgGlyphSprites[i].useAlternatePalette = 0;
+        sMsgGlyphSprites[i].visible = FALSE;
+        sMsgGlyphSprites[i].useAlternatePalette = FALSE;
 
         switch (mode) {
         case 0:
@@ -1359,7 +1359,7 @@ u16 InitMsgGlyphSprites(s32 mode) {
             break;
         }
 
-        FadeSetPaletteExcluded(sMsgGlyphSprites[i].palette->index + 16, 1);
+        FadeSetPaletteExcluded(sMsgGlyphSprites[i].palette->index + 16, TRUE);
     }
 
     sTextEntryCount = 0;
@@ -1377,8 +1377,8 @@ u16 InitMsgGlyphSpritesAltPalette5(s32 mode) {
         sMsgGlyphSprites[i].tiles = NULL;
         sMsgGlyphSprites[i].palette = NULL;
         sMsgGlyphSprites[i].alternatePalette = NULL;
-        sMsgGlyphSprites[i].visible = 0;
-        sMsgGlyphSprites[i].useAlternatePalette = 0;
+        sMsgGlyphSprites[i].visible = FALSE;
+        sMsgGlyphSprites[i].useAlternatePalette = FALSE;
 
         switch (mode) {
         case 0:
@@ -1393,8 +1393,8 @@ u16 InitMsgGlyphSpritesAltPalette5(s32 mode) {
         }
 
         sMsgGlyphSprites[i].alternatePalette = LoadTextPalette(5);
-        FadeSetPaletteExcluded(sMsgGlyphSprites[i].palette->index + 16, 1);
-        FadeSetPaletteExcluded(sMsgGlyphSprites[i].alternatePalette->index + 16, 1);
+        FadeSetPaletteExcluded(sMsgGlyphSprites[i].palette->index + 16, TRUE);
+        FadeSetPaletteExcluded(sMsgGlyphSprites[i].alternatePalette->index + 16, TRUE);
     }
 
     sTextEntryCount = 0;
@@ -1412,8 +1412,8 @@ u16 InitMsgGlyphSpritesAltPalette3(s32 mode) {
         sMsgGlyphSprites[i].tiles = NULL;
         sMsgGlyphSprites[i].palette = NULL;
         sMsgGlyphSprites[i].alternatePalette = NULL;
-        sMsgGlyphSprites[i].visible = 0;
-        sMsgGlyphSprites[i].useAlternatePalette = 0;
+        sMsgGlyphSprites[i].visible = FALSE;
+        sMsgGlyphSprites[i].useAlternatePalette = FALSE;
 
         switch (mode) {
         case 0:
@@ -1428,8 +1428,8 @@ u16 InitMsgGlyphSpritesAltPalette3(s32 mode) {
         }
 
         sMsgGlyphSprites[i].alternatePalette = LoadTextPalette(3);
-        FadeSetPaletteExcluded(sMsgGlyphSprites[i].palette->index + 16, 1);
-        FadeSetPaletteExcluded(sMsgGlyphSprites[i].alternatePalette->index + 16, 1);
+        FadeSetPaletteExcluded(sMsgGlyphSprites[i].palette->index + 16, TRUE);
+        FadeSetPaletteExcluded(sMsgGlyphSprites[i].alternatePalette->index + 16, TRUE);
     }
 
     sTextEntryCount = 0;
@@ -1515,7 +1515,7 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText
 
     cx = 0;
     cy = 0;
-    alternate = 0;
+    alternate = FALSE;
 
     if (sMsgGlyphSprites == NULL) {
         return 0;
@@ -1528,15 +1528,15 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
-        sMsgGlyphSprites[sTextEntryCount].visible = 1;
+        sMsgGlyphSprites[sTextEntryCount].visible = TRUE;
 
         if (*text == MSG_CODE_HIGHLIGHT) {
-            alternate = 1;
+            alternate = TRUE;
             text++;
         }
 
         if (*text == MSG_CODE_PLAIN) {
-            alternate = 0;
+            alternate = FALSE;
             text++;
         }
 
@@ -1641,7 +1641,7 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
 
     cx = 0;
     cy = 0;
-    alternate = 0;
+    alternate = FALSE;
 
     if (sMsgGlyphSprites == NULL) {
         return 0;
@@ -1654,15 +1654,15 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
-        sMsgGlyphSprites[sTextEntryCount].visible = 1;
+        sMsgGlyphSprites[sTextEntryCount].visible = TRUE;
 
         if (*text == MSG_CODE_HIGHLIGHT) {
-            alternate = 1;
+            alternate = TRUE;
             text++;
         }
 
         if (*text == MSG_CODE_PLAIN) {
-            alternate = 0;
+            alternate = FALSE;
             text++;
         }
 
@@ -1779,7 +1779,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
 
-        sMsgGlyphSprites[sTextEntryCount].visible = 1;
+        sMsgGlyphSprites[sTextEntryCount].visible = TRUE;
 
         if (*(u16*)text == MSG_CODE_JP_NL) {
             cx = 0;
@@ -1984,7 +1984,7 @@ void DrawMsgGlyphs(u8 n) {
     for (i = 0; i < n; i++) {
         TextGlyphSprite* sprites = sMsgGlyphSprites;
 
-        if (sprites[i].visible == 1) {
+        if (sprites[i].visible == TRUE) {
             s32 x = sprites[i].x;
             s32 y = sprites[i].y;
 
@@ -2025,7 +2025,7 @@ void HideMsgGlyphs() {
     u8 i;
 
     for (i = 0; i < 128; i++) {
-        sMsgGlyphSprites[i].visible = 0;
+        sMsgGlyphSprites[i].visible = FALSE;
     }
 }
 
@@ -6251,7 +6251,7 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
         sCardMsgGlyphSprites[i].tiles = NULL;
         sCardMsgGlyphSprites[i].palette = NULL;
         sCardMsgGlyphSprites[i].alternatePalette = NULL;
-        sCardMsgGlyphSprites[i].visible = 0;
+        sCardMsgGlyphSprites[i].visible = FALSE;
 
         switch (mode) {
         case 0:
@@ -6271,8 +6271,8 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
             sCardMsgGlyphSprites[i].alternatePalette = LoadTextPalette(5);
         }
 
-        FadeSetPaletteExcluded(sCardMsgGlyphSprites[i].palette->index + 0x10, 1);
-        FadeSetPaletteExcluded(sCardMsgGlyphSprites[i].alternatePalette->index + 0x10, 1);
+        FadeSetPaletteExcluded(sCardMsgGlyphSprites[i].palette->index + 0x10, TRUE);
+        FadeSetPaletteExcluded(sCardMsgGlyphSprites[i].alternatePalette->index + 0x10, TRUE);
     }
 
     sTextEntryCount = 0;
@@ -6286,7 +6286,7 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** next
 
     cx = 0;
     cy = 0;
-    alternate = 0;
+    alternate = FALSE;
 
     if (sCardMsgGlyphSprites == NULL) {
         return 0;
@@ -6299,15 +6299,15 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** next
 
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
-        sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
+        sCardMsgGlyphSprites[sTextEntryCount].visible = TRUE;
 
         if (*text == MSG_CODE_HIGHLIGHT) {
-            alternate = 1;
+            alternate = TRUE;
             text++;
         }
 
         if (*text == MSG_CODE_PLAIN) {
-            alternate = 0;
+            alternate = FALSE;
             text++;
         }
 
@@ -6432,8 +6432,8 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
         glyph = 0;
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
-        sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
-        sCardMsgGlyphSprites[sTextEntryCount].useAlternatePalette = 0;
+        sCardMsgGlyphSprites[sTextEntryCount].visible = TRUE;
+        sCardMsgGlyphSprites[sTextEntryCount].useAlternatePalette = FALSE;
 
         if (*(u16*)text == MSG_CODE_JP_NL) {
             cx = 0;
@@ -6642,7 +6642,7 @@ void DrawCardMsgGlyphs(u8 n) {
     for (i = 0; i < n; i++) {
         TextGlyphSprite* sprites = sCardMsgGlyphSprites;
 
-        if (sprites[i].visible == 1) {
+        if (sprites[i].visible == TRUE) {
             s32 x = sprites[i].x;
             s32 y = sprites[i].y;
 
@@ -6683,7 +6683,7 @@ void DrawMsgGlyphsWithPalette(u8 n, void* palette) {
     for (i = 0; i < n; i++) {
         TextGlyphSprite* sprites = sMsgGlyphSprites;
 
-        if (sprites[i].visible == 1) {
+        if (sprites[i].visible == TRUE) {
             s32 x = sprites[i].x;
             s32 y = sprites[i].y;
 
@@ -7094,7 +7094,7 @@ s32 CopySjisGlyphsToVramAt(const TextChar* str, u16 tile) {
 
 u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile) {
     u8* dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + tile * 32;
-    s32 flag = 0;
+    s32 flag = FALSE;
     sTextEntryCount = 0;
     *widths = 0;
 
@@ -7174,7 +7174,7 @@ u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile) {
                 dst += 128;
                 sTextEntryCount++;
                 widths++;
-                flag = 1;
+                flag = TRUE;
             } else if (flag) {
                 widths[-1] += 3;
             }

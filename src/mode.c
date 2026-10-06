@@ -142,10 +142,10 @@ void ModeClearVBlankCallback() {
 
 u8 IsModeStarted() {
     if (gModeFlags & MODE_FLAG_STARTED) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void ModeRequest(Mode* mode, s32 arg) {

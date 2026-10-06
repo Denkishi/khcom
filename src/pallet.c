@@ -371,7 +371,7 @@ void StartBgWave(void (*callback)()) {
     for (i = 0; i < 4; i++) {
         gBgWaves[i].amplitude = 1;
         gBgWaves[i].frequency = 1;
-        gBgWaves[i].enabled = 0;
+        gBgWaves[i].enabled = FALSE;
     }
 
     SetHBlankCallback(callback);
@@ -384,11 +384,11 @@ void SetBgWaveParams(s32 bg, u8 amplitude, u8 frequency) {
 }
 
 void EnableBgWave(s32 bg) {
-    gBgWaves[bg].enabled = 1;
+    gBgWaves[bg].enabled = TRUE;
 }
 
 void DisableBgWave(s32 bg) {
-    gBgWaves[bg].enabled = 0;
+    gBgWaves[bg].enabled = FALSE;
 }
 
 void HBlankIntrBgWave1(s32 bg) {
@@ -397,13 +397,13 @@ void HBlankIntrBgWave1(s32 bg) {
     line = REG_VCOUNT;
     line = (line + 1) % 228;
 
-    if (gBgWaves[bg].enabled == 1) {
+    if (gBgWaves[bg].enabled == TRUE) {
         REG_BGHOFS(0) = SIN((line + gFrameCounter) * gBgWaves[bg].frequency) * gBgWaves[bg].amplitude >> 8;
     }
 }
 
 void StopBgWave(s32 bg) {
-    gBgWaves[bg].enabled = 0;
+    gBgWaves[bg].enabled = FALSE;
     ResetHBlankCallback();
     DisableHBlankIntr();
 }
@@ -418,7 +418,7 @@ void HBlankIntrBgWave() {
     for (i = 0; i < 4; i++) {
         const s16* sine = gSineTable;
 
-        if (gBgWaves[i].enabled == 1) {
+        if (gBgWaves[i].enabled == TRUE) {
             REG_BGHOFS(i) = sine[((line + gFrameCounter) * gBgWaves[i].frequency) & 0xFF] * gBgWaves[i].amplitude / 256;
         }
     }
@@ -428,7 +428,7 @@ void StopAllBgWaves() {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        gBgWaves[i].enabled = 0;
+        gBgWaves[i].enabled = FALSE;
     }
 
     ResetHBlankCallback();

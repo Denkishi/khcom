@@ -147,10 +147,10 @@ void AllmapDimPalette10() {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        FadeSetPaletteExcluded(i, 1);
+        FadeSetPaletteExcluded(i, TRUE);
     }
 
-    FadeSetPaletteExcluded(10, 0);
+    FadeSetPaletteExcluded(10, FALSE);
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
 }
 
@@ -269,7 +269,7 @@ void mode_allmap_0(s32 lowerBgm) {
 }
 
 void AllmapFreezePalette10() {
-    FadeSetPaletteExcluded(10, 1);
+    FadeSetPaletteExcluded(10, TRUE);
     CpuCopy16((void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sAllmapPalette10Copy, 32);
     LoadPalette(sAllmapPalette10Copy, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 32);
 }
@@ -352,30 +352,30 @@ u8 AllmapDoorLeadsToHall(u8 room, u8 side) {
     u8* links = GetMapRoomLinks(room);
 
     if ((u8)(links[side] + 3) <= 1) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 AllmapDoorExists(u8 room, u8 side) {
     u16 flags = GetMapDoorFlags(room, side);
 
     if (flags == 0 || (flags & 8) != 0) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 AllmapDoorIsOpen(u8 room, u8 side) {
     u16 flags = GetMapDoorFlags(room, side);
 
     if ((flags & 2) != 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {

@@ -65,11 +65,11 @@ void mode_debflag_0(s32 arg) {
     if (arg != 0) {
         sDebflagCount = 7;
         sDebflagList = sDebugFlagListMap;
-        gDebflagReturnToMap = 1;
+        gDebflagReturnToMap = TRUE;
     } else {
         sDebflagCount = 14;
         sDebflagList = sDebugFlagList;
-        gDebflagReturnToMap = 0;
+        gDebflagReturnToMap = FALSE;
     }
 
     for (i = 0; i < sDebflagCount; i++) {

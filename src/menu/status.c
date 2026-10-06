@@ -376,7 +376,7 @@ s16 GetStatusScroll() {
 }
 
 void StatusBarStartClose(StatusBarWork* work) {
-    work->closing = 1;
+    work->closing = TRUE;
 
     if (gStatusBarState == STATUS_BAR_STATE_BARS_IN) {
         gStatusBarState = STATUS_BAR_STATE_BARS_OUT;
@@ -409,8 +409,8 @@ void task_status_bar_0(StatusBarWork* work) {
     work->targetY = 0;
     work->targetY2 = 0x9800;
     work->targetX = 0;
-    work->closing = 0;
-    work->fadeStarted = 0;
+    work->closing = FALSE;
+    work->fadeStarted = FALSE;
 }
 
 u8 task_status_bar_1(StatusBarWork* work) {
@@ -449,7 +449,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
     case STATUS_BAR_STATE_BARS_OUT:
         if (!FadeIsActive() && !work->fadeStarted) {
             FadeStartOut(FADE_MODE_BLACK, 16);
-            work->fadeStarted = 1;
+            work->fadeStarted = TRUE;
         }
 
         ApproachValue(&work->y, work->targetY, work->steps);
@@ -466,13 +466,13 @@ u8 task_status_bar_1(StatusBarWork* work) {
             if (GetKeysPressed() & START_BUTTON) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 FadeStartOut(FADE_MODE_BLACK, 16);
-                SetStatusReturnToMenu(0);
+                SetStatusReturnToMenu(FALSE);
                 gStatusBarState = STATUS_BAR_STATE_EXIT;
             } else if (GetKeysPressed() & B_BUTTON) {
                 if (!IsStatusMesWindowOpen()) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
                     StatusBarStartClose(work);
-                    SetStatusReturnToMenu(1);
+                    SetStatusReturnToMenu(TRUE);
                 }
             }
         }
@@ -517,10 +517,10 @@ void task_status_bar_3(StatusBarWork* work) {
 
 u8 IsStatusBarIdle() {
     if (gStatusBarState == STATUS_BAR_STATE_IDLE) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void task_status_tab_0(StatusTabWork* work, s32* tab) {
@@ -748,14 +748,14 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* tab) {
     work->gfx = gStatusNewMarkFrame0;
 #endif
     work->timer = 0;
-    work->blink = 0;
+    work->blink = FALSE;
 }
 
 u8 task_status_stocklist_1(StatusStocklistWork* work) {
     work->timer++;
 
     if (work->timer > 24) {
-        work->blink = !work->blink ? 1 : 0;
+        work->blink = !work->blink ? TRUE : FALSE;
         work->timer = 0;
     }
 
@@ -817,10 +817,10 @@ u16 GetStatusMaxScroll() {
 
 u8 StatusTabHasItems() {
     if (sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count == 0) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void StatusStocklistScrollDown() {
@@ -1263,17 +1263,17 @@ void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
 }
 
 u8 stock_mes_disp_1(StockMesDispWork* work) {
-    u8 changed = 0;
+    u8 changed = FALSE;
 
     if (GetKeysPressed() & R_BUTTON) {
         if (work->textIndex < work->textCount - 1) {
             work->textIndex++;
-            changed = 1;
+            changed = TRUE;
         }
     } else if (GetKeysPressed() & L_BUTTON) {
         if (work->textIndex != 0) {
             work->textIndex--;
-            changed = 1;
+            changed = TRUE;
         }
     }
 

@@ -599,7 +599,7 @@ void Mode_MapChk_1() {
         switch (work->mode) {
         case 1:
             gGameState.floors[work->floor].world = gMapChkWorldNames[work->world][0];
-            MapChkSetFloorProgress(sMapChkWork->floor, 0);
+            MapChkSetFloorProgress(sMapChkWork->floor, FALSE);
             GoToFloor(sMapChkWork->floor);
             SetFloorWorld(gMapChkWorldNames[sMapChkWork->world][0]);
             gMapFloorState.flags |= FLOOR_FLAG_LOGO_SHOWN;
@@ -608,7 +608,7 @@ void Mode_MapChk_1() {
             break;
         case 2:
             gGameState.floors[work->floor].world = 0;
-            MapChkSetFloorProgress(sMapChkWork->floor, 0);
+            MapChkSetFloorProgress(sMapChkWork->floor, FALSE);
             GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_ENTRANCE_HALL;
             gMapFloorState.entrySide = 5;
@@ -616,7 +616,7 @@ void Mode_MapChk_1() {
             break;
         case 3:
             gGameState.floors[sMapChkWork->floor].world = gMapChkWorldNames[sMapChkWork->world][0];
-            MapChkSetFloorProgress(sMapChkWork->floor, 1);
+            MapChkSetFloorProgress(sMapChkWork->floor, TRUE);
             GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_EXIT_HALL;
             gMapFloorState.entrySide = 5;
@@ -633,7 +633,7 @@ void Mode_MapChk_1() {
         default:
             gGameState.floors[sMapChkWork->floor].world =
                 gMapChkWorldNames[sMapChkWork->world][0];
-            MapChkSetFloorProgress(sMapChkWork->floor, 0);
+            MapChkSetFloorProgress(sMapChkWork->floor, FALSE);
             GoToFloor(sMapChkWork->floor);
             SetFloorWorld(gMapChkWorldNames[sMapChkWork->world][0]);
             EnterFloorWorld();

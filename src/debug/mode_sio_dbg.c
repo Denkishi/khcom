@@ -411,7 +411,7 @@ void mode_sio_dbg_flg_1() {
     }
 
     if (GetKeysPressed() & (A_BUTTON | B_BUTTON | START_BUTTON)) {
-        gSioDebugMode = 1;
+        gSioDebugMode = TRUE;
         InitDebugDecks();
         ModeRequest(&gModeSioBtlConnect, 0);
     } else {

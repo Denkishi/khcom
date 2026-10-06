@@ -85,13 +85,13 @@ u16 IsVBlankIntrLive() {
         if (REG_DISPSTAT & DISPSTAT_VBLANK_INTR) {
             if (REG_IE & INTR_FLAG_VBLANK) {
                 if (!(REG_DISPCNT & DISPCNT_FORCED_BLANK)) {
-                    return 1;
+                    return TRUE;
                 }
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void SetVBlankCallback(IntrFunc fn) {
@@ -172,7 +172,7 @@ void SioInit() {
     *(u64*)REG_ADDR_SIOMULTI0 = 0;
     CpuFill32(0, &gSioWork, sizeof(SioWork));
     sSioIdleVBlanks = 0;
-    sSioSendEmpty = 0;
+    sSioSendEmpty = FALSE;
     sSioPrevPlayerCount = 0;
     gSioLastSendCount = 0;
     gSioLastRecvCount = 0;
@@ -185,7 +185,7 @@ void SioInit() {
     gSioHandshakeRequest = SIO_REQUEST_NONE;
     gSioLinkResult = SIO_LINK_RESULT_NONE;
     sSioAutoStartDone = 0;
-    sSioChecksumReady = 0;
+    sSioChecksumReady = FALSE;
     sSioSendNonzero = 0;
     sSioRecvNonzero = 0;
     gSioLinkSendCallback = NULL;
@@ -233,7 +233,7 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
 
             if (sSioAutoStartDone == 0) {
                 if (gSioWork.isParent != 0 && gSioWork.playerCount == 2) {
-                    gSioWork.startPending = 1;
+                    gSioWork.startPending = TRUE;
                     sSioAutoStartDone = -1;
                 }
             }
@@ -241,7 +241,7 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
             break;
         case SIO_REQUEST_START:
             if (gSioWork.isParent != 0 && gSioWork.playerCount == 2) {
-                gSioWork.startPending = 1;
+                gSioWork.startPending = TRUE;
             }
 
             sSioAutoStartDone = -1;
@@ -431,7 +431,7 @@ void SioVBlankUpdate() {
             return;
         }
 
-        gSioWork.paused = 0;
+        gSioWork.paused = FALSE;
     }
 
     if (gSioWork.isParent != 0) {
@@ -520,13 +520,13 @@ u8 SioHandshake() {
     count = 0;
     min = 0xFFFF;
 
-    if (gSioWork.startPending == 1) {
+    if (gSioWork.startPending == TRUE) {
         REG_SIOMLT_SEND = SIO_HANDSHAKE_START;
     } else {
         REG_SIOMLT_SEND = SIO_HANDSHAKE_IDLE;
     }
 
-    gSioWork.startPending = 0;
+    gSioWork.startPending = FALSE;
     *(u64*)gSioWork.recv = *(u64*)REG_ADDR_SIOMULTI0;
 
     for (i = 0; i < 2; i++) {
@@ -550,7 +550,7 @@ u8 SioHandshake() {
 
     if (gSioWork.playerCount == 2) {
         if (gSioWork.playerCount == sSioPrevPlayerCount && gSioWork.recv[0] == SIO_HANDSHAKE_START) {
-            return 1;
+            return TRUE;
         }
 
         if (gSioWork.playerCount == 2) {
@@ -563,7 +563,7 @@ u8 SioHandshake() {
     }
 
     sSioPrevPlayerCount = gSioWork.playerCount;
-    return 0;
+    return FALSE;
 }
 
 void SioRecvWord() {
@@ -581,7 +581,7 @@ void SioRecvWord() {
         }
 
         gSioWork.checksum = 0;
-        sSioChecksumReady = 1;
+        sSioChecksumReady = TRUE;
     } else {
         idx = gSioWork.recvReadIdx + gSioWork.recvCount;
 
@@ -596,7 +596,7 @@ void SioRecvWord() {
                 gSioWork.recvBuf[i][gSioWork.recvWordIdx][idx] = recv[i];
 
                 if (gSioWork.sendWordIdx == 1 && !gSioWork.paused && (recv[i] & SIO_PAUSE_REQUEST)) {
-                    gSioWork.paused = 1;
+                    gSioWork.paused = TRUE;
                     sSioPauseTimer = 5;
                 }
             }
@@ -625,11 +625,11 @@ void SioSendWord() {
                 gSioWork.sendReadIdx = 0;
             }
         } else {
-            sSioSendEmpty = 0;
+            sSioSendEmpty = FALSE;
         }
     } else {
         if (gSioWork.sendWordIdx == 0 && gSioWork.sendCount == 0) {
-            sSioSendEmpty = 1;
+            sSioSendEmpty = TRUE;
         }
 
         if (sSioSendEmpty) {
@@ -720,8 +720,8 @@ void SioShutdown() {
 
 u8 SioIsConnected() {
     if (gSioWork.state == SIO_STATE_CONNECTED) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }

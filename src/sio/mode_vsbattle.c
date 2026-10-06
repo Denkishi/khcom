@@ -54,26 +54,26 @@ void mode_vsbattle_0(u32 mode) {
     SetupBg(2, 2, 28, 10);
     SetBgPriority(3, 2);
     SetBgPriority(2, 0);
-    SetBgOverflow(3, 1);
-    SetBgOverflow(2, 0);
+    SetBgOverflow(3, TRUE);
+    SetBgOverflow(2, FALSE);
     TaskPoolInit(&gBtlWork->taskPools[0], 32);
     TaskPoolInit(&gBtlWork->taskPools[1], 32);
     BgFxInit(BGCNT_256COLOR, gBtlWork->bg);
     ColliderPoolsInit();
 
     if (mode == 0) {
-        arg.mainSide = 1;
+        arg.mainSide = TRUE;
         arg.side = 0;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg);
-        arg.mainSide = 0;
+        arg.mainSide = FALSE;
         arg.side = 1;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg);
         gBtlWork->flags |= BTL_FLAG_VS_LINK_PARENT;
     } else {
-        arg2.mainSide = 0;
+        arg2.mainSide = FALSE;
         arg2.side = 0;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg2);
-        arg2.mainSide = 1;
+        arg2.mainSide = TRUE;
         arg2.side = 1;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg2);
     }

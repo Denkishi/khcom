@@ -42,11 +42,11 @@ u8 BytesEqual(const u8* lhs, const u8* rhs, s16 len) {
 
     for (i = 0; i < len; i++) {
         if (lhs[i] != rhs[i]) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u16 SaveChecksum(u16* data, int size) {
@@ -721,7 +721,7 @@ void WaitSramErrorInput() {
     s32 ok;
 
     i = 0;
-    ok = 0;
+    ok = FALSE;
     cur = 0;
     prev = 0;
     j = 0;
@@ -743,7 +743,7 @@ void WaitSramErrorInput() {
             }
 
             if (prev != 0 && cur - prev <= 3) {
-                ok = 1;
+                ok = TRUE;
             }
 
             i++;

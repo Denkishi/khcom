@@ -35,10 +35,10 @@ void BgAnimInit(s32 bg, u16 size, u16 colorMode) {
     sBgAnimCurrent = NULL;
     sBgAnimScrollX = 0;
     sBgAnimScrollY = 0;
-    sBgAnimStopped = 1;
+    sBgAnimStopped = TRUE;
 
     if (colorMode == BGCNT_16COLOR) {
-        sBgAnimAffine = 0;
+        sBgAnimAffine = FALSE;
 
         switch (size) {
         case BGCNT_TXT512x256:
@@ -54,7 +54,7 @@ void BgAnimInit(s32 bg, u16 size, u16 colorMode) {
             break;
         }
     } else {
-        sBgAnimAffine = 1;
+        sBgAnimAffine = TRUE;
 
         switch (size) {
         case BGCNT_AFF256x256:
@@ -108,7 +108,7 @@ void BgAnimStart(BgAnimationDef* def, s32 x, s32 y) {
     sBgAnimStopFrame = -1;
     sBgAnimFrameTimer = 0;
     sBgAnimFrame = 0;
-    sBgAnimStopped = 0;
+    sBgAnimStopped = FALSE;
     sBgAnimFrameDuration = def->frameDuration;
 
     if (sBgAnimAffine) {
@@ -181,14 +181,14 @@ void BgAnimUpdate() {
 
     if (sBgAnimAffine) {
         BgAnimApplyAffineTransform(sBgAnimBg, sBgAnimRotation, sBgAnimScaleX, sBgAnimScaleY, sBgAnimScrollX, sBgAnimScrollY);
-        vis = 1;
+        vis = TRUE;
     } else {
         SetBgScroll(sBgAnimBg, (u16)sBgAnimScrollX, (u16)sBgAnimScrollY);
 
         if (sBgAnimScrollX > -256 && sBgAnimScrollX < 128 && sBgAnimScrollY < 128 && sBgAnimScrollY > -256) {
-            vis = 1;
+            vis = TRUE;
         } else {
-            vis = 0;
+            vis = FALSE;
         }
     }
 
@@ -238,7 +238,7 @@ void BgAnimSetStopFrame(u16 frame) {
 
 void BgAnimStop() {
     sBgAnimCurrent = NULL;
-    sBgAnimStopped = 1;
+    sBgAnimStopped = TRUE;
     DisableBg(sBgAnimBg);
 }
 

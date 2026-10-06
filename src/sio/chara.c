@@ -353,7 +353,7 @@ u8 SioConnectUpdate() {
         }
 
         if (gSioStatus & SIO_STAT_ERRORS) {
-            if (gSioConnected == 1) {
+            if (gSioConnected == TRUE) {
                 gSioErrorFrameCount++;
 
                 if (gSioErrorFrameCount > 180) {
@@ -408,7 +408,7 @@ u8 SioLinkUpdate() {
         }
 
         if (gSioStatus & SIO_STAT_ERRORS) {
-            if (gSioConnected == 1) {
+            if (gSioConnected == TRUE) {
                 gSioErrorFrameCount++;
 
                 if (gSioErrorFrameCount > 180) {
@@ -441,7 +441,7 @@ u8 SioConnectUpdateAuto() {
         }
 
         if (gSioStatus & SIO_STAT_ERRORS) {
-            if (gSioConnected == 1) {
+            if (gSioConnected == TRUE) {
                 gSioErrorFrameCount++;
 
                 if (gSioErrorFrameCount > 180) {
@@ -476,9 +476,9 @@ void SioLinkClose() {
         gSystemFlags &= ~SYSTEM_FLAG_DMA3_FLUSH_CPU;
     }
 
-    if (gLinkDecksAllocated == 1) {
+    if (gLinkDecksAllocated == TRUE) {
         FreeLinkDecks();
-        gLinkDecksAllocated = 0;
+        gLinkDecksAllocated = FALSE;
     }
 }
 
@@ -529,10 +529,10 @@ void VBlankTimerUpdate() {
 
 u8 SioHasError() {
     if (gSioStatus & SIO_STAT_ERRORS) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 #ifdef VERSION_JP
@@ -613,8 +613,8 @@ void SioAutoConnectOnConnect() {
 
 void SioConnectInit(void (*onConnect)(), void (*onCancel)(), u8 mode) {
     gSioConnectId = (mode & 0xF) | SIO_CONNECT_ID;
-    gSioConnectAccepted = 0;
-    gSioConnected = 0;
+    gSioConnectAccepted = FALSE;
+    gSioConnected = FALSE;
     gSioConnectRetries = 0;
     gSioConnectCallback = onConnect;
     gSioCancelCallback = onCancel;
@@ -668,7 +668,7 @@ s32 SioConnectRecv() {
         if (!gSioConnectAccepted) {
             if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_CONNECT_REQUEST) {
                 if (gSioRecvFrame[1][0] == gSioConnectId && gSioRecvFrame[1][1] == gSioRecvFrame[1][0]) {
-                    gSioConnectAccepted = 1;
+                    gSioConnectAccepted = TRUE;
                 }
             } else {
                 cancelWord = SIO_CMD_CONNECT_CANCEL;
@@ -685,7 +685,7 @@ s32 SioConnectRecv() {
                 }
             }
         } else if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT) {
-            gSioConnected = 1;
+            gSioConnected = TRUE;
 
             if (gSioConnectCallback != NULL) {
                 gSioConnectCallback();
@@ -724,10 +724,10 @@ s32 SioConnectRecvAuto() {
     if (!gSioConnected) {
         if (!gSioConnectAccepted) {
             if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_CONNECT_REQUEST) {
-                gSioConnectAccepted = 1;
+                gSioConnectAccepted = TRUE;
             }
         } else if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT) {
-            gSioConnected = 1;
+            gSioConnected = TRUE;
 
             if (gSioConnectCallback != NULL) {
                 gSioConnectCallback();
@@ -882,12 +882,12 @@ void SioPrepareDeckExchange() {
     gSioSendDeck = sendDeck;
     recvDeck = CreateLinkPartnerDeck();
     gSioRecvDeck = recvDeck;
-    gLinkDecksAllocated = 1;
+    gLinkDecksAllocated = TRUE;
     gSioExchangeSeqEnd = 59;
     gSioExchangeSeq = 1;
-    gSioHandshakeAck = 0;
-    gSioHandshakeDone = 0;
-    gSioHandshakeConfirm = 0;
+    gSioHandshakeAck = FALSE;
+    gSioHandshakeDone = FALSE;
+    gSioHandshakeConfirm = FALSE;
     gUnk_0203C3B8 = 0;
     gSioExchangeSendData = (u16*)gSioSendDeck;
     gSioExchangeRecvData = (u16*)gSioRecvDeck;
@@ -933,10 +933,10 @@ s32 SioExchangeRecv() {
     if (!gSioHandshakeDone) {
         if (!gSioHandshakeAck) {
             if (gSioRecvFrame[0][0] == SIO_CMD_EXCHANGE_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_EXCHANGE_REQUEST) {
-                gSioHandshakeAck = 1;
+                gSioHandshakeAck = TRUE;
             }
         } else if (gSioRecvFrame[0][0] == SIO_CMD_EXCHANGE_ACCEPT && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
-            gSioHandshakeDone = 1;
+            gSioHandshakeDone = TRUE;
             gSioExchangeSeq = 1;
         }
     } else if (gSioPlayerId == 0) {
@@ -1008,17 +1008,17 @@ void SioPrepareCharaLinkExchange() {
 
     gSioExchangeSeqEnd = 11;
     gSioExchangeSeq = 1;
-    gSioHandshakeAck = 0;
-    gSioHandshakeDone = 0;
-    gSioHandshakeConfirm = 0;
+    gSioHandshakeAck = FALSE;
+    gSioHandshakeDone = FALSE;
+    gSioHandshakeConfirm = FALSE;
     gSioExchangeSendData = (u16*)send;
     gSioExchangeRecvData = recv;
 }
 
 void SioSyncInit(void (*onConnect)()) {
-    gSioHandshakeAck = 0;
-    gSioHandshakeDone = 0;
-    gSioHandshakeConfirm = 0;
+    gSioHandshakeAck = FALSE;
+    gSioHandshakeDone = FALSE;
+    gSioHandshakeConfirm = FALSE;
     gSioConnectCallback = onConnect;
 }
 
@@ -1040,19 +1040,19 @@ s32 SioSyncRecv() {
     if (!gSioHandshakeDone) {
         if (!gSioHandshakeAck) {
             if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_CONNECT_REQUEST) {
-                gSioHandshakeAck = 1;
+                gSioHandshakeAck = TRUE;
             }
         } else if (gSioRecvFrame[0][0] != SIO_CMD_SYNC_CONFIRM) {
             if (gSioPlayerId == 0 && gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT &&
                 gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
-                gSioHandshakeConfirm = 1;
+                gSioHandshakeConfirm = TRUE;
             }
         } else {
             if (gSioConnectCallback != NULL) {
                 gSioConnectCallback();
             }
 
-            gSioHandshakeDone = 1;
+            gSioHandshakeDone = TRUE;
         }
     }
 
@@ -1350,12 +1350,12 @@ u8 CharaObjUpdateDefeat2() {
 
         break;
     default:
-        return 0;
+        return FALSE;
     }
 
     TaskPoolUpdate(&sCharaTaskPool);
     TaskPoolDraw(&sCharaTaskPool);
-    return 1;
+    return TRUE;
 }
 
 void CharaObjFree() {
@@ -1674,12 +1674,12 @@ u8 CharaObjUpdateDefeat() {
 
         break;
     default:
-        return 0;
+        return FALSE;
     }
 
     TaskPoolUpdate(&sCharaTaskPool);
     TaskPoolDraw(&sCharaTaskPool);
-    return 1;
+    return TRUE;
 }
 
 void RequestTileRowsCopy(u8* src, u8* dst, u16 size, s16 count) {

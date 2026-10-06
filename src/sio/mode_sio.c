@@ -210,15 +210,15 @@ void mode_sio_battle_0(s32 arg) {
     case 0:
     case 1:
         if (work->modeArg == 0) {
-            if (gSioBattleFileLoaded != 1) {
-                gSioBattleFileLoaded = 0;
+            if (gSioBattleFileLoaded != TRUE) {
+                gSioBattleFileLoaded = FALSE;
                 work->cursor = 1;
             } else {
-                gSioBattleFileLoaded = 1;
+                gSioBattleFileLoaded = TRUE;
                 work->cursor = 0;
             }
         } else {
-            gSioBattleFileLoaded = 1;
+            gSioBattleFileLoaded = TRUE;
             work->cursor = 0;
         }
 
@@ -257,7 +257,7 @@ void mode_sio_battle_0(s32 arg) {
     case 2:
 #ifdef VERSION_EU
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
-        gSioBattleFileLoaded = 1;
+        gSioBattleFileLoaded = TRUE;
         work->cursor = 0;
 
         switch (gLanguage) {
@@ -288,14 +288,14 @@ void mode_sio_battle_0(s32 arg) {
         sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
         sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
-        gSioBattleFileLoaded = 1;
+        gSioBattleFileLoaded = TRUE;
 #endif
         break;
     case 3:
         work->cursor = 0;
 #ifdef VERSION_EU
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
-        gSioBattleFileLoaded = 1;
+        gSioBattleFileLoaded = TRUE;
 
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -324,15 +324,15 @@ void mode_sio_battle_0(s32 arg) {
         sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
         sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
-        gSioBattleFileLoaded = 1;
+        gSioBattleFileLoaded = TRUE;
 #endif
         break;
     case 0xFFFF:
         break;
     }
 
-    gLinkDecksAllocated = 0;
-    gSioDebugMode = 0;
+    gLinkDecksAllocated = FALSE;
+    gSioDebugMode = FALSE;
 }
 
 void mode_sio_battle_1() {
@@ -374,7 +374,7 @@ void mode_sio_battle_1() {
         sSioBattleWork->state = SIO_BATTLE_STATE_MENU;
         break;
     case SIO_BATTLE_STATE_MENU:
-        if (gSioBattleFileLoaded == 1) {
+        if (gSioBattleFileLoaded == TRUE) {
             if (GetKeysPressed() & DPAD_UP) {
                 m4aSongNumStart(SONG_SYS_CLICK);
                 sSioBattleWork->cursor--;
@@ -504,7 +504,7 @@ void mode_sio_battle_2() {
 }
 
 void ClearSioBattleFileLoaded() {
-    gSioBattleFileLoaded = 0;
+    gSioBattleFileLoaded = FALSE;
 }
 
 enum SioBtlConnectState {
@@ -732,15 +732,15 @@ void mode_sio_btl_option_0(s32 arg) {
     SetBgMode1();
     SetupBg(0, 0, 7, 10);
     SetBgPriority(0, 0);
-    SetBgOverflow(0, 1);
+    SetBgOverflow(0, TRUE);
     SetBgSize(0, BGCNT_TXT256x256);
     SetupBg(1, 0, 15, 10);
     SetBgPriority(1, 1);
-    SetBgOverflow(1, 1);
+    SetBgOverflow(1, TRUE);
     SetBgSize(1, BGCNT_TXT256x256);
     SetupBg(2, 2, 24, 0);
     SetBgPriority(2, 2);
-    SetBgOverflow(2, 1);
+    SetBgOverflow(2, TRUE);
     SetBgSize(2, BGCNT_AFF512x512);
     RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(0), 0x2000);
 #ifdef VERSION_EU
@@ -819,19 +819,19 @@ void SioBtlOptionInitObjs() {
 #endif
 
     if (sSioBtlOptionWork->modeArg == 1) {
-        sSioBtlOptionWork->menuOpen = 1;
+        sSioBtlOptionWork->menuOpen = TRUE;
         sSioBtlOptionWork->cursor = 1;
         sSioBtlOptionWork->y = sSioBtlOptionWork->cursor * 4608 + 10752;
     } else {
-        sSioBtlOptionWork->menuOpen = 0;
+        sSioBtlOptionWork->menuOpen = FALSE;
         sSioBtlOptionWork->cursor = 0;
         sSioBtlOptionWork->y = 10752;
     }
 
     sSioBtlOptionWork->fadeLevel = 0;
     sSioBtlOptionWork->timer = 0;
-    sSioBtlOptionWork->player1Ready = 0;
-    sSioBtlOptionWork->player2Ready = 0;
+    sSioBtlOptionWork->player1Ready = FALSE;
+    sSioBtlOptionWork->player2Ready = FALSE;
     sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
     sSioBtlOptionWork->frameCount = 0;
     sSioBtlOptionWork->leaveDelay = 0;
@@ -889,11 +889,11 @@ void SioBtlOptionInitObjs() {
     AnimInit(&sSioBtlOptionWork->anim, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioBtlOptionWork->anim, 1, ANIM_FLAG_LOOP);
     sSioBtlOptionWork->gfx2 = AnimGetGfx(&sSioBtlOptionWork->anim);
-    sSioBtlOptionWork->cursorVisible = 1;
+    sSioBtlOptionWork->cursorVisible = TRUE;
     sSioBtlOptionWork->tiles3 = LoadObjTiles(gDialogBoxTiles, 0xC00);
     sSioBtlOptionWork->palette3 = LoadObjPalette(gCard00Palette, 32);
     sSioBtlOptionWork->gfx3 = gDialogBoxFrames[0];
-    sSioBtlOptionWork->messageVisible = 0;
+    sSioBtlOptionWork->messageVisible = FALSE;
 #ifdef VERSION_EU
     InitTextSlots(sSioBtlOptionWork->textSlots4, 120);
     sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlWaitingTextByLanguage), sSioBtlOptionWork->textSlots4);
@@ -913,7 +913,7 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->gfx4 = gSioBtlOptionLrFrames[0];
     sSioBtlOptionWork->gfx7 = gSioBtlOptionLrFrames[1];
     sSioBtlOptionWork->gfx8 = gSioBtlOptionLrFrames[2];
-    sSioBtlOptionWork->handicapMarkerVisible = 0;
+    sSioBtlOptionWork->handicapMarkerVisible = FALSE;
     sSioBtlOptionWork->tiles5[0] = LoadObjTiles(gSioHandicapGauge1Tiles, 0x280);
     sSioBtlOptionWork->palette5[0] = LoadObjPalette(gSioHandicapGauge1Palettes[0], 32);
     sSioBtlOptionWork->gfx5[0] = gSioHandicapGauge1Frames[0];
@@ -1050,24 +1050,24 @@ void SioBtlOptionDraw() {
     DrawSprite(-((sSioBtlOptionWork->frameCount >> 3) % 4) + 88, 2, sSioBtlOptionWork->gfx4, sSioBtlOptionWork->tiles4, sSioBtlOptionWork->palette4, NULL, 0, 0xFF00);
     DrawSprite(224 + ((sSioBtlOptionWork->frameCount >> 3) % 4), 2, sSioBtlOptionWork->gfx7, sSioBtlOptionWork->tiles4, sSioBtlOptionWork->palette4, NULL, 0, 0xFF00);
 
-    if (sSioBtlOptionWork->menuOpen == 1) {
+    if (sSioBtlOptionWork->menuOpen == TRUE) {
         DrawSprite(72, 38, sSioBtlOptionWork->gfx, sSioBtlOptionWork->tiles, sSioBtlOptionWork->palette, NULL, 0, 0x200);
 
-        if (sSioBtlOptionWork->cursorVisible == 1) {
+        if (sSioBtlOptionWork->cursorVisible == TRUE) {
             ApproachValueHalf(&sSioBtlOptionWork->y, sSioBtlOptionWork->cursor * 4608 + 10752);
             DrawSprite(64, sSioBtlOptionWork->y >> 8, sSioBtlOptionWork->gfx2, sSioBtlOptionWork->tiles2, sSioBtlOptionWork->palette2, NULL, 0, 0x100);
         }
     }
 
-    if (sSioBtlOptionWork->messageVisible == 1) {
+    if (sSioBtlOptionWork->messageVisible == TRUE) {
         DrawSprite(120, 131, sSioBtlOptionWork->gfx3, sSioBtlOptionWork->tiles3, sSioBtlOptionWork->palette3, NULL, 0, 0xF000);
 #ifdef VERSION_EU
         width = GetTextSlotsMaxLineWidth(sSioBtlOptionWork->textSlots4, sSioBtlOptionWork->textSlotCount4);
-        multiline = 0;
+        multiline = FALSE;
 
         for (i = 0; i < sSioBtlOptionWork->textSlotCount4; i++) {
             if (sSioBtlOptionWork->textSlots4[i].tiles == NULL) {
-                multiline = 1;
+                multiline = TRUE;
                 break;
             }
         }
@@ -1085,7 +1085,7 @@ void SioBtlOptionDraw() {
     DrawSprite(32, 24, sSioBtlOptionWork->gfx5[0], sSioBtlOptionWork->tiles5[0], sSioBtlOptionWork->palette5[0], NULL, 0, 0xF100);
     DrawSprite(132, 24, sSioBtlOptionWork->gfx5[1], sSioBtlOptionWork->tiles5[1], sSioBtlOptionWork->palette5[1], NULL, 0, 0xF100);
 
-    if (sSioBtlOptionWork->handicapMarkerVisible == 1) {
+    if (sSioBtlOptionWork->handicapMarkerVisible == TRUE) {
         DrawSprite(gSioPlayerId * 101 + 44 + gSioHandicapMarkerX[sSioBtlOptionWork->handicap], -((sSioBtlOptionWork->frameCount >> 3) % 4) / 2 + 22, sSioBtlOptionWork->gfx8, sSioBtlOptionWork->tiles4, sSioBtlOptionWork->palette4, NULL, 0, 0xF000);
     }
 
@@ -1168,7 +1168,7 @@ void SioBtlOptionHandleIdle() {
 
         if (gSioPlayerId == 0) {
             m4aSongNumStart(SONG_SYS_CANSEL);
-            sSioBtlOptionWork->menuOpen = 1;
+            sSioBtlOptionWork->menuOpen = TRUE;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
     } else if ((gSioCommandRecv[1][1] & 0xFFF0) == SIO_CMD_BTL_OPEN_MENU) {
@@ -1176,7 +1176,7 @@ void SioBtlOptionHandleIdle() {
 
         if (gSioPlayerId == 1) {
             m4aSongNumStart(SONG_SYS_CANSEL);
-            sSioBtlOptionWork->menuOpen = 1;
+            sSioBtlOptionWork->menuOpen = TRUE;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
     }
@@ -1193,7 +1193,7 @@ void SioBtlOptionHandleIdle() {
     } else {
         if (GetKeysPressed() & A_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
-            sSioBtlOptionWork->menuOpen = 1;
+            sSioBtlOptionWork->menuOpen = TRUE;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
 
@@ -1314,8 +1314,8 @@ void SioBtlOptionHandleMenu() {
                 gSioCommandSend[1] = SIO_CMD_BTL_PLAYER2_READY;
             }
 
-            sSioBtlOptionWork->menuOpen = 0;
-            sSioBtlOptionWork->messageVisible = 1;
+            sSioBtlOptionWork->menuOpen = FALSE;
+            sSioBtlOptionWork->messageVisible = TRUE;
             sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlWaitingText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
             sSioBtlOptionWork->x = 68;
@@ -1329,14 +1329,14 @@ void SioBtlOptionHandleMenu() {
             ModeRequest(&gModeDeck, 0);
             break;
         case 2:
-            sSioBtlOptionWork->cursorVisible = 0;
-            sSioBtlOptionWork->handicapMarkerVisible = 1;
+            sSioBtlOptionWork->cursorVisible = FALSE;
+            sSioBtlOptionWork->handicapMarkerVisible = TRUE;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_SET_HANDICAP;
             break;
         }
     } else if (GetKeysPressed() & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sSioBtlOptionWork->menuOpen = 0;
+        sSioBtlOptionWork->menuOpen = FALSE;
         sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_IDLE;
     }
 
@@ -1410,8 +1410,8 @@ void SioBtlOptionHandleMenu() {
             switch (sSioBtlOptionWork->cursor) {
             case 0:
                 gSioDebugReady[0] = 1;
-                sSioBtlOptionWork->menuOpen = 0;
-                sSioBtlOptionWork->messageVisible = 1;
+                sSioBtlOptionWork->menuOpen = FALSE;
+                sSioBtlOptionWork->messageVisible = TRUE;
                 sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlWaitingTextByLanguage), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
                 sSioBtlOptionWork->x = 68;
@@ -1425,14 +1425,14 @@ void SioBtlOptionHandleMenu() {
                 ModeRequest(&gModeDeck, 0);
                 break;
             case 2:
-                sSioBtlOptionWork->cursorVisible = 0;
-                sSioBtlOptionWork->handicapMarkerVisible = 1;
+                sSioBtlOptionWork->cursorVisible = FALSE;
+                sSioBtlOptionWork->handicapMarkerVisible = TRUE;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_SET_HANDICAP;
                 break;
             }
         } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sSioBtlOptionWork->menuOpen = 0;
+            sSioBtlOptionWork->menuOpen = FALSE;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_IDLE;
         }
 
@@ -1472,8 +1472,8 @@ void SioBtlOptionSetHandicap() {
 
     if (GetKeysPressed() & (A_BUTTON | B_BUTTON)) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sSioBtlOptionWork->cursorVisible = 1;
-        sSioBtlOptionWork->handicapMarkerVisible = 0;
+        sSioBtlOptionWork->cursorVisible = TRUE;
+        sSioBtlOptionWork->handicapMarkerVisible = FALSE;
         sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
     }
 
@@ -1519,8 +1519,8 @@ void SioBtlOptionSetHandicap() {
 
         if (GetKeysPressed() & (A_BUTTON | B_BUTTON)) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sSioBtlOptionWork->cursorVisible = 1;
-            sSioBtlOptionWork->handicapMarkerVisible = 0;
+            sSioBtlOptionWork->cursorVisible = TRUE;
+            sSioBtlOptionWork->handicapMarkerVisible = FALSE;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
 
@@ -1621,7 +1621,7 @@ void SioBtlOptionWaitReady() {
     }
 #endif
 
-    if (sSioBtlOptionWork->player1Ready == 1 && sSioBtlOptionWork->player2Ready == 1) {
+    if (sSioBtlOptionWork->player1Ready == TRUE && sSioBtlOptionWork->player2Ready == TRUE) {
         sSioBtlOptionWork->timer = 0;
         sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlReadyText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
@@ -1835,7 +1835,7 @@ void SioBtlOptionCheckReady() {
             SetSioBtlOptionAnimation(0, 1, 1);
         }
 
-        sSioBtlOptionWork->player1Ready = 1;
+        sSioBtlOptionWork->player1Ready = TRUE;
     }
 
     if (gSioCommandRecv[1][1] == SIO_CMD_BTL_PLAYER2_READY) {
@@ -1845,7 +1845,7 @@ void SioBtlOptionCheckReady() {
             SetSioBtlOptionAnimation(1, 1, 1);
         }
 
-        sSioBtlOptionWork->player2Ready = 1;
+        sSioBtlOptionWork->player2Ready = TRUE;
     }
 #ifdef VERSION_EU
     } else {
@@ -1856,7 +1856,7 @@ void SioBtlOptionCheckReady() {
             SetSioBtlOptionAnimation(0, 1, 1);
         }
 
-        sSioBtlOptionWork->player1Ready = 1;
+        sSioBtlOptionWork->player1Ready = TRUE;
     }
 
     if (gSioDebugReady[1] == 1) {
@@ -1866,7 +1866,7 @@ void SioBtlOptionCheckReady() {
             SetSioBtlOptionAnimation(1, 1, 1);
         }
 
-        sSioBtlOptionWork->player2Ready = 1;
+        sSioBtlOptionWork->player2Ready = TRUE;
     }
     }
 #endif
@@ -2283,11 +2283,11 @@ void SioBtlOptionUpdateHandicapGauges(u16 handicap1, u16 handicap2) {
 }
 
 void SioBtlOptionCancelReady() {
-    sSioBtlOptionWork->messageVisible = 0;
+    sSioBtlOptionWork->messageVisible = FALSE;
     RequestDma3Copy(gSioBtlOptionReadyTiles, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
     RequestDma3Copy(gSioBtlOptionReadyTiles + 0x400, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
-    sSioBtlOptionWork->player1Ready = 0;
-    sSioBtlOptionWork->player2Ready = 0;
+    sSioBtlOptionWork->player1Ready = FALSE;
+    sSioBtlOptionWork->player2Ready = FALSE;
     SetSioBtlOptionAnimation(0, 0, 0);
     SetSioBtlOptionAnimation(1, 0, 0);
 }
@@ -2358,17 +2358,17 @@ void mode_sio_btl_cardget_0(s32 arg) {
     gSystemFlags |= SYSTEM_FLAG_DMA3_FLUSH_CPU;
 #endif
 
-    if (gLinkDecksAllocated == 1) {
+    if (gLinkDecksAllocated == TRUE) {
         FreeLinkDecks();
-        gLinkDecksAllocated = 0;
+        gLinkDecksAllocated = FALSE;
     }
 
     sSioBtlCardgetWork = EwramAlloc(sizeof(SioBtlCardgetWork));
 
     if (arg == 0) {
-        sSioBtlCardgetWork->lost = 0;
+        sSioBtlCardgetWork->lost = FALSE;
     } else {
-        sSioBtlCardgetWork->lost = 1;
+        sSioBtlCardgetWork->lost = TRUE;
     }
 
     SetBgMode0();
@@ -2905,15 +2905,15 @@ void mode_sio_chg_card_0(s32 arg) {
     SetBgMode0();
     SetupBg(0, 0, 7, 0);
     SetBgPriority(0, 0);
-    SetBgOverflow(0, 1);
+    SetBgOverflow(0, TRUE);
     SetBgSize(0, BGCNT_TXT256x256);
     SetupBg(1, 0, 15, 0);
     SetBgPriority(1, 1);
-    SetBgOverflow(1, 1);
+    SetBgOverflow(1, TRUE);
     SetBgSize(1, BGCNT_TXT256x256);
     SetupBg(2, 0, 24, 0);
     SetBgPriority(2, 2);
-    SetBgOverflow(2, 1);
+    SetBgOverflow(2, TRUE);
     SetBgSize(2, BGCNT_TXT256x256);
     RequestDma3Copy(gSioChgCardBgTiles, GetBgCharBase(0), 0x2000);
     DisableBg(0);
@@ -2921,9 +2921,9 @@ void mode_sio_chg_card_0(s32 arg) {
     DisableBg(2);
     sSioChgCardWork->blinkPhase = 0;
     sSioChgCardWork->timer = 0;
-    sSioChgCardWork->ready = 0;
+    sSioChgCardWork->ready = FALSE;
     sSioChgCardWork->state = SIO_CHG_CARD_STATE_LOAD_BG;
-    sSioChgCardWork->receiveOk = 0;
+    sSioChgCardWork->receiveOk = FALSE;
     sSioChgCardWork->leaveDelay = 0;
     sSioChgCardWork->offeredCard = arg;
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((arg + 1) & 0x0FFF);
@@ -2957,7 +2957,7 @@ void SioChgCardInitObjs() {
     sSioChgCardWork->x = gSioChgCardSlotPos[sSioChgCardWork->cursor].x;
     sSioChgCardWork->y = gSioChgCardSlotPos[sSioChgCardWork->cursor].y;
     sSioChgCardWork->nextCursor = sSioChgCardWork->cursor;
-    sSioChgCardWork->cursorVisible = 1;
+    sSioChgCardWork->cursorVisible = TRUE;
 
     for (i = 0; i < 2; i++) {
         sSioChgCardWork->playerTilesPalettes[i] = AllocObjTiles(0xC80, NULL);
@@ -3022,14 +3022,14 @@ void SioChgCardInitObjs() {
     sSioChgCardWork->palette4 = LoadObjPalette(gCard00Palette, 32);
     sSioChgCardWork->tiles5 = LoadObjTiles(gDialogBoxTiles, 0xC00);
     sSioChgCardWork->gfx6 = gDialogBoxFrames[0];
-    sSioChgCardWork->messageVisible = 0;
+    sSioChgCardWork->messageVisible = FALSE;
     InitTextSlots(sSioChgCardWork->textSlots, 42);
     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
     sSioChgCardWork->x3 = 68;
     sSioChgCardWork->y3 = 124;
     InitTextSlots(sSioChgCardWork->textSlots2, 20);
     sSioChgCardWork->textSlotCount2 = LoadTextSlots(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].name, sSioChgCardWork->textSlots2);
-    sSioChgCardWork->cardInfoVisible = 0;
+    sSioChgCardWork->cardInfoVisible = FALSE;
     TaskPoolInit(&sSioChgCardWork->tasks, 11);
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((sSioChgCardWork->offeredCard + 1) & 0x0FFF);
     sSioChgCardWork->state++;
@@ -3131,7 +3131,7 @@ void SioChgCardSelect() {
         if (gSioChgCardReady[0] == 1) {
             SetSioChgCardAnimation(0, 0, 0);
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sSioChgCardWork->messageVisible = 0;
+            sSioChgCardWork->messageVisible = FALSE;
         }
 
         RequestDma3Copy(gSioChgCardReadyTiles, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
@@ -3150,7 +3150,7 @@ void SioChgCardSelect() {
         if (gSioChgCardReady[1] == 1) {
             SetSioChgCardAnimation(1, 0, 0);
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sSioChgCardWork->messageVisible = 0;
+            sSioChgCardWork->messageVisible = FALSE;
         }
 
         RequestDma3Copy(gSioChgCardReadyTiles + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
@@ -3229,7 +3229,7 @@ void SioChgCardTryTrade() {
     SioChgCardBackupCollection();
     sSioChgCardWork->receiveOk = SioChgCardReceiveCards();
 
-    if (sSioChgCardWork->receiveOk == 1) {
+    if (sSioChgCardWork->receiveOk == TRUE) {
         gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_OK;
     } else {
         gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_FAILED;
@@ -3239,7 +3239,7 @@ void SioChgCardTryTrade() {
 }
 
 void SioChgCardWaitTradeResult() {
-    if (sSioChgCardWork->receiveOk == 1) {
+    if (sSioChgCardWork->receiveOk == TRUE) {
         gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_OK;
     } else {
         gSioCommandSend[1] = SIO_CMD_TRADE_RECEIVE_FAILED;
@@ -3303,14 +3303,14 @@ void SioChgCardWaitMove() {
     TaskPoolUpdate(&sSioChgCardWork->tasks);
 
     if (sSioChgCardWork->timer == 80) {
-        sSioChgCardWork->messageVisible = 0;
+        sSioChgCardWork->messageVisible = FALSE;
     }
 
     sSioChgCardWork->timer++;
 
     if (sSioChgCardWork->timer > 199) {
         sSioChgCardWork->timer = 0;
-        sSioChgCardWork->messageVisible = 1;
+        sSioChgCardWork->messageVisible = TRUE;
         sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwapCompleteText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 70;
         sSioChgCardWork->y3 = 119;
@@ -3335,7 +3335,7 @@ void SioChgCardHideMessage() {
 
     if (sSioChgCardWork->timer > 119) {
         sSioChgCardWork->timer = 0;
-        sSioChgCardWork->messageVisible = 0;
+        sSioChgCardWork->messageVisible = FALSE;
         sSioChgCardWork->state++;
     }
 }
@@ -3396,7 +3396,7 @@ void SioChgCardDraw() {
     DrawSprite(72, 72, sSioChgCardWork->gfx[0], sSioChgCardWork->playerTilesPalettes[0], sSioChgCardWork->playerTilesPalettes[2], NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 0xFFFF);
     DrawSprite(168, 72, sSioChgCardWork->gfx[1], sSioChgCardWork->playerTilesPalettes[1], sSioChgCardWork->playerTilesPalettes[3], NULL, SPRITE_PRIORITY(1), 0xFFFF);
 
-    if (sSioChgCardWork->cursorVisible == 1) {
+    if (sSioChgCardWork->cursorVisible == TRUE) {
         DrawSprite(sSioChgCardWork->x, sSioChgCardWork->y, sSioChgCardWork->gfx2, sSioChgCardWork->tiles, sSioChgCardWork->palette, NULL, SPRITE_PRIORITY(1), 0xFFC0);
         DrawSprite(sSioChgCardWork->x + 2, sSioChgCardWork->y - 8, sSioChgCardWork->gfx3, sSioChgCardWork->tiles2, sSioChgCardWork->palette2, NULL, SPRITE_PRIORITY(1), 0xFFA0);
     }
@@ -3412,12 +3412,12 @@ void SioChgCardDraw() {
         }
     }
 
-    if (sSioChgCardWork->messageVisible == 1) {
+    if (sSioChgCardWork->messageVisible == TRUE) {
         DrawSprite(120, 131, sSioChgCardWork->gfx6, sSioChgCardWork->tiles5, sSioChgCardWork->palette4, NULL, 0, 0xFF00);
         DrawTextSlots(sSioChgCardWork->x3, sSioChgCardWork->y3, sSioChgCardWork->textSlots, sSioChgCardWork->palette2, 20, sSioChgCardWork->textSlotCount);
     }
 
-    if (sSioChgCardWork->cardInfoVisible == 1) {
+    if (sSioChgCardWork->cardInfoVisible == TRUE) {
         DrawTextSlots(58, 27, sSioChgCardWork->textSlots2, sSioChgCardWork->palette, 18, sSioChgCardWork->textSlotCount2);
         DrawTextSlots(52, 42, sSioChgCardWork->textSlots, sSioChgCardWork->palette2, 18, sSioChgCardWork->textSlotCount);
     }
@@ -3452,7 +3452,7 @@ void SioChgCardSetSlot(u16 command) {
             sSioChgCardWork->gfx5[i] = gCardValueDigitFrames[0];
             gSioChgCardSlots[i] = slot;
 
-            if (sSioChgCardWork->cardInfoVisible == 1) {
+            if (sSioChgCardWork->cardInfoVisible == TRUE) {
                 if (i == sSioChgCardWork->cursor) {
                     SioChgCardHideInfo();
                 }
@@ -3555,9 +3555,9 @@ void SioChgCardHandleInput() {
     player1Pressed = GetKeysPressed();
     player2Pressed = GetKeysPressed();
 
-    if (sSioChgCardWork->cardInfoVisible == 1) {
+    if (sSioChgCardWork->cardInfoVisible == TRUE) {
         if (GetKeysPressed() & B_BUTTON) {
-            if (sSioChgCardWork->cardInfoVisible == 1) {
+            if (sSioChgCardWork->cardInfoVisible == TRUE) {
                 SioChgCardHideInfo();
             }
         }
@@ -3594,12 +3594,12 @@ void SioChgCardHandleInput() {
 
         if (player1Pressed & A_BUTTON) {
             if (owner == 2) {
-                if (SioChgCardHasOwnCards() == 1) {
-                    sSioChgCardWork->ready = 1;
+                if (SioChgCardHasOwnCards() == TRUE) {
+                    sSioChgCardWork->ready = TRUE;
                     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
                     sSioChgCardWork->x3 = 68;
                     sSioChgCardWork->y3 = 124;
-                    sSioChgCardWork->messageVisible = 1;
+                    sSioChgCardWork->messageVisible = TRUE;
                 } else {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 }
@@ -3612,7 +3612,7 @@ void SioChgCardHandleInput() {
                 SioChgCardShowInfo();
             }
         } else if (player1Pressed & B_BUTTON) {
-            if (SioChgCardSlotsEmpty() == 1) {
+            if (SioChgCardSlotsEmpty() == TRUE) {
                 gSioCommandSend[1] = SIO_CMD_TRADE_LEAVE;
             } else if (owner == 0) {
                 if (gSioChgCardSlots[sSioChgCardWork->cursor] != SIO_TRADE_CARD_NONE) {
@@ -3654,12 +3654,12 @@ void SioChgCardHandleInput() {
 
         if (player2Pressed & A_BUTTON) {
             if (owner == 2) {
-                if (SioChgCardHasOwnCards() == 1) {
-                    sSioChgCardWork->ready = 1;
+                if (SioChgCardHasOwnCards() == TRUE) {
+                    sSioChgCardWork->ready = TRUE;
                     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
                     sSioChgCardWork->x3 = 68;
                     sSioChgCardWork->y3 = 124;
-                    sSioChgCardWork->messageVisible = 1;
+                    sSioChgCardWork->messageVisible = TRUE;
                 } else {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 }
@@ -3672,7 +3672,7 @@ void SioChgCardHandleInput() {
                 SioChgCardShowInfo();
             }
         } else if (player2Pressed & B_BUTTON) {
-            if (SioChgCardSlotsEmpty() == 1) {
+            if (SioChgCardSlotsEmpty() == TRUE) {
                 gSioCommandSend[1] = SIO_CMD_TRADE_LEAVE;
             } else if (owner == 1) {
                 if (gSioChgCardSlots[sSioChgCardWork->cursor] != SIO_TRADE_CARD_NONE) {
@@ -3684,21 +3684,21 @@ void SioChgCardHandleInput() {
     }
 
     if (sSioChgCardWork->cursor == 10) {
-        sSioChgCardWork->cursorVisible = 0;
+        sSioChgCardWork->cursorVisible = FALSE;
 
         if (gFrameCounter % 10 == 0) {
             RequestDma3Copy(&gSioChgCardReadyTiles[sSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
             sSioChgCardWork->blinkPhase = 1 - sSioChgCardWork->blinkPhase;
         }
     } else if (sSioChgCardWork->cursor == 11) {
-        sSioChgCardWork->cursorVisible = 0;
+        sSioChgCardWork->cursorVisible = FALSE;
 
         if (gFrameCounter % 10 == 0) {
             RequestDma3Copy(&gSioChgCardReadyTiles[0x400 + sSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
             sSioChgCardWork->blinkPhase = 1 - sSioChgCardWork->blinkPhase;
         }
     } else {
-        sSioChgCardWork->cursorVisible = 1;
+        sSioChgCardWork->cursorVisible = TRUE;
         RequestDma3Copy(gSioChgCardReadyTiles, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
         RequestDma3Copy(gSioChgCardReadyTiles + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
     }
@@ -3718,18 +3718,18 @@ s8 SioChgCardHasOwnCards() {
     if (gSioPlayerId == 0) {
         for (i = 0; i < 5; i++) {
             if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
-                return 1;
+                return TRUE;
             }
         }
     } else {
         for (i = 5; i < 10; i++) {
             if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
-                return 1;
+                return TRUE;
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s8 SioChgCardSlotsEmpty() {
@@ -3737,11 +3737,11 @@ s8 SioChgCardSlotsEmpty() {
 
     for (i = 0; i < 10; i++) {
         if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void SioChgCardShowInfo() {
@@ -3761,17 +3761,17 @@ void SioChgCardShowInfo() {
     sSioChgCardWork->textSlotCount2 = LoadTextSlots(defs[n].gfx, sSioChgCardWork->textSlots2);
     sSioChgCardWork->textSlotCount = LoadTextSlots((void*)gCardKindDescriptions[nameId], sSioChgCardWork->textSlots);
     EnableBg(0);
-    sSioChgCardWork->cardInfoVisible = 1;
+    sSioChgCardWork->cardInfoVisible = TRUE;
 }
 
 void SioChgCardHideInfo() {
     DisableBg(0);
-    sSioChgCardWork->cardInfoVisible = 0;
+    sSioChgCardWork->cardInfoVisible = FALSE;
 }
 
 void SioChgCardCancelReady() {
     s8 cursor;
-    sSioChgCardWork->ready = 0;
+    sSioChgCardWork->ready = FALSE;
 
     if (gSioPlayerId == 0) {
         gSioChgCardCursor = 0;
@@ -3784,7 +3784,7 @@ void SioChgCardCancelReady() {
     sSioChgCardWork->nextCursor = cursor;
     sSioChgCardWork->x = gSioChgCardSlotPos[sSioChgCardWork->cursor].x;
     sSioChgCardWork->y = gSioChgCardSlotPos[sSioChgCardWork->cursor].y;
-    sSioChgCardWork->cursorVisible = 1;
+    sSioChgCardWork->cursorVisible = TRUE;
     sSioChgCardWork->offeredCard = gSioChgCardSlots[sSioChgCardWork->cursor];
     SetSioChgCardAnimation(0, 0, 0);
     SetSioChgCardAnimation(1, 0, 0);
@@ -3792,7 +3792,7 @@ void SioChgCardCancelReady() {
     RequestDma3Copy(gSioChgCardReadyTiles + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
     gSioChgCardReady[0] = 0;
     gSioChgCardReady[1] = 0;
-    sSioChgCardWork->messageVisible = 0;
+    sSioChgCardWork->messageVisible = FALSE;
 }
 
 void SioChgCardCreateMoveTasks() {
@@ -3860,7 +3860,7 @@ s16 SioChgCardReceiveCards() {
 
             if (hasCard) {
                 if (AddCardToCollection(gSioChgCardSlots[i]) == CARD_NOT_ADDED) {
-                    return 0;
+                    return FALSE;
                 }
             }
         }
@@ -3870,13 +3870,13 @@ s16 SioChgCardReceiveCards() {
 
             if (hasCard) {
                 if (AddCardToCollection(gSioChgCardSlots[i]) == CARD_NOT_ADDED) {
-                    return 0;
+                    return FALSE;
                 }
             }
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void SioChgCardReturnOwnCards() {

@@ -36,11 +36,11 @@ void InitGameState() {
 }
 
 void ClearFieldResume() {
-    gGameState.fieldResume = 0;
+    gGameState.fieldResume = FALSE;
 }
 
 void RequestFieldResume() {
-    gGameState.fieldResume = 1;
+    gGameState.fieldResume = TRUE;
 }
 
 void SeedGameRandom() {

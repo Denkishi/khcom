@@ -396,7 +396,7 @@ u8 IsSongPlaying(u16 songNum) {
     u8 idx = gSongTable[songNum].ms;
     SongHeader* header = gSongTable[songNum].header;
     MusicPlayerInfo* info = gMPlayTable[idx].info;
-    s32 playing = 0;
+    s32 playing = FALSE;
 
     if (header == info->songHeader) {
         playing = (u16)info->status != 0;

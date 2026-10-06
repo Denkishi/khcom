@@ -158,7 +158,7 @@ void TitleFadeOut() {
 }
 
 void mode_title_0() {
-    sTitleCancelled = 0;
+    sTitleCancelled = FALSE;
     ResetGameState();
     SaveLoadHeader();
     InitMapCardInventory();
@@ -404,7 +404,7 @@ void mode_title_1() {
             TitleFadeOut();
         } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sTitleCancelled = 1;
+            sTitleCancelled = TRUE;
             TitleFadeOut();
         }
 
@@ -448,18 +448,18 @@ void mode_title_2() {
 
 u8 IsTitleLogoShown() {
     if (sTitleState > TITLE_STATE_WHITE_OUT) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsTitleIntroDone() {
     if (sTitleState > TITLE_STATE_CROSSFADE_BG) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 Mode gModeTitle = {

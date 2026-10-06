@@ -242,14 +242,14 @@ void* CreateAllmapRoomTask(TaskPool* pool) {
     arg.x = 208;
     arg.y = 0;
     arg.room = gMapFloorState.room;
-    arg.asSprite = 1;
+    arg.asSprite = TRUE;
     return TaskCreate(pool, &sTaskDescAllmapRoom, &arg);
 }
 
 u8 AllmapDoorHasCardInfo(u8 room, u8 side) {
     if (GetEventRoomKind(room) != EVENT_DOOR_NONE) {
         if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
-            return 0;
+            return FALSE;
         }
     }
 
@@ -257,29 +257,29 @@ u8 AllmapDoorHasCardInfo(u8 room, u8 side) {
         return AllmapDoorExists(room, side);
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 AllmapDoorHasKeyInfo(u8 room, u8 side) {
     if (GetEventRoomKind(room) == EVENT_DOOR_NONE) {
         if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) == 0) {
-            return 0;
+            return FALSE;
         }
     } else {
         if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
-            return 0;
+            return FALSE;
         }
 
         if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) == 0) {
-            return 0;
+            return FALSE;
         }
     }
 
     if (AllmapDoorExists(room, side)) {
-        return AllmapDoorIsOpen(room, side) == 0;
+        return AllmapDoorIsOpen(room, side) == FALSE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg) {
@@ -452,7 +452,7 @@ enum AllmapBarState {
 };
 
 void AllmapBarStartClose(AllmapBarWork* work) {
-    work->closing = 1;
+    work->closing = TRUE;
 
     if (work->state == ALLMAP_BAR_STATE_BARS_IN) {
         work->state = ALLMAP_BAR_STATE_BARS_OUT;
@@ -487,8 +487,8 @@ void task_allmap_bar_0(AllmapBarWork* work) {
     work->targetY = 0;
     work->targetY2 = 0x9800;
     work->targetX = 0;
-    work->closing = 0;
-    work->fadeStarted = 0;
+    work->closing = FALSE;
+    work->fadeStarted = FALSE;
 }
 
 void AllmapBarFadeOut(AllmapBarWork* work) {
@@ -539,11 +539,11 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
     case ALLMAP_BAR_STATE_BARS_OUT:
         if (!FadeIsActive() && !work->fadeStarted) {
             for (i = 0; i < 32; i++) {
-                FadeSetPaletteExcluded(i, 0);
+                FadeSetPaletteExcluded(i, FALSE);
             }
 
             AllmapBarFadeOut(work);
-            work->fadeStarted = 1;
+            work->fadeStarted = TRUE;
         }
 
         ApproachValue(&work->y, work->targetY, work->steps);
@@ -570,7 +570,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
             AllmapBarFadeOut(work);
             gAllmapModeState = ALLMAP_MODE_STATE_FADE;
             AllmapClearRoomnameFrame();
-            SetAllmapReturnToMenu(0);
+            SetAllmapReturnToMenu(FALSE);
             return 0;
         }
 
@@ -579,7 +579,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
             AllmapBarStartClose(work);
             gAllmapModeState = ALLMAP_MODE_STATE_BAR_SLIDE;
             AllmapClearRoomnameFrame();
-            SetAllmapReturnToMenu(1);
+            SetAllmapReturnToMenu(TRUE);
         }
 
         break;
@@ -628,12 +628,12 @@ u8 AllmapHasDoorInfo(AllmapCursorPos pos) {
             }
 
             if (hasInfo) {
-                return 1;
+                return TRUE;
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
@@ -662,8 +662,8 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
             work->doors[i].sprite.tiles2 = LoadObjTiles(gCardOutlineWhiteTiles, 0x600);
             work->doors[i].sprite.palette2 = LoadObjPalette(gDoorCardPalette, 32);
             work->doors[i].sprite.gfx2 = gCardOutlineWhiteFrames[0];
-            FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, 1);
-            FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, 1);
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, TRUE);
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, TRUE);
             work->gfx2[i] = gAllmapDoorinfoArrowFrames[i];
             work->count++;
         } else {
@@ -674,11 +674,11 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
     if (work->count != 0) {
         work->tiles = LoadObjTiles(gAllmapDoorinfoArrowTiles, 0x80);
         work->palette = LoadObjPalette(gAllmapObjPalette, 32);
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         work->tiles2 = LoadObjTiles(gAllmapRoomTiles, 0x2400);
         work->gfx = gAllmapRoomFrames[0];
         InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, 32);
-        FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
     }
 }
 
@@ -718,15 +718,15 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         SetLayeredCardSpritePos(GetAllmapKeyCardX(work->count, i), 0x6800, &card->sprite);
 
         if (work->doors[i].sprite.palette != NULL) {
-            FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, TRUE);
         }
 
         if (work->doors[i].sprite.palette2 != NULL) {
-            FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, 1);
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, TRUE);
         }
 
         if (work->doors[i].sprite.palette3 != NULL) {
-            FadeSetPaletteExcluded(work->doors[i].sprite.palette3->index + 16, 1);
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette3->index + 16, TRUE);
         }
     }
 
@@ -740,14 +740,14 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, 32);
     }
 
-    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
 }
 
 void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        FadeSetPaletteExcluded(i, 0);
+        FadeSetPaletteExcluded(i, FALSE);
     }
 
     work->palette2 = EwramAlloc(sizeof(ObjPalette));
@@ -768,13 +768,13 @@ void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
     work->steps = 8;
     work->x = work->roomX << 8;
     work->y = work->roomY << 8;
-    work->closing = 0;
+    work->closing = FALSE;
     FadeToAmount(FADE_MODE_BLACK, 14, 8);
 }
 
 s32 task_allmap_doorinfo_1(AllmapDoorinfoWork* work) {
     if ((GetKeysPressed() & B_BUTTON) != 0 && !work->closing) {
-        work->closing = 1;
+        work->closing = TRUE;
         m4aSongNumStart(SONG_SYS_CLOSE);
         work->steps = 8 - work->steps;
         work->targetX = work->roomX << 8;
@@ -863,10 +863,10 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
     }
 
     for (i = 0; i < 32; i++) {
-        FadeSetPaletteExcluded(i, 1);
+        FadeSetPaletteExcluded(i, TRUE);
     }
 
-    FadeSetPaletteExcluded(10, 0);
+    FadeSetPaletteExcluded(10, FALSE);
     EwramFree(work->palette2);
 }
 
@@ -914,10 +914,10 @@ void task_allmap_pusha_3(AllmapPushaWork* work) {
 
 u8 IsStockMesDispActive() {
     if (gStockMesDispWork == NULL || !IsTaskActive(((AllmapPushaWork*)gStockMesDispWork)->task)) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void ClearStockMesDispWork() {
@@ -1183,7 +1183,7 @@ void AllmapHandleInput() {
     u8 moved;
     u8 room;
 
-    moved = 0;
+    moved = FALSE;
     cursor = sAllmapState->cursorTask->work;
     pos = cursor->pos;
 
@@ -1191,22 +1191,22 @@ void AllmapHandleInput() {
     case DPAD_UP:
         pos.x++;
         pos.y--;
-        moved = 1;
+        moved = TRUE;
         break;
     case DPAD_RIGHT:
         pos.x++;
         pos.y++;
-        moved = 1;
+        moved = TRUE;
         break;
     case DPAD_LEFT:
         pos.x--;
         pos.y--;
-        moved = 1;
+        moved = TRUE;
         break;
     case DPAD_DOWN:
         pos.x--;
         pos.y++;
-        moved = 1;
+        moved = TRUE;
         break;
     }
 
@@ -1282,7 +1282,7 @@ void AllmapAddRoom(u8 id, u16 x, u16 y) {
     arg.x = x;
     arg.y = y;
     arg.room = id;
-    arg.asSprite = 0;
+    arg.asSprite = FALSE;
     sAllmapState->roomTasks[id] = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoom, &arg);
 
     room = links[0];

@@ -26,16 +26,16 @@ static u16 sUnk_02034EDA;
 void mode_copyright1_0(s32 arg) {
 #ifndef VERSION_JP
     if (arg == 0) {
-        sCopyrightExtraScreen = 1;
+        sCopyrightExtraScreen = TRUE;
     } else {
-        sCopyrightExtraScreen = 0;
+        sCopyrightExtraScreen = FALSE;
     }
 #endif
 
-    sCopyrightSaveCorrupted = 0;
+    sCopyrightSaveCorrupted = FALSE;
 
     if (SaveRepairHeader() == SAVE_BAD_CHECKSUM) {
-        sCopyrightSaveCorrupted = 1;
+        sCopyrightSaveCorrupted = TRUE;
         SaveClearHeader();
         SaveClearSystem();
         SaveClearFileLarge(0);
@@ -45,27 +45,27 @@ void mode_copyright1_0(s32 arg) {
     }
 
     if (SaveRepairFileLarge(0) == SAVE_BAD_CHECKSUM) {
-        sCopyrightSaveCorrupted = 1;
+        sCopyrightSaveCorrupted = TRUE;
         SaveClearFileLarge(0);
     }
 
     if (SaveRepairFileLarge(1) == SAVE_BAD_CHECKSUM) {
-        sCopyrightSaveCorrupted = 1;
+        sCopyrightSaveCorrupted = TRUE;
         SaveClearFileLarge(1);
     }
 
     if (SaveRepairFileSmall(0) == SAVE_BAD_CHECKSUM) {
-        sCopyrightSaveCorrupted = 1;
+        sCopyrightSaveCorrupted = TRUE;
         SaveClearFileSmall(0);
     }
 
     if (SaveRepairFileSmall(1) == SAVE_BAD_CHECKSUM) {
-        sCopyrightSaveCorrupted = 1;
+        sCopyrightSaveCorrupted = TRUE;
         SaveClearFileSmall(1);
     }
 
     if (SaveRepairSystem() == SAVE_BAD_CHECKSUM) {
-        sCopyrightSaveCorrupted = 1;
+        sCopyrightSaveCorrupted = TRUE;
         SaveClearSystem();
     }
 

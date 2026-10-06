@@ -258,10 +258,10 @@ s16 GetMapInspectTabCount(s16 tab) {
 
 u8 MapInspectCanDelete() {
     if (sMapInspectCardTotal > 20) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MapInspectLoadGrid() {
@@ -363,7 +363,7 @@ void MapInspectLoadSelectedCard() {
         sMapInspectCardBackPalette = NULL;
         sMapInspectCardBackTiles = NULL;
         sMapInspectCardBackSprite = NULL;
-        sMapInspectCardPremium = 0;
+        sMapInspectCardPremium = FALSE;
         sMapInspectCategoryPalette = NULL;
         sMapInspectNameTextCount = 0;
         sMapInspectDescTextCount = 0;
@@ -484,18 +484,18 @@ u8 MapCardEntryIsEmpty(MapCardInventoryEntry* entry) {
     }
 
     if (i > 9) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 MapCardEntrySelectedValueIsEmpty(MapCardInventoryEntry* entry) {
     if (entry->countsByValue[GetMapInspectSelectedValue()] == 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MapInspectSelectNextValue(MapCardInventoryEntry* entry) {
@@ -651,13 +651,13 @@ void MapInspectHandleGridInput() {
     } else if (keys & B_BUTTON) {
         LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMapInspectReturnToMenu = 1;
+        sMapInspectReturnToMenu = TRUE;
         sMapInspectSteps = 16;
         sMapInspectState = MAP_INSPECT_STATE_TITLE_OUT;
     } else if (keys & START_BUTTON) {
         LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMapInspectReturnToMenu = 0;
+        sMapInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
         sMapInspectState = MAP_INSPECT_STATE_EXIT;
     } else if (keys & SELECT_BUTTON) {
@@ -725,7 +725,7 @@ void MapInspectHandleTabInput() {
         if (keys & START_BUTTON) {
             LoadBgMap(0, gMapInspectBgMap, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sMapInspectReturnToMenu = 0;
+            sMapInspectReturnToMenu = FALSE;
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMapInspectState = MAP_INSPECT_STATE_EXIT;
         } else if (keys & (B_BUTTON | DPAD_DOWN)) {
@@ -743,7 +743,7 @@ void MapInspectHandleTabInput() {
             } else if (keys & B_BUTTON) {
                 LoadBgMap(0, gMapInspectBgMap, 0x500);
                 m4aSongNumStart(SONG_SYS_CLOSE);
-                sMapInspectReturnToMenu = 1;
+                sMapInspectReturnToMenu = TRUE;
                 sMapInspectSteps = 16;
                 sMapInspectState = MAP_INSPECT_STATE_TITLE_OUT;
             } else if (keys & DPAD_DOWN) {
@@ -829,7 +829,7 @@ void MapInspectHandleValueInput() {
         } else if (keys & START_BUTTON) {
             LoadBgMap(0, gMapInspectBgMap, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sMapInspectReturnToMenu = 0;
+            sMapInspectReturnToMenu = FALSE;
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMapInspectState = MAP_INSPECT_STATE_EXIT;
         } else if (keys & DPAD_LEFT) {
@@ -916,7 +916,7 @@ void MapInspectHandleConfirmInput() {
     } else if (keys & START_BUTTON) {
         LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMapInspectReturnToMenu = 0;
+        sMapInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
         sMapInspectState = MAP_INSPECT_STATE_EXIT;
     } else if (keys & DPAD_LEFT) {
@@ -942,7 +942,7 @@ void MapInspectHandleNoticeInput() {
     } else if (keys & START_BUTTON) {
         LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMapInspectReturnToMenu = 0;
+        sMapInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
         sMapInspectState = MAP_INSPECT_STATE_EXIT;
     }
@@ -1140,7 +1140,7 @@ void mode_mapinspect_0() {
     sMapInspectCardBackPalette = NULL;
     sMapInspectCardBackTiles = NULL;
     sMapInspectCardBackSprite = NULL;
-    sMapInspectCardPremium = 0;
+    sMapInspectCardPremium = FALSE;
     sMapInspectCategoryPalette = NULL;
     sMapInspectValueCol = 0;
     sMapInspectValueRow = 0;

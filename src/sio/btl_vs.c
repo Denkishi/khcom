@@ -445,7 +445,7 @@ void VsBattleUpdate() {
     }
 
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_START) {
-        entered = 1;
+        entered = TRUE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
 
         if (gBtlWork->soraOwnsPlay) {
@@ -459,7 +459,7 @@ void VsBattleUpdate() {
         gBtlWork->phase = BTL_PHASE_CARD_PLAY;
         gBtlWork->phaseStep = 0;
     } else {
-        entered = 0;
+        entered = FALSE;
     }
 
     if ((gBtlWork->flags & BTL_FLAG_PLAYER_DEFEATED) && gBtlWork->phase != BTL_PHASE_END) {
@@ -480,7 +480,7 @@ void VsBattleUpdate() {
 
         if (gBtlWork->phaseStep == BTL_START_STEP_EXCLUDE_PALETTES) {
             for (i = 0; i < 32; i++) {
-                if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) FadeSetPaletteExcluded(i, 1);
+                if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) FadeSetPaletteExcluded(i, TRUE);
             }
 
             gBtlWork->phaseStep = BTL_START_STEP_CREATE_TASKS;
@@ -541,11 +541,11 @@ void VsBattleUpdate() {
     case BTL_PHASE_CARD_PLAY:
         if (entered) return;
 
-        busy = 0;
+        busy = FALSE;
 
-        if (player->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = 1;
+        if (player->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = TRUE;
 
-        if (other->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = 1;
+        if (other->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = TRUE;
 
         if (busy) return;
 

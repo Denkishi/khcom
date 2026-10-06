@@ -55,19 +55,19 @@ void mode_chkeff_0() {
     LoadBgPalette(1, gDebugCheckerBgPalette, 0x20);
     LoadBgMap(1, gDebugCheckerBgMap, 0x800);
 #endif
-    FadeSetPaletteExcluded(8, 1);
-    FadeSetPaletteExcluded(9, 1);
-    FadeSetPaletteExcluded(10, 1);
-    FadeSetPaletteExcluded(11, 1);
-    FadeSetPaletteExcluded(12, 1);
-    FadeSetPaletteExcluded(13, 1);
-    FadeSetPaletteExcluded(14, 1);
-    FadeSetPaletteExcluded(15, 1);
+    FadeSetPaletteExcluded(8, TRUE);
+    FadeSetPaletteExcluded(9, TRUE);
+    FadeSetPaletteExcluded(10, TRUE);
+    FadeSetPaletteExcluded(11, TRUE);
+    FadeSetPaletteExcluded(12, TRUE);
+    FadeSetPaletteExcluded(13, TRUE);
+    FadeSetPaletteExcluded(14, TRUE);
+    FadeSetPaletteExcluded(15, TRUE);
     BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     TaskPoolInit(&sChkEffWork->pool, 1);
     TaskCreate(&sChkEffWork->pool, &gTaskDescPrint, NULL);
     sChkEffWork->effectIndex = 0;
-    sChkEffWork->paused = 0;
+    sChkEffWork->paused = FALSE;
     sChkEffWork->scrollX = 0;
     sChkEffWork->scrollY = 0;
     sChkEffWork->scale = Q_8_8(1);
@@ -112,7 +112,7 @@ void mode_chkeff_1() {
         def = gChkEffBgAnimations[sChkEffWork->effectIndex];
 
         if (prev != sChkEffWork->effectIndex) {
-            sChkEffWork->paused = 0;
+            sChkEffWork->paused = FALSE;
             BgAnimStart(def, 120, 80);
         }
 

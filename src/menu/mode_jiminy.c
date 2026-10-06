@@ -1280,8 +1280,8 @@ s32 GetJiminyEntryState(s32 idx) {
     entry = &sJiminyEntries[idx];
 
     if (entry->flags != NULL) {
-        allSet = 1;
-        noneSet = 1;
+        allSet = TRUE;
+        noneSet = TRUE;
 
         for (i = 0; i < (u16)entry->count; i++) {
             if (IsJiminyFlagNew(entry->flags[i])) {
@@ -1289,9 +1289,9 @@ s32 GetJiminyEntryState(s32 idx) {
             }
 
             if (!IsJiminyFlagSet(entry->flags[i])) {
-                allSet = 0;
+                allSet = FALSE;
             } else {
-                noneSet = 0;
+                noneSet = FALSE;
             }
         }
 
@@ -1310,22 +1310,22 @@ s32 GetJiminyEntryState(s32 idx) {
         return JIMINY_ENTRY_STATE_HIDDEN;
     }
 
-    allComplete = 1;
-    allHidden = 1;
+    allComplete = TRUE;
+    allHidden = TRUE;
 
     for (i = 0; i < (u16)entry->count; i++) {
         switch (GetJiminyEntryState(entry->children[i])) {
         case JIMINY_ENTRY_STATE_NEW:
             return JIMINY_ENTRY_STATE_NEW;
         case JIMINY_ENTRY_STATE_INCOMPLETE:
-            allComplete = 0;
-            allHidden = 0;
+            allComplete = FALSE;
+            allHidden = FALSE;
             break;
         case JIMINY_ENTRY_STATE_COMPLETE:
-            allHidden = 0;
+            allHidden = FALSE;
             break;
         case JIMINY_ENTRY_STATE_HIDDEN:
-            allComplete = 0;
+            allComplete = FALSE;
             break;
         }
     }
@@ -1458,7 +1458,7 @@ void JiminyOpenList(s16 visibleRows, s16 itemCount, const u16* const* itemTexts,
 
 u8 JiminyHandleListInput() {
     if (FadeIsActive()) {
-        return 1;
+        return TRUE;
     }
 
     if (sJiminyWork->shownChars < sJiminyWork->charCount) {
@@ -1521,10 +1521,10 @@ u8 JiminyHandleListInput() {
         sJiminyWork->stateTimer = 0;
         sJiminyWork->state = JIMINY_STATE_EXIT_TO_MAP;
         m4aSongNumStart(SONG_SYS_CLOSE);
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void mode_jiminy_0() {
@@ -1578,7 +1578,7 @@ void mode_jiminy_0() {
     sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, 0x880);
 #endif
     sJiminyWork->palette = LoadObjPalette(gJiminyTitlePalette, 0x20);
-    FadeSetPaletteExcluded(sJiminyWork->palette->index + 0x10, 1);
+    FadeSetPaletteExcluded(sJiminyWork->palette->index + 0x10, TRUE);
     sJiminyWork->tiles2 = LoadObjTiles(gJiminyBinderRingTiles, 0x40);
     sJiminyWork->palette2 = LoadObjPalette(gJiminyBinderRingPalette, 0x20);
     sJiminyWork->palette3 = LoadObjPalette(gJiminyRootListPalette, 0x20);
@@ -1748,7 +1748,7 @@ void mode_jiminy_1() {
         }
 
         if (FadeGetAmount() > 30) {
-            ReturnToMap(1);
+            ReturnToMap(TRUE);
         }
 
         break;
@@ -1759,7 +1759,7 @@ void mode_jiminy_1() {
         }
 
         if (FadeGetAmount() > 30) {
-            ReturnToMap(0);
+            ReturnToMap(FALSE);
         }
 
         break;
@@ -1826,13 +1826,13 @@ void mode_jiminy_1() {
         if (GetKeysPressed() & A_BUTTON) {
             u32 ok;
 
-            ok = 1;
+            ok = TRUE;
 
             if (listEntry->flags != NULL) {
-                ok = IsJiminyFlagSet(listEntry->flags[sJiminyWork->cursor]) != 0;
+                ok = IsJiminyFlagSet(listEntry->flags[sJiminyWork->cursor]) != FALSE;
             } else {
                 if (sJiminyWork->rowStates[sJiminyWork->cursorRow] == JIMINY_ENTRY_STATE_HIDDEN) {
-                    ok = 0;
+                    ok = FALSE;
                 }
             }
 
@@ -2099,7 +2099,7 @@ void JiminyDetailUpdate() {
     u16* paletteDest;
 
 #ifdef VERSION_EU
-    s32 wide = 0;
+    s32 wide = FALSE;
 #endif
 
     switch ((u32)sJiminyWork->state) {
@@ -2417,7 +2417,7 @@ void JiminyDetailUpdate() {
 #ifdef VERSION_EU
             case 14: nameMap += 0x190; break;
             case 15: nameMap += 0x1F0; break;
-            default: nameMap += 0x1F0; wide = 1; break;
+            default: nameMap += 0x1F0; wide = TRUE; break;
 #else
             default: nameMap += 0x190; break;
 #endif
@@ -2596,7 +2596,7 @@ void JiminyDetailUpdate() {
         }
 
         if (FadeGetAmount() > 30) {
-            ReturnToMap(0);
+            ReturnToMap(FALSE);
         }
 
         break;

@@ -309,15 +309,15 @@ void WorldselectHandleInput() {
             BgAnimStart(&gBgAnimDefWorldStart, 112, 126);
             SetBgPriority(2, 1);
             gBldCnt |= BLDCNT_TGT2_OBJ;
-            sWorldselectBgAnimActive = 1;
+            sWorldselectBgAnimActive = TRUE;
             m4aSongNumStart(SONG_SYS_WORLDSTART);
-            sWorldselectCancelled = 0;
+            sWorldselectCancelled = FALSE;
             sWorldselectStep = WORLDSELECT_STEP_START_ANIM;
         } else if ((GetKeysPressed() & B_BUTTON) && sWorldselectFirstVisit == 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             LoadBgMap(0, gWorldselectGlowMap, 0x500);
             LoadBgMap(1, gWorldselectBarMap, 0x500);
-            sWorldselectCancelled = 1;
+            sWorldselectCancelled = TRUE;
             sWorldselectTimer = 16;
             sWorldselectStep = WORLDSELECT_STEP_TITLE_OUT;
         } else if (sWorldselectSlotCount > 1) {
@@ -694,8 +694,8 @@ void mode_worldselect_0() {
 
     SpriteReset();
     sWorldselectFirstVisit = (gGameState.progression.tutorialFlags ^ 1) & 1;
-    sWorldselectBgAnimActive = 0;
-    sWorldselectCancelled = 0;
+    sWorldselectBgAnimActive = FALSE;
+    sWorldselectCancelled = FALSE;
     FadeStartIn(FADE_MODE_ADD_WHITE, 16);
 
     if (sWorldselectFirstVisit != 0) {
@@ -762,7 +762,7 @@ void mode_worldselect_0() {
         BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
         BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
         BgAnimSetLoopStartFrame(0);
-        sWorldselectBgAnimActive = 1;
+        sWorldselectBgAnimActive = TRUE;
     }
 
     sWorldselectCardPalettes[0] = LoadObjPalette(gWorldselectCardPalette, 32);
@@ -839,7 +839,7 @@ void mode_worldselect_1() {
                 BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
                 BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
                 BgAnimSetLoopStartFrame(0);
-                sWorldselectBgAnimActive = 1;
+                sWorldselectBgAnimActive = TRUE;
                 sWorldselectStep = WORLDSELECT_STEP_SELECT;
             }
         }

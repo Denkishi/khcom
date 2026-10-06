@@ -1351,7 +1351,7 @@ void mode_chkobj_0() {
     sChkObjWork->tiles = AllocObjTiles(0x2000, NULL);
     sChkObjWork->palette = LoadObjPalette(gSoraPalette, 0x20);
     sChkObjWork->gfx = gSor1ff00Frame0;
-    sChkObjWork->paused = 0;
+    sChkObjWork->paused = FALSE;
     sChkObjWork->angle = 0x80A0;
     sChkObjWork->maxTiles = 0;
     sChkObjWork->y = 0;
@@ -1389,7 +1389,7 @@ void mode_chkobj_1() {
             }
 
             sChkObjWork->y = 0;
-            sChkObjWork->paused = 0;
+            sChkObjWork->paused = FALSE;
             sChkObjWork->maxTiles = 0;
             def = &sChkObjEntries[sChkObjWork->category].defs[sChkObjWork->defIndex];
 
@@ -1444,7 +1444,7 @@ void mode_chkobj_1() {
             }
         } else if (GetKeysRepeat() & (L_BUTTON | R_BUTTON)) {
             sChkObjWork->y = 0;
-            sChkObjWork->paused = 0;
+            sChkObjWork->paused = FALSE;
             sChkObjWork->maxTiles = 0;
 
             if (GetKeysRepeat() & L_BUTTON) {

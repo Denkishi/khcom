@@ -123,9 +123,9 @@ u8 LevelUp() {
         gBtlWork->pendingLevelUps++;
         progression->level++;
         AdvanceLevelExpThreshold(progression);
-        return 1;
+        return TRUE;
     } else {
-        return 0;
+        return FALSE;
     }
 }
 
@@ -179,10 +179,10 @@ u8 CanLevelUp() {
     PlayerProgression* progression = &gGameState.progression;
 
     if (progression->exp >= progression->nextExp) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 const EnemyBaseStats* GetEnemyBaseStats(u16 i) {
@@ -236,10 +236,10 @@ u8 IsStockLearned(u32 stock) {
     flags = (u64*)addr;
 
     if (*flags & (1LL << stock)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void SetCardKindObtained(s32 kind) {
@@ -252,10 +252,10 @@ void SetCardKindObtained(s32 kind) {
 
 u8 IsCardKindObtained(s32 kind) {
     if (gGameState.progression.obtainedCardKinds & (1LL << kind)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsLinkStockLearned(u32 stock) {
@@ -274,10 +274,10 @@ u8 IsLinkStockLearned(u32 stock) {
     flags = (u64*)addr;
 
     if (*flags & (1LL << stock)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsLinkPartnerStockLearned(u32 stock) {
@@ -296,10 +296,10 @@ u8 IsLinkPartnerStockLearned(u32 stock) {
     flags = (u64*)addr;
 
     if (*flags & (1LL << stock)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsStockNew(u32 stock) {
@@ -318,10 +318,10 @@ u8 IsStockNew(u32 stock) {
     flags = (u64*)addr;
 
     if (*flags & (1LL << stock)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void ClearStockNew(u32 stock) {
@@ -413,10 +413,10 @@ u8 IsJiminyFlagSet(u32 flag) {
     flags = (u64*)addr;
 
     if (*flags & (1LL << flag)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsJiminyFlagNew(u32 flag) {
@@ -443,10 +443,10 @@ u8 IsJiminyFlagNew(u32 flag) {
     flags = (u64*)addr;
 
     if (*flags & (1LL << flag)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void ClearJiminyFlagNew(u32 flag) {

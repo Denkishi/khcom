@@ -474,18 +474,18 @@ u8 MsCardIsEmpty(MsCard* card) {
     }
 
     if (i > 9) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 MsCardSelectedValueIsEmpty(MsCard* card) {
     if (card->values[GetMsChargeSelectedValue()][0] == 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MsChargeSelectNextValue(MsCard* card) {
@@ -679,12 +679,12 @@ void MsChargeHandleGridInput() {
         MsChargeDrawPoints();
     } else if (keys & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMsChargeBackToTop = 1;
+        sMsChargeBackToTop = TRUE;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = MS_CHARGE_STATE_EXIT;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMsChargeBackToTop = 0;
+        sMsChargeBackToTop = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = MS_CHARGE_STATE_EXIT;
     } else if (keys & SELECT_BUTTON) {
@@ -754,7 +754,7 @@ void MsChargeHandleTabInput() {
     if ((keys & A_BUTTON) == 0) {
         if (keys & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sMsChargeBackToTop = 0;
+            sMsChargeBackToTop = FALSE;
             FadeStartOut(FADE_MODE_BLACK, 0x10);
             sMsChargeState = MS_CHARGE_STATE_EXIT;
         } else if (keys & (B_BUTTON | DPAD_DOWN)) {
@@ -771,7 +771,7 @@ void MsChargeHandleTabInput() {
                 MsChargeLoadSelectedCard();
             } else if (keys & B_BUTTON) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
-                sMsChargeBackToTop = 1;
+                sMsChargeBackToTop = TRUE;
                 FadeStartOut(FADE_MODE_BLACK, 0x10);
                 sMsChargeState = MS_CHARGE_STATE_EXIT;
             } else if (keys & DPAD_DOWN) {
@@ -801,7 +801,7 @@ s32 MsChargeSelectValueInColumn(MsCard* card, u16 col) {
     s32 row;
     s32 found;
 
-    found = 0;
+    found = FALSE;
     base = sMsChargeValueRow;
 
     for (i = 0; i <= 4; i++) {
@@ -810,7 +810,7 @@ s32 MsChargeSelectValueInColumn(MsCard* card, u16 col) {
         if (row >= 0 && card->values[GetMsChargeValueIndex(col, row)][0] > 0) {
             sMsChargeValueCol = col;
             sMsChargeValueRow = row;
-            found = 1;
+            found = TRUE;
             break;
         }
 
@@ -819,7 +819,7 @@ s32 MsChargeSelectValueInColumn(MsCard* card, u16 col) {
         if (row <= 4 && card->values[GetMsChargeValueIndex(col, row)][0] > 0) {
             sMsChargeValueCol = col;
             sMsChargeValueRow = row;
-            found = 1;
+            found = TRUE;
             break;
         }
     }
@@ -862,7 +862,7 @@ void MsChargeHandleValueInput() {
         MsChargeDrawPoints();
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMsChargeBackToTop = 0;
+        sMsChargeBackToTop = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = MS_CHARGE_STATE_EXIT;
     } else if (keys & DPAD_LEFT) {
@@ -964,7 +964,7 @@ void MsChargeHandleConfirmInput() {
         sMsChargeMenuState = MS_CHARGE_MENU_STATE_VALUE;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMsChargeBackToTop = 0;
+        sMsChargeBackToTop = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = MS_CHARGE_STATE_EXIT;
     } else if (keys & DPAD_LEFT) {
@@ -989,7 +989,7 @@ void MsChargeHandleNoticeInput() {
         sMsChargeMenuState = MS_CHARGE_MENU_STATE_VALUE;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMsChargeBackToTop = 0;
+        sMsChargeBackToTop = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = MS_CHARGE_STATE_EXIT;
     }

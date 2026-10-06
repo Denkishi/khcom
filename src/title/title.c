@@ -112,7 +112,7 @@ void TitleLogoLoadSprites(TitleLogoWork* work) {
     work->scale = 0;
     work->unk_48 = 0xC00;
     work->unk_50 = 0;
-    sTitleLogoScaleDone = 0;
+    sTitleLogoScaleDone = FALSE;
 }
 
 void task_title_logo_0(TitleLogoWork* work) {
@@ -127,7 +127,7 @@ u8 task_title_logo_1(TitleLogoWork* work) {
         if (work->scale > 255) {
             work->scale = Q_8_8(1);
             work->unk_48 = 0;
-            sTitleLogoScaleDone = 1;
+            sTitleLogoScaleDone = TRUE;
         }
     }
 
@@ -318,7 +318,7 @@ void task_title_obj_0(TitleObjWork* work) {
     work->sprites[2].targetX = 0xB800;
     work->sprites[2].y = 0x91;
     work->slideTimer = 30;
-    sTitleObjSlideDone = 0;
+    sTitleObjSlideDone = FALSE;
     work->slideDelay = 0;
 }
 
@@ -332,7 +332,7 @@ u8 task_title_obj_1(TitleObjWork* work) {
             work->slideTimer--;
 
             if (work->slideTimer == 0) {
-                sTitleObjSlideDone = 1;
+                sTitleObjSlideDone = TRUE;
             }
         }
     }

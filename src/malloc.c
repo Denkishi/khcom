@@ -21,10 +21,10 @@ void HeapUnlinkFreeBlock(HeapBlock* block) {
 
 u8 HeapContains(const void* ptr, Heap* heap) {
     if (ptr != NULL && (u8*)ptr > (u8*)heap->start && (u8*)ptr < (u8*)heap->end) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 HeapBlock* HeapFindFreeBlock(s32 size, Heap* heap) {
@@ -132,9 +132,9 @@ void* HeapAlloc(u32 size, Heap* heap) {
     block->nextFree = NULL;
 
     if (heap->allocFlag != 0) {
-        block->allocFlag = 1;
+        block->allocFlag = TRUE;
     } else {
-        block->allocFlag = 0;
+        block->allocFlag = FALSE;
     }
 
     block->name = heap->name;

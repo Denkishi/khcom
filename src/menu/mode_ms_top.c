@@ -165,11 +165,11 @@ void SetMooglePoints(u32 points) {
 }
 
 u8 SpendMooglePoints(u32 points) {
-    u8 ok = 0;
+    u8 ok = FALSE;
 
     if (GetMooglePoints() >= points) {
         SetMooglePoints(GetMooglePoints() - points);
-        ok = 1;
+        ok = TRUE;
     }
 
     return ok;
@@ -180,11 +180,11 @@ u8 AddMooglePoints(u32 points) {
 
     if (points > 99999) {
         SetMooglePoints(99999);
-        return 0;
+        return FALSE;
     }
 
     SetMooglePoints(points);
-    return 1;
+    return TRUE;
 }
 
 void LoadDecimalDigitTiles(u32 value, u8* glyphs, u8* dst, u16 stride, u16 count) {
@@ -205,12 +205,12 @@ void UpdateMsTopMooglePalette() {
     s32 base;
 
     x = sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8);
-    dim = 0;
+    dim = FALSE;
     screenX = x;
     base = (-sMsTopBg1ScrollX) >> 8;
 
     if (screenX <= base + 0x1C || screenX >= base + 0x1C + 0x62) {
-        dim = 1;
+        dim = TRUE;
     }
 
     ReleaseObjPalette(sMsTopMooglePalette);
@@ -282,7 +282,7 @@ void MsTopHandleInput() {
     } else if (keys & B_BUTTON) {
         sMsTopNextMode = NULL;
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMsTopBarVisible = 1;
+        sMsTopBarVisible = TRUE;
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
@@ -293,7 +293,7 @@ void MsTopHandleInput() {
     } else if (keys & START_BUTTON) {
         sMsTopNextMode = NULL;
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMsTopBarVisible = 1;
+        sMsTopBarVisible = TRUE;
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
@@ -407,10 +407,10 @@ void mode_ms_top_0(u32 flags) {
     }
 
     if (flags & 2) {
-        sMsTopBarVisible = 0;
+        sMsTopBarVisible = FALSE;
         sMsTopState = MS_TOP_STATE_SHOW_OPTION;
     } else {
-        sMsTopBarVisible = 1;
+        sMsTopBarVisible = TRUE;
         sMsTopState = MS_TOP_STATE_BARS_IN;
         sMsTopSteps = 16;
         sMsTopBarY[0] = -0x800;
@@ -437,7 +437,7 @@ void mode_ms_top_0(u32 flags) {
 
     sMsTopPendingMessage = -1;
     sMsTopPendingOptionMessage = -1;
-    sMsTopMessageStarted = 0;
+    sMsTopMessageStarted = FALSE;
     LoadBgPalette(0, gMsTopBgPalette, 0x60);
 #ifdef VERSION_EU
     LoadBgTiles(0, gMsTopBgTiles, 0x24C0);
@@ -510,7 +510,7 @@ void mode_ms_top_1() {
         ApproachValue(&sMsTopBarX, 0, sMsTopSteps);
 
         if (--sMsTopSteps <= 0) {
-            sMsTopBarVisible = 0;
+            sMsTopBarVisible = FALSE;
 #ifdef VERSION_EU
             LoadBgMap(2, sMsTopBarBgMapsByLanguage[gLanguage], 0x500);
 #else
@@ -559,7 +559,7 @@ void mode_ms_top_1() {
             }
 
             InitMooglePackOpening(120, 80);
-            FadeSetPaletteExcluded(13, 1);
+            FadeSetPaletteExcluded(13, TRUE);
             FadeToAmount(FADE_MODE_BLACK, 16, 8);
             sMsTopState = MS_TOP_STATE_FREE_PACK;
         }
@@ -679,7 +679,7 @@ void mode_ms_top_1() {
         } else {
             ShowPersistentCardMessage(&sMsTopTaskPool, 3, sMsTopPendingOptionMessage);
             sMsTopPendingOptionMessage = -1;
-            sMsTopMessageStarted = 1;
+            sMsTopMessageStarted = TRUE;
         }
     }
 
@@ -692,7 +692,7 @@ void mode_ms_top_1() {
         } else {
             CreateCardMessageTask(&sMsTopTaskPool, 3, sMsTopPendingMessage);
             sMsTopPendingMessage = -1;
-            sMsTopMessageStarted = 1;
+            sMsTopMessageStarted = TRUE;
         }
     }
 

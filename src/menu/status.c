@@ -213,6 +213,15 @@ static const StatusFriendTable sStatusFriendTable = {{
     {128, CARD_ID(CARD_THE_KING, 0)},
 }};
 
+enum StatusBarState {
+    STATUS_BAR_STATE_BARS_IN,
+    STATUS_BAR_STATE_TITLE_IN,
+    STATUS_BAR_STATE_IDLE,
+    STATUS_BAR_STATE_TITLE_OUT,
+    STATUS_BAR_STATE_BARS_OUT,
+    STATUS_BAR_STATE_EXIT
+};
+
 static StatusWork* sStatusWork;
 static u8 sStatusMesWindowOpen;
 static s16 sStatusSelectedIndex;
@@ -369,10 +378,10 @@ s16 GetStatusScroll() {
 void StatusBarStartClose(StatusBarWork* work) {
     work->closing = 1;
 
-    if (gStatusBarState == 0) {
-        gStatusBarState = 4;
+    if (gStatusBarState == STATUS_BAR_STATE_BARS_IN) {
+        gStatusBarState = STATUS_BAR_STATE_BARS_OUT;
     } else {
-        gStatusBarState = 3;
+        gStatusBarState = STATUS_BAR_STATE_TITLE_OUT;
     }
 
     if (work->steps == 0) {
@@ -393,7 +402,7 @@ void task_status_bar_0(StatusBarWork* work) {
 #endif
     work->palette = LoadObjPalette(gStatusBarPalette, 0x20);
     work->steps = 16;
-    gStatusBarState = 0;
+    gStatusBarState = STATUS_BAR_STATE_BARS_IN;
     work->y = -0x800;
     work->y2 = 0xA000;
     work->x = -0x8000;
@@ -406,38 +415,38 @@ void task_status_bar_0(StatusBarWork* work) {
 
 u8 task_status_bar_1(StatusBarWork* work) {
     switch (gStatusBarState) {
-    case 0:
+    case STATUS_BAR_STATE_BARS_IN:
         ApproachValue(&work->y, work->targetY, work->steps);
         ApproachValue(&work->y2, work->targetY2, work->steps);
         work->steps--;
 
         if (work->steps == 0) {
             work->steps = 16;
-            gStatusBarState = 1;
+            gStatusBarState = STATUS_BAR_STATE_TITLE_IN;
         }
 
         break;
-    case 1:
+    case STATUS_BAR_STATE_TITLE_IN:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
 
         if (work->steps == 0) {
             LoadBgMap(3, gStatusBarBgMap, 0x500);
-            gStatusBarState = 2;
+            gStatusBarState = STATUS_BAR_STATE_IDLE;
         }
 
         break;
-    case 3:
+    case STATUS_BAR_STATE_TITLE_OUT:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
 
         if (work->steps == 0) {
             work->steps = 16;
-            gStatusBarState = 4;
+            gStatusBarState = STATUS_BAR_STATE_BARS_OUT;
         }
 
         break;
-    case 4:
+    case STATUS_BAR_STATE_BARS_OUT:
         if (!FadeIsActive() && !work->fadeStarted) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             work->fadeStarted = 1;
@@ -452,13 +461,13 @@ u8 task_status_bar_1(StatusBarWork* work) {
         }
 
         break;
-    case 2:
+    case STATUS_BAR_STATE_IDLE:
         if (!work->closing) {
             if (GetKeysPressed() & START_BUTTON) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 FadeStartOut(FADE_MODE_BLACK, 16);
                 SetStatusReturnToMenu(0);
-                gStatusBarState = 5;
+                gStatusBarState = STATUS_BAR_STATE_EXIT;
             } else if (GetKeysPressed() & B_BUTTON) {
                 if (!IsStatusMesWindowOpen()) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
@@ -469,7 +478,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
         }
 
         break;
-    case 5:
+    case STATUS_BAR_STATE_EXIT:
         if (!FadeIsActive()) {
             return 0;
         }
@@ -488,7 +497,7 @@ void task_status_bar_2(StatusBarWork* work) {
     DrawSprite(work->x >> 8, 0, gStatusBarFrame2, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 29);
 #endif
 
-    if (gStatusBarState != 2) {
+    if (gStatusBarState != STATUS_BAR_STATE_IDLE) {
 #ifdef VERSION_EU
         DrawSprite(128, work->y >> 8, (sStatusBarSprites[gLanguage])[0], work->tiles,
             work->palette, NULL, SPRITE_PRIORITY(3), 30);
@@ -507,7 +516,7 @@ void task_status_bar_3(StatusBarWork* work) {
 }
 
 u8 IsStatusBarIdle() {
-    if (gStatusBarState == 2) {
+    if (gStatusBarState == STATUS_BAR_STATE_IDLE) {
         return 1;
     }
 

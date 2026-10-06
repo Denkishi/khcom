@@ -180,6 +180,31 @@ Mode gModeWorldselect = {
     mode_worldselect_2,
 };
 
+enum WorldselectStep {
+    WORLDSELECT_STEP_BARS_IN,
+    WORLDSELECT_STEP_TITLE_IN,
+    WORLDSELECT_STEP_TUTORIAL,
+    WORLDSELECT_STEP_SELECT,
+    WORLDSELECT_STEP_START_ANIM,
+    WORLDSELECT_STEP_TITLE_OUT,
+    WORLDSELECT_STEP_BARS_OUT,
+    WORLDSELECT_STEP_FADE_OUT,
+    WORLDSELECT_STEP_WAIT_FADE,
+    WORLDSELECT_STEP_ENTER_WORLD
+};
+
+enum WorldselectRotation {
+    WORLDSELECT_ROTATION_NONE,
+    WORLDSELECT_ROTATION_RIGHT,
+    WORLDSELECT_ROTATION_LEFT
+};
+
+enum WorldselectNameMode {
+    WORLDSELECT_NAME_MODE_IDLE,
+    WORLDSELECT_NAME_MODE_SHOW,
+    WORLDSELECT_NAME_MODE_HIDE
+};
+
 static s16 sWorldselectCursor;
 static WorldselectSlot sWorldselectSlots[5];
 static s16 sWorldselectWorlds[14];
@@ -275,7 +300,7 @@ void WorldselectHandleInput() {
     u8 step;
 
     switch (sWorldselectRotation) {
-    case 0:
+    case WORLDSELECT_ROTATION_NONE:
         if (GetKeysPressed() & A_BUTTON) {
             BgAnimInit(2, 0x8000, 128);
             BgAnimStart(&gBgAnimDefWorldStart, 112, 126);
@@ -284,14 +309,14 @@ void WorldselectHandleInput() {
             sWorldselectBgAnimActive = 1;
             m4aSongNumStart(SONG_SYS_WORLDSTART);
             sWorldselectCancelled = 0;
-            sWorldselectStep = 4;
+            sWorldselectStep = WORLDSELECT_STEP_START_ANIM;
         } else if ((GetKeysPressed() & B_BUTTON) && sWorldselectFirstVisit == 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             LoadBgMap(0, gWorldselectGlowMap, 0x500);
             LoadBgMap(1, gWorldselectBarMap, 0x500);
             sWorldselectCancelled = 1;
             sWorldselectTimer = 16;
-            sWorldselectStep = 5;
+            sWorldselectStep = WORLDSELECT_STEP_TITLE_OUT;
         } else if (sWorldselectSlotCount > 1) {
             if (GetKeysHeld() & DPAD_LEFT) {
                 j = sWorldselectCursor - sWorldselectSlotCount / 2;
@@ -319,8 +344,8 @@ void WorldselectHandleInput() {
                 }
 
                 m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                sWorldselectNameMode = 2;
-                sWorldselectRotation = 2;
+                sWorldselectNameMode = WORLDSELECT_NAME_MODE_HIDE;
+                sWorldselectRotation = WORLDSELECT_ROTATION_LEFT;
             } else if (GetKeysHeld() & DPAD_RIGHT) {
                 j = sWorldselectCursor + sWorldselectSlotCount / 2;
 
@@ -347,13 +372,13 @@ void WorldselectHandleInput() {
                 }
 
                 m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                sWorldselectNameMode = 2;
-                sWorldselectRotation = 1;
+                sWorldselectNameMode = WORLDSELECT_NAME_MODE_HIDE;
+                sWorldselectRotation = WORLDSELECT_ROTATION_RIGHT;
             }
         }
 
         break;
-    case 1:
+    case WORLDSELECT_ROTATION_RIGHT:
         if (GetKeysHeld() & DPAD_LEFT) {
             j = sWorldselectCursor - sWorldselectSlotCount / 2;
 
@@ -380,7 +405,7 @@ void WorldselectHandleInput() {
             }
 
             m4aSongNumStart(SONG_SYS_WORLDSELECT);
-            sWorldselectRotation = 2;
+            sWorldselectRotation = WORLDSELECT_ROTATION_LEFT;
         } else {
             for (i = 0; i < sWorldselectSlotCount; i++) {
                 sWorldselectSlots[i].angle -= 2;
@@ -413,7 +438,7 @@ void WorldselectHandleInput() {
                     }
 
                     m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                    sWorldselectRotation = 1;
+                    sWorldselectRotation = WORLDSELECT_ROTATION_RIGHT;
                 } else {
                     step = 128 - sWorldselectSlots[sWorldselectCursor].angle;
 
@@ -421,15 +446,15 @@ void WorldselectHandleInput() {
                         sWorldselectSlots[i].angle += step;
                     }
 
-                    sWorldselectNameMode = 1;
+                    sWorldselectNameMode = WORLDSELECT_NAME_MODE_SHOW;
                     sWorldselectNameWorld = sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex];
-                    sWorldselectRotation = 0;
+                    sWorldselectRotation = WORLDSELECT_ROTATION_NONE;
                 }
             }
         }
 
         break;
-    case 2:
+    case WORLDSELECT_ROTATION_LEFT:
         if (GetKeysHeld() & DPAD_RIGHT) {
             j = sWorldselectCursor + sWorldselectSlotCount / 2;
 
@@ -456,7 +481,7 @@ void WorldselectHandleInput() {
             }
 
             m4aSongNumStart(SONG_SYS_WORLDSELECT);
-            sWorldselectRotation = 1;
+            sWorldselectRotation = WORLDSELECT_ROTATION_RIGHT;
         } else {
             for (i = 0; i < sWorldselectSlotCount; i++) {
                 sWorldselectSlots[i].angle += 2;
@@ -489,7 +514,7 @@ void WorldselectHandleInput() {
                     }
 
                     m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                    sWorldselectRotation = 2;
+                    sWorldselectRotation = WORLDSELECT_ROTATION_LEFT;
                 } else {
                     step = sWorldselectSlots[sWorldselectCursor].angle + 128;
 
@@ -497,9 +522,9 @@ void WorldselectHandleInput() {
                         sWorldselectSlots[i].angle -= step;
                     }
 
-                    sWorldselectNameMode = 1;
+                    sWorldselectNameMode = WORLDSELECT_NAME_MODE_SHOW;
                     sWorldselectNameWorld = sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex];
-                    sWorldselectRotation = 0;
+                    sWorldselectRotation = WORLDSELECT_ROTATION_NONE;
                 }
             }
         }
@@ -525,7 +550,7 @@ void WorldselectDraw() {
     void* tiles;
     void* pal;
 
-    if (sWorldselectStep < 2 || sWorldselectStep > 4) {
+    if (sWorldselectStep < WORLDSELECT_STEP_TUTORIAL || sWorldselectStep > WORLDSELECT_STEP_START_ANIM) {
         DrawSprite(sWorldselectTitleX >> 8, 0,
 #ifdef VERSION_EU
                       sWorldselectTitleGfx[gLanguage],
@@ -560,7 +585,7 @@ void WorldselectDraw() {
                 pal = sWorldselectCardPalettes[0];
                 anim = gWorldselectCardFrame0;
 
-                if (sWorldselectStep > 3 && !sWorldselectCancelled) {
+                if (sWorldselectStep > WORLDSELECT_STEP_SELECT && !sWorldselectCancelled) {
                     BgAnimSetPosition(x - 1, y - 5);
                 }
             } else if (t <= 61) {
@@ -593,23 +618,23 @@ void WorldselectDraw() {
     }
 
     switch (sWorldselectNameMode) {
-    case 1:
+    case WORLDSELECT_NAME_MODE_SHOW:
         WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
 
         if (sWorldselectNameWidth <= 8) {
             sWorldselectNameWidth++;
         } else {
-            sWorldselectNameMode = 0;
+            sWorldselectNameMode = WORLDSELECT_NAME_MODE_IDLE;
         }
 
         break;
-    case 2:
+    case WORLDSELECT_NAME_MODE_HIDE:
         WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
 
         if (sWorldselectNameWidth > 0) {
             sWorldselectNameWidth--;
         } else {
-            sWorldselectNameMode = 0;
+            sWorldselectNameMode = WORLDSELECT_NAME_MODE_IDLE;
         }
 
         break;
@@ -677,7 +702,7 @@ void mode_worldselect_0() {
     }
 
     sWorldselectCursor = 0;
-    sWorldselectRotation = 0;
+    sWorldselectRotation = WORLDSELECT_ROTATION_NONE;
     j = 0;
 
     for (i = 0; i <= 12; i++) {
@@ -708,14 +733,14 @@ void mode_worldselect_0() {
     }
 
     sWorldselectBobPhase = 0;
-    sWorldselectNameMode = 1;
+    sWorldselectNameMode = WORLDSELECT_NAME_MODE_SHOW;
     sWorldselectNameWidth = 0;
     sWorldselectNameWorld = sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex];
     p = &sWorldselectNameBuffer;
     *p = EwramAlloc(0x6C0);
     sWorldselectPaletteTimer = 0;
     sWorldselectPaletteFrame = 0;
-    sWorldselectStep = 0;
+    sWorldselectStep = WORLDSELECT_STEP_BARS_IN;
     sWorldselectTimer = 16;
     sWorldselectFrameY[0] = -2048;
     sWorldselectFrameY[1] = 0xA800;
@@ -767,18 +792,18 @@ void mode_worldselect_1() {
     sWorldselectBobPhase += 2;
 
     switch (sWorldselectStep) {
-    case 0:
+    case WORLDSELECT_STEP_BARS_IN:
         ApproachValue(&sWorldselectFrameY[0], 0, sWorldselectTimer);
         ApproachValue(&sWorldselectFrameY[1], 0x9800, sWorldselectTimer);
         sWorldselectTimer--;
 
         if (sWorldselectTimer <= 0) {
             sWorldselectTimer = 16;
-            sWorldselectStep = 1;
+            sWorldselectStep = WORLDSELECT_STEP_TITLE_IN;
         }
 
         break;
-    case 1:
+    case WORLDSELECT_STEP_TITLE_IN:
         ApproachValue(&sWorldselectTitleX, 0, sWorldselectTimer);
         sWorldselectTimer--;
 
@@ -786,9 +811,9 @@ void mode_worldselect_1() {
             if (sWorldselectFirstVisit != 0) {
                 sWorldselectTutorialStep = 0;
                 CreateCardMessageTask(&sWorldselectTaskPool, 2, 70);
-                sWorldselectStep = 2;
+                sWorldselectStep = WORLDSELECT_STEP_TUTORIAL;
             } else {
-                sWorldselectStep = 3;
+                sWorldselectStep = WORLDSELECT_STEP_SELECT;
             }
 
             LoadBgMap(0, gWorldselectGlowLineMap, 0x500);
@@ -800,7 +825,7 @@ void mode_worldselect_1() {
         }
 
         break;
-    case 2:
+    case WORLDSELECT_STEP_TUTORIAL:
         if (!IsMessageWindowOpen()) {
             if (sWorldselectTutorialStep == 0) {
                 CreateCardMessageTask(&sWorldselectTaskPool, 2, 71);
@@ -812,44 +837,44 @@ void mode_worldselect_1() {
                 BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
                 BgAnimSetLoopStartFrame(0);
                 sWorldselectBgAnimActive = 1;
-                sWorldselectStep = 3;
+                sWorldselectStep = WORLDSELECT_STEP_SELECT;
             }
         }
 
         break;
-    case 3:
+    case WORLDSELECT_STEP_SELECT:
         WorldselectHandleInput();
         break;
-    case 4:
+    case WORLDSELECT_STEP_START_ANIM:
         if (BgAnimIsStopped()) {
             LoadBgMap(0, gWorldselectGlowMap, 0x500);
             LoadBgMap(1, gWorldselectBarMap, 0x500);
             sWorldselectTimer = 16;
-            sWorldselectStep = 5;
+            sWorldselectStep = WORLDSELECT_STEP_TITLE_OUT;
         }
 
         break;
-    case 5:
+    case WORLDSELECT_STEP_TITLE_OUT:
         ApproachValue(&sWorldselectTitleX, -32768, sWorldselectTimer);
         sWorldselectTimer--;
 
         if (sWorldselectTimer <= 0) {
             sWorldselectTimer = 16;
-            sWorldselectStep = 6;
+            sWorldselectStep = WORLDSELECT_STEP_BARS_OUT;
         }
 
         break;
-    case 6:
+    case WORLDSELECT_STEP_BARS_OUT:
         ApproachValue(&sWorldselectFrameY[0], -2048, sWorldselectTimer);
         ApproachValue(&sWorldselectFrameY[1], 0xA800, sWorldselectTimer);
         sWorldselectTimer--;
 
         if (sWorldselectTimer <= 0) {
-            sWorldselectStep = 7;
+            sWorldselectStep = WORLDSELECT_STEP_FADE_OUT;
         }
 
         break;
-    case 7:
+    case WORLDSELECT_STEP_FADE_OUT:
         FadeLock();
 
         if (sWorldselectCancelled) {
@@ -858,20 +883,20 @@ void mode_worldselect_1() {
             FadeStartOut(FADE_MODE_ADD_WHITE, 16);
         }
 
-        sWorldselectStep = 8;
+        sWorldselectStep = WORLDSELECT_STEP_WAIT_FADE;
         break;
-    case 8:
+    case WORLDSELECT_STEP_WAIT_FADE:
         if (!FadeIsActive()) {
             if (sWorldselectCancelled) {
                 RequestMapMode();
             } else {
                 sWorldselectTimer = 60;
-                sWorldselectStep = 9;
+                sWorldselectStep = WORLDSELECT_STEP_ENTER_WORLD;
             }
         }
 
         break;
-    case 9:
+    case WORLDSELECT_STEP_ENTER_WORLD:
         sWorldselectTimer--;
 
         if (sWorldselectTimer <= 0) {

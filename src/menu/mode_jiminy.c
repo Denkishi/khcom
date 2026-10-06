@@ -1186,12 +1186,38 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
 #include "jiminy_placeholders.inc"
 static JiminyWork* sJiminyWork;
 
+enum JiminyState {
+    JIMINY_STATE_BARS_IN,
+    JIMINY_STATE_TITLE_IN,
+    JIMINY_STATE_TITLE_OUT,
+    JIMINY_STATE_BARS_OUT,
+    JIMINY_STATE_EXIT_TO_MENU,
+    JIMINY_STATE_EXIT_TO_MAP,
+    JIMINY_STATE_OPEN_LIST,
+    JIMINY_STATE_LIST,
+    JIMINY_STATE_OPEN_DETAIL,
+    JIMINY_STATE_DETAIL
+};
+
+enum JiminyEntryState {
+    JIMINY_ENTRY_STATE_INCOMPLETE,
+    JIMINY_ENTRY_STATE_NEW,
+    JIMINY_ENTRY_STATE_COMPLETE,
+    JIMINY_ENTRY_STATE_HIDDEN
+};
+
+enum JiminyDetailLayout {
+    JIMINY_DETAIL_LAYOUT_STORY,
+    JIMINY_DETAIL_LAYOUT_CARD,
+    JIMINY_DETAIL_LAYOUT_CHARACTER
+};
+
 void JiminyFreeRows() {
     s32 i;
     s32 j;
 
     for (i = 0; i < 8; i++) {
-        sJiminyWork->rowStates[i] = 0;
+        sJiminyWork->rowStates[i] = JIMINY_ENTRY_STATE_INCOMPLETE;
         FreeTextSlots(sJiminyWork->lines[i].textSlots, 48);
 
         for (j = 0; j < 48; j++) {
@@ -1259,7 +1285,7 @@ s32 GetJiminyEntryState(s32 idx) {
 
         for (i = 0; i < (u16)e->count; i++) {
             if (IsJiminyFlagNew(e->flags[i])) {
-                return 1;
+                return JIMINY_ENTRY_STATE_NEW;
             }
 
             if (!IsJiminyFlagSet(e->flags[i])) {
@@ -1270,18 +1296,18 @@ s32 GetJiminyEntryState(s32 idx) {
         }
 
         if (a) {
-            return 2;
+            return JIMINY_ENTRY_STATE_COMPLETE;
         }
 
         if (b) {
-            return 3;
+            return JIMINY_ENTRY_STATE_HIDDEN;
         }
 
-        return 0;
+        return JIMINY_ENTRY_STATE_INCOMPLETE;
     }
 
     if (e->children == NULL) {
-        return 3;
+        return JIMINY_ENTRY_STATE_HIDDEN;
     }
 
     c = 1;
@@ -1289,30 +1315,30 @@ s32 GetJiminyEntryState(s32 idx) {
 
     for (i = 0; i < (u16)e->count; i++) {
         switch (GetJiminyEntryState(e->children[i])) {
-        case 1:
-            return 1;
-        case 0:
+        case JIMINY_ENTRY_STATE_NEW:
+            return JIMINY_ENTRY_STATE_NEW;
+        case JIMINY_ENTRY_STATE_INCOMPLETE:
             c = 0;
             d = 0;
             break;
-        case 2:
+        case JIMINY_ENTRY_STATE_COMPLETE:
             d = 0;
             break;
-        case 3:
+        case JIMINY_ENTRY_STATE_HIDDEN:
             c = 0;
             break;
         }
     }
 
     if (c) {
-        return 2;
+        return JIMINY_ENTRY_STATE_COMPLETE;
     }
 
     if (d) {
-        return 3;
+        return JIMINY_ENTRY_STATE_HIDDEN;
     }
 
-    return 0;
+    return JIMINY_ENTRY_STATE_INCOMPLETE;
 }
 
 void JiminyLoadHiddenRow(s32 row, const u16* const* itemTexts) {
@@ -1343,7 +1369,7 @@ void JiminyLoadRows(s16 visibleRows, s16 itemCount, const u16* const* itemTexts,
             if (itemChildren != NULL) {
                 sJiminyWork->rowStates[i] = GetJiminyEntryState(itemChildren[i]);
 
-                if (sJiminyWork->rowStates[i] == 3) {
+                if (sJiminyWork->rowStates[i] == JIMINY_ENTRY_STATE_HIDDEN) {
                     JiminyLoadHiddenRow(i, itemTexts);
                 } else {
                     sJiminyWork->textSlotCounts[i] =
@@ -1361,7 +1387,7 @@ void JiminyLoadRows(s16 visibleRows, s16 itemCount, const u16* const* itemTexts,
                     LoadTextSlots(itemTexts[i], sJiminyWork->lines[i].textSlots);
 
                 if (IsJiminyFlagNew(itemFlags[i])) {
-                    sJiminyWork->rowStates[i] = 1;
+                    sJiminyWork->rowStates[i] = JIMINY_ENTRY_STATE_NEW;
                 }
             } else {
                 JiminyLoadHiddenRow(i, itemTexts);
@@ -1493,7 +1519,7 @@ u8 JiminyHandleListInput() {
 
     if (GetKeysPressed() & START_BUTTON) {
         sJiminyWork->stateTimer = 0;
-        sJiminyWork->state = 5;
+        sJiminyWork->state = JIMINY_STATE_EXIT_TO_MAP;
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     }
@@ -1567,7 +1593,7 @@ void mode_jiminy_0() {
     sJiminyWork->x3 = -0x8000;
     sJiminyWork->y3 = -0x800;
     sJiminyWork->y4 = 0xA000;
-    sJiminyWork->state = 0;
+    sJiminyWork->state = JIMINY_STATE_BARS_IN;
     sJiminyWork->stateTimer = 0;
     sJiminyWork->shownChars = 0;
     sJiminyWork->cursor = 0;
@@ -1646,7 +1672,7 @@ void mode_jiminy_1() {
     JiminyPair* p2;
 
     switch (sJiminyWork->state) {
-    case 0:
+    case JIMINY_STATE_BARS_IN:
         if (sJiminyWork->stateTimer == 0) {
             sJiminyWork->steps = 16;
         }
@@ -1656,14 +1682,14 @@ void mode_jiminy_1() {
         sJiminyWork->steps--;
 
         if (sJiminyWork->steps <= 0) {
-            sJiminyWork->state = 1;
+            sJiminyWork->state = JIMINY_STATE_TITLE_IN;
             sJiminyWork->stateTimer = 0;
         } else {
             sJiminyWork->stateTimer++;
         }
 
         break;
-    case 1:
+    case JIMINY_STATE_TITLE_IN:
         if (sJiminyWork->stateTimer == 0) {
             sJiminyWork->steps = 16;
         }
@@ -1672,14 +1698,14 @@ void mode_jiminy_1() {
         sJiminyWork->steps--;
 
         if (sJiminyWork->steps <= 0) {
-            sJiminyWork->state = 6;
+            sJiminyWork->state = JIMINY_STATE_OPEN_LIST;
             sJiminyWork->stateTimer = 0;
         } else {
             sJiminyWork->stateTimer++;
         }
 
         break;
-    case 2:
+    case JIMINY_STATE_TITLE_OUT:
         if (sJiminyWork->stateTimer == 0) {
             c = sJiminyWork->flags | JIMINY_FLAG_SHOW_TITLE;
             sJiminyWork->flags = c & ~JIMINY_FLAG_SHOW_CURSOR;
@@ -1691,14 +1717,14 @@ void mode_jiminy_1() {
         sJiminyWork->steps--;
 
         if (sJiminyWork->steps <= 0) {
-            sJiminyWork->state = 3;
+            sJiminyWork->state = JIMINY_STATE_BARS_OUT;
             sJiminyWork->stateTimer = 0;
         } else {
             sJiminyWork->stateTimer++;
         }
 
         break;
-    case 3:
+    case JIMINY_STATE_BARS_OUT:
         if (sJiminyWork->stateTimer == 0) {
             sJiminyWork->steps = 16;
         }
@@ -1708,14 +1734,14 @@ void mode_jiminy_1() {
         sJiminyWork->steps--;
 
         if (sJiminyWork->steps <= 0) {
-            sJiminyWork->state = 4;
+            sJiminyWork->state = JIMINY_STATE_EXIT_TO_MENU;
             sJiminyWork->stateTimer = 0;
         } else {
             sJiminyWork->stateTimer++;
         }
 
         break;
-    case 4:
+    case JIMINY_STATE_EXIT_TO_MENU:
         if (sJiminyWork->stateTimer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
@@ -1726,7 +1752,7 @@ void mode_jiminy_1() {
         }
 
         break;
-    case 5:
+    case JIMINY_STATE_EXIT_TO_MAP:
         if (sJiminyWork->stateTimer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
@@ -1737,7 +1763,7 @@ void mode_jiminy_1() {
         }
 
         break;
-    case 6:
+    case JIMINY_STATE_OPEN_LIST:
         e = &sJiminyEntries[sJiminyWork->entry];
         p = &sJiminyWork->pairs[sJiminyWork->entry];
 #ifdef VERSION_JP
@@ -1769,8 +1795,8 @@ void mode_jiminy_1() {
 #endif
         }
 
-        sJiminyWork->state = 7;
-    case 7:
+        sJiminyWork->state = JIMINY_STATE_LIST;
+    case JIMINY_STATE_LIST:
         e2 = &sJiminyEntries[sJiminyWork->entry];
         p2 = &sJiminyWork->pairs[sJiminyWork->entry];
 
@@ -1785,9 +1811,9 @@ void mode_jiminy_1() {
             sJiminyWork->stateTimer = 0;
 
             if (e2->parent == -1) {
-                sJiminyWork->state = 2;
+                sJiminyWork->state = JIMINY_STATE_TITLE_OUT;
             } else {
-                sJiminyWork->state = 6;
+                sJiminyWork->state = JIMINY_STATE_OPEN_LIST;
                 sJiminyWork->entry = e2->parent;
                 FadeStartIn(FADE_MODE_BLACK, 5);
                 FadeLock();
@@ -1805,7 +1831,7 @@ void mode_jiminy_1() {
             if (e2->flags != NULL) {
                 ok = IsJiminyFlagSet(e2->flags[sJiminyWork->cursor]) != 0;
             } else {
-                if (sJiminyWork->rowStates[sJiminyWork->cursorRow] == 3) {
+                if (sJiminyWork->rowStates[sJiminyWork->cursorRow] == JIMINY_ENTRY_STATE_HIDDEN) {
                     ok = 0;
                 }
             }
@@ -1814,7 +1840,7 @@ void mode_jiminy_1() {
                 m4aSongNumStart(SONG_SYS_KETTEI);
 
                 if (e2->children != NULL) {
-                    sJiminyWork->state = 6;
+                    sJiminyWork->state = JIMINY_STATE_OPEN_LIST;
                     sJiminyWork->entry = e2->children[sJiminyWork->cursor];
                     sJiminyWork->stateTimer = 0;
                     FadeStartIn(FADE_MODE_BLACK, 5);
@@ -1824,7 +1850,7 @@ void mode_jiminy_1() {
                     FadeStartIn(FADE_MODE_BLACK, 5);
                     FadeLock();
                     sJiminyWork->stateTimer = 0;
-                    sJiminyWork->state = 8;
+                    sJiminyWork->state = JIMINY_STATE_OPEN_DETAIL;
                     sJiminyWork->detailIndex = sJiminyWork->cursor;
                     sJiminyWork->detailTable = e2->detail;
                     SetModeUpdate(JiminyDetailUpdate);
@@ -1858,9 +1884,9 @@ void mode_jiminy_1() {
         DrawTextSlots(sJiminyWork->listX, sJiminyWork->listY + sJiminyWork->rowHeight * i,
             sJiminyWork->lines[i].textSlots, sJiminyWork->palette3, 0, sJiminyWork->textSlotCounts[i]);
 
-        if (sJiminyWork->state == 7) {
+        if (sJiminyWork->state == JIMINY_STATE_LIST) {
             switch (sJiminyWork->rowStates[i]) {
-            case 1:
+            case JIMINY_ENTRY_STATE_NEW:
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
@@ -1890,7 +1916,7 @@ void mode_jiminy_1() {
                     sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0);
 #endif
                 break;
-            case 2:
+            case JIMINY_ENTRY_STATE_COMPLETE:
 #ifdef VERSION_EU
                 DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i - 2, gJiminyRowMarkFrame1,
                     sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
@@ -2000,7 +2026,7 @@ void mode_jiminy_1() {
 #endif
     }
 
-    if (sJiminyWork->state == 7) {
+    if (sJiminyWork->state == JIMINY_STATE_LIST) {
         if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
             DrawSprite(sJiminyWork->x, sJiminyWork->y - ((sJiminyWork->frame >> 3) & 3),
                 gJiminyScrollArrowFrame0, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
@@ -2077,92 +2103,92 @@ void JiminyDetailUpdate() {
 #endif
 
     switch ((u32)sJiminyWork->state) {
-    case 8:
+    case JIMINY_STATE_OPEN_DETAIL:
         switch ((u32)sJiminyWork->detailTable) {
         case 1:
             count = 17;
             entries = sJiminyEntry01Details;
-            sJiminyWork->detailLayout = 0;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_STORY;
             break;
         case 2:
             count = 17;
             entries = sJiminyEntry04Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 3:
             count = 14;
             entries = sJiminyEntry05Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 4:
             count = 7;
             entries = sJiminyEntry06Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 5:
             count = 7;
             entries = sJiminyEntry07Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 6:
             count = 49;
             entries = sJiminyEntry08Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 7:
             count = 26;
             entries = sJiminyEntry09Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 8:
             count = 1;
             entries = sJiminyEntry10Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 9:
             count = 25;
             entries = sJiminyEntry11Details;
-            sJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CHARACTER;
             break;
         case 10:
             count = 40;
             entries = sJiminyEntry12Details;
-            sJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CHARACTER;
             break;
         case 11:
             count = 35;
             entries = sJiminyEntry13Details;
-            sJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CHARACTER;
             break;
         case 12:
             count = 6;
             entries = sJiminyEntry15Details;
-            sJiminyWork->detailLayout = 0;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_STORY;
             break;
         case 13:
             count = 22;
             entries = sJiminyEntry16Details;
-            sJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CARD;
             break;
         case 14:
             count = 14;
             entries = sJiminyEntry18Details;
-            sJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CHARACTER;
             break;
         case 15:
             count = 6;
             entries = sJiminyEntry19Details;
-            sJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CHARACTER;
             break;
         case 16:
             count = 33;
             entries = sJiminyEntry20Details;
-            sJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CHARACTER;
             break;
         default:
             count = 25;
             entries = sJiminyEntry11Details;
-            sJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = JIMINY_DETAIL_LAYOUT_CHARACTER;
             break;
         }
 
@@ -2245,7 +2271,7 @@ void JiminyDetailUpdate() {
         }
 
         switch (sJiminyWork->detailLayout) {
-        case 0:
+        case JIMINY_DETAIL_LAYOUT_STORY:
             map0 = gJiminyDetailOverlayMap;
             map1 = gJiminyStoryDetailMap;
 #ifdef VERSION_JP
@@ -2268,7 +2294,7 @@ void JiminyDetailUpdate() {
 #endif
 #endif
             break;
-        case 1:
+        case JIMINY_DETAIL_LAYOUT_CARD:
             map0 = gJiminyDetailOverlayMap;
             map1 = gJiminyCardDetailMap;
 #ifdef VERSION_JP
@@ -2291,7 +2317,7 @@ void JiminyDetailUpdate() {
 #endif
 #endif
             break;
-        case 2:
+        case JIMINY_DETAIL_LAYOUT_CHARACTER:
         default:
             map0 = gJiminyCharacterDetailOverlayMap;
             map1 = gJiminyCharacterDetailMap;
@@ -2341,7 +2367,7 @@ void JiminyDetailUpdate() {
             SetObjTileSource(sJiminyWork->tiles8, sJiminyWork->detail->tiles2);
         }
 
-        if (sJiminyWork->detailLayout == 2) {
+        if (sJiminyWork->detailLayout == JIMINY_DETAIL_LAYOUT_CHARACTER) {
             nameMap = gJiminyCharacterNamePlateMap;
             dest = (u8*)GetBgScreenBase(0) + 0x8E;
         } else {
@@ -2349,7 +2375,7 @@ void JiminyDetailUpdate() {
             dest = (u8*)GetBgScreenBase(0) + 0x80;
         }
 
-        if (sJiminyWork->detailLayout < 2) {
+        if (sJiminyWork->detailLayout < JIMINY_DETAIL_LAYOUT_CHARACTER) {
 #ifdef VERSION_JP
             switch (sJiminyWork->charCount) {
             case 1: nameMap += 0x60; break;
@@ -2465,7 +2491,7 @@ void JiminyDetailUpdate() {
         RequestDma3Copy(source + digits[1] * 0x20, dest, 0x20);
         dest = (u8*)GetBgCharBase(0) + 0xC0;
         RequestDma3Copy(source + digits[2] * 0x20, dest, 0x20);
-        sJiminyWork->state = 9;
+        sJiminyWork->state = JIMINY_STATE_DETAIL;
         DisableBg(2);
 
         if (sJiminyWork->detail->bgTiles != NULL) {
@@ -2496,7 +2522,7 @@ void JiminyDetailUpdate() {
 
         sJiminyWork->detailTimer = 5;
         SetBlendAlpha(0, 16);
-    case 9:
+    case JIMINY_STATE_DETAIL:
         if (sJiminyWork->cursor > 0) {
             sJiminyWork->flags |= JIMINY_FLAG_SCROLL_UP;
         } else {
@@ -2535,13 +2561,13 @@ void JiminyDetailUpdate() {
 
         if (sJiminyWork->detailIndex != sJiminyWork->nextDetail) {
             if (GetKeysRepeat() & L_BUTTON) {
-                sJiminyWork->state = 8;
+                sJiminyWork->state = JIMINY_STATE_OPEN_DETAIL;
                 sJiminyWork->stateTimer = 0;
                 sJiminyWork->detailIndex = sJiminyWork->prevDetail;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             } else if (GetKeysRepeat() & R_BUTTON) {
-                sJiminyWork->state = 8;
+                sJiminyWork->state = JIMINY_STATE_OPEN_DETAIL;
                 sJiminyWork->stateTimer = 0;
                 sJiminyWork->detailIndex = sJiminyWork->nextDetail;
                 m4aSongNumStart(SONG_SYS_CANSEL);
@@ -2551,19 +2577,19 @@ void JiminyDetailUpdate() {
 
         if (GetKeysPressed() & B_BUTTON) {
             sJiminyWork->stateTimer = 0;
-            sJiminyWork->state = 6;
+            sJiminyWork->state = JIMINY_STATE_OPEN_LIST;
             FadeStartIn(FADE_MODE_BLACK, 5);
             FadeLock();
             SetModeUpdate(mode_jiminy_1);
             m4aSongNumStart(SONG_SYS_CLOSE);
         } else if (GetKeysPressed() & START_BUTTON) {
             sJiminyWork->stateTimer = 0;
-            sJiminyWork->state = 5;
+            sJiminyWork->state = JIMINY_STATE_EXIT_TO_MAP;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
 
         break;
-    case 5:
+    case JIMINY_STATE_EXIT_TO_MAP:
         if (sJiminyWork->stateTimer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
@@ -2601,14 +2627,14 @@ void JiminyDetailUpdate() {
     }
 
     switch (sJiminyWork->detailLayout) {
-    case 0:
+    case JIMINY_DETAIL_LAYOUT_STORY:
         if (sJiminyWork->detail->tiles != NULL) {
             DrawSprite(sJiminyWork->detail->x + 0xC8, sJiminyWork->detail->y + 0x5C,
                 sJiminyWork->detail->sprite, sJiminyWork->tiles7, sJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
         }
 
         break;
-    case 1:
+    case JIMINY_DETAIL_LAYOUT_CARD:
         if (sJiminyWork->detail->tiles != NULL) {
             DrawSprite(0xC2, 0x5E, sJiminyWork->detail->sprite,
                 sJiminyWork->tiles7, sJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
@@ -2620,7 +2646,7 @@ void JiminyDetailUpdate() {
         }
 
         break;
-    case 2:
+    case JIMINY_DETAIL_LAYOUT_CHARACTER:
         if (sJiminyWork->detail->tiles != NULL) {
             DrawSprite(sJiminyWork->detail->x + 0xC4, sJiminyWork->detail->y + 0x74,
                 sJiminyWork->detail->sprite, sJiminyWork->tiles7, sJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);

@@ -34,6 +34,7 @@
 #include "allmap.h"
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
+#include "mode_allmap_api.h"
 
 static const PooBgSet sAllmapWorldBgs[15] = {
     { gAllmapWorldBgWonderlandMap, gAllmapWorldBgWonderlandTiles, gAllmapWorldBgWonderlandPalette },
@@ -247,7 +248,7 @@ void mode_allmap_0(s32 lowerBgm) {
     SetBgMapBlocks(1, gAllmapBg1MapBlocks, 2, 4);
     TaskPoolInit(&gAllmapTaskPool, 1);
     TaskCreate(&gAllmapTaskPool, &gTaskDescAllmapBar, NULL);
-    gAllmapModeState = 0;
+    gAllmapModeState = ALLMAP_MODE_STATE_FADE;
     InitAllmap();
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VCOUNT;
@@ -278,16 +279,16 @@ void mode_allmap_1() {
     TaskPoolUpdate(&gAllmapTaskPool);
     TaskPoolDraw(&gAllmapTaskPool);
 
-    if (gAllmapModeState == 0 && !FadeIsActive()) {
+    if (gAllmapModeState == ALLMAP_MODE_STATE_FADE && !FadeIsActive()) {
         if (gAllmapScrollInTimer != 0 && gAllmapCursorDropTimer != 0) {
-            gAllmapModeState = 1;
+            gAllmapModeState = ALLMAP_MODE_STATE_BAR_SLIDE;
             sAllmapBlendTimer = 16;
         } else {
             ReturnToMap(sAllmapReturnToMenu);
         }
     }
 
-    if (gAllmapModeState == 2) {
+    if (gAllmapModeState == ALLMAP_MODE_STATE_INTRO) {
         if (gAllmapScrollInTimer != 0) {
             gAllmapScrollInTimer--;
         }
@@ -310,13 +311,13 @@ void mode_allmap_1() {
         }
 
         if (gAllmapScrollInTimer == 0 && gAllmapCursorDropTimer == 0) {
-            gAllmapModeState = 3;
+            gAllmapModeState = ALLMAP_MODE_STATE_ACTIVE;
         }
     }
 
     AllmapCyclePalette();
 
-    if (gAllmapModeState == 2 || gAllmapModeState == 3) {
+    if (gAllmapModeState == ALLMAP_MODE_STATE_INTRO || gAllmapModeState == ALLMAP_MODE_STATE_ACTIVE) {
         EnableBg(0);
         EnableBg(1);
         UpdateAllmap();

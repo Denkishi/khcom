@@ -5,6 +5,13 @@
 
 struct AllmapRoomWork;
 
+enum AllmapModeState {
+    ALLMAP_MODE_STATE_FADE,
+    ALLMAP_MODE_STATE_BAR_SLIDE,
+    ALLMAP_MODE_STATE_INTRO,
+    ALLMAP_MODE_STATE_ACTIVE
+};
+
 void SetAllmapReturnToMenu(u8 returnToMenu);
 u8 AllmapDoorExists(u8 room, u8 side);
 u8 AllmapDoorIsOpen(u8 room, u8 side);

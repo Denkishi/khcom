@@ -38,6 +38,15 @@
 #include "sprite_palettes.h"
 #include <stddef.h>
 
+enum WorldInspectState {
+    WORLD_INSPECT_STATE_BARS_IN,
+    WORLD_INSPECT_STATE_TITLE_IN,
+    WORLD_INSPECT_STATE_SELECT,
+    WORLD_INSPECT_STATE_TITLE_OUT,
+    WORLD_INSPECT_STATE_BARS_OUT,
+    WORLD_INSPECT_STATE_EXIT
+};
+
 static s16 sWorldInspectCursor;
 static s16 sWorldInspectFloorCount;
 static s16 sWorldInspectWorlds[12];
@@ -392,7 +401,7 @@ void WorldInspectHandleInput() {
 #endif
         sWorldInspectReturnToMenu = 1;
         sWorldInspectSteps = 16;
-        sWorldInspectState = 3;
+        sWorldInspectState = WORLD_INSPECT_STATE_TITLE_OUT;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         LoadBgMap(0, gWorldInspectBgMap, 0x500);
@@ -401,7 +410,7 @@ void WorldInspectHandleInput() {
 #endif
         sWorldInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
-        sWorldInspectState = 5;
+        sWorldInspectState = WORLD_INSPECT_STATE_EXIT;
     } else if (keys & DPAD_UP) {
         while (1) {
             sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].up;
@@ -506,7 +515,7 @@ void WorldInspectHandleDetailInput() {
 #endif
             sWorldInspectReturnToMenu = 0;
             FadeStartOut(FADE_MODE_BLACK, 16);
-            sWorldInspectState = 5;
+            sWorldInspectState = WORLD_INSPECT_STATE_EXIT;
         }
     }
 }
@@ -552,7 +561,7 @@ void WorldInspectDraw() {
 #ifdef VERSION_EU
     if (sWorldInspectBarPalette != NULL) {
 #else
-    if (sWorldInspectState != 2) {
+    if (sWorldInspectState != WORLD_INSPECT_STATE_SELECT) {
 #endif
         DrawSprite(sWorldInspectBarX >> 8, 0,
 #ifdef VERSION_EU
@@ -565,7 +574,7 @@ void WorldInspectDraw() {
 #ifdef VERSION_EU
     }
 
-    if (sWorldInspectState != 2) {
+    if (sWorldInspectState != WORLD_INSPECT_STATE_SELECT) {
 #endif
         DrawSprite(112, sWorldInspectBarY[0] >> 8,
 #ifdef VERSION_EU
@@ -591,7 +600,7 @@ void WorldInspectDraw() {
         prio |= 4;
     }
 
-    if (sWorldInspectState == 2) {
+    if (sWorldInspectState == WORLD_INSPECT_STATE_SELECT) {
         DrawSprite(sWorldinspectNavs[sWorldInspectCursor].x * 8 + 22,
                       sWorldinspectNavs[sWorldInspectCursor].y * 8 + 12,
                       AnimUpdate(&sWorldInspectHighlightAnim), sWorldInspectHighlightTiles, sWorldInspectHighlightPalette, NULL, prio, 2013);
@@ -693,7 +702,7 @@ void mode_worldinspect_0() {
     sWorldInspectBobPhase = 0;
     sWorldInspectCursorX = (sWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000;
     sWorldInspectCursorY = (sWorldinspectNavs[sWorldInspectCursor].y << 11) - 0x600;
-    sWorldInspectState = 0;
+    sWorldInspectState = WORLD_INSPECT_STATE_BARS_IN;
     sWorldInspectSteps = 16;
     sWorldInspectBarY[0] = -0x800;
     sWorldInspectBarY[1] = 0xA800;
@@ -854,18 +863,18 @@ void mode_worldinspect_1() {
     sWorldInspectBobPhase += 2;
 
     switch (sWorldInspectState) {
-    case 0:
+    case WORLD_INSPECT_STATE_BARS_IN:
         ApproachValue(&sWorldInspectBarY[0], 0, sWorldInspectSteps);
         ApproachValue(&sWorldInspectBarY[1], 0x9800, sWorldInspectSteps);
         sWorldInspectSteps--;
 
         if (sWorldInspectSteps <= 0) {
             sWorldInspectSteps = 16;
-            sWorldInspectState = 1;
+            sWorldInspectState = WORLD_INSPECT_STATE_TITLE_IN;
         }
 
         break;
-    case 1:
+    case WORLD_INSPECT_STATE_TITLE_IN:
         ApproachValue(&sWorldInspectBarX, 0, sWorldInspectSteps);
         sWorldInspectSteps--;
 
@@ -874,11 +883,11 @@ void mode_worldinspect_1() {
 #ifndef VERSION_EU
             ReleaseObjPalette(sWorldInspectBarPalette);
 #endif
-            sWorldInspectState = 2;
+            sWorldInspectState = WORLD_INSPECT_STATE_SELECT;
         }
 
         break;
-    case 2:
+    case WORLD_INSPECT_STATE_SELECT:
         switch (sWorldInspectDetailOpen) {
         case 0:
             WorldInspectHandleInput();
@@ -889,28 +898,28 @@ void mode_worldinspect_1() {
         }
 
         break;
-    case 3:
+    case WORLD_INSPECT_STATE_TITLE_OUT:
         ApproachValue(&sWorldInspectBarX, -0x8000, sWorldInspectSteps);
         sWorldInspectSteps--;
 
         if (sWorldInspectSteps <= 0) {
             sWorldInspectSteps = 16;
-            sWorldInspectState = 4;
+            sWorldInspectState = WORLD_INSPECT_STATE_BARS_OUT;
         }
 
         break;
-    case 4:
+    case WORLD_INSPECT_STATE_BARS_OUT:
         ApproachValue(&sWorldInspectBarY[0], -0x800, sWorldInspectSteps);
         ApproachValue(&sWorldInspectBarY[1], 0xA800, sWorldInspectSteps);
         sWorldInspectSteps--;
 
         if (sWorldInspectSteps <= 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
-            sWorldInspectState = 5;
+            sWorldInspectState = WORLD_INSPECT_STATE_EXIT;
         }
 
         break;
-    case 5:
+    case WORLD_INSPECT_STATE_EXIT:
         if (!FadeIsActive()) {
             ReturnToMap(sWorldInspectReturnToMenu);
         }

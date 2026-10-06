@@ -177,6 +177,28 @@ static const s16 sMooglePackPrices[4][4] = {
     {150, 200, 300, 400},
 };
 
+enum MooglePackCardState {
+    MOOGLE_PACK_CARD_STATE_WAIT,
+    MOOGLE_PACK_CARD_STATE_DEAL,
+    MOOGLE_PACK_CARD_STATE_SPIN,
+    MOOGLE_PACK_CARD_STATE_FLIP,
+    MOOGLE_PACK_CARD_STATE_RISE,
+    MOOGLE_PACK_CARD_STATE_SPIN_PREMIUM,
+    MOOGLE_PACK_CARD_STATE_FLIP_PREMIUM,
+    MOOGLE_PACK_CARD_STATE_RISE_PREMIUM,
+    MOOGLE_PACK_CARD_STATE_REVEALED,
+    MOOGLE_PACK_CARD_STATE_BROWSE
+};
+
+enum MoogleShopState {
+    MOOGLE_SHOP_STATE_FADE_IN,
+    MOOGLE_SHOP_STATE_SOLD_OUT,
+    MOOGLE_SHOP_STATE_SELECT_ROW,
+    MOOGLE_SHOP_STATE_SELECT_PACK,
+    MOOGLE_SHOP_STATE_OPEN_PACK,
+    MOOGLE_SHOP_STATE_EXIT
+};
+
 static MooglePackCardWork sMooglePackCards[5];
 static struct ObjPalette* sMooglePackCard00Palette;
 static struct ObjTiles* sMooglePackValueTiles;
@@ -439,7 +461,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
         sMooglePackCards[i].y = y << 8;
         sMooglePackCards[i].scale = 2;
         sMooglePackCards[i].flipAngle = 0;
-        sMooglePackCards[i].state = 0;
+        sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_WAIT;
         sMooglePackCards[i].timer = 0;
     }
 
@@ -542,7 +564,7 @@ void DrawMooglePackOpening() {
             }
         }
 
-        if (sMooglePackCards[i].state == 9) {
+        if (sMooglePackCards[i].state == MOOGLE_PACK_CARD_STATE_BROWSE) {
             DrawTextSlots(0x30, 0x63, sMooglePackNameText, sMooglePackCategoryPalette, 0, sMooglePackNameTextCount);
             DrawTextSlots(0x31, 0x72, sMooglePackDescText, sMooglePackCursorPalette, 0, sMooglePackDescTextCount);
             ApproachValueHalf(&sMooglePackCursorX, sMooglePackCards[sMooglePackCardCursor].x - 0x1000);
@@ -575,31 +597,31 @@ u8 UpdateMooglePackOpening(u16 freePack) {
 
     for (i = 0; i < 5; i++) {
         switch (sMooglePackCards[i].state) {
-        case 0:
+        case MOOGLE_PACK_CARD_STATE_WAIT:
             if (!FadeIsActive()) {
                 if (sMooglePackCards[i].timer != 0) {
-                    sMooglePackCards[i].state = 1;
+                    sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_DEAL;
                 }
             }
 
             break;
-        case 1:
+        case MOOGLE_PACK_CARD_STATE_DEAL:
             ApproachValue(&sMooglePackCards[i].x, i * 10240 + 0x2800, sMooglePackCards[i].timer);
             ApproachValue(&sMooglePackCards[i].y, 0x6400, sMooglePackCards[i].timer);
             ApproachValue(&sMooglePackCards[i].scale, 0x100, sMooglePackCards[i].timer);
 
             if (--sMooglePackCards[i].timer == 0) {
                 if (sMooglePackCards[i].premium) {
-                    sMooglePackCards[i].state = 5;
+                    sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_SPIN_PREMIUM;
                 } else {
-                    sMooglePackCards[i].state = 2;
+                    sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_SPIN;
                 }
 
                 if (i <= 3) {
                     sMooglePackCards[i + 1].timer = 15;
                 } else {
                     for (j = 0; j < 5; j++) {
-                        if (sMooglePackCards[j].state == 2) {
+                        if (sMooglePackCards[j].state == MOOGLE_PACK_CARD_STATE_SPIN) {
                             sMooglePackCards[j].timer = 8;
                             break;
                         }
@@ -612,7 +634,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
             }
 
             break;
-        case 2:
+        case MOOGLE_PACK_CARD_STATE_SPIN:
             if (sMooglePackCards[i].timer != 0) {
                 if (AnimGetFrame(&sMooglePackCards[i].anim) == 3 || AnimGetFrame(&sMooglePackCards[i].anim) == 8) {
                     ReleaseObjPalette(sMooglePackCards[i].palette2);
@@ -622,31 +644,31 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].tiles, 0x300);
                     sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].gfx;
                     sMooglePackCards[i].flipAngle = 0x40;
-                    sMooglePackCards[i].state = 3;
+                    sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_FLIP;
                     sMooglePackCards[i].revealed = 1;
                 }
             }
 
             break;
-        case 3:
+        case MOOGLE_PACK_CARD_STATE_FLIP:
             d = 0x80 - sMooglePackCards[i].flipAngle;
             sMooglePackCards[i].flipAngle += d / sMooglePackCards[i].timer;
 
             if (--sMooglePackCards[i].timer == 0) {
                 sMooglePackCards[i].timer = 5;
-                sMooglePackCards[i].state = 4;
+                sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_RISE;
             }
 
             break;
-        case 4:
+        case MOOGLE_PACK_CARD_STATE_RISE:
             ApproachValue(&sMooglePackCards[i].y, 0x4600, sMooglePackCards[i].timer);
 
             if (--sMooglePackCards[i].timer == 0) {
                 m4aSongNumStart(SONG_SYS_KAIHUKU);
-                sMooglePackCards[i].state = 8;
+                sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_REVEALED;
 
                 for (j = 0; j < 5; j++) {
-                    if (sMooglePackCards[j].state == 2) {
+                    if (sMooglePackCards[j].state == MOOGLE_PACK_CARD_STATE_SPIN) {
                         sMooglePackCards[j].timer = 8;
                         break;
                     }
@@ -654,7 +676,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
 
                 if (j == 5) {
                     for (j = 0; j < 5; j++) {
-                        if (sMooglePackCards[j].state == 5) {
+                        if (sMooglePackCards[j].state == MOOGLE_PACK_CARD_STATE_SPIN_PREMIUM) {
                             sMooglePackCards[j].timer = 8;
                             break;
                         }
@@ -667,7 +689,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
             }
 
             break;
-        case 5:
+        case MOOGLE_PACK_CARD_STATE_SPIN_PREMIUM:
             if (sMooglePackCards[i].timer != 0) {
                 if (AnimGetFrame(&sMooglePackCards[i].anim) == 3 || AnimGetFrame(&sMooglePackCards[i].anim) == 8) {
                     ReleaseObjPalette(sMooglePackCards[i].palette2);
@@ -677,19 +699,19 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].tiles, 0x300);
                     sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].gfx;
                     sMooglePackCards[i].flipAngle = 0x40;
-                    sMooglePackCards[i].state = 6;
+                    sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_FLIP_PREMIUM;
                     sMooglePackCards[i].revealed = 1;
                 }
             }
 
             break;
-        case 6:
+        case MOOGLE_PACK_CARD_STATE_FLIP_PREMIUM:
             d = 0x80 - sMooglePackCards[i].flipAngle;
             sMooglePackCards[i].flipAngle += d / sMooglePackCards[i].timer;
 
             if (--sMooglePackCards[i].timer == 0) {
                 sMooglePackCards[i].timer = 5;
-                sMooglePackCards[i].state = 7;
+                sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_RISE_PREMIUM;
 
                 for (k = 0; k < 8; k++) {
                     arg0.x = sMooglePackCards[i].x >> 8;
@@ -702,7 +724,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
             }
 
             break;
-        case 7:
+        case MOOGLE_PACK_CARD_STATE_RISE_PREMIUM:
             ApproachValue(&sMooglePackCards[i].y, 0x4600, sMooglePackCards[i].timer);
             f = gFrameCounter & 0x1F;
 
@@ -717,10 +739,10 @@ u8 UpdateMooglePackOpening(u16 freePack) {
 
             if (--sMooglePackCards[i].timer == 0) {
                 m4aSongNumStart(SONG_SYS_KAIHUKU);
-                sMooglePackCards[i].state = 8;
+                sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_REVEALED;
 
                 for (j = 0; j < 5; j++) {
-                    if (sMooglePackCards[j].state == 5) {
+                    if (sMooglePackCards[j].state == MOOGLE_PACK_CARD_STATE_SPIN_PREMIUM) {
                         sMooglePackCards[j].timer = 8;
                         break;
                     }
@@ -732,7 +754,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
             }
 
             break;
-        case 8:
+        case MOOGLE_PACK_CARD_STATE_REVEALED:
             if (sMooglePackCards[i].premium) {
                 g = gFrameCounter & 0x1F;
 
@@ -763,12 +785,12 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
                     LoadObjPaletteBank(sMooglePackCategoryPalette->index, gMooglePackCategoryPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16);
                     EnableBg(3);
-                    sMooglePackCards[i].state = 9;
+                    sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_BROWSE;
                 }
             }
 
             break;
-        case 9:
+        case MOOGLE_PACK_CARD_STATE_BROWSE:
             if (sMooglePackCards[i].premium) {
                 h = gFrameCounter & 0x1F;
 
@@ -844,12 +866,12 @@ void MoogleShopHandleSoldOutInput() {
             m4aSongNumStart(SONG_SYS_CLOSE);
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 1;
-            sMoogleShopState = 5;
+            sMoogleShopState = MOOGLE_SHOP_STATE_EXIT;
         } else if (keys & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 0;
-            sMoogleShopState = 5;
+            sMoogleShopState = MOOGLE_SHOP_STATE_EXIT;
         }
     }
 }
@@ -867,12 +889,12 @@ void MoogleShopHandleRowInput() {
             m4aSongNumStart(SONG_SYS_CLOSE);
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 1;
-            sMoogleShopState = 5;
+            sMoogleShopState = MOOGLE_SHOP_STATE_EXIT;
         } else if (keys & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 0;
-            sMoogleShopState = 5;
+            sMoogleShopState = MOOGLE_SHOP_STATE_EXIT;
         } else if (keys & DPAD_UP) {
             sMoogleShopRowCursor--;
 
@@ -900,7 +922,7 @@ void MoogleShopHandleRowInput() {
                 sMoogleShopRowCursor = 0;
             }
         } else if (keys & DPAD_RIGHT) {
-            sMoogleShopState = 3;
+            sMoogleShopState = MOOGLE_SHOP_STATE_SELECT_PACK;
             sMoogleShopPackCursor = 0;
             LoadMooglePackSelectionTilemap(0);
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -1051,7 +1073,7 @@ void MoogleShopHandlePackInput() {
             FadeSetPaletteExcluded(13, 1);
             FadeToAmount(FADE_MODE_BLACK, 16, 8);
             m4aSongNumStart(SONG_SYS_KETTEI);
-            sMoogleShopState = 4;
+            sMoogleShopState = MOOGLE_SHOP_STATE_OPEN_PACK;
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
@@ -1059,12 +1081,12 @@ void MoogleShopHandlePackInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         FadeStartOut(FADE_MODE_BLACK, 16);
         sMoogleShopBackToTop = 1;
-        sMoogleShopState = 5;
+        sMoogleShopState = MOOGLE_SHOP_STATE_EXIT;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         FadeStartOut(FADE_MODE_BLACK, 16);
         sMoogleShopBackToTop = 0;
-        sMoogleShopState = 5;
+        sMoogleShopState = MOOGLE_SHOP_STATE_EXIT;
     } else if (keys & DPAD_UP) {
         sMoogleShopPackCursor = sMooglePackMenuEntries[sMoogleShopPackCursor].upEntry;
     } else if (keys & DPAD_DOWN) {
@@ -1079,7 +1101,7 @@ void MoogleShopHandlePackInput() {
         sMoogleShopPackCursor = old;
     } else if (sMoogleShopPackCursor == 5) {
         sMoogleShopPackCursor = old;
-        sMoogleShopState = 2;
+        sMoogleShopState = MOOGLE_SHOP_STATE_SELECT_ROW;
         DisableBg(1);
         m4aSongNumStart(SONG_SYS_CLICK);
     } else if (sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0] < 0) {
@@ -1097,7 +1119,7 @@ void MoogleShopDraw() {
     s16 v;
 
     switch (sMoogleShopState) {
-    case 2:
+    case MOOGLE_SHOP_STATE_SELECT_ROW:
         if (sMoogleShopHasPacks) {
             ApproachValueHalf(&sMoogleShopCursorX, 0x400);
             ApproachValueHalf(&sMoogleShopCursorY, sMoogleShopRowCursor * 6144 + 0x800);
@@ -1105,12 +1127,12 @@ void MoogleShopDraw() {
         }
 
         break;
-    case 3:
+    case MOOGLE_SHOP_STATE_SELECT_PACK:
         ApproachValueHalf(&sMoogleShopCursorX, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorX << 8);
         ApproachValueHalf(&sMoogleShopCursorY, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorY << 8);
         DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, NULL, SPRITE_PRIORITY(1), 0x3E8);
         break;
-    case 4:
+    case MOOGLE_SHOP_STATE_OPEN_PACK:
         DrawMooglePackOpening();
         break;
     }
@@ -1142,7 +1164,7 @@ void mode_ms_shop_0() {
     SetBgPriority(1, 2);
     SetBgPriority(2, 1);
     SetBgPriority(3, 0);
-    sMoogleShopState = 0;
+    sMoogleShopState = MOOGLE_SHOP_STATE_FADE_IN;
     sMoogleShopRowCursor = 0;
     sMoogleShopPackCursor = 0;
     sMoogleShopHasPacks = BuildMooglePackList(gGameState.floor);
@@ -1183,28 +1205,28 @@ void mode_ms_shop_1() {
     UpdatePlayTime();
 
     switch (sMoogleShopState) {
-    case 0:
+    case MOOGLE_SHOP_STATE_FADE_IN:
         if (!FadeIsActive()) {
             if (sMoogleShopHasPacks) {
                 sMoogleShopCursorX = 0x400;
                 sMoogleShopCursorY = sMoogleShopRowCursor * 6144 + 0x800;
-                sMoogleShopState = 2;
+                sMoogleShopState = MOOGLE_SHOP_STATE_SELECT_ROW;
             } else {
-                sMoogleShopState = 1;
+                sMoogleShopState = MOOGLE_SHOP_STATE_SOLD_OUT;
             }
         }
 
         break;
-    case 1:
+    case MOOGLE_SHOP_STATE_SOLD_OUT:
         MoogleShopHandleSoldOutInput();
         break;
-    case 2:
+    case MOOGLE_SHOP_STATE_SELECT_ROW:
         MoogleShopHandleRowInput();
         break;
-    case 3:
+    case MOOGLE_SHOP_STATE_SELECT_PACK:
         MoogleShopHandlePackInput();
         break;
-    case 4:
+    case MOOGLE_SHOP_STATE_OPEN_PACK:
         if (!UpdateMooglePackOpening(0)) {
             ReleaseMooglePackOpening();
             SetMooglePackBought(gMapFloorState.room, sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0]);
@@ -1242,11 +1264,11 @@ void mode_ms_shop_1() {
             LoadDecimalDigitTiles(GetMooglePoints(), gMoogleShopPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
             DisableBg(3);
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            sMoogleShopState = sMoogleShopHasPacks ? 3 : 1;
+            sMoogleShopState = sMoogleShopHasPacks ? MOOGLE_SHOP_STATE_SELECT_PACK : MOOGLE_SHOP_STATE_SOLD_OUT;
         }
 
         break;
-    case 5:
+    case MOOGLE_SHOP_STATE_EXIT:
         if (!FadeIsActive()) {
             if (sMoogleShopBackToTop) {
                 ModeRequest(&gModeMsTop, 2);

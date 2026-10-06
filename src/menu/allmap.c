@@ -301,7 +301,7 @@ s32 task_allmap_cursor_1(AllmapCursorWork* work) {
     s32 x;
     s32 y;
 
-    if (gAllmapModeState == 2) {
+    if (gAllmapModeState == ALLMAP_MODE_STATE_INTRO) {
         if (gAllmapCursorDropTimer > 6) {
             ApproachValue(&work->dropY, work->dropTargetY, gAllmapCursorDropTimer - 7);
         } else if (gAllmapCursorDropTimer > 3) {
@@ -311,7 +311,7 @@ s32 task_allmap_cursor_1(AllmapCursorWork* work) {
         }
     }
 
-    if (gAllmapModeState != 3) {
+    if (gAllmapModeState != ALLMAP_MODE_STATE_ACTIVE) {
         work->gfx = gAllmapCursorFrames[0];
         return 1;
     }
@@ -343,7 +343,7 @@ void task_allmap_cursor_2(AllmapCursorWork* work) {
         return;
     }
 
-    if (gAllmapModeState != 3) {
+    if (gAllmapModeState != ALLMAP_MODE_STATE_ACTIVE) {
         x = work->screenX;
         y = work->dropY >> 8;
     } else {
@@ -442,13 +442,21 @@ void AllmapClearRoomnameFrame() {
     RequestDma3Copy(p, dst, 32);
 }
 
+enum AllmapBarState {
+    ALLMAP_BAR_STATE_BARS_IN,
+    ALLMAP_BAR_STATE_TITLE_IN,
+    ALLMAP_BAR_STATE_IDLE,
+    ALLMAP_BAR_STATE_TITLE_OUT,
+    ALLMAP_BAR_STATE_BARS_OUT
+};
+
 void AllmapBarStartClose(AllmapBarWork* work) {
     work->closing = 1;
 
-    if (work->state == 0) {
-        work->state = 4;
+    if (work->state == ALLMAP_BAR_STATE_BARS_IN) {
+        work->state = ALLMAP_BAR_STATE_BARS_OUT;
     } else {
-        work->state = 3;
+        work->state = ALLMAP_BAR_STATE_TITLE_OUT;
     }
 
     if (work->steps == 0) {
@@ -471,7 +479,7 @@ void task_allmap_bar_0(AllmapBarWork* work) {
     work->tiles2 = LoadObjTiles(gAllmapBarBandTiles, 0xC0);
     work->palette = LoadObjPalette(gAllmapObjPalette, 32);
     work->steps = 16;
-    work->state = 0;
+    work->state = ALLMAP_BAR_STATE_BARS_IN;
     work->y = -0x800;
     work->y2 = 0xA000;
     work->x = -0x8000;
@@ -491,18 +499,18 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
     s32 i;
 
     switch (work->state) {
-    case 0:
+    case ALLMAP_BAR_STATE_BARS_IN:
         ApproachValue(&work->y, work->targetY, work->steps);
         ApproachValue(&work->y2, work->targetY2, work->steps);
         work->steps--;
 
         if (work->steps == 0) {
             work->steps = 16;
-            work->state = 1;
+            work->state = ALLMAP_BAR_STATE_TITLE_IN;
         }
 
         break;
-    case 1:
+    case ALLMAP_BAR_STATE_TITLE_IN:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
 
@@ -512,22 +520,22 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
 #else
             LoadBgMap(3, gAllmapBarBgMap, 0x500);
 #endif
-            work->state = 2;
-            gAllmapModeState = 2;
+            work->state = ALLMAP_BAR_STATE_IDLE;
+            gAllmapModeState = ALLMAP_MODE_STATE_INTRO;
         }
 
         break;
-    case 3:
+    case ALLMAP_BAR_STATE_TITLE_OUT:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
 
         if (work->steps == 0) {
             work->steps = 16;
-            work->state = 4;
+            work->state = ALLMAP_BAR_STATE_BARS_OUT;
         }
 
         break;
-    case 4:
+    case ALLMAP_BAR_STATE_BARS_OUT:
         if (!FadeIsActive() && !work->fadeStarted) {
             for (i = 0; i < 32; i++) {
                 FadeSetPaletteExcluded(i, 0);
@@ -542,24 +550,24 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
         work->steps--;
 
         if (work->steps == 0) {
-            gAllmapModeState = 0;
+            gAllmapModeState = ALLMAP_MODE_STATE_FADE;
             return 0;
         }
 
         break;
-    case 2:
+    case ALLMAP_BAR_STATE_IDLE:
         if (work->closing) {
             break;
         }
 
-        if (gAllmapModeState != 3) {
+        if (gAllmapModeState != ALLMAP_MODE_STATE_ACTIVE) {
             break;
         }
 
         if ((GetKeysPressed() & START_BUTTON) != 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             AllmapBarFadeOut(work);
-            gAllmapModeState = 0;
+            gAllmapModeState = ALLMAP_MODE_STATE_FADE;
             AllmapClearRoomnameFrame();
             SetAllmapReturnToMenu(0);
             return 0;
@@ -568,7 +576,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
         if ((GetKeysPressed() & B_BUTTON) != 0 && !IsStockMesDispActive()) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             AllmapBarStartClose(work);
-            gAllmapModeState = 1;
+            gAllmapModeState = ALLMAP_MODE_STATE_BAR_SLIDE;
             AllmapClearRoomnameFrame();
             SetAllmapReturnToMenu(1);
         }
@@ -580,7 +588,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
 }
 
 void task_allmap_bar_2(AllmapBarWork* work) {
-    if (work->state == 2) {
+    if (work->state == ALLMAP_BAR_STATE_IDLE) {
         return;
     }
 
@@ -789,7 +797,7 @@ s32 task_allmap_doorinfo_1(AllmapDoorinfoWork* work) {
 void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work) {
     s32 i;
 
-    if (gAllmapModeState == 0) {
+    if (gAllmapModeState == ALLMAP_MODE_STATE_FADE) {
         return;
     }
 
@@ -1057,11 +1065,11 @@ void UpdateAllmap() {
     s16 x;
     s16 y;
 
-    if (!FadeIsActive() && gAllmapModeState == 3) {
+    if (!FadeIsActive() && gAllmapModeState == ALLMAP_MODE_STATE_ACTIVE) {
         AllmapHandleInput();
     }
 
-    if (gAllmapModeState == 2) {
+    if (gAllmapModeState == ALLMAP_MODE_STATE_INTRO) {
         if (gAllmapScrollInTimer > 6) {
             ApproachValue(&sAllmapState->introScrollY, sAllmapState->introTargetY - 0x200, gAllmapScrollInTimer - 7);
         } else if (gAllmapScrollInTimer & 1) {
@@ -1073,7 +1081,7 @@ void UpdateAllmap() {
         sAllmapState->scrollY = sAllmapState->introScrollY >> 8;
     }
 
-    if (gAllmapModeState == 3) {
+    if (gAllmapModeState == ALLMAP_MODE_STATE_ACTIVE) {
         AllmapUpdateCamera(sAllmapState);
     } else {
         gAllmapCameraX = sAllmapState->originX + sAllmapState->scrollX;

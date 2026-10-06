@@ -33,6 +33,15 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 
+enum WorldWarpState {
+    WORLD_WARP_STATE_BARS_IN,
+    WORLD_WARP_STATE_TITLE_IN,
+    WORLD_WARP_STATE_SELECT,
+    WORLD_WARP_STATE_TITLE_OUT,
+    WORLD_WARP_STATE_BARS_OUT,
+    WORLD_WARP_STATE_EXIT
+};
+
 static s16 sWorldWarpCursor;
 static s16 sWorldWarpFloorCount;
 static s16 sWorldWarpFloorWorlds[13];
@@ -196,14 +205,14 @@ void WorldWarpHandleInput() {
             sWorldWarpTarget = -1;
             LoadBgMap(0, gWorldWarpBgMap, 0x500);
             sWorldWarpSteps = 16;
-            sWorldWarpState = 3;
+            sWorldWarpState = WORLD_WARP_STATE_TITLE_OUT;
             m4aSongNumStart(SONG_SYS_CLOSE);
         } else {
             if (sWorldWarpFloorWorlds[sWorldWarpCursor] >= 0) {
                 sWorldWarpTarget = sWorldWarpCursor;
                 LoadBgMap(0, gWorldWarpBgMap, 0x500);
                 sWorldWarpSteps = 16;
-                sWorldWarpState = 3;
+                sWorldWarpState = WORLD_WARP_STATE_TITLE_OUT;
                 m4aSongNumStart(SONG_SYS_WORLDSTART);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
@@ -213,7 +222,7 @@ void WorldWarpHandleInput() {
         sWorldWarpTarget = -1;
         LoadBgMap(0, gWorldWarpBgMap, 0x500);
         sWorldWarpSteps = 16;
-        sWorldWarpState = 3;
+        sWorldWarpState = WORLD_WARP_STATE_TITLE_OUT;
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (keys & DPAD_UP) {
         do {
@@ -345,19 +354,19 @@ void WorldWarpDraw() {
 
     DrawSprite(sWorldWarpBarX >> 8, 0, tile0, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
 
-    if (sWorldWarpState != 2) {
+    if (sWorldWarpState != WORLD_WARP_STATE_SELECT) {
         DrawSprite(0x80, sWorldWarpBarY[0] >> 8, tile1, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
         DrawSprite(0x80, sWorldWarpBarY[1] >> 8, tile2, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
     }
 #else
-    if (sWorldWarpState != 2) {
+    if (sWorldWarpState != WORLD_WARP_STATE_SELECT) {
         DrawSprite(sWorldWarpBarX >> 8, 0, gWorldWarpBarFrame0, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
         DrawSprite(0x80, sWorldWarpBarY[0] >> 8, gWorldWarpBarFrame1, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
         DrawSprite(0x80, sWorldWarpBarY[1] >> 8, gWorldWarpBarFrame2, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
     }
 #endif
 
-    if (sWorldWarpState == 2) {
+    if (sWorldWarpState == WORLD_WARP_STATE_SELECT) {
         DrawSprite(sWarpIcons[sWorldWarpCursor].x * 8 + 22,
             sWarpIcons[sWorldWarpCursor].y * 8 + 12,
             AnimUpdate(&sWorldWarpHighlightAnim), sWorldWarpHighlightTiles, sWorldWarpHighlightPalette, NULL, SPRITE_PRIORITY(2), 0x898);
@@ -442,7 +451,7 @@ void mode_worldwarp_0() {
         }
     }
 
-    sWorldWarpState = 0;
+    sWorldWarpState = WORLD_WARP_STATE_BARS_IN;
     sWorldWarpSteps = 16;
     sWorldWarpBarY[0] = -0x800;
     sWorldWarpBarY[1] = 0xA800;
@@ -664,49 +673,49 @@ void mode_worldwarp_1() {
     UpdatePlayTime();
 
     switch (sWorldWarpState) {
-    case 0:
+    case WORLD_WARP_STATE_BARS_IN:
         ApproachValue(&sWorldWarpBarY[0], 0, sWorldWarpSteps);
         ApproachValue(&sWorldWarpBarY[1], 0x9800, sWorldWarpSteps);
 
         if (--sWorldWarpSteps <= 0) {
             sWorldWarpSteps = 16;
-            sWorldWarpState = 1;
+            sWorldWarpState = WORLD_WARP_STATE_TITLE_IN;
         }
 
         break;
-    case 1:
+    case WORLD_WARP_STATE_TITLE_IN:
         ApproachValue(&sWorldWarpBarX, 0, sWorldWarpSteps);
 
         if (--sWorldWarpSteps <= 0) {
             LoadBgMap(0, gWorldWarpBgHeaderMap, 0x500);
-            sWorldWarpState = 2;
+            sWorldWarpState = WORLD_WARP_STATE_SELECT;
         }
 
         break;
-    case 2:
+    case WORLD_WARP_STATE_SELECT:
         WorldWarpHandleInput();
         break;
-    case 3:
+    case WORLD_WARP_STATE_TITLE_OUT:
         ApproachValue(&sWorldWarpBarX, -0x8000, sWorldWarpSteps);
 
         if (--sWorldWarpSteps <= 0) {
             sWorldWarpSteps = 16;
-            sWorldWarpState = 4;
+            sWorldWarpState = WORLD_WARP_STATE_BARS_OUT;
         }
 
         break;
-    case 4:
+    case WORLD_WARP_STATE_BARS_OUT:
         ApproachValue(&sWorldWarpBarY[0], -0x800, sWorldWarpSteps);
         ApproachValue(&sWorldWarpBarY[1], 0xA800, sWorldWarpSteps);
 
         if (--sWorldWarpSteps <= 0) {
             sWorldWarpSteps = 16;
             FadeStartOut(FADE_MODE_BLACK, 16);
-            sWorldWarpState = 5;
+            sWorldWarpState = WORLD_WARP_STATE_EXIT;
         }
 
         break;
-    case 5:
+    case WORLD_WARP_STATE_EXIT:
         if (!FadeIsActive()) {
             if (sWorldWarpTarget >= 0) {
                 WarpToFloor(sWorldWarpTarget);

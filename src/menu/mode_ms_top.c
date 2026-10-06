@@ -37,6 +37,27 @@
 #include "card_msgwin.h"
 #include "sprite_palettes.h"
 
+enum MsTopState {
+    MS_TOP_STATE_BARS_IN,
+    MS_TOP_STATE_TITLE_IN,
+    MS_TOP_STATE_CHECK_INTRO,
+    MS_TOP_STATE_INTRO,
+    MS_TOP_STATE_CHECK_FREE_PACK,
+    MS_TOP_STATE_FREE_PACK_MESSAGE,
+    MS_TOP_STATE_FREE_PACK,
+    MS_TOP_STATE_SHOW_OPTION,
+    MS_TOP_STATE_SELECT,
+    MS_TOP_STATE_TITLE_OUT,
+    MS_TOP_STATE_BARS_OUT,
+    MS_TOP_STATE_EXIT
+};
+
+enum MsTopDir {
+    MS_TOP_DIR_NONE,
+    MS_TOP_DIR_LEFT,
+    MS_TOP_DIR_RIGHT
+};
+
 static s16 sMsTopCursor;
 static void* sMsTopNextMode;
 static struct ObjTiles* sMsTopBarTiles;
@@ -255,7 +276,7 @@ void MsTopHandleInput() {
         m4aSongNumStart(SONG_SYS_KETTEI);
         FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
-        sMsTopState = 11;
+        sMsTopState = MS_TOP_STATE_EXIT;
     } else if (keys & B_BUTTON) {
         sMsTopNextMode = NULL;
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -266,7 +287,7 @@ void MsTopHandleInput() {
         LoadBgMap(2, gMsTopBgMap, 0x500);
 #endif
         sMsTopSteps = 16;
-        sMsTopState = 9;
+        sMsTopState = MS_TOP_STATE_TITLE_OUT;
     } else if (keys & START_BUTTON) {
         sMsTopNextMode = NULL;
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -278,18 +299,18 @@ void MsTopHandleInput() {
 #endif
         FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
-        sMsTopState = 11;
-    } else if ((keys & DPAD_LEFT) && sMsTopScrollDir != 1 && sMsTopCursor != 0) {
+        sMsTopState = MS_TOP_STATE_EXIT;
+    } else if ((keys & DPAD_LEFT) && sMsTopScrollDir != MS_TOP_DIR_LEFT && sMsTopCursor != 0) {
         sMsTopCursor = 0;
-        sMsTopScrollDir = 1;
+        sMsTopScrollDir = MS_TOP_DIR_LEFT;
         sMsTopScrollSteps = 30 - sMsTopScrollSteps;
-        sMsTopMoogleWalkDir = 1;
+        sMsTopMoogleWalkDir = MS_TOP_DIR_LEFT;
         AnimStart(&sMsTopMoogleAnim, 1, ANIM_FLAG_LOOP);
-    } else if ((keys & DPAD_RIGHT) && sMsTopScrollDir != 2 && sMsTopCursor != 1) {
+    } else if ((keys & DPAD_RIGHT) && sMsTopScrollDir != MS_TOP_DIR_RIGHT && sMsTopCursor != 1) {
         sMsTopCursor = 1;
-        sMsTopScrollDir = 2;
+        sMsTopScrollDir = MS_TOP_DIR_RIGHT;
         sMsTopScrollSteps = 30 - sMsTopScrollSteps;
-        sMsTopMoogleWalkDir = 2;
+        sMsTopMoogleWalkDir = MS_TOP_DIR_RIGHT;
         AnimStart(&sMsTopMoogleAnim, 1, ANIM_FLAG_LOOP);
     }
 
@@ -323,15 +344,15 @@ void MsTopDraw() {
     flags = SPRITE_PRIORITY(2);
 
     switch (sMsTopMoogleWalkDir) {
-    case 0:
+    case MS_TOP_DIR_NONE:
         if (sMsTopCursor == 0) {
             flags |= SPRITE_FLAG_HFLIP;
         }
 
         break;
-    case 1:
+    case MS_TOP_DIR_LEFT:
         break;
-    case 2:
+    case MS_TOP_DIR_RIGHT:
         flags |= SPRITE_FLAG_HFLIP;
         break;
     }
@@ -353,7 +374,7 @@ void MsTopDraw() {
             AnimUpdate(&sMsTopWarpAnims[i]), sMsTopWarpTiles[i], sMsTopWarpPalettes[i], NULL, SPRITE_PRIORITY(2), 0x7D0);
     }
 
-    if (sMsTopState == 6) {
+    if (sMsTopState == MS_TOP_STATE_FREE_PACK) {
         DrawMooglePackOpening();
     }
 
@@ -385,10 +406,10 @@ void mode_ms_top_0(u32 flags) {
 
     if (flags & 2) {
         sMsTopBarVisible = 0;
-        sMsTopState = 7;
+        sMsTopState = MS_TOP_STATE_SHOW_OPTION;
     } else {
         sMsTopBarVisible = 1;
-        sMsTopState = 0;
+        sMsTopState = MS_TOP_STATE_BARS_IN;
         sMsTopSteps = 16;
         sMsTopBarY[0] = -0x800;
         sMsTopBarY[1] = 0xA800;
@@ -396,9 +417,9 @@ void mode_ms_top_0(u32 flags) {
         sMsTopCursor = 0;
     }
 
-    sMsTopScrollDir = 0;
+    sMsTopScrollDir = MS_TOP_DIR_NONE;
     sMsTopScrollSteps = 0;
-    sMsTopMoogleWalkDir = 0;
+    sMsTopMoogleWalkDir = MS_TOP_DIR_NONE;
 
     if (sMsTopCursor == 0) {
         sMsTopBg1ScrollX = 0;
@@ -473,17 +494,17 @@ void mode_ms_top_1() {
     UpdatePlayTime();
 
     switch (sMsTopState) {
-    case 0:
+    case MS_TOP_STATE_BARS_IN:
         ApproachValue(&sMsTopBarY[0], 0, sMsTopSteps);
         ApproachValue(&sMsTopBarY[1], 0x9800, sMsTopSteps);
 
         if (--sMsTopSteps <= 0) {
             sMsTopSteps = 16;
-            sMsTopState = 1;
+            sMsTopState = MS_TOP_STATE_TITLE_IN;
         }
 
         break;
-    case 1:
+    case MS_TOP_STATE_TITLE_IN:
         ApproachValue(&sMsTopBarX, 0, sMsTopSteps);
 
         if (--sMsTopSteps <= 0) {
@@ -493,39 +514,39 @@ void mode_ms_top_1() {
 #else
             LoadBgMap(2, gMsTopBarBgMap, 0x500);
 #endif
-            sMsTopState = 2;
+            sMsTopState = MS_TOP_STATE_CHECK_INTRO;
         }
 
         break;
-    case 2:
+    case MS_TOP_STATE_CHECK_INTRO:
         if ((gGameState.progression.tutorialFlags & 0x80) == 0) {
             sMsTopIntroIndex = 0;
-            sMsTopState = 3;
+            sMsTopState = MS_TOP_STATE_INTRO;
         } else {
-            sMsTopState = 4;
+            sMsTopState = MS_TOP_STATE_CHECK_FREE_PACK;
         }
 
         break;
-    case 3:
+    case MS_TOP_STATE_INTRO:
         QueueMsTopIntroMessage();
 
         if (sMsTopIntroIndex > 2 && sMsTopPendingMessage < 0 && !IsMessageWindowOpen()) {
             SetJiminyFlag(27);
             gGameState.progression.tutorialFlags |= 0x80;
-            sMsTopState = 4;
+            sMsTopState = MS_TOP_STATE_CHECK_FREE_PACK;
         }
 
         break;
-    case 4:
+    case MS_TOP_STATE_CHECK_FREE_PACK:
         if (GetMoogleFreePackFlag(gMapFloorState.room) == 0) {
             sMsTopPendingMessage = 0x42;
-            sMsTopState = 5;
+            sMsTopState = MS_TOP_STATE_FREE_PACK_MESSAGE;
         } else {
-            sMsTopState = 7;
+            sMsTopState = MS_TOP_STATE_SHOW_OPTION;
         }
 
         break;
-    case 5:
+    case MS_TOP_STATE_FREE_PACK_MESSAGE:
         if (!IsMessageWindowOpen()) {
             if (gGameState.floor <= 5) {
                 RollMooglePackCards(0, 0);
@@ -538,11 +559,11 @@ void mode_ms_top_1() {
             InitMooglePackOpening(120, 80);
             FadeSetPaletteExcluded(13, 1);
             FadeToAmount(FADE_MODE_BLACK, 16, 8);
-            sMsTopState = 6;
+            sMsTopState = MS_TOP_STATE_FREE_PACK;
         }
 
         break;
-    case 6:
+    case MS_TOP_STATE_FREE_PACK:
         if (!UpdateMooglePackOpening(1)) {
             ReleaseMooglePackOpening();
             SetMoogleFreePackFlag(gMapFloorState.room);
@@ -550,38 +571,38 @@ void mode_ms_top_1() {
             DisableBg(3);
             LoadDecimalDigitTiles(GetMooglePoints(), gMsTopPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            sMsTopState = 7;
+            sMsTopState = MS_TOP_STATE_SHOW_OPTION;
         }
 
         break;
-    case 7:
+    case MS_TOP_STATE_SHOW_OPTION:
         sMsTopPendingOptionMessage = sMsTopCursor == 0 ? 0x40 : 0x41;
-        sMsTopState = 8;
+        sMsTopState = MS_TOP_STATE_SELECT;
         break;
-    case 8:
+    case MS_TOP_STATE_SELECT:
         MsTopHandleInput();
         break;
-    case 9:
+    case MS_TOP_STATE_TITLE_OUT:
         ApproachValue(&sMsTopBarX, -0x8000, sMsTopSteps);
 
         if (--sMsTopSteps <= 0) {
             sMsTopSteps = 16;
-            sMsTopState = 10;
+            sMsTopState = MS_TOP_STATE_BARS_OUT;
         }
 
         break;
-    case 10:
+    case MS_TOP_STATE_BARS_OUT:
         ApproachValue(&sMsTopBarY[0], -0x800, sMsTopSteps);
         ApproachValue(&sMsTopBarY[1], 0xA800, sMsTopSteps);
 
         if (--sMsTopSteps <= 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
-            sMsTopState = 11;
+            sMsTopState = MS_TOP_STATE_EXIT;
         }
 
         break;
-    case 11:
+    case MS_TOP_STATE_EXIT:
         if (!FadeIsActive()) {
             if (sMsTopNextMode != NULL) {
                 ModeRequest(sMsTopNextMode, 0);
@@ -594,54 +615,54 @@ void mode_ms_top_1() {
     }
 
     switch (sMsTopScrollDir) {
-    case 0:
+    case MS_TOP_DIR_NONE:
         break;
-    case 1:
+    case MS_TOP_DIR_LEFT:
         UpdateMsTopWarpGfx();
         ApproachValue(&sMsTopBg1ScrollX, 0, sMsTopScrollSteps);
         ApproachValue(&sMsTopBg0ScrollX, 0, sMsTopScrollSteps);
         ApproachValue(&sMsTopObjScrollX, 0, sMsTopScrollSteps);
 
         if (--sMsTopScrollSteps <= 0) {
-            sMsTopScrollDir = 0;
+            sMsTopScrollDir = MS_TOP_DIR_NONE;
         }
 
         break;
-    case 2:
+    case MS_TOP_DIR_RIGHT:
         UpdateMsTopWarpGfx();
         ApproachValue(&sMsTopBg1ScrollX, -0x6100, sMsTopScrollSteps);
         ApproachValue(&sMsTopBg0ScrollX, 0x2100, sMsTopScrollSteps);
         ApproachValue(&sMsTopObjScrollX, -0x1C00, sMsTopScrollSteps);
 
         if (--sMsTopScrollSteps <= 0) {
-            sMsTopScrollDir = 0;
+            sMsTopScrollDir = MS_TOP_DIR_NONE;
         }
 
         break;
     }
 
     switch (sMsTopMoogleWalkDir) {
-    case 0:
+    case MS_TOP_DIR_NONE:
         break;
-    case 1:
+    case MS_TOP_DIR_LEFT:
         UpdateMsTopMooglePalette();
         sMsTopMoogleX -= 0x180;
 
         if (sMsTopMoogleX <= 0) {
             AnimStart(&sMsTopMoogleAnim, 0, ANIM_FLAG_LOOP);
             sMsTopMoogleX = 0;
-            sMsTopMoogleWalkDir = 0;
+            sMsTopMoogleWalkDir = MS_TOP_DIR_NONE;
         }
 
         break;
-    case 2:
+    case MS_TOP_DIR_RIGHT:
         UpdateMsTopMooglePalette();
         sMsTopMoogleX += 0x180;
 
         if (sMsTopMoogleX >= 0xBC00) {
             AnimStart(&sMsTopMoogleAnim, 0, ANIM_FLAG_LOOP);
             sMsTopMoogleX = 0xBC00;
-            sMsTopMoogleWalkDir = 0;
+            sMsTopMoogleWalkDir = MS_TOP_DIR_NONE;
         }
 
         break;

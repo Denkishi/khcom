@@ -113,6 +113,23 @@ static const u16 sMapInspectBarTileSizesByLanguage[5] = {2752, 2816, 2816, 2816,
 #endif
 static const u16 sMapCardCategoryTypes[4] = {2, 1, 3, 4};
 
+enum MapInspectState {
+    MAP_INSPECT_STATE_BARS_IN,
+    MAP_INSPECT_STATE_TITLE_IN,
+    MAP_INSPECT_STATE_MENU,
+    MAP_INSPECT_STATE_TITLE_OUT,
+    MAP_INSPECT_STATE_BARS_OUT,
+    MAP_INSPECT_STATE_EXIT
+};
+
+enum MapInspectMenuState {
+    MAP_INSPECT_MENU_STATE_GRID,
+    MAP_INSPECT_MENU_STATE_TAB,
+    MAP_INSPECT_MENU_STATE_VALUE,
+    MAP_INSPECT_MENU_STATE_CONFIRM,
+    MAP_INSPECT_MENU_STATE_NOTICE
+};
+
 static MapCardInventoryEntry* sMapCardInventoryEntries;
 static s16 sMapInspectMenuState;
 static s16 sMapInspectTab;
@@ -392,7 +409,7 @@ void MapInspectDrawValueCounts() {
         LoadPalette(gMapInspectCategoryBgPalettes + p->category * 16, (void*)PLTT, 12);
     }
 
-    if (sMapInspectMenuState == 1) {
+    if (sMapInspectMenuState == MAP_INSPECT_MENU_STATE_TAB) {
         for (i = 0; i <= 9; i++) {
             LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
             LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), 2);
@@ -627,7 +644,7 @@ void MapInspectHandleGridInput() {
             MapInspectSelectFirstValue();
             m4aSongNumStart(SONG_SYS_KETTEI);
             AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
-            sMapInspectMenuState = 2;
+            sMapInspectMenuState = MAP_INSPECT_MENU_STATE_VALUE;
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
@@ -636,19 +653,19 @@ void MapInspectHandleGridInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 1;
         sMapInspectSteps = 16;
-        sMapInspectState = 3;
+        sMapInspectState = MAP_INSPECT_STATE_TITLE_OUT;
     } else if (keys & START_BUTTON) {
         LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
-        sMapInspectState = 5;
+        sMapInspectState = MAP_INSPECT_STATE_EXIT;
     } else if (keys & SELECT_BUTTON) {
         sMapInspectGridCol = 0;
         sMapInspectGridRow = 0;
         sMapInspectGridScroll = 0;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
-        sMapInspectMenuState = 1;
+        sMapInspectMenuState = MAP_INSPECT_MENU_STATE_TAB;
         MapInspectDrawValueCounts();
     } else if (keys & DPAD_UP) {
         if (sMapInspectGridRow > 0) {
@@ -657,7 +674,7 @@ void MapInspectHandleGridInput() {
             sMapInspectGridScroll--;
         } else {
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-            sMapInspectMenuState = 1;
+            sMapInspectMenuState = MAP_INSPECT_MENU_STATE_TAB;
             MapInspectDrawValueCounts();
         }
     } else if (keys & DPAD_DOWN) {
@@ -710,7 +727,7 @@ void MapInspectHandleTabInput() {
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = 0;
             FadeStartOut(FADE_MODE_BLACK, 16);
-            sMapInspectState = 5;
+            sMapInspectState = MAP_INSPECT_STATE_EXIT;
         } else if (keys & (B_BUTTON | DPAD_DOWN)) {
             if (GetMapInspectTabCount(sMapInspectTab) > 0) {
                 sMapInspectGridCol = 0;
@@ -721,14 +738,14 @@ void MapInspectHandleTabInput() {
                 MapInspectLoadSelectedCard();
                 AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
-                sMapInspectMenuState = 0;
+                sMapInspectMenuState = MAP_INSPECT_MENU_STATE_GRID;
                 MapInspectDrawValueCounts();
             } else if (keys & B_BUTTON) {
                 LoadBgMap(0, gMapInspectBgMap, 0x500);
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 sMapInspectReturnToMenu = 1;
                 sMapInspectSteps = 16;
-                sMapInspectState = 3;
+                sMapInspectState = MAP_INSPECT_STATE_TITLE_OUT;
             } else if (keys & DPAD_DOWN) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
@@ -798,23 +815,23 @@ void MapInspectHandleValueInput() {
             AnimStart(&sMapInspectCursorAnim, 4, ANIM_FLAG_LOOP);
             EnableBg(2);
             m4aSongNumStart(SONG_SYS_CANSEL);
-            sMapInspectMenuState = 3;
+            sMapInspectMenuState = MAP_INSPECT_MENU_STATE_CONFIRM;
         } else {
             EnableBg(2);
             m4aSongNumStart(SONG_SYS_BEEP);
-            sMapInspectMenuState = 4;
+            sMapInspectMenuState = MAP_INSPECT_MENU_STATE_NOTICE;
         }
     } else {
         if (keys & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
-            sMapInspectMenuState = 0;
+            sMapInspectMenuState = MAP_INSPECT_MENU_STATE_GRID;
         } else if (keys & START_BUTTON) {
             LoadBgMap(0, gMapInspectBgMap, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = 0;
             FadeStartOut(FADE_MODE_BLACK, 16);
-            sMapInspectState = 5;
+            sMapInspectState = MAP_INSPECT_STATE_EXIT;
         } else if (keys & DPAD_LEFT) {
             MapInspectSelectValueInColumn(p, 0);
         } else if (keys & DPAD_RIGHT) {
@@ -871,9 +888,9 @@ void MapInspectHandleConfirmInput() {
 
                 if (GetMapInspectTabCount(sMapInspectTab) > 0) {
                     AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
-                    sMapInspectMenuState = 0;
+                    sMapInspectMenuState = MAP_INSPECT_MENU_STATE_GRID;
                 } else {
-                    sMapInspectMenuState = 1;
+                    sMapInspectMenuState = MAP_INSPECT_MENU_STATE_TAB;
                 }
             } else {
                 if (MapCardEntrySelectedValueIsEmpty(p)) {
@@ -881,12 +898,12 @@ void MapInspectHandleConfirmInput() {
                 }
 
                 AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
-                sMapInspectMenuState = 2;
+                sMapInspectMenuState = MAP_INSPECT_MENU_STATE_VALUE;
             }
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
             AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
-            sMapInspectMenuState = 2;
+            sMapInspectMenuState = MAP_INSPECT_MENU_STATE_VALUE;
         }
     } else if (keys & B_BUTTON) {
         sMapInspectCursorX = sMapInspectValueCol * 12288 + 0x9200;
@@ -895,13 +912,13 @@ void MapInspectHandleConfirmInput() {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
         AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
-        sMapInspectMenuState = 2;
+        sMapInspectMenuState = MAP_INSPECT_MENU_STATE_VALUE;
     } else if (keys & START_BUTTON) {
         LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
-        sMapInspectState = 5;
+        sMapInspectState = MAP_INSPECT_STATE_EXIT;
     } else if (keys & DPAD_LEFT) {
         sMapInspectConfirmCursor = 0;
     } else if (keys & DPAD_RIGHT) {
@@ -921,13 +938,13 @@ void MapInspectHandleNoticeInput() {
     if (keys & (A_BUTTON | B_BUTTON)) {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        sMapInspectMenuState = 2;
+        sMapInspectMenuState = MAP_INSPECT_MENU_STATE_VALUE;
     } else if (keys & START_BUTTON) {
         LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
-        sMapInspectState = 5;
+        sMapInspectState = MAP_INSPECT_STATE_EXIT;
     }
 }
 
@@ -938,7 +955,7 @@ void MapInspectDraw() {
     s16 t;
     void* anim;
 
-    if (sMapInspectState != 2) {
+    if (sMapInspectState != MAP_INSPECT_STATE_MENU) {
         DrawSprite(sMapInspectBarX >> 8, 0,
 #ifdef VERSION_EU
             sMapInspectTitleSpritesByLanguage[gLanguage],
@@ -978,27 +995,27 @@ void MapInspectDraw() {
 #endif
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(2), 0x898);
 
-    if (sMapInspectState == 2) {
+    if (sMapInspectState == MAP_INSPECT_STATE_MENU) {
         switch (sMapInspectMenuState) {
-        case 1:
+        case MAP_INSPECT_MENU_STATE_TAB:
             ApproachValueHalf(&sMapInspectCursorX, sMapCardCategoryDefs[sMapInspectTab].displayIndex * 3584 - 256);
             ApproachValueHalf(&sMapInspectCursorY, 0);
             DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
             break;
-        case 0:
+        case MAP_INSPECT_MENU_STATE_GRID:
             ApproachValueHalf(&sMapInspectCursorX, (sMapInspectGridCol * 23 - 2) * 256);
             ApproachValueHalf(&sMapInspectCursorY, (sMapInspectGridRow * 26 + 16) * 256);
             DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
             DrawSprite(sMapInspectGridCol * 23 - 3, sMapInspectGridRow * 26 + 28, AnimUpdate(&sMapInspectHighlightAnim), sMapInspectHighlightTiles, sMapInspectCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7DA);
             break;
-        case 2:
+        case MAP_INSPECT_MENU_STATE_VALUE:
             GetMapInspectSelectedEntry();
             ApproachValueHalf(&sMapInspectCursorX, sMapInspectValueCol * 12288 + 0x9200);
             ApproachValueHalf(&sMapInspectCursorY, sMapInspectValueRow * 2048 + 0x1000);
             DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
             DrawSprite(sMapInspectValueCol * 48 + 133, sMapInspectValueRow * 8 + 35, AnimUpdate(&sMapInspectHighlightAnim), sMapInspectHighlightTiles, sMapInspectCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7DA);
             break;
-        case 3:
+        case MAP_INSPECT_MENU_STATE_CONFIRM:
             ApproachValueHalf(&sMapInspectCursorX, sMapInspectConfirmCursor == 0 ? 0x3400 : 0x7400);
             ApproachValueHalf(&sMapInspectCursorY, 0x5000);
             DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sMapInspectBarTiles, sMapInspectBarPalette, NULL, 0, 0);
@@ -1016,7 +1033,7 @@ void MapInspectDraw() {
             }
 
             break;
-        case 4:
+        case MAP_INSPECT_MENU_STATE_NOTICE:
             if (sMapInspectNoticeTextCount[0] != 0) {
                 DrawTextSlots(120 - GetTextSlotsWidth(sMapInspectNoticeText[0], sMapInspectNoticeTextCount[0]) / 2, 68, sMapInspectNoticeText[0], sMapInspectBarPalette, 1, sMapInspectNoticeTextCount[0]);
 #ifdef VERSION_JP
@@ -1042,7 +1059,7 @@ void MapInspectDraw() {
         }
     }
 
-    if (sMapInspectMenuState != 1) {
+    if (sMapInspectMenuState != MAP_INSPECT_MENU_STATE_TAB) {
         if (sMapInspectCardSprite != NULL) {
             DrawSprite(112, 56, sMapInspectCardSprite, sMapInspectCardTiles, sMapInspectCardPalette, NULL, SPRITE_PRIORITY(2), 0x848);
         }
@@ -1056,8 +1073,8 @@ void MapInspectDraw() {
         }
 
         if (sMapInspectNameTextCount != 0) {
-            if (sMapInspectMenuState != 3) {
-                if (sMapInspectMenuState != 4) {
+            if (sMapInspectMenuState != MAP_INSPECT_MENU_STATE_CONFIRM) {
+                if (sMapInspectMenuState != MAP_INSPECT_MENU_STATE_NOTICE) {
                     DrawTextSlots(96, 92, sMapInspectNameText, sMapInspectCategoryPalette, 1, sMapInspectNameTextCount);
                 }
             }
@@ -1088,7 +1105,7 @@ void mode_mapinspect_0() {
     SetBgPriority(2, 1);
     SetBgPriority(3, 0);
     MapInspectBuildInventory();
-    sMapInspectState = 0;
+    sMapInspectState = MAP_INSPECT_STATE_BARS_IN;
     sMapInspectSteps = 16;
     sMapInspectBarY[0] = -0x800;
     sMapInspectBarY[1] = 0xA800;
@@ -1099,13 +1116,13 @@ void mode_mapinspect_0() {
     sMapInspectGridScroll = 0;
 
     if (sMapInspectCardTotal > 0) {
-        sMapInspectCursorX = (v = 0, -0x200);
+        sMapInspectCursorX = (v = MAP_INSPECT_MENU_STATE_GRID, -0x200);
         sMapInspectCursorY = 0x1000;
         sMapInspectMenuState = v;
     } else {
         sMapInspectCursorX = sMapCardCategoryDefs[4].displayIndex * 7 * 512 - 0x100;
         sMapInspectCursorY = 0;
-        sMapInspectMenuState = 1;
+        sMapInspectMenuState = MAP_INSPECT_MENU_STATE_TAB;
     }
 
     for (i = 0; i < 4; i++) {
@@ -1253,69 +1270,69 @@ void mode_mapinspect_1() {
     UpdatePlayTime();
 
     switch (sMapInspectState) {
-    case 0:
+    case MAP_INSPECT_STATE_BARS_IN:
         ApproachValue(&sMapInspectBarY[0], 0, sMapInspectSteps);
         ApproachValue(&sMapInspectBarY[1], 0x9800, sMapInspectSteps);
         sMapInspectSteps--;
 
         if (sMapInspectSteps <= 0) {
             sMapInspectSteps = 16;
-            sMapInspectState = 1;
+            sMapInspectState = MAP_INSPECT_STATE_TITLE_IN;
         }
 
         break;
-    case 1:
+    case MAP_INSPECT_STATE_TITLE_IN:
         ApproachValue(&sMapInspectBarX, 0, sMapInspectSteps);
         sMapInspectSteps--;
 
         if (sMapInspectSteps <= 0) {
             LoadBgMap(0, gMapInspectBgHeaderMap, 0x500);
-            sMapInspectState = 2;
+            sMapInspectState = MAP_INSPECT_STATE_MENU;
         }
 
         break;
-    case 2:
+    case MAP_INSPECT_STATE_MENU:
         switch (sMapInspectMenuState) {
-        case 0:
+        case MAP_INSPECT_MENU_STATE_GRID:
             MapInspectHandleGridInput();
             break;
-        case 1:
+        case MAP_INSPECT_MENU_STATE_TAB:
             MapInspectHandleTabInput();
             break;
-        case 2:
+        case MAP_INSPECT_MENU_STATE_VALUE:
             MapInspectHandleValueInput();
             break;
-        case 3:
+        case MAP_INSPECT_MENU_STATE_CONFIRM:
             MapInspectHandleConfirmInput();
             break;
-        case 4:
+        case MAP_INSPECT_MENU_STATE_NOTICE:
             MapInspectHandleNoticeInput();
             break;
         }
 
         break;
-    case 3:
+    case MAP_INSPECT_STATE_TITLE_OUT:
         ApproachValue(&sMapInspectBarX, -0x8000, sMapInspectSteps);
         sMapInspectSteps--;
 
         if (sMapInspectSteps <= 0) {
             sMapInspectSteps = 16;
-            sMapInspectState = 4;
+            sMapInspectState = MAP_INSPECT_STATE_BARS_OUT;
         }
 
         break;
-    case 4:
+    case MAP_INSPECT_STATE_BARS_OUT:
         ApproachValue(&sMapInspectBarY[0], -0x800, sMapInspectSteps);
         ApproachValue(&sMapInspectBarY[1], 0xA800, sMapInspectSteps);
         sMapInspectSteps--;
 
         if (sMapInspectSteps <= 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
-            sMapInspectState = 5;
+            sMapInspectState = MAP_INSPECT_STATE_EXIT;
         }
 
         break;
-    case 5:
+    case MAP_INSPECT_STATE_EXIT:
         if (!FadeIsActive()) {
             ReturnToMap(sMapInspectReturnToMenu);
         }

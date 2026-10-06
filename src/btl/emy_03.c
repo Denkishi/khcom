@@ -86,7 +86,7 @@ u8 task_emy_03_1(Emy03Work* work) {
             m4aSongNumStart(SONG_BTL_YELLOW_MOV);
         }
 
-        if (EmyLungeAttack(&work->base, 0x11, 0x17, 0x0A, 0xAB, 0x50, SONG_BTL_YELLOW_HIT, 0, 0, 0x0A) == 2) {
+        if (EmyLungeAttack(&work->base, 0x11, 0x17, 0x0A, 0xAB, 0x50, SONG_BTL_YELLOW_HIT, 0, 0, 0x0A) == EMY_LUNGE_FINISHED) {
             BgAnimStop();
         }
 

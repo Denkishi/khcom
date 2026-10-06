@@ -102,7 +102,7 @@ u8 task_emy_29_1(Emy29Work* work) {
         z = act->z + 0x1000;
         act->z += (sample - z) >> 2;
 
-        if (EmyLungeAttack(&work->base, 0x16, 0x64, 0x18, 0xCB, 0xB4, SONG_BTL_KAMITUKI, 0, 0, 0x0C) == 1) {
+        if (EmyLungeAttack(&work->base, 0x16, 0x64, 0x18, 0xCB, 0xB4, SONG_BTL_KAMITUKI, 0, 0, 0x0C) == EMY_LUNGE_HIT) {
             EmyReturnToIdle(&work->base);
         }
 

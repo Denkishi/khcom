@@ -108,7 +108,7 @@ s16 EmyLungeAttack(EmyWork* work, s16 delay, s16 duration, s16 recovery, s32 att
     s32 targetY;
     s16 steps;
 
-    hit = 0;
+    hit = EMY_LUNGE_ACTIVE;
 
     if (work->stateTimer == 0) {
         work->flags &= ~EMY_FLAG_LUNGE_HIT;
@@ -135,19 +135,19 @@ s16 EmyLungeAttack(EmyWork* work, s16 delay, s16 duration, s16 recovery, s32 att
                     if (ApplyAttackBox(attack, actor->x - (dx << 8), actor->y, actor->z + (dz << 8), halfSize, halfSize / 2, halfSize) != ATTACK_RESULT_NONE) {
                         m4aSongNumStart(song);
                         work->flags |= EMY_FLAG_LUNGE_HIT;
-                        hit = 1;
+                        hit = EMY_LUNGE_HIT;
                     }
                 } else {
                     if (ApplyAttackBox(attack, actor->x + (dx << 8), actor->y, actor->z + (dz << 8), halfSize, halfSize / 2, halfSize) != ATTACK_RESULT_NONE) {
                         m4aSongNumStart(song);
-                        hit = 1;
+                        hit = EMY_LUNGE_HIT;
                         work->flags |= EMY_FLAG_LUNGE_HIT;
                     }
                 }
             }
         } else if (work->stateTimer > delay + duration + recovery) {
             EmyReturnToIdle(work);
-            return 2;
+            return EMY_LUNGE_FINISHED;
         }
     }
 

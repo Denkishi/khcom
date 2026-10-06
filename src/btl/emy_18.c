@@ -170,7 +170,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         }
 
         if (EmyLungeAttack(&work->base, 30, 10, 6, 185, 32, SONG_BTL_MON_HIT02, 24, -10, 16)
-                == 1) {
+                == EMY_LUNGE_HIT) {
             w->hitFrame = work->base.stateTimer;
         }
 
@@ -190,7 +190,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         }
 
         if (EmyLungeAttack(&work->base, 21, 8, 7, 186, 32, SONG_BTL_MON_HIT00, 16, -30, 16)
-                == 1) {
+                == EMY_LUNGE_HIT) {
             w->hitFrame = work->base.stateTimer;
         }
 

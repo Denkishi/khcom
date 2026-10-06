@@ -898,20 +898,20 @@ u8 GetPoohLookColumn(PoohWork* work) {
     return tbl[row][col] + 2;
 }
 
-void SetPoohAnimation(PoohWork* work, u32 anim) {
+void SetPoohAnimation(PoohWork* work, u32 action) {
     AnimDef* e;
     u16 flags;
 
     flags = 0;
     ColliderSetRadius(&work->collider, gPoohHitBox.radius);
 
-    if (work->animAction == anim) {
+    if (work->animAction == action) {
         flags = ANIM_FLAG_KEEP_FRAME;
     }
 
-    work->animAction = anim;
+    work->animAction = action;
 
-    switch (anim) {
+    switch (action) {
     case POOH_ACTION_WALK:
     case POOH_ACTION_WALK_AWAY:
     case POOH_ACTION_STUMP_WALK:

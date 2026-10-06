@@ -440,7 +440,7 @@ u8 HandlePoohRequest(PoohWork* work) {
     return 1;
 }
 
-u8 CheckPoohInterrupts(PoohWork* work, PooNode* n) {
+u8 CheckPoohInterrupts(PoohWork* work, PooNode* node) {
     if (ColliderIsTouchingType(&work->collider, 1)) {
         if (!IsPooSoraOverWagon()) {
             SetPoohAction(work, POOH_ACTION_BLOCKED);
@@ -455,8 +455,8 @@ u8 CheckPoohInterrupts(PoohWork* work, PooNode* n) {
     return 0;
 }
 
-void ChoosePoohTarget(PoohWork* work, PooNode* n) {
-    if (n != NULL) {
+void ChoosePoohTarget(PoohWork* work, PooNode* node) {
+    if (node != NULL) {
         if (IsPooSoraCallStarting()) {
             if (work->callTimer != 0 || work->targetNode == gPooSoraNode) {
                 work->callCount++;
@@ -475,18 +475,18 @@ void ChoosePoohTarget(PoohWork* work, PooNode* n) {
 
         if (work->callTimer != 0) {
             work->callTimer--;
-            n = gPooSoraNode;
+            node = gPooSoraNode;
         }
 
-        if (work->targetNode != n && work->lookTimer <= 59) {
+        if (work->targetNode != node && work->lookTimer <= 59) {
             work->lookAngle = work->angle;
             work->lookColumn = work->angle;
-            work->lookTarget = GetAngle(work->pos.x, work->pos.y, ((PooPos*)n->pos)->x, ((PooPos*)n->pos)->y);
+            work->lookTarget = GetAngle(work->pos.x, work->pos.y, ((PooPos*)node->pos)->x, ((PooPos*)node->pos)->y);
             work->targetX = work->pos.x;
             work->targetY = work->pos.y;
             SetPoohAction(work, POOH_ACTION_LOOK);
         } else {
-            work->targetNode = n;
+            work->targetNode = node;
             work->lookTimer = 0;
             work->targetX = ((PooPos*)work->targetNode->pos)->x;
             work->targetY = ((PooPos*)work->targetNode->pos)->y;
@@ -585,14 +585,14 @@ void UpdatePoohStumpCircle(PoohWork* work) {
     }
 }
 
-s32 GetPooGroundZ(Collider* w, PooPos* pos, u8* onCollider) {
+s32 GetPooGroundZ(Collider* collider, PooPos* pos, u8* onCollider) {
     s32 v;
 
-    if ((w->standFlags & COLLIDER_STAND_OVER_PLATFORM) != 0) {
-        if (pos->ground < w->platformZ) {
+    if ((collider->standFlags & COLLIDER_STAND_OVER_PLATFORM) != 0) {
+        if (pos->ground < collider->platformZ) {
             v = pos->ground;
         } else {
-            v = w->platformZ;
+            v = collider->platformZ;
         }
 
         *onCollider = 1;
@@ -634,7 +634,7 @@ u8 IsPoohNearScreenEdge() {
     return 0;
 }
 
-void UpdatePoohAction(PoohWork* work, PooNode* n) {
+void UpdatePoohAction(PoohWork* work, PooNode* node) {
     u16 a0;
     u16 a1;
     u16 a2;
@@ -660,7 +660,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
 
         b = 0x4C;
 
-        if (IsPooSoraCalling() && work->targetNode == n && n == gPooSoraNode) {
+        if (IsPooSoraCalling() && work->targetNode == node && node == gPooSoraNode) {
             b = 152;
             work->speed = 152;
         } else if (work->speed > 82) {
@@ -669,10 +669,10 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
 
         MovePooh(work, b, 1);
 
-        if (CheckPoohInterrupts(work, n)) {
+        if (CheckPoohInterrupts(work, node)) {
             work->speed = 0;
         } else {
-            ChoosePoohTarget(work, n);
+            ChoosePoohTarget(work, node);
         }
 
         break;
@@ -689,7 +689,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             work->pos.x += work->collider.pushX;
             work->pos.y += work->collider.pushY;
             work->targetNode = NULL;
-            ChoosePoohTarget(work, n);
+            ChoosePoohTarget(work, node);
             break;
         }
 
@@ -756,7 +756,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             break;
         }
 
-        ChoosePoohTarget(work, n);
+        ChoosePoohTarget(work, node);
 
         if (sPoohAction != POOH_ACTION_IDLE) {
             break;
@@ -813,12 +813,12 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
     case POOH_ACTION_LOOK:
         if (work->lookTimer <= 59) {
             a1 = work->lookAngle;
-            work->lookTarget = GetAngle(work->pos.x, work->pos.y, ((s32*)n->pos)[0], ((s32*)n->pos)[1]);
+            work->lookTarget = GetAngle(work->pos.x, work->pos.y, ((s32*)node->pos)[0], ((s32*)node->pos)[1]);
             ApproachAngle(&a1, work->lookTarget, 4);
             work->lookAngle = a1;
             work->lookTimer++;
         } else {
-            ChoosePoohTarget(work, n);
+            ChoosePoohTarget(work, node);
         }
 
         break;
@@ -2159,7 +2159,7 @@ void task_poo_sora_0(PooSoraWork* work) {
     ColliderSetPosition(&work->collider, a->pos.x, a->pos.y, a->pos.z);
 }
 
-u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
+u8 PooSoraUpdateJump(PooSoraWork* work, Task* task) {
     PooActor* a = &gPooActor;
     PooPos p;
     s32 z;
@@ -2341,7 +2341,7 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
         } else if (work->timer > 6) {
             work->state = POO_SORA_STATE_STAND;
             work->timer = 0;
-            SetTaskUpdate(t, (TaskUpdateFunc)task_poo_sora_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)task_poo_sora_1);
         } else {
             work->timer++;
         }
@@ -2379,7 +2379,7 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
     return 1;
 }
 
-u8 PooSoraUpdateAttack(PooSoraWork* work, Task* t) {
+u8 PooSoraUpdateAttack(PooSoraWork* work, Task* task) {
     PooActor* a = &gPooActor;
     s32 sx;
     s32 sy;
@@ -2554,7 +2554,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* t) {
 
             SetPooSoraAnimation(work, 0, 0);
             work->state = POO_SORA_STATE_STAND;
-            SetTaskUpdate(t, (TaskUpdateFunc)task_poo_sora_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)task_poo_sora_1);
         } else {
             work->timer++;
         }
@@ -2576,7 +2576,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* t) {
     return 1;
 }
 
-u8 PooSoraUpdateCall(PooSoraWork* work, Task* t) {
+u8 PooSoraUpdateCall(PooSoraWork* work, Task* task) {
     PooActor* a = &gPooActor;
     s32 x;
     s32 y;
@@ -2599,7 +2599,7 @@ u8 PooSoraUpdateCall(PooSoraWork* work, Task* t) {
             } else {
                 work->timer = 0;
                 work->state = POO_SORA_STATE_STAND;
-                SetTaskUpdate(t, (TaskUpdateFunc)task_poo_sora_1);
+                SetTaskUpdate(task, (TaskUpdateFunc)task_poo_sora_1);
             }
         } else {
             work->timer++;
@@ -2622,7 +2622,7 @@ u8 PooSoraUpdateCall(PooSoraWork* work, Task* t) {
     return 1;
 }
 
-u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
+u8 task_poo_sora_1(PooSoraWork* work, Task* task) {
     PooActor* a = &gPooActor;
     s32 z;
     s32 sx;
@@ -2669,7 +2669,7 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
         if ((GetKeysPressed() & B_BUTTON) != 0) {
             work->timer = 0;
             work->state = POO_SORA_STATE_JUMP_START;
-            SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateJump);
+            SetTaskUpdate(task, (TaskUpdateFunc)PooSoraUpdateJump);
             m4aSongNumStart(work->sounds[2]);
         } else if ((GetKeysPressed() & A_BUTTON) != 0) {
             SetPooSoraAttackPoint(a);
@@ -2685,12 +2685,12 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
             } else {
                 work->timer = 0;
                 work->state = POO_SORA_STATE_ATTACK;
-                SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateAttack);
+                SetTaskUpdate(task, (TaskUpdateFunc)PooSoraUpdateAttack);
             }
         } else if ((GetKeysPressed() & R_BUTTON) != 0) {
             work->timer = 0;
             work->state = POO_SORA_STATE_CALL;
-            SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateCall);
+            SetTaskUpdate(task, (TaskUpdateFunc)PooSoraUpdateCall);
             a->angle = GetPooAngleToPooh(&a->pos);
         }
     } else if (AnimIsFinished(&work->anim)) {
@@ -2718,7 +2718,7 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
         work->vz = 0;
         work->timer = 0;
         work->state = POO_SORA_STATE_JUMP_FALL;
-        SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateJump);
+        SetTaskUpdate(task, (TaskUpdateFunc)PooSoraUpdateJump);
     }
 
     ColliderSetPosition(&work->collider, a->pos.x, a->pos.y, a->pos.z);
@@ -2987,7 +2987,7 @@ void task_poo_balloon_0(PooBalloonObjWork* work, PooPos* pos) {
     work->gfx = AnimGetGfx(&work->anim);
 }
 
-u8 task_poo_balloon_1(void* w) {
+u8 task_poo_balloon_1(void* work) {
     return 1;
 }
 
@@ -3009,26 +3009,26 @@ void task_poo_balloon_3(PooBalloonObjWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void task_poo_shadow_0(TaskPool* w, void* arg) {
+void task_poo_shadow_0(TaskPool* pool, void* arg) {
     PooShadowArgs args;
 
     args.pos = arg;
     args.scale = 0xA6;
-    TaskPoolInit(w, 1);
-    TaskCreate(w, &gTaskDescPooShadowscale, &args);
+    TaskPoolInit(pool, 1);
+    TaskCreate(pool, &gTaskDescPooShadowscale, &args);
 }
 
-u8 task_poo_shadow_1(TaskPool* w) {
-    TaskPoolUpdate(w);
+u8 task_poo_shadow_1(TaskPool* pool) {
+    TaskPoolUpdate(pool);
     return 1;
 }
 
-void task_poo_shadow_2(TaskPool* w) {
-    TaskPoolDraw(w);
+void task_poo_shadow_2(TaskPool* pool) {
+    TaskPoolDraw(pool);
 }
 
-void task_poo_shadow_3(TaskPool* w) {
-    TaskPoolDestroy(w);
+void task_poo_shadow_3(TaskPool* pool) {
+    TaskPoolDestroy(pool);
 }
 
 void task_poo_shadowdodai_0(PooShadowWork* work, PooShadowArgs* args) {
@@ -3226,12 +3226,12 @@ void task_poo_freeballoon_3(PooFreeBalloonWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-s32 GetPooGaugeFrame(u16 x) {
+s32 GetPooGaugeFrame(u16 timer) {
     s32 v;
     u32 a;
     u8 c;
 
-    a = x;
+    a = timer;
     v = 3 - gPoohGauge;
 
     if (gPoohGaugeTimer <= 0x1CD) {
@@ -3475,40 +3475,40 @@ void task_poo_owlballoon_3(PooOwlBalloonWork* work) {
     RemovePooNode(&work->node);
 }
 
-u16 GetPooNodeWeight(PooNode* n) {
-    return n->weight;
+u16 GetPooNodeWeight(PooNode* node) {
+    return node->weight;
 }
 
-void SetPooNodeWeight(PooNode* n, u16 v) {
-    n->weight = v;
+void SetPooNodeWeight(PooNode* node, u16 weight) {
+    node->weight = weight;
 }
 
-u16 GetPooNodeBaseWeight(PooNode* n) {
-    return n->baseWeight;
+u16 GetPooNodeBaseWeight(PooNode* node) {
+    return node->baseWeight;
 }
 
-void SetPooNodeBaseWeight(PooNode* n, u16 v) {
-    n->baseWeight = v;
+void SetPooNodeBaseWeight(PooNode* node, u16 weight) {
+    node->baseWeight = weight;
 }
 
-void AddPooNode(PooNode* n, u16 v, void* pos) {
-    SetPooNodeWeight(n, v);
-    SetPooNodeBaseWeight(n, v);
-    n->pos = pos;
-    n->unk_04 = 0;
-    ListNodeInit(&n->node, &sPooNodes, n);
-    ListPoolAppend(&n->node, &sPooNodes);
+void AddPooNode(PooNode* node, u16 weight, void* pos) {
+    SetPooNodeWeight(node, weight);
+    SetPooNodeBaseWeight(node, weight);
+    node->pos = pos;
+    node->unk_04 = 0;
+    ListNodeInit(&node->node, &sPooNodes, node);
+    ListPoolAppend(&node->node, &sPooNodes);
 }
 
-void RemovePooNode(PooNode* n) {
-    ListPoolRemove(&n->node, &sPooNodes);
+void RemovePooNode(PooNode* node) {
+    ListPoolRemove(&node->node, &sPooNodes);
 }
 
 void InitPooNodes() {
     ListPoolInit(&sPooNodes);
 }
 
-s32 GetPooNodeScore(PooNode* n) {
+s32 GetPooNodeScore(PooNode* node) {
     PooPos* q;
     PooPos* p;
     s16 dx;
@@ -3517,10 +3517,10 @@ s32 GetPooNodeScore(PooNode* n) {
     s32 d;
 
     q = gPoohPos;
-    p = n->pos;
+    p = node->pos;
     dx = (q->x - p->x) >> 8;
     dy = (q->y - p->y) >> 8;
-    r = GetPooNodeWeight(n);
+    r = GetPooNodeWeight(node);
 
     if (dx * dx > 0x3840 && dy * dy > 0x1900) {
         return 0;
@@ -3742,10 +3742,10 @@ u8 task_poo_mapanime_1(PooMapAnimeWork* work) {
     return 1;
 }
 
-void task_poo_mapanime_2(void* w) {
+void task_poo_mapanime_2(void* work) {
 }
 
-void task_poo_mapanime_3(void* w) {
+void task_poo_mapanime_3(void* work) {
 }
 
 enum PooPileStage {
@@ -5177,7 +5177,7 @@ void task_poo_roo_footmark_0(PooFootmarkWork* work) {
     }
 }
 
-u8 task_poo_roo_footmark_1(void* w) {
+u8 task_poo_roo_footmark_1(void* work) {
     return 1;
 }
 
@@ -7048,7 +7048,7 @@ void task_poo_zzz_0(PooZzzWork* work, u8* arg) {
     work->gfx = AnimGetGfx(&work->anim);
 }
 
-u8 task_poo_zzz_1(void* w) {
+u8 task_poo_zzz_1(void* work) {
     return 1;
 }
 

@@ -32,6 +32,8 @@
 #include "map_room_tables.h"
 #include "map_rooms.h"
 
+#define MAP_PIECE_VARIANT_RANDOM 0xFF
+
 MapRoomState* gMapRoomState EWRAM_COMMON(4);
 MapFormDef gMapForm EWRAM_COMMON(8);
 struct MapGmkPlacement* gMapGmkPlacements EWRAM_COMMON(4);
@@ -679,7 +681,7 @@ void MapCellSetBg2PieceVariant(MapCell* cell, s32 piece, u8 variant) {
         const u8* def = gMapCellBg2Pieces[piece];
         s32 offset;
 
-        if (variant == 0xFF) {
+        if (variant == MAP_PIECE_VARIANT_RANDOM) {
             variant = GetRandom() % def[3];
         }
 
@@ -733,11 +735,11 @@ void MapBuildStairs(u16 x, u16 y) {
             break;
         case 8:
             cell->flags |= MAP_CELL_FLAG_STAIRS;
-            MapCellSetBg2PieceVariant(cell, 37, 0xFF);
+            MapCellSetBg2PieceVariant(cell, 37, MAP_PIECE_VARIANT_RANDOM);
             break;
         case 9:
             cell->flags |= MAP_CELL_FLAG_STAIRS;
-            MapCellSetBg2PieceVariant(cell, 42, 0xFF);
+            MapCellSetBg2PieceVariant(cell, 42, MAP_PIECE_VARIANT_RANDOM);
             break;
         case 4:
             MapGetCell(x, y + 1)->flags |= MAP_CELL_FLAG_KEEP_CLEAR;
@@ -3250,7 +3252,7 @@ void MapFixCreateGimmicks(void* gimmicks) {
 
     placement = gMapGmkPlacements;
 
-    while (fixedGmk->defIndex != 0xFF) {
+    while (fixedGmk->defIndex != MAP_FIXED_GMK_END) {
         pos.x = fixedGmk->x;
         y = fixedGmk->y;
         pos.y = pos.z = pos.ground = 0;

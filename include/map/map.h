@@ -83,6 +83,8 @@ typedef struct MapGmkPlacement {
     const MapGmkDef* def;
 } MapGmkPlacement;
 
+#define MAP_PATTERN_END 0xFF
+
 typedef struct MapCellPattern {
     s16 dx;
     s16 dy;

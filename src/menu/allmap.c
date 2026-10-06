@@ -619,7 +619,7 @@ u8 AllmapHasDoorInfo(AllmapCursorPos pos) {
         neighbor.y = pos.y + sAllmapDirDeltas[i][1];
         room = GetAllmapRoomAt(neighbor);
 
-        if (room != 255) {
+        if (room != MAP_ROOM_NONE) {
             if (GetEventRoomKind(GetAllmapRoomAt(pos)) == 2) {
                 hasInfo = AllmapDoorHasKeyInfo(room, sAllmapReverseDoors[i]);
             } else {
@@ -1211,7 +1211,7 @@ void AllmapHandleInput() {
 
     room = GetAllmapRoomAt(pos);
 
-    if (room == 255) {
+    if (room == MAP_ROOM_NONE) {
         return;
     }
 

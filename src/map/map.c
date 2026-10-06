@@ -1863,7 +1863,7 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* pattern) {
     MapCell* cell;
     s32 flags;
 
-    while (pattern->bg3Piece != 0xFF) {
+    while (pattern->bg3Piece != MAP_PATTERN_END) {
         // @bug MapCellAt returns NULL past the room edge (NULL read).
         cell = MapCellAt(x + pattern->dx, y + pattern->dy);
 
@@ -1952,7 +1952,7 @@ void MapPlaceLayer2DecorPiece(s16 x, s16 y, const u8* pieces, u16* base) {
 }
 
 u8 MapDecorCheckFits(s16 x, s16 y, const u8* pattern) {
-    while (pattern[0] != 0xFF) {
+    while (pattern[0] != MAP_PATTERN_END) {
         if (MapCellAt(pattern[0] + x, pattern[1] + y)->bg1Piece != pattern[2]) {
             return 0;
         }
@@ -2095,7 +2095,7 @@ u8 IsEventDoor(u8 room, u8 side) {
     door = GetMapEventDoor(0);
 
     while (door->kind != 5) {
-        if (door->keyList != 0xFF && door->room == room && door->side == side) {
+        if (door->keyList != EVENT_KEY_LIST_NONE && door->room == room && door->side == side) {
             return 1;
         }
 
@@ -2117,7 +2117,7 @@ u8 SelectEventDoor(u8 room, u8 side) {
     door = GetMapEventDoor(0);
 
     while (door->kind != 5) {
-        if (door->keyList != 0xFF && door->room == room && door->side == side) {
+        if (door->keyList != EVENT_KEY_LIST_NONE && door->room == room && door->side == side) {
             sEventKeyList = &gEventKeyLists[door->keyList];
             sEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
             return 1;
@@ -2895,7 +2895,7 @@ void MapFldExitRoom() {
 
     roomEvent = GetMapRoomEvent(gMapFloorState.eventStep);
 
-    if (roomEvent[0] == 0xFF) {
+    if (roomEvent[0] == MAP_ROOM_EVENT_END) {
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
         return;
@@ -3201,7 +3201,7 @@ void MapFixCreateCharaTasks() {
 
 u8 GetWorldEntryEventId() {
     if (gMapFloorState.flags & FLOOR_FLAG_ENTRY_EVENT_DONE) {
-        return 0xFF;
+        return MAP_EVENT_NONE;
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -3216,7 +3216,7 @@ u8 GetWorldEntryEventId() {
             return EVENT_192_RIKU_B1F_E0;
         }
 
-        return 0xFF;
+        return MAP_EVENT_NONE;
     }
 
     return gWorldEntryEvents[gMapFloorState.world];
@@ -3224,7 +3224,7 @@ u8 GetWorldEntryEventId() {
 
 u8 GetFloorEventId() {
     if (gMapFloorState.flags & FLOOR_FLAG_CLEARED) {
-        return 0xFF;
+        return MAP_EVENT_NONE;
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -3303,7 +3303,7 @@ void MapFixLeaveEntranceHall() {
             ModeRequest(&gModeWorldselect, 0);
         } else if (gMapFloorState.world == WORLD_100_ACRE_WOOD) {
             RequestEventMode(EVENT_135_100ACREWOOD_START_RETRY);
-        } else if (GetWorldEntryEventId() != 0xFF) {
+        } else if (GetWorldEntryEventId() != MAP_EVENT_NONE) {
             sMapFixEventDelay = 60;
             MapFixSetUpdateAndRun(MapFixWaitWorldEvent);
         } else {
@@ -3341,7 +3341,7 @@ void MapFixLeaveExitHall() {
 
     eventId = GetFloorEventId();
 
-    if (eventId != 0xFF) {
+    if (eventId != MAP_EVENT_NONE) {
         RequestEventMode(eventId);
         return;
     }
@@ -6660,14 +6660,14 @@ const u8 gSoraFloorEvents[13] = {
     EVENT_038_9F_DEMO,
     EVENT_042_10F_DEMO,
     EVENT_050_11F_GOAL_3,
-    255,
+    MAP_EVENT_NONE,
     EVENT_068_13F_CASTLE_OBLIVION_LAST3,
 };
 
 const u8 gRikuFloorEvents[13] = {
     EVENT_157_RIKU_B12F_DEMO,
     EVENT_159_RIKU_B11F_DEMO,
-    255,
+    MAP_EVENT_NONE,
     EVENT_162_RIKU_B9F_DEMO,
     EVENT_165_RIKU_B8F_DEMO,
     EVENT_167_RIKU_B7F_DEMO,
@@ -6676,7 +6676,7 @@ const u8 gRikuFloorEvents[13] = {
     EVENT_175_RIKU_B4F_DEMO,
     EVENT_184_RIKU_B3F_DEMO,
     EVENT_191_RIKU_B1F_ENTRANCE,
-    255,
+    MAP_EVENT_NONE,
     0,
 };
 
@@ -6759,7 +6759,7 @@ Mode gModeMapFld = {
 };
 
 u8 gWorldEntryEvents[14] = {
-    255,
+    MAP_EVENT_NONE,
     EVENT_107_AGRABAH_E0,
     EVENT_101_ATLANTICA_E0,
     EVENT_120_COLISEUM_E0,

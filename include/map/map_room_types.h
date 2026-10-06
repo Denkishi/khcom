@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define MAP_FIXED_GMK_END 0xFF
+
 typedef struct MapFixedGmk {
     u8 defIndex;
     s32 x;
@@ -23,6 +25,8 @@ typedef struct MapDecorRule {
     const u8* pieces;
     u16* tilemap;
 } MapDecorRule;
+
+#define MAP_ROOM_EVENT_END 0xFF
 
 typedef struct MapRoomDef {
     void* palette;

@@ -24,6 +24,8 @@ enum MapRoomId {
     MAP_ROOM_NONE = 0xFF
 };
 
+#define MAP_EVENT_NONE 0xFF
+
 enum DoorFlag {
     DOOR_FLAG_PRESENT = 0x1,
     DOOR_FLAG_OPEN = 0x2,
@@ -112,6 +114,8 @@ typedef struct MapCell {
     u16* bg2Map;
     u16* bg1Map;
 } MapCell;
+
+#define EVENT_KEY_LIST_NONE 0xFF
 
 typedef struct MapEventDoor {
     u8 kind;

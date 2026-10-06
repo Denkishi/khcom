@@ -31,6 +31,7 @@
 #include "event_ids.h"
 #include "jiminy_records_index_data.h"
 #include "card_ids.h"
+#include "map_room_types.h"
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
@@ -54,15 +55,15 @@ static const u8 sSoraWorldExitEvents[13] = {
 
 static const u8 sRikuWorldExitEvents[13] = {
     EVENT_155_RIKU_B12F_GOAL,
-    255,
+    MAP_EVENT_NONE,
     EVENT_160_RIKU_B10F_GOAL,
-    255,
+    MAP_EVENT_NONE,
     EVENT_163_RIKU_B8F_GOAL,
-    255,
-    255,
-    255,
+    MAP_EVENT_NONE,
+    MAP_EVENT_NONE,
+    MAP_EVENT_NONE,
     EVENT_171_RIKU_B4F_GOAL,
-    255,
+    MAP_EVENT_NONE,
     EVENT_190_RIKU_B2F_GOAL,
     EVENT_193_RIKU_B1F_LAST1,
     0,
@@ -529,7 +530,7 @@ void AdvanceFloorStory() {
         StoreMapFloorState();
         GoToNextFloor();
         SetHallDefaultSpawn();
-    } else if (event[0] == 0xFF) {
+    } else if (event[0] == MAP_ROOM_EVENT_END) {
         exitEventFlags = gMapFloorState.flags | FLOOR_FLAG_EXIT_EVENT_DONE;
         gMapFloorState.flags = exitEventFlags;
         gMapFloorState.progress++;
@@ -543,7 +544,7 @@ void AdvanceFloorStory() {
         SetCurrentMapRoom(door->returnRoom, door->returnSide);
         gMapFloorState.eventStep++;
 
-        if (event[4] == 0xFF) {
+        if (event[4] == MAP_ROOM_EVENT_END) {
             exitRoom = GetMapFloorRoom(GetMapFloorDef(gGameState.floor)->exitRoom);
             flags = exitRoom->flags & ~FLOOR_ROOM_FLAG_LOCKED;
             exitRoom->flags = flags;
@@ -830,7 +831,7 @@ void EnterExitHall() {
     u16 flags;
 
     if ((gMapFloorState.flags & FLOOR_FLAG_EXIT_EVENT_DONE) != 0) {
-        eventId = 0xFF;
+        eventId = MAP_EVENT_NONE;
     } else {
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             eventId = sRikuWorldExitEvents[gGameState.floor];
@@ -839,7 +840,7 @@ void EnterExitHall() {
         }
     }
 
-    if (eventId != 0xFF) {
+    if (eventId != MAP_EVENT_NONE) {
         gGameState.world = 0;
         gGameState.battleStage = BATTLE_STAGE_CASTLE_OBLIVION;
         gGameState.roomEffect = 0;

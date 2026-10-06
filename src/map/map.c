@@ -67,6 +67,7 @@
 #include "map_room_tables.h"
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "card_ids.h"
 #include "event_ids.h"
 
 extern u8 gSoraWorldBattleBase[];
@@ -2149,7 +2150,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* card) {
     u8 roomValue;
 
     if (!IsEventDoor(gMapRoomState->doorRoom, gMapRoomState->doorSide)) {
-        if (card->kind > 21) {
+        if (card->kind > MAP_CARD_BLACK_ROOM) {
             return 0;
         }
 
@@ -2168,7 +2169,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* card) {
         if (key->kind != card->kind) {
             return 0;
         }
-    } else if (card->kind > 21) {
+    } else if (card->kind > MAP_CARD_BLACK_ROOM) {
         return 0;
     }
 

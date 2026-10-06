@@ -93,10 +93,29 @@ static TaskDesc sTaskDescHumAxcelPtc = {
     sizeof(AxcelPtcWork),
 };
 
+enum HumAxcelState {
+    HUM_AXCEL_STATE_WARP = 19,
+    HUM_AXCEL_STATE_SLASH,
+    HUM_AXCEL_STATE_SLASH_FOLLOWUP,
+    HUM_AXCEL_STATE_THROW_APPROACH,
+    HUM_AXCEL_STATE_THROW_WINDUP,
+    HUM_AXCEL_STATE_THROW,
+    HUM_AXCEL_STATE_CATCH,
+    HUM_AXCEL_STATE_CHAKRAM_IGNITE,
+    HUM_AXCEL_STATE_CHAKRAM_SWEEP,
+    HUM_AXCEL_STATE_CHAKRAM_END,
+    HUM_AXCEL_STATE_CHAKRAM_ORBIT,
+    HUM_AXCEL_STATE_CHAKRAM_EXIT,
+    HUM_AXCEL_STATE_CHAKRAM_BOUNCE,
+    HUM_AXCEL_STATE_FIRE_WALL_WINDUP,
+    HUM_AXCEL_STATE_FIRE_WALL,
+    HUM_AXCEL_STATE_FIRE_WALL_END
+};
+
 void AxcelMoveTo(HumWork* work, s32 x, s32 y) {
     work->targetX = x;
     work->targetY = y;
-    work->state = 19;
+    work->state = HUM_AXCEL_STATE_WARP;
     work->stateTimer = 0;
 }
 
@@ -166,18 +185,18 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
         case 38:
-            work->base.state = 20;
+            work->base.state = HUM_AXCEL_STATE_SLASH;
             work->base.steps = 0;
             break;
         case 37:
         case 39:
-            work->base.state = 22;
+            work->base.state = HUM_AXCEL_STATE_THROW_APPROACH;
             break;
         case 0xF21C8721:
-            work->base.state = 32;
+            work->base.state = HUM_AXCEL_STATE_FIRE_WALL_WINDUP;
             break;
         case 0xF21CAF21:
-            work->base.state = 26;
+            work->base.state = HUM_AXCEL_STATE_CHAKRAM_IGNITE;
             break;
         }
 
@@ -210,14 +229,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     }
 
     switch (work->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 17:
+    case HUM_STATE_RELOAD:
         AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         w->hoverZ = -0x300;
 
@@ -226,7 +245,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
 
         if ((u16)(GetRandom() % 80) == 0) {
-            work->base.state = 8;
+            work->base.state = HUM_STATE_MOVE;
             work->base.stateTimer = 0;
             break;
         }
@@ -239,15 +258,15 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         HumFaceTarget(&work->base, 8);
         work->base.stateTimer++;
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         if (work->base.stateTimer == 0) {
             work->base.targetX = x + (((u16)(GetRandom() % 201) - 100) << 8);
             work->base.targetY = y + (((u16)(GetRandom() % 65) - 32) << 8);
-            work->base.state = 19;
+            work->base.state = HUM_AXCEL_STATE_WARP;
         }
 
         break;
-    case 1:
+    case HUM_STATE_HURT:
         if (work->base.stateTimer == 0) {
             if (act->btl->hcEffect == 18) {
                 act->btl->hcEffectCount--;
@@ -262,10 +281,10 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 break;
             }
         }
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         if (work->base.stateTimer == 0) {
             w->targetScaleX = work->base.scaleX = 0x100;
             w->targetScaleY = work->base.scaleY = 0x100;
@@ -274,7 +293,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         w->hoverZ = 0;
         AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
-    case 22:
+    case HUM_AXCEL_STATE_THROW_APPROACH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
             work->base.steps = 10;
@@ -291,14 +310,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (work->base.steps <= 0) {
-            work->base.state = 23;
+            work->base.state = HUM_AXCEL_STATE_THROW_WINDUP;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 23:
+    case HUM_AXCEL_STATE_THROW_WINDUP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             w->hoverZ = 0;
@@ -310,14 +329,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         BtlMapFollowPosition(act->x, act->y, act->z);
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 24;
+            work->base.state = HUM_AXCEL_STATE_THROW;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 24:
+    case HUM_AXCEL_STATE_THROW:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
@@ -359,14 +378,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
 
         if (w->steps <= 4) {
-            work->base.state = 25;
+            work->base.state = HUM_AXCEL_STATE_CATCH;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 25:
+    case HUM_AXCEL_STATE_CATCH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
             sub->flags |= HUM_SUB_FLAG_HIDDEN;
@@ -377,14 +396,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 26:
+    case HUM_AXCEL_STATE_CHAKRAM_IGNITE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
             AnimReset(&sub->anim);
@@ -463,11 +482,11 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             if (act->hp < act->maxHp / 2) {
-                work->base.state = 31;
+                work->base.state = HUM_AXCEL_STATE_CHAKRAM_BOUNCE;
             } else if ((x - act->x >= 0) ? x - act->x <= 0x4FFF : act->x - x <= 0x4FFF) {
-                work->base.state = 29;
+                work->base.state = HUM_AXCEL_STATE_CHAKRAM_ORBIT;
             } else {
-                work->base.state = 27;
+                work->base.state = HUM_AXCEL_STATE_CHAKRAM_SWEEP;
             }
 
             work->base.stateTimer = 0;
@@ -476,7 +495,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
 
         break;
-    case 27: {
+    case HUM_AXCEL_STATE_CHAKRAM_SWEEP: {
         s32 t;
 
         if (work->base.stateTimer == 0) {
@@ -544,14 +563,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub->flags |= HUM_SUB_FLAG_HIDDEN;
             sub2->flags |= HUM_SUB_FLAG_HIDDEN;
             work->base.stateTimer = 0;
-            work->base.state = 28;
+            work->base.state = HUM_AXCEL_STATE_CHAKRAM_END;
         } else {
             work->base.stateTimer++;
         }
 
         break;
     }
-    case 29: {
+    case HUM_AXCEL_STATE_CHAKRAM_ORBIT: {
         u16 angle;
         s32 dx;
         s32 dy;
@@ -607,14 +626,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         if (w->steps <= 0) {
             work->base.stateTimer = 0;
-            work->base.state = 30;
+            work->base.state = HUM_AXCEL_STATE_CHAKRAM_EXIT;
         } else {
             work->base.stateTimer++;
         }
 
         break;
     }
-    case 30:
+    case HUM_AXCEL_STATE_CHAKRAM_EXIT:
         if (work->base.stateTimer == 0) {
             w->steps = 20;
         }
@@ -635,13 +654,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub->flags |= HUM_SUB_FLAG_HIDDEN;
             sub2->flags |= HUM_SUB_FLAG_HIDDEN;
             work->base.stateTimer = 0;
-            work->base.state = 28;
+            work->base.state = HUM_AXCEL_STATE_CHAKRAM_END;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 31:
+    case HUM_AXCEL_STATE_CHAKRAM_BOUNCE:
         HumFaceTarget(&work->base, 1);
 
         if (work->base.stateTimer == 0) {
@@ -700,13 +719,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
-            work->base.state = 30;
+            work->base.state = HUM_AXCEL_STATE_CHAKRAM_EXIT;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 28:
+    case HUM_AXCEL_STATE_CHAKRAM_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
         }
@@ -714,13 +733,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.stateTimer = 0;
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 20:
+    case HUM_AXCEL_STATE_SLASH:
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_SND_291);
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -755,18 +774,18 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
 
         if (w->flags & AXCEL_FLAG_ATTACK_HIT) {
-            work->base.state = 21;
+            work->base.state = HUM_AXCEL_STATE_SLASH_FOLLOWUP;
             work->base.stateTimer = 0;
         } else if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 21:
+    case HUM_AXCEL_STATE_SLASH_FOLLOWUP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             w->hoverZ = 0;
@@ -795,19 +814,19 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
 
         if (work->base.steps <= 1 && (w->flags & AXCEL_FLAG_ATTACK_HIT) && AnimGetFrame(&work->base.anim) > 2) {
-            work->base.state = 20;
+            work->base.state = HUM_AXCEL_STATE_SLASH;
             work->base.stateTimer = 0;
             work->base.steps++;
         } else if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 32:
+    case HUM_AXCEL_STATE_FIRE_WALL_WINDUP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
             w->hoverZ = 0;
@@ -817,14 +836,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 33;
+            work->base.state = HUM_AXCEL_STATE_FIRE_WALL;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 33: {
+    case HUM_AXCEL_STATE_FIRE_WALL: {
         s32 a, b, c;
 
         if (work->base.stateTimer == 0) {
@@ -854,7 +873,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         if (!BgFxIsActive() || a < ((gBtlWork->xMin - 64) << 8) || a > ((gBtlWork->xMax + 64) << 8)) {
             m4aSongNumStop(SONG_EF_AKL_FIREWALL);
-            work->base.state = 34;
+            work->base.state = HUM_AXCEL_STATE_FIRE_WALL_END;
             work->base.stateTimer = 0;
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             FadeToOriginal(FADE_MODE_BLACK, 8);
@@ -864,7 +883,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         break;
     }
-    case 34:
+    case HUM_AXCEL_STATE_FIRE_WALL_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
             w->hoverZ = 0;
@@ -876,13 +895,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             act->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 19:
+    case HUM_AXCEL_STATE_WARP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AxcelScaleTo(w, 12, 512, 8);
@@ -896,7 +915,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
                 work->base.stateTimer = 0;
                 break;
             }

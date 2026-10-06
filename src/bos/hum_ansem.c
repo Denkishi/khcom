@@ -104,6 +104,19 @@ void task_hum_ansem_0(AnsemWork* work) {
     work->base.stockMoves = sHumAnsemStockMovesA;
 }
 
+enum HumAnsemState {
+    HUM_ANSEM_STATE_GUARDIAN_STRIKE = 20,
+    HUM_ANSEM_STATE_GUARDIAN_SUMMON,
+    HUM_ANSEM_STATE_GUARDIAN_ASCEND,
+    HUM_ANSEM_STATE_GUARDIAN_ERUPT,
+    HUM_ANSEM_STATE_GUARDIAN_RETURN,
+    HUM_ANSEM_STATE_WAVE,
+    HUM_ANSEM_STATE_RUSH_START,
+    HUM_ANSEM_STATE_RUSH,
+    HUM_ANSEM_STATE_RUSH_END,
+    HUM_ANSEM_STATE_GUARD
+};
+
 u8 task_hum_ansem_1(AnsemWork* work) {
     AnsemWork* w;
     BtlObj* act;
@@ -127,18 +140,18 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
         case 38:
-            work->base.state = 20;
+            work->base.state = HUM_ANSEM_STATE_GUARDIAN_STRIKE;
             break;
         case 37:
         case 39:
-            work->base.state = 25;
+            work->base.state = HUM_ANSEM_STATE_WAVE;
             break;
         case 0xFADEB7A3:
-            work->base.state = 26;
+            work->base.state = HUM_ANSEM_STATE_RUSH_START;
             work->repeatCount = 0;
             break;
         case 0xFA3EB7A3:
-            work->base.state = 21;
+            work->base.state = HUM_ANSEM_STATE_GUARDIAN_SUMMON;
             work->repeatCount = 0;
             break;
         }
@@ -161,17 +174,17 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     }
 
     switch (work->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
         break;
-    case 17:
+    case HUM_STATE_RELOAD:
         AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
         w->hoverZ = -0x5000;
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
         w->hoverZ = -0xC00;
@@ -183,7 +196,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (gBtlWork->battleId == 177) {
             if ((u16)(GetRandom() % 15) == 0) {
                 if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-                    work->base.state = 29;
+                    work->base.state = HUM_ANSEM_STATE_GUARD;
                     work->base.stateTimer = 0;
                     break;
                 }
@@ -191,7 +204,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if ((u16)(GetRandom() % 80) == 0) {
-            work->base.state = 8;
+            work->base.state = HUM_STATE_MOVE;
             work->base.stateTimer = 0;
             break;
         }
@@ -199,7 +212,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         HumFaceTarget(&work->base, 3);
         work->base.stateTimer++;
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
@@ -216,7 +229,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (gBtlWork->battleId == 177) {
             if ((u16)(GetRandom() % 30) == 0) {
                 if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-                    work->base.state = 29;
+                    work->base.state = HUM_ANSEM_STATE_GUARD;
                     work->base.stateTimer = 0;
                     break;
                 }
@@ -224,7 +237,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 0x300)) {
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
@@ -232,16 +245,16 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         HumFaceTarget(&work->base, 1);
         work->base.stateTimer++;
         break;
-    case 1:
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_HURT:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         w->hoverZ = 0;
         AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 1, 0, w->base.sub->tiles);
         break;
-    case 2:
+    case HUM_STATE_HURT_RECOVER:
         if (gBtlWork->battleId != 177) {
             break;
         }
@@ -254,10 +267,10 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             break;
         }
 
-        work->base.state = 29;
+        work->base.state = HUM_ANSEM_STATE_GUARD;
         work->base.stateTimer = 0;
         break;
-    case 20:
+    case HUM_ANSEM_STATE_GUARDIAN_STRIKE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 2, 0, w->base.sub->tiles);
@@ -302,14 +315,14 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (AnimIsFinished(&w->sub.anim)) {
             w->sub.flags &= ~HUM_SUB_FLAG_IN_FRONT;
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 21:
+    case HUM_ANSEM_STATE_GUARDIAN_SUMMON:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 3, 0, w->base.sub->tiles);
@@ -336,14 +349,14 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (AnimIsFinished(&w->sub.anim)) {
-            work->base.state = 22;
+            work->base.state = HUM_ANSEM_STATE_GUARDIAN_ASCEND;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case HUM_ANSEM_STATE_GUARDIAN_ASCEND:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 5, 0, w->base.sub->tiles);
@@ -353,14 +366,14 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         w->sub.z -= w->subRiseSpeed;
 
         if (w->sub.z < -0x12C00) {
-            work->base.state = 23;
+            work->base.state = HUM_ANSEM_STATE_GUARDIAN_ERUPT;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 23:
+    case HUM_ANSEM_STATE_GUARDIAN_ERUPT:
         if (work->base.stateTimer == 0) {
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
@@ -427,18 +440,18 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.stateTimer = 0;
 
             if (w->repeatCount > 6) {
-                work->base.state = 24;
+                work->base.state = HUM_ANSEM_STATE_GUARDIAN_RETURN;
                 break;
             }
 
-            work->base.state = 23;
+            work->base.state = HUM_ANSEM_STATE_GUARDIAN_ERUPT;
             w->repeatCount++;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 24:
+    case HUM_ANSEM_STATE_GUARDIAN_RETURN:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
             w->steps = 30;
@@ -457,14 +470,14 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (w->steps <= 0) {
             FadeStartIn(FADE_MODE_BLACK, 30);
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 29:
+    case HUM_ANSEM_STATE_GUARD:
         if (work->base.stateTimer == 0) {
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 7, 0, w->base.sub->tiles);
@@ -501,13 +514,13 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             w->sub.flags &= ~HUM_SUB_FLAG_IN_FRONT;
             act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
             work->base.stateTimer = 0;
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 26:
+    case HUM_ANSEM_STATE_RUSH_START:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 7, 0, w->base.sub->tiles);
@@ -517,13 +530,13 @@ u8 task_hum_ansem_1(AnsemWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 27;
+            work->base.state = HUM_ANSEM_STATE_RUSH;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 27:
+    case HUM_ANSEM_STATE_RUSH:
         if (work->base.stateTimer == 0) {
             if (act->x <= 0xFFFF) {
                 work->base.targetX = (gBtlWork->xMax - 48) << 8;
@@ -584,18 +597,18 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.stateTimer = 0;
 
             if (w->repeatCount > 3) {
-                work->base.state = 28;
+                work->base.state = HUM_ANSEM_STATE_RUSH_END;
                 break;
             }
 
-            work->base.state = 27;
+            work->base.state = HUM_ANSEM_STATE_RUSH;
             w->repeatCount++;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 28:
+    case HUM_ANSEM_STATE_RUSH_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 9, 0, w->base.sub->tiles);
@@ -607,10 +620,10 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         ClearBtlObjActionFlags(act);
-        work->base.state = 0;
+        work->base.state = HUM_STATE_IDLE;
         work->base.stateTimer = 0;
         break;
-    case 25:
+    case HUM_ANSEM_STATE_WAVE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 6, 0, w->base.sub->tiles);
@@ -662,7 +675,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             if (!BgFxIsActive()) {
                 ClearBtlObjActionFlags(act);
                 FadeToOriginal(FADE_MODE_BLACK, 8);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -677,12 +690,12 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     }
 
     switch (work->base.state) {
-    case 21:
-    case 22:
-    case 23:
-    case 25:
-    case 27:
-    case 29:
+    case HUM_ANSEM_STATE_GUARDIAN_SUMMON:
+    case HUM_ANSEM_STATE_GUARDIAN_ASCEND:
+    case HUM_ANSEM_STATE_GUARDIAN_ERUPT:
+    case HUM_ANSEM_STATE_WAVE:
+    case HUM_ANSEM_STATE_RUSH:
+    case HUM_ANSEM_STATE_GUARD:
         break;
     default:
         AnsemPlaceSub(w);

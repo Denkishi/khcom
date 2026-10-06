@@ -49,6 +49,11 @@ void task_hum_leon_0(LeonWork* work) {
     gGameState.progression.learnedStocks2 = 0;
 }
 
+enum HumLeonState {
+    HUM_LEON_STATE_CARD_ACTION = 19,
+    HUM_LEON_STATE_COUNTER
+};
+
 u8 task_hum_leon_1(LeonWork* work) {
     LeonWork* w;
     BtlObj* act;
@@ -68,7 +73,7 @@ u8 task_hum_leon_1(LeonWork* work) {
     case 4:
         break;
     case 5:
-        work->base.state = 19;
+        work->base.state = HUM_LEON_STATE_CARD_ACTION;
         work->base.stateTimer = 0;
         break;
     }
@@ -76,10 +81,10 @@ u8 task_hum_leon_1(LeonWork* work) {
     HumFaceTarget(&work->base, 1);
 
     switch (work->base.state) {
-    case 12:
+    case HUM_STATE_ENTER:
         AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         if (gBtlWork->flags & 0x20000000000) {
             if (w->gunbladeRaised == 0) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -98,13 +103,13 @@ u8 task_hum_leon_1(LeonWork* work) {
 
         if (gBtlWork->flags & 0x100000) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-                work->base.state = 20;
+                work->base.state = HUM_LEON_STATE_COUNTER;
                 work->base.stateTimer = 0;
             }
         }
 
         break;
-    case 1:
+    case HUM_STATE_HURT:
         if (work->base.stateTimer == 0) {
             ClearBtlObjActionFlags(act);
             AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -112,29 +117,29 @@ u8 task_hum_leon_1(LeonWork* work) {
         }
 
         break;
-    case 2:
+    case HUM_STATE_HURT_RECOVER:
         if (gBtlWork->flags & 0x100000) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-                work->base.state = 20;
+                work->base.state = HUM_LEON_STATE_COUNTER;
                 work->base.stateTimer = 0;
             }
         }
 
         break;
-    case 20:
+    case HUM_LEON_STATE_COUNTER:
         if (work->base.stateTimer > 10) {
             gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 19:
+    case HUM_LEON_STATE_CARD_ACTION:
         if (work->base.stateTimer > 80) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;

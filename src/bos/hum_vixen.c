@@ -202,6 +202,26 @@ void task_hum_vixen_0(VixenWork* work) {
     }
 }
 
+enum HumVixenState {
+    HUM_VIXEN_STATE_LUNGE = 21,
+    HUM_VIXEN_STATE_BLIZZARD,
+    HUM_VIXEN_STATE_NEEDLE_WINDUP,
+    HUM_VIXEN_STATE_NEEDLE_CHARGE,
+    HUM_VIXEN_STATE_NEEDLE_RELEASE,
+    HUM_VIXEN_STATE_NEEDLE_TRAIL,
+    HUM_VIXEN_STATE_NEEDLE_END,
+    HUM_VIXEN_STATE_ICE_FALL,
+    HUM_VIXEN_STATE_GROUND_ICE_WINDUP,
+    HUM_VIXEN_STATE_GROUND_ICE_CHARGE,
+    HUM_VIXEN_STATE_GROUND_ICE_RELEASE,
+    HUM_VIXEN_STATE_GROUND_ICE,
+    HUM_VIXEN_STATE_FREEZE_WINDUP,
+    HUM_VIXEN_STATE_FREEZE_CHARGE,
+    HUM_VIXEN_STATE_FREEZE_RELEASE,
+    HUM_VIXEN_STATE_FREEZE,
+    HUM_VIXEN_STATE_REVIVE
+};
+
 u8 task_hum_vixen_1(VixenWork* work) {
     VixenWork* w;
     BtlObj* act;
@@ -229,23 +249,23 @@ u8 task_hum_vixen_1(VixenWork* work) {
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
         case 38:
-            w->base.state = 22;
+            w->base.state = HUM_VIXEN_STATE_BLIZZARD;
             break;
         case 37:
         case 39:
-            w->base.state = 21;
+            w->base.state = HUM_VIXEN_STATE_LUNGE;
             break;
         case 0xF53D7753:
-            work->base.state = 33;
+            work->base.state = HUM_VIXEN_STATE_FREEZE_WINDUP;
             break;
         case 0xF53D4F5D:
-            work->base.state = 28;
+            work->base.state = HUM_VIXEN_STATE_ICE_FALL;
             break;
         case 0xF5DD4F53:
-            work->base.state = 29;
+            work->base.state = HUM_VIXEN_STATE_GROUND_ICE_WINDUP;
             break;
         case 0xF53D4F53:
-            work->base.state = 23;
+            work->base.state = HUM_VIXEN_STATE_NEEDLE_WINDUP;
             break;
         }
 
@@ -256,7 +276,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
     case 3:
     case 8:
         if (act->btl->hcEffect == 27) {
-            w->base.state = 37;
+            w->base.state = HUM_VIXEN_STATE_REVIVE;
             w->base.stateTimer = 0;
         }
 
@@ -306,16 +326,16 @@ u8 task_hum_vixen_1(VixenWork* work) {
     }
 
     switch (w->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         break;
-    case 17:
+    case HUM_STATE_RELOAD:
         AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         work->hoverZ = -0x4000;
         HumFaceTarget(&w->base, 20);
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         work->hoverZ = 0;
 
@@ -323,7 +343,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             HumFaceTarget(&w->base, 80);
 
             if (AnimIsFinished(&w->base.anim) && GetRandom() % 80 == 0) {
-                w->base.state = 8;
+                w->base.state = HUM_STATE_MOVE;
                 w->base.stateTimer = 0;
             } else {
                 w->base.stateTimer++;
@@ -331,7 +351,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 1, ANIM_FLAG_LOOP, work->base.tiles);
             work->hoverZ = -0xF00;
@@ -372,21 +392,21 @@ u8 task_hum_vixen_1(VixenWork* work) {
         d = act->x - w->base.targetX;
 
         if ((d >= 0) ? d <= 0xBFF : w->base.targetX - act->x <= 0xBFF) {
-            w->base.state = 0;
+            w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 1:
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_HURT:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 2, 0, work->base.tiles);
         break;
-    case 21:
+    case HUM_VIXEN_STATE_LUNGE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 3, 0, work->base.tiles);
             work->hoverZ = 0;
@@ -410,14 +430,14 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimIsFinished(&w->base.anim)) {
             ClearBtlObjActionFlags(act);
-            w->base.state = 0;
+            w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 37:
+    case HUM_VIXEN_STATE_REVIVE:
         if (w->base.stateTimer == 0) {
             AnimReset(&w->base.anim);
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 2, 0, work->base.tiles);
@@ -438,7 +458,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         break;
-    case 22:
+    case HUM_VIXEN_STATE_BLIZZARD:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 4, 0, work->base.tiles);
             work->hoverZ = 0;
@@ -456,14 +476,14 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimIsFinished(&w->base.anim) && !BgFxIsActive()) {
             ClearBtlObjActionFlags(act);
-            w->base.state = 0;
+            w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 23:
+    case HUM_VIXEN_STATE_NEEDLE_WINDUP:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 5, 0, work->base.tiles);
             work->hoverZ = 0;
@@ -472,39 +492,39 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimIsFinished(&w->base.anim)) {
             w->base.stateTimer = 0;
-            w->base.state = 24;
+            w->base.state = HUM_VIXEN_STATE_NEEDLE_CHARGE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 24:
+    case HUM_VIXEN_STATE_NEEDLE_CHARGE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 6, ANIM_FLAG_LOOP, work->base.tiles);
         }
 
         if (w->base.stateTimer > 60) {
             w->base.stateTimer = 0;
-            w->base.state = 25;
+            w->base.state = HUM_VIXEN_STATE_NEEDLE_RELEASE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 25:
+    case HUM_VIXEN_STATE_NEEDLE_RELEASE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 7, 0, work->base.tiles);
         }
 
         if (AnimIsFinished(&w->base.anim)) {
             w->base.stateTimer = 0;
-            w->base.state = 26;
+            w->base.state = HUM_VIXEN_STATE_NEEDLE_TRAIL;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 26:
+    case HUM_VIXEN_STATE_NEEDLE_TRAIL:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 4, 0, work->base.tiles);
 
@@ -543,24 +563,24 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         if (w->base.stateTimer > 360 || (gBtlWork->actor->flags & BTLOBJ_FLAG_HURT)) {
-            w->base.state = 27;
+            w->base.state = HUM_VIXEN_STATE_NEEDLE_END;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 27:
+    case HUM_VIXEN_STATE_NEEDLE_END:
         if (w->base.stateTimer > 70) {
             ClearBtlObjActionFlags(act);
-            w->base.state = 0;
+            w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 28:
+    case HUM_VIXEN_STATE_ICE_FALL:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 8, 0, work->base.tiles);
             work->hoverZ = 0;
@@ -587,14 +607,14 @@ u8 task_hum_vixen_1(VixenWork* work) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             ClearBtlObjActionFlags(act);
-            w->base.state = 0;
+            w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 29:
+    case HUM_VIXEN_STATE_GROUND_ICE_WINDUP:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 9, 0, work->base.tiles);
             work->hoverZ = 0;
@@ -602,39 +622,39 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimIsFinished(&w->base.anim)) {
             w->base.stateTimer = 0;
-            w->base.state = 30;
+            w->base.state = HUM_VIXEN_STATE_GROUND_ICE_CHARGE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 30:
+    case HUM_VIXEN_STATE_GROUND_ICE_CHARGE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 10, ANIM_FLAG_LOOP, work->base.tiles);
         }
 
         if (w->base.stateTimer > 60) {
             w->base.stateTimer = 0;
-            w->base.state = 31;
+            w->base.state = HUM_VIXEN_STATE_GROUND_ICE_RELEASE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 31:
+    case HUM_VIXEN_STATE_GROUND_ICE_RELEASE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 11, 0, work->base.tiles);
         }
 
         if (AnimIsFinished(&w->base.anim)) {
             w->base.stateTimer = 0;
-            w->base.state = 32;
+            w->base.state = HUM_VIXEN_STATE_GROUND_ICE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 32:
+    case HUM_VIXEN_STATE_GROUND_ICE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 4, 0, work->base.tiles);
         }
@@ -646,14 +666,14 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimIsFinished(&w->base.anim) && !FadeIsActive()) {
             ClearBtlObjActionFlags(act);
-            w->base.state = 0;
+            w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 33:
+    case HUM_VIXEN_STATE_FREEZE_WINDUP:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 12, 0, work->base.tiles);
             work->hoverZ = 0;
@@ -661,26 +681,26 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimIsFinished(&w->base.anim)) {
             w->base.stateTimer = 0;
-            w->base.state = 34;
+            w->base.state = HUM_VIXEN_STATE_FREEZE_CHARGE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 34:
+    case HUM_VIXEN_STATE_FREEZE_CHARGE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 13, ANIM_FLAG_LOOP, work->base.tiles);
         }
 
         if (w->base.stateTimer > 60) {
             w->base.stateTimer = 0;
-            w->base.state = 35;
+            w->base.state = HUM_VIXEN_STATE_FREEZE_RELEASE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 35:
+    case HUM_VIXEN_STATE_FREEZE_RELEASE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 14, 0, work->base.tiles);
             m4aSongNumStart(SONG_VO_VIC_ATTACK00);
@@ -688,13 +708,13 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimIsFinished(&w->base.anim)) {
             w->base.stateTimer = 0;
-            w->base.state = 36;
+            w->base.state = HUM_VIXEN_STATE_FREEZE;
         } else {
             w->base.stateTimer++;
         }
 
         break;
-    case 36:
+    case HUM_VIXEN_STATE_FREEZE:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 4, 0, work->base.tiles);
             work->task = NULL;
@@ -710,7 +730,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (AnimIsFinished(&w->base.anim) &&
             !IsTaskActiveNamed(work->task, sTaskDescHumVixenFrz.name)) {
             ClearBtlObjActionFlags(act);
-            w->base.state = 0;
+            w->base.state = HUM_STATE_IDLE;
             w->base.stateTimer = 0;
         } else {
             w->base.stateTimer++;
@@ -821,11 +841,18 @@ void task_hum_vixen_ndl_3(VixenNdlWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum HumVixenIceState {
+    HUM_VIXEN_ICE_STATE_GROW,
+    HUM_VIXEN_ICE_STATE_IDLE,
+    HUM_VIXEN_ICE_STATE_GLINT,
+    HUM_VIXEN_ICE_STATE_INACTIVE
+};
+
 void task_hum_vixen_ice_0(VixenIceWork* work, VixenSub* args) {
     work->palette = LoadObjPalette(gVixEPalette, 0x20);
     work->tiles = LoadObjTiles(gVixenE2Tiles, 0x800);
     work->sub = args;
-    work->state = 3;
+    work->state = HUM_VIXEN_ICE_STATE_INACTIVE;
     AnimInit(&work->anim, gVixenE2Anims, gVixenE2Frames);
     AnimStart(&work->anim, 0, 0);
     ColliderInit(&work->collider, 12, 27, 1);
@@ -846,7 +873,7 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
     if (work->sub->pending != 0) {
         FadeSetPaletteExcluded(work->palette->index + 16, 0);
         work->sub->pending = 0;
-        work->state = 0;
+        work->state = HUM_VIXEN_ICE_STATE_GROW;
         work->stateTimer = 0;
         work->scale = 10;
 
@@ -864,7 +891,7 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case HUM_VIXEN_ICE_STATE_GROW:
         if (work->stateTimer == 0) {
             work->steps = 30;
             work->stateTimer++;
@@ -875,32 +902,32 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
 
         if ((s16)work->steps <= 0) {
             ColliderSetDisabled(&work->collider, 0);
-            work->state = 1;
+            work->state = HUM_VIXEN_ICE_STATE_IDLE;
             work->stateTimer = 0;
             work->lifetime = GetRandom() % 0x259 + 600;
         }
 
         break;
-    case 1:
+    case HUM_VIXEN_ICE_STATE_IDLE:
         if (work->stateTimer == 0) {
             AnimStart(&work->anim, 0, 0);
             work->stateTimer++;
         }
 
         if (GetRandom() % 300 == 0) {
-            work->state = 2;
+            work->state = HUM_VIXEN_ICE_STATE_GLINT;
             work->stateTimer = 0;
         }
 
         break;
-    case 2:
+    case HUM_VIXEN_ICE_STATE_GLINT:
         if (work->stateTimer == 0) {
             AnimStart(&work->anim, 1, 0);
             work->stateTimer++;
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 1;
+            work->state = HUM_VIXEN_ICE_STATE_IDLE;
             work->stateTimer = 0;
         }
 
@@ -908,8 +935,8 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
     }
 
     switch (work->state) {
-    case 1:
-    case 2:
+    case HUM_VIXEN_ICE_STATE_IDLE:
+    case HUM_VIXEN_ICE_STATE_GLINT:
         ApproachValue(&work->scale, 10, work->lifetime);
         work->lifetime--;
 
@@ -955,6 +982,16 @@ void task_hum_vixen_ice_3(VixenIceWork* work) {
     ColliderUnregister(&work->collider);
 }
 
+enum HumVixenFrzState {
+    HUM_VIXEN_FRZ_STATE_CAST,
+    HUM_VIXEN_FRZ_STATE_ENCASE,
+    HUM_VIXEN_FRZ_STATE_FROZEN,
+    HUM_VIXEN_FRZ_STATE_SHATTER,
+    HUM_VIXEN_FRZ_STATE_MISS,
+    HUM_VIXEN_FRZ_STATE_MISS_SHATTER,
+    HUM_VIXEN_FRZ_STATE_DONE
+};
+
 void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gVixEPalette, 0x20);
     work->tiles = gBtlWork->tiles2;
@@ -971,7 +1008,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
 
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 0, 0, work->tiles);
-    work->state = 0;
+    work->state = HUM_VIXEN_FRZ_STATE_CAST;
 
     if (gBtlWork->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->flipped = 0;
@@ -994,7 +1031,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
     }
 
     switch (work->state) {
-    case 1:
+    case HUM_VIXEN_FRZ_STATE_ENCASE:
         if (work->timer == 0) {
             switch (work->variant) {
             case 0:
@@ -1014,14 +1051,14 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         work->z = gBtlWork->actor->z;
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 2;
+            work->state = HUM_VIXEN_FRZ_STATE_FROZEN;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 2:
+    case HUM_VIXEN_FRZ_STATE_FROZEN:
         if (work->timer == 0) {
             switch (work->variant) {
             case 0:
@@ -1041,14 +1078,14 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         work->z = gBtlWork->actor->z;
 
         if (gBtlWork->flags & 0x100000) {
-            work->state = 3;
+            work->state = HUM_VIXEN_FRZ_STATE_SHATTER;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 3:
+    case HUM_VIXEN_FRZ_STATE_SHATTER:
         if (work->timer == 0) {
             switch (work->variant) {
             case 0:
@@ -1072,14 +1109,14 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
             args.y = work->y;
             args.z = work->z;
             TaskCreate(&gBtlWork->taskPools[0], &sTaskDescHumVixenFrg, &args);
-            work->state = 6;
+            work->state = HUM_VIXEN_FRZ_STATE_DONE;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 0:
+    case HUM_VIXEN_FRZ_STATE_CAST:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
@@ -1089,29 +1126,29 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
             gBtlWork->actor->y = work->y;
             gBtlWork->actor->z = work->z;
             gBtlWork->actor->flags |= (BTLOBJ_FLAG_CARD_USE_BLOCKED | BTLOBJ_FLAG_FREEZE_PENDING);
-            work->state = 1;
+            work->state = HUM_VIXEN_FRZ_STATE_ENCASE;
             gBtlWork->flags &= ~0x100000;
             work->timer = 0;
         } else {
-            work->state = 4;
+            work->state = HUM_VIXEN_FRZ_STATE_MISS;
             work->timer = 0;
         }
 
         break;
-    case 4:
+    case HUM_VIXEN_FRZ_STATE_MISS:
         if (work->timer == 0) {
             AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 5;
+            work->state = HUM_VIXEN_FRZ_STATE_MISS_SHATTER;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 5:
+    case HUM_VIXEN_FRZ_STATE_MISS_SHATTER:
         if (work->timer == 0) {
             AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 5, 0, work->tiles);
         }
@@ -1121,14 +1158,14 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
             args2.y = work->y;
             args2.z = work->z;
             TaskCreate(&gBtlWork->taskPools[0], &sTaskDescHumVixenFrg, &args2);
-            work->state = 6;
+            work->state = HUM_VIXEN_FRZ_STATE_DONE;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 6:
+    case HUM_VIXEN_FRZ_STATE_DONE:
         if (work->timer > 80) {
             return 0;
         }
@@ -1147,7 +1184,7 @@ void task_hum_vixen_frz_2(VixenFrzWork* work) {
     void* gfx;
     u16 attr;
 
-    if (work->state != 6) {
+    if (work->state != HUM_VIXEN_FRZ_STATE_DONE) {
         gfx = AnimGetGfx(&work->anim);
         attr = GetBattleSpritePriorityFlags(work->y) | work->flipped;
         WorldToScreen(&x, &y, work->x, work->y, work->z);

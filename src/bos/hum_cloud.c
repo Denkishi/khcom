@@ -64,6 +64,25 @@ TaskDesc gTaskDescHumCloud = {
     sizeof(CloudWork),
 };
 
+enum HumCloudState {
+    HUM_CLOUD_STATE_SLASH_LONG = 19,
+    HUM_CLOUD_STATE_SLASH_SHORT,
+    HUM_CLOUD_STATE_AIR_FOLLOW,
+    HUM_CLOUD_STATE_AIR_HANG,
+    HUM_CLOUD_STATE_DIVE,
+    HUM_CLOUD_STATE_LANDING_SLASH,
+    HUM_CLOUD_STATE_JUMP_CROUCH,
+    HUM_CLOUD_STATE_JUMP_AIR,
+    HUM_CLOUD_STATE_JUMP_LAND,
+    HUM_CLOUD_STATE_OMNISLASH_RISE,
+    HUM_CLOUD_STATE_OMNISLASH_FLY,
+    HUM_CLOUD_STATE_OMNISLASH_STRIKE,
+    HUM_CLOUD_STATE_CROSS_SLASH_START,
+    HUM_CLOUD_STATE_CROSS_SLASH,
+    HUM_CLOUD_STATE_LEAP_RISE,
+    HUM_CLOUD_STATE_LEAP_FLY
+};
+
 void CloudJumpOffset(CloudWork* work, s16 distance, s32 speed) {
     CloudWork* w = work;
     BtlObj* obj = &work->base.actor;
@@ -75,7 +94,7 @@ void CloudJumpOffset(CloudWork* work, s16 distance, s32 speed) {
     }
 
     w->base.targetY = obj->y;
-    w->base.state = 0x19;
+    w->base.state = HUM_CLOUD_STATE_JUMP_CROUCH;
     w->base.stateTimer = 0;
     work->speed = -speed;
     work->state = 0;
@@ -84,16 +103,16 @@ void CloudJumpOffset(CloudWork* work, s16 distance, s32 speed) {
 void CloudJumpTo(CloudWork* work, s32 x, s32 y) {
     work->base.targetX = x;
     work->base.targetY = y;
-    work->base.state = 0x19;
+    work->base.state = HUM_CLOUD_STATE_JUMP_CROUCH;
     work->base.stateTimer = 0;
     work->speed = -0x500;
-    work->nextState = 0;
+    work->nextState = HUM_STATE_IDLE;
 }
 
 void CloudLeapTo(CloudWork* work, s32 x, s32 y) {
     work->base.targetX = x;
     work->base.targetY = y;
-    work->base.state = 0x21;
+    work->base.state = HUM_CLOUD_STATE_LEAP_RISE;
     work->base.stateTimer = 0;
 }
 
@@ -134,6 +153,11 @@ void task_hum_cloud_0(CloudWork* work, void* obj) {
     work->base.stockMoves = sHumCloudStockMoves[0];
 }
 
+enum HumCloudAttackPhase {
+    HUM_CLOUD_ATTACK_PHASE_OPENER,
+    HUM_CLOUD_ATTACK_PHASE_FINISHER
+};
+
 u8 task_hum_cloud_1(CloudWork* work) {
     CloudWork* w;
     BtlObj* act;
@@ -154,32 +178,32 @@ u8 task_hum_cloud_1(CloudWork* work) {
         case 36:
         case 38:
             if (act->z < 0) {
-                work->base.state = 21;
+                work->base.state = HUM_CLOUD_STATE_AIR_FOLLOW;
             } else {
-                work->base.state = 19;
+                work->base.state = HUM_CLOUD_STATE_SLASH_LONG;
             }
 
             break;
         case 37:
         case 39:
             if (act->z < 0) {
-                work->base.state = 21;
+                work->base.state = HUM_CLOUD_STATE_AIR_FOLLOW;
             } else {
-                work->base.state = 20;
+                work->base.state = HUM_CLOUD_STATE_SLASH_SHORT;
             }
 
             break;
         case 0xEB3ACEB3:
-            work->base.state = 31;
+            work->base.state = HUM_CLOUD_STATE_CROSS_SLASH_START;
             break;
         case 0xEB3AA6B3:
-            work->base.state = 28;
+            work->base.state = HUM_CLOUD_STATE_OMNISLASH_RISE;
             break;
         }
 
         break;
     case 4:
-        work->nextState = 0;
+        work->nextState = HUM_STATE_IDLE;
         break;
     }
 
@@ -192,11 +216,11 @@ u8 task_hum_cloud_1(CloudWork* work) {
     }
 
     switch (work->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 17: {
+    case HUM_STATE_RELOAD: {
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
@@ -217,7 +241,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     }
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
         if (func_08081828()) {
@@ -225,7 +249,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         }
 
         if ((u16)(GetRandom() % 60) == 0) {
-            work->base.state = 8;
+            work->base.state = HUM_STATE_MOVE;
             work->base.stateTimer = 0;
             break;
         }
@@ -246,13 +270,13 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 8: {
+    case HUM_STATE_MOVE: {
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
 
         if (HumMoveToward(&work->base, work->base.targetX, y, 0x133)) {
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
@@ -275,14 +299,14 @@ u8 task_hum_cloud_1(CloudWork* work) {
         work->base.stateTimer++;
         break;
     }
-    case 1:
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_HURT:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
-    case 19:
+    case HUM_CLOUD_STATE_SLASH_LONG:
         if (work->base.stateTimer == 0) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
@@ -298,14 +322,14 @@ u8 task_hum_cloud_1(CloudWork* work) {
             }
         } else if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 20:
+    case HUM_CLOUD_STATE_SLASH_SHORT:
         if (work->base.stateTimer == 0) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
@@ -321,28 +345,28 @@ u8 task_hum_cloud_1(CloudWork* work) {
             }
         } else if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 25:
+    case HUM_CLOUD_STATE_JUMP_CROUCH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         }
 
         if (work->base.stateTimer > 3) {
             work->base.stateTimer = 0;
-            work->base.state = 26;
+            work->base.state = HUM_CLOUD_STATE_JUMP_AIR;
             work->base.vz = w->speed;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 26: {
+    case HUM_CLOUD_STATE_JUMP_AIR: {
         s32 d;
 
         act->x += (work->base.targetX - act->x) >> 4;
@@ -363,7 +387,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         if (act->z >= 0) {
             work->base.stateTimer = 0;
-            work->base.state = 27;
+            work->base.state = HUM_CLOUD_STATE_JUMP_LAND;
         } else {
             HumFaceTarget(&work->base, 1);
             work->base.stateTimer++;
@@ -371,7 +395,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     }
-    case 27:
+    case HUM_CLOUD_STATE_JUMP_LAND:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
         }
@@ -384,7 +408,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         }
 
         break;
-    case 33: {
+    case HUM_CLOUD_STATE_LEAP_RISE: {
         s32 d;
 
         if (work->base.stateTimer == 0) {
@@ -403,14 +427,14 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         if (work->base.vz > 0) {
             work->base.stateTimer = 0;
-            work->base.state = 34;
+            work->base.state = HUM_CLOUD_STATE_LEAP_FLY;
         } else {
             work->base.stateTimer++;
         }
 
         break;
     }
-    case 34: {
+    case HUM_CLOUD_STATE_LEAP_FLY: {
         s32 d;
 
         if (work->base.stateTimer == 0) {
@@ -422,8 +446,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
         ret = HumMoveToward(&work->base, work->base.targetX, work->base.targetY, w->speed);
 
         if (ret) {
-            work->base.state = 26;
-            w->nextState = 0;
+            work->base.state = HUM_CLOUD_STATE_JUMP_AIR;
+            w->nextState = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             w->speed += 76;
@@ -459,7 +483,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     }
-    case 21: {
+    case HUM_CLOUD_STATE_AIR_FOLLOW: {
         s32 d;
 
         if (work->base.stateTimer == 0) {
@@ -481,7 +505,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         work->base.vz = 0;
 
         if (work->base.stateTimer > 30) {
-            work->base.state = 22;
+            work->base.state = HUM_CLOUD_STATE_AIR_HANG;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
@@ -489,7 +513,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     }
-    case 22:
+    case HUM_CLOUD_STATE_AIR_HANG:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
         }
@@ -498,27 +522,27 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         if (work->base.stateTimer > 8) {
             work->base.vz = 0x500;
-            work->base.state = 23;
+            work->base.state = HUM_CLOUD_STATE_DIVE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 23:
+    case HUM_CLOUD_STATE_DIVE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
         }
 
         if (act->z >= 0) {
-            work->base.state = 24;
+            work->base.state = HUM_CLOUD_STATE_LANDING_SLASH;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 24:
+    case HUM_CLOUD_STATE_LANDING_SLASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
         }
@@ -531,38 +555,38 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 31:
+    case HUM_CLOUD_STATE_CROSS_SLASH_START:
         if (act->z >= act->groundZ) {
             s32 v;
             work->base.targetX = x + (v = ((u16)(GetRandom() % 41) << 8) - 0x1400);
             work->base.targetY = y;
-            work->base.state = 25;
+            work->base.state = HUM_CLOUD_STATE_JUMP_CROUCH;
             work->base.stateTimer = 0;
             w->speed = -0x500;
-            w->nextState = 32;
+            w->nextState = HUM_CLOUD_STATE_CROSS_SLASH;
         }
 
         break;
-    case 32: {
+    case HUM_CLOUD_STATE_CROSS_SLASH: {
         s32 d;
 
         if (work->base.stateTimer == 0) {
-            w->attackPhase = 0;
+            w->attackPhase = HUM_CLOUD_ATTACK_PHASE_OPENER;
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 18, 0, w->base.tiles);
-        } else if ((s16)w->attackPhase == 0 && AnimIsFinished(&work->base.anim)) {
+        } else if ((s16)w->attackPhase == HUM_CLOUD_ATTACK_PHASE_OPENER && AnimIsFinished(&work->base.anim)) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 19, 0, w->base.tiles);
             w->attackPhase++;
         } else if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
-            w->nextState = 0;
+            work->base.state = HUM_STATE_IDLE;
+            w->nextState = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
@@ -570,7 +594,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (work->base.anim.timer == 0) {
-            if ((s16)w->attackPhase == 0) {
+            if ((s16)w->attackPhase == HUM_CLOUD_ATTACK_PHASE_OPENER) {
                 switch (AnimGetFrame(&work->base.anim)) {
                 case 2:
                     m4aSongNumStart(SONG_VO_MKU_ATTACK00);
@@ -649,7 +673,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         work->base.stateTimer++;
         break;
     }
-    case 28: {
+    case HUM_CLOUD_STATE_OMNISLASH_RISE: {
         s32 d;
 
         if (work->base.stateTimer == 0) {
@@ -668,7 +692,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         if (work->base.vz > 0) {
             work->base.stateTimer = 0;
-            work->base.state = 29;
+            work->base.state = HUM_CLOUD_STATE_OMNISLASH_FLY;
             w->state = 0;
         } else {
             work->base.stateTimer++;
@@ -676,7 +700,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     }
-    case 29: {
+    case HUM_CLOUD_STATE_OMNISLASH_FLY: {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             w->speed = 0;
@@ -713,7 +737,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         w->speed += 0x80;
 
         if ((act->z - work->base.targetZ >= 0) ? act->z - work->base.targetZ <= 0xFFF : work->base.targetZ - act->z <= 0xFFF) {
-            work->base.state = 30;
+            work->base.state = HUM_CLOUD_STATE_OMNISLASH_STRIKE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
@@ -721,7 +745,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         break;
     }
-    case 30:
+    case HUM_CLOUD_STATE_OMNISLASH_STRIKE:
         if (work->base.stateTimer == 0) {
             work->base.targetX = x;
             work->base.targetY = y;
@@ -805,10 +829,10 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
             if ((s16)w->state > 2) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 26;
-                w->nextState = 0;
+                work->base.state = HUM_CLOUD_STATE_JUMP_AIR;
+                w->nextState = HUM_STATE_IDLE;
             } else {
-                work->base.state = 29;
+                work->base.state = HUM_CLOUD_STATE_OMNISLASH_FLY;
             }
         } else {
             work->base.stateTimer++;

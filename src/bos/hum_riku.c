@@ -71,6 +71,26 @@ TaskDesc gTaskDescHumRiku = {
     sizeof(RikuWork),
 };
 
+enum HumRikuState {
+    HUM_RIKU_STATE_JUMP_CROUCH = 19,
+    HUM_RIKU_STATE_JUMP_AIR,
+    HUM_RIKU_STATE_JUMP_LAND,
+    HUM_RIKU_STATE_DASH_SLASH,
+    HUM_RIKU_STATE_SWEEP,
+    HUM_RIKU_STATE_VERTICAL_SLASH,
+    HUM_RIKU_STATE_DIVE_CROUCH,
+    HUM_RIKU_STATE_DIVE_RISE,
+    HUM_RIKU_STATE_DIVE,
+    HUM_RIKU_STATE_DIVE_RECOIL,
+    HUM_RIKU_STATE_DARK_FIRAGA,
+    HUM_RIKU_STATE_DARK_AURA_START,
+    HUM_RIKU_STATE_DARK_AURA_LEAP,
+    HUM_RIKU_STATE_DARK_AURA_EXIT,
+    HUM_RIKU_STATE_DARK_AURA_AIM,
+    HUM_RIKU_STATE_DARK_AURA_DASH,
+    HUM_RIKU_STATE_DARK_AURA_END
+};
+
 void RikuJumpOffset(RikuWork* work, s16 distance, s32 speed) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
@@ -82,7 +102,7 @@ void RikuJumpOffset(RikuWork* work, s16 distance, s32 speed) {
     }
 
     w->targetY = act->y;
-    w->state = 19;
+    w->state = HUM_RIKU_STATE_JUMP_CROUCH;
     w->stateTimer = 0;
     work->unk_1C4 = -speed;
     work->state = 0;
@@ -91,7 +111,7 @@ void RikuJumpOffset(RikuWork* work, s16 distance, s32 speed) {
 void RikuJumpTo(RikuWork* work, s32 x, s32 y) {
     work->base.targetX = x;
     work->base.targetY = y;
-    work->base.state = 19;
+    work->base.state = HUM_RIKU_STATE_JUMP_CROUCH;
     work->base.stateTimer = 0;
     work->unk_1C4 = -0x500;
 }
@@ -236,22 +256,22 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
-            work->base.state = 24;
+            work->base.state = HUM_RIKU_STATE_VERTICAL_SLASH;
             break;
         case 37:
-            work->base.state = 22;
+            work->base.state = HUM_RIKU_STATE_DASH_SLASH;
             break;
         case 38:
-            work->base.state = 23;
+            work->base.state = HUM_RIKU_STATE_SWEEP;
             break;
         case 39:
-            work->base.state = 25;
+            work->base.state = HUM_RIKU_STATE_DIVE_CROUCH;
             break;
         case 0xF0DBE6F9:
-            work->base.state = 29;
+            work->base.state = HUM_RIKU_STATE_DARK_FIRAGA;
             break;
         case 0xF17C0F03:
-            work->base.state = 30;
+            work->base.state = HUM_RIKU_STATE_DARK_AURA_START;
             break;
         }
 
@@ -293,11 +313,11 @@ u8 task_hum_riku_1(RikuWork* work) {
     }
 
     switch (work->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 17:
+    case HUM_STATE_RELOAD:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
         if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && RikuTryJumpAway(w)) {
@@ -313,7 +333,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (func_08081828()) {
@@ -321,7 +341,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim) && (u16)(GetRandom() % 60) == 0) {
-            work->base.state = 8;
+            work->base.state = HUM_STATE_MOVE;
             work->base.stateTimer = 0;
             break;
         }
@@ -341,13 +361,13 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
 
         if (HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 512) && AnimIsFinished(&work->base.anim)) {
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
@@ -367,13 +387,13 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
-    case 1:
+    case HUM_STATE_HURT:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
 
         if (work->base.stateTimer == 3) {
@@ -392,7 +412,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         break;
-    case 30:
+    case HUM_RIKU_STATE_DARK_AURA_START:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
@@ -404,14 +424,14 @@ u8 task_hum_riku_1(RikuWork* work) {
         act->z += (-0x2800 - act->z) >> 5;
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 31;
+            work->base.state = HUM_RIKU_STATE_DARK_AURA_LEAP;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 31: {
+    case HUM_RIKU_STATE_DARK_AURA_LEAP: {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 15, 0, w->base.tiles);
         }
@@ -434,7 +454,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 32;
+            work->base.state = HUM_RIKU_STATE_DARK_AURA_EXIT;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
@@ -442,7 +462,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         break;
     }
-    case 32:
+    case HUM_RIKU_STATE_DARK_AURA_EXIT:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 16, 0, w->base.tiles);
             work->base.flags |= HUM_FLAG_IGNORE_BOUNDS;
@@ -459,7 +479,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (act->x < ((gBtlWork->xMin - 48) << 8) ||
             act->x > ((gBtlWork->xMax + 48) << 8)) {
-            work->base.state = 33;
+            work->base.state = HUM_RIKU_STATE_DARK_AURA_AIM;
             work->base.stateTimer = 0;
             w->dashCount = 0;
         } else {
@@ -467,7 +487,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         break;
-    case 33:
+    case HUM_RIKU_STATE_DARK_AURA_AIM:
         if (work->base.stateTimer == 0) {
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
 
@@ -528,14 +548,14 @@ u8 task_hum_riku_1(RikuWork* work) {
         work->base.steps--;
 
         if (work->base.steps <= 0) {
-            work->base.state = 34;
+            work->base.state = HUM_RIKU_STATE_DARK_AURA_DASH;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 34:
+    case HUM_RIKU_STATE_DARK_AURA_DASH:
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_EF_RK_LIMITMOV);
             MakeOpponentsHittable();
@@ -553,10 +573,10 @@ u8 task_hum_riku_1(RikuWork* work) {
         BtlMapFollowPosition(gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
 
         if (work->base.stateTimer == 15 && (s16)w->dashCount > 4) {
-            work->base.state = 35;
+            work->base.state = HUM_RIKU_STATE_DARK_AURA_END;
             work->base.stateTimer = 0;
         } else if (work->base.stateTimer > 30) {
-            work->base.state = 33;
+            work->base.state = HUM_RIKU_STATE_DARK_AURA_AIM;
             work->base.stateTimer = 0;
             w->dashCount++;
         } else {
@@ -564,7 +584,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         break;
-    case 35:
+    case HUM_RIKU_STATE_DARK_AURA_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 20, 0, w->base.tiles);
             work->base.steps = 40;
@@ -584,7 +604,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         if (!BgFxIsActive() && work->base.steps <= 0 && AnimIsFinished(&work->base.anim)) {
             work->base.flags &= ~HUM_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             FadeStartIn(FADE_MODE_DARK_MAGENTA, 30);
             work->base.stateTimer = 0;
         } else {
@@ -592,7 +612,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         break;
-    case 24:
+    case HUM_RIKU_STATE_VERTICAL_SLASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK02);
@@ -634,14 +654,14 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 29:
+    case HUM_RIKU_STATE_DARK_FIRAGA:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
@@ -719,14 +739,14 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (AnimIsFinished(&work->base.anim) && !BgFxIsActive()) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 23:
+    case HUM_RIKU_STATE_SWEEP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
@@ -799,14 +819,14 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case HUM_RIKU_STATE_DASH_SLASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
@@ -893,14 +913,14 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 25:
+    case HUM_RIKU_STATE_DIVE_CROUCH:
         if (act->z < act->groundZ) {
             break;
         }
@@ -912,14 +932,14 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 26;
+            work->base.state = HUM_RIKU_STATE_DIVE_RISE;
             work->base.vz = -0x600;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 26:
+    case HUM_RIKU_STATE_DIVE_RISE:
         act->x += (x - act->x) >> 4;
         act->y += (y - act->y) >> 4;
 
@@ -931,13 +951,13 @@ u8 task_hum_riku_1(RikuWork* work) {
             }
         } else {
             work->base.stateTimer = 0;
-            work->base.state = 27;
+            work->base.state = HUM_RIKU_STATE_DIVE;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 27:
+    case HUM_RIKU_STATE_DIVE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
             w->flags &= ~RIKU_FLAG_DIVE_HIT;
@@ -955,13 +975,13 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if ((w->flags & RIKU_FLAG_DIVE_HIT) || act->z >= act->groundZ) {
             work->base.stateTimer = 0;
-            work->base.state = 28;
+            work->base.state = HUM_RIKU_STATE_DIVE_RECOIL;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 28:
+    case HUM_RIKU_STATE_DIVE_RECOIL:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
             work->base.vz = -0x400;
@@ -977,28 +997,28 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (AnimIsFinished(&work->base.anim) && act->z >= act->groundZ) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 19:
+    case HUM_RIKU_STATE_JUMP_CROUCH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 20;
+            work->base.state = HUM_RIKU_STATE_JUMP_AIR;
             work->base.vz = w->unk_1C4;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 20:
+    case HUM_RIKU_STATE_JUMP_AIR:
         act->x += (work->base.targetX - act->x) >> 4;
         act->y += (work->base.targetY - act->y) >> 4;
 
@@ -1016,21 +1036,21 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (act->z >= 0) {
             work->base.stateTimer = 0;
-            work->base.state = 21;
+            work->base.state = HUM_RIKU_STATE_JUMP_LAND;
             break;
         }
 
         HumFaceTarget(&work->base, 1);
         work->base.stateTimer++;
         break;
-    case 21:
+    case HUM_RIKU_STATE_JUMP_LAND:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }

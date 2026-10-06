@@ -68,6 +68,21 @@ TaskDesc gTaskDescHumMahluxia = {
     sizeof(MahluxiaWork),
 };
 
+enum HumMahluxiaState {
+    HUM_MAHLUXIA_STATE_SWING = 19,
+    HUM_MAHLUXIA_STATE_RETREAT,
+    HUM_MAHLUXIA_STATE_SCYTHE_WAVE,
+    HUM_MAHLUXIA_STATE_KAMA_WINDUP,
+    HUM_MAHLUXIA_STATE_KAMA_CHARGE,
+    HUM_MAHLUXIA_STATE_KAMA_RELEASE,
+    HUM_MAHLUXIA_STATE_KAMA_SLASH,
+    HUM_MAHLUXIA_STATE_PETAL_STORM,
+    HUM_MAHLUXIA_STATE_STAMP,
+    HUM_MAHLUXIA_STATE_DASH_WINDUP,
+    HUM_MAHLUXIA_STATE_DASH_SLASH,
+    HUM_MAHLUXIA_STATE_DASH_END
+};
+
 void MahluxiaJumpOffset(MahluxiaWork* work, s16 distance) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
@@ -81,7 +96,7 @@ void MahluxiaJumpOffset(MahluxiaWork* work, s16 distance) {
         w->targetX = act->x + (distance << 8);
     }
 
-    w->state = 20;
+    w->state = HUM_MAHLUXIA_STATE_RETREAT;
     w->stateTimer = 0;
     work->hoverZ = -0x300;
 
@@ -95,7 +110,7 @@ void MahluxiaJumpOffset(MahluxiaWork* work, s16 distance) {
 void MahluxiaSwingTo(MahluxiaWork* work, s32 x, u16 amplitude) {
     work->base.targetX = x;
     work->swingAmplitude = amplitude;
-    work->base.state = 19;
+    work->base.state = HUM_MAHLUXIA_STATE_SWING;
     work->base.stateTimer = 0;
 }
 
@@ -265,20 +280,20 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
-            work->base.state = 21;
+            work->base.state = HUM_MAHLUXIA_STATE_SCYTHE_WAVE;
             break;
         case 37:
-            work->base.state = 27;
+            work->base.state = HUM_MAHLUXIA_STATE_STAMP;
             break;
         case 38:
         case 39:
-            work->base.state = 28;
+            work->base.state = HUM_MAHLUXIA_STATE_DASH_WINDUP;
             break;
         case 0xF71D9F71:
-            work->base.state = 26;
+            work->base.state = HUM_MAHLUXIA_STATE_PETAL_STORM;
             break;
         case 0xF7BDC767:
-            work->base.state = 22;
+            work->base.state = HUM_MAHLUXIA_STATE_KAMA_WINDUP;
             break;
         }
 
@@ -297,11 +312,11 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     }
 
     switch (work->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 17:
+    case HUM_STATE_RELOAD:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
@@ -319,7 +334,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
 
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         w->hoverZ = -0x300;
 
@@ -329,7 +344,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         if (act->x - x >= 0 ? act->x - x > 0x2800 : x - act->x > 0x2800) {
             if (GetRandom() % 80 == 0) {
-                work->base.state = 8;
+                work->base.state = HUM_STATE_MOVE;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -350,13 +365,13 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
 
         if (HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 358)) {
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
@@ -371,15 +386,15 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 1:
+    case HUM_STATE_HURT:
         MahluxiaSpawnFlower(w);
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
-    case 20:
+    case HUM_MAHLUXIA_STATE_RETREAT:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         act->x += (work->base.targetX - act->x) >> 4;
         act->y += (work->base.targetY - act->y) >> 4;
@@ -389,7 +404,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                     ? work->base.targetX - act->x <= 0x7FF
                     : act->x - work->base.targetX <= 0x7FF)) {
             work->base.stateTimer = 0;
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             break;
         }
 
@@ -398,7 +413,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
         work->base.stateTimer++;
         break;
-    case 19:
+    case HUM_MAHLUXIA_STATE_SWING:
         if (work->base.stateTimer == 0) {
             w->steps = 60;
             w->angle = 0;
@@ -430,7 +445,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         if ((s16)w->steps <= 0) {
             work->base.stateTimer = 0;
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             break;
         }
 
@@ -438,7 +453,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
         work->base.stateTimer++;
         break;
-    case 22:
+    case HUM_MAHLUXIA_STATE_KAMA_WINDUP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
         }
@@ -450,10 +465,10 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             break;
         }
 
-        work->base.state = 23;
+        work->base.state = HUM_MAHLUXIA_STATE_KAMA_CHARGE;
         work->base.stateTimer = 0;
         break;
-    case 23:
+    case HUM_MAHLUXIA_STATE_KAMA_CHARGE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
         }
@@ -462,14 +477,14 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         n = work->base.stateTimer;
 
         if ((s16)n > 60) {
-            work->base.state = 24;
+            work->base.state = HUM_MAHLUXIA_STATE_KAMA_RELEASE;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer = n + 1;
         break;
-    case 24:
+    case HUM_MAHLUXIA_STATE_KAMA_RELEASE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
         }
@@ -481,10 +496,10 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             break;
         }
 
-        work->base.state = 25;
+        work->base.state = HUM_MAHLUXIA_STATE_KAMA_SLASH;
         work->base.stateTimer = 0;
         break;
-    case 25:
+    case HUM_MAHLUXIA_STATE_KAMA_SLASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK00);
@@ -515,7 +530,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             if (!BgFxIsActive()) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -523,7 +538,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 28:
+    case HUM_MAHLUXIA_STATE_DASH_WINDUP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
@@ -538,14 +553,14 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 29;
+            work->base.state = HUM_MAHLUXIA_STATE_DASH_SLASH;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 29:
+    case HUM_MAHLUXIA_STATE_DASH_SLASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
             FadeStartIn(FADE_MODE_ADD_WHITE, 20);
@@ -566,14 +581,14 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         n = work->base.stateTimer;
 
         if ((s16)n > 60) {
-            work->base.state = 30;
+            work->base.state = HUM_MAHLUXIA_STATE_DASH_END;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer = n + 1;
         break;
-    case 30:
+    case HUM_MAHLUXIA_STATE_DASH_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
         }
@@ -582,14 +597,14 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 26:
+    case HUM_MAHLUXIA_STATE_PETAL_STORM:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
             w->flags &= ~MAHLUXIA_FLAG_EFFECT_LAUNCHED;
@@ -612,7 +627,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             if (!BgFxIsActive()) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -620,7 +635,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 27:
+    case HUM_MAHLUXIA_STATE_STAMP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
@@ -652,7 +667,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             if (!BgFxIsActive()) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -660,7 +675,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 21:
+    case HUM_MAHLUXIA_STATE_SCYTHE_WAVE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             w->flags &= ~MAHLUXIA_FLAG_EFFECT_LAUNCHED;
@@ -739,7 +754,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             if (w->sub.x < (gBtlWork->xMin - 32) << 8 ||
                 w->sub.x > (gBtlWork->xMax + 32) << 8) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
                 work->base.stateTimer = 0;
                 w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
                 break;

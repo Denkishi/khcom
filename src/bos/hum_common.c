@@ -74,7 +74,7 @@ void HumInit(HumWork* work, const HumDef* def) {
     TaskPoolInit(&work->tasks, 3);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, actor);
     TaskCreate(&work->tasks, &gTaskDescBtlBadstatus, actor);
-    work->state = 12;
+    work->state = HUM_STATE_ENTER;
     work->scaleX = 0x100;
     work->scaleY = 0x100;
     work->sub = NULL;
@@ -154,40 +154,40 @@ s32 HumUpdateReaction(HumWork* work) {
             actor->badStatusTimer = 0x168;
         }
 
-        work->state = 11;
+        work->state = HUM_STATE_STUNNED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_STUNNED:
         HumStartKnockback(work);
-        work->state = 11;
+        work->state = HUM_STATE_STUNNED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_GRAVITY:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        work->state = 14;
+        work->state = HUM_STATE_GRAVITY;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_HURT:
         HumStartKnockback(work);
-        work->state = 1;
+        work->state = HUM_STATE_HURT;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_DEFEATED:
         work->flags |= HUM_FLAG_PASS_THROUGH;
-        work->state = 3;
+        work->state = HUM_STATE_DEFEATED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_HEALED:
-        work->state = 10;
+        work->state = HUM_STATE_HEALED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_CARD_BROKEN:
-        work->state = 9;
+        work->state = HUM_STATE_CARD_BROKEN;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_STOPPED:
-        if (work->state != 13) {
-            work->state = 13;
+        if (work->state != HUM_STATE_STOPPED) {
+            work->state = HUM_STATE_STOPPED;
             work->stateTimer = 0;
             actor->vx = actor->vy = 0;
         }
@@ -213,23 +213,23 @@ s32 HumUpdate(HumWork* work) {
     GetEnemyTargetPosition(actor, &x, NULL, NULL);
 
     switch (work->state) {
-    case 12:
+    case HUM_STATE_ENTER:
         if (work->stateTimer > 100) {
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 1:
+    case HUM_STATE_HURT:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
         }
 
         if (work->stateTimer > 10) {
             ClearBtlObjActionFlags(actor);
-            work->state = 2;
+            work->state = HUM_STATE_HURT_RECOVER;
             work->stateTimer = 0;
 
             if (actor->x < x) {
@@ -252,14 +252,14 @@ s32 HumUpdate(HumWork* work) {
         }
 
         break;
-    case 2:
+    case HUM_STATE_HURT_RECOVER:
         if (AnimIsFinished(&work->anim)) {
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             work->stateTimer = 0;
         }
 
         break;
-    case 14:
+    case HUM_STATE_GRAVITY:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             ColliderSetDisabled(&actor->collider, 1);
@@ -278,16 +278,16 @@ s32 HumUpdate(HumWork* work) {
             work->stateTimer++;
         } else {
             work->stateTimer = 0;
-            work->state = 15;
+            work->state = HUM_STATE_GRAVITY_FLAT;
         }
 
         break;
-    case 15:
+    case HUM_STATE_GRAVITY_FLAT:
         if (work->stateTimer > 44) {
             if (actor->hp <= 0) {
-                work->state = 3;
+                work->state = HUM_STATE_DEFEATED;
             } else {
-                work->state = 16;
+                work->state = HUM_STATE_GRAVITY_RECOVER;
             }
 
             work->stateTimer = 0;
@@ -296,7 +296,7 @@ s32 HumUpdate(HumWork* work) {
         }
 
         break;
-    case 16:
+    case HUM_STATE_GRAVITY_RECOVER:
         if (work->stateTimer == 0) {
             ColliderSetDisabled(&actor->collider, 0);
             work->steps = 10;
@@ -307,14 +307,14 @@ s32 HumUpdate(HumWork* work) {
         if (work->steps <= 0) {
             actor->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(actor);
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 11:
+    case HUM_STATE_STUNNED:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             work->stateTimer++;
@@ -331,22 +331,22 @@ s32 HumUpdate(HumWork* work) {
 
         if (actor->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(actor);
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             work->stateTimer = 0;
         }
 
         break;
-    case 9:
+    case HUM_STATE_CARD_BROKEN:
         if (AnimIsFinished(&work->anim) && work->stateTimer > 60) {
             ClearBtlObjActionFlags(actor);
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 10:
+    case HUM_STATE_HEALED:
         if (work->stateTimer == 0) {
             work->scaleX = 0x100;
             work->scaleY = 0x100;
@@ -365,14 +365,14 @@ s32 HumUpdate(HumWork* work) {
             }
 
             ClearBtlObjActionFlags(actor);
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 18:
+    case HUM_STATE_USE_ITEM:
         if (work->stateTimer == 23) {
             BgFxStartPotion(actor->x, actor->y, actor->z - ((actor->height - 48) << 8));
         }
@@ -403,21 +403,21 @@ s32 HumUpdate(HumWork* work) {
             }
 
             ClearBtlObjActionFlags(actor);
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 13:
+    case HUM_STATE_STOPPED:
         if (actor->badStatus != BAD_STATUS_STOP) {
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
             ClearBtlObjActionFlags(actor);
         }
 
         break;
-    case 3:
+    case HUM_STATE_DEFEATED:
         if (work->stateTimer == 0) {
             BeginBossDefeat(actor);
 
@@ -432,9 +432,9 @@ s32 HumUpdate(HumWork* work) {
             work->stateTimer = 0;
 
             if (work->flags & HUM_FLAG_BOSS_DEATH) {
-                work->state = 6;
+                work->state = HUM_STATE_BOSS_DEATH;
             } else {
-                work->state = 4;
+                work->state = HUM_STATE_DEFEAT_EFFECT;
             }
         } else {
             BtlMapFollowPosition(actor->x, actor->y, actor->z);
@@ -442,7 +442,7 @@ s32 HumUpdate(HumWork* work) {
         }
 
         break;
-    case 4:
+    case HUM_STATE_DEFEAT_EFFECT:
         if (work->stateTimer == 0) {
             BgFxStartHumDefeat(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -453,13 +453,13 @@ s32 HumUpdate(HumWork* work) {
 
         if (work->stateTimer > 150) {
             work->stateTimer = 0;
-            work->state = 5;
+            work->state = HUM_STATE_DROP_PRIZES;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 5:
+    case HUM_STATE_DROP_PRIZES:
         if (work->stateTimer == 0) {
             PrizeCardArg arg;
 
@@ -479,7 +479,7 @@ s32 HumUpdate(HumWork* work) {
         }
 
         break;
-    case 6:
+    case HUM_STATE_BOSS_DEATH:
         if (work->stateTimer == 0) {
             BgFxStartBossDeath(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -490,14 +490,14 @@ s32 HumUpdate(HumWork* work) {
 
         if (work->stateTimer > 150) {
             work->stateTimer = 0;
-            work->state = 7;
+            work->state = HUM_STATE_BOSS_DEATH_FLASH;
             BgFxStartBossDeathFlash();
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 7:
+    case HUM_STATE_BOSS_DEATH_FLASH:
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
 
         if (!BgFxIsActive()) {
@@ -517,21 +517,21 @@ s32 HumUpdate(HumWork* work) {
 
         work->stateTimer++;
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         work->flags &= ~HUM_FLAG_PASS_THROUGH;
 
         if (IsRikuReloadCardSelected()) {
             work->stateTimer = 0;
-            work->state = 17;
+            work->state = HUM_STATE_RELOAD;
         }
 
         break;
-    case 17:
+    case HUM_STATE_RELOAD:
         SetRikuReloadCharging();
 
         if (!IsRikuReloadCardSelected()) {
             work->stateTimer = 0;
-            work->state = 0;
+            work->state = HUM_STATE_IDLE;
         } else {
             work->stateTimer++;
         }
@@ -728,7 +728,7 @@ void HumDraw(HumWork* work) {
         affine = AllocObjAffine(0, sx, sy, 1);
     }
 
-    if (work->state == 17) {
+    if (work->state == HUM_STATE_RELOAD) {
         idx = (work->stateTimer >> 2) % 8;
 
         if (work->stateTimer & 1) {
@@ -1123,31 +1123,31 @@ s32 HumResolveCardMove(HumWork* work) {
 
     switch (id) {
     case 47:
-        work->state = 18;
+        work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 0;
         break;
     case 48:
-        work->state = 18;
+        work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 1;
         break;
     case 49:
-        work->state = 18;
+        work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 2;
         break;
     case 50:
-        work->state = 18;
+        work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 3;
         break;
     case 51:
-        work->state = 18;
+        work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 4;
         break;
     case 52:
-        work->state = 18;
+        work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 5;
         break;
     case 53:
-        work->state = 18;
+        work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 6;
         break;
     }

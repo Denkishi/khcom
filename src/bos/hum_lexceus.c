@@ -107,6 +107,16 @@ void task_hum_lexceus_0(LexceusWork* work) {
     TaskPoolInit(&work->tasks, 3);
 }
 
+enum HumLexceusState {
+    HUM_LEXCEUS_STATE_COMBO = 21,
+    HUM_LEXCEUS_STATE_COMBO_FINISH,
+    HUM_LEXCEUS_STATE_AXE_THROW,
+    HUM_LEXCEUS_STATE_AXE_RECALL,
+    HUM_LEXCEUS_STATE_ROCK_RAISE,
+    HUM_LEXCEUS_STATE_ROCK_SMASH,
+    HUM_LEXCEUS_STATE_QUAKE
+};
+
 u8 task_hum_lexceus_1(LexceusWork* work) {
     LexceusWork* w;
     BtlObj* act;
@@ -131,17 +141,17 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
-            work->base.state = 21;
+            work->base.state = HUM_LEXCEUS_STATE_COMBO;
             break;
         case 37:
-            work->base.state = 23;
+            work->base.state = HUM_LEXCEUS_STATE_AXE_THROW;
             break;
         case 38:
         case 39:
-            work->base.state = 27;
+            work->base.state = HUM_LEXCEUS_STATE_QUAKE;
             break;
         case 0xF85E3F85:
-            work->base.state = 25;
+            work->base.state = HUM_LEXCEUS_STATE_ROCK_RAISE;
             break;
         }
 
@@ -163,14 +173,14 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     w->hoverZ = 0;
 
     switch (work->base.state) {
-    case 12:
+    case HUM_STATE_ENTER:
         AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 17:
-    case 18:
+    case HUM_STATE_RELOAD:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (func_08081828()) {
@@ -179,7 +189,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             if (GetRandom() % 80 == 0) {
-                work->base.state = 8;
+                work->base.state = HUM_STATE_MOVE;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -188,7 +198,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         HumFaceTarget(&work->base, 10);
         work->base.stateTimer++;
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         w->hoverZ = -0x1000;
         work->base.targetX = x;
@@ -196,7 +206,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             if (HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 0x100)) {
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -205,7 +215,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         HumFaceTarget(&work->base, 10);
         work->base.stateTimer++;
         break;
-    case 1:
+    case HUM_STATE_HURT:
         act->vx = act->vy = 0;
         work->base.vz = 0;
 
@@ -216,13 +226,13 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         work->base.stateTimer = 6;
         act->invincibleTimer = 30;
         break;
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
-    case 25:
+    case HUM_LEXCEUS_STATE_ROCK_RAISE:
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_SND_286);
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
@@ -256,13 +266,13 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 26;
+            work->base.state = HUM_LEXCEUS_STATE_ROCK_SMASH;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 26:
+    case HUM_LEXCEUS_STATE_ROCK_SMASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
             gBtlWork->flags |= 0x100000;
@@ -277,10 +287,10 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         }
 
         work->base.stateTimer = 0;
-        work->base.state = 0;
+        work->base.state = HUM_STATE_IDLE;
         ClearBtlObjActionFlags(act);
         break;
-    case 23:
+    case HUM_LEXCEUS_STATE_AXE_THROW:
         if (work->base.stateTimer == 0) {
             w->hoverZ = 0;
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
@@ -309,14 +319,14 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         if (w->flags & LEXCEUS_FLAG_WEAPON_THROWN) {
             if (!IsTaskActiveNamed(w->task, sTaskDescHumLexTmh.name)) {
                 work->base.stateTimer = 0;
-                work->base.state = 24;
+                work->base.state = HUM_LEXCEUS_STATE_AXE_RECALL;
                 break;
             }
         }
 
         work->base.stateTimer++;
         break;
-    case 24:
+    case HUM_LEXCEUS_STATE_AXE_RECALL:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
         }
@@ -339,14 +349,14 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 21:
+    case HUM_LEXCEUS_STATE_COMBO:
         if (work->base.stateTimer == 0) {
             w->hoverZ = 0;
             AnimReset(&work->base.anim);
@@ -418,18 +428,18 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (w->flags & LEXCEUS_FLAG_COMBO_FOLLOWUP) {
             work->base.stateTimer = 0;
-            work->base.state = 22;
+            work->base.state = HUM_LEXCEUS_STATE_COMBO_FINISH;
             work->base.steps++;
         } else if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case HUM_LEXCEUS_STATE_COMBO_FINISH:
         if (work->base.stateTimer == 0) {
             w->hoverZ = 0;
             AnimReset(&work->base.anim);
@@ -475,13 +485,13 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             work->base.stateTimer = 0;
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 27:
+    case HUM_LEXCEUS_STATE_QUAKE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             w->hoverZ = 0;
@@ -556,7 +566,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             w->targetTilt = 0;
             w->tiltSteps = 420;
@@ -608,6 +618,11 @@ void task_hum_lexceus_3(LexceusWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum HumLexTmhState {
+    HUM_LEX_TMH_STATE_FLY,
+    HUM_LEX_TMH_STATE_BOUNCE
+};
+
 void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gRexeusPalette, 0x20);
     work->tiles = AllocObjTiles(0x400, gRexeusTmhAxTiles);
@@ -625,7 +640,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     work->z = args->z;
     work->targetX = gBtlWork->targetX + (GetRandom() % 65 - 32) * 256;
     work->targetY = gBtlWork->targetY + (GetRandom() % 33 - 16) * 256;
-    work->state = 0;
+    work->state = HUM_LEX_TMH_STATE_FLY;
     work->timer = 0;
     work->done = 0;
     work->vz = -0x980;
@@ -644,7 +659,7 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case HUM_LEX_TMH_STATE_FLY:
         work->x += (work->targetX - work->x) >> 4;
         work->y += (work->targetY - work->y) >> 4;
         work->z += work->vz;
@@ -653,17 +668,17 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
         if (ApplyAttackBox(0x146, work->x, work->y, work->z, 16, 12, 16)) {
             m4aSongNumStart(SONG_BTL_LEC_THRHIT);
             work->timer = 0;
-            work->state = 1;
+            work->state = HUM_LEX_TMH_STATE_BOUNCE;
         } else if (work->z >= 0) {
             m4aSongNumStart(SONG_BTL_LEC_THR);
             work->timer = 0;
-            work->state = 1;
+            work->state = HUM_LEX_TMH_STATE_BOUNCE;
         } else {
             work->timer++;
         }
 
         break;
-    case 1:
+    case HUM_LEX_TMH_STATE_BOUNCE:
         if (work->timer == 0) {
             work->vz = -work->vz >> 1;
 
@@ -821,6 +836,16 @@ void task_hum_lex_tmh0_3(LexTmh0Work* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum HumLexRockState {
+    HUM_LEX_ROCK_STATE_EMERGE,
+    HUM_LEX_ROCK_STATE_EMERGE_WAIT,
+    HUM_LEX_ROCK_STATE_LIFT,
+    HUM_LEX_ROCK_STATE_HOLD,
+    HUM_LEX_ROCK_STATE_SMASH_WAIT,
+    HUM_LEX_ROCK_STATE_SHATTER,
+    HUM_LEX_ROCK_STATE_SCATTER
+};
+
 void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     if (args->facingLeft != 0) {
         work->facingLeft = 1;
@@ -831,7 +856,7 @@ void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
-    work->state = 0;
+    work->state = HUM_LEX_ROCK_STATE_EMERGE;
     work->rockCount = 0;
     work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
@@ -849,7 +874,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case HUM_LEX_ROCK_STATE_EMERGE:
         work->rockCount = 1;
         work->palette2 = LoadObjPalette(gRexeusRock01Palette, 0x20);
         work->tiles2[0] = AllocObjTiles(0xDC0, gRexeusRock01Tiles);
@@ -857,14 +882,14 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         AnimStart(&work->anim[0], 0, 0);
         work->state++;
         break;
-    case 1:
+    case HUM_LEX_ROCK_STATE_EMERGE_WAIT:
         if (!AnimIsFinished(&work->anim[0])) {
             break;
         }
 
         work->state++;
         break;
-    case 2:
+    case HUM_LEX_ROCK_STATE_LIFT:
         ReleaseObjTiles(work->tiles2[0]);
         ReleaseObjPalette(work->palette2);
         work->rockCount = 1;
@@ -875,21 +900,21 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         work->z -= 0x4000;
         work->state++;
         break;
-    case 3:
+    case HUM_LEX_ROCK_STATE_HOLD:
         if (gBtlWork->flags & 0x100000) {
             m4aSongNumStart(SONG_BTL_LEC_JMPKUEIKU);
             work->state += 2;
         }
 
         break;
-    case 4:
+    case HUM_LEX_ROCK_STATE_SMASH_WAIT:
         if (!AnimIsFinished(&work->anim[0])) {
             break;
         }
 
         work->state++;
         break;
-    case 5:
+    case HUM_LEX_ROCK_STATE_SHATTER:
         work->rockCount = 12;
         ReleaseObjTiles(work->tiles2[0]);
 
@@ -921,7 +946,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         work->state++;
         work->timer = 0;
         break;
-    case 6:
+    case HUM_LEX_ROCK_STATE_SCATTER:
         if (!work->blinking) {
             MakeOpponentsHittable();
 

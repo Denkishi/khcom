@@ -25,10 +25,15 @@ TaskDesc gTaskDescHumMahluxiaFlw = {
     sizeof(MahluxiaFlwWork),
 };
 
+enum HumMahluxiaFlwState {
+    HUM_MAHLUXIA_FLW_STATE_TOSS,
+    HUM_MAHLUXIA_FLW_STATE_FLUTTER
+};
+
 void task_hum_mahluxia_flw_0(MahluxiaFlwWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gMaruxhaBtEffPalette, 0x20);
     work->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, 0x100);
-    work->state = 0;
+    work->state = HUM_MAHLUXIA_FLW_STATE_TOSS;
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
@@ -40,17 +45,17 @@ void task_hum_mahluxia_flw_0(MahluxiaFlwWork* work, VixenNdlArgs* args) {
 
 u8 task_hum_mahluxia_flw_1(MahluxiaFlwWork* work) {
     switch (work->state) {
-    case 0:
+    case HUM_MAHLUXIA_FLW_STATE_TOSS:
         work->x += work->vx;
         work->z += work->vz;
         work->vz += 17;
 
         if (work->vz > 0x1CC) {
-            work->state = 1;
+            work->state = HUM_MAHLUXIA_FLW_STATE_FLUTTER;
         }
 
         break;
-    case 1:
+    case HUM_MAHLUXIA_FLW_STATE_FLUTTER:
         work->x += work->vx;
         work->z += work->vz;
         work->vz -= 12;

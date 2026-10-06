@@ -120,6 +120,17 @@ void task_hum_hades_0(HadesWork* work) {
     work->base.stockMoves = sHumHadesStockMoves;
 }
 
+enum HumHadesState {
+    HUM_HADES_STATE_ENRAGE = 19,
+    HUM_HADES_STATE_FIRA_SHOT,
+    HUM_HADES_STATE_NAIL_OF_FLAME,
+    HUM_HADES_STATE_FIRAGA_BALL_START,
+    HUM_HADES_STATE_FIRAGA_BALL,
+    HUM_HADES_STATE_FLAME_SPREAD_START,
+    HUM_HADES_STATE_FLAME_SPREAD,
+    HUM_HADES_STATE_FLAME_SPREAD_END
+};
+
 u8 task_hum_hades_1(HadesWork* work) {
     HadesWork* w;
     BtlObj* act;
@@ -146,27 +157,27 @@ u8 task_hum_hades_1(HadesWork* work) {
         case 36:
         case 38:
             if (w->flags & HADES_FLAG_ANGRY) {
-                work->base.state = 21;
+                work->base.state = HUM_HADES_STATE_NAIL_OF_FLAME;
             } else {
-                work->base.state = 20;
+                work->base.state = HUM_HADES_STATE_FIRA_SHOT;
             }
 
             break;
         case 37:
         case 39:
             if (w->flags & HADES_FLAG_ANGRY) {
-                work->base.state = 24;
+                work->base.state = HUM_HADES_STATE_FLAME_SPREAD_START;
             } else {
-                work->base.state = 20;
+                work->base.state = HUM_HADES_STATE_FIRA_SHOT;
             }
 
             break;
         case 0xEE5B96E5:
         case 0xEEFB96EF:
             if (w->flags & HADES_FLAG_ANGRY) {
-                work->base.state = 22;
+                work->base.state = HUM_HADES_STATE_FIRAGA_BALL_START;
             } else {
-                work->base.state = 19;
+                work->base.state = HUM_HADES_STATE_ENRAGE;
             }
 
             break;
@@ -188,13 +199,13 @@ u8 task_hum_hades_1(HadesWork* work) {
     w->hoverZ = -0xA00;
 
     switch (work->base.state) {
-    case 12:
-    case 17:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_RELOAD:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 0:
-    case 8:
+    case HUM_STATE_IDLE:
+    case HUM_STATE_MOVE:
         t = -((u8)work->base.stateTimer * 2);
         work->base.targetX = x + gSineTable[t] * 90;
         work->base.targetY = y + (-gSineTable[t + 64]) * 45;
@@ -225,15 +236,15 @@ u8 task_hum_hades_1(HadesWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 1:
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_HURT:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         w->hoverZ = 0;
         AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
-    case 19:
+    case HUM_HADES_STATE_ENRAGE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
@@ -260,14 +271,14 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case HUM_HADES_STATE_FIRAGA_BALL_START:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
@@ -282,14 +293,14 @@ u8 task_hum_hades_1(HadesWork* work) {
         w->sub.z = act->z;
 
         if (AnimIsFinished(&w->sub.anim)) {
-            work->base.state = 23;
+            work->base.state = HUM_HADES_STATE_FIRAGA_BALL;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 23:
+    case HUM_HADES_STATE_FIRAGA_BALL:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 3, ANIM_FLAG_LOOP, w->base.sub->tiles);
 
@@ -326,14 +337,14 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (w->sub.x < (gBtlWork->xMin - 32) << 8 || w->sub.x > (gBtlWork->xMax + 32) << 8) {
             w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             HadesEndAttack(w);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 24:
+    case HUM_HADES_STATE_FLAME_SPREAD_START:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
 
@@ -345,14 +356,14 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
         if (AnimGetFrame(&work->base.anim) == 4) {
-            work->base.state = 25;
+            work->base.state = HUM_HADES_STATE_FLAME_SPREAD;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 25:
+    case HUM_HADES_STATE_FLAME_SPREAD:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 8, ANIM_FLAG_LOOP, w->base.tiles);
             w->scale = 10;
@@ -532,28 +543,28 @@ u8 task_hum_hades_1(HadesWork* work) {
 
         if ((w->flags & HADES_FLAG_FLAMES_ENDING) && work->base.steps <= 0) {
             w->flags &= ~HADES_FLAG_FLAMES_ACTIVE;
-            work->base.state = 26;
+            work->base.state = HUM_HADES_STATE_FLAME_SPREAD_END;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 26:
+    case HUM_HADES_STATE_FLAME_SPREAD_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 21:
+    case HUM_HADES_STATE_NAIL_OF_FLAME:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
@@ -598,14 +609,14 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 20:
+    case HUM_HADES_STATE_FIRA_SHOT:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
@@ -652,7 +663,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;

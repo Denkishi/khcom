@@ -108,6 +108,22 @@ void task_hum_laxene_0(LaxeneWork* work) {
     TaskPoolInit(&work->tasks, 12);
 }
 
+enum HumLaxeneState {
+    HUM_LAXENE_STATE_COMBO = 21,
+    HUM_LAXENE_STATE_THUNDER_WINDUP,
+    HUM_LAXENE_STATE_THUNDER,
+    HUM_LAXENE_STATE_THUNDER_END,
+    HUM_LAXENE_STATE_BEAM_WINDUP,
+    HUM_LAXENE_STATE_BEAM_CHARGE,
+    HUM_LAXENE_STATE_BEAM_AIM,
+    HUM_LAXENE_STATE_BEAM,
+    HUM_LAXENE_STATE_BEAM_END,
+    HUM_LAXENE_STATE_KNIFE_THROW,
+    HUM_LAXENE_STATE_THUNDER_COMBO,
+    HUM_LAXENE_STATE_WARP_SLASH,
+    HUM_LAXENE_STATE_WARP_THROW
+};
+
 u8 task_hum_laxene_1(LaxeneWork* work) {
     LaxeneWork* w;
     BtlObj* act;
@@ -128,26 +144,26 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
-            work->base.state = 21;
+            work->base.state = HUM_LAXENE_STATE_COMBO;
             break;
         case 37:
-            work->base.state = 30;
+            work->base.state = HUM_LAXENE_STATE_KNIFE_THROW;
             break;
         case 38:
         case 39:
             if (act->hp < (act->maxHp >> 1)) {
-                work->base.state = 31;
+                work->base.state = HUM_LAXENE_STATE_THUNDER_COMBO;
             } else {
-                work->base.state = 22;
+                work->base.state = HUM_LAXENE_STATE_THUNDER_WINDUP;
             }
 
             break;
         case 0xF49D2735:
-            work->base.state = 25;
+            work->base.state = HUM_LAXENE_STATE_BEAM_WINDUP;
             break;
         case 0xF35CFF3F:
             work->base.steps = GetRandom() % 4 + 4;
-            work->base.state = 32;
+            work->base.state = HUM_LAXENE_STATE_WARP_SLASH;
             m4aSongNumStart(SONG_SND_284);
             break;
         }
@@ -173,20 +189,20 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     }
 
     switch (work->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 17:
+    case HUM_STATE_RELOAD:
         AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         HumFaceTarget(&work->base, 5);
 
         if (func_08081828() == 0) {
             if (GetRandom() % 30 == 0) {
-                work->base.state = 8;
+                work->base.state = HUM_STATE_MOVE;
                 work->base.stateTimer = 0;
             } else {
                 work->base.stateTimer++;
@@ -194,7 +210,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         }
 
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             work->base.targetX = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
@@ -218,7 +234,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         work->base.steps--;
 
         if (work->base.steps <= 0) {
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             w->hoverZ = act->z;
             break;
@@ -234,15 +250,15 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 1:
-    case 3:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_HURT:
+    case HUM_STATE_DEFEATED:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         w->hoverZ = 0;
         AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         break;
-    case 25:
+    case HUM_LAXENE_STATE_BEAM_WINDUP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
             w->hoverZ = 0;
@@ -250,13 +266,13 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 26;
+            work->base.state = HUM_LAXENE_STATE_BEAM_CHARGE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 26:
+    case HUM_LAXENE_STATE_BEAM_CHARGE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
@@ -273,11 +289,11 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.stateTimer++;
         } else {
             work->base.stateTimer = 0;
-            work->base.state = 27;
+            work->base.state = HUM_LAXENE_STATE_BEAM_AIM;
         }
 
         break;
-    case 27:
+    case HUM_LAXENE_STATE_BEAM_AIM:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
         }
@@ -286,13 +302,13 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 28;
+            work->base.state = HUM_LAXENE_STATE_BEAM;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 28:
+    case HUM_LAXENE_STATE_BEAM:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 10, ANIM_FLAG_LOOP, w->base.tiles);
             m4aSongNumStart(SONG_EF_RAC_BEEM);
@@ -313,25 +329,25 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             m4aSongNumStop(SONG_EF_RAC_BEEM);
             work->base.stateTimer = 0;
-            work->base.state = 29;
+            work->base.state = HUM_LAXENE_STATE_BEAM_END;
         }
 
         break;
-    case 29:
+    case HUM_LAXENE_STATE_BEAM_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case HUM_LAXENE_STATE_THUNDER_WINDUP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
             w->hoverZ = 0;
@@ -340,13 +356,13 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 23;
+            work->base.state = HUM_LAXENE_STATE_THUNDER;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 23:
+    case HUM_LAXENE_STATE_THUNDER:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
@@ -361,25 +377,25 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.stateTimer++;
         } else {
             work->base.stateTimer = 0;
-            work->base.state = 24;
+            work->base.state = HUM_LAXENE_STATE_THUNDER_END;
         }
 
         break;
-    case 24:
+    case HUM_LAXENE_STATE_THUNDER_END:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 30:
+    case HUM_LAXENE_STATE_KNIFE_THROW:
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_SND_285);
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
@@ -414,14 +430,14 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (work->base.stateTimer > 120) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 21:
+    case HUM_LAXENE_STATE_COMBO:
         if (work->base.stateTimer == 0) {
             AnimReset(&work->base.anim);
 
@@ -506,18 +522,18 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.stateTimer = 0;
 
             if (work->base.steps <= 0 && (w->flags & LAXENE_FLAG_ATTACK_HIT)) {
-                work->base.state = 21;
+                work->base.state = HUM_LAXENE_STATE_COMBO;
                 work->base.steps++;
             } else {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
             }
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 31:
+    case HUM_LAXENE_STATE_THUNDER_COMBO:
         if (work->base.stateTimer == 0) {
             AnimReset(&work->base.anim);
 
@@ -616,21 +632,21 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             if (w->flags & LAXENE_FLAG_ATTACK_HIT) {
                 if (work->base.steps > 3) {
                     ClearBtlObjActionFlags(act);
-                    work->base.state = 0;
+                    work->base.state = HUM_STATE_IDLE;
                 } else {
-                    work->base.state = 31;
+                    work->base.state = HUM_LAXENE_STATE_THUNDER_COMBO;
                     work->base.steps++;
                 }
             } else {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
             }
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 32:
+    case HUM_LAXENE_STATE_WARP_SLASH:
         if (work->base.stateTimer == 0) {
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
 
@@ -736,20 +752,20 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
             if (work->base.steps > 0) {
                 if (GetRandom() % 6 != 0) {
-                    work->base.state = 32;
+                    work->base.state = HUM_LAXENE_STATE_WARP_SLASH;
                 } else {
-                    work->base.state = 33;
+                    work->base.state = HUM_LAXENE_STATE_WARP_THROW;
                 }
             } else {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
             }
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 33:
+    case HUM_LAXENE_STATE_WARP_THROW:
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_SND_285);
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
@@ -799,11 +815,11 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
             if (work->base.steps <= 0) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 0;
+                work->base.state = HUM_STATE_IDLE;
             } else if (GetRandom() & 10) {
-                work->base.state = 32;
+                work->base.state = HUM_LAXENE_STATE_WARP_SLASH;
             } else {
-                work->base.state = 33;
+                work->base.state = HUM_LAXENE_STATE_WARP_THROW;
             }
         } else {
             work->base.stateTimer++;
@@ -838,6 +854,11 @@ void task_hum_laxene_3(LaxeneWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum HumLaxeneKnfState {
+    HUM_LAXENE_KNF_STATE_FLY,
+    HUM_LAXENE_KNF_STATE_STUCK
+};
+
 void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gLaxinePalette, 0x20);
     work->tiles = LoadObjTiles(gLaxineKnifeTiles, 0x2C0);
@@ -855,7 +876,7 @@ void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
     work->z = args->z;
     work->timer = 0;
     work->onScreen = 1;
-    work->state = 0;
+    work->state = HUM_LAXENE_KNF_STATE_FLY;
     work->playerPrevX = gBtlWork->actor->x;
     work->playerPrevY = gBtlWork->actor->y;
     work->playerPrevZ = gBtlWork->actor->z;
@@ -875,11 +896,11 @@ u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case HUM_LAXENE_KNF_STATE_FLY:
         if (ApplyAttackBox(0x133, work->x, work->y, work->z, 1, 6, 2)) {
             m4aSongNumStart(SONG_BTL_RAC_HIT);
             work->timer = 0;
-            work->state = 1;
+            work->state = HUM_LAXENE_KNF_STATE_STUCK;
             BgFxStartThunderHit(work->x, work->y, work->z + 0x1000);
         } else {
             if (work->facingLeft) {
@@ -892,7 +913,7 @@ u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
         }
 
         break;
-    case 1:
+    case HUM_LAXENE_KNF_STATE_STUCK:
         if ((s16)work->timer == 0) {
             AnimStart(&work->anim, 1, 0);
         }

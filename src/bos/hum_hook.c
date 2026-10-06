@@ -90,6 +90,20 @@ static TaskDesc sTaskDescHumHookBomb = {
     sizeof(HookBombWork),
 };
 
+enum HumHookState {
+    HUM_HOOK_STATE_LUNGE = 19,
+    HUM_HOOK_STATE_SLASH,
+    HUM_HOOK_STATE_DASH_SLASH,
+    HUM_HOOK_STATE_JUMP_CROUCH,
+    HUM_HOOK_STATE_JUMP_AIR,
+    HUM_HOOK_STATE_JUMP_LAND,
+    HUM_HOOK_STATE_BOMB_THROW,
+    HUM_HOOK_STATE_FLURRY,
+    HUM_HOOK_STATE_FLURRY_FINISH,
+    HUM_HOOK_STATE_BOMB_SCATTER,
+    HUM_HOOK_STATE_BOMB_BARRAGE
+};
+
 void HookJumpOffset(CloudWork* work, s16 distance, s32 speed) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
@@ -101,7 +115,7 @@ void HookJumpOffset(CloudWork* work, s16 distance, s32 speed) {
     }
 
     w->targetY = act->y;
-    w->state = 0x16;
+    w->state = HUM_HOOK_STATE_JUMP_CROUCH;
     w->stateTimer = 0;
     work->speed = -speed;
 }
@@ -109,7 +123,7 @@ void HookJumpOffset(CloudWork* work, s16 distance, s32 speed) {
 void HookJumpTo(CloudWork* work, s32 x, s32 y) {
     work->base.targetX = x;
     work->base.targetY = y;
-    work->base.state = 0x16;
+    work->base.state = HUM_HOOK_STATE_JUMP_CROUCH;
     work->base.stateTimer = 0;
     work->speed = -0x680;
 }
@@ -184,22 +198,22 @@ u8 task_hum_hook_1(HookWork* work) {
 
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
-            work->base.state = 20;
+            work->base.state = HUM_HOOK_STATE_SLASH;
             break;
         case 37:
-            work->base.state = 21;
+            work->base.state = HUM_HOOK_STATE_DASH_SLASH;
             break;
         case 38:
-            work->base.state = 19;
+            work->base.state = HUM_HOOK_STATE_LUNGE;
             break;
         case 39:
-            work->base.state = 25;
+            work->base.state = HUM_HOOK_STATE_BOMB_THROW;
             break;
         case 0xED1AF6BD:
-            work->base.state = 26;
+            work->base.state = HUM_HOOK_STATE_FLURRY;
             break;
         case 0xED1B1EC7:
-            work->base.state = 29;
+            work->base.state = HUM_HOOK_STATE_BOMB_BARRAGE;
             work->base.steps = 0;
             break;
         }
@@ -214,11 +228,11 @@ u8 task_hum_hook_1(HookWork* work) {
     }
 
     switch (work->base.state) {
-    case 12:
-    case 18:
+    case HUM_STATE_ENTER:
+    case HUM_STATE_USE_ITEM:
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
-    case 17: {
+    case HUM_STATE_RELOAD: {
         s32 d;
 
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
@@ -243,7 +257,7 @@ u8 task_hum_hook_1(HookWork* work) {
 
         break;
     }
-    case 0:
+    case HUM_STATE_IDLE:
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
         if (func_08081828()) {
@@ -251,7 +265,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if (GetRandom() % 150 == 0) {
-            work->base.state = 8;
+            work->base.state = HUM_STATE_MOVE;
             work->base.stateTimer = 0;
             break;
         }
@@ -272,13 +286,13 @@ u8 task_hum_hook_1(HookWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 8:
+    case HUM_STATE_MOVE:
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
 
         if (HumMoveToward(&work->base, work->base.targetX, y, 358)) {
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
@@ -293,17 +307,17 @@ u8 task_hum_hook_1(HookWork* work) {
 
         work->base.stateTimer++;
         break;
-    case 3:
+    case HUM_STATE_DEFEATED:
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         gBtlWork->rotation = 0;
         break;
-    case 1:
-    case 9:
-    case 11:
-    case 14:
+    case HUM_STATE_HURT:
+    case HUM_STATE_CARD_BROKEN:
+    case HUM_STATE_STUNNED:
+    case HUM_STATE_GRAVITY:
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
-    case 2:
+    case HUM_STATE_HURT_RECOVER:
         if (func_08081828() == 0) {
             break;
         }
@@ -319,11 +333,11 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         work->base.targetY = (gBtlWork->yMin + gBtlWork->yMax) << 7;
-        work->base.state = 23;
+        work->base.state = HUM_HOOK_STATE_JUMP_AIR;
         work->base.stateTimer = 0;
         work->base.vz = -0x680;
         break;
-    case 26:
+    case HUM_HOOK_STATE_FLURRY:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 11, ANIM_FLAG_LOOP, w->base.tiles);
         }
@@ -359,14 +373,14 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if (work->base.stateTimer > 120) {
-            work->base.state = 27;
+            work->base.state = HUM_HOOK_STATE_FLURRY_FINISH;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 27:
+    case HUM_HOOK_STATE_FLURRY_FINISH:
         BtlMapFollowPosition(act->x, act->y, act->z);
 
         if (work->base.stateTimer == 0) {
@@ -396,14 +410,14 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 28;
+            work->base.state = HUM_HOOK_STATE_BOMB_SCATTER;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 28:
+    case HUM_HOOK_STATE_BOMB_SCATTER:
         BtlMapFollowPosition(act->x, act->y, act->z);
 
         if (work->base.stateTimer == 0) {
@@ -452,14 +466,14 @@ u8 task_hum_hook_1(HookWork* work) {
             !IsTaskActiveNamed(w->bombTask2, sTaskDescHumHookBomb.name) &&
             !IsTaskActiveNamed(w->bombTask3, sTaskDescHumHookBomb.name)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 25:
+    case HUM_HOOK_STATE_BOMB_THROW:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
             w->bombTask = NULL;
@@ -500,14 +514,14 @@ u8 task_hum_hook_1(HookWork* work) {
         if ((w->flags & HOOK_FLAG_BOMB_THROWN) &&
             !IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 29:
+    case HUM_HOOK_STATE_BOMB_BARRAGE:
         if (work->base.stateTimer == 0) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
@@ -543,12 +557,12 @@ u8 task_hum_hook_1(HookWork* work) {
             if (work->base.steps <= 4) {
                 work->base.stateTimer = 0;
                 work->base.steps++;
-                work->base.state = 29;
+                work->base.state = HUM_HOOK_STATE_BOMB_BARRAGE;
             } else {
                 if (!IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name)) {
                     work->base.stateTimer = 0;
                     ClearBtlObjActionFlags(act);
-                    work->base.state = 0;
+                    work->base.state = HUM_STATE_IDLE;
                 }
             }
         } else {
@@ -556,7 +570,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         break;
-    case 20:
+    case HUM_HOOK_STATE_SLASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_HO_VOICE00);
@@ -582,14 +596,14 @@ u8 task_hum_hook_1(HookWork* work) {
             }
         } else if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
             break;
         }
 
         work->base.stateTimer++;
         break;
-    case 19:
+    case HUM_HOOK_STATE_LUNGE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_HO_VOICE01);
@@ -621,14 +635,14 @@ u8 task_hum_hook_1(HookWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 21:
+    case HUM_HOOK_STATE_DASH_SLASH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
         }
@@ -666,28 +680,28 @@ u8 task_hum_hook_1(HookWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case HUM_HOOK_STATE_JUMP_CROUCH:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 23;
+            work->base.state = HUM_HOOK_STATE_JUMP_AIR;
             work->base.vz = w->speed;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 23: {
+    case HUM_HOOK_STATE_JUMP_AIR: {
         s32 d;
 
         act->x += (work->base.targetX - act->x) >> 4;
@@ -708,7 +722,7 @@ u8 task_hum_hook_1(HookWork* work) {
 
         if (act->z >= 0) {
             work->base.stateTimer = 0;
-            work->base.state = 24;
+            work->base.state = HUM_HOOK_STATE_JUMP_LAND;
         } else {
             HumFaceTarget(&work->base, 1);
             work->base.stateTimer++;
@@ -716,14 +730,14 @@ u8 task_hum_hook_1(HookWork* work) {
 
         break;
     }
-    case 24:
+    case HUM_HOOK_STATE_JUMP_LAND:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 0;
+            work->base.state = HUM_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
@@ -864,6 +878,11 @@ void task_hum_hook_moon_3(HookMoonWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum HumHookBombState {
+    HUM_HOOK_BOMB_STATE_BOUNCE,
+    HUM_HOOK_BOMB_STATE_EXPLODE
+};
+
 void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
     if (args->facingLeft != 0) {
         work->facingLeft = 1;
@@ -889,19 +908,19 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
         work->angle = GetAngle(work->x, work->y,
             gBtlWork->targetX, gBtlWork->targetY);
         work->maxBounces = GetRandom() % 3 + 1;
-        work->state = 0;
+        work->state = HUM_HOOK_BOMB_STATE_BOUNCE;
         break;
     case 2:
         work->angle = GetAngle(work->x, work->y,
             gBtlWork->targetX, gBtlWork->targetY);
         work->maxBounces = 0;
-        work->state = 1;
+        work->state = HUM_HOOK_BOMB_STATE_EXPLODE;
         break;
     case 1:
     default:
         work->angle = GetRandom();
         work->maxBounces = GetRandom() % 5 + 4;
-        work->state = 0;
+        work->state = HUM_HOOK_BOMB_STATE_BOUNCE;
         break;
     }
 
@@ -916,7 +935,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case HUM_HOOK_BOMB_STATE_BOUNCE:
         work->x += gSineTable[work->angle] * work->speed >> 8;
         work->y += -gSineTable[work->angle + 64] * work->speed >> 8;
         work->z += work->vz;
@@ -927,7 +946,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
 
             if (work->bounceCount >= work->maxBounces) {
                 work->timer = 0;
-                work->state = 1;
+                work->state = HUM_HOOK_BOMB_STATE_EXPLODE;
                 break;
             }
 
@@ -945,7 +964,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
 
         if (TestAttackBox(work->x, work->y, work->z, 2, 2, 2)) {
             work->timer = 0;
-            work->state = 1;
+            work->state = HUM_HOOK_BOMB_STATE_EXPLODE;
             break;
         }
 

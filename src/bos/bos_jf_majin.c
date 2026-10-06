@@ -246,18 +246,36 @@ void task_bos_jf_majin_3(JfMajinWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum BosJfPillar {
+    BOS_JF_PILLAR_LEFT,
+    BOS_JF_PILLAR_MIDDLE,
+    BOS_JF_PILLAR_RIGHT
+};
+
+enum BosJfPillarDistance {
+    BOS_JF_PILLAR_NEAR,
+    BOS_JF_PILLAR_MIDWAY,
+    BOS_JF_PILLAR_FAR
+};
+
+enum BosJfRockHit {
+    BOS_JF_ROCK_HIT_NONE,
+    BOS_JF_ROCK_HIT_PILLAR,
+    BOS_JF_ROCK_HIT_OUT_OF_BOUNDS
+};
+
 s32 BosJfGetActorPillar() {
     s32 x = gBtlWork->actor->x;
 
     if (x < 0x1EA00) {
-        return 0;
+        return BOS_JF_PILLAR_LEFT;
     }
 
     if (x < 0x22200) {
-        return 1;
+        return BOS_JF_PILLAR_MIDDLE;
     }
 
-    return 2;
+    return BOS_JF_PILLAR_RIGHT;
 }
 
 s32 BosJfMajinGetActorPillarDistance(JfMajinWork* work) {
@@ -267,27 +285,27 @@ s32 BosJfMajinGetActorPillarDistance(JfMajinWork* work) {
         x = gBtlWork->actor->x;
 
         if (x < 0x1EA00) {
-            return 2;
+            return BOS_JF_PILLAR_FAR;
         }
 
         if (x < 0x22200) {
-            return 1;
+            return BOS_JF_PILLAR_MIDWAY;
         }
 
-        return 0;
+        return BOS_JF_PILLAR_NEAR;
     }
 
     x = gBtlWork->actor->x;
 
     if (x > 0x22200) {
-        return 2;
+        return BOS_JF_PILLAR_FAR;
     }
 
     if (x > 0x1EA00) {
-        return 1;
+        return BOS_JF_PILLAR_MIDWAY;
     }
 
-    return 0;
+    return BOS_JF_PILLAR_NEAR;
 }
 
 void BosJfMajinUpdateIdle(JfMajinWork* work) {
@@ -1355,9 +1373,9 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
 
         work->stepTimer = 0;
         actorPillar = BosJfGetActorPillar();
-        n += (s8)BosJfStepPillarLevel(&work->leftLevel, work->leftTarget, actorPillar, 0);
-        n += (s8)BosJfStepPillarLevel(&work->middleLevel, work->middleTarget, actorPillar, 1);
-        n += (s8)BosJfStepPillarLevel(&work->rightLevel, work->rightTarget, actorPillar, 2);
+        n += (s8)BosJfStepPillarLevel(&work->leftLevel, work->leftTarget, actorPillar, BOS_JF_PILLAR_LEFT);
+        n += (s8)BosJfStepPillarLevel(&work->middleLevel, work->middleTarget, actorPillar, BOS_JF_PILLAR_MIDDLE);
+        n += (s8)BosJfStepPillarLevel(&work->rightLevel, work->rightTarget, actorPillar, BOS_JF_PILLAR_RIGHT);
 
         if (n == 3) {
             if (sub->hp < sub->maxHp / 2) {
@@ -1454,7 +1472,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
             dist = BosJfMajinGetActorPillarDistance(work);
 
             switch (dist) {
-            case 0:
+            case BOS_JF_PILLAR_NEAR:
                 RequestEnemyCardUse(sub);
                 roll = (s16)(GetRandom() % 100);
 
@@ -1470,11 +1488,11 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                 }
 
                 break;
-            case 1:
+            case BOS_JF_PILLAR_MIDWAY:
                 RequestEnemyCardUse(sub);
                 work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 break;
-            case 2:
+            case BOS_JF_PILLAR_FAR:
                 if (GetRandom() % 100 <= 49) {
                     work->jf->state = BOS_JF_STATE_SWITCH_SIDE;
                 } else {
@@ -1499,7 +1517,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
             dist = BosJfMajinGetActorPillarDistance(work);
 
             switch (dist) {
-            case 0:
+            case BOS_JF_PILLAR_NEAR:
                 RequestEnemyCardUse(sub);
 
                 if (GetRandom() % 100 <= 59) {
@@ -1511,7 +1529,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                 }
 
                 break;
-            case 1:
+            case BOS_JF_PILLAR_MIDWAY:
                 if (GetRandom() % 100 <= 79) {
                     RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
@@ -1521,7 +1539,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                 }
 
                 break;
-            case 2:
+            case BOS_JF_PILLAR_FAR:
                 if (GetRandom() % 100 <= 69) {
                     work->jf->state = BOS_JF_STATE_SWITCH_SIDE;
                 } else {
@@ -1759,13 +1777,13 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         }
 
         switch ((s8)BosJfRockTestPillars(work->body.x, work->body.y, work->body.z - 0x2000)) {
-        case 1:
+        case BOS_JF_ROCK_HIT_PILLAR:
             m4aSongNumStart(SONG_EF_FIRE01);
             BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
             work->shadowVisible = FALSE;
             work->state = BOS_JF_ROCK_STATE_EXPLODE;
             break;
-        case 2:
+        case BOS_JF_ROCK_HIT_OUT_OF_BOUNDS:
             work->shadowVisible = FALSE;
             work->state = BOS_JF_ROCK_STATE_OUT_OF_BOUNDS;
             break;
@@ -1868,22 +1886,22 @@ u8 BosJfRockTestPillars(s32 x, s32 y, s32 z) {
     s32 zl = z - 0x1C00;
 
     if (zh >= leftZ && hi > 0x1B200 && lo < 0x1EA00) {
-        return 1;
+        return BOS_JF_ROCK_HIT_PILLAR;
     }
 
     if (zh >= middleZ && hi > 0x1EA00 && lo < 0x22200) {
-        return 1;
+        return BOS_JF_ROCK_HIT_PILLAR;
     }
 
     if (zh >= rightZ && hi > 0x22200 && lo < 0x25A00) {
-        return 1;
+        return BOS_JF_ROCK_HIT_PILLAR;
     }
 
     if (zl > 0 || lo > 0x2CA00 || hi < 0x14200) {
-        return 2;
+        return BOS_JF_ROCK_HIT_OUT_OF_BOUNDS;
     }
 
-    return 0;
+    return BOS_JF_ROCK_HIT_NONE;
 }
 
 void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {

@@ -10,11 +10,11 @@ extern TextChar gJiminyChooseEntryText[];
 void JiminyFreeRows();
 u8 JiminyHandleListInput();
 void JiminyReloadPlainRows();
-void JiminyOpenList(s16 a, s16 b, const u16* const* c, const u16* d, const u16* e, s16 f, s16 g, s16 h);
+void JiminyOpenList(s16 visibleRows, s16 itemCount, const u16* const* itemTexts, const u16* itemFlags, const u16* itemChildren, s16 listX, s16 listY, s16 rowHeight);
 
 void JiminyDetailUpdate();
-void JiminyOpenPlainList(s16 a, s16 b, const u16* const* c, s16 d, s16 e, s16 f);
-void SplitThreeDecimalDigits(s16 a, u8* out);
+void JiminyOpenPlainList(s16 visibleRows, s16 itemCount, const u16* const* itemTexts, s16 listX, s16 listY, s16 rowHeight);
+void SplitThreeDecimalDigits(s16 value, u8* out);
 
 void mode_jiminy_1();
 

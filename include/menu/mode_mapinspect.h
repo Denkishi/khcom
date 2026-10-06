@@ -5,20 +5,20 @@
 #include "ms_types.h"
 extern u16 gMapInspectNoticeText[];
 
-s16 GetMapInspectTabStart(s16 a);
+s16 GetMapInspectTabStart(s16 tab);
 s16 GetMapInspectSelectedIndex();
 void MapInspectSelectFirstValue();
-s16 GetMapInspectTabCount(s16 a);
+s16 GetMapInspectTabCount(s16 tab);
 u8 MapInspectCanDelete();
-s16 GetMapInspectValueIndex(s16 a, s16 b);
+s16 GetMapInspectValueIndex(s16 col, s16 row);
 s16 GetMapInspectSelectedValue();
 u16 MapInspectReadMenuKeys();
-void MapInspectSelectValueInColumn(MapCardInventoryEntry* p, u16 row);
+void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 row);
 void MapInspectDeleteCard();
-u8 MapCardEntryIsEmpty(MapCardInventoryEntry* p);
-u8 MapCardEntrySelectedValueIsEmpty(MapCardInventoryEntry* p);
-void MapInspectSelectNextValue(MapCardInventoryEntry* p);
-void MapInspectRemoveEntry(MapCardInventoryEntry* p);
+u8 MapCardEntryIsEmpty(MapCardInventoryEntry* entry);
+u8 MapCardEntrySelectedValueIsEmpty(MapCardInventoryEntry* entry);
+void MapInspectSelectNextValue(MapCardInventoryEntry* entry);
+void MapInspectRemoveEntry(MapCardInventoryEntry* entry);
 void MapInspectHandleGridInput();
 void MapInspectHandleTabInput();
 void MapInspectHandleValueInput();
@@ -27,7 +27,7 @@ void MapInspectHandleNoticeInput();
 void MapInspectDraw();
 void MapInspectBuildInventory();
 struct MapCardInventoryEntry* GetMapInspectSelectedEntry();
-void MapInspectDrawTab(s16 a);
+void MapInspectDrawTab(s16 tab);
 void MapInspectDrawCardTotal();
 void MapInspectDrawCategoryCounts();
 void MapInspectDrawValueCounts();

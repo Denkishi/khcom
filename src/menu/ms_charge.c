@@ -143,11 +143,11 @@ static s32 sMsChargeCursorX;
 static s32 sMsChargeCursorY;
 static u8 sMsChargeBackToTop;
 
-s16 GetMsChargeTabStart(s16 a) {
+s16 GetMsChargeTabStart(s16 tab) {
     s16 v;
 
-    if (a <= 3) {
-        v = sMsChargeCategoryStart[a];
+    if (tab <= 3) {
+        v = sMsChargeCategoryStart[tab];
     } else {
         v = 0;
     }
@@ -155,12 +155,12 @@ s16 GetMsChargeTabStart(s16 a) {
     return v;
 }
 
-s16 GetMsChargeTabCount(s16 a) {
+s16 GetMsChargeTabCount(s16 tab) {
     s16 v;
     s16 i;
 
-    if (a <= 3) {
-        v = sMsChargeCategoryEntryCount[a];
+    if (tab <= 3) {
+        v = sMsChargeCategoryEntryCount[tab];
     } else {
         v = 0;
 
@@ -290,8 +290,8 @@ void MsChargeLoadSelectedCard() {
     }
 }
 
-s16 GetMsChargeValueIndex(s16 a, s16 b) {
-    return b + a * 5;
+s16 GetMsChargeValueIndex(s16 col, s16 row) {
+    return row + col * 5;
 }
 
 s16 GetMsChargeSelectedValue() {
@@ -409,11 +409,11 @@ void MsChargeDrawValueCounts() {
     }
 }
 
-void MsChargeDrawTab(s16 a) {
+void MsChargeDrawTab(s16 tab) {
     s16 t;
     void* base;
 
-    t = 4 - a;
+    t = 4 - tab;
     base = GetBgScreenBase(0);
 #ifdef VERSION_EU
     RequestTilemapRectCopy(sMsChargeTabTilemapsByLanguage[gLanguage], base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);

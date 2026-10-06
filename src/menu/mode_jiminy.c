@@ -1202,16 +1202,16 @@ void JiminyFreeRows() {
     }
 }
 
-void JiminyInitCursor(s16 a, s16 b, s16 c) {
+void JiminyInitCursor(s16 x, s16 y, s16 rowHeight) {
     sJiminyWork->moveDelay = 0;
-    sJiminyWork->x4 = a << 8;
-    sJiminyWork->y5 = (b + sJiminyWork->cursorRow * c) << 8;
+    sJiminyWork->x4 = x << 8;
+    sJiminyWork->y5 = (y + sJiminyWork->cursorRow * rowHeight) << 8;
 }
 
-void JiminyUpdateCursor(s16 a, s16 b, s16 c) {
+void JiminyUpdateCursor(s16 x, s16 y, s16 rowHeight) {
     s32 v;
 
-    v = (b + sJiminyWork->cursorRow * c) << 8;
+    v = (y + sJiminyWork->cursorRow * rowHeight) << 8;
     ApproachValueHalf(&sJiminyWork->y5, v);
 
     if (sJiminyWork->moveDelay > 0) {
@@ -1219,11 +1219,11 @@ void JiminyUpdateCursor(s16 a, s16 b, s16 c) {
     }
 }
 
-u16 GetJiminyTextLength(const u16* p) {
+u16 GetJiminyTextLength(const u16* text) {
     s32 n;
     const u16* q;
 
-    q = p;
+    q = text;
     n = 0;
 
     while (1) {
@@ -1315,10 +1315,10 @@ s32 GetJiminyEntryState(s32 idx) {
     return 0;
 }
 
-void JiminyLoadHiddenRow(s32 a, const u16* const* b) {
+void JiminyLoadHiddenRow(s32 row, const u16* const* itemTexts) {
     s16 t;
 
-    t = GetJiminyTextLength(b[a]);
+    t = GetJiminyTextLength(itemTexts[row]);
     t--;
 
     if (t < 0) {
@@ -1329,42 +1329,42 @@ void JiminyLoadHiddenRow(s32 a, const u16* const* b) {
         t = 12;
     }
 
-    sJiminyWork->textSlotCounts[a] = LoadTextSlots(gJiminyHiddenTexts[t], sJiminyWork->lines[a].textSlots);
+    sJiminyWork->textSlotCounts[row] = LoadTextSlots(gJiminyHiddenTexts[t], sJiminyWork->lines[row].textSlots);
 }
 
-void JiminyLoadRows(s16 a, s16 b, const u16* const* d, const u16* c, const u16* e, s16 f, s16 g, s16 h) {
+void JiminyLoadRows(s16 visibleRows, s16 itemCount, const u16* const* itemTexts, const u16* itemFlags, const u16* itemChildren, s16 listX, s16 listY, s16 rowHeight) {
     s16 n;
     s32 i;
 
-    n = a > b ? b : a;
+    n = visibleRows > itemCount ? itemCount : visibleRows;
 
-    if (c == NULL) {
+    if (itemFlags == NULL) {
         for (i = 0; i < n; i++) {
-            if (e != NULL) {
-                sJiminyWork->rowStates[i] = GetJiminyEntryState(e[i]);
+            if (itemChildren != NULL) {
+                sJiminyWork->rowStates[i] = GetJiminyEntryState(itemChildren[i]);
 
                 if (sJiminyWork->rowStates[i] == 3) {
-                    JiminyLoadHiddenRow(i, d);
+                    JiminyLoadHiddenRow(i, itemTexts);
                 } else {
                     sJiminyWork->textSlotCounts[i] =
-                        LoadTextSlots(d[i], sJiminyWork->lines[i].textSlots);
+                        LoadTextSlots(itemTexts[i], sJiminyWork->lines[i].textSlots);
                 }
             } else {
                 sJiminyWork->textSlotCounts[i] =
-                    LoadTextSlots(d[i], sJiminyWork->lines[i].textSlots);
+                    LoadTextSlots(itemTexts[i], sJiminyWork->lines[i].textSlots);
             }
         }
     } else {
         for (i = 0; i < n; i++) {
-            if (IsJiminyFlagSet(c[i])) {
+            if (IsJiminyFlagSet(itemFlags[i])) {
                 sJiminyWork->textSlotCounts[i] =
-                    LoadTextSlots(d[i], sJiminyWork->lines[i].textSlots);
+                    LoadTextSlots(itemTexts[i], sJiminyWork->lines[i].textSlots);
 
-                if (IsJiminyFlagNew(c[i])) {
+                if (IsJiminyFlagNew(itemFlags[i])) {
                     sJiminyWork->rowStates[i] = 1;
                 }
             } else {
-                JiminyLoadHiddenRow(i, d);
+                JiminyLoadHiddenRow(i, itemTexts);
             }
         }
     }
@@ -1397,31 +1397,31 @@ void JiminyReloadPlainRows() {
         sJiminyWork->listX, sJiminyWork->listY, sJiminyWork->rowHeight);
 }
 
-void JiminyOpenList(s16 a, s16 b, const u16* const* c, const u16* d, const u16* e, s16 f, s16 g, s16 h) {
+void JiminyOpenList(s16 visibleRows, s16 itemCount, const u16* const* itemTexts, const u16* itemFlags, const u16* itemChildren, s16 listX, s16 listY, s16 rowHeight) {
 #ifdef VERSION_EU
     s32 i;
 #endif
-    sJiminyWork->listX = f;
-    sJiminyWork->listY = g;
-    sJiminyWork->rowHeight = h;
-    sJiminyWork->itemCount = b;
-    sJiminyWork->visibleRows = a;
+    sJiminyWork->listX = listX;
+    sJiminyWork->listY = listY;
+    sJiminyWork->rowHeight = rowHeight;
+    sJiminyWork->itemCount = itemCount;
+    sJiminyWork->visibleRows = visibleRows;
 
 #ifdef VERSION_EU
-    for (i = 0; i < b; i++) {
-        sJiminyWork->resolvedTexts[i] = GetLocalizedString(c[i]);
+    for (i = 0; i < itemCount; i++) {
+        sJiminyWork->resolvedTexts[i] = GetLocalizedString(itemTexts[i]);
     }
 
     sJiminyWork->itemTexts = sJiminyWork->resolvedTexts;
 #else
-    sJiminyWork->itemTexts = c;
+    sJiminyWork->itemTexts = itemTexts;
 #endif
-    sJiminyWork->itemFlags = d;
-    sJiminyWork->itemChildren = e;
-    sJiminyWork->x = f + 56;
-    sJiminyWork->x2 = f + 56;
-    sJiminyWork->y = g - 10;
-    sJiminyWork->y2 = g + h * (a - 1) + 12;
+    sJiminyWork->itemFlags = itemFlags;
+    sJiminyWork->itemChildren = itemChildren;
+    sJiminyWork->x = listX + 56;
+    sJiminyWork->x2 = listX + 56;
+    sJiminyWork->y = listY - 10;
+    sJiminyWork->y2 = listY + rowHeight * (visibleRows - 1) + 12;
     sJiminyWork->flags = (sJiminyWork->flags & ~(JIMINY_FLAG_SHOW_TITLE | JIMINY_FLAG_SCROLL_UP | JIMINY_FLAG_SCROLL_DOWN)) | JIMINY_FLAG_SHOW_CURSOR;
     sJiminyWork->shownChars = 0;
     JiminyInitCursor(sJiminyWork->listX - 24, sJiminyWork->listY - 4,
@@ -2033,17 +2033,17 @@ void mode_jiminy_1() {
     sJiminyWork->frame++;
 }
 
-void JiminyOpenPlainList(s16 a, s16 b, const u16* const* c, s16 d, s16 e, s16 f) {
-    sJiminyWork->listX = d;
-    sJiminyWork->listY = e;
-    sJiminyWork->rowHeight = f;
-    sJiminyWork->itemCount = b;
-    sJiminyWork->visibleRows = a;
-    sJiminyWork->itemTexts = c;
-    sJiminyWork->x = d + 0x38;
-    sJiminyWork->x2 = d + 0x38;
-    sJiminyWork->y = e - 10;
-    sJiminyWork->y2 = e + f * (a - 1) + 12;
+void JiminyOpenPlainList(s16 visibleRows, s16 itemCount, const u16* const* itemTexts, s16 listX, s16 listY, s16 rowHeight) {
+    sJiminyWork->listX = listX;
+    sJiminyWork->listY = listY;
+    sJiminyWork->rowHeight = rowHeight;
+    sJiminyWork->itemCount = itemCount;
+    sJiminyWork->visibleRows = visibleRows;
+    sJiminyWork->itemTexts = itemTexts;
+    sJiminyWork->x = listX + 0x38;
+    sJiminyWork->x2 = listX + 0x38;
+    sJiminyWork->y = listY - 10;
+    sJiminyWork->y2 = listY + rowHeight * (visibleRows - 1) + 12;
     sJiminyWork->cursor = 0;
     sJiminyWork->cursorRow = 0;
     sJiminyWork->moveDelay = 0;
@@ -2051,10 +2051,10 @@ void JiminyOpenPlainList(s16 a, s16 b, const u16* const* c, s16 d, s16 e, s16 f)
     JiminyReloadPlainRows();
 }
 
-void SplitThreeDecimalDigits(s16 a, u8* out) {
-    out[0] = a / 100;
-    out[1] = a % 100 / 10;
-    out[2] = a % 10;
+void SplitThreeDecimalDigits(s16 value, u8* out) {
+    out[0] = value / 100;
+    out[1] = value % 100 / 10;
+    out[2] = value % 10;
 }
 
 void JiminyDetailUpdate() {

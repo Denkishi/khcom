@@ -19,7 +19,7 @@ void MsChargeDrawPoints();
 void MsChargeDrawCardCounts();
 void MsChargeDrawCategoryCounts();
 void MsChargeDrawValueCounts();
-void MsChargeDrawTab(s16 a);
+void MsChargeDrawTab(s16 tab);
 void MsChargeBuildCardList();
 void MsChargeHandleGridInput();
 void MsChargeHandleTabInput();

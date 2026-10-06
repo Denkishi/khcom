@@ -179,11 +179,11 @@ static s32 sMapInspectCursorX;
 static s32 sMapInspectCursorY;
 static u8 sMapInspectReturnToMenu;
 
-s16 GetMapInspectTabStart(s16 a) {
+s16 GetMapInspectTabStart(s16 tab) {
     s16 r;
 
-    if (a <= 3) {
-        r = sMapInspectCategoryStart[a];
+    if (tab <= 3) {
+        r = sMapInspectCategoryStart[tab];
     } else {
         r = 0;
     }
@@ -220,13 +220,13 @@ void MapInspectSelectFirstValue() {
     }
 }
 
-s16 GetMapInspectTabCount(s16 a) {
+s16 GetMapInspectTabCount(s16 tab) {
     s16 r;
     s16 i;
     s32 t;
 
-    if (a <= 3) {
-        r = sMapInspectCategoryEntryCount[a];
+    if (tab <= 3) {
+        r = sMapInspectCategoryEntryCount[tab];
     } else {
         r = 0;
 
@@ -353,8 +353,8 @@ void MapInspectLoadSelectedCard() {
     }
 }
 
-s16 GetMapInspectValueIndex(s16 a, s16 b) {
-    return b + a * 5;
+s16 GetMapInspectValueIndex(s16 col, s16 row) {
+    return row + col * 5;
 }
 
 s16 GetMapInspectSelectedValue() {
@@ -435,8 +435,8 @@ void MapInspectDrawValueCounts() {
     }
 }
 
-void MapInspectDrawTab(s16 a) {
-    RequestTilemapRectCopy(gMapInspectTabsMap, GetBgScreenBase(0), 0, sMapCardCategoryDefs[a].displayIndex * 2, 0, 2, 11, 2);
+void MapInspectDrawTab(s16 tab) {
+    RequestTilemapRectCopy(gMapInspectTabsMap, GetBgScreenBase(0), 0, sMapCardCategoryDefs[tab].displayIndex * 2, 0, 2, 11, 2);
 }
 
 void MapInspectDeleteCard() {
@@ -457,11 +457,11 @@ void MapInspectDeleteCard() {
     }
 }
 
-u8 MapCardEntryIsEmpty(MapCardInventoryEntry* p) {
+u8 MapCardEntryIsEmpty(MapCardInventoryEntry* entry) {
     s16 i;
 
     for (i = 0; i < 10; i++) {
-        if (p->countsByValue[i] > 0) {
+        if (entry->countsByValue[i] > 0) {
             break;
         }
     }
@@ -473,22 +473,22 @@ u8 MapCardEntryIsEmpty(MapCardInventoryEntry* p) {
     return 0;
 }
 
-u8 MapCardEntrySelectedValueIsEmpty(MapCardInventoryEntry* p) {
-    if (p->countsByValue[GetMapInspectSelectedValue()] == 0) {
+u8 MapCardEntrySelectedValueIsEmpty(MapCardInventoryEntry* entry) {
+    if (entry->countsByValue[GetMapInspectSelectedValue()] == 0) {
         return 1;
     }
 
     return 0;
 }
 
-void MapInspectSelectNextValue(MapCardInventoryEntry* p) {
+void MapInspectSelectNextValue(MapCardInventoryEntry* entry) {
     s16 k;
     s16 i;
 
     k = GetMapInspectSelectedValue();
 
     for (i = 0; i <= 9; i++) {
-        if (p->countsByValue[k] > 0) {
+        if (entry->countsByValue[k] > 0) {
             break;
         }
 
@@ -503,12 +503,12 @@ void MapInspectSelectNextValue(MapCardInventoryEntry* p) {
     sMapInspectValueRow = k % 5;
 }
 
-void MapInspectRemoveEntry(MapCardInventoryEntry* p) {
+void MapInspectRemoveEntry(MapCardInventoryEntry* entry) {
     u16 row;
     s16 j;
 
-    row = p->category;
-    DmaCopy16(3, p + 1, p, (26 - GetMapInspectSelectedIndex()) * 28);
+    row = entry->category;
+    DmaCopy16(3, entry + 1, entry, (26 - GetMapInspectSelectedIndex()) * 28);
     DmaFill16(3, 0, &sMapCardInventoryEntries[26], 0x1C);
     sMapCardInventoryEntries[26].cardType = 27;
 
@@ -750,7 +750,7 @@ void MapInspectHandleTabInput() {
     }
 }
 
-void MapInspectSelectValueInColumn(MapCardInventoryEntry* p, u16 row) {
+void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 row) {
     s16 c;
     s16 i;
     s32 k;
@@ -760,7 +760,7 @@ void MapInspectSelectValueInColumn(MapCardInventoryEntry* p, u16 row) {
     for (i = 0; i <= 4; i++) {
         k = c - i;
 
-        if (k >= 0 && p->countsByValue[GetMapInspectValueIndex(row, k)] > 0) {
+        if (k >= 0 && entry->countsByValue[GetMapInspectValueIndex(row, k)] > 0) {
             sMapInspectValueCol = row;
             sMapInspectValueRow = k;
             return;
@@ -768,7 +768,7 @@ void MapInspectSelectValueInColumn(MapCardInventoryEntry* p, u16 row) {
 
         k = c + i;
 
-        if (k <= 4 && p->countsByValue[GetMapInspectValueIndex(row, k)] > 0) {
+        if (k <= 4 && entry->countsByValue[GetMapInspectValueIndex(row, k)] > 0) {
             sMapInspectValueCol = row;
             sMapInspectValueRow = k;
             return;

@@ -5,9 +5,9 @@
 
 struct AllmapRoomWork;
 
-void SetAllmapReturnToMenu(u8 a);
-u8 AllmapDoorExists(u8 a, u8 b);
-u8 AllmapDoorIsOpen(u8 a, u8 b);
+void SetAllmapReturnToMenu(u8 returnToMenu);
+u8 AllmapDoorExists(u8 room, u8 side);
+u8 AllmapDoorIsOpen(u8 room, u8 side);
 s32 SetupAllmapRoomDoors(struct AllmapRoomWork* work);
 
 extern u16* gAllmapBg0MapBlocks[8];

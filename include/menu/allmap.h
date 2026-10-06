@@ -125,29 +125,29 @@ typedef struct AllmapPushaWork {
     s16 y;
 } AllmapPushaWork;
 
-s32 GetAllmapRoomPaletteOffset(u8 a);
+s32 GetAllmapRoomPaletteOffset(u8 room);
 void InitAllmap();
 void AllmapUpdateCamera(AllmapState* s);
 void UpdateAllmap();
 void DestroyAllmap();
 void AllmapHandleInput();
 void AllmapInitDropOffsets();
-void AllmapSetBounds(u16 a, u16 b, u16 c, u16 d);
-u8 AllmapDoorHasCardInfo(u8 a, u8 b);
-u8 AllmapDoorHasKeyInfo(u8 a, u8 b);
-s16 AllmapDrawRoomnameFrame(u16 a);
-s32 GetAllmapRoomnamePaletteOffset(u8 a);
+void AllmapSetBounds(u16 minX, u16 maxX, u16 minY, u16 maxY);
+u8 AllmapDoorHasCardInfo(u8 room, u8 side);
+u8 AllmapDoorHasKeyInfo(u8 room, u8 side);
+s16 AllmapDrawRoomnameFrame(u16 width);
+s32 GetAllmapRoomnamePaletteOffset(u8 nameId);
 void AllmapClearRoomnameFrame();
 void AllmapBarStartClose(AllmapBarWork* work);
 void AllmapBarFadeOut(AllmapBarWork* work);
-u8 AllmapHasDoorInfo(AllmapCursorPos a);
+u8 AllmapHasDoorInfo(AllmapCursorPos pos);
 void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work);
 void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work);
 void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work);
 void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work);
 u8 IsStockMesDispActive();
-s32 GetAllmapRoomAt(AllmapCursorPos a);
-void AllmapAddRoom(u8 a, u16 b, u16 c);
+s32 GetAllmapRoomAt(AllmapCursorPos pos);
+void AllmapAddRoom(u8 id, u16 x, u16 y);
 
 extern u8 gUnk_05000160[];
 

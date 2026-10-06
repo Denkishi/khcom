@@ -4,11 +4,11 @@
 #include "ms_charge_api.h"
 #include "types.h"
 
-s16 GetMsChargeTabStart(s16 a);
-s16 GetMsChargeTabCount(s16 a);
+s16 GetMsChargeTabStart(s16 tab);
+s16 GetMsChargeTabCount(s16 tab);
 s16 GetMsChargeSelectedIndex();
 void MsChargeSelectFirstValue();
-s16 GetMsChargeValueIndex(s16 a, s16 b);
+s16 GetMsChargeValueIndex(s16 col, s16 row);
 s16 GetMsChargeSelectedValue();
 u16 GetMsChargeCardPoints(u16 index);
 void MsChargeSellCard();

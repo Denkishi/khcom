@@ -18,14 +18,14 @@ extern u8 gUnk_05000140[];
 void AllmapVCountCallback();
 void AllmapAllocBgMaps();
 void AllmapDimPalette10();
-void AllmapSetBlend(s16 a);
+void AllmapSetBlend(s16 alpha);
 void AllmapCyclePalette();
 void AllmapLoadWorldBg();
 void AllmapLoadFloorTiles();
-void mode_allmap_0(s32 a);
+void mode_allmap_0(s32 lowerBgm);
 void AllmapFreezePalette10();
 void mode_allmap_1();
 void mode_allmap_2();
-u8 AllmapDoorLeadsToHall(u8 a, u8 b);
+u8 AllmapDoorLeadsToHall(u8 room, u8 side);
 
 #endif /* GUARD_MODE_ALLMAP_H */

@@ -153,8 +153,8 @@ void AllmapDimPalette10() {
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
 }
 
-void AllmapSetBlend(s16 a) {
-    SetBlendAlpha(a, 16 - a);
+void AllmapSetBlend(s16 alpha) {
+    SetBlendAlpha(alpha, 16 - alpha);
 }
 
 void AllmapCyclePalette() {
@@ -212,11 +212,11 @@ void AllmapLoadFloorTiles() {
     RequestDma3Copy(src, dst, 10);
 }
 
-void mode_allmap_0(s32 a) {
+void mode_allmap_0(s32 lowerBgm) {
     sAllmapLowerBgm = 0;
 
-    if (a == 1) {
-        sAllmapLowerBgm = a;
+    if (lowerBgm == 1) {
+        sAllmapLowerBgm = lowerBgm;
     }
 
     SetObjPaletteRange(0, 14);
@@ -343,22 +343,22 @@ void mode_allmap_2() {
     EwramFree(gAllmapBg1Map);
 }
 
-void SetAllmapReturnToMenu(u8 a) {
-    sAllmapReturnToMenu = a;
+void SetAllmapReturnToMenu(u8 returnToMenu) {
+    sAllmapReturnToMenu = returnToMenu;
 }
 
-u8 AllmapDoorLeadsToHall(u8 a, u8 b) {
-    u8* p = GetMapRoomLinks(a);
+u8 AllmapDoorLeadsToHall(u8 room, u8 side) {
+    u8* p = GetMapRoomLinks(room);
 
-    if ((u8)(p[b] + 3) <= 1) {
+    if ((u8)(p[side] + 3) <= 1) {
         return 1;
     }
 
     return 0;
 }
 
-u8 AllmapDoorExists(u8 a, u8 b) {
-    u16 v = GetMapDoorFlags(a, b);
+u8 AllmapDoorExists(u8 room, u8 side) {
+    u16 v = GetMapDoorFlags(room, side);
 
     if (v == 0 || (v & 8) != 0) {
         return 0;
@@ -367,8 +367,8 @@ u8 AllmapDoorExists(u8 a, u8 b) {
     return 1;
 }
 
-u8 AllmapDoorIsOpen(u8 a, u8 b) {
-    u16 v = GetMapDoorFlags(a, b);
+u8 AllmapDoorIsOpen(u8 room, u8 side) {
+    u16 v = GetMapDoorFlags(room, side);
 
     if ((v & 2) != 0) {
         return 1;

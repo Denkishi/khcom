@@ -100,7 +100,7 @@ void CreateHeartlessCardTask(void* p, s16 x, s16 y, s16 z, u16 n);
 void BgFxReset();
 void BgFxUpdateBase();
 void FieldTransitionInit();
-s32 ApplyAttackAt(s32 a, s32 b, s32 c, s32 d);
+s32 ApplyAttackAt(s32 attack, s32 x, s32 y, s32 z);
 void BgFxUpdateFlash();
 void BgFxUpdateStop();
 void BgFxUpdateAnsemWave();
@@ -122,12 +122,12 @@ void BgFxUpdateGas();
 void BgFxUpdateRikuLimit();
 void BgFxUpdateLaxeneBeam();
 void BgFxUpdateAero();
-void ColliderCheckPoolPairs(ListPool* a, ListPool* b);
+void ColliderCheckPoolPairs(ListPool* poolA, ListPool* poolB);
 s64 __ashldi3(s64 v, s32 n);
 u8 GetStockMoveCount();
 
 const EnemyBaseStats* GetEnemyBaseStats(u16 i);
-s32 ResolveAttackHit(BtlObj* a, s32 b);
+s32 ResolveAttackHit(BtlObj* hit, s32 index);
 
 u8 GetRikuSelectedCardValue();
 s32 GetRikuSelectedMove();
@@ -141,7 +141,7 @@ u8 TryStartCardAction(BtlObj* obj);
 void VsBtlWorkInit();
 void VsEndCardPlay();
 void VsBattleUpdate();
-void AbsorbAttack(BtlObj* a, BtlObj* b, const BattleAttackDef* c);
+void AbsorbAttack(BtlObj* target, BtlObj* source, const BattleAttackDef* attack);
 
 void func_080135EC(s32 x, s32 y, s32 z);
 void BgFxStartFlashHit(s32 x, s32 y, s32 z);
@@ -151,12 +151,12 @@ void func_080146A8(s32 x, s32 y, s32 z);
 void func_08014654();
 void BgFxUpdateUrsulaBeam();
 void BgFxUpdateFire();
-void BgFxStartAxcelFireWall(s32 x, u8 f, s32 w);
+void BgFxStartAxcelFireWall(s32 x, u8 facingLeft, s32 w);
 void BgFxUpdateBind();
 void BgFxUpdateAxcelFireWall();
 void BgFxUpdateFireBurst();
 void BgFxUpdateDsdEnergy();
-void BgFxTornadoLiftBtlObj(BtlObj* p, BtlObj* o, u8 a, u8 b);
+void BgFxTornadoLiftBtlObj(BtlObj* source, BtlObj* target, u8 spin, u8 init);
 void BgFxUpdateTornado();
 void BgFxUpdatePcShot();
 void BgFxUpdateRikuLimitFinish();
@@ -186,24 +186,24 @@ s32 LevelUpDp();
 s32 LevelUpAp();
 void AddExp(u16 exp);
 void BgFxUpdateTrinityLimit();
-s32 ApplyAttackInFront(BtlObj* p, s16 h, s32 c);
+s32 ApplyAttackInFront(BtlObj* obj, s16 distance, s32 attack);
 void RequestSwitchRikuCardList();
 u8 GetRikuStockCount();
 u8 IsRikuSelectionEmpty();
 u8 GetRikuCardListIndex();
 u8 StepHitFlashSolid(BtlObj* obj);
 
-void BgFxReleaseEarly(s16 a);
+void BgFxReleaseEarly(s16 frames);
 void BgFxStartGuard(s32 x, s32 y, s32 z);
-void BgFxStartLimit(s32 x, s32 y, s32 z, u8 f);
+void BgFxStartLimit(s32 x, s32 y, s32 z, u8 flip);
 void BgFxUpdateFollowActor();
 void EndCardPlay();
 
 void func_08012214();
 void ColliderClearPoolContacts(ListPool* pool);
-u8 BgFxIsBlocked(u8 a);
+u8 BgFxIsBlocked(u8 priority);
 
-u8 ColliderIsColliding(Collider* p);
+u8 ColliderIsColliding(Collider* collider);
 s32 ApplyBtlObjHit(BtlObj* obj);
 void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d);
 

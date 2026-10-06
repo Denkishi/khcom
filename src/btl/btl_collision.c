@@ -355,42 +355,42 @@ static ListPool sColliderPoolEnemy;
 static ListPool sColliderPoolPlayerOnly;
 static ListPool sColliderPoolObstacle;
 
-u8 CanAttackBoxHitBtlObj(BtlObj* p, s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
-    BtlObj* q = p->parent;
+u8 CanAttackBoxHitBtlObj(BtlObj* obj, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
+    BtlObj* q = obj->parent;
     u64 f;
 
     if (q != NULL) {
-        f = q->flags | p->flags;
+        f = q->flags | obj->flags;
     } else {
-        f = p->flags;
-        q = p;
+        f = obj->flags;
+        q = obj;
     }
 
     if (f & (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_UNHITTABLE)) {
         return 0;
     }
 
-    if (x - (a << 8) > p->x + (p->radiusX << 8)) {
+    if (x - (halfX << 8) > obj->x + (obj->radiusX << 8)) {
         return 0;
     }
 
-    if (x + (a << 8) < p->x - (p->radiusX << 8)) {
+    if (x + (halfX << 8) < obj->x - (obj->radiusX << 8)) {
         return 0;
     }
 
-    if (y - (b << 8) > p->y + (p->radiusY << 8)) {
+    if (y - (halfY << 8) > obj->y + (obj->radiusY << 8)) {
         return 0;
     }
 
-    if (y + (b << 8) < p->y - (p->radiusY << 8)) {
+    if (y + (halfY << 8) < obj->y - (obj->radiusY << 8)) {
         return 0;
     }
 
-    if (z - (c << 8) > p->z) {
+    if (z - (halfZ << 8) > obj->z) {
         return 0;
     }
 
-    if (z + (c << 8) < p->z - (p->height << 8)) {
+    if (z + (halfZ << 8) < obj->z - (obj->height << 8)) {
         return 0;
     }
 
@@ -401,10 +401,10 @@ u8 CanAttackBoxHitBtlObj(BtlObj* p, s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     return 1;
 }
 
-void AbsorbAttack(BtlObj* a, BtlObj* b, const BattleAttackDef* c) {
+void AbsorbAttack(BtlObj* target, BtlObj* source, const BattleAttackDef* attack) {
     gBtlWork->pendingHitStop = 8;
-    a->damage = -((b->attack * c->power) >> 8);
-    a->flags |= BTLOBJ_FLAG_HEAL_PENDING;
+    target->damage = -((source->attack * attack->power) >> 8);
+    target->flags |= BTLOBJ_FLAG_HEAL_PENDING;
 }
 
 s32 ResolveAttackHit(BtlObj* hit, s32 index) {
@@ -778,16 +778,16 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     return 1;
 }
 
-u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
+u8 TestAttackBox(s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
     BtlObj* o;
 
     gBtlWork->areaUpdated = 1;
     gBtlWork->x3 = x;
     gBtlWork->y3 = y;
     gBtlWork->z3 = z;
-    gBtlWork->areaHalfX = a;
-    gBtlWork->areaHalfY = b;
-    gBtlWork->areaHalfZ = c;
+    gBtlWork->areaHalfX = halfX;
+    gBtlWork->areaHalfY = halfY;
+    gBtlWork->areaHalfZ = halfZ;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
@@ -796,14 +796,14 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
             o = gBtlWork->actor;
         }
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
+        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
             return 1;
         }
     } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         o = ListPoolFirst(&gBtlWork->pool);
 
         while (o != NULL) {
-            if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
+            if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
                 return 1;
             }
 
@@ -814,7 +814,7 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     } else {
         o = gBtlWork->actor;
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
+        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
             return 1;
         }
     }
@@ -822,11 +822,11 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     return 0;
 }
 
-s32 ApplyAttackToBtlObj(s32 a, BtlObj* b) {
-    return ResolveAttackHit(b, a);
+s32 ApplyAttackToBtlObj(s32 attack, BtlObj* obj) {
+    return ResolveAttackHit(obj, attack);
 }
 
-s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
+s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
     const BattleAttackDef* t;
     BtlObj* o;
     s32 sx;
@@ -838,16 +838,16 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
     s32 res;
     s32 r2;
 
-    t = &sBattleAttackDefs[a];
+    t = &sBattleAttackDefs[attack];
     cnt = 0;
     flag = 0;
     gBtlWork->areaUpdated = 1;
     gBtlWork->x3 = x;
     gBtlWork->y3 = y;
     gBtlWork->z3 = z;
-    gBtlWork->areaHalfX = p;
-    gBtlWork->areaHalfY = q;
-    gBtlWork->areaHalfZ = r;
+    gBtlWork->areaHalfX = halfX;
+    gBtlWork->areaHalfY = halfY;
+    gBtlWork->areaHalfZ = halfZ;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
@@ -856,8 +856,8 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
             o = gBtlWork->actor;
         }
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, p, q, r)) {
-            res = ResolveAttackHit(o, a);
+        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
+            res = ResolveAttackHit(o, attack);
 
             if (res == 1) {
                 if (t->hitEffect != NULL) {
@@ -874,12 +874,12 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
         sx = 0;
 
         while (o != NULL) {
-            if (!CanAttackBoxHitBtlObj(o, x, y, z, p, q, r)) {
+            if (!CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
                 o = ListPoolNext(&o->node);
                 continue;
             }
 
-            r2 = ResolveAttackHit(o, a);
+            r2 = ResolveAttackHit(o, attack);
 
             if (r2 == 1) {
                 sx += o->x;
@@ -916,8 +916,8 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
     } else {
         o = gBtlWork->actor;
 
-        if (CanAttackBoxHitBtlObj(o, x, y, z, p, q, r)) {
-            res = ResolveAttackHit(o, a);
+        if (CanAttackBoxHitBtlObj(o, x, y, z, halfX, halfY, halfZ)) {
+            res = ResolveAttackHit(o, attack);
 
             if (res == 1) {
                 if (t->hitEffect != NULL) {
@@ -932,25 +932,25 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
     return 0;
 }
 
-s32 ApplyAttackAt(s32 a, s32 b, s32 c, s32 d) {
-    return ApplyAttackBox(a, b, c, d, 16, 16, 16);
+s32 ApplyAttackAt(s32 attack, s32 x, s32 y, s32 z) {
+    return ApplyAttackBox(attack, x, y, z, 16, 16, 16);
 }
 
-s32 ApplyAttackInFront(BtlObj* p, s16 h, s32 c) {
-    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        return ApplyAttackAt(p->x - (h << 8), p->y, p->z - (p->height >> 1), c);
+s32 ApplyAttackInFront(BtlObj* obj, s16 distance, s32 attack) {
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        return ApplyAttackAt(obj->x - (distance << 8), obj->y, obj->z - (obj->height >> 1), attack);
     } else {
-        return ApplyAttackAt(p->x + (h << 8), p->y, p->z - (p->height >> 1), c);
+        return ApplyAttackAt(obj->x + (distance << 8), obj->y, obj->z - (obj->height >> 1), attack);
     }
 }
 
-void FldObjRegister(FldObj* p) {
-    ListNodeInit(&p->node, &gFieldState->actor.pool, p);
-    ListPoolAppend(&p->node, &gFieldState->actor.pool);
+void FldObjRegister(FldObj* obj) {
+    ListNodeInit(&obj->node, &gFieldState->actor.pool, obj);
+    ListPoolAppend(&obj->node, &gFieldState->actor.pool);
 }
 
-void FldObjUnregister(FldObj* p) {
-    ListPoolRemove(&p->node, &gFieldState->actor.pool);
+void FldObjUnregister(FldObj* obj) {
+    ListPoolRemove(&obj->node, &gFieldState->actor.pool);
 }
 
 void func_08012214() {
@@ -984,42 +984,42 @@ void ColliderPoolsInit() {
     ListPoolInit(&sColliderPoolObstacle);
 }
 
-void ColliderInit(Collider* p, u32 type, u16 r, u16 h) {
+void ColliderInit(Collider* collider, u32 type, u16 r, u16 height) {
     void* pool;
-    p->otherType = 0;
-    p->colliding = 0;
-    p->standFlags = 0;
-    p->flags = 0;
-    p->radius = r << 8;
-    p->height = h << 8;
-    p->type = type;
-    p->self = p;
-    p->touchedTypes = 0;
+    collider->otherType = 0;
+    collider->colliding = 0;
+    collider->standFlags = 0;
+    collider->flags = 0;
+    collider->radius = r << 8;
+    collider->height = height << 8;
+    collider->type = type;
+    collider->self = collider;
+    collider->touchedTypes = 0;
     pool = ColliderGetPool(type);
 
     switch (type) {
     case 6:
     case 7:
-        p->flags |= COLLIDER_FLAG_IS_PLATFORM;
+        collider->flags |= COLLIDER_FLAG_IS_PLATFORM;
         break;
     }
 
-    ListNodeInit(&p->node, pool, p);
-    ListPoolAppend(&p->node, pool);
+    ListNodeInit(&collider->node, pool, collider);
+    ListPoolAppend(&collider->node, pool);
 }
 
-void ColliderUnregister(Collider* p) {
-    Collider* q = p->self;
+void ColliderUnregister(Collider* collider) {
+    Collider* q = collider->self;
 
-    if (q == p) {
+    if (q == collider) {
         ListPoolRemove(&q->node, ColliderGetPool(q->type));
     }
 }
 
-void ColliderSetPosition(Collider* p, s32 a, s32 b, s32 c) {
-    p->x = a;
-    p->y = b * 2;
-    p->z = c;
+void ColliderSetPosition(Collider* collider, s32 x, s32 y, s32 z) {
+    collider->x = x;
+    collider->y = y * 2;
+    collider->z = z;
 }
 
 void ColliderClearPoolContacts(ListPool* pool) {
@@ -1033,7 +1033,7 @@ void ColliderClearPoolContacts(ListPool* pool) {
     }
 }
 
-void ColliderCheckPoolPairs(ListPool* a, ListPool* b) {
+void ColliderCheckPoolPairs(ListPool* poolA, ListPool* poolB) {
     Collider* p;
     Collider* q;
     s32 sum;
@@ -1044,10 +1044,10 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b) {
     s32 t;
     u8 angle;
 
-    p = ListPoolFirst(a);
+    p = ListPoolFirst(poolA);
 
     while (p != NULL) {
-        q = ListPoolLast(b);
+        q = ListPoolLast(poolB);
 
         while (q != NULL && p != q) {
             sum = p->radius + q->radius;
@@ -1162,30 +1162,30 @@ void ColliderUpdateAll() {
     ColliderCheckPoolPairs(&sColliderPoolObstacle, &sColliderPoolEnemy);
 }
 
-void ColliderSetDisabled(Collider* p, u8 b) {
-    if (b) {
-        p->node.flags |= LIST_NODE_FLAG_SKIP;
-        p->colliding = 0;
-        p->standFlags = 0;
+void ColliderSetDisabled(Collider* collider, u8 on) {
+    if (on) {
+        collider->node.flags |= LIST_NODE_FLAG_SKIP;
+        collider->colliding = 0;
+        collider->standFlags = 0;
     } else {
-        p->node.flags &= ~LIST_NODE_FLAG_SKIP;
+        collider->node.flags &= ~LIST_NODE_FLAG_SKIP;
     }
 }
 
-u8 ColliderIsColliding(Collider* p) {
-    return p->colliding;
+u8 ColliderIsColliding(Collider* collider) {
+    return collider->colliding;
 }
 
-void ColliderSetRadius(Collider* p, u16 r) {
-    p->radius = r << 8;
+void ColliderSetRadius(Collider* collider, u16 r) {
+    collider->radius = r << 8;
 }
 
-void ColliderSetHeight(Collider* p, u16 h) {
-    p->height = h << 8;
+void ColliderSetHeight(Collider* collider, u16 height) {
+    collider->height = height << 8;
 }
 
-u8 ColliderIsTouchingType(Collider* p, s32 bit) {
-    if (p->touchedTypes & (1 << bit)) {
+u8 ColliderIsTouchingType(Collider* collider, s32 bit) {
+    if (collider->touchedTypes & (1 << bit)) {
         return 1;
     }
 

@@ -450,7 +450,7 @@ s32 CloudTryJumpAway(CloudWork* work);
 void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub);
 void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p);
 void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst);
-void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 f, s32 w);
+void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 facingLeft, s32 w);
 void LexceusHover(HumWork* work, s32 a);
 s32 __modsi3(s32 a, s32 b);
 u16 GetJiminyTextLength(const u16* p);

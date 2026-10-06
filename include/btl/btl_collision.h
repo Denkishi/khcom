@@ -4,22 +4,22 @@
 #include "battle_actor_types.h"
 #include "types.h"
 
-s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r);
+s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ);
 void ColliderPoolsInit();
-void ColliderInit(Collider* p, u32 type, u16 r, u16 h);
-void ColliderUnregister(Collider* p);
-void ColliderSetPosition(Collider* p, s32 x, s32 y, s32 z);
+void ColliderInit(Collider* collider, u32 type, u16 r, u16 height);
+void ColliderUnregister(Collider* collider);
+void ColliderSetPosition(Collider* collider, s32 x, s32 y, s32 z);
 void ColliderUpdateAll();
-void ColliderSetDisabled(Collider* p, u8 b);
-void ColliderSetRadius(Collider* p, u16 r);
-void ColliderSetHeight(Collider* p, u16 h);
-u8 ColliderIsTouchingType(Collider* p, s32 bit);
+void ColliderSetDisabled(Collider* collider, u8 on);
+void ColliderSetRadius(Collider* collider, u16 r);
+void ColliderSetHeight(Collider* collider, u16 height);
+u8 ColliderIsTouchingType(Collider* collider, s32 bit);
 
 struct FldObj;
 
-u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c);
-s32 ApplyAttackToBtlObj(s32 a, BtlObj* b);
-void FldObjRegister(struct FldObj* p);
-void FldObjUnregister(struct FldObj* p);
+u8 TestAttackBox(s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ);
+s32 ApplyAttackToBtlObj(s32 attack, BtlObj* obj);
+void FldObjRegister(struct FldObj* obj);
+void FldObjUnregister(struct FldObj* obj);
 
 #endif

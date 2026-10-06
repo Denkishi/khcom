@@ -194,8 +194,8 @@ typedef struct BtlRikuWork {
 
 void LoadBtlSoraPalette(BtlSoraWork* work);
 void DisableBtlSoraPassThrough(BtlSoraWork* work);
-void BgFxStartDashRing(s32 x, s32 y, s32 z, u8 f);
-void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 f);
+void BgFxStartDashRing(s32 x, s32 y, s32 z, u8 flip);
+void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 flip);
 s32 ResolveLinkActiveCardsMove(s32* out, s32 b);
 
 typedef struct BtlMapWork {

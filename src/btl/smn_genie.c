@@ -26,6 +26,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sSmnGenieAnimDefs[2] = {
     { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 0 },
@@ -93,13 +94,13 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
     work->speedY = 0;
 
     switch (args->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         work->attacksLeft = 1;
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         work->attacksLeft = 2;
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
     default:
         work->attacksLeft = 3;
         break;

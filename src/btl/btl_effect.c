@@ -2542,7 +2542,7 @@ void BgFxUpdateDumboSplash() {
     BgFxUpdateBase();
 }
 
-void BgFxStartDumboSplash(u16 variant, s32 x, s32 y, s32 z, u8 flip, s32 attack) {
+void BgFxStartDumboSplash(u16 level, s32 x, s32 y, s32 z, u8 flip, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -2564,14 +2564,14 @@ void BgFxStartDumboSplash(u16 variant, s32 x, s32 y, s32 z, u8 flip, s32 attack)
     WorldToScreen(&sx, &sy, x, y, z);
     sBgFx->scaleY = Q_8_8(0.1);
 
-    switch (variant) {
-    case 0:
+    switch (level) {
+    case SUMMON_LEVEL_SINGLE:
         sBgFx->targetX = Q_8_8(1);
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         sBgFx->targetX = Q_8_8(1.5);
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
         sBgFx->targetX = Q_8_8(2);
         break;
     }

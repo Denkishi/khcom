@@ -55,7 +55,7 @@ void BgFxStartBossDeathFlash();
 void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, s32 attack, u16 steps, s32 targetScale);
 void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 attack);
 void BgFxStartThunder(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, s32 attack);
-void BgFxStartDumboSplash(u16 variant, s32 x, s32 y, s32 z, u8 flip, s32 attack);
+void BgFxStartDumboSplash(u16 level, s32 x, s32 y, s32 z, u8 flip, s32 attack);
 void BgFxStartTrinityLimit(s32 x, s32 y, s32 z);
 void BgFxStartTrinityLimitCharge(s32 x, s32 y, s32 z);
 void BgFxStartTrinityLimitBlast(s32 x, s32 y, s32 z);

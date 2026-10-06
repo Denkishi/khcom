@@ -25,6 +25,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sFrdPanAnimDefs[4] = {
     { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 0 },
@@ -99,13 +100,13 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
     switch (work->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         work->duration = 0x78;
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         work->duration = 0xF0;
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
     default:
         work->duration = 0x1E0;
         break;

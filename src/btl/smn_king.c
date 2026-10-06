@@ -25,6 +25,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sSmnKingAnimDefs[3] = {
     { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 0 },
@@ -159,15 +160,15 @@ u8 task_smn_king_1(SmnKingWork* work) {
             m4aSongNumStart(SONG_EF_TLIMIT01);
 
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 gBtlWork->actor->hp += gBtlWork->actor->maxHp / 5;
                 RequestSoraKingReload0();
                 break;
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 gBtlWork->actor->hp += gBtlWork->actor->maxHp / 2;
                 RequestSoraKingReload1();
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
             default:
                 gBtlWork->actor->hp += gBtlWork->actor->maxHp;
                 RequestSoraKingReload2();

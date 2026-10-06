@@ -22,6 +22,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sSmnMushuAnimDefs[4] = {
     { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 0 },
@@ -181,13 +182,13 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
 
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 work->scaleSteps = 0x78;
                 break;
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 work->scaleSteps = 0xF0;
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
             default:
                 work->scaleSteps = 0x1E0;
                 break;
@@ -205,13 +206,13 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             z = 0;
 
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 attack = 0x9D;
                 break;
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 attack = 0x9E;
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
             default:
                 attack = 0x9F;
                 break;

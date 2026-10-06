@@ -25,6 +25,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sFrdJackAnimDefs[5] = {
     { gFrdJackFrames, gFrdJackAnims, gFrdJackTiles, 0 },
@@ -117,13 +118,13 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
 
     switch (args->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         work->repeatsLeft = 0;
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         work->repeatsLeft = 1;
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
     default:
         work->repeatsLeft = 2;
         break;
@@ -345,17 +346,17 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 }
 
                 switch (work->variant) {
-                case 0:
+                case SUMMON_LEVEL_SINGLE:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_BASE, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 133);
                     else BgFxStartFire(SPELL_TIER_BASE, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 133);
 
                     break;
-                case 1:
+                case SUMMON_LEVEL_PAIR:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_RA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 134);
                     else BgFxStartFire(SPELL_TIER_RA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 134);
 
                     break;
-                case 2:
+                case SUMMON_LEVEL_TRIPLE:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_GA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 135);
                     else BgFxStartFire(SPELL_TIER_GA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 135);
@@ -410,17 +411,17 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 }
 
                 switch (work->variant) {
-                case 0:
+                case SUMMON_LEVEL_SINGLE:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_BASE, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, TRUE, 142);
                     else BgFxStartGravity(SPELL_TIER_BASE, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, FALSE, 142);
 
                     break;
-                case 1:
+                case SUMMON_LEVEL_PAIR:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_RA, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, TRUE, 143);
                     else BgFxStartGravity(SPELL_TIER_RA, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, FALSE, 143);
 
                     break;
-                case 2:
+                case SUMMON_LEVEL_TRIPLE:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_GA, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, TRUE, 144);
                     else BgFxStartGravity(SPELL_TIER_GA, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, FALSE, 144);
@@ -468,17 +469,17 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 }
 
                 switch (work->variant) {
-                case 0:
+                case SUMMON_LEVEL_SINGLE:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_BASE, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 136);
                     else BgFxStartBlizzard(SPELL_TIER_BASE, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 136);
 
                     break;
-                case 1:
+                case SUMMON_LEVEL_PAIR:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_RA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 137);
                     else BgFxStartBlizzard(SPELL_TIER_RA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 137);
 
                     break;
-                case 2:
+                case SUMMON_LEVEL_TRIPLE:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_GA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 138);
                     else BgFxStartBlizzard(SPELL_TIER_GA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 138);
@@ -513,7 +514,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
         if (work->stateTimer == 44) {
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 {
                     s32 x, y, z;
 
@@ -534,12 +535,12 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
                     break;
                 }
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartWideThunder(SPELL_TIER_RA, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
                 else BgFxStartWideThunder(SPELL_TIER_RA, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
 
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
             default:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartWideThunder(SPELL_TIER_GA, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
                 else BgFxStartWideThunder(SPELL_TIER_GA, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);

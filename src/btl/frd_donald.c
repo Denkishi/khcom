@@ -29,6 +29,7 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "card_label_data.h"
+#include "btl.h"
 
 static const AnimDef sFrdDonaldAnimDefs[6] = {
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0 },
@@ -160,7 +161,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
 
     switch (args->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         work->repeatsLeft = 1;
 
 #ifdef VERSION_EU
@@ -173,7 +174,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
         m4aSongNumStart(SONG_VO_SR_SUMMON04);
 #endif
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         work->repeatsLeft = 1;
 
 #ifdef VERSION_EU
@@ -186,7 +187,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
         m4aSongNumStart(SONG_VO_SR_SUMMON04);
 #endif
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
         work->repeatsLeft = 1;
 
 #ifdef VERSION_EU
@@ -236,12 +237,12 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         body->x += (work->unk_158 - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
-        if (work->variant == 3) UpdateDonaldFlame(body, FALSE, 8, 8);
+        if (work->variant == SUMMON_LEVEL_SLEIGHT) UpdateDonaldFlame(body, FALSE, 8, 8);
 
         if (FrdDonaldApplyGravity(work)) {
             work->stateTimer = 0;
 
-            if (work->variant == 3) work->state = FRD_DONALD_STATE_FLAME_RUN;
+            if (work->variant == SUMMON_LEVEL_SLEIGHT) work->state = FRD_DONALD_STATE_FLAME_RUN;
             else {
                 work->state = FRD_DONALD_STATE_LAND;
                 m4aSongNumStart(SONG_VO_DL_ATTACK00);
@@ -330,12 +331,12 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
         ApproachValue(&body->x, work->unk_158, work->steps);
 
-        if (work->variant == 3) UpdateDonaldFlame(body, FALSE, 8, 8);
+        if (work->variant == SUMMON_LEVEL_SLEIGHT) UpdateDonaldFlame(body, FALSE, 8, 8);
 
         FrdDonaldApplyGravity(work);
 
         if (work->steps <= 0) {
-            if (work->variant == 3) BgAnimStop();
+            if (work->variant == SUMMON_LEVEL_SLEIGHT) BgAnimStop();
 
             return 0;
         }
@@ -410,17 +411,17 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 }
 
                 switch (work->variant) {
-                case 0:
+                case SUMMON_LEVEL_SINGLE:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 123);
                     else BgFxStartFire(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 123);
 
                     break;
-                case 1:
+                case SUMMON_LEVEL_PAIR:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 124);
                     else BgFxStartFire(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 124);
 
                     break;
-                case 2:
+                case SUMMON_LEVEL_TRIPLE:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 125);
                     else BgFxStartFire(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 125);
@@ -473,17 +474,17 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 }
 
                 switch (work->variant) {
-                case 0:
+                case SUMMON_LEVEL_SINGLE:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 126);
                     else BgFxStartBlizzard(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 126);
 
                     break;
-                case 1:
+                case SUMMON_LEVEL_PAIR:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 127);
                     else BgFxStartBlizzard(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 127);
 
                     break;
-                case 2:
+                case SUMMON_LEVEL_TRIPLE:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 128);
                     else BgFxStartBlizzard(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 128);
@@ -518,7 +519,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
         if (work->stateTimer == 40) {
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 {
                     s32 x,y,z;
 
@@ -537,10 +538,10 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     BgFxStartThunder(SPELL_TIER_BASE, body->x, body->y, body->z-0x4000, x,y,z,129);
                     break;
                 }
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 BgFxStartWideThunder(SPELL_TIER_RA,body->x,body->y,body->z-0x4000,body->groundZ,130);
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
             default:
                 BgFxStartWideThunder(SPELL_TIER_GA,body->x,body->y,body->z-0x4000,body->groundZ,131);
                 break;
@@ -570,13 +571,13 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
             if (work->stateTimer == 40) {
                 switch (work->variant) {
-                case 0:
+                case SUMMON_LEVEL_SINGLE:
                     BgFxStartCure(SPELL_TIER_BASE,ally->x,ally->y,ally->z-0x2C00);
                     break;
-                case 1:
+                case SUMMON_LEVEL_PAIR:
                     BgFxStartCure(SPELL_TIER_RA,ally->x,ally->y,ally->z-0x2C00);
                     break;
-                case 2:
+                case SUMMON_LEVEL_TRIPLE:
                     BgFxStartCure(SPELL_TIER_GA,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 default:
@@ -591,25 +592,25 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 } else {
                     if (ally->btl->hcEffect == HC_EFFECT_CURE_BOOST) {
                         switch (work->variant) {
-                        case 0:
+                        case SUMMON_LEVEL_SINGLE:
                             ally->hp+=75;
                             break;
-                        case 1:
+                        case SUMMON_LEVEL_PAIR:
                             ally->hp+=225;
                             break;
-                        case 2:
+                        case SUMMON_LEVEL_TRIPLE:
                             ally->hp+=450;
                             break;
                         }
                     } else {
                         switch (work->variant) {
-                        case 0:
+                        case SUMMON_LEVEL_SINGLE:
                             ally->hp+=50;
                             break;
-                        case 1:
+                        case SUMMON_LEVEL_PAIR:
                             ally->hp+=150;
                             break;
-                        case 2:
+                        case SUMMON_LEVEL_TRIPLE:
                             ally->hp+=300;
                             break;
                         }

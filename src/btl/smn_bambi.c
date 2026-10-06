@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sSmnBambiAnimDef = { gBanb00Frames, gBanb00Anims, gBanb00Tiles, 0 };
 
@@ -199,7 +200,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         if (work->steps > 0) {
             STEP_STATE(work);
         } else {
-            if (work->variant == 3) {
+            if (work->variant == SUMMON_LEVEL_SLEIGHT) {
                 work->state = SMN_BAMBI_STATE_STOMP;
             } else {
                 work->state = SMN_BAMBI_STATE_HOP;
@@ -280,7 +281,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             work->steps = 30;
         }
 
-        if (work->variant == 2) {
+        if (work->variant == SUMMON_LEVEL_TRIPLE) {
             ApplyAttackBox(0x75, body->x, body->y, body->z, 8, 8, 8);
         } else {
             ApplyAttackBox(0x74, body->x, body->y, body->z, 8, 8, 8);
@@ -309,7 +310,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             args.y = body->y;
             args.z = body->z;
 
-            if (work->variant == 0) {
+            if (work->variant == SUMMON_LEVEL_SINGLE) {
                 args.kind = 1;
             } else {
                 args.kind = 2;

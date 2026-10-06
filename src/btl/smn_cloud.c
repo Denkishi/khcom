@@ -26,6 +26,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sSmnCloudAnimDefs[8] = {
     { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0 },
@@ -233,15 +234,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             work->stateTimer = 0;
 
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 work->state = SMN_CLOUD_STATE_DOUBLE_SLASH;
                 work->animating = TRUE;
                 break;
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 work->state = SMN_CLOUD_STATE_TRIPLE_SLASH;
                 work->animating = TRUE;
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
                 work->state = SMN_CLOUD_STATE_RISE;
                 work->animating = TRUE;
                 break;

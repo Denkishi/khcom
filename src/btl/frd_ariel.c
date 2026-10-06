@@ -23,6 +23,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sFrdArielAnimDefs[3] = {
     { gFrdArielFrames, gFrdArielAnims, gFrdArielTiles, 0 },
@@ -86,15 +87,15 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
     switch (args->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         work->passSpeed = 0x500;
         work->passesLeft = 0;
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         work->passSpeed = 0x800;
         work->passesLeft = 1;
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
     default:
         work->passSpeed = 0xC00;
         work->passesLeft = 4;

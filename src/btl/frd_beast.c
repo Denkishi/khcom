@@ -26,6 +26,7 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "engine_math.h"
+#include "btl.h"
 
 static const AnimDef sFrdBeastAnimDefs[2] = {
     { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 0 },
@@ -109,15 +110,15 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
     body->groundZ = 0;
 
     switch (work->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         work->state = FRD_BEAST_STATE_CHARGE;
         work->attack = 0xA0;
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         work->state = FRD_BEAST_STATE_CHARGE;
         work->attack = 0xA1;
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
     default:
         work->state = FRD_BEAST_STATE_POUNCE;
         work->attack = 0xA1;
@@ -185,7 +186,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
 
-            if (work->variant != 2) {
+            if (work->variant != SUMMON_LEVEL_TRIPLE) {
                 m4aSongNumStart(SONG_VO_BE_ATTACK00);
             }
         }

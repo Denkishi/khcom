@@ -1267,21 +1267,21 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
-                work->variant[0] = 0;
+                work->variant[0] = SUMMON_LEVEL_SINGLE;
                 break;
             case MOVE_MM_MIRACLE_PAIR:
                 work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
-                work->variant[0] = 1;
+                work->variant[0] = SUMMON_LEVEL_PAIR;
                 break;
             case MOVE_MM_MIRACLE:
                 work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
-                work->variant[0] = 2;
+                work->variant[0] = SUMMON_LEVEL_TRIPLE;
                 break;
             case MOVE_DARK_BREAK:
                 work->state = BTL_RIKU_STATE_DARK_BREAK;

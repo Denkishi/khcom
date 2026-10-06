@@ -13,6 +13,13 @@ typedef struct BtlSpawnArgs {
     u32 unk_03 : 8;
 } BtlSpawnArgs;
 
+enum SummonLevel {
+    SUMMON_LEVEL_SINGLE,
+    SUMMON_LEVEL_PAIR,
+    SUMMON_LEVEL_TRIPLE,
+    SUMMON_LEVEL_SLEIGHT
+};
+
 typedef struct BtlTaskArgs {
     s32 x;
     s32 y;

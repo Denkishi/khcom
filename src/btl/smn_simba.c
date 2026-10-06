@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sSmnSimbaAnimDef = { gShinba10Frames, gShinba10Anims, gShinba10Tiles, 0 };
 
@@ -149,13 +150,13 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             break;
         case 50:
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 m4aSongNumStart(SONG_BTL_SIMBA_ROA0);
                 break;
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 m4aSongNumStart(SONG_BTL_SIMBA_ROA1);
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
             default:
                 m4aSongNumStart(SONG_BTL_SIMBA_ROA2);
                 break;
@@ -172,7 +173,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             }
 
             switch (work->variant) {
-            case 0:
+            case SUMMON_LEVEL_SINGLE:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0x99, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
@@ -182,7 +183,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                 }
 
                 break;
-            case 1:
+            case SUMMON_LEVEL_PAIR:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0x9A, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
@@ -192,7 +193,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                 }
 
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
             default:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0x9B, body->x - 0x8000, body->y, body->z,

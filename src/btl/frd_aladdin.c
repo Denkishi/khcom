@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sFrdAladdinAnimDefs[3] = {
     { gAladdin10Frames, gAladdin10Anims, gAladdin10Tiles, 2 },
@@ -113,13 +114,13 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
     switch (work->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         work->duration = 0x78;
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         work->duration = 0xF0;
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
     default:
         work->duration = 0x1E0;
         break;

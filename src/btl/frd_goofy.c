@@ -22,6 +22,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "btl.h"
 
 static const AnimDef sFrdGoofyAnimDefs[5] = {
     { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 0 },
@@ -156,11 +157,11 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             switch (work->variant) {
-            case 0:
-            case 1:
+            case SUMMON_LEVEL_SINGLE:
+            case SUMMON_LEVEL_PAIR:
                 work->state = FRD_GOOFY_STATE_CHARGE;
                 break;
-            case 2:
+            case SUMMON_LEVEL_TRIPLE:
                 work->state = FRD_GOOFY_STATE_TORNADO_WINDUP;
                 break;
             }

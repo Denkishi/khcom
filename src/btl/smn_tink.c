@@ -23,6 +23,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "card_label_data.h"
+#include "btl.h"
 
 static const AnimDef sSmnTinkAnimDefs[3] = {
     { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 1 },
@@ -113,15 +114,15 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     work->healHp = work->actor->hp << 8;
 
     switch (args->variant) {
-    case 0:
+    case SUMMON_LEVEL_SINGLE:
         healRate = 0x4C;
         work->healFrames = 0xB4;
         break;
-    case 1:
+    case SUMMON_LEVEL_PAIR:
         healRate = 0x99;
         work->healFrames = 0x12C;
         break;
-    case 2:
+    case SUMMON_LEVEL_TRIPLE:
     default:
         healRate = 0x100;
         work->healFrames = 0x1A4;

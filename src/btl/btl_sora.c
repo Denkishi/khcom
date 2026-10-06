@@ -1381,49 +1381,49 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_GOOFY_CHARGE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_GOOFY_TORNADO:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_DONALD_DUCK:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_MAGIC_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_MAGIC:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_TINKER_BELL:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             work->breakAnim = 1;
             break;
         case MOVE_TWINKLE_PAIR:
@@ -1431,7 +1431,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             work->breakAnim = 1;
             break;
         case MOVE_TWINKLE:
@@ -1439,7 +1439,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             work->breakAnim = 1;
             break;
         case MOVE_ARIEL:
@@ -1447,231 +1447,231 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_SPIRAL_WAVE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_SPIRAL_WAVE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_MUSHU:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_FLARE_BREATH_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_FLARE_BREATH:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_SIMBA:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_PROUD_ROAR_PAIR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_PROUD_ROAR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_CLOUD:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_CROSS_SLASH:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_OMNISLASH:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_BAMBI:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_PARADISE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_PARADISE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_JACK:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_SURPRISE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_SURPRISE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_ALADDIN:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_SANDSTORM_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_SANDSTORM:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_PETER_PAN:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_HUMMINGBIRD_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_HUMMINGBIRD:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_DUMBO:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_SPLASH_PAIR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_SPLASH:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_GENIE:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_SHOWTIME_PAIR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_SHOWTIME:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_THE_BEAST:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
-            work->variant[0] = 0;
+            work->variant[0] = SUMMON_LEVEL_SINGLE;
             break;
         case MOVE_FEROCIOUS_LUNGE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
-            work->variant[0] = 1;
+            work->variant[0] = SUMMON_LEVEL_PAIR;
             break;
         case MOVE_FEROCIOUS_LUNGE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
-            work->variant[0] = 2;
+            work->variant[0] = SUMMON_LEVEL_TRIPLE;
             break;
         case MOVE_POTION:
             work->state = BTL_SORA_STATE_ITEM;
@@ -1863,7 +1863,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
-            work->variant[0] = 3;
+            work->variant[0] = SUMMON_LEVEL_SLEIGHT;
             break;
         case MOVE_QUAKE:
             work->state = BTL_SORA_STATE_QUAKE;
@@ -1875,14 +1875,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
-            work->variant[0] = 3;
+            work->variant[0] = SUMMON_LEVEL_SLEIGHT;
             break;
         case MOVE_CROSS_SLASH_PLUS:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
-            work->variant[0] = 3;
+            work->variant[0] = SUMMON_LEVEL_SLEIGHT;
             break;
         case MOVE_AQUA_SPLASH:
             work->state = BTL_SORA_STATE_AQUA_SPLASH;
@@ -5403,9 +5403,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_EF_DAMBO_SPLOOP);
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartDumboSplash(1, act->x - 9728, act->y, act->z - 6656, FALSE, 99);
+                BgFxStartDumboSplash(SUMMON_LEVEL_PAIR, act->x - 9728, act->y, act->z - 6656, FALSE, 99);
             } else {
-                BgFxStartDumboSplash(1, act->x + 9728, act->y, act->z - 6656, TRUE, 99);
+                BgFxStartDumboSplash(SUMMON_LEVEL_PAIR, act->x + 9728, act->y, act->z - 6656, TRUE, 99);
             }
         }
 

@@ -986,6 +986,12 @@ void task_hum_vixen_ice_3(VixenIceWork* work) {
     ColliderUnregister(&work->collider);
 }
 
+enum HumVixenFrzVariant {
+    HUM_VIXEN_FRZ_SORA,
+    HUM_VIXEN_FRZ_RIKU,
+    HUM_VIXEN_FRZ_DARK_RIKU
+};
+
 enum HumVixenFrzState {
     HUM_VIXEN_FRZ_STATE_CAST,
     HUM_VIXEN_FRZ_STATE_ENCASE,
@@ -1002,12 +1008,12 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-            work->variant = 2;
+            work->variant = HUM_VIXEN_FRZ_DARK_RIKU;
         } else {
-            work->variant = 1;
+            work->variant = HUM_VIXEN_FRZ_RIKU;
         }
     } else {
-        work->variant = 0;
+        work->variant = HUM_VIXEN_FRZ_SORA;
     }
 
     AnimInit(&work->anim, NULL, NULL);
@@ -1038,13 +1044,13 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
     case HUM_VIXEN_FRZ_STATE_ENCASE:
         if (work->timer == 0) {
             switch (work->variant) {
-            case 0:
+            case HUM_VIXEN_FRZ_SORA:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 2, 0, work->tiles);
                 break;
-            case 1:
+            case HUM_VIXEN_FRZ_RIKU:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 7, 0, work->tiles);
                 break;
-            case 2:
+            case HUM_VIXEN_FRZ_DARK_RIKU:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 10, 0, work->tiles);
                 break;
             }
@@ -1065,13 +1071,13 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
     case HUM_VIXEN_FRZ_STATE_FROZEN:
         if (work->timer == 0) {
             switch (work->variant) {
-            case 0:
+            case HUM_VIXEN_FRZ_SORA:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 4, 0, work->tiles);
                 break;
-            case 1:
+            case HUM_VIXEN_FRZ_RIKU:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 8, 0, work->tiles);
                 break;
-            case 2:
+            case HUM_VIXEN_FRZ_DARK_RIKU:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 11, 0, work->tiles);
                 break;
             }
@@ -1092,13 +1098,13 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
     case HUM_VIXEN_FRZ_STATE_SHATTER:
         if (work->timer == 0) {
             switch (work->variant) {
-            case 0:
+            case HUM_VIXEN_FRZ_SORA:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 6, 0, work->tiles);
                 break;
-            case 1:
+            case HUM_VIXEN_FRZ_RIKU:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 9, 0, work->tiles);
                 break;
-            case 2:
+            case HUM_VIXEN_FRZ_DARK_RIKU:
                 AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 12, 0, work->tiles);
                 break;
             }

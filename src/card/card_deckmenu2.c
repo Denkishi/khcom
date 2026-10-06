@@ -1347,11 +1347,11 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->exitRequested = 0;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
-    work->x5 = 0x7800;
-    work->y5 = -0x800;
-    work->x6 = 0xA400;
-    work->y6 = 0xA000;
-    work->x7 = -0x8000;
+    work->topBarX = 0x7800;
+    work->topBarY = -0x800;
+    work->bottomBarX = 0xA400;
+    work->bottomBarY = 0xA000;
+    work->bannerX = -0x8000;
     work->holding = 0;
     work->handVisible = 0;
     work->removeLabelX = 95;
@@ -1570,8 +1570,8 @@ u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* task) {
     if (!FadeIsActive()) {
         switch (work->step) {
         case DECK_MENU_SLIDE_IN_STEP_VERTICAL:
-            ApproachValue(&work->y5, 0, work->timer);
-            ApproachValue(&work->y6, 0x9800, work->timer);
+            ApproachValue(&work->topBarY, 0, work->timer);
+            ApproachValue(&work->bottomBarY, 0x9800, work->timer);
             work->timer--;
 
             if (work->timer == 0) {
@@ -1581,7 +1581,7 @@ u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* task) {
 
             break;
         case DECK_MENU_SLIDE_IN_STEP_HORIZONTAL:
-            ApproachValue(&work->x7, 0, work->timer);
+            ApproachValue(&work->bannerX, 0, work->timer);
             work->timer--;
 
             if (work->timer == 0) {
@@ -4095,11 +4095,11 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* task) {
 
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
     LoadBgMap(3, gDeckMenuMap, 0x800);
-    work->x5 = 0x7800;
-    work->y5 = 0;
-    work->x6 = 0xA400;
-    work->y6 = 0x9800;
-    work->x7 = 0;
+    work->topBarX = 0x7800;
+    work->topBarY = 0;
+    work->bottomBarX = 0xA400;
+    work->bottomBarY = 0x9800;
+    work->bannerX = 0;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
     work->handVisible = 0;
@@ -4109,11 +4109,11 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* task) {
 
 u8 UpdateDeckMenuSlideOut(DeckMenuWork* work, void* task) {
     if ((s8)work->bannerSlideTimer > 0) {
-        ApproachValue(&work->x7, -0x8000, (s8)work->bannerSlideTimer);
+        ApproachValue(&work->bannerX, -0x8000, (s8)work->bannerSlideTimer);
         work->bannerSlideTimer--;
     } else if ((s8)work->barSlideTimer > 0) {
-        ApproachValue(&work->y5, -0x800, (s8)work->barSlideTimer);
-        ApproachValue(&work->y6, 0xA000, (s8)work->barSlideTimer);
+        ApproachValue(&work->topBarY, -0x800, (s8)work->barSlideTimer);
+        ApproachValue(&work->bottomBarY, 0xA000, (s8)work->barSlideTimer);
         work->barSlideTimer--;
     } else {
         FadeStartOut(FADE_MODE_BLACK, 4);
@@ -4176,12 +4176,12 @@ static void Deckmenu2_2(DeckMenuWork* work) {
     }
 
     if (work->tiles6 != NULL) {
-        DrawSprite(work->x5 >> 8, work->y5 >> 8, gDeckMenuBarFrames[0], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
-        DrawSprite(work->x6 >> 8, work->y6 >> 8, gDeckMenuBarFrames[1], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(work->topBarX >> 8, work->topBarY >> 8, gDeckMenuBarFrames[0], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(work->bottomBarX >> 8, work->bottomBarY >> 8, gDeckMenuBarFrames[1], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
     }
 
     if (work->tiles12 != NULL) {
-        DrawSprite(work->x7 >> 8, 0,
+        DrawSprite(work->bannerX >> 8, 0,
 #ifdef VERSION_EU
                    gDeckTitleBannerSpritesByLanguage[gLanguage][0],
 #elif defined(VERSION_US)

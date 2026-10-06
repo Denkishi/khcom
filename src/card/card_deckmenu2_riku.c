@@ -129,11 +129,11 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->exitRequested = 0;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
-    work->x5 = 0x7800;
-    work->y5 = -0x800;
-    work->x6 = 0xA400;
-    work->y6 = 0xA000;
-    work->x7 = -0x8000;
+    work->topBarX = 0x7800;
+    work->topBarY = -0x800;
+    work->bottomBarX = 0xA400;
+    work->bottomBarY = 0xA000;
+    work->bannerX = -0x8000;
     work->holding = 0;
 #ifdef VERSION_EU
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTilesByLanguage[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
@@ -256,8 +256,8 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
     if (!FadeIsActive()) {
         switch (work->step) {
         case DECK_MENU_SLIDE_IN_STEP_VERTICAL:
-            ApproachValue(&work->y5, 0, work->timer);
-            ApproachValue(&work->y6, 0x9800, work->timer);
+            ApproachValue(&work->topBarY, 0, work->timer);
+            ApproachValue(&work->bottomBarY, 0x9800, work->timer);
             work->timer--;
 
             if (work->timer == 0) {
@@ -267,7 +267,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
 
             break;
         case DECK_MENU_SLIDE_IN_STEP_HORIZONTAL:
-            ApproachValue(&work->x7, 0, work->timer);
+            ApproachValue(&work->bannerX, 0, work->timer);
             n = --work->timer;
 
             if (n == 0) {
@@ -446,11 +446,11 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task) {
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
-    work->x5 = 0x7800;
-    work->y5 = 0;
-    work->x6 = 0xA400;
-    work->y6 = 0x9800;
-    work->x7 = 0;
+    work->topBarX = 0x7800;
+    work->topBarY = 0;
+    work->bottomBarX = 0xA400;
+    work->bottomBarY = 0x9800;
+    work->bannerX = 0;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
     work->handVisible = 0;
@@ -464,14 +464,14 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* task) {
     slideTimer = &work->bannerSlideTimer;
 
     if ((s8)*slideTimer > 0) {
-        ApproachValue(&work->x7, -0x8000, (s8)*slideTimer);
+        ApproachValue(&work->bannerX, -0x8000, (s8)*slideTimer);
         (*slideTimer)--;
     } else {
         slideTimer = &work->barSlideTimer;
 
         if ((s8)*slideTimer > 0) {
-            ApproachValue(&work->y5, -0x800, (s8)*slideTimer);
-            ApproachValue(&work->y6, 0xA000, (s8)*slideTimer);
+            ApproachValue(&work->topBarY, -0x800, (s8)*slideTimer);
+            ApproachValue(&work->bottomBarY, 0xA000, (s8)*slideTimer);
             (*slideTimer)--;
         } else {
             FadeStartOut(FADE_MODE_BLACK, 4);
@@ -485,16 +485,16 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* task) {
 static void Deckmenu2_2(RikuDeckMenuWork* work) {
     if (work->tiles12 != NULL) {
 #ifdef VERSION_EU
-        DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerSpritesByLanguage[gLanguage][0], work->tiles12, work->palette3, NULL, 0, 10);
+        DrawSprite(work->bannerX >> 8, 0, gRikuDeckTitleBannerSpritesByLanguage[gLanguage][0], work->tiles12, work->palette3, NULL, 0, 10);
 #else
-        DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerFrames[0], work->tiles12, work->palette3, NULL, 0, 10);
+        DrawSprite(work->bannerX >> 8, 0, gRikuDeckTitleBannerFrames[0], work->tiles12, work->palette3, NULL, 0, 10);
 #endif
     }
 
     if (work->tiles6 != NULL) {
-        DrawSprite(work->x5 >> 8, work->y5 >> 8, gDeckMenuBarFrames[0], work->tiles6,
+        DrawSprite(work->topBarX >> 8, work->topBarY >> 8, gDeckMenuBarFrames[0], work->tiles6,
                    work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
-        DrawSprite(work->x6 >> 8, work->y6 >> 8, gDeckMenuBarFrames[1], work->tiles6,
+        DrawSprite(work->bottomBarX >> 8, work->bottomBarY >> 8, gDeckMenuBarFrames[1], work->tiles6,
                    work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
     }
 

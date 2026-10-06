@@ -1201,11 +1201,11 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                 result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &data, flag, 0);
             }
 
-            if (result != 108) {
+            if (result != STOCK_DARK_MODE) {
                 gCardBattleState->soraStockName = result;
 
-                if (result <= 105) {
-                    if (result != 107) {
+                if (result <= STOCK_ICE_NEEDLES) {
+                    if (result != STOCK_MULTIPLE) {
                         for (i = 0; i < work->stockCount; i++) {
                             work->stock[i]->flags |= CARD_DISP_FLAG_STOCK_NAMED;
                         }
@@ -3184,7 +3184,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
             result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 0);
         }
 
-        if ((u16)result == 52 && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
+        if ((u16)result == STOCK_ZANTETSUKEN && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
             for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                 if (gCardBattleState->activeCards[i]->args.slot->used == 1) {
                     gCardBattleState->activeCards[i]->args.slot->removed = 1;
@@ -3229,7 +3229,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
             result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 0);
         }
 
-        if ((u16)result == 52 && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
+        if ((u16)result == STOCK_ZANTETSUKEN && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
             for (i = 0; i < previousCount; i++) {
                 if (previous[i]->args.slot->used == 1) {
                     previous[i]->args.slot->removed = 1;

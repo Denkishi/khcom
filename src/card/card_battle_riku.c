@@ -1345,7 +1345,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
 
         gCardBattleState->rikuStockName = result;
 
-        if (result <= 105) {
+        if (result <= STOCK_ICE_NEEDLES) {
             for (i = 0; i < work->stockCount; i++) {
                 work->stock[i]->flags |= CARD_DISP_FLAG_STOCK_NAMED;
             }
@@ -2345,7 +2345,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
             result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 1);
         }
 
-        if (result == 52) {
+        if (result == STOCK_ZANTETSUKEN) {
             for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                 if (gCardBattleState->activeCards[i]->args.slot->used == 1) {
                     gCardBattleState->activeCards[i]->args.slot->removed = 1;
@@ -2390,7 +2390,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
             result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 1);
         }
 
-        if (result == 52) {
+        if (result == STOCK_ZANTETSUKEN) {
             for (i = 0; i < previousCount; i++) {
                 if (previous[i]->args.slot->used == 1) {
                     previous[i]->args.slot->removed = 1;

@@ -82,7 +82,7 @@ TmBodyStep gUnk_09EF2154 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, {
 
 TmBodyStep gUnk_09EF2174 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
 
-static s8 sBosTmActionChoices[4] = { 1, 3, 9, 4 };
+static s8 sBosTmActionChoices[4] = { BOS_TM_STATE_FIRE, BOS_TM_STATE_SLAM_GROUND, BOS_TM_STATE_SPIN, BOS_TM_STATE_WALK_LEFT };
 
 TaskDesc gTaskDescBosTmBody = {
     "task_bos_tm_body",
@@ -430,59 +430,59 @@ void BosTmBodyChooseAction(TmBodyWork* work) {
     if (work->body2.hp < work->body2.maxHp / 2) {
         st = work->tm->tableState;
 
-        if (st == 2) {
+        if (st == BOS_TM_TABLE_STATE_UP) {
             if (work->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
-                work->tm->state = 1;
+                work->tm->state = BOS_TM_STATE_FIRE;
                 work->tm->flags = work->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
             } else if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 20) {
-                    work->tm->state = 9;
+                    work->tm->state = BOS_TM_STATE_SPIN;
                 } else {
-                    work->tm->state = 1;
+                    work->tm->state = BOS_TM_STATE_FIRE;
                 }
             } else {
                 work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (work->tm->state == 3) {
+                if (work->tm->state == BOS_TM_STATE_SLAM_GROUND) {
                     work->tm->state = st;
                 }
 
-                if (work->tm->state == 4) {
-                    work->tm->state = 1;
+                if (work->tm->state == BOS_TM_STATE_WALK_LEFT) {
+                    work->tm->state = BOS_TM_STATE_FIRE;
                 }
             }
-        } else if (st == 0) {
+        } else if (st == BOS_TM_TABLE_STATE_DOWN) {
             if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 30) {
-                    work->tm->state = 9;
+                    work->tm->state = BOS_TM_STATE_SPIN;
                 } else {
-                    work->tm->state = 1;
+                    work->tm->state = BOS_TM_STATE_FIRE;
                 }
             } else {
                 work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (work->tm->state == 4) {
+                if (work->tm->state == BOS_TM_STATE_WALK_LEFT) {
                     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
                         work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        work->tm->state = 4;
-                        work->tm->resumeState = 4;
+                        work->tm->state = BOS_TM_STATE_WALK_LEFT;
+                        work->tm->resumeState = BOS_TM_STATE_WALK_LEFT;
                     } else {
                         work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        work->tm->state = 6;
-                        work->tm->resumeState = 6;
+                        work->tm->state = BOS_TM_STATE_WALK_RIGHT;
+                        work->tm->resumeState = BOS_TM_STATE_WALK_RIGHT;
                     }
 
                     next = work->tm->state;
 
-                    if (next == 3) {
+                    if (next == BOS_TM_STATE_SLAM_GROUND) {
                         rnd = GetRandom() % 100;
 
                         if (rnd <= 49) {
-                            work->tm->state = 11;
+                            work->tm->state = BOS_TM_STATE_SLAM_GROUND_SLOW;
                         } else {
                             work->tm->state = next;
                         }
@@ -493,75 +493,75 @@ void BosTmBodyChooseAction(TmBodyWork* work) {
             rnd = GetRandom() % 100;
 
             if (rnd <= 59) {
-                work->tm->state = 9;
+                work->tm->state = BOS_TM_STATE_SPIN;
             } else {
-                work->tm->state = 10;
+                work->tm->state = BOS_TM_STATE_FIRE_TWICE;
             }
         }
 
         st = work->tm->state;
 
-        if (st == 1) {
+        if (st == BOS_TM_STATE_FIRE) {
             rnd = GetRandom() % 100;
 
             if (rnd <= 59) {
                 work->tm->state = st;
             } else {
-                work->tm->state = 10;
+                work->tm->state = BOS_TM_STATE_FIRE_TWICE;
             }
         }
     } else {
         st = work->tm->tableState;
 
-        if (st == 2) {
+        if (st == BOS_TM_TABLE_STATE_UP) {
             if (work->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
-                work->tm->state = 1;
+                work->tm->state = BOS_TM_STATE_FIRE;
                 work->tm->flags = work->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
             } else if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 20) {
-                    work->tm->state = 9;
+                    work->tm->state = BOS_TM_STATE_SPIN;
                 } else {
-                    work->tm->state = 1;
+                    work->tm->state = BOS_TM_STATE_FIRE;
                 }
             } else {
                 work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (work->tm->state == 3) {
+                if (work->tm->state == BOS_TM_STATE_SLAM_GROUND) {
                     work->tm->state = st;
                 }
 
-                if (work->tm->state == 4) {
-                    work->tm->state = 1;
+                if (work->tm->state == BOS_TM_STATE_WALK_LEFT) {
+                    work->tm->state = BOS_TM_STATE_FIRE;
                 }
             }
-        } else if (st == 0) {
+        } else if (st == BOS_TM_TABLE_STATE_DOWN) {
             if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 30) {
-                    work->tm->state = 9;
+                    work->tm->state = BOS_TM_STATE_SPIN;
                 } else {
-                    work->tm->state = 1;
+                    work->tm->state = BOS_TM_STATE_FIRE;
                 }
             } else {
                 work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (work->tm->state == 4) {
+                if (work->tm->state == BOS_TM_STATE_WALK_LEFT) {
                     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
                         work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        work->tm->state = 4;
-                        work->tm->resumeState = 4;
+                        work->tm->state = BOS_TM_STATE_WALK_LEFT;
+                        work->tm->resumeState = BOS_TM_STATE_WALK_LEFT;
                     } else {
                         work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        work->tm->state = 6;
-                        work->tm->resumeState = 6;
+                        work->tm->state = BOS_TM_STATE_WALK_RIGHT;
+                        work->tm->resumeState = BOS_TM_STATE_WALK_RIGHT;
                     }
                 }
             }
         } else {
-            work->tm->state = 9;
+            work->tm->state = BOS_TM_STATE_SPIN;
         }
     }
 }
@@ -588,7 +588,7 @@ void BosTmBodyUpdateReaction(BtlObj* obj, TmBodyWork* work) {
         break;
     case BTL_REACTION_CARD_BROKEN:
         work->tm->stateTimer = 0;
-        work->tm->state = 14;
+        work->tm->state = BOS_TM_STATE_CARD_BROKEN;
         break;
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
@@ -599,9 +599,9 @@ void BosTmBodyUpdateReaction(BtlObj* obj, TmBodyWork* work) {
 
         if (work->prevHp - work->hp >= 9999) {
             work->tm->hurtTimer = 55;
-            work->tm->state = 12;
+            work->tm->state = BOS_TM_STATE_RECOIL;
             work->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
-        } else if (work->tm->state != 12) {
+        } else if (work->tm->state != BOS_TM_STATE_RECOIL) {
             work->tm->hurtTimer = 20;
             work->tm->flags |= TM_FLAG_HURT_NO_RECOIL;
         }
@@ -611,7 +611,7 @@ void BosTmBodyUpdateReaction(BtlObj* obj, TmBodyWork* work) {
     case BTL_REACTION_GRAVITY_DEFEATED:
         BeginBossDefeat(obj);
         work->tm->step = 0;
-        work->tm->state = 13;
+        work->tm->state = BOS_TM_STATE_DEFEATED;
         break;
     }
 
@@ -631,10 +631,10 @@ void BosTmBodyUpdateReaction(BtlObj* obj, TmBodyWork* work) {
 
                 if (t) {
                     BosTmBodySetWalkPose(work);
-                    work->tm->state = 8;
+                    work->tm->state = BOS_TM_STATE_RESUME_WALK;
                 } else {
                     BosTmBodyResetPose(work);
-                    work->tm->state = 0;
+                    work->tm->state = BOS_TM_STATE_IDLE;
                 }
             }
         }
@@ -702,8 +702,8 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
     }
 
     switch (work->tm->state) {
-    case 0:
-    case 15:
+    case BOS_TM_STATE_IDLE:
+    case BOS_TM_STATE_EVENT_IDLE:
         if (work->tm->stateTimer == 0) {
             BosTmBodyResetPose(work);
         } else {
@@ -724,7 +724,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         }
 
         break;
-    case 4:
+    case BOS_TM_STATE_WALK_LEFT:
         if (work->tm->stateTimer == 0) {
             BosTmBodySetWalkPose(work);
             work->tm->vx = -0x900;
@@ -735,8 +735,8 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (work->tm->baseX <= 0x8E00) {
                 work->tm->flags &= ~TM_FLAG_FACING_LEFT;
                 work->body2.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-                work->tm->state = 5;
-                work->tm->resumeState = 5;
+                work->tm->state = BOS_TM_STATE_WALK_LEFT_SETTLE;
+                work->tm->resumeState = BOS_TM_STATE_WALK_LEFT_SETTLE;
                 BosTmBodyResetTimers(work);
                 BosTmBodySetWalkPose(work);
                 work->tm->vx = 0x900;
@@ -745,7 +745,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_TM_STATE_WALK_LEFT_SETTLE:
         if (work->tm->stateTimer == 0) {
             BosTmBodySetWalkPose(work);
             work->tm->vx = 0x900;
@@ -756,15 +756,15 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (work->tm->baseX > 0x9FFF) {
                 ClearBtlObjActionFlags(&work->body2);
                 work->tm->flags &= ~TM_FLAG_SWITCHING_SIDES;
-                work->tm->state = 0;
-                work->tm->resumeState = 16;
+                work->tm->state = BOS_TM_STATE_IDLE;
+                work->tm->resumeState = BOS_TM_STATE_NONE;
                 BosTmBodyResetTimers(work);
                 BosTmBodyResetPose(work);
             }
         }
 
         break;
-    case 6:
+    case BOS_TM_STATE_WALK_RIGHT:
         if (work->tm->stateTimer == 0) {
             BosTmBodySetWalkPose(work);
             work->tm->vx = 0x900;
@@ -775,8 +775,8 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (work->tm->baseX > 0x16EFF) {
                 work->tm->flags |= TM_FLAG_FACING_LEFT;
                 work->body2.flags |= BTLOBJ_FLAG_FACING_LEFT;
-                work->tm->state = 7;
-                work->tm->resumeState = 7;
+                work->tm->state = BOS_TM_STATE_WALK_RIGHT_SETTLE;
+                work->tm->resumeState = BOS_TM_STATE_WALK_RIGHT_SETTLE;
                 BosTmBodyResetTimers(work);
                 BosTmBodySetWalkPose(work);
                 work->tm->vx = -0x900;
@@ -785,7 +785,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         }
 
         break;
-    case 7:
+    case BOS_TM_STATE_WALK_RIGHT_SETTLE:
         if (work->tm->stateTimer == 0) {
             BosTmBodySetWalkPose(work);
             work->tm->vx = -0x900;
@@ -796,29 +796,29 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (work->tm->baseX <= 0x15D00) {
                 ClearBtlObjActionFlags(&work->body2);
                 work->tm->flags &= ~TM_FLAG_SWITCHING_SIDES;
-                work->tm->state = 0;
-                work->tm->resumeState = 16;
+                work->tm->state = BOS_TM_STATE_IDLE;
+                work->tm->resumeState = BOS_TM_STATE_NONE;
                 BosTmBodyResetTimers(work);
                 BosTmBodyResetPose(work);
             }
         }
 
         break;
-    case 1:
-    case 10:
+    case BOS_TM_STATE_FIRE:
+    case BOS_TM_STATE_FIRE_TWICE:
         if (work->tm->stateTimer == 0) {
             BosTmBodyResetPose(work);
         } else if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
             work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
             ClearBtlObjActionFlags(&work->body2);
-            work->tm->state = 0;
+            work->tm->state = BOS_TM_STATE_IDLE;
             BosTmBodyResetTimers(work);
             work->tm->z2 = (s16)work->tm->z << 8;
         }
 
         break;
-    case 2:
-    case 3:
+    case BOS_TM_STATE_SLAM_TABLE:
+    case BOS_TM_STATE_SLAM_GROUND:
         if (work->tm->stateTimer == 0) {
             BosTmBodyResetPose(work);
         } else {
@@ -835,14 +835,14 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
                 work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
                 ClearBtlObjActionFlags(&work->body2);
-                work->tm->state = 0;
+                work->tm->state = BOS_TM_STATE_IDLE;
                 BosTmBodyResetTimers(work);
                 BosTmBodyResetPose(work);
             }
         }
 
         break;
-    case 11:
+    case BOS_TM_STATE_SLAM_GROUND_SLOW:
         if (work->tm->stateTimer == 0) {
             BosTmBodyResetPose(work);
         } else {
@@ -859,14 +859,14 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
                 work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
                 ClearBtlObjActionFlags(&work->body2);
-                work->tm->state = 0;
+                work->tm->state = BOS_TM_STATE_IDLE;
                 BosTmBodyResetTimers(work);
                 BosTmBodyResetPose(work);
             }
         }
 
         break;
-    case 9:
+    case BOS_TM_STATE_SPIN:
         if (work->tm->stateTimer == 0) {
             BosTmBodyResetPose(work);
         } else {
@@ -881,17 +881,17 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
                 work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
                 ClearBtlObjActionFlags(&work->body2);
-                work->tm->state = 0;
+                work->tm->state = BOS_TM_STATE_IDLE;
                 BosTmBodyResetTimers(work);
                 BosTmBodyResetPose(work);
             }
         }
 
         break;
-    case 12:
+    case BOS_TM_STATE_RECOIL:
         BosTmBodyUpdateRecoil(work);
         break;
-    case 14:
+    case BOS_TM_STATE_CARD_BROKEN:
         if (work->tm->stateTimer == 0) {
             BosTmBodySetBreakPose(work);
 
@@ -906,13 +906,13 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             if (flags) {
                 ClearBtlObjActionFlags(&work->body2);
                 BosTmBodySetBreakPose(work);
-                work->tm->state = 8;
+                work->tm->state = BOS_TM_STATE_RESUME_WALK;
             } else {
                 ClearBtlObjActionFlags(&work->body2);
                 BosTmBodyResetPose(work);
-                work->tm->state = 0;
+                work->tm->state = BOS_TM_STATE_IDLE;
             }
-        } else if (!(work->tm->flags & TM_FLAG_GIMMICK_DROP_ROLLED) && work->tm->tableState == 0 && (work->tm->flags & TM_FLAG_HURT)) {
+        } else if (!(work->tm->flags & TM_FLAG_GIMMICK_DROP_ROLLED) && work->tm->tableState == BOS_TM_TABLE_STATE_DOWN && (work->tm->flags & TM_FLAG_HURT)) {
             if ((u16)(GetRandom() % 100) <= 30) {
                 DropGimmickCard(0, work->tm->baseX, work->tm->baseY, work->tm->baseZ);
                 work->tm->flags |= TM_FLAG_GIMMICK_DROP_ROLLED;
@@ -922,17 +922,17 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         }
 
         break;
-    case 8:
+    case BOS_TM_STATE_RESUME_WALK:
         RequestEnemyCardUse(&work->body2);
         break;
-    case 13:
+    case BOS_TM_STATE_DEFEATED:
         if (work->tm->step == 0) {
             BosTmBodySetDefeatPose(work);
         }
 
         break;
-    case 16:
-    case 17:
+    case BOS_TM_STATE_NONE:
+    case BOS_TM_STATE_FROZEN:
         break;
     }
 

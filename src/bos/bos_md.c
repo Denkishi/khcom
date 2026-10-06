@@ -475,13 +475,27 @@ u8 BosMdAnimIsLastFrame(MdWork* work) {
     return 0;
 }
 
+enum BosMdState {
+    BOS_MD_STATE_IDLE,
+    BOS_MD_STATE_BITE,
+    BOS_MD_STATE_QUAKE,
+    BOS_MD_STATE_FIRE_BREATH,
+    BOS_MD_STATE_DEFEATED
+};
+
+enum BosMdPhase {
+    BOS_MD_PHASE_ENTER,
+    BOS_MD_PHASE_UPDATE,
+    BOS_MD_PHASE_EXIT
+};
+
 u8 BosMdUpdateIdle(MdWork* work) {
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_MD_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_MD_PHASE_ENTER:
         if (gBtlWork->actor->x > 0x8000) {
             MdAnimStart(work, 1);
         } else {
@@ -497,7 +511,7 @@ u8 BosMdUpdateIdle(MdWork* work) {
         }
 
         break;
-    case 1:
+    case BOS_MD_PHASE_UPDATE:
         if (BosMdAnimIsLastFrame(work) && gBtlWork->actor->x > 0x8000) {
             MdAnimStart(work, 1);
         }
@@ -507,22 +521,22 @@ u8 BosMdUpdateIdle(MdWork* work) {
 
             if (work->timer <= 0) {
                 RequestEnemyCardUse(&work->sub[0]);
-                BosMdRequestState(work, 0);
+                BosMdRequestState(work, BOS_MD_STATE_IDLE);
             }
         }
 
         break;
-    case 2:
+    case BOS_MD_PHASE_EXIT:
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_MD_PHASE_ENTER) {
+        work->statePhase = BOS_MD_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_MD_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_MD_PHASE_ENTER;
         work->flags &= ~MD_FLAG_STATE_REQUESTED;
     }
 
@@ -534,11 +548,11 @@ u8 BosMdUpdateBite(MdWork* work) {
     u16 r;
 
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_MD_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-        case 0:
+        case BOS_MD_PHASE_ENTER:
             d = gBtlWork->actor->x;
 
             if (d > 0xA800) {
@@ -588,7 +602,7 @@ u8 BosMdUpdateBite(MdWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_MD_PHASE_UPDATE:
             switch (work->anim.frames[work->anim.frame].gfxIndex) {
             case 33:
             case 34:
@@ -603,37 +617,43 @@ u8 BosMdUpdateBite(MdWork* work) {
             }
 
             if (BosMdAnimIsLastFrame(work)) {
-                BosMdRequestState(work, 0);
+                BosMdRequestState(work, BOS_MD_STATE_IDLE);
             }
 
             break;
-        case 2:
+        case BOS_MD_PHASE_EXIT:
             ClearBtlObjActionFlags(&work->sub[0]);
             break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_MD_PHASE_ENTER) {
+        work->statePhase = BOS_MD_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_MD_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_MD_PHASE_ENTER;
         work->flags &= ~MD_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
 
+enum BosMdQuakeStep {
+    BOS_MD_QUAKE_STEP_FIRST_SLAM,
+    BOS_MD_QUAKE_STEP_SECOND_SLAM,
+    BOS_MD_QUAKE_STEP_DONE
+};
+
 u8 BosMdUpdateQuake(MdWork* work) {
     s32 v;
 
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_MD_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-        case 0:
+        case BOS_MD_PHASE_ENTER:
             if (gBtlWork->actor->x > 0xA800) {
                 if (GetRandom() % 100 <= 59) {
                     MdAnimStart(work, 6);
@@ -648,11 +668,11 @@ u8 BosMdUpdateQuake(MdWork* work) {
                 }
             }
 
-            work->step = 0;
+            work->step = BOS_MD_QUAKE_STEP_FIRST_SLAM;
             break;
-        case 1:
+        case BOS_MD_PHASE_UPDATE:
             switch (work->step) {
-            case 0:
+            case BOS_MD_QUAKE_STEP_FIRST_SLAM:
                 v = work->anim.frames[work->anim.frame].gfxIndex;
 
                 if (v == 18) {
@@ -661,18 +681,18 @@ u8 BosMdUpdateQuake(MdWork* work) {
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
                     BtlMapStartShake();
                     work->signals |= 1;
-                    work->step = 1;
+                    work->step = BOS_MD_QUAKE_STEP_SECOND_SLAM;
                 } else if (v == 28) {
                     ApplyAttackBox(254, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
                     BtlMapStartShake();
                     work->signals |= 1;
-                    work->step = 2;
+                    work->step = BOS_MD_QUAKE_STEP_DONE;
                 }
 
                 break;
-            case 1:
+            case BOS_MD_QUAKE_STEP_SECOND_SLAM:
                 v = work->anim.frames[work->anim.frame].gfxIndex;
 
                 if (v == 22) {
@@ -682,61 +702,67 @@ u8 BosMdUpdateQuake(MdWork* work) {
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
                     BtlMapStartShake();
                     work->signals |= 1;
-                    work->step = 2;
+                    work->step = BOS_MD_QUAKE_STEP_DONE;
                 }
 
                 break;
             }
 
             if (BosMdAnimIsLastFrame(work)) {
-                BosMdRequestState(work, 0);
+                BosMdRequestState(work, BOS_MD_STATE_IDLE);
             }
 
             break;
-        case 2:
+        case BOS_MD_PHASE_EXIT:
             ClearBtlObjActionFlags(&work->sub[0]);
             break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_MD_PHASE_ENTER) {
+        work->statePhase = BOS_MD_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_MD_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_MD_PHASE_ENTER;
         work->flags &= ~MD_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
 
+enum BosMdFireBreathStep {
+    BOS_MD_FIRE_BREATH_STEP_WINDUP,
+    BOS_MD_FIRE_BREATH_STEP_BREATHE,
+    BOS_MD_FIRE_BREATH_STEP_RECOVER
+};
+
 u8 BosMdUpdateFireBreath(MdWork* work) {
     MdFireArg a;
 
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_MD_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-        case 0:
+        case BOS_MD_PHASE_ENTER:
             work->signals = work->signals | 2;
             MdAnimStart(work, 2);
-            work->step = 0;
+            work->step = BOS_MD_FIRE_BREATH_STEP_WINDUP;
             break;
-        case 1:
+        case BOS_MD_PHASE_UPDATE:
             switch (work->step) {
-                case 0:
+                case BOS_MD_FIRE_BREATH_STEP_WINDUP:
                     if (BosMdAnimIsLastFrame(work)) {
                         MdAnimStart(work, 3);
                         BgFxStartDragonFire(work->sub[0].x, work->sub[0].y,
                                       work->sub[0].z + 0x1200, 512);
                         m4aSongNumStart(SONG_EF_DRGN_FIRE);
-                        work->step = 1;
+                        work->step = BOS_MD_FIRE_BREATH_STEP_BREATHE;
                     }
 
                     break;
-                case 1:
+                case BOS_MD_FIRE_BREATH_STEP_BREATHE:
                     if (ApplyAttackBox(253, work->sub[0].x,
                                       work->sub[0].y + 0x1800, 0, 72, 48, 1) != 0) {
                         m4aSongNumStart(SONG_SND_714);
@@ -776,36 +802,42 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
 
                         TaskCreate(&work->tasks, &sTaskDescBosMdFire, &a);
                         MdAnimStart(work, 4);
-                        work->step = 2;
+                        work->step = BOS_MD_FIRE_BREATH_STEP_RECOVER;
                     }
 
                     break;
-                case 2:
+                case BOS_MD_FIRE_BREATH_STEP_RECOVER:
                     if (BosMdAnimIsLastFrame(work)) {
-                        BosMdRequestState(work, 0);
+                        BosMdRequestState(work, BOS_MD_STATE_IDLE);
                     }
 
                     break;
             }
 
             break;
-        case 2:
+        case BOS_MD_PHASE_EXIT:
             ClearBtlObjActionFlags(&work->sub[0]);
             break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_MD_PHASE_ENTER) {
+        work->statePhase = BOS_MD_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_MD_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_MD_PHASE_ENTER;
         work->flags &= ~MD_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
+
+enum BosMdDefeatStep {
+    BOS_MD_DEFEAT_STEP_WAIT_FADE,
+    BOS_MD_DEFEAT_STEP_DEATH_FX,
+    BOS_MD_DEFEAT_STEP_DEATH_FLASH
+};
 
 u8 BosMdUpdateDefeat(MdWork* work) {
     u8 result;
@@ -814,38 +846,38 @@ u8 BosMdUpdateDefeat(MdWork* work) {
     result = 1;
 
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_MD_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-        case 0:
+        case BOS_MD_PHASE_ENTER:
             MdAnimStart(work, 10);
             BeginBossDefeat(&work->sub[0]);
             work->signals |= 2;
-            work->step = 0;
+            work->step = BOS_MD_DEFEAT_STEP_WAIT_FADE;
             break;
-        case 1:
+        case BOS_MD_PHASE_UPDATE:
             switch (work->step) {
-            case 0:
+            case BOS_MD_DEFEAT_STEP_WAIT_FADE:
                 if (!FadeIsActive()) {
                     BgFxStartBossDeath(work->sub[0].x,
                                   work->sub[0].y + work->sub[0].z);
                     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
                     work->timer = 120;
-                    work->step = 1;
+                    work->step = BOS_MD_DEFEAT_STEP_DEATH_FX;
                 }
 
                 break;
-            case 1:
+            case BOS_MD_DEFEAT_STEP_DEATH_FX:
                 work->timer--;
 
                 if (work->timer <= 0) {
                     BgFxStartBossDeathFlash();
-                    work->step = 2;
+                    work->step = BOS_MD_DEFEAT_STEP_DEATH_FLASH;
                 }
 
                 break;
-            case 2:
+            case BOS_MD_DEFEAT_STEP_DEATH_FLASH:
                 if (work->bgVisible && FadeGetAmount() == 31) {
                     DisableBg(1);
                     work->bgVisible = 0;
@@ -865,17 +897,17 @@ u8 BosMdUpdateDefeat(MdWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_MD_PHASE_EXIT:
             break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_MD_PHASE_ENTER) {
+        work->statePhase = BOS_MD_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_MD_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_MD_PHASE_ENTER;
         work->flags &= ~MD_FLAG_STATE_REQUESTED;
     }
 
@@ -892,44 +924,49 @@ void BosMdChooseAttack(MdWork* work) {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            BosMdRequestState(work, 2);
+            BosMdRequestState(work, BOS_MD_STATE_QUAKE);
         } else if (r <= 89) {
-            BosMdRequestState(work, 3);
+            BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
-            BosMdRequestState(work, 1);
+            BosMdRequestState(work, BOS_MD_STATE_BITE);
         }
     } else if (d > 0x7000) {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            BosMdRequestState(work, 1);
+            BosMdRequestState(work, BOS_MD_STATE_BITE);
         } else if (r <= 89) {
-            BosMdRequestState(work, 3);
+            BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
-            BosMdRequestState(work, 2);
+            BosMdRequestState(work, BOS_MD_STATE_QUAKE);
         }
     } else if (d > 0x3800) {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            BosMdRequestState(work, 1);
+            BosMdRequestState(work, BOS_MD_STATE_BITE);
         } else if (r <= 89) {
-            BosMdRequestState(work, 3);
+            BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
-            BosMdRequestState(work, 2);
+            BosMdRequestState(work, BOS_MD_STATE_QUAKE);
         }
     } else {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            BosMdRequestState(work, 2);
+            BosMdRequestState(work, BOS_MD_STATE_QUAKE);
         } else if (r <= 89) {
-            BosMdRequestState(work, 3);
+            BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
-            BosMdRequestState(work, 1);
+            BosMdRequestState(work, BOS_MD_STATE_BITE);
         }
     }
 }
+
+enum BosMdHurtState {
+    BOS_MD_HURT_STATE_NONE,
+    BOS_MD_HURT_STATE_HIT = 2
+};
 
 void BosMdHandleReaction(MdWork* work) {
     s16 i;
@@ -945,15 +982,15 @@ void BosMdHandleReaction(MdWork* work) {
         case BTL_REACTION_STUNNED:
         case BTL_REACTION_GRAVITY:
             work->hurtTimer = 30;
-            work->hurtState[i] = 2;
+            work->hurtState[i] = BOS_MD_HURT_STATE_HIT;
             break;
         case BTL_REACTION_DEFEATED:
         case BTL_REACTION_GRAVITY_DEFEATED:
             SetBtlObjUnhittable(e, 1);
-            BosMdRequestState(work, 4);
+            BosMdRequestState(work, BOS_MD_STATE_DEFEATED);
             break;
         case BTL_REACTION_CARD_BROKEN:
-            BosMdRequestState(work, 0);
+            BosMdRequestState(work, BOS_MD_STATE_IDLE);
             ClearBtlObjActionFlags(e);
             break;
         }
@@ -966,8 +1003,8 @@ void BosMdEndHurt(MdWork* work) {
     for (i = 0; i < 1; i++) {
         BtlObj* e = &work->sub[i];
 
-        if (work->hurtState[i] == 2 && work->hurtTimer == 0) {
-            work->hurtState[i] = 0;
+        if (work->hurtState[i] == BOS_MD_HURT_STATE_HIT && work->hurtTimer == 0) {
+            work->hurtState[i] = BOS_MD_HURT_STATE_NONE;
             ClearBtlObjActionFlags(e);
         }
     }
@@ -978,10 +1015,10 @@ void task_bos_md_0(MdWork* work, void* arg) {
 
     TaskCreate(&gBtlWork->taskPools[1], &sTaskDescBosMdMap, (void*)&sMdMapData);
     gBtlWork->flags &= 0xFFFFFFFFFFEFFFFF;
-    work->state = 0;
-    work->nextState = 0;
+    work->state = BOS_MD_STATE_IDLE;
+    work->nextState = BOS_MD_STATE_IDLE;
     work->flags = 0;
-    work->statePhase = 0;
+    work->statePhase = BOS_MD_PHASE_ENTER;
     work->timer = 0;
     work->stepsLeft = 0;
     work->hurtTimer = 0;
@@ -989,7 +1026,7 @@ void task_bos_md_0(MdWork* work, void* arg) {
     work->bgVisible = 1;
 
     for (i = 0; i < 1; i++) {
-        work->hurtState[i] = 0;
+        work->hurtState[i] = BOS_MD_HURT_STATE_NONE;
     }
 
     for (i = 0; i < 2; i++) {
@@ -1050,19 +1087,19 @@ s32 task_bos_md_1(MdWork* work) {
     BosMdHandleReaction(work);
 
     switch (work->state) {
-    case 0:
+    case BOS_MD_STATE_IDLE:
         result = BosMdUpdateIdle(work);
         break;
-    case 1:
+    case BOS_MD_STATE_BITE:
         result = BosMdUpdateBite(work);
         break;
-    case 2:
+    case BOS_MD_STATE_QUAKE:
         result = BosMdUpdateQuake(work);
         break;
-    case 3:
+    case BOS_MD_STATE_FIRE_BREATH:
         result = BosMdUpdateFireBreath(work);
         break;
-    case 4:
+    case BOS_MD_STATE_DEFEATED:
         result = BosMdUpdateDefeat(work);
         break;
     }
@@ -1241,6 +1278,14 @@ s32 task_bos_md_map_1(MdMapWork* work) {
     return 1;
 }
 
+enum BosMdFireState {
+    BOS_MD_FIRE_STATE_APPEAR,
+    BOS_MD_FIRE_STATE_ACTIVE,
+    BOS_MD_FIRE_STATE_INERT,
+    BOS_MD_FIRE_STATE_HURT,
+    BOS_MD_FIRE_STATE_VANISH
+};
+
 void BosMdFireHandleReaction(MdFireWork* work) {
     BtlObj* e;
 
@@ -1251,7 +1296,7 @@ void BosMdFireHandleReaction(MdFireWork* work) {
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
         work->flashTimer = 30;
-        work->state = 3;
+        work->state = BOS_MD_FIRE_STATE_HURT;
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
@@ -1263,10 +1308,17 @@ void BosMdFireHandleReaction(MdFireWork* work) {
 
         SetBtlObjUnhittable(e, 1);
         work->scaleSteps = 30;
-        work->state = 4;
+        work->state = BOS_MD_FIRE_STATE_VANISH;
         break;
     }
 }
+
+enum BosMdFireMotion {
+    BOS_MD_FIRE_MOTION_WAIT,
+    BOS_MD_FIRE_MOTION_SHOOT,
+    BOS_MD_FIRE_MOTION_CIRCLE,
+    BOS_MD_FIRE_MOTION_SWAY
+};
 
 u8 BosMdFireUpdateMotion(MdFireWork* work) {
     u8 result;
@@ -1276,25 +1328,25 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
     result = 1;
     e = &work->sub;
 
-    if ((*work->flags & 2) && work->state != 4) {
+    if ((*work->flags & 2) && work->state != BOS_MD_FIRE_STATE_VANISH) {
         SetBtlObjUnhittable(e, 1);
         work->scaleSteps = 30;
-        work->state = 4;
+        work->state = BOS_MD_FIRE_STATE_VANISH;
     }
 
     switch (work->state) {
-        case 0:
+        case BOS_MD_FIRE_STATE_APPEAR:
             work->scaleSteps--;
 
             if (work->scaleSteps <= 0) {
                 SetBtlObjUnhittable(e, 0);
-                work->state = 1;
+                work->state = BOS_MD_FIRE_STATE_ACTIVE;
             }
 
             break;
-        case 1:
+        case BOS_MD_FIRE_STATE_ACTIVE:
             switch (work->motion) {
-                case 0:
+                case BOS_MD_FIRE_MOTION_WAIT:
                     if (work->timer > 0) {
                         work->timer--;
 
@@ -1310,20 +1362,20 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
                                 work->vx = gSineTable[a] * 3;
                                 work->vy = -gSineTable[a + 0x40] * 3;
                                 work->timer = 90;
-                                work->motion = 1;
+                                work->motion = BOS_MD_FIRE_MOTION_SHOOT;
                                 break;
                             case 3:
-                                work->motion = 2;
+                                work->motion = BOS_MD_FIRE_MOTION_CIRCLE;
                                 break;
                             case 5:
-                                work->motion = 3;
+                                work->motion = BOS_MD_FIRE_MOTION_SWAY;
                                 break;
                             }
                         }
                     }
 
                     break;
-                case 1:
+                case BOS_MD_FIRE_MOTION_SHOOT:
                     work->x += work->vx;
                     work->y += work->vy;
                     work->timer--;
@@ -1335,16 +1387,16 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
 #endif
                         SetBtlObjUnhittable(e, 1);
                         work->scaleSteps = 30;
-                        work->state = 4;
+                        work->state = BOS_MD_FIRE_STATE_VANISH;
                     }
 
                     break;
-                case 2:
+                case BOS_MD_FIRE_MOTION_CIRCLE:
                     work->angle++;
                     work->x = gSineTable[work->angle] * 40 + work->centerX;
                     work->y = -gSineTable[work->angle + 0x40] * 40 + work->centerY;
                     break;
-                case 3:
+                case BOS_MD_FIRE_MOTION_SWAY:
                     work->angle++;
                     work->x = gSineTable[work->angle] * 32 + work->centerX;
                     break;
@@ -1359,16 +1411,16 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_MD_FIRE_STATE_INERT:
             break;
-        case 3:
+        case BOS_MD_FIRE_STATE_HURT:
             if (work->flashTimer == 0) {
-                work->state = 1;
+                work->state = BOS_MD_FIRE_STATE_ACTIVE;
                 ClearBtlObjActionFlags(e);
             }
 
             break;
-        case 4:
+        case BOS_MD_FIRE_STATE_VANISH:
             work->scaleSteps--;
 
             if (work->scaleSteps <= 0) {
@@ -1392,7 +1444,7 @@ void BosMdFirePlace(MdFireWork* work) {
         work->x = p->x * 256;
         work->y = p->y * 256;
         work->timer = p->delay;
-        work->motion = 0;
+        work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
     case 3:
         work->angle = work->index * 256 / 6;
@@ -1401,13 +1453,13 @@ void BosMdFirePlace(MdFireWork* work) {
         work->x = gSineTable[work->angle] * 40 + work->centerX;
         work->y = -gSineTable[work->angle + 0x40] * 40 + work->centerY;
         work->timer = 60;
-        work->motion = 0;
+        work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
     case 4:
         work->x = GetRandom() % 96 * 256 + 0x9800;
         work->y = work->index * 4096 + 0x11800;
         work->timer = work->index * 60 + 240;
-        work->motion = 0;
+        work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
     case 5:
         work->angle = 0;
@@ -1415,7 +1467,7 @@ void BosMdFirePlace(MdFireWork* work) {
         work->x = gSineTable[work->angle] * 32 + work->centerX;
         work->y = work->index * 4096 + 0x11800;
         work->timer = work->index * 256 / 6 + 60;
-        work->motion = 0;
+        work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
     }
 }
@@ -1429,7 +1481,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->contactCooldown = 0;
     work->scale = 25;
     work->scaleSteps = 30;
-    work->state = 0;
+    work->state = BOS_MD_FIRE_STATE_APPEAR;
     work->z = 0;
     work->pattern = arg->pattern;
     work->index = arg->index;
@@ -1500,10 +1552,10 @@ void task_bos_md_fire_2(MdFireWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     frame = GetBattleSpritePriorityFlags(work->y);
 
-    if (work->state == 0) {
+    if (work->state == BOS_MD_FIRE_STATE_APPEAR) {
         ApproachValue(&work->scale, 0x100, work->scaleSteps);
         sprite = AllocObjAffine(0, work->scale, work->scale, 0);
-    } else if (work->state == 4) {
+    } else if (work->state == BOS_MD_FIRE_STATE_VANISH) {
         ApproachValue(&work->scale, 25, work->scaleSteps);
         sprite = AllocObjAffine(0, work->scale, work->scale, 0);
     } else {
@@ -1522,6 +1574,13 @@ void task_bos_md_fire_3(MdFireWork* work) {
     ReleaseObjTiles(work->tiles);
 }
 
+enum BosMdDaiState {
+    BOS_MD_DAI_STATE_DROP_BOTTOM,
+    BOS_MD_DAI_STATE_DROP_MIDDLE,
+    BOS_MD_DAI_STATE_DROP_TOP,
+    BOS_MD_DAI_STATE_STACKED
+};
+
 void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     Collider* p;
 
@@ -1529,7 +1588,7 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     work->flags = args[1];
     work->pool = args[0];
     work->level = 0;
-    work->state = 0;
+    work->state = BOS_MD_DAI_STATE_DROP_BOTTOM;
     work->x = 0x8000;
     work->y = 0x14F00;
     work->z = 0;
@@ -1552,7 +1611,7 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
     result = 1;
 
     switch (work->state) {
-    case 0:
+    case BOS_MD_DAI_STATE_DROP_BOTTOM:
         ApproachValue(&work->dropZ, 0, work->dropSteps);
         work->dropSteps--;
 
@@ -1563,11 +1622,11 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
             work->level = 1;
             work->dropSteps = 20;
-            work->state = 1;
+            work->state = BOS_MD_DAI_STATE_DROP_MIDDLE;
         }
 
         break;
-    case 1:
+    case BOS_MD_DAI_STATE_DROP_MIDDLE:
         ApproachValue(&work->dropZ, -3584, work->dropSteps);
         work->dropSteps--;
 
@@ -1578,11 +1637,11 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
             work->level = 2;
             work->dropSteps = 20;
-            work->state = 2;
+            work->state = BOS_MD_DAI_STATE_DROP_TOP;
         }
 
         break;
-    case 2:
+    case BOS_MD_DAI_STATE_DROP_TOP:
         ApproachValue(&work->dropZ, -7168, work->dropSteps);
         work->dropSteps--;
 
@@ -1592,11 +1651,11 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
             work->level = 3;
             *work->flags &= 0xFFFE;
-            work->state = 3;
+            work->state = BOS_MD_DAI_STATE_STACKED;
         }
 
         break;
-    case 3:
+    case BOS_MD_DAI_STATE_STACKED:
         if (*work->flags & 1) {
             *work->flags &= 0xFFFE;
             args[0] = work->x;
@@ -1632,7 +1691,7 @@ void task_bos_md_dai_2(MdDaiWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z + work->dropZ);
     frame = GetBattleSpritePriorityFlags(work->y);
 
-    if (work->state <= 2) {
+    if (work->state <= BOS_MD_DAI_STATE_DROP_TOP) {
         DrawSprite(x, y + 24, gBosMdDaiFrame0, work->tiles, work->palette, NULL,
                       frame, -4100 - (work->y >> 8) * 4);
         DrawSprite(x, y, gBosMdDaiFrame1, work->tiles, work->palette, NULL, frame,

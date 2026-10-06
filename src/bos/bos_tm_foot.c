@@ -576,8 +576,8 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
     BosTmFootSyncCollider(&work->body4, work);
 
     switch (work->tm->state) {
-    case 0:
-    case 15:
+    case BOS_TM_STATE_IDLE:
+    case BOS_TM_STATE_EVENT_IDLE:
         if (work->tm->stateTimer != 0) {
             if (work->tm->stepTimer != 0) {
                 break;
@@ -598,10 +598,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         break;
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case BOS_TM_STATE_WALK_LEFT:
+    case BOS_TM_STATE_WALK_LEFT_SETTLE:
+    case BOS_TM_STATE_WALK_RIGHT:
+    case BOS_TM_STATE_WALK_RIGHT_SETTLE:
         if (work->tm->stateTimer != 0) {
             BosTmFootWalk(work);
         } else {
@@ -609,15 +609,15 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         break;
-    case 1:
-    case 10:
+    case BOS_TM_STATE_FIRE:
+    case BOS_TM_STATE_FIRE_TWICE:
         if (work->tm->stateTimer == 0) {
             BosTmFootResetPose(work);
         }
 
         break;
-    case 2:
-    case 3:
+    case BOS_TM_STATE_SLAM_TABLE:
+    case BOS_TM_STATE_SLAM_GROUND:
         if (work->tm->stateTimer != 0) {
             n = work->tm->step;
 
@@ -637,7 +637,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         break;
-    case 11:
+    case BOS_TM_STATE_SLAM_GROUND_SLOW:
         if (work->tm->stateTimer != 0) {
             n = work->tm->step;
 
@@ -657,7 +657,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         break;
-    case 9:
+    case BOS_TM_STATE_SPIN:
         if (work->tm->stateTimer != 0) {
             n = work->tm->step;
 
@@ -674,7 +674,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         break;
-    case 12:
+    case BOS_TM_STATE_RECOIL:
         if (work->tm->hitCount == 1) {
             work->unk_002 = 0;
             work->unk_000 = 0;
@@ -705,7 +705,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         break;
-    case 14:
+    case BOS_TM_STATE_CARD_BROKEN:
         if (work->tm->stateTimer == 0) {
             BosTmFootSetBreakPose(work);
         } else if (work->tm->stateTimer > 59) {
@@ -717,15 +717,15 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         break;
-    case 13:
+    case BOS_TM_STATE_DEFEATED:
         if (work->tm->step == 0) {
             BosTmFootSetBreakPose(work);
         }
 
         break;
-    case 8:
-    case 16:
-    case 17:
+    case BOS_TM_STATE_RESUME_WALK:
+    case BOS_TM_STATE_NONE:
+    case BOS_TM_STATE_FROZEN:
     default:
         break;
     }
@@ -784,10 +784,24 @@ void task_bos_tm_foot_3(TmFootWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
+enum BosTmClbMoveMode {
+    BOS_TM_CLB_MOVE_MODE_FOLLOW,
+    BOS_TM_CLB_MOVE_MODE_HOLD,
+    BOS_TM_CLB_MOVE_MODE_HOLD_LEFT,
+    BOS_TM_CLB_MOVE_MODE_HOLD_RIGHT_HIGH,
+    BOS_TM_CLB_MOVE_MODE_THROWN
+};
+
+enum BosTmClbSpinMode {
+    BOS_TM_CLB_SPIN_MODE_TWIRL,
+    BOS_TM_CLB_SPIN_MODE_ALIGN,
+    BOS_TM_CLB_SPIN_MODE_LOCKED
+};
+
 void CreateBosTmClbTask(TaskPool* pool, TmClbArg* clb, TmArmPos* tip) {
     clb->src = tip;
-    clb->moveMode = 0;
-    clb->spinMode = 1;
+    clb->moveMode = BOS_TM_CLB_MOVE_MODE_FOLLOW;
+    clb->spinMode = BOS_TM_CLB_SPIN_MODE_ALIGN;
     clb->vz = 0;
     TaskCreate(pool, &sTaskDescBosTmClb, clb);
 }
@@ -795,34 +809,34 @@ void CreateBosTmClbTask(TaskPool* pool, TmClbArg* clb, TmArmPos* tip) {
 void BosTmClbThrow(TmClbArg* clb, TmArmPos* tip, s32 vz) {
     clb->src = tip;
     clb->vz = vz;
-    clb->moveMode = 4;
-    clb->spinMode = 0;
+    clb->moveMode = BOS_TM_CLB_MOVE_MODE_THROWN;
+    clb->spinMode = BOS_TM_CLB_SPIN_MODE_TWIRL;
 }
 
 void BosTmClbHoldSpinning(TmClbArg* clb, TmArmPos* tip) {
     clb->src = tip;
     clb->vz = 0;
-    clb->moveMode = 0;
-    clb->spinMode = 0;
+    clb->moveMode = BOS_TM_CLB_MOVE_MODE_FOLLOW;
+    clb->spinMode = BOS_TM_CLB_SPIN_MODE_TWIRL;
 }
 
 void BosTmClbHold(TmClbArg* clb, TmArmPos* tip, u8 mode) {
     clb->src = tip;
     clb->vz = 0;
-    clb->spinMode = 2;
+    clb->spinMode = BOS_TM_CLB_SPIN_MODE_LOCKED;
 
     switch (mode) {
     case 0:
-        clb->moveMode = 1;
+        clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD;
         break;
     case 1:
-        clb->moveMode = 1;
+        clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD;
         break;
     case 2:
-        clb->moveMode = 2;
+        clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD_LEFT;
         break;
     case 3:
-        clb->moveMode = 3;
+        clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD_RIGHT_HIGH;
         break;
     }
 }
@@ -844,7 +858,7 @@ u8 task_bos_tm_clb_1(TmClbWork* work) {
     TmClbArg* a = work->arg;
 
     switch (a->moveMode) {
-    case 4:
+    case BOS_TM_CLB_MOVE_MODE_THROWN:
         work->x += (a->src->x - work->x) >> 4;
         work->y = a->src->y;
         work->z += a->vz;
@@ -852,27 +866,27 @@ u8 task_bos_tm_clb_1(TmClbWork* work) {
 
         if (a->vz > 0 && work->z >= a->src->z) {
             work->z = a->src->z;
-            a->moveMode = 0;
-            a->spinMode = 1;
+            a->moveMode = BOS_TM_CLB_MOVE_MODE_FOLLOW;
+            a->spinMode = BOS_TM_CLB_SPIN_MODE_ALIGN;
         }
 
         break;
-    case 0:
+    case BOS_TM_CLB_MOVE_MODE_FOLLOW:
         work->x = a->src->x;
         work->y = a->src->y;
         work->z = a->src->z;
         break;
-    case 1:
+    case BOS_TM_CLB_MOVE_MODE_HOLD:
         work->x = a->src->x;
         work->y = a->src->y;
         work->z = a->src->z;
         break;
-    case 2:
+    case BOS_TM_CLB_MOVE_MODE_HOLD_LEFT:
         work->x = a->src->x - 0x600;
         work->y = a->src->y;
         work->z = a->src->z;
         break;
-    case 3:
+    case BOS_TM_CLB_MOVE_MODE_HOLD_RIGHT_HIGH:
         work->x = a->src->x + 0x600;
         work->y = a->src->y;
         work->z = a->src->z - 0x500;
@@ -880,13 +894,13 @@ u8 task_bos_tm_clb_1(TmClbWork* work) {
     }
 
     switch (a->spinMode) {
-    case 0:
+    case BOS_TM_CLB_SPIN_MODE_TWIRL:
         work->angle += 0x10;
         break;
-    case 1:
+    case BOS_TM_CLB_SPIN_MODE_ALIGN:
         ApproachAngle(&work->angle, a->src->angle, 2);
         break;
-    case 2:
+    case BOS_TM_CLB_SPIN_MODE_LOCKED:
         work->angle = a->src->angle;
         break;
     }
@@ -1030,7 +1044,7 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->timer = 0;
     work->timer2 = 0;
     work->clbSwapped = 1;
-    work->prevState = 0;
+    work->prevState = BOS_TM_STATE_IDLE;
     work->jointAnim2.frames = NULL;
     work->jointAnim.frames = NULL;
     BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleLeftFrames, 3, work->joints.arms[0]);
@@ -1109,8 +1123,8 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     u8 v;
 
     switch (work->src->tm->state) {
-    case 0:
-    case 15:
+    case BOS_TM_STATE_IDLE:
+    case BOS_TM_STATE_EVENT_IDLE:
         if (work->timer == 0) {
             work->tips[0].angle = 0x110;
 
@@ -1143,10 +1157,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         work->timer++;
         break;
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case BOS_TM_STATE_WALK_LEFT:
+    case BOS_TM_STATE_WALK_LEFT_SETTLE:
+    case BOS_TM_STATE_WALK_RIGHT:
+    case BOS_TM_STATE_WALK_RIGHT_SETTLE:
         if (work->timer == 0) {
             work->tips[0].angle = 0x110;
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
@@ -1160,8 +1174,8 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         work->timer++;
         break;
-    case 12:
-    case 14:
+    case BOS_TM_STATE_RECOIL:
+    case BOS_TM_STATE_CARD_BROKEN:
         if (work->timer == 0) {
             work->tips[0].angle = 90;
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
@@ -1175,7 +1189,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         work->timer++;
         break;
-    case 13:
+    case BOS_TM_STATE_DEFEATED:
         if (work->timer == 0) {
             work->tips[0].angle = 90;
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
@@ -1189,7 +1203,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         work->timer++;
         break;
-    case 1:
+    case BOS_TM_STATE_FIRE:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, 3, &work->joints.all[4]);
@@ -1223,7 +1237,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         work->timer++;
         break;
-    case 10:
+    case BOS_TM_STATE_FIRE_TWICE:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, 3, &work->joints.all[4]);
@@ -1273,7 +1287,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         work->timer++;
         break;
-    case 2:
+    case BOS_TM_STATE_SLAM_TABLE:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, 6, &work->joints.all[4]);
@@ -1287,7 +1301,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         if (work->timer == 35) {
             work->tips[0].angle = 0x110;
-            work->src->tm->tableState = 1;
+            work->src->tm->tableState = BOS_TM_TABLE_STATE_MOVING;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 r = ApplyAttackBox(237, work->tips[1].x - 0x1000, work->tips[1].y,
@@ -1311,7 +1325,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_TM_STATE_SLAM_GROUND:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, 6, &work->joints.all[4]);
@@ -1355,7 +1369,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         break;
-    case 11:
+    case BOS_TM_STATE_SLAM_GROUND_SLOW:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowSlowLeftFrames, 6, &work->joints.all[4]);
@@ -1399,7 +1413,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         break;
-    case 9:
+    case BOS_TM_STATE_SPIN:
         if (work->timer == 0) {
             work->tips[0].angle = 0x10C;
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
@@ -1426,7 +1440,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         gBosTmArmSpinTimer = work->timer;
         break;
-    case 17:
+    case BOS_TM_STATE_FROZEN:
         return;
     }
 
@@ -1442,8 +1456,8 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     s32 i;
 
     switch (work->src->tm->state) {
-    case 0:
-    case 15:
+    case BOS_TM_STATE_IDLE:
+    case BOS_TM_STATE_EVENT_IDLE:
         if (work->timer2 == 0) {
             work->tips[1].angle = 0x110;
 
@@ -1464,10 +1478,10 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case BOS_TM_STATE_WALK_LEFT:
+    case BOS_TM_STATE_WALK_LEFT_SETTLE:
+    case BOS_TM_STATE_WALK_RIGHT:
+    case BOS_TM_STATE_WALK_RIGHT_SETTLE:
         if (work->timer2 == 0) {
             work->tips[1].angle = 0x110;
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
@@ -1481,8 +1495,8 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 12:
-    case 14:
+    case BOS_TM_STATE_RECOIL:
+    case BOS_TM_STATE_CARD_BROKEN:
         if (work->timer2 == 0) {
             work->tips[1].angle = 185;
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
@@ -1496,7 +1510,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 13:
+    case BOS_TM_STATE_DEFEATED:
         if (work->timer2 == 0) {
             work->tips[1].angle = 185;
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
@@ -1510,7 +1524,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 1:
+    case BOS_TM_STATE_FIRE:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, 3, work->joints.all);
@@ -1531,7 +1545,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 10:
+    case BOS_TM_STATE_FIRE_TWICE:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, 3, work->joints.all);
@@ -1552,7 +1566,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 2:
+    case BOS_TM_STATE_SLAM_TABLE:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, 6, work->joints.all);
@@ -1570,7 +1584,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 3:
+    case BOS_TM_STATE_SLAM_GROUND:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, 6, work->joints.all);
@@ -1588,7 +1602,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 11:
+    case BOS_TM_STATE_SLAM_GROUND_SLOW:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowSlowLeftFrames, 6, work->joints.all);
@@ -1606,7 +1620,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 9:
+    case BOS_TM_STATE_SPIN:
         if (work->timer2 == 0) {
             work->tips[1].angle = 0x110;
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
@@ -1620,7 +1634,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
 
         work->timer2++;
         break;
-    case 17:
+    case BOS_TM_STATE_FROZEN:
         return;
     }
 
@@ -1647,7 +1661,7 @@ u8 task_bos_tm_arm_1(TmArmWork* work) {
         BosTmArmUpdateArm0(work);
     }
 
-    if (work->src->tm->state != 13) {
+    if (work->src->tm->state != BOS_TM_STATE_DEFEATED) {
         gfx = AnimUpdate(&work->anim);
         work->clb.gfx = gfx;
         work->clb2.gfx = gfx;
@@ -1728,13 +1742,20 @@ void task_bos_tm_arm_3(TmArmWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum BosTmTblState {
+    BOS_TM_TBL_STATE_DOWN,
+    BOS_TM_TBL_STATE_UP,
+    BOS_TM_TBL_STATE_RISING,
+    BOS_TM_TBL_STATE_SINKING
+};
+
 void task_bos_tm_tbl_0(TmTblWork* work, TmWork* arg) {
     ColliderInit(&work->collider, 7, 0x1C, 0);
     ColliderSetPosition(&work->collider, 0x10000, 0x16000, 0);
     ColliderSetDisabled(&work->collider, 0);
     DisableBg(1);
     work->tm = arg;
-    work->state = 0;
+    work->state = BOS_TM_TBL_STATE_DOWN;
     work->unk_062 = 1;
     work->unk_064 = 0;
     work->frame = 0;
@@ -1746,26 +1767,26 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
     u16 t;
 
     switch (work->state) {
-    case 1:
-        if (work->tm->tableState == 1) {
+    case BOS_TM_TBL_STATE_UP:
+        if (work->tm->tableState == BOS_TM_TABLE_STATE_MOVING) {
             work->frame = 0;
-            work->state = 3;
+            work->state = BOS_TM_TBL_STATE_SINKING;
         }
 
         break;
-    case 0:
+    case BOS_TM_TBL_STATE_DOWN:
         if (!work->gimmickPlayed) {
             if (ConsumeGimmickFlag(0)) {
                 work->gimmickPlayed = 1;
             }
         } else {
-            work->state = 2;
-            work->tm->tableState = 1;
+            work->state = BOS_TM_TBL_STATE_RISING;
+            work->tm->tableState = BOS_TM_TABLE_STATE_MOVING;
             work->gimmickPlayed = 0;
         }
 
         break;
-    case 2:
+    case BOS_TM_TBL_STATE_RISING:
         switch (work->frame) {
         case 0:
             m4aSongNumStart(SONG_BTL_TABLE_U);
@@ -1801,8 +1822,8 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
 
         if (work->frame > 15) {
             work->frame = 0;
-            work->state = 1;
-            work->tm->tableState = 2;
+            work->state = BOS_TM_TBL_STATE_UP;
+            work->tm->tableState = BOS_TM_TABLE_STATE_UP;
             t = work->tm->flags | TM_FLAG_TABLE_JUST_RAISED;
             work->tm->flags = t;
         } else {
@@ -1812,7 +1833,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_TM_TBL_STATE_SINKING:
         switch (work->frame) {
         case 0:
             LoadBgMap(1, gBosTmTableMaps[1], 0x800);
@@ -1847,8 +1868,8 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
 
         if (work->frame > 7) {
             work->frame = 0;
-            work->state = 0;
-            work->tm->tableState = 0;
+            work->state = BOS_TM_TBL_STATE_DOWN;
+            work->tm->tableState = BOS_TM_TABLE_STATE_DOWN;
         } else {
             work->frame++;
         }

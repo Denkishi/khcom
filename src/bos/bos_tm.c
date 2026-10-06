@@ -96,10 +96,10 @@ void task_bos_tm_0(TmWork* work, BtlObj* arg) {
     work->hitCount = 0;
     work->hurtTimer = 55;
     work->stateTimer = 0;
-    work->tableState = 0;
+    work->tableState = BOS_TM_TABLE_STATE_DOWN;
     work->flags |= (TM_FLAG_TABLE_JUST_RAISED | TM_FLAG_FACING_LEFT);
     work->unk_3B = 0;
-    work->resumeState = 16;
+    work->resumeState = BOS_TM_STATE_NONE;
     work->tileIndex = 0;
     work->tileCount = 0;
     work->paletteIndex = 0;
@@ -107,12 +107,12 @@ void task_bos_tm_0(TmWork* work, BtlObj* arg) {
     BosTmSetArmPositions(work);
 
     if (work->flags & TM_FLAG_IN_EVENT) {
-        work->state = 15;
+        work->state = BOS_TM_STATE_EVENT_IDLE;
         sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, work);
         sBosTmFootTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmFoot, work);
         sBosTmArmTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmArm, &work->arm);
     } else {
-        work->state = 0;
+        work->state = BOS_TM_STATE_IDLE;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&sBosTmBattleBackgroundDef);
         sBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, work);
         sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, work);
@@ -127,8 +127,8 @@ u8 task_bos_tm_1(TmWork* work) {
     u16 t;
 
     switch (work->state) {
-    case 0:
-    case 15:
+    case BOS_TM_STATE_IDLE:
+    case BOS_TM_STATE_EVENT_IDLE:
         work->stepTimer++;
 
         if (work->stepTimer > 8) {
@@ -141,7 +141,7 @@ u8 task_bos_tm_1(TmWork* work) {
         }
 
         break;
-    case 12:
+    case BOS_TM_STATE_RECOIL:
         work->step++;
         t = work->hitCount;
 
@@ -150,10 +150,10 @@ u8 task_bos_tm_1(TmWork* work) {
         }
 
         break;
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case BOS_TM_STATE_WALK_LEFT:
+    case BOS_TM_STATE_WALK_LEFT_SETTLE:
+    case BOS_TM_STATE_WALK_RIGHT:
+    case BOS_TM_STATE_WALK_RIGHT_SETTLE:
         work->stepTimer++;
 
         if (work->stepTimer > 6) {
@@ -166,7 +166,7 @@ u8 task_bos_tm_1(TmWork* work) {
         }
 
         break;
-    case 13:
+    case BOS_TM_STATE_DEFEATED:
         if (work->step != 0) {
             if (!CharaObjUpdateDefeat2()) {
                 EndBossDefeat();
@@ -191,13 +191,13 @@ u8 task_bos_tm_1(TmWork* work) {
         }
 
         break;
-    case 2:
-    case 3:
-    case 9:
-    case 11:
+    case BOS_TM_STATE_SLAM_TABLE:
+    case BOS_TM_STATE_SLAM_GROUND:
+    case BOS_TM_STATE_SPIN:
+    case BOS_TM_STATE_SLAM_GROUND_SLOW:
         work->step++;
         break;
-    case 17:
+    case BOS_TM_STATE_FROZEN:
         break;
     }
 
@@ -206,7 +206,7 @@ u8 task_bos_tm_1(TmWork* work) {
     gBosTmActorZ = gBtlWork->actor->z >> 8;
     gBosTmBossY = gBtlWork->bossY >> 8;
 
-    if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && work->state != 13) {
+    if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && work->state != BOS_TM_STATE_DEFEATED) {
         if (gBtlWork->actor->originZ <= -0x2D00) {
             gBtlWork->bossPriorityOffset = -10;
         } else {

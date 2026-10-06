@@ -10,6 +10,6 @@ typedef struct WLogoTaskWork {
 } WLogoTaskWork;
 
 void WLogoInitWorldSelect();
-void WLogoStartLogo(u8 a);
+void WLogoStartLogo(u8 world);
 
 #endif

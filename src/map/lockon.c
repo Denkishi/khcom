@@ -197,8 +197,8 @@ void task_lockon_3(LockonWork* work) {
     gLockonDoorPosition = NULL;
 }
 
-s32 VectorLength2D(s32 a, s32 b) {
-    return (u16)Sqrt(a * a + b * b);
+s32 VectorLength2D(s32 x, s32 y) {
+    return (u16)Sqrt(x * x + y * y);
 }
 
 s32 NormalizeVector2D8(s32* x, s32* y) {
@@ -212,7 +212,7 @@ s32 NormalizeVector2D8(s32* x, s32* y) {
     return d;
 }
 
-s8 LockonPickNearest(s32 a, s32 b, LockonWork* work, s8 n, s8* list) {
+s8 LockonPickNearest(s32 px, s32 py, LockonWork* work, s8 n, s8* list) {
     s8 i;
     s8 best;
     s32 bestDist;
@@ -230,7 +230,7 @@ s8 LockonPickNearest(s32 a, s32 b, LockonWork* work, s8 n, s8* list) {
         if (o != NULL) {
             dx = o->fieldPosition.x;
             dy = o->fieldPosition.y;
-            dist = VectorLength2D(dx - a, dy - b);
+            dist = VectorLength2D(dx - px, dy - py);
 
             if (bestDist > dist) {
                 bestDist = dist;
@@ -260,22 +260,22 @@ void LockonClearTargets(LockonWork* work) {
     }
 }
 
-u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d) {
+u8 LockonIsInFront(u16 angle, s32 px, s32 py, FldObj* target) {
     s32 x;
     s32 y;
     s32 sn;
     s32 cs;
     s32 dot;
 
-    if (d != NULL) {
-        x = d->fieldPosition.x - b;
-        y = d->fieldPosition.y - c;
-        sn = SIN(a);
-        cs = -COS(a);
+    if (target != NULL) {
+        x = target->fieldPosition.x - px;
+        y = target->fieldPosition.y - py;
+        sn = SIN(angle);
+        cs = -COS(angle);
         NormalizeVector2D8(&x, &y);
         dot = (sn * x >> 8) + (y * cs >> 8);
 
-        if (d->kind == 3) {
+        if (target->kind == 3) {
             if (dot > 99) {
                 return 1;
             }

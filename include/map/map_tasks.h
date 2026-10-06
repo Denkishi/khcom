@@ -297,7 +297,7 @@ void Task_MapTutorial_0(MapTutorialWork* work);
 s32 Task_MapTutorial_1(MapTutorialWork* work);
 void Task_MapTutorial_2(MapTutorialWork* work);
 void Task_MapTutorial_3(MapTutorialWork* work);
-s32 IsPlayerWithin(FldPos* p, s32 lim);
+s32 IsPlayerWithin(FldPos* pos, s32 lim);
 void MapStairWaitStepOn(MapStairWork* work);
 void MapStairWaitStepOn2(MapStairWork* work);
 void MapStairWaitApproach(MapStairWork* work);

@@ -105,14 +105,14 @@ void FldSoraSetAngleFromDpad(FldActor* act) {
     }
 }
 
-u8 FldSoraCheckBlocked(FldPos* p) {
+u8 FldSoraCheckBlocked(FldPos* pos) {
     FldPos a;
     FldPos b;
     s32 v1;
     s32 v2;
 
-    a = *p;
-    b = *p;
+    a = *pos;
+    b = *pos;
     a.y -= 1536;
     b.y += 1536;
 
@@ -136,18 +136,18 @@ u8 FldSoraCheckBlocked(FldPos* p) {
         return 1;
     }
 
-    p->ground = v2 > v1 ? v1 : v2;
+    pos->ground = v2 > v1 ? v1 : v2;
     return 0;
 }
 
-s32 FldSoraProbeGround(FldPos* p) {
+s32 FldSoraProbeGround(FldPos* pos) {
     FldPos a;
     FldPos b;
     s32 v1;
     s32 v2;
 
-    a = *p;
-    b = *p;
+    a = *pos;
+    b = *pos;
     a.y -= 1536;
     b.y += 1536;
     v1 = GetFldPosGround(&a);
@@ -160,13 +160,13 @@ s32 FldSoraProbeGround(FldPos* p) {
     return v2;
 }
 
-u8 FldSoraCheckClimb(FldPos* p, FldWork* work) {
+u8 FldSoraCheckClimb(FldPos* pos, FldWork* work) {
     FldPos a;
     FldPos b;
     u8 r;
 
-    a = *p;
-    b = *p;
+    a = *pos;
+    b = *pos;
     a.y -= 1536;
     b.y += 1536;
 
@@ -243,9 +243,9 @@ void FldSoraTurn(FldActor* act) {
     }
 }
 
-void FldSoraSetAnim(FldWork* work, s32 a, s32 b) {
+void FldSoraSetAnim(FldWork* work, s32 index, s32 animFlags) {
     const FldAnimDef* e;
-    u16 flags = b;
+    u16 flags = animFlags;
     s32 idx;
 
     switch (gFieldState->actor.angle) {
@@ -284,13 +284,13 @@ void FldSoraSetAnim(FldWork* work, s32 a, s32 b) {
         break;
     }
 
-    if (work->animAction == a) {
+    if (work->animAction == index) {
         flags |= ANIM_FLAG_KEEP_FRAME;
     }
 
-    work->animAction = a;
+    work->animAction = index;
 
-    e = &sFldSoraAnimDefs[a][idx];
+    e = &sFldSoraAnimDefs[index][idx];
     AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }

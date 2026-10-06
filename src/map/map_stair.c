@@ -22,20 +22,20 @@
 #include "types.h"
 #include <stddef.h>
 
-s32 IsPlayerWithin(FldPos* p, s32 lim) {
+s32 IsPlayerWithin(FldPos* pos, s32 lim) {
     s32 dx;
     s32 dy;
 
-    dx = p->x - gFieldState->actor.fieldPosition.x;
+    dx = pos->x - gFieldState->actor.fieldPosition.x;
 
     if (dx < 0) {
-        dx = gFieldState->actor.fieldPosition.x - p->x;
+        dx = gFieldState->actor.fieldPosition.x - pos->x;
     }
 
-    dy = p->y - gFieldState->actor.fieldPosition.y;
+    dy = pos->y - gFieldState->actor.fieldPosition.y;
 
     if (dy < 0) {
-        dy = gFieldState->actor.fieldPosition.y - p->y;
+        dy = gFieldState->actor.fieldPosition.y - pos->y;
     }
 
     if (dx > 0x8000 || dy > 0x8000) {

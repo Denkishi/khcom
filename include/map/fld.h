@@ -20,9 +20,9 @@ void FldRikuSetAnim(FldWork* work, s32 index, u16 flags);
 
 void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z);
 
-u8 FldRikuCheckBlocked(FldPos* p);
-s32 FldRikuProbeGround(FldPos* p);
-u8 FldRikuCheckClimb(FldPos* p, FldWork* work);
+u8 FldRikuCheckBlocked(FldPos* pos);
+s32 FldRikuProbeGround(FldPos* pos);
+u8 FldRikuCheckClimb(FldPos* pos, FldWork* work);
 u8 FldRikuCheckDoorAhead(FldActor* act);
 s32 FldRikuGetGround(FldWork* work);
 void FldRikuSetAngleFromDpad(FldActor* act);

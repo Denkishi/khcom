@@ -25,11 +25,11 @@ void task_lockon_0(LockonWork* work);
 u8 task_lockon_1(LockonWork* work);
 void task_lockon_2(LockonWork* work);
 void task_lockon_3(LockonWork* work);
-s32 VectorLength2D(s32 a, s32 b);
+s32 VectorLength2D(s32 x, s32 y);
 s32 NormalizeVector2D8(s32* x, s32* y);
-s8 LockonPickNearest(s32 a, s32 b, LockonWork* work, s8 n, s8* list);
+s8 LockonPickNearest(s32 px, s32 py, LockonWork* work, s8 n, s8* list);
 void LockonClearTargets(LockonWork* work);
-u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d);
+u8 LockonIsInFront(u16 angle, s32 px, s32 py, FldObj* target);
 void LockonGetDoorScreenPos(s32* x, s32* y);
 
 #endif

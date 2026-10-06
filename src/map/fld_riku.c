@@ -97,15 +97,15 @@ void FldRikuSetAngleFromDpad(FldActor* act) {
     }
 }
 
-u8 FldRikuCheckBlocked(FldPos* p) {
+u8 FldRikuCheckBlocked(FldPos* pos) {
     FldPos a;
     FldPos b;
     s32 lo;
     s32 hi;
     s32 v;
 
-    a = *p;
-    b = *p;
+    a = *pos;
+    b = *pos;
     a.y -= 0x600;
     b.y += 0x600;
 
@@ -131,18 +131,18 @@ u8 FldRikuCheckBlocked(FldPos* p) {
         v = lo;
     }
 
-    p->ground = v;
+    pos->ground = v;
     return 0;
 }
 
-s32 FldRikuProbeGround(FldPos* p) {
+s32 FldRikuProbeGround(FldPos* pos) {
     FldPos a;
     FldPos b;
     s32 lo;
     s32 hi;
 
-    a = *p;
-    b = *p;
+    a = *pos;
+    b = *pos;
     a.y -= 0x600;
     b.y += 0x600;
 
@@ -156,13 +156,13 @@ s32 FldRikuProbeGround(FldPos* p) {
     return hi;
 }
 
-u8 FldRikuCheckClimb(FldPos* p, FldWork* work) {
+u8 FldRikuCheckClimb(FldPos* pos, FldWork* work) {
     FldPos a;
     FldPos b;
     u8 hit;
 
-    a = *p;
-    b = *p;
+    a = *pos;
+    b = *pos;
     a.y -= 0x600;
     b.y += 0x600;
 

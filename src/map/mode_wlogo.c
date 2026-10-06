@@ -215,7 +215,7 @@ void WLogoInitWorldSelect() {
     sWLogoNamePalette = LoadObjPalette(gNameTextPalettes[0], 32);
 }
 
-void WLogoStartLogo(u8 a) {
+void WLogoStartLogo(u8 world) {
     FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode1();
     SetupBg(0, 0, 7, 14);
@@ -228,7 +228,7 @@ void WLogoStartLogo(u8 a) {
     SetBgSize(2, 0x8000);
     TaskPoolInit(&sModeWLogoTasks, 2);
 
-    switch (a) {
+    switch (world) {
     case 4:
         LoadBgTiles(2, gBtlBgWonderlandTiles, 0x4000);
         LoadBgPalette(2, gBtlBgWonderlandPalette, 0xC0);

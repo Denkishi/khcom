@@ -1508,11 +1508,6 @@ s32 GetMsgTextWidth(const TextChar* text) {
     return (s16)sum;
 }
 
-#ifdef VERSION_EU
-#define MSG_LATIN_CODE(wide, byte) (byte)
-#else
-#define MSG_LATIN_CODE(wide, byte) (wide)
-#endif
 u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText) {
     s32 cx;
     s32 cy;
@@ -1535,19 +1530,19 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*text == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*text == MSG_CODE_HIGHLIGHT) {
             alternate = 1;
             text++;
         }
 
-        if (*text == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*text == MSG_CODE_PLAIN) {
             alternate = 0;
             text++;
         }
 
         sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = alternate;
 
-        if (*text == MSG_LATIN_CODE(10, 31)) {
+        if (*text == MSG_CODE_NL) {
             cx = 0;
             cy += 0xC00;
         } else {
@@ -1661,19 +1656,19 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*text == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*text == MSG_CODE_HIGHLIGHT) {
             alternate = 1;
             text++;
         }
 
-        if (*text == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*text == MSG_CODE_PLAIN) {
             alternate = 0;
             text++;
         }
 
         sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = alternate;
 
-        if (*text == MSG_LATIN_CODE(10, 31)) {
+        if (*text == MSG_CODE_NL) {
             cx = 0;
             cy += 0xC00;
         } else {
@@ -1786,7 +1781,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
 
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*(u16*)text == 0x6E6E) {
+        if (*(u16*)text == MSG_CODE_JP_NL) {
             cx = 0;
             cy += 0xC00;
             text += 2;
@@ -2239,11 +2234,7 @@ s32 LoadLatinTextSlots(const u16* text, TextSlot* slots) {
     while (MSG_CHAR(text) != 0) {
         s32 glyph = 0;
 
-#ifdef VERSION_EU
-        if (MSG_CHAR(text) == 31) {
-#else
-        if (MSG_CHAR(text) == 10) {
-#endif
+        if (MSG_CHAR(text) == MSG_CODE_NL) {
             if (slots->tiles != NULL) {
                 ReleaseObjTiles(slots->tiles);
                 slots->tiles = NULL;
@@ -2366,7 +2357,7 @@ s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
 #endif
         raw = (u16*)buf;
 
-        if (*raw == 0x6E6E) {
+        if (*raw == MSG_CODE_JP_NL) {
 #ifdef VERSION_JP
             text = (u16*)((u8*)text + 2);
 #else
@@ -2571,7 +2562,7 @@ s32 LoadTextTileArray(TextChar* text, void** tiles) {
         buf[1] = text[1];
         raw = (u16*)buf;
 
-        if (*raw == 0x6E6E) {
+        if (*raw == MSG_CODE_JP_NL) {
             text += 2;
 
             if (*tiles != NULL) {
@@ -6310,17 +6301,17 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** next
         sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*text == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*text == MSG_CODE_HIGHLIGHT) {
             alternate = 1;
             text++;
         }
 
-        if (*text == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*text == MSG_CODE_PLAIN) {
             alternate = 0;
             text++;
         }
 
-        if (*text == MSG_LATIN_CODE(10, 31)) {
+        if (*text == MSG_CODE_NL) {
             cx = 0;
             cy += 0xC00;
         } else {
@@ -6444,7 +6435,7 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
         sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
         sCardMsgGlyphSprites[sTextEntryCount].useAlternatePalette = 0;
 
-        if (*(u16*)text == 0x6E6E) {
+        if (*(u16*)text == MSG_CODE_JP_NL) {
             cx = 0;
             cy += 0xC00;
             text += 2;
@@ -6752,7 +6743,7 @@ s32 CopySjisGlyphsToVram(const TextChar* str) {
         buf[1] = str[1];
         raw = (u16*)buf;
 
-        if (*raw == 0x6E6E) {
+        if (*raw == MSG_CODE_JP_NL) {
             str += 2;
         } else {
             code = *raw;
@@ -6936,7 +6927,7 @@ s32 CopySjisGlyphsToVramAt(const TextChar* str, u16 tile) {
         buf[1] = str[1];
         raw = (u16*)buf;
 
-        if (*raw == 0x6E6E) {
+        if (*raw == MSG_CODE_JP_NL) {
             str += 2;
         } else {
             code = *raw;
@@ -7110,11 +7101,7 @@ u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile) {
     while (*str != 0) {
         s32 glyph = 0;
 
-#ifdef VERSION_EU
-        if (*str == 31) {
-#else
-        if (*str == 10) {
-#endif
+        if (*str == MSG_CODE_NL) {
             *widths = 0;
         } else {
 #ifdef VERSION_EU

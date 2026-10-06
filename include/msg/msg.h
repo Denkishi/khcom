@@ -10,6 +10,17 @@
 #include "text_types.h"
 #include "taskpool.h"
 
+#ifdef VERSION_EU
+#define MSG_CODE_NL 0x1F
+#define MSG_CODE_HIGHLIGHT 0x1D
+#define MSG_CODE_PLAIN 0x1E
+#else
+#define MSG_CODE_NL 0x0A
+#define MSG_CODE_HIGHLIGHT 0x4079
+#define MSG_CODE_PLAIN 0x4000
+#endif
+#define MSG_CODE_JP_NL 0x6E6E
+
 typedef struct SpriteTextLine {
     s32 x;
     s32 y;

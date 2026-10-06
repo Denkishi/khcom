@@ -2876,7 +2876,7 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* task) {
     SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_ROW);
     view = &work->view;
     z = 0;
-    *view = 3;
+    *view = DECK_MENU_VIEW_COMMANDS;
     work->commandCursor = z;
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCommands);
     TaskPoolUpdate(&work->taskpool);
@@ -2921,7 +2921,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
     case B_BUTTON:
         work->timer = 1;
 
-        if (work->prevView == 0) {
+        if (work->prevView == DECK_MENU_VIEW_DECK_GRID) {
             work->view = DECK_MENU_VIEW_DECK_GRID;
             SetDeckMenuHandAnim(work);
             SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
@@ -2940,7 +2940,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
         work->exitRequested = 1;
         work->timer = 1;
 
-        if (work->prevView == 0) {
+        if (work->prevView == DECK_MENU_VIEW_DECK_GRID) {
             work->view = DECK_MENU_VIEW_DECK_GRID;
             SetDeckMenuHandAnim(work);
             SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
@@ -3040,7 +3040,7 @@ u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* task) {
     case 3:
     case 4:
     case 5:
-        if (work->prevView == 0) {
+        if (work->prevView == DECK_MENU_VIEW_DECK_GRID) {
             work->view = DECK_MENU_VIEW_DECK_GRID;
             SetDeckMenuHandAnim(work);
             work->timer = 4;

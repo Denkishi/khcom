@@ -53,6 +53,14 @@ enum MessageScriptFlag {
     MSG_SCRIPT_FLAG_END = 0x8000
 };
 
+enum MsgWinPosition {
+    MSG_WIN_POSITION_TOP_FACE_RIGHT,
+    MSG_WIN_POSITION_BOTTOM_FACE_RIGHT,
+    MSG_WIN_POSITION_TOP_FACE_LEFT,
+    MSG_WIN_POSITION_BOTTOM_FACE_LEFT,
+    MSG_WIN_POSITION_KEEP
+};
+
 typedef struct MessageScriptEntry {
     u32 portraitId;
     u32 expressionId;

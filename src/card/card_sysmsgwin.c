@@ -35,6 +35,7 @@
 #include "card_sysmsgwin.h"
 #include "sprite_palettes.h"
 #include "macros.h"
+#include "msg_types.h"
 
 static SysMsgWinWork* sActiveSysmsgwin;
 
@@ -134,12 +135,12 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
         LoadPalette(gCard00Palette, pal, sizeof(gCard00Palette));
 
         switch (work->messageDef->positionIndex) {
-        case 0:
-        case 2:
+        case MSG_WIN_POSITION_TOP_FACE_RIGHT:
+        case MSG_WIN_POSITION_TOP_FACE_LEFT:
             SetBgScroll(work->args.bg, (u16)-24, 0);
             break;
-        case 1:
-        case 3:
+        case MSG_WIN_POSITION_BOTTOM_FACE_RIGHT:
+        case MSG_WIN_POSITION_BOTTOM_FACE_LEFT:
             SetBgScroll(work->args.bg, (u16)-24, (u16)-94);
             break;
         default:
@@ -151,12 +152,12 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
     case CARD_MESSAGE_MODE_SPRITE_WINDOW:
     case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         switch (work->messageDef->positionIndex) {
-        case 0:
-        case 2:
+        case MSG_WIN_POSITION_TOP_FACE_RIGHT:
+        case MSG_WIN_POSITION_TOP_FACE_LEFT:
             work->frameX = 0x7800;
             work->frameY = 0x2200;
             break;
-        case 1:
+        case MSG_WIN_POSITION_BOTTOM_FACE_RIGHT:
         default:
             work->frameX = 0x7800;
             work->frameY = 0x7E00;
@@ -564,12 +565,12 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
         LoadPalette(gCard00Palette, pal, sizeof(gCard00Palette));
 
         switch (work->messageDef->positionIndex) {
-        case 0:
-        case 2:
+        case MSG_WIN_POSITION_TOP_FACE_RIGHT:
+        case MSG_WIN_POSITION_TOP_FACE_LEFT:
             SetBgScroll(work->args.bg, 0, 0);
             break;
-        case 1:
-        case 3:
+        case MSG_WIN_POSITION_BOTTOM_FACE_RIGHT:
+        case MSG_WIN_POSITION_BOTTOM_FACE_LEFT:
             SetBgScroll(work->args.bg, 0, 0);
             break;
         default:
@@ -581,12 +582,12 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
     case CARD_MESSAGE_MODE_SPRITE_WINDOW:
     case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         switch (work->messageDef->positionIndex) {
-        case 0:
-        case 2:
+        case MSG_WIN_POSITION_TOP_FACE_RIGHT:
+        case MSG_WIN_POSITION_TOP_FACE_LEFT:
             work->frameX = 0x7800;
             work->frameY = 0x2000;
             break;
-        case 1:
+        case MSG_WIN_POSITION_BOTTOM_FACE_RIGHT:
         default:
             work->frameX = 0x7800;
             work->frameY = 0x8200;

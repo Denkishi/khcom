@@ -6221,12 +6221,12 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                     gEventState->msgWinOpen = TRUE;
 
                     switch (entry->positionIndex) {
-                    case 0:
-                    case 2:
+                    case MSG_WIN_POSITION_TOP_FACE_RIGHT:
+                    case MSG_WIN_POSITION_TOP_FACE_LEFT:
                         SetBgScroll(work->bg, (u16)-0x28, 0);
                         break;
-                    case 1:
-                    case 3:
+                    case MSG_WIN_POSITION_BOTTOM_FACE_RIGHT:
+                    case MSG_WIN_POSITION_BOTTOM_FACE_LEFT:
                         SetBgScroll(work->bg, (u16)-0x28, (u16)-0x60);
                         break;
                     }
@@ -6277,12 +6277,12 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
             gEventState->msgWinOpen = TRUE;
 
             switch (entry->positionIndex) {
-            case 0:
-            case 2:
+            case MSG_WIN_POSITION_TOP_FACE_RIGHT:
+            case MSG_WIN_POSITION_TOP_FACE_LEFT:
                 SetBgScroll(work->bg, (u16)-0x18, 0);
                 break;
-            case 1:
-            case 3:
+            case MSG_WIN_POSITION_BOTTOM_FACE_RIGHT:
+            case MSG_WIN_POSITION_BOTTOM_FACE_LEFT:
                 SetBgScroll(work->bg, (u16)-0x18, (u16)-0x60);
                 break;
             }
@@ -6440,7 +6440,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* task) {
             HideMsgGlyphs();
 
             if ((entry->flags & MSG_SCRIPT_FLAG_END) == 0) {
-                if (work->script[work->scriptIndex + 1].positionIndex != 4) {
+                if (work->script[work->scriptIndex + 1].positionIndex != MSG_WIN_POSITION_KEEP) {
                     work->steps = 8;
                     RequestMsgfaceSlideOut(&work->face);
                     SetTaskUpdate(task, (TaskUpdateFunc)MsgwinCloseUpdate);
@@ -6511,7 +6511,7 @@ void MsgwinLoadEntry(MsgWinWork* work) {
 
     position = entry->positionIndex;
 
-    if (position != 4) {
+    if (position != MSG_WIN_POSITION_KEEP) {
         work->position = position;
         work->scrollX = gMsgwinClosedScrollX[position];
     }
@@ -6638,9 +6638,9 @@ void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
         anim = gMsgFaceAnims[0];
     }
 
-    if (work->face->positionIndex <= 1) {
+    if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_RIGHT) {
         work->flipX = TRUE;
-    } else if (work->face->positionIndex <= 3) {
+    } else if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_LEFT) {
         work->flipX = FALSE;
     }
 
@@ -6697,9 +6697,9 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
     case MSGFACE_COMMAND_FLIP:
         work->steps = 4;
 
-        if (work->face->positionIndex <= 1) {
+        if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_RIGHT) {
             work->scaleX = -255;
-        } else if (work->face->positionIndex <= 3) {
+        } else if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_LEFT) {
             work->scaleX = Q_8_8(1);
         }
 
@@ -6803,9 +6803,9 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* task) {
         work->visible = FALSE;
     }
 
-    if (work->face->positionIndex <= 1) {
+    if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_RIGHT) {
         work->flipX = TRUE;
-    } else if (work->face->positionIndex <= 3) {
+    } else if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_LEFT) {
         work->flipX = FALSE;
     }
 
@@ -6846,9 +6846,9 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* task) {
             anims = gMsgFaceAnims[work->face->portraitId];
         }
 
-        if (work->face->positionIndex <= 1) {
+        if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_RIGHT) {
             work->flipX = TRUE;
-        } else if (work->face->positionIndex <= 3) {
+        } else if (work->face->positionIndex <= MSG_WIN_POSITION_BOTTOM_FACE_LEFT) {
             work->flipX = FALSE;
         }
 
@@ -7427,12 +7427,12 @@ u8 view_1(EventCameraWork* work, Task* task) {
         work->targetX = gEventState->charaObjs[targetIndex]->x;
 
         switch (gEventState->msgWinPosition) {
-        case 0:
-        case 2:
+        case MSG_WIN_POSITION_TOP_FACE_RIGHT:
+        case MSG_WIN_POSITION_TOP_FACE_LEFT:
             work->targetY = gEventState->charaObjs[targetIndex]->y + gEventState->charaObjs[targetIndex]->z + sSpeakerFocusYOffsets[targetIndex];
             break;
-        case 1:
-        case 3:
+        case MSG_WIN_POSITION_BOTTOM_FACE_RIGHT:
+        case MSG_WIN_POSITION_BOTTOM_FACE_LEFT:
             work->targetY = gEventState->charaObjs[targetIndex]->y + gEventState->charaObjs[targetIndex]->z;
             break;
         }

@@ -138,11 +138,11 @@ void Level_Up_0(LevelUpWork* work) {
     }
 
     if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
-        work->x7 = 0x1C400;
-        work->y6 = 0x5000;
+        work->playerX = 0x1C400;
+        work->playerY = 0x5000;
     } else {
-        work->x7 = x << 8;
-        work->y6 = y << 8;
+        work->playerX = x << 8;
+        work->playerY = y << 8;
     }
 
     work->gfx = AnimGetGfx(&work->anim2);
@@ -198,33 +198,33 @@ void Level_Up_0(LevelUpWork* work) {
     }
 
     gBldCnt &= ~BLDCNT_EFFECT_BLEND;
-    work->x6 = -128;
-    work->x4[0] = -128;
-    work->x4[1] = -128;
-    work->x4[2] = -128;
-    work->y4[0] = 16;
-    work->y4[1] = 64;
-    work->y4[2] = 112;
+    work->headerX = -128;
+    work->bonusX[0] = -128;
+    work->bonusX[1] = -128;
+    work->bonusX[2] = -128;
+    work->bonusY[0] = 16;
+    work->bonusY[1] = 64;
+    work->bonusY[2] = 112;
     work->slideSteps = 24;
     work->headerSteps = 16;
     work->optionSteps[0] = 16;
     work->optionSteps[1] = 16;
     work->optionSteps[2] = 16;
-    work->x5[0] = 8;
-    work->x5[1] = 8;
-    work->x5[2] = 8;
-    work->y5[0] = 31;
-    work->y5[1] = 79;
-    work->y5[2] = 127;
-    work->x = 128;
-    work->x2 = 128;
-    work->y = -0x800;
-    work->y2 = 0xA000;
+    work->textX[0] = 8;
+    work->textX[1] = 8;
+    work->textX[2] = 8;
+    work->textY[0] = 31;
+    work->textY[1] = 79;
+    work->textY[2] = 127;
+    work->topBarX = 128;
+    work->bottomBarX = 128;
+    work->topBarY = -0x800;
+    work->bottomBarY = 0xA000;
     work->barSteps = 16;
     work->bgScrollX = 0;
     work->statsOffsetX = 256;
-    work->x3 = 132;
-    work->y3 = sLevelUpCursorY[0];
+    work->cursorX = 132;
+    work->cursorY = sLevelUpCursorY[0];
     work->state = LEVEL_UP_STATE_SLIDE_IN;
     work->cursor = 0;
     work->applied = 0;
@@ -279,7 +279,7 @@ void LoadLevelUpRikuBgTiles() {
 }
 
 u8 Level_Up_1(LevelUpWork* work, void* task) {
-    s32 x[3];
+    s32 bonusX[3];
 #ifdef VERSION_EU
     enum { tileSize = 0xC80, mapSize = 0x500, bgSize = 0x2C00 };
 #else
@@ -506,14 +506,14 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
 
     if (work->playerSteps != 0) {
-        ApproachValue(&work->x7, 0xBE00, work->playerSteps);
-        ApproachValue(&work->y6, 0x5000, work->playerSteps);
+        ApproachValue(&work->playerX, 0xBE00, work->playerSteps);
+        ApproachValue(&work->playerY, 0x5000, work->playerSteps);
         work->playerSteps--;
     }
 
     if (work->barSteps != 0) {
-        ApproachValue(&work->y, 0, work->barSteps);
-        ApproachValue(&work->y2, 0x9800, work->barSteps);
+        ApproachValue(&work->topBarY, 0, work->barSteps);
+        ApproachValue(&work->bottomBarY, 0x9800, work->barSteps);
         work->barSteps--;
     } else {
         s32 bgScrollX = work->bgScrollX << 8;
@@ -535,26 +535,26 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
         }
 
         if (work->slideSteps <= 11) {
-            s32 headerX = work->x6 << 8;
+            s32 headerX = work->headerX << 8;
             ApproachValue(&headerX, 0, work->headerSteps);
-            work->x6 = headerX >> 8;
+            work->headerX = headerX >> 8;
 
             if (work->headerSteps > 0) {
                 work->headerSteps--;
             }
 
             if (work->headerSteps <= 6) {
-                x[0] = work->x4[0] << 8;
-                x[1] = work->x4[1] << 8;
-                x[2] = work->x4[2] << 8;
-                ApproachValue(&x[0], 0x1000, work->optionSteps[0]);
+                bonusX[0] = work->bonusX[0] << 8;
+                bonusX[1] = work->bonusX[1] << 8;
+                bonusX[2] = work->bonusX[2] << 8;
+                ApproachValue(&bonusX[0], 0x1000, work->optionSteps[0]);
 
                 if (work->optionSteps[0] > 0) {
                     work->optionSteps[0]--;
                 }
 
                 if (work->optionSteps[0] <= 6) {
-                    ApproachValue(&x[1], 0x1000, work->optionSteps[1]);
+                    ApproachValue(&bonusX[1], 0x1000, work->optionSteps[1]);
 
                     if (work->optionSteps[1] > 0) {
                         work->optionSteps[1]--;
@@ -562,16 +562,16 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                 }
 
                 if (work->optionSteps[1] <= 6) {
-                    ApproachValue(&x[2], 0x1000, work->optionSteps[2]);
+                    ApproachValue(&bonusX[2], 0x1000, work->optionSteps[2]);
 
                     if (work->optionSteps[2] > 0) {
                         work->optionSteps[2]--;
                     }
                 }
 
-                work->x4[0] = x[0] >> 8;
-                work->x4[1] = x[1] >> 8;
-                work->x4[2] = x[2] >> 8;
+                work->bonusX[0] = bonusX[0] >> 8;
+                work->bonusX[1] = bonusX[1] >> 8;
+                work->bonusX[2] = bonusX[2] >> 8;
 
                 if (work->optionSteps[2] == 0) {
                     u8 i;
@@ -720,7 +720,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                     }
 
                     work->cursor = i;
-                    work->y3 = sLevelUpCursorY[work->cursor];
+                    work->cursorY = sLevelUpCursorY[work->cursor];
                     SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpSelect);
 
                     if (gBtlWork->battleId == BATTLE_URSULA) {
@@ -738,7 +738,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 }
 
 u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
-    s32 x;
+    s32 cursorY;
     s8 i;
     u8* optionEnabled;
 #ifdef VERSION_EU
@@ -824,7 +824,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim);
         work->cursorSteps = 16;
-        work->x3 = 136;
+        work->cursorX = 136;
 
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             SetObjTileSource(work->tiles4, gSor1ff00Tiles);
@@ -840,10 +840,10 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
         return 1;
     }
 
-    x = work->y3 << 8;
-    ApproachValue(&x, sLevelUpCursorY[work->cursor] << 8, work->cursorSteps);
+    cursorY = work->cursorY << 8;
+    ApproachValue(&cursorY, sLevelUpCursorY[work->cursor] << 8, work->cursorSteps);
     work->cursorSteps--;
-    work->y3 = x >> 8;
+    work->cursorY = cursorY >> 8;
     work->gfx2 = AnimUpdate(&work->anim);
     work->blinkTimer++;
 
@@ -875,19 +875,19 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
 
     for (i = 0; i < 3; i++) {
         if (i != work->cursor) {
-            s32 bonusX = work->x4[i] << 8;
-            s32 textX = work->x5[i] << 8;
+            s32 bonusX = work->bonusX[i] << 8;
+            s32 textX = work->textX[i] << 8;
             ApproachValue(&bonusX, -0x10000, work->optionSteps[i]);
             ApproachValue(&textX, -0xF800, work->optionSteps[i]);
-            work->x4[i] = bonusX >> 8;
-            work->x5[i] = textX >> 8;
+            work->bonusX[i] = bonusX >> 8;
+            work->textX[i] = textX >> 8;
         } else {
-            s32 bonusY = work->y4[i] << 8;
-            s32 textY = work->y5[i] << 8;
+            s32 bonusY = work->bonusY[i] << 8;
+            s32 textY = work->textY[i] << 8;
             ApproachValue(&bonusY, 0x2000, work->optionSteps[i]);
             ApproachValue(&textY, 0x3100, work->optionSteps[i]);
-            work->y4[i] = bonusY >> 8;
-            work->y5[i] = textY >> 8;
+            work->bonusY[i] = bonusY >> 8;
+            work->textY[i] = textY >> 8;
         }
 
         if (work->optionSteps[i] > 0) {
@@ -962,10 +962,10 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
     }
 
     {
-        s32 y = work->y3 << 8;
-        ApproachValue(&y, 0x3000, work->cursorSteps);
+        s32 cursorY = work->cursorY << 8;
+        ApproachValue(&cursorY, 0x3000, work->cursorSteps);
         work->cursorSteps--;
-        work->y3 = y >> 8;
+        work->cursorY = cursorY >> 8;
     }
 
     TaskPoolUpdate(&work->pool);
@@ -1018,23 +1018,23 @@ u8 UpdateLevelUpClose(LevelUpWork* work, void* task) {
     s32 headerX;
     s8 slideSteps;
 
-    bonusX = work->x4[work->cursor] << 8;
-    textX = work->x5[work->cursor] << 8;
+    bonusX = work->bonusX[work->cursor] << 8;
+    textX = work->textX[work->cursor] << 8;
     bgScrollX = work->bgScrollX << 8;
     statsOffsetX = work->statsOffsetX << 8;
-    headerX = work->x6 << 8;
+    headerX = work->headerX << 8;
     ApproachValue(&headerX, -0x8000, work->headerSteps);
     ApproachValue(&bonusX, -0x8000, work->optionSteps[work->cursor]);
     ApproachValue(&textX, -0xF800, work->optionSteps[work->cursor]);
-    work->x4[work->cursor] = bonusX >> 8;
-    work->x5[work->cursor] = textX >> 8;
-    work->x6 = headerX >> 8;
+    work->bonusX[work->cursor] = bonusX >> 8;
+    work->textX[work->cursor] = textX >> 8;
+    work->headerX = headerX >> 8;
     work->headerSteps--;
     work->optionSteps[work->cursor]--;
     ApproachValue(&bgScrollX, 0, work->slideSteps);
     ApproachValue(&statsOffsetX, 0x10000, work->slideSteps);
-    ApproachValue(&work->x7, 0x1BE00, work->slideSteps);
-    ApproachValue(&work->y6, 0x4800, work->slideSteps);
+    ApproachValue(&work->playerX, 0x1BE00, work->slideSteps);
+    ApproachValue(&work->playerY, 0x4800, work->slideSteps);
 
     if (gBtlWork->battleId == BATTLE_URSULA) {
         ScrollBgMapTo(0, bgScrollX >> 8, 0);
@@ -1053,8 +1053,8 @@ u8 UpdateLevelUpClose(LevelUpWork* work, void* task) {
 
     if (slideSteps == 0) {
         if (work->barSteps != 0) {
-            ApproachValue(&work->y, -0x800, work->barSteps);
-            ApproachValue(&work->y2, 0xA000, work->barSteps);
+            ApproachValue(&work->topBarY, -0x800, work->barSteps);
+            ApproachValue(&work->bottomBarY, 0xA000, work->barSteps);
             work->barSteps--;
         } else {
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpWaitFade);
@@ -1080,7 +1080,7 @@ void Level_Up_2(LevelUpWork* work) {
     if (work->loaded[0] != 0) {
         switch (work->state) {
         case LEVEL_UP_STATE_SLIDE_IN:
-            DrawSprite(work->x6, 0,
+            DrawSprite(work->headerX, 0,
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage][10],
 #else
@@ -1092,10 +1092,10 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[0], work->y4[0], gLevelUpSoraBonusFrames[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->bonusX[0], work->bonusY[0], gLevelUpSoraBonusFrames[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[0], work->y4[0], gLevelUpSoraBonusItalianFrames[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->bonusX[0], work->bonusY[0], gLevelUpSoraBonusItalianFrames[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
@@ -1104,10 +1104,10 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[1], work->y4[1], gLevelUpSoraBonusFrames[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->bonusX[1], work->bonusY[1], gLevelUpSoraBonusFrames[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[1], work->y4[1], gLevelUpSoraBonusItalianFrames[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->bonusX[1], work->bonusY[1], gLevelUpSoraBonusItalianFrames[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
@@ -1116,88 +1116,88 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[2], work->y4[2], gLevelUpSoraBonusFrames[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->bonusX[2], work->bonusY[2], gLevelUpSoraBonusFrames[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[2], work->y4[2], gLevelUpSoraBonusItalianFrames[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->bonusX[2], work->bonusY[2], gLevelUpSoraBonusItalianFrames[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            DrawSprite(work->x, work->y >> 8, gLevelUpBarFrames[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(work->x2, work->y2 >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->topBarX, work->topBarY >> 8, gLevelUpBarFrames[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->bottomBarX, work->bottomBarY >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         case LEVEL_UP_STATE_SELECT:
             for (; i < 3; i++) {
                 if (i == work->cursor) {
 #ifdef VERSION_EU
-                    DrawSprite(work->x5[i] + 5, work->y5[i] - 4, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
+                    DrawSprite(work->textX[i] + 5, work->textY[i] - 4, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
 #else
-                    DrawTextSlots(work->x5[i] + 22, work->y5[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
-                    DrawTextSlots(work->x5[i] + 4, work->y5[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
+                    DrawTextSlots(work->textX[i] + 22, work->textY[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
+                    DrawTextSlots(work->textX[i] + 4, work->textY[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
 #endif
                 } else {
 #ifdef VERSION_EU
-                    DrawSprite(work->x5[i] + 3, work->y5[i] - 2, NULL, work->tiles5[i], work->palette2, NULL, 0, 40);
+                    DrawSprite(work->textX[i] + 3, work->textY[i] - 2, NULL, work->tiles5[i], work->palette2, NULL, 0, 40);
 #else
-                    DrawTextSlots(work->x5[i] + 20, work->y5[i] - 3, work->textSlots[i], work->palette2, 40, work->textSlotCounts[i]);
-                    DrawTextSlots(work->x5[i] + 2, work->y5[i] + 15, work->textSlots[i + 3], work->palette2, 40, work->textSlotCounts[i + 3]);
+                    DrawTextSlots(work->textX[i] + 20, work->textY[i] - 3, work->textSlots[i], work->palette2, 40, work->textSlotCounts[i]);
+                    DrawTextSlots(work->textX[i] + 2, work->textY[i] + 15, work->textSlots[i + 3], work->palette2, 40, work->textSlotCounts[i + 3]);
 #endif
                 }
             }
 
-            DrawSprite(work->x3, work->y3, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
+            DrawSprite(work->cursorX, work->cursorY, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
             break;
         case LEVEL_UP_STATE_RESULT:
             for (; i < 3; i++) {
                 if (i == work->cursor) {
 #ifdef VERSION_EU
-                    DrawSprite(work->x5[i] + 4, work->y5[i] - 3, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
+                    DrawSprite(work->textX[i] + 4, work->textY[i] - 3, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
 #else
-                    DrawTextSlots(work->x5[i] + 22, work->y5[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
-                    DrawTextSlots(work->x5[i] + 4, work->y5[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
+                    DrawTextSlots(work->textX[i] + 22, work->textY[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
+                    DrawTextSlots(work->textX[i] + 4, work->textY[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
 #endif
-                    DrawSprite(work->x4[i], work->y4[i], gLevelUpSoraBonusChosenFrames[i], work->tilesPalettes[i], work->tilesPalettes[5], NULL, 0, 50);
+                    DrawSprite(work->bonusX[i], work->bonusY[i], gLevelUpSoraBonusChosenFrames[i], work->tilesPalettes[i], work->tilesPalettes[5], NULL, 0, 50);
                 } else {
                     if (work->tilesPalettes[i] != NULL) {
 #ifdef VERSION_EU
-                        DrawSprite(work->x5[i] + 2, work->y5[i] - 1, NULL, work->tiles5[i], work->palette2, NULL, 0, 40);
+                        DrawSprite(work->textX[i] + 2, work->textY[i] - 1, NULL, work->tiles5[i], work->palette2, NULL, 0, 40);
 #else
-                        DrawTextSlots(work->x5[i] + 20, work->y5[i] - 3, work->textSlots[i], work->palette2, 40, work->textSlotCounts[i]);
-                        DrawTextSlots(work->x5[i] + 2, work->y5[i] + 15, work->textSlots[i + 3], work->palette2, 40, work->textSlotCounts[i + 3]);
+                        DrawTextSlots(work->textX[i] + 20, work->textY[i] - 3, work->textSlots[i], work->palette2, 40, work->textSlotCounts[i]);
+                        DrawTextSlots(work->textX[i] + 2, work->textY[i] + 15, work->textSlots[i + 3], work->palette2, 40, work->textSlotCounts[i + 3]);
 #endif
 #ifdef VERSION_EU
                         if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                            DrawSprite(work->x4[i], work->y4[i], gLevelUpSoraBonusFrames[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
+                            DrawSprite(work->bonusX[i], work->bonusY[i], gLevelUpSoraBonusFrames[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                         } else {
-                            DrawSprite(work->x4[i], work->y4[i], gLevelUpSoraBonusItalianFrames[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
+                            DrawSprite(work->bonusX[i], work->bonusY[i], gLevelUpSoraBonusItalianFrames[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
                         }
 #endif
                     }
                 }
             }
 
-            DrawSprite(work->x3, work->y3, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
+            DrawSprite(work->cursorX, work->cursorY, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
             break;
         case LEVEL_UP_STATE_SLIDE_OUT:
 #ifdef VERSION_EU
-            DrawSprite(work->x5[work->cursor] + 2, work->y5[work->cursor] - 1, NULL, work->tiles5[work->cursor], work->palette, NULL, 0, 40);
+            DrawSprite(work->textX[work->cursor] + 2, work->textY[work->cursor] - 1, NULL, work->tiles5[work->cursor], work->palette, NULL, 0, 40);
 #else
-            DrawTextSlots(work->x5[work->cursor] + 22, work->y5[work->cursor] - 5, work->textSlots[work->cursor], work->palette, 40, work->textSlotCounts[work->cursor]);
-            DrawTextSlots(work->x5[work->cursor] + 4, work->y5[work->cursor] + 13, work->textSlots[work->cursor + 3], work->palette, 40, work->textSlotCounts[work->cursor + 3]);
+            DrawTextSlots(work->textX[work->cursor] + 22, work->textY[work->cursor] - 5, work->textSlots[work->cursor], work->palette, 40, work->textSlotCounts[work->cursor]);
+            DrawTextSlots(work->textX[work->cursor] + 4, work->textY[work->cursor] + 13, work->textSlots[work->cursor + 3], work->palette, 40, work->textSlotCounts[work->cursor + 3]);
 #endif
-            DrawSprite(work->x4[work->cursor], work->y4[work->cursor], NULL, work->tilesPalettes[work->cursor], work->tilesPalettes[5], NULL, 0, 50);
-            DrawSprite(work->x6, 0,
+            DrawSprite(work->bonusX[work->cursor], work->bonusY[work->cursor], NULL, work->tilesPalettes[work->cursor], work->tilesPalettes[5], NULL, 0, 50);
+            DrawSprite(work->headerX, 0,
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage][10],
 #else
                        gLevelUpHeaderFrames[10],
 #endif
                        work->tilesPalettes[6], work->tilesPalettes[7], NULL, 0, 50);
-            DrawSprite(work->x, work->y >> 8, gLevelUpBarFrames[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(work->x2, work->y2 >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->topBarX, work->topBarY >> 8, gLevelUpBarFrames[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->bottomBarX, work->bottomBarY >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         }
 
@@ -1261,7 +1261,7 @@ void Level_Up_2(LevelUpWork* work) {
         }
     }
 
-    DrawSprite(work->x7 >> 8, work->y6 >> 8, work->gfx, work->tiles4, work->palette5, NULL, SPRITE_PRIORITY(1), 40);
+    DrawSprite(work->playerX >> 8, work->playerY >> 8, work->gfx, work->tiles4, work->palette5, NULL, SPRITE_PRIORITY(1), 40);
     TaskPoolDraw(&work->pool);
 }
 
@@ -1534,17 +1534,17 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
 
     {
-        s32 x0 = work->x4[0] << 8;
-        s32 x1 = work->x4[1] << 8;
-        s32 x2 = work->x4[2] << 8;
-        ApproachValue(&x0, 0x1000, work->optionSteps[0]);
+        s32 bonusX0 = work->bonusX[0] << 8;
+        s32 bonusX1 = work->bonusX[1] << 8;
+        s32 bonusX2 = work->bonusX[2] << 8;
+        ApproachValue(&bonusX0, 0x1000, work->optionSteps[0]);
 
         if (work->optionSteps[0] > 0) {
             work->optionSteps[0]--;
         }
 
         if (work->optionSteps[0] <= 6) {
-            ApproachValue(&x1, 0x1000, work->optionSteps[1]);
+            ApproachValue(&bonusX1, 0x1000, work->optionSteps[1]);
 
             if (work->optionSteps[1] > 0) {
                 work->optionSteps[1]--;
@@ -1552,16 +1552,16 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
         }
 
         if (work->optionSteps[1] <= 6) {
-            ApproachValue(&x2, 0x1000, work->optionSteps[2]);
+            ApproachValue(&bonusX2, 0x1000, work->optionSteps[2]);
 
             if (work->optionSteps[2] > 0) {
                 work->optionSteps[2]--;
             }
         }
 
-        work->x4[0] = x0 >> 8;
-        work->x4[1] = x1 >> 8;
-        work->x4[2] = x2 >> 8;
+        work->bonusX[0] = bonusX0 >> 8;
+        work->bonusX[1] = bonusX1 >> 8;
+        work->bonusX[2] = bonusX2 >> 8;
     }
 
     if (work->optionSteps[2] == 0) {
@@ -1711,7 +1711,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
         }
 
         work->cursor = i;
-        work->y3 = sLevelUpCursorY[work->cursor];
+        work->cursorY = sLevelUpCursorY[work->cursor];
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpSelect);
 
         if (gBtlWork->battleId == BATTLE_URSULA) {
@@ -1726,16 +1726,16 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
 }
 
 u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
-    s32 x;
-    s32 y;
+    s32 bonusX;
+    s32 textX;
     s8 n;
 
-    x = work->x4[work->cursor] << 8;
-    y = work->x5[work->cursor] << 8;
-    ApproachValue(&x, -0x8000, work->optionSteps[work->cursor]);
-    ApproachValue(&y, -0xF800, work->optionSteps[work->cursor]);
-    work->x4[work->cursor] = x >> 8;
-    work->x5[work->cursor] = y >> 8;
+    bonusX = work->bonusX[work->cursor] << 8;
+    textX = work->textX[work->cursor] << 8;
+    ApproachValue(&bonusX, -0x8000, work->optionSteps[work->cursor]);
+    ApproachValue(&textX, -0xF800, work->optionSteps[work->cursor]);
+    work->bonusX[work->cursor] = bonusX >> 8;
+    work->textX[work->cursor] = textX >> 8;
     work->optionSteps[work->cursor]--;
 
     if (work->slideSteps > 0) {
@@ -1746,8 +1746,8 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
 
     if (n == 0) {
         if (work->barSteps != 0) {
-            ApproachValue(&work->y, 0, work->barSteps);
-            ApproachValue(&work->y2, 0x9800, work->barSteps);
+            ApproachValue(&work->topBarY, 0, work->barSteps);
+            ApproachValue(&work->bottomBarY, 0x9800, work->barSteps);
             work->barSteps--;
         } else {
             if (work->tilesPalettes[0] != NULL) {
@@ -1808,25 +1808,25 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
                 ReleaseObjPalette(work->palette4);
             }
 
-            work->x4[0] = 0xFF80;
-            work->x4[1] = 0xFF80;
-            work->x4[2] = 0xFF80;
-            work->y4[0] = 16;
-            work->y4[1] = 64;
-            work->y4[2] = 112;
+            work->bonusX[0] = 0xFF80;
+            work->bonusX[1] = 0xFF80;
+            work->bonusX[2] = 0xFF80;
+            work->bonusY[0] = 16;
+            work->bonusY[1] = 64;
+            work->bonusY[2] = 112;
             work->slideSteps = 24;
             work->headerSteps = 16;
             work->optionSteps[0] = 16;
             work->optionSteps[1] = 16;
             work->optionSteps[2] = 16;
-            work->x5[0] = 8;
-            work->x5[1] = 8;
-            work->x5[2] = 8;
-            work->y5[0] = 31;
-            work->y5[1] = 79;
-            work->y5[2] = 127;
-            work->x3 = 132;
-            work->y3 = sLevelUpCursorY[0];
+            work->textX[0] = 8;
+            work->textX[1] = 8;
+            work->textX[2] = 8;
+            work->textY[0] = 31;
+            work->textY[1] = 79;
+            work->textY[2] = 127;
+            work->cursorX = 132;
+            work->cursorY = sLevelUpCursorY[0];
 
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 SetObjTileSource(work->tiles4, gSor1ll51Tiles);

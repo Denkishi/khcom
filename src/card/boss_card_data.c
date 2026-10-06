@@ -42,7 +42,7 @@ static const s32 sWizardCardIds[3] = {
     CARD_WIZARD_3, CARD_WIZARD_1, CARD_WIZARD_7,
 };
 
-const s32 gRedNocturneCardId = 459;
+const s32 gRedNocturneCardId = CARD_RED_NOCTURNE_1;
 
 static const s32 sDarksideCardIds[10] = {
     565, 566, 567, 568, 569, 570, 571, 572, 573, 574,

@@ -39,6 +39,12 @@ TaskDesc gTaskDescFrdAriel = {
     sizeof(FrdArielWork),
 };
 
+enum FrdArielState {
+    FRD_ARIEL_STATE_ENTER,
+    FRD_ARIEL_STATE_ACCELERATE,
+    FRD_ARIEL_STATE_CHARGE
+};
+
 void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     BtlObj* body;
 
@@ -58,7 +64,7 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     }
 
     work->variant = args->variant;
-    work->state = 0;
+    work->state = FRD_ARIEL_STATE_ENTER;
     work->stateTimer = 0;
 
     if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -116,7 +122,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
     ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
 
     switch (work->state) {
-    case 0:
+    case FRD_ARIEL_STATE_ENTER:
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             t = gBtlWork->xMax - 0x30;
         } else {
@@ -127,13 +133,13 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
 
         if (work->stateTimer > 20) {
             work->stateTimer = 0;
-            work->state = 1;
+            work->state = FRD_ARIEL_STATE_ACCELERATE;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 1:
+    case FRD_ARIEL_STATE_ACCELERATE:
         if (work->stateTimer == 0) {
             work->speed = 0;
             work->steps = 12;
@@ -163,13 +169,13 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
 
         if (work->steps <= 0 && AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            work->state = 2;
+            work->state = FRD_ARIEL_STATE_CHARGE;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 2:
+    case FRD_ARIEL_STATE_CHARGE:
         AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
 
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT

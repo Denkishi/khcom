@@ -41,6 +41,16 @@ TaskDesc gTaskDescSmnGenie = {
     sizeof(SmnGenieWork),
 };
 
+enum SmnGenieState {
+    SMN_GENIE_STATE_APPEAR,
+    SMN_GENIE_STATE_VANISH,
+    SMN_GENIE_STATE_IDLE,
+    SMN_GENIE_STATE_FOLLOW,
+    SMN_GENIE_STATE_CAST_THUNDER,
+    SMN_GENIE_STATE_CAST_GRAVITY,
+    SMN_GENIE_STATE_CAST_STOP
+};
+
 void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -74,7 +84,7 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
     work->palette = LoadObjPalette(gGeniePalette, 32);
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
-    work->state = 0;
+    work->state = SMN_GENIE_STATE_APPEAR;
     work->stateTimer = 0;
     work->steps = 0;
     work->scale = 10;
@@ -227,7 +237,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case SMN_GENIE_STATE_APPEAR:
         if ((s16)work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -237,7 +247,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         ApproachValue(&work->scale, 256, work->steps);
 
         if (work->steps <= 0) {
-            work->state = 2;
+            work->state = SMN_GENIE_STATE_IDLE;
             work->stateTimer = 0;
             work->animating = 1;
         } else {
@@ -246,7 +256,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         }
 
         break;
-    case 1:
+    case SMN_GENIE_STATE_VANISH:
         if ((s16)work->stateTimer == 0) {
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
             work->steps = 30;
@@ -263,7 +273,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 2:
+    case SMN_GENIE_STATE_IDLE:
         if ((s16)work->stateTimer == 0) {
             gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
@@ -276,10 +286,10 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             work->target = SmnGenieNextTarget(work);
 
             if (work->target == NULL || work->attacksLeft-- <= 0) {
-                work->state = 1;
+                work->state = SMN_GENIE_STATE_VANISH;
                 work->stateTimer = 0;
             } else {
-                work->state = 3;
+                work->state = SMN_GENIE_STATE_FOLLOW;
                 work->stateTimer = 0;
             }
         } else {
@@ -287,7 +297,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         }
 
         break;
-    case 3:
+    case SMN_GENIE_STATE_FOLLOW:
         AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
         SmnGenieFollowTarget(work);
 
@@ -296,14 +306,14 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
 
             switch ((u16)(GetRandom() % 3)) {
             case 0:
-                work->state = 4;
+                work->state = SMN_GENIE_STATE_CAST_THUNDER;
                 break;
             case 1:
-                work->state = 5;
+                work->state = SMN_GENIE_STATE_CAST_GRAVITY;
                 break;
             case 2:
             default:
-                work->state = 6;
+                work->state = SMN_GENIE_STATE_CAST_STOP;
                 break;
             }
 
@@ -314,7 +324,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         }
 
         break;
-    case 4:
+    case SMN_GENIE_STATE_CAST_THUNDER:
         if ((s16)work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_GE_ATTACK00);
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
@@ -352,14 +362,14 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         }
 
         if (work->fired && !BgFxIsActive()) {
-            work->state = 2;
+            work->state = SMN_GENIE_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 5:
+    case SMN_GENIE_STATE_CAST_GRAVITY:
         if ((s16)work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_GE_ATTACK01);
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
@@ -399,14 +409,14 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
 
         if (work->fired && !BgFxIsActive()) {
             FadeStartIn(FADE_MODE_GRAY, 8);
-            work->state = 2;
+            work->state = SMN_GENIE_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 6:
+    case SMN_GENIE_STATE_CAST_STOP:
         if ((s16)work->stateTimer == 0) {
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
             m4aSongNumStart(SONG_VO_GE_ATTACK02);
@@ -437,7 +447,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         }
 
         if (work->fired && !BgFxIsActive()) {
-            work->state = 2;
+            work->state = SMN_GENIE_STATE_IDLE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;

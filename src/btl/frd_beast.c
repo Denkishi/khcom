@@ -47,6 +47,11 @@ u8 FrdBeastApplyGravity(FrdBeastWork* work) {
     return 0;
 }
 
+enum FrdBeastState {
+    FRD_BEAST_STATE_CHARGE = 1,
+    FRD_BEAST_STATE_POUNCE
+};
+
 void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -103,16 +108,16 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
 
     switch (work->variant) {
     case 0:
-        work->state = 1;
+        work->state = FRD_BEAST_STATE_CHARGE;
         work->attack = 0xA0;
         break;
     case 1:
-        work->state = 1;
+        work->state = FRD_BEAST_STATE_CHARGE;
         work->attack = 0xA1;
         break;
     case 2:
     default:
-        work->state = 2;
+        work->state = FRD_BEAST_STATE_POUNCE;
         work->attack = 0xA1;
         break;
     }
@@ -141,7 +146,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
     }
 
     switch (work->state) {
-    case 2:
+    case FRD_BEAST_STATE_POUNCE:
         if (work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_BE_ATTACK00);
         }
@@ -165,7 +170,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         }
 
         if (FrdBeastApplyGravity(work) && AnimIsFinished(&work->anim)) {
-            work->state = 1;
+            work->state = FRD_BEAST_STATE_CHARGE;
             work->attack = 0xA1;
             work->stateTimer = 0;
             BtlMapStartShake();
@@ -174,7 +179,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
 
         work->stateTimer++;
         break;
-    case 1:
+    case FRD_BEAST_STATE_CHARGE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
 

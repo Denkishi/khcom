@@ -105,6 +105,18 @@ void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz) {
     }
 }
 
+enum FrdDonaldState {
+    FRD_DONALD_STATE_ENTER,
+    FRD_DONALD_STATE_LAND,
+    FRD_DONALD_STATE_ATTACK_END,
+    FRD_DONALD_STATE_LEAVE,
+    FRD_DONALD_STATE_CAST_FIRE,
+    FRD_DONALD_STATE_CAST_BLIZZARD,
+    FRD_DONALD_STATE_CAST_THUNDER,
+    FRD_DONALD_STATE_CAST_CURE,
+    FRD_DONALD_STATE_FLAME_RUN
+};
+
 void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     BtlObj* body;
 
@@ -123,7 +135,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     }
 
     work->variant = args->variant;
-    work->state = 0;
+    work->state = FRD_DONALD_STATE_ENTER;
     work->stateTimer = 0;
     work->steps = 0;
     work->vz = 0;
@@ -213,7 +225,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
 
     switch (work->state) {
-    case 0:
+    case FRD_DONALD_STATE_ENTER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
             work->stateTimer++;
@@ -227,37 +239,37 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         if (FrdDonaldApplyGravity(work)) {
             work->stateTimer = 0;
 
-            if (work->variant == 3) work->state = 8;
+            if (work->variant == 3) work->state = FRD_DONALD_STATE_FLAME_RUN;
             else {
-                work->state = 1;
+                work->state = FRD_DONALD_STATE_LAND;
                 m4aSongNumStart(SONG_VO_DL_ATTACK00);
             }
         }
 
         break;
-    case 1:
+    case FRD_DONALD_STATE_LAND:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
 
         if (AnimIsFinished(&work->anim)) {
             SelectLockonTarget();
 
-            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
+            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = FRD_DONALD_STATE_CAST_FIRE;
             else {
                 u16 spell = GetRandom();
                 spell &= 3;
 
                 switch (spell) {
                 case 0:
-                    work->state = 4;
+                    work->state = FRD_DONALD_STATE_CAST_FIRE;
                     break;
                 case 1:
-                    work->state = 5;
+                    work->state = FRD_DONALD_STATE_CAST_BLIZZARD;
                     break;
                 case 2:
-                    work->state = 6;
+                    work->state = FRD_DONALD_STATE_CAST_THUNDER;
                     break;
                 case 3:
-                    work->state = 7;
+                    work->state = FRD_DONALD_STATE_CAST_CURE;
                     break;
                 }
             }
@@ -266,27 +278,27 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         } else work->stateTimer++;
 
         break;
-    case 2:
+    case FRD_DONALD_STATE_ATTACK_END:
         if (work->repeatsLeft > 0) {
             SelectLockonTarget();
 
-            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
+            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = FRD_DONALD_STATE_CAST_FIRE;
             else {
                 u16 spell = GetRandom();
                 spell &= 3;
 
                 switch (spell) {
                 case 0:
-                    work->state = 4;
+                    work->state = FRD_DONALD_STATE_CAST_FIRE;
                     break;
                 case 1:
-                    work->state = 5;
+                    work->state = FRD_DONALD_STATE_CAST_BLIZZARD;
                     break;
                 case 2:
-                    work->state = 6;
+                    work->state = FRD_DONALD_STATE_CAST_THUNDER;
                     break;
                 case 3:
-                    work->state = 7;
+                    work->state = FRD_DONALD_STATE_CAST_CURE;
                     break;
                 }
             }
@@ -297,13 +309,13 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
 
             if (AnimIsFinished(&work->anim)) {
-                work->state = 3;
+                work->state = FRD_DONALD_STATE_LEAVE;
                 work->stateTimer = 0;
             } else work->stateTimer++;
         }
 
         break;
-    case 3:
+    case FRD_DONALD_STATE_LEAVE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
 
@@ -329,7 +341,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 8:
+    case FRD_DONALD_STATE_FLAME_RUN:
         if (work->stateTimer == 0) {
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) angle = GetRandom() % 2 ? 0xAD : 0xD3;
             else angle = GetRandom() % 2 ? 0x53 : 0x2D;
@@ -362,11 +374,11 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
         if (work->stateTimer > 179) {
             work->stateTimer = 0;
-            work->state = 3;
+            work->state = FRD_DONALD_STATE_LEAVE;
         } else work->stateTimer++;
 
         break;
-    case 4:
+    case FRD_DONALD_STATE_CAST_FIRE:
         {
             s32 x,y,z;
 
@@ -418,7 +430,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
             if (work->stateTimer > 40) {
                 if (!BgFxIsActive()) {
-                    work->state = 2;
+                    work->state = FRD_DONALD_STATE_ATTACK_END;
                     work->stateTimer = 0;
                     break;
                 }
@@ -429,7 +441,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             work->stateTimer++;
             break;
         }
-    case 5:
+    case FRD_DONALD_STATE_CAST_BLIZZARD:
         {
             s32 x,y,z;
 
@@ -481,7 +493,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
             if (work->stateTimer > 40) {
                 if (!BgFxIsActive()) {
-                    work->state = 2;
+                    work->state = FRD_DONALD_STATE_ATTACK_END;
                     work->stateTimer = 0;
                     break;
                 }
@@ -492,7 +504,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             work->stateTimer++;
             break;
         }
-    case 6:
+    case FRD_DONALD_STATE_CAST_THUNDER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
             AnimReset(&work->anim);
@@ -537,13 +549,13 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         if (work->stateTimer == 60) SetBattleZoom(15,148,0x10000,0x12C00);
 
         if (work->stateTimer > 40 && !BgFxIsActive()) {
-            work->state=2;
+            work->state=FRD_DONALD_STATE_ATTACK_END;
             SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
             work->stateTimer=0;
         } else work->stateTimer++;
 
         break;
-    case 7:
+    case FRD_DONALD_STATE_CAST_CURE:
         {
             BtlObj* ally=work->mainSide != 0 ? gBtlWork->actor : gRikuBtlWork->actor;
 
@@ -605,7 +617,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     if (ally->hp > ally->maxHp) ally->hp=ally->maxHp;
 
                     CreateBtlPopTask(ally,10);
-                    work->state=2;
+                    work->state=FRD_DONALD_STATE_ATTACK_END;
                     SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
                     work->stateTimer=0;
                     break;

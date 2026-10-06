@@ -62,6 +62,13 @@ u8 FrdAladdinApplyGravity(FrdAladdinWork* work) {
     return 0;
 }
 
+enum FrdAladdinState {
+    FRD_ALADDIN_STATE_ENTER,
+    FRD_ALADDIN_STATE_LAND,
+    FRD_ALADDIN_STATE_LEAVE,
+    FRD_ALADDIN_STATE_ATTACK
+};
+
 void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     BtlObj* body;
 
@@ -81,7 +88,7 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     }
 
     work->variant = args->variant;
-    work->state = 0;
+    work->state = FRD_ALADDIN_STATE_ENTER;
     work->stateTimer = 0;
     work->steps = 0;
     work->vz = 0;
@@ -134,7 +141,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
     if ((work->mainSide ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) return 0;
 
     switch (work->state) {
-    case 0:
+    case FRD_ALADDIN_STATE_ENTER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
             work->stateTimer++;
@@ -144,26 +151,26 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
         if (FrdAladdinApplyGravity(work)) {
-            work->state = 1;
+            work->state = FRD_ALADDIN_STATE_LAND;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_AD_ATTACK00);
         }
 
         break;
-    case 1:
+    case FRD_ALADDIN_STATE_LAND:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 3;
+            work->state = FRD_ALADDIN_STATE_ATTACK;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 2:
+    case FRD_ALADDIN_STATE_LEAVE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
 
@@ -187,7 +194,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 3:
+    case FRD_ALADDIN_STATE_ATTACK:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
         }
@@ -241,7 +248,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
 
         if (work->stateTimer > work->duration) {
             work->stateTimer = 0;
-            work->state = 2;
+            work->state = FRD_ALADDIN_STATE_LEAVE;
         } else {
             work->stateTimer++;
         }

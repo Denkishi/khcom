@@ -41,6 +41,13 @@ TaskDesc gTaskDescSmnMushu = {
     sizeof(SmnMushuWork),
 };
 
+enum SmnMushuState {
+    SMN_MUSHU_STATE_APPEAR,
+    SMN_MUSHU_STATE_VANISH,
+    SMN_MUSHU_STATE_FIRE,
+    SMN_MUSHU_STATE_FIRE_WINDUP
+};
+
 void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -74,7 +81,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     work->palette = LoadObjPalette(gMushuPalette, 32);
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
-    work->state = 0;
+    work->state = SMN_MUSHU_STATE_APPEAR;
     work->stateTimer = 0;
     work->scaleSteps = 0;
     work->scale = 10;
@@ -125,7 +132,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case SMN_MUSHU_STATE_APPEAR:
         if (work->stateTimer == 0) {
             work->scaleSteps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -138,13 +145,13 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             work->stateTimer++;
             work->scaleSteps--;
         } else {
-            work->state = 3;
+            work->state = SMN_MUSHU_STATE_FIRE_WINDUP;
             work->stateTimer = 0;
             work->animating = 1;
         }
 
         break;
-    case 1:
+    case SMN_MUSHU_STATE_VANISH:
         if (work->stateTimer == 0) {
             work->scaleSteps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -160,16 +167,16 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         work->stateTimer++;
         work->scaleSteps--;
         break;
-    case 3:
+    case SMN_MUSHU_STATE_FIRE_WINDUP:
         AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 2, 0, work->tiles);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 2;
+            work->state = SMN_MUSHU_STATE_FIRE;
             work->stateTimer = 0;
         }
 
         break;
-    case 2:
+    case SMN_MUSHU_STATE_FIRE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
 
@@ -229,7 +236,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         }
 
         if (work->stateTimer > work->scaleSteps) {
-            work->state = 1;
+            work->state = SMN_MUSHU_STATE_VANISH;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;

@@ -36,6 +36,12 @@ TaskDesc gTaskDescSmnSimba = {
     sizeof(SmnSimbaWork),
 };
 
+enum SmnSimbaState {
+    SMN_SIMBA_STATE_APPEAR,
+    SMN_SIMBA_STATE_ROAR,
+    SMN_SIMBA_STATE_VANISH
+};
+
 void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -69,7 +75,7 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
     work->palette = LoadObjPalette(gShinbaPalette, 32);
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(&sSmnSimbaAnimDef, &work->anim, 0, 0, work->tiles);
-    work->state = 0;
+    work->state = SMN_SIMBA_STATE_APPEAR;
     work->stateTimer = 0;
     work->steps = 0;
     work->unk_14C = 0;
@@ -96,7 +102,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
     BtlMapFollowPosition(body->x, body->y, body->z);
 
     switch (work->state) {
-    case 0:
+    case SMN_SIMBA_STATE_APPEAR:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -109,13 +115,13 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             work->stateTimer++;
             work->steps--;
         } else {
-            work->state = 1;
+            work->state = SMN_SIMBA_STATE_ROAR;
             work->stateTimer = 0;
             work->animating = 1;
         }
 
         break;
-    case 2:
+    case SMN_SIMBA_STATE_VANISH:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -131,7 +137,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 1:
+    case SMN_SIMBA_STATE_ROAR:
         switch (work->stateTimer) {
         case 0:
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -206,7 +212,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
-            work->state = 2;
+            work->state = SMN_SIMBA_STATE_VANISH;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;

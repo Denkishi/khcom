@@ -47,6 +47,14 @@ TaskDesc gTaskDescSmnTinkeff = {
     sizeof(SmnTinkeffWork),
 };
 
+enum SmnTinkState {
+    SMN_TINK_STATE_APPEAR,
+    SMN_TINK_STATE_VANISH,
+    SMN_TINK_STATE_HOVER,
+    SMN_TINK_STATE_ORBIT,
+    SMN_TINK_STATE_LOOP_THE_LOOP
+};
+
 void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -85,7 +93,7 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     work->palette = LoadObjPalette(gTinkPalette, 32);
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
-    work->state = 0;
+    work->state = SMN_TINK_STATE_APPEAR;
     work->stateTimer = 0;
     work->steps = 0;
     work->scale = 10;
@@ -155,8 +163,8 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
     }
 
     if (work->healFrames <= 0) {
-        if (work->state != 1) {
-            work->state = 1;
+        if (work->state != SMN_TINK_STATE_VANISH) {
+            work->state = SMN_TINK_STATE_VANISH;
             work->stateTimer = 0;
         }
     } else {
@@ -166,7 +174,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case SMN_TINK_STATE_APPEAR:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -176,7 +184,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         ApproachValue(&work->scale, 256, work->steps);
 
         if (work->steps <= 0) {
-            work->state = 2;
+            work->state = SMN_TINK_STATE_HOVER;
             work->stateTimer = 0;
             work->animating = 1;
             m4aSongNumStart(SONG_EF_TINK_LOOP);
@@ -186,7 +194,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         }
 
         break;
-    case 1:
+    case SMN_TINK_STATE_VANISH:
         if (work->stateTimer == 0) {
             work->steps = 20;
             m4aSongNumStop(SONG_EF_TINK_LOOP);
@@ -203,7 +211,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 2:
+    case SMN_TINK_STATE_HOVER:
         SmnTinkSpawnSparkle(work);
 
         if (work->stateTimer == 0) {
@@ -223,13 +231,13 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
 
         if (work->steps-- <= 0) {
             work->stateTimer = 0;
-            work->state = 3;
+            work->state = SMN_TINK_STATE_ORBIT;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 3:
+    case SMN_TINK_STATE_ORBIT:
         SmnTinkSpawnSparkle(work);
 
         if (work->stateTimer == 0) {
@@ -272,11 +280,11 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             switch (GetRandom() % 3) {
             case 0:
                 work->speed = 0x280;
-                work->state = 4;
+                work->state = SMN_TINK_STATE_LOOP_THE_LOOP;
                 work->stateTimer = t;
                 break;
             case 1:
-                work->state = 2;
+                work->state = SMN_TINK_STATE_HOVER;
                 work->stateTimer = t;
                 break;
             case 2:
@@ -289,7 +297,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         }
 
         break;
-    case 4:
+    case SMN_TINK_STATE_LOOP_THE_LOOP:
         SmnTinkSpawnSparkle(work);
 
         if (work->stateTimer == 0) {
@@ -313,7 +321,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
-            work->state = 3;
+            work->state = SMN_TINK_STATE_ORBIT;
             work->stateTimer = 1;
         } else {
             work->stateTimer++;

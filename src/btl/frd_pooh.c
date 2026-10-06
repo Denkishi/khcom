@@ -60,6 +60,16 @@ u8 FrdPoohApplyGravity(FrdPoohWork* work) {
     return 0;
 }
 
+enum FrdPoohState {
+    FRD_POOH_STATE_WANDER,
+    FRD_POOH_STATE_APPROACH,
+    FRD_POOH_STATE_RIDE,
+    FRD_POOH_STATE_JUMP_OFF,
+    FRD_POOH_STATE_RECOVER,
+    FRD_POOH_STATE_BEAM_CHARGE,
+    FRD_POOH_STATE_BEAM
+};
+
 void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
     FrdPoohBody* body;
     body = &work->body;
@@ -91,7 +101,7 @@ void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
     body->y = work->actor->y;
     body->z = 0;
     body->ground = 0;
-    work->state = 0;
+    work->state = FRD_POOH_STATE_WANDER;
     work->targetX = work->actor->x;
     work->targetY = work->actor->y;
     work->palette = LoadObjPalette(gPoohPalette, 32);
@@ -115,7 +125,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
     BtlMapFollowPosition(body->x, body->y, body->z);
 
     switch (work->state) {
-    case 0: {
+    case FRD_POOH_STATE_WANDER: {
         s32 flip = 0;
         u8 angle = GetAngle(body->x, body->y, work->targetX, work->targetY);
 
@@ -167,11 +177,11 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
             work->targetY = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) * 256;
         }
 
-        if ((u16)(GetRandom() % 300u) == 0) work->state = 1;
+        if ((u16)(GetRandom() % 300u) == 0) work->state = FRD_POOH_STATE_APPROACH;
 
         break;
     }
-    case 1: {
+    case FRD_POOH_STATE_APPROACH: {
         u8 angle;
         work->targetX = work->actor->x;
         work->targetY = work->actor->y;
@@ -186,21 +196,21 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
         ApplyAttackBox(110, body->x, body->y, body->z, 20, 10, 64);
 
         if (ColliderIsTouchingType(&body->collider, 1)) {
-            work->state = 2;
+            work->state = FRD_POOH_STATE_RIDE;
             ColliderSetDisabled(&body->collider, 1);
             work->bob = 0;
         }
 
         break;
     }
-    case 2:
+    case FRD_POOH_STATE_RIDE:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 6, 0, work->tiles);
 
         if (AnimIsFinished(&work->anim)) {
             if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
             else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
 
-            if ((u16)(GetRandom() % 200u) == 0) work->state = 5;
+            if ((u16)(GetRandom() % 200u) == 0) work->state = FRD_POOH_STATE_BEAM_CHARGE;
         }
 
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) body->x = work->actor->x + 0xA00;
@@ -210,7 +220,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
         body->z = work->actor->z + work->bob;
         work->bob += (-0x1C00 - work->bob) >> 3;
         break;
-    case 5:
+    case FRD_POOH_STATE_BEAM_CHARGE:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 9, 0, work->tiles);
 
         if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -221,7 +231,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
         body->z = work->actor->z + work->bob - 0xC00;
 
         if (work->counter > 180) {
-            work->state = 6;
+            work->state = FRD_POOH_STATE_BEAM;
             work->counter = 120;
             work->animcounter = 0;
             work->scale = 0;
@@ -229,7 +239,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
         } else work->counter++;
 
         break;
-    case 6: {
+    case FRD_POOH_STATE_BEAM: {
         s32 frame;
 
         if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -246,7 +256,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
         BgFxSetPosition(body->x, body->y, body->z - 0x1A00);
 
         if (--work->counter <= 0) {
-            work->state = 3;
+            work->state = FRD_POOH_STATE_JUMP_OFF;
             work->counter = 0;
             work->velocity = -0x380;
             work->speed = 0x500;
@@ -255,7 +265,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
 
         break;
     }
-    case 3:
+    case FRD_POOH_STATE_JUMP_OFF:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 7, 0, work->tiles);
 
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) body->x -= work->speed;
@@ -267,7 +277,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
             work->speed = 0;
 
             if (AnimIsFinished(&work->anim)) {
-                work->state = 4;
+                work->state = FRD_POOH_STATE_RECOVER;
                 ColliderSetDisabled(&body->collider, 0);
             }
         }
@@ -279,10 +289,10 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
 
         ApplyAttackBox(162, body->x, body->y, body->z, 30, 25, 10);
         break;
-    case 4:
+    case FRD_POOH_STATE_RECOVER:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 8, 0, work->tiles);
 
-        if (AnimIsFinished(&work->anim)) work->state = 0;
+        if (AnimIsFinished(&work->anim)) work->state = FRD_POOH_STATE_WANDER;
 
         break;
     }

@@ -32,6 +32,14 @@ static const AnimDef sSmnKingAnimDefs[3] = {
     { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 2 },
 };
 
+enum SmnKingState {
+    SMN_KING_STATE_APPEAR,
+    SMN_KING_STATE_VANISH,
+    SMN_KING_STATE_FALL,
+    SMN_KING_STATE_FLASH = 4,
+    SMN_KING_STATE_WAIT
+};
+
 void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -60,7 +68,7 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
     work->vz = 0;
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 0, 0, work->tiles);
-    work->state = 0;
+    work->state = SMN_KING_STATE_APPEAR;
     work->stateTimer = 0;
     work->steps = 0;
     work->unk_14C = 0;
@@ -99,7 +107,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
     BtlMapFollowPosition(body->x, body->y, body->z);
 
     switch (work->state) {
-    case 0:
+    case SMN_KING_STATE_APPEAR:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -109,7 +117,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
         ApproachValue(&work->scale, 256, work->steps);
 
         if (work->steps <= 0) {
-            work->state = 2;
+            work->state = SMN_KING_STATE_FALL;
             work->stateTimer = 0;
             work->animating = 1;
         } else {
@@ -118,7 +126,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
         }
 
         break;
-    case 1:
+    case SMN_KING_STATE_VANISH:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -134,17 +142,17 @@ u8 task_smn_king_1(SmnKingWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 2:
+    case SMN_KING_STATE_FALL:
         AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 1, 0, work->tiles);
 
         if (SmnKingApplyGravity(work)) {
-            work->state = 4;
+            work->state = SMN_KING_STATE_FLASH;
             work->stateTimer = 0;
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
 
         break;
-    case 4:
+    case SMN_KING_STATE_FLASH:
         AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 2, 0, work->tiles);
 
         if (AnimGetFrame(&work->anim) == 5 && work->anim.timer == 3) {
@@ -178,17 +186,17 @@ u8 task_smn_king_1(SmnKingWork* work) {
         ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 5;
+            work->state = SMN_KING_STATE_WAIT;
             work->stateTimer = 0;
         }
 
         break;
-    case 5:
+    case SMN_KING_STATE_WAIT:
         ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
 
         if (work->stateTimer > 60) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            work->state = 1;
+            work->state = SMN_KING_STATE_VANISH;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;

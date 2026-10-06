@@ -60,6 +60,20 @@ u8 FrdJackApplyGravity(FrdJackWork* work) {
     return 0;
 }
 
+enum FrdJackState {
+    FRD_JACK_STATE_ENTER,
+    FRD_JACK_STATE_LAND,
+    FRD_JACK_STATE_ATTACK_END,
+    FRD_JACK_STATE_LEAVE,
+    FRD_JACK_STATE_CAST_FIRE,
+    FRD_JACK_STATE_CAST_BLIZZARD,
+    FRD_JACK_STATE_CAST_THUNDER,
+    FRD_JACK_STATE_CAST_GRAVITY,
+    FRD_JACK_STATE_FLIP_WINDUP,
+    FRD_JACK_STATE_FLIP,
+    FRD_JACK_STATE_FLIP_LAND
+};
+
 void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     BtlObj* body;
 
@@ -79,7 +93,7 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     }
 
     work->variant = args->variant;
-    work->state = 0;
+    work->state = FRD_JACK_STATE_ENTER;
     work->stateTimer = 0;
     work->steps = 0;
     work->vz = 0;
@@ -137,7 +151,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
 
     switch (work->state) {
-    case 0:
+    case FRD_JACK_STATE_ENTER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
             work->stateTimer++;
@@ -147,13 +161,13 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
         if (FrdJackApplyGravity(work)) {
-            work->state = 1;
+            work->state = FRD_JACK_STATE_LAND;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_JC_ATTACK00);
         }
 
         break;
-    case 1:
+    case FRD_JACK_STATE_LAND:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
 
         if (AnimIsFinished(&work->anim)) {
@@ -164,16 +178,16 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
             switch (spell) {
             case 0:
-                work->state = 4;
+                work->state = FRD_JACK_STATE_CAST_FIRE;
                 break;
             case 1:
-                work->state = 5;
+                work->state = FRD_JACK_STATE_CAST_BLIZZARD;
                 break;
             case 2:
-                work->state = 6;
+                work->state = FRD_JACK_STATE_CAST_THUNDER;
                 break;
             case 3:
-                work->state = 7;
+                work->state = FRD_JACK_STATE_CAST_GRAVITY;
                 break;
             }
 
@@ -181,22 +195,22 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         } else work->stateTimer++;
 
         break;
-    case 2:
+    case FRD_JACK_STATE_ATTACK_END:
         if (work->repeatsLeft > 0) {
-            work->state = 8;
+            work->state = FRD_JACK_STATE_FLIP_WINDUP;
             work->stateTimer = 0;
             work->repeatsLeft--;
         } else {
             if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
 
             if (AnimIsFinished(&work->anim)) {
-                work->state = 3;
+                work->state = FRD_JACK_STATE_LEAVE;
                 work->stateTimer = 0;
             } else work->stateTimer++;
         }
 
         break;
-    case 3:
+    case FRD_JACK_STATE_LEAVE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
 
@@ -215,18 +229,18 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 8:
+    case FRD_JACK_STATE_FLIP_WINDUP:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 9;
+            work->state = FRD_JACK_STATE_FLIP;
             GetRandom();
             m4aSongNumStart(SONG_VO_JC_ATTACK00);
             work->stateTimer = 0;
         } else work->stateTimer++;
 
         break;
-    case 9:
+    case FRD_JACK_STATE_FLIP:
         if (work->stateTimer == 0) {
             if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) work->targetX = work->actor->x - 0x2D00;
             else work->targetX = work->actor->x + 0x2D00;
@@ -269,11 +283,11 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         if (body->z >= body->groundZ && work->steps <= 0) {
             work->stateTimer = 0;
             work->rotation = 0;
-            work->state = 10;
+            work->state = FRD_JACK_STATE_FLIP_LAND;
         }
 
         break;
-    case 10:
+    case FRD_JACK_STATE_FLIP_LAND:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
 
         if (AnimIsFinished(&work->anim)) {
@@ -284,16 +298,16 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
             switch (spell) {
             case 0:
-                work->state = 4;
+                work->state = FRD_JACK_STATE_CAST_FIRE;
                 break;
             case 1:
-                work->state = 5;
+                work->state = FRD_JACK_STATE_CAST_BLIZZARD;
                 break;
             case 2:
-                work->state = 6;
+                work->state = FRD_JACK_STATE_CAST_THUNDER;
                 break;
             case 3:
-                work->state = 7;
+                work->state = FRD_JACK_STATE_CAST_GRAVITY;
                 break;
             }
 
@@ -301,7 +315,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         } else work->stateTimer++;
 
         break;
-    case 4:
+    case FRD_JACK_STATE_CAST_FIRE:
         {
             s32 x, y, z;
 
@@ -353,7 +367,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
             if (work->stateTimer > 44) {
                 if (!BgFxIsActive()) {
-                    work->state = 2;
+                    work->state = FRD_JACK_STATE_ATTACK_END;
                     work->stateTimer = 0;
                     break;
                 }
@@ -364,7 +378,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             work->stateTimer++;
             break;
         }
-    case 7:
+    case FRD_JACK_STATE_CAST_GRAVITY:
         {
             s32 x, y, z;
 
@@ -418,13 +432,13 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
             if (work->stateTimer > 44 && !BgFxIsActive()) {
                 FadeToOriginal(FADE_MODE_ADD_WHITE, 20);
-                work->state = 2;
+                work->state = FRD_JACK_STATE_ATTACK_END;
                 work->stateTimer = 0;
             } else work->stateTimer++;
 
             break;
         }
-    case 5:
+    case FRD_JACK_STATE_CAST_BLIZZARD:
         {
             s32 x, y, z;
 
@@ -476,7 +490,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
             if (work->stateTimer > 44) {
                 if (!BgFxIsActive()) {
-                    work->state = 2;
+                    work->state = FRD_JACK_STATE_ATTACK_END;
                     work->stateTimer = 0;
                     break;
                 }
@@ -487,7 +501,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             work->stateTimer++;
             break;
         }
-    case 6:
+    case FRD_JACK_STATE_CAST_THUNDER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
             AnimReset(&work->anim);
@@ -538,7 +552,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         if (work->stateTimer == 64) SetBattleZoom(15, 148, 0x10000, 0x12C00);
 
         if (work->stateTimer > 44 && !BgFxIsActive()) {
-            work->state = 2;
+            work->state = FRD_JACK_STATE_ATTACK_END;
             SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
             work->stateTimer = 0;
         } else work->stateTimer++;

@@ -48,6 +48,13 @@ void SmnBambiPickHopTarget(SmnBambiWork* work) {
     }
 }
 
+enum SmnBambiState {
+    SMN_BAMBI_STATE_APPEAR,
+    SMN_BAMBI_STATE_HOP,
+    SMN_BAMBI_STATE_STOMP,
+    SMN_BAMBI_STATE_VANISH
+};
+
 void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -86,7 +93,7 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     work->vz = 0;
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(&sSmnBambiAnimDef, &work->anim, 0, 0, work->tiles);
-    work->state = 0;
+    work->state = SMN_BAMBI_STATE_APPEAR;
     work->stateTimer = 0;
     work->steps = 0;
     work->hopTimer = 0;
@@ -176,7 +183,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case SMN_BAMBI_STATE_APPEAR:
         if (work->mainSide != 0) {
             BtlMapFollowPosition(body->x, body->y, body->z);
         }
@@ -194,9 +201,9 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             work->steps--;
         } else {
             if (work->variant == 3) {
-                work->state = 2;
+                work->state = SMN_BAMBI_STATE_STOMP;
             } else {
-                work->state = 1;
+                work->state = SMN_BAMBI_STATE_HOP;
             }
 
             work->stateTimer = 0;
@@ -204,7 +211,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         }
 
         break;
-    case 3:
+    case SMN_BAMBI_STATE_VANISH:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -223,7 +230,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 2:
+    case SMN_BAMBI_STATE_STOMP:
         if (work->stateTimer == 0) {
             AnimStart(&work->anim, 0, 0);
             work->vz = -0x480;
@@ -255,7 +262,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         }
 
         if ((work->vz > 0 && work->steps > 7) || work->target == NULL) {
-            work->state = 3;
+            work->state = SMN_BAMBI_STATE_VANISH;
             work->stateTimer = 0;
         } else {
             if (body->x < work->target->x) {
@@ -271,7 +278,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         }
 
         break;
-    case 1:
+    case SMN_BAMBI_STATE_HOP:
         if (work->hopTimer == 0) {
             AnimStart(&work->anim, 0, 0);
             SmnBambiPickHopTarget(work);
@@ -320,7 +327,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         }
 
         if (work->stateTimer > 4) {
-            work->state = 3;
+            work->state = SMN_BAMBI_STATE_VANISH;
             work->stateTimer = 0;
         }
 

@@ -57,6 +57,16 @@ u8 FrdGoofyApplyGravity(FrdGoofyWork* work) {
     return 0;
 }
 
+enum FrdGoofyState {
+    FRD_GOOFY_STATE_ENTER,
+    FRD_GOOFY_STATE_LAND,
+    FRD_GOOFY_STATE_ATTACK_END,
+    FRD_GOOFY_STATE_LEAVE,
+    FRD_GOOFY_STATE_CHARGE,
+    FRD_GOOFY_STATE_TORNADO_WINDUP,
+    FRD_GOOFY_STATE_TORNADO
+};
+
 void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     BtlObj* body;
 
@@ -85,7 +95,7 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     }
 
     work->variant = args->variant;
-    work->state = 0;
+    work->state = FRD_GOOFY_STATE_ENTER;
     work->stateTimer = 0;
     work->steps = 0;
     work->vz = 0;
@@ -123,7 +133,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case FRD_GOOFY_STATE_ENTER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
             work->stateTimer++;
@@ -133,13 +143,13 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
         if (FrdGoofyApplyGravity(work)) {
-            work->state = 1;
+            work->state = FRD_GOOFY_STATE_LAND;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_GF_ATTACK00);
         }
 
         break;
-    case 1:
+    case FRD_GOOFY_STATE_LAND:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
         }
@@ -148,10 +158,10 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
             switch (work->variant) {
             case 0:
             case 1:
-                work->state = 4;
+                work->state = FRD_GOOFY_STATE_CHARGE;
                 break;
             case 2:
-                work->state = 5;
+                work->state = FRD_GOOFY_STATE_TORNADO_WINDUP;
                 break;
             }
 
@@ -161,20 +171,20 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         }
 
         break;
-    case 2:
+    case FRD_GOOFY_STATE_ATTACK_END:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 3;
+            work->state = FRD_GOOFY_STATE_LEAVE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 3:
+    case FRD_GOOFY_STATE_LEAVE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
 
@@ -198,7 +208,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 4:
+    case FRD_GOOFY_STATE_CHARGE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 2, 0, work->tiles);
 
@@ -229,14 +239,14 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         FrdGoofyApplyGravity(work);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 2;
+            work->state = FRD_GOOFY_STATE_ATTACK_END;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 5:
+    case FRD_GOOFY_STATE_TORNADO_WINDUP:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 3, 0, work->tiles);
         }
@@ -244,14 +254,14 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         FrdGoofyApplyGravity(work);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 6;
+            work->state = FRD_GOOFY_STATE_TORNADO;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 6:
+    case FRD_GOOFY_STATE_TORNADO:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
             work->angle = GetRandom();
@@ -271,7 +281,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         FrdGoofyApplyGravity(work);
 
         if (work->stateTimer > 179) {
-            work->state = 2;
+            work->state = FRD_GOOFY_STATE_ATTACK_END;
             work->stateTimer = 0;
         }
 

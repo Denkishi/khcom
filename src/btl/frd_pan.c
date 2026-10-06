@@ -42,6 +42,15 @@ TaskDesc gTaskDescFrdPan = {
     sizeof(FrdPanWork),
 };
 
+enum FrdPanState {
+    FRD_PAN_STATE_ENTER,
+    FRD_PAN_STATE_HOVER,
+    FRD_PAN_STATE_LEAVE,
+    FRD_PAN_STATE_ATTACK_WINDUP,
+    FRD_PAN_STATE_ATTACK,
+    FRD_PAN_STATE_ATTACK_END
+};
+
 void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     BtlObj* body;
 
@@ -61,7 +70,7 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     }
 
     work->variant = args->variant;
-    work->state = 0;
+    work->state = FRD_PAN_STATE_ENTER;
     work->stateTimer = 0;
     work->steps = 0;
     work->vz = 0;
@@ -181,7 +190,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case FRD_PAN_STATE_ENTER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
             work->steps = 30;
@@ -191,7 +200,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         FrdPanHover(work);
 
         if (work->steps <= 0) {
-            work->state = 3;
+            work->state = FRD_PAN_STATE_ATTACK_WINDUP;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
@@ -199,7 +208,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         }
 
         break;
-    case 1:
+    case FRD_PAN_STATE_HOVER:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
         }
@@ -208,13 +217,13 @@ u8 task_frd_pan_1(FrdPanWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            work->state = 2;
+            work->state = FRD_PAN_STATE_LEAVE;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 2:
+    case FRD_PAN_STATE_LEAVE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
 
@@ -238,7 +247,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 3:
+    case FRD_PAN_STATE_ATTACK_WINDUP:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 1, 0, work->tiles);
         }
@@ -247,14 +256,14 @@ u8 task_frd_pan_1(FrdPanWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            work->state = 4;
+            work->state = FRD_PAN_STATE_ATTACK;
             m4aSongNumStart(SONG_VO_PP_ATTACK00);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 4:
+    case FRD_PAN_STATE_ATTACK:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->steps = 70;
@@ -310,13 +319,13 @@ u8 task_frd_pan_1(FrdPanWork* work) {
 
         if (work->stateTimer > work->duration) {
             work->stateTimer = 0;
-            work->state = 5;
+            work->state = FRD_PAN_STATE_ATTACK_END;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 5:
+    case FRD_PAN_STATE_ATTACK_END:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 3, 0, work->tiles);
         }
@@ -325,7 +334,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            work->state = 1;
+            work->state = FRD_PAN_STATE_HOVER;
             FadeToOriginal(FADE_MODE_BLACK, 8);
         } else {
             work->stateTimer++;

@@ -139,6 +139,22 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     return p;
 }
 
+enum SmnCloudState {
+    SMN_CLOUD_STATE_APPEAR,
+    SMN_CLOUD_STATE_TRIPLE_SLASH,
+    SMN_CLOUD_STATE_DOUBLE_SLASH,
+    SMN_CLOUD_STATE_RISE,
+    SMN_CLOUD_STATE_DIVE,
+    SMN_CLOUD_STATE_VANISH,
+    SMN_CLOUD_STATE_TELEPORT_OUT,
+    SMN_CLOUD_STATE_TELEPORT_IN
+};
+
+enum SmnCloudAttackPhase {
+    SMN_CLOUD_ATTACK_PHASE_OPENER,
+    SMN_CLOUD_ATTACK_PHASE_FINISHER
+};
+
 void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -173,14 +189,14 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     work->vz = 0;
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 0, 0, work->tiles);
-    work->state = 0;
+    work->state = SMN_CLOUD_STATE_APPEAR;
     work->stateTimer = 0;
     work->speed = 0;
     work->unk_158 = 0;
     work->scaleX = 10;
     work->scaleY = 10;
     work->animating = 0;
-    work->attackPhase = 0;
+    work->attackPhase = SMN_CLOUD_ATTACK_PHASE_OPENER;
     work->target = NULL;
     work->attackCount = 0;
     work->targetIndex = 0;
@@ -199,11 +215,11 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
 
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
 
-    if (work->state == 4) BtlMapFollowPosition(body->x, body->y, body->z + 0x2000);
+    if (work->state == SMN_CLOUD_STATE_DIVE) BtlMapFollowPosition(body->x, body->y, body->z + 0x2000);
     else BtlMapFollowPosition(body->x, body->y, body->z);
 
     switch (work->state) {
-    case 0:
+    case SMN_CLOUD_STATE_APPEAR:
         if (work->stateTimer == 0) {
             work->steps = 12;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -218,19 +234,19 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
 
             switch (work->variant) {
             case 0:
-                work->state = 2;
+                work->state = SMN_CLOUD_STATE_DOUBLE_SLASH;
                 work->animating = 1;
                 break;
             case 1:
-                work->state = 1;
+                work->state = SMN_CLOUD_STATE_TRIPLE_SLASH;
                 work->animating = 1;
                 break;
             case 2:
-                work->state = 3;
+                work->state = SMN_CLOUD_STATE_RISE;
                 work->animating = 1;
                 break;
             default:
-                work->state = 6;
+                work->state = SMN_CLOUD_STATE_TELEPORT_OUT;
                 break;
             }
         } else {
@@ -239,7 +255,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         }
 
         break;
-    case 5:
+    case SMN_CLOUD_STATE_VANISH:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -254,20 +270,20 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 6:
+    case SMN_CLOUD_STATE_TELEPORT_OUT:
         if (work->stateTimer == 0) work->steps = 8;
 
         ApproachValue(&work->scaleX, 10, work->steps);
         ApproachValue(&work->scaleY, 512, work->steps);
 
         if (--work->steps <= 0) {
-            work->state = 7;
+            work->state = SMN_CLOUD_STATE_TELEPORT_IN;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_EF_TELEP);
         } else work->stateTimer++;
 
         break;
-    case 7: {
+    case SMN_CLOUD_STATE_TELEPORT_IN: {
         BtlObj* target;
 
         if (work->stateTimer == 0) {
@@ -294,26 +310,26 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
 
         if (--work->steps <= 0) {
             work->animating = 1;
-            work->state = 1;
+            work->state = SMN_CLOUD_STATE_TRIPLE_SLASH;
             work->stateTimer = 0;
         } else work->stateTimer++;
 
         break;
     }
-    case 1:
+    case SMN_CLOUD_STATE_TRIPLE_SLASH:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 0, 0, work->tiles);
-        } else if ((s16)work->attackPhase == 0 && AnimIsFinished(&work->anim)) {
+        } else if ((s16)work->attackPhase == SMN_CLOUD_ATTACK_PHASE_OPENER && AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 1, 0, work->tiles);
             work->attackPhase++;
         } else if (AnimIsFinished(&work->anim)) {
-            work->state = 5;
+            work->state = SMN_CLOUD_STATE_VANISH;
             work->stateTimer = 0;
             break;
         }
 
         if (work->anim.timer == 0) {
-            if ((s16)work->attackPhase == 0) {
+            if ((s16)work->attackPhase == SMN_CLOUD_ATTACK_PHASE_OPENER) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 2:
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);
@@ -385,20 +401,20 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
 
         work->stateTimer++;
         break;
-    case 2:
+    case SMN_CLOUD_STATE_DOUBLE_SLASH:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 6, 0, work->tiles);
-        } else if ((s16)work->attackPhase == 0 && AnimIsFinished(&work->anim)) {
+        } else if ((s16)work->attackPhase == SMN_CLOUD_ATTACK_PHASE_OPENER && AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 7, 0, work->tiles);
             work->attackPhase++;
         } else if (AnimIsFinished(&work->anim)) {
-            work->state = 5;
+            work->state = SMN_CLOUD_STATE_VANISH;
             work->stateTimer = 0;
             break;
         }
 
         if (work->anim.timer == 0) {
-            if ((s16)work->attackPhase == 0) {
+            if ((s16)work->attackPhase == SMN_CLOUD_ATTACK_PHASE_OPENER) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 2:
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);
@@ -449,7 +465,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
 
         work->stateTimer++;
         break;
-    case 3:
+    case SMN_CLOUD_STATE_RISE:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->speed = 0;
@@ -471,12 +487,12 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         work->speed += 128;
 
         if ((body->z - targetZ >= 0 ? body->z - targetZ : targetZ - body->z) < 0x1000) {
-            work->state = 4;
+            work->state = SMN_CLOUD_STATE_DIVE;
             work->stateTimer = 0;
         } else work->stateTimer++;
 
         break;
-    case 4: {
+    case SMN_CLOUD_STATE_DIVE: {
         BtlObj* target;
 
         if (work->stateTimer == 0) {
@@ -484,7 +500,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             work->target = target;
 
             if (target == NULL) {
-                work->state = 5;
+                work->state = SMN_CLOUD_STATE_VANISH;
                 work->stateTimer = 0;
                 break;
             }
@@ -558,8 +574,8 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         if (work->stateTimer > 23 && AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
 
-            if ((s16)++work->attackCount > 2) work->state = 5;
-            else work->state = 3;
+            if ((s16)++work->attackCount > 2) work->state = SMN_CLOUD_STATE_VANISH;
+            else work->state = SMN_CLOUD_STATE_RISE;
         } else work->stateTimer++;
 
         break;

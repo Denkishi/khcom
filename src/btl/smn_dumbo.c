@@ -38,6 +38,14 @@ TaskDesc gTaskDescSmnDumbo = {
     sizeof(SmnDumboWork),
 };
 
+enum SmnDumboState {
+    SMN_DUMBO_STATE_APPEAR,
+    SMN_DUMBO_STATE_VANISH,
+    SMN_DUMBO_STATE_SPLASH_WINDUP,
+    SMN_DUMBO_STATE_SPLASH,
+    SMN_DUMBO_STATE_SPLASH_END
+};
+
 void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
     BtlObj* body;
     BtlObj* obj;
@@ -71,7 +79,7 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
     work->palette = LoadObjPalette(gDamboPalette, 32);
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 0, 0, work->tiles);
-    work->state = 0;
+    work->state = SMN_DUMBO_STATE_APPEAR;
     work->stateTimer = 0;
     work->steps = 0;
     work->unk_14C = 0;
@@ -95,7 +103,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
     BtlMapFollowPosition(body->x, body->y, body->z);
 
     switch (work->state) {
-    case 0:
+    case SMN_DUMBO_STATE_APPEAR:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -108,13 +116,13 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
             work->stateTimer++;
             work->steps--;
         } else {
-            work->state = 2;
+            work->state = SMN_DUMBO_STATE_SPLASH_WINDUP;
             work->stateTimer = 0;
             work->animating = 1;
         }
 
         break;
-    case 1:
+    case SMN_DUMBO_STATE_VANISH:
         if (work->stateTimer == 0) {
             work->steps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
@@ -130,20 +138,20 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
         work->stateTimer++;
         work->steps--;
         break;
-    case 2:
+    case SMN_DUMBO_STATE_SPLASH_WINDUP:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 0, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 3;
+            work->state = SMN_DUMBO_STATE_SPLASH;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 3:
+    case SMN_DUMBO_STATE_SPLASH:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
 
@@ -158,20 +166,20 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
             m4aSongNumStart(SONG_EF_DAMBO_SPLOOP);
         } else if (!BgFxIsActive()) {
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
-            work->state = 4;
+            work->state = SMN_DUMBO_STATE_SPLASH_END;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 4:
+    case SMN_DUMBO_STATE_SPLASH_END:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 2, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 1;
+            work->state = SMN_DUMBO_STATE_VANISH;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;

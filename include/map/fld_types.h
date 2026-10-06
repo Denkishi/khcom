@@ -31,6 +31,12 @@ enum FldAngle {
     FLD_ANGLE_UP_LEFT = 0xD3
 };
 
+enum FldClimbDir {
+    FLD_CLIMB_DIR_NONE,
+    FLD_CLIMB_DIR_UP_RIGHT,
+    FLD_CLIMB_DIR_UP_LEFT
+};
+
 typedef struct FldActor {
     FldPos fieldPosition;
     s32 speed;

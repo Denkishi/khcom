@@ -173,7 +173,7 @@ u8 FldSoraCheckClimb(FldPos* pos, FldWork* work) {
 
     dir = GetFldPosClimbDir(&up);
 
-    if (dir != 0) {
+    if (dir != FLD_CLIMB_DIR_NONE) {
         work->targetX = up.x;
         work->targetY = up.y;
         return dir;
@@ -181,13 +181,13 @@ u8 FldSoraCheckClimb(FldPos* pos, FldWork* work) {
 
     dir = GetFldPosClimbDir(&down);
 
-    if (dir != 0) {
+    if (dir != FLD_CLIMB_DIR_NONE) {
         work->targetX = down.x;
         work->targetY = down.y;
         return dir;
     }
 
-    return 0;
+    return FLD_CLIMB_DIR_NONE;
 }
 
 u8 FldSoraCheckDoorAhead(FldActor* act) {
@@ -728,13 +728,13 @@ u8 FldSoraJump(FldWork* work, void* task) {
         act->fieldPosition.y = sy;
 
         switch (FldSoraCheckClimb(&act->fieldPosition, work)) {
-        case 2:
+        case FLD_CLIMB_DIR_UP_LEFT:
             work->timer = 0;
             work->state = FLD_STATE_CLIMB;
             act->angle = FLD_ANGLE_UP_LEFT;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
             break;
-        case 1:
+        case FLD_CLIMB_DIR_UP_RIGHT:
             work->timer = 0;
             work->state = FLD_STATE_CLIMB;
             act->angle = FLD_ANGLE_UP_RIGHT;
@@ -1568,16 +1568,16 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             act->fieldPosition.y = sy;
             climbDir = FldSoraCheckClimb(&act->fieldPosition, work);
 
-            if (climbDir != 0) {
+            if (climbDir != FLD_CLIMB_DIR_NONE) {
                 switch (climbDir) {
-                case 2:
+                case FLD_CLIMB_DIR_UP_LEFT:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
                     act->angle = FLD_ANGLE_UP_LEFT;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
                     break;
-                case 1:
+                case FLD_CLIMB_DIR_UP_RIGHT:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
                     act->angle = FLD_ANGLE_UP_RIGHT;

@@ -40,7 +40,7 @@
 static const EmyKind sBosUrsulaEmyKind = { ENEMY_URSULA, 0, 32, 24, 0, 0, 0 };
 
 static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
-    gBosUrsulaBgTiles, 0x7000, gBosUrsulaBgPalettes, sizeof(gBosUrsulaBgPalettes), { gBosUrsulaBgMap0, gBosUrsulaBgMap1, gBosUrsulaBgMap2, gBosUrsulaBgMap3 }
+    gBosUrsulaBgTiles, sizeof(gBosUrsulaBgTiles), gBosUrsulaBgPalettes, sizeof(gBosUrsulaBgPalettes), { gBosUrsulaBgMap0, gBosUrsulaBgMap1, gBosUrsulaBgMap2, gBosUrsulaBgMap3 }
 };
 
 static const u16* sBosUrsulaMapBlocksLeft[12] = {
@@ -168,7 +168,7 @@ static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbl
 
 static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, ARRAY_COUNT(sBosUrsulaMapanimeChargeFrames), gBosUrsulaMapanimeChargeTiles, 0x0C00, 0x0860, 0x0C00, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, ARRAY_COUNT(sBosUrsulaMapanimeRecoverFrames), gBosUrsulaMapanimeRecoverTiles, 0x0C00, 0x0860, 0x0C00, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, ARRAY_COUNT(sBosUrsulaMapanimeRecoverFrames), gBosUrsulaBgTiles + 0xC00, 0x0C00, 0x0860, 0x0C00, 0 };
 
 static TaskDesc sTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",

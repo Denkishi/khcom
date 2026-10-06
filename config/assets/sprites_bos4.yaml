@@ -1004,25 +1004,13 @@ entries:
   width: 32
   us:
     address: 0x097EE378
-    size: 3072
+    size: 28672
   jp:
     address: 0x097A880C
-    size: 3072
+    size: 28672
   eu:
     address: 0x097C4A80
-    size: 3072
-- name: gBosUrsulaMapanimeRecoverTiles
-  format: tiles4
-  width: 32
-  us:
-    address: 0x097EEF78
-    size: 25600
-  jp:
-    address: 0x097A940C
-    size: 25600
-  eu:
-    address: 0x097C5680
-    size: 25600
+    size: 28672
 - name: gBosUrsulaMapanimeIdleTiles
   format: tiles4
   width: 8

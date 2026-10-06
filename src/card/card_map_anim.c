@@ -314,10 +314,10 @@ u8 IsCardCollectionFull() {
     }
 
     if (count > 0) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void ExpandCardCollectionForNewCard(u16 cardId) {

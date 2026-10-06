@@ -112,8 +112,8 @@ void CardName_0(CardNameWork* work) {
     work->tiles = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
     pal = LoadObjPalette(gCard00Palette, 32);
     work->palette2 = pal;
-    FadeSetPaletteExcluded(pal->index + 16, 1);
-    FadeSetPaletteExcluded(work->textPalette->index + 16, 1);
+    FadeSetPaletteExcluded(pal->index + 16, TRUE);
+    FadeSetPaletteExcluded(work->textPalette->index + 16, TRUE);
 }
 
 s32 CardName_1() {

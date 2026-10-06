@@ -667,7 +667,7 @@ static const PrizeMapCardGroupList sRikuPrizeMapCardGroups[14] = {
 static const u16 sKeyToRewardsChances[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };
 
 void PrizeCardInitInit(PrizeCardInitWork* work, PrizeCardArgs* args) {
-    work->spawned = 0;
+    work->spawned = FALSE;
     work->args = *args;
     TaskPoolInit(&work->tasks, 1);
 }
@@ -784,7 +784,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
             }
         }
 
-        work->spawned = 1;
+        work->spawned = TRUE;
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -878,7 +878,7 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* work, void* task) {
             args.cardId = CARD_LEXAEUS_9;
             break;
         default:
-            work->spawned = 1;
+            work->spawned = TRUE;
             return 1;
         }
 
@@ -890,7 +890,7 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* work, void* task) {
             TaskCreate(&work->tasks, &gTaskDescPrizeBoss, &args);
         }
 
-        work->spawned = 1;
+        work->spawned = TRUE;
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -1004,7 +1004,7 @@ void DispCardname_0(DispCardnameWork* work, u16* text) {
     InitTextSlots(work->textSlots, 32);
     textPalette = LoadTextPalette(1);
     work->textPalette = textPalette;
-    FadeSetPaletteExcluded(textPalette->index + 16, 1);
+    FadeSetPaletteExcluded(textPalette->index + 16, TRUE);
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
     work->palette = LoadObjPalette(gCard00Palette, 32);
@@ -1030,7 +1030,7 @@ void DispCardname_2(DispCardnameWork* work) {
 void DispCardname_3(DispCardnameWork* work) {
     FreeTextSlots(work->textSlots, 32);
     ReleaseObjTiles(work->tiles);
-    FadeSetPaletteExcluded(work->textPalette->index + 16, 0);
+    FadeSetPaletteExcluded(work->textPalette->index + 16, FALSE);
     ReleaseObjPalette(work->textPalette);
     ReleaseObjPalette(work->palette);
 }
@@ -1092,13 +1092,13 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->flipAngleX = 0;
     collider = &work->collider;
     ColliderInit(collider, 5, 8, 10);
-    ColliderSetDisabled(collider, 1);
+    ColliderSetDisabled(collider, TRUE);
     ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     work->backAnimTimer = 0;
     work->backAnimStep = 0;
     work->backFrame = 0;
     work->timer = 0;
-    work->collected = 0;
+    work->collected = FALSE;
     work->steps = 0;
     work->holdTimer = 0;
     TaskPoolInit(&work->tasks, 1);
@@ -1136,14 +1136,14 @@ static u8 PrizeCard_1(PrizeMapCardWork* work, void* task) {
     }
 
     if (work->collider.colliding) {
-        work->collected = 1;
+        work->collected = TRUE;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         AddMapCard(work->cardId);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdatePrizeMapCardFlight);
         WorldToScreen(&x, &y, work->posX, work->posY, work->posZ);
         work->posX = x << 8;
         work->posY = y << 8;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         work->priority = 50;
         AimPrizeMapCardAtCenter(work);
         return 1;
@@ -1156,7 +1156,7 @@ static u8 PrizeCard_1(PrizeMapCardWork* work, void* task) {
         work->flipAngleX += 2;
 
         if (work->timer == 20) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
         }
 
         if (work->timer <= 59) {
@@ -1348,8 +1348,8 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
 }
 
 static void PrizeCard_3(PrizeMapCardWork* work) {
-    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette2->index + 16, FALSE);
+    FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
     ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
     ReleaseObjTiles(work->tiles2);
@@ -1418,7 +1418,7 @@ void SpotLight_0(SpotlightWork* work, u8* src) {
 
     LoadBgTiles(0, gSpotLightTiles, 0xCA0);
     LoadPalette(gSpotLightPalette, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 32);
-    FadeSetPaletteExcluded(13, 1);
+    FadeSetPaletteExcluded(13, TRUE);
     LoadBgMap(0, gSpotLightMap, 0x800);
     SetBgScroll(0, 0, 0);
     work->steps = 30;
@@ -1466,7 +1466,7 @@ void SpotLight_2() {
 }
 
 void SpotLight_3() {
-    FadeSetPaletteExcluded(13, 0);
+    FadeSetPaletteExcluded(13, FALSE);
 }
 
 void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* args) {
@@ -1481,15 +1481,15 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* args) {
         InitEventKeyCard(&work->cards[i], GetEventKey(i));
 
         if (work->cards[i].sprite.palette != NULL) {
-            FadeSetPaletteExcluded(work->cards[i].sprite.palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->cards[i].sprite.palette->index + 16, TRUE);
         }
 
         if (work->cards[i].sprite.palette2 != NULL) {
-            FadeSetPaletteExcluded(work->cards[i].sprite.palette2->index + 16, 1);
+            FadeSetPaletteExcluded(work->cards[i].sprite.palette2->index + 16, TRUE);
         }
 
         if (work->cards[i].sprite.palette3 != NULL) {
-            FadeSetPaletteExcluded(work->cards[i].sprite.palette3->index + 16, 1);
+            FadeSetPaletteExcluded(work->cards[i].sprite.palette3->index + 16, TRUE);
         }
     }
 

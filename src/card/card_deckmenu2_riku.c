@@ -96,7 +96,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->handFlags = 0;
     work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
-    work->handVisible = 0;
+    work->handVisible = FALSE;
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetRikuDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
@@ -126,7 +126,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->entryCount = 0;
     work->entries = NULL;
     work->popupActive = 0;
-    work->exitRequested = 0;
+    work->exitRequested = FALSE;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
     work->topBarX = 0x7800;
@@ -162,7 +162,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     InitTextSlots(work->textSlots5, 60);
     work->descriptionX = 94;
     work->descriptionY = 126;
-    work->previewShown = 0;
+    work->previewShown = FALSE;
 }
 
 void DrawRikuCardDescription(RikuDeckMenuWork* work) {
@@ -294,7 +294,7 @@ u8 UpdateRikuDeckMenuEnterDeckGrid(RikuDeckMenuWork* work, void* task) {
     work->view = DECK_MENU_VIEW_DECK_GRID;
     SetRikuDeckMenuHandAnim(work);
     ShowRikuDeckCardPreview(work);
-    work->handVisible = 1;
+    work->handVisible = TRUE;
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuDeckGrid);
     return 1;
 }
@@ -322,7 +322,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
         TaskPoolUpdate(&work->cardpool);
 
         if (GetKeysPressed() & START_BUTTON) {
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         work->inputDelay = 4;
@@ -344,7 +344,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     switch (GetKeysRepeat()) {
@@ -453,7 +453,7 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task) {
     work->bannerX = 0;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
-    work->handVisible = 0;
+    work->handVisible = FALSE;
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuSlideOut);
     return 1;
 }
@@ -615,7 +615,7 @@ void ClearRikuCardGrid(RikuDeckMenuWork* work) {
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
-        node->done = 1;
+        node->done = TRUE;
         node = ListPoolNext(&node->node);
     }
 
@@ -665,14 +665,14 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* work) {
 
         if (work->thumbY < 0x2800) {
             work->thumbY = 0x2800;
-            return 0;
+            return FALSE;
         }
 
-        return 1;
+        return TRUE;
     }
 
     if (node->args.row == 0) {
-        return 0;
+        return FALSE;
     }
 
     do {
@@ -694,7 +694,7 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* work) {
         work->thumbY = 0x2800;
     }
 
-    return 1;
+    return TRUE;
 }
 
 DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* work) {
@@ -933,10 +933,10 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
         LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
         LoadRikuCardNameText(work, defIndex);
         LoadRikuCardDescriptionText(work, defIndex);
-        work->previewShown = 1;
+        work->previewShown = TRUE;
     } else {
         DrawRikuCpCost(0);
-        work->previewShown = 0;
+        work->previewShown = FALSE;
     }
 }
 
@@ -1002,20 +1002,20 @@ u8 CheckRikuDeckCpCost(RikuDeckMenuWork* work) {
     if (GetDeckCpCost(GetActiveDeckIndex()) > gGameState.progression.cp) {
         TaskCreate(&work->cardpool, &gTaskDescDeckErrorCp, &work->popupActive);
         m4aSongNumStart(SONG_SYS_BEEP);
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* work) {
     if (CountActiveDeckCardsOfCategory(0) == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
         TaskCreate(&work->cardpool, &gTaskDescDeckErrorNoAttackCard, &work->popupActive);
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
@@ -1025,7 +1025,7 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
 
     while (node != NULL) {
         if (node->args.col == x && node->args.row == y) {
-            return 1;
+            return TRUE;
         }
 
         node = ListPoolNext(&node->node);
@@ -1042,7 +1042,7 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
         return FindRikuCardInDirection(work, x + 1, y, 16);
     }
 
-    return 0;
+    return FALSE;
 }
 
 #ifdef VERSION_EU

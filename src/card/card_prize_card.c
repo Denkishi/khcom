@@ -74,7 +74,7 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     work->flipAngleX = 0;
     collider = &work->collider;
     ColliderInit(collider, 5, 30, 10);
-    ColliderSetDisabled(collider, 1);
+    ColliderSetDisabled(collider, TRUE);
     ColliderSetPosition(collider, work->pos.x, work->pos.y, work->pos.z);
     work->timer = 0;
     work->collected[0] = 0;
@@ -126,7 +126,7 @@ static u8 PrizeCard_1(PrizeCardWork* work, void* task) {
         y = (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8);
         work->pos.x = x << 8;
         work->pos.y = y << 8;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         work->steps = 16;
         work->priority = 50;
         AimFieldPrizeCardAtCenter(work);
@@ -143,7 +143,7 @@ static u8 PrizeCard_1(PrizeCardWork* work, void* task) {
     work->flipAngleX += 2;
 
     if (work->timer == 20) {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->timer <= 59) {
@@ -326,8 +326,8 @@ static void PrizeCard_2(PrizeCardWork* work) {
 }
 
 static void PrizeCard_3(PrizeCardWork* work) {
-    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette2->index + 16, FALSE);
+    FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
     ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
     ReleaseObjTiles(work->tiles2);

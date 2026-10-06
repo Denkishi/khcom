@@ -100,7 +100,7 @@ s32 ResolveActiveCardsMove(s32* out) {
     memset(found, 0, 6);
 
 #ifdef VERSION_EU
-    soraStockActive = 0;
+    soraStockActive = FALSE;
     out[0] = -1;
     out[1] = -1;
     out[2] = -1;
@@ -128,16 +128,16 @@ s32 ResolveActiveCardsMove(s32* out) {
 #endif
         gCardBattleState->stockMoveCount = 1;
 
-        if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay == 1 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
-                gCardBattleState->darkModeReady = 0;
+        if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay == TRUE && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
+            if (gCardBattleState->darkModeReady == TRUE || gBtlWork->darkPoints > 29) {
+                gCardBattleState->darkModeReady = FALSE;
                 return 46;
             }
         }
 
         return gCardBattleState->activeCards[0]->cardDef->move;
 #ifdef VERSION_EU
-    } else if (gCardBattleState->activeCardCount == 1 && (btl = gBtlWork)->soraOwnsPlay == 1) {
+    } else if (gCardBattleState->activeCardCount == 1 && (btl = gBtlWork)->soraOwnsPlay == TRUE) {
         if (btl->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
             out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
             gCardBattleState->stockMoveCount = 2;
@@ -159,7 +159,7 @@ s32 ResolveActiveCardsMove(s32* out) {
         default:
             btl = gBtlWork;
 
-            if (btl->soraOwnsPlay == 1) {
+            if (btl->soraOwnsPlay == TRUE) {
                 if (btl->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
@@ -217,7 +217,7 @@ s32 ResolveActiveCardsMove(s32* out) {
 #endif
                 }
 
-                if (gBtlWork->soraOwnsPlay == 1) {
+                if (gBtlWork->soraOwnsPlay == TRUE) {
                     if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
@@ -257,7 +257,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
     memset(found, 0, 6);
 
 #ifdef VERSION_EU
-    stockActive = 0;
+    stockActive = FALSE;
     out[0] = -1;
     out[1] = -1;
     out[2] = -1;
@@ -294,8 +294,8 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
         gCardBattleState->stockMoveCount = 1;
 
         if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
-                gCardBattleState->darkModeReady = 0;
+            if (gCardBattleState->darkModeReady == TRUE || gBtlWork->darkPoints > 29) {
+                gCardBattleState->darkModeReady = FALSE;
                 return 46;
             }
         }
@@ -303,7 +303,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
         return gCardBattleState->activeCards[0]->cardDef->move;
 #ifdef VERSION_EU
         } else {
-            if (gBtlWork->soraOwnsPlay == 1) {
+            if (gBtlWork->soraOwnsPlay == TRUE) {
                 if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
                     gCardBattleState->stockMoveCount = 2;
@@ -333,7 +333,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
             gCardBattleState->stockMoveCount = 1;
             return 46;
         default:
-            if (gBtlWork->soraOwnsPlay == 1) {
+            if (gBtlWork->soraOwnsPlay == TRUE) {
                 if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
@@ -392,7 +392,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
 #endif
                 }
 
-                if (gBtlWork->soraOwnsPlay == 1) {
+                if (gBtlWork->soraOwnsPlay == TRUE) {
                     if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
@@ -720,7 +720,7 @@ u8 AreThreeCardValuesEqual(CardDisplayWork** cards, u8 count) {
     u8 z;
 
     if (count != 3) {
-        return 0;
+        return FALSE;
     }
 
     x = cards[0]->value;
@@ -728,14 +728,14 @@ u8 AreThreeCardValuesEqual(CardDisplayWork** cards, u8 count) {
     z = cards[2]->value;
 
     if (x != y) {
-        return 0;
+        return FALSE;
     }
 
     if (x != z) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stockKeys, u8* flag) {
@@ -752,8 +752,8 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-        if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
-            gCardBattleState->darkModeReady = 0;
+        if (gCardBattleState->darkModeReady == TRUE || gBtlWork->darkPoints > 29) {
+            gCardBattleState->darkModeReady = FALSE;
             return STOCK_DARK_MODE;
         }
     }
@@ -1125,8 +1125,8 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-        if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
-            gCardBattleState->darkModeReady = 0;
+        if (gCardBattleState->darkModeReady == TRUE || gBtlWork->darkPoints > 29) {
+            gCardBattleState->darkModeReady = FALSE;
             return STOCK_DARK_MODE;
         }
     }
@@ -1502,11 +1502,11 @@ s32 IsThreeDistinctAttackCards(CardDisplayWork** cards, u8 count) {
 
         if (firstDef->category == 0 && secondDef->category == 0 && thirdDef->category == 0 &&
             firstKind != secondKind && firstKind != thirdKind && secondKind != thirdKind) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsThreeAttackCardsNoMove18(CardDisplayWork** cards, u8 count) {
@@ -1521,11 +1521,11 @@ s32 IsThreeAttackCardsNoMove18(CardDisplayWork** cards, u8 count) {
 
         if (firstDef->move != 18 && secondDef->move != 18 && thirdDef->move != 18 &&
             firstDef->category == 0 && secondDef->category == 0 && thirdDef->category == 0) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** cards, u8 count) {
@@ -1543,37 +1543,37 @@ s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** cards, u8 count) {
         if (firstKind != secondKind && secondKind != thirdKind && thirdKind != firstKind) {
             if (firstDef->category == 0) {
                 if (secondKind == CARD_KIND_DONALD_DUCK && thirdKind == CARD_KIND_GOOFY) {
-                    return 1;
+                    return TRUE;
                 }
 
                 if (secondKind == CARD_KIND_GOOFY && thirdKind == CARD_KIND_DONALD_DUCK) {
-                    return 1;
+                    return TRUE;
                 }
             }
 
             if (cards[1]->cardDef->category == 0) {
                 if (firstKind == CARD_KIND_DONALD_DUCK && thirdKind == CARD_KIND_GOOFY) {
-                    return 1;
+                    return TRUE;
                 }
 
                 if (firstKind == CARD_KIND_GOOFY && thirdKind == CARD_KIND_DONALD_DUCK) {
-                    return 1;
+                    return TRUE;
                 }
             }
 
             if (cards[2]->cardDef->category == 0) {
                 if (secondKind == CARD_KIND_DONALD_DUCK && firstKind == CARD_KIND_GOOFY) {
-                    return 1;
+                    return TRUE;
                 }
 
                 if (secondKind == CARD_KIND_GOOFY && firstKind == CARD_KIND_DONALD_DUCK) {
-                    return 1;
+                    return TRUE;
                 }
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsKindPairThenNonSummonOfCategory(CardDisplayWork** cards, u8 count, u16 firstKind, u16 secondKind, u8 category) {
@@ -1584,10 +1584,10 @@ s32 IsKindPairThenNonSummonOfCategory(CardDisplayWork** cards, u8 count, u16 fir
 #endif
         cards[0]->cardDef->kind == firstKind && cards[1]->cardDef->kind == secondKind &&
         cards[2]->cardDef->category == category && !(cards[2]->cardDef->flags & CARD_DEF_FLAG_SUMMON)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsKindPairThenSummon(CardDisplayWork** cards, u8 count, u16 firstKind, u16 secondKind) {
@@ -1598,10 +1598,10 @@ s32 IsKindPairThenSummon(CardDisplayWork** cards, u8 count, u16 firstKind, u16 s
 #endif
         cards[0]->cardDef->kind == firstKind && cards[1]->cardDef->kind == secondKind &&
         (cards[2]->cardDef->flags & CARD_DEF_FLAG_SUMMON)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsKindThenTwoAttackCards(CardDisplayWork** cards, u16 kind, u8 count) {
@@ -1619,11 +1619,11 @@ s32 IsKindThenTwoAttackCards(CardDisplayWork** cards, u16 kind, u8 count) {
         thirdCategory = thirdDef->category;
 
         if (secondCategory == 0 && thirdCategory == 0 && firstKind == kind) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsKindThenTwoOfCategory(CardDisplayWork** cards, u16 kind, u8 category, u8 count) {
@@ -1641,11 +1641,11 @@ s32 IsKindThenTwoOfCategory(CardDisplayWork** cards, u16 kind, u8 category, u8 c
         thirdCategory = thirdDef->category;
 
         if (firstKind == kind && secondCategory == category && thirdCategory == secondCategory) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 #ifndef VERSION_EU
@@ -1660,11 +1660,11 @@ s32 IsAnyThenTwoGenie(CardDisplayWork** cards, u8 count) {
         thirdKind = cards[2]->cardDef->kind;
 
         if (secondKind == thirdKind && secondKind == CARD_KIND_GENIE && firstKind != CARD_KIND_GENIE) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 #endif
 
@@ -1677,11 +1677,11 @@ s32 IsFireMushuAttack(CardDisplayWork** cards, u8 count) {
         secondKind = cards[1]->cardDef->kind;
 
         if (firstKind == CARD_KIND_FIRE && secondKind == CARD_KIND_MUSHU && cards[2]->cardDef->category == 0) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsTwoSummonsThenKind(CardDisplayWork** cards, u8 count, u16 kind) {
@@ -1693,11 +1693,11 @@ s32 IsTwoSummonsThenKind(CardDisplayWork** cards, u8 count, u16 kind) {
         secondFlags = cards[1]->cardDef->flags;
 
         if ((firstFlags & 4) && (secondFlags & 4) && cards[2]->cardDef->kind == kind) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsSimbaMushuItem(CardDisplayWork** cards, u8 count) {
@@ -1713,12 +1713,12 @@ s32 IsSimbaMushuItem(CardDisplayWork** cards, u8 count) {
             thirdDef = cards[2]->cardDef;
 
             if (thirdDef->category == 2 && !(thirdDef->flags & CARD_DEF_FLAG_FRIEND)) {
-                return 1;
+                return TRUE;
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsSummonMagicJackOrBambiBlizzardItem(CardDisplayWork** cards, u8 count) {
@@ -1733,16 +1733,16 @@ s32 IsSummonMagicJackOrBambiBlizzardItem(CardDisplayWork** cards, u8 count) {
 
         if ((firstFlags & 4) && secondFlags == 0 && secondDef->category == 1 &&
             cards[2]->cardDef->kind == CARD_KIND_JACK) {
-            return 1;
+            return TRUE;
         }
 
         if (cards[0]->cardDef->kind == CARD_KIND_BAMBI && cards[1]->cardDef->kind == CARD_KIND_BLIZZARD &&
             cards[2]->cardDef->category == 2 && !(cards[2]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsGenieTinkerBellSummon(CardDisplayWork** cards, u8 count) {
@@ -1756,11 +1756,11 @@ s32 IsGenieTinkerBellSummon(CardDisplayWork** cards, u8 count) {
         thirdFlags = cards[2]->cardDef->flags;
 
         if (firstKind == CARD_KIND_GENIE && secondKind == CARD_KIND_TINKER_BELL && (thirdFlags & 4)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsMegaEtherMegalixirItem(CardDisplayWork** cards, u8 count) {
@@ -1776,11 +1776,11 @@ s32 IsMegaEtherMegalixirItem(CardDisplayWork** cards, u8 count) {
         thirdCategory = thirdDef->category;
 
         if (firstKind == CARD_KIND_MEGA_ETHER && secondKind == CARD_KIND_MEGALIXIR && thirdCategory == 2 && !(thirdDef->flags & CARD_DEF_FLAG_FRIEND)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsFireDonaldMagic(CardDisplayWork** cards, u8 count) {
@@ -1796,11 +1796,11 @@ s32 IsFireDonaldMagic(CardDisplayWork** cards, u8 count) {
         thirdCategory = thirdDef->category;
 
         if (firstKind == CARD_KIND_FIRE && secondKind == CARD_KIND_DONALD_DUCK && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsCloudStopAttack(CardDisplayWork** cards, u8 count) {
@@ -1814,11 +1814,11 @@ s32 IsCloudStopAttack(CardDisplayWork** cards, u8 count) {
         thirdCategory = cards[2]->cardDef->category;
 
         if (firstKind == CARD_KIND_CLOUD && secondKind == CARD_KIND_STOP && thirdCategory == 0) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsAeroFireMagic(CardDisplayWork** cards, u8 count) {
@@ -1834,11 +1834,11 @@ s32 IsAeroFireMagic(CardDisplayWork** cards, u8 count) {
         thirdCategory = thirdDef->category;
 
         if (firstKind == CARD_KIND_AERO && secondKind == CARD_KIND_FIRE && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsAeroBlizzardMagic(CardDisplayWork** cards, u8 count) {
@@ -1854,11 +1854,11 @@ s32 IsAeroBlizzardMagic(CardDisplayWork** cards, u8 count) {
         thirdCategory = thirdDef->category;
 
         if (firstKind == CARD_KIND_AERO && secondKind == CARD_KIND_BLIZZARD && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsTwoMagicThenPeterPan(CardDisplayWork** cards, u8 count) {
@@ -1885,15 +1885,15 @@ s32 IsTwoMagicThenPeterPan(CardDisplayWork** cards, u8 count) {
 
         if (firstCategory == 1 && !(firstDef->flags & CARD_DEF_FLAG_SUMMON) && secondCategory == 1 && !(secondDef->flags & CARD_DEF_FLAG_SUMMON) &&
             thirdKind == CARD_KIND_PETER_PAN) {
-            return 1;
+            return TRUE;
         }
 
         if (firstKind == CARD_KIND_STOP && secondKind == CARD_KIND_AERO && thirdCategory == 2 && !(cards[2]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsLinkSideStockLearned(s32 stock, s32 side) {

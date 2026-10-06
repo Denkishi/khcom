@@ -78,7 +78,7 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     work->scaleX = Q_8_8(0.5);
     work->scaleY = Q_8_8(0.5);
     work->scale = Q_8_8(0.5);
-    work->screenSpace = 0;
+    work->screenSpace = FALSE;
     work->unk_1CB = 0;
     work->unk_1CC = 0;
     work->timer = 0;
@@ -121,7 +121,7 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
     work->scaleX = Q_8_8(0.5);
     work->scaleY = Q_8_8(0.5);
     work->scale = Q_8_8(0.5);
-    work->screenSpace = 0;
+    work->screenSpace = FALSE;
     work->unk_1CB = 0;
     work->unk_1CC = 0;
     work->timer = 0;
@@ -165,7 +165,7 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     work->scaleX = Q_8_8(0.5);
     work->scaleY = Q_8_8(0.5);
     work->scale = Q_8_8(0.5);
-    work->screenSpace = 0;
+    work->screenSpace = FALSE;
     work->unk_1CB = 0;
     work->unk_1CC = 0;
     work->timer = 0;
@@ -263,8 +263,8 @@ s32 Friend_card_1(PickupCardWork* work, void* task) {
                           work->posZ);
             work->posX = sx << 8;
             work->posY = sy << 8;
-            work->screenSpace = 1;
-            ColliderSetDisabled(&work->collider, 1);
+            work->screenSpace = TRUE;
+            ColliderSetDisabled(&work->collider, TRUE);
             StartPickupCardFlight(work, 0);
 #ifdef VERSION_EU
             work->visible = 1;
@@ -371,8 +371,8 @@ s32 Gimmick_card_1(PickupCardWork* work, void* task) {
                           work->posZ);
             work->posX = sx << 8;
             work->posY = sy << 8;
-            work->screenSpace = 1;
-            ColliderSetDisabled(&work->collider, 1);
+            work->screenSpace = TRUE;
+            ColliderSetDisabled(&work->collider, TRUE);
             StartPickupCardFlight(work, 0);
 #ifdef VERSION_EU
             work->visible = 1;
@@ -610,8 +610,8 @@ s32 Heartless_card_1(PickupCardWork* work, void* task) {
         WorldToScreen(&x, &y, work->posX, work->posY, work->posZ);
         work->posX = x << 8;
         work->posY = y << 8;
-        work->screenSpace = 1;
-        ColliderSetDisabled(&work->collider, 1);
+        work->screenSpace = TRUE;
+        ColliderSetDisabled(&work->collider, TRUE);
         StartPickupCardFlight(work, 1);
         SetTaskUpdate(task, (TaskUpdateFunc)FlyHeartlessCardToCenter);
         return 1;
@@ -817,9 +817,9 @@ void StockNameSora_0(StockNameWork* work, const s32* src) {
             *name = names[i];
         }
 
-        work->cycling = 1;
+        work->cycling = TRUE;
     } else {
-        work->cycling = 0;
+        work->cycling = FALSE;
     }
 
     z = 0;
@@ -853,7 +853,7 @@ void StockNameSora_0(StockNameWork* work, const s32* src) {
     }
 
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    work->visible = 1;
+    work->visible = TRUE;
     work->stockName = gCardBattleState->soraStockName;
 }
 
@@ -868,12 +868,12 @@ u8 StockNameSora_1(StockNameWork* work) {
     }
 
     if ((gFrameCounter >> 5) & 1) {
-        work->visible = 1;
+        work->visible = TRUE;
     } else {
-        work->visible = 0;
+        work->visible = FALSE;
     }
 
-    if (work->cycling == 1 && work->visible) {
+    if (work->cycling == TRUE && work->visible) {
         work->stockNameIndex++;
 
         if (work->stockNames[work->stockNameIndex] == -1) {
@@ -919,9 +919,9 @@ void StockNameRiku_0(StockNameWork* work, const s32* src) {
             *name = names[i];
         }
 
-        work->cycling = 1;
+        work->cycling = TRUE;
     } else {
-        work->cycling = 0;
+        work->cycling = FALSE;
     }
 
     z = 0;
@@ -955,7 +955,7 @@ void StockNameRiku_0(StockNameWork* work, const s32* src) {
     }
 
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    work->visible = 1;
+    work->visible = TRUE;
     work->stockName = gCardBattleState->rikuStockName;
 }
 
@@ -970,12 +970,12 @@ u8 StockNameRiku_1(StockNameWork* work) {
     }
 
     if ((gFrameCounter >> 5) & 1) {
-        work->visible = 0;
+        work->visible = FALSE;
     } else {
-        work->visible = 1;
+        work->visible = TRUE;
     }
 
-    if (work->cycling == 1 && work->visible) {
+    if (work->cycling == TRUE && work->visible) {
         work->stockNameIndex++;
 
         if (work->stockNames[work->stockNameIndex] == -1) {
@@ -1002,7 +1002,7 @@ void StockNameRiku_3(StockNameWork* work) {
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     gCardBattleState->unk_0D9 = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     gCardBattleState->unk_0CA = 256;
 }
 
@@ -1010,7 +1010,7 @@ void StockNameSora_3(StockNameWork* work) {
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     gCardBattleState->unk_0D8 = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     gCardBattleState->unk_0C8 = 256;
 }
 
@@ -1068,10 +1068,10 @@ void Premire_Chance_0(PremireChanceWork* work) {
     work->tiles4 = LoadObjTiles(gAButtonIconTiles, 0x80);
     work->palette4 = LoadObjPalette(gBStatesPalette, 32);
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
-    FadeSetPaletteExcluded(work->palette->index + 16, 1);
-    FadeSetPaletteExcluded(work->palette3->index + 16, 1);
-    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
-    FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
+    FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
+    FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
+    FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
 
 #ifdef VERSION_EU
     for (i = 0, n = 0; i < DECK_SIZE; i++) {
@@ -1085,7 +1085,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
                         work->slots[n].cardId = gCardCollection[cards[i]] & CARD_ID_MASK;
                         work->slots[n].index = i;
                         work->slots[n].unk_06 = n;
-                        work->slots[n].stocked = 0;
+                        work->slots[n].stocked = FALSE;
                         n++;
                     }
                 }
@@ -1104,7 +1104,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
                             work->slots[n].cardId = gCardCollection[cards[j]] & CARD_ID_MASK;
                             work->slots[n].index = j;
                             work->slots[n].unk_06 = n;
-                            work->slots[n].stocked = 0;
+                            work->slots[n].stocked = FALSE;
                             n++;
                         }
                     }
@@ -1127,10 +1127,10 @@ void Premire_Chance_0(PremireChanceWork* work) {
     TaskPoolInit(&gCardListWork->effectTasks, 24);
     CreatePremireChanceCardTasks(work);
     work->spinDelay = 10;
-    work->advanced = 0;
-    work->stopped = 0;
+    work->advanced = FALSE;
+    work->stopped = FALSE;
     work->inputEnabled = 1;
-    work->resultPending = 1;
+    work->resultPending = TRUE;
     work->cursorHidden = 0;
     work->stopTimer = 0;
     work->titleSteps = 16;
@@ -1147,11 +1147,11 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
 
     if (work->inputEnabled != 0) {
         if ((GetKeysPressed() & A_BUTTON) && !work->stopped) {
-            work->stopped = 1;
+            work->stopped = TRUE;
             m4aSongNumStart(SONG_SYS_ITEMGET);
         }
 
-        if ((GetKeysPressed() & B_BUTTON) && work->stopped != 1) {
+        if ((GetKeysPressed() & B_BUTTON) && work->stopped != TRUE) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->titleSteps = 16;
             work->slideSteps = 16;
@@ -1160,7 +1160,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
 
             while (card != NULL) {
                 card->state |= PREMIRE_CHANCE_CARD_STATE_HIDDEN;
-                work->resultPending = 0;
+                work->resultPending = FALSE;
                 card = ListPoolNext(&card->node);
             }
 
@@ -1189,7 +1189,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
                 }
 
                 card->steps = work->spinDelay;
-                work->advanced = 1;
+                work->advanced = TRUE;
             }
 
             card = ListPoolNext(&card->node);
@@ -1210,7 +1210,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
             work->spinDelay--;
         }
 
-        work->advanced = 0;
+        work->advanced = FALSE;
     }
 
     work->gfx = AnimUpdate(&work->anim);
@@ -1279,10 +1279,10 @@ void Premire_Chance_3(PremireChanceWork* work) {
     ReleaseObjTiles(work->tiles4);
     ReleaseObjTiles(work->tiles);
     ReleaseObjTiles(work->tiles5);
-    FadeSetPaletteExcluded(work->palette->index + 16, 0);
-    FadeSetPaletteExcluded(work->palette3->index + 16, 0);
-    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(work->palette4->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
+    FadeSetPaletteExcluded(work->palette3->index + 16, FALSE);
+    FadeSetPaletteExcluded(work->palette2->index + 16, FALSE);
+    FadeSetPaletteExcluded(work->palette4->index + 16, FALSE);
     ReleaseObjPalette(work->palette2);
     ReleaseObjPalette(work->palette3);
     ReleaseObjPalette(work->palette4);
@@ -1324,7 +1324,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
                     card->state = PREMIRE_CHANCE_CARD_STATE_MOVE_AWAY;
                 }
 
-                work->resultPending = 0;
+                work->resultPending = FALSE;
             }
 
             card = ListPoolNext(&card->node);
@@ -1346,12 +1346,12 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
         gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
         gBldAlpha = BLDALPHA_BLEND(16, 16);
         BgAnimUpdate();
-        FadeSetPaletteExcluded(10, 1);
-        FadeSetPaletteExcluded(11, 1);
-        FadeSetPaletteExcluded(12, 1);
-        FadeSetPaletteExcluded(13, 1);
-        FadeSetPaletteExcluded(14, 1);
-        FadeSetPaletteExcluded(15, 1);
+        FadeSetPaletteExcluded(10, TRUE);
+        FadeSetPaletteExcluded(11, TRUE);
+        FadeSetPaletteExcluded(12, TRUE);
+        FadeSetPaletteExcluded(13, TRUE);
+        FadeSetPaletteExcluded(14, TRUE);
+        FadeSetPaletteExcluded(15, TRUE);
         TaskCreate(pool, &gTaskDescCardName, NULL);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceResult);
     }

@@ -398,7 +398,7 @@ void DispatchEnemyCardCommand(CardDisplayWork* work, void* task) {
 u8 EnemyStockMoveToSlot(CardDisplayWork* work, void* task) {
     s32 (*layout)[2]; s32* px;
 
-    if (gBtlWork->paused == 1) {
+    if (gBtlWork->paused == TRUE) {
         return 1;
     }
 
@@ -549,7 +549,7 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
             work->value = 9;
         }
 
-        work->valueModified = 1;
+        work->valueModified = TRUE;
         break;
     case 2:
         if (work->value > 2) {
@@ -558,10 +558,10 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
             work->value = 1;
         }
 
-        work->valueModified = 1;
+        work->valueModified = TRUE;
         break;
     default:
-        work->valueModified = 0;
+        work->valueModified = FALSE;
         break;
     }
 
@@ -679,7 +679,7 @@ void UseEnemyCard(u16 arg) {
         gCardBattleState->activeCards[0] = card;
         gCardBattleState->activeValue = card->value;
         gCardBattleState->activeCardCount = 1;
-        gBtlWork->soraOwnsPlay = 0;
+        gBtlWork->soraOwnsPlay = FALSE;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if ((gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
@@ -688,17 +688,17 @@ void UseEnemyCard(u16 arg) {
 #else
         if (gCardBattleState->activeValue <= card->value) {
 #endif
-            found = 0;
+            found = FALSE;
 
             if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
 #ifdef VERSION_EU
                 if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
-                    found = 1;
+                    found = TRUE;
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->category == 0) {
-                        found = 1;
+                        found = TRUE;
                         break;
                     }
                 }
@@ -709,13 +709,13 @@ void UseEnemyCard(u16 arg) {
 #ifdef VERSION_EU
                 for (j = 0; j < gCardBattleState->activeCardCount; j++) {
                     if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
-                        found = 1;
+                        found = TRUE;
                     }
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
-                        found = 1;
+                        found = TRUE;
                         break;
                     }
                 }
@@ -726,13 +726,13 @@ void UseEnemyCard(u16 arg) {
 #ifdef VERSION_EU
                 for (k = 0; k < gCardBattleState->activeCardCount; k++) {
                     if (gCardBattleState->activeCards[k]->cardDef->category == 2 && !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
-                        found = 1;
+                        found = TRUE;
                     }
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->category == 2) {
-                        found = 1;
+                        found = TRUE;
                         break;
                     }
                 }
@@ -777,7 +777,7 @@ void UseEnemyCard(u16 arg) {
                     }
 
                     gCardBattleState->activeCardCount = 1;
-                    gBtlWork->soraOwnsPlay = 0;
+                    gBtlWork->soraOwnsPlay = FALSE;
                     card->flags |= CARD_DISP_FLAG_IN_PLAY;
                     AddBreakDarkPoints();
                 } else {
@@ -785,7 +785,7 @@ void UseEnemyCard(u16 arg) {
                     gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
-                    gBtlWork->soraOwnsPlay = 0;
+                    gBtlWork->soraOwnsPlay = FALSE;
                 }
             }
         }
@@ -795,17 +795,17 @@ void UseEnemyCard(u16 arg) {
 #else
         if (gCardBattleState->activeValue <= card->value) {
 #endif
-            flag = 0;
+            flag = FALSE;
 
             if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
 #ifdef VERSION_EU
                 if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->category == 0) {
-                        flag = 1;
+                        flag = TRUE;
                         break;
                     }
                 }
@@ -816,7 +816,7 @@ void UseEnemyCard(u16 arg) {
             if (gBtlWork->hcEffect == HC_EFFECT_INCREMENTOR_2) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->category == 1) {
-                        flag = 1;
+                        flag = TRUE;
                         break;
                     }
                 }
@@ -826,7 +826,7 @@ void UseEnemyCard(u16 arg) {
             if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
-                        flag = 1;
+                        flag = TRUE;
                         break;
                     }
                 }
@@ -839,7 +839,7 @@ void UseEnemyCard(u16 arg) {
 #else
                     if (gCardBattleState->activeCards[i]->cardDef->category == 2) {
 #endif
-                        flag = 1;
+                        flag = TRUE;
                         break;
                     }
                 }
@@ -887,7 +887,7 @@ void UseEnemyCard(u16 arg) {
                     gCardBattleState->activeValue = card->value;
 #endif
                     gCardBattleState->activeCardCount = 1;
-                    gBtlWork->soraOwnsPlay = 0;
+                    gBtlWork->soraOwnsPlay = FALSE;
                     card->flags |= CARD_DISP_FLAG_IN_PLAY;
                     AddBreakDarkPoints();
                 } else {
@@ -895,7 +895,7 @@ void UseEnemyCard(u16 arg) {
                     gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
-                    gBtlWork->soraOwnsPlay = 0;
+                    gBtlWork->soraOwnsPlay = FALSE;
                 }
             }
         }
@@ -922,7 +922,7 @@ void UseEnemyCardByIndex(u16 variant, u8 index) {
         gCardBattleState->activeCards[0] = card;
         gCardBattleState->activeValue = card->cardDef->value;
         gCardBattleState->activeCardCount = 1;
-        gBtlWork->soraOwnsPlay = 0;
+        gBtlWork->soraOwnsPlay = FALSE;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if ((gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
@@ -939,7 +939,7 @@ void UseEnemyCardByIndex(u16 variant, u8 index) {
                 gCardBattleState->activeCards[0] = card;
                 gCardBattleState->activeValue = card->cardDef->value;
                 gCardBattleState->activeCardCount = 1;
-                gBtlWork->soraOwnsPlay = 0;
+                gBtlWork->soraOwnsPlay = FALSE;
                 card->flags |= CARD_DISP_FLAG_IN_PLAY;
             }
         }
@@ -967,7 +967,7 @@ void UseRandomEnemyCard(u16 variant, u8 index) {
         gCardBattleState->activeCards[0] = card;
         gCardBattleState->activeValue = card->cardDef->value;
         gCardBattleState->activeCardCount = 1;
-        gBtlWork->soraOwnsPlay = 0;
+        gBtlWork->soraOwnsPlay = FALSE;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
@@ -984,7 +984,7 @@ void UseRandomEnemyCard(u16 variant, u8 index) {
                 gCardBattleState->activeCards[0] = card;
                 gCardBattleState->activeValue = card->cardDef->value;
                 gCardBattleState->activeCardCount = 1;
-                gBtlWork->soraOwnsPlay = 0;
+                gBtlWork->soraOwnsPlay = FALSE;
                 card->flags |= CARD_DISP_FLAG_IN_PLAY;
             }
         }

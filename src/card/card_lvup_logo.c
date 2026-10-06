@@ -99,7 +99,7 @@ void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* arg) {
         args.tiles = work->tiles;
         args.palette = work->palette;
         TaskCreate(&work->tasks, &gTaskDescLvupLogo, &args);
-        sLvupLogoActive = 1;
+        sLvupLogoActive = TRUE;
     }
 }
 
@@ -280,7 +280,7 @@ void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* args) {
     LoadObjPalette(gCard00Palette, 32);
     work->tiles = args->tiles;
     work->palette = args->palette;
-    FadeSetPaletteExcluded(args->palette->index + 16, 1);
+    FadeSetPaletteExcluded(args->palette->index + 16, TRUE);
     work->frame = 0;
     work->timer = 0;
     work->vy[0] = -0x280;
@@ -308,16 +308,16 @@ void Lvup_Logo_2(LevelUpEffectWork* work) {
 void Lvup_Logo_3(LevelUpEffectWork* work) {
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
-    sLvupLogoActive = 0;
+    sLvupLogoActive = FALSE;
 }
 
 u8 CreateLevelUpEffectTask(BtlObj* target, TaskPool* pool) {
     LevelUpEffectArgs args;
 
-    sLvupLogoActive = 0;
+    sLvupLogoActive = FALSE;
 
     if (gBtlWork->flags & BTL_FLAG_LEVEL_UP_EFFECT) {
-        return 0;
+        return FALSE;
     }
 
     args.x = target->x;
@@ -326,7 +326,7 @@ u8 CreateLevelUpEffectTask(BtlObj* target, TaskPool* pool) {
     args.target = target;
     TaskCreate(pool, &gTaskDescLVUPEFFECT, &args);
     gBtlWork->flags |= BTL_FLAG_LEVEL_UP_EFFECT;
-    return 1;
+    return TRUE;
 }
 
 void LoadEventMapObjectGfx(EventMapObjectWork* work, EventBackgroundDef* background) {
@@ -382,7 +382,7 @@ u8 Ev_mapObj_1(EventMapObjectWork* work) {
     entries = def->placements;
 
     for (i = 0; i < def->placementCount; i++) {
-        FadeSetPaletteExcluded(work->palettes[entries[i].spriteIndex]->index + 16, 0);
+        FadeSetPaletteExcluded(work->palettes[entries[i].spriteIndex]->index + 16, FALSE);
     }
 
     return 1;

@@ -555,16 +555,16 @@ u8 CollectionHasCard(u16 id) {
     s32 i;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return 0;
+        return FALSE;
     }
 
     for (i = 0; i < gCardCount; i++) {
         if ((gCardCollection[i] & CARD_ID_MASK) == id) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void InitDecks() {
@@ -626,7 +626,7 @@ u8 AddCardToActiveDeck(u16 card) {
         i++;
 
         if (i == 99) {
-            return 0;
+            return FALSE;
         }
     }
 
@@ -647,7 +647,7 @@ u8 AddCardToActiveDeck(u16 card) {
     cpCost = GetCardCpCost(gCardCollection[card]);
     gDecks[sActiveDeck].cpCost += cpCost;
     gDecks[sActiveDeck].cardCount++;
-    return 1;
+    return TRUE;
 }
 
 u8 AddCardToDeck(u16 card, u8 deck) {
@@ -661,7 +661,7 @@ u8 AddCardToDeck(u16 card, u8 deck) {
     }
 
     if (i == 99) {
-        return 0;
+        return FALSE;
     }
 
     cards[i] = card;
@@ -681,7 +681,7 @@ u8 AddCardToDeck(u16 card, u8 deck) {
     cpCost = GetCardCpCost(gCardCollection[card]);
     gDecks[deck].cpCost += cpCost;
     gDecks[deck].cardCount++;
-    return 1;
+    return TRUE;
 }
 
 void RemoveCardFromActiveDeck(u16 slot) {
@@ -784,10 +784,10 @@ u8 HasNonPremiumCardsInActiveDeck() {
     }
 
     if (gDecks[sActiveDeck].cardCount == count) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 Deck* GetActiveDeck() {
@@ -1023,10 +1023,10 @@ u8 IsActiveDeckAllPremium() {
     }
 
     if (premiumCount == attackMagicCount) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 #ifdef VERSION_JP
@@ -1344,7 +1344,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->entryCount = 0;
     work->entries = NULL;
     work->popupActive = 0;
-    work->exitRequested = 0;
+    work->exitRequested = FALSE;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
     work->topBarX = 0x7800;
@@ -1352,7 +1352,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->bottomBarX = 0xA400;
     work->bottomBarY = 0xA000;
     work->bannerX = -0x8000;
-    work->holding = 0;
+    work->holding = FALSE;
     work->handVisible = 0;
     work->removeLabelX = 95;
     work->removeLabelY = -2;
@@ -1639,7 +1639,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
         TaskPoolUpdate(&work->cardpool);
 
         if (GetKeysPressed() & START_BUTTON) {
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
         }
 
@@ -1661,7 +1661,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
-            work->exitRequested = 0;
+            work->exitRequested = FALSE;
         }
     }
 
@@ -1672,7 +1672,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
             work->timer = 1;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         } else {
-            if (!ScrollGridUp(work, 1)) {
+            if (!ScrollGridUp(work, TRUE)) {
                 if (!work->holding) {
                     work->cursorCol = work->categoryFilter;
                     work->timer = 1;
@@ -1760,7 +1760,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
             return 1;
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            work->holding = 0;
+            work->holding = FALSE;
             AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
             return 1;
         }
@@ -1771,7 +1771,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
 
         if (!work->holding) {
             m4aSongNumStart(SONG_SYS_KETEI2);
-            work->holding = 1;
+            work->holding = TRUE;
             work->heldCol = work->cursorCol;
             work->heldRow = work->cursorRow;
             work->heldX = gDeckGridColumnX[work->heldCol] << 8;
@@ -1780,7 +1780,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
         } else {
             if (SwapHeldDeckCard(work)) {
                 m4aSongNumStart(SONG_SYS_KETEI2);
-                work->holding = 0;
+                work->holding = FALSE;
                 AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
@@ -1799,21 +1799,21 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
         return 1;
     case L_BUTTON:
         m4aSongNumStart(SONG_SYS_CANSEL);
-        work->holding = 0;
+        work->holding = FALSE;
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
         return 1;
     case R_BUTTON:
         FreeCollectionEntries(work);
         m4aSongNumStart(SONG_SYS_CANSEL);
-        work->holding = 0;
+        work->holding = FALSE;
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
         return 1;
     }
 
     if (GetKeysPressed() & SELECT_BUTTON) {
-        work->holding = 0;
+        work->holding = FALSE;
         work->cursorRow = 0;
         work->scrollRowEnd = 4;
         ResetGridScroll(work);
@@ -1858,7 +1858,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         work->inputDelay = 4;
@@ -1873,7 +1873,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     switch (GetKeysRepeat()) {
@@ -2017,7 +2017,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* task) {
                         work->cursorRow--;
 
                         if (work->cursorRow < 0) {
-                            ScrollGridUp(work, 0);
+                            ScrollGridUp(work, FALSE);
                             work->cursorRow = 0;
                         }
 
@@ -2083,7 +2083,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         work->inputDelay = 8;
@@ -2098,7 +2098,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     work->gfx = AnimUpdate(&work->anim2);
@@ -2265,7 +2265,7 @@ void RemoveEmptyCollectionEntry(DeckMenuWork* work, u8 excludeBossCards) {
         next = ListPoolNext(&next->node);
     }
 
-    node->done = 1;
+    node->done = TRUE;
     TaskPoolUpdate(&work->taskpool);
     ShowCollectionCardPreview(work);
 #ifdef VERSION_EU
@@ -2285,7 +2285,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         return 1;
@@ -2299,7 +2299,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     work->gfx = AnimUpdate(&work->anim2);
@@ -2420,7 +2420,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
                     while ((ready = IsCardAtCursor(work)) == 0) {
                         if (--work->cursorCol < 0) {
                             if (--work->cursorRow < 0) {
-                                ScrollGridUp(work, 0);
+                                ScrollGridUp(work, FALSE);
                                 work->cursorRow = ready;
                             }
 
@@ -2490,7 +2490,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         return 1;
@@ -2504,7 +2504,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     switch (GetKeysRepeat()) {
@@ -2519,9 +2519,9 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* task) {
             ClearCardGrid(work);
 
             if (work->view == DECK_MENU_VIEW_ADD_FILTER) {
-                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, 0);
+                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, FALSE);
             } else {
-                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, 1);
+                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, TRUE);
             }
         }
 
@@ -2541,9 +2541,9 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* task) {
             ClearCardGrid(work);
 
             if (work->view == DECK_MENU_VIEW_ADD_FILTER) {
-                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, 0);
+                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, FALSE);
             } else {
-                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, 1);
+                work->gridEntryCount = CreateCollectionGridCards(work, work->categoryFilter, TRUE);
             }
         }
 
@@ -2733,7 +2733,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         work->inputDelay = 4;
@@ -2754,7 +2754,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* task) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
-            work->exitRequested = 0;
+            work->exitRequested = FALSE;
         }
     }
 
@@ -2937,7 +2937,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
 
         break;
     case START_BUTTON:
-        work->exitRequested = 1;
+        work->exitRequested = TRUE;
         work->timer = 1;
 
         if (work->prevView == DECK_MENU_VIEW_DECK_GRID) {
@@ -3200,7 +3200,7 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* task) {
         categoryFilter = &work->categoryFilter;
         zero = 0;
         *categoryFilter = 5;
-        work->gridEntryCount = CreateCollectionGridCards(work, 5, 0);
+        work->gridEntryCount = CreateCollectionGridCards(work, 5, FALSE);
         SetDeckMenuHandAnim(work);
         work->handX = gCollectionGridColumnX[0] << 8;
         work->handY = gCollectionGridRowY[0] << 8;
@@ -3247,7 +3247,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         return 1;
@@ -3260,7 +3260,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* task) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
-            work->exitRequested = 0;
+            work->exitRequested = FALSE;
         }
     }
 
@@ -3274,7 +3274,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* task) {
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
                 }
             } else {
-                if (!ScrollGridUp(work, 1)) {
+                if (!ScrollGridUp(work, TRUE)) {
                     work->cursorCol = work->categoryFilter;
                     work->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3580,7 +3580,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         return 1;
@@ -3594,7 +3594,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     switch (GetKeysRepeat()) {
@@ -3621,7 +3621,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* task) {
             work->cursorRow--;
             work->timer = 1;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-        } else if (!ScrollGridUp(work, 1)) {
+        } else if (!ScrollGridUp(work, TRUE)) {
             categoryFilter = work->categoryFilter;
             work->cursorCol = categoryFilter;
             work->timer = 1;
@@ -3828,7 +3828,7 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* task) {
         break;
     case 5:
         work->categoryFilter = 5;
-        work->gridEntryCount = CreateCollectionGridCards(work, 5, 1);
+        work->gridEntryCount = CreateCollectionGridCards(work, 5, TRUE);
         SetDeckMenuHandAnim(work);
         work->handX = gCollectionGridColumnX[0] << 8;
         work->handY = gCollectionGridRowY[0] << 8;
@@ -3867,7 +3867,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* task) {
 
         if (GetKeysPressed() & START_BUTTON) {
             work->result = DECK_MENU_RESULT_RETURN_TO_MAP;
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         return 1;
@@ -3880,7 +3880,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* task) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
-            work->exitRequested = 0;
+            work->exitRequested = FALSE;
         }
     }
 
@@ -3893,7 +3893,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* task) {
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
         } else {
-            if (!ScrollGridUp(work, 1)) {
+            if (!ScrollGridUp(work, TRUE)) {
                 work->cursorCol = work->categoryFilter;
                 work->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -4199,7 +4199,7 @@ static void Deckmenu2_2(DeckMenuWork* work) {
         }
 
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
-        DrawDeckNames(work, 0);
+        DrawDeckNames(work, FALSE);
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
         DrawSprite(work->addLabelX, work->addLabelY, work->gfx8, work->tiles5, work->palette, NULL, 0, 10);
         break;
@@ -4211,22 +4211,22 @@ static void Deckmenu2_2(DeckMenuWork* work) {
 #else
         DrawSprite(120, 80, gDeckCommandMenuFrames[0], work->tiles3, work->palette2, NULL, 0, 8);
 #endif
-        DrawDeckNames(work, 0);
+        DrawDeckNames(work, FALSE);
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
         DrawSprite(work->addLabelX, work->addLabelY, work->gfx8, work->tiles5, work->palette, NULL, 0, 10);
         break;
     case DECK_MENU_VIEW_DECK_FILTER:
-        DrawDeckNames(work, 0);
+        DrawDeckNames(work, FALSE);
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
         DrawSprite(work->addLabelX, work->addLabelY, work->gfx8, work->tiles5, work->palette, NULL, 0, 10);
         break;
     case DECK_MENU_VIEW_DECK_SELECT:
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
         DrawSprite(work->addLabelX, work->addLabelY, work->gfx8, work->tiles5, work->palette, NULL, 0, 10);
-        DrawDeckNames(work, 0);
+        DrawDeckNames(work, FALSE);
         break;
     case DECK_MENU_VIEW_ADD_GRID:
-        DrawDeckNames(work, 1);
+        DrawDeckNames(work, TRUE);
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
 
@@ -4251,7 +4251,7 @@ static void Deckmenu2_2(DeckMenuWork* work) {
 
         break;
     case DECK_MENU_VIEW_REMOVE_GRID:
-        DrawDeckNames(work, 1);
+        DrawDeckNames(work, TRUE);
         DrawSprite(work->addLabelX, work->addLabelY, work->gfx8, work->tiles5, work->palette, NULL, 0, 10);
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
 
@@ -4279,7 +4279,7 @@ static void Deckmenu2_2(DeckMenuWork* work) {
     case DECK_MENU_VIEW_ADD_VALUE_SELECT:
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
         DrawSprite((work->handX >> 8) - 26, (work->handY >> 8) - 13, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
-        DrawDeckNames(work, 1);
+        DrawDeckNames(work, TRUE);
 
         if (work->tiles7 != NULL) {
             DrawSprite(24, 82, work->gfx4, work->tiles7, work->palette5, NULL, SPRITE_PRIORITY(1), 100);
@@ -4300,11 +4300,11 @@ static void Deckmenu2_2(DeckMenuWork* work) {
         break;
     case DECK_MENU_VIEW_ADD_FILTER:
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
-        DrawDeckNames(work, 1);
+        DrawDeckNames(work, TRUE);
         break;
     case DECK_MENU_VIEW_REMOVE_FILTER:
         DrawSprite(work->addLabelX, work->addLabelY, work->gfx8, work->tiles5, work->palette, NULL, 0, 10);
-        DrawDeckNames(work, 1);
+        DrawDeckNames(work, TRUE);
         break;
     case DECK_MENU_VIEW_DELETE_GRID:
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
@@ -4619,7 +4619,7 @@ void ClearCardGrid(DeckMenuWork* work) {
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
-        node->done = 1;
+        node->done = TRUE;
         node = ListPoolNext(&node->node);
     }
 
@@ -4691,7 +4691,7 @@ u8 ScrollGridUp(DeckMenuWork* work, u8 playSound) {
     node = ListPoolFirst(&work->pool);
 
     if (work->scrollRowEnd <= 4) {
-        return 0;
+        return FALSE;
     }
 
     if (node == NULL) {
@@ -4705,7 +4705,7 @@ u8 ScrollGridUp(DeckMenuWork* work, u8 playSound) {
 
         if (work->thumbY < 0x2800) {
             work->thumbY = 0x2800;
-            return 0;
+            return FALSE;
         }
 
         if (playSound) {
@@ -4736,7 +4736,7 @@ u8 ScrollGridUp(DeckMenuWork* work, u8 playSound) {
     }
 
     UpdateGridScrollBar(work);
-    return 1;
+    return TRUE;
 }
 
 DeckCard2Work* GetCardAtCursor(DeckMenuWork* work) {
@@ -5459,7 +5459,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
     startRow = *(u8*)&work->cursorRow;
 
     if (entry->valueCounts[idx] != 0) {
-        return 1;
+        return TRUE;
     }
 
     switch (keys) {
@@ -5470,7 +5470,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
             idx = work->cursorCol * 5 + *(u8*)&work->cursorRow;
 
             if (work->cursorCol == startCol && work->cursorRow == startRow) {
-                return 0;
+                return FALSE;
             }
         } while (entry->valueCounts[idx] == 0);
 
@@ -5482,7 +5482,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
             idx = work->cursorCol * 5 + *(u8*)&work->cursorRow;
 
             if (work->cursorCol == startCol && work->cursorRow == startRow) {
-                return 0;
+                return FALSE;
             }
         } while (entry->valueCounts[idx] == 0);
 
@@ -5504,7 +5504,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
 
         if (sum == 0) {
             *(u16*)&work->cursorCol = 1;
-            return 0;
+            return FALSE;
         }
 
         x = (u8*)&work->cursorRow;
@@ -5554,7 +5554,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
 
         if (sum == 0) {
             *(u16*)&work->cursorCol = 0;
-            return 0;
+            return FALSE;
         }
 
         x = (u8*)&work->cursorRow;
@@ -5612,7 +5612,7 @@ store:
                 *(u16*)&work->cursorRow = 0;
 
                 if (SumValueCounts(entry->valueCounts) == 0) {
-                    return 0;
+                    return FALSE;
                 }
             }
 
@@ -5622,7 +5622,7 @@ store:
         break;
     }
 
-    return 1;
+    return TRUE;
 }
 
 s32 AddSelectedValueCardToDeck(DeckMenuWork* work) {
@@ -5734,7 +5734,7 @@ void RemoveCursorCardFromDeck(DeckMenuWork* work) {
         if (node->args.row == work->cursorRow && node->args.col == work->cursorCol) {
             if (node->args.cardId != CARD_ID_NONE) {
                 RemoveCardFromDeck(node->args.slot, work->deckIndex);
-                node->done = 1;
+                node->done = TRUE;
                 node->args.row = (u16)node->args.row | 0xFFFF;
                 m4aSongNumStart(SONG_SYS_KETTEI);
             } else {
@@ -5763,7 +5763,7 @@ u8 CheckCardDeletable(DeckMenuWork* work) {
 
     if (entry->valueCounts[idx] == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
-        return 1;
+        return TRUE;
     }
 
     for (i = 0; i < entry->count; i++) {
@@ -5782,36 +5782,36 @@ u8 CheckCardDeletable(DeckMenuWork* work) {
             }
 
             if (def->category != 0) {
-                return 1;
+                return TRUE;
             }
 
             if (CountCollectionCardsOfCategory(def->category) > 1) {
-                return 1;
+                return TRUE;
             }
 
             TaskCreate(&work->cardpool, &gTaskDescDeckErrorLastAttackCard, &work->popupActive);
             m4aSongNumStart(SONG_SYS_BEEP);
-            return 0;
+            return FALSE;
         } else {
             if (def->value != idx) {
                 continue;
             }
 
             if (def->category != 0) {
-                return 1;
+                return TRUE;
             }
 
             if (CountCollectionCardsOfCategory(def->category) > 1) {
-                return 1;
+                return TRUE;
             }
 
             TaskCreate(&work->cardpool, &gTaskDescDeckErrorLastAttackCard, &work->popupActive);
             m4aSongNumStart(SONG_SYS_BEEP);
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 DeleteSelectedValueCard(DeckMenuWork* work) {
@@ -5827,7 +5827,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
 
     if (entry->valueCounts[idx] == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
-        return 1;
+        return TRUE;
     }
 
     for (i = 0; i < entry->count; i++) {
@@ -5846,11 +5846,11 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                             entry->valueCounts[idx]--;
                             DrawValueCount(entry->valueCounts[idx], idx);
                             m4aSongNumStart(SONG_SYS_CARD_DELETE);
-                            return 1;
+                            return TRUE;
                         } else {
                             TaskCreate(&work->cardpool, &gTaskDescDeckErrorLastAttackCard, &work->popupActive);
                             m4aSongNumStart(SONG_SYS_BEEP);
-                            return 0;
+                            return FALSE;
                         }
                     } else {
                         ClearCardCollectionSlot(&gCardCollection[card]);
@@ -5858,7 +5858,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                         entry->valueCounts[idx]--;
                         DrawValueCount(entry->valueCounts[idx], idx);
                         m4aSongNumStart(SONG_SYS_CARD_DELETE);
-                        return 1;
+                        return TRUE;
                     }
                 }
             } else if (def->value == idx) {
@@ -5869,11 +5869,11 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                         entry->valueCounts[idx]--;
                         DrawValueCount(entry->valueCounts[idx], idx);
                         m4aSongNumStart(SONG_SYS_CARD_DELETE);
-                        return 1;
+                        return TRUE;
                     } else {
                         TaskCreate(&work->cardpool, &gTaskDescDeckErrorLastAttackCard, &work->popupActive);
                         m4aSongNumStart(SONG_SYS_BEEP);
-                        return 0;
+                        return FALSE;
                     }
                 } else {
                     ClearCardCollectionSlot(&gCardCollection[card]);
@@ -5881,14 +5881,14 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                     entry->valueCounts[idx]--;
                     DrawValueCount(entry->valueCounts[idx], idx);
                     m4aSongNumStart(SONG_SYS_CARD_DELETE);
-                    return 1;
+                    return TRUE;
                 }
             }
         }
     }
 
     m4aSongNumStart(SONG_SYS_BEEP);
-    return 1;
+    return TRUE;
 }
 
 s32 CheckDeckCpCost(DeckMenuWork* work) {
@@ -5896,10 +5896,10 @@ s32 CheckDeckCpCost(DeckMenuWork* work) {
         TaskCreate(&work->cardpool, &gTaskDescDeckErrorCp, &work->popupActive);
         m4aSongNumStart(SONG_SYS_BEEP);
 
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 s32 CheckDeckHasAttackCard(DeckMenuWork* work) {
@@ -5907,10 +5907,10 @@ s32 CheckDeckHasAttackCard(DeckMenuWork* work) {
         m4aSongNumStart(SONG_SYS_BEEP);
         TaskCreate(&work->cardpool, &gTaskDescDeckErrorNoAttackCard, &work->popupActive);
 
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void ResetGridScroll(DeckMenuWork* work) {
@@ -5959,14 +5959,14 @@ s32 IsCardAtCursor(DeckMenuWork* work) {
     while (node != NULL) {
         if (node->args.col == work->cursorCol) {
             if (node->args.row == work->cursorRow) {
-                return 1;
+                return TRUE;
             }
         }
 
         node = ListPoolNext(&node->node);
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsCardAt(DeckMenuWork* work, s16 col, s16 row) {
@@ -5976,13 +5976,13 @@ u8 IsCardAt(DeckMenuWork* work, s16 col, s16 row) {
 
     while (node != NULL) {
         if (node->args.col == col && node->args.row == row) {
-            return 1;
+            return TRUE;
         }
 
         node = ListPoolNext(&node->node);
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 FindCardInDirection(DeckMenuWork* work, s16 x, s16 y, u16 dir) {
@@ -5992,7 +5992,7 @@ u8 FindCardInDirection(DeckMenuWork* work, s16 x, s16 y, u16 dir) {
 
     while (node != NULL) {
         if (node->args.col == x && node->args.row == y) {
-            return 1;
+            return TRUE;
         }
 
         node = ListPoolNext(&node->node);
@@ -6009,7 +6009,7 @@ u8 FindCardInDirection(DeckMenuWork* work, s16 x, s16 y, u16 dir) {
         return FindCardInDirection(work, x + 1, y, 0x10);
     }
 
-    return 0;
+    return FALSE;
 }
 
 void RecreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
@@ -6137,7 +6137,7 @@ u8 ToggleDeckSlotGap(DeckMenuWork* work) {
             }
 
             work->timer = 1;
-            return 1;
+            return TRUE;
         }
     } else {
         while (card != NULL) {
@@ -6154,10 +6154,10 @@ u8 ToggleDeckSlotGap(DeckMenuWork* work) {
         ClearCardGrid(work);
         TaskPoolUpdate(&work->taskpool);
         RecreateDeckGridCards(work, work->categoryFilter);
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 SwapHeldDeckCard(DeckMenuWork* work) {
@@ -6188,7 +6188,7 @@ u8 SwapHeldDeckCard(DeckMenuWork* work) {
     }
 
     if (target == NULL) {
-        return 0;
+        return FALSE;
     }
 
     while (held != NULL) {
@@ -6244,7 +6244,7 @@ u8 SwapHeldDeckCard(DeckMenuWork* work) {
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 WrapKanaKeyboardCursor(DeckMenuWork* work, u16 dir) {
@@ -6316,10 +6316,10 @@ u8 WrapKanaKeyboardCursor(DeckMenuWork* work, u16 dir) {
             AnimStart(&work->anim4, 1, ANIM_FLAG_LOOP);
         }
 
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 WrapKeyboardCursor(DeckMenuWork* work, u16 keys) {
@@ -6435,20 +6435,20 @@ u8 WrapKeyboardCursor(DeckMenuWork* work, u16 keys) {
             work->cursor.parts.x = 9;
             AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
-            work->onEndKey = 0;
+            work->onEndKey = FALSE;
 #endif
         } else {
             work->cursor.parts.x = 14;
             AnimStart(&work->anim4, 1, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
-            work->onEndKey = 1;
+            work->onEndKey = TRUE;
 #endif
         }
 
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 #ifdef VERSION_EU
@@ -6523,17 +6523,17 @@ u8 func_eu_0808E94C(DeckMenuWork* work, u16 keys) {
         if (work->cursor.parts.x == 13 && keys == 32) {
             work->cursor.parts.x = 1;
             AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
-            work->onEndKey = 0;
+            work->onEndKey = FALSE;
         } else {
             work->cursor.parts.x = 14;
             AnimStart(&work->anim4, 1, ANIM_FLAG_LOOP);
-            work->onEndKey = 1;
+            work->onEndKey = TRUE;
         }
 
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 #endif
 
@@ -6664,10 +6664,10 @@ s32 AppendKeyboardChar(DeckMenuWork* work) {
         offset++;
         dst[offset] = zero;
 #endif
-        return 1;
+        return TRUE;
     } else {
         m4aSongNumStart(SONG_SYS_BEEP);
-        return 0;
+        return FALSE;
     }
 }
 
@@ -6752,7 +6752,7 @@ void func_jp_0808F240(DeckMenuWork* work) {
 
             break;
         case 6:
-            if (work->onEndKey == 1) {
+            if (work->onEndKey == TRUE) {
                 work->cursor.parts.x = 14;
                 work->cursor.parts.y = 7;
             }
@@ -6789,7 +6789,7 @@ void func_jp_0808F240(DeckMenuWork* work) {
         case 5:
             break;
         case 6:
-            if (work->onEndKey == 1) {
+            if (work->onEndKey == TRUE) {
                 work->cursor.parts.y = 6;
                 work->cursor.parts.x = 14;
             } else if (work->cursor.parts.x > 1) {
@@ -6844,7 +6844,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
 
 #ifdef VERSION_EU
     work->handVisible = 0;
-    work->onEndKey = 0;
+    work->onEndKey = FALSE;
 #endif
 
     switch (work->step) {
@@ -7011,7 +7011,7 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
 
 #ifdef VERSION_EU
     if (work->keyCursorSteps != 0) {
-        if (work->onEndKey == 1) {
+        if (work->onEndKey == TRUE) {
             if (gLanguage == LANGUAGE_GERMAN) {
                 work->keyCursorX = 0xC800;
             } else if (gLanguage == LANGUAGE_ITALIAN) {
@@ -7075,7 +7075,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
             if (WrapKeyboardCursor(work, 32)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
 #endif
             }
 
@@ -7084,7 +7084,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         case 3:
             if (func_eu_0808E94C(work, 32)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
             }
 
             break;
@@ -7109,7 +7109,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
             if (WrapKeyboardCursor(work, 16)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
 #endif
             }
 
@@ -7118,7 +7118,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         case 3:
             if (func_eu_0808E94C(work, 16)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
             }
 
             break;
@@ -7153,7 +7153,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
             if (WrapKeyboardCursor(work, 64)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
 #endif
             }
 
@@ -7162,7 +7162,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         case 3:
             if (func_eu_0808E94C(work, 64)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
             }
 
             break;
@@ -7187,7 +7187,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
             if (WrapKeyboardCursor(work, 128)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
 #endif
             }
 
@@ -7196,7 +7196,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         case 3:
             if (func_eu_0808E94C(work, 128)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
-                work->onEndKey = 0;
+                work->onEndKey = FALSE;
             }
 
             break;
@@ -7236,7 +7236,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 #endif
                 AnimStart(&work->anim4, 1, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
-                work->onEndKey = 1;
+                work->onEndKey = TRUE;
 #endif
             }
         }
@@ -7262,7 +7262,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         AnimStart(&work->anim4, 1, ANIM_FLAG_LOOP);
         m4aSongNumStart(SONG_SYS_CLICKI04B);
 #ifdef VERSION_EU
-        work->onEndKey = 1;
+        work->onEndKey = TRUE;
 #endif
         break;
 #if defined(VERSION_JP) || defined(VERSION_EU)

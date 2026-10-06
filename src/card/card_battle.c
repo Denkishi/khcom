@@ -166,10 +166,10 @@ void ClearSoraCardRequest() {
 
 u8 IsSoraReloadCardSelected() {
     if (sSoraSelectedCard != NULL && (sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void SetSoraReloadCharging() {
@@ -229,23 +229,23 @@ void CreateCardBattleState() {
     gCardBattleState->unk_0D9 = 0;
     gCardBattleState->gimmickCardCount = 0;
     gCardBattleState->enemyCardUsed = 0;
-    gCardBattleState->soraStockActive = 0;
-    gCardBattleState->rikuStockActive = 0;
+    gCardBattleState->soraStockActive = FALSE;
+    gCardBattleState->rikuStockActive = FALSE;
     gCardBattleState->enemyCardUsed = 0;
-    gCardBattleState->soraStockNameShown = 0;
-    gCardBattleState->rikuStockNameShown = 0;
+    gCardBattleState->soraStockNameShown = FALSE;
+    gCardBattleState->rikuStockNameShown = FALSE;
     gCardBattleState->unk_0E5 = 0;
     gCardBattleState->unk_0E6 = 0;
-    gCardBattleState->levelUpShown = 0;
+    gCardBattleState->levelUpShown = FALSE;
     gCardBattleState->addedFriendCards[0] = 0;
     gCardBattleState->addedFriendCards[1] = 0;
-    gCardBattleState->cardsOpen = 0;
-    gCardBattleState->soraHcEffectReplaced = 0;
-    gCardBattleState->rikuHcEffectReplaced = 0;
+    gCardBattleState->cardsOpen = FALSE;
+    gCardBattleState->soraHcEffectReplaced = FALSE;
+    gCardBattleState->rikuHcEffectReplaced = FALSE;
     gCardBattleState->unk_0ED = 0;
     gCardBattleState->soraStockedCount = 0;
     gCardBattleState->rikuStockedCount = 0;
-    gCardBattleState->darkModeReady = 0;
+    gCardBattleState->darkModeReady = FALSE;
     gCardBattleState->rikuCardsLeft = 0;
     gCardBattleState->soraReloadGauge = 0;
     gCardBattleState->rikuReloadGauge = 0;
@@ -267,7 +267,7 @@ void CreateCardBattleState() {
     gCardBattleState->tiles7 = LoadObjTiles(gCardModifiedValueDigitTiles, 320);
     gCardBattleState->palette = LoadObjPalette(gCard00Palette, 32);
     gCardBattleState->palette2 = LoadObjPalette(gBStatesPalette, 32);
-    FadeSetPaletteExcluded(((ObjPaletteHeader*)gCardBattleState->palette)->index + 16, 1);
+    FadeSetPaletteExcluded(((ObjPaletteHeader*)gCardBattleState->palette)->index + 16, TRUE);
     LoadPremiumCardGfx(gCardBattleState);
 }
 
@@ -541,7 +541,7 @@ static void cardbattle_0(CardBattleWork* work) {
     work->stockValue = 0;
     work->xSteps = 0;
     work->x = sSoraStockValueX[0];
-    work->cardsClosed = 0;
+    work->cardsClosed = FALSE;
 
     for (i = 0; i < 3; i++) {
         work->playedCards[i] = NULL;
@@ -553,7 +553,7 @@ static void cardbattle_0(CardBattleWork* work) {
         work->slots[i] = NULL;
     }
 
-    work->stockNameChecked = 0;
+    work->stockNameChecked = FALSE;
 
     if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
         work->slotCounts[0] = gTutorialDeck.cardCount + 15;
@@ -584,7 +584,7 @@ static void cardbattle_0(CardBattleWork* work) {
     sSoraCardRequest = CARD_REQUEST_NONE;
     sSoraCardReloadRequest = CARD_REQUEST_NONE;
     CreateBosscardTask(&work->tasks);
-    work->actionTaken = 0;
+    work->actionTaken = FALSE;
 
     if (gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) {
         return;
@@ -597,10 +597,10 @@ static void cardbattle_0(CardBattleWork* work) {
 
 s32 IsSoraOnlyStockLeft(CardBattleWork* work) {
     if (CountAvailableCards(work, 0) == 0 && work->cardsLeft[0] <= 1 && work->stockCount != 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
@@ -741,7 +741,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
 
-            work->actionTaken = 1;
+            work->actionTaken = TRUE;
             break;
         case CARD_REQUEST_USE_CARD:
             sSoraCardRequest = CARD_REQUEST_NONE;
@@ -770,7 +770,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                 work->reloadPending[work->listIndex] = 1;
             }
 
-            work->actionTaken = 1;
+            work->actionTaken = TRUE;
             break;
         case CARD_REQUEST_USE_STOCK:
             sSoraCardRequest = CARD_REQUEST_NONE;
@@ -781,7 +781,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
 
-            work->actionTaken = 1;
+            work->actionTaken = TRUE;
             break;
         case CARD_REQUEST_OPEN_CARDS:
             sSoraCardRequest = CARD_REQUEST_NONE;
@@ -798,12 +798,12 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
         case CARD_REQUEST_CYCLE_LIST:
             sSoraCardRequest = CARD_REQUEST_NONE;
             CycleSoraCardList(work);
-            work->actionTaken = 1;
+            work->actionTaken = TRUE;
             break;
         case CARD_REQUEST_SWITCH_LIST:
             sSoraCardRequest = CARD_REQUEST_NONE;
             SwitchSoraCardList(work);
-            work->actionTaken = 1;
+            work->actionTaken = TRUE;
             break;
         case CARD_REQUEST_AUTO_CYCLE_60:
             work->timer = 60;
@@ -1135,12 +1135,12 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             break;
         }
 
-        if (gCardBattleState->pickedFriendCardId != 950 && work->actionTaken == 0 && work->reloadPending[work->listIndex] == 0) {
+        if (gCardBattleState->pickedFriendCardId != 950 && work->actionTaken == FALSE && work->reloadPending[work->listIndex] == 0) {
             gBtlWork->flags |= 0x20000000000LL;
             AddPickedCardToSoraDeck(work);
         }
 
-        if (gCardBattleState->pickedGimmickCardId != 950 && work->actionTaken == 0 && work->reloadPending[work->listIndex] == 0) {
+        if (gCardBattleState->pickedGimmickCardId != 950 && work->actionTaken == FALSE && work->reloadPending[work->listIndex] == 0) {
             AddPickedCardToSoraDeck(work);
         }
 
@@ -1192,7 +1192,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             }
         }
 
-        if (work->stockNameChecked == 0 && AreCardsSettled(work->stock, work->stockCount)) {
+        if (work->stockNameChecked == FALSE && AreCardsSettled(work->stock, work->stockCount)) {
             data = gSoraEmptyKeys;
 
             if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
@@ -1212,7 +1212,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
                         if (!gCardBattleState->soraStockNameShown) {
                             TaskCreate(&work->tasks, &gTaskDescStockNameSora, NULL);
-                            gCardBattleState->soraStockNameShown = 1;
+                            gCardBattleState->soraStockNameShown = TRUE;
                         }
                     } else {
                         for (i = 0; i < work->stockCount; i++) {
@@ -1221,13 +1221,13 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
                         if (!gCardBattleState->soraStockNameShown) {
                             TaskCreate(&work->tasks, &gTaskDescStockNameSora, &data);
-                            gCardBattleState->soraStockNameShown = 1;
+                            gCardBattleState->soraStockNameShown = TRUE;
                         }
                     }
                 } else if (work->stockCount == 3) {
                     cards = gSoraEmptyKeys;
                     memset(output, 0, sizeof(output));
-                    found = 0;
+                    found = FALSE;
 
                     for (i = 0; i < work->stockCount; i++) {
                         cards.keys[i] = work->stock[i]->cardDef->catalogNumber;
@@ -1259,7 +1259,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                     case STOCK_MM_MIRACLE_PAIR:
                     case STOCK_AERORA:
                         gCardBattleState->soraStockName = stockName;
-                        found = 1;
+                        found = TRUE;
                         break;
                     }
 
@@ -1269,7 +1269,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                         }
 
                         if (gCardBattleState->soraStockNameShown) {
-                            gCardBattleState->soraStockNameShown = 0;
+                            gCardBattleState->soraStockNameShown = FALSE;
                         }
                     } else {
                         for (i = 0; i < work->stockCount; i++) {
@@ -1278,24 +1278,24 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
                         if (!gCardBattleState->soraStockNameShown) {
                             TaskCreate(&work->tasks, &gTaskDescStockNameSora, NULL);
-                            gCardBattleState->soraStockNameShown = 1;
+                            gCardBattleState->soraStockNameShown = TRUE;
                         }
                     }
                 }
             }
 
-            work->stockNameChecked = 1;
+            work->stockNameChecked = TRUE;
         }
     }
 
     TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&gCardBattleState->tasks);
     gCardBattleState->soraStockCount = work->stockCount;
-    work->actionTaken = 0;
+    work->actionTaken = FALSE;
 
     if (gBtlWork->flags & BTL_FLAG_DARK_MODE_CHANGED) {
         gBtlWork->flags &= ~BTL_FLAG_DARK_MODE_CHANGED;
-        work->stockNameChecked = 0;
+        work->stockNameChecked = FALSE;
     }
 
     return 1;
@@ -1565,10 +1565,10 @@ u8 AreCardsSettled(CardDisplayWork** stock, u8 stockCount) {
     }
 
     if (stockCount == count) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void ClearSoraCardPlayFlags() {
@@ -1590,20 +1590,20 @@ void LoadActiveDeckCardSlots(CardSlot* slots, s32 cardSet) {
 
     for (i = 0; i < n; i++) {
         slots[i].unk_06 = 0;
-        slots[i].stocked = 0;
-        slots[i].removed = 0;
+        slots[i].stocked = FALSE;
+        slots[i].removed = FALSE;
         slots[i].cardId = cardIds[i];
         slots[i].index = i;
-        slots[i].restoreOnReload = 0;
+        slots[i].restoreOnReload = FALSE;
     }
 
     if (cardSet == DECK_CARD_SET_MAIN) {
         slots[n].unk_06 = 0;
-        slots[n].stocked = 0;
-        slots[n].removed = 0;
+        slots[n].stocked = FALSE;
+        slots[n].removed = FALSE;
         slots[n].cardId = CARD_ID_RELOAD;
         slots[n].index = n;
-        slots[n].restoreOnReload = 0;
+        slots[n].restoreOnReload = FALSE;
     }
 
     EwramFree(cardIds);
@@ -1617,19 +1617,19 @@ void LoadTutorialDeckCardSlots(CardSlot* slots) {
 
     for (i = 0; i < n; i++) {
         slots[i].unk_06 = 0;
-        slots[i].stocked = 0;
-        slots[i].removed = 0;
+        slots[i].stocked = FALSE;
+        slots[i].removed = FALSE;
         slots[i].cardId = gTutorialDeckCardIds[gTutorialDeck.cards[i]];
         slots[i].index = i;
-        slots[i].restoreOnReload = 0;
+        slots[i].restoreOnReload = FALSE;
     }
 
     slots[n].unk_06 = 0;
-    slots[n].stocked = 0;
-    slots[n].removed = 0;
+    slots[n].stocked = FALSE;
+    slots[n].removed = FALSE;
     slots[n].cardId = CARD_ID_RELOAD;
     slots[n].index = n;
-    slots[n].restoreOnReload = 0;
+    slots[n].restoreOnReload = FALSE;
 }
 
 void ShuffleCardSlots(CardSlot* slots, u8 count) {
@@ -1666,16 +1666,16 @@ void InitSoraTutorialCardList(CardBattleWork* work, s32 cardSet) {
 
         for (i = 0; i < n + 1; i++) {
             work->slots[0][i].unk_06 = 0;
-            work->slots[0][i].stocked = 0;
-            work->slots[0][i].removed = 0;
-            work->slots[0][i].used = 0;
+            work->slots[0][i].stocked = FALSE;
+            work->slots[0][i].removed = FALSE;
+            work->slots[0][i].used = FALSE;
         }
 
         for (i = n + 1; i < n + 15; i++) {
             work->slots[0][i].unk_06 = 1;
-            work->slots[0][i].stocked = 1;
-            work->slots[0][i].removed = 1;
-            work->slots[0][i].used = 1;
+            work->slots[0][i].stocked = TRUE;
+            work->slots[0][i].removed = TRUE;
+            work->slots[0][i].used = TRUE;
         }
 
         LoadTutorialDeckCardSlots(work->slots[0]);
@@ -1715,17 +1715,17 @@ void InitSoraCardList(CardBattleWork* work, s32 cardSet) {
             for (i = 0; i < n + 1; i++) {
                 work->slots[0][i].unk_06 = 0;
                 work->slots[0][i].cardId = CARD_ID_NONE;
-                work->slots[0][i].stocked = 0;
-                work->slots[0][i].removed = 0;
-                work->slots[0][i].used = 0;
+                work->slots[0][i].stocked = FALSE;
+                work->slots[0][i].removed = FALSE;
+                work->slots[0][i].used = FALSE;
             }
 
             for (i = n + 1; i < n + 15; i++) {
                 work->slots[0][i].unk_06 = 1;
                 work->slots[0][i].cardId = CARD_ID_NONE;
-                work->slots[0][i].stocked = 1;
-                work->slots[0][i].removed = 1;
-                work->slots[0][i].used = 1;
+                work->slots[0][i].stocked = TRUE;
+                work->slots[0][i].removed = TRUE;
+                work->slots[0][i].used = TRUE;
             }
 
             LoadActiveDeckCardSlots(work->slots[0], DECK_CARD_SET_MAIN);
@@ -1756,9 +1756,9 @@ void InitSoraCardList(CardBattleWork* work, s32 cardSet) {
             for (i = 0; i < n; i++) {
                 work->slots[3][i].unk_06 = 0;
                 work->slots[3][i].cardId = CARD_ID_NONE;
-                work->slots[3][i].stocked = 0;
-                work->slots[3][i].removed = 0;
-                work->slots[3][i].used = 0;
+                work->slots[3][i].stocked = FALSE;
+                work->slots[3][i].removed = FALSE;
+                work->slots[3][i].used = FALSE;
             }
 
             LoadActiveDeckCardSlots(work->slots[3], DECK_CARD_SET_ENEMY);
@@ -1850,7 +1850,7 @@ void ClearUsedCardSlots(CardBattleWork* work, u8 listIndex) {
 
     for (i = 0; i < work->slotCounts[listIndex]; i++) {
         if (!work->slots[listIndex][i].stocked) {
-            work->slots[listIndex][i].used = 0;
+            work->slots[listIndex][i].used = FALSE;
         }
     }
 }
@@ -1861,21 +1861,21 @@ void ResetCardSlotsForReload(CardBattleWork* work, u8 listIndex) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         for (i = 0; i < work->slotCounts[listIndex]; i++) {
             if (!work->slots[listIndex][i].stocked) {
-                work->slots[listIndex][i].used = 0;
+                work->slots[listIndex][i].used = FALSE;
                 work->slots[listIndex][i].unk_06 = 0;
             }
 
             if (!(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-                if (work->slots[listIndex][i].restoreOnReload == 1) {
-                    work->slots[listIndex][i].removed = 0;
-                    work->slots[listIndex][i].restoreOnReload = 0;
+                if (work->slots[listIndex][i].restoreOnReload == TRUE) {
+                    work->slots[listIndex][i].removed = FALSE;
+                    work->slots[listIndex][i].restoreOnReload = FALSE;
                 }
             }
         }
     } else {
         for (i = 0; i < work->slotCounts[listIndex]; i++) {
             if (!work->slots[listIndex][i].stocked) {
-                work->slots[listIndex][i].used = 0;
+                work->slots[listIndex][i].used = FALSE;
                 work->slots[listIndex][i].unk_06 = 0;
             }
         }
@@ -1957,17 +1957,17 @@ void AddPickedCardToSoraDeck(CardBattleWork* work) {
         slots[work->slotCounts[0] - 5].cardId = 0x28F;
         slots[work->slotCounts[0] - 5].index = work->slotCounts[0] - 5;
         slots[work->slotCounts[0] - 5].unk_06 = 0;
-        slots[work->slotCounts[0] - 5].stocked = 0;
-        slots[work->slotCounts[0] - 5].removed = 0;
-        slots[work->slotCounts[0] - 5].used = 0;
+        slots[work->slotCounts[0] - 5].stocked = FALSE;
+        slots[work->slotCounts[0] - 5].removed = FALSE;
+        slots[work->slotCounts[0] - 5].used = FALSE;
         gCardBattleState->pickedGimmickCardId = 0x3B6;
     } else {
         slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].cardId = gCardBattleState->pickedFriendCardId;
         slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].index = gCardBattleState->addedFriendCards[0] + (work->slotCounts[0] - 14);
         slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].unk_06 = 0;
-        slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].stocked = 0;
-        slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].removed = 0;
-        slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].used = 0;
+        slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].stocked = FALSE;
+        slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].removed = FALSE;
+        slots[work->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].used = FALSE;
         gCardBattleState->pickedFriendCardId = 0x3B6;
         gCardBattleState->addedFriendCards[0]++;
     }
@@ -2262,15 +2262,15 @@ void TrySoraCardBreak(CardBattleWork* work) {
         }
 
         sSoraSelectedCard->value = n;
-        sSoraSelectedCard->valueModified = 1;
+        sSoraSelectedCard->valueModified = TRUE;
     } else if (gBtlWork->hcEffect == HC_EFFECT_DECREMENTOR) {
         if (sSoraSelectedCard->value != 0) {
             n = sSoraSelectedCard->value - 1;
             sSoraSelectedCard->value--;
-            sSoraSelectedCard->valueModified = 1;
+            sSoraSelectedCard->valueModified = TRUE;
         } else {
             n = 0;
-            sSoraSelectedCard->valueModified = 1;
+            sSoraSelectedCard->valueModified = TRUE;
         }
     } else {
         n = sSoraSelectedCard->value;
@@ -2280,19 +2280,19 @@ void TrySoraCardBreak(CardBattleWork* work) {
         return;
     }
 
-    skip = 0;
+    skip = FALSE;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
         if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
             !gCardBattleState->rikuStockActive) {
-            skip = 1;
+            skip = TRUE;
         }
 
 #ifdef VERSION_EU
         if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
             for (j = 0; j < gCardBattleState->activeCardCount; j++) {
                 if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
-                    skip = 1;
+                    skip = TRUE;
                 }
             }
         }
@@ -2301,19 +2301,19 @@ void TrySoraCardBreak(CardBattleWork* work) {
             for (k = 0; k < gCardBattleState->activeCardCount; k++) {
                 if (gCardBattleState->activeCards[k]->cardDef->category == 2 &&
                     !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
-                    skip = 1;
+                    skip = TRUE;
                 }
             }
         }
 #else
         if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
             !gCardBattleState->rikuStockActive) {
-            skip = 1;
+            skip = TRUE;
         }
 
         if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
             !gCardBattleState->rikuStockActive) {
-            skip = 1;
+            skip = TRUE;
         }
 #endif
     }
@@ -2350,10 +2350,10 @@ void TrySoraCardBreak(CardBattleWork* work) {
         gCardBattleState->activeCards[0] = sSoraSelectedCard;
         gCardBattleState->activeCardCount = 1;
         gCardBattleState->activeValue = sSoraSelectedCard->value;
-        gBtlWork->soraOwnsPlay = 1;
+        gBtlWork->soraOwnsPlay = TRUE;
 
         if (!(gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) && AddBreakDarkPoints() && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            gCardBattleState->darkModeReady = 1;
+            gCardBattleState->darkModeReady = TRUE;
         }
     } else {
         ApplyTrickmasterToSoraCard(work);
@@ -2362,7 +2362,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
         m4aSongNumStart(SONG_SYS_DROW);
-        gBtlWork->soraOwnsPlay = 1;
+        gBtlWork->soraOwnsPlay = TRUE;
         gCardBattleState->activeCards[0] = sSoraSelectedCard;
         gCardBattleState->activeCardCount = 1;
         gCardBattleState->activeValue = sSoraSelectedCard->value;
@@ -2405,14 +2405,14 @@ s32 UseSoraCard(CardBattleWork* work) {
                 gCardBattleState->activeValue = 9;
             }
 
-            sSoraSelectedCard->valueModified = 1;
+            sSoraSelectedCard->valueModified = TRUE;
         } else if (btl->hcEffect == HC_EFFECT_DECREMENTOR) {
             if (sSoraSelectedCard->value != 0) {
                 sSoraSelectedCard->value--;
-                sSoraSelectedCard->valueModified = 1;
+                sSoraSelectedCard->valueModified = TRUE;
                 gCardBattleState->activeValue = sSoraSelectedCard->value;
             } else {
-                sSoraSelectedCard->valueModified = 1;
+                sSoraSelectedCard->valueModified = TRUE;
                 gCardBattleState->activeValue = 0;
             }
         } else {
@@ -2421,12 +2421,12 @@ s32 UseSoraCard(CardBattleWork* work) {
 
         gCardBattleState->activeCardCount = 1;
         sSoraSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
-        gBtlWork->soraOwnsPlay = 1;
+        gBtlWork->soraOwnsPlay = TRUE;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_BUSY;
     } else {
-        if (btl->soraOwnsPlay == 1) {
+        if (btl->soraOwnsPlay == TRUE) {
             return 1;
         }
 
@@ -2446,25 +2446,25 @@ s32 UseSoraCard(CardBattleWork* work) {
     }
 
     if ((sSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_ITEM) && (sSoraSelectedCard->flags & CARD_DISP_FLAG_IN_PLAY)) {
-        sSoraSelectedCard->args.slot->removed = 1;
+        sSoraSelectedCard->args.slot->removed = TRUE;
     }
 
     if (sSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        sSoraSelectedCard->args.slot->removed = 1;
+        sSoraSelectedCard->args.slot->removed = TRUE;
     }
 
-    if (sSoraSelectedCard->premium == 1) {
-        sSoraSelectedCard->args.slot->removed = 1;
+    if (sSoraSelectedCard->premium == TRUE) {
+        sSoraSelectedCard->args.slot->removed = TRUE;
 
         if (CountRemainingAttackCards(work, 0) == 0) {
-            sSoraSelectedCard->args.slot->removed = 0;
+            sSoraSelectedCard->args.slot->removed = FALSE;
         }
     }
 
     work->playedCards[0] = sSoraSelectedCard;
     sSoraSelectedCard->command = CARD_DISP_COMMAND_PLAY;
     sSoraSelectedCard->priority = 50;
-    sSoraSelectedCard->args.slot->used = 1;
+    sSoraSelectedCard->args.slot->used = TRUE;
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
     TickSoraHcEffectOnCardUse();
 
@@ -2479,7 +2479,7 @@ s32 UseSoraCard(CardBattleWork* work) {
 
     other = 0xFF;
     index = other;
-    found = 0;
+    found = FALSE;
     sSoraSelectedCard = NULL;
 
     card = ListPoolFirst(&work->cardDisplays[work->listIndex]);
@@ -2491,7 +2491,7 @@ s32 UseSoraCard(CardBattleWork* work) {
             card->ringAngleTarget = gSoraCardRingAngles[card->ringIndex];
             card->priority = 50;
             sSoraSelectedCard = card;
-            found = 1;
+            found = TRUE;
             break;
         }
 
@@ -2597,12 +2597,12 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
         gCardBattleState->soraHcEffect = sSoraSelectedCard->cardDef->move;
         func_0807B458(work, gCardBattleState->soraHcEffect);
         ApplySoraHcEffect(work);
-        gCardBattleState->soraHcEffectReplaced = 1;
+        gCardBattleState->soraHcEffectReplaced = TRUE;
     }
 
-    sSoraSelectedCard->args.slot->removed = 1;
+    sSoraSelectedCard->args.slot->removed = TRUE;
     sSoraSelectedCard->command = CARD_DISP_COMMAND_HEARTLESS;
-    sSoraSelectedCard->args.slot->used = 1;
+    sSoraSelectedCard->args.slot->used = TRUE;
     sSoraSelectedCard->priority = 50;
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
 
@@ -2614,7 +2614,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
     work->cardsLeft[work->listIndex]--;
     other = 0xFF;
     index = other;
-    found = 0;
+    found = FALSE;
     sSoraSelectedCard = NULL;
 
     card = ListPoolFirst(&work->cardDisplays[work->listIndex]);
@@ -2626,7 +2626,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
             card->ringAngleTarget = gSoraCardRingAngles[card->ringIndex];
             card->priority = 50;
             sSoraSelectedCard = card;
-            found = 1;
+            found = TRUE;
             break;
         }
 
@@ -2723,15 +2723,15 @@ s32 UseSoraGimmickCard(CardBattleWork* work) {
 
     gBtlWork->flags |= BTL_FLAG_GIMMICK_CARD_ACTIVE;
     m4aSongNumStart(SONG_SYS_CLICKI04);
-    sSoraSelectedCard->args.slot->removed = 1;
+    sSoraSelectedCard->args.slot->removed = TRUE;
     sSoraSelectedCard->command = CARD_DISP_COMMAND_GIMMICK;
-    sSoraSelectedCard->args.slot->used = 1;
+    sSoraSelectedCard->args.slot->used = TRUE;
     sSoraSelectedCard->priority = 50;
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
     work->cardsLeft[work->listIndex]--;
     other = 0xFF;
     index = other;
-    found = 0;
+    found = FALSE;
     sSoraSelectedCard = NULL;
 
     card = ListPoolFirst(&work->cardDisplays[work->listIndex]);
@@ -2743,7 +2743,7 @@ s32 UseSoraGimmickCard(CardBattleWork* work) {
             card->ringAngleTarget = gSoraCardRingAngles[card->ringIndex];
             card->priority = 50;
             sSoraSelectedCard = card;
-            found = 1;
+            found = TRUE;
             break;
         }
 
@@ -2836,8 +2836,8 @@ s32 StockSoraCard(CardBattleWork* work) {
         return 1;
     }
 
-    work->stockNameChecked = 0;
-    gCardBattleState->soraStockNameShown = 0;
+    work->stockNameChecked = FALSE;
+    gCardBattleState->soraStockNameShown = FALSE;
     m4aSongNumStart(SONG_SYS_KETEI2);
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
     sSoraSelectedCard->flags |= CARD_DISP_FLAG_STOCKED;
@@ -2846,7 +2846,7 @@ s32 StockSoraCard(CardBattleWork* work) {
     sSoraSelectedCard->priority = 50 - (3 - work->stockCount) * 4;
     work->stock[work->stockCount] = sSoraSelectedCard;
     gCardBattleState->soraStockedCards[gCardBattleState->soraStockedCount] = sSoraSelectedCard;
-    sSoraSelectedCard->args.slot->stocked = active = 1;
+    sSoraSelectedCard->args.slot->stocked = active = TRUE;
     sSoraSelectedCard->args.slot->used = active;
 
     if (gBtlWork->hcEffect == HC_EFFECT_INCREMENTOR) {
@@ -2887,7 +2887,7 @@ s32 StockSoraCard(CardBattleWork* work) {
     work->cardsLeft[work->listIndex]--;
 
     if (sSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        sSoraSelectedCard->args.slot->removed = 1;
+        sSoraSelectedCard->args.slot->removed = TRUE;
     }
 
     if (gBtlWork->hcEffect == HC_EFFECT_RANDOM_FLUSH) {
@@ -2901,7 +2901,7 @@ s32 StockSoraCard(CardBattleWork* work) {
 
     other = 0xFF;
     index = other;
-    found = 0;
+    found = FALSE;
     sSoraSelectedCard = NULL;
 
     card = ListPoolFirst(&work->cardDisplays[work->listIndex]);
@@ -2913,7 +2913,7 @@ s32 StockSoraCard(CardBattleWork* work) {
             card->ringAngleTarget = gSoraCardRingAngles[card->ringIndex];
             card->priority = 50;
             sSoraSelectedCard = card;
-            found = 1;
+            found = TRUE;
             break;
         }
 
@@ -3050,8 +3050,8 @@ void OpenSoraCards(CardBattleWork* work) {
     }
 
     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
-    gCardBattleState->cardsOpen = 1;
-    work->cardsClosed = 0;
+    gCardBattleState->cardsOpen = TRUE;
+    work->cardsClosed = FALSE;
 }
 
 void CloseSoraCards(CardBattleWork* work) {
@@ -3073,9 +3073,9 @@ void CloseSoraCards(CardBattleWork* work) {
 
     gCardBattleState->soraHcEffect = HC_EFFECT_NONE;
     gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
-    gCardBattleState->cardsOpen = 0;
-    gCardBattleState->soraStockNameShown = 0;
-    work->cardsClosed = 1;
+    gCardBattleState->cardsOpen = FALSE;
+    gCardBattleState->soraStockNameShown = FALSE;
+    work->cardsClosed = TRUE;
 }
 
 void TrySoraStockBreak(CardBattleWork* work) {
@@ -3104,19 +3104,19 @@ void TrySoraStockBreak(CardBattleWork* work) {
         return;
     }
 
-    skip = 0;
+    skip = FALSE;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
         if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
             !gCardBattleState->rikuStockActive) {
-            skip = 1;
+            skip = TRUE;
         }
 
 #ifdef VERSION_EU
         if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
             for (j = 0; j < gCardBattleState->activeCardCount; j++) {
                 if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
-                    skip = 1;
+                    skip = TRUE;
                 }
             }
         }
@@ -3125,19 +3125,19 @@ void TrySoraStockBreak(CardBattleWork* work) {
             for (k = 0; k < gCardBattleState->activeCardCount; k++) {
                 if (gCardBattleState->activeCards[k]->cardDef->category == 2 &&
                     !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
-                    skip = 1;
+                    skip = TRUE;
                 }
             }
         }
 #else
         if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
             !gCardBattleState->rikuStockActive) {
-            skip = 1;
+            skip = TRUE;
         }
 
         if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
             !gCardBattleState->rikuStockActive) {
-            skip = 1;
+            skip = TRUE;
         }
 #endif
     }
@@ -3168,7 +3168,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
         }
 
         if (!(gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) && AddBreakDarkPoints() && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            gCardBattleState->darkModeReady = 1;
+            gCardBattleState->darkModeReady = TRUE;
         }
 
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
@@ -3186,8 +3186,8 @@ void TrySoraStockBreak(CardBattleWork* work) {
 
         if ((u16)result == STOCK_ZANTETSUKEN && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
             for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-                if (gCardBattleState->activeCards[i]->args.slot->used == 1) {
-                    gCardBattleState->activeCards[i]->args.slot->removed = 1;
+                if (gCardBattleState->activeCards[i]->args.slot->used == TRUE) {
+                    gCardBattleState->activeCards[i]->args.slot->removed = TRUE;
                     gCardBattleState->activeCards[i]->flags |= 0x80000000;
                 }
             }
@@ -3214,12 +3214,12 @@ void TrySoraStockBreak(CardBattleWork* work) {
             work->stock[i]->flags |= CARD_DISP_FLAG_IN_PLAY;
 
             if (work->stock[i]->cardDef->flags & CARD_DEF_FLAG_ITEM) {
-                work->stock[i]->args.slot->removed = 1;
+                work->stock[i]->args.slot->removed = TRUE;
             }
         }
 
-        gBtlWork->soraOwnsPlay = 1;
-        gCardBattleState->soraStockActive = 1;
+        gBtlWork->soraOwnsPlay = TRUE;
+        gCardBattleState->soraStockActive = TRUE;
         m4aSongNumStart(SONG_BTL_GARD);
 
 #ifdef VERSION_EU
@@ -3231,8 +3231,8 @@ void TrySoraStockBreak(CardBattleWork* work) {
 
         if ((u16)result == STOCK_ZANTETSUKEN && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
             for (i = 0; i < previousCount; i++) {
-                if (previous[i]->args.slot->used == 1) {
-                    previous[i]->args.slot->removed = 1;
+                if (previous[i]->args.slot->used == TRUE) {
+                    previous[i]->args.slot->removed = TRUE;
                     previous[i]->flags |= 0x80000000;
                 }
             }
@@ -3248,8 +3248,8 @@ void TrySoraStockBreak(CardBattleWork* work) {
     gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
-    gCardBattleState->soraStockActive = 0;
-    gBtlWork->soraOwnsPlay = 1;
+    gCardBattleState->soraStockActive = FALSE;
+    gBtlWork->soraOwnsPlay = TRUE;
 }
 
 void UseSoraStock(CardBattleWork* work) {
@@ -3270,8 +3270,8 @@ void UseSoraStock(CardBattleWork* work) {
     }
 
     gCardBattleState->unk_0C0 = 0;
-    gCardBattleState->soraStockNameShown = 0;
-    work->stockNameChecked = 0;
+    gCardBattleState->soraStockNameShown = FALSE;
+    work->stockNameChecked = FALSE;
     flags = gBtlWork->flags;
 
     if ((flags & BTL_FLAG_CARD_ACTIVE) == 0) {
@@ -3284,20 +3284,20 @@ void UseSoraStock(CardBattleWork* work) {
             work->stock[i]->priority = i * 4 + 50;
 
             if (work->stock[i]->cardDef->flags & CARD_DEF_FLAG_ITEM) {
-                work->stock[i]->args.slot->removed = 1;
+                work->stock[i]->args.slot->removed = TRUE;
             }
 
             work->stock[i]->flags |= (CARD_DISP_FLAG_IN_PLAY | CARD_DISP_FLAG_UNOPPOSED);
         }
 
         gCardBattleState->activeValue = work->stockValue;
-        gBtlWork->soraOwnsPlay = 1;
+        gBtlWork->soraOwnsPlay = TRUE;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_BUSY;
-        gCardBattleState->soraStockActive = 1;
+        gCardBattleState->soraStockActive = TRUE;
     } else {
-        if (gBtlWork->soraOwnsPlay == 1) {
+        if (gBtlWork->soraOwnsPlay == TRUE) {
             return;
         }
 
@@ -3311,19 +3311,19 @@ void UseSoraStock(CardBattleWork* work) {
     }
 
     for (i = 0; i < work->stockCount; i++) {
-        work->stock[i]->args.slot->stocked = 0;
+        work->stock[i]->args.slot->stocked = FALSE;
 
         if (work->stock[i]->cardDef->flags & CARD_DEF_FLAG_ITEM) {
-            work->stock[i]->args.slot->removed = 1;
+            work->stock[i]->args.slot->removed = TRUE;
         } else if (i == 0 && gBtlWork->hcEffect != HC_EFFECT_SLEIGHT_LOCK) {
-            work->stock[0]->args.slot->removed = 1;
+            work->stock[0]->args.slot->removed = TRUE;
         }
     }
 
     if (CountRemainingAttackCards(work, 0) == 0) {
         for (i = 0; i < work->stockCount; i++) {
             if (work->stock[i]->args.listIndex == 0) {
-                work->stock[i]->args.slot->removed = 0;
+                work->stock[i]->args.slot->removed = FALSE;
                 break;
             }
         }
@@ -3347,7 +3347,7 @@ void UseSoraStock(CardBattleWork* work) {
     gCardBattleState->soraStockedCount = 0;
     work->stockValue = 0;
     ClearStockedCardSlots(work);
-    work->stockNameChecked = 0;
+    work->stockNameChecked = FALSE;
 }
 
 void ClearStockedCardSlots(CardBattleWork* work) {
@@ -3360,7 +3360,7 @@ void ClearStockedCardSlots(CardBattleWork* work) {
 
         // @bug? Should be slotCounts[i].
         for (j = 0; j < work->slotCounts[j]; j++) {
-            slots[j].stocked = 0;
+            slots[j].stocked = FALSE;
         }
     }
 }
@@ -3726,27 +3726,27 @@ u8 UpdateSoraAutoCycle(CardBattleWork* work, void* task) {
 u8 CanUseSoraSelectedCard() {
     if (gBtlWork->hcEffect == HC_EFFECT_MAGIC_BOOST) {
         if (sSoraSelectedCard->cardDef->category != 1) {
-            return 1;
+            return TRUE;
         }
 
         if (!(sSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_SUMMON)) {
-            return 1;
+            return TRUE;
         }
 
-        return 0;
+        return FALSE;
     } else if (gBtlWork->hcEffect == HC_EFFECT_SUMMON_BOOST) {
         if (sSoraSelectedCard->cardDef->category != 1) {
-            return 1;
+            return TRUE;
         }
 
         if (sSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_SUMMON) {
-            return 1;
+            return TRUE;
         }
 
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void LoadPremiumCardGfx(CardBattleState* state) {
@@ -3793,7 +3793,7 @@ void RestoreCardsForPotion(CardBattleWork* work) {
                         slots[i].unk_06 = 0;
                     }
                 } else if (category == 1) {
-                    if (slots[i].removed == 1 || slots[i].stocked == 1 || slots[i].used == 1) {
+                    if (slots[i].removed == TRUE || slots[i].stocked == TRUE || slots[i].used == TRUE) {
                         slots[i].unk_06 = 1;
                     }
                 }
@@ -3818,10 +3818,10 @@ void RestoreCardsForHiPotion(CardBattleWork* work) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
                 if (category == 0) {
-                    slots[i].removed = 0;
+                    slots[i].removed = FALSE;
                     slots[i].unk_06 = 0;
                 } else if (category != 2) {
-                    if (slots[i].used == 1 || slots[i].removed == 1 || slots[i].stocked == 1) {
+                    if (slots[i].used == TRUE || slots[i].removed == TRUE || slots[i].stocked == TRUE) {
                         slots[i].unk_06 = 1;
                     }
                 }
@@ -3847,9 +3847,9 @@ void RestoreCardsForMegaPotion(CardBattleWork* work) {
 
                 if (category == 0) {
                     slots[i].unk_06 = 0;
-                    slots[i].removed = 0;
+                    slots[i].removed = FALSE;
                 } else if (category != 2) {
-                    if (slots[i].used == 1 || slots[i].removed == 1 || slots[i].stocked == 1) {
+                    if (slots[i].used == TRUE || slots[i].removed == TRUE || slots[i].stocked == TRUE) {
                         slots[i].unk_06 = 1;
                     }
                 }
@@ -3878,7 +3878,7 @@ void RestoreCardsForEther(CardBattleWork* work) {
                         slots[i].unk_06 = 0;
                     }
                 } else if (category != 2) {
-                    if (slots[i].removed == 1 || slots[i].stocked == 1 || slots[i].used == 1) {
+                    if (slots[i].removed == TRUE || slots[i].stocked == TRUE || slots[i].used == TRUE) {
                         slots[i].unk_06 = 1;
                     }
                 }
@@ -3904,9 +3904,9 @@ void RestoreCardsForMegaEther(CardBattleWork* work) {
 
                 if (category == 1) {
                     slots[i].unk_06 = 0;
-                    slots[i].removed = 0;
+                    slots[i].removed = FALSE;
                 } else if (category != 2) {
-                    if (slots[i].used == 1 || slots[i].removed == 1 || slots[i].stocked == 1) {
+                    if (slots[i].used == TRUE || slots[i].removed == TRUE || slots[i].stocked == TRUE) {
                         slots[i].unk_06 = 1;
                     }
                 }
@@ -3926,7 +3926,7 @@ void RestoreCardsForElixir(CardBattleWork* work) {
             if (slots[i].cardId != CARD_ID_RELOAD) {
                 if (gCardDefs[slots[i].cardId & CARD_ID_MASK].category != 2) {
                     slots[i].unk_06 = 0;
-                    slots[i].removed = 0;
+                    slots[i].removed = FALSE;
                 }
             }
         }
@@ -3944,10 +3944,10 @@ void RemoveItemCards(CardBattleWork* work) {
             if (slots[i].cardId != CARD_ID_RELOAD) {
                 if (gCardDefs[slots[i].cardId & CARD_ID_MASK].flags & CARD_DEF_FLAG_ITEM) {
                     if (!slots[i].removed) {
-                        slots[i].restoreOnReload = 1;
+                        slots[i].restoreOnReload = TRUE;
                     }
 
-                    slots[i].removed = 1;
+                    slots[i].removed = TRUE;
                 }
             }
         }
@@ -3970,10 +3970,10 @@ u8 AddBreakDarkPoints() {
     }
 
     if (gBtlWork->darkPoints > 29 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void TickSoraHcEffectOnReload() {
@@ -4048,9 +4048,9 @@ void SoraCardInit(CardDisplayWork* work, CardDisplayArgs* args) {
 
     // @bug A "not have" display has no slot (NULL read).
     if (work->args.slot->cardId & CARD_FLAG_PREMIUM) {
-        work->premium = 1;
+        work->premium = TRUE;
     } else {
-        work->premium = 0;
+        work->premium = FALSE;
     }
 
     work->scaleX = Q_8_8(1);
@@ -4081,7 +4081,7 @@ void SoraCardInit(CardDisplayWork* work, CardDisplayArgs* args) {
         work->value = 0;
     }
 
-    work->valueModified = 0;
+    work->valueModified = FALSE;
     work->flags |= CARD_DISP_FLAG_OPEN;
     work->flags &= ~CARD_DISP_FLAG_SETTLED;
     LinkSoraCardDisplay(work);
@@ -4163,7 +4163,7 @@ static void card_2(CardDisplayWork* work) {
 
     attr = 0x410;
 
-    if (IsMessageWindowOpen() == 1) {
+    if (IsMessageWindowOpen() == TRUE) {
         y = work->y >> 8;
     } else {
         y = (work->y >> 8) + (gSineTable[work->bobAngle] >> 8);
@@ -4232,7 +4232,7 @@ void card_not_have_2(CardDisplayWork* work) {
 
     gfx = gCardBacks[work->args.listIndex].gfx2;
 
-    if (IsMessageWindowOpen() == 1) {
+    if (IsMessageWindowOpen() == TRUE) {
         y = work->y >> 8;
     } else {
         y = (work->y >> 8) + (gSineTable[work->bobAngle] >> 8);
@@ -4417,7 +4417,7 @@ u8 SoraStockWaitPlayEnd(CardDisplayWork* work, void* task) {
         work->timer = 0x100;
         work->ringAngle = -16;
         work->spinSpeed = 0xFF;
-        gCardBattleState->soraStockActive = 0;
+        gCardBattleState->soraStockActive = FALSE;
         SetTaskUpdate(task, (TaskUpdateFunc)SoraCardBreakFall);
     }
 
@@ -4433,7 +4433,7 @@ u8 SoraStockWaitPlayEnd(CardDisplayWork* work, void* task) {
             TickSoraHcEffectOnPlayEnd();
         }
 
-        gCardBattleState->soraStockActive = 0;
+        gCardBattleState->soraStockActive = FALSE;
         gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_BUSY;
         SetTaskUpdate(task, (TaskUpdateFunc)SoraCardShrinkAway);
     }
@@ -4525,7 +4525,7 @@ u8 SoraStockMoveToSlot(CardDisplayWork* work, void* task) {
     u8 (*fn)(CardDisplayWork*, void*);
     u16 timer;
 
-    if (gBtlWork->paused == 1) {
+    if (gBtlWork->paused == TRUE) {
         return 1;
     }
 
@@ -4760,22 +4760,22 @@ u8 SoraCardShrinkAway(CardDisplayWork* work) {
 
 u8 IsCardDisplayOffScreen(CardDisplayWork* work) {
     if (work->x > 0x10000) {
-        return 1;
+        return TRUE;
     }
 
     if (work->x < -0x1000) {
-        return 1;
+        return TRUE;
     }
 
     if (work->y > 0xC000) {
-        return 1;
+        return TRUE;
     }
 
     if (work->y < -0x2000) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 SoraCardFlyOff(CardDisplayWork* work) {
@@ -4841,7 +4841,7 @@ u8 SoraStockMoveToPlay(CardDisplayWork* work, void* task) {
             work->ringAngle = -16;
             work->spinSpeed = 0xFF;
             gCardBattleState->unk_0C0 = 0;
-            gCardBattleState->soraStockActive = 0;
+            gCardBattleState->soraStockActive = FALSE;
             SetTaskUpdate(task, (TaskUpdateFunc)SoraCardFlyOff);
         }
     } else if ((s16)work->timer <= 2) {
@@ -4850,7 +4850,7 @@ u8 SoraStockMoveToPlay(CardDisplayWork* work, void* task) {
         work->timer = 0x100;
         work->ringAngle = -16;
         work->spinSpeed = 0xFF;
-        gCardBattleState->soraStockActive = 0;
+        gCardBattleState->soraStockActive = FALSE;
         SetTaskUpdate(task, (TaskUpdateFunc)SoraCardFlyOff);
     }
 
@@ -5317,7 +5317,7 @@ void card_reload_2(CardDisplayWork* work) {
     if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {
         gauge = work->reloadGauge;
 
-        if (IsMessageWindowOpen() == 1) {
+        if (IsMessageWindowOpen() == TRUE) {
             y = work->y >> 8;
         } else {
             y = (work->y >> 8) + (gSineTable[work->bobAngle] >> 8);
@@ -5466,17 +5466,17 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
     // @bug A "not have" display has no cardDef (NULL read).
     if (gBtlWork->hcEffect == HC_EFFECT_RANDOM_VALUES) {
         if (work->flags & CARD_DISP_FLAG_SELECTED) {
-            work->valueModified = 1;
+            work->valueModified = TRUE;
             work->value = GetRandom() % 10;
         } else {
-            work->valueModified = 0;
+            work->valueModified = FALSE;
             work->value = work->cardDef->value;
         }
     } else if (gBtlWork->hcEffect == HC_EFFECT_ALL_ZEROS) {
-        work->valueModified = 1;
+        work->valueModified = TRUE;
         work->value = 0;
     } else if (gBtlWork->hcEffect == HC_EFFECT_RETROGRADE) {
-        work->valueModified = 1;
+        work->valueModified = TRUE;
         work->value = 10 - work->cardDef->value;
 
         if (work->value == 10) {
@@ -5494,7 +5494,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
                     work->value = 9;
                 }
 
-                work->valueModified = 1;
+                work->valueModified = TRUE;
             }
 
             break;
@@ -5506,7 +5506,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
                     work->value = 9;
                 }
 
-                work->valueModified = 1;
+                work->valueModified = TRUE;
             }
 
             break;
@@ -5518,12 +5518,12 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
                     work->value = 9;
                 }
 
-                work->valueModified = 1;
+                work->valueModified = TRUE;
             }
 
             break;
         default:
-            work->valueModified = 0;
+            work->valueModified = FALSE;
             work->value = work->cardDef->value;
             break;
         }

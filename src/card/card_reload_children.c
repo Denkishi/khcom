@@ -559,10 +559,10 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     work->flipAngleX = 0;
     collider = &work->collider;
     ColliderInit(collider, 5, 8, 10);
-    ColliderSetDisabled(collider, 1);
+    ColliderSetDisabled(collider, TRUE);
     ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     work->timer = 0;
-    work->collected = 0;
+    work->collected = FALSE;
     work->steps = 0;
     work->holdTimer = 0;
     work->effectCount = 0;
@@ -595,7 +595,7 @@ u8 PrizeBoss_1(BossPrizeWork* work, void* task) {
     work->flipAngleX += 2;
 
     if (work->timer == 60) {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->timer <= 59) {
@@ -603,7 +603,7 @@ u8 PrizeBoss_1(BossPrizeWork* work, void* task) {
     }
 
     if (work->collider.colliding) {
-        work->collected = 1;
+        work->collected = TRUE;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         ObtainCard(work->cardId);
 
@@ -615,7 +615,7 @@ u8 PrizeBoss_1(BossPrizeWork* work, void* task) {
         WorldToScreen(&x, &y, work->posX, work->posY, work->posZ);
         work->posX = x << 8;
         work->posY = y << 8;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         work->steps = 16;
         work->priority = 50;
         AimBossPrizeAtCenter(work);
@@ -663,8 +663,8 @@ void PrizeBoss_2(BossPrizeWork* work) {
 }
 
 void PrizeBoss_3(BossPrizeWork* work) {
-    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette2->index + 16, FALSE);
+    FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
     ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
     ReleaseObjTiles(work->tiles2);

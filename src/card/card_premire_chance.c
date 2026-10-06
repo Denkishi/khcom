@@ -27,7 +27,7 @@ static const u8 sPremireChanceCardPriorities[9] = { 6, 4, 2, 0, 2, 4, 6, 8, 12 }
 void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     const CardDef* def;
 
-    work->gfxLoaded = 0;
+    work->gfxLoaded = FALSE;
     work->tiles4 = NULL;
 
     if (slot->unk_06 <= 8) {
@@ -57,7 +57,7 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     work->x2 = 0;
     work->y2 = 0;
     work->steps = 32;
-    work->premium = 0;
+    work->premium = FALSE;
 }
 
 u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* task) {
@@ -177,13 +177,13 @@ u8 IsPremireChanceCardOnScreen(PremireChanceCardWork* work) {
         if (work->x <= DISPLAY_WIDTH) {
             if (work->y >= 0) {
                 if (work->y <= DISPLAY_HEIGHT) {
-                    return 1;
+                    return TRUE;
                 }
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void LoadPremireChanceCardGfx(PremireChanceCardWork* work) {
@@ -195,10 +195,10 @@ void LoadPremireChanceCardGfx(PremireChanceCardWork* work) {
         work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
         work->tiles5 = LoadObjTiles(gCardPremiumValueDigitTiles, 0x140);
         work->palette = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
-        FadeSetPaletteExcluded(work->palette3->index + 16, 1);
-        FadeSetPaletteExcluded(work->palette2->index + 16, 1);
-        work->gfxLoaded = 1;
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
+        FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
+        FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
+        work->gfxLoaded = TRUE;
     }
 }
 
@@ -211,7 +211,7 @@ void ReleasePremireChanceCardGfx(PremireChanceCardWork* work) {
         ReleaseObjTiles(work->tiles3);
         ReleaseObjPalette(work->palette);
         ReleaseObjTiles(work->tiles5);
-        work->gfxLoaded = 0;
+        work->gfxLoaded = FALSE;
     }
 }
 
@@ -248,7 +248,7 @@ s32 UpdatePremireChanceCardAnim(PremireChanceCardWork* work) {
     work->gfx = AnimUpdate(&work->anim);
 
     if (work->anim.timer == 0 && work->anim.frame == 4) {
-        work->premium = 1;
+        work->premium = TRUE;
     }
 
     return 1;

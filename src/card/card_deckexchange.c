@@ -120,7 +120,7 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->categoryFilter = 0;
     work->entryCount = 0;
     work->popupActive = 0;
-    work->exitRequested = 0;
+    work->exitRequested = FALSE;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
     work->topBarX = 0;
@@ -327,7 +327,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         TaskPoolUpdate(&work->tasks2);
 
         if (GetKeysPressed() & START_BUTTON) {
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         return 1;
@@ -341,7 +341,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     work->gfx = AnimUpdate(&work->anim);
@@ -469,7 +469,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
             work->categoryFilter = work->cursorCol;
             DrawDeckExchangeCollectionFilterTab(work->categoryFilter, work->mode);
             ClearDeckExchangeCardGrid(work);
-            work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, work->categoryFilter, 1);
+            work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, work->categoryFilter, TRUE);
         }
 
         for (i = 0; i < 10; i++) {
@@ -485,7 +485,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
             work->categoryFilter = work->cursorCol;
             DrawDeckExchangeCollectionFilterTab(work->categoryFilter, work->mode);
             ClearDeckExchangeCardGrid(work);
-            work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, work->categoryFilter, 1);
+            work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, work->categoryFilter, TRUE);
         }
 
         for (i = 0; i < 10; i++) {
@@ -628,7 +628,7 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* task) {
         break;
     case 5:
         work->categoryFilter = 5;
-        work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, 5, 1);
+        work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, 5, TRUE);
         SetDeckExchangeHandAnim(work);
         work->handX = gCollectionGridColumnX[0] << 8;
         work->handY = gCollectionGridRowY[0] << 8;
@@ -666,7 +666,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
         TaskPoolUpdate(&work->tasks2);
 
         if (GetKeysPressed() & START_BUTTON) {
-            work->exitRequested = 1;
+            work->exitRequested = TRUE;
         }
 
         return 1;
@@ -680,7 +680,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
             return 1;
         }
 
-        work->exitRequested = 0;
+        work->exitRequested = FALSE;
     }
 
     switch (GetKeysRepeat()) {
@@ -893,10 +893,10 @@ void deckexchange_2(DeckExchangeWork* work) {
     case DECK_MENU_VIEW_DECK_SELECT:
     case DECK_MENU_VIEW_DECK_FILTER:
     case DECK_MENU_VIEW_COMMANDS:
-        DrawDeckExchangeDeckNames(work, 0);
+        DrawDeckExchangeDeckNames(work, FALSE);
         break;
     case DECK_MENU_VIEW_ADD_GRID:
-        DrawDeckExchangeDeckNames(work, 1);
+        DrawDeckExchangeDeckNames(work, TRUE);
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
 
         if (work->tiles4 != NULL) {
@@ -911,7 +911,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 
         break;
     case DECK_MENU_VIEW_REMOVE_GRID:
-        DrawDeckExchangeDeckNames(work, 1);
+        DrawDeckExchangeDeckNames(work, TRUE);
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
 
         if (work->tiles4 != NULL) {
@@ -928,7 +928,7 @@ void deckexchange_2(DeckExchangeWork* work) {
         break;
     case DECK_MENU_VIEW_ADD_VALUE_SELECT:
         DrawSprite((work->handX >> 8) - 26, (work->handY >> 8) - 13, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
-        DrawDeckExchangeDeckNames(work, 1);
+        DrawDeckExchangeDeckNames(work, TRUE);
 
         if (work->tiles4 != NULL) {
             DrawSprite(24, 82, work->gfx3, work->tiles4, work->palette2, NULL, 0, 20);
@@ -938,7 +938,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 
         break;
     case DECK_MENU_VIEW_ADD_FILTER:
-        DrawDeckExchangeDeckNames(work, 1);
+        DrawDeckExchangeDeckNames(work, TRUE);
 
         if (work->tiles4 != NULL) {
             DrawSprite(24, 82, work->gfx3, work->tiles4, work->palette2, NULL, 0, 20);
@@ -948,7 +948,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 
         break;
     case DECK_MENU_VIEW_REMOVE_FILTER:
-        DrawDeckExchangeDeckNames(work, 1);
+        DrawDeckExchangeDeckNames(work, TRUE);
 
         if (work->tiles4 != NULL) {
             DrawSprite(164, 82, work->gfx3, work->tiles4, work->palette2, NULL, 0, 20);
@@ -1145,7 +1145,7 @@ void ClearDeckExchangeCardGrid(DeckExchangeWork* work) {
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
-        node->done = 1;
+        node->done = TRUE;
         node = ListPoolNext(&node->node);
     }
 
@@ -1195,14 +1195,14 @@ u8 ScrollDeckExchangeGridUp(DeckExchangeWork* work) {
 
         if (work->thumbY < 0x2800) {
             work->thumbY = 0x2800;
-            return 0;
+            return FALSE;
         }
 
-        return 1;
+        return TRUE;
     }
 
     if (node->args.row == 0) {
-        return 0;
+        return FALSE;
     }
 
     do {
@@ -1224,7 +1224,7 @@ u8 ScrollDeckExchangeGridUp(DeckExchangeWork* work) {
         work->thumbY = 0x2800;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void SetDeckExchangeHandAnim(DeckExchangeWork* work) {
@@ -1654,7 +1654,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
     startRow = work->cursorRow;
 
     if (*(u16*)&entry[idx << 1] != 0) {
-        return 1;
+        return TRUE;
     }
 
     switch (key) {
@@ -1669,7 +1669,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
             idx = work->cursorCol * 5 + (u8)work->cursorRow;
 
             if (work->cursorCol == startCol && work->cursorRow == startRow) {
-                return 0;
+                return FALSE;
             }
         } while (*(u16*)&entry[idx << 1] == 0);
 
@@ -1685,7 +1685,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
             idx = work->cursorCol * 5 + (u8)work->cursorRow;
 
             if (work->cursorCol == startCol && work->cursorRow == startRow) {
-                return 0;
+                return FALSE;
             }
         } while (*(u16*)&entry[idx << 1] == 0);
 
@@ -1696,7 +1696,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
                 work->cursorCol = cursorCol - 1;
             }
 
-            return 1;
+            return TRUE;
         }
 
         sum = 0;
@@ -1707,7 +1707,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
 
         if (sum == 0) {
             work->cursorCol = 1;
-            return 0;
+            return FALSE;
         }
 
         cursorRow = (u8*)&work->cursorRow;
@@ -1749,7 +1749,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
                 work->cursorCol = cursorCol + 1;
             }
 
-            return 1;
+            return TRUE;
         }
 
         sum = 0;
@@ -1760,7 +1760,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
 
         if (sum == 0) {
             work->cursorCol = 0;
-            return 0;
+            return FALSE;
         }
 
         cursorRow = (u8*)&work->cursorRow;
@@ -1815,7 +1815,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
                 }
 
                 if (SumDeckExchangeValueCounts((u16*)entry) == 0) {
-                    return 0;
+                    return FALSE;
                 }
             }
         } while (*(u16*)&entry[idx << 1] == 0);
@@ -1823,7 +1823,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
         break;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void FreeDeckExchangeCollectionEntries(DeckExchangeWork* work) {
@@ -1870,7 +1870,7 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
 
     if (entry->valueCounts[idx] == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
-        return 1;
+        return TRUE;
     }
 
     for (i = 0; i < entry->count; i++) {
@@ -1888,7 +1888,7 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
                     entry->valueCounts[0]--;
                     DrawValueCount(entry->valueCounts[0], 0);
                     m4aSongNumStart(SONG_SYS_KETTEI);
-                    return 1;
+                    return TRUE;
                 }
             } else {
                 value = def->value;
@@ -1900,14 +1900,14 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
                     entry->valueCounts[value]--;
                     DrawValueCount(entry->valueCounts[value], value);
                     m4aSongNumStart(SONG_SYS_KETTEI);
-                    return 1;
+                    return TRUE;
                 }
             }
         }
     }
 
     m4aSongNumStart(SONG_SYS_BEEP);
-    return 1;
+    return TRUE;
 }
 
 s32 CheckDeckExchangeCpCost(DeckExchangeWork* work) {
@@ -1915,20 +1915,20 @@ s32 CheckDeckExchangeCpCost(DeckExchangeWork* work) {
         TaskCreate(&work->tasks2, &gTaskDescDeckErrorCp, &work->popupActive);
         m4aSongNumStart(SONG_SYS_BEEP);
 
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 CheckDeckExchangeHasAttackCard(DeckExchangeWork* work) {
     if (CountActiveDeckCardsOfCategory(0) == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
         TaskCreate(&work->tasks2, &gTaskDescDeckErrorNoAttackCard, &work->popupActive);
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void ResetDeckExchangeGridScroll(DeckExchangeWork* work) {
@@ -1965,13 +1965,13 @@ u8 IsDeckExchangeCardAtCursor(DeckExchangeWork* work) {
     while (node != NULL) {
         if (node->args.col == work->cursorCol &&
             node->args.row == work->cursorRow) {
-            return 1;
+            return TRUE;
         }
 
         node = ListPoolNext(&node->node);
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 IsDeckExchangeCardAt(DeckExchangeWork* work, s16 x, s16 y) {
@@ -1981,13 +1981,13 @@ u8 IsDeckExchangeCardAt(DeckExchangeWork* work, s16 x, s16 y) {
 
     while (node != NULL) {
         if (node->args.col == x && node->args.row == y) {
-            return 1;
+            return TRUE;
         }
 
         node = ListPoolNext(&node->node);
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 FindDeckExchangeCardInDirection(DeckExchangeWork* work, s16 x, s16 y, u16 dir) {
@@ -1995,7 +1995,7 @@ u8 FindDeckExchangeCardInDirection(DeckExchangeWork* work, s16 x, s16 y, u16 dir
 
     for (node = ListPoolFirst(&work->pool); node != NULL; node = ListPoolNext(&node->node)) {
         if (node->args.col == x && node->args.row == y) {
-            return 1;
+            return TRUE;
         }
     }
 
@@ -2010,7 +2010,7 @@ u8 FindDeckExchangeCardInDirection(DeckExchangeWork* work, s16 x, s16 y, u16 dir
         return FindDeckExchangeCardInDirection(work, x + 1, y, 0x10);
     }
 
-    return 0;
+    return FALSE;
 }
 
 void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* work, u16 index) {

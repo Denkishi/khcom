@@ -45,12 +45,12 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
     work->messageDef = &gCardMessageDefs[work->args.messageId];
 
     if (work->messageDef->flags & CARD_MSG_FLAG_ALT_HIGHLIGHT) {
-        work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 1);
+        work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, TRUE);
     } else {
-        work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
+        work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, FALSE);
     }
 
-    FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
+    FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, TRUE);
     work->unk_13C = 0;
     work->steps = 8;
     work->shownChars = 0;
@@ -68,12 +68,12 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
     work->palette3 = NULL;
     work->textPalette = NULL;
     work->unk_142 = 1;
-    work->waitIconVisible = 1;
-    work->choiceVisible = 0;
+    work->waitIconVisible = TRUE;
+    work->choiceVisible = FALSE;
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
-    work->messagePending = 0;
-    work->keepOpen = 1;
+    work->messagePending = FALSE;
+    work->keepOpen = TRUE;
 #ifdef VERSION_JP
     work->charCount = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[work->messageDef->positionIndex],
                                    (TextChar*)work->messageDef->text, &work->nextText);
@@ -89,15 +89,15 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
 
     InitTextSlots(work->textSlots, 10);
     InitTextSlots(work->textSlots2, 10);
-    gMessageWindowOpen = 1;
-    gMessageWindowAnswerYes = 0;
+    gMessageWindowOpen = TRUE;
+    gMessageWindowAnswerYes = FALSE;
     work->shownChars = work->charCount;
 
     switch (work->args.mode) {
     case CARD_MESSAGE_MODE_BG_WINDOW:
         work->tiles3 = AllocObjTiles(0x40, NULL);
         work->palette = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         SetObjTileSource(work->tiles3, gFEventTiles);
         AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
         AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
@@ -110,7 +110,7 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
     case CARD_MESSAGE_MODE_SPRITE_WINDOW:
         work->tiles3 = AllocObjTiles(0x40, NULL);
         work->palette = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         SetObjTileSource(work->tiles3, gFEventTiles);
         AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
         AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
@@ -165,14 +165,14 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
         work->tiles2 = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
 
         if (work->tiles2 == NULL) {
-            work->fallbackFrame = 1;
+            work->fallbackFrame = TRUE;
             work->tiles2 = LoadObjTiles(gSysMsgWinFallbackTiles, 0x680);
         } else {
-            work->fallbackFrame = 0;
+            work->fallbackFrame = FALSE;
         }
 
         work->palette4 = LoadObjPalette(gCard00Palette, 32);
-        FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
         break;
     }
 
@@ -224,9 +224,9 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* task) {
             pal = gDialogBoxPalette;
             work->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
-            FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
 #else
-            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
 #endif
             LoadObjPaletteBank(work->palette2->index, pal);
             SetObjTileSource(work->tiles4, gHandCursorTiles);
@@ -239,13 +239,13 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* task) {
             work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots);
             work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
             work->textPalette = LoadTextPalette(1);
-            work->choiceVisible = 1;
+            work->choiceVisible = TRUE;
             work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
             work->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
-            FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
 #else
-            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
 #endif
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoice);
         }
@@ -262,7 +262,7 @@ s32 UpdateSysmsgwinClose(SysMsgWinWork* work) {
     work->closeTimer += 1;
 
     if (work->closeTimer > 15) {
-        work->waitIconVisible = 0;
+        work->waitIconVisible = FALSE;
         return 0;
     }
 
@@ -294,9 +294,9 @@ u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* task) {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
         if (work->choice == 0) {
-            gMessageWindowAnswerYes = 1;
+            gMessageWindowAnswerYes = TRUE;
         } else {
-            gMessageWindowAnswerYes = 0;
+            gMessageWindowAnswerYes = FALSE;
         }
 
         work->unk_142 = 0;
@@ -319,7 +319,7 @@ void sysmsgwin_2(SysMsgWinWork* work) {
     case CARD_MESSAGE_MODE_SPRITE_WINDOW:
     case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         if (work->tiles2 != NULL) {
-            if (work->fallbackFrame != 0) {
+            if (work->fallbackFrame != FALSE) {
                 DrawSprite(work->frameX >> 8, work->frameY >> 8, gSysMsgWinFallbackFrames[0],
                            work->tiles2, work->palette4, NULL, 0, 10);
             } else {
@@ -397,7 +397,7 @@ void sysmsgwin_3(SysMsgWinWork* work) {
 
     FreeTextSlots(work->textSlots, 10);
     FreeTextSlots(work->textSlots2, 10);
-    gMessageWindowOpen = 0;
+    gMessageWindowOpen = FALSE;
     sActiveSysmsgwin = NULL;
 }
 
@@ -406,12 +406,12 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* task) {
     TextChar** nextText;
 #endif
 
-    if (work->keepOpen == 0) {
+    if (work->keepOpen == FALSE) {
         return 0;
     }
 
-    if (work->messagePending == 1) {
-        work->messagePending = 0;
+    if (work->messagePending == TRUE) {
+        work->messagePending = FALSE;
         work->messageDef = &gCardMessageDefs[work->args.messageId];
 #ifdef VERSION_JP
         work->charCount = LayoutCardMsgGlyphsPageSjis(
@@ -445,29 +445,29 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* task) {
 s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
     if (sActiveSysmsgwin != NULL) {
         sActiveSysmsgwin->args = *src;
-        sActiveSysmsgwin->messagePending = 1;
+        sActiveSysmsgwin->messagePending = TRUE;
 
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 CloseSysmsgwin() {
     if (sActiveSysmsgwin != NULL) {
-        sActiveSysmsgwin->keepOpen = 0;
-        return 1;
+        sActiveSysmsgwin->keepOpen = FALSE;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* args) {
     CpuFill32(0, work, sizeof(SysMsgWinWork));
     work->args = *args;
     work->messageDef = &gCardMessageDefs[work->args.messageId];
-    work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
-    FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
+    work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, FALSE);
+    FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, TRUE);
     work->unk_13C = 0;
     work->steps = 8;
     work->shownChars = 0;
@@ -485,12 +485,12 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* args) {
     work->palette3 = NULL;
     work->textPalette = NULL;
     work->unk_142 = 1;
-    work->waitIconVisible = 1;
-    work->choiceVisible = 0;
+    work->waitIconVisible = TRUE;
+    work->choiceVisible = FALSE;
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
-    work->messagePending = 0;
-    work->keepOpen = 1;
+    work->messagePending = FALSE;
+    work->keepOpen = TRUE;
 #ifdef VERSION_JP
     work->charCount = LayoutCardMsgGlyphsPageSjis(0x4000, 0x4000, (TextChar*)work->messageDef->text, &work->nextText);
 #else
@@ -545,8 +545,8 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* args) {
 
     InitTextSlots(work->textSlots, 10);
     InitTextSlots(work->textSlots2, 10);
-    gMessageWindowOpen = 1;
-    gMessageWindowAnswerYes = 0;
+    gMessageWindowOpen = TRUE;
+    gMessageWindowAnswerYes = FALSE;
     work->shownChars = work->charCount;
     sActiveSysmsgwin = work;
 }
@@ -594,7 +594,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
 
         work->tiles2 = LoadObjTiles(gDialogBoxTiles, 0xC00);
         work->palette4 = LoadObjPalette(gCard00Palette, 32);
-        FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
         break;
     }
 
@@ -612,9 +612,9 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* task) {
     pal = gDialogBoxPalette;
     work->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
-    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
 #else
-    FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
 #endif
     LoadObjPaletteBank(work->palette2->index, pal);
     SetObjTileSource(work->tiles4, gHandCursorTiles);
@@ -627,13 +627,13 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* task) {
     work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
     work->textPalette = LoadTextPalette(1);
-    work->choiceVisible = 1;
+    work->choiceVisible = TRUE;
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
     work->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
-    FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
 #else
-    FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
 #endif
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoiceInput);
     return 1;
@@ -647,7 +647,7 @@ s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* work) {
     work->closeTimer += 1;
 
     if (work->closeTimer > 15) {
-        work->waitIconVisible = 0;
+        work->waitIconVisible = FALSE;
         return 0;
     }
 
@@ -685,9 +685,9 @@ u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* task) {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
         if (work->choice == 0) {
-            gMessageWindowAnswerYes = 1;
+            gMessageWindowAnswerYes = TRUE;
         } else {
-            gMessageWindowAnswerYes = 0;
+            gMessageWindowAnswerYes = FALSE;
         }
 
         work->unk_142 = 0;
@@ -695,7 +695,7 @@ u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* task) {
         break;
     case B_BUTTON:
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gMessageWindowAnswerYes = 0;
+        gMessageWindowAnswerYes = FALSE;
         work->unk_142 = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoiceClose);
         break;
@@ -779,7 +779,7 @@ void sysmsgwinChoice_3(SysMsgWinWork* work) {
 
     FreeTextSlots(work->textSlots, 10);
     FreeTextSlots(work->textSlots2, 10);
-    gMessageWindowOpen = 0;
+    gMessageWindowOpen = FALSE;
     sActiveSysmsgwin = NULL;
 }
 

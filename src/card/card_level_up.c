@@ -91,7 +91,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->optionEnabled[2] = 1;
 
     if (gCardBattleState != NULL) {
-        gCardBattleState->levelUpShown = 1;
+        gCardBattleState->levelUpShown = TRUE;
     }
 
 #ifndef VERSION_EU
@@ -109,7 +109,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
     work->tilesPalettes[7] = LoadObjPalette(gLevelUpHeaderPalette, 32);
-    FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, 1);
+    FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, TRUE);
     work->tiles2 = LoadObjTiles(gLevelUpBarTiles, 0x3C0);
     TaskPoolInit(&work->pool, 10);
 
@@ -117,7 +117,7 @@ void Level_Up_0(LevelUpWork* work) {
         work->tiles4 = AllocObjTiles(0x500, NULL);
         work->palette5 = AllocObjPalette(32);
         UpdateAllocatedObjPalette(work->palette5, gSoraPalette);
-        FadeSetPaletteExcluded(work->palette5->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette5->index + 16, TRUE);
         WorldToScreen(&x, &y, gBtlWork->actor->x,
                       gBtlWork->actor->y,
                       gBtlWork->actor->z);
@@ -128,7 +128,7 @@ void Level_Up_0(LevelUpWork* work) {
         work->tiles4 = AllocObjTiles(0x800, NULL);
         work->palette5 = AllocObjPalette(32);
         UpdateAllocatedObjPalette(work->palette5, gRikuPalette);
-        FadeSetPaletteExcluded(work->palette5->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette5->index + 16, TRUE);
         WorldToScreen(&x, &y, gBtlWork->actor->x,
                       gBtlWork->actor->y,
                       gBtlWork->actor->z);
@@ -148,7 +148,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->gfx = AnimGetGfx(&work->anim2);
 
     if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE)) {
-        work->bossBattle = 0;
+        work->bossBattle = FALSE;
         gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
         gBg1Cnt &= ~BGCNT_256COLOR;
         SetBgSize(1, BGCNT_TXT256x256);
@@ -168,7 +168,7 @@ void Level_Up_0(LevelUpWork* work) {
         gBg2X = gBg3X;
         gBg2Y = gBg3Y;
     } else {
-        work->bossBattle = 1;
+        work->bossBattle = TRUE;
 
         switch (gBtlWork->battleId) {
         case BATTLE_URSULA:
@@ -227,7 +227,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->cursorY = sLevelUpCursorY[0];
     work->state = LEVEL_UP_STATE_SLIDE_IN;
     work->cursor = 0;
-    work->applied = 0;
+    work->applied = FALSE;
     LevelUpSplitDigits3(gGameState.progression.level, work->levelDigits);
     LevelUpSplitDigits3(gGameState.progression.maxHp, work->maxHpDigits);
     LevelUpSplitDigits4(gGameState.progression.cp, work->cpDigits);
@@ -400,10 +400,10 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                 }
             }
 
-            FadeSetPaletteExcluded(10, 1);
-            FadeSetPaletteExcluded(11, 1);
-            FadeSetPaletteExcluded(12, 1);
-            FadeSetPaletteExcluded(13, 1);
+            FadeSetPaletteExcluded(10, TRUE);
+            FadeSetPaletteExcluded(11, TRUE);
+            FadeSetPaletteExcluded(12, TRUE);
+            FadeSetPaletteExcluded(13, TRUE);
             work->loaded[1] = 1;
             work->timer = 0;
             return 1;
@@ -485,12 +485,12 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
             work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, 1);
-            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, TRUE);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, TRUE);
+            FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
             work->tiles = AllocObjTiles(0x3C0, NULL);
             work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
-            FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
             SetObjTileSource(work->tiles, gSmallHandCursorTiles);
             AnimInit(&work->anim, gSmallHandCursorAnims, gSmallHandCursorFrames);
             AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
@@ -710,8 +710,8 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                         work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, 32);
                     }
 
-                    FadeSetPaletteExcluded(work->palette->index + 16, 1);
-                    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+                    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
+                    FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
 
                     for (i = 0; i < 3; i++) {
                         if (work->optionEnabled[i] == 1) {
@@ -818,7 +818,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
         ReleaseObjPalette(work->palette3);
         work->tiles = AllocObjTiles(128, NULL);
         work->palette3 = LoadObjPalette(gLevelUpChosenCursorPalette, 32);
-        FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
         SetObjTileSource(work->tiles, gLevelUpChosenCursorTiles);
         AnimInit(&work->anim, gLevelUpChosenCursorAnims, gLevelUpChosenCursorFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -957,7 +957,7 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
             LevelUpSplitDigits4(gGameState.progression.cp, work->cpDigits);
             LevelUpSplitDigits3(gGameState.progression.dp, work->dpDigits);
             LevelUpSplitDigits2(gGameState.progression.ap, work->apDigits);
-            work->applied = 1;
+            work->applied = TRUE;
         }
     }
 
@@ -1513,12 +1513,12 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
             work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, 1);
-            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, TRUE);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, TRUE);
+            FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
             work->tiles = AllocObjTiles(0x3C0, NULL);
             work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
-            FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
             SetObjTileSource(work->tiles, gSmallHandCursorTiles);
             AnimInit(&work->anim, gSmallHandCursorAnims, gSmallHandCursorFrames);
             AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
@@ -1701,8 +1701,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
             work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, 32);
         }
 
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
-        FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
+        FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
 
         for (i = 0; i < 3; i++) {
             if (work->optionEnabled[i] == 1) {
@@ -1842,7 +1842,7 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
             work->state = LEVEL_UP_STATE_SLIDE_IN;
             work->effectShown = 0;
             work->timer = 0;
-            work->applied = 0;
+            work->applied = FALSE;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpNextSlideIn);
         }
     }
@@ -1857,10 +1857,10 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
 
 s32 IsLevelUpApUnlocked() {
     if (gGameState.progression.level >= sLevelUpApLevels[gGameState.progression.levelMilestone]) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 #ifdef VERSION_EU

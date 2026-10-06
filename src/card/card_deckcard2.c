@@ -58,9 +58,9 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
 
     if (work->args.cardId != CARD_ID_NONE) {
         if (!(work->args.cardId & CARD_FLAG_PREMIUM)) {
-            work->premium = 0;
+            work->premium = FALSE;
         } else {
-            work->premium = 1;
+            work->premium = TRUE;
         }
 
         work->cardDef = &gCardDefs[work->args.cardId & CARD_ID_MASK];
@@ -72,13 +72,13 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
         }
     }
 
-    work->done = 0;
+    work->done = FALSE;
     ListNodeInit(&work->node, work->args.pool, work);
     ListPoolAppend(&work->node, work->args.pool);
 }
 
 u8 DeckCard2_1(DeckCard2Work* work) {
-    if (work->done == 1) {
+    if (work->done == TRUE) {
         return 0;
     }
 
@@ -176,22 +176,22 @@ u8 DeckCard2IsOnScreen(DeckCard2Work* work) {
     y = work->y >> 8;
 
     if (x < 0) {
-        return 0;
+        return FALSE;
     }
 
     if (x > DISPLAY_WIDTH) {
-        return 0;
+        return FALSE;
     }
 
     if (y < 0) {
-        return 0;
+        return FALSE;
     }
 
     if (y > DISPLAY_HEIGHT) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 TaskDesc gTaskDescDeckCard2 = {

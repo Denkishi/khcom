@@ -59,7 +59,7 @@ void Mode_Deck_1() {
         } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
             ModeRequest(&gModeSioBtlOption, 1);
         } else {
-            ReturnToMap(0);
+            ReturnToMap(FALSE);
         }
     }
 
@@ -69,7 +69,7 @@ void Mode_Deck_1() {
         } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
             ModeRequest(&gModeSioBtlOption, 1);
         } else {
-            ReturnToMap(1);
+            ReturnToMap(TRUE);
         }
     }
 }

@@ -201,24 +201,24 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
         state = gCardBattleState;
 
         if (state->soraHcEffect == HC_EFFECT_NONE) {
-            state->soraHcEffectReplaced = 0;
+            state->soraHcEffectReplaced = FALSE;
             return 0;
         }
 
         if (state->soraHcEffect != work->effect) {
-            state->soraHcEffectReplaced = 0;
+            state->soraHcEffectReplaced = FALSE;
             return 0;
         }
 
-        if (state->soraHcEffectReplaced == 1) {
-            state->soraHcEffectReplaced = 0;
+        if (state->soraHcEffectReplaced == TRUE) {
+            state->soraHcEffectReplaced = FALSE;
             return 0;
         }
 
         if ((s16)gBtlWork->hcEffectCount <= 0) {
             state->soraHcEffect = HC_EFFECT_NONE;
             gBtlWork->hcEffect = HC_EFFECT_NONE;
-            state->soraHcEffectReplaced = 0;
+            state->soraHcEffectReplaced = FALSE;
             return 0;
         }
 
@@ -230,24 +230,24 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
         state = gCardBattleState;
 
         if (state->rikuHcEffect == HC_EFFECT_NONE) {
-            state->rikuHcEffectReplaced = 0;
+            state->rikuHcEffectReplaced = FALSE;
             return 0;
         }
 
         if (state->rikuHcEffect != work->effect) {
-            state->rikuHcEffectReplaced = 0;
+            state->rikuHcEffectReplaced = FALSE;
             return 0;
         }
 
-        if (state->rikuHcEffectReplaced == 1) {
-            state->rikuHcEffectReplaced = 0;
+        if (state->rikuHcEffectReplaced == TRUE) {
+            state->rikuHcEffectReplaced = FALSE;
             return 0;
         }
 
         if ((s16)gRikuBtlWork->hcEffectCount <= 0) {
             state->rikuHcEffect = HC_EFFECT_NONE;
             gRikuBtlWork->hcEffect = HC_EFFECT_NONE;
-            state->rikuHcEffectReplaced = 0;
+            state->rikuHcEffectReplaced = FALSE;
             return 0;
         }
 
@@ -272,15 +272,15 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
 u8 IsHcEffectNameShuffling(HcEffectNameWork* work) {
     if (work->side != 1) {
         if (work->side != 2) {
-            return 0;
+            return FALSE;
         }
     }
 
     if (work->effect != 37) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* task) {
@@ -292,7 +292,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* task) {
             work->effect = gCardBattleState->soraHcEffect;
 
             if (gCardBattleState->soraHcEffect == HC_EFFECT_NONE) {
-                gCardBattleState->soraHcEffectReplaced = 0;
+                gCardBattleState->soraHcEffectReplaced = FALSE;
                 return 0;
             }
 
@@ -324,7 +324,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* task) {
             work->effect = gCardBattleState->rikuHcEffect;
 
             if (gCardBattleState->rikuHcEffect == HC_EFFECT_NONE) {
-                gCardBattleState->soraHcEffectReplaced = 0;
+                gCardBattleState->soraHcEffectReplaced = FALSE;
                 return 0;
             }
 

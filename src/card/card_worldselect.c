@@ -110,13 +110,13 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     work->status = status;
     *status = 0;
     work->messageTimer = 0;
-    work->cancelled = 0;
+    work->cancelled = FALSE;
     work->pageScroll = MAP_SELECT_PAGE_SCROLL_NONE;
     work->card2 = NULL;
-    sMapCardDelivered = 0;
+    sMapCardDelivered = FALSE;
     work->valueColumn = 0;
     work->valueRow = 0;
-    work->scrollBarVisible = 0;
+    work->scrollBarVisible = FALSE;
     work->isEventDoor = SelectCurrentEventDoor();
     n = GetCurrentRoomCardValue() + 1;
     work->requiredValue = n;
@@ -142,12 +142,12 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
 
         work->tiles2 = LoadObjTiles(gCardBacks[4].tiles2, 0x300);
         work->palette = LoadObjPalette(gDoorCardPalette, 32);
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     } else {
         work->tiles4 = NULL;
         work->tiles2 = NULL;
         work->palette = LoadObjPalette(gDoorCardPalette, 32);
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     }
 
     gMapCardUiResources.tiles = AllocObjTiles(0x280, NULL);
@@ -228,15 +228,15 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     }
 
     work->nameY = 0x19100;
-    FadeSetPaletteExcluded(work->palette3->index + 16, 1);
-    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
-    FadeSetPaletteExcluded(15, 1);
-    FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
+    FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
+    FadeSetPaletteExcluded(15, TRUE);
+    FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
     work->unk_1E4 = NULL;
     work->mosaicX = 9;
     work->mosaicY = 9;
     work->mosaicTimer = 0;
-    work->inTutorial = 0;
+    work->inTutorial = FALSE;
 }
 
 u8 MapSelect_1(MapSelectWork* work, void* task) {
@@ -270,9 +270,9 @@ u8 MapSelect_1(MapSelectWork* work, void* task) {
 #endif
     LoadPalette(gMapSelectBgPalettes, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
     LoadPalette(&gMapSelectBgPalettes[0x40], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 64);
-    FadeSetPaletteExcluded(12, 1);
-    FadeSetPaletteExcluded(14, 1);
-    FadeSetPaletteExcluded(15, 1);
+    FadeSetPaletteExcluded(12, TRUE);
+    FadeSetPaletteExcluded(14, TRUE);
+    FadeSetPaletteExcluded(15, TRUE);
     work->messageTimer++;
     DisableBg(1);
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectSetup);
@@ -287,7 +287,7 @@ u8 UpdateMapSelectSetup(MapSelectWork* work, void* task) {
     ScrollBgMapTo(1, 0, 0);
     EnableBg(1);
 
-    if (work->isEventDoor == 1) {
+    if (work->isEventDoor == TRUE) {
         work->remainingKeys = CountRemainingEventKeys();
         work->nextEventKey = GetEventKey(0);
         n = work->remainingKeys;
@@ -323,11 +323,11 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task) {
             work->slideSteps--;
         } else {
             if ((gGameState.progression.tutorialFlags & 8) == 0) {
-                work->inTutorial = 1;
+                work->inTutorial = TRUE;
                 ResetMessageWindowFlags();
                 work->tutorialMessage = CARD_MSG_MAP_SELECT_TUTORIAL_0;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectTutorial);
-            } else if ((gGameState.progression.tutorialFlags & 0x40) == 0 && work->isEventDoor == 1) {
+            } else if ((gGameState.progression.tutorialFlags & 0x40) == 0 && work->isEventDoor == TRUE) {
                 ResetMessageWindowFlags();
                 work->tutorialMessage = CARD_MSG_MAP_SELECT_EVENT_DOOR_TUTORIAL_0;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectEventDoorTutorial);
@@ -357,7 +357,7 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task) {
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
-                work->scrollBarVisible = 1;
+                work->scrollBarVisible = TRUE;
             }
         }
     }
@@ -414,7 +414,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* task) {
 
         work->steps = 4;
         work->steps2 = 4;
-        work->scrollBarVisible = 0;
+        work->scrollBarVisible = FALSE;
     }
 
     SetObjMosaicSize(work->mosaicX, work->mosaicY);
@@ -485,7 +485,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
 
         if (n == 1) {
             if (gMapCardCounts[work->card->args.baseCardId + sel] != 0) {
-                if (work->isEventDoor == 1) {
+                if (work->isEventDoor == TRUE) {
                     m4aSongNumStart(SONG_SYS_KETEI2);
 
                     if (CountMapCardsOfKind(work->card->args.baseCardId) == 0) {
@@ -495,7 +495,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
 
                     RemoveMapCard(work->card->args.baseCardId + sel);
 
-                    if ((u8)PayEventKey((struct MapCardAttributes*)&gMapCardDefs[work->card->args.baseCardId + sel].kind) == 1) {
+                    if ((u8)PayEventKey((struct MapCardAttributes*)&gMapCardDefs[work->card->args.baseCardId + sel].kind) == TRUE) {
                         work->remainingKeys = CountRemainingEventKeys();
                         work->eventKey->paidCount++;
                         work->eventKey->slideSteps = 8;
@@ -618,7 +618,7 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* task) {
         work->y2 = work->savedCursorY << 8;
         work->x = work->card->x;
         work->y = work->card->y;
-        work->scrollBarVisible = 1;
+        work->scrollBarVisible = TRUE;
     }
 
     SetObjMosaicSize(work->mosaicX, work->mosaicY);
@@ -670,7 +670,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
                         RemoveMapCard(work->card->args.baseCardId + 1);
 
-                        if ((u8)PayEventKey((struct MapCardAttributes*)&gMapCardDefs[work->card->args.baseCardId + 1].kind) == 1) {
+                        if ((u8)PayEventKey((struct MapCardAttributes*)&gMapCardDefs[work->card->args.baseCardId + 1].kind) == TRUE) {
                             work->remainingKeys = CountRemainingEventKeys();
                             work->eventKey->paidCount++;
                             work->eventKey->slideSteps = 8;
@@ -727,7 +727,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
                 node->flags &= ~MAPCARD_FLAG_RAISED;
             }
 
-            work->cancelled = 1;
+            work->cancelled = TRUE;
             work->slideSteps = 16;
             work->barSteps = 16;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectClose);
@@ -782,7 +782,7 @@ u8 UpdateMapSelectClose(MapSelectWork* work) {
     ApproachValue(&work->y, 0x17A00, work->slideSteps);
     ApproachValue(&work->nameY, 0x19100, work->slideSteps);
     ScrollBgMapTo(1, 0, (u32)work->bgScrollY >> 8);
-    work->scrollBarVisible = 0;
+    work->scrollBarVisible = FALSE;
 
     if (work->mosaicX <= 8) {
         work->mosaicX++;
@@ -821,7 +821,7 @@ void MapSelect_2(MapSelectWork* work) {
                    work->tiles3, work->palette3, NULL, 0, 80);
     }
 
-    if (work->isEventDoor == 1) {
+    if (work->isEventDoor == TRUE) {
         switch (gMapCardDefs[work->card->args.baseCardId].backIndex) {
         case 0:
             break;
@@ -872,10 +872,10 @@ void MapSelect_3(MapSelectWork* work) {
         EwramFree(work->kindEntries);
     }
 
-    FadeSetPaletteExcluded(work->palette3->index + 16, 0);
-    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(15, 0);
-    FadeSetPaletteExcluded(work->palette4->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette3->index + 16, FALSE);
+    FadeSetPaletteExcluded(work->palette2->index + 16, FALSE);
+    FadeSetPaletteExcluded(15, FALSE);
+    FadeSetPaletteExcluded(work->palette4->index + 16, FALSE);
     ReleaseObjTiles(work->tiles5);
     ReleaseObjPalette(work->palette3);
     ReleaseObjTiles(work->tiles);
@@ -1313,7 +1313,7 @@ s32 AddMapCard(u16 cardId) {
                 break;
             }
 
-            return 1;
+            return TRUE;
         }
     } else {
         if (gMapCardDefs[cardId].kind > MAP_CARD_BLACK_ROOM) {
@@ -1334,20 +1334,20 @@ s32 AddMapCard(u16 cardId) {
                 break;
             }
 
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 RemoveMapCard(u16 cardId) {
     if (gMapCardCounts[cardId] != 0) {
         gMapCardCounts[cardId]--;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 AddRandomMapCard() {
@@ -1436,7 +1436,7 @@ u8 IsMapCardDelivered() {
 }
 
 void SetMapCardDelivered() {
-    sMapCardDelivered = 1;
+    sMapCardDelivered = TRUE;
 }
 
 void SetSelectedMapCard(void* card) {
@@ -1449,7 +1449,7 @@ void* GetSelectedMapCard() {
 
 void ResetSelectedMapCard() {
     sSelectedMapCard = NULL;
-    sMapCardDelivered = 0;
+    sMapCardDelivered = FALSE;
 }
 
 const void* GetRoomName(u16 kind) {
@@ -1462,10 +1462,10 @@ const void* GetRoomName(u16 kind) {
 
 u8 HasMapCard(u16 cardId) {
     if (gMapCardCounts[cardId] != 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void LoadMapSelectKindPalette(u16 baseCardId, MapSelectWork* work) {
@@ -1623,7 +1623,7 @@ void HandleMapSelectValueCursor(MapSelectWork* work) {
 
     prevColumn = work->valueColumn;
     prevRow = work->valueRow;
-    pastEnd = 0;
+    pastEnd = FALSE;
 
     switch (GetKeysRepeat() & DPAD_ANY) {
     case DPAD_RIGHT:
@@ -1656,15 +1656,15 @@ void HandleMapSelectValueCursor(MapSelectWork* work) {
 
         while (work->valueCounts[work->valueColumn + work->valueRow * 5] == 0) {
             if (work->valueColumn > 3) {
-                pastEnd = 1;
+                pastEnd = TRUE;
                 break;
             }
 
             work->valueColumn++;
-            pastEnd = 0;
+            pastEnd = FALSE;
         }
 
-        if (pastEnd == 1) {
+        if (pastEnd == TRUE) {
             work->valueColumn = FindLastMapSelectValueInRow(work);
 
             if (work->valueColumn == -1) {
@@ -1681,15 +1681,15 @@ void HandleMapSelectValueCursor(MapSelectWork* work) {
 
         while (work->valueCounts[work->valueColumn + work->valueRow * 5] == 0) {
             if (work->valueColumn > 3) {
-                pastEnd = 1;
+                pastEnd = TRUE;
                 break;
             }
 
             work->valueColumn++;
-            pastEnd = 0;
+            pastEnd = FALSE;
         }
 
-        if (pastEnd == 1) {
+        if (pastEnd == TRUE) {
             work->valueColumn = FindLastMapSelectValueInRow(work);
 
             if (work->valueColumn == -1) {
@@ -1768,7 +1768,7 @@ u8 UpdateMapSelectTutorial(MapSelectWork* work, void* task) {
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
-                work->scrollBarVisible = 1;
+                work->scrollBarVisible = TRUE;
                 work->tutorialMessage = CARD_MSG_MAP_SELECT_VALUE_TUTORIAL_0;
                 return 1;
             }
@@ -1853,7 +1853,7 @@ u8 UpdateMapSelectEventDoorTutorial(MapSelectWork* work, void* task) {
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
-                work->scrollBarVisible = 1;
+                work->scrollBarVisible = TRUE;
                 return 1;
             }
         } else {
@@ -2108,7 +2108,7 @@ u8 UpdateMapcardFlyToDoor(MapcardWork* work, void* task) {
     work->speed -= work->deceleration;
     work->deceleration += 2;
 
-    if (work->args.parent->isEventDoor != 1) {
+    if (work->args.parent->isEventDoor != TRUE) {
         if (distance <= 0x7FF) {
             SetMapCardDelivered();
             flags = work->flags | MAPCARD_FLAG_DELIVERED;
@@ -2181,13 +2181,13 @@ u8 IsMapcardOnScreen(MapcardWork* work) {
         if (work->x <= 0x10000) {
             if (work->y >= -5120) {
                 if (work->y <= 0xC000) {
-                    return 1;
+                    return TRUE;
                 }
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void UpdateMapcardGfx(MapcardWork* work) {
@@ -2204,8 +2204,8 @@ void UpdateMapcardGfx(MapcardWork* work) {
             work->tiles3 = LoadObjTiles(back->tiles, back->tilesSize);
             work->palette2 = LoadObjPalette(back->palette, 32);
             work->tiles = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
-            FadeSetPaletteExcluded(work->palette->index + 16, 1);
-            FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
+            FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
             flags = work->flags | MAPCARD_FLAG_GFX_LOADED;
             work->flags = flags;
         }
@@ -2249,10 +2249,10 @@ u8 func_08094E4C(MapcardWork* work) {
 
     if (work->steps != 0) {
         work->steps--;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 MapcardWork* CreateMapCard(MapcardArgs* args, TaskPool* pool) {

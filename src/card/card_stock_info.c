@@ -1872,7 +1872,7 @@ void StockInfo_0(StockInfoWork* work, u8* active) {
     work->palette = LoadObjPalette(gStockInfoWindowPalette, 32);
 
     for (i = 16; i < 32; i++) {
-        FadeSetPaletteExcluded(i, 1);
+        FadeSetPaletteExcluded(i, TRUE);
     }
 
     work->x = 0x4C00;
@@ -1964,10 +1964,10 @@ u8 GetCardHelpTextCount(u16 helpIndex) {
 
 u8 IsLevelUpStockUnlocked() {
     if (gGameState.progression.level >= sLevelUpStockLevels[gGameState.progression.levelMilestone]) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 const CardHelpDef* gCardHelpDefs[] = {

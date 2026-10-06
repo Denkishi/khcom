@@ -48,7 +48,7 @@ u8 gMessageWindowAnswerYes EWRAM_COMMON(4);
 
 static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* args) {
     CpuFill32(0, work, sizeof(CardMsgWinWork));
-    work->glyphPaletteIndex = InitCardMsgGlyphSprites(0, 0);
+    work->glyphPaletteIndex = InitCardMsgGlyphSprites(0, FALSE);
     work->args = *args;
     work->messageDef = &gCardMessageDefs[work->args.messageId];
     work->tiles3 = NULL;
@@ -79,28 +79,28 @@ static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* args) {
     work->cursorSteps = 0;
     work->textSlotCounts[0] = 0;
     work->textSlotCounts[1] = 0;
-    work->waitIconVisible = 1;
-    work->textVisible = 0;
+    work->waitIconVisible = TRUE;
+    work->textVisible = FALSE;
     work->unk_14A[0] = 0;
     work->unk_14A[1] = 0;
     work->unk_14C = 0;
-    work->faceFlip = 0;
-    work->messagePending = 0;
-    work->keepOpen = 1;
+    work->faceFlip = FALSE;
+    work->messagePending = FALSE;
+    work->keepOpen = TRUE;
 
     switch (work->messageDef->positionIndex) {
     case 0:
     case 1:
-        work->faceFlip = 1;
+        work->faceFlip = TRUE;
         break;
     case 2:
     case 3:
-        work->faceFlip = 0;
+        work->faceFlip = FALSE;
         break;
     }
 
-    gMessageWindowOpen = 1;
-    gMessageWindowAnswerYes = 0;
+    gMessageWindowOpen = TRUE;
+    gMessageWindowAnswerYes = FALSE;
     SetBgScroll(work->args.bg, 0, 0);
 
     switch (work->args.mode) {
@@ -188,7 +188,7 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* work, void* task) {
     CardMessageDef* messageDef;
     const MsgFaceAnim* faceAnims;
 
-    work->textVisible = 1;
+    work->textVisible = TRUE;
     messageDef = work->messageDef;
 
     if (messageDef->portraitId != PORTRAIT_NONE) {
@@ -283,7 +283,7 @@ static void msgwin_3(CardMsgWinWork* work) {
 
     FreeTextSlots(work->textSlots, 10);
     FreeTextSlots(work->textSlots2, 10);
-    gMessageWindowOpen = 0;
+    gMessageWindowOpen = FALSE;
     sActiveCardMsgwin = NULL;
 }
 
@@ -317,7 +317,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* task) {
                 work->gfx2 = AnimGetGfx(&work->anim2);
             }
 
-            work->waitIconVisible = 1;
+            work->waitIconVisible = TRUE;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinWaitInput);
         }
 
@@ -355,7 +355,7 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* task) {
                 AnimStart(&work->anim, 1, faceAnims[work->messageDef->expressionId].animFlags);
             }
 
-            work->waitIconVisible = 0;
+            work->waitIconVisible = FALSE;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinTyping);
         } else if (!(work->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
             AnimStart(&work->anim2, 3, ANIM_FLAG_LOOP);
@@ -399,8 +399,8 @@ u8 UpdateCardMsgwinClose(CardMsgWinWork* work) {
     work->closeTimer++;
 
     if (work->closeTimer > 15) {
-        work->textVisible = 0;
-        work->waitIconVisible = 0;
+        work->textVisible = FALSE;
+        work->waitIconVisible = FALSE;
         ApproachValue(&work->x, gMsgwinClosedScrollX[work->messageDef->positionIndex], work->steps);
         ApproachValue(&work->faceX, gMsgfaceHiddenX[work->messageDef->positionIndex], work->steps);
         ScrollBgMapTo(work->args.bg, work->x, 0);
@@ -430,9 +430,9 @@ u8 UpdateCardMsgwinChoice(CardMsgWinWork* work, void* task) {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
         if (work->choice == 0) {
-            gMessageWindowAnswerYes = 1;
+            gMessageWindowAnswerYes = TRUE;
         } else {
-            gMessageWindowAnswerYes = 0;
+            gMessageWindowAnswerYes = FALSE;
         }
 
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinClose);
@@ -482,8 +482,8 @@ u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* task) {
 
     if (!work->keepOpen) {
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinClose);
-    } else if (work->messagePending == 1) {
-        work->messagePending = 0;
+    } else if (work->messagePending == TRUE) {
+        work->messagePending = FALSE;
         work->messageDef = &gCardMessageDefs[work->args.messageId];
 #ifdef VERSION_JP
         work->charCount = LayoutCardMsgGlyphsPageSjis(gMsgwinTextX[work->messageDef->positionIndex],
@@ -511,12 +511,12 @@ u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* task) {
 s32 ReplaceCardMsgwinMessage(CardMessageArgs* src) {
     if (sActiveCardMsgwin != NULL) {
         sActiveCardMsgwin->args = *src;
-        sActiveCardMsgwin->messagePending = 1;
+        sActiveCardMsgwin->messagePending = TRUE;
 
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void CreateCardMessageTask(void* pool, u32 bg, u16 message) {
@@ -580,8 +580,8 @@ void ShowPersistentCardMessage(void* pool, u32 bg, u16 message) {
 }
 
 void ResetMessageWindowFlags() {
-    gMessageWindowOpen = 0;
-    gMessageWindowAnswerYes = 0;
+    gMessageWindowOpen = FALSE;
+    gMessageWindowAnswerYes = FALSE;
 }
 
 u8 IsMessageWindowOpen() {
@@ -594,8 +594,8 @@ u8 IsMessageWindowAnswerYes() {
 
 u8 CloseMessageWindow() {
     if (sActiveCardMsgwin != NULL) {
-        sActiveCardMsgwin->keepOpen = 0;
-        return 1;
+        sActiveCardMsgwin->keepOpen = FALSE;
+        return TRUE;
     }
 
     return CloseSysmsgwin();

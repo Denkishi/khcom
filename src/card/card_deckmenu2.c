@@ -5038,64 +5038,64 @@ void DrawDeckCpCost(u8 mode) {
     RequestDma3Copy(&gDeckCountDigitTiles[(cpDigits[3] + 1) * 32], base + 0x180, 32);
 }
 #ifdef VERSION_EU
-#define CARD_SLOT_OFFSET(slot, fixed) ((fixed) * 128)
+#define FILTER_TAB_OFFSET(mode, euBlock) ((euBlock) * 128)
 #else
-#define CARD_SLOT_OFFSET(slot, fixed) ((slot) * 128)
+#define FILTER_TAB_OFFSET(mode, euBlock) ((mode) * 128)
 #endif
-void DrawDeckFilterTab(u8 kind, u8 slot) {
+void DrawDeckFilterTab(u8 categoryFilter, u8 mode) {
     u8* dst;
 
     dst = (u8*)GetBgScreenBase(3) + 0x80;
 
-    switch (kind) {
+    switch (categoryFilter) {
     case 0:
-        RequestDma3Copy(gDeckFilterTabMap + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + FILTER_TAB_OFFSET(mode, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x20 + FILTER_TAB_OFFSET(mode, 0), dst + 0x40, 20);
         break;
     case 1:
-        RequestDma3Copy(gDeckFilterTabMap + 0xA + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + FILTER_TAB_OFFSET(mode, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + FILTER_TAB_OFFSET(mode, 0), dst + 0x40, 20);
         break;
     case 2:
-        RequestDma3Copy(gDeckFilterTabMap + 0x14 + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + FILTER_TAB_OFFSET(mode, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + FILTER_TAB_OFFSET(mode, 0), dst + 0x40, 20);
         break;
     case 3:
-        RequestDma3Copy(gDeckFilterTabMap + 0x40 + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + FILTER_TAB_OFFSET(mode, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + FILTER_TAB_OFFSET(mode, 0), dst + 0x40, 20);
         break;
     case 4:
-        RequestDma3Copy(gDeckFilterTabMap + 0x4A + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + FILTER_TAB_OFFSET(mode, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + FILTER_TAB_OFFSET(mode, 0), dst + 0x40, 20);
         break;
     }
 }
 
-void DrawCollectionFilterTab(u8 kind, u8 slot) {
+void DrawCollectionFilterTab(u8 categoryFilter, u8 mode) {
     u8* dst;
 
     dst = (u8*)GetBgScreenBase(3) + 0xA8;
 
-    switch (kind) {
+    switch (categoryFilter) {
     case 5:
-        RequestDma3Copy(gDeckFilterTabMap + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + FILTER_TAB_OFFSET(mode, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x20 + FILTER_TAB_OFFSET(mode, 1), dst + 0x40, 20);
         break;
     case 4:
-        RequestDma3Copy(gDeckFilterTabMap + 0xA + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + FILTER_TAB_OFFSET(mode, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + FILTER_TAB_OFFSET(mode, 1), dst + 0x40, 20);
         break;
     case 3:
-        RequestDma3Copy(gDeckFilterTabMap + 0x14 + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + FILTER_TAB_OFFSET(mode, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + FILTER_TAB_OFFSET(mode, 1), dst + 0x40, 20);
         break;
     case 2:
-        RequestDma3Copy(gDeckFilterTabMap + 0x40 + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + FILTER_TAB_OFFSET(mode, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + FILTER_TAB_OFFSET(mode, 1), dst + 0x40, 20);
         break;
     case 1:
-        RequestDma3Copy(gDeckFilterTabMap + 0x4A + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + FILTER_TAB_OFFSET(mode, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + FILTER_TAB_OFFSET(mode, 1), dst + 0x40, 20);
         break;
     }
 }

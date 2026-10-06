@@ -1416,31 +1416,31 @@ void DrawDeckExchangeDeckCpCost(u8 kind) {
     RequestDma3Copy(&gDeckCountDigitTiles[(cpDigits[2] + 1) * 32], base + 0x140, 32);
 }
 
-void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot) {
+void DrawDeckExchangeCollectionFilterTab(u8 categoryFilter, u8 mode) {
     u8* dst;
 
     dst = (u8*)GetBgScreenBase(3) + 0xA8;
 
-    switch (kind) {
+    switch (categoryFilter) {
     case 5:
-        RequestDma3Copy(gDeckFilterTabMap + slot * 128, dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + mode * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x20 + mode * 128, dst + 0x40, 20);
         break;
     case 4:
-        RequestDma3Copy(gDeckFilterTabMap + 0xA + slot * 128, dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + mode * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + mode * 128, dst + 0x40, 20);
         break;
     case 3:
-        RequestDma3Copy(gDeckFilterTabMap + 0x14 + slot * 128, dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + mode * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + mode * 128, dst + 0x40, 20);
         break;
     case 2:
-        RequestDma3Copy(gDeckFilterTabMap + 0x40 + slot * 128, dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + mode * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + mode * 128, dst + 0x40, 20);
         break;
     case 1:
-        RequestDma3Copy(gDeckFilterTabMap + 0x4A + slot * 128, dst, 20);
-        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + mode * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + mode * 128, dst + 0x40, 20);
         break;
     }
 }

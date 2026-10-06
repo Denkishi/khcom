@@ -535,6 +535,27 @@ u8 SioHasError() {
     return 0;
 }
 
+#ifdef VERSION_JP
+#define SIO_CONNECT_ID 0xC0F0
+#else
+#ifdef VERSION_EU
+#define SIO_CONNECT_ID 0xC2F0
+#else
+#define SIO_CONNECT_ID 0xC1F0
+#endif
+#endif
+
+enum SioProtocolCommand {
+    SIO_CMD_FILLER = 0xDDDD,
+    SIO_CMD_CONNECT_REQUEST = 0xFEFE,
+    SIO_CMD_CONNECT_CANCEL = 0xAFAF,
+    SIO_CMD_CONNECT_ACCEPT = 0xECEC,
+    SIO_CMD_SYNC_CONFIRM = 0xDF89,
+    SIO_CMD_EXCHANGE_REQUEST = 0x1BFE,
+    SIO_CMD_EXCHANGE_ACCEPT = 0xC5A0,
+    SIO_CMD_AUTO_CONNECT_SYNC = 0x2811
+};
+
 enum SioAutoConnectState {
     SIO_AUTO_CONNECT_STATE_CONNECT,
     SIO_AUTO_CONNECT_STATE_START_LINK,
@@ -544,7 +565,7 @@ enum SioAutoConnectState {
 
 void SioAutoConnectStart() {
     SioReset();
-    SioConnectInit(SioAutoConnectOnConnect, NULL, 0);
+    SioConnectInit(SioAutoConnectOnConnect, NULL, SIO_CONNECT_MODE_BATTLE);
     gSioAutoConnectState = SIO_AUTO_CONNECT_STATE_CONNECT;
     gSioAutoConnectTimer = 0;
 }
@@ -570,9 +591,9 @@ u8 SioAutoConnectUpdate() {
         gSioAutoConnectTimer++;
 
         if (gSioAutoConnectTimer > 4) {
-            gSioSendFrame[1] = 0x2811;
+            gSioSendFrame[1] = SIO_CMD_AUTO_CONNECT_SYNC;
 
-            if (gSioRecvFrame[1][0] == 0x2811 && gSioRecvFrame[1][1] == gSioRecvFrame[1][0]) {
+            if (gSioRecvFrame[1][0] == SIO_CMD_AUTO_CONNECT_SYNC && gSioRecvFrame[1][1] == gSioRecvFrame[1][0]) {
                 gSioAutoConnectTimer = 0;
                 gSioAutoConnectState++;
             }
@@ -591,23 +612,15 @@ void SioAutoConnectOnConnect() {
 }
 
 void SioConnectInit(void (*onConnect)(), void (*onCancel)(), u8 mode) {
-#ifdef VERSION_JP
-    gSioConnectId = (mode & 0xF) | 0xC0F0;
-#else
-#ifdef VERSION_EU
-    gSioConnectId = (mode & 0xF) | 0xC2F0;
-#else
-    gSioConnectId = (mode & 0xF) | 0xC1F0;
-#endif
-#endif
+    gSioConnectId = (mode & 0xF) | SIO_CONNECT_ID;
     gSioConnectAccepted = 0;
     gSioConnected = 0;
     gSioConnectRetries = 0;
     gSioConnectCallback = onConnect;
     gSioCancelCallback = onCancel;
     gSioCancelTimer = 0;
-    gSioSendFrame[0] = 0xDDDD;
-    gSioSendFrame[1] = 0xDDDD;
+    gSioSendFrame[0] = SIO_CMD_FILLER;
+    gSioSendFrame[1] = SIO_CMD_FILLER;
 }
 
 s32 SioConnectSend() {
@@ -618,11 +631,11 @@ s32 SioConnectSend() {
     if (!gSioConnected) {
         if (!gSioConnectAccepted) {
             if (GetKeysPressed() & A_BUTTON) {
-                gSioSendFrame[0] = 0xFEFE;
+                gSioSendFrame[0] = SIO_CMD_CONNECT_REQUEST;
                 send = gSioSendFrame;
                 param = &gSioConnectId;
             } else if (GetKeysPressed() & B_BUTTON) {
-                gSioSendFrame[0] = 0xAFAF;
+                gSioSendFrame[0] = SIO_CMD_CONNECT_CANCEL;
                 send = gSioSendFrame;
                 param = &gSioConnectId;
             } else {
@@ -636,7 +649,7 @@ s32 SioConnectSend() {
 
             send[1] = *param;
         } else {
-            gSioSendFrame[0] = 0xECEC;
+            gSioSendFrame[0] = SIO_CMD_CONNECT_ACCEPT;
         }
     } else {
         for (i = 0; i < 4; i++) {
@@ -653,12 +666,12 @@ s32 SioConnectRecv() {
 
     if (!gSioConnected) {
         if (!gSioConnectAccepted) {
-            if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
+            if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_CONNECT_REQUEST) {
                 if (gSioRecvFrame[1][0] == gSioConnectId && gSioRecvFrame[1][1] == gSioRecvFrame[1][0]) {
                     gSioConnectAccepted = 1;
                 }
             } else {
-                cancelWord = 0xAFAF;
+                cancelWord = SIO_CMD_CONNECT_CANCEL;
 
                 if (gSioRecvFrame[0][0] == cancelWord || gSioRecvFrame[0][1] == cancelWord) {
                     SioShutdown();
@@ -671,7 +684,7 @@ s32 SioConnectRecv() {
                     }
                 }
             }
-        } else if (gSioRecvFrame[0][0] == 0xECEC) {
+        } else if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT) {
             gSioConnected = 1;
 
             if (gSioConnectCallback != NULL) {
@@ -694,9 +707,9 @@ s32 SioConnectSendAuto() {
 
     if (!gSioConnected) {
         if (!gSioConnectAccepted) {
-            gSioSendFrame[0] = 0xFEFE;
+            gSioSendFrame[0] = SIO_CMD_CONNECT_REQUEST;
         } else {
-            gSioSendFrame[0] = 0xECEC;
+            gSioSendFrame[0] = SIO_CMD_CONNECT_ACCEPT;
         }
     } else {
         for (i = 0; i < 4; i++) {
@@ -710,10 +723,10 @@ s32 SioConnectSendAuto() {
 s32 SioConnectRecvAuto() {
     if (!gSioConnected) {
         if (!gSioConnectAccepted) {
-            if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
+            if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_CONNECT_REQUEST) {
                 gSioConnectAccepted = 1;
             }
-        } else if (gSioRecvFrame[0][0] == 0xECEC) {
+        } else if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT) {
             gSioConnected = 1;
 
             if (gSioConnectCallback != NULL) {
@@ -756,7 +769,7 @@ void SioCommandClearRecv() {
 }
 
 s32 SioCommandSend() {
-    gSioCommandSend[0] = 0xACD;
+    gSioCommandSend[0] = SIO_CMD_DATA;
     gSioSendFrame[0] = gSioCommandSend[0];
     gSioSendFrame[1] = gSioCommandSend[1];
     gSioSendFrame[2] = gSioCommandSend[2];
@@ -766,14 +779,14 @@ s32 SioCommandSend() {
 }
 
 s32 SioCommandRecv() {
-    if (gSioRecvFrame[0][0] == 0xACD) {
+    if (gSioRecvFrame[0][0] == SIO_CMD_DATA) {
         gSioCommandRecv[0][0] = gSioRecvFrame[0][0];
         gSioCommandRecv[1][0] = gSioRecvFrame[1][0];
         gSioCommandRecv[2][0] = gSioRecvFrame[2][0];
         gSioCommandRecv[3][0] = gSioRecvFrame[3][0];
     }
 
-    if (gSioRecvFrame[0][1] == 0xACD) {
+    if (gSioRecvFrame[0][1] == SIO_CMD_DATA) {
         gSioCommandRecv[0][1] = gSioRecvFrame[0][1];
         gSioCommandRecv[1][1] = gSioRecvFrame[1][1];
         gSioCommandRecv[2][1] = gSioRecvFrame[2][1];
@@ -817,12 +830,12 @@ void SioSetLinkCallbacks(s32 (*send)(), s32 (*recv)()) {
 
 s32 SioKeySyncSend() {
     if (gSioPlayerId == 0) {
-        gSioSendFrame[0] = 0xACD;
+        gSioSendFrame[0] = SIO_CMD_DATA;
         gSioSendFrame[1] = GetKeysHeld() & KEYS_MASK;
         gSioSendFrame[2] = gSioRelayKeysA;
         gSioSendFrame[3] = gSioRelayKeysB;
     } else {
-        gSioSendFrame[0] = 0xACD;
+        gSioSendFrame[0] = SIO_CMD_DATA;
         gSioSendFrame[1] = GetKeysHeld() & KEYS_MASK;
         gSioSendFrame[2] = 0x1234;
         gSioSendFrame[3] = 0x3456;
@@ -833,7 +846,7 @@ s32 SioKeySyncSend() {
 
 s32 SioKeySyncRecv() {
     if (gSioPlayerId == 0) {
-        if (gSioRecvFrame[0][0] == 0xACD && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
+        if (gSioRecvFrame[0][0] == SIO_CMD_DATA && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
             gSioRelayKeysA = gSioRecvFrame[1][0];
             gSioRelayKeysB = gSioRecvFrame[1][1];
             gSioStatus &= ~SIO_STAT_RECV_EMPTY;
@@ -841,7 +854,7 @@ s32 SioKeySyncRecv() {
             gSioStatus |= SIO_STAT_RECV_EMPTY;
         }
 
-        if (gSioRecvFrame[0][0] == 0xACD) {
+        if (gSioRecvFrame[0][0] == SIO_CMD_DATA) {
             SioKeyStateUpdateA(gSioRecvFrame[2][0]);
             SioKeyStateUpdateB(gSioRecvFrame[3][0]);
             gSioStatus &= ~SIO_STAT_RECV_EMPTY;
@@ -849,7 +862,7 @@ s32 SioKeySyncRecv() {
             gSioStatus |= SIO_STAT_RECV_EMPTY;
         }
     } else {
-        if (gSioRecvFrame[0][0] == 0xACD) {
+        if (gSioRecvFrame[0][0] == SIO_CMD_DATA) {
             SioKeyStateUpdateA(gSioRecvFrame[2][0]);
             SioKeyStateUpdateB(gSioRecvFrame[3][0]);
             gSioStatus &= ~SIO_STAT_RECV_EMPTY;
@@ -885,24 +898,24 @@ s32 SioExchangeSend() {
 
     if (!gSioHandshakeDone) {
         if (!gSioHandshakeAck) {
-            gSioSendFrame[0] = 0x1BFE;
+            gSioSendFrame[0] = SIO_CMD_EXCHANGE_REQUEST;
         } else {
-            gSioSendFrame[0] = 0xC5A0;
+            gSioSendFrame[0] = SIO_CMD_EXCHANGE_ACCEPT;
         }
     } else {
         if (gSioExchangeSeq <= 3) {
-            gSioSendFrame[0] = 0xACD;
-            gSioSendFrame[1] = 0xDDDD;
-            gSioSendFrame[2] = 0xDDDD;
-            gSioSendFrame[3] = 0xDDDD;
+            gSioSendFrame[0] = SIO_CMD_DATA;
+            gSioSendFrame[1] = SIO_CMD_FILLER;
+            gSioSendFrame[2] = SIO_CMD_FILLER;
+            gSioSendFrame[3] = SIO_CMD_FILLER;
         } else if (gSioExchangeSeq <= gSioExchangeSeqEnd) {
             n = gSioExchangeSeq - 3;
-            gSioSendFrame[0] = 0xACD;
+            gSioSendFrame[0] = SIO_CMD_DATA;
             gSioSendFrame[1] = gSioExchangeSeq;
             gSioSendFrame[2] = gSioExchangeSendData[n * 2 - 2];
             gSioSendFrame[3] = gSioExchangeSendData[n * 2 - 1];
         } else {
-            gSioSendFrame[0] = 0xACD;
+            gSioSendFrame[0] = SIO_CMD_DATA;
             gSioSendFrame[1] = gSioExchangeSeq;
             gSioSendFrame[2] = 0;
             gSioSendFrame[3] = 0;
@@ -919,15 +932,15 @@ s32 SioExchangeRecv() {
 
     if (!gSioHandshakeDone) {
         if (!gSioHandshakeAck) {
-            if (gSioRecvFrame[0][0] == 0x1BFE || gSioRecvFrame[0][1] == 0x1BFE) {
+            if (gSioRecvFrame[0][0] == SIO_CMD_EXCHANGE_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_EXCHANGE_REQUEST) {
                 gSioHandshakeAck = 1;
             }
-        } else if (gSioRecvFrame[0][0] == 0xC5A0 && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
+        } else if (gSioRecvFrame[0][0] == SIO_CMD_EXCHANGE_ACCEPT && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
             gSioHandshakeDone = 1;
             gSioExchangeSeq = 1;
         }
     } else if (gSioPlayerId == 0) {
-        if (gSioRecvFrame[1][1] != 0xDDDD && gSioRecvFrame[1][1] > 3) {
+        if (gSioRecvFrame[1][1] != SIO_CMD_FILLER && gSioRecvFrame[1][1] > 3) {
             if (gSioRecvFrame[1][1] > gSioExchangeSeqEnd) {
                 return SIO_LINK_RESULT_EXCHANGE_DONE;
             }
@@ -937,7 +950,7 @@ s32 SioExchangeRecv() {
             gSioExchangeRecvData[n * 2 - 1] = gSioRecvFrame[3][1];
         }
     } else {
-        if (gSioRecvFrame[1][0] != 0xDDDD && gSioRecvFrame[1][0] > 3) {
+        if (gSioRecvFrame[1][0] != SIO_CMD_FILLER && gSioRecvFrame[1][0] > 3) {
             if (gSioRecvFrame[1][0] > gSioExchangeSeqEnd) {
                 return SIO_LINK_RESULT_EXCHANGE_DONE;
             }
@@ -1012,11 +1025,11 @@ void SioSyncInit(void (*onConnect)()) {
 s32 SioSyncSend() {
     if (!gSioHandshakeDone) {
         if (!gSioHandshakeAck) {
-            gSioSendFrame[0] = 0xFEFE;
+            gSioSendFrame[0] = SIO_CMD_CONNECT_REQUEST;
         } else if (!gSioHandshakeConfirm) {
-            gSioSendFrame[0] = 0xECEC;
+            gSioSendFrame[0] = SIO_CMD_CONNECT_ACCEPT;
         } else {
-            gSioSendFrame[0] = 0xDF89;
+            gSioSendFrame[0] = SIO_CMD_SYNC_CONFIRM;
         }
     }
 
@@ -1026,11 +1039,11 @@ s32 SioSyncSend() {
 s32 SioSyncRecv() {
     if (!gSioHandshakeDone) {
         if (!gSioHandshakeAck) {
-            if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
+            if (gSioRecvFrame[0][0] == SIO_CMD_CONNECT_REQUEST || gSioRecvFrame[0][1] == SIO_CMD_CONNECT_REQUEST) {
                 gSioHandshakeAck = 1;
             }
-        } else if (gSioRecvFrame[0][0] != 0xDF89) {
-            if (gSioPlayerId == 0 && gSioRecvFrame[0][0] == 0xECEC &&
+        } else if (gSioRecvFrame[0][0] != SIO_CMD_SYNC_CONFIRM) {
+            if (gSioPlayerId == 0 && gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT &&
                 gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
                 gSioHandshakeConfirm = 1;
             }

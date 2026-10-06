@@ -538,11 +538,11 @@ void mode_sio_btl_connect_0(s32 arg) {
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
         SioReset();
-        SioConnectInit(SioBtlConnectOnConnect, SioBtlConnectOnCancel, 0);
+        SioConnectInit(SioBtlConnectOnConnect, SioBtlConnectOnCancel, SIO_CONNECT_MODE_BATTLE);
     }
 #else
     SioReset();
-    SioConnectInit(SioBtlConnectOnConnect, SioBtlConnectOnCancel, 0);
+    SioConnectInit(SioBtlConnectOnConnect, SioBtlConnectOnCancel, SIO_CONNECT_MODE_BATTLE);
 #endif
 }
 
@@ -2771,7 +2771,7 @@ void mode_sio_chg_connect_0(s32 arg) {
     sSioChgConnectWork->textSlotCount = LoadTextSlots(gSioChgConnectText, sSioChgConnectWork->textSlots);
     sSioChgConnectWork->palette = LoadObjPalette(gSioCursorPalette, 32);
     SioReset();
-    SioConnectInit(SioChgConnectOnConnect, SioChgConnectOnCancel, 1);
+    SioConnectInit(SioChgConnectOnConnect, SioChgConnectOnCancel, SIO_CONNECT_MODE_TRADE);
 }
 #endif
 
@@ -3395,11 +3395,11 @@ void SioChgCardDraw() {
 }
 
 void SioChgCardRecvSlots() {
-    if (gSioCommandRecv[0][0] == 0xACD) {
+    if (gSioCommandRecv[0][0] == SIO_CMD_DATA) {
         SioChgCardSetSlot(gSioCommandRecv[3][0]);
     }
 
-    if (gSioCommandRecv[0][1] == 0xACD) {
+    if (gSioCommandRecv[0][1] == SIO_CMD_DATA) {
         SioChgCardSetSlot(gSioCommandRecv[3][1]);
     }
 }
@@ -3444,11 +3444,11 @@ void SioChgCardSetSlot(u16 command) {
 void SioChgCardRecvSlotIds() {
     gSioCommandSend[2] = 0x6000;
 
-    if (gSioCommandRecv[0][0] == 0xACD) {
+    if (gSioCommandRecv[0][0] == SIO_CMD_DATA) {
         SioChgCardSetSlotId(gSioCommandRecv[3][0]);
     }
 
-    if (gSioCommandRecv[0][1] == 0xACD) {
+    if (gSioCommandRecv[0][1] == SIO_CMD_DATA) {
         SioChgCardSetSlotId(gSioCommandRecv[3][1]);
     }
 }

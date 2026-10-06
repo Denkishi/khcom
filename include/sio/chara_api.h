@@ -7,6 +7,13 @@
 struct CharaObjParam;
 struct CharaObjParam2;
 
+#define SIO_CMD_DATA 0xACD
+
+enum SioConnectMode {
+    SIO_CONNECT_MODE_BATTLE,
+    SIO_CONNECT_MODE_TRADE
+};
+
 u8 SioConnectUpdate();
 u8 SioLinkUpdate();
 void FreeLinkDecks();

@@ -418,7 +418,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
             if (!work->asSprite) {
                 work->tiles2[i] = LoadObjTiles(gAllmapHallDoorTiles, 0x500);
             } else {
-                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapHallDoorFrames, 16), gAllmapHallDoorTiles);
+                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapHallDoorFrames, ARRAY_COUNT(gAllmapHallDoorFrames)), gAllmapHallDoorTiles);
             }
         } else if (!AllmapDoorIsOpen(work->room, i)) {
             AnimInit(&work->anim[i], gAllmapClosedDoorAnims, gAllmapClosedDoorFrames);
@@ -428,7 +428,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
             if (!work->asSprite) {
                 work->tiles2[i] = LoadObjTiles(gAllmapClosedDoorTiles, 0x500);
             } else {
-                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapClosedDoorFrames, 16), gAllmapClosedDoorTiles);
+                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapClosedDoorFrames, ARRAY_COUNT(gAllmapClosedDoorFrames)), gAllmapClosedDoorTiles);
             }
         }
     }

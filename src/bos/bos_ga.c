@@ -31,6 +31,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "macros.h"
 
 static const EmyKind sBosGaEmyKind =
 {ENEMY_GUARD_ARMOR, 100, 16, 16, 0, 100, EMY_KIND_FLAG_NO_COLLIDER}
@@ -373,7 +374,7 @@ void BosGaEntryInit(GaWork* work, u32 index, s32 assemble) {
     entry->gfx = AnimGetGfx(&entry->anim);
 
     if (index == 0) {
-        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosGaCollarFrames, 4), gBosGaCollarTiles);
+        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosGaCollarFrames, ARRAY_COUNT(gBosGaCollarFrames)), gBosGaCollarTiles);
         AnimInit(&work->anim, gBosGaCollarAnims, gBosGaCollarFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(&work->anim);

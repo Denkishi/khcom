@@ -24,6 +24,7 @@
 #include "bos_ursula.h"
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "macros.h"
 
 #ifdef VERSION_EU
 static UrsulaBubbleWork* sUrsulaBubbleWork;
@@ -127,7 +128,7 @@ void task_bos_ursula_bubble_0(UrsulaBubbleWork* work) {
     sUrsulaBubbleWork = work;
     AnimInit(&work->anim, gBosUrsulaBubbleAnims, gBosUrsulaBubbleFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    gBtlWork->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gBosUrsulaBubbleFrames, 6), gBosUrsulaBubbleTiles);
+    gBtlWork->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gBosUrsulaBubbleFrames, ARRAY_COUNT(gBosUrsulaBubbleFrames)), gBosUrsulaBubbleTiles);
 #endif
     TaskPoolInit(&work->tasks, 10);
     work->bubbleCount = 0;

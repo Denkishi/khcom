@@ -529,7 +529,7 @@ void task_status_tab_0(StatusTabWork* work, s32* tab) {
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(sStatusTabSprites[gLanguage], 4),
         sStatusTabTiles[gLanguage]);
 #else
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabFrames, 4), gStatusTabTiles);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabFrames, ARRAY_COUNT(gStatusTabFrames)), gStatusTabTiles);
 #endif
     work->palette = LoadObjPalette(gStatusTabPalette, 0x20);
 #ifdef VERSION_EU
@@ -537,7 +537,7 @@ void task_status_tab_0(StatusTabWork* work, s32* tab) {
 #else
     work->gfx = gStatusTabFrames[*work->tab];
 #endif
-    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabRightFrames, 4), gStatusTabRightTiles);
+    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabRightFrames, ARRAY_COUNT(gStatusTabRightFrames)), gStatusTabRightTiles);
     work->palette2 = LoadObjPalette(gStatusTabRightPalette, 0x20);
     work->gfx2 = gStatusTabRightFrames[*work->tab];
 }
@@ -630,7 +630,7 @@ void task_status_deckname_3(StatusDecknameWork* work) {
 
 void task_status_cursor_0(StatusCursorWork* work, s16* cursor) {
     work->cursor = cursor;
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusRowHighlightFrames, 5), gStatusRowHighlightTiles);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusRowHighlightFrames, ARRAY_COUNT(gStatusRowHighlightFrames)), gStatusRowHighlightTiles);
     work->palette = LoadObjPalette(gStatusRowHighlightPalette, 0x20);
     AnimInit(&work->anim[0], gStatusRowHighlightAnims, gStatusRowHighlightFrames);
     AnimStart(&work->anim[0], 0, ANIM_FLAG_LOOP);
@@ -1253,10 +1253,10 @@ void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
     TaskPoolInit(&work->tasks, 1);
     work->task = CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16,
                                         GetCardHelpText(work->helpIndex, work->textIndex));
-    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gStockMesDispArrowFrames, 2), gStockMesDispArrowTiles);
+    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gStockMesDispArrowFrames, ARRAY_COUNT(gStockMesDispArrowFrames)), gStockMesDispArrowTiles);
     work->palette2 = LoadObjPalette(gStockMesDispArrowPalette, 0x20);
     work->gfx = gStockMesDispArrowFrames[0];
-    work->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gStockMesDispArrowFrames, 2), gStockMesDispArrowTiles);
+    work->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gStockMesDispArrowFrames, ARRAY_COUNT(gStockMesDispArrowFrames)), gStockMesDispArrowTiles);
     work->palette3 = LoadObjPalette(gStockMesDispArrowPalette, 0x20);
     work->gfx2 = gStockMesDispArrowFrames[1];
     work->frame = 0;

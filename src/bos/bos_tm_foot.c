@@ -1047,8 +1047,8 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->prevState = BOS_TM_STATE_IDLE;
     work->jointAnim2.frames = NULL;
     work->jointAnim.frames = NULL;
-    BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleLeftFrames, 3, work->joints.arms[0]);
-    BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleLeftFrames, 3, &work->joints.arms[1][0]);
+    BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleLeftFrames, ARRAY_COUNT(sBosTmArm0IdleLeftFrames), work->joints.arms[0]);
+    BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleLeftFrames, ARRAY_COUNT(sBosTmArm1IdleLeftFrames), &work->joints.arms[1][0]);
 
     for (i = 0; i < 4; i++) {
         arm0Joint = &work->joints.arms[0][i];
@@ -1129,9 +1129,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 0x110;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleLeftFrames, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleLeftFrames, ARRAY_COUNT(sBosTmArm1IdleLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleRightFrames, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleRightFrames, ARRAY_COUNT(sBosTmArm1IdleRightFrames), &work->joints.all[4]);
             }
         }
 
@@ -1166,9 +1166,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1WalkLeftFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1WalkLeftFrames, ARRAY_COUNT(sBosTmArm1WalkLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1WalkRightFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1WalkRightFrames, ARRAY_COUNT(sBosTmArm1WalkRightFrames), &work->joints.all[4]);
             }
         }
 
@@ -1181,9 +1181,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtLeftFrames, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtLeftFrames, ARRAY_COUNT(sBosTmArm1HurtLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtRightFrames, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtRightFrames, ARRAY_COUNT(sBosTmArm1HurtRightFrames), &work->joints.all[4]);
             }
         }
 
@@ -1195,9 +1195,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtLeftFrames, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtLeftFrames, ARRAY_COUNT(sBosTmArm1HurtLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtRightFrames, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtRightFrames, ARRAY_COUNT(sBosTmArm1HurtRightFrames), &work->joints.all[4]);
             }
         }
 
@@ -1206,11 +1206,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case BOS_TM_STATE_FIRE:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, ARRAY_COUNT(sBosTmArm1FireLeftFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, ARRAY_COUNT(sBosTmArm1FireRightFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
                 BosTmClbHold(&work->clb, &work->tips[0], 2);
             }
@@ -1240,11 +1240,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case BOS_TM_STATE_FIRE_TWICE:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, ARRAY_COUNT(sBosTmArm1FireLeftFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, ARRAY_COUNT(sBosTmArm1FireRightFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
                 BosTmClbHold(&work->clb, &work->tips[0], 2);
             }
@@ -1290,9 +1290,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case BOS_TM_STATE_SLAM_TABLE:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, ARRAY_COUNT(sBosTmArm1ThrowLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowRightFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowRightFrames, ARRAY_COUNT(sBosTmArm1ThrowRightFrames), &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1328,9 +1328,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case BOS_TM_STATE_SLAM_GROUND:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, ARRAY_COUNT(sBosTmArm1ThrowLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowRightFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowRightFrames, ARRAY_COUNT(sBosTmArm1ThrowRightFrames), &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1372,9 +1372,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case BOS_TM_STATE_SLAM_GROUND_SLOW:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowSlowLeftFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowSlowLeftFrames, ARRAY_COUNT(sBosTmArm1ThrowSlowLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowSlowRightFrames, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowSlowRightFrames, ARRAY_COUNT(sBosTmArm1ThrowSlowRightFrames), &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1419,9 +1419,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1SpinLeftFrames, 5, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1SpinLeftFrames, ARRAY_COUNT(sBosTmArm1SpinLeftFrames), &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1SpinRightFrames, 5, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1SpinRightFrames, ARRAY_COUNT(sBosTmArm1SpinRightFrames), &work->joints.all[4]);
             }
         }
 
@@ -1462,9 +1462,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             work->tips[1].angle = 0x110;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleLeftFrames, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleLeftFrames, ARRAY_COUNT(sBosTmArm0IdleLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleRightFrames, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleRightFrames, ARRAY_COUNT(sBosTmArm0IdleRightFrames), work->joints.all);
             }
         }
 
@@ -1487,9 +1487,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0WalkLeftFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0WalkLeftFrames, ARRAY_COUNT(sBosTmArm0WalkLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0WalkRightFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0WalkRightFrames, ARRAY_COUNT(sBosTmArm0WalkRightFrames), work->joints.all);
             }
         }
 
@@ -1502,9 +1502,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtLeftFrames, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtLeftFrames, ARRAY_COUNT(sBosTmArm0HurtLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtRightFrames, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtRightFrames, ARRAY_COUNT(sBosTmArm0HurtRightFrames), work->joints.all);
             }
         }
 
@@ -1516,9 +1516,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtLeftFrames, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtLeftFrames, ARRAY_COUNT(sBosTmArm0HurtLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtRightFrames, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtRightFrames, ARRAY_COUNT(sBosTmArm0HurtRightFrames), work->joints.all);
             }
         }
 
@@ -1527,11 +1527,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case BOS_TM_STATE_FIRE:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, ARRAY_COUNT(sBosTmArm0FireLeftFrames), work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, ARRAY_COUNT(sBosTmArm0FireRightFrames), work->joints.all);
                 work->tips[1].angle = 0x118;
                 BosTmClbHold(&work->clb2, &work->tips[1], 3);
             }
@@ -1548,11 +1548,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case BOS_TM_STATE_FIRE_TWICE:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, ARRAY_COUNT(sBosTmArm0FireLeftFrames), work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, ARRAY_COUNT(sBosTmArm0FireRightFrames), work->joints.all);
                 work->tips[1].angle = 0x118;
                 BosTmClbHold(&work->clb2, &work->tips[1], 3);
             }
@@ -1569,9 +1569,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case BOS_TM_STATE_SLAM_TABLE:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, ARRAY_COUNT(sBosTmArm0ThrowLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowRightFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowRightFrames, ARRAY_COUNT(sBosTmArm0ThrowRightFrames), work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1587,9 +1587,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case BOS_TM_STATE_SLAM_GROUND:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, ARRAY_COUNT(sBosTmArm0ThrowLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowRightFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowRightFrames, ARRAY_COUNT(sBosTmArm0ThrowRightFrames), work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1605,9 +1605,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case BOS_TM_STATE_SLAM_GROUND_SLOW:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowSlowLeftFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowSlowLeftFrames, ARRAY_COUNT(sBosTmArm0ThrowSlowLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowSlowRightFrames, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowSlowRightFrames, ARRAY_COUNT(sBosTmArm0ThrowSlowRightFrames), work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1626,9 +1626,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0SpinLeftFrames, 5, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0SpinLeftFrames, ARRAY_COUNT(sBosTmArm0SpinLeftFrames), work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0SpinRightFrames, 5, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0SpinRightFrames, ARRAY_COUNT(sBosTmArm0SpinRightFrames), work->joints.all);
             }
         }
 

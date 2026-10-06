@@ -17,6 +17,7 @@
 #include "gba/macro.h"
 #include "taskpool.h"
 #include "types.h"
+#include "macros.h"
 
 static const u16 sBosLstFldVofsTable[832] = {
     0, 0, 3, 6, 6, 12, 9, 18, 12, 25, 15, 31, 18, 37, 21, 43,
@@ -703,7 +704,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     }
 
     if (work->fadeStep <= 63) {
-        BosLstFldDarkenPalette(work->paletteBuf, gBosLstFldPalette, 80, sBosLstFldFadeLevels[work->fadeStep]);
+        BosLstFldDarkenPalette(work->paletteBuf, gBosLstFldPalette, ARRAY_COUNT(gBosLstFldPalette), sBosLstFldFadeLevels[work->fadeStep]);
         LoadPalette(work->paletteBuf, (void*)(BG_PLTT + 5 * PLTT_SIZE_4BPP), 160);
         work->fadeStep++;
     }

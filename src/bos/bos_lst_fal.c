@@ -48,7 +48,7 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
     work->lift = GetRandom() % 0x81 + 0x80;
 
     switch (arg->kind) {
-    case 1:
+    case BOS_LST_FAL_DASH:
         if ((GetRandom() & 1) != 0) {
             work->vx = work->vx * 512 >> 8;
             work->vz = work->vz * 384 >> 8;
@@ -56,17 +56,17 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
         }
 
         break;
-    case 2:
+    case BOS_LST_FAL_HIGH:
         work->vz = GetRandom() % 0x81 + 0x180;
         break;
-    case 3:
+    case BOS_LST_FAL_PLATFORM:
         work->vx = work->vx * 640 >> 8;
         break;
-    case 4:
+    case BOS_LST_FAL_DEFEAT_SPIRAL:
         work->vx = (-gSineTable[arg->angle + 0x40] << 8) / 256;
         work->vz = (gSineTable[arg->angle] << 8) / 256;
         break;
-    case 5:
+    case BOS_LST_FAL_DEFEAT_BURST:
         work->vx = GetRandom() % 0x201 - 0x100;
         work->vz = GetRandom() % 0xC1 + 0xC0;
         work->lift = GetRandom() % 0x381 + 0x80;
@@ -99,7 +99,7 @@ u8 task_bos_lst_fal_1(LstFalWork* work) {
     work->x += work->vx;
     work->z += work->vz;
 
-    if (work->kind != 4) {
+    if (work->kind != BOS_LST_FAL_DEFEAT_SPIRAL) {
         if (work->lift > 0) {
             rise = 512;
 

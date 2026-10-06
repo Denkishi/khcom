@@ -167,7 +167,7 @@ u8 BosLstSpawnFal(BosLstWork* work, s32 kind) {
             arg.z += jitterZ;
             pool = &gBtlWork->taskPools[1];
             break;
-        case 4:
+        case BOS_LST_FAL_DEFEAT_SPIRAL:
             range = 0x800;
             spiralX = (GetRandom() % 17 << 8) - range;
             arg.x += spiralX;
@@ -176,7 +176,7 @@ u8 BosLstSpawnFal(BosLstWork* work, s32 kind) {
             arg.angle = work->defeatTimer * 4;
             pool = &work->tasks;
             break;
-        case 5:
+        case BOS_LST_FAL_DEFEAT_BURST:
             burstX = (GetRandom() % 33 << 8) - 0x1000;
             arg.x += burstX;
             burstY = (GetRandom() % 21 << 8) + 0x800;
@@ -714,7 +714,7 @@ void BosLstMoveDash(BosLstWork* work) {
     case BOS_LST_DASH_STEP_FLY_OFF:
         if (work->state != BOS_LST_STATE_DEFEATED) {
             if ((((s16)work->frameCount + 4) & 7) == 0) {
-                BosLstSpawnFal(work, 0);
+                BosLstSpawnFal(work, BOS_LST_FAL_DRIFT);
             }
         }
 
@@ -1572,7 +1572,7 @@ u8 BosLstAttackDash(BosLstWork* work) {
         work->step += 1;
     }
 
-    BosLstSpawnFal(work, 1);
+    BosLstSpawnFal(work, BOS_LST_FAL_DASH);
 
     if (work->timer == 30) {
         m4aSongNumStart(SONG_SND_711);
@@ -2143,11 +2143,11 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
     work->y = BosLstApproachValue(work->y, 0x1F000, 0x80, 0x100, 0x100);
 
     if ((work->defeatTimer & 7) == 0) {
-        BosLstSpawnFal(work, 4);
+        BosLstSpawnFal(work, BOS_LST_FAL_DEFEAT_SPIRAL);
     }
 
     if ((work->defeatTimer & 7) == 4) {
-        BosLstSpawnFal(work, 5);
+        BosLstSpawnFal(work, BOS_LST_FAL_DEFEAT_BURST);
     }
 
     work->defeatTimer += 1;
@@ -2239,7 +2239,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
             switch (work->timer) {
             case 40:
                 for (i = 0; i < 8; i++) {
-                    BosLstSpawnFal(work, 5);
+                    BosLstSpawnFal(work, BOS_LST_FAL_DEFEAT_BURST);
                 }
 
                 FadeStartOut(FADE_MODE_ADD_WHITE, 4);
@@ -2249,7 +2249,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
             case 170:
             case 190:
                 for (i = 0; i < 8; i++) {
-                    BosLstSpawnFal(work, 5);
+                    BosLstSpawnFal(work, BOS_LST_FAL_DEFEAT_BURST);
                 }
 
                 FadeStartOut(FADE_MODE_ADD_WHITE, 2);
@@ -2266,7 +2266,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
             }
         } else {
             for (i = 0; i < 80; i++) {
-                BosLstSpawnFal(work, 5);
+                BosLstSpawnFal(work, BOS_LST_FAL_DEFEAT_BURST);
             }
 
             FadeStartIn(FADE_MODE_ADD_WHITE, 60);
@@ -2556,10 +2556,10 @@ u8 task_bos_lst_1(BosLstWork* work) {
         work->cardDelay = work->cardDelay * 3;
         work->cardDelay = work->cardDelay / 4;
         work->hurtTimer = 20;
-        BosLstSpawnFal(work, 0);
-        BosLstSpawnFal(work, 0);
-        BosLstSpawnFal(work, 0);
-        BosLstSpawnFal(work, 0);
+        BosLstSpawnFal(work, BOS_LST_FAL_DRIFT);
+        BosLstSpawnFal(work, BOS_LST_FAL_DRIFT);
+        BosLstSpawnFal(work, BOS_LST_FAL_DRIFT);
+        BosLstSpawnFal(work, BOS_LST_FAL_DRIFT);
         work->platformSpeed += 0x80;
         BosLstSetAnim(work, 1, 0, FALSE);
 
@@ -2667,11 +2667,11 @@ u8 task_bos_lst_1(BosLstWork* work) {
         WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
 
         if (sy < -16) {
-            BosLstSpawnFal(work, 2);
+            BosLstSpawnFal(work, BOS_LST_FAL_HIGH);
         } else if (work->playerOnPlatform == TRUE) {
-            BosLstSpawnFal(work, 3);
+            BosLstSpawnFal(work, BOS_LST_FAL_PLATFORM);
         } else {
-            BosLstSpawnFal(work, 0);
+            BosLstSpawnFal(work, BOS_LST_FAL_DRIFT);
         }
     }
 

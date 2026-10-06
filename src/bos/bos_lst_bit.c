@@ -71,7 +71,7 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
     }
 
     if ((s16)*work->falCount <= 31) {
-        arg.kind = 0;
+        arg.kind = BOS_LST_FAL_DRIFT;
 
         if (kind == 1) {
             arg.x = work->targetX;

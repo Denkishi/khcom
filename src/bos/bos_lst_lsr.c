@@ -129,7 +129,7 @@ u8 BosLstLsrSpawnFal(LstLsrWork* work) {
     }
 
     if ((s16)*work->falCount <= 31) {
-        arg.kind = 0;
+        arg.kind = BOS_LST_FAL_DRIFT;
         arg.x = work->pos2.x;
         arg.y = work->pos2.y;
         arg.z = work->pos2.z;

@@ -29,6 +29,15 @@ typedef struct LstCtrArg {
     s32 z;
 } LstCtrArg;
 
+enum BosLstFalKind {
+    BOS_LST_FAL_DRIFT,
+    BOS_LST_FAL_DASH,
+    BOS_LST_FAL_HIGH,
+    BOS_LST_FAL_PLATFORM,
+    BOS_LST_FAL_DEFEAT_SPIRAL,
+    BOS_LST_FAL_DEFEAT_BURST
+};
+
 typedef struct LstFalArg {
     s32 kind;
     s32 x;

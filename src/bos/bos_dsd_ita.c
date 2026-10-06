@@ -16,12 +16,21 @@
 #include "taskpool.h"
 #include "types.h"
 
+enum BosDsdItaState {
+    BOS_DSD_ITA_STATE_ENTER,
+    BOS_DSD_ITA_STATE_WAIT,
+    BOS_DSD_ITA_STATE_CARRY,
+    BOS_DSD_ITA_STATE_FALL,
+    BOS_DSD_ITA_STATE_LEAVE,
+    BOS_DSD_ITA_STATE_END
+};
+
 void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
     work->dsd = arg;
     work->moveSteps = 0x1E;
     work->lifeTimer = 0;
     work->offTimer = 0;
-    work->state = 0;
+    work->state = BOS_DSD_ITA_STATE_ENTER;
     work->x = 0x12C00;
     work->y = 0x17C00;
     work->z = -0x7800;
@@ -42,37 +51,37 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
     BosDsdItaUpdateRider(work);
 
     switch (work->state) {
-    case 0:
+    case BOS_DSD_ITA_STATE_ENTER:
         if (work->moveSteps > 0) {
             ApproachValue(&work->x, 0x1400, work->moveSteps);
             ApproachValue(&work->z, -0x1400, work->moveSteps);
             work->moveSteps--;
         } else {
-            work->state = 1;
+            work->state = BOS_DSD_ITA_STATE_WAIT;
         }
 
         break;
-    case 1:
+    case BOS_DSD_ITA_STATE_WAIT:
         if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
-            work->state = 2;
+            work->state = BOS_DSD_ITA_STATE_CARRY;
         }
 
         BosDsdItaUpdateLifetime(work);
         break;
-    case 2:
+    case BOS_DSD_ITA_STATE_CARRY:
         if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
             BosDsdItaMoveToward(&work->x, a->x - 12800);
             BosDsdItaMoveToward(&work->y, a->y);
             BosDsdItaMoveToward(&work->z, a->z + 0x500);
         } else if (work->offTimer > 49) {
-            work->state = 3;
+            work->state = BOS_DSD_ITA_STATE_FALL;
         } else {
             work->offTimer++;
         }
 
         BosDsdItaUpdateLifetime(work);
         break;
-    case 3:
+    case BOS_DSD_ITA_STATE_FALL:
         if (work->z < 0) {
             work->z += work->vz;
             work->vz += work->gravity;
@@ -82,12 +91,12 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
 
         if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
             work->offTimer = 0;
-            work->state = 2;
+            work->state = BOS_DSD_ITA_STATE_CARRY;
         }
 
         BosDsdItaUpdateLifetime(work);
         break;
-    case 4:
+    case BOS_DSD_ITA_STATE_LEAVE:
         if (work->moveSteps > 0) {
             ApproachValue(&work->x, -0x5000, work->moveSteps);
             ApproachValue(&work->z, -0x1400, work->moveSteps);
@@ -196,13 +205,13 @@ void BosDsdItaUpdateRider(DsdItaWork* work) {
 void BosDsdItaUpdateLifetime(DsdItaWork* work) {
     if ((s16)work->lifeTimer >= 600) {
         work->moveSteps = 30;
-        work->state = 4;
+        work->state = BOS_DSD_ITA_STATE_LEAVE;
     } else {
         work->lifeTimer++;
     }
 
-    if (work->dsd->state == 11) {
-        work->state = 4;
+    if (work->dsd->state == BOS_DSD_STATE_DEFEATED) {
+        work->state = BOS_DSD_ITA_STATE_LEAVE;
     }
 }
 

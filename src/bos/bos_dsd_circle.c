@@ -40,7 +40,7 @@ void task_bos_dsd_circle_0(DsdCircleWork* work, void* arg) {
 u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
     DsdWork* d = work->dsd;
 
-    if (d->state == 8 || d->state == 0) {
+    if (d->state == BOS_DSD_STATE_CARD_BROKEN || d->state == BOS_DSD_STATE_RETURN) {
         if (work->endTimer > 66) {
             return 0;
         }
@@ -50,15 +50,15 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
     }
 
     switch (d->stateStep) {
-    case 1:
+    case BOS_DSD_SUMMON_STEP_OPEN:
         work->frame = work->dsd->bgFrame - 21;
         work->gfx = gBosDsdCircleFrames[work->frame];
         work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
         work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
-    case 2:
+    case BOS_DSD_SUMMON_STEP_START_SPAWN:
         break;
-    case 3:
+    case BOS_DSD_SUMMON_STEP_SPAWN_SHADOWS:
         work->paletteTimer++;
 
         if (work->paletteTimer >= gBosDsdCirclePaletteDurations[work->paletteFrame]) {
@@ -80,27 +80,27 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
 
         work->summonTimer++;
         break;
-    case 4:
+    case BOS_DSD_SUMMON_STEP_STOP_SPAWN:
         LoadObjPaletteBank(work->dsd->palette->index, gBosDsdCircleCyclePalettes);
         work->frame = work->dsd->bgFrame - 21;
         break;
-    case 5:
+    case BOS_DSD_SUMMON_STEP_CLOSE:
         work->frame = work->dsd->bgFrame - 21;
         work->gfx = gBosDsdCircleFrames[work->frame];
         work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
         work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
-    case 6:
+    case BOS_DSD_SUMMON_STEP_WARP_SHADOWS:
         work->frame = 0;
         work->gfx = gBosDsdCircleFrames[work->frame];
         work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
         work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
-    case 7:
+    case BOS_DSD_SUMMON_STEP_END:
         return 0;
     }
 
-    if (work->dsd->state == 11) {
+    if (work->dsd->state == BOS_DSD_STATE_DEFEATED) {
         if (BgFxIsActive() == 1) {
             BgAnimStop();
         }
@@ -122,6 +122,15 @@ void task_bos_dsd_circle_2(DsdCircleWork* work) {
 void task_bos_dsd_circle_3() {
 }
 
+enum BosDsdEnergy1State {
+    BOS_DSD_ENERGY1_STATE_SPAWN,
+    BOS_DSD_ENERGY1_STATE_FORM,
+    BOS_DSD_ENERGY1_STATE_CHARGE,
+    BOS_DSD_ENERGY1_STATE_ARC,
+    BOS_DSD_ENERGY1_STATE_HOMING,
+    BOS_DSD_ENERGY1_STATE_STRAIGHT
+};
+
 void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
     work->dsd = arg;
     work->x = 0xBC00;
@@ -134,7 +143,7 @@ void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
     work->targetAngle = 0xF4;
     work->speed = 0x800;
     work->unk_30 = 0x19;
-    work->state = 0;
+    work->state = BOS_DSD_ENERGY1_STATE_SPAWN;
     work->unk_36 = 0;
     work->timer = 0;
     work->chargeTime = 0xF;
@@ -148,11 +157,11 @@ void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
 
 u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
     switch (work->state) {
-    case 0:
+    case BOS_DSD_ENERGY1_STATE_SPAWN:
         BgFxStartEnemySpawn(work->x, work->y, work->z, 0x100);
         work->state++;
         break;
-    case 1:
+    case BOS_DSD_ENERGY1_STATE_FORM:
         if (BgFxIsActive()) {
             break;
         }
@@ -161,7 +170,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
         m4aSongNumStart(SONG_SND_701);
         work->state++;
         break;
-    case 2:
+    case BOS_DSD_ENERGY1_STATE_CHARGE:
         work->timer++;
 
         if (work->timer >= work->chargeTime) {
@@ -173,13 +182,13 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
         }
 
         break;
-    case 3:
+    case BOS_DSD_ENERGY1_STATE_ARC:
         BosDsdEnergy1UpdateArc(work);
         break;
-    case 4:
+    case BOS_DSD_ENERGY1_STATE_HOMING:
         BosDsdEnergy1UpdateHoming(work);
         break;
-    case 5:
+    case BOS_DSD_ENERGY1_STATE_STRAIGHT:
         BgFxAddPosition(work->vx, work->vy, work->vz);
         work->x += work->vx;
         work->y += work->vy;
@@ -195,7 +204,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
     }
 
     if (work->z >= -0x800 || work->x <= -0x2000 || work->x > 0x11FFF ||
-        work->dsd->state == 8 || work->dsd->state == 11) {
+        work->dsd->state == BOS_DSD_STATE_CARD_BROKEN || work->dsd->state == BOS_DSD_STATE_DEFEATED) {
         BgFxSignalEnd(0);
         work->visible = 0;
         return 0;
@@ -290,12 +299,24 @@ void BosDsdEnergy1UpdateHoming(DsdEnergy1Work* work) {
     work->z += work->vz;
 }
 
+enum BosDsdEnergy2State {
+    BOS_DSD_ENERGY2_STATE_CHARGE,
+    BOS_DSD_ENERGY2_STATE_RISE,
+    BOS_DSD_ENERGY2_STATE_BURST,
+    BOS_DSD_ENERGY2_STATE_WAIT_BURST,
+    BOS_DSD_ENERGY2_STATE_FADE_OUT,
+    BOS_DSD_ENERGY2_STATE_SPAWN_DROP,
+    BOS_DSD_ENERGY2_STATE_FALL,
+    BOS_DSD_ENERGY2_STATE_NEXT_DROP,
+    BOS_DSD_ENERGY2_STATE_END
+};
+
 void task_bos_dsd_energy2_0(DsdEnergy2Work* work, void* arg) {
     work->dsd = arg;
     work->x = 0xBC00;
     work->y = 0x16800;
     work->z = -0x2C00;
-    work->state = 0;
+    work->state = BOS_DSD_ENERGY2_STATE_CHARGE;
     work->unk_2E = 0;
     work->timer = 0;
     work->chargeTime = 0xF;
@@ -311,13 +332,13 @@ void task_bos_dsd_energy2_0(DsdEnergy2Work* work, void* arg) {
     m4aSongNumStart(SONG_SND_704);
 
     switch (work->dsd->hpPhase) {
-    case 1:
+    case BOS_DSD_HP_PHASE_MID:
         work->dropTotal = 5;
         break;
-    case 2:
+    case BOS_DSD_HP_PHASE_LOW:
         work->dropTotal = 7;
         break;
-    case 0:
+    case BOS_DSD_HP_PHASE_HIGH:
     default:
         work->dropTotal = 3;
         break;
@@ -328,7 +349,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
     BtlObj* p;
 
     switch (work->state) {
-    case 0:
+    case BOS_DSD_ENERGY2_STATE_CHARGE:
         BgFxSetScale(work->scaleX, work->scaleY);
         work->scaleX += 25;
         work->scaleY += 25;
@@ -341,7 +362,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         }
 
         break;
-    case 1:
+    case BOS_DSD_ENERGY2_STATE_RISE:
         BgFxAddPosition(work->vx, work->vy, work->vz);
         work->x += work->vx;
         work->y += work->vy;
@@ -353,13 +374,13 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         }
 
         break;
-    case 2:
+    case BOS_DSD_ENERGY2_STATE_BURST:
         BgFxStartMahluxiaGround(work->x, work->y, work->z, 0x103);
         m4aSongNumStart(SONG_SND_705);
         BtlMapSetCameraTarget(work->x, work->y + work->z);
         work->state++;
         break;
-    case 3:
+    case BOS_DSD_ENERGY2_STATE_WAIT_BURST:
         BtlMapSetCameraTarget(work->x, work->y + work->z);
 
         if (!BgFxIsActive()) {
@@ -367,11 +388,11 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         }
 
         break;
-    case 4:
+    case BOS_DSD_ENERGY2_STATE_FADE_OUT:
         FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         work->state++;
         break;
-    case 5:
+    case BOS_DSD_ENERGY2_STATE_SPAWN_DROP:
         work->x = (p = gBtlWork->actor)->x + (-0x4000 + GetRandom() % 0x8001);
 
         if (work->x < -0xFFF || work->x > 0x10FFF) {
@@ -386,7 +407,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         work->timer = 0;
         work->state++;
         break;
-    case 6:
+    case BOS_DSD_ENERGY2_STATE_FALL:
         BgFxAddPosition(0, 0, work->vz);
         work->z += work->vz;
 
@@ -394,19 +415,19 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
             m4aSongNumStart(SONG_BTL_RK_LIMITENTRY);
             BgFxSignalEnd(0);
             work->visible = 0;
-            work->state = 7;
+            work->state = BOS_DSD_ENERGY2_STATE_NEXT_DROP;
         }
 
         if (work->z >= -0x800) {
             BgFxSignalEnd(0);
             m4aSongNumStart(SONG_SND_703);
             work->visible = 0;
-            work->state = 7;
+            work->state = BOS_DSD_ENERGY2_STATE_NEXT_DROP;
         }
 
         work->timer++;
         break;
-    case 7:
+    case BOS_DSD_ENERGY2_STATE_NEXT_DROP:
         if (work->dropCount >= (s8)work->dropTotal - 1) {
             if (!BgFxIsActive()) {
                 BgAnimStop();
@@ -420,7 +441,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         if (work->timer > 49) {
             work->timer = 0;
             work->dropCount++;
-            work->state = 5;
+            work->state = BOS_DSD_ENERGY2_STATE_SPAWN_DROP;
         } else {
             work->timer++;
         }
@@ -430,7 +451,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         return 0;
     }
 
-    if (work->dsd->state == 8 || work->dsd->state == 11) {
+    if (work->dsd->state == BOS_DSD_STATE_CARD_BROKEN || work->dsd->state == BOS_DSD_STATE_DEFEATED) {
         if (BgFxIsActive() == 1) {
             BgAnimStop();
             FadeToOriginal(FADE_MODE_BLACK, 8);

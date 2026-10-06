@@ -100,48 +100,48 @@ u8 task_bos_dsd_main_1(DsdMainWork* work) {
     BosDsdMainUpdateDrift(work);
 
     switch (work->dsd->state) {
-    case 0:
+    case BOS_DSD_STATE_RETURN:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateReturn(work);
         break;
-    case 1:
+    case BOS_DSD_STATE_IDLE:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateIdle(work);
         break;
-    case 2:
+    case BOS_DSD_STATE_ATTACK_START:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateAttackStart(work);
         break;
-    case 3:
+    case BOS_DSD_STATE_APPROACH:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateApproach(work);
         break;
-    case 4:
+    case BOS_DSD_STATE_SHOCKWAVE:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateShockwave(work);
         break;
-    case 5:
+    case BOS_DSD_STATE_SUMMON:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateCircleAttack(work);
         break;
-    case 6:
+    case BOS_DSD_STATE_ENERGY_HOMING:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateEnergy1Attack(work);
         break;
-    case 7:
+    case BOS_DSD_STATE_ENERGY_RAIN:
         work->dsd->lastState = work->dsd->state;
         BosDsdMainUpdateEnergy2Attack(work);
         break;
-    case 8:
+    case BOS_DSD_STATE_CARD_BROKEN:
         BosDsdMainUpdateBreak(work);
         break;
-    case 9:
+    case BOS_DSD_STATE_EVENT_IDLE:
         BosDsdMainUpdateEventIdle(work);
         break;
-    case 10:
+    case BOS_DSD_STATE_UNUSED:
         BosDsdMainUpdateState10(work);
         break;
-    case 11:
+    case BOS_DSD_STATE_DEFEATED:
         BosDsdMainUpdateDefeat(work);
         break;
     }
@@ -306,18 +306,26 @@ void BosDsdMainEndTransition(DsdMainWork* work) {
     q->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
 }
 
+enum BosDsdAttackStartStep {
+    BOS_DSD_ATTACK_START_STEP_BEGIN_TRANSITION,
+    BOS_DSD_ATTACK_START_STEP_HIDE,
+    BOS_DSD_ATTACK_START_STEP_LOAD_TILES,
+    BOS_DSD_ATTACK_START_STEP_WAIT_TILES,
+    BOS_DSD_ATTACK_START_STEP_END
+};
+
 void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
     DsdWork* d = work->dsd;
     BtlObj* q = &d->body[1];
     BtlObj* p = &work->body;
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_ATTACK_START_STEP_BEGIN_TRANSITION:
         BosDsdMainBeginTransition(work, d->body[0].x, d->body[0].y, d->body[0].z);
         work->stepTimer = 0;
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_ATTACK_START_STEP_HIDE:
         work->stepTimer++;
 
         if (work->stepTimer > 11) {
@@ -327,16 +335,16 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_DSD_ATTACK_START_STEP_LOAD_TILES:
         switch (d->attackState) {
-        case 4:
-        case 5:
+        case BOS_DSD_STATE_SHOCKWAVE:
+        case BOS_DSD_STATE_SUMMON:
             CreateBgTileTransferTask(&work->tasks, 1, 0, 0x2C8, 8, gBosDsdFrame8Tiles);
             break;
-        case 6:
+        case BOS_DSD_STATE_ENERGY_HOMING:
             CreateBgTileTransferTask(&work->tasks, 1, 0, 0x280, 8, gBosDsdFrame36Tiles);
             break;
-        case 7:
+        case BOS_DSD_STATE_ENERGY_RAIN:
             CreateBgTileTransferTask(&work->tasks, 1, 0, 0x200, 8, gBosDsdFrame41Tiles);
             break;
         }
@@ -344,7 +352,7 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
         work->stepTimer = 0;
         work->dsd->stateStep++;
         break;
-    case 3:
+    case BOS_DSD_ATTACK_START_STEP_WAIT_TILES:
         work->stepTimer++;
 
         if (work->stepTimer > 9) {
@@ -357,24 +365,24 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
         work->dsd->stateStep = 0;
 
         switch (work->dsd->attackState) {
-        case 4:
-        case 5:
+        case BOS_DSD_STATE_SHOCKWAVE:
+        case BOS_DSD_STATE_SUMMON:
             p->x = 0xDC00;
             p->y = 0x16800;
             p->z = -0x4000;
-            work->dsd->state = 3;
+            work->dsd->state = BOS_DSD_STATE_APPROACH;
             break;
-        case 6:
+        case BOS_DSD_STATE_ENERGY_HOMING:
             p->x = 0xBC00;
             p->y = 0x16800;
             p->z = 0;
-            work->dsd->state = 6;
+            work->dsd->state = BOS_DSD_STATE_ENERGY_HOMING;
             break;
-        case 7:
+        case BOS_DSD_STATE_ENERGY_RAIN:
             p->x = 0xDC00;
             p->y = 0x16800;
             p->z = 0;
-            work->dsd->state = 7;
+            work->dsd->state = BOS_DSD_STATE_ENERGY_RAIN;
             break;
         }
 
@@ -383,18 +391,27 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
     }
 }
 
+enum BosDsdReturnStep {
+    BOS_DSD_RETURN_STEP_BEGIN_TRANSITION,
+    BOS_DSD_RETURN_STEP_HIDE,
+    BOS_DSD_RETURN_STEP_LOAD_TILES,
+    BOS_DSD_RETURN_STEP_RESET_POSE,
+    BOS_DSD_RETURN_STEP_END_TRANSITION,
+    BOS_DSD_RETURN_STEP_END
+};
+
 void BosDsdMainUpdateReturn(DsdMainWork* work) {
     DsdWork* d = work->dsd;
     BtlObj* q = &d->body[1];
     BtlObj* p = &work->body;
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_RETURN_STEP_BEGIN_TRANSITION:
         BosDsdMainBeginTransition(work, d->body[0].x, d->body[0].y, d->body[0].z);
         work->stepTimer = 0;
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_RETURN_STEP_HIDE:
         work->stepTimer++;
 
         if (work->stepTimer > 4) {
@@ -403,12 +420,12 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_DSD_RETURN_STEP_LOAD_TILES:
         CreateBgTileTransferTask(&work->tasks, 1, 0, 0x120, 3, gBosDsdBgTiles);
         work->stepTimer = 0;
         work->dsd->stateStep++;
         break;
-    case 3:
+    case BOS_DSD_RETURN_STEP_RESET_POSE:
         work->stepTimer++;
 
         if (work->stepTimer > 4) {
@@ -423,7 +440,7 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
         }
 
         break;
-    case 4:
+    case BOS_DSD_RETURN_STEP_END_TRANSITION:
         if (!BgFxIsActive()) {
             BosDsdMainEndTransition(work);
             work->dsd->stateStep++;
@@ -432,17 +449,30 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
         break;
     default:
         d->stateStep = 0;
-        work->dsd->state = 1;
+        work->dsd->state = BOS_DSD_STATE_IDLE;
         break;
     }
 }
+
+enum BosDsdApproachStep {
+    BOS_DSD_APPROACH_STEP_APPEAR,
+    BOS_DSD_APPROACH_STEP_END_TRANSITION,
+    BOS_DSD_APPROACH_STEP_MOVE_IN,
+    BOS_DSD_APPROACH_STEP_RAISE_ARM,
+    BOS_DSD_APPROACH_STEP_BOB_UP,
+    BOS_DSD_APPROACH_STEP_BOB_DOWN,
+    BOS_DSD_APPROACH_STEP_HOLD,
+    BOS_DSD_APPROACH_STEP_SWING,
+    BOS_DSD_APPROACH_STEP_REACH,
+    BOS_DSD_APPROACH_STEP_END
+};
 
 void BosDsdMainUpdateApproach(DsdMainWork* work) {
     DsdWork* d = work->dsd;
     BtlObj* q = &d->body[1];
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_APPROACH_STEP_APPEAR:
         work->dsd->bgFrame = 8;
         work->baseFrame = 8;
         work->dsd->bgFrameTimer = 0;
@@ -458,7 +488,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         q->z = -0xD400;
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_APPROACH_STEP_END_TRANSITION:
         if (BgFxIsActive()) {
             break;
         }
@@ -466,7 +496,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         BosDsdMainEndTransition(work);
         work->dsd->stateStep++;
         break;
-    case 2:
+    case BOS_DSD_APPROACH_STEP_MOVE_IN:
         if ((s16)work->moveSteps > 0) {
             ApproachValue(&d->body[0].x, 0xDC00, work->moveSteps);
             ApproachValue(&d->body[0].z, -0x9400, work->moveSteps);
@@ -484,7 +514,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_DSD_APPROACH_STEP_RAISE_ARM:
         work->stepTimer++;
 
         if (work->stepTimer > 3) {
@@ -497,7 +527,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         }
 
         break;
-    case 4:
+    case BOS_DSD_APPROACH_STEP_BOB_UP:
         work->stepTimer++;
 
         if (work->stepTimer > 1) {
@@ -508,7 +538,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_DSD_APPROACH_STEP_BOB_DOWN:
         work->stepTimer++;
 
         if (work->stepTimer > 1) {
@@ -519,7 +549,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         }
 
         break;
-    case 6:
+    case BOS_DSD_APPROACH_STEP_HOLD:
         work->stepTimer++;
 
         if (work->stepTimer > 25) {
@@ -532,7 +562,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         }
 
         break;
-    case 7:
+    case BOS_DSD_APPROACH_STEP_SWING:
         work->stepTimer++;
 
         if (work->stepTimer > 3) {
@@ -545,7 +575,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         }
 
         break;
-    case 8:
+    case BOS_DSD_APPROACH_STEP_REACH:
         work->stepTimer++;
 
         if (work->stepTimer > 3) {
@@ -576,13 +606,23 @@ void BosDsdMainLoopFrames(DsdMainWork* work) {
     work->dsd->bgFrameTimer++;
 }
 
+enum BosDsdShockwaveStep {
+    BOS_DSD_SHOCKWAVE_STEP_PUNCH,
+    BOS_DSD_SHOCKWAVE_STEP_BOB_DOWN,
+    BOS_DSD_SHOCKWAVE_STEP_BOB_UP,
+    BOS_DSD_SHOCKWAVE_STEP_WAIT_WAVE,
+    BOS_DSD_SHOCKWAVE_STEP_HOLD,
+    BOS_DSD_SHOCKWAVE_STEP_LIFT,
+    BOS_DSD_SHOCKWAVE_STEP_END
+};
+
 void BosDsdMainUpdateShockwave(DsdMainWork* work) {
     DsdWork* d = work->dsd;
     BtlObj* a = &d->body[1];
     BtlObj* b = &d->body[2];
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_SHOCKWAVE_STEP_PUNCH:
         work->dsd->bgFrame = 13;
         work->baseFrame = 13;
         work->dsd->bgFrameTimer = 0;
@@ -598,7 +638,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         ColliderSetDisabled(&b->collider, 0);
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_SHOCKWAVE_STEP_BOB_DOWN:
         BosDsdMainLoopFrames(work);
         work->stepTimer++;
 
@@ -610,7 +650,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_DSD_SHOCKWAVE_STEP_BOB_UP:
         BosDsdMainLoopFrames(work);
         work->stepTimer++;
 
@@ -622,7 +662,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_DSD_SHOCKWAVE_STEP_WAIT_WAVE:
         BosDsdMainLoopFrames(work);
 
         if (!BgFxIsActive()) {
@@ -632,7 +672,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         }
 
         break;
-    case 4:
+    case BOS_DSD_SHOCKWAVE_STEP_HOLD:
         BosDsdMainLoopFrames(work);
         work->stepTimer++;
 
@@ -642,7 +682,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_DSD_SHOCKWAVE_STEP_LIFT:
         BosDsdSetBgFrame(8, 0x80);
         b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         ColliderSetDisabled(&b->collider, 1);
@@ -650,7 +690,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         break;
     default:
         d->stateStep = 0;
-        work->dsd->state = 0;
+        work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
 }
@@ -662,7 +702,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
     BtlObj* e;
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_SUMMON_STEP_PLUNGE:
         work->dsd->bgFrame = 21;
         work->baseFrame = 21;
         work->dsd->bgFrameTimer = 0;
@@ -673,7 +713,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         m4aSongNumStart(SONG_EF_DS_BEEM);
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_SUMMON_STEP_OPEN:
         if (++work->dsd->bgFrameTimer >= gBosDsdFrameDurations[work->dsd->bgFrame]) {
             work->dsd->bgFrameTimer = 0;
             work->dsd->bgFrame++;
@@ -688,7 +728,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_DSD_SUMMON_STEP_START_SPAWN:
         work->dsd->bgFrame = 28;
         work->baseFrame = 28;
         work->dsd->bgFrameTimer = 0;
@@ -700,7 +740,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         b->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         work->dsd->stateStep++;
         break;
-    case 3:
+    case BOS_DSD_SUMMON_STEP_SPAWN_SHADOWS:
         if (++work->dsd->bgFrameTimer >= gBosDsdFrameDurations[work->dsd->bgFrame]) {
             work->dsd->bgFrameTimer = 0;
             work->dsd->bgFrame++;
@@ -719,7 +759,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         }
 
         break;
-    case 4:
+    case BOS_DSD_SUMMON_STEP_STOP_SPAWN:
         work->dsd->bgFrame = 27;
         work->baseFrame = 27;
         work->dsd->bgFrameTimer = 0;
@@ -727,7 +767,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         work->dsd->stateStep++;
         break;
-    case 5:
+    case BOS_DSD_SUMMON_STEP_CLOSE:
         if (++work->dsd->bgFrameTimer >= gBosDsdFrameDurations[work->dsd->bgFrame]) {
             work->dsd->bgFrameTimer = 0;
             work->dsd->bgFrame--;
@@ -747,7 +787,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         }
 
         break;
-    case 6:
+    case BOS_DSD_SUMMON_STEP_WARP_SHADOWS:
         work->stepTimer = 0;
         BosDsdSetBgFrame(8, 0x80);
         e = ListPoolFirst(&gBtlWork->pool);
@@ -765,7 +805,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         break;
     default:
         d->stateStep = 0;
-        work->dsd->state = 0;
+        work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
 }
@@ -785,12 +825,23 @@ void BosDsdMainLoopMapFrames(DsdMainWork* work) {
     work->dsd->bgFrameTimer++;
 }
 
+enum BosDsdEnergyHomingStep {
+    BOS_DSD_ENERGY_HOMING_STEP_APPEAR,
+    BOS_DSD_ENERGY_HOMING_STEP_END_TRANSITION,
+    BOS_DSD_ENERGY_HOMING_STEP_LAUNCH,
+    BOS_DSD_ENERGY_HOMING_STEP_WAIT_FIRST,
+    BOS_DSD_ENERGY_HOMING_STEP_WAIT_SECOND,
+    BOS_DSD_ENERGY_HOMING_STEP_WAIT_THIRD,
+    BOS_DSD_ENERGY_HOMING_STEP_END_ACTION,
+    BOS_DSD_ENERGY_HOMING_STEP_END
+};
+
 void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
     DsdWork* d = work->dsd;
     BtlObj* q = &d->body[1];
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_ENERGY_HOMING_STEP_APPEAR:
         work->dsd->bgFrame = 36;
         work->baseFrame = 36;
         work->dsd->bgFrameTimer = 0;
@@ -801,7 +852,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         q->z = -0x6000;
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_ENERGY_HOMING_STEP_END_TRANSITION:
         if (BgFxIsActive()) {
             break;
         }
@@ -811,20 +862,20 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         work->moveSteps = 0;
         work->dsd->stateStep++;
         break;
-    case 2:
+    case BOS_DSD_ENERGY_HOMING_STEP_LAUNCH:
         BosDsdMainLoopMapFrames(work);
         work->energy1Task = TaskCreate(&work->tasks, &gTaskDescBosDsdEnergy1, work->dsd);
         work->dsd->stateStep++;
         break;
-    case 3:
+    case BOS_DSD_ENERGY_HOMING_STEP_WAIT_FIRST:
         BosDsdMainLoopMapFrames(work);
 
         if (IsTaskActive(work->energy1Task)) {
             break;
         }
 
-        if (work->dsd->hpPhase == 0) {
-            work->dsd->stateStep = 6;
+        if (work->dsd->hpPhase == BOS_DSD_HP_PHASE_HIGH) {
+            work->dsd->stateStep = BOS_DSD_ENERGY_HOMING_STEP_END_ACTION;
             break;
         }
 
@@ -837,15 +888,15 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         }
 
         break;
-    case 4:
+    case BOS_DSD_ENERGY_HOMING_STEP_WAIT_SECOND:
         BosDsdMainLoopMapFrames(work);
 
         if (IsTaskActive(work->energy1Task2)) {
             break;
         }
 
-        if (work->dsd->hpPhase == 1) {
-            work->dsd->stateStep = 6;
+        if (work->dsd->hpPhase == BOS_DSD_HP_PHASE_MID) {
+            work->dsd->stateStep = BOS_DSD_ENERGY_HOMING_STEP_END_ACTION;
             break;
         }
 
@@ -858,7 +909,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_DSD_ENERGY_HOMING_STEP_WAIT_THIRD:
         BosDsdMainLoopMapFrames(work);
 
         if (IsTaskActive(work->energy1Task3)) {
@@ -867,24 +918,33 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
 
         work->dsd->stateStep++;
         break;
-    case 6:
+    case BOS_DSD_ENERGY_HOMING_STEP_END_ACTION:
         BosDsdMainLoopMapFrames(work);
         ClearBtlObjActionFlags(q);
         work->dsd->stateStep++;
         break;
     default:
         d->stateStep = 0;
-        work->dsd->state = 0;
+        work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
 }
+
+enum BosDsdEnergyRainStep {
+    BOS_DSD_ENERGY_RAIN_STEP_APPEAR,
+    BOS_DSD_ENERGY_RAIN_STEP_END_TRANSITION,
+    BOS_DSD_ENERGY_RAIN_STEP_LAUNCH,
+    BOS_DSD_ENERGY_RAIN_STEP_WAIT,
+    BOS_DSD_ENERGY_RAIN_STEP_END_ACTION,
+    BOS_DSD_ENERGY_RAIN_STEP_END
+};
 
 void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
     DsdWork* d = work->dsd;
     BtlObj* q = &d->body[1];
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_ENERGY_RAIN_STEP_APPEAR:
         work->dsd->bgFrame = 41;
         work->baseFrame = 41;
         work->dsd->bgFrameTimer = 0;
@@ -896,7 +956,7 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         q->z = -0x5C00;
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_ENERGY_RAIN_STEP_END_TRANSITION:
         if (BgFxIsActive()) {
             break;
         }
@@ -905,13 +965,13 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         work->moveSteps = 0;
         work->dsd->stateStep++;
         break;
-    case 2:
+    case BOS_DSD_ENERGY_RAIN_STEP_LAUNCH:
         BosDsdMainLoopMapFrames(work);
         LoadPalette(gBosDsdBgPalette, (void*)PLTT, 32);
         work->energy2Task = TaskCreate(&work->tasks, &gTaskDescBosDsdEnergy2, work->dsd);
         work->dsd->stateStep++;
         break;
-    case 3:
+    case BOS_DSD_ENERGY_RAIN_STEP_WAIT:
         BosDsdMainLoopMapFrames(work);
 
         if (IsTaskActive(work->energy2Task)) {
@@ -920,14 +980,14 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
 
         work->dsd->stateStep++;
         break;
-    case 4:
+    case BOS_DSD_ENERGY_RAIN_STEP_END_ACTION:
         BosDsdMainLoopMapFrames(work);
         ClearBtlObjActionFlags(q);
         work->dsd->stateStep++;
         break;
     default:
         d->stateStep = 0;
-        work->dsd->state = 0;
+        work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
 }
@@ -940,22 +1000,34 @@ void BosDsdMainUpdateBreak(DsdMainWork* work) {
     BtlObj* a = &d->body[1];
     BtlObj* b = &d->body[2];
 
-    if (d->lastState == 2 || d->lastState == 3) {
+    if (d->lastState == BOS_DSD_STATE_ATTACK_START || d->lastState == BOS_DSD_STATE_APPROACH) {
         ClearBtlObjActionFlags(a);
         b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         ColliderSetDisabled(&b->collider, 1);
         work->dsd->stateStep = 0;
-        work->dsd->state = 0;
+        work->dsd->state = BOS_DSD_STATE_RETURN;
     } else if (d->stateStep > 60) {
         ClearBtlObjActionFlags(a);
         b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         ColliderSetDisabled(&b->collider, 1);
         work->dsd->stateStep = 0;
-        work->dsd->state = 0;
+        work->dsd->state = BOS_DSD_STATE_RETURN;
     } else {
         d->stateStep++;
     }
 }
+
+enum BosDsdDefeatStep {
+    BOS_DSD_DEFEAT_STEP_WARP_SHADOWS,
+    BOS_DSD_DEFEAT_STEP_BEGIN_DEFEAT,
+    BOS_DSD_DEFEAT_STEP_HIDE,
+    BOS_DSD_DEFEAT_STEP_LOAD_FRAME,
+    BOS_DSD_DEFEAT_STEP_END_TRANSITION,
+    BOS_DSD_DEFEAT_STEP_DELAY,
+    BOS_DSD_DEFEAT_STEP_START_DISSOLVE,
+    BOS_DSD_DEFEAT_STEP_DISSOLVE,
+    BOS_DSD_DEFEAT_STEP_END
+};
 
 void BosDsdMainUpdateDefeat(DsdMainWork* work) {
     DsdWork* d = work->dsd;
@@ -966,7 +1038,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
     CharaObjParam param;
 
     switch (d->stateStep) {
-    case 0:
+    case BOS_DSD_DEFEAT_STEP_WARP_SHADOWS:
         e = ListPoolFirst(&gBtlWork->pool);
 
         while (e != NULL) {
@@ -980,7 +1052,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
 
         work->dsd->stateStep++;
         break;
-    case 1:
+    case BOS_DSD_DEFEAT_STEP_BEGIN_DEFEAT:
         BeginBossDefeat(a);
         ColliderSetDisabled(&a->collider, 1);
         ColliderSetDisabled(&b->collider, 1);
@@ -994,7 +1066,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         work->dsd->stateStep++;
         BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
         break;
-    case 2:
+    case BOS_DSD_DEFEAT_STEP_HIDE:
         BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
         work->stepTimer++;
 
@@ -1005,13 +1077,13 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_DSD_DEFEAT_STEP_LOAD_FRAME:
         BosDsdSetBgFrame(36, 0xE0);
         EnableBg(1);
         BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
         work->dsd->stateStep++;
         break;
-    case 4:
+    case BOS_DSD_DEFEAT_STEP_END_TRANSITION:
         BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
 
         if (BgFxIsActive()) {
@@ -1023,11 +1095,11 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         FadeSetPaletteExcluded(19, 1);
         work->dsd->stateStep++;
         break;
-    case 5:
+    case BOS_DSD_DEFEAT_STEP_DELAY:
         BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
         work->dsd->stateStep++;
         break;
-    case 6:
+    case BOS_DSD_DEFEAT_STEP_START_DISSOLVE:
         BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
         param.tilesAddr = 0;
         param.tileCount = 0;
@@ -1050,7 +1122,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         CharaObjInitDefeat(&param);
         work->dsd->stateStep++;
         break;
-    case 7:
+    case BOS_DSD_DEFEAT_STEP_DISSOLVE:
         if (!CharaObjUpdateDefeat()) {
             d->body[0].x = 300;
             d->body[0].y = 0;
@@ -1078,7 +1150,7 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
     BtlObj* a = &d->body[1];
 
     if (a->hp < a->maxHp / 3) {
-        d->hpPhase = 2;
+        d->hpPhase = BOS_DSD_HP_PHASE_LOW;
 
         if (GetRandom() % 100 <= 9) {
             RequestBossCardValue(1);
@@ -1088,7 +1160,7 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
             RequestBossCardValue(GetRandom() % 3 + 5);
         }
     } else if (a->hp < a->maxHp / 3 * 2) {
-        d->hpPhase = 1;
+        d->hpPhase = BOS_DSD_HP_PHASE_MID;
 
         if (GetRandom() % 100 <= 29) {
             RequestBossCardValue(GetRandom() % 2 + 8);
@@ -1096,7 +1168,7 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
             RequestBossCardValue(GetRandom() % 3 + 4);
         }
     } else {
-        d->hpPhase = 0;
+        d->hpPhase = BOS_DSD_HP_PHASE_HIGH;
 
         if (GetRandom() % 100 <= 59) {
             RequestBossCardValue(GetRandom() % 3 + 7);
@@ -1107,19 +1179,19 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
 
     switch (work->dsd->attackCycle) {
     case 0:
-        work->dsd->attackState = 5;
+        work->dsd->attackState = BOS_DSD_STATE_SUMMON;
         break;
     case 1:
-        work->dsd->attackState = 6;
+        work->dsd->attackState = BOS_DSD_STATE_ENERGY_HOMING;
         break;
     case 2:
-        work->dsd->attackState = 4;
+        work->dsd->attackState = BOS_DSD_STATE_SHOCKWAVE;
         break;
     case 3:
-        work->dsd->attackState = 7;
+        work->dsd->attackState = BOS_DSD_STATE_ENERGY_RAIN;
         break;
     default:
-        work->dsd->attackState = 0;
+        work->dsd->attackState = BOS_DSD_STATE_RETURN;
         break;
     }
 

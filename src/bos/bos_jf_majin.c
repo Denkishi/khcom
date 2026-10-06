@@ -146,40 +146,40 @@ u8 task_bos_jf_majin_1(JfMajinWork* work) {
     jf->flags |= JF_FLAG_NEEDS_BG_CLIP;
 
     switch (work->jf->state) {
-    case 0:
+    case BOS_JF_STATE_IDLE:
         BosJfMajinUpdateIdle(work);
         break;
-    case 1:
+    case BOS_JF_STATE_SWITCH_SIDE:
         BosJfMajinUpdateSwitchSide(work);
         break;
-    case 2:
+    case BOS_JF_STATE_ROCK_THROW:
         BosJfMajinUpdateRockAttack(work);
         break;
-    case 3:
+    case BOS_JF_STATE_SLAM:
         BosJfMajinUpdateSlam(work);
         break;
-    case 4:
+    case BOS_JF_STATE_BEAM:
         BosJfMajinUpdateBeam(work);
         break;
-    case 5:
+    case BOS_JF_STATE_SWEEP_BEAM:
         BosJfMajinUpdateSweepBeam(work);
         break;
-    case 8:
+    case BOS_JF_STATE_UNUSED:
         BosJfMajinUpdateState8(work);
         break;
-    case 6:
+    case BOS_JF_STATE_SHIFT_PILLARS:
         BosJfMajinUpdatePillars(work);
         break;
-    case 7:
+    case BOS_JF_STATE_CARD_BROKEN:
         BosJfMajinUpdateBreak(work);
         break;
-    case 9:
+    case BOS_JF_STATE_DEFEATED:
         BosJfMajinUpdateDefeat(work);
         break;
-    case 10:
+    case BOS_JF_STATE_EVENT_IDLE:
         BosJfMajinUpdateEventIdle(work);
         break;
-    case 11:
+    case BOS_JF_STATE_GIMMICK:
         BosJfMajinUpdateGimmick(work);
         break;
     }
@@ -188,7 +188,7 @@ u8 task_bos_jf_majin_1(JfMajinWork* work) {
     TaskPoolUpdate(&work->tasks);
 
     if (work->jf->flags & JF_FLAG_NEEDS_BG_CLIP) {
-        if (work->jf->state != 6) {
+        if (work->jf->state != BOS_JF_STATE_SHIFT_PILLARS) {
             BosJfMajinUpdateBgClip(work->jf->bgFrame, work);
         }
     }
@@ -334,6 +334,13 @@ void BosJfMajinUpdateIdle(JfMajinWork* work) {
     }
 }
 
+enum BosJfMajinSwitchSideStep {
+    BOS_JF_MAJIN_SWITCH_SIDE_STEP_SINK,
+    BOS_JF_MAJIN_SWITCH_SIDE_STEP_WARP,
+    BOS_JF_MAJIN_SWITCH_SIDE_STEP_RISE,
+    BOS_JF_MAJIN_SWITCH_SIDE_STEP_END
+};
+
 void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
     JfWork* jf = work->jf;
 
@@ -346,13 +353,13 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
 
         work->jf->bgFrameTimer = 0;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
-        work->step = 0;
+        work->step = BOS_JF_MAJIN_SWITCH_SIDE_STEP_SINK;
         work->stepTimer = 0;
         work->spriteVisible = 0;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
-        case 0:
+        case BOS_JF_MAJIN_SWITCH_SIDE_STEP_SINK:
             if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
                 jf->bgFrameTimer = 0;
 
@@ -387,7 +394,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_JF_MAJIN_SWITCH_SIDE_STEP_WARP:
             work->stepTimer++;
 
             if (work->stepTimer > 60) {
@@ -410,7 +417,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_JF_MAJIN_SWITCH_SIDE_STEP_RISE:
             if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
                 jf->bgFrameTimer = 0;
 
@@ -447,11 +454,21 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             break;
         default:
             work->jf->stateStep = 0;
-            work->jf->state = 0;
+            work->jf->state = BOS_JF_STATE_IDLE;
             break;
         }
     }
 }
+
+enum BosJfMajinRockThrowStep {
+    BOS_JF_MAJIN_ROCK_THROW_STEP_SINK,
+    BOS_JF_MAJIN_ROCK_THROW_STEP_SPAWN_ROCK,
+    BOS_JF_MAJIN_ROCK_THROW_STEP_RISE,
+    BOS_JF_MAJIN_ROCK_THROW_STEP_THROW,
+    BOS_JF_MAJIN_ROCK_THROW_STEP_WAIT_ROCK,
+    BOS_JF_MAJIN_ROCK_THROW_STEP_RETURN,
+    BOS_JF_MAJIN_ROCK_THROW_STEP_END
+};
 
 void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
     JfWork* jf = work->jf;
@@ -468,13 +485,13 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
 
         work->jf->bgFrameTimer = 0;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
-        work->step = 0;
+        work->step = BOS_JF_MAJIN_ROCK_THROW_STEP_SINK;
         work->stepTimer = 0;
         work->spriteVisible = 0;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
-        case 0:
+        case BOS_JF_MAJIN_ROCK_THROW_STEP_SINK:
             if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
                 work->jf->bgFrameTimer = 0;
 
@@ -509,7 +526,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_JF_MAJIN_ROCK_THROW_STEP_SPAWN_ROCK:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->jf->bgFrame = 14;
                 work->z = -0x2000 - ((gBosJfRightPillarLevel + 1) << 11);
@@ -524,7 +541,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             work->moveSteps = 120;
             work->step++;
             break;
-        case 2:
+        case BOS_JF_MAJIN_ROCK_THROW_STEP_RISE:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.z, work->z, work->moveSteps);
                 work->moveSteps--;
@@ -537,7 +554,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             }
 
             break;
-        case 3:
+        case BOS_JF_MAJIN_ROCK_THROW_STEP_THROW:
             if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
                 work->jf->bgFrameTimer = 0;
                 work->jf->bgFrame++;
@@ -558,7 +575,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
 
             work->jf->bgFrameTimer++;
             break;
-        case 4:
+        case BOS_JF_MAJIN_ROCK_THROW_STEP_WAIT_ROCK:
             if (!IsTaskActive(work->task)) {
                 work->z = -0x3800;
                 work->moveSteps = 10;
@@ -566,7 +583,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             }
 
             break;
-        case 5:
+        case BOS_JF_MAJIN_ROCK_THROW_STEP_RETURN:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.z, work->z, work->moveSteps);
                 work->moveSteps--;
@@ -578,11 +595,21 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
         default:
             ClearBtlObjActionFlags(q);
             work->jf->stateStep = 0;
-            work->jf->state = 6;
+            work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
         }
     }
 }
+
+enum BosJfMajinSlamStep {
+    BOS_JF_MAJIN_SLAM_STEP_WINDUP,
+    BOS_JF_MAJIN_SLAM_STEP_HOLD,
+    BOS_JF_MAJIN_SLAM_STEP_DROP,
+    BOS_JF_MAJIN_SLAM_STEP_IMPACT,
+    BOS_JF_MAJIN_SLAM_STEP_RECOVER,
+    BOS_JF_MAJIN_SLAM_STEP_RETURN,
+    BOS_JF_MAJIN_SLAM_STEP_END
+};
 
 void BosJfMajinUpdateSlam(JfMajinWork* work) {
     JfWork* jf = work->jf;
@@ -604,14 +631,14 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
         }
 
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
-        work->step = 0;
+        work->step = BOS_JF_MAJIN_SLAM_STEP_WINDUP;
         work->stepTimer = 0;
         work->moveSteps = 40;
         work->spriteVisible = 0;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
-        case 0:
+        case BOS_JF_MAJIN_SLAM_STEP_WINDUP:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.x, work->x, work->moveSteps);
                 ApproachValue(&jf->body.z, work->z, work->moveSteps);
@@ -634,7 +661,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_JF_MAJIN_SLAM_STEP_HOLD:
             work->stepTimer++;
 
             if (work->stepTimer > 20) {
@@ -644,7 +671,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_JF_MAJIN_SLAM_STEP_DROP:
             jf->body.z += 0xA00;
 
             if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
@@ -661,7 +688,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
 
             work->jf->bgFrameTimer++;
             break;
-        case 3:
+        case BOS_JF_MAJIN_SLAM_STEP_IMPACT:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartGroundImpact(jf->body.x - 0x3000, jf->body.y + jf->body.z + 0x1800);
                 ApplyAttackBox(0xE8, jf->body.x - 0x3000, jf->body.y, jf->body.z + 0x1800, 30, 30, 30);
@@ -675,7 +702,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
             work->stepTimer = 0;
             work->step++;
             break;
-        case 4:
+        case BOS_JF_MAJIN_SLAM_STEP_RECOVER:
             if (work->stepTimer == 10) {
                 work->jf->bgFrame = work->baseFrame + 5;
                 BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
@@ -697,7 +724,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
 
             work->stepTimer++;
             break;
-        case 5:
+        case BOS_JF_MAJIN_SLAM_STEP_RETURN:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.x, work->x, work->moveSteps);
                 ApproachValue(&jf->body.z, work->z, work->moveSteps);
@@ -710,11 +737,21 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
         default:
             ClearBtlObjActionFlags(q);
             work->jf->stateStep = 0;
-            work->jf->state = 6;
+            work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
         }
     }
 }
+
+enum BosJfMajinBeamStep {
+    BOS_JF_MAJIN_BEAM_STEP_RISE,
+    BOS_JF_MAJIN_BEAM_STEP_WINDUP,
+    BOS_JF_MAJIN_BEAM_STEP_LUNGE,
+    BOS_JF_MAJIN_BEAM_STEP_FIRE,
+    BOS_JF_MAJIN_BEAM_STEP_SUSTAIN,
+    BOS_JF_MAJIN_BEAM_STEP_RETURN,
+    BOS_JF_MAJIN_BEAM_STEP_END
+};
 
 void BosJfMajinUpdateBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
@@ -736,14 +773,14 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
         }
 
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
-        work->step = 0;
+        work->step = BOS_JF_MAJIN_BEAM_STEP_RISE;
         work->stepTimer = 0;
         work->moveSteps = 40;
         work->spriteVisible = 0;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
-        case 0:
+        case BOS_JF_MAJIN_BEAM_STEP_RISE:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.z, work->z, work->moveSteps);
                 work->moveSteps--;
@@ -752,7 +789,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_JF_MAJIN_BEAM_STEP_WINDUP:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 jf->body.x += 0x100;
             } else {
@@ -770,7 +807,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_JF_MAJIN_BEAM_STEP_LUNGE:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.x, work->x, work->moveSteps);
                 work->moveSteps--;
@@ -780,7 +817,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             }
 
             break;
-        case 3:
+        case BOS_JF_MAJIN_BEAM_STEP_FIRE:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 160, 45);
             } else {
@@ -792,7 +829,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             work->stepTimer = 0;
             work->step++;
             break;
-        case 4:
+        case BOS_JF_MAJIN_BEAM_STEP_SUSTAIN:
             jf->body.x = (work->x - 0x100) + (work->moveSteps++ % 2) * 0x200;
 
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -820,7 +857,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
 
             work->stepTimer++;
             break;
-        case 5:
+        case BOS_JF_MAJIN_BEAM_STEP_RETURN:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.x, work->x, work->moveSteps);
                 ApproachValue(&jf->body.z, work->z, work->moveSteps);
@@ -833,11 +870,21 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
         default:
             ClearBtlObjActionFlags(q);
             work->jf->stateStep = 0;
-            work->jf->state = 6;
+            work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
         }
     }
 }
+
+enum BosJfMajinSweepBeamStep {
+    BOS_JF_MAJIN_SWEEP_BEAM_STEP_ALIGN,
+    BOS_JF_MAJIN_SWEEP_BEAM_STEP_WINDUP,
+    BOS_JF_MAJIN_SWEEP_BEAM_STEP_LUNGE,
+    BOS_JF_MAJIN_SWEEP_BEAM_STEP_FIRE,
+    BOS_JF_MAJIN_SWEEP_BEAM_STEP_SWEEP,
+    BOS_JF_MAJIN_SWEEP_BEAM_STEP_RETURN,
+    BOS_JF_MAJIN_SWEEP_BEAM_STEP_END
+};
 
 void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
@@ -861,14 +908,14 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
         }
 
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
-        work->step = 0;
+        work->step = BOS_JF_MAJIN_SWEEP_BEAM_STEP_ALIGN;
         work->stepTimer = 0;
         work->moveSteps = 40;
         work->spriteVisible = 0;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
-        case 0:
+        case BOS_JF_MAJIN_SWEEP_BEAM_STEP_ALIGN:
             BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
             if (work->moveSteps > 0) {
@@ -880,7 +927,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_JF_MAJIN_SWEEP_BEAM_STEP_WINDUP:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 jf->body.x += 0x100;
             } else {
@@ -898,7 +945,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_JF_MAJIN_SWEEP_BEAM_STEP_LUNGE:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.x, work->x, work->moveSteps);
                 work->moveSteps--;
@@ -908,7 +955,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             }
 
             break;
-        case 3:
+        case BOS_JF_MAJIN_SWEEP_BEAM_STEP_FIRE:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->beamAngle = 148;
                 work->beamScale = 0x100;
@@ -927,7 +974,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             work->beamLength = 0;
             work->step++;
             break;
-        case 4:
+        case BOS_JF_MAJIN_SWEEP_BEAM_STEP_SWEEP:
             work->moveSteps++;
 
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -975,7 +1022,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             }
 
             break;
-        case 5:
+        case BOS_JF_MAJIN_SWEEP_BEAM_STEP_RETURN:
             if (work->moveSteps > 0) {
                 ApproachValue(&jf->body.x, work->x, work->moveSteps);
                 ApproachValue(&jf->body.y, work->y2, work->moveSteps);
@@ -989,7 +1036,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
         default:
             ClearBtlObjActionFlags(q);
             work->jf->stateStep = 0;
-            work->jf->state = 6;
+            work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
         }
     }
@@ -1032,7 +1079,7 @@ void BosJfMajinUpdateBreak(JfMajinWork* work) {
         }
 
         work->jf->bgFrameTimer = 0;
-        work->jf->state = 6;
+        work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
     } else {
         work->jf->stateStep++;
     }
@@ -1071,9 +1118,17 @@ void BosJfMajinUpdateGimmick(JfMajinWork* work) {
         }
 
         work->jf->bgFrameTimer = 0;
-        work->jf->state = 6;
+        work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
     }
 }
+
+enum BosJfMajinDefeatStep {
+    BOS_JF_MAJIN_DEFEAT_STEP_DELAY,
+    BOS_JF_MAJIN_DEFEAT_STEP_START_DEATH_FX,
+    BOS_JF_MAJIN_DEFEAT_STEP_START_FLASH,
+    BOS_JF_MAJIN_DEFEAT_STEP_DROP_PRIZES,
+    BOS_JF_MAJIN_DEFEAT_STEP_END
+};
 
 void BosJfMajinUpdateDefeat(JfMajinWork* work) {
     JfWork* jf = work->jf;
@@ -1098,14 +1153,14 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         work->spriteVisible = 1;
         BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
         BeginBossDefeat(&jf->body);
-        work->step = 0;
+        work->step = BOS_JF_MAJIN_DEFEAT_STEP_DELAY;
         work->moveSteps = 0;
         work->jf->stateStep++;
         return;
     }
 
     switch (work->step) {
-    case 0:
+    case BOS_JF_MAJIN_DEFEAT_STEP_DELAY:
         BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
         if (work->moveSteps > 1) {
@@ -1116,7 +1171,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         }
 
         break;
-    case 1:
+    case BOS_JF_MAJIN_DEFEAT_STEP_START_DEATH_FX:
         BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
         if (FadeIsActive()) {
@@ -1132,7 +1187,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         work->step++;
         break;
-    case 2:
+    case BOS_JF_MAJIN_DEFEAT_STEP_START_FLASH:
         BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
         if (work->moveSteps <= 119) {
@@ -1143,7 +1198,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_JF_MAJIN_DEFEAT_STEP_DROP_PRIZES:
         if (!BgFxIsActive()) {
             if (q->x < 0x1B200) {
                 q->x = 0x1BA00;
@@ -1209,6 +1264,12 @@ u8 BosJfStepPillarLevel(u16* level, s16 target, u8 actorPillar, u8 pillar) {
     return 0;
 }
 
+enum BosJfShiftPillarsStep {
+    BOS_JF_SHIFT_PILLARS_STEP_CHOOSE_LAYOUT,
+    BOS_JF_SHIFT_PILLARS_STEP_RUMBLE,
+    BOS_JF_SHIFT_PILLARS_STEP_MOVE
+};
+
 void BosJfMajinUpdatePillars(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* s = &work->jf->sub;
@@ -1218,12 +1279,12 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
 
     if (jf->gimmickTimer > 0) {
         jf->stateStep = 0;
-        work->jf->state = 0;
+        work->jf->state = BOS_JF_STATE_IDLE;
         return;
     }
 
     switch (jf->stateStep) {
-    case 0:
+    case BOS_JF_SHIFT_PILLARS_STEP_CHOOSE_LAYOUT:
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 8;
             work->baseFrame = 8;
@@ -1239,25 +1300,25 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
 
         if (work->jf->flags & JF_FLAG_GIMMICK_PENDING) {
             work->jf->flags &= ~JF_FLAG_GIMMICK_PENDING;
-            work->jf->pillarPhase = 2;
+            work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_GIMMICK;
             m = 14;
         } else if (s->hp < s->maxHp / 2) {
             switch (work->jf->pillarPhase) {
-            case 0:
+            case BOS_JF_PILLAR_PHASE_START:
                 m = GetRandom() & 1;
                 break;
-            case 1:
-            case 2:
+            case BOS_JF_PILLAR_PHASE_STAIRS:
+            case BOS_JF_PILLAR_PHASE_GIMMICK:
                 m = GetRandom() % 6 + 2;
                 break;
-            case 3:
+            case BOS_JF_PILLAR_PHASE_FLAT:
                 m = GetRandom() % 6 + 8;
                 break;
             default:
                 m = 0;
                 break;
             }
-        } else if (work->jf->pillarPhase == 0) {
+        } else if (work->jf->pillarPhase == BOS_JF_PILLAR_PHASE_START) {
             m = GetRandom() % 6 + 8;
         } else {
             m = GetRandom() % 8;
@@ -1275,7 +1336,7 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
         BosJfStartShake(60);
         work->jf->stateStep++;
         break;
-    case 1:
+    case BOS_JF_SHIFT_PILLARS_STEP_RUMBLE:
         work->stepTimer++;
 
         if (work->stepTimer > 80) {
@@ -1301,37 +1362,37 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
         if (n == 3) {
             if (s->hp < s->maxHp / 2) {
                 switch (work->jf->pillarPhase) {
-                case 0:
-                    work->jf->pillarPhase = 3;
+                case BOS_JF_PILLAR_PHASE_START:
+                    work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_FLAT;
                     break;
-                case 1:
-                    work->jf->pillarPhase = 0;
+                case BOS_JF_PILLAR_PHASE_STAIRS:
+                    work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_START;
                     break;
-                case 2:
-                    work->jf->pillarPhase = 0;
+                case BOS_JF_PILLAR_PHASE_GIMMICK:
+                    work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_START;
                     work->jf->gimmickTimer = 300;
                     break;
-                case 3:
-                    work->jf->pillarPhase = 1;
+                case BOS_JF_PILLAR_PHASE_FLAT:
+                    work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_STAIRS;
                     break;
                 }
             } else {
                 switch (work->jf->pillarPhase) {
-                case 0:
-                    work->jf->pillarPhase = 1;
+                case BOS_JF_PILLAR_PHASE_START:
+                    work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_STAIRS;
                     break;
-                case 1:
-                    work->jf->pillarPhase = 0;
+                case BOS_JF_PILLAR_PHASE_STAIRS:
+                    work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_START;
                     break;
-                case 2:
-                    work->jf->pillarPhase = 0;
+                case BOS_JF_PILLAR_PHASE_GIMMICK:
+                    work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_START;
                     work->jf->gimmickTimer = 300;
                     break;
                 }
             }
 
             work->jf->stateStep = 0;
-            work->jf->state = 0;
+            work->jf->state = BOS_JF_STATE_IDLE;
         } else {
             gBosJfLeftPillarLevel = work->leftLevel;
             gBosJfMiddlePillarLevel = work->middleLevel;
@@ -1388,7 +1449,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
 
         if (gBosJfLeftPillarLevel == gBosJfMiddlePillarLevel && gBosJfLeftPillarLevel == gBosJfRightPillarLevel && GetRandom() % 100 <= 79) {
             RequestEnemyCardUse(s);
-            work->jf->attackState = 5;
+            work->jf->attackState = BOS_JF_STATE_SWEEP_BEAM;
         } else {
             v = BosJfMajinGetActorPillarDistance(work);
 
@@ -1399,26 +1460,26 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
 
                 if (r <= 39) {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 3;
+                    work->jf->attackState = BOS_JF_STATE_SLAM;
                 } else if (r <= 79) {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 4;
+                    work->jf->attackState = BOS_JF_STATE_BEAM;
                 } else {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 2;
+                    work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 }
 
                 break;
             case 1:
                 RequestEnemyCardUse(s);
-                work->jf->attackState = 2;
+                work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 break;
             case 2:
                 if (GetRandom() % 100 <= 49) {
-                    work->jf->state = 1;
+                    work->jf->state = BOS_JF_STATE_SWITCH_SIDE;
                 } else {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 2;
+                    work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 }
 
                 break;
@@ -1433,7 +1494,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
 
         if (gBosJfLeftPillarLevel == gBosJfMiddlePillarLevel && gBosJfLeftPillarLevel == gBosJfRightPillarLevel && GetRandom() % 100 <= 19) {
             RequestEnemyCardUse(s);
-            work->jf->attackState = 5;
+            work->jf->attackState = BOS_JF_STATE_SWEEP_BEAM;
         } else {
             v = BosJfMajinGetActorPillarDistance(work);
 
@@ -1443,29 +1504,29 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
 
                 if (GetRandom() % 100 <= 59) {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 3;
+                    work->jf->attackState = BOS_JF_STATE_SLAM;
                 } else {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 4;
+                    work->jf->attackState = BOS_JF_STATE_BEAM;
                 }
 
                 break;
             case 1:
                 if (GetRandom() % 100 <= 79) {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 2;
+                    work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 } else {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 4;
+                    work->jf->attackState = BOS_JF_STATE_BEAM;
                 }
 
                 break;
             case 2:
                 if (GetRandom() % 100 <= 69) {
-                    work->jf->state = 1;
+                    work->jf->state = BOS_JF_STATE_SWITCH_SIDE;
                 } else {
                     RequestEnemyCardUse(s);
-                    work->jf->attackState = 2;
+                    work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 }
 
                 break;
@@ -1473,6 +1534,15 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
         }
     }
 }
+
+enum BosJfRockState {
+    BOS_JF_ROCK_STATE_RISE,
+    BOS_JF_ROCK_STATE_THROW,
+    BOS_JF_ROCK_STATE_FLY,
+    BOS_JF_ROCK_STATE_EXPLODE,
+    BOS_JF_ROCK_STATE_OUT_OF_BOUNDS,
+    BOS_JF_ROCK_STATE_INTERRUPTED
+};
 
 void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->jf = arg;
@@ -1511,7 +1581,7 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->animIndex = 0;
     work->riseSteps = 120;
     work->throwTimer = 0;
-    work->state = 0;
+    work->state = BOS_JF_ROCK_STATE_RISE;
     work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
     work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
     AnimInit(&work->anim, gBosJfObjAnims, gBosJfObjFrames);
@@ -1530,7 +1600,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
     s16 n;
 
     switch (work->state) {
-    case 0:
+    case BOS_JF_ROCK_STATE_RISE:
         if (work->riseSteps > 40) {
             BtlMapSetCameraTarget(work->body.x, work->body.y + work->body.z - 0x2000);
         }
@@ -1598,15 +1668,15 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             work->state++;
         }
 
-        if (work->jf->state == 7 || work->jf->state == 11) {
+        if (work->jf->state == BOS_JF_STATE_CARD_BROKEN || work->jf->state == BOS_JF_STATE_GIMMICK) {
             m4aSongNumStart(SONG_EF_FIRE01);
             work->visible2 = 0;
             work->riseSteps = 0;
-            work->state = 5;
+            work->state = BOS_JF_ROCK_STATE_INTERRUPTED;
         }
 
         break;
-    case 1:
+    case BOS_JF_ROCK_STATE_THROW:
         work->paletteTimer++;
 
         if (work->paletteTimer > 2) {
@@ -1641,16 +1711,16 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             work->state++;
         }
 
-        if (work->jf->state == 7 || work->jf->state == 11) {
+        if (work->jf->state == BOS_JF_STATE_CARD_BROKEN || work->jf->state == BOS_JF_STATE_GIMMICK) {
             m4aSongNumStart(SONG_EF_FIRE01);
             work->visible2 = 0;
             work->shadowVisible = 0;
             work->riseSteps = 0;
-            work->state = 5;
+            work->state = BOS_JF_ROCK_STATE_INTERRUPTED;
         }
 
         break;
-    case 2:
+    case BOS_JF_ROCK_STATE_FLY:
         work->paletteTimer++;
 
         if (work->paletteTimer > 2) {
@@ -1677,15 +1747,15 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             m4aSongNumStart(SONG_EF_JF_BALLHIT);
             BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
             work->shadowVisible = 0;
-            work->state = 3;
+            work->state = BOS_JF_ROCK_STATE_EXPLODE;
         }
 
-        if (work->jf->state == 7 || work->jf->state == 11) {
+        if (work->jf->state == BOS_JF_STATE_CARD_BROKEN || work->jf->state == BOS_JF_STATE_GIMMICK) {
             m4aSongNumStart(SONG_EF_FIRE01);
             work->visible2 = 0;
             work->shadowVisible = 0;
             work->riseSteps = 0;
-            work->state = 5;
+            work->state = BOS_JF_ROCK_STATE_INTERRUPTED;
         }
 
         switch ((s8)BosJfRockTestPillars(work->body.x, work->body.y, work->body.z - 0x2000)) {
@@ -1693,17 +1763,17 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             m4aSongNumStart(SONG_EF_FIRE01);
             BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
             work->shadowVisible = 0;
-            work->state = 3;
+            work->state = BOS_JF_ROCK_STATE_EXPLODE;
             break;
         case 2:
             work->shadowVisible = 0;
-            work->state = 4;
+            work->state = BOS_JF_ROCK_STATE_OUT_OF_BOUNDS;
             break;
         }
 
         work->throwTimer++;
         break;
-    case 5:
+    case BOS_JF_ROCK_STATE_INTERRUPTED:
         if (!MosaicIsActive()) {
             if (work->riseSteps == 0) {
                 BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
@@ -1718,7 +1788,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_JF_ROCK_STATE_EXPLODE:
         if (AnimIsFinished(&work->anim)) {
             return 0;
         }
@@ -1936,13 +2006,13 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
     JfWork* jf = work->jf;
 
     switch (jf->state) {
-    case 0:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
+    case BOS_JF_STATE_IDLE:
+    case BOS_JF_STATE_SHIFT_PILLARS:
+    case BOS_JF_STATE_CARD_BROKEN:
+    case BOS_JF_STATE_UNUSED:
+    case BOS_JF_STATE_DEFEATED:
+    case BOS_JF_STATE_EVENT_IDLE:
+    case BOS_JF_STATE_GIMMICK:
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = -0x500;
         } else {
@@ -1950,7 +2020,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_JF_STATE_SLAM:
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = -0x100;
         } else {
@@ -1958,8 +2028,8 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         }
 
         break;
-    case 4:
-    case 5:
+    case BOS_JF_STATE_BEAM:
+    case BOS_JF_STATE_SWEEP_BEAM:
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = 0x1000;
         } else {
@@ -1967,8 +2037,8 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         }
 
         break;
-    case 1:
-    case 2:
+    case BOS_JF_STATE_SWITCH_SIDE:
+    case BOS_JF_STATE_ROCK_THROW:
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = -0xA00;
         } else {

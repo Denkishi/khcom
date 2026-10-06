@@ -88,11 +88,11 @@ void task_bos_jf_0(JfWork* work, s32 arg) {
     v1 = work->flags & JF_FLAG_IN_EVENT;
 
     if (v1 != 0) {
-        work->state = 10;
-        work->attackState = 10;
+        work->state = BOS_JF_STATE_EVENT_IDLE;
+        work->attackState = BOS_JF_STATE_EVENT_IDLE;
     } else {
-        work->state = 0;
-        work->attackState = 0;
+        work->state = BOS_JF_STATE_IDLE;
+        work->attackState = BOS_JF_STATE_IDLE;
     }
 
     work->hitCount = 0;
@@ -101,7 +101,7 @@ void task_bos_jf_0(JfWork* work, s32 arg) {
     work->stepTimer = 0;
     work->bgFrame = 8;
     work->bgFrameTimer = 12;
-    work->pillarPhase = 0;
+    work->pillarPhase = BOS_JF_PILLAR_PHASE_START;
     work->gimmickTimer = 0;
     v2 = work->flags & JF_FLAG_IN_EVENT;
 
@@ -170,7 +170,7 @@ u8 task_bos_jf_1(JfWork* work) {
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        work->state = 9;
+        work->state = BOS_JF_STATE_DEFEATED;
         work->stateStep = 0;
         break;
     case BTL_REACTION_CARD_BROKEN:
@@ -182,7 +182,7 @@ u8 task_bos_jf_1(JfWork* work) {
             }
         }
 
-        work->state = 7;
+        work->state = BOS_JF_STATE_CARD_BROKEN;
         work->stateStep = 0;
         break;
     }
@@ -195,9 +195,9 @@ u8 task_bos_jf_1(JfWork* work) {
             ClearBtlObjActionFlags(sub);
 
             if (sub->hp > 0) {
-                if (work->state != 1 && work->state != 6 && work->state != 7 &&
-                    work->state != 11) {
-                    work->state = 0;
+                if (work->state != BOS_JF_STATE_SWITCH_SIDE && work->state != BOS_JF_STATE_SHIFT_PILLARS &&
+                    work->state != BOS_JF_STATE_CARD_BROKEN && work->state != BOS_JF_STATE_GIMMICK) {
+                    work->state = BOS_JF_STATE_IDLE;
                     work->stateStep = 0;
                 }
             }
@@ -218,7 +218,7 @@ u8 task_bos_jf_1(JfWork* work) {
 
     if (ConsumeGimmickFlag(0)) {
         work->stateStep = 0;
-        work->state = 11;
+        work->state = BOS_JF_STATE_GIMMICK;
         work->flags |= JF_FLAG_GIMMICK_PENDING;
 
         if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
@@ -261,6 +261,18 @@ void task_bos_jf_3(JfWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum BosJfPillarShape {
+    BOS_JF_PILLAR_SHAPE_DESCENDING,
+    BOS_JF_PILLAR_SHAPE_VALLEY,
+    BOS_JF_PILLAR_SHAPE_LEFT_HIGH,
+    BOS_JF_PILLAR_SHAPE_PEAK,
+    BOS_JF_PILLAR_SHAPE_ASCENDING,
+    BOS_JF_PILLAR_SHAPE_LEFT_LOW,
+    BOS_JF_PILLAR_SHAPE_RIGHT_LOW,
+    BOS_JF_PILLAR_SHAPE_RIGHT_HIGH,
+    BOS_JF_PILLAR_SHAPE_FLAT
+};
+
 u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
     s32 v1;
     s32 v2;
@@ -279,7 +291,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
 
         if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
-            gBosJfPillarShape = 0;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_DESCENDING;
             x = *px;
 
             if (x > hi) {
@@ -312,7 +324,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             }
         } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
-            gBosJfPillarShape = 1;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_VALLEY;
             x = *px;
 
             if (x <= lo) {
@@ -344,7 +356,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
                 }
             }
         } else {
-            gBosJfPillarShape = 2;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_LEFT_HIGH;
             x = *px;
 
             if (x > lo) {
@@ -368,7 +380,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
 
         if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
-            gBosJfPillarShape = 3;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_PEAK;
             x = *px;
 
             if (x < lo) {
@@ -399,7 +411,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             }
         } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
-            gBosJfPillarShape = 4;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_ASCENDING;
             x = *px;
 
             if (x < lo) {
@@ -431,7 +443,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
                 }
             }
         } else {
-            gBosJfPillarShape = 5;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_LEFT_LOW;
             x = *px;
 
             if (x < lo) {
@@ -453,7 +465,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
     } else {
         if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
-            gBosJfPillarShape = 6;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_RIGHT_LOW;
             x = *px;
 
             if (x > hi) {
@@ -473,7 +485,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             }
         } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
-            gBosJfPillarShape = 7;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_RIGHT_HIGH;
             x = *px;
 
             if (x < hi) {
@@ -492,7 +504,7 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
                 return 1;
             }
         } else {
-            gBosJfPillarShape = 8;
+            gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_FLAT;
             v1 = v2;
             *out = v1;
             return 0;
@@ -678,6 +690,15 @@ s32 BosJfUpdateShake() {
     return gBosJfShakeOffset;
 }
 
+enum BosJfLampState {
+    BOS_JF_LAMP_STATE_FLY_OUT,
+    BOS_JF_LAMP_STATE_HOVER_OUT,
+    BOS_JF_LAMP_STATE_FLY_BACK,
+    BOS_JF_LAMP_STATE_HOVER_BACK,
+    BOS_JF_LAMP_STATE_LOW_PATROL,
+    BOS_JF_LAMP_STATE_DEFEATED
+};
+
 void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     JfLampSpeed speed;
 
@@ -699,7 +720,7 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     work->voiceTimer = 0;
     work->unk_24 = 1;
     work->onFlatGround = 1;
-    work->state = 0;
+    work->state = BOS_JF_LAMP_STATE_FLY_OUT;
     work->stateTimer = 0;
     work->targetX = 0;
     work->angle = 0;
@@ -713,7 +734,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
     ObjTiles* p;
     s32 d;
 
-    if (jf->state <= 3) {
+    if (jf->state <= BOS_JF_STATE_SLAM) {
         if (++work->voiceTimer > work->voiceInterval) {
             work->voiceTimer = 0;
             m4aSongNumStart(SONG_VO_EG_DAMAGE00);
@@ -721,12 +742,12 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         }
     }
 
-    if (work->jf->state == 9) {
-        work->state = 5;
+    if (work->jf->state == BOS_JF_STATE_DEFEATED) {
+        work->state = BOS_JF_LAMP_STATE_DEFEATED;
     }
 
     switch (work->state) {
-    case 0:
+    case BOS_JF_LAMP_STATE_FLY_OUT:
         if (work->stateTimer == 0) {
             work->targetX = BosJfLampChooseTargetX(work);
             d = (s16)((work->targetX >> 8) - (sub->x >> 8));
@@ -744,13 +765,13 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             work->moveSteps--;
         } else {
             work->stateTimer = 0;
-            work->state = 1;
+            work->state = BOS_JF_LAMP_STATE_HOVER_OUT;
         }
 
         sub->z = gSineTable[(u8)work->angle] * 20 - 0xB400;
         work->angle += 2;
         break;
-    case 1:
+    case BOS_JF_LAMP_STATE_HOVER_OUT:
         if (work->stateTimer == 0) {
             d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
@@ -763,7 +784,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             work->stateTimer++;
         } else if (work->stateTimer > 60) {
             work->stateTimer = 0;
-            work->state = 2;
+            work->state = BOS_JF_LAMP_STATE_FLY_BACK;
         } else {
             work->stateTimer++;
         }
@@ -771,7 +792,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         sub->z = gSineTable[(u8)work->angle] * 20 - 0xB400;
         work->angle += 2;
         break;
-    case 2:
+    case BOS_JF_LAMP_STATE_FLY_BACK:
         if (work->stateTimer == 0) {
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->targetX = 0x27800;
@@ -795,13 +816,13 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             work->moveSteps--;
         } else {
             work->stateTimer = 0;
-            work->state = 3;
+            work->state = BOS_JF_LAMP_STATE_HOVER_BACK;
         }
 
         sub->z = gSineTable[(u8)work->angle] * 20 - 0xB400;
         work->angle += 2;
         break;
-    case 3:
+    case BOS_JF_LAMP_STATE_HOVER_BACK:
         if (work->stateTimer == 0) {
             d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
@@ -814,7 +835,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             work->stateTimer++;
         } else if (work->stateTimer > 60) {
             work->stateTimer = 0;
-            work->state = 0;
+            work->state = BOS_JF_LAMP_STATE_FLY_OUT;
         } else {
             work->stateTimer++;
         }
@@ -822,7 +843,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         sub->z = gSineTable[(u8)work->angle] * 20 - 0xB400;
         work->angle += 2;
         break;
-    case 4:
+    case BOS_JF_LAMP_STATE_LOW_PATROL:
         if (work->stateTimer == 0) {
             work->moveSteps = 20;
             sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -848,18 +869,18 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
 
             if (work->jf->gimmickTimer == 0) {
                 work->stateTimer = 0;
-                work->state = 2;
+                work->state = BOS_JF_LAMP_STATE_FLY_BACK;
             }
         }
 
         break;
-    case 5:
+    case BOS_JF_LAMP_STATE_DEFEATED:
         break;
     }
 
-    if (work->jf->pillarPhase == 2) {
+    if (work->jf->pillarPhase == BOS_JF_PILLAR_PHASE_GIMMICK) {
         work->stateTimer = 0;
-        work->state = 4;
+        work->state = BOS_JF_LAMP_STATE_LOW_PATROL;
     }
 
     if (work->tiles2Timer > 3) {
@@ -927,16 +948,16 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
 
     if (work->jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
         switch (gBosJfPillarShape) {
-        case 5:
-        case 6:
+        case BOS_JF_PILLAR_SHAPE_LEFT_LOW:
+        case BOS_JF_PILLAR_SHAPE_RIGHT_LOW:
             r = 0x27800;
             break;
-        case 1:
-        case 4:
-        case 7:
+        case BOS_JF_PILLAR_SHAPE_VALLEY:
+        case BOS_JF_PILLAR_SHAPE_ASCENDING:
+        case BOS_JF_PILLAR_SHAPE_RIGHT_HIGH:
             r = 0x21800;
             break;
-        case 8:
+        case BOS_JF_PILLAR_SHAPE_FLAT:
             v = GetRandom() % 3;
 
             if (v == 0) {
@@ -948,9 +969,9 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
             }
 
             break;
-        case 0:
-        case 2:
-        case 3:
+        case BOS_JF_PILLAR_SHAPE_DESCENDING:
+        case BOS_JF_PILLAR_SHAPE_LEFT_HIGH:
+        case BOS_JF_PILLAR_SHAPE_PEAK:
             r = 0x24600;
             break;
         default:
@@ -962,16 +983,16 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
     }
 
     switch (gBosJfPillarShape) {
-    case 0:
-    case 2:
+    case BOS_JF_PILLAR_SHAPE_DESCENDING:
+    case BOS_JF_PILLAR_SHAPE_LEFT_HIGH:
         r = 0x1F400;
         break;
-    case 3:
-    case 5:
-    case 7:
+    case BOS_JF_PILLAR_SHAPE_PEAK:
+    case BOS_JF_PILLAR_SHAPE_LEFT_LOW:
+    case BOS_JF_PILLAR_SHAPE_RIGHT_HIGH:
         r = 0x19400;
         break;
-    case 8:
+    case BOS_JF_PILLAR_SHAPE_FLAT:
         v = GetRandom() % 3;
 
         if (v == 0) {
@@ -983,9 +1004,9 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
         }
 
         break;
-    case 1:
-    case 4:
-    case 6:
+    case BOS_JF_PILLAR_SHAPE_VALLEY:
+    case BOS_JF_PILLAR_SHAPE_ASCENDING:
+    case BOS_JF_PILLAR_SHAPE_RIGHT_LOW:
         r = 0x1CE00;
         break;
     default:

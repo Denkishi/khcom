@@ -42,13 +42,13 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->unk_392 = 0;
 
     if (work->flags & DSD_FLAG_IN_EVENT) {
-        work->state = 9;
+        work->state = BOS_DSD_STATE_EVENT_IDLE;
     } else {
-        work->state = 1;
+        work->state = BOS_DSD_STATE_IDLE;
     }
 
-    work->attackState = 1;
-    work->lastState = 1;
+    work->attackState = BOS_DSD_STATE_IDLE;
+    work->lastState = BOS_DSD_STATE_IDLE;
     work->attackCycle = 0;
     work->hitCount = 0;
     work->timer = 0;
@@ -56,7 +56,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->stepTimer = 0;
     work->bgFrame = 0;
     work->bgFrameTimer = 0;
-    work->hpPhase = 0;
+    work->hpPhase = BOS_DSD_HP_PHASE_HIGH;
     work->driftX = -51;
     v = (s16)(work->flags & DSD_FLAG_IN_EVENT);
 
@@ -122,7 +122,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
 
     switch (UpdateBtlObjReaction(b)) {
     case BTL_REACTION_CARD_ACTION:
-        work->state = 2;
+        work->state = BOS_DSD_STATE_ATTACK_START;
         b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         work->stateStep = 0;
         break;
@@ -134,11 +134,11 @@ u8 task_bos_dsd_1(DsdWork* work) {
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        work->state = 11;
+        work->state = BOS_DSD_STATE_DEFEATED;
         work->stateStep = 0;
         break;
     case BTL_REACTION_CARD_BROKEN:
-        work->state = 8;
+        work->state = BOS_DSD_STATE_CARD_BROKEN;
         work->stateStep = 0;
         break;
     }
@@ -154,14 +154,14 @@ u8 task_bos_dsd_1(DsdWork* work) {
 
             if (b->hp > 0) {
                 switch (work->state) {
-                case 0:
-                case 1:
-                case 4:
-                case 5:
-                case 8:
+                case BOS_DSD_STATE_RETURN:
+                case BOS_DSD_STATE_IDLE:
+                case BOS_DSD_STATE_SHOCKWAVE:
+                case BOS_DSD_STATE_SUMMON:
+                case BOS_DSD_STATE_CARD_BROKEN:
                     break;
                 default:
-                    work->state = 0;
+                    work->state = BOS_DSD_STATE_RETURN;
                     work->stateStep = 0;
                     break;
                 }
@@ -174,7 +174,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
         TaskCreate(&work->tasks, &gTaskDescBosDsdIta, work);
     }
 
-    if (work->state == 4) {
+    if (work->state == BOS_DSD_STATE_SHOCKWAVE) {
         if (gBtlWork->actor->z <= -0x1000) {
             gBtlWork->bossPriorityOffset = -30;
         } else {

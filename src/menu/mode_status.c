@@ -56,29 +56,29 @@ u8* CopyNumberTiles(u8* dst, s32 value, u16 digits) {
 }
 
 void LoadStatusNumberTiles() {
-    u8* p;
+    u8* dst;
 
-    p = GetBgCharBase(2) + 0x40;
-    p = CopyNumberTiles(p, gGameState.progression.level, 2);
-    p = CopyNumberTiles(p, gGameState.hp, 3);
-    p = CopyNumberTiles(p, gGameState.progression.maxHp, 3);
+    dst = GetBgCharBase(2) + 0x40;
+    dst = CopyNumberTiles(dst, gGameState.progression.level, 2);
+    dst = CopyNumberTiles(dst, gGameState.hp, 3);
+    dst = CopyNumberTiles(dst, gGameState.progression.maxHp, 3);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        p += 0x80;
+        dst += 0x80;
     } else {
-        p = CopyNumberTiles(p, gGameState.progression.cp, 4);
+        dst = CopyNumberTiles(dst, gGameState.progression.cp, 4);
     }
 
-    p = CopyNumberTiles(p, gGameState.progression.exp, 6);
-    p = CopyNumberTiles(p, gGameState.progression.nextExp, 6);
+    dst = CopyNumberTiles(dst, gGameState.progression.exp, 6);
+    dst = CopyNumberTiles(dst, gGameState.progression.nextExp, 6);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        p += 0xC0;
-        p = CopyNumberTiles(p, gGameState.progression.ap, 2);
-        CopyNumberTiles(p, gGameState.progression.dp, 3);
+        dst += 0xC0;
+        dst = CopyNumberTiles(dst, gGameState.progression.ap, 2);
+        CopyNumberTiles(dst, gGameState.progression.dp, 3);
     } else {
-        p += 0x20;
-        CopyNumberTiles(p, gGameState.progression.mooglePoints, 5);
+        dst += 0x20;
+        CopyNumberTiles(dst, gGameState.progression.mooglePoints, 5);
     }
 }
 

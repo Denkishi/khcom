@@ -704,15 +704,15 @@ void task_status_cursor_3(StatusCursorWork* work) {
 
 void task_status_stocklist_0(StatusStocklistWork* work, s32* tab) {
     s32 i;
-    StatusEntry* e;
+    StatusEntry* entry;
 
     sStatusStocklistWork = work;
     work->tab = tab;
-    e = work->entries;
+    entry = work->entries;
 
     for (i = 0; i < 4; i++) {
-        StatusEntryClear(e);
-        e++;
+        StatusEntryClear(entry);
+        entry++;
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -806,13 +806,13 @@ u16 GetStatusVisibleRowCount() {
 }
 
 u16 GetStatusMaxScroll() {
-    s16 v = sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count - 8;
+    s16 maxScroll = sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count - 8;
 
-    if (v <= 0) {
+    if (maxScroll <= 0) {
         return 0;
     }
 
-    return v;
+    return maxScroll;
 }
 
 u8 StatusTabHasItems() {
@@ -892,18 +892,18 @@ s32 GetStatusItemTab(u32 item) {
 }
 
 void* LoadStockNameTiles(u16 stock) {
-    const SpriteFrameResourceDef* d;
-    void* t;
+    const SpriteFrameResourceDef* def;
+    void* tiles;
 
-    d = &gStockNameSprites[stock];
-    t = AllocSpriteFrameTiles(d->tilesSize);
+    def = &gStockNameSprites[stock];
+    tiles = AllocSpriteFrameTiles(def->tilesSize);
 #ifdef VERSION_EU
-    UpdateSpriteFrameTiles(t, d->sprites[gLanguage][d->spriteIndex],
-        d->tiles[gLanguage]);
+    UpdateSpriteFrameTiles(tiles, def->sprites[gLanguage][def->spriteIndex],
+        def->tiles[gLanguage]);
 #else
-    UpdateSpriteFrameTiles(t, d->sprites[d->spriteIndex], d->tiles);
+    UpdateSpriteFrameTiles(tiles, def->sprites[def->spriteIndex], def->tiles);
 #endif
-    return t;
+    return tiles;
 }
 
 s32 GetStatusItemStockIndex(s32 item) {
@@ -1098,17 +1098,17 @@ void task_status_meswindow_0(StatusMeswindowWork* work, u8* open) {
 }
 
 u8 task_status_meswindow_1(StatusMeswindowWork* work) {
-    s32 v;
+    s32 item;
     s16 idx;
 
     if (*work->open != 0) {
         idx = GetStatusSelectedIndex();
 
         if (idx >= 0) {
-            v = GetStatusListItem(GetStatusSelectedIndex());
+            item = GetStatusListItem(GetStatusSelectedIndex());
 
-            if (work->item != v) {
-                work->item = v;
+            if (work->item != item) {
+                work->item = item;
 
                 if (work->task != NULL) {
                     work->textIndex = GetStockMesDispTextIndex(work->task);
@@ -1313,13 +1313,13 @@ void stock_mes_disp_3(StockMesDispWork* work) {
 }
 
 void* CreateStockMesDispTask(void* pool, u16 helpIndex, u8 textIndex, u16 x, s32 y) {
-    StatusMesParam p;
+    StatusMesParam param;
 
-    p.helpIndex = helpIndex;
-    p.textIndex = textIndex;
-    p.x = x;
-    p.y = y;
-    return TaskCreate(pool, &gTaskDescStockMesDisp, &p);
+    param.helpIndex = helpIndex;
+    param.textIndex = textIndex;
+    param.x = x;
+    param.y = y;
+    return TaskCreate(pool, &gTaskDescStockMesDisp, &param);
 }
 
 u8 GetStockMesDispTextIndex(void* task) {

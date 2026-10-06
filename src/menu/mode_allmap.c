@@ -159,23 +159,23 @@ void AllmapSetBlend(s16 alpha) {
 }
 
 void AllmapCyclePalette() {
-    PooPalStep t[9];
+    PooPalStep steps[9];
 
-    memcpy(t, sAllmapPalSteps, sizeof(t));
+    memcpy(steps, sAllmapPalSteps, sizeof(steps));
     sAllmapPalTimer++;
 
-    if (sAllmapPalTimer < t[sAllmapPalStep].duration) {
+    if (sAllmapPalTimer < steps[sAllmapPalStep].duration) {
         return;
     }
 
     sAllmapPalTimer = 0;
     sAllmapPalStep++;
 
-    if (t[sAllmapPalStep].palette == 0xFF) {
+    if (steps[sAllmapPalStep].palette == 0xFF) {
         sAllmapPalStep = 0;
     }
 
-    LoadPalette(&gAllmapCurrentRoomPalettes[t[sAllmapPalStep].palette * 0x10], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 0x20);
+    LoadPalette(&gAllmapCurrentRoomPalettes[steps[sAllmapPalStep].palette * 0x10], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 0x20);
 }
 
 void AllmapLoadWorldBg() {
@@ -349,9 +349,9 @@ void SetAllmapReturnToMenu(u8 returnToMenu) {
 }
 
 u8 AllmapDoorLeadsToHall(u8 room, u8 side) {
-    u8* p = GetMapRoomLinks(room);
+    u8* links = GetMapRoomLinks(room);
 
-    if ((u8)(p[side] + 3) <= 1) {
+    if ((u8)(links[side] + 3) <= 1) {
         return 1;
     }
 
@@ -359,9 +359,9 @@ u8 AllmapDoorLeadsToHall(u8 room, u8 side) {
 }
 
 u8 AllmapDoorExists(u8 room, u8 side) {
-    u16 v = GetMapDoorFlags(room, side);
+    u16 flags = GetMapDoorFlags(room, side);
 
-    if (v == 0 || (v & 8) != 0) {
+    if (flags == 0 || (flags & 8) != 0) {
         return 0;
     }
 
@@ -369,9 +369,9 @@ u8 AllmapDoorExists(u8 room, u8 side) {
 }
 
 u8 AllmapDoorIsOpen(u8 room, u8 side) {
-    u16 v = GetMapDoorFlags(room, side);
+    u16 flags = GetMapDoorFlags(room, side);
 
-    if ((v & 2) != 0) {
+    if ((flags & 2) != 0) {
         return 1;
     }
 

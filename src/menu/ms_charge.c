@@ -158,32 +158,32 @@ static s32 sMsChargeCursorY;
 static u8 sMsChargeBackToTop;
 
 s16 GetMsChargeTabStart(s16 tab) {
-    s16 v;
+    s16 start;
 
     if (tab <= 3) {
-        v = sMsChargeCategoryStart[tab];
+        start = sMsChargeCategoryStart[tab];
     } else {
-        v = 0;
+        start = 0;
     }
 
-    return v;
+    return start;
 }
 
 s16 GetMsChargeTabCount(s16 tab) {
-    s16 v;
+    s16 count;
     s16 i;
 
     if (tab <= 3) {
-        v = sMsChargeCategoryEntryCount[tab];
+        count = sMsChargeCategoryEntryCount[tab];
     } else {
-        v = 0;
+        count = 0;
 
         for (i = 0; i < 4; i++) {
-            v += sMsChargeCategoryEntryCount[i];
+            count += sMsChargeCategoryEntryCount[i];
         }
     }
 
-    return v;
+    return count;
 }
 
 s16 GetMsChargeSelectedIndex() {
@@ -219,11 +219,11 @@ void MsChargeLoadGrid() {
     s16 i;
     s16 k;
     s16 idx;
-    s16 a;
+    s16 start;
     s16 limit;
     s32 defIdx;
 
-    a = GetMsChargeTabStart(sMsChargeTab);
+    start = GetMsChargeTabStart(sMsChargeTab);
     limit = GetMsChargeTabCount(sMsChargeTab);
     idx = sMsChargeGridScroll * 3;
 
@@ -238,11 +238,11 @@ void MsChargeLoadGrid() {
             }
 
             if (idx < limit) {
-                defIdx = sMsCards[a + idx].cardId;
+                defIdx = sMsCards[start + idx].cardId;
                 sMsChargeGridPalettes[i][k] = LoadObjPalette(gCardDefs[defIdx].palette2, 0x20);
                 sMsChargeGridTiles[i][k] = LoadObjTiles(gCardDefs[defIdx].tiles2, 0x100);
                 sMsChargeGridSprites[i][k] = gCardDefs[defIdx].gfx2;
-                sMsChargeGridPremium[i][k] = sMsCards[a + idx].premium;
+                sMsChargeGridPremium[i][k] = sMsCards[start + idx].premium;
             } else {
                 sMsChargeGridPalettes[i][k] = NULL;
                 sMsChargeGridTiles[i][k] = NULL;
@@ -257,8 +257,8 @@ void MsChargeLoadGrid() {
 
 void MsChargeLoadSelectedCard() {
     MsCard* card;
-    u8* p;
-    u8* q;
+    u8* nameCountPtr;
+    u8* descCountPtr;
     s32 defIdx;
 
     card = GetMsChargeSelectedCard();
@@ -283,14 +283,14 @@ void MsChargeLoadSelectedCard() {
         sMsChargeCardBackTiles = LoadObjTiles(gCardBacks[card->category].tiles, 0x300);
         sMsChargeCardBackSprite = gCardBacks[card->category].gfx;
         sMsChargeCardPremium = card->premium;
-        p = &sMsChargeNameTextCount;
+        nameCountPtr = &sMsChargeNameTextCount;
 #ifdef VERSION_EU
-        *p = LoadTextSlots(GetLocalizedString(gCardDefs[defIdx].name), sMsChargeNameText);
+        *nameCountPtr = LoadTextSlots(GetLocalizedString(gCardDefs[defIdx].name), sMsChargeNameText);
 #else
-        *p = LoadTextSlots(gCardDefs[defIdx].name, sMsChargeNameText);
+        *nameCountPtr = LoadTextSlots(gCardDefs[defIdx].name, sMsChargeNameText);
 #endif
-        q = &sMsChargeDescTextCount;
-        *q = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[card->kind]), sMsChargeDescText);
+        descCountPtr = &sMsChargeDescTextCount;
+        *descCountPtr = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[card->kind]), sMsChargeDescText);
         LoadObjPaletteBank(sMsChargeCategoryPalette->index, gMsChargeCategoryPalettes + card->category * 0x10);
     } else {
         sMsChargeCardPalette = NULL;
@@ -327,18 +327,18 @@ u16 GetMsChargeCardPoints(u16 index) {
 }
 
 void MsChargeDrawPoints() {
-    u32 v;
+    u32 points;
 
-    v = GetMooglePoints();
-    LoadDecimalDigitTiles(v, gMsChargeDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
+    points = GetMooglePoints();
+    LoadDecimalDigitTiles(points, gMsChargeDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
 
     if (sMsChargeMenuState >= MS_CHARGE_MENU_STATE_VALUE && sMsChargeMenuState <= MS_CHARGE_MENU_STATE_CONFIRM) {
-        v = GetMsChargeCardPoints(GetMsChargeSelectedIndex());
+        points = GetMsChargeCardPoints(GetMsChargeSelectedIndex());
     } else {
-        v = 0;
+        points = 0;
     }
 
-    LoadDecimalDigitTiles(v, gMsChargeCardPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x180, 0x20, 2);
+    LoadDecimalDigitTiles(points, gMsChargeCardPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x180, 0x20, 2);
 }
 
 void MsChargeDrawCardCounts() {
@@ -348,13 +348,13 @@ void MsChargeDrawCardCounts() {
 
 void MsChargeDrawCategoryCounts() {
     s16 i;
-    s32 v;
+    s32 count;
 
     for (i = 0; i < 4; i++) {
-        v = sMsChargeCategoryCardCount[i];
+        count = sMsChargeCategoryCardCount[i];
 
-        if (v != 0) {
-            LoadDecimalDigitTiles(v, gMsChargeCategoryCountDigitTiles, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
+        if (count != 0) {
+            LoadDecimalDigitTiles(count, gMsChargeCategoryCountDigitTiles, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
         } else {
             LoadDecimalDigitTiles(0, gMsChargeCategoryCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
         }
@@ -364,7 +364,7 @@ void MsChargeDrawCategoryCounts() {
 void MsChargeDrawValueCounts() {
     MsCard* card;
     s16 i;
-    s32 v;
+    s32 count;
 
     card = GetMsChargeSelectedCard();
 
@@ -387,10 +387,10 @@ void MsChargeDrawValueCounts() {
         }
 
         for (i = 0; i < 10; i++) {
-            v = card->values[i][0];
+            count = card->values[i][0];
 
-            if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
-                LoadDecimalDigitTiles(v, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
+            if (count != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
+                LoadDecimalDigitTiles(count, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
                 LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
                 break;
             }
@@ -410,10 +410,10 @@ void MsChargeDrawValueCounts() {
         }
 
         for (i = 0; i < 10; i++) {
-            v = card->values[i][0];
+            count = card->values[i][0];
 
-            if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
-                LoadDecimalDigitTiles(v, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
+            if (count != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
+                LoadDecimalDigitTiles(count, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
                 LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
             } else {
                 LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
@@ -424,15 +424,15 @@ void MsChargeDrawValueCounts() {
 }
 
 void MsChargeDrawTab(s16 tab) {
-    s16 t;
+    s16 cell;
     void* base;
 
-    t = 4 - tab;
+    cell = 4 - tab;
     base = GetBgScreenBase(0);
 #ifdef VERSION_EU
-    RequestTilemapRectCopy(sMsChargeTabTilemapsByLanguage[gLanguage], base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
+    RequestTilemapRectCopy(sMsChargeTabTilemapsByLanguage[gLanguage], base, cell % 3 * 10, cell / 3 * 2, 20, 2, 10, 2);
 #else
-    RequestTilemapRectCopy(gMsChargeTabMap, base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
+    RequestTilemapRectCopy(gMsChargeTabMap, base, cell % 3 * 10, cell / 3 * 2, 20, 2, 10, 2);
 #endif
 }
 
@@ -489,41 +489,41 @@ u8 MsCardSelectedValueIsEmpty(MsCard* card) {
 }
 
 void MsChargeSelectNextValue(MsCard* card) {
-    s16 k;
+    s16 value;
     s16 n;
 
-    k = GetMsChargeSelectedValue();
+    value = GetMsChargeSelectedValue();
 
     for (n = 0; n < 10; n++) {
-        if (card->values[k][0] > 0) {
+        if (card->values[value][0] > 0) {
             break;
         }
 
-        k++;
+        value++;
 
-        if (k > 9) {
-            k = 0;
+        if (value > 9) {
+            value = 0;
         }
     }
 
-    sMsChargeValueCol = k / 5;
-    sMsChargeValueRow = k % 5;
+    sMsChargeValueCol = value / 5;
+    sMsChargeValueRow = value % 5;
 }
 
 void MsChargeRemoveCard(MsCard* card) {
-    u8 slot;
+    u8 category;
     s16 j;
 
-    slot = gCardDefs[card->cardId].category;
+    category = gCardDefs[card->cardId].category;
     DmaCopy16(3, card + 1, card, (285 - GetMsChargeSelectedIndex()) * 52);
     DmaFill16(3, 0, &sMsCards[285], 0x34);
     sMsCards[285].kind = 0x8F;
 
-    for (j = slot + 1; j <= 3; j++) {
+    for (j = category + 1; j <= 3; j++) {
         sMsChargeCategoryStart[j]--;
     }
 
-    sMsChargeCategoryEntryCount[slot]--;
+    sMsChargeCategoryEntryCount[category]--;
 
     if (GetMsChargeSelectedIndex() >= GetMsChargeTabCount(sMsChargeTab)) {
         sMsChargeGridCol--;
@@ -561,9 +561,9 @@ s32 FindMsCard(u16 kind, u8 premium, s16 count) {
 }
 
 void MsChargeBuildCardList() {
-    MsCard tmp;
-    s16* q;
-    s16 a;
+    MsCard card;
+    s16* deckCountPtr;
+    s16 collectionCount;
     s16 n;
     u16 id;
     s16 i;
@@ -571,7 +571,7 @@ void MsChargeBuildCardList() {
     u16 kind;
     u16 flags;
     u32 sortKey;
-    u8 prem;
+    u8 premium;
     s16 j;
     s16 idx;
 
@@ -583,10 +583,10 @@ void MsChargeBuildCardList() {
         sMsCards[n].premium = 0;
     }
 
-    a = CountCollectionCards();
-    sMsChargeCollectionCount = a;
-    q = &sMsChargeDeckCardCount;
-    *q = CountCardsInDecks();
+    collectionCount = CountCollectionCards();
+    sMsChargeCollectionCount = collectionCount;
+    deckCountPtr = &sMsChargeDeckCardCount;
+    *deckCountPtr = CountCardsInDecks();
 
     for (j = 0; j < 4; j++) {
         sMsChargeCategoryStart[j] = 0;
@@ -605,11 +605,11 @@ void MsChargeBuildCardList() {
             j = gCardDefs[id].category;
             kind = gCardDefs[id].kind;
             flags = raw & 0x8000;
-            prem = flags != 0;
+            premium = flags != 0;
             sMsChargeCategoryCardCount[j]++;
             sMsChargeCardTotal++;
 
-            if ((idx = FindMsCard(kind, prem, n)) >= 0) {
+            if ((idx = FindMsCard(kind, premium, n)) >= 0) {
                 sMsCards[idx].values[raw = gCardDefs[id].value][0]++;
                 sMsCards[idx].values[raw][1] = id;
             } else {
@@ -619,10 +619,10 @@ void MsChargeBuildCardList() {
                 raw = gCardDefs[id].value;
                 sMsCards[n].values[raw][0]++;
                 sMsCards[n].values[raw][1] = id;
-                sMsCards[n].premium = prem;
+                sMsCards[n].premium = premium;
                 sortKey = 0x01000000;
 
-                if (prem != 0) {
+                if (premium != 0) {
                     sortKey = 0x03000000;
                 }
 
@@ -638,17 +638,17 @@ void MsChargeBuildCardList() {
     }
 
     for (i = 1; i < n; i++) {
-        tmp = sMsCards[i];
+        card = sMsCards[i];
 
         for (j = i - 1; j >= 0; j--) {
-            if (sMsCards[j].sortKey > tmp.sortKey) {
+            if (sMsCards[j].sortKey > card.sortKey) {
                 sMsCards[j + 1] = sMsCards[j];
             } else {
                 break;
             }
         }
 
-        sMsCards[j + 1] = tmp;
+        sMsCards[j + 1] = card;
     }
 }
 
@@ -660,14 +660,14 @@ s32 MsChargeReadMenuKeys() {
 }
 
 void MsChargeHandleGridInput() {
-    s16 oldCE0;
-    s16 oldCE2;
-    s16 oldCE4;
+    s16 oldCol;
+    s16 oldRow;
+    s16 oldScroll;
     u16 keys;
 
-    oldCE0 = sMsChargeGridCol;
-    oldCE2 = sMsChargeGridRow;
-    oldCE4 = sMsChargeGridScroll;
+    oldCol = sMsChargeGridCol;
+    oldRow = sMsChargeGridRow;
+    oldScroll = sMsChargeGridScroll;
     keys = MsChargeReadMenuKeys();
 
     if (keys & A_BUTTON) {
@@ -731,14 +731,14 @@ void MsChargeHandleGridInput() {
         }
     }
 
-    if (sMsChargeGridCol != oldCE0 || sMsChargeGridRow != oldCE2 || sMsChargeGridScroll != oldCE4) {
+    if (sMsChargeGridCol != oldCol || sMsChargeGridRow != oldRow || sMsChargeGridScroll != oldScroll) {
         MsChargeSelectFirstValue();
         MsChargeDrawValueCounts();
         MsChargeDrawPoints();
         MsChargeLoadSelectedCard();
         m4aSongNumStart(SONG_SYS_CLICKI04B);
 
-        if (sMsChargeGridScroll != oldCE4) {
+        if (sMsChargeGridScroll != oldScroll) {
             MsChargeLoadGrid();
         }
     }
@@ -798,27 +798,27 @@ void MsChargeHandleTabInput() {
 s32 MsChargeSelectValueInColumn(MsCard* card, u16 col) {
     s16 base;
     s16 i;
-    s32 r;
+    s32 row;
     s32 found;
 
     found = 0;
     base = sMsChargeValueRow;
 
     for (i = 0; i <= 4; i++) {
-        r = base - i;
+        row = base - i;
 
-        if (r >= 0 && card->values[GetMsChargeValueIndex(col, r)][0] > 0) {
+        if (row >= 0 && card->values[GetMsChargeValueIndex(col, row)][0] > 0) {
             sMsChargeValueCol = col;
-            sMsChargeValueRow = r;
+            sMsChargeValueRow = row;
             found = 1;
             break;
         }
 
-        r = base + i;
+        row = base + i;
 
-        if (r <= 4 && card->values[GetMsChargeValueIndex(col, r)][0] > 0) {
+        if (row <= 4 && card->values[GetMsChargeValueIndex(col, row)][0] > 0) {
             sMsChargeValueCol = col;
-            sMsChargeValueRow = r;
+            sMsChargeValueRow = row;
             found = 1;
             break;
         }
@@ -999,8 +999,8 @@ void MsChargeDraw() {
     MsCard* card;
     void* anim;
     s32 sine;
-    s16 t;
-    s16 v;
+    s16 maxScroll;
+    s16 barOffset;
     s16 col;
     s16 row;
     s32 i;
@@ -1010,15 +1010,15 @@ void MsChargeDraw() {
         DrawSprite(16, 60, AnimUpdate(&sMsChargeArrowAnim), sMsChargeHighlightTiles, sMsChargeCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
     }
 
-    t = (GetMsChargeTabCount(sMsChargeTab) + 2) / 3 - 4;
+    maxScroll = (GetMsChargeTabCount(sMsChargeTab) + 2) / 3 - 4;
 
-    if (sMsChargeGridScroll <= t) {
-        v = 84 * sMsChargeGridScroll / t;
+    if (sMsChargeGridScroll <= maxScroll) {
+        barOffset = 84 * sMsChargeGridScroll / maxScroll;
     } else {
-        v = 0;
+        barOffset = 0;
     }
 
-    DrawSprite(160, v + 40, gMsChargeScrollbarFrame0, sMsChargeScrollbarTiles, sMsChargeCard00Palette, NULL, SPRITE_PRIORITY(2), 0x898);
+    DrawSprite(160, barOffset + 40, gMsChargeScrollbarFrame0, sMsChargeScrollbarTiles, sMsChargeCard00Palette, NULL, SPRITE_PRIORITY(2), 0x898);
     DrawSprite(24, 58, AnimUpdate(&sMsChargeMoogleAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, NULL, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x834);
 
     if (sMsChargeState == MS_CHARGE_STATE_MENU) {
@@ -1116,7 +1116,7 @@ void MsChargeDraw() {
 void mode_ms_charge_0() {
     s16 i;
     s16 j;
-    u8* pb;
+    u8* countPtr;
     u16 length;
 
     {
@@ -1272,8 +1272,8 @@ void mode_ms_charge_0() {
     }
 
     InitTextSlots(sMsChargeConfirmText, sMsChargeConfirmTextLength);
-    pb = &sMsChargeConfirmTextCount;
-    *pb = LoadTextSlots(
+    countPtr = &sMsChargeConfirmTextCount;
+    *countPtr = LoadTextSlots(
         LOCALIZED_STRING(gMsChargeConfirmText)
     , sMsChargeConfirmText);
     length = GetTextLength(
@@ -1287,8 +1287,8 @@ void mode_ms_charge_0() {
     }
 
     InitTextSlots(sMsChargeNoticeText, sMsChargeNoticeTextLength);
-    pb = &sMsChargeNoticeTextCount;
-    *pb = LoadTextSlots(
+    countPtr = &sMsChargeNoticeTextCount;
+    *countPtr = LoadTextSlots(
         LOCALIZED_STRING(gMsChargeNoticeText)
     , sMsChargeNoticeText);
     length = GetTextLength(
@@ -1302,8 +1302,8 @@ void mode_ms_charge_0() {
     }
 
     InitTextSlots(sMsChargeYesText, sMsChargeYesTextLength);
-    pb = &sMsChargeYesTextCount;
-    *pb = LoadTextSlots(
+    countPtr = &sMsChargeYesTextCount;
+    *countPtr = LoadTextSlots(
         LOCALIZED_STRING(gYesChoiceText)
     , sMsChargeYesText);
     length = GetTextLength(
@@ -1317,8 +1317,8 @@ void mode_ms_charge_0() {
     }
 
     InitTextSlots(sMsChargeNoText, sMsChargeNoTextLength);
-    pb = &sMsChargeNoTextCount;
-    *pb = LoadTextSlots(
+    countPtr = &sMsChargeNoTextCount;
+    *countPtr = LoadTextSlots(
         LOCALIZED_STRING(gNoChoiceText)
     , sMsChargeNoText);
     MsChargeLoadGrid();

@@ -186,15 +186,15 @@ void WorldInspectSetTilemapRectPalette(u8 pal, u16 w, s16 h, u16* map, s16 x, s1
     s16 i;
     s16 j;
     s16 n;
-    u16 v;
+    u16 palBits;
 
     n = w;
-    v = pal << 12;
+    palBits = pal << 12;
     map += x + y * 32;
 
     for (j = 0; j < h; j++) {
         for (i = 0; i < n; i++) {
-            *map = (*map & 0xFFF) | v;
+            *map = (*map & 0xFFF) | palBits;
             map++;
         }
 
@@ -223,13 +223,13 @@ void WorldInspectCopyTilemapRect(s16 w, s16 h, u16* src, s16 sx, s16 sy, u16* ds
 
 u8 WorldInspectLoadName(s16 world) {
 #ifdef VERSION_EU
-    u8 ret = 0;
+    u8 count = 0;
 
     if (world != 0) {
-        ret = LoadTextSlots(GetLocalizedString(sWorldinspectMsgs[world].text), sWorldInspectNameText);
+        count = LoadTextSlots(GetLocalizedString(sWorldinspectMsgs[world].text), sWorldInspectNameText);
     }
 
-    return ret;
+    return count;
 #else
     if (world == 0) {
         return 0;
@@ -240,29 +240,29 @@ u8 WorldInspectLoadName(s16 world) {
 }
 
 u8 WorldInspectLoadDesc(s16 world) {
-    CardDescriptionText** tbl;
-    CardDescriptionText** p;
-    u16 i;
+    CardDescriptionText** descs;
+    CardDescriptionText** desc;
+    u16 descId;
 
     if (world != 0) {
-        tbl = gWorldDescriptions;
+        descs = gWorldDescriptions;
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            i = sWorldinspectMsgs[world].descId2;
+            descId = sWorldinspectMsgs[world].descId2;
         } else {
-            i = sWorldinspectMsgs[world].descId;
+            descId = sWorldinspectMsgs[world].descId;
         }
 
-        p = &tbl[i];
+        desc = &descs[descId];
 
 #ifdef VERSION_EU
         {
-            const u8** langs = (*p)->strings;
+            const u8** langs = (*desc)->strings;
 
             return LoadTextSlots((void*)langs[gLanguage], sWorldInspectDescText);
         }
 #else
-        return LoadTextSlots((void*)*p, sWorldInspectDescText);
+        return LoadTextSlots((void*)*desc, sWorldInspectDescText);
 #endif
     }
 
@@ -524,36 +524,36 @@ void WorldInspectDraw() {
     s32 i;
     u16 prio;
 #ifdef VERSION_EU
-    void* first;
-    void* second;
-    void* third;
+    void* titleSprite;
+    void* topBarSprite;
+    void* bottomBarSprite;
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        first = gWorldInspectBarFrame0;
-        second = gWorldInspectBarFrame1;
-        third = gWorldInspectBarFrame2;
+        titleSprite = gWorldInspectBarFrame0;
+        topBarSprite = gWorldInspectBarFrame1;
+        bottomBarSprite = gWorldInspectBarFrame2;
         break;
     case LANGUAGE_FRENCH:
-        first = gWorldInspectBarFrenchFrame0;
-        second = gWorldInspectBarFrenchFrame1;
-        third = gWorldInspectBarFrenchFrame2;
+        titleSprite = gWorldInspectBarFrenchFrame0;
+        topBarSprite = gWorldInspectBarFrenchFrame1;
+        bottomBarSprite = gWorldInspectBarFrenchFrame2;
         break;
     case LANGUAGE_SPANISH:
-        first = gWorldInspectBarSpanishFrame0;
-        second = gWorldInspectBarSpanishFrame1;
-        third = gWorldInspectBarSpanishFrame2;
+        titleSprite = gWorldInspectBarSpanishFrame0;
+        topBarSprite = gWorldInspectBarSpanishFrame1;
+        bottomBarSprite = gWorldInspectBarSpanishFrame2;
         break;
     case LANGUAGE_ITALIAN:
-        first = gWorldInspectBarItalianFrame0;
-        second = gWorldInspectBarItalianFrame1;
-        third = gWorldInspectBarItalianFrame2;
+        titleSprite = gWorldInspectBarItalianFrame0;
+        topBarSprite = gWorldInspectBarItalianFrame1;
+        bottomBarSprite = gWorldInspectBarItalianFrame2;
         break;
     case LANGUAGE_GERMAN:
     default:
-        first = gWorldInspectBarGermanFrame0;
-        second = gWorldInspectBarGermanFrame1;
-        third = gWorldInspectBarGermanFrame2;
+        titleSprite = gWorldInspectBarGermanFrame0;
+        topBarSprite = gWorldInspectBarGermanFrame1;
+        bottomBarSprite = gWorldInspectBarGermanFrame2;
         break;
     }
 #endif
@@ -565,7 +565,7 @@ void WorldInspectDraw() {
 #endif
         DrawSprite(sWorldInspectBarX >> 8, 0,
 #ifdef VERSION_EU
-                      first,
+                      titleSprite,
 #else
                       gWorldInspectBarFrame0,
 #endif
@@ -578,7 +578,7 @@ void WorldInspectDraw() {
 #endif
         DrawSprite(112, sWorldInspectBarY[0] >> 8,
 #ifdef VERSION_EU
-                      second,
+                      topBarSprite,
 #else
                       gWorldInspectBarFrame1,
 #endif
@@ -586,7 +586,7 @@ void WorldInspectDraw() {
                       SPRITE_PRIORITY(3), 3001);
         DrawSprite(112, sWorldInspectBarY[1] >> 8,
 #ifdef VERSION_EU
-                      third,
+                      bottomBarSprite,
 #else
                       gWorldInspectBarFrame2,
 #endif
@@ -657,12 +657,12 @@ void mode_worldinspect_0() {
     s16 i;
     s32 floor;
     s16 id;
-    void** p;
+    void** tilemapPtr;
     u32 floorKeep;
-    s16 fa;
+    s16 slot;
 
-    p = &sWorldInspectTilemap;
-    *p = EwramAlloc(0x500);
+    tilemapPtr = &sWorldInspectTilemap;
+    *tilemapPtr = EwramAlloc(0x500);
     SpriteReset();
     FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
@@ -688,11 +688,11 @@ void mode_worldinspect_0() {
         }
     }
 
-    for (i = 0, fa = sWorldInspectFloorCount; i <= 13; i++) {
+    for (i = 0, slot = sWorldInspectFloorCount; i <= 13; i++) {
         if ((gGameState.availableWorlds & sWorldinspectMsgs[i].flags) != 0) {
-            sWorldInspectWorlds[fa++] = sWorldinspectMsgs[i].world;
+            sWorldInspectWorlds[slot++] = sWorldinspectMsgs[i].world;
 
-            if (fa > 11) {
+            if (slot > 11) {
                 break;
             }
         }

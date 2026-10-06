@@ -251,55 +251,55 @@ void MoogleShopClearFlags() {
 }
 
 void MoogleShopSaveFlags(void* dst) {
-    u16* p = dst;
+    u16* buf = dst;
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        p[i] = sMooglePackBoughtFlags[i];
+        buf[i] = sMooglePackBoughtFlags[i];
     }
 
     for (i = 0; i < 2; i++) {
-        p[i + 32] = sMoogleFreePackFlags[i];
+        buf[i + 32] = sMoogleFreePackFlags[i];
     }
 }
 
 void MoogleShopLoadFlags(void* src) {
-    u16* p = src;
+    u16* buf = src;
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        sMooglePackBoughtFlags[i] = p[i];
+        sMooglePackBoughtFlags[i] = buf[i];
     }
 
     for (i = 0; i < 2; i++) {
-        sMoogleFreePackFlags[i] = p[i + 32];
+        sMoogleFreePackFlags[i] = buf[i + 32];
     }
 }
 
 void SetMooglePackBought(u16 room, u16 category, u16 pack) {
-    u16 v;
-    v = room * 16 + category * 4 + pack;
+    u16 bit;
+    bit = room * 16 + category * 4 + pack;
 
-    if (v <= 0x1FF) {
-        sMooglePackBoughtFlags[v >> 4] |= 1 << (v & 15);
+    if (bit <= 0x1FF) {
+        sMooglePackBoughtFlags[bit >> 4] |= 1 << (bit & 15);
     }
 }
 
 void ClearMooglePackBought(u16 room, u16 category, u16 pack) {
-    u16 v;
-    v = room * 16 + category * 4 + pack;
+    u16 bit;
+    bit = room * 16 + category * 4 + pack;
 
-    if (v <= 0x1FF) {
-        sMooglePackBoughtFlags[v >> 4] &= ~(1 << (v & 15));
+    if (bit <= 0x1FF) {
+        sMooglePackBoughtFlags[bit >> 4] &= ~(1 << (bit & 15));
     }
 }
 
 u8 IsMooglePackBought(u16 room, u16 category, u16 pack) {
-    u16 v;
-    v = room * 16 + category * 4 + pack;
+    u16 bit;
+    bit = room * 16 + category * 4 + pack;
 
-    if (v <= 0x1FF) {
-        return sMooglePackBoughtFlags[v >> 4] >> (v & 15) & 1;
+    if (bit <= 0x1FF) {
+        return sMooglePackBoughtFlags[bit >> 4] >> (bit & 15) & 1;
     }
 
     return 0;
@@ -341,10 +341,10 @@ void ClearMoogleRoomFlags() {
 u8 BuildMooglePackList(s16 floor) {
     s16 i;
     s16 k;
-    s16 m;
-    s16 n;
-    s16 v;
-    s32 r;
+    s16 packs;
+    s16 rows;
+    s16 tier;
+    s32 hasPacks;
 
     for (i = 0; i < 4; i++) {
         sMoogleShopRowCategory[i] = -1;
@@ -354,36 +354,36 @@ u8 BuildMooglePackList(s16 floor) {
         }
     }
 
-    n = 0;
+    rows = 0;
 
     for (i = 0; i < 4; i++) {
-        m = 0;
+        packs = 0;
 
         for (k = 0; k < 4; k++) {
-            v = sMooglePackTiers[floor][i][k];
+            tier = sMooglePackTiers[floor][i][k];
 
             if (IsMooglePackBought(gMapFloorState.room, i, k) == 0) {
-                if (v >= 0) {
-                    sMoogleShopPacks[n][m][0] = k;
-                    sMoogleShopPacks[n][m][1] = v;
-                    m++;
+                if (tier >= 0) {
+                    sMoogleShopPacks[rows][packs][0] = k;
+                    sMoogleShopPacks[rows][packs][1] = tier;
+                    packs++;
                 }
             }
         }
 
-        if (m > 0) {
-            sMoogleShopRowCategory[n] = i;
-            n++;
+        if (packs > 0) {
+            sMoogleShopRowCategory[rows] = i;
+            rows++;
         }
     }
 
-    r = 0;
+    hasPacks = 0;
 
-    if (n > 0) {
-        r = 1;
+    if (rows > 0) {
+        hasPacks = 1;
     }
 
-    return r;
+    return hasPacks;
 }
 
 void MoogleShopCopyTilemapRect(u16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst, s16 dx, s16 dy) {
@@ -425,16 +425,16 @@ void DrawMoogleShopPacks(s16 row) {
 }
 
 s32 MoogleShopReadMenuKeys() {
-    s32 k;
+    s32 keys;
 
-    k = GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON);
-    return k | (GetKeysRepeat() & (DPAD_ANY | R_BUTTON | L_BUTTON));
+    keys = GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON);
+    return keys | (GetKeysRepeat() & (DPAD_ANY | R_BUTTON | L_BUTTON));
 }
 
 void InitMooglePackOpening(s16 x, s16 y) {
     s16 i;
     u16 id;
-    TextSlot** p;
+    TextSlot** textPtr;
 
     for (i = 0; i < 5; i++) {
         id = sMooglePackCardIds[i];
@@ -478,11 +478,11 @@ void InitMooglePackOpening(s16 x, s16 y) {
     FadeSetPaletteExcluded(sMooglePackCursorPalette->index + 0x10, 1);
     sMooglePackCategoryPalette = LoadObjPalette(gMooglePackCategoryPalettes, 0x20);
     FadeSetPaletteExcluded(sMooglePackCategoryPalette->index + 0x10, 1);
-    p = &sMooglePackNameText;
-    *p = EwramAlloc(0x24 * sizeof(TextSlot));
+    textPtr = &sMooglePackNameText;
+    *textPtr = EwramAlloc(0x24 * sizeof(TextSlot));
     InitTextSlots(sMooglePackNameText, 0x24);
-    p = &sMooglePackDescText;
-    *p = EwramAlloc(0x5A * sizeof(TextSlot));
+    textPtr = &sMooglePackDescText;
+    *textPtr = EwramAlloc(0x5A * sizeof(TextSlot));
     InitTextSlots(sMooglePackDescText, 0x5A);
     sMooglePackPremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
     AnimInit(&sMooglePackPremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
@@ -533,23 +533,23 @@ void DrawMooglePackOpening() {
     s16 i;
     ObjAffine* affine;
     void* obj;
-    s32 v;
+    s32 scaleX;
     void* anim;
 
     anim = AnimUpdate(&sMooglePackPremiumAnim);
 
     for (i = 0; i < 5; i++) {
         if (!sMooglePackCards[i].revealed) {
-            v = sMooglePackCards[i].scale;
-            affine = AllocObjAffine(0, v, v, 0);
+            scaleX = sMooglePackCards[i].scale;
+            affine = AllocObjAffine(0, scaleX, scaleX, 0);
             obj = AnimUpdate(&sMooglePackCards[i].anim);
         } else {
-            v = sMooglePackCards[i].scale * -COS(sMooglePackCards[i].flipAngle) >> 8;
-            affine = AllocObjAffine(0, v, sMooglePackCards[i].scale, 0);
+            scaleX = sMooglePackCards[i].scale * -COS(sMooglePackCards[i].flipAngle) >> 8;
+            affine = AllocObjAffine(0, scaleX, sMooglePackCards[i].scale, 0);
             obj = sMooglePackCards[i].backSprite;
         }
 
-        if (v != 0) {
+        if (scaleX != 0) {
             DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, obj, sMooglePackCards[i].tiles2, sMooglePackCards[i].palette2, affine, 0, 0x50);
 
             if (sMooglePackCards[i].revealed) {
@@ -579,19 +579,19 @@ void DrawMooglePackOpening() {
 }
 
 u8 UpdateMooglePackOpening(u16 freePack) {
-    MsShopHosiArg arg0;
-    MsShopHosiArg arg1;
-    MsShopHosiArg arg2;
+    MsShopHosiArg premiumSparkle;
+    MsShopHosiArg revealedSparkle;
+    MsShopHosiArg browseSparkle;
     u8 result;
     s16 i;
     s16 j;
     s16 k;
     s16 old;
     u16 keys;
-    u16 d;
-    s32 f;
-    s32 g;
-    s32 h;
+    u16 delta;
+    s32 premiumTick;
+    s32 revealedTick;
+    s32 browseTick;
 
     result = 1;
 
@@ -651,8 +651,8 @@ u8 UpdateMooglePackOpening(u16 freePack) {
 
             break;
         case MOOGLE_PACK_CARD_STATE_FLIP:
-            d = 0x80 - sMooglePackCards[i].flipAngle;
-            sMooglePackCards[i].flipAngle += d / sMooglePackCards[i].timer;
+            delta = 0x80 - sMooglePackCards[i].flipAngle;
+            sMooglePackCards[i].flipAngle += delta / sMooglePackCards[i].timer;
 
             if (--sMooglePackCards[i].timer == 0) {
                 sMooglePackCards[i].timer = 5;
@@ -706,35 +706,35 @@ u8 UpdateMooglePackOpening(u16 freePack) {
 
             break;
         case MOOGLE_PACK_CARD_STATE_FLIP_PREMIUM:
-            d = 0x80 - sMooglePackCards[i].flipAngle;
-            sMooglePackCards[i].flipAngle += d / sMooglePackCards[i].timer;
+            delta = 0x80 - sMooglePackCards[i].flipAngle;
+            sMooglePackCards[i].flipAngle += delta / sMooglePackCards[i].timer;
 
             if (--sMooglePackCards[i].timer == 0) {
                 sMooglePackCards[i].timer = 5;
                 sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_RISE_PREMIUM;
 
                 for (k = 0; k < 8; k++) {
-                    arg0.x = sMooglePackCards[i].x >> 8;
-                    arg0.y = sMooglePackCards[i].y >> 8;
-                    arg0.palette = sMooglePackCategoryPalette;
-                    arg0.angle = GetRandom() % 96 - 48;
-                    arg0.speed = GetRandom() % 256 + 0x1C0;
-                    TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg0);
+                    premiumSparkle.x = sMooglePackCards[i].x >> 8;
+                    premiumSparkle.y = sMooglePackCards[i].y >> 8;
+                    premiumSparkle.palette = sMooglePackCategoryPalette;
+                    premiumSparkle.angle = GetRandom() % 96 - 48;
+                    premiumSparkle.speed = GetRandom() % 256 + 0x1C0;
+                    TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &premiumSparkle);
                 }
             }
 
             break;
         case MOOGLE_PACK_CARD_STATE_RISE_PREMIUM:
             ApproachValue(&sMooglePackCards[i].y, 0x4600, sMooglePackCards[i].timer);
-            f = gFrameCounter & 0x1F;
+            premiumTick = gFrameCounter & 0x1F;
 
-            if (f == 0) {
-                arg0.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
-                arg0.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
-                arg0.palette = sMooglePackCategoryPalette;
-                arg0.angle = 0x80;
-                arg0.speed = f;
-                TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg0);
+            if (premiumTick == 0) {
+                premiumSparkle.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
+                premiumSparkle.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
+                premiumSparkle.palette = sMooglePackCategoryPalette;
+                premiumSparkle.angle = 0x80;
+                premiumSparkle.speed = premiumTick;
+                TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &premiumSparkle);
             }
 
             if (--sMooglePackCards[i].timer == 0) {
@@ -756,15 +756,15 @@ u8 UpdateMooglePackOpening(u16 freePack) {
             break;
         case MOOGLE_PACK_CARD_STATE_REVEALED:
             if (sMooglePackCards[i].premium) {
-                g = gFrameCounter & 0x1F;
+                revealedTick = gFrameCounter & 0x1F;
 
-                if (g == 0) {
-                    arg1.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
-                    arg1.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
-                    arg1.palette = sMooglePackCategoryPalette;
-                    arg1.angle = 0x80;
-                    arg1.speed = g;
-                    TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg1);
+                if (revealedTick == 0) {
+                    revealedSparkle.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
+                    revealedSparkle.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
+                    revealedSparkle.palette = sMooglePackCategoryPalette;
+                    revealedSparkle.angle = 0x80;
+                    revealedSparkle.speed = revealedTick;
+                    TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &revealedSparkle);
                 }
             }
 
@@ -792,15 +792,15 @@ u8 UpdateMooglePackOpening(u16 freePack) {
             break;
         case MOOGLE_PACK_CARD_STATE_BROWSE:
             if (sMooglePackCards[i].premium) {
-                h = gFrameCounter & 0x1F;
+                browseTick = gFrameCounter & 0x1F;
 
-                if (h == 0) {
-                    arg2.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
-                    arg2.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
-                    arg2.palette = sMooglePackCategoryPalette;
-                    arg2.angle = 0x80;
-                    arg2.speed = h;
-                    TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg2);
+                if (browseTick == 0) {
+                    browseSparkle.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
+                    browseSparkle.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
+                    browseSparkle.palette = sMooglePackCategoryPalette;
+                    browseSparkle.angle = 0x80;
+                    browseSparkle.speed = browseTick;
+                    TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &browseSparkle);
                 }
             }
 
@@ -942,14 +942,14 @@ void MoogleShopHandleRowInput() {
 
 u16 RollMoogleCardValue() {
     s16 i;
-    u16 r;
+    u16 roll;
     u16 acc;
 
-    r = GetRandom() % 100;
+    roll = GetRandom() % 100;
     i = 0;
     acc = sMoogleCardValueWeights[0];
 
-    if (r >= acc) {
+    if (roll >= acc) {
         do {
             i++;
 
@@ -958,7 +958,7 @@ u16 RollMoogleCardValue() {
             }
 
             acc += sMoogleCardValueWeights[i];
-        } while (r >= acc);
+        } while (roll >= acc);
     }
 
     return i % 10;
@@ -969,14 +969,14 @@ void RollMooglePackCards(s16 category, s16 tier) {
     s16 hi;
     s16 j;
     s16 m;
-    s16 k;
-    s16 cnt;
+    s16 count;
+    s16 capacity;
     u16 total;
     u16 rnd;
     u16 acc;
     u16 id;
     const MooglePackCardDef** list;
-    const MooglePackCardDef* e;
+    const MooglePackCardDef* cards;
     s16 n;
 
     id = 0;
@@ -990,24 +990,24 @@ void RollMooglePackCards(s16 category, s16 tier) {
     }
 
     total = 0;
-    cnt = 0;
+    capacity = 0;
 
     for (j = lo; j < hi; j++) {
-        cnt += sMooglePackCardTables[j].count;
+        capacity += sMooglePackCardTables[j].count;
     }
 
-    list = EwramAlloc(cnt * sizeof(*list));
-    k = 0;
+    list = EwramAlloc(capacity * sizeof(*list));
+    count = 0;
 
     for (j = lo; j < hi; j++) {
-        e = sMooglePackCardTables[j].cards;
+        cards = sMooglePackCardTables[j].cards;
         n = sMooglePackCardTables[j].count;
 
         for (m = 0; m < n; m++) {
-            if (e[m].weights[tier] != 0) {
-                total += e[m].weights[tier];
-                list[k] = &e[m];
-                k++;
+            if (cards[m].weights[tier] != 0) {
+                total += cards[m].weights[tier];
+                list[count] = &cards[m];
+                count++;
             }
         }
     }
@@ -1016,7 +1016,7 @@ void RollMooglePackCards(s16 category, s16 tier) {
         rnd = GetRandom() % total;
         acc = 0;
 
-        for (m = 0; m < k; m++) {
+        for (m = 0; m < count; m++) {
             acc += list[m]->weights[tier];
 
             if (rnd < acc) {
@@ -1116,7 +1116,7 @@ void MoogleShopHandlePackInput() {
 
 void MoogleShopDraw() {
     s32 i;
-    s16 v;
+    s16 tier;
 
     switch (sMoogleShopState) {
     case MOOGLE_SHOP_STATE_SELECT_ROW:
@@ -1139,8 +1139,8 @@ void MoogleShopDraw() {
 
     for (i = 0; i < 4; i++) {
         if (sMoogleShopPacks[sMoogleShopRowCursor][i][0] >= 0) {
-            v = sMoogleShopPacks[sMoogleShopRowCursor][i][1];
-            DrawSprite(sMooglePackMenuEntries[i].spriteX + sMooglePackSpriteDefs[v].xOffset, sMooglePackMenuEntries[i].spriteY + sMooglePackSpriteDefs[v].yOffset, sMooglePackSprites[v], sMooglePackTiles[v], sMooglePackPalettes[v], NULL, SPRITE_PRIORITY(1), 0x3F2);
+            tier = sMoogleShopPacks[sMoogleShopRowCursor][i][1];
+            DrawSprite(sMooglePackMenuEntries[i].spriteX + sMooglePackSpriteDefs[tier].xOffset, sMooglePackMenuEntries[i].spriteY + sMooglePackSpriteDefs[tier].yOffset, sMooglePackSprites[tier], sMooglePackTiles[tier], sMooglePackPalettes[tier], NULL, SPRITE_PRIORITY(1), 0x3F2);
         }
     }
 }
@@ -1148,11 +1148,11 @@ void MoogleShopDraw() {
 void mode_ms_shop_0() {
     s16 i;
     s32 size;
-    u16** p;
+    u16** tilemapPtr;
 
-    p = &sMoogleShopTilemap;
+    tilemapPtr = &sMoogleShopTilemap;
     size = 0x500;
-    *p = EwramAlloc(size);
+    *tilemapPtr = EwramAlloc(size);
     SpriteReset();
     FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();

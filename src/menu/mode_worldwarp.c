@@ -122,15 +122,15 @@ void WorldWarpSetTilemapRectPalette(u8 pal, u16 w, s16 h, u16* map, s16 x, s16 y
     s16 i;
     s16 j;
     s16 n;
-    u16 v;
+    u16 palBits;
 
     n = w;
-    v = pal << 12;
+    palBits = pal << 12;
     map += x + y * 32;
 
     for (j = 0; j < h; j++) {
         for (i = 0; i < n; i++) {
-            *map = (*map & 0xFFF) | v;
+            *map = (*map & 0xFFF) | palBits;
             map++;
         }
 
@@ -319,44 +319,44 @@ void WorldWarpHandleInput() {
 void WorldWarpDraw() {
     s32 i;
 #ifdef VERSION_EU
-    void* tile0;
-    void* tile1;
-    void* tile2;
+    void* titleSprite;
+    void* topBarSprite;
+    void* bottomBarSprite;
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        tile0 = gWorldWarpBarFrame0;
-        tile1 = gWorldWarpBarFrame1;
-        tile2 = gWorldWarpBarFrame2;
+        titleSprite = gWorldWarpBarFrame0;
+        topBarSprite = gWorldWarpBarFrame1;
+        bottomBarSprite = gWorldWarpBarFrame2;
         break;
     case LANGUAGE_FRENCH:
-        tile0 = gWorldWarpBarFrenchFrame0;
-        tile1 = gWorldWarpBarFrenchFrame1;
-        tile2 = gWorldWarpBarFrenchFrame2;
+        titleSprite = gWorldWarpBarFrenchFrame0;
+        topBarSprite = gWorldWarpBarFrenchFrame1;
+        bottomBarSprite = gWorldWarpBarFrenchFrame2;
         break;
     case LANGUAGE_SPANISH:
-        tile0 = gWorldWarpBarSpanishFrame0;
-        tile1 = gWorldWarpBarSpanishFrame1;
-        tile2 = gWorldWarpBarSpanishFrame2;
+        titleSprite = gWorldWarpBarSpanishFrame0;
+        topBarSprite = gWorldWarpBarSpanishFrame1;
+        bottomBarSprite = gWorldWarpBarSpanishFrame2;
         break;
     case LANGUAGE_ITALIAN:
-        tile0 = gWorldWarpBarItalianFrame0;
-        tile1 = gWorldWarpBarItalianFrame1;
-        tile2 = gWorldWarpBarItalianFrame2;
+        titleSprite = gWorldWarpBarItalianFrame0;
+        topBarSprite = gWorldWarpBarItalianFrame1;
+        bottomBarSprite = gWorldWarpBarItalianFrame2;
         break;
     case LANGUAGE_GERMAN:
     default:
-        tile0 = gWorldWarpBarGermanFrame0;
-        tile1 = gWorldWarpBarGermanFrame1;
-        tile2 = gWorldWarpBarGermanFrame2;
+        titleSprite = gWorldWarpBarGermanFrame0;
+        topBarSprite = gWorldWarpBarGermanFrame1;
+        bottomBarSprite = gWorldWarpBarGermanFrame2;
         break;
     }
 
-    DrawSprite(sWorldWarpBarX >> 8, 0, tile0, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
+    DrawSprite(sWorldWarpBarX >> 8, 0, titleSprite, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
 
     if (sWorldWarpState != WORLD_WARP_STATE_SELECT) {
-        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, tile1, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
-        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, tile2, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, topBarSprite, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, bottomBarSprite, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
     }
 #else
     if (sWorldWarpState != WORLD_WARP_STATE_SELECT) {
@@ -424,11 +424,11 @@ void WorldWarpDraw() {
 
 void mode_worldwarp_0() {
     s32 i;
-    void** p;
+    void** tilemapPtr;
 
     sWorldWarpFloorCount = GetProgressFloor() + 1;
-    p = &sWorldWarpTilemap;
-    *p = EwramAlloc(0x500);
+    tilemapPtr = &sWorldWarpTilemap;
+    *tilemapPtr = EwramAlloc(0x500);
     SpriteReset();
     FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();

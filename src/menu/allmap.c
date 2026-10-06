@@ -134,13 +134,13 @@ static s32 sAllmapCameraFixedX;
 static s32 sAllmapCameraFixedY;
 
 s32 GetAllmapRoomPaletteOffset(u8 room) {
-    u8 r = 0;
+    u8 eventRoom = 0;
 
     if (GetEventRoomKind(room) == 1 || GetEventRoomKind(room) == 4) {
-        r = 1;
+        eventRoom = 1;
     }
 
-    return r << 5;
+    return eventRoom << 5;
 }
 
 void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
@@ -179,14 +179,14 @@ void task_allmap_room_2(AllmapRoomWork* work) {
     s32 i;
     s16 x;
     s16 y;
-    u16 g;
-    u16 h;
+    u16 flags;
+    u16 priority;
 
     if (!work->asSprite) {
         x = work->x * 24 - gAllmapCameraX;
         y = work->y * 24 - gAllmapCameraY;
-        g = 0x800;
-        h = -4100 - work->y * 4;
+        flags = 0x800;
+        priority = -4100 - work->y * 4;
     } else {
         if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {
             return;
@@ -194,8 +194,8 @@ void task_allmap_room_2(AllmapRoomWork* work) {
 
         x = work->x;
         y = work->y;
-        g = 0;
-        h = 80;
+        flags = 0;
+        priority = 80;
     }
 
     if (x < -32 || x > 240) {
@@ -211,13 +211,13 @@ void task_allmap_room_2(AllmapRoomWork* work) {
     }
 
     if (work->gfx2 != NULL) {
-        DrawSprite(x, y, work->gfx2, work->tiles, work->palette, NULL, g, h);
+        DrawSprite(x, y, work->gfx2, work->tiles, work->palette, NULL, flags, priority);
     }
 
     for (i = 0; i < 4; i++) {
         if (work->gfx[i] != NULL) {
             work->gfx[i] = AnimUpdate(&work->anim[i]);
-            DrawSprite(x, y, work->gfx[i], work->tiles2[i], work->palette, NULL, g, i - 4 + h);
+            DrawSprite(x, y, work->gfx[i], work->tiles2[i], work->palette, NULL, flags, i - 4 + priority);
         }
     }
 }
@@ -361,29 +361,29 @@ void task_allmap_cursor_3(AllmapCursorWork* work) {
 
 s16 AllmapDrawRoomnameFrame(u16 width) {
     u8* base;
-    u16* p;
-    s16 v;
-    s16 q;
+    u16* src;
+    s16 left;
+    s16 tileOffset;
     u8* dst;
 
-    v = 120 - width;
+    left = 120 - width;
 
-    if (v < 0) {
-        v = 0;
+    if (left < 0) {
+        left = 0;
     }
 
-    q = v / 8;
+    tileOffset = left / 8;
     base = GetBgScreenBase(2);
     dst = base + 28;
-    p = gAllmapRoomnameFrameMap - q;
-    RequestDma3Copy(p, dst, 32);
+    src = gAllmapRoomnameFrameMap - tileOffset;
+    RequestDma3Copy(src, dst, 32);
     dst = base + 92;
-    p += 32;
-    RequestDma3Copy(p, dst, 32);
+    src += 32;
+    RequestDma3Copy(src, dst, 32);
     dst = base + 156;
-    p += 32;
-    RequestDma3Copy(p, dst, 32);
-    return v - v % 8 / 2;
+    src += 32;
+    RequestDma3Copy(src, dst, 32);
+    return left - left % 8 / 2;
 }
 
 s32 GetAllmapRoomnamePaletteOffset(u8 nameId) {
@@ -427,19 +427,19 @@ void task_allmap_roomname_3(AllmapRoomnameWork* work) {
 
 void AllmapClearRoomnameFrame() {
     u8* base;
-    u16* p;
+    u16* src;
     u8* dst;
 
     base = GetBgScreenBase(2);
     dst = base + 28;
-    p = gDefaultBgMap;
-    RequestDma3Copy(p, dst, 32);
+    src = gDefaultBgMap;
+    RequestDma3Copy(src, dst, 32);
     dst = base + 92;
-    p += 32;
-    RequestDma3Copy(p, dst, 32);
+    src += 32;
+    RequestDma3Copy(src, dst, 32);
     dst = base + 156;
-    p += 32;
-    RequestDma3Copy(p, dst, 32);
+    src += 32;
+    RequestDma3Copy(src, dst, 32);
 }
 
 enum AllmapBarState {
@@ -609,24 +609,24 @@ void task_allmap_bar_3(AllmapBarWork* work) {
 }
 
 u8 AllmapHasDoorInfo(AllmapCursorPos pos) {
-    AllmapCursorPos p;
+    AllmapCursorPos neighbor;
     s32 i;
-    u8 r;
-    u8 v;
+    u8 room;
+    u8 hasInfo;
 
     for (i = 0; i < 4; i++) {
-        p.x = pos.x + sAllmapDirDeltas[i][0];
-        p.y = pos.y + sAllmapDirDeltas[i][1];
-        r = GetAllmapRoomAt(p);
+        neighbor.x = pos.x + sAllmapDirDeltas[i][0];
+        neighbor.y = pos.y + sAllmapDirDeltas[i][1];
+        room = GetAllmapRoomAt(neighbor);
 
-        if (r != 255) {
+        if (room != 255) {
             if (GetEventRoomKind(GetAllmapRoomAt(pos)) == 2) {
-                v = AllmapDoorHasKeyInfo(r, sAllmapReverseDoors[i]);
+                hasInfo = AllmapDoorHasKeyInfo(room, sAllmapReverseDoors[i]);
             } else {
-                v = AllmapDoorHasCardInfo(r, sAllmapReverseDoors[i]);
+                hasInfo = AllmapDoorHasCardInfo(room, sAllmapReverseDoors[i]);
             }
 
-            if (v) {
+            if (hasInfo) {
                 return 1;
             }
         }
@@ -639,7 +639,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
     s32 i;
     AllmapCursorPos pos;
     u8 room;
-    u8 n;
+    u8 value;
 
     work->count = 0;
 
@@ -649,13 +649,13 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
         room = GetAllmapRoomAt(pos);
 
         if (room != MAP_ROOM_NONE && AllmapDoorHasCardInfo(room, sAllmapReverseDoors[i])) {
-            n = GetMapRoomCardValue(room) + 1;
+            value = GetMapRoomCardValue(room) + 1;
 
-            if (n == 10) {
-                n = 0;
+            if (value == 10) {
+                value = 0;
             }
 
-            work->doors[i].sprite.tiles = AllocKeyValueTiles(n);
+            work->doors[i].sprite.tiles = AllocKeyValueTiles(value);
             work->doors[i].sprite.palette = LoadObjPalette(gDoorCardPalette, 32);
             work->doors[i].sprite.gfx = NULL;
             work->doors[i].sprite.tiles2 = LoadObjTiles(gCardOutlineWhiteTiles, 0x600);
@@ -682,17 +682,17 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
 }
 
 s32 GetAllmapKeyCardX(u16 count, s32 index) {
-    s16 tbl[4][4];
+    s16 keyCardX[4][4];
 
-    memcpy(tbl, sAllmapKeyCardX, sizeof(tbl));
-    return tbl[count - 1][index] << 8;
+    memcpy(keyCardX, sAllmapKeyCardX, sizeof(keyCardX));
+    return keyCardX[count - 1][index] << 8;
 }
 
 void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
     s32 i;
     AllmapCursorPos pos;
     u8 room;
-    EventKeyCard* e;
+    EventKeyCard* card;
 
     for (i = 0; i < 4; i++) {
         pos.x = work->pos.x + sAllmapDirDeltas[i][0];
@@ -712,9 +712,9 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
     }
 
     for (i = 0; i < work->count; i++) {
-        e = &work->doors[i];
-        InitEventKeyCard(e, GetEventKey(i));
-        SetLayeredCardSpritePos(GetAllmapKeyCardX(work->count, i), 0x6800, &e->sprite);
+        card = &work->doors[i];
+        InitEventKeyCard(card, GetEventKey(i));
+        SetLayeredCardSpritePos(GetAllmapKeyCardX(work->count, i), 0x6800, &card->sprite);
 
         if (work->doors[i].sprite.palette != NULL) {
             FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, 1);
@@ -924,10 +924,10 @@ void ClearStockMesDispWork() {
 }
 
 void AllmapDrawRoomTiles(s16 x, s16 y, s32 shape, u8 selected) {
-    AllmapCursorPos p;
+    AllmapCursorPos pos;
     u16* map;
-    s16 x8;
-    s16 y8;
+    s16 tileX;
+    s16 tileY;
     s32 i;
     s32 j;
     u8 room;
@@ -940,14 +940,14 @@ void AllmapDrawRoomTiles(s16 x, s16 y, s32 shape, u8 selected) {
         map = gAllmapBg1Map;
     }
 
-    x8 = (x * 24 - sAllmapState->originX) / 8;
-    y8 = (y * 24 - sAllmapState->originY) / 8;
-    p.x = x;
-    p.y = y;
-    room = GetAllmapRoomAt(p);
+    tileX = (x * 24 - sAllmapState->originX) / 8;
+    tileY = (y * 24 - sAllmapState->originY) / 8;
+    pos.x = x;
+    pos.y = y;
+    room = GetAllmapRoomAt(pos);
     tile = shape * 16;
 
-    if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || AllmapHasDoorInfo(p)) {
+    if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || AllmapHasDoorInfo(pos)) {
         if (selected) {
             tile += 0x2000;
         } else if (shape == 1) {
@@ -963,7 +963,7 @@ void AllmapDrawRoomTiles(s16 x, s16 y, s32 shape, u8 selected) {
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            ofs = (y8 + i) / 32 * 2048 + (y8 + i) % 32 * 32 + (x8 + j) / 32 * 1024 + (x8 + j) % 32;
+            ofs = (tileY + i) / 32 * 2048 + (tileY + i) % 32 * 32 + (tileX + j) / 32 * 1024 + (tileX + j) % 32;
             map[ofs] = tile;
             tile++;
         }
@@ -974,8 +974,8 @@ void InitAllmap() {
     s32 i;
     s32 j;
     AllmapCursorPos arg;
-    AllmapRoomWork* w;
-    AllmapRoomWork* c;
+    AllmapRoomWork* room;
+    AllmapRoomWork* cursorRoom;
     void** state = &gSharedModeWork;
 
     *state = EwramAlloc(sizeof(AllmapState));
@@ -1005,32 +1005,32 @@ void InitAllmap() {
 
     for (j = 0; j < 32; j++) {
         if (IsTaskActive(sAllmapState->roomTasks[j])) {
-            w = sAllmapState->roomTasks[j]->work;
-            AllmapDrawRoomTiles(w->x, w->y, w->shape, j == gAllmapCursorRoom);
+            room = sAllmapState->roomTasks[j]->work;
+            AllmapDrawRoomTiles(room->x, room->y, room->shape, j == gAllmapCursorRoom);
         }
     }
 
     RedrawBgMapAt(0, sAllmapState->scrollX - sAllmapState->originX % 8, sAllmapState->scrollY - sAllmapState->originY % 8);
     RedrawBgMapAt(1, sAllmapState->scrollX - sAllmapState->originX % 8, sAllmapState->scrollY - sAllmapState->originY % 8);
-    c = sAllmapState->roomTasks[gAllmapCursorRoom]->work;
-    arg.x = c->x;
-    arg.y = c->y;
+    cursorRoom = sAllmapState->roomTasks[gAllmapCursorRoom]->work;
+    arg.x = cursorRoom->x;
+    arg.y = cursorRoom->y;
     sAllmapState->cursorTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapCursor, &arg);
     AllmapInitDropOffsets();
 }
 
 void AllmapUpdateCamera(AllmapState* state) {
-    s32 tx;
-    s32 ty;
+    s32 targetX;
+    s32 targetY;
     s32 dx;
     s32 dy;
-    s32 px;
-    s32 py;
+    s32 prevX;
+    s32 prevY;
 
-    tx = (state->originX + state->scrollX) << 8;
-    ty = (state->originY + state->scrollY) << 8;
-    dx = (tx - sAllmapCameraFixedX) >> 3;
-    dy = (ty - sAllmapCameraFixedY) >> 3;
+    targetX = (state->originX + state->scrollX) << 8;
+    targetY = (state->originY + state->scrollY) << 8;
+    dx = (targetX - sAllmapCameraFixedX) >> 3;
+    dy = (targetY - sAllmapCameraFixedY) >> 3;
 
     if (dx > 0x800) {
         dx = 0x800;
@@ -1044,17 +1044,17 @@ void AllmapUpdateCamera(AllmapState* state) {
         dy = -0x800;
     }
 
-    px = sAllmapCameraFixedX;
-    py = sAllmapCameraFixedY;
+    prevX = sAllmapCameraFixedX;
+    prevY = sAllmapCameraFixedY;
     sAllmapCameraFixedX += dx;
     sAllmapCameraFixedY += dy;
 
-    if ((px - sAllmapCameraFixedX >= 0 ? px - sAllmapCameraFixedX : sAllmapCameraFixedX - px) <= 7) {
-        sAllmapCameraFixedX = tx;
+    if ((prevX - sAllmapCameraFixedX >= 0 ? prevX - sAllmapCameraFixedX : sAllmapCameraFixedX - prevX) <= 7) {
+        sAllmapCameraFixedX = targetX;
     }
 
-    if ((py - sAllmapCameraFixedY >= 0 ? py - sAllmapCameraFixedY : sAllmapCameraFixedY - py) <= 7) {
-        sAllmapCameraFixedY = ty;
+    if ((prevY - sAllmapCameraFixedY >= 0 ? prevY - sAllmapCameraFixedY : sAllmapCameraFixedY - prevY) <= 7) {
+        sAllmapCameraFixedY = targetY;
     }
 
     gAllmapCameraX = sAllmapCameraFixedX >> 8;
@@ -1112,8 +1112,8 @@ u16 GetAllmapMoveSpeed() {
 }
 
 void AllmapInitDropOffsets() {
-    AllmapRoomWork* w;
-    AllmapCursorWork* c;
+    AllmapRoomWork* room;
+    AllmapCursorWork* cursor;
     s32 base;
     u8 i;
 
@@ -1121,27 +1121,27 @@ void AllmapInitDropOffsets() {
 
     for (i = 0; i < 32; i++) {
         if (IsTaskActive(sAllmapState->roomTasks[i])) {
-            w = sAllmapState->roomTasks[i]->work;
-            w->dropTargetY = (w->y * 24 - gAllmapCameraY) << 8;
-            w->dropY = w->dropTargetY - base;
+            room = sAllmapState->roomTasks[i]->work;
+            room->dropTargetY = (room->y * 24 - gAllmapCameraY) << 8;
+            room->dropY = room->dropTargetY - base;
         }
     }
 
     if (IsTaskActive(sAllmapState->cursorTask)) {
-        c = sAllmapState->cursorTask->work;
-        c->dropY = c->dropTargetY - base;
+        cursor = sAllmapState->cursorTask->work;
+        cursor->dropY = cursor->dropTargetY - base;
     }
 }
 
 s32 GetAllmapRoomAt(AllmapCursorPos pos) {
-    AllmapRoomWork* w;
+    AllmapRoomWork* room;
     u8 i;
 
     for (i = 0; i < 32; i++) {
         if (IsTaskActive(sAllmapState->roomTasks[i])) {
-            w = sAllmapState->roomTasks[i]->work;
+            room = sAllmapState->roomTasks[i]->work;
 
-            if (pos.x == w->x && pos.y == w->y) {
+            if (pos.x == room->x && pos.y == room->y) {
                 return i;
             }
         }
@@ -1151,10 +1151,10 @@ s32 GetAllmapRoomAt(AllmapCursorPos pos) {
 }
 
 void AllmapCenterOnRoom() {
-    AllmapRoomWork* w;
+    AllmapRoomWork* room;
 
-    w = sAllmapState->roomTasks[gAllmapCursorRoom]->work;
-    sAllmapState->scrollY = w->y * 24 - sAllmapState->originY - 69;
+    room = sAllmapState->roomTasks[gAllmapCursorRoom]->work;
+    sAllmapState->scrollY = room->y * 24 - sAllmapState->originY - 69;
 
     if (sAllmapState->scrollY < 0 || sAllmapState->height <= 159) {
         sAllmapState->scrollY = 0;
@@ -1162,11 +1162,11 @@ void AllmapCenterOnRoom() {
         sAllmapState->scrollY = sAllmapState->height - 160;
     }
 
-    if ((s16)(w->y * 24 - sAllmapState->originY) <= 15) {
+    if ((s16)(room->y * 24 - sAllmapState->originY) <= 15) {
         sAllmapState->scrollY -= 16;
     }
 
-    sAllmapState->scrollX = w->x * 24 - sAllmapState->originX - 104;
+    sAllmapState->scrollX = room->x * 24 - sAllmapState->originX - 104;
 
     if (sAllmapState->scrollX < 0 || sAllmapState->width <= 239) {
         sAllmapState->scrollX = 0;
@@ -1176,53 +1176,53 @@ void AllmapCenterOnRoom() {
 }
 
 void AllmapHandleInput() {
-    AllmapCursorWork* c;
-    AllmapCursorPos p;
-    MapFloorRoom* d;
+    AllmapCursorWork* cursor;
+    AllmapCursorPos pos;
+    MapFloorRoom* floorRoom;
     u8 moved;
-    u8 r;
+    u8 room;
 
     moved = 0;
-    c = sAllmapState->cursorTask->work;
-    p = c->pos;
+    cursor = sAllmapState->cursorTask->work;
+    pos = cursor->pos;
 
     switch (GetKeysRepeat()) {
     case DPAD_UP:
-        p.x++;
-        p.y--;
+        pos.x++;
+        pos.y--;
         moved = 1;
         break;
     case DPAD_RIGHT:
-        p.x++;
-        p.y++;
+        pos.x++;
+        pos.y++;
         moved = 1;
         break;
     case DPAD_LEFT:
-        p.x--;
-        p.y--;
+        pos.x--;
+        pos.y--;
         moved = 1;
         break;
     case DPAD_DOWN:
-        p.x--;
-        p.y++;
+        pos.x--;
+        pos.y++;
         moved = 1;
         break;
     }
 
-    r = GetAllmapRoomAt(p);
+    room = GetAllmapRoomAt(pos);
 
-    if (r == 255) {
+    if (room == 255) {
         return;
     }
 
-    c->pos = p;
+    cursor->pos = pos;
 
-    if (sAllmapState->lastRoom == r) {
+    if (sAllmapState->lastRoom == room) {
         return;
     }
 
-    sAllmapState->lastRoom = r;
-    gAllmapCursorRoom = r;
+    sAllmapState->lastRoom = room;
+    gAllmapCursorRoom = room;
 
     if (moved) {
         m4aSongNumStart(SONG_SYS_CLICK);
@@ -1233,10 +1233,10 @@ void AllmapHandleInput() {
         TaskKill(&sAllmapState->tasks, sAllmapState->roomnameTask);
     }
 
-    d = GetMapFloorRoom(r);
+    floorRoom = GetMapFloorRoom(room);
 
-    if (d->nameId != 26 && (TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
-        sAllmapState->roomnameTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoomname, &d->nameId);
+    if (floorRoom->nameId != 26 && (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
+        sAllmapState->roomnameTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoomname, &floorRoom->nameId);
     } else {
         sAllmapState->roomnameTask = NULL;
         AllmapClearRoomnameFrame();
@@ -1246,17 +1246,17 @@ void AllmapHandleInput() {
         TaskKill(&sAllmapState->tasks, sAllmapState->pushaTask);
     }
 
-    if (AllmapHasDoorInfo(c->pos)) {
-        sAllmapState->pushaTask = TaskCreate(&sAllmapState->tasks, &gTaskDescAllmapPusha, c);
+    if (AllmapHasDoorInfo(cursor->pos)) {
+        sAllmapState->pushaTask = TaskCreate(&sAllmapState->tasks, &gTaskDescAllmapPusha, cursor);
     }
 }
 
 void AllmapAddRoom(u8 id, u16 x, u16 y) {
     AllmapRoomArg arg;
-    u8* d;
+    u8* links;
     u8 room;
 
-    d = GetMapRoomLinks(id);
+    links = GetMapRoomLinks(id);
 
     if (IsTaskActive(sAllmapState->roomTasks[id])) {
         return;
@@ -1284,25 +1284,25 @@ void AllmapAddRoom(u8 id, u16 x, u16 y) {
     arg.asSprite = 0;
     sAllmapState->roomTasks[id] = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoom, &arg);
 
-    room = d[0];
+    room = links[0];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x + 1, y - 1);
     }
 
-    room = d[1];
+    room = links[1];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x - 1, y + 1);
     }
 
-    room = d[2];
+    room = links[2];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x + 1, y + 1);
     }
 
-    room = d[3];
+    room = links[3];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x - 1, y - 1);

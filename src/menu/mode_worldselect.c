@@ -270,7 +270,7 @@ s16 WorldselectSetSlotGfx(s16 model, s16 slot) {
 
 void WorldselectDrawName(s16 model, s16 width) {
     u8* src;
-    u8* src2;
+    u8* srcRight;
 
     DmaFill16(3, 0, sWorldselectNameBuffer, 0x6C0);
 
@@ -282,12 +282,12 @@ void WorldselectDrawName(s16 model, s16 width) {
         src = sWorldselectWorldDefs[model].nameTiles;
 #endif
         DmaCopy16(3, src, (u8*)sWorldselectNameBuffer + (9 - width) * 32, width * 32);
-        src2 = src + (18 - width) * 32;
-        DmaCopy16(3, src2, (u8*)sWorldselectNameBuffer + 288, width * 32);
+        srcRight = src + (18 - width) * 32;
+        DmaCopy16(3, srcRight, (u8*)sWorldselectNameBuffer + 288, width * 32);
         DmaCopy16(3, src + 576, (u8*)sWorldselectNameBuffer + (9 - width) * 32 + 576, width * 32);
-        DmaCopy16(3, src2 + 576, (u8*)sWorldselectNameBuffer + 864, width * 32);
+        DmaCopy16(3, srcRight + 576, (u8*)sWorldselectNameBuffer + 864, width * 32);
         DmaCopy16(3, src + 1152, (u8*)sWorldselectNameBuffer + (9 - width) * 32 + 1152, width * 32);
-        DmaCopy16(3, src2 + 1152, (u8*)sWorldselectNameBuffer + 1440, width * 32);
+        DmaCopy16(3, srcRight + 1152, (u8*)sWorldselectNameBuffer + 1440, width * 32);
     }
 
     RequestDma3Copy(sWorldselectNameBuffer, (u8*)GetBgCharBase(0) + 1024, 0x6C0);
@@ -295,8 +295,8 @@ void WorldselectDrawName(s16 model, s16 width) {
 
 void WorldselectHandleInput() {
     s16 i;
-    s16 j;
-    s16 k;
+    s16 slot;
+    s16 listIndex;
     u8 step;
 
     switch (sWorldselectRotation) {
@@ -319,24 +319,24 @@ void WorldselectHandleInput() {
             sWorldselectStep = WORLDSELECT_STEP_TITLE_OUT;
         } else if (sWorldselectSlotCount > 1) {
             if (GetKeysHeld() & DPAD_LEFT) {
-                j = sWorldselectCursor - sWorldselectSlotCount / 2;
+                slot = sWorldselectCursor - sWorldselectSlotCount / 2;
 
-                while (j < 0) {
-                    j += sWorldselectSlotCount;
+                while (slot < 0) {
+                    slot += sWorldselectSlotCount;
                 }
 
-                ReleaseObjPalette(sWorldselectSlots[j].palette);
-                ReleaseObjTiles(sWorldselectSlots[j].tiles);
-                k = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
+                ReleaseObjPalette(sWorldselectSlots[slot].palette);
+                ReleaseObjTiles(sWorldselectSlots[slot].tiles);
+                listIndex = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
 
-                while (k < 0) {
-                    k += sWorldselectWorldCount;
+                while (listIndex < 0) {
+                    listIndex += sWorldselectWorldCount;
                 }
 
-                sWorldselectSlots[j].listIndex = k;
-                WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
-                WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
-                WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                sWorldselectSlots[slot].listIndex = listIndex;
+                WorldselectLoadSlotPalette(sWorldselectWorlds[listIndex], slot);
+                WorldselectLoadSlotTiles(sWorldselectWorlds[listIndex], slot);
+                WorldselectSetSlotGfx(sWorldselectWorlds[listIndex], slot);
                 sWorldselectCursor--;
 
                 if (sWorldselectCursor < 0) {
@@ -347,24 +347,24 @@ void WorldselectHandleInput() {
                 sWorldselectNameMode = WORLDSELECT_NAME_MODE_HIDE;
                 sWorldselectRotation = WORLDSELECT_ROTATION_LEFT;
             } else if (GetKeysHeld() & DPAD_RIGHT) {
-                j = sWorldselectCursor + sWorldselectSlotCount / 2;
+                slot = sWorldselectCursor + sWorldselectSlotCount / 2;
 
-                while (j >= sWorldselectSlotCount) {
-                    j -= sWorldselectSlotCount;
+                while (slot >= sWorldselectSlotCount) {
+                    slot -= sWorldselectSlotCount;
                 }
 
-                ReleaseObjPalette(sWorldselectSlots[j].palette);
-                ReleaseObjTiles(sWorldselectSlots[j].tiles);
-                k = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
+                ReleaseObjPalette(sWorldselectSlots[slot].palette);
+                ReleaseObjTiles(sWorldselectSlots[slot].tiles);
+                listIndex = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
 
-                while (k >= sWorldselectWorldCount) {
-                    k -= sWorldselectWorldCount;
+                while (listIndex >= sWorldselectWorldCount) {
+                    listIndex -= sWorldselectWorldCount;
                 }
 
-                sWorldselectSlots[j].listIndex = k;
-                WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
-                WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
-                WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                sWorldselectSlots[slot].listIndex = listIndex;
+                WorldselectLoadSlotPalette(sWorldselectWorlds[listIndex], slot);
+                WorldselectLoadSlotTiles(sWorldselectWorlds[listIndex], slot);
+                WorldselectSetSlotGfx(sWorldselectWorlds[listIndex], slot);
                 sWorldselectCursor++;
 
                 if (sWorldselectCursor >= sWorldselectSlotCount) {
@@ -380,24 +380,24 @@ void WorldselectHandleInput() {
         break;
     case WORLDSELECT_ROTATION_RIGHT:
         if (GetKeysHeld() & DPAD_LEFT) {
-            j = sWorldselectCursor - sWorldselectSlotCount / 2;
+            slot = sWorldselectCursor - sWorldselectSlotCount / 2;
 
-            while (j < 0) {
-                j += sWorldselectSlotCount;
+            while (slot < 0) {
+                slot += sWorldselectSlotCount;
             }
 
-            ReleaseObjPalette(sWorldselectSlots[j].palette);
-            ReleaseObjTiles(sWorldselectSlots[j].tiles);
-            k = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
+            ReleaseObjPalette(sWorldselectSlots[slot].palette);
+            ReleaseObjTiles(sWorldselectSlots[slot].tiles);
+            listIndex = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
 
-            while (k < 0) {
-                k += sWorldselectWorldCount;
+            while (listIndex < 0) {
+                listIndex += sWorldselectWorldCount;
             }
 
-            sWorldselectSlots[j].listIndex = k;
-            WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
-            WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
-            WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+            sWorldselectSlots[slot].listIndex = listIndex;
+            WorldselectLoadSlotPalette(sWorldselectWorlds[listIndex], slot);
+            WorldselectLoadSlotTiles(sWorldselectWorlds[listIndex], slot);
+            WorldselectSetSlotGfx(sWorldselectWorlds[listIndex], slot);
             sWorldselectCursor--;
 
             if (sWorldselectCursor < 0) {
@@ -413,24 +413,24 @@ void WorldselectHandleInput() {
 
             if (sWorldselectSlots[sWorldselectCursor].angle <= 128) {
                 if (GetKeysHeld() & DPAD_RIGHT) {
-                    j = sWorldselectCursor + sWorldselectSlotCount / 2;
+                    slot = sWorldselectCursor + sWorldselectSlotCount / 2;
 
-                    while (j >= sWorldselectSlotCount) {
-                        j -= sWorldselectSlotCount;
+                    while (slot >= sWorldselectSlotCount) {
+                        slot -= sWorldselectSlotCount;
                     }
 
-                    ReleaseObjPalette(sWorldselectSlots[j].palette);
-                    ReleaseObjTiles(sWorldselectSlots[j].tiles);
-                    k = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
+                    ReleaseObjPalette(sWorldselectSlots[slot].palette);
+                    ReleaseObjTiles(sWorldselectSlots[slot].tiles);
+                    listIndex = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
 
-                    while (k >= sWorldselectWorldCount) {
-                        k -= sWorldselectWorldCount;
+                    while (listIndex >= sWorldselectWorldCount) {
+                        listIndex -= sWorldselectWorldCount;
                     }
 
-                    sWorldselectSlots[j].listIndex = k;
-                    WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
-                    WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
-                    WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                    sWorldselectSlots[slot].listIndex = listIndex;
+                    WorldselectLoadSlotPalette(sWorldselectWorlds[listIndex], slot);
+                    WorldselectLoadSlotTiles(sWorldselectWorlds[listIndex], slot);
+                    WorldselectSetSlotGfx(sWorldselectWorlds[listIndex], slot);
                     sWorldselectCursor++;
 
                     if (sWorldselectCursor >= sWorldselectSlotCount) {
@@ -456,24 +456,24 @@ void WorldselectHandleInput() {
         break;
     case WORLDSELECT_ROTATION_LEFT:
         if (GetKeysHeld() & DPAD_RIGHT) {
-            j = sWorldselectCursor + sWorldselectSlotCount / 2;
+            slot = sWorldselectCursor + sWorldselectSlotCount / 2;
 
-            while (j >= sWorldselectSlotCount) {
-                j -= sWorldselectSlotCount;
+            while (slot >= sWorldselectSlotCount) {
+                slot -= sWorldselectSlotCount;
             }
 
-            ReleaseObjPalette(sWorldselectSlots[j].palette);
-            ReleaseObjTiles(sWorldselectSlots[j].tiles);
-            k = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
+            ReleaseObjPalette(sWorldselectSlots[slot].palette);
+            ReleaseObjTiles(sWorldselectSlots[slot].tiles);
+            listIndex = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
 
-            while (k >= sWorldselectWorldCount) {
-                k -= sWorldselectWorldCount;
+            while (listIndex >= sWorldselectWorldCount) {
+                listIndex -= sWorldselectWorldCount;
             }
 
-            sWorldselectSlots[j].listIndex = k;
-            WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
-            WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
-            WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+            sWorldselectSlots[slot].listIndex = listIndex;
+            WorldselectLoadSlotPalette(sWorldselectWorlds[listIndex], slot);
+            WorldselectLoadSlotTiles(sWorldselectWorlds[listIndex], slot);
+            WorldselectSetSlotGfx(sWorldselectWorlds[listIndex], slot);
             sWorldselectCursor++;
 
             if (sWorldselectCursor >= sWorldselectSlotCount) {
@@ -489,24 +489,24 @@ void WorldselectHandleInput() {
 
             if ((s8)sWorldselectSlots[sWorldselectCursor].angle < 0) {
                 if (GetKeysHeld() & DPAD_LEFT) {
-                    j = sWorldselectCursor - sWorldselectSlotCount / 2;
+                    slot = sWorldselectCursor - sWorldselectSlotCount / 2;
 
-                    while (j < 0) {
-                        j += sWorldselectSlotCount;
+                    while (slot < 0) {
+                        slot += sWorldselectSlotCount;
                     }
 
-                    ReleaseObjPalette(sWorldselectSlots[j].palette);
-                    ReleaseObjTiles(sWorldselectSlots[j].tiles);
-                    k = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
+                    ReleaseObjPalette(sWorldselectSlots[slot].palette);
+                    ReleaseObjTiles(sWorldselectSlots[slot].tiles);
+                    listIndex = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
 
-                    while (k < 0) {
-                        k += sWorldselectWorldCount;
+                    while (listIndex < 0) {
+                        listIndex += sWorldselectWorldCount;
                     }
 
-                    sWorldselectSlots[j].listIndex = k;
-                    WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
-                    WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
-                    WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                    sWorldselectSlots[slot].listIndex = listIndex;
+                    WorldselectLoadSlotPalette(sWorldselectWorlds[listIndex], slot);
+                    WorldselectLoadSlotTiles(sWorldselectWorlds[listIndex], slot);
+                    WorldselectSetSlotGfx(sWorldselectWorlds[listIndex], slot);
                     sWorldselectCursor--;
 
                     if (sWorldselectCursor < 0) {
@@ -539,12 +539,12 @@ void WorldselectDraw() {
     s16 x;
     s16 y;
     u8 ang;
-    u8 t;
-    s32 s;
-    s32 h;
-    s32 d;
-    s32 w;
-    s32 v;
+    u8 facing;
+    s32 bob;
+    s32 ringY;
+    s32 scale;
+    s32 scaleX;
+    s32 bobY;
     s16 angle;
     void* anim;
     void* tiles;
@@ -567,19 +567,19 @@ void WorldselectDraw() {
 
     for (i = 0; i < sWorldselectSlotCount; i++) {
         ang = sWorldselectSlots[i].angle;
-        s = -COS(256 / sWorldselectSlotCount * i + sWorldselectBobPhase);
-        t = (s * 3 >> 7) + ang;
+        bob = -COS(256 / sWorldselectSlotCount * i + sWorldselectBobPhase);
+        facing = (bob * 3 >> 7) + ang;
 
-        if ((u8)(t - 62) > 2 && (u8)(t + 64) > 2) {
-            h = -gSineTable[ang + 64] * 5 >> 5;
-            d = -25600 / (h - 140);
-            w = -gSineTable[t + 64] * d >> 8;
+        if ((u8)(facing - 62) > 2 && (u8)(facing + 64) > 2) {
+            ringY = -gSineTable[ang + 64] * 5 >> 5;
+            scale = -25600 / (ringY - 140);
+            scaleX = -gSineTable[facing + 64] * scale >> 8;
             angle = ang;
             x = (gSineTable[angle] * 5 >> 4) + 120;
-            v = ((d << 3) * s >> 16) + 64;
-            y = h + v;
+            bobY = ((scale << 3) * bob >> 16) + 64;
+            y = ringY + bobY;
 
-            if ((u8)(t - 121) <= 14) {
+            if ((u8)(facing - 121) <= 14) {
                 sprite = NULL;
                 tiles = sWorldselectCardTiles[0];
                 pal = sWorldselectCardPalettes[0];
@@ -588,18 +588,18 @@ void WorldselectDraw() {
                 if (sWorldselectStep > WORLDSELECT_STEP_SELECT && !sWorldselectCancelled) {
                     BgAnimSetPosition(x - 1, y - 5);
                 }
-            } else if (t <= 61) {
+            } else if (facing <= 61) {
                 sprite = NULL;
                 tiles = sWorldselectCardTiles[1];
                 pal = sWorldselectCardPalettes[1];
-                anim = gWorldselectCardFlipFrames[(62 - t) / 13];
-            } else if (t > 194) {
+                anim = gWorldselectCardFlipFrames[(62 - facing) / 13];
+            } else if (facing > 194) {
                 sprite = NULL;
                 tiles = sWorldselectCardTiles[1];
                 pal = sWorldselectCardPalettes[1];
-                anim = gWorldselectCardFlipFrames[(t - 194) / 13];
+                anim = gWorldselectCardFlipFrames[(facing - 194) / 13];
             } else {
-                sprite = AllocObjAffine(0, w, d, 0);
+                sprite = AllocObjAffine(0, scaleX, scale, 0);
                 tiles = sWorldselectCardTiles[0];
                 pal = sWorldselectCardPalettes[0];
                 anim = gWorldselectCardFrame0;
@@ -608,7 +608,7 @@ void WorldselectDraw() {
             DrawSprite(x, y, anim, tiles, pal, sprite, SPRITE_PRIORITY(2),
                           ang > 128 ? (u16)(ang * 2 + 0x6D1) : (u16)((128 - ang) * 2 + 0x7D1));
 
-            if ((u8)(t - 65) <= 126) {
+            if ((u8)(facing - 65) <= 126) {
                 DrawSprite(x, y, sWorldselectSlots[i].gfx, sWorldselectSlots[i].tiles,
                               sWorldselectSlots[i].palette, sprite, SPRITE_PRIORITY(2),
                               ang > 128 ? (u16)(ang * 2 + 0x6D0)
@@ -687,7 +687,7 @@ void WorldselectCyclePalette() {
 void mode_worldselect_0() {
     s16 i;
     s16 j;
-    void** p;
+    void** bufferPtr;
 
     SpriteReset();
     sWorldselectFirstVisit = (gGameState.progression.tutorialFlags ^ 1) & 1;
@@ -736,8 +736,8 @@ void mode_worldselect_0() {
     sWorldselectNameMode = WORLDSELECT_NAME_MODE_SHOW;
     sWorldselectNameWidth = 0;
     sWorldselectNameWorld = sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex];
-    p = &sWorldselectNameBuffer;
-    *p = EwramAlloc(0x6C0);
+    bufferPtr = &sWorldselectNameBuffer;
+    *bufferPtr = EwramAlloc(0x6C0);
     sWorldselectPaletteTimer = 0;
     sWorldselectPaletteFrame = 0;
     sWorldselectStep = WORLDSELECT_STEP_BARS_IN;
@@ -785,8 +785,8 @@ void mode_worldselect_0() {
 }
 
 void mode_worldselect_1() {
-    s16 a;
-    s16 b;
+    s16 world;
+    s16 eventId;
 
     UpdatePlayTime();
     sWorldselectBobPhase += 2;
@@ -900,20 +900,20 @@ void mode_worldselect_1() {
         sWorldselectTimer--;
 
         if (sWorldselectTimer <= 0) {
-            a = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].world;
+            world = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].world;
 
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                b = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].eventId;
+                eventId = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].eventId;
             } else {
-                b = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].rikuEventId;
+                eventId = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].rikuEventId;
             }
 
             gGameState.availableWorlds &=
                 ~sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].worldBit;
-            SetFloorWorld(a);
+            SetFloorWorld(world);
 
-            if (b >= 0) {
-                RequestEventMode(b);
+            if (eventId >= 0) {
+                RequestEventMode(eventId);
             } else {
                 if (gGameState.flags & GAME_FLAG_RIKU) {
                     AddMapCard(221);

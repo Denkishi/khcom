@@ -197,15 +197,15 @@ static s32 sMapInspectCursorY;
 static u8 sMapInspectReturnToMenu;
 
 s16 GetMapInspectTabStart(s16 tab) {
-    s16 r;
+    s16 start;
 
     if (tab <= 3) {
-        r = sMapInspectCategoryStart[tab];
+        start = sMapInspectCategoryStart[tab];
     } else {
-        r = 0;
+        start = 0;
     }
 
-    return r;
+    return start;
 }
 
 s16 GetMapInspectSelectedIndex() {
@@ -217,14 +217,14 @@ MapCardInventoryEntry* GetMapInspectSelectedEntry() {
 }
 
 void MapInspectSelectFirstValue() {
-    MapCardInventoryEntry* p;
+    MapCardInventoryEntry* entry;
     s16 i;
 
-    p = GetMapInspectSelectedEntry();
+    entry = GetMapInspectSelectedEntry();
 
-    if (p->cardType <= 26) {
+    if (entry->cardType <= 26) {
         for (i = 0; i < 10; i++) {
-            if (p->countsByValue[i] > 0) {
+            if (entry->countsByValue[i] > 0) {
                 break;
             }
         }
@@ -238,22 +238,22 @@ void MapInspectSelectFirstValue() {
 }
 
 s16 GetMapInspectTabCount(s16 tab) {
-    s16 r;
+    s16 count;
     s16 i;
-    s32 t;
+    s32 categoryCount;
 
     if (tab <= 3) {
-        r = sMapInspectCategoryEntryCount[tab];
+        count = sMapInspectCategoryEntryCount[tab];
     } else {
-        r = 0;
+        count = 0;
 
         for (i = 0; i <= 3; i++) {
-            t = sMapInspectCategoryEntryCount[i];
-            r += t;
+            categoryCount = sMapInspectCategoryEntryCount[i];
+            count += categoryCount;
         }
     }
 
-    return r;
+    return count;
 }
 
 u8 MapInspectCanDelete() {
@@ -265,16 +265,16 @@ u8 MapInspectCanDelete() {
 }
 
 void MapInspectLoadGrid() {
-    s16 a;
-    s16 k;
+    s16 start;
+    s16 offset;
     s16 i;
     s16 j;
-    s16 b;
+    s16 limit;
     u16 idx;
 
-    a = GetMapInspectTabStart(sMapInspectTab);
-    b = GetMapInspectTabCount(sMapInspectTab);
-    k = sMapInspectGridScroll * 3;
+    start = GetMapInspectTabStart(sMapInspectTab);
+    limit = GetMapInspectTabCount(sMapInspectTab);
+    offset = sMapInspectGridScroll * 3;
 
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
@@ -286,12 +286,12 @@ void MapInspectLoadGrid() {
                 ReleaseObjTiles(sMapInspectGridTiles[i][j]);
             }
 
-            if (k < b) {
-                idx = sMapCardInventoryEntries[a + k].cardIndex;
+            if (offset < limit) {
+                idx = sMapCardInventoryEntries[start + offset].cardIndex;
                 sMapInspectGridPalettes[i][j] = LoadObjPalette(gMapCardDefs[idx].palette2, 32);
                 sMapInspectGridTiles[i][j] = LoadObjTiles(gMapCardDefs[idx].tiles2, gMapCardDefs[idx].tilesSize2);
                 sMapInspectGridSprites[i][j] = *gMapCardDefs[idx].sprites2;
-                sMapInspectGridPremium[i][j] = sMapCardInventoryEntries[a + k].category == 3;
+                sMapInspectGridPremium[i][j] = sMapCardInventoryEntries[start + offset].category == 3;
             } else {
                 sMapInspectGridPalettes[i][j] = NULL;
                 sMapInspectGridTiles[i][j] = NULL;
@@ -299,18 +299,18 @@ void MapInspectLoadGrid() {
                 sMapInspectGridPremium[i][j] = 0;
             }
 
-            k++;
+            offset++;
         }
     }
 }
 
 void MapInspectLoadSelectedCard() {
-    MapCardInventoryEntry* p;
+    MapCardInventoryEntry* entry;
     u16 idx;
-    u16 k;
-    u8* q;
+    u16 color;
+    u8* countPtr;
 
-    p = GetMapInspectSelectedEntry();
+    entry = GetMapInspectSelectedEntry();
 
     if (sMapInspectCardPalette != NULL) {
         ReleaseObjPalette(sMapInspectCardPalette);
@@ -332,29 +332,29 @@ void MapInspectLoadSelectedCard() {
         ReleaseObjPalette(sMapInspectCategoryPalette);
     }
 
-    if (p->cardType <= 26 && GetMapInspectTabCount(sMapInspectTab) > 0) {
-        idx = p->cardIndex;
-        k = sMapCardCategoryTypes[p->category];
+    if (entry->cardType <= 26 && GetMapInspectTabCount(sMapInspectTab) > 0) {
+        idx = entry->cardIndex;
+        color = sMapCardCategoryTypes[entry->category];
         sMapInspectCardPalette = LoadObjPalette(gMapCardDefs[idx].palette, gMapCardDefs[idx].paletteSize);
         sMapInspectCardTiles = LoadObjTiles(gMapCardDefs[idx].tiles, gMapCardDefs[idx].tilesSize);
         sMapInspectCardSprite = *gMapCardDefs[idx].sprites;
-        sMapInspectCardBackPalette = LoadObjPalette(gMapCardBackDefs[k].palette, gMapCardBackDefs[k].paletteSize);
-        sMapInspectCardBackTiles = LoadObjTiles(gMapCardBackDefs[k].tiles, gMapCardBackDefs[k].tilesSize);
-        sMapInspectCardBackSprite = *gMapCardBackDefs[k].sprites;
-        sMapInspectCardPremium = p->category == 3;
-        sMapInspectCategoryPalette = LoadObjPalette(gMapInspectCategoryPalettes + p->category * 16, 32);
-        q = &sMapInspectNameTextCount;
-        *q = LoadTextSlots(GetRoomName(p->cardType), sMapInspectNameText);
+        sMapInspectCardBackPalette = LoadObjPalette(gMapCardBackDefs[color].palette, gMapCardBackDefs[color].paletteSize);
+        sMapInspectCardBackTiles = LoadObjTiles(gMapCardBackDefs[color].tiles, gMapCardBackDefs[color].tilesSize);
+        sMapInspectCardBackSprite = *gMapCardBackDefs[color].sprites;
+        sMapInspectCardPremium = entry->category == 3;
+        sMapInspectCategoryPalette = LoadObjPalette(gMapInspectCategoryPalettes + entry->category * 16, 32);
+        countPtr = &sMapInspectNameTextCount;
+        *countPtr = LoadTextSlots(GetRoomName(entry->cardType), sMapInspectNameText);
 
 #ifdef VERSION_EU
         {
-            const u8** strings = gMapCardDescriptions[p->cardType]->strings;
-            q = &sMapInspectDescTextCount;
-            *q = LoadTextSlots((void*)strings[gLanguage], sMapInspectDescText);
+            const u8** strings = gMapCardDescriptions[entry->cardType]->strings;
+            countPtr = &sMapInspectDescTextCount;
+            *countPtr = LoadTextSlots((void*)strings[gLanguage], sMapInspectDescText);
         }
 #else
-        q = &sMapInspectDescTextCount;
-        *q = LoadTextSlots((void*)gMapCardDescriptions[p->cardType], sMapInspectDescText);
+        countPtr = &sMapInspectDescTextCount;
+        *countPtr = LoadTextSlots((void*)gMapCardDescriptions[entry->cardType], sMapInspectDescText);
 #endif
     } else {
         sMapInspectCardPalette = NULL;
@@ -385,13 +385,13 @@ void MapInspectDrawCardTotal() {
 
 void MapInspectDrawCategoryCounts() {
     s16 i;
-    s16 v;
+    s16 count;
 
     for (i = 0; i <= 3; i++) {
-        v = sMapInspectCategoryCardCount[i];
+        count = sMapInspectCategoryCardCount[i];
 
-        if (v != 0) {
-            LoadDecimalDigitTiles(v, gMapInspectCategoryDigitTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x2A0), 32, 2);
+        if (count != 0) {
+            LoadDecimalDigitTiles(count, gMapInspectCategoryDigitTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x2A0), 32, 2);
         } else {
             LoadDecimalDigitTiles(0, gMapInspectCategoryZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x2A0), 32, 2);
         }
@@ -399,14 +399,14 @@ void MapInspectDrawCategoryCounts() {
 }
 
 void MapInspectDrawValueCounts() {
-    MapCardInventoryEntry* p;
+    MapCardInventoryEntry* entry;
     s16 i;
-    s32 v;
+    s32 count;
 
-    p = GetMapInspectSelectedEntry();
+    entry = GetMapInspectSelectedEntry();
 
     if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-        LoadPalette(gMapInspectCategoryBgPalettes + p->category * 16, (void*)PLTT, 12);
+        LoadPalette(gMapInspectCategoryBgPalettes + entry->category * 16, (void*)PLTT, 12);
     }
 
     if (sMapInspectMenuState == MAP_INSPECT_MENU_STATE_TAB) {
@@ -414,16 +414,16 @@ void MapInspectDrawValueCounts() {
             LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
             LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), 2);
         }
-    } else if (p->category == 3) {
+    } else if (entry->category == 3) {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
             LoadBgMap(1, gMapInspectPremiumValuesMap, 0x500);
         }
 
         for (i = 0; i <= 9; i++) {
-            v = p->countsByValue[i];
+            count = entry->countsByValue[i];
 
-            if (v != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
-                LoadDecimalDigitTiles(v, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
+            if (count != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
+                LoadDecimalDigitTiles(count, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
                 LoadPalette(gMapInspectValueDigitPalette, (void*)(BG_PLTT + 0xC), 2);
                 break;
             }
@@ -439,10 +439,10 @@ void MapInspectDrawValueCounts() {
         }
 
         for (i = 0; i <= 9; i++) {
-            v = p->countsByValue[i];
+            count = entry->countsByValue[i];
 
-            if (v != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
-                LoadDecimalDigitTiles(v, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
+            if (count != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
+                LoadDecimalDigitTiles(count, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
                 LoadPalette(gMapInspectValueDigitPalette, (void*)(PLTT + (i + 6) * 2), 2);
             } else {
                 LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
@@ -457,16 +457,16 @@ void MapInspectDrawTab(s16 tab) {
 }
 
 void MapInspectDeleteCard() {
-    MapCardInventoryEntry* p;
+    MapCardInventoryEntry* entry;
     u16 card;
 
-    p = GetMapInspectSelectedEntry();
+    entry = GetMapInspectSelectedEntry();
 
-    if (p->countsByValue[GetMapInspectSelectedValue()] > 0) {
-        card = GetMapInspectSelectedValue() + p->cardIndex;
-        sMapInspectCategoryCardCount[p->category]--;
+    if (entry->countsByValue[GetMapInspectSelectedValue()] > 0) {
+        card = GetMapInspectSelectedValue() + entry->cardIndex;
+        sMapInspectCategoryCardCount[entry->category]--;
         sMapInspectCardTotal--;
-        p->countsByValue[GetMapInspectSelectedValue()]--;
+        entry->countsByValue[GetMapInspectSelectedValue()]--;
         RemoveMapCard(card);
         MapInspectDrawCardTotal();
         MapInspectDrawValueCounts();
@@ -499,41 +499,41 @@ u8 MapCardEntrySelectedValueIsEmpty(MapCardInventoryEntry* entry) {
 }
 
 void MapInspectSelectNextValue(MapCardInventoryEntry* entry) {
-    s16 k;
+    s16 value;
     s16 i;
 
-    k = GetMapInspectSelectedValue();
+    value = GetMapInspectSelectedValue();
 
     for (i = 0; i <= 9; i++) {
-        if (entry->countsByValue[k] > 0) {
+        if (entry->countsByValue[value] > 0) {
             break;
         }
 
-        k++;
+        value++;
 
-        if (k > 9) {
-            k = 0;
+        if (value > 9) {
+            value = 0;
         }
     }
 
-    sMapInspectValueCol = k / 5;
-    sMapInspectValueRow = k % 5;
+    sMapInspectValueCol = value / 5;
+    sMapInspectValueRow = value % 5;
 }
 
 void MapInspectRemoveEntry(MapCardInventoryEntry* entry) {
-    u16 row;
+    u16 category;
     s16 j;
 
-    row = entry->category;
+    category = entry->category;
     DmaCopy16(3, entry + 1, entry, (26 - GetMapInspectSelectedIndex()) * 28);
     DmaFill16(3, 0, &sMapCardInventoryEntries[26], 0x1C);
     sMapCardInventoryEntries[26].cardType = 27;
 
-    for (j = row + 1; j <= 3; j++) {
+    for (j = category + 1; j <= 3; j++) {
         sMapInspectCategoryStart[j]--;
     }
 
-    sMapInspectCategoryEntryCount[row]--;
+    sMapInspectCategoryEntryCount[category]--;
 
     if (GetMapInspectSelectedIndex() >= GetMapInspectTabCount(sMapInspectTab)) {
         if (--sMapInspectGridCol < 0) {
@@ -558,15 +558,15 @@ void MapInspectRemoveEntry(MapCardInventoryEntry* entry) {
 }
 
 void MapInspectBuildInventory() {
-    s16* pd;
-    s32 w;
+    s16* entryCountPtr;
+    s32 start;
     s16 k;
     s16 j;
     s16 i;
-    s16 a;
-    u16 u;
+    s16 entryCount;
+    u16 kind;
     u16 n;
-    u16 t;
+    u16 color;
 
     DmaFill16(3, 0, sMapCardInventoryEntries, 0x2F4);
 
@@ -574,33 +574,33 @@ void MapInspectBuildInventory() {
         sMapCardInventoryEntries[i].cardType = 27;
     }
 
-    a = 0;
+    entryCount = 0;
     sMapInspectCardTotal = 0;
 
     for (j = 0; j <= 3; j++) {
-        sMapInspectCategoryStart[j] = a;
+        sMapInspectCategoryStart[j] = entryCount;
         sMapInspectCategoryCardCount[j] = 0;
 
         for (k = 0; k <= 26; k++) {
-            t = gMapCardDefs[k * 10].color;
+            color = gMapCardDefs[k * 10].color;
 
-            if (t == sMapCardCategoryTypes[j]) {
-                u = gMapCardDefs[k * 10].kind;
+            if (color == sMapCardCategoryTypes[j]) {
+                kind = gMapCardDefs[k * 10].kind;
 
                 for (i = 0; i <= 9; i++) {
                     n = gMapCardCounts[(u16)(k * 10 + i)];
 
                     if (n != 0) {
-                        if (t != 4) {
+                        if (color != 4) {
                             sMapInspectCardTotal += n;
                         }
 
                         {
                             s16* counts = sMapInspectCategoryCardCount;
-                            s32 index = a;
+                            s32 index = entryCount;
 
                             counts[j] += n;
-                            sMapCardInventoryEntries[index].cardType = u;
+                            sMapCardInventoryEntries[index].cardType = kind;
                             sMapCardInventoryEntries[index].cardIndex = k * 10;
                             sMapCardInventoryEntries[index].category = j;
                             sMapCardInventoryEntries[index].countsByValue[i] = n;
@@ -609,14 +609,14 @@ void MapInspectBuildInventory() {
                 }
             }
 
-            if (sMapCardInventoryEntries[a].cardType <= 26) {
-                a++;
+            if (sMapCardInventoryEntries[entryCount].cardType <= 26) {
+                entryCount++;
             }
         }
 
-        pd = &sMapInspectCategoryEntryCount[j];
-        w = sMapInspectCategoryStart[j];
-        *pd = a - w;
+        entryCountPtr = &sMapInspectCategoryEntryCount[j];
+        start = sMapInspectCategoryStart[j];
+        *entryCountPtr = entryCount - start;
     }
 }
 
@@ -629,14 +629,14 @@ u16 MapInspectReadMenuKeys() {
 }
 
 void MapInspectHandleGridInput() {
-    s16 a;
-    s16 b;
-    s16 c;
+    s16 oldCol;
+    s16 oldRow;
+    s16 oldScroll;
     u16 keys;
 
-    a = sMapInspectGridCol;
-    b = sMapInspectGridRow;
-    c = sMapInspectGridScroll;
+    oldCol = sMapInspectGridCol;
+    oldRow = sMapInspectGridRow;
+    oldScroll = sMapInspectGridScroll;
     keys = MapInspectReadMenuKeys();
 
     if (keys & A_BUTTON) {
@@ -702,13 +702,13 @@ void MapInspectHandleGridInput() {
         }
     }
 
-    if (sMapInspectGridCol != a || sMapInspectGridRow != b || sMapInspectGridScroll != c) {
+    if (sMapInspectGridCol != oldCol || sMapInspectGridRow != oldRow || sMapInspectGridScroll != oldScroll) {
         MapInspectSelectFirstValue();
         MapInspectDrawValueCounts();
         MapInspectLoadSelectedCard();
         m4aSongNumStart(SONG_SYS_CLICKI04B);
 
-        if (sMapInspectGridScroll != c) {
+        if (sMapInspectGridScroll != oldScroll) {
             MapInspectLoadGrid();
         }
     }
@@ -768,42 +768,42 @@ void MapInspectHandleTabInput() {
 }
 
 void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 col) {
-    s16 c;
+    s16 base;
     s16 i;
-    s32 k;
+    s32 row;
 
-    c = sMapInspectValueRow;
+    base = sMapInspectValueRow;
 
     for (i = 0; i <= 4; i++) {
-        k = c - i;
+        row = base - i;
 
-        if (k >= 0 && entry->countsByValue[GetMapInspectValueIndex(col, k)] > 0) {
+        if (row >= 0 && entry->countsByValue[GetMapInspectValueIndex(col, row)] > 0) {
             sMapInspectValueCol = col;
-            sMapInspectValueRow = k;
+            sMapInspectValueRow = row;
             return;
         }
 
-        k = c + i;
+        row = base + i;
 
-        if (k <= 4 && entry->countsByValue[GetMapInspectValueIndex(col, k)] > 0) {
+        if (row <= 4 && entry->countsByValue[GetMapInspectValueIndex(col, row)] > 0) {
             sMapInspectValueCol = col;
-            sMapInspectValueRow = k;
+            sMapInspectValueRow = row;
             return;
         }
     }
 }
 
 void MapInspectHandleValueInput() {
-    MapCardInventoryEntry* p;
-    s16 a;
-    s16 b;
+    MapCardInventoryEntry* entry;
+    s16 oldCol;
+    s16 oldRow;
     s16 i;
     u16 keys;
     u16 trg;
 
-    p = GetMapInspectSelectedEntry();
-    a = sMapInspectValueCol;
-    b = sMapInspectValueRow;
+    entry = GetMapInspectSelectedEntry();
+    oldCol = sMapInspectValueCol;
+    oldRow = sMapInspectValueRow;
     trg = MapInspectReadMenuKeys();
     keys = trg;
 
@@ -833,16 +833,16 @@ void MapInspectHandleValueInput() {
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMapInspectState = MAP_INSPECT_STATE_EXIT;
         } else if (keys & DPAD_LEFT) {
-            MapInspectSelectValueInColumn(p, 0);
+            MapInspectSelectValueInColumn(entry, 0);
         } else if (keys & DPAD_RIGHT) {
-            MapInspectSelectValueInColumn(p, 1);
+            MapInspectSelectValueInColumn(entry, 1);
         } else if (keys & DPAD_UP) {
             for (i = 0; i <= 4; i++) {
                 if (--sMapInspectValueRow < 0) {
                     sMapInspectValueRow = 4;
                 }
 
-                if (p->countsByValue[GetMapInspectSelectedValue()] > 0) {
+                if (entry->countsByValue[GetMapInspectSelectedValue()] > 0) {
                     break;
                 }
             }
@@ -852,24 +852,24 @@ void MapInspectHandleValueInput() {
                     sMapInspectValueRow = 0;
                 }
 
-                if (p->countsByValue[GetMapInspectSelectedValue()] > 0) {
+                if (entry->countsByValue[GetMapInspectSelectedValue()] > 0) {
                     break;
                 }
             }
         }
     }
 
-    if (sMapInspectValueCol != a || sMapInspectValueRow != b) {
+    if (sMapInspectValueCol != oldCol || sMapInspectValueRow != oldRow) {
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 }
 
 void MapInspectHandleConfirmInput() {
-    MapCardInventoryEntry* p;
+    MapCardInventoryEntry* entry;
     s16 old;
     u16 keys;
 
-    p = GetMapInspectSelectedEntry();
+    entry = GetMapInspectSelectedEntry();
     old = sMapInspectConfirmCursor;
     keys = MapInspectReadMenuKeys();
 
@@ -883,8 +883,8 @@ void MapInspectHandleConfirmInput() {
             MapInspectDeleteCard();
             m4aSongNumStart(SONG_SYS_CARD_DELETE);
 
-            if (MapCardEntryIsEmpty(p)) {
-                MapInspectRemoveEntry(p);
+            if (MapCardEntryIsEmpty(entry)) {
+                MapInspectRemoveEntry(entry);
 
                 if (GetMapInspectTabCount(sMapInspectTab) > 0) {
                     AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
@@ -893,8 +893,8 @@ void MapInspectHandleConfirmInput() {
                     sMapInspectMenuState = MAP_INSPECT_MENU_STATE_TAB;
                 }
             } else {
-                if (MapCardEntrySelectedValueIsEmpty(p)) {
-                    MapInspectSelectNextValue(p);
+                if (MapCardEntrySelectedValueIsEmpty(entry)) {
+                    MapInspectSelectNextValue(entry);
                 }
 
                 AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
@@ -951,8 +951,8 @@ void MapInspectHandleNoticeInput() {
 void MapInspectDraw() {
     s32 i;
     s32 j;
-    s16 n;
-    s16 t;
+    s16 maxScroll;
+    s16 barOffset;
     void* anim;
 
     if (sMapInspectState != MAP_INSPECT_STATE_MENU) {
@@ -979,15 +979,15 @@ void MapInspectDraw() {
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
     }
 
-    n = (GetMapInspectTabCount(sMapInspectTab) + 2) / 3 - 4;
+    maxScroll = (GetMapInspectTabCount(sMapInspectTab) + 2) / 3 - 4;
 
-    if (sMapInspectGridScroll <= n) {
-        t = 84 * sMapInspectGridScroll / n;
+    if (sMapInspectGridScroll <= maxScroll) {
+        barOffset = 84 * sMapInspectGridScroll / maxScroll;
     } else {
-        t = 0;
+        barOffset = 0;
     }
 
-    DrawSprite(72, t + 40,
+    DrawSprite(72, barOffset + 40,
 #ifdef VERSION_EU
             sMapInspectScrollMarkerSpritesByLanguage[gLanguage],
 #else
@@ -1089,7 +1089,7 @@ void MapInspectDraw() {
 void mode_mapinspect_0() {
     s16 i;
     s16 j;
-    s16 v;
+    s16 state;
     u16 length;
 
     sMapCardInventoryEntries = EwramAlloc(27 * sizeof(MapCardInventoryEntry));
@@ -1116,9 +1116,9 @@ void mode_mapinspect_0() {
     sMapInspectGridScroll = 0;
 
     if (sMapInspectCardTotal > 0) {
-        sMapInspectCursorX = (v = MAP_INSPECT_MENU_STATE_GRID, -0x200);
+        sMapInspectCursorX = (state = MAP_INSPECT_MENU_STATE_GRID, -0x200);
         sMapInspectCursorY = 0x1000;
-        sMapInspectMenuState = v;
+        sMapInspectMenuState = state;
     } else {
         sMapInspectCursorX = sMapCardCategoryDefs[4].displayIndex * 7 * 512 - 0x100;
         sMapInspectCursorY = 0;

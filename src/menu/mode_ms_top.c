@@ -197,39 +197,39 @@ void LoadDecimalDigitTiles(u32 value, u8* glyphs, u8* dst, u16 stride, u16 count
 }
 
 void UpdateMsTopMooglePalette() {
-    s32 flag;
+    s32 dim;
     s16 x;
-    s32 v;
+    s32 screenX;
     s32 base;
 
     x = sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8);
-    flag = 0;
-    v = x;
+    dim = 0;
+    screenX = x;
     base = (-sMsTopBg1ScrollX) >> 8;
 
-    if (v <= base + 0x1C || v >= base + 0x1C + 0x62) {
-        flag = 1;
+    if (screenX <= base + 0x1C || screenX >= base + 0x1C + 0x62) {
+        dim = 1;
     }
 
     ReleaseObjPalette(sMsTopMooglePalette);
-    sMsTopMooglePalette = LoadObjPalette(!flag ? gMoguPalette : gMsTopMoogleDimPalette, 0x20);
+    sMsTopMooglePalette = LoadObjPalette(!dim ? gMoguPalette : gMsTopMoogleDimPalette, 0x20);
 }
 
 void UpdateMsTopWarpGfx() {
     s16 i;
-    s32 flag;
+    s32 dim;
     s16 x;
-    s32 v;
+    s32 screenX;
     s32 base;
 
     for (i = 0; i <= 1; i++) {
         x = sWarpDefs[0].gfx[i].x - (sMsTopBg0ScrollX >> 8);
-        flag = 0;
-        v = x;
+        dim = 0;
+        screenX = x;
         base = (-sMsTopBg1ScrollX) >> 8;
 
-        if (v <= base + 0x18 || v >= base + 0x18 + 0x6A) {
-            flag = 1;
+        if (screenX <= base + 0x18 || screenX >= base + 0x18 + 0x6A) {
+            dim = 1;
         }
 
         if (sMsTopWarpPalettes[i] != NULL) {
@@ -240,10 +240,10 @@ void UpdateMsTopWarpGfx() {
             ReleaseObjTiles(sMsTopWarpTiles[i]);
         }
 
-        sMsTopWarpPalettes[i] = LoadObjPalette(sWarpDefs[flag].gfx[i].palette, sWarpDefs[flag].gfx[i].paletteSize);
-        sMsTopWarpTiles[i] = LoadObjTiles(sWarpDefs[flag].gfx[i].tiles, sWarpDefs[flag].gfx[i].tilesSize);
-        AnimInit(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].anims, sWarpDefs[flag].gfx[i].gfxTable);
-        AnimStart(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].animId, ANIM_FLAG_LOOP);
+        sMsTopWarpPalettes[i] = LoadObjPalette(sWarpDefs[dim].gfx[i].palette, sWarpDefs[dim].gfx[i].paletteSize);
+        sMsTopWarpTiles[i] = LoadObjTiles(sWarpDefs[dim].gfx[i].tiles, sWarpDefs[dim].gfx[i].tilesSize);
+        AnimInit(&sMsTopWarpAnims[i], sWarpDefs[dim].gfx[i].anims, sWarpDefs[dim].gfx[i].gfxTable);
+        AnimStart(&sMsTopWarpAnims[i], sWarpDefs[dim].gfx[i].animId, ANIM_FLAG_LOOP);
     }
 }
 

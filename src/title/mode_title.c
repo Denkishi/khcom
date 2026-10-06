@@ -151,7 +151,7 @@ void TitleFinishIntro() {
 }
 
 void TitleFadeOut() {
-    m4aMPlayFadeOut(gMPlayTable[gSongTable[6].ms].info, 5);
+    m4aMPlayFadeOut(gMPlayTable[gSongTable[SONG_BGM_TITLE].ms].info, 5);
     FadeStartOut(FADE_MODE_BLACK, 90);
     BackdropFadeStartOut(0, 90);
     sTitleState = TITLE_STATE_FADE_OUT;

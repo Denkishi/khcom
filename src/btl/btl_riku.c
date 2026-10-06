@@ -101,21 +101,21 @@ static const s32 sBtlRikuAttackIds[3] = {
     0, 1, 2,
 };
 
-static const RikuAttackDef sBtlRikuSwing1 = { 1, 15, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT00, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing1 = { 1, 15, sBtlRikuAttackIds, SONG_VO_RK_ATTACK01, SONG_BTL_RK_HIT00, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuSwing2 = { 2, 17, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT01, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing2 = { 2, 17, &sBtlRikuAttackIds[1], SONG_VO_RK_ATTACK00, SONG_BTL_RK_HIT01, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuSwing1Wide = { 3, 15, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT00, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing1Wide = { 3, 15, sBtlRikuAttackIds, SONG_VO_RK_ATTACK03, SONG_BTL_RK_HIT00, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuSwing3 = { 4, 21, &sBtlRikuAttackIds[2], 258, SONG_BTL_RK_HIT02, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing3 = { 4, 21, &sBtlRikuAttackIds[2], SONG_VO_RK_ATTACK06, SONG_BTL_RK_HIT02, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuAirSwing1Hop = { 6, 15, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing1 };
+static const RikuAttackDef sBtlRikuAirSwing1Hop = { 6, 15, sBtlRikuAttackIds, SONG_VO_RK_ATTACK03, SONG_BTL_RK_HIT01, -640, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing1 };
 
-static const RikuAttackDef sBtlRikuAirSwing1 = { 5, 15, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing1 };
+static const RikuAttackDef sBtlRikuAirSwing1 = { 5, 15, &sBtlRikuAttackIds[1], SONG_VO_RK_ATTACK00, SONG_BTL_RK_HIT00, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing1 };
 
-static const RikuAttackDef sBtlRikuAirSwing2 = { 5, 15, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing2 };
+static const RikuAttackDef sBtlRikuAirSwing2 = { 5, 15, sBtlRikuAttackIds, SONG_VO_RK_ATTACK01, SONG_BTL_RK_HIT01, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing2 };
 
-static const RikuAttackDef sBtlRikuAirSwing3 = { 6, 15, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing3 };
+static const RikuAttackDef sBtlRikuAirSwing3 = { 6, 15, &sBtlRikuAttackIds[2], SONG_VO_RK_ATTACK05, SONG_BTL_RK_HIT02, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing3 };
 
 void EnableBtlRikuPassThrough(BtlRikuWork* work) {
     u16 flags = work->flags | BTL_RIKU_FLAG_PASS_THROUGH;

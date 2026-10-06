@@ -47,6 +47,7 @@
 #include "card_deckmenu2.h"
 #include "enemy_ids.h"
 #include "event_ids.h"
+#include "songs.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);
@@ -1361,7 +1362,7 @@ void BeginBossDefeat(BtlObj* actor) {
     gBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
     gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
     SetEnemyJiminyFlag(actor);
-    m4aMPlayFadeOut(gMPlayTable[gSongTable[3].ms].info, 12);
+    m4aMPlayFadeOut(gMPlayTable[gSongTable[SONG_BGM_BOSS1_WORLD].ms].info, 12);
     FadeStartIn(FADE_MODE_ADD_WHITE, 20);
     FadeLock();
     enemy = ListPoolFirst(&gBtlWork->pool);

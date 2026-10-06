@@ -1543,11 +1543,9 @@ void mode_jiminy_0() {
     SetBgPriority(1, 1);
     SetBgPriority(2, 0);
     SetBgPriority(3, 0);
-#ifdef VERSION_JP
     LoadBgTiles(1, gJiminyBgTiles, sizeof(gJiminyBgTiles));
-#elif defined(VERSION_EU)
-    LoadBgTiles(1, gJiminyBgTiles, 0x2F60);
 
+#ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
         RequestDma3Copy(gJiminyBgTitleTilesFrench, (u8*)GetBgCharBase(1) + 0x2000, sizeof(gJiminyBgTitleTilesFrench));
@@ -1562,8 +1560,6 @@ void mode_jiminy_0() {
         RequestDma3Copy(gJiminyBgTitleTilesGerman, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
     }
-#else
-    LoadBgTiles(1, gJiminyBgTiles, sizeof(gJiminyBgTiles));
 #endif
     LoadBgPalette(1, gJiminyBgPalette, sizeof(gJiminyBgPalette));
     LoadBgMap(1, gJiminyCoverMap, sizeof(gJiminyCoverMap));

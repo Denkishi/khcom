@@ -188,7 +188,7 @@ entries:
     size: 11680
   eu:
     address: 0x08EF0F7C
-    size: 11904
+    size: 12128
 - name: gJiminyDigitTiles
   format: tiles4
   width: 2
@@ -268,12 +268,6 @@ entries:
   eu:
     address: 0x08EFD43C
     size: 5280
-- name: gJiminyBgExtraTiles
-  format: tiles4
-  width: 7
-  eu:
-    address: 0x08EF3DFC
-    size: 224
 - name: gJiminyBgTitleTilesFrench
   format: tiles4
   width: 32

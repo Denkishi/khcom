@@ -160,27 +160,27 @@ s32 FldRikuProbeGround(FldPos* pos) {
 u8 FldRikuCheckClimb(FldPos* pos, FldWork* work) {
     FldPos up;
     FldPos down;
-    u8 hit;
+    u8 dir;
 
     up = *pos;
     down = *pos;
     up.y -= 0x600;
     down.y += 0x600;
 
-    hit = GetFldPosClimbDir(&up);
+    dir = GetFldPosClimbDir(&up);
 
-    if (hit != 0) {
+    if (dir != 0) {
         work->targetX = up.x;
         work->targetY = up.y;
-        return hit;
+        return dir;
     }
 
-    hit = GetFldPosClimbDir(&down);
+    dir = GetFldPosClimbDir(&down);
 
-    if (hit != 0) {
+    if (dir != 0) {
         work->targetX = down.x;
         work->targetY = down.y;
-        return hit;
+        return dir;
     }
 
     return 0;

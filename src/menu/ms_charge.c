@@ -1217,21 +1217,21 @@ void mode_ms_charge_0() {
     MsChargeDrawCategoryCounts();
     MsChargeDrawValueCounts();
     sMsChargeCard00Palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
-    sMsChargePremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
+    sMsChargePremiumTiles = LoadObjTiles(gCardPremiumTiles, sizeof(gCardPremiumTiles));
     AnimInit(&sMsChargePremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMsChargePremiumAnim, 0, ANIM_FLAG_LOOP);
-    sMsChargeGridPremiumTiles = LoadObjTiles(gCardPremiumSmallTiles, 0x260);
+    sMsChargeGridPremiumTiles = LoadObjTiles(gCardPremiumSmallTiles, sizeof(gCardPremiumSmallTiles));
     AnimInit(&sMsChargeGridPremiumAnim, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&sMsChargeGridPremiumAnim, 0, ANIM_FLAG_LOOP);
-    sMsChargeScrollbarTiles = LoadObjTiles(gMsChargeScrollbarTiles, 32);
+    sMsChargeScrollbarTiles = LoadObjTiles(gMsChargeScrollbarTiles, sizeof(gMsChargeScrollbarTiles));
     sMsChargeCategoryPalette = LoadObjPalette(gMsChargeCategoryPalettes, sizeof(gMsChargeCategoryPalettes));
-    sMsChargeHighlightTiles = LoadObjTiles(gMsChargeHighlightTiles, 0xFE0);
+    sMsChargeHighlightTiles = LoadObjTiles(gMsChargeHighlightTiles, sizeof(gMsChargeHighlightTiles));
     AnimInit(&sMsChargeArrowAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeArrowAnim, 1, ANIM_FLAG_LOOP);
     AnimInit(&sMsChargeHighlightAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
     sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, sizeof(gMoguPalette));
-    sMsChargeMoogleTiles = LoadObjTiles(gMsChargeMoogleTiles, 0x940);
+    sMsChargeMoogleTiles = LoadObjTiles(gMsChargeMoogleTiles, sizeof(gMsChargeMoogleTiles));
     AnimInit(&sMsChargeCursorAnim,
         gMsChargeMoogleAnims
     ,
@@ -1245,7 +1245,7 @@ void mode_ms_charge_0() {
     );
     AnimStart(&sMsChargeMoogleAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeConfirmCursorPalette = LoadObjPalette(gMoguPalette, sizeof(gMoguPalette));
-    sMsChargeConfirmCursorTiles = LoadObjTiles(gMoguFl00Tiles, 0xC00);
+    sMsChargeConfirmCursorTiles = LoadObjTiles(gMoguFl00Tiles, sizeof(gMoguFl00Tiles));
     AnimInit(&sMsChargeConfirmCursorAnim, gMoguFl00Anims, gMoguFl00Frames);
 
     {

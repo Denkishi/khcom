@@ -189,7 +189,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         break;
     }
 
-    work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
+    work->tiles = LoadObjTiles(gBtlShadowSmallTiles, sizeof(gBtlShadowSmallTiles));
     work->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     m4aSongNumStart(SONG_BTL_LT2_SW);
 }

@@ -55,26 +55,26 @@ void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* arg) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
         break;
     case LANGUAGE_FRENCH:
-        work->tiles = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoFrenchTiles, sizeof(gLvupLogoFrenchTiles));
         break;
     case LANGUAGE_GERMAN:
-        work->tiles = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoGermanTiles, sizeof(gLvupLogoGermanTiles));
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoItalianTiles, sizeof(gLvupLogoItalianTiles));
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoSpanishTiles, sizeof(gLvupLogoSpanishTiles));
         break;
     default:
-        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
         break;
     }
 #else
-    work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+    work->tiles = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
 #endif
     work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 
@@ -256,26 +256,26 @@ void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* args) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
         break;
     case LANGUAGE_FRENCH:
-        work->tiles = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoFrenchTiles, sizeof(gLvupLogoFrenchTiles));
         break;
     case LANGUAGE_GERMAN:
-        work->tiles = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoGermanTiles, sizeof(gLvupLogoGermanTiles));
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoItalianTiles, sizeof(gLvupLogoItalianTiles));
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoSpanishTiles, sizeof(gLvupLogoSpanishTiles));
         break;
     default:
-        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
         break;
     }
 #else
-    work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+    work->tiles = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
 #endif
     LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->tiles = args->tiles;

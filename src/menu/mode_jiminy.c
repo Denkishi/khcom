@@ -1571,25 +1571,21 @@ void mode_jiminy_0() {
 
 #ifdef VERSION_EU
     if (gLanguage == LANGUAGE_ENGLISH) {
-        sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, 0x880);
+        sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, sizeof(gJiminyTitleTiles));
     } else {
-        sJiminyWork->tiles = LoadObjTiles(gJiminyTitleLocalizedTiles, 0x1780);
+        sJiminyWork->tiles = LoadObjTiles(gJiminyTitleLocalizedTiles, sizeof(gJiminyTitleLocalizedTiles));
     }
 #else
-    sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, 0x880);
+    sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, sizeof(gJiminyTitleTiles));
 #endif
     sJiminyWork->palette = LoadObjPalette(gJiminyTitlePalette, sizeof(gJiminyTitlePalette));
     FadeSetPaletteExcluded(sJiminyWork->palette->index + 0x10, TRUE);
-    sJiminyWork->tiles2 = LoadObjTiles(gJiminyBinderRingTiles, 0x40);
+    sJiminyWork->tiles2 = LoadObjTiles(gJiminyBinderRingTiles, sizeof(gJiminyBinderRingTiles));
     sJiminyWork->palette2 = LoadObjPalette(gJiminyBinderRingPalette, sizeof(gJiminyBinderRingPalette));
     sJiminyWork->palette3 = LoadObjPalette(gJiminyRootListPalette, sizeof(gJiminyRootListPalette));
-    sJiminyWork->tiles5 = LoadObjTiles(gJiminyScrollArrowTiles, 0x140);
+    sJiminyWork->tiles5 = LoadObjTiles(gJiminyScrollArrowTiles, sizeof(gJiminyScrollArrowTiles));
     sJiminyWork->palette6 = LoadObjPalette(gJiminyScrollArrowPalette, sizeof(gJiminyScrollArrowPalette));
-#ifdef VERSION_EU
-    sJiminyWork->tiles6 = LoadObjTiles(gJiminyRowMarkTiles, 0x340);
-#else
-    sJiminyWork->tiles6 = LoadObjTiles(gJiminyRowMarkTiles, 0x1C0);
-#endif
+    sJiminyWork->tiles6 = LoadObjTiles(gJiminyRowMarkTiles, sizeof(gJiminyRowMarkTiles));
     sJiminyWork->palette7 = LoadObjPalette(gJiminyListPalette, sizeof(gJiminyListPalette));
     sJiminyWork->x3 = -0x8000;
     sJiminyWork->y3 = -0x800;

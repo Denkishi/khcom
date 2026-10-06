@@ -60,7 +60,7 @@ enum RoomNameState {
 };
 
 void task_room_name_0(RoomNameWork* work, s32 nameId) {
-    work->tiles = LoadObjTiles(gMapNameBarTiles, 0x800);
+    work->tiles = LoadObjTiles(gMapNameBarTiles, sizeof(gMapNameBarTiles));
     work->palette = LoadObjPalette(gMapFloorNamePalette, sizeof(gMapFloorNamePalette));
     work->gfx = gMapNameBarFrames[0];
     work->nameId = nameId;

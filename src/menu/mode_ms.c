@@ -453,7 +453,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
         sMooglePackCards[i].gfx = gCardDefs[id].gfx;
         sMooglePackCards[i].palette2 = LoadObjPalette(gMooglePackCardSpinPalettes + gCardDefs[id].category * 16, 0x20);
         FadeSetPaletteExcluded(sMooglePackCards[i].palette2->index + 0x10, TRUE);
-        sMooglePackCards[i].tiles2 = LoadObjTiles(gMooglePackCardSpinTiles, 0x1D80);
+        sMooglePackCards[i].tiles2 = LoadObjTiles(gMooglePackCardSpinTiles, sizeof(gMooglePackCardSpinTiles));
         sMooglePackCards[i].backSprite = NULL;
         AnimInit(&sMooglePackCards[i].anim, gMooglePackCardSpinAnims, gMooglePackCardSpinFrames);
         AnimStart(&sMooglePackCards[i].anim, 0, ANIM_FLAG_LOOP);
@@ -467,12 +467,12 @@ void InitMooglePackOpening(s16 x, s16 y) {
 
     sMooglePackCard00Palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     FadeSetPaletteExcluded(sMooglePackCard00Palette->index + 0x10, TRUE);
-    sMooglePackValueTiles = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+    sMooglePackValueTiles = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
     sMooglePackPremiumValuePalette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     FadeSetPaletteExcluded(sMooglePackPremiumValuePalette->index + 0x10, TRUE);
-    sMooglePackPremiumValueTiles = LoadObjTiles(gCardPremiumValueDigitTiles, 0x140);
+    sMooglePackPremiumValueTiles = LoadObjTiles(gCardPremiumValueDigitTiles, sizeof(gCardPremiumValueDigitTiles));
     sMooglePackCursorPalette = LoadObjPalette(gMoogleShopCursorPalette, sizeof(gMoogleShopCursorPalette));
-    sMooglePackCursorTiles = LoadObjTiles(gMoogleShopCursorTiles, 0x1C0);
+    sMooglePackCursorTiles = LoadObjTiles(gMoogleShopCursorTiles, sizeof(gMoogleShopCursorTiles));
     AnimInit(&sMooglePackCursorAnim, gMoogleShopCursorAnims, gMoogleShopCursorFrames);
     AnimStart(&sMooglePackCursorAnim, 0, ANIM_FLAG_LOOP);
     FadeSetPaletteExcluded(sMooglePackCursorPalette->index + 0x10, TRUE);
@@ -484,7 +484,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
     textPtr = &sMooglePackDescText;
     *textPtr = EwramAlloc(0x5A * sizeof(TextSlot));
     InitTextSlots(sMooglePackDescText, 0x5A);
-    sMooglePackPremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
+    sMooglePackPremiumTiles = LoadObjTiles(gCardPremiumTiles, sizeof(gCardPremiumTiles));
     AnimInit(&sMooglePackPremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMooglePackPremiumAnim, 0, ANIM_FLAG_LOOP);
 
@@ -1185,7 +1185,7 @@ void mode_ms_shop_0() {
     DrawMoogleShopPacks(sMoogleShopRowCursor);
     LoadBgMap(3, gMooglePackCardInfoMap, size);
     sMoogleShopCursorPalette = LoadObjPalette(gMoogleShopCursorPalette, sizeof(gMoogleShopCursorPalette));
-    sMoogleShopCursorTiles = LoadObjTiles(gMoogleShopCursorTiles, 0x1C0);
+    sMoogleShopCursorTiles = LoadObjTiles(gMoogleShopCursorTiles, sizeof(gMoogleShopCursorTiles));
     AnimInit(&sMoogleShopCursorAnim, gMoogleShopCursorAnims, gMoogleShopCursorFrames);
     AnimStart(&sMoogleShopCursorAnim, 0, ANIM_FLAG_LOOP);
 

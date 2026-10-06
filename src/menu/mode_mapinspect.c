@@ -1191,22 +1191,18 @@ void mode_mapinspect_0() {
     sMapInspectBarTiles = LoadObjTiles(sMapInspectBarTilesByLanguage[gLanguage], sMapInspectBarTileSizesByLanguage[gLanguage]);
     AnimInit(&sMapInspectCursorAnim, sMapInspectCursorAnimsByLanguage[gLanguage], sMapInspectCursorFramesByLanguage[gLanguage]);
 #else
-#ifdef VERSION_JP
-    sMapInspectBarTiles = LoadObjTiles(gMapInspectBarTiles, 0xA80);
-#else
-    sMapInspectBarTiles = LoadObjTiles(gMapInspectBarTiles, 0xAC0);
-#endif
+    sMapInspectBarTiles = LoadObjTiles(gMapInspectBarTiles, sizeof(gMapInspectBarTiles));
     AnimInit(&sMapInspectCursorAnim, gMapInspectBarAnims, gMapInspectBarFrames);
 #endif
     AnimStart(&sMapInspectCursorAnim, 0, ANIM_FLAG_LOOP);
-    sMapInspectHighlightTiles = LoadObjTiles(gMapInspectHighlightTiles, 0xD60);
+    sMapInspectHighlightTiles = LoadObjTiles(gMapInspectHighlightTiles, sizeof(gMapInspectHighlightTiles));
     AnimInit(&sMapInspectHighlightAnim, gMapInspectHighlightAnims, gMapInspectHighlightFrames);
     AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
     sMapInspectBarPalette2 = LoadObjPalette(gMapInspectBarPalette, sizeof(gMapInspectBarPalette));
-    sMapInspectPremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
+    sMapInspectPremiumTiles = LoadObjTiles(gCardPremiumTiles, sizeof(gCardPremiumTiles));
     AnimInit(&sMapInspectPremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMapInspectPremiumAnim, 0, ANIM_FLAG_LOOP);
-    sMapInspectGridPremiumTiles = LoadObjTiles(gCardPremiumSmallTiles, 0x260);
+    sMapInspectGridPremiumTiles = LoadObjTiles(gCardPremiumSmallTiles, sizeof(gCardPremiumSmallTiles));
     AnimInit(&sMapInspectGridPremiumAnim, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&sMapInspectGridPremiumAnim, 0, ANIM_FLAG_LOOP);
 

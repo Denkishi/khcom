@@ -39,7 +39,7 @@ TaskDesc gTaskDescBtlArea = {
 };
 
 void task_btl_lockon_0(BtlLockonWork* work) {
-    work->tiles = LoadObjTiles(gBtlLockonTiles, 0x180);
+    work->tiles = LoadObjTiles(gBtlLockonTiles, sizeof(gBtlLockonTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gBtlLockonAnims, gBtlLockonFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -169,7 +169,7 @@ void task_btl_lockon_3(BtlLockonWork* work) {
 void task_btl_area_0(BtlAreaWork* work) {
     work->visible = FALSE;
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
-    work->tiles = LoadObjTiles(gBtlAreaTiles, 0xE0);
+    work->tiles = LoadObjTiles(gBtlAreaTiles, sizeof(gBtlAreaTiles));
     work->timer = 0;
     work->enabled = TRUE;
 }

@@ -32,7 +32,7 @@ enum HumMahluxiaFlwState {
 
 void task_hum_mahluxia_flw_0(MahluxiaFlwWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gMaruxhaBtEffPalette, sizeof(gMaruxhaBtEffPalette));
-    work->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, 0x100);
+    work->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, sizeof(gMaruxhaBtEff2Tiles));
     work->state = HUM_MAHLUXIA_FLW_STATE_TOSS;
     work->x = args->x;
     work->y = args->y;

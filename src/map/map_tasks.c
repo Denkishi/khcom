@@ -2005,7 +2005,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
 
     work->jumpHeight = arg->spotLowerZ - arg->spotUpperZ;
     work->palette = LoadObjPalette(gMapGmkJumpPalette, sizeof(gMapGmkJumpPalette));
-    work->tiles = LoadObjTiles(gMapGmkJumpTiles, 0x980);
+    work->tiles = LoadObjTiles(gMapGmkJumpTiles, sizeof(gMapGmkJumpTiles));
     anim = &work->anim;
     AnimInit(anim, gMapGmkJumpAnims, gMapGmkJumpFrames);
     work->state = MAP_GMK_JUMP_STATE_WAIT_STEP;
@@ -4103,7 +4103,7 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     work->vz = -(GetRandom() % 0x301 + 0x200);
     work->speed = GetRandom() % 155 + 153;
     work->angle = GetRandom();
-    work->tiles = LoadObjTiles(gMapPrizeTiles, 0x160);
+    work->tiles = LoadObjTiles(gMapPrizeTiles, sizeof(gMapPrizeTiles));
     work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->kind = arg->id;
 
@@ -4381,9 +4381,9 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* arg) {
     back = &gCardBacks[work->stat.category];
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->tiles2 = LoadObjTiles(back->tiles, 0x280);
-    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
     work->palette3 = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
-    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->posX = arg->x;
     work->posY = arg->y;
     work->posZ = arg->z;

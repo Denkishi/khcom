@@ -100,7 +100,7 @@ void Task_MapStair_0(MapStairWork* work, FldObj* arg) {
     work->obj.fieldPosition.z = 0;
     work->obj.fieldPosition.y = y;
     work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
-    work->tiles = LoadObjTiles(gBtlAreaTiles, 0xE0);
+    work->tiles = LoadObjTiles(gBtlAreaTiles, sizeof(gBtlAreaTiles));
     work->visible = 0;
 
     switch (work->obj.angle) {

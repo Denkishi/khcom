@@ -95,7 +95,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->handX = sRikuDeckTabPointerX[0] << 8;
     work->handY = sRikuDeckTabPointerY[0] << 8;
     work->handFlags = 0;
-    work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
+    work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, sizeof(gDeckScrollThumbTiles));
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
     work->handVisible = FALSE;
     work->tiles2 = AllocObjTiles(0x280, NULL);
@@ -139,9 +139,9 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
 #ifdef VERSION_EU
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTilesByLanguage[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
-    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, sizeof(gRikuDeckTitleBannerTiles));
 #endif
-    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
+    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, sizeof(gDeckMenuBarTiles));
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
     work->unk_4BC = 79;
     rowY = sRikuDeckRowY[work->deckIndex];
@@ -442,9 +442,9 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTilesByLanguage[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
-    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, sizeof(gRikuDeckTitleBannerTiles));
 #endif
-    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
+    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, sizeof(gDeckMenuBarTiles));
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     work->topBarX = 0x7800;
@@ -925,7 +925,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
         work->gfx5 = def->gfx;
 
         if (def->category != 3) {
-            work->tiles9 = LoadObjTiles(gCardValueDigitTiles, 480);
+            work->tiles9 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
             work->gfx6 = gCardValueDigitFrames[def->value];
         }
 

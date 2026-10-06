@@ -646,7 +646,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     work->timer = 0;
     work->done = FALSE;
     work->vz = -0x980;
-    work->tiles2 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles2 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette2 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     m4aSongNumStart(SONG_BTL_LEC_THRSW);
 }
@@ -860,7 +860,7 @@ void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     work->z = args->z;
     work->state = HUM_LEX_ROCK_STATE_EMERGE;
     work->rockCount = 0;
-    work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
+    work->tiles = LoadObjTiles(gBtlShadowSmallTiles, sizeof(gBtlShadowSmallTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->blinking = FALSE;
 }

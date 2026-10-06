@@ -853,7 +853,7 @@ enum HumVixenIceState {
 
 void task_hum_vixen_ice_0(VixenIceWork* work, VixenSub* args) {
     work->palette = LoadObjPalette(gVixEPalette, sizeof(gVixEPalette));
-    work->tiles = LoadObjTiles(gVixenE2Tiles, 0x800);
+    work->tiles = LoadObjTiles(gVixenE2Tiles, sizeof(gVixenE2Tiles));
     work->sub = args;
     work->state = HUM_VIXEN_ICE_STATE_INACTIVE;
     AnimInit(&work->anim, gVixenE2Anims, gVixenE2Frames);

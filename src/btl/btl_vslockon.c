@@ -17,7 +17,7 @@
 #include "card_label_data.h"
 
 void task_btl_vslockon_0(BtlVslockonWork* work) {
-    work->tiles = LoadObjTiles(gBtlLockonTiles, 0x180);
+    work->tiles = LoadObjTiles(gBtlLockonTiles, sizeof(gBtlLockonTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gBtlLockonAnims, gBtlLockonFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);

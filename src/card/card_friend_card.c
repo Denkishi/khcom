@@ -92,10 +92,10 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     }
 
     work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
-    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
-    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     collider = &work->collider;
     ColliderInit(collider, 5, 8, 10);
@@ -136,10 +136,10 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
 
     work->tiles = LoadObjTiles(gCardBacks[work->backCategory].tiles, 0x280);
     work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
-    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
-    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     collider = &work->collider;
     ColliderInit(collider, 5, 8, 10);
@@ -173,10 +173,10 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     work->cardDef = &gCardDefs[args->cardId];
     work->backCategory = work->cardDef->category;
     work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
-    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
-    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     collider = &work->collider;
     ColliderInit(collider, 5, 8, 10);
@@ -1036,36 +1036,36 @@ void Premire_Chance_0(PremireChanceWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        work->tiles = LoadObjTiles(gPremireChanceTitleFrenchTiles, 0x340);
+        work->tiles = LoadObjTiles(gPremireChanceTitleFrenchTiles, sizeof(gPremireChanceTitleFrenchTiles));
         break;
     case LANGUAGE_GERMAN:
-        work->tiles = LoadObjTiles(gPremireChanceTitleGermanTiles, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleGermanTiles, sizeof(gPremireChanceTitleGermanTiles));
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = LoadObjTiles(gPremireChanceTitleItalianTiles, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleItalianTiles, sizeof(gPremireChanceTitleItalianTiles));
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = LoadObjTiles(gPremireChanceTitleSpanishTiles, 0x300);
+        work->tiles = LoadObjTiles(gPremireChanceTitleSpanishTiles, sizeof(gPremireChanceTitleSpanishTiles));
         break;
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gPremireChanceTitleTiles, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleTiles, sizeof(gPremireChanceTitleTiles));
         break;
     default:
-        work->tiles = LoadObjTiles(gPremireChanceTitleTiles, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleTiles, sizeof(gPremireChanceTitleTiles));
         break;
     }
 #else
-    work->tiles = LoadObjTiles(gPremireChanceTitleTiles, 0x3C0);
+    work->tiles = LoadObjTiles(gPremireChanceTitleTiles, sizeof(gPremireChanceTitleTiles));
 #endif
     work->palette = LoadObjPalette(gPremireChancePalette, sizeof(gPremireChancePalette));
-    work->tiles5 = LoadObjTiles(gPremireChanceBarTiles, 0x3C0);
+    work->tiles5 = LoadObjTiles(gPremireChanceBarTiles, sizeof(gPremireChanceBarTiles));
     work->tiles3 = AllocObjTiles(0x3C0, NULL);
     work->palette3 = LoadObjPalette(gCardSelectBoxPalette, sizeof(gCardSelectBoxPalette));
     SetObjTileSource(work->tiles3, gCardSelectBoxTiles);
     AnimInit(&work->anim2, gCardSelectBoxAnims, gCardSelectBoxFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    work->tiles4 = LoadObjTiles(gAButtonIconTiles, 0x80);
+    work->tiles4 = LoadObjTiles(gAButtonIconTiles, sizeof(gAButtonIconTiles));
     work->palette4 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
     FadeSetPaletteExcluded(work->palette->index + 16, TRUE);

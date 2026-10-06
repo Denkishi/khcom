@@ -72,7 +72,7 @@ void mode_debug_0() {
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
     DebugTextLoadPalette(0, gDebugMenuTextPalette, 0x20, 0x0F);
-    sDebugWork->tiles = LoadObjTiles(gDebugMenuCursorTiles, 0x2E0);
+    sDebugWork->tiles = LoadObjTiles(gDebugMenuCursorTiles, sizeof(gDebugMenuCursorTiles));
     sDebugWork->palette = LoadObjPalette(gDebugMenuCursorPalette, sizeof(gDebugMenuCursorPalette));
     AnimInit(&sDebugWork->anim, gDebugMenuCursorAnims, gDebugMenuCursorFrames);
     AnimStart(&sDebugWork->anim, 0, ANIM_FLAG_LOOP);

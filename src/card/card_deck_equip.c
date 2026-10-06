@@ -39,7 +39,7 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gDeckEquipText), work->textSlots2);
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
-    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_JP
     work->textSlotCount3 = LoadTextSlots((u16*)gDeckEquipSuffixText, work->textSlots3);
@@ -89,7 +89,7 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount2 = LoadTextSlots(gDeckErrorCpText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
-    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_JP
     work->x2 = (207 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
@@ -122,7 +122,7 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount2 = LoadTextSlots(gDeckErrorNoAttackCardText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
-    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->x = (250 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 64;
@@ -155,7 +155,7 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount2 = LoadTextSlots(gDeckErrorLastAttackCardText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
-    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->x = (242 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 66;
@@ -186,7 +186,7 @@ void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount2 = LoadTextSlots(gDeckErrorDeckFullText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
-    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->x = (243 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 66;
@@ -246,7 +246,7 @@ void Deck_Yes_No_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots3);
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
-    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 66;
@@ -278,7 +278,7 @@ void Deck_Clear_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots3);
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
-    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->x2 = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;

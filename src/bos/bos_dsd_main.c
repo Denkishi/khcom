@@ -64,13 +64,13 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     work->energy2Task = NULL;
     work->lastBreakDifference = gBtlWork->breakDifference;
     SetBgMapBlocks(1, gBosDsdFrameMaps, 2, 2);
-    work->tiles = LoadObjTiles(gBosDsdLimbTiles, 0x12A0);
+    work->tiles = LoadObjTiles(gBosDsdLimbTiles, sizeof(gBosDsdLimbTiles));
     AnimInit(&work->anim, gBosDsdLegAnims, gBosDsdLegFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     arg->body[0].y++;
     arg->body[0].y--;
-    work->tiles2 = LoadObjTiles(gBosDsdLimbTiles, 0x12A0);
+    work->tiles2 = LoadObjTiles(gBosDsdLimbTiles, sizeof(gBosDsdLimbTiles));
     AnimInit(&work->anim2, gBosDsdArmAnims, gBosDsdArmFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
@@ -81,7 +81,7 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     work->dsd->tiles2 = LoadObjTiles(gBosDsdItaTiles, 0x740);
     work->dsd->palette2 = LoadObjPalette(gBosDsdItaPalette, sizeof(gBosDsdItaPalette));
     work->dsd->palette3 = LoadObjPalette(gBosDsdItaShadowPalette, sizeof(gBosDsdItaShadowPalette));
-    work->dsd->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
+    work->dsd->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, sizeof(gBtlShadowSmallTiles));
     work->dsd->palette4 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     body->x = 0xDC00;
     body->y = 0x16800;

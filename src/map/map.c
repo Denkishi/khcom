@@ -3898,7 +3898,7 @@ void Mode_MenuNew_0() {
     LoadBgMap(0, gMenuNewMsgWinMap, 0x800);
     SetBgScroll(0, 0, 0xFFFC);
     sNewGameSlotMenuWork->palette2 = LoadObjPalette(gSaveMenuTitlePalette, sizeof(gSaveMenuTitlePalette));
-    sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
+    sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gMapSaveTitleTiles, sizeof(gMapSaveTitleTiles));
     sNewGameSlotMenuWork->y = -0x800;
     sNewGameSlotMenuWork->y2 = 0xA000;
     sNewGameSlotMenuWork->tiles4 = AllocObjTiles(0x340, gSor1ff00Tiles);
@@ -3910,7 +3910,7 @@ void Mode_MenuNew_0() {
     sNewGameSlotMenuWork->tiles7 = AllocObjTiles(0x400, gRikuFf00Tiles);
     sNewGameSlotMenuWork->palette7 = LoadObjPalette(gRikuPalette, sizeof(gRikuPalette));
     sNewGameSlotMenuWork->palette3 = LoadObjPalette(gFileMenuWindowPalette, sizeof(gFileMenuWindowPalette));
-    sNewGameSlotMenuWork->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, 0x4C0);
+    sNewGameSlotMenuWork->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, sizeof(gSaveSlotCharaWinTiles));
     sNewGameSlotMenuWork->palette = LoadObjPalette(gFileMenuCursorPalette, sizeof(gFileMenuCursorPalette));
     sNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gSaveSlotCursorTiles);
     AnimInit(&sNewGameSlotMenuWork->anim, gSaveSlotCursorAnims, gSaveSlotCursorFrames);
@@ -4524,24 +4524,24 @@ void Mode_MenuLoad_0(s32 arg) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleTiles, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleTiles, sizeof(gMenuLoadTitleTiles));
         break;
     case LANGUAGE_FRENCH:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleFrenchTiles, 0x300);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleFrenchTiles, sizeof(gMenuLoadTitleFrenchTiles));
         break;
     case LANGUAGE_SPANISH:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleSpanishTiles, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleSpanishTiles, sizeof(gMenuLoadTitleSpanishTiles));
         break;
     case LANGUAGE_ITALIAN:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleItalianTiles, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleItalianTiles, sizeof(gMenuLoadTitleItalianTiles));
         break;
     case LANGUAGE_GERMAN:
     default:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleGermanTiles, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleGermanTiles, sizeof(gMenuLoadTitleGermanTiles));
         break;
     }
 #else
-    sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleTiles, 0x2C0);
+    sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleTiles, sizeof(gMenuLoadTitleTiles));
 #endif
     sLoadGameMenuWork->y = -0x800;
     sLoadGameMenuWork->y2 = 0xA000;
@@ -5226,7 +5226,7 @@ void MapMenuFreeConfirm(MapMenuWork* work) {
 
 s32 MapMenuOpen(MapMenuWork* work) {
     work->palette2 = LoadObjPalette(gMapMenuBarPalette, sizeof(gMapMenuBarPalette));
-    work->tiles2 = LoadObjTiles(gMapMenuBarsTiles, 0x80);
+    work->tiles2 = LoadObjTiles(gMapMenuBarsTiles, sizeof(gMapMenuBarsTiles));
     work->y = -0x800;
     work->y2 = 0xA000;
 
@@ -5236,7 +5236,7 @@ s32 MapMenuOpen(MapMenuWork* work) {
         work->tiles8 = AllocObjTiles(0x340, gSor1ff00Tiles);
     }
 
-    work->tiles7 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles7 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette7 = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->playerStartX = gFieldState->actor.fieldPosition.x - gFieldState->x;
     work->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
@@ -5271,24 +5271,24 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, sizeof(gMapMenuStatusTiles));
             break;
         case LANGUAGE_FRENCH:
-            work->tiles5 = LoadObjTiles(gMapMenuStatusFrenchTiles, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusFrenchTiles, sizeof(gMapMenuStatusFrenchTiles));
             break;
         case LANGUAGE_SPANISH:
-            work->tiles5 = LoadObjTiles(gMapMenuStatusSpanishTiles, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusSpanishTiles, sizeof(gMapMenuStatusSpanishTiles));
             break;
         case LANGUAGE_ITALIAN:
-            work->tiles5 = LoadObjTiles(gMapMenuStatusItalianTiles, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusItalianTiles, sizeof(gMapMenuStatusItalianTiles));
             break;
         case LANGUAGE_GERMAN:
         default:
-            work->tiles5 = LoadObjTiles(gMapMenuStatusGermanTiles, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusGermanTiles, sizeof(gMapMenuStatusGermanTiles));
             break;
         }
 #else
-        work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, 0x1BC0);
+        work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, sizeof(gMapMenuStatusTiles));
 #endif
         work->palette3 = LoadObjPalette(gMapMenuStatusPalette, sizeof(gMapMenuStatusPalette));
         work->x3 = 0x11800;
@@ -5311,51 +5311,51 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, sizeof(gMapMenuRikuCommandsTiles));
             } else {
-                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsTiles, sizeof(gMapMenuSoraCommandsTiles));
             }
 
             break;
         case LANGUAGE_FRENCH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsFrenchTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsFrenchTiles, sizeof(gMapMenuRikuCommandsFrenchTiles));
             } else {
-                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsFrenchTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsFrenchTiles, sizeof(gMapMenuSoraCommandsFrenchTiles));
             }
 
             break;
         case LANGUAGE_SPANISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsSpanishTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsSpanishTiles, sizeof(gMapMenuRikuCommandsSpanishTiles));
             } else {
-                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsSpanishTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsSpanishTiles, sizeof(gMapMenuSoraCommandsSpanishTiles));
             }
 
             break;
         case LANGUAGE_ITALIAN:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsItalianTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsItalianTiles, sizeof(gMapMenuRikuCommandsItalianTiles));
             } else {
-                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsItalianTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsItalianTiles, sizeof(gMapMenuSoraCommandsItalianTiles));
             }
 
             break;
         case LANGUAGE_GERMAN:
         default:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsGermanTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsGermanTiles, sizeof(gMapMenuRikuCommandsGermanTiles));
             } else {
-                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsGermanTiles, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsGermanTiles, sizeof(gMapMenuSoraCommandsGermanTiles));
             }
 
             break;
         }
 #else
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, 0x1500);
+            work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, sizeof(gMapMenuRikuCommandsTiles));
         } else {
-            work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsTiles, 0x1500);
+            work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsTiles, sizeof(gMapMenuSoraCommandsTiles));
         }
 #endif
 
@@ -5379,27 +5379,27 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, sizeof(gMapMenuTitleTiles));
             break;
         case LANGUAGE_FRENCH:
-            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, sizeof(gMapMenuTitleTiles));
             break;
         case LANGUAGE_SPANISH:
-            work->tiles3 = LoadObjTiles(gMapMenuTitleSpanishTiles, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleSpanishTiles, sizeof(gMapMenuTitleSpanishTiles));
             break;
         case LANGUAGE_ITALIAN:
-            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, sizeof(gMapMenuTitleTiles));
             break;
         case LANGUAGE_GERMAN:
         default:
-            work->tiles3 = LoadObjTiles(gMapMenuTitleGermanTiles, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleGermanTiles, sizeof(gMapMenuTitleGermanTiles));
             break;
         }
 #else
-        work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
+        work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, sizeof(gMapMenuTitleTiles));
 #endif
         work->x = -0x8000;
-        work->tiles4 = LoadObjTiles(gMapMenuCharaWinTiles, 0x300);
+        work->tiles4 = LoadObjTiles(gMapMenuCharaWinTiles, sizeof(gMapMenuCharaWinTiles));
         work->x2 = 0xF800;
         MapMenuSetPanelPalettesExcluded(work, TRUE);
         work->panelsVisible = TRUE;
@@ -6257,7 +6257,7 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         work->tiles5 = AllocObjTiles(0x280, gDonaFl00Tiles);
         work->tiles6 = AllocObjTiles(0x400, gGoofyFl00Tiles);
         work->palette3 = LoadObjPalette(gFileMenuWindowPalette, sizeof(gFileMenuWindowPalette));
-        work->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, 0x4C0);
+        work->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, sizeof(gSaveSlotCharaWinTiles));
         work->palette = LoadObjPalette(gMapMenuCursorPalette, sizeof(gMapMenuCursorPalette));
         work->tiles = AllocObjTiles(0x120, gMapMenuCursorTiles);
         AnimInit(&work->anim, gMapMenuCursorAnims, gMapMenuCursorFrames);
@@ -6384,27 +6384,27 @@ void Task_MapSave_0(MapSaveWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleTiles, sizeof(gMapSaveTitleTiles));
         break;
     case LANGUAGE_FRENCH:
-        work->tiles2 = LoadObjTiles(gMapSaveTitleFrenchTiles, 0x400);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleFrenchTiles, sizeof(gMapSaveTitleFrenchTiles));
         break;
     case LANGUAGE_SPANISH:
-        work->tiles2 = LoadObjTiles(gMapSaveTitleSpanishTiles, 0x3C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleSpanishTiles, sizeof(gMapSaveTitleSpanishTiles));
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles2 = LoadObjTiles(gMapSaveTitleItalianTiles, 0x2C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleItalianTiles, sizeof(gMapSaveTitleItalianTiles));
         break;
     case LANGUAGE_GERMAN:
     default:
-        work->tiles2 = LoadObjTiles(gMapSaveTitleGermanTiles, 0x3C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleGermanTiles, sizeof(gMapSaveTitleGermanTiles));
         break;
     }
 
     work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, sizeof(gSaveMenuTitlePalette));
 #else
     work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, sizeof(gSaveMenuTitlePalette));
-    work->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
+    work->tiles2 = LoadObjTiles(gMapSaveTitleTiles, sizeof(gMapSaveTitleTiles));
 #endif
     work->y = -0x800;
     work->y2 = 0xA000;

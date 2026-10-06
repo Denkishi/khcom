@@ -404,7 +404,7 @@ void task_smn_tinkeff_0(SmnTinkeffWork* work, BtlObj* args) {
     work->y = args->y + GetTinkEffectOffset();
     work->z = args->z;
     work->vz = (u16)(GetRandom() % 0xE8) + 0x4C;
-    work->tiles = LoadObjTiles(gSmnTinkEffTiles, 0x200);
+    work->tiles = LoadObjTiles(gSmnTinkEffTiles, sizeof(gSmnTinkEffTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gSmnTinkEffAnims, gSmnTinkEffFrames);
 

@@ -106,7 +106,7 @@ void CardName_0(CardNameWork* work) {
     x = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->messageX = x;
 #endif
-    work->tiles = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
+    work->tiles = LoadObjTiles(gLargeDialogBoxTiles, sizeof(gLargeDialogBoxTiles));
     pal = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->palette2 = pal;
     FadeSetPaletteExcluded(pal->index + 16, TRUE);

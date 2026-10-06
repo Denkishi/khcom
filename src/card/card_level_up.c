@@ -102,7 +102,7 @@ void Level_Up_0(LevelUpWork* work) {
     InitTextSlots(work->textSlots[3], ARRAY_COUNT(work->textSlots[0]));
     InitTextSlots(work->textSlots[4], ARRAY_COUNT(work->textSlots[0]));
     InitTextSlots(work->textSlots[5], ARRAY_COUNT(work->textSlots[0]));
-    work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTiles, 0x500);
+    work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTiles, sizeof(gLevelUpHeaderTiles));
 #else
     work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
     work->tiles5[0] = AllocSpriteFrameTiles(0x500);
@@ -111,7 +111,7 @@ void Level_Up_0(LevelUpWork* work) {
 #endif
     work->tilesPalettes[7] = LoadObjPalette(gLevelUpHeaderPalette, sizeof(gLevelUpHeaderPalette));
     FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, TRUE);
-    work->tiles2 = LoadObjTiles(gLevelUpBarTiles, 0x3C0);
+    work->tiles2 = LoadObjTiles(gLevelUpBarTiles, sizeof(gLevelUpBarTiles));
     TaskPoolInit(&work->pool, 10);
 
     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
@@ -464,26 +464,26 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
                 break;
             case LANGUAGE_FRENCH:
-                work->tiles3 = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoFrenchTiles, sizeof(gLvupLogoFrenchTiles));
                 break;
             case LANGUAGE_GERMAN:
-                work->tiles3 = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoGermanTiles, sizeof(gLvupLogoGermanTiles));
                 break;
             case LANGUAGE_ITALIAN:
-                work->tiles3 = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoItalianTiles, sizeof(gLvupLogoItalianTiles));
                 break;
             case LANGUAGE_SPANISH:
-                work->tiles3 = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoSpanishTiles, sizeof(gLvupLogoSpanishTiles));
                 break;
             default:
-                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
                 break;
             }
 #else
-            work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+            work->tiles3 = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, TRUE);
@@ -1492,26 +1492,26 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
                 break;
             case LANGUAGE_FRENCH:
-                work->tiles3 = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoFrenchTiles, sizeof(gLvupLogoFrenchTiles));
                 break;
             case LANGUAGE_GERMAN:
-                work->tiles3 = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoGermanTiles, sizeof(gLvupLogoGermanTiles));
                 break;
             case LANGUAGE_ITALIAN:
-                work->tiles3 = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoItalianTiles, sizeof(gLvupLogoItalianTiles));
                 break;
             case LANGUAGE_SPANISH:
-                work->tiles3 = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoSpanishTiles, sizeof(gLvupLogoSpanishTiles));
                 break;
             default:
-                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
                 break;
             }
 #else
-            work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
+            work->tiles3 = LoadObjTiles(gLvupLogoTiles, sizeof(gLvupLogoTiles));
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, TRUE);

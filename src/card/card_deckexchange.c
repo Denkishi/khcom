@@ -99,7 +99,7 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->handX = sDeckExchangeTabPointerX[0] << 8;
     work->handY = sDeckExchangeTabPointerY[0] << 8;
     work->handFlags = 0;
-    work->tiles3 = LoadObjTiles(gDeckScrollThumbTiles, 32);
+    work->tiles3 = LoadObjTiles(gDeckScrollThumbTiles, sizeof(gDeckScrollThumbTiles));
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_CARD);

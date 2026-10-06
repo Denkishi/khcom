@@ -22,7 +22,7 @@ void task_fld_shadow_0(FldShadowWork* work, FldObj* obj) {
     work->actor = obj;
     work->x = obj->fieldPosition.x;
     work->y = obj->fieldPosition.y;
-    work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     AnimInit(&work->anim, gBtlShadowAnims, gBtlShadowFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);

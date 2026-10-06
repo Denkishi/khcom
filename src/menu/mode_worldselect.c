@@ -766,16 +766,16 @@ void mode_worldselect_0() {
     }
 
     sWorldselectCardPalettes[0] = LoadObjPalette(gWorldselectCardPalette, sizeof(gWorldselectCardPalette));
-    sWorldselectCardTiles[0] = LoadObjTiles(gWorldselectCardTiles, 0xC40);
+    sWorldselectCardTiles[0] = LoadObjTiles(gWorldselectCardTiles, sizeof(gWorldselectCardTiles));
     sWorldselectCardPalettes[1] = LoadObjPalette(gWorldselectCardFlipPalette, sizeof(gWorldselectCardFlipPalette));
-    sWorldselectCardTiles[1] = LoadObjTiles(gWorldselectCardFlipTiles, 0x1340);
+    sWorldselectCardTiles[1] = LoadObjTiles(gWorldselectCardFlipTiles, sizeof(gWorldselectCardFlipTiles));
     sWorldselectOverlayPalette = LoadObjPalette(gWorldselectOverlayPalette, sizeof(gWorldselectOverlayPalette));
 #ifdef VERSION_EU
     sWorldselectTitleTiles = LoadObjTiles(sWorldselectTitleTileData[gLanguage], sWorldselectTitleTileSizes.sizes[gLanguage]);
 #else
-    sWorldselectTitleTiles = LoadObjTiles(gWorldselectTitleTiles, 0x380);
+    sWorldselectTitleTiles = LoadObjTiles(gWorldselectTitleTiles, sizeof(gWorldselectTitleTiles));
 #endif
-    sWorldselectFrameTiles = LoadObjTiles(gWorldselectBarTiles, 0x780);
+    sWorldselectFrameTiles = LoadObjTiles(gWorldselectBarTiles, sizeof(gWorldselectBarTiles));
     TaskPoolInit(&sWorldselectTaskPool, 1);
     EnableBg(0);
     EnableBg(1);

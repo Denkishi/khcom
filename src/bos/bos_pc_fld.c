@@ -79,7 +79,7 @@ void BosPcFldEnableObject(Task* task, u8 on) {
 
     if (!on) {
         if (work->tiles == NULL) {
-            work->tiles = LoadObjTiles(gBosPcFldTiles, 0x200);
+            work->tiles = LoadObjTiles(gBosPcFldTiles, sizeof(gBosPcFldTiles));
         }
 
         if (work->palette == NULL) {

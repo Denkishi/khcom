@@ -24,7 +24,7 @@ u16 gUnk_0203C3C0 EWRAM_COMMON(4);
 
 void task_bos_jf_shadow_0(JfShadowWork* work, BtlObj* obj) {
     work->actor = obj;
-    work->tiles = LoadObjTiles(gBtlShadowLargeTiles, 0x140);
+    work->tiles = LoadObjTiles(gBtlShadowLargeTiles, sizeof(gBtlShadowLargeTiles));
     work->gfx = gBtlShadowLargeFrame0;
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
 }

@@ -41,7 +41,7 @@ static s32 Square(s32 x) {
 void task_sroll_tmr_0(SrollTmrWork* work, void* arg) {
     work->visible = 0;
     work->frameCount = 0;
-    work->tiles = LoadObjTiles(gSrollTimerTiles, 352);
+    work->tiles = LoadObjTiles(gSrollTimerTiles, sizeof(gSrollTimerTiles));
     work->palette = LoadObjPalette(gSrollTimerPalette, sizeof(gSrollTimerPalette));
 }
 

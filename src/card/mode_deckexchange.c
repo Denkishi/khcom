@@ -62,7 +62,7 @@ void Mode_DeckExchange_2() {
 #endif
 
 void DarkPoint_0(DarkPointWork* work) {
-    work->tiles = LoadObjTiles(gDarkPointTiles, 576);
+    work->tiles = LoadObjTiles(gDarkPointTiles, sizeof(gDarkPointTiles));
     work->slideTimer = 8;
     work->x = -0x2000;
     SplitFourDigits(gBtlWork->darkPoints, &work->thousands);

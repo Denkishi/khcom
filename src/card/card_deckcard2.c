@@ -147,7 +147,7 @@ void DeckCard2LoadGfx(DeckCard2Work* work) {
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     work->tiles = LoadObjTiles(work->cardDef->tiles2, 0x200);
     work->palette = LoadObjPalette(work->cardDef->palette2, 32);
-    work->tiles2 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+    work->tiles2 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
 
     if (work->tiles != NULL && work->palette != NULL) {
         work->flags |= DECK_CARD2_FLAG_GFX_LOADED;

@@ -36,11 +36,7 @@ void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* arg) {
 
     switch (arg->kind) {
     case 0:
-#ifdef VERSION_JP
-        work->tiles = LoadObjTiles(gSrollNameOrnamentTiles, 45 * 32);
-#else
-        work->tiles = LoadObjTiles(gSrollNameOrnamentTiles, 35 * 32);
-#endif
+        work->tiles = LoadObjTiles(gSrollNameOrnamentTiles, sizeof(gSrollNameOrnamentTiles));
         anim = &work->anim;
         AnimInit(anim, gSrollNameOrnamentAnims, gSrollNameOrnamentFrames);
         AnimStart(anim, arg->animId, 0);

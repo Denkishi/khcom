@@ -156,7 +156,7 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     work->shape = SetupAllmapRoomDoors(work);
 
     if (!work->asSprite) {
-        work->tiles = LoadObjTiles(gAllmapRoomTiles, 0x2400);
+        work->tiles = LoadObjTiles(gAllmapRoomTiles, sizeof(gAllmapRoomTiles));
         work->gfx2 = NULL;
     } else {
         work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapRoomFrames, 17), gAllmapRoomTiles);
@@ -290,7 +290,7 @@ void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg) {
     work->dropTargetY = work->screenY << 8;
     work->x = work->drawX = work->screenX << 8;
     work->y = work->drawY = work->screenY << 8;
-    work->tiles = LoadObjTiles(gAllmapCursorTiles, 0xC0);
+    work->tiles = LoadObjTiles(gAllmapCursorTiles, sizeof(gAllmapCursorTiles));
     work->palette = LoadObjPalette(gAllmapObjPalette, sizeof(gAllmapObjPalette));
     AnimInit(&work->anim, gAllmapCursorAnims, gAllmapCursorFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -472,12 +472,8 @@ void AllmapBarStartClose(AllmapBarWork* work) {
 
 void task_allmap_bar_0(AllmapBarWork* work) {
     gStockMesDispWork = work;
-#ifdef VERSION_EU
-    work->tiles = LoadObjTiles(gAllmapBarTitleTiles, 0xDC0);
-#else
-    work->tiles = LoadObjTiles(gAllmapBarTitleTiles, 0x2C0);
-#endif
-    work->tiles2 = LoadObjTiles(gAllmapBarBandTiles, 0xC0);
+    work->tiles = LoadObjTiles(gAllmapBarTitleTiles, sizeof(gAllmapBarTitleTiles));
+    work->tiles2 = LoadObjTiles(gAllmapBarBandTiles, sizeof(gAllmapBarBandTiles));
     work->palette = LoadObjPalette(gAllmapObjPalette, sizeof(gAllmapObjPalette));
     work->steps = 16;
     work->state = ALLMAP_BAR_STATE_BARS_IN;
@@ -659,7 +655,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
             work->doors[i].sprite.tiles = AllocKeyValueTiles(value);
             work->doors[i].sprite.palette = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
             work->doors[i].sprite.gfx = NULL;
-            work->doors[i].sprite.tiles2 = LoadObjTiles(gCardOutlineWhiteTiles, 0x600);
+            work->doors[i].sprite.tiles2 = LoadObjTiles(gCardOutlineWhiteTiles, sizeof(gCardOutlineWhiteTiles));
             work->doors[i].sprite.palette2 = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
             work->doors[i].sprite.gfx2 = gCardOutlineWhiteFrames[0];
             FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, TRUE);
@@ -672,10 +668,10 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
     }
 
     if (work->count != 0) {
-        work->tiles = LoadObjTiles(gAllmapDoorinfoArrowTiles, 0x80);
+        work->tiles = LoadObjTiles(gAllmapDoorinfoArrowTiles, sizeof(gAllmapDoorinfoArrowTiles));
         work->palette = LoadObjPalette(gAllmapObjPalette, sizeof(gAllmapObjPalette));
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
-        work->tiles2 = LoadObjTiles(gAllmapRoomTiles, 0x2400);
+        work->tiles2 = LoadObjTiles(gAllmapRoomTiles, sizeof(gAllmapRoomTiles));
         work->gfx = gAllmapRoomFrames[0];
         InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, 32);
         FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
@@ -730,7 +726,7 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         }
     }
 
-    work->tiles2 = LoadObjTiles(gAllmapRoomTiles, 0x2400);
+    work->tiles2 = LoadObjTiles(gAllmapRoomTiles, sizeof(gAllmapRoomTiles));
 
     if (GetEventRoomKind(work->room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_BOSS_ROOM) {
         work->gfx = gAllmapRoomFrames[1];
@@ -875,7 +871,7 @@ void task_allmap_pusha_0(AllmapPushaWork* work, AllmapCursorWork* arg) {
     work->cursor = arg;
     work->x = arg->pos.x * 24 - gAllmapCameraX;
     work->y = arg->pos.y * 24 - gAllmapCameraY;
-    work->tiles = LoadObjTiles(gAllmapPushaTiles, 0x80);
+    work->tiles = LoadObjTiles(gAllmapPushaTiles, sizeof(gAllmapPushaTiles));
     work->palette = LoadObjPalette(gAllmapObjPalette, sizeof(gAllmapObjPalette));
     work->gfx = gAllmapPushaFrame0;
     work->angle = 0;

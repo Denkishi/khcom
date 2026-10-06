@@ -353,7 +353,7 @@ void WorldInspectHandleInput() {
             sWorldInspectBarPalette = NULL;
 #endif
             sWorldInspectDetailPalettes[0] = LoadObjPalette(gWorldselectCardPalette, sizeof(gWorldselectCardPalette));
-            sWorldInspectDetailTiles[0] = LoadObjTiles(gWorldselectCardTiles, 0xC40);
+            sWorldInspectDetailTiles[0] = LoadObjTiles(gWorldselectCardTiles, sizeof(gWorldselectCardTiles));
             sWorldInspectDetailSprites[0] = gWorldselectCardFrame0;
 
             if (sWorldInspectCursor <= 9) {
@@ -374,7 +374,7 @@ void WorldInspectHandleInput() {
 
             if (sWorldInspectWorlds[sWorldInspectCursor] == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
                 sWorldInspectDetailPalettes[1] = LoadObjPalette(gPooAltImagePalettes, sizeof(gPooAltImagePalettes));
-                sWorldInspectDetailTiles[1] = LoadObjTiles(gPooAltImageTiles, 0x1000);
+                sWorldInspectDetailTiles[1] = LoadObjTiles(gPooAltImageTiles, sizeof(gPooAltImageTiles));
                 sWorldInspectDetailSprites[1] = gPooAltImageFrame0;
             } else {
                 sWorldInspectDetailPalettes[1] =
@@ -809,11 +809,11 @@ void mode_worldinspect_0() {
     LoadBgMap(3, gWorldInspectDetailMap, 0x500);
     WorldInspectLoadFloorTiles(sWorldInspectCursor);
     sWorldInspectHighlightPalette = LoadObjPalette(gWorldInspectHighlightPalette, sizeof(gWorldInspectHighlightPalette));
-    sWorldInspectHighlightTiles = LoadObjTiles(gWorldInspectHighlightTiles, 0x400);
+    sWorldInspectHighlightTiles = LoadObjTiles(gWorldInspectHighlightTiles, sizeof(gWorldInspectHighlightTiles));
     AnimInit(&sWorldInspectHighlightAnim, gWorldInspectHighlightAnims, gWorldInspectHighlightFrames);
     AnimStart(&sWorldInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
     sWorldInspectCursorPalette = LoadObjPalette(gWorldInspectCursorPalette, sizeof(gWorldInspectCursorPalette));
-    sWorldInspectCursorTiles = LoadObjTiles(gWorldInspectCursorTiles, 0xC0);
+    sWorldInspectCursorTiles = LoadObjTiles(gWorldInspectCursorTiles, sizeof(gWorldInspectCursorTiles));
     AnimInit(&sWorldInspectCursorAnim, gWorldInspectCursorAnims, gWorldInspectCursorFrames);
     AnimStart(&sWorldInspectCursorAnim, 0, ANIM_FLAG_LOOP);
     InitTextSlots(sWorldInspectNameText, ARRAY_COUNT(sWorldInspectNameText));
@@ -824,26 +824,26 @@ void mode_worldinspect_0() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, 0x400);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, sizeof(gWorldInspectBarTiles));
         break;
     case LANGUAGE_FRENCH:
-        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarFrenchTiles, 0x440);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarFrenchTiles, sizeof(gWorldInspectBarFrenchTiles));
         break;
     case LANGUAGE_SPANISH:
-        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarSpanishTiles, 0x400);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarSpanishTiles, sizeof(gWorldInspectBarSpanishTiles));
         break;
     case LANGUAGE_ITALIAN:
-        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarItalianTiles, 0x400);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarItalianTiles, sizeof(gWorldInspectBarItalianTiles));
         break;
     case LANGUAGE_GERMAN:
     default:
-        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarGermanTiles, 0x440);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarGermanTiles, sizeof(gWorldInspectBarGermanTiles));
         break;
     }
 #elif defined(VERSION_JP)
-    sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, 0x3C0);
+    sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, sizeof(gWorldInspectBarTiles));
 #else
-    sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, 0x400);
+    sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, sizeof(gWorldInspectBarTiles));
 #endif
     EnableBg(0);
     EnableBg(1);

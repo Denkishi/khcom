@@ -1868,7 +1868,7 @@ void StockInfo_0(StockInfoWork* work, u8* active) {
 
     work->active = active;
     TaskPoolInit(&work->tasks, 1);
-    work->tiles = LoadObjTiles(gStockInfoWindowTiles, 0x12A0);
+    work->tiles = LoadObjTiles(gStockInfoWindowTiles, sizeof(gStockInfoWindowTiles));
     work->palette = LoadObjPalette(gStockInfoWindowPalette, sizeof(gStockInfoWindowPalette));
 
     for (i = 16; i < 32; i++) {

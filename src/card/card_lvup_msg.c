@@ -86,7 +86,7 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* arg) {
     work->tiles = AllocSpriteFrameTiles(0x780);
     UpdateSpriteFrameTiles(work->tiles, gMsgBoxFrames[0], gMsgBoxTiles);
 #else
-    work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
+    work->tiles = LoadObjTiles(gMsgBoxTiles, sizeof(gMsgBoxTiles));
 #endif
     work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 }

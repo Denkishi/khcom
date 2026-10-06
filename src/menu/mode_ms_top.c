@@ -468,18 +468,18 @@ void mode_ms_top_0(u32 flags) {
     }
 
     sMsTopBarPalette = LoadObjPalette(gMsTopBarPalette, sizeof(gMsTopBarPalette));
-    sMsTopBarTiles = LoadObjTiles(gMsTopBarTiles, 0x400);
+    sMsTopBarTiles = LoadObjTiles(gMsTopBarTiles, sizeof(gMsTopBarTiles));
     sMsTopArrowPalette = LoadObjPalette(gMsTopArrowPalette, sizeof(gMsTopArrowPalette));
-    sMsTopArrowTiles = LoadObjTiles(gMsTopArrowTiles, 0x500);
+    sMsTopArrowTiles = LoadObjTiles(gMsTopArrowTiles, sizeof(gMsTopArrowTiles));
     AnimInit(&sMsTopArrowAnim, gMsTopArrowAnims, gMsTopArrowFrames);
     sMsTopSoraPalette = LoadObjPalette(gSoraPalette, sizeof(gSoraPalette));
-    sMsTopSoraTiles = LoadObjTiles(gSor1ll00Tiles, 0x300);
+    sMsTopSoraTiles = LoadObjTiles(gSor1ll00Tiles, sizeof(gSor1ll00Tiles));
     AnimInit(&sMsTopSoraAnim, gSor1ll00Anims, gSor1ll00Frames);
     AnimStart(&sMsTopSoraAnim, 0, ANIM_FLAG_LOOP);
     sMsTopShadowPalette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
-    sMsTopShadowTiles = LoadObjTiles(gBtlShadowTiles, 0x100);
+    sMsTopShadowTiles = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     sMsTopMooglePalette = LoadObjPalette(gMoguPalette, sizeof(gMoguPalette));
-    sMsTopMoogleTiles = LoadObjTiles(gMoguFl00Tiles, 0xC00);
+    sMsTopMoogleTiles = LoadObjTiles(gMoguFl00Tiles, sizeof(gMoguFl00Tiles));
     AnimInit(&sMsTopMoogleAnim, gMoguFl00Anims, gMoguFl00Frames);
     AnimStart(&sMsTopMoogleAnim, 0, ANIM_FLAG_LOOP);
     SetMsTopWarpAnim(sMsTopCursor);

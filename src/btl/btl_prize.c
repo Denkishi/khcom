@@ -38,7 +38,7 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     work->vz = -(GetRandom() % 897 + 768);
     angle = GetRandom();
 
-    work->tiles = LoadObjTiles(gBPuraizuTiles, 0x340);
+    work->tiles = LoadObjTiles(gBPuraizuTiles, sizeof(gBPuraizuTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->timer = 0;
     work->gfx2 = gBPuraizuFrame0;

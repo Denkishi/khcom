@@ -1007,7 +1007,7 @@ void DispCardname_0(DispCardnameWork* work, u16* text) {
     work->textPalette = textPalette;
     FadeSetPaletteExcluded(textPalette->index + 16, TRUE);
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
-    work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
+    work->tiles = LoadObjTiles(gMsgBoxTiles, sizeof(gMsgBoxTiles));
     work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_JP
     x = (DISPLAY_WIDTH - work->textSlotCount * 10) / 2;
@@ -1075,8 +1075,8 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->tiles2 = LoadObjTiles(work->cardBack->tiles, work->cardBack->tilesSize);
     work->tiles3 = LoadObjTiles(work->cardBack->tiles, work->cardBack->tilesSize);
     work->palette2 = LoadObjPalette(work->cardBack->palette, work->cardBack->paletteSize);
-    work->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
-    work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles4 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
+    work->tiles5 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->posX = args[0];
     work->posY = args[1];

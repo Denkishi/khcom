@@ -45,7 +45,7 @@ const void* GetFloorName() {
 void Task_MapFloor_0(MapFloorWork* work) {
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
-    work->tiles = LoadObjTiles(gMapNameBarTiles, 0x800);
+    work->tiles = LoadObjTiles(gMapNameBarTiles, sizeof(gMapNameBarTiles));
     work->palette = LoadObjPalette(gMapFloorNamePalette, sizeof(gMapFloorNamePalette));
     work->gfx = gMapNameBarFrames[0];
     work->timer = 120;

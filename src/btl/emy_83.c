@@ -317,7 +317,7 @@ void task_emy_83_b_3(Emy83bWork* work) {
 
 void task_emy_83_s_0(Emy83sWork* work, EmySpawn* spawn) {
     work->palette = LoadObjPalette(gEmy83Palette, sizeof(gEmy83Palette));
-    work->tiles = LoadObjTiles(gEmy8311bTiles, 0x40);
+    work->tiles = LoadObjTiles(gEmy8311bTiles, sizeof(gEmy8311bTiles));
     work->x = spawn->x;
     work->y = spawn->y;
     work->z = spawn->z;

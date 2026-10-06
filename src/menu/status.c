@@ -398,7 +398,7 @@ void task_status_bar_0(StatusBarWork* work) {
 #ifdef VERSION_EU
     work->tiles = LoadObjTiles(sStatusBarTiles[gLanguage], sStatusBarTileSizes[gLanguage]);
 #else
-    work->tiles = LoadObjTiles(gStatusBarTiles, 0x2E0);
+    work->tiles = LoadObjTiles(gStatusBarTiles, sizeof(gStatusBarTiles));
 #endif
     work->palette = LoadObjPalette(gStatusBarPalette, sizeof(gStatusBarPalette));
     work->steps = 16;
@@ -739,7 +739,7 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* tab) {
 #ifdef VERSION_EU
     work->tiles = LoadObjTiles(sStatusNewMarkTiles[gLanguage], sStatusNewMarkTileSizes[gLanguage]);
 #else
-    work->tiles = LoadObjTiles(gStatusNewMarkTiles, 0xC0);
+    work->tiles = LoadObjTiles(gStatusNewMarkTiles, sizeof(gStatusNewMarkTiles));
 #endif
     work->palette2 = LoadObjPalette(gStatusNewMarkPalette, sizeof(gStatusNewMarkPalette));
 #ifdef VERSION_EU

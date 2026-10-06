@@ -373,7 +373,7 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     work->angle = arg->index << 7;
     work->scaleX = 2;
     work->scaleY = 2;
-    work->tiles = LoadObjTiles(gBosLstBitTiles, 0x900);
+    work->tiles = LoadObjTiles(gBosLstBitTiles, sizeof(gBosLstBitTiles));
     work->palette = LoadObjPalette(gBosLstObjPalette, sizeof(gBosLstObjPalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gBosLstBitAnims, gBosLstBitFrames);

@@ -172,7 +172,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* arg) {
         break;
     }
 
-    work->tiles = LoadObjTiles(gBtlExpNextTiles, 0x360);
+    work->tiles = LoadObjTiles(gBtlExpNextTiles, sizeof(gBtlExpNextTiles));
     work->countThousands = 0;
     work->countHundreds = 0;
     work->countTens = 0;
@@ -393,7 +393,7 @@ void HCEffectName_3(HcEffectNameWork* work) {
 
 void NumberPlus_0(NumberPlusWork* work, NumberPlusArgs* args) {
     work->args = *args;
-    work->tiles = LoadObjTiles(gNumberPlusTiles, 128);
+    work->tiles = LoadObjTiles(gNumberPlusTiles, sizeof(gNumberPlusTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->x = work->args.x >> 8;
     work->y = (work->args.y >> 8) - 20;

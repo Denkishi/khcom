@@ -163,11 +163,11 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
             break;
         }
 
-        work->tiles2 = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
+        work->tiles2 = LoadObjTiles(gLargeDialogBoxTiles, sizeof(gLargeDialogBoxTiles));
 
         if (work->tiles2 == NULL) {
             work->fallbackFrame = TRUE;
-            work->tiles2 = LoadObjTiles(gSysMsgWinFallbackTiles, 0x680);
+            work->tiles2 = LoadObjTiles(gSysMsgWinFallbackTiles, sizeof(gSysMsgWinFallbackTiles));
         } else {
             work->fallbackFrame = FALSE;
         }
@@ -241,7 +241,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* task) {
             work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
             work->textPalette = LoadTextPalette(1);
             work->choiceVisible = TRUE;
-            work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
+            work->tiles = LoadObjTiles(gMsgBoxTiles, sizeof(gMsgBoxTiles));
             work->palette3 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_EU
             FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);
@@ -593,7 +593,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
             break;
         }
 
-        work->tiles2 = LoadObjTiles(gDialogBoxTiles, 0xC00);
+        work->tiles2 = LoadObjTiles(gDialogBoxTiles, sizeof(gDialogBoxTiles));
         work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
         FadeSetPaletteExcluded(work->palette4->index + 16, TRUE);
         break;
@@ -629,7 +629,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* task) {
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
     work->textPalette = LoadTextPalette(1);
     work->choiceVisible = TRUE;
-    work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
+    work->tiles = LoadObjTiles(gMsgBoxTiles, sizeof(gMsgBoxTiles));
     work->palette3 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 #ifdef VERSION_EU
     FadeSetPaletteExcluded(work->palette3->index + 16, TRUE);

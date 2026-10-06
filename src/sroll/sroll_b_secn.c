@@ -30,11 +30,7 @@ void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* arg) {
     work->scrollSpeed = arg->scrollSpeed;
 
     if (arg->index < 0) {
-#ifdef VERSION_JP
-        work->tiles = LoadObjTiles(gSrollSecnThemeSongTiles, 590 * 32);
-#else
-        work->tiles = LoadObjTiles(gSrollSecnThemeSongTiles, 606 * 32);
-#endif
+        work->tiles = LoadObjTiles(gSrollSecnThemeSongTiles, sizeof(gSrollSecnThemeSongTiles));
         work->palette = LoadObjPalette(gSrollSecnThemeSongPalette, sizeof(gSrollSecnThemeSongPalette));
         AnimInit(&work->anim, gSrollSecnThemeSongAnims, gSrollSecnThemeSongFrames);
         AnimStart(&work->anim, 0, 0);

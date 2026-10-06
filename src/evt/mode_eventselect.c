@@ -422,7 +422,7 @@ void Hanabira_c_0(EffectWork* work, EventCharaWork* chara) {
     work->actor = chara;
     obj = &chara->obj;
     work->palette = LoadObjPalette(gMaruxhaBtEffPalette, sizeof(gMaruxhaBtEffPalette));
-    work->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, 256);
+    work->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, sizeof(gMaruxhaBtEff2Tiles));
     work->x = obj->x;
     work->y = obj->y;
     work->z = obj->z - 0x3000;

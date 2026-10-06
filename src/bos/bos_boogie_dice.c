@@ -728,7 +728,7 @@ u8 BosBoogieIsActorPastSaku() {
 
 void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
     work->boogie = arg;
-    work->tiles = LoadObjTiles(gSakuTiles, 0x2E0);
+    work->tiles = LoadObjTiles(gSakuTiles, sizeof(gSakuTiles));
     work->palette = LoadObjPalette(gBoss02objPalette, sizeof(gBoss02objPalette));
     AnimInit(&work->anim, gSakuAnims, gSakuFrames);
     AnimStart(&work->anim, 0, 0);
@@ -1146,7 +1146,7 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     work->obj.z = -0xC000;
     work->obj.x = *arg;
     ColliderInit(&work->obj.collider, 8, sBosBoogieKnifeEmyKind.radius, sBosBoogieKnifeEmyKind.height);
-    work->tiles = LoadObjTiles(gKnifeTiles, 0xC40);
+    work->tiles = LoadObjTiles(gKnifeTiles, sizeof(gKnifeTiles));
     work->palette = LoadObjPalette(gKnifePalette, sizeof(gKnifePalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gKnifeAnims, gKnifeFrames);
@@ -1425,7 +1425,7 @@ void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg) {
     z = arg->actor.z - 0x7C00;
     InitEnemyBtlObj(&work->obj, &sBosBoogieKaihukuEmyKind, x, y, z);
     work->obj.flags |= 0x400;
-    work->tiles = LoadObjTiles(gKaifukuTiles, 0x400);
+    work->tiles = LoadObjTiles(gKaifukuTiles, sizeof(gKaifukuTiles));
     work->palette = LoadObjPalette(gKaifukuPalette, sizeof(gKaifukuPalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     AnimInit(&work->anim, gKaifukuAnims, gKaifukuFrames);

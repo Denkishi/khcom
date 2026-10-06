@@ -167,7 +167,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     AnimInit(&work->anim2, gSmallHandCursorAnims, gSmallHandCursorFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    work->tiles7 = LoadObjTiles(gMapSelectBarTiles, 0xC0);
+    work->tiles7 = LoadObjTiles(gMapSelectBarTiles, sizeof(gMapSelectBarTiles));
     work->y3 = -0x800;
     work->y4 = 0xA000;
     work->barSteps = 16;
@@ -181,7 +181,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
 #ifdef VERSION_EU
     gMapCardUiResources.extraTiles = LoadObjTiles(gMapCardUiExtraTilesByLanguage[gLanguage], gMapCardUiExtraTileSizes[gLanguage]);
 #else
-    gMapCardUiResources.extraTiles = LoadObjTiles(gMapCardUiExtraTiles, 0x360);
+    gMapCardUiResources.extraTiles = LoadObjTiles(gMapCardUiExtraTiles, sizeof(gMapCardUiExtraTiles));
 #endif
     gMapCardUiResources.palette = work->palette3;
 #ifdef VERSION_EU
@@ -189,7 +189,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
 #else
     gMapCardUiResources.sprites = gMapCardUiExtraFrames;
 #endif
-    work->tiles6 = LoadObjTiles(gMapSelectScrollBarTiles, 32);
+    work->tiles6 = LoadObjTiles(gMapSelectScrollBarTiles, sizeof(gMapSelectScrollBarTiles));
     work->page = 0;
     work->lastPage = 0;
     work->card = ListPoolFirst(&work->cards);
@@ -245,27 +245,27 @@ u8 MapSelect_1(MapSelectWork* work, void* task) {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles3 = LoadObjTiles(gMapSelectTitleTiles, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleTiles, sizeof(gMapSelectTitleTiles));
         break;
     case LANGUAGE_FRENCH:
-        work->tiles3 = LoadObjTiles(gMapSelectTitleFrenchTiles, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleFrenchTiles, sizeof(gMapSelectTitleFrenchTiles));
         RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_GERMAN:
-        work->tiles3 = LoadObjTiles(gMapSelectTitleGermanTiles, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleGermanTiles, sizeof(gMapSelectTitleGermanTiles));
         RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles3 = LoadObjTiles(gMapSelectTitleItalianTiles, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleItalianTiles, sizeof(gMapSelectTitleItalianTiles));
         RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_SPANISH:
-        work->tiles3 = LoadObjTiles(gMapSelectTitleSpanishTiles, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleSpanishTiles, sizeof(gMapSelectTitleSpanishTiles));
         RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     }
 #else
-    work->tiles3 = LoadObjTiles(gMapSelectTitleTiles, 0x400);
+    work->tiles3 = LoadObjTiles(gMapSelectTitleTiles, sizeof(gMapSelectTitleTiles));
     LoadBgTiles(1, gMapSelectTiles, 0x2020);
 #endif
     LoadPalette(gMapSelectBgPalettes, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
@@ -2203,7 +2203,7 @@ void UpdateMapcardGfx(MapcardWork* work) {
             work->palette = LoadObjPalette(def->palette, 32);
             work->tiles3 = LoadObjTiles(back->tiles, back->tilesSize);
             work->palette2 = LoadObjPalette(back->palette, 32);
-            work->tiles = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+            work->tiles = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
             FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
             FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
             flags = work->flags | MAPCARD_FLAG_GFX_LOADED;
@@ -2335,7 +2335,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* arg) {
     work->tiles4 = AllocObjTiles(0x80, NULL);
     SetObjTileSource(work->tiles4, gReloadCardTiles[1]);
     InitReloadGageAnims(work->reloadGauge, work, work->args.listIndex);
-    work->tiles = LoadObjTiles(gAButtonIconTiles, 0x80);
+    work->tiles = LoadObjTiles(gAButtonIconTiles, sizeof(gAButtonIconTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->tiles5 = AllocObjTiles(0x100, NULL);
     SetObjTileSource(work->tiles5, gReloadCounterTiles[work->args.listIndex]);

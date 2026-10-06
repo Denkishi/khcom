@@ -2903,7 +2903,7 @@ void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** tiles, void* palette,
 }
 
 void* LoadSmallFontTiles() {
-    return LoadObjTiles(gSmallFontTiles, 0x5A0);
+    return LoadObjTiles(gSmallFontTiles, sizeof(gSmallFontTiles));
 }
 
 void* LoadSmallFontPalette() {

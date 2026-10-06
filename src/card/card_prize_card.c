@@ -55,8 +55,8 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     work->tiles2 = LoadObjTiles(back->tiles, 0x280);
     work->tiles3 = LoadObjTiles(back->tiles3, 0x600);
     work->palette2 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
-    work->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
-    work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles4 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
+    work->tiles5 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     work->pos.x = args.x;
     work->pos.y = args.y;

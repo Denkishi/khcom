@@ -1292,12 +1292,12 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->handX = sDeckTabPointerX[0] << 8;
     work->handY = sDeckTabPointerY[0] << 8;
     work->handFlags = 0;
-    work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
+    work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, sizeof(gDeckScrollThumbTiles));
     work->palette = LoadObjPalette(gDialogBoxPalette, sizeof(gDialogBoxPalette));
 #ifdef VERSION_EU
     work->tiles5 = LoadObjTiles(gDeckButtonLabelTilesByLanguage[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
 #else
-    work->tiles5 = LoadObjTiles(gDeckButtonLabelTiles, 0x280);
+    work->tiles5 = LoadObjTiles(gDeckButtonLabelTiles, sizeof(gDeckButtonLabelTiles));
 #endif
 #ifdef VERSION_EU
     work->gfx7 = gDeckButtonLabelSpritesByLanguage[gLanguage][0];
@@ -1542,17 +1542,17 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* task) {
         LoadDeckNameTexts(work);
         work->handX = sDeckTabPointerX[work->cursorCol] << 8;
         work->handY = sDeckTabPointerY[work->cursorRow] << 8;
-        work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
+        work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, sizeof(gDeckMenuBarTiles));
 #ifdef VERSION_EU
         work->tiles12 = LoadObjTiles(gDeckTitleBannerTilesByLanguage[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
+            work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, sizeof(gRikuDeckTitleBannerTiles));
         } else {
-            work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles, 0x320);
+            work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles, sizeof(gDeckTitleBannerTiles));
         }
 #else
-        work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
+        work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, sizeof(gRikuDeckTitleBannerTiles));
 #endif
         work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
         work->step = DECK_MENU_SLIDE_IN_STEP_VERTICAL;
@@ -2870,7 +2870,7 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
     work->tiles3 = LoadObjTiles(gDeckCommandMenuTilesByLanguage[gLanguage], sDeckCommandMenuTileSizes[gLanguage]);
 #else
-    work->tiles3 = LoadObjTiles(gDeckCommandMenuTiles, 0x1800);
+    work->tiles3 = LoadObjTiles(gDeckCommandMenuTiles, sizeof(gDeckCommandMenuTiles));
 #endif
     work->palette2 = LoadObjPalette(gDeckCommandMenuPalette, sizeof(gDeckCommandMenuPalette));
     SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_ROW);
@@ -4079,18 +4079,18 @@ u8 UpdateDeckMenuFadeOut(DeckMenuWork* work) {
 }
 
 u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* task) {
-    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
+    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, sizeof(gDeckMenuBarTiles));
 
 #ifdef VERSION_EU
     work->tiles12 = LoadObjTiles(gDeckTitleBannerTilesByLanguage[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
+        work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, sizeof(gRikuDeckTitleBannerTiles));
     } else {
-        work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles, 0x320);
+        work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles, sizeof(gDeckTitleBannerTiles));
     }
 #else
-    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, sizeof(gRikuDeckTitleBannerTiles));
 #endif
 
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
@@ -5360,7 +5360,7 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
         work->gfx5 = def->gfx;
 
         if ((id & CARD_ID_MASK) <= 0x1C1) {
-            work->tiles9 = LoadObjTiles(gCardValueDigitTiles, 480);
+            work->tiles9 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
             work->gfx6 = gCardValueDigitFrames[def->value];
         }
 

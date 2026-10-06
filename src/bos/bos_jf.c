@@ -707,9 +707,9 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     speed.fraction = 0x80;
     work->jf = arg;
     work->vx = speed.integer * 256 + speed.fraction;
-    work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->tiles = LoadObjTiles(gBosJfObjTiles, sizeof(gBosJfObjTiles));
     work->gfx = gBosJfObjFrames[12];
-    work->tiles2 = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->tiles2 = LoadObjTiles(gBosJfObjTiles, sizeof(gBosJfObjTiles));
     work->gfx2 = gBosJfObjFrames[14];
     work->palette = LoadObjPalette(gBosJfObjPalette, sizeof(gBosJfObjPalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));

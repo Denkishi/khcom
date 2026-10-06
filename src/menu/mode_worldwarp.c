@@ -626,33 +626,33 @@ void mode_worldwarp_0() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarTiles, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarTiles, sizeof(gWorldWarpBarTiles));
         break;
     case LANGUAGE_FRENCH:
-        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarFrenchTiles, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarFrenchTiles, sizeof(gWorldWarpBarFrenchTiles));
         break;
     case LANGUAGE_SPANISH:
-        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarSpanishTiles, 0x440);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarSpanishTiles, sizeof(gWorldWarpBarSpanishTiles));
         break;
     case LANGUAGE_ITALIAN:
-        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarItalianTiles, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarItalianTiles, sizeof(gWorldWarpBarItalianTiles));
         break;
     case LANGUAGE_GERMAN:
     default:
-        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarGermanTiles, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarGermanTiles, sizeof(gWorldWarpBarGermanTiles));
         break;
     }
 #else
-    sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarTiles, 0x500);
+    sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarTiles, sizeof(gWorldWarpBarTiles));
 #endif
     sWorldWarpHighlightPalette = LoadObjPalette(gWorldWarpHighlightPalette, sizeof(gWorldWarpHighlightPalette));
-    sWorldWarpHighlightTiles = LoadObjTiles(gWorldWarpHighlightTiles, 0x680);
+    sWorldWarpHighlightTiles = LoadObjTiles(gWorldWarpHighlightTiles, sizeof(gWorldWarpHighlightTiles));
     AnimInit(&sWorldWarpHighlightAnim, gWorldWarpHighlightAnims, gWorldWarpHighlightFrames);
     AnimStart(&sWorldWarpHighlightAnim, 0, ANIM_FLAG_LOOP);
     AnimInit(&sWorldWarpArrowAnim, gWorldWarpHighlightAnims, gWorldWarpHighlightFrames);
     AnimStart(&sWorldWarpArrowAnim, 1, ANIM_FLAG_LOOP);
     sWorldWarpCursorPalette = LoadObjPalette(gWorldWarpCursorPalette, sizeof(gWorldWarpCursorPalette));
-    sWorldWarpCursorTiles = LoadObjTiles(gWorldWarpCursorTiles, 192);
+    sWorldWarpCursorTiles = LoadObjTiles(gWorldWarpCursorTiles, sizeof(gWorldWarpCursorTiles));
     AnimInit(&sWorldWarpCursorAnim, gWorldWarpCursorAnims, gWorldWarpCursorFrames);
     AnimStart(&sWorldWarpCursorAnim, 0, ANIM_FLAG_LOOP);
     InitTextSlots(sWorldWarpCurrentName, ARRAY_COUNT(sWorldWarpCurrentName));

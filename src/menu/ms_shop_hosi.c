@@ -21,7 +21,7 @@ void task_ms_shop_hosi_0(MsShopHosiWork* work, MsShopHosiArg* arg) {
     work->frame = 0;
     work->timer = work->frameDuration = GetRandom() % 8 + 4;
     work->palette = arg->palette;
-    work->tiles = LoadObjTiles(gMsShopHosiTiles, 0x1E0);
+    work->tiles = LoadObjTiles(gMsShopHosiTiles, sizeof(gMsShopHosiTiles));
 }
 
 s32 task_ms_shop_hosi_1(MsShopHosiWork* work) {

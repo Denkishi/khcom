@@ -36,7 +36,7 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     work->vz = -(GetRandom() % 897 + 768);
     angle = GetRandom();
 
-    work->tiles = LoadObjTiles(gBPuraizuTiles, 0x340);
+    work->tiles = LoadObjTiles(gBPuraizuTiles, sizeof(gBPuraizuTiles));
     work->palette = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     AnimInit(&work->anim, gBPuraizuAnims, gBPuraizuFrames);
     AnimStart(&work->anim, 10, ANIM_FLAG_LOOP);

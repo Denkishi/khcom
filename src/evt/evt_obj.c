@@ -152,9 +152,9 @@ void task_evt_obj_3(EvtObjWork* work) {
 
 void task_evt_shadow_0(EvtShadowWork* work, EvtObj* obj) {
     work->obj = obj;
-    work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
-    work->tiles2 = LoadObjTiles(gBtlShadowLargeTiles, 0x140);
+    work->tiles = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
+    work->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, sizeof(gBtlShadowSmallTiles));
+    work->tiles2 = LoadObjTiles(gBtlShadowLargeTiles, sizeof(gBtlShadowLargeTiles));
     work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
 }
 

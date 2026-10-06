@@ -147,7 +147,7 @@ void task_bos_lst_lsr_0(LstLsrWork* work, LstLsrArg* arg) {
     work->facing = arg->facing;
     work->falCount = arg->falCount;
     work->state = BOS_LST_LSR_STATE_IDLE;
-    work->tiles = LoadObjTiles(gBosLstBitTiles, 0x900);
+    work->tiles = LoadObjTiles(gBosLstBitTiles, sizeof(gBosLstBitTiles));
     work->palette = LoadObjPalette(gBosLstObjPalette, sizeof(gBosLstObjPalette));
     AnimInit(&work->anim, gBosLstBitAnims, gBosLstBitFrames);
     AnimStart(&work->anim, 4, 0);

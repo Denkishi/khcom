@@ -6999,7 +6999,7 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* arg) {
     AnimInit(&work->anim2, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    work->tiles3 = LoadObjTiles(gMsgBoxTiles, 4032);
+    work->tiles3 = LoadObjTiles(gMsgBoxTiles, sizeof(gMsgBoxTiles));
     work->palette3 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
     LoadObjPaletteBank(work->palette3->index, gCard00Palette);
     FadeSetPaletteExcluded(work->palette->index + 16, TRUE);

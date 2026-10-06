@@ -645,7 +645,7 @@ void BosTmBodyUpdateReaction(BtlObj* obj, TmBodyWork* work) {
 }
 
 void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
-    work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
+    work->tiles = LoadObjTiles(gBosTmObjTiles, sizeof(gBosTmObjTiles));
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     work->gfx = gBosTmBodyPart0Frames[0];

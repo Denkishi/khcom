@@ -375,7 +375,7 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* task) {
             AnimInit(&work->anim3, gHandCursorAnims, gHandCursorFrames);
             AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
             work->gfx3 = AnimGetGfx(&work->anim3);
-            work->tiles2 = LoadObjTiles(gMsgBoxTiles, 0xFC0);
+            work->tiles2 = LoadObjTiles(gMsgBoxTiles, sizeof(gMsgBoxTiles));
             work->palette4 = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
             work->choice = 0;
             work->cursorX = 0x5800;

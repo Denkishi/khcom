@@ -78,7 +78,7 @@ void ContinueSora_0(ContinueWork* work) {
     BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
-    work->tiles3 = LoadObjTiles(gContinueLineTiles, 192);
+    work->tiles3 = LoadObjTiles(gContinueLineTiles, sizeof(gContinueLineTiles));
     work->palette3 = LoadObjPalette(gContinueLinePalette, sizeof(gContinueLinePalette));
     LoadContinueCursorPalette(work->cursor);
     work->tiles = AllocObjTiles(512, NULL);
@@ -148,7 +148,7 @@ void ContinueRiku_0(ContinueWork* work) {
     BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
-    work->tiles3 = LoadObjTiles(gContinueLineTiles, 192);
+    work->tiles3 = LoadObjTiles(gContinueLineTiles, sizeof(gContinueLineTiles));
     work->palette3 = LoadObjPalette(gContinueLinePalette, sizeof(gContinueLinePalette));
     LoadContinueCursorPalette(work->cursor);
     work->tiles = AllocObjTiles(512, NULL);

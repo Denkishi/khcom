@@ -22,7 +22,7 @@ void Task_MapDmg_0(MapDmgWork* work) {
 
     work->visible = zero;
     work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
-    work->tiles = LoadObjTiles(gBtlAreaTiles, 224);
+    work->tiles = LoadObjTiles(gBtlAreaTiles, sizeof(gBtlAreaTiles));
     work->timer = zero;
     work->enabled = TRUE;
 }

@@ -225,7 +225,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
 #ifdef VERSION_EU
     work->tiles = gBtlWork->tiles3;
 #else
-    work->tiles = LoadObjTiles(gBosUrsulaBubbleTiles, 0xA80);
+    work->tiles = LoadObjTiles(gBosUrsulaBubbleTiles, sizeof(gBosUrsulaBubbleTiles));
 #endif
     work->palette = LoadObjPalette(gBosUrsulaTakoPalette, sizeof(gBosUrsulaTakoPalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));

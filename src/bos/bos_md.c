@@ -1039,7 +1039,7 @@ void task_bos_md_0(MdWork* work, void* arg) {
     }
 
     work->gfx[0].tiles = AllocSpriteFrameTiles(2432);
-    work->gfx[1].tiles = LoadObjTiles(gBosMdForearmTiles, 0x12A0);
+    work->gfx[1].tiles = LoadObjTiles(gBosMdForearmTiles, sizeof(gBosMdForearmTiles));
     gBtlWork->bossX = 0x11000;
     gBtlWork->bossY = 0x15000;
     gBtlWork->bossZ = 0;
@@ -1498,7 +1498,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     SetBtlObjUnhittable(&work->sub, TRUE);
     work->palette = LoadObjPalette(gBosMdFirePalette, sizeof(gBosMdFirePalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
-    work->tiles = LoadObjTiles(gBosMdFireTiles, 0x800);
+    work->tiles = LoadObjTiles(gBosMdFireTiles, sizeof(gBosMdFireTiles));
     AnimInit(&work->anim, gBosMdFireAnims, gBosMdFireFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     fireArg.pool = NULL;
@@ -1600,7 +1600,7 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     ColliderSetPosition(collider, work->x, work->y, work->z);
     ColliderSetDisabled(collider, TRUE);
     work->palette = LoadObjPalette(gBosMdDaiPalette, sizeof(gBosMdDaiPalette));
-    work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
+    work->tiles = LoadObjTiles(gBosMdDaiTiles, sizeof(gBosMdDaiTiles));
 }
 
 s32 task_bos_md_dai_1(MdDaiWork* work) {
@@ -1732,7 +1732,7 @@ void task_bos_md_hahen_0(MdHahenWork* work, s32* src) {
     work->vz = -((GetRandom() & 0x1FF) + 0x100);
     work->timer = 3;
     work->palette = LoadObjPalette(gBosMdDaiPalette, sizeof(gBosMdDaiPalette));
-    work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
+    work->tiles = LoadObjTiles(gBosMdDaiTiles, sizeof(gBosMdDaiTiles));
     work->gfx = gBosMdDaiFrames[GetRandom() % 2];
 }
 

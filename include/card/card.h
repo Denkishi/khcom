@@ -367,6 +367,11 @@ typedef struct CardMessageArgs {
     u32 mode : 8;
 } CardMessageArgs;
 
+enum DeckCard2Panel {
+    DECK_CARD2_PANEL_DECK,
+    DECK_CARD2_PANEL_COLLECTION
+};
+
 typedef struct DeckCard2Args {
     void* pool;
     u16 cardId;

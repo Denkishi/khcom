@@ -1248,6 +1248,15 @@ static const s16 sDeckFilterTabX[5] = { 12, 28, 42, 56, 70 };
 
 static const s16 sCollectionFilterTabX[6] = { 172, 172, 188, 202, 216, 230 };
 
+enum DeckCommand {
+    DECK_COMMAND_EQUIP,
+    DECK_COMMAND_RENAME,
+    DECK_COMMAND_CLEAR,
+    DECK_COMMAND_ADD,
+    DECK_COMMAND_REMOVE,
+    DECK_COMMAND_DELETE
+};
+
 static const s16 sDeckCommandY[6] = { 50, 67, 85, 108, 126, 149 };
 
 static const s16 sValueGridX[2] = { 80, 128 };
@@ -1331,7 +1340,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->prevCursor[0] = 0;
     work->prevCursor[1] = 0;
     work->timer = 16;
-    work->commandCursor = 0;
+    work->commandCursor = DECK_COMMAND_EQUIP;
     work->cursorCard = NULL;
     work->prevCursorCard = NULL;
     work->mode = DECK_MENU_MODE_NONE;
@@ -2112,7 +2121,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
             work->cursorCol--;
             work->timer = 1;
 
-            if ((u8)MoveValueCursor(work, 32)) {
+            if ((u8)MoveValueCursor(work, DPAD_LEFT)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -2126,7 +2135,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
             work->cursorCol++;
             work->timer = 1;
 
-            if ((u8)MoveValueCursor(work, 16)) {
+            if ((u8)MoveValueCursor(work, DPAD_RIGHT)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -2143,7 +2152,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
         }
 
         work->timer = 1;
-        MoveValueCursor(work, 64);
+        MoveValueCursor(work, DPAD_UP);
 
         if (prevRow != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -2161,7 +2170,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
         }
 
         work->timer = 1;
-        MoveValueCursor(work, 128);
+        MoveValueCursor(work, DPAD_DOWN);
 
         if (prevRow != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -2313,7 +2322,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
             work->cursorCol--;
             work->timer = 1;
 
-            if ((u8)MoveValueCursor(work, 32)) {
+            if ((u8)MoveValueCursor(work, DPAD_LEFT)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -2327,7 +2336,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
             work->cursorCol++;
             work->timer = 1;
 
-            if ((u8)MoveValueCursor(work, 16)) {
+            if ((u8)MoveValueCursor(work, DPAD_RIGHT)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -2344,7 +2353,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
         }
 
         work->timer = 1;
-        MoveValueCursor(work, 64);
+        MoveValueCursor(work, DPAD_UP);
 
         if (n != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -2362,7 +2371,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
         }
 
         work->timer = 1;
-        MoveValueCursor(work, 128);
+        MoveValueCursor(work, DPAD_DOWN);
 
         if (n != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -2896,20 +2905,20 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
 
     switch (GetKeysRepeat()) {
     case DPAD_UP:
-        if (work->commandCursor != 0) {
+        if (work->commandCursor != DECK_COMMAND_EQUIP) {
             work->commandCursor--;
         } else {
-            work->commandCursor = 5;
+            work->commandCursor = DECK_COMMAND_DELETE;
         }
 
         m4aSongNumStart(SONG_SYS_CLICK);
         work->timer = 1;
         break;
     case DPAD_DOWN:
-        if (work->commandCursor < 5) {
+        if (work->commandCursor < DECK_COMMAND_DELETE) {
             work->commandCursor++;
         } else {
-            work->commandCursor = 0;
+            work->commandCursor = DECK_COMMAND_EQUIP;
         }
 
         work->timer = 1;
@@ -2956,14 +2965,14 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
         break;
     case A_BUTTON:
         switch (work->commandCursor) {
-        case 0:
+        case DECK_COMMAND_EQUIP:
             SetActiveDeckIndex(work->deckIndex);
             DrawDeckEquipMarker(work->deckIndex);
             TaskCreate(&work->cardpool, &gTaskDescDeckEquip, &work->popupActive);
             m4aSongNumStart(SONG_SYS_DECKSET);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuCloseCommands);
             return 1;
-        case 1:
+        case DECK_COMMAND_RENAME:
             m4aSongNumStart(SONG_SYS_KETTEI);
             ClearCardGrid(work);
             work->step = 0;
@@ -2973,22 +2982,22 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
 #endif
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenKeyboard);
             break;
-        case 2:
+        case DECK_COMMAND_CLEAR:
             m4aSongNumStart(SONG_SYS_KETTEI);
             work->view = DECK_MENU_VIEW_CLEAR_PROMPT;
             TaskCreate(&work->cardpool, &gTaskDescDeckClear, &work->popupActive);
             work->promptChoice = 1;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuClearPrompt);
             return 1;
-        case 3:
+        case DECK_COMMAND_ADD:
             m4aSongNumStart(SONG_SYS_KETTEI);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
             break;
-        case 4:
+        case DECK_COMMAND_REMOVE:
             m4aSongNumStart(SONG_SYS_KETTEI);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
             break;
-        case 5:
+        case DECK_COMMAND_DELETE:
             m4aSongNumStart(SONG_SYS_KETTEI);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuOpenDeleteMode);
             break;
@@ -3034,12 +3043,12 @@ u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* task) {
     SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
 
     switch (work->commandCursor) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
+    case DECK_COMMAND_EQUIP:
+    case DECK_COMMAND_RENAME:
+    case DECK_COMMAND_CLEAR:
+    case DECK_COMMAND_ADD:
+    case DECK_COMMAND_REMOVE:
+    case DECK_COMMAND_DELETE:
         if (work->prevView == DECK_MENU_VIEW_DECK_GRID) {
             work->view = DECK_MENU_VIEW_DECK_GRID;
             SetDeckMenuHandAnim(work);
@@ -4445,7 +4454,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
                     args.row = y;
-                    args.panel = 0;
+                    args.panel = DECK_CARD2_PANEL_DECK;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
@@ -4453,7 +4462,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
                     args.row = y;
-                    args.panel = 0;
+                    args.panel = DECK_CARD2_PANEL_DECK;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 }
@@ -4462,7 +4471,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                 args.cardId = CARD_ID_NONE;
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &deck[i];
                 TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
             }
@@ -4481,7 +4490,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                 args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &deck[i];
                 TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
@@ -4520,7 +4529,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 categoryFilter, u8 excludeB
                         work->entries[i].kind);
                     args.col = x;
                     args.row = y;
-                    args.panel = 1;
+                    args.panel = DECK_CARD2_PANEL_COLLECTION;
                     args.slot = NULL;
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                     x++;
@@ -4534,7 +4543,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 categoryFilter, u8 excludeB
                 if (gCardDefs[args.cardId & CARD_ID_MASK].category == categoryFilter - 1) {
                     args.col = x;
                     args.row = y;
-                    args.panel = 1;
+                    args.panel = DECK_CARD2_PANEL_COLLECTION;
                     args.slot = NULL;
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                     x++;
@@ -4558,7 +4567,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 categoryFilter, u8 excludeB
                             work->entries[i].kind);
                         args.col = x;
                         args.row = y;
-                        args.panel = 1;
+                        args.panel = DECK_CARD2_PANEL_COLLECTION;
                         args.slot = NULL;
                         TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                         x++;
@@ -4575,7 +4584,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 categoryFilter, u8 excludeB
                         64) {
                         args.col = x;
                         args.row = y;
-                        args.panel = 1;
+                        args.panel = DECK_CARD2_PANEL_COLLECTION;
                         args.slot = NULL;
                         TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                         x++;
@@ -5463,7 +5472,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
     }
 
     switch (keys) {
-    case 64:
+    case DPAD_UP:
         do {
             cursorRow = *(u16*)&work->cursorRow;
             *(u16*)&work->cursorRow = (s16)cursorRow > 0 ? cursorRow - 1 : 4;
@@ -5475,7 +5484,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
         } while (entry->valueCounts[idx] == 0);
 
         break;
-    case 128:
+    case DPAD_DOWN:
         do {
             cursorRow = *(u16*)&work->cursorRow;
             *(u16*)&work->cursorRow = (s16)cursorRow <= 3 ? cursorRow + 1 : 0;
@@ -5487,7 +5496,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
         } while (entry->valueCounts[idx] == 0);
 
         break;
-    case 32:
+    case DPAD_LEFT:
         if (entry->valueCounts[work->cursorRow] != 0) {
             if ((s16)cursorCol > 0) {
                 *(u16*)&work->cursorCol = cursorCol - 1;
@@ -5537,7 +5546,7 @@ s32 MoveValueCursor(DeckMenuWork* work, u16 keys) {
         }
 
         goto store;
-    case 16:
+    case DPAD_RIGHT:
         if (entry->valueCounts[work->cursorRow + 5] != 0) {
             if ((s16)cursorCol <= 0) {
                 *(u16*)&work->cursorCol = cursorCol + 1;
@@ -5999,14 +6008,14 @@ u8 FindCardInDirection(DeckMenuWork* work, s16 x, s16 y, u16 dir) {
     }
 
     switch (dir) {
-    case 0x40:
-        return FindCardInDirection(work, x, y - 1, 0x40);
-    case 0x80:
-        return FindCardInDirection(work, x, y + 1, 0x80);
-    case 0x20:
-        return FindCardInDirection(work, x - 1, y, 0x20);
-    case 0x10:
-        return FindCardInDirection(work, x + 1, y, 0x10);
+    case DPAD_UP:
+        return FindCardInDirection(work, x, y - 1, DPAD_UP);
+    case DPAD_DOWN:
+        return FindCardInDirection(work, x, y + 1, DPAD_DOWN);
+    case DPAD_LEFT:
+        return FindCardInDirection(work, x - 1, y, DPAD_LEFT);
+    case DPAD_RIGHT:
+        return FindCardInDirection(work, x + 1, y, DPAD_RIGHT);
     }
 
     return FALSE;
@@ -6031,7 +6040,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
                     args.row = y;
-                    args.panel = 0;
+                    args.panel = DECK_CARD2_PANEL_DECK;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
@@ -6039,7 +6048,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
                     args.row = y;
-                    args.panel = 0;
+                    args.panel = DECK_CARD2_PANEL_DECK;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 }
@@ -6048,7 +6057,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                 args.cardId = CARD_ID_NONE;
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &deck[i];
                 TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
             }
@@ -6067,7 +6076,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
                 args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &deck[i];
                 TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
@@ -6247,6 +6256,13 @@ u8 SwapHeldDeckCard(DeckMenuWork* work) {
     return TRUE;
 }
 
+enum DeckKeyboardPage {
+    DECK_KEYBOARD_PAGE_HIRAGANA,
+    DECK_KEYBOARD_PAGE_KATAKANA,
+    DECK_KEYBOARD_PAGE_ALPHANUMERIC,
+    DECK_KEYBOARD_PAGE_SYMBOLS
+};
+
 u8 WrapKanaKeyboardCursor(DeckMenuWork* work, u16 dir) {
     u16 row;
     u16 row2;
@@ -6255,36 +6271,36 @@ u8 WrapKanaKeyboardCursor(DeckMenuWork* work, u16 dir) {
 
     if ((s16)row == 3 && (u16)work->cursor.parts.x > 9) {
         switch (dir) {
-        case 0x40:
+        case DPAD_UP:
             work->cursor.parts.y = row - 1;
             break;
-        case 0x80:
+        case DPAD_DOWN:
             work->cursor.parts.y = row + 1;
             break;
-        case 0x20:
+        case DPAD_LEFT:
             work->cursor.parts.x = 9;
             break;
-        case 0x10:
+        case DPAD_RIGHT:
             work->cursor.parts.x = 0;
             break;
         }
     }
 
-    if (work->keyboardPage == 0) {
+    if (work->keyboardPage == DECK_KEYBOARD_PAGE_HIRAGANA) {
         row2 = work->cursor.parts.y;
 
         if ((s16)row2 == 5 && (u16)(work->cursor.parts.x - 5) <= 4) {
             switch (dir) {
-            case 0x40:
+            case DPAD_UP:
                 work->cursor.parts.y = row2 - 1;
                 break;
-            case 0x80:
+            case DPAD_DOWN:
                 work->cursor.parts.y = row2 + 1;
                 break;
-            case 0x20:
+            case DPAD_LEFT:
                 work->cursor.parts.x = 4;
                 break;
-            case 0x10:
+            case DPAD_RIGHT:
                 work->cursor.parts.x = 10;
                 break;
             }
@@ -6308,7 +6324,7 @@ u8 WrapKanaKeyboardCursor(DeckMenuWork* work, u16 dir) {
     }
 
     if (work->cursor.parts.y == 6 && work->cursor.parts.x > 11) {
-        if (work->cursor.parts.x == 13 && dir == 0x20) {
+        if (work->cursor.parts.x == 13 && dir == DPAD_LEFT) {
             work->cursor.parts.x = 11;
             AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
         } else {
@@ -6325,16 +6341,16 @@ u8 WrapKanaKeyboardCursor(DeckMenuWork* work, u16 dir) {
 u8 WrapKeyboardCursor(DeckMenuWork* work, u16 keys) {
     if (work->cursor.parts.y == 1 && (u16)work->cursor.parts.x > 10) {
         switch (keys) {
-        case 64:
+        case DPAD_UP:
             work->cursor.parts.y--;
             break;
-        case 128:
+        case DPAD_DOWN:
             work->cursor.parts.y++;
             break;
-        case 32:
+        case DPAD_LEFT:
             work->cursor.parts.x = 10;
             break;
-        case 16:
+        case DPAD_RIGHT:
             work->cursor.parts.x = 0;
             break;
         }
@@ -6342,16 +6358,16 @@ u8 WrapKeyboardCursor(DeckMenuWork* work, u16 keys) {
 
     if (work->cursor.parts.y == 3 && (u16)work->cursor.parts.x > 10) {
         switch (keys) {
-        case 64:
+        case DPAD_UP:
             work->cursor.parts.y--;
             break;
-        case 128:
+        case DPAD_DOWN:
             work->cursor.parts.y++;
             break;
-        case 32:
+        case DPAD_LEFT:
             work->cursor.parts.x = 10;
             break;
-        case 16:
+        case DPAD_RIGHT:
             work->cursor.parts.x = 0;
             break;
         }
@@ -6364,20 +6380,20 @@ u8 WrapKeyboardCursor(DeckMenuWork* work, u16 keys) {
     if (work->cursor.parts.y == 5 && (u16)work->cursor.parts.x > 9) {
 #endif
         switch (keys) {
-        case 64:
+        case DPAD_UP:
 #ifdef VERSION_JP
             work->cursor.parts.y -= 2;
 #else
             work->cursor.parts.y--;
 #endif
             break;
-        case 128:
+        case DPAD_DOWN:
             work->cursor.parts.y++;
             break;
-        case 32:
+        case DPAD_LEFT:
             work->cursor.parts.x = 9;
             break;
-        case 16:
+        case DPAD_RIGHT:
             work->cursor.parts.x = 0;
             break;
         }
@@ -6431,7 +6447,7 @@ u8 WrapKeyboardCursor(DeckMenuWork* work, u16 keys) {
 #else
     if (work->cursor.parts.y == 6 &&work->cursor.parts.x > 9) {
 #endif
-        if (work->cursor.parts.x == 13 && keys == 32) {
+        if (work->cursor.parts.x == 13 && keys == DPAD_LEFT) {
             work->cursor.parts.x = 9;
             AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
@@ -6455,16 +6471,16 @@ u8 WrapKeyboardCursor(DeckMenuWork* work, u16 keys) {
 u8 func_eu_0808E94C(DeckMenuWork* work, u16 keys) {
     if (work->cursor.parts.y == 1 && (u16)work->cursor.parts.x > 5) {
         switch (keys) {
-        case 64:
+        case DPAD_UP:
             work->cursor.parts.y--;
             break;
-        case 128:
+        case DPAD_DOWN:
             work->cursor.parts.y++;
             break;
-        case 32:
+        case DPAD_LEFT:
             work->cursor.parts.x = 5;
             break;
-        case 16:
+        case DPAD_RIGHT:
             work->cursor.parts.x = 0;
             break;
         }
@@ -6472,16 +6488,16 @@ u8 func_eu_0808E94C(DeckMenuWork* work, u16 keys) {
 
     if (work->cursor.parts.y == 4 && (u16)work->cursor.parts.x > 2) {
         switch (keys) {
-        case 64:
+        case DPAD_UP:
             work->cursor.parts.y--;
             break;
-        case 128:
+        case DPAD_DOWN:
             work->cursor.parts.y++;
             break;
-        case 32:
+        case DPAD_LEFT:
             work->cursor.parts.x = 2;
             break;
-        case 16:
+        case DPAD_RIGHT:
             work->cursor.parts.x = 0;
             break;
         }
@@ -6520,7 +6536,7 @@ u8 func_eu_0808E94C(DeckMenuWork* work, u16 keys) {
     }
 
     if (work->cursor.parts.y == 6 &&work->cursor.parts.x > 1) {
-        if (work->cursor.parts.x == 13 && keys == 32) {
+        if (work->cursor.parts.x == 13 && keys == DPAD_LEFT) {
             work->cursor.parts.x = 1;
             AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
             work->onEndKey = FALSE;
@@ -6617,7 +6633,7 @@ s32 AppendKeyboardChar(DeckMenuWork* work) {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
 #ifdef VERSION_EU
-        if (work->keyboardPage == 2) {
+        if (work->keyboardPage == DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
             src = gDeckKeyboardLetterRows[work->cursor.parts.y];
         } else {
             src = gDeckKeyboardSymbolRows[work->cursor.parts.y];
@@ -6625,13 +6641,13 @@ s32 AppendKeyboardChar(DeckMenuWork* work) {
 #else
 #ifdef VERSION_JP
         switch (work->keyboardPage) {
-        case 0:
+        case DECK_KEYBOARD_PAGE_HIRAGANA:
             src = gDeckKeyboardRows[work->cursor.parts.y];
             break;
-        case 1:
+        case DECK_KEYBOARD_PAGE_KATAKANA:
             src = gDeckKeyboardKatakanaRows[work->cursor.parts.y];
             break;
-        case 2:
+        case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
             src = gDeckKeyboardAlphanumericRows[work->cursor.parts.y];
             break;
         }
@@ -6675,13 +6691,13 @@ s32 AppendKeyboardChar(DeckMenuWork* work) {
 void func_jp_0808F240(DeckMenuWork* work) {
     switch (work->keyboardPage) {
 #ifdef VERSION_JP
-    case 0:
+    case DECK_KEYBOARD_PAGE_HIRAGANA:
         if (work->cursor.parts.y == 5 && (u16)(work->cursor.parts.x - 5) <= 4) {
             work->cursor.parts.x = 4;
         }
 
         break;
-    case 1:
+    case DECK_KEYBOARD_PAGE_KATAKANA:
         switch (work->cursor.parts.y) {
         case 0:
         case 1:
@@ -6700,7 +6716,7 @@ void func_jp_0808F240(DeckMenuWork* work) {
         }
 
         break;
-    case 2:
+    case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
         switch (work->cursor.parts.y) {
         case 0:
             break;
@@ -6731,7 +6747,7 @@ void func_jp_0808F240(DeckMenuWork* work) {
 
         break;
 #else
-    case 2:
+    case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
         switch (work->cursor.parts.y) {
         case 0:
             break;
@@ -6767,7 +6783,7 @@ void func_jp_0808F240(DeckMenuWork* work) {
         }
 
         break;
-    case 3:
+    case DECK_KEYBOARD_PAGE_SYMBOLS:
         switch (work->cursor.parts.y) {
         case 0:
             break;
@@ -6816,20 +6832,20 @@ void func_jp_0808F240(DeckMenuWork* work) {
 void func_jp_0808F34C(DeckMenuWork* work) {
     switch (work->keyboardPage) {
 #ifdef VERSION_JP
-    case 0:
+    case DECK_KEYBOARD_PAGE_HIRAGANA:
         LoadBgMap(3, gDeckKeyboardMap, sizeof(gDeckKeyboardMap));
         break;
-    case 1:
+    case DECK_KEYBOARD_PAGE_KATAKANA:
         LoadBgMap(3, gDeckKeyboardKatakanaMap, sizeof(gDeckKeyboardKatakanaMap));
         break;
-    case 2:
+    case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
         LoadBgMap(3, gDeckKeyboardAlphanumericMap, sizeof(gDeckKeyboardAlphanumericMap));
         break;
 #else
-    case 2:
+    case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
         LoadBgMap(3, gDeckKeyboardMap, sizeof(gDeckKeyboardMap));
         break;
-    case 3:
+    case DECK_KEYBOARD_PAGE_SYMBOLS:
         LoadBgMap(3, gDeckKeyboardSymbolMap, sizeof(gDeckKeyboardSymbolMap));
         break;
 #endif
@@ -6937,9 +6953,9 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
         work->cursor.parts.x = 0;
         work->cursor.parts.y = 0;
 #ifdef VERSION_JP
-        work->keyboardPage = 0;
+        work->keyboardPage = DECK_KEYBOARD_PAGE_HIRAGANA;
 #else
-        work->keyboardPage = 2;
+        work->keyboardPage = DECK_KEYBOARD_PAGE_ALPHANUMERIC;
 #endif
         DrawKeyboardDeckNumber(work->deckIndex);
         break;
@@ -6954,7 +6970,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
 #if defined(VERSION_JP) || defined(VERSION_EU)
 u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
-    u8* mode = &work->keyboardPage;
+    u8* page = &work->keyboardPage;
     work->handVisible = 1;
 #endif
 
@@ -6963,10 +6979,10 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
         work->keyCursorSteps = 1;
 
-        if (*mode <= 2) {
-            (*mode)++;
+        if (*page <= DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
+            (*page)++;
 #else
-        if (work->keyboardPage <= 1) {
+        if (work->keyboardPage <= DECK_KEYBOARD_PAGE_KATAKANA) {
             work->keyboardPage++;
 #endif
             func_jp_0808F34C(work);
@@ -6979,10 +6995,10 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
         work->keyCursorSteps = 1;
 
-        if (*mode > 2) {
-            (*mode)--;
+        if (*page > DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
+            (*page)--;
 #else
-        if (work->keyboardPage != 0) {
+        if (work->keyboardPage != DECK_KEYBOARD_PAGE_HIRAGANA) {
             work->keyboardPage--;
 #endif
             func_jp_0808F34C(work);
@@ -7015,7 +7031,7 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
             }
 
             work->keyCursorY = 0x8C00;
-        } else if (work->keyboardPage == 2) {
+        } else if (work->keyboardPage == DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
             ApproachValue(&work->keyCursorX, gKeyboardRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
             ApproachValue(&work->keyCursorY, gKeyboardColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
         } else {
@@ -7026,7 +7042,7 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
         work->keyCursorSteps--;
     }
 
-    ApproachValueHalf(&work->handX, (gKeyboardPageTabXEu[work->keyboardPage - 2] + 8) << 8);
+    ApproachValueHalf(&work->handX, (gKeyboardPageTabXEu[work->keyboardPage - DECK_KEYBOARD_PAGE_ALPHANUMERIC] + 8) << 8);
 #else
     ApproachValueHalf(&work->handX, (gKeyboardPageTabXJp[work->keyboardPage] + 8) << 8);
 #endif
@@ -7041,10 +7057,10 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
 
 u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
-    u8 mode = work->keyboardPage;
+    u8 page = work->keyboardPage;
     s32 bottom = 6;
 
-    if (mode == 2) {
+    if (page == DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
         bottom = 7;
     }
 #endif
@@ -7058,15 +7074,15 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         work->cursor.parts.x--;
 
         switch (work->keyboardPage) {
-        case 0:
-        case 1:
-            if (WrapKanaKeyboardCursor(work, 32)) {
+        case DECK_KEYBOARD_PAGE_HIRAGANA:
+        case DECK_KEYBOARD_PAGE_KATAKANA:
+            if (WrapKanaKeyboardCursor(work, DPAD_LEFT)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
             }
 
             break;
-        case 2:
-            if (WrapKeyboardCursor(work, 32)) {
+        case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
+            if (WrapKeyboardCursor(work, DPAD_LEFT)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 work->onEndKey = FALSE;
@@ -7075,8 +7091,8 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 
             break;
 #ifdef VERSION_EU
-        case 3:
-            if (func_eu_0808E94C(work, 32)) {
+        case DECK_KEYBOARD_PAGE_SYMBOLS:
+            if (func_eu_0808E94C(work, DPAD_LEFT)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
                 work->onEndKey = FALSE;
             }
@@ -7092,15 +7108,15 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         work->cursor.parts.x++;
 
         switch (work->keyboardPage) {
-        case 0:
-        case 1:
-            if (WrapKanaKeyboardCursor(work, 16)) {
+        case DECK_KEYBOARD_PAGE_HIRAGANA:
+        case DECK_KEYBOARD_PAGE_KATAKANA:
+            if (WrapKanaKeyboardCursor(work, DPAD_RIGHT)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
             }
 
             break;
-        case 2:
-            if (WrapKeyboardCursor(work, 16)) {
+        case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
+            if (WrapKeyboardCursor(work, DPAD_RIGHT)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 work->onEndKey = FALSE;
@@ -7109,8 +7125,8 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 
             break;
 #ifdef VERSION_EU
-        case 3:
-            if (func_eu_0808E94C(work, 16)) {
+        case DECK_KEYBOARD_PAGE_SYMBOLS:
+            if (func_eu_0808E94C(work, DPAD_RIGHT)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
                 work->onEndKey = FALSE;
             }
@@ -7136,15 +7152,15 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 #endif
 
         switch (work->keyboardPage) {
-        case 0:
-        case 1:
-            if (WrapKanaKeyboardCursor(work, 64)) {
+        case DECK_KEYBOARD_PAGE_HIRAGANA:
+        case DECK_KEYBOARD_PAGE_KATAKANA:
+            if (WrapKanaKeyboardCursor(work, DPAD_UP)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
             }
 
             break;
-        case 2:
-            if (WrapKeyboardCursor(work, 64)) {
+        case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
+            if (WrapKeyboardCursor(work, DPAD_UP)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 work->onEndKey = FALSE;
@@ -7153,8 +7169,8 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 
             break;
 #ifdef VERSION_EU
-        case 3:
-            if (func_eu_0808E94C(work, 64)) {
+        case DECK_KEYBOARD_PAGE_SYMBOLS:
+            if (func_eu_0808E94C(work, DPAD_UP)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
                 work->onEndKey = FALSE;
             }
@@ -7170,15 +7186,15 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         work->cursor.parts.y++;
 
         switch (work->keyboardPage) {
-        case 0:
-        case 1:
-            if (WrapKanaKeyboardCursor(work, 128)) {
+        case DECK_KEYBOARD_PAGE_HIRAGANA:
+        case DECK_KEYBOARD_PAGE_KATAKANA:
+            if (WrapKanaKeyboardCursor(work, DPAD_DOWN)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
             }
 
             break;
-        case 2:
-            if (WrapKeyboardCursor(work, 128)) {
+        case DECK_KEYBOARD_PAGE_ALPHANUMERIC:
+            if (WrapKeyboardCursor(work, DPAD_DOWN)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 work->onEndKey = FALSE;
@@ -7187,8 +7203,8 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 
             break;
 #ifdef VERSION_EU
-        case 3:
-            if (func_eu_0808E94C(work, 128)) {
+        case DECK_KEYBOARD_PAGE_SYMBOLS:
+            if (func_eu_0808E94C(work, DPAD_DOWN)) {
                 AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
                 work->onEndKey = FALSE;
             }
@@ -7262,9 +7278,9 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 #if defined(VERSION_JP) || defined(VERSION_EU)
     case R_BUTTON:
 #ifdef VERSION_JP
-        if (work->keyboardPage <= 1) {
+        if (work->keyboardPage <= DECK_KEYBOARD_PAGE_KATAKANA) {
 #else
-        if (work->keyboardPage <= 2) {
+        if (work->keyboardPage <= DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
 #endif
             work->keyboardPage++;
             func_jp_0808F34C(work);
@@ -7274,9 +7290,9 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         break;
     case L_BUTTON:
 #ifdef VERSION_JP
-        if (work->keyboardPage != 0) {
+        if (work->keyboardPage != DECK_KEYBOARD_PAGE_HIRAGANA) {
 #else
-        if (work->keyboardPage > 2) {
+        if (work->keyboardPage > DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
 #endif
             work->keyboardPage--;
             func_jp_0808F34C(work);
@@ -7316,7 +7332,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 #endif
             ApproachValue(&work->keyCursorY, 0x8C00, work->keyCursorSteps);
 #ifdef VERSION_EU
-        } else if (work->keyboardPage == 2) {
+        } else if (work->keyboardPage == DECK_KEYBOARD_PAGE_ALPHANUMERIC) {
 #else
         } else {
 #endif

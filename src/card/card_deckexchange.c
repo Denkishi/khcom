@@ -353,7 +353,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
             work->cursorCol--;
             work->timer = 4;
 
-            if ((u8)MoveDeckExchangeValueCursor(work, 32)) {
+            if ((u8)MoveDeckExchangeValueCursor(work, DPAD_LEFT)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -365,7 +365,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
             work->cursorCol++;
             work->timer = 4;
 
-            if ((u8)MoveDeckExchangeValueCursor(work, 16)) {
+            if ((u8)MoveDeckExchangeValueCursor(work, DPAD_RIGHT)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -380,7 +380,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         }
 
         work->timer = 4;
-        MoveDeckExchangeValueCursor(work, 64);
+        MoveDeckExchangeValueCursor(work, DPAD_UP);
 
         if (prevRow != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -396,7 +396,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         }
 
         work->timer = 4;
-        MoveDeckExchangeValueCursor(work, 128);
+        MoveDeckExchangeValueCursor(work, DPAD_DOWN);
 
         if (prevRow != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -1054,7 +1054,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 categoryFilter) 
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &cards[i];
                 TaskCreate(&work->tasks, &gTaskDescDeckCard2, &args);
                 x++;
@@ -1063,7 +1063,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 categoryFilter) 
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &cards[i];
                 TaskCreate(&work->tasks, &gTaskDescDeckCard2, &args);
                 x++;
@@ -1098,7 +1098,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 categoryFil
                 args.cardId = GetCardIdForKind(work->entries[i].kind);
                 args.col = x;
                 args.row = y;
-                args.panel = 1;
+                args.panel = DECK_CARD2_PANEL_COLLECTION;
                 args.slot = NULL;
                 TaskCreate(&work->tasks, &gTaskDescDeckCard2, &args);
                 x++;
@@ -1110,7 +1110,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 categoryFil
             if (gCardDefs[args.cardId].category == categoryFilter - 1 && work->entries[i].kind <= CARD_KIND_CRESCENDO) {
                 args.col = x;
                 args.row = y;
-                args.panel = 1;
+                args.panel = DECK_CARD2_PANEL_COLLECTION;
                 args.slot = NULL;
                 TaskCreate(&work->tasks, &gTaskDescDeckCard2, &args);
                 x++;
@@ -1658,7 +1658,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
     }
 
     switch (key) {
-    case 0x40:
+    case DPAD_UP:
         do {
             if (work->cursorRow > 0) {
                 work->cursorRow = work->cursorRow - 1;
@@ -1674,7 +1674,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
         } while (*(u16*)&entry[idx << 1] == 0);
 
         break;
-    case 0x80:
+    case DPAD_DOWN:
         do {
             if (work->cursorRow <= 3) {
                 work->cursorRow = work->cursorRow + 1;
@@ -1690,7 +1690,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
         } while (*(u16*)&entry[idx << 1] == 0);
 
         break;
-    case 0x20:
+    case DPAD_LEFT:
         if (*(u16*)&entry[work->cursorRow << 1] != 0) {
             if ((s16)cursorCol > 0) {
                 work->cursorCol = cursorCol - 1;
@@ -1743,7 +1743,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
 
         work->cursorRow = n;
         break;
-    case 0x10:
+    case DPAD_RIGHT:
         if (*(u16*)&entry[(work->cursorRow + 5) << 1] != 0) {
             if ((s16)cursorCol <= 0) {
                 work->cursorCol = cursorCol + 1;
@@ -2000,14 +2000,14 @@ u8 FindDeckExchangeCardInDirection(DeckExchangeWork* work, s16 x, s16 y, u16 dir
     }
 
     switch (dir) {
-    case 0x40:
-        return FindDeckExchangeCardInDirection(work, x, y - 1, 0x40);
-    case 0x80:
-        return FindDeckExchangeCardInDirection(work, x, y + 1, 0x80);
-    case 0x20:
-        return FindDeckExchangeCardInDirection(work, x - 1, y, 0x20);
-    case 0x10:
-        return FindDeckExchangeCardInDirection(work, x + 1, y, 0x10);
+    case DPAD_UP:
+        return FindDeckExchangeCardInDirection(work, x, y - 1, DPAD_UP);
+    case DPAD_DOWN:
+        return FindDeckExchangeCardInDirection(work, x, y + 1, DPAD_DOWN);
+    case DPAD_LEFT:
+        return FindDeckExchangeCardInDirection(work, x - 1, y, DPAD_LEFT);
+    case DPAD_RIGHT:
+        return FindDeckExchangeCardInDirection(work, x + 1, y, DPAD_RIGHT);
     }
 
     return FALSE;

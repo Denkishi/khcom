@@ -137,6 +137,11 @@ enum SioBattleState {
     SIO_BATTLE_STATE_MENU
 };
 
+enum SioBattleMenu {
+    SIO_BATTLE_MENU_VERSUS_BATTLE,
+    SIO_BATTLE_MENU_LOAD
+};
+
 void mode_sio_battle_0(s32 arg) {
     SioBattleWork* work;
     void* gfx;
@@ -212,14 +217,14 @@ void mode_sio_battle_0(s32 arg) {
         if (work->modeArg == 0) {
             if (gSioBattleFileLoaded != TRUE) {
                 gSioBattleFileLoaded = FALSE;
-                work->cursor = 1;
+                work->cursor = SIO_BATTLE_MENU_LOAD;
             } else {
                 gSioBattleFileLoaded = TRUE;
-                work->cursor = 0;
+                work->cursor = SIO_BATTLE_MENU_VERSUS_BATTLE;
             }
         } else {
             gSioBattleFileLoaded = TRUE;
-            work->cursor = 0;
+            work->cursor = SIO_BATTLE_MENU_VERSUS_BATTLE;
         }
 
 #ifdef VERSION_EU
@@ -258,7 +263,7 @@ void mode_sio_battle_0(s32 arg) {
 #ifdef VERSION_EU
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = TRUE;
-        work->cursor = 0;
+        work->cursor = SIO_BATTLE_MENU_VERSUS_BATTLE;
 
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -284,7 +289,7 @@ void mode_sio_battle_0(s32 arg) {
             break;
         }
 #else
-        work->cursor = 0;
+        work->cursor = SIO_BATTLE_MENU_VERSUS_BATTLE;
         sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
         sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
@@ -292,7 +297,7 @@ void mode_sio_battle_0(s32 arg) {
 #endif
         break;
     case 3:
-        work->cursor = 0;
+        work->cursor = SIO_BATTLE_MENU_VERSUS_BATTLE;
 #ifdef VERSION_EU
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = TRUE;
@@ -380,7 +385,7 @@ void mode_sio_battle_1() {
                 sSioBattleWork->cursor--;
 
                 if (sSioBattleWork->cursor < 0) {
-                    sSioBattleWork->cursor = 1;
+                    sSioBattleWork->cursor = SIO_BATTLE_MENU_LOAD;
                 }
             }
 
@@ -388,8 +393,8 @@ void mode_sio_battle_1() {
                 m4aSongNumStart(SONG_SYS_CLICK);
                 sSioBattleWork->cursor++;
 
-                if (sSioBattleWork->cursor > 1) {
-                    sSioBattleWork->cursor = 0;
+                if (sSioBattleWork->cursor > SIO_BATTLE_MENU_LOAD) {
+                    sSioBattleWork->cursor = SIO_BATTLE_MENU_VERSUS_BATTLE;
                 }
             }
         } else {
@@ -431,10 +436,10 @@ void mode_sio_battle_1() {
             m4aSongNumStart(SONG_SYS_KETTEI);
 
             switch (sSioBattleWork->cursor) {
-            case 0:
+            case SIO_BATTLE_MENU_VERSUS_BATTLE:
                 ModeRequest(&gModeSioBtlConnect, 0);
                 break;
-            case 1:
+            case SIO_BATTLE_MENU_LOAD:
                 ModeRequest(&gModeMenuLoad, 1);
                 break;
             }
@@ -708,6 +713,12 @@ enum SioBtlOptionState {
     SIO_BTL_OPTION_STATE_START_BATTLE
 };
 
+enum SioBtlOptionMenu {
+    SIO_BTL_OPTION_MENU_OK,
+    SIO_BTL_OPTION_MENU_REVIEW_DECKS,
+    SIO_BTL_OPTION_MENU_HANDICAP
+};
+
 enum SioWorldChangeState {
     SIO_WORLD_CHANGE_STATE_FADE_OUT,
     SIO_WORLD_CHANGE_STATE_LOAD_MAP,
@@ -820,11 +831,11 @@ void SioBtlOptionInitObjs() {
 
     if (sSioBtlOptionWork->modeArg == 1) {
         sSioBtlOptionWork->menuOpen = TRUE;
-        sSioBtlOptionWork->cursor = 1;
+        sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_REVIEW_DECKS;
         sSioBtlOptionWork->y = sSioBtlOptionWork->cursor * 4608 + 10752;
     } else {
         sSioBtlOptionWork->menuOpen = FALSE;
-        sSioBtlOptionWork->cursor = 0;
+        sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_OK;
         sSioBtlOptionWork->y = 10752;
     }
 
@@ -1262,14 +1273,14 @@ void SioBtlOptionHandleMenu() {
         sSioBtlOptionWork->cursor--;
 
         if (sSioBtlOptionWork->cursor < 0) {
-            sSioBtlOptionWork->cursor = 2;
+            sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_HANDICAP;
         }
     } else if (GetKeysPressed() & DPAD_DOWN) {
         m4aSongNumStart(SONG_SYS_CLICK);
         sSioBtlOptionWork->cursor++;
 
-        if (sSioBtlOptionWork->cursor > 2) {
-            sSioBtlOptionWork->cursor = 0;
+        if (sSioBtlOptionWork->cursor > SIO_BTL_OPTION_MENU_HANDICAP) {
+            sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_OK;
         }
     }
 
@@ -1307,7 +1318,7 @@ void SioBtlOptionHandleMenu() {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
         switch (sSioBtlOptionWork->cursor) {
-        case 0:
+        case SIO_BTL_OPTION_MENU_OK:
             if (gSioPlayerId == 0) {
                 gSioCommandSend[1] = SIO_CMD_BTL_PLAYER1_READY;
             } else {
@@ -1325,10 +1336,10 @@ void SioBtlOptionHandleMenu() {
             sSioBtlOptionWork->y2 = 124;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_WAIT_READY;
             break;
-        case 1:
+        case SIO_BTL_OPTION_MENU_REVIEW_DECKS:
             ModeRequest(&gModeDeck, 0);
             break;
-        case 2:
+        case SIO_BTL_OPTION_MENU_HANDICAP:
             sSioBtlOptionWork->cursorVisible = FALSE;
             sSioBtlOptionWork->handicapMarkerVisible = TRUE;
             sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_SET_HANDICAP;
@@ -1351,14 +1362,14 @@ void SioBtlOptionHandleMenu() {
             sSioBtlOptionWork->cursor--;
 
             if (sSioBtlOptionWork->cursor < 0) {
-                sSioBtlOptionWork->cursor = 2;
+                sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_HANDICAP;
             }
         } else if (GetKeysPressed() & DPAD_DOWN) {
             m4aSongNumStart(SONG_SYS_CLICK);
             sSioBtlOptionWork->cursor++;
 
-            if (sSioBtlOptionWork->cursor > 2) {
-                sSioBtlOptionWork->cursor = 0;
+            if (sSioBtlOptionWork->cursor > SIO_BTL_OPTION_MENU_HANDICAP) {
+                sSioBtlOptionWork->cursor = SIO_BTL_OPTION_MENU_OK;
             }
         }
 
@@ -1408,7 +1419,7 @@ void SioBtlOptionHandleMenu() {
             m4aSongNumStart(SONG_SYS_KETTEI);
 
             switch (sSioBtlOptionWork->cursor) {
-            case 0:
+            case SIO_BTL_OPTION_MENU_OK:
                 gSioDebugReady[0] = 1;
                 sSioBtlOptionWork->menuOpen = FALSE;
                 sSioBtlOptionWork->messageVisible = TRUE;
@@ -1421,10 +1432,10 @@ void SioBtlOptionHandleMenu() {
                 sSioBtlOptionWork->y2 = 124;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_WAIT_READY;
                 break;
-            case 1:
+            case SIO_BTL_OPTION_MENU_REVIEW_DECKS:
                 ModeRequest(&gModeDeck, 0);
                 break;
-            case 2:
+            case SIO_BTL_OPTION_MENU_HANDICAP:
                 sSioBtlOptionWork->cursorVisible = FALSE;
                 sSioBtlOptionWork->handicapMarkerVisible = TRUE;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_SET_HANDICAP;

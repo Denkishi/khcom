@@ -35,7 +35,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
     work->flags = 0;
 
     switch (work->args.panel) {
-    case 0:
+    case DECK_CARD2_PANEL_DECK:
         if ((u16)work->args.row < ARRAY_COUNT(gDeckGridRowY)) {
             work->x = gDeckGridColumnX[work->args.col] << 8;
             work->y = gDeckGridRowY[work->args.row] << 8;
@@ -45,7 +45,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
         }
 
         break;
-    case 1:
+    case DECK_CARD2_PANEL_COLLECTION:
         if ((u16)work->args.row < ARRAY_COUNT(gCollectionGridRowY)) {
             work->x = gCollectionGridColumnX[work->args.col] << 8;
             work->y = gCollectionGridRowY[work->args.row] << 8;
@@ -84,7 +84,7 @@ u8 DeckCard2_1(DeckCard2Work* work) {
     }
 
     switch (work->args.panel) {
-    case 0:
+    case DECK_CARD2_PANEL_DECK:
         if ((u16)work->args.row < ARRAY_COUNT(gDeckGridRowY)) {
             work->x = gDeckGridColumnX[work->args.col] << 8;
             work->y = gDeckGridRowY[work->args.row] << 8;
@@ -94,7 +94,7 @@ u8 DeckCard2_1(DeckCard2Work* work) {
         }
 
         break;
-    case 1:
+    case DECK_CARD2_PANEL_COLLECTION:
         if ((u16)work->args.row < ARRAY_COUNT(gCollectionGridRowY)) {
             work->x = gCollectionGridColumnX[work->args.col] << 8;
             work->y = gCollectionGridRowY[work->args.row] << 8;
@@ -126,7 +126,7 @@ void DeckCard2_2(DeckCard2Work* work) {
         }
     }
 
-    if (work->args.panel == 0 && work->cardDef->category != CARD_CATEGORY_ENEMY) {
+    if (work->args.panel == DECK_CARD2_PANEL_DECK && work->cardDef->category != CARD_CATEGORY_ENEMY) {
         DrawSprite((work->x >> 8) - 3, (work->y >> 8) - 4, gCardValueDigitFrames[work->cardDef->value], work->tiles2, work->palette2, NULL, 0, 0x31);
     }
 }

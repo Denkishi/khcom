@@ -583,7 +583,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 categoryFilter) {
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &cards[i];
                 TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
@@ -592,7 +592,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 categoryFilter) {
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
-                args.panel = 0;
+                args.panel = DECK_CARD2_PANEL_DECK;
                 args.slot = &cards[i];
                 TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
@@ -1033,14 +1033,14 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
     }
 
     switch (dir) {
-    case 64:
-        return FindRikuCardInDirection(work, x, y - 1, 64);
-    case 128:
-        return FindRikuCardInDirection(work, x, y + 1, 128);
-    case 32:
-        return FindRikuCardInDirection(work, x - 1, y, 32);
-    case 16:
-        return FindRikuCardInDirection(work, x + 1, y, 16);
+    case DPAD_UP:
+        return FindRikuCardInDirection(work, x, y - 1, DPAD_UP);
+    case DPAD_DOWN:
+        return FindRikuCardInDirection(work, x, y + 1, DPAD_DOWN);
+    case DPAD_LEFT:
+        return FindRikuCardInDirection(work, x - 1, y, DPAD_LEFT);
+    case DPAD_RIGHT:
+        return FindRikuCardInDirection(work, x + 1, y, DPAD_RIGHT);
     }
 
     return FALSE;

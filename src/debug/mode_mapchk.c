@@ -141,11 +141,11 @@ Mode gModeMapChk = {
     Mode_MapChk_2,
 };
 
-void MapChkSetParamToggle(u8* p, u8 a) {
-    if (p[5] != a) {
-        p[5] = a;
+void MapChkSetParamToggle(u8* work, u8 on) {
+    if (work[5] != on) {
+        work[5] = on;
 
-        if (a != 0) {
+        if (on != 0) {
             DebugTextPrint(80, 68, 2, sMapChkOnText);
         } else {
             DebugTextPrint(80, 68, 2, sMapChkOffText);
@@ -153,10 +153,10 @@ void MapChkSetParamToggle(u8* p, u8 a) {
     }
 }
 
-void MapChkSetFloorProgress(u8 a, u8 b) {
+void MapChkSetFloorProgress(u8 floor, u8 cleared) {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
-        if (b) {
-            switch (a) {
+        if (cleared) {
+            switch (floor) {
             case 0:
                 gMapFloorState.progress = 1;
                 break;
@@ -195,7 +195,7 @@ void MapChkSetFloorProgress(u8 a, u8 b) {
                 break;
             }
         } else {
-            switch (a) {
+            switch (floor) {
             case 0:
                 gMapFloorState.progress = 0;
                 break;
@@ -235,8 +235,8 @@ void MapChkSetFloorProgress(u8 a, u8 b) {
             }
         }
     } else {
-        if (b) {
-            switch (a) {
+        if (cleared) {
+            switch (floor) {
             case 0:
                 gMapFloorState.progress = 1;
                 break;
@@ -278,7 +278,7 @@ void MapChkSetFloorProgress(u8 a, u8 b) {
                 break;
             }
         } else {
-            switch (a) {
+            switch (floor) {
             case 0:
                 gMapFloorState.progress = 0;
                 break;

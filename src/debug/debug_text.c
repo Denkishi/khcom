@@ -37,8 +37,8 @@ void DebugTextClearScreen() {
     DebugTextClearBg();
 }
 
-void func_0805F7C8(u8 a) {
-    sUnk_02034A2C = (u8*)GetBgCharBase(0) + (a << 12);
+void func_0805F7C8(u8 block) {
+    sUnk_02034A2C = (u8*)GetBgCharBase(0) + (block << 12);
 }
 
 void DebugTextPrintFont2(u8 x, u8 y, u16* s) {
@@ -65,8 +65,8 @@ void DebugTextPrintFont2(u8 x, u8 y, u16* s) {
     sDebugTextLineCount++;
 }
 
-u8 DebugTextGetPixelShift(u8 a) {
-    return a * 4 % 32;
+u8 DebugTextGetPixelShift(u8 x) {
+    return x * 4 % 32;
 }
 
 void DebugTextClearLines() {
@@ -80,7 +80,7 @@ void DebugTextClearLines() {
     }
 }
 
-s32 DebugTextScrollUp(u8 bg, u8 b, u8 c, u8 d, u8 e) {
+s32 DebugTextScrollUp(u8 bg, u8 x, u8 y, u8 width, u8 height) {
     u8 i;
     u8 j;
     u8 r;
@@ -96,16 +96,16 @@ s32 DebugTextScrollUp(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     s32 n;
 
     j = 0;
-    sDebugTextTileDest = (u8*)GetBgCharBase(bg) + c * 0x400 + (b + 1) * 32;
-    b = ((b + d) >> 3) + 1;
-    n = (s8)d + b;
-    d = n;
-    e += (c + e) >> 3;
-    k = c & 7;
-    col = (c >> 3) << 3;
+    sDebugTextTileDest = (u8*)GetBgCharBase(bg) + y * 0x400 + (x + 1) * 32;
+    x = ((x + width) >> 3) + 1;
+    n = (s8)width + x;
+    width = n;
+    height += (y + height) >> 3;
+    k = y & 7;
+    col = (y >> 3) << 3;
 
-    for (; j < e; j++) {
-        for (i = 0; i < d; i++) {
+    for (; j < height; j++) {
+        for (i = 0; i < width; i++) {
             ko = k * 4;
             co = col * 4;
             ko4 = ko + 4;
@@ -137,22 +137,22 @@ s32 DebugTextScrollUp(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     return 1;
 }
 
-void DebugTextLoadPalette(s32 a, const void* b, s32 c, u8 d) {
-    if (b != NULL) {
-        LoadPalette(b, (void*)(d * 32 + PLTT), 32);
+void DebugTextLoadPalette(s32 bg, const void* palette, s32 size, u8 bank) {
+    if (palette != NULL) {
+        LoadPalette(palette, (void*)(bank * 32 + PLTT), 32);
     }
 
-    sDebugTextPaletteBank = d;
+    sDebugTextPaletteBank = bank;
 }
 
-void DebugTextInit(u8 bg, u16 b, u16 c) {
+void DebugTextInit(u8 bg, u16 charSize, u16 screenSize) {
     u8 i;
     u8 j;
     void* charBase = GetBgCharBase(bg);
     void* screenBase = GetBgScreenBase(bg);
 
-    CpuFill32(0, charBase, b);
-    CpuFill32(0, screenBase, c);
+    CpuFill32(0, charBase, charSize);
+    CpuFill32(0, screenBase, screenSize);
 
     sDebugTextLines = EwramAlloc(sizeof(DebugTextLine) * 20);
     sDebugTextLineCount = 0;
@@ -174,11 +174,11 @@ void DebugTextInit(u8 bg, u16 b, u16 c) {
     EnableBg(bg);
 }
 
-void DebugTextSetMergeFirstGlyph(s32 a) {
-    sDebugTextMergeFirstGlyph = a;
+void DebugTextSetMergeFirstGlyph(s32 on) {
+    sDebugTextMergeFirstGlyph = on;
 }
 
-void DebugTextPrintXNumber(u8 x, u8 y, u32 c, u8 v) {
+void DebugTextPrintXNumber(u8 x, u8 y, u32 font, u8 v) {
     u8 buf[8];
 
     buf[3] = v / 10;
@@ -190,10 +190,10 @@ void DebugTextPrintXNumber(u8 x, u8 y, u32 c, u8 v) {
     buf[4] = 0x82;
     buf[5] += 0x4F;
     buf[6] = 0;
-    DebugTextPrint(x, y, c, buf);
+    DebugTextPrint(x, y, font, buf);
 }
 
-void DebugTextPrintNumber(u8 x, u8 y, u32 c, u16 v) {
+void DebugTextPrintNumber(u8 x, u8 y, u32 font, u16 v) {
     u8 buf[8];
 
     buf[1] = v / 100;
@@ -206,15 +206,15 @@ void DebugTextPrintNumber(u8 x, u8 y, u32 c, u16 v) {
     buf[4] = 0x82;
     buf[5] += 0x4F;
     buf[6] = 0;
-    DebugTextPrint(x, y, c, buf);
+    DebugTextPrint(x, y, font, buf);
 }
 
-void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
+void DebugTextPrint(u8 x, u8 y, u32 font, const char* s) {
     u8 i = 0;
     s32 shift = 0;
     u16 character;
 
-    switch (c) {
+    switch (font) {
     case 0:
         shift = 1;
         break;
@@ -222,7 +222,7 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
         shift = 0;
         break;
     case 2:
-        sDebugTextLines[sDebugTextLineCount].font = c;
+        sDebugTextLines[sDebugTextLineCount].font = font;
         DebugTextPrintFont2(x, y, (u16*)s);
         return;
     }
@@ -404,7 +404,7 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
     sDebugTextLines[sDebugTextLineCount].x = x;
     sDebugTextLines[sDebugTextLineCount].y = y;
     sDebugTextLines[sDebugTextLineCount].length = i;
-    sDebugTextLines[sDebugTextLineCount].font = c;
+    sDebugTextLines[sDebugTextLineCount].font = font;
     sDebugTextLineCount++;
 }
 

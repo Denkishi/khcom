@@ -56,8 +56,8 @@ void mode_test_2() {
 }
 #endif
 
-void ApproachValueHalf(s32* p, s32 v) {
-    *p += (v - *p) >> 1;
+void ApproachValueHalf(s32* value, s32 target) {
+    *value += (target - *value) >> 1;
 }
 
 #ifndef VERSION_EU

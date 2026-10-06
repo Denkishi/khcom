@@ -13,8 +13,8 @@ typedef struct MapChkWork {
     u8 unk_06[0x02];
 } MapChkWork;
 
-void MapChkSetParamToggle(u8* p, u8 a);
-void MapChkSetFloorProgress(u8 a, u8 b);
+void MapChkSetParamToggle(u8* work, u8 on);
+void MapChkSetFloorProgress(u8 floor, u8 cleared);
 void MapChkEditMode(MapChkWork* work);
 void MapChkEditWorld(MapChkWork* work);
 void MapChkEditFloor(MapChkWork* work);

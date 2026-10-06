@@ -23,6 +23,13 @@
 
 #ifdef VERSION_EU
 
+enum LangState {
+    LANG_STATE_FADE_IN,
+    LANG_STATE_SELECT,
+    LANG_STATE_CONFIRM,
+    LANG_STATE_FADE_OUT
+};
+
 static LangWork* sLangWork;
 
 void mode_lang_0(s32 arg) {
@@ -39,7 +46,7 @@ void mode_lang_0(s32 arg) {
     sLangWork->tiles = LoadObjTiles(gLanguageSelectCursorTiles, 0x1A0);
     sLangWork->palette = LoadObjPalette(gLanguageSelectCursorPalette, 32);
     sLangWork->timer = 0;
-    sLangWork->state = 0;
+    sLangWork->state = LANG_STATE_FADE_IN;
     sLangWork->flags = 0;
     SaveLoadHeader();
 
@@ -71,13 +78,13 @@ void mode_lang_0(s32 arg) {
 
 void mode_lang_1() {
     switch (sLangWork->state) {
-    case 0:
+    case LANG_STATE_FADE_IN:
         if (!FadeIsActive()) {
-            sLangWork->state = 1;
+            sLangWork->state = LANG_STATE_SELECT;
         }
 
         break;
-    case 1:
+    case LANG_STATE_SELECT:
         if (GetKeysRepeat() & DPAD_UP) {
             sLangWork->cursor--;
 
@@ -96,15 +103,15 @@ void mode_lang_1() {
             m4aSongNumStart(SONG_SYS_CLICK);
         } else if (GetKeysPressed() & A_BUTTON) {
             sLangWork->timer = 0;
-            sLangWork->state = 2;
+            sLangWork->state = LANG_STATE_CONFIRM;
             m4aSongNumStart(SONG_SYS_KETTEI);
         } else if (GetKeysPressed() & B_BUTTON) {
-            sLangWork->state = 3;
+            sLangWork->state = LANG_STATE_FADE_OUT;
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
 
         break;
-    case 2:
+    case LANG_STATE_CONFIRM:
         if (sLangWork->timer == 0) {
             switch (sLangWork->cursor) {
             case 0:
@@ -140,14 +147,14 @@ void mode_lang_1() {
 
         if (sLangWork->timer > 29) {
             sLangWork->flags &= ~LANG_FLAG_HIDE_CURSOR;
-            sLangWork->state = 3;
+            sLangWork->state = LANG_STATE_FADE_OUT;
             sLangWork->timer = 0;
         } else {
             sLangWork->timer++;
         }
 
         break;
-    case 3:
+    case LANG_STATE_FADE_OUT:
         if (sLangWork->timer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
         }

@@ -36,6 +36,19 @@ s32 gTitleBgScale EWRAM_COMMON(4);
 s32 gTitleBgX EWRAM_COMMON(4);
 s32 gTitleBgY EWRAM_COMMON(4);
 
+enum TitleState {
+    TITLE_STATE_FADE_IN,
+    TITLE_STATE_ZOOM,
+    TITLE_STATE_WHITE_OUT,
+    TITLE_STATE_LOGO_IN,
+    TITLE_STATE_CROSSFADE_BG,
+    TITLE_STATE_PRESS_START,
+    TITLE_STATE_MENU_IN,
+    TITLE_STATE_MENU_OUT,
+    TITLE_STATE_MENU,
+    TITLE_STATE_FADE_OUT
+};
+
 static u32 sTitleState;
 static TaskPool sTitleTaskPool;
 static Task* sTitleMenuTask;
@@ -62,27 +75,27 @@ void TitleExitToChoice() {
     }
 
     switch (sTitleMenuChoice) {
-    case 3:
+    case TITLE_MENU_RESUME:
         SaveLoadSystem();
         SaveClearSystem();
         RequestMapMode();
         return;
-    case 1:
+    case TITLE_MENU_CONTINUE:
         ModeRequest(&gModeMenuLoad, 0);
         return;
-    case 2:
+    case TITLE_MENU_LINK_BATTLE:
         ClearSioBattleFileLoaded();
         ModeRequest(&gModeSioBattle, 0);
         return;
-    case 4:
+    case TITLE_MENU_NEW_GAME_SORA:
         SetupSoraNewGame();
         ModeRequest(&gModeMenuNew, 0);
         return;
-    case 5:
+    case TITLE_MENU_NEW_GAME_RIKU:
         SetupRikuNewGame();
         ModeRequest(&gModeMenuNew, 0);
         return;
-    case 0:
+    case TITLE_MENU_NEW_GAME:
     default:
         ModeRequest(&gModeMenuNew, 0);
         return;
@@ -141,7 +154,7 @@ void TitleFadeOut() {
     m4aMPlayFadeOut(gMPlayTable[gSongTable[6].ms].info, 5);
     FadeStartOut(FADE_MODE_BLACK, 90);
     BackdropFadeStartOut(0, 90);
-    sTitleState = 9;
+    sTitleState = TITLE_STATE_FADE_OUT;
 }
 
 void mode_title_0() {
@@ -150,7 +163,7 @@ void mode_title_0() {
     SaveLoadHeader();
     InitMapCardInventory();
     ResetSelectedMapCard();
-    sTitleMenuChoice = 0;
+    sTitleMenuChoice = TITLE_MENU_NEW_GAME;
     sTitlePaletteBuffer = EwramAlloc(0x400);
     SetBgMode1();
     SetupBg(0, 0, 0x1D, 0);
@@ -209,14 +222,14 @@ void mode_title_0() {
     sTitleLogoTask = NULL;
     sTitleObjTask = NULL;
     FadeStartIn(FADE_MODE_BLACK, 0x4C);
-    sTitleState = 0;
+    sTitleState = TITLE_STATE_FADE_IN;
     m4aSongNumStart(SONG_SND_0);
     sTitleTimer = 0x1E;
 }
 
 void mode_title_1() {
     switch (sTitleState) {
-    case 0:
+    case TITLE_STATE_FADE_IN:
         if (FadeIsActive()) {
             break;
         }
@@ -229,10 +242,10 @@ void mode_title_1() {
             }
         }
 
-        sTitleState = 1;
+        sTitleState = TITLE_STATE_ZOOM;
         sTitleTimer = 100;
         break;
-    case 1:
+    case TITLE_STATE_ZOOM:
         if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
             ApproachValue(&gTitleBgX, 0x3F3F, sTitleTimer);
         } else {
@@ -253,12 +266,12 @@ void mode_title_1() {
         }
 
         if (sTitleTimer == 0) {
-            sTitleState = 2;
+            sTitleState = TITLE_STATE_WHITE_OUT;
             sTitleTimer = 2;
         }
 
         break;
-    case 2:
+    case TITLE_STATE_WHITE_OUT:
         if (FadeIsActive()) {
             break;
         }
@@ -270,10 +283,10 @@ void mode_title_1() {
         }
 
         TitleShowLogo(15);
-        sTitleState = 3;
+        sTitleState = TITLE_STATE_LOGO_IN;
         sTitleTimer = 0x28;
         break;
-    case 3:
+    case TITLE_STATE_LOGO_IN:
         if (FadeIsActive()) {
             break;
         }
@@ -283,14 +296,14 @@ void mode_title_1() {
             break;
         }
 
-        sTitleState = 4;
+        sTitleState = TITLE_STATE_CROSSFADE_BG;
         sTitleBlendStep = 0;
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_OBJ);
         gBldAlpha = BLDALPHA_BLEND(16, 0);
         sTitleTimer = 4;
         EnableBg(1);
         break;
-    case 4:
+    case TITLE_STATE_CROSSFADE_BG:
         if (sTitleTimer != 0) {
             sTitleTimer--;
             break;
@@ -303,11 +316,11 @@ void mode_title_1() {
         if (sTitleBlendStep > 15) {
             gBldCnt = 0;
             TitleFinishIntro();
-            sTitleState = 5;
+            sTitleState = TITLE_STATE_PRESS_START;
         }
 
         break;
-    case 5:
+    case TITLE_STATE_PRESS_START:
         if (!IsTitleObjSlideDone()) {
             break;
         }
@@ -319,27 +332,27 @@ void mode_title_1() {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
         if (SaveRepairSystem() == SAVE_OK) {
-            sTitleMenuChoice = 3;
+            sTitleMenuChoice = TITLE_MENU_RESUME;
         } else if (SaveRepairFileLarge(0) == SAVE_OK || SaveRepairFileLarge(1) == SAVE_OK) {
-            sTitleMenuChoice = 1;
+            sTitleMenuChoice = TITLE_MENU_CONTINUE;
         } else if ((gGameState.flags & GAME_FLAG_SORA_CLEAR) &&
                    (SaveRepairFileSmall(0) == SAVE_OK || SaveRepairFileSmall(1) == SAVE_OK)) {
-            sTitleMenuChoice = 1;
+            sTitleMenuChoice = TITLE_MENU_CONTINUE;
         } else {
-            sTitleMenuChoice = 0;
+            sTitleMenuChoice = TITLE_MENU_NEW_GAME;
         }
 
         TaskKill(&sTitleTaskPool, sTitleLogoTask);
         TaskKill(&sTitleTaskPool, sTitleObjTask);
         sTitleMenuTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleMenu, &sTitleMenuChoice);
         DisableBg(0);
-        sTitleState = 6;
+        sTitleState = TITLE_STATE_MENU_IN;
         sTitleBlendStep = 0;
         gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1);
         gBldAlpha = ((16 - sTitleBlendStep) << 8) | sTitleBlendStep;
         sTitleTimer = 4;
         break;
-    case 6:
+    case TITLE_STATE_MENU_IN:
         if (sTitleTimer != 0) {
             sTitleTimer--;
             break;
@@ -351,11 +364,11 @@ void mode_title_1() {
 
         if (sTitleBlendStep > 15) {
             gBldCnt = 0;
-            sTitleState = 8;
+            sTitleState = TITLE_STATE_MENU;
         }
 
         break;
-    case 7:
+    case TITLE_STATE_MENU_OUT:
         if (sTitleTimer != 0) {
             sTitleTimer--;
             break;
@@ -371,16 +384,16 @@ void mode_title_1() {
             sTitleLogoTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleLogo, NULL);
             sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, NULL);
             EnableBg(0);
-            sTitleState = 5;
+            sTitleState = TITLE_STATE_PRESS_START;
         }
 
         break;
-    case 8:
+    case TITLE_STATE_MENU:
         if ((GetKeysPressed() & START_BUTTON) || (GetKeysPressed() & A_BUTTON)) {
             switch (sTitleMenuChoice) {
-            case 0:
-            case 4:
-            case 5:
+            case TITLE_MENU_NEW_GAME:
+            case TITLE_MENU_NEW_GAME_SORA:
+            case TITLE_MENU_NEW_GAME_RIKU:
                 m4aSongNumStart(SONG_SYS_START);
                 break;
             default:
@@ -396,7 +409,7 @@ void mode_title_1() {
         }
 
         break;
-    case 9:
+    case TITLE_STATE_FADE_OUT:
         if (!FadeIsActive()) {
             TitleExitToChoice();
         }
@@ -404,22 +417,22 @@ void mode_title_1() {
         break;
     }
 
-    if (!FadeIsActive() && sTitleState != 6) {
+    if (!FadeIsActive() && sTitleState != TITLE_STATE_MENU_IN) {
         TaskPoolUpdate(&sTitleTaskPool);
     }
 
     TaskPoolDraw(&sTitleTaskPool);
     BackdropFadeUpdate();
 
-    if (sTitleState <= 4 && (GetKeysPressed() & (A_BUTTON | START_BUTTON))) {
+    if (sTitleState <= TITLE_STATE_CROSSFADE_BG && (GetKeysPressed() & (A_BUTTON | START_BUTTON))) {
         m4aSongNumStart(SONG_SYS_CLICK);
 
-        if (sTitleState <= 3) {
+        if (sTitleState <= TITLE_STATE_LOGO_IN) {
             TitleShowLogo(2);
         }
 
         TitleFinishIntro();
-        sTitleState = 5;
+        sTitleState = TITLE_STATE_PRESS_START;
     }
 }
 
@@ -434,7 +447,7 @@ void mode_title_2() {
 }
 
 u8 IsTitleLogoShown() {
-    if (sTitleState > 2) {
+    if (sTitleState > TITLE_STATE_WHITE_OUT) {
         return 1;
     }
 
@@ -442,7 +455,7 @@ u8 IsTitleLogoShown() {
 }
 
 u8 IsTitleIntroDone() {
-    if (sTitleState > 4) {
+    if (sTitleState > TITLE_STATE_CROSSFADE_BG) {
         return 1;
     }
 

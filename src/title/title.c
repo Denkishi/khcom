@@ -48,7 +48,12 @@ TaskDesc gTaskDescTitleObj = {
     sizeof(TitleObjWork),
 };
 
-static const s32 sTitleMenuChoiceOrder[4] = {4, 5, 1, 2};
+static const s32 sTitleMenuChoiceOrder[4] = {
+    TITLE_MENU_NEW_GAME_SORA,
+    TITLE_MENU_NEW_GAME_RIKU,
+    TITLE_MENU_CONTINUE,
+    TITLE_MENU_LINK_BATTLE,
+};
 
 #ifdef VERSION_EU
 static void** sTitleMenuEntrySpritesEu[5] = {
@@ -364,6 +369,14 @@ u8 IsTitleObjSlideDone() {
     return sTitleObjSlideDone;
 }
 
+enum TitleMenuLayout {
+    TITLE_MENU_LAYOUT_BASIC,
+    TITLE_MENU_LAYOUT_SINGLE_NEW_GAME,
+    TITLE_MENU_LAYOUT_SINGLE_RESUME,
+    TITLE_MENU_LAYOUT_FULL,
+    TITLE_MENU_LAYOUT_NEW_GAME
+};
+
 void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     s32 t;
     u8* pal;
@@ -372,19 +385,19 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     t = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
     work->choice = arg;
 
-    if (arg[0] == 0) {
+    if (arg[0] == TITLE_MENU_NEW_GAME) {
         if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
-            work->layout = 4;
-            arg[0] = 4;
+            work->layout = TITLE_MENU_LAYOUT_NEW_GAME;
+            arg[0] = TITLE_MENU_NEW_GAME_SORA;
         } else {
-            work->layout = 1;
+            work->layout = TITLE_MENU_LAYOUT_SINGLE_NEW_GAME;
         }
-    } else if (arg[0] == 3) {
-        work->layout = 2;
+    } else if (arg[0] == TITLE_MENU_RESUME) {
+        work->layout = TITLE_MENU_LAYOUT_SINGLE_RESUME;
     } else if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
-        work->layout = 3;
+        work->layout = TITLE_MENU_LAYOUT_FULL;
     } else {
-        work->layout = 0;
+        work->layout = TITLE_MENU_LAYOUT_BASIC;
     }
 
 #ifdef VERSION_EU
@@ -509,7 +522,7 @@ void TitleMenuMoveBasic(s16* choice) {
     s16 max;
     u16 keys;
 
-    max = (gGameState.flags & GAME_FLAG_SORA_CLEAR) ? 2 : 1;
+    max = (gGameState.flags & GAME_FLAG_SORA_CLEAR) ? TITLE_MENU_LINK_BATTLE : TITLE_MENU_CONTINUE;
     keys = GetKeysPressed() & DPAD_UP;
 
     if (keys != 0) {
@@ -524,7 +537,7 @@ void TitleMenuMoveBasic(s16* choice) {
         *choice = *choice + 1;
 
         if (*choice > max) {
-            *choice = 0;
+            *choice = TITLE_MENU_NEW_GAME;
         }
     }
 }
@@ -556,11 +569,11 @@ void TitleMenuMoveOrdered(s16* choice, s16 count) {
 }
 
 u8 task_title_menu_1(TitleMenuWork* work) {
-    if (work->layout == 0) {
+    if (work->layout == TITLE_MENU_LAYOUT_BASIC) {
         TitleMenuMoveBasic(work->choice);
-    } else if (work->layout == 3) {
+    } else if (work->layout == TITLE_MENU_LAYOUT_FULL) {
         TitleMenuMoveOrdered(work->choice, 3);
-    } else if (work->layout == 4) {
+    } else if (work->layout == TITLE_MENU_LAYOUT_NEW_GAME) {
         TitleMenuMoveOrdered(work->choice, 1);
     }
 
@@ -709,11 +722,11 @@ void task_title_menu_2(TitleMenuWork* work) {
         work->x = 0;
     }
 
-    if (work->layout == 0) {
+    if (work->layout == TITLE_MENU_LAYOUT_BASIC) {
         TitleMenuDrawBasic(work);
-    } else if (work->layout == 3) {
+    } else if (work->layout == TITLE_MENU_LAYOUT_FULL) {
         TitleMenuDrawFull(work);
-    } else if (work->layout == 4) {
+    } else if (work->layout == TITLE_MENU_LAYOUT_NEW_GAME) {
         TitleMenuDrawNewGame(work);
     } else {
         TitleMenuDrawSingle(work);

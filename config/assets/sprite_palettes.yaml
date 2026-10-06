@@ -5516,27 +5516,17 @@ entries:
     size: 32
 - name: rabbit
   format: palette
-  symbol: gRabbitPalette
+  symbol: gRabbitPalettes
+  shape: [2, 16]
   us:
     address: 0x09849CB8
-    size: 32
+    size: 64
   jp:
     address: 0x097FE98C
-    size: 32
+    size: 64
   eu:
     address: 0x0981E360
-    size: 32
-- name: gUnk_09849CD8
-  format: palette
-  us:
-    address: 0x09849CD8
-    size: 32
-  jp:
-    address: 0x097FE9AC
-    size: 32
-  eu:
-    address: 0x0981E380
-    size: 32
+    size: 64
 - name: roo
   format: palette
   symbol: gRooPalette

@@ -4629,7 +4629,7 @@ void task_poo_rabbit_2(PooRabbitWork* work) {
         TaskPoolUpdate(pool);
 
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gRabbitPalette, 0x40);
+            work->palette = LoadObjPalette(gRabbitPalettes, sizeof(gRabbitPalettes));
             ColliderInit(&work->collider, 10, 4, 48);
             SetPoohInteractionEnabled(work->interactionId, TRUE);
         }
@@ -7472,7 +7472,7 @@ void task_poo_rabbitAfterEvent_2(PooRabbitAfterEventWork* work) {
         TaskPoolUpdate(&work->tasks);
 
         if (work->palette == NULL) {
-            work->palette = LoadObjPalette(gRabbitPalette, 0x40);
+            work->palette = LoadObjPalette(gRabbitPalettes, sizeof(gRabbitPalettes));
             work->tiles = AllocObjTiles(work->tileBytes, gRabbitBl00Tiles);
             ColliderInit(&work->collider, 10, 4, 48);
             SetPoohInteractionEnabled(work->interactionId, TRUE);

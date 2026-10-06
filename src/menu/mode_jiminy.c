@@ -342,7 +342,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { gCharacterNameRoo, gJiminyCharacterRooLines, ARRAY_COUNT(gJiminyCharacterRooLines), gRooFl00Frame0, gRooPalette, gRooFl00Tiles, gCardNpcPo07Frame0, gCardNpcPo07Palette, gCardNpcPo07Tiles, NULL, NULL, NULL, 0, 0, -1, -13 },
     { gCharacterNameEeyore, gJiminyCharacterEeyoreLines, ARRAY_COUNT(gJiminyCharacterEeyoreLines), gEeyoreFl00Frame0, gEeyorePalette, gEeyoreFl00Tiles, gCardNpcPo04Frame0, gCardNpcPo04Palette, gCardNpcPo04Tiles, NULL, NULL, NULL, 0, 0, 5, -13 },
     { gCharacterNameTigger, gJiminyCharacterTiggerLines, ARRAY_COUNT(gJiminyCharacterTiggerLines), gTiggerFl00Frame0, gTiggerPalette, gTiggerFl00Tiles, gCardNpcPo02Frame0, gCardNpcPo02Palette, gCardNpcPo02Tiles, NULL, NULL, NULL, 0, 0, -3, -3 },
-    { gCharacterNameRabbit, gJiminyCharacterRabbitLines, ARRAY_COUNT(gJiminyCharacterRabbitLines), gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, NULL, NULL, NULL, 0, 0, -1, -3 },
+    { gCharacterNameRabbit, gJiminyCharacterRabbitLines, ARRAY_COUNT(gJiminyCharacterRabbitLines), gRabbitFl00Frame0, gRabbitPalettes, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, NULL, NULL, NULL, 0, 0, -1, -3 },
 };
 
 static const JiminyDetail sJiminyEntry13Details[35] = {
@@ -711,7 +711,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { gCharacterNameRoo, gJiminyCharacterRooLines, ARRAY_COUNT(gJiminyCharacterRooLines), gRooFl00Frame0, gRooPalette, gRooFl00Tiles, gCardNpcPo07Frame0, gCardNpcPo07Palette, gCardNpcPo07Tiles, NULL, NULL, NULL, 0, 0, -1, -13 },
     { gCharacterNameEeyore, gJiminyCharacterEeyoreLines, ARRAY_COUNT(gJiminyCharacterEeyoreLines), gEeyoreFl00Frame0, gEeyorePalette, gEeyoreFl00Tiles, gCardNpcPo04Frame0, gCardNpcPo04Palette, gCardNpcPo04Tiles, NULL, NULL, NULL, 0, 0, 5, -13 },
     { gCharacterNameTigger, gJiminyCharacterTiggerLines, ARRAY_COUNT(gJiminyCharacterTiggerLines), gTiggerFl00Frame0, gTiggerPalette, gTiggerFl00Tiles, gCardNpcPo02Frame0, gCardNpcPo02Palette, gCardNpcPo02Tiles, NULL, NULL, NULL, 0, 0, -3, -3 },
-    { gCharacterNameRabbit, gJiminyCharacterRabbitLines, ARRAY_COUNT(gJiminyCharacterRabbitLines), gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, NULL, NULL, NULL, 0, 0, -1, -3 },
+    { gCharacterNameRabbit, gJiminyCharacterRabbitLines, ARRAY_COUNT(gJiminyCharacterRabbitLines), gRabbitFl00Frame0, gRabbitPalettes, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, NULL, NULL, NULL, 0, 0, -1, -3 },
 };
 
 static const JiminyDetail sJiminyEntry13Details[35] = {
@@ -1080,7 +1080,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { &gCharacterNameRooByLanguage, &gJiminyCharacterRooText, gRooFl00Frame0, gRooPalette, gRooFl00Tiles, gCardNpcPo07Frame0, gCardNpcPo07Palette, gCardNpcPo07Tiles, NULL, NULL, NULL, 0, 0, -1, -13 },
     { &gCharacterNameEeyoreByLanguage, &gJiminyCharacterEeyoreText, gEeyoreFl00Frame0, gEeyorePalette, gEeyoreFl00Tiles, gCardNpcPo04Frame0, gCardNpcPo04Palette, gCardNpcPo04Tiles, NULL, NULL, NULL, 0, 0, 5, -13 },
     { &gCharacterNameTiggerByLanguage, &gJiminyCharacterTiggerText, gTiggerFl00Frame0, gTiggerPalette, gTiggerFl00Tiles, gCardNpcPo02Frame0, gCardNpcPo02Palette, gCardNpcPo02Tiles, NULL, NULL, NULL, 0, 0, -3, -3 },
-    { &gCharacterNameRabbitByLanguage, &gJiminyCharacterRabbitText, gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, NULL, NULL, NULL, 0, 0, -1, -3 },
+    { &gCharacterNameRabbitByLanguage, &gJiminyCharacterRabbitText, gRabbitFl00Frame0, gRabbitPalettes, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, NULL, NULL, NULL, 0, 0, -1, -3 },
 };
 
 static const JiminyDetail sJiminyEntry13Details[35] = {

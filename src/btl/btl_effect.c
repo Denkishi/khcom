@@ -365,7 +365,7 @@ void BgFxReleaseEarly(s16 frames) {
     }
 }
 
-void BgFxInit(u16 affine, u16 bg) {
+void BgFxInit(u16 colorMode, u16 bg) {
     s32 i;
     sBgFx = EwramAlloc(sizeof(BgFx));
 
@@ -373,7 +373,7 @@ void BgFxInit(u16 affine, u16 bg) {
         FadeSetPaletteExcluded(i, 1);
     }
 
-    if (affine == 0) {
+    if (colorMode == 0) {
         BgAnimInit(bg, 0xC000, 0);
     } else {
         BgAnimInit(bg, 0x8000, 0x80);
@@ -1308,7 +1308,7 @@ void BgFxStartEnemySpawn(s32 x, s32 y, s32 z, s32 s) {
     sBgFx->timer = 0;
 }
 
-void BgFxStartDarkDeathBlend(s32 x, s32 y, s32 s, u16 alphaA, u16 alphaB) {
+void BgFxStartDarkDeathBlend(s32 x, s32 y, s32 s, u16 target2, u16 target1) {
     s16 sx;
     s16 sy;
 
@@ -1319,7 +1319,7 @@ void BgFxStartDarkDeathBlend(s32 x, s32 y, s32 s, u16 alphaA, u16 alphaB) {
     BgFxReset();
     sBgFx->scaleX = s;
     sBgFx->scaleY = s;
-    SetBgBlend(sBgFx->bg, alphaA, alphaB);
+    SetBgBlend(sBgFx->bg, target2, target1);
     sBgFx->x = x;
     sBgFx->y = y;
     sBgFx->z = -0x1000;

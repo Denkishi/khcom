@@ -7,7 +7,7 @@
 u8 BgFxIsActive();
 void BgFxSetPosition(s32 x, s32 y, s32 z);
 
-void BgFxInit(u16 affine, u16 bg);
+void BgFxInit(u16 colorMode, u16 bg);
 void BgFxFree();
 void BgFxUpdate();
 void BgFxStartCure(u16 variant, s32 x, s32 y, s32 z);
@@ -21,7 +21,7 @@ void BgFxStartWideThunder(u16 variant, s32 x, s32 y, s32 z, s32 groundZ, s32 att
 void BgFxStartEnemyDeath(s32 x, s32 y, s32 z, s32 s);
 void BgFxStartDarkDeath(s32 x, s32 y, s32 z, s32 s);
 void BgFxStartEnemySpawn(s32 x, s32 y, s32 z, s32 s);
-void BgFxStartDarkDeathBlend(s32 x, s32 y, s32 s, u16 alphaA, u16 alphaB);
+void BgFxStartDarkDeathBlend(s32 x, s32 y, s32 s, u16 target2, u16 target1);
 void BgFxStartExplosion(s32 x, s32 y, s32 z);
 void BgFxGetPosition(s32* x, s32* y, s32* z);
 void BgFxStartSummon(s32 x, s32 y, s32 z);

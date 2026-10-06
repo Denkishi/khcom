@@ -24,6 +24,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "card_deckmenu2.h"
+#include "card_types.h"
 
 #ifndef VERSION_EU
 static TaskPool sModeDeckExchangeTasks;
@@ -160,13 +161,13 @@ void FillDebugCardCollection() {
 
     for (i = 0; i < 170; i++) {
         if (n < 999) {
-            gCardCollection[n++] = i | 0x8000;
+            gCardCollection[n++] = i | CARD_FLAG_PREMIUM;
         }
     }
 
     for (i = 170; i < 240; i++) {
         if (n < 999) {
-            gCardCollection[n++] = i | 0x8000;
+            gCardCollection[n++] = i | CARD_FLAG_PREMIUM;
         }
     }
 

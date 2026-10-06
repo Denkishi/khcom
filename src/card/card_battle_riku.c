@@ -2789,7 +2789,7 @@ void RikuCardInit(CardDisplayWork* work, CardDisplayArgs* args) {
         work->flags = CARD_DISP_FLAG_NO_CARD;
     }
 
-    if (work->args.slot->cardId & 0x8000) {
+    if (work->args.slot->cardId & CARD_FLAG_PREMIUM) {
         work->premium = 1;
     } else {
         work->premium = 0;

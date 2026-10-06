@@ -320,7 +320,7 @@ u16 GetMsChargeCardPoints(u16 index) {
 
     if (card->kind != 0x8F) {
         id = card->values[GetMsChargeSelectedValue()][1];
-        return GetCardMooglePointValue(card->premium != 0 ? id | 0x8000 : id);
+        return GetCardMooglePointValue(card->premium != 0 ? id | CARD_FLAG_PREMIUM : id);
     }
 
     return 0;
@@ -447,7 +447,7 @@ void MsChargeSellCard() {
         id = card->values[GetMsChargeSelectedValue()][1];
 
         if (card->premium != 0) {
-            id |= 0x8000;
+            id |= CARD_FLAG_PREMIUM;
         }
 
         for (i = 0; i < gCardCount; i++) {
@@ -601,10 +601,10 @@ void MsChargeBuildCardList() {
         raw = gCardCollection[i];
         id = raw & CARD_ID_MASK;
 
-        if (raw != CARD_COLLECTION_EMPTY && (raw & 0x7000) == 0 && id <= 0x21C) {
+        if (raw != CARD_COLLECTION_EMPTY && (raw & CARD_FLAG_IN_ANY_DECK) == 0 && id <= 0x21C) {
             j = gCardDefs[id].category;
             kind = gCardDefs[id].kind;
-            flags = raw & 0x8000;
+            flags = raw & CARD_FLAG_PREMIUM;
             premium = flags != 0;
             sMsChargeCategoryCardCount[j]++;
             sMsChargeCardTotal++;

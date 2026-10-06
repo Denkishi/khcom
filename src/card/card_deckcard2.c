@@ -57,7 +57,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
     }
 
     if (work->args.cardId != CARD_ID_NONE) {
-        if (!(work->args.cardId & 0x8000)) {
+        if (!(work->args.cardId & CARD_FLAG_PREMIUM)) {
             work->premium = 0;
         } else {
             work->premium = 1;

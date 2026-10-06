@@ -13,6 +13,14 @@ enum CardIdSentinel {
     CARD_ID_NONE = 0xFFFF
 };
 
+enum CardFlag {
+    CARD_FLAG_IN_DECK_1 = 0x1000,
+    CARD_FLAG_IN_DECK_2 = 0x2000,
+    CARD_FLAG_IN_DECK_3 = 0x4000,
+    CARD_FLAG_IN_ANY_DECK = 0x7000,
+    CARD_FLAG_PREMIUM = 0x8000
+};
+
 typedef struct Deck {
     u16 cards[DECK_SIZE];
     u8 name[0x14];

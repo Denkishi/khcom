@@ -439,7 +439,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
     for (i = 0; i < 5; i++) {
         id = sMooglePackCardIds[i];
 
-        if (id & 0x8000) {
+        if (id & CARD_FLAG_PREMIUM) {
             sMooglePackCards[i].premium = 1;
         } else {
             sMooglePackCards[i].premium = 0;
@@ -1040,7 +1040,7 @@ void RollMooglePackCards(s16 category, s16 tier) {
 
                 if (gCardDefs[id].category <= 1) {
                     if (GetRandom() % 100 <= 9) {
-                        id |= 0x8000;
+                        id |= CARD_FLAG_PREMIUM;
                     }
                 }
 

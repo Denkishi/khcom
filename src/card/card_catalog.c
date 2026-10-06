@@ -7565,7 +7565,7 @@ u16 GetCardCpCost(u16 cardId) {
     u16 cpCost;
     CardStat* stat;
 
-    if (cardId & 0x8000) {
+    if (cardId & CARD_FLAG_PREMIUM) {
         return gCardDefs[cardId & 0x0FFF].cpCost;
     }
 
@@ -7589,7 +7589,7 @@ u16 GetCardCpCost(u16 cardId) {
 u16 GetCardMooglePointValue(u16 cardId) {
     u16 points;
 
-    if ((cardId & 0x8000) == 0) {
+    if ((cardId & CARD_FLAG_PREMIUM) == 0) {
         points = GetCardCpCost(cardId) / 5 * 2;
     } else {
         points = GetCardCpCost(cardId & 0x0FFF) / 5 * 2 + 10;

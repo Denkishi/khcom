@@ -1039,7 +1039,7 @@ u16 CountCardsInDecks() {
     count = i = 0;
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] != CARD_COLLECTION_EMPTY && (gCardCollection[i] & 0x7000)) {
+        if (gCardCollection[i] != CARD_COLLECTION_EMPTY && (gCardCollection[i] & CARD_FLAG_IN_ANY_DECK)) {
             count++;
         }
     }
@@ -1061,17 +1061,17 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
     if (mode == 1) {
         switch (deck) {
         case 0:
-            mask = 0x1000;
+            mask = CARD_FLAG_IN_DECK_1;
             break;
         case 1:
-            mask = 0x2000;
+            mask = CARD_FLAG_IN_DECK_2;
             break;
         case 2:
-            mask = 0x4000;
+            mask = CARD_FLAG_IN_DECK_3;
             break;
         }
     } else {
-        mask = 0x7000;
+        mask = CARD_FLAG_IN_ANY_DECK;
     }
 
     for (i = 0; i < gCardCount; i++) {
@@ -1083,7 +1083,7 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
             continue;
         }
 
-        if (!(gCardCollection[i] & 0x8000)) {
+        if (!(gCardCollection[i] & CARD_FLAG_PREMIUM)) {
             present[gCardDefs[gCardCollection[i] & CARD_ID_MASK].kind] = 1;
         } else {
             present[gCardDefs[gCardCollection[i] & CARD_ID_MASK].kind + 0x8F] = 1;

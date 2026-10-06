@@ -4047,7 +4047,7 @@ void SoraCardInit(CardDisplayWork* work, CardDisplayArgs* args) {
     }
 
     // @bug A "not have" display has no slot (NULL read).
-    if (work->args.slot->cardId & 0x8000) {
+    if (work->args.slot->cardId & CARD_FLAG_PREMIUM) {
         work->premium = 1;
     } else {
         work->premium = 0;

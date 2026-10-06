@@ -1051,7 +1051,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
         if (cards[i] != CARD_NONE) {
             if (kind == 0) {
                 args.pool = &work->pool;
-                args.cardId = gCardCollection[cards[i]] & 0x8FFF;
+                args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
                 args.panel = 0;
@@ -1060,7 +1060,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
                 x++;
             } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == kind - 1) {
                 args.pool = &work->pool;
-                args.cardId = gCardCollection[cards[i]] & 0x8FFF;
+                args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
                 args.row = y;
                 args.panel = 0;

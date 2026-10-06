@@ -1079,7 +1079,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
     for (i = 0; i < DECK_SIZE; i++) {
 #endif
         if (cards[i] != CARD_NONE) {
-            if (!(gCardCollection[cards[i]] & 0x8000)) {
+            if (!(gCardCollection[cards[i]] & CARD_FLAG_PREMIUM)) {
                 if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 3) {
                     if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 2) {
                         work->slots[n].cardId = gCardCollection[cards[i]] & CARD_ID_MASK;
@@ -1098,7 +1098,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
 
         do {
             if (cards[j] != CARD_NONE) {
-                if (!(gCardCollection[cards[j]] & 0x8000)) {
+                if (!(gCardCollection[cards[j]] & CARD_FLAG_PREMIUM)) {
                     if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 3) {
                         if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 2) {
                             work->slots[n].cardId = gCardCollection[cards[j]] & CARD_ID_MASK;

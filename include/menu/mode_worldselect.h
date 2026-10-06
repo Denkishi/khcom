@@ -38,7 +38,7 @@ void mode_worldselect_1();
 void WorldselectHandleInput();
 void WorldselectDraw();
 void mode_worldselect_0();
-void WorldselectDrawName(s16 model, s16 n);
+void WorldselectDrawName(s16 model, s16 width);
 void mode_worldselect_2();
 void WorldselectSetBgMode1();
 void WorldselectCyclePalette();

@@ -401,12 +401,12 @@ s32 GetAllmapRoomnamePaletteOffset(u8 nameId) {
     }
 }
 
-void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* arg) {
+void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* nameId) {
     u16 pal;
 
     InitTextSlots(work->textSlots, ALLMAP_ROOMNAME_TEXT_SLOTS);
-    work->textSlotCount = LoadTextSlots(GetRoomName(arg[0]), work->textSlots);
-    pal = GetAllmapRoomnamePaletteOffset(arg[0]);
+    work->textSlotCount = LoadTextSlots(GetRoomName(nameId[0]), work->textSlots);
+    pal = GetAllmapRoomnamePaletteOffset(nameId[0]);
     work->palette = LoadObjPalette(gAllmapRoomnamePalettes + pal, 32);
     LoadPalette(gAllmapRoomnameBgPalettes + pal, gUnk_05000160, 32);
     work->x = AllmapDrawRoomnameFrame(GetTextSlotsWidth(work->textSlots, work->textSlotCount));
@@ -1019,7 +1019,7 @@ void InitAllmap() {
     AllmapInitDropOffsets();
 }
 
-void AllmapUpdateCamera(AllmapState* s) {
+void AllmapUpdateCamera(AllmapState* state) {
     s32 tx;
     s32 ty;
     s32 dx;
@@ -1027,8 +1027,8 @@ void AllmapUpdateCamera(AllmapState* s) {
     s32 px;
     s32 py;
 
-    tx = (s->originX + s->scrollX) << 8;
-    ty = (s->originY + s->scrollY) << 8;
+    tx = (state->originX + state->scrollX) << 8;
+    ty = (state->originY + state->scrollY) << 8;
     dx = (tx - sAllmapCameraFixedX) >> 3;
     dy = (ty - sAllmapCameraFixedY) >> 3;
 

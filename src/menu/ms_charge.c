@@ -548,11 +548,11 @@ void MsChargeRemoveCard(MsCard* card) {
     sMsChargeValueRow = 0;
 }
 
-s32 FindMsCard(u16 id, u8 flag, s16 count) {
+s32 FindMsCard(u16 kind, u8 premium, s16 count) {
     s16 i;
 
     for (i = 0; i < count; i++) {
-        if (sMsCards[i].kind == id && sMsCards[i].premium == flag) {
+        if (sMsCards[i].kind == kind && sMsCards[i].premium == premium) {
             return i;
         }
     }

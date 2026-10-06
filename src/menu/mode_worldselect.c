@@ -268,26 +268,26 @@ s16 WorldselectSetSlotGfx(s16 model, s16 slot) {
     }
 }
 
-void WorldselectDrawName(s16 model, s16 n) {
+void WorldselectDrawName(s16 model, s16 width) {
     u8* src;
     u8* src2;
 
     DmaFill16(3, 0, sWorldselectNameBuffer, 0x6C0);
 
-    if (n > 0) {
+    if (width > 0) {
 #ifdef VERSION_EU
         src = ((u8**)sWorldselectWorldDefs[model].nameTiles)[gLanguage];
         src += sWorldselectWorldDefs[model].nameTilesOffset;
 #else
         src = sWorldselectWorldDefs[model].nameTiles;
 #endif
-        DmaCopy16(3, src, (u8*)sWorldselectNameBuffer + (9 - n) * 32, n * 32);
-        src2 = src + (18 - n) * 32;
-        DmaCopy16(3, src2, (u8*)sWorldselectNameBuffer + 288, n * 32);
-        DmaCopy16(3, src + 576, (u8*)sWorldselectNameBuffer + (9 - n) * 32 + 576, n * 32);
-        DmaCopy16(3, src2 + 576, (u8*)sWorldselectNameBuffer + 864, n * 32);
-        DmaCopy16(3, src + 1152, (u8*)sWorldselectNameBuffer + (9 - n) * 32 + 1152, n * 32);
-        DmaCopy16(3, src2 + 1152, (u8*)sWorldselectNameBuffer + 1440, n * 32);
+        DmaCopy16(3, src, (u8*)sWorldselectNameBuffer + (9 - width) * 32, width * 32);
+        src2 = src + (18 - width) * 32;
+        DmaCopy16(3, src2, (u8*)sWorldselectNameBuffer + 288, width * 32);
+        DmaCopy16(3, src + 576, (u8*)sWorldselectNameBuffer + (9 - width) * 32 + 576, width * 32);
+        DmaCopy16(3, src2 + 576, (u8*)sWorldselectNameBuffer + 864, width * 32);
+        DmaCopy16(3, src + 1152, (u8*)sWorldselectNameBuffer + (9 - width) * 32 + 1152, width * 32);
+        DmaCopy16(3, src2 + 1152, (u8*)sWorldselectNameBuffer + 1440, width * 32);
     }
 
     RequestDma3Copy(sWorldselectNameBuffer, (u8*)GetBgCharBase(0) + 1024, 0x6C0);

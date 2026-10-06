@@ -16,7 +16,7 @@ u8 MsCardIsEmpty(MsCard* card);
 u8 MsCardSelectedValueIsEmpty(MsCard* card);
 void MsChargeSelectNextValue(MsCard* card);
 void MsChargeRemoveCard(MsCard* card);
-s32 FindMsCard(u16 id, u8 flag, s16 count);
+s32 FindMsCard(u16 kind, u8 premium, s16 count);
 s32 MsChargeReadMenuKeys();
 s32 MsChargeSelectValueInColumn(MsCard* card, u16 col);
 

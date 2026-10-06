@@ -221,36 +221,36 @@ void WorldInspectCopyTilemapRect(s16 w, s16 h, u16* src, s16 sx, s16 sy, u16* ds
     }
 }
 
-u8 WorldInspectLoadName(s16 id) {
+u8 WorldInspectLoadName(s16 world) {
 #ifdef VERSION_EU
     u8 ret = 0;
 
-    if (id != 0) {
-        ret = LoadTextSlots(GetLocalizedString(sWorldinspectMsgs[id].text), sWorldInspectNameText);
+    if (world != 0) {
+        ret = LoadTextSlots(GetLocalizedString(sWorldinspectMsgs[world].text), sWorldInspectNameText);
     }
 
     return ret;
 #else
-    if (id == 0) {
+    if (world == 0) {
         return 0;
     }
 
-    return LoadTextSlots(sWorldinspectMsgs[id].text, sWorldInspectNameText);
+    return LoadTextSlots(sWorldinspectMsgs[world].text, sWorldInspectNameText);
 #endif
 }
 
-u8 WorldInspectLoadDesc(s16 id) {
+u8 WorldInspectLoadDesc(s16 world) {
     CardDescriptionText** tbl;
     CardDescriptionText** p;
     u16 i;
 
-    if (id != 0) {
+    if (world != 0) {
         tbl = gWorldDescriptions;
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            i = sWorldinspectMsgs[id].descId2;
+            i = sWorldinspectMsgs[world].descId2;
         } else {
-            i = sWorldinspectMsgs[id].descId;
+            i = sWorldinspectMsgs[world].descId;
         }
 
         p = &tbl[i];

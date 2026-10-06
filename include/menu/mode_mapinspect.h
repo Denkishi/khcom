@@ -13,7 +13,7 @@ u8 MapInspectCanDelete();
 s16 GetMapInspectValueIndex(s16 col, s16 row);
 s16 GetMapInspectSelectedValue();
 u16 MapInspectReadMenuKeys();
-void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 row);
+void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 col);
 void MapInspectDeleteCard();
 u8 MapCardEntryIsEmpty(MapCardInventoryEntry* entry);
 u8 MapCardEntrySelectedValueIsEmpty(MapCardInventoryEntry* entry);

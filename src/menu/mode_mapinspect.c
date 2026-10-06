@@ -767,7 +767,7 @@ void MapInspectHandleTabInput() {
     }
 }
 
-void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 row) {
+void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 col) {
     s16 c;
     s16 i;
     s32 k;
@@ -777,16 +777,16 @@ void MapInspectSelectValueInColumn(MapCardInventoryEntry* entry, u16 row) {
     for (i = 0; i <= 4; i++) {
         k = c - i;
 
-        if (k >= 0 && entry->countsByValue[GetMapInspectValueIndex(row, k)] > 0) {
-            sMapInspectValueCol = row;
+        if (k >= 0 && entry->countsByValue[GetMapInspectValueIndex(col, k)] > 0) {
+            sMapInspectValueCol = col;
             sMapInspectValueRow = k;
             return;
         }
 
         k = c + i;
 
-        if (k <= 4 && entry->countsByValue[GetMapInspectValueIndex(row, k)] > 0) {
-            sMapInspectValueCol = row;
+        if (k <= 4 && entry->countsByValue[GetMapInspectValueIndex(col, k)] > 0) {
+            sMapInspectValueCol = col;
             sMapInspectValueRow = k;
             return;
         }

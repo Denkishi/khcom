@@ -523,8 +523,8 @@ u8 IsStatusBarIdle() {
     return 0;
 }
 
-void task_status_tab_0(StatusTabWork* work, s32* arg) {
-    work->tab = arg;
+void task_status_tab_0(StatusTabWork* work, s32* tab) {
+    work->tab = tab;
 #ifdef VERSION_EU
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(sStatusTabSprites[gLanguage], 4),
         sStatusTabTiles[gLanguage]);
@@ -606,9 +606,9 @@ void task_status_sora_3(StatusSoraWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void task_status_deckname_0(StatusDecknameWork* work, u8* arg) {
+void task_status_deckname_0(StatusDecknameWork* work, u8* mesWindowOpen) {
     InitTextSlots(work->textSlots, 10);
-    work->mesWindowOpen = arg;
+    work->mesWindowOpen = mesWindowOpen;
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
     work->palette = LoadObjPalette(gStatusRowHighlightPalette, 0x20);
 }
@@ -628,8 +628,8 @@ void task_status_deckname_3(StatusDecknameWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
-    work->cursor = arg;
+void task_status_cursor_0(StatusCursorWork* work, s16* cursor) {
+    work->cursor = cursor;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusRowHighlightFrames, 5), gStatusRowHighlightTiles);
     work->palette = LoadObjPalette(gStatusRowHighlightPalette, 0x20);
     AnimInit(&work->anim[0], gStatusRowHighlightAnims, gStatusRowHighlightFrames);
@@ -702,12 +702,12 @@ void task_status_cursor_3(StatusCursorWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
+void task_status_stocklist_0(StatusStocklistWork* work, s32* tab) {
     s32 i;
     StatusEntry* e;
 
     sStatusStocklistWork = work;
-    work->tab = arg;
+    work->tab = tab;
     e = work->entries;
 
     for (i = 0; i < 4; i++) {
@@ -874,8 +874,8 @@ void StatusEntryClear(StatusEntry* entry) {
     entry->count = 0;
 }
 
-void StatusEntryAppend(StatusEntry* entry, s32 v) {
-    entry->items[entry->count] = v;
+void StatusEntryAppend(StatusEntry* entry, s32 item) {
+    entry->items[entry->count] = item;
     entry->count++;
 }
 
@@ -1065,8 +1065,8 @@ s16 GetStatusScrollcursorY(StatusScrollcursorWork* work) {
     return *work->scroll * 84 / GetStatusMaxScroll() + 40;
 }
 
-void task_status_scrollcursor_0(StatusScrollcursorWork* work, u16* arg) {
-    work->scroll = arg;
+void task_status_scrollcursor_0(StatusScrollcursorWork* work, u16* scroll) {
+    work->scroll = scroll;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusCursorFrames, 4), gStatusCursorTiles);
     work->palette = LoadObjPalette(gStatusCursorPalette, 0x20);
     work->gfx = gStatusCursorFrames[4];
@@ -1089,8 +1089,8 @@ void task_status_scrollcursor_3(StatusScrollcursorWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void task_status_meswindow_0(StatusMeswindowWork* work, u8* arg) {
-    work->open = arg;
+void task_status_meswindow_0(StatusMeswindowWork* work, u8* open) {
+    work->open = open;
     work->item = 72;
     TaskPoolInit(&work->pool, 2);
     work->task = NULL;

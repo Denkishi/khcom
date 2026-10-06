@@ -127,7 +127,7 @@ typedef struct AllmapPushaWork {
 
 s32 GetAllmapRoomPaletteOffset(u8 room);
 void InitAllmap();
-void AllmapUpdateCamera(AllmapState* s);
+void AllmapUpdateCamera(AllmapState* state);
 void UpdateAllmap();
 void DestroyAllmap();
 void AllmapHandleInput();
@@ -163,7 +163,7 @@ void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg);
 s32 task_allmap_cursor_1(AllmapCursorWork* work);
 void task_allmap_cursor_2(AllmapCursorWork* work);
 void task_allmap_cursor_3(AllmapCursorWork* work);
-void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* arg);
+void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* nameId);
 s32 task_allmap_roomname_1();
 void task_allmap_roomname_2(AllmapRoomnameWork* work);
 void task_allmap_roomname_3(AllmapRoomnameWork* work);

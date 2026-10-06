@@ -815,7 +815,7 @@ void SioBtlOptionInitObjs() {
     s32 i;
 
 #ifdef VERSION_EU
-    RequestDma3Copy(gSioBtlOptionExtraTiles, (u8*)GetBgCharBase(0) + 0x49E0, sizeof(gSioBtlOptionExtraTiles));
+    RequestDma3Copy(gSioBtlCardgetBgTiles + 0x9E0, (u8*)GetBgCharBase(0) + 0x49E0, sizeof(gSioBtlCardgetBgTiles) - 0x9E0);
 #endif
 
     if (sSioBtlOptionWork->modeArg == 1) {
@@ -2385,11 +2385,7 @@ void SioBtlCardgetLoadBgTiles() {
 }
 
 void SioBtlCardgetLoadBg() {
-#ifdef VERSION_EU
-    RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, 0x2000);
-#else
     RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, sizeof(gSioBtlCardgetBgTiles));
-#endif
     LoadBgPalette(1, gSioBtlCardgetBgPalettes, sizeof(gSioBtlCardgetBgPalettes));
 
 #ifdef VERSION_EU

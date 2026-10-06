@@ -90,7 +90,7 @@ entries:
     size: 2528
   eu:
     address: 0x0967C18C
-    size: 2528
+    size: 8192
 - name: gSioBtlOptionDigitTiles
   format: tiles4
   width: 2
@@ -279,11 +279,6 @@ entries:
   jp:
     address: 0x096B4760
     size: 128
-- name: gSioBtlOptionExtraTiles
-  format: tiles4
-  eu:
-    address: 0x0967CB6C
-    size: 5664
 - name: gUnkEu_096C098C
   format: tilemap
   eu:

@@ -17,6 +17,7 @@
 #include "event_ids.h"
 #include "msg_portrait_data.h"
 #include "world_types.h"
+#include "macros.h"
 
 #include "events/074_monstoro_e0.inc"
 #include "events/075_monstoro_e1.inc"

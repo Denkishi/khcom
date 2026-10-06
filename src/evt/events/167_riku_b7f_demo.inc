@@ -165,7 +165,7 @@ static const EventCharaTrack sEvent167Tracks[5] = {
 
 #if defined(VERSION_US) || defined(VERSION_JP)
 const EventSequenceDef gEvent167 = {
-    5,
+    ARRAY_COUNT(sEvent167Tracks),
     sEvent167Tracks,
     sEvent167Camera,
     sEvent167Script,
@@ -188,7 +188,7 @@ const EventSequenceDef gEvent167 = {
 };
 #elif defined(VERSION_EU)
 const EventSequenceDef gEvent167 = {
-    5,
+    ARRAY_COUNT(sEvent167Tracks),
     sEvent167Tracks,
     sEvent167Camera,
     sEvent167Script,

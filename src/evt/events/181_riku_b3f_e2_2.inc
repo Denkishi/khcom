@@ -78,7 +78,7 @@ static const EventCharaTrack sEvent181Tracks[3] = {
 };
 
 const EventSequenceDef gEvent181 = {
-    3,
+    ARRAY_COUNT(sEvent181Tracks),
     sEvent181Tracks,
     sEvent181Camera,
     sEvent181Script,

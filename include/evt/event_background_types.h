@@ -10,6 +10,13 @@ enum EventBackgroundFlag {
     EVENT_BG_FLAG_ALPHA_BLEND = 0x2
 };
 
+enum EventBgCompression {
+    EVENT_BG_COMPRESSION_NONE,
+    EVENT_BG_COMPRESSION_TILES,
+    EVENT_BG_COMPRESSION_MAPS,
+    EVENT_BG_COMPRESSION_TILES_AND_MAPS
+};
+
 typedef struct EventBackgroundDef {
     void* tiles;
     void* tiles2;

@@ -2511,7 +2511,8 @@ void event_seq_0(EventSeqWork* work, u8* arg) {
             }
 
             if (bg->isAffine != 0) {
-                if (bg->compression[0] == 1 || bg->compression[0] == 3) {
+                if (bg->compression[0] == EVENT_BG_COMPRESSION_TILES ||
+                    bg->compression[0] == EVENT_BG_COMPRESSION_TILES_AND_MAPS) {
                     LoadBgTilesLz77(2, bg->tiles);
                 } else {
                     LoadBgTiles(2, bg->tiles, bg->tilesSize);
@@ -2521,7 +2522,8 @@ void event_seq_0(EventSeqWork* work, u8* arg) {
                 SetBgColorMode(2, BGCNT_256COLOR);
                 SetBgSize(2, BGCNT_AFF512x512);
 
-                if (bg->compression[0] == 2 || bg->compression[0] == 3) {
+                if (bg->compression[0] == EVENT_BG_COMPRESSION_MAPS ||
+                    bg->compression[0] == EVENT_BG_COMPRESSION_TILES_AND_MAPS) {
                     LoadBgMapLz77(2, (void*)*bg->maps);
                 } else {
                     LoadBgMap(2, *bg->maps, 0x1000);
@@ -2552,7 +2554,8 @@ u8 LoadEventBg3(EventSeqWork* work) {
     EventBackgroundDef* bg = gEventBackgroundDefs[work->eventId];
 
     if (bg != NULL) {
-        if (bg->compression[0] == 1 || bg->compression[0] == 3) {
+        if (bg->compression[0] == EVENT_BG_COMPRESSION_TILES ||
+            bg->compression[0] == EVENT_BG_COMPRESSION_TILES_AND_MAPS) {
             LoadBgTilesLz77(3, bg->tiles);
         } else {
             LoadBgTiles(3, bg->tiles, bg->tilesSize);
@@ -2561,7 +2564,8 @@ u8 LoadEventBg3(EventSeqWork* work) {
         LoadBgPalette(3, bg->palette, bg->paletteSize);
 
         if (bg->maps != NULL) {
-            if (bg->compression[0] == 2 || bg->compression[0] == 3) {
+            if (bg->compression[0] == EVENT_BG_COMPRESSION_MAPS ||
+                bg->compression[0] == EVENT_BG_COMPRESSION_TILES_AND_MAPS) {
                 work->bg3MapUnpacked = TRUE;
                 SetBgMapBlocksLz77(3, bg->maps, bg->mapWidth, bg->mapHeight);
             } else {
@@ -2581,7 +2585,8 @@ u8 LoadEventBg2Map(EventSeqWork* work) {
 
     if (bg != NULL) {
         if (bg->maps2 != NULL) {
-            if (bg->compression[0] == 2 || bg->compression[0] == 3) {
+            if (bg->compression[0] == EVENT_BG_COMPRESSION_MAPS ||
+                bg->compression[0] == EVENT_BG_COMPRESSION_TILES_AND_MAPS) {
                 work->bg2MapUnpacked = TRUE;
                 SetBgMapBlocksLz77(2, bg->maps2, bg->mapWidth, bg->mapHeight);
             } else {
@@ -2606,7 +2611,8 @@ u8 LoadEventBg1(EventSeqWork* work) {
         if (bg->tiles2 != NULL) {
             if ((bg->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
                 LoadBgTiles(2, bg->tiles2, bg->tilesSize2);
-            } else if (bg->compression[0] == 1 || bg->compression[0] == 3) {
+            } else if (bg->compression[0] == EVENT_BG_COMPRESSION_TILES ||
+                       bg->compression[0] == EVENT_BG_COMPRESSION_TILES_AND_MAPS) {
                 LoadBgTilesLz77(1, bg->tiles2);
             } else {
                 LoadBgTiles(1, bg->tiles2, bg->tilesSize2);
@@ -2625,7 +2631,8 @@ u8 LoadEventBg1(EventSeqWork* work) {
                 gEventState->bldAlpha = 0;
             }
 
-            if (bg->compression[0] == 2 || bg->compression[0] == 3) {
+            if (bg->compression[0] == EVENT_BG_COMPRESSION_MAPS ||
+                bg->compression[0] == EVENT_BG_COMPRESSION_TILES_AND_MAPS) {
                 work->bg1MapUnpacked = TRUE;
                 SetBgMapBlocksLz77(1, bg->maps3, bg->mapWidth, bg->mapHeight);
             } else {

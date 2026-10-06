@@ -693,14 +693,14 @@ u8 BosMdUpdateQuake(MdWork* work) {
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
                     BtlMapStartShake();
-                    work->signals |= 1;
+                    work->signals |= MD_SIGNAL_QUAKE_SLAM;
                     work->step = BOS_MD_QUAKE_STEP_SECOND_SLAM;
                 } else if (gfxIndex == 28) {
                     ApplyAttackBox(254, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
                     BtlMapStartShake();
-                    work->signals |= 1;
+                    work->signals |= MD_SIGNAL_QUAKE_SLAM;
                     work->step = BOS_MD_QUAKE_STEP_DONE;
                 }
 
@@ -714,7 +714,7 @@ u8 BosMdUpdateQuake(MdWork* work) {
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
                     BtlMapStartShake();
-                    work->signals |= 1;
+                    work->signals |= MD_SIGNAL_QUAKE_SLAM;
                     work->step = BOS_MD_QUAKE_STEP_DONE;
                 }
 
@@ -759,7 +759,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
 
     switch (work->statePhase) {
         case BOS_MD_PHASE_ENTER:
-            work->signals = work->signals | 2;
+            work->signals = work->signals | MD_SIGNAL_CLEAR_FIRES;
             MdAnimStart(work, 2);
             work->step = BOS_MD_FIRE_BREATH_STEP_WINDUP;
             break;
@@ -782,7 +782,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
                     }
 
                     if (!BgFxIsActive()) {
-                        work->signals &= 0xFFFD;
+                        work->signals &= ~MD_SIGNAL_CLEAR_FIRES;
                         fireArg.pool = &work->tasks;
                         fireArg.index = 0;
                         fireArg.flags = &work->signals;
@@ -866,7 +866,7 @@ u8 BosMdUpdateDefeat(MdWork* work) {
         case BOS_MD_PHASE_ENTER:
             MdAnimStart(work, 10);
             BeginBossDefeat(&work->sub[0]);
-            work->signals |= 2;
+            work->signals |= MD_SIGNAL_CLEAR_FIRES;
             work->step = BOS_MD_DEFEAT_STEP_WAIT_FADE;
             break;
         case BOS_MD_PHASE_UPDATE:
@@ -1341,7 +1341,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
     result = 1;
     sub = &work->sub;
 
-    if ((*work->flags & 2) && work->state != BOS_MD_FIRE_STATE_VANISH) {
+    if ((*work->flags & MD_SIGNAL_CLEAR_FIRES) && work->state != BOS_MD_FIRE_STATE_VANISH) {
         SetBtlObjUnhittable(sub, TRUE);
         work->scaleSteps = 30;
         work->state = BOS_MD_FIRE_STATE_VANISH;
@@ -1663,14 +1663,14 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             ColliderSetHeight(&work->collider, 24);
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
             work->level = 3;
-            *work->flags &= 0xFFFE;
+            *work->flags &= ~MD_SIGNAL_QUAKE_SLAM;
             work->state = BOS_MD_DAI_STATE_STACKED;
         }
 
         break;
     case BOS_MD_DAI_STATE_STACKED:
-        if (*work->flags & 1) {
-            *work->flags &= 0xFFFE;
+        if (*work->flags & MD_SIGNAL_QUAKE_SLAM) {
+            *work->flags &= ~MD_SIGNAL_QUAKE_SLAM;
             args[0] = work->x;
             args[1] = work->y;
             args[2] = -((work->level - 1) * 7 << 9);

@@ -137,6 +137,11 @@ enum MdFlag {
     MD_FLAG_STATE_REQUESTED = 0x1
 };
 
+enum MdSignal {
+    MD_SIGNAL_QUAKE_SLAM = 0x1,
+    MD_SIGNAL_CLEAR_FIRES = 0x2
+};
+
 typedef struct MdWork {
     u32 state;
     u32 nextState;

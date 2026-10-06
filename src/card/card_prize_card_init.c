@@ -1676,6 +1676,7 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
     CpuFill32(0, card, sizeof(EventKeyCard));
 
     if (key->kind != MAP_CARD_NONE) {
+        // @bug kind is a MapCardKind, not a group (latent: only key card kinds are used).
         def = &gMapCardDefs[key->kind * 10];
         backDef = &gMapCardBackDefs[def->backIndex];
         card->sprite.tiles = LoadObjTiles(def->tiles, def->tilesSize);

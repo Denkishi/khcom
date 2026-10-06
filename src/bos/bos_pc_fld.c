@@ -212,6 +212,7 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
     dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
     dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
 
+    // @bug Should clamp to +-0x500, not add it.
     if (dx > 0x500) {
         dx += 0x500;
     } else if (dx < -0x500) {

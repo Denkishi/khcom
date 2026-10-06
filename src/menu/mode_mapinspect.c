@@ -583,6 +583,7 @@ void MapInspectBuildInventory() {
         sMapInspectCategoryStart[j] = entryCount;
         sMapInspectCategoryCardCount[j] = 0;
 
+        // @bug Reads past the end of gMapCardDefs at k = 26 (harmless).
         for (k = 0; k <= 26; k++) {
             color = gMapCardDefs[k * 10].color;
 

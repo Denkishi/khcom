@@ -940,6 +940,7 @@ s32 ApplyAttackAt(s32 attack, s32 x, s32 y, s32 z) {
 }
 
 s32 ApplyAttackInFront(BtlObj* obj, s16 distance, s32 attack) {
+    // @bug Passes attack last, but ApplyAttackAt takes it first (never called).
     if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
         return ApplyAttackAt(obj->x - (distance << 8), obj->y, obj->z - (obj->height >> 1), attack);
     } else {

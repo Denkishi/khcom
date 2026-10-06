@@ -5785,6 +5785,7 @@ u8 CheckCardDeletable(DeckMenuWork* work) {
         cardId = gCardCollection[card] & CARD_ID_MASK;
         def = &gCardDefs[cardId];
 
+        // @bug Should be >=, so card 450 (the first enemy card) is missed (harmless here).
         if (cardId > CARD_ID_FIRST_ENEMY) {
             if (idx != 0) {
                 continue;
@@ -6929,6 +6930,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
             RequestDma3Copy(gDeckKeyboardTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x4800, sizeof(gDeckKeyboardTextFrenchTiles));
             break;
         case LANGUAGE_GERMAN:
+            // @bug Reads past the end of gDeckKeyboardTextGermanTiles.
             RequestDma3Copy(gDeckKeyboardTextGermanTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
         case LANGUAGE_ITALIAN:
@@ -7304,6 +7306,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         work->keyCursorSteps = 1;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
 #ifdef VERSION_EU
+        // @bug Should subtract DECK_KEYBOARD_PAGE_ALPHANUMERIC; reads past gKeyboardPageTabXEu.
         work->handX = (gKeyboardPageTabXEu[work->keyboardPage] + 8) << 8;
         work->handY = 0x1A00;
 #endif

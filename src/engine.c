@@ -1022,6 +1022,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
             dy = ~dy;
         }
 
+        // @bug Each part is offset from the previous one, not the sprite's position (never called).
         x += dx;
         y += dy;
         EngineObjSize(attr0, attr1, &w, &h);

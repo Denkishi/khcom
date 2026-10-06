@@ -740,6 +740,7 @@ void mode_worldinspect_0() {
             RequestDma3Copy(gWorldInspectRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldInspectRikuFloorNumberItalianTiles));
             break;
         case LANGUAGE_GERMAN:
+            // @bug Reads past the end of gWorldInspectRikuFloorNumberGermanTiles.
             RequestDma3Copy(gWorldInspectRikuFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         }

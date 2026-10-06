@@ -1056,6 +1056,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
 
         while (node != NULL) {
             if (node->x == -0x6400) {
+                // @bug Clears firstLoaded's flag instead of node's.
                 firstLoaded->flags &= ~MAPCARD_FLAG_CURSOR;
             }
 
@@ -1100,6 +1101,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
 
         while (node != NULL) {
             if (node->x == -0x6400) {
+                // @bug Clears firstLoaded's flag instead of node's.
                 firstLoaded->flags &= ~MAPCARD_FLAG_CURSOR;
             }
 

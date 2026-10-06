@@ -498,6 +498,7 @@ u8 FindStockPairsInCombo(s32* keys, u8* found) {
 }
 
 s32 GetStockMove(s32 stock) {
+    // @bug No case for STOCK_SLEIGHT_68 (latent: no lookup returns it).
     switch (stock) {
     case STOCK_FIRA:
         return MOVE_FIRA;

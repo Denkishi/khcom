@@ -791,6 +791,7 @@ u8 UpdateBossPrizeShow(BossPrizeWork* work, void* task) {
     UpdateBossPrizeScale(work);
     work->holdTimer++;
 
+    // @bug Should be >=, so card 450 (the first enemy card) is missed (no boss prize is 450).
     if ((u32)work->cardId > CARD_ID_FIRST_ENEMY) {
         if (work->holdTimer == 120) {
             work->holdTimer = 0;

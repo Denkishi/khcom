@@ -1084,7 +1084,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
             return TRUE;
         }
 
-        // @bug unk_184 is NULL for humanoid bosses without a card table (NULL read).
+        // @bug stockMoves is NULL for every humanoid boss but Lexaeus (NULL read).
         if (value == 0 || work->stockMoves[cards] != id) {
             gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         } else {

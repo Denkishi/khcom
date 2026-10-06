@@ -1446,6 +1446,7 @@ s32 GetMsgTextWidth(const TextChar* text) {
     while (*text != MSG_CODE_END) {
         glyph = 0;
 
+        // @bug In EU, 10 is the up-arrow glyph and the newline is 0x1F (latent).
         if (*text != 10) {
 #ifdef VERSION_US
             if ((u16)(*text - 32) <= 223) {

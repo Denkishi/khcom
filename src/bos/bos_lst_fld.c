@@ -417,6 +417,7 @@ void BosLstFldResetShake() {
 }
 
 void BosLstFldSetShake(s16 pattern) {
+    // @bug Never sets sBosLstFldShakeActive, so the shake never starts (never called).
     sBosLstFldShakePattern = pattern;
     sBosLstFldShakeStep = 0;
     sBosLstFldShakeOffset = 0;
@@ -568,6 +569,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
         break;
     }
 
+    // @bug Should clamp to +-0x500, not add it.
     if (dx > 0x500) {
         dx += 0x500;
     } else if (dx < -0x500) {

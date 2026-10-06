@@ -1557,6 +1557,7 @@ void mode_jiminy_0() {
         RequestDma3Copy(gJiminyBgTitleTilesItalian, (u8*)GetBgCharBase(1) + 0x2000, sizeof(gJiminyBgTitleTilesItalian));
         break;
     case LANGUAGE_GERMAN:
+        // @bug Reads past the end of gJiminyBgTitleTilesGerman.
         RequestDma3Copy(gJiminyBgTitleTilesGerman, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
     }

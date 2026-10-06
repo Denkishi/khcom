@@ -1029,6 +1029,7 @@ void deckexchange_3(DeckExchangeWork* work) {
     FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     FreeTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
     FreeTextSlots(work->textSlots5, ARRAY_COUNT(work->textSlots5));
+    // @bug Releases palette4 a second time.
     ReleaseObjPalette(*palette4);
     TaskPoolDestroy(&work->tasks);
     TaskPoolDestroy(&work->tasks2);

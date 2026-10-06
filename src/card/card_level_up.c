@@ -311,6 +311,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_GERMAN:
+                    // @bug Reads past the end of gLevelUpBannerGermanTiles.
                     RequestDma3Copy(gLevelUpBannerGermanTiles, GetBgCharBase(1) + 0x2400, 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
@@ -348,6 +349,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
+                        // @bug Reads past the end of gLevelUpBannerGermanTiles.
                         RequestDma3Copy(gLevelUpBannerGermanTiles, GetBgCharBase(0) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
@@ -383,6 +385,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
+                        // @bug Reads past the end of gLevelUpBannerGermanTiles.
                         RequestDma3Copy(gLevelUpBannerGermanTiles, GetBgCharBase(1) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;

@@ -2157,6 +2157,7 @@ u8 StockRikuCard(CardBattleWork* work) {
         return 1;
     }
 
+    // @bug? unk_0B0 is only ever set to 145, so these never fire.
     if (gCardBattleState->unk_0B0 == 112) {
         return 1;
     }

@@ -4505,6 +4505,7 @@ void Mode_MenuLoad_0(s32 arg) {
         RequestDma3Copy((void*)gMenuLoadLabelsItalianTiles, (u8*)GetBgCharBase(1) + 0xC00, sizeof(gMenuLoadLabelsItalianTiles));
         break;
     case LANGUAGE_GERMAN:
+        // @bug Reads past the end of gMenuLoadLabelsGermanTiles.
         RequestDma3Copy((void*)gMenuLoadLabelsGermanTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     }

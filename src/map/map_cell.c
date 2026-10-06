@@ -981,6 +981,7 @@ void MapFillOutlineCells() {
             }
         }
 
+        // @bug? Never true: fillType is never UNSET (NONE was probably meant).
         if (fillType == MAP_CELL_TYPE_UNSET) {
             for (j = 0; j < sMapRows; j++) {
                 MapCellSetType(MapGetCell(i, j), MAP_CELL_TYPE_BACK_WALL_FACE, 0);

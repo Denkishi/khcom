@@ -243,6 +243,7 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* task) {
     UpdateFieldPrizeCardScale(work);
     work->holdTimer++;
 
+    // @bug Should be >=, so card 450 (the first enemy card) is missed (never called).
     if (work->cardId > CARD_ID_FIRST_ENEMY) {
         if (work->holdTimer == 120) {
             work->holdTimer = 0;

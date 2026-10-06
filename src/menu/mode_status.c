@@ -99,6 +99,7 @@ void mode_status_0() {
         RequestDma3Copy(gStatusBgFrenchTiles, (u8*)GetBgCharBase(3) + 0x1800, sizeof(gStatusBgFrenchTiles));
         break;
     case LANGUAGE_GERMAN:
+        // @bug Reads past the end of gStatusBgGermanTiles.
         RequestDma3Copy(gStatusBgGermanTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
     case LANGUAGE_ITALIAN:

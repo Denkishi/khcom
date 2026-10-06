@@ -774,6 +774,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     if (freePack & 1) {
                         SetupBg(3, 0, 31, 0);
                         SetBgScroll(3, 0, 0);
+                        // @bug Reads past the end of gMoogleShopBgTiles.
                         RequestDma3Copy(gMoogleShopBgTiles + 0x5800, (u8*)GetBgCharBase(3) + 0x5800, 0x1400);
                         LoadBgMap(3, gMooglePackCardInfoMap, sizeof(gMooglePackCardInfoMap));
                     }

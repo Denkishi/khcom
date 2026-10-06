@@ -488,6 +488,7 @@ void mode_worldwarp_0() {
             RequestDma3Copy(gWorldWarpRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldWarpRikuFloorNumberItalianTiles));
             break;
         case LANGUAGE_GERMAN:
+            // @bug Reads past the end of gWorldWarpRikuFloorNumberGermanTiles.
             RequestDma3Copy(gWorldWarpRikuFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         }

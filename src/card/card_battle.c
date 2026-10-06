@@ -1208,6 +1208,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                 gCardBattleState->soraStockName = result;
 
                 if (result <= STOCK_ICE_NEEDLES) {
+                    // @bug Always true here, so the STOCK_MULTIPLE branch never runs.
                     if (result != STOCK_MULTIPLE) {
                         for (i = 0; i < work->stockCount; i++) {
                             work->stock[i]->flags |= CARD_DISP_FLAG_STOCK_NAMED;
@@ -1956,6 +1957,7 @@ void AddPickedCardToSoraDeck(CardBattleWork* work) {
 
     slots = work->slots[CARD_LIST_MAIN];
 
+    // @bug Other gimmick cards take the friend card path (latent: only CARD_GIMMICK_0 drops).
     if (gCardBattleState->pickedGimmickCardId == CARD_GIMMICK_0) {
         slots[work->slotCounts[CARD_LIST_MAIN] - 5].cardId = CARD_GIMMICK_0;
         slots[work->slotCounts[CARD_LIST_MAIN] - 5].index = work->slotCounts[CARD_LIST_MAIN] - 5;
@@ -2835,6 +2837,7 @@ s32 StockSoraCard(CardBattleWork* work) {
         return 1;
     }
 
+    // @bug? unk_0B4 is only ever set to 145, so this never fires.
     if (gCardBattleState->unk_0B4 == 112 || gCardBattleState->unk_0B4 == 109) {
         return 1;
     }

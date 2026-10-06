@@ -246,11 +246,11 @@ u8 task_emy_31_1(Emy31Work* work) {
             if (AnimIsFinished(&work->base.anim)) {
                 if (work->base.steps == 0) {
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        BgFxStartThunder(1, act->x - 0x1600, act->y,
+                        BgFxStartThunder(SPELL_TIER_RA, act->x - 0x1600, act->y,
                             act->z - 0x3C00, w->targetX, w->targetY,
                             w->targetZ, 0xD1);
                     } else {
-                        BgFxStartThunder(1, act->x + 0x1600, act->y,
+                        BgFxStartThunder(SPELL_TIER_RA, act->x + 0x1600, act->y,
                             act->z - 0x3C00, w->targetX, w->targetY,
                             w->targetZ, 0xD1);
                     }

@@ -1358,21 +1358,21 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
         case 0x80034CD3:
             work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
         case 0xCD334CD3:
             work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
         case 27:
@@ -1725,19 +1725,19 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = SPELL_TIER_BASE;
             break;
         case 0x80039CE7:
             work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = SPELL_TIER_RA;
             break;
         case 0xCE739CE7:
             work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = SPELL_TIER_GA;
             break;
         case 0xC0100401:
             work->state = BTL_SORA_STATE_SONIC_BLADE;
@@ -3221,13 +3221,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 27) {
             switch (work->variant[0]) {
             case 0:
-                BgFxStartAero(0, act->x, act->y, act->z, 81);
+                BgFxStartAero(SPELL_TIER_BASE, act->x, act->y, act->z, 81);
                 break;
             case 1:
-                BgFxStartAero(1, act->x, act->y, act->z, 82);
+                BgFxStartAero(SPELL_TIER_RA, act->x, act->y, act->z, 82);
                 break;
             case 2:
-                BgFxStartAero(2, act->x, act->y, act->z, 83);
+                BgFxStartAero(SPELL_TIER_GA, act->x, act->y, act->z, 83);
                 break;
             }
 
@@ -3534,7 +3534,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
 
                 hit = 0;
-                BgFxStartThunder(0, act->x, act->y, act->z - 16384, targetX, targetY, hit, 72);
+                BgFxStartThunder(SPELL_TIER_BASE, act->x, act->y, act->z - 16384, targetX, targetY, hit, 72);
                 break;
             case 1:
                 BgFxStartWideThunder(SPELL_TIER_RA, act->x, act->y, act->z - 16384, act->groundZ, 73);

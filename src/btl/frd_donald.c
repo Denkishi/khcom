@@ -535,7 +535,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                         z=0;
                     }
 
-                    BgFxStartThunder(0, body->x, body->y, body->z-0x4000, x,y,z,129);
+                    BgFxStartThunder(SPELL_TIER_BASE, body->x, body->y, body->z-0x4000, x,y,z,129);
                     break;
                 }
             case 1:

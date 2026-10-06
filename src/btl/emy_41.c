@@ -94,10 +94,10 @@ u8 task_emy_41_1(Emy41Work* work) {
 
         if (AnimGetFrame(&work->base.anim) == 4 && work->base.anim.timer == 0) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartThunder(1, act->x - 0x2C00, act->y, act->z, w->targetX,
+                BgFxStartThunder(SPELL_TIER_RA, act->x - 0x2C00, act->y, act->z, w->targetX,
                     w->targetY, w->targetZ, 0xD9);
             } else {
-                BgFxStartThunder(1, act->x + 0x2C00, act->y, act->z, w->targetX,
+                BgFxStartThunder(SPELL_TIER_RA, act->x + 0x2C00, act->y, act->z, w->targetX,
                     w->targetY, w->targetZ, 0xD9);
             }
         }

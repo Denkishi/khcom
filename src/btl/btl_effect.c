@@ -1879,17 +1879,17 @@ void BgFxUpdateGravity() {
         sBgFx->releaseFrames = 20;
 
         switch (sBgFx->state) {
-        case 0:
+        case SPELL_TIER_BASE:
             sBgFx->targetX = 128;
             sBgFx->targetY = 128;
             BgAnimStart(&gBgAnimDefGravity01, sx, sy);
             break;
-        case 1:
+        case SPELL_TIER_RA:
             sBgFx->targetX = 256;
             sBgFx->targetY = 256;
             BgAnimStart(&gBgAnimDefGravity01, sx, sy);
             break;
-        case 2:
+        case SPELL_TIER_GA:
         default:
             sBgFx->targetX = 512;
             sBgFx->targetY = 512;
@@ -1911,13 +1911,13 @@ void BgFxUpdateGravity() {
 
         if (sBgFx->timer == 35) {
             switch (sBgFx->state) {
-            case 0:
+            case SPELL_TIER_BASE:
                 hit = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 24, 12, 256);
                 break;
-            case 1:
+            case SPELL_TIER_RA:
                 hit = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 40, 20, 256);
                 break;
-            case 2:
+            case SPELL_TIER_GA:
             default:
                 hit = ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 80, 40, 256);
                 break;
@@ -1934,7 +1934,7 @@ void BgFxUpdateGravity() {
     BgFxUpdateBase();
 }
 
-void BgFxStartGravity(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack) {
+void BgFxStartGravity(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -1961,7 +1961,7 @@ void BgFxStartGravity(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
     BgAnimStart(&gBgAnimDefGravity00, sx, sy);
     m4aSongNumStart(SONG_EF_GRABI00);
-    sBgFx->state = variant;
+    sBgFx->state = tier;
     sBgFx->update = BgFxUpdateGravity;
 }
 
@@ -2373,17 +2373,17 @@ void BgFxUpdateThunder() {
         sBgFx->flags |= BGFX_FLAG_IGNORE_ZOOM;
 
         switch (sBgFx->state) {
-        case 0:
+        case SPELL_TIER_BASE:
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 16, 16, 256);
             BgAnimStart(&gBgAnimDefThunder01, sx, sy);
             m4aSongNumStart(SONG_EF_THUND01);
             break;
-        case 1:
+        case SPELL_TIER_RA:
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 40, 40, 256);
             BgAnimStart(&gBgAnimDefThunder02, sx, sy);
             m4aSongNumStart(SONG_EF_THUND02);
             break;
-        case 2:
+        case SPELL_TIER_GA:
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 64, 64, 256);
             BgAnimStart(&gBgAnimDefThunder03, sx, sy);
             m4aSongNumStart(SONG_EF_THUND03);
@@ -2406,7 +2406,7 @@ void BgFxUpdateThunder() {
     BgFxUpdateBase();
 }
 
-void BgFxStartThunder(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, s32 attack) {
+void BgFxStartThunder(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -2426,7 +2426,7 @@ void BgFxStartThunder(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY
     m4aSongNumStart(SONG_EF_THUND00);
     sBgFx->attack = attack;
     sBgFx->update = BgFxUpdateThunder;
-    sBgFx->state = variant;
+    sBgFx->state = tier;
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     sBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
@@ -4494,15 +4494,15 @@ void BgFxUpdateAero() {
     s16 halfSize;
 
     switch (sBgFx->state) {
-    case 0:
+    case SPELL_TIER_BASE:
         sBgFx->scaleX += 2;
         sBgFx->scaleY += 2;
         break;
-    case 1:
+    case SPELL_TIER_RA:
         sBgFx->scaleX += 5;
         sBgFx->scaleY += 5;
         break;
-    case 2:
+    case SPELL_TIER_GA:
         sBgFx->scaleX += 10;
         sBgFx->scaleY += 10;
         break;
@@ -4520,7 +4520,7 @@ void BgFxUpdateAero() {
     BgFxUpdateBase();
 }
 
-void BgFxStartAero(u16 variant, s32 x, s32 y, s32 z, s32 attack) {
+void BgFxStartAero(u16 tier, s32 x, s32 y, s32 z, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -4533,7 +4533,7 @@ void BgFxStartAero(u16 variant, s32 x, s32 y, s32 z, s32 attack) {
     sBgFx->y = y;
     sBgFx->z = z;
     sBgFx->attack = attack;
-    sBgFx->state = variant;
+    sBgFx->state = tier;
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefAero, sx, sy);
     sBgFx->update = BgFxUpdateAero;

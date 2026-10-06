@@ -97,7 +97,7 @@ u8 task_emy_03_1(Emy03Work* work) {
         } else if (work->base.stateTimer == 1) {
             GetEnemyTargetPosition(act, &w->targetX, &w->targetY, NULL);
             w->targetZ = 0;
-            BgFxStartThunder(0, act->x, act->y, act->z - 0x1000, w->targetX,
+            BgFxStartThunder(SPELL_TIER_BASE, act->x, act->y, act->z - 0x1000, w->targetX,
                 w->targetY, 0, 0xAC);
         }
 

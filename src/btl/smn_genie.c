@@ -350,9 +350,9 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                 }
 
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    BgFxStartThunder(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
+                    BgFxStartThunder(SPELL_TIER_RA, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 } else {
-                    BgFxStartThunder(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
+                    BgFxStartThunder(SPELL_TIER_RA, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 }
 
                 work->fired = 1;
@@ -395,9 +395,9 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                 }
 
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    BgFxStartGravity(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 1, 148);
+                    BgFxStartGravity(SPELL_TIER_RA, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 1, 148);
                 } else {
-                    BgFxStartGravity(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
+                    BgFxStartGravity(SPELL_TIER_RA, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
                 }
 
                 work->fired = 1;

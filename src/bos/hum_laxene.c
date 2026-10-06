@@ -280,10 +280,10 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartThunder(0, act->x + 0x400, act->y, act->z - 0x5000, act->x,
+                BgFxStartThunder(SPELL_TIER_BASE, act->x + 0x400, act->y, act->z - 0x5000, act->x,
                     act->y, act->z - 0x5000, 0x135);
             } else {
-                BgFxStartThunder(0, act->x - 0x400, act->y, act->z - 0x5000, act->x,
+                BgFxStartThunder(SPELL_TIER_BASE, act->x - 0x400, act->y, act->z - 0x5000, act->x,
                     act->y, act->z - 0x5000, 0x135);
             }
         }
@@ -370,9 +370,9 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartThunder(1, act->x + 0x400, act->y, act->z - 0x5000, x, y, 0, 0x135);
+                BgFxStartThunder(SPELL_TIER_RA, act->x + 0x400, act->y, act->z - 0x5000, x, y, 0, 0x135);
             } else {
-                BgFxStartThunder(1, act->x - 0x400, act->y, act->z - 0x5000, x, y, 0, 0x135);
+                BgFxStartThunder(SPELL_TIER_RA, act->x - 0x400, act->y, act->z - 0x5000, x, y, 0, 0x135);
             }
         }
 

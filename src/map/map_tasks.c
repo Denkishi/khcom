@@ -2069,9 +2069,6 @@ u8 MapGmkEnmRise(MapGmkEnmWork* work) {
 
 void Task_MapGmk_Enm_0(MapGmkEnmWork* work, FldPos* arg) {
     FldPos* pos = &work->obj.fieldPosition;
-    AnimState* an;
-    void* anim;
-    void* frames;
     u8 flip;
 
     work->obj.fieldPosition = *arg;
@@ -2082,24 +2079,17 @@ void Task_MapGmk_Enm_0(MapGmkEnmWork* work, FldPos* arg) {
     if (gMapFloorState.world != WORLD_ATLANTICA) {
         work->tiles = AllocObjTiles(0x220, gEmy01L00Tiles);
         work->palette = LoadObjPalette(gEmy01Palette, sizeof(gEmy01Palette));
-        an = &work->anim;
-        anim = gEmy01L00Anims;
-        frames = gEmy01L00Frames;
+        AnimInit(&work->anim, gEmy01L00Anims, gEmy01L00Frames);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+        work->gfx = AnimGetGfx(&work->anim);
     } else {
         work->tiles = AllocObjTiles(0x440, gEmy0600Tiles);
         work->palette = LoadObjPalette(gEmy06Palette, sizeof(gEmy06Palette));
-        an = &work->anim;
-        anim = gEmy0600Anims;
-        frames = gEmy0600Frames;
+        AnimInit(&work->anim, gEmy0600Anims, gEmy0600Frames);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+        work->gfx = AnimGetGfx(&work->anim);
     }
 
-    // fakematch
-    do {
-        AnimInit(an, anim, frames);
-        AnimStart(an, 0, ANIM_FLAG_LOOP);
-    } while (0);
-
-    work->gfx = AnimGetGfx(an);
     work->update = MapGmkEnmRise;
     flip = FALSE;
 

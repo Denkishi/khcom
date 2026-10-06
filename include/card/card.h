@@ -228,11 +228,11 @@ typedef struct PrizeMapCardWork {
     s16 scaleY;
     u16 priority;
     s16 x;
-    s16 y2;
-    s16 x3;
-    s16 y3;
-    s16 x2;
     s16 y;
+    s16 targetX;
+    s16 targetY;
+    s16 shadowX;
+    s16 shadowY;
     s16 scale;
     u16 moveAngle;
     u8 rotation;

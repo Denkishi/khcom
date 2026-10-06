@@ -1149,8 +1149,8 @@ static u8 PrizeCard_1(PrizeMapCardWork* work, void* task) {
         return 1;
     } else {
         ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
-        WorldToScreen(&work->x, &work->y2, work->posX, work->posY, work->posZ);
-        WorldToScreen(&work->x2, &work->y, work->posX, work->posY, work->groundZ);
+        WorldToScreen(&work->x, &work->y, work->posX, work->posY, work->posZ);
+        WorldToScreen(&work->shadowX, &work->shadowY, work->posX, work->posY, work->groundZ);
         work->priority = -0x1004 - (work->posY >> 8) * 4;
         UpdatePrizeMapCardScale(work);
         work->flipAngleX += 2;
@@ -1231,7 +1231,7 @@ u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* work, void* task) {
     px = &work->x;
     *px = x;
     y = work->posY >> 8;
-    py = &work->y2;
+    py = &work->y;
     *py = y;
     UpdatePrizeMapCardScale(work);
     return 1;
@@ -1266,7 +1266,7 @@ u8 UpdatePrizeMapCardShow(PrizeMapCardWork* work, void* task) {
     screenCoord = &work->x;
     *screenCoord = x;
     x = work->posY >> 8;
-    screenCoord = &work->y2;
+    screenCoord = &work->y;
     *screenCoord = x;
     UpdatePrizeMapCardScale(work);
     work->holdTimer++;
@@ -1282,9 +1282,9 @@ u8 UpdatePrizeMapCardShow(PrizeMapCardWork* work, void* task) {
 
 u8 UpdatePrizeMapCardShrink(PrizeMapCardWork* work) {
     work->rotation += 32;
-    WorldToScreen(&work->x3, &work->y3, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-    work->x += (work->x3 - work->x) >> 3;
-    work->y2 += (work->y3 - work->y2) >> 3;
+    WorldToScreen(&work->targetX, &work->targetY, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
+    work->x += (work->targetX - work->x) >> 3;
+    work->y += (work->targetY - work->y) >> 3;
     work->scaleX -= 10;
     work->scaleY -= 10;
 
@@ -1309,7 +1309,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
         affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
     }
 
-    DrawSprite(work->x, (u16)work->y2 - 8,
+    DrawSprite(work->x, (u16)work->y - 8,
                *work->cardDef->sprites,
                work->tiles, work->palette, affine, pal,
                work->priority + 1);
@@ -1320,13 +1320,13 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
         gfx = work->cardBack->sprites[0];
     }
 
-    DrawSprite(work->x, (u16)work->y2 - 8, gfx,
+    DrawSprite(work->x, (u16)work->y - 8, gfx,
                work->tiles2, work->palette2, affine, pal,
                work->priority);
 
     if (work->cardDef->backIndex != 4) {
         gfx = gCardValueDigitFrames[work->value];
-        DrawSprite(work->x, (u16)work->y2 - 8, gfx,
+        DrawSprite(work->x, (u16)work->y - 8, gfx,
                    work->tiles4, work->palette2, affine, pal,
                    work->priority - 1);
     }
@@ -1338,7 +1338,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
             shadowScale = 2;
         }
 
-        DrawSprite(work->x2, work->y, gBtlShadowFrames[0],
+        DrawSprite(work->shadowX, work->shadowY, gBtlShadowFrames[0],
                    work->tiles5, work->palette3,
                    AllocObjAffine(0, shadowScale, shadowScale, 0), pal,
                    work->priority + 2);

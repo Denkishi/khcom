@@ -749,11 +749,7 @@ void mode_worldselect_0() {
     sWorldselectFrameY[1] = 0xA800;
     sWorldselectTitleX = -32768;
     LoadBgPalette(0, gWorldselectBgPalettes, sizeof(gWorldselectBgPalettes));
-#ifdef VERSION_EU
-    LoadBgTiles(0, gWorldselectBgTiles, 16000);
-#else
     LoadBgTiles(0, gWorldselectBgTiles, sizeof(gWorldselectBgTiles));
-#endif
     WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
     LoadBgMap(0, gWorldselectGlowMap, sizeof(gWorldselectGlowMap));
     LoadBgMap(1, gWorldselectBarMap, sizeof(gWorldselectBarMap));

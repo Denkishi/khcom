@@ -1159,7 +1159,7 @@ entries:
     size: 11968
   eu:
     address: 0x099FFE00
-    size: 11968
+    size: 16000
 - name: gWorldselectNameWonderlandTiles
   format: tiles4
   width: 32
@@ -1723,12 +1723,6 @@ entries:
   eu:
     address: 0x09A83BA0
     size: 1280
-- name: gWorldselectBgTranslationTiles
-  format: tiles4
-  width: 21
-  eu:
-    address: 0x09A02CC0
-    size: 4032
 - name: gWorldselectTitleFrenchMap
   format: tilemap
   eu:

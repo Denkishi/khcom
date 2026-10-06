@@ -590,67 +590,67 @@ u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 idCount, u8 listInde
     return count;
 }
 
-void InitRikuCardList(CardBattleWork* work, s8 idx) {
-    u16 n = work->slotCounts[idx];
+void InitRikuCardList(CardBattleWork* work, s8 listIndex) {
+    u16 n = work->slotCounts[listIndex];
 
     if (n != 0) {
-        if (idx == 0) {
+        if (listIndex == 0) {
             CardSlot* slots;
             u8 i;
 
             slots = EwramAlloc((n + 15) * sizeof(CardSlot));
-            work->slots[idx] = slots;
+            work->slots[listIndex] = slots;
             CpuFill32(0, slots, (n + 15) * sizeof(CardSlot));
 
             for (i = 0; i < n; i++) {
-                work->slots[idx][i].unk_06 = 0;
-                work->slots[idx][i].cardId = CARD_ID_NONE;
-                work->slots[idx][i].stocked = 0;
-                work->slots[idx][i].removed = 0;
-                work->slots[idx][i].used = 0;
-                work->slots[idx][i].restoreOnReload = 0;
+                work->slots[listIndex][i].unk_06 = 0;
+                work->slots[listIndex][i].cardId = CARD_ID_NONE;
+                work->slots[listIndex][i].stocked = 0;
+                work->slots[listIndex][i].removed = 0;
+                work->slots[listIndex][i].used = 0;
+                work->slots[listIndex][i].restoreOnReload = 0;
             }
 
             for (i = n; i < n + 15; i++) {
-                work->slots[idx][i].unk_06 = 1;
-                work->slots[idx][i].cardId = CARD_ID_NONE;
-                work->slots[idx][i].stocked = 1;
-                work->slots[idx][i].removed = 1;
-                work->slots[idx][i].used = 1;
-                work->slots[idx][i].restoreOnReload = 0;
+                work->slots[listIndex][i].unk_06 = 1;
+                work->slots[listIndex][i].cardId = CARD_ID_NONE;
+                work->slots[listIndex][i].stocked = 1;
+                work->slots[listIndex][i].removed = 1;
+                work->slots[listIndex][i].used = 1;
+                work->slots[listIndex][i].restoreOnReload = 0;
             }
         } else {
             CardSlot* slots;
             u8 i;
 
             slots = EwramAlloc(n * sizeof(CardSlot));
-            work->slots[idx] = slots;
+            work->slots[listIndex] = slots;
             CpuFill32(0, slots, n * sizeof(CardSlot));
 
             for (i = 0; i < n; i++) {
-                work->slots[idx][i].unk_06 = 0;
-                work->slots[idx][i].cardId = CARD_ID_NONE;
-                work->slots[idx][i].stocked = 0;
-                work->slots[idx][i].removed = 0;
-                work->slots[idx][i].used = 0;
-                work->slots[idx][i].restoreOnReload = 0;
+                work->slots[listIndex][i].unk_06 = 0;
+                work->slots[listIndex][i].cardId = CARD_ID_NONE;
+                work->slots[listIndex][i].stocked = 0;
+                work->slots[listIndex][i].removed = 0;
+                work->slots[listIndex][i].used = 0;
+                work->slots[listIndex][i].restoreOnReload = 0;
             }
         }
 
-        LoadRikuDeckCardSlots(work, work->slots[idx], idx, (u16)work->slotCounts[idx]);
-        work->cursors[idx] = 0;
+        LoadRikuDeckCardSlots(work, work->slots[listIndex], listIndex, (u16)work->slotCounts[listIndex]);
+        work->cursors[listIndex] = 0;
     } else {
         CardSlot* slot;
         u16* cursor;
         s32 k;
 
         slot = EwramAlloc(sizeof(CardSlot));
-        work->slots[idx] = slot;
+        work->slots[listIndex] = slot;
         CpuFill32(0, slot, sizeof(CardSlot));
-        work->slots[idx]->cardId = (idx << 12) | 0xFF;
-        work->slots[idx]->restoreOnReload = 0;
+        work->slots[listIndex]->cardId = (listIndex << 12) | 0xFF;
+        work->slots[listIndex]->restoreOnReload = 0;
         cursor = work->cursors;
-        cursor += idx;
+        cursor += listIndex;
         k = 0xFFFF;
         *cursor = k;
     }
@@ -857,7 +857,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
     CardDisplayWork* selected;
     u16 result;
     u8 i;
-    u8 slot;
+    u8 listIndex;
 
     if (gBtlWork->phase == BTL_PHASE_END) {
         if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
@@ -1274,8 +1274,8 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
 #ifndef VERSION_EU
                 m4aSongNumStart(SONG_SYS_RELOAD);
 #endif
-                slot = work->listIndex;
-                args.slot = slot;
+                listIndex = work->listIndex;
+                args.listIndex = listIndex;
                 args.state = &work->reloadShown;
                 args.mode = 2;
                 TaskCreate(&work->tasks, &gTaskDescRELOAD, &args);

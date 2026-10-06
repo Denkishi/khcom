@@ -450,8 +450,8 @@ void RELOAD_0(ReloadWork* work, ReloadArgs* args) {
     work->tiles = AllocObjTiles(0xA0, NULL);
     work->palette = LoadObjPalette(gCard00Palette, 32);
     work->args = *args;
-    SetObjTileSource(work->tiles, gReloadTiles[work->args.slot]);
-    AnimInit(&work->anim, gReloadAnims[work->args.slot], gReloadFrames[work->args.slot]);
+    SetObjTileSource(work->tiles, gReloadTiles[work->args.listIndex]);
+    AnimInit(&work->anim, gReloadAnims[work->args.listIndex], gReloadFrames[work->args.listIndex]);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 

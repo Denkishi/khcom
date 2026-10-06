@@ -169,8 +169,8 @@ u16 CountLinkPartnerDeckCardsOfCategory(u8 slot) {
     return count;
 }
 
-u16 CountLinkPartnerDeckCards(u8 mode) {
-    u8 slot;
+u16 CountLinkPartnerDeckCards(u8 listIndex) {
+    u8 category;
     u16* cards;
     u16 count;
     u16 i;
@@ -178,13 +178,13 @@ u16 CountLinkPartnerDeckCards(u8 mode) {
     count = 0;
     cards = gLinkPartnerDeck->cards;
 
-    switch (mode) {
+    switch (listIndex) {
     case 0:
         for (i = 0; i < DECK_SIZE; i++) {
             if (cards[i] != 0xFFFF) {
-                slot = gCardDefs[cards[i] & CARD_ID_MASK].category;
+                category = gCardDefs[cards[i] & CARD_ID_MASK].category;
 
-                if (slot <= 2) {
+                if (category <= 2) {
                     count++;
                 }
             }
@@ -210,7 +210,7 @@ Deck* GetLinkPartnerDeck() {
     return gLinkPartnerDeck;
 }
 
-void CopyLinkPartnerDeckCards(u8 kind, u16* out) {
+void CopyLinkPartnerDeckCards(u8 listIndex, u16* out) {
     Deck* deck;
     u16 i;
 
@@ -218,7 +218,7 @@ void CopyLinkPartnerDeckCards(u8 kind, u16* out) {
 
     for (i = 0; i < 99; i++) {
         if (deck->cards[i] != 0xFFFF) {
-            switch (kind) {
+            switch (listIndex) {
             case 0:
                 if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category <= 2) {
                     *out++ = deck->cards[i];

@@ -1537,7 +1537,7 @@ typedef struct EventBgEffectWork {
 extern const EventBgEffectDef* gEventBgEffectDefs[];
 
 typedef struct ReloadArgs {
-    u8 slot;
+    u8 listIndex;
     u8 mode;
     u8* state;
 } ReloadArgs;
@@ -1721,7 +1721,7 @@ void EnemyCardSlideBack(CardDisplayWork* work, void* task);
 u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* task);
 void LoadRikuDeckNameTexts(RikuDeckMenuWork* work);
 void LoadDeckExchangeDeckNameTexts(DeckExchangeWork* work);
-void CopyLinkPartnerDeckCards(u8 kind, u16* out);
+void CopyLinkPartnerDeckCards(u8 listIndex, u16* out);
 void SetDeckMenuFrameCursor(DeckMenuWork* work, u8 kind);
 void UpdateFieldPrizeCardScale(PrizeCardWork* work);
 void UpdatePrizeMapCardScale(PrizeMapCardWork* work);

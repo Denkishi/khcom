@@ -1154,7 +1154,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                     SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraReloadDeal);
                     TaskPoolUpdate(&work->tasks);
                     TaskPoolUpdate(&gCardBattleState->tasks);
-                    args.slot = work->listIndex;
+                    args.listIndex = work->listIndex;
                     args.state = &work->reloadShown;
                     args.mode = 1;
                     TaskCreate(&work->tasks, &gTaskDescRELOAD, &args);

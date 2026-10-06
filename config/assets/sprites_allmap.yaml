@@ -685,7 +685,7 @@ entries:
     size: 3936
   eu:
     address: 0x09793C20
-    size: 3936
+    size: 6720
 - name: gAllmapFloorTiles
   format: tiles4
   width: 2
@@ -1198,11 +1198,6 @@ entries:
   eu:
     address: 0x09811640
     size: 28
-- name: gAllmapBackdropTilesEu
-  format: tiles4
-  eu:
-    address: 0x09794B80
-    size: 2784
 - name: gAllmapBarBgEnglishMap
   format: tilemap
   eu:

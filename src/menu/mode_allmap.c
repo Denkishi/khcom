@@ -225,11 +225,7 @@ void mode_allmap_0(s32 lowerBgm) {
     SetBgMode0();
     SetupBg(3, 1, 28, 8);
     SetBgPriority(3, 3);
-#ifdef VERSION_EU
-    LoadBgTiles(3, gAllmapBackdropTiles, 0x1A40);
-#else
     LoadBgTiles(3, gAllmapBackdropTiles, sizeof(gAllmapBackdropTiles));
-#endif
     LoadBgPalette(3, gAllmapBgPalettes, sizeof(gAllmapBgPalettes));
     LoadBgMap(3, gAllmapBackdropMap, sizeof(gAllmapBackdropMap));
     SetupBg(2, 1, 29, 8);

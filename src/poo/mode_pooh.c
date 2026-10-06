@@ -636,7 +636,7 @@ void OpenPoohModeMessage(u16 message) {
     sModePoohMessage = message;
 
     if (message == 0xFFFD || message == 0xFFFE) {
-        message = 0x45;
+        message = CARD_MSG_POOH_LEAVE_WORLD;
     }
 
     CreateCardMessageTask(&sModePoohMessageTasks, 0, message);

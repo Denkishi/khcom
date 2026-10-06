@@ -2667,11 +2667,7 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* task) {
             gPooAttackActive = 0;
             message = FindPoohInteractionMessage();
 
-#ifdef VERSION_EU
-            if (message != 179) {
-#else
-            if (message != 180) {
-#endif
+            if (message != CARD_MSG_COUNT) {
                 OpenPoohModeMessage(message);
             } else {
                 work->timer = 0;
@@ -7717,7 +7713,7 @@ u16 FindPoohInteractionMessage() {
     s32 i;
 
     for (i = 0; i < sPoohInteractions->count; i++) {
-        if (sPoohInteractions->entries[i].message == 0x3B && sPoohInteractions->rabbitTalkBlocked) {
+        if (sPoohInteractions->entries[i].message == CARD_MSG_RABBIT_TALK_0 && sPoohInteractions->rabbitTalkBlocked) {
             continue;
         }
 
@@ -7732,11 +7728,7 @@ u16 FindPoohInteractionMessage() {
         return sPoohInteractions->entries[i].message;
     }
 
-#ifdef VERSION_EU
-    return 0xB3;
-#else
-    return 0xB4;
-#endif
+    return CARD_MSG_COUNT;
 }
 
 void SetPooRabbitTalkBlocked(u8 blocked) {

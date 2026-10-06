@@ -56,6 +56,7 @@
 #include "default_bg_map.h"
 #include "card_ids.h"
 #include "card_label_data.h"
+#include "card_message_data.h"
 #include "jiminy_records_index_data.h"
 
 static TaskPool sModeWorldselectTasks;
@@ -323,11 +324,11 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task) {
             if ((gGameState.progression.tutorialFlags & 8) == 0) {
                 work->inTutorial = 1;
                 ResetMessageWindowFlags();
-                work->tutorialMessage = 95;
+                work->tutorialMessage = CARD_MSG_MAP_SELECT_TUTORIAL_0;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectTutorial);
             } else if ((gGameState.progression.tutorialFlags & 0x40) == 0 && work->isEventDoor == 1) {
                 ResetMessageWindowFlags();
-                work->tutorialMessage = 109;
+                work->tutorialMessage = CARD_MSG_MAP_SELECT_EVENT_DOOR_TUTORIAL_0;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectEventDoorTutorial);
                 gGameState.progression.tutorialFlags |= 0x40;
             } else {
@@ -1743,7 +1744,7 @@ u8 UpdateMapSelectTutorial(MapSelectWork* work, void* task) {
         if (work->messageTimer == 8) {
             work->messageTimer = 0;
 
-            if (work->tutorialMessage <= 98) {
+            if (work->tutorialMessage <= CARD_MSG_MAP_SELECT_TUTORIAL_3) {
                 CreateSysmsgwinTask(&work->tasks, work->tutorialMessage);
                 work->tutorialMessage++;
             } else {
@@ -1767,7 +1768,7 @@ u8 UpdateMapSelectTutorial(MapSelectWork* work, void* task) {
                 work->nameY = 0x9100;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
                 work->scrollBarVisible = 1;
-                work->tutorialMessage = 99;
+                work->tutorialMessage = CARD_MSG_MAP_SELECT_VALUE_TUTORIAL_0;
                 return 1;
             }
         } else {
@@ -1788,7 +1789,7 @@ u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* task) {
         if (work->messageTimer == 8) {
             work->messageTimer = 0;
 
-            if (work->tutorialMessage <= 0x66) {
+            if (work->tutorialMessage <= CARD_MSG_MAP_SELECT_VALUE_TUTORIAL_3) {
                 CreateSysmsgwinTask(&work->tasks, work->tutorialMessage);
                 work->tutorialMessage++;
             } else {
@@ -1828,7 +1829,7 @@ u8 UpdateMapSelectEventDoorTutorial(MapSelectWork* work, void* task) {
         if (work->messageTimer == 8) {
             work->messageTimer = 0;
 
-            if (work->tutorialMessage <= 0x71) {
+            if (work->tutorialMessage <= CARD_MSG_MAP_SELECT_EVENT_DOOR_TUTORIAL_4) {
                 CreateSysmsgwinTask(&work->tasks, work->tutorialMessage);
                 work->tutorialMessage++;
             } else {

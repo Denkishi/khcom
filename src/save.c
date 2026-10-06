@@ -672,43 +672,25 @@ void SaveSetFileSmallState(s16 file, s16 slot, s16 state) {
 }
 
 void ShowSramErrorScreen() {
-    vu16* ime;
-    vu16* ie;
-    vu16* dispstat;
-    vu16* dispcnt;
-    vu16* reg;
-
-    ime = (vu16*)REG_ADDR_IME;
-    *ime = 0;
-    ie = (vu16*)REG_ADDR_IE;
-    *ie |= INTR_FLAG_VBLANK;
-    dispstat = (vu16*)REG_ADDR_DISPSTAT;
-    *dispstat |= DISPSTAT_VBLANK_INTR;
-    *ime = 1;
-    reg = (vu16*)REG_ADDR_BG0CNT;
-
-    // fakematch
-    do {
-        *reg = 0x88;
-    } while (0);
-
-    reg += 0x24;
-    *reg = 0x3FBF;
-    reg += 2;
-    *reg = 0x10;
-    dispcnt = (vu16*)REG_ADDR_DISPCNT;
-    *dispcnt = (DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+    REG_IME = 1;
+    REG_BG0CNT = 0x88;
+    REG_BLDCNT = 0x3FBF;
+    REG_BLDY = 0x10;
+    REG_DISPCNT = (DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
     VBlankIntrWait();
     DmaCopy16(3, gSramErrorTiles, BG_CHAR_ADDR(2), sizeof(gSramErrorTiles));
     DmaCopy16(3, gSramErrorPalette, BG_PLTT, BG_PLTT_SIZE);
     DmaCopy16(3, gSramErrorTilemap, sSramErrorTilemapBuf, sizeof(gSramErrorTilemap));
     DmaCopy16(3, sSramErrorTilemapBuf, VRAM, sizeof(sSramErrorTilemapBuf));
     WaitSramErrorInput();
-    *ime = 0;
-    *ie &= ~INTR_FLAG_VBLANK;
-    *dispstat &= ~DISPSTAT_VBLANK_INTR;
-    *ime = 1;
-    *dispcnt = 0;
+    REG_IME = 0;
+    REG_IE &= ~INTR_FLAG_VBLANK;
+    REG_DISPSTAT &= ~DISPSTAT_VBLANK_INTR;
+    REG_IME = 1;
+    REG_DISPCNT = 0;
 }
 
 void WaitSramErrorInput() {

@@ -3382,18 +3382,18 @@ u8 CountSoraCardDisplays(CardBattleWork* work, u8 listIndex) {
     return count;
 }
 
-u8 CountSoraCardDisplaysByCategory(CardBattleWork* work, u8 kind) {
+u8 CountSoraCardDisplaysByCategory(CardBattleWork* work, u8 category) {
     CardDisplayWork* node;
     u8 count;
 
     count = 0;
-    node = ListPoolFirst(&work->cardDisplays[kind]);
+    node = ListPoolFirst(&work->cardDisplays[category]);
 
     while (node != NULL) {
         if ((node->flags & (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_RELOAD_GAUGE)) == 0) {
-            if (kind == CARD_CATEGORY_ITEM) {
+            if (category == CARD_CATEGORY_ITEM) {
                 count++;
-            } else if (node->cardDef->category == kind) {
+            } else if (node->cardDef->category == category) {
                 count++;
             }
         }

@@ -505,10 +505,10 @@ void CountCardsNotInDeckByCategory(u8 deck, u16* out) {
     u16 i;
 
     mask = 0;
-    out[0] = 0;
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
+    out[CARD_CATEGORY_ATTACK] = 0;
+    out[CARD_CATEGORY_MAGIC] = 0;
+    out[CARD_CATEGORY_ITEM] = 0;
+    out[CARD_CATEGORY_ENEMY] = 0;
 
     switch (deck) {
     case 0:

@@ -20,6 +20,15 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
+enum SrollBCharMotion {
+    SROLL_B_CHAR_MOTION_NONE,
+    SROLL_B_CHAR_MOTION_SLIDE_DOWN_LEFT,
+    SROLL_B_CHAR_MOTION_HOP,
+    SROLL_B_CHAR_MOTION_BOB_SPARKLE,
+    SROLL_B_CHAR_MOTION_SLIDE_UP_RIGHT,
+    SROLL_B_CHAR_MOTION_SWAY
+};
+
 void SrollBCharSetMotion(Task* task, s32 v) {
     ((SrollBCharWork*)task->work)->motion = v;
 }
@@ -40,7 +49,7 @@ void task_sroll_b_char_0(SrollBCharWork* work, EvtObjParam* arg) {
     AnimState* anim;
 
     res = arg->res;
-    work->motion = 0;
+    work->motion = SROLL_B_CHAR_MOTION_NONE;
     work->motionTimer = 0;
     work->obj = arg->obj;
     work->tiles = AllocObjTiles(res->tileCount * 32, NULL);
@@ -70,15 +79,15 @@ s32 task_sroll_b_char_1(SrollBCharWork* work) {
     TaskPoolUpdate(&work->tasks);
 
     switch (work->motion) {
-    case 1:
+    case SROLL_B_CHAR_MOTION_SLIDE_DOWN_LEFT:
         work->obj->x -= 128;
         work->obj->y += 128;
         break;
-    case 2:
+    case SROLL_B_CHAR_MOTION_HOP:
         work->obj->z = gSrollBCharHopOffsets[(work->motionTimer >> 2) & 15] << 8;
         work->motionTimer++;
         break;
-    case 3:
+    case SROLL_B_CHAR_MOTION_BOB_SPARKLE:
         if ((work->motionTimer & 3) == 0) {
             a.kind = 2;
             a.x = work->obj->x;
@@ -89,11 +98,11 @@ s32 task_sroll_b_char_1(SrollBCharWork* work) {
         work->obj->z = (gSrollBCharHopOffsets[(work->motionTimer >> 2) & 15] << 8) >> 2;
         work->motionTimer++;
         break;
-    case 4:
+    case SROLL_B_CHAR_MOTION_SLIDE_UP_RIGHT:
         work->obj->x += 128;
         work->obj->y -= 128;
         break;
-    case 5:
+    case SROLL_B_CHAR_MOTION_SWAY:
         work->obj->x += (gSrollBCharSwayOffsets[(work->motionTimer >> 2) & 15] << 8) >> 2;
         work->motionTimer++;
         break;

@@ -863,7 +863,7 @@ void UpdateBattleState() {
                 default:
                     if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, NULL);
-                    } else if (gGameState.progression.tutorialFlags & 0x20) {
+                    } else if (gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MAP) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, NULL);
                     }
 

@@ -202,11 +202,11 @@ void ApplySaveHeaderData(SaveHeaderData* data) {
 }
 
 void ApplySaveSystem(SaveFileLarge* save) {
-    u32 t;
+    u32 headerFlags;
 
-    t = gGameState.flags & GAME_FLAGS_HEADER;
+    headerFlags = gGameState.flags & GAME_FLAGS_HEADER;
     save->common.flags &= ~GAME_FLAGS_HEADER;
-    gGameState.flags = save->common.flags | t;
+    gGameState.flags = save->common.flags | headerFlags;
     gGameState.hp = save->common.hp;
     memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
     gGameState.availableWorlds = save->common.availableWorlds;
@@ -221,11 +221,11 @@ void ApplySaveSystem(SaveFileLarge* save) {
 }
 
 void ApplySaveFileLarge(SaveFileLarge* save) {
-    u32 t;
+    u32 headerFlags;
 
-    t = gGameState.flags & GAME_FLAGS_HEADER;
+    headerFlags = gGameState.flags & GAME_FLAGS_HEADER;
     save->common.flags &= ~GAME_FLAGS_HEADER;
-    gGameState.flags = save->common.flags | t;
+    gGameState.flags = save->common.flags | headerFlags;
     gGameState.hp = save->common.hp;
     memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
     gGameState.availableWorlds = save->common.availableWorlds;
@@ -241,11 +241,11 @@ void ApplySaveFileLarge(SaveFileLarge* save) {
 }
 
 void ApplySaveFileSmall(SaveFileSmall* save) {
-    u32 t;
+    u32 headerFlags;
 
-    t = gGameState.flags & GAME_FLAGS_HEADER;
+    headerFlags = gGameState.flags & GAME_FLAGS_HEADER;
     save->common.flags &= ~GAME_FLAGS_HEADER;
-    gGameState.flags = save->common.flags | t;
+    gGameState.flags = save->common.flags | headerFlags;
     gGameState.hp = save->common.hp;
     memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
     gGameState.availableWorlds = save->common.availableWorlds;

@@ -106,39 +106,39 @@ u8 KeyGetOffFrames(KeyState* state, u16 key) {
 }
 
 u16 KeyReadChord(KeyState* state, u16 key1, u16 key2) {
-    u16 r = 0;
-    u8 ca = KeyGetOffFrames(state, key1);
-    u8 cb = KeyGetOffFrames(state, key2);
+    u16 keys = 0;
+    u8 release1 = KeyGetOffFrames(state, key1);
+    u8 release2 = KeyGetOffFrames(state, key2);
 
-    if (ca == 2) {
+    if (release1 == 2) {
         state->chordLatch &= ~key1;
     }
 
-    if (cb == 2) {
+    if (release2 == 2) {
         state->chordLatch &= ~key2;
     }
 
     if (((KeyGetPressed(state) & key1) && (KeyGetHeld(state) & key2)) ||
         ((KeyGetPressed(state) & key2) && (KeyGetHeld(state) & key1))) {
         state->chordLatch |= key1 | key2;
-        r = key1 | key2;
+        keys = key1 | key2;
     }
 
     if (!(state->chordLatch & key1)) {
-        if (KeyGetHoldFrames(state, key1) == 5 || ca == 1) {
+        if (KeyGetHoldFrames(state, key1) == 5 || release1 == 1) {
             state->chordLatch |= key1;
-            r = key1;
+            keys = key1;
         }
     }
 
     if (!(state->chordLatch & key2)) {
-        if (KeyGetHoldFrames(state, key2) == 5 || cb == 1) {
+        if (KeyGetHoldFrames(state, key2) == 5 || release2 == 1) {
             state->chordLatch |= key2;
-            r = key2;
+            keys = key2;
         }
     }
 
-    return r;
+    return keys;
 }
 
 void KeyStateUpdate(KeyState* state, u16 keys) {
@@ -396,13 +396,13 @@ u8 IsSongPlaying(u16 songNum) {
     u8 idx = gSongTable[songNum].ms;
     SongHeader* header = gSongTable[songNum].header;
     MusicPlayerInfo* info = gMPlayTable[idx].info;
-    s32 r = 0;
+    s32 playing = 0;
 
     if (header == info->songHeader) {
-        r = (u16)info->status != 0;
+        playing = (u16)info->status != 0;
     }
 
-    return r;
+    return playing;
 }
 
 void StopSong(u16 songNum) {

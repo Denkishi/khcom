@@ -167,7 +167,7 @@ void DoSoftReset() {
 #endif
 
 void ModeUpdate() {
-    u8 v;
+    u8 displayHeld;
 
     if ((((GetKeysPressed() & START_BUTTON) && (GetKeysHeld() & SELECT_BUTTON) && (GetKeysHeld() & A_BUTTON) &&
              (GetKeysHeld() & B_BUTTON)) ||
@@ -191,9 +191,9 @@ void ModeUpdate() {
             return;
         }
 
-        v = gModeFlags & MODE_FLAG_DISPLAY_HELD;
+        displayHeld = gModeFlags & MODE_FLAG_DISPLAY_HELD;
 
-        if (v != 0) {
+        if (displayHeld != 0) {
             if (gModeFlags & MODE_FLAG_BLANK_PENDING) {
                 return;
             }

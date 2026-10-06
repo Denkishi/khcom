@@ -620,9 +620,9 @@ void SaveWriteFileSmall(u16 file) {
     u8* dst;
     s16 i;
     s32 off;
-    s16 f;
+    s16 fileIndex;
 
-    f = file;
+    fileIndex = file;
     blk = EwramAlloc(SAVE_FILE_SMALL_SIZE);
     ZeroFill(blk, SAVE_FILE_SMALL_SIZE);
     MakeSaveFileSmall(&blk->data);
@@ -631,13 +631,13 @@ void SaveWriteFileSmall(u16 file) {
     blk->checksum = SaveChecksum((u16*)blk, SAVE_FILE_SMALL_SIZE);
 
     for (i = 0; i < SAVE_SLOTS; i++) {
-        off = f * (SAVE_FILE_SMALL_SIZE * 2);
+        off = fileIndex * (SAVE_FILE_SMALL_SIZE * 2);
         dst = SRAM_FILE_SMALL + i * SAVE_FILE_SMALL_SIZE;
         WriteAndVerifySramFast((u8*)blk, (u8*)(off + (u32)dst), SAVE_FILE_SMALL_SIZE);
     }
 
     EwramFree(blk);
-    SaveWriteHeader(f + 2);
+    SaveWriteHeader(fileIndex + 2);
 }
 
 void SaveSetFileSmallState(s16 file, s16 slot, s16 state) {
@@ -676,7 +676,7 @@ void ShowSramErrorScreen() {
     vu16* ie;
     vu16* dispstat;
     vu16* dispcnt;
-    vu16* p;
+    vu16* reg;
 
     ime = (vu16*)REG_ADDR_IME;
     *ime = 0;
@@ -685,17 +685,17 @@ void ShowSramErrorScreen() {
     dispstat = (vu16*)REG_ADDR_DISPSTAT;
     *dispstat |= DISPSTAT_VBLANK_INTR;
     *ime = 1;
-    p = (vu16*)REG_ADDR_BG0CNT;
+    reg = (vu16*)REG_ADDR_BG0CNT;
 
     // fakematch
     do {
-        *p = 0x88;
+        *reg = 0x88;
     } while (0);
 
-    p += 0x24;
-    *p = 0x3FBF;
-    p += 2;
-    *p = 0x10;
+    reg += 0x24;
+    *reg = 0x3FBF;
+    reg += 2;
+    *reg = 0x10;
     dispcnt = (vu16*)REG_ADDR_DISPCNT;
     *dispcnt = (DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
     VBlankIntrWait();

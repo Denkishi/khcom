@@ -150,17 +150,17 @@ void* ListPoolRelease(void* item, void* pool) {
 
 void* ListPoolFirst(void* pool) {
     ListPool* list = pool;
-    ListNode* n;
+    ListNode* node;
     void* result;
 
-    n = list->activeHead;
+    node = list->activeHead;
 
-    if (n != NULL) {
-        if (n->flags & LIST_NODE_FLAG_SKIP) {
-            return ListPoolNext(n);
+    if (node != NULL) {
+        if (node->flags & LIST_NODE_FLAG_SKIP) {
+            return ListPoolNext(node);
         }
 
-        result = n->owner;
+        result = node->owner;
     } else {
         result = NULL;
     }
@@ -170,17 +170,17 @@ void* ListPoolFirst(void* pool) {
 
 void* ListPoolLast(void* pool) {
     ListPool* list = pool;
-    ListNode* n;
+    ListNode* node;
     void* result;
 
-    n = list->activeTail;
+    node = list->activeTail;
 
-    if (n != NULL) {
-        if (n->flags & LIST_NODE_FLAG_SKIP) {
-            return ListPoolPrev(n);
+    if (node != NULL) {
+        if (node->flags & LIST_NODE_FLAG_SKIP) {
+            return ListPoolPrev(node);
         }
 
-        result = n->owner;
+        result = node->owner;
     } else {
         result = NULL;
     }
@@ -190,17 +190,17 @@ void* ListPoolLast(void* pool) {
 
 void* ListPoolNext(void* item) {
     ListNode* node = item;
-    ListNode* n;
+    ListNode* next;
     void* result;
 
-    n = node->next;
+    next = node->next;
 
-    if (n != NULL) {
-        if (n->flags & LIST_NODE_FLAG_SKIP) {
-            return ListPoolNext(n);
+    if (next != NULL) {
+        if (next->flags & LIST_NODE_FLAG_SKIP) {
+            return ListPoolNext(next);
         }
 
-        result = n->owner;
+        result = next->owner;
     } else {
         result = NULL;
     }
@@ -210,17 +210,17 @@ void* ListPoolNext(void* item) {
 
 void* ListPoolPrev(void* item) {
     ListNode* node = item;
-    ListNode* n;
+    ListNode* prev;
     void* result;
 
-    n = node->prev;
+    prev = node->prev;
 
-    if (n != NULL) {
-        if (n->flags & LIST_NODE_FLAG_SKIP) {
-            return ListPoolPrev(n);
+    if (prev != NULL) {
+        if (prev->flags & LIST_NODE_FLAG_SKIP) {
+            return ListPoolPrev(prev);
         }
 
-        result = n->owner;
+        result = prev->owner;
     } else {
         result = NULL;
     }
@@ -230,12 +230,12 @@ void* ListPoolPrev(void* item) {
 
 void* ListPoolFirstFree(void* pool) {
     ListPool* list = pool;
-    ListNode* n;
+    ListNode* node;
 
-    n = list->freeHead;
+    node = list->freeHead;
 
-    if (n != NULL) {
-        return n->owner;
+    if (node != NULL) {
+        return node->owner;
     }
 
     return NULL;

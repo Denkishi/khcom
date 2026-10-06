@@ -56,7 +56,7 @@ u16 GetObjTileCount(u16 attr0, u16 attr1) {
 }
 
 void SortSpriteEntries(SpriteEntry** arr, s32 lo, s32 hi) {
-    SpriteEntry* t;
+    SpriteEntry* entry;
     u16 pivot;
     s32 i;
     s32 j;
@@ -78,9 +78,9 @@ void SortSpriteEntries(SpriteEntry** arr, s32 lo, s32 hi) {
             break;
         }
 
-        t = arr[i];
+        entry = arr[i];
         arr[i] = arr[j];
-        arr[j] = t;
+        arr[j] = entry;
         i++;
         j--;
     }
@@ -103,25 +103,25 @@ void DisableObj() {
 }
 
 void SetObjTileRange(u16 start, u16 count) {
-    s32 v;
+    s32 end;
 
     gSpriteWork->tilePool.rangeStart = start;
-    v = start + count;
-    gSpriteWork->tilePool.rangeEnd = v;
+    end = start + count;
+    gSpriteWork->tilePool.rangeEnd = end;
 
-    if ((u16)v > 0x400) {
+    if ((u16)end > 0x400) {
         gSpriteWork->tilePool.rangeEnd = 0x400;
     }
 }
 
 void SetObjPaletteRange(u16 start, u16 count) {
-    s32 v;
+    s32 end;
 
     gSpriteWork->palettePool.rangeStart = start;
-    v = start + count;
-    gSpriteWork->palettePool.rangeEnd = v;
+    end = start + count;
+    gSpriteWork->palettePool.rangeEnd = end;
 
-    if ((u16)v > 0x10) {
+    if ((u16)end > 0x10) {
         gSpriteWork->palettePool.rangeEnd = 0x10;
     }
 }
@@ -154,20 +154,20 @@ void SpriteReset() {
 }
 
 u8 DrawSpriteSharedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority) {
-    SpriteWork* p;
+    SpriteWork* work;
 
     if (palette != NULL && sprite != NULL) {
-        p = gSpriteWork;
-        p->entries[p->entryCount].x = x;
-        p->entries[p->entryCount].y = y;
-        p->entries[p->entryCount].tiles = obj;
-        p->entries[p->entryCount].palette = palette;
-        p->entries[p->entryCount].affine = affine;
-        p->entries[p->entryCount].flags = flags;
-        p->entries[p->entryCount].priority = priority;
-        p->entries[p->entryCount].sprite = sprite;
-        p->sortPtrs[p->entryCount] = &p->entries[p->entryCount];
-        p->entryCount += 1;
+        work = gSpriteWork;
+        work->entries[work->entryCount].x = x;
+        work->entries[work->entryCount].y = y;
+        work->entries[work->entryCount].tiles = obj;
+        work->entries[work->entryCount].palette = palette;
+        work->entries[work->entryCount].affine = affine;
+        work->entries[work->entryCount].flags = flags;
+        work->entries[work->entryCount].priority = priority;
+        work->entries[work->entryCount].sprite = sprite;
+        work->sortPtrs[work->entryCount] = &work->entries[work->entryCount];
+        work->entryCount += 1;
         return 1;
     }
 

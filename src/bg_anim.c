@@ -156,7 +156,7 @@ void BgAnimApplyAffineTransform(s32 bg, u8 rot, s32 sx, s32 sy, s16 cx, s16 cy) 
 
 void BgAnimUpdate() {
     u8* src;
-    u16 q;
+    u16 chunk;
     u16 off;
     u16 len;
     s16 over;
@@ -194,10 +194,10 @@ void BgAnimUpdate() {
         EnableBg(sBgAnimBg);
 
         if (sBgAnimFrameTimer == 0) {
-            q = sBgAnimFrame / sBgAnimFramesPerChunk;
+            chunk = sBgAnimFrame / sBgAnimFramesPerChunk;
             off = sBgAnimFrame % sBgAnimFramesPerChunk * sBgAnimFrameBytes;
-            src = (u8*)sBgAnimCurrent->chunks[q].data + off;
-            over = off + sBgAnimFrameBytes - sBgAnimCurrent->chunks[q].size;
+            src = (u8*)sBgAnimCurrent->chunks[chunk].data + off;
+            over = off + sBgAnimFrameBytes - sBgAnimCurrent->chunks[chunk].size;
 
             if (over > 0) {
                 len = sBgAnimFrameBytes - over;

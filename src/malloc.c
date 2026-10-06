@@ -28,16 +28,16 @@ u8 HeapContains(const void* ptr, Heap* heap) {
 }
 
 HeapBlock* HeapFindFreeBlock(s32 size, Heap* heap) {
-    HeapBlock* b;
+    HeapBlock* block;
 
-    b = heap->start->nextFree;
+    block = heap->start->nextFree;
 
-    while (b != NULL && b != heap->end) {
-        if (b->size >= size) {
-            return b;
+    while (block != NULL && block != heap->end) {
+        if (block->size >= size) {
+            return block;
         }
 
-        b = b->nextFree;
+        block = block->nextFree;
     }
 
     return NULL;
@@ -98,7 +98,7 @@ void IwramHeapInit(void* addr, u32 size) {
 }
 
 void* HeapAlloc(u32 size, Heap* heap) {
-    HeapBlock* b;
+    HeapBlock* block;
     HeapBlock* prev;
     s32 rem;
 
@@ -107,40 +107,40 @@ void* HeapAlloc(u32 size, Heap* heap) {
     }
 
     size = (size + 63) & ~31;
-    b = HeapFindFreeBlock(size, heap);
+    block = HeapFindFreeBlock(size, heap);
 
-    if (b == NULL) {
+    if (block == NULL) {
         return NULL;
     }
 
-    if (b->size < (s32)(size + 64)) {
-        size = b->size;
-        HeapUnlinkFreeBlock(b);
+    if (block->size < (s32)(size + 64)) {
+        size = block->size;
+        HeapUnlinkFreeBlock(block);
     } else {
-        prev = b;
+        prev = block;
         rem = prev->size - size;
         prev->size = rem;
-        b = (HeapBlock*)((u8*)prev + rem);
-        b->next = prev->next;
-        b->prev = prev;
-        prev->next = b;
-        b->next->prev = b;
+        block = (HeapBlock*)((u8*)prev + rem);
+        block->next = prev->next;
+        block->prev = prev;
+        prev->next = block;
+        block->next->prev = block;
     }
 
-    b->size = -size;
-    b->prevFree = NULL;
-    b->nextFree = NULL;
+    block->size = -size;
+    block->prevFree = NULL;
+    block->nextFree = NULL;
 
     if (heap->allocFlag != 0) {
-        b->allocFlag = 1;
+        block->allocFlag = 1;
     } else {
-        b->allocFlag = 0;
+        block->allocFlag = 0;
     }
 
-    b->name = heap->name;
-    b->self = b;
+    block->name = heap->name;
+    block->self = block;
 
-    return b + 1;
+    return block + 1;
 }
 
 void* EwramAlloc(u32 size) {
@@ -152,8 +152,8 @@ void* IwramAlloc(u32 size) {
 }
 
 void HeapFree(const void* ptr, Heap* heap) {
-    HeapBlock* b;
-    HeapBlock* n;
+    HeapBlock* block;
+    HeapBlock* neighbor;
     HeapBlock* head;
     s32 size;
 
@@ -161,9 +161,9 @@ void HeapFree(const void* ptr, Heap* heap) {
         return;
     }
 
-    b = (HeapBlock*)ptr - 1;
+    block = (HeapBlock*)ptr - 1;
 
-    if (b->self != b) {
+    if (block->self != block) {
         return;
     }
 
@@ -171,42 +171,42 @@ void HeapFree(const void* ptr, Heap* heap) {
         return;
     }
 
-    size = -b->size;
+    size = -block->size;
 
     if (size < 0) {
         return;
     }
 
-    b->size = size;
-    n = b->prev;
+    block->size = size;
+    neighbor = block->prev;
 
-    if (n->size > 0) {
-        HeapUnlinkFreeBlock(n);
-        n->size += size;
-        n->next = b->next;
-        b->next->prev = n;
-        b->prev = NULL;
-        b->next = NULL;
-        b = n;
+    if (neighbor->size > 0) {
+        HeapUnlinkFreeBlock(neighbor);
+        neighbor->size += size;
+        neighbor->next = block->next;
+        block->next->prev = neighbor;
+        block->prev = NULL;
+        block->next = NULL;
+        block = neighbor;
     }
 
-    n = b->next;
+    neighbor = block->next;
 
-    if (n->size > 0) {
-        HeapUnlinkFreeBlock(n);
-        b->size += n->size;
-        b->next = n->next;
-        n->next->prev = b;
-        n->prev = NULL;
-        n->next = NULL;
+    if (neighbor->size > 0) {
+        HeapUnlinkFreeBlock(neighbor);
+        block->size += neighbor->size;
+        block->next = neighbor->next;
+        neighbor->next->prev = block;
+        neighbor->prev = NULL;
+        neighbor->next = NULL;
     }
 
     head = heap->start;
-    b->prevFree = head;
-    b->nextFree = head->nextFree;
-    head->nextFree->prevFree = b;
-    head->nextFree = b;
-    b->self = NULL;
+    block->prevFree = head;
+    block->nextFree = head->nextFree;
+    head->nextFree->prevFree = block;
+    head->nextFree = block;
+    block->self = NULL;
 }
 
 void EwramFree(const void* ptr) {
@@ -240,15 +240,15 @@ s32 IwramGetBlockSize(void* ptr) {
 }
 
 s32 HeapGetFreeTotal(Heap* heap) {
-    HeapBlock* b;
+    HeapBlock* block;
     s32 total;
 
-    b = heap->start->nextFree;
+    block = heap->start->nextFree;
     total = 0;
 
-    while (b != NULL && b->size > 0) {
-        total += b->size;
-        b = b->nextFree;
+    while (block != NULL && block->size > 0) {
+        total += block->size;
+        block = block->nextFree;
     }
 
     return total;
@@ -263,10 +263,10 @@ s32 IwramGetFreeTotal() {
 }
 
 void func_08000A60(Heap* heap) {
-    HeapBlock* b;
+    HeapBlock* block;
 
-    for (b = heap->start; b != NULL; b = b->next) {
-        *(volatile s32*)&b->size;
+    for (block = heap->start; block != NULL; block = block->next) {
+        *(volatile s32*)&block->size;
     }
 }
 
@@ -287,10 +287,10 @@ void SetIwramHeapAllocFlag(u8 flag) {
 }
 
 void func_08000AA8(Heap* heap) {
-    HeapBlock* b;
+    HeapBlock* block;
 
-    for (b = heap->start; b != NULL; b = b->next) {
-        *(volatile s32*)&b->size;
+    for (block = heap->start; block != NULL; block = block->next) {
+        *(volatile s32*)&block->size;
     }
 }
 

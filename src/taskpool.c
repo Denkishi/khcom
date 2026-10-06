@@ -61,7 +61,7 @@ Task* TaskCreate(TaskPool* pool, TaskDesc* desc, const void* arg) {
 }
 
 void TaskPoolInit(TaskPool* pool, s32 count) {
-    Task* t;
+    Task* task;
     s32 i;
 
     pool->tasks = EwramAlloc(count * sizeof(Task));
@@ -73,60 +73,60 @@ void TaskPoolInit(TaskPool* pool, s32 count) {
     ListPoolInit(pool);
 
     for (i = 0; i < count; i++) {
-        t = &((Task*)pool->tasks)[i];
-        ListPoolAddFree(&t->node, pool, t);
+        task = &((Task*)pool->tasks)[i];
+        ListPoolAddFree(&task->node, pool, task);
     }
 }
 
 void TaskPoolUpdate(TaskPool* pool) {
-    Task* t;
+    Task* task;
 
-    t = ListPoolFirst(&pool->head);
+    task = ListPoolFirst(&pool->head);
 
-    while (t != NULL) {
-        if (t->update != NULL && t->update(t->work, t) == 0) {
-            t = TaskDestroy(pool, t);
+    while (task != NULL) {
+        if (task->update != NULL && task->update(task->work, task) == 0) {
+            task = TaskDestroy(pool, task);
         } else {
-            t = ListPoolNext(&t->node);
+            task = ListPoolNext(&task->node);
         }
     }
 }
 
 void TaskPoolDraw(TaskPool* pool) {
-    Task* t;
+    Task* task;
 
-    t = ListPoolFirst(&pool->head);
+    task = ListPoolFirst(&pool->head);
 
-    while (t != NULL) {
-        if (t->desc->draw != NULL) {
-            t->desc->draw(t->work);
+    while (task != NULL) {
+        if (task->desc->draw != NULL) {
+            task->desc->draw(task->work);
         }
 
-        t = ListPoolNext(&t->node);
+        task = ListPoolNext(&task->node);
     }
 }
 
 void TaskPoolDestroy(TaskPool* pool) {
-    Task* t;
+    Task* task;
 
-    t = ListPoolFirst(&pool->head);
+    task = ListPoolFirst(&pool->head);
 
-    while (t != NULL) {
-        t = TaskDestroy(pool, t);
+    while (task != NULL) {
+        task = TaskDestroy(pool, task);
     }
 
     EwramFree(pool->tasks);
 }
 
 void func_08000F30(TaskPool* pool) {
-    Task* t;
+    Task* task;
 
-    t = ListPoolFirst(&pool->head);
+    task = ListPoolFirst(&pool->head);
 
-    if (t != NULL) {
+    if (task != NULL) {
         do {
-            t = ListPoolNext(&t->node);
-        } while (t != NULL);
+            task = ListPoolNext(&task->node);
+        } while (task != NULL);
     }
 }
 

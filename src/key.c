@@ -122,42 +122,42 @@ u8 GetKeyReleaseTime(u16 key) {
 }
 
 u16 ReadKeyChord(u16 key1, u16 key2) {
-    u16 r = 0;
-    u8 va = GetKeyReleaseTime(key1);
-    u8 vb = GetKeyReleaseTime(key2);
+    u16 keys = 0;
+    u8 release1 = GetKeyReleaseTime(key1);
+    u8 release2 = GetKeyReleaseTime(key2);
 
-    if (va == 2) {
+    if (release1 == 2) {
         sKeyChordLatch &= ~key1;
     }
 
-    if (vb == 2) {
+    if (release2 == 2) {
         sKeyChordLatch &= ~key2;
     }
 
     if (((GetKeysPressed() & key1) && (GetKeysHeld() & key2)) || ((GetKeysPressed() & key2) && (GetKeysHeld() & key1))) {
         sKeyChordLatch |= key1 | key2;
-        r = key1 | key2;
+        keys = key1 | key2;
     }
 
     if ((sKeyChordLatch & key1) == 0) {
-        if (GetKeyHoldTime(key1) == 5 || va == 1) {
+        if (GetKeyHoldTime(key1) == 5 || release1 == 1) {
             sKeyChordLatch |= key1;
-            r = key1;
+            keys = key1;
         }
     }
 
     if ((sKeyChordLatch & key2) == 0) {
-        if (GetKeyHoldTime(key2) == 5 || vb == 1) {
+        if (GetKeyHoldTime(key2) == 5 || release2 == 1) {
             sKeyChordLatch |= key2;
-            r = key2;
+            keys = key2;
         }
     }
 
-    return r;
+    return keys;
 }
 
 u16 ReadDpadChord() {
-    u16 r = 0;
+    u16 keys = 0;
     u8 up = GetKeyReleaseTime(DPAD_UP);
     u8 down = GetKeyReleaseTime(DPAD_DOWN);
     u8 left = GetKeyReleaseTime(DPAD_LEFT);
@@ -181,53 +181,53 @@ u16 ReadDpadChord() {
 
     if (((GetKeysPressed() & DPAD_UP) && (GetKeysHeld() & DPAD_LEFT)) || ((GetKeysPressed() & DPAD_LEFT) && (GetKeysHeld() & DPAD_UP))) {
         sKeyChordLatch |= (DPAD_UP | DPAD_LEFT);
-        r = (DPAD_UP | DPAD_LEFT);
+        keys = (DPAD_UP | DPAD_LEFT);
     }
 
     if (((GetKeysPressed() & DPAD_UP) && (GetKeysHeld() & DPAD_RIGHT)) || ((GetKeysPressed() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_UP))) {
         sKeyChordLatch |= (DPAD_UP | DPAD_RIGHT);
-        r = (DPAD_UP | DPAD_RIGHT);
+        keys = (DPAD_UP | DPAD_RIGHT);
     }
 
     if (((GetKeysPressed() & DPAD_DOWN) && (GetKeysHeld() & DPAD_LEFT)) || ((GetKeysPressed() & DPAD_LEFT) && (GetKeysHeld() & DPAD_DOWN))) {
         sKeyChordLatch |= (DPAD_DOWN | DPAD_LEFT);
-        r = (DPAD_DOWN | DPAD_LEFT);
+        keys = (DPAD_DOWN | DPAD_LEFT);
     }
 
     if (((GetKeysPressed() & DPAD_DOWN) && (GetKeysHeld() & DPAD_RIGHT)) || ((GetKeysPressed() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_DOWN))) {
         sKeyChordLatch |= (DPAD_DOWN | DPAD_RIGHT);
-        r = (DPAD_DOWN | DPAD_RIGHT);
+        keys = (DPAD_DOWN | DPAD_RIGHT);
     }
 
     if ((sKeyChordLatch & DPAD_UP) == 0) {
         if (GetKeyHoldTime(DPAD_UP) == 10 || up == 1) {
             sKeyChordLatch |= DPAD_UP;
-            r = DPAD_UP;
+            keys = DPAD_UP;
         }
     }
 
     if ((sKeyChordLatch & DPAD_DOWN) == 0) {
         if (GetKeyHoldTime(DPAD_DOWN) == 10 || down == 1) {
             sKeyChordLatch |= DPAD_DOWN;
-            r = DPAD_DOWN;
+            keys = DPAD_DOWN;
         }
     }
 
     if ((sKeyChordLatch & DPAD_LEFT) == 0) {
         if (GetKeyHoldTime(DPAD_LEFT) == 10 || left == 1) {
             sKeyChordLatch |= DPAD_LEFT;
-            r = DPAD_LEFT;
+            keys = DPAD_LEFT;
         }
     }
 
     if ((sKeyChordLatch & DPAD_RIGHT) == 0) {
         if (GetKeyHoldTime(DPAD_RIGHT) == 10 || right == 1) {
             sKeyChordLatch |= DPAD_RIGHT;
-            r = DPAD_RIGHT;
+            keys = DPAD_RIGHT;
         }
     }
 
-    return r;
+    return keys;
 }
 
 void UpdateKeyState() {

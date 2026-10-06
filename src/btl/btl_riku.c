@@ -399,7 +399,7 @@ void UpdateBtlRikuWalk(BtlRikuWork* work, u16 held) {
     }
 
     if (held & 0xF0) {
-        if (act->btl->hcEffect == 50) {
+        if (act->btl->hcEffect == HC_EFFECT_DASH) {
             work->speed += 256;
 
             if (work->speed > 768) {
@@ -468,7 +468,7 @@ void UpdateBtlRikuDarkWalk(BtlRikuWork* work, u16 held) {
     }
 
     if (held & 0xF0) {
-        if (act->btl->hcEffect == 50) {
+        if (act->btl->hcEffect == HC_EFFECT_DASH) {
             work->speed += 256;
 
             if (work->speed > 768) {
@@ -1014,7 +1014,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     }
 
     switch (act->btl->hcEffect) {
-    case 26:
+    case HC_EFFECT_SECOND_CHANCE:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
@@ -1055,7 +1055,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     act->flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
 
     switch ((u32)act->btl->hcEffect) {
-    case 51:
+    case HC_EFFECT_GUARD:
         enemy = GetBtlRikuActiveOpponent(work);
 
         if (enemy != NULL) {
@@ -1180,7 +1180,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             EndRikuDarkMode(work);
             work->speed = 0;
 
-            if (act->btl->hcEffect == 27) {
+            if (act->btl->hcEffect == HC_EFFECT_AUTO_LIFE) {
                 work->state = BTL_RIKU_STATE_REVIVE;
                 work->steps = 0;
                 work->stateTimer = 0;
@@ -1902,11 +1902,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
 
             switch (act->btl->hcEffect) {
-            case 8:
-            case 34:
-            case 43:
-            case 44:
-            case 49:
+            case HC_EFFECT_BERSERK:
+            case HC_EFFECT_WIDE_ATTACK_2:
+            case HC_EFFECT_OVERDRIVE:
+            case HC_EFFECT_ATTACK_HASTE:
+            case HC_EFFECT_WARP_BREAK:
                 act->btl->hcEffectCount--;
                 break;
             }
@@ -1967,7 +1967,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         frame = AnimGetFrame(&work->anim);
 
         if (frame >= 1 && frame <= 9) {
-            if (act->btl->hcEffect == 34) {
+            if (act->btl->hcEffect == HC_EFFECT_WIDE_ATTACK_2) {
                 if (ApplyAttackBox(6, act->x, act->y, act->z - 5120, 65, 30, 12) != 0) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
                     work->flags |= BTL_RIKU_FLAG_SWING_HIT;
@@ -2110,11 +2110,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
 
             switch (act->btl->hcEffect) {
-            case 8:
-            case 34:
-            case 43:
-            case 44:
-            case 49:
+            case HC_EFFECT_BERSERK:
+            case HC_EFFECT_WIDE_ATTACK_2:
+            case HC_EFFECT_OVERDRIVE:
+            case HC_EFFECT_ATTACK_HASTE:
+            case HC_EFFECT_WARP_BREAK:
                 act->btl->hcEffectCount--;
                 break;
             }
@@ -2169,7 +2169,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
 
             if (strike) {
-                if (act->btl->hcEffect == 34) {
+                if (act->btl->hcEffect == HC_EFFECT_WIDE_ATTACK_2) {
                     if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(attack, act->x - 8960, act->y, act->z, 35, 25, 40)
                                        : ApplyAttackBox(attack, act->x + 8960, act->y, act->z, 35, 25, 40)) {
                         work->flags |= BTL_RIKU_FLAG_SWING_HIT;
@@ -2252,11 +2252,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
 
             switch (act->btl->hcEffect) {
-            case 8:
-            case 34:
-            case 43:
-            case 44:
-            case 49:
+            case HC_EFFECT_BERSERK:
+            case HC_EFFECT_WIDE_ATTACK_2:
+            case HC_EFFECT_OVERDRIVE:
+            case HC_EFFECT_ATTACK_HASTE:
+            case HC_EFFECT_WARP_BREAK:
                 act->btl->hcEffectCount--;
                 break;
             }
@@ -2326,7 +2326,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (strike) {
                 MakeOpponentsHittable();
 
-                if (act->btl->hcEffect == 34) {
+                if (act->btl->hcEffect == HC_EFFECT_WIDE_ATTACK_2) {
                     reach = 35;
                     halfX = 35;
                     halfY = 25;
@@ -2717,7 +2717,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             StartBtlRikuKnockback(work);
             func_0807B3C4(30);
 
-            if (gBtlWork->hcEffect == 18) {
+            if (gBtlWork->hcEffect == HC_EFFECT_QUICK_RECOVERY) {
                 act->btl->hcEffectCount--;
                 work->steps = 0;
             } else {
@@ -3718,7 +3718,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         hit = 0;
         FocusBtlRikuCameraOnTarget(work);
 
-        if (act->btl->hcEffect == 3) {
+        if (act->btl->hcEffect == HC_EFFECT_COMBO_PLUS) {
             if ((work->flags & BTL_RIKU_FLAG_COMBO_EXTENDED) == 0) {
                 if (work->comboCount == 2) {
                     work->comboCount = 1;
@@ -3730,7 +3730,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 swing = work->attacks[work->comboCount];
             }
-        } else if (act->btl->hcEffect == 5) {
+        } else if (act->btl->hcEffect == HC_EFFECT_COMBO_FINISH) {
             work->comboCount = 2;
             swing = work->attacks[2];
         } else {
@@ -3758,16 +3758,16 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->vz = swing->vz;
 
             switch (act->btl->hcEffect) {
-            case 8:
-            case 34:
-            case 43:
-            case 44:
-            case 49:
+            case HC_EFFECT_BERSERK:
+            case HC_EFFECT_WIDE_ATTACK_2:
+            case HC_EFFECT_OVERDRIVE:
+            case HC_EFFECT_ATTACK_HASTE:
+            case HC_EFFECT_WARP_BREAK:
                 act->btl->hcEffectCount--;
                 break;
             }
         } else if (work->stateTimer == swing->hitFrame) {
-            if (act->btl->hcEffect == 34) {
+            if (act->btl->hcEffect == HC_EFFECT_WIDE_ATTACK_2) {
                 switch (swing->animId) {
                 case 5:
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -3795,7 +3795,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     break;
                 }
             } else {
-                if (act->btl->hcEffect == 49 && work->comboCount == 2) {
+                if (act->btl->hcEffect == HC_EFFECT_WARP_BREAK && work->comboCount == 2) {
                     if (GetRandom() % 2 != 0) {
                         attack = 164;
                     } else {
@@ -4226,7 +4226,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             gBtlWork->hitStop = gBtlWork->pendingHitStop;
             StartBtlRikuKnockback(work);
 
-            if (gBtlWork->hcEffect == 18) {
+            if (gBtlWork->hcEffect == HC_EFFECT_QUICK_RECOVERY) {
                 act->btl->hcEffectCount--;
                 work->steps = 0;
             } else {

@@ -278,7 +278,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        if (act->btl->hcEffect == 27) {
+        if (act->btl->hcEffect == HC_EFFECT_AUTO_LIFE) {
             w->base.state = HUM_VIXEN_STATE_REVIVE;
             w->base.stateTimer = 0;
         }

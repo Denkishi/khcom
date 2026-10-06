@@ -112,7 +112,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 
             if (flags & BTL_FLAG_VS_BATTLE) {
                 if (flags & BTL_FLAG_VS_LINK_PARENT) {
-                    if (gRikuBtlWork->hcEffect == 6) {
+                    if (gRikuBtlWork->hcEffect == HC_EFFECT_DRAW) {
                         range = 0x10000;
                     } else {
                         range = 0x2000;

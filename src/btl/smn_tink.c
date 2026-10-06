@@ -128,7 +128,7 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
         break;
     }
 
-    if (work->actor->btl->hcEffect == 0x27) {
+    if (work->actor->btl->hcEffect == HC_EFFECT_SUMMON_BOOST) {
         healRate = 332 * healRate >> 8;
     }
 

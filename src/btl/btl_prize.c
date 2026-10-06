@@ -203,7 +203,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                 }
 
                 if (rikuNearer) {
-                    if (gRikuBtlWork->hcEffect == 6) {
+                    if (gRikuBtlWork->hcEffect == HC_EFFECT_DRAW) {
                         range = 0x10000;
                     } else {
                         range = 0x2800;

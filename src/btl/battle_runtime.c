@@ -907,7 +907,7 @@ void UpdateBattleState() {
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
             gBtlWork->actor2 = NULL;
             gBtlWork->phaseStep = BTL_END_STEP_WAIT_FRAME;
-            gBtlWork->hcEffect = 0;
+            gBtlWork->hcEffect = HC_EFFECT_NONE;
             gBtlWork->flags |= BTL_FLAG_STOP_SPAWNING;
         } else if (gBtlWork->phaseStep == BTL_END_STEP_WAIT_FRAME) {
             gBtlWork->phaseStep = BTL_END_STEP_REWARDS;

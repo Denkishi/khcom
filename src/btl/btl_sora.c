@@ -390,7 +390,7 @@ void UpdateBtlSoraWalk(BtlSoraWork* work, u16 held) {
     }
 
     if (held & 0xF0) {
-        if (act->btl->hcEffect == 50) {
+        if (act->btl->hcEffect == HC_EFFECT_DASH) {
             work->speed += 256;
 
             if (work->speed > 1024) {
@@ -899,7 +899,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     switch (act->btl->hcEffect) {
-    case 26:
+    case HC_EFFECT_SECOND_CHANCE:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
@@ -937,7 +937,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     act->flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
 
     switch ((u32)act->btl->hcEffect) {
-    case 51:
+    case HC_EFFECT_GUARD:
         enemy = GetBtlSoraActiveOpponent(work);
 
         if (enemy != NULL) {
@@ -979,7 +979,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         break;
     }
-    case 24: {
+    case HC_EFFECT_BIO: {
         BtlObj* enemy;
         u16 hp;
 
@@ -1095,7 +1095,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     case BTL_REACTION_GRAVITY_DEFEATED:
         work->speed = 0;
 
-        if (act->btl->hcEffect == 27) {
+        if (act->btl->hcEffect == HC_EFFECT_AUTO_LIFE) {
             work->state = BTL_SORA_STATE_REVIVE;
             work->steps = 0;
             work->stateTimer = 0;
@@ -2148,7 +2148,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (state != BTL_SORA_STATE_SUMMON_IDLE) {
             act->btl->flags |= BTL_FLAG_CAN_CHARGE_RELOAD;
 
-            if ((act->btl->flags & BTL_FLAG_RELOAD_CHARGING) && act->btl->hcEffect != 30) {
+            if ((act->btl->flags & BTL_FLAG_RELOAD_CHARGING) && act->btl->hcEffect != HC_EFFECT_RELOAD_KINESIS) {
                 SetBtlSoraAnimation(work, 51, 0);
 
                 if (AnimIsFinished(&work->anim)) {
@@ -2615,7 +2615,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             switch (act->btl->hcEffect) {
-            case 13:
+            case HC_EFFECT_CURE_BOOST:
                 switch (work->variant[0]) {
                 case 0:
                     act->hp += 75;
@@ -2820,7 +2820,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCameraOnTarget(work);
         memcpy(hitFrames, sBtlSoraSwingHitFrames, 5);
 
-        if (act->btl->hcEffect == 3) {
+        if (act->btl->hcEffect == HC_EFFECT_COMBO_PLUS) {
             if ((work->flags & BTL_SORA_FLAG_COMBO_EXTENDED) == 0) {
                 if (work->comboCount == 2) {
                     work->comboCount = 1;
@@ -2832,7 +2832,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 swing = work->attacks[work->comboCount];
             }
-        } else if (act->btl->hcEffect == 5) {
+        } else if (act->btl->hcEffect == HC_EFFECT_COMBO_FINISH) {
             work->comboCount = 2;
             swing = work->attacks[2];
         } else {
@@ -2853,18 +2853,18 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->vz = swing->vz;
 
             switch (act->btl->hcEffect) {
-            case 8:
-            case 34:
-            case 43:
-            case 44:
-            case 49:
+            case HC_EFFECT_BERSERK:
+            case HC_EFFECT_WIDE_ATTACK_2:
+            case HC_EFFECT_OVERDRIVE:
+            case HC_EFFECT_ATTACK_HASTE:
+            case HC_EFFECT_WARP_BREAK:
                 act->btl->hcEffectCount--;
                 break;
             }
         } else if ((s16)work->stateTimer == hitFrames[work->swingSpeed]) {
             MakeOpponentsHittable();
 
-            if (act->btl->hcEffect == 34) {
+            if (act->btl->hcEffect == HC_EFFECT_WIDE_ATTACK_2) {
                 switch (swing->animId) {
                 case 22:
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -2898,7 +2898,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     break;
                 }
             } else {
-                if (act->btl->hcEffect == 49 && work->comboCount == 2) {
+                if (act->btl->hcEffect == HC_EFFECT_WARP_BREAK && work->comboCount == 2) {
                     if (GetRandom() % 3 != 0) {
                         attack = 164;
                     } else {
@@ -4025,7 +4025,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         case 0:
             work->flags &= ~BTL_SORA_FLAG_PASS_THROUGH;
 
-            if (act->btl->hcEffect == 42
+            if (act->btl->hcEffect == HC_EFFECT_HYPER_HEALING
                 && work->summonDesc != &gTaskDescSmnBambi
                 && work->summonDesc != &gTaskDescSmnTink
                 && work->summonDesc != &gTaskDescSmnMushu) {
@@ -4276,7 +4276,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             gBtlWork->hitStop = gBtlWork->pendingHitStop;
             StartBtlSoraKnockback(work);
 
-            if (act->btl->hcEffect == 18) {
+            if (act->btl->hcEffect == HC_EFFECT_QUICK_RECOVERY) {
                 SetBtlSoraAnimation(work, 39, 0);
                 act->btl->hcEffectCount--;
                 work->steps = 0;
@@ -6251,7 +6251,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
     }
 
 #ifdef VERSION_EU
-    if (act->btl->hcEffect == 19) {
+    if (act->btl->hcEffect == HC_EFFECT_VANISH) {
         if (work->mainSide) {
             if (gFrameCounter & 1) {
                 return;

@@ -1167,59 +1167,59 @@ void BuildRikuDeck(u8 deck) {
     gCardCollection[212] = CARD_LEXAEUS_9;
     gCardCollection[213] = CARD_ANSEM_9;
 
-    if (IsCardKindObtained(38)) {
+    if (IsCardKindObtained(OBTAINED_CARD_GUARD_ARMOR)) {
         AddCardToActiveDeck(200);
     }
 
-    if (IsCardKindObtained(42)) {
+    if (IsCardKindObtained(OBTAINED_CARD_PARASITE_CAGE)) {
         AddCardToActiveDeck(201);
     }
 
-    if (IsCardKindObtained(40)) {
+    if (IsCardKindObtained(OBTAINED_CARD_TRICKMASTER)) {
         AddCardToActiveDeck(202);
     }
 
-    if (IsCardKindObtained(44)) {
+    if (IsCardKindObtained(OBTAINED_CARD_DARKSIDE)) {
         AddCardToActiveDeck(203);
     }
 
-    if (IsCardKindObtained(50)) {
+    if (IsCardKindObtained(OBTAINED_CARD_HADES)) {
         AddCardToActiveDeck(204);
     }
 
-    if (IsCardKindObtained(39)) {
+    if (IsCardKindObtained(OBTAINED_CARD_JAFAR)) {
         AddCardToActiveDeck(205);
     }
 
-    if (IsCardKindObtained(45)) {
+    if (IsCardKindObtained(OBTAINED_CARD_OOGIE_BOOGIE)) {
         AddCardToActiveDeck(206);
     }
 
-    if (IsCardKindObtained(41)) {
+    if (IsCardKindObtained(OBTAINED_CARD_URSULA)) {
         AddCardToActiveDeck(207);
     }
 
-    if (IsCardKindObtained(48)) {
+    if (IsCardKindObtained(OBTAINED_CARD_HOOK)) {
         AddCardToActiveDeck(208);
     }
 
-    if (IsCardKindObtained(43)) {
+    if (IsCardKindObtained(OBTAINED_CARD_DRAGON_MALEFICENT)) {
         AddCardToActiveDeck(209);
     }
 
-    if (IsCardKindObtained(51)) {
+    if (IsCardKindObtained(OBTAINED_CARD_RIKU)) {
         AddCardToActiveDeck(210);
     }
 
-    if (IsCardKindObtained(54)) {
+    if (IsCardKindObtained(OBTAINED_CARD_VEXEN)) {
         AddCardToActiveDeck(211);
     }
 
-    if (IsCardKindObtained(57)) {
+    if (IsCardKindObtained(OBTAINED_CARD_LEXAEUS)) {
         AddCardToActiveDeck(212);
     }
 
-    if (IsCardKindObtained(56)) {
+    if (IsCardKindObtained(OBTAINED_CARD_ANSEM)) {
         AddCardToActiveDeck(213);
     }
 }

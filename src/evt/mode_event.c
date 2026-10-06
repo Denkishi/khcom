@@ -869,7 +869,7 @@ u8 HandleNoAnswerAfterEvent() {
 void UnlockCardKindsAfterEvent() {
     switch (sEventId) {
     case EVENT_002_1F_TRAVERSE_TOWN_E0_1:
-        SetCardKindObtained(0);
+        SetCardKindObtained(OBTAINED_CARD_KINGDOM_KEY);
         break;
     case EVENT_136_100ACREWOOD_LV1:
         LearnStock(LEARNED_STOCK_CONFUSE);
@@ -890,38 +890,38 @@ void UnlockCardKindsAfterEvent() {
         LearnStock(LEARNED_STOCK_TERROR);
         break;
     case EVENT_108_AGRABAH_E0_2:
-        SetCardKindObtained(1);
+        SetCardKindObtained(OBTAINED_CARD_THREE_WISHES);
         break;
     case EVENT_074_MONSTORO_E0:
-        SetCardKindObtained(5);
+        SetCardKindObtained(OBTAINED_CARD_WISHING_STAR);
         break;
     case EVENT_120_COLISEUM_E0:
-        SetCardKindObtained(8);
+        SetCardKindObtained(OBTAINED_CARD_OLYMPIA);
         break;
     case EVENT_094_WONDERLAND_E0:
-        SetCardKindObtained(10);
+        SetCardKindObtained(OBTAINED_CARD_LADY_LUCK);
         break;
     case EVENT_101_ATLANTICA_E0:
-        SetCardKindObtained(2);
+        SetCardKindObtained(OBTAINED_CARD_CRABCLAW);
         break;
     case EVENT_115_NEVERLAND_E0:
-        SetCardKindObtained(4);
+        SetCardKindObtained(OBTAINED_CARD_FAIRY_HARP);
         break;
     case EVENT_129_HOLLOWBASTION_E0:
-        SetCardKindObtained(11);
+        SetCardKindObtained(OBTAINED_CARD_DIVINE_ROSE);
         break;
     case EVENT_087_HALLOWEEN_TOWN_E0:
-        SetCardKindObtained(3);
+        SetCardKindObtained(OBTAINED_CARD_PUMPKINHEAD);
         break;
     case EVENT_059_12F_GOAL_2:
-        SetCardKindObtained(13);
+        SetCardKindObtained(OBTAINED_CARD_OBLIVION);
         break;
     case EVENT_061_13F_ENTRANCE:
         LearnStock(LEARNED_STOCK_TRINITY_LIMIT);
         break;
     case EVENT_067_13F_CASTLE_OBLIVION_LAST2:
-        SetCardKindObtained(15);
-        SetCardKindObtained(16);
+        SetCardKindObtained(OBTAINED_CARD_DIAMOND_DUST);
+        SetCardKindObtained(OBTAINED_CARD_ONE_WINGED_ANGEL);
         break;
     }
 }

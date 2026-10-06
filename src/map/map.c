@@ -2391,7 +2391,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
         }
     }
 
-    if ((gGameState.flags & GAME_FLAG_RIKU_CLEAR) && gGameState.world == WORLD_CASTLE_OBLIVION && IsCardKindObtained(16)) {
+    if ((gGameState.flags & GAME_FLAG_RIKU_CLEAR) && gGameState.world == WORLD_CASTLE_OBLIVION && IsCardKindObtained(OBTAINED_CARD_ONE_WINGED_ANGEL)) {
         prize = &gPrzCardKinds[14];
 
         if (IsCardKindObtained(prize->unk_00[0]) != 1) {

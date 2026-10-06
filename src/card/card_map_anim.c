@@ -637,182 +637,182 @@ s16 ObtainCard(u16 cardId) {
 
     switch (gCardDefs[cardId & CARD_ID_MASK].kind) {
     case CARD_KIND_KINGDOM_KEY:
-        SetCardKindObtained(0);
+        SetCardKindObtained(OBTAINED_CARD_KINGDOM_KEY);
         SetJiminyFlag(119);
         break;
     case CARD_KIND_OLYMPIA:
-        SetCardKindObtained(8);
+        SetCardKindObtained(OBTAINED_CARD_OLYMPIA);
         SetJiminyFlag(127);
         break;
     case CARD_KIND_THREE_WISHES:
-        SetCardKindObtained(1);
+        SetCardKindObtained(OBTAINED_CARD_THREE_WISHES);
         SetJiminyFlag(120);
         break;
     case CARD_KIND_CRABCLAW:
-        SetCardKindObtained(2);
+        SetCardKindObtained(OBTAINED_CARD_CRABCLAW);
         SetJiminyFlag(121);
         break;
     case CARD_KIND_PUMPKINHEAD:
-        SetCardKindObtained(3);
+        SetCardKindObtained(OBTAINED_CARD_PUMPKINHEAD);
         SetJiminyFlag(122);
         break;
     case CARD_KIND_FAIRY_HARP:
-        SetCardKindObtained(4);
+        SetCardKindObtained(OBTAINED_CARD_FAIRY_HARP);
         SetJiminyFlag(123);
         break;
     case CARD_KIND_WISHING_STAR:
-        SetCardKindObtained(5);
+        SetCardKindObtained(OBTAINED_CARD_WISHING_STAR);
         SetJiminyFlag(124);
         break;
     case CARD_KIND_SPELLBINDER:
-        SetCardKindObtained(6);
+        SetCardKindObtained(OBTAINED_CARD_SPELLBINDER);
         SetJiminyFlag(125);
         break;
     case CARD_KIND_METAL_CHOCOBO:
-        SetCardKindObtained(7);
+        SetCardKindObtained(OBTAINED_CARD_METAL_CHOCOBO);
         SetJiminyFlag(126);
         break;
     case CARD_KIND_LIONHEART:
-        SetCardKindObtained(9);
+        SetCardKindObtained(OBTAINED_CARD_LIONHEART);
         SetJiminyFlag(128);
         break;
     case CARD_KIND_LADY_LUCK:
-        SetCardKindObtained(10);
+        SetCardKindObtained(OBTAINED_CARD_LADY_LUCK);
         SetJiminyFlag(129);
         break;
     case CARD_KIND_DIVINE_ROSE:
-        SetCardKindObtained(11);
+        SetCardKindObtained(OBTAINED_CARD_DIVINE_ROSE);
         SetJiminyFlag(130);
         break;
     case CARD_KIND_OATHKEEPER:
-        SetCardKindObtained(12);
+        SetCardKindObtained(OBTAINED_CARD_OATHKEEPER);
         SetJiminyFlag(131);
         break;
     case CARD_KIND_OBLIVION:
-        SetCardKindObtained(13);
+        SetCardKindObtained(OBTAINED_CARD_OBLIVION);
         SetJiminyFlag(132);
         break;
     case CARD_KIND_ULTIMA_WEAPON:
-        SetCardKindObtained(14);
+        SetCardKindObtained(OBTAINED_CARD_ULTIMA_WEAPON);
         SetJiminyFlag(133);
         break;
     case CARD_KIND_DIAMOND_DUST:
-        SetCardKindObtained(15);
+        SetCardKindObtained(OBTAINED_CARD_DIAMOND_DUST);
         SetJiminyFlag(134);
         break;
     case CARD_KIND_ONE_WINGED_ANGEL:
-        SetCardKindObtained(16);
+        SetCardKindObtained(OBTAINED_CARD_ONE_WINGED_ANGEL);
         SetJiminyFlag(135);
         break;
     case CARD_KIND_FIRE:
-        SetCardKindObtained(17);
+        SetCardKindObtained(OBTAINED_CARD_FIRE);
         LearnStock(LEARNED_STOCK_FIRA);
         LearnStock(LEARNED_STOCK_FIRAGA);
         SetJiminyFlag(136);
         break;
     case CARD_KIND_BLIZZARD:
-        SetCardKindObtained(18);
+        SetCardKindObtained(OBTAINED_CARD_BLIZZARD);
         LearnStock(LEARNED_STOCK_BLIZZARA);
         LearnStock(LEARNED_STOCK_BLIZZAGA);
         SetJiminyFlag(137);
         break;
     case CARD_KIND_THUNDER:
-        SetCardKindObtained(19);
+        SetCardKindObtained(OBTAINED_CARD_THUNDER);
         LearnStock(LEARNED_STOCK_THUNDARA);
         LearnStock(LEARNED_STOCK_THUNDAGA);
         SetJiminyFlag(138);
         break;
     case CARD_KIND_CURE:
-        SetCardKindObtained(20);
+        SetCardKindObtained(OBTAINED_CARD_CURE);
         LearnStock(LEARNED_STOCK_CURA);
         LearnStock(LEARNED_STOCK_CURAGA);
         SetJiminyFlag(139);
         break;
     case CARD_KIND_GRAVITY:
-        SetCardKindObtained(21);
+        SetCardKindObtained(OBTAINED_CARD_GRAVITY);
         LearnStock(LEARNED_STOCK_GRAVIRA);
         LearnStock(LEARNED_STOCK_GRAVIGA);
         SetJiminyFlag(140);
         break;
     case CARD_KIND_STOP:
-        SetCardKindObtained(22);
+        SetCardKindObtained(OBTAINED_CARD_STOP);
         LearnStock(LEARNED_STOCK_STOPRA);
         LearnStock(LEARNED_STOCK_STOPGA);
         SetJiminyFlag(141);
         break;
     case CARD_KIND_AERO:
-        SetCardKindObtained(23);
+        SetCardKindObtained(OBTAINED_CARD_AERO);
         LearnStock(LEARNED_STOCK_AERORA);
         LearnStock(LEARNED_STOCK_AEROGA);
         SetJiminyFlag(142);
         break;
     case CARD_KIND_SIMBA:
-        SetCardKindObtained(24);
+        SetCardKindObtained(OBTAINED_CARD_SIMBA);
         LearnStock(LEARNED_STOCK_PROUD_ROAR);
         SetJiminyFlag(143);
         SetJiminyFlag(23);
         break;
     case CARD_KIND_GENIE:
-        SetCardKindObtained(25);
+        SetCardKindObtained(OBTAINED_CARD_GENIE);
         LearnStock(LEARNED_STOCK_SHOWTIME);
         SetJiminyFlag(144);
         break;
     case CARD_KIND_BAMBI:
-        SetCardKindObtained(26);
+        SetCardKindObtained(OBTAINED_CARD_BAMBI);
         LearnStock(LEARNED_STOCK_PARADISE);
         LearnStock(LEARNED_STOCK_IDYLL_ROMP);
         SetJiminyFlag(145);
         SetJiminyFlag(25);
         break;
     case CARD_KIND_DUMBO:
-        SetCardKindObtained(27);
+        SetCardKindObtained(OBTAINED_CARD_DUMBO);
         LearnStock(LEARNED_STOCK_SPLASH);
         SetJiminyFlag(146);
         SetJiminyFlag(24);
         break;
     case CARD_KIND_TINKER_BELL:
-        SetCardKindObtained(28);
+        SetCardKindObtained(OBTAINED_CARD_TINKER_BELL);
         LearnStock(LEARNED_STOCK_TWINKLE);
         SetJiminyFlag(147);
         break;
     case CARD_KIND_MUSHU:
-        SetCardKindObtained(29);
+        SetCardKindObtained(OBTAINED_CARD_MUSHU);
         LearnStock(LEARNED_STOCK_FLARE_BREATH);
         SetJiminyFlag(148);
         SetJiminyFlag(26);
         break;
     case CARD_KIND_CLOUD:
-        SetCardKindObtained(30);
+        SetCardKindObtained(OBTAINED_CARD_CLOUD);
         LearnStock(LEARNED_STOCK_CROSS_SLASH);
         LearnStock(LEARNED_STOCK_OMNISLASH);
         SetJiminyFlag(149);
         break;
     case CARD_KIND_POTION:
-        SetCardKindObtained(31);
+        SetCardKindObtained(OBTAINED_CARD_POTION);
         SetJiminyFlag(150);
         break;
     case CARD_KIND_HI_POTION:
-        SetCardKindObtained(32);
+        SetCardKindObtained(OBTAINED_CARD_HI_POTION);
         SetJiminyFlag(151);
         break;
     case CARD_KIND_MEGA_POTION:
-        SetCardKindObtained(33);
+        SetCardKindObtained(OBTAINED_CARD_MEGA_POTION);
         SetJiminyFlag(152);
         break;
     case CARD_KIND_ETHER:
-        SetCardKindObtained(34);
+        SetCardKindObtained(OBTAINED_CARD_ETHER);
         SetJiminyFlag(153);
         break;
     case CARD_KIND_MEGA_ETHER:
-        SetCardKindObtained(35);
+        SetCardKindObtained(OBTAINED_CARD_MEGA_ETHER);
         SetJiminyFlag(154);
         break;
     case CARD_KIND_ELIXIR:
-        SetCardKindObtained(36);
+        SetCardKindObtained(OBTAINED_CARD_ELIXIR);
         SetJiminyFlag(155);
         break;
     case CARD_KIND_MEGALIXIR:
-        SetCardKindObtained(37);
+        SetCardKindObtained(OBTAINED_CARD_MEGALIXIR);
         SetJiminyFlag(156);
         break;
     case CARD_KIND_SHADOW:
@@ -973,43 +973,43 @@ void SetRikuCardKindObtained(u16 kind) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (kind) {
         case CARD_KIND_DARKSIDE:
-            SetCardKindObtained(44);
+            SetCardKindObtained(OBTAINED_CARD_DARKSIDE);
             break;
         case CARD_KIND_GUARD_ARMOR:
-            SetCardKindObtained(38);
+            SetCardKindObtained(OBTAINED_CARD_GUARD_ARMOR);
             break;
         case CARD_KIND_OOGIE_BOOGIE:
-            SetCardKindObtained(45);
+            SetCardKindObtained(OBTAINED_CARD_OOGIE_BOOGIE);
             break;
         case CARD_KIND_TRICKMASTER:
-            SetCardKindObtained(40);
+            SetCardKindObtained(OBTAINED_CARD_TRICKMASTER);
             break;
         case CARD_KIND_PARASITE_CAGE:
-            SetCardKindObtained(42);
+            SetCardKindObtained(OBTAINED_CARD_PARASITE_CAGE);
             break;
         case CARD_KIND_JAFAR:
-            SetCardKindObtained(39);
+            SetCardKindObtained(OBTAINED_CARD_JAFAR);
             break;
         case CARD_KIND_URSULA:
-            SetCardKindObtained(41);
+            SetCardKindObtained(OBTAINED_CARD_URSULA);
             break;
         case CARD_KIND_DRAGON_MALEFICENT:
-            SetCardKindObtained(43);
+            SetCardKindObtained(OBTAINED_CARD_DRAGON_MALEFICENT);
             break;
         case CARD_KIND_HOOK:
-            SetCardKindObtained(48);
+            SetCardKindObtained(OBTAINED_CARD_HOOK);
             break;
         case CARD_KIND_HADES:
-            SetCardKindObtained(50);
+            SetCardKindObtained(OBTAINED_CARD_HADES);
             break;
         case CARD_KIND_RIKU:
-            SetCardKindObtained(51);
+            SetCardKindObtained(OBTAINED_CARD_RIKU);
             break;
         case CARD_KIND_VEXEN:
-            SetCardKindObtained(54);
+            SetCardKindObtained(OBTAINED_CARD_VEXEN);
             break;
         case CARD_KIND_LEXAEUS:
-            SetCardKindObtained(57);
+            SetCardKindObtained(OBTAINED_CARD_LEXAEUS);
             break;
         }
     }

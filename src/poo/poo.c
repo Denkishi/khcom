@@ -340,8 +340,8 @@ void SetPoohAction(PoohWork* work, u32 action) {
         m4aSongNumStart(SONG_SYS_PO_FALL);
     } else if (action == POOH_ACTION_OWL_BALLOON || action == POOH_ACTION_OWL_DESCENT ||
                (action >= POOH_ACTION_SIT_FOR_HONEY && action <= POOH_ACTION_EAT_HONEY_3)) {
-        work->angle = 0xAD;
-        work->lookAngle = 0xAD;
+        work->angle = FLD_ANGLE_DOWN_LEFT;
+        work->lookAngle = FLD_ANGLE_DOWN_LEFT;
         work->lookColumn = work->angle;
     }
 
@@ -1329,7 +1329,8 @@ void task_poo_pooh_2(PoohWork* work) {
     } else if ((u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) != 0) {
         if (sPoohAction == POOH_ACTION_WAGON_CLIMB && work->dirIndex == 1 && work->leavingWagon) {
             priority = GetPooWagonPriority2() - 3;
-        } else if ((u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == 83 || (u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == 173) {
+        } else if ((u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == FLD_ANGLE_DOWN_RIGHT ||
+                   (u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == FLD_ANGLE_DOWN_LEFT) {
             if (gPoohPos->y < gPooActor.pos.y) {
                 priority = GetPooWagonPriority() + 5;
             } else {
@@ -1967,22 +1968,22 @@ u8 GetPooAngleToPooh(PooPos* pos) {
 
     switch (ANGLE_DIR8(angle)) {
     case DIR8_UP_RIGHT:
-        return 0x2D;
+        return FLD_ANGLE_UP_RIGHT;
     case DIR8_RIGHT:
-        return 0x40;
+        return FLD_ANGLE_RIGHT;
     case DIR8_DOWN_RIGHT:
-        return 0x53;
+        return FLD_ANGLE_DOWN_RIGHT;
     case DIR8_DOWN:
-        return 0x80;
+        return FLD_ANGLE_DOWN;
     case DIR8_DOWN_LEFT:
-        return 0xAD;
+        return FLD_ANGLE_DOWN_LEFT;
     case DIR8_LEFT:
-        return 0xC0;
+        return FLD_ANGLE_LEFT;
     case DIR8_UP_LEFT:
-        return 0xD3;
+        return FLD_ANGLE_UP_LEFT;
     case DIR8_UP:
     default:
-        return 0;
+        return FLD_ANGLE_UP;
     }
 }
 
@@ -5833,18 +5834,18 @@ s32 GetPooWagonNearestSide(s32 x, s32 y) {
     dy = y - sPooWagon->pos.y;
 
     if (dx < -0xB00 && dy < -0xD00) {
-        return 0x53;
+        return FLD_ANGLE_DOWN_RIGHT;
     }
 
     if (dx > 0xF00 && dy > 0x600) {
-        return 0xD3;
+        return FLD_ANGLE_UP_LEFT;
     }
 
     if (-dx / 2 + dy > 0) {
-        return 0x2D;
+        return FLD_ANGLE_UP_RIGHT;
     }
 
-    return 0xAD;
+    return FLD_ANGLE_DOWN_LEFT;
 }
 
 s32 GetPooWagonSide(s32 posX, s32 posY) {
@@ -5859,18 +5860,18 @@ s32 GetPooWagonSide(s32 posX, s32 posY) {
     }
 
     if (x < -0x1100 && y <= 0x2FF) {
-        return 0x53;
+        return FLD_ANGLE_DOWN_RIGHT;
     }
 
     if (x > 0x1700 && y > 0x500) {
-        return 0xD3;
+        return FLD_ANGLE_UP_LEFT;
     }
 
     if (-x / 2 + y > 0) {
-        return 0x2D;
+        return FLD_ANGLE_UP_RIGHT;
     }
 
-    return 0xAD;
+    return FLD_ANGLE_DOWN_LEFT;
 }
 
 void task_poo_wagon_0(PooWagonWork* work) {
@@ -6014,7 +6015,7 @@ void task_poo_wagon_2(PooWagonWork* work) {
             baseY = work->pos.y + 0x300;
             sPooWagonPriority = -0x1004 - (baseY >> 8) * 4;
             sPooWagonPriority2 = -0x1009 - (baseY >> 8) * 4;
-        } else if (side == 83 || side == 173) {
+        } else if (side == FLD_ANGLE_DOWN_RIGHT || side == FLD_ANGLE_DOWN_LEFT) {
             sPooWagonPriority = soraPriority - 3;
             sPooWagonPriority2 = soraPriority - 8;
         } else {
@@ -6027,7 +6028,7 @@ void task_poo_wagon_2(PooWagonWork* work) {
     DrawSprite(x, y, work->gfx2, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(2), sPooWagonPriority2);
     priority = -0x1002 - ((work->pos.y - 0xE00) >> 8) * 4;
 
-    if (!IsPooSoraOverWagon() && soraPriority > priority && (side == 83 || side == 173)) {
+    if (!IsPooSoraOverWagon() && soraPriority > priority && (side == FLD_ANGLE_DOWN_RIGHT || side == FLD_ANGLE_DOWN_LEFT)) {
         priority = soraPriority - 1;
     }
 

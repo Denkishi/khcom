@@ -13,6 +13,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "main.h"
+#include "sio_api.h"
 
 u8 gSioLastSendCount EWRAM_COMMON(4);
 s16 gSioErrorFrameCount EWRAM_COMMON(4);
@@ -24,7 +25,7 @@ u8 gSioLastRecvCount EWRAM_COMMON(4);
 s32 (*gSioLinkSendCallback)() EWRAM_COMMON(4);
 u16 gSioCommandRecv[4][2] EWRAM_COMMON(16);
 u32 gSioStatus EWRAM_COMMON(4);
-u8 gUnk_02039824 EWRAM_COMMON(4);
+u8 gSioHandshake EWRAM_COMMON(4);
 u32 gSioPlayerId EWRAM_COMMON(4);
 u8 gSioHandshakeRequest EWRAM_COMMON(4);
 SioWork gSioWork EWRAM_COMMON(16);
@@ -157,7 +158,7 @@ void SioInit() {
     gSioErrorStatus = 0;
     gSioPlayerId = 0;
     gSioPlayerCount = 0;
-    gUnk_02039824 = 0;
+    gSioHandshake = 0;
     gSioHandshakeRequest = SIO_REQUEST_NONE;
     gSioLinkResult = 0;
     sSioAutoStartDone = 0;
@@ -242,21 +243,21 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     }
 
     *request = SIO_REQUEST_NONE;
-    playerBits = gSioWork.playerId | (gSioWork.playerCount << 2);
+    playerBits = gSioWork.playerId | (gSioWork.playerCount << SIO_STAT_PLAYER_COUNT_SHIFT);
 
     if (gSioWork.isParent == 8) {
-        playerBits |= 0x20;
+        playerBits |= SIO_STAT_PARENT;
     }
 
-    recvEmpty = gSioWork.recvEmpty << 8;
-    handshake = gSioWork.unk_11 << 9;
-    hardwareError = gSioWork.hardwareError << 16;
-    checksumError = gSioWork.checksumError << 17;
-    queueFull = gSioWork.queueFull << 18;
-    timeout = gSioWork.timeout << 20;
+    recvEmpty = gSioWork.recvEmpty << SIO_STAT_RECV_EMPTY_SHIFT;
+    handshake = gSioWork.handshake << SIO_STAT_HANDSHAKE_SHIFT;
+    hardwareError = gSioWork.hardwareError << SIO_STAT_ERROR_HARDWARE_SHIFT;
+    checksumError = gSioWork.checksumError << SIO_STAT_ERROR_CHECKSUM_SHIFT;
+    queueFull = gSioWork.queueFull << SIO_STAT_ERROR_QUEUE_FULL_SHIFT;
+    timeout = gSioWork.timeout << SIO_STAT_ERROR_TIMEOUT_SHIFT;
 
     if (gSioWork.state == SIO_STATE_CONNECTED) {
-        status = playerBits | 0x40 | recvEmpty | handshake | hardwareError | checksumError | queueFull | timeout;
+        status = playerBits | SIO_STAT_CONNECTED | recvEmpty | handshake | hardwareError | checksumError | queueFull | timeout;
     } else {
         status = playerBits | recvEmpty | handshake | hardwareError | checksumError | queueFull | timeout;
     }
@@ -264,7 +265,7 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     result = status;
 
     if (gSioWork.playerId > 1) {
-        result |= 0x400000;
+        result |= SIO_STAT_ERROR_INVALID_ID;
     }
 
     return result;
@@ -284,21 +285,21 @@ u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
         SioReadRecvFrame(recvFrame);
     }
 
-    playerBits = gSioWork.playerId | (gSioWork.playerCount << 2);
+    playerBits = gSioWork.playerId | (gSioWork.playerCount << SIO_STAT_PLAYER_COUNT_SHIFT);
 
     if (gSioWork.isParent == 8) {
-        playerBits |= 0x20;
+        playerBits |= SIO_STAT_PARENT;
     }
 
-    recvEmpty = gSioWork.recvEmpty << 8;
-    handshake = gSioWork.unk_11 << 9;
-    hardwareError = gSioWork.hardwareError << 16;
-    checksumError = gSioWork.checksumError << 17;
-    queueFull = gSioWork.queueFull << 18;
-    timeout = gSioWork.timeout << 20;
+    recvEmpty = gSioWork.recvEmpty << SIO_STAT_RECV_EMPTY_SHIFT;
+    handshake = gSioWork.handshake << SIO_STAT_HANDSHAKE_SHIFT;
+    hardwareError = gSioWork.hardwareError << SIO_STAT_ERROR_HARDWARE_SHIFT;
+    checksumError = gSioWork.checksumError << SIO_STAT_ERROR_CHECKSUM_SHIFT;
+    queueFull = gSioWork.queueFull << SIO_STAT_ERROR_QUEUE_FULL_SHIFT;
+    timeout = gSioWork.timeout << SIO_STAT_ERROR_TIMEOUT_SHIFT;
 
     if (gSioWork.state == SIO_STATE_CONNECTED) {
-        status = playerBits | 0x40 | recvEmpty | handshake | hardwareError | checksumError | queueFull | timeout;
+        status = playerBits | SIO_STAT_CONNECTED | recvEmpty | handshake | hardwareError | checksumError | queueFull | timeout;
     } else {
         status = playerBits | recvEmpty | handshake | hardwareError | checksumError | queueFull | timeout;
     }
@@ -306,7 +307,7 @@ u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     result = status;
 
     if (gSioWork.playerId > 1) {
-        result |= 0x400000;
+        result |= SIO_STAT_ERROR_INVALID_ID;
     }
 
     return result;
@@ -436,7 +437,7 @@ void SioVBlankUpdate() {
             if (gSioWork.state == SIO_STATE_HANDSHAKE) {
                 gSioWork.playerId = 0;
                 gSioWork.playerCount = 0;
-                gSioWork.unk_11 = 0;
+                gSioWork.handshake = 0;
             }
         }
     }
@@ -530,12 +531,12 @@ u8 SioHandshake() {
         }
 
         if (gSioWork.playerCount == 2) {
-            gSioWork.unk_11 = (min & 3) + 1;
+            gSioWork.handshake = (min & 3) + 1;
         } else {
-            gSioWork.unk_11 = 0;
+            gSioWork.handshake = 0;
         }
     } else {
-        gSioWork.unk_11 = 0;
+        gSioWork.handshake = 0;
     }
 
     sSioPrevPlayerCount = gSioWork.playerCount;

@@ -177,7 +177,7 @@ void AgbMain() {
         if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
             SioLinkUpdate();
 
-            if (!(gSioStatus & 0x100)) {
+            if (!(gSioStatus & SIO_STAT_RECV_EMPTY)) {
                 if (!(gFrameSyncFlags & FRAME_SYNC_FRAME_READY)) {
                     ModeUpdate();
                     gFrameSyncFlags |= FRAME_SYNC_FRAME_READY;

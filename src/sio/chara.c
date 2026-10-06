@@ -341,18 +341,18 @@ u8 SioConnectUpdate() {
 
     status = &gSioStatus;
     *status = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
-    gSioPlayerId = gSioStatus & 3;
-    gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
-    gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
+    gSioPlayerId = gSioStatus & SIO_STAT_LOCAL_ID;
+    gSioPlayerCount = (gSioStatus & SIO_STAT_PLAYER_COUNT) >> SIO_STAT_PLAYER_COUNT_SHIFT;
+    gSioHandshake = (gSioStatus & SIO_STAT_HANDSHAKE) >> SIO_STAT_HANDSHAKE_SHIFT;
 
-    if ((gSioStatus & 0x40) && gSioPlayerId <= 1) {
+    if ((gSioStatus & SIO_STAT_CONNECTED) && gSioPlayerId <= 1) {
         SioConnectSend();
 
-        if ((gSioStatus & 0x100) == 0) {
+        if ((gSioStatus & SIO_STAT_RECV_EMPTY) == 0) {
             gSioLinkResult = SioConnectRecv();
         }
 
-        if (gSioStatus & 0x7F0000) {
+        if (gSioStatus & SIO_STAT_ERRORS) {
             if (gSioConnected == 1) {
                 gSioErrorFrameCount++;
 
@@ -394,11 +394,11 @@ u8 SioLinkUpdate() {
 
     status = &gSioStatus;
     *status = SioTransferFrames(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
-    gSioPlayerId = gSioStatus & 3;
-    gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
-    gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
+    gSioPlayerId = gSioStatus & SIO_STAT_LOCAL_ID;
+    gSioPlayerCount = (gSioStatus & SIO_STAT_PLAYER_COUNT) >> SIO_STAT_PLAYER_COUNT_SHIFT;
+    gSioHandshake = (gSioStatus & SIO_STAT_HANDSHAKE) >> SIO_STAT_HANDSHAKE_SHIFT;
 
-    if ((gSioStatus & 0x40) && gSioPlayerId <= 1) {
+    if ((gSioStatus & SIO_STAT_CONNECTED) && gSioPlayerId <= 1) {
         if (gSioLinkRecvCallback != NULL) {
             gSioLinkResult = gSioLinkRecvCallback();
         }
@@ -407,7 +407,7 @@ u8 SioLinkUpdate() {
             gSioLinkSendCallback();
         }
 
-        if (gSioStatus & 0x7F0000) {
+        if (gSioStatus & SIO_STAT_ERRORS) {
             if (gSioConnected == 1) {
                 gSioErrorFrameCount++;
 
@@ -429,18 +429,18 @@ u8 SioConnectUpdateAuto() {
 
     status = &gSioStatus;
     *status = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
-    gSioPlayerId = gSioStatus & 3;
-    gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
-    gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
+    gSioPlayerId = gSioStatus & SIO_STAT_LOCAL_ID;
+    gSioPlayerCount = (gSioStatus & SIO_STAT_PLAYER_COUNT) >> SIO_STAT_PLAYER_COUNT_SHIFT;
+    gSioHandshake = (gSioStatus & SIO_STAT_HANDSHAKE) >> SIO_STAT_HANDSHAKE_SHIFT;
 
-    if ((gSioStatus & 0x40) && gSioPlayerId <= 1) {
+    if ((gSioStatus & SIO_STAT_CONNECTED) && gSioPlayerId <= 1) {
         SioConnectSendAuto();
 
-        if ((gSioStatus & 0x100) == 0) {
+        if ((gSioStatus & SIO_STAT_RECV_EMPTY) == 0) {
             gSioLinkResult = SioConnectRecvAuto();
         }
 
-        if (gSioStatus & 0x7F0000) {
+        if (gSioStatus & SIO_STAT_ERRORS) {
             if (gSioConnected == 1) {
                 gSioErrorFrameCount++;
 
@@ -528,7 +528,7 @@ void VBlankTimerUpdate() {
 }
 
 u8 SioHasError() {
-    if (gSioStatus & 0x7F0000) {
+    if (gSioStatus & SIO_STAT_ERRORS) {
         return 1;
     }
 
@@ -836,25 +836,25 @@ s32 SioKeySyncRecv() {
         if (gSioRecvFrame[0][0] == 0xACD && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
             gSioRelayKeysA = gSioRecvFrame[1][0];
             gSioRelayKeysB = gSioRecvFrame[1][1];
-            gSioStatus &= ~0x100;
+            gSioStatus &= ~SIO_STAT_RECV_EMPTY;
         } else {
-            gSioStatus |= 0x100;
+            gSioStatus |= SIO_STAT_RECV_EMPTY;
         }
 
         if (gSioRecvFrame[0][0] == 0xACD) {
             SioKeyStateUpdateA(gSioRecvFrame[2][0]);
             SioKeyStateUpdateB(gSioRecvFrame[3][0]);
-            gSioStatus &= ~0x100;
+            gSioStatus &= ~SIO_STAT_RECV_EMPTY;
         } else {
-            gSioStatus |= 0x100;
+            gSioStatus |= SIO_STAT_RECV_EMPTY;
         }
     } else {
         if (gSioRecvFrame[0][0] == 0xACD) {
             SioKeyStateUpdateA(gSioRecvFrame[2][0]);
             SioKeyStateUpdateB(gSioRecvFrame[3][0]);
-            gSioStatus &= ~0x100;
+            gSioStatus &= ~SIO_STAT_RECV_EMPTY;
         } else {
-            gSioStatus |= 0x100;
+            gSioStatus |= SIO_STAT_RECV_EMPTY;
         }
     }
 

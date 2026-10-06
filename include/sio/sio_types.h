@@ -14,7 +14,7 @@ typedef struct SioWork {
     u8 paused;
     u8 unk_0F;
     u8 startPending;
-    u8 unk_11;
+    u8 handshake;
     u8 hardwareError;
     u8 checksumError;
     u8 queueFull;

@@ -705,7 +705,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
         } else {
             battleId = gBtlWork->battleId;
 
-            if (battleId >= 125 && battleId <= 127) {
+            if (battleId >= BATTLE_BARREL_0 && battleId <= BATTLE_BARREL_2) {
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (GetRandom() % 100 < 20) {
                         *(PrizeCardArgs*)args = work->args;
@@ -739,7 +739,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                         return 0;
                     }
                 }
-            } else if (battleId >= 131 && battleId <= 133) {
+            } else if (battleId >= BATTLE_BLACK_FUNGUS_0 && battleId <= BATTLE_BLACK_FUNGUS_2) {
 #ifdef VERSION_EU
                 if (CountRegularMapCards() <= 98) {
                     *(PrizeCardArgs*)args = work->args;

@@ -221,6 +221,11 @@ void task_chara_mask_fade_2() {
 void task_chara_mask_fade_3() {
 }
 
+enum ChgCardObjState {
+    CHG_CARD_OBJ_STATE_DELAY,
+    CHG_CARD_OBJ_STATE_FLY
+};
+
 void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* arg) {
     s32 x;
     s32 y;
@@ -246,7 +251,7 @@ void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* arg) {
     work->dirY = -y;
     work->timer = 0;
     work->unk_02 = 0;
-    work->state = 0;
+    work->state = CHG_CARD_OBJ_STATE_DELAY;
 }
 
 static inline u8 ChgCardRotation(ChgCardObjWork* work, u8 rotation) {
@@ -271,7 +276,7 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
     s32* p14;
 
     switch (work->state) {
-    case 0:
+    case CHG_CARD_OBJ_STATE_DELAY:
         if (work->timer >= work->delay) {
             work->timer = 0;
             work->state++;
@@ -280,7 +285,7 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
         }
 
         break;
-    case 1:
+    case CHG_CARD_OBJ_STATE_FLY:
         *work->x += (work->dirX * work->speed) >> 8;
         *work->y += (work->dirY * work->speed) >> 8;
         *work->angle += 32;
@@ -530,19 +535,26 @@ u8 SioHasError() {
     return 0;
 }
 
+enum SioAutoConnectState {
+    SIO_AUTO_CONNECT_STATE_CONNECT,
+    SIO_AUTO_CONNECT_STATE_START_LINK,
+    SIO_AUTO_CONNECT_STATE_SYNC,
+    SIO_AUTO_CONNECT_STATE_DONE
+};
+
 void SioAutoConnectStart() {
     SioReset();
     SioConnectInit(SioAutoConnectOnConnect, NULL, 0);
-    gSioAutoConnectState = 0;
+    gSioAutoConnectState = SIO_AUTO_CONNECT_STATE_CONNECT;
     gSioAutoConnectTimer = 0;
 }
 
 u8 SioAutoConnectUpdate() {
     switch (gSioAutoConnectState) {
-    case 0:
+    case SIO_AUTO_CONNECT_STATE_CONNECT:
         SioConnectUpdateAuto();
         break;
-    case 1:
+    case SIO_AUTO_CONNECT_STATE_START_LINK:
         gSioAutoConnectTimer++;
 
         if (gSioAutoConnectTimer > 4) {
@@ -554,7 +566,7 @@ u8 SioAutoConnectUpdate() {
         }
 
         break;
-    case 2:
+    case SIO_AUTO_CONNECT_STATE_SYNC:
         gSioAutoConnectTimer++;
 
         if (gSioAutoConnectTimer > 4) {
@@ -575,7 +587,7 @@ u8 SioAutoConnectUpdate() {
 }
 
 void SioAutoConnectOnConnect() {
-    gSioAutoConnectState = 1;
+    gSioAutoConnectState = SIO_AUTO_CONNECT_STATE_START_LINK;
 }
 
 void SioConnectInit(void (*onConnect)(), void (*onCancel)(), u8 mode) {
@@ -1102,6 +1114,28 @@ s32 SioRandomPartnerRecv() {
 }
 #endif
 
+enum CharaDefeat2State {
+    CHARA_DEFEAT2_STATE_WAIT_BGFX,
+    CHARA_DEFEAT2_STATE_PAUSE,
+    CHARA_DEFEAT2_STATE_START,
+    CHARA_DEFEAT2_STATE_DARKEN,
+    CHARA_DEFEAT2_STATE_SAVE_DARK_PALETTE,
+    CHARA_DEFEAT2_STATE_HOLD,
+    CHARA_DEFEAT2_STATE_DISSOLVE,
+    CHARA_DEFEAT2_STATE_START_FLASH,
+    CHARA_DEFEAT2_STATE_FLASH,
+    CHARA_DEFEAT2_STATE_FLASH_HOLD,
+    CHARA_DEFEAT2_STATE_CALLBACK,
+    CHARA_DEFEAT2_STATE_FADE_FROM_WHITE,
+    CHARA_DEFEAT2_STATE_DROP_PRIZES,
+    CHARA_DEFEAT2_STATE_DRIFT_FX,
+    CHARA_DEFEAT2_STATE_START_RISE,
+    CHARA_DEFEAT2_STATE_RISE_FX,
+    CHARA_DEFEAT2_STATE_STOP_FX,
+    CHARA_DEFEAT2_STATE_FADE_FROM_BLACK,
+    CHARA_DEFEAT2_STATE_DONE
+};
+
 void CharaObjInitDefeat2(CharaObjParam2* param) {
     s32 i;
 
@@ -1117,7 +1151,7 @@ void CharaObjInitDefeat2(CharaObjParam2* param) {
     sCharaObj->bgFxVz = -76;
     sCharaObj->fadeTick = 0;
     sCharaObj->timer = 0;
-    sCharaObj->state = 0;
+    sCharaObj->state = CHARA_DEFEAT2_STATE_WAIT_BGFX;
     sCharaObj->callback = param->callback;
     sCharaObj->tilesAddr4 = 0;
     sCharaObj->tileCount4 = 0;
@@ -1137,26 +1171,26 @@ u8 CharaObjUpdateDefeat2() {
     MaskFadeArgs fade;
 
     switch (sCharaObj->state) {
-    case 0:
+    case CHARA_DEFEAT2_STATE_WAIT_BGFX:
         if (!BgFxIsActive()) {
             sCharaObj->state++;
         }
 
         break;
-    case 1:
+    case CHARA_DEFEAT2_STATE_PAUSE:
         if (++sCharaObj->timer > 59) {
             sCharaObj->timer = 0;
             sCharaObj->state++;
         }
 
         break;
-    case 2:
+    case CHARA_DEFEAT2_STATE_START:
         CpuCopy16((void*)PLTT, sCharaObj->savedPalette, 0x400);
         BgFxStartCharaDefeat(sCharaObj->x, sCharaObj->y + sCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
         sCharaObj->state++;
         break;
-    case 3:
+    case CHARA_DEFEAT2_STATE_DARKEN:
         sCharaObj->fadeLevel++;
         FadePaletteToBlack(sCharaObj->savedPalette, (u16*)PLTT, 320, sCharaObj->fadeLevel);
 
@@ -1166,19 +1200,19 @@ u8 CharaObjUpdateDefeat2() {
         }
 
         break;
-    case 4:
+    case CHARA_DEFEAT2_STATE_SAVE_DARK_PALETTE:
         sCharaObj->fadeLevel = 0;
         CpuCopy16((void*)PLTT, sCharaObj->fadedPalette, 0x400);
         sCharaObj->state++;
         break;
-    case 5:
+    case CHARA_DEFEAT2_STATE_HOLD:
         if (++sCharaObj->timer > 89) {
             sCharaObj->timer = 0;
             sCharaObj->state++;
         }
 
         break;
-    case 6:
+    case CHARA_DEFEAT2_STATE_DISSOLVE:
         if (sCharaObj->fadeTick > 1) {
             sCharaObj->fadeTick = 0;
             sCharaObj->fadeLevel++;
@@ -1206,7 +1240,7 @@ u8 CharaObjUpdateDefeat2() {
         }
 
         break;
-    case 7:
+    case CHARA_DEFEAT2_STATE_START_FLASH:
         sCharaObj->fadeLevel = 0;
         sCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
@@ -1214,7 +1248,7 @@ u8 CharaObjUpdateDefeat2() {
         FadeLock();
         sCharaObj->state++;
         break;
-    case 8:
+    case CHARA_DEFEAT2_STATE_FLASH:
         if (sCharaObj->fadeTick > 1) {
             sCharaObj->fadeTick = 0;
             sCharaObj->fadeLevel++;
@@ -1228,14 +1262,14 @@ u8 CharaObjUpdateDefeat2() {
         }
 
         break;
-    case 9:
+    case CHARA_DEFEAT2_STATE_FLASH_HOLD:
         if (++sCharaObj->timer > 20) {
             sCharaObj->timer = 0;
             sCharaObj->state++;
         }
 
         break;
-    case 10:
+    case CHARA_DEFEAT2_STATE_CALLBACK:
         sCharaObj->fadeTick = 0;
 
         if (sCharaObj->callback != NULL) {
@@ -1244,7 +1278,7 @@ u8 CharaObjUpdateDefeat2() {
 
         sCharaObj->state++;
         break;
-    case 11:
+    case CHARA_DEFEAT2_STATE_FADE_FROM_WHITE:
         sCharaObj->fadeLevel -= 2;
         FadePaletteToWhite(sCharaObj->fadedPalette, (u16*)PLTT, 1024, sCharaObj->fadeLevel);
 
@@ -1254,7 +1288,7 @@ u8 CharaObjUpdateDefeat2() {
         }
 
         break;
-    case 12:
+    case CHARA_DEFEAT2_STATE_DROP_PRIZES:
         BgFxStartCharaDefeatEnd(sCharaObj->x, sCharaObj->y + sCharaObj->z - 0x1000);
         prize.x = sCharaObj->x;
         prize.y = sCharaObj->y;
@@ -1263,7 +1297,7 @@ u8 CharaObjUpdateDefeat2() {
         DropBossPrizes(sCharaObj->prizeObj);
         sCharaObj->state++;
         break;
-    case 13:
+    case CHARA_DEFEAT2_STATE_DRIFT_FX:
         BgFxAddPosition(76, 0, sCharaObj->bgFxVz);
 
         if (++sCharaObj->timer > 79) {
@@ -1272,11 +1306,11 @@ u8 CharaObjUpdateDefeat2() {
         }
 
         break;
-    case 14:
+    case CHARA_DEFEAT2_STATE_START_RISE:
         sCharaObj->bgFxVz = 0;
         sCharaObj->state++;
         break;
-    case 15:
+    case CHARA_DEFEAT2_STATE_RISE_FX:
         BgFxAddPosition(0, 0, sCharaObj->bgFxVz);
         sCharaObj->bgFxVz -= 25;
 
@@ -1286,12 +1320,12 @@ u8 CharaObjUpdateDefeat2() {
         }
 
         break;
-    case 16:
+    case CHARA_DEFEAT2_STATE_STOP_FX:
         BgAnimStop();
         sCharaObj->fadeLevel = 11;
         sCharaObj->state++;
         break;
-    case 17:
+    case CHARA_DEFEAT2_STATE_FADE_FROM_BLACK:
         sCharaObj->fadeLevel--;
         FadePaletteToBlack(sCharaObj->savedPalette, (u16*)PLTT, 320, sCharaObj->fadeLevel);
 
@@ -1315,6 +1349,30 @@ void CharaObjFree() {
     EwramFree(sCharaObj);
     TaskPoolDestroy(&sCharaTaskPool);
 }
+
+enum CharaDefeatState {
+    CHARA_DEFEAT_STATE_WAIT_BGFX,
+    CHARA_DEFEAT_STATE_PAUSE,
+    CHARA_DEFEAT_STATE_START,
+    CHARA_DEFEAT_STATE_SAVE_PALETTE,
+    CHARA_DEFEAT_STATE_DARKEN,
+    CHARA_DEFEAT_STATE_END_DARKEN,
+    CHARA_DEFEAT_STATE_HOLD,
+    CHARA_DEFEAT_STATE_DISSOLVE,
+    CHARA_DEFEAT_STATE_START_FLASH,
+    CHARA_DEFEAT_STATE_FLASH,
+    CHARA_DEFEAT_STATE_FLASH_HOLD,
+    CHARA_DEFEAT_STATE_CALLBACK,
+    CHARA_DEFEAT_STATE_FADE_FROM_WHITE,
+    CHARA_DEFEAT_STATE_REDARKEN,
+    CHARA_DEFEAT_STATE_DROP_PRIZES,
+    CHARA_DEFEAT_STATE_DRIFT_FX,
+    CHARA_DEFEAT_STATE_START_RISE,
+    CHARA_DEFEAT_STATE_RISE_FX,
+    CHARA_DEFEAT_STATE_STOP_FX,
+    CHARA_DEFEAT_STATE_FADE_FROM_BLACK,
+    CHARA_DEFEAT_STATE_DONE
+};
 
 void CharaObjInitDefeat(CharaObjParam* param) {
     s32 i;
@@ -1341,7 +1399,7 @@ void CharaObjInitDefeat(CharaObjParam* param) {
     sCharaObj->bgFxVz = -76;
     sCharaObj->fadeTick = 0;
     sCharaObj->timer = 0;
-    sCharaObj->state = 0;
+    sCharaObj->state = CHARA_DEFEAT_STATE_WAIT_BGFX;
     sCharaObj->callback = param->callback;
     sCharaObj->prizeObj = param->prizeObj;
     sCharaObj->flags = param->flags;
@@ -1378,20 +1436,20 @@ u8 CharaObjUpdateDefeat() {
     MaskFadeArgs fade3;
 
     switch (sCharaObj->state) {
-    case 0:
+    case CHARA_DEFEAT_STATE_WAIT_BGFX:
         if (!BgFxIsActive()) {
             sCharaObj->state++;
         }
 
         break;
-    case 1:
+    case CHARA_DEFEAT_STATE_PAUSE:
         if (++sCharaObj->timer > 59) {
             sCharaObj->timer = 0;
             sCharaObj->state++;
         }
 
         break;
-    case 2:
+    case CHARA_DEFEAT_STATE_START:
         BgFxStartCharaDefeat(sCharaObj->x, sCharaObj->y + sCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
 
@@ -1401,11 +1459,11 @@ u8 CharaObjUpdateDefeat() {
 
         sCharaObj->state++;
         break;
-    case 3:
+    case CHARA_DEFEAT_STATE_SAVE_PALETTE:
         CpuCopy16((void*)PLTT, sCharaObj->savedPalette, 0x400);
         sCharaObj->state++;
         break;
-    case 4:
+    case CHARA_DEFEAT_STATE_DARKEN:
         sCharaObj->fadeLevel++;
         FadeAllPalettesToBlack(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 
@@ -1415,18 +1473,18 @@ u8 CharaObjUpdateDefeat() {
         }
 
         break;
-    case 5:
+    case CHARA_DEFEAT_STATE_END_DARKEN:
         sCharaObj->fadeLevel = 0;
         sCharaObj->state++;
         break;
-    case 6:
+    case CHARA_DEFEAT_STATE_HOLD:
         if (++sCharaObj->timer > 89) {
             sCharaObj->timer = 0;
             sCharaObj->state++;
         }
 
         break;
-    case 7:
+    case CHARA_DEFEAT_STATE_DISSOLVE:
         if (sCharaObj->fadeTick > 1) {
             sCharaObj->fadeTick = 0;
             sCharaObj->fadeLevel++;
@@ -1485,7 +1543,7 @@ u8 CharaObjUpdateDefeat() {
         }
 
         break;
-    case 8:
+    case CHARA_DEFEAT_STATE_START_FLASH:
         sCharaObj->fadeLevel = 0;
         sCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
@@ -1493,7 +1551,7 @@ u8 CharaObjUpdateDefeat() {
         FadeLock();
         sCharaObj->state++;
         break;
-    case 9:
+    case CHARA_DEFEAT_STATE_FLASH:
         if (sCharaObj->fadeTick > 1) {
             sCharaObj->fadeTick = 0;
             sCharaObj->fadeLevel++;
@@ -1507,14 +1565,14 @@ u8 CharaObjUpdateDefeat() {
         }
 
         break;
-    case 10:
+    case CHARA_DEFEAT_STATE_FLASH_HOLD:
         if (++sCharaObj->timer > 20) {
             sCharaObj->timer = 0;
             sCharaObj->state++;
         }
 
         break;
-    case 11:
+    case CHARA_DEFEAT_STATE_CALLBACK:
         sCharaObj->fadeTick = 0;
 
         if (sCharaObj->callback != NULL) {
@@ -1524,7 +1582,7 @@ u8 CharaObjUpdateDefeat() {
         sCharaObj->fadeLevel = 32;
         sCharaObj->state++;
         break;
-    case 12:
+    case CHARA_DEFEAT_STATE_FADE_FROM_WHITE:
         FadeAllPalettesToWhite(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 
         if ((sCharaObj->fadeLevel -= 2) <= 0) {
@@ -1534,7 +1592,7 @@ u8 CharaObjUpdateDefeat() {
         }
 
         break;
-    case 13:
+    case CHARA_DEFEAT_STATE_REDARKEN:
         FadeAllPalettesToBlack(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 
         if ((sCharaObj->fadeLevel += 2) > 11) {
@@ -1544,7 +1602,7 @@ u8 CharaObjUpdateDefeat() {
         }
 
         break;
-    case 14:
+    case CHARA_DEFEAT_STATE_DROP_PRIZES:
         prize.x = sCharaObj->x;
         prize.y = sCharaObj->y;
         prize.z = sCharaObj->z;
@@ -1558,11 +1616,11 @@ u8 CharaObjUpdateDefeat() {
         } else {
             sCharaObj->fadeLevel = 12;
             sCharaObj->timer = 0;
-            sCharaObj->state = 19;
+            sCharaObj->state = CHARA_DEFEAT_STATE_FADE_FROM_BLACK;
         }
 
         break;
-    case 15:
+    case CHARA_DEFEAT_STATE_DRIFT_FX:
         BgFxAddPosition(76, 0, sCharaObj->bgFxVz);
 
         if (++sCharaObj->timer > 79) {
@@ -1571,11 +1629,11 @@ u8 CharaObjUpdateDefeat() {
         }
 
         break;
-    case 16:
+    case CHARA_DEFEAT_STATE_START_RISE:
         sCharaObj->bgFxVz = 0;
         sCharaObj->state++;
         break;
-    case 17:
+    case CHARA_DEFEAT_STATE_RISE_FX:
         BgFxAddPosition(0, 0, sCharaObj->bgFxVz);
         sCharaObj->bgFxVz -= 25;
 
@@ -1585,12 +1643,12 @@ u8 CharaObjUpdateDefeat() {
         }
 
         break;
-    case 18:
+    case CHARA_DEFEAT_STATE_STOP_FX:
         BgAnimStop();
         sCharaObj->fadeLevel = 12;
         sCharaObj->state++;
         break;
-    case 19:
+    case CHARA_DEFEAT_STATE_FADE_FROM_BLACK:
         sCharaObj->fadeLevel--;
         FadeAllPalettesToBlack(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 

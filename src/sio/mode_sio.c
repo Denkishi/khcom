@@ -127,6 +127,15 @@ static SioChgCardWork* sSioChgCardWork;
 #endif
 static SioErrorWork* sSioErrorWork;
 
+enum SioBattleState {
+    SIO_BATTLE_STATE_SLIDE_IN_VERTICAL,
+    SIO_BATTLE_STATE_SLIDE_IN_HORIZONTAL,
+    SIO_BATTLE_STATE_SLIDE_OUT_HORIZONTAL,
+    SIO_BATTLE_STATE_SLIDE_OUT_VERTICAL,
+    SIO_BATTLE_STATE_START_MENU = 5,
+    SIO_BATTLE_STATE_MENU
+};
+
 void mode_sio_battle_0(s32 arg) {
     SioBattleWork* w;
     void* gfx;
@@ -141,7 +150,7 @@ void mode_sio_battle_0(s32 arg) {
     LoadBgPalette(1, gSioBgPalettes, 64);
     LoadBgMap(1, gSioBattleBgMap, 0x800);
     EnableBg(1);
-    sSioBattleWork->state = 0;
+    sSioBattleWork->state = SIO_BATTLE_STATE_SLIDE_IN_VERTICAL;
     sSioBattleWork->slideTimer = 0;
     sSioBattleWork->stateFrames = 0;
     sSioBattleWork->x = -0x8000;
@@ -327,7 +336,7 @@ void mode_sio_battle_0(s32 arg) {
 
 void mode_sio_battle_1() {
     switch ((s8)sSioBattleWork->state) {
-    case 0:
+    case SIO_BATTLE_STATE_SLIDE_IN_VERTICAL:
         if ((s16)sSioBattleWork->stateFrames == 0) {
             sSioBattleWork->slideTimer = 16;
         }
@@ -339,12 +348,12 @@ void mode_sio_battle_1() {
         if ((s16)sSioBattleWork->slideTimer > 0) {
             sSioBattleWork->stateFrames++;
         } else {
-            sSioBattleWork->state = 1;
+            sSioBattleWork->state = SIO_BATTLE_STATE_SLIDE_IN_HORIZONTAL;
             sSioBattleWork->stateFrames = 0;
         }
 
         break;
-    case 1:
+    case SIO_BATTLE_STATE_SLIDE_IN_HORIZONTAL:
         if ((s16)sSioBattleWork->stateFrames == 0) {
             sSioBattleWork->slideTimer = 16;
         }
@@ -355,15 +364,15 @@ void mode_sio_battle_1() {
         if ((s16)sSioBattleWork->slideTimer > 0) {
             sSioBattleWork->stateFrames++;
         } else {
-            sSioBattleWork->state = 5;
+            sSioBattleWork->state = SIO_BATTLE_STATE_START_MENU;
             sSioBattleWork->stateFrames = 0;
         }
 
         break;
-    case 5:
-        sSioBattleWork->state = 6;
+    case SIO_BATTLE_STATE_START_MENU:
+        sSioBattleWork->state = SIO_BATTLE_STATE_MENU;
         break;
-    case 6:
+    case SIO_BATTLE_STATE_MENU:
         if (gSioBattleFileLoaded == 1) {
             if (GetKeysPressed() & DPAD_UP) {
                 m4aSongNumStart(SONG_SYS_CLICK);
@@ -432,11 +441,11 @@ void mode_sio_battle_1() {
 
         if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            sSioBattleWork->state = 2;
+            sSioBattleWork->state = SIO_BATTLE_STATE_SLIDE_OUT_HORIZONTAL;
         }
 
         break;
-    case 2:
+    case SIO_BATTLE_STATE_SLIDE_OUT_HORIZONTAL:
         if ((s16)sSioBattleWork->stateFrames == 0) {
             sSioBattleWork->slideTimer = 16;
         }
@@ -447,12 +456,12 @@ void mode_sio_battle_1() {
         if ((s16)sSioBattleWork->slideTimer > 0) {
             sSioBattleWork->stateFrames++;
         } else {
-            sSioBattleWork->state = 3;
+            sSioBattleWork->state = SIO_BATTLE_STATE_SLIDE_OUT_VERTICAL;
             sSioBattleWork->stateFrames = 0;
         }
 
         break;
-    case 3:
+    case SIO_BATTLE_STATE_SLIDE_OUT_VERTICAL:
         if ((s16)sSioBattleWork->stateFrames == 0) {
             sSioBattleWork->slideTimer = 16;
         }
@@ -497,6 +506,13 @@ void ClearSioBattleFileLoaded() {
     gSioBattleFileLoaded = 0;
 }
 
+enum SioBtlConnectState {
+    SIO_BTL_CONNECT_STATE_CONNECT,
+    SIO_BTL_CONNECT_STATE_START_EXCHANGE,
+    SIO_BTL_CONNECT_STATE_EXCHANGE,
+    SIO_BTL_CONNECT_STATE_START_OPTIONS
+};
+
 void mode_sio_btl_connect_0(s32 arg) {
     sSioBtlConnectWork = EwramAlloc(sizeof(SioBtlConnectWork));
     FadeStartIn(FADE_MODE_BLACK, 16);
@@ -513,7 +529,7 @@ void mode_sio_btl_connect_0(s32 arg) {
     LoadBgMap(1, gSioConnectBgMap, 0x800);
     sSioBtlConnectWork->unk_00 = 0;
     sSioBtlConnectWork->timer = 0;
-    sSioBtlConnectWork->state = 0;
+    sSioBtlConnectWork->state = SIO_BTL_CONNECT_STATE_CONNECT;
     sSioBtlConnectWork->textSlotCount = 0;
     InitTextSlots(sSioBtlConnectWork->textSlots, SIO_CONNECT_TEXT_SLOTS);
     sSioBtlConnectWork->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gSioBtlConnectText), sSioBtlConnectWork->textSlots);
@@ -541,10 +557,10 @@ void mode_sio_btl_connect_1() {
     if (!gSioDebugMode) {
 #endif
     switch (sSioBtlConnectWork->state) {
-    case 0:
+    case SIO_BTL_CONNECT_STATE_CONNECT:
         SioConnectUpdate();
         break;
-    case 1:
+    case SIO_BTL_CONNECT_STATE_START_EXCHANGE:
         SioConnectUpdate();
         sSioBtlConnectWork->timer++;
 
@@ -557,7 +573,7 @@ void mode_sio_btl_connect_1() {
         }
 
         break;
-    case 2:
+    case SIO_BTL_CONNECT_STATE_EXCHANGE:
         if (gSioLinkResult == 2) {
             sSioBtlConnectWork->timer = 0;
             SioInitWorldList();
@@ -565,7 +581,7 @@ void mode_sio_btl_connect_1() {
         }
 
         break;
-    case 3:
+    case SIO_BTL_CONNECT_STATE_START_OPTIONS:
         sSioBtlConnectWork->timer++;
 
         if (sSioBtlConnectWork->timer > 4) {
@@ -671,6 +687,34 @@ void SetSioBtlOptionAnimation(u16 player, u16 index, u16 flags) {
     SetObjTileSource(sSioBtlOptionWork->playerTilesPalettes[player], def->tiles);
 }
 
+enum SioBtlOptionState {
+    SIO_BTL_OPTION_STATE_LOAD_BG,
+    SIO_BTL_OPTION_STATE_INIT_OBJS,
+    SIO_BTL_OPTION_STATE_LOAD_WORLD,
+    SIO_BTL_OPTION_STATE_FADE_IN,
+    SIO_BTL_OPTION_STATE_WAIT_START,
+    SIO_BTL_OPTION_STATE_IDLE,
+    SIO_BTL_OPTION_STATE_MENU,
+    SIO_BTL_OPTION_STATE_SET_HANDICAP,
+    SIO_BTL_OPTION_STATE_CHANGE_WORLD,
+    SIO_BTL_OPTION_STATE_WAIT_READY,
+    SIO_BTL_OPTION_STATE_CONFIRM,
+    SIO_BTL_OPTION_STATE_START_DECK_EXCHANGE,
+    SIO_BTL_OPTION_STATE_WAIT_DECK_EXCHANGE,
+    SIO_BTL_OPTION_STATE_RESUME_COMMANDS,
+    SIO_BTL_OPTION_STATE_WAIT_BEFORE_SYNC,
+    SIO_BTL_OPTION_STATE_SYNC_START,
+    SIO_BTL_OPTION_STATE_START_BATTLE
+};
+
+enum SioWorldChangeState {
+    SIO_WORLD_CHANGE_STATE_FADE_OUT,
+    SIO_WORLD_CHANGE_STATE_LOAD_MAP,
+    SIO_WORLD_CHANGE_STATE_LOAD_TILES,
+    SIO_WORLD_CHANGE_STATE_FADE_IN,
+    SIO_WORLD_CHANGE_STATE_DONE
+};
+
 void mode_sio_btl_option_0(s32 arg) {
     sSioBtlOptionWork = EwramAlloc(sizeof(SioBtlOptionWork));
     SetBgMode1();
@@ -713,7 +757,7 @@ void mode_sio_btl_option_0(s32 arg) {
     DisableBg(0);
     DisableBg(1);
     sSioBtlOptionWork->modeArg = arg;
-    sSioBtlOptionWork->state = 0;
+    sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_LOAD_BG;
 }
 
 void SioBtlOptionLoadBg() {
@@ -752,7 +796,7 @@ void SioBtlOptionLoadBg() {
 #endif
     DisableBg(0);
     DisableBg(1);
-    sSioBtlOptionWork->state = 1;
+    sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_INIT_OBJS;
 }
 
 void SioBtlOptionInitObjs() {
@@ -776,7 +820,7 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->timer = 0;
     sSioBtlOptionWork->player1Ready = 0;
     sSioBtlOptionWork->player2Ready = 0;
-    sSioBtlOptionWork->worldChangeState = 0;
+    sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
     sSioBtlOptionWork->frameCount = 0;
     sSioBtlOptionWork->leaveDelay = 0;
     sSioBtlOptionWork->unk_418 = 0;
@@ -874,7 +918,7 @@ void SioBtlOptionInitObjs() {
     }
 
     SioBtlOptionDrawStats();
-    sSioBtlOptionWork->state = 2;
+    sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_LOAD_WORLD;
 }
 
 void SioBtlOptionLoadWorld() {
@@ -900,72 +944,72 @@ void SioBtlOptionFadeIn() {
     EnableBg(1);
     EnableBg(2);
     SioBtlOptionPlayWorldBgm();
-    sSioBtlOptionWork->returnState = 4;
-    sSioBtlOptionWork->state = 4;
+    sSioBtlOptionWork->returnState = SIO_BTL_OPTION_STATE_WAIT_START;
+    sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_WAIT_START;
 }
 
 void mode_sio_btl_option_1() {
     switch (sSioBtlOptionWork->state) {
-    case 0:
+    case SIO_BTL_OPTION_STATE_LOAD_BG:
         SioBtlOptionLoadBg();
         break;
-    case 1:
+    case SIO_BTL_OPTION_STATE_INIT_OBJS:
         SioBtlOptionInitObjs();
         break;
-    case 2:
+    case SIO_BTL_OPTION_STATE_LOAD_WORLD:
         SioBtlOptionLoadWorld();
         break;
-    case 3:
+    case SIO_BTL_OPTION_STATE_FADE_IN:
         SioBtlOptionFadeIn();
         break;
-    case 4:
+    case SIO_BTL_OPTION_STATE_WAIT_START:
         SioBtlOptionWaitStart();
         break;
-    case 5:
+    case SIO_BTL_OPTION_STATE_IDLE:
         SioBtlOptionHandleIdle();
         SioBtlOptionDraw();
         break;
-    case 6:
+    case SIO_BTL_OPTION_STATE_MENU:
         SioBtlOptionHandleMenu();
         SioBtlOptionDraw();
         break;
-    case 7:
+    case SIO_BTL_OPTION_STATE_SET_HANDICAP:
         SioBtlOptionSetHandicap();
         SioBtlOptionDraw();
         break;
-    case 8:
+    case SIO_BTL_OPTION_STATE_CHANGE_WORLD:
         SioBtlOptionChangeWorld();
         SioBtlOptionDraw();
         break;
-    case 9:
+    case SIO_BTL_OPTION_STATE_WAIT_READY:
         SioBtlOptionWaitReady();
         SioBtlOptionDraw();
         break;
-    case 10:
+    case SIO_BTL_OPTION_STATE_CONFIRM:
         SioBtlOptionConfirm();
         SioBtlOptionDraw();
         break;
-    case 11:
+    case SIO_BTL_OPTION_STATE_START_DECK_EXCHANGE:
         SioBtlOptionStartDeckExchange();
         SioBtlOptionDraw();
         break;
-    case 12:
+    case SIO_BTL_OPTION_STATE_WAIT_DECK_EXCHANGE:
         SioBtlOptionWaitDeckExchange();
         SioBtlOptionDraw();
         break;
-    case 13:
+    case SIO_BTL_OPTION_STATE_RESUME_COMMANDS:
         SioBtlOptionResumeCommands();
         SioBtlOptionDraw();
         break;
-    case 14:
+    case SIO_BTL_OPTION_STATE_WAIT_BEFORE_SYNC:
         SioBtlOptionWaitBeforeSync();
         SioBtlOptionDraw();
         break;
-    case 15:
+    case SIO_BTL_OPTION_STATE_SYNC_START:
         SioBtlOptionSyncStart();
         SioBtlOptionDraw();
         break;
-    case 16:
+    case SIO_BTL_OPTION_STATE_START_BATTLE:
         SioBtlOptionStartBattle();
         SioBtlOptionDraw();
         break;
@@ -1041,9 +1085,9 @@ void SioBtlOptionWaitStart() {
         sSioBtlOptionWork->timer = 0;
 
         if (sSioBtlOptionWork->modeArg == 1) {
-            sSioBtlOptionWork->state = 6;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         } else {
-            sSioBtlOptionWork->state = 5;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_IDLE;
         }
     } else {
         sSioBtlOptionWork->timer++;
@@ -1113,7 +1157,7 @@ void SioBtlOptionHandleIdle() {
         if (gSioPlayerId == 0) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             sSioBtlOptionWork->menuOpen = 1;
-            sSioBtlOptionWork->state = 6;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
     } else if ((gSioCommandRecv[1][1] & 0xFFF0) == 0x1F20) {
         sSioBtlOptionWork->leaveDelay = 10;
@@ -1121,7 +1165,7 @@ void SioBtlOptionHandleIdle() {
         if (gSioPlayerId == 1) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             sSioBtlOptionWork->menuOpen = 1;
-            sSioBtlOptionWork->state = 6;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
     }
 
@@ -1138,7 +1182,7 @@ void SioBtlOptionHandleIdle() {
         if (GetKeysPressed() & A_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             sSioBtlOptionWork->menuOpen = 1;
-            sSioBtlOptionWork->state = 6;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
 
         if (GetKeysPressed() & L_BUTTON) {
@@ -1154,11 +1198,11 @@ void SioBtlOptionHandleIdle() {
 
                 sSioBtlOptionWork->timer = 0;
                 sSioBtlOptionWork->fadeLevel = 0;
-                sSioBtlOptionWork->worldChangeState = 0;
+                sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
                 gSioWorldCursor = v;
-                sSioBtlOptionWork->state = 8;
+                sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
         } else if (GetKeysPressed() & R_BUTTON) {
@@ -1174,11 +1218,11 @@ void SioBtlOptionHandleIdle() {
 
                 sSioBtlOptionWork->timer = 0;
                 sSioBtlOptionWork->fadeLevel = 0;
-                sSioBtlOptionWork->worldChangeState = 0;
+                sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
                 gSioWorldCursor = v;
-                sSioBtlOptionWork->state = 8;
+                sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
         } else {
@@ -1267,7 +1311,7 @@ void SioBtlOptionHandleMenu() {
             sSioBtlOptionWork->x = 65;
 #endif
             sSioBtlOptionWork->y2 = 124;
-            sSioBtlOptionWork->state = 9;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_WAIT_READY;
             break;
         case 1:
             ModeRequest(&gModeDeck, 0);
@@ -1275,13 +1319,13 @@ void SioBtlOptionHandleMenu() {
         case 2:
             sSioBtlOptionWork->cursorVisible = 0;
             sSioBtlOptionWork->handicapMarkerVisible = 1;
-            sSioBtlOptionWork->state = 7;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_SET_HANDICAP;
             break;
         }
     } else if (GetKeysPressed() & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sSioBtlOptionWork->menuOpen = 0;
-        sSioBtlOptionWork->state = 5;
+        sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_IDLE;
     }
 
     SioBtlOptionCheckReady();
@@ -1319,11 +1363,11 @@ void SioBtlOptionHandleMenu() {
 
                 sSioBtlOptionWork->timer = 0;
                 sSioBtlOptionWork->fadeLevel = 0;
-                sSioBtlOptionWork->worldChangeState = 0;
+                sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
                 gSioWorldCursor = v;
-                sSioBtlOptionWork->state = 8;
+                sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
         } else if (GetKeysPressed() & R_BUTTON) {
@@ -1339,11 +1383,11 @@ void SioBtlOptionHandleMenu() {
 
                 sSioBtlOptionWork->timer = 0;
                 sSioBtlOptionWork->fadeLevel = 0;
-                sSioBtlOptionWork->worldChangeState = 0;
+                sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
                 gSioWorldCursor = v;
-                sSioBtlOptionWork->state = 8;
+                sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
         }
@@ -1363,7 +1407,7 @@ void SioBtlOptionHandleMenu() {
                 sSioBtlOptionWork->x = 65;
 #endif
                 sSioBtlOptionWork->y2 = 124;
-                sSioBtlOptionWork->state = 9;
+                sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_WAIT_READY;
                 break;
             case 1:
                 ModeRequest(&gModeDeck, 0);
@@ -1371,13 +1415,13 @@ void SioBtlOptionHandleMenu() {
             case 2:
                 sSioBtlOptionWork->cursorVisible = 0;
                 sSioBtlOptionWork->handicapMarkerVisible = 1;
-                sSioBtlOptionWork->state = 7;
+                sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_SET_HANDICAP;
                 break;
             }
         } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             sSioBtlOptionWork->menuOpen = 0;
-            sSioBtlOptionWork->state = 5;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_IDLE;
         }
 
         SioBtlOptionCheckReady();
@@ -1418,7 +1462,7 @@ void SioBtlOptionSetHandicap() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sSioBtlOptionWork->cursorVisible = 1;
         sSioBtlOptionWork->handicapMarkerVisible = 0;
-        sSioBtlOptionWork->state = 6;
+        sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
     }
 
     SioBtlOptionCheckReady();
@@ -1465,7 +1509,7 @@ void SioBtlOptionSetHandicap() {
             m4aSongNumStart(SONG_SYS_CLOSE);
             sSioBtlOptionWork->cursorVisible = 1;
             sSioBtlOptionWork->handicapMarkerVisible = 0;
-            sSioBtlOptionWork->state = 6;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_MENU;
         }
 
         SioBtlOptionCheckReady();
@@ -1481,7 +1525,7 @@ void SioBtlOptionChangeWorld() {
     s8 b = gSioWorldList[gSioWorldCursor];
 
     switch (sSioBtlOptionWork->worldChangeState) {
-    case 0:
+    case SIO_WORLD_CHANGE_STATE_FADE_OUT:
         sSioBtlOptionWork->timer++;
 
         if (sSioBtlOptionWork->timer > 1) {
@@ -1497,7 +1541,7 @@ void SioBtlOptionChangeWorld() {
         }
 
         break;
-    case 1:
+    case SIO_WORLD_CHANGE_STATE_LOAD_MAP:
         FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize, 32);
 #ifdef VERSION_EU
         LoadBgMapLz77(2, gSioWorldEntries[b].map);
@@ -1507,7 +1551,7 @@ void SioBtlOptionChangeWorld() {
         RequestDma3Copy(gSioWorldEntries[b].tiles, GetBgCharBase(2), 0x2000);
         sSioBtlOptionWork->worldChangeState++;
         break;
-    case 2:
+    case SIO_WORLD_CHANGE_STATE_LOAD_TILES:
         RequestDma3Copy((u8*)gSioWorldEntries[b].tiles + 0x2000, (u8*)GetBgCharBase(2) + 0x2000, gSioWorldEntries[b].tilesSize - 0x2000);
 #ifdef VERSION_EU
         sSioBtlOptionWork->textSlotCount = LoadTextSlots(GetLocalizedString(gSioWorldEntries[b].text), sSioBtlOptionWork->textSlots);
@@ -1517,7 +1561,7 @@ void SioBtlOptionChangeWorld() {
         sSioBtlOptionWork->worldEntry = b;
         sSioBtlOptionWork->worldChangeState++;
         break;
-    case 3:
+    case SIO_WORLD_CHANGE_STATE_FADE_IN:
         sSioBtlOptionWork->timer++;
 
         if (sSioBtlOptionWork->timer > 1) {
@@ -1609,7 +1653,7 @@ void SioBtlOptionConfirm() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sSioBtlOptionWork->timer = 0;
         SioBtlOptionCancelReady();
-        sSioBtlOptionWork->state = 5;
+        sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_IDLE;
     }
 #ifdef VERSION_EU
     } else if (GetKeysPressed() & A_BUTTON) {
@@ -1843,9 +1887,9 @@ void SioBtlOptionRecvWorld() {
 
             sSioBtlOptionWork->timer = 0;
             sSioBtlOptionWork->fadeLevel = 0;
-            sSioBtlOptionWork->worldChangeState = 0;
+            sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
             sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
-            sSioBtlOptionWork->state = 8;
+            sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
     }
@@ -2279,6 +2323,20 @@ void SioBtlOptionPlayWorldBgm() {
     }
 }
 
+enum SioBtlCardgetState {
+    SIO_BTL_CARDGET_STATE_LOAD_BG_TILES,
+    SIO_BTL_CARDGET_STATE_LOAD_BG,
+    SIO_BTL_CARDGET_STATE_SHOW_RESULT,
+    SIO_BTL_CARDGET_STATE_START_COMMANDS,
+    SIO_BTL_CARDGET_STATE_PAUSE,
+    SIO_BTL_CARDGET_STATE_WAIT_INPUT,
+    SIO_BTL_CARDGET_STATE_START_EXCHANGE,
+    SIO_BTL_CARDGET_STATE_EXCHANGE,
+    SIO_BTL_CARDGET_STATE_RESUME_COMMANDS,
+    SIO_BTL_CARDGET_STATE_RETURN,
+    SIO_BTL_CARDGET_STATE_DONE
+};
+
 void mode_sio_btl_cardget_0(s32 arg) {
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
@@ -2307,7 +2365,7 @@ void mode_sio_btl_cardget_0(s32 arg) {
     SetupBg(2, 0, 24, 0);
     SetBgPriority(2, 2);
     RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(1), 0x2000);
-    sSioBtlCardgetWork->state = 0;
+    sSioBtlCardgetWork->state = SIO_BTL_CARDGET_STATE_LOAD_BG_TILES;
 }
 
 void SioBtlCardgetLoadBgTiles() {
@@ -2408,19 +2466,19 @@ void mode_sio_btl_cardget_1() {
 #endif
 
     switch (sSioBtlCardgetWork->state) {
-    case 0:
+    case SIO_BTL_CARDGET_STATE_LOAD_BG_TILES:
         SioBtlCardgetLoadBgTiles();
         sSioBtlCardgetWork->state++;
         break;
-    case 1:
+    case SIO_BTL_CARDGET_STATE_LOAD_BG:
         SioBtlCardgetLoadBg();
         sSioBtlCardgetWork->state++;
         break;
-    case 2:
+    case SIO_BTL_CARDGET_STATE_SHOW_RESULT:
         SioBtlCardgetShowResult();
         sSioBtlCardgetWork->state++;
         break;
-    case 3:
+    case SIO_BTL_CARDGET_STATE_START_COMMANDS:
         sSioBtlCardgetWork->timer++;
 
         if (sSioBtlCardgetWork->timer > 4) {
@@ -2440,7 +2498,7 @@ void mode_sio_btl_cardget_1() {
 
         SioBtlCardgetDraw();
         break;
-    case 4:
+    case SIO_BTL_CARDGET_STATE_PAUSE:
         sSioBtlCardgetWork->timer++;
 
         if (sSioBtlCardgetWork->timer > 4) {
@@ -2450,7 +2508,7 @@ void mode_sio_btl_cardget_1() {
 
         SioBtlCardgetDraw();
         break;
-    case 5:
+    case SIO_BTL_CARDGET_STATE_WAIT_INPUT:
 #ifdef VERSION_EU
         if (!gSioDebugMode) {
 #endif
@@ -2474,7 +2532,7 @@ void mode_sio_btl_cardget_1() {
 
         SioBtlCardgetDraw();
         break;
-    case 6:
+    case SIO_BTL_CARDGET_STATE_START_EXCHANGE:
         sSioBtlCardgetWork->timer++;
 
         if (sSioBtlCardgetWork->timer > 4) {
@@ -2497,7 +2555,7 @@ void mode_sio_btl_cardget_1() {
 
         SioBtlCardgetDraw();
         break;
-    case 7:
+    case SIO_BTL_CARDGET_STATE_EXCHANGE:
 #ifdef VERSION_EU
         if (!gSioDebugMode) {
 #endif
@@ -2515,7 +2573,7 @@ void mode_sio_btl_cardget_1() {
 
         SioBtlCardgetDraw();
         break;
-    case 8:
+    case SIO_BTL_CARDGET_STATE_RESUME_COMMANDS:
         sSioBtlCardgetWork->timer++;
 
         if (sSioBtlCardgetWork->timer > 4) {
@@ -2538,7 +2596,7 @@ void mode_sio_btl_cardget_1() {
 
         SioBtlCardgetDraw();
         break;
-    case 9:
+    case SIO_BTL_CARDGET_STATE_RETURN:
         ModeRequestHeapReset(&gModeSioBtlOption, 0);
         sSioBtlCardgetWork->state++;
         break;
@@ -2686,6 +2744,11 @@ void SioBtlCardgetLoad2PWin() {
 }
 
 #ifndef VERSION_EU
+enum SioChgConnectState {
+    SIO_CHG_CONNECT_STATE_CONNECT,
+    SIO_CHG_CONNECT_STATE_START_TRADE
+};
+
 void mode_sio_chg_connect_0(s32 arg) {
     sSioChgConnectWork = EwramAlloc(sizeof(SioBtlConnectWork));
     FadeStartIn(FADE_MODE_BLACK, 16);
@@ -2702,7 +2765,7 @@ void mode_sio_chg_connect_0(s32 arg) {
     LoadBgMap(1, gSioConnectBgMap, 0x800);
     sSioChgConnectWork->unk_00 = 0;
     sSioChgConnectWork->timer = 0;
-    sSioChgConnectWork->state = 0;
+    sSioChgConnectWork->state = SIO_CHG_CONNECT_STATE_CONNECT;
     sSioChgConnectWork->textSlotCount = 0;
     InitTextSlots(sSioChgConnectWork->textSlots, 0x5A);
     sSioChgConnectWork->textSlotCount = LoadTextSlots(gSioChgConnectText, sSioChgConnectWork->textSlots);
@@ -2715,10 +2778,10 @@ void mode_sio_chg_connect_0(s32 arg) {
 #ifndef VERSION_EU
 void mode_sio_chg_connect_1() {
     switch (sSioChgConnectWork->state) {
-    case 0:
+    case SIO_CHG_CONNECT_STATE_CONNECT:
         SioConnectUpdate();
         break;
-    case 1:
+    case SIO_CHG_CONNECT_STATE_START_TRADE:
         SioConnectUpdate();
         sSioChgConnectWork->timer++;
 
@@ -2791,6 +2854,23 @@ void SetSioChgCardAnimation(u16 player, u16 index, u16 flags) {
 #endif
 
 #ifndef VERSION_EU
+enum SioChgCardState {
+    SIO_CHG_CARD_STATE_LOAD_BG,
+    SIO_CHG_CARD_STATE_INIT_OBJS,
+    SIO_CHG_CARD_STATE_WAIT_START,
+    SIO_CHG_CARD_STATE_SELECT,
+    SIO_CHG_CARD_STATE_CONFIRM,
+    SIO_CHG_CARD_STATE_TRY_TRADE,
+    SIO_CHG_CARD_STATE_WAIT_TRADE_RESULT,
+    SIO_CHG_CARD_STATE_TRADE_FAILED,
+    SIO_CHG_CARD_STATE_START_MOVE,
+    SIO_CHG_CARD_STATE_SAVE,
+    SIO_CHG_CARD_STATE_WAIT_MOVE,
+    SIO_CHG_CARD_STATE_SHOW_SECOND_MESSAGE,
+    SIO_CHG_CARD_STATE_HIDE_MESSAGE,
+    SIO_CHG_CARD_STATE_RESTART
+};
+
 void mode_sio_chg_card_0(s32 arg) {
     sSioChgCardWork = EwramAlloc(sizeof(SioChgCardWork));
     SetBgMode0();
@@ -2813,7 +2893,7 @@ void mode_sio_chg_card_0(s32 arg) {
     sSioChgCardWork->blinkPhase = 0;
     sSioChgCardWork->timer = 0;
     sSioChgCardWork->ready = 0;
-    sSioChgCardWork->state = 0;
+    sSioChgCardWork->state = SIO_CHG_CARD_STATE_LOAD_BG;
     sSioChgCardWork->receiveOk = 0;
     sSioChgCardWork->leaveDelay = 0;
     sSioChgCardWork->offeredCard = arg;
@@ -2930,57 +3010,57 @@ void SioChgCardInitObjs() {
 #ifndef VERSION_EU
 void mode_sio_chg_card_1() {
     switch (sSioChgCardWork->state) {
-    case 0:
+    case SIO_CHG_CARD_STATE_LOAD_BG:
         SioChgCardLoadBg();
         break;
-    case 1:
+    case SIO_CHG_CARD_STATE_INIT_OBJS:
         SioChgCardInitObjs();
         break;
-    case 2:
+    case SIO_CHG_CARD_STATE_WAIT_START:
         SioChgCardWaitStart();
         SioChgCardDraw();
         break;
-    case 3:
+    case SIO_CHG_CARD_STATE_SELECT:
         SioChgCardSelect();
         SioChgCardDraw();
         break;
-    case 4:
+    case SIO_CHG_CARD_STATE_CONFIRM:
         SioChgCardConfirm();
         SioChgCardDraw();
         break;
-    case 5:
+    case SIO_CHG_CARD_STATE_TRY_TRADE:
         SioChgCardTryTrade();
         SioChgCardDraw();
         break;
-    case 6:
+    case SIO_CHG_CARD_STATE_WAIT_TRADE_RESULT:
         SioChgCardWaitTradeResult();
         SioChgCardDraw();
         break;
-    case 7:
+    case SIO_CHG_CARD_STATE_TRADE_FAILED:
         SioChgCardTradeFailed();
         SioChgCardDraw();
         break;
-    case 8:
+    case SIO_CHG_CARD_STATE_START_MOVE:
         SioChgCardStartMove();
         SioChgCardDraw();
         break;
-    case 9:
+    case SIO_CHG_CARD_STATE_SAVE:
         SioChgCardSave();
         SioChgCardDraw();
         break;
-    case 10:
+    case SIO_CHG_CARD_STATE_WAIT_MOVE:
         SioChgCardWaitMove();
         SioChgCardDraw();
         break;
-    case 11:
+    case SIO_CHG_CARD_STATE_SHOW_SECOND_MESSAGE:
         SioChgCardShowSecondMessage();
         SioChgCardDraw();
         break;
-    case 12:
+    case SIO_CHG_CARD_STATE_HIDE_MESSAGE:
         SioChgCardHideMessage();
         SioChgCardDraw();
         break;
-    case 13:
+    case SIO_CHG_CARD_STATE_RESTART:
         SioChgCardRestart();
         SioChgCardDraw();
         break;
@@ -3109,7 +3189,7 @@ void SioChgCardConfirm() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sSioChgCardWork->timer = 0;
         SioChgCardCancelReady();
-        sSioChgCardWork->state = 3;
+        sSioChgCardWork->state = SIO_CHG_CARD_STATE_SELECT;
     }
 
     SioChgCardRecvSlots();
@@ -3140,7 +3220,7 @@ void SioChgCardWaitTradeResult() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioChgCardWork->timer = 0;
         gGameState.progression.obtainedCardKinds = sSioChgCardWork->obtainedCardKindsBackup;
-        sSioChgCardWork->state = 8;
+        sSioChgCardWork->state = SIO_CHG_CARD_STATE_START_MOVE;
     }
 
     if (gSioCommandRecv[1][0] == 0x1269 || gSioCommandRecv[1][1] == 0x1269) {
@@ -3150,7 +3230,7 @@ void SioChgCardWaitTradeResult() {
         sSioChgCardWork->y3 = 118;
         SioChgCardRestoreCollection();
         sSioChgCardWork->timer = 0;
-        sSioChgCardWork->state = 7;
+        sSioChgCardWork->state = SIO_CHG_CARD_STATE_TRADE_FAILED;
     }
 }
 
@@ -3158,7 +3238,7 @@ void SioChgCardTradeFailed() {
     if (sSioChgCardWork->timer > 179) {
         sSioChgCardWork->timer = 0;
         SioChgCardCancelReady();
-        sSioChgCardWork->state = 3;
+        sSioChgCardWork->state = SIO_CHG_CARD_STATE_SELECT;
     } else {
         sSioChgCardWork->timer++;
     }

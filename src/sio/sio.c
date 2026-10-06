@@ -42,6 +42,20 @@ static s8 sSioAutoStartDone;
 static u16 sSioSendNonzero;
 static u16 sSioRecvNonzero;
 
+enum SioState {
+    SIO_STATE_STOP,
+    SIO_STATE_INIT,
+    SIO_STATE_HANDSHAKE,
+    SIO_STATE_INIT_TIMER,
+    SIO_STATE_CONNECTED
+};
+
+enum SioRequest {
+    SIO_REQUEST_NONE,
+    SIO_REQUEST_START,
+    SIO_REQUEST_RESET
+};
+
 u16 IsVBlankIntrLive() {
     if (REG_IME & 1) {
         if (REG_DISPSTAT & DISPSTAT_VBLANK_INTR) {
@@ -144,7 +158,7 @@ void SioInit() {
     gSioPlayerId = 0;
     gSioPlayerCount = 0;
     gUnk_02039824 = 0;
-    gSioHandshakeRequest = 0;
+    gSioHandshakeRequest = SIO_REQUEST_NONE;
     gSioLinkResult = 0;
     sSioAutoStartDone = 0;
     sSioChecksumReady = 0;
@@ -180,15 +194,15 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     u32 t0, t1, t2, t3, t4, t5;
 
     switch (gSioWork.state) {
-    case 0:
+    case SIO_STATE_STOP:
         SioStop();
-        gSioWork.state = 1;
+        gSioWork.state = SIO_STATE_INIT;
         break;
-    case 1:
+    case SIO_STATE_INIT:
         SioInit();
-        gSioWork.state = 2;
+        gSioWork.state = SIO_STATE_HANDSHAKE;
         break;
-    case 2:
+    case SIO_STATE_HANDSHAKE:
         switch (*request) {
         default:
             SioCheckParent();
@@ -201,24 +215,24 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
             }
 
             break;
-        case 1:
+        case SIO_REQUEST_START:
             if (gSioWork.isParent != 0 && gSioWork.playerCount == 2) {
                 gSioWork.startPending = 1;
             }
 
             sSioAutoStartDone = -1;
             break;
-        case 2:
-            gSioWork.state = 0;
+        case SIO_REQUEST_RESET:
+            gSioWork.state = SIO_STATE_STOP;
             REG_SIOMLT_SEND = 0;
             break;
         }
 
         break;
-    case 3:
+    case SIO_STATE_INIT_TIMER:
         SioInitTimer();
-        gSioWork.state = 4;
-    case 4:
+        gSioWork.state = SIO_STATE_CONNECTED;
+    case SIO_STATE_CONNECTED:
         if (!gSioWork.paused) {
             SioQueueSendFrame(sendFrame);
         }
@@ -227,7 +241,7 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
         break;
     }
 
-    *request = 0;
+    *request = SIO_REQUEST_NONE;
     r = gSioWork.playerId | (gSioWork.playerCount << 2);
 
     if (gSioWork.isParent == 8) {
@@ -241,7 +255,7 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     t4 = gSioWork.queueFull << 18;
     t5 = gSioWork.timeout << 20;
 
-    if (gSioWork.state == 4) {
+    if (gSioWork.state == SIO_STATE_CONNECTED) {
         v = r | 0x40 | t0 | t1 | t2 | t3 | t4 | t5;
     } else {
         v = r | t0 | t1 | t2 | t3 | t4 | t5;
@@ -262,7 +276,7 @@ u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     u32 w;
     u32 t0, t1, t2, t3, t4, t5;
 
-    if (gSioWork.state == 4) {
+    if (gSioWork.state == SIO_STATE_CONNECTED) {
         if (!gSioWork.paused) {
             SioQueueSendFrame(sendFrame);
         }
@@ -283,7 +297,7 @@ u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     t4 = gSioWork.queueFull << 18;
     t5 = gSioWork.timeout << 20;
 
-    if (gSioWork.state == 4) {
+    if (gSioWork.state == SIO_STATE_CONNECTED) {
         v = r | 0x40 | t0 | t1 | t2 | t3 | t4 | t5;
     } else {
         v = r | t0 | t1 | t2 | t3 | t4 | t5;
@@ -397,9 +411,9 @@ void SioVBlankUpdate() {
     }
 
     if (gSioWork.isParent != 0) {
-        if (gSioWork.state == 2) {
+        if (gSioWork.state == SIO_STATE_HANDSHAKE) {
             SioStartTransfer();
-        } else if (gSioWork.state == 4) {
+        } else if (gSioWork.state == SIO_STATE_CONNECTED) {
             if (gSioWork.transferCount <= 4) {
                 if (gSioWork.hardwareError != 0) {
                     SioStartTransfer();
@@ -411,15 +425,15 @@ void SioVBlankUpdate() {
                 SioStartTransfer();
             }
         }
-    } else if (gSioWork.state == 4 || gSioWork.state == 2) {
+    } else if (gSioWork.state == SIO_STATE_CONNECTED || gSioWork.state == SIO_STATE_HANDSHAKE) {
         sSioIdleVBlanks++;
 
         if (sSioIdleVBlanks > 6) {
-            if (gSioWork.state == 4) {
+            if (gSioWork.state == SIO_STATE_CONNECTED) {
                 gSioWork.timeout = 2;
             }
 
-            if (gSioWork.state == 2) {
+            if (gSioWork.state == SIO_STATE_HANDSHAKE) {
                 gSioWork.playerId = 0;
                 gSioWork.playerCount = 0;
                 gSioWork.unk_11 = 0;
@@ -440,7 +454,7 @@ void SioSerialIntr() {
     gSioWork.playerId = (cnt << 26) >> 30;
 
     switch (gSioWork.state) {
-    case 4:
+    case SIO_STATE_CONNECTED:
         if (cnt & SIO_ERROR) {
             gSioWork.hardwareError = 1;
         }
@@ -449,13 +463,13 @@ void SioSerialIntr() {
         SioSendWord();
         SioFinishTransfer();
         break;
-    case 2:
+    case SIO_STATE_HANDSHAKE:
         if (SioHandshake()) {
             if (gSioWork.isParent != 0) {
-                gSioWork.state = 3;
+                gSioWork.state = SIO_STATE_INIT_TIMER;
                 gSioWork.transferCount = 4;
             } else {
-                gSioWork.state = 4;
+                gSioWork.state = SIO_STATE_CONNECTED;
             }
         }
 
@@ -681,7 +695,7 @@ void SioShutdown() {
 }
 
 u8 SioIsConnected() {
-    if (gSioWork.state == 4) {
+    if (gSioWork.state == SIO_STATE_CONNECTED) {
         return 1;
     }
 

@@ -95,7 +95,7 @@ const EventSequenceDef gEvent023 = {
     0,
     0,
     0,
-    24,
+    EVENT_024_6F_ENTRANCE,
     0,
     { 0, 0 },
     65535,

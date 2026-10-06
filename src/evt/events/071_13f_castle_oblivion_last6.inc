@@ -96,7 +96,7 @@ const EventSequenceDef gEvent071 = {
     0,
     0,
     0,
-    72,
+    EVENT_072_13F_CASLTE_OBLIVION_LAST7,
     0,
     { 0, 0 },
     65535,

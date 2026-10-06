@@ -27,6 +27,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "event_ids.h"
 
 void MapNiserikuCheckTalk(MapNiserikuWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
@@ -70,7 +71,7 @@ void MapNiserikuWaitApproach(MapNiserikuWork* work) {
 
 void MapNiserikuStartEvent(MapNiserikuWork* work) {
     if (!FadeIsActive()) {
-        RequestEventMode(0x3B);
+        RequestEventMode(EVENT_059_12F_GOAL_2);
         work->update = NULL;
     }
 }

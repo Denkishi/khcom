@@ -207,7 +207,7 @@ const EventSequenceDef gEvent072 = {
     0,
     0,
     0,
-    73,
+    EVENT_073_13F_CAPSULE_ROOM_ENDING,
     0,
     { 0, 0 },
     65535,

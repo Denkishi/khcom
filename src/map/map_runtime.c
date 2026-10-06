@@ -28,18 +28,43 @@
 #include "map.h"
 #include "map_room_tables.h"
 #include "text_types.h"
+#include "event_ids.h"
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
 extern const MapNameText* gMapWorldNames[];
 
-static const u8 sSoraWorldExitEvents[13] = { 10, 13, 16, 19, 22, 25, 30, 33, 37, 40, 47, 58, 66 };
+static const u8 sSoraWorldExitEvents[13] = {
+    EVENT_010_1F_GOAL_1,
+    EVENT_013_2F_GOAL,
+    EVENT_016_3F_GOAL,
+    EVENT_019_4F_GOAL,
+    EVENT_022_5F_GOAL,
+    EVENT_025_6F_GOAL_1,
+    EVENT_030_7F_GOAL_1,
+    EVENT_033_8F_GOAL_1,
+    EVENT_037_9F_GOAL,
+    EVENT_040_10F_GOAL_1,
+    EVENT_047_11F_DEMO_1,
+    EVENT_058_12F_GOAL,
+    EVENT_066_13F_CASTLE_OBLIVION_LAST1,
+};
 
-#ifdef VERSION_EU
-static const u8 sRikuWorldExitEvents[13] = { 153, 255, 158, 255, 161, 255, 255, 255, 169, 255, 188, 191, 0 };
-#else
-static const u8 sRikuWorldExitEvents[13] = { 155, 255, 160, 255, 163, 255, 255, 255, 171, 255, 190, 193, 0 };
-#endif
+static const u8 sRikuWorldExitEvents[13] = {
+    EVENT_155_RIKU_B12F_GOAL,
+    255,
+    EVENT_160_RIKU_B10F_GOAL,
+    255,
+    EVENT_163_RIKU_B8F_GOAL,
+    255,
+    255,
+    255,
+    EVENT_171_RIKU_B4F_GOAL,
+    255,
+    EVENT_190_RIKU_B2F_GOAL,
+    EVENT_193_RIKU_B1F_LAST1,
+    0,
+};
 
 u8 GetOppositeDoorSide(u8 side) {
     switch (side) {

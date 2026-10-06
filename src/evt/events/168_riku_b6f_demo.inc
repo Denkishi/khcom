@@ -97,7 +97,6 @@ static const EventCharaTrack sEvent168Tracks[5] = {
     { sEvent168Track4, 85 },
 };
 
-#if defined(VERSION_US) || defined(VERSION_JP)
 const EventSequenceDef gEvent168 = {
     5,
     sEvent168Tracks,
@@ -112,7 +111,7 @@ const EventSequenceDef gEvent168 = {
     0,
     0,
     0,
-    169,
+    EVENT_169_RIKU_B5F_DEMO,
     0,
     { 0, 0 },
     65535,
@@ -120,27 +119,3 @@ const EventSequenceDef gEvent168 = {
     255,
     255,
 };
-#elif defined(VERSION_EU)
-const EventSequenceDef gEvent168 = {
-    5,
-    sEvent168Tracks,
-    sEvent168Camera,
-    sEvent168Script,
-    sEvent168SoundCues,
-    NULL,
-    1685,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    167,
-    0,
-    { 0, 0 },
-    65535,
-    0,
-    255,
-    255,
-};
-#endif

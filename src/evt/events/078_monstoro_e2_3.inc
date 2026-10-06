@@ -67,7 +67,7 @@ const EventSequenceDef gEvent078 = {
     0,
     0,
     0,
-    80,
+    EVENT_080_MONSTORO_E2_5,
     0,
     { 0, 0 },
     65535,

@@ -62,7 +62,7 @@ const EventSequenceDef gEvent057 = {
     0,
     0,
     0,
-    58,
+    EVENT_058_12F_GOAL,
     0,
     { 0, 0 },
     65535,

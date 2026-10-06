@@ -51,7 +51,6 @@ static const EventCharaTrack sEvent175Tracks[2] = {
     { sEvent175Track1, 43 },
 };
 
-#if defined(VERSION_US) || defined(VERSION_JP)
 const EventSequenceDef gEvent175 = {
     2,
     sEvent175Tracks,
@@ -66,7 +65,7 @@ const EventSequenceDef gEvent175 = {
     0,
     0,
     0,
-    176,
+    EVENT_176_RIKU_B3F_ENTRANCE,
     0,
     { 0, 0 },
     65535,
@@ -74,27 +73,3 @@ const EventSequenceDef gEvent175 = {
     255,
     255,
 };
-#elif defined(VERSION_EU)
-const EventSequenceDef gEvent175 = {
-    2,
-    sEvent175Tracks,
-    sEvent175Camera,
-    sEvent175Script,
-    sEvent175SoundCues,
-    NULL,
-    560,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    174,
-    0,
-    { 0, 0 },
-    65535,
-    0,
-    255,
-    255,
-};
-#endif

@@ -103,7 +103,7 @@ const EventSequenceDef gEvent091 = {
     0,
     0,
     0,
-    92,
+    EVENT_092_HALLOWEEN_TOWN_E3,
     0,
     { 0, 0 },
     65535,

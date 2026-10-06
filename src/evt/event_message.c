@@ -55,6 +55,7 @@
 #include <stddef.h>
 #include "default_bg_map.h"
 #include "text_types.h"
+#include "event_ids.h"
 
 static void msgwin_0(MsgWinWork* work, u8* arg);
 static u8 msgwin_1(MsgWinWork* work, void* task);
@@ -2878,9 +2879,9 @@ u8 UpdateEventSeq(EventSeqWork* work, void* task) {
 
     if ((GetKeysHeld() & START_BUTTON) != 0) {
         switch (work->eventId) {
-        case 68:
-        case 83:
-        case 84:
+        case EVENT_068_13F_CASTLE_OBLIVION_LAST3:
+        case EVENT_083_MONSTORO_E3_FAILURE_1:
+        case EVENT_084_MONSTORO_E3_FAILURE_2:
             break;
         default:
             gEventState->skipHoldTime++;
@@ -4925,13 +4926,6 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
-#ifdef VERSION_EU
-#define MSG_SOUND_ID_9E 0x9C
-#define MSG_SOUND_ID_B1 0xAF
-#else
-#define MSG_SOUND_ID_9E 0x9E
-#define MSG_SOUND_ID_B1 0xB1
-#endif
 
 s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
     u16 x;
@@ -4944,7 +4938,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
     case 0x2EB:
     case 0x2F1:
     case 0x2F2:
-        if (work->arg.eventId != MSG_SOUND_ID_9E) {
+        if (work->arg.eventId != EVENT_158_RIKU_B11F_ENTRANCE) {
             if (work->obj.anim->timer == 0) {
                 if (work->obj.anim->frame == 2) {
                     m4aSongNumStart(SONG_SND_958);
@@ -5082,7 +5076,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
     case 0x2C8:
         if (work->obj.anim->timer == 0) {
             if (work->obj.anim->frame == 3) {
-                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+                if ((u16)(work->arg.eventId - EVENT_177_RIKU_B3F_E0) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
                     SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
                 } else {
@@ -5092,7 +5086,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
             }
 
             if (work->obj.anim->frame == 7) {
-                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+                if ((u16)(work->arg.eventId - EVENT_177_RIKU_B3F_E0) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
                     SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
                 } else {
@@ -5107,7 +5101,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
     case 0x2C6:
         if (work->obj.anim->timer == 0) {
             if (work->obj.anim->frame == 2) {
-                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+                if ((u16)(work->arg.eventId - EVENT_177_RIKU_B3F_E0) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
                     SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
                 } else {
@@ -5117,7 +5111,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
             }
 
             if (work->obj.anim->frame == 5) {
-                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+                if ((u16)(work->arg.eventId - EVENT_177_RIKU_B3F_E0) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
                     SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
                 } else {
@@ -5428,7 +5422,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
     case 0xE2:
         if (work->obj.anim->timer == 0) {
             if (work->obj.anim->frame == 1) {
-                if (work->arg.eventId == 0x61) {
+                if (work->arg.eventId == EVENT_097_WONDERLAND_E2) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                     SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
                 } else {
@@ -5438,7 +5432,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
             }
 
             if (work->obj.anim->frame == 5) {
-                if (work->arg.eventId == 0x61) {
+                if (work->arg.eventId == EVENT_097_WONDERLAND_E2) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                     SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
                 } else {
@@ -5944,7 +5938,7 @@ void PlaySoraFootstep(EventCharaWork* work, u8 kind, u8 flag) {
 
         break;
     case 2:
-        if ((work->arg.eventId == 0x4B && gEventState->frame > 0x2BC) || (work->arg.eventId == 0x36 && gEventState->frame <= 0x4F)) {
+        if ((work->arg.eventId == EVENT_075_MONSTORO_E1 && gEventState->frame > 0x2BC) || (work->arg.eventId == EVENT_054_12F_DESTINY_ISLAND_E1 && gEventState->frame <= 0x4F)) {
             if (flag) {
                 m4aSongNumStart(SONG_EV_SR_STONEL);
                 SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
@@ -6013,7 +6007,7 @@ void PlayDonaldFootstep(EventCharaWork* work, u8 kind, u8 flag) {
 
         break;
     case 2:
-        if (work->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
+        if (work->arg.eventId == EVENT_075_MONSTORO_E1 && gEventState->frame > 0x2BC) {
             if (!flag) {
                 m4aSongNumStart(SONG_EV_DL_STONE_R);
                 SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
@@ -6074,7 +6068,7 @@ void PlayGoofyFootstep(EventCharaWork* work, u8 kind, u8 flag) {
 
         break;
     case 2:
-        if (work->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
+        if (work->arg.eventId == EVENT_075_MONSTORO_E1 && gEventState->frame > 0x2BC) {
             if (!flag) {
                 m4aSongNumStart(SONG_EV_GF_STONE_R);
                 SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
@@ -6134,13 +6128,6 @@ void SetupEventCharaShadow(EventCharaWork* work) {
         break;
     }
 }
-#ifdef VERSION_EU
-#define MSG_WIN_ID_A 0x84
-#define MSG_WIN_ID_B 0x9A
-#else
-#define MSG_WIN_ID_A 0x86
-#define MSG_WIN_ID_B 0x9C
-#endif
 
 static void msgwin_0(MsgWinWork* work, u8* arg) {
     const EventSequenceDef* seqDef;
@@ -6148,12 +6135,12 @@ static void msgwin_0(MsgWinWork* work, u8* arg) {
     work->eventId = arg[0];
 
     switch (work->eventId) {
-    case 11:
+    case EVENT_011_1F_GOAL_2:
         work->glyphPaletteIndex = InitMsgGlyphSpritesAltPalette3(0);
         break;
-    case 3:
-    case MSG_WIN_ID_A:
-    case MSG_WIN_ID_B:
+    case EVENT_003_1F_TRAVERSE_TOWN_E0_2:
+    case EVENT_134_100ACREWOOD_START:
+    case EVENT_156_RIKU_B12F_GOAL_2:
         work->glyphPaletteIndex = InitMsgGlyphSpritesAltPalette5(0);
         break;
     default:
@@ -7056,7 +7043,7 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* task) {
         } else {
             gEventState->answerYes = 0;
 
-            if (gEventState->eventId == 68) {
+            if (gEventState->eventId == EVENT_068_13F_CASTLE_OBLIVION_LAST3) {
                 gEventState->endRequest = 1;
                 gEventState->skipHoldTime = 255;
             }
@@ -7068,7 +7055,7 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* task) {
     case B_BUTTON:
         gEventState->answerYes = 0;
 
-        if (gEventState->eventId == 68) {
+        if (gEventState->eventId == EVENT_068_13F_CASTLE_OBLIVION_LAST3) {
             gEventState->endRequest = 1;
             gEventState->skipHoldTime = 255;
         }
@@ -7190,7 +7177,7 @@ void view_0(EventCameraWork* work, u8* arg) {
         if (bg->isAffine != 0) {
             SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
         } else {
-            if (work->eventId == 77) {
+            if (work->eventId == EVENT_077_MONSTORO_E2_2) {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + 8 + gEventState->shakeX, (gEventState->cameraY >> 8) + 40);
             } else {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);
@@ -7214,12 +7201,6 @@ void ClearEventObjPaletteExclusions() {
         FadeSetPaletteExcluded(i + 16, 0);
     }
 }
-
-#ifdef VERSION_EU
-#define MSG_VIEW_ID_B4 0xB2
-#else
-#define MSG_VIEW_ID_B4 0xB4
-#endif
 
 u8 view_1(EventCameraWork* work, Task* task) {
     EventBackgroundDef* bg = gEventBackgroundDefs[work->eventId];
@@ -7383,7 +7364,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
             if (bg->isAffine != 0) {
                 SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
             } else {
-                if (work->eventId == 77) {
+                if (work->eventId == EVENT_077_MONSTORO_E2_2) {
                     ScrollBgMapTo(3, (gEventState->x >> 8) + 8, (gEventState->y >> 8) + 40);
                 } else {
                     ScrollBgMapTo(3, gEventState->x >> 8, gEventState->y >> 8);
@@ -7399,8 +7380,8 @@ u8 view_1(EventCameraWork* work, Task* task) {
             }
         } else {
             switch (work->eventId) {
-            case 77:
-            case 78:
+            case EVENT_077_MONSTORO_E2_2:
+            case EVENT_078_MONSTORO_E2_3:
                 gBtlWork->viewX = gEventState->x;
                 gBtlWork->viewY = gEventState->y;
                 gBtlWork->x = gEventState->x;
@@ -7410,7 +7391,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
                 ScrollBgMapTo(0, (gEventState->x >> 8) + 8, (gEventState->y >> 8) + 40);
                 ScrollBgMapTo(1, gEventState->x >> 8, gEventState->y >> 8);
                 break;
-            case 105:
+            case EVENT_105_ATLANTICA_BOSS:
                 gBtlWork->viewX = gEventState->x;
                 gBtlWork->viewY = gEventState->y;
                 gBtlWork->x = gEventState->x;
@@ -7419,7 +7400,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
                 gBtlWork->y2 = gEventState->y;
                 ScrollBgMapTo(0, gEventState->x >> 8, gEventState->y >> 8);
                 break;
-            case MSG_VIEW_ID_B4:
+            case EVENT_180_RIKU_B3F_BOSS:
                 break;
             default:
                 gBtlWork->viewX = gEventState->x;
@@ -7455,7 +7436,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
             if (bg->isAffine != 0) {
                 SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
             } else {
-                if (work->eventId == 77) {
+                if (work->eventId == EVENT_077_MONSTORO_E2_2) {
                     ScrollBgMapTo(3, (gEventState->x >> 8) + 8, (gEventState->y >> 8) + 40);
                 } else {
                     ScrollBgMapTo(3, gEventState->x >> 8, gEventState->y >> 8);
@@ -7603,7 +7584,7 @@ u8 UpdateEventCameraFollowPlayer(EventCameraWork* work) {
         } else {
             EventCameraFollow(work);
 
-            if (work->eventId == 77) {
+            if (work->eventId == EVENT_077_MONSTORO_E2_2) {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + 8 + gEventState->shakeX, (gEventState->cameraY >> 8) + 40);
             } else {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);

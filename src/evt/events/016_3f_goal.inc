@@ -90,7 +90,7 @@ const EventSequenceDef gEvent016 = {
     0,
     0,
     0,
-    17,
+    EVENT_017_3F_DEMO,
     0,
     { 0, 0 },
     65535,

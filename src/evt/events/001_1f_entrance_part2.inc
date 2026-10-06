@@ -94,7 +94,7 @@ const EventSequenceDef gEvent001 = {
     0,
     0,
     0,
-    2,
+    EVENT_002_1F_TRAVERSE_TOWN_E0_1,
     0,
     { 0, 0 },
     65535,

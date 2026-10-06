@@ -19,6 +19,7 @@
 #include "system_state.h"
 #include "types.h"
 #include "debug_text.h"
+#include "event_ids.h"
 
 static u16 sDummyEntryIndex;
 
@@ -87,22 +88,22 @@ void DummyUpdateExit() {
             RequestMapMode();
             break;
         case 3:
-            RequestEventMode(6);
+            RequestEventMode(EVENT_006_1F_TRAVERSE_TOWN_E2);
             break;
         case 4:
-            RequestEventMode(0x14);
+            RequestEventMode(EVENT_020_4F_DEMO);
             break;
         case 5:
-            RequestEventMode(0x1C);
+            RequestEventMode(EVENT_028_6F_DEMO);
             break;
         case 6:
-            RequestEventMode(0x2C);
+            RequestEventMode(EVENT_044_11F_TWILIGHT_TOWN_E0);
             break;
         case 7:
-            RequestEventMode(0x3D);
+            RequestEventMode(EVENT_061_13F_ENTRANCE);
             break;
         case 8:
-            RequestEventMode(0x49);
+            RequestEventMode(EVENT_073_13F_CAPSULE_ROOM_ENDING);
             break;
         case 9:
         default:

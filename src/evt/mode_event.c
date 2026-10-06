@@ -31,6 +31,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "msg_api.h"
+#include "event_ids.h"
 
 static TaskPool sEventTaskPool;
 static u8 sEventPaused;
@@ -194,11 +195,7 @@ void EventUpdate() {
     }
 
     if (seqDef->toMap) {
-#ifdef VERSION_EU
-        if (sEventId == 148) {
-#else
-        if (sEventId == 150) {
-#endif
+        if (sEventId == EVENT_150_RIKU_B12F_ENTRANCE) {
             ModeRequest(&gModeWorldselect, 0);
         } else {
             AdvanceFloorStory();
@@ -210,42 +207,32 @@ void EventUpdate() {
 
     if (seqDef->nextEvent != 0xFFFF) {
         switch (seqDef->nextEvent) {
-        case 12:
-        case 14:
-        case 17:
-        case 20:
-        case 23:
-        case 28:
-        case 32:
-        case 35:
-        case 38:
-        case 42:
-        case 47:
-        case 50:
-        case 53:
-        case 58:
-        case 68:
-#ifdef VERSION_EU
-        case 155:
-        case 163:
-        case 166:
-        case 167:
-        case 173:
-        case 182:
-        case 189:
-#else
-        case 157:
-        case 165:
-        case 168:
-        case 169:
-        case 175:
-        case 184:
-        case 191:
-#endif
+        case EVENT_012_2F_ENTRANCE:
+        case EVENT_014_2F_DEMO:
+        case EVENT_017_3F_DEMO:
+        case EVENT_020_4F_DEMO:
+        case EVENT_023_5F_DEMO:
+        case EVENT_028_6F_DEMO:
+        case EVENT_032_8F_ENTRANCE:
+        case EVENT_035_8F_DEMO:
+        case EVENT_038_9F_DEMO:
+        case EVENT_042_10F_DEMO:
+        case EVENT_047_11F_DEMO_1:
+        case EVENT_050_11F_GOAL_3:
+        case EVENT_053_12F_DESTINY_ISLAND_E0:
+        case EVENT_058_12F_GOAL:
+        case EVENT_068_13F_CASTLE_OBLIVION_LAST3:
+        case EVENT_157_RIKU_B12F_DEMO:
+        case EVENT_165_RIKU_B8F_DEMO:
+        case EVENT_168_RIKU_B6F_DEMO:
+        case EVENT_169_RIKU_B5F_DEMO:
+        case EVENT_175_RIKU_B4F_DEMO:
+        case EVENT_184_RIKU_B3F_DEMO:
+        case EVENT_191_RIKU_B1F_ENTRANCE:
             AdvanceFloorStory();
             RequestMapMode();
             break;
-        case 61:
+        case EVENT_061_13F_ENTRANCE:
             AdvanceToExitHall();
             RequestMapMode();
             break;
@@ -354,20 +341,15 @@ void Event_2() {
 void RequestEventMode(u16 eventId) {
     ModeRequest(&gModeEvent, eventId);
 }
-#ifdef VERSION_EU
-#define MSG_CODE(n) ((n) - 2)
-#else
-#define MSG_CODE(n) (n)
-#endif
 
 void ShowEventEndMessage() {
     SetBackdropColor(0, 0, 0);
 
     switch (sEventId & 0x7FFF) {
-    case 41:
-    case 49:
-    case MSG_CODE(176):
-    case MSG_CODE(185):
+    case EVENT_041_10F_GOAL_2:
+    case EVENT_049_11F_GOAL_2:
+    case EVENT_176_RIKU_B3F_ENTRANCE:
+    case EVENT_185_RIKU_B2F_ENTRANCE:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -376,7 +358,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 173);
         break;
-    case 34:
+    case EVENT_034_8F_GOAL_2:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -385,7 +367,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 133);
         break;
-    case 88:
+    case EVENT_088_HALLOWEEN_TOWN_E0_2:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -394,7 +376,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 134);
         break;
-    case MSG_CODE(136):
+    case EVENT_136_100ACREWOOD_LV1:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -403,7 +385,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 139);
         break;
-    case MSG_CODE(137):
+    case EVENT_137_100ACREWOOD_LV2:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -412,7 +394,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 160);
         break;
-    case MSG_CODE(139):
+    case EVENT_139_100ACREWOOD_LV3:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -421,7 +403,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 159);
         break;
-    case MSG_CODE(140):
+    case EVENT_140_100ACREWOOD_LV4:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -430,7 +412,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 136);
         break;
-    case MSG_CODE(141):
+    case EVENT_141_100ACREWOOD_LV5:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -439,7 +421,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 137);
         break;
-    case MSG_CODE(142):
+    case EVENT_142_100ACREWOOD_LV6:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -448,7 +430,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 135);
         break;
-    case 61:
+    case EVENT_061_13F_ENTRANCE:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -457,7 +439,7 @@ void ShowEventEndMessage() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&sEventTaskPool, 138);
         break;
-    case 126:
+    case EVENT_126_COLISEUM_END:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -466,7 +448,7 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 162);
         break;
-    case 114:
+    case EVENT_114_AGRABAH_END:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -475,7 +457,7 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 161);
         break;
-    case 57:
+    case EVENT_057_12F_DESTINY_ISLAND_E3:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -484,8 +466,8 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 163);
         break;
-    case MSG_CODE(143):
-    case MSG_CODE(144):
+    case EVENT_143_100ACREWOOD_END_1ST_COMP:
+    case EVENT_144_100ACREWOOD_END_1ST_NO:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -494,10 +476,10 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 165);
         break;
-    case MSG_CODE(145):
-    case MSG_CODE(146):
-    case MSG_CODE(147):
-    case MSG_CODE(148):
+    case EVENT_145_100ACREWOOD_END_COMP:
+    case EVENT_146_100ACREWOOD_END_NO:
+    case EVENT_147_100ACREWOOD_END_COMPCOMP:
+    case EVENT_148_100ACREWOOD_END_SORAONLY:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -505,20 +487,20 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 166);
         break;
-    case 3:
-    case 44:
-    case 53:
-    case 74:
-    case 94:
-    case 101:
-    case 108:
-    case 115:
-    case 120:
-    case MSG_CODE(129):
-    case MSG_CODE(151):
-    case MSG_CODE(177):
-    case MSG_CODE(186):
-    case MSG_CODE(192):
+    case EVENT_003_1F_TRAVERSE_TOWN_E0_2:
+    case EVENT_044_11F_TWILIGHT_TOWN_E0:
+    case EVENT_053_12F_DESTINY_ISLAND_E0:
+    case EVENT_074_MONSTORO_E0:
+    case EVENT_094_WONDERLAND_E0:
+    case EVENT_101_ATLANTICA_E0:
+    case EVENT_108_AGRABAH_E0_2:
+    case EVENT_115_NEVERLAND_E0:
+    case EVENT_120_COLISEUM_E0:
+    case EVENT_129_HOLLOWBASTION_E0:
+    case EVENT_151_RIKU_B12F_E0:
+    case EVENT_177_RIKU_B3F_E0:
+    case EVENT_186_RIKU_B2F_E0:
+    case EVENT_192_RIKU_B1F_E0:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -527,17 +509,17 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 168);
         break;
-    case 54:
-    case 75:
-    case 89:
-    case 96:
-    case 102:
-    case 109:
-    case 116:
-    case 121:
-    case MSG_CODE(130):
-    case MSG_CODE(152):
-    case MSG_CODE(188):
+    case EVENT_054_12F_DESTINY_ISLAND_E1:
+    case EVENT_075_MONSTORO_E1:
+    case EVENT_089_HALLOWEEN_TOWN_E1:
+    case EVENT_096_WONDERLAND_E1_2:
+    case EVENT_102_ATLANTICA_E1:
+    case EVENT_109_AGRABAH_E1:
+    case EVENT_116_NEVERLAND_E1:
+    case EVENT_121_COLISEUM_E1:
+    case EVENT_130_HOLLOWBASTION_E1:
+    case EVENT_152_RIKU_B12F_E1:
+    case EVENT_188_RIKU_B2F_E1_2:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -546,7 +528,7 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 169);
         break;
-    case 5:
+    case EVENT_005_1F_TRAVERSE_TOWN_E1_2:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -555,16 +537,16 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 175);
         break;
-    case 6:
-    case 80:
-    case 90:
-    case 97:
-    case 103:
-    case 111:
-    case 117:
-    case 123:
-    case MSG_CODE(131):
-    case MSG_CODE(153):
+    case EVENT_006_1F_TRAVERSE_TOWN_E2:
+    case EVENT_080_MONSTORO_E2_5:
+    case EVENT_090_HALLOWEEN_TOWN_E2:
+    case EVENT_097_WONDERLAND_E2:
+    case EVENT_103_ATLANTICA_E2:
+    case EVENT_111_AGRABAH_E2_2:
+    case EVENT_117_NEVERLAND_E2:
+    case EVENT_123_COLISEUM_E2_2:
+    case EVENT_131_HOLLOWBASTION_E2:
+    case EVENT_153_RIKU_B12F_E2:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -573,7 +555,7 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 170);
         break;
-    case 119:
+    case EVENT_119_NEVERLAND_END:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -582,7 +564,7 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 172);
         break;
-    case 60:
+    case EVENT_060_12F_GOAL_3:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -591,9 +573,9 @@ void ShowEventEndMessage() {
         FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&sEventTaskPool, 164);
         break;
-    case 27:
-    case MSG_CODE(156):
-    case MSG_CODE(166):
+    case EVENT_027_6F_GOAL_3:
+    case EVENT_156_RIKU_B12F_GOAL_2:
+    case EVENT_166_RIKU_B7F_ENTRANCE:
         m4aSongNumStart(SONG_SYS_ITEMGET);
         DisableBg(0);
         DisableBg(1);
@@ -607,134 +589,134 @@ void ShowEventEndMessage() {
 
 void SetFriendsAfterEvent() {
     switch (sEventId) {
-    case 0:
+    case EVENT_000_1F_ENTRANCE_PART1:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 94:
+    case EVENT_094_WONDERLAND_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 74:
+    case EVENT_074_MONSTORO_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 88:
+    case EVENT_088_HALLOWEEN_TOWN_E0_2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_JACK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(62);
         break;
-    case 93:
+    case EVENT_093_HALLOWEEN_TOWN_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 107:
+    case EVENT_107_AGRABAH_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_ALADDIN);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(61);
         break;
-    case 114:
+    case EVENT_114_AGRABAH_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 103:
+    case EVENT_103_ATLANTICA_E2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_ARIEL);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(63);
         break;
-    case 106:
+    case EVENT_106_ATLANTICA_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case MSG_CODE(131):
+    case EVENT_131_HOLLOWBASTION_E2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_THE_BEAST);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(65);
         break;
-    case MSG_CODE(133):
+    case EVENT_133_HOLLOWBASTION_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 117:
+    case EVENT_117_NEVERLAND_E2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 116:
-    case 118:
+    case EVENT_116_NEVERLAND_E1:
+    case EVENT_118_NEVERLAND_E3:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_PETER_PAN);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(64);
         break;
-    case 119:
+    case EVENT_119_NEVERLAND_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 120:
+    case EVENT_120_COLISEUM_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 44:
+    case EVENT_044_11F_TWILIGHT_TOWN_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 59:
+    case EVENT_059_12F_GOAL_2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case 52:
-    case MSG_CODE(149):
+    case EVENT_052_12F_ENTRANCE:
+    case EVENT_149_RIKU_B12F_OPNING:
         gGameState.progression.friendFlags = 0;
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
-    case MSG_CODE(155):
+    case EVENT_155_RIKU_B12F_GOAL:
         gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
         LearnStock(69);
         break;
-    case MSG_CODE(174):
-    case MSG_CODE(186):
+    case EVENT_174_RIKU_B4F_GOAL_3:
+    case EVENT_186_RIKU_B2F_E0:
         gGameState.progression.friendFlags = 0;
         break;
-    case MSG_CODE(185):
-    case MSG_CODE(190):
+    case EVENT_185_RIKU_B2F_ENTRANCE:
+    case EVENT_190_RIKU_B2F_GOAL:
         gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
         break;
-    case MSG_CODE(156):
+    case EVENT_156_RIKU_B12F_GOAL_2:
         gGameState.flags &= ~GAME_FLAG_DARK_POINTS_LOCKED;
         LearnStock(66);
         LearnStock(67);
@@ -745,110 +727,110 @@ void SetFriendsAfterEvent() {
 
 void GrantRewardsAfterEvent() {
     switch (sEventId) {
-    case 0:
+    case EVENT_000_1F_ENTRANCE_PART1:
         gGameState.availableWorlds = 0x200;
         break;
-    case 5:
+    case EVENT_005_1F_TRAVERSE_TOWN_E1_2:
         ObtainCard(CARD_ID(CARD_SIMBA, 6));
         break;
-    case 11:
+    case EVENT_011_1F_GOAL_2:
         gGameState.availableWorlds = 61;
         break;
-    case 27:
+    case EVENT_027_6F_GOAL_3:
         gGameState.availableWorlds = 0x4C2;
         break;
-    case 41:
+    case EVENT_041_10F_GOAL_2:
         gGameState.availableWorlds = 0x800;
         break;
-    case 49:
+    case EVENT_049_11F_GOAL_2:
         gGameState.availableWorlds = 256;
         break;
-    case 60:
+    case EVENT_060_12F_GOAL_3:
         gGameState.availableWorlds = 0x1000;
         ObtainCard(CARD_ID(CARD_OBLIVION, 6));
         break;
-    case 57:
+    case EVENT_057_12F_DESTINY_ISLAND_E3:
         ObtainCard(CARD_ID(CARD_OATHKEEPER, 4));
         break;
-    case 3:
-    case 44:
-    case 53:
-    case 61:
-    case 74:
-    case 88:
-    case 94:
-    case 101:
-    case 108:
-    case 115:
-    case 120:
-    case MSG_CODE(129):
-    case MSG_CODE(151):
-    case MSG_CODE(177):
-    case MSG_CODE(186):
-    case MSG_CODE(192):
+    case EVENT_003_1F_TRAVERSE_TOWN_E0_2:
+    case EVENT_044_11F_TWILIGHT_TOWN_E0:
+    case EVENT_053_12F_DESTINY_ISLAND_E0:
+    case EVENT_061_13F_ENTRANCE:
+    case EVENT_074_MONSTORO_E0:
+    case EVENT_088_HALLOWEEN_TOWN_E0_2:
+    case EVENT_094_WONDERLAND_E0:
+    case EVENT_101_ATLANTICA_E0:
+    case EVENT_108_AGRABAH_E0_2:
+    case EVENT_115_NEVERLAND_E0:
+    case EVENT_120_COLISEUM_E0:
+    case EVENT_129_HOLLOWBASTION_E0:
+    case EVENT_151_RIKU_B12F_E0:
+    case EVENT_177_RIKU_B3F_E0:
+    case EVENT_186_RIKU_B2F_E0:
+    case EVENT_192_RIKU_B1F_E0:
         AddMapCard(221);
         break;
-    case 4:
-    case 54:
-    case 75:
-    case 89:
-    case 96:
-    case 102:
-    case 109:
-    case 116:
-    case 121:
-    case MSG_CODE(130):
-    case MSG_CODE(152):
-    case MSG_CODE(188):
+    case EVENT_004_1F_TRAVERSE_TOWN_E1_1:
+    case EVENT_054_12F_DESTINY_ISLAND_E1:
+    case EVENT_075_MONSTORO_E1:
+    case EVENT_089_HALLOWEEN_TOWN_E1:
+    case EVENT_096_WONDERLAND_E1_2:
+    case EVENT_102_ATLANTICA_E1:
+    case EVENT_109_AGRABAH_E1:
+    case EVENT_116_NEVERLAND_E1:
+    case EVENT_121_COLISEUM_E1:
+    case EVENT_130_HOLLOWBASTION_E1:
+    case EVENT_152_RIKU_B12F_E1:
+    case EVENT_188_RIKU_B2F_E1_2:
         AddMapCard(231);
         break;
-    case 6:
-    case 80:
-    case 90:
-    case 97:
-    case 103:
-    case 111:
-    case 117:
-    case 123:
-    case MSG_CODE(131):
-    case MSG_CODE(153):
+    case EVENT_006_1F_TRAVERSE_TOWN_E2:
+    case EVENT_080_MONSTORO_E2_5:
+    case EVENT_090_HALLOWEEN_TOWN_E2:
+    case EVENT_097_WONDERLAND_E2:
+    case EVENT_103_ATLANTICA_E2:
+    case EVENT_111_AGRABAH_E2_2:
+    case EVENT_117_NEVERLAND_E2:
+    case EVENT_123_COLISEUM_E2_2:
+    case EVENT_131_HOLLOWBASTION_E2:
+    case EVENT_153_RIKU_B12F_E2:
         AddMapCard(241);
         break;
-    case 114:
+    case EVENT_114_AGRABAH_END:
         ObtainCard(CARD_ID(CARD_GENIE, 6));
         break;
-    case 119:
+    case EVENT_119_NEVERLAND_END:
         ObtainCard(CARD_ID(CARD_TINKER_BELL, 4));
         break;
-    case 126:
+    case EVENT_126_COLISEUM_END:
         ObtainCard(CARD_ID(CARD_CLOUD, 4));
         break;
-    case MSG_CODE(137):
+    case EVENT_137_100ACREWOOD_LV2:
         ObtainCard(CARD_ID(CARD_SPELLBINDER, 4));
         break;
-    case MSG_CODE(139):
+    case EVENT_139_100ACREWOOD_LV3:
         ObtainCard(CARD_ID(CARD_ELIXIR, 1));
         break;
-    case MSG_CODE(143):
-    case MSG_CODE(144):
+    case EVENT_143_100ACREWOOD_END_1ST_COMP:
+    case EVENT_144_100ACREWOOD_END_1ST_NO:
         ObtainCard(CARD_ID(CARD_BAMBI, 5));
         break;
-    case MSG_CODE(149):
+    case EVENT_149_RIKU_B12F_OPNING:
         gGameState.availableWorlds = 128;
         break;
-    case MSG_CODE(156):
+    case EVENT_156_RIKU_B12F_GOAL_2:
         gGameState.availableWorlds = 593;
         break;
-    case MSG_CODE(166):
+    case EVENT_166_RIKU_B7F_ENTRANCE:
         gGameState.availableWorlds = 46;
         break;
-    case MSG_CODE(176):
+    case EVENT_176_RIKU_B3F_ENTRANCE:
         gGameState.availableWorlds = 256;
         break;
-    case MSG_CODE(185):
+    case EVENT_185_RIKU_B2F_ENTRANCE:
         gGameState.availableWorlds = 0x800;
         break;
-    case MSG_CODE(191):
+    case EVENT_191_RIKU_B1F_ENTRANCE:
         gGameState.availableWorlds = 0x1000;
         break;
     }
@@ -858,11 +840,11 @@ void HandleYesAnswerAfterEvent() {
     const EventSequenceDef* seqDef = gEventSequenceDefs[sEventId];
 
     switch (sEventId) {
-    case 68:
+    case EVENT_068_13F_CASTLE_OBLIVION_LAST3:
         ModeRequest(&gModeEvent, 69);
         break;
-    case 83:
-    case 84:
+    case EVENT_083_MONSTORO_E3_FAILURE_1:
+    case EVENT_084_MONSTORO_E3_FAILURE_2:
         gGameState.battleStage = BATTLE_STAGE_MONSTRO;
         ModeRequest(&gModeBattle, seqDef->battleId);
         break;
@@ -871,9 +853,9 @@ void HandleYesAnswerAfterEvent() {
 
 u8 HandleNoAnswerAfterEvent() {
     switch (sEventId) {
-    case 0x44:
-    case 0x53:
-    case 0x54:
+    case EVENT_068_13F_CASTLE_OBLIVION_LAST3:
+    case EVENT_083_MONSTORO_E3_FAILURE_1:
+    case EVENT_084_MONSTORO_E3_FAILURE_2:
         RequestMapMode();
         return 1;
     }
@@ -883,77 +865,72 @@ u8 HandleNoAnswerAfterEvent() {
 
 void UnlockCardKindsAfterEvent() {
     switch (sEventId) {
-    case 2:
+    case EVENT_002_1F_TRAVERSE_TOWN_E0_1:
         SetCardKindObtained(0);
         break;
-    case MSG_CODE(136):
+    case EVENT_136_100ACREWOOD_LV1:
         LearnStock(41);
         break;
-    case MSG_CODE(140):
+    case EVENT_140_100ACREWOOD_LV4:
         LearnStock(40);
         break;
-    case MSG_CODE(141):
+    case EVENT_141_100ACREWOOD_LV5:
         LearnStock(50);
         break;
-    case MSG_CODE(142):
+    case EVENT_142_100ACREWOOD_LV6:
         LearnStock(43);
         break;
-    case 34:
+    case EVENT_034_8F_GOAL_2:
         LearnStock(38);
         break;
-    case 88:
+    case EVENT_088_HALLOWEEN_TOWN_E0_2:
         LearnStock(42);
         break;
-    case 108:
+    case EVENT_108_AGRABAH_E0_2:
         SetCardKindObtained(1);
         break;
-    case 74:
+    case EVENT_074_MONSTORO_E0:
         SetCardKindObtained(5);
         break;
-    case 120:
+    case EVENT_120_COLISEUM_E0:
         SetCardKindObtained(8);
         break;
-    case 94:
+    case EVENT_094_WONDERLAND_E0:
         SetCardKindObtained(10);
         break;
-    case 101:
+    case EVENT_101_ATLANTICA_E0:
         SetCardKindObtained(2);
         break;
-    case 115:
+    case EVENT_115_NEVERLAND_E0:
         SetCardKindObtained(4);
         break;
-    case MSG_CODE(129):
+    case EVENT_129_HOLLOWBASTION_E0:
         SetCardKindObtained(11);
         break;
-    case 87:
+    case EVENT_087_HALLOWEEN_TOWN_E0:
         SetCardKindObtained(3);
         break;
-    case 59:
+    case EVENT_059_12F_GOAL_2:
         SetCardKindObtained(13);
         break;
-    case 61:
+    case EVENT_061_13F_ENTRANCE:
         LearnStock(8);
         break;
-    case 67:
+    case EVENT_067_13F_CASTLE_OBLIVION_LAST2:
         SetCardKindObtained(15);
         SetCardKindObtained(16);
         break;
     }
 }
-#ifdef VERSION_EU
-#define MSG_SAVE_ID_LO 0x8D
-#else
-#define MSG_SAVE_ID_LO 0x8F
-#endif
 
 void SaveAfterEvent() {
     switch (sEventId) {
-    case MSG_SAVE_ID_LO + 0:
-    case MSG_SAVE_ID_LO + 1:
-    case MSG_SAVE_ID_LO + 2:
-    case MSG_SAVE_ID_LO + 3:
-    case MSG_SAVE_ID_LO + 4:
-    case MSG_SAVE_ID_LO + 5:
+    case EVENT_143_100ACREWOOD_END_1ST_COMP:
+    case EVENT_144_100ACREWOOD_END_1ST_NO:
+    case EVENT_145_100ACREWOOD_END_COMP:
+    case EVENT_146_100ACREWOOD_END_NO:
+    case EVENT_147_100ACREWOOD_END_COMPCOMP:
+    case EVENT_148_100ACREWOOD_END_SORAONLY:
         if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
             SaveWriteFileLarge(1);
         } else {
@@ -967,12 +944,12 @@ void SaveAfterEvent() {
 
 void EnterExitHallAfterEvent() {
     switch (sEventId) {
-    case MSG_SAVE_ID_LO + 0:
-    case MSG_SAVE_ID_LO + 1:
-    case MSG_SAVE_ID_LO + 2:
-    case MSG_SAVE_ID_LO + 3:
-    case MSG_SAVE_ID_LO + 4:
-    case MSG_SAVE_ID_LO + 5:
+    case EVENT_143_100ACREWOOD_END_1ST_COMP:
+    case EVENT_144_100ACREWOOD_END_1ST_NO:
+    case EVENT_145_100ACREWOOD_END_COMP:
+    case EVENT_146_100ACREWOOD_END_NO:
+    case EVENT_147_100ACREWOOD_END_COMPCOMP:
+    case EVENT_148_100ACREWOOD_END_SORAONLY:
         EnterExitHall();
         break;
     }
@@ -980,10 +957,10 @@ void EnterExitHallAfterEvent() {
 
 void SetJiminyFlagsAfterEvent() {
     switch (sEventId) {
-    case 0x43:
+    case EVENT_067_13F_CASTLE_OBLIVION_LAST2:
         SetJiminyFlag(16);
         break;
-    case 0x3F:
+    case EVENT_063_13F_CASTLE_OBLIVION_E1:
         SetJiminyFlag(41);
         break;
     }

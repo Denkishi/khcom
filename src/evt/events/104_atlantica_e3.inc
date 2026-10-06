@@ -143,7 +143,7 @@ const EventSequenceDef gEvent104 = {
     0,
     0,
     0,
-    105,
+    EVENT_105_ATLANTICA_BOSS,
     0,
     { 0, 0 },
     65535,

@@ -66,6 +66,7 @@
 #include "card_deckmenu2.h"
 #include "map_room_tables.h"
 #include "sprite_palettes.h"
+#include "event_ids.h"
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];
@@ -2909,8 +2910,8 @@ void MapFldExitRoom() {
     switch (door->kind) {
     case 1:
     case 3:
-        if (roomEvent[1] == 0x51 && (gGameState.flags & GAME_FLAG_MONSGAGE_BATTLE)) {
-            RequestEventMode(0x55);
+        if (roomEvent[1] == EVENT_081_MONSTORO_E3 && (gGameState.flags & GAME_FLAG_MONSGAGE_BATTLE)) {
+            RequestEventMode(EVENT_085_MONSTORO_E3_RETRY);
         } else {
             RequestEventMode(roomEvent[1]);
         }
@@ -3202,29 +3203,13 @@ u8 GetWorldEntryEventId() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gMapFloorState.world) {
         case WORLD_HOLLOW_BASTION:
-#ifdef VERSION_EU
-            return 0x95;
-#else
-            return 0x97;
-#endif
+            return EVENT_151_RIKU_B12F_E0;
         case WORLD_DESTINY_ISLANDS:
-#ifdef VERSION_EU
-            return 0xAF;
-#else
-            return 0xB1;
-#endif
+            return EVENT_177_RIKU_B3F_E0;
         case WORLD_TWILIGHT_TOWN:
-#ifdef VERSION_EU
-            return 0xB8;
-#else
-            return 0xBA;
-#endif
+            return EVENT_186_RIKU_B2F_E0;
         case WORLD_CASTLE_OBLIVION:
-#ifdef VERSION_EU
-            return 0xBE;
-#else
-            return 0xC0;
-#endif
+            return EVENT_192_RIKU_B1F_E0;
         }
 
         return 0xFF;
@@ -3313,11 +3298,7 @@ void MapFixLeaveEntranceHall() {
             gMapFloorState.entrySide = 0;
             ModeRequest(&gModeWorldselect, 0);
         } else if (gMapFloorState.world == WORLD_100_ACRE_WOOD) {
-#ifdef VERSION_EU
-            RequestEventMode(0x85);
-#else
-            RequestEventMode(0x87);
-#endif
+            RequestEventMode(EVENT_135_100ACREWOOD_START_RETRY);
         } else if (GetWorldEntryEventId() != 0xFF) {
             sMapFixEventDelay = 60;
             MapFixSetUpdateAndRun(MapFixWaitWorldEvent);
@@ -3852,11 +3833,7 @@ void NewGameSlotMenuExit(NewGameSlotMenuWork* work) {
     if (work->confirmed) {
         if (work->isRiku != 0) {
             SetupRikuNewGame();
-#ifdef VERSION_EU
-            RequestEventMode(0x93);
-#else
-            RequestEventMode(0x95);
-#endif
+            RequestEventMode(EVENT_149_RIKU_B12F_OPNING);
         } else {
             SetupSoraNewGame();
             ModeRequestHeapReset(&gModeMovie, 1);
@@ -6671,13 +6648,37 @@ static const char sModeNameMapDbg[] = "Mode_MapDbg";
 
 static const char sModeNameMapFld[] = "Mode_MapFld";
 
-const u8 gSoraFloorEvents[13] = { 12, 14, 17, 20, 23, 28, 32, 35, 38, 42, 50, 255, 68 };
+const u8 gSoraFloorEvents[13] = {
+    EVENT_012_2F_ENTRANCE,
+    EVENT_014_2F_DEMO,
+    EVENT_017_3F_DEMO,
+    EVENT_020_4F_DEMO,
+    EVENT_023_5F_DEMO,
+    EVENT_028_6F_DEMO,
+    EVENT_032_8F_ENTRANCE,
+    EVENT_035_8F_DEMO,
+    EVENT_038_9F_DEMO,
+    EVENT_042_10F_DEMO,
+    EVENT_050_11F_GOAL_3,
+    255,
+    EVENT_068_13F_CASTLE_OBLIVION_LAST3,
+};
 
-#ifdef VERSION_EU
-const u8 gRikuFloorEvents[13] = { 155, 157, 255, 160, 163, 165, 166, 167, 173, 182, 189, 255, 0 };
-#else
-const u8 gRikuFloorEvents[13] = { 157, 159, 255, 162, 165, 167, 168, 169, 175, 184, 191, 255, 0 };
-#endif
+const u8 gRikuFloorEvents[13] = {
+    EVENT_157_RIKU_B12F_DEMO,
+    EVENT_159_RIKU_B11F_DEMO,
+    255,
+    EVENT_162_RIKU_B9F_DEMO,
+    EVENT_165_RIKU_B8F_DEMO,
+    EVENT_167_RIKU_B7F_DEMO,
+    EVENT_168_RIKU_B6F_DEMO,
+    EVENT_169_RIKU_B5F_DEMO,
+    EVENT_175_RIKU_B4F_DEMO,
+    EVENT_184_RIKU_B3F_DEMO,
+    EVENT_191_RIKU_B1F_ENTRANCE,
+    255,
+    0,
+};
 
 static const char sModeNameMapFix[] = "Mode_MapFix";
 
@@ -6758,37 +6759,20 @@ Mode gModeMapFld = {
 };
 
 u8 gWorldEntryEvents[14] = {
-#ifdef VERSION_EU
     255,
-    107,
-    101,
-    120,
-    94,
-    74,
-    87,
-    115,
-    127,
-    53,
-    2,
-    44,
-    61,
-    133,
-#else
-    255,
-    107,
-    101,
-    120,
-    94,
-    74,
-    87,
-    115,
-    129,
-    53,
-    2,
-    44,
-    61,
-    135,
-#endif
+    EVENT_107_AGRABAH_E0,
+    EVENT_101_ATLANTICA_E0,
+    EVENT_120_COLISEUM_E0,
+    EVENT_094_WONDERLAND_E0,
+    EVENT_074_MONSTORO_E0,
+    EVENT_087_HALLOWEEN_TOWN_E0,
+    EVENT_115_NEVERLAND_E0,
+    EVENT_129_HOLLOWBASTION_E0,
+    EVENT_053_12F_DESTINY_ISLAND_E0,
+    EVENT_002_1F_TRAVERSE_TOWN_E0_1,
+    EVENT_044_11F_TWILIGHT_TOWN_E0,
+    EVENT_061_13F_ENTRANCE,
+    EVENT_135_100ACREWOOD_START_RETRY,
 };
 
 Mode gModeMapFix = {

@@ -33,6 +33,7 @@
 #include "movie_subtitle_text.h"
 #include "movies.h"
 #include "text_types.h"
+#include "event_ids.h"
 
 static vu16 sMovieModeState;
 static s32 sMovieId;
@@ -883,13 +884,13 @@ void mode_movie_1() {
         } else {
             switch (sMovieId) {
             case 1:
-                RequestEventMode(0);
+                RequestEventMode(EVENT_000_1F_ENTRANCE_PART1);
                 break;
             case 2:
-                RequestEventMode(26);
+                RequestEventMode(EVENT_026_6F_GOAL_2);
                 break;
             case 3:
-                RequestEventMode(57);
+                RequestEventMode(EVENT_057_12F_DESTINY_ISLAND_E3);
                 break;
             case 4:
                 ModeRequest(&gModeStaffRoll, 0);

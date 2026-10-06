@@ -68,7 +68,7 @@ const EventSequenceDef gEvent042 = {
     0,
     0,
     0,
-    43,
+    EVENT_043_11F_ENTRANCE,
     0,
     { 0, 0 },
     65535,

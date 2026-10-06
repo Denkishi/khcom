@@ -45,6 +45,7 @@
 #include <stddef.h>
 #include "hum_common.h"
 #include "card_deckmenu2.h"
+#include "event_ids.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);
@@ -2274,55 +2275,27 @@ void ExitBattle() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gBtlWork->battleId) {
         case 166:
-#ifdef VERSION_EU
-            RequestEventMode(154);
-#else
-            RequestEventMode(156);
-#endif
+            RequestEventMode(EVENT_156_RIKU_B12F_GOAL_2);
             return;
         case 176:
-#ifdef VERSION_EU
-            RequestEventMode(159);
-#else
-            RequestEventMode(161);
-#endif
+            RequestEventMode(EVENT_161_RIKU_B10F_GOAL_2);
             return;
         case 171:
-#ifdef VERSION_EU
-            RequestEventMode(162);
-#else
-            RequestEventMode(164);
-#endif
+            RequestEventMode(EVENT_164_RIKU_B8F_GOAL_2);
             return;
         case 167:
-#ifdef VERSION_EU
-            RequestEventMode(170);
-#else
-            RequestEventMode(172);
-#endif
+            RequestEventMode(EVENT_172_RIKU_B4F_GOAL_2);
             return;
         case 154:
-#ifdef VERSION_EU
-            RequestEventMode(179);
-#else
-            RequestEventMode(181);
-#endif
+            RequestEventMode(EVENT_181_RIKU_B3F_E2_2);
             return;
         case 172:
-#ifdef VERSION_EU
-            RequestEventMode(186);
-#else
-            RequestEventMode(188);
-#endif
+            RequestEventMode(EVENT_188_RIKU_B2F_E1_2);
             return;
         case 177:
             gGameState.flags |= GAME_FLAG_RIKU_CLEAR;
             SaveWriteHeader(-1);
-#ifdef VERSION_EU
-            RequestEventMode(192);
-#else
-            RequestEventMode(194);
-#endif
+            RequestEventMode(EVENT_194_RIKU_B1F_LAST2);
             return;
         default:
             if (gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) {
@@ -2340,107 +2313,103 @@ void ExitBattle() {
     } else {
         switch (gBtlWork->battleId) {
         case 120:
-            RequestEventMode(96);
+            RequestEventMode(EVENT_096_WONDERLAND_E1_2);
             return;
         case 121:
             if (gBtlWork->flags & BTL_FLAG_ESCAPED) {
-                RequestEventMode(84);
+                RequestEventMode(EVENT_084_MONSTORO_E3_FAILURE_2);
             } else if (gBtlWork->flags & 0x100000) {
-                RequestEventMode(82);
+                RequestEventMode(EVENT_082_MONSTORO_E3_SUCCESS);
             } else {
-                RequestEventMode(83);
+                RequestEventMode(EVENT_083_MONSTORO_E3_FAILURE_1);
             }
 
             return;
         case 122:
-            RequestEventMode(88);
+            RequestEventMode(EVENT_088_HALLOWEEN_TOWN_E0_2);
             return;
         case 123:
-            RequestEventMode(108);
+            RequestEventMode(EVENT_108_AGRABAH_E0_2);
             return;
         case 124:
-            RequestEventMode(111);
+            RequestEventMode(EVENT_111_AGRABAH_E2_2);
             return;
         case 148:
-            RequestEventMode(9);
+            RequestEventMode(EVENT_009_1F_TRAVERSE_TOWN_E4);
             return;
         case 149:
-            RequestEventMode(114);
+            RequestEventMode(EVENT_114_AGRABAH_END);
             return;
         case 150:
-            RequestEventMode(100);
+            RequestEventMode(EVENT_100_WONDERLAND_END);
             return;
         case 151:
-            RequestEventMode(106);
+            RequestEventMode(EVENT_106_ATLANTICA_END);
             return;
         case 152:
-            RequestEventMode(78);
+            RequestEventMode(EVENT_078_MONSTORO_E2_3);
             return;
         case 153:
-#ifdef VERSION_EU
-            RequestEventMode(131);
-#else
-            RequestEventMode(133);
-#endif
+            RequestEventMode(EVENT_133_HOLLOWBASTION_END);
             return;
         case 154:
-            RequestEventMode(56);
+            RequestEventMode(EVENT_056_12F_DESTINY_ISLAND_E2_2);
             return;
         case 155:
-            RequestEventMode(93);
+            RequestEventMode(EVENT_093_HALLOWEEN_TOWN_END);
             return;
         case 156:
             gGameState.flags |= GAME_FLAG_SORA_CLEAR;
             SaveWriteHeader(-1);
-            RequestEventMode(71);
+            RequestEventMode(EVENT_071_13F_CASTLE_OBLIVION_LAST6);
             return;
         case 157:
-            RequestEventMode(6);
+            RequestEventMode(EVENT_006_1F_TRAVERSE_TOWN_E2);
             return;
         case 158:
-            RequestEventMode(119);
+            RequestEventMode(EVENT_119_NEVERLAND_END);
             return;
         case 159:
-            RequestEventMode(123);
+            RequestEventMode(EVENT_123_COLISEUM_E2_2);
             return;
         case 160:
-            RequestEventMode(126);
+            RequestEventMode(EVENT_126_COLISEUM_END);
             return;
         case 161:
-            RequestEventMode(31);
+            RequestEventMode(EVENT_031_7F_GOAL_2);
             return;
         case 162:
-            RequestEventMode(11);
+            RequestEventMode(EVENT_011_1F_GOAL_2);
             return;
         case 163:
-            RequestEventMode(27);
+            RequestEventMode(EVENT_027_6F_GOAL_3);
             return;
         case 164:
-            RequestEventMode(41);
+            RequestEventMode(EVENT_041_10F_GOAL_2);
             return;
         case 165:
-            RequestEventMode(67);
+            RequestEventMode(EVENT_067_13F_CASTLE_OBLIVION_LAST2);
             return;
         case 168:
-            RequestEventMode(34);
+            RequestEventMode(EVENT_034_8F_GOAL_2);
             return;
         case 169:
-            RequestEventMode(49);
+            RequestEventMode(EVENT_049_11F_GOAL_2);
             return;
         case 173:
-            RequestEventMode(65);
+            RequestEventMode(EVENT_065_13F_CASTLE_OBLIVION_E1_3);
             return;
         case 174:
-            RequestEventMode(60);
+            RequestEventMode(EVENT_060_12F_GOAL_3);
             return;
         case 175:
-            RequestEventMode(46);
+            RequestEventMode(EVENT_046_11F_TWILIGHT_TOWN_E1_2);
             return;
         case 178:
-            RequestEventMode(3);
+            RequestEventMode(EVENT_003_1F_TRAVERSE_TOWN_E0_2);
             return;
         case 179:
-            RequestEventMode(5);
+            RequestEventMode(EVENT_005_1F_TRAVERSE_TOWN_E1_2);
             return;
         case 170:
             AdvanceFloorStory();

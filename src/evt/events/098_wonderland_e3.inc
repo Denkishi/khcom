@@ -167,7 +167,7 @@ const EventSequenceDef gEvent098 = {
     0,
     0,
     0,
-    99,
+    EVENT_099_WONDERLAND_BOSS,
     0,
     { 0, 0 },
     65535,

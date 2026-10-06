@@ -122,7 +122,7 @@ const EventSequenceDef gEvent022 = {
     0,
     0,
     0,
-    23,
+    EVENT_023_5F_DEMO,
     0,
     { 0, 0 },
     65535,

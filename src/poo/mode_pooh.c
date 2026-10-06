@@ -30,6 +30,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "event_ids.h"
 
 Mode gModePooh = {
     "mode_pooh",
@@ -568,11 +569,7 @@ void mode_pooh_1() {
     SetPooMapBeeVisible(0);
 
     if (sModePoohExiting && !FadeIsActive()) {
-#ifdef VERSION_EU
-        if (sModePoohExitEvent == 195) {
-#else
-        if (sModePoohExitEvent == 197) {
-#endif
+        if (sModePoohExitEvent == EVENT_COUNT) {
             EnterEntranceHall();
         } else {
             RequestEventMode(sModePoohExitEvent);
@@ -589,11 +586,7 @@ void mode_pooh_1() {
         } else if (!IsMessageWindowOpen()) {
             if (sModePoohMessage == 0xFFFE) {
                 if (IsMessageWindowAnswerYes()) {
-#ifdef VERSION_EU
-                    ExitPoohMode(195);
-#else
-                    ExitPoohMode(197);
-#endif
+                    ExitPoohMode(EVENT_COUNT);
                 } else {
 #ifdef VERSION_EU
                     sModePoohMessage = 179;
@@ -603,11 +596,7 @@ void mode_pooh_1() {
                 }
             } else if (sModePoohMessage == 0xFFFD) {
                 if (IsMessageWindowAnswerYes()) {
-#ifdef VERSION_EU
-                    ExitPoohMode(146);
-#else
-                    ExitPoohMode(148);
-#endif
+                    ExitPoohMode(EVENT_148_100ACREWOOD_END_SORAONLY);
                 } else {
 #ifdef VERSION_EU
                     sModePoohMessage = 179;

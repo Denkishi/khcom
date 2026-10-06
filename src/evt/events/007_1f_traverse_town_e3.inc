@@ -132,7 +132,7 @@ const EventSequenceDef gEvent007 = {
     0,
     0,
     0,
-    8,
+    EVENT_008_1F_BATTLE_GUARDARMOR,
     0,
     { 0, 0 },
     65535,

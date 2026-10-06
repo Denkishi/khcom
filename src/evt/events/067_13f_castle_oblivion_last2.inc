@@ -161,7 +161,7 @@ const EventSequenceDef gEvent067 = {
     0,
     0,
     0,
-    68,
+    EVENT_068_13F_CASTLE_OBLIVION_LAST3,
     0,
     { 0, 0 },
     65535,

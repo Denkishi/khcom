@@ -190,7 +190,7 @@ const EventSequenceDef gEvent124 = {
     0,
     0,
     0,
-    125,
+    EVENT_125_COLISEUM_BOSS,
     0,
     { 0, 0 },
     65535,

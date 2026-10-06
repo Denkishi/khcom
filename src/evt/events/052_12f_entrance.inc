@@ -67,7 +67,7 @@ const EventSequenceDef gEvent052 = {
     0,
     0,
     0,
-    53,
+    EVENT_053_12F_DESTINY_ISLAND_E0,
     0,
     { 0, 0 },
     65535,

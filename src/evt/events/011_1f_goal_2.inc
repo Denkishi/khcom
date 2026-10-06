@@ -240,7 +240,7 @@ const EventSequenceDef gEvent011 = {
     0,
     0,
     0,
-    12,
+    EVENT_012_2F_ENTRANCE,
     0,
     { 61, 0 },
     65535,

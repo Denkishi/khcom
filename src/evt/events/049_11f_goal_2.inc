@@ -119,7 +119,7 @@ const EventSequenceDef gEvent049 = {
     0,
     0,
     0,
-    50,
+    EVENT_050_11F_GOAL_3,
     0,
     { 0, 0 },
     65535,

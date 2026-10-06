@@ -46,6 +46,7 @@
 #include "default_bg_map.h"
 #include "event_backgrounds.h"
 #include "sprite_palettes.h"
+#include "event_ids.h"
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);
@@ -571,11 +572,7 @@ void UpdatePoohStumpCircle(PoohWork* work) {
 
         if (work->stumpCount > 3) {
             if (!IsPooEventDone(1)) {
-#ifdef VERSION_EU
-                ExitPoohMode(0x8B);
-#else
-                ExitPoohMode(0x8D);
-#endif
+                ExitPoohMode(EVENT_141_100ACREWOOD_LV5);
                 SetPooEventDone(1);
                 SetJiminyFlag(0x52);
             }
@@ -911,19 +908,11 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
         }
 
         if (!IsPooEventDone(3)) {
-#ifdef VERSION_EU
-            ExitPoohMode(135);
-#else
-            ExitPoohMode(137);
-#endif
+            ExitPoohMode(EVENT_137_100ACREWOOD_LV2);
             SetPooEventDone(3);
             SetJiminyFlag(79);
         } else {
-#ifdef VERSION_EU
-            ExitPoohMode(136);
-#else
-            ExitPoohMode(138);
-#endif
+            ExitPoohMode(EVENT_138_100ACREWOOD_LV2_RETRY);
         }
 
         break;
@@ -2831,43 +2820,23 @@ u16 CheckPooSoraExit(PooPos* pos) {
 
             if (AreAllPooEventsDone()) {
                 if (IsPooFlagSet(1)) {
-#ifdef VERSION_EU
-                    ExitPoohMode(0x91);
-#else
-                    ExitPoohMode(0x93);
-#endif
+                    ExitPoohMode(EVENT_147_100ACREWOOD_END_COMPCOMP);
                 } else if (!IsPooFlagSet(0)) {
                     SetPooFlag(0);
                     SetPooFlag(1);
                     SetJiminyFlag(77);
-#ifdef VERSION_EU
-                    ExitPoohMode(0x8D);
-#else
-                    ExitPoohMode(0x8F);
-#endif
+                    ExitPoohMode(EVENT_143_100ACREWOOD_END_1ST_COMP);
                 } else {
                     SetPooFlag(1);
                     SetJiminyFlag(77);
-#ifdef VERSION_EU
-                    ExitPoohMode(0x8F);
-#else
-                    ExitPoohMode(0x91);
-#endif
+                    ExitPoohMode(EVENT_145_100ACREWOOD_END_COMP);
                 }
             } else if (!IsPooFlagSet(0)) {
                 SetPooFlag(0);
                 SetJiminyFlag(77);
-#ifdef VERSION_EU
-                ExitPoohMode(0x8E);
-#else
-                ExitPoohMode(0x90);
-#endif
+                ExitPoohMode(EVENT_144_100ACREWOOD_END_1ST_NO);
             } else {
-#ifdef VERSION_EU
-                ExitPoohMode(0x90);
-#else
-                ExitPoohMode(0x92);
-#endif
+                ExitPoohMode(EVENT_146_100ACREWOOD_END_NO);
             }
         } else {
             OpenPoohModeMessage(0xFFFD);
@@ -4123,11 +4092,7 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
         gPoohRequestX = work->x;
         gPoohRequestY = work->y;
         gPoohRequest = POOH_REQUEST_PIGLET;
-#ifdef VERSION_EU
-        ExitPoohMode(134);
-#else
-        ExitPoohMode(136);
-#endif
+        ExitPoohMode(EVENT_136_100ACREWOOD_LV1);
         SetPooEventDone(0);
         SetJiminyFlag(78);
     }
@@ -4341,11 +4306,7 @@ u8 task_poo_eeyore_1(PooEeyoreWork* work) {
         work->moveTimer--;
 
         if (work->moveTimer == 0) {
-#ifdef VERSION_EU
-            ExitPoohMode(0x8A);
-#else
-            ExitPoohMode(0x8C);
-#endif
+            ExitPoohMode(EVENT_140_100ACREWOOD_LV4);
             SetPooEventDone(2);
             SetJiminyFlag(0x51);
             work->animId = 1;
@@ -5107,11 +5068,7 @@ u8 task_poo_roo_1(PooRooWork* work) {
         }
 
         if (work->srcPos->z >= 0) {
-#ifdef VERSION_EU
-            ExitPoohMode(0x89);
-#else
-            ExitPoohMode(0x8B);
-#endif
+            ExitPoohMode(EVENT_139_100ACREWOOD_LV3);
             SetPooEventDone(5);
             SetJiminyFlag(80);
         }
@@ -6567,11 +6524,7 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
         break;
     case POO_CABBAGE_STATE_LAND:
         if (!IsPooEventDone(4) && work->stackIndex == 13) {
-#ifdef VERSION_EU
-            ExitPoohMode(140);
-#else
-            ExitPoohMode(142);
-#endif
+            ExitPoohMode(EVENT_142_100ACREWOOD_LV6);
             SetPooEventDone(4);
             SetJiminyFlag(83);
         }

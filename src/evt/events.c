@@ -12,6 +12,7 @@
 #include "msg_types.h"
 #include <stddef.h>
 #include "types.h"
+#include "event_ids.h"
 
 #include "events/074_monstoro_e0.inc"
 #include "events/075_monstoro_e1.inc"

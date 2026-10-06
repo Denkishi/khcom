@@ -270,7 +270,7 @@ void LoadLevelUpRikuBgTiles() {
     }
 }
 
-u8 Level_Up_1(LevelUpWork* work, void* a) {
+u8 Level_Up_1(LevelUpWork* work, void* task) {
     s32 x[3];
 #ifdef VERSION_EU
     enum { tileSize = 0xC80, mapSize = 0x500, bgSize = 0x2C00 };
@@ -713,7 +713,7 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 
                     work->cursor = i;
                     work->y3 = sLevelUpCursorY[work->cursor];
-                    SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpSelect);
 
                     if (gBtlWork->battleId == 151) {
                         LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
@@ -729,7 +729,7 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
+u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
     s32 x;
     s8 i;
     u8* q;
@@ -828,7 +828,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
             AnimStart(&work->anim2, 1, 0);
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpResult);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpResult);
         return 1;
     }
 
@@ -849,7 +849,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateLevelUpResult(LevelUpWork* work, void* a) {
+u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
     u8 i;
 
     if (work->effectShown == 0) {
@@ -986,9 +986,9 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* a) {
             gBtlWork->pendingLevelUps--;
 
             if (gBtlWork->pendingLevelUps == 0) {
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpClose);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpClose);
             } else {
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpNextSlideOut);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpNextSlideOut);
             }
 
             m4aSongNumStart(SONG_SYS_KETTEI);
@@ -1002,7 +1002,7 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateLevelUpClose(LevelUpWork* work, void* a) {
+u8 UpdateLevelUpClose(LevelUpWork* work, void* task) {
     s32 v1;
     s32 v2;
     s32 v3;
@@ -1049,7 +1049,7 @@ u8 UpdateLevelUpClose(LevelUpWork* work, void* a) {
             ApproachValue(&work->y2, 0xA000, work->barSteps);
             work->barSteps--;
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpWaitFade);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpWaitFade);
         }
     }
 
@@ -1380,27 +1380,27 @@ void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16
     }
 }
 
-void LevelUpSplitDigits2(u16 a, u16* p) {
+void LevelUpSplitDigits2(u16 value, u16* digits) {
     u16 q;
     u16 r;
 
-    q = a / 10;
-    r = a - q * 10;
-    p[1] = q;
-    p[2] = r;
+    q = value / 10;
+    r = value - q * 10;
+    digits[1] = q;
+    digits[2] = r;
 }
 
-void LevelUpSplitDigits3(u16 a, u16* p) {
+void LevelUpSplitDigits3(u16 value, u16* digits) {
     u16 h;
     u16 t;
     u16 o;
 
-    h = a / 100;
-    t = a / 10 - h * 10;
-    o = a - h * 100 - t * 10;
-    p[0] = h;
-    p[1] = t;
-    p[2] = o;
+    h = value / 100;
+    t = value / 10 - h * 10;
+    o = value - h * 100 - t * 10;
+    digits[0] = h;
+    digits[1] = t;
+    digits[2] = o;
 }
 
 void LevelUpSplitDigits4(u16 n, u16* out) {
@@ -1419,7 +1419,7 @@ void LevelUpSplitDigits4(u16 n, u16* out) {
     out[3] = d0;
 }
 
-u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
+u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
 #ifdef VERSION_EU
     enum { tileSize = 0xC80, mapSize = 0x500 };
 #else
@@ -1704,7 +1704,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 
         work->cursor = i;
         work->y3 = sLevelUpCursorY[work->cursor];
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpSelect);
 
         if (gBtlWork->battleId == 151) {
             LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
@@ -1717,7 +1717,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* a) {
+u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
     s32 x;
     s32 y;
     s8 n;
@@ -1835,7 +1835,7 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* a) {
             work->effectShown = 0;
             work->timer = 0;
             work->applied = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpNextSlideIn);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpNextSlideIn);
         }
     }
 

@@ -5,6 +5,6 @@
 #include "types.h"
 
 u8 IsHcEffectNameShuffling(HcEffectNameWork* work);
-u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* a);
+u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* task);
 
 #endif

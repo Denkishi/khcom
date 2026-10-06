@@ -234,12 +234,12 @@ void CopyLinkPartnerDeckCards(u8 kind, u16* out) {
     }
 }
 
-void ObtainCardIntoActiveDeck(u16 a) {
+void ObtainCardIntoActiveDeck(u16 cardId) {
     s16 v;
 
-    v = ObtainCard(a);
+    v = ObtainCard(cardId);
 
-    if (gCardDefs[a].value + GetDeckCpCost(GetActiveDeckIndex()) <=
+    if (gCardDefs[cardId].value + GetDeckCpCost(GetActiveDeckIndex()) <=
             gGameState.progression.cp &&
         v != -1) {
         AddCardToActiveDeck(v);
@@ -968,9 +968,9 @@ s16 ObtainCard(u16 cardId) {
     return i;
 }
 
-void SetRikuCardKindObtained(u16 a) {
+void SetRikuCardKindObtained(u16 kind) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        switch (a) {
+        switch (kind) {
         case 0x51:
             SetCardKindObtained(44);
             break;

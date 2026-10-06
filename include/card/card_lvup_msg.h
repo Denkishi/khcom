@@ -4,6 +4,6 @@
 #include "card.h"
 #include "types.h"
 
-u8 UpdateLvupMsgSlideIn(LvupMsgWork* work, void* a);
+u8 UpdateLvupMsgSlideIn(LvupMsgWork* work, void* task);
 
 #endif

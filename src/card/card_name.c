@@ -152,18 +152,18 @@ void CardName_3(CardNameWork* work) {
 #endif
 }
 
-void PremireEffectInit(PremiumCardEffectWork* work, s16* a) {
+void PremireEffectInit(PremiumCardEffectWork* work, s16* arg) {
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCardSparklePalette, 32);
     SetObjTileSource(work->tiles, gCardSparkleTiles);
     AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    work->centerX = a[1] << 8;
-    work->centerY = a[2] << 8;
+    work->centerX = arg[1] << 8;
+    work->centerY = arg[2] << 8;
     work->fallY = 0;
-    work->radius = a[0] << 8;
-    work->angle = a[3];
+    work->radius = arg[0] << 8;
+    work->angle = arg[3];
     work->speed = GetRandom() % 0x181 + 0x100;
     work->x = 0;
     work->y = 0;
@@ -172,18 +172,18 @@ void PremireEffectInit(PremiumCardEffectWork* work, s16* a) {
     gCardListWork->effectCount++;
 }
 
-void PremireEffectConvergeInit(PremiumCardEffectWork* work, s16* a) {
+void PremireEffectConvergeInit(PremiumCardEffectWork* work, s16* arg) {
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCardSparklePalette, 32);
     SetObjTileSource(work->tiles, gCardSparkleTiles);
     AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    work->centerX = a[1] << 8;
-    work->centerY = a[2] << 8;
+    work->centerX = arg[1] << 8;
+    work->centerY = arg[2] << 8;
     work->fallY = 0;
-    work->radius = a[0] << 8;
-    work->angle = a[3];
+    work->radius = arg[0] << 8;
+    work->angle = arg[3];
     work->speed = GetRandom() % 0x81 + 0x200;
     work->x = 0;
     work->y = 0;
@@ -288,17 +288,17 @@ void FreePrintLayer() {
     EwramFree(sPrintLines);
 }
 
-u8 GetStringLength(const u8* p) {
+u8 GetStringLength(const u8* s) {
     u8 n;
 
     n = 0;
 
-    if (p == NULL) {
+    if (s == NULL) {
         return 0;
     }
 
-    while (*p++ != 0) {
-        if (*p != 0) {
+    while (*s++ != 0) {
+        if (*s != 0) {
             n++;
         }
     }
@@ -306,7 +306,7 @@ u8 GetStringLength(const u8* p) {
     return n + 1;
 }
 
-void PrintString(u8 a, u8 b, u8 c, const u8* s) {
+void PrintString(u8 x, u8 y, u8 color, const u8* s) {
     u8 n;
     u8 i;
 
@@ -319,12 +319,12 @@ void PrintString(u8 a, u8 b, u8 c, const u8* s) {
 
         for (i = 0; i < n; i++) {
             sPrintLines[sPrintLineCount].tilemap[i] = s[i];
-            sPrintLines[sPrintLineCount].tilemap[i] |= c << 12;
+            sPrintLines[sPrintLineCount].tilemap[i] |= color << 12;
         }
 
-        sPrintLines[sPrintLineCount].x = a;
-        sPrintLines[sPrintLineCount].y = b;
-        sPrintLines[sPrintLineCount].palette = c;
+        sPrintLines[sPrintLineCount].x = x;
+        sPrintLines[sPrintLineCount].y = y;
+        sPrintLines[sPrintLineCount].palette = color;
         sPrintLines[sPrintLineCount].length = n;
         RequestTilemapRectCopy(sPrintLines[sPrintLineCount].tilemap, GetBgScreenBase(sPrintBg), 0, 0,
                       sPrintLines[sPrintLineCount].x,
@@ -424,7 +424,7 @@ void PrintNumber(u16 x, u16 y, u16 color, s32 value) {
     }
 }
 
-void PrintBinary16(u16 a, u16 b, u16 c, u16 bits) {
+void PrintBinary16(u16 x, u16 y, u16 color, u16 bits) {
     u16 v[16];
     u8 s[17];
     u16 i;
@@ -436,10 +436,10 @@ void PrintBinary16(u16 a, u16 b, u16 c, u16 bits) {
     }
 
     s[16] = 0;
-    PrintString(a, b, c, s);
+    PrintString(x, y, color, s);
 }
 
-void PrintHex32(u16 a, u16 b, u16 c, u32 v) {
+void PrintHex32(u16 x, u16 y, u16 color, u32 v) {
     u8 s[11];
     s32 i;
 
@@ -459,7 +459,7 @@ void PrintHex32(u16 a, u16 b, u16 c, u32 v) {
     }
 
     s[10] = 0;
-    PrintString(a, b, c, s);
+    PrintString(x, y, color, s);
 }
 
 TaskDesc gTaskDescCardName = {

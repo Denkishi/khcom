@@ -4,10 +4,10 @@
 #include "card.h"
 #include "types.h"
 
-u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* a);
-u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a);
-u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* a);
-u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* a);
-void ShowPersistentCardMessage(void* pool, u32 a, u16 b);
+u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* task);
+u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* task);
+u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* task);
+u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* task);
+void ShowPersistentCardMessage(void* pool, u32 bg, u16 message);
 
 #endif

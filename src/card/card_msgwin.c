@@ -45,10 +45,10 @@ u8 gMessageWindowOpen EWRAM_COMMON(4);
 
 u8 gMessageWindowAnswerYes EWRAM_COMMON(4);
 
-static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* a) {
+static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* args) {
     CpuFill32(0, work, sizeof(CardMsgWinWork));
     work->glyphPaletteIndex = InitCardMsgGlyphSprites(0, 0);
-    work->args = *a;
+    work->args = *args;
     work->messageDef = &gCardMessageDefs[work->args.messageId];
     work->tiles3 = NULL;
     work->palette = NULL;
@@ -115,7 +115,7 @@ static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* a) {
     sActiveCardMsgwin = work;
 }
 
-u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* task) {
     const MsgFaceAnim* tbl;
 
     ApproachValue(&work->x, gMsgwinOpenScrollX[work->messageDef->positionIndex], work->steps);
@@ -134,10 +134,10 @@ u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* a) {
 
         switch (work->args.mode) {
         case 0:
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinTyping);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinTyping);
             break;
         case 1:
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinTypingPersistent);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinTypingPersistent);
             break;
         }
     }
@@ -145,16 +145,16 @@ u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* a) {
     return 1;
 }
 
-static u8 msgwin_1(CardMsgWinWork* work, void* a) {
+static u8 msgwin_1(CardMsgWinWork* work, void* task) {
     LoadBgTiles(work->args.bg, gMsgwinTiles, 1280);
     LoadBgPalette(work->args.bg, gMsgwinPalette, 32);
     SetBgMapBlocks(work->args.bg, gMsgwinMapBlocks[work->messageDef->positionIndex], 2, 1);
     ScrollBgMapTo(work->args.bg, work->x, 0);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinLoadText);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinLoadText);
     return 1;
 }
 
-u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* task) {
 #ifdef VERSION_JP
     work->charCount = LayoutCardMsgGlyphsPageSjis(gMsgwinTextX[work->messageDef->positionIndex],
                                gMsgwinTextY[work->messageDef->positionIndex],
@@ -178,12 +178,12 @@ u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* a) {
 
     InitTextSlots(work->textSlots, 10);
     InitTextSlots(work->textSlots2, 10);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinLoadFace);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinLoadFace);
 
     return 1;
 }
 
-u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* work, void* task) {
     CardMessageDef* sel;
     const MsgFaceAnim* e;
 
@@ -205,7 +205,7 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* work, void* a) {
         work->palette = NULL;
     }
 
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinOpen);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinOpen);
     return 1;
 }
 
@@ -286,7 +286,7 @@ static void msgwin_3(CardMsgWinWork* work) {
     sActiveCardMsgwin = NULL;
 }
 
-u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* task) {
     CardMessageDef* sel;
     const MsgFaceAnim* e;
 
@@ -317,7 +317,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* a) {
             }
 
             work->waitIconVisible = 1;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinWaitInput);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinWaitInput);
         }
 
         work->charTimer = 0;
@@ -326,7 +326,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* task) {
     const MsgFaceAnim* e;
     u16* pal;
 
@@ -355,10 +355,10 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a) {
             }
 
             work->waitIconVisible = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinTyping);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinTyping);
         } else if (!(work->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
             AnimStart(&work->anim2, 3, ANIM_FLAG_LOOP);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinClose);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinClose);
             work->closeTimer = 0;
             work->steps = 8;
         } else {
@@ -382,7 +382,7 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a) {
             work->textSlotCounts[0] = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots);
             work->textSlotCounts[1] = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
             work->textPalette = LoadTextPalette(1);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinChoice);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinChoice);
         }
     }
 
@@ -414,7 +414,7 @@ u8 UpdateCardMsgwinClose(CardMsgWinWork* work) {
     return 1;
 }
 
-u8 UpdateCardMsgwinChoice(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinChoice(CardMsgWinWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
     work->gfx3 = AnimUpdate(&work->anim3);
 
@@ -434,7 +434,7 @@ u8 UpdateCardMsgwinChoice(CardMsgWinWork* work, void* a) {
             gMessageWindowAnswerYes = 0;
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinClose);
         break;
     }
 
@@ -446,7 +446,7 @@ u8 UpdateCardMsgwinChoice(CardMsgWinWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* task) {
     const MsgFaceAnim* e;
 
     work->gfx = AnimUpdate(&work->anim);
@@ -464,7 +464,7 @@ u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* a) {
         } else {
             e = gMsgFaceAnims[work->messageDef->portraitId];
             AnimStart(&work->anim, 0, e[work->messageDef->expressionId].animFlags);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinPersistent);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinPersistent);
         }
 
         work->charTimer = 0;
@@ -473,14 +473,14 @@ u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* a) {
+u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* task) {
 #ifndef VERSION_JP
     TextChar** p;
 #endif
     work->gfx = AnimUpdate(&work->anim);
 
     if (!work->keepOpen) {
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinClose);
     } else if (work->messagePending == 1) {
         work->messagePending = 0;
         work->messageDef = &gCardMessageDefs[work->args.messageId];
@@ -518,15 +518,15 @@ s32 ReplaceCardMsgwinMessage(CardMessageArgs* src) {
     return 0;
 }
 
-void CreateCardMessageTask(void* pool, u32 a, u16 b) {
+void CreateCardMessageTask(void* pool, u32 bg, u16 message) {
     CardMessageArgs args;
 
-    args.bg = a;
-    args.messageId = b;
+    args.bg = bg;
+    args.messageId = message;
     args.mode = 0;
 
-    if (gCardMessageDefs[b].portraitId == 62) {
-        if (gCardMessageDefs[b].flags & CARD_MSG_FLAG_CHOICE_WINDOW) {
+    if (gCardMessageDefs[message].portraitId == 62) {
+        if (gCardMessageDefs[message].flags & CARD_MSG_FLAG_CHOICE_WINDOW) {
             TaskCreate(pool, &gTaskDescSysmsgwinChoice, &args);
         } else {
             TaskCreate(pool, &gTaskDescSysmsgwin, &args);
@@ -536,42 +536,42 @@ void CreateCardMessageTask(void* pool, u32 a, u16 b) {
     }
 }
 
-void CreateSysmsgwinTask(void* pool, u16 b) {
+void CreateSysmsgwinTask(void* pool, u16 message) {
     CardMessageArgs args;
 
     args.bg = 0;
-    args.messageId = b;
+    args.messageId = message;
     args.mode = 2;
 
-    if (gCardMessageDefs[b].flags & CARD_MSG_FLAG_CHOICE_WINDOW) {
+    if (gCardMessageDefs[message].flags & CARD_MSG_FLAG_CHOICE_WINDOW) {
         TaskCreate(pool, &gTaskDescSysmsgwinChoice, &args);
     } else {
         TaskCreate(pool, &gTaskDescSysmsgwin, &args);
     }
 }
 
-void CreatePersistentSysmsgwinTask(void* pool, u16 a) {
+void CreatePersistentSysmsgwinTask(void* pool, u16 message) {
     CardMessageArgs args;
 
     IsMessageWindowOpen();
     args.bg = 0;
-    args.messageId = a;
+    args.messageId = message;
     args.mode = 3;
     TaskCreate(pool, &gTaskDescSysmsgwin, &args);
 }
 
-void ShowPersistentCardMessage(void* pool, u32 a, u16 b) {
+void ShowPersistentCardMessage(void* pool, u32 bg, u16 message) {
     CardMessageArgs args;
 
-    args.bg = a;
-    args.messageId = b;
+    args.bg = bg;
+    args.messageId = message;
     args.mode = 1;
 
     if (IsMessageWindowOpen()) {
         if (!(u8)ReplaceCardMsgwinMessage(&args)) {
             ReplaceSysmsgwinMessage(&args);
         }
-    } else if (gCardMessageDefs[b].portraitId == 62) {
+    } else if (gCardMessageDefs[message].portraitId == 62) {
         TaskCreate(pool, &gTaskDescSysmsgwin, &args);
     } else {
         TaskCreate(pool, &gTaskDescCardMsgwin, &args);

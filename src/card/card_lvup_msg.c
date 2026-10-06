@@ -30,8 +30,8 @@ static const u8 sLvupMsgPeriod[] = ".";
 static const u16 sLvupMsgPeriod[2] = { '.', 0 };
 #endif
 
-void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
-    StatIncreaseDisplayArgs args = *a;
+void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* arg) {
+    StatIncreaseDisplayArgs args = *arg;
 
     InitTextSlots(work->textSlots, 20);
     InitTextSlots(work->textSlots2, 20);
@@ -40,8 +40,8 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
     InitTextSlots(work->textSlots4, 20);
     work->textSlotCount4 = LoadTextSlots(sLvupMsgPeriod, work->textSlots4);
 #endif
-    work->amount = a->amount;
-    work->active = a->done;
+    work->amount = arg->amount;
+    work->active = arg->done;
 
     if (args.flags & STAT_INCREASE_FLAG_MAX_HP) {
         work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gLvupMsgHpText), work->textSlots);
@@ -90,13 +90,13 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
     work->palette = LoadObjPalette(gCard00Palette, 32);
 }
 
-s32 Lvup_msg_1(LvupMsgWork* work, void* a) {
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateLvupMsgSlideIn);
+s32 Lvup_msg_1(LvupMsgWork* work, void* task) {
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateLvupMsgSlideIn);
     work->unk_2B1++;
     return 1;
 }
 
-u8 UpdateLvupMsgSlideIn(LvupMsgWork* work, void* a) {
+u8 UpdateLvupMsgSlideIn(LvupMsgWork* work, void* task) {
     s8* counter = &work->slideSteps;
 
     if (*counter > 0) {

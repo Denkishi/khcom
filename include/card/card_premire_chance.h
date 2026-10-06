@@ -8,7 +8,7 @@ void UpdatePremireChanceCardPos(PremireChanceCardWork* work);
 u8 IsPremireChanceCardOnScreen(PremireChanceCardWork* work);
 void LoadPremireChanceCardGfx(PremireChanceCardWork* work);
 void ReleasePremireChanceCardGfx(PremireChanceCardWork* work);
-u8 StartPremireChanceCardAnim(PremireChanceCardWork* work, void* a);
+u8 StartPremireChanceCardAnim(PremireChanceCardWork* work, void* task);
 s32 UpdatePremireChanceCardAnim(PremireChanceCardWork* work);
 
 #endif

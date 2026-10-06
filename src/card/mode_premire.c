@@ -116,10 +116,10 @@ u8 GetHcEffectCountUnit(HcEffectNameWork* work, u16 n) {
     return 0;
 }
 
-void HCEffectName_0(HcEffectNameWork* work, u8* a) {
+void HCEffectName_0(HcEffectNameWork* work, u8* arg) {
     void** tiles;
 
-    work->side = a[0];
+    work->side = arg[0];
     work->timer = 0;
     work->blinkInterval = 32;
     work->palette = LoadObjPalette(gBStatesPalette, 32);
@@ -178,7 +178,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* a) {
     work->countOnes = 0;
 }
 
-u8 HCEffectName_1(HcEffectNameWork* work, void* a) {
+u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
     u8 done;
     s32 div;
     CardBattleState* d;
@@ -189,7 +189,7 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* a) {
 #ifdef VERSION_EU
         SplitFourDigits(gBtlWork->hcEffectCount, &work->countThousands);
 #endif
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateHcEffectNameShuffle);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateHcEffectNameShuffle);
         return 1;
     }
 
@@ -282,7 +282,7 @@ u8 IsHcEffectNameShuffling(HcEffectNameWork* work) {
     return 1;
 }
 
-u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* a) {
+u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* task) {
     void** tiles;
 
     switch (work->side) {
@@ -308,7 +308,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* a) {
             work->countUnit = GetHcEffectCountUnit(work, gCardBattleState->soraHcEffect);
             UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitFrames[work->countUnit], gHcEffectCountUnitTiles);
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)HCEffectName_1);
         } else {
             u16 id = GetNextRandomHcEffect(&work->randomIndex);
             work->effect = id;
@@ -340,7 +340,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* a) {
             work->countUnit = GetHcEffectCountUnit(work, gCardBattleState->rikuHcEffect);
             UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitFrames[work->countUnit], gHcEffectCountUnitTiles);
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)HCEffectName_1);
         } else {
             u16 id = GetNextRandomHcEffect(&work->randomIndex);
             work->effect = id;

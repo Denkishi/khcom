@@ -39,9 +39,9 @@ static SysMsgWinWork* sActiveSysmsgwin;
 
 static const s32 sSysmsgwinTextY[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 
-void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* a) {
+void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
     CpuFill32(0, work, sizeof(SysMsgWinWork));
-    work->args = *a;
+    work->args = *args;
     work->messageDef = &gCardMessageDefs[work->args.messageId];
 
     if (work->messageDef->flags & CARD_MSG_FLAG_ALT_HIGHLIGHT) {
@@ -121,7 +121,7 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* a) {
     sActiveSysmsgwin = work;
 }
 
-u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
+u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
     void* pal;
 
     switch (work->args.mode) {
@@ -179,18 +179,18 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
     switch (work->args.mode) {
     case 0:
     case 2:
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinWaitInput);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinWaitInput);
         break;
     case 1:
     case 3:
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinPersistent);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinPersistent);
         break;
     }
 
     return 1;
 }
 
-u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
+u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* task) {
     u16* pal;
 
     if (work->tiles3 != NULL) {
@@ -212,7 +212,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
         } else if (!(work->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
             AnimStart(&work->anim2, 3, ANIM_FLAG_LOOP);
             work->unk_142 = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinClose);
             work->closeTimer = 0;
             work->steps = 8;
         } else {
@@ -247,7 +247,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
 #else
             FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoice);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoice);
         }
     }
 
@@ -269,7 +269,7 @@ s32 UpdateSysmsgwinClose(SysMsgWinWork* work) {
     return 1;
 }
 
-u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* a) {
+u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim3);
 
     switch (GetKeysPressed()) {
@@ -300,7 +300,7 @@ u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* a) {
         }
 
         work->unk_142 = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinClose);
         break;
     }
 
@@ -401,7 +401,7 @@ void sysmsgwin_3(SysMsgWinWork* work) {
     sActiveSysmsgwin = NULL;
 }
 
-u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a) {
+u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* task) {
 #ifndef VERSION_JP
     TextChar** p;
 #endif
@@ -462,9 +462,9 @@ s32 CloseSysmsgwin() {
     return 0;
 }
 
-void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* a) {
+void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* args) {
     CpuFill32(0, work, sizeof(SysMsgWinWork));
-    work->args = *a;
+    work->args = *args;
     work->messageDef = &gCardMessageDefs[work->args.messageId];
     work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
     FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
@@ -551,7 +551,7 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* a) {
     sActiveSysmsgwin = work;
 }
 
-u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* a) {
+u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
     void* pal;
 
     switch (work->args.mode) {
@@ -599,13 +599,13 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* a) {
     }
 
     if (work->args.mode == 0 || work->args.mode == 2) {
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceSetup);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoiceSetup);
     }
 
     return 1;
 }
 
-u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* a) {
+u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* task) {
     u16* pal;
 
     work->tiles4 = AllocObjTiles(0x120, NULL);
@@ -635,7 +635,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* a) {
 #else
     FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceInput);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoiceInput);
     return 1;
 }
 
@@ -654,7 +654,7 @@ s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* work) {
     return 1;
 }
 
-u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* a) {
+u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* task) {
     s32 tbl[2];
 
     *(u64*)tbl = *(u64*)gSysmsgwinChoiceCursorX;
@@ -691,13 +691,13 @@ u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* a) {
         }
 
         work->unk_142 = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoiceClose);
         break;
     case B_BUTTON:
         m4aSongNumStart(SONG_SYS_CLOSE);
         gMessageWindowAnswerYes = 0;
         work->unk_142 = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateSysmsgwinChoiceClose);
         break;
     }
 

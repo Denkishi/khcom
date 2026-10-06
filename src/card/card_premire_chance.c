@@ -23,21 +23,21 @@ static const s16 sPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 
 
 static const u8 sPremireChanceCardPriorities[9] = { 6, 4, 2, 0, 2, 4, 6, 8, 12 };
 
-void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* a) {
+void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     const CardDef* def;
 
     work->gfxLoaded = 0;
     work->tiles4 = NULL;
 
-    if (a->unk_06 <= 8) {
-        work->angle = sPremireChanceCardAngles[a->unk_06];
+    if (slot->unk_06 <= 8) {
+        work->angle = sPremireChanceCardAngles[slot->unk_06];
     } else {
         work->angle = -0x20;
     }
 
-    work->position = a->unk_06;
-    work->deckIndex = a->index;
-    def = &gCardDefs[a->cardId];
+    work->position = slot->unk_06;
+    work->deckIndex = slot->index;
+    def = &gCardDefs[slot->cardId];
     work->cardDef = def;
 
     if (def->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
@@ -59,7 +59,7 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* a) {
     work->premium = 0;
 }
 
-u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* a) {
+u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* task) {
     s32 v;
     u8 (*fn)(PremireChanceCardWork*, void*);
     u16 lim;
@@ -95,18 +95,18 @@ u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* a) {
         gCardListWork->unk_29 = 0;
         work->steps = 8;
         fn = UpdatePremireChanceCardToCenter;
-        SetTaskUpdate(a, (TaskUpdateFunc)fn);
-        return fn(work, a);
+        SetTaskUpdate(task, (TaskUpdateFunc)fn);
+        return fn(work, task);
     case 3:
         work->steps = 10;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceCardMoveAway);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceCardMoveAway);
         break;
     }
 
     return 1;
 }
 
-u8 PremireChanceCard_1(PremireChanceCardWork* work, void* a) {
+u8 PremireChanceCard_1(PremireChanceCardWork* work, void* task) {
     s32 v;
 
     v = work->radius << 8;
@@ -123,7 +123,7 @@ u8 PremireChanceCard_1(PremireChanceCardWork* work, void* a) {
 
     if (work->steps == 0) {
         work->state = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceCardSpin);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceCardSpin);
     }
 
     return 1;
@@ -214,7 +214,7 @@ void ReleasePremireChanceCardGfx(PremireChanceCardWork* work) {
     }
 }
 
-u8 UpdatePremireChanceCardToCenter(PremireChanceCardWork* work, void* a) {
+u8 UpdatePremireChanceCardToCenter(PremireChanceCardWork* work, void* task) {
     s32 x;
     s32 y;
 
@@ -227,19 +227,19 @@ u8 UpdatePremireChanceCardToCenter(PremireChanceCardWork* work, void* a) {
     work->steps--;
 
     if (work->steps == 0) {
-        SetTaskUpdate(a, (TaskUpdateFunc)StartPremireChanceCardAnim);
+        SetTaskUpdate(task, (TaskUpdateFunc)StartPremireChanceCardAnim);
     }
 
     return 1;
 }
 
-u8 StartPremireChanceCardAnim(PremireChanceCardWork* work, void* a) {
+u8 StartPremireChanceCardAnim(PremireChanceCardWork* work, void* task) {
     work->tiles4 = AllocObjTiles(640, NULL);
     SetObjTileSource(work->tiles4, gCardPremiumTiles);
     AnimInit(&work->anim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceCardAnim);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceCardAnim);
     return 1;
 }
 
@@ -253,7 +253,7 @@ s32 UpdatePremireChanceCardAnim(PremireChanceCardWork* work) {
     return 1;
 }
 
-u8 UpdatePremireChanceCardMoveAway(PremireChanceCardWork* work, void* a) {
+u8 UpdatePremireChanceCardMoveAway(PremireChanceCardWork* work, void* task) {
     s32 v;
 
     v = work->angle << 8;

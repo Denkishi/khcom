@@ -41,15 +41,15 @@ void TrackLevelUpEffectTarget(LevelUpEffectWork* work) {
     }
 }
 
-void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
+void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* arg) {
     s32 i;
     LevelUpEffectArgs args;
 
-    work->target = a->target;
-    work->targetX = a->x;
-    work->targetY = a->y;
+    work->target = arg->target;
+    work->targetX = arg->x;
+    work->targetY = arg->y;
     work->radius = 30;
-    work->unk_97 = a->unk_08;
+    work->unk_97 = arg->unk_08;
     TrackLevelUpEffectTarget(work);
 
 #ifdef VERSION_EU
@@ -103,7 +103,7 @@ void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
     }
 }
 
-u8 LVUP_EFFECT_1(LevelUpEffectWork* work, void* a) {
+u8 LVUP_EFFECT_1(LevelUpEffectWork* work, void* task) {
     s32 i;
 
     TrackLevelUpEffectTarget(work);
@@ -162,7 +162,7 @@ u8 LVUP_EFFECT_1(LevelUpEffectWork* work, void* a) {
         }
 
         work->frame = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpEffectScatter);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpEffectScatter);
     }
 
     return 1;
@@ -246,12 +246,12 @@ const s32 gLvupEffectStartOffsetY[4] = { 0, 0, -0xF000, 0xF000 };
 
 const u16 gLvupEffectStartAngles[4] = { 0, 128, 64, 192 };
 
-void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
-    work->x[0] = a->x;
-    work->targetX = a->x;
-    work->y[0] = a->y;
-    work->targetY = a->y;
-    work->target = a->target;
+void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* args) {
+    work->x[0] = args->x;
+    work->targetX = args->x;
+    work->y[0] = args->y;
+    work->targetY = args->y;
+    work->target = args->target;
 
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -278,9 +278,9 @@ void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
     work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
     LoadObjPalette(gCard00Palette, 32);
-    work->tiles = a->tiles;
-    work->palette = a->palette;
-    FadeSetPaletteExcluded(a->palette->index + 16, 1);
+    work->tiles = args->tiles;
+    work->palette = args->palette;
+    FadeSetPaletteExcluded(args->palette->index + 16, 1);
     work->frame = 0;
     work->timer = 0;
     work->vy[0] = -0x280;
@@ -311,7 +311,7 @@ void Lvup_Logo_3(LevelUpEffectWork* work) {
     sLvupLogoActive = 0;
 }
 
-u8 CreateLevelUpEffectTask(BtlObj* p, TaskPool* pool) {
+u8 CreateLevelUpEffectTask(BtlObj* target, TaskPool* pool) {
     LevelUpEffectArgs args;
 
     sLvupLogoActive = 0;
@@ -320,10 +320,10 @@ u8 CreateLevelUpEffectTask(BtlObj* p, TaskPool* pool) {
         return 0;
     }
 
-    args.x = p->x;
-    args.y = p->y;
+    args.x = target->x;
+    args.y = target->y;
     args.unk_08 = 0;
-    args.target = p;
+    args.target = target;
     TaskCreate(pool, &gTaskDescLVUPEFFECT, &args);
     gBtlWork->flags |= BTL_FLAG_LEVEL_UP_EFFECT;
     return 1;
@@ -361,10 +361,10 @@ void ReleaseEventMapObjectGfx(EventMapObjectWork* work) {
     }
 }
 
-void Ev_mapObj_0(EventMapObjectWork* work, u8* a) {
+void Ev_mapObj_0(EventMapObjectWork* work, u8* arg) {
     EventBackgroundDef* t;
 
-    work->background = a[0];
+    work->background = arg[0];
     t = gEventBackgroundDefs[work->background];
 
     if (t->mapObjects != NULL) {

@@ -1904,14 +1904,14 @@ void StockInfo_0(StockInfoWork* work, u8* active) {
     }
 }
 
-u8 StockInfo_1(StockInfoWork* work, void* a) {
+u8 StockInfo_1(StockInfoWork* work, void* task) {
     if (work->timer > 0) {
         ApproachValue(&work->y, 0x6C00, work->timer);
         work->timer--;
     } else {
         m4aSongNumStart(SONG_SYS_CHAGEF2);
         CreateStockMesDispTask(&work->tasks, sLevelUpStockHelpIndices[gGameState.progression.levelMilestone], 0, 0, 0x50);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateStockInfoMessage);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateStockInfoMessage);
     }
 
     return 1;
@@ -1938,16 +1938,16 @@ void StockInfo_3(StockInfoWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void* GetCardHelpText(u16 a, u8 b) {
-    if (b < gCardHelpDefs[a]->textCount) {
-        return LANGSTR(gCardHelpDefs[a]->texts[b]);
+void* GetCardHelpText(u16 helpIndex, u8 textIndex) {
+    if (textIndex < gCardHelpDefs[helpIndex]->textCount) {
+        return LANGSTR(gCardHelpDefs[helpIndex]->texts[textIndex]);
     }
 
     return NULL;
 }
 
-u8 GetCardHelpTextCount(u16 a) {
-    return gCardHelpDefs[a]->textCount;
+u8 GetCardHelpTextCount(u16 helpIndex) {
+    return gCardHelpDefs[helpIndex]->textCount;
 }
 
 u8 IsLevelUpStockUnlocked() {

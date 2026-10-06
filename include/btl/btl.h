@@ -88,6 +88,16 @@ typedef struct RikuAttackDef {
     const struct RikuAttackDef* next;
 } RikuAttackDef;
 
+enum BtlItem {
+    BTL_ITEM_POTION,
+    BTL_ITEM_HI_POTION,
+    BTL_ITEM_MEGA_POTION,
+    BTL_ITEM_ETHER,
+    BTL_ITEM_MEGA_ETHER,
+    BTL_ITEM_ELIXIR,
+    BTL_ITEM_MEGALIXIR
+};
+
 enum BtlSoraFlag {
     BTL_SORA_FLAG_SWING_HIT = 0x2,
     BTL_SORA_FLAG_HIDDEN = 0x4,

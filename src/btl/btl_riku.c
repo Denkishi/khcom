@@ -1224,43 +1224,43 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
-                work->variant[0] = 1;
+                work->variant[0] = BTL_ITEM_HI_POTION;
                 break;
             case MOVE_POTION:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
-                work->variant[0] = 0;
+                work->variant[0] = BTL_ITEM_POTION;
                 break;
             case MOVE_MEGA_POTION:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
-                work->variant[0] = 2;
+                work->variant[0] = BTL_ITEM_MEGA_POTION;
                 break;
             case MOVE_ETHER:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
-                work->variant[0] = 3;
+                work->variant[0] = BTL_ITEM_ETHER;
                 break;
             case MOVE_MEGA_ETHER:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
-                work->variant[0] = 4;
+                work->variant[0] = BTL_ITEM_MEGA_ETHER;
                 break;
             case MOVE_ELIXIR:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
-                work->variant[0] = 5;
+                work->variant[0] = BTL_ITEM_ELIXIR;
                 break;
             case MOVE_MEGALIXIR:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
-                work->variant[0] = 6;
+                work->variant[0] = BTL_ITEM_MEGALIXIR;
                 break;
             case MOVE_THE_KING:
                 work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
@@ -3649,7 +3649,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->stateTimer > 23 && !BgFxIsActive()) {
             switch (work->variant[0]) {
-            case 0:
+            case BTL_ITEM_POTION:
                 if (work->mainSide) {
                     RequestSoraPotion();
                 } else {
@@ -3657,7 +3657,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 }
 
                 break;
-            case 1:
+            case BTL_ITEM_HI_POTION:
                 if (work->mainSide) {
                     RequestSoraHiPotion();
                 } else {
@@ -3665,7 +3665,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 }
 
                 break;
-            case 2:
+            case BTL_ITEM_MEGA_POTION:
                 if (work->mainSide) {
                     RequestSoraMegaPotion();
                 } else {
@@ -3673,7 +3673,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 }
 
                 break;
-            case 3:
+            case BTL_ITEM_ETHER:
                 if (work->mainSide) {
                     RequestSoraEther();
                 } else {
@@ -3681,7 +3681,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 }
 
                 break;
-            case 4:
+            case BTL_ITEM_MEGA_ETHER:
                 if (work->mainSide) {
                     RequestSoraMegaEther();
                 } else {
@@ -3689,7 +3689,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 }
 
                 break;
-            case 5:
+            case BTL_ITEM_ELIXIR:
                 if (work->mainSide) {
                     RequestSoraElixir();
                 } else {

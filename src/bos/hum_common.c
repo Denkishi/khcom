@@ -34,6 +34,7 @@
 #include "card_label_data.h"
 #include "card.h"
 #include "card_ids.h"
+#include "btl.h"
 
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);
@@ -382,22 +383,22 @@ s32 HumUpdate(HumWork* work) {
 
         if (work->stateTimer > 23 && !BgFxIsActive()) {
             switch (work->itemIndex) {
-            case 0:
+            case BTL_ITEM_POTION:
                 RequestRikuPotion();
                 break;
-            case 1:
+            case BTL_ITEM_HI_POTION:
                 RequestRikuHiPotion();
                 break;
-            case 2:
+            case BTL_ITEM_MEGA_POTION:
                 RequestRikuMegaPotion();
                 break;
-            case 3:
+            case BTL_ITEM_ETHER:
                 RequestRikuEther();
                 break;
-            case 4:
+            case BTL_ITEM_MEGA_ETHER:
                 RequestRikuMegaEther();
                 break;
-            case 5:
+            case BTL_ITEM_ELIXIR:
                 RequestRikuElixir();
                 break;
             default:
@@ -1127,31 +1128,31 @@ s32 HumResolveCardMove(HumWork* work) {
     switch (id) {
     case MOVE_POTION:
         work->state = HUM_STATE_USE_ITEM;
-        work->itemIndex = 0;
+        work->itemIndex = BTL_ITEM_POTION;
         break;
     case MOVE_HI_POTION:
         work->state = HUM_STATE_USE_ITEM;
-        work->itemIndex = 1;
+        work->itemIndex = BTL_ITEM_HI_POTION;
         break;
     case MOVE_MEGA_POTION:
         work->state = HUM_STATE_USE_ITEM;
-        work->itemIndex = 2;
+        work->itemIndex = BTL_ITEM_MEGA_POTION;
         break;
     case MOVE_ETHER:
         work->state = HUM_STATE_USE_ITEM;
-        work->itemIndex = 3;
+        work->itemIndex = BTL_ITEM_ETHER;
         break;
     case MOVE_MEGA_ETHER:
         work->state = HUM_STATE_USE_ITEM;
-        work->itemIndex = 4;
+        work->itemIndex = BTL_ITEM_MEGA_ETHER;
         break;
     case MOVE_ELIXIR:
         work->state = HUM_STATE_USE_ITEM;
-        work->itemIndex = 5;
+        work->itemIndex = BTL_ITEM_ELIXIR;
         break;
     case MOVE_MEGALIXIR:
         work->state = HUM_STATE_USE_ITEM;
-        work->itemIndex = 6;
+        work->itemIndex = BTL_ITEM_MEGALIXIR;
         break;
     }
 

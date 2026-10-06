@@ -54,6 +54,8 @@ typedef struct JiminyLine {
     TextSlot textSlots[48];
 } JiminyLine;
 
+#define JIMINY_ENTRY_NONE (-1)
+
 typedef struct JiminyEntry {
     void* map;
     const void* names;

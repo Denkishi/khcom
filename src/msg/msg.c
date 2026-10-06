@@ -1029,7 +1029,7 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteInde
                 }
 
                 if ((code & 0xFF) == 0x40) {
-                    glyph = 0xFFFF;
+                    glyph = BG_TEXT_GLYPH_SPACE;
                 }
 
                 break;
@@ -1072,7 +1072,7 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteInde
                 code &= 0xFF;
 
                 if (code == 0x40) {
-                    glyph = 0xFFFF;
+                    glyph = BG_TEXT_GLYPH_SPACE;
                 }
 
                 break;
@@ -1154,7 +1154,7 @@ void DrawBgTextLines() {
                 out = dst;
 
                 for (y = sy, yy = 0; y < sy + height; y++, yy += 2) {
-                    if (glyph == 0xFFFF) {
+                    if (glyph == BG_TEXT_GLYPH_SPACE) {
                         pix = 0;
                         cur = 0;
                     } else {
@@ -1204,7 +1204,7 @@ void DrawBgTextLines() {
                 }
 
                 for (y = sy, yy = 0; y < sy + height; y++, yy += 2) {
-                    if (glyph == 0xFFFF) {
+                    if (glyph == BG_TEXT_GLYPH_SPACE) {
                         cur = 0;
                         pix = 0;
                     } else {
@@ -1273,7 +1273,7 @@ void DrawBgTextLines() {
                 out = dst;
 
                 for (y = sy, yy = 0; y < sy + height; y++, yy += 2) {
-                    if (glyph == 0xFFFF) {
+                    if (glyph == BG_TEXT_GLYPH_SPACE) {
                         cur = 0;
                         pix = 0;
                     } else {
@@ -2153,7 +2153,7 @@ s16 GetTextSlotsWidth(TextSlot* slots, u8 n) {
 
     for (i = 0; i < n; i++) {
         if (slots[i].tiles != NULL) {
-            if (slots[i].advance != -1) {
+            if (slots[i].advance != TEXT_ADVANCE_SPACE) {
                 x += slots[i].advance;
             } else {
                 x += 3;
@@ -2174,7 +2174,7 @@ s16 GetTextSlotsMaxLineWidth(TextSlot* slots, u8 n) {
 
     for (i = 0; i < n; i++) {
         if (slots[i].tiles != NULL) {
-            if (slots[i].advance != -1) {
+            if (slots[i].advance != TEXT_ADVANCE_SPACE) {
                 x += slots[i].advance;
             } else {
                 x += 3;
@@ -2787,7 +2787,7 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* slots, void* palette, u16 priority, u
         if (slots->tiles == NULL) {
             cy += 12;
             x = startX;
-        } else if (slots->advance != -1) {
+        } else if (slots->advance != TEXT_ADVANCE_SPACE) {
             DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, 0, priority);
             x += slots->advance;
         } else {
@@ -2811,7 +2811,7 @@ void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* slots, void* palette, s32 pri
         if (slots->tiles == NULL) {
             cy += 12;
             x = startX;
-        } else if (slots->advance != -1) {
+        } else if (slots->advance != TEXT_ADVANCE_SPACE) {
             DrawSpriteUnsorted(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, 0);
             x += slots->advance;
         } else {
@@ -2835,7 +2835,7 @@ void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* slots, void* palette, u16 fl
         if (slots->tiles == NULL) {
             cy += 12;
             x = startX;
-        } else if (slots->advance != -1) {
+        } else if (slots->advance != TEXT_ADVANCE_SPACE) {
             DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, flags, priority);
             x += slots->advance;
         } else {
@@ -2859,7 +2859,7 @@ void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* slots, void* palette, 
         if (slots->tiles == NULL) {
             cy += 12;
             x = startX;
-        } else if (slots->advance != -1) {
+        } else if (slots->advance != TEXT_ADVANCE_SPACE) {
             if (slots->useAlternatePalette == 0) {
                 DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, 0, priority);
             } else {

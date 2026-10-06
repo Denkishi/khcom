@@ -24,6 +24,9 @@
 #include "staff_roll_audio.h"
 #include "staff_roll_font.h"
 
+#define SROLL_FONT_PAGE_NONE 0xFFFF
+#define SROLL_FONT_GLYPH_NONE 0xFF
+
 static DmaStream sDmaStream;
 static u8 sBlockAudioPlaying;
 static s32 sDecodedAudioBuffer[0x810];
@@ -546,8 +549,8 @@ u16 SrollTextGetGlyphIndex(u16 ch, u8* font) {
     hi = font[off + 3] << 8;
     firstGlyph = font[off + 2] | hi;
 
-    if (tableOffset != 0xFFFF) {
-        if (font[(u16)(tableOffset + 0xFFC0 + (ch & 0xFF))] != 0xFF) {
+    if (tableOffset != SROLL_FONT_PAGE_NONE) {
+        if (font[(u16)(tableOffset + 0xFFC0 + (ch & 0xFF))] != SROLL_FONT_GLYPH_NONE) {
             pageGlyph = font[(u16)(tableOffset + 0xFFC0 + (ch & 0xFF))];
             result = firstGlyph + pageGlyph;
         }

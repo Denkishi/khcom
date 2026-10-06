@@ -23,6 +23,8 @@ typedef struct SpriteTextLine {
     u8 useAlternatePalette;
 } SpriteTextLine;
 
+#define BG_TEXT_GLYPH_SPACE 0xFFFF
+
 typedef struct BgTextLine {
     u8 x;
     u8 y;

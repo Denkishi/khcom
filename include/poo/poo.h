@@ -763,6 +763,8 @@ typedef struct PooBgSet {
     void* palette;
 } PooBgSet;
 
+#define POO_PAL_STEP_END 0xFF
+
 typedef struct PooPalStep {
     u16 palette;
     u16 duration;

@@ -21,6 +21,8 @@ typedef struct LocalizedText {
 #define LOCALIZED_STRING(name) (name)
 #endif
 
+#define TEXT_ADVANCE_SPACE (-1)
+
 typedef struct TextSlot {
     void* tiles;
     u8 useAlternatePalette;

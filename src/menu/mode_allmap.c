@@ -63,7 +63,7 @@ static const PooPalStep sAllmapPalSteps[9] = {
     { 3, 8 },
     { 2, 8 },
     { 1, 8 },
-    { 255, 255 },
+    { POO_PAL_STEP_END, 255 },
 };
 
 #ifdef VERSION_EU
@@ -171,7 +171,7 @@ void AllmapCyclePalette() {
     sAllmapPalTimer = 0;
     sAllmapPalStep++;
 
-    if (steps[sAllmapPalStep].palette == 0xFF) {
+    if (steps[sAllmapPalStep].palette == POO_PAL_STEP_END) {
         sAllmapPalStep = 0;
     }
 

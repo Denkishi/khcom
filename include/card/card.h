@@ -1511,6 +1511,8 @@ typedef struct EventBgEffectFrame {
     u16 tilesOffset;
 } EventBgEffectFrame;
 
+#define EVENT_BG_EFFECT_LOOP_NONE (-1)
+
 typedef struct EventBgEffectDef {
     void** maps;
     u8* tiles;

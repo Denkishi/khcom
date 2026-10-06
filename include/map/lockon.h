@@ -5,6 +5,8 @@
 #include "fld_types.h"
 #include "types.h"
 
+#define LOCKON_TARGET_NONE (-1)
+
 typedef struct LockonWork {
     void* tiles;
     void* palette;

@@ -35,7 +35,7 @@ void task_lockon_0(LockonWork* work) {
     }
 
     work->targetCount = 0;
-    work->selected = -1;
+    work->selected = LOCKON_TARGET_NONE;
     work->timer = 0;
     work->unk_30 = 0;
     work->unk_4C = 0;
@@ -221,7 +221,7 @@ s8 LockonPickNearest(s32 px, s32 py, LockonWork* work, s8 n, s8* list) {
     s32 dx;
     s32 dy;
 
-    best = -1;
+    best = LOCKON_TARGET_NONE;
     bestDist = 0x10000;
 
     for (i = 0; i < n; i++) {
@@ -239,7 +239,7 @@ s8 LockonPickNearest(s32 px, s32 py, LockonWork* work, s8 n, s8* list) {
         }
     }
 
-    if (best != -1) {
+    if (best != LOCKON_TARGET_NONE) {
         return list[best];
     }
 
@@ -250,7 +250,7 @@ void LockonClearTargets(LockonWork* work) {
     s8 i;
 
     if ((gFieldState->flags & FIELD_FLAG_HOLD_LOCKON) == 0) {
-        work->selected = -1;
+        work->selected = LOCKON_TARGET_NONE;
 
         for (i = 0; i < 8; i++) {
             work->targets[i] = NULL;

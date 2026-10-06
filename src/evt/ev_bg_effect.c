@@ -19,7 +19,7 @@
 #include "default_bg_map.h"
 
 static const EventBgEffectDef sEventBgEffect0Def = {
-    &gEventBgEffectMaps[0], gEventBgEffect0Tiles, gEventBgEffect0Palette, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,
+    &gEventBgEffectMaps[0], gEventBgEffect0Tiles, gEventBgEffect0Palette, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, EVENT_BG_EFFECT_LOOP_NONE,
 };
 
 static const EventBgEffectFrame sEventBgEffect1Frames[8] = {
@@ -34,7 +34,7 @@ static const EventBgEffectFrame sEventBgEffect1Frames[8] = {
 };
 
 static const EventBgEffectDef sEventBgEffect1Def = {
-    &gEventBgEffectMaps[1], gEventBgEffect1Tiles, gEventBgEffect1Palette, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect1Frames, 8, -1,
+    &gEventBgEffectMaps[1], gEventBgEffect1Tiles, gEventBgEffect1Palette, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect1Frames, 8, EVENT_BG_EFFECT_LOOP_NONE,
 };
 
 static const EventBgEffectFrame sEventBgEffect2Frames[8] = {
@@ -49,7 +49,7 @@ static const EventBgEffectFrame sEventBgEffect2Frames[8] = {
 };
 
 static const EventBgEffectDef sEventBgEffect2Def = {
-    &gEventBgEffectMaps[2], gEventBgEffect2Tiles, gEventBgEffect2Palette, 0xC00, 0x20, { 1, 1, 0, 0 }, sEventBgEffect2Frames, 8, -1,
+    &gEventBgEffectMaps[2], gEventBgEffect2Tiles, gEventBgEffect2Palette, 0xC00, 0x20, { 1, 1, 0, 0 }, sEventBgEffect2Frames, 8, EVENT_BG_EFFECT_LOOP_NONE,
 };
 
 static const EventBgEffectFrame sEventBgEffect3Frames[10] = {
@@ -66,7 +66,7 @@ static const EventBgEffectFrame sEventBgEffect3Frames[10] = {
 };
 
 static const EventBgEffectDef sEventBgEffect3Def = {
-    &gEventBgEffectMaps[3], gEventBgEffect3Tiles, gEventBgEffect3Palette, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect3Frames, 10, -1,
+    &gEventBgEffectMaps[3], gEventBgEffect3Tiles, gEventBgEffect3Palette, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect3Frames, 10, EVENT_BG_EFFECT_LOOP_NONE,
 };
 
 static const EventBgEffectFrame sEventBgEffect4Frames[10] = {
@@ -83,7 +83,7 @@ static const EventBgEffectFrame sEventBgEffect4Frames[10] = {
 };
 
 static const EventBgEffectDef sEventBgEffect4Def = {
-    &gEventBgEffectMaps[4], gEventBgEffect4Tiles, gEventBgEffect4Palette, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect4Frames, 10, -1,
+    &gEventBgEffectMaps[4], gEventBgEffect4Tiles, gEventBgEffect4Palette, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect4Frames, 10, EVENT_BG_EFFECT_LOOP_NONE,
 };
 
 static const EventBgEffectFrame sEventBgEffect5Frames[16] = {
@@ -106,7 +106,7 @@ static const EventBgEffectFrame sEventBgEffect5Frames[16] = {
 };
 
 static const EventBgEffectDef sEventBgEffect5Def = {
-    &gEventBgEffectMaps[5], gEventBgEffect5Tiles, gEventBgEffect5Palette, 0xC00, 0x20, { 1, 1, 0, 0 }, sEventBgEffect5Frames, 16, -1,
+    &gEventBgEffectMaps[5], gEventBgEffect5Tiles, gEventBgEffect5Palette, 0xC00, 0x20, { 1, 1, 0, 0 }, sEventBgEffect5Frames, 16, EVENT_BG_EFFECT_LOOP_NONE,
 };
 
 static const EventBgEffectFrame sEventBgEffect6Frames[6] = {
@@ -292,7 +292,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* work) {
             work->frame++;
             RequestDma3Copy(def->tiles + frames[work->frame].tilesOffset, GetBgCharBase(0), def->tilesSize);
         } else {
-            if (def->loopFrame == -1) {
+            if (def->loopFrame == EVENT_BG_EFFECT_LOOP_NONE) {
                 work->animating = 0;
                 return 0;
             }

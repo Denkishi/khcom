@@ -53,7 +53,7 @@
 #include "sprite_palettes.h"
 
 static const JiminyEntry sJiminyEntries[21] = {
-    { gJiminyRootMap, gJiminyRootNames, 3, -1, gJiminyEntry00Children, NULL, 0 },
+    { gJiminyRootMap, gJiminyRootNames, 3, JIMINY_ENTRY_NONE, gJiminyEntry00Children, NULL, 0 },
     { gJiminyStoryListMap, gJiminyEntry01Names, 17, 0, NULL, gJiminyEntry01Flags, 1 },
     { gJiminyCardListMap, gJiminyEntry02Names, 7, 0, gJiminyEntry02Children, NULL, 0 },
     { gJiminyCharacterListMap, gJiminyEntry03Names, 3, 0, gJiminyEntry03Children, NULL, 0 },
@@ -67,7 +67,7 @@ static const JiminyEntry sJiminyEntries[21] = {
     { gJiminyCharacterListMap, gJiminyEntry11Names, 25, 3, NULL, gJiminyEntry11Flags, 9 },
     { gJiminyCharacterListMap, gJiminyEntry12Names, 40, 3, NULL, gJiminyEntry12Flags, 10 },
     { gJiminyCharacterListMap, gJiminyEntry13Names, 35, 3, NULL, gJiminyEntry13Flags, 11 },
-    { gJiminyRootMap, gJiminyRootNames, 3, -1, gJiminyEntry14Children, NULL, 0 },
+    { gJiminyRootMap, gJiminyRootNames, 3, JIMINY_ENTRY_NONE, gJiminyEntry14Children, NULL, 0 },
     { gJiminyStoryListMap, gJiminyEntry15Names, 6, 14, NULL, gJiminyEntry15Flags, 12 },
     { gJiminyCardListMap, gJiminyEntry16Names, 22, 14, NULL, gJiminyEntry16Flags, 13 },
     { gJiminyCharacterListMap, gJiminyEntry03Names, 3, 14, gJiminyEntry17Children, NULL, 0 },
@@ -1810,7 +1810,7 @@ void mode_jiminy_1() {
         if (GetKeysPressed() & B_BUTTON) {
             sJiminyWork->stateTimer = 0;
 
-            if (listEntry->parent == -1) {
+            if (listEntry->parent == JIMINY_ENTRY_NONE) {
                 sJiminyWork->state = JIMINY_STATE_TITLE_OUT;
             } else {
                 sJiminyWork->state = JIMINY_STATE_OPEN_LIST;

@@ -179,14 +179,20 @@ u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* palette, ObjAffine* affin
     return 1;
 }
 
+enum ObjTilesType {
+    OBJ_TILES_TYPE_SHARED,
+    OBJ_TILES_TYPE_ALLOCATED,
+    OBJ_TILES_TYPE_FRAME
+};
+
 u8 DrawSprite(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority) {
     if (gSpriteWork->entryCount <= 127 && obj != NULL) {
         switch (((ObjTiles*)obj)->type) {
-        case 0:
+        case OBJ_TILES_TYPE_SHARED:
             return DrawSpriteSharedTiles(x, y, sprite, obj, palette, affine, flags, priority);
-        case 1:
+        case OBJ_TILES_TYPE_ALLOCATED:
             return DrawSpriteAllocatedTiles(x, y, sprite, obj, palette, affine, flags, priority);
-        case 2:
+        case OBJ_TILES_TYPE_FRAME:
             return DrawSpriteFrameTiles(x, y, obj, palette, affine, flags, priority);
         }
     }
@@ -274,7 +280,7 @@ ObjTiles* LoadObjTiles(const void* src, u16 size) {
         return NULL;
     }
 
-    node->type = 0;
+    node->type = OBJ_TILES_TYPE_SHARED;
     node->count = size / 32;
     node->src = src;
     node->refCount = 0;
@@ -363,13 +369,13 @@ void ReleaseObjTiles(void* tiles) {
     }
 
     switch (q->type) {
-    case 0:
+    case OBJ_TILES_TYPE_SHARED:
         ReleaseSharedObjTiles(q);
         break;
-    case 1:
+    case OBJ_TILES_TYPE_ALLOCATED:
         ReleaseAllocatedObjTiles(q);
         break;
-    case 2:
+    case OBJ_TILES_TYPE_FRAME:
         ReleaseSpriteFrameTiles(q);
         break;
     }
@@ -392,7 +398,7 @@ ObjTiles* AllocObjTiles(u16 size, const void* owner) {
         return NULL;
     }
 
-    node->type = 1;
+    node->type = OBJ_TILES_TYPE_ALLOCATED;
     node->count = size / 32;
     node->src = owner;
     node->refCount = 0;
@@ -448,6 +454,11 @@ void SetObjTileSource(ObjTiles* tiles, const void* src) {
     tiles->src = src;
 }
 
+enum ObjPaletteType {
+    OBJ_PALETTE_TYPE_SHARED,
+    OBJ_PALETTE_TYPE_ALLOCATED = 2
+};
+
 ObjPalette* LoadObjPalette(const void* src, u16 size) {
     ObjPalette* node;
     ObjPalette* cur;
@@ -476,7 +487,7 @@ ObjPalette* LoadObjPalette(const void* src, u16 size) {
         return NULL;
     }
 
-    node->type = 0;
+    node->type = OBJ_PALETTE_TYPE_SHARED;
     node->count = size / 32;
     node->src = src;
     node->refCount = 0;
@@ -1087,7 +1098,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
 
 void InitObjTilesAtSlot(ObjTiles* t, u16 slot, void* src, u16 size) {
     if (slot + (size >> 5) <= 0x400) {
-        t->type = 0;
+        t->type = OBJ_TILES_TYPE_SHARED;
         t->count = size >> 5;
         t->src = src;
         t->refCount = 0;
@@ -1100,7 +1111,7 @@ void InitObjTilesAtSlot(ObjTiles* t, u16 slot, void* src, u16 size) {
 
 void InitDynamicObjTilesAtSlot(ObjTiles* t, u16 slot, u16 size, void* src) {
     if (slot + (size >> 5) <= 0x400) {
-        t->type = 1;
+        t->type = OBJ_TILES_TYPE_ALLOCATED;
         t->count = size >> 5;
         t->src = src;
         t->refCount = 0;
@@ -1112,7 +1123,7 @@ void InitDynamicObjTilesAtSlot(ObjTiles* t, u16 slot, u16 size, void* src) {
 
 void InitObjPaletteAtSlot(ObjPalette* t, u16 slot, void* src, u16 size) {
     if (slot + (size >> 5) <= 0x10) {
-        t->type = 0;
+        t->type = OBJ_PALETTE_TYPE_SHARED;
         t->count = size >> 5;
         t->src = src;
         t->refCount = 0;
@@ -1125,7 +1136,7 @@ ObjTiles* AllocSpriteFrameTiles(u16 size) {
     ObjTiles* t = AllocObjTiles(size, NULL);
 
     if (t != NULL) {
-        t->type = 2;
+        t->type = OBJ_TILES_TYPE_FRAME;
     }
 
     return t;
@@ -1137,7 +1148,7 @@ u8 UpdateSpriteFrameTiles(ObjTiles* tiles, u16* sprite, void* src) {
     u16 acc;
     u16 n;
 
-    if (sprite != NULL && src != NULL && tiles->type == 2) {
+    if (sprite != NULL && src != NULL && tiles->type == OBJ_TILES_TYPE_FRAME) {
         if (tiles->sprite != sprite || tiles->src != src) {
             tiles->src = src;
             tiles->sprite = sprite;
@@ -1178,7 +1189,7 @@ ObjPalette* AllocObjPalette(u16 size) {
         return NULL;
     }
 
-    node->type = 2;
+    node->type = OBJ_PALETTE_TYPE_ALLOCATED;
     node->count = size / 32;
     node->src = NULL;
     node->refCount = 0;
@@ -1229,7 +1240,7 @@ ObjPalette* AllocObjPalette(u16 size) {
 }
 
 void UpdateAllocatedObjPalette(ObjPalette* t, void* src) {
-    if (t->type == 2) {
+    if (t->type == OBJ_PALETTE_TYPE_ALLOCATED) {
         LoadPalette(src, (void*)(OBJ_PLTT + t->index * PLTT_SIZE_4BPP), t->count << 5);
     }
 }

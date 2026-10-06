@@ -64,7 +64,7 @@ void UpdateVsKeyHoldTimes(u16 keys, s32 side) {
 }
 
 s32 ReadVsKeyChord(u16 held, u16 pressed, s32 side) {
-    s32 ret = 0;
+    s32 chord = 0;
 
     UpdateVsKeyHoldTimes(held, side);
 
@@ -78,24 +78,24 @@ s32 ReadVsKeyChord(u16 held, u16 pressed, s32 side) {
 
     if (((pressed & L_BUTTON) && (held & R_BUTTON)) || ((pressed & R_BUTTON) && (held & L_BUTTON))) {
         sVsKeyChordLatch[side] |= (L_BUTTON | R_BUTTON);
-        ret = L_BUTTON | R_BUTTON;
+        chord = L_BUTTON | R_BUTTON;
     }
 
     if (!(sVsKeyChordLatch[side] & L_BUTTON)) {
         if (sVsKeyHoldL[side] == 5 || sVsKeyReleaseL[side] == 1) {
             sVsKeyChordLatch[side] |= L_BUTTON;
-            ret = L_BUTTON;
+            chord = L_BUTTON;
         }
     }
 
     if (!(sVsKeyChordLatch[side] & R_BUTTON)) {
         if (sVsKeyHoldR[side] == 5 || sVsKeyReleaseR[side] == 1) {
             sVsKeyChordLatch[side] |= R_BUTTON;
-            ret = R_BUTTON;
+            chord = R_BUTTON;
         }
     }
 
-    return ret;
+    return chord;
 }
 
 void VsBtlWorkInit() {
@@ -121,14 +121,14 @@ void VsBtlWorkInit() {
 }
 
 void HandleVsRikuCardInput() {
-    BtlWork* w;
-    BtlObj* o;
+    BtlWork* btl;
+    BtlObj* actor;
     u16 held;
     u16 pressed;
-    s32 res;
-    u8 f;
+    s32 chord;
+    u8 reloadSelected;
 
-    w = gRikuBtlWork;
+    btl = gRikuBtlWork;
 
     if (gBtlWork->flags & BTL_FLAG_VS_LINK_PARENT) {
         held = SioKeyGetHeldB();
@@ -163,9 +163,9 @@ void HandleVsRikuCardInput() {
         sVsRikuReloadTimer--;
     }
 
-    res = (u16)ReadVsKeyChord(held, pressed, 1);
+    chord = (u16)ReadVsKeyChord(held, pressed, 1);
 
-    switch (res) {
+    switch (chord) {
     case L_BUTTON:
         RequestRikuNextCard();
         break;
@@ -178,40 +178,40 @@ void HandleVsRikuCardInput() {
         RequestSwitchRikuCardList();
     }
 
-    f = IsRikuReloadCardSelected();
+    reloadSelected = IsRikuReloadCardSelected();
 
-    if (f) {
-        w->lHeldFrames = 0;
-        w->rHeldFrames = 0;
+    if (reloadSelected) {
+        btl->lHeldFrames = 0;
+        btl->rHeldFrames = 0;
     } else {
         if ((held & L_BUTTON) && !(held & R_BUTTON)) {
-            if (w->lHeldFrames <= 254) {
-                w->lHeldFrames++;
+            if (btl->lHeldFrames <= 254) {
+                btl->lHeldFrames++;
             }
         } else {
-            w->lHeldFrames = f;
+            btl->lHeldFrames = reloadSelected;
         }
 
         if ((held & R_BUTTON) && !(held & L_BUTTON)) {
-            if (w->rHeldFrames <= 254) {
-                w->rHeldFrames++;
+            if (btl->rHeldFrames <= 254) {
+                btl->rHeldFrames++;
             }
         } else {
-            w->rHeldFrames = 0;
+            btl->rHeldFrames = 0;
         }
     }
 
-    if (w->lHeldFrames > 32) {
+    if (btl->lHeldFrames > 32) {
         RequestRikuNextCard();
     }
 
-    if (w->rHeldFrames > 32) {
+    if (btl->rHeldFrames > 32) {
         RequestRikuPrevCard();
     }
 
-    o = w->actor;
+    actor = btl->actor;
 
-    if (o->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
+    if (actor->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -227,11 +227,11 @@ void HandleVsRikuCardInput() {
         return;
     }
 
-    if (o->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+    if (actor->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
-    if (res == 0x300) {
+    if (chord == 0x300) {
         if (GetRikuStockCount() > 2) {
             RequestRikuStockUse();
         } else {
@@ -251,16 +251,16 @@ void HandleVsRikuCardInput() {
 }
 
 void HandleVsSoraCardInput() {
-    BtlWork* w;
-    BtlObj* o;
+    BtlWork* btl;
+    BtlObj* actor;
     u16 held;
     u16 pressed;
-    s32 res;
-    u8 f;
+    s32 chord;
+    u8 reloadSelected;
 
-    w = gBtlWork;
+    btl = gBtlWork;
 
-    if (w->flags & BTL_FLAG_VS_LINK_PARENT) {
+    if (btl->flags & BTL_FLAG_VS_LINK_PARENT) {
         held = SioKeyGetHeldA();
         pressed = SioKeyGetPressedA();
     } else {
@@ -293,9 +293,9 @@ void HandleVsSoraCardInput() {
         sVsSoraReloadTimer--;
     }
 
-    res = (u16)ReadVsKeyChord(held, pressed, 0);
+    chord = (u16)ReadVsKeyChord(held, pressed, 0);
 
-    switch (res) {
+    switch (chord) {
     case L_BUTTON:
         RequestSoraNextCard();
         break;
@@ -308,40 +308,40 @@ void HandleVsSoraCardInput() {
         RequestSwitchSoraCardList();
     }
 
-    f = IsSoraReloadCardSelected();
+    reloadSelected = IsSoraReloadCardSelected();
 
-    if (f) {
-        w->lHeldFrames = 0;
-        w->rHeldFrames = 0;
+    if (reloadSelected) {
+        btl->lHeldFrames = 0;
+        btl->rHeldFrames = 0;
     } else {
         if ((held & L_BUTTON) && !(held & R_BUTTON)) {
-            if (w->lHeldFrames <= 254) {
-                w->lHeldFrames++;
+            if (btl->lHeldFrames <= 254) {
+                btl->lHeldFrames++;
             }
         } else {
-            w->lHeldFrames = f;
+            btl->lHeldFrames = reloadSelected;
         }
 
         if ((held & R_BUTTON) && !(held & L_BUTTON)) {
-            if (w->rHeldFrames <= 254) {
-                w->rHeldFrames++;
+            if (btl->rHeldFrames <= 254) {
+                btl->rHeldFrames++;
             }
         } else {
-            w->rHeldFrames = 0;
+            btl->rHeldFrames = 0;
         }
     }
 
-    if (w->lHeldFrames > 32) {
+    if (btl->lHeldFrames > 32) {
         RequestSoraNextCard();
     }
 
-    if (w->rHeldFrames > 32) {
+    if (btl->rHeldFrames > 32) {
         RequestSoraPrevCard();
     }
 
-    o = w->actor;
+    actor = btl->actor;
 
-    if (o->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
+    if (actor->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -357,11 +357,11 @@ void HandleVsSoraCardInput() {
         return;
     }
 
-    if (o->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+    if (actor->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
-    if (res == 0x300) {
+    if (chord == 0x300) {
         if (GetSoraStockCount() > 2) {
             RequestSoraStockUse();
         } else {

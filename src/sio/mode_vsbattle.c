@@ -31,11 +31,11 @@ u8 gUnk_02039B98 EWRAM_COMMON(4);
 void mode_vsbattle_0(u32 mode) {
     VsTaskArg arg;
     VsTaskArg arg2;
-    BtlWork** p;
+    BtlWork** rikuBtl;
 
     gBtlWork = EwramAlloc(sizeof(BtlWork));
-    p = &gRikuBtlWork;
-    *p = EwramAlloc(sizeof(BtlWork));
+    rikuBtl = &gRikuBtlWork;
+    *rikuBtl = EwramAlloc(sizeof(BtlWork));
 
     if (gSioPlayerId == 0) {
         SeedRandom(gCharaLinkSend.seed);

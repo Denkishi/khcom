@@ -137,7 +137,7 @@ enum SioBattleState {
 };
 
 void mode_sio_battle_0(s32 arg) {
-    SioBattleWork* w;
+    SioBattleWork* work;
     void* gfx;
     s32 i;
 
@@ -201,24 +201,24 @@ void mode_sio_battle_0(s32 arg) {
     AnimInit(&sSioBattleWork->anim, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioBattleWork->anim, 1, ANIM_FLAG_LOOP);
     gfx = AnimGetGfx(&sSioBattleWork->anim);
-    w = sSioBattleWork;
-    w->gfx = gfx;
-    w->modeArg = arg;
+    work = sSioBattleWork;
+    work->gfx = gfx;
+    work->modeArg = arg;
 
-    switch (w->modeArg) {
+    switch (work->modeArg) {
     case 0:
     case 1:
-        if (w->modeArg == 0) {
+        if (work->modeArg == 0) {
             if (gSioBattleFileLoaded != 1) {
                 gSioBattleFileLoaded = 0;
-                w->cursor = 1;
+                work->cursor = 1;
             } else {
                 gSioBattleFileLoaded = 1;
-                w->cursor = 0;
+                work->cursor = 0;
             }
         } else {
             gSioBattleFileLoaded = 1;
-            w->cursor = 0;
+            work->cursor = 0;
         }
 
 #ifdef VERSION_EU
@@ -257,7 +257,7 @@ void mode_sio_battle_0(s32 arg) {
 #ifdef VERSION_EU
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
-        w->cursor = 0;
+        work->cursor = 0;
 
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -283,7 +283,7 @@ void mode_sio_battle_0(s32 arg) {
             break;
         }
 #else
-        w->cursor = 0;
+        work->cursor = 0;
         sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
         sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
@@ -291,7 +291,7 @@ void mode_sio_battle_0(s32 arg) {
 #endif
         break;
     case 3:
-        w->cursor = 0;
+        work->cursor = 0;
 #ifdef VERSION_EU
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
@@ -1100,7 +1100,7 @@ void SioBtlOptionWaitStart() {
 }
 
 void SioBtlOptionHandleIdle() {
-    s8 v = 0;
+    s8 worldCursor = 0;
 
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
@@ -1117,27 +1117,27 @@ void SioBtlOptionHandleIdle() {
         if (gSioWorldCount == 1) {
             m4aSongNumStart(SONG_SYS_BEEP);
         } else {
-            v = gSioWorldCursor;
-            v--;
+            worldCursor = gSioWorldCursor;
+            worldCursor--;
 
-            if (v <= 0) {
-                v = gSioWorldCount;
+            if (worldCursor <= 0) {
+                worldCursor = gSioWorldCount;
             }
 
-            gSioCommandSend[2] |= v & 15;
+            gSioCommandSend[2] |= worldCursor & 15;
         }
     } else if (GetKeysPressed() & R_BUTTON) {
         if (gSioWorldCount == 1) {
             m4aSongNumStart(SONG_SYS_BEEP);
         } else {
-            v = gSioWorldCursor;
-            v++;
+            worldCursor = gSioWorldCursor;
+            worldCursor++;
 
-            if (v > gSioWorldCount) {
-                v = 1;
+            if (worldCursor > gSioWorldCount) {
+                worldCursor = 1;
             }
 
-            gSioCommandSend[2] |= v & 15;
+            gSioCommandSend[2] |= worldCursor & 15;
         }
     } else {
         gSioCommandSend[2] &= 0xFFF0;
@@ -1189,11 +1189,11 @@ void SioBtlOptionHandleIdle() {
             if (gSioWorldCount == 1) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             } else {
-                v = gSioWorldCursor;
-                v--;
+                worldCursor = gSioWorldCursor;
+                worldCursor--;
 
-                if (v <= 0) {
-                    v = gSioWorldCount;
+                if (worldCursor <= 0) {
+                    worldCursor = gSioWorldCount;
                 }
 
                 sSioBtlOptionWork->timer = 0;
@@ -1201,7 +1201,7 @@ void SioBtlOptionHandleIdle() {
                 sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
-                gSioWorldCursor = v;
+                gSioWorldCursor = worldCursor;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
@@ -1209,11 +1209,11 @@ void SioBtlOptionHandleIdle() {
             if (gSioWorldCount == 1) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             } else {
-                v = gSioWorldCursor;
-                v++;
+                worldCursor = gSioWorldCursor;
+                worldCursor++;
 
-                if (v > gSioWorldCount) {
-                    v = 1;
+                if (worldCursor > gSioWorldCount) {
+                    worldCursor = 1;
                 }
 
                 sSioBtlOptionWork->timer = 0;
@@ -1221,7 +1221,7 @@ void SioBtlOptionHandleIdle() {
                 sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
-                gSioWorldCursor = v;
+                gSioWorldCursor = worldCursor;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
@@ -1238,7 +1238,7 @@ void SioBtlOptionHandleIdle() {
 }
 
 void SioBtlOptionHandleMenu() {
-    s8 v;
+    s8 worldCursor;
 
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
@@ -1265,27 +1265,27 @@ void SioBtlOptionHandleMenu() {
         if (gSioWorldCount == 1) {
             m4aSongNumStart(SONG_SYS_BEEP);
         } else {
-            v = gSioWorldCursor;
-            v--;
+            worldCursor = gSioWorldCursor;
+            worldCursor--;
 
-            if (v <= 0) {
-                v = gSioWorldCount;
+            if (worldCursor <= 0) {
+                worldCursor = gSioWorldCount;
             }
 
-            gSioCommandSend[2] |= v & 15;
+            gSioCommandSend[2] |= worldCursor & 15;
         }
     } else if (GetKeysPressed() & R_BUTTON) {
         if (gSioWorldCount == 1) {
             m4aSongNumStart(SONG_SYS_BEEP);
         } else {
-            v = gSioWorldCursor;
-            v++;
+            worldCursor = gSioWorldCursor;
+            worldCursor++;
 
-            if (v > gSioWorldCount) {
-                v = 1;
+            if (worldCursor > gSioWorldCount) {
+                worldCursor = 1;
             }
 
-            gSioCommandSend[2] |= v & 15;
+            gSioCommandSend[2] |= worldCursor & 15;
         }
     } else {
         gSioCommandSend[2] &= 0xFFF0;
@@ -1354,11 +1354,11 @@ void SioBtlOptionHandleMenu() {
             if (gSioWorldCount == 1) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             } else {
-                v = gSioWorldCursor;
-                v--;
+                worldCursor = gSioWorldCursor;
+                worldCursor--;
 
-                if (v <= 0) {
-                    v = gSioWorldCount;
+                if (worldCursor <= 0) {
+                    worldCursor = gSioWorldCount;
                 }
 
                 sSioBtlOptionWork->timer = 0;
@@ -1366,7 +1366,7 @@ void SioBtlOptionHandleMenu() {
                 sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
-                gSioWorldCursor = v;
+                gSioWorldCursor = worldCursor;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
@@ -1374,11 +1374,11 @@ void SioBtlOptionHandleMenu() {
             if (gSioWorldCount == 1) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             } else {
-                v = gSioWorldCursor;
-                v++;
+                worldCursor = gSioWorldCursor;
+                worldCursor++;
 
-                if (v > gSioWorldCount) {
-                    v = 1;
+                if (worldCursor > gSioWorldCount) {
+                    worldCursor = 1;
                 }
 
                 sSioBtlOptionWork->timer = 0;
@@ -1386,7 +1386,7 @@ void SioBtlOptionHandleMenu() {
                 sSioBtlOptionWork->worldChangeState = SIO_WORLD_CHANGE_STATE_FADE_OUT;
                 sSioBtlOptionWork->returnState = sSioBtlOptionWork->state;
                 gSioPrevWorldCursor = gSioWorldCursor;
-                gSioWorldCursor = v;
+                gSioWorldCursor = worldCursor;
                 sSioBtlOptionWork->state = SIO_BTL_OPTION_STATE_CHANGE_WORLD;
                 m4aSongNumStart(SONG_SYS_CANSEL);
             }
@@ -1521,8 +1521,8 @@ void SioBtlOptionSetHandicap() {
 }
 
 void SioBtlOptionChangeWorld() {
-    s8 a = gSioWorldList[gSioPrevWorldCursor];
-    s8 b = gSioWorldList[gSioWorldCursor];
+    s8 prevWorldEntry = gSioWorldList[gSioPrevWorldCursor];
+    s8 worldEntry = gSioWorldList[gSioWorldCursor];
 
     switch (sSioBtlOptionWork->worldChangeState) {
     case SIO_WORLD_CHANGE_STATE_FADE_OUT:
@@ -1536,29 +1536,29 @@ void SioBtlOptionChangeWorld() {
                 sSioBtlOptionWork->worldChangeState++;
             } else {
                 sSioBtlOptionWork->fadeLevel += 8;
-                FadePaletteToBlack(gSioWorldEntries[a].palette, (u16*)PLTT, gSioWorldEntries[a].paletteSize, sSioBtlOptionWork->fadeLevel);
+                FadePaletteToBlack(gSioWorldEntries[prevWorldEntry].palette, (u16*)PLTT, gSioWorldEntries[prevWorldEntry].paletteSize, sSioBtlOptionWork->fadeLevel);
             }
         }
 
         break;
     case SIO_WORLD_CHANGE_STATE_LOAD_MAP:
-        FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize, 32);
+        FadePaletteToBlack(gSioWorldEntries[worldEntry].palette, (u16*)PLTT, gSioWorldEntries[worldEntry].paletteSize, 32);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gSioWorldEntries[b].map);
+        LoadBgMapLz77(2, gSioWorldEntries[worldEntry].map);
 #else
-        LoadBgMap(2, gSioWorldEntries[b].map, gSioWorldEntries[b].mapSize);
+        LoadBgMap(2, gSioWorldEntries[worldEntry].map, gSioWorldEntries[worldEntry].mapSize);
 #endif
-        RequestDma3Copy(gSioWorldEntries[b].tiles, GetBgCharBase(2), 0x2000);
+        RequestDma3Copy(gSioWorldEntries[worldEntry].tiles, GetBgCharBase(2), 0x2000);
         sSioBtlOptionWork->worldChangeState++;
         break;
     case SIO_WORLD_CHANGE_STATE_LOAD_TILES:
-        RequestDma3Copy((u8*)gSioWorldEntries[b].tiles + 0x2000, (u8*)GetBgCharBase(2) + 0x2000, gSioWorldEntries[b].tilesSize - 0x2000);
+        RequestDma3Copy((u8*)gSioWorldEntries[worldEntry].tiles + 0x2000, (u8*)GetBgCharBase(2) + 0x2000, gSioWorldEntries[worldEntry].tilesSize - 0x2000);
 #ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount = LoadTextSlots(GetLocalizedString(gSioWorldEntries[b].text), sSioBtlOptionWork->textSlots);
+        sSioBtlOptionWork->textSlotCount = LoadTextSlots(GetLocalizedString(gSioWorldEntries[worldEntry].text), sSioBtlOptionWork->textSlots);
 #else
-        sSioBtlOptionWork->textSlotCount = LoadTextSlots(gSioWorldEntries[b].text, sSioBtlOptionWork->textSlots);
+        sSioBtlOptionWork->textSlotCount = LoadTextSlots(gSioWorldEntries[worldEntry].text, sSioBtlOptionWork->textSlots);
 #endif
-        sSioBtlOptionWork->worldEntry = b;
+        sSioBtlOptionWork->worldEntry = worldEntry;
         sSioBtlOptionWork->worldChangeState++;
         break;
     case SIO_WORLD_CHANGE_STATE_FADE_IN:
@@ -1575,9 +1575,9 @@ void SioBtlOptionChangeWorld() {
                 sSioBtlOptionWork->fadeLevel -= 8;
 
                 if (sSioBtlOptionWork->fadeLevel == 0) {
-                    LoadPaletteWithEffect(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize);
+                    LoadPaletteWithEffect(gSioWorldEntries[worldEntry].palette, (u16*)PLTT, gSioWorldEntries[worldEntry].paletteSize);
                 } else {
-                    FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize, sSioBtlOptionWork->fadeLevel);
+                    FadePaletteToBlack(gSioWorldEntries[worldEntry].palette, (u16*)PLTT, gSioWorldEntries[worldEntry].paletteSize, sSioBtlOptionWork->fadeLevel);
                 }
             }
         }
@@ -1896,9 +1896,9 @@ void SioBtlOptionRecvWorld() {
 }
 
 void SioBtlOptionRecvSettings() {
-    u8 buf[2];
-    s8 x;
-    s8 y;
+    u8 handicaps[2];
+    s8 player1WorldCursor;
+    s8 player2WorldCursor;
     s32 i;
 
 #ifdef VERSION_EU
@@ -1907,15 +1907,15 @@ void SioBtlOptionRecvSettings() {
     }
 #endif
 
-    buf[0] = (gSioCommandRecv[2][0] & 0xF0) >> 4;
-    buf[1] = (gSioCommandRecv[2][1] & 0xF0) >> 4;
+    handicaps[0] = (gSioCommandRecv[2][0] & 0xF0) >> 4;
+    handicaps[1] = (gSioCommandRecv[2][1] & 0xF0) >> 4;
 
-    if (buf[0] >= 1 && buf[0] <= 11) {
-        gSioHandicaps[0] = buf[0];
+    if (handicaps[0] >= 1 && handicaps[0] <= 11) {
+        gSioHandicaps[0] = handicaps[0];
     }
 
-    if (buf[1] >= 1 && buf[1] <= 11) {
-        gSioHandicaps[1] = buf[1];
+    if (handicaps[1] >= 1 && handicaps[1] <= 11) {
+        gSioHandicaps[1] = handicaps[1];
     }
 
     if ((gSioCommandRecv[2][0] >> 12) != 0) {
@@ -1942,17 +1942,17 @@ void SioBtlOptionRecvSettings() {
         }
     }
 
-    x = gSioCommandRecv[2][0] & 15;
-    y = gSioCommandRecv[2][1] & 15;
+    player1WorldCursor = gSioCommandRecv[2][0] & 15;
+    player2WorldCursor = gSioCommandRecv[2][1] & 15;
 
-    if (x != 0 || y != 0) {
-        if (x <= 12 && y <= 12) {
-            if (x > y) {
-                gSioWorldCursor = x;
-            } else if (x < y) {
-                gSioWorldCursor = y;
+    if (player1WorldCursor != 0 || player2WorldCursor != 0) {
+        if (player1WorldCursor <= 12 && player2WorldCursor <= 12) {
+            if (player1WorldCursor > player2WorldCursor) {
+                gSioWorldCursor = player1WorldCursor;
+            } else if (player1WorldCursor < player2WorldCursor) {
+                gSioWorldCursor = player2WorldCursor;
             } else {
-                gSioWorldCursor = x;
+                gSioWorldCursor = player1WorldCursor;
             }
         }
     }
@@ -2010,63 +2010,63 @@ void SioBtlOptionSyncDeckNames() {
 
 void SioBtlOptionDrawStats() {
     s16 digits[4];
-    s16 a, b, c, d, e, f, g, h;
+    s16 player1Level, player2Level, player1MaxHp, player2MaxHp, player1WinCount, player2WinCount, player1LoseCount, player2LoseCount;
 
 #ifdef VERSION_EU
     if ((!gSioDebugMode ? gSioPlayerId : 0) != 0) {
-        a = gCharaLinkRecv.level;
-        b = gCharaLinkSend.level;
-        c = gCharaLinkRecv.maxHp;
-        d = gCharaLinkSend.maxHp;
-        e = gCharaLinkRecv.winCount;
-        f = gCharaLinkSend.winCount;
-        g = gCharaLinkRecv.loseCount;
-        h = gCharaLinkSend.loseCount;
+        player1Level = gCharaLinkRecv.level;
+        player2Level = gCharaLinkSend.level;
+        player1MaxHp = gCharaLinkRecv.maxHp;
+        player2MaxHp = gCharaLinkSend.maxHp;
+        player1WinCount = gCharaLinkRecv.winCount;
+        player2WinCount = gCharaLinkSend.winCount;
+        player1LoseCount = gCharaLinkRecv.loseCount;
+        player2LoseCount = gCharaLinkSend.loseCount;
     } else {
-        a = gCharaLinkSend.level;
-        b = gCharaLinkRecv.level;
-        c = gCharaLinkSend.maxHp;
-        d = gCharaLinkRecv.maxHp;
-        e = gCharaLinkSend.winCount;
-        f = gCharaLinkRecv.winCount;
-        g = gCharaLinkSend.loseCount;
-        h = gCharaLinkRecv.loseCount;
+        player1Level = gCharaLinkSend.level;
+        player2Level = gCharaLinkRecv.level;
+        player1MaxHp = gCharaLinkSend.maxHp;
+        player2MaxHp = gCharaLinkRecv.maxHp;
+        player1WinCount = gCharaLinkSend.winCount;
+        player2WinCount = gCharaLinkRecv.winCount;
+        player1LoseCount = gCharaLinkSend.loseCount;
+        player2LoseCount = gCharaLinkRecv.loseCount;
     }
 #else
     if (gSioPlayerId == 0) {
-        a = gCharaLinkSend.level;
-        b = gCharaLinkRecv.level;
-        c = gCharaLinkSend.maxHp;
-        d = gCharaLinkRecv.maxHp;
-        e = gCharaLinkSend.winCount;
-        f = gCharaLinkRecv.winCount;
-        g = gCharaLinkSend.loseCount;
-        h = gCharaLinkRecv.loseCount;
+        player1Level = gCharaLinkSend.level;
+        player2Level = gCharaLinkRecv.level;
+        player1MaxHp = gCharaLinkSend.maxHp;
+        player2MaxHp = gCharaLinkRecv.maxHp;
+        player1WinCount = gCharaLinkSend.winCount;
+        player2WinCount = gCharaLinkRecv.winCount;
+        player1LoseCount = gCharaLinkSend.loseCount;
+        player2LoseCount = gCharaLinkRecv.loseCount;
     } else {
-        a = gCharaLinkRecv.level;
-        b = gCharaLinkSend.level;
-        c = gCharaLinkRecv.maxHp;
-        d = gCharaLinkSend.maxHp;
-        e = gCharaLinkRecv.winCount;
-        f = gCharaLinkSend.winCount;
-        g = gCharaLinkRecv.loseCount;
-        h = gCharaLinkSend.loseCount;
+        player1Level = gCharaLinkRecv.level;
+        player2Level = gCharaLinkSend.level;
+        player1MaxHp = gCharaLinkRecv.maxHp;
+        player2MaxHp = gCharaLinkSend.maxHp;
+        player1WinCount = gCharaLinkRecv.winCount;
+        player2WinCount = gCharaLinkSend.winCount;
+        player1LoseCount = gCharaLinkRecv.loseCount;
+        player2LoseCount = gCharaLinkSend.loseCount;
     }
 #endif
 
-    digits[0] = a / 100;
-    a %= 100;
-    digits[1] = a / 10;
-    a %= 10;
-    digits[2] = a;
+    digits[0] = player1Level / 100;
+    player1Level %= 100;
+    digits[1] = player1Level / 10;
+    player1Level %= 10;
+    digits[2] = player1Level;
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 8 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 9 * TILE_SIZE_4BPP), 32);
 
-    digits[0] = c / 100;
-    c %= 100;
-    digits[1] = c / 10;
-    c %= 10;
-    digits[2] = c;
+    digits[0] = player1MaxHp / 100;
+    player1MaxHp %= 100;
+    digits[1] = player1MaxHp / 10;
+    player1MaxHp %= 10;
+    digits[2] = player1MaxHp;
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[0] * 32, (void*)(BG_VRAM + 10 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 11 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 12 * TILE_SIZE_4BPP), 32);
@@ -2074,43 +2074,43 @@ void SioBtlOptionDrawStats() {
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
 
-    digits[0] = e / 1000;
-    e %= 1000;
-    digits[1] = e / 100;
-    e %= 100;
-    digits[2] = e / 10;
-    e %= 10;
-    digits[3] = e;
+    digits[0] = player1WinCount / 1000;
+    player1WinCount %= 1000;
+    digits[1] = player1WinCount / 100;
+    player1WinCount %= 100;
+    digits[2] = player1WinCount / 10;
+    player1WinCount %= 10;
+    digits[3] = player1WinCount;
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[0] * 32, (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[3] * 32, (void*)(BG_VRAM + 19 * TILE_SIZE_4BPP), 32);
 
-    digits[0] = g / 1000;
-    g %= 1000;
-    digits[1] = g / 100;
-    g %= 100;
-    digits[2] = g / 10;
-    g %= 10;
-    digits[3] = g;
+    digits[0] = player1LoseCount / 1000;
+    player1LoseCount %= 1000;
+    digits[1] = player1LoseCount / 100;
+    player1LoseCount %= 100;
+    digits[2] = player1LoseCount / 10;
+    player1LoseCount %= 10;
+    digits[3] = player1LoseCount;
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[0] * 32, (void*)(BG_VRAM + 20 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 21 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 22 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + digits[3] * 32, (void*)(BG_VRAM + 23 * TILE_SIZE_4BPP), 32);
 
-    digits[0] = b / 100;
-    b %= 100;
-    digits[1] = b / 10;
-    b %= 10;
-    digits[2] = b;
+    digits[0] = player2Level / 100;
+    player2Level %= 100;
+    digits[1] = player2Level / 10;
+    player2Level %= 10;
+    digits[2] = player2Level;
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 31 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 32 * TILE_SIZE_4BPP), 32);
 
-    digits[0] = d / 100;
-    d %= 100;
-    digits[1] = d / 10;
-    d %= 10;
-    digits[2] = d;
+    digits[0] = player2MaxHp / 100;
+    player2MaxHp %= 100;
+    digits[1] = player2MaxHp / 10;
+    player2MaxHp %= 10;
+    digits[2] = player2MaxHp;
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 33 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 34 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 35 * TILE_SIZE_4BPP), 32);
@@ -2118,25 +2118,25 @@ void SioBtlOptionDrawStats() {
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 37 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 38 * TILE_SIZE_4BPP), 32);
 
-    digits[0] = f / 1000;
-    f %= 1000;
-    digits[1] = f / 100;
-    f %= 100;
-    digits[2] = f / 10;
-    f %= 10;
-    digits[3] = f;
+    digits[0] = player2WinCount / 1000;
+    player2WinCount %= 1000;
+    digits[1] = player2WinCount / 100;
+    player2WinCount %= 100;
+    digits[2] = player2WinCount / 10;
+    player2WinCount %= 10;
+    digits[3] = player2WinCount;
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 39 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 40 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 41 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[3] * 32, (void*)(BG_VRAM + 42 * TILE_SIZE_4BPP), 32);
 
-    digits[0] = h / 1000;
-    h %= 1000;
-    digits[1] = h / 100;
-    h %= 100;
-    digits[2] = h / 10;
-    h %= 10;
-    digits[3] = h;
+    digits[0] = player2LoseCount / 1000;
+    player2LoseCount %= 1000;
+    digits[1] = player2LoseCount / 100;
+    player2LoseCount %= 100;
+    digits[2] = player2LoseCount / 10;
+    player2LoseCount %= 10;
+    digits[3] = player2LoseCount;
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 43 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 44 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 45 * TILE_SIZE_4BPP), 32);
@@ -2145,20 +2145,20 @@ void SioBtlOptionDrawStats() {
 
 void SioApplyBattleSettings() {
     s8* base;
-    s8* p;
-    GameState* gs;
+    s8* selected;
+    GameState* state;
     SioWorldEntry* table;
     SioWorldEntry* entry;
 
     base = gSioWorldList;
-    p = base + gSioWorldCursor;
-    gs = &gGameState;
+    selected = base + gSioWorldCursor;
+    state = &gGameState;
     table = gSioWorldEntries;
-    entry = &table[*p];
+    entry = &table[*selected];
 
-    gs->battleStage = entry->world;
-    gSioSavedWorld = gs->world;
-    gs->world = entry->world;
+    state->battleStage = entry->world;
+    gSioSavedWorld = state->world;
+    state->world = entry->world;
 
     if (gSioPlayerId == 0) {
         gCharaLinkSend.ap += gSioHandicapAp[sSioBtlOptionWork->handicaps[0]];
@@ -2181,7 +2181,7 @@ void SioApplyBattleSettings() {
 }
 
 void SioBtlOptionSyncHandicaps() {
-    u8 buf[2];
+    u8 handicaps[2];
 
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
@@ -2192,31 +2192,31 @@ void SioBtlOptionSyncHandicaps() {
         gSioCommandSend[2] |= (gSioHandicaps[1] & 15) << 4;
     }
 
-    buf[0] = (gSioCommandRecv[2][0] & 0xF0) >> 4;
-    buf[1] = (gSioCommandRecv[2][1] & 0xF0) >> 4;
+    handicaps[0] = (gSioCommandRecv[2][0] & 0xF0) >> 4;
+    handicaps[1] = (gSioCommandRecv[2][1] & 0xF0) >> 4;
 
-    if (buf[0] >= 1 && buf[0] <= 11) {
-        sSioBtlOptionWork->handicaps[0] = buf[0];
+    if (handicaps[0] >= 1 && handicaps[0] <= 11) {
+        sSioBtlOptionWork->handicaps[0] = handicaps[0];
         gSioHandicaps[0] = sSioBtlOptionWork->handicaps[0];
     }
 
-    if (buf[1] >= 1 && buf[1] <= 11) {
-        sSioBtlOptionWork->handicaps[1] = buf[1];
+    if (handicaps[1] >= 1 && handicaps[1] <= 11) {
+        sSioBtlOptionWork->handicaps[1] = handicaps[1];
         gSioHandicaps[1] = sSioBtlOptionWork->handicaps[1];
     }
 
     SioBtlOptionUpdateHandicapGauges(sSioBtlOptionWork->handicaps[0], sSioBtlOptionWork->handicaps[1]);
 #ifdef VERSION_EU
     } else {
-    buf[0] = gSioHandicaps[0];
-    buf[1] = gSioHandicaps[1];
+    handicaps[0] = gSioHandicaps[0];
+    handicaps[1] = gSioHandicaps[1];
 
-    if (buf[0] >= 1 && buf[0] <= 11) {
-        sSioBtlOptionWork->handicaps[0] = buf[0];
+    if (handicaps[0] >= 1 && handicaps[0] <= 11) {
+        sSioBtlOptionWork->handicaps[0] = handicaps[0];
     }
 
-    if (buf[1] >= 1 && buf[1] <= 11) {
-        sSioBtlOptionWork->handicaps[1] = buf[1];
+    if (handicaps[1] >= 1 && handicaps[1] <= 11) {
+        sSioBtlOptionWork->handicaps[1] = handicaps[1];
     }
 
     SioBtlOptionUpdateHandicapGauges(sSioBtlOptionWork->handicaps[0], sSioBtlOptionWork->handicaps[1]);
@@ -3359,7 +3359,7 @@ void mode_sio_chg_card_2() {
 
 void SioChgCardDraw() {
     s32 i;
-    ObjAffine* aff;
+    ObjAffine* affine;
     sSioChgCardWork->gfx[0] = AnimUpdate(&sSioChgCardWork->anim[0]);
     sSioChgCardWork->gfx[1] = AnimUpdate(&sSioChgCardWork->anim[1]);
     sSioChgCardWork->gfx2 = AnimUpdate(&sSioChgCardWork->anim2);
@@ -3374,11 +3374,11 @@ void SioChgCardDraw() {
 
     for (i = 0; i < 10; i++) {
         if (sSioChgCardWork->cardVisible[i] == 1) {
-            aff = AllocObjAffine(sSioChgCardWork->angle[i], sSioChgCardWork->scaleX[i], sSioChgCardWork->scaleY[i], 1);
-            DrawSprite((sSioChgCardWork->x2[i] >> 8) + 16, (sSioChgCardWork->y2[i] >> 8) + 20, sSioChgCardWork->gfx4[i], sSioChgCardWork->tiles3[i], sSioChgCardWork->palette3[i], aff, SPRITE_PRIORITY(1), 0xFFF0);
+            affine = AllocObjAffine(sSioChgCardWork->angle[i], sSioChgCardWork->scaleX[i], sSioChgCardWork->scaleY[i], 1);
+            DrawSprite((sSioChgCardWork->x2[i] >> 8) + 16, (sSioChgCardWork->y2[i] >> 8) + 20, sSioChgCardWork->gfx4[i], sSioChgCardWork->tiles3[i], sSioChgCardWork->palette3[i], affine, SPRITE_PRIORITY(1), 0xFFF0);
 
             if (gCardDefs[gSioChgCardSlots[i]].category != 3) {
-                DrawSprite((sSioChgCardWork->x2[i] >> 8) + 13, (sSioChgCardWork->y2[i] >> 8) + 16, sSioChgCardWork->gfx5[i], sSioChgCardWork->tiles4, sSioChgCardWork->palette4, aff, SPRITE_PRIORITY(1), 0xFFE0);
+                DrawSprite((sSioChgCardWork->x2[i] >> 8) + 13, (sSioChgCardWork->y2[i] >> 8) + 16, sSioChgCardWork->gfx5[i], sSioChgCardWork->tiles4, sSioChgCardWork->palette4, affine, SPRITE_PRIORITY(1), 0xFFE0);
             }
         }
     }
@@ -3472,59 +3472,59 @@ void SioChgCardSetSlotId(u16 command) {
 
 void SioChgCardDrawPointTotals() {
     u16 sum;
-    s32 lim;
-    s32 x;
+    s32 emptySlot;
+    s32 cardId;
     s32 i;
     s32 j;
     s16 digits[3];
-    s32 v;
+    s32 points;
     sum = 0;
-    lim = 0x800;
+    emptySlot = 0x800;
 
     for (i = 0; i < 5; i++) {
-        x = gSioChgCardSlots[i];
+        cardId = gSioChgCardSlots[i];
 
-        if ((s16)x != lim) {
-            sum = GetCardMooglePointValue(x) - (0 - sum);
+        if ((s16)cardId != emptySlot) {
+            sum = GetCardMooglePointValue(cardId) - (0 - sum);
         }
     }
 
-    v = (s16)sum;
-    digits[0] = v / 100;
-    v = v % 100;
-    digits[1] = v / 10;
-    v = v % 10;
-    digits[2] = v;
+    points = (s16)sum;
+    digits[0] = points / 100;
+    points = points % 100;
+    digits[1] = points / 10;
+    points = points % 10;
+    digits[2] = points;
     RequestDma3Copy(&gSioChgCardDigitTiles[digits[0] * 32], (void*)(BG_VRAM + 13 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(&gSioChgCardDigitTiles[digits[1] * 32], (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(&gSioChgCardDigitTiles[digits[2] * 32], (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
     sum = 0;
 
     for (j = 5; j < 10; j++) {
-        x = gSioChgCardSlots[j];
+        cardId = gSioChgCardSlots[j];
 
-        if ((s16)x != 0x800) {
-            sum = GetCardMooglePointValue(x) - (0 - sum);
+        if ((s16)cardId != 0x800) {
+            sum = GetCardMooglePointValue(cardId) - (0 - sum);
         }
     }
 
-    v = (s16)sum;
-    digits[0] = v / 100;
-    v = v % 100;
-    digits[1] = v / 10;
-    v = v % 10;
-    digits[2] = v;
+    points = (s16)sum;
+    digits[0] = points / 100;
+    points = points % 100;
+    digits[1] = points / 10;
+    points = points % 10;
+    digits[2] = points;
     RequestDma3Copy(&gSioChgCardDigitTiles[digits[0] * 32], (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(&gSioChgCardDigitTiles[digits[1] * 32], (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
     RequestDma3Copy(&gSioChgCardDigitTiles[digits[2] * 32], (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
 }
 
 void SioChgCardHandleInput() {
-    u16 k1;
-    u16 k2;
-    s16 v;
-    k1 = GetKeysPressed();
-    k2 = GetKeysPressed();
+    u16 player1Pressed;
+    u16 player2Pressed;
+    s16 owner;
+    player1Pressed = GetKeysPressed();
+    player2Pressed = GetKeysPressed();
 
     if (sSioChgCardWork->cardInfoVisible == 1) {
         if (GetKeysPressed() & B_BUTTON) {
@@ -3533,19 +3533,19 @@ void SioChgCardHandleInput() {
             }
         }
     } else if (gSioPlayerId == 0) {
-        if (k1 & DPAD_ANY) {
+        if (player1Pressed & DPAD_ANY) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        if (k1 & DPAD_UP) {
+        if (player1Pressed & DPAD_UP) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].up;
-        } else if (k1 & DPAD_DOWN) {
+        } else if (player1Pressed & DPAD_DOWN) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].down;
         }
 
-        if (k1 & DPAD_LEFT) {
+        if (player1Pressed & DPAD_LEFT) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].left;
-        } else if (k1 & DPAD_RIGHT) {
+        } else if (player1Pressed & DPAD_RIGHT) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].right;
         }
 
@@ -3553,7 +3553,7 @@ void SioChgCardHandleInput() {
             sSioChgCardWork->cursor = sSioChgCardWork->nextCursor;
         }
 
-        if (k1 & START_BUTTON) {
+        if (player1Pressed & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLICK);
             sSioChgCardWork->nextCursor = 10;
             sSioChgCardWork->cursor = 10;
@@ -3561,10 +3561,10 @@ void SioChgCardHandleInput() {
 
         sSioChgCardWork->x = gSioChgCardSlotPos[sSioChgCardWork->cursor].x;
         sSioChgCardWork->y = gSioChgCardSlotPos[sSioChgCardWork->cursor].y;
-        v = gSioChgCardSlotPos[sSioChgCardWork->cursor].owner;
+        owner = gSioChgCardSlotPos[sSioChgCardWork->cursor].owner;
 
-        if (k1 & A_BUTTON) {
-            if (v == 2) {
+        if (player1Pressed & A_BUTTON) {
+            if (owner == 2) {
                 if (SioChgCardHasOwnCards() == 1) {
                     sSioChgCardWork->ready = 1;
                     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
@@ -3575,17 +3575,17 @@ void SioChgCardHandleInput() {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 }
             } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == 0x800) {
-                if (v == 0) {
+                if (owner == 0) {
                     gSioCommandSend[1] = 0x1D58;
                 }
             } else if (!sSioChgCardWork->cardInfoVisible) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 SioChgCardShowInfo();
             }
-        } else if (k1 & B_BUTTON) {
+        } else if (player1Pressed & B_BUTTON) {
             if (SioChgCardSlotsEmpty() == 1) {
                 gSioCommandSend[1] = 0xA4CA;
-            } else if (v == 0) {
+            } else if (owner == 0) {
                 if (gSioChgCardSlots[sSioChgCardWork->cursor] != 0x800) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
                     SioChgCardReturnCard();
@@ -3593,19 +3593,19 @@ void SioChgCardHandleInput() {
             }
         }
     } else {
-        if (k2 & DPAD_ANY) {
+        if (player2Pressed & DPAD_ANY) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        if (k2 & DPAD_UP) {
+        if (player2Pressed & DPAD_UP) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].up;
-        } else if (k2 & DPAD_DOWN) {
+        } else if (player2Pressed & DPAD_DOWN) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].down;
         }
 
-        if (k2 & DPAD_LEFT) {
+        if (player2Pressed & DPAD_LEFT) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].left;
-        } else if (k2 & DPAD_RIGHT) {
+        } else if (player2Pressed & DPAD_RIGHT) {
             sSioChgCardWork->nextCursor = gSioChgCardSlotPos[sSioChgCardWork->cursor].right;
         }
 
@@ -3613,7 +3613,7 @@ void SioChgCardHandleInput() {
             sSioChgCardWork->cursor = sSioChgCardWork->nextCursor;
         }
 
-        if (k2 & START_BUTTON) {
+        if (player2Pressed & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLICK);
             sSioChgCardWork->nextCursor = 11;
             sSioChgCardWork->cursor = 11;
@@ -3621,10 +3621,10 @@ void SioChgCardHandleInput() {
 
         sSioChgCardWork->x = gSioChgCardSlotPos[sSioChgCardWork->cursor].x;
         sSioChgCardWork->y = gSioChgCardSlotPos[sSioChgCardWork->cursor].y;
-        v = gSioChgCardSlotPos[sSioChgCardWork->cursor].owner;
+        owner = gSioChgCardSlotPos[sSioChgCardWork->cursor].owner;
 
-        if (k2 & A_BUTTON) {
-            if (v == 2) {
+        if (player2Pressed & A_BUTTON) {
+            if (owner == 2) {
                 if (SioChgCardHasOwnCards() == 1) {
                     sSioChgCardWork->ready = 1;
                     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
@@ -3635,17 +3635,17 @@ void SioChgCardHandleInput() {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 }
             } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == 0x800) {
-                if (v == 1) {
+                if (owner == 1) {
                     gSioCommandSend[1] = 0x1D58;
                 }
             } else if (!sSioChgCardWork->cardInfoVisible) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 SioChgCardShowInfo();
             }
-        } else if (k2 & B_BUTTON) {
+        } else if (player2Pressed & B_BUTTON) {
             if (SioChgCardSlotsEmpty() == 1) {
                 gSioCommandSend[1] = 0xA4CA;
-            } else if (v == 1) {
+            } else if (owner == 1) {
                 if (gSioChgCardSlots[sSioChgCardWork->cursor] != 0x800) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
                     SioChgCardReturnCard();
@@ -3741,7 +3741,7 @@ void SioChgCardHideInfo() {
 }
 
 void SioChgCardCancelReady() {
-    s8 v;
+    s8 cursor;
     sSioChgCardWork->ready = 0;
 
     if (gSioPlayerId == 0) {
@@ -3750,9 +3750,9 @@ void SioChgCardCancelReady() {
         gSioChgCardCursor = 5;
     }
 
-    v = gSioChgCardCursor;
-    sSioChgCardWork->cursor = v;
-    sSioChgCardWork->nextCursor = v;
+    cursor = gSioChgCardCursor;
+    sSioChgCardWork->cursor = cursor;
+    sSioChgCardWork->nextCursor = cursor;
     sSioChgCardWork->x = gSioChgCardSlotPos[sSioChgCardWork->cursor].x;
     sSioChgCardWork->y = gSioChgCardSlotPos[sSioChgCardWork->cursor].y;
     sSioChgCardWork->cursorVisible = 1;
@@ -3823,13 +3823,13 @@ void SioChgCardRestoreCollection() {
 
 s16 SioChgCardReceiveCards() {
     s32 i;
-    s32 t;
+    s32 hasCard;
 
     if (gSioPlayerId == 0) {
         for (i = 5; i < 10; i++) {
-            t = gSioChgCardSlots[i] != 0x800;
+            hasCard = gSioChgCardSlots[i] != 0x800;
 
-            if (t) {
+            if (hasCard) {
                 if (AddCardToCollection(gSioChgCardSlots[i]) == -1) {
                     return 0;
                 }
@@ -3837,9 +3837,9 @@ s16 SioChgCardReceiveCards() {
         }
     } else {
         for (i = 0; i < 5; i++) {
-            t = gSioChgCardSlots[i] != 0x800;
+            hasCard = gSioChgCardSlots[i] != 0x800;
 
-            if (t) {
+            if (hasCard) {
                 if (AddCardToCollection(gSioChgCardSlots[i]) == -1) {
                     return 0;
                 }

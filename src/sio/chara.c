@@ -272,8 +272,8 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
     u8 angleA;
     s32 x;
     s32 y;
-    s32* p10;
-    s32* p14;
+    s32* scaleX;
+    s32* scaleY;
 
     switch (work->state) {
     case CHG_CARD_OBJ_STATE_DELAY:
@@ -297,17 +297,17 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
         work->speed -= work->decel;
         work->decel += 2;
         phase = ChgCardRotation(work, 128);
-        p10 = work->scaleX;
-        *p10 = (-COS(work->flipAngleX + phase) * work->scale) >> 8;
-        p14 = work->scaleY;
-        *p14 = (-COS(work->flipAngleY + 128) * work->scale) >> 8;
+        scaleX = work->scaleX;
+        *scaleX = (-COS(work->flipAngleX + phase) * work->scale) >> 8;
+        scaleY = work->scaleY;
+        *scaleY = (-COS(work->flipAngleY + 128) * work->scale) >> 8;
 
-        if (*p10 >= -2 && *p10 <= 2) {
-            *p10 = 2;
+        if (*scaleX >= -2 && *scaleX <= 2) {
+            *scaleX = 2;
         }
 
-        if (*p14 >= -2 && *p14 <= 2) {
-            *p14 = 2;
+        if (*scaleY >= -2 && *scaleY <= 2) {
+            *scaleY = 2;
         }
 
         if (work->speed < 0) {
@@ -337,10 +337,10 @@ void task_chgCardObj_3() {
 }
 
 u8 SioConnectUpdate() {
-    u32* p;
+    u32* status;
 
-    p = &gSioStatus;
-    *p = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
+    status = &gSioStatus;
+    *status = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
     gSioPlayerId = gSioStatus & 3;
     gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
     gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
@@ -390,10 +390,10 @@ u8 SioConnectUpdate() {
 }
 
 u8 SioLinkUpdate() {
-    u32* p;
+    u32* status;
 
-    p = &gSioStatus;
-    *p = SioTransferFrames(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
+    status = &gSioStatus;
+    *status = SioTransferFrames(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
     gSioPlayerId = gSioStatus & 3;
     gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
     gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
@@ -425,10 +425,10 @@ u8 SioLinkUpdate() {
 }
 
 u8 SioConnectUpdateAuto() {
-    u32* p;
+    u32* status;
 
-    p = &gSioStatus;
-    *p = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
+    status = &gSioStatus;
+    *status = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
     gSioPlayerId = gSioStatus & 3;
     gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
     gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
@@ -648,8 +648,8 @@ s32 SioConnectSend() {
 }
 
 s32 SioConnectRecv() {
-    u16 c;
-    u16 v;
+    u16 cancelWord;
+    u16 sentWord;
 
     if (!gSioConnected) {
         if (!gSioConnectAccepted) {
@@ -658,13 +658,13 @@ s32 SioConnectRecv() {
                     gSioConnectAccepted = 1;
                 }
             } else {
-                c = 0xAFAF;
+                cancelWord = 0xAFAF;
 
-                if (gSioRecvFrame[0][0] == c || gSioRecvFrame[0][1] == c) {
+                if (gSioRecvFrame[0][0] == cancelWord || gSioRecvFrame[0][1] == cancelWord) {
                     SioShutdown();
-                    v = gSioPlayerId == 0 ? gSioRecvFrame[0][0] : gSioRecvFrame[0][1];
+                    sentWord = gSioPlayerId == 0 ? gSioRecvFrame[0][0] : gSioRecvFrame[0][1];
 
-                    if (v == c) {
+                    if (sentWord == cancelWord) {
                         if (gSioCancelCallback != NULL) {
                             gSioCancelCallback();
                         }
@@ -786,18 +786,18 @@ s32 SioCommandRecv() {
 void SioSetLinkCallbacks(s32 (*send)(), s32 (*recv)()) {
     s32 i;
     s32 j;
-    s32 (**pb)();
-    u16* p1;
-    u16* p2;
-    s32 (**pa)();
+    s32 (**recvCallback)();
+    u16* relayKeysA;
+    u16* relayKeysB;
+    s32 (**sendCallback)();
 
     gSioConnectRetries = 0;
     gSioErrorStatus = 0;
     gSioLinkResult = 0;
-    pa = &gSioLinkSendCallback;
-    pb = &gSioLinkRecvCallback;
-    p1 = &gSioRelayKeysA;
-    p2 = &gSioRelayKeysB;
+    sendCallback = &gSioLinkSendCallback;
+    recvCallback = &gSioLinkRecvCallback;
+    relayKeysA = &gSioRelayKeysA;
+    relayKeysB = &gSioRelayKeysB;
 
     for (i = 0; i < 4; i++) {
         gSioSendFrame[i] = 0;
@@ -809,10 +809,10 @@ void SioSetLinkCallbacks(s32 (*send)(), s32 (*recv)()) {
         }
     }
 
-    *pa = send;
-    *pb = recv;
-    *p1 = 0;
-    *p2 = 0;
+    *sendCallback = send;
+    *recvCallback = recv;
+    *relayKeysA = 0;
+    *relayKeysB = 0;
 }
 
 s32 SioKeySyncSend() {
@@ -862,13 +862,13 @@ s32 SioKeySyncRecv() {
 }
 
 void SioPrepareDeckExchange() {
-    Deck* a;
-    Deck* b;
+    Deck* sendDeck;
+    Deck* recvDeck;
 
-    a = CreateLinkSendDeck();
-    gSioSendDeck = a;
-    b = CreateLinkPartnerDeck();
-    gSioRecvDeck = b;
+    sendDeck = CreateLinkSendDeck();
+    gSioSendDeck = sendDeck;
+    recvDeck = CreateLinkPartnerDeck();
+    gSioRecvDeck = recvDeck;
     gLinkDecksAllocated = 1;
     gSioExchangeSeqEnd = 59;
     gSioExchangeSeq = 1;
@@ -1054,7 +1054,7 @@ s32 SioRandomPartnerSend() {
 s32 SioRandomPartnerRecv() {
     u16 held;
     u16 keys;
-    u16 r;
+    u16 roll;
     held = GetKeysHeld() & KEYS_MASK;
     keys = 0;
 
@@ -1063,9 +1063,9 @@ s32 SioRandomPartnerRecv() {
         gRandomPartnerDpadTimer--;
     } else {
         gRandomPartnerDpadTimer = GetRandom() % 91 + 30;
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 7) {
+        switch (roll & 7) {
         case 0:
             gRandomPartnerDpad = 0x10;
             break;

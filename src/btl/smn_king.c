@@ -42,27 +42,27 @@ enum SmnKingState {
 
 void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
+    BtlObj* actor;
 
     body = &work->body;
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gBtlWork->actor;
+        actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gRikuBtlWork->actor;
+        actor = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    body->x = obj->originX;
-    body->y = obj->originY;
-    body->z = obj->originZ - 0x4000;
+    body->x = actor->originX;
+    body->y = actor->originY;
+    body->z = actor->originZ - 0x4000;
     body->groundZ = 0;
-    body->flags = obj->flags & BTLOBJ_FLAG_FACING_LEFT;
+    body->flags = actor->flags & BTLOBJ_FLAG_FACING_LEFT;
     work->variant = args->variant;
     work->palette = LoadObjPalette(gMickeyPalette, 32);
     work->vz = 0;
@@ -97,10 +97,10 @@ u8 SmnKingApplyGravity(SmnKingWork* work) {
 
 u8 task_smn_king_1(SmnKingWork* work) {
     BtlObj* body = &work->body;
-    BtlWork* obj;
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    BtlWork* owner;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -261,10 +261,10 @@ void task_smn_king_2(SmnKingWork* work) {
 }
 
 void task_smn_king_3(SmnKingWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

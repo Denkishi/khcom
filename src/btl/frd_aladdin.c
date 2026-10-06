@@ -304,10 +304,10 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
 }
 
 void task_frd_aladdin_3(FrdAladdinWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

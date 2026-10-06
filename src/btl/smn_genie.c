@@ -53,33 +53,33 @@ enum SmnGenieState {
 
 void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
+    BtlObj* actor;
 
     body = &work->body;
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gBtlWork->actor;
+        actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gRikuBtlWork->actor;
+        actor = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
-        body->x = obj->originX + 0x3700;
+        body->x = actor->originX + 0x3700;
     } else {
         body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
-        body->x = obj->originX - 0x3700;
+        body->x = actor->originX - 0x3700;
     }
 
-    body->y = obj->originY;
-    body->z = obj->originZ - 0x2800;
-    body->groundZ = obj->originZ;
+    body->y = actor->originY;
+    body->z = actor->originZ - 0x2800;
+    body->groundZ = actor->originZ;
     work->variant = args->variant;
     work->palette = LoadObjPalette(gGeniePalette, 32);
     AnimInit(&work->anim, NULL, NULL);
@@ -112,29 +112,29 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
 
 BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
     BtlObj* list[10];
-    BtlObj* p;
+    BtlObj* obj;
     s16 count;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
-            p = gRikuBtlWork->actor;
+            obj = gRikuBtlWork->actor;
         } else {
-            p = gBtlWork->actor;
+            obj = gBtlWork->actor;
         }
 
-        if (p->hp <= 0) {
+        if (obj->hp <= 0) {
             return NULL;
         }
 
-        return p;
+        return obj;
     }
 
     count = 0;
-    p = ListPoolFirst(&gBtlWork->pool);
+    obj = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != NULL) {
-        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
-            list[count] = p;
+    while (obj != NULL) {
+        if (!(obj->flags & BTLOBJ_FLAG_UNHITTABLE)) {
+            list[count] = obj;
             count++;
 
             if (count > 9) {
@@ -142,77 +142,77 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
             }
         }
 
-        p = ListPoolNext(&p->node);
+        obj = ListPoolNext(&obj->node);
     }
 
     if (count == 0) {
         return NULL;
     }
 
-    p = list[work->targetIndex % count];
+    obj = list[work->targetIndex % count];
     work->targetIndex++;
-    return p;
+    return obj;
 }
 
 void SmnGenieFollowTarget(SmnGenieWork* work) {
     BtlObj* body;
-    BtlObj* obj;
-    s32 tx;
-    s32 ty;
-    s32 zt;
-    s32 v;
-    s32 lim;
+    BtlObj* target;
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 delta;
+    s32 speed;
 
-    obj = work->target;
+    target = work->target;
     body = &work->body;
 
-    if (obj == NULL) {
+    if (target == NULL) {
         return;
     }
 
-    if (obj->x < body->x) {
+    if (target->x < body->x) {
         body->flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else {
         body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     }
 
-    if (obj->x > 0x10000) {
-        tx = obj->x - 0x3700;
+    if (target->x > 0x10000) {
+        x = target->x - 0x3700;
     } else {
-        tx = obj->x + 0x3700;
+        x = target->x + 0x3700;
     }
 
-    ty = obj->y;
-    zt = body->groundZ - 0x200;
-    v = (tx - body->x) >> 3;
-    lim = work->speedX;
+    y = target->y;
+    z = body->groundZ - 0x200;
+    delta = (x - body->x) >> 3;
+    speed = work->speedX;
 
-    if (v > lim) {
-        v = lim;
-        work->speedX = lim + 0x4C;
-    } else if (v < -lim) {
-        v = -lim;
-        work->speedX = lim + 0x4C;
+    if (delta > speed) {
+        delta = speed;
+        work->speedX = speed + 0x4C;
+    } else if (delta < -speed) {
+        delta = -speed;
+        work->speedX = speed + 0x4C;
     } else {
-        work->speedX = abs(v);
+        work->speedX = abs(delta);
     }
 
-    body->x += v;
-    v = (ty - body->y) >> 3;
-    lim = work->speedY;
+    body->x += delta;
+    delta = (y - body->y) >> 3;
+    speed = work->speedY;
 
-    if (v > lim) {
-        v = lim;
-        work->speedY = lim + 0x4C;
-    } else if (v < -lim) {
-        v = -lim;
-        work->speedY = lim + 0x4C;
+    if (delta > speed) {
+        delta = speed;
+        work->speedY = speed + 0x4C;
+    } else if (delta < -speed) {
+        delta = -speed;
+        work->speedY = speed + 0x4C;
     } else {
-        work->speedY = abs(v);
+        work->speedY = abs(delta);
     }
 
-    body->y += v;
-    body->z += (zt - SIN(work->stateTimer * 2) * 8 - body->z) >> 3;
+    body->y += delta;
+    body->z += (z - SIN(work->stateTimer * 2) * 8 - body->z) >> 3;
 }
 
 u8 task_smn_genie_1(SmnGenieWork* work) {

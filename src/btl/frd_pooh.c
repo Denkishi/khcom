@@ -114,11 +114,11 @@ void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
 
 u8 task_frd_pooh_1(FrdPoohWork* work) {
     FrdPoohBody* body;
-    BtlWork* battle;
+    BtlWork* owner;
     body = &work->body;
-    battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->side != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (battle->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -345,10 +345,10 @@ void task_frd_pooh_2(FrdPoohWork* work) {
 }
 
 void task_frd_pooh_3(FrdPoohWork* work) {
-    BtlWork* battle;
+    BtlWork* owner;
     ColliderUnregister(&work->body.collider);
-    battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
-    battle->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->side != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

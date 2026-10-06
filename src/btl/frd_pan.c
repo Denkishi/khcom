@@ -392,10 +392,10 @@ void task_frd_pan_2(FrdPanWork* work) {
 }
 
 void task_frd_pan_3(FrdPanWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

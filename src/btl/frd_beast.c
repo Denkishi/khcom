@@ -54,7 +54,7 @@ enum FrdBeastState {
 
 void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
+    BtlObj* target;
 
     body = &work->body;
 
@@ -73,22 +73,22 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
-        obj = gBtlWork->actor2;
+        target = gBtlWork->actor2;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
-        obj = gRikuBtlWork->actor2;
+        target = gRikuBtlWork->actor2;
     }
 
     work->variant = args->variant;
     work->stateTimer = 0;
     work->vz = 0;
 
-    if (obj != NULL) {
-        work->targetX = obj->x;
-        work->targetY = obj->y;
+    if (target != NULL) {
+        work->targetX = target->x;
+        work->targetY = target->y;
     } else {
         work->targetX = 0x10000;
         work->targetY = work->actor->y;
@@ -131,7 +131,7 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
 
 u8 task_frd_beast_1(FrdBeastWork* work) {
     BtlObj* body;
-    BtlWork* obj;
+    BtlWork* owner;
 
     body = &work->body;
 
@@ -139,9 +139,9 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         return 0;
     }
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -259,10 +259,10 @@ void task_frd_beast_2(FrdBeastWork* work) {
 }
 
 void task_frd_beast_3(FrdBeastWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

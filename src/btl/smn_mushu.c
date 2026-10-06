@@ -50,28 +50,28 @@ enum SmnMushuState {
 
 void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
+    BtlObj* actor;
 
     body = &work->body;
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gBtlWork->actor;
+        actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gRikuBtlWork->actor;
+        actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    body->x = obj->x;
-    body->y = obj->y;
-    body->z = obj->z - 0x2200;
-    body->groundZ = obj->groundZ;
+    body->x = actor->x;
+    body->y = actor->y;
+    body->z = actor->z - 0x2200;
+    body->groundZ = actor->groundZ;
 
-    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         body->flags = 0;
@@ -100,27 +100,27 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
 
 u8 task_smn_mushu_1(SmnMushuWork* work) {
     BtlObj* body;
-    BtlWork* obj;
-    s32 px;
-    s32 py;
-    s32 pz;
+    BtlWork* owner;
+    s32 prevX;
+    s32 prevY;
+    s32 prevZ;
     s32 x;
     s32 y;
     s32 z;
-    s32 n;
-    u16 v1;
-    u16 v2;
+    s32 attack;
+    u16 frame;
+    u16 timer;
 
     body = &work->body;
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
-    px = body->x;
-    py = body->y;
-    pz = body->z;
+    prevX = body->x;
+    prevY = body->y;
+    prevZ = body->z;
     body->x = work->actor->x;
     body->y = work->actor->y;
     body->z = work->actor->z - 0x2200;
@@ -206,14 +206,14 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
 
             switch (work->variant) {
             case 0:
-                n = 0x9D;
+                attack = 0x9D;
                 break;
             case 1:
-                n = 0x9E;
+                attack = 0x9E;
                 break;
             case 2:
             default:
-                n = 0x9F;
+                attack = 0x9F;
                 break;
             }
 
@@ -222,17 +222,17 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
 
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFire(0, body->x - 0x3800, body->y, body->z - 0x800,
-                              x, y, z, 1, n);
+                              x, y, z, 1, attack);
             } else {
                 BgFxStartFire(0, body->x + 0x3800, body->y, body->z - 0x800,
-                              x, y, z, 0, n);
+                              x, y, z, 0, attack);
             }
         }
 
-        BgAnimGetFrameState(&v1, &v2);
+        BgAnimGetFrameState(&frame, &timer);
 
-        if (v1 <= 3) {
-            BgFxAddPosition(body->x - px, body->y - py, body->z - pz);
+        if (frame <= 3) {
+            BgFxAddPosition(body->x - prevX, body->y - prevY, body->z - prevZ);
         }
 
         if (work->stateTimer > work->scaleSteps) {
@@ -296,10 +296,10 @@ void task_smn_mushu_2(SmnMushuWork* work) {
 }
 
 void task_smn_mushu_3(SmnMushuWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

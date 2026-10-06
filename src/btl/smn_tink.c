@@ -57,33 +57,33 @@ enum SmnTinkState {
 
 void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
-    s32 t;
+    BtlObj* actor;
+    s32 healRate;
 
     body = &work->body;
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gBtlWork->actor;
+        actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gRikuBtlWork->actor;
+        actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    body->x = obj->originX;
-    body->y = obj->originY;
-    body->z = obj->originZ - 0x3000;
+    body->x = actor->originX;
+    body->y = actor->originY;
+    body->z = actor->originZ - 0x3000;
 #ifdef VERSION_EU
     body->groundZ = 0;
 #else
-    body->groundZ = obj->originZ;
+    body->groundZ = actor->originZ;
 #endif
 
-    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_SMALL_SHADOW);
     } else {
         body->flags = BTLOBJ_FLAG_SMALL_SHADOW;
@@ -113,25 +113,25 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
 
     switch (args->variant) {
     case 0:
-        t = 0x4C;
+        healRate = 0x4C;
         work->healFrames = 0xB4;
         break;
     case 1:
-        t = 0x99;
+        healRate = 0x99;
         work->healFrames = 0x12C;
         break;
     case 2:
     default:
-        t = 0x100;
+        healRate = 0x100;
         work->healFrames = 0x1A4;
         break;
     }
 
     if (work->actor->btl->hcEffect == 0x27) {
-        t = 332 * t >> 8;
+        healRate = 332 * healRate >> 8;
     }
 
-    work->healTarget = work->actor->maxHp * t + work->healHp;
+    work->healTarget = work->actor->maxHp * healRate + work->healHp;
 
     if (work->healTarget > work->actor->maxHp << 8) {
         work->healTarget = work->actor->maxHp << 8;
@@ -149,12 +149,12 @@ void SmnTinkSpawnSparkle(SmnTinkWork* work) {
 
 u8 task_smn_tink_1(SmnTinkWork* work) {
     BtlObj* body;
-    BtlObj* p;
+    BtlObj* actor;
     s32 x;
     s32 y;
     s32 z;
-    s32 d;
-    s32 t;
+    s32 delta;
+    s32 timer;
 
     body = &work->body;
 
@@ -244,10 +244,10 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
         }
 
-        p = work->actor;
-        x = p->x + SIN((u16)work->stateTimer * 4) * 32;
-        y = p->y + COS((u16)work->stateTimer * 4) * -16;
-        z = (p->z - 0x1E00) + SIN((u16)work->stateTimer * 2) * 16;
+        actor = work->actor;
+        x = actor->x + SIN((u16)work->stateTimer * 4) * 32;
+        y = actor->y + COS((u16)work->stateTimer * 4) * -16;
+        z = (actor->z - 0x1E00) + SIN((u16)work->stateTimer * 2) * 16;
 
         if (x < body->x) {
             body->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -255,37 +255,37 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
 
-        d = (x - body->x) >> 3;
+        delta = (x - body->x) >> 3;
 
-        if (d > 0x400) {
-            d = 0x400;
-        } else if (d < -0x400) {
-            d = -0x400;
+        if (delta > 0x400) {
+            delta = 0x400;
+        } else if (delta < -0x400) {
+            delta = -0x400;
         }
 
-        body->x += d;
-        d = (y - body->y) >> 3;
+        body->x += delta;
+        delta = (y - body->y) >> 3;
 
-        if (d > 0x200) {
-            d = 0x200;
-        } else if (d < -0x200) {
-            d = -0x200;
+        if (delta > 0x200) {
+            delta = 0x200;
+        } else if (delta < -0x200) {
+            delta = -0x200;
         }
 
-        body->y += d;
+        body->y += delta;
         body->z += (z - body->z) >> 3;
-        t = work->stateTimer % 60;
+        timer = work->stateTimer % 60;
 
-        if (t == 0) {
+        if (timer == 0) {
             switch (GetRandom() % 3) {
             case 0:
                 work->speed = 0x280;
                 work->state = SMN_TINK_STATE_LOOP_THE_LOOP;
-                work->stateTimer = t;
+                work->stateTimer = timer;
                 break;
             case 1:
                 work->state = SMN_TINK_STATE_HOVER;
-                work->stateTimer = t;
+                work->stateTimer = timer;
                 break;
             case 2:
             default:
@@ -385,10 +385,10 @@ void task_smn_tink_2(SmnTinkWork* work) {
 }
 
 void task_smn_tink_3(SmnTinkWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     m4aSongNumStop(SONG_EF_TINK_LOOP);
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

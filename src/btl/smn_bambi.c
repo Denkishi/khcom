@@ -57,19 +57,19 @@ enum SmnBambiState {
 
 void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
+    BtlObj* actor;
 
     body = &work->body;
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gBtlWork->actor;
+        actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gRikuBtlWork->actor;
+        actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
@@ -77,10 +77,10 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
                     + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
     body->y = (gBtlWork->yMin
                     + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
-    body->z = obj->originZ;
-    body->groundZ = obj->originZ;
+    body->z = actor->originZ;
+    body->groundZ = actor->originZ;
 
-    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->flags = 0;
         work->angle = 0xC0;
     } else {
@@ -128,29 +128,29 @@ u8 SmnBambiApplyGravity(SmnBambiWork* work) {
 
 BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
     BtlObj* list[10];
-    BtlObj* p;
+    BtlObj* obj;
     s16 count;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
-            p = gRikuBtlWork->actor;
+            obj = gRikuBtlWork->actor;
         } else {
-            p = gBtlWork->actor;
+            obj = gBtlWork->actor;
         }
 
-        if (p->hp <= 0) {
+        if (obj->hp <= 0) {
             return NULL;
         }
 
-        return p;
+        return obj;
     }
 
     count = 0;
-    p = ListPoolFirst(&gBtlWork->pool);
+    obj = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != NULL) {
-        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
-            list[count] = p;
+    while (obj != NULL) {
+        if (!(obj->flags & BTLOBJ_FLAG_UNHITTABLE)) {
+            list[count] = obj;
             count++;
 
             if (count > 9) {
@@ -158,27 +158,27 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
             }
         }
 
-        p = ListPoolNext(&p->node);
+        obj = ListPoolNext(&obj->node);
     }
 
     if (count == 0) {
         return NULL;
     }
 
-    p = list[work->targetIndex % count];
+    obj = list[work->targetIndex % count];
     work->targetIndex++;
-    return p;
+    return obj;
 }
 
 u8 task_smn_bambi_1(SmnBambiWork* work) {
     BtlObj* body;
-    BtlWork* obj;
+    BtlWork* owner;
     SmnPrizeArgs args;
 
     body = &work->body;
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -386,10 +386,10 @@ void task_smn_bambi_2(SmnBambiWork* work) {
 }
 
 void task_smn_bambi_3(SmnBambiWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

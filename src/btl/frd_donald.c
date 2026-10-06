@@ -67,39 +67,39 @@ void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz) {
     s32 x;
     s32 y;
     s32 z;
-    s32 w;
-    s32 t;
-    s16 p;
-    s16 q;
-    s16 r;
+    s32 scaleY;
+    s32 scaleX;
+    s16 halfX;
+    s16 halfY;
+    s16 halfZ;
 
     y = body->y;
     z = body->z - (dz * 256);
-    w = 0x180;
+    scaleY = 0x180;
 
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         x = body->x + (dx * 256);
-        t = -0x180;
+        scaleX = -0x180;
     } else {
         x = body->x - (dx * 256);
-        t = w;
+        scaleX = scaleY;
     }
 
     BgFxSetPosition(x, y, z);
-    BgFxSetScale(t, w);
+    BgFxSetScale(scaleX, scaleY);
 
     if (attacking) {
         if (gBtlWork->battleId == 0x98) {
-            p = 0x20;
-            q = 0x20;
-            r = 0x30;
+            halfX = 0x20;
+            halfY = 0x20;
+            halfZ = 0x30;
         } else {
-            p = 0x0A;
-            q = 0x0A;
-            r = 0x0A;
+            halfX = 0x0A;
+            halfY = 0x0A;
+            halfZ = 0x0A;
         }
 
-        if (ApplyAttackBox(0x84, x, y, z, p, q, r) != 0) {
+        if (ApplyAttackBox(0x84, x, y, z, halfX, halfY, halfZ) != 0) {
             m4aSongNumStart(SONG_EF_FIRE01);
         }
     }
@@ -677,10 +677,10 @@ void task_frd_donald_2(FrdDonaldWork* work) {
 }
 
 void task_frd_donald_3(FrdDonaldWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

@@ -49,29 +49,29 @@ TaskDesc gTaskDescSmnCloud = {
 
 BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
     BtlObj* list[10];
-    BtlObj* p;
+    BtlObj* obj;
     s16 count;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
-            p = gRikuBtlWork->actor;
+            obj = gRikuBtlWork->actor;
         } else {
-            p = gBtlWork->actor;
+            obj = gBtlWork->actor;
         }
 
-        if (p->hp <= 0) {
+        if (obj->hp <= 0) {
             return NULL;
         }
 
-        return p;
+        return obj;
     }
 
     count = 0;
-    p = ListPoolFirst(&gBtlWork->pool);
+    obj = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != NULL) {
-        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
-            list[count] = p;
+    while (obj != NULL) {
+        if (!(obj->flags & BTLOBJ_FLAG_UNHITTABLE)) {
+            list[count] = obj;
             count++;
 
             if (count > 9) {
@@ -79,47 +79,47 @@ BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
             }
         }
 
-        p = ListPoolNext(&p->node);
+        obj = ListPoolNext(&obj->node);
     }
 
     if (count == 0) {
         return NULL;
     }
 
-    p = list[work->targetIndex % count];
+    obj = list[work->targetIndex % count];
     work->targetIndex++;
-    return p;
+    return obj;
 }
 
 BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     BtlObj* list[10];
-    BtlObj* p;
+    BtlObj* obj;
     s16 count;
-    s32 d;
+    s32 dz;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
-            p = gRikuBtlWork->actor;
+            obj = gRikuBtlWork->actor;
         } else {
-            p = gBtlWork->actor;
+            obj = gBtlWork->actor;
         }
 
-        if (p->hp <= 0) {
+        if (obj->hp <= 0) {
             return NULL;
         }
 
-        return p;
+        return obj;
     }
 
     count = 0;
-    p = ListPoolFirst(&gBtlWork->pool);
+    obj = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != NULL) {
-        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
-            d = work->body.z - p->z;
+    while (obj != NULL) {
+        if (!(obj->flags & BTLOBJ_FLAG_UNHITTABLE)) {
+            dz = work->body.z - obj->z;
 
-            if (d >= 0 ? d <= 0x3000 : p->z - work->body.z <= 0x3000) {
-                list[count] = p;
+            if (dz >= 0 ? dz <= 0x3000 : obj->z - work->body.z <= 0x3000) {
+                list[count] = obj;
                 count++;
 
                 if (count > 9) {
@@ -128,15 +128,15 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
             }
         }
 
-        p = ListPoolNext(&p->node);
+        obj = ListPoolNext(&obj->node);
     }
 
     if (count == 0) {
         return NULL;
     }
 
-    p = list[GetRandom() % count];
-    return p;
+    obj = list[GetRandom() % count];
+    return obj;
 }
 
 enum SmnCloudState {
@@ -157,28 +157,28 @@ enum SmnCloudAttackPhase {
 
 void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
+    BtlObj* actor;
 
     body = &work->body;
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gBtlWork->actor;
+        actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gRikuBtlWork->actor;
+        actor = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    body->x = obj->originX;
-    body->y = obj->originY;
-    body->z = obj->originZ;
-    body->groundZ = obj->originZ;
+    body->x = actor->originX;
+    body->y = actor->originY;
+    body->z = actor->originZ;
+    body->groundZ = actor->originZ;
 
-    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         body->flags = 0;
@@ -643,10 +643,10 @@ void task_smn_cloud_2(SmnCloudWork* work) {
 }
 
 void task_smn_cloud_3(SmnCloudWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

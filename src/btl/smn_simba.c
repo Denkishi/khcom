@@ -44,28 +44,28 @@ enum SmnSimbaState {
 
 void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
     BtlObj* body;
-    BtlObj* obj;
+    BtlObj* actor;
 
     body = &work->body;
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gBtlWork->actor;
+        actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
-        obj = gRikuBtlWork->actor;
+        actor = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    body->x = obj->originX;
-    body->y = obj->originY;
-    body->z = obj->originZ;
-    body->groundZ = obj->originZ;
+    body->x = actor->originX;
+    body->y = actor->originY;
+    body->z = actor->originZ;
+    body->groundZ = actor->originZ;
 
-    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
     } else {
         body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
@@ -87,12 +87,12 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
 
 u8 task_smn_simba_1(SmnSimbaWork* work) {
     BtlObj* body;
-    BtlWork* obj;
+    BtlWork* owner;
 
     body = &work->body;
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         // fakematch
         do {
             return 0;
@@ -279,10 +279,10 @@ void task_smn_simba_2(SmnSimbaWork* work) {
 }
 
 void task_smn_simba_3(SmnSimbaWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

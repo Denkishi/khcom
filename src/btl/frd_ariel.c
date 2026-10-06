@@ -104,8 +104,8 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
 
 u8 task_frd_ariel_1(FrdArielWork* work) {
     BtlObj* body;
-    BtlWork* obj;
-    s32 t;
+    BtlWork* owner;
+    s32 pixelX;
 
     body = &work->body;
 
@@ -113,9 +113,9 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
         return 0;
     }
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -124,12 +124,12 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
     switch (work->state) {
     case FRD_ARIEL_STATE_ENTER:
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-            t = gBtlWork->xMax - 0x30;
+            pixelX = gBtlWork->xMax - 0x30;
         } else {
-            t = gBtlWork->xMin + 0x30;
+            pixelX = gBtlWork->xMin + 0x30;
         }
 
-        body->x += ((t << 8) - body->x) >> 3;
+        body->x += ((pixelX << 8) - body->x) >> 3;
 
         if (work->stateTimer > 20) {
             work->stateTimer = 0;
@@ -273,10 +273,10 @@ void task_frd_ariel_2(FrdArielWork* work) {
 }
 
 void task_frd_ariel_3(FrdArielWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

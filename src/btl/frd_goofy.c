@@ -122,13 +122,13 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
 
 u8 task_frd_goofy_1(FrdGoofyWork* work) {
     BtlObj* body;
-    BtlWork* obj;
+    BtlWork* owner;
     s32 t;
 
     body = &work->body;
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -337,10 +337,10 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
 }
 
 void task_frd_goofy_3(FrdGoofyWork* work) {
-    BtlWork* obj;
+    BtlWork* owner;
 
-    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

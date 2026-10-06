@@ -429,29 +429,29 @@ s32 MapEnm00CheckOffscreen(MapEnmWork* work) {
     return 0;
 }
 
-void MapEnm00Move(MapEnmWork* work, s32 b, s32 c) {
+void MapEnm00Move(MapEnmWork* work, s32 accel, s32 maxSpeed) {
     FldObj* q = &work->obj;
 
     if (work->flags & MAP_ENM_FLAG_SLOW) {
-        b /= 5;
-        c /= 5;
+        accel /= 5;
+        maxSpeed /= 5;
     }
 
     work->obj.fieldPosition.x += gSineTable[q->angle] * q->speed >> 8;
     q->fieldPosition.y += -gSineTable[q->angle + 64] * q->speed >> 8;
-    q->speed += b;
+    q->speed += accel;
 
-    if (q->speed > c) {
-        q->speed = c;
+    if (q->speed > maxSpeed) {
+        q->speed = maxSpeed;
     }
 }
 
-void MapEnm00CheckBlocked(MapEnmWork* work, s32 b, s32 c) {
+void MapEnm00CheckBlocked(MapEnmWork* work, s32 x, s32 y) {
     FldPos* q = &work->obj.fieldPosition;
 
     if (IsFldPosBlocked(q) != 0 || GetFldPosGround(q) != q->z) {
-        work->obj.fieldPosition.x = b;
-        q->y = c;
+        work->obj.fieldPosition.x = x;
+        q->y = y;
         work->update = MapEnm00Vanish;
         ColliderSetDisabled(&work->collider, 1);
     }
@@ -735,12 +735,12 @@ void MapEnm01CheckOffscreen(MapEnm01Work* work) {
     }
 }
 
-void MapEnm01UpdateHover(MapEnmWork* work, u8 a) {
+void MapEnm01UpdateHover(MapEnmWork* work, u8 moving) {
     s32* q = &work->obj.fieldPosition.x;
     s32 t = q[2];
     s32 v;
 
-    switch (a) {
+    switch (moving) {
     case 1:
         v = work->targetZ + SIN(gFrameCounter) * 10;
         break;
@@ -762,13 +762,13 @@ void MapEnm01UpdateHover(MapEnmWork* work, u8 a) {
     }
 }
 
-void MapEnm01PickTarget(MapEnmWork* work, u8 a) {
+void MapEnm01PickTarget(MapEnmWork* work, u8 atPlayer) {
     s32 t1;
     s32 t2;
     s32 t3;
     s32 t4;
 
-    if (a) {
+    if (atPlayer) {
         work->targetX = gFieldState->actor.fieldPosition.x;
         work->targetY = gFieldState->actor.fieldPosition.y;
         work->targetZ = gFieldState->actor.fieldPosition.z - 0x1000;
@@ -1046,12 +1046,12 @@ void Task_MapEnm02_3(MapEnmWork* work) {
     MapEnmDestroy(work);
 }
 
-void MapEnm03UpdateHover(MapEnmWork* work, u8 a) {
+void MapEnm03UpdateHover(MapEnmWork* work, u8 moving) {
     s32* q = &work->obj.fieldPosition.x;
     s32 t = q[2];
     s32 v;
 
-    switch (a) {
+    switch (moving) {
     case 1:
         v = work->targetZ + SIN(gFrameCounter) * 10;
         break;
@@ -1291,12 +1291,12 @@ void MapEnm04CheckOffscreen(MapEnm01Work* work) {
     }
 }
 
-void MapEnm04UpdateHover(MapEnmWork* work, u8 a) {
+void MapEnm04UpdateHover(MapEnmWork* work, u8 moving) {
     s32* q = &work->obj.fieldPosition.x;
     s32 t = q[2];
     s32 v;
 
-    switch (a) {
+    switch (moving) {
     case 1:
         v = work->targetZ + SIN(gFrameCounter) * 10;
         break;
@@ -1792,8 +1792,8 @@ void Task_MapEnm06_3(MapEnmWork* work) {
     MapEnmDestroy(work);
 }
 
-s32 GetMapRoomDebugCode(MapFloorRoom* p) {
-    return (gGameState.floor << 28) + (p->roomType << 20) + (p->cardValue << 16) + (gMapFloorState.room << 8) + (gMapFloorState.eventStep << 4) + gMapFloorState.world;
+s32 GetMapRoomDebugCode(MapFloorRoom* floorRoom) {
+    return (gGameState.floor << 28) + (floorRoom->roomType << 20) + (floorRoom->cardValue << 16) + (gMapFloorState.room << 8) + (gMapFloorState.eventStep << 4) + gMapFloorState.world;
 }
 
 void MapDbgWaitInput(MapDbgWork* work) {
@@ -1884,13 +1884,13 @@ void MapDbgEditWorld(MapDbgWork* work) {
     }
 }
 
-void Task_MapDbg_0(MapDbgWork* work, u8* p) {
+void Task_MapDbg_0(MapDbgWork* work, u8* editing) {
 #ifndef VERSION_EU
     MapFloorRoom* d;
 #endif
     work->visible = 0;
-    work->editing = p;
-    *p = 0;
+    work->editing = editing;
+    *editing = 0;
     work->update = MapDbgWaitInput;
     work->seedCursor = 0;
     work->codeCursor = 0;
@@ -3538,28 +3538,28 @@ void Task_MapGmk01_3(MapGmk01Work* work) {
     ColliderUnregister(&work->collider);
 }
 
-void MapGmkBarrelDropPrizes(FldPos* p) {
+void MapGmkBarrelDropPrizes(FldPos* pos) {
     u16 r;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         r = GetRandom() % 10000;
 
         if (r < 6000) {
-            CreateMapPrizeTasks(0, 5, p->x, p->y, p->z);
+            CreateMapPrizeTasks(0, 5, pos->x, pos->y, pos->z);
         } else if (r < 10000) {
-            CreateMapPrizeTasks(1, 3, p->x, p->y, p->z);
+            CreateMapPrizeTasks(1, 3, pos->x, pos->y, pos->z);
         }
     } else {
         r = GetRandom() % 10000;
 
         if (r < 3000) {
-            CreateMapPrizeTasks(0, 5, p->x, p->y, p->z);
+            CreateMapPrizeTasks(0, 5, pos->x, pos->y, pos->z);
         } else if (r < 5000) {
-            CreateMapPrizeTasks(1, 3, p->x, p->y, p->z);
+            CreateMapPrizeTasks(1, 3, pos->x, pos->y, pos->z);
         } else if (r < 8000) {
-            CreateMapPrizeTasks(2, 5, p->x, p->y, p->z);
+            CreateMapPrizeTasks(2, 5, pos->x, pos->y, pos->z);
         } else {
-            CreateMapPrizeTasks(3, 5, p->x, p->y, p->z);
+            CreateMapPrizeTasks(3, 5, pos->x, pos->y, pos->z);
         }
     }
 }
@@ -4359,12 +4359,12 @@ void MapPrzCardShrink(MapPrzCardWork* work) {
     }
 }
 
-void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
+void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* arg) {
     const CardDef* d;
     const CardBack* q;
 
     gMapRoomState->flags |= ROOM_FLAG_PRIZE_CARD_ACTIVE;
-    work->cardId = p->id;
+    work->cardId = arg->id;
     d = &gCardDefs[work->cardId];
     work->tiles = LoadObjTiles(d->tiles, 0x300);
     work->palette = LoadObjPalette(d->palette, 32);
@@ -4375,9 +4375,9 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
     work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->palette3 = LoadObjPalette(gCommonObjPalette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->posX = p->x;
-    work->posY = p->y;
-    work->posZ = p->z;
+    work->posX = arg->x;
+    work->posY = arg->y;
+    work->posZ = arg->z;
     work->ground = 0;
     FldPosInitGround((FldPos*)work);
     work->vz = -(GetRandom() % 129 + 0x300);
@@ -4389,7 +4389,7 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
     work->rotation = 24;
     work->phaseY = 0;
     work->phaseX = 0;
-    work->worldPrize = p->worldPrize;
+    work->worldPrize = arg->worldPrize;
     ColliderInit(&work->collider, 5, 30, 10);
     ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
 
@@ -4494,8 +4494,8 @@ void MapPrzStockWaitMessage(MapPrzStockWork* work) {
     }
 }
 
-void Task_MapPrzStock_0(MapPrzStockWork* work, u16* a) {
-    work->stock = a;
+void Task_MapPrzStock_0(MapPrzStockWork* work, u16* stock) {
+    work->stock = stock;
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     work->update = MapPrzStockShowMessage;

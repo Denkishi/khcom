@@ -124,7 +124,7 @@ void task_bos_tm_0(TmWork* work, BtlObj* arg) {
 
 u8 task_bos_tm_1(TmWork* work) {
     CharaObjParam2 param;
-    u16 t;
+    u16 hitCount;
 
     switch (work->state) {
     case BOS_TM_STATE_IDLE:
@@ -143,10 +143,10 @@ u8 task_bos_tm_1(TmWork* work) {
         break;
     case BOS_TM_STATE_RECOIL:
         work->step++;
-        t = work->hitCount;
+        hitCount = work->hitCount;
 
-        if ((s16)t == 1) {
-            work->hitCount = t + 1;
+        if ((s16)hitCount == 1) {
+            work->hitCount = hitCount + 1;
         }
 
         break;

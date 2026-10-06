@@ -386,11 +386,11 @@ static TaskDesc sTaskDescBosMdHahen = {
 };
 
 void BosMdRequestState(MdWork* work, s32 state) {
-    u16 t;
+    u16 flags;
 
     work->nextState = state;
-    t = work->flags | MD_FLAG_STATE_REQUESTED;
-    work->flags = t;
+    flags = work->flags | MD_FLAG_STATE_REQUESTED;
+    work->flags = flags;
 }
 
 void BosMdSetBgMap(MdWork* work, u16 index) {
@@ -428,47 +428,47 @@ void BosMdSetFrame(MdWork* work, u16 id) {
 }
 
 void MdAnimStart(MdWork* work, s16 id) {
-    MdAnim* a;
-    const MdAnimDef* base;
-    const MdAnimDef* d;
-    const MdAnimFrame* f;
+    MdAnim* anim;
+    const MdAnimDef* defs;
+    const MdAnimDef* def;
+    const MdAnimFrame* frames;
 
-    a = &work->anim;
-    a->animId = id;
-    base = sMdAnimDefs;
-    d = base + id;
-    f = d->frames;
-    a->frames = f;
-    a->frameCount = d->frameCount;
-    a->frame = 0;
-    a->timer = f->duration;
-    BosMdSetFrame(work, f->gfxIndex);
+    anim = &work->anim;
+    anim->animId = id;
+    defs = sMdAnimDefs;
+    def = defs + id;
+    frames = def->frames;
+    anim->frames = frames;
+    anim->frameCount = def->frameCount;
+    anim->frame = 0;
+    anim->timer = frames->duration;
+    BosMdSetFrame(work, frames->gfxIndex);
 }
 
 void MdAnimUpdate(MdWork* work) {
-    MdAnim* a;
+    MdAnim* anim;
 
-    a = &work->anim;
-    a->timer--;
+    anim = &work->anim;
+    anim->timer--;
 
-    if (a->timer < 0) {
-        a->frame++;
+    if (anim->timer < 0) {
+        anim->frame++;
 
-        if (a->frame >= a->frameCount) {
-            a->frame = 0;
+        if (anim->frame >= anim->frameCount) {
+            anim->frame = 0;
         }
 
-        a->timer = a->frames[a->frame].duration;
-        BosMdSetFrame(work, a->frames[a->frame].gfxIndex);
+        anim->timer = anim->frames[anim->frame].duration;
+        BosMdSetFrame(work, anim->frames[anim->frame].gfxIndex);
     }
 }
 
 u8 BosMdAnimIsLastFrame(MdWork* work) {
-    MdAnim* a;
+    MdAnim* anim;
 
-    a = &work->anim;
+    anim = &work->anim;
 
-    if (a->frame >= a->frameCount - 1) {
+    if (anim->frame >= anim->frameCount - 1) {
         return 1;
     }
 
@@ -544,8 +544,8 @@ u8 BosMdUpdateIdle(MdWork* work) {
 }
 
 u8 BosMdUpdateBite(MdWork* work) {
-    s32 d;
-    u16 r;
+    s32 actorX;
+    u16 roll;
 
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
         work->statePhase = BOS_MD_PHASE_EXIT;
@@ -553,9 +553,9 @@ u8 BosMdUpdateBite(MdWork* work) {
 
     switch (work->statePhase) {
         case BOS_MD_PHASE_ENTER:
-            d = gBtlWork->actor->x;
+            actorX = gBtlWork->actor->x;
 
-            if (d > 0xA800) {
+            if (actorX > 0xA800) {
                 switch (GetRandom() % 3) {
                 case 0:
                     MdAnimStart(work, 7);
@@ -567,22 +567,22 @@ u8 BosMdUpdateBite(MdWork* work) {
                     MdAnimStart(work, 9);
                     break;
                 }
-            } else if (d > 0x7000) {
-                r = GetRandom() % 100;
+            } else if (actorX > 0x7000) {
+                roll = GetRandom() % 100;
 
-                if (r <= 59) {
+                if (roll <= 59) {
                     MdAnimStart(work, 7);
-                } else if (r <= 89) {
+                } else if (roll <= 89) {
                     MdAnimStart(work, 8);
                 } else {
                     MdAnimStart(work, 9);
                 }
-            } else if (d > 0x3800) {
-                r = GetRandom() % 100;
+            } else if (actorX > 0x3800) {
+                roll = GetRandom() % 100;
 
-                if (r <= 59) {
+                if (roll <= 59) {
                     MdAnimStart(work, 8);
-                } else if (r <= 89) {
+                } else if (roll <= 89) {
                     MdAnimStart(work, 7);
                 } else {
                     MdAnimStart(work, 9);
@@ -646,7 +646,7 @@ enum BosMdQuakeStep {
 };
 
 u8 BosMdUpdateQuake(MdWork* work) {
-    s32 v;
+    s32 gfxIndex;
 
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
         work->statePhase = BOS_MD_PHASE_EXIT;
@@ -673,16 +673,16 @@ u8 BosMdUpdateQuake(MdWork* work) {
         case BOS_MD_PHASE_UPDATE:
             switch (work->step) {
             case BOS_MD_QUAKE_STEP_FIRST_SLAM:
-                v = work->anim.frames[work->anim.frame].gfxIndex;
+                gfxIndex = work->anim.frames[work->anim.frame].gfxIndex;
 
-                if (v == 18) {
+                if (gfxIndex == 18) {
                     ApplyAttackBox(252, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
                     BtlMapStartShake();
                     work->signals |= 1;
                     work->step = BOS_MD_QUAKE_STEP_SECOND_SLAM;
-                } else if (v == 28) {
+                } else if (gfxIndex == 28) {
                     ApplyAttackBox(254, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
@@ -693,9 +693,9 @@ u8 BosMdUpdateQuake(MdWork* work) {
 
                 break;
             case BOS_MD_QUAKE_STEP_SECOND_SLAM:
-                v = work->anim.frames[work->anim.frame].gfxIndex;
+                gfxIndex = work->anim.frames[work->anim.frame].gfxIndex;
 
-                if (v == 22) {
+                if (gfxIndex == 22) {
                     MakeOpponentsHittable();
                     ApplyAttackBox(252, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
@@ -738,7 +738,7 @@ enum BosMdFireBreathStep {
 };
 
 u8 BosMdUpdateFireBreath(MdWork* work) {
-    MdFireArg a;
+    MdFireArg fireArg;
 
     if (work->flags & MD_FLAG_STATE_REQUESTED) {
         work->statePhase = BOS_MD_PHASE_EXIT;
@@ -770,37 +770,37 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
 
                     if (!BgFxIsActive()) {
                         work->signals &= 0xFFFD;
-                        a.pool = &work->tasks;
-                        a.index = 0;
-                        a.flags = &work->signals;
+                        fireArg.pool = &work->tasks;
+                        fireArg.index = 0;
+                        fireArg.flags = &work->signals;
 
                         if (work->sub[0].hp * 10 / work->sub[0].maxHp > 4) {
                             switch (GetRandom() % 3) {
                             case 0:
-                                a.pattern = 0;
+                                fireArg.pattern = 0;
                                 break;
                             case 1:
-                                a.pattern = 1;
+                                fireArg.pattern = 1;
                                 break;
                             case 2:
-                                a.pattern = 2;
+                                fireArg.pattern = 2;
                                 break;
                             }
                         } else {
                             switch (GetRandom() % 3) {
                             case 0:
-                                a.pattern = 3;
+                                fireArg.pattern = 3;
                                 break;
                             case 1:
-                                a.pattern = 4;
+                                fireArg.pattern = 4;
                                 break;
                             case 2:
-                                a.pattern = 5;
+                                fireArg.pattern = 5;
                                 break;
                             }
                         }
 
-                        TaskCreate(&work->tasks, &sTaskDescBosMdFire, &a);
+                        TaskCreate(&work->tasks, &sTaskDescBosMdFire, &fireArg);
                         MdAnimStart(work, 4);
                         work->step = BOS_MD_FIRE_BREATH_STEP_RECOVER;
                     }
@@ -841,7 +841,7 @@ enum BosMdDefeatStep {
 
 u8 BosMdUpdateDefeat(MdWork* work) {
     u8 result;
-    PrizeCardArg arg;
+    PrizeCardArg prize;
 
     result = 1;
 
@@ -884,10 +884,10 @@ u8 BosMdUpdateDefeat(MdWork* work) {
                 }
 
                 if (!BgFxIsActive()) {
-                    arg.x = work->sub[0].x;
-                    arg.y = work->sub[0].y;
-                    arg.z = work->sub[0].z;
-                    CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &arg);
+                    prize.x = work->sub[0].x;
+                    prize.y = work->sub[0].y;
+                    prize.z = work->sub[0].z;
+                    CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
                     DropBossPrizes(&work->sub[0]);
                     EndBossDefeat();
                     result = 0;
@@ -915,47 +915,47 @@ u8 BosMdUpdateDefeat(MdWork* work) {
 }
 
 void BosMdChooseAttack(MdWork* work) {
-    s32 d;
-    u16 r;
+    s32 actorX;
+    u16 roll;
 
-    d = gBtlWork->actor->x;
+    actorX = gBtlWork->actor->x;
 
-    if (d > 0xA800) {
-        r = GetRandom() % 100;
+    if (actorX > 0xA800) {
+        roll = GetRandom() % 100;
 
-        if (r <= 59) {
+        if (roll <= 59) {
             BosMdRequestState(work, BOS_MD_STATE_QUAKE);
-        } else if (r <= 89) {
+        } else if (roll <= 89) {
             BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
             BosMdRequestState(work, BOS_MD_STATE_BITE);
         }
-    } else if (d > 0x7000) {
-        r = GetRandom() % 100;
+    } else if (actorX > 0x7000) {
+        roll = GetRandom() % 100;
 
-        if (r <= 59) {
+        if (roll <= 59) {
             BosMdRequestState(work, BOS_MD_STATE_BITE);
-        } else if (r <= 89) {
+        } else if (roll <= 89) {
             BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
             BosMdRequestState(work, BOS_MD_STATE_QUAKE);
         }
-    } else if (d > 0x3800) {
-        r = GetRandom() % 100;
+    } else if (actorX > 0x3800) {
+        roll = GetRandom() % 100;
 
-        if (r <= 59) {
+        if (roll <= 59) {
             BosMdRequestState(work, BOS_MD_STATE_BITE);
-        } else if (r <= 89) {
+        } else if (roll <= 89) {
             BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
             BosMdRequestState(work, BOS_MD_STATE_QUAKE);
         }
     } else {
-        r = GetRandom() % 100;
+        roll = GetRandom() % 100;
 
-        if (r <= 59) {
+        if (roll <= 59) {
             BosMdRequestState(work, BOS_MD_STATE_QUAKE);
-        } else if (r <= 89) {
+        } else if (roll <= 89) {
             BosMdRequestState(work, BOS_MD_STATE_FIRE_BREATH);
         } else {
             BosMdRequestState(work, BOS_MD_STATE_BITE);
@@ -972,9 +972,9 @@ void BosMdHandleReaction(MdWork* work) {
     s16 i;
 
     for (i = 0; i < 1; i++) {
-        BtlObj* e = &work->sub[i];
+        BtlObj* sub = &work->sub[i];
 
-        switch (UpdateBtlObjReaction(e)) {
+        switch (UpdateBtlObjReaction(sub)) {
         case BTL_REACTION_CARD_ACTION:
             BosMdChooseAttack(work);
             break;
@@ -986,12 +986,12 @@ void BosMdHandleReaction(MdWork* work) {
             break;
         case BTL_REACTION_DEFEATED:
         case BTL_REACTION_GRAVITY_DEFEATED:
-            SetBtlObjUnhittable(e, 1);
+            SetBtlObjUnhittable(sub, 1);
             BosMdRequestState(work, BOS_MD_STATE_DEFEATED);
             break;
         case BTL_REACTION_CARD_BROKEN:
             BosMdRequestState(work, BOS_MD_STATE_IDLE);
-            ClearBtlObjActionFlags(e);
+            ClearBtlObjActionFlags(sub);
             break;
         }
     }
@@ -1001,11 +1001,11 @@ void BosMdEndHurt(MdWork* work) {
     s16 i;
 
     for (i = 0; i < 1; i++) {
-        BtlObj* e = &work->sub[i];
+        BtlObj* sub = &work->sub[i];
 
         if (work->hurtState[i] == BOS_MD_HURT_STATE_HIT && work->hurtTimer == 0) {
             work->hurtState[i] = BOS_MD_HURT_STATE_NONE;
-            ClearBtlObjActionFlags(e);
+            ClearBtlObjActionFlags(sub);
         }
     }
 }
@@ -1142,9 +1142,9 @@ void task_bos_md_2(MdWork* work) {
     s16 x;
     s16 y;
     void* pal;
-    void* p1;
-    void* p2;
-    void* p0;
+    void* daiPool;
+    void* hahenPool;
+    void* firePool;
     s32 i;
 
     if (!work->bgVisible) {
@@ -1170,32 +1170,32 @@ void task_bos_md_2(MdWork* work) {
     x = (gBtlWork->viewX >> 8) - (work->bgOffsetX - 72);
     y = (gBtlWork->viewY >> 8) - (work->bgOffsetY - 48);
     ScrollBgMapTo(1, x, y);
-    p0 = &work->tasks;
-    p1 = &work->tasks2;
-    p2 = &work->tasks3;
+    firePool = &work->tasks;
+    daiPool = &work->tasks2;
+    hahenPool = &work->tasks3;
 
     for (i = 0; i < 2; i++) {
         s32 wx;
         s32 wy;
-        u16 frame;
+        u16 flags;
 
         wx = (work->gfx[i].x + 224) * 256;
         wy = (work->gfx[i].y + 256) * 256;
         WorldToScreen(&x, &y, wx, wy, work->gfx[i].z * 256);
-        frame = GetBattleSpritePriorityFlags(wy);
-        DrawSprite(x, y, work->gfx[i].sprite, work->gfx[i].tiles, pal, NULL, frame,
+        flags = GetBattleSpritePriorityFlags(wy);
+        DrawSprite(x, y, work->gfx[i].sprite, work->gfx[i].tiles, pal, NULL, flags,
                    -4100 - (wy >> 6));
     }
 
-    TaskPoolDraw(p0);
-    TaskPoolDraw(p1);
-    TaskPoolDraw(p2);
+    TaskPoolDraw(firePool);
+    TaskPoolDraw(daiPool);
+    TaskPoolDraw(hahenPool);
 }
 
 void task_bos_md_3(MdWork* work) {
-    void* q;
-    void* r;
-    void* t;
+    void* firePool;
+    void* daiPool;
+    void* hahenPool;
     s32 i;
 
     DisableBg(1);
@@ -1205,9 +1205,9 @@ void task_bos_md_3(MdWork* work) {
         ReleaseEnemyBtlObj(&work->sub[i]);
     }
 
-    q = &work->tasks;
-    r = &work->tasks2;
-    t = &work->tasks3;
+    firePool = &work->tasks;
+    daiPool = &work->tasks2;
+    hahenPool = &work->tasks3;
 
     for (i = 0; i < 2; i++) {
         if (work->gfx[i].tiles != NULL) {
@@ -1217,9 +1217,9 @@ void task_bos_md_3(MdWork* work) {
 
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
-    TaskPoolDestroy(q);
-    TaskPoolDestroy(r);
-    TaskPoolDestroy(t);
+    TaskPoolDestroy(firePool);
+    TaskPoolDestroy(daiPool);
+    TaskPoolDestroy(hahenPool);
 }
 
 void task_bos_md_map_0(MdMapWork* work, MdMapData* arg) {
@@ -1287,11 +1287,11 @@ enum BosMdFireState {
 };
 
 void BosMdFireHandleReaction(MdFireWork* work) {
-    BtlObj* e;
+    BtlObj* sub;
 
-    e = &work->sub;
+    sub = &work->sub;
 
-    switch (UpdateBtlObjReaction(e)) {
+    switch (UpdateBtlObjReaction(sub)) {
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
@@ -1302,11 +1302,11 @@ void BosMdFireHandleReaction(MdFireWork* work) {
     case BTL_REACTION_GRAVITY_DEFEATED:
         if (GetRandom() % 100 <= 49) {
             if ((gBtlWork->flags & 0x100000) == 0) {
-                DropGimmickCard(0, e->x, e->y, e->z);
+                DropGimmickCard(0, sub->x, sub->y, sub->z);
             }
         }
 
-        SetBtlObjUnhittable(e, 1);
+        SetBtlObjUnhittable(sub, 1);
         work->scaleSteps = 30;
         work->state = BOS_MD_FIRE_STATE_VANISH;
         break;
@@ -1322,14 +1322,14 @@ enum BosMdFireMotion {
 
 u8 BosMdFireUpdateMotion(MdFireWork* work) {
     u8 result;
-    BtlObj* e;
-    u8 a;
+    BtlObj* sub;
+    u8 angle;
 
     result = 1;
-    e = &work->sub;
+    sub = &work->sub;
 
     if ((*work->flags & 2) && work->state != BOS_MD_FIRE_STATE_VANISH) {
-        SetBtlObjUnhittable(e, 1);
+        SetBtlObjUnhittable(sub, 1);
         work->scaleSteps = 30;
         work->state = BOS_MD_FIRE_STATE_VANISH;
     }
@@ -1339,7 +1339,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
             work->scaleSteps--;
 
             if (work->scaleSteps <= 0) {
-                SetBtlObjUnhittable(e, 0);
+                SetBtlObjUnhittable(sub, 0);
                 work->state = BOS_MD_FIRE_STATE_ACTIVE;
             }
 
@@ -1356,11 +1356,11 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
                             case 1:
                             case 2:
                             case 4:
-                                a = BosGaGetAngle(work->x, work->y,
+                                angle = BosGaGetAngle(work->x, work->y,
                                                   gBtlWork->actor->x,
                                                   gBtlWork->actor->y);
-                                work->vx = gSineTable[a] * 3;
-                                work->vy = -gSineTable[a + 0x40] * 3;
+                                work->vx = gSineTable[angle] * 3;
+                                work->vy = -gSineTable[angle + 0x40] * 3;
                                 work->timer = 90;
                                 work->motion = BOS_MD_FIRE_MOTION_SHOOT;
                                 break;
@@ -1385,7 +1385,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
 #else
                     if (work->timer <= 0 || work->y <= 0x117FF) {
 #endif
-                        SetBtlObjUnhittable(e, 1);
+                        SetBtlObjUnhittable(sub, 1);
                         work->scaleSteps = 30;
                         work->state = BOS_MD_FIRE_STATE_VANISH;
                     }
@@ -1416,7 +1416,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
         case BOS_MD_FIRE_STATE_HURT:
             if (work->flashTimer == 0) {
                 work->state = BOS_MD_FIRE_STATE_ACTIVE;
-                ClearBtlObjActionFlags(e);
+                ClearBtlObjActionFlags(sub);
             }
 
             break;
@@ -1434,16 +1434,16 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
 }
 
 void BosMdFirePlace(MdFireWork* work) {
-    const MdFirePoint* p;
+    const MdFirePoint* point;
 
     switch (work->pattern) {
     case 0:
     case 1:
     case 2:
-        p = sMdFireDefs[work->pattern].points + work->index;
-        work->x = p->x * 256;
-        work->y = p->y * 256;
-        work->timer = p->delay;
+        point = sMdFireDefs[work->pattern].points + work->index;
+        work->x = point->x * 256;
+        work->y = point->y * 256;
+        work->timer = point->delay;
         work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
     case 3:
@@ -1473,7 +1473,7 @@ void BosMdFirePlace(MdFireWork* work) {
 }
 
 void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
-    MdFireArg a;
+    MdFireArg fireArg;
     s16 i;
     s16 n;
 
@@ -1500,9 +1500,9 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->tiles = LoadObjTiles(gBosMdFireTiles, 0x800);
     AnimInit(&work->anim, gBosMdFireAnims, gBosMdFireFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    a.pool = NULL;
-    a.pattern = arg->pattern;
-    a.flags = arg->flags;
+    fireArg.pool = NULL;
+    fireArg.pattern = arg->pattern;
+    fireArg.flags = arg->flags;
 
     if (arg->pool != NULL) {
         if (work->pattern <= 2) {
@@ -1512,8 +1512,8 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
         }
 
         for (i = 1; i < n; i++) {
-            a.index = i;
-            TaskCreate(arg->pool, &sTaskDescBosMdFire, &a);
+            fireArg.index = i;
+            TaskCreate(arg->pool, &sTaskDescBosMdFire, &fireArg);
         }
     }
 }
@@ -1539,31 +1539,31 @@ u8 task_bos_md_fire_1(MdFireWork* work) {
 void task_bos_md_fire_2(MdFireWork* work) {
     s16 x;
     s16 y;
-    void* gfx;
-    ObjAffine* sprite;
-    u16 frame;
+    void* pal;
+    ObjAffine* affine;
+    u16 flags;
 
     if (work->flashTimer > 0 && (gFrameCounter & 1)) {
-        gfx = work->palette2;
+        pal = work->palette2;
     } else {
-        gfx = work->palette;
+        pal = work->palette;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    frame = GetBattleSpritePriorityFlags(work->y);
+    flags = GetBattleSpritePriorityFlags(work->y);
 
     if (work->state == BOS_MD_FIRE_STATE_APPEAR) {
         ApproachValue(&work->scale, 0x100, work->scaleSteps);
-        sprite = AllocObjAffine(0, work->scale, work->scale, 0);
+        affine = AllocObjAffine(0, work->scale, work->scale, 0);
     } else if (work->state == BOS_MD_FIRE_STATE_VANISH) {
         ApproachValue(&work->scale, 25, work->scaleSteps);
-        sprite = AllocObjAffine(0, work->scale, work->scale, 0);
+        affine = AllocObjAffine(0, work->scale, work->scale, 0);
     } else {
-        sprite = NULL;
+        affine = NULL;
     }
 
-    DrawSprite(x, y, AnimUpdate(&work->anim), work->tiles, gfx,
-                  sprite, frame, -4100 - (work->y >> 8) * 4);
+    DrawSprite(x, y, AnimUpdate(&work->anim), work->tiles, pal,
+                  affine, flags, -4100 - (work->y >> 8) * 4);
 }
 
 void task_bos_md_fire_3(MdFireWork* work) {
@@ -1582,7 +1582,7 @@ enum BosMdDaiState {
 };
 
 void task_bos_md_dai_0(MdDaiWork* work, void** args) {
-    Collider* p;
+    Collider* collider;
 
     gBtlWork->flags |= 0x100000;
     work->flags = args[1];
@@ -1594,10 +1594,10 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     work->z = 0;
     work->dropSteps = 20;
     work->dropZ = -40960;
-    p = &work->collider;
-    ColliderInit(p, 7, 24, 24);
-    ColliderSetPosition(p, work->x, work->y, work->z);
-    ColliderSetDisabled(p, 1);
+    collider = &work->collider;
+    ColliderInit(collider, 7, 24, 24);
+    ColliderSetPosition(collider, work->x, work->y, work->z);
+    ColliderSetDisabled(collider, 1);
     work->palette = LoadObjPalette(gBosMdDaiPalette, 32);
     work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
 }
@@ -1686,26 +1686,26 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
 void task_bos_md_dai_2(MdDaiWork* work) {
     s16 x;
     s16 y;
-    u16 frame;
+    u16 flags;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z + work->dropZ);
-    frame = GetBattleSpritePriorityFlags(work->y);
+    flags = GetBattleSpritePriorityFlags(work->y);
 
     if (work->state <= BOS_MD_DAI_STATE_DROP_TOP) {
         DrawSprite(x, y + 24, gBosMdDaiFrame0, work->tiles, work->palette, NULL,
-                      frame, -4100 - (work->y >> 8) * 4);
-        DrawSprite(x, y, gBosMdDaiFrame1, work->tiles, work->palette, NULL, frame,
+                      flags, -4100 - (work->y >> 8) * 4);
+        DrawSprite(x, y, gBosMdDaiFrame1, work->tiles, work->palette, NULL, flags,
                       -4100 - (work->y >> 8) * 4);
         DrawSprite(x + 8, y - 16, gBosMdDaiFrame0, work->tiles, work->palette, NULL,
-                      frame, -4100 - (work->y >> 8) * 4);
+                      flags, -4100 - (work->y >> 8) * 4);
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    frame = GetBattleSpritePriorityFlags(work->y);
+    flags = GetBattleSpritePriorityFlags(work->y);
 
     if (work->level > 0) {
         DrawSprite(x, y, gBosMdDaiFrames[work->level + 1], work->tiles,
-                      work->palette, NULL, frame,
+                      work->palette, NULL, flags,
                       -4100 - (work->y >> 8) * 4);
     }
 }
@@ -1769,19 +1769,19 @@ s32 task_bos_md_hahen_1(MdHahenWork* work) {
 void task_bos_md_hahen_2(MdHahenWork* work) {
     s16 x;
     s16 y;
-    u16 frame;
-    s32 flag;
+    u16 flags;
+    s32 oddFrame;
 
-    flag = gFrameCounter & 1;
+    oddFrame = gFrameCounter & 1;
 
-    if (flag != 0) {
+    if (oddFrame != 0) {
         return;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    frame = GetBattleSpritePriorityFlags(work->y);
+    flags = GetBattleSpritePriorityFlags(work->y);
     DrawSprite(x, y, work->gfx, work->tiles, work->palette,
-                  NULL, frame, -4100 - (work->y >> 8) * 4);
+                  NULL, flags, -4100 - (work->y >> 8) * 4);
 }
 
 void task_bos_md_hahen_3(MdHahenWork* work) {

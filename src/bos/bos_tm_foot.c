@@ -518,7 +518,7 @@ void BosTmFootApplySpinStep(TmFootWork* work, s16 step) {
 }
 
 void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
-    u16 f;
+    u16 inEvent;
 
     work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
     work->tiles2 = AllocObjTiles(0x440, gBosTmFootTiles);
@@ -540,9 +540,9 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     work->angle2 = 0;
     work->angle3 = 0;
     work->angle4 = 0;
-    f = work->tm->flags & TM_FLAG_IN_EVENT;
+    inEvent = work->tm->flags & TM_FLAG_IN_EVENT;
 
-    if (f != 0) {
+    if (inEvent != 0) {
         BosTmFootSetPartPos(&work->body, (s16)(work->tm->x + 1),
                       (s16)(work->tm->y + 2), (s16)(work->tm->z - 4));
         BosTmFootSetPartPos(&work->body2, (s16)(work->tm->x - 6),
@@ -553,24 +553,24 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
                       (s16)(work->tm->y - 2), (s16)(work->tm->z + 43));
     } else {
         BosTmFootInitPart(&work->body, work->tm->x + 1,
-                      work->tm->y + 2, work->tm->z - 4, 4, 32, f,
+                      work->tm->y + 2, work->tm->z - 4, 4, 32, inEvent,
                       4);
         BosTmFootInitPart(&work->body2, work->tm->x - 6,
-                      work->tm->y - 2, work->tm->z - 4, 4, 32, f,
+                      work->tm->y - 2, work->tm->z - 4, 4, 32, inEvent,
                       5);
         BosTmFootInitPart(&work->body3, work->tm->x + 6,
                       work->tm->y + 5, work->tm->z + 40, 20, 140,
-                      f, 6);
+                      inEvent, 6);
         BosTmFootInitPart(&work->body4, work->tm->x - 2,
                       work->tm->y - 2, work->tm->z + 43, 20, 140,
-                      f, 7);
+                      inEvent, 7);
     }
 }
 
 u8 task_bos_tm_foot_1(TmFootWork* work) {
-    u16 n;
-    TmFootStep* e;
-    TmFootStep* table;
+    u16 step;
+    TmFootStep* recoilStep;
+    TmFootStep* recoilSteps;
 
     BosTmFootSyncCollider(&work->body3, work);
     BosTmFootSyncCollider(&work->body4, work);
@@ -619,16 +619,16 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
     case BOS_TM_STATE_SLAM_TABLE:
     case BOS_TM_STATE_SLAM_GROUND:
         if (work->tm->stateTimer != 0) {
-            n = work->tm->step;
+            step = work->tm->step;
 
             if (work->tm->step <= 3) {
                 BosTmFootApplyThrowStep(work, work->tm->step);
-            } else if (n >= 66 && n <= 74) {
-                n -= 62;
-                BosTmFootApplyThrowStep(work, n);
-            } else if (n >= 98 && n <= 100) {
-                n -= 85;
-                BosTmFootApplyThrowStep(work, n);
+            } else if (step >= 66 && step <= 74) {
+                step -= 62;
+                BosTmFootApplyThrowStep(work, step);
+            } else if (step >= 98 && step <= 100) {
+                step -= 85;
+                BosTmFootApplyThrowStep(work, step);
             } else {
                 break;
             }
@@ -639,16 +639,16 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         break;
     case BOS_TM_STATE_SLAM_GROUND_SLOW:
         if (work->tm->stateTimer != 0) {
-            n = work->tm->step;
+            step = work->tm->step;
 
             if (work->tm->step <= 3) {
                 BosTmFootApplyThrowStep(work, work->tm->step);
-            } else if (n >= 96 && n <= 104) {
-                n -= 92;
-                BosTmFootApplyThrowStep(work, n);
-            } else if (n >= 128 && n <= 130) {
-                n -= 115;
-                BosTmFootApplyThrowStep(work, n);
+            } else if (step >= 96 && step <= 104) {
+                step -= 92;
+                BosTmFootApplyThrowStep(work, step);
+            } else if (step >= 128 && step <= 130) {
+                step -= 115;
+                BosTmFootApplyThrowStep(work, step);
             } else {
                 break;
             }
@@ -659,13 +659,13 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         break;
     case BOS_TM_STATE_SPIN:
         if (work->tm->stateTimer != 0) {
-            n = work->tm->step;
+            step = work->tm->step;
 
             if (work->tm->step <= 2) {
                 BosTmFootApplySpinStep(work, work->tm->step);
-            } else if (n >= 41 && n <= 46) {
-                n -= 38;
-                BosTmFootApplySpinStep(work, n);
+            } else if (step >= 41 && step <= 46) {
+                step -= 38;
+                BosTmFootApplySpinStep(work, step);
             } else {
                 break;
             }
@@ -698,10 +698,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
 
         if (work->tm->hurtTimer <= 2) {
             work->gfx =
-                gBosTmFootFrames[(table = sBosTmFootSteps, e = &table[work->tm->hurtTimer])->gfxIndex + 1];
-            work->gfx2 = gBosTmFootFrames[e->gfx2Index + 1];
-            work->body.z -= e->dz << 8;
-            work->body2.z -= e->dz2 << 8;
+                gBosTmFootFrames[(recoilSteps = sBosTmFootSteps, recoilStep = &recoilSteps[work->tm->hurtTimer])->gfxIndex + 1];
+            work->gfx2 = gBosTmFootFrames[recoilStep->gfx2Index + 1];
+            work->body.z -= recoilStep->dz << 8;
+            work->body2.z -= recoilStep->dz2 << 8;
         }
 
         break;
@@ -735,20 +735,20 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
 
 void task_bos_tm_foot_2(TmFootWork* work) {
     void* pal;
-    s32 flag;
+    s32 facingLeft;
     s16 x;
     s16 y;
-    BtlObj* s0;
-    BtlObj* s1;
-    BtlObj* s2;
-    BtlObj* s3;
-    u16 mode;
+    BtlObj* body;
+    BtlObj* body2;
+    BtlObj* body3;
+    BtlObj* body4;
+    u16 flags;
 
-    flag = work->tm->flags & TM_FLAG_FACING_LEFT;
-    mode = 0x801;
+    facingLeft = work->tm->flags & TM_FLAG_FACING_LEFT;
+    flags = 0x801;
 
-    if (flag != 0) {
-        mode = 0x800;
+    if (facingLeft != 0) {
+        flags = 0x800;
     }
 
     if (gBtlWork->paused) {
@@ -759,18 +759,18 @@ void task_bos_tm_foot_2(TmFootWork* work) {
         pal = work->palette;
     }
 
-    s0 = &work->body;
-    s1 = &work->body2;
-    s2 = &work->body3;
-    s3 = &work->body4;
-    WorldToScreen(&x, &y, s0->x, s0->y, s0->z);
-    DrawSprite(x, y, work->gfx, work->tiles2, pal, NULL, mode, -4100 - (s0->y >> 8) * 4);
-    WorldToScreen(&x, &y, s1->x, s1->y, s1->z);
-    DrawSprite(x, y, work->gfx2, work->tiles3, pal, NULL, mode, -4100 - (s1->y >> 8) * 4);
-    WorldToScreen(&x, &y, s2->x, s2->y, s2->z);
-    DrawSprite(x, y, work->gfx3, work->tiles, pal, NULL, mode, -4100 - (s2->y >> 8) * 4);
-    WorldToScreen(&x, &y, s3->x, s3->y, s3->z);
-    DrawSprite(x, y, work->gfx4, work->tiles, pal, NULL, mode, -4100 - (s3->y >> 8) * 4);
+    body = &work->body;
+    body2 = &work->body2;
+    body3 = &work->body3;
+    body4 = &work->body4;
+    WorldToScreen(&x, &y, body->x, body->y, body->z);
+    DrawSprite(x, y, work->gfx, work->tiles2, pal, NULL, flags, -4100 - (body->y >> 8) * 4);
+    WorldToScreen(&x, &y, body2->x, body2->y, body2->z);
+    DrawSprite(x, y, work->gfx2, work->tiles3, pal, NULL, flags, -4100 - (body2->y >> 8) * 4);
+    WorldToScreen(&x, &y, body3->x, body3->y, body3->z);
+    DrawSprite(x, y, work->gfx3, work->tiles, pal, NULL, flags, -4100 - (body3->y >> 8) * 4);
+    WorldToScreen(&x, &y, body4->x, body4->y, body4->z);
+    DrawSprite(x, y, work->gfx4, work->tiles, pal, NULL, flags, -4100 - (body4->y >> 8) * 4);
 }
 
 void task_bos_tm_foot_3(TmFootWork* work) {
@@ -842,66 +842,66 @@ void BosTmClbHold(TmClbArg* clb, TmArmPos* tip, u8 mode) {
 }
 
 void task_bos_tm_clb_0(TmClbWork* work, TmClbArg* arg) {
-    TmArmPos* p;
+    TmArmPos* tip;
 
     work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->arg = arg;
-    p = arg->src;
-    work->angle = p->angle;
-    work->x = p->x;
-    work->y = p->y;
-    work->z = p->z;
+    tip = arg->src;
+    work->angle = tip->angle;
+    work->x = tip->x;
+    work->y = tip->y;
+    work->z = tip->z;
 }
 
 u8 task_bos_tm_clb_1(TmClbWork* work) {
-    TmClbArg* a = work->arg;
+    TmClbArg* clb = work->arg;
 
-    switch (a->moveMode) {
+    switch (clb->moveMode) {
     case BOS_TM_CLB_MOVE_MODE_THROWN:
-        work->x += (a->src->x - work->x) >> 4;
-        work->y = a->src->y;
-        work->z += a->vz;
-        a->vz += 51;
+        work->x += (clb->src->x - work->x) >> 4;
+        work->y = clb->src->y;
+        work->z += clb->vz;
+        clb->vz += 51;
 
-        if (a->vz > 0 && work->z >= a->src->z) {
-            work->z = a->src->z;
-            a->moveMode = BOS_TM_CLB_MOVE_MODE_FOLLOW;
-            a->spinMode = BOS_TM_CLB_SPIN_MODE_ALIGN;
+        if (clb->vz > 0 && work->z >= clb->src->z) {
+            work->z = clb->src->z;
+            clb->moveMode = BOS_TM_CLB_MOVE_MODE_FOLLOW;
+            clb->spinMode = BOS_TM_CLB_SPIN_MODE_ALIGN;
         }
 
         break;
     case BOS_TM_CLB_MOVE_MODE_FOLLOW:
-        work->x = a->src->x;
-        work->y = a->src->y;
-        work->z = a->src->z;
+        work->x = clb->src->x;
+        work->y = clb->src->y;
+        work->z = clb->src->z;
         break;
     case BOS_TM_CLB_MOVE_MODE_HOLD:
-        work->x = a->src->x;
-        work->y = a->src->y;
-        work->z = a->src->z;
+        work->x = clb->src->x;
+        work->y = clb->src->y;
+        work->z = clb->src->z;
         break;
     case BOS_TM_CLB_MOVE_MODE_HOLD_LEFT:
-        work->x = a->src->x - 0x600;
-        work->y = a->src->y;
-        work->z = a->src->z;
+        work->x = clb->src->x - 0x600;
+        work->y = clb->src->y;
+        work->z = clb->src->z;
         break;
     case BOS_TM_CLB_MOVE_MODE_HOLD_RIGHT_HIGH:
-        work->x = a->src->x + 0x600;
-        work->y = a->src->y;
-        work->z = a->src->z - 0x500;
+        work->x = clb->src->x + 0x600;
+        work->y = clb->src->y;
+        work->z = clb->src->z - 0x500;
         break;
     }
 
-    switch (a->spinMode) {
+    switch (clb->spinMode) {
     case BOS_TM_CLB_SPIN_MODE_TWIRL:
         work->angle += 0x10;
         break;
     case BOS_TM_CLB_SPIN_MODE_ALIGN:
-        ApproachAngle(&work->angle, a->src->angle, 2);
+        ApproachAngle(&work->angle, clb->src->angle, 2);
         break;
     case BOS_TM_CLB_SPIN_MODE_LOCKED:
-        work->angle = a->src->angle;
+        work->angle = clb->src->angle;
         break;
     }
 
@@ -909,17 +909,17 @@ u8 task_bos_tm_clb_1(TmClbWork* work) {
 }
 
 void task_bos_tm_clb_2(TmClbWork* work) {
-    ObjAffine* p;
+    ObjAffine* affine;
     s16 x;
     s16 y;
 
-    p = AllocObjAffineAngle(work->angle, 0);
+    affine = AllocObjAffineAngle(work->angle, 0);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gBosTmClubHandleFrame0, work->tiles, work->palette, p, SPRITE_PRIORITY(2),
+    DrawSprite(x, y, gBosTmClubHandleFrame0, work->tiles, work->palette, affine, SPRITE_PRIORITY(2),
                -0x1002 - (work->y >> 8) * 4);
     // @bug AllocObjAffineAngle returns NULL at angle 0 (NULL write).
-    p->doubleSize = 1;
-    DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, p, SPRITE_PRIORITY(2),
+    affine->doubleSize = 1;
+    DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, affine, SPRITE_PRIORITY(2),
                -0x1003 - (work->y >> 8) * 4);
 }
 
@@ -951,65 +951,65 @@ void BosTmArmStartJointAnim(TmAnim* anim, const TmAnimFrame* src, u16 frameCount
 }
 
 void BosTmArmUpdateArm1Tip(TmArmWork* work) {
-    TmArmJoint* s = &work->joints.all[7];
-    TmArmPos* d = &work->tips[0];
+    TmArmJoint* hand = &work->joints.all[7];
+    TmArmPos* tip = &work->tips[0];
 
-    d->x = s->curX + gSineTable[s->angle] * 12 + work->src->x;
-    d->z = s->curY + -gSineTable[s->angle + 0x40] * 12 + work->src->z;
-    d->y = work->src->y;
+    tip->x = hand->curX + gSineTable[hand->angle] * 12 + work->src->x;
+    tip->z = hand->curY + -gSineTable[hand->angle + 0x40] * 12 + work->src->z;
+    tip->y = work->src->y;
 }
 
 void BosTmArmUpdateArm0Tip(TmArmWork* work) {
-    TmArmJoint* s = &work->joints.all[3];
-    TmArmPos* d = &work->tips[1];
+    TmArmJoint* hand = &work->joints.all[3];
+    TmArmPos* tip = &work->tips[1];
 
-    d->x = s->curX + gSineTable[s->angle] * 12 + work->src->x2;
-    d->z = s->curY + -gSineTable[s->angle + 0x40] * 12 + work->src->z2;
-    d->y = work->src->y2;
+    tip->x = hand->curX + gSineTable[hand->angle] * 12 + work->src->x2;
+    tip->z = hand->curY + -gSineTable[hand->angle + 0x40] * 12 + work->src->z2;
+    tip->y = work->src->y2;
 }
 
 void BosTmArmComputeJointPositions(TmArmJoint* joints) {
     s32 x;
     s32 y;
     s32 i;
-    s32 n;
-    TmArmJoint* p;
+    s32 index;
+    TmArmJoint* joint;
 
     x = 0;
     y = 0;
 
     for (i = 0; i < 3; i++) {
-        p = &joints[i];
-        p->x = x;
-        p->y = y;
-        x += gSineTable[p->angle] * sBosTmArmSegmentLengths[n = p->anim.frame];
-        y += -gSineTable[p->angle + 0x40] * sBosTmArmSegmentLengths[n = p->anim.frame];
+        joint = &joints[i];
+        joint->x = x;
+        joint->y = y;
+        x += gSineTable[joint->angle] * sBosTmArmSegmentLengths[index = joint->anim.frame];
+        y += -gSineTable[joint->angle + 0x40] * sBosTmArmSegmentLengths[index = joint->anim.frame];
     }
 
-    p = &joints[n = 3];
-    p->x = x;
-    p->y = y;
+    joint = &joints[index = 3];
+    joint->x = x;
+    joint->y = y;
 }
 
 void BosTmArmUpdateJoints(TmArmJoint* joints, u16 shift) {
     s32 i;
-    u8* q;
-    TmArmJoint* p;
+    u8* angle;
+    TmArmJoint* joint;
 
     for (i = 0; i < 4; i++) {
-        p = &joints[i];
+        joint = &joints[i];
 
-        q = &p->angle;
-        ApproachAngle((u16*)q, p->targetAngle, shift);
+        angle = &joint->angle;
+        ApproachAngle((u16*)angle, joint->targetAngle, shift);
     }
 
     BosTmArmComputeJointPositions(joints);
 
     for (i = 0; i < 4; i++) {
-        p = &joints[i];
+        joint = &joints[i];
 
-        p->curX += (p->x - p->curX) >> 1;
-        p->curY += (p->y - p->curY) >> 1;
+        joint->curX += (joint->x - joint->curX) >> 1;
+        joint->curY += (joint->y - joint->curY) >> 1;
     }
 }
 
@@ -1032,10 +1032,10 @@ void BosTmArmStepJointAnim(TmArmJoint* joints, TmAnim* anim) {
 void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     s32 i;
     void* gfx;
-    TmArmJoint* a;
-    TmArmJoint* b;
-    TmArmJoint* p;
-    TmArmJoint* q;
+    TmArmJoint* arm0;
+    TmArmJoint* arm1;
+    TmArmJoint* arm0Joint;
+    TmArmJoint* arm1Joint;
 
     work->src = arg;
     work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
@@ -1051,16 +1051,16 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleLeftFrames, 3, &work->joints.arms[1][0]);
 
     for (i = 0; i < 4; i++) {
-        p = &work->joints.arms[0][i];
-        q = &work->joints.arms[1][i];
-        *(u16*)&p->angle = p->targetAngle;
-        *(u16*)&q->angle = q->targetAngle;
+        arm0Joint = &work->joints.arms[0][i];
+        arm1Joint = &work->joints.arms[1][i];
+        *(u16*)&arm0Joint->angle = arm0Joint->targetAngle;
+        *(u16*)&arm1Joint->angle = arm1Joint->targetAngle;
     }
 
-    a = work->joints.arms[0];
-    BosTmArmComputeJointPositions(a);
-    b = &work->joints.arms[1][0];
-    BosTmArmComputeJointPositions(b);
+    arm0 = work->joints.arms[0];
+    BosTmArmComputeJointPositions(arm0);
+    arm1 = &work->joints.arms[1][0];
+    BosTmArmComputeJointPositions(arm1);
 
     for (i = 0; i < 4; i++) {
         work->joints.arms[0][i].curX = work->joints.arms[0][i].x;
@@ -1110,10 +1110,10 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
 }
 
 void BosTmArmUpdateArm1(TmArmWork* work) {
-    TmArmJoint* j;
-    TmArmJoint* j2;
+    TmArmJoint* hand;
+    TmArmJoint* hand2;
     s32 i;
-    s32 r;
+    s32 hit;
     s32 x;
     s32 y;
     s32 z;
@@ -1217,15 +1217,15 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer == 45) {
-            j = &work->joints.all[3];
+            hand = &work->joints.all[3];
             y = work->src->y2;
-            z = work->src->z2 + j->curY - 0x2300;
+            z = work->src->z2 + hand->curY - 0x2300;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                x = work->src->x2 + j->curX - 0x3E00;
+                x = work->src->x2 + hand->curX - 0x3E00;
                 BgFxStartFireAtPlayer(x, y, z, 1, 0, 168, 20);
             } else {
-                x = work->src->x2 + j->curX + 0x4800;
+                x = work->src->x2 + hand->curX + 0x4800;
                 BgFxStartFireAtPlayer(x, y, z, 0, 0, 168, 20);
             }
         } else if (work->timer > 55) {
@@ -1251,15 +1251,15 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer == 30) {
-            j = &work->joints.all[3];
+            hand = &work->joints.all[3];
             y = work->src->y2;
-            z = work->src->z2 + j->curY - 0x2300;
+            z = work->src->z2 + hand->curY - 0x2300;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                x = work->src->x2 + j->curX - 0x3E00;
+                x = work->src->x2 + hand->curX - 0x3E00;
                 BgFxStartFireAtPlayer(x, y, z, 1, 0, 168, 18);
             } else {
-                x = work->src->x2 + j->curX + 0x4800;
+                x = work->src->x2 + hand->curX + 0x4800;
                 BgFxStartFireAtPlayer(x, y, z, 0, 0, 168, 18);
             }
         } else if (work->timer > 70) {
@@ -1271,15 +1271,15 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             v = BgFxIsActive();
 
             if (!v) {
-                j2 = &work->joints.all[3];
+                hand2 = &work->joints.all[3];
                 y2 = work->src->y2;
-                z2 = work->src->z2 + j2->curY - 0x2300;
+                z2 = work->src->z2 + hand2->curY - 0x2300;
 
                 if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                    x2 = work->src->x2 + j2->curX - 0x3E00;
+                    x2 = work->src->x2 + hand2->curX - 0x3E00;
                     BgFxStartFireAtPlayer(x2, y2, z2, 1, 0, 168, 18);
                 } else {
-                    x2 = work->src->x2 + j2->curX + 0x4800;
+                    x2 = work->src->x2 + hand2->curX + 0x4800;
                     BgFxStartFireAtPlayer(x2, y2, z2, 0, 0, 168, 18);
                 }
             }
@@ -1304,14 +1304,14 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->src->tm->tableState = BOS_TM_TABLE_STATE_MOVING;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                r = ApplyAttackBox(237, work->tips[1].x - 0x1000, work->tips[1].y,
+                hit = ApplyAttackBox(237, work->tips[1].x - 0x1000, work->tips[1].y,
                                   work->tips[1].z + 0x1400, 16, 16, 16);
             } else {
-                r = ApplyAttackBox(237, work->tips[1].x + 0x2800, work->tips[1].y,
+                hit = ApplyAttackBox(237, work->tips[1].x + 0x2800, work->tips[1].y,
                                   work->tips[1].z + 0x1400, 16, 16, 16);
             }
 
-            if (r == 1) {
+            if (hit == 1) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
             }
 
@@ -1679,14 +1679,14 @@ u8 task_bos_tm_arm_1(TmArmWork* work) {
 
 void task_bos_tm_arm_2(TmArmWork* work) {
     void* pal;
-    s32 mode;
+    s32 scaleX;
     ObjAffine* affine;
     s16 depth;
     s16 endDepth;
     s16 x;
     s16 y;
     s32 i;
-    TmArmJoint* j;
+    TmArmJoint* joint;
 
     if (gBtlWork->paused) {
         pal = work->palette;
@@ -1697,39 +1697,39 @@ void task_bos_tm_arm_2(TmArmWork* work) {
     }
 
     for (i = 0; i < 3; i++) {
-        j = &work->joints.all[i + 4];
-        affine = AllocObjAffine(j->angle, 256, 256, 0);
-        WorldToScreen(&x, &y, work->src->x + j->curX, work->src->y,
-                      work->src->z + j->curY);
+        joint = &work->joints.all[i + 4];
+        affine = AllocObjAffine(joint->angle, 256, 256, 0);
+        WorldToScreen(&x, &y, work->src->x + joint->curX, work->src->y,
+                      work->src->z + joint->curY);
         depth = -4100;
-        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
+        DrawSprite(x, y, joint->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                    (depth -= (work->src->y >> 8) * 4, (u16)depth));
-        j = &work->joints.all[i];
-        affine = AllocObjAffine(j->angle, 256, 256, 0);
-        WorldToScreen(&x, &y, work->src->x2 + j->curX, work->src->y2,
-                      work->src->z2 + j->curY);
+        joint = &work->joints.all[i];
+        affine = AllocObjAffine(joint->angle, 256, 256, 0);
+        WorldToScreen(&x, &y, work->src->x2 + joint->curX, work->src->y2,
+                      work->src->z2 + joint->curY);
         depth = -4100;
-        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
+        DrawSprite(x, y, joint->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                    (depth -= (work->src->y2 >> 8) * 4, (u16)depth));
     }
 
     if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-        mode = 256;
+        scaleX = 256;
     } else {
-        mode = -256;
+        scaleX = -256;
     }
 
-    j = &work->joints.all[7];
-    affine = AllocObjAffine(j->angle, mode, 256, 0);
-    WorldToScreen(&x, &y, work->src->x + j->curX, work->src->y,
-                  work->src->z + j->curY);
-    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
+    joint = &work->joints.all[7];
+    affine = AllocObjAffine(joint->angle, scaleX, 256, 0);
+    WorldToScreen(&x, &y, work->src->x + joint->curX, work->src->y,
+                  work->src->z + joint->curY);
+    DrawSprite(x, y, joint->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                (endDepth = -4100 - (work->src->y >> 8) * 4, (u16)endDepth));
-    j = &work->joints.all[3];
-    affine = AllocObjAffine(j->angle, mode, 256, 0);
-    WorldToScreen(&x, &y, work->src->x2 + j->curX, work->src->y2,
-                  work->src->z2 + j->curY);
-    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
+    joint = &work->joints.all[3];
+    affine = AllocObjAffine(joint->angle, scaleX, 256, 0);
+    WorldToScreen(&x, &y, work->src->x2 + joint->curX, work->src->y2,
+                  work->src->z2 + joint->curY);
+    DrawSprite(x, y, joint->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                (endDepth = -4100 - (work->src->y2 >> 8) * 4, (u16)endDepth));
     TaskPoolDraw(&work->tasks);
 }
@@ -1764,7 +1764,7 @@ void task_bos_tm_tbl_0(TmTblWork* work, TmWork* arg) {
 }
 
 u8 task_bos_tm_tbl_1(TmTblWork* work) {
-    u16 t;
+    u16 flags;
 
     switch (work->state) {
     case BOS_TM_TBL_STATE_UP:
@@ -1824,8 +1824,8 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
             work->frame = 0;
             work->state = BOS_TM_TBL_STATE_UP;
             work->tm->tableState = BOS_TM_TABLE_STATE_UP;
-            t = work->tm->flags | TM_FLAG_TABLE_JUST_RAISED;
-            work->tm->flags = t;
+            flags = work->tm->flags | TM_FLAG_TABLE_JUST_RAISED;
+            work->tm->flags = flags;
         } else {
             ColliderSetHeight(&work->collider, work->height);
             work->height += 3;

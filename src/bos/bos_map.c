@@ -96,15 +96,15 @@ void task_bos_shadow_2(BosShadowWork* work) {
     s16 x;
     s16 y;
     s32 size;
-    u8 flip;
-    u16 frame;
-    ObjAffine* sprite;
+    u8 doubleSize;
+    u16 flags;
+    ObjAffine* affine;
     void* gfx;
 
     obj = work->actor;
-    flip = 0;
+    doubleSize = 0;
     gfx = gBtlShadowFrame0;
-    frame = GetBattleSpritePriorityFlags(obj->y);
+    flags = GetBattleSpritePriorityFlags(obj->y);
     size = 0x100 - ((obj->groundZ - obj->z) >> 7);
 
     if (size <= 0xB2) {
@@ -113,12 +113,12 @@ void task_bos_shadow_2(BosShadowWork* work) {
 
     if (work->actor->flags & BTLOBJ_FLAG_LARGE_SHADOW) {
         size += 0x100;
-        flip = 1;
+        doubleSize = 1;
     }
 
-    sprite = AllocObjAffine(0, size, size, flip);
+    affine = AllocObjAffine(0, size, size, doubleSize);
     WorldToScreen(&x, &y, obj->x, obj->y, obj->groundZ);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, sprite, frame, 0xFFF0);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, affine, flags, 0xFFF0);
 }
 
 void task_bos_shadow_3(BosShadowWork* work) {

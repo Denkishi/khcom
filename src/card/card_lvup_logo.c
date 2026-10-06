@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "macros.h"
 
 static u8 sLvupLogoActive;
 
@@ -337,7 +338,7 @@ void LoadEventMapObjectGfx(EventMapObjectWork* work, EventBackgroundDef* backgro
     def = background->mapObjects;
     entries = def->placements;
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->tiles); i++) {
         work->tiles[i] = NULL;
         work->palettes[i] = NULL;
     }
@@ -353,7 +354,7 @@ void LoadEventMapObjectGfx(EventMapObjectWork* work, EventBackgroundDef* backgro
 void ReleaseEventMapObjectGfx(EventMapObjectWork* work) {
     u8 i;
 
-    for (i = 0; i <= 9; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->tiles); i++) {
         if (work->tiles[i] != NULL) {
             ReleaseObjTiles(work->tiles[i]);
             ReleaseObjPalette(work->palettes[i]);

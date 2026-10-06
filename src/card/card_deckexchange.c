@@ -1547,7 +1547,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
         dst = (void*)(BG_PLTT + 11 * PLTT_SIZE_4BPP);
         LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
 
-        for (j = 0; j < 10; j++) {
+        for (j = 0; j < ARRAY_COUNT(work->entries[i].valueCounts); j++) {
             DrawValueCount(work->entries[i].valueCounts[j], j);
         }
 

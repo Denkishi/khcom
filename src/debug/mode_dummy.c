@@ -21,6 +21,7 @@
 #include "debug_text.h"
 #include "event_ids.h"
 #include "mode_movie.h"
+#include "macros.h"
 
 static u16 sDummyEntryIndex;
 
@@ -59,7 +60,7 @@ void mode_dummy_0(u32 arg) {
     EnableBg(1);
     sDummyEntryIndex = arg;
 
-    if (arg > 9) {
+    if (arg >= ARRAY_COUNT(sDummyEntries)) {
         sDummyEntryIndex = 0;
         DebugTextPrint(0, 0, 2, "\x83\x47\x83\x89\x81\x5b\x81\x46\x96\xb3\x8c\xf8\x82\xc8\x88\xf8\x90\x94");
     } else {

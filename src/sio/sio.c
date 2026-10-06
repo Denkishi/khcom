@@ -369,7 +369,7 @@ void SioQueueSendFrame(u16* frame) {
             idx -= 32;
         }
 
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < ARRAY_COUNT(gSioWork.sendBuf); i++) {
             sSioSendNonzero |= *frame;
             gSioWork.sendBuf[i][idx] = *frame;
             *frame = 0;
@@ -404,7 +404,7 @@ void SioReadRecvFrame(u16 (*frame)[2]) {
 
         gSioWork.recvEmpty = 1;
     } else {
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < ARRAY_COUNT(gSioWork.recvBuf[0]); i++) {
             for (j = 0; j < gSioWork.playerCount; j++) {
                 frame[i][j] = gSioWork.recvBuf[j][i][gSioWork.recvReadIdx];
             }
@@ -669,8 +669,8 @@ void SioResetSendQueue() {
     gSioWork.sendCount = 0;
     gSioWork.sendReadIdx = 0;
 
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 32; j++) {
+    for (i = 0; i < ARRAY_COUNT(gSioWork.sendBuf); i++) {
+        for (j = 0; j < ARRAY_COUNT(gSioWork.sendBuf[0]); j++) {
             gSioWork.sendBuf[i][j] = 0xEFFF;
         }
     }
@@ -684,9 +684,9 @@ void SioResetRecvQueue() {
     gSioWork.recvCount = 0;
     gSioWork.recvReadIdx = 0;
 
-    for (i = 0; i < 2; i++) {
-        for (j = 0; j < 4; j++) {
-            for (k = 0; k < 32; k++) {
+    for (i = 0; i < ARRAY_COUNT(gSioWork.recvBuf); i++) {
+        for (j = 0; j < ARRAY_COUNT(gSioWork.recvBuf[0]); j++) {
+            for (k = 0; k < ARRAY_COUNT(gSioWork.recvBuf[0][0]); k++) {
                 gSioWork.recvBuf[i][j][k] = 0xEFFF;
             }
         }

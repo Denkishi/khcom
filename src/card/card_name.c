@@ -428,7 +428,7 @@ void PrintBinary16(u16 x, u16 y, u16 color, u16 bits) {
     u16 i;
     u16 j;
 
-    for (i = 0, j = 15; i < 16; i++, j--) {
+    for (i = 0, j = 15; i < ARRAY_COUNT(masked); i++, j--) {
         masked[i] = bits & (1 << i);
         text[j] = (masked[i] >> i) + '0';
     }

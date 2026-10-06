@@ -1116,7 +1116,7 @@ void AllmapInitDropOffsets() {
 
     base = (sAllmapState->maxY * 24 - gAllmapCameraY) << 9;
 
-    for (i = 0; i < 32; i++) {
+    for (i = 0; i < ARRAY_COUNT(sAllmapState->roomTasks); i++) {
         if (IsTaskActive(sAllmapState->roomTasks[i])) {
             room = sAllmapState->roomTasks[i]->work;
             room->dropTargetY = (room->y * 24 - gAllmapCameraY) << 8;
@@ -1134,7 +1134,7 @@ s32 GetAllmapRoomAt(AllmapCursorPos pos) {
     AllmapRoomWork* room;
     u8 i;
 
-    for (i = 0; i < 32; i++) {
+    for (i = 0; i < ARRAY_COUNT(sAllmapState->roomTasks); i++) {
         if (IsTaskActive(sAllmapState->roomTasks[i])) {
             room = sAllmapState->roomTasks[i]->work;
 

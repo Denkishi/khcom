@@ -1400,7 +1400,7 @@ void CreateMapCardSelection(TaskPool* pool, u8* status) {
 void ClearMapCardInventory() {
     u16 i;
 
-    for (i = 0; i < 270; i++) {
+    for (i = 0; i < ARRAY_COUNT(gMapCardCounts); i++) {
         gMapCardCounts[i] = 0;
     }
 }
@@ -1587,7 +1587,7 @@ s32 LoadMapSelectValueCounts(u16 baseCardId, MapSelectWork* work) {
         }
     }
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->valueCounts); i++) {
         if (work->valueCounts[i] != 0) {
             return (s8)i;
         }

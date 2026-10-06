@@ -1435,7 +1435,7 @@ void CharaObjInitDefeat(CharaObjParam* param) {
 }
 
 void CharaObjSetBankFadeEnabled(u16 bank, u8 enabled) {
-    if (bank <= 31) {
+    if (bank < ARRAY_COUNT(sCharaObj->bankFadeEnabled)) {
         sCharaObj->bankFadeEnabled[bank] = enabled;
     }
 }

@@ -890,7 +890,7 @@ u8 task_bos_boogie_mapanime_1(BoogieMapanimeWork* work) {
     u32 i;
     u8 defer = FALSE;
 
-    for (i = gBosBoogieDiceBreakCount; i <= 2; i++) {
+    for (i = gBosBoogieDiceBreakCount; i < ARRAY_COUNT(work->anims); i++) {
         defer = BosMapanimeUpdate(&work->anims[i], work->anims[i].def, defer);
     }
 

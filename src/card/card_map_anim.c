@@ -217,7 +217,7 @@ void CopyLinkPartnerDeckCards(u8 listIndex, u16* out) {
 
     deck = GetLinkPartnerDeck();
 
-    for (i = 0; i < 99; i++) {
+    for (i = 0; i < ARRAY_COUNT(deck->cards); i++) {
         if (deck->cards[i] != CARD_ID_NONE) {
             switch (listIndex) {
             case 0:
@@ -252,7 +252,7 @@ void ObtainCardIntoActiveDeck(u16 cardId) {
 void InitCardCollection() {
     u16 i;
 
-    for (i = 0; i < 999; i++) {
+    for (i = 0; i < ARRAY_COUNT(gCardCollection); i++) {
         gCardCollection[i] = CARD_COLLECTION_EMPTY;
     }
 

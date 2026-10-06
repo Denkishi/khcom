@@ -31,6 +31,7 @@
 #include "sprite_palettes.h"
 #include "default_bg_map.h"
 #include "enemy_ids.h"
+#include "macros.h"
 
 static BoogieWork* sBoogieWork;
 
@@ -158,7 +159,7 @@ void task_bos_boogie_0(BoogieWork* work) {
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     size = 0;
 
-    for (i = 0; i <= 5; i++) {
+    for (i = 0; i < ARRAY_COUNT(sBosBoogieSpriteDefs); i++) {
         bytes = GetMaxSpriteTileBytes(sBosBoogieSpriteDefs[i].sprites, sBosBoogieSpriteDefs[i].spriteCount);
 
         if (size < bytes) {

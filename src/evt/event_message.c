@@ -2669,7 +2669,7 @@ u8 InitEventState(EventSeqWork* work) {
         gEventState->mapAnim = bg->mapAnim;
     }
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < ARRAY_COUNT(gEventState->charaObjs); i++) {
         gEventState->charaObjs[i] = NULL;
     }
 
@@ -2791,7 +2791,7 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
     i = 0;
     seqDef = work->seqDef;
 
-    while (i < 16) {
+    while (i < ARRAY_COUNT(gEventState->charaObjs)) {
         gEventState->charaObjs[i] = NULL;
         i++;
     }

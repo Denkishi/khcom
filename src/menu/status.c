@@ -1219,7 +1219,7 @@ u16 LoadFriendCardSprites(void** tiles, void** palettes, void** gfx) {
 
     count = 0;
 
-    for (index = 0; index <= 7; index++) {
+    for (index = 0; index < ARRAY_COUNT(table.entries); index++) {
         data = &table.entries[index];
         source = &gGameState.progression.friendFlags;
 

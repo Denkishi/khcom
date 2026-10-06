@@ -778,7 +778,7 @@ void down_0(EffectWork* work, EventCharaWork* chara) {
     work->down = EwramAlloc(sizeof(DownWork));
     down = work->down;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_COUNT(down->angle); i++) {
         down->angle[i] = i * 32;
         down->wobble[i] = 0;
     }
@@ -790,7 +790,7 @@ s32 down_1(EffectWork* work) {
 
     down = work->down;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_COUNT(down->x); i++) {
         down->x[i] = SIN(down->angle[i]) * 8 + work->x;
         down->y[i] = -COS(down->angle[i]) * (down->wobble[i] + 4) +
                        work->y;
@@ -818,7 +818,7 @@ s32 down_2(EffectWork* work) {
     flags = work->actor->obj.drawFlags;
     down = work->down;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_COUNT(down->x); i++) {
         DrawSprite((down->x[i] >> 8) - (gEventState->x >> 8),
                    (down->y[i] >> 8) - (gEventState->y >> 8), NULL,
                    work->tiles, work->palette, NULL, flags, 50);

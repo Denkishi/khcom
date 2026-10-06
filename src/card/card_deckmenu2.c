@@ -571,12 +571,12 @@ void InitDecks() {
     u16 i;
     u16 j;
 
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 99; j++) {
+    for (i = 0; i < ARRAY_COUNT(gDecks); i++) {
+        for (j = 0; j < ARRAY_COUNT(gDecks[i].cards); j++) {
             gDecks[i].cards[j] |= CARD_NONE;
         }
 
-        for (j = 0; j < 20; j++) {
+        for (j = 0; j < ARRAY_COUNT(gDecks[i].name); j++) {
             gDecks[i].name[j] = 0;
         }
 
@@ -603,7 +603,7 @@ void ClearDeck(u8 deck) {
         break;
     }
 
-    for (i = 0; i < 99; i++) {
+    for (i = 0; i < ARRAY_COUNT(gDecks[deck].cards); i++) {
         if (gDecks[deck].cards[i] != CARD_NONE) {
             gCardCollection[gDecks[deck].cards[i]] &= ~mask;
             gDecks[deck].cards[i] |= CARD_NONE;
@@ -737,7 +737,7 @@ void RecalculateInactiveDeckCpCosts() {
     s32 j;
     Deck* deck;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(gDecks); i++) {
         if (i == sActiveDeck) {
             continue;
         }
@@ -5245,7 +5245,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
         dst = (void*)(BG_PLTT + 11 * PLTT_SIZE_4BPP);
         LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
 
-        for (j = 0; j <= 9; j++) {
+        for (j = 0; j < ARRAY_COUNT(work->entries[i].valueCounts); j++) {
             DrawValueCount(work->entries[i].valueCounts[j], j);
         }
 

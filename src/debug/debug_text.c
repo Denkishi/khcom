@@ -11,6 +11,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "debug_text.h"
+#include "macros.h"
 
 static u8* sDebugTextTileDest;
 static u8 sDebugTextPaletteBank;
@@ -74,7 +75,7 @@ void DebugTextClearLines() {
     u8 j;
 
     for (i = 0; i <= 19; i++) {
-        for (j = 0; j <= 60; j++) {
+        for (j = 0; j < ARRAY_COUNT(sDebugTextLines[i].glyphs); j++) {
             sDebugTextLines[i].glyphs[j] = 0;
         }
     }
@@ -158,7 +159,7 @@ void DebugTextInit(u8 bg, u16 charSize, u16 screenSize) {
     sDebugTextLineCount = 0;
 
     for (i = 0; i <= 19; i++) {
-        for (j = 0; j <= 60; j++) {
+        for (j = 0; j < ARRAY_COUNT(sDebugTextLines[i].glyphs); j++) {
             sDebugTextLines[i].glyphs[j] = 0;
         }
 

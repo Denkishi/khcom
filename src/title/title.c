@@ -25,6 +25,7 @@
 #include "types.h"
 #include "mode_title.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 #ifdef VERSION_EU
 extern void** gTitleLumiSpritesEu[5];
@@ -809,7 +810,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
 
     switch (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
     case R_BUTTON:
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < ARRAY_COUNT(levels); i++) {
             if (effect < levels[i]) {
                 effect = levels[i];
                 m4aSongNumStart(SONG_SYS_CANSEL);
@@ -819,7 +820,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
 
         break;
     case L_BUTTON:
-        for (j = 2; j > -1; j--) {
+        for (j = ARRAY_COUNT(levels) - 1; j > -1; j--) {
             if (effect > levels[j]) {
                 effect = levels[j];
                 m4aSongNumStart(SONG_SYS_CANSEL);

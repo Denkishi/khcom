@@ -314,15 +314,15 @@ void WriteCardSaveSlice(SaveLargeSlice* out) {
 void ReadCardSaveSlice(SaveLargeSlice* in) {
     u16 i;
 
-    for (i = 0; i < 0x10E; i++) {
+    for (i = 0; i < ARRAY_COUNT(gMapCardCounts); i++) {
         gMapCardCounts[i] = in->mapCardCounts[i];
     }
 
-    for (i = 0; i < 0x3E7; i++) {
+    for (i = 0; i < ARRAY_COUNT(gCardCollection); i++) {
         gCardCollection[i] = in->cards[i];
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(gDecks); i++) {
         gDecks[i] = in->decks[i];
     }
 
@@ -341,7 +341,7 @@ void CopyMapCardInventory(SaveSmallSlice* out) {
 void RestoreMapCardInventory(SaveSmallSlice* in) {
     u16 i;
 
-    for (i = 0; i <= 0x10D; i++) {
+    for (i = 0; i < ARRAY_COUNT(gMapCardCounts); i++) {
         gMapCardCounts[i] = in->mapCardCounts[i];
     }
 }

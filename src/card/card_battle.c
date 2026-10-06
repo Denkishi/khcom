@@ -543,12 +543,12 @@ static void cardbattle_0(CardBattleWork* work) {
     work->x = sSoraStockValueX[0];
     work->cardsClosed = FALSE;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->playedCards); i++) {
         work->playedCards[i] = NULL;
         work->stock[i] = NULL;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->selectedCards); i++) {
         work->selectedCards[i] = NULL;
         work->slots[i] = NULL;
     }
@@ -1320,7 +1320,7 @@ static void cardbattle_3(CardBattleWork* work) {
     TaskPoolDestroy(&work->tasks);
     TaskPoolDestroy(&gCardBattleState->tasks);
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->slots); i++) {
         if (work->slots[i] != NULL) {
             EwramFree(work->slots[i]);
         }
@@ -2998,7 +2998,7 @@ void RemoveSoraCardDisplays(CardBattleWork* work) {
     CardDisplayWork* node;
     u8 i;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->cardDisplays); i++) {
         node = ListPoolFirst(&work->cardDisplays[i]);
 
         while (node != NULL) {
@@ -3019,7 +3019,7 @@ void RemoveIdleSoraCardDisplays(CardBattleWork* work) {
     CardDisplayWork* node;
     u8 i;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->cardDisplays); i++) {
         node = ListPoolFirst(&work->cardDisplays[i]);
 
         while (node != NULL) {
@@ -3040,7 +3040,7 @@ void OpenSoraCards(CardBattleWork* work) {
         work->stock[i]->flags |= CARD_DISP_FLAG_OPEN;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->cardDisplays); i++) {
         node = ListPoolFirst(&work->cardDisplays[i]);
 
         while (node != NULL) {
@@ -3062,7 +3062,7 @@ void CloseSoraCards(CardBattleWork* work) {
         work->stock[i]->flags &= ~CARD_DISP_FLAG_OPEN;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->cardDisplays); i++) {
         node = ListPoolFirst(&work->cardDisplays[i]);
 
         while (node != NULL) {
@@ -3355,7 +3355,7 @@ void ClearStockedCardSlots(CardBattleWork* work) {
     u8 i;
     u8 j;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->slots); i++) {
         slots = work->slots[i];
 
         // @bug? Should be slotCounts[i].

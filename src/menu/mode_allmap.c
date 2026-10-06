@@ -384,7 +384,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
     u32 mask;
     u8 i;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->gfx); i++) {
         work->gfx[i] = NULL;
         work->tiles2[i] = NULL;
     }
@@ -403,7 +403,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
 
     mask = 0;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->anim); i++) {
         if (!AllmapDoorExists(work->room, i)) {
             continue;
         }

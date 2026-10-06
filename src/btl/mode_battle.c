@@ -26,6 +26,7 @@
 #include "types.h"
 #include "battle_ids.h"
 #include "gba/io_reg.h"
+#include "macros.h"
 
 void mode_battle_0(u32 mode) {
     BtlWork** dest;
@@ -349,7 +350,7 @@ void mode_battle_0(u32 mode) {
     } else {
         SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
 
-        if (mode <= 0x92) {
+        if (mode < ARRAY_COUNT(gBtlFormListByBattleId)) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlForm, (void*)gBtlFormListByBattleId[mode]);
         } else if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ChkBtlSpawnEnemy();

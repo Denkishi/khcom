@@ -3817,7 +3817,7 @@ void SioChgCardCreateMoveTasks() {
 void SioChgCardBackupCollection() {
     u16 i;
 
-    for (i = 0; i <= 0x3E6; i++) {
+    for (i = 0; i < ARRAY_COUNT(sSioChgCardWork->collectionBackup); i++) {
         sSioChgCardWork->collectionBackup[i] = gCardCollection[i];
     }
 
@@ -3827,7 +3827,7 @@ void SioChgCardBackupCollection() {
 void SioChgCardRestoreCollection() {
     u16 i;
 
-    for (i = 0; i <= 0x3E6; i++) {
+    for (i = 0; i < ARRAY_COUNT(gCardCollection); i++) {
         gCardCollection[i] = sSioChgCardWork->collectionBackup[i];
     }
 

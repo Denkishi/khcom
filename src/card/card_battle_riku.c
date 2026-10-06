@@ -679,12 +679,12 @@ static void cardbattle_0(CardBattleWork* work) {
     work->xSteps = 0;
     work->x = sRikuStockValueX[0];
 
-    for (i = 0; i <= 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->playedCards); i++) {
         work->playedCards[i] = NULL;
         work->stock[i] = NULL;
     }
 
-    for (i = 0; i <= 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->selectedCards); i++) {
         work->selectedCards[i] = NULL;
         work->slots[i] = NULL;
     }
@@ -1437,7 +1437,7 @@ static void cardbattle_3(CardBattleWork* work) {
 
     TaskPoolDestroy(&work->tasks);
 
-    for (i = 0; i <= 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->slots); i++) {
         if (work->slots[i] != NULL) {
             EwramFree(work->slots[i]);
         }
@@ -1758,7 +1758,7 @@ void ApplyTrickmasterToRikuStock(CardBattleWork* work) {
 
     if (gBtlWork->hcEffect == HC_EFFECT_VALUE_BREAK) {
         if (work->stockValue != 0) {
-            for (i = 0; i < 3; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->stock); i++) {
                 card = work->stock[i];
 
                 if (card->value > dmg) {

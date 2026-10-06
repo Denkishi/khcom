@@ -540,7 +540,7 @@ s32 GetPoohStumpIndex(PoohWork* work) {
 
     memcpy(circle, sPoohStumpCircle, sizeof(circle));
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(circle); i++) {
         if (work->collider.platformX == circle[i].x && work->collider.platformY == circle[i].y) {
             break;
         }
@@ -1549,7 +1549,7 @@ u16 CreatePooMapobjhitTasks(void* pool, u16 prizeId) {
 u16 CreatePooSpawnTasks(void* pool, u16 prizeId) {
     u32 i;
 
-    for (i = 0; i < 85; i++) {
+    for (i = 0; i < ARRAY_COUNT(gPooSpawns); i++) {
         sPooSpawnPos.x = gPooSpawns[i].x;
         sPooSpawnPos.y = gPooSpawns[i].y;
         sPooSpawnPos.z = 0;
@@ -3703,7 +3703,7 @@ u8 task_poo_mapanime_1(PooMapAnimeWork* work) {
 
     defer = FALSE;
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->anims); i++) {
         defer = BosMapanimeUpdate(&work->anims[i], work->anims[i].def, defer);
     }
 
@@ -6237,7 +6237,7 @@ u8 task_poo_bee_1(PooBeeWork* work) {
             }
         }
 
-        if (sPooBeeCount <= 3) {
+        if (sPooBeeCount < ARRAY_COUNT(work->sub)) {
             ApproachValue(&work->sub[sPooBeeCount].x, work->sub[sPooBeeCount].targetX, work->releaseTimer);
             ApproachValue(&work->sub[sPooBeeCount].y, work->sub[sPooBeeCount].targetY, work->releaseTimer);
             work->releaseTimer--;
@@ -7670,7 +7670,7 @@ u8 IsPooAltImageActive() {
 
     doneCount = 0;
 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < ARRAY_COUNT(eventIds); i++) {
         if (IsPooEventDone(eventIds[i])) {
             doneCount++;
         }

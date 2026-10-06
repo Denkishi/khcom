@@ -477,7 +477,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
 
             break;
         case BOS_GA_ASSEMBLE_STEP_START_FALL:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
                 entry->baseVx = 0;
                 entry->baseVy = 0;
@@ -496,7 +496,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
             work->step = BOS_GA_ASSEMBLE_STEP_FALL;
             break;
         case BOS_GA_ASSEMBLE_STEP_FALL:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i != 1) {
@@ -547,7 +547,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
         case BOS_GA_ASSEMBLE_STEP_SETTLE:
             ApproachValue(&gBtlWork->bossZ, 0, work->timer);
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i != 1) {
@@ -565,7 +565,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
 
             break;
         case BOS_GA_ASSEMBLE_STEP_BOUNCE:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 switch (i) {
                 case 0:
                 case 2:
@@ -590,7 +590,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
 
             break;
         case BOS_GA_ASSEMBLE_STEP_LOWER_HEAD:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i == 1) {
@@ -732,7 +732,7 @@ u8 BosGaUpdateWalk(GaWork* work) {
         work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
-    for (i = 0; i <= 5; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
         entry = &work->entries[i];
 
         switch (work->statePhase) {
@@ -949,7 +949,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
 
     switch (work->statePhase) {
     case BOS_GA_PHASE_ENTER:
-            for (; i <= 5; i++) {
+            for (; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (entry->index) {
@@ -974,7 +974,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
     case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
         case BOS_GA_STOMP_STEP_STAMP:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (entry->index) {
@@ -1025,7 +1025,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
 
             break;
         case BOS_GA_STOMP_STEP_STAMP_END:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (entry->index) {
@@ -1043,7 +1043,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
 
             break;
         case BOS_GA_STOMP_STEP_START_MARCH:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (entry->index) {
@@ -1066,7 +1066,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
 
             break;
         case BOS_GA_STOMP_STEP_MARCH:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (entry->index) {
@@ -1148,7 +1148,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
             work->vzDelta = work->vz * 2 / work->timer;
             work->step = BOS_GA_STOMP_STEP_RETURN;
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (entry->index) {
@@ -1167,7 +1167,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
 
             break;
         case BOS_GA_STOMP_STEP_RETURN:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (entry->index) {
@@ -1237,7 +1237,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
 
         break;
     case BOS_GA_PHASE_EXIT:
-        for (; i <= 5; i++) {
+        for (; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
 
             switch (entry->index) {
@@ -1284,7 +1284,7 @@ u8 BosGaUpdateThrust(GaWork* work) {
         work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
-    for (i = 0; i <= 5; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
         entry = &work->entries[i];
 
         switch (work->statePhase) {
@@ -1420,7 +1420,7 @@ u8 BosGaUpdateOrbit(GaWork* work) {
         work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
-    for (i = 0; i <= 5; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
         entry = &work->entries[i];
 
         switch (work->statePhase) {
@@ -1556,7 +1556,7 @@ u8 BosGaUpdateJump(GaWork* work) {
 
     switch (work->statePhase) {
     case BOS_GA_PHASE_ENTER:
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
             entry->flags |= GA_ENTRY_FLAG_NO_BOB;
 
@@ -1636,7 +1636,7 @@ u8 BosGaUpdateJump(GaWork* work) {
     case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
 
             switch (i) {
@@ -1691,7 +1691,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
 
     switch (work->statePhase) {
     case BOS_GA_PHASE_ENTER:
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
             entry->flags |= GA_ENTRY_FLAG_NO_BOB;
 
@@ -1717,7 +1717,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
                 work->step = BOS_GA_BODY_STEP_START_MOVE;
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i <= 1) {
@@ -1794,7 +1794,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
                 work->step = BOS_GA_BODY_STEP_STOP;
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (i) {
@@ -1820,7 +1820,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
                 BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i <= 1) {
@@ -1835,7 +1835,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
     case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
 
             switch (i) {
@@ -1882,7 +1882,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
 
     switch (work->statePhase) {
     case BOS_GA_PHASE_ENTER:
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
             entry->flags |= GA_ENTRY_FLAG_NO_BOB;
 
@@ -1908,7 +1908,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
                 work->step = BOS_GA_BODY_STEP_START_MOVE;
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i <= 1) {
@@ -1969,7 +1969,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
                 work->step = BOS_GA_BODY_STEP_STOP;
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (i) {
@@ -1995,7 +1995,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
                 BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i <= 1) {
@@ -2010,7 +2010,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
     case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
 
             switch (i) {
@@ -2057,7 +2057,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
 
     switch (work->statePhase) {
     case BOS_GA_PHASE_ENTER:
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
             entry->flags |= GA_ENTRY_FLAG_NO_BOB;
 
@@ -2085,7 +2085,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
                 work->step = BOS_GA_BODY_STEP_START_MOVE;
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i <= 1) {
@@ -2152,7 +2152,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
                 }
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (i) {
@@ -2178,7 +2178,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
                 BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
 
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i <= 1) {
@@ -2193,7 +2193,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
     case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
 
             switch (i) {
@@ -2243,7 +2243,7 @@ u8 BosGaUpdateGimmick(GaWork* work) {
     case BOS_GA_PHASE_ENTER:
         work->timer = 0x12C;
 
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
 
             if (!(entry->flags & GA_ENTRY_FLAG_DESTROYED)) {
@@ -2274,7 +2274,7 @@ u8 BosGaUpdateGimmick(GaWork* work) {
     case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
             destroyed = entry->flags & GA_ENTRY_FLAG_DESTROYED;
 
@@ -2327,7 +2327,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
     switch (work->statePhase) {
     case BOS_GA_PHASE_ENTER:
-        for (i = 0; i <= 5; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
             entry = &work->entries[i];
             entry->flags |= GA_ENTRY_FLAG_NO_BOB;
 
@@ -2349,7 +2349,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
     case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
         case BOS_GA_DEFEAT_STEP_COLLAPSE:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (i) {
@@ -2379,7 +2379,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
             break;
         case BOS_GA_DEFEAT_STEP_START_HEAD_SLIDE:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i == 1) {
@@ -2392,7 +2392,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
             break;
         case BOS_GA_DEFEAT_STEP_HEAD_SLIDE:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i == 1) {
@@ -2408,7 +2408,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
             break;
         case BOS_GA_DEFEAT_STEP_START_HEAD_FALL:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i == 1) {
@@ -2420,7 +2420,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
             break;
         case BOS_GA_DEFEAT_STEP_HEAD_FALL:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 if (i == 1) {
@@ -2442,7 +2442,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
             break;
         case BOS_GA_DEFEAT_STEP_START_DEATH:
-            for (i = 0; i <= 5; i++) {
+            for (i = 0; i < ARRAY_COUNT(work->entries); i++) {
                 entry = &work->entries[i];
 
                 switch (i) {

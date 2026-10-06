@@ -714,7 +714,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                     FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
                     FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
 
-                    for (i = 0; i < 3; i++) {
+                    for (i = 0; i < ARRAY_COUNT(work->optionEnabled); i++) {
                         if (work->optionEnabled[i] == 1) {
                             break;
                         }
@@ -874,7 +874,7 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
         work->effectShown++;
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->bonusX); i++) {
         if (i != work->cursor) {
             s32 bonusX = work->bonusX[i] << 8;
             s32 textX = work->textX[i] << 8;
@@ -1129,7 +1129,7 @@ void Level_Up_2(LevelUpWork* work) {
             DrawSprite(work->bottomBarX, work->bottomBarY >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         case LEVEL_UP_STATE_SELECT:
-            for (; i < 3; i++) {
+            for (; i < ARRAY_COUNT(work->textX); i++) {
                 if (i == work->cursor) {
 #ifdef VERSION_EU
                     DrawSprite(work->textX[i] + 5, work->textY[i] - 4, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
@@ -1150,7 +1150,7 @@ void Level_Up_2(LevelUpWork* work) {
             DrawSprite(work->cursorX, work->cursorY, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
             break;
         case LEVEL_UP_STATE_RESULT:
-            for (; i < 3; i++) {
+            for (; i < ARRAY_COUNT(work->textX); i++) {
                 if (i == work->cursor) {
 #ifdef VERSION_EU
                     DrawSprite(work->textX[i] + 4, work->textY[i] - 3, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
@@ -1705,7 +1705,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < ARRAY_COUNT(work->optionEnabled); i++) {
             if (work->optionEnabled[i] == 1) {
                 break;
             }

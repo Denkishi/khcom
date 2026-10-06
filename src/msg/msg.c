@@ -18,6 +18,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "macros.h"
 
 static SpriteTextLine* sSpriteTextLines;
 static TextGlyphSprite* sMsgGlyphSprites;
@@ -68,7 +69,7 @@ void InitSpriteTextLines() {
         sSpriteTextLines[i].palette = NULL;
         sSpriteTextLines[i].length = 0;
 
-        for (j = 0; j < 16; j++) {
+        for (j = 0; j < ARRAY_COUNT(sSpriteTextLines[i].glyphTiles); j++) {
             sSpriteTextLines[i].glyphTiles[j] = NULL;
         }
     }
@@ -342,7 +343,7 @@ void* InitSpriteTextSlots(s32 mode) {
         sSpriteTextLines[i].visible = FALSE;
         sSpriteTextLines[i].unk_53 = 0;
 
-        for (j = 0; j < 16; j++) {
+        for (j = 0; j < ARRAY_COUNT(sSpriteTextLines[i].glyphTiles); j++) {
             sSpriteTextLines[i].glyphTiles[j] = NULL;
         }
 
@@ -784,7 +785,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* text, u8 slot, u8 useAlternatePal
         i++;
     }
 
-    for (j = i; j < 16; j++) {
+    for (j = i; j < ARRAY_COUNT(sSpriteTextLines[slot].glyphTiles); j++) {
         if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
             ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
             sSpriteTextLines[slot].glyphTiles[j] = NULL;
@@ -864,7 +865,7 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* str, u8 slot, u8 useAlternatePalet
 
     len = count;
 
-    for (j = len; j < 16; j++) {
+    for (j = len; j < ARRAY_COUNT(sSpriteTextLines[slot].glyphTiles); j++) {
         if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
             ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
             sSpriteTextLines[slot].glyphTiles[j] = NULL;
@@ -935,7 +936,7 @@ void FreeSpriteTextSlots() {
     u8 j;
 
     for (i = 0; i < 24; i++) {
-        for (j = 0; j < 16; j++) {
+        for (j = 0; j < ARRAY_COUNT(sSpriteTextLines[i].glyphTiles); j++) {
             if (sSpriteTextLines[i].glyphTiles[j] != NULL) {
                 ReleaseObjTiles(sSpriteTextLines[i].glyphTiles[j]);
             }
@@ -966,7 +967,7 @@ void InitBgTextLines(u8 bg) {
         sBgTextLines[i].glyphHeight = 16;
         sBgTextLines[i].dirty = FALSE;
 
-        for (j = 0; j < 16; j++) {
+        for (j = 0; j < ARRAY_COUNT(sBgTextLines[i].glyphs); j++) {
             sBgTextLines[i].glyphs[j] = 0;
         }
     }

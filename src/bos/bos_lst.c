@@ -30,6 +30,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "macros.h"
 
 static const EmyKind sBosLstEmyKind = { ENEMY_MARLUXIA_2, 256, 8, 8, 0, 128, 0 };
 
@@ -125,7 +126,7 @@ void BosLstRequestCardUse(BosLstWork* work) {
 void BosLstDestroyTasks(BosLstWork* work) {
     u32 i;
 
-    for (i = 0; i < 0x20; i++) {
+    for (i = 0; i < ARRAY_COUNT(work->lstTasks); i++) {
         if (work->lstTasks[i] != NULL) {
             TaskKill(&gBtlWork->taskPools[1], work->lstTasks[i]);
         }
@@ -485,7 +486,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     obj = &work->body;
     anim = &work->anim;
 
-    for (; i < 32; i++) {
+    for (; i < ARRAY_COUNT(work->lstTasks); i++) {
         work->lstTasks[i] = NULL;
     }
 

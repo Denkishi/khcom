@@ -279,7 +279,7 @@ u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
     u16 g[2];
     u16 r[2];
 
-    for (bank = 0; bank <= 31; bank++) {
+    for (bank = 0; bank < ARRAY_COUNT(sPaletteBuffer->banks); bank++) {
         if (sPaletteBuffer->banks[bank] == 1) {
             for (j = 0; j <= 15; j++) {
                 u16 idx = bank * 16 + j;
@@ -326,7 +326,7 @@ u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
     u16 g[2];
     u16 r[2];
 
-    for (bank = 0; bank <= 31; bank++) {
+    for (bank = 0; bank < ARRAY_COUNT(sPaletteBuffer->banks); bank++) {
         if (sPaletteBuffer->banks[bank] == 1) {
             for (j = 0; j <= 15; j++) {
                 u16 idx = bank * 16 + j;

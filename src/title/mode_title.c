@@ -47,8 +47,8 @@ static u8* sTitlePaletteBuffer;
 static u16 sTitleBlendStep;
 static u8 sTitleCancelled;
 
-void TitleCopyToPaletteBuffer(u16 a, void* b, u16 c) {
-    RequestDma3Copy(b, sTitlePaletteBuffer + a * 32, c);
+void TitleCopyToPaletteBuffer(u16 slot, void* src, u16 size) {
+    RequestDma3Copy(src, sTitlePaletteBuffer + slot * 32, size);
 }
 
 void TitleLoadPaletteBuffer() {
@@ -89,7 +89,7 @@ void TitleExitToChoice() {
     }
 }
 
-void TitleShowLogo(u16 a) {
+void TitleShowLogo(u16 frames) {
     if ((gGameState.flags & GAME_FLAG_RIKU_TITLE) != 0) {
         LoadBgPalette(1, gTitleRikuBgPalette, 0x200);
         TitleCopyToPaletteBuffer(0, gTitleRikuBgPalette, 0x200);
@@ -110,7 +110,7 @@ void TitleShowLogo(u16 a) {
         sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, NULL);
     }
 
-    FadeStartIn(FADE_MODE_ADD_WHITE, a);
+    FadeStartIn(FADE_MODE_ADD_WHITE, frames);
 }
 
 void TitleFinishIntro() {

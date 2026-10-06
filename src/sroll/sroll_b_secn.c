@@ -19,16 +19,16 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* a) {
+void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* arg) {
     u32 i;
 
     work->timer = 0;
-    work->x = a->x;
-    work->y = a->y;
-    work->scrollY = a->scrollY;
-    work->scrollSpeed = a->scrollSpeed;
+    work->x = arg->x;
+    work->y = arg->y;
+    work->scrollY = arg->scrollY;
+    work->scrollSpeed = arg->scrollSpeed;
 
-    if (a->index < 0) {
+    if (arg->index < 0) {
 #ifdef VERSION_JP
         work->tiles = LoadObjTiles(gSrollSecnThemeSongTiles, 590 * 32);
 #else
@@ -40,11 +40,11 @@ void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* a) {
         AnimInit(&work->anim2, gSrollSecnThemeSongAnims, gSrollSecnThemeSongFrames);
         AnimStart(&work->anim2, 0, 0);
     } else {
-        work->tiles = LoadObjTiles(gSrollSecnSprites[a->index].tiles, gSrollSecnSprites[a->index].tileSize);
+        work->tiles = LoadObjTiles(gSrollSecnSprites[arg->index].tiles, gSrollSecnSprites[arg->index].tileSize);
         work->palette = LoadObjPalette(gSrollSecnPalettes, 256);
-        AnimInit(&work->anim, gSrollSecnSprites[a->index].anims, gSrollSecnSprites[a->index].gfxTable);
+        AnimInit(&work->anim, gSrollSecnSprites[arg->index].anims, gSrollSecnSprites[arg->index].gfxTable);
         AnimStart(&work->anim, 0, 0);
-        AnimInit(&work->anim2, gSrollSecnSprites[a->index].anims, gSrollSecnSprites[a->index].gfxTable);
+        AnimInit(&work->anim2, gSrollSecnSprites[arg->index].anims, gSrollSecnSprites[arg->index].gfxTable);
         AnimStart(&work->anim2, 1, 0);
     }
 

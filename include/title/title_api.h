@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-void TitleCopyToPaletteBuffer(u16 a, void* b, u16 c);
+void TitleCopyToPaletteBuffer(u16 slot, void* src, u16 size);
 void TitleLoadPaletteBuffer();
 u8 IsTitleObjSlideDone();
 

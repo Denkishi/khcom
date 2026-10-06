@@ -24,19 +24,19 @@ static inline s32 GetSrollCurtainOffset() {
     return (GetRandom() % 9) * 256 - 0x400;
 }
 
-void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* a) {
+void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* arg) {
     AnimState* anim;
     s32 t;
 
     work->timer = 0;
-    work->kind = a->kind;
+    work->kind = arg->kind;
 
     switch (work->kind) {
     case 0:
     case 1:
     case 5:
-        work->x = a->x;
-        work->y = a->y + 0xFFFFE000;
+        work->x = arg->x;
+        work->y = arg->y + 0xFFFFE000;
         work->tiles = AllocObjTiles(128, gFEventTiles);
         work->palette = LoadObjPalette(gCommonObjPalette, 32);
         anim = &work->anim;
@@ -44,8 +44,8 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* a) {
         AnimStart(anim, work->kind, 0);
         break;
     case 3:
-        work->x = a->x;
-        work->y = a->y + 0xFFFFD000;
+        work->x = arg->x;
+        work->y = arg->y + 0xFFFFD000;
         work->tiles = AllocObjTiles(128, gFEventTiles);
         work->palette = LoadObjPalette(gCommonObjPalette, 32);
         anim = &work->anim;
@@ -54,9 +54,9 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* a) {
         break;
     case 2:
         t = GetSrollCurtainOffset();
-        work->x = a->x + t;
+        work->x = arg->x + t;
         t = GetSrollCurtainOffset();
-        work->y = a->y + t;
+        work->y = arg->y + t;
         work->tiles = AllocObjTiles(128, gSmnTinkEffTiles);
         work->palette = LoadObjPalette(gCommonObjPalette, 32);
         anim = &work->anim;

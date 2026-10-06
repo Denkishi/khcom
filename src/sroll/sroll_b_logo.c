@@ -16,14 +16,14 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void task_sroll_b_logo_0(SrollBLogoWork* work, SrollBLogoArg* a) {
+void task_sroll_b_logo_0(SrollBLogoWork* work, SrollBLogoArg* arg) {
     AnimState* anim;
     u32 i;
 
-    work->x = a->x;
-    work->y = a->y;
-    work->scrollY = a->scrollY;
-    work->scrollSpeed = a->scrollSpeed;
+    work->x = arg->x;
+    work->y = arg->y;
+    work->scrollY = arg->scrollY;
+    work->scrollSpeed = arg->scrollSpeed;
 #ifdef VERSION_EU
     work->palette = LoadObjPalette(gSrollLogoPalettes, 64);
     work->tiles = LoadObjTiles(gSrollLogoTiles, 94 * 32);
@@ -33,7 +33,7 @@ void task_sroll_b_logo_0(SrollBLogoWork* work, SrollBLogoArg* a) {
 #endif
     anim = &work->anim;
     AnimInit(anim, gSrollLogoAnims, gSrollLogoFrames);
-    AnimStart(anim, a->animId, 0);
+    AnimStart(anim, arg->animId, 0);
 
     for (i = 0; i < 2; i++) {
         FadeSetPaletteExcluded((work->palette->index + i) % 16 + 16, 1);

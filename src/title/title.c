@@ -489,11 +489,11 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     TaskCreate(&work->tasks, &gTaskDescTitleLumichange, NULL);
 }
 
-s16 TitleMenuChoiceRow(s16 a) {
+s16 TitleMenuChoiceRow(s16 choice) {
     s16 i;
 
     for (i = 0; i <= 3; i++) {
-        if (a == sTitleMenuChoiceOrder[i]) {
+        if (choice == sTitleMenuChoiceOrder[i]) {
             break;
         }
     }
@@ -505,7 +505,7 @@ s16 TitleMenuChoiceRow(s16 a) {
     return i;
 }
 
-void TitleMenuMoveBasic(s16* p) {
+void TitleMenuMoveBasic(s16* choice) {
     s16 max;
     u16 keys;
 
@@ -514,27 +514,27 @@ void TitleMenuMoveBasic(s16* p) {
 
     if (keys != 0) {
         m4aSongNumStart(SONG_SYS_CLICK);
-        (*p)--;
+        (*choice)--;
 
-        if (*p < 0) {
-            *p = max;
+        if (*choice < 0) {
+            *choice = max;
         }
     } else if (GetKeysPressed() & DPAD_DOWN) {
         m4aSongNumStart(SONG_SYS_CLICK);
-        *p = *p + 1;
+        *choice = *choice + 1;
 
-        if (*p > max) {
-            *p = 0;
+        if (*choice > max) {
+            *choice = 0;
         }
     }
 }
 
-void TitleMenuMoveOrdered(s16* p, s16 count) {
+void TitleMenuMoveOrdered(s16* choice, s16 count) {
     s16 i;
 
     if (GetKeysPressed() & DPAD_UP) {
         m4aSongNumStart(SONG_SYS_CLICK);
-        i = TitleMenuChoiceRow(*p);
+        i = TitleMenuChoiceRow(*choice);
         i--;
 
         if (i < 0) {
@@ -542,7 +542,7 @@ void TitleMenuMoveOrdered(s16* p, s16 count) {
         }
     } else if (GetKeysPressed() & DPAD_DOWN) {
         m4aSongNumStart(SONG_SYS_CLICK);
-        i = TitleMenuChoiceRow(*p);
+        i = TitleMenuChoiceRow(*choice);
         i++;
 
         if (i > count) {
@@ -552,7 +552,7 @@ void TitleMenuMoveOrdered(s16* p, s16 count) {
         return;
     }
 
-    *p = sTitleMenuChoiceOrder[i];
+    *choice = sTitleMenuChoiceOrder[i];
 }
 
 u8 task_title_menu_1(TitleMenuWork* work) {

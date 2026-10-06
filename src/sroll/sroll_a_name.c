@@ -23,18 +23,18 @@ s32 SrollANameSquare2(s32 x) {
     return x * x;
 }
 
-void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* a) {
+void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* arg) {
     AnimState* anim;
 
-    work->kind = a->kind;
-    work->x = a->x;
-    work->y = a->y;
-    work->targetX = a->targetX;
-    work->targetY = a->targetY;
+    work->kind = arg->kind;
+    work->x = arg->x;
+    work->y = arg->y;
+    work->targetX = arg->targetX;
+    work->targetY = arg->targetY;
     work->unk_00 = 0;
     work->timer = 0;
 
-    switch (a->kind) {
+    switch (arg->kind) {
     case 0:
 #ifdef VERSION_JP
         work->tiles = LoadObjTiles(gSrollNameOrnamentTiles, 45 * 32);
@@ -43,18 +43,18 @@ void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* a) {
 #endif
         anim = &work->anim;
         AnimInit(anim, gSrollNameOrnamentAnims, gSrollNameOrnamentFrames);
-        AnimStart(anim, a->animId, 0);
+        AnimStart(anim, arg->animId, 0);
         break;
     case 1:
-        work->tiles = LoadObjTiles(gSrollNameTileBlocks[a->nameIndex].tiles, gSrollNameTileBlocks[a->nameIndex].size);
+        work->tiles = LoadObjTiles(gSrollNameTileBlocks[arg->nameIndex].tiles, gSrollNameTileBlocks[arg->nameIndex].size);
         anim = &work->anim;
         AnimInit(anim, gSrollNameDirectorAnims, gSrollNameDirectorFrames);
-        AnimStart(anim, a->animId, 0);
+        AnimStart(anim, arg->animId, 0);
         break;
     case 2:
-        work->tiles = LoadObjTiles(gSrollNameTileBlocks[a->nameIndex].tiles, gSrollNameTileBlocks[a->nameIndex].size);
+        work->tiles = LoadObjTiles(gSrollNameTileBlocks[arg->nameIndex].tiles, gSrollNameTileBlocks[arg->nameIndex].size);
 
-        if (a->animId == 1) {
+        if (arg->animId == 1) {
             anim = &work->anim;
             AnimInit(anim, gSrollNameCharacterDirectorsAnims, gSrollNameCharacterDirectorsFrames);
         } else {

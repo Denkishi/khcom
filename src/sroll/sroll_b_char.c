@@ -35,14 +35,14 @@ void SrollBCharChangeAnim(SrollBCharWork* work) {
     work->obj->flags &= ~EVTOBJ_FLAG_ANIM_CHANGED;
 }
 
-void task_sroll_b_char_0(SrollBCharWork* work, EvtObjParam* a) {
+void task_sroll_b_char_0(SrollBCharWork* work, EvtObjParam* arg) {
     const EvtObjRes* res;
     AnimState* anim;
 
-    res = a->res;
+    res = arg->res;
     work->motion = 0;
     work->motionTimer = 0;
-    work->obj = a->obj;
+    work->obj = arg->obj;
     work->tiles = AllocObjTiles(res->tileCount * 32, NULL);
     work->palette = LoadObjPalette(res->palette, 32);
     anim = &work->anim;

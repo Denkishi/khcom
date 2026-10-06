@@ -531,7 +531,7 @@ u32 SrollTextBlit2bpp(SrollBlit* w) {
     return r;
 }
 
-u16 SrollTextGetGlyphIndex(u16 c, u8* font) {
+u16 SrollTextGetGlyphIndex(u16 ch, u8* font) {
     u16 result;
     s32 off;
     s32 hi;
@@ -540,15 +540,15 @@ u16 SrollTextGetGlyphIndex(u16 c, u8* font) {
     u8 v;
 
     result = 0;
-    off = (c & 0x7F00) >> 6;
+    off = (ch & 0x7F00) >> 6;
     hi = font[off + 1] << 8;
     a = font[off] | hi;
     hi = font[off + 3] << 8;
     b = font[off + 2] | hi;
 
     if (a != 0xFFFF) {
-        if (font[(u16)(a + 0xFFC0 + (c & 0xFF))] != 0xFF) {
-            v = font[(u16)(a + 0xFFC0 + (c & 0xFF))];
+        if (font[(u16)(a + 0xFFC0 + (ch & 0xFF))] != 0xFF) {
+            v = font[(u16)(a + 0xFFC0 + (ch & 0xFF))];
             result = b + v;
         }
     }
@@ -556,13 +556,13 @@ u16 SrollTextGetGlyphIndex(u16 c, u8* font) {
     return result;
 }
 
-u8 SrollTextGetGlyphWidth(u16 c, u8* font, u8* widths, u32 count) {
+u8 SrollTextGetGlyphWidth(u16 ch, u8* font, u8* widths, u32 count) {
     u8 w;
 
     w = 0;
 
     if (widths != NULL) {
-        u16 idx = SrollTextGetGlyphIndex(c, font);
+        u16 idx = SrollTextGetGlyphIndex(ch, font);
 
         if (idx < count) {
             w = widths[idx];
@@ -599,8 +599,8 @@ s32 SrollTextMeasureWidth(SrollWork* work, const u8* s) {
     return total;
 }
 
-u8* SrollTextGetGlyphAddress(u16 c, u8* font, u8* base, u16 a, u16 b) {
-    return base + SrollTextGetGlyphIndex(c, font) * (a << 3) * b;
+u8* SrollTextGetGlyphAddress(u16 ch, u8* font, u8* base, u16 bpp, u16 height) {
+    return base + SrollTextGetGlyphIndex(ch, font) * (bpp << 3) * height;
 }
 
 u32 SrollTextBlitGlyph(SrollWork* work, u32* dst, u8* src, s32 width) {
@@ -664,27 +664,27 @@ void SrollTextSelectFont(SrollWork* work, u32 mode) {
     SrollTextSetCursorTile(work, work->x, work->y);
 }
 
-void SrollTextInit(SrollWork* work, const SrollInit* a) {
-    SrollTextSelectFont(work, a->font);
-    SrollTextSetColors(work, a->fgColor, a->shadowColor, a->bgColor, a->edgeColor);
+void SrollTextInit(SrollWork* work, const SrollInit* init) {
+    SrollTextSelectFont(work, init->font);
+    SrollTextSetColors(work, init->fgColor, init->shadowColor, init->bgColor, init->edgeColor);
     work->mapWidth = 32;
     work->flags = 0;
-    work->frameStyle = a->frameStyle;
-    work->windowX = a->windowX;
-    work->windowY = a->windowY;
-    work->windowWidth = a->windowWidth;
-    work->windowHeight = a->windowHeight;
-    work->textX = a->textX;
-    work->textY = a->textY;
-    work->textWidth = a->textWidth;
-    work->textHeight = a->textHeight;
-    work->clearTile = a->clearTile;
-    work->frameTileBase = a->frameTileBase;
-    work->textTileBase = a->textTileBase;
-    work->unk_48 = a->unk_10;
-    work->tilemapBuffer = a->tilemapBuffer;
-    work->tileData = a->tileData;
-    work->tilemap = a->tilemap;
+    work->frameStyle = init->frameStyle;
+    work->windowX = init->windowX;
+    work->windowY = init->windowY;
+    work->windowWidth = init->windowWidth;
+    work->windowHeight = init->windowHeight;
+    work->textX = init->textX;
+    work->textY = init->textY;
+    work->textWidth = init->textWidth;
+    work->textHeight = init->textHeight;
+    work->clearTile = init->clearTile;
+    work->frameTileBase = init->frameTileBase;
+    work->textTileBase = init->textTileBase;
+    work->unk_48 = init->unk_10;
+    work->tilemapBuffer = init->tilemapBuffer;
+    work->tileData = init->tileData;
+    work->tilemap = init->tilemap;
     SrollTextClearQueue(work);
     SrollTextResetWindow(work, 1);
 }
@@ -710,8 +710,8 @@ u8 SrollTextQueueIsEmpty(SrollWork* work) {
     return r;
 }
 
-void SrollTextEnqueueChar(SrollWork* work, u16 c) {
-    work->charQueue[work->writeIdx] = c;
+void SrollTextEnqueueChar(SrollWork* work, u16 ch) {
+    work->charQueue[work->writeIdx] = ch;
     work->writeIdx = (work->writeIdx + 1) & 0xFF;
 }
 
@@ -748,11 +748,11 @@ void SrollTextSetCursorPixelX(SrollWork* work, u16 x) {
     work->x = x;
 }
 
-void SrollTextSetColors(SrollWork* work, u16 a, u16 b, u16 c, u16 d) {
-    work->fgColor = a;
-    work->shadowColor = b;
-    work->bgColor = c;
-    work->edgeColor = d;
+void SrollTextSetColors(SrollWork* work, u16 fgColor, u16 shadowColor, u16 bgColor, u16 edgeColor) {
+    work->fgColor = fgColor;
+    work->shadowColor = shadowColor;
+    work->bgColor = bgColor;
+    work->edgeColor = edgeColor;
 }
 
 void SrollTextClearWindow(SrollWork* work, u8 flush) {
@@ -940,10 +940,10 @@ void SrollTextClearRect(SrollWork* work, u16 x, u16 y, u16 cw, u16 ch, u8 flush)
 void func_081167CC() {
 }
 
-u16 ParseLowercaseHexDigit(u16 c) {
+u16 ParseLowercaseHexDigit(u16 ch) {
     u16 v;
 
-    v = c;
+    v = ch;
 
     if ((u16)(v - '0') <= 9) {
         v -= '0';
@@ -1156,8 +1156,8 @@ void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* s, u8 flush)
     }
 }
 
-u16 SrollTextMapSingleByteChar(u8 c) {
-    return gStaffRollSingleByteCharMap[c];
+u16 SrollTextMapSingleByteChar(u8 ch) {
+    return gStaffRollSingleByteCharMap[ch];
 }
 
 void ScanlineDmaReset() {
@@ -1290,21 +1290,21 @@ u32* GetBlockAudioData() {
     return gBlockAudioData;
 }
 
-u8* ReadNextAudioBlock(u32** p) {
+u8* ReadNextAudioBlock(u32** next) {
     u32* base;
     u32* q;
     u32 v;
 
-    base = *p;
+    base = *next;
     q = base;
     v = *q++;
 
     if ((v & 0xFF) != 0x53) {
-        *p = NULL;
+        *next = NULL;
         return NULL;
     }
 
-    *p = (u32*)((u8*)base + (((v >> 8) & 0xFF00) << 2) + ((v >> 24) << 2));
+    *next = (u32*)((u8*)base + (((v >> 8) & 0xFF00) << 2) + ((v >> 24) << 2));
     return (u8*)q;
 }
 

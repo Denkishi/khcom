@@ -1,7 +1,7 @@
 #ifndef GUARD_MODE_TITLE_H
 #define GUARD_MODE_TITLE_H
 
-void TitleShowLogo(u16 a);
+void TitleShowLogo(u16 frames);
 void TitleFinishIntro();
 void TitleFadeOut();
 void TitleExitToChoice();

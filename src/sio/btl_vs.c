@@ -25,6 +25,7 @@
 #include "card_label_data.h"
 #include "engine_math.h"
 #include "card.h"
+#include "mode_riku_tutorial.h"
 
 static u16 sVsKeyHoldL[2];
 static u16 sVsKeyHoldR[2];
@@ -166,7 +167,7 @@ void HandleVsRikuCardInput() {
         sVsRikuReloadTimer--;
     }
 
-    chord = (u16)ReadVsKeyChord(held, pressed, 1);
+    chord = (u16)ReadVsKeyChord(held, pressed, LINK_SIDE_PARTNER);
 
     switch (chord) {
     case L_BUTTON:
@@ -234,7 +235,7 @@ void HandleVsRikuCardInput() {
         return;
     }
 
-    if (chord == 0x300) {
+    if (chord == (L_BUTTON | R_BUTTON)) {
         if (GetRikuStockCount() > 2) {
             RequestRikuStockUse();
         } else {
@@ -296,7 +297,7 @@ void HandleVsSoraCardInput() {
         sVsSoraReloadTimer--;
     }
 
-    chord = (u16)ReadVsKeyChord(held, pressed, 0);
+    chord = (u16)ReadVsKeyChord(held, pressed, LINK_SIDE_SELF);
 
     switch (chord) {
     case L_BUTTON:
@@ -364,7 +365,7 @@ void HandleVsSoraCardInput() {
         return;
     }
 
-    if (chord == 0x300) {
+    if (chord == (L_BUTTON | R_BUTTON)) {
         if (GetSoraStockCount() > 2) {
             RequestSoraStockUse();
         } else {

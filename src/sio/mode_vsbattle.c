@@ -29,7 +29,7 @@
 
 u8 gUnk_02039B98 EWRAM_COMMON(4);
 
-void mode_vsbattle_0(u32 mode) {
+void mode_vsbattle_0(u32 playerId) {
     VsTaskArg arg;
     VsTaskArg arg2;
     BtlWork** rikuBtl;
@@ -38,7 +38,7 @@ void mode_vsbattle_0(u32 mode) {
     rikuBtl = &gRikuBtlWork;
     *rikuBtl = EwramAlloc(sizeof(BtlWork));
 
-    if (gSioPlayerId == 0) {
+    if (gSioPlayerId == SIO_PLAYER_PARENT) {
         SeedRandom(gCharaLinkSend.seed);
     } else {
         SeedRandom(gCharaLinkRecv.seed);
@@ -61,20 +61,20 @@ void mode_vsbattle_0(u32 mode) {
     BgFxInit(BGCNT_256COLOR, gBtlWork->bg);
     ColliderPoolsInit();
 
-    if (mode == 0) {
+    if (playerId == SIO_PLAYER_PARENT) {
         arg.mainSide = TRUE;
-        arg.side = 0;
+        arg.side = SIO_PLAYER_PARENT;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg);
         arg.mainSide = FALSE;
-        arg.side = 1;
+        arg.side = SIO_PLAYER_CHILD;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg);
         gBtlWork->flags |= BTL_FLAG_VS_LINK_PARENT;
     } else {
         arg2.mainSide = FALSE;
-        arg2.side = 0;
+        arg2.side = SIO_PLAYER_PARENT;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg2);
         arg2.mainSide = TRUE;
-        arg2.side = 1;
+        arg2.side = SIO_PLAYER_CHILD;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg2);
     }
 

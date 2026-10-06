@@ -36,6 +36,7 @@
 #include "card_enemy.h"
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "mode_riku_tutorial.h"
 
 enum BossCardRequest {
     BOSS_CARD_REQUEST_NONE,
@@ -1371,7 +1372,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
             result = LookupStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, flag);
         } else {
-            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, flag, 1);
+            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, flag, LINK_SIDE_PARTNER);
         }
 
         gCardBattleState->rikuStockName = result;
@@ -2373,7 +2374,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
             result = LookupStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag);
         } else {
-            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 1);
+            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, LINK_SIDE_PARTNER);
         }
 
         if (result == STOCK_ZANTETSUKEN) {
@@ -2418,7 +2419,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
             result = LookupStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag);
         } else {
-            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 1);
+            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, LINK_SIDE_PARTNER);
         }
 
         if (result == STOCK_ZANTETSUKEN) {

@@ -4,6 +4,11 @@
 #include "card.h"
 #include "types.h"
 
+enum LinkSide {
+    LINK_SIDE_SELF,
+    LINK_SIDE_PARTNER
+};
+
 u8 FindStockPairsInCombo(s32* keys, u8* found);
 s32 GetStockMove(s32 stock);
 s32 IsThreeDistinctAttackCards(CardDisplayWork** cards, u8 count);

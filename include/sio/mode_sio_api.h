@@ -6,6 +6,13 @@
 
 #define SIO_TRADE_CARD_NONE 0x800
 
+enum SioBattleEntry {
+    SIO_BATTLE_ENTRY_OPEN,
+    SIO_BATTLE_ENTRY_FILE_LOADED,
+    SIO_BATTLE_ENTRY_BATTLE_CANCELLED,
+    SIO_BATTLE_ENTRY_TRADE_CANCELLED
+};
+
 void mode_sio_battle_0(s32 arg);
 void mode_sio_battle_1();
 void mode_sio_battle_2();

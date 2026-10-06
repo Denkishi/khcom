@@ -675,7 +675,7 @@ s32 SioConnectRecv() {
 
                 if (gSioRecvFrame[0][0] == cancelWord || gSioRecvFrame[0][1] == cancelWord) {
                     SioShutdown();
-                    sentWord = gSioPlayerId == 0 ? gSioRecvFrame[0][0] : gSioRecvFrame[0][1];
+                    sentWord = gSioPlayerId == SIO_PLAYER_PARENT ? gSioRecvFrame[0][0] : gSioRecvFrame[0][1];
 
                     if (sentWord == cancelWord) {
                         if (gSioCancelCallback != NULL) {
@@ -829,7 +829,7 @@ void SioSetLinkCallbacks(s32 (*send)(), s32 (*recv)()) {
 }
 
 s32 SioKeySyncSend() {
-    if (gSioPlayerId == 0) {
+    if (gSioPlayerId == SIO_PLAYER_PARENT) {
         gSioSendFrame[0] = SIO_CMD_DATA;
         gSioSendFrame[1] = GetKeysHeld() & KEYS_MASK;
         gSioSendFrame[2] = gSioRelayKeysA;
@@ -845,7 +845,7 @@ s32 SioKeySyncSend() {
 }
 
 s32 SioKeySyncRecv() {
-    if (gSioPlayerId == 0) {
+    if (gSioPlayerId == SIO_PLAYER_PARENT) {
         if (gSioRecvFrame[0][0] == SIO_CMD_DATA && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
             gSioRelayKeysA = gSioRecvFrame[1][0];
             gSioRelayKeysB = gSioRecvFrame[1][1];
@@ -939,7 +939,7 @@ s32 SioExchangeRecv() {
             gSioHandshakeDone = TRUE;
             gSioExchangeSeq = 1;
         }
-    } else if (gSioPlayerId == 0) {
+    } else if (gSioPlayerId == SIO_PLAYER_PARENT) {
         if (gSioRecvFrame[1][1] != SIO_CMD_FILLER && gSioRecvFrame[1][1] > 3) {
             if (gSioRecvFrame[1][1] > gSioExchangeSeqEnd) {
                 return SIO_LINK_RESULT_EXCHANGE_DONE;
@@ -999,7 +999,7 @@ void SioPrepareCharaLinkExchange() {
         }
     }
 
-    if (gSioPlayerId == 0) {
+    if (gSioPlayerId == SIO_PLAYER_PARENT) {
         SeedRandom(gFrameCounter & 0xFFFF);
         gCharaLinkSend.seed = GetRandom() % 0xFFFF;
     } else {
@@ -1043,7 +1043,7 @@ s32 SioSyncRecv() {
                 gSioHandshakeAck = TRUE;
             }
         } else if (gSioRecvFrame[0][0] != SIO_CMD_SYNC_CONFIRM) {
-            if (gSioPlayerId == 0 && gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT &&
+            if (gSioPlayerId == SIO_PLAYER_PARENT && gSioRecvFrame[0][0] == SIO_CMD_CONNECT_ACCEPT &&
                 gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
                 gSioHandshakeConfirm = TRUE;
             }
@@ -1080,45 +1080,45 @@ s32 SioRandomPartnerRecv() {
 
         switch (roll & 7) {
         case 0:
-            gRandomPartnerDpad = 0x10;
+            gRandomPartnerDpad = DPAD_RIGHT;
             break;
         case 1:
-            gRandomPartnerDpad = 0x20;
+            gRandomPartnerDpad = DPAD_LEFT;
             break;
         case 2:
-            gRandomPartnerDpad = 0x40;
+            gRandomPartnerDpad = DPAD_UP;
             break;
         case 3:
-            gRandomPartnerDpad = 0x80;
+            gRandomPartnerDpad = DPAD_DOWN;
             break;
         case 4:
-            gRandomPartnerDpad = 0x50;
+            gRandomPartnerDpad = DPAD_UP | DPAD_RIGHT;
             break;
         case 5:
-            gRandomPartnerDpad = 0x90;
+            gRandomPartnerDpad = DPAD_DOWN | DPAD_RIGHT;
             break;
         case 6:
-            gRandomPartnerDpad = 0x60;
+            gRandomPartnerDpad = DPAD_UP | DPAD_LEFT;
             break;
         case 7:
-            gRandomPartnerDpad = 0xA0;
+            gRandomPartnerDpad = DPAD_DOWN | DPAD_LEFT;
             break;
         }
     }
 
     if (gRandomPartnerATimer != 0) {
-        keys |= 1;
+        keys |= A_BUTTON;
         gRandomPartnerATimer--;
     } else {
         gRandomPartnerATimer = GetRandom() % 61 + 60;
     }
 
     if ((u16)(GetRandom() % 30) == 0) {
-        keys |= 0x200;
+        keys |= L_BUTTON;
     }
 
     if ((u16)(GetRandom() % 50) == 0) {
-        keys |= 0x300;
+        keys |= (L_BUTTON | R_BUTTON);
     }
 
     SioKeyStateUpdateA(held);

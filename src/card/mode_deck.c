@@ -57,7 +57,7 @@ void Mode_Deck_1() {
         if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
-            ModeRequest(&gModeSioBtlOption, 1);
+            ModeRequest(&gModeSioBtlOption, SIO_BTL_OPTION_ENTRY_FROM_DECK_MENU);
         } else {
             ReturnToMap(FALSE);
         }
@@ -67,7 +67,7 @@ void Mode_Deck_1() {
         if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
-            ModeRequest(&gModeSioBtlOption, 1);
+            ModeRequest(&gModeSioBtlOption, SIO_BTL_OPTION_ENTRY_FROM_DECK_MENU);
         } else {
             ReturnToMap(TRUE);
         }

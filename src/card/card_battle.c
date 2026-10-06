@@ -37,6 +37,7 @@
 #include "tutorial_deck.h"
 #include "enemy_ids.h"
 #include "card_ids.h"
+#include "mode_riku_tutorial.h"
 
 static CardDisplayWork* sSoraSelectedCard;
 static u32 sSoraCardRequest;
@@ -1199,7 +1200,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
                 result = LookupStockName(work->stock, work->stockCount, work->stockValue, &data, flag);
             } else {
-                result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &data, flag, 0);
+                result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &data, flag, LINK_SIDE_SELF);
             }
 
             if (result != STOCK_DARK_MODE) {
@@ -3182,7 +3183,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
             result = LookupStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag);
         } else {
-            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 0);
+            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, LINK_SIDE_SELF);
         }
 
         if ((u16)result == STOCK_ZANTETSUKEN && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
@@ -3227,7 +3228,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
             result = LookupStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag);
         } else {
-            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, 0);
+            result = LookupLinkStockName(work->stock, work->stockCount, work->stockValue, &stockKeys, &flag, LINK_SIDE_SELF);
         }
 
         if ((u16)result == STOCK_ZANTETSUKEN && (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {

@@ -33,6 +33,11 @@ enum SioLinkResult {
     SIO_LINK_RESULT_EXCHANGE_DONE
 };
 
+enum SioPlayerId {
+    SIO_PLAYER_PARENT,
+    SIO_PLAYER_CHILD
+};
+
 void SioReset();
 u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]);
 u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]);

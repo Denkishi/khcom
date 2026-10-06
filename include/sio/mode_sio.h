@@ -273,6 +273,12 @@ void SioBtlConnectOnConnect();
 void SioBtlConnectOnCancel();
 void SioInitWorldList();
 void SetSioBtlOptionAnimation(u16 player, u16 index, u16 flags);
+
+enum SioBtlOptionEntry {
+    SIO_BTL_OPTION_ENTRY_NEW,
+    SIO_BTL_OPTION_ENTRY_FROM_DECK_MENU
+};
+
 void mode_sio_btl_option_0(s32 arg);
 void SioBtlOptionLoadBg();
 void SioBtlOptionInitObjs();

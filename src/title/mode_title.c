@@ -85,7 +85,7 @@ void TitleExitToChoice() {
         return;
     case TITLE_MENU_LINK_BATTLE:
         ClearSioBattleFileLoaded();
-        ModeRequest(&gModeSioBattle, 0);
+        ModeRequest(&gModeSioBattle, SIO_BATTLE_ENTRY_OPEN);
         return;
     case TITLE_MENU_NEW_GAME_SORA:
         SetupSoraNewGame();

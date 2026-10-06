@@ -31,6 +31,7 @@
 #include "debug_text.h"
 #include "jiminy_records_index_data.h"
 #include "mode_movie.h"
+#include "mode_sio_api.h"
 
 static DebugWork* sDebugWork;
 
@@ -188,7 +189,7 @@ void mode_debug_1() {
 #endif
             func_08085FB0();
             InitSoraDecks();
-            ModeRequest(&gModeSioBattle, 0);
+            ModeRequest(&gModeSioBattle, SIO_BATTLE_ENTRY_OPEN);
             return;
         }
 

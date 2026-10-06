@@ -72,6 +72,7 @@
 #include "event_ids.h"
 #include "mode_movie.h"
 #include "macros.h"
+#include "mode_sio_api.h"
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];
@@ -4428,9 +4429,9 @@ void LoadGameMenuExit(LoadGameMenuWork* work) {
 
     if (work->forSioBattle) {
         if (work->loaded) {
-            ModeRequest(&gModeSioBattle, 1);
+            ModeRequest(&gModeSioBattle, SIO_BATTLE_ENTRY_FILE_LOADED);
         } else {
-            ModeRequest(&gModeSioBattle, 0);
+            ModeRequest(&gModeSioBattle, SIO_BATTLE_ENTRY_OPEN);
         }
     } else if (work->loaded) {
 #ifdef VERSION_EU

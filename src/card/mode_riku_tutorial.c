@@ -281,10 +281,10 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
     if (gCardBattleState->activeCardCount == 1) {
 #ifdef VERSION_EU
         switch (side) {
-        case 0:
+        case LINK_SIDE_SELF:
             stockActive = gCardBattleState->soraStockActive;
             break;
-        case 1:
+        case LINK_SIDE_PARTNER:
             stockActive = gCardBattleState->rikuStockActive;
             break;
         }
@@ -1899,7 +1899,7 @@ s32 IsTwoMagicThenPeterPan(CardDisplayWork** cards, u8 count) {
 u8 IsLinkSideStockLearned(s32 stock, s32 side) {
     u8 learned;
 
-    if (side != 0) {
+    if (side != LINK_SIDE_SELF) {
         learned = IsLinkPartnerStockLearned(stock);
     } else {
         learned = IsLinkStockLearned(stock);

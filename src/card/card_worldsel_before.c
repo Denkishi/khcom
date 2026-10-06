@@ -63,10 +63,11 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* work) {
     }
 
     if (++work->animTimer == gWorldSelAnims[work->animStep].duration) {
-        // fakematch
-        do {
-            work->animStep = work->animStep > 28 ? 0 : work->animStep + 1;
-        } while (0);
+        if (work->animStep < 29) {
+            work->animStep++;
+        } else {
+            work->animStep = 0;
+        }
 
         work->animTimer = 0;
         UpdateAllocatedObjPalette(work->palette2, &gWorldSelBeforeRingPalettes[gWorldSelAnims[work->animStep].palette << 4]);

@@ -60,61 +60,71 @@ void Mode_Premire_2() {
     TaskPoolDestroy(&sModePremireTasks);
 }
 
+enum HcEffectCountUnit {
+    HC_EFFECT_COUNT_UNIT_ATTACKS,
+    HC_EFFECT_COUNT_UNIT_BREAKS,
+    HC_EFFECT_COUNT_UNIT_CARDS,
+    HC_EFFECT_COUNT_UNIT_HITS,
+    HC_EFFECT_COUNT_UNIT_USES,
+    HC_EFFECT_COUNT_UNIT_SLEIGHTS,
+    HC_EFFECT_COUNT_UNIT_RELOADS
+};
+
 u8 GetHcEffectCountUnit(HcEffectNameWork* work, u16 effect) {
     switch (effect) {
-    case 0:
-    case 1:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 16:
-    case 17:
-    case 19:
-    case 20:
-    case 21:
-    case 24:
-    case 25:
-    case 29:
-    case 30:
-    case 31:
-    case 35:
-    case 36:
-    case 37:
-    case 38:
-    case 39:
-    case 40:
-    case 42:
-    case 51:
-    case 53:
-        return 6;
-    case 41:
-    case 45:
-    case 50:
-        return 2;
-    case 18:
-    case 46:
-        return 3;
-    case 15:
-    case 28:
-    case 47:
-        return 5;
-    case 23:
-    case 26:
-    case 27:
-        return 4;
-    case 48:
-        return 1;
+    case HC_EFFECT_NONE:
+    case HC_EFFECT_INCREMENTOR:
+    case HC_EFFECT_COMBO_PLUS:
+    case HC_EFFECT_FIRE_BOOST:
+    case HC_EFFECT_COMBO_FINISH:
+    case HC_EFFECT_DRAW:
+    case HC_EFFECT_CARDBLIND:
+    case HC_EFFECT_QUICKLOAD:
+    case HC_EFFECT_COMBO_PLUS_2:
+    case HC_EFFECT_BLIZZARD_BOOST:
+    case HC_EFFECT_THUNDER_BOOST:
+    case HC_EFFECT_CURE_BOOST:
+    case HC_EFFECT_PROTECT:
+    case HC_EFFECT_RANDOM_VALUES:
+    case HC_EFFECT_ALL_ZEROS:
+    case HC_EFFECT_VANISH:
+    case HC_EFFECT_LEAF_BRACER:
+    case HC_EFFECT_DECREMENTOR:
+    case HC_EFFECT_BIO:
+    case HC_EFFECT_DRAW_2:
+    case HC_EFFECT_ITEM_BRACER:
+    case HC_EFFECT_RELOAD_KINESIS:
+    case HC_EFFECT_RETROGRADE:
+    case HC_EFFECT_DRAIN:
+    case HC_EFFECT_BACK_ATTACK:
+    case HC_EFFECT_RANDOM_FLUSH:
+    case HC_EFFECT_MAGIC_BOOST:
+    case HC_EFFECT_SUMMON_BOOST:
+    case HC_EFFECT_AUTO_RELOAD:
+    case HC_EFFECT_HYPER_HEALING:
+    case HC_EFFECT_GUARD:
+    case HC_EFFECT_FLOAT:
+        return HC_EFFECT_COUNT_UNIT_RELOADS;
+    case HC_EFFECT_DISPEL:
+    case HC_EFFECT_MIMIC:
+    case HC_EFFECT_DASH:
+        return HC_EFFECT_COUNT_UNIT_CARDS;
+    case HC_EFFECT_QUICK_RECOVERY:
+    case HC_EFFECT_SHELL:
+        return HC_EFFECT_COUNT_UNIT_HITS;
+    case HC_EFFECT_SLEIGHT_LOCK:
+    case HC_EFFECT_SLEIGHTBLIND:
+    case HC_EFFECT_DOUBLE_SLEIGHT:
+        return HC_EFFECT_COUNT_UNIT_SLEIGHTS;
+    case HC_EFFECT_REGEN:
+    case HC_EFFECT_SECOND_CHANCE:
+    case HC_EFFECT_AUTO_LIFE:
+        return HC_EFFECT_COUNT_UNIT_USES;
+    case HC_EFFECT_VALUE_BREAK:
+        return HC_EFFECT_COUNT_UNIT_BREAKS;
     }
 
-    return 0;
+    return HC_EFFECT_COUNT_UNIT_ATTACKS;
 }
 
 void HCEffectName_0(HcEffectNameWork* work, u8* arg) {
@@ -130,7 +140,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* arg) {
     work->visible = 1;
 
     switch (work->side) {
-    case 1:
+    case CARD_SIDE_SORA:
         work->x = 48;
         work->effect = gCardBattleState->soraHcEffect;
 #ifdef VERSION_EU
@@ -150,7 +160,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* arg) {
         }
 
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         work->x = 162;
         work->effect = gCardBattleState->rikuHcEffect;
 #ifdef VERSION_EU
@@ -195,7 +205,7 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
     }
 
     switch (work->side) {
-    case 1:
+    case CARD_SIDE_SORA:
         div = gHcEffectDefs[gBtlWork->hcEffect].count << 8;
         work->blinkInterval = (u32)(((s16)gBtlWork->hcEffectCount << 16) / div) >> 3;
         state = gCardBattleState;
@@ -224,7 +234,7 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
 
         SplitFourDigits(gBtlWork->hcEffectCount, &work->countThousands);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         div = gHcEffectDefs[gRikuBtlWork->hcEffect].count << 8;
         work->blinkInterval = (u32)(((s16)gRikuBtlWork->hcEffectCount << 16) / div) >> 3;
         state = gCardBattleState;
@@ -270,13 +280,13 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
 }
 
 u8 IsHcEffectNameShuffling(HcEffectNameWork* work) {
-    if (work->side != 1) {
-        if (work->side != 2) {
+    if (work->side != CARD_SIDE_SORA) {
+        if (work->side != CARD_SIDE_RIKU) {
             return FALSE;
         }
     }
 
-    if (work->effect != 37) {
+    if (work->effect != HC_EFFECT_RANDOM_FLUSH) {
         return FALSE;
     }
 
@@ -287,7 +297,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* task) {
     void** tiles;
 
     switch (work->side) {
-    case 1:
+    case CARD_SIDE_SORA:
         if (gCardBattleState->soraHcEffect != HC_EFFECT_RANDOM_FLUSH) {
             work->effect = gCardBattleState->soraHcEffect;
 
@@ -319,7 +329,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* task) {
         }
 
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         if (gCardBattleState->rikuHcEffect != HC_EFFECT_RANDOM_FLUSH) {
             work->effect = gCardBattleState->rikuHcEffect;
 

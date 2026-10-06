@@ -310,6 +310,11 @@ typedef struct UnkStruct_080993D4 {
     s16 unk_0E4;
 } UnkStruct_080993D4;
 
+enum CardSide {
+    CARD_SIDE_SORA = 1,
+    CARD_SIDE_RIKU
+};
+
 typedef struct RevCountArgs {
     u8* shownList;
     s16* count;
@@ -1558,7 +1563,7 @@ extern const EventBgEffectDef* gEventBgEffectDefs[];
 
 typedef struct ReloadArgs {
     u8 listIndex;
-    u8 mode;
+    u8 side;
     u8* state;
 } ReloadArgs;
 
@@ -1717,7 +1722,7 @@ u8 REV_COUNT_1(RevCountWork* work, void* task);
 void REV_COUNT_2(RevCountWork* work);
 void REV_COUNT_3(RevCountWork* work);
 u8 UpdateRevCountEmpty(RevCountWork* work, void* task);
-void StartPickupCardFlight(PickupCardWork* work, u8 kind);
+void StartPickupCardFlight(PickupCardWork* work, u8 target);
 void Friend_card_0(PickupCardWork* work, s32* args);
 void Heartless_card_0(PickupCardWork* work, s32* args);
 s32 Friend_card_1(PickupCardWork* work, void* task);

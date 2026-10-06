@@ -2307,7 +2307,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* arg) {
     work->children = EwramAlloc(sizeof(ListPool));
 
     switch (work->args.variant) {
-    case 1:
+    case CARD_SIDE_SORA:
         work->ringCenterX = gSoraCardLayout[0][0];
         work->ringCenterY = gSoraCardLayout[0][1];
         work->x = gSoraCardLayout[4][0];
@@ -2315,7 +2315,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* arg) {
         work->swingAngle = work->swingAngleTarget = 0x2000;
         work->flags |= 0x8000000;
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         work->ringCenterX = gRikuCardLayout[0][0];
         work->ringCenterY = gRikuCardLayout[0][1];
         work->x = gRikuCardLayout[4][0];
@@ -2377,14 +2377,14 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
     reloadCharging = 0;
 
     switch (work->args.variant) {
-    case 1:
+    case CARD_SIDE_SORA:
         if (gCardBattleState->soraListIndex == work->args.listIndex) {
             reloadCharging = gCardBattleState->soraReloadCharging;
             gCardBattleState->soraReloadCharging = 0;
         }
 
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         if (gCardBattleState->rikuListIndex == work->args.listIndex) {
             reloadCharging = gCardBattleState->rikuReloadCharging;
             gCardBattleState->rikuReloadCharging = 0;
@@ -2397,14 +2397,14 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
         if (reloadCharging == 1) {
             if ((s8)gauge->chargeTick == 2) {
                 switch (work->args.variant) {
-                case 1:
+                case CARD_SIDE_SORA:
                     if ((gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) == 0) {
                         m4aSongNumStart(SONG_SYS_CHAGE);
                         gBtlWork->flags |= BTL_FLAG_RELOAD_CHARGING;
                     }
 
                     break;
-                case 2:
+                case CARD_SIDE_RIKU:
                     if ((gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) == 0) {
                         m4aSongNumStart(SONG_SYS_CHAGE);
                         gRikuBtlWork->flags |= BTL_FLAG_RELOAD_CHARGING;
@@ -2468,7 +2468,7 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
                 }
 
                 switch (work->args.variant) {
-                case 1:
+                case CARD_SIDE_SORA:
                     if (gBtlWork->hcEffect == HC_EFFECT_QUICKLOAD) {
                         gauge->chargeTick = 1;
                     } else if (gBtlWork->hcEffect == HC_EFFECT_OVERDRIVE) {
@@ -2478,7 +2478,7 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
                     }
 
                     break;
-                case 2:
+                case CARD_SIDE_RIKU:
                     if (gRikuBtlWork->hcEffect == HC_EFFECT_QUICKLOAD) {
                         gauge->chargeTick = 1;
                     } else if (gRikuBtlWork->hcEffect == HC_EFFECT_OVERDRIVE) {
@@ -2500,10 +2500,10 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
             m4aSongNumStop(SONG_SYS_CHAGE);
 
             switch (work->args.variant) {
-            case 1:
+            case CARD_SIDE_SORA:
                 gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
                 break;
-            case 2:
+            case CARD_SIDE_RIKU:
                 gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
                 break;
             }
@@ -2550,10 +2550,10 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
         m4aSongNumStop(SONG_SYS_CHAGE);
 
         switch (work->args.variant) {
-        case 1:
+        case CARD_SIDE_SORA:
             gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
             break;
-        case 2:
+        case CARD_SIDE_RIKU:
             gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
             break;
         }
@@ -2629,7 +2629,7 @@ void Reload_Gage_3(CardDisplayWork* work) {
     EwramFree(work->reloadGauge);
 
     switch (work->args.variant) {
-    case 1:
+    case CARD_SIDE_SORA:
         gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
 
         switch (gBtlWork->hcEffect) {
@@ -2645,7 +2645,7 @@ void Reload_Gage_3(CardDisplayWork* work) {
         }
 
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
 
         switch (gRikuBtlWork->hcEffect) {
@@ -2684,13 +2684,13 @@ void UpdateReloadGageRingPosition(CardDisplayWork* work) {
     }
 
     switch (work->args.variant) {
-    case 1:
+    case CARD_SIDE_SORA:
         work->ringCenterX = SIN(work->swingAngle >> 8) * 80 + gSoraCardLayout[0][0];
         work->ringCenterY = -COS(work->swingAngle >> 8) * 80 + gSoraCardLayout[0][1];
         work->x = gSineTable[0x20] * (work->ringRadius >> 8) + work->ringCenterX;
         work->y = -gSineTable[0x60] * (work->ringRadius >> 8) + work->ringCenterY;
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         work->ringCenterX = SIN(work->swingAngle >> 8) * 80 + gRikuCardLayout[0][0];
         work->ringCenterY = -COS(work->swingAngle >> 8) * 80 + gRikuCardLayout[0][1];
         work->x = gSineTable[0xE0] * (work->ringRadius >> 8) + work->ringCenterX;
@@ -2734,10 +2734,10 @@ void SetReloadGageCounterAnim(ReloadGauge* gauge, s32 count) {
 s32 UpdateReloadGageSlide(ReloadGauge* gauge, CardDisplayWork* work) {
     if ((s16)work->timer > 0 && work->phase == 1) {
         switch (work->args.variant) {
-        case 1:
+        case CARD_SIDE_SORA:
             ApproachValue(&gauge->offsetX, -0x3000, work->timer);
             break;
-        case 2:
+        case CARD_SIDE_RIKU:
             ApproachValue(&gauge->offsetX, 0x12000, work->timer);
             break;
         }
@@ -2778,14 +2778,14 @@ void ResetReloadGageAnim(ReloadGauge* gauge) {
     gauge->gaugeAnim = 2;
 }
 
-void* CreateReloadGageTask(CardBattleWork* work, u16 index, void* pool, u8 mode) {
+void* CreateReloadGageTask(CardBattleWork* work, u16 index, void* pool, u8 side) {
     CardDisplayArgs args;
 
     args.pool = &work->cardDisplays[work->listIndex];
     args.slot = NULL;
 
-    switch (mode) {
-    case 1:
+    switch (side) {
+    case CARD_SIDE_SORA:
         if (gBtlWork->hcEffect == HC_EFFECT_COMBO_PLUS_2) {
             args.index = index - 2;
         } else {
@@ -2793,7 +2793,7 @@ void* CreateReloadGageTask(CardBattleWork* work, u16 index, void* pool, u8 mode)
         }
 
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         if (gRikuBtlWork->hcEffect == HC_EFFECT_COMBO_PLUS_2) {
             args.index = index - 2;
         } else {
@@ -2803,7 +2803,7 @@ void* CreateReloadGageTask(CardBattleWork* work, u16 index, void* pool, u8 mode)
         break;
     }
 
-    args.variant = mode;
+    args.variant = side;
     args.listIndex = work->listIndex;
     return TaskCreate(pool, &gTaskDescReloadGage, &args)->work;
 }

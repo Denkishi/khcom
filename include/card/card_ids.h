@@ -130,6 +130,14 @@ enum EnemyCardId {
     CARD_ANSEM_9
 };
 
+enum GimmickCardId {
+    CARD_GIMMICK_0 = 655,
+    CARD_GIMMICK_1,
+    CARD_GIMMICK_2,
+    CARD_GIMMICK_3,
+    CARD_GIMMICK_4
+};
+
 enum CardDefKind {
     CARD_KIND_KINGDOM_KEY,
     CARD_KIND_THREE_WISHES,

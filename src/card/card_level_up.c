@@ -66,6 +66,14 @@ enum LevelUpState {
     LEVEL_UP_STATE_SLIDE_OUT
 };
 
+enum LevelUpStat {
+    LEVEL_UP_STAT_LEVEL,
+    LEVEL_UP_STAT_MAX_HP,
+    LEVEL_UP_STAT_CP,
+    LEVEL_UP_STAT_DP,
+    LEVEL_UP_STAT_AP
+};
+
 void Level_Up_0(LevelUpWork* work) {
     s16 x;
     s16 y;
@@ -1215,21 +1223,21 @@ void Level_Up_2(LevelUpWork* work) {
 #else
                        gLevelUpHeaderFrames,
 #endif
-                       work->levelDigits, 0);
+                       work->levelDigits, LEVEL_UP_STAT_LEVEL);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 111, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gLevelUpHeaderFrames,
 #endif
-                       work->maxHpDigits, 1);
+                       work->maxHpDigits, LEVEL_UP_STAT_MAX_HP);
             DrawLevelUpStatDigits(work->statsOffsetX + 206, 132, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gLevelUpHeaderFrames,
 #endif
-                       work->cpDigits, 2);
+                       work->cpDigits, LEVEL_UP_STAT_CP);
         } else {
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
@@ -1237,28 +1245,28 @@ void Level_Up_2(LevelUpWork* work) {
 #else
                        gLevelUpHeaderFrames,
 #endif
-                       work->levelDigits, 0);
+                       work->levelDigits, LEVEL_UP_STAT_LEVEL);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 106, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gLevelUpHeaderFrames,
 #endif
-                       work->maxHpDigits, 1);
+                       work->maxHpDigits, LEVEL_UP_STAT_MAX_HP);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 122, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gLevelUpHeaderFrames,
 #endif
-                       work->apDigits, 4);
+                       work->apDigits, LEVEL_UP_STAT_AP);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 137, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gLevelUpHeaderFrames,
 #endif
-                       work->dpDigits, 3);
+                       work->dpDigits, LEVEL_UP_STAT_DP);
         }
     }
 
@@ -1355,32 +1363,32 @@ void Level_Up_3(LevelUpWork* work) {
     TaskPoolDestroy(&work->pool);
 }
 
-void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16* digits, u8 kind) {
-    switch (kind) {
-    case 0:
+void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16* digits, u8 stat) {
+    switch (stat) {
+    case LEVEL_UP_STAT_LEVEL:
         DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;
         DrawSprite(x, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         break;
-    case 1:
+    case LEVEL_UP_STAT_MAX_HP:
         DrawSprite(x, y, gfx[digits[0]], tiles, pal, NULL, 0, 0);
         DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;
         DrawSprite(x, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         break;
-    case 2:
+    case LEVEL_UP_STAT_CP:
         DrawSprite(x, y, gfx[digits[0]], tiles, pal, NULL, 0, 0);
         DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         DrawSprite(x + 16, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         x += 24;
         DrawSprite(x, y, gfx[digits[3]], tiles, pal, NULL, 0, 0);
         break;
-    case 4:
+    case LEVEL_UP_STAT_AP:
         DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;
         DrawSprite(x, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         break;
-    case 3:
+    case LEVEL_UP_STAT_DP:
         DrawSprite(x, y, gfx[digits[0]], tiles, pal, NULL, 0, 0);
         DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;

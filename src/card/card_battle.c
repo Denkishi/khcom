@@ -36,6 +36,7 @@
 #include "sprite_palettes.h"
 #include "tutorial_deck.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static CardDisplayWork* sSoraSelectedCard;
 static u32 sSoraCardRequest;
@@ -575,7 +576,7 @@ static void cardbattle_0(CardBattleWork* work) {
 
     work->reloadCounts[CARD_LIST_ITEM] = work->reloadCounts[CARD_LIST_MAGIC] = work->reloadCounts[CARD_LIST_MAIN] = 0;
     CreateCardBattleState();
-    CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+    CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
     ListPoolInit(&work->cardDisplays[CARD_LIST_MAIN]);
     ListPoolInit(&work->cardDisplays[CARD_LIST_MAGIC]);
     ListPoolInit(&work->cardDisplays[CARD_LIST_ITEM]);
@@ -923,7 +924,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
 #ifdef VERSION_EU
             if (work->revCountShown[work->listIndex] == 0) {
-                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
             }
 #endif
 
@@ -951,7 +952,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
 #ifdef VERSION_EU
             if (work->revCountShown[work->listIndex] == 0) {
-                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
             }
 #endif
 
@@ -981,7 +982,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
 #ifdef VERSION_EU
             if (work->revCountShown[work->listIndex] == 0) {
-                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
             }
 #endif
 
@@ -1009,7 +1010,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
 #ifdef VERSION_EU
             if (work->revCountShown[work->listIndex] == 0) {
-                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
             }
 #endif
 
@@ -1039,7 +1040,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
 #ifdef VERSION_EU
             if (work->revCountShown[work->listIndex] == 0) {
-                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
             }
 #endif
 
@@ -1067,7 +1068,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
 #ifdef VERSION_EU
             if (work->revCountShown[work->listIndex] == 0) {
-                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
             }
 #endif
 
@@ -1097,7 +1098,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
 #ifdef VERSION_EU
             if (work->revCountShown[work->listIndex] == 0) {
-                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                CreateREVCOUNTTask(&work->tasks, (u8*)&work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
             }
 #endif
 
@@ -1156,7 +1157,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                     TaskPoolUpdate(&gCardBattleState->tasks);
                     args.listIndex = work->listIndex;
                     args.state = &work->reloadShown;
-                    args.mode = 1;
+                    args.side = CARD_SIDE_SORA;
                     TaskCreate(&work->tasks, &gTaskDescRELOAD, &args);
                     return 1;
                 }
@@ -1939,7 +1940,7 @@ void BeginSoraReloadDeal(CardBattleWork* work) {
 
     if (work->cardsLeft[z] > 0) {
         if (work->revCountShown[z] == 0) {
-            CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[z], &work->revCountShown[z], 1);
+            CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[z], &work->revCountShown[z], CARD_SIDE_SORA);
         }
     }
 
@@ -1953,8 +1954,8 @@ void AddPickedCardToSoraDeck(CardBattleWork* work) {
 
     slots = work->slots[CARD_LIST_MAIN];
 
-    if (gCardBattleState->pickedGimmickCardId == 0x28F) {
-        slots[work->slotCounts[CARD_LIST_MAIN] - 5].cardId = 0x28F;
+    if (gCardBattleState->pickedGimmickCardId == CARD_GIMMICK_0) {
+        slots[work->slotCounts[CARD_LIST_MAIN] - 5].cardId = CARD_GIMMICK_0;
         slots[work->slotCounts[CARD_LIST_MAIN] - 5].index = work->slotCounts[CARD_LIST_MAIN] - 5;
         slots[work->slotCounts[CARD_LIST_MAIN] - 5].unk_06 = 0;
         slots[work->slotCounts[CARD_LIST_MAIN] - 5].stocked = FALSE;
@@ -1989,7 +1990,7 @@ void AddPickedCardToSoraDeck(CardBattleWork* work) {
         z = work->listIndex;
 
         if (work->revCountShown[z] == 0) {
-            CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[z], &work->revCountShown[z], 1);
+            CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[z], &work->revCountShown[z], CARD_SIDE_SORA);
         }
     }
 }
@@ -3459,11 +3460,11 @@ void SwitchSoraCardList(CardBattleWork* work) {
         if (work->revCountShown[work->listIndex] == 0) {
             if (work->listIndex != CARD_LIST_MAIN) {
                 if (work->cardsLeft[work->listIndex] > 0) {
-                    CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                    CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
                 }
             } else {
                 if (work->cardsLeft[work->listIndex] > 1) {
-                    CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+                    CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
                 }
             }
         }
@@ -3535,7 +3536,7 @@ void CycleSoraCardList(CardBattleWork* work) {
         }
 
         if (work->revCountShown[work->listIndex] == 0 && work->cardsLeft[work->listIndex] > 0) {
-            CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], 1);
+            CreateREVCOUNTTask(&work->tasks, &work->listIndex, &work->cardsLeft[work->listIndex], &work->revCountShown[work->listIndex], CARD_SIDE_SORA);
         }
     } else {
         sSoraSelectedCard = work->selectedCards[work->listIndex];
@@ -5043,7 +5044,7 @@ u8 SoraHeartlessCardShow(CardDisplayWork* work) {
         return 1;
     }
 
-    arg = 1;
+    arg = CARD_SIDE_SORA;
     gBtlWork->hcEffectCount = gHcEffectDefs[gBtlWork->hcEffect].count;
     TaskCreate(&gCardBattleState->tasks, &gTaskDescHCEffectName, &arg);
     return 0;

@@ -53,6 +53,7 @@
 #include "songs.h"
 #include "gba/defines.h"
 #include "card.h"
+#include "card_ids.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);
@@ -2226,19 +2227,19 @@ void DropGimmickCard(u8 index, s32 x, s32 y, s32 z) {
 
     switch (index) {
     case 0:
-        id = 0x28F;
+        id = CARD_GIMMICK_0;
         break;
     case 1:
-        id = 0x290;
+        id = CARD_GIMMICK_1;
         break;
     case 2:
-        id = 0x291;
+        id = CARD_GIMMICK_2;
         break;
     case 3:
-        id = 0x292;
+        id = CARD_GIMMICK_3;
         break;
     case 4:
-        id = 0x293;
+        id = CARD_GIMMICK_4;
         break;
     default:
         return;

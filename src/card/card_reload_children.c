@@ -49,7 +49,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* work, ReloadChildArgs* args) {
     work->tiles2 = NULL;
 
     switch (work->args.side) {
-    case 1:
+    case CARD_SIDE_SORA:
         if ((s8)work->args.index <= 3) {
             work->offsetX = sSoraReloadChildOffsetX[(s8)work->args.index] << 8;
             work->offsetY = sReloadChildOffsetY[(s8)work->args.index] << 8;
@@ -59,7 +59,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* work, ReloadChildArgs* args) {
         }
 
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         if ((s8)work->args.index <= 3) {
             work->offsetX = sRikuReloadChildOffsetX[(s8)work->args.index] << 8;
             work->offsetY = sReloadChildOffsetY[(s8)work->args.index] << 8;
@@ -97,10 +97,10 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* task) {
 
     if (work->args.index < ARRAY_COUNT(sReloadChildOffsetY)) {
         switch (work->args.side) {
-        case 1:
+        case CARD_SIDE_SORA:
             ApproachValue(&work->offsetX, sSoraReloadChildOffsetX[(s8)work->args.index] << 8, work->steps);
             break;
-        case 2:
+        case CARD_SIDE_RIKU:
             ApproachValue(&work->offsetX, sRikuReloadChildOffsetX[(s8)work->args.index] << 8, work->steps);
             break;
         }
@@ -138,10 +138,10 @@ u8 UpdateReloadChildRetracted(ReloadChildWork* work, void* task) {
     }
 
     switch (work->args.side) {
-    case 1:
+    case CARD_SIDE_SORA:
         ApproachValue(&work->offsetX, sSoraReloadChildOffsetX[(s8)work->args.index] << 8, work->steps);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         ApproachValue(&work->offsetX, sRikuReloadChildOffsetX[(s8)work->args.index] << 8, work->steps);
         break;
     }
@@ -238,11 +238,11 @@ void REV_COUNT_0(RevCountWork* work, RevCountArgs* args) {
     work->shownCount = *work->args.count;
 
     switch (work->args.side) {
-    case 1:
+    case CARD_SIDE_SORA:
         work->x = -0x2000;
         work->y = 0x9800;
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         work->x = 0x11000;
         work->y = 0x9800;
         break;
@@ -300,10 +300,10 @@ u8 REV_COUNT_1(RevCountWork* work, void* task) {
     }
 
     switch (work->args.side) {
-    case 1:
+    case CARD_SIDE_SORA:
         ApproachValue(&work->x, 0, work->steps);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         ApproachValue(&work->x, 0xD800, work->steps);
         break;
     }
@@ -336,10 +336,10 @@ u8 REV_COUNT_1(RevCountWork* work, void* task) {
 
 u8 UpdateRevCountListChanged(RevCountWork* work) {
     switch (work->args.side) {
-    case 1:
+    case CARD_SIDE_SORA:
         ApproachValue(&work->x, -0x2000, work->steps);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         ApproachValue(&work->x, 0x11000, work->steps);
         break;
     }
@@ -359,10 +359,10 @@ u8 UpdateRevCountHidden(RevCountWork* work, void* task) {
     u8 (*fn)(RevCountWork*, void*);
 
     switch (work->args.side) {
-    case 1:
+    case CARD_SIDE_SORA:
         ApproachValue(&work->x, -0x2000, work->steps);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         ApproachValue(&work->x, 0x11000, work->steps);
         break;
     }
@@ -387,10 +387,10 @@ u8 UpdateRevCountEmpty(RevCountWork* work, void* task) {
     u8 (*fn)(RevCountWork*, void*);
 
     switch (work->args.side) {
-    case 1:
+    case CARD_SIDE_SORA:
         ApproachValue(&work->x, -0x2000, work->steps);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         ApproachValue(&work->x, 0x11000, work->steps);
         break;
     }
@@ -457,12 +457,12 @@ void RELOAD_0(ReloadWork* work, ReloadArgs* args) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 
-    switch (work->args.mode) {
-    case 1:
+    switch (work->args.side) {
+    case CARD_SIDE_SORA:
         work->x = -0x3000;
         work->y = 0x7E00;
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         work->x = 0xB4800;
         work->y = 0x7E00;
         break;
@@ -474,11 +474,11 @@ void RELOAD_0(ReloadWork* work, ReloadArgs* args) {
 u8 RELOAD_1(ReloadWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
 
-    switch (work->args.mode) {
-    case 1:
+    switch (work->args.side) {
+    case CARD_SIDE_SORA:
         ApproachValue(&work->x, 0x1800, work->steps);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         ApproachValue(&work->x, 0xD800, work->steps);
         break;
     }
@@ -503,11 +503,11 @@ u8 RELOAD_1(ReloadWork* work, void* task) {
 u8 UpdateReloadSlideOut(ReloadWork* work) {
     work->gfx = AnimUpdate(&work->anim);
 
-    switch (work->args.mode) {
-    case 1:
+    switch (work->args.side) {
+    case CARD_SIDE_SORA:
         ApproachValue(&work->x, -0x3000, work->steps);
         break;
-    case 2:
+    case CARD_SIDE_RIKU:
         ApproachValue(&work->x, 0x12000, work->steps);
         break;
     }

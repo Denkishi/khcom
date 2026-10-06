@@ -185,13 +185,18 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     gBtlWork->prizeCount++;
 }
 
-void StartPickupCardFlight(PickupCardWork* work, u8 kind) {
+enum PickupCardFlight {
+    PICKUP_CARD_FLIGHT_TO_DECK,
+    PICKUP_CARD_FLIGHT_TO_CENTER
+};
+
+void StartPickupCardFlight(PickupCardWork* work, u8 target) {
     s32 dx;
     s32 dy;
     s32 tx;
     s32 ty;
 
-    if (kind == 1) {
+    if (target == PICKUP_CARD_FLIGHT_TO_CENTER) {
         tx = 0x7800;
         ty = 0x5000;
     } else {
@@ -265,7 +270,7 @@ s32 Friend_card_1(PickupCardWork* work, void* task) {
             work->posY = sy << 8;
             work->screenSpace = TRUE;
             ColliderSetDisabled(&work->collider, TRUE);
-            StartPickupCardFlight(work, 0);
+            StartPickupCardFlight(work, PICKUP_CARD_FLIGHT_TO_DECK);
 #ifdef VERSION_EU
             work->visible = 1;
 #endif
@@ -373,7 +378,7 @@ s32 Gimmick_card_1(PickupCardWork* work, void* task) {
             work->posY = sy << 8;
             work->screenSpace = TRUE;
             ColliderSetDisabled(&work->collider, TRUE);
-            StartPickupCardFlight(work, 0);
+            StartPickupCardFlight(work, PICKUP_CARD_FLIGHT_TO_DECK);
 #ifdef VERSION_EU
             work->visible = 1;
 #endif
@@ -438,7 +443,7 @@ u8 FlyPickupCardToDeck(PickupCardWork* work) {
         work->dirY = -dy;
 
         if (work->distance < 0x800) {
-            if (work->cardId >= 655 && work->cardId <= 659) {
+            if (work->cardId >= CARD_GIMMICK_0 && work->cardId <= CARD_GIMMICK_4) {
                 gCardBattleState->pickedGimmickCardId = work->cardId;
             } else {
                 gCardBattleState->pickedFriendCardId = work->cardId;
@@ -612,7 +617,7 @@ s32 Heartless_card_1(PickupCardWork* work, void* task) {
         work->posY = y << 8;
         work->screenSpace = TRUE;
         ColliderSetDisabled(&work->collider, TRUE);
-        StartPickupCardFlight(work, 1);
+        StartPickupCardFlight(work, PICKUP_CARD_FLIGHT_TO_CENTER);
         SetTaskUpdate(task, (TaskUpdateFunc)FlyHeartlessCardToCenter);
         return 1;
     }

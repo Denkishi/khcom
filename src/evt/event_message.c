@@ -7150,7 +7150,7 @@ void view_0(EventCameraWork* work, u8* arg) {
     work->keyframe = 0;
     work->steps = 0;
     work->angle = 0;
-    work->approachMode = 0;
+    work->approachMode = FALSE;
     work->effectStarted = FALSE;
     seqDef = gEventSequenceDefs[work->eventId];
     bg = gEventBackgroundDefs[work->eventId];
@@ -7231,10 +7231,10 @@ u8 view_1(EventCameraWork* work, Task* task) {
 
             switch (keyframe->flags & CAMERA_KEYFRAME_MODE_MASK) {
             case CAMERA_MODE_FOLLOW:
-                work->approachMode = 0;
+                work->approachMode = FALSE;
                 break;
             case CAMERA_MODE_APPROACH:
-                work->approachMode = 1;
+                work->approachMode = TRUE;
                 work->steps = keyframe->duration;
                 break;
             }
@@ -7355,7 +7355,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
             gEventState->shakeY = 0;
         }
 
-        if (work->approachMode != 0) {
+        if (work->approachMode) {
             EventCameraApproach(work);
         } else {
             EventCameraFollow(work);

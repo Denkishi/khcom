@@ -357,7 +357,7 @@ u8 AllmapDoorLeadsToHall(u8 room, u8 side) {
 u8 AllmapDoorExists(u8 room, u8 side) {
     u16 flags = GetMapDoorFlags(room, side);
 
-    if (flags == 0 || (flags & 8) != 0) {
+    if (flags == 0 || (flags & DOOR_FLAG_SEALED) != 0) {
         return FALSE;
     }
 
@@ -367,7 +367,7 @@ u8 AllmapDoorExists(u8 room, u8 side) {
 u8 AllmapDoorIsOpen(u8 room, u8 side) {
     u16 flags = GetMapDoorFlags(room, side);
 
-    if ((flags & 2) != 0) {
+    if ((flags & DOOR_FLAG_OPEN) != 0) {
         return TRUE;
     }
 

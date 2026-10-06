@@ -269,15 +269,15 @@ void SetPoohPalette(PoohWork* work, u32 action) {
     u16* pal;
 
     switch (action) {
-    case 16:
+    case POOH_ACTION_TRAP_FALL:
         pal = gTrap0001Palette;
         break;
-    case 36:
-    case 37:
+    case POOH_ACTION_TRAPPED:
+    case POOH_ACTION_TRAPPED_WITH_ROO:
         pal = gTrap0002Palette;
         break;
-    case 38:
-    case 39:
+    case POOH_ACTION_BALLOON:
+    case POOH_ACTION_OWL_BALLOON:
         pal = gTrap0003Palette;
         break;
     default:
@@ -291,14 +291,30 @@ void SetPoohPalette(PoohWork* work, u32 action) {
     }
 }
 
+enum PoohRequest {
+    POOH_REQUEST_NONE,
+    POOH_REQUEST_TRAP,
+    POOH_REQUEST_TRAP_BALLOON,
+    POOH_REQUEST_HONEY,
+    POOH_REQUEST_PIGLET,
+    POOH_REQUEST_BLOCKED,
+    POOH_REQUEST_IDLE,
+    POOH_REQUEST_OWL_BALLOON,
+    POOH_REQUEST_STUMP,
+    POOH_REQUEST_HONEYCOMB,
+    POOH_REQUEST_HONEYCOMB_DONE,
+    POOH_REQUEST_WAGON,
+    POOH_REQUEST_CANCEL
+};
+
 void SetPoohAction(PoohWork* work, u32 action) {
     sPoohAction = action;
 
-    if (action == 0) {
-        gPoohRequest = 0;
+    if (action == POOH_ACTION_IDLE) {
+        gPoohRequest = POOH_REQUEST_NONE;
     }
 
-    if (action >= 38 && action <= 39) {
+    if (action >= POOH_ACTION_BALLOON && action <= POOH_ACTION_OWL_BALLOON) {
         work->balloonTimer = 0;
 
         if (!IsTaskActive(work->task)) {
@@ -306,19 +322,21 @@ void SetPoohAction(PoohWork* work, u32 action) {
         }
     }
 
-    if (action == 30 || action == 24 || action == 4 || action == 11) {
+    if (action == POOH_ACTION_THINK || action == POOH_ACTION_SIT || action == POOH_ACTION_WALK_AWAY ||
+        action == POOH_ACTION_LOOK_AT_HONEYCOMB_DONE) {
         work->actionTimer = 0;
     }
 
-    if (action == 15) {
+    if (action == POOH_ACTION_JUMP_SCARED) {
         work->vz = -0x130;
     }
 
-    if (action >= 36 && action <= 37) {
+    if (action >= POOH_ACTION_TRAPPED && action <= POOH_ACTION_TRAPPED_WITH_ROO) {
         m4aSongNumStart(SONG_SND_329);
-    } else if (action == 16) {
+    } else if (action == POOH_ACTION_TRAP_FALL) {
         m4aSongNumStart(SONG_SYS_PO_FALL);
-    } else if (action == 39 || action == 22 || (action >= 32 && action <= 35)) {
+    } else if (action == POOH_ACTION_OWL_BALLOON || action == POOH_ACTION_OWL_DESCENT ||
+               (action >= POOH_ACTION_SIT_FOR_HONEY && action <= POOH_ACTION_EAT_HONEY_3)) {
         // fakematch
         do {
             work->angle = 0xAD;
@@ -327,7 +345,7 @@ void SetPoohAction(PoohWork* work, u32 action) {
         } while (0);
     }
 
-    if (action > 35) {
+    if (action > POOH_ACTION_EAT_HONEY_3) {
         work->angle = 0x53;
         work->lookAngle = 0x53;
         work->lookColumn = work->angle;
@@ -344,7 +362,7 @@ void task_poo_pooh_0(PoohWork* work) {
     GetPooStateGauge(&gPoohGauge, &gPoohGaugeTimer);
     work->targetNode = NULL;
     work->lookTimer = 0;
-    gPoohRequest = 0;
+    gPoohRequest = POOH_REQUEST_NONE;
     work->callTimer = 0;
     work->callCount = 0;
     work->angle = 45;
@@ -378,59 +396,59 @@ void task_poo_pooh_0(PoohWork* work) {
 }
 
 u8 HandlePoohRequest(PoohWork* work) {
-    if (gPoohRequest == 1) {
-        SetPoohAction(work, 16);
+    if (gPoohRequest == POOH_REQUEST_TRAP) {
+        SetPoohAction(work, POOH_ACTION_TRAP_FALL);
         work->pos.x = gPoohRequestX;
         work->pos.y = gPoohRequestY;
-    } else if (gPoohRequest == 2) {
+    } else if (gPoohRequest == POOH_REQUEST_TRAP_BALLOON) {
         work->pos.x = gPoohRequestX;
         work->pos.y = gPoohRequestY;
-        SetPoohAction(work, 38);
-    } else if (gPoohRequest == 7) {
+        SetPoohAction(work, POOH_ACTION_BALLOON);
+    } else if (gPoohRequest == POOH_REQUEST_OWL_BALLOON) {
         work->pos.x = gPoohRequestX;
         work->pos.y = gPoohRequestY;
-        SetPoohAction(work, 39);
-    } else if (gPoohRequest == 8) {
+        SetPoohAction(work, POOH_ACTION_OWL_BALLOON);
+    } else if (gPoohRequest == POOH_REQUEST_STUMP) {
         work->angle = GetAngle(work->pos.x, work->pos.y, gPoohRequestX, gPoohRequestY);
         work->lookAngle = work->angle;
         work->lookColumn = work->angle;
-        SetPoohAction(work, 20);
-    } else if (gPoohRequest == 11) {
+        SetPoohAction(work, POOH_ACTION_STUMP_CLIMB);
+    } else if (gPoohRequest == POOH_REQUEST_WAGON) {
         work->angle = GetAngle(work->pos.x, work->pos.y, gPoohRequestX, gPoohRequestY);
         work->lookAngle = work->angle;
         work->lookColumn = work->angle;
         work->leavingWagon = 0;
-        SetPoohAction(work, 21);
-    } else if (gPoohRequest == 3) {
-        SetPoohAction(work, 32);
-    } else if (gPoohRequest == 4 || gPoohRequest == 6) {
-        SetPoohAction(work, 0);
-    } else if (gPoohRequest == 5) {
-        SetPoohAction(work, 10);
-    } else if (gPoohRequest == 9) {
-        SetPoohAction(work, 12);
-    } else if (gPoohRequest == 10) {
-        SetPoohAction(work, 11);
-    } else if (gPoohRequest == 12) {
-        gPoohRequest = 0;
+        SetPoohAction(work, POOH_ACTION_WAGON_CLIMB);
+    } else if (gPoohRequest == POOH_REQUEST_HONEY) {
+        SetPoohAction(work, POOH_ACTION_SIT_FOR_HONEY);
+    } else if (gPoohRequest == POOH_REQUEST_PIGLET || gPoohRequest == POOH_REQUEST_IDLE) {
+        SetPoohAction(work, POOH_ACTION_IDLE);
+    } else if (gPoohRequest == POOH_REQUEST_BLOCKED) {
+        SetPoohAction(work, POOH_ACTION_BLOCKED);
+    } else if (gPoohRequest == POOH_REQUEST_HONEYCOMB) {
+        SetPoohAction(work, POOH_ACTION_LOOK_AT_HONEYCOMB);
+    } else if (gPoohRequest == POOH_REQUEST_HONEYCOMB_DONE) {
+        SetPoohAction(work, POOH_ACTION_LOOK_AT_HONEYCOMB_DONE);
+    } else if (gPoohRequest == POOH_REQUEST_CANCEL) {
+        gPoohRequest = POOH_REQUEST_NONE;
         return 0;
     } else {
-        SetPoohAction(work, 10);
+        SetPoohAction(work, POOH_ACTION_BLOCKED);
     }
 
-    gPoohRequest = 0;
+    gPoohRequest = POOH_REQUEST_NONE;
     return 1;
 }
 
 u8 CheckPoohInterrupts(PoohWork* work, PooNode* n) {
     if (ColliderIsTouchingType(&work->collider, 1)) {
         if (!IsPooSoraOverWagon()) {
-            SetPoohAction(work, 10);
+            SetPoohAction(work, POOH_ACTION_BLOCKED);
             return 1;
         }
     }
 
-    if (gPoohRequest != 0) {
+    if (gPoohRequest != POOH_REQUEST_NONE) {
         return HandlePoohRequest(work);
     }
 
@@ -446,7 +464,7 @@ void ChoosePoohTarget(PoohWork* work, PooNode* n) {
                 if (work->callCount > 10) {
                     work->callTimer = 0;
                     work->callCount = 0;
-                    SetPoohAction(work, 29);
+                    SetPoohAction(work, POOH_ACTION_THINK_START);
                 }
 
                 return;
@@ -466,18 +484,18 @@ void ChoosePoohTarget(PoohWork* work, PooNode* n) {
             work->lookTarget = GetAngle(work->pos.x, work->pos.y, ((PooPos*)n->pos)->x, ((PooPos*)n->pos)->y);
             work->targetX = work->pos.x;
             work->targetY = work->pos.y;
-            SetPoohAction(work, 9);
+            SetPoohAction(work, POOH_ACTION_LOOK);
         } else {
             work->targetNode = n;
             work->lookTimer = 0;
             work->targetX = ((PooPos*)work->targetNode->pos)->x;
             work->targetY = ((PooPos*)work->targetNode->pos)->y;
-            SetPoohAction(work, 3);
+            SetPoohAction(work, POOH_ACTION_WALK);
         }
     } else {
         work->targetX = work->pos.x;
         work->targetY = work->pos.y;
-        SetPoohAction(work, 23);
+        SetPoohAction(work, POOH_ACTION_SIT_DOWN);
     }
 }
 
@@ -625,7 +643,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
     s32 b;
 
     switch (sPoohAction) {
-    case 3:
+    case POOH_ACTION_WALK:
         if (AnimGetGfxIndex(&work->anim) == 8 && gPoohPos->y > 0x1BD00 && (GetKeysPressed() & A_BUTTON) != 0) {
             v = 128;
 
@@ -634,7 +652,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             }
 
             if (GetRandom() % v == 0) {
-                SetPoohAction(work, 17);
+                SetPoohAction(work, POOH_ACTION_TRIP);
             }
 
             break;
@@ -658,7 +676,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         break;
-    case 10:
+    case POOH_ACTION_BLOCKED:
         if (work->collider.colliding) {
             if (ColliderIsTouchingType(&work->collider, 1)) {
                 break;
@@ -676,11 +694,11 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         if (GetPooManhattanDistance(&work->pos, &gPooActor.pos) > 0x1B00) {
-            SetPoohAction(work, 0);
+            SetPoohAction(work, POOH_ACTION_IDLE);
         }
 
         break;
-    case 12:
+    case POOH_ACTION_LOOK_AT_HONEYCOMB:
         a0 = work->lookAngle;
         work->lookTarget = GetAngle(work->pos.x, work->pos.y, 0x8DE00, 0x45C00);
         ApproachAngle(&a0, work->lookTarget, 4);
@@ -691,12 +709,12 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             break;
         }
 
-        SetPoohAction(work, 15);
+        SetPoohAction(work, POOH_ACTION_JUMP_SCARED);
         work->angle = 64;
         work->lookAngle = 64;
         work->lookColumn = work->angle;
         break;
-    case 15:
+    case POOH_ACTION_JUMP_SCARED:
         work->pos.z += work->vz;
         work->vz += 71;
 
@@ -705,10 +723,10 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         work->pos.z = 0;
-        SetPoohAction(work, 5);
+        SetPoohAction(work, POOH_ACTION_FLEE_BEES_1);
         work->speed = 228;
         break;
-    case 5:
+    case POOH_ACTION_FLEE_BEES_1:
         work->targetX = 0x87F00;
         work->targetY = 0x4B700;
         MovePooh(work, 456, 1);
@@ -717,9 +735,9 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             break;
         }
 
-        SetPoohAction(work, 6);
+        SetPoohAction(work, POOH_ACTION_FLEE_BEES_2);
         break;
-    case 6:
+    case POOH_ACTION_FLEE_BEES_2:
         work->targetX = 0x75D00;
         work->targetY = 0x49E00;
         MovePooh(work, 456, 1);
@@ -728,19 +746,19 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             break;
         }
 
-        SetPoohAction(work, 14);
+        SetPoohAction(work, POOH_ACTION_BEE_CHASE_OVER);
         BtlMapStartShake();
         m4aSongNumStart(SONG_SND_372);
         break;
-    case 0:
+    case POOH_ACTION_IDLE:
         if (work->pos.z < 0) {
-            SetPoohAction(work, 1);
+            SetPoohAction(work, POOH_ACTION_FALL);
             break;
         }
 
         ChoosePoohTarget(work, n);
 
-        if (sPoohAction != 0) {
+        if (sPoohAction != POOH_ACTION_IDLE) {
             break;
         }
 
@@ -757,14 +775,14 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         c >>= 1;
         SetPooNodeWeight(work->targetNode, c);
         break;
-    case 29:
+    case POOH_ACTION_THINK_START:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 30);
+        SetPoohAction(work, POOH_ACTION_THINK);
         break;
-    case 30:
+    case POOH_ACTION_THINK:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
@@ -783,16 +801,16 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             break;
         }
 
-        SetPoohAction(work, 31);
+        SetPoohAction(work, POOH_ACTION_THINK_END);
         break;
-    case 31:
+    case POOH_ACTION_THINK_END:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 9);
+        SetPoohAction(work, POOH_ACTION_LOOK);
         break;
-    case 9:
+    case POOH_ACTION_LOOK:
         if (work->lookTimer <= 59) {
             a1 = work->lookAngle;
             work->lookTarget = GetAngle(work->pos.x, work->pos.y, ((s32*)n->pos)[0], ((s32*)n->pos)[1]);
@@ -804,36 +822,36 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         break;
-    case 16:
+    case POOH_ACTION_TRAP_FALL:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
         if (work->pos.x == 0x4A700 && work->pos.y == 0x28E00 && !IsPooEventDone(5)) {
-            SetPoohAction(work, 37);
+            SetPoohAction(work, POOH_ACTION_TRAPPED_WITH_ROO);
             TaskCreate(&work->tasks, &gTaskDescPooRoo, &work->pos);
             break;
         }
 
-        SetPoohAction(work, 36);
+        SetPoohAction(work, POOH_ACTION_TRAPPED);
         break;
-    case 37:
+    case POOH_ACTION_TRAPPED_WITH_ROO:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 38);
+        SetPoohAction(work, POOH_ACTION_BALLOON);
         work->pos.z -= 0x1700;
         StartPooCameraFollowPooh();
         break;
-    case 36:
+    case POOH_ACTION_TRAPPED:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 38);
+        SetPoohAction(work, POOH_ACTION_BALLOON);
         break;
-    case 38:
+    case POOH_ACTION_BALLOON:
         if (work->balloonTimer <= 59) {
             work->pos.z -= 204;
         } else if (work->balloonTimer <= 79) {
@@ -852,7 +870,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         if (work->balloonTimer > 80 && work->pos.z >= -0x800 && IsTaskActive(work->task)) {
             TaskKill(&work->tasks, work->task);
             TaskCreate(&work->tasks, &gTaskDescPooFreeballoon, &work->pos);
-            gPoohRequest = 0;
+            gPoohRequest = POOH_REQUEST_NONE;
         }
 
         if (work->pos.z < 0) {
@@ -862,18 +880,18 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         work->pos.z = 0;
 
         if (ColliderIsTouchingType(&work->collider, 1)) {
-            SetPoohAction(work, 0);
+            SetPoohAction(work, POOH_ACTION_IDLE);
             break;
         }
 
-        if (gPoohRequest == 0) {
-            SetPoohAction(work, 0);
+        if (gPoohRequest == POOH_REQUEST_NONE) {
+            SetPoohAction(work, POOH_ACTION_IDLE);
             break;
         }
 
         HandlePoohRequest(work);
         break;
-    case 39:
+    case POOH_ACTION_OWL_BALLOON:
         work->pos.z -= 204;
 
         if (work->pos.z > -0xD500) {
@@ -884,9 +902,9 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             TaskKill(&work->tasks, work->task);
         }
 
-        SetPoohAction(work, 22);
+        SetPoohAction(work, POOH_ACTION_OWL_DESCENT);
         break;
-    case 22:
+    case POOH_ACTION_OWL_DESCENT:
         if (work->pos.z < -0x1000) {
             work->pos.z += 204;
             break;
@@ -909,10 +927,10 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         break;
-    case 17:
+    case POOH_ACTION_TRIP:
         if (AnimIsFinished(&work->anim)) {
             if (work->actionTimer > 40) {
-                SetPoohAction(work, 18);
+                SetPoohAction(work, POOH_ACTION_GET_UP);
                 ApplyPooh04aFrameOffset(work);
                 work->pos.z = 0;
             }
@@ -927,9 +945,9 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
 
         work->actionTimer = 0;
         break;
-    case 18:
+    case POOH_ACTION_GET_UP:
         if (AnimIsFinished(&work->anim)) {
-            SetPoohAction(work, 0);
+            SetPoohAction(work, POOH_ACTION_IDLE);
             break;
         }
 
@@ -939,7 +957,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
 
         ApplyPooh04aFrameOffset(work);
         break;
-    case 21:
+    case POOH_ACTION_WAGON_CLIMB:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
@@ -961,7 +979,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         work->lookAngle = work->angle;
         work->lookColumn = work->angle;
         work->hopAngle = work->angle;
-        SetPoohAction(work, 2);
+        SetPoohAction(work, POOH_ACTION_WAGON_DROP);
         work->vz = 0;
         work->pos.z = -0xD00;
 
@@ -982,7 +1000,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         break;
-    case 2:
+    case POOH_ACTION_WAGON_DROP:
         work->pos.z += work->vz;
         work->vz += 17;
 
@@ -993,14 +1011,14 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         work->pos.z = 0;
 
         if (!work->leavingWagon) {
-            SetPoohAction(work, 13);
+            SetPoohAction(work, POOH_ACTION_WAGON_WAIT);
             break;
         }
 
-        SetPoohAction(work, 0);
-        gPoohRequest = 0;
+        SetPoohAction(work, POOH_ACTION_IDLE);
+        gPoohRequest = POOH_REQUEST_NONE;
         break;
-    case 13:
+    case POOH_ACTION_WAGON_WAIT:
         if (!IsPooSoraCallStarting()) {
             break;
         }
@@ -1012,15 +1030,15 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         work->angle = work->hopAngle + 128;
         work->lookAngle = work->angle;
         work->lookColumn = work->angle;
-        SetPoohAction(work, 21);
+        SetPoohAction(work, POOH_ACTION_WAGON_CLIMB);
         work->leavingWagon = 1;
         break;
-    case 20:
+    case POOH_ACTION_STUMP_CLIMB:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 8);
+        SetPoohAction(work, POOH_ACTION_STUMP_WAIT);
         ResetPoohStumpCount(work);
         work->pos.z -= 0xE00;
         work->lookAngle = work->angle;
@@ -1033,7 +1051,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         break;
-    case 8:
+    case POOH_ACTION_STUMP_WAIT:
         work->onCollider = 1;
 
         if (!IsPooSoraCallStarting()) {
@@ -1044,9 +1062,9 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             break;
         }
 
-        SetPoohAction(work, 7);
+        SetPoohAction(work, POOH_ACTION_STUMP_WALK);
         break;
-    case 11:
+    case POOH_ACTION_LOOK_AT_HONEYCOMB_DONE:
         if (work->actionTimer <= 179) {
             a2 = work->lookAngle;
             work->lookTarget = GetAngle(work->pos.x, work->pos.y, 0x8DE00, 0x45C00);
@@ -1057,20 +1075,20 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             work->angle += 128;
             work->lookAngle = work->angle;
             work->lookColumn = work->angle;
-            SetPoohAction(work, 4);
+            SetPoohAction(work, POOH_ACTION_WALK_AWAY);
         }
 
         break;
-    case 4:
+    case POOH_ACTION_WALK_AWAY:
         if (work->actionTimer > 119) {
-            SetPoohAction(work, 0);
+            SetPoohAction(work, POOH_ACTION_IDLE);
             break;
         }
 
         work->actionTimer++;
         MovePooh(work, 76, 0);
         break;
-    case 7:
+    case POOH_ACTION_STUMP_WALK:
         if (work->onCollider != 0) {
             work->targetX = gPooActor.pos.x;
             work->targetY = gPooActor.pos.y;
@@ -1083,11 +1101,11 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         work->angle = GetAngle(work->pos.x, work->pos.y, work->targetX, work->targetY);
         work->vz = -0x130;
         work->speed = 237;
-        SetPoohAction(work, 19);
+        SetPoohAction(work, POOH_ACTION_STUMP_JUMP);
         break;
-    case 19:
+    case POOH_ACTION_STUMP_JUMP:
         if (AnimIsFinished(&work->anim) && work->onCollider != 0 && work->pos.z < -0x100) {
-            SetPoohAction(work, 8);
+            SetPoohAction(work, POOH_ACTION_STUMP_WAIT);
             UpdatePoohStumpCircle(work);
             break;
         }
@@ -1105,7 +1123,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         if (AnimGetFrame(&work->anim) <= 1) {
             break;
         }
-    case 1:
+    case POOH_ACTION_FALL:
         work->pos.z += work->vz;
         work->vz += 17;
 
@@ -1114,18 +1132,18 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            SetPoohAction(work, 0);
+            SetPoohAction(work, POOH_ACTION_IDLE);
         }
 
         break;
-    case 23:
+    case POOH_ACTION_SIT_DOWN:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 24);
+        SetPoohAction(work, POOH_ACTION_SIT);
         break;
-    case 24:
+    case POOH_ACTION_SIT:
         if (work->actionTimer <= 119) {
             work->actionTimer++;
 
@@ -1138,24 +1156,24 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
             }
 
             if (gPoohGauge != 0) {
-                SetPoohAction(work, 28);
+                SetPoohAction(work, POOH_ACTION_STAND_UP);
             }
         } else {
-            SetPoohAction(work, 25);
+            SetPoohAction(work, POOH_ACTION_LIE_DOWN);
         }
 
         break;
-    case 25:
+    case POOH_ACTION_LIE_DOWN:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 26);
+        SetPoohAction(work, POOH_ACTION_SLEEP);
         work->sleepTimer = gPoohGaugeTimer * 1800 / 1851;
         break;
-    case 26:
+    case POOH_ACTION_SLEEP:
         if (IsPooSoraCallStarting() && !IsPoohNearScreenEdge() && gPoohGauge != 0) {
-            SetPoohAction(work, 27);
+            SetPoohAction(work, POOH_ACTION_WAKE_UP);
 
             if (!IsTaskActive(work->zzzTask)) {
                 break;
@@ -1184,40 +1202,40 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         }
 
         break;
-    case 27:
+    case POOH_ACTION_WAKE_UP:
         if (AnimIsFinished(&work->anim)) {
-            SetPoohAction(work, 28);
+            SetPoohAction(work, POOH_ACTION_STAND_UP);
         }
 
         break;
-    case 28:
+    case POOH_ACTION_STAND_UP:
         if (AnimIsFinished(&work->anim)) {
-            SetPoohAction(work, 0);
+            SetPoohAction(work, POOH_ACTION_IDLE);
         }
 
         break;
-    case 32:
+    case POOH_ACTION_SIT_FOR_HONEY:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
         if (gPoohGauge == 1) {
-            SetPoohAction(work, 33);
+            SetPoohAction(work, POOH_ACTION_EAT_HONEY_1);
         } else if (gPoohGauge == 2) {
-            SetPoohAction(work, 34);
+            SetPoohAction(work, POOH_ACTION_EAT_HONEY_2);
         } else {
-            SetPoohAction(work, 35);
+            SetPoohAction(work, POOH_ACTION_EAT_HONEY_3);
         }
 
         break;
-    case 33:
-    case 34:
-    case 35:
+    case POOH_ACTION_EAT_HONEY_1:
+    case POOH_ACTION_EAT_HONEY_2:
+    case POOH_ACTION_EAT_HONEY_3:
         if (!AnimIsFinished(&work->anim)) {
             break;
         }
 
-        SetPoohAction(work, 28);
+        SetPoohAction(work, POOH_ACTION_STAND_UP);
         work->pos.x -= 0x400;
         work->pos.y += 0x300;
         break;
@@ -1225,19 +1243,19 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
 }
 
 void UpdatePoohGauge(PoohWork* work) {
-    if (sPoohAction == 3) {
+    if (sPoohAction == POOH_ACTION_WALK) {
         if (gPoohGauge != 0) {
             gPoohGaugeTimer--;
         }
 
         if (gPoohGaugeTimer == 0) {
             if (gPoohGauge == 0) {
-                SetPoohAction(work, 0x17);
+                SetPoohAction(work, POOH_ACTION_SIT_DOWN);
             } else {
                 gPoohGauge--;
 
                 if (gPoohGauge == 0) {
-                    SetPoohAction(work, 0x17);
+                    SetPoohAction(work, POOH_ACTION_SIT_DOWN);
                 } else {
                     gPoohGaugeTimer = 0x73B;
                 }
@@ -1277,7 +1295,7 @@ u8 task_poo_pooh_1(PoohWork* work) {
     SetPoohAnimation(work, sPoohAction);
     work->gfx = AnimUpdate(&work->anim);
 
-    if (sPoohAction == 3 || sPoohAction == 7) {
+    if (sPoohAction == POOH_ACTION_WALK || sPoohAction == POOH_ACTION_STUMP_WALK) {
         if (work->anim.timer == 0) {
             switch (AnimGetFrame(&work->anim)) {
             case 9:
@@ -1310,7 +1328,7 @@ void task_poo_pooh_2(PoohWork* work) {
         f = SPRITE_PRIORITY(2);
     }
 
-    if (sPoohAction == 20 && work->dirIndex == 1) {
+    if (sPoohAction == POOH_ACTION_STUMP_CLIMB && work->dirIndex == 1) {
         if (AnimGetFrame(&work->anim) <= 4) {
             p = -0x1003 - ((gPoohRequestY - 0x500) >> 8) * 4;
             work->shadowInfo.z = 0;
@@ -1323,7 +1341,7 @@ void task_poo_pooh_2(PoohWork* work) {
         work->shadowInfo.priority = p + 1;
         work->shadowInfo.z = 0;
     } else if ((u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) != 0) {
-        if (sPoohAction == 21 && work->dirIndex == 1 && work->leavingWagon) {
+        if (sPoohAction == POOH_ACTION_WAGON_CLIMB && work->dirIndex == 1 && work->leavingWagon) {
             p = GetPooWagonPriority2() - 3;
         } else if ((u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == 83 || (u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == 173) {
             if (gPoohPos->y < gPooActor.pos.y) {
@@ -1382,12 +1400,12 @@ void task_poo_pooh_2(PoohWork* work) {
 }
 
 void task_poo_pooh_3(PoohWork* work) {
-    if (sPoohAction == 22) {
-        sPoohAction = 0;
+    if (sPoohAction == POOH_ACTION_OWL_DESCENT) {
+        sPoohAction = POOH_ACTION_IDLE;
         work->pos.z = 0;
         work->pos.y += 0x2000;
-    } else if (sPoohAction == 14) {
-        sPoohAction = 0;
+    } else if (sPoohAction == POOH_ACTION_BEE_CHASE_OVER) {
+        sPoohAction = POOH_ACTION_IDLE;
         work->pos.x = 0x7F700;
         work->pos.y = 0x47E00;
         work->pos.z = 0;
@@ -1402,7 +1420,7 @@ void task_poo_pooh_3(PoohWork* work) {
 }
 
 u8 IsPoohDescendingWithOwl() {
-    if (sPoohAction == 22) {
+    if (sPoohAction == POOH_ACTION_OWL_DESCENT) {
         return 1;
     }
 
@@ -1410,7 +1428,7 @@ u8 IsPoohDescendingWithOwl() {
 }
 
 u8 IsPoohOnOwlBalloon() {
-    if (sPoohAction == 39) {
+    if (sPoohAction == POOH_ACTION_OWL_BALLOON) {
         return 1;
     }
 
@@ -1418,7 +1436,7 @@ u8 IsPoohOnOwlBalloon() {
 }
 
 u8 IsPoohWalkingToTarget() {
-    if (sPoohAction == 3) {
+    if (sPoohAction == POOH_ACTION_WALK) {
         return 1;
     }
 
@@ -1426,7 +1444,7 @@ u8 IsPoohWalkingToTarget() {
 }
 
 u8 IsPoohBeeChaseOver() {
-    if (sPoohAction == 14) {
+    if (sPoohAction == POOH_ACTION_BEE_CHASE_OVER) {
         return 1;
     }
 
@@ -1434,7 +1452,7 @@ u8 IsPoohBeeChaseOver() {
 }
 
 u8 IsPoohWaitingOnWagon() {
-    if (sPoohAction == 13) {
+    if (sPoohAction == POOH_ACTION_WAGON_WAIT) {
         return 1;
     }
 
@@ -1444,11 +1462,11 @@ u8 IsPoohWaitingOnWagon() {
 u8 IsPoohOnWagon() {
     PoohWork* w;
 
-    if (sPoohAction == 13) {
+    if (sPoohAction == POOH_ACTION_WAGON_WAIT) {
         return 1;
     }
 
-    if (sPoohAction == 2) {
+    if (sPoohAction == POOH_ACTION_WAGON_DROP) {
         if (sPooWork->leavingWagon) {
             return 0;
         }
@@ -1456,7 +1474,7 @@ u8 IsPoohOnWagon() {
         return 1;
     }
 
-    if (sPoohAction != 21) {
+    if (sPoohAction != POOH_ACTION_WAGON_CLIMB) {
         return 0;
     }
 
@@ -1494,15 +1512,15 @@ u8 IsPoohAtLowerExit() {
 }
 
 u16 GetPoohHoneyAnim() {
-    if (sPoohAction == 0x21) {
+    if (sPoohAction == POOH_ACTION_EAT_HONEY_1) {
         return 0;
     }
 
-    if (sPoohAction == 0x22) {
+    if (sPoohAction == POOH_ACTION_EAT_HONEY_2) {
         return 1;
     }
 
-    if (sPoohAction == 0x23) {
+    if (sPoohAction == POOH_ACTION_EAT_HONEY_3) {
         return 2;
     }
 
@@ -1510,7 +1528,7 @@ u16 GetPoohHoneyAnim() {
 }
 
 u8 IsPoohLookingAtHoneycomb() {
-    if (sPoohAction == 12) {
+    if (sPoohAction == POOH_ACTION_LOOK_AT_HONEYCOMB) {
         return 1;
     }
 
@@ -2097,6 +2115,18 @@ void SetPooSoraAttackPoint(PooActor* actor) {
     SetPooAttackPoint(x, y, actor->pos.z - 0x800);
 }
 
+enum PooSoraState {
+    POO_SORA_STATE_STAND,
+    POO_SORA_STATE_WALK,
+    POO_SORA_STATE_JUMP_START,
+    POO_SORA_STATE_JUMP_RISE,
+    POO_SORA_STATE_JUMP_FALL,
+    POO_SORA_STATE_JUMP_LAND,
+    POO_SORA_STATE_ATTACK,
+    POO_SORA_STATE_AIR_ATTACK,
+    POO_SORA_STATE_CALL
+};
+
 void task_poo_sora_0(PooSoraWork* work) {
     PooActor* a = &gPooActor;
 
@@ -2144,7 +2174,7 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
     UpdatePooActorAngle(a);
 
     switch (work->state) {
-    case 7:
+    case POO_SORA_STATE_AIR_ATTACK:
         if (work->timer == 0) {
             SetPooSoraAnimation(work, 10, 0);
         }
@@ -2179,16 +2209,16 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
 
         if (AnimIsFinished(&work->anim)) {
             if (work->vz < 0) {
-                work->state = 3;
+                work->state = POO_SORA_STATE_JUMP_RISE;
             } else {
-                work->state = 4;
+                work->state = POO_SORA_STATE_JUMP_FALL;
             }
         } else {
             work->timer++;
         }
 
         break;
-    case 2:
+    case POO_SORA_STATE_JUMP_START:
         if (work->timer == 0) {
             SetPooSoraAnimation(work, 3, 0);
             a->speed >>= 1;
@@ -2204,7 +2234,7 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
                 m4aSongNumStart(SONG_SYS_SR_I_VO01);
             }
 
-            work->state = 3;
+            work->state = POO_SORA_STATE_JUMP_RISE;
             work->vz = -0x533;
             a->speed <<= 1;
             work->timer = 0;
@@ -2213,7 +2243,7 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
         }
 
         break;
-    case 3:
+    case POO_SORA_STATE_JUMP_RISE:
         if ((GetKeysHeld() & DPAD_ANY) != 0) {
             a->speed += 17;
 
@@ -2247,16 +2277,16 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
 
         if ((GetKeysPressed() & A_BUTTON) != 0) {
             work->timer = 0;
-            work->state = 7;
+            work->state = POO_SORA_STATE_AIR_ATTACK;
         } else if (work->vz > 0) {
             work->timer = 0;
-            work->state = 4;
+            work->state = POO_SORA_STATE_JUMP_FALL;
         } else {
             work->timer++;
         }
 
         break;
-    case 4:
+    case POO_SORA_STATE_JUMP_FALL:
         if ((GetKeysHeld() & DPAD_ANY) != 0) {
             a->speed += 17;
 
@@ -2284,19 +2314,19 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
 
         if ((GetKeysPressed() & A_BUTTON) != 0) {
             work->timer = 0;
-            work->state = 7;
+            work->state = POO_SORA_STATE_AIR_ATTACK;
         } else if (a->pos.z > z) {
             a->pos.z = z;
             work->vz = 0;
 
-            if (work->state != 5) {
-                work->state = 5;
+            if (work->state != POO_SORA_STATE_JUMP_LAND) {
+                work->state = POO_SORA_STATE_JUMP_LAND;
                 work->timer = 0;
             }
         }
 
         break;
-    case 5:
+    case POO_SORA_STATE_JUMP_LAND:
         if (work->timer == 0) {
             SetPooSoraAnimation(work, 7, 0);
             m4aSongNumStart(work->sounds[3]);
@@ -2307,9 +2337,9 @@ u8 PooSoraUpdateJump(PooSoraWork* work, Task* t) {
 
         if (k != 0) {
             work->timer = 0;
-            work->state = 2;
+            work->state = POO_SORA_STATE_JUMP_START;
         } else if (work->timer > 6) {
-            work->state = 0;
+            work->state = POO_SORA_STATE_STAND;
             work->timer = 0;
             SetTaskUpdate(t, (TaskUpdateFunc)task_poo_sora_1);
         } else {
@@ -2357,7 +2387,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* t) {
     sx = a->pos.x;
     sy = a->pos.y;
 
-    if (work->state == 6) {
+    if (work->state == POO_SORA_STATE_ATTACK) {
         if (work->timer == 0) {
             SetPooSoraAnimation(work, 9, 0);
             a->speed = 0;
@@ -2523,7 +2553,7 @@ u8 PooSoraUpdateAttack(PooSoraWork* work, Task* t) {
             }
 
             SetPooSoraAnimation(work, 0, 0);
-            work->state = 0;
+            work->state = POO_SORA_STATE_STAND;
             SetTaskUpdate(t, (TaskUpdateFunc)task_poo_sora_1);
         } else {
             work->timer++;
@@ -2555,7 +2585,7 @@ u8 PooSoraUpdateCall(PooSoraWork* work, Task* t) {
     x = a->pos.x;
     y = a->pos.y;
 
-    if (work->state == 8) {
+    if (work->state == POO_SORA_STATE_CALL) {
         if (work->timer == 0) {
             SetPooSoraAnimation(work, 8, 1);
             a->speed = 0;
@@ -2568,7 +2598,7 @@ u8 PooSoraUpdateCall(PooSoraWork* work, Task* t) {
                 work->timer = 0;
             } else {
                 work->timer = 0;
-                work->state = 0;
+                work->state = POO_SORA_STATE_STAND;
                 SetTaskUpdate(t, (TaskUpdateFunc)task_poo_sora_1);
             }
         } else {
@@ -2603,7 +2633,7 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
     sx = a->pos.x;
     sy = a->pos.y;
 
-    if (work->state <= 1) {
+    if (work->state <= POO_SORA_STATE_WALK) {
         UpdatePooActorAngle(a);
 
         if ((GetKeysHeld() & DPAD_ANY) != 0) {
@@ -2638,7 +2668,7 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
 
         if ((GetKeysPressed() & B_BUTTON) != 0) {
             work->timer = 0;
-            work->state = 2;
+            work->state = POO_SORA_STATE_JUMP_START;
             SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateJump);
             m4aSongNumStart(work->sounds[2]);
         } else if ((GetKeysPressed() & A_BUTTON) != 0) {
@@ -2654,17 +2684,17 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
                 OpenPoohModeMessage(v);
             } else {
                 work->timer = 0;
-                work->state = 6;
+                work->state = POO_SORA_STATE_ATTACK;
                 SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateAttack);
             }
         } else if ((GetKeysPressed() & R_BUTTON) != 0) {
             work->timer = 0;
-            work->state = 8;
+            work->state = POO_SORA_STATE_CALL;
             SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateCall);
             a->angle = GetPooAngleToPooh(&a->pos);
         }
     } else if (AnimIsFinished(&work->anim)) {
-        work->state = 0;
+        work->state = POO_SORA_STATE_STAND;
     }
 
     if (CheckPooSoraExit(&a->pos) != 0) {
@@ -2687,7 +2717,7 @@ u8 task_poo_sora_1(PooSoraWork* work, Task* t) {
         a->speed >>= 2;
         work->vz = 0;
         work->timer = 0;
-        work->state = 4;
+        work->state = POO_SORA_STATE_JUMP_FALL;
         SetTaskUpdate(t, (TaskUpdateFunc)PooSoraUpdateJump);
     }
 
@@ -2758,7 +2788,7 @@ void task_poo_sora_3(PooSoraWork* work) {
 }
 
 u8 IsPooSoraCallStarting() {
-    if (sPooSoraWork->state == 8 && sPooSoraWork->timer == 0) {
+    if (sPooSoraWork->state == POO_SORA_STATE_CALL && sPooSoraWork->timer == 0) {
         return 1;
     }
 
@@ -2766,7 +2796,7 @@ u8 IsPooSoraCallStarting() {
 }
 
 u8 IsPooSoraCalling() {
-    if (sPooSoraWork->state == 8) {
+    if (sPooSoraWork->state == POO_SORA_STATE_CALL) {
         return 1;
     }
 
@@ -2867,7 +2897,7 @@ u8 task_poo_trap_1(PooTrapWork* work) {
         if (ColliderIsTouchingType(&work->collider, 9)) {
             gPoohRequestX = work->x;
             gPoohRequestY = work->y;
-            gPoohRequest = 1;
+            gPoohRequest = POOH_REQUEST_TRAP;
         }
     }
 
@@ -3296,7 +3326,7 @@ u8 task_poo_trapballoon_1(PooBalloonWork* work) {
     if (ColliderIsTouchingType(&work->collider, 9) && IsPoohWalkingToTarget()) {
         gPoohRequestX = work->pos.x;
         gPoohRequestY = work->pos.y;
-        gPoohRequest = 2;
+        gPoohRequest = POOH_REQUEST_TRAP_BALLOON;
         SetPooNodeWeight(&work->node, 0);
         return 0;
     }
@@ -3397,7 +3427,7 @@ u8 task_poo_owlballoon_1(PooOwlBalloonWork* work) {
     if (work->palette != NULL && ColliderIsTouchingType(&work->collider, 9) && IsPoohWalkingToTarget()) {
         gPoohRequestX = work->pos.x;
         gPoohRequestY = work->pos.y;
-        gPoohRequest = 7;
+        gPoohRequest = POOH_REQUEST_OWL_BALLOON;
         SetPooNodeWeight(&work->node, 0);
         m4aSongNumStart(SONG_SND_385);
         return 0;
@@ -3535,6 +3565,12 @@ PooNode* FindPoohTargetNode() {
     return best;
 }
 
+enum PooHoneyState {
+    POO_HONEY_STATE_WAIT_POOH,
+    POO_HONEY_STATE_WAIT_EAT,
+    POO_HONEY_STATE_EATEN
+};
+
 void task_poo_honey_0(PooHoneyWork* work, PooPos* pos) {
     work->pos.x = pos->x;
     work->pos.y = pos->y;
@@ -3555,21 +3591,21 @@ void task_poo_honey_0(PooHoneyWork* work, PooPos* pos) {
     work->maxPos.y += 0x100;
     TaskPoolInit(&work->tasks, 1);
     CreatePooShadowscaleTask(&work->tasks, &work->pos, 0xCC);
-    work->state = 0;
+    work->state = POO_HONEY_STATE_WAIT_POOH;
     work->timer = 0;
 }
 
 u8 task_poo_honey_1(PooHoneyWork* work) {
     switch (work->state) {
-    case 0:
+    case POO_HONEY_STATE_WAIT_POOH:
         if (work->minPos.x <= gPoohPos->x && gPoohPos->x <= work->maxPos.x && work->minPos.y <= gPoohPos->y && gPoohPos->y <= work->maxPos.y) {
-            gPoohRequest = 3;
+            gPoohRequest = POOH_REQUEST_HONEY;
             SetPooNodeWeight(&work->node, 0);
             work->state++;
         }
 
         break;
-    case 1:
+    case POO_HONEY_STATE_WAIT_EAT:
         if (GetPoohHoneyAnim() <= 2) {
             AnimStart(&work->anim, GetPoohHoneyAnim(), 0);
             AnimUpdate(&work->anim);
@@ -3577,7 +3613,7 @@ u8 task_poo_honey_1(PooHoneyWork* work) {
         }
 
         break;
-    case 2:
+    case POO_HONEY_STATE_EATEN:
         AnimUpdate(&work->anim);
 
         if (AnimIsFinished(&work->anim)) {
@@ -3712,45 +3748,57 @@ void task_poo_mapanime_2(void* w) {
 void task_poo_mapanime_3(void* w) {
 }
 
+enum PooPileStage {
+    POO_PILE_STAGE_HEIGHT_4,
+    POO_PILE_STAGE_HIT_TO_3,
+    POO_PILE_STAGE_HEIGHT_3,
+    POO_PILE_STAGE_HIT_TO_2,
+    POO_PILE_STAGE_HEIGHT_2,
+    POO_PILE_STAGE_HIT_TO_1,
+    POO_PILE_STAGE_HEIGHT_1,
+    POO_PILE_STAGE_FLAT,
+    POO_PILE_STAGE_RANDOM
+};
+
 s32 GetRandomPooPileStage() {
     switch (GetRandom() % 40 / 10) {
     case 0:
-        return 0;
+        return POO_PILE_STAGE_HEIGHT_4;
     case 1:
-        return 2;
+        return POO_PILE_STAGE_HEIGHT_3;
     case 2:
-        return 4;
+        return POO_PILE_STAGE_HEIGHT_2;
     }
 
-    return 6;
+    return POO_PILE_STAGE_HEIGHT_1;
 }
 
 s32 NextPooPileStage(u32 stage) {
-    if (stage == 0) {
-        return 1;
+    if (stage == POO_PILE_STAGE_HEIGHT_4) {
+        return POO_PILE_STAGE_HIT_TO_3;
     }
 
-    if (stage <= 2) {
-        return 3;
+    if (stage <= POO_PILE_STAGE_HEIGHT_3) {
+        return POO_PILE_STAGE_HIT_TO_2;
     }
 
-    if (stage <= 4) {
-        return 5;
+    if (stage <= POO_PILE_STAGE_HEIGHT_2) {
+        return POO_PILE_STAGE_HIT_TO_1;
     }
 
-    return 7;
+    return POO_PILE_STAGE_FLAT;
 }
 
 s32 GetPooPileHeight(u32 stage) {
-    if (stage == 0) {
+    if (stage == POO_PILE_STAGE_HEIGHT_4) {
         return 32;
     }
 
-    if (stage <= 2) {
+    if (stage <= POO_PILE_STAGE_HEIGHT_3) {
         return 24;
     }
 
-    if (stage <= 4) {
+    if (stage <= POO_PILE_STAGE_HEIGHT_2) {
         return 16;
     }
 
@@ -3764,7 +3812,7 @@ void task_poo_pile_0(PooPileWork* work, PooPileArgs* args) {
     work->palette = NULL;
     AnimInit(&work->anim, gPooPileAnims, gPooPileFrames);
 
-    if (args->stage == 8) {
+    if (args->stage == POO_PILE_STAGE_RANDOM) {
         work->stage = GetRandomPooPileStage();
     } else {
         work->stage = args->stage;
@@ -3781,7 +3829,7 @@ void task_poo_pile_0(PooPileWork* work, PooPileArgs* args) {
 u8 task_poo_pile_1(PooPileWork* work) {
     PooPos t;
 
-    if (work->stage == 7) {
+    if (work->stage == POO_PILE_STAGE_FLAT) {
         return 1;
     }
 
@@ -3790,7 +3838,7 @@ u8 task_poo_pile_1(PooPileWork* work) {
     }
 
     if (ColliderIsTouchingType(&work->collider, 9)) {
-        gPoohRequest = 5;
+        gPoohRequest = POOH_REQUEST_BLOCKED;
     }
 
     if (!gPooAttackActive) {
@@ -3817,7 +3865,7 @@ u8 task_poo_pile_1(PooPileWork* work) {
     AnimStart(&work->anim, work->stage, 0);
     m4aSongNumStart(SONG_SYS_PO_WOOD);
 
-    if (work->stage == 7) {
+    if (work->stage == POO_PILE_STAGE_FLAT) {
         ColliderUnregister(&work->collider);
         work->colliderActive = 0;
         RemovePooNode(&work->node);
@@ -3859,7 +3907,7 @@ void task_poo_pile_2(PooPileWork* work) {
             work->palette = LoadObjPalette(gPooPilePalette, 0x20);
         }
 
-        if (work->stage != 7) {
+        if (work->stage != POO_PILE_STAGE_FLAT) {
             z = -0x1004 - (work->pos.y >> 8) * 4;
 
             if (!work->colliderActive) {
@@ -3914,7 +3962,7 @@ void task_poo_tigerstump_0(PooStumpWork* work, PooPos* pos) {
 u8 task_poo_tigerstump_1(PooStumpWork* work) {
     if (work->palette != NULL) {
         if (ColliderIsTouchingType(&work->collider, 9)) {
-            gPoohRequest = 5;
+            gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
 
@@ -3968,7 +4016,7 @@ u8 task_poo_poohstump_1(PooStumpWork* work) {
         if (ColliderIsTouchingType(&work->collider, 9)) {
             gPoohRequestX = work->x;
             gPoohRequestY = work->y;
-            gPoohRequest = 8;
+            gPoohRequest = POOH_REQUEST_STUMP;
         }
     }
 
@@ -4016,6 +4064,16 @@ void SetPooPigletAnimation(PooPigletWork* work, s32 animIndex, u16 flags) {
     }
 }
 
+enum PooPigletState {
+    POO_PIGLET_STATE_WAIT,
+    POO_PIGLET_STATE_WALK_OUT,
+    POO_PIGLET_STATE_FACE_AWAY,
+    POO_PIGLET_STATE_FACE_FRONT,
+    POO_PIGLET_STATE_FACE_AWAY_AGAIN,
+    POO_PIGLET_STATE_FACE_FRONT_AGAIN,
+    POO_PIGLET_STATE_WALK_BACK
+};
+
 void task_poo_piglet_0(PooPigletWork* work) {
     u16 m;
     u16 n;
@@ -4024,7 +4082,7 @@ void task_poo_piglet_0(PooPigletWork* work) {
     work->x = 0x2A500;
     work->y = 0x21100;
     work->z = 0;
-    work->state = 0;
+    work->state = POO_PIGLET_STATE_WAIT;
     work->timer = 0;
     work->palette = NULL;
     m = 0;
@@ -4064,7 +4122,7 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
 
         gPoohRequestX = work->x;
         gPoohRequestY = work->y;
-        gPoohRequest = 4;
+        gPoohRequest = POOH_REQUEST_PIGLET;
 #ifdef VERSION_EU
         ExitPoohMode(134);
 #else
@@ -4075,19 +4133,19 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case POO_PIGLET_STATE_WAIT:
         SetPooPigletAnimation(work, 0, 1);
         work->flipped = 0;
 
         if (work->timer > 209) {
-            work->state = 1;
+            work->state = POO_PIGLET_STATE_WALK_OUT;
             work->speed = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 1:
+    case POO_PIGLET_STATE_WALK_OUT:
         SetPooPigletAnimation(work, 3, 1);
         work->flipped = 1;
         work->speed += 0x600;
@@ -4100,60 +4158,60 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
         work->y += -gSineTable[0x60] * work->speed >> 8;
 
         if (work->x > 0x2C8FF) {
-            work->state = 2;
+            work->state = POO_PIGLET_STATE_FACE_AWAY;
             work->timer = 0;
         }
 
         break;
-    case 2:
+    case POO_PIGLET_STATE_FACE_AWAY:
         SetPooPigletAnimation(work, 1, 1);
         work->flipped = 1;
 
         if (work->timer > 39) {
-            work->state = 3;
+            work->state = POO_PIGLET_STATE_FACE_FRONT;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 3:
+    case POO_PIGLET_STATE_FACE_FRONT:
         SetPooPigletAnimation(work, 0, 1);
         work->flipped = 1;
 
         if (work->timer > 29) {
-            work->state = 4;
+            work->state = POO_PIGLET_STATE_FACE_AWAY_AGAIN;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 4:
+    case POO_PIGLET_STATE_FACE_AWAY_AGAIN:
         SetPooPigletAnimation(work, 1, 1);
         work->flipped = 1;
 
         if (work->timer > 29) {
-            work->state = 5;
+            work->state = POO_PIGLET_STATE_FACE_FRONT_AGAIN;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 5:
+    case POO_PIGLET_STATE_FACE_FRONT_AGAIN:
         SetPooPigletAnimation(work, 0, 1);
         work->flipped = 1;
 
         if (work->timer <= 59) {
             work->timer++;
         } else {
-            work->state = 6;
+            work->state = POO_PIGLET_STATE_WALK_BACK;
             work->speed = 0;
         }
 
         break;
-    case 6:
+    case POO_PIGLET_STATE_WALK_BACK:
         SetPooPigletAnimation(work, 2, 1);
         work->flipped = 0;
         work->speed += 0x600;
@@ -4168,7 +4226,7 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
         if (work->x <= 0x2A500) {
             work->x = 0x2A500;
             work->y = 0x21100;
-            work->state = 0;
+            work->state = POO_PIGLET_STATE_WAIT;
             work->timer = 0;
         }
 
@@ -4266,7 +4324,7 @@ void task_poo_eeyore_0(PooEeyoreWork* work) {
 u8 task_poo_eeyore_1(PooEeyoreWork* work) {
     if (work->colliderActive != 0) {
         if (ColliderIsTouchingType(&work->collider, 9)) {
-            gPoohRequest = 5;
+            gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
 
@@ -4454,6 +4512,17 @@ void task_poo_owl_3(PooOwlWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum PooRabbitAnim {
+    POO_RABBIT_ANIM_STAND,
+    POO_RABBIT_ANIM_HARVEST,
+    POO_RABBIT_ANIM_WALK_BACK,
+    POO_RABBIT_ANIM_STAND_AWAY,
+    POO_RABBIT_ANIM_CARRY_SACK,
+    POO_RABBIT_ANIM_DROP_SACK,
+    POO_RABBIT_ANIM_HOLD_SACK,
+    POO_RABBIT_ANIM_NONE
+};
+
 void SetPooRabbitAnimation(PooRabbitWork* work, s32 animIndex, u16 flags) {
     if (work->animIndex != animIndex) {
         work->animIndex = animIndex;
@@ -4484,8 +4553,8 @@ void task_poo_rabbit_0(PooRabbitWork* work) {
 
     work->tiles = AllocObjTiles(m, NULL);
     AnimInit(&work->anim, NULL, NULL);
-    work->animIndex = 7;
-    SetPooRabbitAnimation(work, 1, 0);
+    work->animIndex = POO_RABBIT_ANIM_NONE;
+    SetPooRabbitAnimation(work, POO_RABBIT_ANIM_HARVEST, 0);
     work->flipped = 0;
     work->timer = 0;
     work->gfx = AnimGetGfx(&work->anim);
@@ -4498,23 +4567,23 @@ void task_poo_rabbit_0(PooRabbitWork* work) {
 
 u8 task_poo_rabbit_1(PooRabbitWork* work) {
     switch (work->animIndex) {
-    case 1:
+    case POO_RABBIT_ANIM_HARVEST:
         if (AnimIsFinished(&work->anim)) {
             work->timer++;
 
             if (work->timer <= 3) {
                 AnimReset(&work->anim);
             } else {
-                SetPooRabbitAnimation(work, 4, 1);
+                SetPooRabbitAnimation(work, POO_RABBIT_ANIM_CARRY_SACK, 1);
                 work->flipped = 1;
                 work->timer = 312;
             }
         }
 
         break;
-    case 4:
+    case POO_RABBIT_ANIM_CARRY_SACK:
         if (work->palette != NULL && work->collider.colliding && ColliderIsTouchingType(&work->collider, 9)) {
-            SetPooRabbitAnimation(work, 6, 0);
+            SetPooRabbitAnimation(work, POO_RABBIT_ANIM_HOLD_SACK, 0);
             work->waitTimer = 20;
         } else {
             ApproachValue(&work->x, 0x23000, work->timer);
@@ -4522,52 +4591,52 @@ u8 task_poo_rabbit_1(PooRabbitWork* work) {
             work->timer--;
 
             if (work->timer == 0) {
-                SetPooRabbitAnimation(work, 5, 0);
+                SetPooRabbitAnimation(work, POO_RABBIT_ANIM_DROP_SACK, 0);
                 work->flipped = 1;
             }
         }
 
         break;
-    case 5:
+    case POO_RABBIT_ANIM_DROP_SACK:
         if (AnimIsFinished(&work->anim)) {
-            SetPooRabbitAnimation(work, 2, 1);
+            SetPooRabbitAnimation(work, POO_RABBIT_ANIM_WALK_BACK, 1);
             work->flipped = 0;
             work->timer = 260;
         }
 
         break;
-    case 2:
+    case POO_RABBIT_ANIM_WALK_BACK:
         if (work->palette != NULL && work->collider.colliding && ColliderIsTouchingType(&work->collider, 9)) {
             work->waitTimer = 20;
-            SetPooRabbitAnimation(work, 0, 0);
+            SetPooRabbitAnimation(work, POO_RABBIT_ANIM_STAND, 0);
         } else {
             ApproachValue(&work->x, 0x1B700, work->timer);
             ApproachValue(&work->y, 0x16E00, work->timer);
             work->timer--;
 
             if (work->timer == 0) {
-                SetPooRabbitAnimation(work, 1, 0);
+                SetPooRabbitAnimation(work, POO_RABBIT_ANIM_HARVEST, 0);
                 work->flipped = 0;
                 work->timer = 0;
             }
         }
 
         break;
-    case 6:
+    case POO_RABBIT_ANIM_HOLD_SACK:
         if (work->waitTimer == 0) {
             if (work->palette != NULL && !ColliderIsTouchingType(&work->collider, 9)) {
-                SetPooRabbitAnimation(work, 4, 1);
+                SetPooRabbitAnimation(work, POO_RABBIT_ANIM_CARRY_SACK, 1);
             }
         } else {
             work->waitTimer--;
         }
 
         break;
-    case 0:
+    case POO_RABBIT_ANIM_STAND:
         if (work->waitTimer != 0) {
             work->waitTimer--;
         } else if (work->palette != NULL && !ColliderIsTouchingType(&work->collider, 9)) {
-            SetPooRabbitAnimation(work, 2, 1);
+            SetPooRabbitAnimation(work, POO_RABBIT_ANIM_WALK_BACK, 1);
         }
 
         break;
@@ -4622,12 +4691,18 @@ void task_poo_rabbit_3(PooRabbitWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum PooTiggerMode {
+    POO_TIGGER_MODE_STAND,
+    POO_TIGGER_MODE_BOUNCE,
+    POO_TIGGER_MODE_HOP
+};
+
 void SetPooTiggerrooAnimation(PooTiggerWork* work, u16 flags) {
     s32 a;
 
     AnimReset(&work->anim);
 
-    if (work->mode == 2) {
+    if (work->mode == POO_TIGGER_MODE_HOP) {
         switch (work->heading) {
         case 0xAD:
             a = 2;
@@ -4662,11 +4737,11 @@ void SetPooTiggerAnimation(PooTiggerWork* work, u16 flags) {
 
     AnimReset(&work->anim);
 
-    if (work->mode == 0) {
+    if (work->mode == POO_TIGGER_MODE_STAND) {
         r = 0;
-    } else if (work->mode == 1) {
+    } else if (work->mode == POO_TIGGER_MODE_BOUNCE) {
         r = 1;
-    } else if (work->mode == 2) {
+    } else if (work->mode == POO_TIGGER_MODE_HOP) {
         switch (work->heading) {
         case 0xAD:
             r = 2;
@@ -4775,7 +4850,7 @@ void task_poo_tigger_0(PooTiggerWork* work) {
     u16 t;
     u8 i;
 
-    work->mode = 2;
+    work->mode = POO_TIGGER_MODE_HOP;
     work->heading = 0xAD;
     work->isTigger = 1;
     work->palette = NULL;
@@ -4805,7 +4880,7 @@ void task_poo_tigger_0(PooTiggerWork* work) {
 u8 task_poo_tiggerroo_1(PooTiggerWork* work) {
     GetPooGroundZ(&work->collider, (PooPos*)&work->x, &work->onCollider);
 
-    if (work->mode == 2) {
+    if (work->mode == POO_TIGGER_MODE_HOP) {
         if (work->hopTimer > 0) {
             ApproachValueHalfSteps(&work->x, work->targetX, work->hopTimer);
             ApproachValueHalfSteps(&work->y, work->targetY, work->hopTimer);
@@ -4935,7 +5010,7 @@ void task_poo_tiggerroo_3(PooTiggerWork* work) {
 void task_poo_tiggerroo_0(PooTiggerWork* work) {
     PooShadowArgs args;
 
-    work->mode = 2;
+    work->mode = POO_TIGGER_MODE_HOP;
     work->heading = 0x2D;
     work->isTigger = 0;
     work->palette = NULL;
@@ -4953,6 +5028,13 @@ void task_poo_tiggerroo_0(PooTiggerWork* work) {
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
 }
 
+enum PooRooState {
+    POO_ROO_STATE_TRAPPED,
+    POO_ROO_STATE_HANG,
+    POO_ROO_STATE_JUMP_OFF,
+    POO_ROO_STATE_HOME
+};
+
 void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
     gStockMesDispWork = work;
     work->srcPos = pos;
@@ -4966,12 +5048,12 @@ void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
         work->pos.z = 0;
         AnimStart(&work->anim, 0, 0);
         work->flipped = 0;
-        work->state = 3;
+        work->state = POO_ROO_STATE_HOME;
     } else {
         work->pos = *work->srcPos;
         AnimStart(&work->anim, 4, 0);
         work->flipped = 0;
-        work->state = 0;
+        work->state = POO_ROO_STATE_TRAPPED;
     }
 
     work->gfx = AnimGetGfx(&work->anim);
@@ -4989,17 +5071,17 @@ u8 task_poo_roo_1(PooRooWork* work) {
     s32 t;
 
     switch (work->state) {
-    case 0:
+    case POO_ROO_STATE_TRAPPED:
         if (AnimIsFinished(&work->anim)) {
             AnimStart(&work->anim, 5, 0);
-            work->state = 1;
+            work->state = POO_ROO_STATE_HANG;
             work->pos = *work->srcPos;
             work->pos.x -= 0x600;
             work->pos.z += 0x1F00;
         }
 
         break;
-    case 1:
+    case POO_ROO_STATE_HANG:
         work->lastZ = work->pos.z;
         work->pos = *work->srcPos;
         work->pos.x -= 0x600;
@@ -5008,12 +5090,12 @@ u8 task_poo_roo_1(PooRooWork* work) {
 
         if (work->lastZ - t < 0 && t >= -0x2100) {
             AnimStart(&work->anim, 6, 0);
-            work->state = 2;
+            work->state = POO_ROO_STATE_JUMP_OFF;
             work->vz = 0;
         }
 
         break;
-    case 2:
+    case POO_ROO_STATE_JUMP_OFF:
         work->pos.z += work->vz;
         work->vz += 7;
 
@@ -5035,9 +5117,9 @@ u8 task_poo_roo_1(PooRooWork* work) {
         }
 
         break;
-    case 3:
+    case POO_ROO_STATE_HOME:
         if (ColliderIsTouchingType(&work->collider, 9)) {
-            gPoohRequest = 5;
+            gPoohRequest = POOH_REQUEST_BLOCKED;
         }
 
         break;
@@ -5061,7 +5143,7 @@ void task_poo_roo_2(PooRooWork* work) {
     pr = work->flipped != 0 ? 0x801 : 0x800;
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, pr, -0x1006 - t * 4);
 
-    if (work->state != 0) {
+    if (work->state != POO_ROO_STATE_TRAPPED) {
         TaskPoolDraw(&work->tasks);
     }
 }
@@ -5309,7 +5391,7 @@ void task_poo_ti_board_0(PooBoardWork* work, PooPos* pos) {
 u8 task_poo_ti_board_1(PooBoardWork* work) {
     if (work->palette != NULL) {
         if (ColliderIsTouchingType(&work->collider, 9)) {
-            gPoohRequest = 5;
+            gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
 
@@ -5433,6 +5515,12 @@ u8 IsPooEeyoreTailLanded() {
     return 0;
 }
 
+enum PooHoneycombState {
+    POO_HONEYCOMB_STATE_IDLE,
+    POO_HONEYCOMB_STATE_SHAKING,
+    POO_HONEYCOMB_STATE_SHAKEN
+};
+
 void task_poo_honeycomb_0(PooHoneycombWork* work) {
     work->x = 0x8DE00;
     work->y = 0x46600;
@@ -5443,7 +5531,7 @@ void task_poo_honeycomb_0(PooHoneycombWork* work) {
     work->gfx = gEeHoneycombFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, 0);
     work->colliderActive = 0;
-    sPooHoneycombState = 0;
+    sPooHoneycombState = POO_HONEYCOMB_STATE_IDLE;
     work->shakeX = 0;
     work->angle = 0;
 }
@@ -5453,33 +5541,33 @@ u8 task_poo_honeycomb_1(PooHoneycombWork* work) {
 
     if (work->colliderActive != 0) {
         switch (sPooHoneycombState) {
-        case 2:
+        case POO_HONEYCOMB_STATE_SHAKEN:
             break;
-        case 0:
+        case POO_HONEYCOMB_STATE_IDLE:
             if (ColliderIsTouchingType(&work->collider, 9)) {
                 c = IsPooEventDone(2);
 
                 if (!c) {
-                    gPoohRequest = 9;
+                    gPoohRequest = POOH_REQUEST_HONEYCOMB;
 
                     if (IsPoohLookingAtHoneycomb()) {
-                        sPooHoneycombState = 1;
+                        sPooHoneycombState = POO_HONEYCOMB_STATE_SHAKING;
                         work->shakeTimer = c;
                     }
                 } else {
-                    gPoohRequest = 10;
+                    gPoohRequest = POOH_REQUEST_HONEYCOMB_DONE;
                 }
             }
 
             break;
-        case 1:
+        case POO_HONEYCOMB_STATE_SHAKING:
             work->shakeX = gSineTable[(u8)work->angle];
             work->angle += 16;
             work->shakeTimer++;
 
             if (work->shakeTimer > 60) {
                 work->shakeX = 0;
-                sPooHoneycombState = 2;
+                sPooHoneycombState = POO_HONEYCOMB_STATE_SHAKEN;
                 m4aSongNumStart(SONG_SND_371);
             }
 
@@ -5540,7 +5628,7 @@ void task_poo_honeycomb_3(PooHoneycombWork* work) {
 }
 
 u8 IsPooHoneycombShaken() {
-    if (sPooHoneycombState == 2) {
+    if (sPooHoneycombState == POO_HONEYCOMB_STATE_SHAKEN) {
         return 1;
     }
 
@@ -5561,7 +5649,7 @@ void task_poo_vegetable_0(PooVegetableWork* work) {
 u8 task_poo_vegetable_1(PooVegetableWork* work) {
     if (work->palette != NULL) {
         if (ColliderIsTouchingType(&work->collider, 9)) {
-            gPoohRequest = 5;
+            gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
 
@@ -5887,7 +5975,7 @@ u8 task_poo_wagon_1(PooWagonWork* work) {
         if (!work->poohAboard) {
             gPoohRequestX = work->pos.x;
             gPoohRequestY = work->pos.y;
-            gPoohRequest = 11;
+            gPoohRequest = POOH_REQUEST_WAGON;
             work->poohAboard = 1;
         }
     } else {
@@ -6369,6 +6457,13 @@ void GetPooCabbageStackSpot(PooSpot* spot) {
     spot->z = t[i].z;
 }
 
+enum PooCabbageState {
+    POO_CABBAGE_STATE_STACKED = 1,
+    POO_CABBAGE_STATE_BOUNCE,
+    POO_CABBAGE_STATE_FLY_TO_STACK,
+    POO_CABBAGE_STATE_LAND
+};
+
 void task_poo_cabbage_0(PooCabbageWork* work) {
     u16 r;
 
@@ -6381,7 +6476,7 @@ void task_poo_cabbage_0(PooCabbageWork* work) {
     work->speed = 0x1CC;
     work->palette = NULL;
     AnimInit(&work->anim, gRaVegetablesAnims, gRaVegetablesFrames);
-    work->state = 2;
+    work->state = POO_CABBAGE_STATE_BOUNCE;
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     ColliderInit(&work->collider, 10, 8, 16);
@@ -6405,14 +6500,14 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
     work->age++;
 
     switch (work->state) {
-    case 2:
+    case POO_CABBAGE_STATE_BOUNCE:
         if (gPooAttackActive && PooAttackHitsCollider(&work->collider)) {
             if (IsTaskActive(work->task)) {
                 TaskKill(&work->tasks, work->task);
             }
 
             work->task = TaskCreate(&work->tasks, &gTaskDescPooSpark, &work->x);
-            work->state = 3;
+            work->state = POO_CABBAGE_STATE_FLY_TO_STACK;
             AnimStart(&work->anim, 3, 0);
             m4aSongNumStart(SONG_SND_222);
             work->moveTimer = 30;
@@ -6449,7 +6544,7 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
         }
 
         break;
-    case 3:
+    case POO_CABBAGE_STATE_FLY_TO_STACK:
         if (work->zTimer != 0) {
             ApproachValue(&work->z, work->targetZ + work->hopHeight, work->zTimer);
             work->zTimer--;
@@ -6465,12 +6560,12 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
         work->moveTimer--;
 
         if (work->moveTimer == 0) {
-            work->state = 4;
+            work->state = POO_CABBAGE_STATE_LAND;
             AnimStart(&work->anim, 4, 0);
         }
 
         break;
-    case 4:
+    case POO_CABBAGE_STATE_LAND:
         if (!IsPooEventDone(4) && work->stackIndex == 13) {
 #ifdef VERSION_EU
             ExitPoohMode(140);
@@ -6482,7 +6577,7 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 1;
+            work->state = POO_CABBAGE_STATE_STACKED;
             AnimStart(&work->anim, 1, 0);
             IncPooCabbageLandedCount();
             work->animating = 0;
@@ -6503,7 +6598,7 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
         }
 
         break;
-    case 1:
+    case POO_CABBAGE_STATE_STACKED:
         if (t[work->stackIndex] < GetPooCabbageLandedCount()) {
             return 0;
         }
@@ -6554,7 +6649,7 @@ void task_poo_cabbage_2(PooCabbageWork* work) {
 
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), z);
 
-        if (work->state != 4 && work->state != 1) {
+        if (work->state != POO_CABBAGE_STATE_LAND && work->state != POO_CABBAGE_STATE_STACKED) {
             TaskPoolUpdate(&work->tasks);
             TaskPoolDraw(&work->tasks);
         }
@@ -7142,6 +7237,11 @@ void task_poo_butterflyLeft_2(PooButterflyWork* work) {
     PooBflyPartDraw(&work->parts[0], work->palette);
 }
 
+enum PooMapBeeState {
+    POO_MAP_BEE_STATE_APPEAR,
+    POO_MAP_BEE_STATE_FLY_AWAY
+};
+
 void task_poo_mapbee_0(PooMapBeeWork* work, PooPos* pos) {
     work->x = pos->x;
     work->y = pos->y;
@@ -7152,7 +7252,7 @@ void task_poo_mapbee_0(PooMapBeeWork* work, PooPos* pos) {
     AnimStart(&work->anim, 0, 0);
     work->gfx = AnimGetGfx(&work->anim);
     work->onScreen = 1;
-    work->state = 0;
+    work->state = POO_MAP_BEE_STATE_APPEAR;
     m4aSongNumStart(SONG_SND_386);
 }
 
@@ -7162,14 +7262,14 @@ u8 task_poo_mapbee_1(PooMapBeeWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case POO_MAP_BEE_STATE_APPEAR:
         if (AnimIsFinished(&work->anim)) {
             AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
-            work->state = 1;
+            work->state = POO_MAP_BEE_STATE_FLY_AWAY;
         }
 
         break;
-    case 1:
+    case POO_MAP_BEE_STATE_FLY_AWAY:
         work->z -= 0xCC;
         break;
     }
@@ -7393,7 +7493,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* work) {
 u8 task_poo_rabbitAfterEvent_1(PooRabbitAfterEventWork* work) {
     if (work->palette != NULL) {
         if (ColliderIsTouchingType(&work->collider, 9)) {
-            gPoohRequest = 5;
+            gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
 

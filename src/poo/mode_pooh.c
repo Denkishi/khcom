@@ -218,7 +218,7 @@ void BackdropFadeReset() {
     sBackdropFadeTarget = 0;
     sBackdropFadeLastAmount = 0;
     sBackdropFadeTimer = 0;
-    sBackdropFadeMode = 0;
+    sBackdropFadeMode = FADE_MODE_BLACK;
     sBackdropFadeActive = 0;
 }
 
@@ -240,7 +240,7 @@ void BackdropFadeUpdate() {
         b = (sBackdropFadeColor >> 10) & 31;
 
         switch (sBackdropFadeMode) {
-        case 0:
+        case FADE_MODE_BLACK:
             r -= amt;
             g -= amt;
             b -= amt;
@@ -258,7 +258,7 @@ void BackdropFadeUpdate() {
             }
 
             break;
-        case 1:
+        case FADE_MODE_WHITE:
             if ((s16)r < amt) {
                 r = amt;
             }
@@ -272,7 +272,7 @@ void BackdropFadeUpdate() {
             }
 
             break;
-        case 3:
+        case FADE_MODE_RED:
             r = amt + r;
             g -= amt;
             b -= amt;
@@ -290,7 +290,7 @@ void BackdropFadeUpdate() {
             }
 
             break;
-        case 5:
+        case FADE_MODE_GREEN:
             r -= amt;
             g = amt + g;
             b -= amt;
@@ -308,7 +308,7 @@ void BackdropFadeUpdate() {
             }
 
             break;
-        case 4:
+        case FADE_MODE_BLUE:
             r -= amt;
             g -= amt;
             b = amt + b;
@@ -448,7 +448,7 @@ void SetPooStartPositions() {
     p.x = 0x11000;
     p.y = 0xF800;
     p.z = 0;
-    SetPooStatePooh(&p, 0);
+    SetPooStatePooh(&p, POOH_ACTION_IDLE);
 }
 
 void SetPooReentryPositions() {
@@ -463,7 +463,7 @@ void SetPooReentryPositions() {
         p.x = 0xB3400;
         p.y = 0x5EE00;
         p.z = 0;
-        SetPooStatePooh(&p, 0);
+        SetPooStatePooh(&p, POOH_ACTION_IDLE);
     }
 }
 
@@ -912,41 +912,41 @@ void SetPoohAnimation(PoohWork* work, u32 anim) {
     work->animAction = anim;
 
     switch (anim) {
-    case 3:
-    case 4:
-    case 7:
+    case POOH_ACTION_WALK:
+    case POOH_ACTION_WALK_AWAY:
+    case POOH_ACTION_STUMP_WALK:
         flags |= ANIM_FLAG_LOOP;
         SetPoohDir8(work);
         e = &sPooh01AnimDefs[work->dirIndex];
         break;
-    case 5:
-    case 6:
+    case POOH_ACTION_FLEE_BEES_1:
+    case POOH_ACTION_FLEE_BEES_2:
         flags |= ANIM_FLAG_LOOP;
         SetPoohDir3(work);
         e = &sPooh10AnimDefs[work->dirIndex];
         break;
-    case 16:
+    case POOH_ACTION_TRAP_FALL:
         SetPoohDir8(work);
         e = &sTrap0001AnimDefs[work->dirIndex];
         break;
-    case 17:
+    case POOH_ACTION_TRIP:
         SetPoohDir5Left(work);
         e = &sPooh04AnimDefs[work->dirIndex];
         break;
-    case 18:
+    case POOH_ACTION_GET_UP:
         SetPoohDir5Left(work);
         e = &sPooh04aAnimDefs[work->dirIndex];
         break;
-    case 19:
+    case POOH_ACTION_STUMP_JUMP:
         SetPoohDir2(work);
         e = &sPooh03AnimDefs[work->dirIndex];
         break;
-    case 20:
+    case POOH_ACTION_STUMP_CLIMB:
         work->hideShadow = 1;
         SetPoohDir2(work);
         e = &sPooh07Anim0Defs[work->dirIndex];
         break;
-    case 21:
+    case POOH_ACTION_WAGON_CLIMB:
         work->hideShadow = 1;
         SetPoohDir2(work);
 
@@ -957,98 +957,98 @@ void SetPoohAnimation(PoohWork* work, u32 anim) {
         }
 
         break;
-    case 36:
+    case POOH_ACTION_TRAPPED:
         work->flipped = 0;
         e = &sTrap0002Anim0Def;
         break;
-    case 37:
+    case POOH_ACTION_TRAPPED_WITH_ROO:
         work->flipped = 0;
         e = &sTrap0002Anim1Def;
         break;
-    case 23:
+    case POOH_ACTION_SIT_DOWN:
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim0Def;
         work->hideShadow = 1;
         break;
-    case 32:
+    case POOH_ACTION_SIT_FOR_HONEY:
         work->flipped = 0;
         e = &sPoohFl05Anim9Def;
         work->hideShadow = 1;
         break;
-    case 33:
+    case POOH_ACTION_EAT_HONEY_1:
         work->flipped = 0;
         e = &sPoohFl09Anim0Def;
         break;
-    case 34:
+    case POOH_ACTION_EAT_HONEY_2:
         work->flipped = 0;
         e = &sPoohFl09Anim1Def;
         break;
-    case 35:
+    case POOH_ACTION_EAT_HONEY_3:
         work->flipped = 0;
         e = &sPoohFl09Anim2Def;
         break;
-    case 24:
+    case POOH_ACTION_SIT:
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim1Def;
         work->hideShadow = 1;
         break;
-    case 25:
+    case POOH_ACTION_LIE_DOWN:
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim2Def;
         work->hideShadow = 1;
         break;
-    case 26:
+    case POOH_ACTION_SLEEP:
         ColliderSetRadius(&work->collider, 14);
         flags |= ANIM_FLAG_LOOP;
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim3Def;
         work->hideShadow = 1;
         break;
-    case 27:
+    case POOH_ACTION_WAKE_UP:
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim4Def;
         work->hideShadow = 1;
         break;
-    case 28:
+    case POOH_ACTION_STAND_UP:
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim5Def;
         work->hideShadow = 1;
         break;
-    case 29:
+    case POOH_ACTION_THINK_START:
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl06Anim1Def;
         break;
-    case 30:
+    case POOH_ACTION_THINK:
         flags |= ANIM_FLAG_LOOP;
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl06Anim2Def;
         break;
-    case 31:
+    case POOH_ACTION_THINK_END:
         work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl06Anim3Def;
         break;
-    case 38:
-    case 39:
+    case POOH_ACTION_BALLOON:
+    case POOH_ACTION_OWL_BALLOON:
         flags |= ANIM_FLAG_LOOP;
         work->flipped = 0;
         e = &sTrap0003Anim0Def;
         break;
-    case 22:
+    case POOH_ACTION_OWL_DESCENT:
         flags |= ANIM_FLAG_LOOP;
         work->flipped = 0;
         e = &sPoohOwlDescentAnimDef;
         break;
-    case 0:
-    case 1:
-    case 2:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
+    case POOH_ACTION_IDLE:
+    case POOH_ACTION_FALL:
+    case POOH_ACTION_WAGON_DROP:
+    case POOH_ACTION_STUMP_WAIT:
+    case POOH_ACTION_LOOK:
+    case POOH_ACTION_BLOCKED:
+    case POOH_ACTION_LOOK_AT_HONEYCOMB_DONE:
+    case POOH_ACTION_LOOK_AT_HONEYCOMB:
+    case POOH_ACTION_WAGON_WAIT:
+    case POOH_ACTION_BEE_CHASE_OVER:
+    case POOH_ACTION_JUMP_SCARED:
         flags |= ANIM_FLAG_LOOP;
         SetPoohDir5Right(work);
         work->lookColumn = GetPoohLookColumn(work);

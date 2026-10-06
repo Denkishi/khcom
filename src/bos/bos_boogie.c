@@ -67,28 +67,28 @@ void BosBoogieApplyDiceFace(BoogieWork* work) {
         gBosBoogieTaskKnockedDown = 0;
 
         if (gBosBoogieDiceFace == 0) {
-            work->state = 8;
+            work->state = BOS_BOOGIE_STATE_WAIT_TASK;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieDisk, &work->actor);
         } else if (gBosBoogieDiceFace == 1) {
-            work->state = 6;
+            work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
             SpawnEnemy(18, 0xA000, 0x24000, 0);
             SpawnEnemy(18, 0x15000, 0x24000, 0);
         } else if (gBosBoogieDiceFace == 2) {
-            work->state = 6;
+            work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
             SpawnEnemy(17, 0xA000, 0x24000, 0);
             SpawnEnemy(17, 0x15000, 0x24000, 0);
         } else if (gBosBoogieDiceFace == 3) {
-            work->state = 8;
+            work->state = BOS_BOOGIE_STATE_WAIT_TASK;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnifereader, NULL);
         } else if (gBosBoogieDiceFace == 4) {
-            work->state = 6;
+            work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
             SpawnEnemy(15, 0xA000, 0x24000, 0);
             SpawnEnemy(15, 0x15000, 0x24000, 0);
         } else {
-            work->state = 8;
+            work->state = BOS_BOOGIE_STATE_WAIT_TASK;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKaihuku, work);
         }
     }
@@ -137,7 +137,7 @@ void task_bos_boogie_0(BoogieWork* work) {
 
     sBoogieWork = work;
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosBoogieMap, (void*)&sBosBoogieBattleBackgroundDef);
-    work->state = 0;
+    work->state = BOS_BOOGIE_STATE_IDLE;
     work->timer = 0;
     gBosBoogieDiceFaceReady = 0;
     gBosBoogieGimmickCardDropped = 0;
@@ -182,6 +182,14 @@ void task_bos_boogie_0(BoogieWork* work) {
     gBtlWork->bossZ = work->actor.z;
 }
 
+enum BosBoogieDefeatStep {
+    BOS_BOOGIE_DEFEAT_STEP_DELAY,
+    BOS_BOOGIE_DEFEAT_STEP_BEGIN,
+    BOS_BOOGIE_DEFEAT_STEP_START_DEATH_FX,
+    BOS_BOOGIE_DEFEAT_STEP_DEATH_FX,
+    BOS_BOOGIE_DEFEAT_STEP_FLASH
+};
+
 u8 task_bos_boogie_1(BoogieWork* work) {
     BtlObj* a = &work->actor;
     PrizeCardArg fx;
@@ -189,31 +197,31 @@ u8 task_bos_boogie_1(BoogieWork* work) {
 
     switch (UpdateBtlObjReaction(a)) {
     case BTL_REACTION_CARD_ACTION:
-        work->state = 1;
+        work->state = BOS_BOOGIE_STATE_CARD_ACTION;
         work->timer = 0;
         break;
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
-        work->state = 3;
+        work->state = BOS_BOOGIE_STATE_HURT;
         work->timer = 0;
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        if (work->state != 4) {
-            work->state = 4;
-            work->defeatStep = 0;
+        if (work->state != BOS_BOOGIE_STATE_DEFEATED) {
+            work->state = BOS_BOOGIE_STATE_DEFEATED;
+            work->defeatStep = BOS_BOOGIE_DEFEAT_STEP_DELAY;
             work->timer = 0;
         }
 
         break;
     case BTL_REACTION_CARD_BROKEN:
-        work->state = 2;
+        work->state = BOS_BOOGIE_STATE_CARD_BROKEN;
         work->timer = 0;
         break;
     default:
-        if (gBosBoogieDiceFaceReady && work->state != 4) {
-            work->state = 5;
+        if (gBosBoogieDiceFaceReady && work->state != BOS_BOOGIE_STATE_DEFEATED) {
+            work->state = BOS_BOOGIE_STATE_DICE_FACE;
             work->timer = 0;
         }
 
@@ -221,7 +229,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
     }
 
     switch (work->state) {
-    case 3:
+    case BOS_BOOGIE_STATE_HURT:
         if (work->timer == 0) {
             AnimReset(&work->anim);
             SetBoogieAnimation(work, 4, 1);
@@ -233,47 +241,47 @@ u8 task_bos_boogie_1(BoogieWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(a);
-            work->state = 0;
+            work->state = BOS_BOOGIE_STATE_IDLE;
             work->timer = 0;
         }
 
         break;
-    case 4:
+    case BOS_BOOGIE_STATE_DEFEATED:
         SetBoogieAnimation(work, 8, 0);
 
         switch (work->defeatStep) {
-        case 0:
+        case BOS_BOOGIE_DEFEAT_STEP_DELAY:
             if (work->timer <= 1) {
                 work->timer++;
             } else {
-                work->defeatStep = 1;
+                work->defeatStep = BOS_BOOGIE_DEFEAT_STEP_BEGIN;
             }
 
             break;
-        case 1:
+        case BOS_BOOGIE_DEFEAT_STEP_BEGIN:
             BeginBossDefeat(a);
-            work->defeatStep = 2;
+            work->defeatStep = BOS_BOOGIE_DEFEAT_STEP_START_DEATH_FX;
             break;
-        case 2:
+        case BOS_BOOGIE_DEFEAT_STEP_START_DEATH_FX:
             if (!FadeIsActive()) {
                 BgFxStartBossDeath(a->x, a->y + a->z - ((s16)sBosBoogieEmyKind.centerHeight << 8));
                 SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
                 FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
-                work->defeatStep = 3;
+                work->defeatStep = BOS_BOOGIE_DEFEAT_STEP_DEATH_FX;
                 work->timer = 0;
             }
 
             break;
-        case 3:
+        case BOS_BOOGIE_DEFEAT_STEP_DEATH_FX:
             if (work->timer <= 119) {
                 work->timer++;
             } else {
-                work->defeatStep = 4;
+                work->defeatStep = BOS_BOOGIE_DEFEAT_STEP_FLASH;
                 BgFxStartBossDeathFlash();
             }
 
             break;
-        case 4:
+        case BOS_BOOGIE_DEFEAT_STEP_FLASH:
             if (!BgFxIsActive()) {
                 fx.x = a->x;
                 fx.y = 0x24000;
@@ -288,14 +296,14 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         }
 
         break;
-    case 0:
+    case BOS_BOOGIE_STATE_IDLE:
         SetBoogieAnimation(work, 0, 1);
 
         if (AnimIsFinished(&work->anim)) {
             random = GetRandom();
 
             if ((random & 15) <= 7 && !FadeIsActive()) {
-                work->state = 11;
+                work->state = BOS_BOOGIE_STATE_WALK;
 
                 if (work->cardRequested) {
                     RequestBossCardRandom();
@@ -310,7 +318,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         }
 
         break;
-    case 11:
+    case BOS_BOOGIE_STATE_WALK:
         SetBoogieAnimation(work, 1, 1);
         work->timer++;
 
@@ -344,7 +352,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
                 work->dice3 = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
                 SetBoogieAnimation(work, 2, 1);
                 m4aSongNumStart(SONG_VO_BO_ATTACK00);
-                work->state = 9;
+                work->state = BOS_BOOGIE_STATE_DICE_THROW;
                 work->timer = 0;
 
 #ifndef VERSION_EU
@@ -363,7 +371,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         random = GetRandom();
 
         if ((random & 255) == 0 && !work->cardRequested) {
-            work->state = 0;
+            work->state = BOS_BOOGIE_STATE_IDLE;
             work->timer = 0;
         } else if (a->flags & BTLOBJ_FLAG_FACING_LEFT) {
             a->x -= 256;
@@ -382,50 +390,50 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_BOOGIE_STATE_DICE_FACE:
         gBosBoogieDiceFaceReady = 0;
         SetBoogieAnimation(work, 6, 0);
 
         if (ConsumeGimmickFlag(0)) {
             BosBoogieApplyGimmick();
-            work->state = 0;
+            work->state = BOS_BOOGIE_STATE_IDLE;
             work->timer = 0;
         } else if (AnimIsFinished(&work->anim)) {
             BosBoogieApplyDiceFace(work);
         }
 
         break;
-    case 6:
+    case BOS_BOOGIE_STATE_SUMMON:
         if (work->timer > 29) {
-            work->state = 7;
+            work->state = BOS_BOOGIE_STATE_DICE_FACE_END;
         } else {
             work->timer++;
         }
 
         break;
-    case 8:
+    case BOS_BOOGIE_STATE_WAIT_TASK:
         if (gBosBoogieAttackHit) {
-            work->state = 10;
+            work->state = BOS_BOOGIE_STATE_ATTACK_HIT;
             work->timer = 0;
         } else if (gBosBoogieTaskKnockedDown) {
-            work->state = 0;
+            work->state = BOS_BOOGIE_STATE_IDLE;
             work->timer = 0;
         } else if (!IsTaskActive(work->task)) {
-            work->state = 7;
+            work->state = BOS_BOOGIE_STATE_DICE_FACE_END;
             work->timer = 0;
         }
 
         break;
-    case 7:
+    case BOS_BOOGIE_STATE_DICE_FACE_END:
         SetBoogieAnimation(work, 7, 0);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 0;
+            work->state = BOS_BOOGIE_STATE_IDLE;
             work->timer = 0;
         }
 
         break;
-    case 9:
+    case BOS_BOOGIE_STATE_DICE_THROW:
         SetBoogieAnimation(work, 2, 1);
 
         if (work->timer == 0) {
@@ -435,17 +443,17 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         work->timer++;
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 0;
+            work->state = BOS_BOOGIE_STATE_IDLE;
             work->timer = 0;
         }
 
         break;
-    case 10:
+    case BOS_BOOGIE_STATE_ATTACK_HIT:
         gBosBoogieAttackHit = 0;
         SetBoogieAnimation(work, 5, 1);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 0;
+            work->state = BOS_BOOGIE_STATE_IDLE;
             work->timer = 0;
         }
 
@@ -521,7 +529,7 @@ void task_bos_boogie_2(BoogieWork* work) {
         f |= 1;
     }
 
-    if (StepHitFlash(a) && work->state != 4) {
+    if (StepHitFlash(a) && work->state != BOS_BOOGIE_STATE_DEFEATED) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -570,7 +578,7 @@ u32 GetBoogieDiceState() {
         return ((BoogieDiceWork*)sBoogieWork->dice->work)->state;
     }
 
-    return 11;
+    return BOS_BOOGIE_DICE_STATE_NONE;
 }
 
 TaskDesc gTaskDescBosBoogie = {

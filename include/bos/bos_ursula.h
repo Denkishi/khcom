@@ -9,6 +9,12 @@
 #include "bos4_api.h"
 #include "obj.h"
 
+enum BosUrsulaHpPhase {
+    BOS_URSULA_HP_PHASE_HIGH,
+    BOS_URSULA_HP_PHASE_MID,
+    BOS_URSULA_HP_PHASE_LOW
+};
+
 typedef struct UrsulaWork {
     u32 state;
     s16 timer;

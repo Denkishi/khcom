@@ -132,13 +132,13 @@ void task_bos_ursula_bubble_0(UrsulaBubbleWork* work) {
     work->bubbleCount = 0;
 
     switch (BosUrsulaGetHpPhase()) {
-    case 2:
+    case BOS_URSULA_HP_PHASE_LOW:
         work->bubbleCount = BosUrsulaSpawnTenBubbles(work);
         break;
-    case 1:
+    case BOS_URSULA_HP_PHASE_MID:
         work->bubbleCount += BosUrsulaSpawnSixBubbles(work);
         break;
-    case 0:
+    case BOS_URSULA_HP_PHASE_HIGH:
     default:
         work->bubbleCount += BosUrsulaSpawnThreeBubbles(work);
         break;
@@ -208,6 +208,12 @@ void* BosUrsulaBubbleAnimGetGfx() {
 }
 #endif
 
+enum BosUrsulaBubbleSingleState {
+    BOS_URSULA_BUBBLE_SINGLE_STATE_LAUNCH,
+    BOS_URSULA_BUBBLE_SINGLE_STATE_HOMING,
+    BOS_URSULA_BUBBLE_SINGLE_STATE_POP
+};
+
 void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     work->angle = *arg;
     work->speed = 0x333;
@@ -227,7 +233,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     AnimInit(&work->anim, gBosUrsulaBubbleAnims, gBosUrsulaBubbleFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 #endif
-    work->state = 0;
+    work->state = BOS_URSULA_BUBBLE_SINGLE_STATE_LAUNCH;
     work->timer = 0x3C;
 }
 
@@ -240,7 +246,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
         work->speed = 0x166;
     }
 
-    if (work->state == 0) {
+    if (work->state == BOS_URSULA_BUBBLE_SINGLE_STATE_LAUNCH) {
         p->x += gSineTable[(u8)work->angle] * work->speed >> 8;
         p->z += -gSineTable[(u8)work->angle + 0x40] * work->speed >> 8;
         work->timer--;
@@ -252,11 +258,11 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 
         if (work->timer == 0) {
             work->timer = 180;
-            work->state = 1;
+            work->state = BOS_URSULA_BUBBLE_SINGLE_STATE_HOMING;
         }
     }
 
-    if (work->state == 1 && work->timer != 0) {
+    if (work->state == BOS_URSULA_BUBBLE_SINGLE_STATE_HOMING && work->timer != 0) {
         work->targetAngle = GetAngle(p->x, p->z,
             gBtlWork->actor->x, gBtlWork->actor->z);
         ApproachAngle(&work->angle, work->targetAngle, 4);
@@ -350,7 +356,7 @@ void BosUrsulaBubblePop(UrsulaBubbleSingleWork* work) {
         AnimStart(&work->anim, 1, 0);
 #endif
         SetBtlObjUnhittable(&work->obj, 1);
-        work->state = 2;
+        work->state = BOS_URSULA_BUBBLE_SINGLE_STATE_POP;
     }
 }
 

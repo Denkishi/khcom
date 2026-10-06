@@ -213,8 +213,23 @@ void BosGaEntryUpdateFall(GaEntryWork* work) {
     ClampBattlePosition(&work->actor.x, &work->actor.y, -0x18, -0x0C);
 }
 
+enum BosGaState {
+    BOS_GA_STATE_ASSEMBLE,
+    BOS_GA_STATE_IDLE,
+    BOS_GA_STATE_WALK,
+    BOS_GA_STATE_STOMP,
+    BOS_GA_STATE_THRUST,
+    BOS_GA_STATE_ORBIT,
+    BOS_GA_STATE_JUMP,
+    BOS_GA_STATE_BODY_CHASE,
+    BOS_GA_STATE_BODY_DASH,
+    BOS_GA_STATE_BODY_JUMP,
+    BOS_GA_STATE_GIMMICK,
+    BOS_GA_STATE_DEFEATED
+};
+
 void BosGaRequestState(GaWork* work, s32 state) {
-    if (work->nextState != 11 && work->state != 11) {
+    if (work->nextState != BOS_GA_STATE_DEFEATED && work->state != BOS_GA_STATE_DEFEATED) {
         work->nextState = state;
         work->flags |= GA_FLAG_STATE_REQUESTED;
     }
@@ -294,6 +309,12 @@ void BosGaUpdateFacing(GaWork* work) {
     }
 }
 
+enum BosGaEntryMode {
+    BOS_GA_ENTRY_MODE_FOLLOW,
+    BOS_GA_ENTRY_MODE_FALL,
+    BOS_GA_ENTRY_MODE_DESTROYED = 3
+};
+
 void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
     GaEntryWork* e;
     void* p;
@@ -302,7 +323,7 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
     e->index = i;
     e->bobZ = 0;
     e->bobAngle = GetRandom();
-    e->mode = 0;
+    e->mode = BOS_GA_ENTRY_MODE_FOLLOW;
     e->vz = 0;
     e->rotation = 0;
     e->flags = 0;
@@ -405,7 +426,7 @@ void BosGaEntryDraw(GaWork* work, GaEntryWork* entry) {
     DrawSprite(sx + entry->x2, sy + entry->y2, entry->gfx, entry->tiles, pal, f, g,
                0xEFFC - ((q->actor.y >> 8) << 2));
 
-    if (entry->index == 0 && work->state != 7 && work->state != 8 && work->state != 9) {
+    if (entry->index == 0 && work->state != BOS_GA_STATE_BODY_CHASE && work->state != BOS_GA_STATE_BODY_DASH && work->state != BOS_GA_STATE_BODY_JUMP) {
         DrawSprite(sx + entry->x2, sy + entry->y2, work->gfx, work->tiles, pal, f, g,
                    0xEFFC - ((q->actor.y >> 8) << 2));
     }
@@ -413,31 +434,47 @@ void BosGaEntryDraw(GaWork* work, GaEntryWork* entry) {
     TaskPoolDraw(&entry->tasks);
 }
 
+enum BosGaPhase {
+    BOS_GA_PHASE_ENTER,
+    BOS_GA_PHASE_UPDATE,
+    BOS_GA_PHASE_EXIT
+};
+
+enum BosGaAssembleStep {
+    BOS_GA_ASSEMBLE_STEP_WAIT,
+    BOS_GA_ASSEMBLE_STEP_START_FALL,
+    BOS_GA_ASSEMBLE_STEP_FALL,
+    BOS_GA_ASSEMBLE_STEP_SETTLE,
+    BOS_GA_ASSEMBLE_STEP_BOUNCE,
+    BOS_GA_ASSEMBLE_STEP_LOWER_HEAD,
+    BOS_GA_ASSEMBLE_STEP_DONE
+};
+
 u8 BosGaUpdateAssemble(GaWork* work) {
     u32 i = 0;
     GaEntryWork* e;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         work->timer = 60;
         work->step = i;
-        work->statePhase = 1;
+        work->statePhase = BOS_GA_PHASE_UPDATE;
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
-        case 0:
+        case BOS_GA_ASSEMBLE_STEP_WAIT:
             work->timer--;
 
             if (work->timer <= 0) {
-                work->step = 1;
+                work->step = BOS_GA_ASSEMBLE_STEP_START_FALL;
             }
 
             break;
-        case 1:
+        case BOS_GA_ASSEMBLE_STEP_START_FALL:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 e->baseVx = 0;
@@ -454,9 +491,9 @@ u8 BosGaUpdateAssemble(GaWork* work) {
 
             gBtlWork->bossZ = -0x2000;
             work->timer = 5;
-            work->step = 2;
+            work->step = BOS_GA_ASSEMBLE_STEP_FALL;
             break;
-        case 2:
+        case BOS_GA_ASSEMBLE_STEP_FALL:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -496,7 +533,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
 
                                 if (work->timer <= 0) {
                                     work->timer = 60;
-                                    work->step = 3;
+                                    work->step = BOS_GA_ASSEMBLE_STEP_SETTLE;
                                 }
                             }
                         }
@@ -505,7 +542,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
             }
 
             break;
-        case 3:
+        case BOS_GA_ASSEMBLE_STEP_SETTLE:
             ApproachValue(&gBtlWork->bossZ, 0, work->timer);
 
             for (i = 0; i <= 5; i++) {
@@ -521,11 +558,11 @@ u8 BosGaUpdateAssemble(GaWork* work) {
             if (work->timer <= 0) {
                 work->timer = 0;
                 work->vz = 256;
-                work->step = 4;
+                work->step = BOS_GA_ASSEMBLE_STEP_BOUNCE;
             }
 
             break;
-        case 4:
+        case BOS_GA_ASSEMBLE_STEP_BOUNCE:
             for (i = 0; i <= 5; i++) {
                 switch (i) {
                 case 0:
@@ -545,12 +582,12 @@ u8 BosGaUpdateAssemble(GaWork* work) {
 
                 if (work->timer <= 0) {
                     work->timer = 60;
-                    work->step = 5;
+                    work->step = BOS_GA_ASSEMBLE_STEP_LOWER_HEAD;
                 }
             }
 
             break;
-        case 5:
+        case BOS_GA_ASSEMBLE_STEP_LOWER_HEAD:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -562,24 +599,24 @@ u8 BosGaUpdateAssemble(GaWork* work) {
             work->timer--;
 
             if (work->timer <= 0) {
-                work->step = 6;
+                work->step = BOS_GA_ASSEMBLE_STEP_DONE;
             }
 
             break;
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
@@ -592,14 +629,14 @@ u8 BosGaUpdateIdle(GaWork* work) {
     s32 dy;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         work->timer = 15;
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         if (gBtlWork->phase == 0) {
             break;
         }
@@ -619,65 +656,65 @@ u8 BosGaUpdateIdle(GaWork* work) {
         if (d <= 0xE0F) {
             if (!work->attackToggle) {
                 if (GetRandom() % 3 != 0) {
-                    BosGaRequestState(work, 1);
+                    BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     RequestEnemyCardUse(&work->entries[0].actor);
                 } else {
-                    BosGaRequestState(work, 2);
+                    BosGaRequestState(work, BOS_GA_STATE_WALK);
                 }
             } else {
                 if (GetRandom() % 3 != 0) {
-                    BosGaRequestState(work, 2);
+                    BosGaRequestState(work, BOS_GA_STATE_WALK);
                 } else {
-                    BosGaRequestState(work, 1);
+                    BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     RequestEnemyCardUse(&work->entries[0].actor);
                 }
             }
         } else if (d <= 0x270F) {
             if (!work->attackToggle) {
                 if (GetRandom() & 1) {
-                    BosGaRequestState(work, 1);
+                    BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     RequestEnemyCardUse(&work->entries[0].actor);
                 } else {
-                    BosGaRequestState(work, 2);
+                    BosGaRequestState(work, BOS_GA_STATE_WALK);
                 }
             } else {
                 if (GetRandom() & 1) {
-                    BosGaRequestState(work, 2);
+                    BosGaRequestState(work, BOS_GA_STATE_WALK);
                 } else {
-                    BosGaRequestState(work, 1);
+                    BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     RequestEnemyCardUse(&work->entries[0].actor);
                 }
             }
         } else {
             if (!work->attackToggle) {
                 if (GetRandom() % 3 != 0) {
-                    BosGaRequestState(work, 2);
+                    BosGaRequestState(work, BOS_GA_STATE_WALK);
                 } else {
-                    BosGaRequestState(work, 1);
+                    BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     RequestEnemyCardUse(&work->entries[0].actor);
                 }
             } else {
                 if (GetRandom() % 3 != 0) {
-                    BosGaRequestState(work, 1);
+                    BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     RequestEnemyCardUse(&work->entries[0].actor);
                 } else {
-                    BosGaRequestState(work, 2);
+                    BosGaRequestState(work, BOS_GA_STATE_WALK);
                 }
             }
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
@@ -690,14 +727,14 @@ u8 BosGaUpdateWalk(GaWork* work) {
     s32 x, y;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     for (i = 0; i <= 5; i++) {
         e = &work->entries[i];
 
         switch (work->statePhase) {
-        case 0: {
+        case BOS_GA_PHASE_ENTER: {
             s32 d;
 
             if (e->index != 0) {
@@ -774,7 +811,7 @@ u8 BosGaUpdateWalk(GaWork* work) {
             BosGaUpdateFacing(work);
             break;
         }
-        case 1:
+        case BOS_GA_PHASE_UPDATE:
             switch (e->index) {
             case 4:
             case 5: {
@@ -838,7 +875,7 @@ u8 BosGaUpdateWalk(GaWork* work) {
                         work->entries[5].flags ^= GA_ENTRY_FLAG_STEPPING;
                         work->entries[4].flags ^= GA_ENTRY_FLAG_STEPPING;
                     } else {
-                        BosGaRequestState(work, 1);
+                        BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     }
                 }
 
@@ -864,7 +901,7 @@ u8 BosGaUpdateWalk(GaWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_GA_PHASE_EXIT:
             switch (e->index) {
             case 4:
             case 5:
@@ -877,18 +914,27 @@ u8 BosGaUpdateWalk(GaWork* work) {
         }
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
+
+enum BosGaStompStep {
+    BOS_GA_STOMP_STEP_STAMP,
+    BOS_GA_STOMP_STEP_STAMP_END,
+    BOS_GA_STOMP_STEP_START_MARCH,
+    BOS_GA_STOMP_STEP_MARCH,
+    BOS_GA_STOMP_STEP_START_RETURN,
+    BOS_GA_STOMP_STEP_RETURN
+};
 
 u8 BosGaUpdateStomp(GaWork* work) {
     u32 i = 0;
@@ -896,11 +942,11 @@ u8 BosGaUpdateStomp(GaWork* work) {
     s32 velocity;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
             for (; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -916,16 +962,16 @@ u8 BosGaUpdateStomp(GaWork* work) {
                     work->stepsLeft = 5;
                     work->vz = 1024;
                     work->vzDelta = work->vz * 2 / work->timer;
-                    work->step = 0;
+                    work->step = BOS_GA_STOMP_STEP_STAMP;
                     BosGaUpdateFacing(work);
                     break;
                 }
             }
 
             break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
-        case 0:
+        case BOS_GA_STOMP_STEP_STAMP:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -964,7 +1010,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
                             work->entries[5].flags ^= GA_ENTRY_FLAG_STEPPING;
                             work->entries[4].flags ^= GA_ENTRY_FLAG_STEPPING;
                         } else {
-                            work->step = 1;
+                            work->step = BOS_GA_STOMP_STEP_STAMP_END;
                         }
                     }
 
@@ -976,13 +1022,13 @@ u8 BosGaUpdateStomp(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_STOMP_STEP_STAMP_END:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
                 switch (e->index) {
                 case 0:
-                    work->step = 2;
+                    work->step = BOS_GA_STOMP_STEP_START_MARCH;
                     break;
                 case 4:
                 case 5:
@@ -994,7 +1040,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_GA_STOMP_STEP_START_MARCH:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -1011,13 +1057,13 @@ u8 BosGaUpdateStomp(GaWork* work) {
                     work->vz = 1024;
                     work->vzDelta = work->vz * 2 / work->timer;
                     work->angle = BosGaGetAngle(e->baseX, e->baseY, gBtlWork->actor->x, gBtlWork->actor->y);
-                    work->step = 3;
+                    work->step = BOS_GA_STOMP_STEP_MARCH;
                     break;
                 }
             }
 
             break;
-        case 3:
+        case BOS_GA_STOMP_STEP_MARCH:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -1084,7 +1130,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
                             work->entries[5].flags ^= GA_ENTRY_FLAG_STEPPING;
                             work->entries[4].flags ^= GA_ENTRY_FLAG_STEPPING;
                         } else {
-                            work->step = 4;
+                            work->step = BOS_GA_STOMP_STEP_START_RETURN;
                         }
                     }
 
@@ -1093,12 +1139,12 @@ u8 BosGaUpdateStomp(GaWork* work) {
             }
 
             break;
-        case 4:
+        case BOS_GA_STOMP_STEP_START_RETURN:
             work->timer = 20;
             work->stepsLeft = 6;
             work->vz = 1024;
             work->vzDelta = work->vz * 2 / work->timer;
-            work->step = 5;
+            work->step = BOS_GA_STOMP_STEP_RETURN;
 
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
@@ -1118,7 +1164,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
             }
 
             break;
-        case 5:
+        case BOS_GA_STOMP_STEP_RETURN:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -1176,7 +1222,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
                             work->entries[5].flags ^= GA_ENTRY_FLAG_STEPPING;
                             work->entries[4].flags ^= GA_ENTRY_FLAG_STEPPING;
                         } else {
-                            BosGaRequestState(work, 1);
+                            BosGaRequestState(work, BOS_GA_STATE_IDLE);
                         }
                     }
 
@@ -1188,7 +1234,7 @@ u8 BosGaUpdateStomp(GaWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         for (; i <= 5; i++) {
             e = &work->entries[i];
 
@@ -1208,36 +1254,43 @@ u8 BosGaUpdateStomp(GaWork* work) {
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
 
+enum BosGaThrustStep {
+    BOS_GA_THRUST_STEP_FAR_WINDUP,
+    BOS_GA_THRUST_STEP_FAR_THRUST,
+    BOS_GA_THRUST_STEP_NEAR_WINDUP,
+    BOS_GA_THRUST_STEP_NEAR_THRUST
+};
+
 u8 BosGaUpdateThrust(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     for (i = 0; i <= 5; i++) {
         e = &work->entries[i];
 
         switch (work->statePhase) {
-        case 0:
+        case BOS_GA_PHASE_ENTER:
             switch (e->index) {
             case 0:
                 work->timer = 0;
-                work->step = 0;
+                work->step = BOS_GA_THRUST_STEP_FAR_WINDUP;
                 break;
             case 2:
             case 3:
@@ -1246,23 +1299,23 @@ u8 BosGaUpdateThrust(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_PHASE_UPDATE:
             switch (work->step) {
-            case 0:
+            case BOS_GA_THRUST_STEP_FAR_WINDUP:
                 if (e->index == 3) {
                     e->baseX = e->baseX + (!work->flipped ? 0x80 : -0x80);
                     work->timer++;
 
                     if (work->timer > 30) {
                         work->timer = 0;
-                        work->step = 1;
+                        work->step = BOS_GA_THRUST_STEP_FAR_THRUST;
                     }
                 } else {
                     BosGaEntryResetHome(work, i);
                 }
 
                 break;
-            case 1:
+            case BOS_GA_THRUST_STEP_FAR_THRUST:
                 if (e->index == 3) {
                     e->baseX = e->baseX + (!work->flipped ? -0x300 : 0x300);
                     e->baseY += 0x133;
@@ -1277,28 +1330,28 @@ u8 BosGaUpdateThrust(GaWork* work) {
 
                     if (work->timer > 15) {
                         work->timer = 0;
-                        work->step = 2;
+                        work->step = BOS_GA_THRUST_STEP_NEAR_WINDUP;
                     }
                 } else {
                     BosGaEntryResetHome(work, i);
                 }
 
                 break;
-            case 2:
+            case BOS_GA_THRUST_STEP_NEAR_WINDUP:
                 if (e->index == 2) {
                     e->baseX = e->baseX + (!work->flipped ? 0x80 : -0x80);
                     work->timer++;
 
                     if (work->timer > 30) {
                         work->timer = 0;
-                        work->step = 3;
+                        work->step = BOS_GA_THRUST_STEP_NEAR_THRUST;
                     }
                 } else {
                     BosGaEntryResetHome(work, i);
                 }
 
                 break;
-            case 3:
+            case BOS_GA_THRUST_STEP_NEAR_THRUST:
                 if (e->index == 2) {
                     e->baseX = e->baseX + (!work->flipped ? -0x300 : 0x300);
                     e->baseY -= 0x133;
@@ -1312,7 +1365,7 @@ u8 BosGaUpdateThrust(GaWork* work) {
                     work->timer++;
 
                     if (work->timer > 15) {
-                        BosGaRequestState(work, 1);
+                        BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     }
                 } else {
                     BosGaEntryResetHome(work, i);
@@ -1322,7 +1375,7 @@ u8 BosGaUpdateThrust(GaWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_GA_PHASE_EXIT:
             switch (e->index) {
             case 0:
                 ClearBtlObjActionFlags(&e->actor);
@@ -1338,18 +1391,23 @@ u8 BosGaUpdateThrust(GaWork* work) {
         }
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
+
+enum BosGaOrbitStep {
+    BOS_GA_ORBIT_STEP_WINDUP,
+    BOS_GA_ORBIT_STEP_SPIN
+};
 
 u8 BosGaUpdateOrbit(GaWork* work) {
     GaEntryWork* e;
@@ -1357,17 +1415,17 @@ u8 BosGaUpdateOrbit(GaWork* work) {
     s32 t;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     for (i = 0; i <= 5; i++) {
         e = &work->entries[i];
 
         switch (work->statePhase) {
-        case 0:
+        case BOS_GA_PHASE_ENTER:
             switch (e->index) {
             case 0:
-                work->step = 0;
+                work->step = BOS_GA_ORBIT_STEP_WINDUP;
                 work->timer = 0;
                 work->orbitRadius = 0x1E00;
                 break;
@@ -1382,16 +1440,16 @@ u8 BosGaUpdateOrbit(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_PHASE_UPDATE:
             switch (work->step) {
-            case 0:
+            case BOS_GA_ORBIT_STEP_WINDUP:
                 switch (e->index) {
                 case 0:
                     work->timer++;
 
                     if (work->timer > 31) {
                         work->timer = 0;
-                        work->step = 1;
+                        work->step = BOS_GA_ORBIT_STEP_SPIN;
                     }
 
                     break;
@@ -1413,14 +1471,14 @@ u8 BosGaUpdateOrbit(GaWork* work) {
                 }
 
                 break;
-            case 1:
+            case BOS_GA_ORBIT_STEP_SPIN:
                 switch (e->index) {
                 case 0:
                     work->orbitRadius += 0x59;
                     work->timer++;
 
                     if (work->timer > 0x7F) {
-                        BosGaRequestState(work, 1);
+                        BosGaRequestState(work, BOS_GA_STATE_IDLE);
                     }
 
                     break;
@@ -1446,7 +1504,7 @@ u8 BosGaUpdateOrbit(GaWork* work) {
             }
 
             break;
-        case 2:
+        case BOS_GA_PHASE_EXIT:
             switch (e->index) {
             case 0:
                 ClearBtlObjActionFlags(&e->actor);
@@ -1462,18 +1520,26 @@ u8 BosGaUpdateOrbit(GaWork* work) {
         }
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
+
+enum BosGaJumpStep {
+    BOS_GA_JUMP_STEP_CROUCH,
+    BOS_GA_JUMP_STEP_LEAP,
+    BOS_GA_JUMP_STEP_AIRBORNE,
+    BOS_GA_JUMP_STEP_LAND,
+    BOS_GA_JUMP_STEP_RECOVER
+};
 
 u8 BosGaUpdateJump(GaWork* work) {
     GaEntryWork* e;
@@ -1483,11 +1549,11 @@ u8 BosGaUpdateJump(GaWork* work) {
     e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
             e->flags |= GA_ENTRY_FLAG_NO_BOB;
@@ -1498,15 +1564,15 @@ u8 BosGaUpdateJump(GaWork* work) {
             }
         }
 
-        work->step = 0;
+        work->step = BOS_GA_JUMP_STEP_CROUCH;
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
-        case 0:
+        case BOS_GA_JUMP_STEP_CROUCH:
             gBtlWork->bossZ += 0x33;
 
             if (gBtlWork->bossZ > 0x1800) {
-                work->step = 1;
+                work->step = BOS_GA_JUMP_STEP_LEAP;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1516,14 +1582,14 @@ u8 BosGaUpdateJump(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_JUMP_STEP_LEAP:
             gBtlWork->bossZ = 0;
             work->vx = (gBtlWork->actor->x - gBtlWork->bossX) / 60;
             work->vy = (gBtlWork->actor->y - gBtlWork->bossY) / 60;
             work->vz = 0x600;
-            work->step = 2;
+            work->step = BOS_GA_JUMP_STEP_AIRBORNE;
             break;
-        case 2:
+        case BOS_GA_JUMP_STEP_AIRBORNE:
             gBtlWork->bossX += work->vx;
             gBtlWork->bossY += work->vy;
             gBtlWork->bossZ -= work->vz;
@@ -1533,7 +1599,7 @@ u8 BosGaUpdateJump(GaWork* work) {
                 BtlMapStartShake();
                 m4aSongNumStart(SONG_BTL_IRON_RUMB);
                 ApplyAttackBox(0xE5, gBtlWork->viewX, gBtlWork->viewY, 0, 0x140, 0xF0, 1);
-                work->step = 3;
+                work->step = BOS_GA_JUMP_STEP_LAND;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1541,18 +1607,18 @@ u8 BosGaUpdateJump(GaWork* work) {
             }
 
             break;
-        case 3:
+        case BOS_GA_JUMP_STEP_LAND:
             gBtlWork->bossZ = 0;
             work->vz = 0x100;
-            work->step = 4;
+            work->step = BOS_GA_JUMP_STEP_RECOVER;
             break;
-        case 4:
+        case BOS_GA_JUMP_STEP_RECOVER:
             gBtlWork->bossZ += work->vz;
             t = work->vz - 7;
             work->vz = t;
 
             if (gBtlWork->bossZ <= 0 && t < 0) {
-                BosGaRequestState(work, 1);
+                BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1565,7 +1631,7 @@ u8 BosGaUpdateJump(GaWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
@@ -1590,18 +1656,26 @@ u8 BosGaUpdateJump(GaWork* work) {
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
+
+enum BosGaBodyStep {
+    BOS_GA_BODY_STEP_LOWER,
+    BOS_GA_BODY_STEP_START_MOVE,
+    BOS_GA_BODY_STEP_MOVE,
+    BOS_GA_BODY_STEP_STOP,
+    BOS_GA_BODY_STEP_RAISE
+};
 
 u8 BosGaUpdateBodyChase(GaWork* work) {
     GaEntryWork* e;
@@ -1610,11 +1684,11 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
     e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
             e->flags |= GA_ENTRY_FLAG_NO_BOB;
@@ -1630,15 +1704,15 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
             }
         }
 
-        work->step = 0;
+        work->step = BOS_GA_BODY_STEP_LOWER;
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
-        case 0:
+        case BOS_GA_BODY_STEP_LOWER:
             gBtlWork->bossZ += 0x66;
 
             if (gBtlWork->bossZ > 0x25FF) {
-                work->step = 1;
+                work->step = BOS_GA_BODY_STEP_START_MOVE;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1650,14 +1724,14 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_BODY_STEP_START_MOVE:
             work->vx = 0;
             work->vy = 0;
             work->timer = 0x12C;
-            work->step = 2;
+            work->step = BOS_GA_BODY_STEP_MOVE;
             BosGaUpdateFacing(work);
             break;
-        case 2:
+        case BOS_GA_BODY_STEP_MOVE:
             work->angle = BosGaGetAngle(gBtlWork->bossX, gBtlWork->bossY, gBtlWork->actor->x, gBtlWork->actor->y);
             work->vx += gSineTable[work->angle] * 5 >> 8;
 
@@ -1709,13 +1783,13 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
 
             if (ApplyAttackBox(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
-                work->step = 3;
+                work->step = BOS_GA_BODY_STEP_STOP;
             }
 
             work->timer--;
 
             if (work->timer < 0) {
-                work->step = 3;
+                work->step = BOS_GA_BODY_STEP_STOP;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1734,14 +1808,14 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
             }
 
             break;
-        case 3:
-            work->step = 4;
+        case BOS_GA_BODY_STEP_STOP:
+            work->step = BOS_GA_BODY_STEP_RAISE;
             break;
-        case 4:
+        case BOS_GA_BODY_STEP_RAISE:
             gBtlWork->bossZ -= 0x33;
 
             if (gBtlWork->bossZ <= 0) {
-                BosGaRequestState(work, 1);
+                BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1756,7 +1830,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
@@ -1781,13 +1855,13 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
@@ -1801,11 +1875,11 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
     e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
             e->flags |= GA_ENTRY_FLAG_NO_BOB;
@@ -1821,15 +1895,15 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
             }
         }
 
-        work->step = 0;
+        work->step = BOS_GA_BODY_STEP_LOWER;
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
-        case 0:
+        case BOS_GA_BODY_STEP_LOWER:
             gBtlWork->bossZ += 0x66;
 
             if (gBtlWork->bossZ > 0x25FF) {
-                work->step = 1;
+                work->step = BOS_GA_BODY_STEP_START_MOVE;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1841,15 +1915,15 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_BODY_STEP_START_MOVE:
             work->angle = BosGaGetAngle(gBtlWork->bossX, gBtlWork->bossY, gBtlWork->actor->x, gBtlWork->actor->y);
             work->vx = gSineTable[work->angle] * 4;
             work->vy = -gSineTable[work->angle + 0x40] * 4;
             work->timer = 0x12C;
-            work->step = 2;
+            work->step = BOS_GA_BODY_STEP_MOVE;
             BosGaUpdateFacing(work);
             break;
-        case 2:
+        case BOS_GA_BODY_STEP_MOVE:
             gBtlWork->bossX += work->vx;
 
             if (work->vx < 0) {
@@ -1884,13 +1958,13 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
 
             if (ApplyAttackBox(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
-                work->step = 3;
+                work->step = BOS_GA_BODY_STEP_STOP;
             }
 
             work->timer--;
 
             if (work->timer < 0) {
-                work->step = 3;
+                work->step = BOS_GA_BODY_STEP_STOP;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1909,14 +1983,14 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
             }
 
             break;
-        case 3:
-            work->step = 4;
+        case BOS_GA_BODY_STEP_STOP:
+            work->step = BOS_GA_BODY_STEP_RAISE;
             break;
-        case 4:
+        case BOS_GA_BODY_STEP_RAISE:
             gBtlWork->bossZ -= 0x33;
 
             if (gBtlWork->bossZ <= 0) {
-                BosGaRequestState(work, 1);
+                BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
 
             for (i = 0; i <= 5; i++) {
@@ -1931,7 +2005,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
@@ -1956,13 +2030,13 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
@@ -1976,11 +2050,11 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
     e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
             e->flags |= GA_ENTRY_FLAG_NO_BOB;
@@ -1996,17 +2070,17 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
             }
         }
 
-        work->step = 0;
+        work->step = BOS_GA_BODY_STEP_LOWER;
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
-        case 0:
+        case BOS_GA_BODY_STEP_LOWER:
             gBtlWork->bossZ += 0x66;
 
             if (gBtlWork->bossZ > 0x25FF) {
                 gBtlWork->bossZ = 0x2600;
                 work->timer = 3;
-                work->step = 1;
+                work->step = BOS_GA_BODY_STEP_START_MOVE;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -2018,15 +2092,15 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_BODY_STEP_START_MOVE:
             work->vx = (gBtlWork->actor->x - gBtlWork->bossX) / 60;
             work->vy = (gBtlWork->actor->y - gBtlWork->bossY) / 60;
             work->vz = -0x400;
             work->vzDelta = 0x22;
-            work->step = 2;
+            work->step = BOS_GA_BODY_STEP_MOVE;
             BosGaUpdateFacing(work);
             break;
-        case 2:
+        case BOS_GA_BODY_STEP_MOVE:
             gBtlWork->bossX += work->vx;
 
             if (work->vx < 0) {
@@ -2070,9 +2144,9 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
                 work->timer--;
 
                 if (work->timer > 0) {
-                    work->step = 1;
+                    work->step = BOS_GA_BODY_STEP_START_MOVE;
                 } else {
-                    work->step = 3;
+                    work->step = BOS_GA_BODY_STEP_STOP;
                 }
             }
 
@@ -2092,14 +2166,14 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
             }
 
             break;
-        case 3:
-            work->step = 4;
+        case BOS_GA_BODY_STEP_STOP:
+            work->step = BOS_GA_BODY_STEP_RAISE;
             break;
-        case 4:
+        case BOS_GA_BODY_STEP_RAISE:
             gBtlWork->bossZ -= 0x33;
 
             if (gBtlWork->bossZ <= 0) {
-                BosGaRequestState(work, 1);
+                BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
 
             for (i = 0; i <= 5; i++) {
@@ -2114,7 +2188,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
@@ -2139,13 +2213,13 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
@@ -2160,11 +2234,11 @@ u8 BosGaUpdateGimmick(GaWork* work) {
     e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         work->timer = 0x12C;
 
         for (i = 0; i <= 5; i++) {
@@ -2174,7 +2248,7 @@ u8 BosGaUpdateGimmick(GaWork* work) {
                 e->vz = -COS(GetRandom() % 0x20) * -3;
                 e->vx = SIN(GetRandom() % 0x100) * 0x233 >> 8;
                 e->vy = -COS(GetRandom() % 0x100) * 0x233 >> 8;
-                e->mode = 1;
+                e->mode = BOS_GA_ENTRY_MODE_FALL;
 
                 if (i == 0) {
                     AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
@@ -2186,16 +2260,16 @@ u8 BosGaUpdateGimmick(GaWork* work) {
         m4aSongNumStart(SONG_BTL_IRON_GIMICBREAK);
         BtlMapStartShake();
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         work->timer--;
 
         if (work->timer > 0) {
             break;
         }
 
-        BosGaRequestState(work, 1);
+        BosGaRequestState(work, BOS_GA_STATE_IDLE);
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
@@ -2216,18 +2290,28 @@ u8 BosGaUpdateGimmick(GaWork* work) {
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
     return 1;
 }
+
+enum BosGaDefeatStep {
+    BOS_GA_DEFEAT_STEP_COLLAPSE,
+    BOS_GA_DEFEAT_STEP_START_HEAD_SLIDE,
+    BOS_GA_DEFEAT_STEP_HEAD_SLIDE,
+    BOS_GA_DEFEAT_STEP_START_HEAD_FALL,
+    BOS_GA_DEFEAT_STEP_HEAD_FALL,
+    BOS_GA_DEFEAT_STEP_START_DEATH,
+    BOS_GA_DEFEAT_STEP_DEATH
+};
 
 u8 BosGaUpdateDefeat(GaWork* work) {
     CharaObjParam param;
@@ -2236,11 +2320,11 @@ u8 BosGaUpdateDefeat(GaWork* work) {
     u8 result = 1;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
-        work->statePhase = 2;
+        work->statePhase = BOS_GA_PHASE_EXIT;
     }
 
     switch (work->statePhase) {
-    case 0:
+    case BOS_GA_PHASE_ENTER:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
             e->flags |= GA_ENTRY_FLAG_NO_BOB;
@@ -2258,11 +2342,11 @@ u8 BosGaUpdateDefeat(GaWork* work) {
         }
 
         work->timer = 3;
-        work->step = 0;
+        work->step = BOS_GA_DEFEAT_STEP_COLLAPSE;
         break;
-    case 1:
+    case BOS_GA_PHASE_UPDATE:
         switch (work->step) {
-        case 0:
+        case BOS_GA_DEFEAT_STEP_COLLAPSE:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -2279,7 +2363,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
                         work->timer--;
 
                         if (work->timer <= 0) {
-                            work->step = 1;
+                            work->step = BOS_GA_DEFEAT_STEP_START_HEAD_SLIDE;
                         }
                     }
 
@@ -2292,7 +2376,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_GA_DEFEAT_STEP_START_HEAD_SLIDE:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -2300,12 +2384,12 @@ u8 BosGaUpdateDefeat(GaWork* work) {
                     work->timer = 20;
                     e->baseVx = (!work->flipped ? -0xA00 : 0xA00) / work->timer;
                     e->baseVy = 0x600 / work->timer;
-                    work->step = 2;
+                    work->step = BOS_GA_DEFEAT_STEP_HEAD_SLIDE;
                 }
             }
 
             break;
-        case 2:
+        case BOS_GA_DEFEAT_STEP_HEAD_SLIDE:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -2315,25 +2399,25 @@ u8 BosGaUpdateDefeat(GaWork* work) {
                     work->timer--;
 
                     if (work->timer <= 0) {
-                        work->step = 3;
+                        work->step = BOS_GA_DEFEAT_STEP_START_HEAD_FALL;
                     }
                 }
             }
 
             break;
-        case 3:
+        case BOS_GA_DEFEAT_STEP_START_HEAD_FALL:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
                 if (i == 1) {
                     e->baseVz = 0;
                     work->timer = 3;
-                    work->step = 4;
+                    work->step = BOS_GA_DEFEAT_STEP_HEAD_FALL;
                 }
             }
 
             break;
-        case 4:
+        case BOS_GA_DEFEAT_STEP_HEAD_FALL:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -2348,14 +2432,14 @@ u8 BosGaUpdateDefeat(GaWork* work) {
                         work->timer--;
 
                         if (work->timer <= 0) {
-                            work->step = 5;
+                            work->step = BOS_GA_DEFEAT_STEP_START_DEATH;
                         }
                     }
                 }
             }
 
             break;
-        case 5:
+        case BOS_GA_DEFEAT_STEP_START_DEATH:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
 
@@ -2385,9 +2469,9 @@ u8 BosGaUpdateDefeat(GaWork* work) {
             param.paletteSize2 = 0;
             param.callback = BosGaReleaseBody;
             CharaObjInitDefeat(&param);
-            work->step = 6;
+            work->step = BOS_GA_DEFEAT_STEP_DEATH;
             break;
-        case 6:
+        case BOS_GA_DEFEAT_STEP_DEATH:
             if (!CharaObjUpdateDefeat()) {
                 EndBossDefeat();
                 result = 0;
@@ -2397,17 +2481,17 @@ u8 BosGaUpdateDefeat(GaWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_GA_PHASE_EXIT:
         break;
     }
 
-    if (work->statePhase == 0) {
-        work->statePhase = 1;
+    if (work->statePhase == BOS_GA_PHASE_ENTER) {
+        work->statePhase = BOS_GA_PHASE_UPDATE;
     }
 
-    if (work->statePhase == 2) {
+    if (work->statePhase == BOS_GA_PHASE_EXIT) {
         work->state = work->nextState;
-        work->statePhase = 0;
+        work->statePhase = BOS_GA_PHASE_ENTER;
         work->flags &= ~GA_FLAG_STATE_REQUESTED;
     }
 
@@ -2429,7 +2513,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
     case BTL_REACTION_CARD_ACTION:
         work->cardActionSeen = 1;
 
-        if (work->state == 10 || work->nextState == 10) {
+        if (work->state == BOS_GA_STATE_GIMMICK || work->nextState == BOS_GA_STATE_GIMMICK) {
             ClearBtlObjActionFlags(&entry->actor);
         } else {
             d1 = gBtlWork->actor->x - entry->baseX;
@@ -2440,13 +2524,13 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
             if (work->entries[2].flags & work->entries[3].flags & work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) {
                 switch (GetRandom() % 3) {
                 case 0:
-                    BosGaRequestState(work, 7);
+                    BosGaRequestState(work, BOS_GA_STATE_BODY_CHASE);
                     break;
                 case 1:
-                    BosGaRequestState(work, 8);
+                    BosGaRequestState(work, BOS_GA_STATE_BODY_DASH);
                     break;
                 case 2:
-                    BosGaRequestState(work, 9);
+                    BosGaRequestState(work, BOS_GA_STATE_BODY_JUMP);
                     break;
                 }
             } else if (d1 + d2 <= 0xE0FFF) {
@@ -2459,23 +2543,23 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                         }
 
                         if (work->flipped == flag) {
-                            BosGaRequestState(work, 4);
+                            BosGaRequestState(work, BOS_GA_STATE_THRUST);
                         } else {
-                            BosGaRequestState(work, 5);
+                            BosGaRequestState(work, BOS_GA_STATE_ORBIT);
                         }
                     } else {
                         if (!work->attackToggle) {
-                            BosGaRequestState(work, 6);
+                            BosGaRequestState(work, BOS_GA_STATE_JUMP);
                         } else {
-                            BosGaRequestState(work, 3);
+                            BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     }
                 } else {
                     if ((work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
                         if (!work->attackToggle) {
-                            BosGaRequestState(work, 6);
+                            BosGaRequestState(work, BOS_GA_STATE_JUMP);
                         } else {
-                            BosGaRequestState(work, 3);
+                            BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     } else {
                         flag = 0;
@@ -2485,9 +2569,9 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                         }
 
                         if (work->flipped == flag) {
-                            BosGaRequestState(work, 4);
+                            BosGaRequestState(work, BOS_GA_STATE_THRUST);
                         } else {
-                            BosGaRequestState(work, 5);
+                            BosGaRequestState(work, BOS_GA_STATE_ORBIT);
                         }
                     }
                 }
@@ -2501,23 +2585,23 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                         }
 
                         if (work->flipped == flag) {
-                            BosGaRequestState(work, 4);
+                            BosGaRequestState(work, BOS_GA_STATE_THRUST);
                         } else {
-                            BosGaRequestState(work, 5);
+                            BosGaRequestState(work, BOS_GA_STATE_ORBIT);
                         }
                     } else {
                         if (!work->attackToggle) {
-                            BosGaRequestState(work, 6);
+                            BosGaRequestState(work, BOS_GA_STATE_JUMP);
                         } else {
-                            BosGaRequestState(work, 3);
+                            BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     }
                 } else {
                     if ((work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
                         if (!work->attackToggle) {
-                            BosGaRequestState(work, 6);
+                            BosGaRequestState(work, BOS_GA_STATE_JUMP);
                         } else {
-                            BosGaRequestState(work, 3);
+                            BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     } else {
                         flag = 0;
@@ -2527,9 +2611,9 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                         }
 
                         if (work->flipped == flag) {
-                            BosGaRequestState(work, 4);
+                            BosGaRequestState(work, BOS_GA_STATE_THRUST);
                         } else {
-                            BosGaRequestState(work, 5);
+                            BosGaRequestState(work, BOS_GA_STATE_ORBIT);
                         }
                     }
                 }
@@ -2543,23 +2627,23 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                         }
 
                         if (work->flipped == flag) {
-                            BosGaRequestState(work, 4);
+                            BosGaRequestState(work, BOS_GA_STATE_THRUST);
                         } else {
-                            BosGaRequestState(work, 5);
+                            BosGaRequestState(work, BOS_GA_STATE_ORBIT);
                         }
                     } else {
                         if (!work->attackToggle) {
-                            BosGaRequestState(work, 6);
+                            BosGaRequestState(work, BOS_GA_STATE_JUMP);
                         } else {
-                            BosGaRequestState(work, 3);
+                            BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     }
                 } else {
                     if ((work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
                         if (!work->attackToggle) {
-                            BosGaRequestState(work, 6);
+                            BosGaRequestState(work, BOS_GA_STATE_JUMP);
                         } else {
-                            BosGaRequestState(work, 3);
+                            BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     } else {
                         flag = 0;
@@ -2569,9 +2653,9 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                         }
 
                         if (work->flipped == flag) {
-                            BosGaRequestState(work, 4);
+                            BosGaRequestState(work, BOS_GA_STATE_THRUST);
                         } else {
-                            BosGaRequestState(work, 5);
+                            BosGaRequestState(work, BOS_GA_STATE_ORBIT);
                         }
                     }
                 }
@@ -2606,32 +2690,32 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
 
         if (entry->index == 0) {
             BeginBossDefeat(&entry->actor);
-            entry->mode = 0;
+            entry->mode = BOS_GA_ENTRY_MODE_FOLLOW;
             entry->counter = 0;
-            work->entries[1].mode = 0;
+            work->entries[1].mode = BOS_GA_ENTRY_MODE_FOLLOW;
             work->entries[1].counter = 0;
-            BosGaRequestState(work, 11);
+            BosGaRequestState(work, BOS_GA_STATE_DEFEATED);
         } else {
-            entry->mode = 3;
+            entry->mode = BOS_GA_ENTRY_MODE_DESTROYED;
             entry->counter = 0;
 
-            if (work->state != 10 && work->nextState != 10) {
+            if (work->state != BOS_GA_STATE_GIMMICK && work->nextState != BOS_GA_STATE_GIMMICK) {
                 if (work->cardActionSeen) {
                     ClearBtlObjActionFlags(&work->entries[0].actor);
                 }
 
-                BosGaRequestState(work, 1);
+                BosGaRequestState(work, BOS_GA_STATE_IDLE);
             }
         }
 
         break;
     case BTL_REACTION_CARD_BROKEN:
-        if (work->state != 10 && work->nextState != 10) {
+        if (work->state != BOS_GA_STATE_GIMMICK && work->nextState != BOS_GA_STATE_GIMMICK) {
             if (GetRandom() % 100 < 30) {
                 DropGimmickCard(0, entry->baseX, entry->baseY, entry->baseZ);
             }
 
-            BosGaRequestState(work, 1);
+            BosGaRequestState(work, BOS_GA_STATE_IDLE);
         }
 
         ClearBtlObjActionFlags(&entry->actor);
@@ -2639,7 +2723,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
     }
 
     switch ((u32)entry->mode) {
-    case 0:
+    case BOS_GA_ENTRY_MODE_FOLLOW:
         v = (entry->baseX - entry->actor.x) >> 1;
 
         if (v > 0x600) {
@@ -2678,10 +2762,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
         entry->bobZ = gSineTable[entry->bobAngle] << 2;
         entry->bobAngle += 4;
         break;
-    case 1:
+    case BOS_GA_ENTRY_MODE_FALL:
         BosGaEntryUpdateFall(entry);
         break;
-    case 3:
+    case BOS_GA_ENTRY_MODE_DESTROYED:
         if (entry->counter == 0) {
             entry->flags |= GA_ENTRY_FLAG_HURT;
             entry->flashTimer = 0;
@@ -2736,14 +2820,14 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
     sGaWork = work;
 
     if (arg == 0) {
-        work->state = 1;
+        work->state = BOS_GA_STATE_IDLE;
     } else {
-        work->state = 0;
+        work->state = BOS_GA_STATE_ASSEMBLE;
     }
 
     work->nextState = work->state;
     work->flags = 0;
-    work->statePhase = 0;
+    work->statePhase = BOS_GA_PHASE_ENTER;
     work->timer = 0;
     work->stepsLeft = 0;
     work->hurtTimer = 0;
@@ -2796,51 +2880,51 @@ u8 task_bos_ga_1(GaWork* work) {
     } while (i <= 5);
 
     switch (work->state) {
-    case 0:
+    case BOS_GA_STATE_ASSEMBLE:
         result = BosGaUpdateAssemble(work);
         break;
-    case 1:
+    case BOS_GA_STATE_IDLE:
         result = BosGaUpdateIdle(work);
         break;
-    case 2:
+    case BOS_GA_STATE_WALK:
         result = BosGaUpdateWalk(work);
         break;
-    case 3:
+    case BOS_GA_STATE_STOMP:
         result = BosGaUpdateStomp(work);
         break;
-    case 4:
+    case BOS_GA_STATE_THRUST:
         result = BosGaUpdateThrust(work);
         break;
-    case 5:
+    case BOS_GA_STATE_ORBIT:
         result = BosGaUpdateOrbit(work);
         break;
-    case 6:
+    case BOS_GA_STATE_JUMP:
         result = BosGaUpdateJump(work);
         break;
-    case 7:
+    case BOS_GA_STATE_BODY_CHASE:
         result = BosGaUpdateBodyChase(work);
         break;
-    case 8:
+    case BOS_GA_STATE_BODY_DASH:
         result = BosGaUpdateBodyDash(work);
         break;
-    case 9:
+    case BOS_GA_STATE_BODY_JUMP:
         result = BosGaUpdateBodyJump(work);
         break;
-    case 10:
+    case BOS_GA_STATE_GIMMICK:
         result = BosGaUpdateGimmick(work);
         break;
-    case 11:
+    case BOS_GA_STATE_DEFEATED:
         result = BosGaUpdateDefeat(work);
         break;
     }
 
     if (ConsumeGimmickFlag(0)) {
-        BosGaRequestState(work, 10);
+        BosGaRequestState(work, BOS_GA_STATE_GIMMICK);
     }
 
     anim = &work->entries[1].anim;
 
-    if (AnimIsFinished(anim) && GetRandom() % 100 == 0 && work->state != 11) {
+    if (AnimIsFinished(anim) && GetRandom() % 100 == 0 && work->state != BOS_GA_STATE_DEFEATED) {
         AnimStart(anim, 1, 0);
     }
 

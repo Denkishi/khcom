@@ -126,11 +126,11 @@ static const EventCharaKeyframe sEvent103Track4[14] = {
 };
 
 static const EventCharaTrack sEvent103Tracks[5] = {
-    { sEvent103Track0, 15 },
-    { sEvent103Track1, 0 },
-    { sEvent103Track2, 1 },
-    { sEvent103Track3, 2 },
-    { sEvent103Track4, 20 },
+    { sEvent103Track0, EVENT_CHARA_ARIEL },
+    { sEvent103Track1, EVENT_CHARA_SORA },
+    { sEvent103Track2, EVENT_CHARA_DONALD },
+    { sEvent103Track3, EVENT_CHARA_GOOFY },
+    { sEvent103Track4, EVENT_CHARA_URSULA },
 };
 
 const EventSequenceDef gEvent103 = {

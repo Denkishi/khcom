@@ -37,8 +37,8 @@ static const EventCharaKeyframe sEvent008Track1[1] = {
 };
 
 static const EventCharaTrack sEvent008Tracks[2] = {
-    { sEvent008Track0, 0 },
-    { sEvent008Track1, 104 },
+    { sEvent008Track0, EVENT_CHARA_SORA },
+    { sEvent008Track1, EVENT_CHARA_BOSS_GUARD_ARMOR },
 };
 
 const EventSequenceDef gEvent008 = {

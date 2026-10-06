@@ -90,9 +90,9 @@ static const EventCharaKeyframe sEvent178Track2[4] = {
 };
 
 static const EventCharaTrack sEvent178Tracks[3] = {
-    { sEvent178Track0, 44 },
-    { sEvent178Track1, 83 },
-    { sEvent178Track2, 34 },
+    { sEvent178Track0, EVENT_CHARA_RIKU },
+    { sEvent178Track1, EVENT_CHARA_ZEXION },
+    { sEvent178Track2, EVENT_CHARA_KAIRI },
 };
 
 const EventSequenceDef gEvent178 = {

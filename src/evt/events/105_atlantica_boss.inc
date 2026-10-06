@@ -27,8 +27,8 @@ static const EventCharaKeyframe sEvent105Track1[1] = {
 };
 
 static const EventCharaTrack sEvent105Tracks[2] = {
-    { sEvent105Track0, 0 },
-    { sEvent105Track1, 99 },
+    { sEvent105Track0, EVENT_CHARA_SORA },
+    { sEvent105Track1, EVENT_CHARA_BOSS_URSULA },
 };
 
 const EventSequenceDef gEvent105 = {

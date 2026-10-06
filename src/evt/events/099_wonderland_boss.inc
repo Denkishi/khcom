@@ -33,8 +33,8 @@ static const EventCharaKeyframe sEvent099Track1[3] = {
 };
 
 static const EventCharaTrack sEvent099Tracks[2] = {
-    { sEvent099Track0, 0 },
-    { sEvent099Track1, 95 },
+    { sEvent099Track0, EVENT_CHARA_SORA },
+    { sEvent099Track1, EVENT_CHARA_BOSS_TRICKMASTER },
 };
 
 const EventSequenceDef gEvent099 = {

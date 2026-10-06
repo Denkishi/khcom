@@ -44,9 +44,9 @@ static const EventCharaKeyframe sEvent062Track2[4] = {
 };
 
 static const EventCharaTrack sEvent062Tracks[3] = {
-    { sEvent062Track0, 65 },
-    { sEvent062Track1, 35 },
-    { sEvent062Track2, 79 },
+    { sEvent062Track0, EVENT_CHARA_RIKU_REPLICA },
+    { sEvent062Track1, EVENT_CHARA_NAMINE },
+    { sEvent062Track2, EVENT_CHARA_MARLUXIA },
 };
 
 const EventSequenceDef gEvent062 = {

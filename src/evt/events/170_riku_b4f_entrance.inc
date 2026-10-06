@@ -34,8 +34,8 @@ static const EventCharaKeyframe sEvent170Track1[3] = {
 };
 
 static const EventCharaTrack sEvent170Tracks[2] = {
-    { sEvent170Track0, 44 },
-    { sEvent170Track1, 50 },
+    { sEvent170Track0, EVENT_CHARA_RIKU },
+    { sEvent170Track1, EVENT_CHARA_B_STATES_1 },
 };
 
 const EventSequenceDef gEvent170 = {

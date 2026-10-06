@@ -45,7 +45,7 @@ static const EvSoundCue sEvent100SoundCues[4] = {
 };
 
 static const EventCameraKeyframe sEvent100Camera[6] = {
-    { -65506, 0, 0, 0, 0, 0, 0, NULL },
+    { -65506, 0, 0, 0, EVENT_CHARA_SORA, 0, 0, NULL },
     { -65286, 67328, 70144, 0, 255, CAMERA_MODE_APPROACH, 60, NULL },
     { -64986, 0, 0, 0, 255, CAMERA_MODE_KEEP, 0, NULL },
     { -64736, 55808, 76800, 0, 255, CAMERA_MODE_APPROACH, 70, NULL },
@@ -159,15 +159,15 @@ static const EventCharaKeyframe sEvent100Track8[7] = {
 };
 
 static const EventCharaTrack sEvent100Tracks[9] = {
-    { sEvent100Track0, 0 },
-    { sEvent100Track1, 1 },
-    { sEvent100Track2, 2 },
-    { sEvent100Track3, 6 },
-    { sEvent100Track4, 5 },
-    { sEvent100Track5, 5 },
-    { sEvent100Track6, 4 },
-    { sEvent100Track7, 4 },
-    { sEvent100Track8, 7 },
+    { sEvent100Track0, EVENT_CHARA_SORA },
+    { sEvent100Track1, EVENT_CHARA_DONALD },
+    { sEvent100Track2, EVENT_CHARA_GOOFY },
+    { sEvent100Track3, EVENT_CHARA_QUEEN_OF_HEARTS },
+    { sEvent100Track4, EVENT_CHARA_CARD_SOLDIER_SPADE },
+    { sEvent100Track5, EVENT_CHARA_CARD_SOLDIER_SPADE },
+    { sEvent100Track6, EVENT_CHARA_CARD_SOLDIER_HEART },
+    { sEvent100Track7, EVENT_CHARA_CARD_SOLDIER_HEART },
+    { sEvent100Track8, EVENT_CHARA_ALICE },
 };
 
 const EventSequenceDef gEvent100 = {

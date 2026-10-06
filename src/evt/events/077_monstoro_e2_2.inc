@@ -34,8 +34,8 @@ static const EventCharaKeyframe sEvent077Track0[1] = {
 };
 
 static const EventCharaTrack sEvent077Tracks[2] = {
-    { sEvent077Track0, 96 },
-    { sEvent077Track1, 0 },
+    { sEvent077Track0, EVENT_CHARA_BOSS_PARASITE_CAGE },
+    { sEvent077Track1, EVENT_CHARA_SORA },
 };
 
 const EventSequenceDef gEvent077 = {

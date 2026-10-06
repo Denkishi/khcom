@@ -107,10 +107,10 @@ static const EventCharaKeyframe sEvent149Track3[3] = {
 };
 
 static const EventCharaTrack sEvent149Tracks[4] = {
-    { sEvent149Track0, 44 },
-    { sEvent149Track1, 88 },
-    { sEvent149Track2, 50 },
-    { sEvent149Track3, 93 },
+    { sEvent149Track0, EVENT_CHARA_RIKU },
+    { sEvent149Track1, EVENT_CHARA_KOUKYU_2 },
+    { sEvent149Track2, EVENT_CHARA_B_STATES_1 },
+    { sEvent149Track3, EVENT_CHARA_B_STATES_4 },
 };
 
 const EventSequenceDef gEvent149 = {

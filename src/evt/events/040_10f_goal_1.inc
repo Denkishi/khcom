@@ -94,10 +94,10 @@ static const EventCharaKeyframe sEvent040Track3[2] = {
 };
 
 static const EventCharaTrack sEvent040Tracks[4] = {
-    { sEvent040Track0, 0 },
-    { sEvent040Track1, 1 },
-    { sEvent040Track2, 2 },
-    { sEvent040Track3, 67 },
+    { sEvent040Track0, EVENT_CHARA_SORA },
+    { sEvent040Track1, EVENT_CHARA_DONALD },
+    { sEvent040Track2, EVENT_CHARA_GOOFY },
+    { sEvent040Track3, EVENT_CHARA_VEXEN },
 };
 
 const EventSequenceDef gEvent040 = {

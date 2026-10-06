@@ -43,7 +43,7 @@ static const EventCameraKeyframe sEvent095Camera[6] = {
     { -65436, 30720, 81920, 0, 255, 0, 0, NULL },
     { -64996, 87040, 51200, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
     { -64876, 48640, 79872, 0, 255, CAMERA_MODE_APPROACH, 60, NULL },
-    { -64776, 0, 0, 0, 0, 0, 0, NULL },
+    { -64776, 0, 0, 0, EVENT_CHARA_SORA, 0, 0, NULL },
     { -64636, 87040, 51200, 0, 255, CAMERA_MODE_APPROACH, 50, NULL },
     { -64537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
@@ -147,14 +147,14 @@ static const EventCharaKeyframe sEvent095Track7[1] = {
 };
 
 static const EventCharaTrack sEvent095Tracks[8] = {
-    { sEvent095Track0, 0 },
-    { sEvent095Track1, 7 },
-    { sEvent095Track2, 1 },
-    { sEvent095Track3, 2 },
-    { sEvent095Track4, 4 },
-    { sEvent095Track5, 5 },
-    { sEvent095Track6, 6 },
-    { sEvent095Track7, 11 },
+    { sEvent095Track0, EVENT_CHARA_SORA },
+    { sEvent095Track1, EVENT_CHARA_ALICE },
+    { sEvent095Track2, EVENT_CHARA_DONALD },
+    { sEvent095Track3, EVENT_CHARA_GOOFY },
+    { sEvent095Track4, EVENT_CHARA_CARD_SOLDIER_HEART },
+    { sEvent095Track5, EVENT_CHARA_CARD_SOLDIER_SPADE },
+    { sEvent095Track6, EVENT_CHARA_QUEEN_OF_HEARTS },
+    { sEvent095Track7, EVENT_CHARA_WHITE_RABBIT },
 };
 
 const EventSequenceDef gEvent095 = {

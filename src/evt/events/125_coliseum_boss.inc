@@ -29,8 +29,8 @@ static const EventCharaKeyframe sEvent125Track1[2] = {
 };
 
 static const EventCharaTrack sEvent125Tracks[2] = {
-    { sEvent125Track0, 0 },
-    { sEvent125Track1, 25 },
+    { sEvent125Track0, EVENT_CHARA_SORA },
+    { sEvent125Track1, EVENT_CHARA_HADES },
 };
 
 const EventSequenceDef gEvent125 = {

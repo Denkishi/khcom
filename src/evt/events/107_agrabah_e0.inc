@@ -102,15 +102,15 @@ static const EventCharaKeyframe sEvent107Track8[2] = {
 };
 
 static const EventCharaTrack sEvent107Tracks[9] = {
-    { sEvent107Track0, 12 },
-    { sEvent107Track1, 2 },
-    { sEvent107Track2, 0 },
-    { sEvent107Track3, 1 },
-    { sEvent107Track4, 40 },
-    { sEvent107Track5, 40 },
-    { sEvent107Track6, 40 },
-    { sEvent107Track7, 40 },
-    { sEvent107Track8, 40 },
+    { sEvent107Track0, EVENT_CHARA_ALADDIN },
+    { sEvent107Track1, EVENT_CHARA_GOOFY },
+    { sEvent107Track2, EVENT_CHARA_SORA },
+    { sEvent107Track3, EVENT_CHARA_DONALD },
+    { sEvent107Track4, EVENT_CHARA_SHADOW },
+    { sEvent107Track5, EVENT_CHARA_SHADOW },
+    { sEvent107Track6, EVENT_CHARA_SHADOW },
+    { sEvent107Track7, EVENT_CHARA_SHADOW },
+    { sEvent107Track8, EVENT_CHARA_SHADOW },
 };
 
 const EventSequenceDef gEvent107 = {

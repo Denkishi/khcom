@@ -49,9 +49,9 @@ static const EventCharaKeyframe sEvent042Track2[3] = {
 };
 
 static const EventCharaTrack sEvent042Tracks[3] = {
-    { sEvent042Track0, 43 },
-    { sEvent042Track1, 81 },
-    { sEvent042Track2, 79 },
+    { sEvent042Track0, EVENT_CHARA_AXEL },
+    { sEvent042Track1, EVENT_CHARA_LARXENE },
+    { sEvent042Track2, EVENT_CHARA_MARLUXIA },
 };
 
 const EventSequenceDef gEvent042 = {

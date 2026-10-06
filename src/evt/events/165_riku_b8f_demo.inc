@@ -39,8 +39,8 @@ static const EventCharaKeyframe sEvent165Track1[5] = {
 };
 
 static const EventCharaTrack sEvent165Tracks[2] = {
-    { sEvent165Track0, 65 },
-    { sEvent165Track1, 67 },
+    { sEvent165Track0, EVENT_CHARA_RIKU_REPLICA },
+    { sEvent165Track1, EVENT_CHARA_VEXEN },
 };
 
 const EventSequenceDef gEvent165 = {

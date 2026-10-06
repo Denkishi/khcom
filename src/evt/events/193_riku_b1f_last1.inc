@@ -77,9 +77,9 @@ static const EventCharaKeyframe sEvent193Track2[3] = {
 };
 
 static const EventCharaTrack sEvent193Tracks[3] = {
-    { sEvent193Track0, 44 },
-    { sEvent193Track1, 64 },
-    { sEvent193Track2, 92 },
+    { sEvent193Track0, EVENT_CHARA_RIKU },
+    { sEvent193Track1, EVENT_CHARA_ANSEM },
+    { sEvent193Track2, EVENT_CHARA_SHOUGEKIHA_PURPLE },
 };
 
 const EventSequenceDef gEvent193 = {

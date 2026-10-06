@@ -13,6 +13,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "battle_ids.h"
+#include "event_chara_types.h"
 #include "event_ids.h"
 #include "msg_portrait_data.h"
 #include "world_types.h"

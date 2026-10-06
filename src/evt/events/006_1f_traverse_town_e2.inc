@@ -213,12 +213,12 @@ static const EventCharaKeyframe sEvent006Track5[14] = {
 };
 
 static const EventCharaTrack sEvent006Tracks[6] = {
-    { sEvent006Track0, 0 },
-    { sEvent006Track1, 1 },
-    { sEvent006Track2, 2 },
-    { sEvent006Track3, 57 },
-    { sEvent006Track4, 63 },
-    { sEvent006Track5, 36 },
+    { sEvent006Track0, EVENT_CHARA_SORA },
+    { sEvent006Track1, EVENT_CHARA_DONALD },
+    { sEvent006Track2, EVENT_CHARA_GOOFY },
+    { sEvent006Track3, EVENT_CHARA_LEON },
+    { sEvent006Track4, EVENT_CHARA_YUFFIE },
+    { sEvent006Track5, EVENT_CHARA_AERITH },
 };
 
 const EventSequenceDef gEvent006 = {

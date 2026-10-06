@@ -123,13 +123,13 @@ static const EventCharaKeyframe sEvent038Track6[1] = {
 };
 
 static const EventCharaTrack sEvent038Tracks[7] = {
-    { sEvent038Track0, 43 },
-    { sEvent038Track1, 81 },
-    { sEvent038Track2, 67 },
-    { sEvent038Track3, 3 },
-    { sEvent038Track4, 79 },
-    { sEvent038Track5, 35 },
-    { sEvent038Track6, 86 },
+    { sEvent038Track0, EVENT_CHARA_AXEL },
+    { sEvent038Track1, EVENT_CHARA_LARXENE },
+    { sEvent038Track2, EVENT_CHARA_VEXEN },
+    { sEvent038Track3, EVENT_CHARA_ROBED_FIGURE },
+    { sEvent038Track4, EVENT_CHARA_MARLUXIA },
+    { sEvent038Track5, EVENT_CHARA_NAMINE },
+    { sEvent038Track6, EVENT_CHARA_MAP_GIMMICK_44 },
 };
 
 const EventSequenceDef gEvent038 = {

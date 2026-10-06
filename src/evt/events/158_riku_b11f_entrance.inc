@@ -112,9 +112,9 @@ static const EventCharaKeyframe sEvent158Track2[5] = {
 };
 
 static const EventCharaTrack sEvent158Tracks[3] = {
-    { sEvent158Track0, 44 },
-    { sEvent158Track1, 69 },
-    { sEvent158Track2, 87 },
+    { sEvent158Track0, EVENT_CHARA_RIKU },
+    { sEvent158Track1, EVENT_CHARA_MICKEY },
+    { sEvent158Track2, EVENT_CHARA_KOUKYU },
 };
 
 const EventSequenceDef gEvent158 = {

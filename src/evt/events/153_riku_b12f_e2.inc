@@ -62,7 +62,7 @@ static const EventCharaKeyframe sEvent153Track0[23] = {
 };
 
 static const EventCharaTrack sEvent153Tracks[1] = {
-    { sEvent153Track0, 44 },
+    { sEvent153Track0, EVENT_CHARA_RIKU },
 };
 
 const EventSequenceDef gEvent153 = {

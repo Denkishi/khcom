@@ -66,7 +66,7 @@ static const EventCharaKeyframe sEvent079Track0[21] = {
 };
 
 static const EventCharaTrack sEvent079Tracks[1] = {
-    { sEvent079Track0, 9 },
+    { sEvent079Track0, EVENT_CHARA_PINOCCHIO },
 };
 
 const EventSequenceDef gEvent079 = {

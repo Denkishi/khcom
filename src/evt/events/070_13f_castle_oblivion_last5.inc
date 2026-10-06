@@ -38,8 +38,8 @@ static const EventCharaKeyframe sEvent070Track1[2] = {
 };
 
 static const EventCharaTrack sEvent070Tracks[2] = {
-    { sEvent070Track0, 0 },
-    { sEvent070Track1, 100 },
+    { sEvent070Track0, EVENT_CHARA_SORA },
+    { sEvent070Track1, EVENT_CHARA_BOSS_MARLUXIA_2 },
 };
 
 const EventSequenceDef gEvent070 = {

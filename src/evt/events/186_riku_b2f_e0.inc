@@ -101,9 +101,9 @@ static const EventCharaKeyframe sEvent186Track2[4] = {
 };
 
 static const EventCharaTrack sEvent186Tracks[3] = {
-    { sEvent186Track0, 44 },
-    { sEvent186Track1, 64 },
-    { sEvent186Track2, 84 },
+    { sEvent186Track0, EVENT_CHARA_RIKU },
+    { sEvent186Track1, EVENT_CHARA_ANSEM },
+    { sEvent186Track2, EVENT_CHARA_DIZ },
 };
 
 const EventSequenceDef gEvent186 = {

@@ -249,13 +249,13 @@ static const EventCharaKeyframe sEvent059Track6[9] = {
 };
 
 static const EventCharaTrack sEvent059Tracks[7] = {
-    { sEvent059Track0, 0 },
-    { sEvent059Track1, 65 },
-    { sEvent059Track2, 35 },
-    { sEvent059Track3, 81 },
-    { sEvent059Track4, 1 },
-    { sEvent059Track5, 2 },
-    { sEvent059Track6, 93 },
+    { sEvent059Track0, EVENT_CHARA_SORA },
+    { sEvent059Track1, EVENT_CHARA_RIKU_REPLICA },
+    { sEvent059Track2, EVENT_CHARA_NAMINE },
+    { sEvent059Track3, EVENT_CHARA_LARXENE },
+    { sEvent059Track4, EVENT_CHARA_DONALD },
+    { sEvent059Track5, EVENT_CHARA_GOOFY },
+    { sEvent059Track6, EVENT_CHARA_B_STATES_4 },
 };
 
 const EventSequenceDef gEvent059 = {

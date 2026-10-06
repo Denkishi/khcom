@@ -76,9 +76,9 @@ static const EventCharaKeyframe sEvent023Track2[6] = {
 };
 
 static const EventCharaTrack sEvent023Tracks[3] = {
-    { sEvent023Track0, 81 },
-    { sEvent023Track1, 43 },
-    { sEvent023Track2, 50 },
+    { sEvent023Track0, EVENT_CHARA_LARXENE },
+    { sEvent023Track1, EVENT_CHARA_AXEL },
+    { sEvent023Track2, EVENT_CHARA_B_STATES_1 },
 };
 
 const EventSequenceDef gEvent023 = {

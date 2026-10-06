@@ -40,7 +40,7 @@ static const EventCharaKeyframe sEvent174Track0[15] = {
 };
 
 static const EventCharaTrack sEvent174Tracks[1] = {
-    { sEvent174Track0, 44 },
+    { sEvent174Track0, EVENT_CHARA_RIKU },
 };
 
 const EventSequenceDef gEvent174 = {

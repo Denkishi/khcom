@@ -98,10 +98,10 @@ static const EventCharaKeyframe sEvent184Track3[3] = {
 };
 
 static const EventCharaTrack sEvent184Tracks[4] = {
-    { sEvent184Track0, 83 },
-    { sEvent184Track1, 43 },
-    { sEvent184Track2, 65 },
-    { sEvent184Track3, 93 },
+    { sEvent184Track0, EVENT_CHARA_ZEXION },
+    { sEvent184Track1, EVENT_CHARA_AXEL },
+    { sEvent184Track2, EVENT_CHARA_RIKU_REPLICA },
+    { sEvent184Track3, EVENT_CHARA_B_STATES_4 },
 };
 
 const EventSequenceDef gEvent184 = {

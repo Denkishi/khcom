@@ -148,12 +148,12 @@ static const EventCharaKeyframe sEvent018Track5[3] = {
 };
 
 static const EventCharaTrack sEvent018Tracks[6] = {
-    { sEvent018Track0, 0 },
-    { sEvent018Track1, 1 },
-    { sEvent018Track2, 2 },
-    { sEvent018Track3, 34 },
-    { sEvent018Track4, 35 },
-    { sEvent018Track5, 85 },
+    { sEvent018Track0, EVENT_CHARA_SORA },
+    { sEvent018Track1, EVENT_CHARA_DONALD },
+    { sEvent018Track2, EVENT_CHARA_GOOFY },
+    { sEvent018Track3, EVENT_CHARA_KAIRI },
+    { sEvent018Track4, EVENT_CHARA_NAMINE },
+    { sEvent018Track5, EVENT_CHARA_OMAMORI },
 };
 
 const EventSequenceDef gEvent018 = {

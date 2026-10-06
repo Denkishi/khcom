@@ -29,7 +29,7 @@ static const EventCharaKeyframe sEvent055Track0[5] = {
 };
 
 static const EventCharaTrack sEvent055Tracks[1] = {
-    { sEvent055Track0, 0 },
+    { sEvent055Track0, EVENT_CHARA_SORA },
 };
 
 const EventSequenceDef gEvent055 = {

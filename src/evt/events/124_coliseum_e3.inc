@@ -166,14 +166,14 @@ static const EventCharaKeyframe sEvent124Track7[3] = {
 };
 
 static const EventCharaTrack sEvent124Tracks[8] = {
-    { sEvent124Track0, 0 },
-    { sEvent124Track1, 1 },
-    { sEvent124Track2, 2 },
-    { sEvent124Track3, 19 },
-    { sEvent124Track4, 24 },
-    { sEvent124Track5, 25 },
-    { sEvent124Track6, 89 },
-    { sEvent124Track7, 90 },
+    { sEvent124Track0, EVENT_CHARA_SORA },
+    { sEvent124Track1, EVENT_CHARA_DONALD },
+    { sEvent124Track2, EVENT_CHARA_GOOFY },
+    { sEvent124Track3, EVENT_CHARA_CLOUD },
+    { sEvent124Track4, EVENT_CHARA_HERCULES },
+    { sEvent124Track5, EVENT_CHARA_HADES },
+    { sEvent124Track6, EVENT_CHARA_SHOUGEKIHA },
+    { sEvent124Track7, EVENT_CHARA_SHOUGEKIHA_2 },
 };
 
 const EventSequenceDef gEvent124 = {

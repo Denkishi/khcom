@@ -79,11 +79,11 @@ static const EventCharaKeyframe sEvent047Track4[1] = {
 };
 
 static const EventCharaTrack sEvent047Tracks[5] = {
-    { sEvent047Track0, 81 },
-    { sEvent047Track1, 43 },
-    { sEvent047Track2, 79 },
-    { sEvent047Track3, 35 },
-    { sEvent047Track4, 86 },
+    { sEvent047Track0, EVENT_CHARA_LARXENE },
+    { sEvent047Track1, EVENT_CHARA_AXEL },
+    { sEvent047Track2, EVENT_CHARA_MARLUXIA },
+    { sEvent047Track3, EVENT_CHARA_NAMINE },
+    { sEvent047Track4, EVENT_CHARA_MAP_GIMMICK_44 },
 };
 
 const EventSequenceDef gEvent047 = {

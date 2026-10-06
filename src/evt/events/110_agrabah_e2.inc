@@ -190,18 +190,18 @@ static const EventCharaKeyframe sEvent110Track11[3] = {
 };
 
 static const EventCharaTrack sEvent110Tracks[12] = {
-    { sEvent110Track0, 0 },
-    { sEvent110Track1, 1 },
-    { sEvent110Track2, 2 },
-    { sEvent110Track3, 12 },
-    { sEvent110Track4, 59 },
-    { sEvent110Track5, 48 },
-    { sEvent110Track6, 40 },
-    { sEvent110Track7, 40 },
-    { sEvent110Track8, 40 },
-    { sEvent110Track9, 40 },
-    { sEvent110Track10, 40 },
-    { sEvent110Track11, 93 },
+    { sEvent110Track0, EVENT_CHARA_SORA },
+    { sEvent110Track1, EVENT_CHARA_DONALD },
+    { sEvent110Track2, EVENT_CHARA_GOOFY },
+    { sEvent110Track3, EVENT_CHARA_ALADDIN },
+    { sEvent110Track4, EVENT_CHARA_GENIE },
+    { sEvent110Track5, EVENT_CHARA_JASMINE },
+    { sEvent110Track6, EVENT_CHARA_SHADOW },
+    { sEvent110Track7, EVENT_CHARA_SHADOW },
+    { sEvent110Track8, EVENT_CHARA_SHADOW },
+    { sEvent110Track9, EVENT_CHARA_SHADOW },
+    { sEvent110Track10, EVENT_CHARA_SHADOW },
+    { sEvent110Track11, EVENT_CHARA_B_STATES_4 },
 };
 
 const EventSequenceDef gEvent110 = {

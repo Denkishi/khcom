@@ -49,8 +49,8 @@ static const EventCharaKeyframe sEvent052Track1[9] = {
 };
 
 static const EventCharaTrack sEvent052Tracks[2] = {
-    { sEvent052Track0, 0 },
-    { sEvent052Track1, 8 },
+    { sEvent052Track0, EVENT_CHARA_SORA },
+    { sEvent052Track1, EVENT_CHARA_JIMINY_CRICKET },
 };
 
 const EventSequenceDef gEvent052 = {

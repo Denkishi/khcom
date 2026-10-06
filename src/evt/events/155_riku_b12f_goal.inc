@@ -112,10 +112,10 @@ static const EventCharaKeyframe sEvent155Track3[3] = {
 };
 
 static const EventCharaTrack sEvent155Tracks[4] = {
-    { sEvent155Track0, 44 },
-    { sEvent155Track1, 64 },
-    { sEvent155Track2, 87 },
-    { sEvent155Track3, 93 },
+    { sEvent155Track0, EVENT_CHARA_RIKU },
+    { sEvent155Track1, EVENT_CHARA_ANSEM },
+    { sEvent155Track2, EVENT_CHARA_KOUKYU },
+    { sEvent155Track3, EVENT_CHARA_B_STATES_4 },
 };
 
 const EventSequenceDef gEvent155 = {

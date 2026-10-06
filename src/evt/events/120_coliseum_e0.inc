@@ -189,14 +189,14 @@ static const EventCharaKeyframe sEvent120Track7[3] = {
 };
 
 static const EventCharaTrack sEvent120Tracks[8] = {
-    { sEvent120Track0, 0 },
-    { sEvent120Track1, 1 },
-    { sEvent120Track2, 2 },
-    { sEvent120Track3, 8 },
-    { sEvent120Track4, 19 },
-    { sEvent120Track5, 25 },
-    { sEvent120Track6, 26 },
-    { sEvent120Track7, 27 },
+    { sEvent120Track0, EVENT_CHARA_SORA },
+    { sEvent120Track1, EVENT_CHARA_DONALD },
+    { sEvent120Track2, EVENT_CHARA_GOOFY },
+    { sEvent120Track3, EVENT_CHARA_JIMINY_CRICKET },
+    { sEvent120Track4, EVENT_CHARA_CLOUD },
+    { sEvent120Track5, EVENT_CHARA_HADES },
+    { sEvent120Track6, EVENT_CHARA_HADES_ANGRY },
+    { sEvent120Track7, EVENT_CHARA_HADES_ANGRY_2 },
 };
 
 const EventSequenceDef gEvent120 = {

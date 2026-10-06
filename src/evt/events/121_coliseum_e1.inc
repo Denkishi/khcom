@@ -197,12 +197,12 @@ static const EventCharaKeyframe sEvent121Track5[9] = {
 };
 
 static const EventCharaTrack sEvent121Tracks[6] = {
-    { sEvent121Track0, 0 },
-    { sEvent121Track1, 1 },
-    { sEvent121Track2, 2 },
-    { sEvent121Track3, 23 },
-    { sEvent121Track4, 24 },
-    { sEvent121Track5, 19 },
+    { sEvent121Track0, EVENT_CHARA_SORA },
+    { sEvent121Track1, EVENT_CHARA_DONALD },
+    { sEvent121Track2, EVENT_CHARA_GOOFY },
+    { sEvent121Track3, EVENT_CHARA_PHILOCTETES },
+    { sEvent121Track4, EVENT_CHARA_HERCULES },
+    { sEvent121Track5, EVENT_CHARA_CLOUD },
 };
 
 const EventSequenceDef gEvent121 = {

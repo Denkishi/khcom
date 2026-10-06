@@ -90,11 +90,11 @@ static const EventCharaKeyframe sEvent173Track4[3] = {
 };
 
 static const EventCharaTrack sEvent173Tracks[5] = {
-    { sEvent173Track0, 44 },
-    { sEvent173Track1, 64 },
-    { sEvent173Track2, 87 },
-    { sEvent173Track3, 69 },
-    { sEvent173Track4, 93 },
+    { sEvent173Track0, EVENT_CHARA_RIKU },
+    { sEvent173Track1, EVENT_CHARA_ANSEM },
+    { sEvent173Track2, EVENT_CHARA_KOUKYU },
+    { sEvent173Track3, EVENT_CHARA_MICKEY },
+    { sEvent173Track4, EVENT_CHARA_B_STATES_4 },
 };
 
 const EventSequenceDef gEvent173 = {

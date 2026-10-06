@@ -52,9 +52,9 @@ static const EventCharaKeyframe sEvent188Track2[3] = {
 };
 
 static const EventCharaTrack sEvent188Tracks[3] = {
-    { sEvent188Track0, 44 },
-    { sEvent188Track1, 65 },
-    { sEvent188Track2, 93 },
+    { sEvent188Track0, EVENT_CHARA_RIKU },
+    { sEvent188Track1, EVENT_CHARA_RIKU_REPLICA },
+    { sEvent188Track2, EVENT_CHARA_B_STATES_4 },
 };
 
 const EventSequenceDef gEvent188 = {

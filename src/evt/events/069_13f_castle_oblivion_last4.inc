@@ -60,11 +60,11 @@ static const EventCharaKeyframe sEvent069Track4[3] = {
 };
 
 static const EventCharaTrack sEvent069Tracks[5] = {
-    { sEvent069Track0, 0 },
-    { sEvent069Track1, 1 },
-    { sEvent069Track2, 2 },
-    { sEvent069Track3, 35 },
-    { sEvent069Track4, 65 },
+    { sEvent069Track0, EVENT_CHARA_SORA },
+    { sEvent069Track1, EVENT_CHARA_DONALD },
+    { sEvent069Track2, EVENT_CHARA_GOOFY },
+    { sEvent069Track3, EVENT_CHARA_NAMINE },
+    { sEvent069Track4, EVENT_CHARA_RIKU_REPLICA },
 };
 
 const EventSequenceDef gEvent069 = {

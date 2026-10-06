@@ -46,8 +46,8 @@ static const EventCharaKeyframe sEvent144Track1[6] = {
 };
 
 static const EventCharaTrack sEvent144Tracks[2] = {
-    { sEvent144Track0, 0 },
-    { sEvent144Track1, 70 },
+    { sEvent144Track0, EVENT_CHARA_SORA },
+    { sEvent144Track1, EVENT_CHARA_WINNIE_THE_POOH },
 };
 
 const EventSequenceDef gEvent144 = {

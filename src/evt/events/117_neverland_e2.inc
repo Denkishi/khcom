@@ -171,12 +171,12 @@ static const EventCharaKeyframe sEvent117Track5[6] = {
 };
 
 static const EventCharaTrack sEvent117Tracks[6] = {
-    { sEvent117Track0, 0 },
-    { sEvent117Track1, 1 },
-    { sEvent117Track2, 2 },
-    { sEvent117Track3, 14 },
-    { sEvent117Track4, 62 },
-    { sEvent117Track5, 37 },
+    { sEvent117Track0, EVENT_CHARA_SORA },
+    { sEvent117Track1, EVENT_CHARA_DONALD },
+    { sEvent117Track2, EVENT_CHARA_GOOFY },
+    { sEvent117Track3, EVENT_CHARA_PETER_PAN },
+    { sEvent117Track4, EVENT_CHARA_WENDY },
+    { sEvent117Track5, EVENT_CHARA_TINKER_BELL },
 };
 
 const EventSequenceDef gEvent117 = {

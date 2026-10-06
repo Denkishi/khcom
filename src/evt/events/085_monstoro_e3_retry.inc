@@ -57,9 +57,9 @@ static const EventCharaKeyframe sEvent085Track1[10] = {
 };
 
 static const EventCharaTrack sEvent085Tracks[3] = {
-    { sEvent085Track0, 0 },
-    { sEvent085Track1, 1 },
-    { sEvent085Track2, 2 },
+    { sEvent085Track0, EVENT_CHARA_SORA },
+    { sEvent085Track1, EVENT_CHARA_DONALD },
+    { sEvent085Track2, EVENT_CHARA_GOOFY },
 };
 
 const EventSequenceDef gEvent085 = {

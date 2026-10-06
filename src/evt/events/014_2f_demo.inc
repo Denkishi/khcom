@@ -42,8 +42,8 @@ static const EventCharaKeyframe sEvent014Track1[1] = {
 };
 
 static const EventCharaTrack sEvent014Tracks[2] = {
-    { sEvent014Track0, 35 },
-    { sEvent014Track1, 86 },
+    { sEvent014Track0, EVENT_CHARA_NAMINE },
+    { sEvent014Track1, EVENT_CHARA_MAP_GIMMICK_44 },
 };
 
 const EventSequenceDef gEvent014 = {

@@ -188,14 +188,14 @@ static const EventCharaKeyframe sEvent090Track7[3] = {
 };
 
 static const EventCharaTrack sEvent090Tracks[8] = {
-    { sEvent090Track0, 0 },
-    { sEvent090Track1, 45 },
-    { sEvent090Track2, 13 },
-    { sEvent090Track3, 1 },
-    { sEvent090Track4, 2 },
-    { sEvent090Track5, 21 },
-    { sEvent090Track6, 41 },
-    { sEvent090Track7, 42 },
+    { sEvent090Track0, EVENT_CHARA_SORA },
+    { sEvent090Track1, EVENT_CHARA_SALLY },
+    { sEvent090Track2, EVENT_CHARA_JACK },
+    { sEvent090Track3, EVENT_CHARA_DONALD },
+    { sEvent090Track4, EVENT_CHARA_GOOFY },
+    { sEvent090Track5, EVENT_CHARA_OOGIE_BOOGIE },
+    { sEvent090Track6, EVENT_CHARA_HALLOWEEN_TOWN_GATE_DOOR },
+    { sEvent090Track7, EVENT_CHARA_HALLOWEEN_TOWN_GATE_DOOR_2 },
 };
 
 const EventSequenceDef gEvent090 = {

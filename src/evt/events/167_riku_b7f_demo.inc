@@ -156,11 +156,11 @@ static const EventCharaKeyframe sEvent167Track4[23] = {
 };
 
 static const EventCharaTrack sEvent167Tracks[5] = {
-    { sEvent167Track0, 43 },
-    { sEvent167Track1, 81 },
-    { sEvent167Track2, 67 },
-    { sEvent167Track3, 50 },
-    { sEvent167Track4, 65 },
+    { sEvent167Track0, EVENT_CHARA_AXEL },
+    { sEvent167Track1, EVENT_CHARA_LARXENE },
+    { sEvent167Track2, EVENT_CHARA_VEXEN },
+    { sEvent167Track3, EVENT_CHARA_B_STATES_1 },
+    { sEvent167Track4, EVENT_CHARA_RIKU_REPLICA },
 };
 
 #if defined(VERSION_US) || defined(VERSION_JP)

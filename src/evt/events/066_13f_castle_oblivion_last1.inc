@@ -222,15 +222,15 @@ static const EventCharaKeyframe sEvent066Track8[5] = {
 };
 
 static const EventCharaTrack sEvent066Tracks[9] = {
-    { sEvent066Track0, 0 },
-    { sEvent066Track1, 1 },
-    { sEvent066Track2, 2 },
-    { sEvent066Track3, 79 },
-    { sEvent066Track4, 35 },
-    { sEvent066Track5, 65 },
-    { sEvent066Track6, 79 },
-    { sEvent066Track7, 79 },
-    { sEvent066Track8, 80 },
+    { sEvent066Track0, EVENT_CHARA_SORA },
+    { sEvent066Track1, EVENT_CHARA_DONALD },
+    { sEvent066Track2, EVENT_CHARA_GOOFY },
+    { sEvent066Track3, EVENT_CHARA_MARLUXIA },
+    { sEvent066Track4, EVENT_CHARA_NAMINE },
+    { sEvent066Track5, EVENT_CHARA_RIKU_REPLICA },
+    { sEvent066Track6, EVENT_CHARA_MARLUXIA },
+    { sEvent066Track7, EVENT_CHARA_MARLUXIA },
+    { sEvent066Track8, EVENT_CHARA_MARLUXIA_EFFECT },
 };
 
 const EventSequenceDef gEvent066 = {

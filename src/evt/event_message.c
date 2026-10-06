@@ -3017,7 +3017,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
     gEventState->charaObjs[work->arg.track] = &work->obj;
 
     switch (work->arg.chara) {
-    case 95:
+    case EVENT_CHARA_BOSS_TRICKMASTER:
         // @bug Never sets gBtlWork->actor, which this intro dereferences (NULL read and write).
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
@@ -3042,7 +3042,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         work->obj.z = work->keyframes->z;
         TaskCreate(&work->tasks, &gTaskDescBosTm, &work->obj);
         break;
-    case 96:
+    case EVENT_CHARA_BOSS_PARASITE_CAGE:
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         SetBgPriority(0, 2);
         SetBgPriority(1, 1);
@@ -3059,7 +3059,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         SetBattleBounds(128, 424, 294, 384);
         gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosPc, NULL);
         break;
-    case 97:
+    case EVENT_CHARA_BOSS_PARASITE_CAGE_2:
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         SetBgPriority(0, 2);
         SetBgPriority(1, 1);
@@ -3083,7 +3083,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gEventState->x = viewX;
         gEventState->y = viewY;
         break;
-    case 100:
+    case EVENT_CHARA_BOSS_MARLUXIA_2:
         SetBgSize(1, 0x4000);
         SetBgPriority(0, 2);
         SetBgPriority(1, 1);
@@ -3101,7 +3101,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         SetBattleBounds(128, 368, 480, 512);
         gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosLst, &work->tasks);
         break;
-    case 101:
+    case EVENT_CHARA_BOSS_JAFAR:
         SetupBg(0, 0, 24, 0);
         SetupBg(1, 0, 26, 0);
         SetupBg(2, 2, 28, 14);
@@ -3127,7 +3127,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         SetBattleBounds(420, 612, 328, 384);
         TaskCreate(&work->tasks, &gTaskDescBosJf, &work->obj);
         break;
-    case 103:
+    case EVENT_CHARA_BOSS_DARKSIDE:
         SetupBg(0, 0, 24, 0);
         SetupBg(1, 0, 26, 0);
         SetupBg(2, 2, 28, 14);
@@ -3159,7 +3159,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         SetBattleBounds(0, 256, 328, 424);
         TaskCreate(&work->tasks, &gTaskDescBosDsd, &work->obj);
         break;
-    case 98:
+    case EVENT_CHARA_BOSS_OOGIE_BOOGIE:
         SetupBg(0, 0, 24, 0);
         SetupBg(1, 0, 26, 0);
         SetupBg(2, 2, 28, 10);
@@ -3176,7 +3176,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         TaskCreate(&work->tasks, &gTaskDescBosBoogie, NULL);
         gBtlWork->fadeAmount = 5;
         break;
-    case 99:
+    case EVENT_CHARA_BOSS_URSULA:
         SetupBg(0, 0, 24, 0);
         SetupBg(1, 0, 26, 0);
         SetupBg(2, 2, 28, 10);
@@ -3193,7 +3193,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         TaskCreate(&work->tasks, &gTaskDescBosUrsula, NULL);
         gBtlWork->fadeAmount = 5;
         break;
-    case 104:
+    case EVENT_CHARA_BOSS_GUARD_ARMOR:
         SetupBg(0, 0, 24, 0);
         SetupBg(1, 0, 26, 0);
         SetupBg(2, 2, 28, 10);
@@ -3271,12 +3271,12 @@ u8 event_chara_1(EventCharaWork* work, void* task) {
 
     if (work->usesBtlWork) {
         switch (work->arg.chara) {
-        case 0x62:
+        case EVENT_CHARA_BOSS_OOGIE_BOOGIE:
             gEventState->x = gEventState->cameraX = gBtlWork->x2;
             gEventState->y = gEventState->cameraY = gBtlWork->y2;
             TaskPoolUpdate(&gBtlWork->taskPools[1]);
             break;
-        case 0x63:
+        case EVENT_CHARA_BOSS_URSULA:
             gBtlWork->viewY = gBtlWork->y;
             gBtlWork->x2 = gEventState->cameraX;
             gBtlWork->y2 = gEventState->cameraY;
@@ -3285,7 +3285,7 @@ u8 event_chara_1(EventCharaWork* work, void* task) {
             TaskPoolUpdate(&gBtlWork->taskPools[0]);
             TaskPoolUpdate(&gBtlWork->taskPools[1]);
             break;
-        case 0x65:
+        case EVENT_CHARA_BOSS_JAFAR:
             gEventState->cameraX = viewX = gBtlWork->viewX;
             gEventState->cameraY = viewY = gBtlWork->viewY;
             gEventState->centerX = gBtlWork->x;
@@ -3293,16 +3293,16 @@ u8 event_chara_1(EventCharaWork* work, void* task) {
             gEventState->x = viewX;
             gEventState->y = viewY;
             break;
-        case 0x61:
+        case EVENT_CHARA_BOSS_PARASITE_CAGE_2:
             gBtlWork->x2 = gEventState->centerX;
             gBtlWork->y2 = gEventState->centerY;
             break;
-        case 0x67:
+        case EVENT_CHARA_BOSS_DARKSIDE:
             break;
         }
     }
 
-    if (work->arg.chara == 0) {
+    if (work->arg.chara == EVENT_CHARA_SORA) {
         if (gBtlWork != NULL) {
             gBtlWork->actor->x = work->obj.x - 0x7800;
             gBtlWork->actor->y = work->obj.y - 0x5000;
@@ -3349,7 +3349,7 @@ void event_chara_2(EventCharaWork* work) {
         TaskPoolDraw(&work->tasks);
     }
 
-    if (work->arg.chara == 99) {
+    if (work->arg.chara == EVENT_CHARA_BOSS_URSULA) {
         TaskPoolDraw(&gBtlWork->taskPools[0]);
     }
 
@@ -3543,7 +3543,7 @@ u8 EventCharaHopUpdate(EventCharaWork* work, void* task) {
         work->waitTimer--;
 
         if (work->waitTimer == 0) {
-            if (work->arg.chara == 10) {
+            if (work->arg.chara == EVENT_CHARA_MOOGLE) {
                 m4aSongNumStart(SONG_SND_324);
                 SetEventSoundPosition(SONG_SND_324, x, y);
             }
@@ -3763,7 +3763,7 @@ u8 EventCharaFadeOut(void* work, void* task) {
     chara->effectLevel = 16;
     SetTaskUpdate(task, (TaskUpdateFunc)EventCharaFadeOutUpdate);
 
-    if (chara->arg.chara == 3) {
+    if (chara->arg.chara == EVENT_CHARA_ROBED_FIGURE) {
         keyframe = &chara->keyframes[chara->keyframe];
 
         if ((keyframe->flags & CHARA_KEYFRAME_FLAG_BLINK) == 0) {
@@ -3846,7 +3846,7 @@ u8 EventCharaFadeIn(void* work, void* task) {
     chara->effectLevel = 0;
     SetTaskUpdate(task, (TaskUpdateFunc)EventCharaFadeInUpdate);
 
-    if (chara->arg.chara == 3) {
+    if (chara->arg.chara == EVENT_CHARA_ROBED_FIGURE) {
         keyframe = &chara->keyframes[chara->keyframe];
 
         if ((keyframe->flags & CHARA_KEYFRAME_FLAG_BLINK) == 0) {
@@ -4644,7 +4644,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
     work->obj.x = next;
     work->obj.y += work->speed * -gSineTable[work->angle + 64] >> 8;
 
-    if (work->arg.chara == 0) {
+    if (work->arg.chara == EVENT_CHARA_SORA) {
         if (gBtlWork != NULL) {
             gBtlWork->actor->x = next - 0x7800;
             gBtlWork->actor->y = work->obj.y - 0x5000;
@@ -6102,29 +6102,29 @@ void PlayGoofyFootstep(EventCharaWork* work, u8 kind, u8 flag) {
 
 void SetupEventCharaShadow(EventCharaWork* work) {
     switch (work->arg.chara) {
-    case 6:
-    case 16:
-    case 20:
-    case 21:
-    case 22:
-    case 32:
+    case EVENT_CHARA_QUEEN_OF_HEARTS:
+    case EVENT_CHARA_BEAST:
+    case EVENT_CHARA_URSULA:
+    case EVENT_CHARA_OOGIE_BOOGIE:
+    case EVENT_CHARA_BELLE:
+    case EVENT_CHARA_SIMBA:
         work->obj.flags |= EVTOBJ_FLAG_SHADOW_WIDE;
         break;
-    case 37:
+    case EVENT_CHARA_TINKER_BELL:
         CreateTinkerbellTask(work);
-    case 8:
-    case 10:
-    case 33:
-    case 38:
-    case 39:
-    case 70:
-    case 71:
-    case 72:
-    case 73:
-    case 74:
+    case EVENT_CHARA_JIMINY_CRICKET:
+    case EVENT_CHARA_MOOGLE:
+    case EVENT_CHARA_MUSHU:
+    case EVENT_CHARA_SEBASTIAN:
+    case EVENT_CHARA_FLOUNDER:
+    case EVENT_CHARA_WINNIE_THE_POOH:
+    case EVENT_CHARA_TRAP:
+    case EVENT_CHARA_PIGLET:
+    case EVENT_CHARA_OWL:
+    case EVENT_CHARA_ROO:
         work->obj.flags |= EVTOBJ_FLAG_SHADOW_SMALL;
         break;
-    case 0:
+    case EVENT_CHARA_SORA:
         break;
     }
 }
@@ -7208,11 +7208,11 @@ u8 view_1(EventCameraWork* work, Task* task) {
     EvtObj* obj;
     u8 targetIndex;
 
-    if (gEventState->bossChara == 98) {
+    if (gEventState->bossChara == EVENT_CHARA_BOSS_OOGIE_BOOGIE) {
         return 1;
     }
 
-    if (gEventState->bossChara == 101) {
+    if (gEventState->bossChara == EVENT_CHARA_BOSS_JAFAR) {
         return 1;
     }
 
@@ -7571,7 +7571,7 @@ u8 UpdateEventCameraFollowPlayer(EventCameraWork* work) {
     EvtObj* obj;
     u8 trackIndex;
 
-    trackIndex = FindEventCharaTrack(work, 0);
+    trackIndex = FindEventCharaTrack(work, EVENT_CHARA_SORA);
     bg = gEventBackgroundDefs[work->eventId];
     obj = gEventState->charaObjs[trackIndex];
     work->targetX = obj->x;

@@ -72,9 +72,9 @@ static const EventCharaKeyframe sEvent181Track2[3] = {
 };
 
 static const EventCharaTrack sEvent181Tracks[3] = {
-    { sEvent181Track0, 44 },
-    { sEvent181Track1, 0 },
-    { sEvent181Track2, 89 },
+    { sEvent181Track0, EVENT_CHARA_RIKU },
+    { sEvent181Track1, EVENT_CHARA_SORA },
+    { sEvent181Track2, EVENT_CHARA_SHOUGEKIHA },
 };
 
 const EventSequenceDef gEvent181 = {

@@ -111,11 +111,11 @@ static const EventCharaKeyframe sEvent046Track4[11] = {
 };
 
 static const EventCharaTrack sEvent046Tracks[5] = {
-    { sEvent046Track0, 0 },
-    { sEvent046Track1, 1 },
-    { sEvent046Track2, 2 },
-    { sEvent046Track3, 67 },
-    { sEvent046Track4, 43 },
+    { sEvent046Track0, EVENT_CHARA_SORA },
+    { sEvent046Track1, EVENT_CHARA_DONALD },
+    { sEvent046Track2, EVENT_CHARA_GOOFY },
+    { sEvent046Track3, EVENT_CHARA_VEXEN },
+    { sEvent046Track4, EVENT_CHARA_AXEL },
 };
 
 const EventSequenceDef gEvent046 = {

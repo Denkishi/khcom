@@ -28,7 +28,7 @@ static const EventCharaKeyframe sEvent148Track0[6] = {
 };
 
 static const EventCharaTrack sEvent148Tracks[1] = {
-    { sEvent148Track0, 0 },
+    { sEvent148Track0, EVENT_CHARA_SORA },
 };
 
 const EventSequenceDef gEvent148 = {

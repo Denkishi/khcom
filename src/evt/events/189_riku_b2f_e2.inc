@@ -144,8 +144,8 @@ static const EventCharaKeyframe sEvent189Track1[18] = {
 };
 
 static const EventCharaTrack sEvent189Tracks[2] = {
-    { sEvent189Track0, 44 },
-    { sEvent189Track1, 35 },
+    { sEvent189Track0, EVENT_CHARA_RIKU },
+    { sEvent189Track1, EVENT_CHARA_NAMINE },
 };
 
 const EventSequenceDef gEvent189 = {

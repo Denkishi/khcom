@@ -65,11 +65,11 @@ static const EventCharaKeyframe sEvent005Track4[7] = {
 };
 
 static const EventCharaTrack sEvent005Tracks[5] = {
-    { sEvent005Track0, 0 },
-    { sEvent005Track1, 1 },
-    { sEvent005Track2, 2 },
-    { sEvent005Track3, 57 },
-    { sEvent005Track4, 51 },
+    { sEvent005Track0, EVENT_CHARA_SORA },
+    { sEvent005Track1, EVENT_CHARA_DONALD },
+    { sEvent005Track2, EVENT_CHARA_GOOFY },
+    { sEvent005Track3, EVENT_CHARA_LEON },
+    { sEvent005Track4, EVENT_CHARA_B_STATES_2 },
 };
 
 const EventSequenceDef gEvent005 = {

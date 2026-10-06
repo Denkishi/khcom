@@ -28,7 +28,7 @@ static const EvSoundCue sEvent177SoundCues[5] = {
 static const EventCameraKeyframe sEvent177Camera[7] = {
     { -65536, 96768, 77312, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
     { -65385, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, NULL },
-    { -64846, 0, 0, -6912, 44, 0, 0, NULL },
+    { -64846, 0, 0, -6912, EVENT_CHARA_RIKU, 0, 0, NULL },
     { -64666, 31744, 42752, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
     { -63986, 34560, 45312, 0, 255, CAMERA_MODE_APPROACH, 30, NULL },
     { -62536, 47104, 51968, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
@@ -90,10 +90,10 @@ static const EventCharaKeyframe sEvent177Track3[6] = {
 };
 
 static const EventCharaTrack sEvent177Tracks[4] = {
-    { sEvent177Track0, 44 },
-    { sEvent177Track1, 60 },
-    { sEvent177Track2, 55 },
-    { sEvent177Track3, 61 },
+    { sEvent177Track0, EVENT_CHARA_RIKU },
+    { sEvent177Track1, EVENT_CHARA_WAKKA },
+    { sEvent177Track2, EVENT_CHARA_SELPHIE },
+    { sEvent177Track3, EVENT_CHARA_TIDUS },
 };
 
 const EventSequenceDef gEvent177 = {

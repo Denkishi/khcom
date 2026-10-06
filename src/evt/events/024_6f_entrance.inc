@@ -52,9 +52,9 @@ static const EventCharaKeyframe sEvent024Track2[9] = {
 };
 
 static const EventCharaTrack sEvent024Tracks[3] = {
-    { sEvent024Track0, 0 },
-    { sEvent024Track1, 1 },
-    { sEvent024Track2, 2 },
+    { sEvent024Track0, EVENT_CHARA_SORA },
+    { sEvent024Track1, EVENT_CHARA_DONALD },
+    { sEvent024Track2, EVENT_CHARA_GOOFY },
 };
 
 const EventSequenceDef gEvent024 = {

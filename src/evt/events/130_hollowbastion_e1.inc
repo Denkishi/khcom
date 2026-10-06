@@ -191,11 +191,11 @@ static const EventCharaKeyframe sEvent130Track4[14] = {
 };
 
 static const EventCharaTrack sEvent130Tracks[5] = {
-    { sEvent130Track0, 0 },
-    { sEvent130Track1, 1 },
-    { sEvent130Track2, 2 },
-    { sEvent130Track3, 22 },
-    { sEvent130Track4, 30 },
+    { sEvent130Track0, EVENT_CHARA_SORA },
+    { sEvent130Track1, EVENT_CHARA_DONALD },
+    { sEvent130Track2, EVENT_CHARA_GOOFY },
+    { sEvent130Track3, EVENT_CHARA_BELLE },
+    { sEvent130Track4, EVENT_CHARA_MALEFICENT },
 };
 
 const EventSequenceDef gEvent130 = {

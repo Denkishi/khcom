@@ -35,7 +35,7 @@ static const EvSoundCue sEvent163SoundCues[5] = {
 
 static const EventCameraKeyframe sEvent163Camera[4] = {
     { -65535, 145920, 82944, 0, 255, 0, 0, NULL },
-    { -65205, 0, 0, -7168, 44, 0, 0, NULL },
+    { -65205, 0, 0, -7168, EVENT_CHARA_RIKU, 0, 0, NULL },
     { -64536, 177152, 69120, 0, 255, CAMERA_MODE_APPROACH, 50, NULL },
     { -60536, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
@@ -69,8 +69,8 @@ static const EventCharaKeyframe sEvent163Track1[8] = {
 };
 
 static const EventCharaTrack sEvent163Tracks[2] = {
-    { sEvent163Track0, 44 },
-    { sEvent163Track1, 65 },
+    { sEvent163Track0, EVENT_CHARA_RIKU },
+    { sEvent163Track1, EVENT_CHARA_RIKU_REPLICA },
 };
 
 const EventSequenceDef gEvent163 = {

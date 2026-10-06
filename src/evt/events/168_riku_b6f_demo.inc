@@ -90,11 +90,11 @@ static const EventCharaKeyframe sEvent168Track4[4] = {
 };
 
 static const EventCharaTrack sEvent168Tracks[5] = {
-    { sEvent168Track0, 81 },
-    { sEvent168Track1, 35 },
-    { sEvent168Track2, 86 },
-    { sEvent168Track3, 65 },
-    { sEvent168Track4, 85 },
+    { sEvent168Track0, EVENT_CHARA_LARXENE },
+    { sEvent168Track1, EVENT_CHARA_NAMINE },
+    { sEvent168Track2, EVENT_CHARA_MAP_GIMMICK_44 },
+    { sEvent168Track3, EVENT_CHARA_RIKU_REPLICA },
+    { sEvent168Track4, EVENT_CHARA_OMAMORI },
 };
 
 const EventSequenceDef gEvent168 = {

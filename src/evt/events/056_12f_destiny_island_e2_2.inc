@@ -173,10 +173,10 @@ static const EventCharaKeyframe sEvent056Track3[6] = {
 };
 
 static const EventCharaTrack sEvent056Tracks[4] = {
-    { sEvent056Track0, 0 },
-    { sEvent056Track1, 35 },
-    { sEvent056Track2, 35 },
-    { sEvent056Track3, 85 },
+    { sEvent056Track0, EVENT_CHARA_SORA },
+    { sEvent056Track1, EVENT_CHARA_NAMINE },
+    { sEvent056Track2, EVENT_CHARA_NAMINE },
+    { sEvent056Track3, EVENT_CHARA_OMAMORI },
 };
 
 const EventSequenceDef gEvent056 = {

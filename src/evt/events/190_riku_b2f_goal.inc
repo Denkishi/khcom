@@ -100,10 +100,10 @@ static const EventCharaKeyframe sEvent190Track3[8] = {
 };
 
 static const EventCharaTrack sEvent190Tracks[4] = {
-    { sEvent190Track0, 44 },
-    { sEvent190Track1, 69 },
-    { sEvent190Track2, 84 },
-    { sEvent190Track3, 50 },
+    { sEvent190Track0, EVENT_CHARA_RIKU },
+    { sEvent190Track1, EVENT_CHARA_MICKEY },
+    { sEvent190Track2, EVENT_CHARA_DIZ },
+    { sEvent190Track3, EVENT_CHARA_B_STATES_1 },
 };
 
 const EventSequenceDef gEvent190 = {

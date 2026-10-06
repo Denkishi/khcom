@@ -47,8 +47,8 @@ static const EventCharaKeyframe sEvent175Track1[4] = {
 };
 
 static const EventCharaTrack sEvent175Tracks[2] = {
-    { sEvent175Track0, 83 },
-    { sEvent175Track1, 43 },
+    { sEvent175Track0, EVENT_CHARA_ZEXION },
+    { sEvent175Track1, EVENT_CHARA_AXEL },
 };
 
 const EventSequenceDef gEvent175 = {

@@ -716,11 +716,11 @@ void GlowNose2_0(EffectWork* work, EventCharaWork* chara) {
     obj = &chara->obj;
 
     switch (chara->arg.chara) {
-    case 3:
+    case EVENT_CHARA_ROBED_FIGURE:
         work->x = obj->x - 6144;
         work->y = obj->y + 8192;
         break;
-    case 43:
+    case EVENT_CHARA_AXEL:
         work->x = obj->x + 2048;
         work->y = obj->y + 2048;
         break;
@@ -756,15 +756,15 @@ void down_0(EffectWork* work, EventCharaWork* chara) {
     obj = &chara->obj;
 
     switch (chara->arg.chara) {
-    case 0:
+    case EVENT_CHARA_SORA:
         work->x = obj->x + 4096;
         work->y = obj->y - 6144;
         break;
-    case 2:
+    case EVENT_CHARA_GOOFY:
         work->x = obj->x - 2048;
         work->y = obj->y - 6144;
         break;
-    case 1:
+    case EVENT_CHARA_DONALD:
         work->x = obj->x + 3584;
         work->y = obj->y - 1024;
         break;

@@ -230,16 +230,16 @@ static const EventCharaKeyframe sEvent131Track9[3] = {
 };
 
 static const EventCharaTrack sEvent131Tracks[10] = {
-    { sEvent131Track0, 0 },
-    { sEvent131Track1, 1 },
-    { sEvent131Track2, 2 },
-    { sEvent131Track3, 8 },
-    { sEvent131Track4, 30 },
-    { sEvent131Track5, 22 },
-    { sEvent131Track6, 16 },
-    { sEvent131Track7, 78 },
-    { sEvent131Track8, 91 },
-    { sEvent131Track9, 49 },
+    { sEvent131Track0, EVENT_CHARA_SORA },
+    { sEvent131Track1, EVENT_CHARA_DONALD },
+    { sEvent131Track2, EVENT_CHARA_GOOFY },
+    { sEvent131Track3, EVENT_CHARA_JIMINY_CRICKET },
+    { sEvent131Track4, EVENT_CHARA_MALEFICENT },
+    { sEvent131Track5, EVENT_CHARA_BELLE },
+    { sEvent131Track6, EVENT_CHARA_BEAST },
+    { sEvent131Track7, EVENT_CHARA_HEART },
+    { sEvent131Track8, EVENT_CHARA_MALEFICENT_BALL },
+    { sEvent131Track9, EVENT_CHARA_B_STATES_0 },
 };
 
 const EventSequenceDef gEvent131 = {

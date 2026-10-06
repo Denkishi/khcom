@@ -28,8 +28,8 @@ static const EventCharaKeyframe sEvent180Track1[1] = {
 };
 
 static const EventCharaTrack sEvent180Tracks[2] = {
-    { sEvent180Track0, 44 },
-    { sEvent180Track1, 103 },
+    { sEvent180Track0, EVENT_CHARA_RIKU },
+    { sEvent180Track1, EVENT_CHARA_BOSS_DARKSIDE },
 };
 
 const EventSequenceDef gEvent180 = {

@@ -43,6 +43,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "card_label_data.h"
 
 static const AnimDef sBtlRikuAnimDefs[35] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0 },
@@ -1017,35 +1018,35 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
-    case 8:
+    case HC_EFFECT_BERSERK:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_WEAK_BLIZZARD | BTLOBJ_FLAG_RESIST_FIRE);
         break;
-    case 15:
+    case HC_EFFECT_SLEIGHT_LOCK:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
-    case 18:
+    case HC_EFFECT_QUICK_RECOVERY:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_IMMUNE_FIRE | BTLOBJ_FLAG_WEAK_BLIZZARD);
         break;
-    case 50:
+    case HC_EFFECT_DASH:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_WEAK_NEUTRAL);
         break;
-    case 27:
+    case HC_EFFECT_AUTO_LIFE:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_WEAK_FIRE);
         break;
-    case 47:
+    case HC_EFFECT_DOUBLE_SLEIGHT:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 49:
+    case HC_EFFECT_WARP_BREAK:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_RESIST_PHYSICAL | BTLOBJ_FLAG_WEAK_NEUTRAL);
         break;
-    case 28:
+    case HC_EFFECT_SLEIGHTBLIND:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
         act->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
@@ -1065,7 +1066,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         break;
-    case 23: {
+    case HC_EFFECT_REGEN: {
         u16 hp;
         u16 maxHp;
         s32 newHp;
@@ -1091,7 +1092,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     }
-    case 24:
+    case HC_EFFECT_BIO:
         if (work->frameCount % 180 == 0) {
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
                 BtlObj* enemy;
@@ -4686,7 +4687,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
         return;
     }
 
-    if (work->actor.btl->hcEffect == 19) {
+    if (work->actor.btl->hcEffect == HC_EFFECT_VANISH) {
         if (work->mainSide) {
             if (gFrameCounter & 1) {
                 return;

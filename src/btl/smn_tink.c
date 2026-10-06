@@ -22,6 +22,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 
 static const AnimDef sSmnTinkAnimDefs[3] = {
     { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 1 },

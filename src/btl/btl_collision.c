@@ -16,6 +16,7 @@
 #include "m4a_song.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_label_data.h"
 #include "enemy_ids.h"
 
 static const BattleAttackDef sBattleAttackDefs[330] = {
@@ -449,7 +450,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 
     if (source->btl != NULL) {
         switch (source->btl->hcEffect) {
-        case 35:
+        case HC_EFFECT_DRAIN:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) != ATTACK_FLAG_KIND_WEAPON) break;
 
             if (hit->flags & BTLOBJ_FLAG_INVULNERABLE) break;
@@ -484,49 +485,49 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             }
 
             break;
-        case 43:
+        case HC_EFFECT_OVERDRIVE:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
 
             break;
-        case 8:
+        case HC_EFFECT_BERSERK:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON && source->hp < (source->maxHp >> 2)) {
                 scale = scale != 0 ? (scale * 512) >> 8 : 512;
             }
 
             break;
-        case 4:
+        case HC_EFFECT_FIRE_BOOST:
             if (attack->flags & ATTACK_FLAG_ELEMENT_FIRE) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
 
             break;
-        case 11:
+        case HC_EFFECT_BLIZZARD_BOOST:
             if (attack->flags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
 
             break;
-        case 12:
+        case HC_EFFECT_THUNDER_BOOST:
             if (attack->flags & ATTACK_FLAG_ELEMENT_THUNDER) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
 
             break;
-        case 38:
+        case HC_EFFECT_MAGIC_BOOST:
             if (attack->flags & ATTACK_FLAG_KIND_MAGIC) {
                 scale = scale != 0 ? (scale * 332) >> 8 : 332;
             }
 
             break;
-        case 39:
+        case HC_EFFECT_SUMMON_BOOST:
             if (attack->flags & ATTACK_FLAG_KIND_SUMMON) {
                 scale = scale != 0 ? (scale * 332) >> 8 : 332;
             }
 
             break;
-        case 36:
+        case HC_EFFECT_BACK_ATTACK:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON) {
                 if (source->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if ((hit->flags & BTLOBJ_FLAG_FACING_LEFT) && hit->x < source->x) {
@@ -543,14 +544,14 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 
     if (target->btl != NULL) {
         switch (target->btl->hcEffect) {
-        case 14:
+        case HC_EFFECT_PROTECT:
             if (attack->flags & ATTACK_FLAG_ELEMENT_PHYSICAL) {
                 CreateBtlPopTask(hit, 0);
                 scale = scale != 0 ? (scale * 128) >> 8 : 128;
             }
 
             break;
-        case 46:
+        case HC_EFFECT_SHELL:
             target->btl->hcEffectCount--;
 
 #ifdef VERSION_EU
@@ -753,7 +754,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (target->damage == 0 && attack->power > 0) target->damage = 1;
     }
 
-    if (target->btl != NULL && target->btl->hcEffect == 26) {
+    if (target->btl != NULL && target->btl->hcEffect == HC_EFFECT_SECOND_CHANCE) {
         if (target->hp > 1 && target->hp - target->damage <= 0) {
             target->damage = target->hp - 1;
             target->invincibleTimer = 60;

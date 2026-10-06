@@ -26,6 +26,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 #include "enemy_ids.h"
 
 static const u32 sHumLexceusStockMoves[3] = {
@@ -365,7 +366,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             w->flags &= ~(LEXCEUS_FLAG_ATTACK_HIT | LEXCEUS_FLAG_COMBO_FOLLOWUP);
 
 #ifdef VERSION_EU
-            if (act->btl->hcEffect == 49) {
+            if (act->btl->hcEffect == HC_EFFECT_WARP_BREAK) {
                 act->btl->hcEffectCount--;
             }
 #endif
@@ -448,7 +449,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             w->flags &= ~LEXCEUS_FLAG_ATTACK_HIT;
 
 #ifdef VERSION_EU
-            if (act->btl->hcEffect == 49) {
+            if (act->btl->hcEffect == HC_EFFECT_WARP_BREAK) {
                 act->btl->hcEffectCount--;
             }
 #endif
@@ -458,7 +459,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             if (AnimGetGfxIndex(&work->base.anim) == 1) {
                 MakeOpponentsHittable();
 
-                if (act->btl->hcEffect == 49) {
+                if (act->btl->hcEffect == HC_EFFECT_WARP_BREAK) {
                     if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x149, act->x - 0x2800, act->y, act->z, 24, 20, 55)
                         : ApplyAttackBox(0x149, act->x + 0x2800, act->y, act->z, 24, 20, 55)) {

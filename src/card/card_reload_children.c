@@ -32,6 +32,7 @@
 #include "lockon.h"
 #include "card_reload_children.h"
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 
 static const s16 sSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 
@@ -580,7 +581,7 @@ u8 PrizeBoss_1(BossPrizeWork* work, void* task) {
         SpawnBossPrizeCardEffects(work);
     }
 
-    if (gBtlWork->hcEffect == 6) {
+    if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
         ColliderSetRadius(&work->collider, 30);
     } else {
         ColliderSetRadius(&work->collider, 10);

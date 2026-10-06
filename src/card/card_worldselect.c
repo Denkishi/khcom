@@ -55,6 +55,7 @@
 #include "card_worldselect.h"
 #include "default_bg_map.h"
 #include "card_ids.h"
+#include "card_label_data.h"
 
 static TaskPool sModeWorldselectTasks;
 
@@ -2465,9 +2466,9 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
 
                 switch (work->args.variant) {
                 case 1:
-                    if (gBtlWork->hcEffect == 9) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_QUICKLOAD) {
                         gauge->chargeTick = 1;
-                    } else if (gBtlWork->hcEffect == 43) {
+                    } else if (gBtlWork->hcEffect == HC_EFFECT_OVERDRIVE) {
                         gauge->chargeTick = 254;
                     } else {
                         gauge->chargeTick = 0;
@@ -2475,9 +2476,9 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
 
                     break;
                 case 2:
-                    if (gRikuBtlWork->hcEffect == 9) {
+                    if (gRikuBtlWork->hcEffect == HC_EFFECT_QUICKLOAD) {
                         gauge->chargeTick = 1;
-                    } else if (gRikuBtlWork->hcEffect == 43) {
+                    } else if (gRikuBtlWork->hcEffect == HC_EFFECT_OVERDRIVE) {
                         gauge->chargeTick = 254;
                     } else {
                         gauge->chargeTick = 0;
@@ -2629,13 +2630,13 @@ void Reload_Gage_3(CardDisplayWork* work) {
         gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
 
         switch (gBtlWork->hcEffect) {
-        case 9:
-        case 10:
-        case 25:
-        case 30:
-        case 40:
-        case 43:
-        case 54:
+        case HC_EFFECT_QUICKLOAD:
+        case HC_EFFECT_COMBO_PLUS_2:
+        case HC_EFFECT_DRAW_2:
+        case HC_EFFECT_RELOAD_KINESIS:
+        case HC_EFFECT_AUTO_RELOAD:
+        case HC_EFFECT_OVERDRIVE:
+        case HC_EFFECT_INCREMENTOR_2:
             gBtlWork->hcEffectCount--;
             break;
         }
@@ -2645,13 +2646,13 @@ void Reload_Gage_3(CardDisplayWork* work) {
         gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
 
         switch (gRikuBtlWork->hcEffect) {
-        case 9:
-        case 10:
-        case 25:
-        case 30:
-        case 40:
-        case 43:
-        case 54:
+        case HC_EFFECT_QUICKLOAD:
+        case HC_EFFECT_COMBO_PLUS_2:
+        case HC_EFFECT_DRAW_2:
+        case HC_EFFECT_RELOAD_KINESIS:
+        case HC_EFFECT_AUTO_RELOAD:
+        case HC_EFFECT_OVERDRIVE:
+        case HC_EFFECT_INCREMENTOR_2:
             gRikuBtlWork->hcEffectCount--;
             break;
         }
@@ -2782,7 +2783,7 @@ void* CreateReloadGageTask(CardBattleWork* work, u16 index, void* pool, u8 mode)
 
     switch (mode) {
     case 1:
-        if (gBtlWork->hcEffect == 10) {
+        if (gBtlWork->hcEffect == HC_EFFECT_COMBO_PLUS_2) {
             args.index = index - 2;
         } else {
             args.index = index;
@@ -2790,7 +2791,7 @@ void* CreateReloadGageTask(CardBattleWork* work, u16 index, void* pool, u8 mode)
 
         break;
     case 2:
-        if (gRikuBtlWork->hcEffect == 10) {
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_COMBO_PLUS_2) {
             args.index = index - 2;
         } else {
             args.index = index;

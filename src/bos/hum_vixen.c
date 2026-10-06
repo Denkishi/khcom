@@ -29,6 +29,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "card_label_data.h"
 #include "enemy_ids.h"
 
 static const u32 sHumVixenStockMovesA[3] = {

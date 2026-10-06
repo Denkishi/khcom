@@ -46,6 +46,7 @@
 #include "hum_common.h"
 #include "card_deckmenu2.h"
 #include "battle_ids.h"
+#include "card_label_data.h"
 #include "enemy_ids.h"
 #include "event_ids.h"
 #include "songs.h"
@@ -671,13 +672,13 @@ void UpdateBattleState() {
 
     player = gBtlWork->actor;
 
-    if (gBtlWork->hcEffect == 53) {
+    if (gBtlWork->hcEffect == HC_EFFECT_FLOAT) {
         gBtlWork->gravity = 38;
     } else {
         gBtlWork->gravity = 66;
     }
 
-    if (gBtlWork->hcEffect == 19) {
+    if (gBtlWork->hcEffect == HC_EFFECT_VANISH) {
         if (!(gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) && gFrameCounter % 30 == 0) {
             gBtlWork->targetX = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) * 256;
             gBtlWork->targetY = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) * 256;

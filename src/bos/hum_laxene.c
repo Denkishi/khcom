@@ -26,6 +26,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "card_label_data.h"
 #include "enemy_ids.h"
 
 static const u32 sHumLaxeneStockMoves[2][3] = {
@@ -219,7 +220,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.targetY = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
             work->base.targetZ = -((GetRandom() % 71) << 8);
 
-            if (act->btl->hcEffect == 50) {
+            if (act->btl->hcEffect == HC_EFFECT_DASH) {
                 work->base.steps = 12;
             } else {
                 work->base.steps = 25;

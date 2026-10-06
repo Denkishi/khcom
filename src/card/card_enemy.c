@@ -23,6 +23,7 @@
 #include <stddef.h>
 #include "card_enemy.h"
 #include "battle.h"
+#include "card_label_data.h"
 
 static s16 sBossCardValue;
 
@@ -689,7 +690,7 @@ void UseEnemyCard(u16 arg) {
 #endif
             found = 0;
 
-            if (gBtlWork->hcEffect == 2) {
+            if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
 #ifdef VERSION_EU
                 if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
                     found = 1;
@@ -704,7 +705,7 @@ void UseEnemyCard(u16 arg) {
 #endif
             }
 
-            if (gBtlWork->hcEffect == 20) {
+            if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
 #ifdef VERSION_EU
                 for (j = 0; j < gCardBattleState->activeCardCount; j++) {
                     if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
@@ -721,7 +722,7 @@ void UseEnemyCard(u16 arg) {
 #endif
             }
 
-            if (gBtlWork->hcEffect == 29) {
+            if (gBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
 #ifdef VERSION_EU
                 for (k = 0; k < gCardBattleState->activeCardCount; k++) {
                     if (gCardBattleState->activeCards[k]->cardDef->category == 2 && !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
@@ -758,7 +759,7 @@ void UseEnemyCard(u16 arg) {
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
                     gCardBattleState->activeCards[0] = card;
 
-                    if (gBtlWork->hcEffect == 48) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_VALUE_BREAK) {
                         if (card->value != 0) {
                             gCardBattleState->activeValue = card->value - gCardBattleState->activeValue;
                             card->value = gCardBattleState->activeValue;
@@ -796,7 +797,7 @@ void UseEnemyCard(u16 arg) {
 #endif
             flag = 0;
 
-            if (gBtlWork->hcEffect == 2) {
+            if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
 #ifdef VERSION_EU
                 if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
                     flag = 1;
@@ -812,7 +813,7 @@ void UseEnemyCard(u16 arg) {
             }
 
 #ifndef VERSION_EU
-            if (gBtlWork->hcEffect == 54) {
+            if (gBtlWork->hcEffect == HC_EFFECT_INCREMENTOR_2) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->category == 1) {
                         flag = 1;
@@ -822,7 +823,7 @@ void UseEnemyCard(u16 arg) {
             }
 #endif
 
-            if (gBtlWork->hcEffect == 20) {
+            if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
                         flag = 1;
@@ -831,7 +832,7 @@ void UseEnemyCard(u16 arg) {
                 }
             }
 
-            if (gBtlWork->hcEffect == 29) {
+            if (gBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
 #ifdef VERSION_EU
                     if (gCardBattleState->activeCards[i]->cardDef->category == 2 && !(gCardBattleState->activeCards[i]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
@@ -865,7 +866,7 @@ void UseEnemyCard(u16 arg) {
                     gCardBattleState->activeCards[0] = card;
 
 #ifdef VERSION_EU
-                    if (gBtlWork->hcEffect == 48) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_VALUE_BREAK) {
                         if (card->value != 0) {
                             gCardBattleState->activeValue = card->value - gCardBattleState->activeValue;
                             card->value = gCardBattleState->activeValue;
@@ -925,7 +926,7 @@ void UseEnemyCardByIndex(u16 variant, u8 index) {
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if ((gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
-        if (gCardBattleState->soraHcEffect != 2) {
+        if (gCardBattleState->soraHcEffect != HC_EFFECT_ATTACK_BRACER) {
             if (gCardBattleState->activeValue < card->cardDef->value) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
@@ -970,7 +971,7 @@ void UseRandomEnemyCard(u16 variant, u8 index) {
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
-        if (gBtlWork->hcEffect == 2) {
+        if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
             if (gCardBattleState->activeValue < card->cardDef->value) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;

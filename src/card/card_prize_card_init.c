@@ -46,6 +46,7 @@
 #include "battle.h"
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "card_label_data.h"
 
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
@@ -1117,7 +1118,7 @@ static u8 PrizeCard_1(PrizeMapCardWork* work, void* task) {
         work->moveAngle += GetRandom() % 57 + 100;
     }
 
-    if (gBtlWork->hcEffect == 6) {
+    if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
         ColliderSetRadius(&work->collider, 50);
     } else {
         ColliderSetRadius(&work->collider, 10);

@@ -22,6 +22,7 @@
 #include "types.h"
 #include "key_state.h"
 #include "card_battle_riku.h"
+#include "card_label_data.h"
 
 static u16 sVsKeyHoldL[2];
 static u16 sVsKeyHoldR[2];
@@ -399,7 +400,7 @@ void VsBattleUpdate() {
     s32 busy;
     s8 rank;
 
-    if (gBtlWork->hcEffect == 53 || gRikuBtlWork->hcEffect == 53) {
+    if (gBtlWork->hcEffect == HC_EFFECT_FLOAT || gRikuBtlWork->hcEffect == HC_EFFECT_FLOAT) {
         gBtlWork->gravity = 38;
     } else {
         gBtlWork->gravity = 66;
@@ -516,8 +517,8 @@ void VsBattleUpdate() {
             gRikuBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
             gBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
-            gBtlWork->hcEffect = 0;
-            gRikuBtlWork->hcEffect = 0;
+            gBtlWork->hcEffect = HC_EFFECT_NONE;
+            gRikuBtlWork->hcEffect = HC_EFFECT_NONE;
         }
 
         if (gBtlWork->phaseStep == 140) {

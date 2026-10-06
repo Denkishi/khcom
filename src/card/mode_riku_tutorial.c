@@ -24,6 +24,7 @@
 #include "battle.h"
 #include "btl.h"
 #include "card_ids.h"
+#include "card_label_data.h"
 #include "card_message_data.h"
 
 static TaskPool sRikuTutorialTasks;
@@ -137,7 +138,7 @@ s32 ResolveActiveCardsMove(s32* out) {
         return gCardBattleState->activeCards[0]->cardDef->move;
 #ifdef VERSION_EU
     } else if (gCardBattleState->activeCardCount == 1 && (btl = gBtlWork)->soraOwnsPlay == 1) {
-        if (btl->hcEffect == 47) {
+        if (btl->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
             out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
             gCardBattleState->stockMoveCount = 2;
             return 145;
@@ -159,7 +160,7 @@ s32 ResolveActiveCardsMove(s32* out) {
             btl = gBtlWork;
 
             if (btl->soraOwnsPlay == 1) {
-                if (btl->hcEffect == 47) {
+                if (btl->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
@@ -167,7 +168,7 @@ s32 ResolveActiveCardsMove(s32* out) {
                     return GetStockMove(stockName);
                 }
             } else {
-                if (gRikuBtlWork->hcEffect == 47) {
+                if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
@@ -217,13 +218,13 @@ s32 ResolveActiveCardsMove(s32* out) {
                 }
 
                 if (gBtlWork->soraOwnsPlay == 1) {
-                    if (gBtlWork->hcEffect == 47) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 } else {
-                    if (gRikuBtlWork->hcEffect == 47) {
+                    if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
@@ -303,7 +304,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
 #ifdef VERSION_EU
         } else {
             if (gBtlWork->soraOwnsPlay == 1) {
-                if (gBtlWork->hcEffect == 47) {
+                if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
@@ -311,7 +312,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                     return gCardBattleState->activeCards[0]->cardDef->move;
                 }
             } else {
-                if (gRikuBtlWork->hcEffect == 47) {
+                if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
@@ -333,7 +334,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
             return 46;
         default:
             if (gBtlWork->soraOwnsPlay == 1) {
-                if (gBtlWork->hcEffect == 47) {
+                if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
@@ -341,7 +342,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                     return GetStockMove(stockName);
                 }
             } else {
-                if (gRikuBtlWork->hcEffect == 47) {
+                if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
@@ -392,13 +393,13 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                 }
 
                 if (gBtlWork->soraOwnsPlay == 1) {
-                    if (gBtlWork->hcEffect == 47) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 } else {
-                    if (gRikuBtlWork->hcEffect == 47) {
+                    if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;

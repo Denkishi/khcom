@@ -20,6 +20,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 
 void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     u8 angle;
@@ -214,7 +215,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         work->actor = gRikuBtlWork->actor;
                         hit = 1;
                     } else {
-                        if (gBtlWork->hcEffect == 6) {
+                        if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
                             range = 0x10000;
                         } else {
                             range = 0x2800;
@@ -227,7 +228,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         }
                     }
                 } else {
-                    if (gBtlWork->hcEffect == 6) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
                         range = 0x10000;
                     } else {
                         range = 0x2800;
@@ -238,7 +239,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         DIST(gBtlWork->actor->z, work->z) < 12800) {
                         hit = 1;
                     } else {
-                        if (gRikuBtlWork->hcEffect == 6) {
+                        if (gRikuBtlWork->hcEffect == HC_EFFECT_DRAW) {
                             range = 0x10000;
                         } else {
                             range = 0x2800;
@@ -253,7 +254,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     }
                 }
             } else {
-                if (gBtlWork->hcEffect == 6) {
+                if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
                     range = 0x10000;
                 } else {
                     range = 0x2800;

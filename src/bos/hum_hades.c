@@ -24,6 +24,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 #include "enemy_ids.h"
 
 static const u32 sHumHadesStockMoves[3] = {
@@ -350,7 +351,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
 
 #ifdef VERSION_EU
-            if (act->btl->hcEffect == 8) {
+            if (act->btl->hcEffect == HC_EFFECT_BERSERK) {
                 act->btl->hcEffectCount--;
             }
 #endif
@@ -523,7 +524,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
 #ifndef VERSION_EU
-        if (act->btl->hcEffect == 8 && act->hp < act->maxHp >> 1) {
+        if (act->btl->hcEffect == HC_EFFECT_BERSERK && act->hp < act->maxHp >> 1) {
             gBtlWork->damageScale = 0x200;
         }
 #endif
@@ -573,7 +574,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
 
 #ifdef VERSION_EU
-            if (act->btl->hcEffect == 8) {
+            if (act->btl->hcEffect == HC_EFFECT_BERSERK) {
                 act->btl->hcEffectCount--;
             }
 #endif
@@ -590,7 +591,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         case 3:
         case 4:
 #ifndef VERSION_EU
-            if (act->btl->hcEffect == 8 && act->hp < act->maxHp >> 1) {
+            if (act->btl->hcEffect == HC_EFFECT_BERSERK && act->hp < act->maxHp >> 1) {
                 gBtlWork->damageScale = 0x200;
             }
 #endif
@@ -629,7 +630,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             m4aSongNumStart(SONG_VO_HA_ATTACK01);
 
 #ifdef VERSION_EU
-            if (act->btl->hcEffect == 8) {
+            if (act->btl->hcEffect == HC_EFFECT_BERSERK) {
                 act->btl->hcEffectCount--;
             }
 #endif
@@ -644,7 +645,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             break;
         case 2:
 #ifndef VERSION_EU
-            if (act->btl->hcEffect == 8 && act->hp < act->maxHp >> 1) {
+            if (act->btl->hcEffect == HC_EFFECT_BERSERK && act->hp < act->maxHp >> 1) {
                 gBtlWork->damageScale = 0x200;
             }
 #endif

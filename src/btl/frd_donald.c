@@ -28,6 +28,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "card_label_data.h"
 
 static const AnimDef sFrdDonaldAnimDefs[6] = {
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0 },
@@ -589,7 +590,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 if (BgFxIsActive()) {
                     BgFxSetPosition(ally->x,ally->y,ally->z-0x2C00);
                 } else {
-                    if (ally->btl->hcEffect == 13) {
+                    if (ally->btl->hcEffect == HC_EFFECT_CURE_BOOST) {
                         switch (work->variant) {
                         case 0:
                             ally->hp+=75;

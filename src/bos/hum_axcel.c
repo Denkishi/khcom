@@ -30,6 +30,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "battle_ids.h"
+#include "card_label_data.h"
 #include "enemy_ids.h"
 
 static const u32 sHumAxcelStockMoves[2][3] = {
@@ -270,7 +271,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         break;
     case HUM_STATE_HURT:
         if (work->base.stateTimer == 0) {
-            if (act->btl->hcEffect == 18) {
+            if (act->btl->hcEffect == HC_EFFECT_QUICK_RECOVERY) {
                 act->btl->hcEffectCount--;
 #ifdef VERSION_EU
                 w->targetScaleX = work->base.scaleX = 0x100;

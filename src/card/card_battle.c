@@ -214,8 +214,8 @@ void CreateCardBattleState() {
     gCardBattleState->rikuStockName = 106;
     gCardBattleState->unk_0C8 = 256;
     gCardBattleState->unk_0CA = 256;
-    gCardBattleState->soraHcEffect = 0;
-    gCardBattleState->rikuHcEffect = 0;
+    gCardBattleState->soraHcEffect = HC_EFFECT_NONE;
+    gCardBattleState->rikuHcEffect = HC_EFFECT_NONE;
     gCardBattleState->activeCardCount = 0;
     gCardBattleState->unk_0D1 = 0;
     gCardBattleState->soraListIndex = 0;
@@ -520,7 +520,7 @@ static void cardbattle_0(CardBattleWork* work) {
     CpuFill32(0, work, sizeof(CardBattleWork));
     // @bug gCardBattleState is only allocated further down (NULL write).
     gCardBattleState->soraWork = work;
-    gBtlWork->hcEffect = 0;
+    gBtlWork->hcEffect = HC_EFFECT_NONE;
     ResetBossCardValue();
     ClearSoraCardPlayFlags();
     work->tiles = AllocSpriteFrameTiles(128);
@@ -633,14 +633,14 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
     if (!work->cardsClosed) {
         if (sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
             if (sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_DONE) {
-            if (gBtlWork->hcEffect == 9) {
+            if (gBtlWork->hcEffect == HC_EFFECT_QUICKLOAD) {
                 RemoveSoraCardDisplays(work);
                 TaskPoolUpdate(&work->tasks);
 
-                if (gBtlWork->hcEffect != 25) {
+                if (gBtlWork->hcEffect != HC_EFFECT_DRAW_2) {
                     IncrementReloadCount(work);
 
-                    if (gBtlWork->hcEffect == 10) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_COMBO_PLUS_2) {
                         work->reloadCounts[work->listIndex] -= 2;
 
                         if (work->reloadCounts[work->listIndex] < 0) {
@@ -661,10 +661,10 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                 gBtlWork->flags |= BTL_FLAG_RELOADING;
                 RemoveSoraCardDisplays(work);
 
-                if (gBtlWork->hcEffect != 25) {
+                if (gBtlWork->hcEffect != HC_EFFECT_DRAW_2) {
                     IncrementReloadCount(work);
 
-                    if (gBtlWork->hcEffect == 10) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_COMBO_PLUS_2) {
                         work->reloadCounts[work->listIndex] -= 2;
 
                         if (work->reloadCounts[work->listIndex] < 0) {
@@ -1178,10 +1178,10 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
 
             gBtlWork->flags |= BTL_FLAG_RELOADING;
 
-            if (gBtlWork->hcEffect != 25) {
+            if (gBtlWork->hcEffect != HC_EFFECT_DRAW_2) {
                 IncrementReloadCount(work);
 
-                if (gBtlWork->hcEffect == 10) {
+                if (gBtlWork->hcEffect == HC_EFFECT_COMBO_PLUS_2) {
                     work->reloadCounts[work->listIndex] -= 2;
 
                     if (work->reloadCounts[work->listIndex] < 0) {
@@ -1467,7 +1467,53 @@ s32 UpdateSoraReloadDeal(CardBattleWork* work, Task* task) {
 }
 
 u16 gRandomHcEffects[47] = {
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 30, 31, 34, 35, 36, 38, 39, 40, 41, 42, 43, 44, 46, 47, 48, 49, 50, 51, 53,
+    HC_EFFECT_INCREMENTOR,
+    HC_EFFECT_ATTACK_BRACER,
+    HC_EFFECT_COMBO_PLUS,
+    HC_EFFECT_FIRE_BOOST,
+    HC_EFFECT_COMBO_FINISH,
+    HC_EFFECT_DRAW,
+    HC_EFFECT_CARDBLIND,
+    HC_EFFECT_BERSERK,
+    HC_EFFECT_QUICKLOAD,
+    HC_EFFECT_COMBO_PLUS_2,
+    HC_EFFECT_BLIZZARD_BOOST,
+    HC_EFFECT_THUNDER_BOOST,
+    HC_EFFECT_CURE_BOOST,
+    HC_EFFECT_PROTECT,
+    HC_EFFECT_SLEIGHT_LOCK,
+    HC_EFFECT_RANDOM_VALUES,
+    HC_EFFECT_ALL_ZEROS,
+    HC_EFFECT_QUICK_RECOVERY,
+    HC_EFFECT_VANISH,
+    HC_EFFECT_LEAF_BRACER,
+    HC_EFFECT_DECREMENTOR,
+    HC_EFFECT_REGEN,
+    HC_EFFECT_BIO,
+    HC_EFFECT_DRAW_2,
+    HC_EFFECT_SECOND_CHANCE,
+    HC_EFFECT_AUTO_LIFE,
+    HC_EFFECT_SLEIGHTBLIND,
+    HC_EFFECT_ITEM_BRACER,
+    HC_EFFECT_RELOAD_KINESIS,
+    HC_EFFECT_RETROGRADE,
+    HC_EFFECT_WIDE_ATTACK_2,
+    HC_EFFECT_DRAIN,
+    HC_EFFECT_BACK_ATTACK,
+    HC_EFFECT_MAGIC_BOOST,
+    HC_EFFECT_SUMMON_BOOST,
+    HC_EFFECT_AUTO_RELOAD,
+    HC_EFFECT_DISPEL,
+    HC_EFFECT_HYPER_HEALING,
+    HC_EFFECT_OVERDRIVE,
+    HC_EFFECT_ATTACK_HASTE,
+    HC_EFFECT_SHELL,
+    HC_EFFECT_DOUBLE_SLEIGHT,
+    HC_EFFECT_VALUE_BREAK,
+    HC_EFFECT_WARP_BREAK,
+    HC_EFFECT_DASH,
+    HC_EFFECT_GUARD,
+    HC_EFFECT_FLOAT,
 };
 
 TaskDesc gTaskDescCardBattleSora = {
@@ -2133,7 +2179,7 @@ void SelectNextSoraCard(CardBattleWork* work, u8 listIndex) {
 
 void ApplyTrickmasterToSoraCard(CardBattleWork* work) {
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-        if (gRikuBtlWork->hcEffect == 0x30) {
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_VALUE_BREAK) {
             if (sSoraSelectedCard->value != 0) {
                 sSoraSelectedCard->value -= gCardBattleState->activeValue;
             }
@@ -2148,7 +2194,7 @@ void ApplyTrickmasterToSoraStock(CardBattleWork* work) {
     u8 i;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-        if (gRikuBtlWork->hcEffect == 0x30) {
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_VALUE_BREAK) {
             if (work->stockValue != 0) {
                 for (i = 0; i < work->stockCount; i++) {
                     CardDisplayWork* card = work->stock[i];
@@ -2203,7 +2249,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
     s32 k;
 #endif
 
-    if (gBtlWork->hcEffect == 1) {
+    if (gBtlWork->hcEffect == HC_EFFECT_INCREMENTOR) {
         n = sSoraSelectedCard->value + 1;
 
         if (n > 9) {
@@ -2216,7 +2262,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
 
         sSoraSelectedCard->value = n;
         sSoraSelectedCard->valueModified = 1;
-    } else if (gBtlWork->hcEffect == 21) {
+    } else if (gBtlWork->hcEffect == HC_EFFECT_DECREMENTOR) {
         if (sSoraSelectedCard->value != 0) {
             n = sSoraSelectedCard->value - 1;
             sSoraSelectedCard->value--;
@@ -2236,13 +2282,13 @@ void TrySoraCardBreak(CardBattleWork* work) {
     skip = 0;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-        if (gRikuBtlWork->hcEffect == 2 && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
             !gCardBattleState->rikuStockActive) {
             skip = 1;
         }
 
 #ifdef VERSION_EU
-        if (gRikuBtlWork->hcEffect == 20) {
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
             for (j = 0; j < gCardBattleState->activeCardCount; j++) {
                 if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
                     skip = 1;
@@ -2250,7 +2296,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
             }
         }
 
-        if (gRikuBtlWork->hcEffect == 29) {
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
             for (k = 0; k < gCardBattleState->activeCardCount; k++) {
                 if (gCardBattleState->activeCards[k]->cardDef->category == 2 &&
                     !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
@@ -2259,12 +2305,12 @@ void TrySoraCardBreak(CardBattleWork* work) {
             }
         }
 #else
-        if (gRikuBtlWork->hcEffect == 20 && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
             !gCardBattleState->rikuStockActive) {
             skip = 1;
         }
 
-        if (gRikuBtlWork->hcEffect == 29 && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
             !gCardBattleState->rikuStockActive) {
             skip = 1;
         }
@@ -2341,7 +2387,7 @@ s32 UseSoraCard(CardBattleWork* work) {
     if ((flags & BTL_FLAG_CARD_ACTIVE) == 0) {
         gCardBattleState->activeCards[0] = sSoraSelectedCard;
 
-        if (btl->hcEffect == 1) {
+        if (btl->hcEffect == HC_EFFECT_INCREMENTOR) {
             gCardBattleState->activeValue = sSoraSelectedCard->value + 1;
 
             if (sSoraSelectedCard->value < 9) {
@@ -2359,7 +2405,7 @@ s32 UseSoraCard(CardBattleWork* work) {
             }
 
             sSoraSelectedCard->valueModified = 1;
-        } else if (btl->hcEffect == 21) {
+        } else if (btl->hcEffect == HC_EFFECT_DECREMENTOR) {
             if (sSoraSelectedCard->value != 0) {
                 sSoraSelectedCard->value--;
                 sSoraSelectedCard->valueModified = 1;
@@ -2421,7 +2467,7 @@ s32 UseSoraCard(CardBattleWork* work) {
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
     TickSoraHcEffectOnCardUse();
 
-    if (gBtlWork->hcEffect == 37) {
+    if (gBtlWork->hcEffect == HC_EFFECT_RANDOM_FLUSH) {
         u16 hcEffect = GetRandomHcEffect();
         SyncSoraHcEffect(work);
         gCardBattleState->soraHcEffect = hcEffect;
@@ -2510,7 +2556,7 @@ s32 UseSoraCard(CardBattleWork* work) {
 
     sSoraSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
 
-    if (gBtlWork->hcEffect == 40 && (sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && work->cardsLeft[work->listIndex] == 1) {
+    if (gBtlWork->hcEffect == HC_EFFECT_AUTO_RELOAD && (sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && work->cardsLeft[work->listIndex] == 1) {
         RemoveSoraCardDisplays(work);
         sSoraSelectedCard = NULL;
         gBtlWork->flags |= BTL_FLAG_RELOADING;
@@ -2541,7 +2587,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
 
     m4aSongNumStart(SONG_SYS_CLICKI04);
 
-    if (gCardBattleState->soraHcEffect == 0) {
+    if (gCardBattleState->soraHcEffect == HC_EFFECT_NONE) {
         gCardBattleState->soraHcEffect = sSoraSelectedCard->cardDef->move;
         func_0807B458(work, gCardBattleState->soraHcEffect);
         ApplySoraHcEffect(work);
@@ -2802,7 +2848,7 @@ s32 StockSoraCard(CardBattleWork* work) {
     sSoraSelectedCard->args.slot->stocked = active = 1;
     sSoraSelectedCard->args.slot->used = active;
 
-    if (gBtlWork->hcEffect == 1) {
+    if (gBtlWork->hcEffect == HC_EFFECT_INCREMENTOR) {
         n = sSoraSelectedCard->value + 1;
 
         if (n > 9) {
@@ -2815,7 +2861,7 @@ s32 StockSoraCard(CardBattleWork* work) {
         if (sSoraSelectedCard->value < 9) {
             TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &sSoraSelectedCard->cardDef);
         }
-    } else if (gBtlWork->hcEffect == 21) {
+    } else if (gBtlWork->hcEffect == HC_EFFECT_DECREMENTOR) {
         if (sSoraSelectedCard->value != 0) {
             n = sSoraSelectedCard->value - 1;
             sSoraSelectedCard->value--;
@@ -2843,7 +2889,7 @@ s32 StockSoraCard(CardBattleWork* work) {
         sSoraSelectedCard->args.slot->removed = 1;
     }
 
-    if (gBtlWork->hcEffect == 37) {
+    if (gBtlWork->hcEffect == HC_EFFECT_RANDOM_FLUSH) {
         u16 hcEffect = GetRandomHcEffect();
         SyncSoraHcEffect(work);
         gCardBattleState->soraHcEffect = hcEffect;
@@ -2932,7 +2978,7 @@ s32 StockSoraCard(CardBattleWork* work) {
 
     sSoraSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
 
-    if (gBtlWork->hcEffect == 40 && (sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && work->cardsLeft[work->listIndex] == 1) {
+    if (gBtlWork->hcEffect == HC_EFFECT_AUTO_RELOAD && (sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && work->cardsLeft[work->listIndex] == 1) {
         RemoveSoraCardDisplays(work);
         sSoraSelectedCard = NULL;
         work->cardsLeft[0] = 0;
@@ -3024,7 +3070,7 @@ void CloseSoraCards(CardBattleWork* work) {
         }
     }
 
-    gCardBattleState->soraHcEffect = 0;
+    gCardBattleState->soraHcEffect = HC_EFFECT_NONE;
     gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
     gCardBattleState->cardsOpen = 0;
     gCardBattleState->soraStockNameShown = 0;
@@ -3060,13 +3106,13 @@ void TrySoraStockBreak(CardBattleWork* work) {
     skip = 0;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-        if (gRikuBtlWork->hcEffect == 2 && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
             !gCardBattleState->rikuStockActive) {
             skip = 1;
         }
 
 #ifdef VERSION_EU
-        if (gRikuBtlWork->hcEffect == 20) {
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
             for (j = 0; j < gCardBattleState->activeCardCount; j++) {
                 if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
                     skip = 1;
@@ -3074,7 +3120,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
             }
         }
 
-        if (gRikuBtlWork->hcEffect == 29) {
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
             for (k = 0; k < gCardBattleState->activeCardCount; k++) {
                 if (gCardBattleState->activeCards[k]->cardDef->category == 2 &&
                     !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
@@ -3083,12 +3129,12 @@ void TrySoraStockBreak(CardBattleWork* work) {
             }
         }
 #else
-        if (gRikuBtlWork->hcEffect == 20 && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
             !gCardBattleState->rikuStockActive) {
             skip = 1;
         }
 
-        if (gRikuBtlWork->hcEffect == 29 && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
             !gCardBattleState->rikuStockActive) {
             skip = 1;
         }
@@ -3268,7 +3314,7 @@ void UseSoraStock(CardBattleWork* work) {
 
         if (work->stock[i]->cardDef->flags & CARD_DEF_FLAG_ITEM) {
             work->stock[i]->args.slot->removed = 1;
-        } else if (i == 0 && gBtlWork->hcEffect != 15) {
+        } else if (i == 0 && gBtlWork->hcEffect != HC_EFFECT_SLEIGHT_LOCK) {
             work->stock[0]->args.slot->removed = 1;
         }
     }
@@ -3600,52 +3646,52 @@ void ApplySoraHcEffect(CardBattleWork* work) {
     s16* reloadCounts;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-        if (gRikuBtlWork->hcEffect != 41) {
+        if (gRikuBtlWork->hcEffect != HC_EFFECT_DISPEL) {
             gBtlWork->hcEffect = gCardBattleState->soraHcEffect;
         } else {
-            gBtlWork->hcEffect = 0;
-            gCardBattleState->soraHcEffect = 0;
+            gBtlWork->hcEffect = HC_EFFECT_NONE;
+            gCardBattleState->soraHcEffect = HC_EFFECT_NONE;
         }
 
         hcEffect = &gBtlWork->hcEffect;
 
         if (*hcEffect == 41) {
 #ifdef VERSION_EU
-            if (gRikuBtlWork->hcEffect == 47 && (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION)) {
+            if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT && (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION)) {
                 gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
             }
 #endif
 
-            gCardBattleState->rikuHcEffect = 0;
-            gRikuBtlWork->hcEffect = 0;
+            gCardBattleState->rikuHcEffect = HC_EFFECT_NONE;
+            gRikuBtlWork->hcEffect = HC_EFFECT_NONE;
             gRikuBtlWork->hcEffectCount = 0;
-            gBtlWork->hcEffect = 0;
+            gBtlWork->hcEffect = HC_EFFECT_NONE;
             gBtlWork->hcEffectCount = 0;
         }
 
         soraHcEffect = &gCardBattleState->soraHcEffect;
 
         if (*soraHcEffect == 45) {
-            if (gRikuBtlWork->hcEffect != 0) {
+            if (gRikuBtlWork->hcEffect != HC_EFFECT_NONE) {
                 gBtlWork->hcEffect = gRikuBtlWork->hcEffect;
                 gCardBattleState->soraHcEffect = gCardBattleState->rikuHcEffect;
             } else {
-                gBtlWork->hcEffect = 0;
-                gCardBattleState->rikuHcEffect = 0;
+                gBtlWork->hcEffect = HC_EFFECT_NONE;
+                gCardBattleState->rikuHcEffect = HC_EFFECT_NONE;
             }
         }
 
-        if (gBtlWork->hcEffect == 47) {
+        if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
             reloadCounts = &work->reloadCounts[0];
             reloadCount = reloadCounts;
             *reloadCount++ = 2;
             *reloadCount = 2;
         }
     } else {
-        if (gCardBattleState->soraHcEffect != 41 && gCardBattleState->soraHcEffect != 45) {
+        if (gCardBattleState->soraHcEffect != HC_EFFECT_DISPEL && gCardBattleState->soraHcEffect != HC_EFFECT_MIMIC) {
             gBtlWork->hcEffect = gCardBattleState->soraHcEffect;
         } else {
-            gBtlWork->hcEffect = 0;
+            gBtlWork->hcEffect = HC_EFFECT_NONE;
         }
     }
 }
@@ -3677,7 +3723,7 @@ u8 UpdateSoraAutoCycle(CardBattleWork* work, void* task) {
 }
 
 u8 CanUseSoraSelectedCard() {
-    if (gBtlWork->hcEffect == 38) {
+    if (gBtlWork->hcEffect == HC_EFFECT_MAGIC_BOOST) {
         if (sSoraSelectedCard->cardDef->category != 1) {
             return 1;
         }
@@ -3687,7 +3733,7 @@ u8 CanUseSoraSelectedCard() {
         }
 
         return 0;
-    } else if (gBtlWork->hcEffect == 39) {
+    } else if (gBtlWork->hcEffect == HC_EFFECT_SUMMON_BOOST) {
         if (sSoraSelectedCard->cardDef->category != 1) {
             return 1;
         }
@@ -3931,44 +3977,44 @@ u8 AddBreakDarkPoints() {
 
 void TickSoraHcEffectOnReload() {
     switch (gBtlWork->hcEffect) {
-    case 1:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 16:
-    case 17:
-    case 19:
-    case 20:
-    case 21:
-    case 24:
-    case 25:
-    case 29:
-    case 30:
-    case 31:
-    case 35:
-    case 36:
-    case 37:
-    case 38:
-    case 39:
-    case 40:
-    case 42:
-    case 51:
-    case 53:
+    case HC_EFFECT_INCREMENTOR:
+    case HC_EFFECT_COMBO_PLUS:
+    case HC_EFFECT_FIRE_BOOST:
+    case HC_EFFECT_COMBO_FINISH:
+    case HC_EFFECT_DRAW:
+    case HC_EFFECT_CARDBLIND:
+    case HC_EFFECT_QUICKLOAD:
+    case HC_EFFECT_COMBO_PLUS_2:
+    case HC_EFFECT_BLIZZARD_BOOST:
+    case HC_EFFECT_THUNDER_BOOST:
+    case HC_EFFECT_CURE_BOOST:
+    case HC_EFFECT_PROTECT:
+    case HC_EFFECT_RANDOM_VALUES:
+    case HC_EFFECT_ALL_ZEROS:
+    case HC_EFFECT_VANISH:
+    case HC_EFFECT_LEAF_BRACER:
+    case HC_EFFECT_DECREMENTOR:
+    case HC_EFFECT_BIO:
+    case HC_EFFECT_DRAW_2:
+    case HC_EFFECT_ITEM_BRACER:
+    case HC_EFFECT_RELOAD_KINESIS:
+    case HC_EFFECT_RETROGRADE:
+    case HC_EFFECT_DRAIN:
+    case HC_EFFECT_BACK_ATTACK:
+    case HC_EFFECT_RANDOM_FLUSH:
+    case HC_EFFECT_MAGIC_BOOST:
+    case HC_EFFECT_SUMMON_BOOST:
+    case HC_EFFECT_AUTO_RELOAD:
+    case HC_EFFECT_HYPER_HEALING:
+    case HC_EFFECT_GUARD:
+    case HC_EFFECT_FLOAT:
         gBtlWork->hcEffectCount--;
         break;
     }
 }
 
 void TickSoraHcEffectOnCardUse() {
-    if (gBtlWork->hcEffect == 50) {
+    if (gBtlWork->hcEffect == HC_EFFECT_DASH) {
         gBtlWork->hcEffectCount--;
     }
 }
@@ -5355,7 +5401,7 @@ void UpdateSoraReloadGauge(CardDisplayWork* work) {
                 }
 
                 if (gCardBattleState->reloadGaugeFull[0] == 0) {
-                    if (gBtlWork->hcEffect == 43) {
+                    if (gBtlWork->hcEffect == HC_EFFECT_OVERDRIVE) {
                         gCardBattleState->soraReloadGauge += 12;
                     } else {
                         gCardBattleState->soraReloadGauge += 25;
@@ -5417,7 +5463,7 @@ void UpdateSoraReloadGauge(CardDisplayWork* work) {
 
 void UpdateSoraCardValue(CardDisplayWork* work) {
     // @bug A "not have" display has no cardDef (NULL read).
-    if (gBtlWork->hcEffect == 16) {
+    if (gBtlWork->hcEffect == HC_EFFECT_RANDOM_VALUES) {
         if (work->flags & CARD_DISP_FLAG_SELECTED) {
             work->valueModified = 1;
             work->value = GetRandom() % 10;
@@ -5425,10 +5471,10 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
             work->valueModified = 0;
             work->value = work->cardDef->value;
         }
-    } else if (gBtlWork->hcEffect == 17) {
+    } else if (gBtlWork->hcEffect == HC_EFFECT_ALL_ZEROS) {
         work->valueModified = 1;
         work->value = 0;
-    } else if (gBtlWork->hcEffect == 31) {
+    } else if (gBtlWork->hcEffect == HC_EFFECT_RETROGRADE) {
         work->valueModified = 1;
         work->value = 10 - work->cardDef->value;
 
@@ -5489,16 +5535,16 @@ void TickSoraHcEffectOnPlayEnd() {
     btl = gBtlWork;
 
     switch ((u32)btl->hcEffect) {
-    case 15:
-    case 28:
-    case 47:
+    case HC_EFFECT_SLEIGHT_LOCK:
+    case HC_EFFECT_SLEIGHTBLIND:
+    case HC_EFFECT_DOUBLE_SLEIGHT:
         btl->hcEffectCount--;
         break;
     }
 }
 
 void TickSoraHcEffectOnAttackEnd() {
-    if (gBtlWork->hcEffect == 2) {
+    if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
         gBtlWork->hcEffectCount--;
     }
 }

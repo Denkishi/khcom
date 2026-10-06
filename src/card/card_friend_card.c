@@ -239,7 +239,7 @@ s32 Friend_card_1(PickupCardWork* work, void* task) {
         }
     }
 
-    if (gBtlWork->hcEffect == 6) {
+    if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
         ColliderSetRadius(&work->collider, 50);
     } else {
         ColliderSetRadius(&work->collider, 10);
@@ -347,7 +347,7 @@ s32 Gimmick_card_1(PickupCardWork* work, void* task) {
         }
     }
 
-    if (gBtlWork->hcEffect == 6) {
+    if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
         ColliderSetRadius(&work->collider, 50);
     } else {
         ColliderSetRadius(&work->collider, 10);
@@ -590,7 +590,7 @@ s32 Heartless_card_1(PickupCardWork* work, void* task) {
         }
     }
 
-    if (gBtlWork->hcEffect == 6) {
+    if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
         ColliderSetRadius(&work->collider, 50);
     } else {
         ColliderSetRadius(&work->collider, 10);
@@ -992,7 +992,7 @@ u8 StockNameRiku_1(StockNameWork* work) {
 }
 
 void StockNameRiku_2(StockNameWork* work) {
-    if (gRikuBtlWork->hcEffect != 28 && work->visible) {
+    if (gRikuBtlWork->hcEffect != HC_EFFECT_SLEIGHTBLIND && work->visible) {
         DrawSprite(120, 14, NULL, work->tiles, work->palette, NULL, 0, 10);
     }
 }

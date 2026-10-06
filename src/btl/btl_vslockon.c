@@ -14,6 +14,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 
 void task_btl_vslockon_0(BtlVslockonWork* work) {
     work->tiles = LoadObjTiles(gBtlLockonTiles, 0x180);
@@ -26,13 +27,13 @@ void task_btl_vslockon_0(BtlVslockonWork* work) {
 }
 
 s32 task_btl_vslockon_1(BtlVslockonWork* work) {
-    if (gBtlWork->hcEffect == 19) {
+    if (gBtlWork->hcEffect == HC_EFFECT_VANISH) {
         gRikuBtlWork->actor2 = NULL;
     } else {
         gRikuBtlWork->actor2 = gBtlWork->actor;
     }
 
-    if (gRikuBtlWork->hcEffect == 19) {
+    if (gRikuBtlWork->hcEffect == HC_EFFECT_VANISH) {
         gBtlWork->actor2 = NULL;
     } else {
         gBtlWork->actor2 = gRikuBtlWork->actor;

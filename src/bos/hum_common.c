@@ -31,6 +31,7 @@
 #include "romcri_backgrounds.h"
 #include "card_battle_riku.h"
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);
@@ -1063,7 +1064,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
         return 0;
     }
 
-    if (!(work->flags & HUM_FLAG_ENEMY_CARDS_SPENT) && gRikuBtlWork->hcEffect == 0
+    if (!(work->flags & HUM_FLAG_ENEMY_CARDS_SPENT) && gRikuBtlWork->hcEffect == HC_EFFECT_NONE
         && (u16)(GetRandom() % 60U) == 0) {
         gBtlWork->rikuKeys |= RIKU_KEY_SWITCH_LIST;
         return 0;

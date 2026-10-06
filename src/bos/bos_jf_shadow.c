@@ -17,6 +17,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 u16 gUnk_0203C3BC EWRAM_COMMON(4);
 u16 gUnk_0203C3C0 EWRAM_COMMON(4);
@@ -53,18 +54,18 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
 
     flags = GetBattleSpritePriorityFlags(obj->y);
 
-    if (obj->z >= 0 && gBtlWork->scale == 0x100) {
+    if (obj->z >= 0 && gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else {
-        scale = 0x200 - ((obj->groundZ - obj->z) / 128);
+        scale = Q_8_8(2) - ((obj->groundZ - obj->z) / 128);
 
         if (scale <= 127) {
-            scale = 128;
+            scale = Q_8_8(0.5);
         }
 
         doubleSize = 0;
 
-        if (scale > 0x100) {
+        if (scale > Q_8_8(1)) {
             doubleSize = 1;
         }
 

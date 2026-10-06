@@ -16,6 +16,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "engine_math.h"
 
 TaskDesc gTaskDescBtlBorn = {
     "task_btl_born",
@@ -53,10 +54,10 @@ u8 task_btl_born_1(BtlBornWork* work) {
 
         if (work->flags & SPAWN_FLAG_LARGE_EFFECT) {
             BgFxStartEnemySpawn(work->pos.x, work->pos.y,
-                          work->pos.z - 0x1000, 0x200);
+                          work->pos.z - 0x1000, Q_8_8(2));
         } else {
             BgFxStartEnemySpawn(work->pos.x, work->pos.y,
-                          work->pos.z - 0x800, 0x100);
+                          work->pos.z - 0x800, Q_8_8(1));
         }
 
         TaskCreate(&gBtlWork->taskPools[0], work->desc, work);

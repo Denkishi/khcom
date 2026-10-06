@@ -14,12 +14,13 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "engine_math.h"
 
 void task_btl_start_0(BtlStartWork* work) {
     BgAnimStart(&gBgAnimDefBtlStart, 120, 72);
-    BgAnimSetTransform(0, 0x200, 0x200);
+    BgAnimSetTransform(0, Q_8_8(2), Q_8_8(2));
     SetBgBlend(gBtlWork->bg, 16, 16);
-    SetBattleZoom(1, 0x200, 0x10000, 0x14000);
+    SetBattleZoom(1, Q_8_8(2), 0x10000, 0x14000);
     FadeStartIn(FADE_MODE_BLACK, 60);
     work->timer = 0;
     m4aSongNumStart(SONG_SYS_ENCOUNT);
@@ -33,7 +34,7 @@ s32 task_btl_start_1(BtlStartWork* work) {
 
     switch (work->timer) {
     case 34:
-        SetBattleZoom(35, 0x100, gBtlWork->x2, gBtlWork->y2);
+        SetBattleZoom(35, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         break;
     case 43:
         FadeStartIn(FADE_MODE_ADD_WHITE, 30);

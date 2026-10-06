@@ -174,8 +174,8 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     case BTL_REACTION_CARD_BROKEN:
         m4aSongNumStop(SONG_EF_RAC_BEEM);
-        work->base.scaleX = 256;
-        work->base.scaleY = 256;
+        work->base.scaleX = Q_8_8(1);
+        work->base.scaleY = Q_8_8(1);
         break;
     }
 
@@ -679,7 +679,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             w->flags &= ~LAXENE_FLAG_ATTACK_HIT;
             w->scaleSteps = 8;
             work->base.scaleX = 5;
-            work->base.scaleY = 384;
+            work->base.scaleY = Q_8_8(1.5);
         }
 
         if (work->base.anim.timer == 0) {
@@ -794,7 +794,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.vz = 0x400;
             w->scaleSteps = 8;
             work->base.scaleX = 5;
-            work->base.scaleY = 384;
+            work->base.scaleY = Q_8_8(1.5);
         }
 
         MakeOpponentsHittable();
@@ -838,8 +838,8 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     TaskPoolUpdate(&w->tasks);
 
     if ((s16)w->scaleSteps > 0) {
-        ApproachValue(&work->base.scaleX, 256, w->scaleSteps);
-        ApproachValue(&work->base.scaleY, 256, w->scaleSteps);
+        ApproachValue(&work->base.scaleX, Q_8_8(1), w->scaleSteps);
+        ApproachValue(&work->base.scaleY, Q_8_8(1), w->scaleSteps);
         w->scaleSteps--;
     }
 

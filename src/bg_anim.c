@@ -9,6 +9,7 @@
 #include "bg_animation_types.h"
 #include "display.h"
 #include "types.h"
+#include "engine_math.h"
 
 static BgAnimationDef* sBgAnimCurrent;
 static u16 sBgAnimFrameTimer;
@@ -110,8 +111,8 @@ void BgAnimStart(BgAnimationDef* def, s32 x, s32 y) {
     sBgAnimFrameDuration = def->frameDuration;
 
     if (sBgAnimAffine) {
-        sBgAnimScaleX = 0x100;
-        sBgAnimScaleY = 0x100;
+        sBgAnimScaleX = Q_8_8(1);
+        sBgAnimScaleY = Q_8_8(1);
         sBgAnimRotation = 0;
     }
 

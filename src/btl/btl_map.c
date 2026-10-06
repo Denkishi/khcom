@@ -280,8 +280,8 @@ void task_btl_map_0(BtlMapWork* work) {
         }
     }
 
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0x10000;
     gBtlWork->y = 0x16000;
     gBtlWork->viewX = 0x10000;
@@ -367,12 +367,12 @@ s32 task_btl_map_1(BtlMapWork* work) {
         ApproachValueHalfSteps(&gBtlWork->x, gBtlWork->zoomX, gBtlWork->zoomSteps);
         ApproachValueHalfSteps(&gBtlWork->y, gBtlWork->zoomY, gBtlWork->zoomSteps);
 
-        if (gBtlWork->zoomScale == 0x100) {
+        if (gBtlWork->zoomScale == Q_8_8(1)) {
             ApproachValueHalfSteps(&work->xMin, gBtlWork->xMin << 8, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->xMax, gBtlWork->xMax << 8, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->yMin, gBtlWork->yMin << 8, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->yMax, (gBtlWork->yMax + 0x20) << 8, gBtlWork->zoomSteps);
-        } else if (gBtlWork->zoomScale > 0x100) {
+        } else if (gBtlWork->zoomScale > Q_8_8(1)) {
             ApproachValueHalfSteps(&work->xMin, 0x3000, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->xMax, 0x1D000, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->yMin, 0x9000, gBtlWork->zoomSteps);
@@ -380,7 +380,7 @@ s32 task_btl_map_1(BtlMapWork* work) {
         }
 
         gBtlWork->zoomSteps--;
-    } else if (gBtlWork->scale == 0x100) {
+    } else if (gBtlWork->scale == Q_8_8(1)) {
         dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
         dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
 

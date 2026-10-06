@@ -69,8 +69,8 @@ void card_enemy_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->priority = 0x50;
     work->timer = 0;
     LookupEnemyCardDef(&work->args, &work->cardDef, work->args.index);
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->bobAngle = GetRandom();
     work->angle = 0;
     work->ringRadius = 0;
@@ -290,12 +290,12 @@ u8 EnemyCardShrinkAway(CardDisplayWork* work) {
         work->angle += work->spinSpeed;
         work->spinSpeed++;
 
-        if (work->scaleX <= 25) {
+        if (work->scaleX <= Q_8_8(0.1)) {
             return 0;
         }
 
-        work->scaleX -= 25;
-        work->scaleY -= 25;
+        work->scaleX -= Q_8_8(0.1);
+        work->scaleY -= Q_8_8(0.1);
     }
 
     return 1;
@@ -457,8 +457,8 @@ u8 EnemyCardBreakFall(CardDisplayWork* work, void* task) {
             work->scaleX = -20;
         }
 
-        if (work->scaleX <= -0x100) {
-            work->scaleX = -0x100;
+        if (work->scaleX <= Q_8_8(-1)) {
+            work->scaleX = Q_8_8(-1);
             work->flags |= CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     } else {
@@ -468,8 +468,8 @@ u8 EnemyCardBreakFall(CardDisplayWork* work, void* task) {
             work->scaleX = 20;
         }
 
-        if (work->scaleX >= 0x100) {
-            work->scaleX = 0x100;
+        if (work->scaleX >= Q_8_8(1)) {
+            work->scaleX = Q_8_8(1);
             work->flags &= ~CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     }
@@ -525,8 +525,8 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
     }
 
     work->cardDef = &gCardDefs[id];
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->bobAngle = GetRandom();
     work->angle = 0;
     work->ringRadius = 0;
@@ -595,8 +595,8 @@ void EnemyUsecardByIndexInit(CardDisplayWork* work, CardDisplayArgs* args) {
     }
 
     work->cardDef = &gCardDefs[id];
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->bobAngle = GetRandom();
     work->angle = 0;
     work->ringRadius = 0;
@@ -638,8 +638,8 @@ void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* args) {
     }
 
     work->cardDef = &gCardDefs[id];
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->bobAngle = GetRandom();
     work->angle = 0;
     work->ringRadius = 0;

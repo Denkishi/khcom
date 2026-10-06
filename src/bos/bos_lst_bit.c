@@ -138,7 +138,7 @@ u8 BosLstBitIsScaling(Task* task) {
     work = task->work;
     scaling = BosLstBitIsAlive(task);
 
-    if (scaling == 1 && (work->scaleX == 0x100 || work->scaleY == 0x100)) {
+    if (scaling == 1 && (work->scaleX == Q_8_8(1) || work->scaleY == Q_8_8(1))) {
         scaling = 0;
     }
 
@@ -445,8 +445,8 @@ u8 task_bos_lst_bit_1(LstState* work) {
         ApproachValueHalfSteps(&work->x, work->targetX, 20);
         ApproachValueHalfSteps(&work->y, work->targetY, 20);
         ApproachValueHalfSteps(&work->z, work->targetZ, 20);
-        ApproachValueHalfSteps(&work->scaleX, 0x100, 32);
-        ApproachValueHalfSteps(&work->scaleY, 0x100, 32);
+        ApproachValueHalfSteps(&work->scaleX, Q_8_8(1), 32);
+        ApproachValueHalfSteps(&work->scaleY, Q_8_8(1), 32);
         work->timer++;
 
         if (work->timer > 29) {
@@ -454,8 +454,8 @@ u8 task_bos_lst_bit_1(LstState* work) {
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
-            work->scaleX = 0x100;
-            work->scaleY = 0x100;
+            work->scaleX = Q_8_8(1);
+            work->scaleY = Q_8_8(1);
         }
 
         break;
@@ -598,7 +598,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         ApproachValueHalfSteps(&work->x, work->targetX, 16);
         ApproachValueHalfSteps(&work->y, work->targetY, 16);
         ApproachValueHalfSteps(&work->z, work->targetZ, 16);
-        ApproachValueHalfSteps(&work->scaleX, 0x200, 16);
+        ApproachValueHalfSteps(&work->scaleX, Q_8_8(2), 16);
         ApproachValueHalfSteps(&work->scaleY, 2, 16);
         work->timer++;
 
@@ -611,8 +611,8 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
         break;
     case BOS_LST_BIT_STATE_HIDDEN:
-        work->scaleX = 0x100;
-        work->scaleY = 0x100;
+        work->scaleX = Q_8_8(1);
+        work->scaleY = Q_8_8(1);
         AnimReset(&work->anim);
         AnimChange(&work->anim, 4, ANIM_FLAG_LOOP);
         break;

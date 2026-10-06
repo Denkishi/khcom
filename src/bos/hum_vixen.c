@@ -882,13 +882,13 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
 
         switch (GetRandom() % 3) {
         case 0:
-            work->targetScale = 0x100;
+            work->targetScale = Q_8_8(1);
             break;
         case 1:
-            work->targetScale = 0xC0;
+            work->targetScale = Q_8_8(0.75);
             break;
         case 2:
-            work->targetScale = 0x80;
+            work->targetScale = Q_8_8(0.5);
             break;
         }
     }
@@ -969,7 +969,7 @@ void task_hum_vixen_ice_2(VixenIceWork* work) {
         WorldToScreen(&x, &y, work->sub->x, work->sub->y, 0);
         scale = work->scale * gBtlWork->scale >> 8;
 
-        if (gBtlWork->rotation != 0 || scale > 0x100) {
+        if (gBtlWork->rotation != 0 || scale > Q_8_8(1)) {
             affine = AllocObjAffine(gBtlWork->rotation, scale, scale, 1);
         } else {
             affine = AllocObjAffine(gBtlWork->rotation, scale, scale, 0);

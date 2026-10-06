@@ -2796,7 +2796,7 @@ void RikuCardInit(CardDisplayWork* work, CardDisplayArgs* args) {
     }
 
     work->scaleX = 0;
-    work->scaleY = 0x100;
+    work->scaleY = Q_8_8(1);
     work->bobAngle = 0;
     work->angle = 0;
     work->ringAngle = 0;
@@ -2841,7 +2841,7 @@ u8 RikuCardUpdate(CardDisplayWork* work, void* task) {
     if (work->flags & CARD_DISP_FLAG_SELECTED) {
         if ((s16)work->timer > 0) {
             work->flags &= ~CARD_DISP_FLAG_SETTLED;
-            ApproachValue(&work->scaleX, 0x100, work->timer);
+            ApproachValue(&work->scaleX, Q_8_8(1), work->timer);
             work->timer--;
         } else {
             work->flags |= CARD_DISP_FLAG_SETTLED;
@@ -3087,8 +3087,8 @@ u8 RikuStockWaitPlayEnd(CardDisplayWork* work, void* task) {
     ApproachValue(&work->ringCenterX, gPlayedCardCenter[0], work->timer);
     ApproachValue(&work->ringCenterY, gPlayedCardCenter[1], work->timer);
     ApproachValue(&work->ringRadius, work->ringRadiusTarget, work->timer);
-    ApproachValue(&work->scaleX, 0x100, work->timer);
-    ApproachValue(&work->scaleY, 0x100, work->timer);
+    ApproachValue(&work->scaleX, Q_8_8(1), work->timer);
+    ApproachValue(&work->scaleY, Q_8_8(1), work->timer);
 
     if ((s16)work->timer > 0) {
         work->timer--;
@@ -3144,8 +3144,8 @@ u8 RikuStockMoveToPlay(CardDisplayWork* work, void* task) {
     ApproachValue(&work->ringCenterX, gPlayedCardCenter[0], work->timer);
     ApproachValue(&work->ringCenterY, gPlayedCardCenter[1], work->timer);
     ApproachValue(&work->ringRadius, work->ringRadiusTarget, work->timer);
-    ApproachValue(&work->scaleX, 0x100, work->timer);
-    ApproachValue(&work->scaleY, 0x100, work->timer);
+    ApproachValue(&work->scaleX, Q_8_8(1), work->timer);
+    ApproachValue(&work->scaleY, Q_8_8(1), work->timer);
 
     if ((s16)work->timer > 0) {
         work->timer--;
@@ -3278,9 +3278,9 @@ u8 RikuStockMoveToSlot(CardDisplayWork* work, void* task) {
 
     if (work->flags & CARD_DISP_FLAG_OPEN) {
         ApproachValue(&work->x, gRikuCardLayout[3 - work->stockIndex][0], work->timer);
-        ApproachValue(&work->scaleY, 179, work->timer);
+        ApproachValue(&work->scaleY, Q_8_8(0.7), work->timer);
         ApproachValue(&work->y, gRikuCardLayout[3 - work->stockIndex][1], work->timer);
-        ApproachValue(&work->scaleX, 179, work->timer);
+        ApproachValue(&work->scaleX, Q_8_8(0.7), work->timer);
     } else {
         ApproachValue(&work->x, gRikuCardLayout[4][0], work->timer);
         ApproachValue(&work->y, gRikuCardLayout[4][1], work->timer);
@@ -3293,8 +3293,8 @@ u8 RikuStockMoveToSlot(CardDisplayWork* work, void* task) {
         work->flags &= ~CARD_DISP_FLAG_SETTLED;
     } else {
         work->timer = 0;
-        work->scaleX = 0x100;
-        work->scaleY = 0x100;
+        work->scaleX = Q_8_8(1);
+        work->scaleY = Q_8_8(1);
         work->flags |= CARD_DISP_FLAG_SETTLED;
 
         if (work->flags & CARD_DISP_FLAG_STOCK_NAMED) {
@@ -3350,12 +3350,12 @@ u8 RikuCardDeal(CardDisplayWork* work, void* task) {
         return fn(work, task);
     }
 
-    ApproachValue(&work->scaleX, 0x100, work->timer);
+    ApproachValue(&work->scaleX, Q_8_8(1), work->timer);
     work->timer--;
 
     if (work->timer == 0) {
         work->flags &= ~CARD_DISP_FLAG_DEALING;
-        work->scaleX = 0x100;
+        work->scaleX = Q_8_8(1);
 
         if (work->flags & CARD_DISP_FLAG_RELOAD_CARD) {
             gCardBattleState->rikuReloadCharging = 0;
@@ -3408,12 +3408,12 @@ u8 RikuCardShrinkAway(CardDisplayWork* work) {
         work->angle += work->spinSpeed;
         work->spinSpeed++;
 
-        if (work->scaleX <= 25) {
+        if (work->scaleX <= Q_8_8(0.1)) {
             return 0;
         }
 
-        work->scaleX -= 25;
-        work->scaleY -= 25;
+        work->scaleX -= Q_8_8(0.1);
+        work->scaleY -= Q_8_8(0.1);
     }
 
     return 1;
@@ -3465,7 +3465,7 @@ u8 DispatchRikuCardCommand(CardDisplayWork* work, void* task) {
     case CARD_DISP_COMMAND_PLAY:
         work->timer = 10;
         work->priority -= 4;
-        work->scaleX = 0x100;
+        work->scaleX = Q_8_8(1);
         SetTaskUpdate(task, (TaskUpdateFunc)RikuCardMoveToPlay);
         return 1;
     case CARD_DISP_COMMAND_STOCK:
@@ -3538,8 +3538,8 @@ u8 RikuCardBreakFall(CardDisplayWork* work, void* task) {
             work->scaleX = -10;
         }
 
-        if (work->scaleX <= -0x100) {
-            work->scaleX = -0x100;
+        if (work->scaleX <= Q_8_8(-1)) {
+            work->scaleX = Q_8_8(-1);
             work->flags |= CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     } else {
@@ -3549,8 +3549,8 @@ u8 RikuCardBreakFall(CardDisplayWork* work, void* task) {
             work->scaleX = 10;
         }
 
-        if (work->scaleX >= 0x100) {
-            work->scaleX = 0x100;
+        if (work->scaleX >= Q_8_8(1)) {
+            work->scaleX = Q_8_8(1);
             work->flags &= ~CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     }
@@ -3596,9 +3596,9 @@ u8 RikuHeartlessCardShow(CardDisplayWork* work) {
 
     work->command = CARD_DISP_COMMAND_NONE;
     ApproachValue(&work->x, 0xD800, work->timer);
-    ApproachValue(&work->scaleY, 0x99, work->timer);
+    ApproachValue(&work->scaleY, Q_8_8(0.6), work->timer);
     ApproachValue(&work->y, 0x6400, work->timer);
-    ApproachValue(&work->scaleX, 0x99, work->timer);
+    ApproachValue(&work->scaleX, Q_8_8(0.6), work->timer);
 
     if ((s16)work->timer > 0) {
         work->timer--;
@@ -3619,11 +3619,11 @@ u8 RikuStockVanish(CardDisplayWork* work) {
         return result;
     }
 
-    work->scaleX -= 12;
-    work->scaleY += 12;
+    work->scaleX -= Q_8_8(0.05);
+    work->scaleY += Q_8_8(0.05);
 
     if (work->scaleY > 0x1FF) {
-        work->scaleY = 0x200;
+        work->scaleY = Q_8_8(2);
     }
 
     return 1;
@@ -3646,7 +3646,7 @@ void Reload_Card_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->flags = (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE);
     work->cardDef = NULL;
     work->scaleX = 0;
-    work->scaleY = 0x100;
+    work->scaleY = Q_8_8(1);
     work->bobAngle = 0;
     work->angle = 0;
     work->stockIndex = 0;
@@ -3683,7 +3683,7 @@ u8 Reload_Card_1(CardDisplayWork* work, void* task) {
     if (work->flags & CARD_DISP_FLAG_SELECTED) {
         if ((s16)work->timer > 0) {
             work->flags &= ~CARD_DISP_FLAG_SETTLED;
-            ApproachValue(&work->scaleX, 0x100, work->timer);
+            ApproachValue(&work->scaleX, Q_8_8(1), work->timer);
             gCardBattleState->rikuReloadCharging = 0;
             work->timer--;
         } else {
@@ -3787,13 +3787,13 @@ void UpdateRikuReloadGauge(CardDisplayWork* work) {
 
                 if (gCardBattleState->reloadGaugeFull[1] == 0) {
                     if (gRikuBtlWork->hcEffect == HC_EFFECT_OVERDRIVE) {
-                        gCardBattleState->rikuReloadGauge += 12;
+                        gCardBattleState->rikuReloadGauge += Q_8_8(0.05);
                     } else {
-                        gCardBattleState->rikuReloadGauge += 25;
+                        gCardBattleState->rikuReloadGauge += Q_8_8(0.1);
                     }
 
-                    if ((s32)gCardBattleState->rikuReloadGauge > 0x100) {
-                        gCardBattleState->rikuReloadGauge = 0x100;
+                    if ((s32)gCardBattleState->rikuReloadGauge > Q_8_8(1)) {
+                        gCardBattleState->rikuReloadGauge = Q_8_8(1);
                         gCardBattleState->reloadGaugeFull[1] = 1;
                     }
                 } else {
@@ -3858,7 +3858,7 @@ void Reload_Card_2(CardDisplayWork* work) {
     u16 attr;
 
     attr = 0x410;
-    affine = AllocObjAffine(0, work->scaleX, 0x100, 0);
+    affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
 
     if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {
         gauge = work->reloadGauge;
@@ -4012,7 +4012,7 @@ void Bosscard_0(BossCardWork* work, u32* arg) {
     gBossCardRequestValue = GetRandom() % 9;
     work->x = 0x100;
     work->y = 0x84;
-    work->flipScale = 0x100;
+    work->flipScale = Q_8_8(1);
     work->unk_2F = 1;
     work->unk_30 = 1;
     work->bobAngle = 0;
@@ -4093,7 +4093,7 @@ void Bosscard_3() {
 
 u8 FlipBossCard(BossCardWork* work, u8 requested) {
     if (work->flipShrinking == 1) {
-        work->flipScale -= 51;
+        work->flipScale -= Q_8_8(0.2);
 
         if (work->flipScale <= 2) {
             work->flipScale = 2;
@@ -4106,10 +4106,10 @@ u8 FlipBossCard(BossCardWork* work, u8 requested) {
             SetBossCardValue(gBossCardRequestValue);
         }
     } else {
-        work->flipScale += 51;
+        work->flipScale += Q_8_8(0.2);
 
         if (work->flipScale > 255) {
-            work->flipScale = 256;
+            work->flipScale = Q_8_8(1);
             work->flipShrinking = 1;
             return 1;
         }

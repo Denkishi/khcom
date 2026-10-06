@@ -18,6 +18,7 @@
 #include "registration_data.h"
 #include "taskpool.h"
 #include "types.h"
+#include "engine_math.h"
 
 TaskDesc gTaskDescBosLstLsr = {
     "task_bos_lst_lsr",
@@ -243,7 +244,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
         depth = -0x1004 - (work->pos2.y >> 8) * 4;
-        affine = AllocObjAffine(0, 0x100 - work->timer * 8, work->timer * 16 + 0x100, 1);
+        affine = AllocObjAffine(0, Q_8_8(1) - work->timer * 8, work->timer * 16 + Q_8_8(1), 1);
         gfx = AnimGetGfx(&work->anim);
         DrawSprite(x1, y1, gfx, work->tiles, work->palette,
                    affine, prio | 4, depth);

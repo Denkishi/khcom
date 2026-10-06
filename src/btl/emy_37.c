@@ -371,7 +371,7 @@ void task_emy_37_2(Emy37Work* work) {
 
         scaleY = work->base.scaleY;
 
-        if (scaleY == 0x100) {
+        if (scaleY == Q_8_8(1)) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sy = gBtlWork->scale;
                 sx = sy;
@@ -397,7 +397,7 @@ void task_emy_37_2(Emy37Work* work) {
 
         if (w->rotation) {
             affine = AllocObjAffine(w->rotation, sx, sy, 1);
-        } else if (sy == 0x100 && sx == sy) {
+        } else if (sy == Q_8_8(1) && sx == sy) {
             affine = NULL;
         } else if (sy <= 0xFF) {
             affine = AllocObjAffine(0, sx, sy, 0);

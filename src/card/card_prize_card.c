@@ -67,9 +67,9 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     work->vz = -(GetRandom() % 129 + 0x300);
     work->speed = GetRandom() % 129 + 0x80;
     work->moveAngle = GetRandom() % 256;
-    work->scaleX = 0x80;
-    work->scaleY = 0x80;
-    work->scale = 0x80;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
+    work->scale = Q_8_8(0.5);
     work->flipAngleY = 0;
     work->flipAngleX = 0;
     collider = &work->collider;
@@ -234,7 +234,7 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* task) {
     if (work->scale <= 255) {
         work->scale += 2;
     } else {
-        work->scale = 256;
+        work->scale = Q_8_8(1);
     }
 
     work->x = work->pos.x >> 8;
@@ -294,7 +294,7 @@ static void PrizeCard_2(PrizeCardWork* work) {
         pal = 0x800;
     }
 
-    if (work->scaleX == 0x100 && work->rotation == 0) {
+    if (work->scaleX == Q_8_8(1) && work->rotation == 0) {
         affine = NULL;
     } else {
         affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
@@ -311,7 +311,7 @@ static void PrizeCard_2(PrizeCardWork* work) {
                pal, work->priority - 1);
 
     if (work->collected[0] == 0) {
-        shadowScale = 204 - ((work->pos.ground - work->pos.z) >> 7);
+        shadowScale = Q_8_8(0.8) - ((work->pos.ground - work->pos.z) >> 7);
 
         if (shadowScale <= 2) {
             shadowScale = 2;

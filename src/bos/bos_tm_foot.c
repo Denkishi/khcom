@@ -1698,14 +1698,14 @@ void task_bos_tm_arm_2(TmArmWork* work) {
 
     for (i = 0; i < 3; i++) {
         joint = &work->joints.all[i + 4];
-        affine = AllocObjAffine(joint->angle, 256, 256, 0);
+        affine = AllocObjAffine(joint->angle, Q_8_8(1), Q_8_8(1), 0);
         WorldToScreen(&x, &y, work->src->x + joint->curX, work->src->y,
                       work->src->z + joint->curY);
         depth = -4100;
         DrawSprite(x, y, joint->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                    (depth -= (work->src->y >> 8) * 4, (u16)depth));
         joint = &work->joints.all[i];
-        affine = AllocObjAffine(joint->angle, 256, 256, 0);
+        affine = AllocObjAffine(joint->angle, Q_8_8(1), Q_8_8(1), 0);
         WorldToScreen(&x, &y, work->src->x2 + joint->curX, work->src->y2,
                       work->src->z2 + joint->curY);
         depth = -4100;
@@ -1714,19 +1714,19 @@ void task_bos_tm_arm_2(TmArmWork* work) {
     }
 
     if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-        scaleX = 256;
+        scaleX = Q_8_8(1);
     } else {
-        scaleX = -256;
+        scaleX = Q_8_8(-1);
     }
 
     joint = &work->joints.all[7];
-    affine = AllocObjAffine(joint->angle, scaleX, 256, 0);
+    affine = AllocObjAffine(joint->angle, scaleX, Q_8_8(1), 0);
     WorldToScreen(&x, &y, work->src->x + joint->curX, work->src->y,
                   work->src->z + joint->curY);
     DrawSprite(x, y, joint->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                (endDepth = -4100 - (work->src->y >> 8) * 4, (u16)endDepth));
     joint = &work->joints.all[3];
-    affine = AllocObjAffine(joint->angle, scaleX, 256, 0);
+    affine = AllocObjAffine(joint->angle, scaleX, Q_8_8(1), 0);
     WorldToScreen(&x, &y, work->src->x2 + joint->curX, work->src->y2,
                   work->src->z2 + joint->curY);
     DrawSprite(x, y, joint->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),

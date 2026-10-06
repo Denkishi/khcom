@@ -17,6 +17,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 void task_btl_escape_0(BtlEscapeWork* work) {
     void** frames;
@@ -119,10 +120,10 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     if (work->progressRatio > 0) {
         scale = work->progressRatio * 2;
 
-        if (scale > 256) {
-            affine = AllocObjAffine(0, scale, 256, 1);
+        if (scale > Q_8_8(1)) {
+            affine = AllocObjAffine(0, scale, Q_8_8(1), 1);
         } else {
-            affine = AllocObjAffine(0, scale, 256, 0);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), 0);
         }
 
         DrawSprite(x, y, work->gfx3, work->tiles, work->palette, affine, 0, 1);

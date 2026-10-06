@@ -583,8 +583,8 @@ void task_bos_jf_map_0(JfMapWork* work, JfMapArg* arg) {
     BosJfDrawPillars();
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0x23E00;
     gBtlWork->y = 0x12800;
     gBtlWork->viewX = 0x23E00;

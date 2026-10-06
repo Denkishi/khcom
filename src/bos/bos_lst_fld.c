@@ -467,8 +467,8 @@ void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
 
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0xF800;
     gBtlWork->y = 0x1F000;
     gBtlWork->viewX = 0xF800;

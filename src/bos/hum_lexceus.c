@@ -159,8 +159,8 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         break;
     case BTL_REACTION_CARD_BROKEN:
-        work->base.scaleX = work->targetScaleX = 0x100;
-        work->base.scaleY = work->targetScaleY = 0x100;
+        work->base.scaleX = work->targetScaleX = Q_8_8(1);
+        work->base.scaleY = work->targetScaleY = Q_8_8(1);
         work->scaleSteps = 0;
 
         if (work->targetTilt != 0) {
@@ -747,10 +747,10 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
     if (work->z >= 0) {
         affine = NULL;
     } else {
-        scale = 0x100 - (-work->z) / 256;
+        scale = Q_8_8(1) - (-work->z) / 256;
 
         if (scale <= 75) {
-            scale = 76;
+            scale = Q_8_8(0.3);
         }
 
         affine = AllocObjAffine(0, scale, scale, 0);
@@ -789,7 +789,7 @@ void task_hum_lex_tmh0_0(LexTmh0Work* work, VixenNdlArgs* args) {
 
 u8 task_hum_lex_tmh0_1(LexTmh0Work* work) {
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
-        ApproachValue(&work->scale, 0x100, work->steps--);
+        ApproachValue(&work->scale, Q_8_8(1), work->steps--);
 
         if (work->steps > 0) {
             AnimUpdate(&work->anim);
@@ -813,7 +813,7 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
     attr = GetBattleSpritePriorityFlags(work->y);
     scale = work->scale;
 
-    if (scale == 0x100) {
+    if (scale == Q_8_8(1)) {
         if (!work->facingLeft) {
             attr |= 1;
         }
@@ -827,7 +827,7 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
         }
     }
 
-    affine = AllocObjAffine(0, sx, 0x100, 0);
+    affine = AllocObjAffine(0, sx, Q_8_8(1), 0);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, affine, attr,
         -0x100C - (work->y >> 8) * 4);

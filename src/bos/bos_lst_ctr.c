@@ -250,16 +250,16 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
         }
 
         if (elapsed <= 15) {
-            affine = AllocObjAffine(0, 0x100, elapsed * 16, 0);
+            affine = AllocObjAffine(0, Q_8_8(1), elapsed * 16, 0);
         }
 
         break;
     case BOS_LST_CTR_STATE_DROP:
-        affine = AllocObjAffine(0, 0x100 - work->timer * 4, 0x100 - work->timer * 4, 1);
+        affine = AllocObjAffine(0, Q_8_8(1) - work->timer * 4, Q_8_8(1) - work->timer * 4, 1);
         break;
     case BOS_LST_CTR_STATE_LAND:
-        affine = AllocObjAffine(0, 0x100 - (work->duration - work->timer) * 4,
-                                0x100 - work->duration * 4, 1);
+        affine = AllocObjAffine(0, Q_8_8(1) - (work->duration - work->timer) * 4,
+                                Q_8_8(1) - work->duration * 4, 1);
         break;
     default:
         if (work->curX + work->offsetX > work->x2) {

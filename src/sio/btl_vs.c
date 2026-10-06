@@ -23,6 +23,7 @@
 #include "key_state.h"
 #include "card_battle_riku.h"
 #include "card_label_data.h"
+#include "engine_math.h"
 
 static u16 sVsKeyHoldL[2];
 static u16 sVsKeyHoldR[2];
@@ -439,7 +440,7 @@ void VsBattleUpdate() {
         }
 
         MosaicStartIn(16, 15);
-        SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
+        SetBattleZoom(1, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         gBtlWork->phaseStep = 0;
     }
 
@@ -516,7 +517,7 @@ void VsBattleUpdate() {
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
             gRikuBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
             gBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             gBtlWork->hcEffect = HC_EFFECT_NONE;
             gRikuBtlWork->hcEffect = HC_EFFECT_NONE;
         }

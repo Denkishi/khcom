@@ -203,8 +203,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             break;
         }
 
-        w->targetScaleX = work->base.scaleX = 0x100;
-        w->targetScaleY = work->base.scaleY = 0x100;
+        w->targetScaleX = work->base.scaleX = Q_8_8(1);
+        w->targetScaleY = work->base.scaleY = Q_8_8(1);
         break;
     case BTL_REACTION_CARD_BROKEN:
         work->base.flags &= ~HUM_FLAG_BEHIND_BG_FX;
@@ -213,8 +213,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 #endif
         sub->flags |= HUM_SUB_FLAG_HIDDEN;
         sub2->flags |= HUM_SUB_FLAG_HIDDEN;
-        work->targetScaleX = work->base.scaleX = 0x100;
-        work->targetScaleY = work->base.scaleY = 0x100;
+        work->targetScaleX = work->base.scaleX = Q_8_8(1);
+        work->targetScaleY = work->base.scaleY = Q_8_8(1);
         m4aSongNumStop(SONG_EF_AKL_FIREWALL);
         break;
     }
@@ -274,8 +274,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             if (act->btl->hcEffect == HC_EFFECT_QUICK_RECOVERY) {
                 act->btl->hcEffectCount--;
 #ifdef VERSION_EU
-                w->targetScaleX = work->base.scaleX = 0x100;
-                w->targetScaleY = work->base.scaleY = 0x100;
+                w->targetScaleX = work->base.scaleX = Q_8_8(1);
+                w->targetScaleY = work->base.scaleY = Q_8_8(1);
 #endif
                 act->vx = act->vy = 0;
                 work->base.vz = 0;
@@ -289,8 +289,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case HUM_STATE_STUNNED:
     case HUM_STATE_GRAVITY:
         if (work->base.stateTimer == 0) {
-            w->targetScaleX = work->base.scaleX = 0x100;
-            w->targetScaleY = work->base.scaleY = 0x100;
+            w->targetScaleX = work->base.scaleX = Q_8_8(1);
+            w->targetScaleY = work->base.scaleY = Q_8_8(1);
         }
 
         w->hoverZ = 0;
@@ -370,14 +370,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
 
         if (w->steps == 19) {
-            AxcelScaleTo(w, 12, 0x200, 8);
+            AxcelScaleTo(w, Q_8_8(0.05), Q_8_8(2), 8);
         }
 
         if (w->steps == 11) {
             act->x = work->base.targetX;
             act->y = work->base.targetY;
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
-            AxcelScaleTo(w, 0x100, 0x100, 8);
+            AxcelScaleTo(w, Q_8_8(1), Q_8_8(1), 8);
         }
 
         if (w->steps <= 4) {
@@ -907,14 +907,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case HUM_AXCEL_STATE_WARP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
-            AxcelScaleTo(w, 12, 512, 8);
+            AxcelScaleTo(w, Q_8_8(0.05), Q_8_8(2), 8);
         }
 
         if (work->base.stateTimer > 6) {
             if (work->base.stateTimer == 7) {
                 act->x = work->base.targetX;
                 act->y = work->base.targetY;
-                AxcelScaleTo(w, 256, 256, 8);
+                AxcelScaleTo(w, Q_8_8(1), Q_8_8(1), 8);
             }
 
             if (AnimIsFinished(&work->base.anim)) {
@@ -953,15 +953,15 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
         if (sub->z >= 0) {
             affine = NULL;
         } else {
-            scale = 0x100 - (-sub->z) / 128;
+            scale = Q_8_8(1) - (-sub->z) / 128;
 
             if (scale <= 127) {
-                scale = 128;
+                scale = Q_8_8(0.5);
             }
 
             doubleSize = 0;
 
-            if (scale > 0x100) {
+            if (scale > Q_8_8(1)) {
                 doubleSize = 1;
             }
 

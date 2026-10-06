@@ -139,7 +139,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->scale, 256, work->scaleSteps);
+        ApproachValue(&work->scale, Q_8_8(1), work->scaleSteps);
 
         if (work->scaleSteps > 0) {
             work->stateTimer++;
@@ -158,7 +158,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->scale, 25, work->scaleSteps);
+        ApproachValue(&work->scale, Q_8_8(0.1), work->scaleSteps);
 
         if (work->scaleSteps <= 0) {
             return 0;
@@ -270,7 +270,7 @@ void task_smn_mushu_2(SmnMushuWork* work) {
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+    } else if (gBtlWork->scale == Q_8_8(1) && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
         flags |= SPRITE_FLAG_HFLIP;
@@ -284,7 +284,7 @@ void task_smn_mushu_2(SmnMushuWork* work) {
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
-    if (sclX <= 256 && sclY <= 256) {
+    if (sclX <= Q_8_8(1) && sclY <= Q_8_8(1)) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
         affine = AllocObjAffine(0, sclX, sclY, 1);

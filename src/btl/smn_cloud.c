@@ -226,7 +226,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->scaleX, 256, work->steps);
+        ApproachValue(&work->scaleX, Q_8_8(1), work->steps);
         work->scaleY = work->scaleX;
 
         if (work->steps <= 0) {
@@ -262,7 +262,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->scaleX, 25, work->steps);
+        ApproachValue(&work->scaleX, Q_8_8(0.1), work->steps);
         work->scaleY = work->scaleX;
 
         if (work->steps <= 0) return 0;
@@ -274,7 +274,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         if (work->stateTimer == 0) work->steps = 8;
 
         ApproachValue(&work->scaleX, 10, work->steps);
-        ApproachValue(&work->scaleY, 512, work->steps);
+        ApproachValue(&work->scaleY, Q_8_8(2), work->steps);
 
         if (--work->steps <= 0) {
             work->state = SMN_CLOUD_STATE_TELEPORT_IN;
@@ -305,8 +305,8 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             }
         }
 
-        ApproachValue(&work->scaleX, 256, work->steps);
-        ApproachValue(&work->scaleY, 256, work->steps);
+        ApproachValue(&work->scaleX, Q_8_8(1), work->steps);
+        ApproachValue(&work->scaleY, Q_8_8(1), work->steps);
 
         if (--work->steps <= 0) {
             work->animating = 1;
@@ -340,15 +340,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
 
                     break;
                 case 7:
-                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 9:
                     m4aSongNumStart(SONG_VO_KU_ATTACK01);
@@ -364,15 +364,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
 
                     break;
                 case 1:
-                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 4:
                     m4aSongNumStart(SONG_VO_KU_ATTACK02);
@@ -385,15 +385,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 50);
 
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 512, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(2), body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            SetBattleZoom(6, 512, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(2), body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
 
                     break;
                 case 6:
-                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 }
             }
@@ -425,15 +425,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
 
                     break;
                 case 7:
-                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 9:
                     m4aSongNumStart(SONG_VO_KU_ATTACK01);
@@ -449,15 +449,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, Q_8_8(1.2), body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
 
                     break;
                 case 1:
-                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 }
             }
@@ -608,7 +608,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
     flags = GetBattleSpritePriorityFlags(body->y);
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
-    if (work->scaleX == 256 && work->scaleY == work->scaleX) {
+    if (work->scaleX == Q_8_8(1) && work->scaleY == work->scaleX) {
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sclY = gBtlWork->scale;
             sclX = sclY;
@@ -628,7 +628,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
         sclY = gBtlWork->scale * work->scaleY >> 8;
     }
 
-    if (sclY == 256 && sclX == sclY) {
+    if (sclY == Q_8_8(1) && sclX == sclY) {
         affine = NULL;
     } else if (sclY <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);

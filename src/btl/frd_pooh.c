@@ -235,7 +235,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
             work->counter = 120;
             work->animcounter = 0;
             work->scale = 0;
-            BgFxStartJfMajinBeam(body->x, body->y, body->z - 0x1A00, 0x180, 0x80, 80);
+            BgFxStartJfMajinBeam(body->x, body->y, body->z - 0x1A00, Q_8_8(1.5), 0x80, 80);
         } else work->counter++;
 
         break;
@@ -319,7 +319,7 @@ void task_frd_pooh_2(FrdPoohWork* work) {
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256) {
+    } else if (gBtlWork->scale == Q_8_8(1)) {
         sclY = gBtlWork->scale;
         sclX = sclY;
         flags |= SPRITE_FLAG_HFLIP;
@@ -330,7 +330,7 @@ void task_frd_pooh_2(FrdPoohWork* work) {
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
-    if (gBtlWork->scale == 256) {
+    if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);

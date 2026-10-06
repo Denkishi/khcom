@@ -487,43 +487,43 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             break;
         case HC_EFFECT_OVERDRIVE:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             }
 
             break;
         case HC_EFFECT_BERSERK:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON && source->hp < (source->maxHp >> 2)) {
-                scale = scale != 0 ? (scale * 512) >> 8 : 512;
+                scale = scale != 0 ? (scale * Q_8_8(2)) >> 8 : Q_8_8(2);
             }
 
             break;
         case HC_EFFECT_FIRE_BOOST:
             if (attack->flags & ATTACK_FLAG_ELEMENT_FIRE) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             }
 
             break;
         case HC_EFFECT_BLIZZARD_BOOST:
             if (attack->flags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             }
 
             break;
         case HC_EFFECT_THUNDER_BOOST:
             if (attack->flags & ATTACK_FLAG_ELEMENT_THUNDER) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             }
 
             break;
         case HC_EFFECT_MAGIC_BOOST:
             if (attack->flags & ATTACK_FLAG_KIND_MAGIC) {
-                scale = scale != 0 ? (scale * 332) >> 8 : 332;
+                scale = scale != 0 ? (scale * Q_8_8(1.3)) >> 8 : Q_8_8(1.3);
             }
 
             break;
         case HC_EFFECT_SUMMON_BOOST:
             if (attack->flags & ATTACK_FLAG_KIND_SUMMON) {
-                scale = scale != 0 ? (scale * 332) >> 8 : 332;
+                scale = scale != 0 ? (scale * Q_8_8(1.3)) >> 8 : Q_8_8(1.3);
             }
 
             break;
@@ -531,10 +531,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON) {
                 if (source->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if ((hit->flags & BTLOBJ_FLAG_FACING_LEFT) && hit->x < source->x) {
-                        scale = scale != 0 ? (scale * 512) >> 8 : 512;
+                        scale = scale != 0 ? (scale * Q_8_8(2)) >> 8 : Q_8_8(2);
                     }
                 } else if (!(hit->flags & BTLOBJ_FLAG_FACING_LEFT) && source->x < hit->x) {
-                    scale = scale != 0 ? (scale * 512) >> 8 : 512;
+                    scale = scale != 0 ? (scale * Q_8_8(2)) >> 8 : Q_8_8(2);
                 }
             }
 
@@ -547,7 +547,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         case HC_EFFECT_PROTECT:
             if (attack->flags & ATTACK_FLAG_ELEMENT_PHYSICAL) {
                 CreateBtlPopTask(hit, 0);
-                scale = scale != 0 ? (scale * 128) >> 8 : 128;
+                scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
             }
 
             break;
@@ -558,7 +558,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             if (attack->flags & ATTACK_FLAG_KIND_MAGIC)
 #endif
             {
-                scale = scale != 0 ? (scale * 128) >> 8 : 128;
+                scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
             }
 
             break;
@@ -584,10 +584,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_PHYSICAL) {
-            scale = scale != 0 ? (scale * 128) >> 8 : 128;
+            scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_PHYSICAL) {
             if (target->flags & (BTLOBJ_FLAG_BOSS | BTLOBJ_FLAG_HUM_BOSS | BTLOBJ_FLAG_PLAYER)) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             } else {
                 hit->flags |= BTLOBJ_FLAG_STUN_PENDING;
             }
@@ -610,10 +610,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_NEUTRAL) {
-            scale = scale != 0 ? (scale * 128) >> 8 : 128;
+            scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_NEUTRAL) {
             if (target->flags & (BTLOBJ_FLAG_BOSS | BTLOBJ_FLAG_HUM_BOSS | BTLOBJ_FLAG_PLAYER)) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             } else {
                 hit->flags |= BTLOBJ_FLAG_STUN_PENDING;
             }
@@ -629,10 +629,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_FIRE) {
-            scale = scale != 0 ? (scale * 128) >> 8 : 128;
+            scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_FIRE) {
             if (target->flags & (BTLOBJ_FLAG_BOSS | BTLOBJ_FLAG_HUM_BOSS)) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             } else {
                 hit->flags |= BTLOBJ_FLAG_STUN_PENDING;
             }
@@ -648,10 +648,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_BLIZZARD) {
-            scale = scale != 0 ? (scale * 128) >> 8 : 128;
+            scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_BLIZZARD) {
             if (target->flags & (BTLOBJ_FLAG_BOSS | BTLOBJ_FLAG_HUM_BOSS)) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             } else {
                 hit->flags |= BTLOBJ_FLAG_STUN_PENDING;
             }
@@ -667,10 +667,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_THUNDER) {
-            scale = scale != 0 ? (scale * 128) >> 8 : 128;
+            scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
         } else if (hit->flags & BTLOBJ_FLAG_WEAK_THUNDER) {
             if (target->flags & (BTLOBJ_FLAG_BOSS | BTLOBJ_FLAG_HUM_BOSS)) {
-                scale = scale != 0 ? (scale * 384) >> 8 : 384;
+                scale = scale != 0 ? (scale * Q_8_8(1.5)) >> 8 : Q_8_8(1.5);
             } else {
                 hit->flags |= BTLOBJ_FLAG_STUN_PENDING;
             }

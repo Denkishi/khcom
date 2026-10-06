@@ -293,7 +293,7 @@ void BosDsdMainBeginTransition(DsdMainWork* work, s32 x, s32 y, s32 z) {
     FadeSetPaletteExcluded(0, 0);
     FadeSetPaletteExcluded(0x13, 0);
     FadeToAmount(FADE_MODE_BLACK, 0x14, 8);
-    BgFxStartDsdTransition(x - 0x1400, y, z - 0xA00, 0x100);
+    BgFxStartDsdTransition(x - 0x1400, y, z - 0xA00, Q_8_8(1));
     m4aSongNumStart(SONG_SND_721);
     head->flags |= BTLOBJ_FLAG_UNHITTABLE;
 }
@@ -1061,7 +1061,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         FadeSetPaletteExcluded(0, 0);
         FadeSetPaletteExcluded(19, 0);
         FadeToAmount(FADE_MODE_BLACK, 20, 8);
-        BgFxStartDsdTransition(head->x - 0x1400, head->y, head->z - 0xA00, 0x100);
+        BgFxStartDsdTransition(head->x - 0x1400, head->y, head->z - 0xA00, Q_8_8(1));
         m4aSongNumStart(SONG_SND_721);
         work->stepTimer = 0;
         work->dsd->stateStep++;
@@ -1209,8 +1209,8 @@ void task_bos_dsd_map_0() {
     LoadBgTiles(0, gBosDsdBgTiles, 0x8000);
     LoadBgPalette(0, gBosDsdBgPalette, 0x120);
     SetBgMapBlocks(0, gBosDsdMapBlocks, 2, 2);
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0xA000;
     gBtlWork->y = 0x13600;
     gBtlWork->viewX = 0xA000;

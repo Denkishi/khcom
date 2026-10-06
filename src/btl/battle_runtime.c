@@ -78,7 +78,7 @@ void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz) {
     s32 rotX;
     s32 rotY;
 
-    if (gBtlWork->scale == 0x100) {
+    if (gBtlWork->scale == Q_8_8(1)) {
         x = (px >> 8) - (gBtlWork->viewX >> 8);
         y = ((py >> 8) + (pz >> 8)) - (gBtlWork->viewY >> 8);
     } else {
@@ -744,7 +744,7 @@ void UpdateBattleState() {
         }
 
         MosaicStartIn(16, 15);
-        SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
+        SetBattleZoom(1, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         gBtlWork->phaseStep = 0;
     }
 
@@ -903,7 +903,7 @@ void UpdateBattleState() {
                 FadeToOriginal(FADE_MODE_BLACK, 8);
             }
 
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
             gBtlWork->actor2 = NULL;
             gBtlWork->phaseStep = BTL_END_STEP_WAIT_FRAME;

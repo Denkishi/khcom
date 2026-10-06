@@ -553,7 +553,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
         if (work->stateTimer > 44 && !BgFxIsActive()) {
             work->state = FRD_JACK_STATE_ATTACK_END;
-            SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(15, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             work->stateTimer = 0;
         } else work->stateTimer++;
 
@@ -584,7 +584,7 @@ void task_frd_jack_2(FrdJackWork* work) {
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (angle == 0 && gBtlWork->scale == 256) {
+    } else if (angle == 0 && gBtlWork->scale == Q_8_8(1)) {
         sclY = gBtlWork->scale;
         sclX = sclY;
         flags |= SPRITE_FLAG_HFLIP;
@@ -597,7 +597,7 @@ void task_frd_jack_2(FrdJackWork* work) {
 
     if (angle != 0) {
         affine = AllocObjAffine(angle, sclX, sclY, 1);
-    } else if (gBtlWork->scale == 256) {
+    } else if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);

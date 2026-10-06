@@ -69,9 +69,9 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     work->spriteFlags = 0;
 
     if (actor->flags & BTLOBJ_FLAG_LARGE_SHADOW) {
-        work->fxScale = 281;
+        work->fxScale = Q_8_8(1.1);
     } else {
-        work->fxScale = 0x100;
+        work->fxScale = Q_8_8(1);
     }
 
     work->x = 0;
@@ -89,11 +89,11 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     TaskCreate(&work->tasks, &gTaskDescBtlBadstatus, actor);
 
     if (def->flags & EMY_DEF_FLAG_NO_SCALE_IN) {
-        work->scaleX = 0x100;
-        work->scaleY = 0x100;
+        work->scaleX = Q_8_8(1);
+        work->scaleY = Q_8_8(1);
     } else {
-        work->scaleX = 0x80;
-        work->scaleY = 0x80;
+        work->scaleX = Q_8_8(0.5);
+        work->scaleY = Q_8_8(0.5);
     }
 
     gBtlWork->enemyTileCount += tileCount;
@@ -285,7 +285,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         work->vz = 0;
-        ApproachValue(&work->scaleY, 0x100, work->steps--);
+        ApproachValue(&work->scaleY, Q_8_8(1), work->steps--);
         work->scaleX = work->scaleY;
 
         if (work->steps <= 0) {
@@ -628,7 +628,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
             work->steps = 10;
         }
 
-        ApproachValue(&work->scaleY, 64, work->steps--);
+        ApproachValue(&work->scaleY, Q_8_8(0.25), work->steps--);
 
         if (work->steps <= 0) {
             work->stateTimer = 0;
@@ -658,7 +658,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
             work->steps = 10;
         }
 
-        ApproachValueHalfSteps(&work->scaleY, 0x100, work->steps--);
+        ApproachValueHalfSteps(&work->scaleY, Q_8_8(1), work->steps--);
 
         if (work->steps <= 0) {
             actor->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
@@ -673,8 +673,8 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
     case EMY_STATE_HEALED:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
-            work->scaleX = 0x100;
-            work->scaleY = 0x100;
+            work->scaleX = Q_8_8(1);
+            work->scaleY = Q_8_8(1);
             actor->vx = 0;
             actor->vy = 0;
         }
@@ -713,7 +713,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         ApproachValue(&work->scaleX, 10, work->steps);
-        ApproachValue(&work->scaleY, 0x200, work->steps);
+        ApproachValue(&work->scaleY, Q_8_8(2), work->steps);
         work->steps--;
 
         if (work->steps <= 0) {
@@ -910,11 +910,11 @@ void EmyDraw(EmyWork* work) {
         flags = GetBattleSpritePriorityFlags(actor->y) | work->spriteFlags;
         WorldToScreen(&x, &y, actor->x, actor->y, actor->z);
 
-        if (work->scaleX == 0x100 && work->scaleY == 0x100) {
+        if (work->scaleX == Q_8_8(1) && work->scaleY == Q_8_8(1)) {
             if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sy = gBtlWork->scale;
                 sx = sy;
-            } else if (gBtlWork->scale == 0x100) {
+            } else if (gBtlWork->scale == Q_8_8(1)) {
                 sy = gBtlWork->scale;
                 sx = sy;
                 flags |= 1;
@@ -934,9 +934,9 @@ void EmyDraw(EmyWork* work) {
             }
         }
 
-        if (sy == 0x100 && sx == sy) {
+        if (sy == Q_8_8(1) && sx == sy) {
             affine = NULL;
-        } else if (sy < 256) {
+        } else if (sy < Q_8_8(1)) {
             affine = AllocObjAffine(0, sx, sy, 0);
         } else {
             affine = AllocObjAffine(0, sx, sy, 1);

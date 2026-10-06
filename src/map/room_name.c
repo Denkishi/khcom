@@ -18,6 +18,7 @@
 #include "types.h"
 #include "sprite_palettes.h"
 #include "text_types.h"
+#include "engine_math.h"
 
 const MapNameText* gRoomNames[28] = {
     LOCALIZED(gRoomNameTeemingDarkness),
@@ -71,7 +72,7 @@ void task_room_name_0(RoomNameWork* work, s32 nameId) {
     work->timer = 0;
     work->unk_2C = 0;
     work->state = ROOM_NAME_STATE_DELAY;
-    work->scaleY = 0x19;
+    work->scaleY = Q_8_8(0.1);
     InitTextSlots(work->textSlots, 0x24);
     work->palette2 = LoadTextPalette(1);
 #ifdef VERSION_EU
@@ -102,10 +103,10 @@ u8 task_room_name_1(RoomNameWork* work) {
         if (work->timer > 1) {
             work->timer = 0;
             work->y2 -= 0x99;
-            work->scaleY += 0x19;
+            work->scaleY += Q_8_8(0.1);
 
             if (work->scaleY > 0xFF) {
-                work->scaleY = 0x100;
+                work->scaleY = Q_8_8(1);
                 work->state++;
             }
         }
@@ -126,10 +127,10 @@ u8 task_room_name_1(RoomNameWork* work) {
         if (work->timer > 1) {
             work->timer = 0;
             work->y2 += 0x99;
-            work->scaleY -= 0x19;
+            work->scaleY -= Q_8_8(0.1);
 
-            if (work->scaleY <= 0x19) {
-                work->scaleY = 0x19;
+            if (work->scaleY <= Q_8_8(0.1)) {
+                work->scaleY = Q_8_8(0.1);
                 return 0;
             }
         }
@@ -144,7 +145,7 @@ void task_room_name_2(RoomNameWork* work) {
     ObjAffine* affine;
 
     if (work->state != ROOM_NAME_STATE_DELAY) {
-        affine = AllocObjAffine(0, 0x100, work->scaleY, 0);
+        affine = AllocObjAffine(0, Q_8_8(1), work->scaleY, 0);
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, affine, 0, 0x3C);
         DrawTextSlots(work->x2 >> 8, work->y2 >> 8, work->textSlots, work->palette2, 0x32, work->textSlotCount);
     }

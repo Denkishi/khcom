@@ -32,6 +32,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "engine_math.h"
 
 static const s32 sStaffRollSoraScript0[46] = {
     6, 6, 0, 0, 0, 6,
@@ -3731,7 +3732,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
         LoadBgTiles(2, gTitleLogoBgTiles, 0x3F00);
         LoadBgMap(2, gTitleLogoBgMap, 0x400);
         LoadBgPalette(2, gTitleLogoBgPalette, 0xA0);
-        SetBgAffine(2, 0, 0x100, 0x100, 0x7800, 0x5C00);
+        SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0x7800, 0x5C00);
         work->creditsState = STAFF_ROLL_TITLE_BG_STATE_FADE_IN;
         work->creditsTimer = 0;
         break;

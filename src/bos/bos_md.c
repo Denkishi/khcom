@@ -757,7 +757,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
                     if (BosMdAnimIsLastFrame(work)) {
                         MdAnimStart(work, 3);
                         BgFxStartDragonFire(work->sub[0].x, work->sub[0].y,
-                                      work->sub[0].z + 0x1200, 512);
+                                      work->sub[0].z + 0x1200, Q_8_8(2));
                         m4aSongNumStart(SONG_EF_DRGN_FIRE);
                         work->step = BOS_MD_FIRE_BREATH_STEP_BREATHE;
                     }
@@ -1227,8 +1227,8 @@ void task_bos_md_map_0(MdMapWork* work, MdMapData* arg) {
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
     SetBgMapBlocks(0, &arg->map, 2, 2);
-    gBtlWork->scale = 256;
-    gBtlWork->zoomScale = 256;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0x10000;
     gBtlWork->y = 0x14000;
     gBtlWork->viewX = 0x10000;
@@ -1480,7 +1480,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
 
     work->flashTimer = 0;
     work->contactCooldown = 0;
-    work->scale = 25;
+    work->scale = Q_8_8(0.1);
     work->scaleSteps = 30;
     work->state = BOS_MD_FIRE_STATE_APPEAR;
     work->z = 0;
@@ -1554,10 +1554,10 @@ void task_bos_md_fire_2(MdFireWork* work) {
     flags = GetBattleSpritePriorityFlags(work->y);
 
     if (work->state == BOS_MD_FIRE_STATE_APPEAR) {
-        ApproachValue(&work->scale, 0x100, work->scaleSteps);
+        ApproachValue(&work->scale, Q_8_8(1), work->scaleSteps);
         affine = AllocObjAffine(0, work->scale, work->scale, 0);
     } else if (work->state == BOS_MD_FIRE_STATE_VANISH) {
-        ApproachValue(&work->scale, 25, work->scaleSteps);
+        ApproachValue(&work->scale, Q_8_8(0.1), work->scaleSteps);
         affine = AllocObjAffine(0, work->scale, work->scale, 0);
     } else {
         affine = NULL;

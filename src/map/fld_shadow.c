@@ -16,6 +16,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 void task_fld_shadow_0(FldShadowWork* work, FldObj* obj) {
     work->actor = obj;
@@ -54,10 +55,10 @@ void task_fld_shadow_2(FldShadowWork* work) {
     if (obj->fieldPosition.z >= z) {
         sprite = NULL;
     } else {
-        size = 0x100 - (z - obj->fieldPosition.z) / 128;
+        size = Q_8_8(1) - (z - obj->fieldPosition.z) / 128;
 
         if (size <= 0x18) {
-            size = 0x19;
+            size = Q_8_8(0.1);
         }
 
         sprite = AllocObjAffine(0, size, size, 0);

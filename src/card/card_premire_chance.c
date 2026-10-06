@@ -51,8 +51,8 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     ListNodeInit(&work->node, &gCardListWork->cards, work);
     ListPoolAppend(&work->node, &gCardListWork->cards);
     work->state = PREMIRE_CHANCE_CARD_STATE_DEAL;
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->x2 = 0;
     work->y2 = 0;
     work->steps = 32;

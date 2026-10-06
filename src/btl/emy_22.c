@@ -102,7 +102,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         work->base.vz = 0;
 
         if (work->base.steps > 0) {
-            ApproachValue(&work->base.scaleX, 25, work->base.steps);
+            ApproachValue(&work->base.scaleX, Q_8_8(0.1), work->base.steps);
 
             if (--work->base.steps > 0) {
                 break;
@@ -131,7 +131,7 @@ u8 task_emy_22_1(Emy22Work* work) {
                 + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1))
                 << 8;
             act->z = gBtlWork->targetZ;
-            work->base.scaleX = 25;
+            work->base.scaleX = Q_8_8(0.1);
             work->base.steps = 20;
             work->base.stateTimer = 1;
             m4aSongNumStart(SONG_BTL_WARPIN);
@@ -140,7 +140,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         work->base.vz = 0;
 
         if (work->base.steps > 0) {
-            ApproachValue(&work->base.scaleX, 0x100, work->base.steps);
+            ApproachValue(&work->base.scaleX, Q_8_8(1), work->base.steps);
 
             if (--work->base.steps > 0) {
                 break;

@@ -740,8 +740,8 @@ void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg) {
     LoadBgTiles(1, arg->tiles, arg->tilesSize);
     LoadBgPalette(1, arg->palette, arg->paletteSize);
     SetBgMapBlocks(1, arg->map, 2, 2);
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0x10000;
     gBtlWork->y = 0x17100;
     gBtlWork->viewX = 0x10000;
@@ -938,7 +938,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     work->state = BOS_URSULA_TAKO_STATE_IDLE;
     ColliderInit(&work->collider, 7, BosUrsulaGetTakoPlatformRadius(work->isLeft), 1);
     ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x3800);
-    SetEnemyHpFromStats(&work->obj, ENEMY_URSULA, 51);
+    SetEnemyHpFromStats(&work->obj, ENEMY_URSULA, Q_8_8(0.2));
 }
 
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
@@ -1057,7 +1057,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
             BosUrsulaTakoGetPosition(&x, &y, &z, work);
             InitEnemyBtlObj(&work->obj, &sBosUrsulaTakoEmyKind, x, y, z);
             work->obj.flags |= 0x400;
-            SetEnemyHpFromStats(&work->obj, ENEMY_URSULA, 25);
+            SetEnemyHpFromStats(&work->obj, ENEMY_URSULA, Q_8_8(0.1));
         }
 
         if (work->timer == 0) {
@@ -1307,7 +1307,7 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
         if (!work->attackSpawned) {
             work->attackSpawned = 1;
             BgFxStartUrsulaBeam(gBtlWork->bossX, gBtlWork->bossY + 0xC00,
-                gBtlWork->bossZ, BosUrsulaIsFacingLeft(), 0x266, 0x78);
+                gBtlWork->bossZ, BosUrsulaIsFacingLeft(), Q_8_8(2.4), 0x78);
         } else {
             BgFxSetPosition(gBtlWork->bossX, gBtlWork->bossY + 0xC00,
                 gBtlWork->bossZ);

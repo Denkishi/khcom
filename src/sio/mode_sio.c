@@ -835,7 +835,7 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->frameCount = 0;
     sSioBtlOptionWork->leaveDelay = 0;
     sSioBtlOptionWork->unk_418 = 0;
-    SetBgAffine(2, 0, 256, 256, 0x10000, 0x16800);
+    SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0x10000, 0x16800);
 
     for (i = 0; i < 2; i++) {
         sSioBtlOptionWork->playerTilesPalettes[i] = AllocObjTiles(0xC80, NULL);
@@ -2999,8 +2999,8 @@ void SioChgCardInitObjs() {
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].palette2, 32);
             sSioChgCardWork->gfx4[i] = gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].gfx2;
             sSioChgCardWork->gfx5[i] = gCardValueDigitFrames[0];
-            sSioChgCardWork->scaleX[i] = 0x100;
-            sSioChgCardWork->scaleY[i] = 0x100;
+            sSioChgCardWork->scaleX[i] = Q_8_8(1);
+            sSioChgCardWork->scaleY[i] = Q_8_8(1);
             sSioChgCardWork->angle[i] = 0;
         } else {
             sSioChgCardWork->cardVisible[i] = 1;
@@ -3011,8 +3011,8 @@ void SioChgCardInitObjs() {
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[n].palette2, 32);
             sSioChgCardWork->gfx4[i] = gCardDefs[n].gfx2;
             sSioChgCardWork->gfx5[i] = gCardValueDigitFrames[gCardDefs[n].value];
-            sSioChgCardWork->scaleX[i] = 0x100;
-            sSioChgCardWork->scaleY[i] = 0x100;
+            sSioChgCardWork->scaleX[i] = Q_8_8(1);
+            sSioChgCardWork->scaleY[i] = Q_8_8(1);
             sSioChgCardWork->angle[i] = 0;
         }
     }

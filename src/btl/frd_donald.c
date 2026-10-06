@@ -77,11 +77,11 @@ void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz) {
 
     y = body->y;
     z = body->z - (dz * 256);
-    scaleY = 0x180;
+    scaleY = Q_8_8(1.5);
 
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         x = body->x + (dx * 256);
-        scaleX = -0x180;
+        scaleX = Q_8_8(-1.5);
     } else {
         x = body->x - (dx * 256);
         scaleX = scaleY;
@@ -201,7 +201,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
         break;
     default:
         m4aSongNumStart(SONG_VO_DL_ATTACK00);
-        BgFxStartFlame(0, 0, 0, 0x180);
+        BgFxStartFlame(0, 0, 0, Q_8_8(1.5));
         UpdateDonaldFlame(body, 0, 8, 8);
         break;
     }
@@ -552,7 +552,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
         if (work->stateTimer > 40 && !BgFxIsActive()) {
             work->state=FRD_DONALD_STATE_ATTACK_END;
-            SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
+            SetBattleZoom(15,Q_8_8(1),gBtlWork->x2,gBtlWork->y2);
             work->stateTimer=0;
         } else work->stateTimer++;
 
@@ -620,7 +620,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
                     CreateBtlPopTask(ally,10);
                     work->state=FRD_DONALD_STATE_ATTACK_END;
-                    SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
+                    SetBattleZoom(15,Q_8_8(1),gBtlWork->x2,gBtlWork->y2);
                     work->stateTimer=0;
                     break;
                 }
@@ -653,7 +653,7 @@ void task_frd_donald_2(FrdDonaldWork* work) {
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256) {
+    } else if (gBtlWork->scale == Q_8_8(1)) {
         sclY = gBtlWork->scale;
         sclX = sclY;
         flags |= SPRITE_FLAG_HFLIP;
@@ -664,7 +664,7 @@ void task_frd_donald_2(FrdDonaldWork* work) {
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
-    if (gBtlWork->scale == 256) {
+    if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);

@@ -1085,9 +1085,9 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->vz = -(GetRandom() % 129 + 0x300);
     work->speed = GetRandom() % 129 + 0x80;
     work->moveAngle = GetRandom() % 256;
-    work->scaleX = 0x80;
-    work->scaleY = 0x80;
-    work->scale = 0x80;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
+    work->scale = Q_8_8(0.5);
     work->flipAngleY = 0;
     work->flipAngleX = 0;
     collider = &work->collider;
@@ -1254,9 +1254,9 @@ u8 UpdatePrizeMapCardShow(PrizeMapCardWork* work, void* task) {
         work->steps--;
     }
 
-    lim = 0x100;
+    lim = Q_8_8(1);
 
-    if (work->scale < 0x100) {
+    if (work->scale < Q_8_8(1)) {
         work->scale += 2;
     } else {
         work->scale = lim;
@@ -1303,7 +1303,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
 
     pal = !work->collected ? GetBattleSpritePriorityFlags(work->posY) : 0;
 
-    if (work->scaleX == 0x100 && work->rotation == 0) {
+    if (work->scaleX == Q_8_8(1) && work->rotation == 0) {
         affine = NULL;
     } else {
         affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
@@ -1332,7 +1332,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
     }
 
     if (!work->collected) {
-        shadowScale = 204 - ((work->groundZ - work->posZ) >> 7);
+        shadowScale = Q_8_8(0.8) - ((work->groundZ - work->posZ) >> 7);
 
         if (shadowScale <= 2) {
             shadowScale = 2;
@@ -1619,7 +1619,7 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
         for (i = work->paidCount; i < work->keyCount; i++) {
             if (i == work->paidCount) {
                 DrawLayeredCardSpriteScaled(&work->cards[i].sprite, 0x808, 0,
-                              (gSineTable[(u8)work->pulseAngle] >> 8) * 8 + 256);
+                              (gSineTable[(u8)work->pulseAngle] >> 8) * 8 + Q_8_8(1));
 
                 switch (work->cards[i].color) {
                 case 2:

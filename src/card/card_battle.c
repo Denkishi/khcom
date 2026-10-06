@@ -4053,8 +4053,8 @@ void SoraCardInit(CardDisplayWork* work, CardDisplayArgs* args) {
         work->premium = 0;
     }
 
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->bobAngle = 0;
     work->angle = 0;
     work->ringAngle = 0;
@@ -4388,8 +4388,8 @@ u8 SoraStockWaitPlayEnd(CardDisplayWork* work, void* task) {
     ApproachValue(&work->ringCenterX, gPlayedCardCenter[0], work->timer);
     ApproachValue(&work->ringCenterY, gPlayedCardCenter[1], work->timer);
     ApproachValue(&work->ringRadius, work->ringRadiusTarget, work->timer);
-    ApproachValue(&work->scaleX, 0x100, work->timer);
-    ApproachValue(&work->scaleY, 0x100, work->timer);
+    ApproachValue(&work->scaleX, Q_8_8(1), work->timer);
+    ApproachValue(&work->scaleY, Q_8_8(1), work->timer);
 
     if ((s16)work->timer > 0) {
         work->timer--;
@@ -4533,9 +4533,9 @@ u8 SoraStockMoveToSlot(CardDisplayWork* work, void* task) {
 
     if (work->flags & CARD_DISP_FLAG_OPEN) {
         ApproachValue(&work->x, gSoraCardLayout[3 - work->stockIndex][0], work->timer);
-        ApproachValue(&work->scaleY, 179, work->timer);
+        ApproachValue(&work->scaleY, Q_8_8(0.7), work->timer);
         ApproachValue(&work->y, gSoraCardLayout[3 - work->stockIndex][1], work->timer);
-        ApproachValue(&work->scaleX, 179, work->timer);
+        ApproachValue(&work->scaleX, Q_8_8(0.7), work->timer);
     } else {
         ApproachValue(&work->x, gSoraCardLayout[4][0], work->timer);
         ApproachValue(&work->y, gSoraCardLayout[4][1], work->timer);
@@ -4548,8 +4548,8 @@ u8 SoraStockMoveToSlot(CardDisplayWork* work, void* task) {
         work->flags &= ~CARD_DISP_FLAG_SETTLED;
     } else {
         work->timer = 0;
-        work->scaleX = 0x100;
-        work->scaleY = 0x100;
+        work->scaleX = Q_8_8(1);
+        work->scaleY = Q_8_8(1);
         work->flags |= CARD_DISP_FLAG_SETTLED;
 
         if (work->flags & CARD_DISP_FLAG_STOCK_NAMED) {
@@ -4676,7 +4676,7 @@ void UpdateCardDisplayFlip(CardDisplayWork* work) {
         if (work->flags & CARD_DISP_FLAG_SELECTED) {
             if (work->flags & CARD_DISP_FLAG_FACE_DOWN) {
                 if (work->scaleX > 2) {
-                    work->scaleX -= 64;
+                    work->scaleX -= Q_8_8(0.25);
 
                     if (work->scaleX <= 2) {
                         work->scaleX = 2;
@@ -4692,19 +4692,19 @@ void UpdateCardDisplayFlip(CardDisplayWork* work) {
                 }
             } else {
                 if (work->scaleX <= 255) {
-                    work->scaleX += 64;
+                    work->scaleX += Q_8_8(0.25);
 
-                    if (work->scaleX > 256) {
-                        work->scaleX = 256;
+                    if (work->scaleX > Q_8_8(1)) {
+                        work->scaleX = Q_8_8(1);
                     }
                 } else {
-                    work->scaleX = 256;
+                    work->scaleX = Q_8_8(1);
                 }
             }
         } else {
             if (!(work->flags & CARD_DISP_FLAG_FACE_DOWN)) {
                 if (work->scaleX > 2) {
-                    work->scaleX -= 64;
+                    work->scaleX -= Q_8_8(0.25);
 
                     if (work->scaleX <= 2) {
                         work->scaleX = 2;
@@ -4720,13 +4720,13 @@ void UpdateCardDisplayFlip(CardDisplayWork* work) {
                 }
             } else {
                 if (work->scaleX <= 255) {
-                    work->scaleX += 64;
+                    work->scaleX += Q_8_8(0.25);
 
-                    if (work->scaleX > 256) {
-                        work->scaleX = 256;
+                    if (work->scaleX > Q_8_8(1)) {
+                        work->scaleX = Q_8_8(1);
                     }
                 } else {
-                    work->scaleX = 256;
+                    work->scaleX = Q_8_8(1);
                 }
             }
         }
@@ -4747,12 +4747,12 @@ u8 SoraCardShrinkAway(CardDisplayWork* work) {
         work->angle += work->spinSpeed;
         work->spinSpeed++;
 
-        if (work->scaleX <= 25) {
+        if (work->scaleX <= Q_8_8(0.1)) {
             return 0;
         }
 
-        work->scaleX -= 25;
-        work->scaleY -= 25;
+        work->scaleX -= Q_8_8(0.1);
+        work->scaleY -= Q_8_8(0.1);
     }
 
     return 1;
@@ -4818,8 +4818,8 @@ u8 SoraStockMoveToPlay(CardDisplayWork* work, void* task) {
     ApproachValue(&work->ringCenterX, gPlayedCardCenter[0], work->timer);
     ApproachValue(&work->ringCenterY, gPlayedCardCenter[1], work->timer);
     ApproachValue(&work->ringRadius, work->ringRadiusTarget, work->timer);
-    ApproachValue(&work->scaleX, 0x100, work->timer);
-    ApproachValue(&work->scaleY, 0x100, work->timer);
+    ApproachValue(&work->scaleX, Q_8_8(1), work->timer);
+    ApproachValue(&work->scaleY, Q_8_8(1), work->timer);
 
     if ((s16)work->timer > 0) {
         work->timer--;
@@ -4976,8 +4976,8 @@ u8 SoraCardBreakFall(CardDisplayWork* work, void* task) {
             work->scaleX = -10;
         }
 
-        if (work->scaleX <= -0x100) {
-            work->scaleX = -0x100;
+        if (work->scaleX <= Q_8_8(-1)) {
+            work->scaleX = Q_8_8(-1);
             work->flags |= CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     } else {
@@ -4987,8 +4987,8 @@ u8 SoraCardBreakFall(CardDisplayWork* work, void* task) {
             work->scaleX = 10;
         }
 
-        if (work->scaleX >= 0x100) {
-            work->scaleX = 0x100;
+        if (work->scaleX >= Q_8_8(1)) {
+            work->scaleX = Q_8_8(1);
             work->flags &= ~CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     }
@@ -5034,9 +5034,9 @@ u8 SoraHeartlessCardShow(CardDisplayWork* work) {
 
     work->command = CARD_DISP_COMMAND_NONE;
     ApproachValue(&work->x, 0x1800, work->timer);
-    ApproachValue(&work->scaleY, 0x99, work->timer);
+    ApproachValue(&work->scaleY, Q_8_8(0.6), work->timer);
     ApproachValue(&work->y, 0x6400, work->timer);
-    ApproachValue(&work->scaleX, 0x99, work->timer);
+    ApproachValue(&work->scaleX, Q_8_8(0.6), work->timer);
 
     if ((s16)work->timer > 0) {
         work->timer--;
@@ -5108,11 +5108,11 @@ u8 SoraGimmickCardFly(CardDisplayWork* work, void* task) {
     work->angle += 24;
 
     if (work->scaleX > 24) {
-        work->scaleX -= 12;
-        work->scaleY -= 12;
+        work->scaleX -= Q_8_8(0.05);
+        work->scaleY -= Q_8_8(0.05);
     } else {
-        work->scaleX = 25;
-        work->scaleY = 25;
+        work->scaleX = Q_8_8(0.1);
+        work->scaleY = Q_8_8(0.1);
     }
 
     work->x += (work->ringCenterX * work->ringRadiusTarget) >> 8;
@@ -5151,16 +5151,16 @@ u8 SoraGimmickCardHit(CardDisplayWork* work) {
 u8 SoraStockVanish(CardDisplayWork* work) {
     s32 result;
 
-    if (work->scaleX <= 25) {
+    if (work->scaleX <= Q_8_8(0.1)) {
         work->args.slot->stocked = result = 0;
         return result;
     }
 
-    work->scaleX -= 12;
-    work->scaleY += 12;
+    work->scaleX -= Q_8_8(0.05);
+    work->scaleY += Q_8_8(0.05);
 
     if (work->scaleY > 0x1FF) {
-        work->scaleY = 0x200;
+        work->scaleY = Q_8_8(2);
     }
 
     return 1;
@@ -5182,8 +5182,8 @@ void card_reload_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->reloadGauge->chargeTick = 0;
     work->flags = (CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE);
     work->cardDef = NULL;
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->bobAngle = 0;
     work->angle = 0;
     work->stockIndex = 0;
@@ -5403,13 +5403,13 @@ void UpdateSoraReloadGauge(CardDisplayWork* work) {
 
                 if (gCardBattleState->reloadGaugeFull[0] == 0) {
                     if (gBtlWork->hcEffect == HC_EFFECT_OVERDRIVE) {
-                        gCardBattleState->soraReloadGauge += 12;
+                        gCardBattleState->soraReloadGauge += Q_8_8(0.05);
                     } else {
-                        gCardBattleState->soraReloadGauge += 25;
+                        gCardBattleState->soraReloadGauge += Q_8_8(0.1);
                     }
 
-                    if ((s32)gCardBattleState->soraReloadGauge > 0x100) {
-                        gCardBattleState->soraReloadGauge = 0x100;
+                    if ((s32)gCardBattleState->soraReloadGauge > Q_8_8(1)) {
+                        gCardBattleState->soraReloadGauge = Q_8_8(1);
                         gCardBattleState->reloadGaugeFull[0] = 1;
                     }
                 } else {

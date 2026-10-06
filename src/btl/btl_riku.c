@@ -248,7 +248,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     } else {
         sy = out->scale;
 
-        if (sy == 256) {
+        if (sy == Q_8_8(1)) {
             sx = sy;
             flags |= SPRITE_FLAG_HFLIP;
         } else {
@@ -258,7 +258,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
         }
     }
 
-    if (sy == 256 && sx == sy) {
+    if (sy == Q_8_8(1) && sx == sy) {
         affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);
@@ -661,7 +661,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     work->tapTimers[0] = 0;
     work->tapTimers[1] = 0;
     work->task = 0;
-    work->scaleX = work->scaleY = 0x100;
+    work->scaleX = work->scaleY = Q_8_8(1);
     work->frameCount = 0;
 
     if (gBtlWork->flags & (BTL_FLAG_BOSS_BATTLE | BTL_FLAG_HUM_BATTLE)) {
@@ -995,7 +995,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->scaleX = work->scaleY = 256;
+        work->scaleX = work->scaleY = Q_8_8(1);
         ColliderSetDisabled(&act->collider, 0);
         DisableBtlRikuPassThrough(work);
         act->flags &= 0xFFFFDFFBFF7FFFFFLL;
@@ -1370,13 +1370,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             }
 
-            SetBattleZoom(12, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(12, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             ColliderSetDisabled(&act->collider, 0);
             act->flags &= 0xFFFFDFFBFF7FFFFFLL;
             DisableBtlRikuPassThrough(work);
             act->btl->flags |= BTL_FLAG_DISMISS_SUMMONS;
             work->speed = 0;
-            work->scaleX = work->scaleY = 256;
+            work->scaleX = work->scaleY = Q_8_8(1);
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 work->state = BTL_RIKU_STATE_DARK_HAZARD;
@@ -1405,7 +1405,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            work->scaleX = work->scaleY = 256;
+            work->scaleX = work->scaleY = Q_8_8(1);
             ColliderSetDisabled(&act->collider, 0);
             DisableBtlRikuPassThrough(work);
             act->flags &= 0xFFFFDFFBFF7FFFFFLL;
@@ -1635,7 +1635,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         work->vz = 0;
-        ApproachValue(&work->scaleX, 256, work->steps);
+        ApproachValue(&work->scaleX, Q_8_8(1), work->steps);
 
         if (--work->steps <= 0) {
             work->state = BTL_RIKU_STATE_DARK_AURA_DASH;
@@ -2078,9 +2078,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 45);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 332, act->x - 8192, act->y - 6144 + act->z);
+                            SetBattleZoom(6, Q_8_8(1.3), act->x - 8192, act->y - 6144 + act->z);
                         } else {
-                            SetBattleZoom(6, 332, act->x + 8192, act->y - 6144 + act->z);
+                            SetBattleZoom(6, Q_8_8(1.3), act->x + 8192, act->y - 6144 + act->z);
                         }
                     }
                 }
@@ -2088,7 +2088,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (work->anim.timer == 2 && AnimGetGfxIndex(&work->anim) == 6) {
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         }
 
         if (AnimIsFinished(&work->anim)) {
@@ -2264,7 +2264,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((work->flags & BTL_RIKU_FLAG_SWING_HIT) && work->anim.timer == 2 && AnimGetGfxIndex(&work->anim) == 6) {
             act->flags &= ~BTLOBJ_FLAG_IN_CARD_ACTION;
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         }
 
         if (AnimGetGfxIndex(&work->anim) == 6) {
@@ -2345,9 +2345,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
 
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        SetBattleZoom(6, 307, act->x - 8192, act->y - 6144 + act->z);
+                        SetBattleZoom(6, Q_8_8(1.2), act->x - 8192, act->y - 6144 + act->z);
                     } else {
-                        SetBattleZoom(6, 307, act->x + 8192, act->y - 6144 + act->z);
+                        SetBattleZoom(6, Q_8_8(1.2), act->x + 8192, act->y - 6144 + act->z);
                     }
                 }
 
@@ -2886,12 +2886,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         BgFxSetPosition(act->x, act->y, act->z - 10240);
 
-        if (work->scaleY == 256) {
+        if (work->scaleY == Q_8_8(1)) {
             work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
         }
 
         if (work->steps != 0) {
-            ApproachValue(&work->scaleY, 256, work->steps);
+            ApproachValue(&work->scaleY, Q_8_8(1), work->steps);
             work->steps--;
         }
 
@@ -2953,12 +2953,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->steps = 6;
         }
 
-        if (work->scaleY == 256) {
+        if (work->scaleY == Q_8_8(1)) {
             work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
         }
 
         if (work->steps != 0) {
-            ApproachValue(&work->scaleY, 256, work->steps);
+            ApproachValue(&work->scaleY, Q_8_8(1), work->steps);
             work->steps--;
         }
 
@@ -3841,9 +3841,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 if (swing->flags & COMBO_FLAG_ZOOM_ON_HIT) {
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        SetBattleZoom(8, 384, act->x - 5120, (act->y - 5120) + act->z);
+                        SetBattleZoom(8, Q_8_8(1.5), act->x - 5120, (act->y - 5120) + act->z);
                     } else {
-                        SetBattleZoom(8, 384, act->x + 5120, (act->y - 5120) + act->z);
+                        SetBattleZoom(8, Q_8_8(1.5), act->x + 5120, (act->y - 5120) + act->z);
                     }
                 }
 
@@ -3853,7 +3853,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         } else if (work->stateTimer == swing->hitFrame + 2) {
             if (swing->flags & COMBO_FLAG_ZOOM_ON_HIT) {
-                SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
+                SetBattleZoom(15, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             }
 
             if (work->comboCount <= 1) {
@@ -3865,7 +3865,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (hit == 2) {
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             SetBtlRikuState(work, BTL_RIKU_STATE_GUARDED);
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             break;
@@ -4699,14 +4699,14 @@ void task_btl_riku_2(BtlRikuWork* work) {
 
     attr = GetBattleSpritePriorityFlags(act->y);
 
-    if (work->scaleX == 0x100 && work->scaleY == 0x100) {
+    if (work->scaleX == Q_8_8(1) && work->scaleY == Q_8_8(1)) {
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sy = gBtlWork->scale;
             sx = sy;
         } else {
             sy = gBtlWork->scale;
 
-            if (sy == 0x100) {
+            if (sy == Q_8_8(1)) {
                 sx = sy;
                 attr |= 1;
             } else {
@@ -4723,7 +4723,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
         }
     }
 
-    if (sy == 0x100 && sx == 0x100) {
+    if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);

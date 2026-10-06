@@ -311,7 +311,7 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256) {
+    } else if (gBtlWork->scale == Q_8_8(1)) {
         sclY = gBtlWork->scale;
         sclX = sclY;
         flags |= SPRITE_FLAG_HFLIP;
@@ -322,7 +322,7 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
-    if (gBtlWork->scale == 256) {
+    if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);

@@ -608,15 +608,15 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
+                            SetBattleZoom(6, Q_8_8(1.2), act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         } else {
-                            SetBattleZoom(6, 0x133, act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
+                            SetBattleZoom(6, Q_8_8(1.2), act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         }
                     }
 
                     break;
                 case 7:
-                    SetBattleZoom(6, 0x100, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 9:
                     m4aSongNumStart(SONG_VO_MKU_ATTACK01);
@@ -634,15 +634,15 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x133, act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
+                            SetBattleZoom(6, Q_8_8(1.2), act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         } else {
-                            SetBattleZoom(6, 0x133, act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
+                            SetBattleZoom(6, Q_8_8(1.2), act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         }
                     }
 
                     break;
                 case 1:
-                    SetBattleZoom(6, 0x100, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 4:
                     m4aSongNumStart(SONG_VO_MKU_ATTACK02);
@@ -657,15 +657,15 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 50);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 0x200, act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
+                            SetBattleZoom(6, Q_8_8(2), act->x - 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         } else {
-                            SetBattleZoom(6, 0x200, act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
+                            SetBattleZoom(6, Q_8_8(2), act->x + 0x2000, (focusZ = act->z - 0x1800, act->y + focusZ));
                         }
                     }
 
                     break;
                 case 6:
-                    SetBattleZoom(6, 0x100, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
                     break;
                 }
             }

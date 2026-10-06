@@ -17,6 +17,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 enum BtlHpplyGaugeMode {
     BTL_HPPLY_GAUGE_MODE_SINGLE,
@@ -150,7 +151,7 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
         }
     }
 
-    work->hpRatio = 0x100;
+    work->hpRatio = Q_8_8(1);
     work->firstUpdate = 1;
     work->unk_5C = 1;
     work->timer = 0;
@@ -397,10 +398,10 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
             scale = 10;
         }
 
-        if (scale > 0x100) {
-            affine = AllocObjAffine(0, scale, 0x100, 1);
+        if (scale > Q_8_8(1)) {
+            affine = AllocObjAffine(0, scale, Q_8_8(1), 1);
         } else {
-            affine = AllocObjAffine(0, scale, 0x100, 0);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), 0);
         }
 
         if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_EXTRA_BAR) {

@@ -76,8 +76,8 @@ void HumInit(HumWork* work, const HumDef* def) {
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, actor);
     TaskCreate(&work->tasks, &gTaskDescBtlBadstatus, actor);
     work->state = HUM_STATE_ENTER;
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->sub = NULL;
     work->sub2 = NULL;
     work->stockMoves = NULL;
@@ -273,7 +273,7 @@ s32 HumUpdate(HumWork* work) {
             work->steps = 10;
         }
 
-        ApproachValue(&work->scaleY, 64, work->steps--);
+        ApproachValue(&work->scaleY, Q_8_8(0.25), work->steps--);
 
         if (work->steps > 0) {
             work->stateTimer++;
@@ -303,7 +303,7 @@ s32 HumUpdate(HumWork* work) {
             work->steps = 10;
         }
 
-        ApproachValueHalfSteps(&work->scaleY, 0x100, work->steps--);
+        ApproachValueHalfSteps(&work->scaleY, Q_8_8(1), work->steps--);
 
         if (work->steps <= 0) {
             actor->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
@@ -349,8 +349,8 @@ s32 HumUpdate(HumWork* work) {
         break;
     case HUM_STATE_HEALED:
         if (work->stateTimer == 0) {
-            work->scaleX = 0x100;
-            work->scaleY = 0x100;
+            work->scaleX = Q_8_8(1);
+            work->scaleY = Q_8_8(1);
             actor->vx = 0;
             actor->vy = 0;
         }
@@ -426,7 +426,7 @@ s32 HumUpdate(HumWork* work) {
                 m4aSongNumStart(SONG_BTL_GF_LOOP);
             }
 
-            SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(1, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         }
 
         if (!FadeIsActive()) {
@@ -648,7 +648,7 @@ void HumDrawSub(HumWork* work, HumSub* sub) {
     } else {
         sy = gBtlWork->scale;
 
-        if (sy == 0x100) {
+        if (sy == Q_8_8(1)) {
             sx = sy;
             attr |= 1;
         } else {
@@ -656,7 +656,7 @@ void HumDrawSub(HumWork* work, HumSub* sub) {
         }
     }
 
-    if (sy == 0x100 && sx == 0x100) {
+    if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 0xFF) {
         affine = AllocObjAffine(0, sx, sy, 0);
@@ -695,14 +695,14 @@ void HumDraw(HumWork* work) {
 
     WorldToScreen(&x, &y, actor->x, actor->y, actor->z);
 
-    if (work->scaleX == 0x100 && work->scaleY == 0x100) {
+    if (work->scaleX == Q_8_8(1) && work->scaleY == Q_8_8(1)) {
         if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sy = gBtlWork->scale;
             sx = sy;
         } else {
             sy = gBtlWork->scale;
 
-            if (sy == 0x100) {
+            if (sy == Q_8_8(1)) {
                 sx = sy;
                 attr |= 1;
             } else {
@@ -721,7 +721,7 @@ void HumDraw(HumWork* work) {
         }
     }
 
-    if (sy == 0x100 && sx == 0x100) {
+    if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 0xFF) {
         affine = AllocObjAffine(0, sx, sy, 0);

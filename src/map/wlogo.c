@@ -465,7 +465,7 @@ void task_wlogo_won_2(WlogoWonWork* work) {
 
     if (work->state == WLOGO_WON_STATE_CARDS) {
         for (i = 0; i < 10; i++) {
-            affine = AllocObjAffine(work->angle, gWlogoFlipScales[work->scaleIndex[i]], 0x100, 0);
+            affine = AllocObjAffine(work->angle, gWlogoFlipScales[work->scaleIndex[i]], Q_8_8(1), 0);
             DrawSprite(work->x[i] >> 8, work->y[i] >> 8, work->gfx[i], work->tiles, work->palette, affine, 0, gWlogoWonCardsAlt[i].priority);
         }
     }
@@ -1755,8 +1755,8 @@ void task_wlogo_tt_0(WlogoTtWork* work) {
     work->state = WLOGO_TT_STATE_WAIT;
     work->blend = 0;
     work->paletteStep = 0;
-    work->scaleX = 51;
-    work->scaleX2 = 51;
+    work->scaleX = Q_8_8(0.2);
+    work->scaleX2 = Q_8_8(0.2);
     SetBgBlend(0, 16 - work->blend, work->blend);
     work->tiles = AllocObjTiles(0x200, gWlogoTtGlowTiles);
     work->tiles2 = AllocObjTiles(0x200, gWlogoTtGlowTiles);
@@ -2047,7 +2047,7 @@ void task_wlogo_tt_2(WlogoTtWork* work) {
     }
 
     if (work->visible[0] == 1) {
-        affine = AllocObjAffine(0, work->scaleX, 0x100, 0);
+        affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
         DrawSprite(78, 72, work->gfx, work->tiles2, work->palette, affine, 0, 24);
     }
 
@@ -2056,7 +2056,7 @@ void task_wlogo_tt_2(WlogoTtWork* work) {
     }
 
     if (work->visible[1] == 1) {
-        affine = AllocObjAffine(0, work->scaleX2, 0x100, 0);
+        affine = AllocObjAffine(0, work->scaleX2, Q_8_8(1), 0);
         DrawSprite(108, 94, work->gfx2, work->tiles3, work->palette, affine, 0, 26);
     }
 
@@ -2398,8 +2398,8 @@ void task_wlogo_bks_obj_0(WlogoBksObjWork* work, s32 id) {
     work->y = gWlogoBksObjStarts[work->id][1] << 8;
     work->targetX = gWlogoBksObjTargets[work->id][0] << 8;
     work->targetY = gWlogoBksObjTargets[work->id][1] << 8;
-    work->scaleX = 0x100;
-    work->scaleY = 0x100;
+    work->scaleX = Q_8_8(1);
+    work->scaleY = Q_8_8(1);
     work->holdTimer = 0;
     work->moveTimer = 30;
     work->state = WLOGO_BKS_OBJ_STATE_MOVE;
@@ -2569,26 +2569,26 @@ WlogoWonEntry gWlogoWonCards[10] = {
 };
 
 s32 gWlogoFlipScales[20] = {
-    256,
-    235,
-    204,
-    153,
-    110,
-    25,
-    -110,
-    -153,
-    -204,
-    -235,
-    -256,
-    -235,
-    -204,
-    -153,
-    -110,
-    25,
-    110,
-    153,
-    204,
-    235,
+    Q_8_8(1),
+    Q_8_8(0.92),
+    Q_8_8(0.8),
+    Q_8_8(0.6),
+    Q_8_8(0.43),
+    Q_8_8(0.1),
+    Q_8_8(-0.43),
+    Q_8_8(-0.6),
+    Q_8_8(-0.8),
+    Q_8_8(-0.92),
+    Q_8_8(-1),
+    Q_8_8(-0.92),
+    Q_8_8(-0.8),
+    Q_8_8(-0.6),
+    Q_8_8(-0.43),
+    Q_8_8(0.1),
+    Q_8_8(0.43),
+    Q_8_8(0.6),
+    Q_8_8(0.8),
+    Q_8_8(0.92),
 };
 
 TaskDesc gTaskDescWlogoWon = {
@@ -2797,7 +2797,7 @@ TaskDesc gTaskDescWlogoPooObj = {
 };
 
 WlogoTtMotion gWlogoTtMotion =
-{{128, 25, 128, 204, 256, 0}, {76, 179, 256, 0, 0, 0}}
+{{Q_8_8(0.5), Q_8_8(0.1), Q_8_8(0.5), Q_8_8(0.8), Q_8_8(1), 0}, {Q_8_8(0.3), Q_8_8(0.7), Q_8_8(1), 0, 0, 0}}
 ;
 
 TaskDesc gTaskDescWlogoTt = {

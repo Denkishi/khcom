@@ -124,7 +124,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     work->z = args->z;
     work->timer = 100;
     work->state = BTL_RAID_STATE_THROW;
-    work->scale = 256;
+    work->scale = Q_8_8(1);
     work->vx = 0x800;
     work->hitHalfSize = 10;
     work->flags = BTL_RAID_FLAG_BLADE_VISIBLE;
@@ -140,14 +140,14 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     case 2:
         work->attack = 101;
         BtlRaidGetEffectPosition(work, &x, &y, &z);
-        BgFxStartFlame(x, y, z, 332);
+        BgFxStartFlame(x, y, z, Q_8_8(1.3));
         work->hitHalfSize = 16;
         work->song = SONG_EF_FIRE01;
         break;
     case 3:
         work->attack = 102;
         BtlRaidGetEffectPosition(work, &x, &y, &z);
-        BgFxStartFrost(x, y, z, 332);
+        BgFxStartFrost(x, y, z, Q_8_8(1.3));
         work->hitHalfSize = 16;
         work->song = SONG_EF_BURIZA01;
         break;
@@ -405,7 +405,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         }
 
         if (work->steps > 0) {
-            ApproachValue(&work->scale, 25, work->steps);
+            ApproachValue(&work->scale, Q_8_8(0.1), work->steps);
             work->steps--;
 
             if (work->steps <= 0) {
@@ -445,7 +445,7 @@ void task_btl_raid_2(BtlRaidWork* work) {
         WorldToScreen(&sx, &sy, work->x, work->y, work->z);
         scale = gBtlWork->scale * work->scale >> 8;
 
-        if (scale == 256) {
+        if (scale == Q_8_8(1)) {
             affine = NULL;
 
             if (!work->facingLeft) {

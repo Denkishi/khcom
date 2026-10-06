@@ -13,6 +13,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 #ifdef VERSION_EU
 void* GetLocalizedString(const void* strings) {
@@ -205,10 +206,10 @@ void task_monsgage_2(MonsgageWork* work) {
 
         if (work->visible) {
             if (work->shownValue * 2 > 4) {
-                if (work->shownValue * 2 > 256) {
-                    affine = AllocObjAffine(0, work->shownValue * 2, 256, 1);
+                if (work->shownValue * 2 > Q_8_8(1)) {
+                    affine = AllocObjAffine(0, work->shownValue * 2, Q_8_8(1), 1);
                 } else {
-                    affine = AllocObjAffine(0, work->shownValue * 2, 256, 0);
+                    affine = AllocObjAffine(0, work->shownValue * 2, Q_8_8(1), 0);
                 }
 
                 DrawSprite(174, 16, work->gfx2, work->tiles2, work->palette, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);

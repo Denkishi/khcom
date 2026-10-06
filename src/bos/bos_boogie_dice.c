@@ -226,8 +226,8 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     work->vz = -0x4CC;
     work->speed = GetRandom() % 437 + 0x4C;
     work->angle = GetRandom() % 0x78 + 0x44;
-    work->scaleY = 0x33;
-    work->scaleX = 0x33;
+    work->scaleY = Q_8_8(0.2);
+    work->scaleX = Q_8_8(0.2);
     work->y = 0;
     work->counted = 0;
     gBosBoogieDiceFaceReady = 0;
@@ -462,7 +462,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         break;
     case BOS_BOOGIE_DICE_STATE_SQUASH:
         SetBtlObjUnhittable(obj, 1);
-        work->scaleY -= 12;
+        work->scaleY -= Q_8_8(0.05);
         work->y += 96;
 
         if (work->scaleY <= 127) {
@@ -484,7 +484,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
     case BOS_BOOGIE_DICE_STATE_JUMP:
         work->vz += 51;
         obj->z += work->vz;
-        work->scaleY += 25;
+        work->scaleY += Q_8_8(0.1);
         work->y -= 200;
 
         if (work->scaleY > 255) {
@@ -494,10 +494,10 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
             break;
         }
     case BOS_BOOGIE_DICE_STATE_VANISH:
-        work->scaleX -= 38;
+        work->scaleX -= Q_8_8(0.15);
 
         if (work->scaleX <= 24) {
-            BgFxStartDarkDeathBlend(obj->x, obj->y + obj->z, 0x100, 8, 16);
+            BgFxStartDarkDeathBlend(obj->x, obj->y + obj->z, Q_8_8(1), 8, 16);
 
             return 0;
         }
@@ -548,14 +548,14 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
 
     scaleX = work->scaleX;
 
-    if (scaleX > 0x100) {
-        scaleX = 0x100;
+    if (scaleX > Q_8_8(1)) {
+        scaleX = Q_8_8(1);
     }
 
     scaleY = work->scaleY;
 
-    if (scaleY > 0x100) {
-        scaleY = 0x100;
+    if (scaleY > Q_8_8(1)) {
+        scaleY = Q_8_8(1);
     }
 
     affine = AllocObjAffine(0, scaleX, scaleY, 0);
@@ -827,8 +827,8 @@ void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg) {
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
     SetBgMapBlocks(0, &arg->map, 2, 2);
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0xF800;
     gBtlWork->y = 0x21000;
     gBtlWork->viewX = 0xF800;
@@ -1094,11 +1094,11 @@ void BosBoogieKnifeAttack(BoogieKnifeWork* work) {
     s32 offsetX;
 
     if (gBosBoogieKnivesMoveRight) {
-        work->scaleX = 0x100;
+        work->scaleX = Q_8_8(1);
         work->drawOffsetX = 0;
         offsetX = 0x2000;
     } else {
-        work->scaleX = -0x100;
+        work->scaleX = Q_8_8(-1);
         work->drawOffsetX = 0;
         offsetX = -0x2000;
     }
@@ -1232,7 +1232,7 @@ void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
         pal = work->palette;
     }
 
-    affine = AllocObjAffine(0, work->scaleX, 0x100, 0);
+    affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
     DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, affine, flags,
         -0x1004 - (obj->y >> 8) * 4);
 }
@@ -1469,7 +1469,7 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
         BtlMapSetCameraTarget(obj->x, obj->y + obj->z);
 
         if ((s16)work->timer == 0) {
-            BgFxStartBoogieKaihuku(obj->x, obj->y, obj->z + 0x2800, 0x199);
+            BgFxStartBoogieKaihuku(obj->x, obj->y, obj->z + 0x2800, Q_8_8(1.6));
             m4aSongNumStart(SONG_BTL_BU_KAIFUKU);
             work->timer++;
             break;

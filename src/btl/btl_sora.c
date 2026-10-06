@@ -611,7 +611,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     work->tapTimers[1] = 0;
     work->task = NULL;
     work->breakAnim = 2;
-    work->scaleX = work->scaleY = 0x100;
+    work->scaleX = work->scaleY = Q_8_8(1);
     work->frameCount = 0;
 
     if (gBtlWork->flags & (BTL_FLAG_BOSS_BATTLE | BTL_FLAG_HUM_BATTLE)) {
@@ -1986,14 +1986,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
         }
 
-        SetBattleZoom(12, 0x100, gBtlWork->x2, gBtlWork->y2);
+        SetBattleZoom(12, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         ColliderSetDisabled(&act->collider, 0);
         DisableBtlSoraPassThrough(work);
         act->flags &= 0xFFFFDFFBFF7FFFFFLL;
         act->btl->flags |= BTL_FLAG_DISMISS_SUMMONS;
         work->speed = 0;
-        work->scaleX = 0x100;
-        work->scaleY = 0x100;
+        work->scaleX = Q_8_8(1);
+        work->scaleY = Q_8_8(1);
         work->state = BTL_SORA_STATE_HAZARD;
         work->steps = 0;
         work->stateTimer = 0;
@@ -2032,7 +2032,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 #ifdef VERSION_EU
         act->btl->flags &= ~BTL_FLAG_PLAYER_OFFSCREEN;
 #endif
-        work->scaleX = work->scaleY = 0x100;
+        work->scaleX = work->scaleY = Q_8_8(1);
         ColliderSetDisabled(&act->collider, 0);
         DisableBtlSoraPassThrough(work);
         act->flags &= 0xFFFFDFFBFF7FFFFFLL;
@@ -2942,9 +2942,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 if (swing->flags & COMBO_FLAG_ZOOM_ON_HIT) {
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        SetBattleZoom(8, 384, act->x - 5120, (act->y - 5120) + act->z);
+                        SetBattleZoom(8, Q_8_8(1.5), act->x - 5120, (act->y - 5120) + act->z);
                     } else {
-                        SetBattleZoom(8, 384, act->x + 5120, (act->y - 5120) + act->z);
+                        SetBattleZoom(8, Q_8_8(1.5), act->x + 5120, (act->y - 5120) + act->z);
                     }
                 }
 
@@ -2954,7 +2954,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if ((s16)work->stateTimer == hitFrames[work->swingSpeed] + 2) {
             if (swing->flags & COMBO_FLAG_ZOOM_ON_HIT) {
-                SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
+                SetBattleZoom(15, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             }
 
             if (work->comboCount <= 1) {
@@ -2965,7 +2965,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (hit == 2) {
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             SetBtlSoraState(work, BTL_SORA_STATE_GUARDED);
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             break;
@@ -3428,7 +3428,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         ApproachValue(&work->scaleX, 10, work->steps);
-        ApproachValue(&work->scaleY, 512, work->steps);
+        ApproachValue(&work->scaleY, Q_8_8(2), work->steps);
 
         if (--work->steps > 0) {
             work->stateTimer++;
@@ -3462,8 +3462,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        ApproachValue(&work->scaleX, 256, work->steps);
-        ApproachValue(&work->scaleY, 256, work->steps);
+        ApproachValue(&work->scaleX, Q_8_8(1), work->steps);
+        ApproachValue(&work->scaleY, Q_8_8(1), work->steps);
 
         if (--work->steps <= 0) {
             FadeStartIn(FADE_MODE_GRAY, 1);
@@ -3547,7 +3547,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if (work->variant[0] != SPELL_TIER_BASE && (s16)work->stateTimer == 47) {
             SetBattleZoom(15, 148, 65536, 76800);
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
-            SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(15, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
@@ -3924,9 +3924,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 m4aSongNumStart(SONG_VO_SR_ATTACK07);
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    SetBattleZoom(8, 384, act->x - 5120, (act->y - 5120) + act->z);
+                    SetBattleZoom(8, Q_8_8(1.5), act->x - 5120, (act->y - 5120) + act->z);
                 } else {
-                    SetBattleZoom(8, 384, act->x + 5120, (act->y - 5120) + act->z);
+                    SetBattleZoom(8, Q_8_8(1.5), act->x + 5120, (act->y - 5120) + act->z);
                 }
             }
 
@@ -3972,7 +3972,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 22) {
             if (work->comboCount > 5) {
-                SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
+                SetBattleZoom(15, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -4415,7 +4415,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 10;
         }
 
-        ApproachValue(&work->scaleY, 64, (* &work->steps)--);
+        ApproachValue(&work->scaleY, Q_8_8(0.25), (* &work->steps)--);
 
         if (work->steps > 0) {
             work->stateTimer++;
@@ -4447,7 +4447,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 10;
         }
 
-        ApproachValueHalfSteps(&work->scaleY, 256, (* &work->steps)--);
+        ApproachValueHalfSteps(&work->scaleY, Q_8_8(1), (* &work->steps)--);
 
         if (work->steps > 0) {
             work->stateTimer++;
@@ -5091,7 +5091,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 68, 0);
             EnableBtlSoraPassThrough(work);
-            SetBattleZoom(4, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(4, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         }
 
         elapsed = work->stateTimer;
@@ -5127,15 +5127,15 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     m4aSongNumStart(SONG_BTL_SR_ATT02);
 
                     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        SetBattleZoom(8, 384, act->x - 2048, act->y + act->z);
+                        SetBattleZoom(8, Q_8_8(1.5), act->x - 2048, act->y + act->z);
                     } else {
-                        SetBattleZoom(8, 384, act->x + 2048, act->y + act->z);
+                        SetBattleZoom(8, Q_8_8(1.5), act->x + 2048, act->y + act->z);
                     }
 
                     FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                 }
             } else if ((s16)work->stateTimer == 39) {
-                SetBattleZoom(5, 256, gBtlWork->x2, gBtlWork->y2);
+                SetBattleZoom(5, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             }
         }
 
@@ -6182,14 +6182,14 @@ void task_btl_sora_2(BtlSoraWork* work) {
 
     attr = GetBattleSpritePriorityFlags(act->y);
 
-    if (work->scaleX == 0x100 && work->scaleY == 0x100) {
+    if (work->scaleX == Q_8_8(1) && work->scaleY == Q_8_8(1)) {
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sy = gBtlWork->scale;
             sx = sy;
         } else {
             sy = gBtlWork->scale;
 
-            if (sy == 0x100) {
+            if (sy == Q_8_8(1)) {
                 sx = sy;
                 attr |= 1;
             } else {
@@ -6206,7 +6206,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
         }
     }
 
-    if (sy == 0x100 && sx == 0x100) {
+    if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);

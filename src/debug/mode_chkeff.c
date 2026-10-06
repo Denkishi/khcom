@@ -19,6 +19,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "engine_math.h"
 
 extern BgAnimationDef* gChkEffBgAnimations[83];
 
@@ -68,7 +69,7 @@ void mode_chkeff_0() {
     sChkEffWork->paused = 0;
     sChkEffWork->scrollX = 0;
     sChkEffWork->scrollY = 0;
-    sChkEffWork->scale = 0x100;
+    sChkEffWork->scale = Q_8_8(1);
     sChkEffWork->rotation = 0;
     sChkEffWork->alphaA = 16;
     sChkEffWork->alphaB = 16;
@@ -121,7 +122,7 @@ void mode_chkeff_1() {
         }
 
         if (GetKeysPressed() & SELECT_BUTTON) {
-            sChkEffWork->scale = 0x100;
+            sChkEffWork->scale = Q_8_8(1);
             sChkEffWork->rotation = 0;
         }
 
@@ -139,8 +140,8 @@ void mode_chkeff_1() {
             sChkEffWork->scale = 10;
         }
 
-        if (sChkEffWork->scale > 0xA00) {
-            sChkEffWork->scale = 0xA00;
+        if (sChkEffWork->scale > Q_8_8(10)) {
+            sChkEffWork->scale = Q_8_8(10);
         }
 
         if (BgAnimIsStopped() && (GetKeysHeld() & A_BUTTON)) {

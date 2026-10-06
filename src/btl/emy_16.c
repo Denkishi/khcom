@@ -308,7 +308,7 @@ void task_emy_16_b_2(Emy16bWork* work) {
         WorldToScreen(&x, &y, work->x, work->y, work->z);
         scale = gBtlWork->scale;
 
-        if (scale == 0x100) {
+        if (scale == Q_8_8(1)) {
             affine = NULL;
 
             if (!work->facingLeft) {

@@ -397,7 +397,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             if (w->flags & HADES_FLAG_FLAMES_ENDING) {
                 ApproachValue(&w->scale, 10, work->base.steps);
             } else {
-                ApproachValue(&w->scale, 0x100, work->base.steps);
+                ApproachValue(&w->scale, Q_8_8(1), work->base.steps);
             }
 
             work->base.steps--;
@@ -525,11 +525,11 @@ u8 task_hum_hades_1(HadesWork* work) {
 
 #ifndef VERSION_EU
         if (act->btl->hcEffect == HC_EFFECT_BERSERK && act->hp < act->maxHp >> 1) {
-            gBtlWork->damageScale = 0x200;
+            gBtlWork->damageScale = Q_8_8(2);
         }
 #endif
 
-        if (w->scale == 0x100) {
+        if (w->scale == Q_8_8(1)) {
             if (ApplyAttackBox(0x121, w->sub2[0].x3, w->sub2[0].groundY, w->sub2[0].z3, 16, 16, 16)) {
                 m4aSongNumStart(SONG_EF_FIRE01);
             }
@@ -592,7 +592,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         case 4:
 #ifndef VERSION_EU
             if (act->btl->hcEffect == HC_EFFECT_BERSERK && act->hp < act->maxHp >> 1) {
-                gBtlWork->damageScale = 0x200;
+                gBtlWork->damageScale = Q_8_8(2);
             }
 #endif
 
@@ -646,7 +646,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         case 2:
 #ifndef VERSION_EU
             if (act->btl->hcEffect == HC_EFFECT_BERSERK && act->hp < act->maxHp >> 1) {
-                gBtlWork->damageScale = 0x200;
+                gBtlWork->damageScale = Q_8_8(2);
             }
 #endif
 
@@ -711,7 +711,7 @@ void task_hum_hades_2(HadesWork* work) {
         flame = &work->sub2[i];
         attr = GetBattleSpritePriorityFlags(flame->groundY);
 
-        if (work->scale == 0x100) {
+        if (work->scale == Q_8_8(1)) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
                 attr |= 1;
             }

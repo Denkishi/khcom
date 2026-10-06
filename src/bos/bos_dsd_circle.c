@@ -159,7 +159,7 @@ void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
 u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
     switch (work->state) {
     case BOS_DSD_ENERGY1_STATE_SPAWN:
-        BgFxStartEnemySpawn(work->x, work->y, work->z, 0x100);
+        BgFxStartEnemySpawn(work->x, work->y, work->z, Q_8_8(1));
         work->state++;
         break;
     case BOS_DSD_ENERGY1_STATE_FORM:
@@ -167,7 +167,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
             break;
         }
 
-        BgFxStartDsdEnergy(work->x, work->y, work->z, 0x100, work->chargeTime, 0);
+        BgFxStartDsdEnergy(work->x, work->y, work->z, Q_8_8(1), work->chargeTime, 0);
         m4aSongNumStart(SONG_SND_701);
         work->state++;
         break;
@@ -222,18 +222,18 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
     s16 y;
 
     if (work->visible == 1) {
-        if (work->z >= 0 && gBtlWork->scale == 0x100) {
+        if (work->z >= 0 && gBtlWork->scale == Q_8_8(1)) {
             affine = NULL;
         } else {
-            scale = 0x200 - -work->z / 128;
+            scale = Q_8_8(2) - -work->z / 128;
 
             if (scale <= 0x7F) {
-                scale = 0x80;
+                scale = Q_8_8(0.5);
             }
 
             doubleSize = 0;
 
-            if (scale > 0x100) {
+            if (scale > Q_8_8(1)) {
                 doubleSize = 1;
             }
 
@@ -321,8 +321,8 @@ void task_bos_dsd_energy2_0(DsdEnergy2Work* work, void* arg) {
     work->unk_2E = 0;
     work->timer = 0;
     work->chargeTime = 0xF;
-    work->scaleX = 0x80;
-    work->scaleY = 0x80;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
     work->vx = 0;
     work->vy = 0;
     work->vz = -0x500;
@@ -352,8 +352,8 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
     switch (work->state) {
     case BOS_DSD_ENERGY2_STATE_CHARGE:
         BgFxSetScale(work->scaleX, work->scaleY);
-        work->scaleX += 25;
-        work->scaleY += 25;
+        work->scaleX += Q_8_8(0.1);
+        work->scaleY += Q_8_8(0.1);
 
         if (work->timer >= work->chargeTime) {
             BtlMapSetCameraTarget(work->x, work->y + work->z);
@@ -403,7 +403,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         work->y = gBtlWork->actor->y - 0x2400 + GetRandom() % 0x4001;
         work->z = -0xF000;
         work->vz = 0x600;
-        BgFxStartDsdEnergy(work->x, work->y, work->z, 0x100, work->chargeTime, 0);
+        BgFxStartDsdEnergy(work->x, work->y, work->z, Q_8_8(1), work->chargeTime, 0);
         work->visible = 1;
         work->timer = 0;
         work->state++;
@@ -473,18 +473,18 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
     s16 y;
 
     if (work->visible == 1) {
-        if (work->z >= 0 && gBtlWork->scale == 0x100) {
+        if (work->z >= 0 && gBtlWork->scale == Q_8_8(1)) {
             affine = NULL;
         } else {
-            scale = 0x200 - -work->z / 128;
+            scale = Q_8_8(2) - -work->z / 128;
 
             if (scale <= 0x7F) {
-                scale = 0x80;
+                scale = Q_8_8(0.5);
             }
 
             doubleSize = 0;
 
-            if (scale > 0x100) {
+            if (scale > Q_8_8(1)) {
                 doubleSize = 1;
             }
 

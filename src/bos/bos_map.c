@@ -18,14 +18,15 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     LoadBgTiles(0, cfg->tiles, cfg->tilesSize);
     LoadBgPalette(0, cfg->palette, cfg->paletteSize);
     SetBgMapBlocks(0, cfg->maps, 2, 2);
 
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0x10000;
     gBtlWork->y = 0x14000;
     gBtlWork->viewX = 0x10000;
@@ -105,14 +106,14 @@ void task_bos_shadow_2(BosShadowWork* work) {
     doubleSize = 0;
     gfx = gBtlShadowFrame0;
     flags = GetBattleSpritePriorityFlags(obj->y);
-    size = 0x100 - ((obj->groundZ - obj->z) >> 7);
+    size = Q_8_8(1) - ((obj->groundZ - obj->z) >> 7);
 
     if (size <= 0xB2) {
-        size = 0xB3;
+        size = Q_8_8(0.7);
     }
 
     if (work->actor->flags & BTLOBJ_FLAG_LARGE_SHADOW) {
-        size += 0x100;
+        size += Q_8_8(1);
         doubleSize = 1;
     }
 

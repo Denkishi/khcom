@@ -108,7 +108,7 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* task) {
         ListPoolRemove(&work->node, work->args.pool);
         work->tiles2 = LoadObjTiles(gCardBacks[work->args.listIndex].tiles2, 0xD00);
         work->steps = 8;
-        work->scale = 0x66;
+        work->scale = Q_8_8(0.4);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateReloadChildAbsorb);
         return 1;
     }
@@ -156,7 +156,7 @@ u8 UpdateReloadChildRetracted(ReloadChildWork* work, void* task) {
 s32 UpdateReloadChildAbsorb(ReloadChildWork* work) {
     ApproachValue(&work->offsetX, 0, work->steps);
     ApproachValue(&work->offsetY, 0, work->steps);
-    ApproachValue(&work->scale, 256, work->steps);
+    ApproachValue(&work->scale, Q_8_8(1), work->steps);
 
     if (work->steps != 0) {
         work->steps--;
@@ -552,9 +552,9 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     work->vz = -(GetRandom() % 129 + 0x300);
     work->speed = GetRandom() % 129 + 0x80;
     work->moveAngle = GetRandom() % 256;
-    work->scaleX = 0x80;
-    work->scaleY = 0x80;
-    work->scale = 0x80;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
+    work->scale = Q_8_8(0.5);
     work->flipAngleY = 0;
     work->flipAngleX = 0;
     collider = &work->collider;
@@ -649,7 +649,7 @@ void PrizeBoss_2(BossPrizeWork* work) {
     }
 
     if (!work->collected) {
-        shadowScale = 204 - ((work->groundZ - work->posZ) >> 7);
+        shadowScale = Q_8_8(0.8) - ((work->groundZ - work->posZ) >> 7);
 
         if (shadowScale <= 2) {
             shadowScale = 2;
@@ -787,7 +787,7 @@ u8 UpdateBossPrizeShow(BossPrizeWork* work, void* task) {
     if ((s16)scale <= 0xFF) {
         work->scale = scale + 2;
     } else {
-        maxScale = 0x100;
+        maxScale = Q_8_8(1);
         work->scale = maxScale;
     }
 

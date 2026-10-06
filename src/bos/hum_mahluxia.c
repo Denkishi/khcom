@@ -187,7 +187,7 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* spawn) {
     if (spawn->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
         sy = spawn->scale;
         sx = sy;
-    } else if (spawn->scale == 0x100) {
+    } else if (spawn->scale == Q_8_8(1)) {
         sy = spawn->scale;
         sx = sy;
         attr |= 1;
@@ -196,7 +196,7 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* spawn) {
         sy = gBtlWork->scale;
     }
 
-    if (sy == 0x100 && sx == sy) {
+    if (sy == Q_8_8(1) && sx == sy) {
         affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);

@@ -15,6 +15,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "sprites_mode_test.h"
+#include "engine_math.h"
 
 enum BtlHpenmGaugeLayer {
     BTL_HPENM_GAUGE_LAYER_GREEN,
@@ -29,7 +30,7 @@ void task_btl_hpenm_0(BtlHpenmWork* work) {
     work->tiles3 = AllocObjTiles(0x20, gBHpgagETiles);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     work->visible = 0;
-    work->hpRatio = 0x100;
+    work->hpRatio = Q_8_8(1);
     work->actor = NULL;
     work->gaugeSize = 0;
     work->gaugeLayer = BTL_HPENM_GAUGE_LAYER_GREEN;
@@ -395,10 +396,10 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             scale = 10;
         }
 
-        if (scale > 0x100) {
-            affine = AllocObjAffine(0, scale, 0x100, 1);
+        if (scale > Q_8_8(1)) {
+            affine = AllocObjAffine(0, scale, Q_8_8(1), 1);
         } else {
-            affine = AllocObjAffine(0, scale, 0x100, 0);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), 0);
         }
 
         DrawSprite(217, 6, bar, work->tiles2, work->palette, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);

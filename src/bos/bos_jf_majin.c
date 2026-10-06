@@ -109,7 +109,7 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
     work->rightTarget = gBosJfRightPillarLevel;
     work->beamAngle = 0;
     work->beamLength = 0;
-    work->beamScale = 0x133;
+    work->beamScale = Q_8_8(1.2);
     work->extraClipRows = 0;
     gBosJfMajinMapBlockTable[0] = gDefaultBgMap;
     gBosJfMajinMapBlockTable[1] = gDefaultBgMap;
@@ -819,9 +819,9 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             break;
         case BOS_JF_MAJIN_BEAM_STEP_FIRE:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 160, 45);
+                BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, Q_8_8(1.2), 160, 45);
             } else {
-                BgFxStartJfMajinBeam(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 96, 45);
+                BgFxStartJfMajinBeam(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, Q_8_8(1.2), 96, 45);
             }
 
             m4aSongNumStart(SONG_EF_JF_BEEM);
@@ -958,14 +958,14 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
         case BOS_JF_MAJIN_SWEEP_BEAM_STEP_FIRE:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->beamAngle = 148;
-                work->beamScale = 0x100;
-                BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x100, work->beamAngle, 45);
-                BgFxSetScale(0x133, 0x100);
+                work->beamScale = Q_8_8(1);
+                BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, Q_8_8(1), work->beamAngle, 45);
+                BgFxSetScale(Q_8_8(1.2), Q_8_8(1));
             } else {
                 work->beamAngle = 108;
-                work->beamScale = 0x133;
-                BgFxStartJfMajinBeam(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x100, work->beamAngle, 45);
-                BgFxSetScale(0x133, 0x100);
+                work->beamScale = Q_8_8(1.2);
+                BgFxStartJfMajinBeam(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, Q_8_8(1), work->beamAngle, 45);
+                BgFxSetScale(Q_8_8(1.2), Q_8_8(1));
             }
 
             m4aSongNumStart(SONG_EF_JF_BEEM);
@@ -986,7 +986,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
                     BgFxSetAngle(work->beamAngle);
                     work->beamLength++;
                     work->beamScale = gBosJfMajinBeamScales[work->beamLength];
-                    BgFxSetScale(0x133, work->beamScale);
+                    BgFxSetScale(Q_8_8(1.2), work->beamScale);
                 }
             } else {
                 jf->body.x = (work->x - 0x100) + (work->moveSteps % 2) * 0x200;
@@ -997,7 +997,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
                     BgFxSetAngle(work->beamAngle);
                     work->beamLength++;
                     work->beamScale = gBosJfMajinBeamScales[work->beamLength];
-                    BgFxSetScale(0x133, work->beamScale);
+                    BgFxSetScale(Q_8_8(1.2), work->beamScale);
                 }
             }
 
@@ -2192,7 +2192,7 @@ void* gBosJfMajinFrameTiles[49] = {
     NULL,
 };
 
-u32 gBosJfMajinBeamScales[27] = { 256, 266, 276, 286, 296, 307, 317, 327, 337, 348, 358, 368, 378, 389, 399, 409, 419, 432, 445, 458, 471, 486, 501, 517, 532, 547, 563 };
+u32 gBosJfMajinBeamScales[27] = { Q_8_8(1), Q_8_8(1.04), Q_8_8(1.08), Q_8_8(1.12), Q_8_8(1.16), Q_8_8(1.2), Q_8_8(1.24), Q_8_8(1.28), Q_8_8(1.32), Q_8_8(1.36), Q_8_8(1.4), Q_8_8(1.44), Q_8_8(1.48), Q_8_8(1.52), Q_8_8(1.56), Q_8_8(1.6), Q_8_8(1.64), Q_8_8(1.69), Q_8_8(1.74), Q_8_8(1.79), Q_8_8(1.84), Q_8_8(1.9), Q_8_8(1.96), Q_8_8(2.02), Q_8_8(2.08), Q_8_8(2.14), Q_8_8(2.2) };
 
 u32 gUnk_09EF2A00 = 578;
 

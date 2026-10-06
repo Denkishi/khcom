@@ -608,7 +608,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
         case MOOGLE_PACK_CARD_STATE_DEAL:
             ApproachValue(&sMooglePackCards[i].x, i * 10240 + 0x2800, sMooglePackCards[i].timer);
             ApproachValue(&sMooglePackCards[i].y, 0x6400, sMooglePackCards[i].timer);
-            ApproachValue(&sMooglePackCards[i].scale, 0x100, sMooglePackCards[i].timer);
+            ApproachValue(&sMooglePackCards[i].scale, Q_8_8(1), sMooglePackCards[i].timer);
 
             if (--sMooglePackCards[i].timer == 0) {
                 if (sMooglePackCards[i].premium) {

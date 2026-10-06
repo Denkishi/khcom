@@ -239,7 +239,7 @@ void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* arg) {
     work->targetX = arg->targetX;
     work->targetY = arg->targetY;
     work->delay = arg->delay;
-    work->scale = 0x100;
+    work->scale = Q_8_8(1);
     work->flipAngleY = 0;
     work->flipAngleX = 0;
     work->speed = 0x300;

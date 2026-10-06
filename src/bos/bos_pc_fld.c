@@ -18,6 +18,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "engine_math.h"
 
 static u8 sBosPcFldShakeActive;
 static s16 sBosPcFldShakePattern;
@@ -162,8 +163,8 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
     SetBgMapBlocks(0, &arg->map, 2, 3);
-    gBtlWork->scale = 0x100;
-    gBtlWork->zoomScale = 0x100;
+    gBtlWork->scale = Q_8_8(1);
+    gBtlWork->zoomScale = Q_8_8(1);
     gBtlWork->x = 0x11400;
     gBtlWork->y = 0x15300;
     gBtlWork->viewX = 0x11400;

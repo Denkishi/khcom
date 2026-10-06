@@ -4130,7 +4130,7 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     work->visible = 1;
     work->timer = 0;
     work->update = MapPrizeBounce;
-    work->scale = 0x100;
+    work->scale = Q_8_8(1);
     ColliderInit(&work->collider, 5, 16, 50);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     ColliderSetDisabled(&work->collider, 1);
@@ -4163,7 +4163,7 @@ void Task_MapPrize_2(MapPrizeWork* work) {
         x = (work->x >> 8) - (gFieldState->x >> 8);
         y = (work->y >> 8) + (work->z >> 8) - (gFieldState->y >> 8);
 
-        if (work->scale != 0x100) {
+        if (work->scale != Q_8_8(1)) {
             aff = AllocObjAffine(0, work->scale, work->scale, 0);
         } else {
             aff = NULL;
@@ -4309,8 +4309,8 @@ void MapPrzCardFlyToCenter(MapPrzCardWork* work) {
     work->vz += 2;
     work->scale += 3;
 
-    if (work->scale > 0x100) {
-        work->scale = 0x100;
+    if (work->scale > Q_8_8(1)) {
+        work->scale = Q_8_8(1);
     }
 
     x = work->posX >> 8;
@@ -4330,8 +4330,8 @@ void MapPrzCardShowName(MapPrzCardWork* work) {
     work->phaseY = 0;
     work->scale += 2;
 
-    if (work->scale > 0x100) {
-        work->scale = 0x100;
+    if (work->scale > Q_8_8(1)) {
+        work->scale = Q_8_8(1);
     }
 
     x = work->posX >> 8;
@@ -4390,9 +4390,9 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* arg) {
     work->vz = -(GetRandom() % 129 + 0x300);
     work->speed = GetRandom() % 129 + 128;
     work->angle = GetRandom();
-    work->scaleX = 128;
-    work->scaleY = 128;
-    work->scale = 128;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
+    work->scale = Q_8_8(0.5);
     work->rotation = 24;
     work->phaseY = 0;
     work->phaseX = 0;
@@ -4440,7 +4440,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
     s16 y;
     s16 shadowScale;
 
-    if (work->scaleX == 0x100 && work->scaleY == 0x100 && work->rotation == 0) {
+    if (work->scaleX == Q_8_8(1) && work->scaleY == Q_8_8(1) && work->rotation == 0) {
         affine = NULL;
     } else {
         affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
@@ -4462,7 +4462,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
     if (!work->collected) {
         x = (work->posX >> 8) - (gFieldState->x >> 8);
         y = (work->posY >> 8) + (work->ground >> 8) - (gFieldState->y >> 8);
-        shadowScale = 204 - ((work->ground - work->posZ) >> 7);
+        shadowScale = Q_8_8(0.8) - ((work->ground - work->posZ) >> 7);
 
         if (shadowScale <= 2) {
             shadowScale = 2;

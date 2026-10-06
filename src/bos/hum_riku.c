@@ -194,7 +194,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* spawn) {
     if (spawn->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
         sy = spawn->scale;
         sx = sy;
-    } else if (spawn->scale == 0x100) {
+    } else if (spawn->scale == Q_8_8(1)) {
         sy = spawn->scale;
         sx = sy;
         attr |= 1;
@@ -203,7 +203,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* spawn) {
         sy = gBtlWork->scale;
     }
 
-    if (sy == 0x100 && sx == sy) {
+    if (sy == Q_8_8(1) && sx == sy) {
         affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);
@@ -280,7 +280,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         break;
     case BTL_REACTION_CARD_BROKEN:
         work->base.flags &= ~HUM_FLAG_IGNORE_BOUNDS;
-        work->base.scaleX = 256;
+        work->base.scaleX = Q_8_8(1);
         break;
     }
 
@@ -546,7 +546,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         work->base.vz = 0;
         BtlMapFollowPosition(gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-        ApproachValue(&work->base.scaleX, 256, work->base.steps);
+        ApproachValue(&work->base.scaleX, Q_8_8(1), work->base.steps);
         work->base.steps--;
 
         if (work->base.steps <= 0) {
@@ -900,9 +900,9 @@ u8 task_hum_riku_1(RikuWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 45);
 
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                            SetBattleZoom(6, 332, act->x - 0x2000, (act->y - 0x1800) + act->z);
+                            SetBattleZoom(6, Q_8_8(1.3), act->x - 0x2000, (act->y - 0x1800) + act->z);
                         } else {
-                            SetBattleZoom(6, 332, act->x + 0x2000, (act->y - 0x1800) + act->z);
+                            SetBattleZoom(6, Q_8_8(1.3), act->x + 0x2000, (act->y - 0x1800) + act->z);
                         }
                     }
                 }
@@ -910,7 +910,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         if (work->base.anim.timer == 2 && AnimGetGfxIndex(&work->base.anim) == 6) {
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
         }
 
         if (AnimIsFinished(&work->base.anim)) {

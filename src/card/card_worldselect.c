@@ -81,7 +81,7 @@ void WORLDSELECT_0() {
 #else
     LoadBgMap(3, gBtlBgMonstroMap, 0x1000);
 #endif
-    SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
+    SetBgAffine(3, 0, Q_8_8(1), Q_8_8(1), 0x10000, 0x16800);
     TaskPoolInit(&sModeWorldselectTasks, 1);
     TaskCreate(&sModeWorldselectTasks, &gTaskDescPremireChance, NULL);
 }
@@ -1925,7 +1925,7 @@ void Mapcard_0(MapcardWork* work, MapcardArgs* args) {
     work->angle = 0;
     work->steps = 16;
     work->holdTimer = 0;
-    work->scale = 0x100;
+    work->scale = Q_8_8(1);
     work->unk_71 = 0;
     work->unk_72 = 0;
     work->value = gMapCardDefs[work->args.baseCardId].value;
@@ -2065,7 +2065,7 @@ void AimMapcardAtDoor(MapcardWork* work) {
     work->speed = 0x300;
     work->deceleration = 25;
     work->angle = 0;
-    work->scale = 0x100;
+    work->scale = Q_8_8(1);
 }
 
 u8 UpdateMapcardFlyToDoor(MapcardWork* work, void* task) {
@@ -2323,7 +2323,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* arg) {
         break;
     }
 
-    work->scaleX = 0x100;
+    work->scaleX = Q_8_8(1);
     work->scaleY = 0;
     ListPoolInit(work->children);
     ListNodeInit(&work->node, work->args.pool, work);
@@ -2420,10 +2420,10 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
                 }
 
                 if (work->stockIndex == 0) {
-                    work->scaleY += 25;
+                    work->scaleY += Q_8_8(0.1);
 
-                    if (work->scaleY > 0x100) {
-                        work->scaleY = 0x100;
+                    if (work->scaleY > Q_8_8(1)) {
+                        work->scaleY = Q_8_8(1);
                         work->stockIndex = 1;
                     }
                 } else {
@@ -2592,7 +2592,7 @@ void Reload_Gage_2(CardDisplayWork* work) {
                gCardBattleState->palette, NULL, SPRITE_PRIORITY(1), 50);
 
     if (work->scaleY > 0) {
-        affine = AllocObjAffine(0, 0x100, work->scaleY, 0);
+        affine = AllocObjAffine(0, Q_8_8(1), work->scaleY, 0);
         DrawSprite((work->x >> 8) + (gauge->offsetX >> 8),
                    (work->y >> 8) + (offsetY = (gSineTable[work->bobAngle] >> 8) + 17),
                    gauge->gfx, work->tiles3, gCardBattleState->palette, affine,

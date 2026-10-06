@@ -326,8 +326,8 @@ void BgFxReset() {
     }
 
     SetBgBlend(sBgFx->bg, 16, 16);
-    sBgFx->scaleX = 0x100;
-    sBgFx->scaleY = 0x100;
+    sBgFx->scaleX = Q_8_8(1);
+    sBgFx->scaleY = Q_8_8(1);
     sBgFx->angle = 0;
     sBgFx->update = NULL;
     sBgFx->timer = 0;
@@ -589,8 +589,8 @@ void BgFxUpdateFire() {
         sBgFx->update = BgFxUpdateFadeOut;
     } else if (sBgFx->timer == -1) {
         sBgFx->angle = 0;
-        sBgFx->scaleX = 0x100;
-        sBgFx->scaleY = 0x100;
+        sBgFx->scaleX = Q_8_8(1);
+        sBgFx->scaleY = Q_8_8(1);
         sBgFx->x += dx;
         sBgFx->releaseFrames = 20;
         WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y,
@@ -659,7 +659,7 @@ void BgFxStartFire(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 
 
     if (flip) {
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
     }
 
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -692,12 +692,12 @@ void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 flip, s32 unused, s32 attack,
 
     if (flip) {
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
-        sBgFx->scaleX = -0x180;
+        sBgFx->scaleX = Q_8_8(-1.5);
     } else {
-        sBgFx->scaleX = 0x180;
+        sBgFx->scaleX = Q_8_8(1.5);
     }
 
-    sBgFx->scaleY = 0x180;
+    sBgFx->scaleY = Q_8_8(1.5);
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     sBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
@@ -758,8 +758,8 @@ void BgFxUpdateBlizzard() {
         sBgFx->timer = -1;
     } else if (sBgFx->timer == -1) {
         sBgFx->angle = 0;
-        sBgFx->scaleX = 0x100;
-        sBgFx->scaleY = 0x100;
+        sBgFx->scaleX = Q_8_8(1);
+        sBgFx->scaleY = Q_8_8(1);
         sBgFx->x += dx;
         sBgFx->releaseFrames = 20;
         WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
@@ -847,7 +847,7 @@ void BgFxStartBlizzard(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, 
     sBgFx->steps = 0;
 
     if (flip) {
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
 
@@ -886,11 +886,11 @@ void BgFxStartFlash(s32 x, s32 y, s32 z) {
     sBgFx->y = y;
     sBgFx->z = z - 0x1000;
     WorldToScreen(&sx, &sy, x, y, z - 0x1000);
-    sBgFx->scaleX = 76;
-    sBgFx->scaleY = 76;
+    sBgFx->scaleX = Q_8_8(0.3);
+    sBgFx->scaleY = Q_8_8(0.3);
     sBgFx->angle = 0;
-    sBgFx->targetX = 25;
-    sBgFx->targetY = 25;
+    sBgFx->targetX = Q_8_8(0.1);
+    sBgFx->targetY = Q_8_8(0.1);
     BgAnimStart(&gBgAnimDefFlash, sx, sy);
     BgAnimSetLoopStartFrame(0);
     sBgFx->update = BgFxUpdateFlash;
@@ -926,11 +926,11 @@ void BgFxStartFlashHit(s32 x, s32 y, s32 z) {
     sBgFx->y = y;
     sBgFx->z = z - 0x1000;
     WorldToScreen(&sx, &sy, x, y, z - 0x1000);
-    sBgFx->scaleX = 256;
-    sBgFx->scaleY = 256;
+    sBgFx->scaleX = Q_8_8(1);
+    sBgFx->scaleY = Q_8_8(1);
     sBgFx->angle = 0;
-    sBgFx->targetX = 76;
-    sBgFx->targetY = 76;
+    sBgFx->targetX = Q_8_8(0.3);
+    sBgFx->targetY = Q_8_8(0.3);
     BgAnimStart(&gBgAnimDefFlash, sx, sy);
     BgAnimSetLoopStartFrame(0);
     sBgFx->update = BgFxUpdateFlashHit;
@@ -950,8 +950,8 @@ void func_080135EC(s32 x, s32 y, s32 z) {
     sBgFx->y = y;
     sBgFx->z = z - 0x1000;
     WorldToScreen(&sx, &sy, x, y, z - 0x1000);
-    sBgFx->scaleX = 128;
-    sBgFx->scaleY = 128;
+    sBgFx->scaleX = Q_8_8(0.5);
+    sBgFx->scaleY = Q_8_8(0.5);
     sBgFx->angle = 0;
     BgAnimStart(&gBgAnimDefFlash, sx, sy);
     BgAnimSetLoopStartFrame(0);
@@ -1007,7 +1007,7 @@ void BgFxStartLimit(s32 x, s32 y, s32 z, u8 flip) {
     sBgFx->z = z;
 
     if (flip) {
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
     }
 
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
@@ -1029,7 +1029,7 @@ void BgFxStartDashRing(s32 x, s32 y, s32 z, u8 flip) {
     sBgFx->z = z - 0x1000;
 
     if (flip) {
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
     }
 
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
@@ -1066,7 +1066,7 @@ void BgFxStartFireHit(s32 x, s32 y, s32 z) {
     sBgFx->x = x;
     sBgFx->y = y;
     sBgFx->z = z - 0x1000;
-    sBgFx->scaleY = 0x200;
+    sBgFx->scaleY = Q_8_8(2);
     WorldToScreen(&sx, &sy, x, y, z - 0x1000);
     BgAnimStart(&sBgAnimDefFireHit, sx, sy);
     sBgFx->update = BgFxUpdateBase;
@@ -1164,11 +1164,11 @@ void BgFxUpdateWideThunder() {
         sBgFx->angle = 0;
         sBgFx->releaseFrames = 20;
         sBgFx->flags |= BGFX_FLAG_IGNORE_ZOOM;
-        sBgFx->scaleX = 512;
+        sBgFx->scaleX = Q_8_8(2);
         sBgFx->scaleY = (sy << 8) / 40;
 
-        if (sBgFx->scaleY < 384) {
-            sBgFx->scaleY = 384;
+        if (sBgFx->scaleY < Q_8_8(1.5)) {
+            sBgFx->scaleY = Q_8_8(1.5);
         }
 
         switch (sBgFx->state) {
@@ -1197,8 +1197,8 @@ void BgFxUpdateWideThunder() {
         height = sy2 << 8;
         sBgFx->scaleY = height / 40;
 
-        if (sBgFx->scaleY < 384) {
-            sBgFx->scaleY = 384;
+        if (sBgFx->scaleY < Q_8_8(1.5)) {
+            sBgFx->scaleY = Q_8_8(1.5);
         }
     }
 
@@ -1233,8 +1233,8 @@ void BgFxUpdateEnemyDeath() {
     BgAnimGetFrameState(&frame, NULL);
 
     if (frame > 3) {
-        sBgFx->scaleX += 12;
-        sBgFx->scaleY += 12;
+        sBgFx->scaleX += Q_8_8(0.05);
+        sBgFx->scaleY += Q_8_8(0.05);
         SetBlendAlpha(sBgFx->timer, 16 - sBgFx->timer);
 
         if (sBgFx->timer > 15) {
@@ -1339,8 +1339,8 @@ void BgFxStartDarkDeathBlend(s32 x, s32 y, s32 scale, u16 target2, u16 target1) 
 }
 
 void BgFxUpdateExplosion() {
-    sBgFx->scaleX += 12;
-    sBgFx->scaleY += 12;
+    sBgFx->scaleX += Q_8_8(0.05);
+    sBgFx->scaleY += Q_8_8(0.05);
     BgFxUpdateBase();
 }
 
@@ -1428,8 +1428,8 @@ void BgFxStartActorThunder(BtlObj* actor) {
     sBgFx->x = actor->x;
     sBgFx->y = actor->y;
     sBgFx->z = actor->z - 0x800;
-    sBgFx->scaleX = 0x133;
-    sBgFx->scaleY = 0x133;
+    sBgFx->scaleX = Q_8_8(1.2);
+    sBgFx->scaleY = Q_8_8(1.2);
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
     BgAnimStart(&gBgAnimDefThunder00, sx, sy);
     BgAnimSetLoopStartFrame(4);
@@ -1499,8 +1499,8 @@ void BgFxStartFallingThunder(s32 x, s32 y, s32 z, s32 targetX, s32 vz) {
     sBgFx->targetX = targetX;
     sBgFx->unk_3C = vz;
     sBgFx->state = BGFX_FALLING_THUNDER_STATE_HOVER;
-    sBgFx->scaleX = 0x299;
-    sBgFx->scaleY = 0x299;
+    sBgFx->scaleX = Q_8_8(2.6);
+    sBgFx->scaleY = Q_8_8(2.6);
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefThunder00, sx, sy);
     BgAnimSetLoopStartFrame(4);
@@ -1618,8 +1618,8 @@ void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 scale, s32 steps, s32 spinSpeed
 void func_08014654() {
     u16 timer;
     s16 fade;
-    sBgFx->scaleX += 25;
-    sBgFx->scaleY += 25;
+    sBgFx->scaleX += Q_8_8(0.1);
+    sBgFx->scaleY += Q_8_8(0.1);
     BgFxUpdateBase();
     timer = sBgFx->timer;
 
@@ -1648,8 +1648,8 @@ void func_080146A8(s32 x, s32 y, s32 z) {
     sBgFx->y = y;
     sBgFx->z = z - 0x1000;
     WorldToScreen(&sx, &sy, x, y, 0);
-    sBgFx->scaleX = 512;
-    sBgFx->scaleY = 768;
+    sBgFx->scaleX = Q_8_8(2);
+    sBgFx->scaleY = Q_8_8(3);
     sBgFx->angle = 0;
     BgAnimStart(&gBgAnimDefFlash, sx, sy);
     BgAnimSetLoopStartFrame(0);
@@ -1880,19 +1880,19 @@ void BgFxUpdateGravity() {
 
         switch (sBgFx->state) {
         case SPELL_TIER_BASE:
-            sBgFx->targetX = 128;
-            sBgFx->targetY = 128;
+            sBgFx->targetX = Q_8_8(0.5);
+            sBgFx->targetY = Q_8_8(0.5);
             BgAnimStart(&gBgAnimDefGravity01, sx, sy);
             break;
         case SPELL_TIER_RA:
-            sBgFx->targetX = 256;
-            sBgFx->targetY = 256;
+            sBgFx->targetX = Q_8_8(1);
+            sBgFx->targetY = Q_8_8(1);
             BgAnimStart(&gBgAnimDefGravity01, sx, sy);
             break;
         case SPELL_TIER_GA:
         default:
-            sBgFx->targetX = 512;
-            sBgFx->targetY = 512;
+            sBgFx->targetX = Q_8_8(2);
+            sBgFx->targetY = Q_8_8(2);
             BgAnimStart(&gBgAnimDefGravity01, sx, sy);
             break;
         }
@@ -2006,8 +2006,8 @@ void BgFxStartGravityStrike(s32 x, s32 y, s32 z, s32 attack) {
 }
 
 void BgFxUpdateShockwave() {
-    sBgFx->scaleX += 0x80;
-    sBgFx->scaleY += 0x80;
+    sBgFx->scaleX += Q_8_8(0.5);
+    sBgFx->scaleY += Q_8_8(0.5);
     sBgFx->angle += 3;
 
     if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
@@ -2048,8 +2048,8 @@ void BgFxStartShockwave(s32 x, s32 y, u8 flip) {
     }
 
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, 0);
-    sBgFx->scaleX = 128;
-    sBgFx->scaleY = 128;
+    sBgFx->scaleX = Q_8_8(0.5);
+    sBgFx->scaleY = Q_8_8(0.5);
     sBgFx->angle = 0;
     sBgFx->steps = 0;
     BgAnimStart(&gBgAnimDefFlash, sx, sy);
@@ -2086,8 +2086,8 @@ void BgFxStartGas(s32 x, s32 y, s32 z, u8 facingLeft) {
     sBgFx->x = x;
     sBgFx->y = y;
     sBgFx->z = z;
-    sBgFx->scaleX = 0x100;
-    sBgFx->scaleY = 0x100;
+    sBgFx->scaleX = Q_8_8(1);
+    sBgFx->scaleY = Q_8_8(1);
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefGas, sx, sy);
     sBgFx->update = BgFxUpdateGas;
@@ -2212,8 +2212,8 @@ void BgFxStartBossDeathFlash() {
 
     BgFxReset();
     sBgFx->state = BGFX_BOSS_DEATH_FLASH_STATE_GLOW;
-    sBgFx->scaleX = 0x19;
-    sBgFx->scaleY = 0x19;
+    sBgFx->scaleX = Q_8_8(0.1);
+    sBgFx->scaleY = Q_8_8(0.1);
     BgAnimStart(&gBgAnimDefGlow, 0x78, 0x50);
     BgAnimSetLoopStartFrame(0);
     m4aSongNumStart(SONG_EF_DBOSS_DEAD);
@@ -2235,7 +2235,7 @@ void BgFxUpdatePcShot() {
     case BGFX_PC_SHOT_STATE_GROW:
         timer = sBgFx->timer;
         SetBlendAlpha(16, timer);
-        ApproachValueHalfSteps(&sBgFx->scaleX, 0x100, 17 - timer);
+        ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(1), 17 - timer);
         sBgFx->scaleY = sBgFx->scaleX;
 
         if (timer > 15) {
@@ -2305,8 +2305,8 @@ void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ,
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefPcShot, sx, sy);
     BgAnimSetLoopStartFrame(0);
-    sBgFx->scaleX = 25;
-    sBgFx->scaleY = 25;
+    sBgFx->scaleX = Q_8_8(0.1);
+    sBgFx->scaleY = Q_8_8(0.1);
     sBgFx->update = BgFxUpdatePcShot;
     sBgFx->state = BGFX_PC_SHOT_STATE_GROW;
     sBgFx->attack = attack;
@@ -2330,11 +2330,11 @@ void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 attack) {
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
     height = sy << 8;
-    sBgFx->scaleX = 384;
+    sBgFx->scaleX = Q_8_8(1.5);
     sBgFx->scaleY = height / 40;
 
-    if (sBgFx->scaleY < 384) {
-        sBgFx->scaleY = 384;
+    if (sBgFx->scaleY < Q_8_8(1.5)) {
+        sBgFx->scaleY = Q_8_8(1.5);
     }
 
     BgAnimStart(&gBgAnimDefThunder01, sx, sy);
@@ -2363,11 +2363,11 @@ void BgFxUpdateThunder() {
         sBgFx->z = sBgFx->targetZ;
         WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
         sBgFx->angle = 0;
-        sBgFx->scaleX = 384;
+        sBgFx->scaleX = Q_8_8(1.5);
         sBgFx->scaleY = (sy << 8) / 40;
 
-        if (sBgFx->scaleY < 384) {
-            sBgFx->scaleY = 384;
+        if (sBgFx->scaleY < Q_8_8(1.5)) {
+            sBgFx->scaleY = Q_8_8(1.5);
         }
 
         sBgFx->flags |= BGFX_FLAG_IGNORE_ZOOM;
@@ -2398,8 +2398,8 @@ void BgFxUpdateThunder() {
         height = sy2 << 8;
         sBgFx->scaleY = height / 40;
 
-        if (sBgFx->scaleY < 384) {
-            sBgFx->scaleY = 384;
+        if (sBgFx->scaleY < Q_8_8(1.5)) {
+            sBgFx->scaleY = Q_8_8(1.5);
         }
     }
 
@@ -2450,7 +2450,7 @@ void BgFxUpdateDumboSplash() {
 
         ApproachValue(&sBgFx->unk_3C, 0x1000, sBgFx->steps);
         ApproachValue(&sBgFx->scaleX, sBgFx->targetX, sBgFx->steps);
-        ApproachValue(&sBgFx->scaleY, 0x100, sBgFx->steps);
+        ApproachValue(&sBgFx->scaleY, Q_8_8(1), sBgFx->steps);
         ApproachValue(&sBgFx->angleFixed, 0, sBgFx->steps);
         sBgFx->angle = sBgFx->angleFixed >> 8;
         reach = sBgFx->scaleX;
@@ -2515,13 +2515,13 @@ void BgFxUpdateDumboSplash() {
         }
 
         ApproachValue(&sBgFx->unk_3C, 0, sBgFx->steps);
-        ApproachValue(&sBgFx->scaleY, 128, sBgFx->steps);
+        ApproachValue(&sBgFx->scaleY, Q_8_8(0.5), sBgFx->steps);
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            ApproachValue(&sBgFx->scaleX, -128, sBgFx->steps);
+            ApproachValue(&sBgFx->scaleX, Q_8_8(-0.5), sBgFx->steps);
             ApproachValue(&sBgFx->angleFixed, 0x800, sBgFx->steps);
         } else {
-            ApproachValue(&sBgFx->scaleX, 128, sBgFx->steps);
+            ApproachValue(&sBgFx->scaleX, Q_8_8(0.5), sBgFx->steps);
             ApproachValue(&sBgFx->angleFixed, -0x800, sBgFx->steps);
         }
 
@@ -2561,26 +2561,26 @@ void BgFxStartDumboSplash(u16 variant, s32 x, s32 y, s32 z, u8 flip, s32 attack)
     sBgFx->z = z;
     sBgFx->attack = attack;
     WorldToScreen(&sx, &sy, x, y, z);
-    sBgFx->scaleY = 25;
+    sBgFx->scaleY = Q_8_8(0.1);
 
     switch (variant) {
     case 0:
-        sBgFx->targetX = 256;
+        sBgFx->targetX = Q_8_8(1);
         break;
     case 1:
-        sBgFx->targetX = 384;
+        sBgFx->targetX = Q_8_8(1.5);
         break;
     case 2:
-        sBgFx->targetX = 512;
+        sBgFx->targetX = Q_8_8(2);
         break;
     }
 
     if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-        sBgFx->scaleX = -25;
+        sBgFx->scaleX = Q_8_8(-0.1);
         sBgFx->angleFixed = 2048;
         sBgFx->targetX = -sBgFx->targetX;
     } else {
-        sBgFx->scaleX = 25;
+        sBgFx->scaleX = Q_8_8(0.1);
         sBgFx->angleFixed = -2048;
     }
 
@@ -2606,10 +2606,10 @@ void func_08015C80(s32 x, s32 y, s32 z) {
     sBgFx->y = y;
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
-    sBgFx->scaleX = 76;
-    sBgFx->scaleY = 76;
-    sBgFx->targetX = 12;
-    sBgFx->targetY = 12;
+    sBgFx->scaleX = Q_8_8(0.3);
+    sBgFx->scaleY = Q_8_8(0.3);
+    sBgFx->targetX = Q_8_8(0.05);
+    sBgFx->targetY = Q_8_8(0.05);
     BgAnimStart(&gBgAnimDefFlash, sx, sy);
     BgAnimSetLoopStartFrame(0);
     sBgFx->update = BgFxUpdateFlash;
@@ -2636,8 +2636,8 @@ void BgFxStartTrinityLimit(s32 x, s32 y, s32 z) {
     sBgFx->x = x;
     sBgFx->y = y;
     sBgFx->z = z;
-    sBgFx->scaleX = 0x100;
-    sBgFx->scaleY = 0x100;
+    sBgFx->scaleX = Q_8_8(1);
+    sBgFx->scaleY = Q_8_8(1);
     WorldToScreen(&sx, &sy, x, y, z);
     sBgFx->flags |= BGFX_FLAG_BELOW_SPRITES;
     SetBlendAlpha(16, 0);
@@ -2660,8 +2660,8 @@ void BgFxStartTrinityLimitCharge(s32 x, s32 y, s32 z) {
     sBgFx->y = y;
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
-    sBgFx->scaleX = 0x200;
-    sBgFx->scaleY = 0x200;
+    sBgFx->scaleX = Q_8_8(2);
+    sBgFx->scaleY = Q_8_8(2);
     BgAnimSetLoopStartFrame(7);
     BgAnimStart(&gBgAnimDefTrinityLimitCharge, sx, sy);
     sBgFx->update = BgFxUpdateBase;
@@ -2686,20 +2686,20 @@ void BgFxUpdateTrinityLimitBlast() {
             sBgFx->state++;
         }
 
-        sBgFx->scaleX += 25;
-        sBgFx->scaleY += 25;
+        sBgFx->scaleX += Q_8_8(0.1);
+        sBgFx->scaleY += Q_8_8(0.1);
         break;
     }
     case BGFX_TRINITY_LIMIT_BLAST_STATE_EXPAND: {
         u16 timer;
 
-        sBgFx->scaleX += 0x100;
-        sBgFx->scaleY += 0x100;
+        sBgFx->scaleX += Q_8_8(1);
+        sBgFx->scaleY += Q_8_8(1);
         timer = sBgFx->timer;
 
         if ((s16)timer > 32) {
             ApplyAttackBox(87, sBgFx->x, sBgFx->y, 0, 0x100, 0x100, 0x100);
-            SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(1, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             FadeStartIn(FADE_MODE_ADD_WHITE, 60);
             sBgFx->timer = 0;
             sBgFx->state++;
@@ -2741,8 +2741,8 @@ void BgFxStartTrinityLimitBlast(s32 x, s32 y, s32 z) {
     sBgFx->z = z;
     SetBlendAlpha(16, 0);
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
-    sBgFx->scaleX = 0x300;
-    sBgFx->scaleY = 0x300;
+    sBgFx->scaleX = Q_8_8(3);
+    sBgFx->scaleY = Q_8_8(3);
     BgAnimStart(&gBgAnimDefTrinityLimitBlast, sx, sy);
     BgAnimSetLoopStartFrame(0);
     sBgFx->timer = 8;
@@ -2750,13 +2750,13 @@ void BgFxStartTrinityLimitBlast(s32 x, s32 y, s32 z) {
     sBgFx->flags |= BGFX_FLAG_ABOVE_SPRITES;
     sBgFx->update = BgFxUpdateTrinityLimitBlast;
     FadeStartOut(FADE_MODE_ADD_WHITE, 40);
-    SetBattleZoom(80, 204, x, y + z + 0x2000);
+    SetBattleZoom(80, Q_8_8(0.8), x, y + z + 0x2000);
 }
 
 void BgFxUpdateRagnarokCharge() {
     if (sBgFx->timer > 0) {
-        ApproachValueHalfSteps(&sBgFx->scaleX, 0x100, sBgFx->timer);
-        ApproachValueHalfSteps(&sBgFx->scaleY, 0x100, sBgFx->timer);
+        ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(1), sBgFx->timer);
+        ApproachValueHalfSteps(&sBgFx->scaleY, Q_8_8(1), sBgFx->timer);
         sBgFx->timer--;
     }
 
@@ -2776,8 +2776,8 @@ void BgFxStartRagnarokCharge(s32 x, s32 y, s32 z) {
     sBgFx->y = y;
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
-    sBgFx->scaleX = 0x19;
-    sBgFx->scaleY = 0x19;
+    sBgFx->scaleX = Q_8_8(0.1);
+    sBgFx->scaleY = Q_8_8(0.1);
     m4aSongNumStart(SONG_EF_RAGNA01);
     BgAnimStart(&gBgAnimDefRagnarokCharge, sx, sy);
     BgAnimSetLoopStartFrame(0);
@@ -2832,10 +2832,10 @@ void BgFxUpdateRagnarokShot() {
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
             sBgFx->x -= sBgFx->unk_3C;
-            sBgFx->scaleX -= 51;
+            sBgFx->scaleX -= Q_8_8(0.2);
         } else {
             sBgFx->x += sBgFx->unk_3C;
-            sBgFx->scaleX += 51;
+            sBgFx->scaleX += Q_8_8(0.2);
         }
 
         ApplyAttackBox(91, sBgFx->x + sBgFx->scaleX * 40, sBgFx->y, sBgFx->z, 32, 32, 50);
@@ -2873,7 +2873,7 @@ void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 flip) {
 
     if (flip) {
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
     }
 
     sBgFx->unk_3C = 0;
@@ -2974,7 +2974,7 @@ void BgFxUpdateSync() {
 
     switch (sBgFx->state) {
     case BGFX_SYNC_STATE_RISE:
-        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + 89;
+        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + Q_8_8(0.35);
 
         if (sBgFx->steps > 0) {
             ApproachValueHalfSteps(&sBgFx->z, sBgFx->targetZ - 0x2000, sBgFx->steps);
@@ -2986,7 +2986,7 @@ void BgFxUpdateSync() {
 
         break;
     case BGFX_SYNC_STATE_HOVER:
-        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + 89;
+        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + Q_8_8(0.35);
         sBgFx->steps--;
 
         if (sBgFx->steps <= 0) {
@@ -2996,7 +2996,7 @@ void BgFxUpdateSync() {
 
         break;
     case BGFX_SYNC_STATE_APPROACH:
-        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + 89;
+        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + Q_8_8(0.35);
         target = BgFxGetSyncTarget();
 
         if (target != NULL) {
@@ -3020,7 +3020,7 @@ void BgFxUpdateSync() {
         sBgFx->steps = 16;
         break;
     case BGFX_SYNC_STATE_BURST:
-        sBgFx->scaleX += 166;
+        sBgFx->scaleX += Q_8_8(0.65);
         sBgFx->scaleY = sBgFx->scaleX;
         SetBlendAlpha(16, sBgFx->steps);
         sBgFx->steps--;
@@ -3054,8 +3054,8 @@ void BgFxStartSync(s32 x, s32 y, s32 z) {
     sBgFx->steps = 50;
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefGlow, sx, sy);
-    sBgFx->scaleX = 89;
-    sBgFx->scaleY = 89;
+    sBgFx->scaleX = Q_8_8(0.35);
+    sBgFx->scaleY = Q_8_8(0.35);
     sBgFx->update = BgFxUpdateSync;
     m4aSongNumStart(SONG_EF_SYNC1);
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -3076,8 +3076,8 @@ void BgFxStartStunImpact(s32 x, s32 y, s32 z) {
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefStunImpact, sx, sy);
-    sBgFx->scaleX = 0x200;
-    sBgFx->scaleY = 0x200;
+    sBgFx->scaleX = Q_8_8(2);
+    sBgFx->scaleY = Q_8_8(2);
     sBgFx->update = BgFxUpdateBase;
 }
 
@@ -3112,10 +3112,10 @@ void BgFxStartZantetsuken(s32 x, s32 y, s32 z, u8 facingRight) {
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefGlow, sx, sy);
-    sBgFx->scaleX = 38;
-    sBgFx->scaleY = 256;
+    sBgFx->scaleX = Q_8_8(0.15);
+    sBgFx->scaleY = Q_8_8(1);
     sBgFx->targetX = 7;
-    sBgFx->targetY = 153;
+    sBgFx->targetY = Q_8_8(0.6);
 
     if (facingRight) {
         sBgFx->angle += 40;
@@ -3190,14 +3190,14 @@ void BgFxStartUrsulaBeam(s32 x, s32 y, s32 z, u8 facingLeft, s32 targetScale, u1
 
     if (facingLeft) {
         sBgFx->targetX = targetScale;
-        sBgFx->scaleX = 76;
+        sBgFx->scaleX = Q_8_8(0.3);
     } else {
         sBgFx->targetX = -targetScale;
-        sBgFx->scaleX = -76;
+        sBgFx->scaleX = Q_8_8(-0.3);
     }
 
     sBgFx->targetY = targetScale;
-    sBgFx->scaleY = 76;
+    sBgFx->scaleY = Q_8_8(0.3);
     m4aSongNumStart(SONG_EF_UR_BEEM);
     sBgFx->update = BgFxUpdateUrsulaBeam;
     BgAnimSetLoopStartFrame(0);
@@ -3223,12 +3223,12 @@ void BgFxStartAnsemRush(s32 x, s32 y, s32 z, u8 flip) {
     BgAnimStart(&gBgAnimDefAnsemRush, sx, sy);
 
     if (flip) {
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
     } else {
-        sBgFx->scaleX = 0x100;
+        sBgFx->scaleX = Q_8_8(1);
     }
 
-    sBgFx->scaleY = 0x100;
+    sBgFx->scaleY = Q_8_8(1);
     sBgFx->update = BgFxUpdateFadeInOut;
     BgAnimSetLoopStartFrame(0);
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -3268,13 +3268,13 @@ void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 facingLeft, s32 attack) {
     BgAnimStart(&gBgAnimDefAnsemWave, sx, sy);
 
     if (facingLeft) {
-        sBgFx->scaleX = 0x100;
+        sBgFx->scaleX = Q_8_8(1);
     } else {
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
 
-    sBgFx->scaleY = 0x100;
+    sBgFx->scaleY = Q_8_8(1);
     m4aSongNumStart(SONG_EF_AN_WAVE);
     sBgFx->update = BgFxUpdateAnsemWave;
     BgAnimSetLoopStartFrame(0);
@@ -3295,8 +3295,8 @@ void func_08016BCC(s32 x, s32 y) {
     sBgFx->y = y;
     WorldToScreen(&sx, &sy, x, y, 0);
     BgAnimStart(&gBgAnimDefFriendHit, sx, sy);
-    sBgFx->scaleX = 0x900;
-    sBgFx->scaleY = 0x900;
+    sBgFx->scaleX = Q_8_8(9);
+    sBgFx->scaleY = Q_8_8(9);
     sBgFx->update = BgFxUpdateBase;
 }
 
@@ -3382,8 +3382,8 @@ void BgFxUpdateFireBurst() {
         m4aSongNumStart(SONG_EF_DRHEET);
         SetBlendAlpha(16, 11);
         sBgFx->angle = 0;
-        sBgFx->scaleX = 0x500;
-        sBgFx->scaleY = 0x500;
+        sBgFx->scaleX = Q_8_8(5);
+        sBgFx->scaleY = Q_8_8(5);
         sBgFx->x += dx;
         sBgFx->releaseFrames = 20;
         WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y,
@@ -3399,8 +3399,8 @@ void BgFxUpdateFireBurst() {
                           sBgFx->z, 256, 256, 256);
         }
 
-        sBgFx->scaleX += 51;
-        sBgFx->scaleY += 51;
+        sBgFx->scaleX += Q_8_8(0.2);
+        sBgFx->scaleY += Q_8_8(0.2);
         sBgFx->steps++;
         break;
     }
@@ -3434,7 +3434,7 @@ void BgFxStartFireBurst(s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targe
 
     if (flip) {
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
     }
 
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -3450,8 +3450,8 @@ void BgFxStartFireExplosion(s32 x, s32 y, s32 z) {
     }
 
     BgFxReset();
-    sBgFx->scaleX = 0x180;
-    sBgFx->scaleY = 0x180;
+    sBgFx->scaleX = Q_8_8(1.5);
+    sBgFx->scaleY = Q_8_8(1.5);
     sBgFx->x = x;
     sBgFx->y = y;
     sBgFx->z = z;
@@ -3523,8 +3523,8 @@ void BgFxUpdateVixenIceFall() {
     u16 wobble;
     s32 scaleY;
     wobble = (SIN(sBgFx->unk_0C / 3) * 10240) >> 16;
-    scaleY = ((abs(gSineTable[(u8)sBgFx->unk_0C]) >> 1) + 0x100) * 0x133 >> 8;
-    BgAnimSetTransform(wobble + 15, 0x133, scaleY);
+    scaleY = ((abs(gSineTable[(u8)sBgFx->unk_0C]) >> 1) + Q_8_8(1)) * Q_8_8(1.2) >> 8;
+    BgAnimSetTransform(wobble + 15, Q_8_8(1.2), scaleY);
     BgFxUpdateFullscreen();
     sBgFx->unk_0C++;
 }
@@ -3539,7 +3539,7 @@ void BgFxStartVixenIceFall(u16 steps) {
     sBgFx->unk_0C = 0;
     sBgFx->state = BGFX_FULLSCREEN_STATE_FADE_IN;
     BgAnimStart(&gBgAnimDefVixenIceFall, 120, 80);
-    BgAnimSetTransform(10, 0x133, 0x133);
+    BgAnimSetTransform(10, Q_8_8(1.2), Q_8_8(1.2));
     sBgFx->update = BgFxUpdateVixenIceFall;
     BgAnimSetLoopStartFrame(0);
     sBgFx->flags |= BGFX_FLAG_ABOVE_SPRITES;
@@ -3615,12 +3615,12 @@ enum BgFxHolyState {
 
 void BgFxUpdateHoly() {
     if (sBgFx->unk_0C > 0) {
-        ApproachValueHalfSteps(&sBgFx->scaleX, 0x200, sBgFx->unk_0C);
+        ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(2), sBgFx->unk_0C);
         sBgFx->unk_0C--;
     }
 
     if (sBgFx->scaleYSteps > 0) {
-        ApproachValue(&sBgFx->scaleY, 0x180, sBgFx->scaleYSteps);
+        ApproachValue(&sBgFx->scaleY, Q_8_8(1.5), sBgFx->scaleYSteps);
         sBgFx->scaleYSteps--;
     }
 
@@ -3793,12 +3793,12 @@ void BgFxUpdateTornado() {
         v = 17 - sBgFx->timer;
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            ApproachValueHalfSteps(&sBgFx->scaleX, -0x100, v);
+            ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(-1), v);
         } else {
-            ApproachValueHalfSteps(&sBgFx->scaleX, 0x100, v);
+            ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(1), v);
         }
 
-        ApproachValueHalfSteps(&sBgFx->scaleY, 0x100, v);
+        ApproachValueHalfSteps(&sBgFx->scaleY, Q_8_8(1), v);
         SetBlendAlpha(16, sBgFx->timer);
 
         if (sBgFx->timer > 15) {
@@ -3811,7 +3811,7 @@ void BgFxUpdateTornado() {
         break;
     case BGFX_TORNADO_STATE_LIFT:
         timer = (u16)sBgFx->timer;
-        sBgFx->scaleY = abs(gSineTable[(u8)sBgFx->timer] >> 1) + 0x100;
+        sBgFx->scaleY = abs(gSineTable[(u8)sBgFx->timer] >> 1) + Q_8_8(1);
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
             if ((u16)timer == 0) {
@@ -3850,7 +3850,7 @@ void BgFxUpdateTornado() {
             ApproachValue(&sBgFx->scaleX, 10, 17 - timer);
         }
 
-        ApproachValue(&sBgFx->scaleY, 768, 17 - v);
+        ApproachValue(&sBgFx->scaleY, Q_8_8(3), 17 - v);
 
         if (v > 15) {
             BgAnimStop();
@@ -3919,7 +3919,7 @@ void BgFxUpdateBind() {
 
     switch (sBgFx->state) {
     case BGFX_BIND_STATE_WIDEN:
-        sBgFx->scaleX += 0x80;
+        sBgFx->scaleX += Q_8_8(0.5);
 
         if (sBgFx->timer > 60) {
             sBgFx->timer = 0;
@@ -4000,9 +4000,9 @@ void BgFxUpdateAxcelFireWall() {
         ApproachValue(&sBgFx->x, sBgFx->targetX, sBgFx->steps);
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            ApproachValue(&sBgFx->scaleX, -256, sBgFx->steps);
+            ApproachValue(&sBgFx->scaleX, Q_8_8(-1), sBgFx->steps);
         } else {
-            ApproachValue(&sBgFx->scaleX, 256, sBgFx->steps);
+            ApproachValue(&sBgFx->scaleX, Q_8_8(1), sBgFx->steps);
         }
 
         sBgFx->scaleY = abs(sBgFx->scaleX);
@@ -4090,7 +4090,7 @@ void BgFxStartAxcelFireWall(s32 x, u8 facingLeft, s32 attack) {
 void BgFxUpdateGround() {
     u16 frame;
     u16 halfSize;
-    ApproachValue(&sBgFx->scaleX, 0x300, sBgFx->steps);
+    ApproachValue(&sBgFx->scaleX, Q_8_8(3), sBgFx->steps);
     sBgFx->scaleY = sBgFx->scaleX;
     sBgFx->steps--;
     BgAnimGetFrameState(&frame, NULL);
@@ -4121,8 +4121,8 @@ void BgFxStartMahluxiaGround(s32 x, s32 y, s32 z, s32 attack) {
     sBgFx->attack = attack;
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefMahluxiaGround, sx, sy);
-    sBgFx->scaleX = 0x80;
-    sBgFx->scaleY = 0x80;
+    sBgFx->scaleX = Q_8_8(0.5);
+    sBgFx->scaleY = Q_8_8(0.5);
     sBgFx->steps = BgAnimGetDuration(BgAnimGetCurrent());
     sBgFx->flags |= BGFX_FLAG_BELOW_SPRITES;
     sBgFx->update = BgFxUpdateGround;
@@ -4145,8 +4145,8 @@ void BgFxStartLexceusGround(s32 x, s32 y, s32 z, s32 attack) {
     sBgFx->attack = attack;
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&sBgAnimDefLexceusGround, sx, sy);
-    sBgFx->scaleX = 0x80;
-    sBgFx->scaleY = 0x80;
+    sBgFx->scaleX = Q_8_8(0.5);
+    sBgFx->scaleY = Q_8_8(0.5);
     sBgFx->steps = BgAnimGetDuration(BgAnimGetCurrent());
     sBgFx->flags |= BGFX_FLAG_BELOW_SPRITES;
     sBgFx->update = BgFxUpdateGround;
@@ -4299,12 +4299,12 @@ void BgFxStartKama(s32 x, s32 y, s32 z, s32 dx, s32 attack) {
     sBgFx->attack = attack;
 
     if (dx > 0) {
-        sBgFx->scaleX = -0x180;
+        sBgFx->scaleX = Q_8_8(-1.5);
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
         x -= 0x4000;
         dx += 0x4000;
     } else {
-        sBgFx->scaleX = 0x180;
+        sBgFx->scaleX = Q_8_8(1.5);
         x += 0x4000;
         dx -= 0x4000;
     }
@@ -4316,7 +4316,7 @@ void BgFxStartKama(s32 x, s32 y, s32 z, s32 dx, s32 attack) {
     sBgFx->x = x + ((gSineTable[0] * radius) >> 8);
     sBgFx->z = z + ((-gSineTable[64] * radius) >> 8);
     sBgFx->y = y;
-    sBgFx->scaleY = 0x180;
+    sBgFx->scaleY = Q_8_8(1.5);
     SetBlendAlpha(16, 0);
     m4aSongNumStart(SONG_EF_MARL_KAMAEF);
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
@@ -4395,9 +4395,9 @@ void BgFxUpdateLaxeneBeam() {
     switch (sBgFx->state) {
     case BGFX_LAXENE_BEAM_STATE_EXTEND:
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            ApproachValueHalfSteps(&sBgFx->scaleX, -204, sBgFx->steps);
+            ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(-0.8), sBgFx->steps);
         } else {
-            ApproachValueHalfSteps(&sBgFx->scaleX, 204, sBgFx->steps);
+            ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(0.8), sBgFx->steps);
         }
 
         sBgFx->steps--;
@@ -4630,8 +4630,8 @@ void BgFxUpdateRikuDarkMode() {
     switch (sBgFx->state) {
     case BGFX_RIKU_DARK_MODE_STATE_GROW:
         ApproachValue(&sBgFx->unk_3C, 0xA00, sBgFx->steps);
-        ApproachValueHalfSteps(&sBgFx->scaleX, 460, sBgFx->steps);
-        ApproachValueHalfSteps(&sBgFx->scaleY, 512, sBgFx->steps);
+        ApproachValueHalfSteps(&sBgFx->scaleX, Q_8_8(1.8), sBgFx->steps);
+        ApproachValueHalfSteps(&sBgFx->scaleY, Q_8_8(2), sBgFx->steps);
         SetBlendAlpha(16, sBgFx->unk_3C >> 8);
         sBgFx->steps--;
 
@@ -4766,7 +4766,7 @@ void BgFxStartRikuLimitFinish(s32 x, s32 y, s32 z) {
     case BGFX_RIKU_LIMIT_FINISH_VARIANT_FLIPPED:
         BgAnimStart(&gBgAnimDefRikuLimitFinish, sx, sy);
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
-        sBgFx->scaleX = -0x100;
+        sBgFx->scaleX = Q_8_8(-1);
         break;
     }
 

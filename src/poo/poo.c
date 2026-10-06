@@ -2980,7 +2980,7 @@ void task_poo_shadow_0(TaskPool* pool, void* arg) {
     PooShadowArgs args;
 
     args.pos = arg;
-    args.scale = 0xA6;
+    args.scale = Q_8_8(0.65);
     TaskPoolInit(pool, 1);
     TaskCreate(pool, &gTaskDescPooShadowscale, &args);
 }
@@ -3027,12 +3027,12 @@ void task_poo_shadowdodai_2(PooShadowWork* work) {
         groundZ = work->shadowInfo->z;
 
         if (work->pos->z >= groundZ) {
-            scale = 0xA6;
+            scale = Q_8_8(0.65);
         } else {
-            scale = 0xA6 - (groundZ - work->pos->z) / 128;
+            scale = Q_8_8(0.65) - (groundZ - work->pos->z) / 128;
 
             if (scale <= 0x18) {
-                scale = 0x19;
+                scale = Q_8_8(0.1);
             }
         }
 
@@ -3078,7 +3078,7 @@ void task_poo_shadowscale_2(PooScaleWork* work) {
         scale = work->scale + work->pos->z / 128;
 
         if (scale <= 0x18) {
-            scale = 0x19;
+            scale = Q_8_8(0.1);
         }
     }
 
@@ -3557,7 +3557,7 @@ void task_poo_honey_0(PooHoneyWork* work, PooPos* pos) {
     work->maxPos.x += 0x100;
     work->maxPos.y += 0x100;
     TaskPoolInit(&work->tasks, 1);
-    CreatePooShadowscaleTask(&work->tasks, &work->pos, 0xCC);
+    CreatePooShadowscaleTask(&work->tasks, &work->pos, Q_8_8(0.8));
     work->state = POO_HONEY_STATE_WAIT_POOH;
     work->timer = 0;
 }
@@ -4518,7 +4518,7 @@ void task_poo_rabbit_0(PooRabbitWork* work) {
     work->timer = 0;
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 1);
-    CreatePooShadowscaleTask(&work->tasks, &work->x, 0x100);
+    CreatePooShadowscaleTask(&work->tasks, &work->x, Q_8_8(1));
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_RABBIT_TALK_0);
     SetPoohInteractionEnabled(work->interactionId, 0);
@@ -5394,7 +5394,7 @@ void task_poo_eeyoretail_0(PooEeyoreTailWork* work) {
     work->palette = NULL;
     work->gfx = gEeyoreFl00Frame15;
     TaskPoolInit(&work->tasks, 1);
-    CreatePooShadowscaleTask(&work->tasks, &work->x, 0x66);
+    CreatePooShadowscaleTask(&work->tasks, &work->x, Q_8_8(0.4));
     sPooEeyoreTailTimer = 0x1E;
     work->height = -work->z;
 }
@@ -6438,7 +6438,7 @@ void task_poo_cabbage_0(PooCabbageWork* work) {
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->colliderActive = 1;
     TaskPoolInit(&work->tasks, 2);
-    CreatePooShadowscaleTask(&work->tasks, &work->x, 0x80);
+    CreatePooShadowscaleTask(&work->tasks, &work->x, Q_8_8(0.5));
     work->task = NULL;
     work->age = 0;
     work->wasOnScreen = 0;
@@ -6927,7 +6927,7 @@ void task_poo_prize_0(PooPrizeWork* work, PoohPrizeArgs* args) {
     work->visible = 1;
     work->timer = 0;
     work->update = PooPrizeUpdateBounce;
-    work->scale = 0x100;
+    work->scale = Q_8_8(1);
     ColliderInit(&work->collider, 5, 16, 50);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     ColliderSetDisabled(&work->collider, 1);
@@ -6964,7 +6964,7 @@ void task_poo_prize_2(PooPrizeWork* work) {
 
     scale = work->scale;
 
-    if (scale != 256) {
+    if (scale != Q_8_8(1)) {
         affine = AllocObjAffine(0, scale, scale, 0);
     } else {
         affine = NULL;
@@ -7435,7 +7435,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* work) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 1);
-    CreatePooShadowscaleTask(&work->tasks, &work->x, 0x100);
+    CreatePooShadowscaleTask(&work->tasks, &work->x, Q_8_8(1));
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_RABBIT_TALK_1);
     SetPoohInteractionEnabled(work->interactionId, 0);

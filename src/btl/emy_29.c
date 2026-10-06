@@ -46,7 +46,7 @@ TaskDesc gTaskDescEmy29 = {
 
 void task_emy_29_0(Emy29Work* work, void* obj) {
     EmyInit(&work->base, &sEmy29Def, obj);
-    work->base.fxScale = 0x180;
+    work->base.fxScale = Q_8_8(1.5);
     work->base.idleState = EMY_STATE_HOVER;
     work->base.flags |= EMY_FLAG_DARK_DEATH;
     work->state = 0;

@@ -45,7 +45,7 @@ void Mode_Premire_0() {
 #else
     LoadBgMap(3, gBtlBgMonstroMap, 0x1000);
 #endif
-    SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
+    SetBgAffine(3, 0, Q_8_8(1), Q_8_8(1), 0x10000, 0x16800);
     TaskPoolInit(&sModePremireTasks, 1);
     TaskCreate(&sModePremireTasks, &gTaskDescLevelUp, NULL);
 }

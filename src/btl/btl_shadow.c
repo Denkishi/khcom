@@ -14,6 +14,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 void task_btl_shadow_0(BtlShadowWork* work, BtlObj* actor) {
     work->actor = actor;
@@ -47,17 +48,17 @@ void task_btl_shadow_2(BtlShadowWork* work) {
         if (!(actor->flags & 0x0000000402000000)) {
             flags = GetBattleSpritePriorityFlags(actor->y);
 
-            if (actor->z >= 0 && gBtlWork->scale == 0x100) {
+            if (actor->z >= 0 && gBtlWork->scale == Q_8_8(1)) {
                 affine = NULL;
             } else {
-                s32 scale = 0x100 - (actor->groundZ - actor->z) / 128;
+                s32 scale = Q_8_8(1) - (actor->groundZ - actor->z) / 128;
                 scale = (gBtlWork->scale * scale) >> 8;
 
                 if (scale <= 127) {
-                    scale = 128;
+                    scale = Q_8_8(0.5);
                 }
 
-                affine = AllocObjAffine(0, scale, scale, scale > 0x100);
+                affine = AllocObjAffine(0, scale, scale, scale > Q_8_8(1));
             }
 
             WorldToScreen(&x, &y, actor->x, actor->y, actor->groundZ);

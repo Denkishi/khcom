@@ -37,12 +37,12 @@ static const EmyKind sBosGaEmyKind =
 ;
 
 static const GaEntryDef sGaEntryDefs[6] = {
-    {256, 0, 0, -15872, 0, 0, gBosGaTorsoTiles, gBosGaTorsoAnims, gBosGaTorsoFrames, 8},
-    {256, -2560, 2048, -25088, 0, 0, gBosGaHeadTiles, gBosGaHeadAnims, gBosGaHeadFrames, 6},
-    {256, 2560, 5632, -14848, 0, 0, gBosGaNearHandTiles, gBosGaNearHandAnims, gBosGaNearHandFrames, 7},
-    {256, -11264, -3328, -12288, 0, 0, gBosGaFarHandTiles, gBosGaFarHandAnims, gBosGaFarHandFrames, 7},
-    {256, 3840, 512, -2048, 0, 0, gBosGaNearFootTiles, gBosGaNearFootAnims, gBosGaNearFootFrames, 1},
-    {256, -3328, -1792, -2048, 0, 0, gBosGaFarFootTiles, gBosGaFarFootAnims, gBosGaFarFootFrames, 1},
+    {Q_8_8(1), 0, 0, -15872, 0, 0, gBosGaTorsoTiles, gBosGaTorsoAnims, gBosGaTorsoFrames, 8},
+    {Q_8_8(1), -2560, 2048, -25088, 0, 0, gBosGaHeadTiles, gBosGaHeadAnims, gBosGaHeadFrames, 6},
+    {Q_8_8(1), 2560, 5632, -14848, 0, 0, gBosGaNearHandTiles, gBosGaNearHandAnims, gBosGaNearHandFrames, 7},
+    {Q_8_8(1), -11264, -3328, -12288, 0, 0, gBosGaFarHandTiles, gBosGaFarHandAnims, gBosGaFarHandFrames, 7},
+    {Q_8_8(1), 3840, 512, -2048, 0, 0, gBosGaNearFootTiles, gBosGaNearFootAnims, gBosGaNearFootFrames, 1},
+    {Q_8_8(1), -3328, -1792, -2048, 0, 0, gBosGaFarFootTiles, gBosGaFarFootAnims, gBosGaFarFootFrames, 1},
 };
 
 static const BosMapConfig sBosMapConfig =
@@ -2772,7 +2772,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
             entry->flashTimer = 0;
 
             if (!BgFxIsActive()) {
-                BgFxStartEnemyDeath(entry->actor.x, entry->actor.y + entry->actor.z, 0, 0x100);
+                BgFxStartEnemyDeath(entry->actor.x, entry->actor.y + entry->actor.z, 0, Q_8_8(1));
                 entry->counter++;
             }
         } else if (entry->counter > 0) {

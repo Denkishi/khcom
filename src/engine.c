@@ -575,8 +575,8 @@ ObjAffine* AllocObjAffineAngle(u8 angle, u8 doubleSize) {
         affine->pd = cos;
         affine->index = gSpriteWork->affineCount;
         affine->doubleSize = doubleSize;
-        affine->sx = 0x100;
-        affine->sy = 0x100;
+        affine->sx = Q_8_8(1);
+        affine->sy = Q_8_8(1);
         affine->angle = angle;
         gSpriteWork->affineCount += 1;
         return affine;
@@ -590,7 +590,7 @@ ObjAffine* AllocObjAffine(u8 angle, s32 sx, s32 sy, u8 doubleSize) {
     s32 sin;
     s32 cos;
 
-    if (gSpriteWork->affineCount > 0x1F || (angle == 0 && sx == 0x100 && sy == sx)) {
+    if (gSpriteWork->affineCount > 0x1F || (angle == 0 && sx == Q_8_8(1) && sy == sx)) {
         return NULL;
     }
 
@@ -616,7 +616,7 @@ ObjAffine* AllocObjAffineScaleFirst(u8 angle, s32 sx, s32 sy, u8 doubleSize) {
     s32 sin;
     s32 cos;
 
-    if (gSpriteWork->affineCount > 0x1F || (angle == 0 && sx == 0x100 && sy == sx)) {
+    if (gSpriteWork->affineCount > 0x1F || (angle == 0 && sx == Q_8_8(1) && sy == sx)) {
         return NULL;
     }
 
@@ -653,8 +653,8 @@ ObjAffine* AllocObjAffineMatrix(u16 pa, u16 pb, u16 pc, u16 pd, u8 doubleSize) {
     affine->pd = pd;
     affine->index = gSpriteWork->affineCount;
     affine->doubleSize = doubleSize;
-    affine->sx = 0x100;
-    affine->sy = 0x100;
+    affine->sx = Q_8_8(1);
+    affine->sy = Q_8_8(1);
     affine->angle = z;
     gSpriteWork->affineCount += 1;
 
@@ -2093,7 +2093,7 @@ void SetBgMode1() {
     SetupBg(2, 2, 23, 0);
     SetBgScroll(0, 0, 0);
     SetBgScroll(1, 0, 0);
-    SetBgAffine(2, 0, 0x100, 0x100, 0, 0);
+    SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0, 0);
 
     for (i = 0; i <= 3; i++) {
         gBgWork->entries[i].map = NULL;
@@ -2108,8 +2108,8 @@ void SetBgMode2() {
     gBg3Cnt = (BGCNT_PRIORITY(1) | BGCNT_256COLOR | BGCNT_AFF256x256);
     SetupBg(2, 0, 15, 0);
     SetupBg(3, 2, 31, 0);
-    SetBgAffine(2, 0, 0x100, 0x100, 0, 0);
-    SetBgAffine(3, 0, 0x100, 0x100, 0, 0);
+    SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0, 0);
+    SetBgAffine(3, 0, Q_8_8(1), Q_8_8(1), 0, 0);
 
     for (i = 0; i <= 3; i++) {
         gBgWork->entries[i].map = NULL;

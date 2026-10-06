@@ -2526,7 +2526,7 @@ void event_seq_0(EventSeqWork* work, u8* arg) {
                     LoadBgMap(2, *bg->maps, 0x1000);
                 }
 
-                SetBgAffine(2, 0, 256, 256, 0, 0);
+                SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0, 0);
             } else {
                 LoadEventBg3(work);
                 LoadEventBg2Map(work);
@@ -2717,7 +2717,7 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
             SetBgColorMode(2, BGCNT_256COLOR);
             SetBgSize(2, 0x8000);
             LoadBgMap(2, *bg->maps, 0x1000);
-            SetBgAffine(2, 0, 256, 256, 0, 0);
+            SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0, 0);
         } else {
             LoadBgTiles(3, bg->tiles, bg->tilesSize);
             LoadBgPalette(3, bg->palette, bg->paletteSize);
@@ -3027,9 +3027,9 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         work->usesBtlWork = 1;
         gBtlWork->viewX = gEventState->cameraX;
         gBtlWork->viewY = gEventState->cameraY;
-        gBtlWork->scale = 0x100;
+        gBtlWork->scale = Q_8_8(1);
         gBtlWork->rotation = 0;
-        gBtlWork->zoomScale = 0x100;
+        gBtlWork->zoomScale = Q_8_8(1);
         gBtlWork->x = gEventState->cameraX;
         gBtlWork->y = gEventState->cameraY;
         gBtlWork->x2 = 0x10000;
@@ -3054,7 +3054,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         work->usesBtlWork = 1;
         gBtlWork->viewY = 0x5400;
-        gBtlWork->scale = 0x100;
+        gBtlWork->scale = Q_8_8(1);
         gBtlWork->rotation = 0;
         SetBattleBounds(128, 424, 294, 384);
         gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosPc, NULL);
@@ -3071,7 +3071,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         work->usesBtlWork = 1;
         gBtlWork->viewY = 0x5400;
-        gBtlWork->scale = 0x100;
+        gBtlWork->scale = Q_8_8(1);
         gBtlWork->rotation = 0;
         SetBattleBounds(128, 424, 294, 384);
         gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosPc, &work->tasks);
@@ -3096,7 +3096,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         work->usesBtlWork = 1;
         gBtlWork->viewY = 0x5400;
-        gBtlWork->scale = 0x100;
+        gBtlWork->scale = Q_8_8(1);
         gBtlWork->rotation = 0;
         SetBattleBounds(128, 368, 480, 512);
         gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosLst, &work->tasks);
@@ -6619,7 +6619,7 @@ void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
     work->steps = 0;
     work->x = gMsgfaceHiddenX[position = work->face->positionIndex];
     work->y = gMsgfaceY[position];
-    work->scaleX = 0x100;
+    work->scaleX = Q_8_8(1);
     work->arrived = 0;
     work->talking = 0;
     work->visible = 1;
@@ -6692,7 +6692,7 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
         if (work->face->positionIndex <= 1) {
             work->scaleX = -255;
         } else if (work->face->positionIndex <= 3) {
-            work->scaleX = 256;
+            work->scaleX = Q_8_8(1);
         }
 
         work->y = gMsgfaceY[work->face->positionIndex];
@@ -6736,7 +6736,7 @@ void msgface_2(MsgFaceWork* work) {
     u8 flipX;
 
     if (work->visible) {
-        affine = AllocObjAffine(0, work->scaleX, 256, 0);
+        affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
 
         if (affine != NULL) {
             DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, affine, 0, 50);
@@ -6814,7 +6814,7 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* task) {
 
     work->x = gMsgfaceHiddenX[position = work->face->positionIndex];
     work->y = gMsgfaceY[position];
-    work->scaleX = 256;
+    work->scaleX = Q_8_8(1);
     work->steps = 8;
     SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     return 1;
@@ -6864,7 +6864,7 @@ u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* task) {
     if (work->scaleX < 0) {
         ApproachValue(&work->scaleX, -255, work->steps);
     } else {
-        ApproachValue(&work->scaleX, 256, work->steps);
+        ApproachValue(&work->scaleX, Q_8_8(1), work->steps);
     }
 
     work->steps--;
@@ -6872,7 +6872,7 @@ u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* task) {
     if (work->steps == 0) {
         work->arrived = 1;
         work->face->command = MSGFACE_COMMAND_NONE;
-        work->scaleX = 256;
+        work->scaleX = Q_8_8(1);
         SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
 
@@ -7175,7 +7175,7 @@ void view_0(EventCameraWork* work, u8* arg) {
 
     if (bg != NULL) {
         if (bg->isAffine != 0) {
-            SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
+            SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), gEventState->centerX, gEventState->centerY);
         } else {
             if (work->eventId == EVENT_077_MONSTORO_E2_2) {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + 8 + gEventState->shakeX, (gEventState->cameraY >> 8) + 40);
@@ -7362,7 +7362,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
 
         if (bg != NULL) {
             if (bg->isAffine != 0) {
-                SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
+                SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), gEventState->centerX, gEventState->centerY);
             } else {
                 if (work->eventId == EVENT_077_MONSTORO_E2_2) {
                     ScrollBgMapTo(3, (gEventState->x >> 8) + 8, (gEventState->y >> 8) + 40);
@@ -7434,7 +7434,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
 
         if (bg != NULL) {
             if (bg->isAffine != 0) {
-                SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
+                SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), gEventState->centerX, gEventState->centerY);
             } else {
                 if (work->eventId == EVENT_077_MONSTORO_E2_2) {
                     ScrollBgMapTo(3, (gEventState->x >> 8) + 8, (gEventState->y >> 8) + 40);
@@ -7580,7 +7580,7 @@ u8 UpdateEventCameraFollowPlayer(EventCameraWork* work) {
     if (bg != NULL) {
         if (bg->isAffine != 0) {
             EventCameraSnap(work);
-            SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
+            SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), gEventState->centerX, gEventState->centerY);
         } else {
             EventCameraFollow(work);
 

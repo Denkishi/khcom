@@ -27,6 +27,7 @@
 #include "obj.h"
 #include "sprite_palettes.h"
 #include "world_types.h"
+#include "engine_math.h"
 
 static u8* sWorldNames[13] = {
 #if defined(VERSION_US)
@@ -369,7 +370,7 @@ void WLogoStartLogo(u8 world) {
         break;
     }
 
-    SetBgAffine(2, 0, 256, 256, 0x10000, 0x16800);
+    SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0x10000, 0x16800);
 }
 
 void task_wLogo_0(WLogoTaskWork* work, u8 world) {

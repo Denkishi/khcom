@@ -8,6 +8,8 @@ extern const s16 gSineTable[320];
 #define SIN(angle) gSineTable[(angle) & 0xFF]
 #define COS(angle) gSineTable[((angle) & 0xFF) + 64]
 
+#define Q_8_8(n) ((s16)((n) * 256))
+
 enum Dir8 {
     DIR8_UP,
     DIR8_UP_RIGHT,

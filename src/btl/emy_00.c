@@ -250,7 +250,7 @@ void task_emy_00_2(EmyWork* work) {
         WorldToScreen(&x, &y, act->x, act->y, act->z);
         scaleY = work->scaleY;
 
-        if (scaleY == 0x100) {
+        if (scaleY == Q_8_8(1)) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sy = gBtlWork->scale;
                 sx = sy;
@@ -274,7 +274,7 @@ void task_emy_00_2(EmyWork* work) {
             sy = sy * scaleY >> 8;
         }
 
-        if (sy == 0x100 && sx == sy) {
+        if (sy == Q_8_8(1) && sx == sy) {
             affine = NULL;
         } else if (sy <= 0xFF) {
             affine = AllocObjAffine(0, sx, sy, 0);

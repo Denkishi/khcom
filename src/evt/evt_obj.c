@@ -18,6 +18,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "engine_math.h"
 
 static TaskDesc sTaskDescEvtObj = {
     "task_evt_obj",
@@ -57,8 +58,8 @@ void CreateEvtObjTask(void* pool, EvtObj* obj, s32 res, s32 anim, s32 x, s32 y, 
     obj->flags = 0;
     obj->groundZ = 0;
     obj->drawFlags = SPRITE_PRIORITY(2);
-    obj->scaleY = 0x100;
-    obj->scaleX = 0x100;
+    obj->scaleY = Q_8_8(1);
+    obj->scaleX = Q_8_8(1);
     obj->angle = 0;
     TaskCreate(pool, &sTaskDescEvtObj, &param);
 }
@@ -77,8 +78,8 @@ Task* CreateEvtObjTaskWithDesc(void* pool, void* desc, EvtObj* obj, s32 res, s32
     obj->flags = 0;
     obj->groundZ = 0;
     obj->drawFlags = SPRITE_PRIORITY(2);
-    obj->scaleY = 0x100;
-    obj->scaleX = 0x100;
+    obj->scaleY = Q_8_8(1);
+    obj->scaleX = Q_8_8(1);
     obj->angle = 0;
     return TaskCreate(pool, desc, &param);
 }
@@ -190,10 +191,10 @@ void task_evt_shadow_2(EvtShadowWork* work) {
     if (obj->z >= obj->groundZ) {
         sprite = NULL;
     } else {
-        size = 0x100 - (obj->groundZ - obj->z) / 128;
+        size = Q_8_8(1) - (obj->groundZ - obj->z) / 128;
 
         if (size <= 0x18) {
-            size = 0x19;
+            size = Q_8_8(0.1);
         }
 
         sprite = AllocObjAffine(0, size, size, 0);

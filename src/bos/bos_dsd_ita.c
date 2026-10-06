@@ -136,18 +136,18 @@ void task_bos_dsd_ita_2(DsdItaWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, NULL, flags, prio);
 
-    if (work->z >= 0 && gBtlWork->scale == 0x100) {
+    if (work->z >= 0 && gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else {
-        scale = 0x100 - -work->z / 128;
+        scale = Q_8_8(1) - -work->z / 128;
 
         if (scale <= 0x7F) {
-            scale = 0x80;
+            scale = Q_8_8(0.5);
         }
 
         doubleSize = 0;
 
-        if (scale > 0x100) {
+        if (scale > Q_8_8(1)) {
             doubleSize = 1;
         }
 
@@ -304,7 +304,7 @@ void task_bos_dsd_rock_2(DsdRockWork* work) {
         priority = 10;
         flags = 0x400;
     } else {
-        affine = AllocObjAffine(0, 0x59, 0x59, 0);
+        affine = AllocObjAffine(0, Q_8_8(0.35), Q_8_8(0.35), 0);
         priority = 0xFFF5;
         flags = 0xC00;
     }

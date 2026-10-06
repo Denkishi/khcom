@@ -75,9 +75,9 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     work->flipAngleX = 0;
     work->flipAngleY = 0;
     work->angle = 24;
-    work->scaleX = 0x80;
-    work->scaleY = 0x80;
-    work->scale = 0x80;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
+    work->scale = Q_8_8(0.5);
     work->screenSpace = 0;
     work->unk_1CB = 0;
     work->unk_1CC = 0;
@@ -118,9 +118,9 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
     work->flipAngleX = 0;
     work->flipAngleY = 0;
     work->angle = 24;
-    work->scaleX = 0x80;
-    work->scaleY = 0x80;
-    work->scale = 0x80;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
+    work->scale = Q_8_8(0.5);
     work->screenSpace = 0;
     work->unk_1CB = 0;
     work->unk_1CC = 0;
@@ -162,9 +162,9 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     work->flipAngleX = 0;
     work->flipAngleY = 0;
     work->angle = 24;
-    work->scaleX = 0x80;
-    work->scaleY = 0x80;
-    work->scale = 0x80;
+    work->scaleX = Q_8_8(0.5);
+    work->scaleY = Q_8_8(0.5);
+    work->scale = Q_8_8(0.5);
     work->screenSpace = 0;
     work->unk_1CB = 0;
     work->unk_1CC = 0;
@@ -524,8 +524,8 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* task) {
             work->flipAngleX = 0;
             work->posX = 0x7800;
             work->posY = 0x5000;
-            work->scaleX = 0x100;
-            work->scaleY = 0x100;
+            work->scaleX = Q_8_8(1);
+            work->scaleY = Q_8_8(1);
 #ifdef VERSION_EU
             CreateCardNameDisplay(&work->tasks, GetLocalizedString(gCardDefs[work->cardId].name));
 #else
@@ -667,7 +667,7 @@ void PickupCardDraw(PickupCardWork* work) {
         DrawSprite(x, y - 8, gCardValueDigitFrames[kind],
                    work->tiles3, work->palette, affine,
                    work->spriteFlags, work->priority - 2);
-        shadowScale = 204 - ((work->floor - work->posZ) >> 7);
+        shadowScale = Q_8_8(0.8) - ((work->floor - work->posZ) >> 7);
 
         if (shadowScale <= 2) {
             shadowScale = 2;
@@ -713,7 +713,7 @@ void Heartless_card_2(PickupCardWork* work) {
         DrawSprite(x, y - 8, work->cardDef->gfx,
                    work->tiles2, work->palette2, affine,
                    work->spriteFlags, work->priority + 1);
-        shadowScale = 204 - ((work->floor - work->posZ) >> 7);
+        shadowScale = Q_8_8(0.8) - ((work->floor - work->posZ) >> 7);
 
         if (shadowScale <= 2) {
             shadowScale = 2;

@@ -109,7 +109,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->scale, 256, work->steps);
+        ApproachValue(&work->scale, Q_8_8(1), work->steps);
 
         if (work->steps > 0) {
             work->stateTimer++;
@@ -128,7 +128,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->scale, 25, work->steps);
+        ApproachValue(&work->scale, Q_8_8(0.1), work->steps);
 
         if (work->steps <= 0) {
             return 0;
@@ -141,10 +141,10 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         switch (work->stateTimer) {
         case 0:
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                SetBattleZoom(30, 0x133, body->x - 0x1400,
+                SetBattleZoom(30, Q_8_8(1.2), body->x - 0x1400,
                               body->y + body->z - 0x1400);
             } else {
-                SetBattleZoom(30, 0x133, body->x + 0x1400,
+                SetBattleZoom(30, Q_8_8(1.2), body->x + 0x1400,
                               body->y + body->z - 0x1400);
             }
 
@@ -165,7 +165,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
 
             BtlMapStartShake();
             FadeFromAmount(FADE_MODE_GREEN, 8, 20);
-            SetBattleZoom(30, 0xCC, 0x10000, 0x15E00);
+            SetBattleZoom(30, Q_8_8(0.8), 0x10000, 0x15E00);
 
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartShockwave(body->x - 0x1400, body->y + body->z - 0x1400, 1);
@@ -211,7 +211,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
             work->state = SMN_SIMBA_STATE_VANISH;
             work->stateTimer = 0;
         } else {
@@ -252,7 +252,7 @@ void task_smn_simba_2(SmnSimbaWork* work) {
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+    } else if (gBtlWork->scale == Q_8_8(1) && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
         flags |= SPRITE_FLAG_HFLIP;
@@ -266,7 +266,7 @@ void task_smn_simba_2(SmnSimbaWork* work) {
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
-    if (sclX <= 256 && sclY <= 256) {
+    if (sclX <= Q_8_8(1) && sclY <= Q_8_8(1)) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
         affine = AllocObjAffine(0, sclX, sclY, 1);

@@ -60,7 +60,7 @@ s32 BosLstBitSquare2(s32 x) {
     return x * x;
 }
 
-u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
+u8 BosLstBitSpawnFal(LstState* work, s32 atTarget) {
     LstFalArg arg;
     u8 spawned;
 
@@ -73,7 +73,7 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
     if ((s16)*work->falCount <= 31) {
         arg.kind = BOS_LST_FAL_DRIFT;
 
-        if (kind == 1) {
+        if (atTarget == TRUE) {
             arg.x = work->targetX;
             arg.y = work->targetY;
             arg.z = work->targetZ;
@@ -221,8 +221,8 @@ u8 BosLstBitInterrupt(Task* task, u8 destroy) {
     if (destroy == TRUE && work->index == 0) {
         work->obj.hp = 0;
         SetBtlObjUnhittable(&work->obj, TRUE);
-        BosLstBitSpawnFal(work, 0);
-        BosLstBitSpawnFal(work, 0);
+        BosLstBitSpawnFal(work, FALSE);
+        BosLstBitSpawnFal(work, FALSE);
         destroyed = TRUE;
     }
 
@@ -399,13 +399,13 @@ void BosLstBitHandleHit(LstState* work) {
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
         work->hurtTimer = 20;
-        BosLstBitSpawnFal(work, 0);
+        BosLstBitSpawnFal(work, FALSE);
         ClearBtlObjActionFlags(obj);
         break;
     case BTL_REACTION_DEFEATED:
         SetBtlObjUnhittable(&work->obj, TRUE);
-        BosLstBitSpawnFal(work, 0);
-        BosLstBitSpawnFal(work, 0);
+        BosLstBitSpawnFal(work, FALSE);
+        BosLstBitSpawnFal(work, FALSE);
         ClearBtlObjActionFlags(obj);
         break;
     case BTL_REACTION_CARD_ACTION:
@@ -489,7 +489,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         work->timer++;
 
         if ((work->falTimer & 31) == 0) {
-            BosLstBitSpawnFal(work, 0);
+            BosLstBitSpawnFal(work, FALSE);
         }
 
         ApproachValueHalfSteps(&work->x, work->targetX, 20);
@@ -570,7 +570,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         ApplyAttackBox(0x10D, work->targetX, work->targetY, work->targetZ, 8, 8, 8);
 
         if ((work->timer & 3) == 0) {
-            BosLstBitSpawnFal(work, 1);
+            BosLstBitSpawnFal(work, TRUE);
         }
 
         if (abs(work->targetX - gBtlWork->actor->x) < 0x180) {

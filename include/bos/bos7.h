@@ -291,7 +291,7 @@ u8 BosLstPtlIsActive(Task* task);
 u8 BosLstLsrIsFiring(Task* task);
 s32 BosLstLsrSqrt(s32 n);
 s32 BosLstCtrSqrt(s32 n);
-u8 BosLstBitSpawnFal(LstState* work, s32 kind);
+u8 BosLstBitSpawnFal(LstState* work, s32 atTarget);
 s32 BosLstBitAtanLookup(s32 x, s32 y);
 s32 BosLstBitAngleBetween(s32 x0, s32 y0, s32 x1, s32 y1);
 s32 BosLstBitAngleDiff(u8 from, u8 to);

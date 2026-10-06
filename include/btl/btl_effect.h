@@ -4,20 +4,27 @@
 #include "battle_actor_types.h"
 #include "types.h"
 
+enum SpellTier {
+    SPELL_TIER_BASE,
+    SPELL_TIER_RA,
+    SPELL_TIER_GA,
+    SPELL_TIER_DARK
+};
+
 u8 BgFxIsActive();
 void BgFxSetPosition(s32 x, s32 y, s32 z);
 
 void BgFxInit(u16 colorMode, u16 bg);
 void BgFxFree();
 void BgFxUpdate();
-void BgFxStartCure(u16 variant, s32 x, s32 y, s32 z);
-void BgFxStartFire(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack);
+void BgFxStartCure(u16 tier, s32 x, s32 y, s32 z);
+void BgFxStartFire(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack);
 void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 flip, s32 unused, s32 attack, u16 timer);
-void BgFxStartBlizzard(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack);
+void BgFxStartBlizzard(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack);
 void BgFxStartFlash(s32 x, s32 y, s32 z);
 void BgFxStartThunderHit(s32 x, s32 y, s32 z);
 void BgFxStartPotion(s32 x, s32 y, s32 z);
-void BgFxStartWideThunder(u16 variant, s32 x, s32 y, s32 z, s32 groundZ, s32 attack);
+void BgFxStartWideThunder(u16 tier, s32 x, s32 y, s32 z, s32 groundZ, s32 attack);
 void BgFxStartEnemyDeath(s32 x, s32 y, s32 z, s32 scale);
 void BgFxStartDarkDeath(s32 x, s32 y, s32 z, s32 scale);
 void BgFxStartEnemySpawn(s32 x, s32 y, s32 z, s32 scale);
@@ -34,7 +41,7 @@ void BgFxSetTarget(s32 x, s32 y, s32 z);
 void BgFxSetAngle(u8 angle);
 void BgFxSetScale(s32 scaleX, s32 scaleY);
 void BgFxStartGroundImpact(s32 x, s32 y);
-void BgFxStartStop(u16 variant, s32 x, s32 y, s32 z, s32 attack);
+void BgFxStartStop(u16 tier, s32 x, s32 y, s32 z, s32 attack);
 void BgFxStartCharaDefeat(s32 x, s32 y);
 void BgFxStartHumDefeat(s32 x, s32 y);
 void BgFxStartBossDeath(s32 x, s32 y);

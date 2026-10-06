@@ -476,7 +476,7 @@ void BgFxUpdateBase() {
     }
 }
 
-void BgFxStartCure(u16 variant, s32 x, s32 y, s32 z) {
+void BgFxStartCure(u16 tier, s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
 
@@ -489,30 +489,30 @@ void BgFxStartCure(u16 variant, s32 x, s32 y, s32 z) {
     sBgFx->x = x;
     sBgFx->y = y;
 
-    switch (variant) {
-    case 0:
+    switch (tier) {
+    case SPELL_TIER_BASE:
         sBgFx->z = z - 0x1400;
         break;
-    case 1:
+    case SPELL_TIER_RA:
         sBgFx->z = z;
         break;
-    case 2:
+    case SPELL_TIER_GA:
         sBgFx->z = z - 0x1000;
         break;
     }
 
     WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
 
-    switch (variant) {
-    case 0:
+    switch (tier) {
+    case SPELL_TIER_BASE:
         BgAnimStart(&gBgAnimDefCure00, sx, sy);
         m4aSongNumStart(SONG_EF_CAREL00);
         break;
-    case 1:
+    case SPELL_TIER_RA:
         BgAnimStart(&gBgAnimDefCure01, sx, sy);
         m4aSongNumStart(SONG_EF_CAREL01);
         break;
-    case 2:
+    case SPELL_TIER_GA:
         BgAnimStart(&gBgAnimDefCure02, sx, sy);
         m4aSongNumStart(SONG_EF_CAREL02);
         break;
@@ -597,18 +597,19 @@ void BgFxUpdateFire() {
                       sBgFx->z);
 
         switch (sBgFx->state) {
-        case 0:
+        case SPELL_TIER_BASE:
             BgAnimStart(&gBgAnimDefFire01, sx, sy);
             m4aSongNumStart(SONG_EF_FIRE01);
             break;
-        case 1:
+        case SPELL_TIER_RA:
             BgAnimStart(&gBgAnimDefFire02, sx, sy);
             m4aSongNumStart(SONG_EF_FIRE02);
             break;
-        case 2:
+        case SPELL_TIER_GA:
             BgAnimStart(&gBgAnimDefFire03, sx, sy);
             m4aSongNumStart(SONG_EF_FIRE03);
             break;
+        case SPELL_TIER_DARK:
         default:
             BgAnimStart(&gBgAnimDefRikuFire03, sx, sy);
             m4aSongNumStart(SONG_EF_FIRE03);
@@ -621,7 +622,7 @@ void BgFxUpdateFire() {
     BgFxUpdateBase();
 }
 
-void BgFxStartFire(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack) {
+void BgFxStartFire(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -635,7 +636,7 @@ void BgFxStartFire(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s
     sBgFx->z = z;
     WorldToScreen(&sx, &sy, x, y, z);
 
-    if (variant == 3) {
+    if (tier == SPELL_TIER_DARK) {
         BgAnimStart(&gBgAnimDefRikuFire00, sx, sy);
     } else {
         BgAnimStart(&gBgAnimDefFire00, sx, sy);
@@ -653,7 +654,7 @@ void BgFxStartFire(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s
     sBgFx->targetY = targetY;
     sBgFx->targetZ = targetZ;
     sBgFx->timer = 15;
-    sBgFx->state = variant;
+    sBgFx->state = tier;
     sBgFx->attack = attack;
 
     if (flip) {
@@ -686,7 +687,7 @@ void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 flip, s32 unused, s32 attack,
     sBgFx->targetY = gBtlWork->actor->y;
     sBgFx->targetZ = gBtlWork->actor->z;
     sBgFx->timer = timer;
-    sBgFx->state = 1;
+    sBgFx->state = SPELL_TIER_RA;
     sBgFx->attack = attack;
 
     if (flip) {
@@ -764,15 +765,15 @@ void BgFxUpdateBlizzard() {
         WorldToScreen(&sx, &sy, sBgFx->x, sBgFx->y, sBgFx->z);
 
         switch (sBgFx->state) {
-        case 0:
+        case SPELL_TIER_BASE:
             BgAnimStart(&gBgAnimDefBlizzard01, sx, sy);
             m4aSongNumStart(SONG_EF_BURIZA01);
             break;
-        case 1:
+        case SPELL_TIER_RA:
             BgAnimStart(&gBgAnimDefBlizzard02, sx, sy);
             m4aSongNumStart(SONG_EF_BURIZA02);
             break;
-        case 2:
+        case SPELL_TIER_GA:
         default:
             BgAnimStart(&gBgAnimDefBlizzard03, sx, sy);
             m4aSongNumStart(SONG_EF_BURIZA03);
@@ -784,21 +785,21 @@ void BgFxUpdateBlizzard() {
 
     if (sBgFx->timer == -2) {
         switch (sBgFx->state) {
-        case 0:
+        case SPELL_TIER_BASE:
             if (sBgFx->steps == 20) {
                 ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y,
                     sBgFx->z, 18, 18, 18);
             }
 
             break;
-        case 1:
+        case SPELL_TIER_RA:
             if (sBgFx->steps == 35) {
                 ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y,
                     sBgFx->z, 24, 24, 30);
             }
 
             break;
-        case 2:
+        case SPELL_TIER_GA:
         default:
             if (sBgFx->steps == 50) {
                 ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y,
@@ -814,7 +815,7 @@ void BgFxUpdateBlizzard() {
     BgFxUpdateBase();
 }
 
-void BgFxStartBlizzard(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack) {
+void BgFxStartBlizzard(u16 tier, s32 x, s32 y, s32 z, s32 targetX, s32 targetY, s32 targetZ, u8 flip, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -841,7 +842,7 @@ void BgFxStartBlizzard(u16 variant, s32 x, s32 y, s32 z, s32 targetX, s32 target
     sBgFx->targetY = targetY;
     sBgFx->targetZ = targetZ;
     sBgFx->timer = 15;
-    sBgFx->state = variant;
+    sBgFx->state = tier;
     sBgFx->attack = attack;
     sBgFx->steps = 0;
 
@@ -1171,17 +1172,17 @@ void BgFxUpdateWideThunder() {
         }
 
         switch (sBgFx->state) {
-        case 0:
+        case SPELL_TIER_BASE:
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 32, 256, 256);
             BgAnimStart(&gBgAnimDefThunder01, sx, sy);
             m4aSongNumStart(SONG_EF_THUND01);
             break;
-        case 1:
+        case SPELL_TIER_RA:
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 256, 256, 256);
             BgAnimStart(&gBgAnimDefThunder02, sx, sy);
             m4aSongNumStart(SONG_EF_THUND02);
             break;
-        case 2:
+        case SPELL_TIER_GA:
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 256, 256, 256);
             BgAnimStart(&gBgAnimDefThunder03, sx, sy);
             m4aSongNumStart(SONG_EF_THUND03);
@@ -1204,7 +1205,7 @@ void BgFxUpdateWideThunder() {
     BgFxUpdateBase();
 }
 
-void BgFxStartWideThunder(u16 variant, s32 x, s32 y, s32 z, s32 groundZ, s32 attack) {
+void BgFxStartWideThunder(u16 tier, s32 x, s32 y, s32 z, s32 groundZ, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -1222,7 +1223,7 @@ void BgFxStartWideThunder(u16 variant, s32 x, s32 y, s32 z, s32 groundZ, s32 att
     m4aSongNumStart(SONG_EF_THUND00);
     sBgFx->attack = attack;
     sBgFx->update = BgFxUpdateWideThunder;
-    sBgFx->state = variant;
+    sBgFx->state = tier;
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     sBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
@@ -1709,7 +1710,7 @@ void BgFxStartGroundImpact(s32 x, s32 y) {
 
 void BgFxUpdateStop() {
     switch (sBgFx->state) {
-    case 0:
+    case SPELL_TIER_BASE:
 #ifdef VERSION_EU
         if (sBgFx->timer == 20) {
 #else
@@ -1719,7 +1720,7 @@ void BgFxUpdateStop() {
         }
 
         break;
-    case 1:
+    case SPELL_TIER_RA:
 #ifdef VERSION_EU
         if (sBgFx->timer == 20) {
 #else
@@ -1729,7 +1730,7 @@ void BgFxUpdateStop() {
         }
 
         break;
-    case 2:
+    case SPELL_TIER_GA:
         if (sBgFx->timer == 33) {
             ApplyAttackBox(sBgFx->attack, sBgFx->x, sBgFx->y, sBgFx->z, 32, 32, 48);
         }
@@ -1741,7 +1742,7 @@ void BgFxUpdateStop() {
     BgFxUpdateBase();
 }
 
-void BgFxStartStop(u16 variant, s32 x, s32 y, s32 z, s32 attack) {
+void BgFxStartStop(u16 tier, s32 x, s32 y, s32 z, s32 attack) {
     s16 sx;
     s16 sy;
 
@@ -1755,19 +1756,19 @@ void BgFxStartStop(u16 variant, s32 x, s32 y, s32 z, s32 attack) {
     sBgFx->y = y;
     sBgFx->z = z;
     sBgFx->attack = attack;
-    sBgFx->state = variant;
+    sBgFx->state = tier;
     WorldToScreen(&sx, &sy, x, y, 0);
 
-    switch (variant) {
-    case 0:
+    switch (tier) {
+    case SPELL_TIER_BASE:
         BgAnimStart(&gBgAnimDefStop00, sx, sy);
         m4aSongNumStart(SONG_EF_STOP00);
         break;
-    case 1:
+    case SPELL_TIER_RA:
         BgAnimStart(&gBgAnimDefStop01, sx, sy);
         m4aSongNumStart(SONG_EF_STOP01);
         break;
-    case 2:
+    case SPELL_TIER_GA:
     default:
         BgAnimStart(&gBgAnimDefStop02, sx, sy);
         m4aSongNumStart(SONG_EF_STOP02);

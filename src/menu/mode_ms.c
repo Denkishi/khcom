@@ -40,6 +40,7 @@
 #include "text_types.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "macros.h"
 
 #ifdef VERSION_EU
 static void* sMoogleShopBgMapsByLanguage[5] = {
@@ -149,9 +150,9 @@ static const MooglePackCardDef sMoogleItemPackCards[7] = {
 };
 
 static const MooglePackCardTable sMooglePackCardTables[3] = {
-    {sMoogleAttackPackCards, 17},
-    {sMoogleMagicPackCards, 14},
-    {sMoogleItemPackCards, 7},
+    {sMoogleAttackPackCards, ARRAY_COUNT(sMoogleAttackPackCards)},
+    {sMoogleMagicPackCards, ARRAY_COUNT(sMoogleMagicPackCards)},
+    {sMoogleItemPackCards, ARRAY_COUNT(sMoogleItemPackCards)},
 };
 
 static const s16 sMooglePackTiers[13][4][4] = {

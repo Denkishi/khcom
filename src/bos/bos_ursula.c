@@ -35,6 +35,7 @@
 #include "default_bg_map.h"
 #include "enemy_ids.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 static const EmyKind sBosUrsulaEmyKind = { ENEMY_URSULA, 0, 32, 24, 0, 0, 0 };
 
@@ -159,13 +160,13 @@ static const BosMapanimeFrame sBosUrsulaMapanimeChargeFrames[5] = { { 10, 0 }, {
 
 static const BosMapanimeFrame sBosUrsulaMapanimeRecoverFrames[1] = { { 0, 0 } };
 
-static const BosMapanimeDef sBosUrsulaMapanimeIdle = { sBosUrsulaMapanimeIdleFrames, 6, gBosUrsulaMapanimeIdleTiles, 0x0C00, 0x0300, 0x0400, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeIdle = { sBosUrsulaMapanimeIdleFrames, ARRAY_COUNT(sBosUrsulaMapanimeIdleFrames), gBosUrsulaMapanimeIdleTiles, 0x0C00, 0x0300, 0x0400, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeWindup = { sBosUrsulaMapanimeWindupFrames, 12, gBosUrsulaMapanimeWindupTiles, 0x0C00, 0x0860, 0x0C00, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeWindup = { sBosUrsulaMapanimeWindupFrames, ARRAY_COUNT(sBosUrsulaMapanimeWindupFrames), gBosUrsulaMapanimeWindupTiles, 0x0C00, 0x0860, 0x0C00, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbleFrames, 5, gBosUrsulaMapanimeBubbleTiles, 0x0C00, 0x0860, 0x0C00, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbleFrames, ARRAY_COUNT(sBosUrsulaMapanimeBubbleFrames), gBosUrsulaMapanimeBubbleTiles, 0x0C00, 0x0860, 0x0C00, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, 5, gBosUrsulaMapanimeChargeTiles, 0x0C00, 0x0860, 0x0C00, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, ARRAY_COUNT(sBosUrsulaMapanimeChargeFrames), gBosUrsulaMapanimeChargeTiles, 0x0C00, 0x0860, 0x0C00, 0 };
 
 static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, 1, gBosUrsulaMapanimeRecoverTiles, 0x0C00, 0x0860, 0x0C00, 0 };
 

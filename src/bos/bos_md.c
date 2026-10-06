@@ -32,6 +32,7 @@
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "macros.h"
 
 static const EmyKind sBosMdEmyKind = { ENEMY_DRAGON_MALEFICENT, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 
@@ -311,16 +312,16 @@ static const MdAnimFrame sMdBiteDoubleFrames[11] = { { 39, 3 }, { 31, 24 }, { 32
 static const MdAnimFrame sMdDefeatFrames[1] = { { 1, 32767 } };
 
 static const MdAnimDef sMdAnimDefs[11] = {
-    { sMdIdleFrames, 4 },
-    { sMdIdleNearFrames, 4 },
-    { sMdFireBreathStartFrames, 4 },
-    { sMdFireBreathFrames, 2 },
-    { sMdFireBreathEndFrames, 2 },
-    { sMdQuakeDoubleFrames, 10 },
-    { sMdQuakeHeavyFrames, 8 },
-    { sMdBiteNearFrames, 6 },
-    { sMdBiteFarFrames, 8 },
-    { sMdBiteDoubleFrames, 11 },
+    { sMdIdleFrames, ARRAY_COUNT(sMdIdleFrames) },
+    { sMdIdleNearFrames, ARRAY_COUNT(sMdIdleNearFrames) },
+    { sMdFireBreathStartFrames, ARRAY_COUNT(sMdFireBreathStartFrames) },
+    { sMdFireBreathFrames, ARRAY_COUNT(sMdFireBreathFrames) },
+    { sMdFireBreathEndFrames, ARRAY_COUNT(sMdFireBreathEndFrames) },
+    { sMdQuakeDoubleFrames, ARRAY_COUNT(sMdQuakeDoubleFrames) },
+    { sMdQuakeHeavyFrames, ARRAY_COUNT(sMdQuakeHeavyFrames) },
+    { sMdBiteNearFrames, ARRAY_COUNT(sMdBiteNearFrames) },
+    { sMdBiteFarFrames, ARRAY_COUNT(sMdBiteFarFrames) },
+    { sMdBiteDoubleFrames, ARRAY_COUNT(sMdBiteDoubleFrames) },
     { sMdDefeatFrames, 1 },
 };
 

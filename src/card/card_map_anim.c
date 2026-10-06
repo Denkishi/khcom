@@ -1116,12 +1116,12 @@ static const MapTileAnimationFrame sMapTileAnim0Frames1[4] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim0Tracks[2] = {
-    {sMapTileAnim0Frames0, gMapTileAnim0Track0Tiles, 4, 3232, 864},
-    {sMapTileAnim0Frames1, gMapTileAnim0Track1Tiles, 4, 0, 3232},
+    {sMapTileAnim0Frames0, gMapTileAnim0Track0Tiles, ARRAY_COUNT(sMapTileAnim0Frames0), 3232, 864},
+    {sMapTileAnim0Frames1, gMapTileAnim0Track1Tiles, ARRAY_COUNT(sMapTileAnim0Frames1), 0, 3232},
 };
 
 static const MapTileAnimationDef sMapTileAnim0Def = {
-    sMapTileAnim0Tracks, 2, 1,
+    sMapTileAnim0Tracks, ARRAY_COUNT(sMapTileAnim0Tracks), 1,
 };
 
 static const MapTileAnimationFrame sMapTileAnim1Frames0[4] = {
@@ -1167,16 +1167,16 @@ static const MapTileAnimationFrame sMapTileAnim1Frames5[4] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim1Tracks[6] = {
-    {sMapTileAnim1Frames0, gMapTileAnim1Track0Tiles, 4, 2048, 192},
-    {sMapTileAnim1Frames1, gMapTileAnim1Track1Tiles, 4, 2240, 192},
-    {sMapTileAnim1Frames2, gMapTileAnim1Track2Tiles, 4, 2432, 96},
-    {sMapTileAnim1Frames3, gMapTileAnim1Track3Tiles, 4, 2528, 128},
-    {sMapTileAnim1Frames4, gMapTileAnim1Track4Tiles, 4, 3072, 352},
-    {sMapTileAnim1Frames5, gMapTileAnim1Track5Tiles, 4, 3424, 128},
+    {sMapTileAnim1Frames0, gMapTileAnim1Track0Tiles, ARRAY_COUNT(sMapTileAnim1Frames0), 2048, 192},
+    {sMapTileAnim1Frames1, gMapTileAnim1Track1Tiles, ARRAY_COUNT(sMapTileAnim1Frames1), 2240, 192},
+    {sMapTileAnim1Frames2, gMapTileAnim1Track2Tiles, ARRAY_COUNT(sMapTileAnim1Frames2), 2432, 96},
+    {sMapTileAnim1Frames3, gMapTileAnim1Track3Tiles, ARRAY_COUNT(sMapTileAnim1Frames3), 2528, 128},
+    {sMapTileAnim1Frames4, gMapTileAnim1Track4Tiles, ARRAY_COUNT(sMapTileAnim1Frames4), 3072, 352},
+    {sMapTileAnim1Frames5, gMapTileAnim1Track5Tiles, ARRAY_COUNT(sMapTileAnim1Frames5), 3424, 128},
 };
 
 static const MapTileAnimationDef sMapTileAnim1Def = {
-    sMapTileAnim1Tracks, 6, 0,
+    sMapTileAnim1Tracks, ARRAY_COUNT(sMapTileAnim1Tracks), 0,
 };
 
 static const MapTileAnimationFrame sMapTileAnim2Frames[5] = {
@@ -1188,7 +1188,7 @@ static const MapTileAnimationFrame sMapTileAnim2Frames[5] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim2Track = {
-    sMapTileAnim2Frames, gMapTileAnim2Tiles, 5, 3072, 896,
+    sMapTileAnim2Frames, gMapTileAnim2Tiles, ARRAY_COUNT(sMapTileAnim2Frames), 3072, 896,
 };
 
 static const MapTileAnimationDef sMapTileAnim2Def = {
@@ -1203,7 +1203,7 @@ static const MapTileAnimationFrame sMapTileAnim3Frames[4] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim3Track = {
-    sMapTileAnim3Frames, gMapTileAnim3Tiles, 4, -15360, 3072,
+    sMapTileAnim3Frames, gMapTileAnim3Tiles, ARRAY_COUNT(sMapTileAnim3Frames), -15360, 3072,
 };
 
 static const MapTileAnimationDef sMapTileAnim3Def = {
@@ -1220,7 +1220,7 @@ static const MapTileAnimationFrame sMapTileAnim4Frames[6] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim4Track = {
-    sMapTileAnim4Frames, gMapTileAnim4Tiles, 6, -5120, 1024,
+    sMapTileAnim4Frames, gMapTileAnim4Tiles, ARRAY_COUNT(sMapTileAnim4Frames), -5120, 1024,
 };
 
 static const MapTileAnimationDef sMapTileAnim4Def = {

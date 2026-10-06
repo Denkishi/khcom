@@ -68,7 +68,7 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Palette,
         gTalk0000Frames,
         gTalk0000Anims,
-        4,
+        ARRAY_COUNT(gTalk0000Anims),
         1,
     },
     {
@@ -76,7 +76,7 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Palette,
         gTalk0001Frames,
         gTalk0001Anims,
-        2,
+        ARRAY_COUNT(gTalk0001Anims),
         1,
     },
     {
@@ -84,7 +84,7 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Palette,
         gTalk0002Frames,
         gTalk0002Anims,
-        2,
+        ARRAY_COUNT(gTalk0002Anims),
         1,
     },
     {
@@ -92,7 +92,7 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Palette,
         gTalk0003Frames,
         gTalk0003Anims,
-        2,
+        ARRAY_COUNT(gTalk0003Anims),
         1,
     },
     {
@@ -100,7 +100,7 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Palette,
         gTalk0004Frames,
         gTalk0004Anims,
-        2,
+        ARRAY_COUNT(gTalk0004Anims),
         1,
     },
     {
@@ -108,7 +108,7 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Palette,
         gTalk0005Frames,
         gTalk0005Anims,
-        4,
+        ARRAY_COUNT(gTalk0005Anims),
         1,
     },
     {
@@ -135,7 +135,7 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0100Palette,
         gTalk0100Frames,
         gTalk0100Anims,
-        4,
+        ARRAY_COUNT(gTalk0100Anims),
         1,
     },
     {
@@ -143,7 +143,7 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0100Palette,
         gTalk0101Frames,
         gTalk0101Anims,
-        4,
+        ARRAY_COUNT(gTalk0101Anims),
         1,
     },
     {
@@ -151,7 +151,7 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0100Palette,
         gTalk0102Frames,
         gTalk0102Anims,
-        4,
+        ARRAY_COUNT(gTalk0102Anims),
         1,
     },
     {
@@ -159,7 +159,7 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0100Palette,
         gTalk0103Frames,
         gTalk0103Anims,
-        4,
+        ARRAY_COUNT(gTalk0103Anims),
         1,
     },
     {
@@ -167,7 +167,7 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0100Palette,
         gTalk0104Frames,
         gTalk0104Anims,
-        2,
+        ARRAY_COUNT(gTalk0104Anims),
         1,
     },
     {
@@ -175,7 +175,7 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0100Palette,
         gTalk0105Frames,
         gTalk0105Anims,
-        4,
+        ARRAY_COUNT(gTalk0105Anims),
         1,
     },
 };
@@ -229,7 +229,7 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0200Palette,
         gTalk0200Frames,
         gTalk0200Anims,
-        4,
+        ARRAY_COUNT(gTalk0200Anims),
         1,
     },
     {
@@ -237,7 +237,7 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0200Palette,
         gTalk0201Frames,
         gTalk0201Anims,
-        4,
+        ARRAY_COUNT(gTalk0201Anims),
         1,
     },
     {
@@ -245,7 +245,7 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0200Palette,
         gTalk0202Frames,
         gTalk0202Anims,
-        4,
+        ARRAY_COUNT(gTalk0202Anims),
         1,
     },
     {
@@ -253,7 +253,7 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0200Palette,
         gTalk0203Frames,
         gTalk0203Anims,
-        2,
+        ARRAY_COUNT(gTalk0203Anims),
         1,
     },
     {
@@ -261,7 +261,7 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0200Palette,
         gTalk0204Frames,
         gTalk0204Anims,
-        2,
+        ARRAY_COUNT(gTalk0204Anims),
         1,
     },
 };
@@ -298,7 +298,7 @@ static const MsgFaceAnim sTalk03FaceAnims = {
     gTalk0300Palette,
     gTalk0300Frames,
     gTalk0300Anims,
-    2,
+    ARRAY_COUNT(gTalk0300Anims),
     1,
 };
 
@@ -308,7 +308,7 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0400Palette,
         gTalk0400Frames,
         gTalk0400Anims,
-        2,
+        ARRAY_COUNT(gTalk0400Anims),
         1,
     },
     {
@@ -316,7 +316,7 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0400Palette,
         gTalk0401Frames,
         gTalk0401Anims,
-        2,
+        ARRAY_COUNT(gTalk0401Anims),
         1,
     },
     {
@@ -324,7 +324,7 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0400Palette,
         gTalk0402Frames,
         gTalk0402Anims,
-        2,
+        ARRAY_COUNT(gTalk0402Anims),
         1,
     },
     {
@@ -332,7 +332,7 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0400Palette,
         gTalk0403Frames,
         gTalk0403Anims,
-        2,
+        ARRAY_COUNT(gTalk0403Anims),
         1,
     },
 };
@@ -343,7 +343,7 @@ static const MsgFaceAnim sTalk05FaceAnims[4] = {
         gTalk0500Palette,
         gTalk0500Frames,
         gTalk0500Anims,
-        8,
+        ARRAY_COUNT(gTalk0500Anims),
         1,
     },
     {
@@ -378,7 +378,7 @@ static const MsgFaceAnim sTalk06FaceAnims[5] = {
         gTalk0600Palette,
         gTalk0600Frames,
         gTalk0600Anims,
-        10,
+        ARRAY_COUNT(gTalk0600Anims),
         1,
     },
     {
@@ -420,7 +420,7 @@ static const MsgFaceAnim sTalk07FaceAnims = {
     gTalk0700Palette,
     gTalk0700Frames,
     gTalk0700Anims,
-    2,
+    ARRAY_COUNT(gTalk0700Anims),
     1,
 };
 
@@ -430,7 +430,7 @@ static const MsgFaceAnim sTalk08FaceAnims[2] = {
         gTalk0800Palette,
         gTalk0800Frames,
         gTalk0800Anims,
-        4,
+        ARRAY_COUNT(gTalk0800Anims),
         1,
     },
     {
@@ -449,7 +449,7 @@ static const MsgFaceAnim sTalk09FaceAnims[2] = {
         gTalk0900Palette,
         gTalk0900Frames,
         gTalk0900Anims,
-        2,
+        ARRAY_COUNT(gTalk0900Anims),
         1,
     },
     {
@@ -468,7 +468,7 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Palette,
         gTalk1000Frames,
         gTalk1000Anims,
-        12,
+        ARRAY_COUNT(gTalk1000Anims),
         1,
     },
     {
@@ -516,7 +516,7 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Palette,
         gTalk1002Frames,
         gTalk1002Anims,
-        6,
+        ARRAY_COUNT(gTalk1002Anims),
         1,
     },
     {
@@ -540,7 +540,7 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Palette,
         gTalk1003Frames,
         gTalk1003Anims,
-        6,
+        ARRAY_COUNT(gTalk1003Anims),
         1,
     },
     {
@@ -564,7 +564,7 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Palette,
         gTalk1004Frames,
         gTalk1004Anims,
-        6,
+        ARRAY_COUNT(gTalk1004Anims),
         1,
     },
     {
@@ -591,7 +591,7 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1100Palette,
         gTalk1100Frames,
         gTalk1100Anims,
-        2,
+        ARRAY_COUNT(gTalk1100Anims),
         1,
     },
     {
@@ -599,7 +599,7 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1100Palette,
         gTalk1101Frames,
         gTalk1101Anims,
-        2,
+        ARRAY_COUNT(gTalk1101Anims),
         1,
     },
     {
@@ -607,7 +607,7 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1100Palette,
         gTalk1102Frames,
         gTalk1102Anims,
-        2,
+        ARRAY_COUNT(gTalk1102Anims),
         1,
     },
     {
@@ -615,7 +615,7 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1100Palette,
         gTalk1103Frames,
         gTalk1103Anims,
-        2,
+        ARRAY_COUNT(gTalk1103Anims),
         1,
     },
     {
@@ -623,7 +623,7 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1100Palette,
         gTalk1104Frames,
         gTalk1104Anims,
-        2,
+        ARRAY_COUNT(gTalk1104Anims),
         1,
     },
 };
@@ -634,7 +634,7 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1200Palette,
         gTalk1200Frames,
         gTalk1200Anims,
-        2,
+        ARRAY_COUNT(gTalk1200Anims),
         1,
     },
     {
@@ -642,7 +642,7 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1200Palette,
         gTalk1201Frames,
         gTalk1201Anims,
-        2,
+        ARRAY_COUNT(gTalk1201Anims),
         1,
     },
     {
@@ -650,7 +650,7 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1200Palette,
         gTalk1202Frames,
         gTalk1202Anims,
-        2,
+        ARRAY_COUNT(gTalk1202Anims),
         1,
     },
     {
@@ -658,7 +658,7 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1200Palette,
         gTalk1203Frames,
         gTalk1203Anims,
-        2,
+        ARRAY_COUNT(gTalk1203Anims),
         1,
     },
 };
@@ -669,7 +669,7 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1300Palette,
         gTalk1300Frames,
         gTalk1300Anims,
-        8,
+        ARRAY_COUNT(gTalk1300Anims),
         1,
     },
     {
@@ -701,7 +701,7 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1300Palette,
         gTalk1301Frames,
         gTalk1301Anims,
-        4,
+        ARRAY_COUNT(gTalk1301Anims),
         1,
     },
     {
@@ -720,7 +720,7 @@ static const MsgFaceAnim sTalk14FaceAnims[3] = {
         gTalk1400Palette,
         gTalk1400Frames,
         gTalk1400Anims,
-        2,
+        ARRAY_COUNT(gTalk1400Anims),
         1,
     },
     {
@@ -728,7 +728,7 @@ static const MsgFaceAnim sTalk14FaceAnims[3] = {
         gTalk1400Palette,
         gTalk1401Frames,
         gTalk1401Anims,
-        2,
+        ARRAY_COUNT(gTalk1401Anims),
         1,
     },
     {
@@ -736,7 +736,7 @@ static const MsgFaceAnim sTalk14FaceAnims[3] = {
         gTalk1400Palette,
         gTalk1402Frames,
         gTalk1402Anims,
-        2,
+        ARRAY_COUNT(gTalk1402Anims),
         1,
     },
 };
@@ -747,7 +747,7 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1500Palette,
         gTalk1500Frames,
         gTalk1500Anims,
-        6,
+        ARRAY_COUNT(gTalk1500Anims),
         1,
     },
     {
@@ -763,7 +763,7 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1500Palette,
         gTalk1502Frames,
         gTalk1502Anims,
-        2,
+        ARRAY_COUNT(gTalk1502Anims),
         1,
     },
     {
@@ -771,7 +771,7 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1500Palette,
         gTalk1503Frames,
         gTalk1503Anims,
-        2,
+        ARRAY_COUNT(gTalk1503Anims),
         1,
     },
     {
@@ -790,7 +790,7 @@ static const MsgFaceAnim sTalk16FaceAnims[4] = {
         gTalk1600Palette,
         gTalk1600Frames,
         gTalk1600Anims,
-        8,
+        ARRAY_COUNT(gTalk1600Anims),
         1,
     },
     {
@@ -825,7 +825,7 @@ static const MsgFaceAnim sTalk17FaceAnims[3] = {
         gTalk1700Palette,
         gTalk1700Frames,
         gTalk1700Anims,
-        6,
+        ARRAY_COUNT(gTalk1700Anims),
         1,
     },
     {
@@ -852,7 +852,7 @@ static const MsgFaceAnim sTalk18FaceAnims[3] = {
         gTalk1800Palette,
         gTalk1800Frames,
         gTalk1800Anims,
-        6,
+        ARRAY_COUNT(gTalk1800Anims),
         1,
     },
     {
@@ -879,7 +879,7 @@ static const MsgFaceAnim sTalk19FaceAnims[3] = {
         gTalk1900Palette,
         gTalk1900Frames,
         gTalk1900Anims,
-        6,
+        ARRAY_COUNT(gTalk1900Anims),
         1,
     },
     {
@@ -906,7 +906,7 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2000Palette,
         gTalk2000Frames,
         gTalk2000Anims,
-        2,
+        ARRAY_COUNT(gTalk2000Anims),
         1,
     },
     {
@@ -914,7 +914,7 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2000Palette,
         gTalk2001Frames,
         gTalk2001Anims,
-        2,
+        ARRAY_COUNT(gTalk2001Anims),
         1,
     },
     {
@@ -922,7 +922,7 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2000Palette,
         gTalk2002Frames,
         gTalk2002Anims,
-        2,
+        ARRAY_COUNT(gTalk2002Anims),
         1,
     },
     {
@@ -930,7 +930,7 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2000Palette,
         gTalk2003Frames,
         gTalk2003Anims,
-        2,
+        ARRAY_COUNT(gTalk2003Anims),
         1,
     },
 };
@@ -941,7 +941,7 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2100Palette,
         gTalk2100Frames,
         gTalk2100Anims,
-        2,
+        ARRAY_COUNT(gTalk2100Anims),
         1,
     },
     {
@@ -949,7 +949,7 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2100Palette,
         gTalk2101Frames,
         gTalk2101Anims,
-        2,
+        ARRAY_COUNT(gTalk2101Anims),
         1,
     },
     {
@@ -957,7 +957,7 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2100Palette,
         gTalk2102Frames,
         gTalk2102Anims,
-        2,
+        ARRAY_COUNT(gTalk2102Anims),
         1,
     },
     {
@@ -965,7 +965,7 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2100Palette,
         gTalk2103Frames,
         gTalk2103Anims,
-        2,
+        ARRAY_COUNT(gTalk2103Anims),
         1,
     },
     {
@@ -973,7 +973,7 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2100Palette,
         gTalk2104Frames,
         gTalk2104Anims,
-        2,
+        ARRAY_COUNT(gTalk2104Anims),
         1,
     },
 };
@@ -983,7 +983,7 @@ static const MsgFaceAnim sTalk36FaceAnims = {
     gTalk3600Palette,
     gTalk3600Frames,
     gTalk3600Anims,
-    2,
+    ARRAY_COUNT(gTalk3600Anims),
     1,
 };
 
@@ -993,7 +993,7 @@ static const MsgFaceAnim sTalk37FaceAnims[2] = {
         gTalk3700Palette,
         gTalk3700Frames,
         gTalk3700Anims,
-        4,
+        ARRAY_COUNT(gTalk3700Anims),
         1,
     },
     {
@@ -1012,7 +1012,7 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2400Palette,
         gTalk2400Frames,
         gTalk2400Anims,
-        2,
+        ARRAY_COUNT(gTalk2400Anims),
         1,
     },
     {
@@ -1020,7 +1020,7 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2400Palette,
         gTalk2401Frames,
         gTalk2401Anims,
-        2,
+        ARRAY_COUNT(gTalk2401Anims),
         1,
     },
     {
@@ -1028,7 +1028,7 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2400Palette,
         gTalk2402Frames,
         gTalk2402Anims,
-        2,
+        ARRAY_COUNT(gTalk2402Anims),
         1,
     },
     {
@@ -1036,7 +1036,7 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2400Palette,
         gTalk2403Frames,
         gTalk2403Anims,
-        2,
+        ARRAY_COUNT(gTalk2403Anims),
         1,
     },
     {
@@ -1044,7 +1044,7 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2400Palette,
         gTalk2404Frames,
         gTalk2404Anims,
-        2,
+        ARRAY_COUNT(gTalk2404Anims),
         1,
     },
     {
@@ -1052,7 +1052,7 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2400Palette,
         gTalk2405Frames,
         gTalk2405Anims,
-        2,
+        ARRAY_COUNT(gTalk2405Anims),
         1,
     },
 };
@@ -1063,7 +1063,7 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2500Palette,
         gTalk2500Frames,
         gTalk2500Anims,
-        2,
+        ARRAY_COUNT(gTalk2500Anims),
         1,
     },
     {
@@ -1071,7 +1071,7 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2500Palette,
         gTalk2501Frames,
         gTalk2501Anims,
-        2,
+        ARRAY_COUNT(gTalk2501Anims),
         1,
     },
     {
@@ -1079,7 +1079,7 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2500Palette,
         gTalk2502Frames,
         gTalk2502Anims,
-        2,
+        ARRAY_COUNT(gTalk2502Anims),
         1,
     },
     {
@@ -1087,7 +1087,7 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2500Palette,
         gTalk2503Frames,
         gTalk2503Anims,
-        2,
+        ARRAY_COUNT(gTalk2503Anims),
         1,
     },
     {
@@ -1095,7 +1095,7 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2500Palette,
         gTalk2504Frames,
         gTalk2504Anims,
-        2,
+        ARRAY_COUNT(gTalk2504Anims),
         1,
     },
     {
@@ -1103,7 +1103,7 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2500Palette,
         gTalk2505Frames,
         gTalk2505Anims,
-        2,
+        ARRAY_COUNT(gTalk2505Anims),
         1,
     },
 };
@@ -1114,7 +1114,7 @@ static const MsgFaceAnim sTalk26FaceAnims[2] = {
         gTalk2600Palette,
         gTalk2600Frames,
         gTalk2600Anims,
-        2,
+        ARRAY_COUNT(gTalk2600Anims),
         1,
     },
     {
@@ -1122,7 +1122,7 @@ static const MsgFaceAnim sTalk26FaceAnims[2] = {
         gTalk2600Palette,
         gTalk2601Frames,
         gTalk2601Anims,
-        2,
+        ARRAY_COUNT(gTalk2601Anims),
         1,
     },
 };
@@ -1133,7 +1133,7 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3000Palette,
         gTalk3000Frames,
         gTalk3000Anims,
-        2,
+        ARRAY_COUNT(gTalk3000Anims),
         1,
     },
     {
@@ -1141,7 +1141,7 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3000Palette,
         gTalk3001Frames,
         gTalk3001Anims,
-        2,
+        ARRAY_COUNT(gTalk3001Anims),
         1,
     },
     {
@@ -1149,7 +1149,7 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3000Palette,
         gTalk3002Frames,
         gTalk3002Anims,
-        2,
+        ARRAY_COUNT(gTalk3002Anims),
         1,
     },
     {
@@ -1157,7 +1157,7 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3000Palette,
         gTalk3003Frames,
         gTalk3003Anims,
-        2,
+        ARRAY_COUNT(gTalk3003Anims),
         1,
     },
 };
@@ -1168,7 +1168,7 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3100Palette,
         gTalk3100Frames,
         gTalk3100Anims,
-        2,
+        ARRAY_COUNT(gTalk3100Anims),
         1,
     },
     {
@@ -1176,7 +1176,7 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3100Palette,
         gTalk3101Frames,
         gTalk3101Anims,
-        2,
+        ARRAY_COUNT(gTalk3101Anims),
         1,
     },
     {
@@ -1184,7 +1184,7 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3100Palette,
         gTalk3102Frames,
         gTalk3102Anims,
-        2,
+        ARRAY_COUNT(gTalk3102Anims),
         1,
     },
     {
@@ -1192,7 +1192,7 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3100Palette,
         gTalk3103Frames,
         gTalk3103Anims,
-        2,
+        ARRAY_COUNT(gTalk3103Anims),
         1,
     },
 };
@@ -1203,7 +1203,7 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3300Palette,
         gTalk3300Frames,
         gTalk3300Anims,
-        4,
+        ARRAY_COUNT(gTalk3300Anims),
         1,
     },
     {
@@ -1211,7 +1211,7 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3300Palette,
         gTalk3301Frames,
         gTalk3301Anims,
-        2,
+        ARRAY_COUNT(gTalk3301Anims),
         1,
     },
     {
@@ -1219,7 +1219,7 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3300Palette,
         gTalk3302Frames,
         gTalk3302Anims,
-        2,
+        ARRAY_COUNT(gTalk3302Anims),
         1,
     },
     {
@@ -1227,7 +1227,7 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3300Palette,
         gTalk3303Frames,
         gTalk3303Anims,
-        2,
+        ARRAY_COUNT(gTalk3303Anims),
         1,
     },
     {
@@ -1235,7 +1235,7 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3300Palette,
         gTalk3304Frames,
         gTalk3304Anims,
-        2,
+        ARRAY_COUNT(gTalk3304Anims),
         1,
     },
     {
@@ -1254,7 +1254,7 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3800Palette,
         gTalk3800Frames,
         gTalk3800Anims,
-        6,
+        ARRAY_COUNT(gTalk3800Anims),
         1,
     },
     {
@@ -1270,7 +1270,7 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3800Palette,
         gTalk3802Frames,
         gTalk3802Anims,
-        2,
+        ARRAY_COUNT(gTalk3802Anims),
         1,
     },
     {
@@ -1278,7 +1278,7 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3800Palette,
         gTalk3803Frames,
         gTalk3803Anims,
-        2,
+        ARRAY_COUNT(gTalk3803Anims),
         1,
     },
     {
@@ -1297,7 +1297,7 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4000Palette,
         gTalk4000Frames,
         gTalk4000Anims,
-        2,
+        ARRAY_COUNT(gTalk4000Anims),
         1,
     },
     {
@@ -1305,7 +1305,7 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4000Palette,
         gTalk4001Frames,
         gTalk4001Anims,
-        2,
+        ARRAY_COUNT(gTalk4001Anims),
         1,
     },
     {
@@ -1313,7 +1313,7 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4000Palette,
         gTalk4002Frames,
         gTalk4002Anims,
-        2,
+        ARRAY_COUNT(gTalk4002Anims),
         1,
     },
     {
@@ -1321,7 +1321,7 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4000Palette,
         gTalk4003Frames,
         gTalk4003Anims,
-        2,
+        ARRAY_COUNT(gTalk4003Anims),
         1,
     },
 };
@@ -1332,7 +1332,7 @@ static const MsgFaceAnim sTalk41FaceAnims[4] = {
         gTalk4100Palette,
         gTalk4100Frames,
         gTalk4100Anims,
-        4,
+        ARRAY_COUNT(gTalk4100Anims),
         1,
     },
     {
@@ -1340,7 +1340,7 @@ static const MsgFaceAnim sTalk41FaceAnims[4] = {
         gTalk4100Palette,
         gTalk4101Frames,
         gTalk4101Anims,
-        4,
+        ARRAY_COUNT(gTalk4101Anims),
         1,
     },
     {
@@ -1367,7 +1367,7 @@ static const MsgFaceAnim sTalk42FaceAnims[3] = {
         gTalk4200Palette,
         gTalk4200Frames,
         gTalk4200Anims,
-        6,
+        ARRAY_COUNT(gTalk4200Anims),
         1,
     },
     {
@@ -1394,7 +1394,7 @@ static const MsgFaceAnim sTalk43FaceAnims[3] = {
         gTalk4300Palette,
         gTalk4300Frames,
         gTalk4300Anims,
-        6,
+        ARRAY_COUNT(gTalk4300Anims),
         1,
     },
     {
@@ -1421,7 +1421,7 @@ static const MsgFaceAnim sTalk44FaceAnims[2] = {
         gTalk4400Palette,
         gTalk4400Frames,
         gTalk4400Anims,
-        4,
+        ARRAY_COUNT(gTalk4400Anims),
         1,
     },
     {
@@ -1440,7 +1440,7 @@ static const MsgFaceAnim sTalk45FaceAnims[2] = {
         gTalk4500Palette,
         gTalk4500Frames,
         gTalk4500Anims,
-        4,
+        ARRAY_COUNT(gTalk4500Anims),
         1,
     },
     {
@@ -1459,7 +1459,7 @@ static const MsgFaceAnim sTalk46FaceAnims[3] = {
         gTalk4600Palette,
         gTalk4600Frames,
         gTalk4600Anims,
-        6,
+        ARRAY_COUNT(gTalk4600Anims),
         1,
     },
     {
@@ -1486,7 +1486,7 @@ static const MsgFaceAnim sTalk47FaceAnims[3] = {
         gTalk4700Palette,
         gTalk4700Frames,
         gTalk4700Anims,
-        6,
+        ARRAY_COUNT(gTalk4700Anims),
         1,
     },
     {
@@ -1513,7 +1513,7 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
         gTalk5000Palette,
         gTalk5000Frames,
         gTalk5000Anims,
-        2,
+        ARRAY_COUNT(gTalk5000Anims),
         1,
     },
     {
@@ -1521,7 +1521,7 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
         gTalk5000Palette,
         gTalk5001Frames,
         gTalk5001Anims,
-        4,
+        ARRAY_COUNT(gTalk5001Anims),
         1,
     },
     {
@@ -1529,7 +1529,7 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
         gTalk5000Palette,
         gTalk5002Frames,
         gTalk5002Anims,
-        2,
+        ARRAY_COUNT(gTalk5002Anims),
         1,
     },
     {
@@ -1548,7 +1548,7 @@ static const MsgFaceAnim sTalk51FaceAnims[3] = {
         gTalk5100Palette,
         gTalk5100Frames,
         gTalk5100Anims,
-        4,
+        ARRAY_COUNT(gTalk5100Anims),
         1,
     },
     {
@@ -1564,7 +1564,7 @@ static const MsgFaceAnim sTalk51FaceAnims[3] = {
         gTalk5100Palette,
         gTalk5102Frames,
         gTalk5102Anims,
-        2,
+        ARRAY_COUNT(gTalk5102Anims),
         1,
     },
 };
@@ -1575,7 +1575,7 @@ static const MsgFaceAnim sTalk55FaceAnims[4] = {
         gTalk5500Palette,
         gTalk5500Frames,
         gTalk5500Anims,
-        4,
+        ARRAY_COUNT(gTalk5500Anims),
         1,
     },
     {
@@ -1591,7 +1591,7 @@ static const MsgFaceAnim sTalk55FaceAnims[4] = {
         gTalk5500Palette,
         gTalk5502Frames,
         gTalk5502Anims,
-        2,
+        ARRAY_COUNT(gTalk5502Anims),
         1,
     },
     {
@@ -1599,7 +1599,7 @@ static const MsgFaceAnim sTalk55FaceAnims[4] = {
         gTalk5500Palette,
         gTalk5503Frames,
         gTalk5503Anims,
-        2,
+        ARRAY_COUNT(gTalk5503Anims),
         1,
     },
 };
@@ -1610,7 +1610,7 @@ static const MsgFaceAnim sTalk39FaceAnims[4] = {
         gTalk3900Palette,
         gTalk3900Frames,
         gTalk3900Anims,
-        8,
+        ARRAY_COUNT(gTalk3900Anims),
         1,
     },
     {
@@ -1645,7 +1645,7 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5200Palette,
         gTalk5200Frames,
         gTalk5200Anims,
-        2,
+        ARRAY_COUNT(gTalk5200Anims),
         1,
     },
     {
@@ -1653,7 +1653,7 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5200Palette,
         gTalk5201Frames,
         gTalk5201Anims,
-        2,
+        ARRAY_COUNT(gTalk5201Anims),
         1,
     },
     {
@@ -1661,7 +1661,7 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5200Palette,
         gTalk5202Frames,
         gTalk5202Anims,
-        2,
+        ARRAY_COUNT(gTalk5202Anims),
         1,
     },
     {
@@ -1669,7 +1669,7 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5200Palette,
         gTalk5203Frames,
         gTalk5203Anims,
-        2,
+        ARRAY_COUNT(gTalk5203Anims),
         1,
     },
     {
@@ -1677,7 +1677,7 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5200Palette,
         gTalk5204Frames,
         gTalk5204Anims,
-        2,
+        ARRAY_COUNT(gTalk5204Anims),
         1,
     },
 };
@@ -1688,7 +1688,7 @@ static const MsgFaceAnim sTalk54FaceAnims[3] = {
         gTalk5400Palette,
         gTalk5400Frames,
         gTalk5400Anims,
-        2,
+        ARRAY_COUNT(gTalk5400Anims),
         1,
     },
     {
@@ -1696,7 +1696,7 @@ static const MsgFaceAnim sTalk54FaceAnims[3] = {
         gTalk5400Palette,
         gTalk5401Frames,
         gTalk5401Anims,
-        2,
+        ARRAY_COUNT(gTalk5401Anims),
         1,
     },
     {
@@ -1704,7 +1704,7 @@ static const MsgFaceAnim sTalk54FaceAnims[3] = {
         gTalk5400Palette,
         gTalk5402Frames,
         gTalk5402Anims,
-        2,
+        ARRAY_COUNT(gTalk5402Anims),
         1,
     },
 };
@@ -1715,7 +1715,7 @@ static const MsgFaceAnim sTalk49FaceAnims[4] = {
         gTalk4900Palette,
         gTalk4900Frames,
         gTalk4900Anims,
-        8,
+        ARRAY_COUNT(gTalk4900Anims),
         1,
     },
     {
@@ -1750,7 +1750,7 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4800Palette,
         gTalk4800Frames,
         gTalk4800Anims,
-        2,
+        ARRAY_COUNT(gTalk4800Anims),
         1,
     },
     {
@@ -1758,7 +1758,7 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4800Palette,
         gTalk4801Frames,
         gTalk4801Anims,
-        2,
+        ARRAY_COUNT(gTalk4801Anims),
         1,
     },
     {
@@ -1766,7 +1766,7 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4800Palette,
         gTalk4802Frames,
         gTalk4802Anims,
-        2,
+        ARRAY_COUNT(gTalk4802Anims),
         1,
     },
     {
@@ -1774,7 +1774,7 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4800Palette,
         gTalk4803Frames,
         gTalk4803Anims,
-        2,
+        ARRAY_COUNT(gTalk4803Anims),
         1,
     },
     {
@@ -1782,7 +1782,7 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4800Palette,
         gTalk4804Frames,
         gTalk4804Anims,
-        2,
+        ARRAY_COUNT(gTalk4804Anims),
         1,
     },
 };
@@ -1793,7 +1793,7 @@ static const MsgFaceAnim sTalk56FaceAnims[3] = {
         gTalk5600Palette,
         gTalk5600Frames,
         gTalk5600Anims,
-        4,
+        ARRAY_COUNT(gTalk5600Anims),
         1,
     },
     {
@@ -1809,7 +1809,7 @@ static const MsgFaceAnim sTalk56FaceAnims[3] = {
         gTalk5600Palette,
         gTalk5602Frames,
         gTalk5602Anims,
-        2,
+        ARRAY_COUNT(gTalk5602Anims),
         1,
     },
 };
@@ -1820,7 +1820,7 @@ static const MsgFaceAnim sTalk58FaceAnims[2] = {
         gTalk5800Palette,
         gTalk5800Frames,
         gTalk5800Anims,
-        4,
+        ARRAY_COUNT(gTalk5800Anims),
         1,
     },
     {
@@ -1839,7 +1839,7 @@ static const MsgFaceAnim sTalk59FaceAnims[3] = {
         gTalk5900Palette,
         gTalk5900Frames,
         gTalk5900Anims,
-        6,
+        ARRAY_COUNT(gTalk5900Anims),
         1,
     },
     {
@@ -1865,7 +1865,7 @@ static const MsgFaceAnim sTalk60FaceAnims = {
     gTalk6000Palette,
     gTalk6000Frames,
     gTalk6000Anims,
-    2,
+    ARRAY_COUNT(gTalk6000Anims),
     1,
 };
 
@@ -1875,7 +1875,7 @@ static const MsgFaceAnim sTalk61FaceAnims[3] = {
         gTalk6100Palette,
         gTalk6100Frames,
         gTalk6100Anims,
-        6,
+        ARRAY_COUNT(gTalk6100Anims),
         1,
     },
     {
@@ -1901,7 +1901,7 @@ static const MsgFaceAnim sTalk34FaceAnims = {
     gTalk3400Palette,
     gTalk3400Frames,
     gTalk3400Anims,
-    2,
+    ARRAY_COUNT(gTalk3400Anims),
     1,
 };
 
@@ -1911,7 +1911,7 @@ static const MsgFaceAnim sTalk35FaceAnims[3] = {
         gTalk3500Palette,
         gTalk3500Frames,
         gTalk3500Anims,
-        2,
+        ARRAY_COUNT(gTalk3500Anims),
         1,
     },
     {
@@ -1919,7 +1919,7 @@ static const MsgFaceAnim sTalk35FaceAnims[3] = {
         gTalk3500Palette,
         gTalk3501Frames,
         gTalk3501Anims,
-        2,
+        ARRAY_COUNT(gTalk3501Anims),
         1,
     },
     {
@@ -1927,7 +1927,7 @@ static const MsgFaceAnim sTalk35FaceAnims[3] = {
         gTalk3500Palette,
         gTalk3502Frames,
         gTalk3502Anims,
-        2,
+        ARRAY_COUNT(gTalk3502Anims),
         1,
     },
 };
@@ -1938,7 +1938,7 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5300Palette,
         gTalk5300Frames,
         gTalk5300Anims,
-        2,
+        ARRAY_COUNT(gTalk5300Anims),
         1,
     },
     {
@@ -1946,7 +1946,7 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5300Palette,
         gTalk5301Frames,
         gTalk5301Anims,
-        2,
+        ARRAY_COUNT(gTalk5301Anims),
         1,
     },
     {
@@ -1954,7 +1954,7 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5300Palette,
         gTalk5302Frames,
         gTalk5302Anims,
-        2,
+        ARRAY_COUNT(gTalk5302Anims),
         1,
     },
     {
@@ -1962,7 +1962,7 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5300Palette,
         gTalk5303Frames,
         gTalk5303Anims,
-        2,
+        ARRAY_COUNT(gTalk5303Anims),
         1,
     },
     {
@@ -1970,7 +1970,7 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5300Palette,
         gTalk5304Frames,
         gTalk5304Anims,
-        2,
+        ARRAY_COUNT(gTalk5304Anims),
         1,
     },
 };
@@ -1981,7 +1981,7 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2900Palette,
         gTalk2900Frames,
         gTalk2900Anims,
-        2,
+        ARRAY_COUNT(gTalk2900Anims),
         1,
     },
     {
@@ -1989,7 +1989,7 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2900Palette,
         gTalk2901Frames,
         gTalk2901Anims,
-        2,
+        ARRAY_COUNT(gTalk2901Anims),
         1,
     },
     {
@@ -1997,7 +1997,7 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2900Palette,
         gTalk2902Frames,
         gTalk2902Anims,
-        2,
+        ARRAY_COUNT(gTalk2902Anims),
         1,
     },
     {
@@ -2005,7 +2005,7 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2900Palette,
         gTalk2903Frames,
         gTalk2903Anims,
-        2,
+        ARRAY_COUNT(gTalk2903Anims),
         1,
     },
     {
@@ -2013,7 +2013,7 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2900Palette,
         gTalk2904Frames,
         gTalk2904Anims,
-        2,
+        ARRAY_COUNT(gTalk2904Anims),
         1,
     },
 };
@@ -2024,7 +2024,7 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2800Palette,
         gTalk2800Frames,
         gTalk2800Anims,
-        2,
+        ARRAY_COUNT(gTalk2800Anims),
         1,
     },
     {
@@ -2032,7 +2032,7 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2800Palette,
         gTalk2801Frames,
         gTalk2801Anims,
-        2,
+        ARRAY_COUNT(gTalk2801Anims),
         1,
     },
     {
@@ -2040,7 +2040,7 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2800Palette,
         gTalk2802Frames,
         gTalk2802Anims,
-        2,
+        ARRAY_COUNT(gTalk2802Anims),
         1,
     },
     {
@@ -2048,7 +2048,7 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2800Palette,
         gTalk2803Frames,
         gTalk2803Anims,
-        2,
+        ARRAY_COUNT(gTalk2803Anims),
         1,
     },
     {
@@ -2056,7 +2056,7 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2800Palette,
         gTalk2804Frames,
         gTalk2804Anims,
-        2,
+        ARRAY_COUNT(gTalk2804Anims),
         1,
     },
     {
@@ -2064,7 +2064,7 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2800Palette,
         gTalk2805Frames,
         gTalk2805Anims,
-        2,
+        ARRAY_COUNT(gTalk2805Anims),
         1,
     },
 };
@@ -2075,7 +2075,7 @@ static const MsgFaceAnim sTalk32FaceAnims[3] = {
         gTalk3200Palette,
         gTalk3200Frames,
         gTalk3200Anims,
-        2,
+        ARRAY_COUNT(gTalk3200Anims),
         1,
     },
     {
@@ -2083,7 +2083,7 @@ static const MsgFaceAnim sTalk32FaceAnims[3] = {
         gTalk3200Palette,
         gTalk3201Frames,
         gTalk3201Anims,
-        2,
+        ARRAY_COUNT(gTalk3201Anims),
         1,
     },
     {
@@ -2091,7 +2091,7 @@ static const MsgFaceAnim sTalk32FaceAnims[3] = {
         gTalk3200Palette,
         gTalk3202Frames,
         gTalk3202Anims,
-        2,
+        ARRAY_COUNT(gTalk3202Anims),
         1,
     },
 };
@@ -2102,7 +2102,7 @@ static const MsgFaceAnim sTalk57FaceAnims[3] = {
         gTalk5700Palette,
         gTalk5700Frames,
         gTalk5700Anims,
-        4,
+        ARRAY_COUNT(gTalk5700Anims),
         1,
     },
     {
@@ -2118,7 +2118,7 @@ static const MsgFaceAnim sTalk57FaceAnims[3] = {
         gTalk5700Palette,
         gTalk5702Frames,
         gTalk5702Anims,
-        2,
+        ARRAY_COUNT(gTalk5702Anims),
         1,
     },
 };
@@ -2129,7 +2129,7 @@ static const MsgFaceAnim sTalk27FaceAnims[5] = {
         gTalk2700Palette,
         gTalk2700Frames,
         gTalk2700Anims,
-        10,
+        ARRAY_COUNT(gTalk2700Anims),
         1,
     },
     {

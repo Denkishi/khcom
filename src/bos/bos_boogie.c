@@ -48,12 +48,12 @@ static const StatusAnimDef sBosBoogieAnimDefs[9] = {
 };
 
 static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gBosBoogieIdleFrames, 7 },
-    { gBosBoogieWalkFrames, 8 },
-    { gBosBoogieDiceThrowFrames, 9 },
-    { gBosBoogieHurtFrames, 5 },
-    { gBosBoogieAttackHitFrames, 6 },
-    { gBosBoogieDiceFaceFrames, 6 },
+    { gBosBoogieIdleFrames, ARRAY_COUNT(gBosBoogieIdleFrames) },
+    { gBosBoogieWalkFrames, ARRAY_COUNT(gBosBoogieWalkFrames) },
+    { gBosBoogieDiceThrowFrames, ARRAY_COUNT(gBosBoogieDiceThrowFrames) },
+    { gBosBoogieHurtFrames, ARRAY_COUNT(gBosBoogieHurtFrames) },
+    { gBosBoogieAttackHitFrames, ARRAY_COUNT(gBosBoogieAttackHitFrames) },
+    { gBosBoogieDiceFaceFrames, ARRAY_COUNT(gBosBoogieDiceFaceFrames) },
 };
 
 static const EmyKind sBosBoogieEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };

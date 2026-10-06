@@ -101,11 +101,11 @@ TaskDesc gTaskDescBosBoogieMap = {
 
 static const BosMapanimeFrame sBosBoogieMapanimeFrames[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
 
-static const BosMapanimeDef sBosBoogieMapanimeDef0 = { sBosBoogieMapanimeFrames, 5, gBosBoogieMapanime0Tiles, 0x7C00, 0x0100, 0x0300, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef0 = { sBosBoogieMapanimeFrames, ARRAY_COUNT(sBosBoogieMapanimeFrames), gBosBoogieMapanime0Tiles, 0x7C00, 0x0100, 0x0300, 0 };
 
-static const BosMapanimeDef sBosBoogieMapanimeDef1 = { sBosBoogieMapanimeFrames, 5, gBosBoogieMapanime1Tiles, 0x7D00, 0x0100, 0x0300, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef1 = { sBosBoogieMapanimeFrames, ARRAY_COUNT(sBosBoogieMapanimeFrames), gBosBoogieMapanime1Tiles, 0x7D00, 0x0100, 0x0300, 0 };
 
-static const BosMapanimeDef sBosBoogieMapanimeDef2 = { sBosBoogieMapanimeFrames, 5, gBosBoogieMapanime2Tiles, 0x7E00, 0x0100, 0x0300, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef2 = { sBosBoogieMapanimeFrames, ARRAY_COUNT(sBosBoogieMapanimeFrames), gBosBoogieMapanime2Tiles, 0x7E00, 0x0100, 0x0300, 0 };
 
 TaskDesc gTaskDescBosBoogieMapanime = {
     "task_bos_boogie_mapanime",

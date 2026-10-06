@@ -25,6 +25,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "map_types.h"
 
 u16 gEnemyTileCounts[54] = {
     32, 32, 32, 32, 32, 34, 28, 24, 32,
@@ -249,7 +250,7 @@ void EmyFinishSpawn(EmyWork* work) {
     if (gGameState.flags & GAME_FLAG_FIRST_STRIKE) {
         actor->flags |= (BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_STUN_PENDING);
 
-        if (gGameState.roomEffect == 3) {
+        if (gGameState.roomEffect == ROOM_EFFECT_STRONG_INITIATIVE) {
             actor->damage = (actor->maxHp * 204) >> 8;
         } else {
             actor->damage = (actor->maxHp * 25) >> 8;
@@ -775,7 +776,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
 
             DropEnemyPrizes(actor);
 
-            if (gGameState.roomEffect == 6) {
+            if (gGameState.roomEffect == ROOM_EFFECT_PREMIUM_ROOM) {
                 if (GetRandom() % 10 == 0) {
                     TryDropPremireCard(actor);
                 }

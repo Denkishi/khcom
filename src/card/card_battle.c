@@ -38,6 +38,7 @@
 #include "enemy_ids.h"
 #include "card_ids.h"
 #include "mode_riku_tutorial.h"
+#include "map_types.h"
 
 static CardDisplayWork* sSoraSelectedCard;
 static u32 sSoraCardRequest;
@@ -5488,7 +5489,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
         work->value = work->cardDef->value;
 
         switch (gGameState.roomEffect) {
-        case 7:
+        case ROOM_EFFECT_SORCEROUS_WAKING:
             if (work->cardDef->category == CARD_CATEGORY_MAGIC) {
                 work->value += 2;
 
@@ -5500,7 +5501,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
             }
 
             break;
-        case 8:
+        case ROOM_EFFECT_ALCHEMIC_WAKING:
             if (work->cardDef->category == CARD_CATEGORY_ITEM && (work->cardDef->flags & CARD_DEF_FLAG_ITEM)) {
                 work->value += 2;
 
@@ -5512,7 +5513,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
             }
 
             break;
-        case 9:
+        case ROOM_EFFECT_MARTIAL_WAKING:
             if (work->cardDef->category == CARD_CATEGORY_ATTACK) {
                 work->value += 2;
 

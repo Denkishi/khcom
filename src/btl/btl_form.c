@@ -15,6 +15,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "enemy_tile_counts.h"
+#include "map_types.h"
 
 TaskDesc gTaskDescBtlForm = {
     "task_btl_form",
@@ -90,7 +91,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
         if (work->waitTimer-- <= 0) {
             work->flags |= BTL_FORM_FLAG_WAIT_NEXT_ENTRY;
 
-            if (gGameState.roomEffect != 4) {
+            if (gGameState.roomEffect != ROOM_EFFECT_LASTING_DAZE) {
                 gGameState.flags &= ~GAME_FLAG_FIRST_STRIKE;
             }
 

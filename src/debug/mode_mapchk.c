@@ -532,7 +532,7 @@ void Mode_MapChk_0() {
     sMapChkWork->floor = 1;
     sMapChkWork->form = 0;
     sMapChkWork->useParams = FALSE;
-    gGameState.roomEffect = 0;
+    gGameState.roomEffect = ROOM_EFFECT_NONE;
     LoadMapForm(sMapChkWork->form);
     sMapChkForm = &gMapForm;
     SetBgMode0();

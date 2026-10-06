@@ -24,6 +24,7 @@
 #include "card_enemy.h"
 #include "battle.h"
 #include "card_label_data.h"
+#include "map_types.h"
 
 static s16 sBossCardValue;
 
@@ -542,7 +543,7 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->value = work->cardDef->value;
 
     switch (gGameState.roomEffect) {
-    case 1:
+    case ROOM_EFFECT_ALMIGHTY_DARKNESS:
         work->value += 2;
 
         if (work->value > 9) {
@@ -551,7 +552,7 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
 
         work->valueModified = TRUE;
         break;
-    case 2:
+    case ROOM_EFFECT_FEEBLE_DARKNESS:
         if (work->value > 2) {
             work->value -= 2;
         } else {

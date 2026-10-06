@@ -16,6 +16,7 @@
 #include "mode_chkbtl_api.h"
 #include "world_types.h"
 #include "jiminy_records_index_data.h"
+#include "map_types.h"
 
 void InitGameState() {
     CpuFill32(0, &gGameState, sizeof(GameState));
@@ -32,7 +33,7 @@ void InitGameState() {
     ResetMapFloors();
     gGameState.hp = gGameState.progression.maxHp;
     gGameState.fieldAngle = 0x2D;
-    gGameState.roomEffect = 0;
+    gGameState.roomEffect = ROOM_EFFECT_NONE;
 }
 
 void ClearFieldResume() {

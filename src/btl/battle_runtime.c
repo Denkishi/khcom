@@ -54,6 +54,7 @@
 #include "gba/defines.h"
 #include "card.h"
 #include "card_ids.h"
+#include "map_types.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);
@@ -887,7 +888,7 @@ void UpdateBattleState() {
             gBtlWork->phase = BTL_PHASE_IDLE;
             gBtlWork->phaseStep = 0;
 
-            if (gGameState.roomEffect == 5) {
+            if (gGameState.roomEffect == ROOM_EFFECT_MEETING_GROUND) {
                 DropFriendCard(0x10000, gBtlWork->actor->y, gBtlWork->actor->z - 0x7800);
             }
         }
@@ -1847,7 +1848,8 @@ void DropEnemyPrizes(BtlObj* obj) {
             } else if (chance == 0) {
                 enemyCard = FALSE;
             } else {
-                if (gGameState.roomEffect == 1 || gGameState.roomEffect == 10) {
+                if (gGameState.roomEffect == ROOM_EFFECT_ALMIGHTY_DARKNESS ||
+                    gGameState.roomEffect == ROOM_EFFECT_ENEMY_CARD_DROPS) {
                     chance = (chance * 5 * 128) >> 8;
                 }
 

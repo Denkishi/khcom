@@ -843,7 +843,7 @@ void EnterExitHall() {
     if (eventId != MAP_EVENT_NONE) {
         gGameState.world = 0;
         gGameState.battleStage = BATTLE_STAGE_CASTLE_OBLIVION;
-        gGameState.roomEffect = 0;
+        gGameState.roomEffect = ROOM_EFFECT_NONE;
 
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             InitRikuDeckForWorld(0);

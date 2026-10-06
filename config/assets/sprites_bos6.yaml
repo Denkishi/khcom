@@ -35,7 +35,7 @@ objects:
     end: 0x09D59A74
   - name: sprites_bos6_palettes_1.s
     start: 0x09D69374
-    end: 0x09D694F4
+    end: 0x09D69594
   - name: sprites_bos6_palettes_2.s
     start: 0x09D69594
     end: 0x09D695F4
@@ -64,7 +64,7 @@ objects:
     end: 0x09D32F80
   - name: sprites_bos6_palettes_1.s
     start: 0x09D42880
-    end: 0x09D42A00
+    end: 0x09D42AA0
   - name: sprites_bos6_palettes_2.s
     start: 0x09D42AA0
     end: 0x09D42B00
@@ -93,7 +93,7 @@ objects:
     end: 0x09DC59A0
   - name: sprites_bos6_palettes_1.s
     start: 0x09DD92A0
-    end: 0x09DD9420
+    end: 0x09DD94C0
   - name: sprites_bos6_palettes_2.s
     start: 0x09DD94C0
     end: 0x09DD9520
@@ -3400,17 +3400,18 @@ entries:
   eu:
     address: 0x09DD9360
     size: 32
-- name: gBosLstBgPalette
+- name: gBosLstBgPalettes
   format: palette
+  shape: [10, 16]
   us:
     address: 0x09D69454
-    size: 160
+    size: 320
   jp:
     address: 0x09D42960
-    size: 160
+    size: 320
   eu:
     address: 0x09DD9380
-    size: 160
+    size: 320
 - name: gBosLstObjPalette
   format: palette
   us:

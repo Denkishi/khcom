@@ -35,7 +35,7 @@
 static const EmyKind sBosLstEmyKind = { ENEMY_MARLUXIA_2, 256, 8, 8, 0, 128, 0 };
 
 static const BattleBackgroundDef sBosLstBattleBackgroundDef = {
-    gBosLstBgTiles, sizeof(gBosLstBgTiles), gBosLstBgPalette, 0x140, { gBosLstBgMap, gBosLstBgMap, gBosLstBgMap, gBosLstBgMap }
+    gBosLstBgTiles, sizeof(gBosLstBgTiles), gBosLstBgPalettes, sizeof(gBosLstBgPalettes), { gBosLstBgMap, gBosLstBgMap, gBosLstBgMap, gBosLstBgMap }
 };
 
 static const LstAnimDef sLstAnimDefs[8] = {
@@ -2713,7 +2713,7 @@ void task_bos_lst_2(BosLstWork* work) {
 
     if ((s16)work->flash != (s16)work->prevFlash) {
         if ((s16)work->flash == 0) {
-            LoadPalette(gBosLstBgPalette, (void*)PLTT, 0x60);
+            LoadPalette(gBosLstBgPalettes, (void*)PLTT, 3 * sizeof(gBosLstBgPalettes[0]));
             LoadPalette(gBosLstObjPalette, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), sizeof(gBosLstObjPalette));
         } else {
             LoadPalette(gHitFlashPalette, (void*)PLTT, sizeof(gHitFlashPalette));

@@ -501,7 +501,6 @@ sprites_bos6_maps_2.s
 sprites_staff_roll_maps.s
 sprite_palettes_18.s
 sprites_bos6_palettes_1.s
-sprites_bos7_palettes.s
 sprites_bos6_palettes_2.s
 sprites_staff_roll_palettes.s
 sprite_palettes_19.s

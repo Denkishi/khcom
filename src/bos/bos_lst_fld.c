@@ -704,7 +704,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     }
 
     if (work->fadeStep <= 63) {
-        BosLstFldDarkenPalette(work->paletteBuf, gBosLstFldPalette, ARRAY_COUNT(gBosLstFldPalette), sBosLstFldFadeLevels[work->fadeStep]);
+        BosLstFldDarkenPalette(work->paletteBuf, gBosLstBgPalettes[5], ARRAY_COUNT(work->paletteBuf), sBosLstFldFadeLevels[work->fadeStep]);
         LoadPalette(work->paletteBuf, (void*)(BG_PLTT + 5 * PLTT_SIZE_4BPP), sizeof(work->paletteBuf));
         work->fadeStep++;
     }

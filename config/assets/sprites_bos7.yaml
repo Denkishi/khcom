@@ -30,9 +30,6 @@ objects:
   - name: sprites_bos7_maps.s
     start: 0x09D4BA74
     end: 0x09D4DA74
-  - name: sprites_bos7_palettes.s
-    start: 0x09D694F4
-    end: 0x09D69594
   jp:
   - name: sprites_bos7_frames_1.s
     start: 0x09C34B84
@@ -50,9 +47,6 @@ objects:
   - name: sprites_bos7_maps.s
     start: 0x09D24F80
     end: 0x09D26F80
-  - name: sprites_bos7_palettes.s
-    start: 0x09D42A00
-    end: 0x09D42AA0
   eu:
   - name: sprites_bos7_frames_1.s
     start: 0x09CBA1A8
@@ -70,9 +64,6 @@ objects:
   - name: sprites_bos7_maps.s
     start: 0x09DB79A0
     end: 0x09DB99A0
-  - name: sprites_bos7_palettes.s
-    start: 0x09DD9420
-    end: 0x09DD94C0
 entries:
 - name: gBosLstEdgFrames
   record: SpriteTable
@@ -680,14 +671,3 @@ entries:
   eu:
     address: 0x09DB91A0
     size: 2048
-- name: gBosLstFldPalette
-  format: palette
-  us:
-    address: 0x09D694F4
-    size: 160
-  jp:
-    address: 0x09D42A00
-    size: 160
-  eu:
-    address: 0x09DD9420
-    size: 160

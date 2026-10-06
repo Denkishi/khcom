@@ -358,80 +358,80 @@ void BackdropFadeUpdate() {
     }
 }
 
-void BackdropFadeStartIn(u32 a, u16 b) {
+void BackdropFadeStartIn(u32 mode, u16 frames) {
     sBackdropFadeActive = 1;
-    sBackdropFadeTimer = b;
+    sBackdropFadeTimer = frames;
     sBackdropFadeAmount = 0x1F00;
     sBackdropFadeTarget = 0;
     sBackdropFadeLastAmount = 0;
-    sBackdropFadeMode = a;
+    sBackdropFadeMode = mode;
 }
 
-void BackdropFadeStartOut(u32 a, u16 b) {
+void BackdropFadeStartOut(u32 mode, u16 frames) {
     sBackdropFadeActive = 1;
-    sBackdropFadeTimer = b;
+    sBackdropFadeTimer = frames;
     sBackdropFadeAmount = 0;
     sBackdropFadeTarget = 0x1F00;
     sBackdropFadeLastAmount = 0;
-    sBackdropFadeMode = a;
+    sBackdropFadeMode = mode;
 }
 
-void BackdropFadeToOriginal(u32 a, u16 b) {
+void BackdropFadeToOriginal(u32 mode, u16 frames) {
     sBackdropFadeActive = 1;
-    sBackdropFadeTimer = b;
+    sBackdropFadeTimer = frames;
     sBackdropFadeTarget = 0;
-    sBackdropFadeMode = a;
+    sBackdropFadeMode = mode;
 }
 
-void BackdropFadeToAmount(u32 a, u16 b, u16 c) {
+void BackdropFadeToAmount(u32 mode, u16 amount, u16 frames) {
     sBackdropFadeActive = 1;
-    sBackdropFadeTimer = c;
-    sBackdropFadeTarget = b << 8;
-    sBackdropFadeMode = a;
+    sBackdropFadeTimer = frames;
+    sBackdropFadeTarget = amount << 8;
+    sBackdropFadeMode = mode;
 }
 
 u8 BackdropFadeIsActive() {
     return sBackdropFadeActive;
 }
 
-void BackdropFadeFromAmount(u32 a, u16 b, u16 c) {
+void BackdropFadeFromAmount(u32 mode, u16 amount, u16 frames) {
     sBackdropFadeActive = 1;
-    sBackdropFadeTimer = c;
-    sBackdropFadeAmount = b << 8;
+    sBackdropFadeTimer = frames;
+    sBackdropFadeAmount = amount << 8;
     sBackdropFadeLastAmount = 0;
     sBackdropFadeTarget = 0;
-    sBackdropFadeMode = a;
+    sBackdropFadeMode = mode;
 }
 
-void SetPooAttackPoint(s32 a, s32 b, s32 c) {
+void SetPooAttackPoint(s32 x, s32 y, s32 z) {
     gPooAttackActive = 1;
-    sPooAttackX = a;
-    sPooAttackY = b * 2;
-    sPooAttackZ = c;
+    sPooAttackX = x;
+    sPooAttackY = y * 2;
+    sPooAttackZ = z;
 }
 
-u8 PooAttackHitsCollider(Collider* p) {
+u8 PooAttackHitsCollider(Collider* collider) {
     s32 lim;
     s32 dx;
     s32 dy;
     s32 dz;
 
-    lim = p->radius + 0x1400;
-    dx = sPooAttackX - p->x;
+    lim = collider->radius + 0x1400;
+    dx = sPooAttackX - collider->x;
 
     if (dx < 0) {
-        dx = p->x - sPooAttackX;
+        dx = collider->x - sPooAttackX;
     }
 
-    dy = sPooAttackY - p->y;
+    dy = sPooAttackY - collider->y;
 
     if (dy < 0) {
-        dy = p->y - sPooAttackY;
+        dy = collider->y - sPooAttackY;
     }
 
-    dz = sPooAttackZ - p->z;
+    dz = sPooAttackZ - collider->z;
 
-    if (dx < lim && dy < lim && dz <= 0x1FFF && -dz < p->height) {
+    if (dx < lim && dy < lim && dz <= 0x1FFF && -dz < collider->height) {
         return 1;
     }
 
@@ -638,11 +638,11 @@ void mode_pooh_2() {
     m4aSongNumStop(SONG_BG_POO);
 }
 
-void ExitPoohMode(u32 a) {
+void ExitPoohMode(u32 event) {
     s32 i;
 
     if (!sModePoohExiting) {
-        sModePoohExitEvent = a;
+        sModePoohExitEvent = event;
 
         for (i = 0; i <= 31; i++) {
             FadeSetPaletteExcluded(i, 0);
@@ -654,14 +654,14 @@ void ExitPoohMode(u32 a) {
     }
 }
 
-void OpenPoohModeMessage(u16 a) {
-    sModePoohMessage = a;
+void OpenPoohModeMessage(u16 message) {
+    sModePoohMessage = message;
 
-    if (a == 0xFFFD || a == 0xFFFE) {
-        a = 0x45;
+    if (message == 0xFFFD || message == 0xFFFE) {
+        message = 0x45;
     }
 
-    CreateCardMessageTask(&sModePoohMessageTasks, 0, a);
+    CreateCardMessageTask(&sModePoohMessageTasks, 0, message);
 }
 
 u16 SpawnPooPrizes(u8 kind, u8 count, s32 x, s32 y, s32 z) {
@@ -705,8 +705,8 @@ u16 CountPooPrizes() {
     return n;
 }
 
-void SetPooMapBeeVisible(u8 a) {
-    sPooMapBeeVisible = a;
+void SetPooMapBeeVisible(u8 visible) {
+    sPooMapBeeVisible = visible;
 }
 
 u8 IsPooMapBeeVisible() {
@@ -865,8 +865,8 @@ void SetPoohDir3(PoohWork* work) {
     }
 }
 
-u8 IsAngleFacingRight(u8 a) {
-    switch (((a + 16) & 0xFF) >> 5) {
+u8 IsAngleFacingRight(u8 angle) {
+    switch (((angle + 16) & 0xFF) >> 5) {
     case 1:
     case 2:
     case 3:

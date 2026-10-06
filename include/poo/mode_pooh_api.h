@@ -6,17 +6,17 @@
 struct Collider;
 struct PoohWork;
 
-void BackdropFadeStartOut(u32 a, u16 b);
+void BackdropFadeStartOut(u32 mode, u16 frames);
 void BackdropFadeReset();
 void BackdropFadeSetColor(u16 r, u16 g, u16 b);
-void BackdropFadeStartIn(u32 a, u16 b);
+void BackdropFadeStartIn(u32 mode, u16 frames);
 void BackdropFadeUpdate();
-void SetPooAttackPoint(s32 a, s32 b, s32 c);
-u8 PooAttackHitsCollider(struct Collider* p);
-void ExitPoohMode(u32 a);
-void OpenPoohModeMessage(u16 a);
+void SetPooAttackPoint(s32 x, s32 y, s32 z);
+u8 PooAttackHitsCollider(struct Collider* collider);
+void ExitPoohMode(u32 event);
+void OpenPoohModeMessage(u16 message);
 u16 SpawnPooPrizes(u8 kind, u8 count, s32 x, s32 y, s32 z);
-void SetPooMapBeeVisible(u8 a);
+void SetPooMapBeeVisible(u8 visible);
 u8 IsPooMapBeeVisible();
 void SetPoohDir5Right(struct PoohWork* work);
 void SetPoohAnimation(struct PoohWork* work, u32 anim);

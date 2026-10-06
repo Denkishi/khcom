@@ -49,11 +49,11 @@ void mode_chkeff_0() {
 #ifdef VERSION_EU
     LoadBgTilesLz77(1, gDebugCheckerBgTiles);
     LoadBgMapLz77(1, gDebugCheckerBgMap);
-    LoadBgPalette(1, gDebugCheckerBgPalette, 0x20);
+    LoadBgPalette(1, gDebugCheckerBgPalette, sizeof(gDebugCheckerBgPalette));
 #else
-    LoadBgTiles(1, gDebugCheckerBgTiles, 0x7C20);
-    LoadBgPalette(1, gDebugCheckerBgPalette, 0x20);
-    LoadBgMap(1, gDebugCheckerBgMap, 0x800);
+    LoadBgTiles(1, gDebugCheckerBgTiles, sizeof(gDebugCheckerBgTiles));
+    LoadBgPalette(1, gDebugCheckerBgPalette, sizeof(gDebugCheckerBgPalette));
+    LoadBgMap(1, gDebugCheckerBgMap, sizeof(gDebugCheckerBgMap));
 #endif
     FadeSetPaletteExcluded(8, TRUE);
     FadeSetPaletteExcluded(9, TRUE);

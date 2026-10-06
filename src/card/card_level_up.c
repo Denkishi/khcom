@@ -156,8 +156,8 @@ void Level_Up_0(LevelUpWork* work) {
         SetupBg(2, 0, 12, 0);
         SetupBg(1, 2, 24, 0);
         SetupBg(0, 2, 25, 0);
-        LoadBgMap(1, gDefaultBgMap, 0x800);
-        LoadBgMap(0, gDefaultBgMap, 0x800);
+        LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
+        LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
         EnableBg(2);
         DisableBg(1);
         DisableBg(0);
@@ -175,24 +175,24 @@ void Level_Up_0(LevelUpWork* work) {
         case BATTLE_URSULA:
             SetBgSize(0, BGCNT_TXT256x256);
             SetupBg(0, 0, 26, 0);
-            LoadBgMap(0, gDefaultBgMap, 0x800);
+            LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
             DisableBg(0);
             break;
         case BATTLE_PARASITE_CAGE:
             SetBgSize(1, BGCNT_TXT256x256);
             SetupBg(1, 1, 24, 0);
-            LoadBgMap(1, gDefaultBgMap, 0x800);
+            LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
             DisableBg(1);
             break;
         case BATTLE_GUARD_ARMOR:
             SetBgSize(1, BGCNT_TXT256x256);
             SetupBg(1, 2, 26, 0);
-            LoadBgMap(1, gDefaultBgMap, 0x800);
+            LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
             DisableBg(1);
             break;
         default:
             SetBgSize(1, BGCNT_TXT256x256);
-            LoadBgMap(1, gDefaultBgMap, 0x800);
+            LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
             DisableBg(1);
             break;
         }

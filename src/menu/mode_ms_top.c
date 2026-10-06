@@ -286,7 +286,7 @@ void MsTopHandleInput() {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gMsTopBgMap, 0x500);
+        LoadBgMap(2, gMsTopBgMap, sizeof(gMsTopBgMap));
 #endif
         sMsTopSteps = 16;
         sMsTopState = MS_TOP_STATE_TITLE_OUT;
@@ -297,7 +297,7 @@ void MsTopHandleInput() {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gMsTopBgMap, 0x500);
+        LoadBgMap(2, gMsTopBgMap, sizeof(gMsTopBgMap));
 #endif
         FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
@@ -438,27 +438,23 @@ void mode_ms_top_0(u32 flags) {
     sMsTopPendingMessage = -1;
     sMsTopPendingOptionMessage = -1;
     sMsTopMessageStarted = FALSE;
-    LoadBgPalette(0, gMsTopBgPalette, 0x60);
-#ifdef VERSION_EU
-    LoadBgTiles(0, gMsTopBgTiles, 0x24C0);
-#else
-    LoadBgTiles(0, gMsTopBgTiles, 0x19A0);
-#endif
+    LoadBgPalette(0, gMsTopBgPalette, sizeof(gMsTopBgPalette));
+    LoadBgTiles(0, gMsTopBgTiles, sizeof(gMsTopBgTiles));
     LoadDecimalDigitTiles(GetMooglePoints(), gMsTopPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
-    LoadBgMap(0, gMsTopRoomBgMap, 0x500);
-    LoadBgMap(1, gMsTopSpotlightBgMap, 0x500);
+    LoadBgMap(0, gMsTopRoomBgMap, sizeof(gMsTopRoomBgMap));
+    LoadBgMap(1, gMsTopSpotlightBgMap, sizeof(gMsTopSpotlightBgMap));
 
     if (sMsTopBarVisible) {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gMsTopBgMap, 0x500);
+        LoadBgMap(2, gMsTopBgMap, sizeof(gMsTopBgMap));
 #endif
     } else {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBarBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gMsTopBarBgMap, 0x500);
+        LoadBgMap(2, gMsTopBarBgMap, sizeof(gMsTopBarBgMap));
 #endif
     }
 
@@ -514,7 +510,7 @@ void mode_ms_top_1() {
 #ifdef VERSION_EU
             LoadBgMap(2, sMsTopBarBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(2, gMsTopBarBgMap, 0x500);
+            LoadBgMap(2, gMsTopBarBgMap, sizeof(gMsTopBarBgMap));
 #endif
             sMsTopState = MS_TOP_STATE_CHECK_INTRO;
         }

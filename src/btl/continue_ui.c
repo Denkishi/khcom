@@ -42,10 +42,10 @@ static void* sContinueLanguageBgTiles[5] = {
 void LoadContinueCursorPalette(s32 cursor) {
     switch (cursor) {
     case 0:
-        LoadBgPalette(0, gContinueCursor0BgPalettes, 0x40);
+        LoadBgPalette(0, gContinueCursor0BgPalettes, sizeof(gContinueCursor0BgPalettes));
         break;
     case 1:
-        LoadBgPalette(0, gContinueCursor1BgPalettes, 0x40);
+        LoadBgPalette(0, gContinueCursor1BgPalettes, sizeof(gContinueCursor1BgPalettes));
         break;
     }
 }
@@ -73,7 +73,7 @@ void ContinueSora_0(ContinueWork* work) {
     LoadBgMapLz77(0, gContinueBgMap);
 #else
     LoadBgTiles(0, gContinueBgTiles, MSG_CONT_BG_TILES);
-    LoadBgMap(0, gContinueBgMap, 0x800);
+    LoadBgMap(0, gContinueBgMap, sizeof(gContinueBgMap));
 #endif
     BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
@@ -143,7 +143,7 @@ void ContinueRiku_0(ContinueWork* work) {
     LoadBgMapLz77(0, gContinueBgMap);
 #else
     LoadBgTiles(0, gContinueBgTiles, MSG_CONT_BG_TILES);
-    LoadBgMap(0, gContinueBgMap, 0x800);
+    LoadBgMap(0, gContinueBgMap, sizeof(gContinueBgMap));
 #endif
     BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
@@ -271,8 +271,8 @@ static s32 Continue_1(ContinueWork* work) {
         if (!FadeIsActive()) {
             DisableBg(0);
             DisableBg(2);
-            LoadBgMap(0, gDefaultBgMap, 0x800);
-            LoadBgMap(2, gDefaultBgMap, 0x800);
+            LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
+            LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
             work->state = CONTINUE_STATE_DONE;
         }
     }
@@ -291,8 +291,8 @@ static void Continue_2(ContinueWork* work) {
 static void Continue_3(ContinueWork* work) {
     DisableBg(0);
     DisableBg(2);
-    LoadBgMap(0, gDefaultBgMap, 0x800);
-    LoadBgMap(2, gDefaultBgMap, 0x800);
+    LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
     ReleaseObjTiles(work->tiles2);
     ReleaseObjPalette(work->palette2);
     ReleaseObjPalette(work->palette);

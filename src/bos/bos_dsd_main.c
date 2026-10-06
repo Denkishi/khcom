@@ -1206,8 +1206,8 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
 }
 
 void task_bos_dsd_map_0() {
-    LoadBgTiles(0, gBosDsdBgTiles, 0x8000);
-    LoadBgPalette(0, gBosDsdBgPalette, 0x120);
+    LoadBgTiles(0, gBosDsdBgTiles, sizeof(gBosDsdBgTiles));
+    LoadBgPalette(0, gBosDsdBgPalette, sizeof(gBosDsdBgPalette));
     SetBgMapBlocks(0, gBosDsdMapBlocks, 2, 2);
     gBtlWork->scale = Q_8_8(1);
     gBtlWork->zoomScale = Q_8_8(1);

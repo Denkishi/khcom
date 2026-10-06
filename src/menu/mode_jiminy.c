@@ -1544,7 +1544,7 @@ void mode_jiminy_0() {
     SetBgPriority(2, 0);
     SetBgPriority(3, 0);
 #ifdef VERSION_JP
-    LoadBgTiles(1, gJiminyBgTiles, 0x2DA0);
+    LoadBgTiles(1, gJiminyBgTiles, sizeof(gJiminyBgTiles));
 #elif defined(VERSION_EU)
     LoadBgTiles(1, gJiminyBgTiles, 0x2F60);
 
@@ -1563,11 +1563,11 @@ void mode_jiminy_0() {
         break;
     }
 #else
-    LoadBgTiles(1, gJiminyBgTiles, 0x2E80);
+    LoadBgTiles(1, gJiminyBgTiles, sizeof(gJiminyBgTiles));
 #endif
-    LoadBgPalette(1, gJiminyBgPalette, 0x200);
-    LoadBgMap(1, gJiminyCoverMap, 0x800);
-    LoadBgMap(2, gJiminyMessageMap, 0x800);
+    LoadBgPalette(1, gJiminyBgPalette, sizeof(gJiminyBgPalette));
+    LoadBgMap(1, gJiminyCoverMap, sizeof(gJiminyCoverMap));
+    LoadBgMap(2, gJiminyMessageMap, sizeof(gJiminyMessageMap));
 
 #ifdef VERSION_EU
     if (gLanguage == LANGUAGE_ENGLISH) {
@@ -1707,7 +1707,7 @@ void mode_jiminy_1() {
             flags = sJiminyWork->flags | JIMINY_FLAG_SHOW_TITLE;
             sJiminyWork->flags = flags & ~JIMINY_FLAG_SHOW_CURSOR;
             sJiminyWork->steps = 16;
-            LoadBgMap(1, gJiminyCoverMap, 0x800);
+            LoadBgMap(1, gJiminyCoverMap, sizeof(gJiminyCoverMap));
         }
 
         ApproachValue(&sJiminyWork->x3, -0x8000, sJiminyWork->steps);
@@ -1775,7 +1775,7 @@ void mode_jiminy_1() {
 
         if (sJiminyWork->entry == 0 || sJiminyWork->entry == 14) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                LoadBgMap(1, gJiminyRikuRootMap, 0x800);
+                LoadBgMap(1, gJiminyRikuRootMap, sizeof(gJiminyRikuRootMap));
             } else {
                 LoadBgMap(1, openEntry->map, 0x800);
             }

@@ -4536,8 +4536,8 @@ void Task_MapPrzStock_3(MapPrzStockWork* work) {
 }
 
 void MapMsgInit(MapMsgWork* work, void* text) {
-    LoadBgTiles(0, gMapMsgWinTiles, 0x140);
-    LoadBgMap(0, gMapMsgWinMap, 0x800);
+    LoadBgTiles(0, gMapMsgWinTiles, sizeof(gMapMsgWinTiles));
+    LoadBgMap(0, gMapMsgWinMap, sizeof(gMapMsgWinMap));
     SetBgScroll(0, 0, (u16)-46);
     LoadPalette(gCard00Palette, (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 32);
     InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));

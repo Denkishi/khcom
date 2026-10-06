@@ -273,9 +273,9 @@ void InitPrintLayer(u8 bg) {
 
     SetBgScroll(bg, 0, 0);
     SetBackdropColor(0, 0, 0);
-    LoadBgTiles(bg, gPrintFontTiles, 0x1C00);
-    LoadBgMap(bg, gDefaultBgMap, 0x800);
-    LoadBgPalette(bg, gPrintFontPalettes, 0x80);
+    LoadBgTiles(bg, gPrintFontTiles, sizeof(gPrintFontTiles));
+    LoadBgMap(bg, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgPalette(bg, gPrintFontPalettes, sizeof(gPrintFontPalettes));
     EnableBg(bg);
     sPrintBg = bg;
     lines = &sPrintLines;

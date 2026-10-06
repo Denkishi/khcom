@@ -3518,7 +3518,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
         }
 
         SrollTextInit(&work->text, &sStaffRollTextInit);
-        LoadBgPalette(0, gStaffRollTextPalette, 32);
+        LoadBgPalette(0, gStaffRollTextPalette, sizeof(gStaffRollTextPalette));
         gDispCnt |= 0;
         gWinIn = (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ);
         gWinOut = (WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
@@ -3729,9 +3729,9 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
         DisableBg(1);
         EnableBg(2);
         DisableBg(3);
-        LoadBgTiles(2, gTitleLogoBgTiles, 0x3F00);
+        LoadBgTiles(2, gTitleLogoBgTiles, sizeof(gTitleLogoBgTiles));
         LoadBgMap(2, gTitleLogoBgMap, 0x400);
-        LoadBgPalette(2, gTitleLogoBgPalette, 0xA0);
+        LoadBgPalette(2, gTitleLogoBgPalette, sizeof(gTitleLogoBgPalette));
         SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0x7800, 0x5C00);
         work->creditsState = STAFF_ROLL_TITLE_BG_STATE_FADE_IN;
         work->creditsTimer = 0;
@@ -3891,9 +3891,9 @@ u8 StaffRollShowSoraImage1(StaffRollWork* work) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        LoadBgTiles(0, gStaffRollSoraImage1Tiles, 0x7200);
-        LoadBgMap(0, gStaffRollSoraImage1Map, 0x1000);
-        LoadBgPalette(0, gStaffRollSoraImage1Palette, 0x200);
+        LoadBgTiles(0, gStaffRollSoraImage1Tiles, sizeof(gStaffRollSoraImage1Tiles));
+        LoadBgMap(0, gStaffRollSoraImage1Map, sizeof(gStaffRollSoraImage1Map));
+        LoadBgPalette(0, gStaffRollSoraImage1Palette, sizeof(gStaffRollSoraImage1Palette));
         SetBgScroll(0, 0, 160);
         work->imageState = STAFF_ROLL_SORA_IMAGE1_STATE_FADE_IN;
         work->imageTimer = 0;
@@ -3959,9 +3959,9 @@ u8 StaffRollShowSoraImage2(StaffRollWork* work) {
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
-        LoadBgTiles(0, gStaffRollSoraImage2Tiles, 0x53C0);
-        LoadBgMap(0, gStaffRollSoraImage2Map, 0x800);
-        LoadBgPalette(0, gStaffRollSoraImage2Palette, 0x200);
+        LoadBgTiles(0, gStaffRollSoraImage2Tiles, sizeof(gStaffRollSoraImage2Tiles));
+        LoadBgMap(0, gStaffRollSoraImage2Map, sizeof(gStaffRollSoraImage2Map));
+        LoadBgPalette(0, gStaffRollSoraImage2Palette, sizeof(gStaffRollSoraImage2Palette));
         work->imageState = STAFF_ROLL_IMAGE_STATE_FADE_IN;
         work->imageTimer = 0;
     case STAFF_ROLL_IMAGE_STATE_FADE_IN:
@@ -4038,9 +4038,9 @@ u8 StaffRollShowRikuImage1(StaffRollWork* work) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        LoadBgTiles(0, gStaffRollRikuImage1Tiles, 0x53C0);
-        LoadBgMap(0, gStaffRollRikuImage1Map, 0x800);
-        LoadBgPalette(0, gStaffRollRikuImage1Palette, 0x200);
+        LoadBgTiles(0, gStaffRollRikuImage1Tiles, sizeof(gStaffRollRikuImage1Tiles));
+        LoadBgMap(0, gStaffRollRikuImage1Map, sizeof(gStaffRollRikuImage1Map));
+        LoadBgPalette(0, gStaffRollRikuImage1Palette, sizeof(gStaffRollRikuImage1Palette));
         work->imageState = STAFF_ROLL_IMAGE_STATE_FADE_IN;
         work->imageTimer = 0;
     case STAFF_ROLL_IMAGE_STATE_FADE_IN:
@@ -4091,9 +4091,9 @@ u8 StaffRollShowRikuImage2(StaffRollWork* work) {
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
-        LoadBgTiles(0, gStaffRollRikuImage2Tiles, 0x53C0);
-        LoadBgMap(0, gStaffRollRikuImage2Map, 0x800);
-        LoadBgPalette(0, gStaffRollRikuImage2Palette, 0x200);
+        LoadBgTiles(0, gStaffRollRikuImage2Tiles, sizeof(gStaffRollRikuImage2Tiles));
+        LoadBgMap(0, gStaffRollRikuImage2Map, sizeof(gStaffRollRikuImage2Map));
+        LoadBgPalette(0, gStaffRollRikuImage2Palette, sizeof(gStaffRollRikuImage2Palette));
         work->imageState = STAFF_ROLL_IMAGE_STATE_FADE_IN;
         work->imageTimer = 0;
     case STAFF_ROLL_IMAGE_STATE_FADE_IN:
@@ -4143,9 +4143,9 @@ u8 StaffRollShowRikuImage3(StaffRollWork* work) {
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
-        LoadBgTiles(0, gStaffRollRikuImage3Tiles, 0x53C0);
-        LoadBgMap(0, gStaffRollRikuImage3Map, 0x800);
-        LoadBgPalette(0, gStaffRollRikuImage3Palette, 0x200);
+        LoadBgTiles(0, gStaffRollRikuImage3Tiles, sizeof(gStaffRollRikuImage3Tiles));
+        LoadBgMap(0, gStaffRollRikuImage3Map, sizeof(gStaffRollRikuImage3Map));
+        LoadBgPalette(0, gStaffRollRikuImage3Palette, sizeof(gStaffRollRikuImage3Palette));
         work->imageState = STAFF_ROLL_IMAGE_STATE_FADE_IN;
         work->imageTimer = 0;
     case STAFF_ROLL_IMAGE_STATE_FADE_IN:
@@ -4207,56 +4207,56 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                LoadBgMap(1, gStaffRollRikuEndMap, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndMap, sizeof(gStaffRollRikuEndMap));
                 break;
             case LANGUAGE_FRENCH:
-                LoadBgMap(1, gStaffRollRikuEndFrenchMap, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndFrenchMap, sizeof(gStaffRollRikuEndFrenchMap));
                 break;
             case LANGUAGE_SPANISH:
-                LoadBgMap(1, gStaffRollRikuEndSpanishMap, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndSpanishMap, sizeof(gStaffRollRikuEndSpanishMap));
                 break;
             case LANGUAGE_ITALIAN:
-                LoadBgMap(1, gStaffRollRikuEndItalianMap, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndItalianMap, sizeof(gStaffRollRikuEndItalianMap));
                 break;
             case LANGUAGE_GERMAN:
             default:
-                LoadBgMap(1, gStaffRollRikuEndGermanMap, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndGermanMap, sizeof(gStaffRollRikuEndGermanMap));
                 break;
             }
 
-            LoadBgTiles(1, gStaffRollRikuEndTiles, 0x45C0);
+            LoadBgTiles(1, gStaffRollRikuEndTiles, sizeof(gStaffRollRikuEndTiles));
 #else
-            LoadBgTiles(1, gStaffRollRikuEndTiles, 0x7F40);
-            LoadBgMap(1, gStaffRollRikuEndMap, 0x800);
+            LoadBgTiles(1, gStaffRollRikuEndTiles, sizeof(gStaffRollRikuEndTiles));
+            LoadBgMap(1, gStaffRollRikuEndMap, sizeof(gStaffRollRikuEndMap));
 #endif
-            LoadBgPalette(1, gStaffRollRikuEndPalette, 0x200);
+            LoadBgPalette(1, gStaffRollRikuEndPalette, sizeof(gStaffRollRikuEndPalette));
         } else {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                LoadBgMap(1, gStaffRollSoraEndMap, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndMap, sizeof(gStaffRollSoraEndMap));
                 break;
             case LANGUAGE_FRENCH:
-                LoadBgMap(1, gStaffRollSoraEndFrenchMap, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndFrenchMap, sizeof(gStaffRollSoraEndFrenchMap));
                 break;
             case LANGUAGE_SPANISH:
-                LoadBgMap(1, gStaffRollSoraEndSpanishMap, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndSpanishMap, sizeof(gStaffRollSoraEndSpanishMap));
                 break;
             case LANGUAGE_ITALIAN:
-                LoadBgMap(1, gStaffRollSoraEndItalianMap, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndItalianMap, sizeof(gStaffRollSoraEndItalianMap));
                 break;
             case LANGUAGE_GERMAN:
             default:
-                LoadBgMap(1, gStaffRollSoraEndGermanMap, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndGermanMap, sizeof(gStaffRollSoraEndGermanMap));
                 break;
             }
 
-            LoadBgTiles(1, gStaffRollSoraEndTiles, 0x5140);
+            LoadBgTiles(1, gStaffRollSoraEndTiles, sizeof(gStaffRollSoraEndTiles));
 #else
-            LoadBgTiles(1, gStaffRollSoraEndTiles, 0x5BC0);
-            LoadBgMap(1, gStaffRollSoraEndMap, 0x800);
+            LoadBgTiles(1, gStaffRollSoraEndTiles, sizeof(gStaffRollSoraEndTiles));
+            LoadBgMap(1, gStaffRollSoraEndMap, sizeof(gStaffRollSoraEndMap));
 #endif
-            LoadBgPalette(1, gStaffRollSoraEndPalette, 0x200);
+            LoadBgPalette(1, gStaffRollSoraEndPalette, sizeof(gStaffRollSoraEndPalette));
         }
 
         m4aSongNumStart(SONG_BGM_TITLE);

@@ -6154,9 +6154,9 @@ static void msgwin_0(MsgWinWork* work, u8* arg) {
         work->bg = 2;
     }
 
-    LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
-    LoadBgPalette(work->bg, gMsgwinPalette, 32);
-    LoadBgMap(work->bg, gDefaultBgMap, 0x800);
+    LoadBgTiles(work->bg, gMsgwinTiles, sizeof(gMsgwinTiles));
+    LoadBgPalette(work->bg, gMsgwinPalette, sizeof(gMsgwinPalette));
+    LoadBgMap(work->bg, gDefaultBgMap, sizeof(gDefaultBgMap));
     SetBgPriority(work->bg, 0);
     seqDef = gEventSequenceDefs[work->eventId];
     work->palette = NULL;
@@ -6202,8 +6202,8 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                     void* palette;
 
                     palette = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-                    LoadBgTiles(work->bg, gSysMsgWinTiles, 0x140);
-                    LoadBgMap(work->bg, gSysMsgWinMap, 0x800);
+                    LoadBgTiles(work->bg, gSysMsgWinTiles, sizeof(gSysMsgWinTiles));
+                    LoadBgMap(work->bg, gSysMsgWinMap, sizeof(gSysMsgWinMap));
                     LoadPalette(gCard00Palette, palette, 32);
 
                     if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
@@ -6235,8 +6235,8 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                     SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
                     gEventState->msgWinCentered = TRUE;
                 } else {
-                    LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
-                    LoadBgPalette(work->bg, gMsgwinPalette, 32);
+                    LoadBgTiles(work->bg, gMsgwinTiles, sizeof(gMsgwinTiles));
+                    LoadBgPalette(work->bg, gMsgwinPalette, sizeof(gMsgwinPalette));
                     SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
                     RedrawBgMapAt(work->bg, work->scrollX, 0);
                     SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
@@ -6258,8 +6258,8 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
             void* palette;
 
             palette = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-            LoadBgTiles(work->bg, gSysMsgWinTiles, 0x140);
-            LoadBgMap(work->bg, gSysMsgWinMap, 0x800);
+            LoadBgTiles(work->bg, gSysMsgWinTiles, sizeof(gSysMsgWinTiles));
+            LoadBgMap(work->bg, gSysMsgWinMap, sizeof(gSysMsgWinMap));
             LoadPalette(gCard00Palette, palette, 32);
 
             if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
@@ -6291,8 +6291,8 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
             SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
             gEventState->msgWinCentered = TRUE;
         } else {
-            LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
-            LoadBgPalette(work->bg, gMsgwinPalette, 32);
+            LoadBgTiles(work->bg, gMsgwinTiles, sizeof(gMsgwinTiles));
+            LoadBgPalette(work->bg, gMsgwinPalette, sizeof(gMsgwinPalette));
             SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
             RedrawBgMapAt(work->bg, work->scrollX, 0);
             SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);

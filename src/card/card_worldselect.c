@@ -75,12 +75,12 @@ void WORLDSELECT_0() {
     SetupBg(3, 0, 12, 0);
     SetupBg(2, 2, 28, 10);
     SetBgSize(3, BGCNT_AFF512x512);
-    LoadBgTiles(3, gBtlBgMonstroTiles, 0x4000);
-    LoadBgPalette(3, gBtlBgMonstroPalette, 0x100);
+    LoadBgTiles(3, gBtlBgMonstroTiles, sizeof(gBtlBgMonstroTiles));
+    LoadBgPalette(3, gBtlBgMonstroPalette, sizeof(gBtlBgMonstroPalette));
 #ifdef VERSION_EU
     LoadBgMapLz77(3, gBtlBgMonstroMap);
 #else
-    LoadBgMap(3, gBtlBgMonstroMap, 0x1000);
+    LoadBgMap(3, gBtlBgMonstroMap, sizeof(gBtlBgMonstroMap));
 #endif
     SetBgAffine(3, 0, Q_8_8(1), Q_8_8(1), 0x10000, 0x16800);
     TaskPoolInit(&sModeWorldselectTasks, 1);
@@ -241,7 +241,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
 
 u8 MapSelect_1(MapSelectWork* work, void* task) {
 #ifdef VERSION_EU
-    LoadBgTiles(1, gMapSelectTiles, 0x2020);
+    LoadBgTiles(1, gMapSelectTiles, sizeof(gMapSelectTiles));
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -266,7 +266,7 @@ u8 MapSelect_1(MapSelectWork* work, void* task) {
     }
 #else
     work->tiles3 = LoadObjTiles(gMapSelectTitleTiles, sizeof(gMapSelectTitleTiles));
-    LoadBgTiles(1, gMapSelectTiles, 0x2020);
+    LoadBgTiles(1, gMapSelectTiles, sizeof(gMapSelectTiles));
 #endif
     LoadPalette(gMapSelectBgPalettes, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
     LoadPalette(&gMapSelectBgPalettes[0x40], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 64);
@@ -370,7 +370,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* task) {
     s8 firstValue;
 
     if (work->card->steps == 0) {
-        LoadBgTiles(1, gMapSelectValuesTiles, 0x23C0);
+        LoadBgTiles(1, gMapSelectValuesTiles, sizeof(gMapSelectValuesTiles));
 
 #ifdef VERSION_EU
         switch (gLanguage) {
@@ -391,7 +391,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* task) {
         }
 #endif
 
-        LoadBgMap(1, gMapSelectValuesMap, 0x800);
+        LoadBgMap(1, gMapSelectValuesMap, sizeof(gMapSelectValuesMap));
         LoadMapSelectGridPalette(work->card->args.baseCardId, work);
         firstValue = LoadMapSelectValueCounts(work->card->args.baseCardId, work);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectValueInput);
@@ -456,7 +456,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
 
     switch (keys & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON | L_BUTTON | R_BUTTON)) {
     case B_BUTTON:
-        LoadBgTiles(1, gMapSelectTiles, 0x2020);
+        LoadBgTiles(1, gMapSelectTiles, sizeof(gMapSelectTiles));
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -475,7 +475,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
             break;
         }
 #endif
-        LoadBgMap(1, gMapSelectMap, 0x800);
+        LoadBgMap(1, gMapSelectMap, sizeof(gMapSelectMap));
         work->card->flags &= ~MAPCARD_FLAG_OPENED;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectLeaveValues);
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -518,7 +518,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
                     LoadMapSelectGridPalette(work->card->args.baseCardId, work);
 
                     if ((s8)LoadMapSelectValueCounts(work->card->args.baseCardId, work) == -1) {
-                        LoadBgTiles(1, gMapSelectTiles, 0x2020);
+                        LoadBgTiles(1, gMapSelectTiles, sizeof(gMapSelectTiles));
 #ifdef VERSION_EU
                         switch (gLanguage) {
                         case LANGUAGE_ENGLISH:
@@ -537,7 +537,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
                             break;
                         }
 #endif
-                        LoadBgMap(1, gMapSelectMap, 0x800);
+                        LoadBgMap(1, gMapSelectMap, sizeof(gMapSelectMap));
                         work->card->flags &= ~MAPCARD_FLAG_OPENED;
                         RemoveMapSelectCard(work);
                         SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectLeaveValues);

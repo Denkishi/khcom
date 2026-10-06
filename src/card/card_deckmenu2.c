@@ -1423,7 +1423,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
     switch (work->step) {
     case 0:
         LoadBgTiles(3, gDeckMenuTiles, 0x2000);
-        LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
+        LoadBgPalette(3, gDeckMenuPalettes, sizeof(gDeckMenuPalettes));
         break;
     case 1:
 #ifdef VERSION_EU
@@ -1435,7 +1435,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
 #endif
         break;
     case 2:
-        LoadBgMap(3, gDeckMenuMap, 0x800);
+        LoadBgMap(3, gDeckMenuMap, sizeof(gDeckMenuMap));
         break;
     case 3:
 #ifdef VERSION_EU
@@ -1457,11 +1457,11 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
             break;
         }
 #else
-        LoadBgTiles(0, gDeck1PanelTiles, 0xC00);
+        LoadBgTiles(0, gDeck1PanelTiles, sizeof(gDeck1PanelTiles));
 #endif
         break;
     case 4:
-        LoadBgMap(0, gDefaultBgMap, 0x800);
+        LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
         break;
 #ifndef VERSION_EU
     case 5:
@@ -1473,7 +1473,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
         break;
 #endif
     case 7:
-        LoadBgMap(1, gDefaultBgMap, 0x800);
+        LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
         break;
 #ifndef VERSION_EU
     case 8:
@@ -1485,7 +1485,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
         break;
 #endif
     case 10:
-        LoadBgMap(2, gDefaultBgMap, 0x800);
+        LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
         break;
     case 11:
         SetBgScroll(0, (u16)-88, (u16)-16);
@@ -1592,7 +1592,7 @@ u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* task) {
                 work->tiles12 = NULL;
                 work->palette3 = NULL;
                 work->handVisible = 1;
-                LoadBgMap(3, gDeckReviewGridMap, 0x800);
+                LoadBgMap(3, gDeckReviewGridMap, sizeof(gDeckReviewGridMap));
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
             }
 
@@ -3081,8 +3081,8 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* task) {
 #endif
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gDeck1PanelMap, 0x180);
-        LoadBgMap(1, gDeckCollectionInfoMap, 0x800);
-        LoadBgMap(2, gDeckCardsInUseMap, 0x800);
+        LoadBgMap(1, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
+        LoadBgMap(2, gDeckCardsInUseMap, sizeof(gDeckCardsInUseMap));
         SetBgScroll(0, 0, 0xFFF0);
         SetBgScroll(1, 0, 0);
         SetBgScroll(2, 0, 0);
@@ -3102,9 +3102,9 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* task) {
         SetupBg(2, 0, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gDeckCollectionInfoMap, 0x800);
+        LoadBgMap(0, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
         LoadBgMap(1, gDeck2PanelMap, 0x180);
-        LoadBgMap(2, gDeckCardsInUseMap, 0x800);
+        LoadBgMap(2, gDeckCardsInUseMap, sizeof(gDeckCardsInUseMap));
         SetBgScroll(0, 0, 0);
         SetBgScroll(1, 0, 0xFFF0);
         SetBgScroll(2, 0, 0);
@@ -3124,8 +3124,8 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* task) {
         SetupBg(2, 1, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gDeckCollectionInfoMap, 0x800);
-        LoadBgMap(1, gDeckCardsInUseMap, 0x800);
+        LoadBgMap(0, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
+        LoadBgMap(1, gDeckCardsInUseMap, sizeof(gDeckCardsInUseMap));
         LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, 0, 0);
         SetBgScroll(1, 0, 0);
@@ -3168,7 +3168,7 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* task) {
         ReleaseCommandMenuGfx(work);
         SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
         ClearCardGrid(work);
-        LoadBgMap(3, gDeckAddGridMap, 0x800);
+        LoadBgMap(3, gDeckAddGridMap, sizeof(gDeckAddGridMap));
         count = &work->entryCount;
         *count = n = 0x11E;
         work->kindEntries = EwramAlloc(n * sizeof(CardKindEntry));
@@ -3431,11 +3431,11 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* task) {
     SetupBg(1, 2, 23, 0);
     SetupBg(0, 3, 31, 0);
 #endif
-    LoadBgMap(0, gDefaultBgMap, 0x800);
-    LoadBgMap(1, gDefaultBgMap, 0x800);
-    LoadBgMap(2, gDefaultBgMap, 0x800);
+    LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
     HighlightDeckTab(work, work->deckIndex);
-    LoadBgMap(3, gDeckReviewGridMap, 0x800);
+    LoadBgMap(3, gDeckReviewGridMap, sizeof(gDeckReviewGridMap));
     FreeCollectionEntries(work);
     ClearCardGrid(work);
     work->categoryFilter = 0;
@@ -3479,8 +3479,8 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* task) {
 #endif
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gDeck1PanelMap, 0x180);
-        LoadBgMap(1, gDeckDescriptionWindowMap, 0x800);
-        LoadBgMap(2, gDeckCpLabelMap, 0x800);
+        LoadBgMap(1, gDeckDescriptionWindowMap, sizeof(gDeckDescriptionWindowMap));
+        LoadBgMap(2, gDeckCpLabelMap, sizeof(gDeckCpLabelMap));
         SetBgScroll(0, (u16)-88, (u16)-16);
         SetBgScroll(1, (u16)-88, (u16)-112);
         SetBgScroll(2, (u16)-140, (u16)-96);
@@ -3500,9 +3500,9 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* task) {
         SetupBg(2, 0, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gDeckDescriptionWindowMap, 0x800);
+        LoadBgMap(0, gDeckDescriptionWindowMap, sizeof(gDeckDescriptionWindowMap));
         LoadBgMap(1, gDeck2PanelMap, 0x180);
-        LoadBgMap(2, gDeckCpLabelMap, 0x800);
+        LoadBgMap(2, gDeckCpLabelMap, sizeof(gDeckCpLabelMap));
         SetBgScroll(0, (u16)-88, (u16)-112);
         SetBgScroll(1, (u16)-88, (u16)-16);
         SetBgScroll(2, (u16)-140, (u16)-96);
@@ -3522,8 +3522,8 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* task) {
         SetupBg(2, 1, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gDeckDescriptionWindowMap, 0x800);
-        LoadBgMap(1, gDeckCpLabelMap, 0x800);
+        LoadBgMap(0, gDeckDescriptionWindowMap, sizeof(gDeckDescriptionWindowMap));
+        LoadBgMap(1, gDeckCpLabelMap, sizeof(gDeckCpLabelMap));
         LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, (u16)-88, (u16)-112);
         SetBgScroll(1, (u16)-140, (u16)-96);
@@ -3546,7 +3546,7 @@ u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* task) {
     ReleaseCommandMenuGfx(work);
     SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     SetDeckMenuHandAnim(work);
-    LoadBgMap(3, gDeckRemoveGridMap, 0x800);
+    LoadBgMap(3, gDeckRemoveGridMap, sizeof(gDeckRemoveGridMap));
     ClearCardGrid(work);
     work->categoryFilter = 0;
     work->cursorCol = 0;
@@ -3731,11 +3731,11 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* task) {
     SetupBg(1, 2, 23, 0);
     SetupBg(0, 3, 31, 0);
 #endif
-    LoadBgMap(0, gDefaultBgMap, 0x800);
-    LoadBgMap(1, gDefaultBgMap, 0x800);
-    LoadBgMap(2, gDefaultBgMap, 0x800);
+    LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
     HighlightDeckTab(work, work->deckIndex);
-    LoadBgMap(3, gDeckReviewGridMap, 0x800);
+    LoadBgMap(3, gDeckReviewGridMap, sizeof(gDeckReviewGridMap));
     FreeCollectionEntries(work);
     ClearCardGrid(work);
     work->categoryFilter = 0;
@@ -3769,9 +3769,9 @@ u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* work, void* task) {
     SetBgScroll(0, 0, 0);
     SetBgScroll(1, 0, 0);
     SetBgScroll(2, 0, 16);
-    LoadBgMap(3, gDeckDeleteGridMap, 0x800);
-    LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
-    LoadBgMap(1, gDeckCardsInUseMap, 0x800);
+    LoadBgMap(3, gDeckDeleteGridMap, sizeof(gDeckDeleteGridMap));
+    LoadBgMap(2, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
+    LoadBgMap(1, gDeckCardsInUseMap, sizeof(gDeckCardsInUseMap));
     DisableBg(0);
     CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
@@ -4042,11 +4042,11 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* task) {
     SetupBg(1, 2, 23, 0);
     SetupBg(0, 3, 31, 0);
 #endif
-    LoadBgMap(0, gDefaultBgMap, 0x800);
-    LoadBgMap(1, gDefaultBgMap, 0x800);
-    LoadBgMap(2, gDefaultBgMap, 0x800);
+    LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
     HighlightDeckTab(work, work->deckIndex);
-    LoadBgMap(3, gDeckReviewGridMap, 0x800);
+    LoadBgMap(3, gDeckReviewGridMap, sizeof(gDeckReviewGridMap));
     FreeCollectionEntries(work);
     ClearCardGrid(work);
     work->categoryFilter = 0;
@@ -4094,7 +4094,7 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* task) {
 #endif
 
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
-    LoadBgMap(3, gDeckMenuMap, 0x800);
+    LoadBgMap(3, gDeckMenuMap, sizeof(gDeckMenuMap));
     work->topBarX = 0x7800;
     work->topBarY = 0;
     work->bottomBarX = 0xA400;
@@ -5255,21 +5255,21 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
 
         if (work->view >= DECK_MENU_VIEW_DELETE_GRID &&work->view <= DECK_MENU_VIEW_DELETE_PROMPT) {
             if (def->kind > CARD_KIND_THE_KING) {
-                LoadBgMap(2, gDeckCollectionEnemyInfoMap, 0x800);
+                LoadBgMap(2, gDeckCollectionEnemyInfoMap, sizeof(gDeckCollectionEnemyInfoMap));
                 DrawCpCost(GetCardCpCost(id));
                 return id;
             }
 
-            LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
+            LoadBgMap(2, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
             DrawCpCost(0);
         } else if (def->kind > CARD_KIND_THE_KING) {
             switch (work->deckIndex) {
             case 0:
-                LoadBgMap(1, gDeckCollectionEnemyInfoMap, 0x800);
+                LoadBgMap(1, gDeckCollectionEnemyInfoMap, sizeof(gDeckCollectionEnemyInfoMap));
                 break;
             case 1:
             case 2:
-                LoadBgMap(0, gDeckCollectionEnemyInfoMap, 0x800);
+                LoadBgMap(0, gDeckCollectionEnemyInfoMap, sizeof(gDeckCollectionEnemyInfoMap));
                 break;
             }
 
@@ -5277,11 +5277,11 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
         } else {
             switch (work->deckIndex) {
             case 0:
-                LoadBgMap(1, gDeckCollectionInfoMap, 0x800);
+                LoadBgMap(1, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
                 break;
             case 1:
             case 2:
-                LoadBgMap(0, gDeckCollectionInfoMap, 0x800);
+                LoadBgMap(0, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
                 break;
             }
 
@@ -6817,20 +6817,20 @@ void func_jp_0808F34C(DeckMenuWork* work) {
     switch (work->keyboardPage) {
 #ifdef VERSION_JP
     case 0:
-        LoadBgMap(3, gDeckKeyboardMap, 0x800);
+        LoadBgMap(3, gDeckKeyboardMap, sizeof(gDeckKeyboardMap));
         break;
     case 1:
-        LoadBgMap(3, gDeckKeyboardKatakanaMap, 0x800);
+        LoadBgMap(3, gDeckKeyboardKatakanaMap, sizeof(gDeckKeyboardKatakanaMap));
         break;
     case 2:
-        LoadBgMap(3, gDeckKeyboardAlphanumericMap, 0x800);
+        LoadBgMap(3, gDeckKeyboardAlphanumericMap, sizeof(gDeckKeyboardAlphanumericMap));
         break;
 #else
     case 2:
-        LoadBgMap(3, gDeckKeyboardMap, 0x800);
+        LoadBgMap(3, gDeckKeyboardMap, sizeof(gDeckKeyboardMap));
         break;
     case 3:
-        LoadBgMap(3, gDeckKeyboardSymbolMap, 0x800);
+        LoadBgMap(3, gDeckKeyboardSymbolMap, sizeof(gDeckKeyboardSymbolMap));
         break;
 #endif
     }
@@ -6886,11 +6886,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
         work->caretX = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
         break;
     case 1:
-#ifdef VERSION_JP
-        LoadBgTiles(3, gDeckKeyboard0Tiles, 0x2000);
-#else
-        LoadBgTiles(3, gDeckKeyboard0Tiles, 0x1000);
-#endif
+        LoadBgTiles(3, gDeckKeyboard0Tiles, sizeof(gDeckKeyboard0Tiles));
         break;
     case 2:
 #ifdef VERSION_JP
@@ -6932,8 +6928,8 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
 
         break;
     case 5:
-        LoadBgMap(3, gDeckKeyboardMap, 0x800);
-        LoadBgPalette(3, gDeckKeyboardPalettes, 0xA0);
+        LoadBgMap(3, gDeckKeyboardMap, sizeof(gDeckKeyboardMap));
+        LoadBgPalette(3, gDeckKeyboardPalettes, sizeof(gDeckKeyboardPalettes));
         break;
     case 6:
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuKeyboard);

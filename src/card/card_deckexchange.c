@@ -222,13 +222,13 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* task) {
                         (u8*)GetBgCharBase(3) + 0x2000, 0x2000);
         break;
     case 2:
-        LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
+        LoadBgPalette(3, gDeckMenuPalettes, sizeof(gDeckMenuPalettes));
         break;
     case 3:
-        LoadBgTiles(0, gDeck1PanelTiles, 0xC00);
+        LoadBgTiles(0, gDeck1PanelTiles, sizeof(gDeck1PanelTiles));
         break;
     case 4:
-        LoadBgMap(0, gDefaultBgMap, 0x800);
+        LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
         break;
     case 5:
         LoadBgTiles(1, gDeck2PanelTiles, 0x2000);
@@ -238,7 +238,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* task) {
                         (u8*)GetBgCharBase(1) + 0x2000, 0x1E20);
         break;
     case 7:
-        LoadBgMap(1, gDefaultBgMap, 0x800);
+        LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
         break;
     case 8:
         LoadBgTiles(2, gDeck3PanelTiles, 0x2000);
@@ -248,7 +248,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* task) {
                         (u8*)GetBgCharBase(2) + 0x2000, 0x1E20);
         break;
     case 10:
-        LoadBgMap(2, gDefaultBgMap, 0x800);
+        LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
         break;
     case 12:
         work->step = 0;
@@ -558,9 +558,9 @@ u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* task) {
     SetBgScroll(0, 0, 0);
     SetBgScroll(1, 0, 0);
     SetBgScroll(2, 0, 16);
-    LoadBgMap(3, gDeckExchangeGridMap, 0x800);
-    LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
-    LoadBgMap(1, gDeckCardsInUseMap, 0x800);
+    LoadBgMap(3, gDeckExchangeGridMap, sizeof(gDeckExchangeGridMap));
+    LoadBgMap(2, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
+    LoadBgMap(1, gDeckCardsInUseMap, sizeof(gDeckCardsInUseMap));
     DisableBg(0);
     CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
@@ -1555,10 +1555,10 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
         LoadDeckExchangeCardDescriptionText(work, id);
 
         if (def->kind > CARD_KIND_THE_KING) {
-            LoadBgMap(2, gDeckCollectionEnemyInfoMap, 0x800);
+            LoadBgMap(2, gDeckCollectionEnemyInfoMap, sizeof(gDeckCollectionEnemyInfoMap));
             DrawDeckExchangeCpCost(0);
         } else {
-            LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
+            LoadBgMap(2, gDeckCollectionInfoMap, sizeof(gDeckCollectionInfoMap));
             DrawDeckExchangeCpCost(0);
         }
     } else {

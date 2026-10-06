@@ -1791,32 +1791,32 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         case 0:
             m4aSongNumStart(SONG_BTL_TABLE_U);
             EnableBg(1);
-            LoadBgMap(1, gBosTmTableMaps[8], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[8], sizeof(gBosTmTableMaps[0]));
             ColliderSetDisabled(&work->collider, FALSE);
             break;
         case 2:
-            LoadBgMap(1, gBosTmTableMaps[7], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[7], sizeof(gBosTmTableMaps[0]));
             break;
         case 4:
-            LoadBgMap(1, gBosTmTableMaps[6], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[6], sizeof(gBosTmTableMaps[0]));
             break;
         case 6:
-            LoadBgMap(1, gBosTmTableMaps[5], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[5], sizeof(gBosTmTableMaps[0]));
             break;
         case 8:
-            LoadBgMap(1, gBosTmTableMaps[4], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[4], sizeof(gBosTmTableMaps[0]));
             break;
         case 10:
-            LoadBgMap(1, gBosTmTableMaps[3], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[3], sizeof(gBosTmTableMaps[0]));
             break;
         case 12:
-            LoadBgMap(1, gBosTmTableMaps[2], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[2], sizeof(gBosTmTableMaps[0]));
             break;
         case 14:
-            LoadBgMap(1, gBosTmTableMaps[1], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[1], sizeof(gBosTmTableMaps[0]));
             break;
         case 16:
-            LoadBgMap(1, gBosTmTableMaps[0], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[0], sizeof(gBosTmTableMaps[0]));
             break;
         }
 
@@ -1836,30 +1836,30 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
     case BOS_TM_TBL_STATE_SINKING:
         switch (work->frame) {
         case 0:
-            LoadBgMap(1, gBosTmTableMaps[1], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[1], sizeof(gBosTmTableMaps[0]));
             ColliderSetDisabled(&work->collider, TRUE);
             work->height = 0;
             break;
         case 1:
-            LoadBgMap(1, gBosTmTableMaps[2], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[2], sizeof(gBosTmTableMaps[0]));
             break;
         case 2:
-            LoadBgMap(1, gBosTmTableMaps[3], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[3], sizeof(gBosTmTableMaps[0]));
             break;
         case 3:
-            LoadBgMap(1, gBosTmTableMaps[4], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[4], sizeof(gBosTmTableMaps[0]));
             break;
         case 4:
-            LoadBgMap(1, gBosTmTableMaps[5], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[5], sizeof(gBosTmTableMaps[0]));
             break;
         case 5:
-            LoadBgMap(1, gBosTmTableMaps[6], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[6], sizeof(gBosTmTableMaps[0]));
             break;
         case 6:
-            LoadBgMap(1, gBosTmTableMaps[7], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[7], sizeof(gBosTmTableMaps[0]));
             break;
         case 7:
-            LoadBgMap(1, gBosTmTableMaps[8], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[8], sizeof(gBosTmTableMaps[0]));
             break;
         case 8:
             DisableBg(1);

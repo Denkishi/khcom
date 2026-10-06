@@ -204,14 +204,14 @@ void WorldWarpHandleInput() {
     if (keys & A_BUTTON) {
         if (sWorldWarpCursor == gGameState.floor) {
             sWorldWarpTarget = -1;
-            LoadBgMap(0, gWorldWarpBgMap, 0x500);
+            LoadBgMap(0, gWorldWarpBgMap, sizeof(gWorldWarpBgMap));
             sWorldWarpSteps = 16;
             sWorldWarpState = WORLD_WARP_STATE_TITLE_OUT;
             m4aSongNumStart(SONG_SYS_CLOSE);
         } else {
             if (sWorldWarpFloorWorlds[sWorldWarpCursor] >= 0) {
                 sWorldWarpTarget = sWorldWarpCursor;
-                LoadBgMap(0, gWorldWarpBgMap, 0x500);
+                LoadBgMap(0, gWorldWarpBgMap, sizeof(gWorldWarpBgMap));
                 sWorldWarpSteps = 16;
                 sWorldWarpState = WORLD_WARP_STATE_TITLE_OUT;
                 m4aSongNumStart(SONG_SYS_WORLDSTART);
@@ -221,7 +221,7 @@ void WorldWarpHandleInput() {
         }
     } else if (keys & B_BUTTON) {
         sWorldWarpTarget = -1;
-        LoadBgMap(0, gWorldWarpBgMap, 0x500);
+        LoadBgMap(0, gWorldWarpBgMap, sizeof(gWorldWarpBgMap));
         sWorldWarpSteps = 16;
         sWorldWarpState = WORLD_WARP_STATE_TITLE_OUT;
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -459,7 +459,7 @@ void mode_worldwarp_0() {
     sWorldWarpBarX = -0x8000;
     sWorldWarpCursorX = (sWarpIcons[sWorldWarpCursor].x << 11) + 0x2000;
     sWorldWarpCursorY = (sWarpIcons[sWorldWarpCursor].y << 11) - 0x600;
-    LoadBgPalette(0, gWorldWarpPalettes, 0x200);
+    LoadBgPalette(0, gWorldWarpPalettes, sizeof(gWorldWarpPalettes));
 
     for (i = 0; i <= 12; i++) {
         if (sWorldWarpFloorWorlds[i] > 0) {
@@ -473,7 +473,7 @@ void mode_worldwarp_0() {
         }
     }
 
-    LoadBgTiles(0, gWorldWarpTiles, 0x6BC0);
+    LoadBgTiles(0, gWorldWarpTiles, sizeof(gWorldWarpTiles));
 
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -509,7 +509,7 @@ void mode_worldwarp_0() {
     }
 #endif
 
-    LoadBgMap(0, gWorldWarpBgMap, 0x500);
+    LoadBgMap(0, gWorldWarpBgMap, sizeof(gWorldWarpBgMap));
     DmaCopy16(3, gWorldWarpFloorMap, sWorldWarpTilemap, 0x500);
 
     for (i = 0; i <= 12; i++) {
@@ -683,7 +683,7 @@ void mode_worldwarp_1() {
         ApproachValue(&sWorldWarpBarX, 0, sWorldWarpSteps);
 
         if (--sWorldWarpSteps <= 0) {
-            LoadBgMap(0, gWorldWarpBgHeaderMap, 0x500);
+            LoadBgMap(0, gWorldWarpBgHeaderMap, sizeof(gWorldWarpBgHeaderMap));
             sWorldWarpState = WORLD_WARP_STATE_SELECT;
         }
 

@@ -315,8 +315,8 @@ void WorldselectHandleInput() {
             sWorldselectStep = WORLDSELECT_STEP_START_ANIM;
         } else if ((GetKeysPressed() & B_BUTTON) && sWorldselectFirstVisit == 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            LoadBgMap(0, gWorldselectGlowMap, 0x500);
-            LoadBgMap(1, gWorldselectBarMap, 0x500);
+            LoadBgMap(0, gWorldselectGlowMap, sizeof(gWorldselectGlowMap));
+            LoadBgMap(1, gWorldselectBarMap, sizeof(gWorldselectBarMap));
             sWorldselectCancelled = TRUE;
             sWorldselectTimer = 16;
             sWorldselectStep = WORLDSELECT_STEP_TITLE_OUT;
@@ -748,15 +748,15 @@ void mode_worldselect_0() {
     sWorldselectFrameY[0] = -2048;
     sWorldselectFrameY[1] = 0xA800;
     sWorldselectTitleX = -32768;
-    LoadBgPalette(0, gWorldselectBgPalettes, 96);
+    LoadBgPalette(0, gWorldselectBgPalettes, sizeof(gWorldselectBgPalettes));
 #ifdef VERSION_EU
     LoadBgTiles(0, gWorldselectBgTiles, 16000);
 #else
-    LoadBgTiles(0, gWorldselectBgTiles, 11968);
+    LoadBgTiles(0, gWorldselectBgTiles, sizeof(gWorldselectBgTiles));
 #endif
     WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
-    LoadBgMap(0, gWorldselectGlowMap, 0x500);
-    LoadBgMap(1, gWorldselectBarMap, 0x500);
+    LoadBgMap(0, gWorldselectGlowMap, sizeof(gWorldselectGlowMap));
+    LoadBgMap(1, gWorldselectBarMap, sizeof(gWorldselectBarMap));
 
     if (sWorldselectFirstVisit == 0) {
         BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
@@ -819,11 +819,11 @@ void mode_worldselect_1() {
                 sWorldselectStep = WORLDSELECT_STEP_SELECT;
             }
 
-            LoadBgMap(0, gWorldselectGlowLineMap, 0x500);
+            LoadBgMap(0, gWorldselectGlowLineMap, sizeof(gWorldselectGlowLineMap));
 #ifdef VERSION_EU
             LoadBgMap(1, sWorldselectBg1Maps[gLanguage], 0x500);
 #else
-            LoadBgMap(1, gWorldselectTitleMap, 0x500);
+            LoadBgMap(1, gWorldselectTitleMap, sizeof(gWorldselectTitleMap));
 #endif
         }
 
@@ -850,8 +850,8 @@ void mode_worldselect_1() {
         break;
     case WORLDSELECT_STEP_START_ANIM:
         if (BgAnimIsStopped()) {
-            LoadBgMap(0, gWorldselectGlowMap, 0x500);
-            LoadBgMap(1, gWorldselectBarMap, 0x500);
+            LoadBgMap(0, gWorldselectGlowMap, sizeof(gWorldselectGlowMap));
+            LoadBgMap(1, gWorldselectBarMap, sizeof(gWorldselectBarMap));
             sWorldselectTimer = 16;
             sWorldselectStep = WORLDSELECT_STEP_TITLE_OUT;
         }

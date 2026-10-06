@@ -39,7 +39,7 @@ void mode_lang_0(s32 arg) {
     SetupBg(1, 0, 30, 0);
     SetBgPriority(0, 0);
     SetBgPriority(1, 1);
-    LoadBgPalette(0, gLanguageSelectPalette, 0x40);
+    LoadBgPalette(0, gLanguageSelectPalette, sizeof(gLanguageSelectPalette));
     LoadBgTilesLz77(0, gLanguageSelectTiles);
     LoadBgMapLz77(0, gLanguageSelectMenuMap);
     LoadBgMapLz77(1, gLanguageSelectBgMap);

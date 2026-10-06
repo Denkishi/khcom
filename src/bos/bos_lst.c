@@ -527,9 +527,9 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     SetBtlPaletteFadeExcluded(1, TRUE);
     SetBtlPaletteFadeExcluded(2, TRUE);
     SetBattleActorPosition(0xCC00, 0x1F000, 0);
-    LoadBgMap(1, gBosBlankMap, 0x1000);
-    LoadBgMap(1, gBosLstAnim0BgMap, 0x800);
-    LoadBgMap(0, gBosLstBgMap, 0x800);
+    LoadBgMap(1, gBosBlankMap, sizeof(gBosBlankMap));
+    LoadBgMap(1, gBosLstAnim0BgMap, sizeof(gBosLstAnim0BgMap));
+    LoadBgMap(0, gBosLstBgMap, sizeof(gBosLstBgMap));
     btl = gBtlWork;
     btl->bossX = work->x;
     btl->bossY = work->y;

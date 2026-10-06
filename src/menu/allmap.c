@@ -464,7 +464,7 @@ void AllmapBarStartClose(AllmapBarWork* work) {
         work->steps = 16;
     }
 
-    LoadBgMap(3, gAllmapBackdropMap, 0x500);
+    LoadBgMap(3, gAllmapBackdropMap, sizeof(gAllmapBackdropMap));
     work->targetY = -0x800;
     work->targetY2 = 0xA000;
     work->targetX = -0x8000;

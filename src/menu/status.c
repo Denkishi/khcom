@@ -388,7 +388,7 @@ void StatusBarStartClose(StatusBarWork* work) {
         work->steps = 16;
     }
 
-    LoadBgMap(3, gStatusBgMap, 0x500);
+    LoadBgMap(3, gStatusBgMap, sizeof(gStatusBgMap));
     work->targetY = -0x800;
     work->targetY2 = 0xA000;
     work->targetX = -0x8000;
@@ -431,7 +431,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
         work->steps--;
 
         if (work->steps == 0) {
-            LoadBgMap(3, gStatusBarBgMap, 0x500);
+            LoadBgMap(3, gStatusBarBgMap, sizeof(gStatusBarBgMap));
             gStatusBarState = STATUS_BAR_STATE_IDLE;
         }
 

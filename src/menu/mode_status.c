@@ -92,7 +92,7 @@ void mode_status_0() {
     SetBgPriority(2, 2);
     SetBgPriority(3, 3);
 #ifdef VERSION_EU
-    LoadBgTiles(3, gStatusBgTiles, 0x2060);
+    LoadBgTiles(3, gStatusBgTiles, sizeof(gStatusBgTiles));
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
@@ -112,18 +112,18 @@ void mode_status_0() {
         break;
     }
 #else
-    LoadBgTiles(3, gStatusBgTiles, 0x2100);
+    LoadBgTiles(3, gStatusBgTiles, sizeof(gStatusBgTiles));
 #endif
-    LoadBgPalette(3, gStatusBgPalette, 0xA0);
-    LoadBgMap(3, gStatusBgMap, 0x500);
+    LoadBgPalette(3, gStatusBgPalette, sizeof(gStatusBgPalette));
+    LoadBgMap(3, gStatusBgMap, sizeof(gStatusBgMap));
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        LoadBgMap(2, gStatusRikuBgMap, 0x500);
+        LoadBgMap(2, gStatusRikuBgMap, sizeof(gStatusRikuBgMap));
     } else {
-        LoadBgMap(2, gStatusSoraBgMap, 0x500);
+        LoadBgMap(2, gStatusSoraBgMap, sizeof(gStatusSoraBgMap));
     }
 
-    LoadBgMap(0, gStatusMesWindowMap, 0x500);
+    LoadBgMap(0, gStatusMesWindowMap, sizeof(gStatusMesWindowMap));
     DisableBg(0);
     LoadStatusNumberTiles();
     TaskPoolInit(&sStatusTaskPool, 4);

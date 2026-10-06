@@ -16,9 +16,9 @@ void mode_copyright2_0(s32 arg) {
     SetBgMode0();
     SetupBg(0, 0, 0x1F, 0);
     SetBgPriority(0, 3);
-    LoadBgTiles(0, gCopyright2Tiles, 0x4FC0);
-    LoadBgPalette(0, gCopyright2Palette, 0x200);
-    LoadBgMap(0, gCopyright2Map, 0x800);
+    LoadBgTiles(0, gCopyright2Tiles, sizeof(gCopyright2Tiles));
+    LoadBgPalette(0, gCopyright2Palette, sizeof(gCopyright2Palette));
+    LoadBgMap(0, gCopyright2Map, sizeof(gCopyright2Map));
 
     if (arg == 0) {
         FadeStartIn(FADE_MODE_BLACK, 0x43);

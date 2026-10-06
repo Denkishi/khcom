@@ -104,10 +104,10 @@ void TitleExitToChoice() {
 
 void TitleShowLogo(u16 frames) {
     if ((gGameState.flags & GAME_FLAG_RIKU_TITLE) != 0) {
-        LoadBgPalette(1, gTitleRikuBgPalette, 0x200);
+        LoadBgPalette(1, gTitleRikuBgPalette, sizeof(gTitleRikuBgPalette));
         TitleCopyToPaletteBuffer(0, gTitleRikuBgPalette, 0x200);
     } else {
-        LoadBgPalette(1, gTitleSoraBgPalette, 0x200);
+        LoadBgPalette(1, gTitleSoraBgPalette, sizeof(gTitleSoraBgPalette));
         TitleCopyToPaletteBuffer(0, gTitleSoraBgPalette, 0x200);
     }
 
@@ -136,11 +136,11 @@ void TitleFinishIntro() {
     case 5:
     case 6:
 #endif
-        LoadBgMap(0, gTitlePressStartBarMap, 0x800);
+        LoadBgMap(0, gTitlePressStartBarMap, sizeof(gTitlePressStartBarMap));
 #ifdef VERSION_EU
         break;
     case LANGUAGE_GERMAN:
-        LoadBgMap(0, gTitlePressStartBarGermanMap, 0x800);
+        LoadBgMap(0, gTitlePressStartBarGermanMap, sizeof(gTitlePressStartBarGermanMap));
         break;
     }
 #endif
@@ -173,13 +173,13 @@ void mode_title_0() {
 #ifdef VERSION_EU
         LoadBgMapLz77(0, gTitleRikuIntroBgMap);
 #else
-        LoadBgMap(0, gTitleRikuIntroBgMap, 0x800);
+        LoadBgMap(0, gTitleRikuIntroBgMap, sizeof(gTitleRikuIntroBgMap));
 #endif
     } else {
 #ifdef VERSION_EU
         LoadBgMapLz77(0, gTitleSoraIntroBgMap);
 #else
-        LoadBgMap(0, gTitleSoraIntroBgMap, 0x800);
+        LoadBgMap(0, gTitleSoraIntroBgMap, sizeof(gTitleSoraIntroBgMap));
 #endif
     }
 
@@ -192,16 +192,16 @@ void mode_title_0() {
         LoadBgTilesLz77(1, gTitleRikuBgTiles);
         LoadBgMapLz77(1, gTitleRikuBgMap);
 #else
-        LoadBgTiles(1, gTitleRikuBgTiles, 0x7FA0);
-        LoadBgMap(1, gTitleRikuBgMap, 0x800);
+        LoadBgTiles(1, gTitleRikuBgTiles, sizeof(gTitleRikuBgTiles));
+        LoadBgMap(1, gTitleRikuBgMap, sizeof(gTitleRikuBgMap));
 #endif
     } else {
 #ifdef VERSION_EU
         LoadBgTilesLz77(1, gTitleSoraBgTiles);
         LoadBgMapLz77(1, gTitleSoraBgMap);
 #else
-        LoadBgTiles(1, gTitleSoraBgTiles, 0x7FA0);
-        LoadBgMap(1, gTitleSoraBgMap, 0x800);
+        LoadBgTiles(1, gTitleSoraBgTiles, sizeof(gTitleSoraBgTiles));
+        LoadBgMap(1, gTitleSoraBgMap, sizeof(gTitleSoraBgMap));
 #endif
     }
 
@@ -211,8 +211,8 @@ void mode_title_0() {
     SetupBg(2, 2, 0x1F, 0xB);
     SetBgSize(2, BGCNT_AFF256x256);
     SetBgPriority(2, 2);
-    LoadBgTiles(2, gTitleLogoBgTiles, 0x3F00);
-    LoadBgPalette(2, gTitleLogoBgPalette, 0xA0);
+    LoadBgTiles(2, gTitleLogoBgTiles, sizeof(gTitleLogoBgTiles));
+    LoadBgPalette(2, gTitleLogoBgPalette, sizeof(gTitleLogoBgPalette));
     LoadBgMap(2, gTitleLogoBgMap, 0x400);
     gTitleBgX = 0x7800;
     gTitleBgY = 0x5A00;

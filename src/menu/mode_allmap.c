@@ -228,10 +228,10 @@ void mode_allmap_0(s32 lowerBgm) {
 #ifdef VERSION_EU
     LoadBgTiles(3, gAllmapBackdropTiles, 0x1A40);
 #else
-    LoadBgTiles(3, gAllmapBackdropTiles, 0xF60);
+    LoadBgTiles(3, gAllmapBackdropTiles, sizeof(gAllmapBackdropTiles));
 #endif
-    LoadBgPalette(3, gAllmapBgPalettes, 0x100);
-    LoadBgMap(3, gAllmapBackdropMap, 0x500);
+    LoadBgPalette(3, gAllmapBgPalettes, sizeof(gAllmapBgPalettes));
+    LoadBgMap(3, gAllmapBackdropMap, sizeof(gAllmapBackdropMap));
     SetupBg(2, 1, 29, 8);
     SetBgPriority(2, 0);
     LoadBgMap(2, gDefaultBgMap, 0x200);
@@ -239,7 +239,7 @@ void mode_allmap_0(s32 lowerBgm) {
     AllmapLoadFloorTiles();
     SetupBg(0, 0, 26, 0);
     SetBgPriority(0, 2);
-    LoadBgTiles(0, gAllmapRoomTiles, 0x2400);
+    LoadBgTiles(0, gAllmapRoomTiles, sizeof(gAllmapRoomTiles));
     LoadBgPalette(0, gAllmapRoomPalettes, 0xE0);
     AllmapAllocBgMaps();
     SetBgMapBlocks(0, gAllmapBg0MapBlocks, 2, 4);

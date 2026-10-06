@@ -57,9 +57,9 @@ enum WlogoMonsState {
 };
 
 void task_wlogo_mons_0(WlogoMonsWork* work) {
-    LoadBgPalette(0, gWlogoMonsPalette, 0x20);
-    LoadBgTiles(0, gWlogoMonsTiles, 0xC80);
-    LoadBgMap(0, gWlogoMonsNoEyeMap, 0x800);
+    LoadBgPalette(0, gWlogoMonsPalette, sizeof(gWlogoMonsPalette));
+    LoadBgTiles(0, gWlogoMonsTiles, sizeof(gWlogoMonsTiles));
+    LoadBgMap(0, gWlogoMonsNoEyeMap, sizeof(gWlogoMonsNoEyeMap));
     work->tiles = LoadObjTiles(gWlogoMonsEyeTiles, sizeof(gWlogoMonsEyeTiles));
     work->palette = LoadObjPalette(gWlogoMonsPalette, sizeof(gWlogoMonsPalette));
     work->x = 64;
@@ -192,9 +192,9 @@ enum WlogoHwtState {
 };
 
 void task_wlogo_hwt_0(WlogoHwtWork* work) {
-    LoadBgPalette(0, gWlogoHwtPalette, 0x20);
-    LoadBgTiles(0, gWlogoHwtTiles, 0xC20);
-    LoadBgMap(0, gWlogoHwtMap, 0x800);
+    LoadBgPalette(0, gWlogoHwtPalette, sizeof(gWlogoHwtPalette));
+    LoadBgTiles(0, gWlogoHwtTiles, sizeof(gWlogoHwtTiles));
+    LoadBgMap(0, gWlogoHwtMap, sizeof(gWlogoHwtMap));
     work->paletteStep = 0;
     work->timer = 0;
     work->state = WLOGO_HWT_STATE_GHOSTS;
@@ -361,9 +361,9 @@ enum WlogoWonState {
 void task_wlogo_won_0(WlogoWonWork* work) {
     s32 i;
 
-    LoadBgPalette(0, gWlogoWonPalette, 0x20);
-    LoadBgTiles(0, gWlogoWonTiles, 0xC00);
-    LoadBgMap(0, gWlogoWonMap, 0x800);
+    LoadBgPalette(0, gWlogoWonPalette, sizeof(gWlogoWonPalette));
+    LoadBgTiles(0, gWlogoWonTiles, sizeof(gWlogoWonTiles));
+    LoadBgMap(0, gWlogoWonMap, sizeof(gWlogoWonMap));
     work->tiles = LoadObjTiles(gWlogoWonCardTiles, sizeof(gWlogoWonCardTiles));
     work->palette = LoadObjPalette(gWlogoWonPalette, sizeof(gWlogoWonPalette));
 
@@ -484,9 +484,9 @@ enum WlogoState {
 };
 
 void task_wlogo_atl_0(WlogoAtlWork* work) {
-    LoadBgPalette(0, gWlogoAtlPalette, 0x20);
-    LoadBgTiles(0, gWlogoAtlTiles, 0x900);
-    LoadBgMap(0, gWlogoAtlMap, 0x800);
+    LoadBgPalette(0, gWlogoAtlPalette, sizeof(gWlogoAtlPalette));
+    LoadBgTiles(0, gWlogoAtlTiles, sizeof(gWlogoAtlTiles));
+    LoadBgMap(0, gWlogoAtlMap, sizeof(gWlogoAtlMap));
     RequestDma3Copy(gWlogoAtlFishTiles, (u8*)GetBgCharBase(0) + 32, 0x360);
     work->timer = 0;
     work->state = WLOGO_STATE_WAIT;
@@ -600,9 +600,9 @@ void WlogoAtlHBlankIntr() {
 }
 
 void task_wlogo_nvl_0(WlogoNvlWork* work) {
-    LoadBgPalette(0, gWlogoNvlPalette, 0x20);
-    LoadBgTiles(0, gWlogoNvlTiles, 0x620);
-    LoadBgMap(0, gWlogoNvlMap, 0x800);
+    LoadBgPalette(0, gWlogoNvlPalette, sizeof(gWlogoNvlPalette));
+    LoadBgTiles(0, gWlogoNvlTiles, sizeof(gWlogoNvlTiles));
+    LoadBgMap(0, gWlogoNvlMap, sizeof(gWlogoNvlMap));
     RequestDma3Copy(gWlogoNvlShineTiles, GetBgCharBase(0), 0x340);
     work->timer = 0;
     work->state = WLOGO_STATE_WAIT;
@@ -845,9 +845,9 @@ enum WlogoColState {
 };
 
 void task_wlogo_col_0(WlogoColWork* work) {
-    LoadBgPalette(0, gWlogoColPalette, 0x20);
-    LoadBgTiles(0, gWlogoColBlankTiles, 0x1060);
-    LoadBgMap(0, gWlogoColMap, 0x800);
+    LoadBgPalette(0, gWlogoColPalette, sizeof(gWlogoColPalette));
+    LoadBgTiles(0, gWlogoColBlankTiles, sizeof(gWlogoColBlankTiles));
+    LoadBgMap(0, gWlogoColMap, sizeof(gWlogoColMap));
     RequestDma3Copy(gWlogoColTiles, GetBgCharBase(0), 0x620);
     work->tiles = LoadObjTiles(gWlogoColSparkleTiles, sizeof(gWlogoColSparkleTiles));
     work->palette = LoadObjPalette(gWlogoColPalette, sizeof(gWlogoColPalette));
@@ -955,9 +955,9 @@ void task_wlogo_col_3(WlogoColWork* work) {
 }
 
 void task_wlogo_hlw_0(WlogoHlwWork* work) {
-    LoadBgPalette(0, gWlogoHlwPalette, 0x20);
-    LoadBgTiles(0, gWlogoHlwTiles, 0xC00);
-    LoadBgMap(0, gWlogoHlwMap, 0x800);
+    LoadBgPalette(0, gWlogoHlwPalette, sizeof(gWlogoHlwPalette));
+    LoadBgTiles(0, gWlogoHlwTiles, sizeof(gWlogoHlwTiles));
+    LoadBgMap(0, gWlogoHlwMap, sizeof(gWlogoHlwMap));
     work->timer = 0;
     work->state = WLOGO_STATE_WAIT;
     work->blend = 0;
@@ -1039,9 +1039,9 @@ enum WlogoDilState {
 };
 
 void task_wlogo_dil_0(WlogoDilWork* work) {
-    LoadBgPalette(0, gWlogoDilPalette, 0x20);
-    LoadBgTiles(0, gWlogoDilTiles, 0x17A0);
-    LoadBgMap(0, gWlogoDilIslandMap, 0x800);
+    LoadBgPalette(0, gWlogoDilPalette, sizeof(gWlogoDilPalette));
+    LoadBgTiles(0, gWlogoDilTiles, sizeof(gWlogoDilTiles));
+    LoadBgMap(0, gWlogoDilIslandMap, sizeof(gWlogoDilIslandMap));
     work->tiles = LoadObjTiles(gWlogoDilIslandObjTiles, sizeof(gWlogoDilIslandObjTiles));
     work->palette = LoadObjPalette(gWlogoDilPalette, sizeof(gWlogoDilPalette));
     work->gfx = gWlogoDilIslandObjFrames[0];
@@ -1083,7 +1083,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
 
         break;
     case WLOGO_DIL_STATE_LOAD_NAME:
-        LoadBgMap(0, gWlogoDilNameMap, 0x800);
+        LoadBgMap(0, gWlogoDilNameMap, sizeof(gWlogoDilNameMap));
         work->blend = 0;
         SetBgBlend(0, 16, 0);
         work->state++;
@@ -1097,7 +1097,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
 
             if (work->blend > 15) {
                 work->blend = 16;
-                LoadBgMap(0, gWlogoDilMap, 0x800);
+                LoadBgMap(0, gWlogoDilMap, sizeof(gWlogoDilMap));
                 work->visible = FALSE;
                 work->state++;
             }
@@ -1160,9 +1160,9 @@ enum WlogoAgrState {
 
 void task_wlogo_agr_0(WlogoAgrWork* work, s32 arg) {
     work->unk_017 = arg;
-    LoadBgPalette(0, gWlogoAgrPalette, 0x20);
-    LoadBgMap(0, gWlogoAgrLampMap, 0x800);
-    LoadBgTiles(0, gWlogoAgrTiles, 0xC00);
+    LoadBgPalette(0, gWlogoAgrPalette, sizeof(gWlogoAgrPalette));
+    LoadBgMap(0, gWlogoAgrLampMap, sizeof(gWlogoAgrLampMap));
+    LoadBgTiles(0, gWlogoAgrTiles, sizeof(gWlogoAgrTiles));
     work->tiles = LoadObjTiles(gWlogoAgrObjTiles, sizeof(gWlogoAgrObjTiles));
     work->palette = LoadObjPalette(gWlogoAgrPalette, sizeof(gWlogoAgrPalette));
     work->gfx = gWlogoAgrObjFrames[11];
@@ -1210,7 +1210,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
 
         break;
     case WLOGO_AGR_STATE_LOAD_MAP:
-        LoadBgMap(0, gWlogoAgrMap, 0x800);
+        LoadBgMap(0, gWlogoAgrMap, sizeof(gWlogoAgrMap));
         work->blend = 0;
         SetBgBlend(0, 16, 0);
         work->state++;
@@ -1449,9 +1449,9 @@ enum WlogoTvtState {
 };
 
 void task_wlogo_tvt_0(WlogoTvtWork* work) {
-    LoadBgPalette(0, gWlogoTvtPalette, 0x20);
-    LoadBgTiles(0, gWlogoTvtSignTiles, 0xC00);
-    LoadBgMap(0, gWlogoTvtMap, 0x800);
+    LoadBgPalette(0, gWlogoTvtPalette, sizeof(gWlogoTvtPalette));
+    LoadBgTiles(0, gWlogoTvtSignTiles, sizeof(gWlogoTvtSignTiles));
+    LoadBgMap(0, gWlogoTvtMap, sizeof(gWlogoTvtMap));
     RequestDma3Copy(gWlogoTvtLightTiles, (u8*)GetBgCharBase(0) + 32, 0x300);
     work->tiles = AllocObjTiles(0x780, gWlogoTvtNameTiles);
     work->palette = LoadObjPalette(gWlogoTvtPalette, sizeof(gWlogoTvtPalette));
@@ -1583,9 +1583,9 @@ void task_wlogo_tvt_3(WlogoTvtWork* work) {
 }
 
 void task_wlogo_poo_0(WlogoPooWork* work) {
-    LoadBgPalette(0, gWlogoPooPalette, 0x20);
-    LoadBgTiles(0, gWlogoPooTiles, 0xA20);
-    LoadBgMap(0, gWlogoPooMap, 0x800);
+    LoadBgPalette(0, gWlogoPooPalette, sizeof(gWlogoPooPalette));
+    LoadBgTiles(0, gWlogoPooTiles, sizeof(gWlogoPooTiles));
+    LoadBgMap(0, gWlogoPooMap, sizeof(gWlogoPooMap));
     work->timer = 0;
     work->state = WLOGO_STATE_WAIT;
     work->blend = 0;
@@ -1746,9 +1746,9 @@ enum WlogoTtState {
 void task_wlogo_tt_0(WlogoTtWork* work) {
     s32 i;
 
-    LoadBgPalette(0, gWlogoTtPalette, 0x20);
-    LoadBgTiles(0, gWlogoTtTiles, 0x1260);
-    LoadBgMap(0, gWlogoTtTownMap, 0x800);
+    LoadBgPalette(0, gWlogoTtPalette, sizeof(gWlogoTtPalette));
+    LoadBgTiles(0, gWlogoTtTiles, sizeof(gWlogoTtTiles));
+    LoadBgMap(0, gWlogoTtTownMap, sizeof(gWlogoTtTownMap));
     LoadPalette(gWlogoTtPalettes[15], (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 0x20);
     work->timer = 0;
     work->subStep = 0;
@@ -1962,7 +1962,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         break;
     case WLOGO_TT_STATE_LOAD_NAME:
         work->visible[6] = 0;
-        LoadBgMap(0, gWlogoTtMap, 0x800);
+        LoadBgMap(0, gWlogoTtMap, sizeof(gWlogoTtMap));
         LoadPalette(gWlogoTtPalettes[8], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
         EnableBg(0);
         work->blend = 16;
@@ -2202,9 +2202,9 @@ enum WlogoBksState {
 };
 
 void task_wlogo_bks_0(WlogoBksWork* work) {
-    LoadBgPalette(0, gWlogoBksPalette, 0x20);
-    LoadBgTiles(0, gWlogoBksTiles, 0xD80);
-    LoadBgMap(0, gWlogoBksCastleMap, 0x800);
+    LoadBgPalette(0, gWlogoBksPalette, sizeof(gWlogoBksPalette));
+    LoadBgTiles(0, gWlogoBksTiles, sizeof(gWlogoBksTiles));
+    LoadBgMap(0, gWlogoBksCastleMap, sizeof(gWlogoBksCastleMap));
     work->timer = 0;
     work->paletteStep = 0;
     work->state = WLOGO_BKS_STATE_WAIT;
@@ -2327,7 +2327,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
             work->timer = 0;
             work->visible = FALSE;
             LoadPalette(gWlogoBksPalettes, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
-            LoadBgMap(0, gWlogoBksMap, 0x800);
+            LoadBgMap(0, gWlogoBksMap, sizeof(gWlogoBksMap));
             work->state++;
         } else {
             work->gfx = AnimUpdate(&work->anim);

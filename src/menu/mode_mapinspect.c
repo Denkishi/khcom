@@ -416,7 +416,7 @@ void MapInspectDrawValueCounts() {
         }
     } else if (entry->category == 3) {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-            LoadBgMap(1, gMapInspectPremiumValuesMap, 0x500);
+            LoadBgMap(1, gMapInspectPremiumValuesMap, sizeof(gMapInspectPremiumValuesMap));
         }
 
         for (i = 0; i <= 9; i++) {
@@ -435,7 +435,7 @@ void MapInspectDrawValueCounts() {
         }
     } else {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-            LoadBgMap(1, gMapInspectValuesMap, 0x500);
+            LoadBgMap(1, gMapInspectValuesMap, sizeof(gMapInspectValuesMap));
         }
 
         for (i = 0; i <= 9; i++) {
@@ -649,13 +649,13 @@ void MapInspectHandleGridInput() {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
     } else if (keys & B_BUTTON) {
-        LoadBgMap(0, gMapInspectBgMap, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = TRUE;
         sMapInspectSteps = 16;
         sMapInspectState = MAP_INSPECT_STATE_TITLE_OUT;
     } else if (keys & START_BUTTON) {
-        LoadBgMap(0, gMapInspectBgMap, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -723,7 +723,7 @@ void MapInspectHandleTabInput() {
 
     if ((keys & A_BUTTON) == 0) {
         if (keys & START_BUTTON) {
-            LoadBgMap(0, gMapInspectBgMap, 0x500);
+            LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = FALSE;
             FadeStartOut(FADE_MODE_BLACK, 16);
@@ -741,7 +741,7 @@ void MapInspectHandleTabInput() {
                 sMapInspectMenuState = MAP_INSPECT_MENU_STATE_GRID;
                 MapInspectDrawValueCounts();
             } else if (keys & B_BUTTON) {
-                LoadBgMap(0, gMapInspectBgMap, 0x500);
+                LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 sMapInspectReturnToMenu = TRUE;
                 sMapInspectSteps = 16;
@@ -827,7 +827,7 @@ void MapInspectHandleValueInput() {
             AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
             sMapInspectMenuState = MAP_INSPECT_MENU_STATE_GRID;
         } else if (keys & START_BUTTON) {
-            LoadBgMap(0, gMapInspectBgMap, 0x500);
+            LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = FALSE;
             FadeStartOut(FADE_MODE_BLACK, 16);
@@ -914,7 +914,7 @@ void MapInspectHandleConfirmInput() {
         AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
         sMapInspectMenuState = MAP_INSPECT_MENU_STATE_VALUE;
     } else if (keys & START_BUTTON) {
-        LoadBgMap(0, gMapInspectBgMap, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -940,7 +940,7 @@ void MapInspectHandleNoticeInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectMenuState = MAP_INSPECT_MENU_STATE_VALUE;
     } else if (keys & START_BUTTON) {
-        LoadBgMap(0, gMapInspectBgMap, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = FALSE;
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -1144,7 +1144,7 @@ void mode_mapinspect_0() {
     sMapInspectCategoryPalette = NULL;
     sMapInspectValueCol = 0;
     sMapInspectValueRow = 0;
-    LoadBgPalette(0, gMapInspectPalettes, 0x160);
+    LoadBgPalette(0, gMapInspectPalettes, sizeof(gMapInspectPalettes));
 #ifdef VERSION_EU
     LoadBgTiles(0, gMapInspectTiles, 0x2C00);
 
@@ -1169,17 +1169,17 @@ void mode_mapinspect_0() {
         break;
     }
 #else
-    LoadBgTiles(0, gMapInspectTiles, 0x2980);
+    LoadBgTiles(0, gMapInspectTiles, sizeof(gMapInspectTiles));
 #endif
-    LoadBgPalette(2, gCard00Palette, 0x20);
-    LoadBgTiles(2, gConfirmWinTiles, 0x140);
-    LoadBgMap(2, gConfirmWinMap, 0x800);
-    LoadBgMap(0, gMapInspectBgMap, 0x500);
+    LoadBgPalette(2, gCard00Palette, sizeof(gCard00Palette));
+    LoadBgTiles(2, gConfirmWinTiles, sizeof(gConfirmWinTiles));
+    LoadBgMap(2, gConfirmWinMap, sizeof(gConfirmWinMap));
+    LoadBgMap(0, gMapInspectBgMap, sizeof(gMapInspectBgMap));
 
     if (GetMapInspectSelectedEntry()->category == 3) {
-        LoadBgMap(1, gMapInspectPremiumValuesMap, 0x500);
+        LoadBgMap(1, gMapInspectPremiumValuesMap, sizeof(gMapInspectPremiumValuesMap));
     } else {
-        LoadBgMap(1, gMapInspectValuesMap, 0x500);
+        LoadBgMap(1, gMapInspectValuesMap, sizeof(gMapInspectValuesMap));
     }
 
     MapInspectDrawTab(sMapInspectTab);
@@ -1282,7 +1282,7 @@ void mode_mapinspect_1() {
         sMapInspectSteps--;
 
         if (sMapInspectSteps <= 0) {
-            LoadBgMap(0, gMapInspectBgHeaderMap, 0x500);
+            LoadBgMap(0, gMapInspectBgHeaderMap, sizeof(gMapInspectBgHeaderMap));
             sMapInspectState = MAP_INSPECT_STATE_MENU;
         }
 

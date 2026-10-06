@@ -199,18 +199,18 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* task) {
         break;
     }
 
-    LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
-    LoadBgMap(3, gRikuDeckMenuMap, 0x800);
-    LoadBgMap(0, gDefaultBgMap, 0x800);
+    LoadBgPalette(3, gDeckMenuPalettes, sizeof(gDeckMenuPalettes));
+    LoadBgMap(3, gRikuDeckMenuMap, sizeof(gRikuDeckMenuMap));
+    LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
 #else
-    LoadBgTiles(3, gDeckMenuTiles, 0x4000);
-    LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
-    LoadBgMap(3, gRikuDeckMenuMap, 0x800);
-    LoadBgMap(0, gDefaultBgMap, 0x800);
-    LoadBgTiles(1, gDeck1PanelTiles, 0xC00);
+    LoadBgTiles(3, gDeckMenuTiles, sizeof(gDeckMenuTiles));
+    LoadBgPalette(3, gDeckMenuPalettes, sizeof(gDeckMenuPalettes));
+    LoadBgMap(3, gRikuDeckMenuMap, sizeof(gRikuDeckMenuMap));
+    LoadBgMap(0, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgTiles(1, gDeck1PanelTiles, sizeof(gDeck1PanelTiles));
 #endif
-    LoadBgMap(1, gDefaultBgMap, 0x800);
-    LoadBgMap(2, gDefaultBgMap, 0x800);
+    LoadBgMap(1, gDefaultBgMap, sizeof(gDefaultBgMap));
+    LoadBgMap(2, gDefaultBgMap, sizeof(gDefaultBgMap));
     SetBgScroll(0, (u16)-88, (u16)-108);
     SetBgScroll(1, (u16)-88, (u16)-16);
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuLoadDeckInfo);
@@ -229,8 +229,8 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* task) {
 #else
     RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base + 0x1A0, 0x1E0);
 #endif
-    LoadBgMap(0, gDeckDescriptionWindowMap, 0x800);
-    LoadBgMap(1, gRikuDeckPanelMap, 0x800);
+    LoadBgMap(0, gDeckDescriptionWindowMap, sizeof(gDeckDescriptionWindowMap));
+    LoadBgMap(1, gRikuDeckPanelMap, sizeof(gRikuDeckPanelMap));
     DrawRikuDeckCategoryCount(work->deckAttackCount, 0);
     DrawRikuDeckCategoryCount(work->deckMagicCount, 1);
     DrawRikuDeckCategoryCount(work->deckItemCount, 2);
@@ -272,7 +272,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
             n = --work->timer;
 
             if (n == 0) {
-                LoadBgMap(3, gRikuDeckReviewGridMap, 0x800);
+                LoadBgMap(3, gRikuDeckReviewGridMap, sizeof(gRikuDeckReviewGridMap));
                 ReleaseObjTiles(work->tiles12);
                 work->tiles12 = NULL;
                 ReleaseObjTiles(work->tiles6);
@@ -446,7 +446,7 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task) {
 #endif
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, sizeof(gDeckMenuBarTiles));
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, sizeof(gDeckTitleBannerPalette));
-    LoadBgMap(3, gRikuDeckMenuMap, 0x800);
+    LoadBgMap(3, gRikuDeckMenuMap, sizeof(gRikuDeckMenuMap));
     work->topBarX = 0x7800;
     work->topBarY = 0;
     work->bottomBarX = 0xA400;

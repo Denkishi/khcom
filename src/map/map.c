@@ -3866,7 +3866,7 @@ void Mode_MenuNew_0() {
     SetBgPriority(1, 0);
     SetBgPriority(0, 0);
 #ifdef VERSION_EU
-    LoadBgTiles(0, gSaveSlotBgTiles, 0x1FA0);
+    LoadBgTiles(0, gSaveSlotBgTiles, sizeof(gSaveSlotBgTiles));
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
@@ -3883,19 +3883,19 @@ void Mode_MenuNew_0() {
         break;
     }
 
-    LoadBgPalette(3, gMenuNewBgPalette, 0x200);
+    LoadBgPalette(3, gMenuNewBgPalette, sizeof(gMenuNewBgPalette));
     LoadBgMap(3, gMenuNewMaps, 0x800);
-    LoadBgPalette(1, gMenuNewBgPalette, 0x200);
+    LoadBgPalette(1, gMenuNewBgPalette, sizeof(gMenuNewBgPalette));
 #else
-    LoadBgTiles(3, gSaveSlotBgTiles, 0x1FA0);
-    LoadBgPalette(3, gMenuNewBgPalette, 0x200);
+    LoadBgTiles(3, gSaveSlotBgTiles, sizeof(gSaveSlotBgTiles));
+    LoadBgPalette(3, gMenuNewBgPalette, sizeof(gMenuNewBgPalette));
     LoadBgMap(3, gMenuNewMaps, 0x800);
-    LoadBgTiles(1, gSaveSlotBgTiles, 0x1FA0);
-    LoadBgPalette(1, gMenuNewBgPalette, 0x200);
-    LoadBgTiles(0, gSaveSlotBgTiles, 0x1FA0);
+    LoadBgTiles(1, gSaveSlotBgTiles, sizeof(gSaveSlotBgTiles));
+    LoadBgPalette(1, gMenuNewBgPalette, sizeof(gMenuNewBgPalette));
+    LoadBgTiles(0, gSaveSlotBgTiles, sizeof(gSaveSlotBgTiles));
 #endif
-    LoadBgPalette(0, gMenuNewBgPalette, 0x200);
-    LoadBgMap(0, gMenuNewMsgWinMap, 0x800);
+    LoadBgPalette(0, gMenuNewBgPalette, sizeof(gMenuNewBgPalette));
+    LoadBgMap(0, gMenuNewMsgWinMap, sizeof(gMenuNewMsgWinMap));
     SetBgScroll(0, 0, 0xFFFC);
     sNewGameSlotMenuWork->palette2 = LoadObjPalette(gSaveMenuTitlePalette, sizeof(gSaveMenuTitlePalette));
     sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gMapSaveTitleTiles, sizeof(gMapSaveTitleTiles));
@@ -4479,7 +4479,7 @@ void Mode_MenuLoad_0(s32 arg) {
     SetupBg(1, 0, 30, 0);
     SetupBg(0, 3, 31, 0);
 #ifdef VERSION_EU
-    LoadBgTiles(1, gMenuLoadBgTiles, 0x8000);
+    LoadBgTiles(1, gMenuLoadBgTiles, sizeof(gMenuLoadBgTiles));
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
@@ -4496,20 +4496,20 @@ void Mode_MenuLoad_0(s32 arg) {
         break;
     }
 
-    LoadBgPalette(3, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(3, gMenuLoadBackdropMap, 0x800);
-    LoadBgPalette(2, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(2, gMenuLoadCharaWinMap, 0x800);
+    LoadBgPalette(3, gLoadMenuBgPalettes, sizeof(gLoadMenuBgPalettes));
+    LoadBgMap(3, gMenuLoadBackdropMap, sizeof(gMenuLoadBackdropMap));
+    LoadBgPalette(2, gLoadMenuBgPalettes, sizeof(gLoadMenuBgPalettes));
+    LoadBgMap(2, gMenuLoadCharaWinMap, sizeof(gMenuLoadCharaWinMap));
 #else
-    LoadBgTiles(3, gMenuLoadBgTiles, 0x8000);
-    LoadBgPalette(3, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(3, gMenuLoadBackdropMap, 0x800);
-    LoadBgTiles(2, gMenuLoadBgTiles, 0x8000);
-    LoadBgPalette(2, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(2, gMenuLoadCharaWinMap, 0x800);
-    LoadBgTiles(1, gMenuLoadBgTiles, 0x8000);
+    LoadBgTiles(3, gMenuLoadBgTiles, sizeof(gMenuLoadBgTiles));
+    LoadBgPalette(3, gLoadMenuBgPalettes, sizeof(gLoadMenuBgPalettes));
+    LoadBgMap(3, gMenuLoadBackdropMap, sizeof(gMenuLoadBackdropMap));
+    LoadBgTiles(2, gMenuLoadBgTiles, sizeof(gMenuLoadBgTiles));
+    LoadBgPalette(2, gLoadMenuBgPalettes, sizeof(gLoadMenuBgPalettes));
+    LoadBgMap(2, gMenuLoadCharaWinMap, sizeof(gMenuLoadCharaWinMap));
+    LoadBgTiles(1, gMenuLoadBgTiles, sizeof(gMenuLoadBgTiles));
 #endif
-    LoadBgPalette(1, gLoadMenuBgPalettes, 0x200);
+    LoadBgPalette(1, gLoadMenuBgPalettes, sizeof(gLoadMenuBgPalettes));
 
     if (sLoadGameMenuWork->showRikuSlots != 0) {
         LoadBgMap(1, gMenuLoadFourSlotMaps, 0x800);
@@ -5187,8 +5187,8 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     TextSlot* yesSlots;
     TextSlot* noSlots;
 
-    LoadBgTiles(0, gConfirmWinTiles, 0x140);
-    LoadBgMap(0, gConfirmWinMap, 0x800);
+    LoadBgTiles(0, gConfirmWinTiles, sizeof(gConfirmWinTiles));
+    LoadBgMap(0, gConfirmWinMap, sizeof(gConfirmWinMap));
     LoadPalette(gCard00Palette, (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 0x20);
     FadeSetPaletteExcluded(15, TRUE);
     SetBgScroll(0, 0, 0);
@@ -6203,8 +6203,8 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
         SetupBg(0, 3, 31, 11);
         SetBgPriority(0, 0);
-        LoadBgPalette(0, gMapSaveBgPalettes, 128);
-        LoadBgTiles(0, gSaveSlotBgTiles, 0x1FA0);
+        LoadBgPalette(0, gMapSaveBgPalettes, sizeof(gMapSaveBgPalettes));
+        LoadBgTiles(0, gSaveSlotBgTiles, sizeof(gSaveSlotBgTiles));
 
 #ifdef VERSION_EU
         switch (gLanguage) {
@@ -6225,13 +6225,13 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
             if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
-                LoadBgMap(0, gMapSaveRikuFile2Map, 0x800);
+                LoadBgMap(0, gMapSaveRikuFile2Map, sizeof(gMapSaveRikuFile2Map));
 
                 if (SaveRepairFileSmall(1) == SAVE_OK) {
                     MapSaveShowSummary(work, 3);
                 }
             } else {
-                LoadBgMap(0, gMapSaveRikuFile1Map, 0x800);
+                LoadBgMap(0, gMapSaveRikuFile1Map, sizeof(gMapSaveRikuFile1Map));
 
                 if (SaveRepairFileSmall(0) == SAVE_OK) {
                     MapSaveShowSummary(work, 2);
@@ -6239,13 +6239,13 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
             }
         } else {
             if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
-                LoadBgMap(0, gMapSaveSoraFile2Map, 0x800);
+                LoadBgMap(0, gMapSaveSoraFile2Map, sizeof(gMapSaveSoraFile2Map));
 
                 if (SaveRepairFileLarge(1) == SAVE_OK) {
                     MapSaveShowSummary(work, 1);
                 }
             } else {
-                LoadBgMap(0, gMapSaveSoraFile1Map, 0x800);
+                LoadBgMap(0, gMapSaveSoraFile1Map, sizeof(gMapSaveSoraFile1Map));
 
                 if (SaveRepairFileLarge(0) == SAVE_OK) {
                     MapSaveShowSummary(work, 0);

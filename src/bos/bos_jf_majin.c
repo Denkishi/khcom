@@ -117,8 +117,8 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
     gBosJfMajinMapBlockTable[3] = gBosJfMajinMapBuffer;
     RequestDma3Copy(gBosJfMajinFrame8Map, gBosJfMajinMapBuffer, 0x800);
     gBosJfMajinMapBlocks = gBosJfMajinMapBlockTable;
-    LoadBgPalette(1, gBosJfMajinPalette, 32);
-    LoadBgTiles(1, gBosJfMajinFrame8Tiles, 0x2700);
+    LoadBgPalette(1, gBosJfMajinPalette, sizeof(gBosJfMajinPalette));
+    LoadBgTiles(1, gBosJfMajinFrame8Tiles, sizeof(gBosJfMajinFrame8Tiles));
     SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
     work->tiles = LoadObjTiles(gBosJfObjTiles, sizeof(gBosJfObjTiles));
     work->palette = LoadObjPalette(gBosJfObjPalette, sizeof(gBosJfObjPalette));

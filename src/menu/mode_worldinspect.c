@@ -396,7 +396,7 @@ void WorldInspectHandleInput() {
         }
     } else if (keys & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        LoadBgMap(0, gWorldInspectBgMap, 0x500);
+        LoadBgMap(0, gWorldInspectBgMap, sizeof(gWorldInspectBgMap));
 #ifndef VERSION_EU
         sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 #endif
@@ -405,7 +405,7 @@ void WorldInspectHandleInput() {
         sWorldInspectState = WORLD_INSPECT_STATE_TITLE_OUT;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        LoadBgMap(0, gWorldInspectBgMap, 0x500);
+        LoadBgMap(0, gWorldInspectBgMap, sizeof(gWorldInspectBgMap));
 #ifndef VERSION_EU
         sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 #endif
@@ -510,7 +510,7 @@ void WorldInspectHandleDetailInput() {
 #endif
 
         if (keys & START_BUTTON) {
-            LoadBgMap(0, gWorldInspectBgMap, 0x500);
+            LoadBgMap(0, gWorldInspectBgMap, sizeof(gWorldInspectBgMap));
 #ifndef VERSION_EU
             sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
 #endif
@@ -708,7 +708,7 @@ void mode_worldinspect_0() {
     sWorldInspectBarY[0] = -0x800;
     sWorldInspectBarY[1] = 0xA800;
     sWorldInspectBarX = -0x8000;
-    LoadBgPalette(0, gWorldInspectBgPalettes, 0x200);
+    LoadBgPalette(0, gWorldInspectBgPalettes, sizeof(gWorldInspectBgPalettes));
 
     for (i = 0; i <= 11; i++) {
         if (sWorldInspectWorlds[i] != 0) {
@@ -725,7 +725,7 @@ void mode_worldinspect_0() {
         }
     }
 
-    LoadBgTiles(0, gWorldInspectTiles, 0x6BC0);
+    LoadBgTiles(0, gWorldInspectTiles, sizeof(gWorldInspectTiles));
 
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -761,7 +761,7 @@ void mode_worldinspect_0() {
     }
 #endif
 
-    LoadBgMap(0, gWorldInspectBgMap, 0x500);
+    LoadBgMap(0, gWorldInspectBgMap, sizeof(gWorldInspectBgMap));
     DmaCopy16(3, gWorldInspectFloorMap, sWorldInspectTilemap, 0x500);
 
     for (i = 0; i <= 11; i++) {
@@ -805,8 +805,8 @@ void mode_worldinspect_0() {
     }
 
     LoadBgMap(1, sWorldInspectTilemap, 0x500);
-    LoadBgMap(2, gWorldInspectShadeMap, 0x500);
-    LoadBgMap(3, gWorldInspectDetailMap, 0x500);
+    LoadBgMap(2, gWorldInspectShadeMap, sizeof(gWorldInspectShadeMap));
+    LoadBgMap(3, gWorldInspectDetailMap, sizeof(gWorldInspectDetailMap));
     WorldInspectLoadFloorTiles(sWorldInspectCursor);
     sWorldInspectHighlightPalette = LoadObjPalette(gWorldInspectHighlightPalette, sizeof(gWorldInspectHighlightPalette));
     sWorldInspectHighlightTiles = LoadObjTiles(gWorldInspectHighlightTiles, sizeof(gWorldInspectHighlightTiles));
@@ -872,7 +872,7 @@ void mode_worldinspect_1() {
         sWorldInspectSteps--;
 
         if (sWorldInspectSteps <= 0) {
-            LoadBgMap(0, gWorldInspectBgHeaderMap, 0x500);
+            LoadBgMap(0, gWorldInspectBgHeaderMap, sizeof(gWorldInspectBgHeaderMap));
 #ifndef VERSION_EU
             ReleaseObjPalette(sWorldInspectBarPalette);
 #endif

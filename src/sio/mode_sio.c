@@ -147,9 +147,9 @@ void mode_sio_battle_0(s32 arg) {
     SetBgMode0();
     SetupBg(0, 0, 7, 0);
     SetupBg(1, 0, 31, 0);
-    LoadBgTiles(1, gSioBgTiles, 0xBC0);
-    LoadBgPalette(1, gSioBgPalettes, 64);
-    LoadBgMap(1, gSioBattleBgMap, 0x800);
+    LoadBgTiles(1, gSioBgTiles, sizeof(gSioBgTiles));
+    LoadBgPalette(1, gSioBgPalettes, sizeof(gSioBgPalettes));
+    LoadBgMap(1, gSioBattleBgMap, sizeof(gSioBattleBgMap));
     EnableBg(1);
     sSioBattleWork->state = SIO_BATTLE_STATE_SLIDE_IN_VERTICAL;
     sSioBattleWork->slideTimer = 0;
@@ -522,12 +522,12 @@ void mode_sio_btl_connect_0(s32 arg) {
     SetupBg(1, 1, 31, 0);
     EnableBg(0);
     EnableBg(1);
-    LoadBgTiles(0, gSioMsgWinTiles, 0x140);
-    LoadBgMap(0, gSioMsgWinMap, 0x800);
-    LoadBgPalette(0, gCard00Palette, 0x20);
-    LoadBgTiles(1, gSioBgTiles, 0xBC0);
-    LoadBgPalette(1, gSioBgPalettes, 0x40);
-    LoadBgMap(1, gSioConnectBgMap, 0x800);
+    LoadBgTiles(0, gSioMsgWinTiles, sizeof(gSioMsgWinTiles));
+    LoadBgMap(0, gSioMsgWinMap, sizeof(gSioMsgWinMap));
+    LoadBgPalette(0, gCard00Palette, sizeof(gCard00Palette));
+    LoadBgTiles(1, gSioBgTiles, sizeof(gSioBgTiles));
+    LoadBgPalette(1, gSioBgPalettes, sizeof(gSioBgPalettes));
+    LoadBgMap(1, gSioConnectBgMap, sizeof(gSioConnectBgMap));
     sSioBtlConnectWork->unk_00 = 0;
     sSioBtlConnectWork->timer = 0;
     sSioBtlConnectWork->state = SIO_BTL_CONNECT_STATE_CONNECT;
@@ -778,33 +778,33 @@ void SioBtlOptionLoadBg() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        LoadBgMap(0, gSioBtlOptionBg0Map, 0x800);
-        LoadBgMap(1, gSioBtlOptionBg1Map, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0Map, sizeof(gSioBtlOptionBg0Map));
+        LoadBgMap(1, gSioBtlOptionBg1Map, sizeof(gSioBtlOptionBg1Map));
         break;
     case LANGUAGE_ITALIAN:
-        LoadBgMap(0, gSioBtlOptionBg0ItalianMap, 0x800);
-        LoadBgMap(1, gSioBtlOptionBg1ItalianMap, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0ItalianMap, sizeof(gSioBtlOptionBg0ItalianMap));
+        LoadBgMap(1, gSioBtlOptionBg1ItalianMap, sizeof(gSioBtlOptionBg1ItalianMap));
         break;
     case LANGUAGE_FRENCH:
-        LoadBgMap(0, gSioBtlOptionBg0FrenchMap, 0x800);
-        LoadBgMap(1, gSioBtlOptionBg1FrenchMap, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0FrenchMap, sizeof(gSioBtlOptionBg0FrenchMap));
+        LoadBgMap(1, gSioBtlOptionBg1FrenchMap, sizeof(gSioBtlOptionBg1FrenchMap));
         break;
     case LANGUAGE_SPANISH:
-        LoadBgMap(0, gSioBtlOptionBg0SpanishMap, 0x800);
-        LoadBgMap(1, gSioBtlOptionBg1SpanishMap, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0SpanishMap, sizeof(gSioBtlOptionBg0SpanishMap));
+        LoadBgMap(1, gSioBtlOptionBg1SpanishMap, sizeof(gSioBtlOptionBg1SpanishMap));
         break;
     case LANGUAGE_GERMAN:
     default:
-        LoadBgMap(0, gSioBtlOptionBg0GermanMap, 0x800);
-        LoadBgMap(1, gSioBtlOptionBg1GermanMap, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0GermanMap, sizeof(gSioBtlOptionBg0GermanMap));
+        LoadBgMap(1, gSioBtlOptionBg1GermanMap, sizeof(gSioBtlOptionBg1GermanMap));
         break;
     }
 #else
-    LoadBgMap(0, gSioBtlOptionBg0Map, 0x800);
+    LoadBgMap(0, gSioBtlOptionBg0Map, sizeof(gSioBtlOptionBg0Map));
 #endif
-    LoadBgPalette(0, gSioBtlOptionBgPalettes, 0xC0);
+    LoadBgPalette(0, gSioBtlOptionBgPalettes, sizeof(gSioBtlOptionBgPalettes));
 #ifndef VERSION_EU
-    LoadBgMap(1, gSioBtlOptionBg1Map, 0x800);
+    LoadBgMap(1, gSioBtlOptionBg1Map, sizeof(gSioBtlOptionBg1Map));
 #endif
     DisableBg(0);
     DisableBg(1);
@@ -2395,24 +2395,24 @@ void SioBtlCardgetLoadBg() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        LoadBgMap(1, gSioBtlCardgetBgMap, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgMap, sizeof(gSioBtlCardgetBgMap));
         break;
     case LANGUAGE_ITALIAN:
-        LoadBgMap(1, gSioBtlCardgetBgItalianMap, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgItalianMap, sizeof(gSioBtlCardgetBgItalianMap));
         break;
     case LANGUAGE_FRENCH:
-        LoadBgMap(1, gSioBtlCardgetBgFrenchMap, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgFrenchMap, sizeof(gSioBtlCardgetBgFrenchMap));
         break;
     case LANGUAGE_SPANISH:
-        LoadBgMap(1, gSioBtlCardgetBgSpanishMap, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgSpanishMap, sizeof(gSioBtlCardgetBgSpanishMap));
         break;
     case LANGUAGE_GERMAN:
     default:
-        LoadBgMap(1, gSioBtlCardgetBgGermanMap, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgGermanMap, sizeof(gSioBtlCardgetBgGermanMap));
         break;
     }
 #else
-    LoadBgMap(1, gSioBtlCardgetBgMap, 0x800);
+    LoadBgMap(1, gSioBtlCardgetBgMap, sizeof(gSioBtlCardgetBgMap));
 #endif
     DisableBg(1);
 }
@@ -2634,7 +2634,7 @@ void SioBtlCardgetDraw() {
 }
 
 void SioBtlCardgetLoad1PWin() {
-    LoadBgMap(2, gSioBtlCardget1PWinMap, 0x800);
+    LoadBgMap(2, gSioBtlCardget1PWinMap, sizeof(gSioBtlCardget1PWinMap));
     sSioBtlCardgetWork->tiles = AllocObjTiles(0xC80, gSor1ff00Tiles);
     sSioBtlCardgetWork->gfx = gSor1ff00Frames[18];
     sSioBtlCardgetWork->tiles2 = AllocObjTiles(0xC80, gSor1fl26Tiles);
@@ -2687,7 +2687,7 @@ void SioBtlCardgetLoad1PWin() {
 }
 
 void SioBtlCardgetLoad2PWin() {
-    LoadBgMap(2, gSioBtlCardget2PWinMap, 0x800);
+    LoadBgMap(2, gSioBtlCardget2PWinMap, sizeof(gSioBtlCardget2PWinMap));
     sSioBtlCardgetWork->tiles = AllocObjTiles(0xC80, gSor1fl26Tiles);
     sSioBtlCardgetWork->gfx = gSor1fl26Frames[6];
     sSioBtlCardgetWork->tiles2 = AllocObjTiles(0xC80, gSor1ff00Tiles);
@@ -2753,12 +2753,12 @@ void mode_sio_chg_connect_0(s32 arg) {
     SetupBg(1, 1, 31, 0);
     EnableBg(0);
     EnableBg(1);
-    LoadBgTiles(0, gSioMsgWinTiles, 0x140);
-    LoadBgMap(0, gSioMsgWinMap, 0x800);
-    LoadBgPalette(0, gCard00Palette, 0x20);
-    LoadBgTiles(1, gSioBgTiles, 0xBC0);
-    LoadBgPalette(1, gSioBgPalettes, 0x40);
-    LoadBgMap(1, gSioConnectBgMap, 0x800);
+    LoadBgTiles(0, gSioMsgWinTiles, sizeof(gSioMsgWinTiles));
+    LoadBgMap(0, gSioMsgWinMap, sizeof(gSioMsgWinMap));
+    LoadBgPalette(0, gCard00Palette, sizeof(gCard00Palette));
+    LoadBgTiles(1, gSioBgTiles, sizeof(gSioBgTiles));
+    LoadBgPalette(1, gSioBgPalettes, sizeof(gSioBgPalettes));
+    LoadBgMap(1, gSioConnectBgMap, sizeof(gSioConnectBgMap));
     sSioChgConnectWork->unk_00 = 0;
     sSioChgConnectWork->timer = 0;
     sSioChgConnectWork->state = SIO_CHG_CONNECT_STATE_CONNECT;
@@ -2917,8 +2917,8 @@ void mode_sio_chg_card_0(s32 arg) {
 #ifndef VERSION_EU
 void SioChgCardLoadBg() {
     RequestDma3Copy(gSioChgCardTitleTiles, (u8*)GetBgCharBase(0) + 0x2000, 0x11C0);
-    LoadBgPalette(0, gSioChgCardBgPalettes, 0xE0);
-    LoadBgMap(0, gSioChgCardBg0Map, 0x800);
+    LoadBgPalette(0, gSioChgCardBgPalettes, sizeof(gSioChgCardBgPalettes));
+    LoadBgMap(0, gSioChgCardBg0Map, sizeof(gSioChgCardBg0Map));
     DisableBg(0);
     DisableBg(1);
     DisableBg(2);
@@ -2932,8 +2932,8 @@ void SioChgCardInitObjs() {
     s32 i;
     s16 n;
     FadeStartIn(FADE_MODE_BLACK, 16);
-    LoadBgMap(1, gSioChgCardBg1Map, 0x800);
-    LoadBgMap(2, gSioChgCardBg2Map, 0x800);
+    LoadBgMap(1, gSioChgCardBg1Map, sizeof(gSioChgCardBg1Map));
+    LoadBgMap(2, gSioChgCardBg2Map, sizeof(gSioChgCardBg2Map));
     DisableBg(0);
     EnableBg(1);
     EnableBg(2);
@@ -3895,9 +3895,9 @@ void mode_sioError_0(s32 arg) {
     SetupBg(0, 0, 7, 15);
     SetupBg(1, 1, 31, 0);
     SetBgSize(1, BGCNT_TXT256x256);
-    LoadBgTiles(1, gSioBgTiles, 0xBC0);
-    LoadBgPalette(1, gSioBgPalettes, 0x40);
-    LoadBgMap(1, gSioConnectBgMap, 0x800);
+    LoadBgTiles(1, gSioBgTiles, sizeof(gSioBgTiles));
+    LoadBgPalette(1, gSioBgPalettes, sizeof(gSioBgPalettes));
+    LoadBgMap(1, gSioConnectBgMap, sizeof(gSioConnectBgMap));
     EnableBg(0);
     EnableBg(1);
     DisableBg(2);
@@ -3906,24 +3906,24 @@ void mode_sioError_0(s32 arg) {
     sSioErrorWork->unk_02 = 0;
     sSioErrorWork->unk_04 = 0;
 #ifdef VERSION_EU
-    LoadBgPalette(0, gCard00Palette, 32);
-    LoadBgTiles(0, gSysMsgWinTiles, 0x140);
+    LoadBgPalette(0, gCard00Palette, sizeof(gCard00Palette));
+    LoadBgTiles(0, gSysMsgWinTiles, sizeof(gSysMsgWinTiles));
 
     if (gLanguage == LANGUAGE_FRENCH || gLanguage == LANGUAGE_SPANISH) {
-        LoadBgMap(0, gSysMsgWinFrenchSpanishMap, 0x800);
+        LoadBgMap(0, gSysMsgWinFrenchSpanishMap, sizeof(gSysMsgWinFrenchSpanishMap));
         SetBgScroll(0, 0xFFE9, 0xFFCD);
     } else {
-        LoadBgMap(0, gSysMsgWinMap, 0x800);
+        LoadBgMap(0, gSysMsgWinMap, sizeof(gSysMsgWinMap));
         SetBgScroll(0, 0xFFE9, 0xFFD0);
     }
 #elif defined(VERSION_JP)
-    LoadBgTiles(0, gSioMsgWinTiles, 0x140);
-    LoadBgMap(0, gSioMsgWinMap, 0x800);
-    LoadBgPalette(0, gCard00Palette, 32);
+    LoadBgTiles(0, gSioMsgWinTiles, sizeof(gSioMsgWinTiles));
+    LoadBgMap(0, gSioMsgWinMap, sizeof(gSioMsgWinMap));
+    LoadBgPalette(0, gCard00Palette, sizeof(gCard00Palette));
 #else
-    LoadBgTiles(0, gSysMsgWinTiles, 0x140);
-    LoadBgMap(0, gSysMsgWinMap, 0x800);
-    LoadBgPalette(0, gCard00Palette, 32);
+    LoadBgTiles(0, gSysMsgWinTiles, sizeof(gSysMsgWinTiles));
+    LoadBgMap(0, gSysMsgWinMap, sizeof(gSysMsgWinMap));
+    LoadBgPalette(0, gCard00Palette, sizeof(gCard00Palette));
     SetBgScroll(0, 0xFFE9, 0xFFD0);
 #endif
     InitTextSlots(sSioErrorWork->textSlots, SIO_ERROR_TEXT_SLOTS);

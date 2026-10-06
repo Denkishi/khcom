@@ -382,7 +382,7 @@ void MsChargeDrawValueCounts() {
 #ifdef VERSION_EU
             LoadBgMap(1, sMsChargeEnemyCountBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(1, gMsChargeEnemyCountBgMap, 0x500);
+            LoadBgMap(1, gMsChargeEnemyCountBgMap, sizeof(gMsChargeEnemyCountBgMap));
 #endif
         }
 
@@ -405,7 +405,7 @@ void MsChargeDrawValueCounts() {
 #ifdef VERSION_EU
             LoadBgMap(1, sMsChargeValueCountBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(1, gMsChargeValueCountBgMap, 0x500);
+            LoadBgMap(1, gMsChargeValueCountBgMap, sizeof(gMsChargeValueCountBgMap));
 #endif
         }
 
@@ -1174,14 +1174,8 @@ void mode_ms_charge_0() {
     sMsChargeBobPhase = 0;
     sMsChargeMoogleAnimId = -1;
     sMsChargeMoogleAnimTimer = 0;
-    LoadBgPalette(0, gMsChargeBgPalette, 0x1A0);
-    LoadBgTiles(0, gMsChargeBgTiles,
-#ifdef VERSION_EU
-        0x61C0
-#else
-        0x4A60
-#endif
-    );
+    LoadBgPalette(0, gMsChargeBgPalette, sizeof(gMsChargeBgPalette));
+    LoadBgTiles(0, gMsChargeBgTiles, sizeof(gMsChargeBgTiles));
     LoadBgMap(0,
 #ifdef VERSION_EU
         sMsChargeBgMapsByLanguage[gLanguage]
@@ -1211,7 +1205,7 @@ void mode_ms_charge_0() {
     MsChargeDrawTab(sMsChargeTab);
     LoadBgMap(2,
         gMsChargeWindowMap
-    , 0x500);
+    , sizeof(gMsChargeWindowMap));
     MsChargeDrawPoints();
     MsChargeDrawCardCounts();
     MsChargeDrawCategoryCounts();

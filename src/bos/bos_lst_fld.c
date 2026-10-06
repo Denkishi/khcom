@@ -674,31 +674,31 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
 
         switch (work->nextBgMode) {
         case BOS_LST_FLD_BG_MODE_HORIZON:
-            LoadBgMap(0, gBosLstBgMap, 0x800);
+            LoadBgMap(0, gBosLstBgMap, sizeof(gBosLstBgMap));
             ScanlineDmaInit(&REG_BG0HOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         case BOS_LST_FLD_BG_MODE_TUNNEL:
-            LoadBgMap(0, gBosLstFldMode1Map, 0x800);
+            LoadBgMap(0, gBosLstFldMode1Map, sizeof(gBosLstFldMode1Map));
             ScanlineDmaInit(&REG_BG0HOFS, work->hofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         case BOS_LST_FLD_BG_MODE_STAR_DRIFT:
             work->scrollX = -(work->nextScrollDir * 120);
 
             if (work->nextScrollDir > 0) {
-                LoadBgMap(0, gBosLstFldMode2Map, 0x800);
+                LoadBgMap(0, gBosLstFldMode2Map, sizeof(gBosLstFldMode2Map));
             } else {
-                LoadBgMap(0, gBosLstFldMode2ReverseMap, 0x800);
+                LoadBgMap(0, gBosLstFldMode2ReverseMap, sizeof(gBosLstFldMode2ReverseMap));
             }
 
             ScanlineDmaInit(&REG_BG0VOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         case BOS_LST_FLD_BG_MODE_STAR_STREAM:
             work->scrollSpeed = 0;
-            LoadBgMap(0, gBosLstFldMode2Map, 0x800);
+            LoadBgMap(0, gBosLstFldMode2Map, sizeof(gBosLstFldMode2Map));
             ScanlineDmaInit(&REG_BG0VOFS, work->vofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         default:
-            LoadBgMap(0, gBosLstFldMode4Map, 0x800);
+            LoadBgMap(0, gBosLstFldMode4Map, sizeof(gBosLstFldMode4Map));
             break;
         }
     }

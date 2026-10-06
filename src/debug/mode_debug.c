@@ -59,13 +59,13 @@ void mode_debug_0() {
     SetBgColorMode(1, BGCNT_256COLOR);
     SetBgSize(1, BGCNT_TXT256x256);
 #ifdef VERSION_EU
-    LoadBgPalette(1, gDebugMenuBgPalette, 0x200);
+    LoadBgPalette(1, gDebugMenuBgPalette, sizeof(gDebugMenuBgPalette));
     LoadBgTilesLz77(1, gDebugMenuBgTiles);
     LoadBgMapLz77(1, gDebugMenuBgMap);
 #else
-    LoadBgTiles(1, gDebugMenuBgTiles, 0x5B40);
-    LoadBgPalette(1, gDebugMenuBgPalette, 0x200);
-    LoadBgMap(1, gDebugMenuBgMap, 0x800);
+    LoadBgTiles(1, gDebugMenuBgTiles, sizeof(gDebugMenuBgTiles));
+    LoadBgPalette(1, gDebugMenuBgPalette, sizeof(gDebugMenuBgPalette));
+    LoadBgMap(1, gDebugMenuBgMap, sizeof(gDebugMenuBgMap));
 #endif
     EnableBg(1);
     SetBackdropColor(31, 31, 31);

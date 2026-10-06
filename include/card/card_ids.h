@@ -291,6 +291,11 @@ enum MapCardKind {
     MAP_CARD_NONE = 0xFF
 };
 
+enum RoomName {
+    ROOM_NAME_UNKNOWN_PLACE = 26,
+    ROOM_NAME_HIDDEN_CHAMBER
+};
+
 enum MapCardGroup {
     MAP_CARD_GROUP_TRANQUIL_DARKNESS,
     MAP_CARD_GROUP_TEEMING_DARKNESS,

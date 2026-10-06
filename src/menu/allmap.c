@@ -38,6 +38,7 @@
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
 #include "gba/defines.h"
+#include "card_ids.h"
 
 #define sAllmapState ((AllmapState*)gSharedModeWork)
 
@@ -1232,7 +1233,7 @@ void AllmapHandleInput() {
 
     floorRoom = GetMapFloorRoom(room);
 
-    if (floorRoom->nameId != 26 && (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
+    if (floorRoom->nameId != ROOM_NAME_UNKNOWN_PLACE && (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
         sAllmapState->roomnameTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoomname, &floorRoom->nameId);
     } else {
         sAllmapState->roomnameTask = NULL;

@@ -3437,7 +3437,7 @@ void Mode_MapFix_0() {
     InitFieldState();
     ColliderPoolsInit();
     gMapRoomState->flags |= ROOM_FLAG_FIXED_ROOM;
-    gMapRoomState->nameId = 26;
+    gMapRoomState->nameId = ROOM_NAME_UNKNOWN_PLACE;
     gMapRoomState->roomType = 0;
 
     fixedDef = GetMapFixedDef();

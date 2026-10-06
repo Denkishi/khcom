@@ -1923,85 +1923,85 @@ u8 GetRoomCardBackIndex(u16 kind) {
     idx = 0;
 
     switch (kind) {
-    case 1:
-        idx = 0;
+    case MAP_CARD_TRANQUIL_DARKNESS:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 0);
         break;
-    case 2:
-        idx = 170;
+    case MAP_CARD_GUARDED_TROVE:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_GUARDED_TROVE, 0);
         break;
-    case 3:
-        idx = 50;
+    case MAP_CARD_LOOMING_DARKNESS:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_LOOMING_DARKNESS, 0);
         break;
-    case 4:
-        idx = 40;
+    case MAP_CARD_SLEEPING_DARKNESS:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_SLEEPING_DARKNESS, 0);
         break;
-    case 5:
-        idx = 190;
+    case MAP_CARD_MOMENTS_REPRIEVE:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_MOMENTS_REPRIEVE, 0);
         break;
-    case 6:
-        idx = 20;
+    case MAP_CARD_FEEBLE_DARKNESS:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_FEEBLE_DARKNESS, 0);
         break;
-    case 7:
-        idx = 30;
+    case MAP_CARD_ALMIGHTY_DARKNESS:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_ALMIGHTY_DARKNESS, 0);
         break;
-    case 8:
-        idx = 160;
+    case MAP_CARD_CALM_BOUNTY:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_CALM_BOUNTY, 0);
         break;
-    case 9:
-        idx = 180;
+    case MAP_CARD_FALSE_BOUNTY:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_FALSE_BOUNTY, 0);
         break;
-    case 10:
-        idx = 210;
+    case MAP_CARD_MOOGLE_ROOM:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_MOOGLE_ROOM, 0);
         break;
-    case 11:
-        idx = 100;
+    case MAP_CARD_SORCEROUS_WAKING:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_SORCEROUS_WAKING, 0);
         break;
-    case 12:
-        idx = 90;
+    case MAP_CARD_MARTIAL_WAKING:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_MARTIAL_WAKING, 0);
         break;
-    case 13:
-        idx = 110;
+    case MAP_CARD_ALCHEMIC_WAKING:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_ALCHEMIC_WAKING, 0);
         break;
-    case 14:
-        idx = 120;
+    case MAP_CARD_MEETING_GROUND:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_MEETING_GROUND, 0);
         break;
-    case 15:
-        idx = 200;
+    case MAP_CARD_MINGLING_WORLDS:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_MINGLING_WORLDS, 0);
         break;
-    case 16:
-        idx = 140;
+    case MAP_CARD_STRONG_INITIATIVE:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_STRONG_INITIATIVE, 0);
         break;
-    case 17:
-        idx = 150;
+    case MAP_CARD_LASTING_DAZE:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_LASTING_DAZE, 0);
         break;
-    case 18:
-        idx = 130;
+    case MAP_CARD_STAGNANT_SPACE:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_STAGNANT_SPACE, 0);
         break;
-    case 19:
-        idx = 60;
+    case MAP_CARD_PREMIUM_ROOM:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_PREMIUM_ROOM, 0);
         break;
-    case 20:
-        idx = 70;
+    case MAP_CARD_WHITE_ROOM:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_WHITE_ROOM, 0);
         break;
-    case 21:
-        idx = 80;
+    case MAP_CARD_BLACK_ROOM:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_BLACK_ROOM, 0);
         break;
-    case 22:
-        idx = 220;
+    case MAP_CARD_KEY_OF_BEGINNINGS:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_BEGINNINGS, 0);
         break;
-    case 23:
-        idx = 230;
+    case MAP_CARD_KEY_OF_GUIDANCE:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_KEY_OF_GUIDANCE, 0);
         break;
-    case 24:
-        idx = 240;
+    case MAP_CARD_KEY_TO_TRUTH:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_KEY_TO_TRUTH, 0);
         break;
-    case 0:
-    case 26:
-        idx = 10;
+    case MAP_CARD_TEEMING_DARKNESS:
+    case ROOM_NAME_UNKNOWN_PLACE:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_TEEMING_DARKNESS, 0);
         break;
-    case 25:
-    case 27:
-        idx = 250;
+    case MAP_CARD_KEY_TO_REWARDS:
+    case ROOM_NAME_HIDDEN_CHAMBER:
+        idx = MAP_CARD_ID(MAP_CARD_GROUP_KEY_TO_REWARDS, 0);
         break;
     }
 

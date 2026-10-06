@@ -94,7 +94,7 @@ void MarkEventRoomDone(MapEventDoor* door) {
     if (door->kind == EVENT_DOOR_EVENT_ROOM || door->kind == EVENT_DOOR_BOSS_ROOM) {
         floorRoom = GetMapFloorRoom(door->room);
         floorRoom->cardValue = 0;
-        floorRoom->nameId = 26;
+        floorRoom->nameId = ROOM_NAME_UNKNOWN_PLACE;
         floorRoom->roomType = 0;
         floorRoom->flags |= FLOOR_ROOM_FLAG_EVENT_DONE;
     }
@@ -622,14 +622,14 @@ void SetCardlessRoomType(u8 room) {
         if (door->room == room) {
             if (door->kind == EVENT_DOOR_HIDDEN_CHAMBER) {
                 floorRoom->cardValue = 0;
-                floorRoom->nameId = 27;
+                floorRoom->nameId = ROOM_NAME_HIDDEN_CHAMBER;
                 floorRoom->roomType = 22;
                 return;
             }
 
             gMapFloorState.flags |= FLOOR_FLAG_EVENT_ROOM_OPEN;
             floorRoom->cardValue = 0;
-            floorRoom->nameId = 26;
+            floorRoom->nameId = ROOM_NAME_UNKNOWN_PLACE;
             floorRoom->roomType = 0;
         }
 
@@ -638,13 +638,13 @@ void SetCardlessRoomType(u8 room) {
 
     if (GetMapFloorDef(gGameState.floor)->exitRoom != room) {
         floorRoom->cardValue = 0;
-        floorRoom->nameId = 26;
+        floorRoom->nameId = ROOM_NAME_UNKNOWN_PLACE;
         floorRoom->roomType = 0;
         return;
     }
 
     floorRoom->cardValue = 0;
-    floorRoom->nameId = 5;
+    floorRoom->nameId = MAP_CARD_MOMENTS_REPRIEVE;
     floorRoom->roomType = 23;
 }
 

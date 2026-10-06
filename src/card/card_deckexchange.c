@@ -96,8 +96,8 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     AnimInit(&work->anim, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    work->x2 = sDeckExchangeTabPointerX[0] << 8;
-    work->y2 = sDeckExchangeTabPointerY[0] << 8;
+    work->handX = sDeckExchangeTabPointerX[0] << 8;
+    work->handY = sDeckExchangeTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles3 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
@@ -301,12 +301,12 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* task) {
     case 10:
         DrawDeckExchangeEquipMarker(GetActiveDeckIndex());
         DrawDeckExchangeCardTotals();
-        work->x = 0x4800;
-        work->y = 0x2800;
+        work->thumbX = 0x4800;
+        work->thumbY = 0x2800;
         deckIndex = work->deckIndex;
         work->cursorRow = deckIndex;
-        ApproachValue(&work->x2, sDeckExchangeTabPointerX[work->cursorCol] << 8, work->timer);
-        ApproachValue(&work->y2, sDeckExchangeTabPointerY[work->cursorRow] << 8, work->timer);
+        ApproachValue(&work->handX, sDeckExchangeTabPointerX[work->cursorCol] << 8, work->timer);
+        ApproachValue(&work->handY, sDeckExchangeTabPointerY[work->cursorRow] << 8, work->timer);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeOpenCollection);
         work->view = DECK_MENU_VIEW_DECK_SELECT;
         SetDeckExchangeHandAnim(work);
@@ -413,8 +413,8 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         work->cursorCol = saved;
         saved = (s8)work->savedRow;
         work->cursorRow = saved;
-        work->x2 = gCollectionGridColumnX[work->cursorCol] << 8;
-        work->y2 = gCollectionGridRowY[work->cursorRow] << 8;
+        work->handX = gCollectionGridColumnX[work->cursorCol] << 8;
+        work->handY = gCollectionGridRowY[work->cursorRow] << 8;
         ShowDeckExchangeCardPreview(work);
         work->view = DECK_MENU_VIEW_DELETE_GRID;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeGrid);
@@ -445,8 +445,8 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
     }
 
     if (work->timer != 0) {
-        ApproachValue(&work->x2, sDeckExchangeValueGridX[work->cursorCol] << 8, work->timer);
-        ApproachValue(&work->y2, (sDeckExchangeValueGridY[work->cursorRow] - 16) << 8, work->timer);
+        ApproachValue(&work->handX, sDeckExchangeValueGridX[work->cursorCol] << 8, work->timer);
+        ApproachValue(&work->handY, (sDeckExchangeValueGridY[work->cursorRow] - 16) << 8, work->timer);
         work->timer--;
     }
 
@@ -502,8 +502,8 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
             ShowDeckExchangeCardPreview(work);
             work->view = DECK_MENU_VIEW_DELETE_GRID;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeGrid);
-            work->x = 0xA000;
-            work->y = 0x2800;
+            work->thumbX = 0xA000;
+            work->thumbY = 0x2800;
             work->scrollRowEnd = 4;
             return 1;
         }
@@ -519,8 +519,8 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
             ShowDeckExchangeCardPreview(work);
             work->view = DECK_MENU_VIEW_DELETE_GRID;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeGrid);
-            work->x = 0xA000;
-            work->y = 0x2800;
+            work->thumbX = 0xA000;
+            work->thumbY = 0x2800;
             work->scrollRowEnd = 4;
             return 1;
         }
@@ -539,8 +539,8 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
     }
 
     if (work->timer != 0) {
-        ApproachValue(&work->x2, sDeckExchangeFilterTabX[work->cursorCol] << 8, work->timer);
-        ApproachValue(&work->y2, 0x1E00, work->timer);
+        ApproachValue(&work->handX, sDeckExchangeFilterTabX[work->cursorCol] << 8, work->timer);
+        ApproachValue(&work->handY, 0x1E00, work->timer);
         work->timer--;
     }
 
@@ -630,8 +630,8 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* task) {
         work->categoryFilter = 5;
         work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, 5, 1);
         SetDeckExchangeHandAnim(work);
-        work->x2 = gCollectionGridColumnX[0] << 8;
-        work->y2 = gCollectionGridRowY[0] << 8;
+        work->handX = gCollectionGridColumnX[0] << 8;
+        work->handY = gCollectionGridRowY[0] << 8;
         work->mode = DECK_MENU_MODE_ADD;
         work->cursorCol = 0;
         work->cursorRow = 0;
@@ -764,8 +764,8 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
 
             if ((u8)MoveDeckExchangeValueCursor(work, 0)) {
                 DrawDeckExchangeValueCpCost(work);
-                work->x2 = sDeckExchangeValueGridX[work->cursorCol] << 8;
-                work->y2 = (sDeckExchangeValueGridY[work->cursorRow] - 16) << 8;
+                work->handX = sDeckExchangeValueGridX[work->cursorCol] << 8;
+                work->handY = (sDeckExchangeValueGridY[work->cursorRow] - 16) << 8;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeValueSelect);
                 return 1;
             }
@@ -798,8 +798,8 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
         ResetDeckExchangeGridScroll(work);
         work->cursorCol = work->categoryFilter;
         work->timer = 4;
-        work->x = 0xA000;
-        work->y = 0x2800;
+        work->thumbX = 0xA000;
+        work->thumbY = 0x2800;
         work->scrollRowEnd = 4;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
         work->view = DECK_MENU_VIEW_DELETE_FILTER;
@@ -808,8 +808,8 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
     }
 
     if (work->timer != 0) {
-        ApproachValue(&work->x2, gCollectionGridColumnX[work->cursorCol] << 8, work->timer);
-        ApproachValue(&work->y2, gCollectionGridRowY[work->cursorRow] << 8, work->timer);
+        ApproachValue(&work->handX, gCollectionGridColumnX[work->cursorCol] << 8, work->timer);
+        ApproachValue(&work->handY, gCollectionGridRowY[work->cursorRow] << 8, work->timer);
         work->timer--;
     }
 
@@ -878,10 +878,10 @@ void DrawDeckExchangeCardDescription(DeckExchangeWork* work) {
 
 void deckexchange_2(DeckExchangeWork* work) {
     if (work->popupActive == 0) {
-        DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 30, work->gfx, work->tiles, work->palette, NULL, work->handFlags, 3);
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 30, work->gfx, work->tiles, work->palette, NULL, work->handFlags, 3);
     }
 
-    DrawSprite(work->x >> 8, work->y >> 8, gDeckScrollThumbFrames[0], work->tiles3, work->palette, NULL, SPRITE_PRIORITY(2), 10);
+    DrawSprite(work->thumbX >> 8, work->thumbY >> 8, gDeckScrollThumbFrames[0], work->tiles3, work->palette, NULL, SPRITE_PRIORITY(2), 10);
 
     switch (work->view) {
     case DECK_MENU_VIEW_DECK_GRID:
@@ -889,7 +889,7 @@ void deckexchange_2(DeckExchangeWork* work) {
             DrawSprite((work->x3 >> 8) - 16, (work->y3 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
         }
 
-        DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
     case DECK_MENU_VIEW_DECK_SELECT:
     case DECK_MENU_VIEW_DECK_FILTER:
     case DECK_MENU_VIEW_COMMANDS:
@@ -897,11 +897,11 @@ void deckexchange_2(DeckExchangeWork* work) {
         break;
     case DECK_MENU_VIEW_ADD_GRID:
         DrawDeckExchangeDeckNames(work, 1);
-        DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
 
         if (work->tiles4 != NULL) {
             if (work->popupActive == 0) {
-                DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+                DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
             }
 
             DrawSprite(24, 82, work->gfx3, work->tiles4, work->palette2, NULL, 0, 20);
@@ -912,7 +912,7 @@ void deckexchange_2(DeckExchangeWork* work) {
         break;
     case DECK_MENU_VIEW_REMOVE_GRID:
         DrawDeckExchangeDeckNames(work, 1);
-        DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
 
         if (work->tiles4 != NULL) {
             DrawSprite(164, 82, work->gfx3, work->tiles4, work->palette2, NULL, 0, 20);
@@ -927,7 +927,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 
         break;
     case DECK_MENU_VIEW_ADD_VALUE_SELECT:
-        DrawSprite((work->x2 >> 8) - 26, (work->y2 >> 8) - 13, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+        DrawSprite((work->handX >> 8) - 26, (work->handY >> 8) - 13, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
         DrawDeckExchangeDeckNames(work, 1);
 
         if (work->tiles4 != NULL) {
@@ -963,7 +963,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 
         break;
     case DECK_MENU_VIEW_DELETE_GRID:
-        DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
         DrawDeckExchangeCardDescription(work);
 
         if (work->tiles4 != NULL) {
@@ -974,7 +974,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 
         break;
     case DECK_MENU_VIEW_DELETE_VALUE_SELECT:
-        DrawSprite((work->x2 >> 8) - 26, (work->y2 >> 8) - 13, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+        DrawSprite((work->handX >> 8) - 26, (work->handY >> 8) - 13, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
         DrawDeckExchangeCardDescription(work);
 
         if (work->tiles4 != NULL) {
@@ -1076,8 +1076,8 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
         }
     }
 
-    work->x = 0x4800;
-    work->y = 0x2800;
+    work->thumbX = 0x4800;
+    work->thumbY = 0x2800;
     work->scrollRowEnd = 4;
     SetDeckExchangeGridRowCount(work, y * 3 + x);
 }
@@ -1123,8 +1123,8 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 ex
         }
     }
 
-    work->x = 0xA000;
-    work->y = 0x2800;
+    work->thumbX = 0xA000;
+    work->thumbY = 0x2800;
     work->scrollRowEnd = 4;
     SetDeckExchangeGridRowCount(work, y * 3 + x);
 }
@@ -1174,10 +1174,10 @@ void ScrollDeckExchangeGridDown(DeckExchangeWork* work) {
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     work->scrollRowEnd++;
-    work->y += 0x300;
+    work->thumbY += 0x300;
 
-    if (work->y > 0x7C00) {
-        work->y = 0x7C00;
+    if (work->thumbY > 0x7C00) {
+        work->thumbY = 0x7C00;
     }
 
     if (work->holding != 0) {
@@ -1191,10 +1191,10 @@ u8 ScrollDeckExchangeGridUp(DeckExchangeWork* work) {
     node = ListPoolFirst(&work->pool);
 
     if (node == NULL) {
-        work->y -= 0x300;
+        work->thumbY -= 0x300;
 
-        if (work->y < 0x2800) {
-            work->y = 0x2800;
+        if (work->thumbY < 0x2800) {
+            work->thumbY = 0x2800;
             return 0;
         }
 
@@ -1218,10 +1218,10 @@ u8 ScrollDeckExchangeGridUp(DeckExchangeWork* work) {
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     work->scrollRowEnd--;
-    work->y -= 0x300;
+    work->thumbY -= 0x300;
 
-    if (work->y < 0x2800) {
-        work->y = 0x2800;
+    if (work->thumbY < 0x2800) {
+        work->thumbY = 0x2800;
     }
 
     return 1;
@@ -1953,7 +1953,7 @@ void ResetDeckExchangeGridScroll(DeckExchangeWork* work) {
         node = ListPoolNext(&node->node);
     }
 
-    work->y = 0x2800;
+    work->thumbY = 0x2800;
     work->scrollRowEnd = 4;
 }
 
@@ -2032,14 +2032,14 @@ void UpdateDeckExchangeGridScrollBar(DeckExchangeWork* work) {
     s32 rowStep;
 
     rowStep = 0x5400 / (work->rowCount - 4);
-    work->y = rowStep * (work->scrollRowEnd - 4) + 0x2800;
+    work->thumbY = rowStep * (work->scrollRowEnd - 4) + 0x2800;
 
-    if (work->y > 0x7C00) {
-        work->y = 0x7C00;
+    if (work->thumbY > 0x7C00) {
+        work->thumbY = 0x7C00;
     }
 
-    if (work->y < 0x2800) {
-        work->y = 0x2800;
+    if (work->thumbY < 0x2800) {
+        work->thumbY = 0x2800;
     }
 }
 #endif

@@ -91,8 +91,8 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     AnimInit(&work->anim2, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim2);
-    work->x = sRikuDeckTabPointerX[0] << 8;
-    work->y = sRikuDeckTabPointerY[0] << 8;
+    work->handX = sRikuDeckTabPointerX[0] << 8;
+    work->handY = sRikuDeckTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
@@ -236,11 +236,11 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* task) {
     DrawRikuDeckCategoryCount(work->deckEnemyCount, 3);
     DrawRikuDeckCardCount(0);
     DrawRikuCardTotals();
-    work->x2 = 0x4800;
-    work->y2 = 0x2800;
+    work->thumbX = 0x4800;
+    work->thumbY = 0x2800;
     work->cursorRow = work->deckIndex;
-    ApproachValue(&work->x, sRikuDeckTabPointerX[work->cursorCol] << 8, work->timer);
-    ApproachValue(&work->y, sRikuDeckTabPointerY[work->cursorRow] << 8, work->timer);
+    ApproachValue(&work->handX, sRikuDeckTabPointerX[work->cursorCol] << 8, work->timer);
+    ApproachValue(&work->handY, sRikuDeckTabPointerY[work->cursorRow] << 8, work->timer);
     work->view = DECK_MENU_VIEW_DECK_SELECT;
     SetRikuDeckMenuHandAnim(work);
     LoadRikuDeckNameTexts(work);
@@ -289,8 +289,8 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* task) {
 }
 
 u8 UpdateRikuDeckMenuEnterDeckGrid(RikuDeckMenuWork* work, void* task) {
-    work->x = gDeckGridColumnX[work->cursorCol] << 8;
-    work->y = gDeckGridRowY[work->cursorRow] << 8;
+    work->handX = gDeckGridColumnX[work->cursorCol] << 8;
+    work->handY = gDeckGridRowY[work->cursorRow] << 8;
     work->view = DECK_MENU_VIEW_DECK_GRID;
     SetRikuDeckMenuHandAnim(work);
     ShowRikuDeckCardPreview(work);
@@ -311,8 +311,8 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
     }
 
     if (work->popupActive != 0) {
-        ApproachValue(&work->x, gDeckGridColumnX[work->cursorCol] << 8, work->timer);
-        ApproachValue(&work->y, gDeckGridRowY[work->cursorRow] << 8, work->timer);
+        ApproachValue(&work->handX, gDeckGridColumnX[work->cursorCol] << 8, work->timer);
+        ApproachValue(&work->handY, gDeckGridRowY[work->cursorRow] << 8, work->timer);
 
         if (work->timer != 0) {
             work->timer--;
@@ -410,8 +410,8 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
     }
 
     work->cursorCard = GetRikuCardAtCursor(work);
-    ApproachValue(&work->x, gDeckGridColumnX[work->cursorCol] << 8, work->timer);
-    ApproachValue(&work->y, gDeckGridRowY[work->cursorRow] << 8, work->timer);
+    ApproachValue(&work->handX, gDeckGridColumnX[work->cursorCol] << 8, work->timer);
+    ApproachValue(&work->handY, gDeckGridRowY[work->cursorRow] << 8, work->timer);
 
     if (work->timer != 0) {
         work->timer--;
@@ -499,13 +499,13 @@ static void Deckmenu2_2(RikuDeckMenuWork* work) {
     }
 
     if (work->handVisible) {
-        DrawSprite((work->x >> 8) - 16, (work->y >> 8) - 30, work->gfx,
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 30, work->gfx,
                    work->tiles, work->palette, NULL, work->handFlags, 3);
-        DrawSprite((work->x >> 8) - 16, (work->y >> 8) - 20, work->gfx2,
+        DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2,
                    work->tiles2, work->palette4, NULL, 0, 8);
     }
 
-    DrawSprite(work->x2 >> 8, work->y2 >> 8, gDeckScrollThumbFrames[0], work->tiles4,
+    DrawSprite(work->thumbX >> 8, work->thumbY >> 8, gDeckScrollThumbFrames[0], work->tiles4,
                work->palette, NULL, SPRITE_PRIORITY(2), 10);
 
     if (work->tiles7 != NULL) {
@@ -604,8 +604,8 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind) {
         }
     }
 
-    work->x2 = 0x4800;
-    work->y2 = 0x2800;
+    work->thumbX = 0x4800;
+    work->thumbY = 0x2800;
     work->scrollRowEnd = 4;
 }
 
@@ -644,10 +644,10 @@ void ScrollRikuGridDown(RikuDeckMenuWork* work) {
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     work->scrollRowEnd++;
-    work->y2 += 0x300;
+    work->thumbY += 0x300;
 
-    if (work->y2 > 0x7C00) {
-        work->y2 = 0x7C00;
+    if (work->thumbY > 0x7C00) {
+        work->thumbY = 0x7C00;
     }
 
     if (work->holding != 0) {
@@ -661,10 +661,10 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* work) {
     node = ListPoolFirst(&work->pool);
 
     if (node == NULL) {
-        work->y2 -= 0x300;
+        work->thumbY -= 0x300;
 
-        if (work->y2 < 0x2800) {
-            work->y2 = 0x2800;
+        if (work->thumbY < 0x2800) {
+            work->thumbY = 0x2800;
             return 0;
         }
 
@@ -688,10 +688,10 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* work) {
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     work->scrollRowEnd--;
-    work->y2 -= 0x300;
+    work->thumbY -= 0x300;
 
-    if (work->y2 < 0x2800) {
-        work->y2 = 0x2800;
+    if (work->thumbY < 0x2800) {
+        work->thumbY = 0x2800;
     }
 
     return 1;

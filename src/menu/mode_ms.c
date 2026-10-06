@@ -69,14 +69,14 @@ static u16* sMooglePackItemMixedMapsByLanguage[5] = {
 
 static const MooglePackMenuEntry sMooglePackMenuEntries[4] = {
 #ifdef VERSION_EU
-    {MOOGLE_PACK_ENTRY_NONE, 2, 5, 1, 67, 16, gMooglePackSelectionTopLeftMap, 1280, 5, 3, 40, 24, {{sMooglePackAttackMagicMapsByLanguage, 0, 0}, {sMooglePackAttackMagicMapsByLanguage, 0, 16}, {sMooglePackItemMixedMapsByLanguage, 0, 0}, {sMooglePackItemMixedMapsByLanguage, 0, 16}}},
+    {MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_ROW_LIST, 1, 67, 16, gMooglePackSelectionTopLeftMap, 1280, 5, 3, 40, 24, {{sMooglePackAttackMagicMapsByLanguage, 0, 0}, {sMooglePackAttackMagicMapsByLanguage, 0, 16}, {sMooglePackItemMixedMapsByLanguage, 0, 0}, {sMooglePackItemMixedMapsByLanguage, 0, 16}}},
     {MOOGLE_PACK_ENTRY_NONE, 3, 0, MOOGLE_PACK_ENTRY_NONE, 163, 16, gMooglePackSelectionTopRightMap, 1280, 17, 3, 136, 24, {{sMooglePackAttackMagicMapsByLanguage, 12, 0}, {sMooglePackAttackMagicMapsByLanguage, 12, 16}, {sMooglePackItemMixedMapsByLanguage, 12, 0}, {sMooglePackItemMixedMapsByLanguage, 12, 16}}},
-    {0, MOOGLE_PACK_ENTRY_NONE, 5, 3, 67, 80, gMooglePackSelectionBottomLeftMap, 1280, 5, 11, 40, 88, {{sMooglePackAttackMagicMapsByLanguage, 0, 8}, {sMooglePackAttackMagicMapsByLanguage, 0, 24}, {sMooglePackItemMixedMapsByLanguage, 0, 8}, {sMooglePackItemMixedMapsByLanguage, 0, 24}}},
+    {0, MOOGLE_PACK_ENTRY_NONE, MOOGLE_PACK_ENTRY_ROW_LIST, 3, 67, 80, gMooglePackSelectionBottomLeftMap, 1280, 5, 11, 40, 88, {{sMooglePackAttackMagicMapsByLanguage, 0, 8}, {sMooglePackAttackMagicMapsByLanguage, 0, 24}, {sMooglePackItemMixedMapsByLanguage, 0, 8}, {sMooglePackItemMixedMapsByLanguage, 0, 24}}},
     {1, MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_NONE, 163, 80, gMooglePackSelectionBottomRightMap, 1280, 17, 11, 136, 88, {{sMooglePackAttackMagicMapsByLanguage, 12, 8}, {sMooglePackAttackMagicMapsByLanguage, 12, 24}, {sMooglePackItemMixedMapsByLanguage, 12, 8}, {sMooglePackItemMixedMapsByLanguage, 12, 24}}},
 #else
-    {MOOGLE_PACK_ENTRY_NONE, 2, 5, 1, 67, 16, gMooglePackSelectionTopLeftMap, 1280, 5, 3, 40, 24, {{gMooglePackAttackMagicMap, 0, 0}, {gMooglePackAttackMagicMap, 0, 16}, {gMooglePackItemMixedMap, 0, 0}, {gMooglePackItemMixedMap, 0, 16}}},
+    {MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_ROW_LIST, 1, 67, 16, gMooglePackSelectionTopLeftMap, 1280, 5, 3, 40, 24, {{gMooglePackAttackMagicMap, 0, 0}, {gMooglePackAttackMagicMap, 0, 16}, {gMooglePackItemMixedMap, 0, 0}, {gMooglePackItemMixedMap, 0, 16}}},
     {MOOGLE_PACK_ENTRY_NONE, 3, 0, MOOGLE_PACK_ENTRY_NONE, 163, 16, gMooglePackSelectionTopRightMap, 1280, 17, 3, 136, 24, {{gMooglePackAttackMagicMap, 12, 0}, {gMooglePackAttackMagicMap, 12, 16}, {gMooglePackItemMixedMap, 12, 0}, {gMooglePackItemMixedMap, 12, 16}}},
-    {0, MOOGLE_PACK_ENTRY_NONE, 5, 3, 67, 80, gMooglePackSelectionBottomLeftMap, 1280, 5, 11, 40, 88, {{gMooglePackAttackMagicMap, 0, 8}, {gMooglePackAttackMagicMap, 0, 24}, {gMooglePackItemMixedMap, 0, 8}, {gMooglePackItemMixedMap, 0, 24}}},
+    {0, MOOGLE_PACK_ENTRY_NONE, MOOGLE_PACK_ENTRY_ROW_LIST, 3, 67, 80, gMooglePackSelectionBottomLeftMap, 1280, 5, 11, 40, 88, {{gMooglePackAttackMagicMap, 0, 8}, {gMooglePackAttackMagicMap, 0, 24}, {gMooglePackItemMixedMap, 0, 8}, {gMooglePackItemMixedMap, 0, 24}}},
     {1, MOOGLE_PACK_ENTRY_NONE, 2, MOOGLE_PACK_ENTRY_NONE, 163, 80, gMooglePackSelectionBottomRightMap, 1280, 17, 11, 136, 88, {{gMooglePackAttackMagicMap, 12, 8}, {gMooglePackAttackMagicMap, 12, 24}, {gMooglePackItemMixedMap, 12, 8}, {gMooglePackItemMixedMap, 12, 24}}},
 #endif
 };
@@ -1099,7 +1099,7 @@ void MoogleShopHandlePackInput() {
 
     if (sMoogleShopPackCursor == MOOGLE_PACK_ENTRY_NONE) {
         sMoogleShopPackCursor = old;
-    } else if (sMoogleShopPackCursor == 5) {
+    } else if (sMoogleShopPackCursor == MOOGLE_PACK_ENTRY_ROW_LIST) {
         sMoogleShopPackCursor = old;
         sMoogleShopState = MOOGLE_SHOP_STATE_SELECT_ROW;
         DisableBg(1);

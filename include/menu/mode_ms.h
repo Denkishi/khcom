@@ -37,6 +37,7 @@ typedef struct MooglePackTilemapDef {
 } MooglePackTilemapDef;
 
 #define MOOGLE_PACK_ENTRY_NONE (-1)
+#define MOOGLE_PACK_ENTRY_ROW_LIST 5
 
 typedef struct MooglePackMenuEntry {
     s16 upEntry;

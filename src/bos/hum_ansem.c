@@ -635,9 +635,9 @@ u8 task_hum_ansem_1(AnsemWork* work) {
 
         if (work->base.stateTimer == 20) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartAnsemWave(act->x, act->y, 0, 1, 0x142);
+                BgFxStartAnsemWave(act->x, act->y, 0, TRUE, 0x142);
             } else {
-                BgFxStartAnsemWave(act->x, act->y, 0, 0, 0x142);
+                BgFxStartAnsemWave(act->x, act->y, 0, FALSE, 0x142);
             }
         }
 

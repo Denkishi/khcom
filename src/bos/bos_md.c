@@ -470,10 +470,10 @@ u8 BosMdAnimIsLastFrame(MdWork* work) {
     anim = &work->anim;
 
     if (anim->frame >= anim->frameCount - 1) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 enum BosMdState {
@@ -881,7 +881,7 @@ u8 BosMdUpdateDefeat(MdWork* work) {
             case BOS_MD_DEFEAT_STEP_DEATH_FLASH:
                 if (work->bgVisible && FadeGetAmount() == 31) {
                     DisableBg(1);
-                    work->bgVisible = 0;
+                    work->bgVisible = FALSE;
                 }
 
                 if (!BgFxIsActive()) {
@@ -987,7 +987,7 @@ void BosMdHandleReaction(MdWork* work) {
             break;
         case BTL_REACTION_DEFEATED:
         case BTL_REACTION_GRAVITY_DEFEATED:
-            SetBtlObjUnhittable(sub, 1);
+            SetBtlObjUnhittable(sub, TRUE);
             BosMdRequestState(work, BOS_MD_STATE_DEFEATED);
             break;
         case BTL_REACTION_CARD_BROKEN:
@@ -1024,7 +1024,7 @@ void task_bos_md_0(MdWork* work, void* arg) {
     work->stepsLeft = 0;
     work->hurtTimer = 0;
     work->signals = 0;
-    work->bgVisible = 1;
+    work->bgVisible = TRUE;
 
     for (i = 0; i < 1; i++) {
         work->hurtState[i] = BOS_MD_HURT_STATE_NONE;
@@ -1066,12 +1066,12 @@ void task_bos_md_0(MdWork* work, void* arg) {
     BosMdSetFrame(work, 0);
     MdAnimStart(work, 0);
     LoadPalette(gBosMdPalette, (void*)PLTT, 32);
-    SetBtlPaletteFadeExcluded(0, 1);
+    SetBtlPaletteFadeExcluded(0, TRUE);
     work->bgPalette = gBosMdPalette;
     work->palette = LoadObjPalette(gBosMdPalette, 32);
-    SetBtlPaletteFadeExcluded(work->palette->index + 16, 1);
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, TRUE);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
-    SetBtlPaletteFadeExcluded(work->palette2->index + 16, 1);
+    SetBtlPaletteFadeExcluded(work->palette2->index + 16, TRUE);
     TaskPoolInit(&work->tasks, 6);
     TaskPoolInit(&work->tasks2, 1);
     TaskPoolInit(&work->tasks3, 8);
@@ -1307,7 +1307,7 @@ void BosMdFireHandleReaction(MdFireWork* work) {
             }
         }
 
-        SetBtlObjUnhittable(sub, 1);
+        SetBtlObjUnhittable(sub, TRUE);
         work->scaleSteps = 30;
         work->state = BOS_MD_FIRE_STATE_VANISH;
         break;
@@ -1330,7 +1330,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
     sub = &work->sub;
 
     if ((*work->flags & 2) && work->state != BOS_MD_FIRE_STATE_VANISH) {
-        SetBtlObjUnhittable(sub, 1);
+        SetBtlObjUnhittable(sub, TRUE);
         work->scaleSteps = 30;
         work->state = BOS_MD_FIRE_STATE_VANISH;
     }
@@ -1340,7 +1340,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
             work->scaleSteps--;
 
             if (work->scaleSteps <= 0) {
-                SetBtlObjUnhittable(sub, 0);
+                SetBtlObjUnhittable(sub, FALSE);
                 work->state = BOS_MD_FIRE_STATE_ACTIVE;
             }
 
@@ -1386,7 +1386,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
 #else
                     if (work->timer <= 0 || work->y <= 0x117FF) {
 #endif
-                        SetBtlObjUnhittable(sub, 1);
+                        SetBtlObjUnhittable(sub, TRUE);
                         work->scaleSteps = 30;
                         work->state = BOS_MD_FIRE_STATE_VANISH;
                     }
@@ -1495,7 +1495,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->sub.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
     work->sub.hp = 20;
     work->sub.maxHp = 20;
-    SetBtlObjUnhittable(&work->sub, 1);
+    SetBtlObjUnhittable(&work->sub, TRUE);
     work->palette = LoadObjPalette(gBosMdFirePalette, 32);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->tiles = LoadObjTiles(gBosMdFireTiles, 0x800);
@@ -1598,7 +1598,7 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     collider = &work->collider;
     ColliderInit(collider, 7, 24, 24);
     ColliderSetPosition(collider, work->x, work->y, work->z);
-    ColliderSetDisabled(collider, 1);
+    ColliderSetDisabled(collider, TRUE);
     work->palette = LoadObjPalette(gBosMdDaiPalette, 32);
     work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
 }
@@ -1617,7 +1617,7 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
         work->dropSteps--;
 
         if (work->dropSteps <= 0) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
             ColliderSetHeight(&work->collider, 8);
             work->dropZ = work->z - 0xA000;
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
@@ -1632,7 +1632,7 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
         work->dropSteps--;
 
         if (work->dropSteps <= 0) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
             ColliderSetHeight(&work->collider, 16);
             work->dropZ = work->z - 0xA000;
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
@@ -1647,7 +1647,7 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
         work->dropSteps--;
 
         if (work->dropSteps <= 0) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
             ColliderSetHeight(&work->collider, 24);
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
             work->level = 3;
@@ -1671,7 +1671,7 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             work->level--;
 
             if (work->level <= 0) {
-                ColliderSetDisabled(&work->collider, 1);
+                ColliderSetDisabled(&work->collider, TRUE);
                 result = 0;
             } else {
                 ColliderSetHeight(&work->collider, work->level * 8);

@@ -263,7 +263,7 @@ s32 HumUpdate(HumWork* work) {
     case HUM_STATE_GRAVITY:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
-            ColliderSetDisabled(&actor->collider, 1);
+            ColliderSetDisabled(&actor->collider, TRUE);
             actor->flags |= BTLOBJ_FLAG_INTANGIBLE;
             work->anim.frame = 0;
             work->anim.timer = 0;
@@ -299,7 +299,7 @@ s32 HumUpdate(HumWork* work) {
         break;
     case HUM_STATE_GRAVITY_RECOVER:
         if (work->stateTimer == 0) {
-            ColliderSetDisabled(&actor->collider, 0);
+            ColliderSetDisabled(&actor->collider, FALSE);
             work->steps = 10;
         }
 
@@ -879,14 +879,14 @@ u8 HumMoveToward(HumWork* work, s32 x, s32 y, s32 spd) {
     work->actor.y += -gSineTable[ang + 64] * spd >> 8;
 
     if (work->actor.x - x >= 0 ? work->actor.x - x > 0x1E00 : x - work->actor.x > 0x1E00) {
-        return 0;
+        return FALSE;
     }
 
     if (work->actor.y - y >= 0 ? work->actor.y - y > 0x1000 : y - work->actor.y > 0x1000) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 HumIsTargetInReach(HumWork* work, s16 offset, u16 width, u16 depth) {
@@ -903,7 +903,7 @@ u8 HumIsTargetInReach(HumWork* work, s16 offset, u16 width, u16 depth) {
     dy = actor->y - y;
 
     if (dy >= 0 ? dy > maxDy : y - actor->y > maxDy) {
-        return 0;
+        return FALSE;
     }
 
     if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -911,38 +911,38 @@ u8 HumIsTargetInReach(HumWork* work, s16 offset, u16 width, u16 depth) {
         maxDx = width << 8;
 
         if (centerX - maxDx > x) {
-            return 0;
+            return FALSE;
         }
 
         if (centerX + maxDx < x) {
-            return 0;
+            return FALSE;
         }
     } else {
         centerX = actor->x + (offset << 8);
         maxDx = width << 8;
 
         if (centerX + maxDx < x) {
-            return 0;
+            return FALSE;
         }
 
         if (centerX - maxDx > x) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 HumIsNearAreaEdge(HumWork* work, u16 margin) {
     if (work->actor.x < (gBtlWork->xMin + margin) << 8) {
-        return 1;
+        return TRUE;
     }
 
     if (work->actor.x > (gBtlWork->xMax - margin) << 8) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 HumIsInPlayerReach(HumWork* work, s16 offset, u16 width, u16 depth) {
@@ -960,7 +960,7 @@ u8 HumIsInPlayerReach(HumWork* work, s16 offset, u16 width, u16 depth) {
     dy = actor->y - y;
 
     if (dy >= 0 ? dy > maxDy : y - actor->y > maxDy) {
-        return 0;
+        return FALSE;
     }
 
     if (player->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -968,26 +968,26 @@ u8 HumIsInPlayerReach(HumWork* work, s16 offset, u16 width, u16 depth) {
         maxDx = width << 8;
 
         if (centerX - maxDx > actor->x) {
-            return 0;
+            return FALSE;
         }
 
         if (centerX + maxDx < actor->x) {
-            return 0;
+            return FALSE;
         }
     } else {
         centerX = x + (offset << 8);
         maxDx = width << 8;
 
         if (centerX + maxDx < actor->x) {
-            return 0;
+            return FALSE;
         }
 
         if (centerX - maxDx > actor->x) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) {
@@ -998,15 +998,15 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
     s32 n;
 
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
-        return 0;
+        return FALSE;
     }
 
     if ((s16)gRikuBtlWork->listSwitchTimer > 0) {
-        return 0;
+        return FALSE;
     }
 
     if ((u16)((u32)GetRandom() % interval) != 0) {
-        return 0;
+        return FALSE;
     }
 
     value = GetRikuSelectedCardValue();
@@ -1034,7 +1034,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
             gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         }
 
-        return 0;
+        return FALSE;
     }
 
     if (IsRikuReloadCardSelected()) {
@@ -1042,7 +1042,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
             gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         }
 
-        return 0;
+        return FALSE;
     }
 
     if (GetRikuCardListIndex() == 3) {
@@ -1061,24 +1061,24 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
             gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         }
 
-        return 0;
+        return FALSE;
     }
 
     if (!(work->flags & HUM_FLAG_ENEMY_CARDS_SPENT) && gRikuBtlWork->hcEffect == HC_EFFECT_NONE
         && (u16)(GetRandom() % 60U) == 0) {
         gBtlWork->rikuKeys |= RIKU_KEY_SWITCH_LIST;
-        return 0;
+        return FALSE;
     }
 
     if (cards > 2) {
         if ((u16)(GetRandom() % 6U) == 0) {
             gBtlWork->rikuKeys |= RIKU_KEY_STOCK;
-            return 1;
+            return TRUE;
         }
     } else if (GetRandom() % 2 == 0) {
         if (count <= 1 && cards != 0) {
             gBtlWork->rikuKeys |= RIKU_KEY_STOCK;
-            return 1;
+            return TRUE;
         }
 
         // @bug unk_184 is NULL for humanoid bosses without a card table (NULL read).
@@ -1088,7 +1088,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
             gBtlWork->rikuKeys |= RIKU_KEY_STOCK;
         }
 
-        return 0;
+        return FALSE;
     }
 
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
@@ -1103,7 +1103,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
         gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 HumResolveCardMove(HumWork* work) {

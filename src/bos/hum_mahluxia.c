@@ -136,10 +136,10 @@ u8 MahluxiaTryJumpAway(MahluxiaWork* work) {
             MahluxiaJumpOffset(work, -128);
         }
 
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MahluxiaSaveAfterimage(MahluxiaWork* work, RikuSpawn* dst) {

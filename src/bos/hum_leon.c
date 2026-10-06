@@ -42,7 +42,7 @@ TaskDesc gTaskDescHumLeon = {
 void task_hum_leon_0(LeonWork* work) {
     HumInit(&work->base, &sHumLeonDef);
     work->flashTimer = 0;
-    work->gunbladeRaised = 0;
+    work->gunbladeRaised = FALSE;
     AnimChangeWithDef(sHumLeonAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
     work->savedLearnedStocks = gGameState.progression.learnedStocks;
     work->savedLearnedStocks2 = gGameState.progression.learnedStocks2;
@@ -87,16 +87,16 @@ u8 task_hum_leon_1(LeonWork* work) {
         break;
     case HUM_STATE_IDLE:
         if (gBtlWork->flags & 0x20000000000) {
-            if (w->gunbladeRaised == 0) {
+            if (w->gunbladeRaised == FALSE) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
-                w->gunbladeRaised = 1;
+                w->gunbladeRaised = TRUE;
             } else if (AnimIsFinished(&work->base.anim)) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             }
         } else {
-            if (w->gunbladeRaised != 0) {
+            if (w->gunbladeRaised != FALSE) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
-                w->gunbladeRaised = 0;
+                w->gunbladeRaised = FALSE;
             } else if (AnimIsFinished(&work->base.anim)) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             }

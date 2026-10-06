@@ -64,10 +64,10 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
     LstFalArg arg;
     u8 spawned;
 
-    spawned = 0;
+    spawned = FALSE;
 
     if (work->kind != 0) {
-        return 0;
+        return FALSE;
     }
 
     if ((s16)*work->falCount <= 31) {
@@ -86,7 +86,7 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
         arg.facing = *work->facing;
         arg.falCount = work->falCount;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFal, &arg);
-        spawned = 1;
+        spawned = TRUE;
     }
 
     return spawned;
@@ -108,10 +108,10 @@ u8 BosLstBitIsAlive(Task* task) {
     u8 alive;
 
     work = task->work;
-    alive = 1;
+    alive = TRUE;
 
     if (work->obj.hp <= 0 || work->state == BOS_LST_BIT_STATE_HIDDEN) {
-        alive = 0;
+        alive = FALSE;
     }
 
     return alive;
@@ -124,8 +124,8 @@ u8 BosLstBitHasShots(Task* task) {
     work = task->work;
     hasShots = BosLstBitIsAlive(task);
 
-    if (hasShots == 1 && work->shots <= 0) {
-        hasShots = 0;
+    if (hasShots == TRUE && work->shots <= 0) {
+        hasShots = FALSE;
     }
 
     return hasShots;
@@ -138,8 +138,8 @@ u8 BosLstBitIsScaling(Task* task) {
     work = task->work;
     scaling = BosLstBitIsAlive(task);
 
-    if (scaling == 1 && (work->scaleX == Q_8_8(1) || work->scaleY == Q_8_8(1))) {
-        scaling = 0;
+    if (scaling == TRUE && (work->scaleX == Q_8_8(1) || work->scaleY == Q_8_8(1))) {
+        scaling = FALSE;
     }
 
     return scaling;
@@ -151,7 +151,7 @@ s16 BosLstBitMarkFirstAlive(Task* task, s16 found) {
 
     work = task->work;
 
-    if (BosLstBitIsAlive(task) == 1 && found == 0) {
+    if (BosLstBitIsAlive(task) == TRUE && found == 0) {
         work->index = found;
         found = 1;
     }
@@ -208,22 +208,22 @@ u8 BosLstBitInterrupt(Task* task, u8 destroy) {
     u8 destroyed;
 
     work = task->work;
-    destroyed = 0;
+    destroyed = FALSE;
     BosLstLsrStop(work->lsrTask);
     BosLstLsrStop(work->lsrTask2);
     BosLstLsrStop(work->lsrTask3);
     work->shots = 0;
 
     if (work->state >= BOS_LST_BIT_STATE_RETURN && work->state <= BOS_LST_BIT_STATE_HIDDEN) {
-        return 0;
+        return FALSE;
     }
 
-    if (destroy == 1 && work->index == 0) {
+    if (destroy == TRUE && work->index == 0) {
         work->obj.hp = 0;
-        SetBtlObjUnhittable(&work->obj, 1);
+        SetBtlObjUnhittable(&work->obj, TRUE);
         BosLstBitSpawnFal(work, 0);
         BosLstBitSpawnFal(work, 0);
-        destroyed = 1;
+        destroyed = TRUE;
     }
 
 #ifdef VERSION_EU
@@ -403,7 +403,7 @@ void BosLstBitHandleHit(LstState* work) {
         ClearBtlObjActionFlags(obj);
         break;
     case BTL_REACTION_DEFEATED:
-        SetBtlObjUnhittable(&work->obj, 1);
+        SetBtlObjUnhittable(&work->obj, TRUE);
         BosLstBitSpawnFal(work, 0);
         BosLstBitSpawnFal(work, 0);
         ClearBtlObjActionFlags(obj);
@@ -434,7 +434,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
     obj = &work->obj;
 
     if (obj->hp <= 0) {
-        SetBtlObjUnhittable(obj, 1);
+        SetBtlObjUnhittable(obj, TRUE);
         return 1;
     }
 
@@ -513,7 +513,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
         work->timer++;
 
-        if (AnimGetId(&work->anim) == (s16)sLstAnimSets[work->animSet].chargeAnim && AnimIsFinished(&work->anim) == 1) {
+        if (AnimGetId(&work->anim) == (s16)sLstAnimSets[work->animSet].chargeAnim && AnimIsFinished(&work->anim) == TRUE) {
             work->state = BOS_LST_BIT_STATE_FIRE;
             work->timer = 0;
             work->unk_018 = 1;

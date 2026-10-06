@@ -102,7 +102,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
     }
 
     if (work->dsd->state == BOS_DSD_STATE_DEFEATED) {
-        if (BgFxIsActive() == 1) {
+        if (BgFxIsActive() == TRUE) {
             BgAnimStop();
         }
 
@@ -149,7 +149,7 @@ void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
     work->timer = 0;
     work->chargeTime = 0xF;
     work->unk_3A = 0x3C;
-    work->visible = 0;
+    work->visible = FALSE;
     work->vx = gSineTable[work->angle] * work->speed >> 8;
     work->vy = 0;
     work->vz = -gSineTable[work->angle + 0x40] * work->speed >> 8;
@@ -175,7 +175,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
         work->timer++;
 
         if (work->timer >= work->chargeTime) {
-            work->visible = 1;
+            work->visible = TRUE;
             work->timer = 0;
             work->unk_36 = 10;
             work->vy = (gBtlWork->targetY - work->y) / 15;
@@ -200,14 +200,14 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
     if (ApplyAttackBox(0x102, work->x, work->y, work->z, 16, 16, 16) == 1) {
         BgFxSignalEnd(0);
         m4aSongNumStart(SONG_EF_RAC_BEEMENTRY);
-        work->visible = 0;
+        work->visible = FALSE;
         return 0;
     }
 
     if (work->z >= -0x800 || work->x <= -0x2000 || work->x > 0x11FFF ||
         work->dsd->state == BOS_DSD_STATE_CARD_BROKEN || work->dsd->state == BOS_DSD_STATE_DEFEATED) {
         BgFxSignalEnd(0);
-        work->visible = 0;
+        work->visible = FALSE;
         return 0;
     }
 
@@ -221,7 +221,7 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
     s16 x;
     s16 y;
 
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         if (work->z >= 0 && gBtlWork->scale == Q_8_8(1)) {
             affine = NULL;
         } else {
@@ -327,7 +327,7 @@ void task_bos_dsd_energy2_0(DsdEnergy2Work* work, void* arg) {
     work->vy = 0;
     work->vz = -0x500;
     work->dropCount = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     work->gfx = gBtlShadowSmallFrame0;
     BgFxStartDsdEnergy(work->x, work->y, work->z, work->scaleX, work->chargeTime, 0);
     m4aSongNumStart(SONG_SND_704);
@@ -404,7 +404,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         work->z = -0xF000;
         work->vz = 0x600;
         BgFxStartDsdEnergy(work->x, work->y, work->z, Q_8_8(1), work->chargeTime, 0);
-        work->visible = 1;
+        work->visible = TRUE;
         work->timer = 0;
         work->state++;
         break;
@@ -415,14 +415,14 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         if (ApplyAttackBox(0x104, work->x, work->y, work->z, 16, 16, 16) == 1) {
             m4aSongNumStart(SONG_BTL_RK_LIMITENTRY);
             BgFxSignalEnd(0);
-            work->visible = 0;
+            work->visible = FALSE;
             work->state = BOS_DSD_ENERGY2_STATE_NEXT_DROP;
         }
 
         if (work->z >= -0x800) {
             BgFxSignalEnd(0);
             m4aSongNumStart(SONG_SND_703);
-            work->visible = 0;
+            work->visible = FALSE;
             work->state = BOS_DSD_ENERGY2_STATE_NEXT_DROP;
         }
 
@@ -453,12 +453,12 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
     }
 
     if (work->dsd->state == BOS_DSD_STATE_CARD_BROKEN || work->dsd->state == BOS_DSD_STATE_DEFEATED) {
-        if (BgFxIsActive() == 1) {
+        if (BgFxIsActive() == TRUE) {
             BgAnimStop();
             FadeToOriginal(FADE_MODE_BLACK, 8);
         }
 
-        work->visible = 0;
+        work->visible = FALSE;
         return 0;
     }
 
@@ -472,7 +472,7 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
     s16 x;
     s16 y;
 
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         if (work->z >= 0 && gBtlWork->scale == Q_8_8(1)) {
             affine = NULL;
         } else {

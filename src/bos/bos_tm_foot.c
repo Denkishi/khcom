@@ -1043,7 +1043,7 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->timer = 0;
     work->timer2 = 0;
-    work->clbSwapped = 1;
+    work->clbSwapped = TRUE;
     work->prevState = BOS_TM_STATE_IDLE;
     work->jointAnim2.frames = NULL;
     work->jointAnim.frames = NULL;
@@ -1137,10 +1137,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
         switch (work->timer % 30) {
         case 0:
-            v = 0;
+            v = FALSE;
 
             if (!work->clbSwapped) {
-                v = 1;
+                v = TRUE;
             }
 
             work->clbSwapped = v;
@@ -1223,10 +1223,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 x = work->src->x2 + hand->curX - 0x3E00;
-                BgFxStartFireAtPlayer(x, y, z, 1, 0, 168, 20);
+                BgFxStartFireAtPlayer(x, y, z, TRUE, 0, 168, 20);
             } else {
                 x = work->src->x2 + hand->curX + 0x4800;
-                BgFxStartFireAtPlayer(x, y, z, 0, 0, 168, 20);
+                BgFxStartFireAtPlayer(x, y, z, FALSE, 0, 168, 20);
             }
         } else if (work->timer > 55) {
             if (!BgFxIsActive()) {
@@ -1257,10 +1257,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 x = work->src->x2 + hand->curX - 0x3E00;
-                BgFxStartFireAtPlayer(x, y, z, 1, 0, 168, 18);
+                BgFxStartFireAtPlayer(x, y, z, TRUE, 0, 168, 18);
             } else {
                 x = work->src->x2 + hand->curX + 0x4800;
-                BgFxStartFireAtPlayer(x, y, z, 0, 0, 168, 18);
+                BgFxStartFireAtPlayer(x, y, z, FALSE, 0, 168, 18);
             }
         } else if (work->timer > 70) {
             if (!BgFxIsActive()) {
@@ -1277,10 +1277,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
 
                 if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                     x2 = work->src->x2 + hand2->curX - 0x3E00;
-                    BgFxStartFireAtPlayer(x2, y2, z2, 1, 0, 168, 18);
+                    BgFxStartFireAtPlayer(x2, y2, z2, TRUE, 0, 168, 18);
                 } else {
                     x2 = work->src->x2 + hand2->curX + 0x4800;
-                    BgFxStartFireAtPlayer(x2, y2, z2, 0, 0, 168, 18);
+                    BgFxStartFireAtPlayer(x2, y2, z2, FALSE, 0, 168, 18);
                 }
             }
         }
@@ -1752,14 +1752,14 @@ enum BosTmTblState {
 void task_bos_tm_tbl_0(TmTblWork* work, TmWork* arg) {
     ColliderInit(&work->collider, 7, 0x1C, 0);
     ColliderSetPosition(&work->collider, 0x10000, 0x16000, 0);
-    ColliderSetDisabled(&work->collider, 0);
+    ColliderSetDisabled(&work->collider, FALSE);
     DisableBg(1);
     work->tm = arg;
     work->state = BOS_TM_TBL_STATE_DOWN;
     work->unk_062 = 1;
     work->unk_064 = 0;
     work->frame = 0;
-    work->gimmickPlayed = 0;
+    work->gimmickPlayed = FALSE;
     work->height = 0;
 }
 
@@ -1777,12 +1777,12 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
     case BOS_TM_TBL_STATE_DOWN:
         if (!work->gimmickPlayed) {
             if (ConsumeGimmickFlag(0)) {
-                work->gimmickPlayed = 1;
+                work->gimmickPlayed = TRUE;
             }
         } else {
             work->state = BOS_TM_TBL_STATE_RISING;
             work->tm->tableState = BOS_TM_TABLE_STATE_MOVING;
-            work->gimmickPlayed = 0;
+            work->gimmickPlayed = FALSE;
         }
 
         break;
@@ -1792,7 +1792,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
             m4aSongNumStart(SONG_BTL_TABLE_U);
             EnableBg(1);
             LoadBgMap(1, gBosTmTableMaps[8], 0x800);
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
             break;
         case 2:
             LoadBgMap(1, gBosTmTableMaps[7], 0x800);
@@ -1837,7 +1837,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         switch (work->frame) {
         case 0:
             LoadBgMap(1, gBosTmTableMaps[1], 0x800);
-            ColliderSetDisabled(&work->collider, 1);
+            ColliderSetDisabled(&work->collider, TRUE);
             work->height = 0;
             break;
         case 1:

@@ -60,7 +60,7 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     work->stepTimer = 0;
     work->moveSteps = 0;
     work->baseFrame = 0;
-    work->spriteVisible = 1;
+    work->spriteVisible = TRUE;
     work->energy2Task = NULL;
     work->lastBreakDifference = gBtlWork->breakDifference;
     SetBgMapBlocks(1, gBosDsdFrameMaps, 2, 2);
@@ -179,7 +179,7 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
     ScrollBgMapTo(1, ((gBtlWork->viewX - dsd->body[0].x) >> 8) + 100,
                   ((gBtlWork->viewY - (dsd->body[0].y + dsd->body[0].z)) >> 8) + 280);
 
-    if (work->spriteVisible == 1) {
+    if (work->spriteVisible == TRUE) {
         GetBattleSpritePriorityFlags(dsd->body[0].y);
         WorldToScreen(&x, &y, dsd->body[0].x, dsd->body[0].y, -0x6400);
         DrawSprite(x - 96, y + 20, work->gfx, work->tiles, palette, NULL, SPRITE_PRIORITY(1),
@@ -248,7 +248,7 @@ void BosDsdMainResetPose(DsdMainWork* work) {
     work->baseFrame = 0;
     work->dsd->bgFrameTimer = 0;
     BosDsdSetBgFrame(0, 0x60);
-    work->spriteVisible = 1;
+    work->spriteVisible = TRUE;
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     dsd->body[0].z = -0x6400;
@@ -290,8 +290,8 @@ void BosDsdMainUpdateIdle(DsdMainWork* work) {
 void BosDsdMainBeginTransition(DsdMainWork* work, s32 x, s32 y, s32 z) {
     BtlObj* head = &work->dsd->body[1];
 
-    FadeSetPaletteExcluded(0, 0);
-    FadeSetPaletteExcluded(0x13, 0);
+    FadeSetPaletteExcluded(0, FALSE);
+    FadeSetPaletteExcluded(0x13, FALSE);
     FadeToAmount(FADE_MODE_BLACK, 0x14, 8);
     BgFxStartDsdTransition(x - 0x1400, y, z - 0xA00, Q_8_8(1));
     m4aSongNumStart(SONG_SND_721);
@@ -302,8 +302,8 @@ void BosDsdMainEndTransition(DsdMainWork* work) {
     BtlObj* head = &work->dsd->body[1];
 
     FadeToOriginal(FADE_MODE_BLACK, 8);
-    FadeSetPaletteExcluded(0, 1);
-    FadeSetPaletteExcluded(19, 1);
+    FadeSetPaletteExcluded(0, TRUE);
+    FadeSetPaletteExcluded(19, TRUE);
     head->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
 }
 
@@ -331,7 +331,7 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
 
         if (work->stepTimer > 11) {
             DisableBg(1);
-            work->spriteVisible = 0;
+            work->spriteVisible = FALSE;
             work->dsd->stateStep++;
         }
 
@@ -636,7 +636,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         BtlMapStartShake();
         m4aSongNumStart(SONG_EF_AIRO);
         BgFxStartLexceusGround(0x7800, 0x16800, 0, 0x100);
-        ColliderSetDisabled(&hand->collider, 0);
+        ColliderSetDisabled(&hand->collider, FALSE);
         work->dsd->stateStep++;
         break;
     case BOS_DSD_SHOCKWAVE_STEP_BOB_DOWN:
@@ -686,7 +686,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
     case BOS_DSD_SHOCKWAVE_STEP_LIFT:
         BosDsdSetBgFrame(8, 0x80);
         hand->flags |= BTLOBJ_FLAG_UNHITTABLE;
-        ColliderSetDisabled(&hand->collider, 1);
+        ColliderSetDisabled(&hand->collider, TRUE);
         work->dsd->stateStep++;
         break;
     default:
@@ -847,7 +847,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         work->baseFrame = 36;
         work->dsd->bgFrameTimer = 0;
         work->moveSteps = 30;
-        work->spriteVisible = 0;
+        work->spriteVisible = FALSE;
         BosDsdSetBgMap(work->dsd->bgFrame);
         head->x = 0xDC00;
         head->z = -0x6000;
@@ -950,7 +950,7 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         work->baseFrame = 41;
         work->dsd->bgFrameTimer = 0;
         work->moveSteps = 30;
-        work->spriteVisible = 0;
+        work->spriteVisible = FALSE;
         BosDsdSetBgMap(work->dsd->bgFrame);
         work->stepTimer = 0;
         head->x = 0xE400;
@@ -1004,13 +1004,13 @@ void BosDsdMainUpdateBreak(DsdMainWork* work) {
     if (dsd->lastState == BOS_DSD_STATE_ATTACK_START || dsd->lastState == BOS_DSD_STATE_APPROACH) {
         ClearBtlObjActionFlags(head);
         hand->flags |= BTLOBJ_FLAG_UNHITTABLE;
-        ColliderSetDisabled(&hand->collider, 1);
+        ColliderSetDisabled(&hand->collider, TRUE);
         work->dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
     } else if (dsd->stateStep > 60) {
         ClearBtlObjActionFlags(head);
         hand->flags |= BTLOBJ_FLAG_UNHITTABLE;
-        ColliderSetDisabled(&hand->collider, 1);
+        ColliderSetDisabled(&hand->collider, TRUE);
         work->dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
     } else {
@@ -1055,11 +1055,11 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         break;
     case BOS_DSD_DEFEAT_STEP_BEGIN_DEFEAT:
         BeginBossDefeat(head);
-        ColliderSetDisabled(&head->collider, 1);
-        ColliderSetDisabled(&hand->collider, 1);
-        ColliderSetDisabled(&body->collider, 1);
-        FadeSetPaletteExcluded(0, 0);
-        FadeSetPaletteExcluded(19, 0);
+        ColliderSetDisabled(&head->collider, TRUE);
+        ColliderSetDisabled(&hand->collider, TRUE);
+        ColliderSetDisabled(&body->collider, TRUE);
+        FadeSetPaletteExcluded(0, FALSE);
+        FadeSetPaletteExcluded(19, FALSE);
         FadeToAmount(FADE_MODE_BLACK, 20, 8);
         BgFxStartDsdTransition(head->x - 0x1400, head->y, head->z - 0xA00, Q_8_8(1));
         m4aSongNumStart(SONG_SND_721);
@@ -1073,7 +1073,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
 
         if (work->stepTimer > 11) {
             DisableBg(1);
-            work->spriteVisible = 0;
+            work->spriteVisible = FALSE;
             work->dsd->stateStep++;
         }
 
@@ -1092,8 +1092,8 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         }
 
         FadeToOriginal(FADE_MODE_BLACK, 8);
-        FadeSetPaletteExcluded(0, 1);
-        FadeSetPaletteExcluded(19, 1);
+        FadeSetPaletteExcluded(0, TRUE);
+        FadeSetPaletteExcluded(19, TRUE);
         work->dsd->stateStep++;
         break;
     case BOS_DSD_DEFEAT_STEP_DELAY:

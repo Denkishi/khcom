@@ -141,11 +141,11 @@ s32 CloudTryJumpAway(CloudWork* work) {
                 CloudJumpOffset(work, -0x50, 0x500);
             }
 
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void task_hum_cloud_0(CloudWork* work, void* obj) {

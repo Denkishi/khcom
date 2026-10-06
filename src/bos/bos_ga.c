@@ -295,10 +295,10 @@ void BosGaUpdateFacing(GaWork* work) {
     s32 flip;
     u32 i;
 
-    flip = 0;
+    flip = FALSE;
 
     if (gBtlWork->bossX <= gBtlWork->actor->x) {
-        flip = 1;
+        flip = TRUE;
     }
 
     if (work->flipped != flip) {
@@ -413,7 +413,7 @@ void BosGaEntryDraw(GaWork* work, GaEntryWork* entry) {
     q = entry;
     flags = GetBattleSpritePriorityFlags(entry->actor.y);
 
-    if (work->flipped == 1) {
+    if (work->flipped == TRUE) {
         flags |= 1;
     }
 
@@ -2512,7 +2512,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
 
     switch (UpdateBtlObjReaction(&entry->actor)) {
     case BTL_REACTION_CARD_ACTION:
-        work->cardActionSeen = 1;
+        work->cardActionSeen = TRUE;
 
         if (work->state == BOS_GA_STATE_GIMMICK || work->nextState == BOS_GA_STATE_GIMMICK) {
             ClearBtlObjActionFlags(&entry->actor);
@@ -2537,10 +2537,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
             } else if (dx + dy <= 0xE0FFF) {
                 if (GetRandom() % 100 < 70) {
                     if ((work->entries[2].flags & work->entries[3].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
-                        flip = 0;
+                        flip = FALSE;
 
                         if (gBtlWork->bossX <= gBtlWork->actor->x) {
-                            flip = 1;
+                            flip = TRUE;
                         }
 
                         if (work->flipped == flip) {
@@ -2563,10 +2563,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                             BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     } else {
-                        flip = 0;
+                        flip = FALSE;
 
                         if (gBtlWork->bossX <= gBtlWork->actor->x) {
-                            flip = 1;
+                            flip = TRUE;
                         }
 
                         if (work->flipped == flip) {
@@ -2579,10 +2579,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
             } else if (dx + dy <= 0x270FFF) {
                 if (GetRandom() % 100 < 50) {
                     if ((work->entries[2].flags & work->entries[3].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
-                        flip = 0;
+                        flip = FALSE;
 
                         if (gBtlWork->bossX <= gBtlWork->actor->x) {
-                            flip = 1;
+                            flip = TRUE;
                         }
 
                         if (work->flipped == flip) {
@@ -2605,10 +2605,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                             BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     } else {
-                        flip = 0;
+                        flip = FALSE;
 
                         if (gBtlWork->bossX <= gBtlWork->actor->x) {
-                            flip = 1;
+                            flip = TRUE;
                         }
 
                         if (work->flipped == flip) {
@@ -2621,10 +2621,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
             } else {
                 if (GetRandom() % 100 < 30) {
                     if ((work->entries[2].flags & work->entries[3].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
-                        flip = 0;
+                        flip = FALSE;
 
                         if (gBtlWork->bossX <= gBtlWork->actor->x) {
-                            flip = 1;
+                            flip = TRUE;
                         }
 
                         if (work->flipped == flip) {
@@ -2647,10 +2647,10 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
                             BosGaRequestState(work, BOS_GA_STATE_STOMP);
                         }
                     } else {
-                        flip = 0;
+                        flip = FALSE;
 
                         if (gBtlWork->bossX <= gBtlWork->actor->x) {
-                            flip = 1;
+                            flip = TRUE;
                         }
 
                         if (work->flipped == flip) {
@@ -2665,9 +2665,9 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
 
         if (GetRandom() % 3 != 0) {
             if (!work->attackToggle) {
-                work->attackToggle = 1;
+                work->attackToggle = TRUE;
             } else {
-                work->attackToggle = 0;
+                work->attackToggle = FALSE;
             }
         }
 
@@ -2686,7 +2686,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
-        SetBtlObjUnhittable(&entry->actor, 1);
+        SetBtlObjUnhittable(&entry->actor, TRUE);
         entry->flags |= GA_ENTRY_FLAG_DESTROYED;
 
         if (entry->index == 0) {
@@ -2777,7 +2777,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* entry) {
             }
         } else if (entry->counter > 0) {
             if (work->entries[2].flags & work->entries[3].flags & work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) {
-                SetBtlObjUnhittable(&work->entries[0].actor, 0);
+                SetBtlObjUnhittable(&work->entries[0].actor, FALSE);
             }
 
             ClearBtlObjActionFlags(&entry->actor);
@@ -2832,9 +2832,9 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
     work->timer = 0;
     work->stepsLeft = 0;
     work->hurtTimer = 0;
-    work->flipped = 0;
+    work->flipped = FALSE;
     work->angle = 0;
-    work->attackToggle = 0;
+    work->attackToggle = FALSE;
     work->cardTimer = 60;
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, &sBosMapConfig);
     gBtlWork->bossX = 0xE200;
@@ -2847,12 +2847,12 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
         BosGaEntryInit(work, i, arg);
     }
 
-    SetBtlObjUnhittable(&torso->actor, 1);
-    SetBtlObjUnhittable(&work->entries[1].actor, 1);
+    SetBtlObjUnhittable(&torso->actor, TRUE);
+    SetBtlObjUnhittable(&work->entries[1].actor, TRUE);
     work->palette = LoadObjPalette(gBoss01objPalette, 32);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
-    SetBtlPaletteFadeExcluded(work->palette->index + 16, 1);
-    SetBtlPaletteFadeExcluded(work->palette2->index + 16, 1);
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, TRUE);
+    SetBtlPaletteFadeExcluded(work->palette2->index + 16, TRUE);
     RequestBossCardValue(GetRandom() % 4 + 1);
 }
 
@@ -2870,7 +2870,7 @@ u8 task_bos_ga_1(GaWork* work) {
         work->cardTimer = 60;
     }
 
-    work->cardActionSeen = 0;
+    work->cardActionSeen = FALSE;
     i = 0;
     entry = work->entries;
 

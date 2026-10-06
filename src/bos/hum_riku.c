@@ -142,11 +142,11 @@ u8 RikuTryJumpAway(RikuWork* work) {
                 RikuJumpOffset(work, -80, 0x500);
             }
 
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst) {
@@ -675,15 +675,15 @@ u8 task_hum_riku_1(RikuWork* work) {
             BtlObj* player = gBtlWork->actor;
 
             if (player != NULL) {
-                s32 follow = 0;
+                s32 follow = FALSE;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (player->x < act->x - 0x2000) {
-                        follow = 1;
+                        follow = TRUE;
                     }
                 } else {
                     if (player->x > act->x + 0x2000) {
-                        follow = 1;
+                        follow = TRUE;
                     }
                 }
 
@@ -695,7 +695,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (!(w->flags & RIKU_FLAG_FIRE_LAUNCHED) && work->base.anim.timer == 0) {
             s16 step = 0;
-            s32 spawn = 0;
+            s32 spawn = FALSE;
 
             switch (AnimGetFrame(&work->base.anim)) {
             case 0:
@@ -712,7 +712,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 6:
                 step = 7;
-                spawn = 1;
+                spawn = TRUE;
                 break;
             }
 
@@ -727,10 +727,10 @@ u8 task_hum_riku_1(RikuWork* work) {
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartFire(SPELL_TIER_DARK, act->x - 0x4A00, act->y, act->z - 0x1800,
-                        act->originX - 0xC800, act->originY, act->z - 0x1800, 1, 296);
+                        act->originX - 0xC800, act->originY, act->z - 0x1800, TRUE, 296);
                 } else {
                     BgFxStartFire(SPELL_TIER_DARK, act->x + 0x4A00, act->y, act->z - 0x1800,
-                        act->originX + 0xC800, act->originY, act->z - 0x1800, 0, 296);
+                        act->originX + 0xC800, act->originY, act->z - 0x1800, FALSE, 296);
                 }
             }
         }
@@ -756,7 +756,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (work->base.anim.timer == 0) {
             s32 step = 0;
-            s32 hit = 0;
+            s32 hit = FALSE;
 
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
@@ -764,7 +764,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 3:
                 step = 16;
-                hit = 1;
+                hit = TRUE;
                 break;
             case 4:
                 step = 5;
@@ -774,7 +774,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 7:
                 step = 4;
-                hit = 1;
+                hit = TRUE;
                 break;
             case 8:
                 step = 6;
@@ -848,7 +848,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         if (work->base.anim.timer == 0) {
             s16 step = 0;
-            s32 hit = 0;
+            s32 hit = FALSE;
             s32 attack = 290;
 
             switch (AnimGetGfxIndex(&work->base.anim)) {
@@ -857,7 +857,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 2:
                 step = 5;
-                hit = 1;
+                hit = TRUE;
                 attack = 290;
                 break;
             case 4:
@@ -868,7 +868,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 6:
                 step = 20;
-                hit = 1;
+                hit = TRUE;
                 attack = 291;
                 break;
             case 7:

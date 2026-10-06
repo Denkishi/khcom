@@ -136,7 +136,7 @@ void task_bos_jf_0(JfWork* work, s32 arg) {
         work->body.height = 28;
         SetBtlObjParent(&work->body, sub);
         gBtlWork->bossPriorityOffset = 0xFF00;
-        SetBtlPaletteFadeExcluded(0, 1);
+        SetBtlPaletteFadeExcluded(0, TRUE);
         SetBattleActorPosition(0x23E00, 0x16800, -0x4000);
         SetGimmickTarget(0x20600, 0x16800, -0x800);
         TaskCreate(&work->tasks, &gTaskDescBosJfLamp, work);
@@ -531,50 +531,50 @@ u8 BosJfGetGroundZ(s32* px, s32* py, s32* pz, s32* out) {
                     *out = 0;
 
                     if (*px > 0x1AE00) {
-                        return 0;
+                        return FALSE;
                     }
                 } else {
                     *out = leftZ;
 
                     if (*px <= 0x1B5FF) {
-                        return 0;
+                        return FALSE;
                     }
 
                     if (*px > 0x1E600 && leftZ != middleZ) {
-                        return 0;
+                        return FALSE;
                     }
                 }
             } else {
                 *out = middleZ;
 
                 if (*px <= 0x1EDFF && leftZ != middleZ) {
-                    return 0;
+                    return FALSE;
                 }
 
                 if (*px > 0x21E00 && middleZ != rightZ) {
-                    return 0;
+                    return FALSE;
                 }
             }
         } else {
             *out = rightZ;
 
             if (*px <= 0x225FF && middleZ != rightZ) {
-                return 0;
+                return FALSE;
             }
 
             if (*px > 0x25600) {
-                return 0;
+                return FALSE;
             }
         }
     } else {
         *out = 0;
 
         if (*px <= 0x25DFF) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void task_bos_jf_map_0(JfMapWork* work, JfMapArg* arg) {
@@ -599,7 +599,7 @@ void task_bos_jf_map_0(JfMapWork* work, JfMapArg* arg) {
     ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
     work->paletteTimer = 0;
     work->paletteFrame = 0;
-    gBosJfShakeActive = 0;
+    gBosJfShakeActive = FALSE;
     gBosJfShakeStep = 0;
     gBosJfShakeTimer = 0;
     gBosJfShakeDuration = 0;
@@ -664,7 +664,7 @@ void BosJfDrawPillars() {
 }
 
 void BosJfStartShake(s16 duration) {
-    gBosJfShakeActive = 1;
+    gBosJfShakeActive = TRUE;
     gBosJfShakeStep = 0;
     gBosJfShakeTimer = 0;
     gBosJfShakeDuration = duration;
@@ -672,7 +672,7 @@ void BosJfStartShake(s16 duration) {
 }
 
 s32 BosJfUpdateShake() {
-    if (gBosJfShakeActive == 1) {
+    if (gBosJfShakeActive == TRUE) {
         gBosJfShakeTimer++;
 
         if (gBosJfShakeTimer < gBosJfShakeDuration) {
@@ -684,7 +684,7 @@ s32 BosJfUpdateShake() {
 
             gBosJfShakeStep++;
         } else {
-            gBosJfShakeActive = 0;
+            gBosJfShakeActive = FALSE;
         }
     }
 
@@ -713,14 +713,14 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     work->gfx2 = gBosJfObjFrames[14];
     work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
-    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     work->moveSteps = 0;
     work->tiles2Frame = 0;
     work->tiles2Timer = 0;
     work->voiceInterval = GetRandom() % 0x79 + 0x1E0;
     work->voiceTimer = 0;
     work->unk_24 = 1;
-    work->onFlatGround = 1;
+    work->onFlatGround = TRUE;
     work->state = BOS_JF_LAMP_STATE_FLY_OUT;
     work->stateTimer = 0;
     work->targetX = 0;
@@ -930,7 +930,7 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
     DrawSprite(x, y - 14, work->gfx2, work->tiles2, work->palette, NULL, flags,
                -4101 - (sub->y >> 8) * 4);
 
-    if (work->onFlatGround == 1) {
+    if (work->onFlatGround == TRUE) {
         TaskPoolDraw(&work->tasks);
     }
 }

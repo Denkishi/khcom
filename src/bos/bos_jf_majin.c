@@ -123,7 +123,7 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
     work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
     work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
-    work->spriteVisible = 1;
+    work->spriteVisible = TRUE;
     work->unk_30 = 0x2A200;
     work->unk_34 = 0x12600;
     work->y = 0;
@@ -223,7 +223,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
     ScrollBgMapTo(1, ((gBtlWork->viewX - jf->body.x) >> 8) + 776,
                   ((gBtlWork->viewY - (jf->body.y + jf->body.z)) >> 8) + 294);
 
-    if (work->spriteVisible == 1) {
+    if (work->spriteVisible == TRUE) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             flags = GetBattleSpritePriorityFlags(jf->body.y);
         } else {
@@ -305,7 +305,7 @@ void BosJfMajinUpdateIdle(JfMajinWork* work) {
         work->jf->bgFrameTimer = 0;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
         work->idleStep = 0;
-        work->spriteVisible = 1;
+        work->spriteVisible = TRUE;
         work->jf->stateStep++;
     } else {
         if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
@@ -355,7 +355,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
         work->step = BOS_JF_MAJIN_SWITCH_SIDE_STEP_SINK;
         work->stepTimer = 0;
-        work->spriteVisible = 0;
+        work->spriteVisible = FALSE;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
@@ -487,7 +487,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
         work->step = BOS_JF_MAJIN_ROCK_THROW_STEP_SINK;
         work->stepTimer = 0;
-        work->spriteVisible = 0;
+        work->spriteVisible = FALSE;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
@@ -566,7 +566,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
                         work->jf->bgFrame = 28;
                     }
 
-                    work->spriteVisible = 1;
+                    work->spriteVisible = TRUE;
                     work->step++;
                 }
 
@@ -634,7 +634,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
         work->step = BOS_JF_MAJIN_SLAM_STEP_WINDUP;
         work->stepTimer = 0;
         work->moveSteps = 40;
-        work->spriteVisible = 0;
+        work->spriteVisible = FALSE;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
@@ -776,7 +776,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
         work->step = BOS_JF_MAJIN_BEAM_STEP_RISE;
         work->stepTimer = 0;
         work->moveSteps = 40;
-        work->spriteVisible = 0;
+        work->spriteVisible = FALSE;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
@@ -911,7 +911,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
         work->step = BOS_JF_MAJIN_SWEEP_BEAM_STEP_ALIGN;
         work->stepTimer = 0;
         work->moveSteps = 40;
-        work->spriteVisible = 0;
+        work->spriteVisible = FALSE;
         work->jf->stateStep++;
     } else {
         switch (work->step) {
@@ -1063,7 +1063,7 @@ void BosJfMajinUpdateBreak(JfMajinWork* work) {
         work->jf->bgFrameTimer = 0;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
         work->idleStep = 0;
-        work->spriteVisible = 1;
+        work->spriteVisible = TRUE;
         work->extraClipRows = 0;
         jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         CreateBtlPopTask(&jf->body, 9);
@@ -1103,7 +1103,7 @@ void BosJfMajinUpdateGimmick(JfMajinWork* work) {
         work->jf->bgFrameTimer = 0;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
         work->idleStep = 0;
-        work->spriteVisible = 1;
+        work->spriteVisible = TRUE;
         work->extraClipRows = 0;
         jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         work->jf->stateStep++;
@@ -1150,7 +1150,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         jf->body.y = 0x15E00;
         jf->body.z = -0x3800;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
-        work->spriteVisible = 1;
+        work->spriteVisible = TRUE;
         BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
         BeginBossDefeat(&jf->body);
         work->step = BOS_JF_MAJIN_DEFEAT_STEP_DELAY;
@@ -1296,7 +1296,7 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
         work->jf->bgFrameTimer = 0;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
         work->idleStep = 0;
-        work->spriteVisible = 1;
+        work->spriteVisible = TRUE;
 
         if (work->jf->flags & JF_FLAG_GIMMICK_PENDING) {
             work->jf->flags &= ~JF_FLAG_GIMMICK_PENDING;
@@ -1411,7 +1411,7 @@ void BosJfMajinUpdateEventIdle(JfMajinWork* work) {
         work->jf->bgFrameTimer = 0;
         BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
         work->idleStep = 0;
-        work->spriteVisible = 1;
+        work->spriteVisible = TRUE;
         work->jf->stateStep++;
     } else {
         if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
@@ -1561,7 +1561,7 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->accelZ = 0;
     work->paletteFrame = 0;
     work->paletteTimer = 0;
-    work->shadowVisible = 0;
+    work->shadowVisible = FALSE;
 
     if (arg->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->x2 = arg->body.x + 0x2000;
@@ -1575,9 +1575,9 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
         work->targetZ = -0x2000 - ((gBosJfLeftPillarLevel + 1) << 11);
     }
 
-    work->visible2 = 0;
+    work->visible2 = FALSE;
     work->gfx2Index = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     work->animIndex = 0;
     work->riseSteps = 120;
     work->throwTimer = 0;
@@ -1625,16 +1625,16 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
 
             if (work->body.z <= -0xC00) {
                 work->animIndex = 8;
-                work->visible = 1;
+                work->visible = TRUE;
             } else {
                 index = 8 - ((work->body.z >> 8) + 12) / 8;
 
                 if (index < 0) {
                     work->animIndex = 0;
-                    work->visible = 0;
+                    work->visible = FALSE;
                 } else {
                     work->animIndex = index;
-                    work->visible = 1;
+                    work->visible = TRUE;
                 }
             }
 
@@ -1643,16 +1643,16 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
 
             if (work->z2 <= -0x1000) {
                 work->gfx2Index = 11;
-                work->visible2 = 1;
+                work->visible2 = TRUE;
             } else {
                 index = 11 - ((work->z2 >> 8) + 16) / 8;
 
                 if (index < 0) {
                     work->gfx2Index = 0;
-                    work->visible2 = 0;
+                    work->visible2 = FALSE;
                 } else {
                     work->gfx2Index = index;
-                    work->visible2 = 1;
+                    work->visible2 = TRUE;
                 }
             }
 
@@ -1670,7 +1670,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
 
         if (work->jf->state == BOS_JF_STATE_CARD_BROKEN || work->jf->state == BOS_JF_STATE_GIMMICK) {
             m4aSongNumStart(SONG_EF_FIRE01);
-            work->visible2 = 0;
+            work->visible2 = FALSE;
             work->riseSteps = 0;
             work->state = BOS_JF_ROCK_STATE_INTERRUPTED;
         }
@@ -1707,14 +1707,14 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
 
             work->gfx2 = gBosJfObjFrames[15];
             m4aSongNumStart(SONG_BTL_JF_BALLTHR);
-            work->shadowVisible = 1;
+            work->shadowVisible = TRUE;
             work->state++;
         }
 
         if (work->jf->state == BOS_JF_STATE_CARD_BROKEN || work->jf->state == BOS_JF_STATE_GIMMICK) {
             m4aSongNumStart(SONG_EF_FIRE01);
-            work->visible2 = 0;
-            work->shadowVisible = 0;
+            work->visible2 = FALSE;
+            work->shadowVisible = FALSE;
             work->riseSteps = 0;
             work->state = BOS_JF_ROCK_STATE_INTERRUPTED;
         }
@@ -1740,20 +1740,20 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         work->vz += work->accelZ;
 
         if (work->throwTimer == 7) {
-            work->visible2 = 0;
+            work->visible2 = FALSE;
         }
 
         if (ApplyAttackBox(231, work->body.x, work->body.y, work->body.z - 0x2000, 28, 28, 28) == 1) {
             m4aSongNumStart(SONG_EF_JF_BALLHIT);
             BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
-            work->shadowVisible = 0;
+            work->shadowVisible = FALSE;
             work->state = BOS_JF_ROCK_STATE_EXPLODE;
         }
 
         if (work->jf->state == BOS_JF_STATE_CARD_BROKEN || work->jf->state == BOS_JF_STATE_GIMMICK) {
             m4aSongNumStart(SONG_EF_FIRE01);
-            work->visible2 = 0;
-            work->shadowVisible = 0;
+            work->visible2 = FALSE;
+            work->shadowVisible = FALSE;
             work->riseSteps = 0;
             work->state = BOS_JF_ROCK_STATE_INTERRUPTED;
         }
@@ -1762,11 +1762,11 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         case 1:
             m4aSongNumStart(SONG_EF_FIRE01);
             BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
-            work->shadowVisible = 0;
+            work->shadowVisible = FALSE;
             work->state = BOS_JF_ROCK_STATE_EXPLODE;
             break;
         case 2:
-            work->shadowVisible = 0;
+            work->shadowVisible = FALSE;
             work->state = BOS_JF_ROCK_STATE_OUT_OF_BOUNDS;
             break;
         }
@@ -1812,7 +1812,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
     s16 x;
     s16 y;
 
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             if (work->body.x <= 0x259FF) {
                 flags = GetBattleSpritePriorityFlags(work->body.y);
@@ -1833,7 +1833,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, prio);
     }
 
-    if (work->visible2 == 1) {
+    if (work->visible2 == TRUE) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             flags = 0x400;
         } else {
@@ -1845,7 +1845,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
         DrawSprite(x, y, work->gfx2, work->tiles2, work->palette2, NULL, flags, 0xFFF2);
     }
 
-    if (work->shadowVisible == 1) {
+    if (work->shadowVisible == TRUE) {
         TaskPoolDraw(&work->tasks);
     }
 }
@@ -1915,7 +1915,7 @@ void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
     AnimInit(&work->anim5, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim5, 6, ANIM_FLAG_LOOP);
     work->gfx5 = AnimGetGfx(&work->anim5);
-    SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, FALSE);
 }
 
 u8 task_bos_jf_borderline_1(JfBorderlineWork* work) {

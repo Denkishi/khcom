@@ -73,12 +73,12 @@ u8 BosLstLsrIsFiring(Task* task) {
     u8 firing;
 
     work = task->work;
-    firing = 0;
+    firing = FALSE;
 
     switch (work->state) {
     case BOS_LST_LSR_STATE_TRAVEL:
     case BOS_LST_LSR_STATE_IMPACT:
-        firing = 1;
+        firing = TRUE;
         break;
     }
 
@@ -122,10 +122,10 @@ u8 BosLstLsrSpawnFal(LstLsrWork* work) {
     LstFalArg arg;
     u8 spawned;
 
-    spawned = 0;
+    spawned = FALSE;
 
     if (work->kind != 0) {
-        return 0;
+        return FALSE;
     }
 
     if ((s16)*work->falCount <= 31) {
@@ -136,7 +136,7 @@ u8 BosLstLsrSpawnFal(LstLsrWork* work) {
         arg.facing = *work->facing;
         arg.falCount = work->falCount;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFal, &arg);
-        spawned = 1;
+        spawned = TRUE;
     }
 
     return spawned;

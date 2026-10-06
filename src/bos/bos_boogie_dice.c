@@ -163,26 +163,26 @@ TaskDesc gTaskDescBosBoogieKaihuku = {
 u8 ClampBoogieDicePosition(s32* x, s32* y, s16 marginX, u16 marginY) {
     u8 clamped;
 
-    clamped = 0;
+    clamped = FALSE;
 
     if (*x < (128 - marginX) << 8) {
         *x = (128 - marginX) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     if (*x > (marginX + 368) << 8) {
         *x = (marginX + 368) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     if (*y < (576 - (s16)marginY) << 8) {
         *y = (576 - (s16)marginY) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     if (*y > ((s16)marginY + 632) << 8) {
         *y = ((s16)marginY + 632) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     return clamped;
@@ -193,13 +193,13 @@ u8 BosBoogieDiceIsHeld(BoogieDiceWork* work) {
         if (work->parent->state == BOS_BOOGIE_STATE_DICE_THROW) {
             if (AnimGetFrame(&work->parent->anim) <= 2) {
                 if (!AnimIsFinished(&work->parent->anim)) {
-                    return 1;
+                    return TRUE;
                 }
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void BosBoogieDiceGrow(BoogieDiceWork* work) {
@@ -229,8 +229,8 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     work->scaleY = Q_8_8(0.2);
     work->scaleX = Q_8_8(0.2);
     work->y = 0;
-    work->counted = 0;
-    gBosBoogieDiceFaceReady = 0;
+    work->counted = FALSE;
+    gBosBoogieDiceFaceReady = FALSE;
     x = boogieActor->x;
     y = 0x24000;
     z = boogieActor->z - 0x3800;
@@ -384,7 +384,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         if (work->timer == 0 && !work->follower) {
             ClearBtlObjActionFlags(obj);
             gBosBoogieDiceBreakCount++;
-            work->counted = 1;
+            work->counted = TRUE;
         }
 
         work->timer++;
@@ -438,11 +438,11 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         break;
     case BOS_BOOGIE_DICE_STATE_DESTROYED:
         if (!work->follower && !gBosBoogieGimmickCardDropped && GetRandom() % 16 <= 7) {
-            gBosBoogieGimmickCardDropped = 1;
+            gBosBoogieGimmickCardDropped = TRUE;
             DropGimmickCard(0, obj->x, obj->y, obj->z);
         }
 
-        SetBtlObjUnhittable(obj, 1);
+        SetBtlObjUnhittable(obj, TRUE);
 
         return 0;
     case BOS_BOOGIE_DICE_STATE_SHOW_FACE:
@@ -461,7 +461,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         work->timer++;
         break;
     case BOS_BOOGIE_DICE_STATE_SQUASH:
-        SetBtlObjUnhittable(obj, 1);
+        SetBtlObjUnhittable(obj, TRUE);
         work->scaleY -= Q_8_8(0.05);
         work->y += 96;
 
@@ -567,7 +567,7 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
 
 void task_bos_boogie_dice_3(BoogieDiceWork* work) {
     if (!work->counted && gBosBoogieDiceBreakCount != 3 && !work->follower && work->state != BOS_BOOGIE_DICE_STATE_WAIT_CARD) {
-        gBosBoogieDiceFaceReady = 1;
+        gBosBoogieDiceFaceReady = TRUE;
     }
 
     ColliderUnregister(&work->obj.collider);
@@ -622,10 +622,10 @@ u8 BosBoogieExplosiondiceIsHeld(BoogieExplosiondiceWork* work) {
     BoogieWork* boogie = work->boogie;
 
     if (boogie->animationIndex == 3 && AnimGetFrame(&boogie->anim) <= 2) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 enum BosBoogieExplosiondiceState {
@@ -720,10 +720,10 @@ void task_bos_boogie_explosiondice_3(BoogieExplosiondiceWork* work) {
 
 u8 BosBoogieIsActorPastSaku() {
     if (gBtlWork->actor->y <= 0x23EFF) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
@@ -735,7 +735,7 @@ void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
     work->openTimer = 0;
     TaskPoolInit(&work->tasks, 1);
     work->task = NULL;
-    work->closePending = 0;
+    work->closePending = FALSE;
 }
 
 u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
@@ -751,16 +751,16 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
             SetBattleBounds(0x80, 0x170, 0x228, 0x278);
 
             if (BosBoogieIsActorPastSaku()) {
-                SetBtlObjUnhittable(&work->boogie->actor, 0);
+                SetBtlObjUnhittable(&work->boogie->actor, FALSE);
             } else {
-                SetBtlObjUnhittable(&work->boogie->actor, 1);
+                SetBtlObjUnhittable(&work->boogie->actor, TRUE);
             }
         } else if (work->boogie->state != BOS_BOOGIE_STATE_DEFEATED) {
-            work->closePending = 1;
+            work->closePending = TRUE;
             gBosBoogieDiceBreakCount = 0;
             work->openTimer = 0;
             gBosBoogieSakuOpenTime = 0;
-            SetBtlObjUnhittable(&work->boogie->actor, 1);
+            SetBtlObjUnhittable(&work->boogie->actor, TRUE);
 
             if (BosBoogieIsActorPastSaku()) {
                 work->task = TaskCreate(&work->tasks, &sTaskDescBosBoogieExplosiondice, work->boogie);
@@ -775,7 +775,7 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
             AnimChange(&work->anim, gBosBoogieDiceBreakCount, 0);
         } else if (work->closePending) {
             AnimChange(&work->anim, 3, 0);
-            work->closePending = 0;
+            work->closePending = FALSE;
         }
     }
 
@@ -888,7 +888,7 @@ void task_bos_boogie_mapanime_0(BoogieMapanimeWork* work) {
 
 u8 task_bos_boogie_mapanime_1(BoogieMapanimeWork* work) {
     u32 i;
-    u8 defer = 0;
+    u8 defer = FALSE;
 
     for (i = gBosBoogieDiceBreakCount; i <= 2; i++) {
         defer = BosMapanimeUpdate(&work->anims[i], work->anims[i].def, defer);
@@ -904,26 +904,26 @@ void task_bos_boogie_mapanime_3() {
 }
 
 u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 marginX, s16 offsetY, s32 z) {
-    u8 clamped = 0;
+    u8 clamped = FALSE;
 
     if (*x < (0x80 - marginX) << 8) {
         *x = (0x80 - marginX) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     if (*x > (marginX + 0x170) << 8) {
         *x = (marginX + 0x170) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     if (*y < (0x240 - offsetY) << 8) {
         *y = (0x240 - offsetY) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     if (*y > (0x278 - offsetY) << 8) {
         *y = (0x278 - offsetY) << 8;
-        clamped = 1;
+        clamped = TRUE;
     }
 
     return clamped;
@@ -1027,14 +1027,14 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
         }
 
         if (ApplyAttackBox(0x105, obj->x, obj->y, obj->z, 0x20, 0x10, 1) == 1) {
-            gBosBoogieAttackHit = 1;
+            gBosBoogieAttackHit = TRUE;
             m4aSongNumStart(SONG_BTL_MON_SWORD01);
         }
 
         break;
     case BOS_BOOGIE_DISK_STATE_KNOCKED_DOWN:
         if (obj->z >= 0) {
-            gBosBoogieTaskKnockedDown = 1;
+            gBosBoogieTaskKnockedDown = TRUE;
             ClearBtlObjActionFlags(obj);
 
             return 0;
@@ -1104,7 +1104,7 @@ void BosBoogieKnifeAttack(BoogieKnifeWork* work) {
     }
 
     if (ApplyAttackBox(0x106, obj->x - offsetX, obj->y, obj->z - 0x1000, 4, 0x1C, 0x10) == 1) {
-        gBosBoogieAttackHit = 1;
+        gBosBoogieAttackHit = TRUE;
         m4aSongNumStart(SONG_EF_KU_ATT04);
     }
 }
@@ -1246,10 +1246,10 @@ void task_bos_boogie_knife_3(BoogieKnifeWork* work) {
 
 u8 BosBoogieKnifeIsLanded(BoogieKnifeWork* work) {
     if (work->obj.z >= 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 BosBoogieAnyKnifeActive(BoogieKnifereaderWork* work) {
@@ -1257,11 +1257,11 @@ u8 BosBoogieAnyKnifeActive(BoogieKnifereaderWork* work) {
 
     for (i = 0; i <= 4; i++) {
         if (IsTaskActive(work->knives[i])) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void BosBoogieSpawnKnives(BoogieKnifereaderWork* work) {
@@ -1269,7 +1269,7 @@ void BosBoogieSpawnKnives(BoogieKnifereaderWork* work) {
     s32 x;
 
     if (GetRandom() % 16 > 7) {
-        gBosBoogieKnivesMoveRight = 1;
+        gBosBoogieKnivesMoveRight = TRUE;
         x = -0x4000;
 
         for (i = 0; i <= 4; i++) {
@@ -1277,7 +1277,7 @@ void BosBoogieSpawnKnives(BoogieKnifereaderWork* work) {
             x += 0x6800;
         }
     } else {
-        gBosBoogieKnivesMoveRight = 0;
+        gBosBoogieKnivesMoveRight = FALSE;
         x = 0x23000;
 
         for (i = 0; i <= 4; i++) {
@@ -1298,7 +1298,7 @@ void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work) {
 
     work->state = BOS_BOOGIE_KNIFEREADER_STATE_WAIT_CARD;
     work->timer = 0;
-    gBosBoogieKnivesRetract = 0;
+    gBosBoogieKnivesRetract = FALSE;
     TaskPoolInit(&work->tasks, 5);
 
     for (i = 0; i < 5; i++) {
@@ -1306,7 +1306,7 @@ void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work) {
     }
 
     InitEnemyBtlObj(&work->obj, &sBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
-    SetBtlObjUnhittable(&work->obj, 1);
+    SetBtlObjUnhittable(&work->obj, TRUE);
     RequestEnemyCardUse(&work->obj);
 }
 
@@ -1349,21 +1349,21 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
         }
 
         work->timer++;
-        checkKnives = 0;
+        checkKnives = FALSE;
         break;
     case BOS_BOOGIE_KNIFEREADER_STATE_RETRACT:
-        gBosBoogieKnivesRetract = 1;
-        checkKnives = 1;
+        gBosBoogieKnivesRetract = TRUE;
+        checkKnives = TRUE;
         break;
     case BOS_BOOGIE_KNIFEREADER_STATE_ATTACK:
         if ((s16)work->timer == 0) {
             work->timer++;
             BosBoogieSpawnKnives(work);
-            checkKnives = 0;
+            checkKnives = FALSE;
             break;
         }
     default:
-        checkKnives = 1;
+        checkKnives = TRUE;
         break;
     }
 
@@ -1491,7 +1491,7 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
         return 0;
     case BOS_BOOGIE_KAIHUKU_STATE_KNOCKED_DOWN:
         if (obj->z >= 0) {
-            gBosBoogieTaskKnockedDown = 1;
+            gBosBoogieTaskKnockedDown = TRUE;
             ClearBtlObjActionFlags(obj);
 
             return 0;

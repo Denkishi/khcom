@@ -632,9 +632,9 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 
     if (args->facingLeft != 0) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     work->x = args->x;
@@ -644,7 +644,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     work->targetY = gBtlWork->targetY + (GetRandom() % 33 - 16) * 256;
     work->state = HUM_LEX_TMH_STATE_FLY;
     work->timer = 0;
-    work->done = 0;
+    work->done = FALSE;
     work->vz = -0x980;
     work->tiles2 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
@@ -685,15 +685,15 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
             work->vz = -work->vz >> 1;
 
             if (gBtlWork->targetX < work->x) {
-                work->flyLeft = 1;
+                work->flyLeft = TRUE;
             } else {
-                work->flyLeft = 0;
+                work->flyLeft = FALSE;
             }
         }
 
         if (work->x < (gBtlWork->xMin - 32) << 8 ||
             work->x > (gBtlWork->xMax + 32) << 8) {
-            work->done = 1;
+            work->done = TRUE;
         }
 
         if (work->flyLeft) {
@@ -774,9 +774,9 @@ void task_hum_lex_tmh0_0(LexTmh0Work* work, VixenNdlArgs* args) {
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
 
     if (args->facingLeft != 0) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     work->x = args->x;
@@ -850,9 +850,9 @@ enum HumLexRockState {
 
 void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     if (args->facingLeft != 0) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     work->x = args->x;
@@ -862,7 +862,7 @@ void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     work->rockCount = 0;
     work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    work->blinking = 0;
+    work->blinking = FALSE;
 }
 
 u8 task_hum_lex_rock_1(LexRockWork* work) {
@@ -936,7 +936,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
             piece->x = work->x + ((GetRandom() % 17 - 8) << 8);
             piece->y = work->y + ((GetRandom() % 17 - 8) << 8);
             piece->z = work->z + ((GetRandom() % 17 - 8) << 8);
-            piece->hasHit = 0;
+            piece->hasHit = FALSE;
 
             if (GetRandom() % 2) {
                 piece->vz = -(GetRandom() % 0x701 + 0x100);
@@ -980,14 +980,14 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
                 if (!piece->hasHit) {
                     if (ApplyAttackBox(0x148, piece->x, piece->y, piece->z, 4, 4, 4)) {
                         m4aSongNumStart(SONG_BTL_MON_HIT02);
-                        piece->hasHit = 1;
+                        piece->hasHit = TRUE;
                     }
                 }
             }
         }
 
         if (work->timer == 80) {
-            work->blinking = 1;
+            work->blinking = TRUE;
         }
 
         if (work->timer > 100) {

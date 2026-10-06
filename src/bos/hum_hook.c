@@ -151,10 +151,10 @@ u8 HookTryJumpAway(CloudWork* work) {
             HookJumpOffset(work, -80, 0x500);
         }
 
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void task_hum_hook_0(HookWork* work, void* arg) {
@@ -801,8 +801,8 @@ void task_hum_hook_moon_0(HookMoonWork* work) {
     PushPaletteEffect(0);
     work->palette = LoadObjPalette(gHumHookMoonPalette, 0x20);
     PopPaletteEffect();
-    SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
-    work->backdropSet = 0;
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, FALSE);
+    work->backdropSet = FALSE;
     work->angle = 0;
 }
 
@@ -867,7 +867,7 @@ void task_hum_hook_moon_2(HookMoonWork* work) {
             break;
         }
 
-        work->backdropSet = 1;
+        work->backdropSet = TRUE;
     } else if (work->backdropSet) {
         SetBackdropColor(0, 0, 9);
         work->backdropSet = fade;
@@ -886,9 +886,9 @@ enum HumHookBombState {
 
 void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
     if (args->facingLeft != 0) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     work->palette = LoadObjPalette(gPBakudanPalette, 0x20);
@@ -927,7 +927,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
 
     work->tiles2 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
-    work->visible = 1;
+    work->visible = TRUE;
 }
 
 u8 task_hum_hook_bomb_1(HookBombWork* work) {
@@ -991,7 +991,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
         } else if (work->timer == 18) {
             MakeOpponentsHittable();
             BgFxStartExplosion(work->x, work->y, work->z);
-            work->visible = 0;
+            work->visible = FALSE;
         } else if (work->timer > 18) {
             if (ApplyAttackBox(0x117, work->x, work->y, work->z, 24, 24, 24)) {
                 m4aSongNumStart(SONG_BTL_BW_PACHIN);

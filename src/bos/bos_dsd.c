@@ -97,10 +97,10 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         hand->height = 32;
         ColliderInit(&hand->collider, 7, 16, 32);
         ColliderSetPosition(&hand->collider, hand->x, hand->y, hand->z);
-        ColliderSetDisabled(&hand->collider, 1);
+        ColliderSetDisabled(&hand->collider, TRUE);
         SetBtlObjParent(hand, head);
         gBtlWork->bossPriorityOffset = inEvent;
-        SetBtlPaletteFadeExcluded(0, 1);
+        SetBtlPaletteFadeExcluded(0, TRUE);
         SetBattleActorPosition(0x6400, 0x16800, 0);
         SetGimmickTarget(0x2800, 0x16800, 0);
         TaskCreate(&w->tasks, &gTaskDescBosDsdMain, w);

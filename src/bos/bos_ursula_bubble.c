@@ -220,7 +220,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     work->speed = 0x333;
     InitEnemyBtlObj(&work->obj, &sBosUrsulaBubbleSingleEmyKind, gBtlWork->bossX,
         gBtlWork->bossY + 0x1000, gBtlWork->bossZ);
-    SetBtlObjUnhittable(&work->obj, 1);
+    SetBtlObjUnhittable(&work->obj, TRUE);
 #ifdef VERSION_EU
     work->tiles = gBtlWork->tiles3;
 #else
@@ -286,7 +286,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 #else
             AnimStart(&work->anim, 1, 0);
 #endif
-            SetBtlObjUnhittable(&work->obj, 1);
+            SetBtlObjUnhittable(&work->obj, TRUE);
         }
     }
 
@@ -356,7 +356,7 @@ void BosUrsulaBubblePop(UrsulaBubbleSingleWork* work) {
 #else
         AnimStart(&work->anim, 1, 0);
 #endif
-        SetBtlObjUnhittable(&work->obj, 1);
+        SetBtlObjUnhittable(&work->obj, TRUE);
         work->state = BOS_URSULA_BUBBLE_SINGLE_STATE_POP;
     }
 }
@@ -368,7 +368,7 @@ void task_bos_ursula_thunder_0(UrsulaThunderWork* work) {
     work->y = player->y;
     work->z = player->z - 0x6000;
     BgFxStartUrsulaThunder(work->x, work->y, work->z);
-    work->strikeStarted = 0;
+    work->strikeStarted = FALSE;
 }
 
 u8 task_bos_ursula_thunder_1(UrsulaThunderWork* work) {
@@ -378,7 +378,7 @@ u8 task_bos_ursula_thunder_1(UrsulaThunderWork* work) {
         }
 
         BgFxStartThunderStrike(work->x, work->y, 0, 244);
-        work->strikeStarted = 1;
+        work->strikeStarted = TRUE;
     }
 
     return 1;
@@ -393,7 +393,7 @@ void task_bos_ursula_thunder_3() {
 void BosMapanimeInit(BosMapanimeState* anim, const BosMapanimeDef* def) {
     anim->timer = 0;
     anim->frameIndex = 0;
-    anim->uploadPending = 1;
+    anim->uploadPending = TRUE;
     anim->def = def;
 }
 
@@ -415,10 +415,10 @@ u8 BosMapanimeUpdate(BosMapanimeState* anim, const BosMapanimeDef* def, u8 defer
         if (anim->timer == 0 || anim->uploadPending) {
             RequestDma3Copy((u8*)def->tiles + def->frameSize * def->frames[anim->frameIndex].frame,
                 (u8*)GetBgCharBase(def->bg) + def->destOffset, def->copySize);
-            anim->uploadPending = 0;
+            anim->uploadPending = FALSE;
         }
     } else if (anim->timer == 0) {
-        anim->uploadPending = 1;
+        anim->uploadPending = TRUE;
     }
 
     return defer;
@@ -428,10 +428,10 @@ u8 BosMapanimeIsAtEnd(BosMapanimeState* anim) {
     const BosMapanimeDef* def = anim->def;
 
     if (anim->timer + 1 > def->frames[anim->frameIndex].duration && anim->frameIndex + 1 >= def->frameCount) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u16 BosMapanimeGetFrameIndex(BosMapanimeState* anim) {

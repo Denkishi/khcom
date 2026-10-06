@@ -470,10 +470,10 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (AnimGetFrame(&w->base.anim) == 3 && w->base.anim.timer == 0) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartBlizzard(SPELL_TIER_RA, act->x - 0x3700, act->y, act->z - 0x4000,
-                    act->x - 0x6E00, act->y, -0x1400, 1, 0x139);
+                    act->x - 0x6E00, act->y, -0x1400, TRUE, 0x139);
             } else {
                 BgFxStartBlizzard(SPELL_TIER_RA, act->x + 0x3700, act->y, act->z - 0x4000,
-                    act->x + 0x6E00, act->y, -0x1400, 0, 0x139);
+                    act->x + 0x6E00, act->y, -0x1400, FALSE, 0x139);
             }
         }
 
@@ -783,13 +783,13 @@ void task_hum_vixen_ndl_0(VixenNdlWork* work, VixenNdlArgs* args) {
     work->x = args->x;
     work->y = args->y + (GetRandom() % 11 - 5) * 256;
     work->z = args->z;
-    work->hitDone = 0;
+    work->hitDone = FALSE;
     m4aSongNumStart(SONG_BTL_VIC_ICEP);
 
     if ((GetRandom() & 1) != 0) {
-        work->flipped = 1;
+        work->flipped = TRUE;
     } else {
-        work->flipped = 0;
+        work->flipped = FALSE;
     }
 }
 
@@ -815,7 +815,7 @@ u8 task_hum_vixen_ndl_1(VixenNdlWork* work) {
     }
 
     if (gBtlWork->actor->flags & BTLOBJ_FLAG_HURT) {
-        work->hitDone = 1;
+        work->hitDone = TRUE;
     }
 
     AnimUpdate(&work->anim);
@@ -859,22 +859,22 @@ void task_hum_vixen_ice_0(VixenIceWork* work, VixenSub* args) {
     AnimInit(&work->anim, gVixenE2Anims, gVixenE2Frames);
     AnimStart(&work->anim, 0, 0);
     ColliderInit(&work->collider, 12, 27, 1);
-    ColliderSetDisabled(&work->collider, 1);
+    ColliderSetDisabled(&work->collider, TRUE);
 }
 
 u8 task_hum_vixen_ice_1(VixenIceWork* work) {
     if (work->sub->active == 0) {
         if (work->sub->pending != 0) {
-            FadeSetPaletteExcluded(work->palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
             work->sub->pending = 0;
-            ColliderSetDisabled(&work->collider, 1);
+            ColliderSetDisabled(&work->collider, TRUE);
         }
 
         return 1;
     }
 
     if (work->sub->pending != 0) {
-        FadeSetPaletteExcluded(work->palette->index + 16, 0);
+        FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
         work->sub->pending = 0;
         work->state = HUM_VIXEN_ICE_STATE_GROW;
         work->stateTimer = 0;
@@ -904,7 +904,7 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
         work->steps--;
 
         if ((s16)work->steps <= 0) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
             work->state = HUM_VIXEN_ICE_STATE_IDLE;
             work->stateTimer = 0;
             work->lifetime = GetRandom() % 0x259 + 600;
@@ -1210,7 +1210,7 @@ void task_hum_vixen_frg_0(VixenFrgWork* work, VixenNdlArgs* args) {
     work->tiles = &work->tilesSlot;
     work->palette = LoadObjPalette(gVixEPalette, 0x20);
     work->timer = 0;
-    work->blinking = 0;
+    work->blinking = FALSE;
 
     for (i = 0; i < 15; i++) {
         const VixenFrgDef* def = &sVixenFrgDefs[i];
@@ -1258,7 +1258,7 @@ u8 task_hum_vixen_frg_1(VixenFrgWork* work) {
     work->timer++;
 
     if (work->timer == 50) {
-        work->blinking = 1;
+        work->blinking = TRUE;
     }
 
     if (work->timer > 70) {

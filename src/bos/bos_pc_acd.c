@@ -52,11 +52,11 @@ void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
     anim = &work->anim;
     AnimInit(anim, gBosPcAcdAnims, gBosPcAcdFrames);
 
-    if (work->shared->inEvent == 1) {
-        work->acdOff = 1;
+    if (work->shared->inEvent == TRUE) {
+        work->acdOff = TRUE;
         AnimStart(anim, 1, 0);
     } else {
-        work->acdOff = 0;
+        work->acdOff = FALSE;
         AnimStart(anim, 0, 0);
     }
 }
@@ -65,18 +65,18 @@ u8 task_bos_pc_acd_1(PcAcdWork* work) {
     AnimState* anim;
     s32 animId;
 
-    FadeSetPaletteExcluded(work->palette->index + 17, 0);
-    FadeSetPaletteExcluded(work->palette->index + 18, 0);
+    FadeSetPaletteExcluded(work->palette->index + 17, FALSE);
+    FadeSetPaletteExcluded(work->palette->index + 18, FALSE);
     anim = &work->anim;
     AnimUpdate(anim);
 
     if (gBtlWork->actor->z >= 0) {
         if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0 ||
             (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) == 0) {
-            if (work->x < 0 || AnimIsFinished(anim) == 1) {
+            if (work->x < 0 || AnimIsFinished(anim) == TRUE) {
                 animId = 0;
 
-                if (work->acdOff == 1) {
+                if (work->acdOff == TRUE) {
                     animId = 1;
                 }
 
@@ -109,7 +109,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     shakeY = 0;
     shared = work->shared;
 
-    if (shared->inEvent == 1) {
+    if (shared->inEvent == TRUE) {
         shakeX = gEventState->shakeX << 8;
         shakeY = gEventState->shakeY << 8;
     }
@@ -118,7 +118,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     work->y = actor->y - 0x400;
     work->z = 0;
 
-    if (shared->forceRipple == 1) {
+    if (shared->forceRipple == TRUE) {
         frames = gBosPcAcdFrames;
         frame = AnimGetGfxIndex(&work->anim) + 5;
         gfx = frames[frame];

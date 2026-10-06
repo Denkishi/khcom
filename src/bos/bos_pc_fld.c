@@ -69,10 +69,10 @@ void BosPcFldEnableObject(Task* task, u8 on) {
 
     work = task->work;
 
-    if (on == 1) {
-        on = 0;
+    if (on == TRUE) {
+        on = FALSE;
     } else {
-        on = 1;
+        on = TRUE;
     }
 
     ColliderSetDisabled(&work->collider, on);
@@ -91,14 +91,14 @@ void BosPcFldEnableObject(Task* task, u8 on) {
 }
 
 void BosPcFldResetShake() {
-    sBosPcFldShakeActive = 0;
+    sBosPcFldShakeActive = FALSE;
     sBosPcFldShakePattern = 0;
     sBosPcFldShakeStep = 0;
     sBosPcFldShakeOffset = 0;
 }
 
 void BosPcFldStartShake(s16 pattern) {
-    sBosPcFldShakeActive = 1;
+    sBosPcFldShakeActive = TRUE;
     sBosPcFldShakePattern = pattern;
     sBosPcFldShakeStep = 0;
     sBosPcFldShakeOffset = 0;
@@ -113,7 +113,7 @@ void BosPcFldUpdateShake() {
         sBosPcFldShakeStep += 1;
 
         if (pattern[sBosPcFldShakeStep] == 0) {
-            sBosPcFldShakeActive = 0;
+            sBosPcFldShakeActive = FALSE;
             sBosPcFldShakeOffset = 0;
         }
     }
@@ -186,7 +186,7 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
     collider = &work->collider;
     ColliderInit(collider, 6, 40, 8);
     ColliderSetPosition(collider, 0x17400, 0x15400, 0);
-    ColliderSetDisabled(collider, 1);
+    ColliderSetDisabled(collider, TRUE);
 }
 
 u8 task_bos_pc_fld_1(PcFldWork* work) {

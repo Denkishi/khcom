@@ -5176,7 +5176,7 @@ void BosPcUpdateAnim(PcWork* work) {
                 work->animTimer = 0;
             } else {
                 work->animFrame = work->animIndex;
-                cont = 0;
+                cont = FALSE;
             }
 
             break;
@@ -5186,7 +5186,7 @@ void BosPcUpdateAnim(PcWork* work) {
             break;
         case 2:
             work->animTimer = 0xFFFF;
-            cont = 0;
+            cont = FALSE;
             break;
         }
     }
@@ -5255,7 +5255,7 @@ void BosPcDraw(PcWork* work) {
     shakeX = 0;
     shakeY = 0;
 
-    if (work->shared.inEvent == 1) {
+    if (work->shared.inEvent == TRUE) {
         shakeX = gEventState->shakeX;
         shakeY = gEventState->shakeY;
     }
@@ -5355,15 +5355,15 @@ u8 BosPcIsAnimDone(PcWork* work) {
         step = &work->animSteps[work->animIndex];
 
         if (step->op != 2) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void BosPcStartPaletteCycle(PcWork* work) {
-    work->paletteCycle = 1;
+    work->paletteCycle = TRUE;
     work->paletteIndex = 0;
     work->paletteTimer = 0;
 }
@@ -5386,7 +5386,7 @@ void BosPcLoadPaletteCycle(PcWork* work) {
 }
 
 void BosPcStopPaletteCycle(PcWork* work) {
-    work->paletteCycle = 0;
+    work->paletteCycle = FALSE;
 }
 
 void CreateBosPcFltTask(PcWork* work, u16 angle, s32 x, s32 y, s32 z, u8 index) {
@@ -5438,7 +5438,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->cardDelay = 600;
     work->hurtTimer = 0;
     work->reactionAnim = 0;
-    work->defeated = 0;
+    work->defeated = FALSE;
     work->actorMaxX = 0x15000;
     work->x = 0x17000;
     work->y = 0x15400;
@@ -5447,9 +5447,9 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->animIndex = 0;
     work->animTimer = 0;
     work->shared.hpRatio = 0;
-    work->shared.fltShrunk = 0;
+    work->shared.fltShrunk = FALSE;
     work->shared.unk_03 = 0;
-    work->shared.forceRipple = 0;
+    work->shared.forceRipple = FALSE;
     work->shared.fltStopTimer = 0;
     work->shared.gimmickTimer = 0;
     work->flash = 0;
@@ -5473,7 +5473,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->tiles2[1] = AllocObjTiles(0x400, gBosPcStandaloneTiles);
     work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 0x20);
-    SetBtlPaletteFadeExcluded(0, 1);
+    SetBtlPaletteFadeExcluded(0, TRUE);
     work->flt[0] = NULL;
     work->flt[1] = NULL;
     work->flt[2] = NULL;
@@ -5481,12 +5481,12 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     zero = 0;
 
     if (pool == NULL) {
-        work->shared.inEvent = 0;
+        work->shared.inEvent = FALSE;
     } else {
         work->state = BOS_PC_STATE_EVENT;
         work->shared.gimmickTimer = 0x34BC0;
-        work->shared.forceRipple = 1;
-        work->shared.inEvent = 1;
+        work->shared.forceRipple = TRUE;
+        work->shared.inEvent = TRUE;
         BosPcSetAnim(work, 12);
     }
 
@@ -5600,7 +5600,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
         if (x <= 0x109) {
             sel = (y >= 0x144 && y <= 0x162 && x > 175 && (GetRandom() & 0x300)) ? 8 : 7;
         } else {
-            if ((GetRandom() & 3) == 3 && work->shared.fltShrunk == 0 && work->shared.gimmickTimer <= 0) {
+            if ((GetRandom() & 3) == 3 && work->shared.fltShrunk == FALSE && work->shared.gimmickTimer <= 0) {
                 sel = 6;
             } else if (y > 0x161) {
                 sel = 10;
@@ -5652,7 +5652,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
             break;
         case 3:
             if (work->shared.gimmickTimer <= 0) {
-                work->shared.fltShrunk = 1;
+                work->shared.fltShrunk = TRUE;
             }
 
             break;
@@ -5846,8 +5846,8 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
         BeginBossDefeat(body);
         ReleaseObjPalette(work->palette2);
         work->palette2 = NULL;
-        SetBtlObjUnhittable(body, 1);
-        SetBtlObjUnhittable(&work->body2, 1);
+        SetBtlObjUnhittable(body, TRUE);
+        SetBtlObjUnhittable(&work->body2, TRUE);
         gBtlWork->flags |= 0x100000;
         work->shared.unk_03 = 255;
         work->shared.gimmickTimer = 0x34BC0;
@@ -5862,7 +5862,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
         for (i = 0; i <= 3; i++) {
             if (work->flt[i] == NULL) {
                 n++;
-            } else if (BosPcFltIsSubmerged(work->flt[i]) == 1) {
+            } else if (BosPcFltIsSubmerged(work->flt[i]) == TRUE) {
                 TaskKill(&gBtlWork->taskPools[0], work->flt[i]);
                 work->flt[i] = NULL;
             }
@@ -5874,13 +5874,13 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
             args.z = -0x5C00;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &args);
             DropBossPrizes(body);
-            BosPcFldEnableObject(work->fld, 1);
+            BosPcFldEnableObject(work->fld, TRUE);
             work->step += 1;
         }
 
         break;
     case BOS_PC_DEFEAT_STEP_SET_DEFEATED:
-        work->defeated = 1;
+        work->defeated = TRUE;
         work->step += 1;
         break;
     default:
@@ -5902,8 +5902,8 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
     BosPcUpdateAnim(work);
     BosPcUpdatePaletteCycle(work);
 
-    if (ConsumeGimmickFlag(0) == 1) {
-        work->shared.fltShrunk = 0;
+    if (ConsumeGimmickFlag(0) == TRUE) {
+        work->shared.fltShrunk = FALSE;
         work->shared.gimmickTimer = 0x259;
     }
 
@@ -5912,14 +5912,14 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
     }
 
     if (work->shared.gimmickTimer > 0) {
-        BosPcAcdSetOff(work->acd, 1);
+        BosPcAcdSetOff(work->acd, TRUE);
         gBtlWork->flags |= 0x100000;
 
         if (work->shared.gimmickTimer < 0x34BBF) {
             work->shared.gimmickTimer -= 1;
         }
     } else {
-        BosPcAcdSetOff(work->acd, 0);
+        BosPcAcdSetOff(work->acd, FALSE);
         gBtlWork->flags &= ~0x100000;
     }
 

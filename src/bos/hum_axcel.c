@@ -854,9 +854,9 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartAxcelFireWall(act->x, 1, 303);
+                BgFxStartAxcelFireWall(act->x, TRUE, 303);
             } else {
-                BgFxStartAxcelFireWall(act->x, 0, 303);
+                BgFxStartAxcelFireWall(act->x, FALSE, 303);
             }
 
             work->base.flags |= HUM_FLAG_BEHIND_BG_FX;

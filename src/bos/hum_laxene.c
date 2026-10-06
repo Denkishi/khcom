@@ -317,9 +317,9 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             m4aSongNumStart(SONG_EF_RAC_BEEM);
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartLaxeneBeam(act->x - 0x1000, act->y, act->z - 0x3000, 1, 310);
+                BgFxStartLaxeneBeam(act->x - 0x1000, act->y, act->z - 0x3000, TRUE, 310);
             } else {
-                BgFxStartLaxeneBeam(act->x + 0x1000, act->y, act->z - 0x3000, 0, 310);
+                BgFxStartLaxeneBeam(act->x + 0x1000, act->y, act->z - 0x3000, FALSE, 310);
             }
         }
 
@@ -869,16 +869,16 @@ void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
     AnimStart(&work->anim, 0, 0);
 
     if (args->facingLeft != 0) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
     work->timer = 0;
-    work->onScreen = 1;
+    work->onScreen = TRUE;
     work->state = HUM_LAXENE_KNF_STATE_FLY;
     work->playerPrevX = gBtlWork->actor->x;
     work->playerPrevY = gBtlWork->actor->y;
@@ -960,7 +960,7 @@ void task_hum_laxene_knf_2(LaxeneKnfWork* work) {
         -0x1004 - (work->y >> 8) * 4);
 
     if (IsRectOutsideScreen(x, y, 2, 2, 32, 32)) {
-        work->onScreen = 0;
+        work->onScreen = FALSE;
     }
 }
 

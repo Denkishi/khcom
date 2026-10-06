@@ -112,10 +112,10 @@ u8 BosPcFltIsSubmerged(Task* task) {
     work = task->work;
 
     if (work->state == BOS_PC_FLT_STATE_GIMMICK && AnimGetGfxIndex(&work->anim) == 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 BosPcFltIsPlayerOn(Task* task) {
@@ -123,10 +123,10 @@ u8 BosPcFltIsPlayerOn(Task* task) {
     u8 playerOn;
 
     work = task->work;
-    playerOn = 0;
+    playerOn = FALSE;
 
-    if (IsPlayerOnPlatform(&work->collider) == 1) {
-        playerOn = 1;
+    if (IsPlayerOnPlatform(&work->collider) == TRUE) {
+        playerOn = TRUE;
     }
 
     return playerOn;
@@ -137,12 +137,12 @@ void BosPcFltUpdateFloat(PcFltWork* work) {
 
     work->z = work->baseZ;
 
-    if (work->shared->fltShrunk == 0) {
-        if (IsPlayerOnPlatform(&work->collider) == 1) {
+    if (work->shared->fltShrunk == FALSE) {
+        if (IsPlayerOnPlatform(&work->collider) == TRUE) {
             work->z += 0x200;
 
-            if (work->playerOnPlatform != 1) {
-                work->playerOnPlatform = 1;
+            if (work->playerOnPlatform != TRUE) {
+                work->playerOnPlatform = TRUE;
                 AnimChange(&work->anim, 8, 0);
             }
 
@@ -150,13 +150,13 @@ void BosPcFltUpdateFloat(PcFltWork* work) {
 
             if (work->sinkTimer < 0) {
                 work->state = BOS_PC_FLT_STATE_SINK;
-                work->playerOnPlatform = 0;
+                work->playerOnPlatform = FALSE;
                 work->timer = 0;
                 work->sinkTimer = 360;
                 AnimChange(&work->anim, 7, 0);
             }
         } else {
-            if (work->playerOnPlatform == 1) {
+            if (work->playerOnPlatform == TRUE) {
                 work->sinkTimer -= 120;
                 AnimChange(&work->anim, 1, 0);
             } else {
@@ -167,11 +167,11 @@ void BosPcFltUpdateFloat(PcFltWork* work) {
                 }
             }
 
-            work->playerOnPlatform = 0;
+            work->playerOnPlatform = FALSE;
         }
     } else {
         work->state = BOS_PC_FLT_STATE_SHRINK;
-        work->playerOnPlatform = 0;
+        work->playerOnPlatform = FALSE;
         work->timer = 0;
         AnimChange(&work->anim, 5, 0);
     }
@@ -183,7 +183,7 @@ void BosPcFltUpdateSink(PcFltWork* work) {
     work->z = work->baseZ;
     anim = &work->anim;
 
-    if (AnimIsFinished(anim) == 1) {
+    if (AnimIsFinished(anim) == TRUE) {
         work->state = BOS_PC_FLT_STATE_SINK_END;
         work->timer = 0;
         AnimReset(anim);
@@ -194,9 +194,9 @@ void BosPcFltUpdateSink(PcFltWork* work) {
 void BosPcFltUpdateSinkEnd(PcFltWork* work) {
     work->z = work->baseZ;
 
-    if (AnimIsFinished(&work->anim) == 1) {
+    if (AnimIsFinished(&work->anim) == TRUE) {
         work->state = BOS_PC_FLT_STATE_SUBMERGED;
-        work->playerOnPlatform = 0;
+        work->playerOnPlatform = FALSE;
         work->timer = 60;
     }
 }
@@ -206,7 +206,7 @@ void BosPcFltUpdateSubmerged(PcFltWork* work) {
     work->timer -= 1;
 
     if (work->timer < 0) {
-        if (work->shared->fltShrunk == 0) {
+        if (work->shared->fltShrunk == FALSE) {
             work->state = BOS_PC_FLT_STATE_RISE;
             work->timer = 0;
             AnimChange(&work->anim, 4, 0);
@@ -224,7 +224,7 @@ void BosPcFltUpdateRise(PcFltWork* work) {
     work->z = work->baseZ;
     anim = &work->anim;
 
-    if (AnimIsFinished(anim) == 1) {
+    if (AnimIsFinished(anim) == TRUE) {
         work->state = BOS_PC_FLT_STATE_FLOAT;
         AnimReset(anim);
         AnimChange(anim, 1, 0);
@@ -237,7 +237,7 @@ void BosPcFltUpdateState5(PcFltWork* work) {
     work->z = work->baseZ;
     anim = &work->anim;
 
-    if (AnimIsFinished(anim) == 1) {
+    if (AnimIsFinished(anim) == TRUE) {
         work->state = BOS_PC_FLT_STATE_SHRUNK;
         work->timer = 0;
         AnimReset(anim);
@@ -248,7 +248,7 @@ void BosPcFltUpdateState5(PcFltWork* work) {
 void BosPcFltUpdateState6(PcFltWork* work) {
     work->z = work->baseZ;
 
-    if (work->shared->fltShrunk == 0) {
+    if (work->shared->fltShrunk == FALSE) {
         work->state = BOS_PC_FLT_STATE_REGROW;
         work->timer = 0;
         AnimChange(&work->anim, 6, 0);
@@ -261,7 +261,7 @@ void BosPcFltUpdateState7(PcFltWork* work) {
     work->z = work->baseZ;
     anim = &work->anim;
 
-    if (AnimIsFinished(anim) == 1) {
+    if (AnimIsFinished(anim) == TRUE) {
         work->state = BOS_PC_FLT_STATE_FLOAT;
         work->timer = 0;
         AnimReset(anim);
@@ -280,7 +280,7 @@ void BosPcFltUpdateGimmick(PcFltWork* work) {
         anim = &work->anim;
         fin = AnimIsFinished(anim);
 
-        if (fin == 1) {
+        if (fin == TRUE) {
             id = AnimGetGfxIndex(anim);
 
             if (id != 0) {
@@ -292,7 +292,7 @@ void BosPcFltUpdateGimmick(PcFltWork* work) {
         }
     } else if (work->shared->gimmickTimer <= 119) {
         work->state = BOS_PC_FLT_STATE_SUBMERGED;
-        work->playerOnPlatform = 0;
+        work->playerOnPlatform = FALSE;
         work->timer = work->index * 30;
     }
 }
@@ -309,12 +309,12 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
 
     if (work->state != BOS_PC_FLT_STATE_GIMMICK && work->shared->gimmickTimer > 0x257) {
         work->state = BOS_PC_FLT_STATE_GIMMICK;
-        work->playerOnPlatform = 0;
+        work->playerOnPlatform = FALSE;
         work->timer = 0;
         work->sinkTimer = 360;
     }
 
-    if (work->shared->fltShrunk == 0) {
+    if (work->shared->fltShrunk == FALSE) {
         if (work->centerX > 0xF400) {
             work->centerX -= 32;
         }
@@ -384,8 +384,8 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
         break;
     }
 
-    if (IsPlayerOnPlatform(&work->collider) == 1) {
-        work->playerOnPlatform = 1;
+    if (IsPlayerOnPlatform(&work->collider) == TRUE) {
+        work->playerOnPlatform = TRUE;
     }
 }
 
@@ -397,9 +397,9 @@ void BosPcFltSyncCollider(PcFltWork* work) {
     ColliderSetHeight(collider, -work->z >> 8);
 
     if (work->z > 0) {
-        ColliderSetDisabled(collider, 1);
+        ColliderSetDisabled(collider, TRUE);
     } else {
-        ColliderSetDisabled(collider, 0);
+        ColliderSetDisabled(collider, FALSE);
     }
 }
 
@@ -412,7 +412,7 @@ void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg) {
     AnimInit(anim, gBosPcFltAnims, gBosPcFltFrames);
     AnimStart(anim, 1, 0);
     ColliderInit(&work->collider, 7, 26, 4);
-    work->playerOnPlatform = 0;
+    work->playerOnPlatform = FALSE;
     work->timer = 0;
     work->index = arg->index;
     work->state = BOS_PC_FLT_STATE_FLOAT;

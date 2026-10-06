@@ -512,8 +512,8 @@ typedef struct DeckExchangeWork {
     s32 topBarY;
     s32 bottomBarY;
     s32 bannerX;
-    s32 x3;
-    s32 y3;
+    s32 heldX;
+    s32 heldY;
     u8 unk_6C0[2];
     u16 heldRow;
     u16 unk_6C4;
@@ -657,8 +657,8 @@ typedef struct DeckMenuWork {
     s32 topBarY;
     s32 bottomBarY;
     s32 bannerX;
-    s32 x3;
-    s32 y3;
+    s32 heldX;
+    s32 heldY;
     s16 heldCol;
     s16 heldRow;
     s16 removeLabelX;
@@ -768,7 +768,7 @@ typedef struct RikuDeckMenuWork {
     s32 bottomBarY;
     s32 bannerX;
     u8 unk_4B0[4];
-    s32 y3;
+    s32 heldY;
     u8 unk_4B8[2];
     s16 heldRow;
     u16 unk_4BC;

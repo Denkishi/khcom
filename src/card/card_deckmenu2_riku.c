@@ -369,9 +369,9 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
 
             if (work->holding != 0) {
                 if ((u16)work->heldRow <= 3) {
-                    work->y3 = gDeckGridRowY[work->heldRow] << 8;
+                    work->heldY = gDeckGridRowY[work->heldRow] << 8;
                 } else {
-                    work->y3 = 0xFFFF0000;
+                    work->heldY = 0xFFFF0000;
                 }
             }
         }

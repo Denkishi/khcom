@@ -886,7 +886,7 @@ void deckexchange_2(DeckExchangeWork* work) {
     switch (work->view) {
     case DECK_MENU_VIEW_DECK_GRID:
         if (work->holding != 0) {
-            DrawSprite((work->x3 >> 8) - 16, (work->y3 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+            DrawSprite((work->heldX >> 8) - 16, (work->heldY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
         }
 
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);

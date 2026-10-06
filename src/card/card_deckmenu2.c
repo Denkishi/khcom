@@ -1689,9 +1689,9 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
                     work->heldRow++;
 
                     if ((u16)work->heldRow <= 3) {
-                        work->y3 = gDeckGridRowY[work->heldRow] << 8;
+                        work->heldY = gDeckGridRowY[work->heldRow] << 8;
                     } else {
-                        work->y3 = -0x10000;
+                        work->heldY = -0x10000;
                     }
                 }
             }
@@ -1708,9 +1708,9 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
 
             if (work->holding) {
                 if ((u16)work->heldRow <= 3) {
-                    work->y3 = gDeckGridRowY[work->heldRow] << 8;
+                    work->heldY = gDeckGridRowY[work->heldRow] << 8;
                 } else {
-                    work->y3 = -0x10000;
+                    work->heldY = -0x10000;
                 }
             }
         }
@@ -1774,8 +1774,8 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* task) {
             work->holding = 1;
             work->heldCol = work->cursorCol;
             work->heldRow = work->cursorRow;
-            work->x3 = gDeckGridColumnX[work->heldCol] << 8;
-            work->y3 = gDeckGridRowY[work->heldRow] << 8;
+            work->heldX = gDeckGridColumnX[work->heldCol] << 8;
+            work->heldY = gDeckGridRowY[work->heldRow] << 8;
             AnimStart(&work->anim2, 4, ANIM_FLAG_LOOP);
         } else {
             if (SwapHeldDeckCard(work)) {
@@ -4195,7 +4195,7 @@ static void Deckmenu2_2(DeckMenuWork* work) {
     switch (work->view) {
     case DECK_MENU_VIEW_DECK_GRID:
         if (work->holding) {
-            DrawSprite((work->x3 >> 8) - 16, (work->y3 >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
+            DrawSprite((work->heldX >> 8) - 16, (work->heldY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
         }
 
         DrawSprite((work->handX >> 8) - 16, (work->handY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);

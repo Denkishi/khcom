@@ -1,7 +1,7 @@
 #ifndef GUARD_CARD_IDS_H
 #define GUARD_CARD_IDS_H
 
-enum CardKind {
+enum CardGroup {
     CARD_KINGDOM_KEY,
     CARD_THREE_WISHES,
     CARD_CRABCLAW,
@@ -51,7 +51,7 @@ enum CardKind {
     CARD_THE_KING
 };
 
-#define CARD_ID(kind, value) ((kind) * 10 + (value))
+#define CARD_ID(group, value) ((group) * 10 + (value))
 enum EnemyCardId {
     CARD_SOLDIER_1 = 453,
     CARD_LARGE_BODY_1 = 456,

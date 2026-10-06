@@ -6089,12 +6089,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     if ((act->flags & BTLOBJ_FLAG_IGNORE_BOUNDS) == 0) {
         switch (ClampBattlePosition(&act->x, &act->y, -16, 0)) {
-        case 3:
-        case 4:
+        case BATTLE_EDGE_TOP:
+        case BATTLE_EDGE_BOTTOM:
             act->vy = -(act->vy >> 1);
             act->btl->flags &= ~BTL_FLAG_PUSHING_EDGE;
             break;
-        case 1:
+        case BATTLE_EDGE_LEFT:
             act->vx = -(act->vx >> 1);
 
             if (act->z == 0 && (held & DPAD_LEFT)) {
@@ -6105,7 +6105,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             work->flags |= BTL_SORA_FLAG_AT_SIDE_EDGE;
             break;
-        case 2:
+        case BATTLE_EDGE_RIGHT:
             act->vx = -(act->vx >> 1);
 
             if (act->z == 0 && (held & DPAD_RIGHT)) {

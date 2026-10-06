@@ -4605,7 +4605,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     if (!(act->flags & BTLOBJ_FLAG_IGNORE_BOUNDS)) {
         switch (ClampBattlePosition(&act->x, &act->y, -16, 0)) {
-        case 1:
+        case BATTLE_EDGE_LEFT:
             act->vx = 0;
 
             if (act->z == 0 && (held & DPAD_LEFT)) {
@@ -4616,7 +4616,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             work->flags |= BTL_RIKU_FLAG_AT_SIDE_EDGE;
             break;
-        case 2:
+        case BATTLE_EDGE_RIGHT:
             act->vx = 0;
 
             if (act->z == 0 && (held & DPAD_RIGHT)) {
@@ -4627,8 +4627,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             work->flags |= BTL_RIKU_FLAG_AT_SIDE_EDGE;
             break;
-        case 3:
-        case 4:
+        case BATTLE_EDGE_TOP:
+        case BATTLE_EDGE_BOTTOM:
             act->vy = 0;
             act->btl->flags &= ~BTL_FLAG_PUSHING_EDGE;
             break;

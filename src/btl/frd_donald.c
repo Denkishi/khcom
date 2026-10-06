@@ -364,12 +364,12 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         UpdateDonaldFlame(body, TRUE, 2, 8);
 
         switch (ClampBattlePosition(&body->x, &body->y, 0, 0)) {
-        case 1:
-        case 2:
+        case BATTLE_EDGE_LEFT:
+        case BATTLE_EDGE_RIGHT:
             work->unk_158 = -work->unk_158;
             break;
-        case 3:
-        case 4:
+        case BATTLE_EDGE_TOP:
+        case BATTLE_EDGE_BOTTOM:
             work->vy = -work->vy;
             break;
         }

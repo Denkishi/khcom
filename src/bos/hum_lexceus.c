@@ -968,12 +968,12 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
                 edge = ClampBattlePosition(&piece->x, &piece->y, 0, 0);
 
                 switch (edge) {
-                case 3:
-                case 4:
+                case BATTLE_EDGE_TOP:
+                case BATTLE_EDGE_BOTTOM:
                     piece->vy = -piece->vy;
                     break;
-                case 1:
-                case 2:
+                case BATTLE_EDGE_LEFT:
+                case BATTLE_EDGE_RIGHT:
                     piece->vx = -piece->vx;
                     break;
                 }

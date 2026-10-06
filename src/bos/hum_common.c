@@ -592,13 +592,13 @@ s32 HumUpdate(HumWork* work) {
 
     if (!(work->flags & HUM_FLAG_IGNORE_BOUNDS)) {
         switch (ClampBattlePosition(&actor->x, &actor->y, work->boundsMargin, 0)) {
-        case 1:
-        case 2:
+        case BATTLE_EDGE_LEFT:
+        case BATTLE_EDGE_RIGHT:
             actor->vx = -(actor->vx >> 1);
             work->flags |= HUM_FLAG_AT_FIELD_EDGE;
             break;
-        case 3:
-        case 4:
+        case BATTLE_EDGE_TOP:
+        case BATTLE_EDGE_BOTTOM:
             actor->vy = -(actor->vy >> 1);
             work->flags |= HUM_FLAG_AT_FIELD_EDGE;
             break;

@@ -84,12 +84,12 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
             work->vz = vz + gBtlWork->gravity;
 
             switch (ClampBattlePosition(&work->x, &work->y, 0, 0)) {
-            case 1:
-            case 2:
+            case BATTLE_EDGE_LEFT:
+            case BATTLE_EDGE_RIGHT:
                 work->vx = -work->vx;
                 break;
-            case 3:
-            case 4:
+            case BATTLE_EDGE_TOP:
+            case BATTLE_EDGE_BOTTOM:
                 work->vy = -work->vy;
                 break;
             }

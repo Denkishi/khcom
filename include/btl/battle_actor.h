@@ -19,6 +19,14 @@ void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz);
 void CreateBtlPopTask(BtlObj* obj, s16 kind);
 void MakeOpponentsHittable();
 void UpdateBattleState();
+enum BattleEdge {
+    BATTLE_EDGE_NONE,
+    BATTLE_EDGE_LEFT,
+    BATTLE_EDGE_RIGHT,
+    BATTLE_EDGE_TOP,
+    BATTLE_EDGE_BOTTOM
+};
+
 u32 ClampBattlePosition(s32* px, s32* py, s32 radiusX, s32 radiusY);
 void SetBattleBounds(s32 xMin, s32 xMax, s32 yMin, s32 yMax);
 s32 UpdateBtlObjReaction(BtlObj* obj);

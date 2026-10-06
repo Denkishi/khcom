@@ -1111,26 +1111,26 @@ void UpdateBattleState() {
 u32 ClampBattlePosition(s32* px, s32* py, s32 radiusX, s32 radiusY) {
     s16 rx = radiusX;
     s16 ry = radiusY;
-    u8 edge = 0;
+    u8 edge = BATTLE_EDGE_NONE;
 
     if (*py < (gBtlWork->yMin - ry) << 8) {
         *py = (gBtlWork->yMin - ry) << 8;
-        edge = 3;
+        edge = BATTLE_EDGE_TOP;
     }
 
     if (*py > (gBtlWork->yMax + ry) << 8) {
         *py = (gBtlWork->yMax + ry) << 8;
-        edge = 4;
+        edge = BATTLE_EDGE_BOTTOM;
     }
 
     if (*px < (gBtlWork->xMin - rx) << 8) {
         *px = (gBtlWork->xMin - rx) << 8;
-        edge = 1;
+        edge = BATTLE_EDGE_LEFT;
     }
 
     if (*px > (gBtlWork->xMax + rx) << 8) {
         *px = (gBtlWork->xMax + rx) << 8;
-        edge = 2;
+        edge = BATTLE_EDGE_RIGHT;
     }
 
     return edge;

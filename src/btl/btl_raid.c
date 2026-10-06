@@ -277,16 +277,16 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         edge = ClampBattlePosition(&work->x, &work->y, 0, 0);
 
         switch (edge) {
-        case 1:
+        case BATTLE_EDGE_LEFT:
             work->angle = GetRandom() % 65 + 32;
             break;
-        case 2:
+        case BATTLE_EDGE_RIGHT:
             work->angle = GetRandom() % 65 + 160;
             break;
-        case 4:
+        case BATTLE_EDGE_BOTTOM:
             work->angle = GetRandom() % 65 + 0xFFE0;
             break;
-        case 3:
+        case BATTLE_EDGE_TOP:
             work->angle = GetRandom() % 65 + 96;
             break;
         }
@@ -295,7 +295,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             m4aSongNumStart(work->song);
         }
 
-        if (edge != 0) {
+        if (edge != BATTLE_EDGE_NONE) {
             if (work->timer > 180) {
                 work->state = BTL_RAID_STATE_RETURN;
                 work->timer = 0;
@@ -357,8 +357,8 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         }
 
         switch (ClampBattlePosition(&work->x, &work->y, -20, 0)) {
-        case 1:
-        case 2:
+        case BATTLE_EDGE_LEFT:
+        case BATTLE_EDGE_RIGHT:
             work->state = BTL_RAID_STATE_BOUNCE;
             work->steps = work->timer >> 2;
             work->bounceVx = work->vx;

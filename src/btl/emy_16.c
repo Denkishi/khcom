@@ -213,7 +213,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
             work->x += work->vx;
         }
 
-        if (ClampBattlePosition(&work->x, &work->y, -0x10, 0) != 0) {
+        if (ClampBattlePosition(&work->x, &work->y, -0x10, 0) != BATTLE_EDGE_NONE) {
             work->vx = -work->vx;
         }
 
@@ -363,7 +363,7 @@ u8 task_emy_16_p_1(Emy16pWork* work) {
         m4aSongNumStart(SONG_BTL_BW_PACHIN);
     }
 
-    if (ClampBattlePosition(&work->x, &work->y, 0x10, 0) != 0) {
+    if (ClampBattlePosition(&work->x, &work->y, 0x10, 0) != BATTLE_EDGE_NONE) {
         return 0;
     }
 

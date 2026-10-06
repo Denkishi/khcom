@@ -150,7 +150,8 @@ enum CardList {
     CARD_LIST_MAIN,
     CARD_LIST_MAGIC,
     CARD_LIST_ITEM,
-    CARD_LIST_ENEMY
+    CARD_LIST_ENEMY,
+    CARD_LIST_NONE = 0xFF
 };
 
 typedef struct CardBattleWork {

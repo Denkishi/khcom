@@ -3580,7 +3580,7 @@ u8 GetSoraCardListIndex() {
     u8 result;
 
     if (gCardBattleState == NULL) {
-        result = 0xFF;
+        result = CARD_LIST_NONE;
     } else {
         result = gCardBattleState->soraListIndex;
     }

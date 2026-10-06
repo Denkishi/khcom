@@ -270,8 +270,8 @@ void mode_allmap_0(s32 lowerBgm) {
 
 void AllmapFreezePalette10() {
     FadeSetPaletteExcluded(10, 1);
-    CpuCopy16(gUnk_05000140, sAllmapPalette10Copy, 32);
-    LoadPalette(sAllmapPalette10Copy, gUnk_05000140, 32);
+    CpuCopy16((void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sAllmapPalette10Copy, 32);
+    LoadPalette(sAllmapPalette10Copy, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 32);
 }
 
 void mode_allmap_1() {

@@ -1544,7 +1544,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
         }
 
         work->entryIndex = i;
-        dst = gUnk_05000160;
+        dst = (void*)(BG_PLTT + 11 * PLTT_SIZE_4BPP);
         LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
 
         for (j = 0; j < 10; j++) {

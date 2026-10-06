@@ -5381,7 +5381,7 @@ void BosPcUpdatePaletteCycle(PcWork* work) {
 
 void BosPcLoadPaletteCycle(PcWork* work) {
     if (work->paletteCycle) {
-        LoadPalette(&gBosPcCyclePalettes[work->paletteIndex * 16], gUnk_05000080, 32);
+        LoadPalette(&gBosPcCyclePalettes[work->paletteIndex * 16], (void*)(BG_PLTT + 4 * PLTT_SIZE_4BPP), 32);
     }
 }
 

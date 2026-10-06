@@ -149,8 +149,6 @@ u8 IsStockMesDispActive();
 s32 GetAllmapRoomAt(AllmapCursorPos pos);
 void AllmapAddRoom(u8 id, u16 x, u16 y);
 
-extern u8 gUnk_05000160[];
-
 extern u8 gAllmapCursorRoom;
 extern s16 gAllmapCameraY;
 extern s16 gAllmapCameraX;

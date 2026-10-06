@@ -162,7 +162,6 @@ typedef struct TextGlyphSprite {
 
 extern EventState* gEventState;
 
-extern u8 gUnk_050001C0[];
 extern const EventCharaParams gEventCharaParams[];
 
 void HideMsgGlyphs();

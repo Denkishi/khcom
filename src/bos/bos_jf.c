@@ -893,7 +893,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         }
 
         tiles = work->tiles2;
-        RequestDma3Copy(gBosJfIagoTiles + (work->tiles2Frame << 9), gUnk_06010000 + (tiles->index << 5), 512);
+        RequestDma3Copy(gBosJfIagoTiles + (work->tiles2Frame << 9), (void*)(OBJ_VRAM0 + (tiles->index << 5)), 512);
     }
 
     work->tiles2Timer++;

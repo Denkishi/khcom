@@ -836,7 +836,6 @@ extern const u8 gGoofyTalkMessages[28];
 extern const u8 gSoraFloorEvents[13];
 extern const u8 gRikuFloorEvents[13];
 extern const u8 gCellMasks[][8];
-extern u8 gUnk_050001C0[];
 extern u8 gMapQuickSaveConfirmText[];
 extern u8 gMapSaveCompleteText[];
 extern u8 gNewGameSlotMenuText[];

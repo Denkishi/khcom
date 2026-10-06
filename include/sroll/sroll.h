@@ -235,7 +235,6 @@ typedef struct SrollSecnSprite {
 extern const SrollSecnSprite gSrollSecnSprites[];
 extern const s32 gSrollBCharSwayOffsets[16];
 extern const s32 gSrollBCharHopOffsets[16];
-extern u8 gUnk_05000220[];
 
 void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* arg);
 void task_sroll_a_name_2(SrollANameWork* work);

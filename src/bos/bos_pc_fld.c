@@ -19,6 +19,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "engine_math.h"
+#include "gba/defines.h"
 
 static u8 sBosPcFldShakeActive;
 static s16 sBosPcFldShakePattern;
@@ -84,7 +85,7 @@ void BosPcFldEnableObject(Task* task, u8 on) {
         if (work->palette == NULL) {
             pal = LoadObjPalette(gBosPcObjPalette, 0x60);
             work->palette = pal;
-            LoadPalette(gBosPcFldPalette, gUnk_05000220 + pal->index * 32, 32);
+            LoadPalette(gBosPcFldPalette, (void*)(OBJ_PLTT + (pal->index + 1) * PLTT_SIZE_4BPP), 32);
         }
     }
 }
@@ -149,7 +150,7 @@ void BosPcFldUpdatePaletteCycle(PcFldWork* work) {
 
 void BosPcFldLoadPaletteCycle(PcFldWork* work) {
     if (work->paletteCycle != 0) {
-        LoadPalette(gBosPcCyclePalettes + work->paletteIndex * 16, gUnk_05000080, 32);
+        LoadPalette(gBosPcCyclePalettes + work->paletteIndex * 16, (void*)(BG_PLTT + 4 * PLTT_SIZE_4BPP), 32);
     }
 }
 

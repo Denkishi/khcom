@@ -413,7 +413,6 @@ extern const s16 gBosDsdFrameDurations[47];
 extern const s8 gBosDsdIdleBob[10];
 
 extern const s8 gBosDsdCirclePaletteDurations[10];
-extern u8 gUnk_06010000[];
 extern const EmyKind gBosJfEmyKind;
 
 extern const s16 gBosDsdItaDipSteps[6];

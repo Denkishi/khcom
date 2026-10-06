@@ -187,7 +187,6 @@ typedef struct CardListWork {
 
 STATIC_ASSERT(sizeof(CardListWork) == 0x2C, CardListWorkSize);
 
-extern u8 gUnk_05000160[];
 extern void* gLvupEffectSprites[];
 
 typedef struct EventMapObjectWork {
@@ -1162,11 +1161,6 @@ extern const s16 gDeckGridRowY[];
 typedef struct PromptChoiceLayout {
     s32 x[2];
 } PromptChoiceLayout;
-
-extern u8 gUnk_050001A0[];
-extern u8 gUnk_050001C0[];
-extern u8 gUnk_0500016C[];
-extern u8 gUnk_06010000[];
 
 typedef struct MapSelectKindEntry {
     u16 baseCardId;

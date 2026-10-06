@@ -409,7 +409,7 @@ void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* nameId) {
     work->textSlotCount = LoadTextSlots(GetRoomName(nameId[0]), work->textSlots);
     pal = GetAllmapRoomnamePaletteOffset(nameId[0]);
     work->palette = LoadObjPalette(gAllmapRoomnamePalettes + pal, 32);
-    LoadPalette(gAllmapRoomnameBgPalettes + pal, gUnk_05000160, 32);
+    LoadPalette(gAllmapRoomnameBgPalettes + pal, (void*)(BG_PLTT + 11 * PLTT_SIZE_4BPP), 32);
     work->x = AllmapDrawRoomnameFrame(GetTextSlotsWidth(work->textSlots, work->textSlotCount));
 }
 

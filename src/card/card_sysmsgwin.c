@@ -127,7 +127,7 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
     switch (work->args.mode) {
     case CARD_MESSAGE_MODE_BG_WINDOW:
     case CARD_MESSAGE_MODE_BG_WINDOW_PERSISTENT:
-        pal = &gUnk_050001C0[0x20];
+        pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
         LoadBgTiles(work->args.bg, gSysMsgWinTiles, 0x140);
         LoadBgMap(work->args.bg, gSysMsgWinMap, 0x800);
         LoadPalette(gCard00Palette, pal, 32);

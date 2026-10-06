@@ -5188,7 +5188,7 @@ void MapMenuInitConfirm(MapMenuWork* work) {
 
     LoadBgTiles(0, gConfirmWinTiles, 0x140);
     LoadBgMap(0, gConfirmWinMap, 0x800);
-    LoadPalette(gCard00Palette, &gUnk_050001C0[0x20], 0x20);
+    LoadPalette(gCard00Palette, (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 0x20);
     FadeSetPaletteExcluded(15, 1);
     SetBgScroll(0, 0, 0);
     work->confirmPalette = LoadTextPalette(1);

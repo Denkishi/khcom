@@ -373,8 +373,6 @@ typedef struct BosLstWork {
     u8 bgMapRow10Col18[0x55C];
 } BosLstWork;
 
-extern u8 gUnk_05000080[];
-
 void BosPcDraw(PcWork* work);
 void BosPcLoadPaletteCycle(PcWork* work);
 
@@ -432,8 +430,6 @@ typedef struct PcFltFrameDef {
     u16 radius;
     u16 nextAnim;
 } PcFltFrameDef;
-
-extern u8 gUnk_05000220[];
 
 void BosPcStopPaletteCycle(PcWork* work);
 void BosLstSetAnim(BosLstWork* work, u16 animId, u16 flags, u8 change);

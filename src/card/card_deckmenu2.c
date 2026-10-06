@@ -5242,7 +5242,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
         }
 
         work->entryIndex = i;
-        dst = gUnk_05000160;
+        dst = (void*)(BG_PLTT + 11 * PLTT_SIZE_4BPP);
         LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
 
         for (j = 0; j <= 9; j++) {
@@ -5365,7 +5365,7 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
         }
 
         DrawCpCost(GetCardCpCost(id));
-        dst = gUnk_05000160;
+        dst = (void*)(BG_PLTT + 11 * PLTT_SIZE_4BPP);
         LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
         LoadCardNameText(work, id & CARD_ID_MASK);
         LoadCardDescriptionText(work, id & CARD_ID_MASK);

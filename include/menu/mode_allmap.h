@@ -13,7 +13,6 @@ typedef struct AllmapRoomDirs {
 } AllmapRoomDirs;
 
 extern TaskPool gAllmapTaskPool;
-extern u8 gUnk_05000140[];
 
 void AllmapVCountCallback();
 void AllmapAllocBgMaps();

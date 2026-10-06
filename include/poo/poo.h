@@ -929,7 +929,7 @@ u8 IsPooSoraCalling();
 u8 task_poo_trap_1(PooTrapWork* work);
 void task_poo_shadow_0(TaskPool* w, void* arg);
 u8 IsPooNearScreen(s16 x, s16 y);
-s32 GetPooGaugeFrame(u16 a);
+s32 GetPooGaugeFrame(u16 x);
 void task_poo_gauge_2(PooGaugeWork* work);
 void UpdatePooCameraCenter();
 void ScrollPooCamera(PooMapWork* work);

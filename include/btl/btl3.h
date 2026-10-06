@@ -91,6 +91,17 @@ typedef struct BtlRaidArgs {
     u16 variant;
 } BtlRaidArgs;
 
+enum BtlRaidKind {
+    BTL_RAID_STRIKE,
+    BTL_RAID_STOP,
+    BTL_RAID_FIRE,
+    BTL_RAID_BLIZZARD,
+    BTL_RAID_THUNDER,
+    BTL_RAID_GRAVITY,
+    BTL_RAID_REFLECT,
+    BTL_RAID_JUDGMENT
+};
+
 typedef struct BtlBadStatusWork {
     void* tiles;
     void* palette;

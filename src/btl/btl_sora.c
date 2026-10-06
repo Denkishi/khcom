@@ -43,6 +43,7 @@
 #include "battle_ids.h"
 #include "card_label_data.h"
 #include "card_ids.h"
+#include "btl3.h"
 
 static const AnimDef sBtlSoraAnimDefs[77] = {
     { gSor1ll50Frames, gSor1ll50Anims, gSor1ll50Tiles, 0 },
@@ -1750,7 +1751,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = BTL_RAID_STRIKE;
             break;
         case MOVE_BLITZ:
             work->state = BTL_SORA_STATE_BLITZ;
@@ -1826,37 +1827,37 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = BTL_RAID_FIRE;
             break;
         case MOVE_STOP_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = BTL_RAID_STOP;
             break;
         case MOVE_BLIZZARD_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 3;
+            work->variant[0] = BTL_RAID_BLIZZARD;
             break;
         case MOVE_THUNDER_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 4;
+            work->variant[0] = BTL_RAID_THUNDER;
             break;
         case MOVE_GRAVITY_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 5;
+            work->variant[0] = BTL_RAID_GRAVITY;
             break;
         case MOVE_REFLECT_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 6;
+            work->variant[0] = BTL_RAID_REFLECT;
             break;
         case MOVE_BLAZING_DONALD:
             work->state = BTL_SORA_STATE_SUMMON;
@@ -1923,7 +1924,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 7;
+            work->variant[0] = BTL_RAID_JUDGMENT;
             break;
         case MOVE_TORNADO:
             work->state = BTL_SORA_STATE_TORNADO;

@@ -131,37 +131,37 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     work->song = SONG_EF_LT2_HIT;
 
     switch (work->variant) {
-    case 0:
+    case BTL_RAID_STRIKE:
         work->attack = 86;
         break;
-    case 1:
+    case BTL_RAID_STOP:
         work->attack = 100;
         break;
-    case 2:
+    case BTL_RAID_FIRE:
         work->attack = 101;
         BtlRaidGetEffectPosition(work, &x, &y, &z);
         BgFxStartFlame(x, y, z, Q_8_8(1.3));
         work->hitHalfSize = 16;
         work->song = SONG_EF_FIRE01;
         break;
-    case 3:
+    case BTL_RAID_BLIZZARD:
         work->attack = 102;
         BtlRaidGetEffectPosition(work, &x, &y, &z);
         BgFxStartFrost(x, y, z, Q_8_8(1.3));
         work->hitHalfSize = 16;
         work->song = SONG_EF_BURIZA01;
         break;
-    case 4:
+    case BTL_RAID_THUNDER:
         work->attack = 103;
         work->flags |= BTL_RAID_FLAG_STRIKE_ON_CONTACT;
         work->hitHalfSize = 8;
         break;
-    case 5:
+    case BTL_RAID_GRAVITY:
         work->attack = 104;
         work->flags |= BTL_RAID_FLAG_STRIKE_ON_CONTACT;
         work->hitHalfSize = 8;
         break;
-    case 6:
+    case BTL_RAID_REFLECT:
         work->attack = 105;
         work->state = BTL_RAID_STATE_RICOCHET;
 
@@ -174,7 +174,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         work->timer = 0;
         work->unk_5A = GetRandom() % 5 + 0xFFFE;
         break;
-    case 7:
+    case BTL_RAID_JUDGMENT:
         work->attack = 111;
         work->state = BTL_RAID_STATE_HOMING;
 
@@ -347,8 +347,8 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
         if (work->timer <= 0) {
             switch (work->variant) {
-            case 2:
-            case 3:
+            case BTL_RAID_FIRE:
+            case BTL_RAID_BLIZZARD:
                 BgAnimStop();
                 break;
             }
@@ -395,10 +395,10 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             work->steps = 30;
 
             switch (work->variant) {
-            case 4:
+            case BTL_RAID_THUNDER:
                 BgFxStartThunderStrike(work->x, work->y, 0, work->attack);
                 break;
-            case 5:
+            case BTL_RAID_GRAVITY:
                 BgFxStartGravityStrike(work->x, work->y, 0, work->attack);
                 break;
             }
@@ -422,8 +422,8 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     }
 
     switch (work->variant) {
-    case 2:
-    case 3:
+    case BTL_RAID_FIRE:
+    case BTL_RAID_BLIZZARD:
         BtlRaidGetEffectPosition(work, &x, &y, &z);
         BgFxSetPosition(x, y, z);
         break;

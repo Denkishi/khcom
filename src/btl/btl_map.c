@@ -16,6 +16,10 @@
 #include <stddef.h>
 #include "battle_ids.h"
 #include "gba/io_reg.h"
+#include "gba/defines.h"
+
+#define BTL_MAP_VIEW_Y_MIN 144
+#define BTL_MAP_VIEW_Y_MAX_EXTRA 32
 
 static u8 sBtlMapShakeActive;
 static u16 sBtlMapShakeStep;
@@ -296,7 +300,7 @@ void task_btl_map_0(BtlMapWork* work) {
     work->xMin = gBtlWork->xMin << 8;
     work->xMax = gBtlWork->xMax << 8;
     work->yMin = gBtlWork->yMin << 8;
-    work->yMax = (gBtlWork->yMax + 0x20) << 8;
+    work->yMax = (gBtlWork->yMax + BTL_MAP_VIEW_Y_MAX_EXTRA) << 8;
     BtlMapResetShake();
     SetBgAffine(gBtlWork->mapBg, gBtlWork->rotation, gBtlWork->scale,
                 gBtlWork->scale, gBtlWork->viewX,
@@ -372,7 +376,7 @@ s32 task_btl_map_1(BtlMapWork* work) {
             ApproachValueHalfSteps(&work->xMin, gBtlWork->xMin << 8, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->xMax, gBtlWork->xMax << 8, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->yMin, gBtlWork->yMin << 8, gBtlWork->zoomSteps);
-            ApproachValueHalfSteps(&work->yMax, (gBtlWork->yMax + 0x20) << 8, gBtlWork->zoomSteps);
+            ApproachValueHalfSteps(&work->yMax, (gBtlWork->yMax + BTL_MAP_VIEW_Y_MAX_EXTRA) << 8, gBtlWork->zoomSteps);
         } else if (gBtlWork->zoomScale > Q_8_8(1)) {
             ApproachValueHalfSteps(&work->xMin, 0x3000, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->xMax, 0x1D000, gBtlWork->zoomSteps);
@@ -408,16 +412,16 @@ s32 task_btl_map_1(BtlMapWork* work) {
         gBtlWork->rotation = (sBtlMapShakeOffset >> 8) / 3;
     }
 
-    if (gBtlWork->viewX - 0x7800 < work->xMin) {
-        gBtlWork->viewX = work->xMin + 0x7800;
-    } else if (gBtlWork->viewX + 0x7800 > work->xMax) {
-        gBtlWork->viewX = work->xMax - 0x7800;
+    if (gBtlWork->viewX - ((DISPLAY_WIDTH / 2) << 8) < work->xMin) {
+        gBtlWork->viewX = work->xMin + ((DISPLAY_WIDTH / 2) << 8);
+    } else if (gBtlWork->viewX + ((DISPLAY_WIDTH / 2) << 8) > work->xMax) {
+        gBtlWork->viewX = work->xMax - ((DISPLAY_WIDTH / 2) << 8);
     }
 
-    if (gBtlWork->viewY - 0x5000 < 0x9000) {
-        gBtlWork->viewY = 0xE000;
-    } else if (gBtlWork->viewY + 0x5000 > work->yMax) {
-        gBtlWork->viewY = work->yMax - 0x5000;
+    if (gBtlWork->viewY - ((DISPLAY_HEIGHT / 2) << 8) < (BTL_MAP_VIEW_Y_MIN << 8)) {
+        gBtlWork->viewY = (BTL_MAP_VIEW_Y_MIN + DISPLAY_HEIGHT / 2) << 8;
+    } else if (gBtlWork->viewY + ((DISPLAY_HEIGHT / 2) << 8) > work->yMax) {
+        gBtlWork->viewY = work->yMax - ((DISPLAY_HEIGHT / 2) << 8);
     }
 
     SetBgAffine(gBtlWork->mapBg, gBtlWork->rotation, gBtlWork->scale,

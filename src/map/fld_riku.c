@@ -64,37 +64,37 @@ static const u16 sFldRikuSounds[8][8] = {
 
 void FldRikuSetAngleFromDpad(FldActor* act) {
     if ((GetKeysHeld() & DPAD_LEFT) && (GetKeysHeld() & DPAD_DOWN)) {
-        act->angle = 0xAD;
+        act->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) && (GetKeysHeld() & DPAD_LEFT)) {
-        act->angle = 0xD3;
+        act->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) && (GetKeysHeld() & DPAD_RIGHT)) {
-        act->angle = 0x2D;
+        act->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_DOWN)) {
-        act->angle = 0x53;
+        act->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if ((GetKeysHeld() & DPAD_DOWN) && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        act->angle = 0xAD;
+        act->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_DOWN) && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        act->angle = 0x53;
+        act->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if ((GetKeysHeld() & DPAD_UP) && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        act->angle = 0xD3;
+        act->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        act->angle = 0x2D;
+        act->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_LEFT) && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        act->angle = 0xD3;
+        act->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_LEFT) && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        act->angle = 0xAD;
+        act->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        act->angle = 0x2D;
+        act->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        act->angle = 0x53;
+        act->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if (GetKeysHeld() & DPAD_DOWN) {
-        act->angle = 0x80;
+        act->angle = FLD_ANGLE_DOWN;
     } else if (GetKeysHeld() & DPAD_UP) {
-        act->angle = 0;
+        act->angle = FLD_ANGLE_UP;
     } else if (GetKeysHeld() & DPAD_LEFT) {
-        act->angle = 0xC0;
+        act->angle = FLD_ANGLE_LEFT;
     } else if (GetKeysHeld() & DPAD_RIGHT) {
-        act->angle = 0x40;
+        act->angle = FLD_ANGLE_RIGHT;
     }
 }
 
@@ -249,35 +249,35 @@ void FldRikuSetAnim(FldWork* work, s32 index, u16 flags) {
     s32 dir;
 
     switch (gFieldState->actor.angle) {
-    case 0x2D:
+    case FLD_ANGLE_UP_RIGHT:
         dir = 4;
         work->flags |= FLD_FLAG_HFLIP;
         break;
-    case 0x40:
+    case FLD_ANGLE_RIGHT:
         dir = 3;
         work->flags |= FLD_FLAG_HFLIP;
         break;
-    case 0x53:
+    case FLD_ANGLE_DOWN_RIGHT:
         dir = 2;
         work->flags |= FLD_FLAG_HFLIP;
         break;
-    case 0x80:
+    case FLD_ANGLE_DOWN:
         dir = 1;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 0xAD:
+    case FLD_ANGLE_DOWN_LEFT:
         dir = 2;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 0xC0:
+    case FLD_ANGLE_LEFT:
         dir = 3;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 0xD3:
+    case FLD_ANGLE_UP_LEFT:
         dir = 4;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 0x00:
+    case FLD_ANGLE_UP:
     default:
         dir = 0;
         work->flags &= ~FLD_FLAG_HFLIP;
@@ -524,20 +524,20 @@ u8 FldRikuJump(FldWork* work, void* task) {
         switch (AnimGetFrame(&work->anim)) {
         case 1:
             switch (act->angle) {
-            case 45:
-            case 211:
+            case FLD_ANGLE_UP_RIGHT:
+            case FLD_ANGLE_UP_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 12;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 12;
                 break;
-            case 64:
-            case 192:
+            case FLD_ANGLE_RIGHT:
+            case FLD_ANGLE_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 27;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 27;
                 break;
-            case 0:
-            case 83:
-            case 128:
-            case 173:
+            case FLD_ANGLE_UP:
+            case FLD_ANGLE_DOWN_RIGHT:
+            case FLD_ANGLE_DOWN:
+            case FLD_ANGLE_DOWN_LEFT:
             default:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 20;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 20;
@@ -729,13 +729,13 @@ u8 FldRikuJump(FldWork* work, void* task) {
         case 2:
             work->timer = 0;
             work->state = FLD_STATE_CLIMB;
-            act->angle = 211;
+            act->angle = FLD_ANGLE_UP_LEFT;
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuClimb);
             break;
         case 1:
             work->timer = 0;
             work->state = FLD_STATE_CLIMB;
-            act->angle = 45;
+            act->angle = FLD_ANGLE_UP_RIGHT;
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuClimb);
             break;
         default:
@@ -862,11 +862,11 @@ u8 FldRikuClimb(FldWork* work, void* task) {
                 SetTaskUpdate(task, (TaskUpdateFunc)task_fld_riku_1);
             }
         } else if (dz == 0) {
-            if ((GetKeysHeld() & DPAD_UP) || ((GetKeysHeld() & DPAD_LEFT) && act->angle == 0xD3) ||
-                ((GetKeysHeld() & DPAD_RIGHT) && act->angle == 0x2D)) {
+            if ((GetKeysHeld() & DPAD_UP) || ((GetKeysHeld() & DPAD_LEFT) && act->angle == FLD_ANGLE_UP_LEFT) ||
+                ((GetKeysHeld() & DPAD_RIGHT) && act->angle == FLD_ANGLE_UP_RIGHT)) {
                 work->targetZ = ((work->targetZ >> 12) - 1) << 12;
-            } else if ((GetKeysHeld() & DPAD_DOWN) || ((GetKeysHeld() & DPAD_RIGHT) && act->angle == 0xD3) ||
-                       ((GetKeysHeld() & DPAD_LEFT) && act->angle == 0x2D)) {
+            } else if ((GetKeysHeld() & DPAD_DOWN) || ((GetKeysHeld() & DPAD_RIGHT) && act->angle == FLD_ANGLE_UP_LEFT) ||
+                       ((GetKeysHeld() & DPAD_LEFT) && act->angle == FLD_ANGLE_UP_RIGHT)) {
                 work->targetZ = ((work->targetZ >> 12) + 1) << 12;
             }
         }
@@ -922,8 +922,8 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
     act = &gFieldState->actor;
 
     if ((GetKeysPressed() & B_BUTTON) || (GetKeysPressed() & DPAD_DOWN) ||
-        (act->angle == 0xD3 && (GetKeysPressed() & DPAD_RIGHT)) ||
-        (act->angle == 0x2D && (GetKeysPressed() & DPAD_LEFT))) {
+        (act->angle == FLD_ANGLE_UP_LEFT && (GetKeysPressed() & DPAD_RIGHT)) ||
+        (act->angle == FLD_ANGLE_UP_RIGHT && (GetKeysPressed() & DPAD_LEFT))) {
         work->timer = 0;
         work->state = FLD_STATE_FALL;
         work->vz = 0;
@@ -934,8 +934,8 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
     }
 
     if ((GetKeysHeld() & DPAD_UP) ||
-        (act->angle == 0xD3 && (GetKeysHeld() & DPAD_LEFT)) ||
-        (act->angle == 0x2D && (GetKeysHeld() & DPAD_RIGHT))) {
+        (act->angle == FLD_ANGLE_UP_LEFT && (GetKeysHeld() & DPAD_LEFT)) ||
+        (act->angle == FLD_ANGLE_UP_RIGHT && (GetKeysHeld() & DPAD_RIGHT))) {
         work->timer = 0;
         work->state = FLD_STATE_LEDGE_CLIMB;
         act->speed = 0x133;
@@ -1031,7 +1031,7 @@ u8 FldRikuWalkOut(FldWork* work, void* task) {
     case FLD_STATE_WALK_OUT:
         if (work->timer == 0) {
             work->flags |= FLD_FLAG_WALK_OUT;
-            act->angle = 45;
+            act->angle = FLD_ANGLE_UP_RIGHT;
             FldRikuSetAnim(work, 2, 1);
 
             act->fieldPosition.x = 0x22000;
@@ -1192,7 +1192,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
 
         if (work->anim.timer == 0) {
             switch (act->angle) {
-            case 173:
+            case FLD_ANGLE_DOWN_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x500;
@@ -1207,7 +1207,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 83:
+            case FLD_ANGLE_DOWN_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x += 0x500;
@@ -1222,7 +1222,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 211:
+            case FLD_ANGLE_UP_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x500;
@@ -1237,7 +1237,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 45:
+            case FLD_ANGLE_UP_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x += 0x500;
@@ -1252,7 +1252,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 128:
+            case FLD_ANGLE_DOWN:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x300;
@@ -1271,7 +1271,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 64:
+            case FLD_ANGLE_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x += 0x700;
@@ -1286,7 +1286,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 192:
+            case FLD_ANGLE_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x700;
@@ -1301,7 +1301,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 0:
+            case FLD_ANGLE_UP:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.y -= 0x400;
@@ -1324,20 +1324,20 @@ u8 FldRikuAttack(FldWork* work, void* task) {
 
         if (AnimGetFrame(&work->anim) == 3) {
             switch (act->angle) {
-            case 45:
-            case 211:
+            case FLD_ANGLE_UP_RIGHT:
+            case FLD_ANGLE_UP_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 12;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 12;
                 break;
-            case 64:
-            case 192:
+            case FLD_ANGLE_RIGHT:
+            case FLD_ANGLE_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 27;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 27;
                 break;
-            case 0:
-            case 83:
-            case 128:
-            case 173:
+            case FLD_ANGLE_UP:
+            case FLD_ANGLE_DOWN_RIGHT:
+            case FLD_ANGLE_DOWN:
+            case FLD_ANGLE_DOWN_LEFT:
             default:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 20;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 20;
@@ -1349,22 +1349,22 @@ u8 FldRikuAttack(FldWork* work, void* task) {
 
         if (AnimIsFinished(&work->anim)) {
             switch (act->angle) {
-            case 173:
+            case FLD_ANGLE_DOWN_LEFT:
                 act->fieldPosition.x -= 0x200;
                 act->fieldPosition.y += 0x200;
                 break;
-            case 83:
+            case FLD_ANGLE_DOWN_RIGHT:
                 act->fieldPosition.x += 0x200;
                 act->fieldPosition.y += 0x200;
                 break;
-            case 45:
-            case 211:
+            case FLD_ANGLE_UP_RIGHT:
+            case FLD_ANGLE_UP_LEFT:
                 act->fieldPosition.y -= 0x400;
                 break;
-            case 128:
+            case FLD_ANGLE_DOWN:
                 act->fieldPosition.y += 0x200;
                 break;
-            case 0:
+            case FLD_ANGLE_UP:
                 act->fieldPosition.y -= 0x200;
                 break;
             }
@@ -1565,14 +1565,14 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                 case 2:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
-                    act->angle = 211;
+                    act->angle = FLD_ANGLE_UP_LEFT;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldRikuClimb);
                     break;
                 case 1:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
-                    act->angle = 45;
+                    act->angle = FLD_ANGLE_UP_RIGHT;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldRikuClimb);
                     break;
@@ -1585,49 +1585,49 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                 }
 
                 switch (act->angle) {
-                case 173:
+                case FLD_ANGLE_DOWN_LEFT:
                     dx = -256;
                     dy = 0;
                     dz = 0;
                     dw = 384;
                     break;
-                case 83:
+                case FLD_ANGLE_DOWN_RIGHT:
                     dx = 256;
                     dy = 0;
                     dz = 0;
                     dw = 384;
                     break;
-                case 211:
+                case FLD_ANGLE_UP_LEFT:
                     dx = -256;
                     dy = 0;
                     dz = 0;
                     dw = -384;
                     break;
-                case 45:
+                case FLD_ANGLE_UP_RIGHT:
                     dx = 256;
                     dy = 0;
                     dz = 0;
                     dw = -384;
                     break;
-                case 128:
+                case FLD_ANGLE_DOWN:
                     dx = -512;
                     dy = 192;
                     dz = 512;
                     dw = 192;
                     break;
-                case 0:
+                case FLD_ANGLE_UP:
                     dx = -512;
                     dy = -192;
                     dz = 512;
                     dw = -192;
                     break;
-                case 64:
+                case FLD_ANGLE_RIGHT:
                     dx = 384;
                     dy = -307;
                     dz = 384;
                     dw = 307;
                     break;
-                case 192:
+                case FLD_ANGLE_LEFT:
                     dx = -384;
                     dy = -307;
                     dz = -384;

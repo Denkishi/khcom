@@ -107,18 +107,18 @@ s32 GetLedgeAngleAt(s32 x, s32 y, s32 z) {
     case MAP_CELL_TYPE_BACK_WALL_TOP:
     case MAP_CELL_TYPE_BACK_WALL_BASE:
     case MAP_CELL_TYPE_BACK_WALL_FACE:
-        return 0;
+        return FLD_ANGLE_UP;
     case MAP_CELL_TYPE_LEFT_WALL_TOP:
     case MAP_CELL_TYPE_LEFT_WALL_BASE:
     case MAP_CELL_TYPE_LEFT_WALL_FACE:
-        return 0xD3;
+        return FLD_ANGLE_UP_LEFT;
     case MAP_CELL_TYPE_RIGHT_WALL_TOP:
     case MAP_CELL_TYPE_RIGHT_WALL_BASE:
     case MAP_CELL_TYPE_RIGHT_WALL_FACE:
-        return 0x2D;
+        return FLD_ANGLE_UP_RIGHT;
     }
 
-    return 0x80;
+    return FLD_ANGLE_DOWN;
 }
 
 void FldPosPlaceOnFreeFloor(FldPos* pos) {
@@ -437,27 +437,27 @@ void SpawnMapPlayer() {
         case 0:
             gFieldState->spawnX = (x << 8) - 0xC00;
             gFieldState->spawnY = (y << 8) + 0x800;
-            gFieldState->spawnAngle = 0xAD;
+            gFieldState->spawnAngle = FLD_ANGLE_DOWN_LEFT;
             break;
         case 1:
             gFieldState->spawnX = (x << 8) + 0xC00;
             gFieldState->spawnY = (y << 8) - 0x800;
-            gFieldState->spawnAngle = 0x2D;
+            gFieldState->spawnAngle = FLD_ANGLE_UP_RIGHT;
             break;
         case 2:
             gFieldState->spawnX = (x << 8) - 0xC00;
             gFieldState->spawnY = (y << 8) - 0x800;
-            gFieldState->spawnAngle = 0xD3;
+            gFieldState->spawnAngle = FLD_ANGLE_UP_LEFT;
             break;
         case 3:
             gFieldState->spawnX = (x << 8) + 0xC00;
             gFieldState->spawnY = (y << 8) + 0x800;
-            gFieldState->spawnAngle = 0x53;
+            gFieldState->spawnAngle = FLD_ANGLE_DOWN_RIGHT;
             break;
         }
     } else {
         MapPickFreeFloorPos((FldPos*)&gFieldState->spawnX, &gFieldState->spawnY);
-        gFieldState->spawnAngle = 0x80;
+        gFieldState->spawnAngle = FLD_ANGLE_DOWN;
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {

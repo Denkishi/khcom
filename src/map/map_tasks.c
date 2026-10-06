@@ -521,16 +521,16 @@ void MapEnm00Idle(MapEnmWork* work) {
     } else if (GetRandom() % 80 == 0) {
         switch (GetRandom() % 4) {
         case 0:
-            obj->angle = 173;
+            obj->angle = FLD_ANGLE_DOWN_LEFT;
             break;
         case 1:
-            obj->angle = 83;
+            obj->angle = FLD_ANGLE_DOWN_RIGHT;
             break;
         case 2:
-            obj->angle = 211;
+            obj->angle = FLD_ANGLE_UP_LEFT;
             break;
         default:
-            obj->angle = 45;
+            obj->angle = FLD_ANGLE_UP_RIGHT;
             break;
         }
 
@@ -1992,14 +1992,14 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
 
     switch (arg->spotType) {
     case MAP_CELL_TYPE_LEFT_WALL_TOP:
-        obj->angle = 211;
+        obj->angle = FLD_ANGLE_UP_LEFT;
         break;
     case MAP_CELL_TYPE_RIGHT_WALL_TOP:
-        obj->angle = 45;
+        obj->angle = FLD_ANGLE_UP_RIGHT;
         break;
     case MAP_CELL_TYPE_FLOOR:
     default:
-        obj->angle = 0;
+        obj->angle = FLD_ANGLE_UP;
         break;
     }
 
@@ -2219,7 +2219,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
     work->obj.fieldPosition.ground = GetFldPosFloor(&work->obj.fieldPosition);
     work->obj.fieldPosition.z = work->obj.fieldPosition.ground;
     work->obj.fieldPosition.y -= work->obj.fieldPosition.ground;
-    work->obj.angle = 0xAD;
+    work->obj.angle = FLD_ANGLE_DOWN_LEFT;
     work->obj.height = 32;
     work->palette = LoadObjPalette(gMapDoorTraverseTownPalette, sizeof(gMapDoorTraverseTownPalette));
     work->tiles = AllocSpriteFrameTiles(0x400);

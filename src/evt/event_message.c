@@ -56,6 +56,7 @@
 #include "default_bg_map.h"
 #include "text_types.h"
 #include "event_ids.h"
+#include "fld_types.h"
 
 static void msgwin_0(MsgWinWork* work, u8* arg);
 static u8 msgwin_1(MsgWinWork* work, void* task);
@@ -4380,55 +4381,55 @@ void ReadEventCharaDpadAngle(EventCharaWork* work) {
     switch (keys & DPAD_ANY) {
     case DPAD_UP:
         if (GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-            work->angle = 211;
+            work->angle = FLD_ANGLE_UP_LEFT;
         } else if (GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-            work->angle = 45;
+            work->angle = FLD_ANGLE_UP_RIGHT;
         } else {
-            work->angle = 0;
+            work->angle = FLD_ANGLE_UP;
         }
 
         break;
     case DPAD_DOWN:
         if (GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-            work->angle = 173;
+            work->angle = FLD_ANGLE_DOWN_LEFT;
         } else if (GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-            work->angle = 83;
+            work->angle = FLD_ANGLE_DOWN_RIGHT;
         } else {
-            work->angle = 128;
+            work->angle = FLD_ANGLE_DOWN;
         }
 
         break;
     case DPAD_LEFT:
         if (GetKeyReleaseTime(DPAD_UP) <= 4) {
-            work->angle = 211;
+            work->angle = FLD_ANGLE_UP_LEFT;
         } else if (GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-            work->angle = 173;
+            work->angle = FLD_ANGLE_DOWN_LEFT;
         } else {
-            work->angle = 192;
+            work->angle = FLD_ANGLE_LEFT;
         }
 
         break;
     case DPAD_RIGHT:
         if (GetKeyReleaseTime(DPAD_UP) <= 4) {
-            work->angle = 45;
+            work->angle = FLD_ANGLE_UP_RIGHT;
         } else if (GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-            work->angle = 83;
+            work->angle = FLD_ANGLE_DOWN_RIGHT;
         } else {
-            work->angle = 64;
+            work->angle = FLD_ANGLE_RIGHT;
         }
 
         break;
     case (DPAD_RIGHT | DPAD_UP):
-        work->angle = 45;
+        work->angle = FLD_ANGLE_UP_RIGHT;
         break;
     case (DPAD_LEFT | DPAD_UP):
-        work->angle = 211;
+        work->angle = FLD_ANGLE_UP_LEFT;
         break;
     case (DPAD_RIGHT | DPAD_DOWN):
-        work->angle = 83;
+        work->angle = FLD_ANGLE_DOWN_RIGHT;
         break;
     case (DPAD_LEFT | DPAD_DOWN):
-        work->angle = 173;
+        work->angle = FLD_ANGLE_DOWN_LEFT;
         break;
     }
 }
@@ -4453,18 +4454,18 @@ void SetEventCharaMoveAnim(EventCharaWork* work, s32 animId) {
     flags = work->obj.drawFlags;
 
     switch (work->angle) {
-    case 0xD3:
+    case FLD_ANGLE_UP_LEFT:
         flags &= ~SPRITE_FLAG_HFLIP;
         break;
-    case 0x2D:
-    case 0x40:
-    case 0x53:
+    case FLD_ANGLE_UP_RIGHT:
+    case FLD_ANGLE_RIGHT:
+    case FLD_ANGLE_DOWN_RIGHT:
         flags |= SPRITE_FLAG_HFLIP;
         break;
-    case 0x00:
-    case 0x80:
-    case 0xAD:
-    case 0xC0:
+    case FLD_ANGLE_UP:
+    case FLD_ANGLE_DOWN:
+    case FLD_ANGLE_DOWN_LEFT:
+    case FLD_ANGLE_LEFT:
         flags &= ~SPRITE_FLAG_HFLIP;
         break;
     }
@@ -4499,7 +4500,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
     ReadEventCharaDpadAngle(work);
 
     switch (work->angle) {
-    case 0x00:
+    case FLD_ANGLE_UP:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 5);
@@ -4509,7 +4510,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 0x80:
+    case FLD_ANGLE_DOWN:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 6);
@@ -4519,7 +4520,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 0xC0:
+    case FLD_ANGLE_LEFT:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 8);
@@ -4529,7 +4530,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 0x40:
+    case FLD_ANGLE_RIGHT:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 8);
@@ -4539,7 +4540,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 0xD3:
+    case FLD_ANGLE_UP_LEFT:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 9);
@@ -4549,7 +4550,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 0x2D:
+    case FLD_ANGLE_UP_RIGHT:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 9);
@@ -4559,7 +4560,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 0xAD:
+    case FLD_ANGLE_DOWN_LEFT:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 7);
@@ -4569,7 +4570,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 0x53:
+    case FLD_ANGLE_DOWN_RIGHT:
         if ((keys & A_BUTTON) != 0) {
             work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 7);
@@ -4607,28 +4608,28 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         }
 
         switch (work->angle) {
-        case 0x00:
+        case FLD_ANGLE_UP:
             SetEventCharaMoveAnim(work, 0);
             break;
-        case 0x80:
+        case FLD_ANGLE_DOWN:
             SetEventCharaMoveAnim(work, 1);
             break;
-        case 0xC0:
+        case FLD_ANGLE_LEFT:
             SetEventCharaMoveAnim(work, 3);
             break;
-        case 0x40:
+        case FLD_ANGLE_RIGHT:
             SetEventCharaMoveAnim(work, 3);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetEventCharaMoveAnim(work, 2);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetEventCharaMoveAnim(work, 2);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetEventCharaMoveAnim(work, 4);
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetEventCharaMoveAnim(work, 4);
             break;
         }
@@ -4668,28 +4669,28 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
     switch (work->jumpPhase) {
     case EVENT_CHARA_JUMP_PHASE_START:
         switch (work->angle) {
-        case 0x00:
+        case FLD_ANGLE_UP:
             SetEventCharaMoveAnim(work, 38);
             break;
-        case 0x80:
+        case FLD_ANGLE_DOWN:
             SetEventCharaMoveAnim(work, 44);
             break;
-        case 0xC0:
+        case FLD_ANGLE_LEFT:
             SetEventCharaMoveAnim(work, 56);
             break;
-        case 0x40:
+        case FLD_ANGLE_RIGHT:
             SetEventCharaMoveAnim(work, 56);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetEventCharaMoveAnim(work, 50);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetEventCharaMoveAnim(work, 50);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetEventCharaMoveAnim(work, 62);
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetEventCharaMoveAnim(work, 62);
             break;
         }
@@ -4711,28 +4712,28 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
-        case 0x00:
+        case FLD_ANGLE_UP:
             SetEventCharaMoveAnim(work, 39);
             break;
-        case 0x80:
+        case FLD_ANGLE_DOWN:
             SetEventCharaMoveAnim(work, 45);
             break;
-        case 0xC0:
+        case FLD_ANGLE_LEFT:
             SetEventCharaMoveAnim(work, 57);
             break;
-        case 0x40:
+        case FLD_ANGLE_RIGHT:
             SetEventCharaMoveAnim(work, 57);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetEventCharaMoveAnim(work, 51);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetEventCharaMoveAnim(work, 51);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetEventCharaMoveAnim(work, 63);
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetEventCharaMoveAnim(work, 63);
             break;
         }
@@ -4756,28 +4757,28 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
-        case 0x00:
+        case FLD_ANGLE_UP:
             SetEventCharaMoveAnim(work, 40);
             break;
-        case 0x80:
+        case FLD_ANGLE_DOWN:
             SetEventCharaMoveAnim(work, 46);
             break;
-        case 0xC0:
+        case FLD_ANGLE_LEFT:
             SetEventCharaMoveAnim(work, 58);
             break;
-        case 0x40:
+        case FLD_ANGLE_RIGHT:
             SetEventCharaMoveAnim(work, 58);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetEventCharaMoveAnim(work, 52);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetEventCharaMoveAnim(work, 52);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetEventCharaMoveAnim(work, 64);
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetEventCharaMoveAnim(work, 64);
             break;
         }
@@ -4801,28 +4802,28 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
-        case 0x00:
+        case FLD_ANGLE_UP:
             SetEventCharaMoveAnim(work, 40);
             break;
-        case 0x80:
+        case FLD_ANGLE_DOWN:
             SetEventCharaMoveAnim(work, 46);
             break;
-        case 0xC0:
+        case FLD_ANGLE_LEFT:
             SetEventCharaMoveAnim(work, 58);
             break;
-        case 0x40:
+        case FLD_ANGLE_RIGHT:
             SetEventCharaMoveAnim(work, 58);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetEventCharaMoveAnim(work, 52);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetEventCharaMoveAnim(work, 52);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetEventCharaMoveAnim(work, 64);
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetEventCharaMoveAnim(work, 64);
             break;
         }
@@ -4842,28 +4843,28 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
-        case 0x00:
+        case FLD_ANGLE_UP:
             SetEventCharaMoveAnim(work, 41);
             break;
-        case 0x80:
+        case FLD_ANGLE_DOWN:
             SetEventCharaMoveAnim(work, 47);
             break;
-        case 0xC0:
+        case FLD_ANGLE_LEFT:
             SetEventCharaMoveAnim(work, 59);
             break;
-        case 0x40:
+        case FLD_ANGLE_RIGHT:
             SetEventCharaMoveAnim(work, 59);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetEventCharaMoveAnim(work, 53);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetEventCharaMoveAnim(work, 53);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetEventCharaMoveAnim(work, 65);
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetEventCharaMoveAnim(work, 65);
             break;
         }
@@ -4882,28 +4883,28 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         break;
     case EVENT_CHARA_JUMP_PHASE_LAND:
         switch (work->angle) {
-        case 0x00:
+        case FLD_ANGLE_UP:
             SetEventCharaMoveAnim(work, 42);
             break;
-        case 0x80:
+        case FLD_ANGLE_DOWN:
             SetEventCharaMoveAnim(work, 48);
             break;
-        case 0xC0:
+        case FLD_ANGLE_LEFT:
             SetEventCharaMoveAnim(work, 60);
             break;
-        case 0x40:
+        case FLD_ANGLE_RIGHT:
             SetEventCharaMoveAnim(work, 60);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetEventCharaMoveAnim(work, 54);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetEventCharaMoveAnim(work, 54);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetEventCharaMoveAnim(work, 66);
             break;
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetEventCharaMoveAnim(work, 66);
             break;
         }

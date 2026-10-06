@@ -20,6 +20,17 @@ typedef AnimDef FldAnimDef;
 
 typedef ObjPalette FldRes;
 
+enum FldAngle {
+    FLD_ANGLE_UP = 0x00,
+    FLD_ANGLE_UP_RIGHT = 0x2D,
+    FLD_ANGLE_RIGHT = 0x40,
+    FLD_ANGLE_DOWN_RIGHT = 0x53,
+    FLD_ANGLE_DOWN = 0x80,
+    FLD_ANGLE_DOWN_LEFT = 0xAD,
+    FLD_ANGLE_LEFT = 0xC0,
+    FLD_ANGLE_UP_LEFT = 0xD3
+};
+
 typedef struct FldActor {
     FldPos fieldPosition;
     s32 speed;

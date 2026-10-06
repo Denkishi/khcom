@@ -73,7 +73,7 @@ void Task_MapNamine_0(MapNamineWork* work) {
     obj->fieldPosition.z = 0;
     obj->fieldPosition.z = obj->fieldPosition.ground = GetFldPosFloor(&obj->fieldPosition);
     obj->fieldPosition.y -= obj->fieldPosition.ground;
-    obj->angle = 173;
+    obj->angle = FLD_ANGLE_DOWN_LEFT;
     obj->height = 48;
     obj->kind = 2;
     work->registered = gMapFloorState.progress != 23;

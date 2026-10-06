@@ -72,7 +72,7 @@ void Task_MapGoofy_0(MapGoofyWork* work) {
     obj->fieldPosition.ground = GetFldPosFloor(&obj->fieldPosition);
     obj->fieldPosition.z = obj->fieldPosition.ground;
     obj->fieldPosition.y -= obj->fieldPosition.ground;
-    obj->angle = 0x80;
+    obj->angle = FLD_ANGLE_DOWN;
     obj->height = 0x30;
     obj->kind = 2;
     work->visible = TRUE;

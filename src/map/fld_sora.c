@@ -72,37 +72,37 @@ TaskDesc gTaskDescFldSora = {
 
 void FldSoraSetAngleFromDpad(FldActor* act) {
     if ((GetKeysHeld() & DPAD_LEFT) && (GetKeysHeld() & DPAD_DOWN)) {
-        act->angle = 173;
+        act->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) && (GetKeysHeld() & DPAD_LEFT)) {
-        act->angle = 211;
+        act->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) && (GetKeysHeld() & DPAD_RIGHT)) {
-        act->angle = 45;
+        act->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_DOWN)) {
-        act->angle = 83;
+        act->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if ((GetKeysHeld() & DPAD_DOWN) && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        act->angle = 173;
+        act->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_DOWN) && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        act->angle = 83;
+        act->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if ((GetKeysHeld() & DPAD_UP) && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        act->angle = 211;
+        act->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        act->angle = 45;
+        act->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_LEFT) && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        act->angle = 211;
+        act->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_LEFT) && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        act->angle = 173;
+        act->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        act->angle = 45;
+        act->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        act->angle = 83;
+        act->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if (GetKeysHeld() & DPAD_DOWN) {
-        act->angle = 128;
+        act->angle = FLD_ANGLE_DOWN;
     } else if (GetKeysHeld() & DPAD_UP) {
-        act->angle = 0;
+        act->angle = FLD_ANGLE_UP;
     } else if (GetKeysHeld() & DPAD_LEFT) {
-        act->angle = 192;
+        act->angle = FLD_ANGLE_LEFT;
     } else if (GetKeysHeld() & DPAD_RIGHT) {
-        act->angle = 64;
+        act->angle = FLD_ANGLE_RIGHT;
     }
 }
 
@@ -250,35 +250,35 @@ void FldSoraSetAnim(FldWork* work, s32 index, s32 animFlags) {
     s32 idx;
 
     switch (gFieldState->actor.angle) {
-    case 45:
+    case FLD_ANGLE_UP_RIGHT:
         idx = 4;
         work->flags |= FLD_FLAG_HFLIP;
         break;
-    case 64:
+    case FLD_ANGLE_RIGHT:
         idx = 3;
         work->flags |= FLD_FLAG_HFLIP;
         break;
-    case 83:
+    case FLD_ANGLE_DOWN_RIGHT:
         idx = 2;
         work->flags |= FLD_FLAG_HFLIP;
         break;
-    case 128:
+    case FLD_ANGLE_DOWN:
         idx = 1;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 173:
+    case FLD_ANGLE_DOWN_LEFT:
         idx = 2;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 192:
+    case FLD_ANGLE_LEFT:
         idx = 3;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 211:
+    case FLD_ANGLE_UP_LEFT:
         idx = 4;
         work->flags &= ~FLD_FLAG_HFLIP;
         break;
-    case 0:
+    case FLD_ANGLE_UP:
     default:
         idx = 0;
         work->flags &= ~FLD_FLAG_HFLIP;
@@ -526,20 +526,20 @@ u8 FldSoraJump(FldWork* work, void* task) {
         case 3:
         case 4:
             switch (act->angle) {
-            case 45:
-            case 211:
+            case FLD_ANGLE_UP_RIGHT:
+            case FLD_ANGLE_UP_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 12;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 12;
                 break;
-            case 64:
-            case 192:
+            case FLD_ANGLE_RIGHT:
+            case FLD_ANGLE_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 27;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 27;
                 break;
-            case 0:
-            case 83:
-            case 128:
-            case 173:
+            case FLD_ANGLE_UP:
+            case FLD_ANGLE_DOWN_RIGHT:
+            case FLD_ANGLE_DOWN:
+            case FLD_ANGLE_DOWN_LEFT:
             default:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 20;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 20;
@@ -731,13 +731,13 @@ u8 FldSoraJump(FldWork* work, void* task) {
         case 2:
             work->timer = 0;
             work->state = FLD_STATE_CLIMB;
-            act->angle = 211;
+            act->angle = FLD_ANGLE_UP_LEFT;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
             break;
         case 1:
             work->timer = 0;
             work->state = FLD_STATE_CLIMB;
-            act->angle = 45;
+            act->angle = FLD_ANGLE_UP_RIGHT;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
             break;
         default:
@@ -865,11 +865,11 @@ u8 FldSoraClimb(FldWork* work, void* task) {
                 SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
             }
         } else if (dz == 0) {
-            if ((GetKeysHeld() & DPAD_UP) || ((GetKeysHeld() & DPAD_LEFT) && act->angle == 0xD3) ||
-                ((GetKeysHeld() & DPAD_RIGHT) && act->angle == 0x2D)) {
+            if ((GetKeysHeld() & DPAD_UP) || ((GetKeysHeld() & DPAD_LEFT) && act->angle == FLD_ANGLE_UP_LEFT) ||
+                ((GetKeysHeld() & DPAD_RIGHT) && act->angle == FLD_ANGLE_UP_RIGHT)) {
                 work->targetZ = ((work->targetZ >> 12) - 1) << 12;
-            } else if ((GetKeysHeld() & DPAD_DOWN) || ((GetKeysHeld() & DPAD_RIGHT) && act->angle == 0xD3) ||
-                       ((GetKeysHeld() & DPAD_LEFT) && act->angle == 0x2D)) {
+            } else if ((GetKeysHeld() & DPAD_DOWN) || ((GetKeysHeld() & DPAD_RIGHT) && act->angle == FLD_ANGLE_UP_LEFT) ||
+                       ((GetKeysHeld() & DPAD_LEFT) && act->angle == FLD_ANGLE_UP_RIGHT)) {
                 work->targetZ = ((work->targetZ >> 12) + 1) << 12;
             }
         }
@@ -925,8 +925,8 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
     act = &gFieldState->actor;
 
     if ((GetKeysPressed() & B_BUTTON) || (GetKeysPressed() & DPAD_DOWN) ||
-        (act->angle == 0xD3 && (GetKeysPressed() & DPAD_RIGHT)) ||
-        (act->angle == 0x2D && (GetKeysPressed() & DPAD_LEFT))) {
+        (act->angle == FLD_ANGLE_UP_LEFT && (GetKeysPressed() & DPAD_RIGHT)) ||
+        (act->angle == FLD_ANGLE_UP_RIGHT && (GetKeysPressed() & DPAD_LEFT))) {
         work->timer = 0;
         work->state = FLD_STATE_FALL;
         work->vz = 0;
@@ -937,8 +937,8 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
     }
 
     if ((GetKeysHeld() & DPAD_UP) ||
-        (act->angle == 0xD3 && (GetKeysHeld() & DPAD_LEFT)) ||
-        (act->angle == 0x2D && (GetKeysHeld() & DPAD_RIGHT))) {
+        (act->angle == FLD_ANGLE_UP_LEFT && (GetKeysHeld() & DPAD_LEFT)) ||
+        (act->angle == FLD_ANGLE_UP_RIGHT && (GetKeysHeld() & DPAD_RIGHT))) {
         work->timer = 0;
         work->state = FLD_STATE_LEDGE_CLIMB;
         act->speed = 0x133;
@@ -1034,7 +1034,7 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
     case FLD_STATE_WALK_OUT:
         if (work->timer == 0) {
             work->flags |= FLD_FLAG_WALK_OUT;
-            act->angle = 45;
+            act->angle = FLD_ANGLE_UP_RIGHT;
             FldSoraSetAnim(work, 2, 1);
 
             if (gGameState.floor == 0) {
@@ -1200,7 +1200,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
 
         if (work->anim.timer == 0) {
             switch (act->angle) {
-            case 173:
+            case FLD_ANGLE_DOWN_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x500;
@@ -1215,7 +1215,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 83:
+            case FLD_ANGLE_DOWN_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x += 0x500;
@@ -1230,7 +1230,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 211:
+            case FLD_ANGLE_UP_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x500;
@@ -1245,7 +1245,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 45:
+            case FLD_ANGLE_UP_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x += 0x500;
@@ -1260,7 +1260,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 128:
+            case FLD_ANGLE_DOWN:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x300;
@@ -1279,7 +1279,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 64:
+            case FLD_ANGLE_RIGHT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x += 0x700;
@@ -1294,7 +1294,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 192:
+            case FLD_ANGLE_LEFT:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.x -= 0x700;
@@ -1309,7 +1309,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
                 }
 
                 break;
-            case 0:
+            case FLD_ANGLE_UP:
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     act->fieldPosition.y -= 0x400;
@@ -1332,20 +1332,20 @@ u8 FldSoraAttack(FldWork* work, void* task) {
 
         if (AnimGetFrame(&work->anim) == 2) {
             switch (act->angle) {
-            case 45:
-            case 211:
+            case FLD_ANGLE_UP_RIGHT:
+            case FLD_ANGLE_UP_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 12;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 12;
                 break;
-            case 64:
-            case 192:
+            case FLD_ANGLE_RIGHT:
+            case FLD_ANGLE_LEFT:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 27;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 27;
                 break;
-            case 0:
-            case 83:
-            case 128:
-            case 173:
+            case FLD_ANGLE_UP:
+            case FLD_ANGLE_DOWN_RIGHT:
+            case FLD_ANGLE_DOWN:
+            case FLD_ANGLE_DOWN_LEFT:
             default:
                 nx = act->fieldPosition.x + gSineTable[act->angle] * 20;
                 ny = act->fieldPosition.y + -gSineTable[act->angle + 64] * 20;
@@ -1357,22 +1357,22 @@ u8 FldSoraAttack(FldWork* work, void* task) {
 
         if (AnimIsFinished(&work->anim)) {
             switch (act->angle) {
-            case 173:
+            case FLD_ANGLE_DOWN_LEFT:
                 act->fieldPosition.x -= 0x200;
                 act->fieldPosition.y += 0x200;
                 break;
-            case 83:
+            case FLD_ANGLE_DOWN_RIGHT:
                 act->fieldPosition.x += 0x200;
                 act->fieldPosition.y += 0x200;
                 break;
-            case 45:
-            case 211:
+            case FLD_ANGLE_UP_RIGHT:
+            case FLD_ANGLE_UP_LEFT:
                 act->fieldPosition.y -= 0x400;
                 break;
-            case 128:
+            case FLD_ANGLE_DOWN:
                 act->fieldPosition.y += 0x200;
                 break;
-            case 0:
+            case FLD_ANGLE_UP:
                 act->fieldPosition.y -= 0x200;
                 break;
             }
@@ -1573,14 +1573,14 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                 case 2:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
-                    act->angle = 211;
+                    act->angle = FLD_ANGLE_UP_LEFT;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
                     break;
                 case 1:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
-                    act->angle = 45;
+                    act->angle = FLD_ANGLE_UP_RIGHT;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
                     break;
@@ -1593,49 +1593,49 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                 }
 
                 switch (act->angle) {
-                case 173:
+                case FLD_ANGLE_DOWN_LEFT:
                     dx = -256;
                     dy = 0;
                     dz = 0;
                     dw = 384;
                     break;
-                case 83:
+                case FLD_ANGLE_DOWN_RIGHT:
                     dx = 256;
                     dy = 0;
                     dz = 0;
                     dw = 384;
                     break;
-                case 211:
+                case FLD_ANGLE_UP_LEFT:
                     dx = -256;
                     dy = 0;
                     dz = 0;
                     dw = -384;
                     break;
-                case 45:
+                case FLD_ANGLE_UP_RIGHT:
                     dx = 256;
                     dy = 0;
                     dz = 0;
                     dw = -384;
                     break;
-                case 128:
+                case FLD_ANGLE_DOWN:
                     dx = -512;
                     dy = 192;
                     dz = 512;
                     dw = 192;
                     break;
-                case 0:
+                case FLD_ANGLE_UP:
                     dx = -512;
                     dy = -192;
                     dz = 512;
                     dw = -192;
                     break;
-                case 64:
+                case FLD_ANGLE_RIGHT:
                     dx = 384;
                     dy = -307;
                     dz = 384;
                     dw = 307;
                     break;
-                case 192:
+                case FLD_ANGLE_LEFT:
                     dx = -384;
                     dy = -307;
                     dz = -384;

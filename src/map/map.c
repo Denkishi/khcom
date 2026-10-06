@@ -174,10 +174,10 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
                 s32 coord;
 
                 if (cell->type == MAP_CELL_TYPE_LEFT_WALL_BASE) {
-                    arg->angle = 0x53;
+                    arg->angle = FLD_ANGLE_DOWN_RIGHT;
                     coord = (x << 13) + 0x1800;
                 } else if (cell->type == MAP_CELL_TYPE_RIGHT_WALL_BASE) {
-                    arg->angle = 0xAD;
+                    arg->angle = FLD_ANGLE_DOWN_LEFT;
                     coord = (x << 13) + 0x800;
                 } else {
                     continue;
@@ -242,16 +242,16 @@ void MapEnmSetupArgs(MapEnmArgs* arg, const MapEnmDef* def) {
 
     switch (GetRandom() % 4) {
     case 0:
-        arg->angle = 0xAD;
+        arg->angle = FLD_ANGLE_DOWN_LEFT;
         break;
     case 1:
-        arg->angle = 0x53;
+        arg->angle = FLD_ANGLE_DOWN_RIGHT;
         break;
     case 2:
-        arg->angle = 0xD3;
+        arg->angle = FLD_ANGLE_UP_LEFT;
         break;
     default:
-        arg->angle = 0x2D;
+        arg->angle = FLD_ANGLE_UP_RIGHT;
         break;
     }
 
@@ -3017,16 +3017,16 @@ void Mode_MapFld_0() {
     if ((gMapFloorState.flags & FLOOR_FLAG_LOGO_SHOWN) && !gGameState.fieldResume) {
         switch (gMapFloorState.entrySide) {
         case 0:
-            gGameState.fieldAngle = 0xAD;
+            gGameState.fieldAngle = FLD_ANGLE_DOWN_LEFT;
             break;
         case 1:
-            gGameState.fieldAngle = 0x2D;
+            gGameState.fieldAngle = FLD_ANGLE_UP_RIGHT;
             break;
         case 2:
-            gGameState.fieldAngle = 0xD3;
+            gGameState.fieldAngle = FLD_ANGLE_UP_LEFT;
             break;
         case 3:
-            gGameState.fieldAngle = 0x53;
+            gGameState.fieldAngle = FLD_ANGLE_DOWN_RIGHT;
             break;
         }
 
@@ -4734,17 +4734,17 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
 
     switch (gMapFloorState.entrySide) {
     case 0:
-        gFieldState->spawnAngle = 173;
+        gFieldState->spawnAngle = FLD_ANGLE_DOWN_LEFT;
         gFieldState->spawnX = def->stairX - 0xC00;
         gFieldState->spawnY = def->stairY + 0x800;
         break;
     case 1:
-        gFieldState->spawnAngle = 45;
+        gFieldState->spawnAngle = FLD_ANGLE_UP_RIGHT;
         gFieldState->spawnX = def->stair2X + 0xC00;
         gFieldState->spawnY = def->stair2Y - 0x800;
         break;
     default:
-        gFieldState->spawnAngle = 45;
+        gFieldState->spawnAngle = FLD_ANGLE_UP_RIGHT;
         gFieldState->spawnX = def->spawnX;
         gFieldState->spawnY = def->spawnY;
         break;
@@ -4821,13 +4821,13 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
     TaskPoolInit(&work->tasks, 2);
     stair.fieldPosition.x = def->stairX;
     stair.fieldPosition.y = def->stairY;
-    stair.angle = 45;
+    stair.angle = FLD_ANGLE_UP_RIGHT;
     TaskCreate(&work->tasks, &gTaskDescMapStair, &stair);
 
     if (def->stair2X != 0 || def->stair2Y != 0) {
         stair.fieldPosition.x = def->stair2X;
         stair.fieldPosition.y = def->stair2Y;
-        stair.angle = 173;
+        stair.angle = FLD_ANGLE_DOWN_LEFT;
         TaskCreate(&work->tasks, &gTaskDescMapStair, &stair);
     }
 
@@ -4991,7 +4991,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
         work->sprite = gMapDoorSide0Frame0;
         work->openSrc = doorGfx->side0Open;
         work->closedSrc = doorGfx->side0Closed;
-        obj->angle = 173;
+        obj->angle = FLD_ANGLE_DOWN_LEFT;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
         obj->fieldPosition.y = (door->cellY << 4) + 10;
         break;
@@ -4999,7 +4999,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
         work->sprite = gMapDoorSide1Frame0;
         work->openSrc = doorGfx->side1Open;
         work->closedSrc = doorGfx->side1Closed;
-        obj->angle = 45;
+        obj->angle = FLD_ANGLE_UP_RIGHT;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
         obj->fieldPosition.y = (door->cellY << 4) + 6;
         break;
@@ -5007,7 +5007,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
         work->sprite = gMapDoorSide2Frame0;
         work->openSrc = doorGfx->side2Open;
         work->closedSrc = doorGfx->side2Closed;
-        obj->angle = 211;
+        obj->angle = FLD_ANGLE_UP_LEFT;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
         obj->fieldPosition.y = (door->cellY << 4) + 6;
         break;
@@ -5015,7 +5015,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
         work->sprite = gMapDoorSide3Frame0;
         work->openSrc = doorGfx->side3Open;
         work->closedSrc = doorGfx->side3Closed;
-        obj->angle = 83;
+        obj->angle = FLD_ANGLE_DOWN_RIGHT;
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
         obj->fieldPosition.y = (door->cellY << 4) + 10;
         break;

@@ -63,7 +63,7 @@ void Task_MapMickey_0(MapMickeyWork* work) {
     obj->fieldPosition.ground = GetFldPosFloor(&obj->fieldPosition);
     obj->fieldPosition.z = obj->fieldPosition.ground;
     obj->fieldPosition.y -= obj->fieldPosition.ground;
-    obj->angle = 0xAD;
+    obj->angle = FLD_ANGLE_DOWN_LEFT;
     obj->height = 0x30;
     obj->kind = 2;
     work->visible = TRUE;

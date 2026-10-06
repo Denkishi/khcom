@@ -50,6 +50,7 @@
 #include "event_ids.h"
 #include "jiminy_records_index_data.h"
 #include "gba/defines.h"
+#include "fld_types.h"
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);
@@ -344,8 +345,8 @@ void SetPoohAction(PoohWork* work, u32 action) {
     }
 
     if (action > POOH_ACTION_EAT_HONEY_3) {
-        work->angle = 0x53;
-        work->lookAngle = 0x53;
+        work->angle = FLD_ANGLE_DOWN_RIGHT;
+        work->lookAngle = FLD_ANGLE_DOWN_RIGHT;
         work->lookColumn = work->angle;
     }
 
@@ -363,8 +364,8 @@ void task_poo_pooh_0(PoohWork* work) {
     gPoohRequest = POOH_REQUEST_NONE;
     work->callTimer = 0;
     work->callCount = 0;
-    work->angle = 45;
-    work->lookAngle = 45;
+    work->angle = FLD_ANGLE_UP_RIGHT;
+    work->lookAngle = FLD_ANGLE_UP_RIGHT;
     work->lookColumn = work->angle;
     SetPoohDir5Right(work);
     work->speed = 0;
@@ -704,8 +705,8 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
         }
 
         SetPoohAction(work, POOH_ACTION_JUMP_SCARED);
-        work->angle = 64;
-        work->lookAngle = 64;
+        work->angle = FLD_ANGLE_RIGHT;
+        work->lookAngle = FLD_ANGLE_RIGHT;
         work->lookColumn = work->angle;
         break;
     case POOH_ACTION_JUMP_SCARED:
@@ -1907,37 +1908,37 @@ void MovePooCamera(s32 dx, s32 dy) {
 
 void SetPooActorAngleFromDpad(PooActor* actor) {
     if ((GetKeysHeld() & DPAD_LEFT) != 0 && (GetKeysHeld() & DPAD_DOWN) != 0) {
-        actor->angle = 0xAD;
+        actor->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && (GetKeysHeld() & DPAD_LEFT) != 0) {
-        actor->angle = 0xD3;
+        actor->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && (GetKeysHeld() & DPAD_RIGHT) != 0) {
-        actor->angle = 0x2D;
+        actor->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0 && (GetKeysHeld() & DPAD_DOWN) != 0) {
-        actor->angle = 0x53;
+        actor->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if ((GetKeysHeld() & DPAD_DOWN) != 0 && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        actor->angle = 0xAD;
+        actor->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_DOWN) != 0 && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        actor->angle = 0x53;
+        actor->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        actor->angle = 0xD3;
+        actor->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        actor->angle = 0x2D;
+        actor->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_LEFT) != 0 && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        actor->angle = 0xD3;
+        actor->angle = FLD_ANGLE_UP_LEFT;
     } else if ((GetKeysHeld() & DPAD_LEFT) != 0 && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        actor->angle = 0xAD;
+        actor->angle = FLD_ANGLE_DOWN_LEFT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0 && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        actor->angle = 0x2D;
+        actor->angle = FLD_ANGLE_UP_RIGHT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0 && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        actor->angle = 0x53;
+        actor->angle = FLD_ANGLE_DOWN_RIGHT;
     } else if ((GetKeysHeld() & DPAD_DOWN) != 0) {
-        actor->angle = 0x80;
+        actor->angle = FLD_ANGLE_DOWN;
     } else if ((GetKeysHeld() & DPAD_UP) != 0) {
-        actor->angle = 0;
+        actor->angle = FLD_ANGLE_UP;
     } else if ((GetKeysHeld() & DPAD_LEFT) != 0) {
-        actor->angle = 0xC0;
+        actor->angle = FLD_ANGLE_LEFT;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0) {
-        actor->angle = 0x40;
+        actor->angle = FLD_ANGLE_RIGHT;
     }
 }
 
@@ -2127,7 +2128,7 @@ void task_poo_sora_0(PooSoraWork* work) {
     actor->unk_32 = 0;
     actor->kind = 0;
     GetPooStatePos2(&actor->pos);
-    actor->angle = 0xAD;
+    actor->angle = FLD_ANGLE_DOWN_LEFT;
     actor->pos.ground = 0;
     actor->speed = 0;
     SetPooCameraFocus(actor->pos.x, actor->pos.y + actor->pos.z);

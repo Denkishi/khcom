@@ -16,6 +16,7 @@
 #include "mode_chkbtl_api.h"
 #include "world_types.h"
 #include "jiminy_records_index_data.h"
+#include "fld_types.h"
 #include "map_types.h"
 
 void InitGameState() {
@@ -32,7 +33,7 @@ void InitGameState() {
     gGameState.availableWorlds = 0xFFFF;
     ResetMapFloors();
     gGameState.hp = gGameState.progression.maxHp;
-    gGameState.fieldAngle = 0x2D;
+    gGameState.fieldAngle = FLD_ANGLE_UP_RIGHT;
     gGameState.roomEffect = ROOM_EFFECT_NONE;
 }
 

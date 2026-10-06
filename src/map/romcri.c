@@ -11,6 +11,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "fld_types.h"
 
 void task_romcri_eff_0(RomcriEffWork* work, s32 angle) {
     SetupBg(1, 0, 23, 12);
@@ -24,19 +25,19 @@ void task_romcri_eff_0(RomcriEffWork* work, s32 angle) {
     SetBgBlend(1, 16, 16);
 
     switch (work->angle) {
-    case 0xAD:
+    case FLD_ANGLE_DOWN_LEFT:
         LoadBgTiles(1, gRomcriEffDownTiles, sizeof(gRomcriEffDownTiles));
         SetBgScroll(1, (u16)-35, (u16)-23);
         break;
-    case 0x53:
+    case FLD_ANGLE_DOWN_RIGHT:
         LoadBgTiles(1, gRomcriEffDownTiles, sizeof(gRomcriEffDownTiles));
         SetBgScroll(1, (u16)-77, (u16)-23);
         break;
-    case 0xD3:
+    case FLD_ANGLE_UP_LEFT:
         LoadBgTiles(1, gRomcriEffUpTiles, sizeof(gRomcriEffUpTiles));
         SetBgScroll(1, (u16)-39, 2);
         break;
-    case 0x2D:
+    case FLD_ANGLE_UP_RIGHT:
         LoadBgTiles(1, gRomcriEffUpTiles, sizeof(gRomcriEffUpTiles));
 #ifdef VERSION_EU
         SetBgScroll(1, (u16)-73, 5);
@@ -49,7 +50,7 @@ void task_romcri_eff_0(RomcriEffWork* work, s32 angle) {
 
 u8 task_romcri_eff_1(RomcriEffWork* work) {
     switch (work->angle) {
-    case 0xAD:
+    case FLD_ANGLE_DOWN_LEFT:
         switch (work->timer) {
         case 0:
             LoadBgMap(1, gRomcriEffDownLeftMap0, sizeof(gRomcriEffDownLeftMap0));
@@ -81,7 +82,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         }
 
         break;
-    case 0x53:
+    case FLD_ANGLE_DOWN_RIGHT:
         switch (work->timer) {
         case 0:
             LoadBgMap(1, gRomcriEffDownRightMap0, sizeof(gRomcriEffDownRightMap0));
@@ -113,7 +114,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         }
 
         break;
-    case 0x2D:
+    case FLD_ANGLE_UP_RIGHT:
         switch (work->timer) {
         case 0:
             LoadBgMap(1, gRomcriEffUpRightMap0, sizeof(gRomcriEffUpRightMap0));
@@ -144,7 +145,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         }
 
         break;
-    case 0xD3:
+    case FLD_ANGLE_UP_LEFT:
         switch (work->timer) {
         case 0:
             LoadBgMap(1, gRomcriEffUpLeftMap0, sizeof(gRomcriEffUpLeftMap0));
@@ -200,31 +201,31 @@ void task_romcri_eff2_0(RomcriEff2Work* work, s32 angle) {
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (work->angle) {
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetBgScroll(1, (u16)-100, 4);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetBgScroll(1, (u16)-73, 5);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetBgScroll(1, (u16)-101, (u16)-18);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetBgScroll(1, (u16)-75, (u16)-19);
             break;
         }
     } else {
         switch (work->angle) {
-        case 0x2D:
+        case FLD_ANGLE_UP_RIGHT:
             SetBgScroll(1, (u16)-100, (u16)-6);
             break;
-        case 0xD3:
+        case FLD_ANGLE_UP_LEFT:
             SetBgScroll(1, (u16)-73, (u16)-5);
             break;
-        case 0x53:
+        case FLD_ANGLE_DOWN_RIGHT:
             SetBgScroll(1, (u16)-101, (u16)-28);
             break;
-        case 0xAD:
+        case FLD_ANGLE_DOWN_LEFT:
             SetBgScroll(1, (u16)-75, (u16)-29);
             break;
         }

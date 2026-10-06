@@ -104,7 +104,7 @@ void Task_MapStair_0(MapStairWork* work, FldObj* arg) {
     work->visible = FALSE;
 
     switch (work->obj.angle) {
-    case 0x2D:
+    case FLD_ANGLE_UP_RIGHT:
         if ((gGameState.progression.tutorialFlags & 0x400) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             work->update = MapStairWaitApproach;
         } else {
@@ -112,7 +112,7 @@ void Task_MapStair_0(MapStairWork* work, FldObj* arg) {
         }
 
         break;
-    case 0xAD:
+    case FLD_ANGLE_DOWN_LEFT:
         work->update = MapStairWaitStepOn2;
         break;
     }

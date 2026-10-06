@@ -115,20 +115,20 @@ s32 Task_MapNamine_1(MapNamineWork* work) {
 }
 
 void Task_MapNamine_2(MapNamineWork* work) {
-    FldPos* p = &work->obj.fieldPosition;
-    u16 v;
-    s32 k;
+    FldPos* pos = &work->obj.fieldPosition;
+    u16 priority;
+    s32 pixelY;
     s16 x;
     s16 y;
 
     if (work->visible) {
-        x = (p->x >> 8) - (gFieldState->x >> 8);
-        k = p->y >> 8;
-        y = k + (p->z >> 8) - (gFieldState->y >> 8);
-        v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, work->spriteFlags, v);
-        work->obj.shadowZ = p->ground;
-        work->obj.shadowPriority = v + 1;
+        x = (pos->x >> 8) - (gFieldState->x >> 8);
+        pixelY = pos->y >> 8;
+        y = pixelY + (pos->z >> 8) - (gFieldState->y >> 8);
+        priority = -0x1004 - pixelY * 4;
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, work->spriteFlags, priority);
+        work->obj.shadowZ = pos->ground;
+        work->obj.shadowPriority = priority + 1;
         TaskPoolDraw(&work->tasks);
 
         if (work->targeted) {

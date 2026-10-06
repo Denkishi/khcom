@@ -65,7 +65,7 @@ void Task_MapMickey_0(MapMickeyWork* work) {
     obj->fieldPosition.y -= obj->fieldPosition.ground;
     obj->angle = FLD_ANGLE_DOWN_LEFT;
     obj->height = 0x30;
-    obj->kind = 2;
+    obj->kind = FLD_OBJ_KIND_NPC;
     work->visible = TRUE;
     work->update = MapMickeyCheckTalk;
     work->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);

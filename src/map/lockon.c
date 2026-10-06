@@ -81,7 +81,7 @@ u8 task_lockon_1(LockonWork* work) {
             dy = py - oy;
 
             if (VectorLength2D(dx, dy) <= 0x3000 && (dx > -0x8000 && dx < 0x8000) && (dy > -0x8000 && dy < 0x8000) && obj->fieldPosition.ground == gFieldState->actor.fieldPosition.ground) {
-                if (obj->kind == 3) {
+                if (obj->kind == FLD_OBJ_KIND_FIXTURE) {
                     gLockonDoorPosition[0] = obj->fieldPosition.x;
                     gLockonDoorPosition[1] = obj->fieldPosition.y;
                     gLockonDoorPosition[2] = obj->fieldPosition.z;
@@ -149,7 +149,7 @@ void task_lockon_2(LockonWork* work) {
 
     obj = work->targets[work->selected];
 
-    if (obj->kind == 2) {
+    if (obj->kind == FLD_OBJ_KIND_NPC) {
         return;
     }
 
@@ -276,7 +276,7 @@ u8 LockonIsInFront(u16 angle, s32 px, s32 py, FldObj* target) {
         NormalizeVector2D8(&x, &y);
         dot = (sn * x >> 8) + (y * cs >> 8);
 
-        if (target->kind == 3) {
+        if (target->kind == FLD_OBJ_KIND_FIXTURE) {
             if (dot > 99) {
                 return TRUE;
             }

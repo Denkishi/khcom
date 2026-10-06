@@ -75,7 +75,7 @@ void Task_MapNamine_0(MapNamineWork* work) {
     obj->fieldPosition.y -= obj->fieldPosition.ground;
     obj->angle = FLD_ANGLE_DOWN_LEFT;
     obj->height = 48;
-    obj->kind = 2;
+    obj->kind = FLD_OBJ_KIND_NPC;
     work->registered = gMapFloorState.progress != 23;
     work->visible = TRUE;
     work->update = MapNamineCheckTalk;

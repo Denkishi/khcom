@@ -3726,7 +3726,7 @@ void Task_MapGmk04_0(MapGmk04Work* work, MapGmkPlacement* arg) {
     work->placement = arg;
     obj->fieldPosition = arg->pos;
     obj->height = def->height;
-    obj->kind = 3;
+    obj->kind = FLD_OBJ_KIND_FIXTURE;
 
     if (gGameState.progression.tutorialFlags & 0x10) {
         work->update = MapGmk04CheckTalk;
@@ -3824,7 +3824,7 @@ void Task_MapGmk05_0(MapGmk05Work* work, MapGmkPlacement* arg) {
 
     obj->fieldPosition = arg->pos;
     obj->height = def->height;
-    obj->kind = 2;
+    obj->kind = FLD_OBJ_KIND_NPC;
     work->update = MapGmk05CheckTalk;
     work->palette = LoadObjPalette(def->palette, 32);
     work->tiles = AllocObjTiles(def->tilesSize, def->tiles);
@@ -3933,7 +3933,7 @@ void Task_MapGmk06_0(MapGmk06Work* work, MapGmkPlacement* arg) {
 
     obj->fieldPosition = arg->pos;
     obj->height = def->height;
-    obj->kind = 3;
+    obj->kind = FLD_OBJ_KIND_FIXTURE;
     work->update = MapGmk06CheckTalk;
     work->palette = LoadObjPalette(def->palette, 32);
     work->tiles = AllocObjTiles(def->tilesSize, def->tiles);

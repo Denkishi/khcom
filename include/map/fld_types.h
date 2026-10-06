@@ -37,6 +37,13 @@ enum FldClimbDir {
     FLD_CLIMB_DIR_UP_LEFT
 };
 
+enum FldObjKind {
+    FLD_OBJ_KIND_PLAYER,
+    FLD_OBJ_KIND_ENEMY,
+    FLD_OBJ_KIND_NPC,
+    FLD_OBJ_KIND_FIXTURE
+};
+
 typedef struct FldActor {
     FldPos fieldPosition;
     s32 speed;

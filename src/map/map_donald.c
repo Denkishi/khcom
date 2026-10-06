@@ -74,7 +74,7 @@ void Task_MapDonald_0(MapDonaldWork* work) {
     obj->fieldPosition.y -= obj->fieldPosition.ground;
     obj->angle = FLD_ANGLE_DOWN;
     obj->height = 0x20;
-    obj->kind = 2;
+    obj->kind = FLD_OBJ_KIND_NPC;
     work->visible = TRUE;
     work->update = MapDonaldCheckTalk;
     work->tiles = AllocObjTiles(0x400, gDonaFl00Tiles);

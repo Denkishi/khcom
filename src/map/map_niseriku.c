@@ -104,7 +104,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
     obj->fieldPosition.y -= obj->fieldPosition.z;
     obj->angle = FLD_ANGLE_DOWN_LEFT;
     obj->height = 48;
-    obj->kind = 2;
+    obj->kind = FLD_OBJ_KIND_NPC;
 
     registered = FALSE;
 

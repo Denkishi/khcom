@@ -609,7 +609,7 @@ void MapEnmInit(MapEnmWork* work, MapEnmArgs* arg) {
     obj->speed = arg->speed;
     obj->height = def->height;
     obj->unk_34 = 0;
-    obj->kind = 1;
+    obj->kind = FLD_OBJ_KIND_ENEMY;
     work->radius = def->radius;
     work->height = def->height;
     work->timer = 0;
@@ -5027,7 +5027,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
     pos->z = pos->ground = GetFldPosFloor(pos);
     pos->y -= pos->z;
     obj->height = 32;
-    obj->kind = 3;
+    obj->kind = FLD_OBJ_KIND_FIXTURE;
     work->tiles = AllocSpriteFrameTiles(0x400);
     work->palette = LoadObjPalette(doorGfx->palette, 32);
     work->palette2 = LoadObjPalette(gMapDoorEmblemPalette, sizeof(gMapDoorEmblemPalette));

@@ -309,7 +309,7 @@ void task_fld_riku_0(FldWork* work) {
     work->flags = FLD_FLAG_RESTORE_STATE;
     work->animAction = 16;
     act->unk_32 = 0;
-    act->kind = 0;
+    act->kind = FLD_OBJ_KIND_PLAYER;
 
     if (gGameState.fieldResume) {
         act->fieldPosition = gGameState.fieldPosition;

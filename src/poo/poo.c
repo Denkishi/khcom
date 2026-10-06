@@ -2126,7 +2126,7 @@ void task_poo_sora_0(PooSoraWork* work) {
     work->flags = 0;
     work->animAction = 12;
     actor->unk_32 = 0;
-    actor->kind = 0;
+    actor->kind = FLD_OBJ_KIND_PLAYER;
     GetPooStatePos2(&actor->pos);
     actor->angle = FLD_ANGLE_DOWN_LEFT;
     actor->pos.ground = 0;

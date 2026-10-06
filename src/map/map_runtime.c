@@ -898,17 +898,17 @@ void MarkPastEventRoomsDone() {
 
 void GoToFloor(u8 floor) {
     gGameState.floor = floor;
-    InitMapFloorState(0xFE, 0);
+    InitMapFloorState(MAP_ROOM_ENTRANCE_HALL, 0);
 }
 
 void GoToNextFloor() {
     gGameState.floor++;
-    InitMapFloorState(0xFE, 1);
+    InitMapFloorState(MAP_ROOM_ENTRANCE_HALL, 1);
 }
 
 void GoToPreviousFloor() {
     gGameState.floor--;
-    InitMapFloorState(0xFD, 0);
+    InitMapFloorState(MAP_ROOM_EXIT_HALL, 0);
 }
 
 void WarpToFloor(u8 floor) {

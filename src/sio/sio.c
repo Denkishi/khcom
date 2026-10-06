@@ -57,6 +57,29 @@ enum SioRequest {
     SIO_REQUEST_RESET
 };
 
+enum SioRole {
+    SIO_ROLE_CHILD,
+    SIO_ROLE_PARENT = 8
+};
+
+enum SioQueueFull {
+    SIO_QUEUE_FULL_SEND = 1,
+    SIO_QUEUE_FULL_RECV = 2
+};
+
+enum SioTimeout {
+    SIO_TIMEOUT_PARENT = 1,
+    SIO_TIMEOUT_CHILD = 2
+};
+
+enum SioHandshakeWord {
+    SIO_HANDSHAKE_START = 0x8FFF,
+    SIO_HANDSHAKE_IDLE = 0xD5E0
+};
+
+#define SIO_MULTI_EMPTY 0xFFFF
+#define SIO_PAUSE_REQUEST 0x1000
+
 u16 IsVBlankIntrLive() {
     if (REG_IME & 1) {
         if (REG_DISPSTAT & DISPSTAT_VBLANK_INTR) {
@@ -245,7 +268,7 @@ u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     *request = SIO_REQUEST_NONE;
     playerBits = gSioWork.playerId | (gSioWork.playerCount << SIO_STAT_PLAYER_COUNT_SHIFT);
 
-    if (gSioWork.isParent == 8) {
+    if (gSioWork.isParent == SIO_ROLE_PARENT) {
         playerBits |= SIO_STAT_PARENT;
     }
 
@@ -287,7 +310,7 @@ u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
 
     playerBits = gSioWork.playerId | (gSioWork.playerCount << SIO_STAT_PLAYER_COUNT_SHIFT);
 
-    if (gSioWork.isParent == 8) {
+    if (gSioWork.isParent == SIO_ROLE_PARENT) {
         playerBits |= SIO_STAT_PARENT;
     }
 
@@ -315,9 +338,9 @@ u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
 
 void SioCheckParent() {
     if (((*(vu32*)REG_ADDR_SIOCNT) & (SIO_MULTI_SI | SIO_MULTI_SD)) == SIO_MULTI_SD && gSioWork.playerId == 0) {
-        gSioWork.isParent = 8;
+        gSioWork.isParent = SIO_ROLE_PARENT;
     } else {
-        gSioWork.isParent = 0;
+        gSioWork.isParent = SIO_ROLE_CHILD;
     }
 }
 
@@ -353,7 +376,7 @@ void SioQueueSendFrame(u16* frame) {
             frame++;
         }
     } else {
-        gSioWork.queueFull |= 1;
+        gSioWork.queueFull |= SIO_QUEUE_FULL_SEND;
     }
 
     if (sSioSendNonzero != 0) {
@@ -419,7 +442,7 @@ void SioVBlankUpdate() {
                 if (gSioWork.hardwareError != 0) {
                     SioStartTransfer();
                 } else {
-                    gSioWork.timeout = 1;
+                    gSioWork.timeout = SIO_TIMEOUT_PARENT;
                 }
             } else if (gSioWork.timeout == 0) {
                 gSioWork.transferCount = 0;
@@ -431,7 +454,7 @@ void SioVBlankUpdate() {
 
         if (sSioIdleVBlanks > 6) {
             if (gSioWork.state == SIO_STATE_CONNECTED) {
-                gSioWork.timeout = 2;
+                gSioWork.timeout = SIO_TIMEOUT_CHILD;
             }
 
             if (gSioWork.state == SIO_STATE_HANDSHAKE) {
@@ -498,22 +521,22 @@ u8 SioHandshake() {
     min = 0xFFFF;
 
     if (gSioWork.startPending == 1) {
-        REG_SIOMLT_SEND = 0x8FFF;
+        REG_SIOMLT_SEND = SIO_HANDSHAKE_START;
     } else {
-        REG_SIOMLT_SEND = 0xD5E0;
+        REG_SIOMLT_SEND = SIO_HANDSHAKE_IDLE;
     }
 
     gSioWork.startPending = 0;
     *(u64*)gSioWork.recv = *(u64*)REG_ADDR_SIOMULTI0;
 
     for (i = 0; i < 2; i++) {
-        if ((gSioWork.recv[i] & ~3) == 0xD5E0 || gSioWork.recv[i] == 0x8FFF) {
+        if ((gSioWork.recv[i] & ~3) == SIO_HANDSHAKE_IDLE || gSioWork.recv[i] == SIO_HANDSHAKE_START) {
             count++;
 
             if (min > gSioWork.recv[i] && gSioWork.recv[i] != 0) {
                 min = gSioWork.recv[i];
             }
-        } else if (gSioWork.recv[i] == 0xFFFF) {
+        } else if (gSioWork.recv[i] == SIO_MULTI_EMPTY) {
             if (i == gSioWork.playerId) {
                 count = 0;
             }
@@ -526,7 +549,7 @@ u8 SioHandshake() {
     gSioWork.playerCount = count;
 
     if (gSioWork.playerCount == 2) {
-        if (gSioWork.playerCount == sSioPrevPlayerCount && gSioWork.recv[0] == 0x8FFF) {
+        if (gSioWork.playerCount == sSioPrevPlayerCount && gSioWork.recv[0] == SIO_HANDSHAKE_START) {
             return 1;
         }
 
@@ -572,13 +595,13 @@ void SioRecvWord() {
                 sSioRecvNonzero |= recv[i];
                 gSioWork.recvBuf[i][gSioWork.recvWordIdx][idx] = recv[i];
 
-                if (gSioWork.sendWordIdx == 1 && !gSioWork.paused && (recv[i] & 0x1000)) {
+                if (gSioWork.sendWordIdx == 1 && !gSioWork.paused && (recv[i] & SIO_PAUSE_REQUEST)) {
                     gSioWork.paused = 1;
                     sSioPauseTimer = 5;
                 }
             }
         } else {
-            gSioWork.queueFull |= 2;
+            gSioWork.queueFull |= SIO_QUEUE_FULL_RECV;
         }
 
         gSioWork.recvWordIdx++;
@@ -616,7 +639,7 @@ void SioSendWord() {
         }
 
         if (!gSioWork.paused && gSioWork.sendWordIdx == 0 && gSioWork.recvCount > 3) {
-            REG_SIOMLT_SEND |= 0x1000;
+            REG_SIOMLT_SEND |= SIO_PAUSE_REQUEST;
         }
 
         gSioWork.sendWordIdx++;

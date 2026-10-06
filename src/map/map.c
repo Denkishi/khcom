@@ -2774,28 +2774,28 @@ void MapFldDestroyAllmapRoom() {
 void StartWorldBossBattle() {
     switch (gGameState.world) {
     case WORLD_TRAVERSE_TOWN:
-        ModeRequest(&gModeBattle, 0x94);
+        ModeRequest(&gModeBattle, BATTLE_GUARD_ARMOR);
         break;
     case WORLD_AGRABAH:
-        ModeRequest(&gModeBattle, 0x95);
+        ModeRequest(&gModeBattle, BATTLE_JAFAR);
         break;
     case WORLD_MONSTRO:
-        ModeRequest(&gModeBattle, 0x98);
+        ModeRequest(&gModeBattle, BATTLE_PARASITE_CAGE);
         break;
     case WORLD_NEVER_LAND:
-        ModeRequest(&gModeBattle, 0x9E);
+        ModeRequest(&gModeBattle, BATTLE_HOOK);
         break;
     case WORLD_HALLOWEEN_TOWN:
-        ModeRequest(&gModeBattle, 0x9B);
+        ModeRequest(&gModeBattle, BATTLE_OOGIE_BOOGIE);
         break;
     case WORLD_ATLANTICA:
-        ModeRequest(&gModeBattle, 0x97);
+        ModeRequest(&gModeBattle, BATTLE_URSULA);
         break;
     case WORLD_WONDERLAND:
-        ModeRequest(&gModeBattle, 0x96);
+        ModeRequest(&gModeBattle, BATTLE_TRICKMASTER);
         break;
     case WORLD_OLYMPUS_COLISEUM:
-        ModeRequest(&gModeBattle, 0xA0);
+        ModeRequest(&gModeBattle, BATTLE_HADES);
         break;
     }
 }

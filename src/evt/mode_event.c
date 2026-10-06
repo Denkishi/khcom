@@ -283,10 +283,10 @@ void EventUpdate() {
     if (seqDef->exitCode != 0xFFFF) {
         switch (seqDef->exitCode) {
         case 2:
-            ModeRequest(&gModeBattle, 178);
+            ModeRequest(&gModeBattle, BATTLE_TUTORIAL_0);
             break;
         case 4:
-            ModeRequest(&gModeBattle, 179);
+            ModeRequest(&gModeBattle, BATTLE_TUTORIAL_1);
             break;
         case 12:
             ModeRequestHeapReset(&gModeMovie, MOVIE_ENDING);

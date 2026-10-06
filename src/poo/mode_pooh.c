@@ -692,7 +692,7 @@ u8 IsPooMapBeeVisible() {
 }
 
 void SetPoohDir5Right(PoohWork* work) {
-    switch (((work->angle + 16) & 0xFF) >> 5) {
+    switch (ANGLE_DIR8(work->angle)) {
     case DIR8_UP_RIGHT:
         work->dirIndex = 4;
         work->flipped = 0;
@@ -730,7 +730,7 @@ void SetPoohDir5Right(PoohWork* work) {
 }
 
 void SetPoohDir5Left(PoohWork* work) {
-    switch (((work->angle + 16) & 0xFF) >> 5) {
+    switch (ANGLE_DIR8(work->angle)) {
     case DIR8_UP_RIGHT:
         work->dirIndex = 4;
         work->flipped = 1;
@@ -770,7 +770,7 @@ void SetPoohDir5Left(PoohWork* work) {
 void SetPoohDir8(PoohWork* work) {
     work->flipped = 0;
 
-    switch (((work->angle + 16) & 0xFF) >> 5) {
+    switch (ANGLE_DIR8(work->angle)) {
     case DIR8_UP:
         work->dirIndex = 0;
         break;
@@ -802,7 +802,7 @@ void SetPoohDir8(PoohWork* work) {
 }
 
 void SetPoohDir2(PoohWork* work) {
-    switch (((work->angle + 16) & 0xFF) >> 5) {
+    switch (ANGLE_DIR8(work->angle)) {
     case DIR8_UP:
     case DIR8_UP_RIGHT:
         work->dirIndex = 0;
@@ -844,7 +844,7 @@ void SetPoohDir3(PoohWork* work) {
 }
 
 u8 IsAngleFacingRight(u8 angle) {
-    switch (((angle + 16) & 0xFF) >> 5) {
+    switch (ANGLE_DIR8(angle)) {
     case DIR8_UP_RIGHT:
     case DIR8_RIGHT:
     case DIR8_DOWN_RIGHT:

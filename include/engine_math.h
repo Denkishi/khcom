@@ -19,6 +19,8 @@ enum Dir8 {
     DIR8_UP_LEFT
 };
 
+#define ANGLE_DIR8(angle) ((((angle) + 16) & 0xFF) >> 5)
+
 u8 GetAngle(s32 x0, s32 y0, s32 x1, s32 y1);
 s16 GetAngleDiff(s32 target, s32 angle);
 s32 GetAngleDiff16(s32 target, s32 angle);

@@ -1970,7 +1970,7 @@ u8 GetPooAngleToPooh(PooPos* pos) {
 
     angle = GetAngle(pos->x, pos->y, gPoohPos->x, gPoohPos->y);
 
-    switch (((angle + 16) & 0xFF) >> 5) {
+    switch (ANGLE_DIR8(angle)) {
     case DIR8_UP_RIGHT:
         return 0x2D;
     case DIR8_RIGHT:
@@ -7026,7 +7026,7 @@ void task_poo_zzz_3(PooZzzWork* work) {
 }
 
 void PooBflyPartSetDir(PooBflyPart* part) {
-    switch (((part->angle + 16) & 0xFF) >> 5) {
+    switch (ANGLE_DIR8(part->angle)) {
     case DIR8_UP_RIGHT:
         part->dirIndex = 4;
         part->flipped = 1;

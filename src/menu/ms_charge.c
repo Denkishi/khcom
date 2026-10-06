@@ -601,7 +601,7 @@ void MsChargeBuildCardList() {
         raw = gCardCollection[i];
         id = raw & CARD_ID_MASK;
 
-        if (raw != CARD_ID_MASK && (raw & 0x7000) == 0 && id <= 0x21C) {
+        if (raw != CARD_COLLECTION_EMPTY && (raw & 0x7000) == 0 && id <= 0x21C) {
             j = gCardDefs[id].category;
             kind = gCardDefs[id].kind;
             flags = raw & 0x8000;

@@ -5,6 +5,7 @@
 
 #define DECK_SIZE 99
 #define CARD_ID_MASK 0xFFF
+#define CARD_COLLECTION_EMPTY 0xFFF
 #define CARD_NONE 0xFFFF
 
 enum CardIdSentinel {

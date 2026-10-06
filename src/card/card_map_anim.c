@@ -253,7 +253,7 @@ void InitCardCollection() {
     u16 i;
 
     for (i = 0; i < 999; i++) {
-        gCardCollection[i] = CARD_ID_MASK;
+        gCardCollection[i] = CARD_COLLECTION_EMPTY;
     }
 
     gCardCount = 911;
@@ -284,7 +284,7 @@ s16 AddCardToCollection(u16 cardId) {
         return CARD_NOT_ADDED;
     }
 
-    while (gCardCollection[i] != CARD_ID_MASK) {
+    while (gCardCollection[i] != CARD_COLLECTION_EMPTY) {
         i++;
 
         if (i == gCardCount) {
@@ -308,7 +308,7 @@ u8 IsCardCollectionFull() {
     count = 0;
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] == CARD_ID_MASK) {
+        if (gCardCollection[i] == CARD_COLLECTION_EMPTY) {
             count++;
         }
     }
@@ -623,7 +623,7 @@ s16 ObtainCard(u16 cardId) {
 
     ExpandCardCollectionForNewCard(cardId);
 
-    while (gCardCollection[i] != CARD_ID_MASK) {
+    while (gCardCollection[i] != CARD_COLLECTION_EMPTY) {
         i++;
 
         if (i == gCardCount) {
@@ -1024,7 +1024,7 @@ u16 CountCollectionCards() {
     count = i = 0;
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] != CARD_ID_MASK) {
+        if (gCardCollection[i] != CARD_COLLECTION_EMPTY) {
             count++;
         }
     }
@@ -1039,7 +1039,7 @@ u16 CountCardsInDecks() {
     count = i = 0;
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] != CARD_ID_MASK && (gCardCollection[i] & 0x7000)) {
+        if (gCardCollection[i] != CARD_COLLECTION_EMPTY && (gCardCollection[i] & 0x7000)) {
             count++;
         }
     }
@@ -1075,7 +1075,7 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
     }
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] == CARD_ID_MASK) {
+        if (gCardCollection[i] == CARD_COLLECTION_EMPTY) {
             continue;
         }
 

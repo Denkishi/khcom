@@ -387,7 +387,7 @@ void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCo
     }
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] == CARD_ID_MASK) {
+        if (gCardCollection[i] == CARD_COLLECTION_EMPTY) {
             continue;
         }
 
@@ -444,7 +444,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCoun
     }
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] == CARD_ID_MASK) {
+        if (gCardCollection[i] == CARD_COLLECTION_EMPTY) {
             continue;
         }
 
@@ -490,7 +490,7 @@ u16 CountCollectionCardsOfCategory(u8 category) {
     count = 0;
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] != CARD_ID_MASK) {
+        if (gCardCollection[i] != CARD_COLLECTION_EMPTY) {
             if (gCardDefs[gCardCollection[i] & CARD_ID_MASK].category == category) {
                 count++;
             }
@@ -526,7 +526,7 @@ void CountCardsNotInDeckByCategory(u8 mode, u16* out) {
     }
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] != CARD_ID_MASK) {
+        if (gCardCollection[i] != CARD_COLLECTION_EMPTY) {
             if (!(gCardCollection[i] & mask)) {
                 out[gCardDefs[gCardCollection[i] & CARD_ID_MASK].category]++;
             }
@@ -535,17 +535,17 @@ void CountCardsNotInDeckByCategory(u8 mode, u16* out) {
 }
 
 void ClearCardCollectionSlot(u16* slot) {
-    *slot = CARD_ID_MASK;
+    *slot = CARD_COLLECTION_EMPTY;
 }
 
 void RemoveUnequippedCardById(u16 id) {
     s32 i;
 
     for (i = 0; i < gCardCount; i++) {
-        if (gCardCollection[i] != CARD_ID_MASK &&
+        if (gCardCollection[i] != CARD_COLLECTION_EMPTY &&
             (gCardCollection[i] & 0x7000) == 0 &&
             (gCardCollection[i] & CARD_ID_MASK) == id) {
-            gCardCollection[i] = CARD_ID_MASK;
+            gCardCollection[i] = CARD_COLLECTION_EMPTY;
             return;
         }
     }

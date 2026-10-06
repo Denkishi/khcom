@@ -88,8 +88,8 @@ void ListPoolInit(void* pool) {
     list->activeTail = NULL;
 }
 
-void ListPoolAddFree(void* p, void* pool, void* owner) {
-    ListNode* node = p;
+void ListPoolAddFree(void* item, void* pool, void* owner) {
+    ListNode* node = item;
     ListPool* list = pool;
 
     ListAppend(node, &list->freeHead, &list->freeTail);
@@ -97,20 +97,20 @@ void ListPoolAddFree(void* p, void* pool, void* owner) {
     node->flags = 0;
 }
 
-void ListPoolActivate(void* a, void* b) {
+void ListPoolActivate(void* item, void* pool) {
     ListNode* node;
     ListPool* list;
 
-    node = a;
-    list = b;
+    node = item;
+    list = pool;
     ListRemove(node, &list->freeHead, &list->freeTail);
     ListAppend(node, &list->activeHead, &list->activeTail);
     node->flags |= LIST_NODE_FLAG_ACTIVE;
     node->self = node;
 }
 
-void ListPoolActivateAfter(void* p, void* pool, void* position) {
-    ListNode* node = p;
+void ListPoolActivateAfter(void* item, void* pool, void* position) {
+    ListNode* node = item;
     ListPool* list = pool;
     ListNode* after = position;
 
@@ -120,8 +120,8 @@ void ListPoolActivateAfter(void* p, void* pool, void* position) {
     node->self = node;
 }
 
-void ListPoolActivateBefore(void* p, void* pool, void* position) {
-    ListNode* node = p;
+void ListPoolActivateBefore(void* item, void* pool, void* position) {
+    ListNode* node = item;
     ListPool* list = pool;
     ListNode* before = position;
 
@@ -131,8 +131,8 @@ void ListPoolActivateBefore(void* p, void* pool, void* position) {
     node->self = node;
 }
 
-void* ListPoolRelease(void* p, void* pool) {
-    ListNode* node = p;
+void* ListPoolRelease(void* item, void* pool) {
+    ListNode* node = item;
     ListPool* list = pool;
     ListNode* next;
 
@@ -188,8 +188,8 @@ void* ListPoolLast(void* pool) {
     return result;
 }
 
-void* ListPoolNext(void* p) {
-    ListNode* node = p;
+void* ListPoolNext(void* item) {
+    ListNode* node = item;
     ListNode* n;
     void* result;
 
@@ -208,8 +208,8 @@ void* ListPoolNext(void* p) {
     return result;
 }
 
-void* ListPoolPrev(void* p) {
-    ListNode* node = p;
+void* ListPoolPrev(void* item) {
+    ListNode* node = item;
     ListNode* n;
     void* result;
 
@@ -244,15 +244,15 @@ void* ListPoolFirstFree(void* pool) {
 void func_08000D1C() {
 }
 
-void ListNodeInit(void* p, void* pool, void* owner) {
-    ListNode* node = p;
+void ListNodeInit(void* item, void* pool, void* owner) {
+    ListNode* node = item;
 
     node->owner = owner;
     node->flags = 0;
 }
 
-void ListPoolAppend(void* p, void* pool) {
-    ListNode* node = p;
+void ListPoolAppend(void* item, void* pool) {
+    ListNode* node = item;
     ListPool* list = pool;
 
     ListAppend(node, &list->activeHead, &list->activeTail);
@@ -260,8 +260,8 @@ void ListPoolAppend(void* p, void* pool) {
     node->self = node;
 }
 
-void ListPoolInsertAfter(void* p, void* pool, void* position) {
-    ListNode* node = p;
+void ListPoolInsertAfter(void* item, void* pool, void* position) {
+    ListNode* node = item;
     ListPool* list = pool;
     ListNode* after = position;
 
@@ -270,8 +270,8 @@ void ListPoolInsertAfter(void* p, void* pool, void* position) {
     node->self = node;
 }
 
-void ListPoolInsertBefore(void* p, void* pool, void* position) {
-    ListNode* node = p;
+void ListPoolInsertBefore(void* item, void* pool, void* position) {
+    ListNode* node = item;
     ListPool* list = pool;
     ListNode* before = position;
 
@@ -280,8 +280,8 @@ void ListPoolInsertBefore(void* p, void* pool, void* position) {
     node->self = node;
 }
 
-void* ListPoolRemove(void* p, void* pool) {
-    ListNode* node = p;
+void* ListPoolRemove(void* item, void* pool) {
+    ListNode* node = item;
     ListPool* list = pool;
     ListNode* next;
 

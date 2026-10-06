@@ -231,13 +231,13 @@ s16 GetPaletteEffect() {
     return sPaletteEffect;
 }
 
-void SetPaletteEffect(s16 a) {
-    sPaletteEffect = a;
+void SetPaletteEffect(s16 effect) {
+    sPaletteEffect = effect;
 }
 
-void PushPaletteEffect(s32 a) {
+void PushPaletteEffect(s32 effect) {
     sPaletteEffectSaved = sPaletteEffect;
-    sPaletteEffect = a;
+    sPaletteEffect = effect;
 }
 
 void PopPaletteEffect() {
@@ -267,8 +267,8 @@ void PalletClear() {
     }
 }
 
-void SetPaletteBankFadeEnabled(u16 bank, u8 a) {
-    sPaletteBuffer->banks[bank] = a;
+void SetPaletteBankFadeEnabled(u16 bank, u8 enabled) {
+    sPaletteBuffer->banks[bank] = enabled;
 }
 
 u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
@@ -378,32 +378,32 @@ void StartBgWave(void (*callback)()) {
     EnableHBlankIntr();
 }
 
-void SetBgWaveParams(s32 a, u8 b, u8 c) {
-    gBgWaves[a].amplitude = b;
-    gBgWaves[a].frequency = c;
+void SetBgWaveParams(s32 bg, u8 amplitude, u8 frequency) {
+    gBgWaves[bg].amplitude = amplitude;
+    gBgWaves[bg].frequency = frequency;
 }
 
-void EnableBgWave(s32 a) {
-    gBgWaves[a].enabled = 1;
+void EnableBgWave(s32 bg) {
+    gBgWaves[bg].enabled = 1;
 }
 
-void DisableBgWave(s32 a) {
-    gBgWaves[a].enabled = 0;
+void DisableBgWave(s32 bg) {
+    gBgWaves[bg].enabled = 0;
 }
 
-void HBlankIntrBgWave1(s32 a) {
+void HBlankIntrBgWave1(s32 bg) {
     vu16 line;
 
     line = REG_VCOUNT;
     line = (line + 1) % 228;
 
-    if (gBgWaves[a].enabled == 1) {
-        REG_BGHOFS(0) = SIN((line + gFrameCounter) * gBgWaves[a].frequency) * gBgWaves[a].amplitude >> 8;
+    if (gBgWaves[bg].enabled == 1) {
+        REG_BGHOFS(0) = SIN((line + gFrameCounter) * gBgWaves[bg].frequency) * gBgWaves[bg].amplitude >> 8;
     }
 }
 
-void StopBgWave(s32 a) {
-    gBgWaves[a].enabled = 0;
+void StopBgWave(s32 bg) {
+    gBgWaves[bg].enabled = 0;
     ResetHBlankCallback();
     DisableHBlankIntr();
 }

@@ -48,6 +48,6 @@ typedef char ObjAffine_size[(sizeof(ObjAffine) == 0x18) ? 1 : -1];
 void SpriteInit();
 void SpriteFree();
 void SortSpriteEntries(SpriteEntry** arr, s32 lo, s32 hi);
-u8 DrawSpriteSharedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
+u8 DrawSpriteSharedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority);
 
 #endif

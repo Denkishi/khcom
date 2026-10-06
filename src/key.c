@@ -121,35 +121,35 @@ u8 GetKeyReleaseTime(u16 key) {
     }
 }
 
-u16 ReadKeyChord(u16 a, u16 b) {
+u16 ReadKeyChord(u16 key1, u16 key2) {
     u16 r = 0;
-    u8 va = GetKeyReleaseTime(a);
-    u8 vb = GetKeyReleaseTime(b);
+    u8 va = GetKeyReleaseTime(key1);
+    u8 vb = GetKeyReleaseTime(key2);
 
     if (va == 2) {
-        sKeyChordLatch &= ~a;
+        sKeyChordLatch &= ~key1;
     }
 
     if (vb == 2) {
-        sKeyChordLatch &= ~b;
+        sKeyChordLatch &= ~key2;
     }
 
-    if (((GetKeysPressed() & a) && (GetKeysHeld() & b)) || ((GetKeysPressed() & b) && (GetKeysHeld() & a))) {
-        sKeyChordLatch |= a | b;
-        r = a | b;
+    if (((GetKeysPressed() & key1) && (GetKeysHeld() & key2)) || ((GetKeysPressed() & key2) && (GetKeysHeld() & key1))) {
+        sKeyChordLatch |= key1 | key2;
+        r = key1 | key2;
     }
 
-    if ((sKeyChordLatch & a) == 0) {
-        if (GetKeyHoldTime(a) == 5 || va == 1) {
-            sKeyChordLatch |= a;
-            r = a;
+    if ((sKeyChordLatch & key1) == 0) {
+        if (GetKeyHoldTime(key1) == 5 || va == 1) {
+            sKeyChordLatch |= key1;
+            r = key1;
         }
     }
 
-    if ((sKeyChordLatch & b) == 0) {
-        if (GetKeyHoldTime(b) == 5 || vb == 1) {
-            sKeyChordLatch |= b;
-            r = b;
+    if ((sKeyChordLatch & key2) == 0) {
+        if (GetKeyHoldTime(key2) == 5 || vb == 1) {
+            sKeyChordLatch |= key2;
+            r = key2;
         }
     }
 

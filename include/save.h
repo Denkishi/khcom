@@ -41,7 +41,7 @@ typedef struct SaveHeader {
 
 void ZeroFill(void* dst, s16 size);
 void CopyBytes(const u8* src, u8* dst, s16 len);
-u8 BytesEqual(const u8* a, const u8* b, s16 len);
+u8 BytesEqual(const u8* lhs, const u8* rhs, s16 len);
 u16 SaveChecksum(u16* data, int size);
 int SaveVerifyBlock(u8* sram, u8* hdr, u8* buf, s16 size);
 

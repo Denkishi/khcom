@@ -96,7 +96,7 @@ void ModeStart(Mode* mode, s32 arg) {
 }
 
 #ifdef VERSION_EU
-void ModeInit(u8 a) {
+void ModeInit(u8 softReset) {
 #else
 void ModeInit() {
 #endif
@@ -105,7 +105,7 @@ void ModeInit() {
     gDebugModeIndex = 0;
 
 #ifdef VERSION_EU
-    if (a) {
+    if (softReset) {
         ModeStart(&gModeCopyright1, 0);
     } else {
         ModeStart(&gModeLang, 0);
@@ -118,12 +118,12 @@ void ModeInit() {
     gModeVBlankCallback = NULL;
 }
 
-void ModeSetTransitionCallback(void (*a)(), void (*b)()) {
-    if (a != NULL) {
-        a();
+void ModeSetTransitionCallback(void (*init)(), void (*update)()) {
+    if (init != NULL) {
+        init();
     }
 
-    gModeTransitionCallback = b;
+    gModeTransitionCallback = update;
     gModeFlags |= MODE_FLAG_TRANSITION_ACTIVE;
 }
 

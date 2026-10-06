@@ -23,17 +23,17 @@ typedef struct Heap {
 
 void HeapInit(void* addr, u32 size, Heap* heap);
 void* HeapAlloc(u32 size, Heap* heap);
-void HeapFree(const void* p, Heap* heap);
-s32 HeapGetBlockSize(void* p, Heap* heap);
-void HeapUnlinkFreeBlock(HeapBlock* b);
-u8 HeapContains(const void* p, Heap* heap);
+void HeapFree(const void* ptr, Heap* heap);
+s32 HeapGetBlockSize(void* ptr, Heap* heap);
+void HeapUnlinkFreeBlock(HeapBlock* block);
+u8 HeapContains(const void* ptr, Heap* heap);
 HeapBlock* HeapFindFreeBlock(s32 size, Heap* heap);
 void EwramHeapInit(void* addr, u32 size);
 void IwramHeapInit(void* addr, u32 size);
 void* EwramAlloc(u32 size);
 void* IwramAlloc(u32 size);
-void EwramFree(const void* p);
-void IwramFree(const void* p);
+void EwramFree(const void* ptr);
+void IwramFree(const void* ptr);
 void SetEwramHeapName(const void* name);
 void SetIwramHeapName(const void* name);
 

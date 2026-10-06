@@ -14,13 +14,13 @@ static const u8 sIwramHeapName[16] = "HEAPCPU_SYSTEM";
 static Heap sEwramHeap;
 static Heap sIwramHeap;
 
-void HeapUnlinkFreeBlock(HeapBlock* b) {
-    b->prevFree->nextFree = b->nextFree;
-    b->nextFree->prevFree = b->prevFree;
+void HeapUnlinkFreeBlock(HeapBlock* block) {
+    block->prevFree->nextFree = block->nextFree;
+    block->nextFree->prevFree = block->prevFree;
 }
 
-u8 HeapContains(const void* p, Heap* heap) {
-    if (p != NULL && (u8*)p > (u8*)heap->start && (u8*)p < (u8*)heap->end) {
+u8 HeapContains(const void* ptr, Heap* heap) {
+    if (ptr != NULL && (u8*)ptr > (u8*)heap->start && (u8*)ptr < (u8*)heap->end) {
         return 1;
     }
 
@@ -151,23 +151,23 @@ void* IwramAlloc(u32 size) {
     return HeapAlloc(size, &sIwramHeap);
 }
 
-void HeapFree(const void* p, Heap* heap) {
+void HeapFree(const void* ptr, Heap* heap) {
     HeapBlock* b;
     HeapBlock* n;
     HeapBlock* head;
     s32 size;
 
-    if (p == NULL) {
+    if (ptr == NULL) {
         return;
     }
 
-    b = (HeapBlock*)p - 1;
+    b = (HeapBlock*)ptr - 1;
 
     if (b->self != b) {
         return;
     }
 
-    if (!HeapContains(p, heap)) {
+    if (!HeapContains(ptr, heap)) {
         return;
     }
 
@@ -209,19 +209,19 @@ void HeapFree(const void* p, Heap* heap) {
     b->self = NULL;
 }
 
-void EwramFree(const void* p) {
-    HeapFree(p, &sEwramHeap);
+void EwramFree(const void* ptr) {
+    HeapFree(ptr, &sEwramHeap);
 }
 
-void IwramFree(const void* p) {
-    HeapFree(p, &sIwramHeap);
+void IwramFree(const void* ptr) {
+    HeapFree(ptr, &sIwramHeap);
 }
 
-s32 HeapGetBlockSize(void* p, Heap* heap) {
+s32 HeapGetBlockSize(void* ptr, Heap* heap) {
     s32 size;
 
-    if (HeapContains(p, heap)) {
-        size = -((HeapBlock*)p - 1)->size;
+    if (HeapContains(ptr, heap)) {
+        size = -((HeapBlock*)ptr - 1)->size;
 
         if (size > 0) {
             return size;
@@ -231,12 +231,12 @@ s32 HeapGetBlockSize(void* p, Heap* heap) {
     return 0;
 }
 
-s32 EwramGetBlockSize(void* p) {
-    return HeapGetBlockSize(p, &sEwramHeap);
+s32 EwramGetBlockSize(void* ptr) {
+    return HeapGetBlockSize(ptr, &sEwramHeap);
 }
 
-s32 IwramGetBlockSize(void* p) {
-    return HeapGetBlockSize(p, &sIwramHeap);
+s32 IwramGetBlockSize(void* ptr) {
+    return HeapGetBlockSize(ptr, &sIwramHeap);
 }
 
 s32 HeapGetFreeTotal(Heap* heap) {

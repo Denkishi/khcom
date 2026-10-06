@@ -37,11 +37,11 @@ void CopyBytes(const u8* src, u8* dst, s16 len) {
     }
 }
 
-u8 BytesEqual(const u8* a, const u8* b, s16 len) {
+u8 BytesEqual(const u8* lhs, const u8* rhs, s16 len) {
     s16 i;
 
     for (i = 0; i < len; i++) {
-        if (a[i] != b[i]) {
+        if (lhs[i] != rhs[i]) {
             return 0;
         }
     }

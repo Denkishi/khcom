@@ -20,10 +20,10 @@ void SetBgPriority(s32 bg, u16 priority);
 u8 RequestDma3Copy(const void* src, void* dst, u16 size);
 void LoadPalette(const void* src, void* dst, u16 size);
 void LoadObjPaletteBank(u16 bank, void* src);
-void SetBlendAlpha(u16 a, u16 b);
+void SetBlendAlpha(u16 target2, u16 target1);
 
 void SetBackdropColor(u32 r, u32 g, u32 b);
-void SetBgBlend(s32 bg, u16 a, u16 b);
+void SetBgBlend(s32 bg, u16 target2, u16 target1);
 void SetBgSize(s32 bg, u16 size);
 void SetBgAffine(s32 bg, u8 rot, s32 sx, s32 sy, s32 dx, s32 dy);
 void SetBgMapBlocks(s32 bg, const void* src, u8 w, u8 h);
@@ -41,25 +41,25 @@ void LoadBgMapLz77(s32 bg, void* src);
 struct BgAnimationDef;
 
 void MosaicReset();
-void BgAnimSetTransform(u8 a, s32 b, s32 c);
-void BgAnimSetLoopStartFrame(u16 a);
-void BgAnimSetStopFrame(u16 a);
+void BgAnimSetTransform(u8 rotation, s32 scaleX, s32 scaleY);
+void BgAnimSetLoopStartFrame(u16 frame);
+void BgAnimSetStopFrame(u16 frame);
 void BgAnimStop();
 void MosaicStartIn(u16 frames, u16 size);
 void MosaicStartOut(u16 frames, u16 size);
 u8 MosaicIsActive();
 u8 BgAnimIsStopped();
-void BgAnimGetFrameState(u16* a, u16* b);
-u32 BgAnimGetDuration(struct BgAnimationDef* p);
+void BgAnimGetFrameState(u16* frame, u16* timer);
+u32 BgAnimGetDuration(struct BgAnimationDef* def);
 struct BgAnimationDef* BgAnimGetCurrent();
 void VTransReset();
 void BgReset();
-u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 w, u8 h, s8 sw, s8 sh);
+u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 dstX, u8 dstY, s8 sw, s8 sh);
 void BgAnimSetPosition(s16 x, s16 y);
 void BgAnimUpdate();
-void BgAnimInit(s32 bg, u16 b, u16 c);
-void BgAnimStart(struct BgAnimationDef* a, s32 x, s32 y);
-u8 RequestDma3Clear(void* a, u16 b);
+void BgAnimInit(s32 bg, u16 size, u16 colorMode);
+void BgAnimStart(struct BgAnimationDef* def, s32 x, s32 y);
+u8 RequestDma3Clear(void* dst, u16 size);
 
 #ifdef VERSION_EU
 u8 SetBgMapBlocksLz77(s32 bg, const void* src, u8 w, u8 h);
@@ -112,7 +112,7 @@ extern struct FadeWork* gFadeWork;
 
 void CommitDisplayRegs();
 void FlushDma3Queue();
-u8 QueueVTransCallback(void (*a)());
+u8 QueueVTransCallback(void (*callback)());
 void FlushDma3QueueWithCpu();
 void MosaicUpdate();
 void SortSprites();

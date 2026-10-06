@@ -28,17 +28,17 @@ static s16 sBgAnimLoopStartFrame;
 static s16 sBgAnimStopFrame;
 static u16 sBgAnimFrameDuration;
 
-void BgAnimInit(s32 bg, u16 b, u16 c) {
+void BgAnimInit(s32 bg, u16 size, u16 colorMode) {
     sBgAnimBg = bg;
     sBgAnimCurrent = NULL;
     sBgAnimScrollX = 0;
     sBgAnimScrollY = 0;
     sBgAnimStopped = 1;
 
-    if (c == 0) {
+    if (colorMode == 0) {
         sBgAnimAffine = 0;
 
-        switch (b) {
+        switch (size) {
         case 0x4000:
         case 0x8000:
             sBgAnimMapSize = 0x1000;
@@ -54,7 +54,7 @@ void BgAnimInit(s32 bg, u16 b, u16 c) {
     } else {
         sBgAnimAffine = 1;
 
-        switch (b) {
+        switch (size) {
         case 0x4000:
             sBgAnimMapSize = 0x400;
             break;
@@ -71,7 +71,7 @@ void BgAnimInit(s32 bg, u16 b, u16 c) {
         }
     }
 
-    SetBgSize(bg, b);
+    SetBgSize(bg, size);
     DisableBg(bg);
 }
 
@@ -85,20 +85,20 @@ void BgAnimSetPosition(s16 x, s16 y) {
     }
 }
 
-void BgAnimSetTransform(u8 a, s32 b, s32 c) {
-    sBgAnimRotation = a;
-    sBgAnimScaleX = b;
-    sBgAnimScaleY = c;
+void BgAnimSetTransform(u8 rotation, s32 scaleX, s32 scaleY) {
+    sBgAnimRotation = rotation;
+    sBgAnimScaleX = scaleX;
+    sBgAnimScaleY = scaleY;
 }
 
-void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
-    sBgAnimCurrent = a;
+void BgAnimStart(BgAnimationDef* def, s32 x, s32 y) {
+    sBgAnimCurrent = def;
     BgAnimSetPosition(x, y);
 
     if (sBgAnimAffine) {
-        sBgAnimFrameBytes = a->tilesPerFrame << 6;
+        sBgAnimFrameBytes = def->tilesPerFrame << 6;
     } else {
-        sBgAnimFrameBytes = a->tilesPerFrame << 5;
+        sBgAnimFrameBytes = def->tilesPerFrame << 5;
     }
 
     sBgAnimFramesPerChunk = 0x8000 / sBgAnimFrameBytes;
@@ -107,7 +107,7 @@ void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
     sBgAnimFrameTimer = 0;
     sBgAnimFrame = 0;
     sBgAnimStopped = 0;
-    sBgAnimFrameDuration = a->frameDuration;
+    sBgAnimFrameDuration = def->frameDuration;
 
     if (sBgAnimAffine) {
         sBgAnimScaleX = 0x100;
@@ -116,9 +116,9 @@ void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
     }
 
     PushPaletteEffect(0);
-    LoadBgPalette(sBgAnimBg, a->palette, a->paletteSize);
+    LoadBgPalette(sBgAnimBg, def->palette, def->paletteSize);
     PopPaletteEffect();
-    LoadBgMap(sBgAnimBg, a->tilemap, sBgAnimMapSize);
+    LoadBgMap(sBgAnimBg, def->tilemap, sBgAnimMapSize);
 }
 
 void BgAnimApplyAffineTransform(s32 bg, u8 rot, s32 sx, s32 sy, s16 cx, s16 cy) {
@@ -222,16 +222,16 @@ void BgAnimUpdate() {
     }
 }
 
-void BgAnimSetFrameDuration(u16 a) {
-    sBgAnimFrameDuration = a;
+void BgAnimSetFrameDuration(u16 duration) {
+    sBgAnimFrameDuration = duration;
 }
 
-void BgAnimSetLoopStartFrame(u16 a) {
-    sBgAnimLoopStartFrame = a;
+void BgAnimSetLoopStartFrame(u16 frame) {
+    sBgAnimLoopStartFrame = frame;
 }
 
-void BgAnimSetStopFrame(u16 a) {
-    sBgAnimStopFrame = a;
+void BgAnimSetStopFrame(u16 frame) {
+    sBgAnimStopFrame = frame;
 }
 
 void BgAnimStop() {
@@ -244,18 +244,18 @@ u8 BgAnimIsStopped() {
     return sBgAnimStopped;
 }
 
-void BgAnimGetFrameState(u16* a, u16* b) {
-    if (a != NULL) {
-        *a = sBgAnimFrame;
+void BgAnimGetFrameState(u16* frame, u16* timer) {
+    if (frame != NULL) {
+        *frame = sBgAnimFrame;
     }
 
-    if (b != NULL) {
-        *b = sBgAnimFrameTimer;
+    if (timer != NULL) {
+        *timer = sBgAnimFrameTimer;
     }
 }
 
-u32 BgAnimGetDuration(BgAnimationDef* p) {
-    return (u32)p->frameCount * p->frameDuration;
+u32 BgAnimGetDuration(BgAnimationDef* def) {
+    return (u32)def->frameCount * def->frameDuration;
 }
 
 BgAnimationDef* BgAnimGetCurrent() {

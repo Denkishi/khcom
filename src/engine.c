@@ -109,7 +109,7 @@ static u32 sMosaicTarget;
 static u16 sMosaicTimer;
 static u8 sMosaicActive;
 
-u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
+u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority) {
     SpriteWork* p;
     SpriteWork* w;
     u16 n;
@@ -117,7 +117,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
     u16 cnt;
     u16 base;
 
-    if (e == NULL || c == NULL) {
+    if (palette == NULL || sprite == NULL) {
         return 0;
     }
 
@@ -125,26 +125,26 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
     p->entries[p->entryCount].x = x;
     p->entries[p->entryCount].y = y;
     p->entries[p->entryCount].tiles = obj;
-    p->entries[p->entryCount].palette = e;
-    p->entries[p->entryCount].affine = f;
-    p->entries[p->entryCount].flags = g;
-    p->entries[p->entryCount].priority = h;
-    p->entries[p->entryCount].sprite = c;
+    p->entries[p->entryCount].palette = palette;
+    p->entries[p->entryCount].affine = affine;
+    p->entries[p->entryCount].flags = flags;
+    p->entries[p->entryCount].priority = priority;
+    p->entries[p->entryCount].sprite = sprite;
 
-    if (((ObjTiles*)obj)->sprite != c) {
-        ((ObjTiles*)obj)->sprite = c;
-        n = *(u16*)c;
-        c = (u16*)c + 1;
+    if (((ObjTiles*)obj)->sprite != sprite) {
+        ((ObjTiles*)obj)->sprite = sprite;
+        n = *(u16*)sprite;
+        sprite = (u16*)sprite + 1;
         base = 0;
 
         if (n != 0) {
             i = n;
 
             do {
-                cnt = GetObjTileCount(((ObjTileListEntry*)c)->attr0, ((ObjTileListEntry*)c)->attr1);
-                RequestDma3Copy(((ObjTiles*)obj)->src + ((((ObjTileListEntry*)c)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + OBJ_VRAM0), cnt << 5);
+                cnt = GetObjTileCount(((ObjTileListEntry*)sprite)->attr0, ((ObjTileListEntry*)sprite)->attr1);
+                RequestDma3Copy(((ObjTiles*)obj)->src + ((((ObjTileListEntry*)sprite)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + OBJ_VRAM0), cnt << 5);
                 base += cnt;
-                c = (u16*)c + 3;
+                sprite = (u16*)sprite + 3;
             } while (--i);
         }
     }
@@ -155,10 +155,10 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
     return 1;
 }
 
-u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
+u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority) {
     SpriteWork* p;
 
-    if (e == NULL || ((ObjTiles*)obj)->src == NULL) {
+    if (palette == NULL || ((ObjTiles*)obj)->src == NULL) {
         return 0;
     }
 
@@ -167,10 +167,10 @@ u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u
         p->entries[p->entryCount].x = x;
         p->entries[p->entryCount].y = y;
         p->entries[p->entryCount].tiles = obj;
-        p->entries[p->entryCount].palette = e;
-        p->entries[p->entryCount].affine = f;
-        p->entries[p->entryCount].flags = g;
-        p->entries[p->entryCount].priority = h;
+        p->entries[p->entryCount].palette = palette;
+        p->entries[p->entryCount].affine = affine;
+        p->entries[p->entryCount].flags = flags;
+        p->entries[p->entryCount].priority = priority;
         p->entries[p->entryCount].sprite = ((ObjTiles*)obj)->sprite;
         p->sortPtrs[p->entryCount] = &p->entries[p->entryCount];
         p->entryCount += 1;
@@ -179,22 +179,22 @@ u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u
     return 1;
 }
 
-u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
+u8 DrawSprite(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority) {
     if (gSpriteWork->entryCount <= 127 && obj != NULL) {
         switch (((ObjTiles*)obj)->type) {
         case 0:
-            return DrawSpriteSharedTiles(x, y, c, obj, e, f, g, h);
+            return DrawSpriteSharedTiles(x, y, sprite, obj, palette, affine, flags, priority);
         case 1:
-            return DrawSpriteAllocatedTiles(x, y, c, obj, e, f, g, h);
+            return DrawSpriteAllocatedTiles(x, y, sprite, obj, palette, affine, flags, priority);
         case 2:
-            return DrawSpriteFrameTiles(x, y, obj, e, f, g, h);
+            return DrawSpriteFrameTiles(x, y, obj, palette, affine, flags, priority);
         }
     }
 
     return 0;
 }
 
-void DrawSpriteUnsorted(s16 a, s16 b, void* c, void* d, void* e, u16 f) {
+void DrawSpriteUnsorted(s16 x, s16 y, void* sprite, void* tiles, void* palette, u16 flags) {
     SpriteWork* p;
     u32 z;
 
@@ -204,21 +204,21 @@ void DrawSpriteUnsorted(s16 a, s16 b, void* c, void* d, void* e, u16 f) {
         return;
     }
 
-    p->entries[p->entryCount].x = a;
+    p->entries[p->entryCount].x = x;
     z = 0;
-    p->entries[p->entryCount].y = b;
-    p->entries[p->entryCount].tiles = d;
-    p->entries[p->entryCount].palette = e;
+    p->entries[p->entryCount].y = y;
+    p->entries[p->entryCount].tiles = tiles;
+    p->entries[p->entryCount].palette = palette;
     p->entries[p->entryCount].affine = NULL;
-    p->entries[p->entryCount].flags = f;
+    p->entries[p->entryCount].flags = flags;
     p->entries[p->entryCount].priority = z;
-    p->entries[p->entryCount].sprite = c;
+    p->entries[p->entryCount].sprite = sprite;
     p->sortPtrs[p->entryCount] = &p->entries[p->entryCount];
     p->entryCount += 1;
     p->sortLo += 1;
 }
 
-void DrawSpriteUnsortedAffine(u16 a, u16 b, void* c, void* d, void* e, ObjAffine* f, u16 g) {
+void DrawSpriteUnsortedAffine(u16 x, u16 y, void* sprite, void* tiles, void* palette, ObjAffine* affine, u16 flags) {
     SpriteWork* p;
     u32 z;
 
@@ -228,15 +228,15 @@ void DrawSpriteUnsortedAffine(u16 a, u16 b, void* c, void* d, void* e, ObjAffine
         return;
     }
 
-    p->entries[p->entryCount].x = a;
+    p->entries[p->entryCount].x = x;
     z = 0;
-    p->entries[p->entryCount].y = b;
-    p->entries[p->entryCount].tiles = d;
-    p->entries[p->entryCount].palette = e;
-    p->entries[p->entryCount].affine = f;
-    p->entries[p->entryCount].flags = g;
+    p->entries[p->entryCount].y = y;
+    p->entries[p->entryCount].tiles = tiles;
+    p->entries[p->entryCount].palette = palette;
+    p->entries[p->entryCount].affine = affine;
+    p->entries[p->entryCount].flags = flags;
     p->entries[p->entryCount].priority = z;
-    p->entries[p->entryCount].sprite = c;
+    p->entries[p->entryCount].sprite = sprite;
     p->sortPtrs[p->entryCount] = &p->entries[p->entryCount];
     p->entryCount += 1;
     p->sortLo += 1;
@@ -329,27 +329,27 @@ ObjTiles* LoadObjTiles(const void* src, u16 size) {
     return NULL;
 }
 
-void ReleaseSharedObjTiles(ObjTiles* p) {
-    if ((s16)p->refCount > 0) {
-        p->refCount -= 1;
+void ReleaseSharedObjTiles(ObjTiles* tiles) {
+    if ((s16)tiles->refCount > 0) {
+        tiles->refCount -= 1;
     } else {
-        p->self = NULL;
-        ListPoolRelease(&p->node, &gSpriteWork->tilePool);
+        tiles->self = NULL;
+        ListPoolRelease(&tiles->node, &gSpriteWork->tilePool);
     }
 }
 
-void ReleaseAllocatedObjTiles(ObjTiles* p) {
-    p->self = NULL;
-    ListPoolRelease(&p->node, &gSpriteWork->tilePool);
+void ReleaseAllocatedObjTiles(ObjTiles* tiles) {
+    tiles->self = NULL;
+    ListPoolRelease(&tiles->node, &gSpriteWork->tilePool);
 }
 
-void ReleaseSpriteFrameTiles(ObjTiles* p) {
-    p->self = NULL;
-    ListPoolRelease(&p->node, &gSpriteWork->tilePool);
+void ReleaseSpriteFrameTiles(ObjTiles* tiles) {
+    tiles->self = NULL;
+    ListPoolRelease(&tiles->node, &gSpriteWork->tilePool);
 }
 
-void ReleaseObjTiles(void* a) {
-    ObjTiles* p = a;
+void ReleaseObjTiles(void* tiles) {
+    ObjTiles* p = tiles;
     ObjTiles* q;
 
     if (p == NULL) {
@@ -444,8 +444,8 @@ ObjTiles* AllocObjTiles(u16 size, const void* owner) {
     return NULL;
 }
 
-void SetObjTileSource(ObjTiles* a, const void* b) {
-    a->src = b;
+void SetObjTileSource(ObjTiles* tiles, const void* src) {
+    tiles->src = src;
 }
 
 ObjPalette* LoadObjPalette(const void* src, u16 size) {
@@ -533,40 +533,40 @@ void LoadObjPaletteBank(u16 bank, void* src) {
     LoadPalette(src, (void*)(OBJ_PLTT + bank * PLTT_SIZE_4BPP), 32);
 }
 
-void ReleaseObjPaletteRef(ObjPalette* p) {
-    if ((s16)p->refCount > 0) {
-        p->refCount -= 1;
+void ReleaseObjPaletteRef(ObjPalette* palette) {
+    if ((s16)palette->refCount > 0) {
+        palette->refCount -= 1;
     } else {
-        p->self = NULL;
-        FadeClearPaletteSlot(p->index + 0x10);
-        ListPoolRelease(&p->node, &gSpriteWork->palettePool);
+        palette->self = NULL;
+        FadeClearPaletteSlot(palette->index + 0x10);
+        ListPoolRelease(&palette->node, &gSpriteWork->palettePool);
     }
 }
 
-void ReleaseObjPalette(ObjPalette* p) {
-    if (p != NULL && p->self == p) {
-        ReleaseObjPaletteRef(p);
+void ReleaseObjPalette(ObjPalette* palette) {
+    if (palette != NULL && palette->self == palette) {
+        ReleaseObjPaletteRef(palette);
     }
 }
 
-ObjAffine* AllocObjAffineAngle(u8 a, u8 b) {
+ObjAffine* AllocObjAffineAngle(u8 angle, u8 doubleSize) {
     ObjAffine* e;
     s32 sin;
     s32 cos;
 
-    if (gSpriteWork->affineCount <= 0x1F && a != 0) {
-        sin = gSineTable[a];
-        cos = gSineTable[a + 0x40];
+    if (gSpriteWork->affineCount <= 0x1F && angle != 0) {
+        sin = gSineTable[angle];
+        cos = gSineTable[angle + 0x40];
         e = &gSpriteWork->affine[gSpriteWork->affineCount];
         e->pa = cos;
         e->pb = sin;
         e->pc = -sin;
         e->pd = cos;
         e->index = gSpriteWork->affineCount;
-        e->doubleSize = b;
+        e->doubleSize = doubleSize;
         e->sx = 0x100;
         e->sy = 0x100;
-        e->angle = a;
+        e->angle = angle;
         gSpriteWork->affineCount += 1;
         return e;
     }
@@ -574,59 +574,59 @@ ObjAffine* AllocObjAffineAngle(u8 a, u8 b) {
     return NULL;
 }
 
-ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
+ObjAffine* AllocObjAffine(u8 angle, s32 sx, s32 sy, u8 doubleSize) {
     ObjAffine* e;
     s32 sin;
     s32 cos;
 
-    if (gSpriteWork->affineCount > 0x1F || (a == 0 && sx == 0x100 && sy == sx)) {
+    if (gSpriteWork->affineCount > 0x1F || (angle == 0 && sx == 0x100 && sy == sx)) {
         return NULL;
     }
 
-    sin = gSineTable[a];
-    cos = gSineTable[a + 0x40];
+    sin = gSineTable[angle];
+    cos = gSineTable[angle + 0x40];
     e = &gSpriteWork->affine[gSpriteWork->affineCount];
     e->pa = (cos << 8) / sx;
     e->pb = (sin << 8) / sy;
     e->pc = (-sin << 8) / sx;
     e->pd = (cos << 8) / sy;
     e->index = gSpriteWork->affineCount;
-    e->doubleSize = f;
+    e->doubleSize = doubleSize;
     e->sx = sx;
     e->sy = sy;
-    e->angle = a;
+    e->angle = angle;
     gSpriteWork->affineCount += 1;
 
     return e;
 }
 
-ObjAffine* AllocObjAffineScaleFirst(u8 a, s32 sx, s32 sy, u8 f) {
+ObjAffine* AllocObjAffineScaleFirst(u8 angle, s32 sx, s32 sy, u8 doubleSize) {
     ObjAffine* e;
     s32 sin;
     s32 cos;
 
-    if (gSpriteWork->affineCount > 0x1F || (a == 0 && sx == 0x100 && sy == sx)) {
+    if (gSpriteWork->affineCount > 0x1F || (angle == 0 && sx == 0x100 && sy == sx)) {
         return NULL;
     }
 
-    sin = gSineTable[a];
-    cos = gSineTable[a + 0x40];
+    sin = gSineTable[angle];
+    cos = gSineTable[angle + 0x40];
     e = &gSpriteWork->affine[gSpriteWork->affineCount];
     e->pa = (cos << 8) / sx;
     e->pb = (sin << 8) / sx;
     e->pc = (-sin << 8) / sy;
     e->pd = (cos << 8) / sy;
     e->index = gSpriteWork->affineCount;
-    e->doubleSize = f;
+    e->doubleSize = doubleSize;
     e->sx = sx;
     e->sy = sy;
-    e->angle = a;
+    e->angle = angle;
     gSpriteWork->affineCount += 1;
 
     return e;
 }
 
-ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
+ObjAffine* AllocObjAffineMatrix(u16 pa, u16 pb, u16 pc, u16 pd, u8 doubleSize) {
     ObjAffine* e;
     u32 z;
 
@@ -636,12 +636,12 @@ ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
 
     e = &gSpriteWork->affine[gSpriteWork->affineCount];
     z = 0;
-    e->pa = a;
-    e->pb = b;
-    e->pc = c;
-    e->pd = d;
+    e->pa = pa;
+    e->pb = pb;
+    e->pc = pc;
+    e->pd = pd;
     e->index = gSpriteWork->affineCount;
-    e->doubleSize = f;
+    e->doubleSize = doubleSize;
     e->sx = 0x100;
     e->sy = 0x100;
     e->angle = z;
@@ -664,8 +664,8 @@ void SortSprites() {
         *(w) = (size); \
         *(h) = (size); \
     } while (0)
-static inline void EngineObjSize(u16 a, u16 b, u16* w, u16* h) {
-    switch ((((u32)b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
+static inline void EngineObjSize(u16 attr0, u16 attr1, u16* w, u16* h) {
+    switch ((((u32)attr1 << 16) | attr0) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
         ENGINE_SET_SQUARE_SIZE(w, h, 8);
         break;
@@ -897,21 +897,21 @@ void UpdateSpriteOam() {
     gSpriteWork->entryCount = 0;
 }
 
-void SetSpriteMosaicEnabled(u8 a) {
-    gSpriteWork->mosaicEnabled = a;
+void SetSpriteMosaicEnabled(u8 enabled) {
+    gSpriteWork->mosaicEnabled = enabled;
 }
 
-void SetObjMosaicSize(u8 a, u8 b) {
-    a &= 0xF;
-    b &= 0xF;
-    gMosaic = (gMosaic & 0xFF) | (a << 8) | (b << 12);
+void SetObjMosaicSize(u8 x, u8 y) {
+    x &= 0xF;
+    y &= 0xF;
+    gMosaic = (gMosaic & 0xFF) | (x << 8) | (y << 12);
 }
 
-void SetSpriteOamUpdatesPaused(u8 a) {
-    gSpriteWork->oamUpdatesPaused = a;
+void SetSpriteOamUpdatesPaused(u8 paused) {
+    gSpriteWork->oamUpdatesPaused = paused;
 }
 
-u16 GetMaxSpriteTileBytes(void** a, u16 n) {
+u16 GetMaxSpriteTileBytes(void** sprites, u16 n) {
     u16* p;
     u16 count;
     u16 sum;
@@ -922,7 +922,7 @@ u16 GetMaxSpriteTileBytes(void** a, u16 n) {
     max = 0;
 
     for (i = 0; i < n; i++) {
-        p = a[i];
+        p = sprites[i];
         count = p[0];
         p++;
         sum = 0;
@@ -940,24 +940,24 @@ u16 GetMaxSpriteTileBytes(void** a, u16 n) {
     return max * 32;
 }
 
-u16 GetSpriteTileBytes(u16* p) {
-    u16 count = *p++;
+u16 GetSpriteTileBytes(u16* sprite) {
+    u16 count = *sprite++;
     u16 total = 0;
     u16 i;
 
     for (i = 0; i < count; i++) {
-        total += GetObjTileCount(p[0], p[1]);
-        p += 3;
+        total += GetObjTileCount(sprite[0], sprite[1]);
+        sprite += 3;
     }
 
     return total << 5;
 }
 
-u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d) {
-    u16 top = a;
-    u16 bottom = b;
-    u16 left = c;
-    s16 right = d;
+u8 IsRectOutsideScreen(s16 x, s16 y, s32 topExtent, s32 bottomExtent, s32 leftExtent, s32 rightExtent) {
+    u16 top = topExtent;
+    u16 bottom = bottomExtent;
+    u16 left = leftExtent;
+    s16 right = rightExtent;
 
     if (x + right < 0) {
         return 1;
@@ -1121,8 +1121,8 @@ void InitObjPaletteAtSlot(ObjPalette* t, u16 slot, void* src, u16 size) {
     }
 }
 
-ObjTiles* AllocSpriteFrameTiles(u16 a) {
-    ObjTiles* t = AllocObjTiles(a, NULL);
+ObjTiles* AllocSpriteFrameTiles(u16 size) {
+    ObjTiles* t = AllocObjTiles(size, NULL);
 
     if (t != NULL) {
         t->type = 2;
@@ -1131,29 +1131,29 @@ ObjTiles* AllocSpriteFrameTiles(u16 a) {
     return t;
 }
 
-u8 UpdateSpriteFrameTiles(ObjTiles* a, u16* b, void* c) {
+u8 UpdateSpriteFrameTiles(ObjTiles* tiles, u16* sprite, void* src) {
     u16 count;
     s32 j;
     u16 acc;
     u16 n;
 
-    if (b != NULL && c != NULL && a->type == 2) {
-        if (a->sprite != b || a->src != c) {
-            a->src = c;
-            a->sprite = b;
-            count = *b;
-            b++;
+    if (sprite != NULL && src != NULL && tiles->type == 2) {
+        if (tiles->sprite != sprite || tiles->src != src) {
+            tiles->src = src;
+            tiles->sprite = sprite;
+            count = *sprite;
+            sprite++;
             acc = 0;
 
             if (count != 0) {
                 j = count;
 
                 do {
-                    n = GetObjTileCount(b[0], b[1]);
-                    RequestDma3Copy(a->src + ((b[2] & 0x3FF) << 5),
-                                    (void*)(((a->index + acc) << 5) + OBJ_VRAM0), n * 32);
+                    n = GetObjTileCount(sprite[0], sprite[1]);
+                    RequestDma3Copy(tiles->src + ((sprite[2] & 0x3FF) << 5),
+                                    (void*)(((tiles->index + acc) << 5) + OBJ_VRAM0), n * 32);
                     acc = acc + n;
-                    b += 3;
+                    sprite += 3;
                     j--;
                 } while (j != 0);
             }
@@ -1326,8 +1326,8 @@ u8 CanAllocObjPalette(u16 n) {
     return 0;
 }
 
-void GetObjSize(u16 a, u16 b, u16* w, u16* h) {
-    switch (((b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
+void GetObjSize(u16 attr0, u16 attr1, u16* w, u16* h) {
+    switch (((attr1 << 16) | attr0) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
         *w = 8;
         *h = 8;
@@ -1383,20 +1383,20 @@ void GetObjSize(u16 a, u16 b, u16* w, u16* h) {
     }
 }
 
-s32 Sqrt8(s32 a) {
+s32 Sqrt8(s32 value) {
     s32 x;
     s32 prev;
 
-    if (a > 0) {
+    if (value > 0) {
         x = 0x100;
 
-        if (a > 0x100) {
-            x = a;
+        if (value > 0x100) {
+            x = value;
         }
 
         do {
             prev = x;
-            x = ((a << 8) / prev + prev) / 2;
+            x = ((value << 8) / prev + prev) / 2;
         } while (x < prev);
 
         return prev;
@@ -1405,41 +1405,41 @@ s32 Sqrt8(s32 a) {
     return 0;
 }
 
-void SplineBuildAxisCoefficients(Spline2D* p, s32* d, s32* xs, s32* e) {
+void SplineBuildAxisCoefficients(Spline2D* spline, s32* knots, s32* xs, s32* coefficients) {
     s32* a;
     s32* b;
     s32 n;
     s32 i;
     s32 q;
 
-    n = p->pointCount;
-    a = p->intervals;
-    b = p->scratch;
-    e[0] = 0;
-    e[n - 1] = 0;
+    n = spline->pointCount;
+    a = spline->intervals;
+    b = spline->scratch;
+    coefficients[0] = 0;
+    coefficients[n - 1] = 0;
 
     for (i = 0; i < n - 1; i++) {
-        a[i] = d[i + 1] - d[i];
+        a[i] = knots[i + 1] - knots[i];
         b[i + 1] = ((xs[i + 1] - xs[i]) << 8) / a[i];
     }
 
-    e[1] = (b[2] - b[1]) - ((a[0] * e[0]) >> 8);
-    b[1] = (d[2] - d[0]) << 1;
+    coefficients[1] = (b[2] - b[1]) - ((a[0] * coefficients[0]) >> 8);
+    b[1] = (knots[2] - knots[0]) << 1;
 
     for (i = 1; i < n - 2; i++) {
         q = (a[i] << 8) / b[i];
-        e[i + 1] = (b[i + 2] - b[i + 1]) - ((e[i] * q) >> 8);
-        b[i + 1] = ((d[i + 2] - d[i]) << 1) - ((q * a[i]) >> 8);
+        coefficients[i + 1] = (b[i + 2] - b[i + 1]) - ((coefficients[i] * q) >> 8);
+        b[i + 1] = ((knots[i + 2] - knots[i]) << 1) - ((q * a[i]) >> 8);
     }
 
-    e[n - 2] -= (a[n - 2] * e[n - 1]) >> 8;
+    coefficients[n - 2] -= (a[n - 2] * coefficients[n - 1]) >> 8;
 
     for (i = n - 2; i > 0; i--) {
-        e[i] = ((e[i] - ((a[i] * e[i + 1]) >> 8)) << 8) / b[i];
+        coefficients[i] = ((coefficients[i] - ((a[i] * coefficients[i + 1]) >> 8)) << 8) / b[i];
     }
 }
 
-s32 SplineEvaluateAxis(s16* n, s32 v, s32* a, s32* c, s32* b) {
+s32 SplineEvaluateAxis(s16* n, s32 v, s32* knots, s32* values, s32* coefficients) {
     s32 lo;
     s32 hi;
     s32 mid;
@@ -1457,7 +1457,7 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* a, s32* c, s32* b) {
     while (lo < hi) {
         mid = (lo + hi) / 2;
 
-        if (a[mid] < v) {
+        if (knots[mid] < v) {
             lo = mid + 1;
         } else {
             hi = mid;
@@ -1468,17 +1468,17 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* a, s32* c, s32* b) {
         lo--;
     }
 
-    dx = a[lo + 1] - a[lo];
-    t = v - a[lo];
-    y1 = b[lo + 1];
-    y0 = b[lo];
+    dx = knots[lo + 1] - knots[lo];
+    t = v - knots[lo];
+    y1 = coefficients[lo + 1];
+    y0 = coefficients[lo];
     r = (((t * (y1 - y0)) >> 8) << 8) / dx;
     r = (t * (r + y0 * 3)) >> 8;
-    r += ((c[lo + 1] - c[lo]) << 8) / dx - ((dx * (y0 * 2 + y1)) >> 8);
-    return ((t * r) >> 8) + c[lo];
+    r += ((values[lo + 1] - values[lo]) << 8) / dx - ((dx * (y0 * 2 + y1)) >> 8);
+    return ((t * r) >> 8) + values[lo];
 }
 
-void SplineInit2D(Spline2D* p, s32* xs, s32* ys, s16 n) {
+void SplineInit2D(Spline2D* spline, s32* xs, s32* ys, s16 n) {
     s32 i;
     s32 len;
     s32* d;
@@ -1490,17 +1490,17 @@ void SplineInit2D(Spline2D* p, s32* xs, s32* ys, s16 n) {
 
     size = n * 4;
     len = 0;
-    p->pointCount = n;
-    p->intervals = EwramAlloc(size);
-    p->scratch = EwramAlloc(size);
-    p->knots = EwramAlloc(size);
-    p->xCoefficients = EwramAlloc(size);
-    p->yCoefficients = EwramAlloc(size);
-    p->xValues = xs;
-    p->yValues = ys;
-    d = p->knots;
-    e = p->xCoefficients;
-    f = p->yCoefficients;
+    spline->pointCount = n;
+    spline->intervals = EwramAlloc(size);
+    spline->scratch = EwramAlloc(size);
+    spline->knots = EwramAlloc(size);
+    spline->xCoefficients = EwramAlloc(size);
+    spline->yCoefficients = EwramAlloc(size);
+    spline->xValues = xs;
+    spline->yValues = ys;
+    d = spline->knots;
+    e = spline->xCoefficients;
+    f = spline->yCoefficients;
     d[0] = len;
 
     for (i = 1; i < n; i++) {
@@ -1513,21 +1513,21 @@ void SplineInit2D(Spline2D* p, s32* xs, s32* ys, s16 n) {
         d[i] = (d[i] << 8) / d[n - 1];
     }
 
-    SplineBuildAxisCoefficients(p, d, xs, e);
-    SplineBuildAxisCoefficients(p, d, ys, f);
+    SplineBuildAxisCoefficients(spline, d, xs, e);
+    SplineBuildAxisCoefficients(spline, d, ys, f);
 }
 
-void SplineEvaluate2D(Spline2D* p, s32 v, s32* outX, s32* outY) {
-    *outX = SplineEvaluateAxis(&p->pointCount, v, p->knots, p->xValues, p->xCoefficients);
-    *outY = SplineEvaluateAxis(&p->pointCount, v, p->knots, p->yValues, p->yCoefficients);
+void SplineEvaluate2D(Spline2D* spline, s32 v, s32* outX, s32* outY) {
+    *outX = SplineEvaluateAxis(&spline->pointCount, v, spline->knots, spline->xValues, spline->xCoefficients);
+    *outY = SplineEvaluateAxis(&spline->pointCount, v, spline->knots, spline->yValues, spline->yCoefficients);
 }
 
-void SplineFreeBuffers(Spline2D* p) {
-    EwramFree(p->intervals);
-    EwramFree(p->scratch);
-    EwramFree(p->knots);
-    EwramFree(p->xCoefficients);
-    EwramFree(p->yCoefficients);
+void SplineFreeBuffers(Spline2D* spline) {
+    EwramFree(spline->intervals);
+    EwramFree(spline->scratch);
+    EwramFree(spline->knots);
+    EwramFree(spline->xCoefficients);
+    EwramFree(spline->yCoefficients);
 }
 
 void InitDisplayRegs() {
@@ -1680,21 +1680,21 @@ u8 RequestLz77UnCompVram(void* src, void* dst) {
 }
 #endif
 
-u8 RequestDma3Clear(void* a, u16 b) {
+u8 RequestDma3Clear(void* dst, u16 size) {
     Dma3Queue* q = gDma3Requests;
 
     if (q->count > 3) {
         return 0;
     }
 
-    q->pending[q->count].dst = a;
-    q->pending[q->count].size = b;
+    q->pending[q->count].dst = dst;
+    q->pending[q->count].size = size;
     q->count = q->count + 1;
 
     return 1;
 }
 
-u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 w, u8 h, s8 sw, s8 sh) {
+u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 dstX, u8 dstY, s8 sw, s8 sh) {
     if (gDma3Requests->blitCount > 63) {
         return 0;
     }
@@ -1707,37 +1707,37 @@ u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 w, u8 h, s8 sw, s
     gDma3Requests->blits[gDma3Requests->blitCount].dst = dst;
     gDma3Requests->blits[gDma3Requests->blitCount].srcX = x;
     gDma3Requests->blits[gDma3Requests->blitCount].srcY = y;
-    gDma3Requests->blits[gDma3Requests->blitCount].dstX = w;
-    gDma3Requests->blits[gDma3Requests->blitCount].dstY = h;
+    gDma3Requests->blits[gDma3Requests->blitCount].dstX = dstX;
+    gDma3Requests->blits[gDma3Requests->blitCount].dstY = dstY;
     gDma3Requests->blits[gDma3Requests->blitCount].width = sw;
     gDma3Requests->blits[gDma3Requests->blitCount].height = sh;
     gDma3Requests->blitCount = gDma3Requests->blitCount + 1;
     return 1;
 }
 
-u8 RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, u8 e) {
+u8 RequestTilemapStripCopy(void* src, void* dst, u8 x, u8 y, u8 vertical) {
     if (gDma3Requests->fillCount > 7) {
         return 0;
     }
 
-    gDma3Requests->fills[gDma3Requests->fillCount].src = a;
-    gDma3Requests->fills[gDma3Requests->fillCount].dst = b;
-    gDma3Requests->fills[gDma3Requests->fillCount].x = c & 0x1F;
-    gDma3Requests->fills[gDma3Requests->fillCount].y = d & 0x1F;
-    gDma3Requests->fills[gDma3Requests->fillCount].vertical = e;
+    gDma3Requests->fills[gDma3Requests->fillCount].src = src;
+    gDma3Requests->fills[gDma3Requests->fillCount].dst = dst;
+    gDma3Requests->fills[gDma3Requests->fillCount].x = x & 0x1F;
+    gDma3Requests->fills[gDma3Requests->fillCount].y = y & 0x1F;
+    gDma3Requests->fills[gDma3Requests->fillCount].vertical = vertical;
     gDma3Requests->fillCount = gDma3Requests->fillCount + 1;
 
     return 1;
 }
 
-u8 QueueVTransCallback(void (*a)()) {
+u8 QueueVTransCallback(void (*callback)()) {
     Dma3Queue* q = gDma3Requests;
 
     if (q->callbackCount > 7) {
         return 0;
     }
 
-    q->callbacks[q->callbackCount] = a;
+    q->callbacks[q->callbackCount] = callback;
     q->callbackCount = q->callbackCount + 1;
 
     return 1;
@@ -1986,14 +1986,14 @@ void BgFree() {
     IwramFree(gBgWork);
 }
 
-void* GetBgMapBlock(BgEntry* e, u16 x, u16 y) {
-    u8 col = (x >> 8) % e->width;
-    u8 row = (y >> 8) % e->height;
+void* GetBgMapBlock(BgEntry* entry, u16 x, u16 y) {
+    u8 col = (x >> 8) % entry->width;
+    u8 row = (y >> 8) % entry->height;
 
-    return e->map[e->width * row + col];
+    return entry->map[entry->width * row + col];
 }
 
-void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h) {
+void CopyBgMapRect(u16 x, u16 y, BgEntry* entry, void* dst, u8 sx, u8 sy, u8 w, u8 h) {
     u8 tx;
     u8 ty;
     s8 w1;
@@ -2027,12 +2027,12 @@ void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h
         h2 = h - h1;
     }
 
-    RequestTilemapRectCopy(GetBgMapBlock(e, x, y), dst, tx, ty, sx, sy, w1, h1);
+    RequestTilemapRectCopy(GetBgMapBlock(entry, x, y), dst, tx, ty, sx, sy, w1, h1);
     x2 = x + 256;
-    RequestTilemapRectCopy(GetBgMapBlock(e, x2, y), dst, 0, ty, sx2 = sx - (ox = tx - 32), sy, w2, h1);
+    RequestTilemapRectCopy(GetBgMapBlock(entry, x2, y), dst, 0, ty, sx2 = sx - (ox = tx - 32), sy, w2, h1);
     y2 = y + 256;
-    RequestTilemapRectCopy(GetBgMapBlock(e, x, y2), dst, tx, 0, sx, sy2 = sy - (oy = ty - 32), w1, h2);
-    RequestTilemapRectCopy(GetBgMapBlock(e, x2, y2), dst, 0, 0, sx2, sy2, w2, h2);
+    RequestTilemapRectCopy(GetBgMapBlock(entry, x, y2), dst, tx, 0, sx, sy2 = sy - (oy = ty - 32), w1, h2);
+    RequestTilemapRectCopy(GetBgMapBlock(entry, x2, y2), dst, 0, 0, sx2, sy2, w2, h2);
 }
 
 void BgReset() {
@@ -2316,10 +2316,10 @@ void SetBgMosaic(s32 bg, u8 on) {
     }
 }
 
-void SetBgMosaicSize(u8 a, u8 b) {
-    a &= 0xF;
-    b &= 0xF;
-    gMosaic = (gMosaic & 0xFF00) | a | (b << 4);
+void SetBgMosaicSize(u8 x, u8 y) {
+    x &= 0xF;
+    y &= 0xF;
+    gMosaic = (gMosaic & 0xFF00) | x | (y << 4);
 }
 
 void SetBgScroll(s32 bg, s32 x, s32 y) {
@@ -2346,10 +2346,10 @@ void SetBgScroll(s32 bg, s32 x, s32 y) {
     }
 }
 
-u8 GetBgScrollX(u32 a) {
+u8 GetBgScrollX(u32 bg) {
     u16 v;
 
-    switch (a) {
+    switch (bg) {
     case 0:
         v = gBg0HOfs;
         break;
@@ -2369,10 +2369,10 @@ u8 GetBgScrollX(u32 a) {
     return v;
 }
 
-u8 GetBgScrollY(u32 a) {
+u8 GetBgScrollY(u32 bg) {
     u16 v;
 
-    switch (a) {
+    switch (bg) {
     case 0:
         v = gBg0VOfs;
         break;
@@ -2472,8 +2472,8 @@ void SetBackdropColor(u32 r, u32 g, u32 b) {
     gBackdropColor = gLastBackdropColor;
 }
 
-void SetBgBlend(s32 a, u16 b, u16 c) {
-    switch ((u32)a) {
+void SetBgBlend(s32 bg, u16 target2, u16 target1) {
+    switch ((u32)bg) {
     case 0:
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
         break;
@@ -2489,11 +2489,11 @@ void SetBgBlend(s32 a, u16 b, u16 c) {
     }
 
     gBldCnt |= BLDCNT_EFFECT_BLEND;
-    gBldAlpha = (b << 8) | c;
+    gBldAlpha = (target2 << 8) | target1;
 }
 
-void SetBlendAlpha(u16 a, u16 b) {
-    gBldAlpha = (a << 8) | b;
+void SetBlendAlpha(u16 target2, u16 target1) {
+    gBldAlpha = (target2 << 8) | target1;
 }
 
 #ifdef VERSION_EU
@@ -2571,9 +2571,9 @@ void FreeBgDecompressedMap(s32 bg) {
 }
 #endif
 
-s16 GetAngleDiff(s32 a, s32 b) {
-    s32 x = a & 0xFF;
-    s32 y = b & 0xFF;
+s16 GetAngleDiff(s32 target, s32 angle) {
+    s32 x = target & 0xFF;
+    s32 y = angle & 0xFF;
     s32 d = x - y;
 
     if (d <= -0x80) {
@@ -2587,9 +2587,9 @@ s16 GetAngleDiff(s32 a, s32 b) {
     return d;
 }
 
-s32 GetAngleDiff16(s32 a, s32 b) {
-    s32 x = a & 0xFFFF;
-    s32 y = b & 0xFFFF;
+s32 GetAngleDiff16(s32 target, s32 angle) {
+    s32 x = target & 0xFFFF;
+    s32 y = angle & 0xFFFF;
     s32 d = x - y;
     s32 c;
 
@@ -2606,29 +2606,29 @@ s32 GetAngleDiff16(s32 a, s32 b) {
     return d;
 }
 
-void ApproachAngle(u16* p, u16 target, u16 shift) {
+void ApproachAngle(u16* value, u16 target, u16 shift) {
     s16 d;
     u16 v;
 
-    if (*p == target) {
+    if (*value == target) {
         return;
     }
 
-    d = GetAngleDiff((s16)target, (s16)*p);
+    d = GetAngleDiff((s16)target, (s16)*value);
 
     if (d == 0) {
         return;
     }
 
     v = d >> shift;
-    *p = v + *p;
+    *value = v + *value;
 }
 
-void ApproachAngle16(u16* p, u16 target, u16 shift) {
-    s32 d = GetAngleDiff16(target, *p);
+void ApproachAngle16(u16* value, u16 target, u16 shift) {
+    s32 d = GetAngleDiff16(target, *value);
 
     if (d != 0) {
-        *p = (d >> shift) + *p;
+        *value = (d >> shift) + *value;
     }
 }
 
@@ -2646,150 +2646,150 @@ void ApproachValue(s32* value, s32 target, u16 steps) {
     *value = cur + delta / steps;
 }
 
-s32 GetHalfStepDivisor(u16 a) {
-    a >>= 1;
+s32 GetHalfStepDivisor(u16 steps) {
+    steps >>= 1;
 
-    if (a == 0) {
-        a = 1;
+    if (steps == 0) {
+        steps = 1;
     }
 
-    return a;
+    return steps;
 }
 
-void ApproachValueHalfSteps(s32* p, s32 target, u16 steps) {
-    s32 d = target - *p;
+void ApproachValueHalfSteps(s32* value, s32 target, u16 steps) {
+    s32 d = target - *value;
 
-    *p += d / GetHalfStepDivisor(steps);
+    *value += d / GetHalfStepDivisor(steps);
 }
 
-s32 Lerp8(s32 a, s32 b, s32 t) {
-    return (a * (0x100 - t) >> 8) + (b * t >> 8);
+s32 Lerp8(s32 from, s32 to, s32 t) {
+    return (from * (0x100 - t) >> 8) + (to * t >> 8);
 }
 
-void AnimInit(AnimState* a, void* b, void* c) {
-    a->gfxTable = c;
-    a->anims = b;
-    a->frames = NULL;
+void AnimInit(AnimState* anim, void* anims, void* gfxTable) {
+    anim->gfxTable = gfxTable;
+    anim->anims = anims;
+    anim->frames = NULL;
 }
 
-void AnimChangeWithTables(AnimState* a, u16 animId, u16 flags, void* b, void* c) {
-    if (a->gfxTable != c || a->anims != b || a->animId != animId) {
-        a->gfxTable = c;
-        a->anims = b;
-        AnimStart(a, animId, flags);
+void AnimChangeWithTables(AnimState* anim, u16 animId, u16 flags, void* anims, void* gfxTable) {
+    if (anim->gfxTable != gfxTable || anim->anims != anims || anim->animId != animId) {
+        anim->gfxTable = gfxTable;
+        anim->anims = anims;
+        AnimStart(anim, animId, flags);
     }
 }
 
-void AnimStart(AnimState* a, u16 animId, u16 flags) {
-    AnimHeader* h = a->anims[animId];
+void AnimStart(AnimState* anim, u16 animId, u16 flags) {
+    AnimHeader* h = anim->anims[animId];
 
-    a->frameCount = h->frameCount;
+    anim->frameCount = h->frameCount;
 
-    if (a->frameCount == 0) {
-        a->frames = NULL;
+    if (anim->frameCount == 0) {
+        anim->frames = NULL;
         return;
     }
 
-    a->frames = h->frames;
+    anim->frames = h->frames;
 
     if ((flags & ANIM_FLAG_KEEP_FRAME) == 0) {
-        a->timer = 0;
+        anim->timer = 0;
 
         if (flags & ANIM_FLAG_RANDOM_START) {
-            a->frame = GetRandom() % a->frameCount;
+            anim->frame = GetRandom() % anim->frameCount;
         } else {
-            a->frame = 0;
+            anim->frame = 0;
         }
     }
 
-    a->flags = flags;
-    a->animId = animId;
+    anim->flags = flags;
+    anim->animId = animId;
 }
 
-void AnimChange(AnimState* a, u16 id, u16 flags) {
+void AnimChange(AnimState* anim, u16 id, u16 flags) {
     AnimHeader* h;
 
-    if (a->animId == id) {
+    if (anim->animId == id) {
         return;
     }
 
-    h = a->anims[id];
-    a->frameCount = h->frameCount;
+    h = anim->anims[id];
+    anim->frameCount = h->frameCount;
 
-    if (a->frameCount == 0) {
-        a->frames = NULL;
+    if (anim->frameCount == 0) {
+        anim->frames = NULL;
         return;
     }
 
-    a->frames = h->frames;
+    anim->frames = h->frames;
 
     if ((flags & ANIM_FLAG_KEEP_FRAME) == 0) {
-        a->timer = 0;
+        anim->timer = 0;
 
         if (flags & ANIM_FLAG_RANDOM_START) {
-            a->frame = GetRandom() % a->frameCount;
+            anim->frame = GetRandom() % anim->frameCount;
         } else {
-            a->frame = 0;
+            anim->frame = 0;
         }
     }
 
-    a->flags = flags;
-    a->animId = id;
+    anim->flags = flags;
+    anim->animId = id;
 }
 
-void* AnimUpdate(AnimState* a) {
-    void* gfx = AnimGetGfx(a);
-    AnimFrame* frames = a->frames;
+void* AnimUpdate(AnimState* anim) {
+    void* gfx = AnimGetGfx(anim);
+    AnimFrame* frames = anim->frames;
     u16 index;
 
     if (frames == NULL) {
         return NULL;
     }
 
-    a->timer++;
-    index = a->frame;
+    anim->timer++;
+    index = anim->frame;
 
-    if (a->timer >= frames[index].duration) {
-        a->frame = index + 1;
-        a->timer = 0;
+    if (anim->timer >= frames[index].duration) {
+        anim->frame = index + 1;
+        anim->timer = 0;
 
-        if (a->frame >= a->frameCount) {
-            if (a->flags & ANIM_FLAG_LOOP) {
-                a->frame = 0;
+        if (anim->frame >= anim->frameCount) {
+            if (anim->flags & ANIM_FLAG_LOOP) {
+                anim->frame = 0;
             } else {
-                a->frame = index;
+                anim->frame = index;
             }
 
-            a->flags |= ANIM_FLAG_FINISHED;
+            anim->flags |= ANIM_FLAG_FINISHED;
         }
     }
 
     return gfx;
 }
 
-u8 AnimIsFrameEnding(AnimState* a) {
-    if (a->frames == NULL) {
+u8 AnimIsFrameEnding(AnimState* anim) {
+    if (anim->frames == NULL) {
         return 0;
     }
 
-    if (!(a->flags & ANIM_FLAG_LOOP)) {
-        if (a->flags & ANIM_FLAG_FINISHED) {
+    if (!(anim->flags & ANIM_FLAG_LOOP)) {
+        if (anim->flags & ANIM_FLAG_FINISHED) {
             return 0;
         }
     }
 
-    if (a->timer + 1 >= a->frames[a->frame].duration) {
+    if (anim->timer + 1 >= anim->frames[anim->frame].duration) {
         return 1;
     }
 
     return 0;
 }
 
-void* AnimGetGfx(AnimState* a) {
+void* AnimGetGfx(AnimState* anim) {
     void* result;
 
-    if (a->frames != NULL) {
-        result = a->gfxTable[a->frames[a->frame].gfxIndex];
+    if (anim->frames != NULL) {
+        result = anim->gfxTable[anim->frames[anim->frame].gfxIndex];
     } else {
         result = NULL;
     }
@@ -2797,38 +2797,38 @@ void* AnimGetGfx(AnimState* a) {
     return result;
 }
 
-u8 AnimIsFinished(AnimState* a) {
-    if (a->flags & ANIM_FLAG_FINISHED) {
+u8 AnimIsFinished(AnimState* anim) {
+    if (anim->flags & ANIM_FLAG_FINISHED) {
         return 1;
     }
 
     return 0;
 }
 
-u16 AnimGetId(AnimState* a) {
-    return a->animId;
+u16 AnimGetId(AnimState* anim) {
+    return anim->animId;
 }
 
-u16 AnimGetFrame(AnimState* a) {
-    return a->frame;
+u16 AnimGetFrame(AnimState* anim) {
+    return anim->frame;
 }
 
-u16 AnimGetGfxIndex(AnimState* a) {
-    return a->frames[a->frame].gfxIndex;
+u16 AnimGetGfxIndex(AnimState* anim) {
+    return anim->frames[anim->frame].gfxIndex;
 }
 
-void AnimSetFrame(AnimState* a, u16 frame) {
-    if (frame < a->frameCount) {
-        a->frame = frame;
-        a->timer = 0;
-        a->flags &= ~ANIM_FLAG_FINISHED;
+void AnimSetFrame(AnimState* anim, u16 frame) {
+    if (frame < anim->frameCount) {
+        anim->frame = frame;
+        anim->timer = 0;
+        anim->flags &= ~ANIM_FLAG_FINISHED;
     }
 }
 
-void AnimReset(AnimState* a) {
-    a->frame = 0;
-    a->timer = 0;
-    a->flags &= ~ANIM_FLAG_FINISHED;
+void AnimReset(AnimState* anim) {
+    anim->frame = 0;
+    anim->timer = 0;
+    anim->flags &= ~ANIM_FLAG_FINISHED;
 }
 
 void FadeInit() {
@@ -2863,10 +2863,10 @@ void LoadPalette(const void* src, void* dst, u16 size) {
     }
 }
 
-void FadeClearPaletteSlot(u16 a) {
+void FadeClearPaletteSlot(u16 slot) {
     PaletteSlot* p = gFadeWork->slots;
 
-    p += a;
+    p += slot;
     p->src = NULL;
 }
 
@@ -3066,7 +3066,7 @@ void FadeUpdate() {
     }
 }
 
-void FadeStartIn(s32 a, u16 b) {
+void FadeStartIn(s32 mode, u16 frames) {
     FadeWork* base = gFadeWork;
     u32 z;
 
@@ -3078,14 +3078,14 @@ void FadeStartIn(s32 a, u16 b) {
 
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
-    base->timer = b;
+    base->timer = frames;
     base->amount = 0x1F00;
     base->target = z;
     base->lastAmount = z;
-    base->mode = a;
+    base->mode = mode;
 }
 
-void FadeStartOut(s32 a, u16 b) {
+void FadeStartOut(s32 mode, u16 frames) {
     FadeWork* base = gFadeWork;
     u32 z;
 
@@ -3097,14 +3097,14 @@ void FadeStartOut(s32 a, u16 b) {
 
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
-    base->timer = b;
+    base->timer = frames;
     base->amount = z;
     base->target = 0x1F00;
     base->lastAmount = z;
-    base->mode = a;
+    base->mode = mode;
 }
 
-void FadeToOriginal(s32 a, u16 b) {
+void FadeToOriginal(s32 mode, u16 frames) {
     FadeWork* base = gFadeWork;
     u32 z;
 
@@ -3116,12 +3116,12 @@ void FadeToOriginal(s32 a, u16 b) {
 
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
-    base->timer = b;
+    base->timer = frames;
     base->target = z;
-    base->mode = a;
+    base->mode = mode;
 }
 
-void FadeToAmount(s32 a, u16 b, u16 c) {
+void FadeToAmount(s32 mode, u16 amount, u16 frames) {
     FadeWork* base = gFadeWork;
 
     if (base->flags & FADE_FLAG_LOCKED) {
@@ -3131,12 +3131,12 @@ void FadeToAmount(s32 a, u16 b, u16 c) {
     }
 
     base->flags = FADE_FLAG_ACTIVE;
-    base->timer = c;
-    base->target = b << 8;
-    base->mode = a;
+    base->timer = frames;
+    base->target = amount << 8;
+    base->mode = mode;
 }
 
-void FadeFromAmount(s32 a, u16 b, u16 c) {
+void FadeFromAmount(s32 mode, u16 amount, u16 frames) {
     FadeWork* base = gFadeWork;
     u32 z;
 
@@ -3148,11 +3148,11 @@ void FadeFromAmount(s32 a, u16 b, u16 c) {
 
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
-    base->timer = c;
-    base->amount = b << 8;
+    base->timer = frames;
+    base->amount = amount << 8;
     base->lastAmount = z;
     base->target = z;
-    base->mode = a;
+    base->mode = mode;
 }
 
 void FadeSetPaletteExcluded(u16 slot, u8 value) {
@@ -3235,9 +3235,9 @@ void MosaicUpdate() {
     }
 }
 
-void MosaicStartIn(u16 a, u16 b) {
-    sMosaicTimer = a;
-    sMosaicSize = b << 8;
+void MosaicStartIn(u16 frames, u16 size) {
+    sMosaicTimer = frames;
+    sMosaicSize = size << 8;
     sMosaicTarget = 0;
     sMosaicActive = 1;
     SetBgMosaic(0, 1);
@@ -3247,10 +3247,10 @@ void MosaicStartIn(u16 a, u16 b) {
     SetSpriteMosaicEnabled(1);
 }
 
-void MosaicStartOut(u16 a, u16 b) {
-    sMosaicTimer = a;
+void MosaicStartOut(u16 frames, u16 size) {
+    sMosaicTimer = frames;
     sMosaicSize = 0;
-    sMosaicTarget = b << 8;
+    sMosaicTarget = size << 8;
     sMosaicActive = 1;
     SetBgMosaic(0, 1);
     SetBgMosaic(1, 1);

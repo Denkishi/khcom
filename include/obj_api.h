@@ -15,8 +15,8 @@ struct ObjPalette* AllocObjPalette(u16 size);
 void ReleaseObjPalette(struct ObjPalette* palette);
 u8 DrawSprite(s16 x, s16 y, void* sprite, void* tiles, void* palette, ObjAffine* affine, u16 flags, u16 priority);
 void DrawSpriteUnsorted(s16 x, s16 y, void* sprite, void* tiles, void* palette, u16 flags);
-ObjAffine* AllocObjAffine(u8 angle, s32 sx, s32 sy, u8 flags);
-ObjAffine* AllocObjAffineAngle(u8 angle, u8 flags);
+ObjAffine* AllocObjAffine(u8 angle, s32 sx, s32 sy, u8 doubleSize);
+ObjAffine* AllocObjAffineAngle(u8 angle, u8 doubleSize);
 u8 CanAllocObjTiles(u16 size);
 void SpriteReset();
 void SetObjTileSource(struct ObjTiles* tiles, const void* src);
@@ -30,8 +30,8 @@ void InitObjPaletteAtSlot(struct ObjPalette* palette, u16 slot, void* src, u16 s
 void UpdateAllocatedObjPalette(struct ObjPalette* palette, void* src);
 u8 CanAllocObjPalette(u16 n);
 void UpdateSpriteOam();
-u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d);
-void SetObjPaletteRange(u16 a, u16 b);
-u16 GetObjTileCount(u16 a, u16 b);
+u8 IsRectOutsideScreen(s16 x, s16 y, s32 topExtent, s32 bottomExtent, s32 leftExtent, s32 rightExtent);
+void SetObjPaletteRange(u16 start, u16 count);
+u16 GetObjTileCount(u16 attr0, u16 attr1);
 
 #endif

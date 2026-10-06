@@ -74,13 +74,13 @@ static const EnemyBaseStats sEnemyBaseStats[54] = {
 
 GameState gGameState EWRAM_COMMON(16);
 
-void AdvanceLevelExpThreshold(PlayerProgression* p) {
-    s32 n = p->level + 1;
+void AdvanceLevelExpThreshold(PlayerProgression* progression) {
+    s32 n = progression->level + 1;
 
-    if (p->level) {
-        p->nextExp = n * n * 3 + p->nextExp;
+    if (progression->level) {
+        progression->nextExp = n * n * 3 + progression->nextExp;
     } else {
-        p->nextExp = n * n * 3 + p->nextExp;
+        progression->nextExp = n * n * 3 + progression->nextExp;
     }
 }
 
@@ -169,10 +169,10 @@ s32 LevelUpAp() {
     return 1;
 }
 
-void AddExp(u16 a) {
+void AddExp(u16 exp) {
     PlayerProgression* p = &gGameState.progression;
 
-    p->exp += a;
+    p->exp += exp;
 }
 
 u8 CanLevelUp() {
@@ -193,164 +193,164 @@ const EnemyBaseStats* GetEnemyBaseStats(u16 i) {
     return &sEnemyBaseStats[i];
 }
 
-void LearnStock(u32 a) {
+void LearnStock(u32 stock) {
     u8* q;
     u8* z;
 
-    if (a == 72) {
+    if (stock == 72) {
         z = (u8*)&gGameState;
         *(u64*)(z + offsetof(GameState, progression.learnedStocks)) = -1;
         *(u64*)(z + offsetof(GameState, progression.learnedStocks2)) = -1;
         return;
     }
 
-    if (IsStockLearned(a)) {
+    if (IsStockLearned(stock)) {
         return;
     }
 
-    if (a <= 0x1E) {
+    if (stock <= 0x1E) {
         q = (u8*)&gGameState;
-        *(u64*)(q + offsetof(GameState, progression.learnedStocks)) |= 1LL << a;
-        *(u64*)(q + offsetof(GameState, progression.newStocks)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.learnedStocks)) |= 1LL << stock;
+        *(u64*)(q + offsetof(GameState, progression.newStocks)) |= 1LL << stock;
     } else {
-        a -= 0x1F;
+        stock -= 0x1F;
         q = (u8*)&gGameState;
-        *(u64*)(q + offsetof(GameState, progression.learnedStocks2)) |= 1LL << a;
-        *(u64*)(q + offsetof(GameState, progression.newStocks2)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.learnedStocks2)) |= 1LL << stock;
+        *(u64*)(q + offsetof(GameState, progression.newStocks2)) |= 1LL << stock;
     }
 }
 
-u8 IsStockLearned(u32 a) {
+u8 IsStockLearned(u32 stock) {
     u64* p;
     u8* q;
 
-    if (a <= 0x1E) {
+    if (stock <= 0x1E) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.learnedStocks);
     } else {
-        a -= 0x1F;
+        stock -= 0x1F;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.learnedStocks2);
     }
 
     p = (u64*)q;
 
-    if (*p & (1LL << a)) {
+    if (*p & (1LL << stock)) {
         return 1;
     }
 
     return 0;
 }
 
-void SetCardKindObtained(s32 a) {
-    if (a == 0x3A) {
+void SetCardKindObtained(s32 kind) {
+    if (kind == 0x3A) {
         gGameState.progression.obtainedCardKinds = -1;
     } else {
-        gGameState.progression.obtainedCardKinds |= 1LL << a;
+        gGameState.progression.obtainedCardKinds |= 1LL << kind;
     }
 }
 
-u8 IsCardKindObtained(s32 a) {
-    if (gGameState.progression.obtainedCardKinds & (1LL << a)) {
+u8 IsCardKindObtained(s32 kind) {
+    if (gGameState.progression.obtainedCardKinds & (1LL << kind)) {
         return 1;
     }
 
     return 0;
 }
 
-u8 IsLinkStockLearned(u32 a) {
+u8 IsLinkStockLearned(u32 stock) {
     u64* p;
     u8* q;
 
-    if (a <= 0x1E) {
+    if (stock <= 0x1E) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, linkLearnedStocks);
     } else {
-        a -= 0x1F;
+        stock -= 0x1F;
         q = (u8*)&gGameState;
         q += offsetof(GameState, linkLearnedStocks2);
     }
 
     p = (u64*)q;
 
-    if (*p & (1LL << a)) {
+    if (*p & (1LL << stock)) {
         return 1;
     }
 
     return 0;
 }
 
-u8 IsLinkPartnerStockLearned(u32 a) {
+u8 IsLinkPartnerStockLearned(u32 stock) {
     u64* p;
     u8* q;
 
-    if (a <= 0x1E) {
+    if (stock <= 0x1E) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, linkPartnerLearnedStocks);
     } else {
-        a -= 0x1F;
+        stock -= 0x1F;
         q = (u8*)&gGameState;
         q += offsetof(GameState, linkPartnerLearnedStocks2);
     }
 
     p = (u64*)q;
 
-    if (*p & (1LL << a)) {
+    if (*p & (1LL << stock)) {
         return 1;
     }
 
     return 0;
 }
 
-u8 IsStockNew(u32 a) {
+u8 IsStockNew(u32 stock) {
     u64* p;
     u8* q;
 
-    if (a <= 0x1E) {
+    if (stock <= 0x1E) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.newStocks);
     } else {
-        a -= 0x1F;
+        stock -= 0x1F;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.newStocks2);
     }
 
     p = (u64*)q;
 
-    if (*p & (1LL << a)) {
+    if (*p & (1LL << stock)) {
         return 1;
     }
 
     return 0;
 }
 
-void ClearStockNew(u32 a) {
+void ClearStockNew(u32 stock) {
     u64* p;
     u8* q;
 
-    if (a == 0x48) {
+    if (stock == 0x48) {
         GameState* s = &gGameState;
         s->progression.newStocks = 0;
         s->progression.newStocks2 = 0;
     } else {
-        if (a <= 0x1E) {
+        if (stock <= 0x1E) {
             q = (u8*)&gGameState;
             q += offsetof(GameState, progression.newStocks);
         } else {
-            a -= 0x1F;
+            stock -= 0x1F;
             q = (u8*)&gGameState;
             q += offsetof(GameState, progression.newStocks2);
         }
 
         p = (u64*)q;
-        *p &= ~(1LL << a);
+        *p &= ~(1LL << stock);
     }
 }
 
-void SetJiminyFlag(u32 a) {
+void SetJiminyFlag(u32 flag) {
     GameState* state;
 
-    if (a == 250) {
+    if (flag == 250) {
         GameState* state = &gGameState;
         state->progression.jiminyFlags[0] = -1;
         state->progression.jiminyFlags[1] = -1;
@@ -363,98 +363,98 @@ void SetJiminyFlag(u32 a) {
         return;
     }
 
-    if (IsJiminyFlagSet(a)) {
+    if (IsJiminyFlagSet(flag)) {
         return;
     }
 
-    if (a <= 0x3F) {
+    if (flag <= 0x3F) {
         state = &gGameState;
-        state->progression.jiminyFlags[0] |= 1ULL << a;
-        state->progression.jiminyFlags[4] |= 1ULL << a;
-    } else if (a <= 0x7F) {
-        a -= 0x40;
+        state->progression.jiminyFlags[0] |= 1ULL << flag;
+        state->progression.jiminyFlags[4] |= 1ULL << flag;
+    } else if (flag <= 0x7F) {
+        flag -= 0x40;
         state = &gGameState;
-        state->progression.jiminyFlags[1] |= 1ULL << a;
-        state->progression.jiminyFlags[5] |= 1ULL << a;
-    } else if (a <= 0xBF) {
-        a -= 0x80;
+        state->progression.jiminyFlags[1] |= 1ULL << flag;
+        state->progression.jiminyFlags[5] |= 1ULL << flag;
+    } else if (flag <= 0xBF) {
+        flag -= 0x80;
         state = &gGameState;
-        state->progression.jiminyFlags[2] |= 1ULL << a;
-        state->progression.jiminyFlags[6] |= 1ULL << a;
+        state->progression.jiminyFlags[2] |= 1ULL << flag;
+        state->progression.jiminyFlags[6] |= 1ULL << flag;
     } else {
-        a -= 0xC0;
+        flag -= 0xC0;
         state = &gGameState;
-        state->progression.jiminyFlags[3] |= 1ULL << a;
-        state->progression.jiminyFlags[7] |= 1ULL << a;
+        state->progression.jiminyFlags[3] |= 1ULL << flag;
+        state->progression.jiminyFlags[7] |= 1ULL << flag;
     }
 }
 
-u8 IsJiminyFlagSet(u32 a) {
+u8 IsJiminyFlagSet(u32 flag) {
     u64* p;
     u8* q;
 
-    if (a <= 0x3F) {
+    if (flag <= 0x3F) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[0]);
-    } else if (a <= 0x7F) {
-        a -= 0x40;
+    } else if (flag <= 0x7F) {
+        flag -= 0x40;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[1]);
-    } else if (a <= 0xBF) {
-        a -= 0x80;
+    } else if (flag <= 0xBF) {
+        flag -= 0x80;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[2]);
     } else {
-        a -= 0xC0;
+        flag -= 0xC0;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[3]);
     }
 
     p = (u64*)q;
 
-    if (*p & (1LL << a)) {
+    if (*p & (1LL << flag)) {
         return 1;
     }
 
     return 0;
 }
 
-u8 IsJiminyFlagNew(u32 a) {
+u8 IsJiminyFlagNew(u32 flag) {
     u64* p;
     u8* q;
 
-    if (a <= 0x3F) {
+    if (flag <= 0x3F) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[4]);
-    } else if (a <= 0x7F) {
-        a -= 0x40;
+    } else if (flag <= 0x7F) {
+        flag -= 0x40;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[5]);
-    } else if (a <= 0xBF) {
-        a -= 0x80;
+    } else if (flag <= 0xBF) {
+        flag -= 0x80;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[6]);
     } else {
-        a -= 0xC0;
+        flag -= 0xC0;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[7]);
     }
 
     p = (u64*)q;
 
-    if (*p & (1LL << a)) {
+    if (*p & (1LL << flag)) {
         return 1;
     }
 
     return 0;
 }
 
-void ClearJiminyFlagNew(u32 a) {
+void ClearJiminyFlagNew(u32 flag) {
     u64* p;
     u8* q;
     u8* z;
 
-    if (a == 250) {
+    if (flag == 250) {
         z = (u8*)&gGameState;
         *(u64*)(z + offsetof(GameState, progression.jiminyFlags[4])) = 0;
         *(u64*)(z + offsetof(GameState, progression.jiminyFlags[5])) = 0;
@@ -463,23 +463,23 @@ void ClearJiminyFlagNew(u32 a) {
         return;
     }
 
-    if (a <= 0x3F) {
+    if (flag <= 0x3F) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[4]);
-    } else if (a <= 0x7F) {
-        a -= 0x40;
+    } else if (flag <= 0x7F) {
+        flag -= 0x40;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[5]);
-    } else if (a <= 0xBF) {
-        a -= 0x80;
+    } else if (flag <= 0xBF) {
+        flag -= 0x80;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[6]);
     } else {
-        a -= 0xC0;
+        flag -= 0xC0;
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[7]);
     }
 
     p = (u64*)q;
-    *p &= ~(1LL << a);
+    *p &= ~(1LL << flag);
 }

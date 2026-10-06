@@ -184,7 +184,7 @@ s32 LevelUpMaxHp();
 s32 LevelUpCp();
 s32 LevelUpDp();
 s32 LevelUpAp();
-void AddExp(u16 a);
+void AddExp(u16 exp);
 void BgFxUpdateTrinityLimit();
 s32 ApplyAttackInFront(BtlObj* p, s16 h, s32 c);
 void RequestSwitchRikuCardList();

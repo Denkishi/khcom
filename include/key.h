@@ -12,7 +12,7 @@ void ResetKeyState();
 
 
 
-u16 ReadKeyChord(u16 a, u16 b);
+u16 ReadKeyChord(u16 key1, u16 key2);
 u16 ReadDpadChord();
 
 #endif

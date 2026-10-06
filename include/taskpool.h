@@ -39,7 +39,7 @@ typedef char Task_size[(sizeof(Task) == 0x24) ? 1 : -1];
 Task* TaskCreate(TaskPool* pool, TaskDesc* desc, const void* arg);
 Task* TaskDestroy(TaskPool* pool, Task* task);
 void TaskKill(TaskPool* pool, Task* task);
-void func_08000F30(TaskPool* a);
+void func_08000F30(TaskPool* pool);
 u8 IsTaskActive(Task* task);
 u8 IsTaskActiveNamed(Task* task, const char* name);
 const char* GetTaskName(Task* task);

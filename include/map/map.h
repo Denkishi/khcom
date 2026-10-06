@@ -880,7 +880,7 @@ void MapMenuFreeConfirm(MapMenuWork* work);
 s32 Task_MapSave_1(MapSaveWork* work);
 void MapFreeRoom();
 void MapDrawBgs(s16 x, s16 y);
-u8 RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, u8 e);
+u8 RequestTilemapStripCopy(void* src, void* dst, u8 x, u8 y, u8 vertical);
 void* GetSelectedMapCard();
 u8 MapDoorWaitHit(MapDoorWork* work);
 u8 MapDoorWaitCard(MapDoorWork* work);

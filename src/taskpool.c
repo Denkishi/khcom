@@ -10,30 +10,30 @@
 #include <stddef.h>
 #include "types.h"
 
-Task* TaskDestroy(TaskPool* a, Task* t) {
+Task* TaskDestroy(TaskPool* pool, Task* t) {
     if (t->desc->destroy != NULL) {
         t->desc->destroy(t->work);
     }
 
     EwramFree(t->work);
 
-    return ListPoolRelease(&t->node, a);
+    return ListPoolRelease(&t->node, pool);
 }
 
-void TaskKill(TaskPool* a, Task* t) {
+void TaskKill(TaskPool* pool, Task* t) {
     if (t->desc->destroy != NULL) {
         t->desc->destroy(t->work);
     }
 
     EwramFree(t->work);
 
-    ListPoolRelease(&t->node, a);
+    ListPoolRelease(&t->node, pool);
 }
 
-Task* TaskCreate(TaskPool* a, TaskDesc* desc, const void* arg) {
+Task* TaskCreate(TaskPool* pool, TaskDesc* desc, const void* arg) {
     Task* task;
 
-    task = ListPoolFirstFree(a);
+    task = ListPoolFirstFree(pool);
 
     if (task == NULL) {
         return NULL;
@@ -51,7 +51,7 @@ Task* TaskCreate(TaskPool* a, TaskDesc* desc, const void* arg) {
 
     task->desc = desc;
     task->update = desc->update;
-    ListPoolActivate(&task->node, a);
+    ListPoolActivate(&task->node, pool);
 
     if (desc->init != NULL) {
         desc->init(task->work, arg);
@@ -60,42 +60,42 @@ Task* TaskCreate(TaskPool* a, TaskDesc* desc, const void* arg) {
     return task;
 }
 
-void TaskPoolInit(TaskPool* a, s32 count) {
+void TaskPoolInit(TaskPool* pool, s32 count) {
     Task* t;
     s32 i;
 
-    a->tasks = EwramAlloc(count * sizeof(Task));
+    pool->tasks = EwramAlloc(count * sizeof(Task));
 
-    if (a->tasks == NULL) {
+    if (pool->tasks == NULL) {
         return;
     }
 
-    ListPoolInit(a);
+    ListPoolInit(pool);
 
     for (i = 0; i < count; i++) {
-        t = &((Task*)a->tasks)[i];
-        ListPoolAddFree(&t->node, a, t);
+        t = &((Task*)pool->tasks)[i];
+        ListPoolAddFree(&t->node, pool, t);
     }
 }
 
-void TaskPoolUpdate(TaskPool* a) {
+void TaskPoolUpdate(TaskPool* pool) {
     Task* t;
 
-    t = ListPoolFirst(&a->head);
+    t = ListPoolFirst(&pool->head);
 
     while (t != NULL) {
         if (t->update != NULL && t->update(t->work, t) == 0) {
-            t = TaskDestroy(a, t);
+            t = TaskDestroy(pool, t);
         } else {
             t = ListPoolNext(&t->node);
         }
     }
 }
 
-void TaskPoolDraw(TaskPool* a) {
+void TaskPoolDraw(TaskPool* pool) {
     Task* t;
 
-    t = ListPoolFirst(&a->head);
+    t = ListPoolFirst(&pool->head);
 
     while (t != NULL) {
         if (t->desc->draw != NULL) {
@@ -106,22 +106,22 @@ void TaskPoolDraw(TaskPool* a) {
     }
 }
 
-void TaskPoolDestroy(TaskPool* a) {
+void TaskPoolDestroy(TaskPool* pool) {
     Task* t;
 
-    t = ListPoolFirst(&a->head);
+    t = ListPoolFirst(&pool->head);
 
     while (t != NULL) {
-        t = TaskDestroy(a, t);
+        t = TaskDestroy(pool, t);
     }
 
-    EwramFree(a->tasks);
+    EwramFree(pool->tasks);
 }
 
-void func_08000F30(TaskPool* a) {
+void func_08000F30(TaskPool* pool) {
     Task* t;
 
-    t = ListPoolFirst(&a->head);
+    t = ListPoolFirst(&pool->head);
 
     if (t != NULL) {
         do {

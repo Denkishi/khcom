@@ -38,12 +38,12 @@ void SetModeUpdate(void (*fn)());
 #ifdef VERSION_EU
 void DoSoftReset();
 #endif
-void ModeSetTransitionCallback(void (*a)(), void (*b)());
+void ModeSetTransitionCallback(void (*init)(), void (*update)());
 void ModeFlushDisplay();
 void ModeRunVBlankCallbacks();
 
 #ifdef VERSION_EU
-void ModeInit(u8 a);
+void ModeInit(u8 softReset);
 #else
 void ModeInit();
 #endif

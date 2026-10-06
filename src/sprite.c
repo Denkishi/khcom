@@ -29,8 +29,8 @@ void SpriteFree() {
     IwramFree(gSpriteWork);
 }
 
-u16 GetObjTileCount(u16 a, u16 b) {
-    switch ((((u32)b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
+u16 GetObjTileCount(u16 attr0, u16 attr1) {
+    switch ((((u32)attr1 << 16) | attr0) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
         return 1;
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 2):
@@ -102,11 +102,11 @@ void DisableObj() {
     gDispCnt &= ~DISPCNT_OBJ_ON;
 }
 
-void SetObjTileRange(u16 a, u16 b) {
+void SetObjTileRange(u16 start, u16 count) {
     s32 v;
 
-    gSpriteWork->tilePool.rangeStart = a;
-    v = a + b;
+    gSpriteWork->tilePool.rangeStart = start;
+    v = start + count;
     gSpriteWork->tilePool.rangeEnd = v;
 
     if ((u16)v > 0x400) {
@@ -114,11 +114,11 @@ void SetObjTileRange(u16 a, u16 b) {
     }
 }
 
-void SetObjPaletteRange(u16 a, u16 b) {
+void SetObjPaletteRange(u16 start, u16 count) {
     s32 v;
 
-    gSpriteWork->palettePool.rangeStart = a;
-    v = a + b;
+    gSpriteWork->palettePool.rangeStart = start;
+    v = start + count;
     gSpriteWork->palettePool.rangeEnd = v;
 
     if ((u16)v > 0x10) {
@@ -153,19 +153,19 @@ void SpriteReset() {
     SetObjPaletteRange(0, 0x10);
 }
 
-u8 DrawSpriteSharedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
+u8 DrawSpriteSharedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority) {
     SpriteWork* p;
 
-    if (e != NULL && c != NULL) {
+    if (palette != NULL && sprite != NULL) {
         p = gSpriteWork;
         p->entries[p->entryCount].x = x;
         p->entries[p->entryCount].y = y;
         p->entries[p->entryCount].tiles = obj;
-        p->entries[p->entryCount].palette = e;
-        p->entries[p->entryCount].affine = f;
-        p->entries[p->entryCount].flags = g;
-        p->entries[p->entryCount].priority = h;
-        p->entries[p->entryCount].sprite = c;
+        p->entries[p->entryCount].palette = palette;
+        p->entries[p->entryCount].affine = affine;
+        p->entries[p->entryCount].flags = flags;
+        p->entries[p->entryCount].priority = priority;
+        p->entries[p->entryCount].sprite = sprite;
         p->sortPtrs[p->entryCount] = &p->entries[p->entryCount];
         p->entryCount += 1;
         return 1;

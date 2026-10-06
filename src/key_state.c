@@ -105,36 +105,36 @@ u8 KeyGetOffFrames(KeyState* k, u16 key) {
     }
 }
 
-u16 KeyReadChord(KeyState* k, u16 a, u16 b) {
+u16 KeyReadChord(KeyState* k, u16 key1, u16 key2) {
     u16 r = 0;
-    u8 ca = KeyGetOffFrames(k, a);
-    u8 cb = KeyGetOffFrames(k, b);
+    u8 ca = KeyGetOffFrames(k, key1);
+    u8 cb = KeyGetOffFrames(k, key2);
 
     if (ca == 2) {
-        k->chordLatch &= ~a;
+        k->chordLatch &= ~key1;
     }
 
     if (cb == 2) {
-        k->chordLatch &= ~b;
+        k->chordLatch &= ~key2;
     }
 
-    if (((KeyGetPressed(k) & a) && (KeyGetHeld(k) & b)) ||
-        ((KeyGetPressed(k) & b) && (KeyGetHeld(k) & a))) {
-        k->chordLatch |= a | b;
-        r = a | b;
+    if (((KeyGetPressed(k) & key1) && (KeyGetHeld(k) & key2)) ||
+        ((KeyGetPressed(k) & key2) && (KeyGetHeld(k) & key1))) {
+        k->chordLatch |= key1 | key2;
+        r = key1 | key2;
     }
 
-    if (!(k->chordLatch & a)) {
-        if (KeyGetHoldFrames(k, a) == 5 || ca == 1) {
-            k->chordLatch |= a;
-            r = a;
+    if (!(k->chordLatch & key1)) {
+        if (KeyGetHoldFrames(k, key1) == 5 || ca == 1) {
+            k->chordLatch |= key1;
+            r = key1;
         }
     }
 
-    if (!(k->chordLatch & b)) {
-        if (KeyGetHoldFrames(k, b) == 5 || cb == 1) {
-            k->chordLatch |= b;
-            r = b;
+    if (!(k->chordLatch & key2)) {
+        if (KeyGetHoldFrames(k, key2) == 5 || cb == 1) {
+            k->chordLatch |= key2;
+            r = key2;
         }
     }
 
@@ -376,12 +376,12 @@ u16 SioKeyGetRepeatB() {
     return KeyGetRepeat(sSioKeyStateB);
 }
 
-u16 SioKeyReadChordA(u16 a, u16 b) {
-    return KeyReadChord(sSioKeyStateA, a, b);
+u16 SioKeyReadChordA(u16 key1, u16 key2) {
+    return KeyReadChord(sSioKeyStateA, key1, key2);
 }
 
-u16 SioKeyReadChordB(u16 a, u16 b) {
-    return KeyReadChord(sSioKeyStateB, a, b);
+u16 SioKeyReadChordB(u16 key1, u16 key2) {
+    return KeyReadChord(sSioKeyStateB, key1, key2);
 }
 
 void SioKeyStateUpdateA(u16 keys) {

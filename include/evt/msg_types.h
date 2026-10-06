@@ -136,6 +136,15 @@ typedef struct EvSoundCue {
     u16 unk_06;
 } EvSoundCue;
 
+enum EventBgEffectFlag {
+    EVENT_BG_EFFECT_FLAG_LOAD = 0x1,
+    EVENT_BG_EFFECT_FLAG_CLEAR = 0x2,
+    EVENT_BG_EFFECT_FLAG_FADE_OUT = 0x4,
+    EVENT_BG_EFFECT_FLAG_FADE_IN = 0x8,
+    EVENT_BG_EFFECT_FLAG_FULL_FADE = 0x10,
+    EVENT_BG_EFFECT_FLAG_END = 0x8000
+};
+
 typedef struct EventBgEffectEntry {
     u16 frame;
     u16 effect;

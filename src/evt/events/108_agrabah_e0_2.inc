@@ -85,8 +85,8 @@ static const EvSoundCue sEvent108SoundCues[5] = {
 
 static const EventBgEffectEntry sEvent108BgEffects[3] = {
     { 381, 0, 0, 0, 0 },
-    { 500, 0, 0, 0, 0x4 },
-    { 701, 0, 0, 0, 0x8008 },
+    { 500, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_OUT },
+    { 701, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_IN | EVENT_BG_EFFECT_FLAG_END },
 };
 
 static const EventCharaKeyframe sEvent108Track9[3] = {

@@ -40,8 +40,8 @@ static const EvSoundCue sEvent018SoundCues[4] = {
 
 static const EventBgEffectEntry sEvent018BgEffects[3] = {
     { 820, 0, 0, 0, 0 },
-    { 1300, 0, 0, 0, 0x14 },
-    { 1900, 0, 0, 0, 0x8018 },
+    { 1300, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_OUT | EVENT_BG_EFFECT_FLAG_FULL_FADE },
+    { 1900, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_IN | EVENT_BG_EFFECT_FLAG_FULL_FADE | EVENT_BG_EFFECT_FLAG_END },
 };
 
 static const EventCharaKeyframe sEvent018Track0[31] = {

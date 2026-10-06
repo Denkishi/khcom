@@ -48,9 +48,9 @@ static const EventCameraKeyframe sEvent044Camera[7] = {
 
 static const EventBgEffectEntry sEvent044BgEffects[4] = {
     { 1860, 0, 0, 0, 0 },
-    { 1790, 0, 0, 0, 0x14 },
-    { 2230, 0, 0, 0, 0x2 },
-    { 2550, 0, 0, 0, 0x8018 },
+    { 1790, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_OUT | EVENT_BG_EFFECT_FLAG_FULL_FADE },
+    { 2230, 0, 0, 0, EVENT_BG_EFFECT_FLAG_CLEAR },
+    { 2550, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_IN | EVENT_BG_EFFECT_FLAG_FULL_FADE | EVENT_BG_EFFECT_FLAG_END },
 };
 
 static const EventCharaKeyframe sEvent044Track0[40] = {

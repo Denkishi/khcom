@@ -168,7 +168,7 @@ void StartEventBgEffectFadeOut(EventBgEffectWork* work) {
         frames = entry->x;
     }
 
-    if (entry->flags & 0x10) {
+    if (entry->flags & EVENT_BG_EFFECT_FLAG_FULL_FADE) {
         FadeStartOut(FADE_MODE_BLACK, frames);
     } else {
         FadeToAmount(FADE_MODE_BLACK, 16, frames);
@@ -187,7 +187,7 @@ void StartEventBgEffectFadeIn(EventBgEffectWork* work) {
         frames = entry->x;
     }
 
-    if (entry->flags & 0x10) {
+    if (entry->flags & EVENT_BG_EFFECT_FLAG_FULL_FADE) {
         FadeStartIn(FADE_MODE_BLACK, frames);
     } else {
         FadeToOriginal(FADE_MODE_BLACK, frames);
@@ -217,11 +217,11 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* task) {
         return 0;
     }
 
-    if (entries[work->entry].frame <= gEventState->frame && !(entries[work->entry].flags & 0x8000)) {
+    if (entries[work->entry].frame <= gEventState->frame && !(entries[work->entry].flags & EVENT_BG_EFFECT_FLAG_END)) {
         work->entry++;
         entry = &entries[work->entry];
 
-        if (entry->flags & 1) {
+        if (entry->flags & EVENT_BG_EFFECT_FLAG_LOAD) {
             LoadEventBgEffect(work);
 
             if (work->animating != 0) {
@@ -229,16 +229,16 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* task) {
             }
         }
 
-        if (entry->flags & 4) {
+        if (entry->flags & EVENT_BG_EFFECT_FLAG_FADE_OUT) {
             StartEventBgEffectFadeOut(work);
         }
 
-        if (entry->flags & 8) {
+        if (entry->flags & EVENT_BG_EFFECT_FLAG_FADE_IN) {
             StartEventBgEffectFadeIn(work);
             work->fadingIn = TRUE;
         }
 
-        if (entry->flags & 2) {
+        if (entry->flags & EVENT_BG_EFFECT_FLAG_CLEAR) {
             ClearEventBgEffect(work);
             gEventState->bgEffectActive = FALSE;
             gBldCnt = gEventState->bldCnt;

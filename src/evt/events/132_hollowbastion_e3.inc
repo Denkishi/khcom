@@ -41,9 +41,9 @@ static const EventCameraKeyframe sEvent132Camera[5] = {
 
 static const EventBgEffectEntry sEvent132BgEffects[4] = {
     { 850, 0, 0, 0, 0 },
-    { 860, 0, 0, 0, 0x4 },
-    { 870, 6, 66560, 38144, 0x1 },
-    { 1009, 0, 0, 0, 0x8002 },
+    { 860, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_OUT },
+    { 870, 6, 66560, 38144, EVENT_BG_EFFECT_FLAG_LOAD },
+    { 1009, 0, 0, 0, EVENT_BG_EFFECT_FLAG_CLEAR | EVENT_BG_EFFECT_FLAG_END },
 };
 
 static const EventCharaKeyframe sEvent132Track0[7] = {

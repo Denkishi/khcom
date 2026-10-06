@@ -27,10 +27,10 @@ static const EventCameraKeyframe sEvent088Camera[1] = {
 
 static const EventBgEffectEntry sEvent088BgEffects[5] = {
     { 592, 0, 0, 0, 0 },
-    { 593, 0, 0, 0, 0x4 },
+    { 593, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_OUT },
     { 620, 0, 0, 0, 0 },
-    { 700, 0, 0, 0, 0x2 },
-    { 760, 0, 0, 0, 0x8008 },
+    { 700, 0, 0, 0, EVENT_BG_EFFECT_FLAG_CLEAR },
+    { 760, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_IN | EVENT_BG_EFFECT_FLAG_END },
 };
 
 static const EvSoundCue sEvent088SoundCues[4] = {

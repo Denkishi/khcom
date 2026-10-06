@@ -34,10 +34,10 @@ static const EventCameraKeyframe sEvent172Camera[5] = {
 
 static const EventBgEffectEntry sEvent172BgEffects[5] = {
     { 320, 0, 0, 0, 0 },
-    { 450, 0, 60, 0, 0x14 },
+    { 450, 0, 60, 0, EVENT_BG_EFFECT_FLAG_FADE_OUT | EVENT_BG_EFFECT_FLAG_FULL_FADE },
     { 3310, 0, 0, 0, 0 },
-    { 3380, 0, 0, 0, 0x2 },
-    { 3500, 0, 0, 0, 0x8008 },
+    { 3380, 0, 0, 0, EVENT_BG_EFFECT_FLAG_CLEAR },
+    { 3500, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_IN | EVENT_BG_EFFECT_FLAG_END },
 };
 
 static const EventCharaKeyframe sEvent172Track0[7] = {

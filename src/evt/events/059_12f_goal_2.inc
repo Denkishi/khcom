@@ -111,10 +111,10 @@ static const EvSoundCue sEvent059SoundCues[17] = {
 
 static const EventBgEffectEntry sEvent059BgEffects[5] = {
     { 3280, 0, 0, 0, 0 },
-    { 3310, 0, 0, 0, 0x4 },
-    { 3355, 1, 150272, 64512, 0x1 },
-    { 3380, 0, 0, 0, 0x2 },
-    { 3500, 0, 0, 0, 0x8008 },
+    { 3310, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_OUT },
+    { 3355, 1, 150272, 64512, EVENT_BG_EFFECT_FLAG_LOAD },
+    { 3380, 0, 0, 0, EVENT_BG_EFFECT_FLAG_CLEAR },
+    { 3500, 0, 0, 0, EVENT_BG_EFFECT_FLAG_FADE_IN | EVENT_BG_EFFECT_FLAG_END },
 };
 
 static const EventCharaKeyframe sEvent059Track0[25] = {

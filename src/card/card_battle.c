@@ -35,6 +35,7 @@
 #include "lockon.h"
 #include "sprite_palettes.h"
 #include "tutorial_deck.h"
+#include "enemy_ids.h"
 
 static CardDisplayWork* sSoraSelectedCard;
 static u32 sSoraCardRequest;
@@ -3615,15 +3616,15 @@ void CreateBosscardTask(TaskPool* pool) {
         kind = obj->kind;
 
         switch (kind) {
-        case 32:
-        case 33:
-        case 34:
-        case 35:
-        case 36:
-        case 37:
-        case 38:
-        case 39:
-        case 40:
+        case ENEMY_GUARD_ARMOR:
+        case ENEMY_JAFAR:
+        case ENEMY_TRICKMASTER:
+        case ENEMY_URSULA:
+        case ENEMY_PARASITE_CAGE:
+        case ENEMY_DRAGON_MALEFICENT:
+        case ENEMY_DARKSIDE:
+        case ENEMY_OOGIE_BOOGIE:
+        case ENEMY_MARLUXIA_2:
             TaskCreate(pool, &gTaskDescBosscard, &kind);
             return;
         }

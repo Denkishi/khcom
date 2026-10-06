@@ -938,7 +938,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     work->state = BOS_URSULA_TAKO_STATE_IDLE;
     ColliderInit(&work->collider, 7, BosUrsulaGetTakoPlatformRadius(work->isLeft), 1);
     ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x3800);
-    SetEnemyHpFromStats(&work->obj, 35, 51);
+    SetEnemyHpFromStats(&work->obj, ENEMY_URSULA, 51);
 }
 
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
@@ -1057,7 +1057,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
             BosUrsulaTakoGetPosition(&x, &y, &z, work);
             InitEnemyBtlObj(&work->obj, &sBosUrsulaTakoEmyKind, x, y, z);
             work->obj.flags |= 0x400;
-            SetEnemyHpFromStats(&work->obj, 35, 25);
+            SetEnemyHpFromStats(&work->obj, ENEMY_URSULA, 25);
         }
 
         if (work->timer == 0) {

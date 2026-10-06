@@ -11,6 +11,12 @@ from pathlib import Path
 
 
 BINUTILS_SHA256 = 'fd7d227c0dd15cf5448385e56b8ad8313cd491839834b57c0c086ac7b7819a15'
+BINUTILS_URLS = (
+    'https://ftp.gnu.org/gnu/binutils/binutils-2.10.tar.gz',
+    'https://mirrors.kernel.org/gnu/binutils/binutils-2.10.tar.gz',
+    'https://mirrors.ocf.berkeley.edu/gnu/binutils/binutils-2.10.tar.gz',
+    'https://mirror.csclub.uwaterloo.ca/gnu/binutils/binutils-2.10.tar.gz',
+)
 AGBCC_REVISION = 'da598c1d918402c42c0c0d7128ba14567f3175e9'
 AGBCC_SHA256 = 'f69ae187a6133b1d353a01a86c1da92a9e38df06c6d3e08e2ae360ea051c1b60'
 
@@ -42,13 +48,24 @@ def main():
             subprocess.run(list(map(str, command)), cwd=directory, env=env,
                            stdout=log, stderr=subprocess.STDOUT, check=True)
 
-    def fetch(name, url, digest):
+    def fetch(name, urls, digest):
         archive = work / name
         if not archive.exists():
             temporary = archive.with_suffix('.download')
-            with urllib.request.urlopen(url) as response, temporary.open('wb') as output:
-                shutil.copyfileobj(response, output)
-            temporary.replace(archive)
+            failures = []
+            for url in [urls] if isinstance(urls, str) else urls:
+                try:
+                    with urllib.request.urlopen(url, timeout=60) as response, temporary.open('wb') as output:
+                        shutil.copyfileobj(response, output)
+                except OSError as error:
+                    failures.append(f'{url}: {error}')
+                    continue
+                if hashlib.sha256(temporary.read_bytes()).hexdigest() == digest:
+                    temporary.replace(archive)
+                    break
+                failures.append(f'{url}: SHA-256 differs from the pinned source')
+            else:
+                raise RuntimeError(f'could not download {name}:\n' + '\n'.join(failures))
         if hashlib.sha256(archive.read_bytes()).hexdigest() != digest:
             raise ValueError(f'{archive}: SHA-256 differs from the pinned source')
         return archive
@@ -61,7 +78,7 @@ def main():
             raise ValueError(f'{path}: expected source for host compatibility edit is absent')
 
     print('Building the binutils 2.10 assembler and linker', flush=True)
-    archive = fetch('binutils-2.10.tar.gz', 'https://ftp.gnu.org/gnu/binutils/binutils-2.10.tar.gz', BINUTILS_SHA256)
+    archive = fetch('binutils-2.10.tar.gz', BINUTILS_URLS, BINUTILS_SHA256)
     source = work / 'binutils-2.10'
     if not source.exists():
         run(['tar', '-xzf', archive, '-C', work])

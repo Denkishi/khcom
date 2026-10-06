@@ -645,7 +645,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     } else {
         switch (gGameState.battleStage) {
         case BATTLE_STAGE_WONDERLAND:
-        case 2:
+        case BATTLE_STAGE_GARDEN:
             work->groundSongs = sBtlSoraGroundSongs[0];
             break;
         case BATTLE_STAGE_AGRABAH:

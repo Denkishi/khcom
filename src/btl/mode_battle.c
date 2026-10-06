@@ -154,7 +154,7 @@ void mode_battle_0(u32 mode) {
 
         switch (gGameState.battleStage) {
         case BATTLE_STAGE_WONDERLAND:
-        case 2:
+        case BATTLE_STAGE_GARDEN:
             m4aSongNumStart(SONG_BGM_ALICE_BTL);
             break;
         case BATTLE_STAGE_AGRABAH:

@@ -156,7 +156,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 2:
+        case BATTLE_STAGE_GARDEN:
             LoadBgTiles(gBtlWork->mapBg, gBtlBgGardenTiles, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gBtlBgGardenPalette, 0x140);
 #ifdef VERSION_EU

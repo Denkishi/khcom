@@ -249,7 +249,7 @@ static const ChkBtlWorld sChkBtlWorlds[13] = {
     { BATTLE_STAGE_TWILIGHT_TOWN, "\x82\x73\x82\x76\x82\x68" },
     { BATTLE_STAGE_TRAVERSE_TOWN, "\x82\x73\x82\x76\x82\x6d" },
     { BATTLE_STAGE_WONDERLAND, "\x82\x76\x82\x6e\x82\x6d" },
-    { 2, "\x82\x66\x82\x71\x82\x63" },
+    { BATTLE_STAGE_GARDEN, "\x82\x66\x82\x71\x82\x63" },
     { BATTLE_STAGE_OLYMPUS_COLISEUM, "\x82\x62\x82\x6e\x82\x6b" },
     { BATTLE_STAGE_MONSTRO, "\x82\x6c\x82\x6e\x82\x6d" },
     { BATTLE_STAGE_NEVER_LAND, "\x82\x6d\x82\x64\x82\x75" },

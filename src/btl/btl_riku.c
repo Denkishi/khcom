@@ -690,7 +690,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     } else {
         switch (gGameState.battleStage) {
         case BATTLE_STAGE_WONDERLAND:
-        case 2:
+        case BATTLE_STAGE_GARDEN:
             work->groundSongs = sBtlRikuGroundSongs[0];
             break;
         case BATTLE_STAGE_AGRABAH:

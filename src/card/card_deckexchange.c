@@ -2019,11 +2019,11 @@ void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* work, u16 index) {
     work->textSlotCount5 = LoadTextSlots((void*)gCardKindDescriptions[d->kind], work->textSlots5);
 }
 
-void SetDeckExchangeGridRowCount(DeckExchangeWork* work, s16 n) {
-    work->rowCount = n / 3;
+void SetDeckExchangeGridRowCount(DeckExchangeWork* work, s16 cardCount) {
+    work->rowCount = cardCount / 3;
 
-    if (n % 3 != 0) {
-        work->rowCount = n / 3 + 1;
+    if (cardCount % 3 != 0) {
+        work->rowCount = cardCount / 3 + 1;
     }
 }
 

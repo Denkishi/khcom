@@ -735,7 +735,7 @@ u8 AreThreeCardValuesEqual(CardDisplayWork** cards, u8 count) {
     return 1;
 }
 
-s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, u8* flag) {
+s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stockKeys, u8* flag) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -819,13 +819,13 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, 
     case 0xC8D2348D:
     case 0xC9725C97:
     case 0xCA1284A1:
-        if ((u16)(kind - 10) <= 5 && IsStockLearned(0)) {
-            arr->keys[0] = 50;
+        if ((u16)(value - 10) <= 5 && IsStockLearned(0)) {
+            stockKeys->keys[0] = 50;
             return 50;
         }
 
-        if ((u16)(kind - 20) <= 3 && IsStockLearned(2)) {
-            arr->keys[0] = 51;
+        if ((u16)(value - 20) <= 3 && IsStockLearned(2)) {
+            stockKeys->keys[0] = 51;
             return 51;
         }
 
@@ -906,15 +906,15 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, 
         break;
     case 0xE95A5695:
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-            if ((u16)(kind - 5) <= 10) {
+            if ((u16)(value - 5) <= 10) {
                 return 82;
             }
 
-            if ((u16)(kind - 16) <= 9) {
+            if ((u16)(value - 16) <= 9) {
                 return 83;
             }
 
-            if (kind > 26) {
+            if (value > 26) {
                 return 84;
             }
         }
@@ -1055,43 +1055,43 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, 
     }
 
     if ((u8)IsThreeDistinctAttackCards(cards, count)) {
-        if ((u16)(kind - 10) <= 5 && IsStockLearned(1)) {
-            arr->keys[0] = 46;
+        if ((u16)(value - 10) <= 5 && IsStockLearned(1)) {
+            stockKeys->keys[0] = 46;
             return 46;
         }
 
-        if ((u16)(kind - 20) <= 3 && IsStockLearned(5)) {
-            arr->keys[0] = 5;
+        if ((u16)(value - 20) <= 3 && IsStockLearned(5)) {
+            stockKeys->keys[0] = 5;
             return 5;
         }
     }
 
     if ((u8)IsThreeAttackCardsNoMove18(cards, count)) {
-        if ((u16)(kind - 1) <= 5 && IsStockLearned(6)) {
-            arr->keys[0] = 47;
+        if ((u16)(value - 1) <= 5 && IsStockLearned(6)) {
+            stockKeys->keys[0] = 47;
             return 47;
         }
 
-        if ((u16)(kind - 24) <= 2 && IsStockLearned(4)) {
-            arr->keys[0] = 6;
+        if ((u16)(value - 24) <= 2 && IsStockLearned(4)) {
+            stockKeys->keys[0] = 6;
             return 6;
         }
 
-        if ((u16)(kind - 7) <= 2 && IsStockLearned(7)) {
-            arr->keys[0] = 48;
+        if ((u16)(value - 7) <= 2 && IsStockLearned(7)) {
+            stockKeys->keys[0] = 48;
             return 48;
         }
 
-        if (kind == 0 || kind == 27) {
+        if (value == 0 || value == 27) {
             if (IsStockLearned(3)) {
-                arr->keys[0] = 52;
+                stockKeys->keys[0] = 52;
                 return 52;
             }
         }
     }
 
     if ((u8)IsAttackDonaldGoofyAnyOrder(cards, count) && IsStockLearned(8)) {
-        arr->keys[0] = 49;
+        stockKeys->keys[0] = 49;
         return 49;
     }
 
@@ -1102,13 +1102,13 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, 
     }
 
     if (ret == 1) {
-        return arr->keys[0];
+        return stockKeys->keys[0];
     }
 
     return 107;
 }
 
-s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, u8* flag, s32 side) {
+s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stockKeys, u8* flag, s32 side) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -1192,13 +1192,13 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* a
     case 0xC8D2348D:
     case 0xC9725C97:
     case 0xCA1284A1:
-        if ((u16)(kind - 10) <= 5 && IsLinkSideStockLearned(0, side)) {
-            arr->keys[0] = 50;
+        if ((u16)(value - 10) <= 5 && IsLinkSideStockLearned(0, side)) {
+            stockKeys->keys[0] = 50;
             return 50;
         }
 
-        if ((u16)(kind - 20) <= 3 && IsLinkSideStockLearned(2, side)) {
-            arr->keys[0] = 51;
+        if ((u16)(value - 20) <= 3 && IsLinkSideStockLearned(2, side)) {
+            stockKeys->keys[0] = 51;
             return 51;
         }
 
@@ -1279,15 +1279,15 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* a
         break;
     case 0xE95A5695:
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-            if ((u16)(kind - 5) <= 10) {
+            if ((u16)(value - 5) <= 10) {
                 return 82;
             }
 
-            if ((u16)(kind - 16) <= 9) {
+            if ((u16)(value - 16) <= 9) {
                 return 83;
             }
 
-            if (kind > 26) {
+            if (value > 26) {
                 return 84;
             }
         }
@@ -1428,43 +1428,43 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* a
     }
 
     if ((u8)IsThreeDistinctAttackCards(cards, count)) {
-        if ((u16)(kind - 10) <= 5 && IsLinkSideStockLearned(1, side)) {
-            arr->keys[0] = 46;
+        if ((u16)(value - 10) <= 5 && IsLinkSideStockLearned(1, side)) {
+            stockKeys->keys[0] = 46;
             return 46;
         }
 
-        if ((u16)(kind - 20) <= 3 && IsLinkSideStockLearned(5, side)) {
-            arr->keys[0] = 5;
+        if ((u16)(value - 20) <= 3 && IsLinkSideStockLearned(5, side)) {
+            stockKeys->keys[0] = 5;
             return 5;
         }
     }
 
     if ((u8)IsThreeAttackCardsNoMove18(cards, count)) {
-        if ((u16)(kind - 1) <= 5 && IsLinkSideStockLearned(6, side)) {
-            arr->keys[0] = 47;
+        if ((u16)(value - 1) <= 5 && IsLinkSideStockLearned(6, side)) {
+            stockKeys->keys[0] = 47;
             return 47;
         }
 
-        if ((u16)(kind - 24) <= 2 && IsLinkSideStockLearned(4, side)) {
-            arr->keys[0] = 6;
+        if ((u16)(value - 24) <= 2 && IsLinkSideStockLearned(4, side)) {
+            stockKeys->keys[0] = 6;
             return 6;
         }
 
-        if ((u16)(kind - 7) <= 2 && IsLinkSideStockLearned(7, side)) {
-            arr->keys[0] = 48;
+        if ((u16)(value - 7) <= 2 && IsLinkSideStockLearned(7, side)) {
+            stockKeys->keys[0] = 48;
             return 48;
         }
 
-        if (kind == 0 || kind == 27) {
+        if (value == 0 || value == 27) {
             if (IsLinkSideStockLearned(3, side)) {
-                arr->keys[0] = 52;
+                stockKeys->keys[0] = 52;
                 return 52;
             }
         }
     }
 
     if ((u8)IsAttackDonaldGoofyAnyOrder(cards, count) && IsLinkSideStockLearned(8, side)) {
-        arr->keys[0] = 49;
+        stockKeys->keys[0] = 49;
         return 49;
     }
 
@@ -1475,7 +1475,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* a
     }
 
     if (ret == 1) {
-        return arr->keys[0];
+        return stockKeys->keys[0];
     }
 
     return 107;

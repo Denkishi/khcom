@@ -37,7 +37,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 b);
 s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards);
 s32 GetCardIdForKindEntry(s32 kind);
 void ClearCardGrid(DeckMenuWork* work);
-void SetGridRowCount(DeckMenuWork* work, s16 n);
+void SetGridRowCount(DeckMenuWork* work, s16 cardCount);
 void UpdateGridScrollBar(DeckMenuWork* work);
 void ScrollGridDown(DeckMenuWork* work);
 DeckCard2Work* GetCardAtCursor(DeckMenuWork* work);

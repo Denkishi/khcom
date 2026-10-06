@@ -362,7 +362,7 @@ static u16 sUnk_02034AB2;
 
 CardUiSpriteState gCardUiSpriteState EWRAM_COMMON(16);
 
-void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p) {
+void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCount, void* p) {
     u16 mask;
     u16 i;
     s32 x;
@@ -406,7 +406,7 @@ void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void
     }
 }
 
-u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p) {
+u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCount, void* p) {
     u16 mask;
     u16 i;
     u16 count;
@@ -431,7 +431,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* 
         mask = 0x7000;
     }
 
-    for (i = 0, count = 0; i < n; i++) {
+    for (i = 0, count = 0; i < entryCount; i++) {
         if (out[i].count != 0) {
             out[i].indices = EwramAlloc(out[i].count * 2);
             count++;
@@ -4625,11 +4625,11 @@ void ClearCardGrid(DeckMenuWork* work) {
     TaskPoolUpdate(&work->taskpool);
 }
 
-void SetGridRowCount(DeckMenuWork* work, s16 n) {
-    work->rowCount = n / 3;
+void SetGridRowCount(DeckMenuWork* work, s16 cardCount) {
+    work->rowCount = cardCount / 3;
 
-    if (n % 3 != 0) {
-        work->rowCount = n / 3 + 1;
+    if (cardCount % 3 != 0) {
+        work->rowCount = cardCount / 3 + 1;
     }
 }
 

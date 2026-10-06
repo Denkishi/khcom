@@ -288,17 +288,17 @@ void FreePrintLayer() {
     EwramFree(sPrintLines);
 }
 
-u8 GetStringLength(const u8* s) {
+u8 GetStringLength(const u8* text) {
     u8 n;
 
     n = 0;
 
-    if (s == NULL) {
+    if (text == NULL) {
         return 0;
     }
 
-    while (*s++ != 0) {
-        if (*s != 0) {
+    while (*text++ != 0) {
+        if (*text != 0) {
             n++;
         }
     }
@@ -306,19 +306,19 @@ u8 GetStringLength(const u8* s) {
     return n + 1;
 }
 
-void PrintString(u8 x, u8 y, u8 color, const u8* s) {
+void PrintString(u8 x, u8 y, u8 color, const u8* text) {
     u8 n;
     u8 i;
 
     if (sPrintLineCount < 32) {
-        n = GetStringLength(s);
+        n = GetStringLength(text);
 
         if (n > 32) {
             n = 32;
         }
 
         for (i = 0; i < n; i++) {
-            sPrintLines[sPrintLineCount].tilemap[i] = s[i];
+            sPrintLines[sPrintLineCount].tilemap[i] = text[i];
             sPrintLines[sPrintLineCount].tilemap[i] |= color << 12;
         }
 
@@ -439,20 +439,20 @@ void PrintBinary16(u16 x, u16 y, u16 color, u16 bits) {
     PrintString(x, y, color, s);
 }
 
-void PrintHex32(u16 x, u16 y, u16 color, u32 v) {
+void PrintHex32(u16 x, u16 y, u16 color, u32 value) {
     u8 s[11];
     s32 i;
 
     s[0] = '0';
     s[1] = 'x';
-    s[2] = v >> 28;
-    s[3] = (v & 0x0F000000) >> 24;
-    s[4] = (v & 0x00F00000) >> 20;
-    s[5] = (v & 0x000F0000) >> 16;
-    s[6] = (v & 0x0000F000) >> 12;
-    s[7] = (v & 0x00000F00) >> 8;
-    s[8] = (v & 0x000000F0) >> 4;
-    s[9] = v & 0x0000000F;
+    s[2] = value >> 28;
+    s[3] = (value & 0x0F000000) >> 24;
+    s[4] = (value & 0x00F00000) >> 20;
+    s[5] = (value & 0x000F0000) >> 16;
+    s[6] = (value & 0x0000F000) >> 12;
+    s[7] = (value & 0x00000F00) >> 8;
+    s[8] = (value & 0x000000F0) >> 4;
+    s[9] = value & 0x0000000F;
 
     for (i = 0; i < 8; i++) {
         s[i + 2] += s[i + 2] <= 9 ? '0' : '7';

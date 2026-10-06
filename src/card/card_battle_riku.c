@@ -391,7 +391,7 @@ u8 IsRikuSelectionEmpty() {
     return 0;
 }
 
-void CreateRikuCardDisplay(CardBattleWork* work, u8 slot) {
+void CreateRikuCardDisplay(CardBattleWork* work, u8 listIndex) {
     CardDisplayArgs args;
     u16 id;
     CardSlot* card;
@@ -400,16 +400,16 @@ void CreateRikuCardDisplay(CardBattleWork* work, u8 slot) {
 
     count = 0;
 
-    if (work->cursors[slot] != 0xFFFF && work->slotCounts[slot] > 0) {
-        id = work->cursors[slot];
-        card = FindNextAvailableSlot(work, slot, &id);
+    if (work->cursors[listIndex] != 0xFFFF && work->slotCounts[listIndex] > 0) {
+        id = work->cursors[listIndex];
+        card = FindNextAvailableSlot(work, listIndex, &id);
 
         if (card != NULL) {
-            args.pool = &work->cardDisplays[slot];
+            args.pool = &work->cardDisplays[listIndex];
             args.index = id;
-            args.listIndex = slot;
+            args.listIndex = listIndex;
             args.slot = card;
-            args.reloadCount = work->reloadCounts[slot];
+            args.reloadCount = work->reloadCounts[listIndex];
 
             if (card->cardId == CARD_ID_RELOAD) {
                 sRikuSelectedCard = TaskCreate(&work->tasks, &gTaskDescReloadCard, &args)->work;
@@ -423,10 +423,10 @@ void CreateRikuCardDisplay(CardBattleWork* work, u8 slot) {
 
     switch (count) {
     case 0:
-        args.pool = &work->cardDisplays[slot];
+        args.pool = &work->cardDisplays[listIndex];
         args.index = 0xFFFF;
-        args.slot = work->slots[slot];
-        args.listIndex = slot;
+        args.slot = work->slots[listIndex];
+        args.listIndex = listIndex;
         node = TaskCreate(&work->tasks, &gTaskDescNOCard, &args)->work;
         node->swingAngleTarget = node->swingAngle = sRikuCardSwingAngles[0];
         node->ringIndex = 0;
@@ -442,7 +442,7 @@ void CreateRikuCardDisplay(CardBattleWork* work, u8 slot) {
     }
 }
 
-void LoadRikuDeckCardSlots(CardBattleWork* work, CardSlot* slots, s8 kind, s32 n) {
+void LoadRikuDeckCardSlots(CardBattleWork* work, CardSlot* slots, s8 listIndex, s32 cardCount) {
     const Deck* deck;
     u32 count;
 
@@ -450,101 +450,101 @@ void LoadRikuDeckCardSlots(CardBattleWork* work, CardSlot* slots, s8 kind, s32 n
     case 157:
     case 179:
         deck = &sRikuDecks[20];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 158:
         deck = &sRikuDecks[4];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 159:
         deck = &sRikuDecks[1];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 160:
         deck = &sRikuDecks[2];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 161:
         deck = &sRikuDecks[5];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 162:
         deck = &sRikuDecks[0];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 163:
         deck = &sRikuDecks[3];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 164:
         deck = &sRikuDecks[7];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 165:
         deck = &sRikuDecks[13];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 166:
         deck = &sRikuDecks[14];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 177:
         deck = &sRikuDecks[19];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 167:
         deck = &sRikuDecks[17];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 168:
         deck = &sRikuDecks[6];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 169:
         deck = &sRikuDecks[9];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 170:
         deck = &sRikuDecks[10];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 171:
         deck = &sRikuDecks[16];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 172:
         deck = &sRikuDecks[18];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 173:
         deck = &sRikuDecks[12];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 174:
         deck = &sRikuDecks[11];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 175:
         deck = &sRikuDecks[8];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     case 176:
         deck = &sRikuDecks[15];
-        n = deck->cardCount;
+        cardCount = deck->cardCount;
         break;
     default:
         deck = GetLinkPartnerDeck();
-        n = 99;
+        cardCount = 99;
         break;
     }
 
-    count = FillCardSlotsFromIds(slots, deck->cards, n, kind);
+    count = FillCardSlotsFromIds(slots, deck->cards, cardCount, listIndex);
 
     if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
-        ShuffleCardSlots(work->slots[kind], count);
+        ShuffleCardSlots(work->slots[listIndex], count);
     }
 
-    if (kind == 0) {
+    if (listIndex == 0) {
         slots[count].unk_06 = 0;
         slots[count].stocked = 0;
         slots[count].removed = 0;
@@ -553,18 +553,18 @@ void LoadRikuDeckCardSlots(CardBattleWork* work, CardSlot* slots, s8 kind, s32 n
     }
 }
 
-u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 n, u8 kind) {
+u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 idCount, u8 listIndex) {
     u16 count = 0;
     s32 i;
 
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < idCount; i++) {
         if (ids[i] != 0xFFFF) {
-            switch (kind) {
+            switch (listIndex) {
             case 0:
                 if (gCardDefs[ids[i] & CARD_ID_MASK].category <= 2) {
-                    out[count].unk_06 = kind;
-                    out[count].stocked = kind;
-                    out[count].removed = kind;
+                    out[count].unk_06 = listIndex;
+                    out[count].stocked = listIndex;
+                    out[count].removed = listIndex;
                     out[count].cardId = ids[i];
                     out[count].index = count;
                     count++;
@@ -1538,7 +1538,7 @@ u8 UpdateRikuReloadDeal(CardBattleWork* work, void* task) {
     return 1;
 }
 
-void SelectNextRikuCard(CardBattleWork* work, u8 n) {
+void SelectNextRikuCard(CardBattleWork* work, u8 listIndex) {
     CardDisplayArgs args;
     CardDisplayWork* p;
     CardSlot* c;
@@ -1550,18 +1550,18 @@ void SelectNextRikuCard(CardBattleWork* work, u8 n) {
             sRikuSelectedCard->timer = 4;
             v = sRikuSelectedCard->args.index + 1;
 
-            if ((s16)v >= work->slotCounts[n]) {
+            if ((s16)v >= work->slotCounts[listIndex]) {
                 v = 0;
             }
 
-            c = FindNextAvailableSlot(work, n, &v);
+            c = FindNextAvailableSlot(work, listIndex, &v);
 
             if (c != NULL) {
-                args.pool = &work->cardDisplays[n];
+                args.pool = &work->cardDisplays[listIndex];
                 args.index = v;
-                args.listIndex = n;
+                args.listIndex = listIndex;
                 args.slot = c;
-                args.reloadCount = work->reloadCounts[n];
+                args.reloadCount = work->reloadCounts[listIndex];
 
                 if (c->cardId == CARD_ID_RELOAD) {
                     p = TaskCreate(&work->tasks, &gTaskDescReloadCard, &args)->work;
@@ -1582,7 +1582,7 @@ void SelectNextRikuCard(CardBattleWork* work, u8 n) {
     }
 }
 
-void SelectPrevRikuCard(CardBattleWork* work, u8 n) {
+void SelectPrevRikuCard(CardBattleWork* work, u8 listIndex) {
     CardDisplayArgs args;
     CardDisplayWork* p;
     CardSlot* c;
@@ -1596,17 +1596,17 @@ void SelectPrevRikuCard(CardBattleWork* work, u8 n) {
             v = sRikuSelectedCard->args.index - 1;
 
             if ((s16)v < 0) {
-                v = work->slotCounts[n] - 1;
+                v = work->slotCounts[listIndex] - 1;
             }
 
-            c = FindPrevAvailableSlot(work, n, &v);
+            c = FindPrevAvailableSlot(work, listIndex, &v);
 
             if (c != NULL) {
-                args.pool = &work->cardDisplays[n];
+                args.pool = &work->cardDisplays[listIndex];
                 args.index = v;
-                args.listIndex = n;
+                args.listIndex = listIndex;
                 args.slot = c;
-                args.reloadCount = work->reloadCounts[n];
+                args.reloadCount = work->reloadCounts[listIndex];
 
                 if (c->cardId == CARD_ID_RELOAD) {
                     p = TaskCreate(&work->tasks, &gTaskDescReloadCard, &args)->work;
@@ -2597,7 +2597,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* work) {
     return 1;
 }
 
-void func_08081740(CardBattleWork* work, u16 n) {
+void func_08081740(CardBattleWork* work, u16 hcEffect) {
 }
 
 void SyncRikuHcEffect(CardBattleWork* work) {

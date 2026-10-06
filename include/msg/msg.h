@@ -165,7 +165,7 @@ s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots);
 void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteIndex);
 void SetSpriteTextSlotAscii(s32 x, s32 y, u8* str, u8 slot, u8 useAlternatePalette);
 void DrawBgTextLines();
-u8 GetStringLength(const u8* s);
+u8 GetStringLength(const u8* text);
 u8 EventCharaHop(EventCharaWork* work, void* task);
 void CreateMsgfaceTask(void* pool, MsgFaceControl* ctl, u8 portraitId, u8 expressionId, u8 positionIndex);
 u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText);

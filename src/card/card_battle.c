@@ -270,41 +270,41 @@ void CreateCardBattleState() {
     LoadPremiumCardGfx(gCardBattleState);
 }
 
-CardSlot* FindNextAvailableSlot(CardBattleWork* work, u8 slot, u16* n) {
+CardSlot* FindNextAvailableSlot(CardBattleWork* work, u8 listIndex, u16* index) {
     CardSlot* e;
     s16 i;
     u16 cur;
     s16 next;
 
-    i = *n;
+    i = *index;
 
-    if (work->slots[slot][i].unk_06 == 0 && !work->slots[slot][i].stocked) {
-        if (!work->slots[slot][i].used && !work->slots[slot][i].removed) {
-            return &work->slots[slot][(s16)*n];
+    if (work->slots[listIndex][i].unk_06 == 0 && !work->slots[listIndex][i].stocked) {
+        if (!work->slots[listIndex][i].used && !work->slots[listIndex][i].removed) {
+            return &work->slots[listIndex][(s16)*index];
         }
     }
 
-    cur = *n;
+    cur = *index;
     next = cur + 1;
 
-    if (next >= work->slotCounts[slot]) {
+    if (next >= work->slotCounts[listIndex]) {
         next = 0;
     }
 
     while (next != (s16)cur) {
         i = next;
 
-        if (work->slots[slot][i].unk_06 == 0 && !work->slots[slot][i].stocked) {
-            if (!work->slots[slot][i].used && !work->slots[slot][i].removed) {
-                e = &work->slots[slot][i];
-                *n = next;
+        if (work->slots[listIndex][i].unk_06 == 0 && !work->slots[listIndex][i].stocked) {
+            if (!work->slots[listIndex][i].used && !work->slots[listIndex][i].removed) {
+                e = &work->slots[listIndex][i];
+                *index = next;
                 return e;
             }
         }
 
         next = i + 1;
 
-        if (next >= work->slotCounts[slot]) {
+        if (next >= work->slotCounts[listIndex]) {
             next = 0;
         }
     }
@@ -312,34 +312,34 @@ CardSlot* FindNextAvailableSlot(CardBattleWork* work, u8 slot, u16* n) {
     return NULL;
 }
 
-CardSlot* FindPrevAvailableSlot(CardBattleWork* work, u8 slot, u16* n) {
+CardSlot* FindPrevAvailableSlot(CardBattleWork* work, u8 listIndex, u16* index) {
     CardSlot* e;
     s16 i;
     u16 cur;
     s16 next;
 
-    i = *n;
+    i = *index;
 
-    if (work->slots[slot][i].unk_06 == 0 && !work->slots[slot][i].stocked) {
-        if (!work->slots[slot][i].used && !work->slots[slot][i].removed) {
-            return &work->slots[slot][(s16)*n];
+    if (work->slots[listIndex][i].unk_06 == 0 && !work->slots[listIndex][i].stocked) {
+        if (!work->slots[listIndex][i].used && !work->slots[listIndex][i].removed) {
+            return &work->slots[listIndex][(s16)*index];
         }
     }
 
-    cur = *n;
+    cur = *index;
     next = cur - 1;
 
     if (next < 0) {
-        next = work->slotCounts[slot] - 1;
+        next = work->slotCounts[listIndex] - 1;
     }
 
     while (next != (s16)cur) {
         i = next;
 
-        if (work->slots[slot][i].unk_06 == 0 && !work->slots[slot][i].stocked) {
-            if (!work->slots[slot][i].used && !work->slots[slot][i].removed) {
-                e = &work->slots[slot][i];
-                *n = next;
+        if (work->slots[listIndex][i].unk_06 == 0 && !work->slots[listIndex][i].stocked) {
+            if (!work->slots[listIndex][i].used && !work->slots[listIndex][i].removed) {
+                e = &work->slots[listIndex][i];
+                *index = next;
                 return e;
             }
         }
@@ -347,14 +347,14 @@ CardSlot* FindPrevAvailableSlot(CardBattleWork* work, u8 slot, u16* n) {
         next = i - 1;
 
         if (next < 0) {
-            next = work->slotCounts[slot] - 1;
+            next = work->slotCounts[listIndex] - 1;
         }
     }
 
     return NULL;
 }
 
-void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
+void CreateSoraCardRing(CardBattleWork* work, u8 listIndex) {
     CardDisplayArgs arg;
     s16 n;
     s16 count = 0;
@@ -363,18 +363,18 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
     CardDisplayWork* e;
     CardDisplayWork* p;
 
-    if (work->cursors[slot] != 0xFFFF) {
-        u32 index = work->cursors[slot];
+    if (work->cursors[listIndex] != 0xFFFF) {
+        u32 index = work->cursors[listIndex];
         n = index;
         old = index;
-        c = FindNextAvailableSlot(work, slot, &n);
+        c = FindNextAvailableSlot(work, listIndex, &n);
 
         if (c != NULL) {
-            arg.pool = &work->cardDisplays[slot];
+            arg.pool = &work->cardDisplays[listIndex];
             arg.index = n;
-            arg.listIndex = slot;
+            arg.listIndex = listIndex;
             arg.slot = c;
-            arg.reloadCount = work->reloadCounts[slot];
+            arg.reloadCount = work->reloadCounts[listIndex];
 
             if (c->cardId == CARD_ID_RELOAD) {
                 TaskCreate(&work->tasks, &gTaskDescCardReload, &arg);
@@ -388,18 +388,18 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
             count++;
         }
 
-        if (n >= work->slotCounts[slot]) {
+        if (n >= work->slotCounts[listIndex]) {
             n = 0;
         }
 
-        c = FindNextAvailableSlot(work, slot, &n);
+        c = FindNextAvailableSlot(work, listIndex, &n);
 
-        if (c != NULL && n != work->cursors[slot]) {
-            arg.pool = &work->cardDisplays[slot];
+        if (c != NULL && n != work->cursors[listIndex]) {
+            arg.pool = &work->cardDisplays[listIndex];
             arg.index = n;
-            arg.listIndex = slot;
+            arg.listIndex = listIndex;
             arg.slot = c;
-            arg.reloadCount = work->reloadCounts[slot];
+            arg.reloadCount = work->reloadCounts[listIndex];
 
             if (c->cardId == CARD_ID_RELOAD) {
                 TaskCreate(&work->tasks, &gTaskDescCardReload, &arg);
@@ -412,20 +412,20 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
             count++;
         }
 
-        n = work->cursors[slot] - 1;
+        n = work->cursors[listIndex] - 1;
 
         if (n < 0) {
-            n = work->slotCounts[slot] - 1;
+            n = work->slotCounts[listIndex] - 1;
         }
 
-        c = FindPrevAvailableSlot(work, slot, &n);
+        c = FindPrevAvailableSlot(work, listIndex, &n);
 
-        if (c != NULL && n != work->cursors[slot] && n != (s16)old) {
-            arg.pool = &work->cardDisplays[slot];
+        if (c != NULL && n != work->cursors[listIndex] && n != (s16)old) {
+            arg.pool = &work->cardDisplays[listIndex];
             arg.index = n;
-            arg.listIndex = slot;
+            arg.listIndex = listIndex;
             arg.slot = c;
-            arg.reloadCount = work->reloadCounts[slot];
+            arg.reloadCount = work->reloadCounts[listIndex];
 
             if (c->cardId == CARD_ID_RELOAD) {
                 TaskCreate(&work->tasks, &gTaskDescCardReload, &arg);
@@ -440,12 +440,12 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
 
     switch (count) {
         case 0:
-            arg.pool = &work->cardDisplays[slot];
+            arg.pool = &work->cardDisplays[listIndex];
             arg.index = 0xFFFF;
-            arg.slot = work->slots[slot];
-            arg.listIndex = slot;
+            arg.slot = work->slots[listIndex];
+            arg.listIndex = listIndex;
             TaskCreate(&work->tasks, &gTaskDescCardNotHave, &arg);
-            e = ListPoolFirst(&work->cardDisplays[slot]);
+            e = ListPoolFirst(&work->cardDisplays[listIndex]);
             e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 1;
@@ -453,7 +453,7 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
             e->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_VISIBLE);
             break;
         case 1:
-            e = ListPoolFirst(&work->cardDisplays[slot]);
+            e = ListPoolFirst(&work->cardDisplays[listIndex]);
             e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 1;
@@ -461,7 +461,7 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
             e->flags |= CARD_DISP_FLAG_VISIBLE;
             break;
         case 2:
-            e = ListPoolFirst(&work->cardDisplays[slot]);
+            e = ListPoolFirst(&work->cardDisplays[listIndex]);
             e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->priority = 50;
@@ -475,7 +475,7 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
             e->flags |= CARD_DISP_FLAG_VISIBLE;
             break;
         case 3:
-            e = ListPoolFirst(&work->cardDisplays[slot]);
+            e = ListPoolFirst(&work->cardDisplays[listIndex]);
             e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->priority = 50;
@@ -496,7 +496,7 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
             break;
     }
 
-    p = ListPoolFirst(&work->cardDisplays[slot]);
+    p = ListPoolFirst(&work->cardDisplays[listIndex]);
 
     while (p != NULL) {
         // @bug A "not have" display has no slot (NULL write).
@@ -504,11 +504,11 @@ void CreateSoraCardRing(CardBattleWork* work, u8 slot) {
         p = ListPoolNext(&p->node);
     }
 
-    work->selectedCards[slot] = ListPoolFirst(&work->cardDisplays[slot]);
+    work->selectedCards[listIndex] = ListPoolFirst(&work->cardDisplays[listIndex]);
 
     {
         CardDisplayWork** active = &sSoraSelectedCard;
-        *active = ListPoolFirst(&work->cardDisplays[slot]);
+        *active = ListPoolFirst(&work->cardDisplays[listIndex]);
     }
 
     sSoraSelectedCard->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
@@ -1504,20 +1504,20 @@ const s32 gPlayedCardAngles[3] = {
     0x5A00, 0, 0xAC00,
 };
 
-u8 AreCardsSettled(CardDisplayWork** stock, u8 n) {
+u8 AreCardsSettled(CardDisplayWork** stock, u8 stockCount) {
     u8 count;
     u8 i;
 
     i = 0;
     count = 0;
 
-    for (; i < n; i++) {
+    for (; i < stockCount; i++) {
         if (stock[i]->flags & CARD_DISP_FLAG_SETTLED) {
             count++;
         }
     }
 
-    if (n == count) {
+    if (stockCount == count) {
         return 1;
     }
 
@@ -1585,16 +1585,16 @@ void LoadTutorialDeckCardSlots(CardSlot* slots) {
     slots[n].restoreOnReload = 0;
 }
 
-void ShuffleCardSlots(CardSlot* slots, u8 n) {
+void ShuffleCardSlots(CardSlot* slots, u8 count) {
     CardSlot a;
     CardSlot b;
     u8 i;
     u8 x;
     u8 y;
 
-    for (i = 0; i < n; i++) {
-        x = GetRandom() % n;
-        y = GetRandom() % n;
+    for (i = 0; i < count; i++) {
+        x = GetRandom() % count;
+        y = GetRandom() % count;
 
         if (x != y) {
             a = slots[x];
@@ -1734,16 +1734,16 @@ void InitSoraCardList(CardBattleWork* work, s32 mode) {
     }
 }
 
-u16 CountAvailableCardSlots(CardBattleWork* work, u8 n) {
+u16 CountAvailableCardSlots(CardBattleWork* work, u8 listIndex) {
     u16 count;
     u16 i;
     u16 max;
 
-    max = work->slotCounts[n];
+    max = work->slotCounts[listIndex];
     count = 0;
 
     for (i = 0; i < max; i++) {
-        if (work->slots[n][i].unk_06 == 0 && !work->slots[n][i].stocked && !work->slots[n][i].used && !work->slots[n][i].removed) {
+        if (work->slots[listIndex][i].unk_06 == 0 && !work->slots[listIndex][i].stocked && !work->slots[listIndex][i].used && !work->slots[listIndex][i].removed) {
             count++;
         }
     }
@@ -1751,16 +1751,16 @@ u16 CountAvailableCardSlots(CardBattleWork* work, u8 n) {
     return count;
 }
 
-u16 CountAvailableCards(CardBattleWork* work, u8 n) {
+u16 CountAvailableCards(CardBattleWork* work, u8 listIndex) {
     u16 count;
     u16 i;
     u16 max;
 
-    max = work->slotCounts[n];
+    max = work->slotCounts[listIndex];
     count = 0;
 
     for (i = 0; i < max; i++) {
-        if (work->slots[n][i].unk_06 == 0 && !work->slots[n][i].stocked && !work->slots[n][i].used && !work->slots[n][i].removed && work->slots[n][i].cardId != CARD_ID_RELOAD) {
+        if (work->slots[listIndex][i].unk_06 == 0 && !work->slots[listIndex][i].stocked && !work->slots[listIndex][i].used && !work->slots[listIndex][i].removed && work->slots[listIndex][i].cardId != CARD_ID_RELOAD) {
             count++;
         }
     }
@@ -1808,28 +1808,28 @@ void ClearUsedCardSlots(CardBattleWork* work, u8 listIndex) {
     }
 }
 
-void ResetCardSlotsForReload(CardBattleWork* work, u8 n) {
+void ResetCardSlotsForReload(CardBattleWork* work, u8 listIndex) {
     u8 i;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        for (i = 0; i < work->slotCounts[n]; i++) {
-            if (!work->slots[n][i].stocked) {
-                work->slots[n][i].used = 0;
-                work->slots[n][i].unk_06 = 0;
+        for (i = 0; i < work->slotCounts[listIndex]; i++) {
+            if (!work->slots[listIndex][i].stocked) {
+                work->slots[listIndex][i].used = 0;
+                work->slots[listIndex][i].unk_06 = 0;
             }
 
             if (!(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-                if (work->slots[n][i].restoreOnReload == 1) {
-                    work->slots[n][i].removed = 0;
-                    work->slots[n][i].restoreOnReload = 0;
+                if (work->slots[listIndex][i].restoreOnReload == 1) {
+                    work->slots[listIndex][i].removed = 0;
+                    work->slots[listIndex][i].restoreOnReload = 0;
                 }
             }
         }
     } else {
-        for (i = 0; i < work->slotCounts[n]; i++) {
-            if (!work->slots[n][i].stocked) {
-                work->slots[n][i].used = 0;
-                work->slots[n][i].unk_06 = 0;
+        for (i = 0; i < work->slotCounts[listIndex]; i++) {
+            if (!work->slots[listIndex][i].stocked) {
+                work->slots[listIndex][i].used = 0;
+                work->slots[listIndex][i].unk_06 = 0;
             }
         }
     }
@@ -1947,11 +1947,11 @@ void AddPickedCardToSoraDeck(CardBattleWork* work) {
     }
 }
 
-void SelectOtherSoraCard(CardBattleWork* work, u8 kind, u8 timer) {
+void SelectOtherSoraCard(CardBattleWork* work, u8 listIndex, u8 timer) {
     CardDisplayWork* node;
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
-    node = ListPoolFirst(&work->cardDisplays[kind]);
+    node = ListPoolFirst(&work->cardDisplays[listIndex]);
 
     while (node != NULL) {
         switch (node->ringIndex) {
@@ -3318,12 +3318,12 @@ void ClearStockedCardSlots(CardBattleWork* work) {
     }
 }
 
-u8 CountSoraCardDisplays(CardBattleWork* work, u8 n) {
+u8 CountSoraCardDisplays(CardBattleWork* work, u8 listIndex) {
     CardDisplayWork* node;
     u8 count;
 
     count = 0;
-    node = ListPoolFirst(&work->cardDisplays[n]);
+    node = ListPoolFirst(&work->cardDisplays[listIndex]);
 
     while (node != NULL) {
         count++;
@@ -3586,7 +3586,7 @@ void CreateBosscardTask(TaskPool* pool) {
     }
 }
 
-void func_0807B458(CardBattleWork* work, u16 value) {
+void func_0807B458(CardBattleWork* work, u16 hcEffect) {
 }
 
 void SyncSoraHcEffect(CardBattleWork* work) {

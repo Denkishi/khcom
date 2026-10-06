@@ -329,12 +329,12 @@ u8 CreateLevelUpEffectTask(BtlObj* target, TaskPool* pool) {
     return 1;
 }
 
-void LoadEventMapObjectGfx(EventMapObjectWork* work, EventBackgroundDef* t) {
+void LoadEventMapObjectGfx(EventMapObjectWork* work, EventBackgroundDef* background) {
     EventMapObjectDef* q;
     EventMapObjectPlacement* entries;
     u8 i;
 
-    q = t->mapObjects;
+    q = background->mapObjects;
     entries = q->placements;
 
     for (i = 0; i < 10; i++) {

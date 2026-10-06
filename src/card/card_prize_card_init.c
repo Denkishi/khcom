@@ -903,7 +903,7 @@ void PrizeCardInitDestroy(PrizeCardInitWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n) {
+u16 PickPrizeMapCardKind(const PrizeMapCardGroup* groups, u16 groupCount) {
     s32 i;
     const PrizeMapCardEntry* arr;
     u16 cnt;
@@ -913,12 +913,12 @@ u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n) {
     i = 0;
 
     if (CountRegularMapCards() <= 98) {
-        while (i < n) {
-            arr = tbl[i].entries;
-            cnt = tbl[i].count;
+        while (i < groupCount) {
+            arr = groups[i].entries;
+            cnt = groups[i].count;
             v = GetRandom() % 100;
 
-            if (v <= tbl[i].chance) {
+            if (v <= groups[i].chance) {
                 card = arr[GetRandom() % cnt].cardId;
                 v = CountMapCardsOfKind(card);
 
@@ -929,7 +929,7 @@ u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n) {
 
             i++;
 
-            if (i >= n) {
+            if (i >= groupCount) {
                 i = 0;
             }
         }
@@ -1666,7 +1666,7 @@ void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
     ReleaseObjTiles(work->tiles);
 }
 
-void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
+void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
     MapCardDef* c;
     MapCardBackDef* b;
     MapCardBackDef* d;
@@ -1676,43 +1676,43 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     u8 t;
     u8* q;
 
-    CpuFill32(0, work, sizeof(EventKeyCard));
+    CpuFill32(0, card, sizeof(EventKeyCard));
 
     if (key->kind != 255) {
         c = &gMapCardDefs[key->kind * 10];
         b = &gMapCardBackDefs[c->backIndex];
-        work->sprite.tiles = LoadObjTiles(c->tiles, c->tilesSize);
-        work->sprite.palette = LoadObjPalette(c->palette, c->paletteSize);
-        work->sprite.gfx = *c->sprites;
-        work->sprite.tiles2 = LoadObjTiles(b->tiles, b->tilesSize);
-        work->sprite.palette2 = LoadObjPalette(b->palette, b->paletteSize);
-        work->sprite.gfx2 = *b->sprites;
-        work->sprite.tiles3 = NULL;
-        work->sprite.palette3 = NULL;
+        card->sprite.tiles = LoadObjTiles(c->tiles, c->tilesSize);
+        card->sprite.palette = LoadObjPalette(c->palette, c->paletteSize);
+        card->sprite.gfx = *c->sprites;
+        card->sprite.tiles2 = LoadObjTiles(b->tiles, b->tilesSize);
+        card->sprite.palette2 = LoadObjPalette(b->palette, b->paletteSize);
+        card->sprite.gfx2 = *b->sprites;
+        card->sprite.tiles3 = NULL;
+        card->sprite.palette3 = NULL;
         return;
     }
 
-    work->sprite.tiles = NULL;
-    work->sprite.palette = NULL;
-    work->sprite.gfx = NULL;
-    work->sprite.tiles3 = NULL;
-    work->sprite.palette3 = NULL;
+    card->sprite.tiles = NULL;
+    card->sprite.palette = NULL;
+    card->sprite.gfx = NULL;
+    card->sprite.tiles3 = NULL;
+    card->sprite.palette3 = NULL;
 
     if (key->color == 0) {
         n = key->color;
-        work->sprite.tiles2 = NULL;
-        work->sprite.palette2 = NULL;
-        work->sprite.gfx2 = NULL;
+        card->sprite.tiles2 = NULL;
+        card->sprite.palette2 = NULL;
+        card->sprite.gfx2 = NULL;
     } else {
         d = &gMapCardBackDefs[key->color];
-        work->sprite.tiles2 = LoadObjTiles(d->tiles2, d->tilesSize2);
-        work->sprite.palette2 = LoadObjPalette(d->palette, d->paletteSize);
-        work->sprite.gfx2 = *d->sprites2;
-        work->sprite.tiles3 = NULL;
-        work->sprite.tiles = NULL;
-        work->sprite.palette = NULL;
-        work->sprite.gfx = NULL;
-        work->sprite.palette3 = NULL;
+        card->sprite.tiles2 = LoadObjTiles(d->tiles2, d->tilesSize2);
+        card->sprite.palette2 = LoadObjPalette(d->palette, d->paletteSize);
+        card->sprite.gfx2 = *d->sprites2;
+        card->sprite.tiles3 = NULL;
+        card->sprite.tiles = NULL;
+        card->sprite.palette = NULL;
+        card->sprite.gfx = NULL;
+        card->sprite.palette3 = NULL;
 
         switch (key->color) {
         case 1:
@@ -1730,7 +1730,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
         }
     }
 
-    q = &work->color;
+    q = &card->color;
     *q = (z = NULL, n);
 
     if (key->rule == 0) {
@@ -1740,105 +1740,105 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     switch (key->rule) {
     case 1:
         if (key->value <= 9) {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + 0x500, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + 0x500, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         }
 
         break;
     case 2:
         if (key->value <= 9) {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + 0x580, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + 0x580, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         }
 
         break;
     case 3:
         if (key->value <= 9) {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + 0x600, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + 0x600, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         }
 
         break;
     case 4:
         if (key->value <= 9) {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x80);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[0], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x80);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[0], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
-            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[2], gMapSelectRequirementTiles);
-            work->sprite.gfx3 = z;
-            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
-            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[2], gMapSelectRequirementTiles);
+            card->sprite.gfx3 = z;
+            RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
         }
 
         t = key->value;
-        work->total = t;
-        work->drawnTotal = t;
+        card->total = t;
+        card->drawnTotal = t;
         break;
     }
 
-    work->sprite.tiles = NULL;
-    work->sprite.palette = NULL;
-    work->sprite.gfx = NULL;
-    work->sprite.palette3 = LoadObjPalette(gDoorCardPalette, 32);
+    card->sprite.tiles = NULL;
+    card->sprite.palette = NULL;
+    card->sprite.gfx = NULL;
+    card->sprite.palette3 = LoadObjPalette(gDoorCardPalette, 32);
 
-    if (work->sprite.tiles2 == NULL) {
+    if (card->sprite.tiles2 == NULL) {
         cb = &gCardBacks[4];
-        work->sprite.tiles2 = LoadObjTiles(cb->tiles2, 0x300);
-        work->sprite.palette2 = LoadObjPalette(gDoorCardPalette, 32);
-        work->sprite.gfx2 = cb->gfx2;
+        card->sprite.tiles2 = LoadObjTiles(cb->tiles2, 0x300);
+        card->sprite.palette2 = LoadObjPalette(gDoorCardPalette, 32);
+        card->sprite.gfx2 = cb->gfx2;
     }
 }
 
-void UpdateEventKeyTotal(EventKeyCard* w) {
+void UpdateEventKeyTotal(EventKeyCard* card) {
     void* z;
 
-    if (w->total <= 9) {
+    if (card->total <= 9) {
         z = NULL;
-        UpdateSpriteFrameTiles(w->sprite.tiles3, gKeyValueFrames[0], gMapSelectRequirementTiles);
-        w->sprite.gfx3 = z;
-        RequestDma3Copy(w->sprite.tiles3->src + w->total * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
+        UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[0], gMapSelectRequirementTiles);
+        card->sprite.gfx3 = z;
+        RequestDma3Copy(card->sprite.tiles3->src + card->total * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
     } else {
         z = NULL;
-        UpdateSpriteFrameTiles(w->sprite.tiles3, gKeyValueFrames[2], gMapSelectRequirementTiles);
-        w->sprite.gfx3 = z;
-        RequestDma3Copy(w->sprite.tiles3->src + (u16)(w->total / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
-        RequestDma3Copy(w->sprite.tiles3->src + (w->total - (u16)(w->total / 10) * 10) * 128, &gUnk_06010000[(w->sprite.tiles3->index + 4) * 32], 128);
+        UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[2], gMapSelectRequirementTiles);
+        card->sprite.gfx3 = z;
+        RequestDma3Copy(card->sprite.tiles3->src + (u16)(card->total / 10) * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
+        RequestDma3Copy(card->sprite.tiles3->src + (card->total - (u16)(card->total / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
     }
 
-    w->drawnTotal = w->total;
+    card->drawnTotal = card->total;
 }
 
 void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* sprite) {
@@ -1846,21 +1846,21 @@ void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* sprite) {
     sprite->y = y;
 }
 
-void DrawLayeredCardSpriteScaled(LayeredCardSprite* w, u16 flags, s16 dy, s16 scale) {
+void DrawLayeredCardSpriteScaled(LayeredCardSprite* sprite, u16 flags, s16 dy, s16 scale) {
     ObjAffine* aff;
 
     aff = AllocObjAffine(0, scale, scale, 1);
 
-    if (w->tiles != NULL) {
-        DrawSprite(w->x >> 8, dy + (w->y >> 8), w->gfx, w->tiles, w->palette, aff, flags, 10);
+    if (sprite->tiles != NULL) {
+        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx, sprite->tiles, sprite->palette, aff, flags, 10);
     }
 
-    if (w->tiles2 != NULL) {
-        DrawSprite(w->x >> 8, dy + (w->y >> 8), w->gfx2, w->tiles2, w->palette2, aff, flags, 9);
+    if (sprite->tiles2 != NULL) {
+        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx2, sprite->tiles2, sprite->palette2, aff, flags, 9);
     }
 
-    if (w->tiles3 != NULL) {
-        DrawSprite(w->x >> 8, dy + (w->y >> 8), w->gfx3, w->tiles3, w->palette3, aff, flags, 8);
+    if (sprite->tiles3 != NULL) {
+        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx3, sprite->tiles3, sprite->palette3, aff, flags, 8);
     }
 }
 
@@ -1920,12 +1920,12 @@ void ReleaseLayeredCardSprite(LayeredCardSprite* sprite) {
     }
 }
 
-u8 GetRoomCardBackIndex(u16 n) {
+u8 GetRoomCardBackIndex(u16 kind) {
     u8 idx;
 
     idx = 0;
 
-    switch (n) {
+    switch (kind) {
     case 1:
         idx = 0;
         break;

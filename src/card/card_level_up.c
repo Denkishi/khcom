@@ -1410,16 +1410,16 @@ void LevelUpSplitDigits3(u16 value, u16* digits) {
     digits[2] = o;
 }
 
-void LevelUpSplitDigits4(u16 n, u16* out) {
+void LevelUpSplitDigits4(u16 value, u16* out) {
     u16 d3;
     u16 d2;
     u16 d1;
     u16 d0;
 
-    d3 = n / 1000;
-    d2 = n / 100 - d3 * 10;
-    d1 = n / 10 - d2 * 10 - d3 * 100;
-    d0 = n - d3 * 1000 - d2 * 100 - d1 * 10;
+    d3 = value / 1000;
+    d2 = value / 100 - d3 * 10;
+    d1 = value / 10 - d2 * 10 - d3 * 100;
+    d0 = value - d3 * 1000 - d2 * 100 - d1 * 10;
     out[0] = d3;
     out[1] = d2;
     out[2] = d1;

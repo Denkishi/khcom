@@ -59,8 +59,8 @@ void Mode_Premire_2() {
     TaskPoolDestroy(&sModePremireTasks);
 }
 
-u8 GetHcEffectCountUnit(HcEffectNameWork* work, u16 n) {
-    switch (n) {
+u8 GetHcEffectCountUnit(HcEffectNameWork* work, u16 effect) {
+    switch (effect) {
     case 0:
     case 1:
     case 3:

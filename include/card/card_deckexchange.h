@@ -29,7 +29,7 @@ void ResetDeckExchangeGridScroll(DeckExchangeWork* work);
 u8 IsDeckExchangeCardAtCursor(DeckExchangeWork* work);
 u8 IsDeckExchangeCardAt(DeckExchangeWork* work, s16 x, s16 y);
 void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* work, u16 index);
-void SetDeckExchangeGridRowCount(DeckExchangeWork* work, s16 n);
+void SetDeckExchangeGridRowCount(DeckExchangeWork* work, s16 cardCount);
 void UpdateDeckExchangeGridScrollBar(DeckExchangeWork* work);
 
 #endif

@@ -625,9 +625,9 @@ typedef struct DeckMenuWork {
     u8 nameBuffer[20];
     AnimState anim4;
     void* gfx9;
-    s32 x9;
-    s32 y8;
-    s32 x10;
+    s32 keyCursorX;
+    s32 keyCursorY;
+    s32 caretX;
     union {
         struct {
             s16 x;

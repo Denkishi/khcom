@@ -4347,8 +4347,8 @@ static void Deckmenu2_2(DeckMenuWork* work) {
 
         break;
     case DECK_MENU_VIEW_KEYBOARD:
-        DrawSprite(work->x9 >> 8, work->y8 >> 8, work->gfx9, work->tiles11, work->palette7, NULL, 0, 20);
-        DrawSprite(work->x10 >> 8, 18, NULL, work->tiles13, work->palette7, NULL, 0, 21);
+        DrawSprite(work->keyCursorX >> 8, work->keyCursorY >> 8, work->gfx9, work->tiles11, work->palette7, NULL, 0, 20);
+        DrawSprite(work->caretX >> 8, 18, NULL, work->tiles13, work->palette7, NULL, 0, 21);
         DrawTextSlots(138, 16, work->textSlots6, work->palette, 20, work->textSlotCount6);
         break;
     case DECK_MENU_VIEW_DELETE_PROMPT:
@@ -6883,7 +6883,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
         InitTextSlots(work->textSlots6, 8);
         CopyDeckNameToBuffer(work);
         work->textSlotCount6 = LoadTextSlots(work->nameBuffer, work->textSlots6);
-        work->x10 = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
+        work->caretX = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
         break;
     case 1:
 #ifdef VERSION_JP
@@ -6937,8 +6937,8 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
         break;
     case 6:
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuKeyboard);
-        work->x9 = gKeyboardKeyX[0] << 8;
-        work->y8 = gKeyboardKeyY[0] << 8;
+        work->keyCursorX = gKeyboardKeyX[0] << 8;
+        work->keyCursorY = gKeyboardKeyY[0] << 8;
         work->keyCursorSteps = 4;
         work->cursor.parts.x = 0;
         work->cursor.parts.y = 0;
@@ -7013,20 +7013,20 @@ u8 func_jp_0808F638(DeckMenuWork* work, void* task) {
     if (work->keyCursorSteps != 0) {
         if (work->onEndKey == 1) {
             if (gLanguage == LANGUAGE_GERMAN) {
-                work->x9 = 0xC800;
+                work->keyCursorX = 0xC800;
             } else if (gLanguage == LANGUAGE_ITALIAN) {
-                work->x9 = 0xD100;
+                work->keyCursorX = 0xD100;
             } else {
-                work->x9 = 0xD300;
+                work->keyCursorX = 0xD300;
             }
 
-            work->y8 = 0x8C00;
+            work->keyCursorY = 0x8C00;
         } else if (work->keyboardPage == 2) {
-            ApproachValue(&work->x9, gKeyboardRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
-            ApproachValue(&work->y8, gKeyboardColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorX, gKeyboardRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorY, gKeyboardColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
         } else {
-            ApproachValue(&work->x9, gKeyboardSymbolRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
-            ApproachValue(&work->y8, gKeyboardSymbolColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorX, gKeyboardSymbolRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorY, gKeyboardSymbolColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
         }
 
         work->keyCursorSteps--;
@@ -7211,7 +7211,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
     case B_BUTTON:
         DeleteLastNameChar(work);
         work->textSlotCount6 = LoadTextSlots(work->nameBuffer, work->textSlots6);
-        work->x10 = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
+        work->caretX = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
         break;
     case A_BUTTON:
 #ifdef VERSION_EU
@@ -7226,7 +7226,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         } else {
             if ((u8)AppendKeyboardChar(work)) {
                 work->textSlotCount6 = LoadTextSlots(work->nameBuffer, work->textSlots6);
-                work->x10 = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
+                work->caretX = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
             } else {
                 work->cursor.parts.x = 14;
 #ifdef VERSION_EU
@@ -7248,14 +7248,14 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
         work->cursor.parts.y = bottom;
 
         if (gLanguage == LANGUAGE_GERMAN) {
-            work->x9 = 0xC800;
+            work->keyCursorX = 0xC800;
         } else if (gLanguage == LANGUAGE_ITALIAN) {
-            work->x9 = 0xD100;
+            work->keyCursorX = 0xD100;
         } else {
-            work->x9 = 0xD300;
+            work->keyCursorX = 0xD300;
         }
 
-        work->y8 = 0x8C00;
+        work->keyCursorY = 0x8C00;
 #else
         work->cursor.parts.y = 6;
 #endif
@@ -7310,34 +7310,34 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
         if (work->cursor.parts.x == 14 &&work->cursor.parts.y == bottom) {
             if (gLanguage == LANGUAGE_GERMAN) {
-                ApproachValue(&work->x9, 0xC800, work->keyCursorSteps);
+                ApproachValue(&work->keyCursorX, 0xC800, work->keyCursorSteps);
             } else if (gLanguage == LANGUAGE_ITALIAN) {
-                ApproachValue(&work->x9, 0xD100, work->keyCursorSteps);
+                ApproachValue(&work->keyCursorX, 0xD100, work->keyCursorSteps);
             } else {
-                ApproachValue(&work->x9, 0xD300, work->keyCursorSteps);
+                ApproachValue(&work->keyCursorX, 0xD300, work->keyCursorSteps);
             }
 #else
         if (work->cursor.packed == 0x6000E) {
-            ApproachValue(&work->x9, 0xD300, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorX, 0xD300, work->keyCursorSteps);
 #endif
-            ApproachValue(&work->y8, 0x8C00, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorY, 0x8C00, work->keyCursorSteps);
 #ifdef VERSION_EU
         } else if (work->keyboardPage == 2) {
 #else
         } else {
 #endif
-            ApproachValue(&work->x9, gKeyboardRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
-            ApproachValue(&work->y8, gKeyboardColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorX, gKeyboardRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorY, gKeyboardColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
 #ifdef VERSION_EU
         } else {
-            ApproachValue(&work->x9, gKeyboardSymbolRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
-            ApproachValue(&work->y8, gKeyboardSymbolColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorX, gKeyboardSymbolRowLayouts[work->cursor.parts.y].positions[work->cursor.parts.x] << 8, work->keyCursorSteps);
+            ApproachValue(&work->keyCursorY, gKeyboardSymbolColumnLayouts[work->cursor.parts.x].positions[work->cursor.parts.y] << 8, work->keyCursorSteps);
 #endif
         }
     }
 
-    work->handX = work->x9 + 0x800;
-    work->handY = work->y8 + 0x800;
+    work->handX = work->keyCursorX + 0x800;
+    work->handY = work->keyCursorY + 0x800;
     TaskPoolUpdate(&work->taskpool);
     TaskPoolUpdate(&work->cardpool);
     return 1;

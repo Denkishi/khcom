@@ -37,6 +37,11 @@ static u8 sEventPaused;
 static u32 sEventId;
 static u8 sEventEndStep;
 
+enum EventEndStep {
+    EVENT_END_STEP_SHOW_MESSAGE,
+    EVENT_END_STEP_WAIT_MESSAGE
+};
+
 void Event_0(s32 arg) {
     EvtArg cfg;
     EventBackgroundDef* e;
@@ -105,7 +110,7 @@ void Event_0(s32 arg) {
     TaskPoolInit(&sEventTaskPool, 2);
     TaskCreate(&sEventTaskPool, &gTaskDescEventSeq, &cfg);
     ResetMessageWindowFlags();
-    sEventEndStep = 0;
+    sEventEndStep = EVENT_END_STEP_SHOW_MESSAGE;
 }
 
 void EventDebugUpdate() {
@@ -122,12 +127,12 @@ void EventDebugUpdate() {
     TaskPoolDraw(&sEventTaskPool);
 
     if (!gEventState->running) {
-        if (sEventEndStep == 0) {
+        if (sEventEndStep == EVENT_END_STEP_SHOW_MESSAGE) {
             ShowEventEndMessage();
-            sEventEndStep = 1;
+            sEventEndStep = EVENT_END_STEP_WAIT_MESSAGE;
         }
 
-        if (sEventEndStep == 1) {
+        if (sEventEndStep == EVENT_END_STEP_WAIT_MESSAGE) {
             if (!IsMessageWindowOpen()) {
                 ModeRequest(&gModeEventselect, 0);
             }
@@ -149,12 +154,12 @@ void EventUpdate() {
         return;
     }
 
-    if (sEventEndStep == 0) {
+    if (sEventEndStep == EVENT_END_STEP_SHOW_MESSAGE) {
         ShowEventEndMessage();
-        sEventEndStep = 1;
+        sEventEndStep = EVENT_END_STEP_WAIT_MESSAGE;
     }
 
-    if (sEventEndStep != 1) {
+    if (sEventEndStep != EVENT_END_STEP_WAIT_MESSAGE) {
         return;
     }
 

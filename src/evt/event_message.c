@@ -4476,6 +4476,20 @@ void SetEventCharaMoveAnim(EventCharaWork* work, s32 animId) {
     EvtObjSetDrawFlags(&work->obj, f);
 }
 
+enum EventCharaMoveMode {
+    EVENT_CHARA_MOVE_MODE_WALK = 1,
+    EVENT_CHARA_MOVE_MODE_RUN
+};
+
+enum EventCharaJumpPhase {
+    EVENT_CHARA_JUMP_PHASE_START,
+    EVENT_CHARA_JUMP_PHASE_RISE,
+    EVENT_CHARA_JUMP_PHASE_APEX_RISE,
+    EVENT_CHARA_JUMP_PHASE_APEX_FALL,
+    EVENT_CHARA_JUMP_PHASE_FALL,
+    EVENT_CHARA_JUMP_PHASE_LAND
+};
+
 u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
     u16 keys;
     s32 v;
@@ -4486,80 +4500,80 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
     switch (work->angle) {
     case 0x00:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 5);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 10);
         }
 
         break;
     case 0x80:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 6);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 11);
         }
 
         break;
     case 0xC0:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 8);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 13);
         }
 
         break;
     case 0x40:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 8);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 13);
         }
 
         break;
     case 0xD3:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 9);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 14);
         }
 
         break;
     case 0x2D:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 9);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 14);
         }
 
         break;
     case 0xAD:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 7);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 12);
         }
 
         break;
     case 0x53:
         if ((keys & A_BUTTON) != 0) {
-            work->moveMode = 1;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_WALK;
             SetEventCharaMoveAnim(work, 7);
         } else {
-            work->moveMode = 2;
+            work->moveMode = EVENT_CHARA_MOVE_MODE_RUN;
             SetEventCharaMoveAnim(work, 12);
         }
 
@@ -4571,13 +4585,13 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
         work->speed = v;
 
         switch (work->moveMode) {
-        case 1:
+        case EVENT_CHARA_MOVE_MODE_WALK:
             if (v > gEventCharaParams[work->arg.chara].slowSpeed) {
                 work->speed = gEventCharaParams[work->arg.chara].slowSpeed;
             }
 
             break;
-        case 2:
+        case EVENT_CHARA_MOVE_MODE_RUN:
             if (v > gEventCharaParams[work->arg.chara].fastSpeed) {
                 work->speed = gEventCharaParams[work->arg.chara].fastSpeed;
             }
@@ -4620,7 +4634,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
     }
 
     if ((GetKeysPressed() & B_BUTTON) != 0) {
-        work->jumpPhase = 0;
+        work->jumpPhase = EVENT_CHARA_JUMP_PHASE_START;
         work->waitTimer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventCharaJump);
     }
@@ -4651,7 +4665,7 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
     }
 
     switch (work->jumpPhase) {
-    case 0:
+    case EVENT_CHARA_JUMP_PHASE_START:
         switch (work->angle) {
         case 0x00:
             SetEventCharaMoveAnim(work, 38);
@@ -4683,7 +4697,7 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         work->obj.y += -gSineTable[work->angle + 64] * (work->speed >> 2) >> 8;
 
         if (work->waitTimer > 3) {
-            work->jumpPhase = 1;
+            work->jumpPhase = EVENT_CHARA_JUMP_PHASE_RISE;
             work->unk_18C = -0x540;
             work->unk_198 = work->obj.z;
             work->waitTimer = 0;
@@ -4692,7 +4706,7 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         }
 
         break;
-    case 1:
+    case EVENT_CHARA_JUMP_PHASE_RISE:
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
@@ -4732,12 +4746,12 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         }
 
         if (work->unk_18C > -0x200) {
-            work->jumpPhase = 2;
+            work->jumpPhase = EVENT_CHARA_JUMP_PHASE_APEX_RISE;
             work->waitTimer = 0;
         }
 
         break;
-    case 2:
+    case EVENT_CHARA_JUMP_PHASE_APEX_RISE:
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
@@ -4777,12 +4791,12 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         }
 
         if (work->unk_18C > 0) {
-            work->jumpPhase = 3;
+            work->jumpPhase = EVENT_CHARA_JUMP_PHASE_APEX_FALL;
             work->waitTimer = 0;
         }
 
         break;
-    case 3:
+    case EVENT_CHARA_JUMP_PHASE_APEX_FALL:
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
@@ -4818,12 +4832,12 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         work->unk_18C += 51;
 
         if (work->unk_18C > 0x1FF) {
-            work->jumpPhase = 4;
+            work->jumpPhase = EVENT_CHARA_JUMP_PHASE_FALL;
             work->waitTimer = 0;
         }
 
         break;
-    case 4:
+    case EVENT_CHARA_JUMP_PHASE_FALL:
         UpdateEventCharaAngle(work);
 
         switch (work->angle) {
@@ -4860,12 +4874,12 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
 
         if (work->obj.z > work->unk_198) {
             work->obj.z = work->unk_198;
-            work->jumpPhase = 5;
+            work->jumpPhase = EVENT_CHARA_JUMP_PHASE_LAND;
             work->waitTimer = 0;
         }
 
         break;
-    case 5:
+    case EVENT_CHARA_JUMP_PHASE_LAND:
         switch (work->angle) {
         case 0x00:
             SetEventCharaMoveAnim(work, 42);
@@ -4896,7 +4910,7 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
         work->speed = 204 * work->speed >> 8;
 
         if ((GetKeysPressed() & B_BUTTON) != 0) {
-            work->jumpPhase = 1;
+            work->jumpPhase = EVENT_CHARA_JUMP_PHASE_RISE;
             work->unk_18C = -0x540;
         } else if (work->waitTimer > 10) {
             work->lastAngle = 255;
@@ -6600,6 +6614,14 @@ void MsgwinCheckStart(MsgWinWork* work) {
     }
 }
 
+enum MsgfaceCommand {
+    MSGFACE_COMMAND_NONE,
+    MSGFACE_COMMAND_SLIDE_IN,
+    MSGFACE_COMMAND_SLIDE_OUT,
+    MSGFACE_COMMAND_CHANGE_PORTRAIT,
+    MSGFACE_COMMAND_FLIP
+};
+
 void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
     const MsgFaceAnim* anim;
     u32 n;
@@ -6654,7 +6676,7 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
     }
 
     switch (work->face->command) {
-    case 1:
+    case MSGFACE_COMMAND_SLIDE_IN:
         if (!work->face->shown) {
             work->x = gMsgfaceHiddenX[n = work->face->positionIndex];
             work->y = gMsgfaceY[n];
@@ -6672,12 +6694,12 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
 
         SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceSlideInUpdate);
         break;
-    case 2:
+    case MSGFACE_COMMAND_SLIDE_OUT:
         work->steps = 8;
         work->arrived = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceSlideOutUpdate);
         break;
-    case 4:
+    case MSGFACE_COMMAND_FLIP:
         work->steps = 4;
 
         if (work->face->positionIndex <= 1) {
@@ -6689,7 +6711,7 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
         work->y = gMsgfaceY[work->face->positionIndex];
         SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceFlipOutUpdate);
         break;
-    case 3:
+    case MSGFACE_COMMAND_CHANGE_PORTRAIT:
         SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceChangeUpdate);
         break;
     }
@@ -6753,7 +6775,7 @@ u8 MsgfaceSlideInUpdate(MsgFaceWork* work, void* task) {
     work->steps--;
 
     if (work->steps == 0) {
-        work->face->command = 0;
+        work->face->command = MSGFACE_COMMAND_NONE;
         work->arrived = 1;
         SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
@@ -6766,7 +6788,7 @@ u8 MsgfaceSlideOutUpdate(MsgFaceWork* work, void* task) {
     work->steps--;
 
     if (work->steps == 0) {
-        work->face->command = 0;
+        work->face->command = MSGFACE_COMMAND_NONE;
         SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
 
@@ -6800,7 +6822,7 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* task) {
         work->gfx = AnimGetGfx(&work->anim);
         work->arrived = 0;
         work->steps = 8;
-        work->face->command = 0;
+        work->face->command = MSGFACE_COMMAND_NONE;
     }
 
     work->x = gMsgfaceHiddenX[n = work->face->positionIndex];
@@ -6862,7 +6884,7 @@ u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* task) {
 
     if (work->steps == 0) {
         work->arrived = 1;
-        work->face->command = 0;
+        work->face->command = MSGFACE_COMMAND_NONE;
         work->scaleX = 256;
         SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
@@ -6874,7 +6896,7 @@ void CreateMsgfaceTask(void* pool, MsgFaceControl* ctl, u8 portraitId, u8 expres
     ctl->portraitId = portraitId;
     ctl->expressionId = expressionId;
     ctl->positionIndex = positionIndex;
-    ctl->command = 0;
+    ctl->command = MSGFACE_COMMAND_NONE;
     ctl->silhouette = 0;
     TaskCreate(pool, &sTaskDescMsgface, ctl);
 }
@@ -6883,13 +6905,13 @@ void SetMsgfacePortrait(MsgFaceControl* ctl, u8 portraitId, u8 expressionId, u8 
     u8 v;
 
     if (ctl->portraitId != portraitId) {
-        v = 3;
+        v = MSGFACE_COMMAND_CHANGE_PORTRAIT;
     } else {
         if (ctl->expressionId == expressionId && ctl->positionIndex == positionIndex) {
             return;
         }
 
-        v = 4;
+        v = MSGFACE_COMMAND_FLIP;
     }
 
     ctl->command = v;
@@ -6899,11 +6921,11 @@ void SetMsgfacePortrait(MsgFaceControl* ctl, u8 portraitId, u8 expressionId, u8 
 }
 
 void RequestMsgfaceSlideIn(MsgFaceControl* ctl) {
-    ctl->command = 1;
+    ctl->command = MSGFACE_COMMAND_SLIDE_IN;
 }
 
 void RequestMsgfaceSlideOut(MsgFaceControl* ctl) {
-    ctl->command = 2;
+    ctl->command = MSGFACE_COMMAND_SLIDE_OUT;
 }
 
 void msgwait_0(MsgWaitWork* work, u8* arg) {

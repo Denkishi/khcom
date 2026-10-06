@@ -91,17 +91,22 @@ static s16 sEventSelectIndex;
 static u8 sEventSelectList;
 EventSoundMix* gEventSoundMix EWRAM_COMMON(4);
 
+enum EventSelectList {
+    EVENT_SELECT_LIST_SORA,
+    EVENT_SELECT_LIST_RIKU
+};
+
 s16 GetEventListLength(u8 list) {
     s16 n = 0;
 
     switch (list) {
-    case 0:
+    case EVENT_SELECT_LIST_SORA:
         while (sSoraEventIds[n] != -1) {
             n++;
         }
 
         break;
-    case 1:
+    case EVENT_SELECT_LIST_RIKU:
         while (sRikuEventIds[n] != -1) {
             n++;
         }
@@ -125,28 +130,28 @@ void mode_eventselect_0() {
 
 void mode_eventselect_1() {
     if (GetKeysRepeat() & DPAD_UP) {
-        if (sEventSelectList != 0) {
+        if (sEventSelectList != EVENT_SELECT_LIST_SORA) {
             sEventSelectList--;
         } else {
-            sEventSelectList = 1;
+            sEventSelectList = EVENT_SELECT_LIST_RIKU;
         }
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        if (sEventSelectList == 0) {
+        if (sEventSelectList == EVENT_SELECT_LIST_SORA) {
             sEventSelectList++;
         } else {
-            sEventSelectList = 0;
+            sEventSelectList = EVENT_SELECT_LIST_SORA;
         }
     }
 
     switch (sEventSelectList) {
-    case 0:
+    case EVENT_SELECT_LIST_SORA:
         DebugTextPrint(0, 0, 2, sEventSelectCursorText);
         DebugTextPrint(0, 10, 2, sEventSelectBlankText);
         DebugTextPrint(0, 20, 2, sEventSelectBlankText);
         break;
-    case 1:
+    case EVENT_SELECT_LIST_RIKU:
         DebugTextPrint(0, 0, 2, sEventSelectBlankText);
         DebugTextPrint(0, 10, 2, sEventSelectCursorText);
         DebugTextPrint(0, 20, 2, sEventSelectBlankText);
@@ -175,24 +180,24 @@ void mode_eventselect_1() {
     DebugTextPrintNumber(100, 40, 2, sEventSelectIndex + 1);
 
     switch (sEventSelectList) {
-    case 0:
+    case EVENT_SELECT_LIST_SORA:
         DebugTextPrint(20, 80, 2, gEventNames[sSoraEventIds[sEventSelectIndex]]);
         break;
-    case 1:
+    case EVENT_SELECT_LIST_RIKU:
         DebugTextPrint(20, 80, 2, gEventNames[sRikuEventIds[sEventSelectIndex]]);
         break;
     }
 
     if (GetKeysPressed() & A_BUTTON) {
         switch (sEventSelectList) {
-        case 0:
+        case EVENT_SELECT_LIST_SORA:
 #ifdef VERSION_EU
             ModeRequest(&gModeEventDebug, sSoraEventIds[sEventSelectIndex] | 0x8000);
 #else
             RequestEventMode(sSoraEventIds[sEventSelectIndex]);
 #endif
             break;
-        case 1:
+        case EVENT_SELECT_LIST_RIKU:
 #ifdef VERSION_EU
             ModeRequest(&gModeEventDebug, sRikuEventIds[sEventSelectIndex] | 0x8000);
 #else
@@ -238,6 +243,11 @@ void Hanabira_3(EffectWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum HanabiraCState {
+    HANABIRA_C_STATE_RISE,
+    HANABIRA_C_STATE_FLUTTER
+};
+
 void Hanabira_c_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
@@ -252,7 +262,7 @@ void Hanabira_c_0(EffectWork* work, EventCharaWork* chara) {
     work->vz = -(GetRandom() % 539 + 102);
     AnimInit(&work->anim, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames);
     AnimStart(&work->anim, GetRandom() & 1, ANIM_FLAG_LOOP);
-    work->state = 0;
+    work->state = HANABIRA_C_STATE_RISE;
 }
 
 s32 Hanabira_c_1(EffectWork* work) {
@@ -260,17 +270,17 @@ s32 Hanabira_c_1(EffectWork* work) {
     s32 r;
 
     switch (work->state) {
-    case 0:
+    case HANABIRA_C_STATE_RISE:
         work->x += work->vx;
         work->z += work->vz;
         work->vz += 17;
 
         if (work->vz > 256) {
-            work->state = 1;
+            work->state = HANABIRA_C_STATE_FLUTTER;
         }
 
         break;
-    case 1:
+    case HANABIRA_C_STATE_FLUTTER:
         work->x += work->vx;
         work->z += work->vz;
         work->vz = (v = work->vz - 12) - (r = GetRandom()) % 9;
@@ -720,13 +730,19 @@ void CreateHanabiraTask(EventCharaWork* work) {
     TaskCreate(&work->tasks, &gTaskDescHanabira, work);
 }
 
+enum EvSoundFadeMode {
+    EV_SOUND_FADE_MODE_NONE,
+    EV_SOUND_FADE_MODE_IN,
+    EV_SOUND_FADE_MODE_OUT
+};
+
 void EV_SOUND_0(EvSoundWork* work, u8* arg) {
     u8 i;
 
     work->eventId = arg[0];
     work->cue = 0;
     work->unk_06 = 0;
-    work->fadeMode = 0;
+    work->fadeMode = EV_SOUND_FADE_MODE_NONE;
     work->volume = 256;
     work->soundCues = gEventSequenceDefs[work->eventId]->soundCues;
     gEventSoundMix = EwramAlloc(256);
@@ -767,7 +783,7 @@ s32 EV_SOUND_1(EvSoundWork* work) {
 
         if (p->flags & EV_SOUND_FLAG_FADE_OUT) {
             m4aMPlayFadeOut(gMPlayTable[gSongTable[p->song].ms].info, 5);
-            work->fadeMode = 2;
+            work->fadeMode = EV_SOUND_FADE_MODE_OUT;
         }
 
         if (p->flags & EV_SOUND_FLAG_FADE_IN) {
@@ -775,7 +791,7 @@ s32 EV_SOUND_1(EvSoundWork* work) {
             mp = gMPlayTable[n].info;
             work->volume = 3;
             m4aMPlayVolumeControl(mp, 255, 3);
-            work->fadeMode = 1;
+            work->fadeMode = EV_SOUND_FADE_MODE_IN;
         }
 
         if ((p->flags & EV_SOUND_FLAG_END) == 0) {
@@ -807,7 +823,7 @@ void EvSoundUpdateFadeIn(EvSoundWork* work) {
 
     mp = gMPlayTable[0].info;
 
-    if (work->fadeMode == 1) {
+    if (work->fadeMode == EV_SOUND_FADE_MODE_IN) {
         work->volume += 2;
 
         if (work->volume > 255) {

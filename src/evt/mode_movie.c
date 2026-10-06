@@ -405,8 +405,15 @@ u16 CountNonSpaceChars(const TextChar* str) {
     }
 }
 
+enum MovieModeState {
+    MOVIE_MODE_STATE_CLEAR,
+    MOVIE_MODE_STATE_WAIT,
+    MOVIE_MODE_STATE_PLAY,
+    MOVIE_MODE_STATE_EXIT
+};
+
 void mode_movie_0(s32 movieId) {
-    sMovieModeState = 0;
+    sMovieModeState = MOVIE_MODE_STATE_CLEAR;
     sMovieId = movieId;
     sUnk_02034940 = 0;
     sMovieFrame = 0;
@@ -686,17 +693,17 @@ void mode_movie_1() {
     void* p;
 
     switch (sMovieModeState) {
-    case 0: {
+    case MOVIE_MODE_STATE_CLEAR: {
         InitDisplayRegs();
         gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
         CpuFill32(0, (void*)VRAM, VRAM_SIZE);
         sMovieModeState++;
         break;
     }
-    case 1:
+    case MOVIE_MODE_STATE_WAIT:
         sMovieModeState++;
         break;
-    case 2:
+    case MOVIE_MODE_STATE_PLAY:
         m4aSoundVSyncOff();
         gVBlankHandlerOverride = MovieVBlankIntr;
         IwramHeapInit(GetIwramHeapStart(), GetIwramHeapSize());
@@ -860,7 +867,7 @@ void mode_movie_1() {
         m4aSoundVSyncOn();
         sMovieModeState++;
         break;
-    case 3: {
+    case MOVIE_MODE_STATE_EXIT: {
         CpuFill32(0, (void*)VRAM, VRAM_SIZE);
 
         if (sMovieFlags & MOVIE_FLAG_SOFT_RESET) {

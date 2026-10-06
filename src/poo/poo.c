@@ -46,6 +46,7 @@
 #include "default_bg_map.h"
 #include "event_backgrounds.h"
 #include "sprite_palettes.h"
+#include "card_message_data.h"
 #include "event_ids.h"
 
 u8 gPooAttackActive EWRAM_COMMON(4);
@@ -4074,7 +4075,7 @@ void task_poo_piglet_0(PooPigletWork* work) {
     TaskCreate(&work->tasks, &gTaskDescPooShadow, &work->x);
 
     if (IsPooEventDone(0)) {
-        work->interactionId = AddPoohInteraction(&work->collider, 0x36);
+        work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_PIGLET_TALK);
         SetPoohInteractionEnabled(work->interactionId, 0);
     }
 }
@@ -4277,9 +4278,9 @@ void task_poo_eeyore_0(PooEeyoreWork* work) {
     work->colliderActive = 1;
 
     if (!IsPooEventDone(2)) {
-        work->interactionId = AddPoohInteraction(&work->collider, 0x38);
+        work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_EEYORE_TALK_0);
     } else {
-        work->interactionId = AddPoohInteraction(&work->collider, 0x39);
+        work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_EEYORE_TALK_1);
     }
 
     SetPoohInteractionEnabled(work->interactionId, 1);
@@ -4522,7 +4523,7 @@ void task_poo_rabbit_0(PooRabbitWork* work) {
     TaskPoolInit(&work->tasks, 1);
     CreatePooShadowscaleTask(&work->tasks, &work->x, 0x100);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-    work->interactionId = AddPoohInteraction(&work->collider, 0x3B);
+    work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_RABBIT_TALK_0);
     SetPoohInteractionEnabled(work->interactionId, 0);
 }
 
@@ -5024,7 +5025,7 @@ void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
     ColliderSetPosition(&work->collider, work->pos.x, work->pos.y, work->pos.z);
 
     if (IsPooEventDone(5)) {
-        work->interactionId = AddPoohInteraction(&work->collider, 58);
+        work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_ROO_TALK);
     }
 }
 
@@ -7439,7 +7440,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* work) {
     TaskPoolInit(&work->tasks, 1);
     CreatePooShadowscaleTask(&work->tasks, &work->x, 0x100);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-    work->interactionId = AddPoohInteraction(&work->collider, 60);
+    work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_RABBIT_TALK_1);
     SetPoohInteractionEnabled(work->interactionId, 0);
 }
 

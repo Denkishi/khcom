@@ -24,13 +24,14 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "card_message_data.h"
 
 void MapDonaldCheckTalk(MapDonaldWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gGameState.floor == 12 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
-            CreateCardMessageTask(&work->tasks, 0, 24);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_DONALD_EXIT_HALL_TALK);
         } else {
             CreateCardMessageTask(&work->tasks, 0, gDonaldTalkMessages[gMapFloorState.progress]);
         }
@@ -141,8 +142,34 @@ void Task_MapDonald_3(MapDonaldWork* work) {
 }
 
 const u8 gDonaldTalkMessages[28] = {
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-    14, 15, 16, 17, 18, 19, 20, 21, 21, 21, 22, 22, 23, 23,
+    CARD_MSG_DONALD_TALK_00,
+    CARD_MSG_DONALD_TALK_01,
+    CARD_MSG_DONALD_TALK_02,
+    CARD_MSG_DONALD_TALK_03,
+    CARD_MSG_DONALD_TALK_04,
+    CARD_MSG_DONALD_TALK_05,
+    CARD_MSG_DONALD_TALK_06,
+    CARD_MSG_DONALD_TALK_07,
+    CARD_MSG_DONALD_TALK_08,
+    CARD_MSG_DONALD_TALK_09,
+    CARD_MSG_DONALD_TALK_10,
+    CARD_MSG_DONALD_TALK_11,
+    CARD_MSG_DONALD_TALK_12,
+    CARD_MSG_DONALD_TALK_13,
+    CARD_MSG_DONALD_TALK_14,
+    CARD_MSG_DONALD_TALK_15,
+    CARD_MSG_DONALD_TALK_16,
+    CARD_MSG_DONALD_TALK_17,
+    CARD_MSG_DONALD_TALK_18,
+    CARD_MSG_DONALD_TALK_19,
+    CARD_MSG_DONALD_TALK_20,
+    CARD_MSG_DONALD_TALK_21,
+    CARD_MSG_DONALD_TALK_21,
+    CARD_MSG_DONALD_TALK_21,
+    CARD_MSG_DONALD_TALK_22,
+    CARD_MSG_DONALD_TALK_22,
+    CARD_MSG_DONALD_TALK_23,
+    CARD_MSG_DONALD_TALK_23,
 };
 
 TaskDesc gTaskDescMapDonald = {

@@ -23,15 +23,16 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_message_data.h"
 
 void MapNamineCheckTalk(MapNamineWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gMapFloorState.progress == 27) {
-            CreateCardMessageTask(&work->tasks, 0, 0x33);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_NAMINE_TALK_1);
         } else {
-            CreateCardMessageTask(&work->tasks, 0, 0x32);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_NAMINE_TALK_0);
         }
 
         work->update = MapNamineWaitMessage;

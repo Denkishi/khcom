@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_message_data.h"
 
 void MapMickeyCheckTalk(MapMickeyWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
@@ -30,14 +31,14 @@ void MapMickeyCheckTalk(MapMickeyWork* work) {
 
         switch (gMapFloorState.progress) {
         case 20:
-            CreateCardMessageTask(&work->tasks, 0, 0x3F);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MICKEY_TALK_2);
             break;
         case 22:
-            CreateCardMessageTask(&work->tasks, 0, 0x3D);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MICKEY_TALK_0);
             break;
         case 23:
         default:
-            CreateCardMessageTask(&work->tasks, 0, 0x3E);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MICKEY_TALK_1);
             break;
         }
 

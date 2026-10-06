@@ -36,6 +36,7 @@
 #include <stddef.h>
 #include "card_msgwin.h"
 #include "sprite_palettes.h"
+#include "card_message_data.h"
 
 enum MsTopState {
     MS_TOP_STATE_BARS_IN,
@@ -100,9 +101,9 @@ static const WarpDef sWarpDefs[2] = {
 };
 
 static const u16 sMsTopIntroMessages[3] = {
-    129,
-    130,
-    131,
+    CARD_MSG_MS_TOP_INTRO_0,
+    CARD_MSG_MS_TOP_INTRO_1,
+    CARD_MSG_MS_TOP_INTRO_2,
 };
 
 #ifdef VERSION_EU
@@ -319,7 +320,7 @@ void MsTopHandleInput() {
             CloseMessageWindow();
         }
 
-        sMsTopPendingOptionMessage = sMsTopCursor == 0 ? 0x40 : 0x41;
+        sMsTopPendingOptionMessage = sMsTopCursor == 0 ? CARD_MSG_MS_TOP_SHOP_OPTION : CARD_MSG_MS_TOP_CHARGE_OPTION;
         SetMsTopWarpAnim(sMsTopCursor);
         m4aSongNumStart(SONG_SYS_CLICK);
     }
@@ -539,7 +540,7 @@ void mode_ms_top_1() {
         break;
     case MS_TOP_STATE_CHECK_FREE_PACK:
         if (GetMoogleFreePackFlag(gMapFloorState.room) == 0) {
-            sMsTopPendingMessage = 0x42;
+            sMsTopPendingMessage = CARD_MSG_MS_TOP_FREE_PACK;
             sMsTopState = MS_TOP_STATE_FREE_PACK_MESSAGE;
         } else {
             sMsTopState = MS_TOP_STATE_SHOW_OPTION;
@@ -576,7 +577,7 @@ void mode_ms_top_1() {
 
         break;
     case MS_TOP_STATE_SHOW_OPTION:
-        sMsTopPendingOptionMessage = sMsTopCursor == 0 ? 0x40 : 0x41;
+        sMsTopPendingOptionMessage = sMsTopCursor == 0 ? CARD_MSG_MS_TOP_SHOP_OPTION : CARD_MSG_MS_TOP_CHARGE_OPTION;
         sMsTopState = MS_TOP_STATE_SELECT;
         break;
     case MS_TOP_STATE_SELECT:

@@ -32,6 +32,7 @@
 #include <stddef.h>
 #include "msg_api.h"
 #include "battle_ids.h"
+#include "card_message_data.h"
 #include "event_ids.h"
 #include "mode_movie.h"
 
@@ -358,7 +359,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 173);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_WORLD_CARD);
         break;
     case EVENT_034_8F_GOAL_2:
         DisableBg(0);
@@ -367,7 +368,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 133);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_LEARNED_WARPINATOR);
         break;
     case EVENT_088_HALLOWEEN_TOWN_E0_2:
         DisableBg(0);
@@ -376,7 +377,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 134);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_LEARNED_TERROR);
         break;
     case EVENT_136_100ACREWOOD_LV1:
         DisableBg(0);
@@ -385,7 +386,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 139);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_LEARNED_CONFUSE);
         break;
     case EVENT_137_100ACREWOOD_LV2:
         DisableBg(0);
@@ -394,7 +395,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 160);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_SPELLBINDER);
         break;
     case EVENT_139_100ACREWOOD_LV3:
         DisableBg(0);
@@ -403,7 +404,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 159);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_ELIXIR);
         break;
     case EVENT_140_100ACREWOOD_LV4:
         DisableBg(0);
@@ -412,7 +413,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 136);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_LEARNED_BIND);
         break;
     case EVENT_141_100ACREWOOD_LV5:
         DisableBg(0);
@@ -421,7 +422,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 137);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_LEARNED_IDYLL_ROMP);
         break;
     case EVENT_142_100ACREWOOD_LV6:
         DisableBg(0);
@@ -430,7 +431,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 135);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_LEARNED_SYNCHRO);
         break;
     case EVENT_061_13F_ENTRANCE:
         DisableBg(0);
@@ -439,7 +440,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&sEventTaskPool, 138);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_LEARNED_TRINITY_LIMIT);
         break;
     case EVENT_126_COLISEUM_END:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -448,7 +449,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 162);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_CLOUD);
         break;
     case EVENT_114_AGRABAH_END:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -457,7 +458,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 161);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_GENIE);
         break;
     case EVENT_057_12F_DESTINY_ISLAND_E3:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -466,7 +467,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 163);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_OATHKEEPER);
         break;
     case EVENT_143_100ACREWOOD_END_1ST_COMP:
     case EVENT_144_100ACREWOOD_END_1ST_NO:
@@ -476,7 +477,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 165);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_BAMBI);
         break;
     case EVENT_145_100ACREWOOD_END_COMP:
     case EVENT_146_100ACREWOOD_END_NO:
@@ -487,7 +488,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 166);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_EVENT_SAVE_CONFIRM);
         break;
     case EVENT_003_1F_TRAVERSE_TOWN_E0_2:
     case EVENT_044_11F_TWILIGHT_TOWN_E0:
@@ -509,7 +510,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 168);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_KEY_OF_BEGINNINGS);
         break;
     case EVENT_054_12F_DESTINY_ISLAND_E1:
     case EVENT_075_MONSTORO_E1:
@@ -528,7 +529,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 169);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_KEY_OF_GUIDANCE);
         break;
     case EVENT_005_1F_TRAVERSE_TOWN_E1_2:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -537,7 +538,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 175);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_SIMBA);
         break;
     case EVENT_006_1F_TRAVERSE_TOWN_E2:
     case EVENT_080_MONSTORO_E2_5:
@@ -555,7 +556,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 170);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_KEY_TO_TRUTH);
         break;
     case EVENT_119_NEVERLAND_END:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -564,7 +565,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 172);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_TINKER_BELL);
         break;
     case EVENT_060_12F_GOAL_3:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -573,7 +574,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 164);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_OBLIVION);
         break;
     case EVENT_027_6F_GOAL_3:
     case EVENT_156_RIKU_B12F_GOAL_2:
@@ -584,7 +585,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&sEventTaskPool, 174);
+        CreateSysmsgwinTask(&sEventTaskPool, CARD_MSG_OBTAINED_WORLD_CARDS);
         break;
     }
 }

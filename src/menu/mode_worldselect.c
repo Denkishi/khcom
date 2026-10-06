@@ -33,6 +33,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "card_message_data.h"
 #include "event_ids.h"
 
 #ifdef VERSION_EU
@@ -811,7 +812,7 @@ void mode_worldselect_1() {
         if (sWorldselectTimer <= 0) {
             if (sWorldselectFirstVisit != 0) {
                 sWorldselectTutorialStep = 0;
-                CreateCardMessageTask(&sWorldselectTaskPool, 2, 70);
+                CreateCardMessageTask(&sWorldselectTaskPool, 2, CARD_MSG_WORLDSELECT_TUTORIAL_0);
                 sWorldselectStep = WORLDSELECT_STEP_TUTORIAL;
             } else {
                 sWorldselectStep = WORLDSELECT_STEP_SELECT;
@@ -829,7 +830,7 @@ void mode_worldselect_1() {
     case WORLDSELECT_STEP_TUTORIAL:
         if (!IsMessageWindowOpen()) {
             if (sWorldselectTutorialStep == 0) {
-                CreateCardMessageTask(&sWorldselectTaskPool, 2, 71);
+                CreateCardMessageTask(&sWorldselectTaskPool, 2, CARD_MSG_WORLDSELECT_TUTORIAL_1);
                 sWorldselectTutorialStep++;
             } else {
                 gGameState.progression.tutorialFlags |= 1;

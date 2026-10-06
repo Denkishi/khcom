@@ -24,13 +24,14 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_message_data.h"
 
 void MapGoofyCheckTalk(MapGoofyWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gGameState.floor == 12 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
-            CreateCardMessageTask(&work->tasks, 0, 49);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_GOOFY_EXIT_HALL_TALK);
         } else {
             CreateCardMessageTask(&work->tasks, 0, gGoofyTalkMessages[gMapFloorState.progress]);
         }
@@ -141,8 +142,34 @@ void Task_MapGoofy_3(MapGoofyWork* work) {
 }
 
 const u8 gGoofyTalkMessages[28] = {
-    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
-    39, 40, 41, 42, 43, 44, 45, 46, 46, 46, 47, 47, 48, 48,
+    CARD_MSG_GOOFY_TALK_00,
+    CARD_MSG_GOOFY_TALK_01,
+    CARD_MSG_GOOFY_TALK_02,
+    CARD_MSG_GOOFY_TALK_03,
+    CARD_MSG_GOOFY_TALK_04,
+    CARD_MSG_GOOFY_TALK_05,
+    CARD_MSG_GOOFY_TALK_06,
+    CARD_MSG_GOOFY_TALK_07,
+    CARD_MSG_GOOFY_TALK_08,
+    CARD_MSG_GOOFY_TALK_09,
+    CARD_MSG_GOOFY_TALK_10,
+    CARD_MSG_GOOFY_TALK_11,
+    CARD_MSG_GOOFY_TALK_12,
+    CARD_MSG_GOOFY_TALK_13,
+    CARD_MSG_GOOFY_TALK_14,
+    CARD_MSG_GOOFY_TALK_15,
+    CARD_MSG_GOOFY_TALK_16,
+    CARD_MSG_GOOFY_TALK_17,
+    CARD_MSG_GOOFY_TALK_18,
+    CARD_MSG_GOOFY_TALK_19,
+    CARD_MSG_GOOFY_TALK_20,
+    CARD_MSG_GOOFY_TALK_21,
+    CARD_MSG_GOOFY_TALK_21,
+    CARD_MSG_GOOFY_TALK_21,
+    CARD_MSG_GOOFY_TALK_22,
+    CARD_MSG_GOOFY_TALK_22,
+    CARD_MSG_GOOFY_TALK_23,
+    CARD_MSG_GOOFY_TALK_23,
 };
 
 TaskDesc gTaskDescMapGoofy = {

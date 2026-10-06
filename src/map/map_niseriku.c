@@ -27,12 +27,13 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_message_data.h"
 #include "event_ids.h"
 
 void MapNiserikuCheckTalk(MapNiserikuWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-        CreateCardMessageTask(&work->tasks, 0, 0x34);
+        CreateCardMessageTask(&work->tasks, 0, CARD_MSG_RIKU_REPLICA_TALK);
         work->update = MapNiserikuWaitMessage;
     }
 }

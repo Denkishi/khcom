@@ -21,6 +21,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_message_data.h"
 
 s32 IsPlayerWithin(FldPos* pos, s32 lim) {
     s32 dx;
@@ -75,7 +76,7 @@ void MapStairWaitApproach(MapStairWork* work) {
     if ((u8)IsPlayerWithin(&work->obj.fieldPosition, 0x3000)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
-        CreateCardMessageTask(&work->tasks, 0, 0xA7);
+        CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MAP_STAIR_TUTORIAL);
         work->update = MapStairWaitMessage;
     }
 }

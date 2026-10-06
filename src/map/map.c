@@ -68,6 +68,7 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "card_ids.h"
+#include "card_message_data.h"
 #include "event_ids.h"
 #include "mode_movie.h"
 
@@ -4625,18 +4626,14 @@ void Mode_MenuMsg_0(s32 arg) {
     TaskPoolInit(&sMenuMsgWork->tasks, 1);
 
     if (sMenuMsgWork->toTitle == 0) {
-        CreateSysmsgwinTask(&sMenuMsgWork->tasks, 0xB0);
+        CreateSysmsgwinTask(&sMenuMsgWork->tasks, CARD_MSG_SAVE_DATA_LOST);
         BackdropFadeReset();
         BackdropFadeSetColor(0, 0, 0);
         BackdropFadeStartIn(1, 16);
         FadeStartIn(FADE_MODE_WHITE, 16);
         FadeLock();
     } else {
-#ifdef VERSION_EU
-        CreateSysmsgwinTask(&sMenuMsgWork->tasks, 0xB2);
-#else
-        CreateSysmsgwinTask(&sMenuMsgWork->tasks, 0xB3);
-#endif
+        CreateSysmsgwinTask(&sMenuMsgWork->tasks, CARD_MSG_QUICK_SAVE_COMPLETE);
         BackdropFadeReset();
         BackdropFadeSetColor(0, 0, 0);
         BackdropFadeStartIn(0, 1);

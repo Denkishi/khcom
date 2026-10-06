@@ -29,6 +29,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "battle_ids.h"
+#include "card_message_data.h"
 
 void MapTutorialStartBattle() {
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
@@ -46,7 +47,7 @@ void MapTutorialWaitStart(MapTutorialWork* work) {
         if (!(flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) && (gGameState.progression.tutorialFlags & 0x10)) {
             gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
             gFieldState->flags = flags | FIELD_FLAG_FREEZE_PLAYER;
-            CreateCardMessageTask(&work->tasks, 0, 0x6A);
+            CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MAP_TUTORIAL_0);
             work->update = MapTutorialDropBarrel;
         }
     }
@@ -120,7 +121,7 @@ void MapTutorialWaitPrizeCard(MapTutorialWork* work) {
     if ((gMapRoomState->flags & ROOM_FLAG_PRIZE_CARD_ACTIVE) == 0) {
         gGameState.progression.tutorialFlags |= 0x2000;
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-        CreateCardMessageTask(&work->tasks, 0, 0x6B);
+        CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MAP_TUTORIAL_1);
         work->update = MapTutorialSpawnEnemy;
     }
 }
@@ -162,7 +163,7 @@ void MapTutorialEnemyAppear(MapTutorialWork* work) {
     if (AnimIsFinished(anim)) {
         AnimChangeWithTables(anim, 0, ANIM_FLAG_LOOP, gEmy00L00Anims, gEmy00L00Frames);
         SetObjTileSource(work->tiles, gEmy00L00Tiles);
-        CreateCardMessageTask(&work->tasks, 0, 0x6C);
+        CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MAP_TUTORIAL_2);
         work->update = MapTutorialWaitEnemyMessage;
     } else {
         work->gfx = AnimUpdate(anim);

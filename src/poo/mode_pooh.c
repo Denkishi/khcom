@@ -30,6 +30,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "card_message_data.h"
 #include "event_ids.h"
 
 Mode gModePooh = {
@@ -557,11 +558,7 @@ void mode_pooh_0(s32 arg) {
     FadeStartIn(FADE_MODE_BLACK, 16);
     BackdropFadeStartIn(0, 16);
     sModePoohExiting = 0;
-#ifdef VERSION_EU
-    sModePoohMessage = 179;
-#else
-    sModePoohMessage = 180;
-#endif
+    sModePoohMessage = CARD_MSG_COUNT;
 }
 
 void mode_pooh_1() {
@@ -588,21 +585,13 @@ void mode_pooh_1() {
                 if (IsMessageWindowAnswerYes()) {
                     ExitPoohMode(EVENT_COUNT);
                 } else {
-#ifdef VERSION_EU
-                    sModePoohMessage = 179;
-#else
-                    sModePoohMessage = 180;
-#endif
+                    sModePoohMessage = CARD_MSG_COUNT;
                 }
             } else if (sModePoohMessage == 0xFFFD) {
                 if (IsMessageWindowAnswerYes()) {
                     ExitPoohMode(EVENT_148_100ACREWOOD_END_SORAONLY);
                 } else {
-#ifdef VERSION_EU
-                    sModePoohMessage = 179;
-#else
-                    sModePoohMessage = 180;
-#endif
+                    sModePoohMessage = CARD_MSG_COUNT;
                 }
             } else {
                 TaskPoolUpdate(&sModePoohTasks);

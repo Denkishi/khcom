@@ -24,6 +24,7 @@
 #include "battle.h"
 #include "btl.h"
 #include "card_ids.h"
+#include "card_message_data.h"
 
 static TaskPool sRikuTutorialTasks;
 
@@ -58,7 +59,7 @@ void Mode_riku_deckTutorial_1() {
         switch (gRikuDeckTutorialState) {
         case RIKU_DECK_TUTORIAL_STATE_SHOW_MESSAGE:
             if (!IsMessageWindowOpen() && gRikuDeckTutorialState == RIKU_DECK_TUTORIAL_STATE_SHOW_MESSAGE) {
-                CreateSysmsgwinTask(&sRikuTutorialTasks, 0xB1);
+                CreateSysmsgwinTask(&sRikuTutorialTasks, CARD_MSG_RIKU_DECK_TUTORIAL);
                 gRikuDeckTutorialState = RIKU_DECK_TUTORIAL_STATE_WAIT_MESSAGE;
             }
 

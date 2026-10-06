@@ -50,6 +50,7 @@
 #include "lockon.h"
 #include "map_room_tables.h"
 #include "sprite_palettes.h"
+#include "card_message_data.h"
 
 static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0 },
@@ -3700,12 +3701,12 @@ void MapGmk04CheckFirstTalk(MapGmk04Work* work) {
 
     if (state & ROOM_FLAG_TUTORIAL_ACTIVE) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-        CreateCardMessageTask(&work->tasks, 0, 0x69);
+        CreateCardMessageTask(&work->tasks, 0, CARD_MSG_QUICK_SAVE_TUTORIAL);
         work->update = MapGmk04WaitFirstTalkEnd;
     } else if (gFieldState->lockonTarget == &work->obj) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags = state | 0x4000;
-        CreateCardMessageTask(&work->tasks, 0, 0x67);
+        CreateCardMessageTask(&work->tasks, 0, CARD_MSG_SAVE_POINT_TUTORIAL);
         work->update = MapGmk04WaitMessage;
     }
 }
@@ -3904,7 +3905,7 @@ void MapGmk06CheckTalk(MapGmk06Work* work) {
     if (gFieldState->lockonTarget == &work->obj && (gGameState.progression.tutorialFlags & 0x100) == 0) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
-        CreateCardMessageTask(&work->tasks, 0, 0x84);
+        CreateCardMessageTask(&work->tasks, 0, CARD_MSG_WARP_POINT_TUTORIAL);
         gFieldState->lockonDelay = 30;
         work->update = MapGmk06WaitMessage;
     } else if ((u8)IsFldObjTalkTarget(&work->obj) && (GetKeysPressed() & A_BUTTON)) {

@@ -193,11 +193,11 @@ void StartEventBgEffectFadeIn(EventBgEffectWork* work) {
     }
 }
 
-void EV_BG_EFFECT_0(EventBgEffectWork* work, u8* b) {
+void EV_BG_EFFECT_0(EventBgEffectWork* work, u8* arg) {
     u8 t;
     u8 z;
 
-    t = b[0];
+    t = arg[0];
     z = 0;
     work->eventId = t;
     work->entry = z;
@@ -205,7 +205,7 @@ void EV_BG_EFFECT_0(EventBgEffectWork* work, u8* b) {
     work->entries = gEventSequenceDefs[work->eventId]->bgEffects;
 }
 
-u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* a) {
+u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* task) {
     const EventBgEffectEntry* e;
     const EventBgEffectEntry* cur;
     u8 i;
@@ -224,7 +224,7 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* a) {
             LoadEventBgEffect(work);
 
             if (work->animating != 0) {
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventBgEffectAnim);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventBgEffectAnim);
             }
         }
 
@@ -258,7 +258,7 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* a) {
+u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* task) {
     const EventBgEffectEntry* p;
 
     p = &work->entries[work->entry];
@@ -266,7 +266,7 @@ u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* a) {
                 (u16)((gEventState->y >> 8) - (p->y >> 8)));
 
     if (!StepEventBgEffectAnim(work)) {
-        SetTaskUpdate(a, (TaskUpdateFunc)EV_BG_EFFECT_1);
+        SetTaskUpdate(task, (TaskUpdateFunc)EV_BG_EFFECT_1);
     }
 
     return 1;

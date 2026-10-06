@@ -328,7 +328,7 @@ void FreeSpriteTextLines() {
 }
 
 #ifndef VERSION_EU
-void* InitSpriteTextSlots(s32 a) {
+void* InitSpriteTextSlots(s32 mode) {
     u8 i;
     u8 j;
     sSpriteTextLines = EwramAlloc(sizeof(SpriteTextLine) * 24);
@@ -346,7 +346,7 @@ void* InitSpriteTextSlots(s32 a) {
             sSpriteTextLines[i].glyphTiles[j] = NULL;
         }
 
-        switch (a) {
+        switch (mode) {
         case 0:
             sSpriteTextLines[i].palette = LoadObjPalette(gTextWhitePalette, 32);
             break;
@@ -364,7 +364,7 @@ void* InitSpriteTextSlots(s32 a) {
 #endif
 
 #ifndef VERSION_EU
-void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
+void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 useAlternatePalette) {
     u16 g;
     u16 lo;
     u8 kind;
@@ -387,7 +387,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
     sSpriteTextLines[slot].font = 1;
     sSpriteTextLines[slot].visible = 1;
     sSpriteTextLines[slot].unk_53 = i;
-    sSpriteTextLines[slot].useAlternatePalette = a;
+    sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
 
     while (*s != 0) {
         u16 v;
@@ -796,7 +796,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
 #endif
 
 #ifndef VERSION_EU
-void SetSpriteTextSlotXDigits(s32 a, s32 b, u8 v, u8 d, u8 e) {
+void SetSpriteTextSlotXDigits(s32 x, s32 y, u8 v, u8 slot, u8 useAlternatePalette) {
     u8 buf[4];
     buf[0] = 0x78;
     buf[1] = v / 10;
@@ -804,12 +804,12 @@ void SetSpriteTextSlotXDigits(s32 a, s32 b, u8 v, u8 d, u8 e) {
     buf[3] = 0;
     buf[1] += 0x30;
     buf[2] += 0x30;
-    SetSpriteTextSlotAscii(a, b, buf, d, e);
+    SetSpriteTextSlotAscii(x, y, buf, slot, useAlternatePalette);
 }
 #endif
 
 #ifndef VERSION_EU
-void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
+void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 useAlternatePalette) {
     u8 i;
     u8 len;
     u8 j;
@@ -829,7 +829,7 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
     sSpriteTextLines[slot].y = y;
     sSpriteTextLines[slot].font = 2;
     sSpriteTextLines[slot].visible = 1;
-    sSpriteTextLines[slot].useAlternatePalette = a;
+    sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
     len = GetStringLength(s);
 
     if (len > 15) {
@@ -976,21 +976,21 @@ void InitBgTextLines(u8 bg) {
 #endif
 
 #ifndef VERSION_EU
-void SetBgTextLineNumber(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f) {
+void SetBgTextLineNumber(u8 x, u8 y, u8 glyphHeight, u8 value, u8 slot, u8 paletteIndex) {
     u8 buf[5];
-    buf[1] = d / 10;
-    buf[3] = d - buf[1] * 10;
+    buf[1] = value / 10;
+    buf[3] = value - buf[1] * 10;
     buf[0] = 0x82;
     buf[1] += 0x4F;
     buf[2] = 0x82;
     buf[3] += 0x4F;
     buf[4] = 0;
-    SetBgTextLine(a, b, c, buf, e, f);
+    SetBgTextLine(x, y, glyphHeight, buf, slot, paletteIndex);
 }
 #endif
 
 #ifndef VERSION_EU
-void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
+void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* s, u8 slot, u8 paletteIndex) {
     u32 off = 0x7DAB;
     u16 glyph;
     u8 i;
@@ -1002,7 +1002,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
     j = 0;
 
     // @bug? Only 10 lines are allocated.
-    if (e > 23) {
+    if (slot > 23) {
         return;
     }
 
@@ -1010,18 +1010,18 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
         return;
     }
 
-    sBgTextLines[e].x = a;
-    sBgTextLines[e].y = b;
-    sBgTextLines[e].glyphHeight = c;
-    sBgTextLines[e].dirty = 1;
-    sBgTextLines[e].paletteIndex = f;
+    sBgTextLines[slot].x = x;
+    sBgTextLines[slot].y = y;
+    sBgTextLines[slot].glyphHeight = glyphHeight;
+    sBgTextLines[slot].dirty = 1;
+    sBgTextLines[slot].paletteIndex = paletteIndex;
 
     while (*s != 0) {
         w = *(u16*)s;
         w = (w >> 8) | (w << 8);
         s += 2;
 
-        if (c > 8) {
+        if (glyphHeight > 8) {
             switch (w & 0xFF00) {
             case 0x8100:
                 if ((w & 0xFF) > 0x5A) {
@@ -1095,12 +1095,12 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
             }
         }
 
-        sBgTextLines[e].glyphs[j] = glyph;
+        sBgTextLines[slot].glyphs[j] = glyph;
         j++;
         i++;
     }
 
-    sBgTextLines[e].length = i;
+    sBgTextLines[slot].length = i;
 
     if (!sBgTextDrawQueued) {
         QueueVTransCallback(DrawBgTextLines);
@@ -1333,7 +1333,7 @@ void FreeBgTextLines() {
 }
 #endif
 
-u16 InitMsgGlyphSprites(s32 a) {
+u16 InitMsgGlyphSprites(s32 mode) {
     s32 i;
 
     sMsgGlyphSprites = EwramAlloc(sizeof(TextGlyphSprite) * 128);
@@ -1347,7 +1347,7 @@ u16 InitMsgGlyphSprites(s32 a) {
         sMsgGlyphSprites[i].visible = 0;
         sMsgGlyphSprites[i].useAlternatePalette = 0;
 
-        switch (a) {
+        switch (mode) {
         case 0:
             sMsgGlyphSprites[i].palette = LoadObjPalette(gTextBrownPalette, 32);
             break;
@@ -1366,7 +1366,7 @@ u16 InitMsgGlyphSprites(s32 a) {
     return sMsgGlyphSprites->palette->index;
 }
 
-u16 InitMsgGlyphSpritesAltPalette5(s32 a) {
+u16 InitMsgGlyphSpritesAltPalette5(s32 mode) {
     s32 i;
 
     sMsgGlyphSprites = EwramAlloc(sizeof(TextGlyphSprite) * 128);
@@ -1380,7 +1380,7 @@ u16 InitMsgGlyphSpritesAltPalette5(s32 a) {
         sMsgGlyphSprites[i].visible = 0;
         sMsgGlyphSprites[i].useAlternatePalette = 0;
 
-        switch (a) {
+        switch (mode) {
         case 0:
             sMsgGlyphSprites[i].palette = LoadObjPalette(gTextBrownPalette, 32);
             break;
@@ -1401,7 +1401,7 @@ u16 InitMsgGlyphSpritesAltPalette5(s32 a) {
     return sMsgGlyphSprites->palette->index;
 }
 
-u16 InitMsgGlyphSpritesAltPalette3(s32 a) {
+u16 InitMsgGlyphSpritesAltPalette3(s32 mode) {
     s32 i;
 
     sMsgGlyphSprites = EwramAlloc(sizeof(TextGlyphSprite) * 128);
@@ -1415,7 +1415,7 @@ u16 InitMsgGlyphSpritesAltPalette3(s32 a) {
         sMsgGlyphSprites[i].visible = 0;
         sMsgGlyphSprites[i].useAlternatePalette = 0;
 
-        switch (a) {
+        switch (mode) {
         case 0:
             sMsgGlyphSprites[i].palette = LoadObjPalette(gTextBrownPalette, 32);
             break;
@@ -1436,24 +1436,24 @@ u16 InitMsgGlyphSpritesAltPalette3(s32 a) {
     return sMsgGlyphSprites->palette->index;
 }
 
-s32 GetMsgTextWidth(const TextChar* a) {
+s32 GetMsgTextWidth(const TextChar* text) {
     u16 sum;
     s32 v;
 
     sum = 0;
 
-    while (*a != 0) {
+    while (*text != 0) {
         v = 0;
 
-        if (*a != 10) {
+        if (*text != 10) {
 #ifdef VERSION_US
-            if ((u16)(*a - 32) <= 223) {
+            if ((u16)(*text - 32) <= 223) {
 #else
-            if (*a > 31) {
+            if (*text > 31) {
 #endif
-                v = *a;
+                v = *text;
             } else {
-                switch (*a) {
+                switch (*text) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -1502,7 +1502,7 @@ s32 GetMsgTextWidth(const TextChar* a) {
             sum = sLatinGlyphWidths.widths[v] + ((sum << 16) >> 16);
         }
 
-        a++;
+        text++;
     }
 
     return (s16)sum;
@@ -1513,7 +1513,7 @@ s32 GetMsgTextWidth(const TextChar* a) {
 #else
 #define MSG_LATIN_CODE(wide, byte) (wide)
 #endif
-u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
+u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -1630,12 +1630,12 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
         s++;
 
         if (cy > 0x1800) {
-            *d = s;
+            *nextText = s;
             return sTextEntryCount;
         }
     }
 
-    *d = NULL;
+    *nextText = NULL;
     return sTextEntryCount;
 }
 
@@ -2058,24 +2058,24 @@ u16 LoadTwoDigitTextTileArray(u8 v, void** out) {
 }
 #endif
 
-void InitTextTileArray(void** p, u8 n) {
+void InitTextTileArray(void** tiles, u8 n) {
     s32 i;
 
     for (i = 0; i < n; i++) {
-        *p++ = NULL;
+        *tiles++ = NULL;
     }
 }
 
-void FreeTextTileArray(void** p, u8 n) {
+void FreeTextTileArray(void** tiles, u8 n) {
     s32 i;
 
     for (i = 0; i < n; i++) {
-        if (*p != NULL) {
-            ReleaseObjTiles(*p);
-            *p = NULL;
+        if (*tiles != NULL) {
+            ReleaseObjTiles(*tiles);
+            *tiles = NULL;
         }
 
-        p++;
+        tiles++;
     }
 }
 
@@ -2121,40 +2121,40 @@ u16 LoadTwoDigitTextSlots(u8 v, TextSlot* out) {
     return LoadTextSlots(buf, out);
 }
 
-void InitTextSlots(TextSlot* p, s32 n) {
+void InitTextSlots(TextSlot* slots, s32 n) {
     s32 i;
 
     for (i = 0; i < n; i++) {
-        p->tiles = NULL;
-        p->advance = 0;
-        p++;
+        slots->tiles = NULL;
+        slots->advance = 0;
+        slots++;
     }
 }
 
-void FreeTextSlots(TextSlot* p, s32 n) {
+void FreeTextSlots(TextSlot* slots, s32 n) {
     s32 i;
 
     for (i = 0; i < n; i++) {
-        if (p->tiles != NULL) {
-            ReleaseObjTiles(p->tiles);
-            p->tiles = NULL;
+        if (slots->tiles != NULL) {
+            ReleaseObjTiles(slots->tiles);
+            slots->tiles = NULL;
         }
 
-        p->advance = 0;
-        p++;
+        slots->advance = 0;
+        slots++;
     }
 }
 
-s16 GetTextSlotsWidth(TextSlot* p, u8 n) {
+s16 GetTextSlotsWidth(TextSlot* slots, u8 n) {
     s16 x;
     s32 i;
 
     x = 0;
 
     for (i = 0; i < n; i++) {
-        if (p[i].tiles != NULL) {
-            if (p[i].advance != -1) {
-                x += p[i].advance;
+        if (slots[i].tiles != NULL) {
+            if (slots[i].advance != -1) {
+                x += slots[i].advance;
             } else {
                 x += 3;
             }
@@ -2167,15 +2167,15 @@ s16 GetTextSlotsWidth(TextSlot* p, u8 n) {
 }
 
 #ifdef VERSION_EU
-s16 GetTextSlotsMaxLineWidth(TextSlot* p, u8 n) {
+s16 GetTextSlotsMaxLineWidth(TextSlot* slots, u8 n) {
     s16 max = 0;
     s16 x = 0;
     s32 i;
 
     for (i = 0; i < n; i++) {
-        if (p[i].tiles != NULL) {
-            if (p[i].advance != -1) {
-                x += p[i].advance;
+        if (slots[i].tiles != NULL) {
+            if (slots[i].advance != -1) {
+                x += slots[i].advance;
             } else {
                 x += 3;
             }
@@ -2222,46 +2222,46 @@ s32 GetTextLength(const void* s) {
     return n;
 }
 
-u16 LoadTextSlots(const void* a, TextSlot* b) {
+u16 LoadTextSlots(const void* text, TextSlot* slots) {
 #ifdef VERSION_JP
-    return LoadJapaneseTextSlots(a, b);
+    return LoadJapaneseTextSlots(text, slots);
 #else
-    return LoadLatinTextSlots(a, b);
+    return LoadLatinTextSlots(text, slots);
 #endif
 }
 
-s32 LoadLatinTextSlots(const u16* a, TextSlot* b) {
+s32 LoadLatinTextSlots(const u16* text, TextSlot* slots) {
     s32 n;
 
     n = 0;
     sTextEntryCount = n;
 
-    while (MSG_CHAR(a) != 0) {
+    while (MSG_CHAR(text) != 0) {
         s32 v = 0;
 
 #ifdef VERSION_EU
-        if (MSG_CHAR(a) == 31) {
+        if (MSG_CHAR(text) == 31) {
 #else
-        if (MSG_CHAR(a) == 10) {
+        if (MSG_CHAR(text) == 10) {
 #endif
-            if (b->tiles != NULL) {
-                ReleaseObjTiles(b->tiles);
-                b->tiles = NULL;
+            if (slots->tiles != NULL) {
+                ReleaseObjTiles(slots->tiles);
+                slots->tiles = NULL;
             }
 
-            b->advance = 0;
+            slots->advance = 0;
         } else {
 #ifdef VERSION_EU
-            v = MSG_CHAR(a);
+            v = MSG_CHAR(text);
 #else
 #ifdef VERSION_JP
-            if (MSG_CHAR(a) > 31) {
+            if (MSG_CHAR(text) > 31) {
 #else
-            if ((u16)(MSG_CHAR(a) - 32) <= 223) {
+            if ((u16)(MSG_CHAR(text) - 32) <= 223) {
 #endif
-                v = MSG_CHAR(a);
+                v = MSG_CHAR(text);
             } else {
-                switch (MSG_CHAR(a)) {
+                switch (MSG_CHAR(text)) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -2314,28 +2314,28 @@ s32 LoadLatinTextSlots(const u16* a, TextSlot* b) {
             }
 #endif
 
-            if (b->tiles != NULL) {
-                ReleaseObjTiles(b->tiles);
-                b->tiles = NULL;
+            if (slots->tiles != NULL) {
+                ReleaseObjTiles(slots->tiles);
+                slots->tiles = NULL;
             }
 
             if (v != 32) {
-                b->advance = sLatinGlyphWidths.widths[v];
+                slots->advance = sLatinGlyphWidths.widths[v];
             } else {
-                b->advance = 255;
+                slots->advance = 255;
             }
 
             v = ((u16*)gMsgLatinFontFrames[v])[3];
-            b->tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
-            b->useAlternatePalette = n;
+            slots->tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
+            slots->useAlternatePalette = n;
         }
 
         sTextEntryCount++;
-        b++;
+        slots++;
 #if defined(VERSION_EU) || defined(VERSION_JP)
-        a = (u16*)((u8*)a + 1);
+        text = (u16*)((u8*)text + 1);
 #else
-        a++;
+        text++;
 #endif
     }
 
@@ -2343,7 +2343,7 @@ s32 LoadLatinTextSlots(const u16* a, TextSlot* b) {
 }
 
 #ifndef VERSION_EU
-s32 LoadJapaneseTextSlots(const u16* a, TextSlot* b) {
+s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
     u8 buf[2];
     u16* c;
     u16 w;
@@ -2354,38 +2354,38 @@ s32 LoadJapaneseTextSlots(const u16* a, TextSlot* b) {
     t = 0;
     n = 0;
 
-    while (MSG_CHAR(a) != 0) {
+    while (MSG_CHAR(text) != 0) {
         u16 v;
 
 #ifdef VERSION_JP
-        buf[0] = ((u8*)a)[0];
-        buf[1] = ((u8*)a)[1];
+        buf[0] = ((u8*)text)[0];
+        buf[1] = ((u8*)text)[1];
 #else
-        buf[0] = a[0];
-        buf[1] = a[1];
+        buf[0] = text[0];
+        buf[1] = text[1];
 #endif
         c = (u16*)buf;
 
         if (*c == 0x6E6E) {
 #ifdef VERSION_JP
-            a = (u16*)((u8*)a + 2);
+            text = (u16*)((u8*)text + 2);
 #else
-            a += 2;
+            text += 2;
 #endif
 
-            if (b->tiles != NULL) {
-                ReleaseObjTiles(b->tiles);
+            if (slots->tiles != NULL) {
+                ReleaseObjTiles(slots->tiles);
             }
 
-            b->tiles = NULL;
-            b->advance = 0;
+            slots->tiles = NULL;
+            slots->advance = 0;
         } else {
             v = *c;
             v = (v / 256) | (v << 8);
 #ifdef VERSION_JP
-            a = (u16*)((u8*)a + 2);
+            text = (u16*)((u8*)text + 2);
 #else
-            a += 2;
+            text += 2;
 #endif
 
             if ((v & 0xFF00) == 0x8100) {
@@ -2517,34 +2517,34 @@ s32 LoadJapaneseTextSlots(const u16* a, TextSlot* b) {
                 GetSjisGlyph(v, &w, &t);
             }
 
-            if (b->tiles != NULL) {
-                ReleaseObjTiles(b->tiles);
-                b->tiles = NULL;
+            if (slots->tiles != NULL) {
+                ReleaseObjTiles(slots->tiles);
+                slots->tiles = NULL;
             }
 
             switch (t) {
             case 0:
                 w = ((u16*)gMsgFontBank0Frames[w])[3];
-                b->tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
+                slots->tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
                 break;
             case 1:
                 w = ((u16*)gMsgFontBank1Frames[w])[3];
-                b->tiles = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
+                slots->tiles = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
                 break;
             case 2:
                 w = ((u16*)gMsgFontBank2Frames[w])[3];
-                b->tiles = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
+                slots->tiles = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
                 break;
             case 3:
                 w = ((u16*)gMsgFontBank3Frames[w])[3];
-                b->tiles = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
+                slots->tiles = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
                 break;
             }
 
-            b->advance = 10;
+            slots->advance = 10;
         }
 
-        b++;
+        slots++;
         n++;
     }
 
@@ -2553,7 +2553,7 @@ s32 LoadJapaneseTextSlots(const u16* a, TextSlot* b) {
 #endif
 
 #ifndef VERSION_EU
-s32 LoadTextTileArray(TextChar* a, void** p) {
+s32 LoadTextTileArray(TextChar* text, void** tiles) {
     u8 buf[2];
     u16* c;
     u16 w;
@@ -2564,25 +2564,25 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
     t = 0;
     n = 0;
 
-    while (*a != 0) {
+    while (*text != 0) {
         u16 v;
 
-        buf[0] = a[0];
-        buf[1] = a[1];
+        buf[0] = text[0];
+        buf[1] = text[1];
         c = (u16*)buf;
 
         if (*c == 0x6E6E) {
-            a += 2;
+            text += 2;
 
-            if (*p != NULL) {
-                ReleaseObjTiles(*p);
+            if (*tiles != NULL) {
+                ReleaseObjTiles(*tiles);
             }
 
-            *p++ = NULL;
+            *tiles++ = NULL;
         } else {
             v = *c;
             v = (v / 256) | (v << 8);
-            a += 2;
+            text += 2;
 
             if ((v & 0xFF00) == 0x8100) {
                 v &= 0xFF;
@@ -2713,31 +2713,31 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
                 GetSjisGlyph(v, &w, &t);
             }
 
-            if (*p != NULL) {
-                ReleaseObjTiles(*p);
-                *p = NULL;
+            if (*tiles != NULL) {
+                ReleaseObjTiles(*tiles);
+                *tiles = NULL;
             }
 
             switch (t) {
             case 0:
                 w = ((u16*)gMsgFontBank0Frames[w])[3];
-                *p = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
+                *tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
                 break;
             case 1:
                 w = ((u16*)gMsgFontBank1Frames[w])[3];
-                *p = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
+                *tiles = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
                 break;
             case 2:
                 w = ((u16*)gMsgFontBank2Frames[w])[3];
-                *p = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
+                *tiles = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
                 break;
             case 3:
                 w = ((u16*)gMsgFontBank3Frames[w])[3];
-                *p = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
+                *tiles = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
                 break;
             }
 
-            p++;
+            tiles++;
         }
 
         n++;
@@ -2747,10 +2747,10 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
 }
 #endif
 
-void* LoadTextPalette(s32 a) {
+void* LoadTextPalette(s32 palette) {
     void* r = NULL;
 
-    switch (a) {
+    switch (palette) {
     case 0:
         r = LoadObjPalette(gTextBrownPalette, 32);
         break;
@@ -2774,7 +2774,7 @@ void* LoadTextPalette(s32 a) {
     return r;
 }
 
-void DrawTextSlots(s16 x, s16 y, TextSlot* p, void* d, u16 h, u8 n) {
+void DrawTextSlots(s16 x, s16 y, TextSlot* slots, void* palette, u16 priority, u8 n) {
     s16 x0 = x;
     s16 cy = y;
     u8 i;
@@ -2784,21 +2784,21 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* p, void* d, u16 h, u8 n) {
 #endif
 
     for (i = 0; i < n; i++) {
-        if (p->tiles == NULL) {
+        if (slots->tiles == NULL) {
             cy += 12;
             x = x0;
-        } else if (p->advance != -1) {
-            DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, NULL, 0, h);
-            x += p->advance;
+        } else if (slots->advance != -1) {
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, 0, priority);
+            x += slots->advance;
         } else {
             x += 3;
         }
 
-        p++;
+        slots++;
     }
 }
 
-void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* p, void* d, s32 e, u8 n) {
+void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* slots, void* palette, s32 priority, u8 n) {
     s16 x0 = x;
     s16 cy = y;
     u8 i;
@@ -2808,21 +2808,21 @@ void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* p, void* d, s32 e, u8 n) {
 #endif
 
     for (i = 0; i < n; i++) {
-        if (p->tiles == NULL) {
+        if (slots->tiles == NULL) {
             cy += 12;
             x = x0;
-        } else if (p->advance != -1) {
-            DrawSpriteUnsorted(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, 0);
-            x += p->advance;
+        } else if (slots->advance != -1) {
+            DrawSpriteUnsorted(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, 0);
+            x += slots->advance;
         } else {
             x += 3;
         }
 
-        p++;
+        slots++;
     }
 }
 
-void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* p, void* d, u16 g, u16 h, u8 n) {
+void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* slots, void* palette, u16 flags, u16 priority, u8 n) {
     s16 x0 = x;
     s16 cy = y;
     u8 i;
@@ -2832,21 +2832,21 @@ void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* p, void* d, u16 g, u16 h, u8
 #endif
 
     for (i = 0; i < n; i++) {
-        if (p->tiles == NULL) {
+        if (slots->tiles == NULL) {
             cy += 12;
             x = x0;
-        } else if (p->advance != -1) {
-            DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, NULL, g, h);
-            x += p->advance;
+        } else if (slots->advance != -1) {
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, flags, priority);
+            x += slots->advance;
         } else {
             x += 3;
         }
 
-        p++;
+        slots++;
     }
 }
 
-void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* p, void* d, void* e, u16 h, u8 n) {
+void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* slots, void* palette, void* alternatePalette, u16 priority, u8 n) {
     s16 x0 = x;
     s16 cy = y;
     u8 i;
@@ -2856,58 +2856,58 @@ void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* p, void* d, void* e, u
 #endif
 
     for (i = 0; i < n; i++) {
-        if (p->tiles == NULL) {
+        if (slots->tiles == NULL) {
             cy += 12;
             x = x0;
-        } else if (p->advance != -1) {
-            if (p->useAlternatePalette == 0) {
-                DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, NULL, 0, h);
+        } else if (slots->advance != -1) {
+            if (slots->useAlternatePalette == 0) {
+                DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, 0, priority);
             } else {
-                DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, e, NULL, 0, h);
+                DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, alternatePalette, NULL, 0, priority);
             }
 
-            x += p->advance;
+            x += slots->advance;
         } else {
             x += 3;
         }
 
-        p++;
+        slots++;
     }
 }
 
-void DrawTextTileArray(s16 x, s32 y, void** p, void* d, u16 h, u8 n) {
+void DrawTextTileArray(s16 x, s32 y, void** tiles, void* palette, u16 priority, u8 n) {
     s16 cy = y;
     s16 x0 = x;
     u8 i;
 
     for (i = 0; i < n; i++) {
-        if (*p == NULL) {
+        if (*tiles == NULL) {
             cy += 12;
             x = x0;
         } else {
-            DrawSprite(x, cy, MSG_FONT_FRAMES[0], *p, d, NULL, 0, h);
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], *tiles, palette, NULL, 0, priority);
             x += 10;
         }
 
-        p++;
+        tiles++;
     }
 }
 
-void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** p, void* d, s32 e, u16 h, u8 n) {
+void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** tiles, void* palette, s32 alternatePalette, u16 priority, u8 n) {
     s16 cy = y;
     s16 x0 = x;
     u8 i;
 
     for (i = 0; i < n; i++) {
-        if (*p == NULL) {
+        if (*tiles == NULL) {
             cy += 12;
             x = x0;
         } else {
-            DrawSprite(x, cy, MSG_FONT_FRAMES[0], *p, d, NULL, 0, h);
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], *tiles, palette, NULL, 0, priority);
             x += 10;
         }
 
-        p++;
+        tiles++;
     }
 }
 
@@ -2919,9 +2919,9 @@ void* LoadSmallFontPalette() {
     return LoadObjPalette(gCommonObjPalette, 0x20);
 }
 
-void FreeSmallFontResources(void* a, void* b) {
-    ReleaseObjTiles(a);
-    ReleaseObjPalette(b);
+void FreeSmallFontResources(void* tiles, void* palette) {
+    ReleaseObjTiles(tiles);
+    ReleaseObjPalette(palette);
 }
 
 u16 EncodeSmallFontString(const u8* s, u16* out) {
@@ -3159,3075 +3159,3075 @@ u16 FormatSmallFontBinary(u32 v, u16* out, u8 mode) {
     }
 }
 
-s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n) {
+s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* tiles, void* palette, u16 priority, u8 n) {
     u8 i;
 
     for (i = 0; i < n; i++) {
-        DrawSprite(x + i * 8, y, gSmallFontFrames[*s], d, e, NULL, 0, h);
+        DrawSprite(x + i * 8, y, gSmallFontFrames[*s], tiles, palette, NULL, 0, priority);
         s++;
     }
 }
 
-void GetSjisGlyph(u16 a, u16* b, u8* c) {
-    switch (a & 0xFF00) {
+void GetSjisGlyph(u16 code, u16* glyph, u8* bank) {
+    switch (code & 0xFF00) {
     case 0x8200: {
-        u16 v = a & 0xFF;
+        u16 v = code & 0xFF;
 
         if ((u16)(v - 96) <= 25) {
-            *b = a + 0x7DAB;
+            *glyph = code + 0x7DAB;
         }
 
         if ((u16)(v - 129) <= 25) {
-            *b = a + 0x7DA4;
+            *glyph = code + 0x7DA4;
         }
 
         if ((u16)(v - 79) <= 9) {
-            *b = a + 0x7DB2;
+            *glyph = code + 0x7DB2;
         }
 
         if ((u16)(v - 159) <= 82) {
-            *b = a + 0x7DA0;
+            *glyph = code + 0x7DA0;
         }
 
-        *c = 0;
+        *bank = 0;
         break;
     }
     case 0x8300: {
-        u16 v = a & 0xFF;
+        u16 v = code & 0xFF;
 
         if ((u16)(v - 64) <= 62) {
-            *b = a + 0x7D52;
+            *glyph = code + 0x7D52;
         }
 
         if ((u16)(v - 128) <= 20) {
-            *b = a + 0x7D51;
+            *glyph = code + 0x7D51;
         }
 
-        *c = 0;
+        *bank = 0;
         break;
     }
     case 0x8700:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x56:
-            *b = 143;
-            *c = 0;
+            *glyph = 143;
+            *bank = 0;
             break;
         case 0x5D:
-            *b = 142;
-            *c = 0;
+            *glyph = 142;
+            *bank = 0;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8800:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xC5:
-            *b = 9;
-            *c = 1;
+            *glyph = 9;
+            *bank = 1;
             break;
         case 0xC3:
-            *b = 84;
-            *c = 1;
+            *glyph = 84;
+            *bank = 1;
             break;
         case 0xF3:
-            *b = 86;
-            *c = 1;
+            *glyph = 86;
+            *bank = 1;
             break;
         case 0xEA:
-            *b = 104;
-            *c = 1;
+            *glyph = 104;
+            *bank = 1;
             break;
         case 0xF9:
-            *b = 153;
-            *c = 1;
+            *glyph = 153;
+            *bank = 1;
             break;
         case 0xE1:
-            *b = 179;
-            *c = 1;
+            *glyph = 179;
+            *bank = 1;
             break;
         case 0xC8:
-            *b = 182;
-            *c = 1;
+            *glyph = 182;
+            *bank = 1;
             break;
         case 0xAB:
-            *b = 208;
-            *c = 1;
+            *glyph = 208;
+            *bank = 1;
             break;
         case 0xF6:
-            *b = 247;
-            *c = 1;
+            *glyph = 247;
+            *bank = 1;
             break;
         case 0xB5:
-            *b = 250;
-            *c = 1;
+            *glyph = 250;
+            *bank = 1;
             break;
         case 0xD3:
-            *b = 3;
-            *c = 2;
+            *glyph = 3;
+            *bank = 2;
             break;
         case 0xC0:
-            *b = 17;
-            *c = 2;
+            *glyph = 17;
+            *bank = 2;
             break;
         case 0xCD:
-            *b = 57;
-            *c = 2;
+            *glyph = 57;
+            *bank = 2;
             break;
         case 0xE7:
-            *b = 105;
-            *c = 2;
+            *glyph = 105;
+            *bank = 2;
             break;
         case 0xF8:
-            *b = 164;
-            *c = 2;
+            *glyph = 164;
+            *bank = 2;
             break;
         case 0xF5:
-            *b = 184;
-            *c = 2;
+            *glyph = 184;
+            *bank = 2;
             break;
         case 0xA4:
-            *b = 192;
-            *c = 2;
+            *glyph = 192;
+            *bank = 2;
             break;
         case 0xA3:
-            *b = 207;
-            *c = 2;
+            *glyph = 207;
+            *bank = 2;
             break;
         case 0xC4:
-            *b = 63;
-            *c = 3;
+            *glyph = 63;
+            *bank = 3;
             break;
         case 0xAC:
-            *b = 78;
-            *c = 3;
+            *glyph = 78;
+            *bank = 3;
             break;
         case 0xDF:
-            *b = 102;
-            *c = 3;
+            *glyph = 102;
+            *bank = 3;
             break;
         case 0xDA:
-            *b = 118;
-            *c = 3;
+            *glyph = 118;
+            *bank = 3;
             break;
         case 0xD9:
-            *b = 135;
-            *c = 3;
+            *glyph = 135;
+            *bank = 3;
             break;
         case 0xCA:
-            *b = 136;
-            *c = 3;
+            *glyph = 136;
+            *bank = 3;
             break;
         case 0xD0:
-            *b = 187;
-            *c = 3;
+            *glyph = 187;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8900:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x9C:
-            *b = 4;
-            *c = 1;
+            *glyph = 4;
+            *bank = 1;
             break;
         case 0xAF:
-            *b = 26;
-            *c = 1;
+            *glyph = 26;
+            *bank = 1;
             break;
         case 0xBD:
-            *b = 47;
-            *c = 1;
+            *glyph = 47;
+            *bank = 1;
             break;
         case 0xA4:
-            *b = 49;
-            *c = 1;
+            *glyph = 49;
+            *bank = 1;
             break;
         case 0x69:
-            *b = 74;
-            *c = 1;
+            *glyph = 74;
+            *bank = 1;
             break;
         case 0x93:
-            *b = 75;
-            *c = 1;
+            *glyph = 75;
+            *bank = 1;
             break;
         case 0xF6:
-            *b = 95;
-            *c = 1;
+            *glyph = 95;
+            *bank = 1;
             break;
         case 0xEF:
-            *b = 98;
-            *c = 1;
+            *glyph = 98;
+            *bank = 1;
             break;
         case 0x52:
-            *b = 103;
-            *c = 1;
+            *glyph = 103;
+            *bank = 1;
             break;
         case 0xB4:
-            *b = 107;
-            *c = 1;
+            *glyph = 107;
+            *bank = 1;
             break;
         case 0xC6:
-            *b = 121;
-            *c = 1;
+            *glyph = 121;
+            *bank = 1;
             break;
         case 0x5E:
-            *b = 124;
-            *c = 1;
+            *glyph = 124;
+            *bank = 1;
             break;
         case 0x42:
-            *b = 160;
-            *c = 1;
+            *glyph = 160;
+            *bank = 1;
             break;
         case 0xBB:
-            *b = 198;
-            *c = 1;
+            *glyph = 198;
+            *bank = 1;
             break;
         case 0xEE:
-            *b = 205;
-            *c = 1;
+            *glyph = 205;
+            *bank = 1;
             break;
         case 0xBA:
-            *b = 1;
-            *c = 2;
+            *glyph = 1;
+            *bank = 2;
             break;
         case 0x98:
-            *b = 8;
-            *c = 2;
+            *glyph = 8;
+            *bank = 2;
             break;
         case 0xBC:
-            *b = 15;
-            *c = 2;
+            *glyph = 15;
+            *bank = 2;
             break;
         case 0xF0:
-            *b = 61;
-            *c = 2;
+            *glyph = 61;
+            *bank = 2;
             break;
         case 0xF1:
-            *b = 65;
-            *c = 2;
+            *glyph = 65;
+            *bank = 2;
             break;
         case 0xCA:
-            *b = 89;
-            *c = 2;
+            *glyph = 89;
+            *bank = 2;
             break;
         case 0x6A:
-            *b = 101;
-            *c = 2;
+            *glyph = 101;
+            *bank = 2;
             break;
         case 0xE4:
-            *b = 104;
-            *c = 2;
+            *glyph = 104;
+            *bank = 2;
             break;
         case 0xB9:
-            *b = 120;
-            *c = 2;
+            *glyph = 120;
+            *bank = 2;
             break;
         case 0xAE:
-            *b = 124;
-            *c = 2;
+            *glyph = 124;
+            *bank = 2;
             break;
         case 0xC1:
-            *b = 152;
-            *c = 2;
+            *glyph = 152;
+            *bank = 2;
             break;
         case 0x70:
-            *b = 155;
-            *c = 2;
+            *glyph = 155;
+            *bank = 2;
             break;
         case 0xF7:
-            *b = 177;
-            *c = 2;
+            *glyph = 177;
+            *bank = 2;
             break;
         case 0xDF:
-            *b = 200;
-            *c = 2;
+            *glyph = 200;
+            *bank = 2;
             break;
         case 0xE6:
-            *b = 201;
-            *c = 2;
+            *glyph = 201;
+            *bank = 2;
             break;
         case 0xBF:
-            *b = 218;
-            *c = 2;
+            *glyph = 218;
+            *bank = 2;
             break;
         case 0x65:
-            *b = 240;
-            *c = 2;
+            *glyph = 240;
+            *bank = 2;
             break;
         case 0x7A:
-            *b = 244;
-            *c = 2;
+            *glyph = 244;
+            *bank = 2;
             break;
         case 0xC8:
-            *b = 13;
-            *c = 3;
+            *glyph = 13;
+            *bank = 3;
             break;
         case 0x41:
-            *b = 51;
-            *c = 3;
+            *glyph = 51;
+            *bank = 3;
             break;
         case 0x8F:
-            *b = 55;
-            *c = 3;
+            *glyph = 55;
+            *bank = 3;
             break;
         case 0x9E:
-            *b = 80;
-            *c = 3;
+            *glyph = 80;
+            *bank = 3;
             break;
         case 0x45:
-            *b = 113;
-            *c = 3;
+            *glyph = 113;
+            *bank = 3;
             break;
         case 0xCE:
-            *b = 129;
-            *c = 3;
+            *glyph = 129;
+            *bank = 3;
             break;
         case 0x9F:
-            *b = 142;
-            *c = 3;
+            *glyph = 142;
+            *bank = 3;
             break;
         case 0xD7:
-            *b = 148;
-            *c = 3;
+            *glyph = 148;
+            *bank = 3;
             break;
         case 0xC2:
-            *b = 150;
-            *c = 3;
+            *glyph = 150;
+            *bank = 3;
             break;
         case 0x8A:
-            *b = 154;
-            *c = 3;
+            *glyph = 154;
+            *bank = 3;
             break;
         case 0xD4:
-            *b = 181;
-            *c = 3;
+            *glyph = 181;
+            *bank = 3;
             break;
         case 0xFC:
-            *b = 188;
-            *c = 3;
+            *glyph = 188;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8A00:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x4F:
-            *b = 8;
-            *c = 1;
+            *glyph = 8;
+            *bank = 1;
             break;
         case 0x6D:
-            *b = 17;
-            *c = 1;
+            *glyph = 17;
+            *bank = 1;
             break;
         case 0xB5:
-            *b = 61;
-            *c = 1;
+            *glyph = 61;
+            *bank = 1;
             break;
         case 0x4B:
-            *b = 76;
-            *c = 1;
+            *glyph = 76;
+            *bank = 1;
             break;
         case 0xA3:
-            *b = 81;
-            *c = 1;
+            *glyph = 81;
+            *bank = 1;
             break;
         case 0x45:
-            *b = 83;
-            *c = 1;
+            *glyph = 83;
+            *bank = 1;
             break;
         case 0xD4:
-            *b = 101;
-            *c = 1;
+            *glyph = 101;
+            *bank = 1;
             break;
         case 0x43:
-            *b = 123;
-            *c = 1;
+            *glyph = 123;
+            *bank = 1;
             break;
         case 0xEB:
-            *b = 139;
-            *c = 1;
+            *glyph = 139;
+            *bank = 1;
             break;
         case 0xB4:
-            *b = 167;
-            *c = 1;
+            *glyph = 167;
+            *bank = 1;
             break;
         case 0x79:
-            *b = 188;
-            *c = 1;
+            *glyph = 188;
+            *bank = 1;
             break;
         case 0x58:
-            *b = 199;
-            *c = 1;
+            *glyph = 199;
+            *bank = 1;
             break;
         case 0xAA:
-            *b = 252;
-            *c = 1;
+            *glyph = 252;
+            *bank = 1;
             break;
         case 0xB1:
-            *b = 9;
-            *c = 2;
+            *glyph = 9;
+            *bank = 2;
             break;
         case 0xEF:
-            *b = 13;
-            *c = 2;
+            *glyph = 13;
+            *bank = 2;
             break;
         case 0xE7:
-            *b = 54;
-            *c = 2;
+            *glyph = 54;
+            *bank = 2;
             break;
         case 0xE8:
-            *b = 59;
-            *c = 2;
+            *glyph = 59;
+            *bank = 2;
             break;
         case 0xC3:
-            *b = 64;
-            *c = 2;
+            *glyph = 64;
+            *bank = 2;
             break;
         case 0xC8:
-            *b = 84;
-            *c = 2;
+            *glyph = 84;
+            *bank = 2;
             break;
         case 0xF1:
-            *b = 140;
-            *c = 2;
+            *glyph = 140;
+            *bank = 2;
             break;
         case 0x6F:
-            *b = 143;
-            *c = 2;
+            *glyph = 143;
+            *bank = 2;
             break;
         case 0x4A:
-            *b = 146;
-            *c = 2;
+            *glyph = 146;
+            *bank = 2;
             break;
         case 0x51:
-            *b = 149;
-            *c = 2;
+            *glyph = 149;
+            *bank = 2;
             break;
         case 0xD6:
-            *b = 178;
-            *c = 2;
+            *glyph = 178;
+            *bank = 2;
             break;
         case 0x69:
-            *b = 248;
-            *c = 2;
+            *glyph = 248;
+            *bank = 2;
             break;
         case 0x47:
-            *b = 3;
-            *c = 3;
+            *glyph = 3;
+            *bank = 3;
             break;
         case 0x77:
-            *b = 14;
-            *c = 3;
+            *glyph = 14;
+            *bank = 3;
             break;
         case 0xEC:
-            *b = 46;
-            *c = 3;
+            *glyph = 46;
+            *bank = 3;
             break;
         case 0xAE:
-            *b = 56;
-            *c = 3;
+            *glyph = 56;
+            *bank = 3;
             break;
         case 0xED:
-            *b = 76;
-            *c = 3;
+            *glyph = 76;
+            *bank = 3;
             break;
         case 0xB7:
-            *b = 85;
-            *c = 3;
+            *glyph = 85;
+            *bank = 3;
             break;
         case 0x88:
-            *b = 88;
-            *c = 3;
+            *glyph = 88;
+            *bank = 3;
             break;
         case 0xA5:
-            *b = 145;
-            *c = 3;
+            *glyph = 145;
+            *bank = 3;
             break;
         case 0xFA:
-            *b = 162;
-            *c = 3;
+            *glyph = 162;
+            *bank = 3;
             break;
         case 0xAB:
-            *b = 166;
-            *c = 3;
+            *glyph = 166;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8B00:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x4C:
-            *b = 25;
-            *c = 1;
+            *glyph = 25;
+            *bank = 1;
             break;
         case 0x41:
-            *b = 30;
-            *c = 1;
+            *glyph = 30;
+            *bank = 1;
             break;
         case 0x43:
-            *b = 38;
-            *c = 1;
+            *glyph = 38;
+            *bank = 1;
             break;
         case 0x5E:
-            *b = 62;
-            *c = 1;
+            *glyph = 62;
+            *bank = 1;
             break;
         case 0xB3:
-            *b = 70;
-            *c = 1;
+            *glyph = 70;
+            *bank = 1;
             break;
         case 0xFC:
-            *b = 72;
-            *c = 1;
+            *glyph = 72;
+            *bank = 1;
             break;
         case 0xAD:
-            *b = 73;
-            *c = 1;
+            *glyph = 73;
+            *bank = 1;
             break;
         case 0x63:
-            *b = 89;
-            *c = 1;
+            *glyph = 89;
+            *bank = 1;
             break;
         case 0x9F:
-            *b = 129;
-            *c = 1;
+            *glyph = 129;
+            *bank = 1;
             break;
         case 0xDF:
-            *b = 134;
-            *c = 1;
+            *glyph = 134;
+            *bank = 1;
             break;
         case 0xA6:
-            *b = 158;
-            *c = 1;
+            *glyph = 158;
+            *bank = 1;
             break;
         case 0xEA:
-            *b = 173;
-            *c = 1;
+            *glyph = 173;
+            *bank = 1;
             break;
         case 0xE6:
-            *b = 180;
-            *c = 1;
+            *glyph = 180;
+            *bank = 1;
             break;
         case 0xBB:
-            *b = 189;
-            *c = 1;
+            *glyph = 189;
+            *bank = 1;
             break;
         case 0xC1:
-            *b = 200;
-            *c = 1;
+            *glyph = 200;
+            *bank = 1;
             break;
         case 0xB0:
-            *b = 207;
-            *c = 1;
+            *glyph = 207;
+            *bank = 1;
             break;
         case 0x4E:
-            *b = 214;
-            *c = 1;
+            *glyph = 214;
+            *bank = 1;
             break;
         case 0x86:
-            *b = 221;
-            *c = 1;
+            *glyph = 221;
+            *bank = 1;
             break;
         case 0x74:
-            *b = 239;
-            *c = 1;
+            *glyph = 239;
+            *bank = 1;
             break;
         case 0x7E:
-            *b = 253;
-            *c = 1;
+            *glyph = 253;
+            *bank = 1;
             break;
         case 0xB9:
-            *b = 7;
-            *c = 2;
+            *glyph = 7;
+            *bank = 2;
             break;
         case 0x46:
-            *b = 19;
-            *c = 2;
+            *glyph = 19;
+            *bank = 2;
             break;
         case 0x5A:
-            *b = 24;
-            *c = 2;
+            *glyph = 24;
+            *bank = 2;
             break;
         case 0x7D:
-            *b = 27;
-            *c = 2;
+            *glyph = 27;
+            *bank = 2;
             break;
         case 0x92:
-            *b = 40;
-            *c = 2;
+            *glyph = 40;
+            *bank = 2;
             break;
         case 0x96:
-            *b = 43;
-            *c = 2;
+            *glyph = 43;
+            *bank = 2;
             break;
         case 0x7B:
-            *b = 66;
-            *c = 2;
+            *glyph = 66;
+            *bank = 2;
             break;
         case 0xB6:
-            *b = 88;
-            *c = 2;
+            *glyph = 88;
+            *bank = 2;
             break;
         case 0xF3:
-            *b = 99;
-            *c = 2;
+            *glyph = 99;
+            *bank = 2;
             break;
         case 0x5D:
-            *b = 108;
-            *c = 2;
+            *glyph = 108;
+            *bank = 2;
             break;
         case 0xC8:
-            *b = 126;
-            *c = 2;
+            *glyph = 126;
+            *bank = 2;
             break;
         case 0xA3:
-            *b = 153;
-            *c = 2;
+            *glyph = 153;
+            *bank = 2;
             break;
         case 0x81:
-            *b = 195;
-            *c = 2;
+            *glyph = 195;
+            *bank = 2;
             break;
         case 0xEC:
-            *b = 198;
-            *c = 2;
+            *glyph = 198;
+            *bank = 2;
             break;
         case 0x91:
-            *b = 203;
-            *c = 2;
+            *glyph = 203;
+            *bank = 2;
             break;
         case 0x50:
-            *b = 204;
-            *c = 2;
+            *glyph = 204;
+            *bank = 2;
             break;
         case 0xF0:
-            *b = 208;
-            *c = 2;
+            *glyph = 208;
+            *bank = 2;
             break;
         case 0x8E:
-            *b = 213;
-            *c = 2;
+            *glyph = 213;
+            *bank = 2;
             break;
         case 0x70:
-            *b = 214;
-            *c = 2;
+            *glyph = 214;
+            *bank = 2;
             break;
         case 0xBF:
-            *b = 220;
-            *c = 2;
+            *glyph = 220;
+            *bank = 2;
             break;
         case 0xB5:
-            *b = 235;
-            *c = 2;
+            *glyph = 235;
+            *bank = 2;
             break;
         case 0x76:
-            *b = 237;
-            *c = 2;
+            *glyph = 237;
+            *bank = 2;
             break;
         case 0xF4:
-            *b = 239;
-            *c = 2;
+            *glyph = 239;
+            *bank = 2;
             break;
         case 0x40:
-            *b = 254;
-            *c = 2;
+            *glyph = 254;
+            *bank = 2;
             break;
         case 0x60:
-            *b = 255;
-            *c = 2;
+            *glyph = 255;
+            *bank = 2;
             break;
         case 0x83:
-            *b = 5;
-            *c = 3;
+            *glyph = 5;
+            *bank = 3;
             break;
         case 0x95:
-            *b = 43;
-            *c = 3;
+            *glyph = 43;
+            *bank = 3;
             break;
         case 0xEF:
-            *b = 45;
-            *c = 3;
+            *glyph = 45;
+            *bank = 3;
             break;
         case 0x4D:
-            *b = 66;
-            *c = 3;
+            *glyph = 66;
+            *bank = 3;
             break;
         case 0xBD:
-            *b = 71;
-            *c = 3;
+            *glyph = 71;
+            *bank = 3;
             break;
         case 0x90:
-            *b = 99;
-            *c = 3;
+            *glyph = 99;
+            *bank = 3;
             break;
         case 0x7A:
-            *b = 123;
-            *c = 3;
+            *glyph = 123;
+            *bank = 3;
             break;
         case 0x9B:
-            *b = 131;
-            *c = 3;
+            *glyph = 131;
+            *bank = 3;
             break;
         case 0xA5:
-            *b = 158;
-            *c = 3;
+            *glyph = 158;
+            *bank = 3;
             break;
         case 0x78:
-            *b = 167;
-            *c = 3;
+            *glyph = 167;
+            *bank = 3;
             break;
         case 0xE0:
-            *b = 169;
-            *c = 3;
+            *glyph = 169;
+            *bank = 3;
             break;
         case 0xC9:
-            *b = 179;
-            *c = 3;
+            *glyph = 179;
+            *bank = 3;
             break;
         case 0xCA:
-            *b = 184;
-            *c = 3;
+            *glyph = 184;
+            *bank = 3;
             break;
         case 0xCF:
-            *b = 186;
-            *c = 3;
+            *glyph = 186;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8C00:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x4E:
-            *b = 6;
-            *c = 1;
+            *glyph = 6;
+            *bank = 1;
             break;
         case 0xF5:
-            *b = 11;
-            *c = 1;
+            *glyph = 11;
+            *bank = 1;
             break;
         case 0xA9:
-            *b = 12;
-            *c = 1;
+            *glyph = 12;
+            *bank = 1;
             break;
         case 0x78:
-            *b = 22;
-            *c = 1;
+            *glyph = 22;
+            *bank = 1;
             break;
         case 0xAB:
-            *b = 55;
-            *c = 1;
+            *glyph = 55;
+            *bank = 1;
             break;
         case 0xBE:
-            *b = 67;
-            *c = 1;
+            *glyph = 67;
+            *bank = 1;
             break;
         case 0xAE:
-            *b = 80;
-            *c = 1;
+            *glyph = 80;
+            *bank = 1;
             break;
         case 0xB3:
-            *b = 91;
-            *c = 1;
+            *glyph = 91;
+            *bank = 1;
             break;
         case 0x76:
-            *b = 116;
-            *c = 1;
+            *glyph = 116;
+            *bank = 1;
             break;
         case 0x60:
-            *b = 128;
-            *c = 1;
+            *glyph = 128;
+            *bank = 1;
             break;
         case 0x9F:
-            *b = 138;
-            *c = 1;
+            *glyph = 138;
+            *bank = 1;
             break;
         case 0xFB:
-            *b = 152;
-            *c = 1;
+            *glyph = 152;
+            *bank = 1;
             break;
         case 0xC8:
-            *b = 203;
-            *c = 1;
+            *glyph = 203;
+            *bank = 1;
             break;
         case 0xC4:
-            *b = 215;
-            *c = 1;
+            *glyph = 215;
+            *bank = 1;
             break;
         case 0xBB:
-            *b = 216;
-            *c = 1;
+            *glyph = 216;
+            *bank = 1;
             break;
         case 0xA4:
-            *b = 220;
-            *c = 1;
+            *glyph = 220;
+            *bank = 1;
             break;
         case 0xC0:
-            *b = 233;
-            *c = 1;
+            *glyph = 233;
+            *bank = 1;
             break;
         case 0xB4:
-            *b = 246;
-            *c = 1;
+            *glyph = 246;
+            *bank = 1;
             break;
         case 0xB1:
-            *b = 12;
-            *c = 2;
+            *glyph = 12;
+            *bank = 2;
             break;
         case 0x69:
-            *b = 33;
-            *c = 2;
+            *glyph = 33;
+            *bank = 2;
             break;
         case 0x88:
-            *b = 46;
-            *c = 2;
+            *glyph = 46;
+            *bank = 2;
             break;
         case 0x59:
-            *b = 49;
-            *c = 2;
+            *glyph = 49;
+            *bank = 2;
             break;
         case 0xE4:
-            *b = 60;
-            *c = 2;
+            *glyph = 60;
+            *bank = 2;
             break;
         case 0x41:
-            *b = 73;
-            *c = 2;
+            *glyph = 73;
+            *bank = 2;
             break;
         case 0xE3:
-            *b = 76;
-            *c = 2;
+            *glyph = 76;
+            *bank = 2;
             break;
         case 0x8B:
-            *b = 90;
-            *c = 2;
+            *glyph = 90;
+            *bank = 2;
             break;
         case 0xFC:
-            *b = 96;
-            *c = 2;
+            *glyph = 96;
+            *bank = 2;
             break;
         case 0xDD:
-            *b = 97;
-            *c = 2;
+            *glyph = 97;
+            *bank = 2;
             break;
         case 0x57:
-            *b = 106;
-            *c = 2;
+            *glyph = 106;
+            *bank = 2;
             break;
         case 0xAF:
-            *b = 111;
-            *c = 2;
+            *glyph = 111;
+            *bank = 2;
             break;
         case 0x99:
-            *b = 117;
-            *c = 2;
+            *glyph = 117;
+            *bank = 2;
             break;
         case 0xB5:
-            *b = 129;
-            *c = 2;
+            *glyph = 129;
+            *bank = 2;
             break;
         case 0xB8:
-            *b = 175;
-            *c = 2;
+            *glyph = 175;
+            *bank = 2;
             break;
         case 0xE5:
-            *b = 183;
-            *c = 2;
+            *glyph = 183;
+            *bank = 2;
             break;
         case 0x8F:
-            *b = 211;
-            *c = 2;
+            *glyph = 211;
+            *bank = 2;
             break;
         case 0xB6:
-            *b = 226;
-            *c = 2;
+            *glyph = 226;
+            *bank = 2;
             break;
         case 0x8A:
-            *b = 238;
-            *c = 2;
+            *glyph = 238;
+            *bank = 2;
             break;
         case 0xC3:
-            *b = 251;
-            *c = 2;
+            *glyph = 251;
+            *bank = 2;
             break;
         case 0x79:
-            *b = 9;
-            *c = 3;
+            *glyph = 9;
+            *bank = 3;
             break;
         case 0xEB:
-            *b = 19;
-            *c = 3;
+            *glyph = 19;
+            *bank = 3;
             break;
         case 0x8C:
-            *b = 31;
-            *c = 3;
+            *glyph = 31;
+            *bank = 3;
             break;
         case 0x95:
-            *b = 37;
-            *c = 3;
+            *glyph = 37;
+            *bank = 3;
             break;
         case 0xF0:
-            *b = 57;
-            *c = 3;
+            *glyph = 57;
+            *bank = 3;
             break;
         case 0xCC:
-            *b = 70;
-            *c = 3;
+            *glyph = 70;
+            *bank = 3;
             break;
         case 0xF8:
-            *b = 98;
-            *c = 3;
+            *glyph = 98;
+            *bank = 3;
             break;
         case 0xEA:
-            *b = 100;
-            *c = 3;
+            *glyph = 100;
+            *bank = 3;
             break;
         case 0x82:
-            *b = 122;
-            *c = 3;
+            *glyph = 122;
+            *bank = 3;
             break;
         case 0xB9:
-            *b = 171;
-            *c = 3;
+            *glyph = 171;
+            *bank = 3;
             break;
         case 0x6E:
-            *b = 172;
-            *c = 3;
+            *glyph = 172;
+            *bank = 3;
             break;
         case 0x87:
-            *b = 189;
-            *c = 3;
+            *glyph = 189;
+            *bank = 3;
             break;
         case 0x5E:
-            *b = 191;
-            *c = 3;
+            *glyph = 191;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8D00:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x90:
-            *b = 23;
-            *c = 1;
+            *glyph = 23;
+            *bank = 1;
             break;
         case 0x73:
-            *b = 31;
-            *c = 1;
+            *glyph = 31;
+            *bank = 1;
             break;
         case 0xDF:
-            *b = 46;
-            *c = 1;
+            *glyph = 46;
+            *bank = 1;
             break;
         case 0x9E:
-            *b = 127;
-            *c = 1;
+            *glyph = 127;
+            *bank = 1;
             break;
         case 0xC5:
-            *b = 133;
-            *c = 1;
+            *glyph = 133;
+            *bank = 1;
             break;
         case 0xA2:
-            *b = 143;
-            *c = 1;
+            *glyph = 143;
+            *bank = 1;
             break;
         case 0x6C:
-            *b = 157;
-            *c = 1;
+            *glyph = 157;
+            *bank = 1;
             break;
         case 0xA1:
-            *b = 164;
-            *c = 1;
+            *glyph = 164;
+            *bank = 1;
             break;
         case 0xC4:
-            *b = 187;
-            *c = 1;
+            *glyph = 187;
+            *bank = 1;
             break;
         case 0xCB:
-            *b = 228;
-            *c = 1;
+            *glyph = 228;
+            *bank = 1;
             break;
         case 0xEC:
-            *b = 230;
-            *c = 1;
+            *glyph = 230;
+            *bank = 1;
             break;
         case 0x87:
-            *b = 23;
-            *c = 2;
+            *glyph = 23;
+            *bank = 2;
             break;
         case 0x8F:
-            *b = 26;
-            *c = 2;
+            *glyph = 26;
+            *bank = 2;
             break;
         case 0xD9:
-            *b = 29;
-            *c = 2;
+            *glyph = 29;
+            *bank = 2;
             break;
         case 0x91:
-            *b = 38;
-            *c = 2;
+            *glyph = 38;
+            *bank = 2;
             break;
         case 0x44:
-            *b = 81;
-            *c = 2;
+            *glyph = 81;
+            *bank = 2;
             break;
         case 0xA5:
-            *b = 91;
-            *c = 2;
+            *glyph = 91;
+            *bank = 2;
             break;
         case 0x72:
-            *b = 134;
-            *c = 2;
+            *glyph = 134;
+            *bank = 2;
             break;
         case 0x52:
-            *b = 139;
-            *c = 2;
+            *glyph = 139;
+            *bank = 2;
             break;
         case 0xB6:
-            *b = 141;
-            *c = 2;
+            *glyph = 141;
+            *bank = 2;
             break;
         case 0xC3:
-            *b = 147;
-            *c = 2;
+            *glyph = 147;
+            *bank = 2;
             break;
         case 0xCF:
-            *b = 179;
-            *c = 2;
+            *glyph = 179;
+            *bank = 2;
             break;
         case 0x58:
-            *b = 202;
-            *c = 2;
+            *glyph = 202;
+            *bank = 2;
             break;
         case 0x82:
-            *b = 215;
-            *c = 2;
+            *glyph = 215;
+            *bank = 2;
             break;
         case 0xDD:
-            *b = 224;
-            *c = 2;
+            *glyph = 224;
+            *bank = 2;
             break;
         case 0xD7:
-            *b = 230;
-            *c = 2;
+            *glyph = 230;
+            *bank = 2;
             break;
         case 0x48:
-            *b = 231;
-            *c = 2;
+            *glyph = 231;
+            *bank = 2;
             break;
         case 0x4C:
-            *b = 243;
-            *c = 2;
+            *glyph = 243;
+            *bank = 2;
             break;
         case 0xFB:
-            *b = 250;
-            *c = 2;
+            *glyph = 250;
+            *bank = 2;
             break;
         case 0x5C:
-            *b = 15;
-            *c = 3;
+            *glyph = 15;
+            *bank = 3;
             break;
         case 0x93:
-            *b = 39;
-            *c = 3;
+            *glyph = 39;
+            *bank = 3;
             break;
         case 0xBD:
-            *b = 40;
-            *c = 3;
+            *glyph = 40;
+            *bank = 3;
             break;
         case 0xAC:
-            *b = 92;
-            *c = 3;
+            *glyph = 92;
+            *bank = 3;
             break;
         case 0xDB:
-            *b = 108;
-            *c = 3;
+            *glyph = 108;
+            *bank = 3;
             break;
         case 0x55:
-            *b = 121;
-            *c = 3;
+            *glyph = 121;
+            *bank = 3;
             break;
         case 0xBB:
-            *b = 128;
-            *c = 3;
+            *glyph = 128;
+            *bank = 3;
             break;
         case 0xAA:
-            *b = 185;
-            *c = 3;
+            *glyph = 185;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8E00:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xB8:
-            *b = 13;
-            *c = 1;
+            *glyph = 13;
+            *bank = 1;
             break;
         case 0xA9:
-            *b = 15;
-            *c = 1;
+            *glyph = 15;
+            *bank = 1;
             break;
         case 0xD7:
-            *b = 18;
-            *c = 1;
+            *glyph = 18;
+            *bank = 1;
             break;
         case 0xD2:
-            *b = 21;
-            *c = 1;
+            *glyph = 21;
+            *bank = 1;
             break;
         case 0x9E:
-            *b = 27;
-            *c = 1;
+            *glyph = 27;
+            *bank = 1;
             break;
         case 0x76:
-            *b = 28;
-            *c = 1;
+            *glyph = 28;
+            *bank = 1;
             break;
         case 0x84:
-            *b = 44;
-            *c = 1;
+            *glyph = 44;
+            *bank = 1;
             break;
         case 0xA1:
-            *b = 54;
-            *c = 1;
+            *glyph = 54;
+            *bank = 1;
             break;
         case 0xA6:
-            *b = 87;
-            *c = 1;
+            *glyph = 87;
+            *bank = 1;
             break;
         case 0x71:
-            *b = 102;
-            *c = 1;
+            *glyph = 102;
+            *bank = 1;
             break;
         case 0xC0:
-            *b = 111;
-            *c = 1;
+            *glyph = 111;
+            *bank = 1;
             break;
         case 0x9F:
-            *b = 155;
-            *c = 1;
+            *glyph = 155;
+            *bank = 1;
             break;
         case 0x9D:
-            *b = 156;
-            *c = 1;
+            *glyph = 156;
+            *bank = 1;
             break;
         case 0x96:
-            *b = 161;
-            *c = 1;
+            *glyph = 161;
+            *bank = 1;
             break;
         case 0x8E:
-            *b = 191;
-            *c = 1;
+            *glyph = 191;
+            *bank = 1;
             break;
         case 0xE8:
-            *b = 197;
-            *c = 1;
+            *glyph = 197;
+            *bank = 1;
             break;
         case 0x6D:
-            *b = 219;
-            *c = 1;
+            *glyph = 219;
+            *bank = 1;
             break;
         case 0x70:
-            *b = 232;
-            *c = 1;
+            *glyph = 232;
+            *bank = 1;
             break;
         case 0xE6:
-            *b = 241;
-            *c = 1;
+            *glyph = 241;
+            *bank = 1;
             break;
         case 0xE3:
-            *b = 249;
-            *c = 1;
+            *glyph = 249;
+            *bank = 1;
             break;
         case 0x63:
-            *b = 10;
-            *c = 2;
+            *glyph = 10;
+            *bank = 2;
             break;
         case 0x64:
-            *b = 22;
-            *c = 2;
+            *glyph = 22;
+            *bank = 2;
             break;
         case 0xB6:
-            *b = 28;
-            *c = 2;
+            *glyph = 28;
+            *bank = 2;
             break;
         case 0xF1:
-            *b = 31;
-            *c = 2;
+            *glyph = 31;
+            *bank = 2;
             break;
         case 0x80:
-            *b = 48;
-            *c = 2;
+            *glyph = 48;
+            *bank = 2;
             break;
         case 0xE5:
-            *b = 75;
-            *c = 2;
+            *glyph = 75;
+            *bank = 2;
             break;
         case 0x4F:
-            *b = 78;
-            *c = 2;
+            *glyph = 78;
+            *bank = 2;
             break;
         case 0xD3:
-            *b = 80;
-            *c = 2;
+            *glyph = 80;
+            *bank = 2;
             break;
         case 0x67:
-            *b = 86;
-            *c = 2;
+            *glyph = 86;
+            *bank = 2;
             break;
         case 0x5A:
-            *b = 87;
-            *c = 2;
+            *glyph = 87;
+            *bank = 2;
             break;
         case 0xE7:
-            *b = 102;
-            *c = 2;
+            *glyph = 102;
+            *bank = 2;
             break;
         case 0xD8:
-            *b = 112;
-            *c = 2;
+            *glyph = 112;
+            *bank = 2;
             break;
         case 0x97:
-            *b = 122;
-            *c = 2;
+            *glyph = 122;
+            *bank = 2;
             break;
         case 0x8B:
-            *b = 136;
-            *c = 2;
+            *glyph = 136;
+            *bank = 2;
             break;
         case 0x51:
-            *b = 151;
-            *c = 2;
+            *glyph = 151;
+            *bank = 2;
             break;
         case 0x6E:
-            *b = 166;
-            *c = 2;
+            *glyph = 166;
+            *bank = 2;
             break;
         case 0x7E:
-            *b = 169;
-            *c = 2;
+            *glyph = 169;
+            *bank = 2;
             break;
         case 0xF3:
-            *b = 194;
-            *c = 2;
+            *glyph = 194;
+            *bank = 2;
             break;
         case 0xF4:
-            *b = 199;
-            *c = 2;
+            *glyph = 199;
+            *bank = 2;
             break;
         case 0x78:
-            *b = 227;
-            *c = 2;
+            *glyph = 227;
+            *bank = 2;
             break;
         case 0x55:
-            *b = 242;
-            *c = 2;
+            *glyph = 242;
+            *bank = 2;
             break;
         case 0xED:
-            *b = 246;
-            *c = 2;
+            *glyph = 246;
+            *bank = 2;
             break;
         case 0x40:
-            *b = 16;
-            *c = 3;
+            *glyph = 16;
+            *bank = 3;
             break;
         case 0x77:
-            *b = 25;
-            *c = 3;
+            *glyph = 25;
+            *bank = 3;
             break;
         case 0xCC:
-            *b = 42;
-            *c = 3;
+            *glyph = 42;
+            *bank = 3;
             break;
         case 0x91:
-            *b = 50;
-            *c = 3;
+            *glyph = 50;
+            *bank = 3;
             break;
         case 0xA8:
-            *b = 81;
-            *c = 3;
+            *glyph = 81;
+            *bank = 3;
             break;
         case 0xFB:
-            *b = 124;
-            *c = 3;
+            *glyph = 124;
+            *bank = 3;
             break;
         case 0xD4:
-            *b = 125;
-            *c = 3;
+            *glyph = 125;
+            *bank = 3;
             break;
         case 0x9A:
-            *b = 140;
-            *c = 3;
+            *glyph = 140;
+            *bank = 3;
             break;
         case 0xEA:
-            *b = 146;
-            *c = 3;
+            *glyph = 146;
+            *bank = 3;
             break;
         case 0x61:
-            *b = 159;
-            *c = 3;
+            *glyph = 159;
+            *bank = 3;
             break;
         case 0xCB:
-            *b = 164;
-            *c = 3;
+            *glyph = 164;
+            *bank = 3;
             break;
         case 0xBF:
-            *b = 196;
-            *c = 3;
+            *glyph = 196;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x8F00:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x6F:
-            *b = 29;
-            *c = 1;
+            *glyph = 29;
+            *bank = 1;
             break;
         case 0xEA:
-            *b = 32;
-            *c = 1;
+            *glyph = 32;
+            *bank = 1;
             break;
         case 0x8A:
-            *b = 33;
-            *c = 1;
+            *glyph = 33;
+            *bank = 1;
             break;
         case 0x97:
-            *b = 48;
-            *c = 1;
+            *glyph = 48;
+            *bank = 1;
             break;
         case 0x95:
-            *b = 68;
-            *c = 1;
+            *glyph = 68;
+            *bank = 1;
             break;
         case 0xE3:
-            *b = 183;
-            *c = 1;
+            *glyph = 183;
+            *bank = 1;
             break;
         case 0xE4:
-            *b = 185;
-            *c = 1;
+            *glyph = 185;
+            *bank = 1;
             break;
         case 0x80:
-            *b = 194;
-            *c = 1;
+            *glyph = 194;
+            *bank = 1;
             break;
         case 0xD0:
-            *b = 204;
-            *c = 1;
+            *glyph = 204;
+            *bank = 1;
             break;
         case 0x50:
-            *b = 217;
-            *c = 1;
+            *glyph = 217;
+            *bank = 1;
             break;
         case 0xE7:
-            *b = 224;
-            *c = 1;
+            *glyph = 224;
+            *bank = 1;
             break;
         case 0x94:
-            *b = 226;
-            *c = 1;
+            *glyph = 226;
+            *bank = 1;
             break;
         case 0x64:
-            *b = 236;
-            *c = 1;
+            *glyph = 236;
+            *bank = 1;
             break;
         case 0xAD:
-            *b = 21;
-            *c = 2;
+            *glyph = 21;
+            *bank = 2;
             break;
         case 0x57:
-            *b = 35;
-            *c = 2;
+            *glyph = 35;
+            *bank = 2;
             break;
         case 0xD8:
-            *b = 39;
-            *c = 2;
+            *glyph = 39;
+            *bank = 2;
             break;
         case 0x9F:
-            *b = 45;
-            *c = 2;
+            *glyph = 45;
+            *bank = 2;
             break;
         case 0x89:
-            *b = 63;
-            *c = 2;
+            *glyph = 63;
+            *bank = 2;
             break;
         case 0x8F:
-            *b = 70;
-            *c = 2;
+            *glyph = 70;
+            *bank = 2;
             break;
         case 0x5D:
-            *b = 83;
-            *c = 2;
+            *glyph = 83;
+            *bank = 2;
             break;
         case 0xC1:
-            *b = 142;
-            *c = 2;
+            *glyph = 142;
+            *bank = 2;
             break;
         case 0xC4:
-            *b = 144;
-            *c = 2;
+            *glyph = 144;
+            *bank = 2;
             break;
         case 0x91:
-            *b = 145;
-            *c = 2;
+            *glyph = 145;
+            *bank = 2;
             break;
         case 0xE1:
-            *b = 148;
-            *c = 2;
+            *glyph = 148;
+            *bank = 2;
             break;
         case 0xF3:
-            *b = 186;
-            *c = 2;
+            *glyph = 186;
+            *bank = 2;
             break;
         case 0xE9:
-            *b = 189;
-            *c = 2;
+            *glyph = 189;
+            *bank = 2;
             break;
         case 0x49:
-            *b = 190;
-            *c = 2;
+            *glyph = 190;
+            *bank = 2;
             break;
         case 0xEE:
-            *b = 191;
-            *c = 2;
+            *glyph = 191;
+            *bank = 2;
             break;
         case 0xE6:
-            *b = 196;
-            *c = 2;
+            *glyph = 196;
+            *bank = 2;
             break;
         case 0x5B:
-            *b = 206;
-            *c = 2;
+            *glyph = 206;
+            *bank = 2;
             break;
         case 0x75:
-            *b = 209;
-            *c = 2;
+            *glyph = 209;
+            *bank = 2;
             break;
         case 0x68:
-            *b = 225;
-            *c = 2;
+            *glyph = 225;
+            *bank = 2;
             break;
         case 0xAC:
-            *b = 229;
-            *c = 2;
+            *glyph = 229;
+            *bank = 2;
             break;
         case 0x9D:
-            *b = 233;
-            *c = 2;
+            *glyph = 233;
+            *bank = 2;
             break;
         case 0x5A:
-            *b = 0;
-            *c = 3;
+            *glyph = 0;
+            *bank = 3;
             break;
         case 0xCE:
-            *b = 2;
-            *c = 3;
+            *glyph = 2;
+            *bank = 3;
             break;
         case 0x83:
-            *b = 22;
-            *c = 3;
+            *glyph = 22;
+            *bank = 3;
             break;
         case 0xF0:
-            *b = 28;
-            *c = 3;
+            *glyph = 28;
+            *bank = 3;
             break;
         case 0x70:
-            *b = 84;
-            *c = 3;
+            *glyph = 84;
+            *bank = 3;
             break;
         case 0xC6:
-            *b = 130;
-            *c = 3;
+            *glyph = 130;
+            *bank = 3;
             break;
         case 0x5C:
-            *b = 139;
-            *c = 3;
+            *glyph = 139;
+            *bank = 3;
             break;
         case 0xA2:
-            *b = 165;
-            *c = 3;
+            *glyph = 165;
+            *bank = 3;
             break;
         case 0xED:
-            *b = 175;
-            *c = 3;
+            *glyph = 175;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9000:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xD8:
-            *b = 1;
-            *c = 1;
+            *glyph = 1;
+            *bank = 1;
             break;
         case 0x53:
-            *b = 3;
-            *c = 1;
+            *glyph = 3;
+            *bank = 1;
             break;
         case 0x6C:
-            *b = 43;
-            *c = 1;
+            *glyph = 43;
+            *bank = 1;
             break;
         case 0xB0:
-            *b = 65;
-            *c = 1;
+            *glyph = 65;
+            *bank = 1;
             break;
         case 0xED:
-            *b = 66;
-            *c = 1;
+            *glyph = 66;
+            *bank = 1;
             break;
         case 0x5B:
-            *b = 69;
-            *c = 1;
+            *glyph = 69;
+            *bank = 1;
             break;
         case 0xA2:
-            *b = 82;
-            *c = 1;
+            *glyph = 82;
+            *bank = 1;
             break;
         case 0x51:
-            *b = 94;
-            *c = 1;
+            *glyph = 94;
+            *bank = 1;
             break;
         case 0xBA:
-            *b = 97;
-            *c = 1;
+            *glyph = 97;
+            *bank = 1;
             break;
         case 0xE0:
-            *b = 112;
-            *c = 1;
+            *glyph = 112;
+            *bank = 1;
             break;
         case 0x45:
-            *b = 117;
-            *c = 1;
+            *glyph = 117;
+            *bank = 1;
             break;
         case 0xB6:
-            *b = 130;
-            *c = 1;
+            *glyph = 130;
+            *bank = 1;
             break;
         case 0xB3:
-            *b = 149;
-            *c = 1;
+            *glyph = 149;
+            *bank = 1;
             break;
         case 0x4D:
-            *b = 151;
-            *c = 1;
+            *glyph = 151;
+            *bank = 1;
             break;
         case 0x48:
-            *b = 169;
-            *c = 1;
+            *glyph = 169;
+            *bank = 1;
             break;
         case 0xA8:
-            *b = 175;
-            *c = 1;
+            *glyph = 175;
+            *bank = 1;
             break;
         case 0xAC:
-            *b = 184;
-            *c = 1;
+            *glyph = 184;
+            *bank = 1;
             break;
         case 0x5E:
-            *b = 231;
-            *c = 1;
+            *glyph = 231;
+            *bank = 1;
             break;
         case 0x65:
-            *b = 251;
-            *c = 1;
+            *glyph = 251;
+            *bank = 1;
             break;
         case 0xE2:
-            *b = 255;
-            *c = 1;
+            *glyph = 255;
+            *bank = 1;
             break;
         case 0x56:
-            *b = 4;
-            *c = 2;
+            *glyph = 4;
+            *bank = 2;
             break;
         case 0x46:
-            *b = 34;
-            *c = 2;
+            *glyph = 34;
+            *bank = 2;
             break;
         case 0xD3:
-            *b = 41;
-            *c = 2;
+            *glyph = 41;
+            *bank = 2;
             break;
         case 0x67:
-            *b = 44;
-            *c = 2;
+            *glyph = 44;
+            *bank = 2;
             break;
         case 0xE6:
-            *b = 68;
-            *c = 2;
+            *glyph = 68;
+            *bank = 2;
             break;
         case 0x69:
-            *b = 69;
-            *c = 2;
+            *glyph = 69;
+            *bank = 2;
             break;
         case 0x62:
-            *b = 71;
-            *c = 2;
+            *glyph = 71;
+            *bank = 2;
             break;
         case 0x85:
-            *b = 100;
-            *c = 2;
+            *glyph = 100;
+            *bank = 2;
             break;
         case 0xB5:
-            *b = 109;
-            *c = 2;
+            *glyph = 109;
+            *bank = 2;
             break;
         case 0x94:
-            *b = 173;
-            *c = 2;
+            *glyph = 173;
+            *bank = 2;
             break;
         case 0x58:
-            *b = 210;
-            *c = 2;
+            *glyph = 210;
+            *bank = 2;
             break;
         case 0x84:
-            *b = 20;
-            *c = 3;
+            *glyph = 20;
+            *bank = 3;
             break;
         case 0xCC:
-            *b = 21;
-            *c = 3;
+            *glyph = 21;
+            *bank = 3;
             break;
         case 0x7D:
-            *b = 23;
-            *c = 3;
+            *glyph = 23;
+            *bank = 3;
             break;
         case 0xAF:
-            *b = 35;
-            *c = 3;
+            *glyph = 35;
+            *bank = 3;
             break;
         case 0xD4:
-            *b = 49;
-            *c = 3;
+            *glyph = 49;
+            *bank = 3;
             break;
         case 0xF5:
-            *b = 73;
-            *c = 3;
+            *glyph = 73;
+            *bank = 3;
             break;
         case 0x41:
-            *b = 83;
-            *c = 3;
+            *glyph = 83;
+            *bank = 3;
             break;
         case 0xC2:
-            *b = 95;
-            *c = 3;
+            *glyph = 95;
+            *bank = 3;
             break;
         case 0xB8:
-            *b = 97;
-            *c = 3;
+            *glyph = 97;
+            *bank = 3;
             break;
         case 0x5F:
-            *b = 104;
-            *c = 3;
+            *glyph = 104;
+            *bank = 3;
             break;
         case 0xC3:
-            *b = 105;
-            *c = 3;
+            *glyph = 105;
+            *bank = 3;
             break;
         case 0xAB:
-            *b = 106;
-            *c = 3;
+            *glyph = 106;
+            *bank = 3;
             break;
         case 0x44:
-            *b = 109;
-            *c = 3;
+            *glyph = 109;
+            *bank = 3;
             break;
         case 0xDA:
-            *b = 127;
-            *c = 3;
+            *glyph = 127;
+            *bank = 3;
             break;
         case 0x55:
-            *b = 132;
-            *c = 3;
+            *glyph = 132;
+            *bank = 3;
             break;
         case 0xA7:
-            *b = 163;
-            *c = 3;
+            *glyph = 163;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9100:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xE5:
-            *b = 0;
-            *c = 1;
+            *glyph = 0;
+            *bank = 1;
             break;
         case 0x7A:
-            *b = 2;
-            *c = 1;
+            *glyph = 2;
+            *bank = 1;
             break;
         case 0xDE:
-            *b = 53;
-            *c = 1;
+            *glyph = 53;
+            *bank = 1;
             break;
         case 0xD2:
-            *b = 59;
-            *c = 1;
+            *glyph = 59;
+            *bank = 1;
             break;
         case 0x52:
-            *b = 64;
-            *c = 1;
+            *glyph = 64;
+            *bank = 1;
             break;
         case 0xAB:
-            *b = 90;
-            *c = 1;
+            *glyph = 90;
+            *bank = 1;
             break;
         case 0xCC:
-            *b = 135;
-            *c = 1;
+            *glyph = 135;
+            *bank = 1;
             break;
         case 0x81:
-            *b = 137;
-            *c = 1;
+            *glyph = 137;
+            *bank = 1;
             break;
         case 0x7B:
-            *b = 145;
-            *c = 1;
+            *glyph = 145;
+            *bank = 1;
             break;
         case 0xA9:
-            *b = 163;
-            *c = 1;
+            *glyph = 163;
+            *bank = 1;
             break;
         case 0x9C:
-            *b = 181;
-            *c = 1;
+            *glyph = 181;
+            *bank = 1;
             break;
         case 0x8A:
-            *b = 196;
-            *c = 1;
+            *glyph = 196;
+            *bank = 1;
             break;
         case 0x66:
-            *b = 201;
-            *c = 1;
+            *glyph = 201;
+            *bank = 1;
             break;
         case 0xE8:
-            *b = 212;
-            *c = 1;
+            *glyph = 212;
+            *bank = 1;
             break;
         case 0x95:
-            *b = 235;
-            *c = 1;
+            *glyph = 235;
+            *bank = 1;
             break;
         case 0x4E:
-            *b = 5;
-            *c = 2;
+            *glyph = 5;
+            *bank = 2;
             break;
         case 0x4F:
-            *b = 50;
-            *c = 2;
+            *glyph = 50;
+            *bank = 2;
             break;
         case 0x9B:
-            *b = 51;
-            *c = 2;
+            *glyph = 51;
+            *bank = 2;
             break;
         case 0xA7:
-            *b = 98;
-            *c = 2;
+            *glyph = 98;
+            *bank = 2;
             break;
         case 0x84:
-            *b = 103;
-            *c = 2;
+            *glyph = 103;
+            *bank = 2;
             break;
         case 0xBD:
-            *b = 107;
-            *c = 2;
+            *glyph = 107;
+            *bank = 2;
             break;
         case 0xDD:
-            *b = 113;
-            *c = 2;
+            *glyph = 113;
+            *bank = 2;
             break;
         case 0xAE:
-            *b = 115;
-            *c = 2;
+            *glyph = 115;
+            *bank = 2;
             break;
         case 0x44:
-            *b = 121;
-            *c = 2;
+            *glyph = 121;
+            *bank = 2;
             break;
         case 0xAF:
-            *b = 127;
-            *c = 2;
+            *glyph = 127;
+            *bank = 2;
             break;
         case 0xCA:
-            *b = 137;
-            *c = 2;
+            *glyph = 137;
+            *bank = 2;
             break;
         case 0xBC:
-            *b = 150;
-            *c = 2;
+            *glyph = 150;
+            *bank = 2;
             break;
         case 0x88:
-            *b = 154;
-            *c = 2;
+            *glyph = 154;
+            *bank = 2;
             break;
         case 0x49:
-            *b = 158;
-            *c = 2;
+            *glyph = 158;
+            *bank = 2;
             break;
         case 0xC5:
-            *b = 165;
-            *c = 2;
+            *glyph = 165;
+            *bank = 2;
             break;
         case 0x67:
-            *b = 170;
-            *c = 2;
+            *glyph = 170;
+            *bank = 2;
             break;
         case 0x53:
-            *b = 171;
-            *c = 2;
+            *glyph = 171;
+            *bank = 2;
             break;
         case 0x5F:
-            *b = 176;
-            *c = 2;
+            *glyph = 176;
+            *bank = 2;
             break;
         case 0xD4:
-            *b = 187;
-            *c = 2;
+            *glyph = 187;
+            *bank = 2;
             break;
         case 0xCE:
-            *b = 212;
-            *c = 2;
+            *glyph = 212;
+            *bank = 2;
             break;
         case 0xB6:
-            *b = 223;
-            *c = 2;
+            *glyph = 223;
+            *bank = 2;
             break;
         case 0xB1:
-            *b = 6;
-            *c = 3;
+            *glyph = 6;
+            *bank = 3;
             break;
         case 0xA4:
-            *b = 32;
-            *c = 3;
+            *glyph = 32;
+            *bank = 3;
             break;
         case 0xE4:
-            *b = 48;
-            *c = 3;
+            *glyph = 48;
+            *bank = 3;
             break;
         case 0xE3:
-            *b = 72;
-            *c = 3;
+            *glyph = 72;
+            *bank = 3;
             break;
         case 0xB0:
-            *b = 74;
-            *c = 3;
+            *glyph = 74;
+            *bank = 3;
             break;
         case 0x97:
-            *b = 86;
-            *c = 3;
+            *glyph = 86;
+            *bank = 3;
             break;
         case 0x50:
-            *b = 103;
-            *c = 3;
+            *glyph = 103;
+            *bank = 3;
             break;
         case 0xBE:
-            *b = 119;
-            *c = 3;
+            *glyph = 119;
+            *bank = 3;
             break;
         case 0xF0:
-            *b = 137;
-            *c = 3;
+            *glyph = 137;
+            *bank = 3;
             break;
         case 0x77:
-            *b = 149;
-            *c = 3;
+            *glyph = 149;
+            *bank = 3;
             break;
         case 0x96:
-            *b = 161;
-            *c = 3;
+            *glyph = 161;
+            *bank = 3;
             break;
         case 0xAC:
-            *b = 173;
-            *c = 3;
+            *glyph = 173;
+            *bank = 3;
             break;
         case 0xE6:
-            *b = 192;
-            *c = 3;
+            *glyph = 192;
+            *bank = 3;
             break;
         case 0x9D:
-            *b = 195;
-            *c = 3;
+            *glyph = 195;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9200:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x86:
-            *b = 10;
-            *c = 1;
+            *glyph = 10;
+            *bank = 1;
             break;
         case 0x6D:
-            *b = 14;
-            *c = 1;
+            *glyph = 14;
+            *bank = 1;
             break;
         case 0x42:
-            *b = 35;
-            *c = 1;
+            *glyph = 35;
+            *bank = 1;
             break;
         case 0x40:
-            *b = 39;
-            *c = 1;
+            *glyph = 39;
+            *bank = 1;
             break;
         case 0x4E:
-            *b = 40;
-            *c = 1;
+            *glyph = 40;
+            *bank = 1;
             break;
         case 0x69:
-            *b = 77;
-            *c = 1;
+            *glyph = 77;
+            *bank = 1;
             break;
         case 0x6E:
-            *b = 79;
-            *c = 1;
+            *glyph = 79;
+            *bank = 1;
             break;
         case 0x8B:
-            *b = 93;
-            *c = 1;
+            *glyph = 93;
+            *bank = 1;
             break;
         case 0xB7:
-            *b = 120;
-            *c = 1;
+            *glyph = 120;
+            *bank = 1;
             break;
         case 0x54:
-            *b = 122;
-            *c = 1;
+            *glyph = 122;
+            *bank = 1;
             break;
         case 0xBC:
-            *b = 132;
-            *c = 1;
+            *glyph = 132;
+            *bank = 1;
             break;
         case 0x45:
-            *b = 177;
-            *c = 1;
+            *glyph = 177;
+            *bank = 1;
             break;
         case 0x75:
-            *b = 178;
-            *c = 1;
+            *glyph = 178;
+            *bank = 1;
             break;
         case 0xEA:
-            *b = 206;
-            *c = 1;
+            *glyph = 206;
+            *bank = 1;
             break;
         case 0xCA:
-            *b = 222;
-            *c = 1;
+            *glyph = 222;
+            *bank = 1;
             break;
         case 0x6B:
-            *b = 225;
-            *c = 1;
+            *glyph = 225;
+            *bank = 1;
             break;
         case 0xB2:
-            *b = 245;
-            *c = 1;
+            *glyph = 245;
+            *bank = 1;
             break;
         case 0xC9:
-            *b = 254;
-            *c = 1;
+            *glyph = 254;
+            *bank = 1;
             break;
         case 0xC7:
-            *b = 6;
-            *c = 2;
+            *glyph = 6;
+            *bank = 2;
             break;
         case 0x78:
-            *b = 25;
-            *c = 2;
+            *glyph = 25;
+            *bank = 2;
             break;
         case 0x50:
-            *b = 85;
-            *c = 2;
+            *glyph = 85;
+            *bank = 2;
             break;
         case 0x44:
-            *b = 92;
-            *c = 2;
+            *glyph = 92;
+            *bank = 2;
             break;
         case 0x8D:
-            *b = 133;
-            *c = 2;
+            *glyph = 133;
+            *bank = 2;
             break;
         case 0x87:
-            *b = 135;
-            *c = 2;
+            *glyph = 135;
+            *bank = 2;
             break;
         case 0xEF:
-            *b = 138;
-            *c = 2;
+            *glyph = 138;
+            *bank = 2;
             break;
         case 0x6C:
-            *b = 219;
-            *c = 2;
+            *glyph = 219;
+            *bank = 2;
             break;
         case 0x85:
-            *b = 221;
-            *c = 2;
+            *glyph = 221;
+            *bank = 2;
             break;
         case 0x6A:
-            *b = 222;
-            *c = 2;
+            *glyph = 222;
+            *bank = 2;
             break;
         case 0xF6:
-            *b = 12;
-            *c = 3;
+            *glyph = 12;
+            *bank = 3;
             break;
         case 0xBE:
-            *b = 58;
-            *c = 3;
+            *glyph = 58;
+            *bank = 3;
             break;
         case 0x66:
-            *b = 69;
-            *c = 3;
+            *glyph = 69;
+            *bank = 3;
             break;
         case 0x63:
-            *b = 77;
-            *c = 3;
+            *glyph = 77;
+            *bank = 3;
             break;
         case 0xA7:
-            *b = 94;
-            *c = 3;
+            *glyph = 94;
+            *bank = 3;
             break;
         case 0x5A:
-            *b = 101;
-            *c = 3;
+            *glyph = 101;
+            *bank = 3;
             break;
         case 0x8E:
-            *b = 107;
-            *c = 3;
+            *glyph = 107;
+            *bank = 3;
             break;
         case 0xE8:
-            *b = 138;
-            *c = 3;
+            *glyph = 138;
+            *bank = 3;
             break;
         case 0x65:
-            *b = 153;
-            *c = 3;
+            *glyph = 153;
+            *bank = 3;
             break;
         case 0xB4:
-            *b = 157;
-            *c = 3;
+            *glyph = 157;
+            *bank = 3;
             break;
         case 0xE1:
-            *b = 178;
-            *c = 3;
+            *glyph = 178;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9300:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x90:
-            *b = 45;
-            *c = 1;
+            *glyph = 45;
+            *bank = 1;
             break;
         case 0x9A:
-            *b = 57;
-            *c = 1;
+            *glyph = 57;
+            *bank = 1;
             break;
         case 0x96:
-            *b = 63;
-            *c = 1;
+            *glyph = 63;
+            *bank = 1;
             break;
         case 0xAE:
-            *b = 100;
-            *c = 1;
+            *glyph = 100;
+            *bank = 1;
             break;
         case 0x78:
-            *b = 105;
-            *c = 1;
+            *glyph = 105;
+            *bank = 1;
             break;
         case 0xFC:
-            *b = 106;
-            *c = 1;
+            *glyph = 106;
+            *bank = 1;
             break;
         case 0xC1:
-            *b = 108;
-            *c = 1;
+            *glyph = 108;
+            *bank = 1;
             break;
         case 0xE0:
-            *b = 136;
-            *c = 1;
+            *glyph = 136;
+            *bank = 1;
             break;
         case 0x7B:
-            *b = 148;
-            *c = 1;
+            *glyph = 148;
+            *bank = 1;
             break;
         case 0x60:
-            *b = 150;
-            *c = 1;
+            *glyph = 150;
+            *bank = 1;
             break;
         case 0xA6:
-            *b = 168;
-            *c = 1;
+            *glyph = 168;
+            *bank = 1;
             break;
         case 0x66:
-            *b = 172;
-            *c = 1;
+            *glyph = 172;
+            *bank = 1;
             break;
         case 0x47:
-            *b = 202;
-            *c = 1;
+            *glyph = 202;
+            *bank = 1;
             break;
         case 0x56:
-            *b = 227;
-            *c = 1;
+            *glyph = 227;
+            *bank = 1;
             break;
         case 0x6E:
-            *b = 47;
-            *c = 2;
+            *glyph = 47;
+            *bank = 2;
             break;
         case 0xAF:
-            *b = 55;
-            *c = 2;
+            *glyph = 55;
+            *bank = 2;
             break;
         case 0xAA:
-            *b = 58;
-            *c = 2;
+            *glyph = 58;
+            *bank = 2;
             break;
         case 0x61:
-            *b = 67;
-            *c = 2;
+            *glyph = 67;
+            *bank = 2;
             break;
         case 0xB4:
-            *b = 72;
-            *c = 2;
+            *glyph = 72;
+            *bank = 2;
             break;
         case 0xEF:
-            *b = 82;
-            *c = 2;
+            *glyph = 82;
+            *bank = 2;
             break;
         case 0xFA:
-            *b = 131;
-            *c = 2;
+            *glyph = 131;
+            *bank = 2;
             break;
         case 0xCB:
-            *b = 159;
-            *c = 2;
+            *glyph = 159;
+            *bank = 2;
             break;
         case 0xF1:
-            *b = 168;
-            *c = 2;
+            *glyph = 168;
+            *bank = 2;
             break;
         case 0x73:
-            *b = 180;
-            *c = 2;
+            *glyph = 180;
+            *bank = 2;
             break;
         case 0x7C:
-            *b = 182;
-            *c = 2;
+            *glyph = 182;
+            *bank = 2;
             break;
         case 0xC5:
-            *b = 232;
-            *c = 2;
+            *glyph = 232;
+            *bank = 2;
             break;
         case 0xCD:
-            *b = 245;
-            *c = 2;
+            *glyph = 245;
+            *bank = 2;
             break;
         case 0x49:
-            *b = 252;
-            *c = 2;
+            *glyph = 252;
+            *bank = 2;
             break;
         case 0x87:
-            *b = 1;
-            *c = 3;
+            *glyph = 1;
+            *bank = 3;
             break;
         case 0xB1:
-            *b = 26;
-            *c = 3;
+            *glyph = 26;
+            *bank = 3;
             break;
         case 0xB9:
-            *b = 44;
-            *c = 3;
+            *glyph = 44;
+            *bank = 3;
             break;
         case 0x5D:
-            *b = 47;
-            *c = 3;
+            *glyph = 47;
+            *bank = 3;
             break;
         case 0x54:
-            *b = 61;
-            *c = 3;
+            *glyph = 61;
+            *bank = 3;
             break;
         case 0x72:
-            *b = 65;
-            *c = 3;
+            *glyph = 65;
+            *bank = 3;
             break;
         case 0xE4:
-            *b = 89;
-            *c = 3;
+            *glyph = 89;
+            *bank = 3;
             break;
         case 0x79:
-            *b = 90;
-            *c = 3;
+            *glyph = 90;
+            *bank = 3;
             break;
         case 0xBE:
-            *b = 93;
-            *c = 3;
+            *glyph = 93;
+            *bank = 3;
             break;
         case 0xAC:
-            *b = 126;
-            *c = 3;
+            *glyph = 126;
+            *bank = 3;
             break;
         case 0xC7:
-            *b = 134;
-            *c = 3;
+            *glyph = 134;
+            *bank = 3;
             break;
         case 0x58:
-            *b = 147;
-            *c = 3;
+            *glyph = 147;
+            *bank = 3;
             break;
         case 0x8A:
-            *b = 152;
-            *c = 3;
+            *glyph = 152;
+            *bank = 3;
             break;
         case 0x64:
-            *b = 170;
-            *c = 3;
+            *glyph = 170;
+            *bank = 3;
             break;
         case 0x5F:
-            *b = 190;
-            *c = 3;
+            *glyph = 190;
+            *bank = 3;
             break;
         case 0xF7:
-            *b = 197;
-            *c = 3;
+            *glyph = 197;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9400:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xDE:
-            *b = 41;
-            *c = 1;
+            *glyph = 41;
+            *bank = 1;
             break;
         case 0xC6:
-            *b = 42;
-            *c = 1;
+            *glyph = 42;
+            *bank = 1;
             break;
         case 0x7A:
-            *b = 144;
-            *c = 1;
+            *glyph = 144;
+            *bank = 1;
             break;
         case 0xF5:
-            *b = 195;
-            *c = 1;
+            *glyph = 195;
+            *bank = 1;
             break;
         case 0x8E:
-            *b = 218;
-            *c = 1;
+            *glyph = 218;
+            *bank = 1;
             break;
         case 0x6A:
-            *b = 223;
-            *c = 1;
+            *glyph = 223;
+            *bank = 1;
             break;
         case 0xAD:
-            *b = 229;
-            *c = 1;
+            *glyph = 229;
+            *bank = 1;
             break;
         case 0xFC:
-            *b = 240;
-            *c = 1;
+            *glyph = 240;
+            *bank = 1;
             break;
         case 0x73:
-            *b = 244;
-            *c = 1;
+            *glyph = 244;
+            *bank = 1;
             break;
         case 0xDF:
-            *b = 18;
-            *c = 2;
+            *glyph = 18;
+            *bank = 2;
             break;
         case 0xBB:
-            *b = 30;
-            *c = 2;
+            *glyph = 30;
+            *bank = 2;
             break;
         case 0xF2:
-            *b = 32;
-            *c = 2;
+            *glyph = 32;
+            *bank = 2;
             break;
         case 0x92:
-            *b = 36;
-            *c = 2;
+            *glyph = 36;
+            *bank = 2;
             break;
         case 0xED:
-            *b = 37;
-            *c = 2;
+            *glyph = 37;
+            *bank = 2;
             break;
         case 0x43:
-            *b = 42;
-            *c = 2;
+            *glyph = 42;
+            *bank = 2;
             break;
         case 0x4F:
-            *b = 52;
-            *c = 2;
+            *glyph = 52;
+            *bank = 2;
             break;
         case 0x4C:
-            *b = 53;
-            *c = 2;
+            *glyph = 53;
+            *bank = 2;
             break;
         case 0x59:
-            *b = 62;
-            *c = 2;
+            *glyph = 62;
+            *bank = 2;
             break;
         case 0xB2:
-            *b = 74;
-            *c = 2;
+            *glyph = 74;
+            *bank = 2;
             break;
         case 0x97:
-            *b = 114;
-            *c = 2;
+            *glyph = 114;
+            *bank = 2;
             break;
         case 0x67:
-            *b = 119;
-            *c = 2;
+            *glyph = 119;
+            *bank = 2;
             break;
         case 0x46:
-            *b = 160;
-            *c = 2;
+            *glyph = 160;
+            *bank = 2;
             break;
         case 0xE9:
-            *b = 205;
-            *c = 2;
+            *glyph = 205;
+            *bank = 2;
             break;
         case 0x83:
-            *b = 216;
-            *c = 2;
+            *glyph = 216;
+            *bank = 2;
             break;
         case 0xE0:
-            *b = 228;
-            *c = 2;
+            *glyph = 228;
+            *bank = 2;
             break;
         case 0x5C:
-            *b = 236;
-            *c = 2;
+            *glyph = 236;
+            *bank = 2;
             break;
         case 0xD4:
-            *b = 7;
-            *c = 3;
+            *glyph = 7;
+            *bank = 3;
             break;
         case 0xBC:
-            *b = 8;
-            *c = 3;
+            *glyph = 8;
+            *bank = 3;
             break;
         case 0x96:
-            *b = 10;
-            *c = 3;
+            *glyph = 10;
+            *bank = 3;
             break;
         case 0xB1:
-            *b = 11;
-            *c = 3;
+            *glyph = 11;
+            *bank = 3;
             break;
         case 0xBD:
-            *b = 24;
-            *c = 3;
+            *glyph = 24;
+            *bank = 3;
             break;
         case 0x9B:
-            *b = 41;
-            *c = 3;
+            *glyph = 41;
+            *bank = 3;
             break;
         case 0x77:
-            *b = 67;
-            *c = 3;
+            *glyph = 67;
+            *bank = 3;
             break;
         case 0x9A:
-            *b = 68;
-            *c = 3;
+            *glyph = 68;
+            *bank = 3;
             break;
         case 0x4D:
-            *b = 82;
-            *c = 3;
+            *glyph = 82;
+            *bank = 3;
             break;
         case 0x4E:
-            *b = 96;
-            *c = 3;
+            *glyph = 96;
+            *bank = 3;
             break;
         case 0xF1:
-            *b = 110;
-            *c = 3;
+            *glyph = 110;
+            *bank = 3;
             break;
         case 0x7B:
-            *b = 151;
-            *c = 3;
+            *glyph = 151;
+            *bank = 3;
             break;
         case 0xA0:
-            *b = 176;
-            *c = 3;
+            *glyph = 176;
+            *bank = 3;
             break;
         case 0xE7:
-            *b = 183;
-            *c = 3;
+            *glyph = 183;
+            *bank = 3;
             break;
         case 0x65:
-            *b = 193;
-            *c = 3;
+            *glyph = 193;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9500:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xAA:
-            *b = 16;
-            *c = 1;
+            *glyph = 16;
+            *bank = 1;
             break;
         case 0x7C:
-            *b = 37;
-            *c = 1;
+            *glyph = 37;
+            *bank = 1;
             break;
         case 0x95:
-            *b = 85;
-            *c = 1;
+            *glyph = 85;
+            *bank = 1;
             break;
         case 0x73:
-            *b = 88;
-            *c = 1;
+            *glyph = 88;
+            *bank = 1;
             break;
         case 0xCF:
-            *b = 92;
-            *c = 1;
+            *glyph = 92;
+            *bank = 1;
             break;
         case 0xA8:
-            *b = 96;
-            *c = 1;
+            *glyph = 96;
+            *bank = 1;
             break;
         case 0xCA:
-            *b = 109;
-            *c = 1;
+            *glyph = 109;
+            *bank = 1;
             break;
         case 0xFB:
-            *b = 110;
-            *c = 1;
+            *glyph = 110;
+            *bank = 1;
             break;
         case 0x83:
-            *b = 114;
-            *c = 1;
+            *glyph = 114;
+            *bank = 1;
             break;
         case 0xB7:
-            *b = 115;
-            *c = 1;
+            *glyph = 115;
+            *bank = 1;
             break;
         case 0xA0:
-            *b = 118;
-            *c = 1;
+            *glyph = 118;
+            *bank = 1;
             break;
         case 0xC2:
-            *b = 126;
-            *c = 1;
+            *glyph = 126;
+            *bank = 1;
             break;
         case 0xE0:
-            *b = 146;
-            *c = 1;
+            *glyph = 146;
+            *bank = 1;
             break;
         case 0xF3:
-            *b = 147;
-            *c = 1;
+            *glyph = 147;
+            *bank = 1;
             break;
         case 0x40:
-            *b = 165;
-            *c = 1;
+            *glyph = 165;
+            *bank = 1;
             break;
         case 0xBD:
-            *b = 171;
-            *c = 1;
+            *glyph = 171;
+            *bank = 1;
             break;
         case 0x76:
-            *b = 186;
-            *c = 1;
+            *glyph = 186;
+            *bank = 1;
             break;
         case 0xF8:
-            *b = 213;
-            *c = 1;
+            *glyph = 213;
+            *bank = 1;
             break;
         case 0xD4:
-            *b = 248;
-            *c = 1;
+            *glyph = 248;
+            *bank = 1;
             break;
         case 0x69:
-            *b = 2;
-            *c = 2;
+            *glyph = 2;
+            *bank = 2;
             break;
         case 0x4B:
-            *b = 16;
-            *c = 2;
+            *glyph = 16;
+            *bank = 2;
             break;
         case 0xB5:
-            *b = 56;
-            *c = 2;
+            *glyph = 56;
+            *bank = 2;
             break;
         case 0xFA:
-            *b = 110;
-            *c = 2;
+            *glyph = 110;
+            *bank = 2;
             break;
         case 0x9A:
-            *b = 116;
-            *c = 2;
+            *glyph = 116;
+            *bank = 2;
             break;
         case 0x94:
-            *b = 123;
-            *c = 2;
+            *glyph = 123;
+            *bank = 2;
             break;
         case 0x89:
-            *b = 157;
-            *c = 2;
+            *glyph = 157;
+            *bank = 2;
             break;
         case 0xA1:
-            *b = 172;
-            *c = 2;
+            *glyph = 172;
+            *bank = 2;
             break;
         case 0xD6:
-            *b = 234;
-            *c = 2;
+            *glyph = 234;
+            *bank = 2;
             break;
         case 0x60:
-            *b = 4;
-            *c = 3;
+            *glyph = 4;
+            *bank = 3;
             break;
         case 0xF1:
-            *b = 27;
-            *c = 3;
+            *glyph = 27;
+            *bank = 3;
             break;
         case 0x82:
-            *b = 38;
-            *c = 3;
+            *glyph = 38;
+            *bank = 3;
             break;
         case 0xD0:
-            *b = 59;
-            *c = 3;
+            *glyph = 59;
+            *bank = 3;
             break;
         case 0x97:
-            *b = 62;
-            *c = 3;
+            *glyph = 62;
+            *bank = 3;
             break;
         case 0x90:
-            *b = 75;
-            *c = 3;
+            *glyph = 75;
+            *bank = 3;
             break;
         case 0x9C:
-            *b = 87;
-            *c = 3;
+            *glyph = 87;
+            *bank = 3;
             break;
         case 0xBA:
-            *b = 111;
-            *c = 3;
+            *glyph = 111;
+            *bank = 3;
             break;
         case 0x5C:
-            *b = 116;
-            *c = 3;
+            *glyph = 116;
+            *bank = 3;
             break;
         case 0x58:
-            *b = 155;
-            *c = 3;
+            *glyph = 155;
+            *bank = 3;
             break;
         case 0xB6:
-            *b = 160;
-            *c = 3;
+            *glyph = 160;
+            *bank = 3;
             break;
         case 0xD2:
-            *b = 194;
-            *c = 3;
+            *glyph = 194;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9600:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x59:
-            *b = 5;
-            *c = 1;
+            *glyph = 5;
+            *bank = 1;
             break;
         case 0x82:
-            *b = 19;
-            *c = 1;
+            *glyph = 19;
+            *bank = 1;
             break;
         case 0xB0:
-            *b = 24;
-            *c = 1;
+            *glyph = 24;
+            *bank = 1;
             break;
         case 0x6C:
-            *b = 36;
-            *c = 1;
+            *glyph = 36;
+            *bank = 1;
             break;
         case 0xBD:
-            *b = 51;
-            *c = 1;
+            *glyph = 51;
+            *bank = 1;
             break;
         case 0x7B:
-            *b = 71;
-            *c = 1;
+            *glyph = 71;
+            *bank = 1;
             break;
         case 0xBE:
-            *b = 113;
-            *c = 1;
+            *glyph = 113;
+            *bank = 1;
             break;
         case 0x40:
-            *b = 125;
-            *c = 1;
+            *glyph = 125;
+            *bank = 1;
             break;
         case 0x9E:
-            *b = 131;
-            *c = 1;
+            *glyph = 131;
+            *bank = 1;
             break;
         case 0xD9:
-            *b = 142;
-            *c = 1;
+            *glyph = 142;
+            *bank = 1;
             break;
         case 0xF1:
-            *b = 162;
-            *c = 1;
+            *glyph = 162;
+            *bank = 1;
             break;
         case 0x5C:
-            *b = 170;
-            *c = 1;
+            *glyph = 170;
+            *bank = 1;
             break;
         case 0xB3:
-            *b = 176;
-            *c = 1;
+            *glyph = 176;
+            *bank = 1;
             break;
         case 0xA1:
-            *b = 190;
-            *c = 1;
+            *glyph = 190;
+            *bank = 1;
             break;
         case 0xBC:
-            *b = 193;
-            *c = 1;
+            *glyph = 193;
+            *bank = 1;
             break;
         case 0xB2:
-            *b = 209;
-            *c = 1;
+            *glyph = 209;
+            *bank = 1;
             break;
         case 0xE2:
-            *b = 211;
-            *c = 1;
+            *glyph = 211;
+            *bank = 1;
             break;
         case 0xDF:
-            *b = 242;
-            *c = 1;
+            *glyph = 242;
+            *bank = 1;
             break;
         case 0xF2:
-            *b = 243;
-            *c = 1;
+            *glyph = 243;
+            *bank = 1;
             break;
         case 0x5D:
-            *b = 0;
-            *c = 2;
+            *glyph = 0;
+            *bank = 2;
             break;
         case 0xAD:
-            *b = 14;
-            *c = 2;
+            *glyph = 14;
+            *bank = 2;
             break;
         case 0xDA:
-            *b = 79;
-            *c = 2;
+            *glyph = 79;
+            *bank = 2;
             break;
         case 0xCA:
-            *b = 94;
-            *c = 2;
+            *glyph = 94;
+            *bank = 2;
             break;
         case 0xC0:
-            *b = 125;
-            *c = 2;
+            *glyph = 125;
+            *bank = 2;
             break;
         case 0x88:
-            *b = 130;
-            *c = 2;
+            *glyph = 130;
+            *bank = 2;
             break;
         case 0xEC:
-            *b = 161;
-            *c = 2;
+            *glyph = 161;
+            *bank = 2;
             break;
         case 0xBB:
-            *b = 163;
-            *c = 2;
+            *glyph = 163;
+            *bank = 2;
             break;
         case 0x96:
-            *b = 167;
-            *c = 2;
+            *glyph = 167;
+            *bank = 2;
             break;
         case 0x57:
-            *b = 174;
-            *c = 2;
+            *glyph = 174;
+            *bank = 2;
             break;
         case 0x9C:
-            *b = 185;
-            *c = 2;
+            *glyph = 185;
+            *bank = 2;
             break;
         case 0xC2:
-            *b = 197;
-            *c = 2;
+            *glyph = 197;
+            *bank = 2;
             break;
         case 0xF0:
-            *b = 217;
-            *c = 2;
+            *glyph = 217;
+            *bank = 2;
             break;
         case 0xA7:
-            *b = 253;
-            *c = 2;
+            *glyph = 253;
+            *bank = 2;
             break;
         case 0xF3:
-            *b = 18;
-            *c = 3;
+            *glyph = 18;
+            *bank = 3;
             break;
         case 0xA2:
-            *b = 29;
-            *c = 3;
+            *glyph = 29;
+            *bank = 3;
             break;
         case 0x4B:
-            *b = 33;
-            *c = 3;
+            *glyph = 33;
+            *bank = 3;
             break;
         case 0xE9:
-            *b = 36;
-            *c = 3;
+            *glyph = 36;
+            *bank = 3;
             break;
         case 0x64:
-            *b = 52;
-            *c = 3;
+            *glyph = 52;
+            *bank = 3;
             break;
         case 0xC5:
-            *b = 53;
-            *c = 3;
+            *glyph = 53;
+            *bank = 3;
             break;
         case 0xBA:
-            *b = 54;
-            *c = 3;
+            *glyph = 54;
+            *bank = 3;
             break;
         case 0x60:
-            *b = 91;
-            *c = 3;
+            *glyph = 91;
+            *bank = 3;
             break;
         case 0xD8:
-            *b = 117;
-            *c = 3;
+            *glyph = 117;
+            *bank = 3;
             break;
         case 0xFB:
-            *b = 120;
-            *c = 3;
+            *glyph = 120;
+            *bank = 3;
             break;
         case 0x87:
-            *b = 143;
-            *c = 3;
+            *glyph = 143;
+            *bank = 3;
             break;
         case 0x68:
-            *b = 199;
-            *c = 3;
+            *glyph = 199;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9700:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xE1:
-            *b = 7;
-            *c = 1;
+            *glyph = 7;
+            *bank = 1;
             break;
         case 0x45:
-            *b = 20;
-            *c = 1;
+            *glyph = 20;
+            *bank = 1;
             break;
         case 0x46:
-            *b = 34;
-            *c = 1;
+            *glyph = 34;
+            *bank = 1;
             break;
         case 0x6C:
-            *b = 50;
-            *c = 1;
+            *glyph = 50;
+            *bank = 1;
             break;
         case 0xDF:
-            *b = 52;
-            *c = 1;
+            *glyph = 52;
+            *bank = 1;
             break;
         case 0x88:
-            *b = 56;
-            *c = 1;
+            *glyph = 56;
+            *bank = 1;
             break;
         case 0x70:
-            *b = 60;
-            *c = 1;
+            *glyph = 60;
+            *bank = 1;
             break;
         case 0x79:
-            *b = 78;
-            *c = 1;
+            *glyph = 78;
+            *bank = 1;
             break;
         case 0xC7:
-            *b = 99;
-            *c = 1;
+            *glyph = 99;
+            *bank = 1;
             break;
         case 0x9D:
-            *b = 140;
-            *c = 1;
+            *glyph = 140;
+            *bank = 1;
             break;
         case 0x52:
-            *b = 141;
-            *c = 1;
+            *glyph = 141;
+            *bank = 1;
             break;
         case 0x44:
-            *b = 154;
-            *c = 1;
+            *glyph = 154;
+            *bank = 1;
             break;
         case 0xCD:
-            *b = 159;
-            *c = 1;
+            *glyph = 159;
+            *bank = 1;
             break;
         case 0x5C:
-            *b = 166;
-            *c = 1;
+            *glyph = 166;
+            *bank = 1;
             break;
         case 0xA3:
-            *b = 174;
-            *c = 1;
+            *glyph = 174;
+            *bank = 1;
             break;
         case 0x98:
-            *b = 192;
-            *c = 1;
+            *glyph = 192;
+            *bank = 1;
             break;
         case 0x76:
-            *b = 237;
-            *c = 1;
+            *glyph = 237;
+            *bank = 1;
             break;
         case 0x8A:
-            *b = 11;
-            *c = 2;
+            *glyph = 11;
+            *bank = 2;
             break;
         case 0x74:
-            *b = 77;
-            *c = 2;
+            *glyph = 77;
+            *bank = 2;
             break;
         case 0x8E:
-            *b = 93;
-            *c = 2;
+            *glyph = 93;
+            *bank = 2;
             break;
         case 0xA7:
-            *b = 95;
-            *c = 2;
+            *glyph = 95;
+            *bank = 2;
             break;
         case 0x68:
-            *b = 118;
-            *c = 2;
+            *glyph = 118;
+            *bank = 2;
             break;
         case 0xE7:
-            *b = 128;
-            *c = 2;
+            *glyph = 128;
+            *bank = 2;
             break;
         case 0x56:
-            *b = 132;
-            *c = 2;
+            *glyph = 132;
+            *bank = 2;
             break;
         case 0x59:
-            *b = 156;
-            *c = 2;
+            *glyph = 156;
+            *bank = 2;
             break;
         case 0x90:
-            *b = 181;
-            *c = 2;
+            *glyph = 181;
+            *bank = 2;
             break;
         case 0xE2:
-            *b = 193;
-            *c = 2;
+            *glyph = 193;
+            *bank = 2;
             break;
         case 0x4C:
-            *b = 241;
-            *c = 2;
+            *glyph = 241;
+            *bank = 2;
             break;
         case 0xDE:
-            *b = 247;
-            *c = 2;
+            *glyph = 247;
+            *bank = 2;
             break;
         case 0xB7:
-            *b = 249;
-            *c = 2;
+            *glyph = 249;
+            *bank = 2;
             break;
         case 0x63:
-            *b = 17;
-            *c = 3;
+            *glyph = 17;
+            *bank = 3;
             break;
         case 0xA0:
-            *b = 30;
-            *c = 3;
+            *glyph = 30;
+            *bank = 3;
             break;
         case 0xAC:
-            *b = 34;
-            *c = 3;
+            *glyph = 34;
+            *bank = 3;
             break;
         case 0x83:
-            *b = 60;
-            *c = 3;
+            *glyph = 60;
+            *bank = 3;
             break;
         case 0x5E:
-            *b = 64;
-            *c = 3;
+            *glyph = 64;
+            *bank = 3;
             break;
         case 0xBC:
-            *b = 79;
-            *c = 3;
+            *glyph = 79;
+            *bank = 3;
             break;
         case 0x7A:
-            *b = 112;
-            *c = 3;
+            *glyph = 112;
+            *bank = 3;
             break;
         case 0x64:
-            *b = 115;
-            *c = 3;
+            *glyph = 115;
+            *bank = 3;
             break;
         case 0xB9:
-            *b = 144;
-            *c = 3;
+            *glyph = 144;
+            *bank = 3;
             break;
         case 0x8B:
-            *b = 156;
-            *c = 3;
+            *glyph = 156;
+            *bank = 3;
             break;
         case 0xAA:
-            *b = 174;
-            *c = 3;
+            *glyph = 174;
+            *bank = 3;
             break;
         case 0xCA:
-            *b = 180;
-            *c = 3;
+            *glyph = 180;
+            *bank = 3;
             break;
         case 0xA6:
-            *b = 182;
-            *c = 3;
+            *glyph = 182;
+            *bank = 3;
             break;
         case 0x6E:
-            *b = 198;
-            *c = 3;
+            *glyph = 198;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9800:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0x41:
-            *b = 58;
-            *c = 1;
+            *glyph = 58;
+            *bank = 1;
             break;
         case 0x62:
-            *b = 119;
-            *c = 1;
+            *glyph = 119;
+            *bank = 1;
             break;
         case 0x5E:
-            *b = 234;
-            *c = 1;
+            *glyph = 234;
+            *bank = 1;
             break;
         case 0x63:
-            *b = 238;
-            *c = 1;
+            *glyph = 238;
+            *bank = 1;
             break;
         case 0x59:
-            *b = 162;
-            *c = 2;
+            *glyph = 162;
+            *bank = 2;
             break;
         case 0x66:
-            *b = 188;
-            *c = 2;
+            *glyph = 188;
+            *bank = 2;
             break;
         case 0x72:
-            *b = 133;
-            *c = 3;
+            *glyph = 133;
+            *bank = 3;
             break;
         case 0x48:
-            *b = 141;
-            *c = 3;
+            *glyph = 141;
+            *bank = 3;
             break;
         case 0x42:
-            *b = 168;
-            *c = 3;
+            *glyph = 168;
+            *bank = 3;
             break;
         case 0x61:
-            *b = 177;
-            *c = 3;
+            *glyph = 177;
+            *bank = 3;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     case 0x9C00:
-        switch (a & 0xFF) {
+        switch (code & 0xFF) {
         case 0xC9:
-            *b = 210;
-            *c = 1;
+            *glyph = 210;
+            *bank = 1;
             break;
         default:
-            *b = 0;
-            *c = 0;
+            *glyph = 0;
+            *bank = 0;
             break;
         }
 
         break;
     default:
-        *b = 0;
-        *c = 0;
+        *glyph = 0;
+        *bank = 0;
         break;
     }
 }
@@ -6288,7 +6288,7 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
     return sCardMsgGlyphSprites[0].palette->index;
 }
 
-u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
+u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -6408,17 +6408,17 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
         s++;
 
         if (cy > 0x1800) {
-            *d = s;
+            *nextText = s;
             return sTextEntryCount;
         }
     }
 
-    *d = NULL;
+    *nextText = NULL;
     return sTextEntryCount;
 }
 
 #ifndef VERSION_EU
-u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
+u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** nextText) {
     u16 w;
     u8 t;
     s32 cx;
@@ -6629,18 +6629,18 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
                 v = *(u16*)s;
 
                 if ((u16)((v / 256) | (v << 8)) == 0x8142) {
-                    *d = NULL;
+                    *nextText = NULL;
                 } else {
-                    *d = s;
+                    *nextText = s;
                     return sTextEntryCount;
                 }
             } else {
-                *d = NULL;
+                *nextText = NULL;
             }
         }
     }
 
-    *d = NULL;
+    *nextText = NULL;
     return sTextEntryCount;
 }
 #endif
@@ -6686,7 +6686,7 @@ void FreeCardMsgGlyphSprites() {
     EwramFree(sCardMsgGlyphSprites);
 }
 
-void DrawMsgGlyphsWithPalette(u8 n, void* a) {
+void DrawMsgGlyphsWithPalette(u8 n, void* palette) {
     u8 i;
 
     for (i = 0; i < n; i++) {
@@ -6698,7 +6698,7 @@ void DrawMsgGlyphsWithPalette(u8 n, void* a) {
 
             if (b[i].tiles != NULL) {
                 if (!b[i].useAlternatePalette) {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, a, 0);
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, palette, 0);
                 } else {
                     DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles,
                                   b[i].alternatePalette, 0);
@@ -6734,7 +6734,7 @@ u16 FormatSmallFontHex16(s16 v, u16* out) {
 }
 
 #ifndef VERSION_EU
-s32 CopySjisGlyphsToVram(const TextChar* a) {
+s32 CopySjisGlyphsToVram(const TextChar* str) {
     u8 buf[2];
     u16* c;
     u16 w;
@@ -6746,18 +6746,18 @@ s32 CopySjisGlyphsToVram(const TextChar* a) {
     t = 0;
     n = 0;
 
-    while (*a != 0) {
+    while (*str != 0) {
         u16 v;
-        buf[0] = a[0];
-        buf[1] = a[1];
+        buf[0] = str[0];
+        buf[1] = str[1];
         c = (u16*)buf;
 
         if (*c == 0x6E6E) {
-            a += 2;
+            str += 2;
         } else {
             v = *c;
             v = (v / 256) | (v << 8);
-            a += 2;
+            str += 2;
 
             if ((v & 0xFF00) == 0x8100) {
                 v &= 0xFF;
@@ -6918,7 +6918,7 @@ s32 CopySjisGlyphsToVram(const TextChar* a) {
 #endif
 
 #ifndef VERSION_EU
-s32 CopySjisGlyphsToVramAt(const TextChar* a, u16 b) {
+s32 CopySjisGlyphsToVramAt(const TextChar* str, u16 tile) {
     u8 buf[2];
     u16* c;
     u16 w;
@@ -6926,22 +6926,22 @@ s32 CopySjisGlyphsToVramAt(const TextChar* a, u16 b) {
     u8* dst;
     u8 n;
     w = 0;
-    dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + b * 32;
+    dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + tile * 32;
     t = 0;
     n = 0;
 
-    while (*a != 0) {
+    while (*str != 0) {
         u16 v;
-        buf[0] = a[0];
-        buf[1] = a[1];
+        buf[0] = str[0];
+        buf[1] = str[1];
         c = (u16*)buf;
 
         if (*c == 0x6E6E) {
-            a += 2;
+            str += 2;
         } else {
             v = *c;
             v = (v / 256) | (v << 8);
-            a += 2;
+            str += 2;
 
             if ((v & 0xFF00) == 0x8100) {
                 v &= 0xFF;
@@ -7101,33 +7101,33 @@ s32 CopySjisGlyphsToVramAt(const TextChar* a, u16 b) {
 }
 #endif
 
-u8 CopyLatinGlyphsToVram(const TextChar* a, u16* b, u16 tile) {
+u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile) {
     u8* dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + tile * 32;
     s32 flag = 0;
     sTextEntryCount = 0;
-    *b = 0;
+    *widths = 0;
 
-    while (*a != 0) {
+    while (*str != 0) {
         s32 v = 0;
 
 #ifdef VERSION_EU
-        if (*a == 31) {
+        if (*str == 31) {
 #else
-        if (*a == 10) {
+        if (*str == 10) {
 #endif
-            *b = 0;
+            *widths = 0;
         } else {
 #ifdef VERSION_EU
-            v = *a;
+            v = *str;
 #else
 #ifdef VERSION_JP
-            if (*a > 31) {
+            if (*str > 31) {
 #else
-            if ((u16)(*a - 32) <= 223) {
+            if ((u16)(*str - 32) <= 223) {
 #endif
-                v = *a;
+                v = *str;
             } else {
-                switch (*a) {
+                switch (*str) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -7181,19 +7181,19 @@ u8 CopyLatinGlyphsToVram(const TextChar* a, u16* b, u16 tile) {
 #endif
 
             if (v != 32) {
-                *b = sLatinGlyphWidths.widths[v];
+                *widths = sLatinGlyphWidths.widths[v];
                 v = ((u16*)gMsgLatinFontFrames[v])[3];
                 CpuCopy16(&gMsgLatinFontTiles[v * 32], dst, 0x80);
                 dst += 128;
                 sTextEntryCount++;
-                b++;
+                widths++;
                 flag = 1;
             } else if (flag) {
-                b[-1] += 3;
+                widths[-1] += 3;
             }
         }
 
-        a++;
+        str++;
     }
 
     return sTextEntryCount;

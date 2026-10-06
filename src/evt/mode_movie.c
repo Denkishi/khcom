@@ -405,9 +405,9 @@ u16 CountNonSpaceChars(const TextChar* str) {
     }
 }
 
-void mode_movie_0(s32 a) {
+void mode_movie_0(s32 movieId) {
     sMovieModeState = 0;
-    sMovieId = a;
+    sMovieId = movieId;
     sUnk_02034940 = 0;
     sMovieFrame = 0;
     sMovieSubIndex = 0;

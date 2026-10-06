@@ -1796,7 +1796,7 @@ void LoadSoraReloadCardGfx(CardDisplayWork* work);
 void Reload_Card_0(CardDisplayWork* work, CardDisplayArgs* a);
 void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* a);
 u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* a);
-u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* a);
+u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* task);
 void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* a);
 void Card_EFFECT_0(CardEffectWork* work, CardEffectArgs* a);
 void deckexchange_3(DeckExchangeWork* work);

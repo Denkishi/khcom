@@ -31,7 +31,7 @@ typedef struct EvtShadowWork {
 
 extern EventState* gEventState;
 
-void EvtObjSetGroundZ(EvtObj* obj, s32 a);
+void EvtObjSetGroundZ(EvtObj* obj, s32 groundZ);
 void EvtObjChangeAnim(EvtObjWork* work);
 
 #endif /* GUARD_EVT_OBJ_H */

@@ -4,6 +4,6 @@
 #include "card.h"
 #include "types.h"
 
-u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* a);
+u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* task);
 
 #endif

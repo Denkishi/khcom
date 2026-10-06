@@ -91,10 +91,10 @@ static s16 sEventSelectIndex;
 static u8 sEventSelectList;
 EventSoundMix* gEventSoundMix EWRAM_COMMON(4);
 
-s16 GetEventListLength(u8 a) {
+s16 GetEventListLength(u8 list) {
     s16 n = 0;
 
-    switch (a) {
+    switch (list) {
     case 0:
         while (sSoraEventIds[n] != -1) {
             n++;

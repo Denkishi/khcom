@@ -346,8 +346,8 @@ void Event_2() {
     gEventState = NULL;
 }
 
-void RequestEventMode(u16 a) {
-    ModeRequest(&gModeEvent, a);
+void RequestEventMode(u16 eventId) {
+    ModeRequest(&gModeEvent, eventId);
 }
 #ifdef VERSION_EU
 #define MSG_CODE(n) ((n) - 2)

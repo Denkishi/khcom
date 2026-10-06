@@ -106,6 +106,6 @@ s32 Event_Debug_1(EventDebugWork* work);
 void Event_Debug_2(EventDebugWork* work);
 void Event_Debug_3(EventDebugWork* work);
 
-s16 GetEventListLength(u8 a);
+s16 GetEventListLength(u8 list);
 
 #endif

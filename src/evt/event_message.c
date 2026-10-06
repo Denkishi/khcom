@@ -57,7 +57,7 @@
 #include "text_types.h"
 
 static void msgwin_0(MsgWinWork* work, u8* arg);
-static u8 msgwin_1(MsgWinWork* work, void* a);
+static u8 msgwin_1(MsgWinWork* work, void* task);
 static void msgwin_2(MsgWinWork* work);
 static void msgwin_3(MsgWinWork* work);
 
@@ -2444,15 +2444,15 @@ static TaskDesc sTaskDescMsgwait = {
 
 EventScanlineScroll* gEventScanlineScroll EWRAM_COMMON(4);
 
-void event_seq_0(EventSeqWork* work, u8* a) {
+void event_seq_0(EventSeqWork* work, u8* arg) {
 #ifdef VERSION_EU
     EventBackgroundDef* u;
 #endif
     gEventSoundMix = NULL;
     gBtlWork = NULL;
     work->task = NULL;
-    work->eventId = a[0];
-    work->fromGame = a[1];
+    work->eventId = arg[0];
+    work->fromGame = arg[1];
     work->seqDef = gEventSequenceDefs[work->eventId];
     work->unk_30 = 0;
     work->unk_31 = 0;
@@ -2676,7 +2676,7 @@ u8 InitEventState(EventSeqWork* work) {
 }
 #endif
 
-u8 event_seq_1(EventSeqWork* work, void* a) {
+u8 event_seq_1(EventSeqWork* work, void* task) {
     EventSeqArg arg;
 #ifndef VERSION_EU
     s32 flag;
@@ -2849,7 +2849,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
         }
     }
 
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventSeq);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventSeq);
     return 1;
 }
 
@@ -2868,7 +2868,7 @@ u8 UpdateEventSeqSkip() {
     return v;
 }
 
-u8 UpdateEventSeq(EventSeqWork* work, void* a) {
+u8 UpdateEventSeq(EventSeqWork* work, void* task) {
     const EventSequenceDef* t;
     u8 i;
 
@@ -2895,7 +2895,7 @@ u8 UpdateEventSeq(EventSeqWork* work, void* a) {
         work->ending = 1;
         gEventState->ending = 1;
         FadeStartOut(FADE_MODE_BLACK, 64);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventSeqSkip);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventSeqSkip);
 
         for (i = 0; i < 32; i++) {
             FadeSetPaletteExcluded(i, 0);
@@ -2987,12 +2987,12 @@ void event_seq_3(EventSeqWork* work) {
 #endif
 }
 
-void event_chara_0(EventCharaWork* work, EventSeqArg* a) {
+void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
     s32 v0;
     s32 v1;
 
     TaskPoolInit(&work->tasks, 8);
-    work->arg = *a;
+    work->arg = *arg;
     work->keyframes = gEventSequenceDefs[work->arg.eventId]->charaTracks[work->arg.track].keyframes;
     work->keyframe = 0;
     work->steps = work->keyframes->frame;
@@ -3226,7 +3226,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* a) {
     }
 }
 
-u8 event_chara_1(EventCharaWork* work, void* a) {
+u8 event_chara_1(EventCharaWork* work, void* task) {
     u8 t;
     s32 v0;
     s32 v1;
@@ -3241,8 +3241,8 @@ u8 event_chara_1(EventCharaWork* work, void* a) {
 
     if (t) {
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
-            ((void (*)(EventCharaWork*, void*))work->keyframes[work->keyframe].update)(work, a);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
+            ((void (*)(EventCharaWork*, void*))work->keyframes[work->keyframe].update)(work, task);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3263,7 +3263,7 @@ u8 event_chara_1(EventCharaWork* work, void* a) {
         gEventState->flags |= EVENT_FLAG_PAUSED;
         gEventState->flags |= EVENT_FLAG_PLAYER_CONTROL;
         work->speed = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaControl);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventCharaControl);
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -3513,17 +3513,17 @@ void SetEventCharaEndAnim(EventCharaWork* work) {
     EvtObjSetAnim(&work->obj, e->motionArg);
 }
 
-u8 EventCharaHop(EventCharaWork* work, void* a) {
+u8 EventCharaHop(EventCharaWork* work, void* task) {
     work->hopVelocity = 0x800;
     work->unk_18C = 0;
     work->waitTimer = 0;
     work->unk_198 = work->obj.z;
     TaskPoolUpdate(&work->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaHopUpdate);
     return 1;
 }
 
-u8 EventCharaHopUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaHopUpdate(EventCharaWork* work, void* task) {
     u16 x;
     u16 y;
     u8 t;
@@ -3560,9 +3560,9 @@ u8 EventCharaHopUpdate(EventCharaWork* work, void* a) {
         work->obj.z = work->unk_198;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3577,17 +3577,17 @@ u8 EventCharaHopUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaHopHigh(EventCharaWork* work, void* a) {
+u8 EventCharaHopHigh(EventCharaWork* work, void* task) {
     work->hopVelocity = 0xC00;
     work->unk_18C = 0;
     work->waitTimer = 0;
     work->unk_198 = work->obj.z;
     TaskPoolUpdate(&work->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopHighUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaHopHighUpdate);
     return 1;
 }
 
-u8 EventCharaHopHighUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaHopHighUpdate(EventCharaWork* work, void* task) {
     u8 t;
 
     t = AdvanceEventCharaKeyframe(work);
@@ -3613,9 +3613,9 @@ u8 EventCharaHopHighUpdate(EventCharaWork* work, void* a) {
         work->obj.z = work->unk_198;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3630,17 +3630,17 @@ u8 EventCharaHopHighUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaHopLow(EventCharaWork* work, void* a) {
+u8 EventCharaHopLow(EventCharaWork* work, void* task) {
     work->hopVelocity = 0x300;
     work->unk_18C = 0;
     work->waitTimer = 0;
     work->unk_198 = work->obj.z;
     TaskPoolUpdate(&work->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopLowUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaHopLowUpdate);
     return 1;
 }
 
-u8 EventCharaHopLowUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaHopLowUpdate(EventCharaWork* work, void* task) {
     u8 t;
 
     t = AdvanceEventCharaKeyframe(work);
@@ -3666,9 +3666,9 @@ u8 EventCharaHopLowUpdate(EventCharaWork* work, void* a) {
         work->obj.z = work->unk_198;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3683,17 +3683,17 @@ u8 EventCharaHopLowUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaDrop(EventCharaWork* work, void* a) {
+u8 EventCharaDrop(EventCharaWork* work, void* task) {
     work->hopVelocity = 0x300;
     work->unk_18C = 0;
     work->waitTimer = 0;
     work->unk_198 = work->obj.z;
     TaskPoolUpdate(&work->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaDropUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaDropUpdate);
     return 1;
 }
 
-u8 EventCharaDropUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaDropUpdate(EventCharaWork* work, void* task) {
     u8 t;
 
     t = AdvanceEventCharaKeyframe(work);
@@ -3715,9 +3715,9 @@ u8 EventCharaDropUpdate(EventCharaWork* work, void* a) {
 
     if (t) {
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3732,7 +3732,7 @@ u8 EventCharaDropUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeOut(void* work, void* a) {
+u8 EventCharaFadeOut(void* work, void* task) {
     EventCharaWork* p = work;
     const EventCharaKeyframe* e;
     u16 z;
@@ -3742,7 +3742,7 @@ u8 EventCharaFadeOut(void* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+            SetTaskUpdate(task, p->keyframes[p->keyframe].update);
         }
 
         if (p->keyframes[p->keyframe].callback != NULL) {
@@ -3760,7 +3760,7 @@ u8 EventCharaFadeOut(void* work, void* a) {
     gBldAlpha = 16;
     p->effectTimer = 0;
     p->effectLevel = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaFadeOutUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaFadeOutUpdate);
 
     if (p->arg.chara == 3) {
         e = &p->keyframes[p->keyframe];
@@ -3774,7 +3774,7 @@ u8 EventCharaFadeOut(void* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeOutUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaFadeOutUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->effectTimer++;
@@ -3791,9 +3791,9 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* work, void* a) {
         gBldCnt = 0;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3815,7 +3815,7 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeIn(void* work, void* a) {
+u8 EventCharaFadeIn(void* work, void* task) {
     EventCharaWork* p = work;
     const EventCharaKeyframe* e;
     u16 z;
@@ -3825,7 +3825,7 @@ u8 EventCharaFadeIn(void* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+            SetTaskUpdate(task, p->keyframes[p->keyframe].update);
         }
 
         if (p->keyframes[p->keyframe].callback != NULL) {
@@ -3843,7 +3843,7 @@ u8 EventCharaFadeIn(void* work, void* a) {
     gBldAlpha = 0x1000;
     p->effectTimer = 0;
     p->effectLevel = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaFadeInUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaFadeInUpdate);
 
     if (p->arg.chara == 3) {
         e = &p->keyframes[p->keyframe];
@@ -3857,7 +3857,7 @@ u8 EventCharaFadeIn(void* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeInUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaFadeInUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->effectTimer++;
@@ -3874,9 +3874,9 @@ u8 EventCharaFadeInUpdate(EventCharaWork* work, void* a) {
         gBldCnt = 0;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3898,7 +3898,7 @@ u8 EventCharaFadeInUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaBlendUp(void* work, void* a) {
+u8 EventCharaBlendUp(void* work, void* task) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -3907,7 +3907,7 @@ u8 EventCharaBlendUp(void* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+            SetTaskUpdate(task, p->keyframes[p->keyframe].update);
         }
 
         if (p->keyframes[p->keyframe].callback != NULL) {
@@ -3925,12 +3925,12 @@ u8 EventCharaBlendUp(void* work, void* a) {
     gBldAlpha = 16;
     p->effectTimer = 0;
     p->effectLevel = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaBlendUpUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaBlendUpUpdate);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 EventCharaBlendUpUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaBlendUpUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->effectTimer++;
@@ -3947,9 +3947,9 @@ u8 EventCharaBlendUpUpdate(EventCharaWork* work, void* a) {
         gBldCnt = 0;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -3964,7 +3964,7 @@ u8 EventCharaBlendUpUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaBlendDown(void* work, void* a) {
+u8 EventCharaBlendDown(void* work, void* task) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -3973,7 +3973,7 @@ u8 EventCharaBlendDown(void* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+            SetTaskUpdate(task, p->keyframes[p->keyframe].update);
         }
 
         if (p->keyframes[p->keyframe].callback != NULL) {
@@ -3991,12 +3991,12 @@ u8 EventCharaBlendDown(void* work, void* a) {
     gBldAlpha = 0x1010;
     p->effectTimer = 0;
     p->effectLevel = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaBlendDownUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaBlendDownUpdate);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 EventCharaBlendDownUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaBlendDownUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->effectTimer++;
@@ -4013,9 +4013,9 @@ u8 EventCharaBlendDownUpdate(EventCharaWork* work, void* a) {
         gBldCnt = 0;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -4030,16 +4030,16 @@ u8 EventCharaBlendDownUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaCircleSlow(EventCharaWork* work, void* a) {
+u8 EventCharaCircleSlow(EventCharaWork* work, void* task) {
     work->unk_18C = 0;
     work->unk_198 = 0;
     work->startX = work->obj.x;
     work->startZ = work->obj.z;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaCircleSlowUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaCircleSlowUpdate);
     return 1;
 }
 
-u8 EventCharaCircleSlowUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaCircleSlowUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->obj.x += gSineTable[(u8)work->unk_18C] * (work->unk_198 >> 8);
@@ -4052,9 +4052,9 @@ u8 EventCharaCircleSlowUpdate(EventCharaWork* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(work)) {
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -4069,16 +4069,16 @@ u8 EventCharaCircleSlowUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaCircleFast(EventCharaWork* work, void* a) {
+u8 EventCharaCircleFast(EventCharaWork* work, void* task) {
     work->unk_18C = 0;
     work->unk_198 = 0;
     work->startX = work->obj.x;
     work->startZ = work->obj.z;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaCircleFastUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaCircleFastUpdate);
     return 1;
 }
 
-u8 EventCharaCircleFastUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaCircleFastUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->obj.x += gSineTable[(u8)work->unk_18C] * (work->unk_198 >> 8);
@@ -4091,9 +4091,9 @@ u8 EventCharaCircleFastUpdate(EventCharaWork* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(work)) {
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -4108,16 +4108,16 @@ u8 EventCharaCircleFastUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaJitter(EventCharaWork* work, void* a) {
+u8 EventCharaJitter(EventCharaWork* work, void* task) {
     work->unk_18C = 1;
     work->unk_198 = 0;
     work->startX = work->obj.x;
     work->startZ = work->obj.z;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaJitterUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaJitterUpdate);
     return 1;
 }
 
-u8 EventCharaJitterUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaJitterUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
 
@@ -4131,9 +4131,9 @@ u8 EventCharaJitterUpdate(EventCharaWork* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(work)) {
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -4197,15 +4197,15 @@ void ApplyEventCharaDrawFlags(EventCharaWork* work) {
     }
 }
 
-u8 EventCharaToggleAnim(EventCharaWork* work, void* a) {
+u8 EventCharaToggleAnim(EventCharaWork* work, void* task) {
     work->effectTimer = 0;
     work->effectLevel = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaToggleAnimUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaToggleAnimUpdate);
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaToggleAnimUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaToggleAnimUpdate(EventCharaWork* work, void* task) {
     u16 buf[2];
 
     memcpy(buf, sEventCharaToggleAnims, 4);
@@ -4230,9 +4230,9 @@ u8 EventCharaToggleAnimUpdate(EventCharaWork* work, void* a) {
         work->palette = NULL;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
     }
 
@@ -4240,7 +4240,7 @@ u8 EventCharaToggleAnimUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeToBlack(void* work, void* a) {
+u8 EventCharaFadeToBlack(void* work, void* task) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -4249,7 +4249,7 @@ u8 EventCharaFadeToBlack(void* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+            SetTaskUpdate(task, p->keyframes[p->keyframe].update);
         }
 
         if (p->keyframes[p->keyframe].callback != NULL) {
@@ -4267,12 +4267,12 @@ u8 EventCharaFadeToBlack(void* work, void* a) {
     gBldAlpha = 16;
     p->effectTimer = 0;
     p->effectLevel = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaFadeToBlackUpdate);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaFadeToBlackUpdate);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* a) {
+u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->effectTimer++;
@@ -4289,9 +4289,9 @@ u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* a) {
         gBldCnt = 0;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -4306,7 +4306,7 @@ u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 EventCharaBlendDown2(void* work, void* a) {
+u8 EventCharaBlendDown2(void* work, void* task) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -4315,7 +4315,7 @@ u8 EventCharaBlendDown2(void* work, void* a) {
 
     if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+            SetTaskUpdate(task, p->keyframes[p->keyframe].update);
         }
 
         if (p->keyframes[p->keyframe].callback != NULL) {
@@ -4333,12 +4333,12 @@ u8 EventCharaBlendDown2(void* work, void* a) {
     gBldAlpha = 0;
     p->effectTimer = 0;
     p->effectLevel = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaBlendDown2Update);
+    SetTaskUpdate(task, (TaskUpdateFunc)EventCharaBlendDown2Update);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 EventCharaBlendDown2Update(EventCharaWork* work, void* a) {
+u8 EventCharaBlendDown2Update(EventCharaWork* work, void* task) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->effectTimer++;
@@ -4356,9 +4356,9 @@ u8 EventCharaBlendDown2Update(EventCharaWork* work, void* a) {
         gBldCnt = 0;
 
         if (work->keyframes[work->keyframe].update != NULL) {
-            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            SetTaskUpdate(task, work->keyframes[work->keyframe].update);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)event_chara_1);
         }
 
         if (work->keyframes[work->keyframe].callback != NULL) {
@@ -4446,7 +4446,7 @@ void UpdateEventCharaAngle(EventCharaWork* work) {
     }
 }
 
-void SetEventCharaMoveAnim(EventCharaWork* work, s32 a) {
+void SetEventCharaMoveAnim(EventCharaWork* work, s32 animId) {
     u16 f;
 
     f = work->obj.drawFlags;
@@ -4468,15 +4468,15 @@ void SetEventCharaMoveAnim(EventCharaWork* work, s32 a) {
         break;
     }
 
-    if (a != work->animId) {
-        EvtObjSetAnim(&work->obj, a);
-        work->animId = a;
+    if (animId != work->animId) {
+        EvtObjSetAnim(&work->obj, animId);
+        work->animId = animId;
     }
 
     EvtObjSetDrawFlags(&work->obj, f);
 }
 
-u8 UpdateEventCharaControl(EventCharaWork* work, void* a) {
+u8 UpdateEventCharaControl(EventCharaWork* work, void* task) {
     u16 keys;
     s32 v;
 
@@ -4622,7 +4622,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* a) {
     if ((GetKeysPressed() & B_BUTTON) != 0) {
         work->jumpPhase = 0;
         work->waitTimer = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaJump);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventCharaJump);
     }
 
     v = work->obj.x + (gSineTable[work->angle] * work->speed >> 8);
@@ -4643,7 +4643,7 @@ u8 UpdateEventCharaControl(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateEventCharaJump(EventCharaWork* work, void* a) {
+u8 UpdateEventCharaJump(EventCharaWork* work, void* task) {
     u16 keys = GetKeysHeld();
 
     if ((keys & DPAD_ANY) != 0) {
@@ -4900,7 +4900,7 @@ u8 UpdateEventCharaJump(EventCharaWork* work, void* a) {
             work->unk_18C = -0x540;
         } else if (work->waitTimer > 10) {
             work->lastAngle = 255;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaControl);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventCharaControl);
         } else {
             work->waitTimer++;
         }
@@ -6177,7 +6177,7 @@ static void msgwin_0(MsgWinWork* work, u8* arg) {
     CreateMsgfaceTask(&work->tasks, &work->face, work->script->portraitId, work->script->expressionId, work->script->positionIndex);
 }
 
-static u8 msgwin_1(MsgWinWork* work, void* a) {
+static u8 msgwin_1(MsgWinWork* work, void* task) {
     const MessageScriptEntry* e;
 
     if (!work->textLoaded) {
@@ -6231,14 +6231,14 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
                     }
 
                     RequestMsgfaceSlideIn(&work->face);
-                    SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
+                    SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
                     gEventState->msgWinCentered = 1;
                 } else {
                     LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
                     LoadBgPalette(work->bg, gMsgwinPalette, 32);
                     SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
                     RedrawBgMapAt(work->bg, work->scrollX, 0);
-                    SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
+                    SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
                     RequestMsgfaceSlideIn(&work->face);
                     gEventState->msgWinOpen = 1;
 
@@ -6287,14 +6287,14 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
             }
 
             RequestMsgfaceSlideIn(&work->face);
-            SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
+            SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
             gEventState->msgWinCentered = 1;
         } else {
             LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
             LoadBgPalette(work->bg, gMsgwinPalette, 32);
             SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
             RedrawBgMapAt(work->bg, work->scrollX, 0);
-            SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
+            SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
             RequestMsgfaceSlideIn(&work->face);
             gEventState->msgWinOpen = 1;
 
@@ -6320,7 +6320,7 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
     return 1;
 }
 
-u8 MsgwinContinueUpdate(MsgWinWork* work, void* a) {
+u8 MsgwinContinueUpdate(MsgWinWork* work, void* task) {
     if (!work->textLoaded) {
         if (!gEventState->bgEffectActive) {
             MsgwinLoadEntry(work);
@@ -6336,12 +6336,12 @@ u8 MsgwinContinueUpdate(MsgWinWork* work, void* a) {
             if (gEventState->focusSteps != 0) {
                 gEventState->focusSteps--;
             } else {
-                SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
+                SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
                 RequestMsgfaceSlideIn(&work->face);
                 gEventState->msgWinOpen = 1;
             }
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
+            SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
             RequestMsgfaceSlideIn(&work->face);
             gEventState->msgWinOpen = 1;
         }
@@ -6380,7 +6380,7 @@ static void msgwin_3(MsgWinWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 MsgwinOpenUpdate(MsgWinWork* work, void* a) {
+u8 MsgwinOpenUpdate(MsgWinWork* work, void* task) {
     const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
     ApproachValue(&work->scrollX, gMsgwinOpenScrollX[work->position], work->steps);
@@ -6398,14 +6398,14 @@ u8 MsgwinOpenUpdate(MsgWinWork* work, void* a) {
             gEventState->talking = 1;
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)MsgwinTypeUpdate);
+        SetTaskUpdate(task, (TaskUpdateFunc)MsgwinTypeUpdate);
     }
 
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 MsgwinTypeUpdate(MsgWinWork* work, void* a) {
+u8 MsgwinTypeUpdate(MsgWinWork* work, void* task) {
     const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
     MsgwinTypeStep(work);
@@ -6426,7 +6426,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* a) {
             work->textLoaded = 0;
             work->started = 1;
             work->face.shown = 1;
-            SetTaskUpdate(a, (TaskUpdateFunc)MsgwinContinueUpdate);
+            SetTaskUpdate(task, (TaskUpdateFunc)MsgwinContinueUpdate);
         } else {
             HideMsgGlyphs();
 
@@ -6434,7 +6434,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* a) {
                 if (work->script[work->scriptIndex + 1].positionIndex != 4) {
                     work->steps = 8;
                     RequestMsgfaceSlideOut(&work->face);
-                    SetTaskUpdate(a, (TaskUpdateFunc)MsgwinCloseUpdate);
+                    SetTaskUpdate(task, (TaskUpdateFunc)MsgwinCloseUpdate);
                     gEventState->msgWinOpen = 0;
                     work->face.shown = 0;
                 } else {
@@ -6444,12 +6444,12 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* a) {
                     work->scriptIndex++;
                     gEventState->flags &= ~EVENT_FLAG_PAUSED;
                     work->face.shown = 1;
-                    SetTaskUpdate(a, (TaskUpdateFunc)msgwin_1);
+                    SetTaskUpdate(task, (TaskUpdateFunc)msgwin_1);
                 }
             } else {
                 work->steps = 8;
                 RequestMsgfaceSlideOut(&work->face);
-                SetTaskUpdate(a, (TaskUpdateFunc)MsgwinCloseUpdate);
+                SetTaskUpdate(task, (TaskUpdateFunc)MsgwinCloseUpdate);
                 gEventState->msgWinOpen = 0;
                 work->face.shown = 0;
             }
@@ -6462,7 +6462,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* a) {
     return 1;
 }
 
-u8 MsgwinCloseUpdate(MsgWinWork* work, void* a) {
+u8 MsgwinCloseUpdate(MsgWinWork* work, void* task) {
     const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
     ApproachValue(&work->scrollX, gMsgwinClosedScrollX[work->position], work->steps);
@@ -6488,7 +6488,7 @@ u8 MsgwinCloseUpdate(MsgWinWork* work, void* a) {
             work->started = 0;
             work->textLoaded = 0;
             work->scriptIndex++;
-            SetTaskUpdate(a, (TaskUpdateFunc)msgwin_1);
+            SetTaskUpdate(task, (TaskUpdateFunc)msgwin_1);
         }
     }
 
@@ -6642,7 +6642,7 @@ void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
     }
 }
 
-u8 msgface_1(MsgFaceWork* work, void* a) {
+u8 msgface_1(MsgFaceWork* work, void* task) {
     const MsgFaceAnim* anim = NULL;
     u32 n;
 
@@ -6670,12 +6670,12 @@ u8 msgface_1(MsgFaceWork* work, void* a) {
             }
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceSlideInUpdate);
+        SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceSlideInUpdate);
         break;
     case 2:
         work->steps = 8;
         work->arrived = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceSlideOutUpdate);
+        SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceSlideOutUpdate);
         break;
     case 4:
         work->steps = 4;
@@ -6687,10 +6687,10 @@ u8 msgface_1(MsgFaceWork* work, void* a) {
         }
 
         work->y = gMsgfaceY[work->face->positionIndex];
-        SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceFlipOutUpdate);
+        SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceFlipOutUpdate);
         break;
     case 3:
-        SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceChangeUpdate);
+        SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceChangeUpdate);
         break;
     }
 
@@ -6748,32 +6748,32 @@ void msgface_3(MsgFaceWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-u8 MsgfaceSlideInUpdate(MsgFaceWork* work, void* a) {
+u8 MsgfaceSlideInUpdate(MsgFaceWork* work, void* task) {
     ApproachValue(&work->x, gMsgfaceShownX[work->face->positionIndex], work->steps);
     work->steps--;
 
     if (work->steps == 0) {
         work->face->command = 0;
         work->arrived = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
+        SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
 
     return 1;
 }
 
-u8 MsgfaceSlideOutUpdate(MsgFaceWork* work, void* a) {
+u8 MsgfaceSlideOutUpdate(MsgFaceWork* work, void* task) {
     ApproachValue(&work->x, gMsgfaceHiddenX[work->face->positionIndex], work->steps);
     work->steps--;
 
     if (work->steps == 0) {
         work->face->command = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
+        SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
 
     return 1;
 }
 
-u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* a) {
+u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* task) {
     const MsgFaceAnim* t;
     s32 n;
 
@@ -6807,11 +6807,11 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* a) {
     work->y = gMsgfaceY[n];
     work->scaleX = 256;
     work->steps = 8;
-    SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
+    SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     return 1;
 }
 
-u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* a) {
+u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* task) {
     const MsgFaceAnim* t;
 
     if (work->scaleX < 0) {
@@ -6845,13 +6845,13 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* a) {
             work->steps = 8;
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceFlipInUpdate);
+        SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceFlipInUpdate);
     }
 
     return 1;
 }
 
-u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* a) {
+u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* task) {
     if (work->scaleX < 0) {
         ApproachValue(&work->scaleX, -255, work->steps);
     } else {
@@ -6864,46 +6864,46 @@ u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* a) {
         work->arrived = 1;
         work->face->command = 0;
         work->scaleX = 256;
-        SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
+        SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
 
     return 1;
 }
 
-void CreateMsgfaceTask(void* pool, MsgFaceControl* p, u8 a, u8 b, u8 c) {
-    p->portraitId = a;
-    p->expressionId = b;
-    p->positionIndex = c;
-    p->command = 0;
-    p->silhouette = 0;
-    TaskCreate(pool, &sTaskDescMsgface, p);
+void CreateMsgfaceTask(void* pool, MsgFaceControl* ctl, u8 portraitId, u8 expressionId, u8 positionIndex) {
+    ctl->portraitId = portraitId;
+    ctl->expressionId = expressionId;
+    ctl->positionIndex = positionIndex;
+    ctl->command = 0;
+    ctl->silhouette = 0;
+    TaskCreate(pool, &sTaskDescMsgface, ctl);
 }
 
-void SetMsgfacePortrait(MsgFaceControl* p, u8 a, u8 b, u8 c) {
+void SetMsgfacePortrait(MsgFaceControl* ctl, u8 portraitId, u8 expressionId, u8 positionIndex) {
     u8 v;
 
-    if (p->portraitId != a) {
+    if (ctl->portraitId != portraitId) {
         v = 3;
     } else {
-        if (p->expressionId == b && p->positionIndex == c) {
+        if (ctl->expressionId == expressionId && ctl->positionIndex == positionIndex) {
             return;
         }
 
         v = 4;
     }
 
-    p->command = v;
-    p->portraitId = a;
-    p->expressionId = b;
-    p->positionIndex = c;
+    ctl->command = v;
+    ctl->portraitId = portraitId;
+    ctl->expressionId = expressionId;
+    ctl->positionIndex = positionIndex;
 }
 
-void RequestMsgfaceSlideIn(MsgFaceControl* p) {
-    p->command = 1;
+void RequestMsgfaceSlideIn(MsgFaceControl* ctl) {
+    ctl->command = 1;
 }
 
-void RequestMsgfaceSlideOut(MsgFaceControl* p) {
-    p->command = 2;
+void RequestMsgfaceSlideOut(MsgFaceControl* ctl) {
+    ctl->command = 2;
 }
 
 void msgwait_0(MsgWaitWork* work, u8* arg) {
@@ -6919,7 +6919,7 @@ void msgwait_0(MsgWaitWork* work, u8* arg) {
     gEventState->msgWaitActive = 1;
 }
 
-u8 msgwait_1(MsgWaitWork* work, void* a) {
+u8 msgwait_1(MsgWaitWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
@@ -6930,7 +6930,7 @@ u8 msgwait_1(MsgWaitWork* work, void* a) {
             m4aSongNumStart(SONG_SYS_KETTEI);
             return 0;
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateMsgwaitClosing);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateMsgwaitClosing);
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
     }
@@ -6973,8 +6973,8 @@ void msgwait_3(MsgWaitWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void msgwait_yesno_0(MsgWaitWork* work, u8* a) {
-    work->nextPosition = *a;
+void msgwait_yesno_0(MsgWaitWork* work, u8* arg) {
+    work->nextPosition = *arg;
     work->tiles = AllocObjTiles(64, NULL);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     LoadObjPaletteBank(work->palette->index, gBStatesPalette);
@@ -7009,7 +7009,7 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* a) {
     work->choiceShown = 0;
 }
 
-u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* a) {
+u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* task) {
     switch (GetKeysPressed()) {
     case DPAD_UP:
         if (work->cursor != 0) {
@@ -7065,14 +7065,14 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* a) {
     return 1;
 }
 
-u8 msgwait_yesno_1(MsgWaitWork* work, void* a) {
+u8 msgwait_yesno_1(MsgWaitWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
         AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
         work->choiceShown = 1;
         m4aSongNumStart(SONG_SYS_CANSEL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMsgwaitYesnoChoice);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMsgwaitYesnoChoice);
     }
 
     return 1;

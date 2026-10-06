@@ -37,23 +37,23 @@ void EvtObjSetAnim(EvtObj* obj, s32 anim) {
     obj->animEntry = &gEvtObjAnims[anim];
 }
 
-void EvtObjSetPos(EvtObj* obj, s32 a, s32 b, s32 c) {
-    obj->x = a;
-    obj->y = b;
-    obj->z = c;
+void EvtObjSetPos(EvtObj* obj, s32 x, s32 y, s32 z) {
+    obj->x = x;
+    obj->y = y;
+    obj->z = z;
 }
 
-void EvtObjSetGroundZ(EvtObj* obj, s32 a) {
-    obj->groundZ = a;
+void EvtObjSetGroundZ(EvtObj* obj, s32 groundZ) {
+    obj->groundZ = groundZ;
 }
 
-void CreateEvtObjTask(void* pool, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c) {
+void CreateEvtObjTask(void* pool, EvtObj* obj, s32 res, s32 anim, s32 x, s32 y, s32 z) {
     EvtObjParam param;
 
     param.res = &gEvtObjResources[res].res;
     param.obj = obj;
     EvtObjSetAnim(obj, anim);
-    EvtObjSetPos(obj, a, b, c);
+    EvtObjSetPos(obj, x, y, z);
     obj->flags = 0;
     obj->groundZ = 0;
     obj->drawFlags = SPRITE_PRIORITY(2);
@@ -63,17 +63,17 @@ void CreateEvtObjTask(void* pool, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, 
     TaskCreate(pool, &sTaskDescEvtObj, &param);
 }
 
-void EvtObjSetDrawFlags(EvtObj* obj, u16 a) {
-    obj->drawFlags = a;
+void EvtObjSetDrawFlags(EvtObj* obj, u16 flags) {
+    obj->drawFlags = flags;
 }
 
-Task* CreateEvtObjTaskWithDesc(void* pool, void* desc, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c) {
+Task* CreateEvtObjTaskWithDesc(void* pool, void* desc, EvtObj* obj, s32 res, s32 anim, s32 x, s32 y, s32 z) {
     EvtObjParam param;
 
     param.res = &gEvtObjResources[res].res;
     param.obj = obj;
     EvtObjSetAnim(obj, anim);
-    EvtObjSetPos(obj, a, b, c);
+    EvtObjSetPos(obj, x, y, z);
     obj->flags = 0;
     obj->groundZ = 0;
     obj->drawFlags = SPRITE_PRIORITY(2);

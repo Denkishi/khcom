@@ -7,31 +7,31 @@
 
 extern const void* gMsgwinMapBlocks[4];
 
-void RequestEventMode(u16 a);
-u16 InitMsgGlyphSprites(s32 a);
-u16 InitMsgGlyphSpritesAltPalette5(s32 a);
-u16 InitMsgGlyphSpritesAltPalette3(s32 a);
+void RequestEventMode(u16 eventId);
+u16 InitMsgGlyphSprites(s32 mode);
+u16 InitMsgGlyphSpritesAltPalette5(s32 mode);
+u16 InitMsgGlyphSpritesAltPalette3(s32 mode);
 #ifndef VERSION_EU
-u8 LayoutMsgGlyphsSjis(s32 a, s32 b, const u8* c);
+u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s);
 #endif
-s32 GetMsgTextWidth(const TextChar* a);
+s32 GetMsgTextWidth(const TextChar* text);
 u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s);
 void DrawMsgGlyphs(u8 n);
 void FreeMsgGlyphSprites();
 #ifdef VERSION_EU
-s16 GetTextSlotsMaxLineWidth(TextSlot* p, u8 n);
+s16 GetTextSlotsMaxLineWidth(TextSlot* slots, u8 n);
 #endif
-s32 LoadTextTileArray(TextChar* a, void** p);
-void FreeSmallFontResources(void* a, void* b);
+s32 LoadTextTileArray(TextChar* text, void** tiles);
+void FreeSmallFontResources(void* tiles, void* palette);
 u16 EncodeSmallFontString(const u8* s, u16* out);
 u16 FormatSmallFontDecimal(s32 v, u16* out);
 u16 FormatSmallFontHex(s32 v, u16* out);
-s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n);
+s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* tiles, void* palette, u16 priority, u8 n);
 void SplitFourDigits(s16 v, u8* out);
 u16 InitCardMsgGlyphSprites(s32 mode, s32 flag);
-u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);
+u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText);
 #ifndef VERSION_EU
-u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d);
+u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** nextText);
 s32 CopySjisGlyphsToVram(const TextChar* str);
 s32 CopySjisGlyphsToVramAt(const TextChar* str, u16 tile);
 #endif

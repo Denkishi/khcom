@@ -1881,37 +1881,37 @@ void StockInfo_0(StockInfoWork* work, u8* active) {
 
     switch (gGameState.progression.levelMilestone) {
     case 0:
-        LearnStock(0);
+        LearnStock(LEARNED_STOCK_SLIDING_DASH);
         break;
     case 1:
-        LearnStock(2);
+        LearnStock(LEARNED_STOCK_STUN_IMPACT);
         break;
     case 2:
-        LearnStock(4);
+        LearnStock(LEARNED_STOCK_STRIKE_RAID);
         break;
     case 3:
-        LearnStock(1);
+        LearnStock(LEARNED_STOCK_BLITZ);
         break;
     case 4:
-        LearnStock(5);
+        LearnStock(LEARNED_STOCK_SONIC_BLADE);
         break;
     case 5:
-        LearnStock(3);
+        LearnStock(LEARNED_STOCK_ZANTETSUKEN);
         break;
     case 6:
-        LearnStock(36);
+        LearnStock(LEARNED_STOCK_TORNADO);
         break;
     case 7:
-        LearnStock(6);
+        LearnStock(LEARNED_STOCK_ARS_ARCANUM);
         break;
     case 8:
-        LearnStock(46);
+        LearnStock(LEARNED_STOCK_HOLY);
         break;
     case 9:
-        LearnStock(7);
+        LearnStock(LEARNED_STOCK_RAGNAROK);
         break;
     case 10:
-        LearnStock(32);
+        LearnStock(LEARNED_STOCK_MEGA_FLARE);
         break;
     }
 }

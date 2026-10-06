@@ -594,122 +594,122 @@ void SetFriendsAfterEvent() {
     switch (sEventId) {
     case EVENT_000_1F_ENTRANCE_PART1:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_094_WONDERLAND_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_074_MONSTORO_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_088_HALLOWEEN_TOWN_E0_2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_JACK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
-        LearnStock(62);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
+        LearnStock(LEARNED_STOCK_SURPRISE);
         break;
     case EVENT_093_HALLOWEEN_TOWN_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_107_AGRABAH_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_ALADDIN);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
-        LearnStock(61);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
+        LearnStock(LEARNED_STOCK_SANDSTORM);
         break;
     case EVENT_114_AGRABAH_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_103_ATLANTICA_E2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_ARIEL);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
-        LearnStock(63);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
+        LearnStock(LEARNED_STOCK_SPIRAL_WAVE);
         break;
     case EVENT_106_ATLANTICA_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_131_HOLLOWBASTION_E2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_THE_BEAST);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
-        LearnStock(65);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
+        LearnStock(LEARNED_STOCK_FEROCIOUS_LUNGE);
         break;
     case EVENT_133_HOLLOWBASTION_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_117_NEVERLAND_E2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_116_NEVERLAND_E1:
     case EVENT_118_NEVERLAND_E3:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_PETER_PAN);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
-        LearnStock(64);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
+        LearnStock(LEARNED_STOCK_HUMMINGBIRD);
         break;
     case EVENT_119_NEVERLAND_END:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_120_COLISEUM_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_044_11F_TWILIGHT_TOWN_E0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_059_12F_GOAL_2:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_052_12F_ENTRANCE:
     case EVENT_149_RIKU_B12F_OPNING:
         gGameState.progression.friendFlags = 0;
-        LearnStock(57);
-        LearnStock(59);
-        LearnStock(60);
+        LearnStock(LEARNED_STOCK_MAGIC);
+        LearnStock(LEARNED_STOCK_GOOFY_CHARGE);
+        LearnStock(LEARNED_STOCK_GOOFY_TORNADO);
         break;
     case EVENT_155_RIKU_B12F_GOAL:
         gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
-        LearnStock(69);
+        LearnStock(LEARNED_STOCK_MM_MIRACLE);
         break;
     case EVENT_174_RIKU_B4F_GOAL_3:
     case EVENT_186_RIKU_B2F_E0:
@@ -721,9 +721,9 @@ void SetFriendsAfterEvent() {
         break;
     case EVENT_156_RIKU_B12F_GOAL_2:
         gGameState.flags &= ~GAME_FLAG_DARK_POINTS_LOCKED;
-        LearnStock(66);
-        LearnStock(67);
-        LearnStock(68);
+        LearnStock(LEARNED_STOCK_DARK_BREAK);
+        LearnStock(LEARNED_STOCK_DARK_FIRAGA);
+        LearnStock(LEARNED_STOCK_DARK_AURA);
         break;
     }
 }
@@ -872,22 +872,22 @@ void UnlockCardKindsAfterEvent() {
         SetCardKindObtained(0);
         break;
     case EVENT_136_100ACREWOOD_LV1:
-        LearnStock(41);
+        LearnStock(LEARNED_STOCK_CONFUSE);
         break;
     case EVENT_140_100ACREWOOD_LV4:
-        LearnStock(40);
+        LearnStock(LEARNED_STOCK_BIND);
         break;
     case EVENT_141_100ACREWOOD_LV5:
-        LearnStock(50);
+        LearnStock(LEARNED_STOCK_IDYLL_ROMP);
         break;
     case EVENT_142_100ACREWOOD_LV6:
-        LearnStock(43);
+        LearnStock(LEARNED_STOCK_SYNCHRO);
         break;
     case EVENT_034_8F_GOAL_2:
-        LearnStock(38);
+        LearnStock(LEARNED_STOCK_WARPINATOR);
         break;
     case EVENT_088_HALLOWEEN_TOWN_E0_2:
-        LearnStock(42);
+        LearnStock(LEARNED_STOCK_TERROR);
         break;
     case EVENT_108_AGRABAH_E0_2:
         SetCardKindObtained(1);
@@ -917,7 +917,7 @@ void UnlockCardKindsAfterEvent() {
         SetCardKindObtained(13);
         break;
     case EVENT_061_13F_ENTRANCE:
-        LearnStock(8);
+        LearnStock(LEARNED_STOCK_TRINITY_LIMIT);
         break;
     case EVENT_067_13F_CASTLE_OBLIVION_LAST2:
         SetCardKindObtained(15);

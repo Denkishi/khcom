@@ -706,85 +706,85 @@ s16 ObtainCard(u16 cardId) {
         break;
     case CARD_KIND_FIRE:
         SetCardKindObtained(17);
-        LearnStock(9);
-        LearnStock(10);
+        LearnStock(LEARNED_STOCK_FIRA);
+        LearnStock(LEARNED_STOCK_FIRAGA);
         SetJiminyFlag(136);
         break;
     case CARD_KIND_BLIZZARD:
         SetCardKindObtained(18);
-        LearnStock(11);
-        LearnStock(12);
+        LearnStock(LEARNED_STOCK_BLIZZARA);
+        LearnStock(LEARNED_STOCK_BLIZZAGA);
         SetJiminyFlag(137);
         break;
     case CARD_KIND_THUNDER:
         SetCardKindObtained(19);
-        LearnStock(13);
-        LearnStock(14);
+        LearnStock(LEARNED_STOCK_THUNDARA);
+        LearnStock(LEARNED_STOCK_THUNDAGA);
         SetJiminyFlag(138);
         break;
     case CARD_KIND_CURE:
         SetCardKindObtained(20);
-        LearnStock(15);
-        LearnStock(16);
+        LearnStock(LEARNED_STOCK_CURA);
+        LearnStock(LEARNED_STOCK_CURAGA);
         SetJiminyFlag(139);
         break;
     case CARD_KIND_GRAVITY:
         SetCardKindObtained(21);
-        LearnStock(17);
-        LearnStock(18);
+        LearnStock(LEARNED_STOCK_GRAVIRA);
+        LearnStock(LEARNED_STOCK_GRAVIGA);
         SetJiminyFlag(140);
         break;
     case CARD_KIND_STOP:
         SetCardKindObtained(22);
-        LearnStock(19);
-        LearnStock(20);
+        LearnStock(LEARNED_STOCK_STOPRA);
+        LearnStock(LEARNED_STOCK_STOPGA);
         SetJiminyFlag(141);
         break;
     case CARD_KIND_AERO:
         SetCardKindObtained(23);
-        LearnStock(21);
-        LearnStock(22);
+        LearnStock(LEARNED_STOCK_AERORA);
+        LearnStock(LEARNED_STOCK_AEROGA);
         SetJiminyFlag(142);
         break;
     case CARD_KIND_SIMBA:
         SetCardKindObtained(24);
-        LearnStock(47);
+        LearnStock(LEARNED_STOCK_PROUD_ROAR);
         SetJiminyFlag(143);
         SetJiminyFlag(23);
         break;
     case CARD_KIND_GENIE:
         SetCardKindObtained(25);
-        LearnStock(52);
+        LearnStock(LEARNED_STOCK_SHOWTIME);
         SetJiminyFlag(144);
         break;
     case CARD_KIND_BAMBI:
         SetCardKindObtained(26);
-        LearnStock(49);
-        LearnStock(50);
+        LearnStock(LEARNED_STOCK_PARADISE);
+        LearnStock(LEARNED_STOCK_IDYLL_ROMP);
         SetJiminyFlag(145);
         SetJiminyFlag(25);
         break;
     case CARD_KIND_DUMBO:
         SetCardKindObtained(27);
-        LearnStock(48);
+        LearnStock(LEARNED_STOCK_SPLASH);
         SetJiminyFlag(146);
         SetJiminyFlag(24);
         break;
     case CARD_KIND_TINKER_BELL:
         SetCardKindObtained(28);
-        LearnStock(53);
+        LearnStock(LEARNED_STOCK_TWINKLE);
         SetJiminyFlag(147);
         break;
     case CARD_KIND_MUSHU:
         SetCardKindObtained(29);
-        LearnStock(51);
+        LearnStock(LEARNED_STOCK_FLARE_BREATH);
         SetJiminyFlag(148);
         SetJiminyFlag(26);
         break;
     case CARD_KIND_CLOUD:
         SetCardKindObtained(30);
-        LearnStock(54);
-        LearnStock(55);
+        LearnStock(LEARNED_STOCK_CROSS_SLASH);
+        LearnStock(LEARNED_STOCK_OMNISLASH);
         SetJiminyFlag(149);
         break;
     case CARD_KIND_POTION:

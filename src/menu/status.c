@@ -908,149 +908,149 @@ void* LoadStockNameTiles(u16 stock) {
 
 s32 GetStatusItemStockIndex(s32 item) {
     switch (item) {
-    case 1:
+    case LEARNED_STOCK_BLITZ:
         return STOCK_BLITZ;
-    case 5:
+    case LEARNED_STOCK_SONIC_BLADE:
         return STOCK_SONIC_BLADE;
-    case 6:
+    case LEARNED_STOCK_ARS_ARCANUM:
         return STOCK_ARS_ARCANUM;
-    case 4:
+    case LEARNED_STOCK_STRIKE_RAID:
         return STOCK_STRIKE_RAID;
-    case 7:
+    case LEARNED_STOCK_RAGNAROK:
         return STOCK_RAGNAROK;
-    case 8:
+    case LEARNED_STOCK_TRINITY_LIMIT:
         return STOCK_TRINITY_LIMIT;
-    case 0:
+    case LEARNED_STOCK_SLIDING_DASH:
         return STOCK_SLIDING_DASH;
-    case 2:
+    case LEARNED_STOCK_STUN_IMPACT:
         return STOCK_STUN_IMPACT;
-    case 3:
+    case LEARNED_STOCK_ZANTETSUKEN:
         return STOCK_ZANTETSUKEN;
-    case 39:
+    case LEARNED_STOCK_WARP:
         return STOCK_WARP;
-    case 38:
+    case LEARNED_STOCK_WARPINATOR:
         return STOCK_WARPINATOR;
-    case 42:
+    case LEARNED_STOCK_TERROR:
         return STOCK_TERROR;
-    case 41:
+    case LEARNED_STOCK_CONFUSE:
         return STOCK_CONFUSE;
-    case 70:
+    case LEARNED_STOCK_SLEIGHT_57:
         return STOCK_SLEIGHT_57;
-    case 27:
+    case LEARNED_STOCK_STOP_RAID:
         return STOCK_STOP_RAID;
-    case 28:
+    case LEARNED_STOCK_JUDGMENT:
         return STOCK_JUDGMENT;
-    case 29:
+    case LEARNED_STOCK_REFLECT_RAID:
         return STOCK_REFLECT_RAID;
-    case 23:
+    case LEARNED_STOCK_FIRE_RAID:
         return STOCK_FIRE_RAID;
-    case 24:
+    case LEARNED_STOCK_BLIZZARD_RAID:
         return STOCK_BLIZZARD_RAID;
-    case 25:
+    case LEARNED_STOCK_THUNDER_RAID:
         return STOCK_THUNDER_RAID;
-    case 26:
+    case LEARNED_STOCK_GRAVITY_RAID:
         return STOCK_GRAVITY_RAID;
-    case 34:
+    case LEARNED_STOCK_AQUA_SPLASH:
         return STOCK_AQUA_SPLASH;
-    case 46:
+    case LEARNED_STOCK_HOLY:
         return STOCK_HOLY;
-    case 58:
+    case LEARNED_STOCK_BLAZING_DONALD:
         return STOCK_BLAZING_DONALD;
-    case 71:
+    case LEARNED_STOCK_SLEIGHT_68:
         return STOCK_SLEIGHT_68;
-    case 44:
+    case LEARNED_STOCK_GIFTED_MIRACLE:
         return STOCK_GIFTED_MIRACLE;
-    case 32:
+    case LEARNED_STOCK_MEGA_FLARE:
         return STOCK_MEGA_FLARE;
-    case 31:
+    case LEARNED_STOCK_FIRAGA_BREAK:
         return STOCK_FIRAGA_BREAK;
-    case 35:
+    case LEARNED_STOCK_SHOCK_IMPACT:
         return STOCK_SHOCK_IMPACT;
-    case 50:
+    case LEARNED_STOCK_IDYLL_ROMP:
         return STOCK_IDYLL_ROMP;
-    case 56:
+    case LEARNED_STOCK_CROSS_SLASH_PLUS:
         return STOCK_CROSS_SLASH_PLUS;
-    case 30:
+    case LEARNED_STOCK_HOMING_FIRA:
         return STOCK_HOMING_FIRA;
-    case 33:
+    case LEARNED_STOCK_HOMING_BLIZZARA:
         return STOCK_HOMING_BLIZZARA;
-    case 43:
+    case LEARNED_STOCK_SYNCHRO:
         return STOCK_SYNCHRO;
-    case 40:
+    case LEARNED_STOCK_BIND:
         return STOCK_BIND;
-    case 36:
+    case LEARNED_STOCK_TORNADO:
         return STOCK_TORNADO;
-    case 37:
+    case LEARNED_STOCK_QUAKE:
         return STOCK_QUAKE;
-    case 45:
+    case LEARNED_STOCK_TELEPORT:
         return STOCK_TELEPORT;
-    case 9:
+    case LEARNED_STOCK_FIRA:
         return STOCK_FIRA;
-    case 11:
+    case LEARNED_STOCK_BLIZZARA:
         return STOCK_BLIZZARA;
-    case 13:
+    case LEARNED_STOCK_THUNDARA:
         return STOCK_THUNDARA;
-    case 15:
+    case LEARNED_STOCK_CURA:
         return STOCK_CURA;
-    case 17:
+    case LEARNED_STOCK_GRAVIRA:
         return STOCK_GRAVIRA;
-    case 19:
+    case LEARNED_STOCK_STOPRA:
         return STOCK_STOPRA;
-    case 21:
+    case LEARNED_STOCK_AERORA:
         return STOCK_AERORA;
-    case 10:
+    case LEARNED_STOCK_FIRAGA:
         return STOCK_FIRAGA;
-    case 12:
+    case LEARNED_STOCK_BLIZZAGA:
         return STOCK_BLIZZAGA;
-    case 14:
+    case LEARNED_STOCK_THUNDAGA:
         return STOCK_THUNDAGA;
-    case 16:
+    case LEARNED_STOCK_CURAGA:
         return STOCK_CURAGA;
-    case 18:
+    case LEARNED_STOCK_GRAVIGA:
         return STOCK_GRAVIGA;
-    case 20:
+    case LEARNED_STOCK_STOPGA:
         return STOCK_STOPGA;
-    case 22:
+    case LEARNED_STOCK_AEROGA:
         return STOCK_AEROGA;
-    case 47:
+    case LEARNED_STOCK_PROUD_ROAR:
         return STOCK_PROUD_ROAR;
-    case 52:
+    case LEARNED_STOCK_SHOWTIME:
         return STOCK_SHOWTIME;
-    case 53:
+    case LEARNED_STOCK_TWINKLE:
         return STOCK_TWINKLE;
-    case 51:
+    case LEARNED_STOCK_FLARE_BREATH:
         return STOCK_FLARE_BREATH;
-    case 55:
+    case LEARNED_STOCK_OMNISLASH:
         return STOCK_OMNISLASH;
-    case 49:
+    case LEARNED_STOCK_PARADISE:
         return STOCK_PARADISE;
-    case 48:
+    case LEARNED_STOCK_SPLASH:
         return STOCK_SPLASH;
-    case 57:
+    case LEARNED_STOCK_MAGIC:
         return STOCK_MAGIC;
-    case 59:
+    case LEARNED_STOCK_GOOFY_CHARGE:
         return STOCK_GOOFY_CHARGE;
-    case 60:
+    case LEARNED_STOCK_GOOFY_TORNADO:
         return STOCK_GOOFY_TORNADO;
-    case 61:
+    case LEARNED_STOCK_SANDSTORM:
         return STOCK_SANDSTORM;
-    case 62:
+    case LEARNED_STOCK_SURPRISE:
         return STOCK_SURPRISE;
-    case 63:
+    case LEARNED_STOCK_SPIRAL_WAVE:
         return STOCK_SPIRAL_WAVE;
-    case 64:
+    case LEARNED_STOCK_HUMMINGBIRD:
         return STOCK_HUMMINGBIRD;
-    case 65:
+    case LEARNED_STOCK_FEROCIOUS_LUNGE:
         return STOCK_FEROCIOUS_LUNGE;
-    case 66:
+    case LEARNED_STOCK_DARK_BREAK:
         return STOCK_DARK_BREAK;
-    case 67:
+    case LEARNED_STOCK_DARK_FIRAGA:
         return STOCK_DARK_FIRAGA;
-    case 68:
+    case LEARNED_STOCK_DARK_AURA:
         return STOCK_DARK_AURA;
-    case 54:
+    case LEARNED_STOCK_CROSS_SLASH:
         return STOCK_CROSS_SLASH;
-    case 69:
+    case LEARNED_STOCK_MM_MIRACLE:
         return STOCK_MM_MIRACLE;
     case 72:
         return 0xFFFF;

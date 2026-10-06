@@ -39,8 +39,8 @@ static const s16 sRikuReloadChildOffsetX[4] = { -16, -29, -42, -51 };
 
 static const s16 sReloadChildOffsetY[4] = { 0, 0, 0, 24 };
 
-void RELOAD_CHILDREN_0(ReloadChildWork* work, ReloadChildArgs* a) {
-    work->args = *a;
+void RELOAD_CHILDREN_0(ReloadChildWork* work, ReloadChildArgs* args) {
+    work->args = *args;
     work->tiles = LoadObjTiles(gReloadChildTiles[work->args.listIndex], 128);
     work->palette = LoadObjPalette(gCard00Palette, 32);
     work->tiles2 = NULL;
@@ -73,7 +73,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* work, ReloadChildArgs* a) {
     work->retractTimer = 0;
 }
 
-u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* a) {
+u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* task) {
     u8 (*fn)(ReloadChildWork*, void*);
 
     if (work->args.flags & RELOAD_CHILD_FLAG_IDLE) {
@@ -82,8 +82,8 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* a) {
         if (work->retractTimer == 30) {
             work->steps = 8;
             fn = UpdateReloadChildRetracted;
-            SetTaskUpdate(a, (TaskUpdateFunc)fn);
-            return fn(work, a);
+            SetTaskUpdate(task, (TaskUpdateFunc)fn);
+            return fn(work, task);
         }
     }
 
@@ -108,7 +108,7 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* a) {
         work->tiles2 = LoadObjTiles(gCardBacks[work->args.listIndex].tiles2, 0xD00);
         work->steps = 8;
         work->scale = 0x66;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadChildAbsorb);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateReloadChildAbsorb);
         return 1;
     }
 
@@ -120,7 +120,7 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateReloadChildRetracted(ReloadChildWork* work, void* a) {
+u8 UpdateReloadChildRetracted(ReloadChildWork* work, void* task) {
     u8 (*f)(ReloadChildWork*, void*);
     u16 v;
 
@@ -129,9 +129,9 @@ u8 UpdateReloadChildRetracted(ReloadChildWork* work, void* a) {
     if (v == 0) {
         work->steps = 8;
         f = RELOAD_CHILDREN_1;
-        SetTaskUpdate(a, (TaskUpdateFunc)f);
+        SetTaskUpdate(task, (TaskUpdateFunc)f);
         work->retractTimer = 0;
-        return f(work, a);
+        return f(work, task);
     }
 
     switch (work->args.side) {
@@ -193,14 +193,14 @@ void RELOAD_CHILDREN_3(ReloadChildWork* work) {
     }
 }
 
-void REV_COUNT_0(RevCountWork* work, RevCountArgs* a) {
+void REV_COUNT_0(RevCountWork* work, RevCountArgs* args) {
     s16* count;
     s16* count2;
     void** row;
     u8 idx;
 
     CpuFill32(0, work, sizeof(RevCountWork));
-    work->args = *a;
+    work->args = *args;
     idx = work->args.list;
     work->list = idx;
     work->tiles = AllocSpriteFrameTiles(320);
@@ -248,7 +248,7 @@ void REV_COUNT_0(RevCountWork* work, RevCountArgs* a) {
     work->steps = 8;
 }
 
-u8 REV_COUNT_1(RevCountWork* work, void* a) {
+u8 REV_COUNT_1(RevCountWork* work, void* task) {
     s16* count;
     void** row;
 
@@ -265,9 +265,9 @@ u8 REV_COUNT_1(RevCountWork* work, void* a) {
 
                 work->steps = 8;
                 f = UpdateRevCountEmpty;
-                SetTaskUpdate(a, (TaskUpdateFunc)f);
+                SetTaskUpdate(task, (TaskUpdateFunc)f);
                 work->shownCount = *work->args.count;
-                return f(work, a);
+                return f(work, task);
             }
         } else {
             if (*count >= 1 && *count <= 99) {
@@ -279,9 +279,9 @@ u8 REV_COUNT_1(RevCountWork* work, void* a) {
 
                 work->steps = 8;
                 f = UpdateRevCountEmpty;
-                SetTaskUpdate(a, (TaskUpdateFunc)f);
+                SetTaskUpdate(task, (TaskUpdateFunc)f);
                 work->shownCount = *work->args.count;
-                return f(work, a);
+                return f(work, task);
             }
         }
 
@@ -291,9 +291,9 @@ u8 REV_COUNT_1(RevCountWork* work, void* a) {
 
         work->steps = 8;
         f = UpdateRevCountEmpty;
-        SetTaskUpdate(a, (TaskUpdateFunc)f);
+        SetTaskUpdate(task, (TaskUpdateFunc)f);
         work->shownCount = *work->args.count;
-        return f(work, a);
+        return f(work, task);
     }
 
     switch (work->args.side) {
@@ -313,19 +313,19 @@ u8 REV_COUNT_1(RevCountWork* work, void* a) {
         u8 (*f)(RevCountWork*, void*);
 
         f = (u8 (*)(RevCountWork*, void*))UpdateRevCountListChanged;
-        SetTaskUpdate(a, (TaskUpdateFunc)f);
+        SetTaskUpdate(task, (TaskUpdateFunc)f);
         work->steps = 8;
-        return f(work, a);
+        return f(work, task);
     }
 
     if (gBtlWork->phase == 4) {
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateRevCountHidden);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateRevCountHidden);
     }
 
     if (*work->args.visible == 0) {
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateRevCountHidden);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateRevCountHidden);
     }
 
     return 1;
@@ -352,7 +352,7 @@ u8 UpdateRevCountListChanged(RevCountWork* work) {
     return 1;
 }
 
-u8 UpdateRevCountHidden(RevCountWork* work, void* a) {
+u8 UpdateRevCountHidden(RevCountWork* work, void* task) {
     u8 (*f)(RevCountWork*, void*);
 
     switch (work->args.side) {
@@ -373,14 +373,14 @@ u8 UpdateRevCountHidden(RevCountWork* work, void* a) {
     if (*work->args.visible == 1) {
         work->steps = 8;
         f = REV_COUNT_1;
-        SetTaskUpdate(a, (TaskUpdateFunc)f);
-        return f(work, a);
+        SetTaskUpdate(task, (TaskUpdateFunc)f);
+        return f(work, task);
     }
 
     return 1;
 }
 
-u8 UpdateRevCountEmpty(RevCountWork* work, void* a) {
+u8 UpdateRevCountEmpty(RevCountWork* work, void* task) {
     u8 (*f)(RevCountWork*, void*);
 
     switch (work->args.side) {
@@ -401,16 +401,16 @@ u8 UpdateRevCountEmpty(RevCountWork* work, void* a) {
         if (work->list == 0) {
             if (*work->args.count > 1) {
                 f = REV_COUNT_1;
-                SetTaskUpdate(a, (TaskUpdateFunc)f);
+                SetTaskUpdate(task, (TaskUpdateFunc)f);
                 work->steps = 8;
-                return f(work, a);
+                return f(work, task);
             }
         } else {
             if (*work->args.count > 0) {
                 f = REV_COUNT_1;
-                SetTaskUpdate(a, (TaskUpdateFunc)f);
+                SetTaskUpdate(task, (TaskUpdateFunc)f);
                 work->steps = 8;
-                return f(work, a);
+                return f(work, task);
             }
         }
 
@@ -433,22 +433,22 @@ void REV_COUNT_3(RevCountWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void CreateREVCOUNTTask(void* pool, u8* a, s16* b, u8* c, u8 d) {
+void CreateREVCOUNTTask(void* pool, u8* shownList, s16* count, u8* visible, u8 side) {
     RevCountArgs args;
 
-    c[0] = 1;
-    args.shownList = a;
-    args.count = b;
-    args.visible = c;
-    args.list = a[0];
-    args.side = d;
+    visible[0] = 1;
+    args.shownList = shownList;
+    args.count = count;
+    args.visible = visible;
+    args.list = shownList[0];
+    args.side = side;
     TaskCreate(pool, &gTaskDescREVCOUNT, &args);
 }
 
-void RELOAD_0(ReloadWork* work, ReloadArgs* a) {
+void RELOAD_0(ReloadWork* work, ReloadArgs* args) {
     work->tiles = AllocObjTiles(0xA0, NULL);
     work->palette = LoadObjPalette(gCard00Palette, 32);
-    work->args = *a;
+    work->args = *args;
     SetObjTileSource(work->tiles, gReloadTiles[work->args.slot]);
     AnimInit(&work->anim, gReloadAnims[work->args.slot], gReloadFrames[work->args.slot]);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -468,7 +468,7 @@ void RELOAD_0(ReloadWork* work, ReloadArgs* a) {
     work->steps = 6;
 }
 
-u8 RELOAD_1(ReloadWork* work, void* a) {
+u8 RELOAD_1(ReloadWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
 
     switch (work->args.mode) {
@@ -486,12 +486,12 @@ u8 RELOAD_1(ReloadWork* work, void* a) {
 
     if (*work->args.state == 0) {
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadSlideOut);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateReloadSlideOut);
     }
 
     if (gBtlWork->phase == 4) {
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadSlideOut);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateReloadSlideOut);
     }
 
     return 1;
@@ -571,7 +571,7 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     gBtlWork->prizeCount++;
 }
 
-u8 PrizeBoss_1(BossPrizeWork* work, void* a) {
+u8 PrizeBoss_1(BossPrizeWork* work, void* task) {
     s16 x;
     s16 y;
 
@@ -610,7 +610,7 @@ u8 PrizeBoss_1(BossPrizeWork* work, void* a) {
             InitRikuDeckForWorld(gGameState.world);
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeFlight);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateBossPrizeFlight);
         WorldToScreen(&x, &y, work->posX, work->posY, work->posZ);
         work->posX = x << 8;
         work->posY = y << 8;
@@ -710,7 +710,7 @@ void AimBossPrizeAtCenter(BossPrizeWork* work) {
     work->vz = 2;
 }
 
-u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* a) {
+u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* task) {
     s32 dx;
     s32 dy;
     u8 z;
@@ -730,7 +730,7 @@ u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* a) {
         if (work->distance <= 0x7FF) {
             work->steps = 0;
             work->rotation = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeShow);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateBossPrizeShow);
 #ifdef VERSION_EU
             CreateCardNameDisplay(&work->tasks, GetLocalizedString(gCardDefs[work->cardId].name));
 #else
@@ -765,7 +765,7 @@ u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateBossPrizeShow(BossPrizeWork* work, void* a) {
+u8 UpdateBossPrizeShow(BossPrizeWork* work, void* task) {
     s32 v;
     u16 t;
     s32 c;
@@ -798,12 +798,12 @@ u8 UpdateBossPrizeShow(BossPrizeWork* work, void* a) {
     if ((u32)work->cardId > 0x1C2) {
         if (work->holdTimer == 120) {
             work->holdTimer = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeShrink);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateBossPrizeShrink);
         }
     } else {
         if (work->holdTimer == 30) {
             work->holdTimer = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeShrink);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateBossPrizeShrink);
         }
     }
 
@@ -863,16 +863,16 @@ void SpawnBossPrizeCardEffects(BossPrizeWork* work) {
     }
 }
 
-void Card_EFFECT_0(CardEffectWork* work, CardEffectArgs* a) {
-    work->args = *a;
+void Card_EFFECT_0(CardEffectWork* work, CardEffectArgs* args) {
+    work->args = *args;
 
     if (!work->args.screenSpace) {
-        work->posX = a->x + ((GetRandom() % 9 - 4) << 8);
-        work->posY = a->y;
-        work->posZ = a->z - 0x800;
+        work->posX = args->x + ((GetRandom() % 9 - 4) << 8);
+        work->posY = args->y;
+        work->posZ = args->z - 0x800;
     } else {
-        work->posX = a->x + ((GetRandom() % 33 - 16) << 8);
-        work->posY = a->y - 0x1000;
+        work->posX = args->x + ((GetRandom() % 33 - 16) << 8);
+        work->posY = args->y - 0x1000;
         work->posZ = 0;
     }
 
@@ -990,14 +990,14 @@ void func_08099FE8(ScrollBarWork* work, u16 b, u8 c) {
     }
 }
 
-ScrollBarWork* CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 d, u16 e) {
+ScrollBarWork* CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 position, u16 remaining) {
     u16 args[5];
 
     args[0] = a;
     args[1] = b;
     args[2] = c;
-    args[3] = d;
-    args[4] = e;
+    args[3] = position;
+    args[4] = remaining;
     return TaskCreate(pool, &gTaskDescScrollbar, args)->work;
 }
 

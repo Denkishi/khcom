@@ -96,7 +96,7 @@ void* ColliderGetPool(u32 type);
 void HandleSoraCardInput();
 void HandleTutorialCardInput();
 void SetEnemyKindFlags(BtlObj* obj);
-void CreateHeartlessCardTask(void* p, s16 x, s16 y, s16 z, u16 n);
+void CreateHeartlessCardTask(void* pool, s16 x, s16 y, s16 z, u16 kind);
 void BgFxReset();
 void BgFxUpdateBase();
 void FieldTransitionInit();
@@ -205,7 +205,7 @@ u8 BgFxIsBlocked(u8 priority);
 
 u8 ColliderIsColliding(Collider* collider);
 s32 ApplyBtlObjHit(BtlObj* obj);
-void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d);
+void CreateGimmickCardTask(void* pool, s16 x, s16 y, s16 z, u16 cardId);
 
 typedef struct BtlPrizeArgs {
     s32 x;

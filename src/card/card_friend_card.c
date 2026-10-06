@@ -207,7 +207,7 @@ void StartPickupCardFlight(PickupCardWork* work, u8 kind) {
     work->vz = 2;
 }
 
-s32 Friend_card_1(PickupCardWork* work, void* a) {
+s32 Friend_card_1(PickupCardWork* work, void* task) {
     s16 sx;
     s32 t;
     u16 n;
@@ -268,7 +268,7 @@ s32 Friend_card_1(PickupCardWork* work, void* a) {
 #ifdef VERSION_EU
             work->visible = 1;
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)FlyPickupCardToDeck);
+            SetTaskUpdate(task, (TaskUpdateFunc)FlyPickupCardToDeck);
         }
 
         return 1;
@@ -315,7 +315,7 @@ s32 Friend_card_1(PickupCardWork* work, void* a) {
     return 1;
 }
 
-s32 Gimmick_card_1(PickupCardWork* work, void* a) {
+s32 Gimmick_card_1(PickupCardWork* work, void* task) {
     s16 sx;
     s32 t;
     u16 n;
@@ -376,7 +376,7 @@ s32 Gimmick_card_1(PickupCardWork* work, void* a) {
 #ifdef VERSION_EU
             work->visible = 1;
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)FlyPickupCardToDeck);
+            SetTaskUpdate(task, (TaskUpdateFunc)FlyPickupCardToDeck);
         }
 
         return 1;
@@ -494,18 +494,18 @@ u8 FlyHeartlessCardToPlayer(PickupCardWork* work) {
     return 1;
 }
 
-s32 WaitHeartlessCardName(PickupCardWork* work, void* a) {
+s32 WaitHeartlessCardName(PickupCardWork* work, void* task) {
     work->timer += 1;
 
     if (work->timer == 60) {
-        SetTaskUpdate(a, (TaskUpdateFunc)FlyHeartlessCardToPlayer);
+        SetTaskUpdate(task, (TaskUpdateFunc)FlyHeartlessCardToPlayer);
     }
 
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* a) {
+s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* task) {
     s32 dx = 0;
     s32 dy = 0;
     u16 t;
@@ -530,7 +530,7 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* a) {
 #else
             CreateCardNameDisplay(&work->tasks, gCardDefs[work->cardId].name);
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)WaitHeartlessCardName);
+            SetTaskUpdate(task, (TaskUpdateFunc)WaitHeartlessCardName);
             work->timer = 0;
             work->priority = 50;
             return 1;
@@ -566,7 +566,7 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* a) {
     return 1;
 }
 
-s32 Heartless_card_1(PickupCardWork* work, void* a) {
+s32 Heartless_card_1(PickupCardWork* work, void* task) {
     s16 x;
     s16 y;
 
@@ -612,7 +612,7 @@ s32 Heartless_card_1(PickupCardWork* work, void* a) {
         work->screenSpace = 1;
         ColliderSetDisabled(&work->collider, 1);
         StartPickupCardFlight(work, 1);
-        SetTaskUpdate(a, (TaskUpdateFunc)FlyHeartlessCardToCenter);
+        SetTaskUpdate(task, (TaskUpdateFunc)FlyHeartlessCardToCenter);
         return 1;
     }
 
@@ -774,27 +774,27 @@ void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx) {
     }
 }
 
-void CreateHeartlessCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
+void CreateHeartlessCardTask(void* pool, s16 x, s16 y, s16 z, u16 kind) {
     s32 args[4];
     const s32* t;
 
-    t = gEnemyCardIds[d];
-    args[0] = a << 8;
-    args[1] = b << 8;
-    args[2] = c << 8;
+    t = gEnemyCardIds[kind];
+    args[0] = x << 8;
+    args[1] = y << 8;
+    args[2] = z << 8;
     args[3] = t[0];
     TaskCreate(pool, &gTaskDescHeartlessCard, args);
 }
 
-void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
+void CreateGimmickCardTask(void* pool, s16 x, s16 y, s16 z, u16 cardId) {
     s32 args[4];
 
     if (gCardBattleState != NULL && gCardBattleState->gimmickCardCount == 0) {
         gCardBattleState->gimmickCardCount++;
-        args[0] = a << 8;
-        args[1] = b << 8;
-        args[2] = c << 8;
-        args[3] = d;
+        args[0] = x << 8;
+        args[1] = y << 8;
+        args[2] = z << 8;
+        args[3] = cardId;
         TaskCreate(pool, &gTaskDescGimmickCard, args);
     }
 }
@@ -1139,7 +1139,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
     work->bottomY = 0xA000;
 }
 
-u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* a) {
+u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
     PremireChanceCardWork* n;
     s32 t;
     s32 z;
@@ -1154,7 +1154,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* a) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             work->titleSteps = 16;
             work->slideSteps = 16;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceClose);
             n = ListPoolFirst(&gCardListWork->cards);
 
             while (n != NULL) {
@@ -1195,7 +1195,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* a) {
         }
     } else {
         work->cursorHidden = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceStop);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceStop);
     }
 
     if (work->spinDelay == 4 || work->spinDelay == 10) {
@@ -1219,7 +1219,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* a) {
     return 1;
 }
 
-u8 Premire_Chance_1(PremireChanceWork* work, void* a) {
+u8 Premire_Chance_1(PremireChanceWork* work, void* task) {
     s32 v;
     u8* p;
     PremireChanceCardWork* n;
@@ -1227,7 +1227,7 @@ u8 Premire_Chance_1(PremireChanceWork* work, void* a) {
     n = ListPoolFirst(&gCardListWork->cards);
 
     if (n != NULL && n->state == 1) {
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceSpin);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceSpin);
     }
 
     p = &work->slideSteps;
@@ -1299,7 +1299,7 @@ void CreatePremireChanceCardTasks(PremireChanceWork* work) {
     }
 }
 
-u8 UpdatePremireChanceStop(PremireChanceWork* work, void* a) {
+u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
     PremireChanceCardWork* n;
     TaskPool* pool;
     u8 z;
@@ -1352,7 +1352,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* a) {
         FadeSetPaletteExcluded(14, 1);
         FadeSetPaletteExcluded(15, 1);
         TaskCreate(pool, &gTaskDescCardName, NULL);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceResult);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceResult);
     }
 
     TaskPoolUpdate(pool);
@@ -1360,7 +1360,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* a) {
     return 1;
 }
 
-u8 UpdatePremireChanceResult(PremireChanceWork* work, void* a) {
+u8 UpdatePremireChanceResult(PremireChanceWork* work, void* task) {
     ListPoolFirst(&gCardListWork->cards);
     BgAnimUpdate();
     work->gfx = AnimUpdate(&work->anim);
@@ -1375,7 +1375,7 @@ u8 UpdatePremireChanceResult(PremireChanceWork* work, void* a) {
     ) {
         work->titleSteps = 16;
         work->slideSteps = 16;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceClose);
     }
 
 #ifdef VERSION_EU
@@ -1387,7 +1387,7 @@ u8 UpdatePremireChanceResult(PremireChanceWork* work, void* a) {
     return 1;
 }
 
-u8 UpdatePremireChanceClose(PremireChanceWork* work, void* a) {
+u8 UpdatePremireChanceClose(PremireChanceWork* work, void* task) {
     s32 v;
     u8* p;
 

@@ -235,10 +235,10 @@ void BosGaRequestState(GaWork* work, s32 state) {
     }
 }
 
-s32 BosGaEntryOffsetX(GaWork* work, s16 i) {
+s32 BosGaEntryOffsetX(GaWork* work, s16 index) {
     s32 v;
 
-    v = sGaEntryDefs[i].offsetX;
+    v = sGaEntryDefs[index].offsetX;
 
     if (work->flipped) {
         v = -v;
@@ -247,27 +247,27 @@ s32 BosGaEntryOffsetX(GaWork* work, s16 i) {
     return v;
 }
 
-s32 BosGaEntryOffsetY(GaWork* work, s16 i) {
-    return sGaEntryDefs[i].offsetY;
+s32 BosGaEntryOffsetY(GaWork* work, s16 index) {
+    return sGaEntryDefs[index].offsetY;
 }
 
-s32 BosGaEntryHomeX(GaWork* work, s16 i) {
-    return BosGaEntryOffsetX(work, i) + gBtlWork->bossX;
+s32 BosGaEntryHomeX(GaWork* work, s16 index) {
+    return BosGaEntryOffsetX(work, index) + gBtlWork->bossX;
 }
 
-s32 BosGaEntryHomeY(GaWork* work, s16 i) {
-    return BosGaEntryOffsetY(work, i) + gBtlWork->bossY;
+s32 BosGaEntryHomeY(GaWork* work, s16 index) {
+    return BosGaEntryOffsetY(work, index) + gBtlWork->bossY;
 }
 
-s32 BosGaEntryHomeZ(GaWork* work, s16 i) {
-    return sGaEntryDefs[i].offsetZ + gBtlWork->bossZ;
+s32 BosGaEntryHomeZ(GaWork* work, s16 index) {
+    return sGaEntryDefs[index].offsetZ + gBtlWork->bossZ;
 }
 
-void BosGaEntryResetHome(GaWork* work, s32 i) {
+void BosGaEntryResetHome(GaWork* work, s32 index) {
     GaEntryWork* e;
     s32 v;
 
-    e = &work->entries[i];
+    e = &work->entries[index];
 
     if (!work->flipped) {
         e->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -275,19 +275,19 @@ void BosGaEntryResetHome(GaWork* work, s32 i) {
         e->actor.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     }
 
-    e->offsetX = BosGaEntryOffsetX(work, i);
-    e->offsetY = BosGaEntryOffsetY(work, i);
-    e->baseX = BosGaEntryHomeX(work, i);
-    e->baseY = BosGaEntryHomeY(work, i);
-    e->baseZ = BosGaEntryHomeZ(work, i);
-    v = sGaEntryDefs[i].x2;
+    e->offsetX = BosGaEntryOffsetX(work, index);
+    e->offsetY = BosGaEntryOffsetY(work, index);
+    e->baseX = BosGaEntryHomeX(work, index);
+    e->baseY = BosGaEntryHomeY(work, index);
+    e->baseZ = BosGaEntryHomeZ(work, index);
+    v = sGaEntryDefs[index].x2;
 
     if (work->flipped) {
         v = -v;
     }
 
     e->x2 = v;
-    e->y2 = sGaEntryDefs[i].y2;
+    e->y2 = sGaEntryDefs[index].y2;
 }
 
 void BosGaUpdateFacing(GaWork* work) {
@@ -315,12 +315,12 @@ enum BosGaEntryMode {
     BOS_GA_ENTRY_MODE_DESTROYED = 3
 };
 
-void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
+void BosGaEntryInit(GaWork* work, u32 index, s32 assemble) {
     GaEntryWork* e;
     void* p;
 
-    e = &work->entries[i];
-    e->index = i;
+    e = &work->entries[index];
+    e->index = index;
     e->bobZ = 0;
     e->bobAngle = GetRandom();
     e->mode = BOS_GA_ENTRY_MODE_FOLLOW;
@@ -329,14 +329,14 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
     e->flags = 0;
     e->counter = 0;
     e->vx = e->vy = 0;
-    BosGaEntryResetHome(work, i);
+    BosGaEntryResetHome(work, index);
     e->unk_130 = 0;
     e->unk_134 = 0;
     e->unk_138 = 0;
     e->orbitAngle = 0;
 
     if (assemble != 0) {
-        if (i != 1) {
+        if (index != 1) {
             e->baseX -= (GetRandom() & 0x1F) << 8;
             e->baseY -= (GetRandom() & 0x1F) << 8;
         }
@@ -345,10 +345,10 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
     }
 
     InitEnemyBtlObj(&e->actor, &sBosGaEmyKind, e->baseX, e->baseY, e->baseZ);
-    SetEnemyHpFromStats(&e->actor, sBosGaEmyKind.id, sGaEntryDefs[i].hpScale);
+    SetEnemyHpFromStats(&e->actor, sBosGaEmyKind.id, sGaEntryDefs[index].hpScale);
     e->actor.radiusY = 0x10;
 
-    if (i == 0) {
+    if (index == 0) {
         e->actor.flags |= 0x400;
     } else {
         e->actor.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
@@ -356,7 +356,7 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
 
     e->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
 
-    switch (i) {
+    switch (index) {
     case 4:
     case 5:
         e->flags |= GA_ENTRY_FLAG_NO_BOB;
@@ -365,13 +365,13 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 assemble) {
 
     TaskPoolInit(&e->tasks, 1);
     TaskCreate(&e->tasks, &gTaskDescBtlShadow, &e->actor);
-    p = sGaEntryDefs[i].gfxTable;
-    e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, sGaEntryDefs[i].spriteCount), sGaEntryDefs[i].owner);
-    AnimInit(&e->anim, sGaEntryDefs[i].anims, p);
+    p = sGaEntryDefs[index].gfxTable;
+    e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, sGaEntryDefs[index].spriteCount), sGaEntryDefs[index].owner);
+    AnimInit(&e->anim, sGaEntryDefs[index].anims, p);
     AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
     e->gfx = AnimGetGfx(&e->anim);
 
-    if (i == 0) {
+    if (index == 0) {
         work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosGaCollarFrames, 4), gBosGaCollarTiles);
         AnimInit(&work->anim, gBosGaCollarAnims, gBosGaCollarFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);

@@ -1766,13 +1766,13 @@ void DropBossPrizes(BtlObj* obj) {
     src.z = obj->z;
     src.noTimeout = TRUE;
     remaining = obj->exp;
-    CreateBtlPrizeTasks(&src, 0, 0x578, &remaining);
-    CreateBtlPrizeTasks(&src, 8, 199, &remaining);
-    CreateBtlPrizeTasks(&src, 5, 60, &remaining);
-    CreateBtlPrizeTasks(&src, 7, 30, &remaining);
-    CreateBtlPrizeTasks(&src, 4, 10, &remaining);
-    CreateBtlPrizeTasks(&src, 6, 5, &remaining);
-    CreateBtlPrizeTasks(&src, 3, 1, &remaining);
+    CreateBtlPrizeTasks(&src, BTL_PRIZE_EXP_1400, 0x578, &remaining);
+    CreateBtlPrizeTasks(&src, BTL_PRIZE_EXP_199, 199, &remaining);
+    CreateBtlPrizeTasks(&src, BTL_PRIZE_EXP_60, 60, &remaining);
+    CreateBtlPrizeTasks(&src, BTL_PRIZE_EXP_30, 30, &remaining);
+    CreateBtlPrizeTasks(&src, BTL_PRIZE_EXP_10, 10, &remaining);
+    CreateBtlPrizeTasks(&src, BTL_PRIZE_EXP_5, 5, &remaining);
+    CreateBtlPrizeTasks(&src, BTL_PRIZE_EXP_1, 1, &remaining);
 }
 
 void DropEnemyPrizes(BtlObj* obj) {
@@ -1881,31 +1881,31 @@ void DropEnemyPrizes(BtlObj* obj) {
         }
     }
 
-    if (CreateBtlPrizeTasksCapped(&src, 0, 0x578, &remaining, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, BTL_PRIZE_EXP_1400, 0x578, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&src, 8, 199, &remaining, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, BTL_PRIZE_EXP_199, 199, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&src, 5, 60, &remaining, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, BTL_PRIZE_EXP_60, 60, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&src, 7, 30, &remaining, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, BTL_PRIZE_EXP_30, 30, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&src, 4, 10, &remaining, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, BTL_PRIZE_EXP_10, 10, &remaining, &cnt)) {
         return;
     }
 
-    if (CreateBtlPrizeTasksCapped(&src, 6, 5, &remaining, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&src, BTL_PRIZE_EXP_5, 5, &remaining, &cnt)) {
         return;
     }
 
-    CreateBtlPrizeTasksCapped(&src, 3, 1, &remaining, &cnt);
+    CreateBtlPrizeTasksCapped(&src, BTL_PRIZE_EXP_1, 1, &remaining, &cnt);
 }
 
 void TryDropPremireCard(BtlObj* obj) {

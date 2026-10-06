@@ -25,6 +25,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "btl.h"
+#include "battle.h"
 
 static const AnimDef sSmnBambiAnimDef = { gBanb00Frames, gBanb00Anims, gBanb00Tiles, 0 };
 
@@ -311,9 +312,9 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             args.z = body->z;
 
             if (work->variant == SUMMON_LEVEL_SINGLE) {
-                args.kind = 1;
+                args.kind = BTL_PRIZE_HP_3;
             } else {
-                args.kind = 2;
+                args.kind = BTL_PRIZE_HP_10;
             }
 
             args.noTimeout = 0;

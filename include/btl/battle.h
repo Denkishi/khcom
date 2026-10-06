@@ -65,6 +65,18 @@ typedef struct BtlPrizeSrc {
     u8 unk_16[0x0A];
 } BtlPrizeSrc;
 
+enum BtlPrizeKind {
+    BTL_PRIZE_EXP_1400,
+    BTL_PRIZE_HP_3,
+    BTL_PRIZE_HP_10,
+    BTL_PRIZE_EXP_1,
+    BTL_PRIZE_EXP_10,
+    BTL_PRIZE_EXP_60,
+    BTL_PRIZE_EXP_5,
+    BTL_PRIZE_EXP_30,
+    BTL_PRIZE_EXP_199
+};
+
 typedef struct FieldTransitionWork {
     void* tiles;
     void* palette;

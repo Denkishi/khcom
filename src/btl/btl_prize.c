@@ -21,6 +21,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "card_label_data.h"
+#include "battle.h"
 
 void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     u8 angle;
@@ -49,63 +50,63 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     }
 
     switch (src->kind) {
-    case 0:
+    case BTL_PRIZE_EXP_1400:
         work->gfx = gBPuraizuFrame1;
         work->healAmount = 0;
         work->exp = 1400;
         work->bounceSpeed = 1280;
         speed = 384;
         break;
-    case 1:
+    case BTL_PRIZE_HP_3:
         work->gfx = gBPuraizuFrame2;
         work->healAmount = 3;
         work->exp = 0;
         work->bounceSpeed = 0x300;
         speed = 76;
         break;
-    case 2:
+    case BTL_PRIZE_HP_10:
         work->gfx = gBPuraizuFrame3;
         work->healAmount = 10;
         work->exp = 0;
         work->bounceSpeed = 0x300;
         speed = 76;
         break;
-    case 3:
+    case BTL_PRIZE_EXP_1:
         work->gfx = gBPuraizuFrame4;
         work->healAmount = 0;
         work->exp = 1;
         work->bounceSpeed = 0x400;
         speed = 128;
         break;
-    case 4:
+    case BTL_PRIZE_EXP_10:
         work->gfx = gBPuraizuFrame5;
         work->healAmount = 0;
         work->exp = 10;
         work->bounceSpeed = 0x400;
         speed = 128;
         break;
-    case 5:
+    case BTL_PRIZE_EXP_60:
         work->gfx = gBPuraizuFrame6;
         work->healAmount = 0;
         work->exp = 60;
         work->bounceSpeed = 0x400;
         speed = 128;
         break;
-    case 6:
+    case BTL_PRIZE_EXP_5:
         work->gfx = gBPuraizuFrame7;
         work->healAmount = 0;
         work->exp = 5;
         work->bounceSpeed = 0x400;
         speed = 179;
         break;
-    case 7:
+    case BTL_PRIZE_EXP_30:
         work->gfx = gBPuraizuFrame8;
         work->healAmount = 0;
         work->exp = 30;
         work->bounceSpeed = 0x400;
         speed = 179;
         break;
-    case 8:
+    case BTL_PRIZE_EXP_199:
     default:
         work->gfx = gBPuraizuFrame9;
         work->healAmount = 0;

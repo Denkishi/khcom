@@ -27,7 +27,7 @@ static const HumDef sHumRobeDef = { 128, gRobePalette, 0, { ENEMY_MARLUXIA, 99, 
 
 void task_hum_robe_0(RobeWork* work) {
     HumInit(&work->base, &sHumRobeDef);
-    work->idleAnim = 1;
+    work->idleAnim = TRUE;
     AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
 }
 
@@ -43,13 +43,13 @@ u8 task_hum_robe_1(RobeWork* work) {
     }
 
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-        if (work->idleAnim == 1) {
+        if (work->idleAnim == TRUE) {
             AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 1, 0, work->base.tiles);
-            work->idleAnim = 0;
+            work->idleAnim = FALSE;
         }
     } else if (AnimIsFinished(&work->base.anim)) {
         AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
-        work->idleAnim = 1;
+        work->idleAnim = TRUE;
     }
 
     HumFaceTarget(&work->base, 1);

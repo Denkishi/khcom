@@ -26,13 +26,14 @@
 #include "sprite_palettes.h"
 #include "card_label_data.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumHadesStockMoves[3] = {
-    36, 36, 36,
+    MOVE_BOSS_A, MOVE_BOSS_A, MOVE_BOSS_A,
 };
 
 static const u32 sHumHadesAngryStockMoves[3] = {
-    37, 36, 37,
+    MOVE_BOSS_B, MOVE_BOSS_A, MOVE_BOSS_B,
 };
 
 static const AnimDef sHumHadesAnimDefs[10] = {
@@ -156,8 +157,8 @@ u8 task_hum_hades_1(HadesWork* work) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
-        case 38:
+        case MOVE_BOSS_A:
+        case MOVE_BOSS_C:
             if (w->flags & HADES_FLAG_ANGRY) {
                 work->base.state = HUM_HADES_STATE_NAIL_OF_FLAME;
             } else {
@@ -165,8 +166,8 @@ u8 task_hum_hades_1(HadesWork* work) {
             }
 
             break;
-        case 37:
-        case 39:
+        case MOVE_BOSS_B:
+        case MOVE_BOSS_D:
             if (w->flags & HADES_FLAG_ANGRY) {
                 work->base.state = HUM_HADES_STATE_FLAME_SPREAD_START;
             } else {
@@ -174,8 +175,8 @@ u8 task_hum_hades_1(HadesWork* work) {
             }
 
             break;
-        case 0xEE5B96E5:
-        case 0xEEFB96EF:
+        case MOVE_TEMPER_FLARE:
+        case MOVE_FIRAGA_BALL:
             if (w->flags & HADES_FLAG_ANGRY) {
                 work->base.state = HUM_HADES_STATE_FIRAGA_BALL_START;
             } else {

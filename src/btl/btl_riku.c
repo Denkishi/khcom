@@ -44,6 +44,7 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "card_label_data.h"
+#include "card_ids.h"
 
 static const AnimDef sBtlRikuAnimDefs[35] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0 },
@@ -1208,7 +1209,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags |= BTL_RIKU_FLAG_PASS_THROUGH;
             move = ResolveActiveCardsMove(stockMoves);
 
-            if (move == 145) {
+            if (move == MOVE_STOCK_SEQUENCE) {
                 if (!(act->btl->flags & BTL_FLAG_STOCK_SEQUENCE)) {
                     act->btl->flags |= BTL_FLAG_STOCK_SEQUENCE;
                     act->btl->stockMove = 0;
@@ -1219,82 +1220,82 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
 
             switch (move) {
-            case 48:
+            case MOVE_HI_POTION:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 1;
                 break;
-            case 47:
+            case MOVE_POTION:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 0;
                 break;
-            case 49:
+            case MOVE_MEGA_POTION:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 2;
                 break;
-            case 50:
+            case MOVE_ETHER:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 3;
                 break;
-            case 51:
+            case MOVE_MEGA_ETHER:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 4;
                 break;
-            case 52:
+            case MOVE_ELIXIR:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 5;
                 break;
-            case 53:
+            case MOVE_MEGALIXIR:
                 work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 6;
                 break;
-            case 45:
+            case MOVE_THE_KING:
                 work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
                 work->variant[0] = 0;
                 break;
-            case 0x800A7E9F:
+            case MOVE_MM_MIRACLE_PAIR:
                 work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
                 work->variant[0] = 1;
                 break;
-            case 0xE9FA7E9F:
+            case MOVE_MM_MIRACLE:
                 work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
                 work->variant[0] = 2;
                 break;
-            case 137:
+            case MOVE_DARK_BREAK:
                 work->state = BTL_RIKU_STATE_DARK_BREAK;
                 break;
-            case 138:
+            case MOVE_DARK_FIRAGA:
                 work->state = BTL_RIKU_STATE_DARK_FIRAGA;
                 break;
-            case 139:
+            case MOVE_DARK_AURA:
                 work->state = BTL_RIKU_STATE_DARK_AURA;
                 break;
-            case 46:
+            case MOVE_DARK_MODE:
                 work->state = BTL_RIKU_STATE_DARK_MODE_START;
                 break;
-            case 18:
+            case MOVE_SOUL_EATER:
                 if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                     switch (work->state) {
                     case BTL_RIKU_STATE_DARK_LEAP:

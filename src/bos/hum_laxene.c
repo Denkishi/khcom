@@ -29,10 +29,11 @@
 #include "card_label_data.h"
 #include "enemy_ids.h"
 #include "obj.h"
+#include "card_ids.h"
 
 static const u32 sHumLaxeneStockMoves[2][3] = {
-    { 36, 38, 38 },
-    { 37, 37, 36 },
+    { MOVE_BOSS_A, MOVE_BOSS_C, MOVE_BOSS_C },
+    { MOVE_BOSS_B, MOVE_BOSS_B, MOVE_BOSS_A },
 };
 
 static const AnimDef sHumLaxeneAnimDefs[15] = {
@@ -147,14 +148,14 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         work->base.steps = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
+        case MOVE_BOSS_A:
             work->base.state = HUM_LAXENE_STATE_COMBO;
             break;
-        case 37:
+        case MOVE_BOSS_B:
             work->base.state = HUM_LAXENE_STATE_KNIFE_THROW;
             break;
-        case 38:
-        case 39:
+        case MOVE_BOSS_C:
+        case MOVE_BOSS_D:
             if (act->hp < (act->maxHp >> 1)) {
                 work->base.state = HUM_LAXENE_STATE_THUNDER_COMBO;
             } else {
@@ -162,10 +163,10 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             }
 
             break;
-        case 0xF49D2735:
+        case MOVE_LIGHTNING_BOLT:
             work->base.state = HUM_LAXENE_STATE_BEAM_WINDUP;
             break;
-        case 0xF35CFF3F:
+        case MOVE_TELEPORT_RUSH:
             work->base.steps = GetRandom() % 4 + 4;
             work->base.state = HUM_LAXENE_STATE_WARP_SLASH;
             m4aSongNumStart(SONG_SND_284);

@@ -32,10 +32,11 @@
 #include "battle_ids.h"
 #include "card_label_data.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumAxcelStockMoves[2][3] = {
-    { 36, 36, 36 },
-    { 36, 37, 36 },
+    { MOVE_BOSS_A, MOVE_BOSS_A, MOVE_BOSS_A },
+    { MOVE_BOSS_A, MOVE_BOSS_B, MOVE_BOSS_A },
 };
 
 static const AnimDef sHumAxcelAnimDefs[14] = {
@@ -186,19 +187,19 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
-        case 38:
+        case MOVE_BOSS_A:
+        case MOVE_BOSS_C:
             work->base.state = HUM_AXCEL_STATE_SLASH;
             work->base.steps = 0;
             break;
-        case 37:
-        case 39:
+        case MOVE_BOSS_B:
+        case MOVE_BOSS_D:
             work->base.state = HUM_AXCEL_STATE_THROW_APPROACH;
             break;
-        case 0xF21C8721:
+        case MOVE_FIRE_WALL:
             work->base.state = HUM_AXCEL_STATE_FIRE_WALL_WINDUP;
             break;
-        case 0xF21CAF21:
+        case MOVE_FIRETOOTH:
             work->base.state = HUM_AXCEL_STATE_CHAKRAM_IGNITE;
             break;
         }

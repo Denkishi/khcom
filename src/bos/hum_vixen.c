@@ -31,21 +31,22 @@
 #include "battle_ids.h"
 #include "card_label_data.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumVixenStockMovesA[3] = {
-    36, 37, 36,
+    MOVE_BOSS_A, MOVE_BOSS_B, MOVE_BOSS_A,
 };
 
 static const u32 sHumVixenStockMovesB[3] = {
-    37, 36, 36,
+    MOVE_BOSS_B, MOVE_BOSS_A, MOVE_BOSS_A,
 };
 
 static const u32 sHumVixenStockMovesC[3] = {
-    36, 36, 37,
+    MOVE_BOSS_A, MOVE_BOSS_A, MOVE_BOSS_B,
 };
 
 static const u32 sHumVixenStockMovesD[3] = {
-    36, 36, 36,
+    MOVE_BOSS_A, MOVE_BOSS_A, MOVE_BOSS_A,
 };
 
 static const AnimDef sHumVixenAnimDefs[15] = {
@@ -250,24 +251,24 @@ u8 task_hum_vixen_1(VixenWork* work) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
-        case 38:
+        case MOVE_BOSS_A:
+        case MOVE_BOSS_C:
             w->base.state = HUM_VIXEN_STATE_BLIZZARD;
             break;
-        case 37:
-        case 39:
+        case MOVE_BOSS_B:
+        case MOVE_BOSS_D:
             w->base.state = HUM_VIXEN_STATE_LUNGE;
             break;
-        case 0xF53D7753:
+        case MOVE_FREEZE:
             work->base.state = HUM_VIXEN_STATE_FREEZE_WINDUP;
             break;
-        case 0xF53D4F5D:
+        case MOVE_DIAMOND_DUST_SLEIGHT:
             work->base.state = HUM_VIXEN_STATE_ICE_FALL;
             break;
-        case 0xF5DD4F53:
+        case MOVE_ICEBURN:
             work->base.state = HUM_VIXEN_STATE_GROUND_ICE_WINDUP;
             break;
-        case 0xF53D4F53:
+        case MOVE_ICE_NEEDLES:
             work->base.state = HUM_VIXEN_STATE_NEEDLE_WINDUP;
             break;
         }

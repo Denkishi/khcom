@@ -33,6 +33,7 @@
 #include "sprite_palettes.h"
 #include "card_label_data.h"
 #include "card.h"
+#include "card_ids.h"
 
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);
@@ -1016,13 +1017,13 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
     count = GetRikuCardsLeft();
 
     switch (id) {
-    case 47:
-    case 48:
-    case 49:
-    case 50:
-    case 51:
-    case 52:
-    case 53:
+    case MOVE_POTION:
+    case MOVE_HI_POTION:
+    case MOVE_MEGA_POTION:
+    case MOVE_ETHER:
+    case MOVE_MEGA_ETHER:
+    case MOVE_ELIXIR:
+    case MOVE_MEGALIXIR:
         n = count >> 1;
 
         if (n <= 0) {
@@ -1111,7 +1112,7 @@ s32 HumResolveCardMove(HumWork* work) {
     s32 moves[6];
     s32 id = ResolveActiveCardsMove(moves);
 
-    if (id == 145) {
+    if (id == MOVE_STOCK_SEQUENCE) {
         if (!(gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE)) {
             gRikuBtlWork->flags |= BTL_FLAG_STOCK_SEQUENCE;
             gRikuBtlWork->stockMove = 0;
@@ -1124,31 +1125,31 @@ s32 HumResolveCardMove(HumWork* work) {
     work->stateTimer = 0;
 
     switch (id) {
-    case 47:
+    case MOVE_POTION:
         work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 0;
         break;
-    case 48:
+    case MOVE_HI_POTION:
         work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 1;
         break;
-    case 49:
+    case MOVE_MEGA_POTION:
         work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 2;
         break;
-    case 50:
+    case MOVE_ETHER:
         work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 3;
         break;
-    case 51:
+    case MOVE_MEGA_ETHER:
         work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 4;
         break;
-    case 52:
+    case MOVE_ELIXIR:
         work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 5;
         break;
-    case 53:
+    case MOVE_MEGALIXIR:
         work->state = HUM_STATE_USE_ITEM;
         work->itemIndex = 6;
         break;

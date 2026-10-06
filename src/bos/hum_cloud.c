@@ -25,10 +25,11 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumCloudStockMoves[2][3] = {
-    { 37, 37, 37 },
-    { 37, 36, 37 },
+    { MOVE_BOSS_B, MOVE_BOSS_B, MOVE_BOSS_B },
+    { MOVE_BOSS_B, MOVE_BOSS_A, MOVE_BOSS_B },
 };
 
 static const AnimDef sHumCloudAnimDefs[20] = {
@@ -176,8 +177,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
-        case 38:
+        case MOVE_BOSS_A:
+        case MOVE_BOSS_C:
             if (act->z < 0) {
                 work->base.state = HUM_CLOUD_STATE_AIR_FOLLOW;
             } else {
@@ -185,8 +186,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
             }
 
             break;
-        case 37:
-        case 39:
+        case MOVE_BOSS_B:
+        case MOVE_BOSS_D:
             if (act->z < 0) {
                 work->base.state = HUM_CLOUD_STATE_AIR_FOLLOW;
             } else {
@@ -194,10 +195,10 @@ u8 task_hum_cloud_1(CloudWork* work) {
             }
 
             break;
-        case 0xEB3ACEB3:
+        case MOVE_CROSS_SLASH_2:
             work->base.state = HUM_CLOUD_STATE_CROSS_SLASH_START;
             break;
-        case 0xEB3AA6B3:
+        case MOVE_OMNISLASH_2:
             work->base.state = HUM_CLOUD_STATE_OMNISLASH_RISE;
             break;
         }

@@ -26,13 +26,14 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumAnsemStockMovesA[3] = {
-    36, 37, 37,
+    MOVE_BOSS_A, MOVE_BOSS_B, MOVE_BOSS_B,
 };
 
 static const u32 sHumAnsemStockMovesB[3] = {
-    36, 37, 36,
+    MOVE_BOSS_A, MOVE_BOSS_B, MOVE_BOSS_A,
 };
 
 static const AnimDef sHumAnsemAnimDefs[7] = {
@@ -140,19 +141,19 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         MakeOpponentsHittable();
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
-        case 38:
+        case MOVE_BOSS_A:
+        case MOVE_BOSS_C:
             work->base.state = HUM_ANSEM_STATE_GUARDIAN_STRIKE;
             break;
-        case 37:
-        case 39:
+        case MOVE_BOSS_B:
+        case MOVE_BOSS_D:
             work->base.state = HUM_ANSEM_STATE_WAVE;
             break;
-        case 0xFADEB7A3:
+        case MOVE_ROCKSHATTER:
             work->base.state = HUM_ANSEM_STATE_RUSH_START;
             work->repeatCount = 0;
             break;
-        case 0xFA3EB7A3:
+        case MOVE_DARK_SHADOW:
             work->base.state = HUM_ANSEM_STATE_GUARDIAN_SUMMON;
             work->repeatCount = 0;
             break;

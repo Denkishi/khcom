@@ -30,10 +30,11 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumRikuStockMoves[2][3] = {
-    { 36, 36, 38 },
-    { 37, 37, 39 },
+    { MOVE_BOSS_A, MOVE_BOSS_A, MOVE_BOSS_C },
+    { MOVE_BOSS_B, MOVE_BOSS_B, MOVE_BOSS_D },
 };
 
 static const AnimDef sHumRikuAnimDefs[21] = {
@@ -257,22 +258,22 @@ u8 task_hum_riku_1(RikuWork* work) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
+        case MOVE_BOSS_A:
             work->base.state = HUM_RIKU_STATE_VERTICAL_SLASH;
             break;
-        case 37:
+        case MOVE_BOSS_B:
             work->base.state = HUM_RIKU_STATE_DASH_SLASH;
             break;
-        case 38:
+        case MOVE_BOSS_C:
             work->base.state = HUM_RIKU_STATE_SWEEP;
             break;
-        case 39:
+        case MOVE_BOSS_D:
             work->base.state = HUM_RIKU_STATE_DIVE_CROUCH;
             break;
-        case 0xF0DBE6F9:
+        case MOVE_DARK_FIRAGA_2:
             work->base.state = HUM_RIKU_STATE_DARK_FIRAGA;
             break;
-        case 0xF17C0F03:
+        case MOVE_DARK_AURA_2:
             work->base.state = HUM_RIKU_STATE_DARK_AURA_START;
             break;
         }

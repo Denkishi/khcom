@@ -28,9 +28,10 @@
 #include "sprite_palettes.h"
 #include "card_label_data.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumLexceusStockMoves[3] = {
-    36, 37, 36,
+    MOVE_BOSS_A, MOVE_BOSS_B, MOVE_BOSS_A,
 };
 
 static const AnimDef sHumLexceusAnimDefs[10] = {
@@ -142,17 +143,17 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         work->base.steps = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
+        case MOVE_BOSS_A:
             work->base.state = HUM_LEXCEUS_STATE_COMBO;
             break;
-        case 37:
+        case MOVE_BOSS_B:
             work->base.state = HUM_LEXCEUS_STATE_AXE_THROW;
             break;
-        case 38:
-        case 39:
+        case MOVE_BOSS_C:
+        case MOVE_BOSS_D:
             work->base.state = HUM_LEXCEUS_STATE_QUAKE;
             break;
-        case 0xF85E3F85:
+        case MOVE_ROCKSHATTER_2:
             work->base.state = HUM_LEXCEUS_STATE_ROCK_RAISE;
             break;
         }

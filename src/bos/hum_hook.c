@@ -31,13 +31,14 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumHookStockMovesA[3] = {
-    36, 36, 38,
+    MOVE_BOSS_A, MOVE_BOSS_A, MOVE_BOSS_C,
 };
 
 static const u32 sHumHookStockMovesB[3] = {
-    37, 37, 38,
+    MOVE_BOSS_B, MOVE_BOSS_B, MOVE_BOSS_C,
 };
 
 static const AnimDef sHumHookAnimDefs[15] = {
@@ -198,22 +199,22 @@ u8 task_hum_hook_1(HookWork* work) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
+        case MOVE_BOSS_A:
             work->base.state = HUM_HOOK_STATE_SLASH;
             break;
-        case 37:
+        case MOVE_BOSS_B:
             work->base.state = HUM_HOOK_STATE_DASH_SLASH;
             break;
-        case 38:
+        case MOVE_BOSS_C:
             work->base.state = HUM_HOOK_STATE_LUNGE;
             break;
-        case 39:
+        case MOVE_BOSS_D:
             work->base.state = HUM_HOOK_STATE_BOMB_THROW;
             break;
-        case 0xED1AF6BD:
+        case MOVE_COMBO_PRESENT:
             work->base.state = HUM_HOOK_STATE_FLURRY;
             break;
-        case 0xED1B1EC7:
+        case MOVE_RUSH_PRESENT:
             work->base.state = HUM_HOOK_STATE_BOMB_BARRAGE;
             work->base.steps = 0;
             break;

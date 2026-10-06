@@ -29,13 +29,14 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "card_ids.h"
 
 static const u32 sHumMahluxiaStockMovesA[3] = {
-    37, 36, 37,
+    MOVE_BOSS_B, MOVE_BOSS_A, MOVE_BOSS_B,
 };
 
 static const u32 sHumMahluxiaStockMovesB[3] = {
-    36, 37, 38,
+    MOVE_BOSS_A, MOVE_BOSS_B, MOVE_BOSS_C,
 };
 
 static const AnimDef sHumMahluxiaAnimDefs[13] = {
@@ -280,20 +281,20 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         w->hoverZ = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
-        case 36:
+        case MOVE_BOSS_A:
             work->base.state = HUM_MAHLUXIA_STATE_SCYTHE_WAVE;
             break;
-        case 37:
+        case MOVE_BOSS_B:
             work->base.state = HUM_MAHLUXIA_STATE_STAMP;
             break;
-        case 38:
-        case 39:
+        case MOVE_BOSS_C:
+        case MOVE_BOSS_D:
             work->base.state = HUM_MAHLUXIA_STATE_DASH_WINDUP;
             break;
-        case 0xF71D9F71:
+        case MOVE_BLOSSOM_SHOWER:
             work->base.state = HUM_MAHLUXIA_STATE_PETAL_STORM;
             break;
-        case 0xF7BDC767:
+        case MOVE_DEATHSCYTHE:
             work->base.state = HUM_MAHLUXIA_STATE_KAMA_WINDUP;
             break;
         }

@@ -42,6 +42,7 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "card_label_data.h"
+#include "card_ids.h"
 
 static const AnimDef sBtlSoraAnimDefs[77] = {
     { gSor1ll50Frames, gSor1ll50Anims, gSor1ll50Tiles, 0 },
@@ -1128,7 +1129,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             move = ResolveActiveCardsMove(stockMoves);
         }
 
-        if (move == 145) {
+        if (move == MOVE_STOCK_SEQUENCE) {
             if (!(act->btl->flags & BTL_FLAG_STOCK_SEQUENCE)) {
                 act->btl->flags |= BTL_FLAG_STOCK_SEQUENCE;
                 act->btl->stockMove = 0;
@@ -1141,283 +1142,283 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->breakAnim = 2;
 
         switch (move) {
-        case 0:
+        case MOVE_KINGDOM_KEY:
             work->keyblade = 0;
             work->swingSpeed = 2;
             work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
-        case 1:
+        case MOVE_KEYBLADE_1:
             work->keyblade = 1;
             work->swingSpeed = 0;
             work->breakAnim = 3;
             StartBtlSoraCombo(work);
             break;
-        case 2:
+        case MOVE_OLYMPIA:
             work->keyblade = 2;
             work->swingSpeed = 3;
             work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
-        case 3:
+        case MOVE_THREE_WISHES:
             work->keyblade = 3;
             work->swingSpeed = 1;
             work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
-        case 4:
+        case MOVE_CRABCLAW:
             work->keyblade = 4;
             work->swingSpeed = 2;
             work->breakAnim = 0;
             StartBtlSoraCombo(work);
             break;
-        case 5:
+        case MOVE_PUMPKINHEAD:
             work->keyblade = 5;
             work->swingSpeed = 2;
             work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
-        case 6:
+        case MOVE_FAIRY_HARP:
             work->keyblade = 6;
             work->swingSpeed = 0;
             work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
-        case 7:
+        case MOVE_WISHING_STAR:
             work->keyblade = 7;
             work->swingSpeed = 1;
             work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
-        case 8:
+        case MOVE_SPELLBINDER:
             work->keyblade = 8;
             work->swingSpeed = 3;
             work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
-        case 9:
+        case MOVE_METAL_CHOCOBO:
             work->keyblade = 9;
             work->swingSpeed = 3;
             work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
-        case 10:
+        case MOVE_LIONHEART:
             work->keyblade = 10;
             work->swingSpeed = 4;
             work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
-        case 11:
+        case MOVE_LADY_LUCK:
             work->keyblade = 11;
             work->swingSpeed = 1;
             work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
-        case 12:
+        case MOVE_DIVINE_ROSE:
             work->keyblade = 12;
             work->swingSpeed = 1;
             work->breakAnim = 3;
             StartBtlSoraCombo(work);
             break;
-        case 13:
+        case MOVE_OATHKEEPER:
             work->keyblade = 13;
             work->swingSpeed = 2;
             work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
-        case 14:
+        case MOVE_OBLIVION:
             work->keyblade = 14;
             work->swingSpeed = 3;
             work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
-        case 15:
+        case MOVE_ULTIMA_WEAPON:
             work->keyblade = 15;
             work->swingSpeed = 2;
             work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
-        case 16:
+        case MOVE_DIAMOND_DUST:
             work->keyblade = 16;
             work->swingSpeed = 0;
             work->breakAnim = 0;
             StartBtlSoraCombo(work);
             break;
-        case 17:
+        case MOVE_ONE_WINGED_ANGEL:
             work->keyblade = 17;
             work->swingSpeed = 1;
             work->breakAnim = 3;
             StartBtlSoraCombo(work);
             break;
-        case 19:
+        case MOVE_FIRE:
             work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
-        case 0x8002ACAB:
+        case MOVE_FIRA:
             work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
-        case 0xCAB2ACAB:
+        case MOVE_FIRAGA:
             work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
-        case 20:
+        case MOVE_BLIZZARD:
             work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
-        case 0x8002D4B5:
+        case MOVE_BLIZZARA:
             work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
-        case 0xCB52D4B5:
+        case MOVE_BLIZZAGA:
             work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
-        case 21:
+        case MOVE_THUNDER:
             work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
-        case 0x8002FCBF:
+        case MOVE_THUNDARA:
             work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
-        case 0xCBF2FCBF:
+        case MOVE_THUNDAGA:
             work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
-        case 22:
+        case MOVE_CURE:
             work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 0;
             break;
-        case 0x800324C9:
+        case MOVE_CURA:
             work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 0;
             break;
-        case 0xCC9324C9:
+        case MOVE_CURAGA:
             work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 0;
             break;
-        case 24:
+        case MOVE_STOP:
             work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
-        case 0x800374DD:
+        case MOVE_STOPRA:
             work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
-        case 0xCDD374DD:
+        case MOVE_STOPGA:
             work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
-        case 23:
+        case MOVE_GRAVITY:
             work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
-        case 0x80034CD3:
+        case MOVE_GRAVIRA:
             work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
-        case 0xCD334CD3:
+        case MOVE_GRAVIGA:
             work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
-        case 27:
+        case MOVE_GOOFY:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
             work->variant[0] = 0;
             break;
-        case 0x8003ECFB:
+        case MOVE_GOOFY_CHARGE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
             work->variant[0] = 1;
             break;
-        case 0xCFB3ECFB:
+        case MOVE_GOOFY_TORNADO:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
             work->variant[0] = 2;
             break;
-        case 28:
+        case MOVE_DONALD_DUCK:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 0;
             break;
-        case 0x8003C4F1:
+        case MOVE_MAGIC_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 1;
             break;
-        case 0xCF13C4F1:
+        case MOVE_MAGIC:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 2;
             break;
-        case 33:
+        case MOVE_TINKER_BELL:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
@@ -1425,7 +1426,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->variant[0] = 0;
             work->breakAnim = 1;
             break;
-        case 0x8004B52D:
+        case MOVE_TWINKLE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
@@ -1433,7 +1434,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->variant[0] = 1;
             work->breakAnim = 1;
             break;
-        case 0xD2D4B52D:
+        case MOVE_TWINKLE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
@@ -1441,506 +1442,506 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->variant[0] = 2;
             work->breakAnim = 1;
             break;
-        case 41:
+        case MOVE_ARIEL:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
             work->variant[0] = 0;
             break;
-        case 0x80055555:
+        case MOVE_SPIRAL_WAVE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
             work->variant[0] = 1;
             break;
-        case 0xD5555555:
+        case MOVE_SPIRAL_WAVE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
             work->variant[0] = 2;
             break;
-        case 34:
+        case MOVE_MUSHU:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
             work->variant[0] = 0;
             break;
-        case 0x8004DD37:
+        case MOVE_FLARE_BREATH_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
             work->variant[0] = 1;
             break;
-        case 0xD374DD37:
+        case MOVE_FLARE_BREATH:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
             work->variant[0] = 2;
             break;
-        case 29:
+        case MOVE_SIMBA:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
             work->variant[0] = 0;
             break;
-        case 0x80041505:
+        case MOVE_PROUD_ROAR_PAIR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
             work->variant[0] = 1;
             break;
-        case 0xD0541505:
+        case MOVE_PROUD_ROAR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
             work->variant[0] = 2;
             break;
-        case 35:
+        case MOVE_CLOUD:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 0;
             break;
-        case 0x80050541:
+        case MOVE_CROSS_SLASH:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 1;
             break;
-        case 0xD4150541:
+        case MOVE_OMNISLASH:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 2;
             break;
-        case 31:
+        case MOVE_BAMBI:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 0;
             break;
-        case 0x80046519:
+        case MOVE_PARADISE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 1;
             break;
-        case 0xD1946519:
+        case MOVE_PARADISE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 2;
             break;
-        case 42:
+        case MOVE_JACK:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
             work->variant[0] = 0;
             break;
-        case 0x80057D5F:
+        case MOVE_SURPRISE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
             work->variant[0] = 1;
             break;
-        case 0xD5F57D5F:
+        case MOVE_SURPRISE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
             work->variant[0] = 2;
             break;
-        case 40:
+        case MOVE_ALADDIN:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
             work->variant[0] = 0;
             break;
-        case 0x80052D4B:
+        case MOVE_SANDSTORM_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
             work->variant[0] = 1;
             break;
-        case 0xD4B52D4B:
+        case MOVE_SANDSTORM:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
             work->variant[0] = 2;
             break;
-        case 43:
+        case MOVE_PETER_PAN:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
             work->variant[0] = 0;
             break;
-        case 0x8005A569:
+        case MOVE_HUMMINGBIRD_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
             work->variant[0] = 1;
             break;
-        case 0xD695A569:
+        case MOVE_HUMMINGBIRD:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
             work->variant[0] = 2;
             break;
-        case 32:
+        case MOVE_DUMBO:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
             work->variant[0] = 0;
             break;
-        case 0x80048D23:
+        case MOVE_SPLASH_PAIR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
             work->variant[0] = 1;
             break;
-        case 0xD2348D23:
+        case MOVE_SPLASH:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
             work->variant[0] = 2;
             break;
-        case 30:
+        case MOVE_GENIE:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
             work->variant[0] = 0;
             break;
-        case 0x80043D0F:
+        case MOVE_SHOWTIME_PAIR:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
             work->variant[0] = 1;
             break;
-        case 0xD0F43D0F:
+        case MOVE_SHOWTIME:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
             work->variant[0] = 2;
             break;
-        case 44:
+        case MOVE_THE_BEAST:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
             work->variant[0] = 0;
             break;
-        case 0x8005CD73:
+        case MOVE_FEROCIOUS_LUNGE_PAIR:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
             work->variant[0] = 1;
             break;
-        case 0xD735CD73:
+        case MOVE_FEROCIOUS_LUNGE:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
             work->variant[0] = 2;
             break;
-        case 47:
+        case MOVE_POTION:
             work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 0;
             break;
-        case 48:
+        case MOVE_HI_POTION:
             work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 1;
             break;
-        case 49:
+        case MOVE_MEGA_POTION:
             work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 2;
             break;
-        case 50:
+        case MOVE_ETHER:
             work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 3;
             break;
-        case 51:
+        case MOVE_MEGA_ETHER:
             work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 4;
             break;
-        case 52:
+        case MOVE_ELIXIR:
             work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 5;
             break;
-        case 53:
+        case MOVE_MEGALIXIR:
             work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 6;
             break;
-        case 25:
+        case MOVE_AERO:
             work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_BASE;
             break;
-        case 0x80039CE7:
+        case MOVE_AERORA:
             work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_RA;
             break;
-        case 0xCE739CE7:
+        case MOVE_AEROGA:
             work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = SPELL_TIER_GA;
             break;
-        case 0xC0100401:
+        case MOVE_SONIC_BLADE:
             work->state = BTL_SORA_STATE_SONIC_BLADE;
             work->steps = 0;
             work->stateTimer = 0;
             work->comboCount = 0;
             break;
-        case 100:
+        case MOVE_STRIKE_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             break;
-        case 101:
+        case MOVE_BLITZ:
             work->state = BTL_SORA_STATE_BLITZ;
             work->steps = 0;
             work->stateTimer = 0;
             work->comboCount = 2;
             break;
-        case 104:
+        case MOVE_TRINITY_LIMIT:
             work->state = BTL_SORA_STATE_TRINITY_LIMIT;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 3;
             break;
-        case 102:
+        case MOVE_ARS_ARCANUM:
             work->state = BTL_SORA_STATE_ARS_ARCANUM;
             work->steps = 0;
             work->stateTimer = 0;
             work->nextState = BTL_SORA_STATE_ARS_ARCANUM_FINISH;
             work->comboCount = 8;
             break;
-        case 103:
+        case MOVE_RAGNAROK:
             work->state = BTL_SORA_STATE_RAGNAROK;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 3;
             break;
-        case 105:
+        case MOVE_SLIDING_DASH:
             work->state = BTL_SORA_STATE_SLIDING_DASH;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 106:
+        case MOVE_STUN_IMPACT:
             work->state = BTL_SORA_STATE_STUN_IMPACT;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 107:
+        case MOVE_ZANTETSUKEN:
             work->state = BTL_SORA_STATE_ZANTETSUKEN;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 126:
+        case MOVE_FIRAGA_BREAK:
             work->state = BTL_SORA_STATE_FIRAGA_BREAK;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 124:
+        case MOVE_GIFTED_MIRACLE:
             work->state = BTL_SORA_STATE_GIFTED_MIRACLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 130:
+        case MOVE_HOMING_FIRA:
             work->state = BTL_SORA_STATE_HOMING_FIRA;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 131:
+        case MOVE_HOMING_BLIZZARA:
             work->state = BTL_SORA_STATE_HOMING_BLIZZARA;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 108:
+        case MOVE_WARP:
             work->state = BTL_SORA_STATE_WARP;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 109:
+        case MOVE_WARPINATOR:
             work->state = BTL_SORA_STATE_WARPINATOR;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 116:
+        case MOVE_FIRE_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             break;
-        case 113:
+        case MOVE_STOP_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             break;
-        case 117:
+        case MOVE_BLIZZARD_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 3;
             break;
-        case 118:
+        case MOVE_THUNDER_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 4;
             break;
-        case 119:
+        case MOVE_GRAVITY_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 5;
             break;
-        case 115:
+        case MOVE_REFLECT_RAID:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 6;
             break;
-        case 122:
+        case MOVE_BLAZING_DONALD:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 3;
             break;
-        case 135:
+        case MOVE_QUAKE:
             work->state = BTL_SORA_STATE_QUAKE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 128:
+        case MOVE_IDYLL_ROMP:
             work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 3;
             break;
-        case 129:
+        case MOVE_CROSS_SLASH_PLUS:
             work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 3;
             break;
-        case 120:
+        case MOVE_AQUA_SPLASH:
             work->state = BTL_SORA_STATE_AQUA_SPLASH;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 121:
+        case MOVE_HOLY:
             work->state = BTL_SORA_STATE_HOLY;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 132:
+        case MOVE_SYNCHRO:
             work->state = BTL_SORA_STATE_SYNCHRO;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 125:
+        case MOVE_MEGA_FLARE:
             work->state = BTL_SORA_STATE_MEGA_FLARE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 127:
+        case MOVE_SHOCK_IMPACT:
             work->state = BTL_SORA_STATE_SHOCK_IMPACT;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 136:
+        case MOVE_TELEPORT:
             work->state = BTL_SORA_STATE_TELEPORT;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 110:
+        case MOVE_TERROR:
             work->state = BTL_SORA_STATE_TERROR;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 114:
+        case MOVE_JUDGMENT:
             work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 7;
             break;
-        case 134:
+        case MOVE_TORNADO:
             work->state = BTL_SORA_STATE_TORNADO;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 133:
+        case MOVE_BIND:
             work->state = BTL_SORA_STATE_BIND;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 111:
+        case MOVE_CONFUSE:
             work->state = BTL_SORA_STATE_CONFUSE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
-        case 112:
-        case 123:
+        case MOVE_SLEIGHT_57:
+        case MOVE_SLEIGHT_68:
         default:
             SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;

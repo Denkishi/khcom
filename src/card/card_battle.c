@@ -2294,7 +2294,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
 #ifdef VERSION_EU
         if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
             for (j = 0; j < gCardBattleState->activeCardCount; j++) {
-                if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
+                if (gCardBattleState->activeCards[j]->cardDef->move == MOVE_CURE) {
                     skip = TRUE;
                 }
             }
@@ -2309,7 +2309,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
             }
         }
 #else
-        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == MOVE_CURE &&
             !gCardBattleState->rikuStockActive) {
             skip = TRUE;
         }
@@ -3118,7 +3118,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
 #ifdef VERSION_EU
         if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
             for (j = 0; j < gCardBattleState->activeCardCount; j++) {
-                if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
+                if (gCardBattleState->activeCards[j]->cardDef->move == MOVE_CURE) {
                     skip = TRUE;
                 }
             }
@@ -3133,7 +3133,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
             }
         }
 #else
-        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == MOVE_CURE &&
             !gCardBattleState->rikuStockActive) {
             skip = TRUE;
         }
@@ -5140,7 +5140,7 @@ u8 SoraGimmickCardHit(CardDisplayWork* work) {
         FadeLock();
         gBtlWork->flags &= ~BTL_FLAG_BGFX_PAUSED;
 
-        if (work->cardDef->move == 140) {
+        if (work->cardDef->move == MOVE_GIMMICK_0) {
             SetGimmickFlag(0);
         }
 

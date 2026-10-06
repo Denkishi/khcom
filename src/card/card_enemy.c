@@ -25,6 +25,7 @@
 #include "battle.h"
 #include "card_label_data.h"
 #include "map_types.h"
+#include "card_ids.h"
 
 static s16 sBossCardValue;
 
@@ -709,13 +710,13 @@ void UseEnemyCard(u16 arg) {
             if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
 #ifdef VERSION_EU
                 for (j = 0; j < gCardBattleState->activeCardCount; j++) {
-                    if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
+                    if (gCardBattleState->activeCards[j]->cardDef->move == MOVE_CURE) {
                         found = TRUE;
                     }
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-                    if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
+                    if (gCardBattleState->activeCards[i]->cardDef->move == MOVE_CURE) {
                         found = TRUE;
                         break;
                     }
@@ -826,7 +827,7 @@ void UseEnemyCard(u16 arg) {
 
             if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-                    if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
+                    if (gCardBattleState->activeCards[i]->cardDef->move == MOVE_CURE) {
                         flag = TRUE;
                         break;
                     }

@@ -37,6 +37,7 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "mode_riku_tutorial.h"
+#include "card_ids.h"
 
 enum BossCardRequest {
     BOSS_CARD_REQUEST_NONE,
@@ -395,7 +396,7 @@ s32 GetRikuSelectedMove() {
         }
     }
 
-    return 145;
+    return MOVE_STOCK_SEQUENCE;
 }
 
 void SetRikuReloadCharging() {
@@ -1863,7 +1864,7 @@ void TryRikuCardBreak(CardBattleWork* work) {
 #ifdef VERSION_EU
     if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
         for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-            if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
+            if (gCardBattleState->activeCards[i]->cardDef->move == MOVE_CURE) {
                 flag = TRUE;
             }
         }
@@ -1877,7 +1878,7 @@ void TryRikuCardBreak(CardBattleWork* work) {
         }
     }
 #else
-    if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 && !gCardBattleState->soraStockActive) {
+    if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == MOVE_CURE && !gCardBattleState->soraStockActive) {
         flag = TRUE;
     }
 
@@ -2312,7 +2313,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
 #ifdef VERSION_EU
     if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER) {
         for (j = 0; j < gCardBattleState->activeCardCount; j++) {
-            if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
+            if (gCardBattleState->activeCards[j]->cardDef->move == MOVE_CURE) {
                 skip = TRUE;
             }
         }
@@ -2327,7 +2328,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
         }
     }
 #else
-    if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == 22 &&
+    if (gBtlWork->hcEffect == HC_EFFECT_LEAF_BRACER && gCardBattleState->activeCards[0]->cardDef->move == MOVE_CURE &&
         !gCardBattleState->soraStockActive) {
         skip = TRUE;
     }
@@ -2705,7 +2706,7 @@ s32 GetRikuSelectedCardMoveRaw() {
         return sRikuSelectedCard->cardDef->move;
     }
 
-    return 145;
+    return MOVE_STOCK_SEQUENCE;
 }
 
 u8 GetRikuSelectedCardValue() {

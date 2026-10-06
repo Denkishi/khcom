@@ -131,7 +131,7 @@ s32 ResolveActiveCardsMove(s32* out) {
         if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay == TRUE && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
             if (gCardBattleState->darkModeReady == TRUE || gBtlWork->darkPoints > 29) {
                 gCardBattleState->darkModeReady = FALSE;
-                return 46;
+                return MOVE_DARK_MODE;
             }
         }
 
@@ -141,7 +141,7 @@ s32 ResolveActiveCardsMove(s32* out) {
         if (btl->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
             out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
             gCardBattleState->stockMoveCount = 2;
-            return 145;
+            return MOVE_STOCK_SEQUENCE;
         } else {
             return gCardBattleState->activeCards[0]->cardDef->move;
         }
@@ -155,7 +155,7 @@ s32 ResolveActiveCardsMove(s32* out) {
         switch (stockName) {
         case STOCK_DARK_MODE:
             gCardBattleState->stockMoveCount = 1;
-            return 46;
+            return MOVE_DARK_MODE;
         default:
             btl = gBtlWork;
 
@@ -163,7 +163,7 @@ s32 ResolveActiveCardsMove(s32* out) {
                 if (btl->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
-                    return 145;
+                    return MOVE_STOCK_SEQUENCE;
                 } else {
                     return GetStockMove(stockName);
                 }
@@ -171,7 +171,7 @@ s32 ResolveActiveCardsMove(s32* out) {
                 if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
-                    return 145;
+                    return MOVE_STOCK_SEQUENCE;
                 } else {
                     return GetStockMove(stockName);
                 }
@@ -185,7 +185,7 @@ s32 ResolveActiveCardsMove(s32* out) {
                 if (found[0] == 1) {
                     out[0] = stockKeys.keys[0];
 #ifdef VERSION_EU
-                    out[1] = 145;
+                    out[1] = MOVE_STOCK_SEQUENCE;
 #else
                     out[1] = -1;
 #endif
@@ -194,7 +194,7 @@ s32 ResolveActiveCardsMove(s32* out) {
                     out[5] = out[2];
                 } else if (found[1] == 1) {
 #ifdef VERSION_EU
-                    out[1] = 145;
+                    out[1] = MOVE_STOCK_SEQUENCE;
 #else
                     out[1] = -1;
 #endif
@@ -235,7 +235,7 @@ s32 ResolveActiveCardsMove(s32* out) {
             }
 #endif
 
-            return 145;
+            return MOVE_STOCK_SEQUENCE;
         }
     }
 }
@@ -296,7 +296,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
         if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
             if (gCardBattleState->darkModeReady == TRUE || gBtlWork->darkPoints > 29) {
                 gCardBattleState->darkModeReady = FALSE;
-                return 46;
+                return MOVE_DARK_MODE;
             }
         }
 
@@ -307,7 +307,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                 if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
                     gCardBattleState->stockMoveCount = 2;
-                    return 145;
+                    return MOVE_STOCK_SEQUENCE;
                 } else {
                     return gCardBattleState->activeCards[0]->cardDef->move;
                 }
@@ -315,7 +315,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                 if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
                     gCardBattleState->stockMoveCount = 2;
-                    return 145;
+                    return MOVE_STOCK_SEQUENCE;
                 } else {
                     return gCardBattleState->activeCards[0]->cardDef->move;
                 }
@@ -331,13 +331,13 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
         switch (stockName) {
         case STOCK_DARK_MODE:
             gCardBattleState->stockMoveCount = 1;
-            return 46;
+            return MOVE_DARK_MODE;
         default:
             if (gBtlWork->soraOwnsPlay == TRUE) {
                 if (gBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
-                    return 145;
+                    return MOVE_STOCK_SEQUENCE;
                 } else {
                     return GetStockMove(stockName);
                 }
@@ -345,7 +345,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                 if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
                     out[0] = out[1] = GetStockMove(stockName);
                     gCardBattleState->stockMoveCount = 2;
-                    return 145;
+                    return MOVE_STOCK_SEQUENCE;
                 } else {
                     return GetStockMove(stockName);
                 }
@@ -359,7 +359,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                 if (found[0] == 1) {
                     out[0] = stockKeys.keys[0];
 #ifdef VERSION_EU
-                    out[1] = 145;
+                    out[1] = MOVE_STOCK_SEQUENCE;
 #else
                     out[1] = -1;
 #endif
@@ -368,7 +368,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                     out[5] = out[2];
                 } else if (found[1] == 1) {
 #ifdef VERSION_EU
-                    out[1] = 145;
+                    out[1] = MOVE_STOCK_SEQUENCE;
 #else
                     out[1] = -1;
 #endif
@@ -410,7 +410,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
             }
 #endif
 
-            return 145;
+            return MOVE_STOCK_SEQUENCE;
         }
     }
 }
@@ -500,217 +500,217 @@ u8 FindStockPairsInCombo(s32* keys, u8* found) {
 s32 GetStockMove(s32 stock) {
     switch (stock) {
     case STOCK_FIRA:
-        return 0x8002ACAB;
+        return MOVE_FIRA;
     case STOCK_BLIZZARA:
-        return 0x8002D4B5;
+        return MOVE_BLIZZARA;
     case STOCK_THUNDARA:
-        return 0x8002FCBF;
+        return MOVE_THUNDARA;
     case STOCK_CURA:
-        return 0x800324C9;
+        return MOVE_CURA;
     case STOCK_GRAVIRA:
-        return 0x80034CD3;
+        return MOVE_GRAVIRA;
     case STOCK_STOPRA:
-        return 0x800374DD;
+        return MOVE_STOPRA;
     case STOCK_SONIC_BLADE:
-        return 0xC0100401;
+        return MOVE_SONIC_BLADE;
     case STOCK_STRIKE_RAID:
-        return 0x64;
+        return MOVE_STRIKE_RAID;
     case STOCK_FIRAGA:
-        return 0xCAB2ACAB;
+        return MOVE_FIRAGA;
     case STOCK_BLIZZAGA:
-        return 0xCB52D4B5;
+        return MOVE_BLIZZAGA;
     case STOCK_THUNDAGA:
-        return 0xCBF2FCBF;
+        return MOVE_THUNDAGA;
     case STOCK_CURAGA:
-        return 0xCC9324C9;
+        return MOVE_CURAGA;
     case STOCK_STOPGA:
-        return 0xCDD374DD;
+        return MOVE_STOPGA;
     case STOCK_GRAVIGA:
-        return 0xCD334CD3;
+        return MOVE_GRAVIGA;
     case STOCK_GOOFY_TORNADO:
-        return 0xCFB3ECFB;
+        return MOVE_GOOFY_TORNADO;
     case STOCK_GOOFY_CHARGE:
-        return 0x8003ECFB;
+        return MOVE_GOOFY_CHARGE;
     case STOCK_MAGIC:
-        return 0xCF13C4F1;
+        return MOVE_MAGIC;
     case STOCK_MAGIC_PAIR:
-        return 0x8003C4F1;
+        return MOVE_MAGIC_PAIR;
     case STOCK_PROUD_ROAR:
-        return 0xD0541505;
+        return MOVE_PROUD_ROAR;
     case STOCK_PROUD_ROAR_PAIR:
-        return 0x80041505;
+        return MOVE_PROUD_ROAR_PAIR;
     case STOCK_SHOWTIME:
-        return 0xD0F43D0F;
+        return MOVE_SHOWTIME;
     case STOCK_SHOWTIME_PAIR:
-        return 0x80043D0F;
+        return MOVE_SHOWTIME_PAIR;
     case STOCK_PARADISE:
-        return 0xD1946519;
+        return MOVE_PARADISE;
     case STOCK_PARADISE_PAIR:
-        return 0x80046519;
+        return MOVE_PARADISE_PAIR;
     case STOCK_SPLASH:
-        return 0xD2348D23;
+        return MOVE_SPLASH;
     case STOCK_SPLASH_PAIR:
-        return 0x80048D23;
+        return MOVE_SPLASH_PAIR;
     case STOCK_TWINKLE:
-        return 0xD2D4B52D;
+        return MOVE_TWINKLE;
     case STOCK_TWINKLE_PAIR:
-        return 0x8004B52D;
+        return MOVE_TWINKLE_PAIR;
     case STOCK_FLARE_BREATH:
-        return 0xD374DD37;
+        return MOVE_FLARE_BREATH;
     case STOCK_FLARE_BREATH_PAIR:
-        return 0x8004DD37;
+        return MOVE_FLARE_BREATH_PAIR;
     case STOCK_OMNISLASH:
-        return 0xD4150541;
+        return MOVE_OMNISLASH;
     case STOCK_CROSS_SLASH:
-        return 0x80050541;
+        return MOVE_CROSS_SLASH;
     case STOCK_SANDSTORM:
-        return 0xD4B52D4B;
+        return MOVE_SANDSTORM;
     case STOCK_SANDSTORM_PAIR:
-        return 0x80052D4B;
+        return MOVE_SANDSTORM_PAIR;
     case STOCK_SPIRAL_WAVE:
-        return 0xD5555555;
+        return MOVE_SPIRAL_WAVE;
     case STOCK_SPIRAL_WAVE_PAIR:
-        return 0x80055555;
+        return MOVE_SPIRAL_WAVE_PAIR;
     case STOCK_SURPRISE:
-        return 0xD5F57D5F;
+        return MOVE_SURPRISE;
     case STOCK_SURPRISE_PAIR:
-        return 0x80057D5F;
+        return MOVE_SURPRISE_PAIR;
     case STOCK_HUMMINGBIRD:
-        return 0xD695A569;
+        return MOVE_HUMMINGBIRD;
     case STOCK_HUMMINGBIRD_PAIR:
-        return 0x8005A569;
+        return MOVE_HUMMINGBIRD_PAIR;
     case STOCK_FEROCIOUS_LUNGE:
-        return 0xD735CD73;
+        return MOVE_FEROCIOUS_LUNGE;
     case STOCK_FEROCIOUS_LUNGE_PAIR:
-        return 0x8005CD73;
+        return MOVE_FEROCIOUS_LUNGE_PAIR;
     case STOCK_MM_MIRACLE:
-        return 0xE9FA7E9F;
+        return MOVE_MM_MIRACLE;
     case STOCK_MM_MIRACLE_PAIR:
-        return 0x800A7E9F;
+        return MOVE_MM_MIRACLE_PAIR;
     case STOCK_AERORA:
-        return 0x80039CE7;
+        return MOVE_AERORA;
     case STOCK_AEROGA:
-        return 0xCE739CE7;
+        return MOVE_AEROGA;
     case STOCK_BLITZ:
-        return 0x65;
+        return MOVE_BLITZ;
     case STOCK_ARS_ARCANUM:
-        return 0x66;
+        return MOVE_ARS_ARCANUM;
     case STOCK_RAGNAROK:
-        return 0x67;
+        return MOVE_RAGNAROK;
     case STOCK_TRINITY_LIMIT:
-        return 0x68;
+        return MOVE_TRINITY_LIMIT;
     case STOCK_SLIDING_DASH:
-        return 0x69;
+        return MOVE_SLIDING_DASH;
     case STOCK_STUN_IMPACT:
-        return 0x6A;
+        return MOVE_STUN_IMPACT;
     case STOCK_ZANTETSUKEN:
-        return 0x6B;
+        return MOVE_ZANTETSUKEN;
     case STOCK_WARP:
-        return 0x6C;
+        return MOVE_WARP;
     case STOCK_WARPINATOR:
-        return 0x6D;
+        return MOVE_WARPINATOR;
     case STOCK_TERROR:
-        return 0x6E;
+        return MOVE_TERROR;
     case STOCK_CONFUSE:
-        return 0x6F;
+        return MOVE_CONFUSE;
     case STOCK_SLEIGHT_57:
-        return 0x70;
+        return MOVE_SLEIGHT_57;
     case STOCK_STOP_RAID:
-        return 0x71;
+        return MOVE_STOP_RAID;
     case STOCK_JUDGMENT:
-        return 0x72;
+        return MOVE_JUDGMENT;
     case STOCK_REFLECT_RAID:
-        return 0x73;
+        return MOVE_REFLECT_RAID;
     case STOCK_FIRE_RAID:
-        return 0x74;
+        return MOVE_FIRE_RAID;
     case STOCK_BLIZZARD_RAID:
-        return 0x75;
+        return MOVE_BLIZZARD_RAID;
     case STOCK_THUNDER_RAID:
-        return 0x76;
+        return MOVE_THUNDER_RAID;
     case STOCK_GRAVITY_RAID:
-        return 0x77;
+        return MOVE_GRAVITY_RAID;
     case STOCK_AQUA_SPLASH:
-        return 0x78;
+        return MOVE_AQUA_SPLASH;
     case STOCK_HOLY:
-        return 0x79;
+        return MOVE_HOLY;
     case STOCK_BLAZING_DONALD:
-        return 0x7A;
+        return MOVE_BLAZING_DONALD;
     case STOCK_GIFTED_MIRACLE:
-        return 0x7C;
+        return MOVE_GIFTED_MIRACLE;
     case STOCK_MEGA_FLARE:
-        return 0x7D;
+        return MOVE_MEGA_FLARE;
     case STOCK_FIRAGA_BREAK:
-        return 0x7E;
+        return MOVE_FIRAGA_BREAK;
     case STOCK_SHOCK_IMPACT:
-        return 0x7F;
+        return MOVE_SHOCK_IMPACT;
     case STOCK_IDYLL_ROMP:
-        return 0x80;
+        return MOVE_IDYLL_ROMP;
     case STOCK_CROSS_SLASH_PLUS:
-        return 0x81;
+        return MOVE_CROSS_SLASH_PLUS;
     case STOCK_HOMING_FIRA:
-        return 0x82;
+        return MOVE_HOMING_FIRA;
     case STOCK_HOMING_BLIZZARA:
-        return 0x83;
+        return MOVE_HOMING_BLIZZARA;
     case STOCK_SYNCHRO:
-        return 0x84;
+        return MOVE_SYNCHRO;
     case STOCK_BIND:
-        return 0x85;
+        return MOVE_BIND;
     case STOCK_TORNADO:
-        return 0x86;
+        return MOVE_TORNADO;
     case STOCK_QUAKE:
-        return 0x87;
+        return MOVE_QUAKE;
     case STOCK_TELEPORT:
-        return 0x88;
+        return MOVE_TELEPORT;
     case STOCK_DARK_BREAK:
-        return 0x89;
+        return MOVE_DARK_BREAK;
     case STOCK_DARK_FIRAGA:
-        return 0x8A;
+        return MOVE_DARK_FIRAGA;
     case STOCK_DARK_AURA:
-        return 0x8B;
+        return MOVE_DARK_AURA;
     case STOCK_DARK_MODE:
-        return 0x2E;
+        return MOVE_DARK_MODE;
     case STOCK_FIRE_WALL:
-        return 0xF21C8721;
+        return MOVE_FIRE_WALL;
     case STOCK_CROSS_SLASH_2:
-        return 0xEB3ACEB3;
+        return MOVE_CROSS_SLASH_2;
     case STOCK_OMNISLASH_2:
-        return 0xEB3AA6B3;
+        return MOVE_OMNISLASH_2;
     case STOCK_TEMPER_FLARE:
-        return 0xEE5B96E5;
+        return MOVE_TEMPER_FLARE;
     case STOCK_FIRAGA_BALL:
-        return 0xEEFB96EF;
+        return MOVE_FIRAGA_BALL;
     case STOCK_LIGHTNING_BOLT:
-        return 0xF49D2735;
+        return MOVE_LIGHTNING_BOLT;
     case STOCK_COMBO_PRESENT:
-        return 0xED1AF6BD;
+        return MOVE_COMBO_PRESENT;
     case STOCK_RUSH_PRESENT:
-        return 0xED1B1EC7;
+        return MOVE_RUSH_PRESENT;
     case STOCK_DARK_FIRAGA_2:
-        return 0xF0DBE6F9;
+        return MOVE_DARK_FIRAGA_2;
     case STOCK_FREEZE:
-        return 0xF53D7753;
+        return MOVE_FREEZE;
     case STOCK_DIAMOND_DUST:
-        return 0xF53D4F5D;
+        return MOVE_DIAMOND_DUST_SLEIGHT;
     case STOCK_ICEBURN:
-        return 0xF5DD4F53;
+        return MOVE_ICEBURN;
     case STOCK_DARK_AURA_2:
-        return 0xF17C0F03;
+        return MOVE_DARK_AURA_2;
     case STOCK_TELEPORT_RUSH:
-        return 0xF35CFF3F;
+        return MOVE_TELEPORT_RUSH;
     case STOCK_FIRETOOTH:
-        return 0xF21CAF21;
+        return MOVE_FIRETOOTH;
     case STOCK_BLOSSOM_SHOWER:
-        return 0xF71D9F71;
+        return MOVE_BLOSSOM_SHOWER;
     case STOCK_DEATHSCYTHE:
-        return 0xF7BDC767;
+        return MOVE_DEATHSCYTHE;
     case STOCK_ROCKSHATTER:
-        return 0xFADEB7A3;
+        return MOVE_ROCKSHATTER;
     case STOCK_DARK_SHADOW:
-        return 0xFA3EB7A3;
+        return MOVE_DARK_SHADOW;
     case STOCK_ROCKSHATTER_2:
-        return 0xF85E3F85;
+        return MOVE_ROCKSHATTER_2;
     case STOCK_ICE_NEEDLES:
-        return 0xF53D4F53;
+        return MOVE_ICE_NEEDLES;
     }
 }
 
@@ -1069,7 +1069,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
         }
     }
 
-    if ((u8)IsThreeAttackCardsNoMove18(cards, count)) {
+    if ((u8)IsThreeAttackCardsNoSoulEater(cards, count)) {
         if ((u16)(value - 1) <= 5 && IsStockLearned(LEARNED_STOCK_ARS_ARCANUM)) {
             stockKeys->keys[0] = STOCK_ARS_ARCANUM;
             return STOCK_ARS_ARCANUM;
@@ -1442,7 +1442,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
         }
     }
 
-    if ((u8)IsThreeAttackCardsNoMove18(cards, count)) {
+    if ((u8)IsThreeAttackCardsNoSoulEater(cards, count)) {
         if ((u16)(value - 1) <= 5 && IsLinkSideStockLearned(LEARNED_STOCK_ARS_ARCANUM, side)) {
             stockKeys->keys[0] = STOCK_ARS_ARCANUM;
             return STOCK_ARS_ARCANUM;
@@ -1509,7 +1509,7 @@ s32 IsThreeDistinctAttackCards(CardDisplayWork** cards, u8 count) {
     return FALSE;
 }
 
-s32 IsThreeAttackCardsNoMove18(CardDisplayWork** cards, u8 count) {
+s32 IsThreeAttackCardsNoSoulEater(CardDisplayWork** cards, u8 count) {
     const CardDef* firstDef;
     const CardDef* secondDef;
     const CardDef* thirdDef;
@@ -1519,7 +1519,7 @@ s32 IsThreeAttackCardsNoMove18(CardDisplayWork** cards, u8 count) {
         secondDef = cards[1]->cardDef;
         thirdDef = cards[2]->cardDef;
 
-        if (firstDef->move != 18 && secondDef->move != 18 && thirdDef->move != 18 &&
+        if (firstDef->move != MOVE_SOUL_EATER && secondDef->move != MOVE_SOUL_EATER && thirdDef->move != MOVE_SOUL_EATER &&
             firstDef->category == CARD_CATEGORY_ATTACK && secondDef->category == CARD_CATEGORY_ATTACK && thirdDef->category == CARD_CATEGORY_ATTACK) {
             return TRUE;
         }

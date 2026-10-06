@@ -12,7 +12,7 @@ enum LinkSide {
 u8 FindStockPairsInCombo(s32* keys, u8* found);
 s32 GetStockMove(s32 stock);
 s32 IsThreeDistinctAttackCards(CardDisplayWork** cards, u8 count);
-s32 IsThreeAttackCardsNoMove18(CardDisplayWork** cards, u8 count);
+s32 IsThreeAttackCardsNoSoulEater(CardDisplayWork** cards, u8 count);
 s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** cards, u8 count);
 s32 IsKindPairThenNonSummonOfCategory(CardDisplayWork** cards, u8 count, u16 firstKind, u16 secondKind, u8 category);
 s32 IsKindPairThenSummon(CardDisplayWork** cards, u8 count, u16 firstKind, u16 secondKind);

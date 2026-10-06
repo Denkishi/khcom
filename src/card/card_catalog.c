@@ -68,1803 +68,1803 @@ const u8* gBlackCircleTextPtr = gBlackCircleText;
 const CardDef gCardDefs[950] = {
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 0, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 0, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 1, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 1, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 2, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 2, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 3, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 3, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 4, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 4, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 5, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 5, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 6, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 6, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 7, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 7, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 8, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 8, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, LOCALIZED(gCardNameKingdomKey), gKingdomKeySmallCardFrame0, gKingdomKeySmallCardTiles, gKingdomKeySmallCardPalette,
-        CARD_KIND_KINGDOM_KEY, 0x0, 9, 0x0, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_KINGDOM_KEY, 0x0, 9, MOVE_KINGDOM_KEY, 1, CARD_CATEGORY_ATTACK, 10, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 0, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 0, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 1, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 1, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 2, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 2, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 3, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 3, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 4, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 4, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 5, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 5, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 6, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 6, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 7, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 7, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 8, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 8, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, LOCALIZED(gCardNameThreeWishes), gThreeWishesSmallCardFrame0, gThreeWishesSmallCardTiles, gThreeWishesSmallCardPalette,
-        CARD_KIND_THREE_WISHES, 0x0, 9, 0x3, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_THREE_WISHES, 0x0, 9, MOVE_THREE_WISHES, 11, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 0, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 0, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 1, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 1, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 2, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 2, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 3, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 3, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 4, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 4, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 5, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 5, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 6, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 6, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 7, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 7, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 8, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 8, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, LOCALIZED(gCardNameCrabclaw), gCrabclawSmallCardFrame0, gCrabclawSmallCardTiles, gCrabclawSmallCardPalette,
-        CARD_KIND_CRABCLAW, 0x0, 9, 0x4, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_CRABCLAW, 0x0, 9, MOVE_CRABCLAW, 21, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 0, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 0, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 1, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 1, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 2, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 2, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 3, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 3, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 4, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 4, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 5, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 5, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 6, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 6, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 7, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 7, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 8, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 8, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, LOCALIZED(gCardNamePumpkinhead), gPumpkinheadSmallCardFrame0, gPumpkinheadSmallCardTiles, gPumpkinheadSmallCardPalette,
-        CARD_KIND_PUMPKINHEAD, 0x0, 9, 0x5, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_PUMPKINHEAD, 0x0, 9, MOVE_PUMPKINHEAD, 31, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 0, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 0, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 1, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 1, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 2, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 2, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 3, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 3, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 4, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 4, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 5, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 5, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 6, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 6, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 7, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 7, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 8, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 8, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, LOCALIZED(gCardNameFairyHarp), gFairyHarpSmallCardFrame0, gFairyHarpSmallCardTiles, gFairyHarpSmallCardPalette,
-        CARD_KIND_FAIRY_HARP, 0x0, 9, 0x6, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_FAIRY_HARP, 0x0, 9, MOVE_FAIRY_HARP, 41, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 0, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 0, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 1, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 1, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 2, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 2, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 3, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 3, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 4, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 4, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 5, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 5, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 6, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 6, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 7, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 7, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 8, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 8, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, LOCALIZED(gCardNameWishingStar), gWishingStarSmallCardFrame0, gWishingStarSmallCardTiles, gWishingStarSmallCardPalette,
-        CARD_KIND_WISHING_STAR, 0x0, 9, 0x7, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_WISHING_STAR, 0x0, 9, MOVE_WISHING_STAR, 51, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 0, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 0, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 1, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 1, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 2, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 2, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 3, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 3, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 4, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 4, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 5, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 5, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 6, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 6, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 7, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 7, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 8, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 8, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, LOCALIZED(gCardNameSpellbinder), gSpellbinderSmallCardFrame0, gSpellbinderSmallCardTiles, gSpellbinderSmallCardPalette,
-        CARD_KIND_SPELLBINDER, 0x0, 9, 0x8, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_SPELLBINDER, 0x0, 9, MOVE_SPELLBINDER, 61, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 0, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 0, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 1, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 1, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 2, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 2, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 3, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 3, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 4, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 4, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 5, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 5, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 6, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 6, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 7, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 7, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 8, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 8, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, LOCALIZED(gCardNameMetalChocobo), gMetalChocoboSmallCardFrame0, gMetalChocoboSmallCardTiles, gMetalChocoboSmallCardPalette,
-        CARD_KIND_METAL_CHOCOBO, 0x0, 9, 0x9, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_METAL_CHOCOBO, 0x0, 9, MOVE_METAL_CHOCOBO, 71, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 0, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 0, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 1, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 1, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 2, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 2, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 3, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 3, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 4, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 4, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 5, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 5, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 6, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 6, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 7, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 7, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 8, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 8, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, LOCALIZED(gCardNameOlympia), gOlympiaSmallCardFrame0, gOlympiaSmallCardTiles, gOlympiaSmallCardPalette,
-        CARD_KIND_OLYMPIA, 0x0, 9, 0x2, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OLYMPIA, 0x0, 9, MOVE_OLYMPIA, 81, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 0, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 0, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 1, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 1, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 2, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 2, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 3, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 3, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 4, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 4, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 5, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 5, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 6, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 6, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 7, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 7, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 8, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 8, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, LOCALIZED(gCardNameLionheart), gLionheartSmallCardFrame0, gLionheartSmallCardTiles, gLionheartSmallCardPalette,
-        CARD_KIND_LIONHEART, 0x0, 9, 0xa, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LIONHEART, 0x0, 9, MOVE_LIONHEART, 91, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 0, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 0, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 1, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 1, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 2, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 2, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 3, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 3, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 4, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 4, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 5, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 5, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 6, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 6, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 7, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 7, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 8, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 8, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, LOCALIZED(gCardNameLadyLuck), gLadyLuckSmallCardFrame0, gLadyLuckSmallCardTiles, gLadyLuckSmallCardPalette,
-        CARD_KIND_LADY_LUCK, 0x0, 9, 0xb, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_LADY_LUCK, 0x0, 9, MOVE_LADY_LUCK, 101, CARD_CATEGORY_ATTACK, 15, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 0, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 0, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 1, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 1, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 2, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 2, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 3, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 3, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 4, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 4, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 5, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 5, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 6, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 6, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 7, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 7, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 8, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 8, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, LOCALIZED(gCardNameDivineRose), gDivineRoseSmallCardFrame0, gDivineRoseSmallCardTiles, gDivineRoseSmallCardPalette,
-        CARD_KIND_DIVINE_ROSE, 0x0, 9, 0xc, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIVINE_ROSE, 0x0, 9, MOVE_DIVINE_ROSE, 111, CARD_CATEGORY_ATTACK, 20, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 0, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 0, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 1, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 1, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 2, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 2, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 3, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 3, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 4, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 4, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 5, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 5, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 6, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 6, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 7, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 7, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 8, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 8, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, LOCALIZED(gCardNameOathkeeper), gOathkeeperSmallCardFrame0, gOathkeeperSmallCardTiles, gOathkeeperSmallCardPalette,
-        CARD_KIND_OATHKEEPER, 0x0, 9, 0xd, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OATHKEEPER, 0x0, 9, MOVE_OATHKEEPER, 121, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 0, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 0, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 1, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 1, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 2, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 2, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 3, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 3, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 4, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 4, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 5, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 5, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 6, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 6, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 7, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 7, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 8, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 8, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, LOCALIZED(gCardNameOblivion), gOblivionSmallCardFrame0, gOblivionSmallCardTiles, gOblivionSmallCardPalette,
-        CARD_KIND_OBLIVION, 0x0, 9, 0xe, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_OBLIVION, 0x0, 9, MOVE_OBLIVION, 131, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 0, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 0, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 1, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 1, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 2, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 2, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 3, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 3, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 4, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 4, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 5, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 5, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 6, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 6, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 7, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 7, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 8, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 8, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, LOCALIZED(gCardNameDiamondDust), gDiamondDustSmallCardFrame0, gDiamondDustSmallCardTiles, gDiamondDustSmallCardPalette,
-        CARD_KIND_DIAMOND_DUST, 0x0, 9, 0x10, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_DIAMOND_DUST, 0x0, 9, MOVE_DIAMOND_DUST, 141, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 0, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 0, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 1, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 1, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 2, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 2, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 3, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 3, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 4, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 4, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 5, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 5, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 6, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 6, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 7, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 7, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 8, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 8, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, LOCALIZED(gCardNameOneWingedAngel), gOneWingedAngelSmallCardFrame0, gOneWingedAngelSmallCardTiles, gOneWingedAngelSmallCardPalette,
-        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 9, 0x11, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ONE_WINGED_ANGEL, 0x0, 9, MOVE_ONE_WINGED_ANGEL, 151, CARD_CATEGORY_ATTACK, 25, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 0, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {10, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 0, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {10, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 1, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 1, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 2, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 2, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 3, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 3, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 4, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 4, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 5, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 5, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 6, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 6, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 7, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 7, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 8, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 8, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, LOCALIZED(gCardNameUltimaWeapon), gUltimaWeaponSmallCardFrame0, gUltimaWeaponSmallCardTiles, gUltimaWeaponSmallCardPalette,
-        CARD_KIND_ULTIMA_WEAPON, 0x0, 9, 0xf, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
+        CARD_KIND_ULTIMA_WEAPON, 0x0, 9, MOVE_ULTIMA_WEAPON, 161, CARD_CATEGORY_ATTACK, 30, {2, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 0, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 0, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 1, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 1, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 2, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 2, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 3, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 3, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 4, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 4, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 5, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 5, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 6, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 6, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 7, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 7, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 8, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 8, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, LOCALIZED(gCardNameFire), gFireSmallCardFrame0, gFireSmallCardTiles, gFireSmallCardPalette,
-        CARD_KIND_FIRE, 0x0, 9, 0x13, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_FIRE, 0x0, 9, MOVE_FIRE, 171, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 0, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 0, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 1, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 1, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 2, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 2, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 3, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 3, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 4, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 4, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 5, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 5, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 6, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 6, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 7, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 7, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 8, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 8, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, LOCALIZED(gCardNameBlizzard), gBlizzardSmallCardFrame0, gBlizzardSmallCardTiles, gBlizzardSmallCardPalette,
-        CARD_KIND_BLIZZARD, 0x0, 9, 0x14, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BLIZZARD, 0x0, 9, MOVE_BLIZZARD, 181, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 0, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 0, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 1, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 1, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 2, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 2, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 3, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 3, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 4, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 4, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 5, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 5, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 6, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 6, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 7, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 7, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 8, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 8, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, LOCALIZED(gCardNameThunder), gThunderSmallCardFrame0, gThunderSmallCardTiles, gThunderSmallCardPalette,
-        CARD_KIND_THUNDER, 0x0, 9, 0x15, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THUNDER, 0x0, 9, MOVE_THUNDER, 191, CARD_CATEGORY_MAGIC, 15, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 0, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 0, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 1, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 1, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 2, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 2, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 3, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 3, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 4, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 4, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 5, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 5, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 6, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 6, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 7, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 7, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 8, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 8, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, LOCALIZED(gCardNameCure), gCureSmallCardFrame0, gCureSmallCardTiles, gCureSmallCardPalette,
-        CARD_KIND_CURE, 0x0, 9, 0x16, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CURE, 0x0, 9, MOVE_CURE, 201, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 0, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 0, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 1, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 1, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 2, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 2, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 3, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 3, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 4, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 4, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 5, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 5, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 6, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 6, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 7, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 7, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 8, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 8, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, LOCALIZED(gCardNameGravity), gGravitySmallCardFrame0, gGravitySmallCardTiles, gGravitySmallCardPalette,
-        CARD_KIND_GRAVITY, 0x0, 9, 0x17, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GRAVITY, 0x0, 9, MOVE_GRAVITY, 211, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 0, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 0, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 1, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 1, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 2, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 2, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 3, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 3, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 4, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 4, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 5, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 5, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 6, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 6, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 7, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 7, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 8, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 8, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, LOCALIZED(gCardNameStop), gStopSmallCardFrame0, gStopSmallCardTiles, gStopSmallCardPalette,
-        CARD_KIND_STOP, 0x0, 9, 0x18, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_STOP, 0x0, 9, MOVE_STOP, 221, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 0, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 0, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 1, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 1, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 2, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 2, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 3, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 3, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 4, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 4, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 5, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 5, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 6, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 6, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 7, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 7, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 8, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 8, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, LOCALIZED(gCardNameAero), gAeroSmallCardFrame0, gAeroSmallCardTiles, gAeroSmallCardPalette,
-        CARD_KIND_AERO, 0x0, 9, 0x19, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_AERO, 0x0, 9, MOVE_AERO, 231, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 0, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 0, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 1, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 1, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 2, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 2, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 3, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 3, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 4, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 4, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 5, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 5, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 6, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 6, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 7, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 7, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 8, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 8, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, LOCALIZED(gCardNameDonaldDuck), gDonaldDuckSmallCardFrame0, gDonaldDuckSmallCardTiles, gDonaldDuckSmallCardPalette,
-        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 9, 0x1c, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DONALD_DUCK, CARD_DEF_FLAG_FRIEND, 9, MOVE_DONALD_DUCK, 241, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 0, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 0, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 1, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 1, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 2, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 2, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 3, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 3, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 4, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 4, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 5, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 5, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 6, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 6, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 7, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 7, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 8, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 8, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, LOCALIZED(gCardNameGoofy), gGoofySmallCardFrame0, gGoofySmallCardTiles, gGoofySmallCardPalette,
-        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 9, 0x1b, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GOOFY, CARD_DEF_FLAG_FRIEND, 9, MOVE_GOOFY, 251, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 0, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 0, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 1, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 1, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 2, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 2, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 3, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 3, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 4, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 4, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 5, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 5, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 6, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 6, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 7, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 7, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 8, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 8, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, LOCALIZED(gCardNameSimba), gSimbaSmallCardFrame0, gSimbaSmallCardTiles, gSimbaSmallCardPalette,
-        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 9, 0x1d, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_SIMBA, CARD_DEF_FLAG_SUMMON, 9, MOVE_SIMBA, 261, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 0, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 0, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 1, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 1, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 2, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 2, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 3, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 3, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 4, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 4, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 5, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 5, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 6, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 6, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 7, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 7, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 8, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 8, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, LOCALIZED(gCardNameGenie), gGenieSmallCardFrame0, gGenieSmallCardTiles, gGenieSmallCardPalette,
-        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 9, 0x1e, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_GENIE, CARD_DEF_FLAG_SUMMON, 9, MOVE_GENIE, 271, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 0, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 0, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 1, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 1, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 2, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 2, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 3, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 3, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 4, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 4, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 5, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 5, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 6, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 6, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 7, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 7, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 8, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 8, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, LOCALIZED(gCardNameBambi), gBambiSmallCardFrame0, gBambiSmallCardTiles, gBambiSmallCardPalette,
-        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 9, 0x1f, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_BAMBI, CARD_DEF_FLAG_SUMMON, 9, MOVE_BAMBI, 281, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 0, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 0, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 1, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 1, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 2, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 2, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 3, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 3, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 4, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 4, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 5, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 5, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 6, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 6, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 7, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 7, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 8, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 8, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, LOCALIZED(gCardNameDumbo), gDumboSmallCardFrame0, gDumboSmallCardTiles, gDumboSmallCardPalette,
-        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 9, 0x20, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_DUMBO, CARD_DEF_FLAG_SUMMON, 9, MOVE_DUMBO, 291, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 0, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 0, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 1, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 1, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 2, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 2, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 3, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 3, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 4, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 4, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 5, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 5, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 6, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 6, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 7, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 7, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 8, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 8, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, LOCALIZED(gCardNameTinkerBell), gTinkerBellSmallCardFrame0, gTinkerBellSmallCardTiles, gTinkerBellSmallCardPalette,
-        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 9, 0x21, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_TINKER_BELL, CARD_DEF_FLAG_SUMMON, 9, MOVE_TINKER_BELL, 301, CARD_CATEGORY_MAGIC, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 0, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 0, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 1, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 1, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 2, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 2, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 3, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 3, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 4, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 4, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 5, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 5, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 6, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 6, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 7, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 7, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 8, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 8, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, LOCALIZED(gCardNameMushu), gMushuSmallCardFrame0, gMushuSmallCardTiles, gMushuSmallCardPalette,
-        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 9, 0x22, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MUSHU, CARD_DEF_FLAG_SUMMON, 9, MOVE_MUSHU, 311, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 0, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 0, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 1, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 1, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 2, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 2, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 3, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 3, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 4, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 4, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 5, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 5, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 6, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 6, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 7, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 7, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 8, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 8, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, LOCALIZED(gCardNameCloud), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudSmallCardPalette,
-        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 9, 0x23, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD, CARD_DEF_FLAG_SUMMON, 9, MOVE_CLOUD, 321, CARD_CATEGORY_MAGIC, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 0, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 0, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 1, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 1, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 2, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 2, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 3, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 3, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 4, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 4, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 5, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 5, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 6, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 6, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 7, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 7, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 8, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 8, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, LOCALIZED(gCardNameAladdin), gAladdinSmallCardFrame0, gAladdinSmallCardTiles, gAladdinSmallCardPalette,
-        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 9, 0x28, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ALADDIN, CARD_DEF_FLAG_FRIEND, 9, MOVE_ALADDIN, 331, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 0, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 0, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 1, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 1, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 2, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 2, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 3, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 3, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 4, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 4, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 5, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 5, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 6, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 6, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 7, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 7, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 8, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 8, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, LOCALIZED(gCardNameAriel), gArielSmallCardFrame0, gArielSmallCardTiles, gArielSmallCardPalette,
-        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 9, 0x29, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ARIEL, CARD_DEF_FLAG_FRIEND, 9, MOVE_ARIEL, 341, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 0, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 0, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 1, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 1, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 2, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 2, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 3, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 3, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 4, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 4, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 5, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 5, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 6, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 6, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 7, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 7, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 8, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 8, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, LOCALIZED(gCardNameJack), gJackSmallCardFrame0, gJackSmallCardTiles, gJackSmallCardPalette,
-        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 9, 0x2a, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_JACK, CARD_DEF_FLAG_FRIEND, 9, MOVE_JACK, 351, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 0, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 0, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 1, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 1, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 2, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 2, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 3, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 3, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 4, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 4, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 5, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 5, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 6, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 6, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 7, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 7, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 8, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 8, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, LOCALIZED(gCardNamePeterPan), gPeterPanSmallCardFrame0, gPeterPanSmallCardTiles, gPeterPanSmallCardPalette,
-        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 9, 0x2b, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_PETER_PAN, CARD_DEF_FLAG_FRIEND, 9, MOVE_PETER_PAN, 361, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 0, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 0, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 1, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 1, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 2, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 2, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 3, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 3, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 4, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 4, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 5, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 5, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 6, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 6, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 7, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 7, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 8, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 8, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, LOCALIZED(gCardNameBeast), gTheBeastSmallCardFrame0, gTheBeastSmallCardTiles, gTheBeastSmallCardPalette,
-        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 9, 0x2c, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_BEAST, CARD_DEF_FLAG_FRIEND, 9, MOVE_THE_BEAST, 371, CARD_CATEGORY_ITEM, 25, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 0, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 0, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 1, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 1, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 2, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 2, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 3, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 3, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 4, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 4, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 5, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 5, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 6, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 6, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 7, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 7, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 8, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 8, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, LOCALIZED(gCardNamePotion), gPotionSmallCardFrame0, gPotionSmallCardTiles, gPotionSmallCardPalette,
-        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 9, 0x2f, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_POTION, CARD_DEF_FLAG_ITEM, 9, MOVE_POTION, 381, CARD_CATEGORY_ITEM, 30, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 0, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 0, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 1, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 1, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 2, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 2, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 3, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 3, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 4, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 4, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 5, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 5, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 6, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 6, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 7, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 7, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 8, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 8, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, LOCALIZED(gCardNameHiPotion), gHiPotionSmallCardFrame0, gHiPotionSmallCardTiles, gHiPotionSmallCardPalette,
-        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 9, 0x30, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_HI_POTION, CARD_DEF_FLAG_ITEM, 9, MOVE_HI_POTION, 391, CARD_CATEGORY_ITEM, 40, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 0, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 0, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 1, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 1, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 2, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 2, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 3, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 3, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 4, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 4, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 5, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 5, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 6, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 6, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 7, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 7, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 8, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 8, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, LOCALIZED(gCardNameMegaPotion), gMegaPotionSmallCardFrame0, gMegaPotionSmallCardTiles, gMegaPotionSmallCardPalette,
-        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 9, 0x31, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_POTION, CARD_DEF_FLAG_ITEM, 9, MOVE_MEGA_POTION, 401, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 0, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 0, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 1, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 1, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 2, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 2, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 3, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 3, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 4, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 4, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 5, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 5, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 6, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 6, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 7, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 7, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 8, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 8, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, LOCALIZED(gCardNameEther), gEtherSmallCardFrame0, gEtherSmallCardTiles, gEtherSmallCardPalette,
-        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 9, 0x32, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ETHER, CARD_DEF_FLAG_ITEM, 9, MOVE_ETHER, 411, CARD_CATEGORY_ITEM, 20, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 0, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 0, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 1, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 1, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 2, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 2, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 3, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 3, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 4, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 4, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 5, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 5, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 6, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 6, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 7, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 7, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 8, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 8, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, LOCALIZED(gCardNameMegaEther), gMegaEtherSmallCardFrame0, gMegaEtherSmallCardTiles, gMegaEtherSmallCardPalette,
-        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 9, 0x33, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGA_ETHER, CARD_DEF_FLAG_ITEM, 9, MOVE_MEGA_ETHER, 421, CARD_CATEGORY_ITEM, 35, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 0, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 0, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 1, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 1, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 2, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 2, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 3, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 3, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 4, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 4, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 5, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 5, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 6, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 6, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 7, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 7, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 8, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 8, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, LOCALIZED(gCardNameElixir), gElixirSmallCardFrame0, gElixirSmallCardTiles, gElixirSmallCardPalette,
-        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 9, 0x34, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_ELIXIR, CARD_DEF_FLAG_ITEM, 9, MOVE_ELIXIR, 431, CARD_CATEGORY_ITEM, 45, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 0, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 0, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 1, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 1, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 2, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 2, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 3, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 3, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 4, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 4, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 5, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 5, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 6, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 6, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 7, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 7, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 8, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 8, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, LOCALIZED(gCardNameMegalixir), gMegalixirSmallCardFrame0, gMegalixirSmallCardTiles, gMegalixirSmallCardPalette,
-        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 9, 0x35, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_MEGALIXIR, CARD_DEF_FLAG_ITEM, 9, MOVE_MEGALIXIR, 441, CARD_CATEGORY_ITEM, 50, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy00Frame0, gCardEmy00Tiles, gEmy00Palette, LOCALIZED(gEnemyNameShadow), gShadowSmallCardFrame0, gShadowSmallCardTiles, gShadowSmallCardPalette,
@@ -2328,703 +2328,703 @@ const CardDef gCardDefs[950] = {
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 0, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 0, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 1, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 1, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 2, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 2, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 3, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 3, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 4, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 4, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 5, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 5, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 6, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 6, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 7, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 7, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 8, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 8, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 9, 0x0, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 9, HC_EFFECT_NONE, 565, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 0, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 0, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 1, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 1, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 2, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 2, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 3, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 3, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 4, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 4, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 5, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 5, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 6, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 6, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 7, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 7, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 8, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 8, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gCharacterNameCardOfSpades), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 9, 0x0, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 9, HC_EFFECT_NONE, 575, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 0, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 0, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 1, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 1, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 2, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 2, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 3, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 3, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 4, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 4, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 5, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 5, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 6, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 6, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 7, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 7, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 8, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 8, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gCharacterNameCardOfSpades), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 9, 0x0, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 9, HC_EFFECT_NONE, 585, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 0, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 0, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 1, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 1, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 2, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 2, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 3, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 3, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 4, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 4, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 5, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 5, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 6, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 6, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 7, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 7, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 8, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 8, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 9, 0x0, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 9, HC_EFFECT_NONE, 595, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 0, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 0, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 1, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 1, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 2, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 2, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 3, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 3, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 4, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 4, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 5, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 5, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 6, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 6, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 7, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 7, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 8, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 8, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 9, 0x0, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 9, HC_EFFECT_NONE, 605, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 0, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 0, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 1, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 1, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 2, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 2, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 3, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 3, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 4, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 4, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 5, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 5, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 6, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 6, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 7, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 7, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 8, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 8, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gCharacterNameCardOfSpades), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 9, 0x0, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 9, HC_EFFECT_NONE, 615, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 0, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 0, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 1, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 1, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 2, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 2, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 3, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 3, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 4, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 4, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 5, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 5, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 6, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 6, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 7, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 7, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 8, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 8, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gCharacterNameCardOfSpades), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 9, 0x0, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 9, HC_EFFECT_NONE, 625, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 0, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 0, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 1, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 1, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 2, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 2, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 3, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 3, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 4, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 4, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 5, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 5, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 6, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 6, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 7, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 7, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 8, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 8, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gCharacterNameCardOfSpades), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 9, 0x0, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 9, HC_EFFECT_NONE, 635, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 0, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 0, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 1, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 1, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 2, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 2, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 3, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 3, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 4, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 4, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 5, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 5, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 6, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 6, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 7, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 7, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 8, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 8, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 9, 0x0, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 9, HC_EFFECT_NONE, 645, CARD_CATEGORY_ENEMY, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gGimmickCardFrame0, gGimmickCardTiles, gGimmickCardPalette, LOCALIZED(gCharacterNameCardOfSpades), NULL, NULL, NULL,
-        CARD_KIND_GIMMICK_0, CARD_DEF_FLAG_GIMMICK, 0, 0x8c, 655, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_GIMMICK_0, CARD_DEF_FLAG_GIMMICK, 0, MOVE_GIMMICK_0, 655, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gGimmickCardFrame0, gGimmickCardTiles, gGimmickCardPalette, LOCALIZED(gCharacterNameCardOfSpades), NULL, NULL, NULL,
-        CARD_KIND_GIMMICK_1, CARD_DEF_FLAG_GIMMICK, 0, 0x8d, 656, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_GIMMICK_1, CARD_DEF_FLAG_GIMMICK, 0, MOVE_GIMMICK_1, 656, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gGimmickCardFrame0, gGimmickCardTiles, gGimmickCardPalette, LOCALIZED(gCharacterNameCardOfSpades), NULL, NULL, NULL,
-        CARD_KIND_GIMMICK_2, CARD_DEF_FLAG_GIMMICK, 0, 0x8e, 657, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_GIMMICK_2, CARD_DEF_FLAG_GIMMICK, 0, MOVE_GIMMICK_2, 657, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gGimmickCardFrame0, gGimmickCardTiles, gGimmickCardPalette, LOCALIZED(gCharacterNameCardOfSpades), NULL, NULL, NULL,
-        CARD_KIND_GIMMICK_3, CARD_DEF_FLAG_GIMMICK, 0, 0x8f, 658, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_GIMMICK_3, CARD_DEF_FLAG_GIMMICK, 0, MOVE_GIMMICK_3, 658, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gGimmickCardFrame0, gGimmickCardTiles, gGimmickCardPalette, LOCALIZED(gCharacterNameCardOfSpades), NULL, NULL, NULL,
-        CARD_KIND_GIMMICK_4, CARD_DEF_FLAG_GIMMICK, 0, 0x90, 659, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_GIMMICK_4, CARD_DEF_FLAG_GIMMICK, 0, MOVE_GIMMICK_4, 659, CARD_CATEGORY_ITEM, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 0, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 0, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 1, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 1, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 2, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 2, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 3, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 3, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 4, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 4, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 5, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 5, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 6, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 6, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 7, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 7, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 8, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 8, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, LOCALIZED(gCardNameSoulEater), gSoulEaterSmallCardFrame0, gSoulEaterSmallCardTiles, gSoulEaterSmallCardPalette,
-        CARD_KIND_SOUL_EATER, 0x0, 9, 0x12, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOUL_EATER, 0x0, 9, MOVE_SOUL_EATER, 661, CARD_CATEGORY_ATTACK, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 0, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 0, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 1, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 1, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 2, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 2, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 3, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 3, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 4, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 4, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 5, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 5, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 6, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 6, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 7, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 7, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 8, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 8, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, LOCALIZED(gCardNameKing), gTheKingSmallCardFrame0, gTheKingSmallCardTiles, gTheKingSmallCardPalette,
-        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 9, 0x2d, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
+        CARD_KIND_THE_KING, CARD_DEF_FLAG_FRIEND, 9, MOVE_THE_KING, 671, CARD_CATEGORY_ITEM, 0, {3, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 0, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 0, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 1, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 1, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 2, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 2, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 3, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 3, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 4, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 4, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 5, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 5, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 6, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 6, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 7, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 7, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 8, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 8, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudASmallCardPalette,
-        CARD_KIND_CLOUD_A, 0x0, 9, 0x24, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_A, 0x0, 9, MOVE_BOSS_A, 681, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 0, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 0, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 1, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 1, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 2, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 2, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 3, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 3, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 4, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 4, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 5, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 5, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 6, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 6, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 7, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 7, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 8, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 8, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, LOCALIZED(gCharacterNameCardOfSpades), gCloudSmallCardFrame0, gCloudSmallCardTiles, gCloudBSmallCardPalette,
-        CARD_KIND_CLOUD_B, 0x0, 9, 0x25, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_CLOUD_B, 0x0, 9, MOVE_BOSS_B, 691, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 0, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 0, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 1, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 1, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 2, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 2, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 3, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 3, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 4, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 4, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 5, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 5, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 6, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 6, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 7, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 7, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 8, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 8, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookASmallCardFrame0, gHookASmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_A, 0x0, 9, 0x24, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_A, 0x0, 9, MOVE_BOSS_A, 701, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 0, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 0, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 1, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 1, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 2, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 2, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 3, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 3, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 4, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 4, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 5, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 5, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 6, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 6, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 7, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 7, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 8, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 8, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookBSmallCardFrame0, gHookBSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_B, 0x0, 9, 0x25, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_B, 0x0, 9, MOVE_BOSS_B, 711, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 0, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 0, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 1, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 1, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 2, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 2, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 3, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 3, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 4, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 4, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 5, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 5, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 6, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 6, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 7, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 7, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 8, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 8, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookCSmallCardFrame0, gHookCSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_C, 0x0, 9, 0x26, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_C, 0x0, 9, MOVE_BOSS_C, 721, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 0, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 0, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 1, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 1, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 2, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 2, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 3, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 3, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 4, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 4, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 5, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 5, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 6, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 6, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 7, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 7, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 8, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 8, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, LOCALIZED(gCharacterNameCardOfSpades), gHookSmallCardFrame0, gHookSmallCardTiles, gHookVariantSmallCardPalette,
-        CARD_KIND_HOOK_D, 0x0, 9, 0x27, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK_D, 0x0, 9, MOVE_BOSS_D, 731, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3032,7 +3032,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 0, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 0, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3040,7 +3040,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 1, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 1, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3048,7 +3048,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 2, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 2, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3056,7 +3056,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 3, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 3, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3064,7 +3064,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 4, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 4, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3072,7 +3072,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 5, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 5, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3080,7 +3080,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 6, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 6, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3088,7 +3088,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 7, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 7, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3096,7 +3096,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 8, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 8, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3104,7 +3104,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesASmallCardPalette,
 #endif
-        CARD_KIND_HADES_A, 0x0, 9, 0x24, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_A, 0x0, 9, MOVE_BOSS_A, 741, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3112,7 +3112,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 0, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 0, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3120,7 +3120,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 1, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 1, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3128,7 +3128,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 2, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 2, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3136,7 +3136,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 3, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 3, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3144,7 +3144,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 4, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 4, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3152,7 +3152,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 5, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 5, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3160,7 +3160,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 6, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 6, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3168,7 +3168,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 7, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 7, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3176,7 +3176,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 8, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 8, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3184,7 +3184,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, gCharacterNameCardOfSpades, gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesBSmallCardPalette,
 #endif
-        CARD_KIND_HADES_B, 0x0, 9, 0x25, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES_B, 0x0, 9, MOVE_BOSS_B, 751, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3192,7 +3192,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 0, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 0, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3200,7 +3200,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 1, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 1, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3208,7 +3208,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 2, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 2, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3216,7 +3216,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 3, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 3, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3224,7 +3224,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 4, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 4, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3232,7 +3232,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 5, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 5, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3240,7 +3240,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 6, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 6, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3248,7 +3248,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 7, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 7, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3256,7 +3256,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 8, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 8, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3264,7 +3264,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuASmallCardPalette,
 #endif
-        CARD_KIND_RIKU_A, 0x0, 9, 0x24, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_A, 0x0, 9, MOVE_BOSS_A, 761, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3272,7 +3272,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 0, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 0, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3280,7 +3280,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 1, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 1, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3288,7 +3288,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 2, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 2, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3296,7 +3296,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 3, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 3, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3304,7 +3304,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 4, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 4, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3312,7 +3312,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 5, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 5, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3320,7 +3320,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 6, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 6, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3328,7 +3328,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 7, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 7, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3336,7 +3336,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 8, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 8, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3344,7 +3344,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuBSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_B, 0x0, 9, 0x25, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_B, 0x0, 9, MOVE_BOSS_B, 771, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3352,7 +3352,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 0, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 0, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3360,7 +3360,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 1, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 1, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3368,7 +3368,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 2, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 2, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3376,7 +3376,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 3, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 3, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3384,7 +3384,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 4, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 4, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3392,7 +3392,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 5, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 5, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3400,7 +3400,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 6, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 6, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3408,7 +3408,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 7, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 7, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3416,7 +3416,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 8, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 8, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3424,7 +3424,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuCSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_C, 0x0, 9, 0x26, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_C, 0x0, 9, MOVE_BOSS_C, 781, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3432,7 +3432,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 0, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 0, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3440,7 +3440,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 1, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 1, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3448,7 +3448,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 2, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 2, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3456,7 +3456,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 3, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 3, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3464,7 +3464,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 4, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 4, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3472,7 +3472,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 5, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 5, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3480,7 +3480,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 6, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 6, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3488,7 +3488,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 7, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 7, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3496,7 +3496,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 8, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 8, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3504,7 +3504,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, gCharacterNameCardOfSpades, gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuDSmallCardPalette,
 #endif
-        CARD_KIND_RIKU_D, 0x0, 9, 0x27, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU_D, 0x0, 9, MOVE_BOSS_D, 791, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3512,7 +3512,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 0, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 0, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3520,7 +3520,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 1, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 1, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3528,7 +3528,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 2, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 2, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3536,7 +3536,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 3, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 3, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3544,7 +3544,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 4, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 4, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3552,7 +3552,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 5, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 5, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3560,7 +3560,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 6, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 6, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3568,7 +3568,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 7, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 7, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3576,7 +3576,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 8, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 8, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3584,7 +3584,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelASmallCardPalette,
 #endif
-        CARD_KIND_AXEL_A, 0x0, 9, 0x24, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_A, 0x0, 9, MOVE_BOSS_A, 801, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3592,7 +3592,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 0, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 0, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3600,7 +3600,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 1, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 1, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3608,7 +3608,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 2, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 2, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3616,7 +3616,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 3, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 3, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3624,7 +3624,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 4, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 4, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3632,7 +3632,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 5, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 5, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3640,7 +3640,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 6, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 6, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3648,7 +3648,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 7, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 7, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3656,7 +3656,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 8, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 8, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3664,7 +3664,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, gCharacterNameCardOfSpades, gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelBSmallCardPalette,
 #endif
-        CARD_KIND_AXEL_B, 0x0, 9, 0x25, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL_B, 0x0, 9, MOVE_BOSS_B, 811, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3672,7 +3672,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 0, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 0, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3680,7 +3680,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 1, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 1, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3688,7 +3688,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 2, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 2, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3696,7 +3696,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 3, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 3, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3704,7 +3704,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 4, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 4, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3712,7 +3712,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 5, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 5, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3720,7 +3720,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 6, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 6, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3728,7 +3728,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 7, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 7, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3736,7 +3736,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 8, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 8, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3744,7 +3744,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneASmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_A, 0x0, 9, 0x24, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_A, 0x0, 9, MOVE_BOSS_A, 821, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3752,7 +3752,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 0, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 0, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3760,7 +3760,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 1, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 1, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3768,7 +3768,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 2, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 2, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3776,7 +3776,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 3, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 3, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3784,7 +3784,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 4, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 4, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3792,7 +3792,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 5, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 5, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3800,7 +3800,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 6, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 6, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3808,7 +3808,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 7, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 7, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3816,7 +3816,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 8, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 8, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3824,7 +3824,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneBSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_B, 0x0, 9, 0x25, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_B, 0x0, 9, MOVE_BOSS_B, 831, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3832,7 +3832,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 0, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 0, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3840,7 +3840,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 1, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 1, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3848,7 +3848,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 2, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 2, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3856,7 +3856,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 3, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 3, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3864,7 +3864,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 4, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 4, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3872,7 +3872,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 5, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 5, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3880,7 +3880,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 6, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 6, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3888,7 +3888,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 7, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 7, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3896,7 +3896,7 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 8, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 8, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #ifdef VERSION_EU
@@ -3904,407 +3904,407 @@ const CardDef gCardDefs[950] = {
 #else
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, gCharacterNameCardOfSpades, gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneCSmallCardPalette,
 #endif
-        CARD_KIND_LARXENE_C, 0x0, 9, 0x26, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE_C, 0x0, 9, MOVE_BOSS_C, 841, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 0, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 0, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 1, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 1, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 2, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 2, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 3, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 3, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 4, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 4, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 5, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 5, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 6, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 6, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 7, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 7, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 8, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 8, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenASmallCardFrame0, gVexenASmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_A, 0x0, 9, 0x24, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_A, 0x0, 9, MOVE_BOSS_A, 851, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 0, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 0, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 1, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 1, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 2, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 2, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 3, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 3, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 4, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 4, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 5, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 5, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 6, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 6, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 7, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 7, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 8, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 8, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, LOCALIZED(gCharacterNameCardOfSpades), gVexenBSmallCardFrame0, gVexenBSmallCardTiles, gVexenVariantSmallCardPalette,
-        CARD_KIND_VEXEN_B, 0x0, 9, 0x25, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN_B, 0x0, 9, MOVE_BOSS_B, 861, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 0, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 0, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 1, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 1, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 2, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 2, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 3, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 3, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 4, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 4, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 5, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 5, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 6, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 6, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 7, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 7, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 8, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 8, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaASmallCardFrame0, gMarluxiaASmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_A, 0x0, 9, 0x24, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_A, 0x0, 9, MOVE_BOSS_A, 871, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 0, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 0, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 1, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 1, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 2, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 2, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 3, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 3, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 4, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 4, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 5, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 5, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 6, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 6, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 7, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 7, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 8, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 8, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaBSmallCardFrame0, gMarluxiaBSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_B, 0x0, 9, 0x25, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_B, 0x0, 9, MOVE_BOSS_B, 881, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 0, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 0, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 1, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 1, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 2, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 2, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 3, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 3, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 4, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 4, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 5, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 5, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 6, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 6, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 7, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 7, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 8, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 8, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, LOCALIZED(gCharacterNameCardOfSpades), gMarluxiaCSmallCardFrame0, gMarluxiaCSmallCardTiles, gMarluxiaVariantSmallCardPalette,
-        CARD_KIND_MARLUXIA_C, 0x0, 9, 0x26, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_C, 0x0, 9, MOVE_BOSS_C, 891, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 0, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 0, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 1, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 1, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 2, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 2, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 3, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 3, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 4, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 4, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 5, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 5, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 6, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 6, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 7, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 7, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 8, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 8, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusASmallCardFrame0, gLexaeusASmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_A, 0x0, 9, 0x24, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_A, 0x0, 9, MOVE_BOSS_A, 901, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 0, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 0, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 1, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 1, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 2, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 2, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 3, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 3, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 4, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 4, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 5, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 5, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 6, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 6, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 7, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 7, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 8, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 8, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusBSmallCardFrame0, gLexaeusBSmallCardTiles, gLexaeusVariantSmallCardPalette,
-        CARD_KIND_LEXAEUS_B, 0x0, 9, 0x25, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_B, 0x0, 9, MOVE_BOSS_B, 911, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 0, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 0, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 1, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 1, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 2, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 2, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 3, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 3, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 4, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 4, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 5, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 5, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 6, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 6, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 7, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 7, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 8, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 8, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, LOCALIZED(gCharacterNameCardOfSpades), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusCSmallCardPalette,
-        CARD_KIND_LEXAEUS_C, 0x0, 9, 0x26, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS_C, 0x0, 9, MOVE_BOSS_C, 921, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 0, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 0, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 1, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 1, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 2, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 2, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 3, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 3, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 4, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 4, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 5, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 5, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 6, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 6, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 7, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 7, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 8, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 8, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemASmallCardFrame0, gAnsemASmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_A, 0x0, 9, 0x24, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_A, 0x0, 9, MOVE_BOSS_A, 931, CARD_CATEGORY_MAGIC, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 0, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 0, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 1, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 1, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 2, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 2, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 3, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 3, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 4, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 4, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 5, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 5, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 6, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 6, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 7, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 7, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 8, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 8, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, LOCALIZED(gCharacterNameCardOfSpades), gAnsemBSmallCardFrame0, gAnsemBSmallCardTiles, gAnsemVariantSmallCardPalette,
-        CARD_KIND_ANSEM_B, 0x0, 9, 0x25, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM_B, 0x0, 9, MOVE_BOSS_B, 941, CARD_CATEGORY_ATTACK, 0, {0, 0, 0, 0, 0, 0},
     },
 };
 

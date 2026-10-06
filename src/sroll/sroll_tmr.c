@@ -765,7 +765,7 @@ void SrollTextClearWindow(SrollWork* work, u8 flush) {
     row = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
 
     for (i = 0; i < work->windowHeight; i++) {
-        CpuFill16(work->clearTile, row, work->windowWidth * 2);
+        CpuFill16(work->clearTile, row, work->windowWidth * sizeof(u16));
         row += work->mapWidth;
     }
 
@@ -867,7 +867,7 @@ void SrollTextClearTextArea(SrollWork* work) {
     baseTile = work->frameTileBase + 1;
 
     for (i = 0; i < work->textHeight; i++) {
-        CpuFill16(baseTile, row, work->textWidth * 2);
+        CpuFill16(baseTile, row, work->textWidth * sizeof(u16));
         row += work->mapWidth;
     }
 }

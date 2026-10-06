@@ -913,7 +913,7 @@ void EV_SOUND_0(EvSoundWork* work, u8* arg) {
     work->fadeMode = EV_SOUND_FADE_MODE_NONE;
     work->volume = 256;
     work->soundCues = gEventSequenceDefs[work->eventId]->soundCues;
-    gEventSoundMix = EwramAlloc(256);
+    gEventSoundMix = EwramAlloc(sizeof(EventSoundMix) * 64);
 
     for (i = 0; i < 64; i++) {
         gEventSoundMix[i].pan = 0;

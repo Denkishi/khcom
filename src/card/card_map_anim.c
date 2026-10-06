@@ -1055,8 +1055,8 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 thisDeckOnly, u16* out) {
     u16 i;
 
     mask = total = count = 0;
-    present = EwramAlloc(0x23C);
-    CpuFill32(0, present, 0x23C);
+    present = EwramAlloc(0x11E * sizeof(u16));
+    CpuFill32(0, present, 0x11E * sizeof(u16));
 
     if (thisDeckOnly == 1) {
         switch (deck) {

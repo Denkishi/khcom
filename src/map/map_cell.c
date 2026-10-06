@@ -2786,7 +2786,7 @@ void MapGenerateRoom(u16 cols, u16 rows) {
 
     if (!gGameState.fieldResume) {
         sMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
-        sMapPlatforms = EwramAlloc(0x120);
+        sMapPlatforms = EwramAlloc(sizeof(MapPlatform) * 12);
         sMapDoors = EwramAlloc(sizeof(MapDoor) * 4);
         n = sMapCols * sMapRows;
 

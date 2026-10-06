@@ -246,7 +246,7 @@ void PopPaletteEffect() {
 
 void PalletInit() {
     SetIwramHeapName(sPalletHeapName);
-    sPaletteBuffer = IwramAlloc(0x440);
+    sPaletteBuffer = IwramAlloc(sizeof(PaletteBuffer));
     CpuFill32(0, sPaletteBuffer, sizeof(PaletteBuffer));
     PalletClear();
 }

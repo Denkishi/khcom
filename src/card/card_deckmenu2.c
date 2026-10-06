@@ -434,7 +434,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 e
 
     for (i = 0, count = 0; i < entryCount; i++) {
         if (out[i].count != 0) {
-            out[i].indices = EwramAlloc(out[i].count * 2);
+            out[i].indices = EwramAlloc(out[i].count * sizeof(u16));
             count++;
         } else {
             out[i].indices = NULL;
@@ -7375,7 +7375,7 @@ void BuildCollectionEntries(DeckMenuWork* work) {
     for (i = 0, n = 0; i <= 16; i++) {
         if (work->kindEntries[i].count != 0) {
             work->entries[n] = work->kindEntries[i];
-            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * 2);
+            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * sizeof(u16));
 
             for (j = 0; j < work->kindEntries[i].indexCount; j++) {
                 work->entries[n].indices[j] = work->kindEntries[i].indices[j];
@@ -7388,7 +7388,7 @@ void BuildCollectionEntries(DeckMenuWork* work) {
     for (i = 143; i <= 159; i++) {
         if (work->kindEntries[i].count != 0) {
             work->entries[n] = work->kindEntries[i];
-            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * 2);
+            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * sizeof(u16));
 
             for (j = 0; j < work->kindEntries[i].indexCount; j++) {
                 work->entries[n].indices[j] = work->kindEntries[i].indices[j];
@@ -7401,7 +7401,7 @@ void BuildCollectionEntries(DeckMenuWork* work) {
     for (i = 18; i <= 31; i++) {
         if (work->kindEntries[i].count != 0) {
             work->entries[n] = work->kindEntries[i];
-            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * 2);
+            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * sizeof(u16));
 
             for (j = 0; j < work->kindEntries[i].indexCount; j++) {
                 work->entries[n].indices[j] = work->kindEntries[i].indices[j];
@@ -7414,7 +7414,7 @@ void BuildCollectionEntries(DeckMenuWork* work) {
     for (i = 161; i <= 174; i++) {
         if (work->kindEntries[i].count != 0) {
             work->entries[n] = work->kindEntries[i];
-            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * 2);
+            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * sizeof(u16));
 
             for (j = 0; j < work->kindEntries[i].indexCount; j++) {
                 work->entries[n].indices[j] = work->kindEntries[i].indices[j];
@@ -7427,7 +7427,7 @@ void BuildCollectionEntries(DeckMenuWork* work) {
     for (i = 32; i <= 142; i++) {
         if (work->kindEntries[i].count != 0) {
             work->entries[n] = work->kindEntries[i];
-            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * 2);
+            work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * sizeof(u16));
 
             for (j = 0; j < work->kindEntries[i].indexCount; j++) {
                 work->entries[n].indices[j] = work->kindEntries[i].indices[j];

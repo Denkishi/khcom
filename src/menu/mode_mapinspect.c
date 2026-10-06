@@ -525,7 +525,7 @@ void MapInspectRemoveEntry(MapCardInventoryEntry* entry) {
     s16 j;
 
     category = entry->category;
-    DmaCopy16(3, entry + 1, entry, (26 - GetMapInspectSelectedIndex()) * 28);
+    DmaCopy16(3, entry + 1, entry, (26 - GetMapInspectSelectedIndex()) * sizeof(MapCardInventoryEntry));
     DmaFill16(3, 0, &sMapCardInventoryEntries[26], sizeof(MapCardInventoryEntry));
     sMapCardInventoryEntries[26].cardType = 27;
 

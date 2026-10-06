@@ -127,8 +127,8 @@ void AllmapAllocBgMaps() {
     u16 j;
     u16 k;
 
-    gAllmapBg0Map = EwramAlloc(0x4000);
-    gAllmapBg1Map = EwramAlloc(0x4000);
+    gAllmapBg0Map = EwramAlloc(0x2000 * sizeof(u16));
+    gAllmapBg1Map = EwramAlloc(0x2000 * sizeof(u16));
 
     for (i = 0; i < 0x2000; i++) {
         gAllmapBg0Map[i] = 0;

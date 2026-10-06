@@ -606,7 +606,7 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* task) {
         for (i = 0, n = 0; i < 286; i++) {
             if (work->kindEntries[i].count != 0) {
                 work->entries[n] = work->kindEntries[i];
-                work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * 2);
+                work->entries[n].indices = EwramAlloc(work->kindEntries[i].indexCount * sizeof(u16));
 
                 for (j = 0; j < work->kindEntries[i].indexCount; j++) {
                     work->entries[n].indices[j] = work->kindEntries[i].indices[j];

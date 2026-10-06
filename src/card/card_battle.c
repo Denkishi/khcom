@@ -1584,8 +1584,8 @@ void LoadActiveDeckCardSlots(CardSlot* slots, s32 cardSet) {
     u16 i;
 
     n = CountActiveDeckCards(cardSet);
-    cardIds = EwramAlloc(n * 2);
-    CpuFill16(0, cardIds, n * 2);
+    cardIds = EwramAlloc(n * sizeof(u16));
+    CpuFill16(0, cardIds, n * sizeof(u16));
     CopyActiveDeckCards(cardSet, cardIds);
 
     for (i = 0; i < n; i++) {

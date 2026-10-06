@@ -523,7 +523,7 @@ void Mode_MapChk_0() {
     const u8* names;
     s32 offset;
 
-    sMapChkWork = EwramAlloc(8);
+    sMapChkWork = EwramAlloc(sizeof(MapChkWork));
     SaveLoadHeader();
     gMapChkUseParams = 0;
     sMapChkWork->cursor = 0;

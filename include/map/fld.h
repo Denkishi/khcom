@@ -18,7 +18,7 @@ typedef char FldShadowWork_size[(sizeof(FldShadowWork) == 0x2C) ? 1 : -1];
 
 void FldRikuSetAnim(FldWork* work, s32 index, u16 flags);
 
-void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z);
+void CreateWorldSelBeforeTask(void* pool, s32 x, s32 y, s32 z);
 
 u8 FldRikuCheckBlocked(FldPos* pos);
 s32 FldRikuProbeGround(FldPos* pos);

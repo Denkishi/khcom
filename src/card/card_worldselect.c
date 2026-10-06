@@ -91,13 +91,13 @@ void WORLDSELECT_2() {
     TaskPoolDestroy(&sModeWorldselectTasks);
 }
 
-void MapSelect_0(MapSelectWork* work, u8* a) {
+void MapSelect_0(MapSelectWork* work, u8* status) {
     s32 n;
 
     ResetMessageWindowFlags();
     CpuFill32(0, work, sizeof(MapSelectWork));
-    work->status = a;
-    *a = 0;
+    work->status = status;
+    *status = 0;
     work->messageTimer = 0;
     work->cancelled = 0;
     work->pageScroll = 0;
@@ -228,7 +228,7 @@ void MapSelect_0(MapSelectWork* work, u8* a) {
     work->inTutorial = 0;
 }
 
-u8 MapSelect_1(MapSelectWork* work, void* a) {
+u8 MapSelect_1(MapSelectWork* work, void* task) {
 #ifdef VERSION_EU
     LoadBgTiles(1, gMapSelectTiles, 0x2020);
 
@@ -264,11 +264,11 @@ u8 MapSelect_1(MapSelectWork* work, void* a) {
     FadeSetPaletteExcluded(15, 1);
     work->messageTimer++;
     DisableBg(1);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectSetup);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectSetup);
     return 1;
 }
 
-u8 UpdateMapSelectSetup(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectSetup(MapSelectWork* work, void* task) {
     s32 n;
 
     SetBgMapBlocks(1, gMapSelectBgMapBlocks, 1, 2);
@@ -292,11 +292,11 @@ u8 UpdateMapSelectSetup(MapSelectWork* work, void* a) {
     }
 
     LoadMapSelectKindPalette(work->card->args.baseCardId, work);
-    SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectSlideIn);
+    SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectSlideIn);
     return 1;
 }
 
-u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task) {
     MapcardWork* n;
 
     if (work->barSteps != 0) {
@@ -315,11 +315,11 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* a) {
                 work->inTutorial = 1;
                 ResetMessageWindowFlags();
                 work->tutorialMessage = 95;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectTutorial);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectTutorial);
             } else if ((gGameState.progression.tutorialFlags & 0x40) == 0 && work->isEventDoor == 1) {
                 ResetMessageWindowFlags();
                 work->tutorialMessage = 109;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectEventDoorTutorial);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectEventDoorTutorial);
                 gGameState.progression.tutorialFlags |= 0x40;
             } else {
                 n = ListPoolFirst(&work->cards);
@@ -345,7 +345,7 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* a) {
                 work->y2 = 0x6400;
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectKindInput);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
                 work->scrollBarVisible = 1;
             }
         }
@@ -355,7 +355,7 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* task) {
     s8 v;
 
     if (work->card->steps == 0) {
@@ -383,7 +383,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* a) {
         LoadBgMap(1, gMapSelectValuesMap, 0x800);
         LoadMapSelectGridPalette(work->card->args.baseCardId, work);
         v = LoadMapSelectValueCounts(work->card->args.baseCardId, work);
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectValueInput);
         ReleaseObjTiles(work->tiles);
         work->tiles = AllocObjTiles(0x1E0, NULL);
         SetObjTileSource(work->tiles, gMapSelectValueBoxTiles);
@@ -425,7 +425,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
     u16 keys;
     s16 sel;
     u8 n;
@@ -435,7 +435,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
 
     if ((gGameState.progression.tutorialFlags & 8) == 0) {
         if (work->steps == 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueTutorial);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectValueTutorial);
             TaskPoolUpdate(&work->tasks);
             return 1;
         }
@@ -466,7 +466,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
 #endif
         LoadBgMap(1, gMapSelectMap, 0x800);
         work->card->flags &= ~MAPCARD_FLAG_OPENED;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectLeaveValues);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectLeaveValues);
         m4aSongNumStart(SONG_SYS_CLOSE);
         break;
     case A_BUTTON:
@@ -498,7 +498,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
                             work->lastPage = 0;
                             work->page = 0;
                             work->eventKeyArgs.closeMode = n;
-                            SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectClose);
+                            SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectClose);
                             return 1;
                         }
                     }
@@ -529,7 +529,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
                         LoadBgMap(1, gMapSelectMap, 0x800);
                         work->card->flags &= ~MAPCARD_FLAG_OPENED;
                         RemoveMapSelectCard(work);
-                        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectLeaveValues);
+                        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectLeaveValues);
                     }
 
                     break;
@@ -541,7 +541,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
                 *work->status = 2;
                 work->slideSteps = 16;
                 work->barSteps = 16;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectClose);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectClose);
                 m4aSongNumStart(SONG_SYS_KETEI2);
                 work->lastPage = 0;
                 work->page = 0;
@@ -578,7 +578,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* task) {
     MapcardWork* node;
 
     if (CountOwnedMapCardKinds() == 0) {
@@ -596,7 +596,7 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* a) {
             node = ListPoolNext(&node->node);
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectKindInput);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
         ReleaseObjTiles(work->tiles);
         work->tiles = AllocObjTiles(0x3C0, NULL);
         SetObjTileSource(work->tiles, gCardSelectBoxTiles);
@@ -629,7 +629,7 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapSelectKindInput(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
     u16 keys = GetKeysPressed();
     MapcardWork* p;
 
@@ -680,7 +680,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* a) {
                                 work->lastPage = 0;
                                 work->page = 0;
                                 work->eventKeyArgs.closeMode = 1;
-                                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectClose);
+                                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectClose);
                                 return 1;
                             }
                         }
@@ -702,7 +702,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* a) {
                     }
 
                     m4aSongNumStart(SONG_SYS_KETTEI);
-                    SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectEnterValues);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectEnterValues);
                     return 1;
                 }
             }
@@ -719,7 +719,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* a) {
             work->cancelled = 1;
             work->slideSteps = 16;
             work->barSteps = 16;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectClose);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectClose);
             m4aSongNumStart(SONG_SYS_CANSEL);
             sSelectedMapCard = NULL;
             work->lastPage = 0;
@@ -928,7 +928,7 @@ u16 CountOwnedMapCardKinds() {
     return count;
 }
 
-void ListOwnedMapCardKinds(MapSelectKindEntry* p) {
+void ListOwnedMapCardKinds(MapSelectKindEntry* out) {
     u16 i;
     u16 j;
 
@@ -937,9 +937,9 @@ void ListOwnedMapCardKinds(MapSelectKindEntry* p) {
 
         while (j < i * 10 + 10) {
             if (gMapCardCounts[j] != 0) {
-                p->baseCardId = i * 10;
-                p->count = gMapCardCounts[j];
-                p++;
+                out->baseCardId = i * 10;
+                out->count = gMapCardCounts[j];
+                out++;
                 break;
             }
 
@@ -1216,12 +1216,12 @@ u16 CountMapCards() {
     return sum;
 }
 
-s32 AddMapCard(u16 a) {
+s32 AddMapCard(u16 cardId) {
     if (CountRegularMapCards() <= 98) {
-        if (gMapCardCounts[a] <= 8) {
-            gMapCardCounts[a]++;
+        if (gMapCardCounts[cardId] <= 8) {
+            gMapCardCounts[cardId]++;
 
-            switch (gMapCardDefs[a].kind) {
+            switch (gMapCardDefs[cardId].kind) {
             case 0:
                 SetJiminyFlag(209);
                 break;
@@ -1305,10 +1305,10 @@ s32 AddMapCard(u16 a) {
             return 1;
         }
     } else {
-        if (gMapCardDefs[a].kind > 21) {
-            gMapCardCounts[a]++;
+        if (gMapCardDefs[cardId].kind > 21) {
+            gMapCardCounts[cardId]++;
 
-            switch (gMapCardDefs[a].kind) {
+            switch (gMapCardDefs[cardId].kind) {
             case 22:
                 SetJiminyFlag(231);
                 break;
@@ -1330,9 +1330,9 @@ s32 AddMapCard(u16 a) {
     return 0;
 }
 
-s32 RemoveMapCard(u16 a) {
-    if (gMapCardCounts[a] != 0) {
-        gMapCardCounts[a]--;
+s32 RemoveMapCard(u16 cardId) {
+    if (gMapCardCounts[cardId] != 0) {
+        gMapCardCounts[cardId]--;
         return 1;
     }
 
@@ -1343,13 +1343,13 @@ s32 AddRandomMapCard() {
     AddMapCard(GetRandom() % 270);
 }
 
-u16 CountMapCardsOfKind(u16 a) {
+u16 CountMapCardsOfKind(u16 baseCardId) {
     u16 sum;
     s32 i;
 
     sum = 0;
 
-    for (i = a; i < a + 10; i++) {
+    for (i = baseCardId; i < baseCardId + 10; i++) {
         sum += gMapCardCounts[i];
     }
 
@@ -1382,8 +1382,8 @@ u16 CountZeroValueMapCards() {
     return sum;
 }
 
-void CreateMapCardSelection(TaskPool* pool, u8* p) {
-    TaskCreate(pool, &gTaskDescMapSelect, p);
+void CreateMapCardSelection(TaskPool* pool, u8* status) {
+    TaskCreate(pool, &gTaskDescMapSelect, status);
 }
 
 void ClearMapCardInventory() {
@@ -1428,8 +1428,8 @@ void SetMapCardDelivered() {
     sMapCardDelivered = 1;
 }
 
-void SetSelectedMapCard(void* a) {
-    sSelectedMapCard = a;
+void SetSelectedMapCard(void* card) {
+    sSelectedMapCard = card;
 }
 
 void* GetSelectedMapCard() {
@@ -1441,23 +1441,23 @@ void ResetSelectedMapCard() {
     sMapCardDelivered = 0;
 }
 
-const void* GetRoomName(u16 a) {
+const void* GetRoomName(u16 kind) {
 #ifdef VERSION_EU
-    return GetLocalizedString(gRoomNames[a]);
+    return GetLocalizedString(gRoomNames[kind]);
 #else
-    return gRoomNames[a];
+    return gRoomNames[kind];
 #endif
 }
 
-u8 HasMapCard(u16 a) {
-    if (gMapCardCounts[a] != 0) {
+u8 HasMapCard(u16 cardId) {
+    if (gMapCardCounts[cardId] != 0) {
         return 1;
     }
 
     return 0;
 }
 
-void LoadMapSelectKindPalette(u16 a, MapSelectWork* work) {
+void LoadMapSelectKindPalette(u16 baseCardId, MapSelectWork* work) {
     u16 i;
     u16 j;
     u8* pal;
@@ -1476,9 +1476,9 @@ void LoadMapSelectKindPalette(u16 a, MapSelectWork* work) {
         pal[i] = gMapSelectBgPalettes[i + 64];
     }
 
-    for (i = a, j = 2; i < a + 10; i++, j += 2) {
+    for (i = baseCardId, j = 2; i < baseCardId + 10; i++, j += 2) {
         cards = gMapCardDefs;
-        card = &cards[a];
+        card = &cards[baseCardId];
         pal = work->paletteBuffer;
 
         if (gMapCardCounts[i] != 0) {
@@ -1497,7 +1497,7 @@ void LoadMapSelectKindPalette(u16 a, MapSelectWork* work) {
     LoadPalette(work->paletteBuffer, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 32);
 }
 
-void LoadMapSelectGridPalette(u16 a, MapSelectWork* work) {
+void LoadMapSelectGridPalette(u16 baseCardId, MapSelectWork* work) {
     u16 i;
     u16 j;
     u8* pal;
@@ -1534,7 +1534,7 @@ void LoadMapSelectGridPalette(u16 a, MapSelectWork* work) {
         pal[i] = gMapSelectBgPalettes[i];
     }
 
-    for (i = a, j = 2; i < a + 10; i++, j += 2) {
+    for (i = baseCardId, j = 2; i < baseCardId + 10; i++, j += 2) {
         pal = work->paletteBuffer;
 
         if (gMapCardCounts[i] != 0) {
@@ -1547,14 +1547,14 @@ void LoadMapSelectGridPalette(u16 a, MapSelectWork* work) {
     LoadPalette(work->paletteBuffer, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
 }
 
-s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* work) {
+s32 LoadMapSelectValueCounts(u16 baseCardId, MapSelectWork* work) {
     u16 i;
     u16 j;
     u8 count;
     u8* src;
     u8* base;
 
-    for (i = a, j = 0; i < a + 10; i++, j++) {
+    for (i = baseCardId, j = 0; i < baseCardId + 10; i++, j++) {
         if (gMapCardCounts[i] != 0) {
             count = gMapCardCounts[i];
 
@@ -1565,12 +1565,12 @@ s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* work) {
 
             src = &gMapSelectCountBlankTiles[(count + 1) * 32];
             base = GetBgCharBase(1);
-            base += gMapSelectCountTileIndices[i - a] * 32;
+            base += gMapSelectCountTileIndices[i - baseCardId] * 32;
             RequestDma3Copy(src, base, 32);
             work->valueCounts[j] = count;
         } else {
             base = GetBgCharBase(1);
-            base += gMapSelectCountTileIndices[i - a] * 32;
+            base += gMapSelectCountTileIndices[i - baseCardId] * 32;
             RequestDma3Copy(gMapSelectCountDigitTiles, base, 32);
             work->valueCounts[j] = 0;
         }
@@ -1710,7 +1710,7 @@ void HandleMapSelectValueCursor(MapSelectWork* work) {
     }
 }
 
-u8 UpdateMapSelectTutorial(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectTutorial(MapSelectWork* work, void* task) {
     MapcardWork* n;
     u8 v;
 
@@ -1756,7 +1756,7 @@ u8 UpdateMapSelectTutorial(MapSelectWork* work, void* a) {
                 work->y2 = 0x6400;
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectKindInput);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
                 work->scrollBarVisible = 1;
                 work->tutorialMessage = 99;
                 return 1;
@@ -1770,7 +1770,7 @@ u8 UpdateMapSelectTutorial(MapSelectWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* task) {
     u8 r;
 
     r = IsMessageWindowOpen();
@@ -1784,7 +1784,7 @@ u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* a) {
                 work->tutorialMessage++;
             } else {
                 gGameState.progression.tutorialFlags |= 8;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectValueInput);
             }
         } else {
             work->messageTimer++;
@@ -1795,7 +1795,7 @@ u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapSelectEventDoorTutorial(MapSelectWork* work, void* a) {
+u8 UpdateMapSelectEventDoorTutorial(MapSelectWork* work, void* task) {
     MapcardWork* node;
     u32 pages;
 
@@ -1841,7 +1841,7 @@ u8 UpdateMapSelectEventDoorTutorial(MapSelectWork* work, void* a) {
                 work->y2 = 0x6400;
                 work->y = 0x7A00;
                 work->nameY = 0x9100;
-                SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectKindInput);
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectKindInput);
                 work->scrollBarVisible = 1;
                 return 1;
             }
@@ -1899,12 +1899,12 @@ void RemoveMapSelectCard(MapSelectWork* work) {
     }
 }
 
-void Mapcard_0(MapcardWork* work, MapcardArgs* a) {
+void Mapcard_0(MapcardWork* work, MapcardArgs* args) {
     work->tiles = NULL;
     work->unk_04 = NULL;
     work->tiles2 = NULL;
     work->palette = NULL;
-    work->args = *a;
+    work->args = *args;
     work->x = work->args.index <= 5 ? gMapcardSlotX[work->args.index] << 8 : -0x6400;
     work->y = 0x10500;
     work->priority = 50;
@@ -1926,23 +1926,23 @@ void Mapcard_0(MapcardWork* work, MapcardArgs* a) {
     UpdateMapcardGfx(work);
 }
 
-u8 Mapcard_1(MapcardWork* work, void* a) {
+u8 Mapcard_1(MapcardWork* work, void* task) {
     if (work->flags & 0xC) {
         work->steps = 12;
         func_08094DEC(work);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080948F0);
+        SetTaskUpdate(task, (TaskUpdateFunc)func_080948F0);
     }
 
     if (work->flags & MAPCARD_FLAG_OPENED) {
         work->angle = 0;
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapcardMoveToFront);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapcardMoveToFront);
     }
 
     if (work->flags & MAPCARD_FLAG_CHOSEN) {
         work->angle = 0;
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapcardToCenter);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapcardToCenter);
     }
 
     if (work->flags & MAPCARD_FLAG_REMOVED) {
@@ -1955,13 +1955,13 @@ u8 Mapcard_1(MapcardWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapcardMoveToFront(MapcardWork* work, void* a) {
+u8 UpdateMapcardMoveToFront(MapcardWork* work, void* task) {
     ApproachValue(&work->x, gMapcardSlotX[0] << 8, work->steps);
     work->steps--;
 
     if (!(work->flags & MAPCARD_FLAG_OPENED)) {
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapcardMoveBack);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapcardMoveBack);
     }
 
     if (work->flags & MAPCARD_FLAG_CURSOR) {
@@ -1973,7 +1973,7 @@ u8 UpdateMapcardMoveToFront(MapcardWork* work, void* a) {
     if (work->flags & MAPCARD_FLAG_CHOSEN) {
         work->angle = 0;
         work->steps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapcardToCenter);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapcardToCenter);
     }
 
     if (work->flags & MAPCARD_FLAG_REMOVED) {
@@ -1985,12 +1985,12 @@ u8 UpdateMapcardMoveToFront(MapcardWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateMapcardMoveBack(MapcardWork* work, void* a) {
+u8 UpdateMapcardMoveBack(MapcardWork* work, void* task) {
     ApproachValue(&work->x, gMapcardSlotX[work->args.index % 6] << 8, work->steps);
     work->steps--;
 
     if (work->steps == 0) {
-        SetTaskUpdate(a, (TaskUpdateFunc)Mapcard_1);
+        SetTaskUpdate(task, (TaskUpdateFunc)Mapcard_1);
     }
 
     if (work->flags & MAPCARD_FLAG_CURSOR) {
@@ -2004,7 +2004,7 @@ u8 UpdateMapcardMoveBack(MapcardWork* work, void* a) {
     return 1;
 }
 
-s32 func_080948F0(MapcardWork* work, void* a) {
+s32 func_080948F0(MapcardWork* work, void* task) {
     u8 t;
 
     t = func_08094E4C(work);
@@ -2013,13 +2013,13 @@ s32 func_080948F0(MapcardWork* work, void* a) {
 
     if (!t) {
         work->flags &= 0xFFF3;
-        SetTaskUpdate(a, (TaskUpdateFunc)Mapcard_1);
+        SetTaskUpdate(task, (TaskUpdateFunc)Mapcard_1);
     }
 
     return 1;
 }
 
-u8 UpdateMapcardToCenter(MapcardWork* work, void* a) {
+u8 UpdateMapcardToCenter(MapcardWork* work, void* task) {
     work->angle = 0;
     ApproachValue(&work->x, 0x7800, work->steps);
     ApproachValue(&work->y, 0x3800, work->steps);
@@ -2031,7 +2031,7 @@ u8 UpdateMapcardToCenter(MapcardWork* work, void* a) {
 
         if (work->holdTimer > 15) {
             AimMapcardAtDoor(work);
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapcardFlyToDoor);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapcardFlyToDoor);
         }
     }
 
@@ -2058,7 +2058,7 @@ void AimMapcardAtDoor(MapcardWork* work) {
     work->scale = 0x100;
 }
 
-u8 UpdateMapcardFlyToDoor(MapcardWork* work, void* a) {
+u8 UpdateMapcardFlyToDoor(MapcardWork* work, void* task) {
     FldObj* p;
     s32 dx;
     s32 dy;
@@ -2253,7 +2253,7 @@ void LinkMapcardNode(MapcardWork* work) {
     ListPoolAppend(&work->node, work->args.pool);
 }
 
-void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* a) {
+void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* arg) {
     ReloadGauge* d;
     ReloadChildArgs args;
     u16 v;
@@ -2267,7 +2267,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* a) {
     work->tiles5 = NULL;
     work->palette = NULL;
     work->command = 0;
-    work->args = *a;
+    work->args = *arg;
     work->flags = 0;
     work->timer = 16;
     work->ringRadius = 0;
@@ -2280,7 +2280,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* a) {
     work->phase = 0;
     work->swingSteps = 0;
     d = work->reloadGauge;
-    v = a->index;
+    v = arg->index;
 
     if ((s16)v >= 0) {
         d->reloadCounter = v;
@@ -2354,7 +2354,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* a) {
     }
 }
 
-u8 Reload_Gage_1(CardDisplayWork* work, void* a) {
+u8 Reload_Gage_1(CardDisplayWork* work, void* task) {
     ReloadChildArgs args;
     ReloadGauge* p;
     ReloadChildWork* node;
@@ -2535,7 +2535,7 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* a) {
     work->bobAngle += 4;
 
     if ((work->flags & CARD_DISP_FLAG_OPEN) == 0) {
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadGageIdle);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateReloadGageIdle);
         m4aSongNumStop(SONG_SYS_CHAGE);
 
         switch (work->args.variant) {
@@ -2552,7 +2552,7 @@ u8 Reload_Gage_1(CardDisplayWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateReloadGageIdle(CardDisplayWork* work, void* a) {
+u8 UpdateReloadGageIdle(CardDisplayWork* work, void* task) {
     if (work->command == 7) {
         return 0;
     }
@@ -2562,7 +2562,7 @@ u8 UpdateReloadGageIdle(CardDisplayWork* work, void* a) {
     work->y += (gSoraCardLayout[4][1] - work->y) >> 1;
 
     if (work->flags & CARD_DISP_FLAG_OPEN) {
-        SetTaskUpdate(a, (TaskUpdateFunc)Reload_Gage_1);
+        SetTaskUpdate(task, (TaskUpdateFunc)Reload_Gage_1);
     }
 
     return 1;
@@ -2688,86 +2688,86 @@ void UpdateReloadGageRingPosition(CardDisplayWork* work) {
     }
 }
 
-void StepReloadGageSine(ReloadGauge* p) {
-    p->sine = gSineTable[(u8)p->angle] >> 8;
-    p->angle += 16;
+void StepReloadGageSine(ReloadGauge* gauge) {
+    gauge->sine = gSineTable[(u8)gauge->angle] >> 8;
+    gauge->angle += 16;
 }
 
-void InitReloadGageCounterAnim(ReloadGauge* p, void* a, u8 b, s32 count) {
+void InitReloadGageCounterAnim(ReloadGauge* gauge, void* tiles, u8 listIndex, s32 count) {
     s8 c = count;
 
-    AnimInit(&p->anim, gReloadCounterAnims[b], gReloadCounterFrames[b]);
+    AnimInit(&gauge->anim, gReloadCounterAnims[listIndex], gReloadCounterFrames[listIndex]);
 
     if (c >= 0) {
-        AnimStart(&p->anim, c, 0);
+        AnimStart(&gauge->anim, c, 0);
     } else {
-        AnimStart(&p->anim, 0, 0);
+        AnimStart(&gauge->anim, 0, 0);
     }
 
-    p->gfx3 = AnimGetGfx(&p->anim);
+    gauge->gfx3 = AnimGetGfx(&gauge->anim);
 }
 
-void SetReloadGageCounterAnim(ReloadGauge* p, s32 count) {
+void SetReloadGageCounterAnim(ReloadGauge* gauge, s32 count) {
     void* gfx;
 
     if ((u16)count <= 18) {
-        AnimStart(&p->anim, count, 0);
-        gfx = AnimGetGfx(&p->anim);
+        AnimStart(&gauge->anim, count, 0);
+        gfx = AnimGetGfx(&gauge->anim);
     } else {
         gfx = NULL;
     }
 
-    p->gfx3 = gfx;
+    gauge->gfx3 = gfx;
 }
 
-s32 UpdateReloadGageSlide(ReloadGauge* p, CardDisplayWork* work) {
+s32 UpdateReloadGageSlide(ReloadGauge* gauge, CardDisplayWork* work) {
     if ((s16)work->timer > 0 && work->phase == 1) {
         switch (work->args.variant) {
         case 1:
-            ApproachValue(&p->offsetX, -0x3000, work->timer);
+            ApproachValue(&gauge->offsetX, -0x3000, work->timer);
             break;
         case 2:
-            ApproachValue(&p->offsetX, 0x12000, work->timer);
+            ApproachValue(&gauge->offsetX, 0x12000, work->timer);
             break;
         }
     } else {
-        p->offsetX = 0;
+        gauge->offsetX = 0;
     }
 }
 
-void InitReloadGageAnims(ReloadGauge* p, CardDisplayWork* work, u8 idx) {
-    p->gaugeAnim = 2;
-    AnimInit(&p->anim2, gReloadGaugeAnims[idx], gReloadGaugeFrames[idx]);
-    AnimStart(&p->anim2, 1, ANIM_FLAG_LOOP);
-    p->gfx = gReloadGaugeFrames[idx][3];
-    AnimInit(&p->anim3, gReloadGaugeAnims[idx], gReloadGaugeFrames[idx]);
-    AnimStart(&p->anim3, 2, ANIM_FLAG_LOOP);
-    p->gfx2 = gReloadGaugeFrames[idx][6];
+void InitReloadGageAnims(ReloadGauge* gauge, CardDisplayWork* work, u8 idx) {
+    gauge->gaugeAnim = 2;
+    AnimInit(&gauge->anim2, gReloadGaugeAnims[idx], gReloadGaugeFrames[idx]);
+    AnimStart(&gauge->anim2, 1, ANIM_FLAG_LOOP);
+    gauge->gfx = gReloadGaugeFrames[idx][3];
+    AnimInit(&gauge->anim3, gReloadGaugeAnims[idx], gReloadGaugeFrames[idx]);
+    AnimStart(&gauge->anim3, 2, ANIM_FLAG_LOOP);
+    gauge->gfx2 = gReloadGaugeFrames[idx][6];
 }
 
-void UpdateReloadGageAnims(ReloadGauge* p, CardDisplayWork* work) {
-    p->gfx = AnimUpdate(&p->anim2);
-    p->gfx2 = AnimUpdate(&p->anim3);
+void UpdateReloadGageAnims(ReloadGauge* gauge, CardDisplayWork* work) {
+    gauge->gfx = AnimUpdate(&gauge->anim2);
+    gauge->gfx2 = AnimUpdate(&gauge->anim3);
 }
 
-void SetReloadGageIdleFrames(ReloadGauge* p, CardDisplayWork* work) {
-    p->gfx = gReloadGaugeFrames[work->args.listIndex][3];
-    p->gfx2 = gReloadGaugeFrames[work->args.listIndex][work->priority + 2];
+void SetReloadGageIdleFrames(ReloadGauge* gauge, CardDisplayWork* work) {
+    gauge->gfx = gReloadGaugeFrames[work->args.listIndex][3];
+    gauge->gfx2 = gReloadGaugeFrames[work->args.listIndex][work->priority + 2];
 }
 
-void AdvanceReloadGageAnim(ReloadGauge* p, CardDisplayWork* work) {
-    if (p->gaugeAnim <= 3) {
-        p->gaugeAnim++;
+void AdvanceReloadGageAnim(ReloadGauge* gauge, CardDisplayWork* work) {
+    if (gauge->gaugeAnim <= 3) {
+        gauge->gaugeAnim++;
     }
 
-    AnimStart(&p->anim3, p->gaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
+    AnimStart(&gauge->anim3, gauge->gaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 
-void ResetReloadGageAnim(ReloadGauge* p) {
-    p->gaugeAnim = 2;
+void ResetReloadGageAnim(ReloadGauge* gauge) {
+    gauge->gaugeAnim = 2;
 }
 
-void* CreateReloadGageTask(CardBattleWork* work, u16 b, void* pool, u8 mode) {
+void* CreateReloadGageTask(CardBattleWork* work, u16 index, void* pool, u8 mode) {
     CardDisplayArgs args;
 
     args.pool = &work->cardDisplays[work->listIndex];
@@ -2776,17 +2776,17 @@ void* CreateReloadGageTask(CardBattleWork* work, u16 b, void* pool, u8 mode) {
     switch (mode) {
     case 1:
         if (gBtlWork->hcEffect == 10) {
-            args.index = b - 2;
+            args.index = index - 2;
         } else {
-            args.index = b;
+            args.index = index;
         }
 
         break;
     case 2:
         if (gRikuBtlWork->hcEffect == 10) {
-            args.index = b - 2;
+            args.index = index - 2;
         } else {
-            args.index = b;
+            args.index = index;
         }
 
         break;

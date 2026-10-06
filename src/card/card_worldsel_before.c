@@ -18,11 +18,11 @@
 #include "types.h"
 #include "sprite_palettes.h"
 
-void WorldSel_Before_0(WorldSelBeforeWork* work, WorldSelBeforeArgs* a) {
+void WorldSel_Before_0(WorldSelBeforeWork* work, WorldSelBeforeArgs* args) {
     u8 i;
 
     FadeToAmount(FADE_MODE_BLACK, 16, 8);
-    work->pos = *a;
+    work->pos = *args;
     work->tiles = LoadObjTiles(gWorldSelBeforeCardTiles, 0xC0);
     work->palette = LoadObjPalette(gWorldSelBeforeCardPalette, 32);
     work->tiles2 = LoadObjTiles(gWorldSelBeforeRingTiles, 0x4A0);
@@ -102,13 +102,13 @@ void func_080A581C(u8* work) {
     TaskCreate((TaskPool*)&work[0x10], &gTaskDescWorldSelBefore, work);
 }
 
-void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z) {
+void CreateWorldSelBeforeTask(void* pool, s32 x, s32 y, s32 z) {
     WorldSelBeforeArgs args;
 
     args.x = x;
     args.y = y;
     args.z = z;
-    TaskCreate(a, &gTaskDescWorldSelBefore, &args);
+    TaskCreate(pool, &gTaskDescWorldSelBefore, &args);
 }
 
 WorldSelAnim gWorldSelAnims[30] = {

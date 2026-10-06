@@ -33,13 +33,13 @@
 
 const u8 gUnk_090359E8[8] = { 1, 1, 4, 2, 5, 3, 3, 2 };
 
-static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* p) {
+static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     PrizeCardTaskArgs args;
     const CardDef* def;
     const CardBack* back;
     Collider* q;
 
-    args = *p;
+    args = *arg;
     work->cardId = args.cardId;
     def = &gCardDefs[args.cardId];
     work->tiles = LoadObjTiles(def->tiles, 0x300);
@@ -83,7 +83,7 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* p) {
     TaskPoolInit(&work->tasks, 1);
 }
 
-static u8 PrizeCard_1(PrizeCardWork* work, void* a) {
+static u8 PrizeCard_1(PrizeCardWork* work, void* task) {
     s32 k = 112;
     s16 x;
     s16 y;
@@ -121,7 +121,7 @@ static u8 PrizeCard_1(PrizeCardWork* work, void* a) {
             ObtainCard(work->cardId);
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardFlight);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateFieldPrizeCardFlight);
         x = (work->pos.x >> 8) - (gFieldState->x >> 8);
         y = (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8);
         work->pos.x = x << 8;
@@ -171,7 +171,7 @@ void AimFieldPrizeCardAtCenter(PrizeCardWork* work) {
     work->vz = 2;
 }
 
-u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* a) {
+u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* task) {
     s32 v[2];
 
     if (work->speed < 0) {
@@ -184,7 +184,7 @@ u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* a) {
         if (work->distance <= 0x7FF) {
             work->steps = 0;
             work->rotation = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardShow);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateFieldPrizeCardShow);
 #ifdef VERSION_EU
             CreateCardNameDisplay(&work->tasks, GetLocalizedString(gCardDefs[work->cardId].name));
 #else
@@ -217,7 +217,7 @@ u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* a) {
+u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* task) {
     s32 v;
 
     v = work->rotation << 8;
@@ -245,11 +245,11 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* a) {
     if (work->cardId > 0x1C2) {
         if (work->holdTimer == 120) {
             work->holdTimer = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardShrink);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateFieldPrizeCardShrink);
         }
     } else if (work->holdTimer == 30) {
         work->holdTimer = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardShrink);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateFieldPrizeCardShrink);
     }
 
     TaskPoolUpdate(&work->tasks);

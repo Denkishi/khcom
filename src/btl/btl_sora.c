@@ -44,6 +44,8 @@
 #include "card_label_data.h"
 #include "card_ids.h"
 #include "btl3.h"
+#include "mode_riku_tutorial.h"
+#include "sio_api.h"
 
 static const AnimDef sBtlSoraAnimDefs[77] = {
     { gSor1ll50Frames, gSor1ll50Anims, gSor1ll50Tiles, 0 },
@@ -513,7 +515,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     work->flags = 0;
 
     if (arg != NULL) {
-        if (arg->side == 0) {
+        if (arg->side == SIO_PLAYER_PARENT) {
             act->x = 0xC000;
             act->flags = 0;
             work->sioKeysA = TRUE;
@@ -1122,9 +1124,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
             if (work->mainSide) {
-                move = ResolveLinkActiveCardsMove(stockMoves, 0);
+                move = ResolveLinkActiveCardsMove(stockMoves, LINK_SIDE_SELF);
             } else {
-                move = ResolveLinkActiveCardsMove(stockMoves, 1);
+                move = ResolveLinkActiveCardsMove(stockMoves, LINK_SIDE_PARTNER);
             }
         } else {
             move = ResolveActiveCardsMove(stockMoves);

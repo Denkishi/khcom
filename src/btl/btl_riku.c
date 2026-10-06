@@ -45,6 +45,7 @@
 #include "battle_ids.h"
 #include "card_label_data.h"
 #include "card_ids.h"
+#include "sio_api.h"
 
 static const AnimDef sBtlRikuAnimDefs[35] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0 },
@@ -563,7 +564,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     work->flags = 0;
 
     if (arg != NULL) {
-        if (arg->side == 0) {
+        if (arg->side == SIO_PLAYER_PARENT) {
             act->x = 0xC000;
             act->flags = 0;
             work->sioKeysA = TRUE;

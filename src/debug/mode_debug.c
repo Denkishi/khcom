@@ -57,7 +57,7 @@ void mode_debug_0() {
     SetupBg(0, 0, 15, 0);
     SetupBg(1, 2, 31, 0);
     SetBgColorMode(1, BGCNT_256COLOR);
-    SetBgSize(1, 0);
+    SetBgSize(1, BGCNT_TXT256x256);
 #ifdef VERSION_EU
     LoadBgPalette(1, gDebugMenuBgPalette, 0x200);
     LoadBgTilesLz77(1, gDebugMenuBgTiles);

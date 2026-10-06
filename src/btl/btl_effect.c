@@ -24,6 +24,7 @@
 #include "btl_effect.h"
 #include "hum.h"
 #include "enemy_ids.h"
+#include "gba/io_reg.h"
 
 static const BgAnimationChunk sBgAnimationChunks[108] = {
     { gBgAnimCure00Tiles, 29696 },
@@ -374,10 +375,10 @@ void BgFxInit(u16 colorMode, u16 bg) {
         FadeSetPaletteExcluded(i, 1);
     }
 
-    if (colorMode == 0) {
-        BgAnimInit(bg, 0xC000, 0);
+    if (colorMode == BGCNT_16COLOR) {
+        BgAnimInit(bg, BGCNT_TXT512x512, BGCNT_16COLOR);
     } else {
-        BgAnimInit(bg, 0x8000, 0x80);
+        BgAnimInit(bg, BGCNT_AFF512x512, BGCNT_256COLOR);
     }
 
     SetBgBlend(bg, 16, 16);

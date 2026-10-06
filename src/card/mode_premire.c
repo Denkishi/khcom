@@ -25,6 +25,7 @@
 #include "types.h"
 #include "mode_premire.h"
 #include "sprite_palettes.h"
+#include "gba/io_reg.h"
 
 static TaskPool sModePremireTasks;
 #ifndef VERSION_EU
@@ -37,7 +38,7 @@ void Mode_Premire_0() {
     SetBgMode2();
     SetupBg(3, 0, 12, 0);
     SetupBg(2, 2, 28, 10);
-    SetBgSize(3, 0x8000);
+    SetBgSize(3, BGCNT_AFF512x512);
     LoadBgTiles(3, gBtlBgMonstroTiles, 0x4000);
     LoadBgPalette(3, gBtlBgMonstroPalette, 0x100);
 #ifdef VERSION_EU

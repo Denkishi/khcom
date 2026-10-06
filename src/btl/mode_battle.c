@@ -25,6 +25,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "battle_ids.h"
+#include "gba/io_reg.h"
 
 void mode_battle_0(u32 mode) {
     BtlWork** dest;
@@ -84,7 +85,7 @@ void mode_battle_0(u32 mode) {
             SetBgPriority(2, 0);
             SetBgPriority(1, 1);
             SetBgOverflow(2, 0);
-            SetBgSize(1, 0x4000);
+            SetBgSize(1, BGCNT_TXT512x256);
             break;
         case BATTLE_GUARD_ARMOR:
         case BATTLE_JAFAR:
@@ -210,7 +211,7 @@ void mode_battle_0(u32 mode) {
     TaskPoolInit(&gBtlWork->taskPools[0], 40);
     TaskPoolInit(&gBtlWork->taskPools[1], 32);
     TaskPoolInit(&gBtlWork->taskPools[2], 1);
-    BgFxInit(0x80, gBtlWork->bg);
+    BgFxInit(BGCNT_256COLOR, gBtlWork->bg);
     ColliderPoolsInit();
 
     if (gGameState.flags & GAME_FLAG_RIKU) {

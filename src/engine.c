@@ -885,7 +885,7 @@ void UpdateSpriteOam() {
 
             if (tiles->allocated) {
                 palette = (attr2 >> 12) + ((ObjPalette*)entry->palette)->index;
-                oam[2] = (attr2 & 0xC00) | (tileOffset + tiles->index) | (palette << 12);
+                oam[2] = (attr2 & SPRITE_PRIORITY_MASK) | (tileOffset + tiles->index) | (palette << 12);
                 tileOffset += GetObjTileCount(oam[0], oam[1]);
             } else {
                 palette = (attr2 >> 12) + ((ObjPalette*)entry->palette)->index;

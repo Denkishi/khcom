@@ -597,11 +597,11 @@ void MovieVBlankIntr() {
                     x = sub->x;
                     palette = (sub->palette & 15) << 12;
                     oam[0] = attr0 | 0x74;
-                    oam[1] = (x + i * 10) | 0x4000;
+                    oam[1] = (x + i * 10) | OAM_SIZE(1);
 #else
                     palette = (sMovieSubUpper->palette & 15) << 12;
                     oam[0] = attr0 | y;
-                    oam[1] = x | 0x4000;
+                    oam[1] = x | OAM_SIZE(1);
 #endif
                     oam[2] = palette | (tile + 0x200);
                     oam += 4;
@@ -632,11 +632,11 @@ void MovieVBlankIntr() {
                     x = sub->x;
                     palette = (sub->palette & 15) << 12;
                     oam[0] = attr1 | 0x84;
-                    oam[1] = (x + i * 10) | 0x4000;
+                    oam[1] = (x + i * 10) | OAM_SIZE(1);
 #else
                     palette = (sMovieSubLower->palette & 15) << 12;
                     oam[0] = attr1 | y;
-                    oam[1] = x | 0x4000;
+                    oam[1] = x | OAM_SIZE(1);
 #endif
                     oam[2] = palette | (tile + 0x300);
                     oam += 4;

@@ -2518,7 +2518,7 @@ void event_seq_0(EventSeqWork* work, u8* arg) {
 
                 LoadBgPalette(2, bg->palette, bg->paletteSize);
                 SetBgColorMode(2, BGCNT_256COLOR);
-                SetBgSize(2, 0x8000);
+                SetBgSize(2, BGCNT_AFF512x512);
 
                 if (bg->compression[0] == 2 || bg->compression[0] == 3) {
                     LoadBgMapLz77(2, (void*)*bg->maps);
@@ -2715,7 +2715,7 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
             LoadBgTiles(2, bg->tiles, bg->tilesSize);
             LoadBgPalette(2, bg->palette, bg->paletteSize);
             SetBgColorMode(2, BGCNT_256COLOR);
-            SetBgSize(2, 0x8000);
+            SetBgSize(2, BGCNT_AFF512x512);
             LoadBgMap(2, *bg->maps, 0x1000);
             SetBgAffine(2, 0, Q_8_8(1), Q_8_8(1), 0, 0);
         } else {
@@ -3084,7 +3084,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gEventState->y = viewY;
         break;
     case EVENT_CHARA_BOSS_MARLUXIA_2:
-        SetBgSize(1, 0x4000);
+        SetBgSize(1, BGCNT_TXT512x256);
         SetBgPriority(0, 2);
         SetBgPriority(1, 1);
         SetBgPriority(2, 0);

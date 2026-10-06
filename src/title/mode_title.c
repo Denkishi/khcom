@@ -209,7 +209,7 @@ void mode_title_0() {
     BackdropFadeReset();
     BackdropFadeSetColor(0, 0, 0);
     SetupBg(2, 2, 0x1F, 0xB);
-    SetBgSize(2, 0x4000);
+    SetBgSize(2, BGCNT_AFF256x256);
     SetBgPriority(2, 2);
     LoadBgTiles(2, gTitleLogoBgTiles, 0x3F00);
     LoadBgPalette(2, gTitleLogoBgPalette, 0xA0);

@@ -1339,7 +1339,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
         z = 0;
         *cursorHidden = 1;
         SetBgPriority(2, 0);
-        BgAnimInit(2, 0x8000, 0x80);
+        BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
         BgAnimStart(&gBgAnimDefPremireChance, 120, 60);
         work->bgAnimDuration = BgAnimGetDuration(&gBgAnimDefPremireChance);
         work->resultTimer = z;

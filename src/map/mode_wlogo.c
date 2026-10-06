@@ -28,6 +28,7 @@
 #include "sprite_palettes.h"
 #include "world_types.h"
 #include "engine_math.h"
+#include "gba/io_reg.h"
 
 static u8* sWorldNames[13] = {
 #if defined(VERSION_US)
@@ -206,7 +207,7 @@ void WLogoInitWorldSelect() {
     FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(1, 2, 31, 0);
-    SetBgSize(1, 0);
+    SetBgSize(1, BGCNT_TXT256x256);
     LoadBgTiles(1, gSioBgTiles, 0xBC0);
     LoadBgPalette(1, gSioBgPalettes, 0x40);
     LoadBgMap(1, gSioBattleBgMap, 0x800);
@@ -230,11 +231,11 @@ void WLogoStartLogo(u8 world) {
     SetupBg(0, 0, 7, 14);
     SetBgPriority(0, 0);
     SetBgOverflow(0, 1);
-    SetBgSize(0, 0);
+    SetBgSize(0, BGCNT_TXT256x256);
     SetupBg(2, 2, 24, 0);
     SetBgPriority(2, 2);
     SetBgOverflow(2, 1);
-    SetBgSize(2, 0x8000);
+    SetBgSize(2, BGCNT_AFF512x512);
     TaskPoolInit(&sModeWLogoTasks, 2);
 
     switch (world) {

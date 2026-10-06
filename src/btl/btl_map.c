@@ -15,6 +15,7 @@
 #include "event_backgrounds.h"
 #include <stddef.h>
 #include "battle_ids.h"
+#include "gba/io_reg.h"
 
 static u8 sBtlMapShakeActive;
 static u16 sBtlMapShakeStep;
@@ -25,7 +26,7 @@ static const s8 sBtlMapShakePattern[32] = {
 };
 
 void task_btl_map_0(BtlMapWork* work) {
-    SetBgSize(gBtlWork->mapBg, 0x8000);
+    SetBgSize(gBtlWork->mapBg, BGCNT_AFF512x512);
 
     if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         switch (gBtlWork->battleId) {

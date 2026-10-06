@@ -25,6 +25,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "battle.h"
+#include "gba/io_reg.h"
 
 u8 gUnk_02039B98 EWRAM_COMMON(4);
 
@@ -57,7 +58,7 @@ void mode_vsbattle_0(u32 mode) {
     SetBgOverflow(2, 0);
     TaskPoolInit(&gBtlWork->taskPools[0], 32);
     TaskPoolInit(&gBtlWork->taskPools[1], 32);
-    BgFxInit(0x80, gBtlWork->bg);
+    BgFxInit(BGCNT_256COLOR, gBtlWork->bg);
     ColliderPoolsInit();
 
     if (mode == 0) {

@@ -20,6 +20,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "engine_math.h"
+#include "gba/io_reg.h"
 
 extern BgAnimationDef* gChkEffBgAnimations[83];
 
@@ -62,7 +63,7 @@ void mode_chkeff_0() {
     FadeSetPaletteExcluded(13, 1);
     FadeSetPaletteExcluded(14, 1);
     FadeSetPaletteExcluded(15, 1);
-    BgAnimInit(2, 0x8000, 0x80);
+    BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     TaskPoolInit(&sChkEffWork->pool, 1);
     TaskCreate(&sChkEffWork->pool, &gTaskDescPrint, NULL);
     sChkEffWork->effectIndex = 0;

@@ -10,6 +10,7 @@
 #include "display.h"
 #include "types.h"
 #include "engine_math.h"
+#include "gba/io_reg.h"
 
 static BgAnimationDef* sBgAnimCurrent;
 static u16 sBgAnimFrameTimer;
@@ -36,18 +37,18 @@ void BgAnimInit(s32 bg, u16 size, u16 colorMode) {
     sBgAnimScrollY = 0;
     sBgAnimStopped = 1;
 
-    if (colorMode == 0) {
+    if (colorMode == BGCNT_16COLOR) {
         sBgAnimAffine = 0;
 
         switch (size) {
-        case 0x4000:
-        case 0x8000:
+        case BGCNT_TXT512x256:
+        case BGCNT_TXT256x512:
             sBgAnimMapSize = 0x1000;
             break;
-        case 0xC000:
+        case BGCNT_TXT512x512:
             sBgAnimMapSize = 0x2000;
             break;
-        case 0:
+        case BGCNT_TXT256x256:
         default:
             sBgAnimMapSize = 0x800;
             break;
@@ -56,16 +57,16 @@ void BgAnimInit(s32 bg, u16 size, u16 colorMode) {
         sBgAnimAffine = 1;
 
         switch (size) {
-        case 0x4000:
+        case BGCNT_AFF256x256:
             sBgAnimMapSize = 0x400;
             break;
-        case 0x8000:
+        case BGCNT_AFF512x512:
             sBgAnimMapSize = 0x1000;
             break;
-        case 0xC000:
+        case BGCNT_AFF1024x1024:
             sBgAnimMapSize = 0x4000;
             break;
-        case 0:
+        case BGCNT_AFF128x128:
         default:
             sBgAnimMapSize = 0x100;
             break;

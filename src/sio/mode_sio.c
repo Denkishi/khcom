@@ -56,6 +56,7 @@
 #include "card_map_anim.h"
 #include "card_deckmenu2.h"
 #include "sprite_palettes.h"
+#include "gba/io_reg.h"
 
 s8 gSioDebugMode EWRAM_COMMON(4);
 
@@ -732,15 +733,15 @@ void mode_sio_btl_option_0(s32 arg) {
     SetupBg(0, 0, 7, 10);
     SetBgPriority(0, 0);
     SetBgOverflow(0, 1);
-    SetBgSize(0, 0);
+    SetBgSize(0, BGCNT_TXT256x256);
     SetupBg(1, 0, 15, 10);
     SetBgPriority(1, 1);
     SetBgOverflow(1, 1);
-    SetBgSize(1, 0);
+    SetBgSize(1, BGCNT_TXT256x256);
     SetupBg(2, 2, 24, 0);
     SetBgPriority(2, 2);
     SetBgOverflow(2, 1);
-    SetBgSize(2, 0x8000);
+    SetBgSize(2, BGCNT_AFF512x512);
     RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(0), 0x2000);
 #ifdef VERSION_EU
     InitTextSlots(sSioBtlOptionWork->textSlots, 40);
@@ -2905,15 +2906,15 @@ void mode_sio_chg_card_0(s32 arg) {
     SetupBg(0, 0, 7, 0);
     SetBgPriority(0, 0);
     SetBgOverflow(0, 1);
-    SetBgSize(0, 0);
+    SetBgSize(0, BGCNT_TXT256x256);
     SetupBg(1, 0, 15, 0);
     SetBgPriority(1, 1);
     SetBgOverflow(1, 1);
-    SetBgSize(1, 0);
+    SetBgSize(1, BGCNT_TXT256x256);
     SetupBg(2, 0, 24, 0);
     SetBgPriority(2, 2);
     SetBgOverflow(2, 1);
-    SetBgSize(2, 0);
+    SetBgSize(2, BGCNT_TXT256x256);
     RequestDma3Copy(gSioChgCardBgTiles, GetBgCharBase(0), 0x2000);
     DisableBg(0);
     DisableBg(1);
@@ -3909,7 +3910,7 @@ void mode_sioError_0(s32 arg) {
     SetBgMode0();
     SetupBg(0, 0, 7, 15);
     SetupBg(1, 1, 31, 0);
-    SetBgSize(1, 0);
+    SetBgSize(1, BGCNT_TXT256x256);
     LoadBgTiles(1, gSioBgTiles, 0xBC0);
     LoadBgPalette(1, gSioBgPalettes, 0x40);
     LoadBgMap(1, gSioConnectBgMap, 0x800);

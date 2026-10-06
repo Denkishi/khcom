@@ -305,7 +305,7 @@ void WorldselectHandleInput() {
     switch (sWorldselectRotation) {
     case WORLDSELECT_ROTATION_NONE:
         if (GetKeysPressed() & A_BUTTON) {
-            BgAnimInit(2, 0x8000, 128);
+            BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
             BgAnimStart(&gBgAnimDefWorldStart, 112, 126);
             SetBgPriority(2, 1);
             gBldCnt |= BLDCNT_TGT2_OBJ;
@@ -759,7 +759,7 @@ void mode_worldselect_0() {
     LoadBgMap(1, gWorldselectBarMap, 0x500);
 
     if (sWorldselectFirstVisit == 0) {
-        BgAnimInit(2, 0x8000, 128);
+        BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
         BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
         BgAnimSetLoopStartFrame(0);
         sWorldselectBgAnimActive = 1;
@@ -836,7 +836,7 @@ void mode_worldselect_1() {
             } else {
                 gGameState.progression.tutorialFlags |= 1;
                 WorldselectSetBgMode1();
-                BgAnimInit(2, 0x8000, 128);
+                BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
                 BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
                 BgAnimSetLoopStartFrame(0);
                 sWorldselectBgAnimActive = 1;

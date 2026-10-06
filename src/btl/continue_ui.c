@@ -75,7 +75,7 @@ void ContinueSora_0(ContinueWork* work) {
     LoadBgTiles(0, gContinueBgTiles, MSG_CONT_BG_TILES);
     LoadBgMap(0, gContinueBgMap, 0x800);
 #endif
-    BgAnimInit(2, 0x8000, 128);
+    BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
     work->tiles3 = LoadObjTiles(gContinueLineTiles, 192);
@@ -145,7 +145,7 @@ void ContinueRiku_0(ContinueWork* work) {
     LoadBgTiles(0, gContinueBgTiles, MSG_CONT_BG_TILES);
     LoadBgMap(0, gContinueBgMap, 0x800);
 #endif
-    BgAnimInit(2, 0x8000, 128);
+    BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
     work->tiles3 = LoadObjTiles(gContinueLineTiles, 192);

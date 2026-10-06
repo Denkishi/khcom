@@ -151,7 +151,7 @@ void Level_Up_0(LevelUpWork* work) {
         work->bossBattle = 0;
         gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
         gBg1Cnt &= ~BGCNT_256COLOR;
-        SetBgSize(1, 0);
+        SetBgSize(1, BGCNT_TXT256x256);
         SetupBg(2, 0, 12, 0);
         SetupBg(1, 2, 24, 0);
         SetupBg(0, 2, 25, 0);
@@ -172,25 +172,25 @@ void Level_Up_0(LevelUpWork* work) {
 
         switch (gBtlWork->battleId) {
         case BATTLE_URSULA:
-            SetBgSize(0, 0);
+            SetBgSize(0, BGCNT_TXT256x256);
             SetupBg(0, 0, 26, 0);
             LoadBgMap(0, gDefaultBgMap, 0x800);
             DisableBg(0);
             break;
         case BATTLE_PARASITE_CAGE:
-            SetBgSize(1, 0);
+            SetBgSize(1, BGCNT_TXT256x256);
             SetupBg(1, 1, 24, 0);
             LoadBgMap(1, gDefaultBgMap, 0x800);
             DisableBg(1);
             break;
         case BATTLE_GUARD_ARMOR:
-            SetBgSize(1, 0);
+            SetBgSize(1, BGCNT_TXT256x256);
             SetupBg(1, 2, 26, 0);
             LoadBgMap(1, gDefaultBgMap, 0x800);
             DisableBg(1);
             break;
         default:
-            SetBgSize(1, 0);
+            SetBgSize(1, BGCNT_TXT256x256);
             LoadBgMap(1, gDefaultBgMap, 0x800);
             DisableBg(1);
             break;

@@ -906,12 +906,6 @@ entries:
   jp:
     address: 0x093C6CB4
     size: 15904
-- name: gUnkEu_094E0CE4
-  format: tiles4
-  width: 2
-  eu:
-    address: 0x094E0CE4
-    size: 5120
 - name: gDeckCategoryDigitTiles
   format: tiles4
   us:
@@ -1254,7 +1248,7 @@ entries:
   width: 32
   eu:
     address: 0x094E04E4
-    size: 2048
+    size: 7168
 - name: gDeckMenuTextFrenchTiles
   format: tiles4
   width: 32

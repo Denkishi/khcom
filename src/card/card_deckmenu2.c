@@ -1441,7 +1441,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            RequestDma3Copy(gDeckMenuTextTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextTiles));
             break;
         case LANGUAGE_FRENCH:
             RequestDma3Copy(gDeckMenuTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextFrenchTiles));

@@ -375,7 +375,7 @@ u16 CountNonSpaceChars(const TextChar* str) {
     s32 i;
 #ifndef VERSION_JP
     s32 n;
-    TextChar c;
+    TextChar ch;
 #endif
 
     i = 0;
@@ -390,13 +390,13 @@ u16 CountNonSpaceChars(const TextChar* str) {
             return i / 2;
         }
 #else
-        c = str[i];
+        ch = str[i];
 
-        if (c == 0) {
+        if (ch == 0) {
             return n;
         }
 
-        if (c != 0x20) {
+        if (ch != 0x20) {
             n++;
         }
 #endif
@@ -459,11 +459,11 @@ s32 HandleMovieFrame(s32 arg) {
         for (i = 0; i < 2; i++) {
             if (sMovieSubs[sMovieSubIndex].frame == sMovieFrame) {
                 if (sMovieSubs[sMovieSubIndex].line == 0) {
-                    const MovieSub* e;
+                    const MovieSub* sub;
 
-                    sMovieSubUpper = e = &sMovieSubs[sMovieSubIndex];
+                    sMovieSubUpper = sub = &sMovieSubs[sMovieSubIndex];
                     sMovieFlags |= MOVIE_FLAG_UPPER_SUB_PENDING;
-                    sMovieSubUpperTimer = e->duration;
+                    sMovieSubUpperTimer = sub->duration;
 
                     if (sMovieSubIndex < sMovieSubCount - 1) {
                         sMovieSubIndex++;
@@ -475,17 +475,17 @@ s32 HandleMovieFrame(s32 arg) {
                         sMovieSubUpperLength = MOVIE_SUB_MAX_CHARS;
                     }
                 } else {
-                    const MovieSub* e;
+                    const MovieSub* sub;
 
-                    sMovieSubLower = e = &sMovieSubs[sMovieSubIndex];
+                    sMovieSubLower = sub = &sMovieSubs[sMovieSubIndex];
                     sMovieFlags |= MOVIE_FLAG_LOWER_SUB_PENDING;
-                    sMovieSubLowerTimer = e->duration;
+                    sMovieSubLowerTimer = sub->duration;
 
                     if (sMovieSubIndex < sMovieSubCount - 1) {
                         sMovieSubIndex++;
                     }
 
-                    sMovieSubLowerLength = CountNonSpaceChars(e->text);
+                    sMovieSubLowerLength = CountNonSpaceChars(sub->text);
 
                     if (sMovieSubLowerLength > MOVIE_SUB_MAX_CHARS) {
                         sMovieSubLowerLength = MOVIE_SUB_MAX_CHARS;
@@ -690,7 +690,7 @@ void MovieVBlankIntr() {
 }
 
 void mode_movie_1() {
-    void* p;
+    void* movie;
 
     switch (sMovieModeState) {
     case MOVIE_MODE_STATE_CLEAR: {
@@ -716,7 +716,7 @@ void mode_movie_1() {
 
         switch (sMovieId) {
         case 1:
-            p = gMovieOpening;
+            movie = gMovieOpening;
 
 #ifdef VERSION_EU
             switch (gLanguage) {
@@ -748,17 +748,17 @@ void mode_movie_1() {
 #endif
             break;
         case 2:
-            p = gMovieEvent026;
+            movie = gMovieEvent026;
             sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
         case 3:
-            p = gMovieEvent057;
+            movie = gMovieEvent057;
             sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
         case 4:
-            p = gMovieEnding;
+            movie = gMovieEnding;
 
 #ifdef VERSION_EU
             switch (gLanguage) {
@@ -797,7 +797,7 @@ void mode_movie_1() {
         default:
 #endif
         case 5:
-            p = gMovieRikuEnding;
+            movie = gMovieRikuEnding;
 
 #ifdef VERSION_EU
             switch (gLanguage) {
@@ -834,14 +834,14 @@ void mode_movie_1() {
             break;
 #ifndef VERSION_EU
         default:
-            p = gMovieEnding;
+            movie = gMovieEnding;
             sMovieSubs = gMovieSubsOpening;
             sMovieSubCount = 3;
             break;
 #endif
         }
 
-        if (MovieStart(p)) {
+        if (MovieStart(movie)) {
             sMovieFlags |= MOVIE_FLAG_PLAYING;
             MoviePlay(HandleMovieFrame, 0);
             sMovieFlags &= ~MOVIE_FLAG_PLAYING;

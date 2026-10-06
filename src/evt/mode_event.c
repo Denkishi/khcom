@@ -44,17 +44,17 @@ enum EventEndStep {
 
 void Event_0(s32 arg) {
     EvtArg cfg;
-    EventBackgroundDef* e;
+    EventBackgroundDef* bg;
 
     gEventState = EwramAlloc(sizeof(EventState));
-    e = gEventBackgroundDefs[arg & 0x7FFF];
+    bg = gEventBackgroundDefs[arg & 0x7FFF];
     gBldCnt = 0;
     gBldAlpha = 0;
     sEventId = arg;
     sEventPaused = 0;
 
-    if (e != NULL) {
-        if (e->isAffine != 0) {
+    if (bg != NULL) {
+        if (bg->isAffine != 0) {
             SetBgMode1();
             SetupBg(0, 3, 31, 14);
             SetupBg(1, 0, 16, 0);
@@ -145,7 +145,7 @@ void EventDebugUpdate() {
 }
 
 void EventUpdate() {
-    const EventSequenceDef* p = gEventSequenceDefs[sEventId];
+    const EventSequenceDef* seqDef = gEventSequenceDefs[sEventId];
     UpdatePlayTime();
     TaskPoolUpdate(&sEventTaskPool);
     TaskPoolDraw(&sEventTaskPool);
@@ -193,7 +193,7 @@ void EventUpdate() {
         return;
     }
 
-    if (p->toMap) {
+    if (seqDef->toMap) {
 #ifdef VERSION_EU
         if (sEventId == 148) {
 #else
@@ -208,8 +208,8 @@ void EventUpdate() {
         return;
     }
 
-    if (p->nextEvent != 0xFFFF) {
-        switch (p->nextEvent) {
+    if (seqDef->nextEvent != 0xFFFF) {
+        switch (seqDef->nextEvent) {
         case 12:
         case 14:
         case 17:
@@ -250,49 +250,49 @@ void EventUpdate() {
             RequestMapMode();
             break;
         default:
-            ModeRequest(&gModeEvent, p->nextEvent);
+            ModeRequest(&gModeEvent, seqDef->nextEvent);
             break;
         }
 
         return;
     }
 
-    if (p->startsBattle) {
-        if (p->battleId == 122) {
+    if (seqDef->startsBattle) {
+        if (seqDef->battleId == 122) {
             gGameState.battleStage = BATTLE_STAGE_HALLOWEEN_TOWN;
-        } else if (p->battleId == 120) {
+        } else if (seqDef->battleId == 120) {
             gGameState.battleStage = BATTLE_STAGE_WONDERLAND;
-        } else if (p->battleId == 121) {
+        } else if (seqDef->battleId == 121) {
             gGameState.battleStage = BATTLE_STAGE_MONSTRO;
-        } else if (p->battleId == 123) {
+        } else if (seqDef->battleId == 123) {
             gGameState.battleStage = BATTLE_STAGE_AGRABAH;
-        } else if (p->battleId == 124) {
+        } else if (seqDef->battleId == 124) {
             gGameState.battleStage = BATTLE_STAGE_AGRABAH;
         }
 
-        ModeRequest(&gModeBattle, p->battleId);
+        ModeRequest(&gModeBattle, seqDef->battleId);
         return;
     }
 
-    if (p->toTitle != 0) {
+    if (seqDef->toTitle != 0) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         ModeRequest(&gModeTitle, 0);
         return;
     }
 
-    if (p->toCopyright != 0) {
+    if (seqDef->toCopyright != 0) {
         ModeRequest(&gModeCopyright1, 0);
         return;
     }
 
-    if (p->toMapFld) {
+    if (seqDef->toMapFld) {
         AdvanceFloorStory();
         ModeRequest(&gModeMapFld, 0);
         return;
     }
 
-    if (p->exitCode != 0xFFFF) {
-        switch (p->exitCode) {
+    if (seqDef->exitCode != 0xFFFF) {
+        switch (seqDef->exitCode) {
         case 2:
             ModeRequest(&gModeBattle, 178);
             break;
@@ -322,24 +322,24 @@ void EventUpdate() {
             RequestMapMode();
             break;
         default:
-            ModeRequest(&gModeDummy, p->exitCode);
+            ModeRequest(&gModeDummy, seqDef->exitCode);
             break;
         }
 
         return;
     }
 
-    if (p->unk_2A != 0) {
+    if (seqDef->unk_2A != 0) {
         AdvanceFloorStory();
         RequestMapMode();
-    } else if (p->world != 255) {
+    } else if (seqDef->world != 255) {
         AdvanceFloorStory();
         RequestMapMode();
-    } else if (p->poohLevel != 255) {
-        if (p->poohLevel == 0) {
+    } else if (seqDef->poohLevel != 255) {
+        if (seqDef->poohLevel == 0) {
             AdvanceFloorStory();
             ModeRequest(&gModePooh, 0);
-        } else if (p->poohLevel <= 6) {
+        } else if (seqDef->poohLevel <= 6) {
             ModeRequest(&gModePooh, 1);
         }
     }
@@ -855,7 +855,7 @@ void GrantRewardsAfterEvent() {
 }
 
 void HandleYesAnswerAfterEvent() {
-    const EventSequenceDef* m = gEventSequenceDefs[sEventId];
+    const EventSequenceDef* seqDef = gEventSequenceDefs[sEventId];
 
     switch (sEventId) {
     case 68:
@@ -864,7 +864,7 @@ void HandleYesAnswerAfterEvent() {
     case 83:
     case 84:
         gGameState.battleStage = BATTLE_STAGE_MONSTRO;
-        ModeRequest(&gModeBattle, m->battleId);
+        ModeRequest(&gModeBattle, seqDef->battleId);
         break;
     }
 }

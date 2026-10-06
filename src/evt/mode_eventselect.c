@@ -249,15 +249,15 @@ enum HanabiraCState {
 };
 
 void Hanabira_c_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
+    EvtObj* obj;
 
     work->actor = chara;
-    b = &chara->obj;
+    obj = &chara->obj;
     work->palette = LoadObjPalette(gMaruxhaBtEffPalette, 32);
     work->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, 256);
-    work->x = b->x;
-    work->y = b->y;
-    work->z = b->z - 0x3000;
+    work->x = obj->x;
+    work->y = obj->y;
+    work->z = obj->z - 0x3000;
     work->vx = GetRandom() % 717 - 358;
     work->vz = -(GetRandom() % 539 + 102);
     AnimInit(&work->anim, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames);
@@ -266,8 +266,8 @@ void Hanabira_c_0(EffectWork* work, EventCharaWork* chara) {
 }
 
 s32 Hanabira_c_1(EffectWork* work) {
-    s32 v;
-    s32 r;
+    s32 decayed;
+    s32 randomValue;
 
     switch (work->state) {
     case HANABIRA_C_STATE_RISE:
@@ -283,7 +283,7 @@ s32 Hanabira_c_1(EffectWork* work) {
     case HANABIRA_C_STATE_FLUTTER:
         work->x += work->vx;
         work->z += work->vz;
-        work->vz = (v = work->vz - 12) - (r = GetRandom()) % 9;
+        work->vz = (decayed = work->vz - 12) - (randomValue = GetRandom()) % 9;
 
         if (work->vz < 0) {
             work->vz = GetRandom() % 181 + 204;
@@ -310,12 +310,12 @@ s32 Hanabira_c_1(EffectWork* work) {
 void Hanabira_c_2(EffectWork* work) {
     s32 x;
     s32 y;
-    s32 t;
+    s32 baseY;
 
     x = (work->x >> 8) - (gEventState->x >> 8);
-    t = work->y >> 8;
-    y = t + (work->z >> 8) - (gEventState->y >> 8);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - t * 4);
+    baseY = work->y >> 8;
+    y = baseY + (work->z >> 8) - (gEventState->y >> 8);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - baseY * 4);
 }
 
 void Hanabira_c_3(EffectWork* work) {
@@ -324,12 +324,12 @@ void Hanabira_c_3(EffectWork* work) {
 }
 
 void smoke_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
+    EvtObj* obj;
 
     work->actor = chara;
-    b = &chara->obj;
-    work->x = b->x;
-    work->y = b->y - 0x800;
+    obj = &chara->obj;
+    work->x = obj->x;
+    work->y = obj->y - 0x800;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gEventSmokeTiles);
@@ -341,12 +341,12 @@ void smoke_0(EffectWork* work, EventCharaWork* chara) {
 }
 
 void Exclamation_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
+    EvtObj* obj;
 
     work->actor = chara;
-    b = &chara->obj;
-    work->x = b->x;
-    work->y = b->y;
+    obj = &chara->obj;
+    work->x = obj->x;
+    work->y = obj->y;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
 
@@ -363,12 +363,12 @@ void Exclamation_0(EffectWork* work, EventCharaWork* chara) {
 }
 
 void balloon_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
+    EvtObj* obj;
 
     work->actor = chara;
-    b = &chara->obj;
-    work->x = b->x;
-    work->y = b->y;
+    obj = &chara->obj;
+    work->x = obj->x;
+    work->y = obj->y;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gFEventTiles);
@@ -401,19 +401,19 @@ s32 Exclamation_1(EffectWork* work) {
 }
 
 void EffectDrawObj(EffectWork* work) {
-    u16 pr;
+    u16 flags;
     s32 y;
 
-    pr = work->actor->obj.drawFlags;
+    flags = work->actor->obj.drawFlags;
 
     if (!work->followFlip) {
-        pr &= 0xFFFE;
+        flags &= 0xFFFE;
     }
 
     DrawSprite((work->x >> 8) - (gEventState->x >> 8),
                (y = (work->y >> 8) + gEventCharaParams[work->actor->arg.chara].spriteYOffset) -
                    (gEventState->y >> 8),
-               work->gfx, work->tiles, work->palette, NULL, pr, 50);
+               work->gfx, work->tiles, work->palette, NULL, flags, 50);
 }
 
 void EffectReleaseObj(EffectWork* work) {
@@ -422,12 +422,12 @@ void EffectReleaseObj(EffectWork* work) {
 }
 
 void Question_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
+    EvtObj* obj;
 
     work->actor = chara;
-    b = &chara->obj;
-    work->x = b->x;
-    work->y = b->y;
+    obj = &chara->obj;
+    work->x = obj->x;
+    work->y = obj->y;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gFEventTiles);
@@ -457,19 +457,19 @@ s32 Question_1(EffectWork* work) {
 }
 
 void TinkerbellParticleInit(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
-    s32 d1;
-    s32 d2;
-    s32 k;
+    EvtObj* obj;
+    s32 offsetX;
+    s32 offsetY;
+    s32 center;
 
     work->actor = chara;
-    b = &chara->obj;
-    k = 0x400;
-    d1 = (GetRandom() % 9 << 8) - k;
-    work->x = b->x + d1;
-    d2 = (GetRandom() % 9 << 8) - k;
-    work->y = b->y + d2;
-    work->z2 = b->z;
+    obj = &chara->obj;
+    center = 0x400;
+    offsetX = (GetRandom() % 9 << 8) - center;
+    work->x = obj->x + offsetX;
+    offsetY = (GetRandom() % 9 << 8) - center;
+    work->y = obj->y + offsetY;
+    work->z2 = obj->z;
     work->vx = GetRandom() % 232 + 76;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
@@ -495,17 +495,17 @@ s32 TinkerbellParticleUpdate(EffectWork* work) {
 }
 
 void TinkerbellParticleDraw(EffectWork* work) {
-    u16 pr;
+    u16 flags;
 
-    pr = work->actor->obj.drawFlags;
+    flags = work->actor->obj.drawFlags;
 
     if (!work->followFlip) {
-        pr &= 0xFFFE;
+        flags &= 0xFFFE;
     }
 
     DrawSprite((work->x >> 8) - (gEventState->x >> 8),
                ((work->y + work->z2) >> 8) - (gEventState->y >> 8),
-               work->gfx, work->tiles, work->palette, NULL, pr,
+               work->gfx, work->tiles, work->palette, NULL, flags,
                -0x1004 - (work->y >> 8) * 4);
 }
 
@@ -516,12 +516,12 @@ void TinkerbellParticleDestroy(EffectWork* work) {
 }
 
 void GlowNose_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
+    EvtObj* obj;
 
     work->actor = chara;
-    b = &chara->obj;
-    work->x = b->x - 1536;
-    work->y = b->y + 3072;
+    obj = &chara->obj;
+    work->x = obj->x - 1536;
+    work->y = obj->y + 3072;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gGlowNoseTiles);
@@ -544,19 +544,19 @@ s32 GlowNose_1(EffectWork* work) {
 }
 
 void GlowNose2_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
+    EvtObj* obj;
 
     work->actor = chara;
-    b = &chara->obj;
+    obj = &chara->obj;
 
     switch (chara->arg.chara) {
     case 3:
-        work->x = b->x - 6144;
-        work->y = b->y + 8192;
+        work->x = obj->x - 6144;
+        work->y = obj->y + 8192;
         break;
     case 43:
-        work->x = b->x + 2048;
-        work->y = b->y + 2048;
+        work->x = obj->x + 2048;
+        work->y = obj->y + 2048;
         break;
     }
 
@@ -582,25 +582,25 @@ s32 GlowNose2_1(EffectWork* work) {
 }
 
 void down_0(EffectWork* work, EventCharaWork* chara) {
-    EvtObj* b;
-    DownWork* s;
+    EvtObj* obj;
+    DownWork* down;
     u8 i;
 
     work->actor = chara;
-    b = &chara->obj;
+    obj = &chara->obj;
 
     switch (chara->arg.chara) {
     case 0:
-        work->x = b->x + 4096;
-        work->y = b->y - 6144;
+        work->x = obj->x + 4096;
+        work->y = obj->y - 6144;
         break;
     case 2:
-        work->x = b->x - 2048;
-        work->y = b->y - 6144;
+        work->x = obj->x - 2048;
+        work->y = obj->y - 6144;
         break;
     case 1:
-        work->x = b->x + 3584;
-        work->y = b->y - 1024;
+        work->x = obj->x + 3584;
+        work->y = obj->y - 1024;
         break;
     }
 
@@ -608,30 +608,30 @@ void down_0(EffectWork* work, EventCharaWork* chara) {
     UpdateSpriteFrameTiles(work->tiles, gLvupLogoFrames[3], gLvupLogoTiles);
     work->palette = LoadObjPalette(gCard00Palette, 32);
     work->down = EwramAlloc(sizeof(DownWork));
-    s = work->down;
+    down = work->down;
 
     for (i = 0; i < 8; i++) {
-        s->angle[i] = i * 32;
-        s->wobble[i] = 0;
+        down->angle[i] = i * 32;
+        down->wobble[i] = 0;
     }
 }
 
 s32 down_1(EffectWork* work) {
-    DownWork* s;
+    DownWork* down;
     u8 i;
 
-    s = work->down;
+    down = work->down;
 
     for (i = 0; i < 8; i++) {
-        s->x[i] = SIN(s->angle[i]) * 8 + work->x;
-        s->y[i] = -COS(s->angle[i]) * (s->wobble[i] + 4) +
+        down->x[i] = SIN(down->angle[i]) * 8 + work->x;
+        down->y[i] = -COS(down->angle[i]) * (down->wobble[i] + 4) +
                        work->y;
-        s->angle[i] += 4;
+        down->angle[i] += 4;
 
-        if (s->wobble[i] == 0) {
-            s->wobble[i]++;
+        if (down->wobble[i] == 0) {
+            down->wobble[i]++;
         } else {
-            s->wobble[i] = 0;
+            down->wobble[i] = 0;
         }
     }
 
@@ -643,17 +643,17 @@ s32 down_1(EffectWork* work) {
 }
 
 s32 down_2(EffectWork* work) {
-    DownWork* s;
-    u16 pr;
+    DownWork* down;
+    u16 flags;
     u8 i;
 
-    pr = work->actor->obj.drawFlags;
-    s = work->down;
+    flags = work->actor->obj.drawFlags;
+    down = work->down;
 
     for (i = 0; i < 8; i++) {
-        DrawSprite((s->x[i] >> 8) - (gEventState->x >> 8),
-                   (s->y[i] >> 8) - (gEventState->y >> 8), NULL,
-                   work->tiles, work->palette, NULL, pr, 50);
+        DrawSprite((down->x[i] >> 8) - (gEventState->x >> 8),
+                   (down->y[i] >> 8) - (gEventState->y >> 8), NULL,
+                   work->tiles, work->palette, NULL, flags, 50);
     }
 }
 
@@ -754,47 +754,47 @@ void EV_SOUND_0(EvSoundWork* work, u8* arg) {
 }
 
 s32 EV_SOUND_1(EvSoundWork* work) {
-    const EvSoundCue* p;
+    const EvSoundCue* cue;
     MusicPlayerInfo* mp;
-    u8 idx;
-    u8 n;
+    u8 player;
+    u8 fadePlayer;
     u8 i;
 
     if (work->soundCues == NULL) {
         return 0;
     }
 
-    p = &work->soundCues[work->cue];
+    cue = &work->soundCues[work->cue];
 
-    if (gEventState->frame == p->frame) {
-        if (p->song != 0xFFFF) {
-            if ((p->flags & EV_SOUND_FLAG_STOP) == 0) {
-                m4aSongNumStartOrContinue(p->song);
-                idx = gSongTable[p->song].ms;
-                m4aMPlayImmInit(gMPlayTable[idx].info);
-                gEventSoundMix[idx].pan = 0;
-                gEventSoundMix[idx].volume = 256;
+    if (gEventState->frame == cue->frame) {
+        if (cue->song != 0xFFFF) {
+            if ((cue->flags & EV_SOUND_FLAG_STOP) == 0) {
+                m4aSongNumStartOrContinue(cue->song);
+                player = gSongTable[cue->song].ms;
+                m4aMPlayImmInit(gMPlayTable[player].info);
+                gEventSoundMix[player].pan = 0;
+                gEventSoundMix[player].volume = 256;
             } else {
-                m4aSongNumStop(p->song);
+                m4aSongNumStop(cue->song);
             }
         } else {
             m4aMPlayAllStop();
         }
 
-        if (p->flags & EV_SOUND_FLAG_FADE_OUT) {
-            m4aMPlayFadeOut(gMPlayTable[gSongTable[p->song].ms].info, 5);
+        if (cue->flags & EV_SOUND_FLAG_FADE_OUT) {
+            m4aMPlayFadeOut(gMPlayTable[gSongTable[cue->song].ms].info, 5);
             work->fadeMode = EV_SOUND_FADE_MODE_OUT;
         }
 
-        if (p->flags & EV_SOUND_FLAG_FADE_IN) {
-            n = gSongTable[p->song].ms;
-            mp = gMPlayTable[n].info;
+        if (cue->flags & EV_SOUND_FLAG_FADE_IN) {
+            fadePlayer = gSongTable[cue->song].ms;
+            mp = gMPlayTable[fadePlayer].info;
             work->volume = 3;
             m4aMPlayVolumeControl(mp, 255, 3);
             work->fadeMode = EV_SOUND_FADE_MODE_IN;
         }
 
-        if ((p->flags & EV_SOUND_FLAG_END) == 0) {
+        if ((cue->flags & EV_SOUND_FLAG_END) == 0) {
             work->cue++;
         }
     }
@@ -836,32 +836,32 @@ void EvSoundUpdateFadeIn(EvSoundWork* work) {
 }
 
 void SetEventSoundPosition(u16 song, s16 x, s16 y) {
-    u8 idx;
+    u8 player;
     s32 sx;
     s16 dx;
     s16 pan;
     s16 dist;
-    s16 t;
-    s16 v;
-    u32 d;
+    s16 axisDist;
+    s16 total;
+    u32 twiceDy;
 
-    v = 0;
+    total = 0;
 
     if (gEventSoundMix == NULL) {
         return;
     }
 
-    idx = gSongTable[song].ms;
-    m4aMPlayImmInit(gMPlayTable[idx].info);
+    player = gSongTable[song].ms;
+    m4aMPlayImmInit(gMPlayTable[player].info);
 
     if ((u16)x > 240) {
-        gEventSoundMix[idx].pan = v;
-        gEventSoundMix[idx].volume = v;
+        gEventSoundMix[player].pan = total;
+        gEventSoundMix[player].volume = total;
     }
 
     if ((u16)y > 160) {
-        gEventSoundMix[idx].pan = v;
-        gEventSoundMix[idx].volume = v;
+        gEventSoundMix[player].pan = total;
+        gEventSoundMix[player].volume = total;
     }
 
     sx = x;
@@ -877,34 +877,34 @@ void SetEventSoundPosition(u16 song, s16 x, s16 y) {
         pan = -128;
     }
 
-    gEventSoundMix[idx].pan = pan;
+    gEventSoundMix[player].pan = pan;
 
     if (120 - sx >= 0) {
-        t = 120 - sx;
+        axisDist = 120 - sx;
     } else {
-        t = dx;
+        axisDist = dx;
     }
 
-    dist = t;
+    dist = axisDist;
 
     if (80 - y * 2 < 0) {
-        d = y * 2 - 80;
-        t = d / 2;
+        twiceDy = y * 2 - 80;
+        axisDist = twiceDy / 2;
     } else {
-        d = 80 - y * 2;
-        t = d / 2;
+        twiceDy = 80 - y * 2;
+        axisDist = twiceDy / 2;
     }
 
-    v = dist + t;
+    total = dist + axisDist;
 
-    if (v > 256) {
-        v = 256;
+    if (total > 256) {
+        total = 256;
     }
 
-    gEventSoundMix[idx].volume = 256 - v;
+    gEventSoundMix[player].volume = 256 - total;
 
-    if (gEventSoundMix[idx].volume < 12) {
-        gEventSoundMix[idx].volume = 12;
+    if (gEventSoundMix[player].volume < 12) {
+        gEventSoundMix[player].volume = 12;
     }
 }
 

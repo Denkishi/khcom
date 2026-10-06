@@ -31,9 +31,9 @@ static TaskDesc sTaskDescEvtObj = {
 EventState* gEventState EWRAM_COMMON(4);
 
 void EvtObjSetAnim(EvtObj* obj, s32 anim) {
-    u16 t = obj->flags | EVTOBJ_FLAG_ANIM_CHANGED;
+    u16 flags = obj->flags | EVTOBJ_FLAG_ANIM_CHANGED;
 
-    obj->flags = t;
+    obj->flags = flags;
     obj->animEntry = &gEvtObjAnims[anim];
 }
 

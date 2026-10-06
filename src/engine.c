@@ -999,8 +999,6 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
     s16 raw;
     s16 w;
     s16 h;
-    s16* pw;
-    s16* ph;
 
     n = *oam++;
 
@@ -1026,67 +1024,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
 
         x += dx;
         y += dy;
-        pw = &w;
-        ph = &h;
-
-    switch (((attr1 << 16) | attr0) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
-    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
-        *pw = 8;
-        *ph = 8;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 1):
-        *pw = 16;
-        *ph = 16;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 2):
-        // fakematch
-        do {
-            *pw = 32;
-            *ph = 32;
-        } while (0);
-
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 3):
-        *pw = 64;
-        *ph = 64;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 0):
-        *pw = 16;
-        *ph = 8;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 1):
-        *pw = 32;
-        *ph = 8;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 2):
-        *pw = 32;
-        *ph = 16;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 3):
-        *pw = 64;
-        *ph = 32;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 0):
-        *pw = 8;
-        *ph = 16;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 1):
-        *pw = 8;
-        *ph = 32;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 2):
-        *pw = 16;
-        *ph = 32;
-        break;
-    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 3):
-        *pw = 32;
-        *ph = 64;
-        break;
-    default:
-        *pw = 0;
-        *ph = 0;
-        break;
-    }
+        EngineObjSize(attr0, attr1, &w, &h);
 
         if (x <= DISPLAY_WIDTH - 1 && x > -w && y <= DISPLAY_HEIGHT - 1 && y > -h) {
             return FALSE;

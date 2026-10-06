@@ -127,7 +127,7 @@ static SioChgCardWork* sSioChgCardWork;
 #endif
 static SioErrorWork* sSioErrorWork;
 
-void mode_sio_battle_0(s32 a) {
+void mode_sio_battle_0(s32 arg) {
     SioBattleWork* w;
     void* gfx;
     s32 i;
@@ -194,7 +194,7 @@ void mode_sio_battle_0(s32 a) {
     gfx = AnimGetGfx(&sSioBattleWork->anim);
     w = sSioBattleWork;
     w->gfx = gfx;
-    w->modeArg = a;
+    w->modeArg = arg;
 
     switch (w->modeArg) {
     case 0:
@@ -665,10 +665,10 @@ void SioInitWorldList() {
     }
 }
 
-void SetSioBtlOptionAnimation(u16 a, u16 b, u16 c) {
-    const SioAnimDef* def = &sSioBtlOptionAnimDefs[b];
-    AnimChangeWithTables(&sSioBtlOptionWork->anim2[a], def->animId, c, def->anims, def->gfxTable);
-    SetObjTileSource(sSioBtlOptionWork->playerTilesPalettes[a], def->tiles);
+void SetSioBtlOptionAnimation(u16 player, u16 index, u16 flags) {
+    const SioAnimDef* def = &sSioBtlOptionAnimDefs[index];
+    AnimChangeWithTables(&sSioBtlOptionWork->anim2[player], def->animId, flags, def->anims, def->gfxTable);
+    SetObjTileSource(sSioBtlOptionWork->playerTilesPalettes[player], def->tiles);
 }
 
 void mode_sio_btl_option_0(s32 arg) {
@@ -2180,15 +2180,15 @@ void SioBtlOptionSyncHandicaps() {
 #endif
 }
 
-void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
-    switch (a) {
+void SioBtlOptionUpdateHandicapGauges(u16 handicap1, u16 handicap2) {
+    switch (handicap1) {
     case 1:
     case 2:
     case 3:
     case 4:
     case 5:
         LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(&gSioHandicapGauge1Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - a) * 2);
+        LoadPalette(&gSioHandicapGauge1Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - handicap1) * 2);
         break;
     case 6:
         LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
@@ -2199,18 +2199,18 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 10:
     case 11:
         LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(&gSioHandicapGauge1Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (a - 6) * 2);
+        LoadPalette(&gSioHandicapGauge1Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (handicap1 - 6) * 2);
         break;
     }
 
-    switch (b) {
+    switch (handicap2) {
     case 1:
     case 2:
     case 3:
     case 4:
     case 5:
         LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(&gSioHandicapGauge2Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - b) * 2);
+        LoadPalette(&gSioHandicapGauge2Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - handicap2) * 2);
         break;
     case 6:
         LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
@@ -2221,7 +2221,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 10:
     case 11:
         LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(&gSioHandicapGauge2Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (b - 6) * 2);
+        LoadPalette(&gSioHandicapGauge2Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (handicap2 - 6) * 2);
         break;
     }
 }
@@ -2783,10 +2783,10 @@ void SioChgConnectStartTrade() {
 #endif
 
 #ifndef VERSION_EU
-void SetSioChgCardAnimation(u16 a, u16 b, u16 c) {
-    const SioAnimDef* def = &gSioChgCardAnimDefs[b];
-    AnimChangeWithTables(&sSioChgCardWork->anim[a], def->animId, c, def->anims, def->gfxTable);
-    SetObjTileSource(sSioChgCardWork->playerTilesPalettes[a], def->tiles);
+void SetSioChgCardAnimation(u16 player, u16 index, u16 flags) {
+    const SioAnimDef* def = &gSioChgCardAnimDefs[index];
+    AnimChangeWithTables(&sSioChgCardWork->anim[player], def->animId, flags, def->anims, def->gfxTable);
+    SetObjTileSource(sSioChgCardWork->playerTilesPalettes[player], def->tiles);
 }
 #endif
 
@@ -3324,14 +3324,14 @@ void SioChgCardRecvSlots() {
     }
 }
 
-void SioChgCardSetSlot(u16 a) {
+void SioChgCardSetSlot(u16 command) {
     u16 slot;
     s32 i;
 
-    if (a != 0) {
-        i = a;
+    if (command != 0) {
+        i = command;
         i = i >> 12;
-        slot = (a & 0x0FFF) - 1;
+        slot = (command & 0x0FFF) - 1;
 
         if (slot == 0x800) {
             sSioChgCardWork->cardVisible[i] = 0;
@@ -3373,14 +3373,14 @@ void SioChgCardRecvSlotIds() {
     }
 }
 
-void SioChgCardSetSlotId(u16 a) {
+void SioChgCardSetSlotId(u16 command) {
     u16 slot;
     s32 i;
 
-    if (a != 0) {
-        i = a;
+    if (command != 0) {
+        i = command;
         i = i >> 12;
-        slot = (a & 0x0FFF) - 1;
+        slot = (command & 0x0FFF) - 1;
 
         if (slot == 0x800) {
             gSioChgCardSlots[i] = 0x800;

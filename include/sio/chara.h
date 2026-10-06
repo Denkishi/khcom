@@ -96,7 +96,7 @@ void task_chara_mask_fade_0(MaskFadeWork* work, MaskFadeArgs* args);
 u8 task_chara_mask_fade_1(MaskFadeWork* work);
 void task_chara_mask_fade_2();
 void task_chara_mask_fade_3();
-void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* param);
+void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* arg);
 u8 task_chgCardObj_1(ChgCardObjWork* work);
 void task_chgCardObj_2();
 void task_chgCardObj_3();
@@ -116,11 +116,11 @@ s32 SioConnectSendAuto();
 s32 SioConnectRecvAuto();
 void SioCommandClearSend();
 void SioCommandClearRecv();
-void SioSyncInit(void (*a)());
+void SioSyncInit(void (*onConnect)());
 s32 SioSyncSend();
 s32 SioSyncRecv();
 void CharaObjFree();
-void CharaObjSetBankFadeEnabled(u16 a, u8 b);
+void CharaObjSetBankFadeEnabled(u16 bank, u8 enabled);
 void RequestTileRowsCopy(u8* src, u8* dst, u16 size, s16 count);
 
 #endif /* GUARD_CHARA_H */

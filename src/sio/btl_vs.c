@@ -63,10 +63,10 @@ void UpdateVsKeyHoldTimes(u16 keys, s32 i) {
     }
 }
 
-s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
+s32 ReadVsKeyChord(u16 held, u16 pressed, s32 i) {
     s32 ret = 0;
 
-    UpdateVsKeyHoldTimes(a, i);
+    UpdateVsKeyHoldTimes(held, i);
 
     if (sVsKeyReleaseL[i] == 2) {
         sVsKeyChordLatch[i] &= ~L_BUTTON;
@@ -76,7 +76,7 @@ s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
         sVsKeyChordLatch[i] &= ~R_BUTTON;
     }
 
-    if (((b & L_BUTTON) && (a & R_BUTTON)) || ((b & R_BUTTON) && (a & L_BUTTON))) {
+    if (((pressed & L_BUTTON) && (held & R_BUTTON)) || ((pressed & R_BUTTON) && (held & L_BUTTON))) {
         sVsKeyChordLatch[i] |= (L_BUTTON | R_BUTTON);
         ret = L_BUTTON | R_BUTTON;
     }

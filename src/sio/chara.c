@@ -221,19 +221,19 @@ void task_chara_mask_fade_2() {
 void task_chara_mask_fade_3() {
 }
 
-void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* param) {
+void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* arg) {
     s32 x;
     s32 y;
 
-    work->x = param->x;
-    work->y = param->y;
-    work->scaleX = param->scaleX;
-    work->scaleY = param->scaleY;
-    work->angle = param->angle;
-    work->visible = param->visible;
-    work->targetX = param->targetX;
-    work->targetY = param->targetY;
-    work->delay = param->delay;
+    work->x = arg->x;
+    work->y = arg->y;
+    work->scaleX = arg->scaleX;
+    work->scaleY = arg->scaleY;
+    work->angle = arg->angle;
+    work->visible = arg->visible;
+    work->targetX = arg->targetX;
+    work->targetY = arg->targetY;
+    work->delay = arg->delay;
     work->scale = 0x100;
     work->flipAngleY = 0;
     work->flipAngleX = 0;
@@ -578,21 +578,21 @@ void SioAutoConnectOnConnect() {
     gSioAutoConnectState = 1;
 }
 
-void SioConnectInit(void (*a)(), void (*b)(), u8 c) {
+void SioConnectInit(void (*onConnect)(), void (*onCancel)(), u8 mode) {
 #ifdef VERSION_JP
-    gSioConnectId = (c & 0xF) | 0xC0F0;
+    gSioConnectId = (mode & 0xF) | 0xC0F0;
 #else
 #ifdef VERSION_EU
-    gSioConnectId = (c & 0xF) | 0xC2F0;
+    gSioConnectId = (mode & 0xF) | 0xC2F0;
 #else
-    gSioConnectId = (c & 0xF) | 0xC1F0;
+    gSioConnectId = (mode & 0xF) | 0xC1F0;
 #endif
 #endif
     gSioConnectAccepted = 0;
     gSioConnected = 0;
     gSioConnectRetries = 0;
-    gSioConnectCallback = a;
-    gSioCancelCallback = b;
+    gSioConnectCallback = onConnect;
+    gSioCancelCallback = onCancel;
     gSioCancelTimer = 0;
     gSioSendFrame[0] = 0xDDDD;
     gSioSendFrame[1] = 0xDDDD;
@@ -771,7 +771,7 @@ s32 SioCommandRecv() {
     return 0;
 }
 
-void SioSetLinkCallbacks(s32 (*a)(), s32 (*b)()) {
+void SioSetLinkCallbacks(s32 (*send)(), s32 (*recv)()) {
     s32 i;
     s32 j;
     s32 (**pb)();
@@ -797,8 +797,8 @@ void SioSetLinkCallbacks(s32 (*a)(), s32 (*b)()) {
         }
     }
 
-    *pa = a;
-    *pb = b;
+    *pa = send;
+    *pb = recv;
     *p1 = 0;
     *p2 = 0;
 }
@@ -990,11 +990,11 @@ void SioPrepareCharaLinkExchange() {
     gSioExchangeRecvData = recv;
 }
 
-void SioSyncInit(void (*a)()) {
+void SioSyncInit(void (*onConnect)()) {
     gSioHandshakeAck = 0;
     gSioHandshakeDone = 0;
     gSioHandshakeConfirm = 0;
-    gSioConnectCallback = a;
+    gSioConnectCallback = onConnect;
 }
 
 s32 SioSyncSend() {
@@ -1363,9 +1363,9 @@ void CharaObjInitDefeat(CharaObjParam* param) {
     TaskPoolInit(&sCharaTaskPool, 4);
 }
 
-void CharaObjSetBankFadeEnabled(u16 a, u8 b) {
-    if (a <= 31) {
-        sCharaObj->bankFadeEnabled[a] = b;
+void CharaObjSetBankFadeEnabled(u16 bank, u8 enabled) {
+    if (bank <= 31) {
+        sCharaObj->bankFadeEnabled[bank] = enabled;
     }
 }
 

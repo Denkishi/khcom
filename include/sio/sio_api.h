@@ -5,8 +5,8 @@
 #include "sio_types.h"
 
 void SioReset();
-u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]);
-u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]);
+u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]);
+u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]);
 void SioShutdown();
 u8 SioIsConnected();
 

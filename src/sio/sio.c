@@ -173,7 +173,7 @@ void SioStop() {
     CpuFill32(0, &gSioWork, sizeof(SioWork));
 }
 
-u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
+u32 SioRunStateMachine(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     u32 r;
     u32 v;
     u32 w;
@@ -189,7 +189,7 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
         gSioWork.state = 2;
         break;
     case 2:
-        switch (*a) {
+        switch (*request) {
         default:
             SioCheckParent();
 
@@ -220,14 +220,14 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
         gSioWork.state = 4;
     case 4:
         if (!gSioWork.paused) {
-            SioQueueSendFrame(b);
+            SioQueueSendFrame(sendFrame);
         }
 
-        SioReadRecvFrame(c);
+        SioReadRecvFrame(recvFrame);
         break;
     }
 
-    *a = 0;
+    *request = 0;
     r = gSioWork.playerId | (gSioWork.playerCount << 2);
 
     if (gSioWork.isParent == 8) {
@@ -256,7 +256,7 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
     return w;
 }
 
-u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]) {
+u32 SioTransferFrames(u8* request, u16* sendFrame, u16 (*recvFrame)[2]) {
     u32 r;
     u32 v;
     u32 w;
@@ -264,10 +264,10 @@ u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]) {
 
     if (gSioWork.state == 4) {
         if (!gSioWork.paused) {
-            SioQueueSendFrame(b);
+            SioQueueSendFrame(sendFrame);
         }
 
-        SioReadRecvFrame(c);
+        SioReadRecvFrame(recvFrame);
     }
 
     r = gSioWork.playerId | (gSioWork.playerCount << 2);

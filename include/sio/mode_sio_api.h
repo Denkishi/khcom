@@ -4,7 +4,7 @@
 #include "types.h"
 #include "chara_types.h"
 
-void mode_sio_battle_0(s32 a);
+void mode_sio_battle_0(s32 arg);
 void mode_sio_battle_1();
 void mode_sio_battle_2();
 void ClearSioBattleFileLoaded();

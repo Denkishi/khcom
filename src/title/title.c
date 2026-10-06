@@ -202,9 +202,9 @@ u8 IsTitleLogoScaleDone() {
 }
 
 void task_title_obj_0(TitleObjWork* work) {
-    s32 t;
+    s32 paletteOffset;
 
-    t = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
+    paletteOffset = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
 #ifdef VERSION_EU
     work->sprites[0].palette = LoadObjPalette(gTitleLogoKingdomHeartsPalette, 0x20);
 
@@ -279,7 +279,7 @@ void task_title_obj_0(TitleObjWork* work) {
 #else
     work->sprites[1].tiles = LoadObjTiles(gTitlePressStartTiles, 0x700);
 #endif
-    work->sprites[1].palette = LoadObjPalette(&gTitleObjPalettes[t], 0x20);
+    work->sprites[1].palette = LoadObjPalette(&gTitleObjPalettes[paletteOffset], 0x20);
     work->sprites[1].x = -0x7800;
     work->sprites[1].targetX = 0x7C00;
     work->sprites[1].y = 0xA0;
@@ -311,7 +311,7 @@ void task_title_obj_0(TitleObjWork* work) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->sprites[1].gfx = AnimGetGfx(&work->anim);
     work->sprites[2].tiles = LoadObjTiles(gTitleGameStartTiles, 0x100);
-    work->sprites[2].palette = LoadObjPalette(&gTitleObjPalettes[t], 0x20);
+    work->sprites[2].palette = LoadObjPalette(&gTitleObjPalettes[paletteOffset], 0x20);
     work->sprites[2].gfx = gTitleGameStartFrames[0];
     work->sprites[2].x = 0x15800;
     work->sprites[2].targetX = 0xB800;
@@ -378,11 +378,11 @@ enum TitleMenuLayout {
 };
 
 void task_title_menu_0(TitleMenuWork* work, s16* choice) {
-    s32 t;
-    u8* pal;
-    u8* pal2;
+    s32 paletteOffset;
+    u8* objPal;
+    u8* lumiPal;
 
-    t = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
+    paletteOffset = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
     work->choice = choice;
 
     if (choice[0] == TITLE_MENU_NEW_GAME) {
@@ -462,13 +462,13 @@ void task_title_menu_0(TitleMenuWork* work, s16* choice) {
     work->tiles2[2] = LoadObjTiles(gTitleMenuSelectedBarTiles, 0x700);
 #endif
 #endif
-    pal = &gTitleObjPalettes[t];
-    work->palette2[0] = LoadObjPalette(pal, 0x20);
-    work->palette2[1] = LoadObjPalette(pal, 0x20);
-    pal2 = &gTitleSoraLumiPalette[t];
-    work->palette2[2] = LoadObjPalette(pal2, 0x20);
-    TitleCopyToPaletteBuffer(work->palette2[0]->index + 16, pal, 0x20);
-    TitleCopyToPaletteBuffer(work->palette2[2]->index + 16, pal2, 0x20);
+    objPal = &gTitleObjPalettes[paletteOffset];
+    work->palette2[0] = LoadObjPalette(objPal, 0x20);
+    work->palette2[1] = LoadObjPalette(objPal, 0x20);
+    lumiPal = &gTitleSoraLumiPalette[paletteOffset];
+    work->palette2[2] = LoadObjPalette(lumiPal, 0x20);
+    TitleCopyToPaletteBuffer(work->palette2[0]->index + 16, objPal, 0x20);
+    TitleCopyToPaletteBuffer(work->palette2[2]->index + 16, lumiPal, 0x20);
     AnimInit(&work->anim, gTitleMenuCursorAnims, gTitleMenuCursorFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx[0] = AnimGetGfx(&work->anim);
@@ -583,15 +583,15 @@ u8 task_title_menu_1(TitleMenuWork* work) {
 
 void TitleMenuDrawBasic(TitleMenuWork* work) {
     s32 i;
-    s32 t;
+    s32 soraClear;
     s16 y;
     s16 count;
 
     y = 32;
-    t = gGameState.flags & GAME_FLAG_SORA_CLEAR;
+    soraClear = gGameState.flags & GAME_FLAG_SORA_CLEAR;
     count = 3;
 
-    if (t == 0) {
+    if (soraClear == 0) {
         count = 2;
         y = 48;
     }
@@ -806,19 +806,19 @@ void task_title_lumichange_0(TitleLumiChangeWork* work) {
 }
 
 u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
-    s16 tbl[3];
-    s16 v;
+    s16 levels[3];
+    s16 effect;
     u32 i;
     s32 j;
 
-    v = GetPaletteEffect();
-    memcpy(tbl, sTitleLumiLevels, sizeof(tbl));
+    effect = GetPaletteEffect();
+    memcpy(levels, sTitleLumiLevels, sizeof(levels));
 
     switch (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
     case R_BUTTON:
         for (i = 0; i < 3; i++) {
-            if (v < tbl[i]) {
-                v = tbl[i];
+            if (effect < levels[i]) {
+                effect = levels[i];
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             }
@@ -827,8 +827,8 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
         break;
     case L_BUTTON:
         for (j = 2; j > -1; j--) {
-            if (v > tbl[j]) {
-                v = tbl[j];
+            if (effect > levels[j]) {
+                effect = levels[j];
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             }
@@ -838,7 +838,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
     }
 
     if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
-        SetPaletteEffect(v);
+        SetPaletteEffect(effect);
         TitleLoadPaletteBuffer();
     }
 
@@ -846,29 +846,29 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
 }
 
 void task_title_lumichange_2(TitleLumiChangeWork* work) {
-    s16 v;
-    void** tbl;
+    s16 effect;
+    void** frames;
     s16 x;
 
-    v = GetPaletteEffect();
+    effect = GetPaletteEffect();
 
 #ifdef VERSION_EU
     {
-        void** a = gTitleLumiSpritesEu[gLanguage];
-        void** b = gTitleLumiSpritesAltEu[gLanguage];
+        void** soraFrames = gTitleLumiSpritesEu[gLanguage];
+        void** rikuFrames = gTitleLumiSpritesAltEu[gLanguage];
 
-        tbl = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? b : a;
+        frames = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? rikuFrames : soraFrames;
     }
 #else
-    tbl = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? gTitleRikuLumiFrames : gTitleSoraLumiFrames;
+    frames = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? gTitleRikuLumiFrames : gTitleSoraLumiFrames;
 #endif
 
-    if (v < 0) {
-        work->gfx = tbl[0];
-    } else if (v == 0) {
-        work->gfx = tbl[1];
-    } else if (v > 0) {
-        work->gfx = tbl[2];
+    if (effect < 0) {
+        work->gfx = frames[0];
+    } else if (effect == 0) {
+        work->gfx = frames[1];
+    } else if (effect > 0) {
+        work->gfx = frames[2];
     }
 
     x = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 240 : 0;

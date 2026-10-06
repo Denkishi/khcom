@@ -35,6 +35,7 @@
 #include "card_deckmenu2.h"
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
+#include "card_ids.h"
 
 #ifndef VERSION_EU
 u16 gSioTradeCardId EWRAM_COMMON(4);
@@ -1092,7 +1093,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 ex
 
     for (i = 0; i < work->entryCount; i++) {
         if (kind == 5) {
-            if (work->entries[i].kind <= 77) {
+            if (work->entries[i].kind <= CARD_KIND_CRESCENDO) {
                 args.pool = &work->pool;
                 args.cardId = GetCardIdForKind(work->entries[i].kind);
                 args.col = x;
@@ -1106,7 +1107,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 ex
             args.pool = &work->pool;
             args.cardId = GetCardIdForKind(work->entries[i].kind);
 
-            if (gCardDefs[args.cardId].category == kind - 1 && work->entries[i].kind <= 77) {
+            if (gCardDefs[args.cardId].category == kind - 1 && work->entries[i].kind <= CARD_KIND_CRESCENDO) {
                 args.col = x;
                 args.row = y;
                 args.panel = 1;
@@ -1553,7 +1554,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
         LoadDeckExchangeCardNameText(work, id);
         LoadDeckExchangeCardDescriptionText(work, id);
 
-        if (def->kind > 46) {
+        if (def->kind > CARD_KIND_THE_KING) {
             LoadBgMap(2, gDeckCollectionEnemyInfoMap, 0x800);
             DrawDeckExchangeCpCost(0);
         } else {

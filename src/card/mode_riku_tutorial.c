@@ -23,6 +23,7 @@
 #include "mode_riku_tutorial.h"
 #include "battle.h"
 #include "btl.h"
+#include "card_ids.h"
 
 static TaskPool sRikuTutorialTasks;
 
@@ -1729,11 +1730,11 @@ s32 IsSummonMagicJackOrBambiBlizzardItem(CardDisplayWork** cards, u8 count) {
         secondFlags = secondDef->flags;
 
         if ((firstFlags & 4) && secondFlags == 0 && secondDef->category == 1 &&
-            cards[2]->cardDef->kind == 43) {
+            cards[2]->cardDef->kind == CARD_KIND_JACK) {
             return 1;
         }
 
-        if (cards[0]->cardDef->kind == 27 && cards[1]->cardDef->kind == 19 &&
+        if (cards[0]->cardDef->kind == CARD_KIND_BAMBI && cards[1]->cardDef->kind == CARD_KIND_BLIZZARD &&
             cards[2]->cardDef->category == 2 && !(cards[2]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
             return 1;
         }

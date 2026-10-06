@@ -5253,7 +5253,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
         LoadCardDescriptionText(work, defIndex);
 
         if (work->view >= DECK_MENU_VIEW_DELETE_GRID &&work->view <= DECK_MENU_VIEW_DELETE_PROMPT) {
-            if (def->kind > 46) {
+            if (def->kind > CARD_KIND_THE_KING) {
                 LoadBgMap(2, gDeckCollectionEnemyInfoMap, 0x800);
                 DrawCpCost(GetCardCpCost(id));
                 return id;
@@ -5261,7 +5261,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
 
             LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
             DrawCpCost(0);
-        } else if (def->kind > 46) {
+        } else if (def->kind > CARD_KIND_THE_KING) {
             switch (work->deckIndex) {
             case 0:
                 LoadBgMap(1, gDeckCollectionEnemyInfoMap, 0x800);

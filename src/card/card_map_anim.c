@@ -22,6 +22,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "card_deckmenu2.h"
+#include "card_ids.h"
 
 Deck gDecks[3] EWRAM_COMMON(16);
 
@@ -635,331 +636,331 @@ s16 ObtainCard(u16 cardId) {
     gCardCollection[i] = cardId;
 
     switch (gCardDefs[cardId & CARD_ID_MASK].kind) {
-    case 0:
+    case CARD_KIND_KINGDOM_KEY:
         SetCardKindObtained(0);
         SetJiminyFlag(119);
         break;
-    case 8:
+    case CARD_KIND_OLYMPIA:
         SetCardKindObtained(8);
         SetJiminyFlag(127);
         break;
-    case 1:
+    case CARD_KIND_THREE_WISHES:
         SetCardKindObtained(1);
         SetJiminyFlag(120);
         break;
-    case 2:
+    case CARD_KIND_CRABCLAW:
         SetCardKindObtained(2);
         SetJiminyFlag(121);
         break;
-    case 3:
+    case CARD_KIND_PUMPKINHEAD:
         SetCardKindObtained(3);
         SetJiminyFlag(122);
         break;
-    case 4:
+    case CARD_KIND_FAIRY_HARP:
         SetCardKindObtained(4);
         SetJiminyFlag(123);
         break;
-    case 5:
+    case CARD_KIND_WISHING_STAR:
         SetCardKindObtained(5);
         SetJiminyFlag(124);
         break;
-    case 6:
+    case CARD_KIND_SPELLBINDER:
         SetCardKindObtained(6);
         SetJiminyFlag(125);
         break;
-    case 7:
+    case CARD_KIND_METAL_CHOCOBO:
         SetCardKindObtained(7);
         SetJiminyFlag(126);
         break;
-    case 9:
+    case CARD_KIND_LIONHEART:
         SetCardKindObtained(9);
         SetJiminyFlag(128);
         break;
-    case 10:
+    case CARD_KIND_LADY_LUCK:
         SetCardKindObtained(10);
         SetJiminyFlag(129);
         break;
-    case 11:
+    case CARD_KIND_DIVINE_ROSE:
         SetCardKindObtained(11);
         SetJiminyFlag(130);
         break;
-    case 12:
+    case CARD_KIND_OATHKEEPER:
         SetCardKindObtained(12);
         SetJiminyFlag(131);
         break;
-    case 13:
+    case CARD_KIND_OBLIVION:
         SetCardKindObtained(13);
         SetJiminyFlag(132);
         break;
-    case 16:
+    case CARD_KIND_ULTIMA_WEAPON:
         SetCardKindObtained(14);
         SetJiminyFlag(133);
         break;
-    case 14:
+    case CARD_KIND_DIAMOND_DUST:
         SetCardKindObtained(15);
         SetJiminyFlag(134);
         break;
-    case 15:
+    case CARD_KIND_ONE_WINGED_ANGEL:
         SetCardKindObtained(16);
         SetJiminyFlag(135);
         break;
-    case 18:
+    case CARD_KIND_FIRE:
         SetCardKindObtained(17);
         LearnStock(9);
         LearnStock(10);
         SetJiminyFlag(136);
         break;
-    case 19:
+    case CARD_KIND_BLIZZARD:
         SetCardKindObtained(18);
         LearnStock(11);
         LearnStock(12);
         SetJiminyFlag(137);
         break;
-    case 20:
+    case CARD_KIND_THUNDER:
         SetCardKindObtained(19);
         LearnStock(13);
         LearnStock(14);
         SetJiminyFlag(138);
         break;
-    case 21:
+    case CARD_KIND_CURE:
         SetCardKindObtained(20);
         LearnStock(15);
         LearnStock(16);
         SetJiminyFlag(139);
         break;
-    case 22:
+    case CARD_KIND_GRAVITY:
         SetCardKindObtained(21);
         LearnStock(17);
         LearnStock(18);
         SetJiminyFlag(140);
         break;
-    case 23:
+    case CARD_KIND_STOP:
         SetCardKindObtained(22);
         LearnStock(19);
         LearnStock(20);
         SetJiminyFlag(141);
         break;
-    case 24:
+    case CARD_KIND_AERO:
         SetCardKindObtained(23);
         LearnStock(21);
         LearnStock(22);
         SetJiminyFlag(142);
         break;
-    case 25:
+    case CARD_KIND_SIMBA:
         SetCardKindObtained(24);
         LearnStock(47);
         SetJiminyFlag(143);
         SetJiminyFlag(23);
         break;
-    case 26:
+    case CARD_KIND_GENIE:
         SetCardKindObtained(25);
         LearnStock(52);
         SetJiminyFlag(144);
         break;
-    case 27:
+    case CARD_KIND_BAMBI:
         SetCardKindObtained(26);
         LearnStock(49);
         LearnStock(50);
         SetJiminyFlag(145);
         SetJiminyFlag(25);
         break;
-    case 28:
+    case CARD_KIND_DUMBO:
         SetCardKindObtained(27);
         LearnStock(48);
         SetJiminyFlag(146);
         SetJiminyFlag(24);
         break;
-    case 29:
+    case CARD_KIND_TINKER_BELL:
         SetCardKindObtained(28);
         LearnStock(53);
         SetJiminyFlag(147);
         break;
-    case 30:
+    case CARD_KIND_MUSHU:
         SetCardKindObtained(29);
         LearnStock(51);
         SetJiminyFlag(148);
         SetJiminyFlag(26);
         break;
-    case 31:
+    case CARD_KIND_CLOUD:
         SetCardKindObtained(30);
         LearnStock(54);
         LearnStock(55);
         SetJiminyFlag(149);
         break;
-    case 32:
+    case CARD_KIND_POTION:
         SetCardKindObtained(31);
         SetJiminyFlag(150);
         break;
-    case 33:
+    case CARD_KIND_HI_POTION:
         SetCardKindObtained(32);
         SetJiminyFlag(151);
         break;
-    case 34:
+    case CARD_KIND_MEGA_POTION:
         SetCardKindObtained(33);
         SetJiminyFlag(152);
         break;
-    case 35:
+    case CARD_KIND_ETHER:
         SetCardKindObtained(34);
         SetJiminyFlag(153);
         break;
-    case 36:
+    case CARD_KIND_MEGA_ETHER:
         SetCardKindObtained(35);
         SetJiminyFlag(154);
         break;
-    case 37:
+    case CARD_KIND_ELIXIR:
         SetCardKindObtained(36);
         SetJiminyFlag(155);
         break;
-    case 38:
+    case CARD_KIND_MEGALIXIR:
         SetCardKindObtained(37);
         SetJiminyFlag(156);
         break;
-    case 47:
+    case CARD_KIND_SHADOW:
         SetJiminyFlag(164);
         break;
-    case 50:
+    case CARD_KIND_RED_NOCTURNE:
         SetJiminyFlag(165);
         break;
-    case 51:
+    case CARD_KIND_BLUE_RHAPSODY:
         SetJiminyFlag(166);
         break;
-    case 52:
+    case CARD_KIND_YELLOW_OPERA:
         SetJiminyFlag(167);
         break;
-    case 53:
+    case CARD_KIND_GREEN_REQUIEM:
         SetJiminyFlag(168);
         break;
-    case 61:
+    case CARD_KIND_SEA_NEON:
         SetJiminyFlag(169);
         break;
-    case 73:
+    case CARD_KIND_WHITE_MUSHROOM:
         SetJiminyFlag(170);
         break;
-    case 74:
+    case CARD_KIND_BLACK_FUNGUS:
         SetJiminyFlag(171);
         break;
-    case 48:
+    case CARD_KIND_SOLDIER:
         SetJiminyFlag(172);
         break;
-    case 54:
+    case CARD_KIND_POWERWILD:
         SetJiminyFlag(173);
         break;
-    case 55:
+    case CARD_KIND_BOUNCYWILD:
         SetJiminyFlag(174);
         break;
-    case 56:
+    case CARD_KIND_AIR_SOLDIER:
         SetJiminyFlag(175);
         break;
-    case 57:
+    case CARD_KIND_BANDIT:
         SetJiminyFlag(176);
         break;
-    case 59:
+    case CARD_KIND_BARREL_SPIDER:
         SetJiminyFlag(177);
         break;
-    case 60:
+    case CARD_KIND_SEARCH_GHOST:
         SetJiminyFlag(178);
         break;
-    case 62:
+    case CARD_KIND_SCREWDIVER:
         SetJiminyFlag(179);
         break;
-    case 64:
+    case CARD_KIND_WIGHT_KNIGHT:
         SetJiminyFlag(180);
         break;
-    case 65:
+    case CARD_KIND_GARGOYLE:
         SetJiminyFlag(181);
         break;
-    case 66:
+    case CARD_KIND_PIRATE:
         SetJiminyFlag(182);
         break;
-    case 67:
+    case CARD_KIND_AIR_PIRATE:
         SetJiminyFlag(183);
         break;
-    case 68:
+    case CARD_KIND_DARKBALL:
         SetJiminyFlag(184);
         break;
-    case 70:
+    case CARD_KIND_WYVERN:
         SetJiminyFlag(185);
         break;
-    case 71:
+    case CARD_KIND_WIZARD:
         SetJiminyFlag(186);
         break;
-    case 72:
+    case CARD_KIND_NEOSHADOW:
         SetJiminyFlag(187);
         break;
-    case 49:
+    case CARD_KIND_LARGE_BODY:
         SetJiminyFlag(188);
         break;
-    case 58:
+    case CARD_KIND_FAT_BANDIT:
         SetJiminyFlag(189);
         break;
-    case 63:
+    case CARD_KIND_AQUATANK:
         SetJiminyFlag(190);
         break;
-    case 69:
+    case CARD_KIND_DEFENDER:
         SetJiminyFlag(191);
         break;
-    case 76:
+    case CARD_KIND_TORNADO_STEP:
         SetJiminyFlag(192);
         break;
-    case 77:
+    case CARD_KIND_CRESCENDO:
         SetJiminyFlag(193);
         break;
-    case 75:
+    case CARD_KIND_CREEPER_PLANT:
         SetJiminyFlag(194);
         break;
-    case 81:
+    case CARD_KIND_DARKSIDE:
         SetJiminyFlag(204);
         break;
-    case 78:
+    case CARD_KIND_GUARD_ARMOR:
         SetJiminyFlag(195);
         break;
-    case 86:
+    case CARD_KIND_OOGIE_BOOGIE:
         SetJiminyFlag(200);
         break;
-    case 80:
+    case CARD_KIND_TRICKMASTER:
         SetJiminyFlag(197);
         break;
-    case 79:
+    case CARD_KIND_PARASITE_CAGE:
         SetJiminyFlag(201);
         break;
-    case 85:
+    case CARD_KIND_JAFAR:
         SetJiminyFlag(198);
         break;
-    case 87:
+    case CARD_KIND_URSULA:
         SetJiminyFlag(199);
         break;
-    case 89:
+    case CARD_KIND_DRAGON_MALEFICENT:
         SetJiminyFlag(203);
         break;
-    case 88:
+    case CARD_KIND_HOOK:
         SetJiminyFlag(202);
         break;
-    case 84:
+    case CARD_KIND_HADES:
         SetJiminyFlag(196);
         break;
-    case 90:
+    case CARD_KIND_RIKU:
         SetJiminyFlag(247);
         break;
-    case 91:
+    case CARD_KIND_AXEL:
         SetJiminyFlag(206);
         break;
-    case 92:
+    case CARD_KIND_LARXENE:
         SetJiminyFlag(205);
         break;
-    case 93:
+    case CARD_KIND_VEXEN:
         SetJiminyFlag(207);
         break;
-    case 94:
+    case CARD_KIND_MARLUXIA:
         SetJiminyFlag(208);
         break;
-    case 82:
-    case 83:
+    case CARD_KIND_CARD_SOLDIER_HEART:
+    case CARD_KIND_CARD_SOLDIER_SPADE:
         SetJiminyFlag(246);
         break;
-    case 96:
+    case CARD_KIND_LEXAEUS:
         SetJiminyFlag(248);
         break;
-    case 97:
+    case CARD_KIND_ANSEM:
         SetJiminyFlag(249);
         break;
     }
@@ -971,43 +972,43 @@ s16 ObtainCard(u16 cardId) {
 void SetRikuCardKindObtained(u16 kind) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (kind) {
-        case 0x51:
+        case CARD_KIND_DARKSIDE:
             SetCardKindObtained(44);
             break;
-        case 0x4E:
+        case CARD_KIND_GUARD_ARMOR:
             SetCardKindObtained(38);
             break;
-        case 0x56:
+        case CARD_KIND_OOGIE_BOOGIE:
             SetCardKindObtained(45);
             break;
-        case 0x50:
+        case CARD_KIND_TRICKMASTER:
             SetCardKindObtained(40);
             break;
-        case 0x4F:
+        case CARD_KIND_PARASITE_CAGE:
             SetCardKindObtained(42);
             break;
-        case 0x55:
+        case CARD_KIND_JAFAR:
             SetCardKindObtained(39);
             break;
-        case 0x57:
+        case CARD_KIND_URSULA:
             SetCardKindObtained(41);
             break;
-        case 0x59:
+        case CARD_KIND_DRAGON_MALEFICENT:
             SetCardKindObtained(43);
             break;
-        case 0x58:
+        case CARD_KIND_HOOK:
             SetCardKindObtained(48);
             break;
-        case 0x54:
+        case CARD_KIND_HADES:
             SetCardKindObtained(50);
             break;
-        case 0x5A:
+        case CARD_KIND_RIKU:
             SetCardKindObtained(51);
             break;
-        case 0x5D:
+        case CARD_KIND_VEXEN:
             SetCardKindObtained(54);
             break;
-        case 0x60:
+        case CARD_KIND_LEXAEUS:
             SetCardKindObtained(57);
             break;
         }

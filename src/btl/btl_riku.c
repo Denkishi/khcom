@@ -488,6 +488,71 @@ void UpdateBtlRikuDarkWalk(BtlRikuWork* work, u16 held) {
     }
 }
 
+enum BtlRikuState {
+    BTL_RIKU_STATE_ENTER,
+    BTL_RIKU_STATE_IDLE,
+    BTL_RIKU_STATE_JUMP,
+    BTL_RIKU_STATE_AIRBORNE,
+    BTL_RIKU_STATE_LAND,
+    BTL_RIKU_STATE_ITEM,
+    BTL_RIKU_STATE_HURT,
+    BTL_RIKU_STATE_DEFEATED,
+    BTL_RIKU_STATE_ESCAPE,
+    BTL_RIKU_STATE_COMBO,
+    BTL_RIKU_STATE_ITEM_POSE,
+    BTL_RIKU_STATE_CARD_BROKEN,
+    BTL_RIKU_STATE_GUARDED,
+    BTL_RIKU_STATE_STUNNED,
+    BTL_RIKU_STATE_FIELD_HIDDEN,
+    BTL_RIKU_STATE_HAZARD,
+    BTL_RIKU_STATE_DARK_HAZARD,
+    BTL_RIKU_STATE_STOPPED,
+    BTL_RIKU_STATE_RECOVER,
+    BTL_RIKU_STATE_DARK_RECOVER,
+    BTL_RIKU_STATE_REVIVE,
+    BTL_RIKU_STATE_END_BATTLE,
+    BTL_RIKU_STATE_DODGE,
+    BTL_RIKU_STATE_DODGE_LAND,
+    BTL_RIKU_STATE_SUMMON_TAKEOFF,
+    BTL_RIKU_STATE_SUMMON_EXIT,
+    BTL_RIKU_STATE_SUMMON_OFFSCREEN,
+    BTL_RIKU_STATE_SUMMON_RETURN,
+    BTL_RIKU_STATE_SUMMON_RETURN_LAND,
+    BTL_RIKU_STATE_FROZEN = 30,
+    BTL_RIKU_STATE_DARK_MODE_START,
+    BTL_RIKU_STATE_DARK_MODE_TRANSFORM,
+    BTL_RIKU_STATE_DARK_MODE_END,
+    BTL_RIKU_STATE_DARK_MODE_REVERT,
+    BTL_RIKU_STATE_DARK_IDLE,
+    BTL_RIKU_STATE_DARK_HURT,
+    BTL_RIKU_STATE_DARK_JUMP,
+    BTL_RIKU_STATE_DARK_AIRBORNE,
+    BTL_RIKU_STATE_DARK_LAND,
+    BTL_RIKU_STATE_DARK_DOUBLE_SLASH,
+    BTL_RIKU_STATE_DARK_AIR_SLASH,
+    BTL_RIKU_STATE_DARK_VERTICAL_SLASH,
+    BTL_RIKU_STATE_DARK_BREAK,
+    BTL_RIKU_STATE_DARK_BREAK_RISE,
+    BTL_RIKU_STATE_DARK_BREAK_DIVE,
+    BTL_RIKU_STATE_DARK_BREAK_REBOUND,
+    BTL_RIKU_STATE_DARK_BREAK_END,
+    BTL_RIKU_STATE_DARK_FIRAGA,
+    BTL_RIKU_STATE_DARK_AURA,
+    BTL_RIKU_STATE_DARK_AURA_JUMP,
+    BTL_RIKU_STATE_DARK_AURA_EXIT,
+    BTL_RIKU_STATE_DARK_AURA_ENTRY,
+    BTL_RIKU_STATE_DARK_AURA_DASH,
+    BTL_RIKU_STATE_DARK_AURA_FINISH,
+    BTL_RIKU_STATE_DARK_CARD_BROKEN,
+    BTL_RIKU_STATE_DARK_LEAP,
+    BTL_RIKU_STATE_DARK_DASH,
+    BTL_RIKU_STATE_DARK_DASH_VERTICAL,
+    BTL_RIKU_STATE_DARK_DASH_LAND,
+    BTL_RIKU_STATE_DARK_SLASH,
+    BTL_RIKU_STATE_DARK_LUNGE_SLASH,
+    BTL_RIKU_STATE_DARK_STUNNED
+};
+
 void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     BtlObj* e;
 
@@ -581,8 +646,8 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     AnimInit(&work->anim, NULL, NULL);
     SetBtlRikuAnimation(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
-    work->state = 0;
-    work->nextState = 0;
+    work->state = BTL_RIKU_STATE_ENTER;
+    work->nextState = BTL_RIKU_STATE_ENTER;
     work->vz = 0;
     e->vx = 0;
     e->vy = 0;
@@ -668,7 +733,7 @@ void SetBtlRikuState(BtlRikuWork* work, u32 state) {
 void StartBtlRikuCombo(BtlRikuWork* work) {
     u16 t;
 
-    if (work->state == 9 && work->comboCount <= 1) {
+    if (work->state == BTL_RIKU_STATE_COMBO && work->comboCount <= 1) {
         work->comboCount++;
         work->stateTimer = 0;
         work->steps = 0;
@@ -702,7 +767,7 @@ void StartBtlRikuCombo(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 9;
+        work->state = BTL_RIKU_STATE_COMBO;
         work->steps = 0;
         work->stateTimer = 0;
         work->comboCount = 0;
@@ -893,10 +958,10 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     if (gBtlWork->phase == 4 && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         switch (work->state) {
-        case 24:
-        case 25:
-        case 26:
-        case 27:
+        case BTL_RIKU_STATE_SUMMON_TAKEOFF:
+        case BTL_RIKU_STATE_SUMMON_EXIT:
+        case BTL_RIKU_STATE_SUMMON_OFFSCREEN:
+        case BTL_RIKU_STATE_SUMMON_RETURN:
             p->x = p->originX;
             p->y = p->originY;
             p->z = p->originZ;
@@ -912,17 +977,17 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-                SetBtlRikuState(work, 38);
+                SetBtlRikuState(work, BTL_RIKU_STATE_DARK_AIRBORNE);
             } else {
-                SetBtlRikuState(work, 3);
+                SetBtlRikuState(work, BTL_RIKU_STATE_AIRBORNE);
             }
 
             break;
         default:
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-                SetBtlRikuState(work, 19);
+                SetBtlRikuState(work, BTL_RIKU_STATE_DARK_RECOVER);
             } else {
-                SetBtlRikuState(work, 18);
+                SetBtlRikuState(work, BTL_RIKU_STATE_RECOVER);
             }
 
             break;
@@ -1083,9 +1148,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         pressed = SwapBtlRikuKeyBits(pressed, 0x40, 0x80);
     }
 
-    if (work->state != 8 && (p->btl->flags & BTL_FLAG_ESCAPED)) {
+    if (work->state != BTL_RIKU_STATE_ESCAPE && (p->btl->flags & BTL_FLAG_ESCAPED)) {
         p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
-        work->state = 8;
+        work->state = BTL_RIKU_STATE_ESCAPE;
         work->steps = 0;
         work->stateTimer = 0;
         p->flags |= BTLOBJ_FLAG_INTANGIBLE;
@@ -1097,12 +1162,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 AddDarkPoints(-5);
-                work->state = 36;
+                work->state = BTL_RIKU_STATE_DARK_HURT;
                 work->steps = 0;
                 work->stateTimer = 0;
             } else {
                 AddDarkPoints(1);
-                work->state = 6;
+                work->state = BTL_RIKU_STATE_HURT;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -1114,11 +1179,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->speed = 0;
 
             if (p->btl->hcEffect == 27) {
-                work->state = 20;
+                work->state = BTL_RIKU_STATE_REVIVE;
                 work->steps = 0;
                 work->stateTimer = 0;
             } else {
-                work->state = 7;
+                work->state = BTL_RIKU_STATE_DEFEATED;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -1126,7 +1191,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         case BTL_REACTION_HEALED:
             p->flags &= ~BTLOBJ_FLAG_HURT;
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
@@ -1153,113 +1218,113 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             switch (id) {
             case 48:
-                work->state = 5;
+                work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 1;
                 break;
             case 47:
-                work->state = 5;
+                work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 0;
                 break;
             case 49:
-                work->state = 5;
+                work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 2;
                 break;
             case 50:
-                work->state = 5;
+                work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 3;
                 break;
             case 51:
-                work->state = 5;
+                work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 4;
                 break;
             case 52:
-                work->state = 5;
+                work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 5;
                 break;
             case 53:
-                work->state = 5;
+                work->state = BTL_RIKU_STATE_ITEM;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->variant[0] = 6;
                 break;
             case 45:
-                work->state = 24;
+                work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
                 work->variant[0] = 0;
                 break;
             case 0x800A7E9F:
-                work->state = 24;
+                work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
                 work->variant[0] = 1;
                 break;
             case 0xE9FA7E9F:
-                work->state = 24;
+                work->state = BTL_RIKU_STATE_SUMMON_TAKEOFF;
                 work->steps = 0;
                 work->stateTimer = 0;
                 work->summonDesc = &gTaskDescSmnKing;
                 work->variant[0] = 2;
                 break;
             case 137:
-                work->state = 43;
+                work->state = BTL_RIKU_STATE_DARK_BREAK;
                 break;
             case 138:
-                work->state = 48;
+                work->state = BTL_RIKU_STATE_DARK_FIRAGA;
                 break;
             case 139:
-                work->state = 49;
+                work->state = BTL_RIKU_STATE_DARK_AURA;
                 break;
             case 46:
-                work->state = 31;
+                work->state = BTL_RIKU_STATE_DARK_MODE_START;
                 break;
             case 18:
                 if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                     switch (work->state) {
-                    case 56:
-                        work->state = 42;
+                    case BTL_RIKU_STATE_DARK_LEAP:
+                        work->state = BTL_RIKU_STATE_DARK_VERTICAL_SLASH;
                         work->steps = 0;
                         work->stateTimer = 0;
                         break;
-                    case 37:
-                    case 38:
+                    case BTL_RIKU_STATE_DARK_JUMP:
+                    case BTL_RIKU_STATE_DARK_AIRBORNE:
                         work->comboCount = 0;
-                        work->state = 41;
+                        work->state = BTL_RIKU_STATE_DARK_AIR_SLASH;
                         work->steps = 0;
                         work->stateTimer = 0;
                         break;
-                    case 41:
+                    case BTL_RIKU_STATE_DARK_AIR_SLASH:
                         work->comboCount++;
-                        work->state = 41;
+                        work->state = BTL_RIKU_STATE_DARK_AIR_SLASH;
                         work->steps = 0;
                         work->stateTimer = 0;
                         break;
-                    case 60:
-                        work->state = 61;
+                    case BTL_RIKU_STATE_DARK_SLASH:
+                        work->state = BTL_RIKU_STATE_DARK_LUNGE_SLASH;
                         work->steps = 0;
                         work->stateTimer = 0;
                         break;
-                    case 61:
-                        work->state = 42;
+                    case BTL_RIKU_STATE_DARK_LUNGE_SLASH:
+                        work->state = BTL_RIKU_STATE_DARK_VERTICAL_SLASH;
                         work->steps = 0;
                         work->stateTimer = 0;
                         break;
                     default:
-                        work->state = 60;
+                        work->state = BTL_RIKU_STATE_DARK_SLASH;
                         work->steps = 0;
                         work->stateTimer = 0;
                         break;
@@ -1271,9 +1336,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             default:
                 if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-                    SetBtlRikuState(work, 35);
+                    SetBtlRikuState(work, BTL_RIKU_STATE_DARK_IDLE);
                 } else {
-                    SetBtlRikuState(work, 1);
+                    SetBtlRikuState(work, BTL_RIKU_STATE_IDLE);
                 }
 
                 break;
@@ -1312,11 +1377,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->scaleX = work->scaleY = 256;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-                work->state = 16;
+                work->state = BTL_RIKU_STATE_DARK_HAZARD;
                 work->steps = 0;
                 work->stateTimer = 0;
             } else {
-                work->state = 15;
+                work->state = BTL_RIKU_STATE_HAZARD;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -1324,10 +1389,10 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         case BTL_REACTION_CARD_BROKEN:
             switch (work->state) {
-            case 24:
-            case 25:
-            case 26:
-            case 27:
+            case BTL_RIKU_STATE_SUMMON_TAKEOFF:
+            case BTL_RIKU_STATE_SUMMON_EXIT:
+            case BTL_RIKU_STATE_SUMMON_OFFSCREEN:
+            case BTL_RIKU_STATE_SUMMON_RETURN:
                 p->x = p->originX;
                 p->y = p->originY;
                 p->z = p->originZ;
@@ -1348,16 +1413,16 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 if (gBtlWork->darkPoints <= 0) {
                     EndRikuDarkMode(work);
-                    work->state = 11;
+                    work->state = BTL_RIKU_STATE_CARD_BROKEN;
                     work->steps = 0;
                     work->stateTimer = 0;
                 } else {
-                    work->state = 55;
+                    work->state = BTL_RIKU_STATE_DARK_CARD_BROKEN;
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
             } else {
-                work->state = 11;
+                work->state = BTL_RIKU_STATE_CARD_BROKEN;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -1369,23 +1434,23 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 AddDarkPoints(-5);
-                work->state = 62;
+                work->state = BTL_RIKU_STATE_DARK_STUNNED;
                 work->steps = 0;
                 work->stateTimer = 0;
             } else {
                 AddDarkPoints(1);
-                work->state = 13;
+                work->state = BTL_RIKU_STATE_STUNNED;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
 
             break;
         case BTL_REACTION_STOPPED:
-            if (work->state != 17) {
+            if (work->state != BTL_RIKU_STATE_STOPPED) {
                 work->flags |= BTL_RIKU_FLAG_PASS_THROUGH;
                 work->speed = 0;
                 p->vx = p->vy = 0;
-                work->state = 17;
+                work->state = BTL_RIKU_STATE_STOPPED;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -1395,15 +1460,15 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     }
 
     if (p->btl->flags & BTL_FLAG_FIELD_HIDDEN) {
-        if (work->state != 14) {
+        if (work->state != BTL_RIKU_STATE_FIELD_HIDDEN) {
             EndRikuDarkMode(work);
-            work->state = 14;
+            work->state = BTL_RIKU_STATE_FIELD_HIDDEN;
             work->steps = 0;
             work->stateTimer = 0;
         }
     } else if (p->flags & BTLOBJ_FLAG_FREEZE_PENDING) {
         p->flags &= ~BTLOBJ_FLAG_FREEZE_PENDING;
-        work->state = 30;
+        work->state = BTL_RIKU_STATE_FROZEN;
         work->steps = 0;
         work->stateTimer = 0;
     }
@@ -1411,7 +1476,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     work->flags &= ~BTL_RIKU_FLAG_AFTERIMAGE;
 
     switch (work->state) {
-    case 49:
+    case BTL_RIKU_STATE_DARK_AURA:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -1429,10 +1494,10 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 50;
+        work->state = BTL_RIKU_STATE_DARK_AURA_JUMP;
         work->stateTimer = 0;
         break;
-    case 50:
+    case BTL_RIKU_STATE_DARK_AURA_JUMP:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -1461,14 +1526,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 51;
+            work->state = BTL_RIKU_STATE_DARK_AURA_EXIT;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 51:
+    case BTL_RIKU_STATE_DARK_AURA_EXIT:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -1486,7 +1551,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (p->x < ((gBtlWork->xMin - 48) << 8) || p->x > ((gBtlWork->xMax + 48) << 8)) {
-            work->state = 52;
+            work->state = BTL_RIKU_STATE_DARK_AURA_ENTRY;
             work->stateTimer = 0;
             work->limitDashCount = 0;
             break;
@@ -1494,7 +1559,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 52: {
+    case BTL_RIKU_STATE_DARK_AURA_ENTRY: {
         s32 tx;
         s32 ty;
         s32 tz;
@@ -1571,7 +1636,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         ApproachValue(&work->scaleX, 256, work->steps);
 
         if (--work->steps <= 0) {
-            work->state = 53;
+            work->state = BTL_RIKU_STATE_DARK_AURA_DASH;
             work->stateTimer = 0;
             break;
         }
@@ -1579,7 +1644,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     }
-    case 53:
+    case BTL_RIKU_STATE_DARK_AURA_DASH:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -1597,7 +1662,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->vz = 0;
 
         if (work->stateTimer == 15 && (s16)work->limitDashCount > 4) {
-            work->state = 54;
+            work->state = BTL_RIKU_STATE_DARK_AURA_FINISH;
             work->stateTimer = 0;
             break;
         }
@@ -1609,11 +1674,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 52;
+        work->state = BTL_RIKU_STATE_DARK_AURA_ENTRY;
         work->stateTimer = 0;
         work->limitDashCount++;
         break;
-    case 54:
+    case BTL_RIKU_STATE_DARK_AURA_FINISH:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -1634,7 +1699,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (!BgFxIsActive() && work->steps <= 0 && AnimIsFinished(&work->anim)) {
             p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             FadeStartIn(FADE_MODE_DARK_MAGENTA, 30);
             work->stateTimer = 0;
             break;
@@ -1642,7 +1707,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 42:
+    case BTL_RIKU_STATE_DARK_VERTICAL_SLASH:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -1730,14 +1795,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 48:
+    case BTL_RIKU_STATE_DARK_FIRAGA:
         if (work->stateTimer == 0) {
             FocusBtlRikuCameraOnTarget(work);
             SetBtlRikuAnimation(work, 25, 0);
@@ -1818,14 +1883,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 41:
+    case BTL_RIKU_STATE_DARK_AIR_SLASH:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -1923,14 +1988,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 40:
+    case BTL_RIKU_STATE_DARK_DOUBLE_SLASH:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -2026,14 +2091,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 60:
+    case BTL_RIKU_STATE_DARK_SLASH:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -2161,14 +2226,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 61: {
+    case BTL_RIKU_STATE_DARK_LUNGE_SLASH: {
         s16 dz;
         s32 flag;
         s32 mode2;
@@ -2290,7 +2355,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->stateTimer = 0;
             break;
         }
@@ -2298,7 +2363,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     }
-    case 43:
+    case BTL_RIKU_STATE_DARK_BREAK:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (p->z < p->groundZ) {
@@ -2317,10 +2382,10 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         work->stateTimer = 0;
-        work->state = 44;
+        work->state = BTL_RIKU_STATE_DARK_BREAK_RISE;
         work->vz = -3072;
         break;
-    case 44: {
+    case BTL_RIKU_STATE_DARK_BREAK_RISE: {
         BtlObj* e;
 
         BtlMapFollowPosition(p->x, p->y, p->z);
@@ -2347,14 +2412,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer = 0;
             work->steps = 0;
-            work->state = 45;
+            work->state = BTL_RIKU_STATE_DARK_BREAK_DIVE;
             break;
         }
 
         work->stateTimer++;
         break;
     }
-    case 45:
+    case BTL_RIKU_STATE_DARK_BREAK_DIVE:
         if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 23, 0);
             work->vz = 1792;
@@ -2385,18 +2450,18 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->stateTimer = 0;
 
             if (work->steps > 4) {
-                work->state = 47;
+                work->state = BTL_RIKU_STATE_DARK_BREAK_END;
                 break;
             }
 
-            work->state = 46;
+            work->state = BTL_RIKU_STATE_DARK_BREAK_REBOUND;
             work->steps++;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 46: {
+    case BTL_RIKU_STATE_DARK_BREAK_REBOUND: {
         BtlObj* e;
 
         if (work->stateTimer == 0) {
@@ -2418,11 +2483,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 45;
+        work->state = BTL_RIKU_STATE_DARK_BREAK_DIVE;
         work->stateTimer = 0;
         break;
     }
-    case 47:
+    case BTL_RIKU_STATE_DARK_BREAK_END:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -2442,14 +2507,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (AnimIsFinished(&work->anim) && p->z >= p->groundZ) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 37:
+    case BTL_RIKU_STATE_DARK_JUMP:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -2467,14 +2532,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (pressed & B_BUTTON) {
-            work->state = 56;
+            work->state = BTL_RIKU_STATE_DARK_LEAP;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 38;
+            work->state = BTL_RIKU_STATE_DARK_AIRBORNE;
             work->steps = 0;
             work->stateTimer = 0;
             work->vz = -1600;
@@ -2485,7 +2550,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 38:
+    case BTL_RIKU_STATE_DARK_AIRBORNE:
         FocusBtlRikuCameraOnTarget(work);
         p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
 
@@ -2506,7 +2571,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (pressed & B_BUTTON) {
-            work->state = 56;
+            work->state = BTL_RIKU_STATE_DARK_LEAP;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -2582,7 +2647,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 39:
+    case BTL_RIKU_STATE_DARK_LAND:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -2592,13 +2657,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & B_BUTTON) {
             m4aSongNumStart(work->groundSongs[2]);
             p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
-            work->state = 37;
+            work->state = BTL_RIKU_STATE_DARK_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         } else if (pressed & DPAD_LEFT) {
             if (work->tapTimers[0] != 0) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-                work->state = 57;
+                work->state = BTL_RIKU_STATE_DARK_DASH;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2606,7 +2671,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
                 p->flags |= BTLOBJ_FLAG_FACING_LEFT;
-                work->state = 57;
+                work->state = BTL_RIKU_STATE_DARK_DASH;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2614,7 +2679,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & DPAD_UP) {
             if (work->tapTimers[2] != 0) {
                 work->flags |= BTL_RIKU_FLAG_DASH_UP;
-                work->state = 58;
+                work->state = BTL_RIKU_STATE_DARK_DASH_VERTICAL;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2622,7 +2687,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & DPAD_DOWN) {
             if (work->tapTimers[3] != 0) {
                 work->flags &= ~BTL_RIKU_FLAG_DASH_UP;
-                work->state = 58;
+                work->state = BTL_RIKU_STATE_DARK_DASH_VERTICAL;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2630,7 +2695,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -2638,7 +2703,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 36:
+    case BTL_RIKU_STATE_DARK_HURT:
         FocusBtlRikuCameraOnTarget(work);
         p->originX = p->x;
         p->originY = p->y;
@@ -2681,14 +2746,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->originY = p->y;
 
             if (gBtlWork->darkPoints > 0) {
-                work->state = 35;
+                work->state = BTL_RIKU_STATE_DARK_IDLE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
             }
 
             p->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
-            work->state = 33;
+            work->state = BTL_RIKU_STATE_DARK_MODE_END;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -2696,13 +2761,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 35:
+    case BTL_RIKU_STATE_DARK_IDLE:
         FocusBtlRikuCameraOnTarget(work);
         DisableBtlRikuPassThrough(work);
 
         if (gBtlWork->darkPoints <= 0) {
             p->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
-            work->state = 33;
+            work->state = BTL_RIKU_STATE_DARK_MODE_END;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -2711,7 +2776,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (pressed & DPAD_LEFT) {
             if (work->tapTimers[0] != 0) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-                work->state = 57;
+                work->state = BTL_RIKU_STATE_DARK_DASH;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2719,7 +2784,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
                 p->flags |= BTLOBJ_FLAG_FACING_LEFT;
-                work->state = 57;
+                work->state = BTL_RIKU_STATE_DARK_DASH;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2727,7 +2792,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & DPAD_UP) {
             if (work->tapTimers[2] != 0) {
                 work->flags |= BTL_RIKU_FLAG_DASH_UP;
-                work->state = 58;
+                work->state = BTL_RIKU_STATE_DARK_DASH_VERTICAL;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2735,7 +2800,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & DPAD_DOWN) {
             if (work->tapTimers[3] != 0) {
                 work->flags &= ~BTL_RIKU_FLAG_DASH_UP;
-                work->state = 58;
+                work->state = BTL_RIKU_STATE_DARK_DASH_VERTICAL;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2746,13 +2811,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (pressed & B_BUTTON) {
             m4aSongNumStart(work->groundSongs[2]);
-            work->state = 37;
+            work->state = BTL_RIKU_STATE_DARK_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 31:
+    case BTL_RIKU_STATE_DARK_MODE_START:
         if (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             FocusBtlRikuCameraOnTarget(work);
             break;
@@ -2786,11 +2851,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 32;
+        work->state = BTL_RIKU_STATE_DARK_MODE_TRANSFORM;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 32:
+    case BTL_RIKU_STATE_DARK_MODE_TRANSFORM:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -2831,7 +2896,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (work->steps <= 0 && p->z >= p->groundZ) {
             FadeToOriginal(FADE_MODE_DARK_MAGENTA, 10);
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -2839,7 +2904,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 33:
+    case BTL_RIKU_STATE_DARK_MODE_END:
         if (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             FocusBtlRikuCameraOnTarget(work);
             break;
@@ -2872,11 +2937,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 34;
+        work->state = BTL_RIKU_STATE_DARK_MODE_REVERT;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 34:
+    case BTL_RIKU_STATE_DARK_MODE_REVERT:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -2897,7 +2962,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->steps <= 0) {
             p->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -2905,7 +2970,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 0:
+    case BTL_RIKU_STATE_ENTER:
         if (work->stateTimer == 0) {
             if (work->steps == 0) {
                 SetBtlRikuAnimation(work, 11, 0);
@@ -2932,16 +2997,16 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
-        work->state = 1;
+        work->state = BTL_RIKU_STATE_IDLE;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 1:
+    case BTL_RIKU_STATE_IDLE:
         FocusBtlRikuCameraOnTarget(work);
         DisableBtlRikuPassThrough(work);
 
         if (p->z < p->groundZ) {
-            work->state = 3;
+            work->state = BTL_RIKU_STATE_AIRBORNE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -2951,7 +3016,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (work->tapTimers[0] != 0) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
-                work->state = 22;
+                work->state = BTL_RIKU_STATE_DODGE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2960,7 +3025,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (work->tapTimers[1] != 0) {
                 p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
-                work->state = 22;
+                work->state = BTL_RIKU_STATE_DODGE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -2974,11 +3039,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         m4aSongNumStart(work->groundSongs[2]);
-        work->state = 2;
+        work->state = BTL_RIKU_STATE_JUMP;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 2:
+    case BTL_RIKU_STATE_JUMP:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -3002,14 +3067,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 3;
+        work->state = BTL_RIKU_STATE_AIRBORNE;
         work->steps = 0;
         work->stateTimer = 0;
         work->vz = -1664;
         p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
         work->speed <<= 1;
         break;
-    case 30:
+    case BTL_RIKU_STATE_FROZEN:
         if (work->stateTimer == 0) {
             p->flags |= BTLOBJ_FLAG_INTANGIBLE;
             p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
@@ -3050,13 +3115,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags &= ~BTL_RIKU_FLAG_HIDDEN;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-                work->state = 35;
+                work->state = BTL_RIKU_STATE_DARK_IDLE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
             }
 
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -3064,7 +3129,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         break;
-    case 3:
+    case BTL_RIKU_STATE_AIRBORNE:
         FocusBtlRikuCameraOnTarget(work);
         p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
 
@@ -3154,7 +3219,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 4:
+    case BTL_RIKU_STATE_LAND:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -3164,14 +3229,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (pressed & B_BUTTON) {
             m4aSongNumStart(work->groundSongs[2]);
             p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
-            work->state = 2;
+            work->state = BTL_RIKU_STATE_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         } else if (pressed & DPAD_LEFT) {
             if (work->tapTimers[0] != 0) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
-                work->state = 22;
+                work->state = BTL_RIKU_STATE_DODGE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -3180,7 +3245,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (work->tapTimers[1] != 0) {
                 p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
-                work->state = 22;
+                work->state = BTL_RIKU_STATE_DODGE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -3194,11 +3259,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 1;
+        work->state = BTL_RIKU_STATE_IDLE;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 8:
+    case BTL_RIKU_STATE_ESCAPE:
         SetBtlRikuDirAnimation(work, 0, 1);
         work->speed = 0;
 
@@ -3211,19 +3276,19 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         break;
-    case 10:
+    case BTL_RIKU_STATE_ITEM_POSE:
         if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 10, 0);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            SetBtlRikuState(work, 1);
+            SetBtlRikuState(work, BTL_RIKU_STATE_IDLE);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 11:
+    case BTL_RIKU_STATE_CARD_BROKEN:
         if (work->flags & BTL_RIKU_FLAG_HIDDEN) {
             break;
         }
@@ -3238,7 +3303,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3246,7 +3311,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 55:
+    case BTL_RIKU_STATE_DARK_CARD_BROKEN:
         if (work->flags & BTL_RIKU_FLAG_HIDDEN) {
             break;
         }
@@ -3261,7 +3326,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3269,7 +3334,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 56:
+    case BTL_RIKU_STATE_DARK_LEAP:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -3314,7 +3379,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim) && p->z >= p->groundZ) {
             DisableBtlRikuPassThrough(work);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3322,7 +3387,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 22:
+    case BTL_RIKU_STATE_DODGE:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -3384,7 +3449,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (work->steps == 0 && p->z >= p->groundZ) {
             p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
             DisableBtlRikuPassThrough(work);
-            work->state = 23;
+            work->state = BTL_RIKU_STATE_DODGE_LAND;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3392,7 +3457,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 23:
+    case BTL_RIKU_STATE_DODGE_LAND:
         if (work->stateTimer == 0) {
             m4aSongNumStart(work->groundSongs[3]);
             SetBtlRikuDirAnimation(work, 5, 0);
@@ -3403,12 +3468,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 1;
+        work->state = BTL_RIKU_STATE_IDLE;
         work->steps = 0;
         work->stateTimer = 0;
         p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         break;
-    case 57:
+    case BTL_RIKU_STATE_DARK_DASH:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -3458,7 +3523,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->steps == 0 && p->z >= p->groundZ) {
             DisableBtlRikuPassThrough(work);
-            work->state = 59;
+            work->state = BTL_RIKU_STATE_DARK_DASH_LAND;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3466,7 +3531,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 59:
+    case BTL_RIKU_STATE_DARK_DASH_LAND:
         if (work->stateTimer == 0) {
             m4aSongNumStart(work->groundSongs[3]);
             SetBtlRikuAnimation(work, 19, 0);
@@ -3477,11 +3542,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        work->state = 35;
+        work->state = BTL_RIKU_STATE_DARK_IDLE;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 58:
+    case BTL_RIKU_STATE_DARK_DASH_VERTICAL:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -3531,7 +3596,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->steps == 0 && p->z >= p->groundZ) {
             DisableBtlRikuPassThrough(work);
-            work->state = 59;
+            work->state = BTL_RIKU_STATE_DARK_DASH_LAND;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3539,7 +3604,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 12:
+    case BTL_RIKU_STATE_GUARDED:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -3548,7 +3613,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3556,7 +3621,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 5:
+    case BTL_RIKU_STATE_ITEM:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlRikuCameraOnTarget(work);
             break;
@@ -3566,7 +3631,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
 #ifdef VERSION_EU
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-            SetBtlRikuState(work, 35);
+            SetBtlRikuState(work, BTL_RIKU_STATE_DARK_IDLE);
             break;
         }
 #endif
@@ -3639,13 +3704,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            SetBtlRikuState(work, 1);
+            SetBtlRikuState(work, BTL_RIKU_STATE_IDLE);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 9: {
+    case BTL_RIKU_STATE_COMBO: {
         s32 t;
         s32 t2;
         d = 0;
@@ -3799,13 +3864,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (d == 2) {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
-            SetBtlRikuState(work, 12);
+            SetBtlRikuState(work, BTL_RIKU_STATE_GUARDED);
             p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             break;
         }
 
         if (AnimIsFinished(&work->anim) && (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
-            SetBtlRikuState(work, 1);
+            SetBtlRikuState(work, BTL_RIKU_STATE_IDLE);
             break;
         }
 
@@ -3869,7 +3934,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     }
-    case 24:
+    case BTL_RIKU_STATE_SUMMON_TAKEOFF:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlRikuCameraOnTarget(work);
             break;
@@ -3896,7 +3961,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         uv = work->stateTimer;
 
         if (work->stateTimer > 3) {
-            work->state = 25;
+            work->state = BTL_RIKU_STATE_SUMMON_EXIT;
             work->steps = 0;
             work->stateTimer = 0;
             work->vz = -1024;
@@ -3905,7 +3970,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         break;
-    case 25:
+    case BTL_RIKU_STATE_SUMMON_EXIT:
         if (work->stateTimer == 0) {
             work->steps = 20;
             ColliderSetDisabled(&p->collider, 1);
@@ -3942,7 +4007,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->steps--;
 
         if (work->steps == 0) {
-            work->state = 26;
+            work->state = BTL_RIKU_STATE_SUMMON_OFFSCREEN;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3950,7 +4015,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 26:
+    case BTL_RIKU_STATE_SUMMON_OFFSCREEN:
         if (work->stateTimer == 0) {
             work->flags |= BTL_RIKU_FLAG_HIDDEN;
             ReleaseBtlRikuPalette(work);
@@ -3984,7 +4049,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 SetBtlRikuAnimation(work, 0, 1);
             }
 
-            work->state = 27;
+            work->state = BTL_RIKU_STATE_SUMMON_RETURN;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -3992,7 +4057,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         break;
-    case 27:
+    case BTL_RIKU_STATE_SUMMON_RETURN:
         if (work->stateTimer == 0) {
             work->steps = 20;
         }
@@ -4027,7 +4092,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
-            work->state = 28;
+            work->state = BTL_RIKU_STATE_SUMMON_RETURN_LAND;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -4035,7 +4100,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 28:
+    case BTL_RIKU_STATE_SUMMON_RETURN_LAND:
         if (work->stateTimer == 0) {
             ColliderSetDisabled(&p->collider, 0);
             p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
@@ -4052,9 +4117,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->stateTimer > 6) {
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-                SetBtlRikuState(work, 35);
+                SetBtlRikuState(work, BTL_RIKU_STATE_DARK_IDLE);
             } else {
-                SetBtlRikuState(work, 1);
+                SetBtlRikuState(work, BTL_RIKU_STATE_IDLE);
             }
 
             break;
@@ -4062,7 +4127,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer = uv + 1;
         break;
-    case 15: {
+    case BTL_RIKU_STATE_HAZARD: {
         u16 uv;
 
         FocusBtlRikuCameraOnTarget(work);
@@ -4096,7 +4161,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->stateTimer > 24) {
             p->flags &= ~BTLOBJ_FLAG_HURT;
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4105,7 +4170,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     }
-    case 16: {
+    case BTL_RIKU_STATE_DARK_HAZARD: {
         u16 uv;
 
         FocusBtlRikuCameraOnTarget(work);
@@ -4139,7 +4204,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->stateTimer > 24) {
             p->flags &= ~BTLOBJ_FLAG_HURT;
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4148,7 +4213,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     }
-    case 6:
+    case BTL_RIKU_STATE_HURT:
         FocusBtlRikuCameraOnTarget(work);
         p->originX = p->x;
         p->originY = p->y;
@@ -4188,7 +4253,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             ClearBtlObjActionFlags(p);
             p->originX = p->x;
             p->originY = p->y;
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -4197,23 +4262,23 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
         break;
-    case 19:
+    case BTL_RIKU_STATE_DARK_RECOVER:
         if (AnimIsFinished(&work->anim)) {
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 18:
+    case BTL_RIKU_STATE_RECOVER:
         if (AnimIsFinished(&work->anim)) {
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 20:
+    case BTL_RIKU_STATE_REVIVE:
         if (work->stateTimer == 0) {
             StartBtlRikuKnockback(work);
             work->flags |= BTL_RIKU_FLAG_PASS_THROUGH;
@@ -4248,13 +4313,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             CreateBtlPopTask(p, 10);
 
             if (gBtlWork->enemyCount == 0 && gBtlWork->pendingEnemies <= 0) {
-                work->state = 21;
+                work->state = BTL_RIKU_STATE_END_BATTLE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
             }
 
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -4262,7 +4327,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->stateTimer++;
         break;
-    case 21: {
+    case BTL_RIKU_STATE_END_BATTLE: {
         u16 uv;
 
         SetBtlRikuAnimation(work, 0, 0);
@@ -4270,7 +4335,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->stateTimer > 60) {
             gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4279,7 +4344,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     }
-    case 7:
+    case BTL_RIKU_STATE_DEFEATED:
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
@@ -4308,12 +4373,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         break;
-    case 17:
+    case BTL_RIKU_STATE_STOPPED:
         BtlMapFollowPosition(p->x, p->y, p->z);
         work->vz = 0;
 
         if (p->badStatus != BAD_STATUS_STOP) {
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             ClearBtlObjActionFlags(p);
@@ -4323,7 +4388,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         break;
-    case 13:
+    case BTL_RIKU_STATE_STUNNED:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -4345,13 +4410,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (p->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_RIKU_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 62:
+    case BTL_RIKU_STATE_DARK_STUNNED:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
         if (work->stateTimer == 0) {
@@ -4373,13 +4438,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (p->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(p);
-            work->state = 35;
+            work->state = BTL_RIKU_STATE_DARK_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 14:
+    case BTL_RIKU_STATE_FIELD_HIDDEN:
         p->flags &= ~BTLOBJ_FLAG_HURT;
 #ifdef VERSION_EU
         p->vx = p->vy = 0;
@@ -4470,12 +4535,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         p->z = p->groundZ;
         p->btl->flags &= ~BTL_FLAG_PLAYER_AIRBORNE;
 
-        if (work->state == 3) {
-            work->state = 4;
+        if (work->state == BTL_RIKU_STATE_AIRBORNE) {
+            work->state = BTL_RIKU_STATE_LAND;
             work->steps = 0;
             work->stateTimer = 0;
-        } else if (work->state == 38) {
-            work->state = 39;
+        } else if (work->state == BTL_RIKU_STATE_DARK_AIRBORNE) {
+            work->state = BTL_RIKU_STATE_DARK_LAND;
             work->steps = 0;
             work->stateTimer = 0;
         }
@@ -4483,13 +4548,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (work->flags & BTL_RIKU_FLAG_ON_PLATFORM) {
             work->flags &= ~BTL_RIKU_FLAG_ON_PLATFORM;
 
-            if (work->state == 1) {
+            if (work->state == BTL_RIKU_STATE_IDLE) {
                 if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
-                    work->state = 38;
+                    work->state = BTL_RIKU_STATE_DARK_AIRBORNE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 } else {
-                    work->state = 3;
+                    work->state = BTL_RIKU_STATE_AIRBORNE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
@@ -4583,7 +4648,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     TaskPoolUpdate(&work->tasks);
 
-    if (work->state == 11 || work->state == 55) {
+    if (work->state == BTL_RIKU_STATE_CARD_BROKEN || work->state == BTL_RIKU_STATE_DARK_CARD_BROKEN) {
         if (work->flags & BTL_RIKU_FLAG_HIDDEN) {
             work->flags &= ~BTL_RIKU_FLAG_HIDDEN;
             LoadBtlRikuPalette(work);

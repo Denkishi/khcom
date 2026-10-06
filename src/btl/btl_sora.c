@@ -410,6 +410,98 @@ void UpdateBtlSoraWalk(BtlSoraWork* work, u16 held) {
     }
 }
 
+enum BtlSoraState {
+    BTL_SORA_STATE_ENTER,
+    BTL_SORA_STATE_IDLE,
+    BTL_SORA_STATE_JUMP,
+    BTL_SORA_STATE_AIRBORNE,
+    BTL_SORA_STATE_LAND,
+    BTL_SORA_STATE_SONIC_BLADE,
+    BTL_SORA_STATE_FIRE,
+    BTL_SORA_STATE_BLIZZARD,
+    BTL_SORA_STATE_THUNDER,
+    BTL_SORA_STATE_GRAVITY,
+    BTL_SORA_STATE_CURE,
+    BTL_SORA_STATE_STOP,
+    BTL_SORA_STATE_ITEM,
+    BTL_SORA_STATE_HURT,
+    BTL_SORA_STATE_DEFEATED,
+    BTL_SORA_STATE_ESCAPE,
+    BTL_SORA_STATE_COMBO,
+    BTL_SORA_STATE_SUMMON,
+    BTL_SORA_STATE_SUMMON_IDLE,
+    BTL_SORA_STATE_SUMMON_JUMP,
+    BTL_SORA_STATE_SUMMON_AIRBORNE,
+    BTL_SORA_STATE_SUMMON_LAND,
+    BTL_SORA_STATE_SUMMON_DODGE,
+    BTL_SORA_STATE_SUMMON_TAKEOFF,
+    BTL_SORA_STATE_SUMMON_EXIT,
+    BTL_SORA_STATE_SUMMON_OFFSCREEN,
+    BTL_SORA_STATE_SUMMON_RETURN,
+    BTL_SORA_STATE_SUMMON_RETURN_LAND,
+    BTL_SORA_STATE_CAST_POSE,
+    BTL_SORA_STATE_CARD_BROKEN,
+    BTL_SORA_STATE_DODGE,
+    BTL_SORA_STATE_RAID,
+    BTL_SORA_STATE_RAID_CATCH,
+    BTL_SORA_STATE_GUARDED,
+    BTL_SORA_STATE_STUNNED,
+    BTL_SORA_STATE_FIELD_HIDDEN,
+    BTL_SORA_STATE_SLIP,
+    BTL_SORA_STATE_SLIP_RECOVER,
+    BTL_SORA_STATE_HAZARD,
+    BTL_SORA_STATE_TRINITY_LIMIT,
+    BTL_SORA_STATE_TRINITY_LIMIT_JUMP,
+    BTL_SORA_STATE_TRINITY_LIMIT_CHARGE,
+    BTL_SORA_STATE_TRINITY_LIMIT_BLAST,
+    BTL_SORA_STATE_STOPPED,
+    BTL_SORA_STATE_WARP,
+    BTL_SORA_STATE_RAGNAROK,
+    BTL_SORA_STATE_RAGNAROK_JUMP,
+    BTL_SORA_STATE_RAGNAROK_HOVER,
+    BTL_SORA_STATE_RAGNAROK_CHARGE,
+    BTL_SORA_STATE_RAGNAROK_SHOT,
+    BTL_SORA_STATE_ARS_ARCANUM,
+    BTL_SORA_STATE_ARS_ARCANUM_FINISH,
+    BTL_SORA_STATE_BLITZ,
+    BTL_SORA_STATE_BLITZ_STRIKE,
+    BTL_SORA_STATE_STUN_IMPACT = 55,
+    BTL_SORA_STATE_SLIDING_DASH,
+    BTL_SORA_STATE_SLIDING_DASH_SLIDE,
+    BTL_SORA_STATE_SLIDING_DASH_END,
+    BTL_SORA_STATE_ZANTETSUKEN,
+    BTL_SORA_STATE_ZANTETSUKEN_SLASH,
+    BTL_SORA_STATE_ZANTETSUKEN_END,
+    BTL_SORA_STATE_MEGA_FLARE,
+    BTL_SORA_STATE_FIRAGA_BREAK,
+    BTL_SORA_STATE_AQUA_SPLASH,
+    BTL_SORA_STATE_AQUA_SPLASH_JUMP,
+    BTL_SORA_STATE_AQUA_SPLASH_HOVER,
+    BTL_SORA_STATE_AQUA_SPLASH_SPRAY,
+    BTL_SORA_STATE_GIFTED_MIRACLE,
+    BTL_SORA_STATE_HOMING_FIRA,
+    BTL_SORA_STATE_HOMING_BLIZZARA,
+    BTL_SORA_STATE_QUAKE,
+    BTL_SORA_STATE_SYNCHRO,
+    BTL_SORA_STATE_SHOCK_IMPACT,
+    BTL_SORA_STATE_TELEPORT,
+    BTL_SORA_STATE_TELEPORT_ARRIVE,
+    BTL_SORA_STATE_WARPINATOR,
+    BTL_SORA_STATE_TERROR,
+    BTL_SORA_STATE_HOLY,
+    BTL_SORA_STATE_TORNADO,
+    BTL_SORA_STATE_CONFUSE,
+    BTL_SORA_STATE_BIND,
+    BTL_SORA_STATE_RECOVER,
+    BTL_SORA_STATE_FROZEN,
+    BTL_SORA_STATE_REVIVE,
+    BTL_SORA_STATE_END_BATTLE,
+    BTL_SORA_STATE_AERO,
+    BTL_SORA_STATE_GRAVITY_SQUASH,
+    BTL_SORA_STATE_GRAVITY_HOLD,
+    BTL_SORA_STATE_GRAVITY_RECOVER
+};
+
 void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     BtlObj* e;
 
@@ -503,8 +595,8 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     AnimInit(&work->anim, NULL, NULL);
     SetBtlSoraAnimation(work, 1, 1);
     work->gfx = AnimGetGfx(&work->anim);
-    work->state = 0;
-    work->nextState = 0;
+    work->state = BTL_SORA_STATE_ENTER;
+    work->nextState = BTL_SORA_STATE_ENTER;
     work->vz = 0;
     e->vx = 0;
     e->vy = 0;
@@ -591,7 +683,7 @@ void SetBtlSoraStateNoReset(BtlSoraWork* work, u32 state) {
 void StartBtlSoraCombo(BtlSoraWork* work) {
     u16 t;
 
-    if (work->state == 16 && work->comboCount <= 1) {
+    if (work->state == BTL_SORA_STATE_COMBO && work->comboCount <= 1) {
         work->comboCount++;
         work->stateTimer = 0;
         work->steps = 0;
@@ -625,7 +717,7 @@ void StartBtlSoraCombo(BtlSoraWork* work) {
             break;
         }
 
-        work->state = 16;
+        work->state = BTL_SORA_STATE_COMBO;
         work->steps = 0;
         work->stateTimer = 0;
         work->comboCount = 0;
@@ -758,10 +850,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     if (gBtlWork->phase == 4 && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         switch (work->state) {
-        case 23:
-        case 24:
-        case 25:
-        case 26:
+        case BTL_SORA_STATE_SUMMON_TAKEOFF:
+        case BTL_SORA_STATE_SUMMON_EXIT:
+        case BTL_SORA_STATE_SUMMON_OFFSCREEN:
+        case BTL_SORA_STATE_SUMMON_RETURN:
             p->x = p->originX;
             p->y = p->originY;
             p->z = p->originZ;
@@ -771,18 +863,18 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 LoadBtlSoraPalette(work);
             }
 
-            SetBtlSoraState(work, 3);
+            SetBtlSoraState(work, BTL_SORA_STATE_AIRBORNE);
             break;
-        case 67:
+        case BTL_SORA_STATE_AQUA_SPLASH_SPRAY:
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
-            SetBtlSoraState(work, 82);
+            SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
             break;
-        case 79:
+        case BTL_SORA_STATE_TORNADO:
             m4aSongNumStop(SONG_EF_TRUNEDO);
-            SetBtlSoraState(work, 82);
+            SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
             break;
         default:
-            SetBtlSoraState(work, 82);
+            SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
             break;
         }
 
@@ -974,9 +1066,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         pressed = SwapBtlSoraKeyBits(pressed, 64, 128);
     }
 
-    if (work->state != 15 && (p->btl->flags & BTL_FLAG_ESCAPED)) {
+    if (work->state != BTL_SORA_STATE_ESCAPE && (p->btl->flags & BTL_FLAG_ESCAPED)) {
         p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
-        work->state = 15;
+        work->state = BTL_SORA_STATE_ESCAPE;
         work->steps = 0;
         work->stateTimer = 0;
         p->flags |= BTLOBJ_FLAG_INTANGIBLE;
@@ -987,13 +1079,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     switch (UpdateBtlObjReaction(p)) {
     case BTL_REACTION_GRAVITY:
         work->speed = 0;
-        work->state = 87;
+        work->state = BTL_SORA_STATE_GRAVITY_SQUASH;
         work->steps = 0;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_HURT:
         work->speed = 0;
-        work->state = 13;
+        work->state = BTL_SORA_STATE_HURT;
         work->steps = 0;
         work->stateTimer = 0;
         break;
@@ -1002,19 +1094,19 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->speed = 0;
 
         if (p->btl->hcEffect == 27) {
-            work->state = 84;
+            work->state = BTL_SORA_STATE_REVIVE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         }
 
-        work->state = 14;
+        work->state = BTL_SORA_STATE_DEFEATED;
         work->steps = 0;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_HEALED:
         p->flags &= ~BTLOBJ_FLAG_HURT;
-        work->state = 1;
+        work->state = BTL_SORA_STATE_IDLE;
         work->steps = 0;
         work->stateTimer = 0;
         p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
@@ -1156,175 +1248,175 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             StartBtlSoraCombo(work);
             break;
         case 19:
-            work->state = 6;
+            work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             work->breakAnim = 1;
             break;
         case 0x8002ACAB:
-            work->state = 6;
+            work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             work->breakAnim = 2;
             break;
         case 0xCAB2ACAB:
-            work->state = 6;
+            work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             work->breakAnim = 3;
             break;
         case 20:
-            work->state = 7;
+            work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             work->breakAnim = 1;
             break;
         case 0x8002D4B5:
-            work->state = 7;
+            work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             work->breakAnim = 2;
             break;
         case 0xCB52D4B5:
-            work->state = 7;
+            work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             work->breakAnim = 3;
             break;
         case 21:
-            work->state = 8;
+            work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             work->breakAnim = 1;
             break;
         case 0x8002FCBF:
-            work->state = 8;
+            work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             work->breakAnim = 2;
             break;
         case 0xCBF2FCBF:
-            work->state = 8;
+            work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             work->breakAnim = 3;
             break;
         case 22:
-            work->state = 10;
+            work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             work->breakAnim = 0;
             break;
         case 0x800324C9:
-            work->state = 10;
+            work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             work->breakAnim = 0;
             break;
         case 0xCC9324C9:
-            work->state = 10;
+            work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             work->breakAnim = 0;
             break;
         case 24:
-            work->state = 11;
+            work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             work->breakAnim = 1;
             break;
         case 0x800374DD:
-            work->state = 11;
+            work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             work->breakAnim = 2;
             break;
         case 0xCDD374DD:
-            work->state = 11;
+            work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             work->breakAnim = 3;
             break;
         case 23:
-            work->state = 9;
+            work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             work->breakAnim = 1;
             break;
         case 0x80034CD3:
-            work->state = 9;
+            work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             work->breakAnim = 2;
             break;
         case 0xCD334CD3:
-            work->state = 9;
+            work->state = BTL_SORA_STATE_GRAVITY;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             work->breakAnim = 3;
             break;
         case 27:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
             work->variant[0] = 0;
             break;
         case 0x8003ECFB:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
             work->variant[0] = 1;
             break;
         case 0xCFB3ECFB:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdGoofy;
             work->variant[0] = 2;
             break;
         case 28:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 0;
             break;
         case 0x8003C4F1:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 1;
             break;
         case 0xCF13C4F1:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 2;
             break;
         case 33:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
@@ -1332,7 +1424,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->breakAnim = 1;
             break;
         case 0x8004B52D:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
@@ -1340,7 +1432,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->breakAnim = 1;
             break;
         case 0xD2D4B52D:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
@@ -1348,507 +1440,507 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->breakAnim = 1;
             break;
         case 41:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
             work->variant[0] = 0;
             break;
         case 0x80055555:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
             work->variant[0] = 1;
             break;
         case 0xD5555555:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAriel;
             work->variant[0] = 2;
             break;
         case 34:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
             work->variant[0] = 0;
             break;
         case 0x8004DD37:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
             work->variant[0] = 1;
             break;
         case 0xD374DD37:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnMushu;
             work->variant[0] = 2;
             break;
         case 29:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
             work->variant[0] = 0;
             break;
         case 0x80041505:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
             work->variant[0] = 1;
             break;
         case 0xD0541505:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnSimba;
             work->variant[0] = 2;
             break;
         case 35:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 0;
             break;
         case 0x80050541:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 1;
             break;
         case 0xD4150541:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 2;
             break;
         case 31:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 0;
             break;
         case 0x80046519:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 1;
             break;
         case 0xD1946519:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 2;
             break;
         case 42:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
             work->variant[0] = 0;
             break;
         case 0x80057D5F:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
             work->variant[0] = 1;
             break;
         case 0xD5F57D5F:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdJack;
             work->variant[0] = 2;
             break;
         case 40:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
             work->variant[0] = 0;
             break;
         case 0x80052D4B:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
             work->variant[0] = 1;
             break;
         case 0xD4B52D4B:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdAladdin;
             work->variant[0] = 2;
             break;
         case 43:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
             work->variant[0] = 0;
             break;
         case 0x8005A569:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
             work->variant[0] = 1;
             break;
         case 0xD695A569:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdPan;
             work->variant[0] = 2;
             break;
         case 32:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
             work->variant[0] = 0;
             break;
         case 0x80048D23:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
             work->variant[0] = 1;
             break;
         case 0xD2348D23:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnDumbo;
             work->variant[0] = 2;
             break;
         case 30:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
             work->variant[0] = 0;
             break;
         case 0x80043D0F:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
             work->variant[0] = 1;
             break;
         case 0xD0F43D0F:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnGenie;
             work->variant[0] = 2;
             break;
         case 44:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
             work->variant[0] = 0;
             break;
         case 0x8005CD73:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
             work->variant[0] = 1;
             break;
         case 0xD735CD73:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdBeast;
             work->variant[0] = 2;
             break;
         case 47:
-            work->state = 12;
+            work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 0;
             break;
         case 48:
-            work->state = 12;
+            work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 1;
             break;
         case 49:
-            work->state = 12;
+            work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 2;
             break;
         case 50:
-            work->state = 12;
+            work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 3;
             break;
         case 51:
-            work->state = 12;
+            work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 4;
             break;
         case 52:
-            work->state = 12;
+            work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 5;
             break;
         case 53:
-            work->state = 12;
+            work->state = BTL_SORA_STATE_ITEM;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 0;
             work->variant[0] = 6;
             break;
         case 25:
-            work->state = 86;
+            work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             break;
         case 0x80039CE7:
-            work->state = 86;
+            work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             break;
         case 0xCE739CE7:
-            work->state = 86;
+            work->state = BTL_SORA_STATE_AERO;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             break;
         case 0xC0100401:
-            work->state = 5;
+            work->state = BTL_SORA_STATE_SONIC_BLADE;
             work->steps = 0;
             work->stateTimer = 0;
             work->comboCount = 0;
             break;
         case 100:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
             break;
         case 101:
-            work->state = 52;
+            work->state = BTL_SORA_STATE_BLITZ;
             work->steps = 0;
             work->stateTimer = 0;
             work->comboCount = 2;
             break;
         case 104:
-            work->state = 39;
+            work->state = BTL_SORA_STATE_TRINITY_LIMIT;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 3;
             break;
         case 102:
-            work->state = 50;
+            work->state = BTL_SORA_STATE_ARS_ARCANUM;
             work->steps = 0;
             work->stateTimer = 0;
-            work->nextState = 51;
+            work->nextState = BTL_SORA_STATE_ARS_ARCANUM_FINISH;
             work->comboCount = 8;
             break;
         case 103:
-            work->state = 45;
+            work->state = BTL_SORA_STATE_RAGNAROK;
             work->steps = 0;
             work->stateTimer = 0;
             work->breakAnim = 3;
             break;
         case 105:
-            work->state = 56;
+            work->state = BTL_SORA_STATE_SLIDING_DASH;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 106:
-            work->state = 55;
+            work->state = BTL_SORA_STATE_STUN_IMPACT;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 107:
-            work->state = 59;
+            work->state = BTL_SORA_STATE_ZANTETSUKEN;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 126:
-            work->state = 63;
+            work->state = BTL_SORA_STATE_FIRAGA_BREAK;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 124:
-            work->state = 68;
+            work->state = BTL_SORA_STATE_GIFTED_MIRACLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 130:
-            work->state = 69;
+            work->state = BTL_SORA_STATE_HOMING_FIRA;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 131:
-            work->state = 70;
+            work->state = BTL_SORA_STATE_HOMING_BLIZZARA;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 108:
-            work->state = 44;
+            work->state = BTL_SORA_STATE_WARP;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 109:
-            work->state = 76;
+            work->state = BTL_SORA_STATE_WARPINATOR;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 116:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
             break;
         case 113:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
             break;
         case 117:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 3;
             break;
         case 118:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 4;
             break;
         case 119:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 5;
             break;
         case 115:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 6;
             break;
         case 122:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescFrdDonald;
             work->variant[0] = 3;
             break;
         case 135:
-            work->state = 71;
+            work->state = BTL_SORA_STATE_QUAKE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 128:
-            work->state = 17;
+            work->state = BTL_SORA_STATE_SUMMON;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnBambi;
             work->variant[0] = 3;
             break;
         case 129:
-            work->state = 23;
+            work->state = BTL_SORA_STATE_SUMMON_TAKEOFF;
             work->steps = 0;
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnCloud;
             work->variant[0] = 3;
             break;
         case 120:
-            work->state = 64;
+            work->state = BTL_SORA_STATE_AQUA_SPLASH;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 121:
-            work->state = 78;
+            work->state = BTL_SORA_STATE_HOLY;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 132:
-            work->state = 72;
+            work->state = BTL_SORA_STATE_SYNCHRO;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 125:
-            work->state = 62;
+            work->state = BTL_SORA_STATE_MEGA_FLARE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 127:
-            work->state = 73;
+            work->state = BTL_SORA_STATE_SHOCK_IMPACT;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 136:
-            work->state = 74;
+            work->state = BTL_SORA_STATE_TELEPORT;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 110:
-            work->state = 77;
+            work->state = BTL_SORA_STATE_TERROR;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 114:
-            work->state = 31;
+            work->state = BTL_SORA_STATE_RAID;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 7;
             break;
         case 134:
-            work->state = 79;
+            work->state = BTL_SORA_STATE_TORNADO;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 133:
-            work->state = 81;
+            work->state = BTL_SORA_STATE_BIND;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 111:
-            work->state = 80;
+            work->state = BTL_SORA_STATE_CONFUSE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
         case 112:
         case 123:
         default:
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
 
@@ -1872,17 +1964,17 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         break;
     case BTL_REACTION_HAZARD:
         switch (work->state) {
-        case 67:
+        case BTL_SORA_STATE_AQUA_SPLASH_SPRAY:
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
             break;
-        case 79:
+        case BTL_SORA_STATE_TORNADO:
             m4aSongNumStop(SONG_EF_TRUNEDO);
             break;
 #ifdef VERSION_EU
-        case 78:
+        case BTL_SORA_STATE_HOLY:
             m4aSongNumStop(SONG_EF_HOLLY);
             break;
-        case 68:
+        case BTL_SORA_STATE_GIFTED_MIRACLE:
             m4aSongNumStop(SONG_EF_XMAS);
             break;
 #endif
@@ -1900,16 +1992,16 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->speed = 0;
         work->scaleX = 0x100;
         work->scaleY = 0x100;
-        work->state = 38;
+        work->state = BTL_SORA_STATE_HAZARD;
         work->steps = 0;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_CARD_BROKEN:
         switch (work->state) {
-        case 23:
-        case 24:
-        case 25:
-        case 26:
+        case BTL_SORA_STATE_SUMMON_TAKEOFF:
+        case BTL_SORA_STATE_SUMMON_EXIT:
+        case BTL_SORA_STATE_SUMMON_OFFSCREEN:
+        case BTL_SORA_STATE_SUMMON_RETURN:
             p->x = p->originX;
             p->y = p->originY;
             p->z = p->originZ;
@@ -1919,17 +2011,17 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             CreateBtlPopTask(p, 9);
             break;
-        case 67:
+        case BTL_SORA_STATE_AQUA_SPLASH_SPRAY:
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
             break;
-        case 79:
+        case BTL_SORA_STATE_TORNADO:
             m4aSongNumStop(SONG_EF_TRUNEDO);
             break;
 #ifdef VERSION_EU
-        case 78:
+        case BTL_SORA_STATE_HOLY:
             m4aSongNumStop(SONG_EF_HOLLY);
             break;
-        case 68:
+        case BTL_SORA_STATE_GIFTED_MIRACLE:
             m4aSongNumStop(SONG_EF_XMAS);
             break;
 #endif
@@ -1944,7 +2036,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         p->flags &= 0xFFFFDFFBFF7FFFFFLL;
         p->btl->flags |= BTL_FLAG_DISMISS_SUMMONS;
         work->speed = 0;
-        work->state = 29;
+        work->state = BTL_SORA_STATE_CARD_BROKEN;
         work->steps = 0;
         work->stateTimer = 0;
         break;
@@ -1958,23 +2050,23 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         work->speed = 0;
-        work->state = 34;
+        work->state = BTL_SORA_STATE_STUNNED;
         work->steps = 0;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_STUNNED:
         StartBtlSoraKnockback(work);
         work->speed = 0;
-        work->state = 34;
+        work->state = BTL_SORA_STATE_STUNNED;
         work->steps = 0;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_STOPPED:
-        if (work->state != 43) {
+        if (work->state != BTL_SORA_STATE_STOPPED) {
             work->flags |= BTL_SORA_FLAG_PASS_THROUGH;
             work->speed = 0;
             p->vx = p->vy = 0;
-            work->state = 43;
+            work->state = BTL_SORA_STATE_STOPPED;
             work->steps = 0;
             work->stateTimer = 0;
         }
@@ -1983,18 +2075,18 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     if (p->btl->flags & BTL_FLAG_FIELD_HIDDEN) {
-        work->state = 35;
+        work->state = BTL_SORA_STATE_FIELD_HIDDEN;
         work->steps = 0;
         work->stateTimer = 0;
     } else if (p->flags & BTLOBJ_FLAG_FREEZE_PENDING) {
         p->flags &= ~BTLOBJ_FLAG_FREEZE_PENDING;
-        work->state = 83;
+        work->state = BTL_SORA_STATE_FROZEN;
         work->steps = 0;
         work->stateTimer = 0;
     }
 
     switch (work->state) {
-    case 0:
+    case BTL_SORA_STATE_ENTER:
         if ((s16)work->stateTimer == 0) {
             if (work->steps == 0) {
                 SetBtlSoraAnimation(work, 0, 0);
@@ -2021,27 +2113,27 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
         p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
-        work->state = 1;
+        work->state = BTL_SORA_STATE_IDLE;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 18:
+    case BTL_SORA_STATE_SUMMON_IDLE:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
-            SetBtlSoraStateNoReset(work, 1);
+            SetBtlSoraStateNoReset(work, BTL_SORA_STATE_IDLE);
         }
-    case 1: {
+    case BTL_SORA_STATE_IDLE: {
         s32 t2;
 
         FocusBtlSoraCameraOnTarget(work);
         DisableBtlSoraPassThrough(work);
 
         if (p->z < p->groundZ) {
-            if (work->state == 18) {
-                work->state = 20;
+            if (work->state == BTL_SORA_STATE_SUMMON_IDLE) {
+                work->state = BTL_SORA_STATE_SUMMON_AIRBORNE;
                 work->steps = 0;
                 work->stateTimer = 0;
             } else {
-                work->state = 3;
+                work->state = BTL_SORA_STATE_AIRBORNE;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -2051,7 +2143,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         t2 = work->state;
 
-        if (t2 != 18) {
+        if (t2 != BTL_SORA_STATE_SUMMON_IDLE) {
             p->btl->flags |= BTL_FLAG_CAN_CHARGE_RELOAD;
 
             if ((p->btl->flags & BTL_FLAG_RELOAD_CHARGING) && p->btl->hcEffect != 30) {
@@ -2071,12 +2163,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
-                if (t2 == 18) {
-                    work->state = 22;
+                if (t2 == BTL_SORA_STATE_SUMMON_IDLE) {
+                    work->state = BTL_SORA_STATE_SUMMON_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 } else {
-                    work->state = 30;
+                    work->state = BTL_SORA_STATE_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
@@ -2088,12 +2180,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
-                if (t2 == 18) {
-                    work->state = 22;
+                if (t2 == BTL_SORA_STATE_SUMMON_IDLE) {
+                    work->state = BTL_SORA_STATE_SUMMON_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 } else {
-                    work->state = 30;
+                    work->state = BTL_SORA_STATE_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
@@ -2110,23 +2202,23 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         m4aSongNumStart(work->groundSongs[2]);
 
-        if (work->state == 18) {
-            work->state = 19;
+        if (work->state == BTL_SORA_STATE_SUMMON_IDLE) {
+            work->state = BTL_SORA_STATE_SUMMON_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
-            work->state = 2;
+            work->state = BTL_SORA_STATE_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         }
     }
 
         break;
-    case 19:
+    case BTL_SORA_STATE_SUMMON_JUMP:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
-            SetBtlSoraStateNoReset(work, 2);
+            SetBtlSoraStateNoReset(work, BTL_SORA_STATE_JUMP);
         }
-    case 2: {
+    case BTL_SORA_STATE_JUMP: {
         s32 uv;
 
         FocusBtlSoraCameraOnTarget(work);
@@ -2152,12 +2244,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (work->state == 19) {
-            work->state = 20;
+        if (work->state == BTL_SORA_STATE_SUMMON_JUMP) {
+            work->state = BTL_SORA_STATE_SUMMON_AIRBORNE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
-            work->state = 3;
+            work->state = BTL_SORA_STATE_AIRBORNE;
             work->steps = 0;
             work->stateTimer = 0;
         }
@@ -2168,11 +2260,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
         break;
-    case 20:
+    case BTL_SORA_STATE_SUMMON_AIRBORNE:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
-            SetBtlSoraStateNoReset(work, 3);
+            SetBtlSoraStateNoReset(work, BTL_SORA_STATE_AIRBORNE);
         }
-    case 3:
+    case BTL_SORA_STATE_AIRBORNE:
         FocusBtlSoraCameraOnTarget(work);
         p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
 
@@ -2262,11 +2354,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
         break;
-    case 21:
+    case BTL_SORA_STATE_SUMMON_LAND:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
-            SetBtlSoraStateNoReset(work, 4);
+            SetBtlSoraStateNoReset(work, BTL_SORA_STATE_LAND);
         }
-    case 4: {
+    case BTL_SORA_STATE_LAND: {
         s32 uv;
 
         FocusBtlSoraCameraOnTarget(work);
@@ -2281,12 +2373,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(work->groundSongs[2]);
             p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
 
-            if (work->state == 21) {
-                work->state = 19;
+            if (work->state == BTL_SORA_STATE_SUMMON_LAND) {
+                work->state = BTL_SORA_STATE_SUMMON_JUMP;
                 work->steps = 0;
                 work->stateTimer = 0;
             } else {
-                work->state = 2;
+                work->state = BTL_SORA_STATE_JUMP;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -2295,12 +2387,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
-                if (work->state == 21) {
-                    work->state = 22;
+                if (work->state == BTL_SORA_STATE_SUMMON_LAND) {
+                    work->state = BTL_SORA_STATE_SUMMON_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 } else {
-                    work->state = 30;
+                    work->state = BTL_SORA_STATE_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
@@ -2312,12 +2404,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
-                if (work->state == 21) {
-                    work->state = 22;
+                if (work->state == BTL_SORA_STATE_SUMMON_LAND) {
+                    work->state = BTL_SORA_STATE_SUMMON_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 } else {
-                    work->state = 30;
+                    work->state = BTL_SORA_STATE_DODGE;
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
@@ -2333,19 +2425,19 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (work->state == 21) {
-            work->state = 18;
+        if (work->state == BTL_SORA_STATE_SUMMON_LAND) {
+            work->state = BTL_SORA_STATE_SUMMON_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
     }
-    case 15:
+    case BTL_SORA_STATE_ESCAPE:
         SetBtlSoraDirAnimation(work, 0, 1);
         work->speed = 0;
 
@@ -2358,19 +2450,19 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 28:
+    case BTL_SORA_STATE_CAST_POSE:
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 44, 0);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 29:
+    case BTL_SORA_STATE_CARD_BROKEN:
         if (work->flags & BTL_SORA_FLAG_HIDDEN) {
             break;
         }
@@ -2385,7 +2477,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -2393,11 +2485,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 22:
+    case BTL_SORA_STATE_SUMMON_DODGE:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
-            SetBtlSoraStateNoReset(work, 30);
+            SetBtlSoraStateNoReset(work, BTL_SORA_STATE_DODGE);
         }
-    case 30:
+    case BTL_SORA_STATE_DODGE:
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -2406,7 +2498,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBtlSoraAnimation(work, 53, 0);
             work->steps = 32;
 
-            if (work->state != 22) {
+            if (work->state != BTL_SORA_STATE_SUMMON_DODGE) {
                 p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             }
         }
@@ -2414,7 +2506,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 4) {
             EnableBtlSoraPassThrough(work);
 
-            if (work->state != 22) {
+            if (work->state != BTL_SORA_STATE_SUMMON_DODGE) {
                 p->flags |= BTLOBJ_FLAG_HIT_LOCKED;
             }
 
@@ -2449,19 +2541,19 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (work->steps == 0) {
                 DisableBtlSoraPassThrough(work);
 
-                if (work->state != 22) {
+                if (work->state != BTL_SORA_STATE_SUMMON_DODGE) {
                     p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
                 }
             }
         }
 
         if (AnimIsFinished(&work->anim)) {
-            if (work->state == 22) {
-                work->state = 18;
+            if (work->state == BTL_SORA_STATE_SUMMON_DODGE) {
+                work->state = BTL_SORA_STATE_SUMMON_IDLE;
                 work->steps = 0;
                 work->stateTimer = 0;
             } else {
-                work->state = 1;
+                work->state = BTL_SORA_STATE_IDLE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
@@ -2473,7 +2565,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 33:
+    case BTL_SORA_STATE_GUARDED:
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -2482,7 +2574,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -2490,7 +2582,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 10:
+    case BTL_SORA_STATE_CURE:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -2570,13 +2662,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             CreateBtlPopTask(p, 10);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 11: {
+    case BTL_SORA_STATE_STOP: {
         s32 t;
         s32 t2;
         s32 t3;
@@ -2629,14 +2721,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer > 25 && !BgFxIsActive()) {
             FadeStartIn(FADE_MODE_GRAY, 8);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
     }
 
         break;
-    case 12:
+    case BTL_SORA_STATE_ITEM:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -2712,13 +2804,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 break;
             }
 
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 16: {
+    case BTL_SORA_STATE_COMBO: {
         s32 t;
         s32 t2;
 
@@ -2872,13 +2964,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (d == 2) {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
-            SetBtlSoraState(work, 33);
+            SetBtlSoraState(work, BTL_SORA_STATE_GUARDED);
             p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             break;
         }
 
         if (AnimIsFinished(&work->anim) && (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
 
@@ -2942,7 +3034,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer++;
         break;
     }
-    case 68: {
+    case BTL_SORA_STATE_GIFTED_MIRACLE: {
         BtlObj* e;
 
         FocusBtlSoraCamera(work);
@@ -3003,7 +3095,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 RequestRikuMegalixir();
             }
 
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             FadeStartIn(FADE_MODE_BLACK, 16);
             break;
         }
@@ -3011,7 +3103,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer++;
         break;
     }
-    case 76: {
+    case BTL_SORA_STATE_WARPINATOR: {
         u16 uv;
 
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -3073,14 +3165,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 41) {
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer = uv + 1;
         }
 
         break;
     }
-    case 77:
+    case BTL_SORA_STATE_TERROR:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3105,13 +3197,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 70) {
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer = uv + 1;
         }
 
         break;
-    case 86:
+    case BTL_SORA_STATE_AERO:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3140,13 +3232,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_EF_AIRO_HIT);
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBtlSoraAnimation(work, 46, 0);
-            SetBtlSoraState(work, 82);
+            SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 78:
+    case BTL_SORA_STATE_HOLY:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3182,13 +3274,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_EF_HOLLY);
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBtlSoraAnimation(work, 46, 0);
-            SetBtlSoraState(work, 82);
+            SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 79:
+    case BTL_SORA_STATE_TORNADO:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3225,7 +3317,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             if (!BgFxIsActive()) {
                 SetBtlSoraAnimation(work, 46, 0);
-                SetBtlSoraState(work, 82);
+                SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
                 m4aSongNumStop(SONG_EF_TRUNEDO);
                 break;
             }
@@ -3233,7 +3325,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
         break;
-    case 80:
+    case BTL_SORA_STATE_CONFUSE:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3254,13 +3346,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_BTL_JF_BALLTHR);
         } else if ((s16)work->stateTimer > 27 && (s16)--work->timer <= 0) {
             SetBtlSoraAnimation(work, 46, 0);
-            SetBtlSoraState(work, 82);
+            SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 81:
+    case BTL_SORA_STATE_BIND:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3280,14 +3372,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             if ((s16)--work->timer <= 0) {
                 SetBtlSoraAnimation(work, 46, 0);
-                SetBtlSoraState(work, 82);
+                SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
                 break;
             }
         }
 
         work->stateTimer++;
         break;
-    case 44:
+    case BTL_SORA_STATE_WARP:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3313,13 +3405,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer > 41 && !FadeIsActive()) {
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 74:
+    case BTL_SORA_STATE_TELEPORT:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3339,14 +3431,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (--work->steps > 0) {
             work->stateTimer++;
         } else {
-            work->state = 75;
+            work->state = BTL_SORA_STATE_TELEPORT_ARRIVE;
             work->steps = 0;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_EF_TELEP);
         }
 
         break;
-    case 75:
+    case BTL_SORA_STATE_TELEPORT_ARRIVE:
         if ((s16)work->stateTimer == 0) {
             e = PickBtlSoraTarget(work);
             work->steps = 16;
@@ -3374,13 +3466,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (--work->steps <= 0) {
             FadeStartIn(FADE_MODE_GRAY, 1);
             MakeOpponentsHittable();
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 72:
+    case BTL_SORA_STATE_SYNCHRO:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3400,13 +3492,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBtlSoraAnimation(work, 46, 0);
-            SetBtlSoraState(work, 82);
+            SetBtlSoraState(work, BTL_SORA_STATE_RECOVER);
             break;
         }
 
         work->stateTimer++;
         break;
-    case 8: {
+    case BTL_SORA_STATE_THUNDER: {
         s32 t;
         s32 t2;
 
@@ -3454,7 +3546,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBattleZoom(15, 148, 65536, 76800);
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
 
@@ -3466,7 +3558,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
         break;
-    case 9:
+    case BTL_SORA_STATE_GRAVITY:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3502,7 +3594,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
             }
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             FadeToOriginal(FADE_MODE_ADD_WHITE, 20);
             break;
         }
@@ -3513,7 +3605,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
         break;
-    case 70: {
+    case BTL_SORA_STATE_HOMING_BLIZZARA: {
         s32 t;
         s32 t2;
         s32 t3;
@@ -3574,7 +3666,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FocusBtlSoraCameraOnBgFx(work);
 
             if (!BgFxIsActive()) {
-                SetBtlSoraState(work, 1);
+                SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
                 break;
             }
         }
@@ -3586,7 +3678,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer++;
         break;
     }
-    case 69: {
+    case BTL_SORA_STATE_HOMING_FIRA: {
         s32 t;
         s32 t2;
         s32 t3;
@@ -3647,7 +3739,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FocusBtlSoraCameraOnBgFx(work);
 
             if (!BgFxIsActive()) {
-                SetBtlSoraState(work, 1);
+                SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
                 break;
             }
         }
@@ -3659,7 +3751,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer++;
         break;
     }
-    case 6: {
+    case BTL_SORA_STATE_FIRE: {
         BtlObj* e;
 
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -3705,7 +3797,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FocusBtlSoraCameraOnBgFx(work);
 
             if (!BgFxIsActive()) {
-                SetBtlSoraState(work, 1);
+                SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
                 break;
             }
         }
@@ -3717,7 +3809,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer++;
         break;
     }
-    case 62:
+    case BTL_SORA_STATE_MEGA_FLARE:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3743,7 +3835,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FocusBtlSoraCameraOnBgFx(work);
 
             if (!BgFxIsActive()) {
-                SetBtlSoraState(work, 1);
+                SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
                 break;
             }
         }
@@ -3754,7 +3846,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
         break;
-    case 7: {
+    case BTL_SORA_STATE_BLIZZARD: {
         s32 t;
         s32 t2;
 
@@ -3797,7 +3889,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FocusBtlSoraCameraOnBgFx(work);
 
             if (!BgFxIsActive()) {
-                SetBtlSoraState(work, 1);
+                SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
                 break;
             }
         }
@@ -3810,7 +3902,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
         break;
-    case 5: {
+    case BTL_SORA_STATE_SONIC_BLADE: {
         s32 uv;
 
         d = 0;
@@ -3890,7 +3982,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (d == 2) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            SetBtlSoraState(work, 33);
+            SetBtlSoraState(work, BTL_SORA_STATE_GUARDED);
             p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             DisableBtlSoraPassThrough(work);
             break;
@@ -3901,7 +3993,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->comboCount++;
             MakeOpponentsHittable();
             SelectLockonTarget();
-            work->state = 5;
+            work->state = BTL_SORA_STATE_SONIC_BLADE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3909,7 +4001,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             DisableBtlSoraPassThrough(work);
             break;
         }
@@ -3917,7 +4009,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer++;
         break;
     }
-    case 17: {
+    case BTL_SORA_STATE_SUMMON: {
         s32 uv;
 
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -3956,7 +4048,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->originY = p->y;
             p->originZ = p->z;
             TaskCreate(&gBtlWork->taskPools[0], work->summonDesc, &spawn2);
-            work->state = 18;
+            work->state = BTL_SORA_STATE_SUMMON_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -3964,7 +4056,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
         break;
-    case 23:
+    case BTL_SORA_STATE_SUMMON_TAKEOFF:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -3992,12 +4084,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        work->state = 24;
+        work->state = BTL_SORA_STATE_SUMMON_EXIT;
         work->steps = 0;
         work->stateTimer = 0;
         work->vz = -1024;
         break;
-    case 24:
+    case BTL_SORA_STATE_SUMMON_EXIT:
         if ((s16)work->stateTimer == 0) {
             work->steps = 20;
             ColliderSetDisabled(&p->collider, 1);
@@ -4025,7 +4117,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         st = --work->steps;
 
         if (st == 0) {
-            work->state = 25;
+            work->state = BTL_SORA_STATE_SUMMON_OFFSCREEN;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4033,7 +4125,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 25:
+    case BTL_SORA_STATE_SUMMON_OFFSCREEN:
         if ((s16)work->stateTimer == 0) {
             work->flags |= BTL_SORA_FLAG_HIDDEN;
             ReleaseBtlSoraPalette(work);
@@ -4065,11 +4157,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
         work->vz = 0;
         SetBtlSoraAnimation(work, 1, 1);
-        work->state = 26;
+        work->state = BTL_SORA_STATE_SUMMON_RETURN;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 26:
+    case BTL_SORA_STATE_SUMMON_RETURN:
         if ((s16)work->stateTimer == 0) {
             work->steps = 20;
         }
@@ -4094,7 +4186,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (!(p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE)) {
-            work->state = 27;
+            work->state = BTL_SORA_STATE_SUMMON_RETURN_LAND;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4102,7 +4194,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 27: {
+    case BTL_SORA_STATE_SUMMON_RETURN_LAND: {
         u16 uv;
         s16 st;
 
@@ -4119,14 +4211,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)uv > 6) {
             p->btl->flags &= ~BTL_FLAG_PLAYER_OFFSCREEN;
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer = uv + 1;
         }
     }
 
         break;
-    case 38: {
+    case BTL_SORA_STATE_HAZARD: {
         u16 uv;
 
         FocusBtlSoraCameraOnTarget(work);
@@ -4162,7 +4254,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)uv > 24) {
             p->flags &= ~BTLOBJ_FLAG_HURT;
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4171,7 +4263,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         break;
     }
-    case 13:
+    case BTL_SORA_STATE_HURT:
         FocusBtlSoraCameraOnTarget(work);
         p->originX = p->x;
         p->originY = p->y;
@@ -4213,7 +4305,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             ClearBtlObjActionFlags(p);
             p->originX = p->x;
             p->originY = p->y;
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4221,15 +4313,15 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 82:
+    case BTL_SORA_STATE_RECOVER:
         if (AnimIsFinished(&work->anim)) {
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 84:
+    case BTL_SORA_STATE_REVIVE:
         st = work->stateTimer;
 
         if (st == 0) {
@@ -4268,20 +4360,20 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             CreateBtlPopTask(p, 10);
 
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-                work->state = 1;
+                work->state = BTL_SORA_STATE_IDLE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
             }
 
             if (gBtlWork->enemyCount == 0 && gBtlWork->pendingEnemies <= 0) {
-                work->state = 85;
+                work->state = BTL_SORA_STATE_END_BATTLE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
             }
 
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -4289,7 +4381,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
         break;
-    case 85: {
+    case BTL_SORA_STATE_END_BATTLE: {
         u16 uv;
 
         SetBtlSoraAnimation(work, 1, 0);
@@ -4297,7 +4389,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)uv > 60) {
             gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -4306,7 +4398,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         break;
     }
-    case 87:
+    case BTL_SORA_STATE_GRAVITY_SQUASH:
         st = work->stateTimer;
 
         if (st == 0) {
@@ -4327,18 +4419,18 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer++;
         } else {
             work->stateTimer = 0;
-            work->state = 88;
+            work->state = BTL_SORA_STATE_GRAVITY_HOLD;
         }
 
         break;
-    case 88:
+    case BTL_SORA_STATE_GRAVITY_HOLD:
         uv = work->stateTimer;
 
         if ((s16)uv > 44) {
             if (p->hp <= 0) {
-                work->state = 14;
+                work->state = BTL_SORA_STATE_DEFEATED;
             } else {
-                work->state = 89;
+                work->state = BTL_SORA_STATE_GRAVITY_RECOVER;
             }
 
             work->stateTimer = 0;
@@ -4347,7 +4439,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 89:
+    case BTL_SORA_STATE_GRAVITY_RECOVER:
         if ((s16)work->stateTimer == 0) {
             ColliderSetDisabled(&p->collider, 0);
             work->steps = 10;
@@ -4360,12 +4452,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->stateTimer = 0;
         }
 
         break;
-    case 14:
+    case BTL_SORA_STATE_DEFEATED:
         FocusBtlSoraCameraOnTarget(work);
         st = work->stateTimer;
 
@@ -4404,7 +4496,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 50: {
+    case BTL_SORA_STATE_ARS_ARCANUM: {
         u16 uv;
 
         FocusBtlSoraCameraOnTarget(work);
@@ -4509,7 +4601,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     work->steps = 0;
                     work->stateTimer = 0;
                 } else {
-                    work->state = 50;
+                    work->state = BTL_SORA_STATE_ARS_ARCANUM;
                     work->steps = 0;
                     work->stateTimer = 0;
                     work->steps = 1;
@@ -4521,7 +4613,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
     }
-    case 73:
+    case BTL_SORA_STATE_SHOCK_IMPACT:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -4590,13 +4682,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)uv == 41) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer = uv + 1;
         }
 
         break;
-    case 56:
+    case BTL_SORA_STATE_SLIDING_DASH:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -4662,14 +4754,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->x += 2048;
             }
 
-            work->state = 57;
+            work->state = BTL_SORA_STATE_SLIDING_DASH_SLIDE;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 57: {
+    case BTL_SORA_STATE_SLIDING_DASH_SLIDE: {
         u16 uv;
 
         FocusBtlSoraCameraOnTarget(work);
@@ -4700,7 +4792,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 18) {
-            work->state = 58;
+            work->state = BTL_SORA_STATE_SLIDING_DASH_END;
             DisableBtlSoraPassThrough(work);
             work->stateTimer = 0;
         } else {
@@ -4709,7 +4801,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         break;
     }
-    case 58:
+    case BTL_SORA_STATE_SLIDING_DASH_END:
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -4739,13 +4831,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 59:
+    case BTL_SORA_STATE_ZANTETSUKEN:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -4793,14 +4885,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 60;
+            work->state = BTL_SORA_STATE_ZANTETSUKEN_SLASH;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 60:
+    case BTL_SORA_STATE_ZANTETSUKEN_SLASH:
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -4832,21 +4924,21 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 : ApplyAttackBox(95, p->x + 6400, p->y, p->z, 10, 12, 12) != 0) {
                 m4aSongNumStart(SONG_EF_ZANTETSU);
                 SetBtlSoraAnimation(work, 76, 0);
-                work->state = 61;
+                work->state = BTL_SORA_STATE_ZANTETSUKEN_END;
                 work->stateTimer = 0;
                 break;
             }
         }
 
         if (work->steps <= 0) {
-            work->state = 61;
+            work->state = BTL_SORA_STATE_ZANTETSUKEN_END;
             work->stateTimer = 0;
             break;
         }
 
         work->stateTimer++;
         break;
-    case 61:
+    case BTL_SORA_STATE_ZANTETSUKEN_END:
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -4855,13 +4947,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 52:
+    case BTL_SORA_STATE_BLITZ:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -4869,11 +4961,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         FocusBtlSoraCameraOnTarget(work);
         FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
-        work->state = 53;
+        work->state = BTL_SORA_STATE_BLITZ_STRIKE;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 53:
+    case BTL_SORA_STATE_BLITZ_STRIKE:
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -4974,13 +5066,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             if (work->comboCount == 0) {
-                SetBtlSoraState(work, 1);
+                SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
                 FadeToOriginal(FADE_MODE_BLACK, 8);
                 break;
             }
 
             work->comboCount--;
-            work->state = 53;
+            work->state = BTL_SORA_STATE_BLITZ_STRIKE;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -4988,7 +5080,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
         break;
-    case 51: {
+    case BTL_SORA_STATE_ARS_ARCANUM_FINISH: {
         s32 t;
         u16 uv;
 
@@ -5060,7 +5152,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             DisableBtlSoraPassThrough(work);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
 
@@ -5068,7 +5160,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
         break;
-    case 45:
+    case BTL_SORA_STATE_RAGNAROK:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -5078,13 +5170,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         SetBtlSoraAnimation(work, 64, 0);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 46;
+            work->state = BTL_SORA_STATE_RAGNAROK_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 46:
+    case BTL_SORA_STATE_RAGNAROK_JUMP:
         FocusBtlSoraCamera(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -5100,7 +5192,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (work->vz >= 0) {
-            work->state = 47;
+            work->state = BTL_SORA_STATE_RAGNAROK_HOVER;
             work->steps = 0;
             work->stateTimer = 0;
             p->originZ = p->z;
@@ -5110,7 +5202,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 47:
+    case BTL_SORA_STATE_RAGNAROK_HOVER:
         FocusBtlSoraCamera(work);
         work->vz = 0;
 
@@ -5126,7 +5218,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 48;
+            work->state = BTL_SORA_STATE_RAGNAROK_CHARGE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5134,7 +5226,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 48: {
+    case BTL_SORA_STATE_RAGNAROK_CHARGE: {
         u16 uv;
 
         FocusBtlSoraCamera(work);
@@ -5188,7 +5280,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 BgFxStartRagnarokShot(p->x + 10240, p->y, p->z - 6144, 0);
             }
 
-            work->state = 49;
+            work->state = BTL_SORA_STATE_RAGNAROK_SHOT;
             work->steps = 0;
             work->stateTimer = 0;
             p->originX = p->x;
@@ -5199,7 +5291,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         break;
     }
-    case 49: {
+    case BTL_SORA_STATE_RAGNAROK_SHOT: {
         FocusBtlSoraCamera(work);
         SetBtlSoraAnimation(work, 67, 0);
         work->vz = 0;
@@ -5221,14 +5313,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            SetBtlSoraState(work, 3);
+            SetBtlSoraState(work, BTL_SORA_STATE_AIRBORNE);
         } else {
             work->stateTimer++;
         }
 
         break;
     }
-    case 64:
+    case BTL_SORA_STATE_AQUA_SPLASH:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -5238,13 +5330,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         SetBtlSoraAnimation(work, 64, 0);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 65;
+            work->state = BTL_SORA_STATE_AQUA_SPLASH_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 65:
+    case BTL_SORA_STATE_AQUA_SPLASH_JUMP:
         FocusBtlSoraCamera(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -5260,7 +5352,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (work->vz >= 0) {
-            work->state = 66;
+            work->state = BTL_SORA_STATE_AQUA_SPLASH_HOVER;
             work->steps = 0;
             work->stateTimer = 0;
             p->originZ = p->z;
@@ -5270,7 +5362,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 66:
+    case BTL_SORA_STATE_AQUA_SPLASH_HOVER:
         FocusBtlSoraCamera(work);
         work->vz = 0;
 
@@ -5286,7 +5378,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 67;
+            work->state = BTL_SORA_STATE_AQUA_SPLASH_SPRAY;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5294,7 +5386,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 67: {
+    case BTL_SORA_STATE_AQUA_SPLASH_SPRAY: {
         s32 t;
         s32 t2;
         s32 t3;
@@ -5350,14 +5442,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (!BgFxIsActive()) {
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
-            SetBtlSoraState(work, 3);
+            SetBtlSoraState(work, BTL_SORA_STATE_AIRBORNE);
         } else {
             work->stateTimer++;
         }
     }
 
         break;
-    case 63:
+    case BTL_SORA_STATE_FIRAGA_BREAK:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -5393,13 +5485,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 55:
+    case BTL_SORA_STATE_STUN_IMPACT:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -5436,13 +5528,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 71:
+    case BTL_SORA_STATE_QUAKE:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -5474,13 +5566,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (AnimIsFinished(&work->anim) && !FadeIsActive()) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 83:
+    case BTL_SORA_STATE_FROZEN:
         st = work->stateTimer;
 
         if (st == 0) {
@@ -5521,7 +5613,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->flags &= ~BTL_SORA_FLAG_HIDDEN;
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5529,7 +5621,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 39:
+    case BTL_SORA_STATE_TRINITY_LIMIT:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -5550,7 +5642,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 40;
+            work->state = BTL_SORA_STATE_TRINITY_LIMIT_JUMP;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5558,7 +5650,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 40: {
+    case BTL_SORA_STATE_TRINITY_LIMIT_JUMP: {
         s32 t;
         s32 t2;
 
@@ -5599,7 +5691,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
                 CreateBtlPopTask(p, 2);
                 ClearBtlObjActionFlags(p);
-                work->state = 1;
+                work->state = BTL_SORA_STATE_IDLE;
                 work->steps = 0;
                 work->stateTimer = 0;
                 break;
@@ -5612,7 +5704,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 41;
+            work->state = BTL_SORA_STATE_TRINITY_LIMIT_CHARGE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5621,7 +5713,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
         break;
-    case 41:
+    case BTL_SORA_STATE_TRINITY_LIMIT_CHARGE:
         FocusBtlSoraCamera(work);
 
         switch ((s16)work->stateTimer) {
@@ -5642,7 +5734,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 59) {
-            work->state = 42;
+            work->state = BTL_SORA_STATE_TRINITY_LIMIT_BLAST;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5650,7 +5742,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 42:
+    case BTL_SORA_STATE_TRINITY_LIMIT_BLAST:
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 63, 0);
             BgFxStartTrinityLimitBlast(0x10000, (gBtlWork->yMin + gBtlWork->yMax) << 7, -15872);
@@ -5664,7 +5756,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (!BgFxIsActive()) {
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5672,7 +5764,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 31:
+    case BTL_SORA_STATE_RAID:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
             FocusBtlSoraCameraOnTarget(work);
             break;
@@ -5719,7 +5811,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer > 37 && !IsTaskActiveNamed(work->task, gTaskDescBtlRaid.name)) {
-            work->state = 32;
+            work->state = BTL_SORA_STATE_RAID_CATCH;
             work->steps = 0;
             work->stateTimer = 0;
             break;
@@ -5727,22 +5819,22 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
         break;
-    case 32:
+    case BTL_SORA_STATE_RAID_CATCH:
         FocusBtlSoraCameraOnTarget(work);
         SetBtlSoraAnimation(work, 57, 0);
 
         if (AnimIsFinished(&work->anim)) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            SetBtlSoraState(work, 1);
+            SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
         }
 
         break;
-    case 43:
+    case BTL_SORA_STATE_STOPPED:
         FocusBtlSoraCamera(work);
         work->vz = 0;
 
         if (p->badStatus != BAD_STATUS_STOP) {
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
             ClearBtlObjActionFlags(p);
@@ -5752,7 +5844,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 34:
+    case BTL_SORA_STATE_STUNNED:
         FocusBtlSoraCamera(work);
         st = work->stateTimer;
 
@@ -5774,13 +5866,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (p->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(p);
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         }
 
         break;
-    case 36:
+    case BTL_SORA_STATE_SLIP:
         FocusBtlSoraCameraOnTarget(work);
         st = work->stateTimer;
 
@@ -5805,14 +5897,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 40) {
-            work->state = 37;
+            work->state = BTL_SORA_STATE_SLIP_RECOVER;
             work->stateTimer = 0;
         } else {
             work->stateTimer = uv + 1;
         }
 
         break;
-    case 37:
+    case BTL_SORA_STATE_SLIP_RECOVER:
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
@@ -5835,7 +5927,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (AnimIsFinished(&work->anim)) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->speed = 0;
-            work->state = 1;
+            work->state = BTL_SORA_STATE_IDLE;
             work->steps = 0;
             work->stateTimer = 0;
         } else {
@@ -5843,7 +5935,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         break;
-    case 35:
+    case BTL_SORA_STATE_FIELD_HIDDEN:
         p->flags &= ~BTLOBJ_FLAG_HURT;
         p->vx = p->vy = 0;
         work->speed = 0;
@@ -5882,8 +5974,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     if (p->collider.colliding) {
         if (p->collider.otherType == 12) {
-            if (work->speed > 0 && work->state == 1) {
-                work->state = 36;
+            if (work->speed > 0 && work->state == BTL_SORA_STATE_IDLE) {
+                work->state = BTL_SORA_STATE_SLIP;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -5932,12 +6024,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         p->z = p->groundZ;
         p->btl->flags &= ~BTL_FLAG_PLAYER_AIRBORNE;
 
-        if (work->state == 3) {
-            work->state = 4;
+        if (work->state == BTL_SORA_STATE_AIRBORNE) {
+            work->state = BTL_SORA_STATE_LAND;
             work->steps = 0;
             work->stateTimer = 0;
-        } else if (work->state == 20) {
-            work->state = 21;
+        } else if (work->state == BTL_SORA_STATE_SUMMON_AIRBORNE) {
+            work->state = BTL_SORA_STATE_SUMMON_LAND;
             work->steps = 0;
             work->stateTimer = 0;
         }
@@ -5945,12 +6037,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (work->flags & BTL_SORA_FLAG_ON_PLATFORM) {
             work->flags &= ~BTL_SORA_FLAG_ON_PLATFORM;
 
-            if (work->state == 1) {
-                work->state = 3;
+            if (work->state == BTL_SORA_STATE_IDLE) {
+                work->state = BTL_SORA_STATE_AIRBORNE;
                 work->steps = 0;
                 work->stateTimer = 0;
-            } else if (work->state == 18) {
-                work->state = 20;
+            } else if (work->state == BTL_SORA_STATE_SUMMON_IDLE) {
+                work->state = BTL_SORA_STATE_SUMMON_AIRBORNE;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
@@ -6040,7 +6132,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     ApplyBattleBounds(&p->x, &p->y, &p->z, &p->floorZ);
     TaskPoolUpdate(&work->tasks);
 
-    if (work->state == 29 && (work->flags & BTL_SORA_FLAG_HIDDEN)) {
+    if (work->state == BTL_SORA_STATE_CARD_BROKEN && (work->flags & BTL_SORA_FLAG_HIDDEN)) {
         work->flags &= ~BTL_SORA_FLAG_HIDDEN;
         LoadBtlSoraPalette(work);
         SetBtlSoraAnimation(work, work->breakAnim + 47, 0);

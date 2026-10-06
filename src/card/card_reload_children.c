@@ -384,8 +384,6 @@ u8 UpdateRevCountHidden(RevCountWork* work, void* task) {
 }
 
 u8 UpdateRevCountEmpty(RevCountWork* work, void* task) {
-    u8 (*fn)(RevCountWork*, void*);
-
     switch (work->args.side) {
     case CARD_SIDE_SORA:
         ApproachValue(&work->x, -0x2000, work->steps);
@@ -399,26 +397,21 @@ u8 UpdateRevCountEmpty(RevCountWork* work, void* task) {
         work->steps--;
     }
 
-    // fakematch
-    do {
-        if (work->list == CARD_LIST_MAIN) {
-            if (*work->args.count > 1) {
-                fn = REV_COUNT_1;
-                SetTaskUpdate(task, (TaskUpdateFunc)fn);
-                work->steps = 8;
-                return fn(work, task);
-            }
-        } else {
-            if (*work->args.count > 0) {
-                fn = REV_COUNT_1;
-                SetTaskUpdate(task, (TaskUpdateFunc)fn);
-                work->steps = 8;
-                return fn(work, task);
-            }
+    if (work->list == CARD_LIST_MAIN) {
+        if (*work->args.count > 1) {
+            SetTaskUpdate(task, (TaskUpdateFunc)REV_COUNT_1);
+            work->steps = 8;
+            return REV_COUNT_1(work, task);
         }
+    } else {
+        if (*work->args.count > 0) {
+            SetTaskUpdate(task, (TaskUpdateFunc)REV_COUNT_1);
+            work->steps = 8;
+            return REV_COUNT_1(work, task);
+        }
+    }
 
-        return 1;
-    } while (0);
+    return 1;
 }
 
 #ifdef VERSION_EU

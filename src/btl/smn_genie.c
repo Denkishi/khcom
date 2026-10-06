@@ -251,8 +251,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             work->stateTimer = 0;
             work->animating = TRUE;
         } else {
-            work->stateTimer++;
-            work->steps--;
+            STEP_STATE(work);
         }
 
         break;
@@ -270,8 +269,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case SMN_GENIE_STATE_IDLE:
         if ((s16)work->stateTimer == 0) {

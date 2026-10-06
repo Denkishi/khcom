@@ -191,8 +191,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case FRD_ALADDIN_STATE_ATTACK:
         if (work->stateTimer == 0) {

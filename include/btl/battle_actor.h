@@ -4,6 +4,12 @@
 #include "battle_actor_types.h"
 #include "types.h"
 
+#define STEP_STATE(work) \
+    do { \
+        (work)->stateTimer++; \
+        (work)->steps--; \
+    } while (0)
+
 struct EmyKind;
 struct AnimDef;
 

@@ -112,8 +112,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         ApproachValue(&work->scale, Q_8_8(1), work->steps);
 
         if (work->steps > 0) {
-            work->stateTimer++;
-            work->steps--;
+            STEP_STATE(work);
         } else {
             work->state = SMN_SIMBA_STATE_ROAR;
             work->stateTimer = 0;
@@ -134,8 +133,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case SMN_SIMBA_STATE_ROAR:
         switch (work->stateTimer) {

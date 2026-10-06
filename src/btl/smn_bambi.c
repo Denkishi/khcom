@@ -197,8 +197,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         ApproachValue(&work->scale, Q_8_8(1), work->steps);
 
         if (work->steps > 0) {
-            work->stateTimer++;
-            work->steps--;
+            STEP_STATE(work);
         } else {
             if (work->variant == 3) {
                 work->state = SMN_BAMBI_STATE_STOMP;
@@ -218,17 +217,13 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        // fakematch
-        do {
-            ApproachValue(&work->scale, Q_8_8(0.1), work->steps);
-        } while (0);
+        ApproachValue(&work->scale, Q_8_8(0.1), work->steps);
 
         if (work->steps <= 0) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case SMN_BAMBI_STATE_STOMP:
         if (work->stateTimer == 0) {

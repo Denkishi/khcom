@@ -190,8 +190,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             work->animating = TRUE;
             m4aSongNumStart(SONG_EF_TINK_LOOP);
         } else {
-            work->stateTimer++;
-            work->steps--;
+            STEP_STATE(work);
         }
 
         break;
@@ -209,8 +208,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case SMN_TINK_STATE_HOVER:
         SmnTinkSpawnSparkle(work);

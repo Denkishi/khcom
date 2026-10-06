@@ -203,8 +203,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             work->state = FRD_PAN_STATE_ATTACK_WINDUP;
             work->stateTimer = 0;
         } else {
-            work->stateTimer++;
-            work->steps--;
+            STEP_STATE(work);
         }
 
         break;
@@ -244,8 +243,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case FRD_PAN_STATE_ATTACK_WINDUP:
         if (work->stateTimer == 0) {

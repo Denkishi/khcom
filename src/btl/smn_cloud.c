@@ -250,8 +250,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 break;
             }
         } else {
-            work->stateTimer++;
-            work->steps--;
+            STEP_STATE(work);
         }
 
         break;
@@ -267,8 +266,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
 
         if (work->steps <= 0) return 0;
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case SMN_CLOUD_STATE_TELEPORT_OUT:
         if (work->stateTimer == 0) work->steps = 8;

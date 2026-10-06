@@ -340,8 +340,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case FRD_DONALD_STATE_FLAME_RUN:
         if (work->stateTimer == 0) {

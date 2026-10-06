@@ -121,8 +121,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
             work->stateTimer = 0;
             work->animating = TRUE;
         } else {
-            work->stateTimer++;
-            work->steps--;
+            STEP_STATE(work);
         }
 
         break;
@@ -139,8 +138,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case SMN_KING_STATE_FALL:
         AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 1, 0, work->tiles);

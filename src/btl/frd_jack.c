@@ -226,8 +226,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
         if (work->steps <= 0) return 0;
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case FRD_JACK_STATE_FLIP_WINDUP:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);

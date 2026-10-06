@@ -205,8 +205,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
             return 0;
         }
 
-        work->stateTimer++;
-        work->steps--;
+        STEP_STATE(work);
         break;
     case FRD_GOOFY_STATE_CHARGE:
         if (work->stateTimer == 0) {

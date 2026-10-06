@@ -30,6 +30,7 @@
 #include "lockon.h"
 #include "card_prize_card.h"
 #include "sprite_palettes.h"
+#include "card_ids.h"
 
 const u8 gUnk_090359E8[8] = { 1, 1, 4, 2, 5, 3, 3, 2 };
 
@@ -117,7 +118,7 @@ static u8 PrizeCard_1(PrizeCardWork* work, void* task) {
         work->collected[0] = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
 
-        if (work->cardId <= 0x1C1) {
+        if (work->cardId <= CARD_ID_LAST_VALUED) {
             ObtainCard(work->cardId);
         }
 
@@ -242,7 +243,7 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* task) {
     UpdateFieldPrizeCardScale(work);
     work->holdTimer++;
 
-    if (work->cardId > 0x1C2) {
+    if (work->cardId > CARD_ID_FIRST_ENEMY) {
         if (work->holdTimer == 120) {
             work->holdTimer = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateFieldPrizeCardShrink);

@@ -7569,7 +7569,7 @@ u16 GetCardCpCost(u16 cardId) {
         return gCardDefs[cardId & CARD_ID_MASK].cpCost;
     }
 
-    if ((cardId & CARD_ID_MASK) <= 0x1C1) {
+    if ((cardId & CARD_ID_MASK) <= CARD_ID_LAST_VALUED) {
         stat = (CardStat*)&gCardDefs[cardId & CARD_ID_MASK].kind;
         n = stat->value;
 

@@ -456,7 +456,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 e
             id = gCardCollection[i] & CARD_ID_MASK;
             x = gCardDefs[id].kind;
 
-            if (id > 0x1C1) {
+            if (id > CARD_ID_LAST_VALUED) {
                 out[x].valueCounts[0]++;
             } else {
                 out[x].valueCounts[gCardDefs[id].value]++;
@@ -467,7 +467,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 e
             id = gCardCollection[i] & CARD_ID_MASK;
             x = gCardDefs[id].kind + 0x8F;
 
-            if (id > 0x1C1) {
+            if (id > CARD_ID_LAST_VALUED) {
                 out[x].valueCounts[0]++;
             } else {
                 out[x].valueCounts[gCardDefs[id].value]++;
@@ -5359,7 +5359,7 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
         work->gfx4 = gCardBacks[def->category].gfx;
         work->gfx5 = def->gfx;
 
-        if ((id & CARD_ID_MASK) <= 0x1C1) {
+        if ((id & CARD_ID_MASK) <= CARD_ID_LAST_VALUED) {
             work->tiles9 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
             work->gfx6 = gCardValueDigitFrames[def->value];
         }
@@ -5665,7 +5665,7 @@ s32 AddSelectedValueCardToDeck(DeckMenuWork* work) {
             id = raw & CARD_ID_MASK;
             def = &gCardDefs[id];
 
-            if (id > 0x1C1) {
+            if (id > CARD_ID_LAST_VALUED) {
                 if (idx == 0) {
                     AddCardToDeck(card, work->deckIndex);
                     entry->valueCounts[idx]--;
@@ -5776,7 +5776,7 @@ u8 CheckCardDeletable(DeckMenuWork* work) {
         cardId = gCardCollection[card] & CARD_ID_MASK;
         def = &gCardDefs[cardId];
 
-        if (cardId > 0x1C2) {
+        if (cardId > CARD_ID_FIRST_ENEMY) {
             if (idx != 0) {
                 continue;
             }
@@ -5837,7 +5837,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
             id = gCardCollection[card] & CARD_ID_MASK;
             def = &gCardDefs[id];
 
-            if (id >= 0x1C2) {
+            if (id >= CARD_ID_FIRST_ENEMY) {
                 if (idx == 0) {
                     if (def->category == 0) {
                         if (CountCollectionCardsOfCategory(def->category) > 1) {

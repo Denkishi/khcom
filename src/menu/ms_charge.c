@@ -41,6 +41,7 @@
 #include "card_map_anim.h"
 #include "card_deckmenu2.h"
 #include "sprite_palettes.h"
+#include "card_ids.h"
 
 #ifdef VERSION_EU
 static void* sMsChargeBgMapsByLanguage[5] = {
@@ -601,7 +602,7 @@ void MsChargeBuildCardList() {
         raw = gCardCollection[i];
         id = raw & CARD_ID_MASK;
 
-        if (raw != CARD_COLLECTION_EMPTY && (raw & CARD_FLAG_IN_ANY_DECK) == 0 && id <= 0x21C) {
+        if (raw != CARD_COLLECTION_EMPTY && (raw & CARD_FLAG_IN_ANY_DECK) == 0 && id <= CARD_CRESCENDO_6) {
             j = gCardDefs[id].category;
             kind = gCardDefs[id].kind;
             flags = raw & CARD_FLAG_PREMIUM;

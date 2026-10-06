@@ -52,6 +52,8 @@ enum CardGroup {
 };
 
 #define CARD_ID(group, value) ((group) * 10 + (value))
+#define CARD_ID_LAST_VALUED CARD_ID(CARD_MEGALIXIR, 9)
+#define CARD_ID_FIRST_ENEMY 450
 enum EnemyCardId {
     CARD_SOLDIER_1 = 453,
     CARD_LARGE_BODY_1 = 456,

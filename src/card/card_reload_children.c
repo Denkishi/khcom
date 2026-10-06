@@ -34,6 +34,7 @@
 #include "sprite_palettes.h"
 #include "card_label_data.h"
 #include "macros.h"
+#include "card_ids.h"
 
 static const s16 sSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 
@@ -797,7 +798,7 @@ u8 UpdateBossPrizeShow(BossPrizeWork* work, void* task) {
     UpdateBossPrizeScale(work);
     work->holdTimer++;
 
-    if ((u32)work->cardId > 0x1C2) {
+    if ((u32)work->cardId > CARD_ID_FIRST_ENEMY) {
         if (work->holdTimer == 120) {
             work->holdTimer = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateBossPrizeShrink);

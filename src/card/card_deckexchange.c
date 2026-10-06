@@ -1880,7 +1880,7 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
             id = gCardCollection[card] & CARD_ID_MASK;
             def = &gCardDefs[id];
 
-            if (id > 0x1C1) {
+            if (id > CARD_ID_LAST_VALUED) {
                 if (idx == 0) {
                     gSioTradeCardId = gCardCollection[card] & CARD_ID_MASK;
                     ClearCardCollectionSlot(&gCardCollection[card]);

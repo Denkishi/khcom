@@ -16,6 +16,7 @@
 #include "card_deckcard2.h"
 #include "sprite_palettes.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 const s16 gDeckGridColumnX[3] = { 13, 36, 59 };
 
@@ -35,7 +36,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
 
     switch (work->args.panel) {
     case 0:
-        if ((u16)work->args.row <= 3) {
+        if ((u16)work->args.row < ARRAY_COUNT(gDeckGridRowY)) {
             work->x = gDeckGridColumnX[work->args.col] << 8;
             work->y = gDeckGridRowY[work->args.row] << 8;
         } else {
@@ -45,7 +46,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
 
         break;
     case 1:
-        if ((u16)work->args.row <= 3) {
+        if ((u16)work->args.row < ARRAY_COUNT(gCollectionGridRowY)) {
             work->x = gCollectionGridColumnX[work->args.col] << 8;
             work->y = gCollectionGridRowY[work->args.row] << 8;
         } else {
@@ -84,7 +85,7 @@ u8 DeckCard2_1(DeckCard2Work* work) {
 
     switch (work->args.panel) {
     case 0:
-        if ((u16)work->args.row <= 3) {
+        if ((u16)work->args.row < ARRAY_COUNT(gDeckGridRowY)) {
             work->x = gDeckGridColumnX[work->args.col] << 8;
             work->y = gDeckGridRowY[work->args.row] << 8;
         } else {
@@ -94,7 +95,7 @@ u8 DeckCard2_1(DeckCard2Work* work) {
 
         break;
     case 1:
-        if ((u16)work->args.row <= 3) {
+        if ((u16)work->args.row < ARRAY_COUNT(gCollectionGridRowY)) {
             work->x = gCollectionGridColumnX[work->args.col] << 8;
             work->y = gCollectionGridRowY[work->args.row] << 8;
         } else {

@@ -19,6 +19,7 @@
 #include "card_premire_chance.h"
 #include "sprite_palettes.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 static const s16 sPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 90 };
 
@@ -30,7 +31,7 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     work->gfxLoaded = FALSE;
     work->tiles4 = NULL;
 
-    if (slot->unk_06 <= 8) {
+    if (slot->unk_06 < ARRAY_COUNT(sPremireChanceCardAngles)) {
         work->angle = sPremireChanceCardAngles[slot->unk_06];
     } else {
         work->angle = -0x20;

@@ -33,6 +33,7 @@
 #include "card_reload_children.h"
 #include "sprite_palettes.h"
 #include "card_label_data.h"
+#include "macros.h"
 
 static const s16 sSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 
@@ -93,7 +94,7 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* task) {
         work->args.flags &= ~RELOAD_CHILD_FLAG_SHIFTED;
     }
 
-    if (work->args.index <= 3) {
+    if (work->args.index < ARRAY_COUNT(sReloadChildOffsetY)) {
         switch (work->args.side) {
         case 1:
             ApproachValue(&work->offsetX, sSoraReloadChildOffsetX[(s8)work->args.index] << 8, work->steps);

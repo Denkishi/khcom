@@ -565,7 +565,7 @@ ObjAffine* AllocObjAffineAngle(u8 angle, u8 doubleSize) {
     s32 sin;
     s32 cos;
 
-    if (gSpriteWork->affineCount <= 0x1F && angle != 0) {
+    if (gSpriteWork->affineCount < ARRAY_COUNT(gSpriteWork->affine) && angle != 0) {
         sin = gSineTable[angle];
         cos = gSineTable[angle + 0x40];
         affine = &gSpriteWork->affine[gSpriteWork->affineCount];

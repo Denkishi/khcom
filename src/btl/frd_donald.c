@@ -63,7 +63,7 @@ u8 FrdDonaldApplyGravity(FrdDonaldWork* work) {
     return 0;
 }
 
-void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c) {
+void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz) {
     s32 x;
     s32 y;
     s32 z;
@@ -74,21 +74,21 @@ void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c) {
     s16 r;
 
     y = body->y;
-    z = body->z - (c * 256);
+    z = body->z - (dz * 256);
     w = 0x180;
 
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        x = body->x + (b * 256);
+        x = body->x + (dx * 256);
         t = -0x180;
     } else {
-        x = body->x - (b * 256);
+        x = body->x - (dx * 256);
         t = w;
     }
 
     BgFxSetPosition(x, y, z);
     BgFxSetScale(t, w);
 
-    if (a) {
+    if (attacking) {
         if (gBtlWork->battleId == 0x98) {
             p = 0x20;
             q = 0x20;

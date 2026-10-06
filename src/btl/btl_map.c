@@ -330,29 +330,29 @@ s32 BtlMapGetShake() {
     return sBtlMapShakeOffset;
 }
 
-void BtlMapSetCameraTarget(s32 a, s32 b) {
-    gBtlWork->x2 = a;
-    gBtlWork->y2 = b;
+void BtlMapSetCameraTarget(s32 x, s32 y) {
+    gBtlWork->x2 = x;
+    gBtlWork->y2 = y;
 }
 
-void BtlMapFollowPosition(s32 a, s32 b, s32 c) {
-    s32 x = (a + 0x10000) >> 1;
-    s32 y = (b + 0x14400) >> 1;
+void BtlMapFollowPosition(s32 px, s32 py, s32 pz) {
+    s32 x = (px + 0x10000) >> 1;
+    s32 y = (py + 0x14400) >> 1;
 
-    if (a - x > 0x3000) {
-        x = a - 0x3000;
-    } else if (x - a > 0x3000) {
-        x = a + 0x3000;
+    if (px - x > 0x3000) {
+        x = px - 0x3000;
+    } else if (x - px > 0x3000) {
+        x = px + 0x3000;
     }
 
-    if (b - y > 0x3000) {
-        y = b - 0x3000;
-    } else if (y - b > 0x3000) {
-        y = b + 0x3000;
+    if (py - y > 0x3000) {
+        y = py - 0x3000;
+    } else if (y - py > 0x3000) {
+        y = py + 0x3000;
     }
 
     gBtlWork->x2 = x;
-    gBtlWork->y2 = y + c;
+    gBtlWork->y2 = y + pz;
 }
 
 s32 task_btl_map_1(BtlMapWork* work) {

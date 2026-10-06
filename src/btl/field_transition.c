@@ -153,17 +153,17 @@ void StartFieldTransition() {
     ModeSetTransitionCallback(FieldTransitionInit, FieldTransitionUpdate);
 }
 
-u8 ClampBosBoogieBounds(s32* a, s32* b, s32* c, s32* d) {
-    if (*b < 0x24000) {
-        if (*c > -0x2000) {
-            *d = 0;
-            *b = 0x24000;
+u8 ClampBosBoogieBounds(s32* x, s32* y, s32* z, s32* floor) {
+    if (*y < 0x24000) {
+        if (*z > -0x2000) {
+            *floor = 0;
+            *y = 0x24000;
             return 1;
         }
 
-        *d = -0x2000;
+        *floor = -0x2000;
     } else {
-        *d = 0;
+        *floor = 0;
     }
 
     return 0;

@@ -8,7 +8,7 @@
 extern TaskDesc gTaskDescContinueSora;
 extern TaskDesc gTaskDescContinueRiku;
 
-void LoadContinueCursorPalette(s32 a);
+void LoadContinueCursorPalette(s32 cursor);
 void ContinueSora_0(ContinueWork* work);
 void ContinueRiku_0(ContinueWork* work);
 

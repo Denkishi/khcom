@@ -24,56 +24,56 @@
 #include "types.h"
 #include "sprite_palettes.h"
 
-void TutorialOpenMessage(u16 a) {
+void TutorialOpenMessage(u16 message) {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
-    CreateCardMessageTask(&gBtlWork->taskPools[1], 0, a);
+    CreateCardMessageTask(&gBtlWork->taskPools[1], 0, message);
 }
 
-void TutorialOpenPersistentMessage(u16 a) {
-    CreatePersistentSysmsgwinTask(&gBtlWork->taskPools[1], a);
+void TutorialOpenPersistentMessage(u16 message) {
+    CreatePersistentSysmsgwinTask(&gBtlWork->taskPools[1], message);
 }
 
 void TutorialRestoreBgMode() {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
 }
 
-void TutorialQueueMessage(TutorialWork* work, u16 b, u32 c) {
+void TutorialQueueMessage(TutorialWork* work, u16 message, u32 nextState) {
     work->timer = 0;
     work->state = 1;
-    work->nextState = c;
-    work->message = b;
+    work->nextState = nextState;
+    work->message = message;
 }
 
-void TutorialQueuePersistentMessage(TutorialWork* work, u16 b, u32 c) {
+void TutorialQueuePersistentMessage(TutorialWork* work, u16 message, u32 nextState) {
     work->timer = 0;
     work->state = 3;
-    work->nextState = c;
-    work->message = b;
+    work->nextState = nextState;
+    work->message = message;
 }
 
 void TutorialCloseMessage() {
     CloseMessageWindow();
 }
 
-void TutorialWait(TutorialWork* work, u16 b, u32 c) {
+void TutorialWait(TutorialWork* work, u16 count, u32 nextState) {
     work->timer = 0;
     work->state = 0;
-    work->nextState = c;
-    work->count = b;
+    work->nextState = nextState;
+    work->count = count;
 }
 
-void TutorialShowArrow(TutorialWork* work, u16 b, u16 c, u16 d) {
+void TutorialShowArrow(TutorialWork* work, u16 x, u16 y, u16 animId) {
     work->flags |= TUTORIAL_FLAG_SHOW_ARROW;
-    work->arrowX = b;
-    work->arrowY = c;
-    AnimStart(&work->anim, d, ANIM_FLAG_LOOP);
+    work->arrowX = x;
+    work->arrowY = y;
+    AnimStart(&work->anim, animId, ANIM_FLAG_LOOP);
 }
 
 void TutorialHideArrow(TutorialWork* work) {
     work->flags &= ~TUTORIAL_FLAG_SHOW_ARROW;
 }
 
-void task_tutorial_0(TutorialWork* work, s32 arg1) {
+void task_tutorial_0(TutorialWork* work, s32 kind) {
     gBg0Cnt = 0;
     SetupBg(0, 2, 28, 14);
     SetBgScroll(0, 0, 0);
@@ -81,7 +81,7 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
     work->timer = 0;
     work->state = 0;
     work->count = 120;
-    work->nextState = arg1 == 0 ? 5 : 0x2B;
+    work->nextState = kind == 0 ? 5 : 0x2B;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CONTROL;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_JUMP;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_DODGE;

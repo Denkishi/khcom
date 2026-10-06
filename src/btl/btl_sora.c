@@ -282,15 +282,15 @@ void FocusBtlSoraCamera(BtlSoraWork* work) {
     }
 }
 
-void SetBtlSoraAnimation(BtlSoraWork* work, u16 a, u16 b) {
+void SetBtlSoraAnimation(BtlSoraWork* work, u16 index, u16 flags) {
     const FldAnimDef* e;
 
-    e = &sBtlSoraAnimDefs[a];
-    AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
+    e = &sBtlSoraAnimDefs[index];
+    AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
 
-void SetBtlSoraDirAnimation(BtlSoraWork* work, u16 a, u16 b) {
+void SetBtlSoraDirAnimation(BtlSoraWork* work, u16 index, u16 flags) {
     const FldAnimDef* e;
     s32 idx;
 
@@ -317,8 +317,8 @@ void SetBtlSoraDirAnimation(BtlSoraWork* work, u16 a, u16 b) {
         break;
     }
 
-    e = &sBtlSoraDirAnimDefs[a][idx];
-    AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
+    e = &sBtlSoraDirAnimDefs[index][idx];
+    AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
 
@@ -341,36 +341,36 @@ void ReleaseBtlSoraPalette(BtlSoraWork* work) {
     work->palette = NULL;
 }
 
-void UpdateBtlSoraWalk(BtlSoraWork* work, u16 a) {
+void UpdateBtlSoraWalk(BtlSoraWork* work, u16 held) {
     BtlObj* p;
 
     p = &work->actor;
 
-    if ((a & 0x10) && (a & 0x40)) {
+    if ((held & 0x10) && (held & 0x40)) {
         work->angle = 0x20;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-    } else if ((a & 0x10) && (a & 0x80)) {
+    } else if ((held & 0x10) && (held & 0x80)) {
         work->angle = 0x60;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-    } else if ((a & 0x20) && (a & 0x80)) {
+    } else if ((held & 0x20) && (held & 0x80)) {
         work->angle = 0xA0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
-    } else if ((a & 0x20) && (a & 0x40)) {
+    } else if ((held & 0x20) && (held & 0x40)) {
         work->angle = 0xE0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
-    } else if (a & 0x40) {
+    } else if (held & 0x40) {
         work->angle = 0;
-    } else if (a & 0x10) {
+    } else if (held & 0x10) {
         work->angle = 0x40;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-    } else if (a & 0x80) {
+    } else if (held & 0x80) {
         work->angle = 0x80;
-    } else if (a & 0x20) {
+    } else if (held & 0x20) {
         work->angle = 0xC0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     }
 
-    if (a & 0xF0) {
+    if (held & 0xF0) {
         SetBtlSoraDirAnimation(work, 0, 1);
 
         if (work->anim.timer == 0) {
@@ -387,7 +387,7 @@ void UpdateBtlSoraWalk(BtlSoraWork* work, u16 a) {
         SetBtlSoraAnimation(work, 1, 1);
     }
 
-    if (a & 0xF0) {
+    if (held & 0xF0) {
         if (p->btl->hcEffect == 50) {
             work->speed += 256;
 
@@ -576,15 +576,15 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     TaskCreate(&work->tasks, &gTaskDescBtlBadstatus, e);
 }
 
-void SetBtlSoraState(BtlSoraWork* work, u32 a) {
-    work->state = a;
+void SetBtlSoraState(BtlSoraWork* work, u32 state) {
+    work->state = state;
     work->steps = 0;
     work->stateTimer = 0;
     ClearBtlObjActionFlags(&work->actor);
 }
 
-void SetBtlSoraStateNoReset(BtlSoraWork* work, u32 a) {
-    work->state = a;
+void SetBtlSoraStateNoReset(BtlSoraWork* work, u32 state) {
+    work->state = state;
     ClearBtlObjActionFlags(&work->actor);
 }
 
@@ -694,23 +694,23 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
     return e;
 }
 
-u16 SwapBtlSoraKeyBits(u16 a, u16 b, u16 c) {
+u16 SwapBtlSoraKeyBits(u16 keys, u16 bitA, u16 bitB) {
     u16 d;
 
-    d = b;
+    d = bitA;
 
-    if (a & b) {
-        if ((a & c) == 0) {
-            a &= ~b;
+    if (keys & bitA) {
+        if ((keys & bitB) == 0) {
+            keys &= ~bitA;
         }
 
-        a |= c;
-    } else if (a & c) {
-        a &= ~c;
-        a |= d;
+        keys |= bitB;
+    } else if (keys & bitB) {
+        keys &= ~bitB;
+        keys |= d;
     }
 
-    return a;
+    return keys;
 }
 
 BtlObj* GetBtlSoraActiveOpponent(BtlSoraWork* work) {

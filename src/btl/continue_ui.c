@@ -39,8 +39,8 @@ static void* sContinueLanguageBgTiles[5] = {
 };
 #endif
 
-void LoadContinueCursorPalette(s32 a) {
-    switch (a) {
+void LoadContinueCursorPalette(s32 cursor) {
+    switch (cursor) {
     case 0:
         LoadBgPalette(0, gContinueCursor0BgPalettes, 0x40);
         break;

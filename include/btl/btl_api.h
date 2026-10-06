@@ -8,7 +8,7 @@ void BtlMapResetShake();
 void BtlMapStartShake();
 void BtlMapUpdateShake();
 s32 BtlMapGetShake();
-void BtlMapSetCameraTarget(s32 a, s32 b);
-void BtlMapFollowPosition(s32 a, s32 b, s32 c);
+void BtlMapSetCameraTarget(s32 x, s32 y);
+void BtlMapFollowPosition(s32 px, s32 py, s32 pz);
 
 #endif

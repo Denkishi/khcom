@@ -270,15 +270,15 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     DrawSprite(x, y, gfx, work->tiles, work->palette, affine, flags, z);
 }
 
-void SetBtlRikuAnimation(BtlRikuWork* work, u16 a, u16 b) {
+void SetBtlRikuAnimation(BtlRikuWork* work, u16 index, u16 flags) {
     const FldAnimDef* e;
 
-    e = &sBtlRikuAnimDefs[a];
-    AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
+    e = &sBtlRikuAnimDefs[index];
+    AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles2, e->tiles);
 }
 
-void SetBtlRikuDirAnimation(BtlRikuWork* work, u16 a, u16 b) {
+void SetBtlRikuDirAnimation(BtlRikuWork* work, u16 index, u16 flags) {
     const FldAnimDef* e;
     s32 idx;
 
@@ -305,8 +305,8 @@ void SetBtlRikuDirAnimation(BtlRikuWork* work, u16 a, u16 b) {
         break;
     }
 
-    e = &sBtlRikuDirAnimDefs[a][idx];
-    AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
+    e = &sBtlRikuDirAnimDefs[index][idx];
+    AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles2, e->tiles);
 }
 
@@ -326,42 +326,42 @@ void ReleaseBtlRikuPalette(BtlRikuWork* work) {
     work->palette = NULL;
 }
 
-void UpdateBtlRikuWalk(BtlRikuWork* work, u16 a) {
+void UpdateBtlRikuWalk(BtlRikuWork* work, u16 held) {
     BtlObj* p;
 
     p = &work->actor;
 
-    if ((a & 0x10) && (a & 0x40)) {
+    if ((held & 0x10) && (held & 0x40)) {
         work->angle = 0x20;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         p->vx += 25;
         p->vy -= 12;
-    } else if ((a & 0x10) && (a & 0x80)) {
+    } else if ((held & 0x10) && (held & 0x80)) {
         work->angle = 0x60;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         p->vx += 25;
         p->vy += 12;
-    } else if ((a & 0x20) && (a & 0x80)) {
+    } else if ((held & 0x20) && (held & 0x80)) {
         work->angle = 0xA0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         p->vx -= 25;
         p->vy += 12;
-    } else if ((a & 0x20) && (a & 0x40)) {
+    } else if ((held & 0x20) && (held & 0x40)) {
         work->angle = 0xE0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         p->vx -= 25;
         p->vy -= 12;
-    } else if (a & 0x40) {
+    } else if (held & 0x40) {
         work->angle = 0;
         p->vy -= 12;
-    } else if (a & 0x10) {
+    } else if (held & 0x10) {
         work->angle = 0x40;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         p->vx += 25;
-    } else if (a & 0x80) {
+    } else if (held & 0x80) {
         work->angle = 0x80;
         p->vy += 12;
-    } else if (a & 0x20) {
+    } else if (held & 0x20) {
         work->angle = 0xC0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         p->vx -= 25;
@@ -379,7 +379,7 @@ void UpdateBtlRikuWalk(BtlRikuWork* work, u16 a) {
         p->vy = -256;
     }
 
-    if (a & 0xF0) {
+    if (held & 0xF0) {
         SetBtlRikuDirAnimation(work, 0, 1);
 
         if (work->anim.timer == 0) {
@@ -396,7 +396,7 @@ void UpdateBtlRikuWalk(BtlRikuWork* work, u16 a) {
         SetBtlRikuAnimation(work, 0, 1);
     }
 
-    if (a & 0xF0) {
+    if (held & 0xF0) {
         if (p->btl->hcEffect == 50) {
             work->speed += 256;
 
@@ -419,36 +419,36 @@ void UpdateBtlRikuWalk(BtlRikuWork* work, u16 a) {
     }
 }
 
-void UpdateBtlRikuDarkWalk(BtlRikuWork* work, u16 a) {
+void UpdateBtlRikuDarkWalk(BtlRikuWork* work, u16 held) {
     BtlObj* p;
 
     p = &work->actor;
 
-    if ((a & 0x10) && (a & 0x40)) {
+    if ((held & 0x10) && (held & 0x40)) {
         work->angle = 0x20;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-    } else if ((a & 0x10) && (a & 0x80)) {
+    } else if ((held & 0x10) && (held & 0x80)) {
         work->angle = 0x60;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-    } else if ((a & 0x20) && (a & 0x80)) {
+    } else if ((held & 0x20) && (held & 0x80)) {
         work->angle = 0xA0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
-    } else if ((a & 0x20) && (a & 0x40)) {
+    } else if ((held & 0x20) && (held & 0x40)) {
         work->angle = 0xE0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
-    } else if (a & 0x40) {
+    } else if (held & 0x40) {
         work->angle = 0;
-    } else if (a & 0x10) {
+    } else if (held & 0x10) {
         work->angle = 0x40;
         p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-    } else if (a & 0x80) {
+    } else if (held & 0x80) {
         work->angle = 0x80;
-    } else if (a & 0x20) {
+    } else if (held & 0x20) {
         work->angle = 0xC0;
         p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     }
 
-    if (a & 0xF0) {
+    if (held & 0xF0) {
         SetBtlRikuAnimation(work, 13, 1);
 
         if (work->anim.timer == 0) {
@@ -465,7 +465,7 @@ void UpdateBtlRikuDarkWalk(BtlRikuWork* work, u16 a) {
         SetBtlRikuAnimation(work, 12, 1);
     }
 
-    if (a & 0xF0) {
+    if (held & 0xF0) {
         if (p->btl->hcEffect == 50) {
             work->speed += 256;
 
@@ -658,8 +658,8 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     work->drawInfo[8] = work->drawInfo[0];
 }
 
-void SetBtlRikuState(BtlRikuWork* work, u32 a) {
-    work->state = a;
+void SetBtlRikuState(BtlRikuWork* work, u32 state) {
+    work->state = state;
     work->steps = 0;
     work->stateTimer = 0;
     ClearBtlObjActionFlags(&work->actor);
@@ -813,23 +813,23 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
     return e;
 }
 
-u16 SwapBtlRikuKeyBits(u16 a, u16 b, u16 c) {
+u16 SwapBtlRikuKeyBits(u16 keys, u16 bitA, u16 bitB) {
     u16 d;
 
-    d = b;
+    d = bitA;
 
-    if (a & b) {
-        if ((a & c) == 0) {
-            a &= ~b;
+    if (keys & bitA) {
+        if ((keys & bitB) == 0) {
+            keys &= ~bitA;
         }
 
-        a |= c;
-    } else if (a & c) {
-        a &= ~c;
-        a |= d;
+        keys |= bitB;
+    } else if (keys & bitB) {
+        keys &= ~bitB;
+        keys |= d;
     }
 
-    return a;
+    return keys;
 }
 
 void EndRikuDarkMode(BtlRikuWork* work) {
@@ -841,12 +841,12 @@ void EndRikuDarkMode(BtlRikuWork* work) {
     }
 }
 
-void AddDarkPoints(s16 a) {
+void AddDarkPoints(s16 points) {
     if (gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) {
         return;
     }
 
-    gBtlWork->darkPoints += a;
+    gBtlWork->darkPoints += points;
 
     if (gBtlWork->darkPoints < 0) {
         gBtlWork->darkPoints = 0;

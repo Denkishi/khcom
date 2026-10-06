@@ -7,6 +7,6 @@
 struct FrdDonaldWork;
 
 u8 FrdDonaldApplyGravity(struct FrdDonaldWork* work);
-void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c);
+void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz);
 
 #endif

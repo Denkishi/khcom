@@ -100,7 +100,7 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     gBtlWork->pendingEnemies--;
 }
 
-s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 g, s16 h, u16 i) {
+s16 EmyLungeAttack(EmyWork* work, s16 delay, s16 duration, s16 recovery, s32 attack, s16 distance, u16 song, s16 dx, s16 dz, u16 halfSize) {
     BtlObj* actor = &work->actor;
     s32 ret;
     s32 v;
@@ -113,15 +113,15 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
         work->flags &= ~EMY_FLAG_LUNGE_HIT;
     }
 
-    if (work->stateTimer >= a) {
-        if (work->stateTimer < a + b) {
-            steps = (a + b) - work->stateTimer;
+    if (work->stateTimer >= delay) {
+        if (work->stateTimer < delay + duration) {
+            steps = (delay + duration) - work->stateTimer;
             target = actor->originY;
 
             if (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT) {
-                v = actor->originX - (e << 8);
+                v = actor->originX - (distance << 8);
             } else {
-                v = actor->originX + (e << 8);
+                v = actor->originX + (distance << 8);
             }
 
             if (actor->badStatus != BAD_STATUS_BIND) {
@@ -131,20 +131,20 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
 
             if (!(work->flags & EMY_FLAG_LUNGE_HIT)) {
                 if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    if (ApplyAttackBox(d, actor->x - (g << 8), actor->y, actor->z + (h << 8), i, i / 2, i) != 0) {
-                        m4aSongNumStart(f);
+                    if (ApplyAttackBox(attack, actor->x - (dx << 8), actor->y, actor->z + (dz << 8), halfSize, halfSize / 2, halfSize) != 0) {
+                        m4aSongNumStart(song);
                         work->flags |= EMY_FLAG_LUNGE_HIT;
                         ret = 1;
                     }
                 } else {
-                    if (ApplyAttackBox(d, actor->x + (g << 8), actor->y, actor->z + (h << 8), i, i / 2, i) != 0) {
-                        m4aSongNumStart(f);
+                    if (ApplyAttackBox(attack, actor->x + (dx << 8), actor->y, actor->z + (dz << 8), halfSize, halfSize / 2, halfSize) != 0) {
+                        m4aSongNumStart(song);
                         ret = 1;
                         work->flags |= EMY_FLAG_LUNGE_HIT;
                     }
                 }
             }
-        } else if (work->stateTimer > a + b + c) {
+        } else if (work->stateTimer > delay + duration + recovery) {
             EmyReturnToIdle(work);
             return 2;
         }

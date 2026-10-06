@@ -843,7 +843,7 @@ void HandleYesAnswerAfterEvent() {
 
     switch (sEventId) {
     case EVENT_068_13F_CASTLE_OBLIVION_LAST3:
-        ModeRequest(&gModeEvent, 69);
+        ModeRequest(&gModeEvent, EVENT_069_13F_CASTLE_OBLIVION_LAST4);
         break;
     case EVENT_083_MONSTORO_E3_FAILURE_1:
     case EVENT_084_MONSTORO_E3_FAILURE_2:

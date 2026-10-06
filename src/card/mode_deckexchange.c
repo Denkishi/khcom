@@ -35,7 +35,7 @@ static u8 sModeDeckExchangeResult;
 #ifndef VERSION_EU
 void Mode_DeckExchange_0() {
     sModeDeckExchangeResult = DECK_MENU_RESULT_NONE;
-    gSioTradeCardId = 2048;
+    gSioTradeCardId = SIO_TRADE_CARD_NONE;
     TaskPoolInit(&sModeDeckExchangeTasks, 1);
     TaskCreate(&sModeDeckExchangeTasks, &gTaskDescDeckexchange, &sModeDeckExchangeResult);
 }

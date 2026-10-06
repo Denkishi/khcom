@@ -24,6 +24,7 @@
 #include "card_deckmenu2.h"
 #include "card_ids.h"
 #include "jiminy_records_index_data.h"
+#include "card_map_anim.h"
 
 Deck gDecks[3] EWRAM_COMMON(16);
 
@@ -243,7 +244,7 @@ void ObtainCardIntoActiveDeck(u16 cardId) {
 
     if (gCardDefs[cardId].value + GetDeckCpCost(GetActiveDeckIndex()) <=
             gGameState.progression.cp &&
-        card != -1) {
+        card != CARD_NOT_ADDED) {
         AddCardToActiveDeck(card);
     }
 }
@@ -280,19 +281,19 @@ s16 AddCardToCollection(u16 cardId) {
     i = 0;
 
     if (CountCardsById(cardId) > 98) {
-        return -1;
+        return CARD_NOT_ADDED;
     }
 
     while (gCardCollection[i] != CARD_ID_MASK) {
         i++;
 
         if (i == gCardCount) {
-            return -1;
+            return CARD_NOT_ADDED;
         }
     }
 
     if (gCardDefs[cardId & CARD_ID_MASK].flags & CARD_DEF_FLAG_FRIEND) {
-        return -1;
+        return CARD_NOT_ADDED;
     }
 
     gCardCollection[i] = cardId;
@@ -617,7 +618,7 @@ s16 ObtainCard(u16 cardId) {
     u16 i = 0;
 
     if (CountCardsById(cardId) > 98) {
-        return -1;
+        return CARD_NOT_ADDED;
     }
 
     ExpandCardCollectionForNewCard(cardId);
@@ -626,12 +627,12 @@ s16 ObtainCard(u16 cardId) {
         i++;
 
         if (i == gCardCount) {
-            return -1;
+            return CARD_NOT_ADDED;
         }
     }
 
     if (gCardDefs[cardId & CARD_ID_MASK].flags & CARD_DEF_FLAG_FRIEND) {
-        return -1;
+        return CARD_NOT_ADDED;
     }
 
     gCardCollection[i] = cardId;

@@ -210,8 +210,8 @@ void CreateCardBattleState() {
     gCardBattleState->pickedGimmickCardId = 950;
     gCardBattleState->unk_0C0 = 0;
     gCardBattleState->activeValue = 0;
-    gCardBattleState->soraStockName = 106;
-    gCardBattleState->rikuStockName = 106;
+    gCardBattleState->soraStockName = STOCK_NONE;
+    gCardBattleState->rikuStockName = STOCK_NONE;
     gCardBattleState->unk_0C8 = 256;
     gCardBattleState->unk_0CA = 256;
     gCardBattleState->soraHcEffect = HC_EFFECT_NONE;
@@ -1235,28 +1235,28 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                     stockName = LookupStockPairName(&cards, output, work->stockCount);
 
                     switch (stockName) {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 11:
-                    case 15:
-                    case 17:
-                    case 19:
-                    case 21:
-                    case 23:
-                    case 25:
-                    case 27:
-                    case 29:
-                    case 31:
-                    case 33:
-                    case 35:
-                    case 37:
-                    case 39:
-                    case 41:
-                    case 43:
-                    case 44:
+                    case STOCK_FIRA:
+                    case STOCK_BLIZZARA:
+                    case STOCK_THUNDARA:
+                    case STOCK_CURA:
+                    case STOCK_STOPRA:
+                    case STOCK_GRAVIRA:
+                    case STOCK_GOOFY_CHARGE:
+                    case STOCK_MAGIC_PAIR:
+                    case STOCK_PROUD_ROAR_PAIR:
+                    case STOCK_SHOWTIME_PAIR:
+                    case STOCK_PARADISE_PAIR:
+                    case STOCK_SPLASH_PAIR:
+                    case STOCK_TWINKLE_PAIR:
+                    case STOCK_FLARE_BREATH_PAIR:
+                    case STOCK_CROSS_SLASH:
+                    case STOCK_SANDSTORM_PAIR:
+                    case STOCK_SPIRAL_WAVE_PAIR:
+                    case STOCK_SURPRISE_PAIR:
+                    case STOCK_HUMMINGBIRD_PAIR:
+                    case STOCK_FEROCIOUS_LUNGE_PAIR:
+                    case STOCK_MM_MIRACLE_PAIR:
+                    case STOCK_AERORA:
                         gCardBattleState->soraStockName = stockName;
                         found = 1;
                         break;

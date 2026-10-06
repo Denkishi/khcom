@@ -909,149 +909,149 @@ void* LoadStockNameTiles(u16 stock) {
 s32 GetStatusItemStockIndex(s32 item) {
     switch (item) {
     case 1:
-        return 46;
+        return STOCK_BLITZ;
     case 5:
-        return 5;
+        return STOCK_SONIC_BLADE;
     case 6:
-        return 47;
+        return STOCK_ARS_ARCANUM;
     case 4:
-        return 6;
+        return STOCK_STRIKE_RAID;
     case 7:
-        return 48;
+        return STOCK_RAGNAROK;
     case 8:
-        return 49;
+        return STOCK_TRINITY_LIMIT;
     case 0:
-        return 50;
+        return STOCK_SLIDING_DASH;
     case 2:
-        return 51;
+        return STOCK_STUN_IMPACT;
     case 3:
-        return 52;
+        return STOCK_ZANTETSUKEN;
     case 39:
-        return 53;
+        return STOCK_WARP;
     case 38:
-        return 54;
+        return STOCK_WARPINATOR;
     case 42:
-        return 55;
+        return STOCK_TERROR;
     case 41:
-        return 56;
+        return STOCK_CONFUSE;
     case 70:
-        return 57;
+        return STOCK_SLEIGHT_57;
     case 27:
-        return 58;
+        return STOCK_STOP_RAID;
     case 28:
-        return 59;
+        return STOCK_JUDGMENT;
     case 29:
-        return 60;
+        return STOCK_REFLECT_RAID;
     case 23:
-        return 61;
+        return STOCK_FIRE_RAID;
     case 24:
-        return 62;
+        return STOCK_BLIZZARD_RAID;
     case 25:
-        return 63;
+        return STOCK_THUNDER_RAID;
     case 26:
-        return 64;
+        return STOCK_GRAVITY_RAID;
     case 34:
-        return 65;
+        return STOCK_AQUA_SPLASH;
     case 46:
-        return 66;
+        return STOCK_HOLY;
     case 58:
-        return 67;
+        return STOCK_BLAZING_DONALD;
     case 71:
-        return 68;
+        return STOCK_SLEIGHT_68;
     case 44:
-        return 69;
+        return STOCK_GIFTED_MIRACLE;
     case 32:
-        return 70;
+        return STOCK_MEGA_FLARE;
     case 31:
-        return 71;
+        return STOCK_FIRAGA_BREAK;
     case 35:
-        return 72;
+        return STOCK_SHOCK_IMPACT;
     case 50:
-        return 73;
+        return STOCK_IDYLL_ROMP;
     case 56:
-        return 74;
+        return STOCK_CROSS_SLASH_PLUS;
     case 30:
-        return 75;
+        return STOCK_HOMING_FIRA;
     case 33:
-        return 76;
+        return STOCK_HOMING_BLIZZARA;
     case 43:
-        return 77;
+        return STOCK_SYNCHRO;
     case 40:
-        return 78;
+        return STOCK_BIND;
     case 36:
-        return 79;
+        return STOCK_TORNADO;
     case 37:
-        return 80;
+        return STOCK_QUAKE;
     case 45:
-        return 81;
+        return STOCK_TELEPORT;
     case 9:
-        return 0;
+        return STOCK_FIRA;
     case 11:
-        return 1;
+        return STOCK_BLIZZARA;
     case 13:
-        return 2;
+        return STOCK_THUNDARA;
     case 15:
-        return 3;
+        return STOCK_CURA;
     case 17:
-        return 11;
+        return STOCK_GRAVIRA;
     case 19:
-        return 4;
+        return STOCK_STOPRA;
     case 21:
-        return 44;
+        return STOCK_AERORA;
     case 10:
-        return 7;
+        return STOCK_FIRAGA;
     case 12:
-        return 8;
+        return STOCK_BLIZZAGA;
     case 14:
-        return 9;
+        return STOCK_THUNDAGA;
     case 16:
-        return 10;
+        return STOCK_CURAGA;
     case 18:
-        return 12;
+        return STOCK_GRAVIGA;
     case 20:
-        return 13;
+        return STOCK_STOPGA;
     case 22:
-        return 45;
+        return STOCK_AEROGA;
     case 47:
-        return 18;
+        return STOCK_PROUD_ROAR;
     case 52:
-        return 20;
+        return STOCK_SHOWTIME;
     case 53:
-        return 26;
+        return STOCK_TWINKLE;
     case 51:
-        return 28;
+        return STOCK_FLARE_BREATH;
     case 55:
-        return 30;
+        return STOCK_OMNISLASH;
     case 49:
-        return 22;
+        return STOCK_PARADISE;
     case 48:
-        return 24;
+        return STOCK_SPLASH;
     case 57:
-        return 16;
+        return STOCK_MAGIC;
     case 59:
-        return 15;
+        return STOCK_GOOFY_CHARGE;
     case 60:
-        return 14;
+        return STOCK_GOOFY_TORNADO;
     case 61:
-        return 32;
+        return STOCK_SANDSTORM;
     case 62:
-        return 36;
+        return STOCK_SURPRISE;
     case 63:
-        return 34;
+        return STOCK_SPIRAL_WAVE;
     case 64:
-        return 38;
+        return STOCK_HUMMINGBIRD;
     case 65:
-        return 40;
+        return STOCK_FEROCIOUS_LUNGE;
     case 66:
-        return 82;
+        return STOCK_DARK_BREAK;
     case 67:
-        return 83;
+        return STOCK_DARK_FIRAGA;
     case 68:
-        return 84;
+        return STOCK_DARK_AURA;
     case 54:
-        return 31;
+        return STOCK_CROSS_SLASH;
     case 69:
-        return 42;
+        return STOCK_MM_MIRACLE;
     case 72:
         return 0xFFFF;
     }

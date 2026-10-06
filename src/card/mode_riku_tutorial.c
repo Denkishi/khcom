@@ -153,7 +153,7 @@ s32 ResolveActiveCardsMove(s32* out) {
         stockName = LookupStockName(gCardBattleState->activeCards, gCardBattleState->activeCardCount, gCardBattleState->activeValue, &stockKeys, &flag);
 
         switch (stockName) {
-        case 108:
+        case STOCK_DARK_MODE:
             gCardBattleState->stockMoveCount = 1;
             return 46;
         default:
@@ -176,7 +176,7 @@ s32 ResolveActiveCardsMove(s32* out) {
                     return GetStockMove(stockName);
                 }
             }
-        case 106:
+        case STOCK_NONE:
 #ifndef VERSION_EU
             if (out != NULL) {
 #endif
@@ -329,7 +329,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
         stockName = LookupLinkStockName(gCardBattleState->activeCards, gCardBattleState->activeCardCount, gCardBattleState->activeValue, &stockKeys, &flag, side);
 
         switch (stockName) {
-        case 108:
+        case STOCK_DARK_MODE:
             gCardBattleState->stockMoveCount = 1;
             return 46;
         default:
@@ -350,7 +350,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
                     return GetStockMove(stockName);
                 }
             }
-        case 106:
+        case STOCK_NONE:
 #ifndef VERSION_EU
             if (out != NULL) {
 #endif
@@ -499,217 +499,217 @@ u8 FindStockPairsInCombo(s32* keys, u8* found) {
 
 s32 GetStockMove(s32 stock) {
     switch (stock) {
-    case 0:
+    case STOCK_FIRA:
         return 0x8002ACAB;
-    case 1:
+    case STOCK_BLIZZARA:
         return 0x8002D4B5;
-    case 2:
+    case STOCK_THUNDARA:
         return 0x8002FCBF;
-    case 3:
+    case STOCK_CURA:
         return 0x800324C9;
-    case 11:
+    case STOCK_GRAVIRA:
         return 0x80034CD3;
-    case 4:
+    case STOCK_STOPRA:
         return 0x800374DD;
-    case 5:
+    case STOCK_SONIC_BLADE:
         return 0xC0100401;
-    case 6:
+    case STOCK_STRIKE_RAID:
         return 0x64;
-    case 7:
+    case STOCK_FIRAGA:
         return 0xCAB2ACAB;
-    case 8:
+    case STOCK_BLIZZAGA:
         return 0xCB52D4B5;
-    case 9:
+    case STOCK_THUNDAGA:
         return 0xCBF2FCBF;
-    case 10:
+    case STOCK_CURAGA:
         return 0xCC9324C9;
-    case 13:
+    case STOCK_STOPGA:
         return 0xCDD374DD;
-    case 12:
+    case STOCK_GRAVIGA:
         return 0xCD334CD3;
-    case 14:
+    case STOCK_GOOFY_TORNADO:
         return 0xCFB3ECFB;
-    case 15:
+    case STOCK_GOOFY_CHARGE:
         return 0x8003ECFB;
-    case 16:
+    case STOCK_MAGIC:
         return 0xCF13C4F1;
-    case 17:
+    case STOCK_MAGIC_PAIR:
         return 0x8003C4F1;
-    case 18:
+    case STOCK_PROUD_ROAR:
         return 0xD0541505;
-    case 19:
+    case STOCK_PROUD_ROAR_PAIR:
         return 0x80041505;
-    case 20:
+    case STOCK_SHOWTIME:
         return 0xD0F43D0F;
-    case 21:
+    case STOCK_SHOWTIME_PAIR:
         return 0x80043D0F;
-    case 22:
+    case STOCK_PARADISE:
         return 0xD1946519;
-    case 23:
+    case STOCK_PARADISE_PAIR:
         return 0x80046519;
-    case 24:
+    case STOCK_SPLASH:
         return 0xD2348D23;
-    case 25:
+    case STOCK_SPLASH_PAIR:
         return 0x80048D23;
-    case 26:
+    case STOCK_TWINKLE:
         return 0xD2D4B52D;
-    case 27:
+    case STOCK_TWINKLE_PAIR:
         return 0x8004B52D;
-    case 28:
+    case STOCK_FLARE_BREATH:
         return 0xD374DD37;
-    case 29:
+    case STOCK_FLARE_BREATH_PAIR:
         return 0x8004DD37;
-    case 30:
+    case STOCK_OMNISLASH:
         return 0xD4150541;
-    case 31:
+    case STOCK_CROSS_SLASH:
         return 0x80050541;
-    case 32:
+    case STOCK_SANDSTORM:
         return 0xD4B52D4B;
-    case 33:
+    case STOCK_SANDSTORM_PAIR:
         return 0x80052D4B;
-    case 34:
+    case STOCK_SPIRAL_WAVE:
         return 0xD5555555;
-    case 35:
+    case STOCK_SPIRAL_WAVE_PAIR:
         return 0x80055555;
-    case 36:
+    case STOCK_SURPRISE:
         return 0xD5F57D5F;
-    case 37:
+    case STOCK_SURPRISE_PAIR:
         return 0x80057D5F;
-    case 38:
+    case STOCK_HUMMINGBIRD:
         return 0xD695A569;
-    case 39:
+    case STOCK_HUMMINGBIRD_PAIR:
         return 0x8005A569;
-    case 40:
+    case STOCK_FEROCIOUS_LUNGE:
         return 0xD735CD73;
-    case 41:
+    case STOCK_FEROCIOUS_LUNGE_PAIR:
         return 0x8005CD73;
-    case 42:
+    case STOCK_MM_MIRACLE:
         return 0xE9FA7E9F;
-    case 43:
+    case STOCK_MM_MIRACLE_PAIR:
         return 0x800A7E9F;
-    case 44:
+    case STOCK_AERORA:
         return 0x80039CE7;
-    case 45:
+    case STOCK_AEROGA:
         return 0xCE739CE7;
-    case 46:
+    case STOCK_BLITZ:
         return 0x65;
-    case 47:
+    case STOCK_ARS_ARCANUM:
         return 0x66;
-    case 48:
+    case STOCK_RAGNAROK:
         return 0x67;
-    case 49:
+    case STOCK_TRINITY_LIMIT:
         return 0x68;
-    case 50:
+    case STOCK_SLIDING_DASH:
         return 0x69;
-    case 51:
+    case STOCK_STUN_IMPACT:
         return 0x6A;
-    case 52:
+    case STOCK_ZANTETSUKEN:
         return 0x6B;
-    case 53:
+    case STOCK_WARP:
         return 0x6C;
-    case 54:
+    case STOCK_WARPINATOR:
         return 0x6D;
-    case 55:
+    case STOCK_TERROR:
         return 0x6E;
-    case 56:
+    case STOCK_CONFUSE:
         return 0x6F;
-    case 57:
+    case STOCK_SLEIGHT_57:
         return 0x70;
-    case 58:
+    case STOCK_STOP_RAID:
         return 0x71;
-    case 59:
+    case STOCK_JUDGMENT:
         return 0x72;
-    case 60:
+    case STOCK_REFLECT_RAID:
         return 0x73;
-    case 61:
+    case STOCK_FIRE_RAID:
         return 0x74;
-    case 62:
+    case STOCK_BLIZZARD_RAID:
         return 0x75;
-    case 63:
+    case STOCK_THUNDER_RAID:
         return 0x76;
-    case 64:
+    case STOCK_GRAVITY_RAID:
         return 0x77;
-    case 65:
+    case STOCK_AQUA_SPLASH:
         return 0x78;
-    case 66:
+    case STOCK_HOLY:
         return 0x79;
-    case 67:
+    case STOCK_BLAZING_DONALD:
         return 0x7A;
-    case 69:
+    case STOCK_GIFTED_MIRACLE:
         return 0x7C;
-    case 70:
+    case STOCK_MEGA_FLARE:
         return 0x7D;
-    case 71:
+    case STOCK_FIRAGA_BREAK:
         return 0x7E;
-    case 72:
+    case STOCK_SHOCK_IMPACT:
         return 0x7F;
-    case 73:
+    case STOCK_IDYLL_ROMP:
         return 0x80;
-    case 74:
+    case STOCK_CROSS_SLASH_PLUS:
         return 0x81;
-    case 75:
+    case STOCK_HOMING_FIRA:
         return 0x82;
-    case 76:
+    case STOCK_HOMING_BLIZZARA:
         return 0x83;
-    case 77:
+    case STOCK_SYNCHRO:
         return 0x84;
-    case 78:
+    case STOCK_BIND:
         return 0x85;
-    case 79:
+    case STOCK_TORNADO:
         return 0x86;
-    case 80:
+    case STOCK_QUAKE:
         return 0x87;
-    case 81:
+    case STOCK_TELEPORT:
         return 0x88;
-    case 82:
+    case STOCK_DARK_BREAK:
         return 0x89;
-    case 83:
+    case STOCK_DARK_FIRAGA:
         return 0x8A;
-    case 84:
+    case STOCK_DARK_AURA:
         return 0x8B;
-    case 108:
+    case STOCK_DARK_MODE:
         return 0x2E;
-    case 85:
+    case STOCK_FIRE_WALL:
         return 0xF21C8721;
-    case 86:
+    case STOCK_CROSS_SLASH_2:
         return 0xEB3ACEB3;
-    case 87:
+    case STOCK_OMNISLASH_2:
         return 0xEB3AA6B3;
-    case 88:
+    case STOCK_TEMPER_FLARE:
         return 0xEE5B96E5;
-    case 89:
+    case STOCK_FIRAGA_BALL:
         return 0xEEFB96EF;
-    case 90:
+    case STOCK_LIGHTNING_BOLT:
         return 0xF49D2735;
-    case 91:
+    case STOCK_COMBO_PRESENT:
         return 0xED1AF6BD;
-    case 92:
+    case STOCK_RUSH_PRESENT:
         return 0xED1B1EC7;
-    case 93:
+    case STOCK_DARK_FIRAGA_2:
         return 0xF0DBE6F9;
-    case 94:
+    case STOCK_FREEZE:
         return 0xF53D7753;
-    case 95:
+    case STOCK_DIAMOND_DUST:
         return 0xF53D4F5D;
-    case 96:
+    case STOCK_ICEBURN:
         return 0xF5DD4F53;
-    case 97:
+    case STOCK_DARK_AURA_2:
         return 0xF17C0F03;
-    case 98:
+    case STOCK_TELEPORT_RUSH:
         return 0xF35CFF3F;
-    case 99:
+    case STOCK_FIRETOOTH:
         return 0xF21CAF21;
-    case 100:
+    case STOCK_BLOSSOM_SHOWER:
         return 0xF71D9F71;
-    case 101:
+    case STOCK_DEATHSCYTHE:
         return 0xF7BDC767;
-    case 102:
+    case STOCK_ROCKSHATTER:
         return 0xFADEB7A3;
-    case 103:
+    case STOCK_DARK_SHADOW:
         return 0xFA3EB7A3;
-    case 104:
+    case STOCK_ROCKSHATTER_2:
         return 0xF85E3F85;
-    case 105:
+    case STOCK_ICE_NEEDLES:
         return 0xF53D4F53;
     }
 }
@@ -754,7 +754,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
         if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
             gCardBattleState->darkModeReady = 0;
-            return 108;
+            return STOCK_DARK_MODE;
         }
     }
 
@@ -762,49 +762,49 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
 
     switch (key) {
     case 0x8002ACAB:
-        return 0;
+        return STOCK_FIRA;
     case 0x8002FCBF:
-        return 2;
+        return STOCK_THUNDARA;
     case 0x8002D4B5:
-        return 1;
+        return STOCK_BLIZZARA;
     case 0x800324C9:
-        return 3;
+        return STOCK_CURA;
     case 0x80034CD3:
-        return 11;
+        return STOCK_GRAVIRA;
     case 0x800374DD:
-        return 4;
+        return STOCK_STOPRA;
     case 0x80039CE7:
-        return 44;
+        return STOCK_AERORA;
     case 0x8003ECFB:
-        return 15;
+        return STOCK_GOOFY_CHARGE;
     case 0x8003C4F1:
-        return 17;
+        return STOCK_MAGIC_PAIR;
     case 0x80041505:
-        return 19;
+        return STOCK_PROUD_ROAR_PAIR;
     case 0x80043D0F:
-        return 21;
+        return STOCK_SHOWTIME_PAIR;
     case 0x80046519:
-        return 23;
+        return STOCK_PARADISE_PAIR;
     case 0x80048D23:
-        return 25;
+        return STOCK_SPLASH_PAIR;
     case 0x8004B52D:
-        return 27;
+        return STOCK_TWINKLE_PAIR;
     case 0x8004DD37:
-        return 29;
+        return STOCK_FLARE_BREATH_PAIR;
     case 0x80050541:
-        return 31;
+        return STOCK_CROSS_SLASH;
     case 0x80052D4B:
-        return 33;
+        return STOCK_SANDSTORM_PAIR;
     case 0x80055555:
-        return 35;
+        return STOCK_SPIRAL_WAVE_PAIR;
     case 0x80057D5F:
-        return 37;
+        return STOCK_SURPRISE_PAIR;
     case 0x8005A569:
-        return 39;
+        return STOCK_HUMMINGBIRD_PAIR;
     case 0x8005CD73:
-        return 41;
+        return STOCK_FEROCIOUS_LUNGE_PAIR;
     case 0x800A7E9F:
-        return 43;
+        return STOCK_MM_MIRACLE_PAIR;
     case 0xC0100401:
     case 0xC0B02C0B:
     case 0xC1505415:
@@ -823,292 +823,292 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
     case 0xC9725C97:
     case 0xCA1284A1:
         if ((u16)(value - 10) <= 5 && IsStockLearned(0)) {
-            stockKeys->keys[0] = 50;
-            return 50;
+            stockKeys->keys[0] = STOCK_SLIDING_DASH;
+            return STOCK_SLIDING_DASH;
         }
 
         if ((u16)(value - 20) <= 3 && IsStockLearned(2)) {
-            stockKeys->keys[0] = 51;
-            return 51;
+            stockKeys->keys[0] = STOCK_STUN_IMPACT;
+            return STOCK_STUN_IMPACT;
         }
 
         break;
     case 0xCAB2ACAB:
-        return 7;
+        return STOCK_FIRAGA;
     case 0xCB52D4B5:
-        return 8;
+        return STOCK_BLIZZAGA;
     case 0xCBF2FCBF:
-        return 9;
+        return STOCK_THUNDAGA;
     case 0xCC9324C9:
-        return 10;
+        return STOCK_CURAGA;
     case 0xCD334CD3:
-        return 12;
+        return STOCK_GRAVIGA;
     case 0xCDD374DD:
-        return 13;
+        return STOCK_STOPGA;
     case 0xCE739CE7:
-        return 45;
+        return STOCK_AEROGA;
     case 0xCFB3ECFB:
-        return 14;
+        return STOCK_GOOFY_TORNADO;
     case 0xCF13C4F1:
-        return 16;
+        return STOCK_MAGIC;
     case 0xD0541505:
-        return 18;
+        return STOCK_PROUD_ROAR;
     case 0xD0F43D0F:
-        return 20;
+        return STOCK_SHOWTIME;
     case 0xD1946519:
-        return 22;
+        return STOCK_PARADISE;
     case 0xD2348D23:
-        return 24;
+        return STOCK_SPLASH;
     case 0xD2D4B52D:
-        return 26;
+        return STOCK_TWINKLE;
     case 0xD374DD37:
-        return 28;
+        return STOCK_FLARE_BREATH;
     case 0xD4150541:
-        return 30;
+        return STOCK_OMNISLASH;
     case 0xD4B52D4B:
-        return 32;
+        return STOCK_SANDSTORM;
     case 0xD5555555:
-        return 34;
+        return STOCK_SPIRAL_WAVE;
     case 0xD5F57D5F:
-        return 36;
+        return STOCK_SURPRISE;
     case 0xD695A569:
-        return 38;
+        return STOCK_HUMMINGBIRD;
     case 0xD735CD73:
-        return 40;
+        return STOCK_FEROCIOUS_LUNGE;
     case 0xE9FA7E9F:
-        return 42;
+        return STOCK_MM_MIRACLE;
     case 0xCE739CDD:
         if (IsStockLearned(39)) {
-            return 53;
+            return STOCK_WARP;
         }
 
         break;
     case 0xCE734CDD:
         if (IsStockLearned(38)) {
-            return 54;
+            return STOCK_WARPINATOR;
         }
 
         break;
     case 0xCE72ACB5:
         if (IsStockLearned(34)) {
-            return 65;
+            return STOCK_AQUA_SPLASH;
         }
 
         break;
     case 0xCAB2AD37:
         if (IsStockLearned(32)) {
-            return 70;
+            return STOCK_MEGA_FLARE;
         }
 
         break;
     case 0xCE734CC9:
         if (IsStockLearned(43)) {
-            return 77;
+            return STOCK_SYNCHRO;
         }
 
         break;
     case 0xE95A5695:
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
             if ((u16)(value - 5) <= 10) {
-                return 82;
+                return STOCK_DARK_BREAK;
             }
 
             if ((u16)(value - 16) <= 9) {
-                return 83;
+                return STOCK_DARK_FIRAGA;
             }
 
             if (value > 26) {
-                return 84;
+                return STOCK_DARK_AURA;
             }
         }
 
         break;
     case 0xF21C8721:
-        return 85;
+        return STOCK_FIRE_WALL;
     case 0xEB3ACEB3:
-        return 86;
+        return STOCK_CROSS_SLASH_2;
     case 0xEB3AA6B3:
-        return 87;
+        return STOCK_OMNISLASH_2;
     case 0xEE5B96E5:
-        return 88;
+        return STOCK_TEMPER_FLARE;
     case 0xEEFB96EF:
-        return 89;
+        return STOCK_FIRAGA_BALL;
     case 0xF49D2735:
-        return 90;
+        return STOCK_LIGHTNING_BOLT;
     case 0xED1AF6BD:
-        return 91;
+        return STOCK_COMBO_PRESENT;
     case 0xED1B1EC7:
-        return 92;
+        return STOCK_RUSH_PRESENT;
     case 0xF0DBE6F9:
-        return 93;
+        return STOCK_DARK_FIRAGA_2;
     case 0xF53D7753:
-        return 94;
+        return STOCK_FREEZE;
     case 0xF53D4F5D:
-        return 95;
+        return STOCK_DIAMOND_DUST;
     case 0xF5DD4F53:
-        return 96;
+        return STOCK_ICEBURN;
     case 0xF17C0F03:
-        return 97;
+        return STOCK_DARK_AURA_2;
     case 0xF35CFF3F:
-        return 98;
+        return STOCK_TELEPORT_RUSH;
     case 0xF21CAF21:
-        return 99;
+        return STOCK_FIRETOOTH;
     case 0xF71D9F71:
-        return 100;
+        return STOCK_BLOSSOM_SHOWER;
     case 0xF7BDC767:
-        return 101;
+        return STOCK_DEATHSCYTHE;
     case 0xFADEB7A3:
-        return 102;
+        return STOCK_ROCKSHATTER;
     case 0xFA3EB7A3:
-        return 103;
+        return STOCK_DARK_SHADOW;
     case 0xF85E3F85:
-        return 104;
+        return STOCK_ROCKSHATTER_2;
     case 0xF53D4F53:
-        return 105;
+        return STOCK_ICE_NEEDLES;
     }
 
     if ((u8)IsTwoSummonsThenKind(cards, count, 43) || (u8)IsSimbaMushuItem(cards, count)) {
         if (IsStockLearned(42)) {
-            return 55;
+            return STOCK_TERROR;
         }
     }
 
     if ((u8)IsGenieTinkerBellSummon(cards, count) && IsStockLearned(41)) {
-        return 56;
+        return STOCK_CONFUSE;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 23, count) && IsStockLearned(27)) {
-        return 58;
+        return STOCK_STOP_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 24, count) && IsStockLearned(28)) {
-        return 59;
+        return STOCK_JUDGMENT;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 31, count) && IsStockLearned(29)) {
-        return 60;
+        return STOCK_REFLECT_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 18, count) && IsStockLearned(23)) {
-        return 61;
+        return STOCK_FIRE_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 19, count) && IsStockLearned(24)) {
-        return 62;
+        return STOCK_BLIZZARD_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 20, count) && IsStockLearned(25)) {
-        return 63;
+        return STOCK_THUNDER_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 22, count) && IsStockLearned(26)) {
-        return 64;
+        return STOCK_GRAVITY_RAID;
     }
 
     if ((u8)IsMegaEtherMegalixirItem(cards, count) && IsStockLearned(46)) {
-        return 66;
+        return STOCK_HOLY;
     }
 
     if ((u8)IsFireDonaldMagic(cards, count) && IsStockLearned(58)) {
-        return 67;
+        return STOCK_BLAZING_DONALD;
     }
 
     if ((u8)IsSummonMagicJackOrBambiBlizzardItem(cards, count) && IsStockLearned(44)) {
-        return 69;
+        return STOCK_GIFTED_MIRACLE;
     }
 
     if ((u8)IsFireMushuAttack(cards, count) && IsStockLearned(31)) {
-        return 71;
+        return STOCK_FIRAGA_BREAK;
     }
 
     if ((u8)IsKindThenTwoOfCategory(cards, 25, 0, count) && IsStockLearned(35)) {
-        return 72;
+        return STOCK_SHOCK_IMPACT;
     }
 
     if ((u8)IsKindThenTwoOfCategory(cards, 27, 0, count) && IsStockLearned(50)) {
-        return 73;
+        return STOCK_IDYLL_ROMP;
     }
 
     if ((u8)IsCloudStopAttack(cards, count) && IsStockLearned(56)) {
-        return 74;
+        return STOCK_CROSS_SLASH_PLUS;
     }
 
     if ((u8)IsAeroFireMagic(cards, count) && IsStockLearned(30)) {
-        return 75;
+        return STOCK_HOMING_FIRA;
     }
 
     if ((u8)IsAeroBlizzardMagic(cards, count) && IsStockLearned(33)) {
-        return 76;
+        return STOCK_HOMING_BLIZZARA;
     }
 
     if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 23, 1) && IsStockLearned(40)) {
-        return 78;
+        return STOCK_BIND;
     }
 
     if ((u8)IsKindPairThenSummon(cards, count, 24, 22) && IsStockLearned(36)) {
-        return 79;
+        return STOCK_TORNADO;
     }
 
     if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 25, 1) && IsStockLearned(37)) {
-        return 80;
+        return STOCK_QUAKE;
     }
 
     if ((u8)IsTwoMagicThenPeterPan(cards, count) && IsStockLearned(45)) {
-        return 81;
+        return STOCK_TELEPORT;
     }
 
     if ((u8)IsThreeDistinctAttackCards(cards, count)) {
         if ((u16)(value - 10) <= 5 && IsStockLearned(1)) {
-            stockKeys->keys[0] = 46;
-            return 46;
+            stockKeys->keys[0] = STOCK_BLITZ;
+            return STOCK_BLITZ;
         }
 
         if ((u16)(value - 20) <= 3 && IsStockLearned(5)) {
-            stockKeys->keys[0] = 5;
-            return 5;
+            stockKeys->keys[0] = STOCK_SONIC_BLADE;
+            return STOCK_SONIC_BLADE;
         }
     }
 
     if ((u8)IsThreeAttackCardsNoMove18(cards, count)) {
         if ((u16)(value - 1) <= 5 && IsStockLearned(6)) {
-            stockKeys->keys[0] = 47;
-            return 47;
+            stockKeys->keys[0] = STOCK_ARS_ARCANUM;
+            return STOCK_ARS_ARCANUM;
         }
 
         if ((u16)(value - 24) <= 2 && IsStockLearned(4)) {
-            stockKeys->keys[0] = 6;
-            return 6;
+            stockKeys->keys[0] = STOCK_STRIKE_RAID;
+            return STOCK_STRIKE_RAID;
         }
 
         if ((u16)(value - 7) <= 2 && IsStockLearned(7)) {
-            stockKeys->keys[0] = 48;
-            return 48;
+            stockKeys->keys[0] = STOCK_RAGNAROK;
+            return STOCK_RAGNAROK;
         }
 
         if (value == 0 || value == 27) {
             if (IsStockLearned(3)) {
-                stockKeys->keys[0] = 52;
-                return 52;
+                stockKeys->keys[0] = STOCK_ZANTETSUKEN;
+                return STOCK_ZANTETSUKEN;
             }
         }
     }
 
     if ((u8)IsAttackDonaldGoofyAnyOrder(cards, count) && IsStockLearned(8)) {
-        stockKeys->keys[0] = 49;
-        return 49;
+        stockKeys->keys[0] = STOCK_TRINITY_LIMIT;
+        return STOCK_TRINITY_LIMIT;
     }
 
     *flag = matchCount;
 
     if (matchCount == 0) {
-        return 106;
+        return STOCK_NONE;
     }
 
     if (matchCount == 1) {
         return stockKeys->keys[0];
     }
 
-    return 107;
+    return STOCK_MULTIPLE;
 }
 
 s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stockKeys, u8* flag, s32 side) {
@@ -1127,7 +1127,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
         if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
             gCardBattleState->darkModeReady = 0;
-            return 108;
+            return STOCK_DARK_MODE;
         }
     }
 
@@ -1135,49 +1135,49 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
 
     switch (key) {
     case 0x8002ACAB:
-        return 0;
+        return STOCK_FIRA;
     case 0x8002FCBF:
-        return 2;
+        return STOCK_THUNDARA;
     case 0x8002D4B5:
-        return 1;
+        return STOCK_BLIZZARA;
     case 0x800324C9:
-        return 3;
+        return STOCK_CURA;
     case 0x80034CD3:
-        return 11;
+        return STOCK_GRAVIRA;
     case 0x800374DD:
-        return 4;
+        return STOCK_STOPRA;
     case 0x80039CE7:
-        return 44;
+        return STOCK_AERORA;
     case 0x8003ECFB:
-        return 15;
+        return STOCK_GOOFY_CHARGE;
     case 0x8003C4F1:
-        return 17;
+        return STOCK_MAGIC_PAIR;
     case 0x80041505:
-        return 19;
+        return STOCK_PROUD_ROAR_PAIR;
     case 0x80043D0F:
-        return 21;
+        return STOCK_SHOWTIME_PAIR;
     case 0x80046519:
-        return 23;
+        return STOCK_PARADISE_PAIR;
     case 0x80048D23:
-        return 25;
+        return STOCK_SPLASH_PAIR;
     case 0x8004B52D:
-        return 27;
+        return STOCK_TWINKLE_PAIR;
     case 0x8004DD37:
-        return 29;
+        return STOCK_FLARE_BREATH_PAIR;
     case 0x80050541:
-        return 31;
+        return STOCK_CROSS_SLASH;
     case 0x80052D4B:
-        return 33;
+        return STOCK_SANDSTORM_PAIR;
     case 0x80055555:
-        return 35;
+        return STOCK_SPIRAL_WAVE_PAIR;
     case 0x80057D5F:
-        return 37;
+        return STOCK_SURPRISE_PAIR;
     case 0x8005A569:
-        return 39;
+        return STOCK_HUMMINGBIRD_PAIR;
     case 0x8005CD73:
-        return 41;
+        return STOCK_FEROCIOUS_LUNGE_PAIR;
     case 0x800A7E9F:
-        return 43;
+        return STOCK_MM_MIRACLE_PAIR;
     case 0xC0100401:
     case 0xC0B02C0B:
     case 0xC1505415:
@@ -1196,292 +1196,292 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
     case 0xC9725C97:
     case 0xCA1284A1:
         if ((u16)(value - 10) <= 5 && IsLinkSideStockLearned(0, side)) {
-            stockKeys->keys[0] = 50;
-            return 50;
+            stockKeys->keys[0] = STOCK_SLIDING_DASH;
+            return STOCK_SLIDING_DASH;
         }
 
         if ((u16)(value - 20) <= 3 && IsLinkSideStockLearned(2, side)) {
-            stockKeys->keys[0] = 51;
-            return 51;
+            stockKeys->keys[0] = STOCK_STUN_IMPACT;
+            return STOCK_STUN_IMPACT;
         }
 
         break;
     case 0xCAB2ACAB:
-        return 7;
+        return STOCK_FIRAGA;
     case 0xCB52D4B5:
-        return 8;
+        return STOCK_BLIZZAGA;
     case 0xCBF2FCBF:
-        return 9;
+        return STOCK_THUNDAGA;
     case 0xCC9324C9:
-        return 10;
+        return STOCK_CURAGA;
     case 0xCD334CD3:
-        return 12;
+        return STOCK_GRAVIGA;
     case 0xCDD374DD:
-        return 13;
+        return STOCK_STOPGA;
     case 0xCE739CE7:
-        return 45;
+        return STOCK_AEROGA;
     case 0xCFB3ECFB:
-        return 14;
+        return STOCK_GOOFY_TORNADO;
     case 0xCF13C4F1:
-        return 16;
+        return STOCK_MAGIC;
     case 0xD0541505:
-        return 18;
+        return STOCK_PROUD_ROAR;
     case 0xD0F43D0F:
-        return 20;
+        return STOCK_SHOWTIME;
     case 0xD1946519:
-        return 22;
+        return STOCK_PARADISE;
     case 0xD2348D23:
-        return 24;
+        return STOCK_SPLASH;
     case 0xD2D4B52D:
-        return 26;
+        return STOCK_TWINKLE;
     case 0xD374DD37:
-        return 28;
+        return STOCK_FLARE_BREATH;
     case 0xD4150541:
-        return 30;
+        return STOCK_OMNISLASH;
     case 0xD4B52D4B:
-        return 32;
+        return STOCK_SANDSTORM;
     case 0xD5555555:
-        return 34;
+        return STOCK_SPIRAL_WAVE;
     case 0xD5F57D5F:
-        return 36;
+        return STOCK_SURPRISE;
     case 0xD695A569:
-        return 38;
+        return STOCK_HUMMINGBIRD;
     case 0xD735CD73:
-        return 40;
+        return STOCK_FEROCIOUS_LUNGE;
     case 0xE9FA7E9F:
-        return 42;
+        return STOCK_MM_MIRACLE;
     case 0xCE739CDD:
         if (IsLinkSideStockLearned(39, side)) {
-            return 53;
+            return STOCK_WARP;
         }
 
         break;
     case 0xCE734CDD:
         if (IsLinkSideStockLearned(38, side)) {
-            return 54;
+            return STOCK_WARPINATOR;
         }
 
         break;
     case 0xCE72ACB5:
         if (IsLinkSideStockLearned(34, side)) {
-            return 65;
+            return STOCK_AQUA_SPLASH;
         }
 
         break;
     case 0xCAB2AD37:
         if (IsLinkSideStockLearned(32, side)) {
-            return 70;
+            return STOCK_MEGA_FLARE;
         }
 
         break;
     case 0xCE734CC9:
         if (IsLinkSideStockLearned(43, side)) {
-            return 77;
+            return STOCK_SYNCHRO;
         }
 
         break;
     case 0xE95A5695:
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
             if ((u16)(value - 5) <= 10) {
-                return 82;
+                return STOCK_DARK_BREAK;
             }
 
             if ((u16)(value - 16) <= 9) {
-                return 83;
+                return STOCK_DARK_FIRAGA;
             }
 
             if (value > 26) {
-                return 84;
+                return STOCK_DARK_AURA;
             }
         }
 
         break;
     case 0xF21C8721:
-        return 85;
+        return STOCK_FIRE_WALL;
     case 0xEB3ACEB3:
-        return 86;
+        return STOCK_CROSS_SLASH_2;
     case 0xEB3AA6B3:
-        return 87;
+        return STOCK_OMNISLASH_2;
     case 0xEE5B96E5:
-        return 88;
+        return STOCK_TEMPER_FLARE;
     case 0xEEFB96EF:
-        return 89;
+        return STOCK_FIRAGA_BALL;
     case 0xF49D2735:
-        return 90;
+        return STOCK_LIGHTNING_BOLT;
     case 0xED1AF6BD:
-        return 91;
+        return STOCK_COMBO_PRESENT;
     case 0xED1B1EC7:
-        return 92;
+        return STOCK_RUSH_PRESENT;
     case 0xF0DBE6F9:
-        return 93;
+        return STOCK_DARK_FIRAGA_2;
     case 0xF53D7753:
-        return 94;
+        return STOCK_FREEZE;
     case 0xF53D4F5D:
-        return 95;
+        return STOCK_DIAMOND_DUST;
     case 0xF5DD4F53:
-        return 96;
+        return STOCK_ICEBURN;
     case 0xF17C0F03:
-        return 97;
+        return STOCK_DARK_AURA_2;
     case 0xF35CFF3F:
-        return 98;
+        return STOCK_TELEPORT_RUSH;
     case 0xF21CAF21:
-        return 99;
+        return STOCK_FIRETOOTH;
     case 0xF71D9F71:
-        return 100;
+        return STOCK_BLOSSOM_SHOWER;
     case 0xF7BDC767:
-        return 101;
+        return STOCK_DEATHSCYTHE;
     case 0xFADEB7A3:
-        return 102;
+        return STOCK_ROCKSHATTER;
     case 0xFA3EB7A3:
-        return 103;
+        return STOCK_DARK_SHADOW;
     case 0xF85E3F85:
-        return 104;
+        return STOCK_ROCKSHATTER_2;
     case 0xF53D4F53:
-        return 105;
+        return STOCK_ICE_NEEDLES;
     }
 
     if ((u8)IsTwoSummonsThenKind(cards, count, 43) || (u8)IsSimbaMushuItem(cards, count)) {
         if (IsLinkSideStockLearned(42, side)) {
-            return 55;
+            return STOCK_TERROR;
         }
     }
 
     if ((u8)IsGenieTinkerBellSummon(cards, count) && IsLinkSideStockLearned(41, side)) {
-        return 56;
+        return STOCK_CONFUSE;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 23, count) && IsLinkSideStockLearned(27, side)) {
-        return 58;
+        return STOCK_STOP_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 24, count) && IsLinkSideStockLearned(28, side)) {
-        return 59;
+        return STOCK_JUDGMENT;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 31, count) && IsLinkSideStockLearned(29, side)) {
-        return 60;
+        return STOCK_REFLECT_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 18, count) && IsLinkSideStockLearned(23, side)) {
-        return 61;
+        return STOCK_FIRE_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 19, count) && IsLinkSideStockLearned(24, side)) {
-        return 62;
+        return STOCK_BLIZZARD_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 20, count) && IsLinkSideStockLearned(25, side)) {
-        return 63;
+        return STOCK_THUNDER_RAID;
     }
 
     if ((u8)IsKindThenTwoAttackCards(cards, 22, count) && IsLinkSideStockLearned(26, side)) {
-        return 64;
+        return STOCK_GRAVITY_RAID;
     }
 
     if ((u8)IsMegaEtherMegalixirItem(cards, count) && IsLinkSideStockLearned(46, side)) {
-        return 66;
+        return STOCK_HOLY;
     }
 
     if ((u8)IsFireDonaldMagic(cards, count) && IsLinkSideStockLearned(58, side)) {
-        return 67;
+        return STOCK_BLAZING_DONALD;
     }
 
     if ((u8)IsSummonMagicJackOrBambiBlizzardItem(cards, count) && IsLinkSideStockLearned(44, side)) {
-        return 69;
+        return STOCK_GIFTED_MIRACLE;
     }
 
     if ((u8)IsFireMushuAttack(cards, count) && IsLinkSideStockLearned(31, side)) {
-        return 71;
+        return STOCK_FIRAGA_BREAK;
     }
 
     if ((u8)IsKindThenTwoOfCategory(cards, 25, 0, count) && IsLinkSideStockLearned(35, side)) {
-        return 72;
+        return STOCK_SHOCK_IMPACT;
     }
 
     if ((u8)IsKindThenTwoOfCategory(cards, 27, 0, count) && IsLinkSideStockLearned(50, side)) {
-        return 73;
+        return STOCK_IDYLL_ROMP;
     }
 
     if ((u8)IsCloudStopAttack(cards, count) && IsLinkSideStockLearned(56, side)) {
-        return 74;
+        return STOCK_CROSS_SLASH_PLUS;
     }
 
     if ((u8)IsAeroFireMagic(cards, count) && IsLinkSideStockLearned(30, side)) {
-        return 75;
+        return STOCK_HOMING_FIRA;
     }
 
     if ((u8)IsAeroBlizzardMagic(cards, count) && IsLinkSideStockLearned(33, side)) {
-        return 76;
+        return STOCK_HOMING_BLIZZARA;
     }
 
     if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 23, 1) && IsLinkSideStockLearned(40, side)) {
-        return 78;
+        return STOCK_BIND;
     }
 
     if ((u8)IsKindPairThenSummon(cards, count, 24, 22) && IsLinkSideStockLearned(36, side)) {
-        return 79;
+        return STOCK_TORNADO;
     }
 
     if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 25, 1) && IsLinkSideStockLearned(37, side)) {
-        return 80;
+        return STOCK_QUAKE;
     }
 
     if ((u8)IsTwoMagicThenPeterPan(cards, count) && IsLinkSideStockLearned(45, side)) {
-        return 81;
+        return STOCK_TELEPORT;
     }
 
     if ((u8)IsThreeDistinctAttackCards(cards, count)) {
         if ((u16)(value - 10) <= 5 && IsLinkSideStockLearned(1, side)) {
-            stockKeys->keys[0] = 46;
-            return 46;
+            stockKeys->keys[0] = STOCK_BLITZ;
+            return STOCK_BLITZ;
         }
 
         if ((u16)(value - 20) <= 3 && IsLinkSideStockLearned(5, side)) {
-            stockKeys->keys[0] = 5;
-            return 5;
+            stockKeys->keys[0] = STOCK_SONIC_BLADE;
+            return STOCK_SONIC_BLADE;
         }
     }
 
     if ((u8)IsThreeAttackCardsNoMove18(cards, count)) {
         if ((u16)(value - 1) <= 5 && IsLinkSideStockLearned(6, side)) {
-            stockKeys->keys[0] = 47;
-            return 47;
+            stockKeys->keys[0] = STOCK_ARS_ARCANUM;
+            return STOCK_ARS_ARCANUM;
         }
 
         if ((u16)(value - 24) <= 2 && IsLinkSideStockLearned(4, side)) {
-            stockKeys->keys[0] = 6;
-            return 6;
+            stockKeys->keys[0] = STOCK_STRIKE_RAID;
+            return STOCK_STRIKE_RAID;
         }
 
         if ((u16)(value - 7) <= 2 && IsLinkSideStockLearned(7, side)) {
-            stockKeys->keys[0] = 48;
-            return 48;
+            stockKeys->keys[0] = STOCK_RAGNAROK;
+            return STOCK_RAGNAROK;
         }
 
         if (value == 0 || value == 27) {
             if (IsLinkSideStockLearned(3, side)) {
-                stockKeys->keys[0] = 52;
-                return 52;
+                stockKeys->keys[0] = STOCK_ZANTETSUKEN;
+                return STOCK_ZANTETSUKEN;
             }
         }
     }
 
     if ((u8)IsAttackDonaldGoofyAnyOrder(cards, count) && IsLinkSideStockLearned(8, side)) {
-        stockKeys->keys[0] = 49;
-        return 49;
+        stockKeys->keys[0] = STOCK_TRINITY_LIMIT;
+        return STOCK_TRINITY_LIMIT;
     }
 
     *flag = matchCount;
 
     if (matchCount == 0) {
-        return 106;
+        return STOCK_NONE;
     }
 
     if (matchCount == 1) {
         return stockKeys->keys[0];
     }
 
-    return 107;
+    return STOCK_MULTIPLE;
 }
 
 s32 IsThreeDistinctAttackCards(CardDisplayWork** cards, u8 count) {
@@ -1917,99 +1917,99 @@ s32 LookupStockPairName(StockKeys* cards, u8* output, u8 count) {
 
     switch ((catalogNumbers[1] << 10) | catalogNumbers[0] | 0x80000000) {
     case 0x8002ACAB:
-        return 0;
+        return STOCK_FIRA;
     case 0x8002D4B5:
-        return 1;
+        return STOCK_BLIZZARA;
     case 0x8002FCBF:
-        return 2;
+        return STOCK_THUNDARA;
     case 0x800324C9:
-        return 3;
+        return STOCK_CURA;
     case 0x80034CD3:
-        return 11;
+        return STOCK_GRAVIRA;
     case 0x800374DD:
-        return 4;
+        return STOCK_STOPRA;
     case 0x80039CE7:
-        return 44;
+        return STOCK_AERORA;
     case 0x8003ECFB:
-        return 15;
+        return STOCK_GOOFY_CHARGE;
     case 0x8003C4F1:
-        return 17;
+        return STOCK_MAGIC_PAIR;
     case 0x80041505:
-        return 19;
+        return STOCK_PROUD_ROAR_PAIR;
     case 0x80043D0F:
-        return 21;
+        return STOCK_SHOWTIME_PAIR;
     case 0x80046519:
-        return 23;
+        return STOCK_PARADISE_PAIR;
     case 0x80048D23:
-        return 25;
+        return STOCK_SPLASH_PAIR;
     case 0x8004B52D:
-        return 27;
+        return STOCK_TWINKLE_PAIR;
     case 0x8004DD37:
-        return 29;
+        return STOCK_FLARE_BREATH_PAIR;
     case 0x80050541:
-        return 31;
+        return STOCK_CROSS_SLASH;
     case 0x80052D4B:
-        return 33;
+        return STOCK_SANDSTORM_PAIR;
     case 0x80055555:
-        return 35;
+        return STOCK_SPIRAL_WAVE_PAIR;
     case 0x80057D5F:
-        return 37;
+        return STOCK_SURPRISE_PAIR;
     case 0x8005A569:
-        return 39;
+        return STOCK_HUMMINGBIRD_PAIR;
     case 0x8005CD73:
-        return 41;
+        return STOCK_FEROCIOUS_LUNGE_PAIR;
     case 0x800A7E9F:
-        return 43;
+        return STOCK_MM_MIRACLE_PAIR;
     }
 
     switch (catalogNumbers[1] | (catalogNumbers[2] << 10) | 0x80000000) {
     case 0x8002ACAB:
-        return 0;
+        return STOCK_FIRA;
     case 0x8002D4B5:
-        return 1;
+        return STOCK_BLIZZARA;
     case 0x8002FCBF:
-        return 2;
+        return STOCK_THUNDARA;
     case 0x800324C9:
-        return 3;
+        return STOCK_CURA;
     case 0x80034CD3:
-        return 11;
+        return STOCK_GRAVIRA;
     case 0x800374DD:
-        return 4;
+        return STOCK_STOPRA;
     case 0x80039CE7:
-        return 44;
+        return STOCK_AERORA;
     case 0x8003ECFB:
-        return 15;
+        return STOCK_GOOFY_CHARGE;
     case 0x8003C4F1:
-        return 17;
+        return STOCK_MAGIC_PAIR;
     case 0x80041505:
-        return 19;
+        return STOCK_PROUD_ROAR_PAIR;
     case 0x80043D0F:
-        return 21;
+        return STOCK_SHOWTIME_PAIR;
     case 0x80046519:
-        return 23;
+        return STOCK_PARADISE_PAIR;
     case 0x80048D23:
-        return 25;
+        return STOCK_SPLASH_PAIR;
     case 0x8004B52D:
-        return 27;
+        return STOCK_TWINKLE_PAIR;
     case 0x8004DD37:
-        return 29;
+        return STOCK_FLARE_BREATH_PAIR;
     case 0x80050541:
-        return 31;
+        return STOCK_CROSS_SLASH;
     case 0x80052D4B:
-        return 33;
+        return STOCK_SANDSTORM_PAIR;
     case 0x80055555:
-        return 35;
+        return STOCK_SPIRAL_WAVE_PAIR;
     case 0x80057D5F:
-        return 37;
+        return STOCK_SURPRISE_PAIR;
     case 0x8005A569:
-        return 39;
+        return STOCK_HUMMINGBIRD_PAIR;
     case 0x8005CD73:
-        return 41;
+        return STOCK_FEROCIOUS_LUNGE_PAIR;
     case 0x800A7E9F:
-        return 43;
+        return STOCK_MM_MIRACLE_PAIR;
     }
 
-    return 106;
+    return STOCK_NONE;
 }
 
 Mode gModeRikuBtlTutorial = {

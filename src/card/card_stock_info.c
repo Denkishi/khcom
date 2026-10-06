@@ -23,6 +23,7 @@
 #include "types.h"
 #include "card_stock_info.h"
 #include "sprite_palettes.h"
+#include "card_label_data.h"
 
 #if defined(VERSION_US)
 static const CardHelpDef sFiraHelpDef = {
@@ -1844,7 +1845,18 @@ const CardHelpText* gMmMiraclePairHelpTexts[] = {
 #endif
 
 static const u16 sLevelUpStockHelpIndices[12] = {
-    50, 51, 6, 46, 5, 52, 79, 47, 66, 48, 70, 0xFFFF,
+    STOCK_SLIDING_DASH,
+    STOCK_STUN_IMPACT,
+    STOCK_STRIKE_RAID,
+    STOCK_BLITZ,
+    STOCK_SONIC_BLADE,
+    STOCK_ZANTETSUKEN,
+    STOCK_TORNADO,
+    STOCK_ARS_ARCANUM,
+    STOCK_HOLY,
+    STOCK_RAGNAROK,
+    STOCK_MEGA_FLARE,
+    0xFFFF,
 };
 
 static const u16 sLevelUpStockLevels[12] = {

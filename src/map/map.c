@@ -2094,7 +2094,7 @@ u8 IsEventDoor(u8 room, u8 side) {
 
     door = GetMapEventDoor(0);
 
-    while (door->kind != 5) {
+    while (door->kind != EVENT_DOOR_END) {
         if (door->keyList != EVENT_KEY_LIST_NONE && door->room == room && door->side == side) {
             return 1;
         }
@@ -2116,7 +2116,7 @@ u8 SelectEventDoor(u8 room, u8 side) {
     i = 0;
     door = GetMapEventDoor(0);
 
-    while (door->kind != 5) {
+    while (door->kind != EVENT_DOOR_END) {
         if (door->keyList != EVENT_KEY_LIST_NONE && door->room == room && door->side == side) {
             sEventKeyList = &gEventKeyLists[door->keyList];
             sEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
@@ -2912,8 +2912,8 @@ void MapFldExitRoom() {
     gGameState.roomEffect = fading;
 
     switch (door->kind) {
-    case 1:
-    case 3:
+    case EVENT_DOOR_EVENT_ROOM:
+    case EVENT_DOOR_WALK_IN:
         if (roomEvent[1] == EVENT_081_MONSTORO_E3 && (gGameState.flags & GAME_FLAG_MONSGAGE_BATTLE)) {
             RequestEventMode(EVENT_085_MONSTORO_E3_RETRY);
         } else {
@@ -2921,11 +2921,11 @@ void MapFldExitRoom() {
         }
 
         break;
-    case 2:
+    case EVENT_DOOR_HIDDEN_CHAMBER:
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
         break;
-    case 4:
+    case EVENT_DOOR_BOSS_ROOM:
         StartWorldBossBattle();
         break;
     }

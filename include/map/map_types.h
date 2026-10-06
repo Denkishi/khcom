@@ -117,6 +117,15 @@ typedef struct MapCell {
 
 #define EVENT_KEY_LIST_NONE 0xFF
 
+enum EventDoorKind {
+    EVENT_DOOR_NONE,
+    EVENT_DOOR_EVENT_ROOM,
+    EVENT_DOOR_HIDDEN_CHAMBER,
+    EVENT_DOOR_WALK_IN,
+    EVENT_DOOR_BOSS_ROOM,
+    EVENT_DOOR_END
+};
+
 typedef struct MapEventDoor {
     u8 kind;
     u8 keyList;

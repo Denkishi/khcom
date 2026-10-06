@@ -136,7 +136,7 @@ static s32 sAllmapCameraFixedY;
 s32 GetAllmapRoomPaletteOffset(u8 room) {
     u8 eventRoom = 0;
 
-    if (GetEventRoomKind(room) == 1 || GetEventRoomKind(room) == 4) {
+    if (GetEventRoomKind(room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(room) == EVENT_DOOR_BOSS_ROOM) {
         eventRoom = 1;
     }
 
@@ -246,7 +246,7 @@ void* CreateAllmapRoomTask(TaskPool* pool) {
 }
 
 u8 AllmapDoorHasCardInfo(u8 room, u8 side) {
-    if (GetEventRoomKind(room) != 0) {
+    if (GetEventRoomKind(room) != EVENT_DOOR_NONE) {
         if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
             return 0;
         }
@@ -260,7 +260,7 @@ u8 AllmapDoorHasCardInfo(u8 room, u8 side) {
 }
 
 u8 AllmapDoorHasKeyInfo(u8 room, u8 side) {
-    if (GetEventRoomKind(room) == 0) {
+    if (GetEventRoomKind(room) == EVENT_DOOR_NONE) {
         if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) == 0) {
             return 0;
         }
@@ -620,7 +620,7 @@ u8 AllmapHasDoorInfo(AllmapCursorPos pos) {
         room = GetAllmapRoomAt(neighbor);
 
         if (room != MAP_ROOM_NONE) {
-            if (GetEventRoomKind(GetAllmapRoomAt(pos)) == 2) {
+            if (GetEventRoomKind(GetAllmapRoomAt(pos)) == EVENT_DOOR_HIDDEN_CHAMBER) {
                 hasInfo = AllmapDoorHasKeyInfo(room, sAllmapReverseDoors[i]);
             } else {
                 hasInfo = AllmapDoorHasCardInfo(room, sAllmapReverseDoors[i]);
@@ -731,7 +731,7 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
 
     work->tiles2 = LoadObjTiles(gAllmapRoomTiles, 0x2400);
 
-    if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4) {
+    if (GetEventRoomKind(work->room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_BOSS_ROOM) {
         work->gfx = gAllmapRoomFrames[1];
         InitObjPaletteAtSlot(work->palette2, 15, gAllmapEventRoomPalette, 32);
     } else {
@@ -756,7 +756,7 @@ void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
     work->roomY = work->pos.y * 24 - gAllmapCameraY;
     work->targetX = 0x6800;
 
-    if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4 || GetEventRoomKind(work->room) == 2) {
+    if (GetEventRoomKind(work->room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_BOSS_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_HIDDEN_CHAMBER) {
         work->targetY = 0x2100;
         AllmapDoorinfoLoadKeys(work);
     } else {
@@ -827,7 +827,7 @@ void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work) {
 }
 
 void task_allmap_doorinfo_2(AllmapDoorinfoWork* work) {
-    if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4 || GetEventRoomKind(work->room) == 2) {
+    if (GetEventRoomKind(work->room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_BOSS_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_HIDDEN_CHAMBER) {
         AllmapDoorinfoDrawKeys(work);
     } else {
         AllmapDoorinfoDrawDoors(work);
@@ -843,7 +843,7 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
 
     ReleaseObjTiles(work->tiles2);
 
-    if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4 || GetEventRoomKind(work->room) == 2) {
+    if (GetEventRoomKind(work->room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_BOSS_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_HIDDEN_CHAMBER) {
         for (i = 0; i < work->count; i++) {
             ReleaseLayeredCardSprite(&work->doors[i].sprite);
         }

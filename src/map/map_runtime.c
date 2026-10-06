@@ -91,7 +91,7 @@ u8 GetOppositeDoorSide(u8 side) {
 void MarkEventRoomDone(MapEventDoor* door) {
     MapFloorRoom* floorRoom;
 
-    if (door->kind == 1 || door->kind == 4) {
+    if (door->kind == EVENT_DOOR_EVENT_ROOM || door->kind == EVENT_DOOR_BOSS_ROOM) {
         floorRoom = GetMapFloorRoom(door->room);
         floorRoom->cardValue = 0;
         floorRoom->nameId = 26;
@@ -244,11 +244,11 @@ u16 GetMapDoorFlags(u8 room, u8 side) {
 
     kind = GetEventRoomKind(neighbor);
 
-    if (kind == 1 || kind == 4 || kind == 2) {
+    if (kind == EVENT_DOOR_EVENT_ROOM || kind == EVENT_DOOR_BOSS_ROOM || kind == EVENT_DOOR_HIDDEN_CHAMBER) {
         flags |= DOOR_FLAG_EVENT;
         door = GetMapEventDoor(0);
 
-        while (door->kind != 5) {
+        while (door->kind != EVENT_DOOR_END) {
             if (door->room == neighbor) {
                 if (door->side != side) {
                     flags |= DOOR_FLAG_SEALED;
@@ -589,7 +589,7 @@ u8 SelectCurrentEventDoor() {
 u8 GetEventRoomKind(u8 room) {
     MapEventDoor* door = GetMapEventDoor(0);
 
-    while (door->kind != 5) {
+    while (door->kind != EVENT_DOOR_END) {
         if (door->room == room) {
             return door->kind;
         }
@@ -597,7 +597,7 @@ u8 GetEventRoomKind(u8 room) {
         door++;
     }
 
-    return 0;
+    return EVENT_DOOR_NONE;
 }
 
 s32 GetMapRoomCardValue(u8 room) {
@@ -618,9 +618,9 @@ void SetCardlessRoomType(u8 room) {
     MapFloorRoom* floorRoom = GetMapFloorRoom(room);
     MapEventDoor* door = GetMapEventDoor(0);
 
-    while (door->kind != 5) {
+    while (door->kind != EVENT_DOOR_END) {
         if (door->room == room) {
-            if (door->kind == 2) {
+            if (door->kind == EVENT_DOOR_HIDDEN_CHAMBER) {
                 floorRoom->cardValue = 0;
                 floorRoom->nameId = 27;
                 floorRoom->roomType = 22;

@@ -389,7 +389,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
         work->tiles2[i] = NULL;
     }
 
-    if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4) {
+    if (GetEventRoomKind(work->room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_BOSS_ROOM) {
         if (TestAllmapRoomFlag(work->room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
             return 17;
         }

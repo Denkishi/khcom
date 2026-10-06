@@ -2845,14 +2845,14 @@ void SioChgConnectStartTrade() {
     }
 
     for (i = 0; i < 10; i++) {
-        gSioChgCardSlots[i] = 0x800;
+        gSioChgCardSlots[i] = SIO_TRADE_CARD_NONE;
     }
 
     for (i = 0; i < 2; i++) {
         gSioChgCardReady[i] = 0;
     }
 
-    ModeRequest(&gModeSioChgCard, 0x800);
+    ModeRequest(&gModeSioChgCard, SIO_TRADE_CARD_NONE);
 }
 #endif
 
@@ -2991,7 +2991,7 @@ void SioChgCardInitObjs() {
     sSioChgCardWork->gfx3 = AnimGetGfx(&sSioChgCardWork->anim3);
 
     for (i = 0; i < 10; i++) {
-        if (gSioChgCardSlots[i] == 0x800) {
+        if (gSioChgCardSlots[i] == SIO_TRADE_CARD_NONE) {
             sSioChgCardWork->cardVisible[i] = 0;
             sSioChgCardWork->x2[i] = gSioChgCardSlotPos[i].x << 8;
             sSioChgCardWork->y2[i] = gSioChgCardSlotPos[i].y << 8;
@@ -3351,12 +3351,12 @@ void SioChgCardRestart() {
         }
 
         for (i = 0; i < 10; i++) {
-            gSioChgCardSlots[i] = 0x800;
+            gSioChgCardSlots[i] = SIO_TRADE_CARD_NONE;
         }
 
         gSioChgCardReady[0] = 0;
         gSioChgCardReady[1] = 0;
-        ModeRequest(&gModeSioChgCard, 0x800);
+        ModeRequest(&gModeSioChgCard, SIO_TRADE_CARD_NONE);
     }
 }
 
@@ -3441,7 +3441,7 @@ void SioChgCardSetSlot(u16 command) {
         i = i >> 12;
         slot = (command & 0x0FFF) - 1;
 
-        if (slot == 0x800) {
+        if (slot == SIO_TRADE_CARD_NONE) {
             sSioChgCardWork->cardVisible[i] = 0;
             ReleaseObjTiles(sSioChgCardWork->tiles3[i]);
             ReleaseObjPalette(sSioChgCardWork->palette3[i]);
@@ -3490,8 +3490,8 @@ void SioChgCardSetSlotId(u16 command) {
         i = i >> 12;
         slot = (command & 0x0FFF) - 1;
 
-        if (slot == 0x800) {
-            gSioChgCardSlots[i] = 0x800;
+        if (slot == SIO_TRADE_CARD_NONE) {
+            gSioChgCardSlots[i] = SIO_TRADE_CARD_NONE;
         } else {
             gSioChgCardSlots[i] = slot;
         }
@@ -3507,7 +3507,7 @@ void SioChgCardDrawPointTotals() {
     s16 digits[3];
     s32 points;
     sum = 0;
-    emptySlot = 0x800;
+    emptySlot = SIO_TRADE_CARD_NONE;
 
     for (i = 0; i < 5; i++) {
         cardId = gSioChgCardSlots[i];
@@ -3531,7 +3531,7 @@ void SioChgCardDrawPointTotals() {
     for (j = 5; j < 10; j++) {
         cardId = gSioChgCardSlots[j];
 
-        if ((s16)cardId != 0x800) {
+        if ((s16)cardId != SIO_TRADE_CARD_NONE) {
             sum = GetCardMooglePointValue(cardId) - (0 - sum);
         }
     }
@@ -3602,7 +3602,7 @@ void SioChgCardHandleInput() {
                 } else {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 }
-            } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == 0x800) {
+            } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == SIO_TRADE_CARD_NONE) {
                 if (owner == 0) {
                     gSioCommandSend[1] = SIO_CMD_TRADE_PICK_CARD;
                 }
@@ -3614,7 +3614,7 @@ void SioChgCardHandleInput() {
             if (SioChgCardSlotsEmpty() == 1) {
                 gSioCommandSend[1] = SIO_CMD_TRADE_LEAVE;
             } else if (owner == 0) {
-                if (gSioChgCardSlots[sSioChgCardWork->cursor] != 0x800) {
+                if (gSioChgCardSlots[sSioChgCardWork->cursor] != SIO_TRADE_CARD_NONE) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
                     SioChgCardReturnCard();
                 }
@@ -3662,7 +3662,7 @@ void SioChgCardHandleInput() {
                 } else {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 }
-            } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == 0x800) {
+            } else if (gSioChgCardSlots[sSioChgCardWork->cursor] == SIO_TRADE_CARD_NONE) {
                 if (owner == 1) {
                     gSioCommandSend[1] = SIO_CMD_TRADE_PICK_CARD;
                 }
@@ -3674,7 +3674,7 @@ void SioChgCardHandleInput() {
             if (SioChgCardSlotsEmpty() == 1) {
                 gSioCommandSend[1] = SIO_CMD_TRADE_LEAVE;
             } else if (owner == 1) {
-                if (gSioChgCardSlots[sSioChgCardWork->cursor] != 0x800) {
+                if (gSioChgCardSlots[sSioChgCardWork->cursor] != SIO_TRADE_CARD_NONE) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
                     SioChgCardReturnCard();
                 }
@@ -3705,9 +3705,9 @@ void SioChgCardHandleInput() {
 
 void SioChgCardReturnCard() {
     AddCardToCollection(gSioChgCardSlots[sSioChgCardWork->cursor]);
-    gSioChgCardSlots[sSioChgCardWork->cursor] = 0x800;
+    gSioChgCardSlots[sSioChgCardWork->cursor] = SIO_TRADE_CARD_NONE;
     gSioChgCardCursor = sSioChgCardWork->cursor;
-    sSioChgCardWork->offeredCard = 0x800;
+    sSioChgCardWork->offeredCard = SIO_TRADE_CARD_NONE;
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((sSioChgCardWork->offeredCard + 1) & 0x0FFF);
 }
 
@@ -3716,13 +3716,13 @@ s8 SioChgCardHasOwnCards() {
 
     if (gSioPlayerId == 0) {
         for (i = 0; i < 5; i++) {
-            if (gSioChgCardSlots[i] != 0x800) {
+            if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
                 return 1;
             }
         }
     } else {
         for (i = 5; i < 10; i++) {
-            if (gSioChgCardSlots[i] != 0x800) {
+            if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
                 return 1;
             }
         }
@@ -3735,7 +3735,7 @@ s8 SioChgCardSlotsEmpty() {
     s32 i;
 
     for (i = 0; i < 10; i++) {
-        if (gSioChgCardSlots[i] != 0x800) {
+        if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
             return 0;
         }
     }
@@ -3799,7 +3799,7 @@ void SioChgCardCreateMoveTasks() {
     s32 i;
 
     for (i = 0; i < 5; i++) {
-        if (gSioChgCardSlots[i] != 0x800) {
+        if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
             arg.x = &sSioChgCardWork->x2[i];
             arg.y = &sSioChgCardWork->y2[i];
             arg.scaleX = &sSioChgCardWork->scaleX[i];
@@ -3814,7 +3814,7 @@ void SioChgCardCreateMoveTasks() {
     }
 
     for (i = 5; i < 10; i++) {
-        if (gSioChgCardSlots[i] != 0x800) {
+        if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
             arg.x = &sSioChgCardWork->x2[i];
             arg.y = &sSioChgCardWork->y2[i];
             arg.scaleX = &sSioChgCardWork->scaleX[i];
@@ -3855,20 +3855,20 @@ s16 SioChgCardReceiveCards() {
 
     if (gSioPlayerId == 0) {
         for (i = 5; i < 10; i++) {
-            hasCard = gSioChgCardSlots[i] != 0x800;
+            hasCard = gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE;
 
             if (hasCard) {
-                if (AddCardToCollection(gSioChgCardSlots[i]) == -1) {
+                if (AddCardToCollection(gSioChgCardSlots[i]) == CARD_NOT_ADDED) {
                     return 0;
                 }
             }
         }
     } else {
         for (i = 0; i < 5; i++) {
-            hasCard = gSioChgCardSlots[i] != 0x800;
+            hasCard = gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE;
 
             if (hasCard) {
-                if (AddCardToCollection(gSioChgCardSlots[i]) == -1) {
+                if (AddCardToCollection(gSioChgCardSlots[i]) == CARD_NOT_ADDED) {
                     return 0;
                 }
             }
@@ -3883,13 +3883,13 @@ void SioChgCardReturnOwnCards() {
 
     if (gSioPlayerId == 0) {
         for (i = 0; i < 5; i++) {
-            if (gSioChgCardSlots[i] != 0x800) {
+            if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
                 AddCardToCollection(gSioChgCardSlots[i]);
             }
         }
     } else {
         for (i = 5; i < 10; i++) {
-            if (gSioChgCardSlots[i] != 0x800) {
+            if (gSioChgCardSlots[i] != SIO_TRADE_CARD_NONE) {
                 AddCardToCollection(gSioChgCardSlots[i]);
             }
         }

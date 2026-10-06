@@ -4,6 +4,8 @@
 #include "types.h"
 #include "chara_types.h"
 
+#define SIO_TRADE_CARD_NONE 0x800
+
 void mode_sio_battle_0(s32 arg);
 void mode_sio_battle_1();
 void mode_sio_battle_2();

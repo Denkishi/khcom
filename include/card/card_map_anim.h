@@ -4,6 +4,8 @@
 #include "card_types.h"
 #include "types.h"
 
+#define CARD_NOT_ADDED (-1)
+
 Deck* CreateLinkSendDeck();
 void FreeLinkSendDeck();
 Deck* CreateLinkPartnerDeck();

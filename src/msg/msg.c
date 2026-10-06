@@ -77,9 +77,9 @@ void InitSpriteTextLines() {
 void AddSpriteTextLine(s32 x, s32 y, u8* str) {
     u8 i;
     u8 len;
-    u8 idx;
+    u8 glyph;
 
-    idx = 0;
+    glyph = 0;
 
     if (sTextEntryCount > 44) {
         return;
@@ -101,56 +101,56 @@ void AddSpriteTextLine(s32 x, s32 y, u8* str) {
     sSpriteTextLines[sTextEntryCount].length = len;
 
     for (i = 0; i < len; i++) {
-        s16 c;
+        s16 ch;
 
         sSpriteTextLines[sTextEntryCount].glyphTiles[i] = AllocSpriteFrameTiles(32);
-        c = str[i];
+        ch = str[i];
 
-        if ((u8)(c - 48) <= 9) {
-            idx = c - 48;
+        if ((u8)(ch - 48) <= 9) {
+            glyph = ch - 48;
         }
 
-        if ((u8)(c - 65) <= 25) {
-            idx = c - 55;
+        if ((u8)(ch - 65) <= 25) {
+            glyph = ch - 55;
         }
 
-        if (c == 47) {
-            idx = 36;
+        if (ch == 47) {
+            glyph = 36;
         }
 
-        if (c == 45) {
-            idx = 37;
+        if (ch == 45) {
+            glyph = 37;
         }
 
-        if (c == 95) {
-            idx = 38;
+        if (ch == 95) {
+            glyph = 38;
         }
 
-        if (c == 46) {
-            idx = 39;
+        if (ch == 46) {
+            glyph = 39;
         }
 
-        if (c == 43) {
-            idx = 40;
+        if (ch == 43) {
+            glyph = 40;
         }
 
-        if (c == 33) {
-            idx = 41;
+        if (ch == 33) {
+            glyph = 41;
         }
 
-        if (c == 63) {
-            idx = 42;
+        if (ch == 63) {
+            glyph = 42;
         }
 
-        if (c == 35) {
-            idx = 43;
+        if (ch == 35) {
+            glyph = 43;
         }
 
         if (str[i] == 37) {
-            idx = 44;
+            glyph = 44;
         }
 
-        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[i], gSmallFontFrames[idx], gSmallFontTiles);
+        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[i], gSmallFontFrames[glyph], gSmallFontTiles);
     }
 
     sSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(gCommonObjPalette, 32);
@@ -162,8 +162,8 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* str) {
     u8 i;
     u8 len;
     u8 k;
-    u8 idx;
-    idx = 0;
+    u8 glyph;
+    glyph = 0;
 
     if (sTextEntryCount > 44) {
         return;
@@ -185,18 +185,18 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* str) {
     sSpriteTextLines[sTextEntryCount].length = len;
 
     for (i = 0, k = 0; i < len; i++) {
-        s32 c = str[i];
+        s32 ch = str[i];
 
-        if ((u8)(c - 48) <= 9) {
-            idx = c - 48;
+        if ((u8)(ch - 48) <= 9) {
+            glyph = ch - 48;
         }
 
-        if ((u8)(c - 65) <= 25) {
-            idx = c - 52;
+        if ((u8)(ch - 65) <= 25) {
+            glyph = ch - 52;
         }
 
         sSpriteTextLines[sTextEntryCount].glyphTiles[k] = AllocSpriteFrameTiles(128);
-        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[k], gMsgFontBank0Frames[idx], gMsgFontBank0Tiles);
+        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[k], gMsgFontBank0Frames[glyph], gMsgFontBank0Tiles);
         k++;
     }
 
@@ -365,12 +365,12 @@ void* InitSpriteTextSlots(s32 mode) {
 
 #ifndef VERSION_EU
 void SetSpriteTextSlot(s32 x, s32 y, TextChar* text, u8 slot, u8 useAlternatePalette) {
-    u16 g;
+    u16 glyph;
     u16 lo;
     u8 kind;
     u8 i;
     u8 j;
-    g = 0;
+    glyph = 0;
     i = 0;
     j = 0;
 
@@ -390,377 +390,377 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* text, u8 slot, u8 useAlternatePal
     sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
 
     while (*text != 0) {
-        u16 v;
-        v = *(u16*)text;
-        v = (v >> 8) | (v << 8);
+        u16 code;
+        code = *(u16*)text;
+        code = (code >> 8) | (code << 8);
         text += 2;
 
-        switch (v & 0xFF00) {
+        switch (code & 0xFF00) {
         case 0x8100:
-            v &= 0xFF;
+            code &= 0xFF;
 
-            switch (v) {
+            switch (code) {
             case 0x40:
-                g = 0;
+                glyph = 0;
                 break;
             case 0x41:
-                g = 0xF5;
+                glyph = 0xF5;
                 break;
             case 0x42:
-                g = 0xF6;
+                glyph = 0xF6;
                 break;
             case 0x45:
-                g = 0xF9;
+                glyph = 0xF9;
                 break;
             case 0x48:
-                g = 0xF1;
+                glyph = 0xF1;
                 break;
             case 0x49:
-                g = 0xF0;
+                glyph = 0xF0;
                 break;
             case 0x5B:
-                g = 0xFD;
+                glyph = 0xFD;
                 break;
             case 0x5C:
-                g = 0xFC;
+                glyph = 0xFC;
                 break;
             case 0x60:
-                g = 0xFE;
+                glyph = 0xFE;
                 break;
             case 0x63:
-                g = 0xFB;
+                glyph = 0xFB;
                 break;
             case 0x75:
-                g = 0xE8;
+                glyph = 0xE8;
                 break;
             case 0x76:
-                g = 0xE9;
+                glyph = 0xE9;
                 break;
             case 0x77:
-                g = 0xEA;
+                glyph = 0xEA;
                 break;
             case 0x78:
-                g = 0xEB;
+                glyph = 0xEB;
                 break;
             case 0x69:
-                g = 0xEC;
+                glyph = 0xEC;
                 break;
             case 0x6A:
-                g = 0xED;
+                glyph = 0xED;
                 break;
             case 0xA8:
-                g = 0xE7;
+                glyph = 0xE7;
                 break;
             case 0xA9:
-                g = 0xE6;
+                glyph = 0xE6;
                 break;
             }
 
             kind = 0;
             break;
         case 0x8200:
-            lo = v & 0xFF;
+            lo = code & 0xFF;
 
             if (lo >= 0x60 && lo <= 0x79) {
-                g = v + 0x7DAB;
+                glyph = code + 0x7DAB;
             }
 
             if (lo >= 0x81 && lo <= 0x9A) {
-                g = v + 0x7DA4;
+                glyph = code + 0x7DA4;
             }
 
             if (lo >= 0x4F && lo <= 0x58) {
-                g = v + 0x7DB2;
+                glyph = code + 0x7DB2;
             }
 
             if (lo >= 0x9F && lo <= 0xF1) {
-                g = v + 0x7DA0;
+                glyph = code + 0x7DA0;
             }
 
             kind = 0;
             break;
         case 0x8300:
-            lo = v & 0xFF;
+            lo = code & 0xFF;
 
             if (lo >= 0x40 && lo <= 0x7E) {
-                g = v + 0x7D52;
+                glyph = code + 0x7D52;
             }
 
             if (lo >= 0x80 && lo <= 0x94) {
-                g = v + 0x7D51;
+                glyph = code + 0x7D51;
             }
 
             kind = 0;
             break;
         case 0x8800:
-            v &= 0xFF;
+            code &= 0xFF;
 
-            if (v == 0xC5) {
-                g = 9;
+            if (code == 0xC5) {
+                glyph = 9;
             }
 
             kind = 1;
             break;
         case 0x8900:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x9C:
-                g = 4;
+                glyph = 4;
                 break;
             case 0xA4:
-                g = 0x31;
+                glyph = 0x31;
                 break;
             case 0xAF:
-                g = 0x1A;
+                glyph = 0x1A;
                 break;
             case 0xBD:
-                g = 0x2F;
+                glyph = 0x2F;
                 break;
             }
 
             kind = 1;
             break;
         case 0x8A00:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x4F:
-                g = 8;
+                glyph = 8;
                 break;
             case 0x6D:
-                g = 0x11;
+                glyph = 0x11;
                 break;
             }
 
             kind = 1;
             break;
         case 0x8B00:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x41:
-                g = 0x1E;
+                glyph = 0x1E;
                 break;
             case 0x43:
-                g = 0x26;
+                glyph = 0x26;
                 break;
             case 0x4C:
-                g = 0x19;
+                glyph = 0x19;
                 break;
             }
 
             kind = 1;
             break;
         case 0x8C00:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x4E:
-                g = 6;
+                glyph = 6;
                 break;
             case 0x78:
-                g = 0x16;
+                glyph = 0x16;
                 break;
             case 0xF5:
-                g = 0x0B;
+                glyph = 0x0B;
                 break;
             case 0xAB:
-                g = 0x37;
+                glyph = 0x37;
                 break;
             case 0xA9:
-                g = 0x0C;
+                glyph = 0x0C;
                 break;
             }
 
             kind = 1;
             break;
         case 0x8D00:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x73:
-                g = 0x1F;
+                glyph = 0x1F;
                 break;
             case 0x90:
-                g = 0x17;
+                glyph = 0x17;
                 break;
             case 0xDF:
-                g = 0x2E;
+                glyph = 0x2E;
                 break;
             }
 
             kind = 1;
             break;
         case 0x8E00:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0xB8:
-                g = 0x0D;
+                glyph = 0x0D;
                 break;
             case 0x76:
-                g = 0x1C;
+                glyph = 0x1C;
                 break;
             case 0x84:
-                g = 0x2C;
+                glyph = 0x2C;
                 break;
             case 0x9E:
-                g = 0x1B;
+                glyph = 0x1B;
                 break;
             case 0xA1:
-                g = 0x36;
+                glyph = 0x36;
                 break;
             case 0xA9:
-                g = 0x0F;
+                glyph = 0x0F;
                 break;
             case 0xD2:
-                g = 0x15;
+                glyph = 0x15;
                 break;
             case 0xD7:
-                g = 0x12;
+                glyph = 0x12;
                 break;
             }
 
             kind = 1;
             break;
         case 0x8F00:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x6F:
-                g = 0x1D;
+                glyph = 0x1D;
                 break;
             case 0x8A:
-                g = 0x21;
+                glyph = 0x21;
                 break;
             case 0x97:
-                g = 0x30;
+                glyph = 0x30;
                 break;
             case 0xEA:
-                g = 0x20;
+                glyph = 0x20;
                 break;
             }
 
             kind = 1;
             break;
         case 0x9000:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x53:
-                g = 3;
+                glyph = 3;
                 break;
             case 0xD8:
-                g = 1;
+                glyph = 1;
                 break;
             case 0x6C:
-                g = 0x2B;
+                glyph = 0x2B;
                 break;
             }
 
             kind = 1;
             break;
         case 0x9100:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0xDE:
-                g = 0x35;
+                glyph = 0x35;
                 break;
             case 0xE5:
-                g = 0;
+                glyph = 0;
                 break;
             case 0x7A:
-                g = 2;
+                glyph = 2;
                 break;
             }
 
             kind = 1;
             break;
         case 0x9200:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x40:
-                g = 0x27;
+                glyph = 0x27;
                 break;
             case 0x42:
-                g = 0x23;
+                glyph = 0x23;
                 break;
             case 0x4E:
-                g = 0x28;
+                glyph = 0x28;
                 break;
             case 0x6D:
-                g = 0x0E;
+                glyph = 0x0E;
                 break;
             case 0x86:
-                g = 0x0A;
+                glyph = 0x0A;
                 break;
             }
 
             kind = 1;
             break;
         case 0x9300:
-            v &= 0xFF;
+            code &= 0xFF;
 
-            if (v == 0x90) {
-                g = 45;
+            if (code == 0x90) {
+                glyph = 45;
             }
 
             kind = 1;
             break;
         case 0x9400:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0xDE:
-                g = 0x29;
+                glyph = 0x29;
                 break;
             case 0xC6:
-                g = 0x2A;
+                glyph = 0x2A;
                 break;
             }
 
             kind = 1;
             break;
         case 0x9500:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x7C:
-                g = 0x25;
+                glyph = 0x25;
                 break;
             case 0xAA:
-                g = 0x10;
+                glyph = 0x10;
                 break;
             }
 
             kind = 1;
             break;
         case 0x9600:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x59:
-                g = 5;
+                glyph = 5;
                 break;
             case 0x6C:
-                g = 0x24;
+                glyph = 0x24;
                 break;
             case 0x82:
-                g = 0x13;
+                glyph = 0x13;
                 break;
             case 0xBD:
-                g = 0x33;
+                glyph = 0x33;
                 break;
             case 0xB0:
-                g = 0x18;
+                glyph = 0x18;
                 break;
             }
 
             kind = 1;
             break;
         case 0x9700:
-            switch (v & 0xFF) {
+            switch (code & 0xFF) {
             case 0x45:
-                g = 0x14;
+                glyph = 0x14;
                 break;
             case 0x46:
-                g = 0x22;
+                glyph = 0x22;
                 break;
             case 0x6C:
-                g = 0x32;
+                glyph = 0x32;
                 break;
             case 0x88:
-                g = 0x38;
+                glyph = 0x38;
                 break;
             case 0xDF:
-                g = 0x34;
+                glyph = 0x34;
                 break;
             case 0xE1:
-                g = 7;
+                glyph = 7;
                 break;
             }
 
             kind = 1;
             break;
         default:
-            g = 0;
+            glyph = 0;
             kind = 0;
             break;
         }
@@ -769,14 +769,14 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* text, u8 slot, u8 useAlternatePal
             ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
         }
 
-        g = ((u16*)gMsgFontBank0Frames[g])[3];
+        glyph = ((u16*)gMsgFontBank0Frames[glyph])[3];
 
         switch (kind) {
         case 0:
-            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank0Tiles[g * 32], 128);
+            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank0Tiles[glyph * 32], 128);
             break;
         case 1:
-            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank1Tiles[g * 32], 128);
+            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank1Tiles[glyph * 32], 128);
             break;
         }
 
@@ -813,9 +813,9 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* str, u8 slot, u8 useAlternatePalet
     u8 i;
     u8 len;
     u8 j;
-    s16 idx;
+    s16 glyph;
     u8 count;
-    idx = 0;
+    glyph = 0;
 
     if (slot > 23) {
         return;
@@ -842,23 +842,23 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* str, u8 slot, u8 useAlternatePalet
 
     for (; i < len; i++) {
         if ((u8)(str[i] - 48) <= 9) {
-            idx = (u8)(str[i] + 209);
+            glyph = (u8)(str[i] + 209);
         }
 
         if ((u8)(str[i] - 65) <= 25) {
-            idx = (u8)(str[i] + 202);
+            glyph = (u8)(str[i] + 202);
         }
 
         if ((u8)(str[i] - 97) <= 25) {
-            idx = (u8)(str[i] + 196);
+            glyph = (u8)(str[i] + 196);
         }
 
         if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
             ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
         }
 
-        idx = ((u8*)gMsgFontBank0Frames[idx])[6];
-        sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank0Tiles[idx * 32], 128);
+        glyph = ((u8*)gMsgFontBank0Frames[glyph])[6];
+        sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank0Tiles[glyph * 32], 128);
         j++;
     }
 
@@ -879,7 +879,7 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* str, u8 slot, u8 useAlternatePalet
 void DrawSpriteTextSlots() {
     s32 x;
     s32 y;
-    void* g;
+    void* palette;
     u8 i;
     u8 j;
     u8 dx;
@@ -890,9 +890,9 @@ void DrawSpriteTextSlots() {
         }
 
         if (sSpriteTextLines[i].useAlternatePalette == 0) {
-            g = sSpriteTextLines[i].palette;
+            palette = sSpriteTextLines[i].palette;
         } else {
-            g = sSpriteTextLines[i].alternatePalette;
+            palette = sSpriteTextLines[i].alternatePalette;
         }
 
         x = sSpriteTextLines[i].x;
@@ -900,7 +900,7 @@ void DrawSpriteTextSlots() {
         dx = 0;
 
         for (j = 0; j < sSpriteTextLines[i].length; j++) {
-            DrawSprite((x >> 8) + dx, y >> 8, gMsgFontBank0Frames[0], sSpriteTextLines[i].glyphTiles[j], g, NULL, 0, 50);
+            DrawSprite((x >> 8) + dx, y >> 8, gMsgFontBank0Frames[0], sSpriteTextLines[i].glyphTiles[j], palette, NULL, 0, 50);
 
             if (sSpriteTextLines[i].font == 1) {
                 dx += 10;
@@ -995,7 +995,7 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteInde
     u16 glyph;
     u8 i;
     u8 j;
-    u16 w;
+    u16 code;
     u16 lo;
     glyph = 0;
     i = 0;
@@ -1017,74 +1017,74 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteInde
     sBgTextLines[slot].paletteIndex = paletteIndex;
 
     while (*text != 0) {
-        w = *(u16*)text;
-        w = (w >> 8) | (w << 8);
+        code = *(u16*)text;
+        code = (code >> 8) | (code << 8);
         text += 2;
 
         if (glyphHeight > 8) {
-            switch (w & 0xFF00) {
+            switch (code & 0xFF00) {
             case 0x8100:
-                if ((w & 0xFF) > 0x5A) {
+                if ((code & 0xFF) > 0x5A) {
                     glyph = 0xFD;
                 }
 
-                if ((w & 0xFF) == 0x40) {
+                if ((code & 0xFF) == 0x40) {
                     glyph = 0xFFFF;
                 }
 
                 break;
             case 0x8200:
-                lo = w & 0xFF;
+                lo = code & 0xFF;
 
                 if (lo >= 0x60 && lo <= 0x79) {
-                    glyph = w + off;
+                    glyph = code + off;
                 }
 
                 if (lo >= 0x81 && lo <= 0x9A) {
-                    glyph = w + 0x7DA4;
+                    glyph = code + 0x7DA4;
                 }
 
                 if (lo >= 0x4F && lo <= 0x58) {
-                    glyph = w + 0x7DB2;
+                    glyph = code + 0x7DB2;
                 }
 
                 if (lo >= 0x9F && lo <= 0xF1) {
-                    glyph = w + 0x7DA0;
+                    glyph = code + 0x7DA0;
                 }
 
                 break;
             case 0x8300:
-                lo = w & 0xFF;
+                lo = code & 0xFF;
 
                 if (lo >= 0x40 && lo <= 0x7E) {
-                    glyph = w + 0x7D52;
+                    glyph = code + 0x7D52;
                 }
 
                 if (lo >= 0x80 && lo <= 0x94) {
-                    glyph = w + 0x7D51;
+                    glyph = code + 0x7D51;
                 }
 
                 break;
             }
         } else {
-            switch (w & 0xFF00) {
+            switch (code & 0xFF00) {
             case 0x8100:
-                w &= 0xFF;
+                code &= 0xFF;
 
-                if (w == 0x40) {
+                if (code == 0x40) {
                     glyph = 0xFFFF;
                 }
 
                 break;
             case 0x8200:
-                lo = w & 0xFF;
+                lo = code & 0xFF;
 
                 if (lo >= 0x4F && lo <= 0x58) {
-                    glyph = w + 0x7DC1;
+                    glyph = code + 0x7DC1;
                 }
 
                 if (lo >= 0x81 && lo <= 0x84) {
-                    glyph = w + 0x7D99;
+                    glyph = code + 0x7D99;
                 }
 
                 if (lo == 0x98) {
@@ -1116,11 +1116,11 @@ void DrawBgTextLines() {
     u8 k;
     u16* src;
     u8* dst;
-    u8* p;
+    u8* out;
     u8 tx;
     u8 ty;
     u8 sx;
-    u8 h;
+    u8 height;
     u16 glyph;
     u8 sy;
     u8 y;
@@ -1140,9 +1140,9 @@ void DrawBgTextLines() {
         for (k = 0; k < sBgTextLines[n].length; k++) {
             glyph = sBgTextLines[n].glyphs[k];
             pal = sBgTextLines[n].paletteIndex;
-            h = sBgTextLines[n].glyphHeight;
+            height = sBgTextLines[n].glyphHeight;
 
-            if (h > 8) {
+            if (height > 8) {
                 tx = (k * 12 + sBgTextLines[n].x) >> 3;
                 ty = sBgTextLines[n].y >> 3;
                 sx = k * 12 + sBgTextLines[n].x - tx * 8;
@@ -1151,88 +1151,88 @@ void DrawBgTextLines() {
                 screen = GetBgScreenBase(sBgTextLines[n].bg);
                 tile = ((u16*)gMsgFontBank0Frames[glyph])[3];
                 src = (u16*)&gMsgFontBank0Tiles[tile * 32];
-                p = dst;
+                out = dst;
 
-                for (y = sy, yy = 0; y < sy + h; y++, yy += 2) {
+                for (y = sy, yy = 0; y < sy + height; y++, yy += 2) {
                     if (glyph == 0xFFFF) {
                         pix = 0;
                         cur = 0;
                     } else {
-                        s32 q;
-                        cur = *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024);
-                        q = yy & 15;
-                        q += (u16)((yy >> 4) * 32);
-                        pix = src[q] | ((u32)src[q + 1] << 16);
+                        s32 srcIndex;
+                        cur = *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024);
+                        srcIndex = yy & 15;
+                        srcIndex += (u16)((yy >> 4) * 32);
+                        pix = src[srcIndex] | ((u32)src[srcIndex + 1] << 16);
                     }
 
-                    *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024) = cur | (pix << (sx * 4));
+                    *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024) = cur | (pix << (sx * 4));
 
                     if (sx != 0) {
-                        *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32) = pix >> (32 - sx * 4);
+                        *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32) = pix >> (32 - sx * 4);
                     }
                 }
 
                 {
-                    s32 t0;
+                    s32 rowTile0;
                     s32 ty1;
-                    s32 t1;
+                    s32 rowTile1;
                     s32 tx2;
-                    t0 = ty * 32;
-                    *(u16*)(screen + tx * 2 + ty * 64) = (tx + 1 + t0) | (pal << 12);
+                    rowTile0 = ty * 32;
+                    *(u16*)(screen + tx * 2 + ty * 64) = (tx + 1 + rowTile0) | (pal << 12);
                     ty1 = ty + 1;
-                    t1 = ty1 * 32;
-                    *(u16*)(screen + tx * 2 + ty1 * 64) = (tx + 1 + t1) | (pal << 12);
+                    rowTile1 = ty1 * 32;
+                    *(u16*)(screen + tx * 2 + ty1 * 64) = (tx + 1 + rowTile1) | (pal << 12);
 
                     if (sy != 0) {
-                        s32 r = ty + 2;
-                        s32 t = r * 32;
-                        *(u16*)(screen + tx * 2 + r * 64) = (tx + 1 + t) | (pal << 12);
+                        s32 ty2 = ty + 2;
+                        s32 rowTile2 = ty2 * 32;
+                        *(u16*)(screen + tx * 2 + ty2 * 64) = (tx + 1 + rowTile2) | (pal << 12);
                     }
 
                     tx2 = tx + 2;
 
                     if (sx != 0) {
-                        *(u16*)(screen + tx * 2 + ty * 64 + 2) = (tx2 + t0) | (pal << 12);
-                        *(u16*)(screen + tx * 2 + ty1 * 64 + 2) = (tx2 + t1) | (pal << 12);
+                        *(u16*)(screen + tx * 2 + ty * 64 + 2) = (tx2 + rowTile0) | (pal << 12);
+                        *(u16*)(screen + tx * 2 + ty1 * 64 + 2) = (tx2 + rowTile1) | (pal << 12);
 
                         if (sy != 0) {
-                            s32 r = ty + 2;
-                            s32 t = r * 32;
-                            *(u16*)(screen + tx * 2 + r * 64 + 2) = (tx2 + t) | (pal << 12);
+                            s32 ty2 = ty + 2;
+                            s32 rowTile2 = ty2 * 32;
+                            *(u16*)(screen + tx * 2 + ty2 * 64 + 2) = (tx2 + rowTile2) | (pal << 12);
                         }
                     }
                 }
 
-                for (y = sy, yy = 0; y < sy + h; y++, yy += 2) {
+                for (y = sy, yy = 0; y < sy + height; y++, yy += 2) {
                     if (glyph == 0xFFFF) {
                         cur = 0;
                         pix = 0;
                     } else {
-                        cur = *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32);
+                        cur = *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32);
                         pix = src[(yy & 15) + (yy >> 4) * 32 + 16] |
                               ((u32)src[(yy & 15) + (yy >> 4) * 32 + 17] << 16);
                     }
 
-                    *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32) = cur | (pix << (sx * 4));
+                    *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32) = cur | (pix << (sx * 4));
 
                     if (sy != 0) {
-                        s32 r = ty + 2;
-                        s32 t = r * 32;
-                        *(u16*)(screen + tx * 2 + r * 64 + 2) = (tx + 2 + t) | (pal << 12);
+                        s32 ty2 = ty + 2;
+                        s32 rowTile2 = ty2 * 32;
+                        *(u16*)(screen + tx * 2 + ty2 * 64 + 2) = (tx + 2 + rowTile2) | (pal << 12);
                     }
 
                     if (sx != 0) {
-                        *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 64) = pix >> (32 - sx * 4);
+                        *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 64) = pix >> (32 - sx * 4);
                         *(u16*)(screen + tx * 2 + ty * 64 + 4) = (tx + 3 + ty * 32) | (pal << 12);
 
                         {
                             s32 ty1 = ty + 1;
-                            s32 t1 = ty1 * 32;
-                            *(u16*)(screen + tx * 2 + ty1 * 64 + 4) = (tx + 3 + t1) | (pal << 12);
+                            s32 rowTile1 = ty1 * 32;
+                            *(u16*)(screen + tx * 2 + ty1 * 64 + 4) = (tx + 3 + rowTile1) | (pal << 12);
 
                             if (sy != 0) {
-                                s32 r = ty + 2;
-                                *(u16*)(screen + tx * 2 + r * 64 + 4) = (tx + 3 + r * 32) | (pal << 12);
+                                s32 ty2 = ty + 2;
+                                *(u16*)(screen + tx * 2 + ty2 * 64 + 4) = (tx + 3 + ty2 * 32) | (pal << 12);
                             }
                         }
                     }
@@ -1240,24 +1240,24 @@ void DrawBgTextLines() {
 
                 {
                     s32 tx2;
-                    s32 t0;
+                    s32 rowTile0;
                     s32 ty1;
-                    s32 t1;
+                    s32 rowTile1;
                     tx2 = tx + 2;
-                    t0 = ty * 32;
-                    *(u16*)(screen + tx * 2 + ty * 64 + 2) = (tx2 + t0) | (pal << 12);
+                    rowTile0 = ty * 32;
+                    *(u16*)(screen + tx * 2 + ty * 64 + 2) = (tx2 + rowTile0) | (pal << 12);
                     ty1 = ty + 1;
-                    t1 = ty1 * 32;
-                    *(u16*)(screen + tx * 2 + ty1 * 64 + 2) = (tx2 + t1) | (pal << 12);
+                    rowTile1 = ty1 * 32;
+                    *(u16*)(screen + tx * 2 + ty1 * 64 + 2) = (tx2 + rowTile1) | (pal << 12);
 
                     if (sx != 0) {
-                        *(u16*)(screen + tx * 2 + ty * 64 + 4) = (tx + 3 + t0) | (pal << 12);
-                        *(u16*)(screen + tx * 2 + ty1 * 64 + 4) = (tx + 3 + t1) | (pal << 12);
+                        *(u16*)(screen + tx * 2 + ty * 64 + 4) = (tx + 3 + rowTile0) | (pal << 12);
+                        *(u16*)(screen + tx * 2 + ty1 * 64 + 4) = (tx + 3 + rowTile1) | (pal << 12);
 
                         if (sy != 0) {
-                            s32 r = ty + 2;
-                            s32 t = r * 32;
-                            *(u16*)(screen + tx * 2 + r * 64 + 4) = (tx + 3 + t) | (pal << 12);
+                            s32 ty2 = ty + 2;
+                            s32 rowTile2 = ty2 * 32;
+                            *(u16*)(screen + tx * 2 + ty2 * 64 + 4) = (tx + 3 + rowTile2) | (pal << 12);
                         }
                     }
                 }
@@ -1270,41 +1270,41 @@ void DrawBgTextLines() {
                 screen = GetBgScreenBase(sBgTextLines[n].bg);
                 tile = ((u16*)gBgTextSmallFontFrames[glyph])[3];
                 src = (u16*)&gBgTextSmallFontTiles[tile * 32];
-                p = dst;
+                out = dst;
 
-                for (y = sy, yy = 0; y < sy + h; y++, yy += 2) {
+                for (y = sy, yy = 0; y < sy + height; y++, yy += 2) {
                     if (glyph == 0xFFFF) {
                         cur = 0;
                         pix = 0;
                     } else {
-                        s32 q;
-                        cur = *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024);
-                        q = yy & 15;
-                        q += (yy >> 4) * 32;
-                        pix = src[q] | ((u32)src[q + 1] << 16);
+                        s32 srcIndex;
+                        cur = *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024);
+                        srcIndex = yy & 15;
+                        srcIndex += (yy >> 4) * 32;
+                        pix = src[srcIndex] | ((u32)src[srcIndex + 1] << 16);
                     }
 
-                    *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024) = cur | (pix << (sx * 4));
+                    *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024) = cur | (pix << (sx * 4));
 
                     if (sx != 0) {
-                        *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32) = pix >> (32 - sx * 4);
+                        *(u32*)(out + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32) = pix >> (32 - sx * 4);
                     }
                 }
 
                 {
-                    s32 t0;
+                    s32 rowTile0;
                     s32 ty1;
-                    s32 t1;
-                    t0 = ty * 32;
-                    *(u16*)(screen + tx * 2 + ty * 64) = (tx + 1 + t0) | (pal << 12);
+                    s32 rowTile1;
+                    rowTile0 = ty * 32;
+                    *(u16*)(screen + tx * 2 + ty * 64) = (tx + 1 + rowTile0) | (pal << 12);
                     ty1 = ty + 1;
-                    t1 = ty1 * 32;
-                    *(u16*)(screen + tx * 2 + ty1 * 64) = (tx + 1 + t1) | (pal << 12);
+                    rowTile1 = ty1 * 32;
+                    *(u16*)(screen + tx * 2 + ty1 * 64) = (tx + 1 + rowTile1) | (pal << 12);
 
                     if (sy != 0) {
-                        s32 r = ty + 2;
-                        s32 t = r * 32;
-                        *(u16*)(screen + tx * 2 + r * 64) = (tx + 1 + t) | (pal << 12);
+                        s32 ty2 = ty + 2;
+                        s32 rowTile2 = ty2 * 32;
+                        *(u16*)(screen + tx * 2 + ty2 * 64) = (tx + 1 + rowTile2) | (pal << 12);
                     }
 
                     if (sx != 0) {
@@ -1312,9 +1312,9 @@ void DrawBgTextLines() {
                         *(u16*)(screen + tx * 2 + ty1 * 64 + 2) = (tx + 2 + ty1 * 32) | (pal << 12);
 
                         if (sy != 0) {
-                            s32 r = ty + 2;
-                            s32 t = r * 32;
-                            *(u16*)(screen + tx * 2 + r * 64 + 2) = (tx + 2 + t) | (pal << 12);
+                            s32 ty2 = ty + 2;
+                            s32 rowTile2 = ty2 * 32;
+                            *(u16*)(screen + tx * 2 + ty2 * 64 + 2) = (tx + 2 + rowTile2) | (pal << 12);
                         }
                     }
                 }
@@ -1438,12 +1438,12 @@ u16 InitMsgGlyphSpritesAltPalette3(s32 mode) {
 
 s32 GetMsgTextWidth(const TextChar* text) {
     u16 sum;
-    s32 v;
+    s32 glyph;
 
     sum = 0;
 
     while (*text != 0) {
-        v = 0;
+        glyph = 0;
 
         if (*text != 10) {
 #ifdef VERSION_US
@@ -1451,55 +1451,55 @@ s32 GetMsgTextWidth(const TextChar* text) {
 #else
             if (*text > 31) {
 #endif
-                v = *text;
+                glyph = *text;
             } else {
                 switch (*text) {
                 case 0xE000:
-                    v = 25;
+                    glyph = 25;
                     break;
                 case 0x2191:
-                    v = 10;
+                    glyph = 10;
                     break;
                 case 0x2193:
-                    v = 11;
+                    glyph = 11;
                     break;
                 case 0x2190:
-                    v = 12;
+                    glyph = 12;
                     break;
                 case 0x2192:
-                    v = 13;
+                    glyph = 13;
                     break;
                 case 0x300C:
-                    v = 1;
+                    glyph = 1;
                     break;
                 case 0x300D:
-                    v = 2;
+                    glyph = 2;
                     break;
                 case 0x300E:
-                    v = 3;
+                    glyph = 3;
                     break;
                 case 0x300F:
-                    v = 4;
+                    glyph = 4;
                     break;
                 case 0x203B:
-                    v = 6;
+                    glyph = 6;
                     break;
                 case 0x266A:
-                    v = 18;
+                    glyph = 18;
                     break;
                 case 0x2642:
-                    v = 8;
+                    glyph = 8;
                     break;
                 case 0x2640:
-                    v = 9;
+                    glyph = 9;
                     break;
                 case 0x2605:
-                    v = 21;
+                    glyph = 21;
                     break;
                 }
             }
 
-            sum = sLatinGlyphWidths.widths[v] + ((sum << 16) >> 16);
+            sum = sLatinGlyphWidths.widths[glyph] + ((sum << 16) >> 16);
         }
 
         text++;
@@ -1516,11 +1516,11 @@ s32 GetMsgTextWidth(const TextChar* text) {
 u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText) {
     s32 cx;
     s32 cy;
-    s32 f;
+    s32 alternate;
 
     cx = 0;
     cy = 0;
-    f = 0;
+    alternate = 0;
 
     if (sMsgGlyphSprites == NULL) {
         return 0;
@@ -1529,79 +1529,79 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText
     sTextEntryCount = 0;
 
     while (*text != 0) {
-        s32 v = 0;
+        s32 glyph = 0;
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
         if (*text == MSG_LATIN_CODE(0x4079, 29)) {
-            f = 1;
+            alternate = 1;
             text++;
         }
 
         if (*text == MSG_LATIN_CODE(0x4000, 30)) {
-            f = 0;
+            alternate = 0;
             text++;
         }
 
-        sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = f;
+        sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = alternate;
 
         if (*text == MSG_LATIN_CODE(10, 31)) {
             cx = 0;
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = *text;
+            glyph = *text;
 #else
             if ((u16)(*text - 32) <= 223) {
-                v = *text;
+                glyph = *text;
             } else {
                 switch (*text) {
                 case 0xE000:
-                    v = 25;
+                    glyph = 25;
                     break;
                 case 0x2191:
-                    v = 10;
+                    glyph = 10;
                     break;
                 case 0x2193:
-                    v = 11;
+                    glyph = 11;
                     break;
                 case 0x2190:
-                    v = 12;
+                    glyph = 12;
                     break;
                 case 0x2192:
-                    v = 13;
+                    glyph = 13;
                     break;
                 case 0x300C:
-                    v = 1;
+                    glyph = 1;
                     break;
                 case 0x300D:
-                    v = 2;
+                    glyph = 2;
                     break;
                 case 0x300E:
-                    v = 3;
+                    glyph = 3;
                     break;
                 case 0x300F:
-                    v = 4;
+                    glyph = 4;
                     break;
                 case 0x203B:
-                    v = 6;
+                    glyph = 6;
                     break;
                 case 0x266A:
-                    v = 18;
+                    glyph = 18;
                     break;
                 case 0x2642:
-                    v = 8;
+                    glyph = 8;
                     break;
                 case 0x2640:
-                    v = 9;
+                    glyph = 9;
                     break;
                 case 0x2605:
-                    v = 21;
+                    glyph = 21;
                     break;
                 case 0x25A0:
-                    v = 17;
+                    glyph = 17;
                     break;
                 }
             }
@@ -1612,11 +1612,11 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText
                 sMsgGlyphSprites[sTextEntryCount].tiles = NULL;
             }
 
-            cx += (s16)sLatinGlyphWidths.widths[v] << 8;
+            cx += (s16)sLatinGlyphWidths.widths[glyph] << 8;
 
-            if (v != 32) {
-                v = ((u16*)gMsgLatinFontFrames[v])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
+            if (glyph != 32) {
+                glyph = ((u16*)gMsgLatinFontFrames[glyph])[3];
+                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[glyph * 32], 128);
             }
 
             sTextEntryCount++;
@@ -1642,11 +1642,11 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText
 u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
     s32 cx;
     s32 cy;
-    s32 f;
+    s32 alternate;
 
     cx = 0;
     cy = 0;
-    f = 0;
+    alternate = 0;
 
     if (sMsgGlyphSprites == NULL) {
         return 0;
@@ -1655,79 +1655,79 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
     sTextEntryCount = 0;
 
     while (*text != 0) {
-        s32 v = 0;
+        s32 glyph = 0;
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
         if (*text == MSG_LATIN_CODE(0x4079, 29)) {
-            f = 1;
+            alternate = 1;
             text++;
         }
 
         if (*text == MSG_LATIN_CODE(0x4000, 30)) {
-            f = 0;
+            alternate = 0;
             text++;
         }
 
-        sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = f;
+        sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = alternate;
 
         if (*text == MSG_LATIN_CODE(10, 31)) {
             cx = 0;
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = *text;
+            glyph = *text;
 #else
             if ((u16)(*text - 32) <= 223) {
-                v = *text;
+                glyph = *text;
             } else {
                 switch (*text) {
                 case 0xE000:
-                    v = 25;
+                    glyph = 25;
                     break;
                 case 0x2191:
-                    v = 10;
+                    glyph = 10;
                     break;
                 case 0x2193:
-                    v = 11;
+                    glyph = 11;
                     break;
                 case 0x2190:
-                    v = 12;
+                    glyph = 12;
                     break;
                 case 0x2192:
-                    v = 13;
+                    glyph = 13;
                     break;
                 case 0x300C:
-                    v = 1;
+                    glyph = 1;
                     break;
                 case 0x300D:
-                    v = 2;
+                    glyph = 2;
                     break;
                 case 0x300E:
-                    v = 3;
+                    glyph = 3;
                     break;
                 case 0x300F:
-                    v = 4;
+                    glyph = 4;
                     break;
                 case 0x203B:
-                    v = 6;
+                    glyph = 6;
                     break;
                 case 0x266A:
-                    v = 18;
+                    glyph = 18;
                     break;
                 case 0x2642:
-                    v = 8;
+                    glyph = 8;
                     break;
                 case 0x2640:
-                    v = 9;
+                    glyph = 9;
                     break;
                 case 0x2605:
-                    v = 21;
+                    glyph = 21;
                     break;
                 case 0x25A0:
-                    v = 17;
+                    glyph = 17;
                     break;
                 }
             }
@@ -1738,11 +1738,11 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
                 sMsgGlyphSprites[sTextEntryCount].tiles = NULL;
             }
 
-            cx += (s16)sLatinGlyphWidths.widths[v] << 8;
+            cx += (s16)sLatinGlyphWidths.widths[glyph] << 8;
 
-            if (v != 32) {
-                v = ((u16*)gMsgLatinFontFrames[v])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
+            if (glyph != 32) {
+                glyph = ((u16*)gMsgLatinFontFrames[glyph])[3];
+                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[glyph * 32], 128);
             }
 
             sTextEntryCount++;
@@ -1761,13 +1761,13 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
 
 #ifndef VERSION_EU
 u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
-    u16 w;
-    u8 t;
+    u16 glyph;
+    u8 bank;
     s32 cx;
     s32 cy;
     s32 px;
-    w = 0;
-    t = 0;
+    glyph = 0;
+    bank = 0;
     cx = 0;
     cy = 0;
     px = 0;
@@ -1779,8 +1779,8 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
     sTextEntryCount = 0;
 
     while (*text != 0) {
-        u16 v;
-        w = 0;
+        u16 code;
+        glyph = 0;
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
 
@@ -1791,137 +1791,137 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
             cy += 0xC00;
             text += 2;
         } else {
-            v = *(u16*)text;
-            v = (v / 256) | (v << 8);
+            code = *(u16*)text;
+            code = (code / 256) | (code << 8);
             text += 2;
 
-            if ((v & 0xFF00) == 0x8100) {
-                switch (v & 0xFF) {
+            if ((code & 0xFF00) == 0x8100) {
+                switch (code & 0xFF) {
                 case 0x40:
-                    w = 0;
-                    t = 0;
+                    glyph = 0;
+                    bank = 0;
                     break;
                 case 0x41:
-                    w = 0xF5;
-                    t = 0;
+                    glyph = 0xF5;
+                    bank = 0;
                     break;
                 case 0x42:
-                    w = 0xF6;
-                    t = 0;
+                    glyph = 0xF6;
+                    bank = 0;
                     break;
                 case 0x44:
-                    w = 0xF7;
-                    t = 0;
+                    glyph = 0xF7;
+                    bank = 0;
                     break;
                 case 0x45:
-                    w = 0xF9;
-                    t = 0;
+                    glyph = 0xF9;
+                    bank = 0;
                     break;
                 case 0x48:
-                    w = 0xF1;
-                    t = 0;
+                    glyph = 0xF1;
+                    bank = 0;
                     break;
                 case 0x49:
-                    w = 0xF0;
-                    t = 0;
+                    glyph = 0xF0;
+                    bank = 0;
                     break;
                 case 0x58:
-                    w = 20;
-                    t = 2;
+                    glyph = 20;
+                    bank = 2;
                     break;
                 case 0x5B:
-                    w = 0xFD;
-                    t = 0;
+                    glyph = 0xFD;
+                    bank = 0;
                     break;
                 case 0x5C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0x60:
-                    w = 0xFE;
-                    t = 0;
+                    glyph = 0xFE;
+                    bank = 0;
                     break;
                 case 0x63:
-                    w = 0xFB;
-                    t = 0;
+                    glyph = 0xFB;
+                    bank = 0;
                     break;
                 case 0x75:
-                    w = 0xE8;
-                    t = 0;
+                    glyph = 0xE8;
+                    bank = 0;
                     break;
                 case 0x76:
-                    w = 0xE9;
-                    t = 0;
+                    glyph = 0xE9;
+                    bank = 0;
                     break;
                 case 0x77:
-                    w = 0xEA;
-                    t = 0;
+                    glyph = 0xEA;
+                    bank = 0;
                     break;
                 case 0x78:
-                    w = 0xEB;
-                    t = 0;
+                    glyph = 0xEB;
+                    bank = 0;
                     break;
                 case 0x66:
-                    w = 0xFF;
-                    t = 0;
+                    glyph = 0xFF;
+                    bank = 0;
                     break;
                 case 0x69:
-                    w = 0xEC;
-                    t = 0;
+                    glyph = 0xEC;
+                    bank = 0;
                     break;
                 case 0x6A:
-                    w = 0xED;
-                    t = 0;
+                    glyph = 0xED;
+                    bank = 0;
                     break;
                 case 0xA8:
-                    w = 0xE7;
-                    t = 0;
+                    glyph = 0xE7;
+                    bank = 0;
                     break;
                 case 0xA9:
-                    w = 0xE6;
-                    t = 0;
+                    glyph = 0xE6;
+                    bank = 0;
                     break;
                 case 0x7B:
-                    w = 0xDF;
-                    t = 0;
+                    glyph = 0xDF;
+                    bank = 0;
                     break;
                 case 0x7C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0xA6:
-                    w = 0xEE;
-                    t = 0;
+                    glyph = 0xEE;
+                    bank = 0;
                     break;
                 case 0x81:
-                    w = 0xEF;
-                    t = 0;
+                    glyph = 0xEF;
+                    bank = 0;
                     break;
                 case 0x93:
-                    w = 0xF2;
-                    t = 0;
+                    glyph = 0xF2;
+                    bank = 0;
                     break;
                 case 0x96:
-                    w = 0xF4;
-                    t = 0;
+                    glyph = 0xF4;
+                    bank = 0;
                     break;
                 case 0x5E:
-                    w = 0xF3;
-                    t = 0;
+                    glyph = 0xF3;
+                    bank = 0;
                     break;
                 case 0x43:
-                    w = 0xF8;
-                    t = 0;
+                    glyph = 0xF8;
+                    bank = 0;
                     break;
                 case 0x9A:
-                    w = 0x8E;
-                    t = 0;
+                    glyph = 0x8E;
+                    bank = 0;
                     break;
                 }
 
                 if (sTextEntryCount != 0 &&
-                    (v == 0x8141 || v == 0x8142 || v > 0x8177 || v == 0x8144 ||
-                     (v == 0x8148 || v == 0x8149)) &&
+                    (code == 0x8141 || code == 0x8142 || code > 0x8177 || code == 0x8144 ||
+                     (code == 0x8148 || code == 0x8149)) &&
                     cx == 0 && cy > 0) {
                     cx = px;
                     cx += 0xA00;
@@ -1930,7 +1930,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
                     sMsgGlyphSprites[sTextEntryCount].y = y + cy;
                 }
             } else {
-                GetSjisGlyph(v, &w, &t);
+                GetSjisGlyph(code, &glyph, &bank);
             }
 
             if (sMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
@@ -1939,7 +1939,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
 
             px = cx;
 
-            if ((u16)(v - 0x8260) <= 58) {
+            if ((u16)(code - 0x8260) <= 58) {
                 cx += 0xA00;
             } else {
                 cx += 0xA00;
@@ -1950,22 +1950,22 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
                 cy += 0xC00;
             }
 
-            switch (t) {
+            switch (bank) {
             case 0:
-                w = ((u16*)gMsgFontBank0Frames[w])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank0Frames[glyph])[3];
+                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank0Tiles[glyph * 32], 128);
                 break;
             case 1:
-                w = ((u16*)gMsgFontBank1Frames[w])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank1Frames[glyph])[3];
+                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank1Tiles[glyph * 32], 128);
                 break;
             case 2:
-                w = ((u16*)gMsgFontBank2Frames[w])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank2Frames[glyph])[3];
+                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank2Tiles[glyph * 32], 128);
                 break;
             case 3:
-                w = ((u16*)gMsgFontBank3Frames[w])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank3Frames[glyph])[3];
+                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank3Tiles[glyph * 32], 128);
                 break;
             }
 
@@ -1987,19 +1987,19 @@ void DrawMsgGlyphs(u8 n) {
     u8 i;
 
     for (i = 0; i < n; i++) {
-        TextGlyphSprite* b = sMsgGlyphSprites;
+        TextGlyphSprite* sprites = sMsgGlyphSprites;
 
-        if (b[i].visible == 1) {
-            s32 x = b[i].x;
-            s32 y = b[i].y;
+        if (sprites[i].visible == 1) {
+            s32 x = sprites[i].x;
+            s32 y = sprites[i].y;
 
-            if (b[i].useAlternatePalette) {
-                if (b[i].tiles != NULL) {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].alternatePalette, 0);
+            if (sprites[i].useAlternatePalette) {
+                if (sprites[i].tiles != NULL) {
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], sprites[i].tiles, sprites[i].alternatePalette, 0);
                 }
             } else {
-                if (b[i].tiles != NULL) {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].palette, 0);
+                if (sprites[i].tiles != NULL) {
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], sprites[i].tiles, sprites[i].palette, 0);
                 }
             }
         }
@@ -2037,10 +2037,10 @@ void HideMsgGlyphs() {
 #ifndef VERSION_EU
 u16 LoadTwoDigitTextTileArray(u8 value, void** out) {
     u8 buf[8];
-    u8 q;
-    q = value / 10;
+    u8 tens;
+    tens = value / 10;
 
-    if (q != 0) {
+    if (tens != 0) {
         buf[1] = value / 10;
         buf[3] = value - buf[1] * 10;
         buf[0] = 0x82;
@@ -2082,11 +2082,11 @@ void FreeTextTileArray(void** tiles, u8 n) {
 u16 LoadTwoDigitTextSlots(u8 value, TextSlot* out) {
 #ifdef VERSION_JP
     u8 buf[8];
-    s32 q;
+    s32 tens;
 
-    q = value / 10;
+    tens = value / 10;
 
-    if ((u8)q != 0) {
+    if ((u8)tens != 0) {
         buf[1] = value / 10;
         buf[3] = value - buf[1] * 10;
         buf[0] = 0x82;
@@ -2101,17 +2101,17 @@ u16 LoadTwoDigitTextSlots(u8 value, TextSlot* out) {
     }
 #else
     TextChar buf[4];
-    TextChar* p;
-    TextChar c;
-    TextChar end;
+    TextChar* cursor;
+    TextChar tensDigit;
+    TextChar terminator;
 
     if (value > 9) {
-        p = buf;
-        c = value / 10 + '0';
-        end = 0;
-        p[0] = c;
+        cursor = buf;
+        tensDigit = value / 10 + '0';
+        terminator = 0;
+        cursor[0] = tensDigit;
         buf[1] = value - (u8)(value / 10) * 10 + '0';
-        buf[2] = end;
+        buf[2] = terminator;
     } else {
         buf[0] = value + '0';
         buf[1] = 0;
@@ -2204,19 +2204,19 @@ s16 GetTextSlotsMaxLineWidth(TextSlot* slots, u8 n) {
 
 s32 GetTextLength(const void* text) {
 #ifdef VERSION_JP
-    const u16* p = text;
+    const u16* cursor = text;
     u16 n = 0;
 #elif defined(VERSION_EU)
     u16 n = 0;
-    const u8* p = text;
+    const u8* cursor = text;
 #else
     u16 n = 0;
-    const u16* p = text;
+    const u16* cursor = text;
 #endif
 
-    while (MSG_CHAR(p) != 0) {
+    while (MSG_CHAR(cursor) != 0) {
         n++;
-        p++;
+        cursor++;
     }
 
     return n;
@@ -2231,13 +2231,13 @@ u16 LoadTextSlots(const void* text, TextSlot* slots) {
 }
 
 s32 LoadLatinTextSlots(const u16* text, TextSlot* slots) {
-    s32 n;
+    s32 zero;
 
-    n = 0;
-    sTextEntryCount = n;
+    zero = 0;
+    sTextEntryCount = zero;
 
     while (MSG_CHAR(text) != 0) {
-        s32 v = 0;
+        s32 glyph = 0;
 
 #ifdef VERSION_EU
         if (MSG_CHAR(text) == 31) {
@@ -2252,63 +2252,63 @@ s32 LoadLatinTextSlots(const u16* text, TextSlot* slots) {
             slots->advance = 0;
         } else {
 #ifdef VERSION_EU
-            v = MSG_CHAR(text);
+            glyph = MSG_CHAR(text);
 #else
 #ifdef VERSION_JP
             if (MSG_CHAR(text) > 31) {
 #else
             if ((u16)(MSG_CHAR(text) - 32) <= 223) {
 #endif
-                v = MSG_CHAR(text);
+                glyph = MSG_CHAR(text);
             } else {
                 switch (MSG_CHAR(text)) {
                 case 0xE000:
-                    v = 25;
+                    glyph = 25;
                     break;
                 case 0x2191:
-                    v = 10;
+                    glyph = 10;
                     break;
                 case 0x2193:
-                    v = 11;
+                    glyph = 11;
                     break;
                 case 0x2190:
-                    v = 12;
+                    glyph = 12;
                     break;
                 case 0x2192:
-                    v = 13;
+                    glyph = 13;
                     break;
                 case 0x300C:
-                    v = 1;
+                    glyph = 1;
                     break;
                 case 0x300D:
-                    v = 2;
+                    glyph = 2;
                     break;
                 case 0x300E:
-                    v = 3;
+                    glyph = 3;
                     break;
                 case 0x300F:
-                    v = 4;
+                    glyph = 4;
                     break;
                 case 0x203B:
-                    v = 6;
+                    glyph = 6;
                     break;
                 case 0x266A:
-                    v = 18;
+                    glyph = 18;
                     break;
                 case 0x2642:
-                    v = 8;
+                    glyph = 8;
                     break;
                 case 0x2640:
-                    v = 9;
+                    glyph = 9;
                     break;
                 case 0x2605:
-                    v = 21;
+                    glyph = 21;
                     break;
                 case 0x25A0:
-                    v = 17;
+                    glyph = 17;
                     break;
                 default:
-                    v = 0;
+                    glyph = 0;
                     break;
                 }
             }
@@ -2319,15 +2319,15 @@ s32 LoadLatinTextSlots(const u16* text, TextSlot* slots) {
                 slots->tiles = NULL;
             }
 
-            if (v != 32) {
-                slots->advance = sLatinGlyphWidths.widths[v];
+            if (glyph != 32) {
+                slots->advance = sLatinGlyphWidths.widths[glyph];
             } else {
                 slots->advance = 255;
             }
 
-            v = ((u16*)gMsgLatinFontFrames[v])[3];
-            slots->tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
-            slots->useAlternatePalette = n;
+            glyph = ((u16*)gMsgLatinFontFrames[glyph])[3];
+            slots->tiles = LoadObjTiles(&gMsgLatinFontTiles[glyph * 32], 128);
+            slots->useAlternatePalette = zero;
         }
 
         sTextEntryCount++;
@@ -2345,17 +2345,17 @@ s32 LoadLatinTextSlots(const u16* text, TextSlot* slots) {
 #ifndef VERSION_EU
 s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
     u8 buf[2];
-    u16* c;
-    u16 w;
-    u8 t;
+    u16* raw;
+    u16 glyph;
+    u8 bank;
     u8 n;
 
-    w = 0;
-    t = 0;
+    glyph = 0;
+    bank = 0;
     n = 0;
 
     while (MSG_CHAR(text) != 0) {
-        u16 v;
+        u16 code;
 
 #ifdef VERSION_JP
         buf[0] = ((u8*)text)[0];
@@ -2364,9 +2364,9 @@ s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
         buf[0] = text[0];
         buf[1] = text[1];
 #endif
-        c = (u16*)buf;
+        raw = (u16*)buf;
 
-        if (*c == 0x6E6E) {
+        if (*raw == 0x6E6E) {
 #ifdef VERSION_JP
             text = (u16*)((u8*)text + 2);
 #else
@@ -2380,141 +2380,141 @@ s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
             slots->tiles = NULL;
             slots->advance = 0;
         } else {
-            v = *c;
-            v = (v / 256) | (v << 8);
+            code = *raw;
+            code = (code / 256) | (code << 8);
 #ifdef VERSION_JP
             text = (u16*)((u8*)text + 2);
 #else
             text += 2;
 #endif
 
-            if ((v & 0xFF00) == 0x8100) {
-                v &= 0xFF;
+            if ((code & 0xFF00) == 0x8100) {
+                code &= 0xFF;
 
-                switch (v) {
+                switch (code) {
                 case 0x40:
-                    w = 0;
-                    t = 0;
+                    glyph = 0;
+                    bank = 0;
                     break;
                 case 0x41:
-                    w = 0xF5;
-                    t = 0;
+                    glyph = 0xF5;
+                    bank = 0;
                     break;
                 case 0x42:
-                    w = 0xF6;
-                    t = 0;
+                    glyph = 0xF6;
+                    bank = 0;
                     break;
                 case 0x45:
-                    w = 0xF9;
-                    t = 0;
+                    glyph = 0xF9;
+                    bank = 0;
                     break;
                 case 0x46:
-                    w = 0xFA;
-                    t = 0;
+                    glyph = 0xFA;
+                    bank = 0;
                     break;
                 case 0x48:
-                    w = 0xF1;
-                    t = 0;
+                    glyph = 0xF1;
+                    bank = 0;
                     break;
                 case 0x49:
-                    w = 0xF0;
-                    t = 0;
+                    glyph = 0xF0;
+                    bank = 0;
                     break;
                 case 0x58:
-                    w = 20;
-                    t = 2;
+                    glyph = 20;
+                    bank = 2;
                     break;
                 case 0x5B:
-                    w = 0xFD;
-                    t = 0;
+                    glyph = 0xFD;
+                    bank = 0;
                     break;
                 case 0x5C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0x60:
-                    w = 0xFE;
-                    t = 0;
+                    glyph = 0xFE;
+                    bank = 0;
                     break;
                 case 0x63:
-                    w = 0xFB;
-                    t = 0;
+                    glyph = 0xFB;
+                    bank = 0;
                     break;
                 case 0x75:
-                    w = 0xE8;
-                    t = 0;
+                    glyph = 0xE8;
+                    bank = 0;
                     break;
                 case 0x76:
-                    w = 0xE9;
-                    t = 0;
+                    glyph = 0xE9;
+                    bank = 0;
                     break;
                 case 0x77:
-                    w = 0xEA;
-                    t = 0;
+                    glyph = 0xEA;
+                    bank = 0;
                     break;
                 case 0x78:
-                    w = 0xEB;
-                    t = 0;
+                    glyph = 0xEB;
+                    bank = 0;
                     break;
                 case 0x66:
-                    w = 0xFF;
-                    t = 0;
+                    glyph = 0xFF;
+                    bank = 0;
                     break;
                 case 0x69:
-                    w = 0xEC;
-                    t = 0;
+                    glyph = 0xEC;
+                    bank = 0;
                     break;
                 case 0x6A:
-                    w = 0xED;
-                    t = 0;
+                    glyph = 0xED;
+                    bank = 0;
                     break;
                 case 0xA8:
-                    w = 0xE7;
-                    t = 0;
+                    glyph = 0xE7;
+                    bank = 0;
                     break;
                 case 0xA9:
-                    w = 0xE6;
-                    t = 0;
+                    glyph = 0xE6;
+                    bank = 0;
                     break;
                 case 0x7B:
-                    w = 0xDF;
-                    t = 0;
+                    glyph = 0xDF;
+                    bank = 0;
                     break;
                 case 0x7C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0xA6:
-                    w = 0xEE;
-                    t = 0;
+                    glyph = 0xEE;
+                    bank = 0;
                     break;
                 case 0x81:
-                    w = 0xEF;
-                    t = 0;
+                    glyph = 0xEF;
+                    bank = 0;
                     break;
                 case 0x93:
-                    w = 0xF2;
-                    t = 0;
+                    glyph = 0xF2;
+                    bank = 0;
                     break;
                 case 0x96:
-                    w = 0xF4;
-                    t = 0;
+                    glyph = 0xF4;
+                    bank = 0;
                     break;
                 case 0x5E:
-                    w = 0xF3;
-                    t = 0;
+                    glyph = 0xF3;
+                    bank = 0;
                     break;
                 case 0x43:
-                    w = 0xF8;
-                    t = 0;
+                    glyph = 0xF8;
+                    bank = 0;
                     break;
                 case 0x9A:
-                    w = 0x8E;
-                    t = 0;
+                    glyph = 0x8E;
+                    bank = 0;
                     break;
                 }
             } else {
-                GetSjisGlyph(v, &w, &t);
+                GetSjisGlyph(code, &glyph, &bank);
             }
 
             if (slots->tiles != NULL) {
@@ -2522,22 +2522,22 @@ s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
                 slots->tiles = NULL;
             }
 
-            switch (t) {
+            switch (bank) {
             case 0:
-                w = ((u16*)gMsgFontBank0Frames[w])[3];
-                slots->tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank0Frames[glyph])[3];
+                slots->tiles = LoadObjTiles(&gMsgFontBank0Tiles[glyph * 32], 128);
                 break;
             case 1:
-                w = ((u16*)gMsgFontBank1Frames[w])[3];
-                slots->tiles = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank1Frames[glyph])[3];
+                slots->tiles = LoadObjTiles(&gMsgFontBank1Tiles[glyph * 32], 128);
                 break;
             case 2:
-                w = ((u16*)gMsgFontBank2Frames[w])[3];
-                slots->tiles = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank2Frames[glyph])[3];
+                slots->tiles = LoadObjTiles(&gMsgFontBank2Tiles[glyph * 32], 128);
                 break;
             case 3:
-                w = ((u16*)gMsgFontBank3Frames[w])[3];
-                slots->tiles = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank3Frames[glyph])[3];
+                slots->tiles = LoadObjTiles(&gMsgFontBank3Tiles[glyph * 32], 128);
                 break;
             }
 
@@ -2555,23 +2555,23 @@ s32 LoadJapaneseTextSlots(const u16* text, TextSlot* slots) {
 #ifndef VERSION_EU
 s32 LoadTextTileArray(TextChar* text, void** tiles) {
     u8 buf[2];
-    u16* c;
-    u16 w;
-    u8 t;
+    u16* raw;
+    u16 glyph;
+    u8 bank;
     u8 n;
 
-    w = 0;
-    t = 0;
+    glyph = 0;
+    bank = 0;
     n = 0;
 
     while (*text != 0) {
-        u16 v;
+        u16 code;
 
         buf[0] = text[0];
         buf[1] = text[1];
-        c = (u16*)buf;
+        raw = (u16*)buf;
 
-        if (*c == 0x6E6E) {
+        if (*raw == 0x6E6E) {
             text += 2;
 
             if (*tiles != NULL) {
@@ -2580,137 +2580,137 @@ s32 LoadTextTileArray(TextChar* text, void** tiles) {
 
             *tiles++ = NULL;
         } else {
-            v = *c;
-            v = (v / 256) | (v << 8);
+            code = *raw;
+            code = (code / 256) | (code << 8);
             text += 2;
 
-            if ((v & 0xFF00) == 0x8100) {
-                v &= 0xFF;
+            if ((code & 0xFF00) == 0x8100) {
+                code &= 0xFF;
 
-                switch (v) {
+                switch (code) {
                 case 0x40:
-                    w = 0;
-                    t = 0;
+                    glyph = 0;
+                    bank = 0;
                     break;
                 case 0x41:
-                    w = 0xF5;
-                    t = 0;
+                    glyph = 0xF5;
+                    bank = 0;
                     break;
                 case 0x42:
-                    w = 0xF6;
-                    t = 0;
+                    glyph = 0xF6;
+                    bank = 0;
                     break;
                 case 0x45:
-                    w = 0xF9;
-                    t = 0;
+                    glyph = 0xF9;
+                    bank = 0;
                     break;
                 case 0x46:
-                    w = 0xFA;
-                    t = 0;
+                    glyph = 0xFA;
+                    bank = 0;
                     break;
                 case 0x48:
-                    w = 0xF1;
-                    t = 0;
+                    glyph = 0xF1;
+                    bank = 0;
                     break;
                 case 0x49:
-                    w = 0xF0;
-                    t = 0;
+                    glyph = 0xF0;
+                    bank = 0;
                     break;
                 case 0x58:
-                    w = 20;
-                    t = 2;
+                    glyph = 20;
+                    bank = 2;
                     break;
                 case 0x5B:
-                    w = 0xFD;
-                    t = 0;
+                    glyph = 0xFD;
+                    bank = 0;
                     break;
                 case 0x5C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0x60:
-                    w = 0xFE;
-                    t = 0;
+                    glyph = 0xFE;
+                    bank = 0;
                     break;
                 case 0x63:
-                    w = 0xFB;
-                    t = 0;
+                    glyph = 0xFB;
+                    bank = 0;
                     break;
                 case 0x75:
-                    w = 0xE8;
-                    t = 0;
+                    glyph = 0xE8;
+                    bank = 0;
                     break;
                 case 0x76:
-                    w = 0xE9;
-                    t = 0;
+                    glyph = 0xE9;
+                    bank = 0;
                     break;
                 case 0x77:
-                    w = 0xEA;
-                    t = 0;
+                    glyph = 0xEA;
+                    bank = 0;
                     break;
                 case 0x78:
-                    w = 0xEB;
-                    t = 0;
+                    glyph = 0xEB;
+                    bank = 0;
                     break;
                 case 0x66:
-                    w = 0xFF;
-                    t = 0;
+                    glyph = 0xFF;
+                    bank = 0;
                     break;
                 case 0x69:
-                    w = 0xEC;
-                    t = 0;
+                    glyph = 0xEC;
+                    bank = 0;
                     break;
                 case 0x6A:
-                    w = 0xED;
-                    t = 0;
+                    glyph = 0xED;
+                    bank = 0;
                     break;
                 case 0xA8:
-                    w = 0xE7;
-                    t = 0;
+                    glyph = 0xE7;
+                    bank = 0;
                     break;
                 case 0xA9:
-                    w = 0xE6;
-                    t = 0;
+                    glyph = 0xE6;
+                    bank = 0;
                     break;
                 case 0x7B:
-                    w = 0xDF;
-                    t = 0;
+                    glyph = 0xDF;
+                    bank = 0;
                     break;
                 case 0x7C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0xA6:
-                    w = 0xEE;
-                    t = 0;
+                    glyph = 0xEE;
+                    bank = 0;
                     break;
                 case 0x81:
-                    w = 0xEF;
-                    t = 0;
+                    glyph = 0xEF;
+                    bank = 0;
                     break;
                 case 0x93:
-                    w = 0xF2;
-                    t = 0;
+                    glyph = 0xF2;
+                    bank = 0;
                     break;
                 case 0x96:
-                    w = 0xF4;
-                    t = 0;
+                    glyph = 0xF4;
+                    bank = 0;
                     break;
                 case 0x5E:
-                    w = 0xF3;
-                    t = 0;
+                    glyph = 0xF3;
+                    bank = 0;
                     break;
                 case 0x43:
-                    w = 0xF8;
-                    t = 0;
+                    glyph = 0xF8;
+                    bank = 0;
                     break;
                 case 0x9A:
-                    w = 0x8E;
-                    t = 0;
+                    glyph = 0x8E;
+                    bank = 0;
                     break;
                 }
             } else {
-                GetSjisGlyph(v, &w, &t);
+                GetSjisGlyph(code, &glyph, &bank);
             }
 
             if (*tiles != NULL) {
@@ -2718,22 +2718,22 @@ s32 LoadTextTileArray(TextChar* text, void** tiles) {
                 *tiles = NULL;
             }
 
-            switch (t) {
+            switch (bank) {
             case 0:
-                w = ((u16*)gMsgFontBank0Frames[w])[3];
-                *tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank0Frames[glyph])[3];
+                *tiles = LoadObjTiles(&gMsgFontBank0Tiles[glyph * 32], 128);
                 break;
             case 1:
-                w = ((u16*)gMsgFontBank1Frames[w])[3];
-                *tiles = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank1Frames[glyph])[3];
+                *tiles = LoadObjTiles(&gMsgFontBank1Tiles[glyph * 32], 128);
                 break;
             case 2:
-                w = ((u16*)gMsgFontBank2Frames[w])[3];
-                *tiles = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank2Frames[glyph])[3];
+                *tiles = LoadObjTiles(&gMsgFontBank2Tiles[glyph * 32], 128);
                 break;
             case 3:
-                w = ((u16*)gMsgFontBank3Frames[w])[3];
-                *tiles = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank3Frames[glyph])[3];
+                *tiles = LoadObjTiles(&gMsgFontBank3Tiles[glyph * 32], 128);
                 break;
             }
 
@@ -2748,34 +2748,34 @@ s32 LoadTextTileArray(TextChar* text, void** tiles) {
 #endif
 
 void* LoadTextPalette(s32 palette) {
-    void* r = NULL;
+    void* objPalette = NULL;
 
     switch (palette) {
     case 0:
-        r = LoadObjPalette(gTextBrownPalette, 32);
+        objPalette = LoadObjPalette(gTextBrownPalette, 32);
         break;
     case 1:
-        r = LoadObjPalette(gTextWhitePalette, 32);
+        objPalette = LoadObjPalette(gTextWhitePalette, 32);
         break;
     case 2:
-        r = LoadObjPalette(gTextGrayPalette, 32);
+        objPalette = LoadObjPalette(gTextGrayPalette, 32);
         break;
     case 3:
-        r = LoadObjPalette(gTextYellowPalette, 32);
+        objPalette = LoadObjPalette(gTextYellowPalette, 32);
         break;
     case 4:
-        r = LoadObjPalette(gTextGreenPalette, 32);
+        objPalette = LoadObjPalette(gTextGreenPalette, 32);
         break;
     case 5:
-        r = LoadObjPalette(gTextCyanPalette, 32);
+        objPalette = LoadObjPalette(gTextCyanPalette, 32);
         break;
     }
 
-    return r;
+    return objPalette;
 }
 
 void DrawTextSlots(s16 x, s16 y, TextSlot* slots, void* palette, u16 priority, u8 n) {
-    s16 x0 = x;
+    s16 startX = x;
     s16 cy = y;
     u8 i;
 
@@ -2786,7 +2786,7 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* slots, void* palette, u16 priority, u
     for (i = 0; i < n; i++) {
         if (slots->tiles == NULL) {
             cy += 12;
-            x = x0;
+            x = startX;
         } else if (slots->advance != -1) {
             DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, 0, priority);
             x += slots->advance;
@@ -2799,7 +2799,7 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* slots, void* palette, u16 priority, u
 }
 
 void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* slots, void* palette, s32 priority, u8 n) {
-    s16 x0 = x;
+    s16 startX = x;
     s16 cy = y;
     u8 i;
 
@@ -2810,7 +2810,7 @@ void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* slots, void* palette, s32 pri
     for (i = 0; i < n; i++) {
         if (slots->tiles == NULL) {
             cy += 12;
-            x = x0;
+            x = startX;
         } else if (slots->advance != -1) {
             DrawSpriteUnsorted(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, 0);
             x += slots->advance;
@@ -2823,7 +2823,7 @@ void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* slots, void* palette, s32 pri
 }
 
 void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* slots, void* palette, u16 flags, u16 priority, u8 n) {
-    s16 x0 = x;
+    s16 startX = x;
     s16 cy = y;
     u8 i;
 
@@ -2834,7 +2834,7 @@ void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* slots, void* palette, u16 fl
     for (i = 0; i < n; i++) {
         if (slots->tiles == NULL) {
             cy += 12;
-            x = x0;
+            x = startX;
         } else if (slots->advance != -1) {
             DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, flags, priority);
             x += slots->advance;
@@ -2847,7 +2847,7 @@ void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* slots, void* palette, u16 fl
 }
 
 void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* slots, void* palette, void* alternatePalette, u16 priority, u8 n) {
-    s16 x0 = x;
+    s16 startX = x;
     s16 cy = y;
     u8 i;
 
@@ -2858,7 +2858,7 @@ void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* slots, void* palette, 
     for (i = 0; i < n; i++) {
         if (slots->tiles == NULL) {
             cy += 12;
-            x = x0;
+            x = startX;
         } else if (slots->advance != -1) {
             if (slots->useAlternatePalette == 0) {
                 DrawSprite(x, cy, MSG_FONT_FRAMES[0], slots->tiles, palette, NULL, 0, priority);
@@ -2877,13 +2877,13 @@ void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* slots, void* palette, 
 
 void DrawTextTileArray(s16 x, s32 y, void** tiles, void* palette, u16 priority, u8 n) {
     s16 cy = y;
-    s16 x0 = x;
+    s16 startX = x;
     u8 i;
 
     for (i = 0; i < n; i++) {
         if (*tiles == NULL) {
             cy += 12;
-            x = x0;
+            x = startX;
         } else {
             DrawSprite(x, cy, MSG_FONT_FRAMES[0], *tiles, palette, NULL, 0, priority);
             x += 10;
@@ -2895,13 +2895,13 @@ void DrawTextTileArray(s16 x, s32 y, void** tiles, void* palette, u16 priority, 
 
 void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** tiles, void* palette, s32 alternatePalette, u16 priority, u8 n) {
     s16 cy = y;
-    s16 x0 = x;
+    s16 startX = x;
     u8 i;
 
     for (i = 0; i < n; i++) {
         if (*tiles == NULL) {
             cy += 12;
-            x = x0;
+            x = startX;
         } else {
             DrawSprite(x, cy, MSG_FONT_FRAMES[0], *tiles, palette, NULL, 0, priority);
             x += 10;
@@ -2925,133 +2925,133 @@ void FreeSmallFontResources(void* tiles, void* palette) {
 }
 
 u16 EncodeSmallFontString(const u8* str, u16* out) {
-    u16 g = 0;
-    u8 n;
+    u16 glyph = 0;
+    u8 length;
     u8 i;
 
     if (out == NULL) {
         return 0;
     }
 
-    n = GetStringLength(str);
+    length = GetStringLength(str);
 
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < length; i++) {
         if ((u8)(str[i] - '0') <= 9) {
-            g = str[i] - '0';
+            glyph = str[i] - '0';
         }
 
         if ((u8)(str[i] - 'A') <= 25) {
-            g = str[i] - 0x37;
+            glyph = str[i] - 0x37;
         }
 
         if ((u8)(str[i] - 'a') <= 25) {
-            g = str[i] - 0x57;
+            glyph = str[i] - 0x57;
         }
 
         if (str[i] == '/') {
-            g = 0x24;
+            glyph = 0x24;
         }
 
         if (str[i] == '-') {
-            g = 0x25;
+            glyph = 0x25;
         }
 
         if (str[i] == '_') {
-            g = 0x26;
+            glyph = 0x26;
         }
 
         if (str[i] == '.') {
-            g = 0x27;
+            glyph = 0x27;
         }
 
         if (str[i] == '+') {
-            g = 0x28;
+            glyph = 0x28;
         }
 
         if (str[i] == '!') {
-            g = 0x29;
+            glyph = 0x29;
         }
 
         if (str[i] == '?') {
-            g = 0x2A;
+            glyph = 0x2A;
         }
 
         if (str[i] == '#') {
-            g = 0x2B;
+            glyph = 0x2B;
         }
 
         if (str[i] == '%') {
-            g = 0x2C;
+            glyph = 0x2C;
         }
 
-        *out++ = g;
+        *out++ = glyph;
     }
 
-    return n;
+    return length;
 }
 
 u16 FormatSmallFontDecimal(s32 value, u16* out) {
-    s32 t[11];
-    u8 s[12];
+    s32 digits[11];
+    u8 str[12];
     s32 acc;
-    s32 d;
+    s32 divisor;
     s32 i;
 
     acc = 0;
 
     if (value >= 0) {
-        d = 1000000000;
+        divisor = 1000000000;
 
         for (i = 0; i <= 9; i++) {
-            t[i] = value / d - acc;
-            acc = (acc + t[i]) * 10;
-            d /= 10;
+            digits[i] = value / divisor - acc;
+            acc = (acc + digits[i]) * 10;
+            divisor /= 10;
         }
 
         for (i = 0; i <= 9; i++) {
-            s[i] = t[i] + '0';
+            str[i] = digits[i] + '0';
         }
 
-        s[10] = 0;
+        str[10] = 0;
 
         for (i = 0; i <= 9; i++) {
-            if (s[i] > '0') {
+            if (str[i] > '0') {
                 break;
             }
         }
 
-        return EncodeSmallFontString(&s[i], out);
+        return EncodeSmallFontString(&str[i], out);
     }
 
-    d = -1000000000;
+    divisor = -1000000000;
 
     for (i = 1; i <= 10; i++) {
-        t[i] = value / d - acc;
-        acc = (acc + t[i]) * 10;
-        d /= 10;
+        digits[i] = value / divisor - acc;
+        acc = (acc + digits[i]) * 10;
+        divisor /= 10;
     }
 
-    s[0] = '-';
+    str[0] = '-';
 
     for (i = 1; i <= 10; i++) {
-        s[i] = t[i] + '0';
+        str[i] = digits[i] + '0';
     }
 
-    s[11] = 0;
+    str[11] = 0;
 
     for (i = 1; i <= 10; i++) {
-        if (s[i] > '0') {
+        if (str[i] > '0') {
             break;
         }
     }
 
-    s[i - 1] = '-';
-    return EncodeSmallFontString(&s[i - 1], out);
+    str[i - 1] = '-';
+    return EncodeSmallFontString(&str[i - 1], out);
 }
 
 u16 FormatSmallFontHex(s32 value, u16* out) {
     u8 buf[11];
-    u8* p;
+    u8* cursor;
     s32 i;
 
     buf[0] = '0';
@@ -3065,97 +3065,97 @@ u16 FormatSmallFontHex(s32 value, u16* out) {
     buf[8] = (value & 0x000000F0) >> 4;
     buf[9] = value & 0xF;
     buf[10] = 0;
-    p = &buf[2];
+    cursor = &buf[2];
 
     for (i = 0; i < 8; i++) {
-        if (*p <= 9) {
-            *p += 0x30;
+        if (*cursor <= 9) {
+            *cursor += 0x30;
         } else {
-            *p += 0x37;
+            *cursor += 0x37;
         }
 
-        p++;
+        cursor++;
     }
 
     return EncodeSmallFontString(buf, out);
 }
 
 u16 FormatSmallFontBinary(u32 value, u16* out, u8 mode) {
-    u8 a[2];
-    u8 b[9];
-    u8 c[17];
-    u8 d[33];
+    u8 digits1[2];
+    u8 digits8[9];
+    u8 digits16[17];
+    u8 digits32[33];
 
     switch (mode) {
     case 0:
-        a[0] = value;
-        a[0] += '0';
-        a[1] = 0;
-        return EncodeSmallFontString(a, out);
+        digits1[0] = value;
+        digits1[0] += '0';
+        digits1[1] = 0;
+        return EncodeSmallFontString(digits1, out);
     case 1:
-        b[0] = (value >> 7) + '0';
-        b[1] = ((value >> 6) & 1) + '0';
-        b[2] = ((value >> 5) & 1) + '0';
-        b[3] = ((value >> 4) & 1) + '0';
-        b[4] = ((value >> 3) & 1) + '0';
-        b[5] = ((value >> 2) & 1) + '0';
-        b[6] = ((value >> 1) & 1) + '0';
-        b[7] = (value & 1) + '0';
-        b[8] = 0;
-        return EncodeSmallFontString(b, out);
+        digits8[0] = (value >> 7) + '0';
+        digits8[1] = ((value >> 6) & 1) + '0';
+        digits8[2] = ((value >> 5) & 1) + '0';
+        digits8[3] = ((value >> 4) & 1) + '0';
+        digits8[4] = ((value >> 3) & 1) + '0';
+        digits8[5] = ((value >> 2) & 1) + '0';
+        digits8[6] = ((value >> 1) & 1) + '0';
+        digits8[7] = (value & 1) + '0';
+        digits8[8] = 0;
+        return EncodeSmallFontString(digits8, out);
     case 2:
-        c[0] = (value >> 15) + '0';
-        c[1] = ((value >> 14) & 1) + '0';
-        c[2] = ((value >> 13) & 1) + '0';
-        c[3] = ((value >> 12) & 1) + '0';
-        c[4] = ((value >> 11) & 1) + '0';
-        c[5] = ((value >> 10) & 1) + '0';
-        c[6] = ((value >> 9) & 1) + '0';
-        c[7] = ((value >> 8) & 1) + '0';
-        c[8] = ((value >> 7) & 1) + '0';
-        c[9] = ((value >> 6) & 1) + '0';
-        c[10] = ((value >> 5) & 1) + '0';
-        c[11] = ((value >> 4) & 1) + '0';
-        c[12] = ((value >> 3) & 1) + '0';
-        c[13] = ((value >> 2) & 1) + '0';
-        c[14] = ((value >> 1) & 1) + '0';
-        c[15] = (value & 1) + '0';
-        c[16] = 0;
-        return EncodeSmallFontString(c, out);
+        digits16[0] = (value >> 15) + '0';
+        digits16[1] = ((value >> 14) & 1) + '0';
+        digits16[2] = ((value >> 13) & 1) + '0';
+        digits16[3] = ((value >> 12) & 1) + '0';
+        digits16[4] = ((value >> 11) & 1) + '0';
+        digits16[5] = ((value >> 10) & 1) + '0';
+        digits16[6] = ((value >> 9) & 1) + '0';
+        digits16[7] = ((value >> 8) & 1) + '0';
+        digits16[8] = ((value >> 7) & 1) + '0';
+        digits16[9] = ((value >> 6) & 1) + '0';
+        digits16[10] = ((value >> 5) & 1) + '0';
+        digits16[11] = ((value >> 4) & 1) + '0';
+        digits16[12] = ((value >> 3) & 1) + '0';
+        digits16[13] = ((value >> 2) & 1) + '0';
+        digits16[14] = ((value >> 1) & 1) + '0';
+        digits16[15] = (value & 1) + '0';
+        digits16[16] = 0;
+        return EncodeSmallFontString(digits16, out);
     case 3:
-        d[0] = (value >> 31) + '0';
-        d[1] = ((value >> 30) & 1) + '0';
-        d[2] = ((value >> 29) & 1) + '0';
-        d[3] = ((value >> 28) & 1) + '0';
-        d[4] = ((value >> 27) & 1) + '0';
-        d[5] = ((value >> 26) & 1) + '0';
-        d[6] = ((value >> 25) & 1) + '0';
-        d[7] = ((value >> 24) & 1) + '0';
-        d[8] = ((value >> 23) & 1) + '0';
-        d[9] = ((value >> 22) & 1) + '0';
-        d[10] = ((value >> 21) & 1) + '0';
-        d[11] = ((value >> 20) & 1) + '0';
-        d[12] = ((value >> 19) & 1) + '0';
-        d[13] = ((value >> 18) & 1) + '0';
-        d[14] = ((value >> 17) & 1) + '0';
-        d[15] = ((value >> 16) & 1) + '0';
-        d[16] = ((value >> 15) & 1) + '0';
-        d[17] = ((value >> 14) & 1) + '0';
-        d[18] = ((value >> 13) & 1) + '0';
-        d[19] = ((value >> 12) & 1) + '0';
-        d[20] = ((value >> 11) & 1) + '0';
-        d[21] = ((value >> 10) & 1) + '0';
-        d[22] = ((value >> 9) & 1) + '0';
-        d[23] = ((value >> 8) & 1) + '0';
-        d[24] = ((value >> 7) & 1) + '0';
-        d[25] = ((value >> 6) & 1) + '0';
-        d[26] = ((value >> 5) & 1) + '0';
-        d[27] = ((value >> 4) & 1) + '0';
-        d[28] = ((value >> 3) & 1) + '0';
-        d[29] = ((value >> 2) & 1) + '0';
-        d[30] = ((value >> 1) & 1) + '0';
-        d[31] = (value & 1) + '0';
-        return EncodeSmallFontString(d, out);
+        digits32[0] = (value >> 31) + '0';
+        digits32[1] = ((value >> 30) & 1) + '0';
+        digits32[2] = ((value >> 29) & 1) + '0';
+        digits32[3] = ((value >> 28) & 1) + '0';
+        digits32[4] = ((value >> 27) & 1) + '0';
+        digits32[5] = ((value >> 26) & 1) + '0';
+        digits32[6] = ((value >> 25) & 1) + '0';
+        digits32[7] = ((value >> 24) & 1) + '0';
+        digits32[8] = ((value >> 23) & 1) + '0';
+        digits32[9] = ((value >> 22) & 1) + '0';
+        digits32[10] = ((value >> 21) & 1) + '0';
+        digits32[11] = ((value >> 20) & 1) + '0';
+        digits32[12] = ((value >> 19) & 1) + '0';
+        digits32[13] = ((value >> 18) & 1) + '0';
+        digits32[14] = ((value >> 17) & 1) + '0';
+        digits32[15] = ((value >> 16) & 1) + '0';
+        digits32[16] = ((value >> 15) & 1) + '0';
+        digits32[17] = ((value >> 14) & 1) + '0';
+        digits32[18] = ((value >> 13) & 1) + '0';
+        digits32[19] = ((value >> 12) & 1) + '0';
+        digits32[20] = ((value >> 11) & 1) + '0';
+        digits32[21] = ((value >> 10) & 1) + '0';
+        digits32[22] = ((value >> 9) & 1) + '0';
+        digits32[23] = ((value >> 8) & 1) + '0';
+        digits32[24] = ((value >> 7) & 1) + '0';
+        digits32[25] = ((value >> 6) & 1) + '0';
+        digits32[26] = ((value >> 5) & 1) + '0';
+        digits32[27] = ((value >> 4) & 1) + '0';
+        digits32[28] = ((value >> 3) & 1) + '0';
+        digits32[29] = ((value >> 2) & 1) + '0';
+        digits32[30] = ((value >> 1) & 1) + '0';
+        digits32[31] = (value & 1) + '0';
+        return EncodeSmallFontString(digits32, out);
     }
 }
 
@@ -3171,21 +3171,21 @@ s32 DrawSmallFontString(s16 x, s16 y, u16* str, void* tiles, void* palette, u16 
 void GetSjisGlyph(u16 code, u16* glyph, u8* bank) {
     switch (code & 0xFF00) {
     case 0x8200: {
-        u16 v = code & 0xFF;
+        u16 low = code & 0xFF;
 
-        if ((u16)(v - 96) <= 25) {
+        if ((u16)(low - 96) <= 25) {
             *glyph = code + 0x7DAB;
         }
 
-        if ((u16)(v - 129) <= 25) {
+        if ((u16)(low - 129) <= 25) {
             *glyph = code + 0x7DA4;
         }
 
-        if ((u16)(v - 79) <= 9) {
+        if ((u16)(low - 79) <= 9) {
             *glyph = code + 0x7DB2;
         }
 
-        if ((u16)(v - 159) <= 82) {
+        if ((u16)(low - 159) <= 82) {
             *glyph = code + 0x7DA0;
         }
 
@@ -3193,13 +3193,13 @@ void GetSjisGlyph(u16 code, u16* glyph, u8* bank) {
         break;
     }
     case 0x8300: {
-        u16 v = code & 0xFF;
+        u16 low = code & 0xFF;
 
-        if ((u16)(v - 64) <= 62) {
+        if ((u16)(low - 64) <= 62) {
             *glyph = code + 0x7D52;
         }
 
-        if ((u16)(v - 128) <= 20) {
+        if ((u16)(low - 128) <= 20) {
             *glyph = code + 0x7D51;
         }
 
@@ -6234,17 +6234,17 @@ void GetSjisGlyph(u16 code, u16* glyph, u8* bank) {
 
 void SplitFourDigits(s16 value, u8* out) {
     s16 acc = 0;
-    s16 div;
+    s16 divisor;
     s16 i;
 
     if (value >= 0) {
-        div = 1000;
+        divisor = 1000;
 
         for (i = 0; i < 4; i++) {
-            u8* q = &out[i];
-            *q = value / div - acc;
-            acc = (acc + *q) * 10;
-            div /= 10;
+            u8* digit = &out[i];
+            *digit = value / divisor - acc;
+            acc = (acc + *digit) * 10;
+            divisor /= 10;
         }
     }
 }
@@ -6291,11 +6291,11 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
 u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText) {
     s32 cx;
     s32 cy;
-    s32 f;
+    s32 alternate;
 
     cx = 0;
     cy = 0;
-    f = 0;
+    alternate = 0;
 
     if (sCardMsgGlyphSprites == NULL) {
         return 0;
@@ -6304,19 +6304,19 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** next
     sTextEntryCount = 0;
 
     while (*text != 0) {
-        s32 v;
+        s32 glyph;
 
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
 
         if (*text == MSG_LATIN_CODE(0x4079, 29)) {
-            f = 1;
+            alternate = 1;
             text++;
         }
 
         if (*text == MSG_LATIN_CODE(0x4000, 30)) {
-            f = 0;
+            alternate = 0;
             text++;
         }
 
@@ -6325,76 +6325,76 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** next
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = *text;
+            glyph = *text;
 #else
             if ((u16)(*text - 32) <= 223) {
-                v = *text;
+                glyph = *text;
             } else {
                 switch (*text) {
                 case 0xE000:
-                    v = 25;
+                    glyph = 25;
                     break;
                 case 0x2191:
-                    v = 10;
+                    glyph = 10;
                     break;
                 case 0x2193:
-                    v = 11;
+                    glyph = 11;
                     break;
                 case 0x2190:
-                    v = 12;
+                    glyph = 12;
                     break;
                 case 0x2192:
-                    v = 13;
+                    glyph = 13;
                     break;
                 case 0x300C:
-                    v = 1;
+                    glyph = 1;
                     break;
                 case 0x300D:
-                    v = 2;
+                    glyph = 2;
                     break;
                 case 0x300E:
-                    v = 3;
+                    glyph = 3;
                     break;
                 case 0x300F:
-                    v = 4;
+                    glyph = 4;
                     break;
                 case 0x203B:
-                    v = 6;
+                    glyph = 6;
                     break;
                 case 0x266A:
-                    v = 18;
+                    glyph = 18;
                     break;
                 case 0x2642:
-                    v = 8;
+                    glyph = 8;
                     break;
                 case 0x2640:
-                    v = 9;
+                    glyph = 9;
                     break;
                 case 0x2605:
-                    v = 21;
+                    glyph = 21;
                     break;
                 case 0x25A0:
-                    v = 17;
+                    glyph = 17;
                     break;
                 default:
-                    v = 0;
+                    glyph = 0;
                     break;
                 }
             }
 #endif
 
-            sCardMsgGlyphSprites[sTextEntryCount].useAlternatePalette = f;
+            sCardMsgGlyphSprites[sTextEntryCount].useAlternatePalette = alternate;
 
             if (sCardMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
                 ReleaseObjTiles(sCardMsgGlyphSprites[sTextEntryCount].tiles);
                 sCardMsgGlyphSprites[sTextEntryCount].tiles = NULL;
             }
 
-            cx += (s16)sLatinGlyphWidths.widths[v] << 8;
+            cx += (s16)sLatinGlyphWidths.widths[glyph] << 8;
 
-            if (v != 32) {
-                v = ((u16*)gMsgLatinFontFrames[v])[3];
-                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
+            if (glyph != 32) {
+                glyph = ((u16*)gMsgLatinFontFrames[glyph])[3];
+                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[glyph * 32], 128);
             }
 
             sTextEntryCount++;
@@ -6419,13 +6419,13 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** next
 
 #ifndef VERSION_EU
 u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
-    u16 w;
-    u8 t;
+    u16 glyph;
+    u8 bank;
     s32 cx;
     s32 cy;
     s32 px;
-    w = 0;
-    t = 0;
+    glyph = 0;
+    bank = 0;
     cx = 0;
     cy = 0;
     px = 0;
@@ -6437,8 +6437,8 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
     sTextEntryCount = 0;
 
     while (*text != 0) {
-        u16 v;
-        w = 0;
+        u16 code;
+        glyph = 0;
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
@@ -6449,137 +6449,137 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
             cy += 0xC00;
             text += 2;
         } else {
-            v = *(u16*)text;
-            v = (v / 256) | (v << 8);
+            code = *(u16*)text;
+            code = (code / 256) | (code << 8);
             text += 2;
 
-            if ((v & 0xFF00) == 0x8100) {
-                switch (v & 0xFF) {
+            if ((code & 0xFF00) == 0x8100) {
+                switch (code & 0xFF) {
                 case 0x40:
-                    w = 0;
-                    t = 0;
+                    glyph = 0;
+                    bank = 0;
                     break;
                 case 0x41:
-                    w = 0xF5;
-                    t = 0;
+                    glyph = 0xF5;
+                    bank = 0;
                     break;
                 case 0x42:
-                    w = 0xF6;
-                    t = 0;
+                    glyph = 0xF6;
+                    bank = 0;
                     break;
                 case 0x44:
-                    w = 0xF7;
-                    t = 0;
+                    glyph = 0xF7;
+                    bank = 0;
                     break;
                 case 0x45:
-                    w = 0xF9;
-                    t = 0;
+                    glyph = 0xF9;
+                    bank = 0;
                     break;
                 case 0x48:
-                    w = 0xF1;
-                    t = 0;
+                    glyph = 0xF1;
+                    bank = 0;
                     break;
                 case 0x49:
-                    w = 0xF0;
-                    t = 0;
+                    glyph = 0xF0;
+                    bank = 0;
                     break;
                 case 0x58:
-                    w = 20;
-                    t = 2;
+                    glyph = 20;
+                    bank = 2;
                     break;
                 case 0x5B:
-                    w = 0xFD;
-                    t = 0;
+                    glyph = 0xFD;
+                    bank = 0;
                     break;
                 case 0x5C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0x60:
-                    w = 0xFE;
-                    t = 0;
+                    glyph = 0xFE;
+                    bank = 0;
                     break;
                 case 0x63:
-                    w = 0xFB;
-                    t = 0;
+                    glyph = 0xFB;
+                    bank = 0;
                     break;
                 case 0x75:
-                    w = 0xE8;
-                    t = 0;
+                    glyph = 0xE8;
+                    bank = 0;
                     break;
                 case 0x76:
-                    w = 0xE9;
-                    t = 0;
+                    glyph = 0xE9;
+                    bank = 0;
                     break;
                 case 0x77:
-                    w = 0xEA;
-                    t = 0;
+                    glyph = 0xEA;
+                    bank = 0;
                     break;
                 case 0x78:
-                    w = 0xEB;
-                    t = 0;
+                    glyph = 0xEB;
+                    bank = 0;
                     break;
                 case 0x66:
-                    w = 0xFF;
-                    t = 0;
+                    glyph = 0xFF;
+                    bank = 0;
                     break;
                 case 0x69:
-                    w = 0xEC;
-                    t = 0;
+                    glyph = 0xEC;
+                    bank = 0;
                     break;
                 case 0x6A:
-                    w = 0xED;
-                    t = 0;
+                    glyph = 0xED;
+                    bank = 0;
                     break;
                 case 0xA8:
-                    w = 0xE7;
-                    t = 0;
+                    glyph = 0xE7;
+                    bank = 0;
                     break;
                 case 0xA9:
-                    w = 0xE6;
-                    t = 0;
+                    glyph = 0xE6;
+                    bank = 0;
                     break;
                 case 0x7B:
-                    w = 0xDF;
-                    t = 0;
+                    glyph = 0xDF;
+                    bank = 0;
                     break;
                 case 0x7C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0xA6:
-                    w = 0xEE;
-                    t = 0;
+                    glyph = 0xEE;
+                    bank = 0;
                     break;
                 case 0x81:
-                    w = 0xEF;
-                    t = 0;
+                    glyph = 0xEF;
+                    bank = 0;
                     break;
                 case 0x93:
-                    w = 0xF2;
-                    t = 0;
+                    glyph = 0xF2;
+                    bank = 0;
                     break;
                 case 0x96:
-                    w = 0xF4;
-                    t = 0;
+                    glyph = 0xF4;
+                    bank = 0;
                     break;
                 case 0x5E:
-                    w = 0xF3;
-                    t = 0;
+                    glyph = 0xF3;
+                    bank = 0;
                     break;
                 case 0x43:
-                    w = 0xF8;
-                    t = 0;
+                    glyph = 0xF8;
+                    bank = 0;
                     break;
                 case 0x9A:
-                    w = 0x8E;
-                    t = 0;
+                    glyph = 0x8E;
+                    bank = 0;
                     break;
                 }
 
                 if (sTextEntryCount != 0 &&
-                    (v == 0x8141 || v == 0x8142 || v > 0x8177 || v == 0x8144 ||
-                     (v == 0x8148 || v == 0x8149)) &&
+                    (code == 0x8141 || code == 0x8142 || code > 0x8177 || code == 0x8144 ||
+                     (code == 0x8148 || code == 0x8149)) &&
                     cx == 0 && cy > 0) {
                     cx = px + 0xA00;
                     cy -= 0xC00;
@@ -6587,7 +6587,7 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
                     sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
                 }
             } else {
-                GetSjisGlyph(v, &w, &t);
+                GetSjisGlyph(code, &glyph, &bank);
             }
 
             if (sCardMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
@@ -6602,22 +6602,22 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
                 cy += 0xC00;
             }
 
-            switch (t) {
+            switch (bank) {
             case 0:
-                w = ((u16*)gMsgFontBank0Frames[w])[3];
-                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank0Frames[glyph])[3];
+                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank0Tiles[glyph * 32], 128);
                 break;
             case 1:
-                w = ((u16*)gMsgFontBank1Frames[w])[3];
-                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank1Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank1Frames[glyph])[3];
+                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank1Tiles[glyph * 32], 128);
                 break;
             case 2:
-                w = ((u16*)gMsgFontBank2Frames[w])[3];
-                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank2Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank2Frames[glyph])[3];
+                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank2Tiles[glyph * 32], 128);
                 break;
             case 3:
-                w = ((u16*)gMsgFontBank3Frames[w])[3];
-                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank3Tiles[w * 32], 128);
+                glyph = ((u16*)gMsgFontBank3Frames[glyph])[3];
+                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank3Tiles[glyph * 32], 128);
                 break;
             }
 
@@ -6626,9 +6626,9 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
 
         if (cy > 0x1800) {
             if (*text != 0) {
-                v = *(u16*)text;
+                code = *(u16*)text;
 
-                if ((u16)((v / 256) | (v << 8)) == 0x8142) {
+                if ((u16)((code / 256) | (code << 8)) == 0x8142) {
                     *nextText = NULL;
                 } else {
                     *nextText = text;
@@ -6649,17 +6649,17 @@ void DrawCardMsgGlyphs(u8 n) {
     u8 i;
 
     for (i = 0; i < n; i++) {
-        TextGlyphSprite* b = sCardMsgGlyphSprites;
+        TextGlyphSprite* sprites = sCardMsgGlyphSprites;
 
-        if (b[i].visible == 1) {
-            s32 x = b[i].x;
-            s32 y = b[i].y;
+        if (sprites[i].visible == 1) {
+            s32 x = sprites[i].x;
+            s32 y = sprites[i].y;
 
-            if (b[i].tiles != NULL) {
-                if (!b[i].useAlternatePalette) {
-                    DrawSprite(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].palette, NULL, 0, 0);
+            if (sprites[i].tiles != NULL) {
+                if (!sprites[i].useAlternatePalette) {
+                    DrawSprite(x >> 8, y >> 8, MSG_FONT_FRAMES[0], sprites[i].tiles, sprites[i].palette, NULL, 0, 0);
                 } else {
-                    DrawSprite(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].alternatePalette, NULL, 0, 0);
+                    DrawSprite(x >> 8, y >> 8, MSG_FONT_FRAMES[0], sprites[i].tiles, sprites[i].alternatePalette, NULL, 0, 0);
                 }
             }
         }
@@ -6690,18 +6690,18 @@ void DrawMsgGlyphsWithPalette(u8 n, void* palette) {
     u8 i;
 
     for (i = 0; i < n; i++) {
-        TextGlyphSprite* b = sMsgGlyphSprites;
+        TextGlyphSprite* sprites = sMsgGlyphSprites;
 
-        if (b[i].visible == 1) {
-            s32 x = b[i].x;
-            s32 y = b[i].y;
+        if (sprites[i].visible == 1) {
+            s32 x = sprites[i].x;
+            s32 y = sprites[i].y;
 
-            if (b[i].tiles != NULL) {
-                if (!b[i].useAlternatePalette) {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, palette, 0);
+            if (sprites[i].tiles != NULL) {
+                if (!sprites[i].useAlternatePalette) {
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], sprites[i].tiles, palette, 0);
                 } else {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles,
-                                  b[i].alternatePalette, 0);
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], sprites[i].tiles,
+                                  sprites[i].alternatePalette, 0);
                 }
             }
         }
@@ -6710,7 +6710,7 @@ void DrawMsgGlyphsWithPalette(u8 n, void* palette) {
 
 u16 FormatSmallFontHex16(s16 value, u16* out) {
     u8 buf[8];
-    u8* p;
+    u8* cursor;
     s32 i;
 
     buf[0] = (value & 0xF000) >> 12;
@@ -6718,16 +6718,16 @@ u16 FormatSmallFontHex16(s16 value, u16* out) {
     buf[2] = (value & 0x00F0) >> 4;
     buf[3] = value & 0xF;
     buf[4] = 0;
-    p = buf;
+    cursor = buf;
 
     for (i = 0; i < 4; i++) {
-        if (*p <= 9) {
-            *p += 0x30;
+        if (*cursor <= 9) {
+            *cursor += 0x30;
         } else {
-            *p += 0x37;
+            *cursor += 0x37;
         }
 
-        p++;
+        cursor++;
     }
 
     return EncodeSmallFontString(buf, out);
@@ -6736,174 +6736,174 @@ u16 FormatSmallFontHex16(s16 value, u16* out) {
 #ifndef VERSION_EU
 s32 CopySjisGlyphsToVram(const TextChar* str) {
     u8 buf[2];
-    u16* c;
-    u16 w;
-    u8 t;
+    u16* raw;
+    u16 glyph;
+    u8 bank;
     u8* dst;
     u8 n;
-    w = 0;
+    glyph = 0;
     dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP);
-    t = 0;
+    bank = 0;
     n = 0;
 
     while (*str != 0) {
-        u16 v;
+        u16 code;
         buf[0] = str[0];
         buf[1] = str[1];
-        c = (u16*)buf;
+        raw = (u16*)buf;
 
-        if (*c == 0x6E6E) {
+        if (*raw == 0x6E6E) {
             str += 2;
         } else {
-            v = *c;
-            v = (v / 256) | (v << 8);
+            code = *raw;
+            code = (code / 256) | (code << 8);
             str += 2;
 
-            if ((v & 0xFF00) == 0x8100) {
-                v &= 0xFF;
+            if ((code & 0xFF00) == 0x8100) {
+                code &= 0xFF;
 
-                switch (v) {
+                switch (code) {
         case 0x40:
-            w = 0;
-            t = 0;
+            glyph = 0;
+            bank = 0;
             break;
         case 0x41:
-            w = 0xF5;
-            t = 0;
+            glyph = 0xF5;
+            bank = 0;
             break;
         case 0x42:
-            w = 0xF6;
-            t = 0;
+            glyph = 0xF6;
+            bank = 0;
             break;
         case 0x45:
-            w = 0xF9;
-            t = 0;
+            glyph = 0xF9;
+            bank = 0;
             break;
         case 0x46:
-            w = 0xFA;
-            t = 0;
+            glyph = 0xFA;
+            bank = 0;
             break;
         case 0x48:
-            w = 0xF1;
-            t = 0;
+            glyph = 0xF1;
+            bank = 0;
             break;
         case 0x49:
-            w = 0xF0;
-            t = 0;
+            glyph = 0xF0;
+            bank = 0;
             break;
         case 0x58:
-            w = 20;
-            t = 2;
+            glyph = 20;
+            bank = 2;
             break;
         case 0x5B:
-            w = 0xFD;
-            t = 0;
+            glyph = 0xFD;
+            bank = 0;
             break;
         case 0x5C:
-            w = 0xFC;
-            t = 0;
+            glyph = 0xFC;
+            bank = 0;
             break;
         case 0x60:
-            w = 0xFE;
-            t = 0;
+            glyph = 0xFE;
+            bank = 0;
             break;
         case 0x63:
-            w = 0xFB;
-            t = 0;
+            glyph = 0xFB;
+            bank = 0;
             break;
         case 0x75:
-            w = 0xE8;
-            t = 0;
+            glyph = 0xE8;
+            bank = 0;
             break;
         case 0x76:
-            w = 0xE9;
-            t = 0;
+            glyph = 0xE9;
+            bank = 0;
             break;
         case 0x77:
-            w = 0xEA;
-            t = 0;
+            glyph = 0xEA;
+            bank = 0;
             break;
         case 0x78:
-            w = 0xEB;
-            t = 0;
+            glyph = 0xEB;
+            bank = 0;
             break;
         case 0x66:
-            w = 0xFF;
-            t = 0;
+            glyph = 0xFF;
+            bank = 0;
             break;
         case 0x69:
-            w = 0xEC;
-            t = 0;
+            glyph = 0xEC;
+            bank = 0;
             break;
         case 0x6A:
-            w = 0xED;
-            t = 0;
+            glyph = 0xED;
+            bank = 0;
             break;
         case 0xA8:
-            w = 0xE7;
-            t = 0;
+            glyph = 0xE7;
+            bank = 0;
             break;
         case 0xA9:
-            w = 0xE6;
-            t = 0;
+            glyph = 0xE6;
+            bank = 0;
             break;
         case 0x7B:
-            w = 0xDF;
-            t = 0;
+            glyph = 0xDF;
+            bank = 0;
             break;
         case 0x7C:
-            w = 0xFC;
-            t = 0;
+            glyph = 0xFC;
+            bank = 0;
             break;
         case 0xA6:
-            w = 0xEE;
-            t = 0;
+            glyph = 0xEE;
+            bank = 0;
             break;
         case 0x81:
-            w = 0xEF;
-            t = 0;
+            glyph = 0xEF;
+            bank = 0;
             break;
         case 0x93:
-            w = 0xF2;
-            t = 0;
+            glyph = 0xF2;
+            bank = 0;
             break;
         case 0x96:
-            w = 0xF4;
-            t = 0;
+            glyph = 0xF4;
+            bank = 0;
             break;
         case 0x5E:
-            w = 0xF3;
-            t = 0;
+            glyph = 0xF3;
+            bank = 0;
             break;
         case 0x43:
-            w = 0xF8;
-            t = 0;
+            glyph = 0xF8;
+            bank = 0;
             break;
         case 0x9A:
-            w = 0x8E;
-            t = 0;
+            glyph = 0x8E;
+            bank = 0;
             break;
                 }
             } else {
-                GetSjisGlyph(v, &w, &t);
+                GetSjisGlyph(code, &glyph, &bank);
             }
 
-            switch (t) {
+            switch (bank) {
         case 0:
-            w = ((u16*)gMsgFontBank0Frames[w])[3];
-            CpuCopy16(&gMsgFontBank0Tiles[w * 32], dst, 0x80);
+            glyph = ((u16*)gMsgFontBank0Frames[glyph])[3];
+            CpuCopy16(&gMsgFontBank0Tiles[glyph * 32], dst, 0x80);
             break;
         case 1:
-            w = ((u16*)gMsgFontBank1Frames[w])[3];
-            CpuCopy16(&gMsgFontBank1Tiles[w * 32], dst, 0x80);
+            glyph = ((u16*)gMsgFontBank1Frames[glyph])[3];
+            CpuCopy16(&gMsgFontBank1Tiles[glyph * 32], dst, 0x80);
             break;
         case 2:
-            w = ((u16*)gMsgFontBank2Frames[w])[3];
-            CpuCopy16(&gMsgFontBank2Tiles[w * 32], dst, 0x80);
+            glyph = ((u16*)gMsgFontBank2Frames[glyph])[3];
+            CpuCopy16(&gMsgFontBank2Tiles[glyph * 32], dst, 0x80);
             break;
         case 3:
-            w = ((u16*)gMsgFontBank3Frames[w])[3];
-            CpuCopy16(&gMsgFontBank3Tiles[w * 32], dst, 0x80);
+            glyph = ((u16*)gMsgFontBank3Frames[glyph])[3];
+            CpuCopy16(&gMsgFontBank3Tiles[glyph * 32], dst, 0x80);
             break;
             }
 
@@ -6920,174 +6920,174 @@ s32 CopySjisGlyphsToVram(const TextChar* str) {
 #ifndef VERSION_EU
 s32 CopySjisGlyphsToVramAt(const TextChar* str, u16 tile) {
     u8 buf[2];
-    u16* c;
-    u16 w;
-    u8 t;
+    u16* raw;
+    u16 glyph;
+    u8 bank;
     u8* dst;
     u8 n;
-    w = 0;
+    glyph = 0;
     dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + tile * 32;
-    t = 0;
+    bank = 0;
     n = 0;
 
     while (*str != 0) {
-        u16 v;
+        u16 code;
         buf[0] = str[0];
         buf[1] = str[1];
-        c = (u16*)buf;
+        raw = (u16*)buf;
 
-        if (*c == 0x6E6E) {
+        if (*raw == 0x6E6E) {
             str += 2;
         } else {
-            v = *c;
-            v = (v / 256) | (v << 8);
+            code = *raw;
+            code = (code / 256) | (code << 8);
             str += 2;
 
-            if ((v & 0xFF00) == 0x8100) {
-                v &= 0xFF;
+            if ((code & 0xFF00) == 0x8100) {
+                code &= 0xFF;
 
-                switch (v) {
+                switch (code) {
                 case 0x40:
-                    w = 0;
-                    t = 0;
+                    glyph = 0;
+                    bank = 0;
                     break;
                 case 0x41:
-                    w = 0xF5;
-                    t = 0;
+                    glyph = 0xF5;
+                    bank = 0;
                     break;
                 case 0x42:
-                    w = 0xF6;
-                    t = 0;
+                    glyph = 0xF6;
+                    bank = 0;
                     break;
                 case 0x45:
-                    w = 0xF9;
-                    t = 0;
+                    glyph = 0xF9;
+                    bank = 0;
                     break;
                 case 0x46:
-                    w = 0xFA;
-                    t = 0;
+                    glyph = 0xFA;
+                    bank = 0;
                     break;
                 case 0x48:
-                    w = 0xF1;
-                    t = 0;
+                    glyph = 0xF1;
+                    bank = 0;
                     break;
                 case 0x49:
-                    w = 0xF0;
-                    t = 0;
+                    glyph = 0xF0;
+                    bank = 0;
                     break;
                 case 0x58:
-                    w = 20;
-                    t = 2;
+                    glyph = 20;
+                    bank = 2;
                     break;
                 case 0x5B:
-                    w = 0xFD;
-                    t = 0;
+                    glyph = 0xFD;
+                    bank = 0;
                     break;
                 case 0x5C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0x60:
-                    w = 0xFE;
-                    t = 0;
+                    glyph = 0xFE;
+                    bank = 0;
                     break;
                 case 0x63:
-                    w = 0xFB;
-                    t = 0;
+                    glyph = 0xFB;
+                    bank = 0;
                     break;
                 case 0x75:
-                    w = 0xE8;
-                    t = 0;
+                    glyph = 0xE8;
+                    bank = 0;
                     break;
                 case 0x76:
-                    w = 0xE9;
-                    t = 0;
+                    glyph = 0xE9;
+                    bank = 0;
                     break;
                 case 0x77:
-                    w = 0xEA;
-                    t = 0;
+                    glyph = 0xEA;
+                    bank = 0;
                     break;
                 case 0x78:
-                    w = 0xEB;
-                    t = 0;
+                    glyph = 0xEB;
+                    bank = 0;
                     break;
                 case 0x66:
-                    w = 0xFF;
-                    t = 0;
+                    glyph = 0xFF;
+                    bank = 0;
                     break;
                 case 0x69:
-                    w = 0xEC;
-                    t = 0;
+                    glyph = 0xEC;
+                    bank = 0;
                     break;
                 case 0x6A:
-                    w = 0xED;
-                    t = 0;
+                    glyph = 0xED;
+                    bank = 0;
                     break;
                 case 0xA8:
-                    w = 0xE7;
-                    t = 0;
+                    glyph = 0xE7;
+                    bank = 0;
                     break;
                 case 0xA9:
-                    w = 0xE6;
-                    t = 0;
+                    glyph = 0xE6;
+                    bank = 0;
                     break;
                 case 0x7B:
-                    w = 0xDF;
-                    t = 0;
+                    glyph = 0xDF;
+                    bank = 0;
                     break;
                 case 0x7C:
-                    w = 0xFC;
-                    t = 0;
+                    glyph = 0xFC;
+                    bank = 0;
                     break;
                 case 0xA6:
-                    w = 0xEE;
-                    t = 0;
+                    glyph = 0xEE;
+                    bank = 0;
                     break;
                 case 0x81:
-                    w = 0xEF;
-                    t = 0;
+                    glyph = 0xEF;
+                    bank = 0;
                     break;
                 case 0x93:
-                    w = 0xF2;
-                    t = 0;
+                    glyph = 0xF2;
+                    bank = 0;
                     break;
                 case 0x96:
-                    w = 0xF4;
-                    t = 0;
+                    glyph = 0xF4;
+                    bank = 0;
                     break;
                 case 0x5E:
-                    w = 0xF3;
-                    t = 0;
+                    glyph = 0xF3;
+                    bank = 0;
                     break;
                 case 0x43:
-                    w = 0xF8;
-                    t = 0;
+                    glyph = 0xF8;
+                    bank = 0;
                     break;
                 case 0x9A:
-                    w = 0x8E;
-                    t = 0;
+                    glyph = 0x8E;
+                    bank = 0;
                     break;
                 }
             } else {
-                GetSjisGlyph(v, &w, &t);
+                GetSjisGlyph(code, &glyph, &bank);
             }
 
-            switch (t) {
+            switch (bank) {
             case 0:
-                w = ((u16*)gMsgFontBank0Frames[w])[3];
-                CpuCopy16(&gMsgFontBank0Tiles[w * 32], dst, 0x80);
+                glyph = ((u16*)gMsgFontBank0Frames[glyph])[3];
+                CpuCopy16(&gMsgFontBank0Tiles[glyph * 32], dst, 0x80);
                 break;
             case 1:
-                w = ((u16*)gMsgFontBank1Frames[w])[3];
-                CpuCopy16(&gMsgFontBank1Tiles[w * 32], dst, 0x80);
+                glyph = ((u16*)gMsgFontBank1Frames[glyph])[3];
+                CpuCopy16(&gMsgFontBank1Tiles[glyph * 32], dst, 0x80);
                 break;
             case 2:
-                w = ((u16*)gMsgFontBank2Frames[w])[3];
-                CpuCopy16(&gMsgFontBank2Tiles[w * 32], dst, 0x80);
+                glyph = ((u16*)gMsgFontBank2Frames[glyph])[3];
+                CpuCopy16(&gMsgFontBank2Tiles[glyph * 32], dst, 0x80);
                 break;
             case 3:
-                w = ((u16*)gMsgFontBank3Frames[w])[3];
-                CpuCopy16(&gMsgFontBank3Tiles[w * 32], dst, 0x80);
+                glyph = ((u16*)gMsgFontBank3Frames[glyph])[3];
+                CpuCopy16(&gMsgFontBank3Tiles[glyph * 32], dst, 0x80);
                 break;
             }
 
@@ -7108,7 +7108,7 @@ u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile) {
     *widths = 0;
 
     while (*str != 0) {
-        s32 v = 0;
+        s32 glyph = 0;
 
 #ifdef VERSION_EU
         if (*str == 31) {
@@ -7118,72 +7118,72 @@ u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile) {
             *widths = 0;
         } else {
 #ifdef VERSION_EU
-            v = *str;
+            glyph = *str;
 #else
 #ifdef VERSION_JP
             if (*str > 31) {
 #else
             if ((u16)(*str - 32) <= 223) {
 #endif
-                v = *str;
+                glyph = *str;
             } else {
                 switch (*str) {
                 case 0xE000:
-                    v = 25;
+                    glyph = 25;
                     break;
                 case 0x2191:
-                    v = 10;
+                    glyph = 10;
                     break;
                 case 0x2193:
-                    v = 11;
+                    glyph = 11;
                     break;
                 case 0x2190:
-                    v = 12;
+                    glyph = 12;
                     break;
                 case 0x2192:
-                    v = 13;
+                    glyph = 13;
                     break;
                 case 0x300C:
-                    v = 1;
+                    glyph = 1;
                     break;
                 case 0x300D:
-                    v = 2;
+                    glyph = 2;
                     break;
                 case 0x300E:
-                    v = 3;
+                    glyph = 3;
                     break;
                 case 0x300F:
-                    v = 4;
+                    glyph = 4;
                     break;
                 case 0x203B:
-                    v = 6;
+                    glyph = 6;
                     break;
                 case 0x266A:
-                    v = 18;
+                    glyph = 18;
                     break;
                 case 0x2642:
-                    v = 8;
+                    glyph = 8;
                     break;
                 case 0x2640:
-                    v = 9;
+                    glyph = 9;
                     break;
                 case 0x2605:
-                    v = 21;
+                    glyph = 21;
                     break;
                 case 0x25A0:
-                    v = 17;
+                    glyph = 17;
                     break;
                 default:
-                    v = 0;
+                    glyph = 0;
                     break;
                 }
             }
 #endif
 
-            if (v != 32) {
-                *widths = sLatinGlyphWidths.widths[v];
-                v = ((u16*)gMsgLatinFontFrames[v])[3];
-                CpuCopy16(&gMsgLatinFontTiles[v * 32], dst, 0x80);
+            if (glyph != 32) {
+                *widths = sLatinGlyphWidths.widths[glyph];
+                glyph = ((u16*)gMsgLatinFontFrames[glyph])[3];
+                CpuCopy16(&gMsgLatinFontTiles[glyph * 32], dst, 0x80);
                 dst += 128;
                 sTextEntryCount++;
                 widths++;

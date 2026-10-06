@@ -63,7 +63,7 @@ void task_sroll_b_char_0(SrollBCharWork* work, EvtObjParam* arg) {
 }
 
 s32 task_sroll_b_char_1(SrollBCharWork* work) {
-    SrollBCrtnArg a;
+    SrollBCrtnArg sparkle;
 
     if (work->obj->flags & EVTOBJ_FLAG_ANIM_CHANGED) {
         SrollBCharChangeAnim(work);
@@ -89,10 +89,10 @@ s32 task_sroll_b_char_1(SrollBCharWork* work) {
         break;
     case SROLL_B_CHAR_MOTION_BOB_SPARKLE:
         if ((work->motionTimer & 3) == 0) {
-            a.kind = 2;
-            a.x = work->obj->x;
-            a.y = work->obj->y;
-            TaskCreate(&work->tasks, &gTaskDescSrollBCrtn, &a);
+            sparkle.kind = 2;
+            sparkle.x = work->obj->x;
+            sparkle.y = work->obj->y;
+            TaskCreate(&work->tasks, &gTaskDescSrollBCrtn, &sparkle);
         }
 
         work->obj->z = (gSrollBCharHopOffsets[(work->motionTimer >> 2) & 15] << 8) >> 2;

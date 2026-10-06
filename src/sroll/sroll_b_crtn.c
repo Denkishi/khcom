@@ -26,7 +26,7 @@ static inline s32 GetSrollCurtainOffset() {
 
 void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* arg) {
     AnimState* anim;
-    s32 t;
+    s32 offset;
 
     work->timer = 0;
     work->kind = arg->kind;
@@ -53,10 +53,10 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* arg) {
         AnimStart(anim, 0, 0);
         break;
     case 2:
-        t = GetSrollCurtainOffset();
-        work->x = arg->x + t;
-        t = GetSrollCurtainOffset();
-        work->y = arg->y + t;
+        offset = GetSrollCurtainOffset();
+        work->x = arg->x + offset;
+        offset = GetSrollCurtainOffset();
+        work->y = arg->y + offset;
         work->tiles = AllocObjTiles(128, gSmnTinkEffTiles);
         work->palette = LoadObjPalette(gCommonObjPalette, 32);
         anim = &work->anim;
@@ -69,16 +69,16 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* arg) {
 }
 
 u8 task_sroll_b_crtn_1(SrollBCrtnWork* work) {
-    u8 r;
+    u8 alive;
 
-    r = 1;
+    alive = 1;
     AnimUpdate(&work->anim);
     work->timer++;
 
     switch (work->kind) {
     case 1:
         if (work->timer > 120) {
-            r = 0;
+            alive = 0;
         }
 
         break;
@@ -86,7 +86,7 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* work) {
         work->y += 0x100;
 
         if (work->timer > 20) {
-            r = 0;
+            alive = 0;
         }
 
         break;
@@ -97,13 +97,13 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* work) {
     case 0:
     case 3:
         if (work->timer > 50) {
-            r = 0;
+            alive = 0;
         }
 
         break;
     }
 
-    return r;
+    return alive;
 }
 
 void task_sroll_b_crtn_2(SrollBCrtnWork* work) {

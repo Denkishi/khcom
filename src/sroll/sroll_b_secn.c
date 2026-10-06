@@ -54,14 +54,14 @@ void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* arg) {
 }
 
 u8 task_sroll_b_secn_1(SrollBSecnWork* work) {
-    u8 r;
+    u8 alive;
     s16 y;
 
-    r = 1;
+    alive = 1;
     y = (work->y >> 8) - (*work->scrollY >> 8);
 
     if (y <= -32) {
-        r = 0;
+        alive = 0;
     }
 
     if (y <= 159) {
@@ -78,7 +78,7 @@ u8 task_sroll_b_secn_1(SrollBSecnWork* work) {
     }
 
     work->timer++;
-    return r;
+    return alive;
 }
 
 void task_sroll_b_secn_2(SrollBSecnWork* work) {

@@ -2971,13 +2971,13 @@ u8 StaffRollBlendIsActive(StaffRollWork* work) {
 }
 
 void StaffRollBlendUpdate(StaffRollWork* work) {
-    u16 v;
+    u16 level;
 
     if (work->blendTimer < work->blendDuration) {
-        v = ((work->blendTimer << 12) / work->blendDuration) << 8 >> 16;
+        level = ((work->blendTimer << 12) / work->blendDuration) << 8 >> 16;
         work->blendTimer = work->blendTimer + 1;
     } else {
-        v = 16;
+        level = 16;
         gBldCnt &= ~BLDCNT_EFFECT_MASK;
         gBldAlpha = 0;
         gBldY = 0;
@@ -2986,17 +2986,17 @@ void StaffRollBlendUpdate(StaffRollWork* work) {
     switch (work->blendMode) {
     case STAFF_ROLL_BLEND_MODE_FADE_IN:
     case STAFF_ROLL_BLEND_MODE_FADE_IN_WHITE:
-        gBldY = 16 - v;
+        gBldY = 16 - level;
         break;
     case STAFF_ROLL_BLEND_MODE_FADE_OUT:
     case STAFF_ROLL_BLEND_MODE_FADE_OUT_WHITE:
-        gBldY = v;
+        gBldY = level;
         break;
     case STAFF_ROLL_BLEND_MODE_ALPHA_IN:
-        gBldAlpha = v;
+        gBldAlpha = level;
         break;
     case STAFF_ROLL_BLEND_MODE_ALPHA_OUT:
-        gBldAlpha = 16 - v;
+        gBldAlpha = 16 - level;
         break;
     }
 }
@@ -3039,7 +3039,7 @@ EvtObj* StaffRollGetScriptObj(StaffRollWork* work) {
 
 void StaffRollRunScript(StaffRollWork* work) {
     StaffRollLabelArg arg;
-    EvtObj* e;
+    EvtObj* obj;
     s32 run;
     s32 x;
     s32 y;
@@ -3065,8 +3065,8 @@ void StaffRollRunScript(StaffRollWork* work) {
                     work->opTimer = 0;
                 }
 
-                e = &work->objs[work->moveObj];
-                EvtObjSetPos(e, x, y, 0);
+                obj = &work->objs[work->moveObj];
+                EvtObjSetPos(obj, x, y, 0);
                 work->opTimer++;
                 break;
             case STAFF_ROLL_SCRIPT_OP_WAIT:
@@ -3094,23 +3094,23 @@ void StaffRollRunScript(StaffRollWork* work) {
             work->scriptFrame = 0;
             continue;
         case STAFF_ROLL_SCRIPT_OP_SET_ANIM:
-            e = StaffRollGetScriptObj(work);
-            EvtObjSetAnim(e, work->script[work->scriptPos + 4]);
+            obj = StaffRollGetScriptObj(work);
+            EvtObjSetAnim(obj, work->script[work->scriptPos + 4]);
             break;
         case STAFF_ROLL_SCRIPT_OP_SET_DRAW_FLAGS:
-            e = StaffRollGetScriptObj(work);
-            EvtObjSetDrawFlags(e, work->script[work->scriptPos + 4] | 0x400);
+            obj = StaffRollGetScriptObj(work);
+            EvtObjSetDrawFlags(obj, work->script[work->scriptPos + 4] | 0x400);
             break;
         case STAFF_ROLL_SCRIPT_OP_SET_POS:
-            e = StaffRollGetScriptObj(work);
-            EvtObjSetPos(e, work->script[work->scriptPos + 4] << 8, work->script[work->scriptPos + 5] << 8, 0);
+            obj = StaffRollGetScriptObj(work);
+            EvtObjSetPos(obj, work->script[work->scriptPos + 4] << 8, work->script[work->scriptPos + 5] << 8, 0);
             break;
         case STAFF_ROLL_SCRIPT_OP_MOVE:
-            e = StaffRollGetScriptObj(work);
+            obj = StaffRollGetScriptObj(work);
             work->activeOp = STAFF_ROLL_SCRIPT_OP_MOVE;
             work->moveObj = work->script[work->scriptPos + 3];
-            work->moveStartX = e->x;
-            work->moveStartY = e->y;
+            work->moveStartX = obj->x;
+            work->moveStartY = obj->y;
             work->moveEndX = work->script[work->scriptPos + 4] << 8;
             work->moveEndY = work->script[work->scriptPos + 5] << 8;
             work->opDuration = work->script[work->scriptPos + 6];
@@ -3134,28 +3134,28 @@ void StaffRollRunScript(StaffRollWork* work) {
             FadeStartOut(FADE_MODE_BLACK, work->script[work->scriptPos + 4]);
             break;
         case STAFF_ROLL_SCRIPT_OP_ALPHA_IN:
-            e = StaffRollGetScriptObj(work);
-            e->drawFlags |= SPRITE_FLAG_BLEND;
+            obj = StaffRollGetScriptObj(work);
+            obj->drawFlags |= SPRITE_FLAG_BLEND;
             StaffRollBlendAlphaIn(work, 0x2000, work->script[work->scriptPos + 4]);
             break;
         case STAFF_ROLL_SCRIPT_OP_ALPHA_OUT:
-            e = StaffRollGetScriptObj(work);
-            e->drawFlags |= SPRITE_FLAG_BLEND;
+            obj = StaffRollGetScriptObj(work);
+            obj->drawFlags |= SPRITE_FLAG_BLEND;
             StaffRollBlendAlphaOut(work, 0x2000, work->script[work->scriptPos + 4]);
             break;
         case STAFF_ROLL_SCRIPT_OP_BLEND_ON:
-            e = StaffRollGetScriptObj(work);
-            e->drawFlags |= SPRITE_FLAG_BLEND;
+            obj = StaffRollGetScriptObj(work);
+            obj->drawFlags |= SPRITE_FLAG_BLEND;
             break;
         case STAFF_ROLL_SCRIPT_OP_BLEND_OFF:
-            e = StaffRollGetScriptObj(work);
-            e->drawFlags &= ~SPRITE_FLAG_BLEND;
+            obj = StaffRollGetScriptObj(work);
+            obj->drawFlags &= ~SPRITE_FLAG_BLEND;
             break;
         case STAFF_ROLL_SCRIPT_OP_SPAWN_EFFECT:
-            e = StaffRollGetScriptObj(work);
+            obj = StaffRollGetScriptObj(work);
             arg.kind = work->script[work->scriptPos + 4];
-            arg.x = e->x;
-            arg.y = e->y;
+            arg.x = obj->x;
+            arg.y = obj->y;
             TaskCreate(&work->tasks2, &gTaskDescSrollBCrtn, &arg);
             break;
         case STAFF_ROLL_SCRIPT_OP_SET_MOTION:
@@ -3173,51 +3173,51 @@ void StaffRollRunScript(StaffRollWork* work) {
 }
 
 void mode_StaffRoll_0() {
-    StaffRollWork* w;
-    StaffRollWork** p;
+    StaffRollWork* work;
+    StaffRollWork** workPtr;
 
-    p = &sStaffRollWork;
-    w = EwramAlloc(sizeof(StaffRollWork));
-    *p = w;
+    workPtr = &sStaffRollWork;
+    work = EwramAlloc(sizeof(StaffRollWork));
+    *workPtr = work;
     SetBackdropColor(0, 0, 0);
     SpriteReset();
-    w->palette = LoadObjPalette(gSrollSecnPalettes, 0x100);
-    w->unk_000 = 1;
-    w->unk_001 = 1;
-    w->phase = STAFF_ROLL_PHASE_WAIT_START;
-    w->phaseTimer = 0;
-    w->musicFrames = 0;
-    w->secnCount = 0;
-    StaffRollBlendReset(w);
-    w->sceneState = STAFF_ROLL_SCENE_STATE_LOAD;
-    w->sceneStep = 0;
-    w->sceneTimer = 0;
-    w->sceneIndex = -1;
-    w->nextScene = 0;
-    w->sceneScroll = 0;
-    w->creditsState = STAFF_ROLL_CREDITS_STATE_SETUP;
-    w->creditsEnded = 0;
-    w->creditsTimer = 0;
-    w->unk_0AC = 0;
-    w->lastRow = -1;
-    w->scrollY = 0;
-    w->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
-    w->imageTimer = 0;
-    w->endState = STAFF_ROLL_END_STATE_LOAD;
-    w->endTimer = 0;
-    w->script = NULL;
-    w->scriptPos = 0;
-    w->scriptFrame = 0;
-    w->activeOp = STAFF_ROLL_SCRIPT_OP_NONE;
-    w->opTimer = 0;
-    TaskPoolInit(&w->tasks, 32);
-    TaskPoolInit(&w->tasks2, 32);
-    w->subTasks[0] = NULL;
-    w->subTasks[1] = NULL;
-    w->subTasks[2] = NULL;
-    w->subTasks[4] = NULL;
-    w->subTasks[5] = NULL;
-    w->objs[0].animEntry = NULL;
+    work->palette = LoadObjPalette(gSrollSecnPalettes, 0x100);
+    work->unk_000 = 1;
+    work->unk_001 = 1;
+    work->phase = STAFF_ROLL_PHASE_WAIT_START;
+    work->phaseTimer = 0;
+    work->musicFrames = 0;
+    work->secnCount = 0;
+    StaffRollBlendReset(work);
+    work->sceneState = STAFF_ROLL_SCENE_STATE_LOAD;
+    work->sceneStep = 0;
+    work->sceneTimer = 0;
+    work->sceneIndex = -1;
+    work->nextScene = 0;
+    work->sceneScroll = 0;
+    work->creditsState = STAFF_ROLL_CREDITS_STATE_SETUP;
+    work->creditsEnded = 0;
+    work->creditsTimer = 0;
+    work->unk_0AC = 0;
+    work->lastRow = -1;
+    work->scrollY = 0;
+    work->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
+    work->imageTimer = 0;
+    work->endState = STAFF_ROLL_END_STATE_LOAD;
+    work->endTimer = 0;
+    work->script = NULL;
+    work->scriptPos = 0;
+    work->scriptFrame = 0;
+    work->activeOp = STAFF_ROLL_SCRIPT_OP_NONE;
+    work->opTimer = 0;
+    TaskPoolInit(&work->tasks, 32);
+    TaskPoolInit(&work->tasks2, 32);
+    work->subTasks[0] = NULL;
+    work->subTasks[1] = NULL;
+    work->subTasks[2] = NULL;
+    work->subTasks[4] = NULL;
+    work->subTasks[5] = NULL;
+    work->objs[0].animEntry = NULL;
 }
 
 u8 StaffRollWaitStart(StaffRollWork* work) {
@@ -3237,7 +3237,7 @@ u8 StaffRollWaitStart(StaffRollWork* work) {
 u8 StaffRollRunScenes(StaffRollWork* work) {
     StaffRollTaskArg arg;
     u8 result;
-    s32 z;
+    s32 centerX;
 
     result = 1;
 
@@ -3293,7 +3293,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
         work->sceneStep = 0;
     case STAFF_ROLL_SCENE_STATE_FADE_IN:
     {
-        u8 t;
+        u8 blendActive;
 
             if (work->sceneStep == 0) {
                 if (work->scene[work->sceneIndex].fadeInBg == 1) {
@@ -3306,15 +3306,15 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
             }
 
             StaffRollBlendUpdate(work);
-            t = StaffRollBlendIsActive(work);
+            blendActive = StaffRollBlendIsActive(work);
 
-            if (t) {
+            if (blendActive) {
                 break;
             }
 
-            arg.kind = t;
+            arg.kind = blendActive;
             arg.animId = work->scene[work->sceneIndex].animId;
-            arg.nameIndex = t;
+            arg.nameIndex = blendActive;
             arg.x = 0x14000;
             arg.y = work->scene[work->sceneIndex].targetY;
             arg.targetX = work->scene[work->sceneIndex].targetX;
@@ -3324,16 +3324,16 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
             arg.animId = 1;
             arg.nameIndex = work->scene[work->sceneIndex].nameIndex;
             arg.x = -0x5000;
-            z = 0x7800;
-            arg.targetX = z;
+            centerX = 0x7800;
+            arg.targetX = centerX;
             work->subTasks[1] = TaskCreate(&work->tasks, &gTaskDescSrollAName, &arg);
             arg.kind = 2;
             arg.animId = work->scene[work->sceneIndex].animId;
             arg.nameIndex = work->scene[work->sceneIndex].nameIndex;
-            arg.x = z;
+            arg.x = centerX;
             work->subTasks[2] = TaskCreate(&work->tasks, &gTaskDescSrollAName, &arg);
             work->sceneState = STAFF_ROLL_SCENE_STATE_HOLD;
-            work->sceneStep = t;
+            work->sceneStep = blendActive;
             break;
     }
     case STAFF_ROLL_SCENE_STATE_HOLD:
@@ -3367,7 +3367,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
         break;
     case STAFF_ROLL_SCENE_STATE_FADE_OUT:
     {
-        u8 t;
+        u8 blendActive;
 
             if (work->sceneStep == 0) {
                 if (work->scene[work->sceneIndex].fadeOutBg == 1) {
@@ -3380,9 +3380,9 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
             }
 
             StaffRollBlendUpdate(work);
-            t = StaffRollBlendIsActive(work);
+            blendActive = StaffRollBlendIsActive(work);
 
-            if (t) {
+            if (blendActive) {
                 break;
             }
 
@@ -3398,7 +3398,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
             if (work->nextScene > 21) {
                 work->sceneState = STAFF_ROLL_SCENE_STATE_SCROLL;
             } else {
-                work->sceneState = t;
+                work->sceneState = blendActive;
             }
 
             work->sceneStep = 0;
@@ -3407,12 +3407,12 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
     }
     case STAFF_ROLL_SCENE_STATE_SCROLL:
     {
-        s32 v;
+        s32 scroll;
 
-        v = work->sceneScroll + 64;
-        work->sceneScroll = v;
+        scroll = work->sceneScroll + 64;
+        work->sceneScroll = scroll;
 
-        if (v > 0x1BFF) {
+        if (scroll > 0x1BFF) {
             SetBgScroll(0, (u16) - (work->scene[work->sceneIndex].x >> 8),
                         (u16)(-(work->scene[work->sceneIndex].y >> 8) + 28));
 
@@ -3423,7 +3423,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
             }
         } else {
             SetBgScroll(0, (u16) - (work->scene[work->sceneIndex].x >> 8),
-                        (u16)(-(work->scene[work->sceneIndex].y >> 8) + (v >> 8)));
+                        (u16)(-(work->scene[work->sceneIndex].y >> 8) + (scroll >> 8)));
         }
 
         break;
@@ -3471,19 +3471,19 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
     u8 result;
     s32 i;
     u32 row;
-    u8* s;
+    u8* line;
     s32 loop;
     s32 x;
     u32 y;
     s32 total;
-    s32 wa;
-    s32 wb;
-    s32 wc;
-    s32 w1;
+    s32 lineWidth;
+    s32 tildeWidth;
+    s32 spaceWidth;
+    s32 width;
     s32 n;
-    s32 t;
-    s32 sub;
-    s32 idx;
+    s32 timer;
+    s32 pixelY;
+    s32 scriptIndex;
 
     result = 1;
 
@@ -3532,18 +3532,18 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
         break;
     case STAFF_ROLL_CREDITS_STATE_SCROLL:
         work->scrollY += work->scrollSpeed;
-        sub = work->scrollY >> 8;
+        pixelY = work->scrollY >> 8;
         row = work->scrollY >> 11;
 
-        if (sub % 8 == 0 && work->lastRow != row) {
-            s = sStaffRollLines[row];
+        if (pixelY % 8 == 0 && work->lastRow != row) {
+            line = sStaffRollLines[row];
 
-            if (!work->creditsEnded && s == NULL) {
+            if (!work->creditsEnded && line == NULL) {
                 work->scrollSpeed = 0;
                 work->creditsEnded = 1;
             }
 
-            if (*s != '!') {
+            if (*line != '!') {
                 SrollTextClearRect(&work->text, 0, (row + 20) & 31, 30, 2, 1);
             }
 
@@ -3552,12 +3552,12 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                 loop = 1;
 
                 while (loop) {
-                    switch (*s) {
+                    switch (*line) {
                     case '!':
                         loop = 0;
                         break;
                     case '*':
-                        switch (s[1]) {
+                        switch (line[1]) {
                         case 'D':
                             logo.animId = 0;
                             break;
@@ -3596,57 +3596,57 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         loop = 0;
                         break;
                     case '#':
-                        SrollTextSelectFont(&work->text, s[1] - '0');
-                        s += 2;
+                        SrollTextSelectFont(&work->text, line[1] - '0');
+                        line += 2;
                         break;
                     case '@':
                         SrollTextSetColors(&work->text, 7, 5, 0, 6);
-                        s++;
+                        line++;
                         break;
                     case '~':
-                        s++;
-                        wa = SrollTextMeasureWidth(&work->text, s);
-                        wb = SrollTextMeasureWidth(&work->text, sStaffRollTildeText);
-                        wc = SrollTextMeasureWidth(&work->text, sStaffRollSpaceText);
-                        w1 = wa - wb + wc * 3;
-                        x = (240 - w1) >> 1;
+                        line++;
+                        lineWidth = SrollTextMeasureWidth(&work->text, line);
+                        tildeWidth = SrollTextMeasureWidth(&work->text, sStaffRollTildeText);
+                        spaceWidth = SrollTextMeasureWidth(&work->text, sStaffRollSpaceText);
+                        width = lineWidth - tildeWidth + spaceWidth * 3;
+                        x = (240 - width) >> 1;
                         SrollTextSetColors(&work->text, 7, 5, 0, 6);
 
-                        for (n = 0; s[n] != '~'; n++) {
-                            buf[n] = s[n];
+                        for (n = 0; line[n] != '~'; n++) {
+                            buf[n] = line[n];
                         }
 
                         buf[n] = ' ';
                         buf[n + 1] = ' ';
                         buf[n + 2] = ' ';
                         buf[n + 3] = 0;
-                        w1 = SrollTextMeasureWidth(&work->text, buf);
+                        width = SrollTextMeasureWidth(&work->text, buf);
                         SrollTextDrawStringAtPixelX(&work->text, x, (row + 20) & 31, buf, 1);
-                        s += n + 1;
+                        line += n + 1;
 
-                        for (n = 0; s[n] != 0; n++) {
-                            buf[n] = s[n];
+                        for (n = 0; line[n] != 0; n++) {
+                            buf[n] = line[n];
                         }
 
                         buf[n] = 0;
                         SrollTextSetColors(&work->text, 15, 13, 0, 14);
-                        SrollTextDrawStringAtPixelX(&work->text, x + w1, (row + 20) & 31, buf, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, x + width, (row + 20) & 31, buf, 1);
                         loop = 0;
                         break;
                     case '=':
-                        SrollTextDrawStringAtPixelX(&work->text, (240 - SrollTextMeasureWidth(&work->text, s + 1)) >> 1, (row + 20) & 31, s + 1, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, (240 - SrollTextMeasureWidth(&work->text, line + 1)) >> 1, (row + 20) & 31, line + 1, 1);
                         loop = 0;
                         break;
                     case '-':
-                        SrollTextDrawStringAtPixelX(&work->text, 0, (row + 20) & 31, s + 1, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, 0, (row + 20) & 31, line + 1, 1);
                         loop = 0;
                         break;
                     case '+':
-                        SrollTextDrawStringAtPixelX(&work->text, 240 - SrollTextMeasureWidth(&work->text, s + 1), (row + 20) & 31, s + 1, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, 240 - SrollTextMeasureWidth(&work->text, line + 1), (row + 20) & 31, line + 1, 1);
                         loop = 0;
                         break;
                     default:
-                        SrollTextDrawStringAtPixelX(&work->text, (240 - SrollTextMeasureWidth(&work->text, s)) >> 1, (row + 20) & 31, s, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, (240 - SrollTextMeasureWidth(&work->text, line)) >> 1, (row + 20) & 31, line, 1);
                         loop = 0;
                         break;
                     }
@@ -3655,17 +3655,17 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
         }
 
         work->lastRow = row;
-        t = work->creditsTimer;
+        timer = work->creditsTimer;
 
-        if (t % STAFFROLL_SCRIPT_PERIOD == 60) {
+        if (timer % STAFFROLL_SCRIPT_PERIOD == 60) {
             work->script = NULL;
-            idx = t / STAFFROLL_SCRIPT_PERIOD;
+            scriptIndex = timer / STAFFROLL_SCRIPT_PERIOD;
 
-            if (idx <= 16) {
+            if (scriptIndex <= 16) {
                 if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
-                    work->script = sStaffRollRikuScripts[idx];
+                    work->script = sStaffRollRikuScripts[scriptIndex];
                 } else {
-                    work->script = sStaffRollSoraScripts[idx];
+                    work->script = sStaffRollSoraScripts[scriptIndex];
                 }
             }
 
@@ -3717,7 +3717,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
 
 u8 StaffRollShowTitleBg(StaffRollWork* work) {
     u8 result;
-    u8 t;
+    u8 fading;
 
     result = 1;
 
@@ -3741,9 +3741,9 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
             work->creditsTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             work->creditsState = STAFF_ROLL_TITLE_BG_STATE_HOLD;
             work->creditsTimer = 0;
         }
@@ -3764,9 +3764,9 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
             work->creditsTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             work->creditsState = STAFF_ROLL_TITLE_BG_STATE_STOP_AUDIO;
             work->creditsTimer = 0;
         }
@@ -3858,7 +3858,7 @@ u8 StaffRollShowCharacter(StaffRollWork* work) {
 
 u8 StaffRollShowSoraImage1(StaffRollWork* work) {
     u8 result;
-    u8 t;
+    u8 fading;
 
     result = 1;
 
@@ -3902,9 +3902,9 @@ u8 StaffRollShowSoraImage1(StaffRollWork* work) {
             work->imageTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             work->imageState = STAFF_ROLL_SORA_IMAGE1_STATE_SCROLL;
             work->imageTimer = 0;
         }
@@ -3952,7 +3952,7 @@ u8 StaffRollShowSoraImage1(StaffRollWork* work) {
 
 u8 StaffRollShowSoraImage2(StaffRollWork* work) {
     u8 result;
-    u8 t;
+    u8 fading;
 
     result = 1;
 
@@ -3969,9 +3969,9 @@ u8 StaffRollShowSoraImage2(StaffRollWork* work) {
             work->imageTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             SetBackdropColor(0, 0, 0);
             work->imageState = STAFF_ROLL_IMAGE_STATE_HOLD;
             work->imageTimer = 0;
@@ -4005,7 +4005,7 @@ u8 StaffRollShowSoraImage2(StaffRollWork* work) {
 
 u8 StaffRollShowRikuImage1(StaffRollWork* work) {
     u8 result;
-    u8 t;
+    u8 fading;
 
     result = 1;
 
@@ -4048,9 +4048,9 @@ u8 StaffRollShowRikuImage1(StaffRollWork* work) {
             work->imageTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             work->imageState = STAFF_ROLL_IMAGE_STATE_HOLD;
             work->imageTimer = 0;
         }
@@ -4084,7 +4084,7 @@ u8 StaffRollShowRikuImage1(StaffRollWork* work) {
 
 u8 StaffRollShowRikuImage2(StaffRollWork* work) {
     u8 result;
-    u8 t;
+    u8 fading;
 
     result = 1;
 
@@ -4101,9 +4101,9 @@ u8 StaffRollShowRikuImage2(StaffRollWork* work) {
             work->imageTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             work->imageState = STAFF_ROLL_IMAGE_STATE_HOLD;
             work->imageTimer = 0;
         }
@@ -4136,7 +4136,7 @@ u8 StaffRollShowRikuImage2(StaffRollWork* work) {
 
 u8 StaffRollShowRikuImage3(StaffRollWork* work) {
     u8 result;
-    u8 t;
+    u8 fading;
 
     result = 1;
 
@@ -4153,9 +4153,9 @@ u8 StaffRollShowRikuImage3(StaffRollWork* work) {
             work->imageTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             SetBackdropColor(0, 0, 0);
             work->imageState = STAFF_ROLL_IMAGE_STATE_HOLD;
             work->imageTimer = 0;
@@ -4189,7 +4189,7 @@ u8 StaffRollShowRikuImage3(StaffRollWork* work) {
 
 u8 StaffRollShowEndScreen(StaffRollWork* work) {
     u8 result;
-    u8 t;
+    u8 fading;
 
     result = 1;
 
@@ -4277,9 +4277,9 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
             work->endTimer++;
         }
 
-        t = FadeIsActive();
+        fading = FadeIsActive();
 
-        if (!t) {
+        if (!fading) {
             work->endState = STAFF_ROLL_END_STATE_WAIT_KEY;
             work->endTimer = 0;
         }
@@ -4297,30 +4297,30 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
 }
 
 void mode_StaffRoll_1() {
-    StaffRollWork* w;
+    StaffRollWork* work;
 
-    w = sStaffRollWork;
-    w->unk_004 = 0;
-    w->flags = 0;
+    work = sStaffRollWork;
+    work->unk_004 = 0;
+    work->flags = 0;
 
-    switch (w->phase) {
+    switch (work->phase) {
     case STAFF_ROLL_PHASE_WAIT_START:
-        if (StaffRollWaitStart(w)) {
+        if (StaffRollWaitStart(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_SCENES;
-        w->phaseTimer = 0;
-        w->musicFrames = 0;
+        work->phase = STAFF_ROLL_PHASE_SCENES;
+        work->phaseTimer = 0;
+        work->musicFrames = 0;
         BlockAudioStart();
     case STAFF_ROLL_PHASE_SCENES:
     {
-        if (StaffRollRunScenes(w)) {
+        if (StaffRollRunScenes(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_CREDITS;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_CREDITS;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
@@ -4329,18 +4329,18 @@ void mode_StaffRoll_1() {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->creditsState = STAFF_ROLL_CREDITS_STATE_SETUP;
-        w->creditsTimer = 0;
+        work->creditsState = STAFF_ROLL_CREDITS_STATE_SETUP;
+        work->creditsTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_CREDITS:
     {
-        if (StaffRollRunCredits(w)) {
+        if (StaffRollRunCredits(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_TITLE_BG;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_TITLE_BG;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
@@ -4349,13 +4349,13 @@ void mode_StaffRoll_1() {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->creditsState = STAFF_ROLL_TITLE_BG_STATE_LOAD;
-        w->creditsTimer = 0;
+        work->creditsState = STAFF_ROLL_TITLE_BG_STATE_LOAD;
+        work->creditsTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_TITLE_BG:
     {
-        if (StaffRollShowTitleBg(w)) {
+        if (StaffRollShowTitleBg(work)) {
             break;
         }
 
@@ -4369,41 +4369,41 @@ void mode_StaffRoll_1() {
         DisableBg(3);
 
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
-            w->phase = STAFF_ROLL_PHASE_RIKU_IMAGE1;
-            w->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
+            work->phase = STAFF_ROLL_PHASE_RIKU_IMAGE1;
+            work->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
         } else {
-            w->phase = STAFF_ROLL_PHASE_SORA_IMAGE1;
-            w->imageState = STAFF_ROLL_SORA_IMAGE1_STATE_SETUP;
+            work->phase = STAFF_ROLL_PHASE_SORA_IMAGE1;
+            work->imageState = STAFF_ROLL_SORA_IMAGE1_STATE_SETUP;
         }
 
-        w->phaseTimer = 0;
-        w->imageTimer = 0;
+        work->phaseTimer = 0;
+        work->imageTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_CHARACTER:
     {
-        if (StaffRollShowCharacter(w)) {
+        if (StaffRollShowCharacter(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_END_SCREEN;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_END_SCREEN;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
-        w->endState = STAFF_ROLL_END_STATE_LOAD;
-        w->endTimer = 0;
+        work->endState = STAFF_ROLL_END_STATE_LOAD;
+        work->endTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_SORA_IMAGE1:
     {
-        if (StaffRollShowSoraImage1(w)) {
+        if (StaffRollShowSoraImage1(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_SORA_IMAGE2;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_SORA_IMAGE2;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
@@ -4412,18 +4412,18 @@ void mode_StaffRoll_1() {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
-        w->imageTimer = 0;
+        work->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
+        work->imageTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_SORA_IMAGE2:
     {
-        if (StaffRollShowSoraImage2(w)) {
+        if (StaffRollShowSoraImage2(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_CHARACTER;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_CHARACTER;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
@@ -4432,18 +4432,18 @@ void mode_StaffRoll_1() {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
-        w->imageTimer = 0;
+        work->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
+        work->imageTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_RIKU_IMAGE1:
     {
-        if (StaffRollShowRikuImage1(w)) {
+        if (StaffRollShowRikuImage1(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_RIKU_IMAGE2;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_RIKU_IMAGE2;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
@@ -4452,18 +4452,18 @@ void mode_StaffRoll_1() {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
-        w->imageTimer = 0;
+        work->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
+        work->imageTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_RIKU_IMAGE2:
     {
-        if (StaffRollShowRikuImage2(w)) {
+        if (StaffRollShowRikuImage2(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_RIKU_IMAGE3;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_RIKU_IMAGE3;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
@@ -4472,18 +4472,18 @@ void mode_StaffRoll_1() {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
-        w->imageTimer = 0;
+        work->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
+        work->imageTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_RIKU_IMAGE3:
     {
-        if (StaffRollShowRikuImage3(w)) {
+        if (StaffRollShowRikuImage3(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_CHARACTER;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_CHARACTER;
+        work->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
         DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
@@ -4492,26 +4492,26 @@ void mode_StaffRoll_1() {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
-        w->imageTimer = 0;
+        work->imageState = STAFF_ROLL_IMAGE_STATE_SETUP;
+        work->imageTimer = 0;
         break;
     }
     case STAFF_ROLL_PHASE_END_SCREEN:
-        if (StaffRollShowEndScreen(w)) {
+        if (StaffRollShowEndScreen(work)) {
             break;
         }
 
-        w->phase = STAFF_ROLL_PHASE_RESET;
-        w->phaseTimer = 0;
+        work->phase = STAFF_ROLL_PHASE_RESET;
+        work->phaseTimer = 0;
         break;
     case STAFF_ROLL_PHASE_RESET:
-        if (w->phaseTimer == 0) {
+        if (work->phaseTimer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 120);
         }
 
-        w->phaseTimer++;
+        work->phaseTimer++;
 
-        if (w->phaseTimer > 120) {
+        if (work->phaseTimer > 120) {
 #ifdef VERSION_EU
             DoSoftReset();
 #else
@@ -4522,21 +4522,21 @@ void mode_StaffRoll_1() {
         break;
     }
 
-    TaskPoolUpdate(&w->tasks);
-    TaskPoolDraw(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
+    TaskPoolDraw(&work->tasks);
     BlockAudioUpdate();
-    w->musicFrames++;
+    work->musicFrames++;
 }
 
 void mode_StaffRoll_2() {
-    StaffRollWork* w;
+    StaffRollWork* work;
 
-    w = sStaffRollWork;
-    ReleaseObjPalette(w->palette);
-    TaskPoolDestroy(&w->tasks);
+    work = sStaffRollWork;
+    ReleaseObjPalette(work->palette);
+    TaskPoolDestroy(&work->tasks);
 
     if (sStaffRollWork != NULL) {
-        EwramFree(w);
+        EwramFree(work);
         sStaffRollWork = NULL;
     }
 }

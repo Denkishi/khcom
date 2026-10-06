@@ -41,16 +41,16 @@ void task_sroll_b_logo_0(SrollBLogoWork* work, SrollBLogoArg* arg) {
 }
 
 u8 task_sroll_b_logo_1(SrollBLogoWork* work) {
-    u8 r;
+    u8 alive;
 
-    r = 1;
+    alive = 1;
 
     if ((s16)((work->y >> 8) - (*work->scrollY >> 8)) <= -32) {
-        r = 0;
+        alive = 0;
     }
 
     AnimUpdate(&work->anim);
-    return r;
+    return alive;
 }
 
 void task_sroll_b_logo_2(SrollBLogoWork* work) {

@@ -43,47 +43,47 @@ void task_sroll_tmr_0(SrollTmrWork* work, void* arg) {
 }
 
 u8 task_sroll_tmr_1(SrollTmrWork* work) {
-    u8 r;
+    u8 alive;
 
-    r = 1;
+    alive = 1;
 
     if (GetKeysPressed() & SELECT_BUTTON) {
         if (work->visible == 1) {
             work->visible = 0;
         } else {
-            work->visible = r;
+            work->visible = alive;
         }
     }
 
     FadeSetPaletteExcluded((work->palette->index & 15) + 16, 1);
     work->frameCount++;
-    return r;
+    return alive;
 }
 
 void task_sroll_tmr_2(SrollTmrWork* work) {
-    s32 t;
-    u16 h;
-    u16 m;
-    u16 s;
-    u16 z;
+    s32 frames;
+    u16 hours;
+    u16 minutes;
+    u16 seconds;
+    u16 zero;
 
     if (work->visible == 0) {
         return;
     }
 
-    t = work->frameCount;
-    h = t / 3600;
-    m = t / 60 % 60;
-    s = t % 60;
-    z = 0;
-    DrawSprite(8, 8, gSrollTimerFrames[h / 10 % 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(16, 8, gSrollTimerFrames[h % 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(24, 8, gSrollTimerFrames[10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(32, 8, gSrollTimerFrames[m / 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(40, 8, gSrollTimerFrames[m % 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(48, 8, gSrollTimerFrames[10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(56, 8, gSrollTimerFrames[s / 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(64, 8, gSrollTimerFrames[s % 10], work->tiles, work->palette, NULL, z, z);
+    frames = work->frameCount;
+    hours = frames / 3600;
+    minutes = frames / 60 % 60;
+    seconds = frames % 60;
+    zero = 0;
+    DrawSprite(8, 8, gSrollTimerFrames[hours / 10 % 10], work->tiles, work->palette, NULL, zero, zero);
+    DrawSprite(16, 8, gSrollTimerFrames[hours % 10], work->tiles, work->palette, NULL, zero, zero);
+    DrawSprite(24, 8, gSrollTimerFrames[10], work->tiles, work->palette, NULL, zero, zero);
+    DrawSprite(32, 8, gSrollTimerFrames[minutes / 10], work->tiles, work->palette, NULL, zero, zero);
+    DrawSprite(40, 8, gSrollTimerFrames[minutes % 10], work->tiles, work->palette, NULL, zero, zero);
+    DrawSprite(48, 8, gSrollTimerFrames[10], work->tiles, work->palette, NULL, zero, zero);
+    DrawSprite(56, 8, gSrollTimerFrames[seconds / 10], work->tiles, work->palette, NULL, zero, zero);
+    DrawSprite(64, 8, gSrollTimerFrames[seconds % 10], work->tiles, work->palette, NULL, zero, zero);
 }
 
 void task_sroll_tmr_3(SrollTmrWork* work) {
@@ -95,461 +95,461 @@ void SrollBlit1bppWidth0() {
 }
 
 void SrollBlit1bppWidth1(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 24;
-        v = pal[(c >> 31) & 1];
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 24;
+        pixels = pal[(bits >> 31) & 1];
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit1bppWidth2(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 24;
-        v = pal[(c >> 31) & 1];
-        v |= pal[(c >> 30) & 1] << 4;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 24;
+        pixels = pal[(bits >> 31) & 1];
+        pixels |= pal[(bits >> 30) & 1] << 4;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit1bppWidth3(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 24;
-        v = pal[(c >> 31) & 1];
-        v |= pal[(c >> 30) & 1] << 4;
-        v |= pal[(c >> 29) & 1] << 8;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 24;
+        pixels = pal[(bits >> 31) & 1];
+        pixels |= pal[(bits >> 30) & 1] << 4;
+        pixels |= pal[(bits >> 29) & 1] << 8;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit1bppWidth4(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 24;
-        v = pal[(c >> 31) & 1];
-        v |= pal[(c >> 30) & 1] << 4;
-        v |= pal[(c >> 29) & 1] << 8;
-        v |= pal[(c >> 28) & 1] << 12;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 24;
+        pixels = pal[(bits >> 31) & 1];
+        pixels |= pal[(bits >> 30) & 1] << 4;
+        pixels |= pal[(bits >> 29) & 1] << 8;
+        pixels |= pal[(bits >> 28) & 1] << 12;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit1bppWidth5(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 24;
-        v = pal[(c >> 31) & 1];
-        v |= pal[(c >> 30) & 1] << 4;
-        v |= pal[(c >> 29) & 1] << 8;
-        v |= pal[(c >> 28) & 1] << 12;
-        v |= pal[(c >> 27) & 1] << 16;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 24;
+        pixels = pal[(bits >> 31) & 1];
+        pixels |= pal[(bits >> 30) & 1] << 4;
+        pixels |= pal[(bits >> 29) & 1] << 8;
+        pixels |= pal[(bits >> 28) & 1] << 12;
+        pixels |= pal[(bits >> 27) & 1] << 16;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit1bppWidth6(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 24;
-        v = pal[(c >> 31) & 1];
-        v |= pal[(c >> 30) & 1] << 4;
-        v |= pal[(c >> 29) & 1] << 8;
-        v |= pal[(c >> 28) & 1] << 12;
-        v |= pal[(c >> 27) & 1] << 16;
-        v |= pal[(c >> 26) & 1] << 20;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 24;
+        pixels = pal[(bits >> 31) & 1];
+        pixels |= pal[(bits >> 30) & 1] << 4;
+        pixels |= pal[(bits >> 29) & 1] << 8;
+        pixels |= pal[(bits >> 28) & 1] << 12;
+        pixels |= pal[(bits >> 27) & 1] << 16;
+        pixels |= pal[(bits >> 26) & 1] << 20;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit1bppWidth7(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 24;
-        v = pal[(c >> 31) & 1];
-        v |= pal[(c >> 30) & 1] << 4;
-        v |= pal[(c >> 29) & 1] << 8;
-        v |= pal[(c >> 28) & 1] << 12;
-        v |= pal[(c >> 27) & 1] << 16;
-        v |= pal[(c >> 26) & 1] << 20;
-        v |= pal[(c >> 25) & 1] << 24;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 24;
+        pixels = pal[(bits >> 31) & 1];
+        pixels |= pal[(bits >> 30) & 1] << 4;
+        pixels |= pal[(bits >> 29) & 1] << 8;
+        pixels |= pal[(bits >> 28) & 1] << 12;
+        pixels |= pal[(bits >> 27) & 1] << 16;
+        pixels |= pal[(bits >> 26) & 1] << 20;
+        pixels |= pal[(bits >> 25) & 1] << 24;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit1bppWidth8(u32* dst, u8* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
+    u32 pixels;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        v = pal[(src[i] >> 7) & 1];
-        v |= pal[(src[i] >> 6) & 1] << 4;
-        v |= pal[(src[i] >> 5) & 1] << 8;
-        v |= pal[(src[i] >> 4) & 1] << 12;
-        v |= pal[(src[i] >> 3) & 1] << 16;
-        v |= pal[(src[i] >> 2) & 1] << 20;
-        v |= pal[(src[i] >> 1) & 1] << 24;
-        v |= pal[src[i] & 1] << 28;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        pixels = pal[(src[i] >> 7) & 1];
+        pixels |= pal[(src[i] >> 6) & 1] << 4;
+        pixels |= pal[(src[i] >> 5) & 1] << 8;
+        pixels |= pal[(src[i] >> 4) & 1] << 12;
+        pixels |= pal[(src[i] >> 3) & 1] << 16;
+        pixels |= pal[(src[i] >> 2) & 1] << 20;
+        pixels |= pal[(src[i] >> 1) & 1] << 24;
+        pixels |= pal[src[i] & 1] << 28;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 u32 SrollTextBlit1bpp(SrollBlit* blit) {
-    SrollMask* m;
-    u32* d;
-    u32* p;
-    u32 k;
-    s32 e;
-    u32 r;
+    SrollMask* mask;
+    u32* dst;
+    u32* buf;
+    u32 keep;
+    s32 end;
+    u32 tileCount;
 
-    e = blit->x + blit->width;
-    p = blit->buf;
-    d = blit->dst;
-    m = &gStaffRollBlitMasks[blit->width][blit->x];
-    k = m->keepLeft | m->keepRight;
-    p[0] = d[0] & k;
-    p[1] = d[1] & k;
-    p[2] = d[2] & k;
-    p[3] = d[3] & k;
-    p[4] = d[4] & k;
-    p[5] = d[5] & k;
-    p[6] = d[6] & k;
-    p[7] = d[7] & k;
+    end = blit->x + blit->width;
+    buf = blit->buf;
+    dst = blit->dst;
+    mask = &gStaffRollBlitMasks[blit->width][blit->x];
+    keep = mask->keepLeft | mask->keepRight;
+    buf[0] = dst[0] & keep;
+    buf[1] = dst[1] & keep;
+    buf[2] = dst[2] & keep;
+    buf[3] = dst[3] & keep;
+    buf[4] = dst[4] & keep;
+    buf[5] = dst[5] & keep;
+    buf[6] = dst[6] & keep;
+    buf[7] = dst[7] & keep;
 
-    if (e > 8) {
-        k = m->keepNext;
-        p[8] = d[8] & k;
-        p[9] = d[9] & k;
-        p[10] = d[10] & k;
-        p[11] = d[11] & k;
-        p[12] = d[12] & k;
-        p[13] = d[13] & k;
-        p[14] = d[14] & k;
-        p[15] = d[15] & k;
+    if (end > 8) {
+        keep = mask->keepNext;
+        buf[8] = dst[8] & keep;
+        buf[9] = dst[9] & keep;
+        buf[10] = dst[10] & keep;
+        buf[11] = dst[11] & keep;
+        buf[12] = dst[12] & keep;
+        buf[13] = dst[13] & keep;
+        buf[14] = dst[14] & keep;
+        buf[15] = dst[15] & keep;
     }
 
-    gStaffRollBlit1bppFuncs[blit->width](p, blit->src, blit->colors, blit->x);
-    d[0] = p[0];
-    d[1] = p[1];
-    d[2] = p[2];
-    d[3] = p[3];
-    d[4] = p[4];
-    d[5] = p[5];
-    d[6] = p[6];
-    d[7] = p[7];
+    gStaffRollBlit1bppFuncs[blit->width](buf, blit->src, blit->colors, blit->x);
+    dst[0] = buf[0];
+    dst[1] = buf[1];
+    dst[2] = buf[2];
+    dst[3] = buf[3];
+    dst[4] = buf[4];
+    dst[5] = buf[5];
+    dst[6] = buf[6];
+    dst[7] = buf[7];
 
-    if (e > 8) {
-        d[8] = p[8];
-        d[9] = p[9];
-        d[10] = p[10];
-        d[11] = p[11];
-        d[12] = p[12];
-        d[13] = p[13];
-        d[14] = p[14];
-        d[15] = p[15];
+    if (end > 8) {
+        dst[8] = buf[8];
+        dst[9] = buf[9];
+        dst[10] = buf[10];
+        dst[11] = buf[11];
+        dst[12] = buf[12];
+        dst[13] = buf[13];
+        dst[14] = buf[14];
+        dst[15] = buf[15];
     }
 
-    r = 1;
+    tileCount = 1;
 
-    if (e > 8) {
-        r = 2;
+    if (end > 8) {
+        tileCount = 2;
     }
 
-    return r;
+    return tileCount;
 }
 
 void SrollBlit2bppWidth0() {
 }
 
 void SrollBlit2bppWidth1(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
-    u32* d;
-    u16* s;
+    SrollShift* shifts;
+    u32* dstRow;
+    u16* srcRow;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
-    d = dst;
-    s = src;
+    shifts = &gStaffRollBlitShifts[x];
+    dstRow = dst;
+    srcRow = src;
 
     for (i = 0; i <= 7; i++) {
-        c = *s << 16;
-        v = pal[(c >> 22) & 3];
-        d[0] |= v << t->shift;
-        d[8] |= v >> t->spillShift;
-        d++;
-        s++;
+        bits = *srcRow << 16;
+        pixels = pal[(bits >> 22) & 3];
+        dstRow[0] |= pixels << shifts->shift;
+        dstRow[8] |= pixels >> shifts->spillShift;
+        dstRow++;
+        srcRow++;
     }
 }
 
 void SrollBlit2bppWidth2(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 16;
-        v = pal[(c >> 22) & 3];
-        v |= pal[(c >> 20) & 3] << 4;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 16;
+        pixels = pal[(bits >> 22) & 3];
+        pixels |= pal[(bits >> 20) & 3] << 4;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit2bppWidth3(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
-    u32 c;
+    u32 pixels;
+    u32 bits;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        c = src[i] << 16;
-        v = pal[(c >> 22) & 3];
-        v |= pal[(c >> 20) & 3] << 4;
-        v |= pal[(c >> 18) & 3] << 8;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        bits = src[i] << 16;
+        pixels = pal[(bits >> 22) & 3];
+        pixels |= pal[(bits >> 20) & 3] << 4;
+        pixels |= pal[(bits >> 18) & 3] << 8;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit2bppWidth4(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
+    u32 pixels;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        v = pal[(src[i] >> 6) & 3];
-        v |= pal[(src[i] >> 4) & 3] << 4;
-        v |= pal[(src[i] >> 2) & 3] << 8;
-        v |= pal[src[i] & 3] << 12;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        pixels = pal[(src[i] >> 6) & 3];
+        pixels |= pal[(src[i] >> 4) & 3] << 4;
+        pixels |= pal[(src[i] >> 2) & 3] << 8;
+        pixels |= pal[src[i] & 3] << 12;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit2bppWidth5(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
+    u32 pixels;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        v = pal[(src[i] >> 6) & 3];
-        v |= pal[(src[i] >> 4) & 3] << 4;
-        v |= pal[(src[i] >> 2) & 3] << 8;
-        v |= pal[src[i] & 3] << 12;
-        v |= pal[(src[i] >> 14) & 3] << 16;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        pixels = pal[(src[i] >> 6) & 3];
+        pixels |= pal[(src[i] >> 4) & 3] << 4;
+        pixels |= pal[(src[i] >> 2) & 3] << 8;
+        pixels |= pal[src[i] & 3] << 12;
+        pixels |= pal[(src[i] >> 14) & 3] << 16;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit2bppWidth6(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
+    u32 pixels;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        v = pal[(src[i] >> 6) & 3];
-        v |= pal[(src[i] >> 4) & 3] << 4;
-        v |= pal[(src[i] >> 2) & 3] << 8;
-        v |= pal[src[i] & 3] << 12;
-        v |= pal[(src[i] >> 14) & 3] << 16;
-        v |= pal[(src[i] >> 12) & 3] << 20;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        pixels = pal[(src[i] >> 6) & 3];
+        pixels |= pal[(src[i] >> 4) & 3] << 4;
+        pixels |= pal[(src[i] >> 2) & 3] << 8;
+        pixels |= pal[src[i] & 3] << 12;
+        pixels |= pal[(src[i] >> 14) & 3] << 16;
+        pixels |= pal[(src[i] >> 12) & 3] << 20;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit2bppWidth7(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
+    u32 pixels;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        v = pal[(src[i] >> 6) & 3];
-        v |= pal[(src[i] >> 4) & 3] << 4;
-        v |= pal[(src[i] >> 2) & 3] << 8;
-        v |= pal[src[i] & 3] << 12;
-        v |= pal[(src[i] >> 14) & 3] << 16;
-        v |= pal[(src[i] >> 12) & 3] << 20;
-        v |= pal[(src[i] >> 10) & 3] << 24;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        pixels = pal[(src[i] >> 6) & 3];
+        pixels |= pal[(src[i] >> 4) & 3] << 4;
+        pixels |= pal[(src[i] >> 2) & 3] << 8;
+        pixels |= pal[src[i] & 3] << 12;
+        pixels |= pal[(src[i] >> 14) & 3] << 16;
+        pixels |= pal[(src[i] >> 12) & 3] << 20;
+        pixels |= pal[(src[i] >> 10) & 3] << 24;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 void SrollBlit2bppWidth8(u32* dst, u16* src, u32* pal, s32 x) {
-    SrollShift* t;
+    SrollShift* shifts;
     s32 i;
-    u32 v;
+    u32 pixels;
 
-    t = &gStaffRollBlitShifts[x];
+    shifts = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
-        v = pal[(src[i] >> 6) & 3];
-        v |= pal[(src[i] >> 4) & 3] << 4;
-        v |= pal[(src[i] >> 2) & 3] << 8;
-        v |= pal[src[i] & 3] << 12;
-        v |= pal[(src[i] >> 14) & 3] << 16;
-        v |= pal[(src[i] >> 12) & 3] << 20;
-        v |= pal[(src[i] >> 10) & 3] << 24;
-        v |= pal[(src[i] >> 8) & 3] << 28;
-        dst[i] |= v << t->shift;
-        dst[i + 8] |= v >> t->spillShift;
+        pixels = pal[(src[i] >> 6) & 3];
+        pixels |= pal[(src[i] >> 4) & 3] << 4;
+        pixels |= pal[(src[i] >> 2) & 3] << 8;
+        pixels |= pal[src[i] & 3] << 12;
+        pixels |= pal[(src[i] >> 14) & 3] << 16;
+        pixels |= pal[(src[i] >> 12) & 3] << 20;
+        pixels |= pal[(src[i] >> 10) & 3] << 24;
+        pixels |= pal[(src[i] >> 8) & 3] << 28;
+        dst[i] |= pixels << shifts->shift;
+        dst[i + 8] |= pixels >> shifts->spillShift;
     }
 }
 
 u32 SrollTextBlit2bpp(SrollBlit* blit) {
-    SrollMask* m;
-    u32* d;
-    u32* p;
-    u32 k;
-    s32 e;
-    u32 r;
+    SrollMask* mask;
+    u32* dst;
+    u32* buf;
+    u32 keep;
+    s32 end;
+    u32 tileCount;
 
-    e = blit->x + blit->width;
-    p = blit->buf;
-    d = blit->dst;
-    m = &gStaffRollBlitMasks[blit->width][blit->x];
-    k = m->keepLeft | m->keepRight;
-    p[0] = d[0] & k;
-    p[1] = d[1] & k;
-    p[2] = d[2] & k;
-    p[3] = d[3] & k;
-    p[4] = d[4] & k;
-    p[5] = d[5] & k;
-    p[6] = d[6] & k;
-    p[7] = d[7] & k;
+    end = blit->x + blit->width;
+    buf = blit->buf;
+    dst = blit->dst;
+    mask = &gStaffRollBlitMasks[blit->width][blit->x];
+    keep = mask->keepLeft | mask->keepRight;
+    buf[0] = dst[0] & keep;
+    buf[1] = dst[1] & keep;
+    buf[2] = dst[2] & keep;
+    buf[3] = dst[3] & keep;
+    buf[4] = dst[4] & keep;
+    buf[5] = dst[5] & keep;
+    buf[6] = dst[6] & keep;
+    buf[7] = dst[7] & keep;
 
-    if (e > 8) {
-        k = m->keepNext;
-        p[8] = d[8] & k;
-        p[9] = d[9] & k;
-        p[10] = d[10] & k;
-        p[11] = d[11] & k;
-        p[12] = d[12] & k;
-        p[13] = d[13] & k;
-        p[14] = d[14] & k;
-        p[15] = d[15] & k;
+    if (end > 8) {
+        keep = mask->keepNext;
+        buf[8] = dst[8] & keep;
+        buf[9] = dst[9] & keep;
+        buf[10] = dst[10] & keep;
+        buf[11] = dst[11] & keep;
+        buf[12] = dst[12] & keep;
+        buf[13] = dst[13] & keep;
+        buf[14] = dst[14] & keep;
+        buf[15] = dst[15] & keep;
     }
 
-    gStaffRollBlit2bppFuncs[blit->width](p, blit->src, blit->colors, blit->x);
-    d[0] = p[0];
-    d[1] = p[1];
-    d[2] = p[2];
-    d[3] = p[3];
-    d[4] = p[4];
-    d[5] = p[5];
-    d[6] = p[6];
-    d[7] = p[7];
+    gStaffRollBlit2bppFuncs[blit->width](buf, blit->src, blit->colors, blit->x);
+    dst[0] = buf[0];
+    dst[1] = buf[1];
+    dst[2] = buf[2];
+    dst[3] = buf[3];
+    dst[4] = buf[4];
+    dst[5] = buf[5];
+    dst[6] = buf[6];
+    dst[7] = buf[7];
 
-    if (e > 8) {
-        d[8] = p[8];
-        d[9] = p[9];
-        d[10] = p[10];
-        d[11] = p[11];
-        d[12] = p[12];
-        d[13] = p[13];
-        d[14] = p[14];
-        d[15] = p[15];
+    if (end > 8) {
+        dst[8] = buf[8];
+        dst[9] = buf[9];
+        dst[10] = buf[10];
+        dst[11] = buf[11];
+        dst[12] = buf[12];
+        dst[13] = buf[13];
+        dst[14] = buf[14];
+        dst[15] = buf[15];
     }
 
-    r = 1;
+    tileCount = 1;
 
-    if (e > 8) {
-        r = 2;
+    if (end > 8) {
+        tileCount = 2;
     }
 
-    return r;
+    return tileCount;
 }
 
 u16 SrollTextGetGlyphIndex(u16 ch, u8* font) {
     u16 result;
     s32 off;
     s32 hi;
-    s32 a;
-    s32 b;
-    u8 v;
+    s32 tableOffset;
+    s32 firstGlyph;
+    u8 pageGlyph;
 
     result = 0;
     off = (ch & 0x7F00) >> 6;
     hi = font[off + 1] << 8;
-    a = font[off] | hi;
+    tableOffset = font[off] | hi;
     hi = font[off + 3] << 8;
-    b = font[off + 2] | hi;
+    firstGlyph = font[off + 2] | hi;
 
-    if (a != 0xFFFF) {
-        if (font[(u16)(a + 0xFFC0 + (ch & 0xFF))] != 0xFF) {
-            v = font[(u16)(a + 0xFFC0 + (ch & 0xFF))];
-            result = b + v;
+    if (tableOffset != 0xFFFF) {
+        if (font[(u16)(tableOffset + 0xFFC0 + (ch & 0xFF))] != 0xFF) {
+            pageGlyph = font[(u16)(tableOffset + 0xFFC0 + (ch & 0xFF))];
+            result = firstGlyph + pageGlyph;
         }
     }
 
@@ -557,28 +557,28 @@ u16 SrollTextGetGlyphIndex(u16 ch, u8* font) {
 }
 
 u8 SrollTextGetGlyphWidth(u16 ch, u8* font, u8* widths, u32 count) {
-    u8 w;
+    u8 width;
 
-    w = 0;
+    width = 0;
 
     if (widths != NULL) {
         u16 idx = SrollTextGetGlyphIndex(ch, font);
 
         if (idx < count) {
-            w = widths[idx];
+            width = widths[idx];
         }
     }
 
-    if (w == 0) {
-        w = 8;
+    if (width == 0) {
+        width = 8;
     }
 
-    return w;
+    return width;
 }
 
 s32 SrollTextMeasureWidth(SrollWork* work, const u8* str) {
     s32 total;
-    u16 c;
+    u16 ch;
     s32 hi;
 
     total = 0;
@@ -586,14 +586,14 @@ s32 SrollTextMeasureWidth(SrollWork* work, const u8* str) {
     while (*str != 0) {
         if (*str & 0x80) {
             hi = str[0] << 8;
-            c = str[1] | hi;
+            ch = str[1] | hi;
             str += 2;
         } else {
-            c = SrollTextMapSingleByteChar(str[0]);
+            ch = SrollTextMapSingleByteChar(str[0]);
             str += 1;
         }
 
-        total += SrollTextGetGlyphWidth(c, work->fontPages, work->fontWidths, work->fontGlyphCount);
+        total += SrollTextGetGlyphWidth(ch, work->fontPages, work->fontWidths, work->fontGlyphCount);
     }
 
     return total;
@@ -604,49 +604,49 @@ u8* SrollTextGetGlyphAddress(u16 ch, u8* font, u8* base, u16 bpp, u16 height) {
 }
 
 u32 SrollTextBlitGlyph(SrollWork* work, u32* dst, u8* src, s32 width) {
-    SrollBlit b;
+    SrollBlit blit;
     u32 pal[16];
     u32 bg;
-    u32 r;
-    u16 c;
+    u32 tileCount;
+    u16 bgColor;
     u16 n;
 
-    r = 0;
-    pal[0] = c = work->bgColor;
+    tileCount = 0;
+    pal[0] = bgColor = work->bgColor;
     pal[1] = work->fgColor;
     pal[2] = work->shadowColor;
     pal[3] = work->edgeColor;
-    bg = (c << 4) | c;
+    bg = (bgColor << 4) | bgColor;
     bg |= bg << 8;
     bg |= bg << 16;
-    b.x = work->x & 7;
-    b.width = width;
-    b.src = src;
-    b.dst = dst;
-    b.colors = pal;
+    blit.x = work->x & 7;
+    blit.width = width;
+    blit.src = src;
+    blit.dst = dst;
+    blit.colors = pal;
     n = work->glyphHeight;
 
     if (n-- != 0) {
         do {
-            if (b.x == 0) {
-                CpuFastFill(bg, b.dst, 32);
+            if (blit.x == 0) {
+                CpuFastFill(bg, blit.dst, 32);
             }
 
             switch (work->glyphBpp) {
             case 1:
-                r = SrollTextBlit1bpp(&b);
+                tileCount = SrollTextBlit1bpp(&blit);
                 break;
             case 2:
-                r = SrollTextBlit2bpp(&b);
+                tileCount = SrollTextBlit2bpp(&blit);
                 break;
             }
 
-            b.src += work->glyphBpp * 8;
-            b.dst += work->textWidth * 8;
+            blit.src += work->glyphBpp * 8;
+            blit.dst += work->textWidth * 8;
         } while (n-- != 0);
     }
 
-    return r;
+    return tileCount;
 }
 
 void SrollTextSelectFont(SrollWork* work, u32 font) {
@@ -699,15 +699,15 @@ void SrollTextClearQueue(SrollWork* work) {
 }
 
 u8 SrollTextQueueIsEmpty(SrollWork* work) {
-    u8 r;
+    u8 empty;
 
-    r = 0;
+    empty = 0;
 
     if (work->writeIdx == work->readIdx) {
-        r = 1;
+        empty = 1;
     }
 
-    return r;
+    return empty;
 }
 
 void SrollTextEnqueueChar(SrollWork* work, u16 ch) {
@@ -716,15 +716,15 @@ void SrollTextEnqueueChar(SrollWork* work, u16 ch) {
 }
 
 u16 SrollTextDequeueChar(SrollWork* work) {
-    u16 c;
+    u16 ch;
 
     if (work->writeIdx == work->readIdx) {
         return 0;
     }
 
-    c = work->charQueue[work->readIdx];
+    ch = work->charQueue[work->readIdx];
     work->readIdx = (work->readIdx + 1) & 0xFF;
-    return c;
+    return ch;
 }
 
 void SrollTextSetCursorTile(SrollWork* work, u16 x, u16 y) {
@@ -756,14 +756,14 @@ void SrollTextSetColors(SrollWork* work, u16 fgColor, u16 shadowColor, u16 bgCol
 }
 
 void SrollTextClearWindow(SrollWork* work, u8 flush) {
-    u16* p;
+    u16* row;
     u16 i;
 
-    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
+    row = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
 
     for (i = 0; i < work->windowHeight; i++) {
-        CpuFill16(work->clearTile, p, work->windowWidth * 2);
-        p += work->mapWidth;
+        CpuFill16(work->clearTile, row, work->windowWidth * 2);
+        row += work->mapWidth;
     }
 
     if (flush == 1) {
@@ -772,105 +772,105 @@ void SrollTextClearWindow(SrollWork* work, u8 flush) {
 }
 
 void SrollTextDrawFrame(SrollWork* work) {
-    u16* p;
+    u16* row;
     u16 i;
-    u16 t;
+    u16 baseTile;
 
-    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
-    t = work->frameTileBase + 1;
-    CpuFill16(t + 2, p + 1, (u32)(work->windowWidth - 2) << 1);
-    p[0] = t + 1;
-    p[work->windowWidth - 1] = t + 3;
-    p += work->mapWidth;
+    row = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
+    baseTile = work->frameTileBase + 1;
+    CpuFill16(baseTile + 2, row + 1, (u32)(work->windowWidth - 2) << 1);
+    row[0] = baseTile + 1;
+    row[work->windowWidth - 1] = baseTile + 3;
+    row += work->mapWidth;
 
     for (i = 1; i < work->windowHeight - 1; i++) {
-        CpuFill16(t, p + 1, (u32)(work->windowWidth - 2) << 1);
-        p[0] = t + 4;
-        p[work->windowWidth - 1] = t + 5;
-        p += work->mapWidth;
+        CpuFill16(baseTile, row + 1, (u32)(work->windowWidth - 2) << 1);
+        row[0] = baseTile + 4;
+        row[work->windowWidth - 1] = baseTile + 5;
+        row += work->mapWidth;
     }
 
-    CpuFill16(t + 7, p + 1, (u32)(work->windowWidth - 2) << 1);
-    p[0] = t + 6;
-    p[work->windowWidth - 1] = t + 8;
+    CpuFill16(baseTile + 7, row + 1, (u32)(work->windowWidth - 2) << 1);
+    row[0] = baseTile + 6;
+    row[work->windowWidth - 1] = baseTile + 8;
 }
 
 void SrollTextDrawFrameTailLeft(SrollWork* work) {
-    u16* p;
+    u16* row;
     u16 i;
-    u16 t;
+    u16 baseTile;
 
-    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
-    t = work->frameTileBase + 1;
-    CpuFill16(t + 2, p + 2, (u32)(work->windowWidth - 3) << 1);
-    p[1] = t + 1;
-    p[work->windowWidth - 1] = t + 3;
-    p += work->mapWidth;
+    row = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
+    baseTile = work->frameTileBase + 1;
+    CpuFill16(baseTile + 2, row + 2, (u32)(work->windowWidth - 3) << 1);
+    row[1] = baseTile + 1;
+    row[work->windowWidth - 1] = baseTile + 3;
+    row += work->mapWidth;
 
     for (i = 1; i < work->windowHeight - 2; i++) {
-        CpuFill16(t, p + 2, (u32)(work->windowWidth - 3) << 1);
-        p[1] = t + 4;
-        p[work->windowWidth - 1] = t + 5;
-        p += work->mapWidth;
+        CpuFill16(baseTile, row + 2, (u32)(work->windowWidth - 3) << 1);
+        row[1] = baseTile + 4;
+        row[work->windowWidth - 1] = baseTile + 5;
+        row += work->mapWidth;
     }
 
-    CpuFill16(t, p + 2, (u32)(work->windowWidth - 3) << 1);
-    p[0] = t + 10;
-    p[1] = t + 11;
-    p[work->windowWidth - 1] = t + 5;
-    p += work->mapWidth;
+    CpuFill16(baseTile, row + 2, (u32)(work->windowWidth - 3) << 1);
+    row[0] = baseTile + 10;
+    row[1] = baseTile + 11;
+    row[work->windowWidth - 1] = baseTile + 5;
+    row += work->mapWidth;
 
-    CpuFill16(t + 7, p + 2, (u32)(work->windowWidth - 3) << 1);
-    p[1] = t + 6;
-    p[work->windowWidth - 1] = t + 8;
+    CpuFill16(baseTile + 7, row + 2, (u32)(work->windowWidth - 3) << 1);
+    row[1] = baseTile + 6;
+    row[work->windowWidth - 1] = baseTile + 8;
 }
 
 void SrollTextDrawFrameTailRight(SrollWork* work) {
-    u16* p;
+    u16* row;
     u16 i;
-    u16 t;
+    u16 baseTile;
 
-    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
-    t = work->frameTileBase + 1;
-    CpuFill16(t + 2, p + 1, (u32)(work->windowWidth - 3) << 1);
-    p[0] = t + 1;
-    p[work->windowWidth - 2] = t + 3;
-    p += work->mapWidth;
+    row = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
+    baseTile = work->frameTileBase + 1;
+    CpuFill16(baseTile + 2, row + 1, (u32)(work->windowWidth - 3) << 1);
+    row[0] = baseTile + 1;
+    row[work->windowWidth - 2] = baseTile + 3;
+    row += work->mapWidth;
 
     for (i = 1; i < work->windowHeight - 2; i++) {
-        CpuFill16(t, p + 1, (u32)(work->windowWidth - 3) << 1);
-        p[0] = t + 4;
-        p[work->windowWidth - 2] = t + 5;
-        p += work->mapWidth;
+        CpuFill16(baseTile, row + 1, (u32)(work->windowWidth - 3) << 1);
+        row[0] = baseTile + 4;
+        row[work->windowWidth - 2] = baseTile + 5;
+        row += work->mapWidth;
     }
 
-    CpuFill16(t, p + 1, (u32)(work->windowWidth - 3) << 1);
-    p[0] = t + 4;
-    p[work->windowWidth - 2] = (t | 0x400) + 11;
-    p[work->windowWidth - 1] = (t | 0x400) + 10;
-    p += work->mapWidth;
+    CpuFill16(baseTile, row + 1, (u32)(work->windowWidth - 3) << 1);
+    row[0] = baseTile + 4;
+    row[work->windowWidth - 2] = (baseTile | 0x400) + 11;
+    row[work->windowWidth - 1] = (baseTile | 0x400) + 10;
+    row += work->mapWidth;
 
-    CpuFill16(t + 7, p + 1, (u32)(work->windowWidth - 3) << 1);
-    p[0] = t + 6;
-    p[work->windowWidth - 2] = t + 8;
+    CpuFill16(baseTile + 7, row + 1, (u32)(work->windowWidth - 3) << 1);
+    row[0] = baseTile + 6;
+    row[work->windowWidth - 2] = baseTile + 8;
 }
 
 void SrollTextClearTextArea(SrollWork* work) {
-    u16* p;
+    u16* row;
     u16 i;
-    u16 t;
+    u16 baseTile;
 
-    p = (u16*)(SrollTextGetTilemap(work) + work->textY * work->mapWidth * 2 + work->textX * 2);
-    t = work->frameTileBase + 1;
+    row = (u16*)(SrollTextGetTilemap(work) + work->textY * work->mapWidth * 2 + work->textX * 2);
+    baseTile = work->frameTileBase + 1;
 
     for (i = 0; i < work->textHeight; i++) {
-        CpuFill16(t, p, work->textWidth * 2);
-        p += work->mapWidth;
+        CpuFill16(baseTile, row, work->textWidth * 2);
+        row += work->mapWidth;
     }
 }
 
 void SrollTextResetWindow(SrollWork* work, u8 flush) {
-    u16 t;
+    u16 flags;
 
     switch (work->frameStyle) {
     case 1:
@@ -892,16 +892,16 @@ void SrollTextResetWindow(SrollWork* work, u8 flush) {
     if (flush == 1) {
         SrollTextFlushTilemap(work);
     } else {
-        t = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
-        work->flags = t;
+        flags = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
+        work->flags = flags;
     }
 }
 
 void SrollTextClearRect(SrollWork* work, u16 x, u16 y, u16 width, u16 height, u8 flush) {
-    u16* p;
+    u16* row;
     u16 i;
-    u16 t;
-    u16 v;
+    u16 flags;
+    u16 baseTile;
 
     if (x >= work->textWidth) {
         return;
@@ -919,21 +919,21 @@ void SrollTextClearRect(SrollWork* work, u16 x, u16 y, u16 width, u16 height, u8
         height = work->textHeight - y;
     }
 
-    p = (u16*)(SrollTextGetTilemap(work) + (work->textY + y) * work->mapWidth * 2 + (work->textX + x) * 2);
-    v = work->frameTileBase + 1;
+    row = (u16*)(SrollTextGetTilemap(work) + (work->textY + y) * work->mapWidth * 2 + (work->textX + x) * 2);
+    baseTile = work->frameTileBase + 1;
     i = 0;
 
     while (i < height) {
-        CpuFill16(v, p, (u32)(width << 1));
-        p += work->mapWidth;
+        CpuFill16(baseTile, row, (u32)(width << 1));
+        row += work->mapWidth;
         i++;
     }
 
     if (flush == 1) {
         SrollTextFlushTilemap(work);
     } else {
-        t = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
-        work->flags = t;
+        flags = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
+        work->flags = flags;
     }
 }
 
@@ -941,18 +941,18 @@ void func_081167CC() {
 }
 
 u16 ParseLowercaseHexDigit(u16 ch) {
-    u16 v;
+    u16 digit;
 
-    v = ch;
+    digit = ch;
 
-    if ((u16)(v - '0') <= 9) {
-        v -= '0';
+    if ((u16)(digit - '0') <= 9) {
+        digit -= '0';
     } else {
-        v -= 'a';
-        v += 10;
+        digit -= 'a';
+        digit += 10;
     }
 
-    return v;
+    return digit;
 }
 
 u8* SrollTextEnqueueString(SrollWork* work, u8* str) {
@@ -973,70 +973,70 @@ u8* SrollTextEnqueueString(SrollWork* work, u8* str) {
 }
 
 u8 SrollTextProcessNextChar(SrollWork* work) {
-    u16 v[2];
-    u16* p;
+    u16 cmd[2];
+    u16* row;
     u32 off;
-    u8* g;
-    u32 n;
-    u16 c;
-    u16 t;
+    u8* glyph;
+    u32 tileCount;
+    u16 ch;
+    u16 tile;
     u16 i;
-    u8 r;
-    u8 wd;
+    u8 drawn;
+    u8 width;
 
-    r = 0;
+    drawn = 0;
 
     if (work->x >= work->textWidth * 8) {
         work->x = 0;
     }
 
-    c = SrollTextDequeueChar(work);
+    ch = SrollTextDequeueChar(work);
 
-    if (c & 0xFF00) {
+    if (ch & 0xFF00) {
         off = (work->y * work->textWidth + (work->x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(c, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
-        wd = SrollTextGetGlyphWidth(c, work->fontPages, work->fontWidths, work->fontGlyphCount);
-        n = SrollTextBlitGlyph(work, (u32*)(work->tileData + off), g, wd);
-        t = work->y * work->textWidth + (work->x >> 3) + work->textTileBase;
-        p = (u16*)(SrollTextGetTilemap(work) +
+        glyph = SrollTextGetGlyphAddress(ch, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
+        width = SrollTextGetGlyphWidth(ch, work->fontPages, work->fontWidths, work->fontGlyphCount);
+        tileCount = SrollTextBlitGlyph(work, (u32*)(work->tileData + off), glyph, width);
+        tile = work->y * work->textWidth + (work->x >> 3) + work->textTileBase;
+        row = (u16*)(SrollTextGetTilemap(work) +
                    ((work->textY + work->y) * work->mapWidth + ((work->x >> 3) + work->textX)) * 2);
 
         for (i = 0; i < work->glyphHeight; i++) {
-            if (n == 1) {
-                p[0] = t;
+            if (tileCount == 1) {
+                row[0] = tile;
             } else {
-                p[0] = t;
-                p[1] = t + 1;
+                row[0] = tile;
+                row[1] = tile + 1;
             }
 
-            p += work->mapWidth;
-            t += work->textWidth;
+            row += work->mapWidth;
+            tile += work->textWidth;
         }
 
-        work->x += wd;
+        work->x += width;
         work->flags |= SROLL_FLAG_TILEMAP_DIRTY;
-        r = 1;
+        drawn = 1;
     } else {
-        switch (c) {
+        switch (ch) {
         case '@':
-            v[0] = SrollTextDequeueChar(work);
-            v[1] = SrollTextDequeueChar(work);
+            cmd[0] = SrollTextDequeueChar(work);
+            cmd[1] = SrollTextDequeueChar(work);
 
-            switch (v[0]) {
+            switch (cmd[0]) {
             case 'F':
-                SrollTextSelectFont(work, ParseLowercaseHexDigit(v[1]));
+                SrollTextSelectFont(work, ParseLowercaseHexDigit(cmd[1]));
                 break;
             case 'f':
-                work->fgColor = ParseLowercaseHexDigit(v[1]);
+                work->fgColor = ParseLowercaseHexDigit(cmd[1]);
                 break;
             case 's':
-                work->shadowColor = ParseLowercaseHexDigit(v[1]);
+                work->shadowColor = ParseLowercaseHexDigit(cmd[1]);
                 break;
             case 'b':
-                work->bgColor = ParseLowercaseHexDigit(v[1]);
+                work->bgColor = ParseLowercaseHexDigit(cmd[1]);
                 break;
             case 'e':
-                work->edgeColor = ParseLowercaseHexDigit(v[1]);
+                work->edgeColor = ParseLowercaseHexDigit(cmd[1]);
                 break;
             }
 
@@ -1055,16 +1055,16 @@ u8 SrollTextProcessNextChar(SrollWork* work) {
         }
     }
 
-    return r;
+    return drawn;
 }
 
 void SrollTextDrawNextGlyph(SrollWork* work, u8 flush) {
-    u8 r;
+    u8 drawn;
 
-    r = 0;
+    drawn = 0;
 
-    while (!SrollTextQueueIsEmpty(work) && !r) {
-        r = SrollTextProcessNextChar(work);
+    while (!SrollTextQueueIsEmpty(work) && !drawn) {
+        drawn = SrollTextProcessNextChar(work);
     }
 
     if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
@@ -1083,15 +1083,15 @@ void SrollTextDrawQueued(SrollWork* work, u8 flush) {
 }
 
 u8* SrollTextGetTilemap(SrollWork* work) {
-    u8* v;
+    u8* tilemap;
 
-    v = work->tilemapBuffer;
+    tilemap = work->tilemapBuffer;
 
-    if (v == NULL) {
-        v = work->tilemap;
+    if (tilemap == NULL) {
+        tilemap = work->tilemap;
     }
 
-    return v;
+    return tilemap;
 }
 
 void SrollTextFlushTilemap(SrollWork* work) {
@@ -1128,17 +1128,17 @@ void SrollTextDrawStringAtTile(SrollWork* work, u16 x, u16 y, u8* str, u8 flush)
 
 void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* str, u8 flush) {
     u32 off;
-    u8* g;
-    s32 n;
+    u8* glyph;
+    s32 padWidth;
 
     SrollTextDrawQueued(work, 0);
     SrollTextSetCursorTile(work, x >> 3, y);
-    n = x & 7;
+    padWidth = x & 7;
 
-    if (n != 0) {
+    if (padWidth != 0) {
         off = (work->y * work->textWidth + (x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(0x8140, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
-        SrollTextBlitGlyph(work, (u32*)(work->tileData + off), g, n);
+        glyph = SrollTextGetGlyphAddress(0x8140, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
+        SrollTextBlitGlyph(work, (u32*)(work->tileData + off), glyph, padWidth);
     }
 
     SrollTextSetCursorPixelX(work, x);
@@ -1147,8 +1147,8 @@ void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* str, u8 flus
 
     if ((work->x & 7) != 0) {
         off = (work->y * work->textWidth + (work->x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(0x8140, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
-        SrollTextBlitGlyph(work, (u32*)(work->tileData + off), g, 8 - (work->x & 7));
+        glyph = SrollTextGetGlyphAddress(0x8140, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
+        SrollTextBlitGlyph(work, (u32*)(work->tileData + off), glyph, 8 - (work->x & 7));
     }
 
     if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
@@ -1292,38 +1292,38 @@ u32* GetBlockAudioData() {
 
 u8* ReadNextAudioBlock(u32** next) {
     u32* base;
-    u32* q;
-    u32 v;
+    u32* data;
+    u32 header;
 
     base = *next;
-    q = base;
-    v = *q++;
+    data = base;
+    header = *data++;
 
-    if ((v & 0xFF) != 0x53) {
+    if ((header & 0xFF) != 0x53) {
         *next = NULL;
         return NULL;
     }
 
-    *next = (u32*)((u8*)base + (((v >> 8) & 0xFF00) << 2) + ((v >> 24) << 2));
-    return (u8*)q;
+    *next = (u32*)((u8*)base + (((header >> 8) & 0xFF00) << 2) + ((header >> 24) << 2));
+    return (u8*)data;
 }
 
 s32 AudioBlockStreamInit(u32* src) {
-    s32* p;
-    u8* q;
+    s32* sample;
+    u8* block;
 
-    for (p = sDecodedAudioBuffer; p < sDecodedAudioBuffer + 0x810;) {
-        *p++ = 0;
+    for (sample = sDecodedAudioBuffer; sample < sDecodedAudioBuffer + 0x810;) {
+        *sample++ = 0;
     }
 
     sAudioBlockNext = src;
 
     for (sDecodedAudioWritePosition = 0; sDecodedAudioWritePosition <= 0x7FF; sDecodedAudioWritePosition += 0x200) {
         if (sAudioBlockNext != NULL) {
-            q = ReadNextAudioBlock(&sAudioBlockNext);
+            block = ReadNextAudioBlock(&sAudioBlockNext);
 
-            if (q != NULL) {
-                DecodeAudioBlock(q, sDecodedAudioBuffer, sDecodedAudioWritePosition);
+            if (block != NULL) {
+                DecodeAudioBlock(block, sDecodedAudioBuffer, sDecodedAudioWritePosition);
             }
         }
     }
@@ -1334,14 +1334,14 @@ s32 AudioBlockStreamInit(u32* src) {
 }
 
 s32 AudioBlockStreamUpdate() {
-    u8* q;
+    u8* block;
 
     if (sDecodedAudioReadPosition > sDecodedAudioWritePosition + 0x200 || sDecodedAudioReadPosition < sDecodedAudioWritePosition) {
         if (sAudioBlockNext != NULL) {
-            q = ReadNextAudioBlock(&sAudioBlockNext);
+            block = ReadNextAudioBlock(&sAudioBlockNext);
 
-            if (q != NULL) {
-                DecodeAudioBlock(q, sDecodedAudioBuffer, sDecodedAudioWritePosition);
+            if (block != NULL) {
+                DecodeAudioBlock(block, sDecodedAudioBuffer, sDecodedAudioWritePosition);
             }
 
             sDecodedAudioWritePosition = (sDecodedAudioWritePosition + 0x200) & 0x7FF;

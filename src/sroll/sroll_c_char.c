@@ -18,7 +18,7 @@ static s32 Square(s32 x) {
 }
 
 void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
-    AnimState* p;
+    AnimState* anim;
     s32 i;
 
 #ifdef VERSION_EU
@@ -33,10 +33,10 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
 #endif
         work->palette = LoadObjPalette(gSrollSoraEpiloguePalettes, 224);
 
-        for (i = 0, p = work->anim; i <= 4; i++) {
-            AnimInit(p, gSrollSoraEpilogueAnims, gSrollSoraEpilogueFrames);
-            AnimStart(p, i, 0);
-            p++;
+        for (i = 0, anim = work->anim; i <= 4; i++) {
+            AnimInit(anim, gSrollSoraEpilogueAnims, gSrollSoraEpilogueFrames);
+            AnimStart(anim, i, 0);
+            anim++;
         }
     } else {
 #ifdef VERSION_JP
@@ -46,10 +46,10 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
 #endif
         work->palette = LoadObjPalette(gSrollRikuEpiloguePalettes, 224);
 
-        for (i = 0, p = work->anim; i <= 4; i++) {
-            AnimInit(p, gSrollRikuEpilogueAnims, gSrollRikuEpilogueFrames);
-            AnimStart(p, i, 0);
-            p++;
+        for (i = 0, anim = work->anim; i <= 4; i++) {
+            AnimInit(anim, gSrollRikuEpilogueAnims, gSrollRikuEpilogueFrames);
+            AnimStart(anim, i, 0);
+            anim++;
         }
     }
 
@@ -60,19 +60,19 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
             work->tiles = LoadObjTiles(gSrollSoraEpilogueFrenchTiles, 168 * 32);
             work->palette = LoadObjPalette(gSrollSoraEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollSoraEpilogueFrenchAnims, gSrollSoraEpilogueFrenchFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollSoraEpilogueFrenchAnims, gSrollSoraEpilogueFrenchFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         } else {
             work->tiles = LoadObjTiles(gSrollRikuEpilogueFrenchTiles, 158 * 32);
             work->palette = LoadObjPalette(gSrollRikuEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollRikuEpilogueFrenchAnims, gSrollRikuEpilogueFrenchFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollRikuEpilogueFrenchAnims, gSrollRikuEpilogueFrenchFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         }
 
@@ -82,19 +82,19 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
             work->tiles = LoadObjTiles(gSrollSoraEpilogueSpanishTiles, 167 * 32);
             work->palette = LoadObjPalette(gSrollSoraEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollSoraEpilogueSpanishAnims, gSrollSoraEpilogueSpanishFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollSoraEpilogueSpanishAnims, gSrollSoraEpilogueSpanishFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         } else {
             work->tiles = LoadObjTiles(gSrollRikuEpilogueSpanishTiles, 186 * 32);
             work->palette = LoadObjPalette(gSrollRikuEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollRikuEpilogueSpanishAnims, gSrollRikuEpilogueSpanishFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollRikuEpilogueSpanishAnims, gSrollRikuEpilogueSpanishFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         }
 
@@ -104,19 +104,19 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
             work->tiles = LoadObjTiles(gSrollSoraEpilogueItalianTiles, 142 * 32);
             work->palette = LoadObjPalette(gSrollSoraEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollSoraEpilogueItalianAnims, gSrollSoraEpilogueItalianFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollSoraEpilogueItalianAnims, gSrollSoraEpilogueItalianFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         } else {
             work->tiles = LoadObjTiles(gSrollRikuEpilogueItalianTiles, 162 * 32);
             work->palette = LoadObjPalette(gSrollRikuEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollRikuEpilogueItalianAnims, gSrollRikuEpilogueItalianFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollRikuEpilogueItalianAnims, gSrollRikuEpilogueItalianFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         }
 
@@ -127,19 +127,19 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
             work->tiles = LoadObjTiles(gSrollSoraEpilogueGermanTiles, 188 * 32);
             work->palette = LoadObjPalette(gSrollSoraEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollSoraEpilogueGermanAnims, gSrollSoraEpilogueGermanFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollSoraEpilogueGermanAnims, gSrollSoraEpilogueGermanFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         } else {
             work->tiles = LoadObjTiles(gSrollRikuEpilogueGermanTiles, 190 * 32);
             work->palette = LoadObjPalette(gSrollRikuEpiloguePalettes, 224);
 
-            for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gSrollRikuEpilogueGermanAnims, gSrollRikuEpilogueGermanFrames);
-                AnimStart(p, i, 0);
-                p++;
+            for (i = 0, anim = work->anim; i <= 4; i++) {
+                AnimInit(anim, gSrollRikuEpilogueGermanAnims, gSrollRikuEpilogueGermanFrames);
+                AnimStart(anim, i, 0);
+                anim++;
             }
         }
 
@@ -149,30 +149,30 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
 }
 
 u8 task_sroll_c_char_1(SrollCCharWork* work) {
-    AnimState* p;
+    AnimState* anim;
     s32 i;
 
-    p = work->anim;
+    anim = work->anim;
 
     for (i = 4; i >= 0; i--) {
-        AnimUpdate(p);
-        p++;
+        AnimUpdate(anim);
+        anim++;
     }
 
     return 1;
 }
 
 void task_sroll_c_char_2(SrollCCharWork* work) {
-    AnimState* p;
+    AnimState* anim;
     s32 i;
     u16 flags;
 
     flags = 0;
-    p = work->anim;
+    anim = work->anim;
 
     for (i = 4; i >= 0; i--) {
-        DrawSprite(120, 80, AnimGetGfx(p), work->tiles, work->palette, NULL, flags, 0xFF0);
-        p++;
+        DrawSprite(120, 80, AnimGetGfx(anim), work->tiles, work->palette, NULL, flags, 0xFF0);
+        anim++;
     }
 }
 

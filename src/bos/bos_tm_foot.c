@@ -820,22 +820,29 @@ void BosTmClbHoldSpinning(TmClbArg* clb, TmArmPos* tip) {
     clb->spinMode = BOS_TM_CLB_SPIN_MODE_TWIRL;
 }
 
+enum BosTmClbHoldMode {
+    BOS_TM_CLB_HOLD_ARM1_FACING_LEFT,
+    BOS_TM_CLB_HOLD_ARM0_FACING_LEFT,
+    BOS_TM_CLB_HOLD_ARM1_FACING_RIGHT,
+    BOS_TM_CLB_HOLD_ARM0_FACING_RIGHT
+};
+
 void BosTmClbHold(TmClbArg* clb, TmArmPos* tip, u8 mode) {
     clb->src = tip;
     clb->vz = 0;
     clb->spinMode = BOS_TM_CLB_SPIN_MODE_LOCKED;
 
     switch (mode) {
-    case 0:
+    case BOS_TM_CLB_HOLD_ARM1_FACING_LEFT:
         clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD;
         break;
-    case 1:
+    case BOS_TM_CLB_HOLD_ARM0_FACING_LEFT:
         clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD;
         break;
-    case 2:
+    case BOS_TM_CLB_HOLD_ARM1_FACING_RIGHT:
         clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD_LEFT;
         break;
-    case 3:
+    case BOS_TM_CLB_HOLD_ARM0_FACING_RIGHT:
         clb->moveMode = BOS_TM_CLB_MOVE_MODE_HOLD_RIGHT_HIGH;
         break;
     }
@@ -1208,11 +1215,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, ARRAY_COUNT(sBosTmArm1FireLeftFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
-                BosTmClbHold(&work->clb, &work->tips[0], 0);
+                BosTmClbHold(&work->clb, &work->tips[0], BOS_TM_CLB_HOLD_ARM1_FACING_LEFT);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, ARRAY_COUNT(sBosTmArm1FireRightFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
-                BosTmClbHold(&work->clb, &work->tips[0], 2);
+                BosTmClbHold(&work->clb, &work->tips[0], BOS_TM_CLB_HOLD_ARM1_FACING_RIGHT);
             }
         }
 
@@ -1242,11 +1249,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, ARRAY_COUNT(sBosTmArm1FireLeftFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
-                BosTmClbHold(&work->clb, &work->tips[0], 0);
+                BosTmClbHold(&work->clb, &work->tips[0], BOS_TM_CLB_HOLD_ARM1_FACING_LEFT);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, ARRAY_COUNT(sBosTmArm1FireRightFrames), &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
-                BosTmClbHold(&work->clb, &work->tips[0], 2);
+                BosTmClbHold(&work->clb, &work->tips[0], BOS_TM_CLB_HOLD_ARM1_FACING_RIGHT);
             }
         }
 
@@ -1529,11 +1536,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, ARRAY_COUNT(sBosTmArm0FireLeftFrames), work->joints.all);
                 work->tips[1].angle = 0x10C;
-                BosTmClbHold(&work->clb2, &work->tips[1], 1);
+                BosTmClbHold(&work->clb2, &work->tips[1], BOS_TM_CLB_HOLD_ARM0_FACING_LEFT);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, ARRAY_COUNT(sBosTmArm0FireRightFrames), work->joints.all);
                 work->tips[1].angle = 0x118;
-                BosTmClbHold(&work->clb2, &work->tips[1], 3);
+                BosTmClbHold(&work->clb2, &work->tips[1], BOS_TM_CLB_HOLD_ARM0_FACING_RIGHT);
             }
         }
 
@@ -1550,11 +1557,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, ARRAY_COUNT(sBosTmArm0FireLeftFrames), work->joints.all);
                 work->tips[1].angle = 0x10C;
-                BosTmClbHold(&work->clb2, &work->tips[1], 1);
+                BosTmClbHold(&work->clb2, &work->tips[1], BOS_TM_CLB_HOLD_ARM0_FACING_LEFT);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, ARRAY_COUNT(sBosTmArm0FireRightFrames), work->joints.all);
                 work->tips[1].angle = 0x118;
-                BosTmClbHold(&work->clb2, &work->tips[1], 3);
+                BosTmClbHold(&work->clb2, &work->tips[1], BOS_TM_CLB_HOLD_ARM0_FACING_RIGHT);
             }
         }
 

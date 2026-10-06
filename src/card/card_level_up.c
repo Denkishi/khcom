@@ -1728,7 +1728,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
 u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
     s32 bonusX;
     s32 textX;
-    s8 n;
+    s8 slideSteps;
 
     bonusX = work->bonusX[work->cursor] << 8;
     textX = work->textX[work->cursor] << 8;
@@ -1742,9 +1742,9 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* task) {
         work->slideSteps--;
     }
 
-    n = work->slideSteps;
+    slideSteps = work->slideSteps;
 
-    if (n == 0) {
+    if (slideSteps == 0) {
         if (work->barSteps != 0) {
             ApproachValue(&work->topBarY, 0, work->barSteps);
             ApproachValue(&work->bottomBarY, 0x9800, work->barSteps);

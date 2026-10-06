@@ -52,6 +52,7 @@
 #include "jiminy_records_index_data.h"
 #include "songs.h"
 #include "gba/defines.h"
+#include "card.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);
@@ -309,7 +310,7 @@ void HandleSoraCardInput() {
     if (GetKeysPressed() & A_BUTTON) {
         RequestSoraCardUse();
 
-        if (GetSoraCardListIndex() == 3) {
+        if (GetSoraCardListIndex() == CARD_LIST_ENEMY) {
             if (IsSoraSelectionEmpty() == 0) {
                 gBtlWork->listSwitchTimer = 15;
             }
@@ -415,7 +416,7 @@ void HandleRikuCardInput() {
     if (GetKeysPressed() & A_BUTTON) {
         RequestRikuCardUse();
 
-        if (GetRikuCardListIndex() == 3) {
+        if (GetRikuCardListIndex() == CARD_LIST_ENEMY) {
             if (IsRikuSelectionEmpty() == 0) {
                 gRikuBtlWork->listSwitchTimer = 15;
             }

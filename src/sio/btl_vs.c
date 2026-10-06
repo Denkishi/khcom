@@ -24,6 +24,7 @@
 #include "card_battle_riku.h"
 #include "card_label_data.h"
 #include "engine_math.h"
+#include "card.h"
 
 static u16 sVsKeyHoldL[2];
 static u16 sVsKeyHoldR[2];
@@ -244,7 +245,7 @@ void HandleVsRikuCardInput() {
     if (pressed & A_BUTTON) {
         RequestRikuCardUse();
 
-        if (GetRikuCardListIndex() == 3) {
+        if (GetRikuCardListIndex() == CARD_LIST_ENEMY) {
             if (IsRikuSelectionEmpty() == 0) {
                 gRikuBtlWork->listSwitchTimer = 15;
             }
@@ -374,7 +375,7 @@ void HandleVsSoraCardInput() {
     if (pressed & A_BUTTON) {
         RequestSoraCardUse();
 
-        if (GetSoraCardListIndex() == 3) {
+        if (GetSoraCardListIndex() == CARD_LIST_ENEMY) {
             if (IsSoraSelectionEmpty() == 0) {
                 gBtlWork->listSwitchTimer = 15;
             }

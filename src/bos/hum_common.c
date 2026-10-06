@@ -32,6 +32,7 @@
 #include "card_battle_riku.h"
 #include "sprite_palettes.h"
 #include "card_label_data.h"
+#include "card.h"
 
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);
@@ -820,7 +821,7 @@ void HandleRikuAiCardInput() {
     if (keys & RIKU_KEY_USE_CARD) {
         RequestRikuCardUse();
 
-        if (GetRikuCardListIndex() == 3 && !IsRikuSelectionEmpty()) {
+        if (GetRikuCardListIndex() == CARD_LIST_ENEMY && !IsRikuSelectionEmpty()) {
             gRikuBtlWork->listSwitchTimer = 15;
         }
     }
@@ -1045,7 +1046,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
         return FALSE;
     }
 
-    if (GetRikuCardListIndex() == 3) {
+    if (GetRikuCardListIndex() == CARD_LIST_ENEMY) {
         if ((GetRandom() & 3) == 0) {
             if (count <= 0) {
                 work->flags |= HUM_FLAG_ENEMY_CARDS_SPENT;

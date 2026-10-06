@@ -146,6 +146,13 @@ enum DeckCardSet {
     DECK_CARD_SET_ENEMY
 };
 
+enum CardList {
+    CARD_LIST_MAIN,
+    CARD_LIST_MAGIC,
+    CARD_LIST_ITEM,
+    CARD_LIST_ENEMY
+};
+
 typedef struct CardBattleWork {
     TaskPool tasks;
     void* tiles;

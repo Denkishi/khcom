@@ -545,7 +545,7 @@ void LoadRikuDeckCardSlots(CardBattleWork* work, CardSlot* slots, s8 listIndex, 
         ShuffleCardSlots(work->slots[listIndex], count);
     }
 
-    if (listIndex == 0) {
+    if (listIndex == CARD_LIST_MAIN) {
         slots[count].unk_06 = 0;
         slots[count].stocked = FALSE;
         slots[count].removed = FALSE;
@@ -561,7 +561,7 @@ u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 idCount, u8 listInde
     for (i = 0; i < idCount; i++) {
         if (ids[i] != CARD_ID_NONE) {
             switch (listIndex) {
-            case 0:
+            case CARD_LIST_MAIN:
                 if (gCardDefs[ids[i] & CARD_ID_MASK].category <= 2) {
                     out[count].unk_06 = listIndex;
                     out[count].stocked = listIndex;
@@ -572,7 +572,7 @@ u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 idCount, u8 listInde
                 }
 
                 break;
-            case 3:
+            case CARD_LIST_ENEMY:
                 if (gCardDefs[ids[i] & CARD_ID_MASK].category == 3) {
                     out[count].unk_06 = 0;
                     out[count].stocked = FALSE;
@@ -594,7 +594,7 @@ void InitRikuCardList(CardBattleWork* work, s8 listIndex) {
     u16 n = work->slotCounts[listIndex];
 
     if (n != 0) {
-        if (listIndex == 0) {
+        if (listIndex == CARD_LIST_MAIN) {
             CardSlot* slots;
             u8 i;
 
@@ -666,15 +666,15 @@ static void cardbattle_0(CardBattleWork* work) {
     UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles);
     TaskPoolInit(&work->tasks, 30);
     work->stockCount = 0;
-    work->listIndex = 0;
-    work->reloadPending[0] = 0;
-    work->reloadPending[1] = 0;
-    work->reloadPending[2] = 0;
-    work->reloadPending[3] = 0;
-    work->revCountShown[0] = 1;
-    work->revCountShown[1] = 0;
-    work->revCountShown[2] = 0;
-    work->revCountShown[3] = 0;
+    work->listIndex = CARD_LIST_MAIN;
+    work->reloadPending[CARD_LIST_MAIN] = 0;
+    work->reloadPending[CARD_LIST_MAGIC] = 0;
+    work->reloadPending[CARD_LIST_ITEM] = 0;
+    work->reloadPending[CARD_LIST_ENEMY] = 0;
+    work->revCountShown[CARD_LIST_MAIN] = 1;
+    work->revCountShown[CARD_LIST_MAGIC] = 0;
+    work->revCountShown[CARD_LIST_ITEM] = 0;
+    work->revCountShown[CARD_LIST_ENEMY] = 0;
     work->stockValue = 0;
     work->xSteps = 0;
     work->x = sRikuStockValueX[0];
@@ -690,154 +690,154 @@ static void cardbattle_0(CardBattleWork* work) {
     }
 
     work->stockNameChecked = FALSE;
-    ListPoolInit(&work->cardDisplays[0]);
-    ListPoolInit(&work->cardDisplays[1]);
-    ListPoolInit(&work->cardDisplays[2]);
-    ListPoolInit(&work->cardDisplays[3]);
+    ListPoolInit(&work->cardDisplays[CARD_LIST_MAIN]);
+    ListPoolInit(&work->cardDisplays[CARD_LIST_MAGIC]);
+    ListPoolInit(&work->cardDisplays[CARD_LIST_ITEM]);
+    ListPoolInit(&work->cardDisplays[CARD_LIST_ENEMY]);
 
     switch (gBtlWork->battleId) {
     case BATTLE_LEON:
     case BATTLE_TUTORIAL_1:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[20]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[20]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[20]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[20]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_HOOK:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[4]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[4]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[4]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[4]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_CLOUD:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[1]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[1]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[1]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[1]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_HADES:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[2]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[2]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[2]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[2]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_RIKU_1:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[5]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[5]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[5]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[5]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_AXEL_1:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[0]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[0]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[0]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[0]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_LARXENE_1:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[3]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[3]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[3]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[3]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_VEXEN_1:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[7]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[7]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[7]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[7]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_MARLUXIA:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[13]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[13]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[13]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[13]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_ANSEM_1:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[14]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[14]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[14]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[14]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_ANSEM_2:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[19]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[19]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[19]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[19]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_LEXAEUS:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[17]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[17]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[17]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[17]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_RIKU_2:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[6]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[6]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[6]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[6]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_RIKU_3:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[9]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[9]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[9]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[9]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_RIKU_4:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[10]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[10]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[10]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[10]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_RIKU_5:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[16]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[16]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[16]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[16]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_RIKU_6:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[18]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[18]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[18]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[18]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_AXEL_2:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[12]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[12]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[12]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[12]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_LARXENE_2:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[11]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[11]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[11]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[11]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_VEXEN_2:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[8]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[8]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[8]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[8]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     case BATTLE_VEXEN_3:
-        work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[15]) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[15]);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountDeckCards(DECK_CARD_SET_MAIN, &sRikuDecks[15]) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountDeckCards(DECK_CARD_SET_ENEMY, &sRikuDecks[15]);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     default:
-        work->slotCounts[0] = work->cardsLeft[0] = CountLinkPartnerDeckCards(0) + 1;
-        work->slotCounts[3] = work->cardsLeft[3] = CountLinkPartnerDeckCards(3);
-        InitRikuCardList(work, 0);
-        InitRikuCardList(work, 3);
+        work->slotCounts[CARD_LIST_MAIN] = work->cardsLeft[CARD_LIST_MAIN] = CountLinkPartnerDeckCards(CARD_LIST_MAIN) + 1;
+        work->slotCounts[CARD_LIST_ENEMY] = work->cardsLeft[CARD_LIST_ENEMY] = CountLinkPartnerDeckCards(CARD_LIST_ENEMY);
+        InitRikuCardList(work, CARD_LIST_MAIN);
+        InitRikuCardList(work, CARD_LIST_ENEMY);
         break;
     }
 
-    work->reloadCounts[0] = 0;
-    work->reloadCounts[1] = 0;
-    work->reloadCounts[2] = 0;
-    work->cursors[0] = 0;
-    work->cursors[1] = 0;
-    work->cursors[2] = 0;
-    work->cursors[3] = 0;
+    work->reloadCounts[CARD_LIST_MAIN] = 0;
+    work->reloadCounts[CARD_LIST_MAGIC] = 0;
+    work->reloadCounts[CARD_LIST_ITEM] = 0;
+    work->cursors[CARD_LIST_MAIN] = 0;
+    work->cursors[CARD_LIST_MAGIC] = 0;
+    work->cursors[CARD_LIST_ITEM] = 0;
+    work->cursors[CARD_LIST_ENEMY] = 0;
     sRikuSelectedCard = NULL;
     CreateRikuCardDisplay(work, work->listIndex);
     sRikuCardRequest = CARD_REQUEST_NONE;
@@ -896,10 +896,10 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
                 gCardBattleState->rikuReloadGauge = 0;
                 gCardBattleState->rikuGaugeFullFrame = 4;
                 TaskPoolUpdate(&work->tasks);
-                ResetCardSlotsForReload(work, 0);
-                work->cursors[0] = 0;
-                work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-                CreateRikuCardDisplay(work, 0);
+                ResetCardSlotsForReload(work, CARD_LIST_MAIN);
+                work->cursors[CARD_LIST_MAIN] = 0;
+                work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+                CreateRikuCardDisplay(work, CARD_LIST_MAIN);
                 TickRikuHcEffectOnReload();
             } else {
                 sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
@@ -919,7 +919,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
                 gCardBattleState->rikuReloadCounter = work->reloadCounts[work->listIndex];
                 gCardBattleState->rikuReloadGauge = 0;
                 gCardBattleState->rikuGaugeFullFrame = 4;
-                ClearUsedCardSlots(work, 0);
+                ClearUsedCardSlots(work, CARD_LIST_MAIN);
                 work->cursors[work->listIndex] = 0;
                 work->cardsLeft[work->listIndex] = 0;
                 work->reloadPending[work->listIndex] = 1;
@@ -1053,7 +1053,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
         sRikuCardReloadRequest = CARD_REQUEST_NONE;
         RestoreCardsForPotion(work);
 
-        if (work->listIndex == 0) {
+        if (work->listIndex == CARD_LIST_MAIN) {
             if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
@@ -1065,24 +1065,24 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             }
 
             sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
-            work->listIndex = 0;
+            work->listIndex = CARD_LIST_MAIN;
 #ifdef VERSION_EU
-            gCardBattleState->rikuListIndex = 0;
+            gCardBattleState->rikuListIndex = CARD_LIST_MAIN;
 #endif
         }
 
         TaskPoolUpdate(&work->tasks);
-        ClearUsedCardSlots(work, 0);
-        work->cursors[0] = 0;
-        work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-        CreateRikuCardDisplay(work, 0);
+        ClearUsedCardSlots(work, CARD_LIST_MAIN);
+        work->cursors[CARD_LIST_MAIN] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+        CreateRikuCardDisplay(work, CARD_LIST_MAIN);
         TickRikuHcEffectOnReload();
         break;
     case CARD_REQUEST_HI_POTION:
         sRikuCardReloadRequest = CARD_REQUEST_NONE;
         RestoreCardsForHiPotion(work);
 
-        if (work->listIndex == 0) {
+        if (work->listIndex == CARD_LIST_MAIN) {
             if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
@@ -1094,26 +1094,26 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             }
 
             sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
-            work->listIndex = 0;
+            work->listIndex = CARD_LIST_MAIN;
 #ifdef VERSION_EU
-            gCardBattleState->rikuListIndex = 0;
+            gCardBattleState->rikuListIndex = CARD_LIST_MAIN;
 #endif
         }
 
         TaskPoolUpdate(&work->tasks);
-        ClearUsedCardSlots(work, 0);
-        work->cursors[0] = 0;
-        work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-        CreateRikuCardDisplay(work, 0);
+        ClearUsedCardSlots(work, CARD_LIST_MAIN);
+        work->cursors[CARD_LIST_MAIN] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+        CreateRikuCardDisplay(work, CARD_LIST_MAIN);
         TickRikuHcEffectOnReload();
         break;
     case CARD_REQUEST_MEGA_POTION:
         sRikuCardReloadRequest = CARD_REQUEST_NONE;
         RestoreCardsForMegaPotion(work);
         ResetRikuReloadGauge(work);
-        work->reloadCounts[0] = 0;
+        work->reloadCounts[CARD_LIST_MAIN] = 0;
 
-        if (work->listIndex == 0) {
+        if (work->listIndex == CARD_LIST_MAIN) {
             if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
@@ -1125,24 +1125,24 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             }
 
             sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
-            work->listIndex = 0;
+            work->listIndex = CARD_LIST_MAIN;
 #ifdef VERSION_EU
-            gCardBattleState->rikuListIndex = 0;
+            gCardBattleState->rikuListIndex = CARD_LIST_MAIN;
 #endif
         }
 
         TaskPoolUpdate(&work->tasks);
-        ClearUsedCardSlots(work, 0);
-        work->cursors[0] = 0;
-        work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-        CreateRikuCardDisplay(work, 0);
+        ClearUsedCardSlots(work, CARD_LIST_MAIN);
+        work->cursors[CARD_LIST_MAIN] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+        CreateRikuCardDisplay(work, CARD_LIST_MAIN);
         TickRikuHcEffectOnReload();
         break;
     case CARD_REQUEST_ETHER:
         sRikuCardReloadRequest = CARD_REQUEST_NONE;
         RestoreCardsForEther(work);
 
-        if (work->listIndex == 0) {
+        if (work->listIndex == CARD_LIST_MAIN) {
             if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
@@ -1154,26 +1154,26 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             }
 
             sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
-            work->listIndex = 0;
+            work->listIndex = CARD_LIST_MAIN;
 #ifdef VERSION_EU
-            gCardBattleState->rikuListIndex = 0;
+            gCardBattleState->rikuListIndex = CARD_LIST_MAIN;
 #endif
         }
 
         TaskPoolUpdate(&work->tasks);
-        ClearUsedCardSlots(work, 0);
-        work->cursors[0] = 0;
-        work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-        CreateRikuCardDisplay(work, 0);
+        ClearUsedCardSlots(work, CARD_LIST_MAIN);
+        work->cursors[CARD_LIST_MAIN] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+        CreateRikuCardDisplay(work, CARD_LIST_MAIN);
         TickRikuHcEffectOnReload();
         break;
     case CARD_REQUEST_MEGA_ETHER:
         sRikuCardReloadRequest = CARD_REQUEST_NONE;
         RestoreCardsForMegaEther(work);
         ResetRikuReloadGauge(work);
-        work->reloadCounts[0] = 0;
+        work->reloadCounts[CARD_LIST_MAIN] = 0;
 
-        if (work->listIndex == 0) {
+        if (work->listIndex == CARD_LIST_MAIN) {
             if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
@@ -1185,24 +1185,24 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             }
 
             sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
-            work->listIndex = 0;
+            work->listIndex = CARD_LIST_MAIN;
 #ifdef VERSION_EU
-            gCardBattleState->rikuListIndex = 0;
+            gCardBattleState->rikuListIndex = CARD_LIST_MAIN;
 #endif
         }
 
         TaskPoolUpdate(&work->tasks);
-        ClearUsedCardSlots(work, 0);
-        work->cursors[0] = 0;
-        work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-        CreateRikuCardDisplay(work, 0);
+        ClearUsedCardSlots(work, CARD_LIST_MAIN);
+        work->cursors[CARD_LIST_MAIN] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+        CreateRikuCardDisplay(work, CARD_LIST_MAIN);
         TickRikuHcEffectOnReload();
         break;
     case CARD_REQUEST_ELIXIR:
         sRikuCardReloadRequest = CARD_REQUEST_NONE;
         RestoreCardsForElixir(work);
 
-        if (work->listIndex == 0) {
+        if (work->listIndex == CARD_LIST_MAIN) {
             if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
@@ -1214,26 +1214,26 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             }
 
             sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
-            work->listIndex = 0;
+            work->listIndex = CARD_LIST_MAIN;
 #ifdef VERSION_EU
-            gCardBattleState->rikuListIndex = 0;
+            gCardBattleState->rikuListIndex = CARD_LIST_MAIN;
 #endif
         }
 
         TaskPoolUpdate(&work->tasks);
-        ClearUsedCardSlots(work, 0);
-        work->cursors[0] = 0;
-        work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-        CreateRikuCardDisplay(work, 0);
+        ClearUsedCardSlots(work, CARD_LIST_MAIN);
+        work->cursors[CARD_LIST_MAIN] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+        CreateRikuCardDisplay(work, CARD_LIST_MAIN);
         TickRikuHcEffectOnReload();
         break;
     case CARD_REQUEST_MEGALIXIR:
         sRikuCardReloadRequest = CARD_REQUEST_NONE;
         RestoreCardsForElixir(work);
         ResetRikuReloadGauge(work);
-        work->reloadCounts[0] = 0;
+        work->reloadCounts[CARD_LIST_MAIN] = 0;
 
-        if (work->listIndex == 0) {
+        if (work->listIndex == CARD_LIST_MAIN) {
             if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
@@ -1245,17 +1245,17 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             }
 
             sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
-            work->listIndex = 0;
+            work->listIndex = CARD_LIST_MAIN;
 #ifdef VERSION_EU
-            gCardBattleState->rikuListIndex = 0;
+            gCardBattleState->rikuListIndex = CARD_LIST_MAIN;
 #endif
         }
 
         TaskPoolUpdate(&work->tasks);
-        ClearUsedCardSlots(work, 0);
-        work->cursors[0] = 0;
-        work->cardsLeft[0] = CountAvailableCardSlots(work, 0);
-        CreateRikuCardDisplay(work, 0);
+        ClearUsedCardSlots(work, CARD_LIST_MAIN);
+        work->cursors[CARD_LIST_MAIN] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = CountAvailableCardSlots(work, CARD_LIST_MAIN);
+        CreateRikuCardDisplay(work, CARD_LIST_MAIN);
         TickRikuHcEffectOnReload();
         break;
     }
@@ -1296,7 +1296,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
     } else if (sRikuSelectedCard != NULL && (sRikuSelectedCard->flags & (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED)) == (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED) &&
                CountAvailableCardSlots(work, work->listIndex) != 0) {
         work->reloadPending[work->listIndex] = 1;
-        work->cardsLeft[0] = 0;
+        work->cardsLeft[CARD_LIST_MAIN] = 0;
         sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
 
         if (gRikuBtlWork->hcEffect != HC_EFFECT_AUTO_RELOAD) {
@@ -1330,7 +1330,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
             work->selectedCards[work->listIndex] = NULL;
             sRikuSelectedCard = NULL;
             work->reloadPending[work->listIndex] = 1;
-            work->cardsLeft[0] = 0;
+            work->cardsLeft[CARD_LIST_MAIN] = 0;
         }
     }
 
@@ -1655,11 +1655,11 @@ void SwitchRikuCardList(CardBattleWork* work) {
         }
 
         switch (work->listIndex) {
-        case 0:
-            work->listIndex = 3;
+        case CARD_LIST_MAIN:
+            work->listIndex = CARD_LIST_ENEMY;
             break;
-        case 3:
-            work->listIndex = 0;
+        case CARD_LIST_ENEMY:
+            work->listIndex = CARD_LIST_MAIN;
             break;
         }
 
@@ -1707,17 +1707,17 @@ void CycleRikuCardList(CardBattleWork* work) {
     }
 
     switch (work->listIndex) {
-    case 0:
-        work->listIndex = 3;
+    case CARD_LIST_MAIN:
+        work->listIndex = CARD_LIST_ENEMY;
         break;
-    case 1:
-        work->listIndex = 0;
+    case CARD_LIST_MAGIC:
+        work->listIndex = CARD_LIST_MAIN;
         break;
-    case 2:
-        work->listIndex = 3;
+    case CARD_LIST_ITEM:
+        work->listIndex = CARD_LIST_ENEMY;
         break;
-    case 3:
-        work->listIndex = 0;
+    case CARD_LIST_ENEMY:
+        work->listIndex = CARD_LIST_MAIN;
         break;
     }
 
@@ -1975,7 +1975,7 @@ u8 UseRikuCard(CardBattleWork* work) {
     if (sRikuSelectedCard->premium == TRUE) {
         sRikuSelectedCard->args.slot->removed = TRUE;
 
-        if (CountRemainingAttackCards(work, 0) == 0) {
+        if (CountRemainingAttackCards(work, CARD_LIST_MAIN) == 0) {
             sRikuSelectedCard->args.slot->removed = FALSE;
         }
     }
@@ -2037,7 +2037,7 @@ u8 UseRikuCard(CardBattleWork* work) {
         sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
         work->selectedCards[work->listIndex] = NULL;
         sRikuSelectedCard = NULL;
-        work->reloadPending[0] = 1;
+        work->reloadPending[CARD_LIST_MAIN] = 1;
 
 #ifndef VERSION_EU
         m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -2233,7 +2233,7 @@ u8 StockRikuCard(CardBattleWork* work) {
         sRikuSelectedCard->command = CARD_DISP_COMMAND_REMOVE;
         work->selectedCards[work->listIndex] = NULL;
         sRikuSelectedCard = NULL;
-        work->reloadPending[0] = 1;
+        work->reloadPending[CARD_LIST_MAIN] = 1;
 
 #ifndef VERSION_EU
         m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -2479,9 +2479,9 @@ void UseRikuStock(CardBattleWork* work) {
         }
     }
 
-    if (CountRemainingAttackCards(work, 0) == 0) {
+    if (CountRemainingAttackCards(work, CARD_LIST_MAIN) == 0) {
         for (i = 0; i < work->stockCount; i++) {
-            if (work->stock[i]->args.listIndex == 0) {
+            if (work->stock[i]->args.listIndex == CARD_LIST_MAIN) {
                 work->stock[i]->args.slot->removed = FALSE;
                 break;
             }
@@ -2638,8 +2638,8 @@ void ApplyRikuHcEffect(CardBattleWork* work) {
     }
 
     if (gRikuBtlWork->hcEffect == HC_EFFECT_DOUBLE_SLEIGHT) {
-        work->reloadCounts[0] = 2;
-        work->reloadCounts[1] = 2;
+        work->reloadCounts[CARD_LIST_MAIN] = 2;
+        work->reloadCounts[CARD_LIST_MAGIC] = 2;
     }
 
 #ifndef VERSION_EU

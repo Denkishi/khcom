@@ -209,7 +209,7 @@ void REV_COUNT_0(RevCountWork* work, RevCountArgs* args) {
     work->tiles = AllocSpriteFrameTiles(320);
     work->palette = LoadObjPalette(gCard00Palette, sizeof(gCard00Palette));
 
-    if (work->list == 0) {
+    if (work->list == CARD_LIST_MAIN) {
         count = work->args.count;
 
         if (*count >= 2 && *count <= 100) {
@@ -258,7 +258,7 @@ u8 REV_COUNT_1(RevCountWork* work, void* task) {
     count = work->args.count;
 
     if (*count != (s16)work->shownCount) {
-        if (work->list == 0) {
+        if (work->list == CARD_LIST_MAIN) {
             if (*count >= 2 && *count <= 100) {
                 row = gRevCountSprites[work->list];
                 UpdateSpriteFrameTiles(work->tiles, row[*count - 2],
@@ -401,7 +401,7 @@ u8 UpdateRevCountEmpty(RevCountWork* work, void* task) {
 
     // fakematch
     do {
-        if (work->list == 0) {
+        if (work->list == CARD_LIST_MAIN) {
             if (*work->args.count > 1) {
                 fn = REV_COUNT_1;
                 SetTaskUpdate(task, (TaskUpdateFunc)fn);

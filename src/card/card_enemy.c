@@ -669,7 +669,7 @@ void UseEnemyCard(u16 arg) {
     args.slot = NULL;
     args.variant = arg;
     args.index = sBossCardValue;
-    args.listIndex = 0;
+    args.listIndex = CARD_LIST_MAIN;
     card = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecard, &args)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
     gCardBattleState->enemyCardUsed = TRUE;
@@ -913,7 +913,7 @@ void UseEnemyCardByIndex(u16 variant, u8 index) {
     arg.slot = NULL;
     arg.variant = variant;
     arg.index = index;
-    arg.listIndex = 0;
+    arg.listIndex = CARD_LIST_MAIN;
     card = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardByIndex, &arg)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
 
@@ -958,7 +958,7 @@ void UseRandomEnemyCard(u16 variant, u8 index) {
     arg.slot = NULL;
     arg.variant = variant;
     arg.index = index;
-    arg.listIndex = 0;
+    arg.listIndex = CARD_LIST_MAIN;
     card = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardRandom, &arg)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
 

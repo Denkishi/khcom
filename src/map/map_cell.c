@@ -948,11 +948,11 @@ s16 MapOutlineNextRowRightToLeft(u8 prevType, u8 type, s16 y) {
 void MapFillOutlineCells() {
     s32 i;
     s32 j;
-    s32 dir;
+    s32 fillType;
     MapCell* cell;
 
     for (i = 0; i < sMapCols; i++) {
-        dir = MAP_CELL_TYPE_NONE;
+        fillType = MAP_CELL_TYPE_NONE;
 
         for (j = 0; j < sMapRows; j++) {
             cell = MapGetCell(i, j);
@@ -961,27 +961,27 @@ void MapFillOutlineCells() {
             case MAP_CELL_TYPE_BACK_WALL_BASE:
             case MAP_CELL_TYPE_LEFT_WALL_BASE:
             case MAP_CELL_TYPE_RIGHT_WALL_BASE:
-                dir = MAP_CELL_TYPE_FLOOR;
+                fillType = MAP_CELL_TYPE_FLOOR;
                 break;
             case MAP_CELL_TYPE_LEFT_WALL_TOP:
-                dir = MAP_CELL_TYPE_LEFT_WALL_FACE;
+                fillType = MAP_CELL_TYPE_LEFT_WALL_FACE;
                 break;
             case MAP_CELL_TYPE_RIGHT_WALL_TOP:
-                dir = MAP_CELL_TYPE_RIGHT_WALL_FACE;
+                fillType = MAP_CELL_TYPE_RIGHT_WALL_FACE;
                 break;
             case MAP_CELL_TYPE_BACK_WALL_TOP:
-                dir = MAP_CELL_TYPE_BACK_WALL_FACE;
+                fillType = MAP_CELL_TYPE_BACK_WALL_FACE;
                 break;
             case MAP_CELL_TYPE_UNSET:
-                if (dir != MAP_CELL_TYPE_NONE) {
-                    MapCellSetType(cell, dir, 0);
+                if (fillType != MAP_CELL_TYPE_NONE) {
+                    MapCellSetType(cell, fillType, 0);
                 }
 
                 break;
             }
         }
 
-        if (dir == MAP_CELL_TYPE_UNSET) {
+        if (fillType == MAP_CELL_TYPE_UNSET) {
             for (j = 0; j < sMapRows; j++) {
                 MapCellSetType(MapGetCell(i, j), MAP_CELL_TYPE_BACK_WALL_FACE, 0);
             }
@@ -989,24 +989,24 @@ void MapFillOutlineCells() {
     }
 
     for (i = 0; i < sMapCols; i++) {
-        dir = MAP_CELL_TYPE_NONE;
+        fillType = MAP_CELL_TYPE_NONE;
 
         for (j = sMapRows - 1; j >= 0; j--) {
             cell = MapGetCell(i, j);
 
             switch (cell->type) {
             case MAP_CELL_TYPE_LEFT_WALL_BASE:
-                dir = MAP_CELL_TYPE_LEFT_WALL_FACE;
+                fillType = MAP_CELL_TYPE_LEFT_WALL_FACE;
                 break;
             case MAP_CELL_TYPE_RIGHT_WALL_BASE:
-                dir = MAP_CELL_TYPE_RIGHT_WALL_FACE;
+                fillType = MAP_CELL_TYPE_RIGHT_WALL_FACE;
                 break;
             case MAP_CELL_TYPE_BACK_WALL_BASE:
-                dir = MAP_CELL_TYPE_BACK_WALL_FACE;
+                fillType = MAP_CELL_TYPE_BACK_WALL_FACE;
                 break;
             case MAP_CELL_TYPE_UNSET:
-                if (dir != MAP_CELL_TYPE_NONE) {
-                    MapCellSetType(cell, dir, 0);
+                if (fillType != MAP_CELL_TYPE_NONE) {
+                    MapCellSetType(cell, fillType, 0);
                 }
 
                 break;

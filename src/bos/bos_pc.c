@@ -5483,7 +5483,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     InitEnemyBtlObj(body2, &sBosPcEmyKind, work->x, work->y, work->z - 0x1000);
     work->body2.flags |= BTLOBJ_FLAG_FACING_LEFT;
     SetBtlObjParent(body2, body);
-    ColliderInit(&work->collider, 8, 32, 56);
+    ColliderInit(&work->collider, COLLIDER_TYPE_BOSS, 32, 56);
     LoadBgMap(1, gBosBlankMap, sizeof(gBosBlankMap));
     work->tiles = LoadObjTiles(gBosPcLayerTiles, sizeof(gBosPcLayerTiles));
     work->tiles2[0] = AllocObjTiles(0x400, gBosPcStandaloneTiles);

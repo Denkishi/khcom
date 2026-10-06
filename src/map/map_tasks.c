@@ -1944,7 +1944,7 @@ enum MapGmkJumpState {
 };
 
 void MapGmkJumpWaitStep(MapGmkJumpWork* work) {
-    if (ColliderIsTouchingType(&work->collider, 1) && (work->collider.standFlags & COLLIDER_STAND_STOOD_ON)) {
+    if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER) && (work->collider.standFlags & COLLIDER_STAND_STOOD_ON)) {
         gMapRoomState->jumpGmkHeight = work->jumpHeight;
         gMapRoomState->jumpGmkAngle = work->obj.angle;
         work->update = MapGmkJumpWaitJump;
@@ -1956,7 +1956,7 @@ void MapGmkJumpWaitStep(MapGmkJumpWork* work) {
 }
 
 void MapGmkJumpWaitJump(MapGmkJumpWork* work) {
-    if (ColliderIsTouchingType(&work->collider, 1)) {
+    if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
         gMapRoomState->jumpGmkHeight = work->jumpHeight;
         gMapRoomState->jumpGmkAngle = work->obj.angle;
     } else if (gFieldState->actor.fieldPosition.z != gFieldState->actor.fieldPosition.ground) {
@@ -2011,7 +2011,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
     work->state = MAP_GMK_JUMP_STATE_WAIT_STEP;
     AnimStart(anim, 0, ANIM_FLAG_LOOP);
     work->update = MapGmkJumpWaitStep;
-    ColliderInit(&work->collider, 6, 16, 0);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 16, 0);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
 }
 
@@ -2224,7 +2224,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
     work->palette = LoadObjPalette(gMapDoorTraverseTownPalette, sizeof(gMapDoorTraverseTownPalette));
     work->tiles = AllocSpriteFrameTiles(0x400);
     UpdateSpriteFrameTiles(work->tiles, gMapDoorSide0Frame0, gMapDoorTraverseTownSide0ClosedTiles);
-    ColliderInit(&work->collider, 6, 16, 0);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 16, 0);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
     work->opened = FALSE;
     work->update = MapGmkTutorialWaitHit;
@@ -2232,7 +2232,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
 }
 
 s32 Task_MapGmk_Tutorial_1(MapGmkTutorialWork* work) {
-    if (work->opened && (work->collider.standFlags & COLLIDER_STAND_STOOD_ON) && work->collider.otherType == 1) {
+    if (work->opened && (work->collider.standFlags & COLLIDER_STAND_STOOD_ON) && work->collider.otherType == COLLIDER_TYPE_PLAYER) {
         gMapRoomState->flags |= ROOM_FLAG_ENTER_WORLD;
     }
 
@@ -2388,7 +2388,7 @@ void Task_MapGmk_GP00_0(MapGmkGpWork* work, MapGmkPlacement* arg) {
     AnimInit(&work->anim, def->anims, def->gfxTable);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->timer = 0;
@@ -2489,7 +2489,7 @@ void Task_MapGmk_GP01_0(MapGmkGp1Work* work, MapGmkPlacement* arg) {
     AnimStart(anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->visible = TRUE;
@@ -2583,7 +2583,7 @@ void Task_MapGmk_GP02_0(MapGmkGpWork* work, MapGmkPlacement* arg) {
     AnimStart(anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->update = MapGmkGp02WaitHit;
@@ -2691,7 +2691,7 @@ void Task_MapGmk_GP03_0(MapGmkGpWork* work, MapGmkPlacement* arg) {
     AnimStart(anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->update = MapGmkGp03WaitHit;
@@ -2789,7 +2789,7 @@ void Task_MapGmk_GP04_0(MapGmkGpWork* work, MapGmkPlacement* arg) {
 
     work->gfx = AnimGetGfx(&work->anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->update = MapGmkGp04WaitHit;
@@ -2885,7 +2885,7 @@ void Task_MapGmk_GP05_0(MapGmkGpWork* work, MapGmkPlacement* arg) {
 
     work->gfx = AnimGetGfx(&work->anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->update = MapGmkGp05WaitHit;
@@ -2995,7 +2995,7 @@ void Task_MapGmk_GP06_0(MapGmkGpWork* work, MapGmkPlacement* arg) {
 
     work->gfx = AnimGetGfx(&work->anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->update = MapGmkGp06WaitHit;
@@ -3043,7 +3043,7 @@ s32 MapGmkGp07WaitStep(MapGmkGp07Work* work) {
 
     work->gfx = AnimUpdate(anim);
 
-    if (ColliderIsTouchingType(&work->collider, 1)) {
+    if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
         if (work->collider.standFlags & COLLIDER_STAND_STOOD_ON) {
             if (!(work->placement->flags & GMK_FLAG_USED)) {
                 work->placement->flags |= GMK_FLAG_USED;
@@ -3062,7 +3062,7 @@ s32 MapGmkGp07WaitStep(MapGmkGp07Work* work) {
 s32 MapGmkGp07WaitStepOff(MapGmkGp07Work* work) {
     work->gfx = AnimUpdate(&work->anim);
 
-    if (!ColliderIsTouchingType(&work->collider, 1)) {
+    if (!ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
         AnimStart(&work->anim, 2, 0);
         work->update = MapGmkGp07EndAnim;
     }
@@ -3100,7 +3100,7 @@ void Task_MapGmk_GP07_0(MapGmkGp07Work* work, MapGmkPlacement* arg) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->update = MapGmkGp07WaitStep;
 }
@@ -3195,7 +3195,7 @@ void Task_MapGmk_GP08_0(MapGmkGp08Work* work, MapGmkPlacement* arg) {
     AnimInit(&work->anim, def->anims, def->gfxTable);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
     work->overlayVisible = FALSE;
@@ -3248,7 +3248,7 @@ s32 MapGmkGp09WaitStep(MapGmkGp09Work* work) {
 
     work->gfx2 = AnimUpdate(anim);
 
-    if (ColliderIsTouchingType(&work->collider, 1)) {
+    if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
         if (work->collider.standFlags & COLLIDER_STAND_STOOD_ON) {
             if (!(work->placement->flags & GMK_FLAG_USED)) {
                 work->placement->flags |= GMK_FLAG_USED;
@@ -3277,7 +3277,7 @@ s32 MapGmkGp09StepAnim(MapGmkGp09Work* work) {
 }
 
 s32 MapGmkGp09WaitStepOff(MapGmkGp09Work* work) {
-    if (!ColliderIsTouchingType(&work->collider, 1)) {
+    if (!ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
         work->update = MapGmkGp09WaitStep;
     }
 
@@ -3299,7 +3299,7 @@ void Task_MapGmk_GP09_0(MapGmkGp09Work* work, MapGmkPlacement* arg) {
     AnimInit(&work->anim, def->anims, def->gfxTable);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->overlayVisible = FALSE;
     work->update = MapGmkGp09WaitStep;
@@ -3363,7 +3363,7 @@ void Task_MapGmk00_0(MapGmk00Work* work, MapGmkPlacement* arg) {
     AnimInit(anim, def->anims, def->gfxTable);
     AnimStart(anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(anim);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
 
     if (FldObjIsOutOfView(obj)) {
@@ -3502,7 +3502,7 @@ void Task_MapGmk01_0(MapGmk01Work* work, MapGmkPlacement* arg) {
     }
 
     SetObjTileSource(work->tiles, gMapGmk01Tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
 }
 
@@ -3640,7 +3640,7 @@ void Task_MapGmk_Barrel_0(MapGmkBarrelWork* work, MapGmkPlacement* arg) {
     AnimStart(anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(anim);
     SetObjTileSource(work->tiles, def->tiles);
-    ColliderInit(&work->collider, 6, def->radius, def->height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->visible = TRUE;
     work->update = MapGmkBarrelWaitHit;
@@ -3739,7 +3739,7 @@ void Task_MapGmk04_0(MapGmk04Work* work, MapGmkPlacement* arg) {
     AnimInit(&work->anim, def->anims, def->gfxTable);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderInit(&work->collider, 4, 24, 24);
+    ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 24, 24);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     TaskPoolInit(&work->tasks, 1);
     FldObjRegister(obj);
@@ -3832,7 +3832,7 @@ void Task_MapGmk05_0(MapGmk05Work* work, MapGmkPlacement* arg) {
     AnimInit(anim, def->anims, def->gfxTable);
     AnimStart(anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(anim);
-    ColliderInit(&work->collider, 4, 16, 24);
+    ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 16, 24);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 1);
@@ -3940,7 +3940,7 @@ void Task_MapGmk06_0(MapGmk06Work* work, MapGmkPlacement* arg) {
     AnimInit(&work->anim, def->anims, def->gfxTable);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderInit(&work->collider, 4, 24, 24);
+    ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 24, 24);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     TaskPoolInit(&work->tasks, 1);
     FldObjRegister(obj);
@@ -4123,7 +4123,7 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     work->timer = 0;
     work->update = MapPrizeBounce;
     work->scale = Q_8_8(1);
-    ColliderInit(&work->collider, 5, 16, 50);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PICKUP, 16, 50);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     ColliderSetDisabled(&work->collider, TRUE);
 }
@@ -4389,7 +4389,7 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* arg) {
     work->phaseY = 0;
     work->phaseX = 0;
     work->worldPrize = arg->worldPrize;
-    ColliderInit(&work->collider, 5, 30, 10);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PICKUP, 30, 10);
     ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
 
     if (work->worldPrize) {

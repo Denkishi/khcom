@@ -384,7 +384,7 @@ void task_poo_pooh_0(PoohWork* work) {
     work->hideShadow = FALSE;
     SetPoohAnimation(work, sPoohAction);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderInit(&work->collider, 9, gPoohHitBox.radius, gPoohHitBox.height);
+    ColliderInit(&work->collider, COLLIDER_TYPE_POOH, gPoohHitBox.radius, gPoohHitBox.height);
     ColliderSetPosition(&work->collider, work->pos.x, work->pos.y, work->pos.z);
     TaskPoolInit(&work->tasks, 10);
     args.pos = &work->pos;
@@ -441,7 +441,7 @@ u8 HandlePoohRequest(PoohWork* work) {
 }
 
 u8 CheckPoohInterrupts(PoohWork* work, PooNode* node) {
-    if (ColliderIsTouchingType(&work->collider, 1)) {
+    if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
         if (!IsPooSoraOverWagon()) {
             SetPoohAction(work, POOH_ACTION_BLOCKED);
             return TRUE;
@@ -674,7 +674,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
         break;
     case POOH_ACTION_BLOCKED:
         if (work->collider.colliding) {
-            if (ColliderIsTouchingType(&work->collider, 1)) {
+            if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
                 break;
             }
 
@@ -875,7 +875,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
 
         work->pos.z = 0;
 
-        if (ColliderIsTouchingType(&work->collider, 1)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
             SetPoohAction(work, POOH_ACTION_IDLE);
             break;
         }
@@ -1945,7 +1945,7 @@ void SetPooActorAngleFromDpad(PooActor* actor) {
 }
 
 u8 ApplyPooSoraPushOut(PooSoraWork* work, PooPos* pos) {
-    if (work->collider.colliding && !ColliderIsTouchingType(&work->collider, 5) && !ColliderIsTouchingType(&work->collider, 3) && !ColliderIsTouchingType(&work->collider, 5) && !ColliderIsTouchingType(&work->collider, 11)) {
+    if (work->collider.colliding && !ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PICKUP) && !ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_ENEMY) && !ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PICKUP) && !ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_ENEMY_NO_ENEMY_COLLISION)) {
         if (IsPooSoraOverWagon()) {
             pos->x += work->collider.pushX;
             pos->y += work->collider.pushY;
@@ -2142,7 +2142,7 @@ void task_poo_sora_0(PooSoraWork* work) {
     gFieldState = EwramAlloc(sizeof(FieldState));
     TaskCreate(&work->tasks, &gTaskDescFldShadow, actor);
     AddPooNode(&work->node, 1, actor);
-    ColliderInit(&work->collider, 1, 18, 48);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PLAYER, 18, 48);
     ColliderSetPosition(&work->collider, actor->pos.x, actor->pos.y, actor->pos.z);
 }
 
@@ -2857,7 +2857,7 @@ void task_poo_trap_0(PooTrapWork* work, PooPos* pos) {
 
 u8 task_poo_trap_1(PooTrapWork* work) {
     if (work->colliderActive) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequestX = work->x;
             gPoohRequestY = work->y;
             gPoohRequest = POOH_REQUEST_TRAP;
@@ -2881,7 +2881,7 @@ void task_poo_trap_2(PooTrapWork* work) {
         }
     } else {
         if (!work->colliderActive) {
-            ColliderInit(&work->collider, 10, 8, 16);
+            ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 8, 16);
             work->colliderActive = TRUE;
         }
 
@@ -2909,7 +2909,7 @@ u8 task_poo_pitAndButterfly_1(PooTrapWork* work) {
     task_poo_trap_1(work);
 
     if (work->colliderActive) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             SetPooNodeWeight(&work->node, 0);
         }
     }
@@ -3286,7 +3286,7 @@ u8 task_poo_trapballoon_1(PooBalloonWork* work) {
         return 0;
     }
 
-    if (ColliderIsTouchingType(&work->collider, 9) && IsPoohWalkingToTarget()) {
+    if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH) && IsPoohWalkingToTarget()) {
         gPoohRequestX = work->pos.x;
         gPoohRequestY = work->pos.y;
         gPoohRequest = POOH_REQUEST_TRAP_BALLOON;
@@ -3295,7 +3295,7 @@ u8 task_poo_trapballoon_1(PooBalloonWork* work) {
     }
 
     if (!gPooAttackActive) {
-        if (!ColliderIsTouchingType(&work->collider, 9)) {
+        if (!ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             return 1;
         }
 
@@ -3349,7 +3349,7 @@ void task_poo_trapballoon_2(PooBalloonWork* work) {
             if (work->palette == NULL) {
                 work->tiles = AllocObjTiles(work->tileBytes, gTrap0006Tiles);
                 work->palette = LoadObjPalette(gPooTrapBalloonPalette, sizeof(gPooTrapBalloonPalette));
-                ColliderInit(&work->collider, 10, 8, 16);
+                ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 8, 16);
                 AddPooNode(&work->node, 0x400, &work->pos);
             }
 
@@ -3387,7 +3387,7 @@ void task_poo_owlballoon_0(PooOwlBalloonWork* work, PooPos* pos) {
 }
 
 u8 task_poo_owlballoon_1(PooOwlBalloonWork* work) {
-    if (work->palette != NULL && ColliderIsTouchingType(&work->collider, 9) && IsPoohWalkingToTarget()) {
+    if (work->palette != NULL && ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH) && IsPoohWalkingToTarget()) {
         gPoohRequestX = work->pos.x;
         gPoohRequestY = work->pos.y;
         gPoohRequest = POOH_REQUEST_OWL_BALLOON;
@@ -3418,7 +3418,7 @@ void task_poo_owlballoon_2(PooOwlBalloonWork* work) {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gPooBalloonTiles);
             work->palette = LoadObjPalette(gPooBalloonPalette, sizeof(gPooBalloonPalette));
-            ColliderInit(&work->collider, 10, 8, 16);
+            ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 8, 16);
         }
 
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1003 - (work->pos.y >> 8) * 4);
@@ -3666,7 +3666,7 @@ void task_poo_honey_2(PooHoneyWork* work) {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gPoohHoneyTiles);
             work->palette = LoadObjPalette(gPoohGaugePalettes[0], sizeof(gPoohGaugePalettes[0]));
-            ColliderInit(&work->collider, 10, 8, 16);
+            ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 8, 16);
             AddPooNode(&work->node, 0x1FA4, &work->pos2);
         }
 
@@ -3800,7 +3800,7 @@ u8 task_poo_pile_1(PooPileWork* work) {
         return 1;
     }
 
-    if (ColliderIsTouchingType(&work->collider, 9)) {
+    if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
         gPoohRequest = POOH_REQUEST_BLOCKED;
     }
 
@@ -3874,7 +3874,7 @@ void task_poo_pile_2(PooPileWork* work) {
             z = -0x1004 - (work->pos.y >> 8) * 4;
 
             if (!work->colliderActive) {
-                ColliderInit(&work->collider, 7, 4, GetPooPileHeight(work->stage));
+                ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 4, GetPooPileHeight(work->stage));
                 AddPooNode(&work->node, 0x240, &work->pos);
                 work->colliderActive = TRUE;
             }
@@ -3924,7 +3924,7 @@ void task_poo_tigerstump_0(PooStumpWork* work, PooPos* pos) {
 
 u8 task_poo_tigerstump_1(PooStumpWork* work) {
     if (work->palette != NULL) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
@@ -3950,7 +3950,7 @@ void task_poo_tigerstump_2(PooStumpWork* work) {
         if (work->palette == NULL) {
             work->tiles = LoadObjTiles(gPooTigerStumpTiles, sizeof(gPooTigerStumpTiles));
             work->palette = LoadObjPalette(gPooStumpPalette, sizeof(gPooStumpPalette));
-            ColliderInit(&work->collider, 7, 15, 24);
+            ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 15, 24);
         }
 
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - ((work->y - 0x700) >> 8) * 4);
@@ -3976,7 +3976,7 @@ void task_poo_poohstump_0(PooStumpWork* work, PooPos* pos) {
 
 u8 task_poo_poohstump_1(PooStumpWork* work) {
     if (work->palette != NULL) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequestX = work->x;
             gPoohRequestY = work->y;
             gPoohRequest = POOH_REQUEST_STUMP;
@@ -4004,7 +4004,7 @@ void task_poo_poohstump_2(PooStumpWork* work) {
         if (work->palette == NULL) {
             work->tiles = LoadObjTiles(gPooPoohStumpTiles, sizeof(gPooPoohStumpTiles));
             work->palette = LoadObjPalette(gPooStumpPalette, sizeof(gPooStumpPalette));
-            ColliderInit(&work->collider, 7, 7, 14);
+            ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 7, 14);
         }
 
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - ((work->y - 0x500) >> 8) * 4);
@@ -4075,7 +4075,7 @@ void task_poo_piglet_0(PooPigletWork* work) {
 
 u8 task_poo_piglet_1(PooPigletWork* work) {
     if (work->palette != NULL && work->collider.colliding) {
-        if (!ColliderIsTouchingType(&work->collider, 9)) {
+        if (!ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             return 1;
         }
 
@@ -4220,9 +4220,9 @@ void task_poo_piglet_2(PooPigletWork* work) {
             work->palette = LoadObjPalette(gPigletPalette, sizeof(gPigletPalette));
 
             if (IsPooEventDone(POO_EVENT_PIGLET)) {
-                ColliderInit(&work->collider, 10, 4, 16);
+                ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 4, 16);
             } else {
-                ColliderInit(&work->collider, 10, 16, 16);
+                ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 16, 16);
             }
 
             SetPoohInteractionEnabled(work->interactionId, TRUE);
@@ -4266,7 +4266,7 @@ void task_poo_eeyore_0(PooEeyoreWork* work) {
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescPooShadow, &work->x);
-    ColliderInit(&work->collider, 10, 16, 16);
+    ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 16, 16);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->colliderActive = 1;
 
@@ -4282,7 +4282,7 @@ void task_poo_eeyore_0(PooEeyoreWork* work) {
 
 u8 task_poo_eeyore_1(PooEeyoreWork* work) {
     if (work->colliderActive != 0) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
@@ -4337,7 +4337,7 @@ void task_poo_eeyore_2(PooEeyoreWork* work) {
         colliderActive = &work->colliderActive;
 
         if (*colliderActive == 0) {
-            ColliderInit(&work->collider, 10, 16, 16);
+            ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 16, 16);
             SetPoohInteractionEnabled(work->interactionId, TRUE);
             *colliderActive = 1;
         }
@@ -4537,7 +4537,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* work) {
 
         break;
     case POO_RABBIT_ANIM_CARRY_SACK:
-        if (work->palette != NULL && work->collider.colliding && ColliderIsTouchingType(&work->collider, 9)) {
+        if (work->palette != NULL && work->collider.colliding && ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             SetPooRabbitAnimation(work, POO_RABBIT_ANIM_HOLD_SACK, 0);
             work->waitTimer = 20;
         } else {
@@ -4561,7 +4561,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* work) {
 
         break;
     case POO_RABBIT_ANIM_WALK_BACK:
-        if (work->palette != NULL && work->collider.colliding && ColliderIsTouchingType(&work->collider, 9)) {
+        if (work->palette != NULL && work->collider.colliding && ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             work->waitTimer = 20;
             SetPooRabbitAnimation(work, POO_RABBIT_ANIM_STAND, 0);
         } else {
@@ -4579,7 +4579,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* work) {
         break;
     case POO_RABBIT_ANIM_HOLD_SACK:
         if (work->waitTimer == 0) {
-            if (work->palette != NULL && !ColliderIsTouchingType(&work->collider, 9)) {
+            if (work->palette != NULL && !ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
                 SetPooRabbitAnimation(work, POO_RABBIT_ANIM_CARRY_SACK, 1);
             }
         } else {
@@ -4590,7 +4590,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* work) {
     case POO_RABBIT_ANIM_STAND:
         if (work->waitTimer != 0) {
             work->waitTimer--;
-        } else if (work->palette != NULL && !ColliderIsTouchingType(&work->collider, 9)) {
+        } else if (work->palette != NULL && !ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             SetPooRabbitAnimation(work, POO_RABBIT_ANIM_WALK_BACK, 1);
         }
 
@@ -4625,7 +4625,7 @@ void task_poo_rabbit_2(PooRabbitWork* work) {
 
         if (work->palette == NULL) {
             work->palette = LoadObjPalette(gRabbitPalettes, sizeof(gRabbitPalettes));
-            ColliderInit(&work->collider, 10, 4, 48);
+            ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 4, 48);
             SetPoohInteractionEnabled(work->interactionId, TRUE);
         }
 
@@ -4905,11 +4905,11 @@ void task_poo_tiggerroo_2(PooTiggerWork* work) {
         if (work->palette == NULL) {
             if (work->isTigger) {
                 work->palette = LoadObjPalette(gTiggerPalette, sizeof(gTiggerPalette));
-                ColliderInit(&work->collider, 4, 8, 8);
+                ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 8, 8);
             } else {
                 work->palette = LoadObjPalette(gRooPalette, sizeof(gRooPalette));
                 work->tiles = AllocObjTiles(work->tileBytes, gRooFl00Tiles);
-                ColliderInit(&work->collider, 4, 8, 8);
+                ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 8, 8);
             }
         }
 
@@ -5014,7 +5014,7 @@ void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescPooShadow, &work->pos);
-    ColliderInit(&work->collider, 10, 4, 32);
+    ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 4, 32);
     ColliderSetPosition(&work->collider, work->pos.x, work->pos.y, work->pos.z);
 
     if (IsPooEventDone(POO_EVENT_ROO)) {
@@ -5069,7 +5069,7 @@ u8 task_poo_roo_1(PooRooWork* work) {
 
         break;
     case POO_ROO_STATE_HOME:
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequest = POOH_REQUEST_BLOCKED;
         }
 
@@ -5220,7 +5220,7 @@ void task_poo_leaf_2(PooLeafWork* work) {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gPooLeafTiles);
             work->palette = LoadObjPalette(gPooLeafPalette, sizeof(gPooLeafPalette));
-            ColliderInit(&work->collider, 6, 28, 0);
+            ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 28, 0);
         }
 
         playing = &work->playing;
@@ -5301,7 +5301,7 @@ void task_poo_tanpopo_2(PooTanpopoWork* work) {
             work->tiles = LoadObjTiles(gPooTanpopoTiles, sizeof(gPooTanpopoTiles));
             work->tiles2 = LoadObjTiles(gPooTanpopoSeedTiles, sizeof(gPooTanpopoSeedTiles));
             work->palette = LoadObjPalette(gPooTanpopoPalette, sizeof(gPooTanpopoPalette));
-            ColliderInit(&work->collider, 6, 24, 0);
+            ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 24, 0);
         }
 
         playing = &work->playing;
@@ -5341,7 +5341,7 @@ void task_poo_ti_board_0(PooBoardWork* work, PooPos* pos) {
 
 u8 task_poo_ti_board_1(PooBoardWork* work) {
     if (work->palette != NULL) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
@@ -5365,7 +5365,7 @@ void task_poo_ti_board_2(PooBoardWork* work) {
     } else {
         if (work->palette == NULL) {
             work->palette = LoadObjPalette(gPooTiBoardPalette, sizeof(gPooTiBoardPalette));
-            ColliderInit(&work->collider, 7, 8, 16);
+            ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 8, 16);
         }
 
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (work->y >> 8) * 4);
@@ -5495,7 +5495,7 @@ u8 task_poo_honeycomb_1(PooHoneycombWork* work) {
         case POO_HONEYCOMB_STATE_SHAKEN:
             break;
         case POO_HONEYCOMB_STATE_IDLE:
-            if (ColliderIsTouchingType(&work->collider, 9)) {
+            if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
                 eventDone = IsPooEventDone(POO_EVENT_EEYORE);
 
                 if (!eventDone) {
@@ -5559,7 +5559,7 @@ void task_poo_honeycomb_2(PooHoneycombWork* work) {
         colliderActive = &work->colliderActive;
 
         if (*colliderActive == 0) {
-            ColliderInit(&work->collider, 6, 64, 0);
+            ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 64, 0);
             *colliderActive = 1;
         }
 
@@ -5599,7 +5599,7 @@ void task_poo_vegetable_0(PooVegetableWork* work) {
 
 u8 task_poo_vegetable_1(PooVegetableWork* work) {
     if (work->palette != NULL) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
@@ -5625,7 +5625,7 @@ void task_poo_vegetable_2(PooVegetableWork* work) {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gRaVegetablesTiles);
             work->palette = LoadObjPalette(gRaVegetablesPalette, sizeof(gRaVegetablesPalette));
-            ColliderInit(&work->collider, 7, 0x26, 12);
+            ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 0x26, 12);
         }
 
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (work->y >> 8) * 4);
@@ -6430,7 +6430,7 @@ void task_poo_cabbage_0(PooCabbageWork* work) {
     work->state = POO_CABBAGE_STATE_BOUNCE;
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderInit(&work->collider, 10, 8, 16);
+    ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 8, 16);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->colliderActive = TRUE;
     TaskPoolInit(&work->tasks, 2);
@@ -6801,7 +6801,7 @@ void PooPrizeUpdateBounce(PooPrizeWork* work) {
         work->speed = work->speed * 212 >> 8;
     }
 
-    if (work->collider.colliding && ColliderIsTouchingType(&work->collider, 1)) {
+    if (work->collider.colliding && ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
         switch (work->kind) {
         case MAP_PRIZE_MOOGLE_POINTS_SMALL:
         case MAP_PRIZE_MOOGLE_POINTS_LARGE:
@@ -6924,7 +6924,7 @@ void task_poo_prize_0(PooPrizeWork* work, PoohPrizeArgs* args) {
     work->timer = 0;
     work->update = PooPrizeUpdateBounce;
     work->scale = Q_8_8(1);
-    ColliderInit(&work->collider, 5, 16, 50);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PICKUP, 16, 50);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     ColliderSetDisabled(&work->collider, TRUE);
 }
@@ -7299,7 +7299,7 @@ void task_poo_mapbeeborn_2(PooMapBornWork* work) {
         }
     } else {
         if (!work->colliderActive) {
-            ColliderInit(&work->collider, 6, 28, 0);
+            ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 28, 0);
             work->colliderActive = TRUE;
             work->armed = TRUE;
         }
@@ -7402,7 +7402,7 @@ void task_poo_mapbutterflyborn_2(PooMapBornWork* work) {
         }
     } else {
         if (!work->colliderActive) {
-            ColliderInit(&work->collider, 6, 40, 0);
+            ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 40, 0);
             work->colliderActive = TRUE;
             work->armed = TRUE;
         }
@@ -7439,7 +7439,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* work) {
 
 u8 task_poo_rabbitAfterEvent_1(PooRabbitAfterEventWork* work) {
     if (work->palette != NULL) {
-        if (ColliderIsTouchingType(&work->collider, 9)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_POOH)) {
             gPoohRequest = POOH_REQUEST_BLOCKED;
         }
     }
@@ -7469,7 +7469,7 @@ void task_poo_rabbitAfterEvent_2(PooRabbitAfterEventWork* work) {
         if (work->palette == NULL) {
             work->palette = LoadObjPalette(gRabbitPalettes, sizeof(gRabbitPalettes));
             work->tiles = AllocObjTiles(work->tileBytes, gRabbitBl00Tiles);
-            ColliderInit(&work->collider, 10, 4, 48);
+            ColliderInit(&work->collider, COLLIDER_TYPE_POOH_OBJECT, 4, 48);
             SetPoohInteractionEnabled(work->interactionId, TRUE);
         }
 

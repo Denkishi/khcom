@@ -403,12 +403,12 @@ void MapEnmStartBattle(MapEnmWork* work) {
 
 void MapEnmCheckContact(MapEnmWork* work) {
     if (work->collider.colliding) {
-        if ((gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) == 0 && ColliderIsTouchingType(&work->collider, 1)) {
+        if ((gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) == 0 && ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_PLAYER)) {
             MapEnmStartBattle(work);
             return;
         }
 
-        if (ColliderIsTouchingType(&work->collider, 6)) {
+        if (ColliderIsTouchingType(&work->collider, COLLIDER_TYPE_SOLID)) {
             work->obj.fieldPosition.x += work->collider.pushX;
             work->obj.fieldPosition.y += work->collider.pushY;
         }
@@ -638,9 +638,9 @@ void MapEnmInit(MapEnmWork* work, MapEnmArgs* arg) {
 
     if (def->flags & MAP_ENM_DEF_FLAG_GUARD) {
         work->flags |= MAP_ENM_FLAG_PERSISTENT;
-        ColliderInit(&work->collider, 11, def->radius, def->height);
+        ColliderInit(&work->collider, COLLIDER_TYPE_ENEMY_NO_ENEMY_COLLISION, def->radius, def->height);
     } else {
-        ColliderInit(&work->collider, 3, def->radius, def->height);
+        ColliderInit(&work->collider, COLLIDER_TYPE_ENEMY, def->radius, def->height);
     }
 
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
@@ -4723,7 +4723,7 @@ void MapFixInitColliders(MapFixWork* work, MapFixedCollider* collider) {
 
         do {
             if (collider->radius != 0) {
-                ColliderInit(&work->colliders[i], 6, collider->radius, 0xA0);
+                ColliderInit(&work->colliders[i], COLLIDER_TYPE_SOLID, collider->radius, 0xA0);
                 ColliderSetPosition(&work->colliders[i], collider->x, collider->y, 0);
                 work->colliderCount++;
             } else {

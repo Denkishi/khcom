@@ -553,7 +553,7 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     work->flipAngleY = 0;
     work->flipAngleX = 0;
     collider = &work->collider;
-    ColliderInit(collider, 5, 8, 10);
+    ColliderInit(collider, COLLIDER_TYPE_PICKUP, 8, 10);
     ColliderSetDisabled(collider, TRUE);
     ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     work->timer = 0;

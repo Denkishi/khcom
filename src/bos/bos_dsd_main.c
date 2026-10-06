@@ -86,7 +86,7 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     body->x = 0xDC00;
     body->y = 0x16800;
     body->z = 0;
-    ColliderInit(&body->collider, 8, 24, 100);
+    ColliderInit(&body->collider, COLLIDER_TYPE_BOSS, 24, 100);
     ColliderSetPosition(&body->collider, body->x, body->y, body->z);
     ScrollBgMapTo(1, ((gBtlWork->viewX - arg->body[0].x) >> 8) + 100,
                   ((gBtlWork->viewY - (arg->body[0].y + arg->body[0].z)) >> 8) + 280);

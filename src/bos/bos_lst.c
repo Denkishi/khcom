@@ -502,13 +502,13 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     InitEnemyBtlObj(&work->sub[1].body, kind, work->x, work->y, work->z);
     work->sub[1].body.flags |= 0x400;
     SetEnemyHpFromStats(&work->sub[1].body, ENEMY_MARLUXIA_2, Q_8_8(1));
-    ColliderInit(&work->collider, 8, 20, 20);
+    ColliderInit(&work->collider, COLLIDER_TYPE_BOSS, 20, 20);
     collider = &work->collider2;
-    ColliderInit(collider, 8, 28, 64);
+    ColliderInit(collider, COLLIDER_TYPE_BOSS, 28, 64);
     ColliderSetDisabled(collider, TRUE);
 
     for (i = 0; (s32)i < 8; i++) {
-        ColliderInit(&work->colliders[i], 7, 24, 4);
+        ColliderInit(&work->colliders[i], COLLIDER_TYPE_PLATFORM, 24, 4);
         ColliderSetDisabled(&work->colliders[i], TRUE);
     }
 

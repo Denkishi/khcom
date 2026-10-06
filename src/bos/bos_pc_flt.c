@@ -411,7 +411,7 @@ void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg) {
     anim = &work->anim;
     AnimInit(anim, gBosPcFltAnims, gBosPcFltFrames);
     AnimStart(anim, 1, 0);
-    ColliderInit(&work->collider, 7, 26, 4);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 26, 4);
     work->playerOnPlatform = FALSE;
     work->timer = 0;
     work->index = arg->index;

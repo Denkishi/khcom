@@ -95,7 +95,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         hand->radiusX = 16;
         hand->radiusY = 16;
         hand->height = 32;
-        ColliderInit(&hand->collider, 7, 16, 32);
+        ColliderInit(&hand->collider, COLLIDER_TYPE_PLATFORM, 16, 32);
         ColliderSetPosition(&hand->collider, hand->x, hand->y, hand->z);
         ColliderSetDisabled(&hand->collider, TRUE);
         SetBtlObjParent(hand, head);

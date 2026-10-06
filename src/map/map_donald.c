@@ -25,6 +25,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "card_message_data.h"
+#include "battle_actor_types.h"
 
 void MapDonaldCheckTalk(MapDonaldWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
@@ -81,7 +82,7 @@ void Task_MapDonald_0(MapDonaldWork* work) {
     work->palette = LoadObjPalette(gDonaldPalette, sizeof(gDonaldPalette));
     AnimInit(&work->anim, gDonaFl00Anims, gDonaFl00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    ColliderInit(&work->collider, 4, 16, 48);
+    ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 16, 48);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 2);

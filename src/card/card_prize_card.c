@@ -74,7 +74,7 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     work->flipAngleY = 0;
     work->flipAngleX = 0;
     collider = &work->collider;
-    ColliderInit(collider, 5, 30, 10);
+    ColliderInit(collider, COLLIDER_TYPE_PICKUP, 30, 10);
     ColliderSetDisabled(collider, TRUE);
     ColliderSetPosition(collider, work->pos.x, work->pos.y, work->pos.z);
     work->timer = 0;

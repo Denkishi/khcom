@@ -588,9 +588,9 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
 
     // @bug arg is NULL in normal battles (NULL read).
     if (arg->mainSide) {
-        ColliderInit(&act->collider, 1, act->radiusX, act->height);
+        ColliderInit(&act->collider, COLLIDER_TYPE_PLAYER, act->radiusX, act->height);
     } else {
-        ColliderInit(&act->collider, 2, act->radiusX, act->height);
+        ColliderInit(&act->collider, COLLIDER_TYPE_OPPONENT, act->radiusX, act->height);
     }
 
     gBtlWork->targetX = act->x;
@@ -5979,15 +5979,15 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     if (act->collider.colliding) {
-        if (act->collider.otherType == 12) {
+        if (act->collider.otherType == COLLIDER_TYPE_SLIPPERY) {
             if (work->speed > 0 && work->state == BTL_SORA_STATE_IDLE) {
                 work->state = BTL_SORA_STATE_SLIP;
                 work->steps = 0;
                 work->stateTimer = 0;
             }
-        } else if ((work->flags & BTL_SORA_FLAG_ON_PLATFORM) && act->collider.otherType == 7) {
+        } else if ((work->flags & BTL_SORA_FLAG_ON_PLATFORM) && act->collider.otherType == COLLIDER_TYPE_PLATFORM) {
             act->collider.standFlags |= COLLIDER_STAND_OVER_PLATFORM;
-        } else if ((work->flags & BTL_SORA_FLAG_PASS_THROUGH) == 0 && act->collider.otherType != 5 &&
+        } else if ((work->flags & BTL_SORA_FLAG_PASS_THROUGH) == 0 && act->collider.otherType != COLLIDER_TYPE_PICKUP &&
                    (act->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH) == 0) {
             act->x += act->collider.pushX >> 1;
             act->y += act->collider.pushY >> 1;

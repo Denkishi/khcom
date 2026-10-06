@@ -29,6 +29,7 @@
 #include <stddef.h>
 #include "card_message_data.h"
 #include "event_ids.h"
+#include "battle_actor_types.h"
 
 void MapNiserikuCheckTalk(MapNiserikuWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
@@ -127,7 +128,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
         work->palette = LoadObjPalette(gNiserikuPalette, sizeof(gNiserikuPalette));
         AnimInit(&work->anim, gNiseFl00Anims, gNiseFl00Frames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-        ColliderInit(&work->collider, 4, 16, 48);
+        ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 16, 48);
         ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
         TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
         break;
@@ -137,7 +138,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
         work->palette = LoadObjPalette(gNiserikuPalette, sizeof(gNiserikuPalette));
         AnimInit(&work->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-        ColliderInit(&work->collider, 4, 16, 48);
+        ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 16, 48);
         ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
         TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
         break;
@@ -150,7 +151,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
         work->palette = LoadObjPalette(gNiserikuPalette, sizeof(gNiserikuPalette));
         AnimInit(&work->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
         AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
-        ColliderInit(&work->collider, 4, 36, 48);
+        ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 36, 48);
         ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
         break;
     }

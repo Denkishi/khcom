@@ -1685,7 +1685,7 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
     case EMY_ID_39:
     case EMY_ID_40:
         if (!(kind->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
-            ColliderInit(&obj->collider, 8, kind->radius, kind->height);
+            ColliderInit(&obj->collider, COLLIDER_TYPE_BOSS, kind->radius, kind->height);
         }
 
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_IMMUNE_BIND);
@@ -1694,9 +1694,9 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
     default:
         if (!(kind->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
             if (kind->flags & EMY_KIND_FLAG_NO_ENEMY_COLLISION) {
-                ColliderInit(&obj->collider, 11, kind->radius, kind->height);
+                ColliderInit(&obj->collider, COLLIDER_TYPE_ENEMY_NO_ENEMY_COLLISION, kind->radius, kind->height);
             } else {
-                ColliderInit(&obj->collider, 3, kind->radius, kind->height);
+                ColliderInit(&obj->collider, COLLIDER_TYPE_ENEMY, kind->radius, kind->height);
             }
         }
     }

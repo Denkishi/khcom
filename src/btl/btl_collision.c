@@ -961,19 +961,19 @@ void func_08012214() {
 
 void* ColliderGetPool(u32 type) {
     switch (type) {
-    case 1:
-    case 2:
-    case 4:
-    case 9:
+    case COLLIDER_TYPE_PLAYER:
+    case COLLIDER_TYPE_OPPONENT:
+    case COLLIDER_TYPE_NPC:
+    case COLLIDER_TYPE_POOH:
         return &sColliderPoolPlayer;
-    case 3:
+    case COLLIDER_TYPE_ENEMY:
         return &sColliderPoolEnemy;
-    case 5:
-    case 7:
-    case 8:
-    case 10:
-    case 11:
-    case 12:
+    case COLLIDER_TYPE_PICKUP:
+    case COLLIDER_TYPE_PLATFORM:
+    case COLLIDER_TYPE_BOSS:
+    case COLLIDER_TYPE_POOH_OBJECT:
+    case COLLIDER_TYPE_ENEMY_NO_ENEMY_COLLISION:
+    case COLLIDER_TYPE_SLIPPERY:
         return &sColliderPoolPlayerOnly;
     }
 
@@ -989,7 +989,7 @@ void ColliderPoolsInit() {
 
 void ColliderInit(Collider* collider, u32 type, u16 radius, u16 height) {
     void* pool;
-    collider->otherType = 0;
+    collider->otherType = COLLIDER_TYPE_NONE;
     collider->colliding = FALSE;
     collider->standFlags = 0;
     collider->flags = 0;
@@ -1001,8 +1001,8 @@ void ColliderInit(Collider* collider, u32 type, u16 radius, u16 height) {
     pool = ColliderGetPool(type);
 
     switch (type) {
-    case 6:
-    case 7:
+    case COLLIDER_TYPE_SOLID:
+    case COLLIDER_TYPE_PLATFORM:
         collider->flags |= COLLIDER_FLAG_IS_PLATFORM;
         break;
     }

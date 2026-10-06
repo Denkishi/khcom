@@ -70,7 +70,7 @@ void MapTutorialDropBarrel(MapTutorialWork* work) {
         AnimInit(anim, gMapGmkBarrelAnims, gMapGmkBarrelFrames);
         AnimStart(anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(anim);
-        ColliderInit(&work->collider, 6, 12, 24);
+        ColliderInit(&work->collider, COLLIDER_TYPE_SOLID, 12, 24);
         ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
         work->shadowVisible = TRUE;
         TaskCreate(&work->tasks2, &gTaskDescFldShadow, &work->obj);
@@ -150,7 +150,7 @@ void MapTutorialSpawnEnemy(MapTutorialWork* work) {
         AnimInit(anim, gEmy00L06Anims, gEmy00L06Frames);
         AnimStart(anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(anim);
-        ColliderInit(&work->collider, 3, 8, 16);
+        ColliderInit(&work->collider, COLLIDER_TYPE_ENEMY, 8, 16);
         ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
         ColliderSetDisabled(&work->collider, TRUE);
         work->update = MapTutorialEnemyAppear;
@@ -194,7 +194,7 @@ void MapTutorialEnemyUpdate(MapTutorialWork* work) {
         SetObjTileSource(work->tiles, gEmy00L09Tiles);
         work->update = MapTutorialEnemyHit;
     } else if (work->collider.colliding) {
-        if (!(gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) && work->collider.otherType == 1) {
+        if (!(gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) && work->collider.otherType == COLLIDER_TYPE_PLAYER) {
             ColliderSetDisabled(&work->collider, TRUE);
             MapTutorialStartBattle();
         } else {

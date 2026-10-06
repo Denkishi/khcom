@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_message_data.h"
+#include "battle_actor_types.h"
 
 void MapNamineCheckTalk(MapNamineWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
@@ -83,7 +84,7 @@ void Task_MapNamine_0(MapNamineWork* work) {
     work->palette = LoadObjPalette(gNaminePalette, sizeof(gNaminePalette));
     AnimInit(&work->anim, gNamiF00Anims, gNamiF00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    ColliderInit(&work->collider, 4, 16, 48);
+    ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 16, 48);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
 
     if (work->registered) {

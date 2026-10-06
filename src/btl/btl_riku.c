@@ -635,9 +635,9 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
 
     // @bug arg is NULL in normal battles (NULL read).
     if (arg->mainSide) {
-        ColliderInit(&act->collider, 1, act->radiusX, act->height);
+        ColliderInit(&act->collider, COLLIDER_TYPE_PLAYER, act->radiusX, act->height);
     } else {
-        ColliderInit(&act->collider, 2, act->radiusX, act->height);
+        ColliderInit(&act->collider, COLLIDER_TYPE_OPPONENT, act->radiusX, act->height);
     }
 
     gBtlWork->targetX = act->x;
@@ -4492,8 +4492,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         act->y += -gSineTable[work->angle + 64] * (work->speed >> 1) >> 8;
     }
 
-    if (act->collider.colliding && act->collider.otherType != 12) {
-        if ((work->flags & BTL_RIKU_FLAG_ON_PLATFORM) && act->collider.otherType == 7) {
+    if (act->collider.colliding && act->collider.otherType != COLLIDER_TYPE_SLIPPERY) {
+        if ((work->flags & BTL_RIKU_FLAG_ON_PLATFORM) && act->collider.otherType == COLLIDER_TYPE_PLATFORM) {
             act->collider.standFlags |= COLLIDER_STAND_OVER_PLATFORM;
         } else if (!(work->flags & BTL_RIKU_FLAG_PASS_THROUGH)) {
             act->x += act->collider.pushX >> 1;

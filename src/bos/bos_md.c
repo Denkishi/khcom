@@ -1061,9 +1061,9 @@ void task_bos_md_0(MdWork* work, void* arg) {
         InitEnemyBtlObj(&work->sub[i], &sBosMdEmyKind, gBtlWork->bossX,
                       gBtlWork->bossY, gBtlWork->bossZ);
 #ifdef VERSION_EU
-        ColliderInit(&work->sub[i].collider, 8, 16, 24);
+        ColliderInit(&work->sub[i].collider, COLLIDER_TYPE_BOSS, 16, 24);
 #else
-        ColliderInit(&work->sub[i].collider, 8, 16, 16);
+        ColliderInit(&work->sub[i].collider, COLLIDER_TYPE_BOSS, 16, 16);
 #endif
 
         if (i == 0) {
@@ -1417,7 +1417,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
 
             if (work->contactCooldown > 0) {
                 work->contactCooldown--;
-            } else if (ColliderIsTouchingType(&work->sub.collider, 1)) {
+            } else if (ColliderIsTouchingType(&work->sub.collider, COLLIDER_TYPE_PLAYER)) {
                 m4aSongNumStart(SONG_SND_714);
                 gBtlWork->actor->flags |= BTLOBJ_FLAG_HAZARD_PENDING;
                 work->contactCooldown = 60;
@@ -1501,7 +1501,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->flags = arg->flags;
     BosMdFirePlace(work);
     InitEnemyBtlObj(&work->sub, &sBosMdFireEmyKind, work->x, work->y, work->z);
-    ColliderInit(&work->sub.collider, 3, 16, 16);
+    ColliderInit(&work->sub.collider, COLLIDER_TYPE_ENEMY, 16, 16);
     ColliderSetPosition(&work->sub.collider, work->sub.x, work->sub.y,
                   work->sub.z);
     work->sub.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
@@ -1608,7 +1608,7 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     work->dropSteps = 20;
     work->dropZ = -40960;
     collider = &work->collider;
-    ColliderInit(collider, 7, 24, 24);
+    ColliderInit(collider, COLLIDER_TYPE_PLATFORM, 24, 24);
     ColliderSetPosition(collider, work->x, work->y, work->z);
     ColliderSetDisabled(collider, TRUE);
     work->palette = LoadObjPalette(gBosMdDaiPalette, sizeof(gBosMdDaiPalette));

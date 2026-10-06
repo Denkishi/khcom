@@ -859,7 +859,7 @@ void task_hum_vixen_ice_0(VixenIceWork* work, VixenSub* args) {
     work->state = HUM_VIXEN_ICE_STATE_INACTIVE;
     AnimInit(&work->anim, gVixenE2Anims, gVixenE2Frames);
     AnimStart(&work->anim, 0, 0);
-    ColliderInit(&work->collider, 12, 27, 1);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SLIPPERY, 27, 1);
     ColliderSetDisabled(&work->collider, TRUE);
 }
 

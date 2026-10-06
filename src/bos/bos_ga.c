@@ -389,7 +389,7 @@ void BosGaEntryInit(GaWork* work, u32 index, s32 assemble) {
         work->gfx = AnimGetGfx(&work->anim);
     }
 
-    ColliderInit(&entry->actor.collider, 8, 8, 0x10);
+    ColliderInit(&entry->actor.collider, COLLIDER_TYPE_BOSS, 8, 0x10);
 }
 
 void BosGaEntryRelease(GaEntryWork* work) {

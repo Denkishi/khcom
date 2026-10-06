@@ -1086,7 +1086,7 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->flipAngleY = 0;
     work->flipAngleX = 0;
     collider = &work->collider;
-    ColliderInit(collider, 5, 8, 10);
+    ColliderInit(collider, COLLIDER_TYPE_PICKUP, 8, 10);
     ColliderSetDisabled(collider, TRUE);
     ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     work->backAnimTimer = 0;

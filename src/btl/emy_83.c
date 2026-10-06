@@ -240,7 +240,7 @@ void task_emy_83_b_0(Emy83bWork* work, EmySpawn* spawn) {
     work->y = spawn->y;
     work->z = spawn->z;
     work->timer = 0;
-    ColliderInit(&work->collider, 0x0C, 4, 0x10);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SLIPPERY, 4, 0x10);
 }
 
 u8 task_emy_83_b_1(Emy83bWork* work) {

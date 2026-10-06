@@ -326,7 +326,7 @@ void BosTmFootInitPart(BtlObj* work, s16 x, s16 y, s16 z, s16 radius, s16 height
     work->z = z << 8;
 
     if (part >= 6 && part <= 7) {
-        ColliderInit(&work->collider, 8, radius, height);
+        ColliderInit(&work->collider, COLLIDER_TYPE_BOSS, radius, height);
         ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     }
 }
@@ -1757,7 +1757,7 @@ enum BosTmTblState {
 };
 
 void task_bos_tm_tbl_0(TmTblWork* work, TmWork* arg) {
-    ColliderInit(&work->collider, 7, 0x1C, 0);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 0x1C, 0);
     ColliderSetPosition(&work->collider, 0x10000, 0x16000, 0);
     ColliderSetDisabled(&work->collider, FALSE);
     DisableBg(1);

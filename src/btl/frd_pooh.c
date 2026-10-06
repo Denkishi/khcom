@@ -107,7 +107,7 @@ void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
     work->palette = LoadObjPalette(gPoohPalette, sizeof(gPoohPalette));
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 0, 0, work->tiles);
-    ColliderInit(&body->collider, 3, 10, 32);
+    ColliderInit(&body->collider, COLLIDER_TYPE_ENEMY, 10, 32);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -195,7 +195,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
         body->y += -gSineTable[angle + 64] * 0x133 >> 8;
         ApplyAttackBox(110, body->x, body->y, body->z, 20, 10, 64);
 
-        if (ColliderIsTouchingType(&body->collider, 1)) {
+        if (ColliderIsTouchingType(&body->collider, COLLIDER_TYPE_PLAYER)) {
             work->state = FRD_POOH_STATE_RIDE;
             ColliderSetDisabled(&body->collider, TRUE);
             work->bob = 0;

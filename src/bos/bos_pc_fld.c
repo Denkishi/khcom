@@ -186,7 +186,7 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
     work->tiles = NULL;
     work->palette = NULL;
     collider = &work->collider;
-    ColliderInit(collider, 6, 40, 8);
+    ColliderInit(collider, COLLIDER_TYPE_SOLID, 40, 8);
     ColliderSetPosition(collider, 0x17400, 0x15400, 0);
     ColliderSetDisabled(collider, TRUE);
 }

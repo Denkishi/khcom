@@ -239,7 +239,7 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     y = 0x24000;
     z = boogieActor->z - 0x3800;
     InitEnemyBtlObj(&work->obj, &sBosBoogieDiceEmyKind, x, y, z);
-    ColliderInit(&work->obj.collider, 3, sBosBoogieDiceEmyKind.radius, sBosBoogieDiceEmyKind.height);
+    ColliderInit(&work->obj.collider, COLLIDER_TYPE_ENEMY, sBosBoogieDiceEmyKind.radius, sBosBoogieDiceEmyKind.height);
     work->obj.flags |= 0x400;
 #ifdef VERSION_EU
     work->obj.flags |= BTLOBJ_FLAG_INTANGIBLE;
@@ -651,7 +651,7 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
     work->obj.x = player->x;
     work->obj.y = player->y;
     work->obj.z = -0xA000;
-    ColliderInit(&work->obj.collider, 8, sBosBoogieExplosiondiceEmyKind.radius, sBosBoogieExplosiondiceEmyKind.height);
+    ColliderInit(&work->obj.collider, COLLIDER_TYPE_BOSS, sBosBoogieExplosiondiceEmyKind.radius, sBosBoogieExplosiondiceEmyKind.height);
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosBoogieExplosiondiceFrames, ARRAY_COUNT(gBosBoogieExplosiondiceFrames)), gBosBoogieExplosiondiceTiles);
     work->palette = LoadObjPalette(gBosBoogieDicePalette, sizeof(gBosBoogieDicePalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
@@ -1149,7 +1149,7 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     work->obj.y = 0x25C00;
     work->obj.z = -0xC000;
     work->obj.x = *arg;
-    ColliderInit(&work->obj.collider, 8, sBosBoogieKnifeEmyKind.radius, sBosBoogieKnifeEmyKind.height);
+    ColliderInit(&work->obj.collider, COLLIDER_TYPE_BOSS, sBosBoogieKnifeEmyKind.radius, sBosBoogieKnifeEmyKind.height);
     work->tiles = LoadObjTiles(gKnifeTiles, sizeof(gKnifeTiles));
     work->palette = LoadObjPalette(gKnifePalette, sizeof(gKnifePalette));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));

@@ -98,7 +98,7 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     collider = &work->collider;
-    ColliderInit(collider, 5, 8, 10);
+    ColliderInit(collider, COLLIDER_TYPE_PICKUP, 8, 10);
     ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
@@ -142,7 +142,7 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     collider = &work->collider;
-    ColliderInit(collider, 5, 8, 10);
+    ColliderInit(collider, COLLIDER_TYPE_PICKUP, 8, 10);
     ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
@@ -179,7 +179,7 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, sizeof(gBtlShadowTiles));
     work->palette3 = LoadObjPalette(gBStatesPalette, sizeof(gBStatesPalette));
     collider = &work->collider;
-    ColliderInit(collider, 5, 8, 10);
+    ColliderInit(collider, COLLIDER_TYPE_PICKUP, 8, 10);
     ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;

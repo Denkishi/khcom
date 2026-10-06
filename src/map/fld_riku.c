@@ -368,7 +368,7 @@ void task_fld_riku_0(FldWork* work) {
 
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, &gFieldState->actor);
-    ColliderInit(&work->collider, 1, 4, 32);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PLAYER, 4, 32);
     ColliderSetPosition(&work->collider, act->fieldPosition.x, act->fieldPosition.y, act->fieldPosition.z);
 }
 
@@ -706,9 +706,9 @@ u8 FldRikuJump(FldWork* work, void* task) {
 
     if (work->collider.colliding) {
         switch (work->collider.otherType) {
-        case 3:
-        case 5:
-        case 11:
+        case COLLIDER_TYPE_ENEMY:
+        case COLLIDER_TYPE_PICKUP:
+        case COLLIDER_TYPE_ENEMY_NO_ENEMY_COLLISION:
             break;
         default:
             if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
@@ -1379,9 +1379,9 @@ u8 FldRikuAttack(FldWork* work, void* task) {
 
     if (work->collider.colliding) {
         switch (work->collider.otherType) {
-        case 5:
-        case 3:
-        case 11:
+        case COLLIDER_TYPE_PICKUP:
+        case COLLIDER_TYPE_ENEMY:
+        case COLLIDER_TYPE_ENEMY_NO_ENEMY_COLLISION:
             break;
         default:
             if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
@@ -1540,9 +1540,9 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
 
         if (work->collider.colliding) {
             switch (work->collider.otherType) {
-            case 3:
-            case 5:
-            case 11:
+            case COLLIDER_TYPE_ENEMY:
+            case COLLIDER_TYPE_PICKUP:
+            case COLLIDER_TYPE_ENEMY_NO_ENEMY_COLLISION:
                 break;
             default:
                 if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {

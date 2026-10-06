@@ -200,7 +200,7 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
     work->timer = 0;
     work->visible = TRUE;
     work->bounced = FALSE;
-    ColliderInit(&work->collider, 0x0C, 4, 3);
+    ColliderInit(&work->collider, COLLIDER_TYPE_SLIPPERY, 4, 3);
     ColliderSetDisabled(&work->collider, TRUE);
 }
 

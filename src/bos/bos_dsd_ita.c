@@ -39,7 +39,7 @@ void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
     work->flags = 0;
     work->dipStep = 0;
     work->dipOffset = 0;
-    ColliderInit(&work->collider, 7, 0x20, 3);
+    ColliderInit(&work->collider, COLLIDER_TYPE_PLATFORM, 0x20, 3);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->gfx = gBosDsdItaFrames[0];
     work->gfx2 = gBosDsdItaShadowFrames[0];

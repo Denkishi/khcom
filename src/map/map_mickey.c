@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_message_data.h"
+#include "battle_actor_types.h"
 
 void MapMickeyCheckTalk(MapMickeyWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
@@ -72,7 +73,7 @@ void Task_MapMickey_0(MapMickeyWork* work) {
     work->palette = LoadObjPalette(gMickeyPalette, sizeof(gMickeyPalette));
     AnimInit(&work->anim, gMickeyFl00Anims, gMickeyFl00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    ColliderInit(&work->collider, 4, 16, 48);
+    ColliderInit(&work->collider, COLLIDER_TYPE_NPC, 16, 48);
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 2);

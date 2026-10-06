@@ -51,9 +51,9 @@ u32 gUnk_0203B4EC EWRAM_COMMON(4);
 
 void task_bos_jf_0(JfWork* work, s32 arg) {
     BtlObj* sub;
-    BtlWork* q;
-    s32 v1;
-    s32 v2;
+    BtlWork* btl;
+    s32 inEvent;
+    s32 inEvent2;
 
     gBosJfActorX = 0;
     gBosJfActorY = 0;
@@ -85,9 +85,9 @@ void task_bos_jf_0(JfWork* work, s32 arg) {
 
     work->unk_268 = 0;
     work->unk_26A = 0;
-    v1 = work->flags & JF_FLAG_IN_EVENT;
+    inEvent = work->flags & JF_FLAG_IN_EVENT;
 
-    if (v1 != 0) {
+    if (inEvent != 0) {
         work->state = BOS_JF_STATE_EVENT_IDLE;
         work->attackState = BOS_JF_STATE_EVENT_IDLE;
     } else {
@@ -103,9 +103,9 @@ void task_bos_jf_0(JfWork* work, s32 arg) {
     work->bgFrameTimer = 12;
     work->pillarPhase = BOS_JF_PILLAR_PHASE_START;
     work->gimmickTimer = 0;
-    v2 = work->flags & JF_FLAG_IN_EVENT;
+    inEvent2 = work->flags & JF_FLAG_IN_EVENT;
 
-    if (v2 != 0) {
+    if (inEvent2 != 0) {
         work->bodyX = 0x2A200;
         work->bodyY = 0x15E00;
         work->bodyZ = -0x3800;
@@ -121,7 +121,7 @@ void task_bos_jf_0(JfWork* work, s32 arg) {
         sub->flags |= 0x400;
         sub->flags |= BTLOBJ_FLAG_NO_BREAK_POP;
         sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-        sub->hitFlags = v2;
+        sub->hitFlags = inEvent2;
         work->sub.centerHeight = 4;
         work->bodyX = 0x2A200;
         work->bodyY = 0x15E00;
@@ -140,17 +140,17 @@ void task_bos_jf_0(JfWork* work, s32 arg) {
         SetGimmickTarget(0x20600, 0x16800, -0x800);
         TaskCreate(&work->tasks, &gTaskDescBosJfLamp, work);
         TaskCreate(&work->tasks, &gTaskDescBosJfMajin, work);
-        q = gBtlWork;
-        q->bossX = sub->x;
-        q->bossY = sub->y;
-        q->bossZ = sub->z;
+        btl = gBtlWork;
+        btl->bossX = sub->x;
+        btl->bossY = sub->y;
+        btl->bossZ = sub->z;
     }
 }
 
 u8 task_bos_jf_1(JfWork* work) {
     BtlObj* sub = &work->sub;
-    BtlWork* q;
-    u16 t;
+    BtlWork* btl;
+    u16 timer;
 
     if (work->flags & JF_FLAG_IN_EVENT) {
         TaskPoolUpdate(&work->tasks);
@@ -226,25 +226,25 @@ u8 task_bos_jf_1(JfWork* work) {
         }
     }
 
-    t = work->gimmickTimer;
+    timer = work->gimmickTimer;
 
-    if ((s16)t > 0) {
-        work->gimmickTimer = t - 1;
+    if ((s16)timer > 0) {
+        work->gimmickTimer = timer - 1;
     }
 
     TaskPoolUpdate(&work->tasks);
-    q = gBtlWork;
-    q->bossX = sub->x;
-    q->bossY = sub->y;
-    q->bossZ = sub->z;
+    btl = gBtlWork;
+    btl->bossX = sub->x;
+    btl->bossY = sub->y;
+    btl->bossZ = sub->z;
 
     if (work->flags & JF_FLAG_DEFEAT_DONE) {
         return 0;
     }
 
-    gBosJfActorX = q->actor->x >> 8;
-    gBosJfActorY = q->actor->y >> 8;
-    gBosJfActorZ = q->actor->z >> 8;
+    gBosJfActorX = btl->actor->x >> 8;
+    gBosJfActorY = btl->actor->y >> 8;
+    gBosJfActorZ = btl->actor->z >> 8;
     return 1;
 }
 
@@ -274,16 +274,16 @@ enum BosJfPillarShape {
 };
 
 u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
-    s32 v1;
-    s32 v2;
-    s32 v3;
+    s32 leftZ;
+    s32 middleZ;
+    s32 rightZ;
     s32 lo;
     s32 hi;
     s32 x;
 
-    v1 = -((gBosJfLeftPillarLevel + 1) << 11);
-    v2 = -((gBosJfMiddlePillarLevel + 1) << 11);
-    v3 = -((gBosJfRightPillarLevel + 1) << 11);
+    leftZ = -((gBosJfLeftPillarLevel + 1) << 11);
+    middleZ = -((gBosJfMiddlePillarLevel + 1) << 11);
+    rightZ = -((gBosJfRightPillarLevel + 1) << 11);
     gBtlWork->actor->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
 
     if (gBosJfLeftPillarLevel > gBosJfMiddlePillarLevel) {
@@ -295,29 +295,29 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x > hi) {
-                *out = v3;
+                *out = rightZ;
                 return 0;
             }
 
             if (x > lo) {
-                if (*pz <= v2) {
-                    *out = v2;
+                if (*pz <= middleZ) {
+                    *out = middleZ;
 
                     if (x > hi - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
-                    *out = v3;
+                    *out = rightZ;
                     *px = hi;
                     return 1;
                 }
             } else {
-                if (*pz <= v1) {
-                    *out = v1;
+                if (*pz <= leftZ) {
+                    *out = leftZ;
 
                     if (x > lo - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
-                    *out = v2;
+                    *out = middleZ;
                     *px = lo;
                     return 1;
                 }
@@ -328,29 +328,29 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x <= lo) {
-                if (*pz <= v1) {
-                    *out = v1;
+                if (*pz <= leftZ) {
+                    *out = leftZ;
 
                     if (x > lo - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
-                    *out = v2;
+                    *out = middleZ;
                     *px = lo;
                     return 1;
                 }
             } else {
                 if (x < hi) {
-                    *out = v2;
+                    *out = middleZ;
                     return 0;
                 }
 
-                if (*pz <= v3) {
-                    *out = v3;
+                if (*pz <= rightZ) {
+                    *out = rightZ;
 
                     if (x < hi + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
-                    *out = v2;
+                    *out = middleZ;
                     *px = hi;
                     return 1;
                 }
@@ -360,17 +360,17 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x > lo) {
-                *out = v2;
+                *out = middleZ;
                 return 0;
             }
 
-            if (*pz <= v1) {
-                *out = v1;
+            if (*pz <= leftZ) {
+                *out = leftZ;
 
                 if (x > lo - 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
-                *out = v2;
+                *out = middleZ;
                 *px = lo;
                 return 1;
             }
@@ -384,28 +384,28 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x < lo) {
-                *out = v1;
+                *out = leftZ;
                 return 0;
             }
 
             if (x > hi) {
-                *out = v3;
+                *out = rightZ;
                 return 0;
             }
 
-            if (*pz <= v2) {
-                *out = v2;
+            if (*pz <= middleZ) {
+                *out = middleZ;
 
                 if ((x < lo + 0x1000) || (x > hi - 0x1000))
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 if (x <= 0x205FF) {
-                    *out = v1;
+                    *out = leftZ;
                     *px = lo;
                     return 1;
                 }
 
-                *out = v3;
+                *out = rightZ;
                 *px = hi;
                 return 1;
             }
@@ -415,29 +415,29 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x < lo) {
-                *out = v1;
+                *out = leftZ;
                 return 0;
             }
 
             if (x < hi) {
-                if (*pz <= v2) {
-                    *out = v2;
+                if (*pz <= middleZ) {
+                    *out = middleZ;
 
                     if (x < lo + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
-                    *out = v1;
+                    *out = leftZ;
                     *px = lo;
                     return 1;
                 }
             } else {
-                if (*pz <= v3) {
-                    *out = v3;
+                if (*pz <= rightZ) {
+                    *out = rightZ;
 
                     if (x < hi + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
-                    *out = v2;
+                    *out = middleZ;
                     *px = hi;
                     return 1;
                 }
@@ -447,17 +447,17 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x < lo) {
-                *out = v1;
+                *out = leftZ;
                 return 0;
             }
 
-            if (*pz <= v2) {
-                *out = v2;
+            if (*pz <= middleZ) {
+                *out = middleZ;
 
                 if (x < lo + 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
-                *out = v1;
+                *out = leftZ;
                 *px = lo;
                 return 1;
             }
@@ -469,17 +469,17 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x > hi) {
-                *out = v3;
+                *out = rightZ;
                 return 0;
             }
 
-            if (*pz <= v2) {
-                *out = v2;
+            if (*pz <= middleZ) {
+                *out = middleZ;
 
                 if (x > hi - 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
-                *out = v3;
+                *out = rightZ;
                 *px = hi;
                 return 1;
             }
@@ -489,24 +489,24 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
             x = *px;
 
             if (x < hi) {
-                *out = v2;
+                *out = middleZ;
                 return 0;
             }
 
-            if (*pz <= v3) {
-                *out = v3;
+            if (*pz <= rightZ) {
+                *out = rightZ;
 
                 if (x < hi + 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
-                *out = v2;
+                *out = middleZ;
                 *px = hi;
                 return 1;
             }
         } else {
             gBosJfPillarShape = BOS_JF_PILLAR_SHAPE_FLAT;
-            v1 = v2;
-            *out = v1;
+            leftZ = middleZ;
+            *out = leftZ;
             return 0;
         }
     }
@@ -515,13 +515,13 @@ u8 ClampBosJfBounds(s32* px, s32* py, s32* pz, s32* out) {
 }
 
 u8 BosJfGetGroundZ(s32* px, s32* py, s32* pz, s32* out) {
-    s32 v1;
-    s32 v2;
-    s32 v3;
+    s32 leftZ;
+    s32 middleZ;
+    s32 rightZ;
 
-    v1 = -((gBosJfLeftPillarLevel + 1) << 11);
-    v2 = -((gBosJfMiddlePillarLevel + 1) << 11);
-    v3 = -((gBosJfRightPillarLevel + 1) << 11);
+    leftZ = -((gBosJfLeftPillarLevel + 1) << 11);
+    middleZ = -((gBosJfMiddlePillarLevel + 1) << 11);
+    rightZ = -((gBosJfRightPillarLevel + 1) << 11);
 
     if (*px <= 0x259FF) {
         if (*px <= 0x221FF) {
@@ -533,31 +533,31 @@ u8 BosJfGetGroundZ(s32* px, s32* py, s32* pz, s32* out) {
                         return 0;
                     }
                 } else {
-                    *out = v1;
+                    *out = leftZ;
 
                     if (*px <= 0x1B5FF) {
                         return 0;
                     }
 
-                    if (*px > 0x1E600 && v1 != v2) {
+                    if (*px > 0x1E600 && leftZ != middleZ) {
                         return 0;
                     }
                 }
             } else {
-                *out = v2;
+                *out = middleZ;
 
-                if (*px <= 0x1EDFF && v1 != v2) {
+                if (*px <= 0x1EDFF && leftZ != middleZ) {
                     return 0;
                 }
 
-                if (*px > 0x21E00 && v2 != v3) {
+                if (*px > 0x21E00 && middleZ != rightZ) {
                     return 0;
                 }
             }
         } else {
-            *out = v3;
+            *out = rightZ;
 
-            if (*px <= 0x225FF && v2 != v3) {
+            if (*px <= 0x225FF && middleZ != rightZ) {
                 return 0;
             }
 
@@ -731,8 +731,8 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
 u8 task_bos_jf_lamp_1(JfLampWork* work) {
     BtlObj* sub = &work->jf->sub;
     JfWork* jf = work->jf;
-    ObjTiles* p;
-    s32 d;
+    ObjTiles* tiles;
+    s32 dx;
 
     if (jf->state <= BOS_JF_STATE_SLAM) {
         if (++work->voiceTimer > work->voiceInterval) {
@@ -750,11 +750,11 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
     case BOS_JF_LAMP_STATE_FLY_OUT:
         if (work->stateTimer == 0) {
             work->targetX = BosJfLampChooseTargetX(work);
-            d = (s16)((work->targetX >> 8) - (sub->x >> 8));
+            dx = (s16)((work->targetX >> 8) - (sub->x >> 8));
 
-            if (d > 0) {
+            if (dx > 0) {
                 sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-            } else if (d < 0) {
+            } else if (dx < 0) {
                 sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
@@ -773,11 +773,11 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         break;
     case BOS_JF_LAMP_STATE_HOVER_OUT:
         if (work->stateTimer == 0) {
-            d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
+            dx = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
-            if (d > 0) {
+            if (dx > 0) {
                 sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-            } else if (d < 0) {
+            } else if (dx < 0) {
                 sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
@@ -800,11 +800,11 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
                 work->targetX = 0x19400;
             }
 
-            d = (s16)((work->targetX >> 8) - (sub->x >> 8));
+            dx = (s16)((work->targetX >> 8) - (sub->x >> 8));
 
-            if (d > 0) {
+            if (dx > 0) {
                 sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-            } else if (d < 0) {
+            } else if (dx < 0) {
                 sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
@@ -824,11 +824,11 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         break;
     case BOS_JF_LAMP_STATE_HOVER_BACK:
         if (work->stateTimer == 0) {
-            d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
+            dx = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
-            if (d > 0) {
+            if (dx > 0) {
                 sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-            } else if (d < 0) {
+            } else if (dx < 0) {
                 sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
@@ -891,8 +891,8 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             work->tiles2Frame = 0;
         }
 
-        p = work->tiles2;
-        RequestDma3Copy(gBosJfIagoTiles + (work->tiles2Frame << 9), gUnk_06010000 + (p->index << 5), 512);
+        tiles = work->tiles2;
+        RequestDma3Copy(gBosJfIagoTiles + (work->tiles2Frame << 9), gUnk_06010000 + (tiles->index << 5), 512);
     }
 
     work->tiles2Timer++;
@@ -905,28 +905,28 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
 
 void task_bos_jf_lamp_2(JfLampWork* work) {
     BtlObj* sub = &work->jf->sub;
-    void* pal;
-    u16 mode;
+    void* palette;
+    u16 flags;
     s16 x;
     s16 y;
 
-    mode = GetBattleSpritePriorityFlags(sub->y);
+    flags = GetBattleSpritePriorityFlags(sub->y);
 
     if (sub->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        mode &= 0xFFFE;
+        flags &= 0xFFFE;
     } else {
-        mode |= 1;
+        flags |= 1;
     }
 
     if (!gBtlWork->paused && (work->jf->flags & JF_FLAG_HURT) && (gFrameCounter & 1)) {
-        pal = work->palette2;
+        palette = work->palette2;
     } else {
-        pal = work->palette;
+        palette = work->palette;
     }
 
     WorldToScreen(&x, &y, sub->x, sub->y, sub->z);
-    DrawSprite(x, y, work->gfx, work->tiles, pal, NULL, mode, -4100 - (sub->y >> 8) * 4);
-    DrawSprite(x, y - 14, work->gfx2, work->tiles2, work->palette, NULL, mode,
+    DrawSprite(x, y, work->gfx, work->tiles, palette, NULL, flags, -4100 - (sub->y >> 8) * 4);
+    DrawSprite(x, y - 14, work->gfx2, work->tiles2, work->palette, NULL, flags,
                -4101 - (sub->y >> 8) * 4);
 
     if (work->onFlatGround == 1) {
@@ -943,78 +943,78 @@ void task_bos_jf_lamp_3(JfLampWork* work) {
 }
 
 s32 BosJfLampChooseTargetX(JfLampWork* work) {
-    s16 v;
-    s32 r;
+    s16 roll;
+    s32 targetX;
 
     if (work->jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
         switch (gBosJfPillarShape) {
         case BOS_JF_PILLAR_SHAPE_LEFT_LOW:
         case BOS_JF_PILLAR_SHAPE_RIGHT_LOW:
-            r = 0x27800;
+            targetX = 0x27800;
             break;
         case BOS_JF_PILLAR_SHAPE_VALLEY:
         case BOS_JF_PILLAR_SHAPE_ASCENDING:
         case BOS_JF_PILLAR_SHAPE_RIGHT_HIGH:
-            r = 0x21800;
+            targetX = 0x21800;
             break;
         case BOS_JF_PILLAR_SHAPE_FLAT:
-            v = GetRandom() % 3;
+            roll = GetRandom() % 3;
 
-            if (v == 0) {
-                r = 0x27800;
-            } else if (v == 1) {
-                r = 0x24600;
+            if (roll == 0) {
+                targetX = 0x27800;
+            } else if (roll == 1) {
+                targetX = 0x24600;
             } else {
-                r = 0x21800;
+                targetX = 0x21800;
             }
 
             break;
         case BOS_JF_PILLAR_SHAPE_DESCENDING:
         case BOS_JF_PILLAR_SHAPE_LEFT_HIGH:
         case BOS_JF_PILLAR_SHAPE_PEAK:
-            r = 0x24600;
+            targetX = 0x24600;
             break;
         default:
-            r = 0;
+            targetX = 0;
             break;
         }
 
-        return r;
+        return targetX;
     }
 
     switch (gBosJfPillarShape) {
     case BOS_JF_PILLAR_SHAPE_DESCENDING:
     case BOS_JF_PILLAR_SHAPE_LEFT_HIGH:
-        r = 0x1F400;
+        targetX = 0x1F400;
         break;
     case BOS_JF_PILLAR_SHAPE_PEAK:
     case BOS_JF_PILLAR_SHAPE_LEFT_LOW:
     case BOS_JF_PILLAR_SHAPE_RIGHT_HIGH:
-        r = 0x19400;
+        targetX = 0x19400;
         break;
     case BOS_JF_PILLAR_SHAPE_FLAT:
-        v = GetRandom() % 3;
+        roll = GetRandom() % 3;
 
-        if (v == 0) {
-            r = 0x19400;
-        } else if (v == 1) {
-            r = 0x1CE00;
+        if (roll == 0) {
+            targetX = 0x19400;
+        } else if (roll == 1) {
+            targetX = 0x1CE00;
         } else {
-            r = 0x1F400;
+            targetX = 0x1F400;
         }
 
         break;
     case BOS_JF_PILLAR_SHAPE_VALLEY:
     case BOS_JF_PILLAR_SHAPE_ASCENDING:
     case BOS_JF_PILLAR_SHAPE_RIGHT_LOW:
-        r = 0x1CE00;
+        targetX = 0x1CE00;
         break;
     default:
-        r = 0;
+        targetX = 0;
         break;
     }
 
-    return r;
+    return targetX;
 }
 
 const EmyKind gBosJfEmyKind = { 33, 1000, 16, 16, 24, 60, 0 };

@@ -36,10 +36,10 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
     BtlObj* obj;
     s16 x;
     s16 y;
-    s32 size;
-    s32 flip;
-    u16 frame;
-    ObjAffine* sprite;
+    s32 scale;
+    s32 doubleSize;
+    u16 flags;
+    ObjAffine* affine;
 
     obj = work->actor;
 
@@ -51,28 +51,28 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
         return;
     }
 
-    frame = GetBattleSpritePriorityFlags(obj->y);
+    flags = GetBattleSpritePriorityFlags(obj->y);
 
     if (obj->z >= 0 && gBtlWork->scale == 0x100) {
-        sprite = NULL;
+        affine = NULL;
     } else {
-        size = 0x200 - ((obj->groundZ - obj->z) / 128);
+        scale = 0x200 - ((obj->groundZ - obj->z) / 128);
 
-        if (size <= 127) {
-            size = 128;
+        if (scale <= 127) {
+            scale = 128;
         }
 
-        flip = 0;
+        doubleSize = 0;
 
-        if (size > 0x100) {
-            flip = 1;
+        if (scale > 0x100) {
+            doubleSize = 1;
         }
 
-        sprite = AllocObjAffine(0, size, size, flip);
+        affine = AllocObjAffine(0, scale, scale, doubleSize);
     }
 
     WorldToScreen(&x, &y, obj->x, obj->y, obj->groundZ);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, sprite, frame, obj->shadowPriority);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags, obj->shadowPriority);
 }
 
 void task_bos_jf_shadow_3(JfShadowWork* work) {

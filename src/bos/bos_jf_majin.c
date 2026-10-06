@@ -84,7 +84,7 @@ void BosJfMajinUpdateBgClip(u8 frame, JfMajinWork* work) {
     (out_z) = (actor)->z; \
 } while (0)
 void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
-    JfWork* arg = jf;
+    JfWork* boss = jf;
     s32 x;
     union {
         s32 coordinate;
@@ -92,8 +92,8 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
     } y;
     s32 z;
 
-    work->jf = arg;
-    GET_ACTOR_POSITION(&arg->body, x, y.coordinate, z);
+    work->jf = boss;
+    GET_ACTOR_POSITION(&boss->body, x, y.coordinate, z);
     work->step = 0;
     work->stepTimer = 0;
     work->moveSteps = 0;
@@ -133,8 +133,8 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
     AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     y.bounds = gBtlWork;
-    ScrollBgMapTo(1, ((y.bounds->viewX - arg->body.x) >> 8) + x,
-                  ((z = y.bounds->viewY - (arg->body.y + arg->body.z)) >> 8) + 0x126);
+    ScrollBgMapTo(1, ((y.bounds->viewX - boss->body.x) >> 8) + x,
+                  ((z = y.bounds->viewY - (boss->body.y + boss->body.z)) >> 8) + 0x126);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescBosJfBorderline, work->jf);
 }
@@ -198,8 +198,8 @@ u8 task_bos_jf_majin_1(JfMajinWork* work) {
 
 void task_bos_jf_majin_2(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    void* gfx;
-    u16 pal;
+    void* palette;
+    u16 flags;
     s16 x;
     s16 y;
 
@@ -207,17 +207,17 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
         if (jf->flags & JF_FLAG_HURT) {
             if (gFrameCounter & 1) {
                 LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, 32);
-                gfx = work->palette2;
+                palette = work->palette2;
             } else {
                 LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
-                gfx = work->palette;
+                palette = work->palette;
             }
         } else {
-            gfx = work->palette;
+            palette = work->palette;
         }
     } else {
         LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
-        gfx = work->palette;
+        palette = work->palette;
     }
 
     ScrollBgMapTo(1, ((gBtlWork->viewX - jf->body.x) >> 8) + 776,
@@ -225,14 +225,14 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
 
     if (work->spriteVisible == 1) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
-            pal = GetBattleSpritePriorityFlags(jf->body.y);
+            flags = GetBattleSpritePriorityFlags(jf->body.y);
         } else {
-            pal = GetBattleSpritePriorityFlags(jf->body.y);
-            pal |= 1;
+            flags = GetBattleSpritePriorityFlags(jf->body.y);
+            flags |= 1;
         }
 
         WorldToScreen(&x, &y, jf->body.x, jf->body.y, jf->body.z);
-        DrawSprite(x, work->y + (y - 61), work->gfx, work->tiles, gfx, NULL, pal,
+        DrawSprite(x, work->y + (y - 61), work->gfx, work->tiles, palette, NULL, flags,
                    -4100 - (jf->body.y >> 8) * 4);
     }
 
@@ -247,13 +247,13 @@ void task_bos_jf_majin_3(JfMajinWork* work) {
 }
 
 s32 BosJfGetActorPillar() {
-    s32 v = gBtlWork->actor->x;
+    s32 x = gBtlWork->actor->x;
 
-    if (v < 0x1EA00) {
+    if (x < 0x1EA00) {
         return 0;
     }
 
-    if (v < 0x22200) {
+    if (x < 0x22200) {
         return 1;
     }
 
@@ -261,29 +261,29 @@ s32 BosJfGetActorPillar() {
 }
 
 s32 BosJfMajinGetActorPillarDistance(JfMajinWork* work) {
-    s32 v;
+    s32 x;
 
     if (work->jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
-        v = gBtlWork->actor->x;
+        x = gBtlWork->actor->x;
 
-        if (v < 0x1EA00) {
+        if (x < 0x1EA00) {
             return 2;
         }
 
-        if (v < 0x22200) {
+        if (x < 0x22200) {
             return 1;
         }
 
         return 0;
     }
 
-    v = gBtlWork->actor->x;
+    x = gBtlWork->actor->x;
 
-    if (v > 0x22200) {
+    if (x > 0x22200) {
         return 2;
     }
 
-    if (v > 0x1EA00) {
+    if (x > 0x1EA00) {
         return 1;
     }
 
@@ -472,7 +472,7 @@ enum BosJfMajinRockThrowStep {
 
 void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* q = &jf->sub;
+    BtlObj* sub = &jf->sub;
 
     if (jf->stateStep == 0) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -593,7 +593,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
 
             break;
         default:
-            ClearBtlObjActionFlags(q);
+            ClearBtlObjActionFlags(sub);
             work->jf->stateStep = 0;
             work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
@@ -613,7 +613,7 @@ enum BosJfMajinSlamStep {
 
 void BosJfMajinUpdateSlam(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* q = &jf->sub;
+    BtlObj* sub = &jf->sub;
 
     if (jf->stateStep == 0) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -735,7 +735,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
 
             break;
         default:
-            ClearBtlObjActionFlags(q);
+            ClearBtlObjActionFlags(sub);
             work->jf->stateStep = 0;
             work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
@@ -755,7 +755,7 @@ enum BosJfMajinBeamStep {
 
 void BosJfMajinUpdateBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* q = &jf->sub;
+    BtlObj* sub = &jf->sub;
 
     if (jf->stateStep == 0) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -868,7 +868,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
 
             break;
         default:
-            ClearBtlObjActionFlags(q);
+            ClearBtlObjActionFlags(sub);
             work->jf->stateStep = 0;
             work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
@@ -888,7 +888,7 @@ enum BosJfMajinSweepBeamStep {
 
 void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* q = &jf->sub;
+    BtlObj* sub = &jf->sub;
 
     if (jf->stateStep == 0) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1034,7 +1034,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
 
             break;
         default:
-            ClearBtlObjActionFlags(q);
+            ClearBtlObjActionFlags(sub);
             work->jf->stateStep = 0;
             work->jf->state = BOS_JF_STATE_SHIFT_PILLARS;
             break;
@@ -1047,7 +1047,7 @@ void BosJfMajinUpdateState8(JfMajinWork* work) {
 
 void BosJfMajinUpdateBreak(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* q = &jf->sub;
+    BtlObj* sub = &jf->sub;
 
     if (jf->stateStep == 0) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1069,7 +1069,7 @@ void BosJfMajinUpdateBreak(JfMajinWork* work) {
         CreateBtlPopTask(&jf->body, 9);
         work->jf->stateStep++;
     } else if (jf->stateStep > 60) {
-        ClearBtlObjActionFlags(q);
+        ClearBtlObjActionFlags(sub);
         work->jf->stateStep = 0;
 
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1087,7 +1087,7 @@ void BosJfMajinUpdateBreak(JfMajinWork* work) {
 
 void BosJfMajinUpdateGimmick(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* q = &jf->sub;
+    BtlObj* sub = &jf->sub;
 
     if (jf->stateStep == 0) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1108,7 +1108,7 @@ void BosJfMajinUpdateGimmick(JfMajinWork* work) {
         jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         work->jf->stateStep++;
     } else {
-        ClearBtlObjActionFlags(q);
+        ClearBtlObjActionFlags(sub);
         work->jf->stateStep = 0;
 
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1132,20 +1132,20 @@ enum BosJfMajinDefeatStep {
 
 void BosJfMajinUpdateDefeat(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* q = &jf->sub;
-    PrizeCardArg fx;
-    s32 v;
+    BtlObj* sub = &jf->sub;
+    PrizeCardArg prize;
+    s32 x;
 
     if (jf->stateStep == 0) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 8;
-            v = 0x2A200;
+            x = 0x2A200;
         } else {
             jf->bgFrame = 28;
-            v = 0x16A00;
+            x = 0x16A00;
         }
 
-        jf->body.x = v;
+        jf->body.x = x;
 
         jf->body.y = 0x15E00;
         jf->body.z = -0x3800;
@@ -1200,20 +1200,20 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         break;
     case BOS_JF_MAJIN_DEFEAT_STEP_DROP_PRIZES:
         if (!BgFxIsActive()) {
-            if (q->x < 0x1B200) {
-                q->x = 0x1BA00;
+            if (sub->x < 0x1B200) {
+                sub->x = 0x1BA00;
             }
 
-            if (q->x > 0x25A00) {
-                q->x = 0x25200;
+            if (sub->x > 0x25A00) {
+                sub->x = 0x25200;
             }
 
-            fx.x = q->x;
-            fx.y = q->y;
-            fx.z = -0x7800;
-            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &fx);
+            prize.x = sub->x;
+            prize.y = sub->y;
+            prize.z = -0x7800;
+            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
 #ifdef VERSION_EU
-            DropBossPrizes(q);
+            DropBossPrizes(sub);
 #else
             DropBossPrizes(&jf->body);
 #endif
@@ -1246,17 +1246,17 @@ u8 BosJfStepPillarLevel(u16* level, s16 target, u8 actorPillar, u8 pillar) {
     if ((s16)*level > target) {
         *level = *level - 1;
     } else {
-        BtlObj* q;
-        s32 v;
+        BtlObj* actor;
+        s32 pillarZ;
 
         *level = *level + 1;
 
         if (actorPillar == pillar) {
-            q = gBtlWork->actor;
-            v = -(((s16)*level + 1) << 11);
+            actor = gBtlWork->actor;
+            pillarZ = -(((s16)*level + 1) << 11);
 
-            if (q->z >= v) {
-                q->z = v;
+            if (actor->z >= pillarZ) {
+                actor->z = pillarZ;
             }
         }
     }
@@ -1272,10 +1272,10 @@ enum BosJfShiftPillarsStep {
 
 void BosJfMajinUpdatePillars(JfMajinWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* s = &work->jf->sub;
+    BtlObj* sub = &work->jf->sub;
     s16 n = 0;
-    s16 m;
-    u8 v;
+    s16 pattern;
+    u8 actorPillar;
 
     if (jf->gimmickTimer > 0) {
         jf->stateStep = 0;
@@ -1301,35 +1301,35 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
         if (work->jf->flags & JF_FLAG_GIMMICK_PENDING) {
             work->jf->flags &= ~JF_FLAG_GIMMICK_PENDING;
             work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_GIMMICK;
-            m = 14;
-        } else if (s->hp < s->maxHp / 2) {
+            pattern = 14;
+        } else if (sub->hp < sub->maxHp / 2) {
             switch (work->jf->pillarPhase) {
             case BOS_JF_PILLAR_PHASE_START:
-                m = GetRandom() & 1;
+                pattern = GetRandom() & 1;
                 break;
             case BOS_JF_PILLAR_PHASE_STAIRS:
             case BOS_JF_PILLAR_PHASE_GIMMICK:
-                m = GetRandom() % 6 + 2;
+                pattern = GetRandom() % 6 + 2;
                 break;
             case BOS_JF_PILLAR_PHASE_FLAT:
-                m = GetRandom() % 6 + 8;
+                pattern = GetRandom() % 6 + 8;
                 break;
             default:
-                m = 0;
+                pattern = 0;
                 break;
             }
         } else if (work->jf->pillarPhase == BOS_JF_PILLAR_PHASE_START) {
-            m = GetRandom() % 6 + 8;
+            pattern = GetRandom() % 6 + 8;
         } else {
-            m = GetRandom() % 8;
+            pattern = GetRandom() % 8;
         }
 
         work->leftLevel = gBosJfLeftPillarLevel;
         work->middleLevel = gBosJfMiddlePillarLevel;
         work->rightLevel = gBosJfRightPillarLevel;
-        work->leftTarget = gBosJfPillarPatterns[m][0];
-        work->middleTarget = gBosJfPillarPatterns[m][1];
-        work->rightTarget = gBosJfPillarPatterns[m][2];
+        work->leftTarget = gBosJfPillarPatterns[pattern][0];
+        work->middleTarget = gBosJfPillarPatterns[pattern][1];
+        work->rightTarget = gBosJfPillarPatterns[pattern][2];
         work->step = 0;
         work->stepTimer = 0;
         work->moveSteps = 0;
@@ -1354,13 +1354,13 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
         }
 
         work->stepTimer = 0;
-        v = BosJfGetActorPillar();
-        n += (s8)BosJfStepPillarLevel(&work->leftLevel, work->leftTarget, v, 0);
-        n += (s8)BosJfStepPillarLevel(&work->middleLevel, work->middleTarget, v, 1);
-        n += (s8)BosJfStepPillarLevel(&work->rightLevel, work->rightTarget, v, 2);
+        actorPillar = BosJfGetActorPillar();
+        n += (s8)BosJfStepPillarLevel(&work->leftLevel, work->leftTarget, actorPillar, 0);
+        n += (s8)BosJfStepPillarLevel(&work->middleLevel, work->middleTarget, actorPillar, 1);
+        n += (s8)BosJfStepPillarLevel(&work->rightLevel, work->rightTarget, actorPillar, 2);
 
         if (n == 3) {
-            if (s->hp < s->maxHp / 2) {
+            if (sub->hp < sub->maxHp / 2) {
                 switch (work->jf->pillarPhase) {
                 case BOS_JF_PILLAR_PHASE_START:
                     work->jf->pillarPhase = BOS_JF_PILLAR_PHASE_FLAT;
@@ -1434,11 +1434,11 @@ void BosJfMajinUpdateEventIdle(JfMajinWork* work) {
 }
 
 void BosJfMajinChooseAttack(JfMajinWork* work) {
-    BtlObj* s = &work->jf->sub;
-    u8 v;
-    s32 r;
+    BtlObj* sub = &work->jf->sub;
+    u8 dist;
+    s32 roll;
 
-    if (s->hp < s->maxHp / 2) {
+    if (sub->hp < sub->maxHp / 2) {
         if (GetRandom() % 100 <= 9) {
             RequestBossCardValue(1);
         } else if (GetRandom() % 90 <= 19) {
@@ -1448,37 +1448,37 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
         }
 
         if (gBosJfLeftPillarLevel == gBosJfMiddlePillarLevel && gBosJfLeftPillarLevel == gBosJfRightPillarLevel && GetRandom() % 100 <= 79) {
-            RequestEnemyCardUse(s);
+            RequestEnemyCardUse(sub);
             work->jf->attackState = BOS_JF_STATE_SWEEP_BEAM;
         } else {
-            v = BosJfMajinGetActorPillarDistance(work);
+            dist = BosJfMajinGetActorPillarDistance(work);
 
-            switch (v) {
+            switch (dist) {
             case 0:
-                RequestEnemyCardUse(s);
-                r = (s16)(GetRandom() % 100);
+                RequestEnemyCardUse(sub);
+                roll = (s16)(GetRandom() % 100);
 
-                if (r <= 39) {
-                    RequestEnemyCardUse(s);
+                if (roll <= 39) {
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_SLAM;
-                } else if (r <= 79) {
-                    RequestEnemyCardUse(s);
+                } else if (roll <= 79) {
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_BEAM;
                 } else {
-                    RequestEnemyCardUse(s);
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 }
 
                 break;
             case 1:
-                RequestEnemyCardUse(s);
+                RequestEnemyCardUse(sub);
                 work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 break;
             case 2:
                 if (GetRandom() % 100 <= 49) {
                     work->jf->state = BOS_JF_STATE_SWITCH_SIDE;
                 } else {
-                    RequestEnemyCardUse(s);
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 }
 
@@ -1493,30 +1493,30 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
         }
 
         if (gBosJfLeftPillarLevel == gBosJfMiddlePillarLevel && gBosJfLeftPillarLevel == gBosJfRightPillarLevel && GetRandom() % 100 <= 19) {
-            RequestEnemyCardUse(s);
+            RequestEnemyCardUse(sub);
             work->jf->attackState = BOS_JF_STATE_SWEEP_BEAM;
         } else {
-            v = BosJfMajinGetActorPillarDistance(work);
+            dist = BosJfMajinGetActorPillarDistance(work);
 
-            switch (v) {
+            switch (dist) {
             case 0:
-                RequestEnemyCardUse(s);
+                RequestEnemyCardUse(sub);
 
                 if (GetRandom() % 100 <= 59) {
-                    RequestEnemyCardUse(s);
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_SLAM;
                 } else {
-                    RequestEnemyCardUse(s);
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_BEAM;
                 }
 
                 break;
             case 1:
                 if (GetRandom() % 100 <= 79) {
-                    RequestEnemyCardUse(s);
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 } else {
-                    RequestEnemyCardUse(s);
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_BEAM;
                 }
 
@@ -1525,7 +1525,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                 if (GetRandom() % 100 <= 69) {
                     work->jf->state = BOS_JF_STATE_SWITCH_SIDE;
                 } else {
-                    RequestEnemyCardUse(s);
+                    RequestEnemyCardUse(sub);
                     work->jf->attackState = BOS_JF_STATE_ROCK_THROW;
                 }
 
@@ -1596,8 +1596,8 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
 
 u8 task_bos_jf_rock_1(JfRockWork* work) {
     JfWork* jf = work->jf;
-    BtlObj* b;
-    s16 n;
+    BtlObj* actor;
+    s16 index;
 
     switch (work->state) {
     case BOS_JF_ROCK_STATE_RISE:
@@ -1627,13 +1627,13 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->animIndex = 8;
                 work->visible = 1;
             } else {
-                n = 8 - ((work->body.z >> 8) + 12) / 8;
+                index = 8 - ((work->body.z >> 8) + 12) / 8;
 
-                if (n < 0) {
+                if (index < 0) {
                     work->animIndex = 0;
                     work->visible = 0;
                 } else {
-                    work->animIndex = n;
+                    work->animIndex = index;
                     work->visible = 1;
                 }
             }
@@ -1645,22 +1645,22 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->gfx2Index = 11;
                 work->visible2 = 1;
             } else {
-                n = 11 - ((work->z2 >> 8) + 16) / 8;
+                index = 11 - ((work->z2 >> 8) + 16) / 8;
 
-                if (n < 0) {
+                if (index < 0) {
                     work->gfx2Index = 0;
                     work->visible2 = 0;
                 } else {
-                    work->gfx2Index = n;
+                    work->gfx2Index = index;
                     work->visible2 = 1;
                 }
             }
 
             work->gfx2 = gBosJfObjFrames[gBosJfRockGfx2Frames[work->gfx2Index]];
         } else {
-            work->targetX = (b = gBtlWork->actor)->x;
-            work->targetY = b->y;
-            work->targetZ = b->z;
+            work->targetX = (actor = gBtlWork->actor)->x;
+            work->targetY = actor->y;
+            work->targetZ = actor->z;
             work->vx = (work->targetX - work->body.x) / 40;
             work->vy = (work->targetY - work->body.y) / 40;
             work->vz = 0;
@@ -1807,7 +1807,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
 
 void task_bos_jf_rock_2(JfRockWork* work) {
     JfWork* jf = work->jf;
-    u16 pal;
+    u16 flags;
     s32 prio;
     s16 x;
     s16 y;
@@ -1815,34 +1815,34 @@ void task_bos_jf_rock_2(JfRockWork* work) {
     if (work->visible == 1) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             if (work->body.x <= 0x259FF) {
-                pal = GetBattleSpritePriorityFlags(work->body.y);
+                flags = GetBattleSpritePriorityFlags(work->body.y);
                 prio = 0xFD00;
             } else {
-                pal = 0x400;
+                flags = 0x400;
                 prio = 0xFFF5;
             }
         } else if (work->body.x > 0x1B200) {
-            pal = GetBattleSpritePriorityFlags(work->body.y);
+            flags = GetBattleSpritePriorityFlags(work->body.y);
             prio = 0xFD00;
         } else {
-            pal = 0x400;
+            flags = 0x400;
             prio = 0xFFF5;
         }
 
         WorldToScreen(&x, &y, work->body.x, work->body.y, work->body.z);
-        DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, pal, prio);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, prio);
     }
 
     if (work->visible2 == 1) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
-            pal = 0x400;
+            flags = 0x400;
         } else {
-            pal = 0x400;
-            pal |= 1;
+            flags = 0x400;
+            flags |= 1;
         }
 
         WorldToScreen(&x, &y, work->x2, work->y2, work->z2);
-        DrawSprite(x, y, work->gfx2, work->tiles2, work->palette2, NULL, pal, 0xFFF2);
+        DrawSprite(x, y, work->gfx2, work->tiles2, work->palette2, NULL, flags, 0xFFF2);
     }
 
     if (work->shadowVisible == 1) {
@@ -1859,23 +1859,23 @@ void task_bos_jf_rock_3(JfRockWork* work) {
 }
 
 u8 BosJfRockTestPillars(s32 x, s32 y, s32 z) {
-    s32 t0 = -((gBosJfLeftPillarLevel + 1) << 11);
-    s32 t1 = -((gBosJfMiddlePillarLevel + 1) << 11);
-    s32 t2 = -((gBosJfRightPillarLevel + 1) << 11);
+    s32 leftZ = -((gBosJfLeftPillarLevel + 1) << 11);
+    s32 middleZ = -((gBosJfMiddlePillarLevel + 1) << 11);
+    s32 rightZ = -((gBosJfRightPillarLevel + 1) << 11);
     s32 hi = x + 0x1C00;
     s32 lo = x - 0x1C00;
     s32 zh = z + 0x1C00;
     s32 zl = z - 0x1C00;
 
-    if (zh >= t0 && hi > 0x1B200 && lo < 0x1EA00) {
+    if (zh >= leftZ && hi > 0x1B200 && lo < 0x1EA00) {
         return 1;
     }
 
-    if (zh >= t1 && hi > 0x1EA00 && lo < 0x22200) {
+    if (zh >= middleZ && hi > 0x1EA00 && lo < 0x22200) {
         return 1;
     }
 
-    if (zh >= t2 && hi > 0x22200 && lo < 0x25A00) {
+    if (zh >= rightZ && hi > 0x22200 && lo < 0x25A00) {
         return 1;
     }
 
@@ -1919,11 +1919,11 @@ void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
 }
 
 u8 task_bos_jf_borderline_1(JfBorderlineWork* work) {
-    JfWork* p = work->jf;
+    JfWork* jf = work->jf;
 
     BosJfBorderlineUpdateLayout(work);
-    work->x = p->body.x + work->offsetX;
-    work->y = p->body.y + work->offsetY;
+    work->x = jf->body.x + work->offsetX;
+    work->y = jf->body.y + work->offsetY;
     work->gfx = AnimUpdate(&work->anim);
     work->gfx2 = AnimUpdate(&work->anim2);
     work->gfx3 = AnimUpdate(&work->anim3);

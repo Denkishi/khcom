@@ -46,7 +46,7 @@ void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
 }
 
 u8 task_bos_dsd_ita_1(DsdItaWork* work) {
-    BtlObj* a = &work->dsd->body[1];
+    BtlObj* head = &work->dsd->body[1];
 
     BosDsdItaUpdateRider(work);
 
@@ -70,9 +70,9 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
         break;
     case BOS_DSD_ITA_STATE_CARRY:
         if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
-            BosDsdItaMoveToward(&work->x, a->x - 12800);
-            BosDsdItaMoveToward(&work->y, a->y);
-            BosDsdItaMoveToward(&work->z, a->z + 0x500);
+            BosDsdItaMoveToward(&work->x, head->x - 12800);
+            BosDsdItaMoveToward(&work->y, head->y);
+            BosDsdItaMoveToward(&work->z, head->z + 0x500);
         } else if (work->offTimer > 49) {
             work->state = BOS_DSD_ITA_STATE_FALL;
         } else {
@@ -117,24 +117,24 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
 }
 
 void task_bos_dsd_ita_2(DsdItaWork* work) {
-    u16 pal;
+    u16 flags;
     u16 prio;
     ObjAffine* affine;
     s32 scale;
-    s32 flag;
+    s32 doubleSize;
     s16 x;
     s16 y;
 
     if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
-        pal = 0x800;
+        flags = 0x800;
         prio = -4100 - ((work->y - 0x4000) >> 8) * 4;
     } else {
-        pal = GetBattleSpritePriorityFlags(work->y);
+        flags = GetBattleSpritePriorityFlags(work->y);
         prio = -4102 - (work->y >> 8) * 4;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, NULL, pal, prio);
+    DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, NULL, flags, prio);
 
     if (work->z >= 0 && gBtlWork->scale == 0x100) {
         affine = NULL;
@@ -145,13 +145,13 @@ void task_bos_dsd_ita_2(DsdItaWork* work) {
             scale = 0x80;
         }
 
-        flag = 0;
+        doubleSize = 0;
 
         if (scale > 0x100) {
-            flag = 1;
+            doubleSize = 1;
         }
 
-        affine = AllocObjAffine(0, scale, scale, flag);
+        affine = AllocObjAffine(0, scale, scale, doubleSize);
     }
 
     WorldToScreen(&x, &y, work->x, work->y, 0);
@@ -163,16 +163,16 @@ void task_bos_dsd_ita_3(DsdItaWork* work) {
 }
 
 void BosDsdItaUpdateRider(DsdItaWork* work) {
-    s32 v;
-    s16 k;
+    s32 onPlatform;
+    s16 dip;
 
     if (gBtlWork->platform == &work->collider) {
-        v = work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM;
+        onPlatform = work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM;
 
-        if (v == 0) {
+        if (onPlatform == 0) {
             work->flags |= DSD_ITA_FLAG_SINKING;
             work->dsd->flags |= DSD_FLAG_PLAYER_ON_PLATFORM;
-            work->dipStep = v;
+            work->dipStep = onPlatform;
         }
     } else if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
         work->dsd->flags &= ~DSD_FLAG_PLAYER_ON_PLATFORM;
@@ -181,20 +181,20 @@ void BosDsdItaUpdateRider(DsdItaWork* work) {
     }
 
     if (work->flags & DSD_ITA_FLAG_RISING) {
-        k = gBosDsdItaDipSteps[work->dipStep];
-        work->dipOffset -= k << 8;
+        dip = gBosDsdItaDipSteps[work->dipStep];
+        work->dipOffset -= dip << 8;
 
-        if (k == 0) {
+        if (dip == 0) {
             work->flags &= ~DSD_ITA_FLAG_RISING;
             work->dipOffset = 0;
         } else {
             work->dipStep++;
         }
     } else if (work->flags & DSD_ITA_FLAG_SINKING) {
-        k = gBosDsdItaDipSteps[work->dipStep];
-        work->dipOffset += k << 8;
+        dip = gBosDsdItaDipSteps[work->dipStep];
+        work->dipOffset += dip << 8;
 
-        if (k == 0) {
+        if (dip == 0) {
             work->flags &= ~DSD_ITA_FLAG_SINKING;
         } else {
             work->dipStep++;
@@ -238,8 +238,8 @@ void BosDsdItaMoveToward(s32* value, s32 target) {
 }
 
 void task_bos_dsd_rock_0(DsdRockWork* work, DsdWork* arg) {
-    s32 r;
-    u8 ang;
+    s32 speed;
+    u8 angle;
 
     work->dsd = arg;
     work->front = GetRandom() % 2;
@@ -247,33 +247,33 @@ void task_bos_dsd_rock_0(DsdRockWork* work, DsdWork* arg) {
 
     if (work->dsd->driftX > 0) {
         if (work->front != 0) {
-            r = GetRandom() % 0x301 + 0x700;
-            ang = GetRandom() % 13 + 58;
+            speed = GetRandom() % 0x301 + 0x700;
+            angle = GetRandom() % 13 + 58;
             work->x = gBtlWork->viewX - 0x8800;
             work->y = (gBtlWork->yMax - 140) << 8;
         } else {
-            r = GetRandom() % 0x201 + 0x400;
-            ang = -(GetRandom() % 13 + 58);
+            speed = GetRandom() % 0x201 + 0x400;
+            angle = -(GetRandom() % 13 + 58);
             work->x = gBtlWork->viewX + 0x8800;
             work->y = (gBtlWork->yMin - 140) << 8;
         }
     } else {
         if (work->front != 0) {
-            r = GetRandom() % 0x301 + 0x700;
-            ang = -(GetRandom() % 13 + 58);
+            speed = GetRandom() % 0x301 + 0x700;
+            angle = -(GetRandom() % 13 + 58);
             work->x = gBtlWork->viewX + 0x8800;
             work->y = (gBtlWork->yMax - 140) << 8;
         } else {
-            r = GetRandom() % 0x201 + 0x400;
-            ang = GetRandom() % 13 + 58;
+            speed = GetRandom() % 0x201 + 0x400;
+            angle = GetRandom() % 13 + 58;
             work->x = gBtlWork->viewX - 0x8800;
             work->y = (gBtlWork->yMin - 140) << 8;
         }
     }
 
     work->z = (GetRandom() % 101) << 8;
-    work->vx = gSineTable[ang] * r >> 8;
-    work->vz = -gSineTable[ang + 0x40] * r >> 8;
+    work->vx = gSineTable[angle] * speed >> 8;
+    work->vz = -gSineTable[angle + 0x40] * speed >> 8;
 }
 
 u8 task_bos_dsd_rock_1(DsdRockWork* work) {
@@ -294,23 +294,23 @@ u8 task_bos_dsd_rock_1(DsdRockWork* work) {
 
 void task_bos_dsd_rock_2(DsdRockWork* work) {
     ObjAffine* affine;
-    s32 h;
-    s32 prio;
+    s32 priority;
+    s32 flags;
     s16 x;
     s16 y;
 
     if (work->front != 0) {
         affine = NULL;
-        h = 10;
-        prio = 0x400;
+        priority = 10;
+        flags = 0x400;
     } else {
         affine = AllocObjAffine(0, 0x59, 0x59, 0);
-        h = 0xFFF5;
-        prio = 0xC00;
+        priority = 0xFFF5;
+        flags = 0xC00;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, affine, prio, h);
+    DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, affine, flags, priority);
 }
 
 void task_bos_dsd_rock_3() {

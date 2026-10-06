@@ -18,10 +18,10 @@
 #include <stddef.h>
 
 void task_bos_dsd_0(DsdWork* work, void* arg) {
-    s32 v;
+    s32 inEvent;
     DsdWork* w;
-    BtlObj* p1;
-    BtlObj* p2;
+    BtlObj* head;
+    BtlObj* hand;
     BtlWork* btl;
 
     work->flags = 0;
@@ -58,18 +58,18 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->bgFrameTimer = 0;
     work->hpPhase = BOS_DSD_HP_PHASE_HIGH;
     work->driftX = -51;
-    v = (s16)(work->flags & DSD_FLAG_IN_EVENT);
+    inEvent = (s16)(work->flags & DSD_FLAG_IN_EVENT);
 
-    if (v != 0) {
+    if (inEvent != 0) {
         work->bodyX = 0xDC00;
         work->bodyY = 0x16800;
         work->bodyZ = -0x6400;
         w = work;
         InitEnemyBtlObj(&w->body[0], &gBosDsdEmyKind, work->bodyX, work->bodyY, work->bodyZ);
-        p1 = &w->body[1];
-        InitEnemyBtlObj(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
-        p2 = &w->body[2];
-        InitEnemyBtlObj(p2, &gBosDsdEmyKind, 0x9000, 0x16800, 0);
+        head = &w->body[1];
+        InitEnemyBtlObj(head, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
+        hand = &w->body[2];
+        InitEnemyBtlObj(hand, &gBosDsdEmyKind, 0x9000, 0x16800, 0);
         TaskCreate(&w->tasks, &gTaskDescBosDsdMain, w);
     } else {
         work->bodyX = 0xDC00;
@@ -79,26 +79,26 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         InitEnemyBtlObj(&w->body[0], &gBosDsdEmyKind, work->bodyX, work->bodyY, work->bodyZ);
         w->body[0].flags |= BTLOBJ_FLAG_UNHITTABLE;
         w->body[0].flags |= BTLOBJ_FLAG_FACING_LEFT;
-        p1 = &w->body[1];
-        InitEnemyBtlObj(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
-        p1->flags |= BTLOBJ_FLAG_FACING_LEFT;
-        p1->flags |= 0x400;
-        p1->centerHeight = v;
-        p1->radiusX = 16;
-        p1->radiusY = 16;
-        p1->height = 16;
-        p2 = &w->body[2];
-        InitEnemyBtlObj(p2, &gBosDsdEmyKind, 0x9000, 0x16800, v);
-        p2->flags |= (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_UNHITTABLE | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
-        p2->centerHeight = v;
-        p2->radiusX = 16;
-        p2->radiusY = 16;
-        p2->height = 32;
-        ColliderInit(&p2->collider, 7, 16, 32);
-        ColliderSetPosition(&p2->collider, p2->x, p2->y, p2->z);
-        ColliderSetDisabled(&p2->collider, 1);
-        SetBtlObjParent(p2, p1);
-        gBtlWork->bossPriorityOffset = v;
+        head = &w->body[1];
+        InitEnemyBtlObj(head, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
+        head->flags |= BTLOBJ_FLAG_FACING_LEFT;
+        head->flags |= 0x400;
+        head->centerHeight = inEvent;
+        head->radiusX = 16;
+        head->radiusY = 16;
+        head->height = 16;
+        hand = &w->body[2];
+        InitEnemyBtlObj(hand, &gBosDsdEmyKind, 0x9000, 0x16800, inEvent);
+        hand->flags |= (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_UNHITTABLE | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
+        hand->centerHeight = inEvent;
+        hand->radiusX = 16;
+        hand->radiusY = 16;
+        hand->height = 32;
+        ColliderInit(&hand->collider, 7, 16, 32);
+        ColliderSetPosition(&hand->collider, hand->x, hand->y, hand->z);
+        ColliderSetDisabled(&hand->collider, 1);
+        SetBtlObjParent(hand, head);
+        gBtlWork->bossPriorityOffset = inEvent;
         SetBtlPaletteFadeExcluded(0, 1);
         SetBattleActorPosition(0x6400, 0x16800, 0);
         SetGimmickTarget(0x2800, 0x16800, 0);
@@ -111,19 +111,19 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
 }
 
 u8 task_bos_dsd_1(DsdWork* work) {
-    BtlWork* q;
-    BtlObj* a = work->body;
-    BtlObj* b = &work->body[1];
+    BtlWork* btl;
+    BtlObj* body = work->body;
+    BtlObj* head = &work->body[1];
 
     if (work->flags & DSD_FLAG_IN_EVENT) {
         TaskPoolUpdate(&work->tasks);
         return 1;
     }
 
-    switch (UpdateBtlObjReaction(b)) {
+    switch (UpdateBtlObjReaction(head)) {
     case BTL_REACTION_CARD_ACTION:
         work->state = BOS_DSD_STATE_ATTACK_START;
-        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
+        head->flags |= BTLOBJ_FLAG_UNHITTABLE;
         work->stateStep = 0;
         break;
     case BTL_REACTION_HURT:
@@ -150,9 +150,9 @@ u8 task_bos_dsd_1(DsdWork* work) {
             work->hitCount = 0;
             work->flags &= ~DSD_FLAG_HURT;
             LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);
-            ClearBtlObjActionFlags(b);
+            ClearBtlObjActionFlags(head);
 
-            if (b->hp > 0) {
+            if (head->hp > 0) {
                 switch (work->state) {
                 case BOS_DSD_STATE_RETURN:
                 case BOS_DSD_STATE_IDLE:
@@ -185,10 +185,10 @@ u8 task_bos_dsd_1(DsdWork* work) {
     }
 
     TaskPoolUpdate(&work->tasks);
-    q = gBtlWork;
-    q->bossX = a->x;
-    q->bossY = a->y;
-    q->bossZ = a->z;
+    btl = gBtlWork;
+    btl->bossX = body->x;
+    btl->bossY = body->y;
+    btl->bossZ = body->z;
 
     if (work->flags & DSD_FLAG_DEFEAT_DONE) {
         return 0;
@@ -202,16 +202,16 @@ void task_bos_dsd_2(DsdWork* work) {
 }
 
 void task_bos_dsd_3(DsdWork* work) {
-    BtlObj* a;
-    BtlObj* b;
+    BtlObj* head;
+    BtlObj* hand;
 
-    a = &work->body[1];
-    b = &work->body[2];
+    head = &work->body[1];
+    hand = &work->body[2];
     TaskPoolDestroy(&work->tasks);
     ColliderUnregister(&work->body[2].collider);
     ReleaseEnemyBtlObj(&work->body[0]);
-    ReleaseEnemyBtlObj(a);
-    ReleaseEnemyBtlObj(b);
+    ReleaseEnemyBtlObj(head);
+    ReleaseEnemyBtlObj(hand);
 }
 
 const EmyKind gBosDsdEmyKind = { 38, 1000, 16, 16, 40, 60, 0 };

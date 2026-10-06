@@ -49,7 +49,7 @@ void BosDsdSetBgFrame(u8 index, u16 tileCount) {
 }
 
 void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
-    BtlObj* s = &work->body;
+    BtlObj* body = &work->body;
 
     work->dsd = arg;
     SetBgPriority(1, 1);
@@ -82,11 +82,11 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     work->dsd->palette3 = LoadObjPalette(gBosDsdItaShadowPalette, 32);
     work->dsd->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->dsd->palette4 = LoadObjPalette(gBStatesPalette, 32);
-    s->x = 0xDC00;
-    s->y = 0x16800;
-    s->z = 0;
-    ColliderInit(&s->collider, 8, 24, 100);
-    ColliderSetPosition(&s->collider, s->x, s->y, s->z);
+    body->x = 0xDC00;
+    body->y = 0x16800;
+    body->z = 0;
+    ColliderInit(&body->collider, 8, 24, 100);
+    ColliderSetPosition(&body->collider, body->x, body->y, body->z);
     ScrollBgMapTo(1, ((gBtlWork->viewX - arg->body[0].x) >> 8) + 100,
                   ((gBtlWork->viewY - (arg->body[0].y + arg->body[0].z)) >> 8) + 280);
     TaskPoolInit(&work->tasks, 10);
@@ -94,8 +94,8 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
 }
 
 u8 task_bos_dsd_main_1(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* p = &work->body;
+    DsdWork* dsd = work->dsd;
+    BtlObj* body = &work->body;
 
     BosDsdMainUpdateDrift(work);
 
@@ -146,8 +146,8 @@ u8 task_bos_dsd_main_1(DsdMainWork* work) {
         break;
     }
 
-    ColliderSetPosition(&d->body[0].collider, d->body[0].x, d->body[0].y, d->body[0].z);
-    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
+    ColliderSetPosition(&dsd->body[0].collider, dsd->body[0].x, dsd->body[0].y, dsd->body[0].z);
+    ColliderSetPosition(&body->collider, body->x, body->y, body->z);
     TaskPoolUpdate(&work->tasks);
     work->lastBreakDifference = gBtlWork->breakDifference;
 
@@ -155,36 +155,36 @@ u8 task_bos_dsd_main_1(DsdMainWork* work) {
 }
 
 void task_bos_dsd_main_2(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    void* gfx;
+    DsdWork* dsd = work->dsd;
+    void* palette;
     s16 x;
     s16 y;
 
     if (gBtlWork->paused) {
         LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);
-        gfx = work->palette;
-    } else if (d->flags & DSD_FLAG_HURT) {
+        palette = work->palette;
+    } else if (dsd->flags & DSD_FLAG_HURT) {
         if (gFrameCounter & 1) {
             LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, 32);
-            gfx = work->palette2;
+            palette = work->palette2;
         } else {
             LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);
-            gfx = work->palette;
+            palette = work->palette;
         }
     } else {
-        gfx = work->palette;
+        palette = work->palette;
     }
 
-    ScrollBgMapTo(1, ((gBtlWork->viewX - d->body[0].x) >> 8) + 100,
-                  ((gBtlWork->viewY - (d->body[0].y + d->body[0].z)) >> 8) + 280);
+    ScrollBgMapTo(1, ((gBtlWork->viewX - dsd->body[0].x) >> 8) + 100,
+                  ((gBtlWork->viewY - (dsd->body[0].y + dsd->body[0].z)) >> 8) + 280);
 
     if (work->spriteVisible == 1) {
-        GetBattleSpritePriorityFlags(d->body[0].y);
-        WorldToScreen(&x, &y, d->body[0].x, d->body[0].y, -0x6400);
-        DrawSprite(x - 96, y + 20, work->gfx, work->tiles, gfx, NULL, SPRITE_PRIORITY(1),
-                   -4101 - (d->body[0].y >> 8) * 4);
-        DrawSprite(x - 96, y + 20, work->gfx2, work->tiles2, gfx, NULL, SPRITE_PRIORITY(2),
-                   -4099 - (d->body[0].y >> 8) * 4);
+        GetBattleSpritePriorityFlags(dsd->body[0].y);
+        WorldToScreen(&x, &y, dsd->body[0].x, dsd->body[0].y, -0x6400);
+        DrawSprite(x - 96, y + 20, work->gfx, work->tiles, palette, NULL, SPRITE_PRIORITY(1),
+                   -4101 - (dsd->body[0].y >> 8) * 4);
+        DrawSprite(x - 96, y + 20, work->gfx2, work->tiles2, palette, NULL, SPRITE_PRIORITY(2),
+                   -4099 - (dsd->body[0].y >> 8) * 4);
     }
 
     TaskPoolDraw(&work->tasks);
@@ -207,9 +207,9 @@ void task_bos_dsd_main_3(DsdMainWork* work) {
 }
 
 void BosDsdMainUpdateDrift(DsdMainWork* work) {
-    BtlObj* q = &work->dsd->body[1];
+    BtlObj* head = &work->dsd->body[1];
 
-    if (q->hp > 0) {
+    if (head->hp > 0) {
         if (GetRandom() % 30 == 0) {
             TaskCreate(&work->tasks, &gTaskDescBosDsdRock, work->dsd);
         }
@@ -240,26 +240,26 @@ void BosDsdMainUpdateDrift(DsdMainWork* work) {
 }
 
 void BosDsdMainResetPose(DsdMainWork* work) {
-    DsdWork* p = work->dsd;
-    BtlObj* q = &p->body[1];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
 
-    p->bgFrame = 0;
+    dsd->bgFrame = 0;
     work->baseFrame = 0;
     work->dsd->bgFrameTimer = 0;
     BosDsdSetBgFrame(0, 0x60);
     work->spriteVisible = 1;
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
-    p->body[0].z = -0x6400;
-    q->z = -0x8C00;
+    dsd->body[0].z = -0x6400;
+    head->z = -0x8C00;
 }
 
 void BosDsdMainUpdateIdleFrames(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* q = &d->body[1];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
 
-    if (d->bgFrameTimer >= gBosDsdFrameDurations[d->bgFrame]) {
-        d->bgFrameTimer = 0;
+    if (dsd->bgFrameTimer >= gBosDsdFrameDurations[dsd->bgFrame]) {
+        dsd->bgFrameTimer = 0;
         work->dsd->bgFrame++;
 
         if (work->dsd->bgFrame > work->baseFrame + 7) {
@@ -267,8 +267,8 @@ void BosDsdMainUpdateIdleFrames(DsdMainWork* work) {
         }
 
         BosDsdSetBgFrame(work->dsd->bgFrame, 0x60);
-        d->body[0].z += gBosDsdIdleBob[work->dsd->bgFrame] << 8;
-        q->z += gBosDsdIdleBob[work->dsd->bgFrame] << 8;
+        dsd->body[0].z += gBosDsdIdleBob[work->dsd->bgFrame] << 8;
+        head->z += gBosDsdIdleBob[work->dsd->bgFrame] << 8;
     }
 
     work->dsd->bgFrameTimer++;
@@ -287,23 +287,23 @@ void BosDsdMainUpdateIdle(DsdMainWork* work) {
 }
 
 void BosDsdMainBeginTransition(DsdMainWork* work, s32 x, s32 y, s32 z) {
-    BtlObj* q = &work->dsd->body[1];
+    BtlObj* head = &work->dsd->body[1];
 
     FadeSetPaletteExcluded(0, 0);
     FadeSetPaletteExcluded(0x13, 0);
     FadeToAmount(FADE_MODE_BLACK, 0x14, 8);
     BgFxStartDsdTransition(x - 0x1400, y, z - 0xA00, 0x100);
     m4aSongNumStart(SONG_SND_721);
-    q->flags |= BTLOBJ_FLAG_UNHITTABLE;
+    head->flags |= BTLOBJ_FLAG_UNHITTABLE;
 }
 
 void BosDsdMainEndTransition(DsdMainWork* work) {
-    BtlObj* q = &work->dsd->body[1];
+    BtlObj* head = &work->dsd->body[1];
 
     FadeToOriginal(FADE_MODE_BLACK, 8);
     FadeSetPaletteExcluded(0, 1);
     FadeSetPaletteExcluded(19, 1);
-    q->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
+    head->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
 }
 
 enum BosDsdAttackStartStep {
@@ -315,13 +315,13 @@ enum BosDsdAttackStartStep {
 };
 
 void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* q = &d->body[1];
-    BtlObj* p = &work->body;
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
+    BtlObj* body = &work->body;
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_ATTACK_START_STEP_BEGIN_TRANSITION:
-        BosDsdMainBeginTransition(work, d->body[0].x, d->body[0].y, d->body[0].z);
+        BosDsdMainBeginTransition(work, dsd->body[0].x, dsd->body[0].y, dsd->body[0].z);
         work->stepTimer = 0;
         work->dsd->stateStep++;
         break;
@@ -336,7 +336,7 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
 
         break;
     case BOS_DSD_ATTACK_START_STEP_LOAD_TILES:
-        switch (d->attackState) {
+        switch (dsd->attackState) {
         case BOS_DSD_STATE_SHOCKWAVE:
         case BOS_DSD_STATE_SUMMON:
             CreateBgTileTransferTask(&work->tasks, 1, 0, 0x2C8, 8, gBosDsdFrame8Tiles);
@@ -357,7 +357,7 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
 
         if (work->stepTimer > 9) {
             work->stepTimer = 0;
-            d->stateStep++;
+            dsd->stateStep++;
         }
 
         break;
@@ -367,26 +367,26 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
         switch (work->dsd->attackState) {
         case BOS_DSD_STATE_SHOCKWAVE:
         case BOS_DSD_STATE_SUMMON:
-            p->x = 0xDC00;
-            p->y = 0x16800;
-            p->z = -0x4000;
+            body->x = 0xDC00;
+            body->y = 0x16800;
+            body->z = -0x4000;
             work->dsd->state = BOS_DSD_STATE_APPROACH;
             break;
         case BOS_DSD_STATE_ENERGY_HOMING:
-            p->x = 0xBC00;
-            p->y = 0x16800;
-            p->z = 0;
+            body->x = 0xBC00;
+            body->y = 0x16800;
+            body->z = 0;
             work->dsd->state = BOS_DSD_STATE_ENERGY_HOMING;
             break;
         case BOS_DSD_STATE_ENERGY_RAIN:
-            p->x = 0xDC00;
-            p->y = 0x16800;
-            p->z = 0;
+            body->x = 0xDC00;
+            body->y = 0x16800;
+            body->z = 0;
             work->dsd->state = BOS_DSD_STATE_ENERGY_RAIN;
             break;
         }
 
-        q->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
+        head->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         break;
     }
 }
@@ -401,13 +401,13 @@ enum BosDsdReturnStep {
 };
 
 void BosDsdMainUpdateReturn(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* q = &d->body[1];
-    BtlObj* p = &work->body;
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
+    BtlObj* body = &work->body;
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_RETURN_STEP_BEGIN_TRANSITION:
-        BosDsdMainBeginTransition(work, d->body[0].x, d->body[0].y, d->body[0].z);
+        BosDsdMainBeginTransition(work, dsd->body[0].x, dsd->body[0].y, dsd->body[0].z);
         work->stepTimer = 0;
         work->dsd->stateStep++;
         break;
@@ -431,11 +431,11 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
         if (work->stepTimer > 4) {
             work->stepTimer = 0;
             BosDsdMainResetPose(work);
-            d->body[0].x = 0xDC00;
-            q->x = 0xDC00;
-            p->x = 0xDC00;
-            p->y = 0x16800;
-            p->z = 0;
+            dsd->body[0].x = 0xDC00;
+            head->x = 0xDC00;
+            body->x = 0xDC00;
+            body->y = 0x16800;
+            body->z = 0;
             work->dsd->stateStep++;
         }
 
@@ -448,7 +448,7 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
 
         break;
     default:
-        d->stateStep = 0;
+        dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_IDLE;
         break;
     }
@@ -468,10 +468,10 @@ enum BosDsdApproachStep {
 };
 
 void BosDsdMainUpdateApproach(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* q = &d->body[1];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_APPROACH_STEP_APPEAR:
         work->dsd->bgFrame = 8;
         work->baseFrame = 8;
@@ -480,12 +480,12 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         work->moveSteps = 30;
         BosDsdSetBgFrame(8, 0x80);
         EnableBg(1);
-        d->body[0].x = 0x13C00;
-        d->body[0].y = 0x16800;
-        d->body[0].z = -0xAC00;
-        q->x = 0x13C00;
-        q->y = 0x16800;
-        q->z = -0xD400;
+        dsd->body[0].x = 0x13C00;
+        dsd->body[0].y = 0x16800;
+        dsd->body[0].z = -0xAC00;
+        head->x = 0x13C00;
+        head->y = 0x16800;
+        head->z = -0xD400;
         work->dsd->stateStep++;
         break;
     case BOS_DSD_APPROACH_STEP_END_TRANSITION:
@@ -498,18 +498,18 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         break;
     case BOS_DSD_APPROACH_STEP_MOVE_IN:
         if ((s16)work->moveSteps > 0) {
-            ApproachValue(&d->body[0].x, 0xDC00, work->moveSteps);
-            ApproachValue(&d->body[0].z, -0x9400, work->moveSteps);
-            ApproachValue(&q->x, 0xDC00, work->moveSteps);
-            ApproachValue(&q->z, -0xBC00, work->moveSteps);
-            BtlMapSetCameraTarget(d->body[0].x, d->body[0].y + d->body[0].z);
+            ApproachValue(&dsd->body[0].x, 0xDC00, work->moveSteps);
+            ApproachValue(&dsd->body[0].z, -0x9400, work->moveSteps);
+            ApproachValue(&head->x, 0xDC00, work->moveSteps);
+            ApproachValue(&head->z, -0xBC00, work->moveSteps);
+            BtlMapSetCameraTarget(dsd->body[0].x, dsd->body[0].y + dsd->body[0].z);
             work->moveSteps--;
         } else {
             work->stepTimer = 0;
             work->dsd->bgFrame = 9;
             BosDsdSetBgFrame(work->dsd->bgFrame, 0x80);
-            q->x = 0xEC00;
-            q->z = -0x9400;
+            head->x = 0xEC00;
+            head->z = -0x9400;
             work->dsd->stateStep++;
         }
 
@@ -521,8 +521,8 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             work->stepTimer = 0;
             work->dsd->bgFrame = 10;
             BosDsdSetBgFrame(work->dsd->bgFrame, 0x80);
-            q->x = 0xFC00;
-            q->z = -0x9400;
+            head->x = 0xFC00;
+            head->z = -0x9400;
             work->dsd->stateStep++;
         }
 
@@ -532,8 +532,8 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
 
         if (work->stepTimer > 1) {
             work->stepTimer = 0;
-            d->body[0].x += 0x100;
-            d->body[0].z += -0x100;
+            dsd->body[0].x += 0x100;
+            dsd->body[0].z += -0x100;
             work->dsd->stateStep++;
         }
 
@@ -543,8 +543,8 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
 
         if (work->stepTimer > 1) {
             work->stepTimer = 0;
-            d->body[0].x += -0x100;
-            d->body[0].z += 0x100;
+            dsd->body[0].x += -0x100;
+            dsd->body[0].z += 0x100;
             work->dsd->stateStep++;
         }
 
@@ -556,8 +556,8 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             work->stepTimer = 0;
             work->dsd->bgFrame = 11;
             BosDsdSetBgFrame(work->dsd->bgFrame, 0x80);
-            q->x = 0xEC00;
-            q->z = -0x9400;
+            head->x = 0xEC00;
+            head->z = -0x9400;
             work->dsd->stateStep++;
         }
 
@@ -569,8 +569,8 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             work->stepTimer = 0;
             work->dsd->bgFrame = 12;
             BosDsdSetBgFrame(work->dsd->bgFrame, 0x80);
-            q->x = 0xB400;
-            q->z = -0x8400;
+            head->x = 0xB400;
+            head->z = -0x8400;
             work->dsd->stateStep++;
         }
 
@@ -585,7 +585,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
 
         break;
     default:
-        d->stateStep = 0;
+        dsd->stateStep = 0;
         work->dsd->state = work->dsd->attackState;
         break;
     }
@@ -617,25 +617,25 @@ enum BosDsdShockwaveStep {
 };
 
 void BosDsdMainUpdateShockwave(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* a = &d->body[1];
-    BtlObj* b = &d->body[2];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
+    BtlObj* hand = &dsd->body[2];
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_SHOCKWAVE_STEP_PUNCH:
         work->dsd->bgFrame = 13;
         work->baseFrame = 13;
         work->dsd->bgFrameTimer = 0;
         work->stepTimer = 0;
         BosDsdSetBgFrame(13, 0x80);
-        b->x = 0x7600;
-        b->y = 0x16800;
-        b->z = 0;
-        b->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
+        hand->x = 0x7600;
+        hand->y = 0x16800;
+        hand->z = 0;
+        hand->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         BtlMapStartShake();
         m4aSongNumStart(SONG_EF_AIRO);
         BgFxStartLexceusGround(0x7800, 0x16800, 0, 0x100);
-        ColliderSetDisabled(&b->collider, 0);
+        ColliderSetDisabled(&hand->collider, 0);
         work->dsd->stateStep++;
         break;
     case BOS_DSD_SHOCKWAVE_STEP_BOB_DOWN:
@@ -644,8 +644,8 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
 
         if (work->stepTimer > 1) {
             work->stepTimer = 0;
-            d->body[0].x += -0x100;
-            d->body[0].z += 0x100;
+            dsd->body[0].x += -0x100;
+            dsd->body[0].z += 0x100;
             work->dsd->stateStep++;
         }
 
@@ -656,8 +656,8 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
 
         if (work->stepTimer > 1) {
             work->stepTimer = 0;
-            d->body[0].x += 0x100;
-            d->body[0].z += -0x100;
+            dsd->body[0].x += 0x100;
+            dsd->body[0].z += -0x100;
             work->dsd->stateStep++;
         }
 
@@ -666,7 +666,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         BosDsdMainLoopFrames(work);
 
         if (!BgFxIsActive()) {
-            ClearBtlObjActionFlags(a);
+            ClearBtlObjActionFlags(head);
             work->stepTimer = 0;
             work->dsd->stateStep++;
         }
@@ -684,24 +684,24 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         break;
     case BOS_DSD_SHOCKWAVE_STEP_LIFT:
         BosDsdSetBgFrame(8, 0x80);
-        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
-        ColliderSetDisabled(&b->collider, 1);
+        hand->flags |= BTLOBJ_FLAG_UNHITTABLE;
+        ColliderSetDisabled(&hand->collider, 1);
         work->dsd->stateStep++;
         break;
     default:
-        d->stateStep = 0;
+        dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
 }
 
 void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* a = &d->body[1];
-    BtlObj* b = &d->body[2];
-    BtlObj* e;
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
+    BtlObj* hand = &dsd->body[2];
+    BtlObj* obj;
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_SUMMON_STEP_PLUNGE:
         work->dsd->bgFrame = 21;
         work->baseFrame = 21;
@@ -717,7 +717,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         if (++work->dsd->bgFrameTimer >= gBosDsdFrameDurations[work->dsd->bgFrame]) {
             work->dsd->bgFrameTimer = 0;
             work->dsd->bgFrame++;
-            a->z += 0x600;
+            head->z += 0x600;
 
             if (work->dsd->bgFrame > work->baseFrame + 6) {
                 work->dsd->bgFrame = work->baseFrame + 6;
@@ -733,11 +733,11 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         work->baseFrame = 28;
         work->dsd->bgFrameTimer = 0;
         work->stepTimer = 0;
-        ClearBtlObjActionFlags(a);
-        b->x = 0x9000;
-        b->y = 0x16800;
-        b->z = 0;
-        b->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
+        ClearBtlObjActionFlags(head);
+        hand->x = 0x9000;
+        hand->y = 0x16800;
+        hand->z = 0;
+        hand->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         work->dsd->stateStep++;
         break;
     case BOS_DSD_SUMMON_STEP_SPAWN_SHADOWS:
@@ -764,20 +764,20 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         work->baseFrame = 27;
         work->dsd->bgFrameTimer = 0;
         work->stepTimer = 0;
-        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
+        hand->flags |= BTLOBJ_FLAG_UNHITTABLE;
         work->dsd->stateStep++;
         break;
     case BOS_DSD_SUMMON_STEP_CLOSE:
         if (++work->dsd->bgFrameTimer >= gBosDsdFrameDurations[work->dsd->bgFrame]) {
             work->dsd->bgFrameTimer = 0;
             work->dsd->bgFrame--;
-            a->z -= 0x600;
+            head->z -= 0x600;
 
             if (work->dsd->bgFrame < work->baseFrame - 6) {
                 work->dsd->bgFrame = work->baseFrame - 6;
 
                 if (gBtlWork->enemyTileCount <= 0 && (work->dsd->flags & DSD_FLAG_PLATFORM_ACTIVE) == 0) {
-                    DropGimmickCard(0, d->body[0].x, d->body[0].y, d->body[0].z);
+                    DropGimmickCard(0, dsd->body[0].x, dsd->body[0].y, dsd->body[0].z);
                 }
 
                 work->dsd->stateStep++;
@@ -790,21 +790,21 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
     case BOS_DSD_SUMMON_STEP_WARP_SHADOWS:
         work->stepTimer = 0;
         BosDsdSetBgFrame(8, 0x80);
-        e = ListPoolFirst(&gBtlWork->pool);
+        obj = ListPoolFirst(&gBtlWork->pool);
 
-        while (e != NULL) {
-            if (e->kind == 0) {
-                e->flags |= BTLOBJ_FLAG_WARP_PENDING;
+        while (obj != NULL) {
+            if (obj->kind == 0) {
+                obj->flags |= BTLOBJ_FLAG_WARP_PENDING;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
             }
 
-            e = ListPoolNext(&e->node);
+            obj = ListPoolNext(&obj->node);
         }
 
         work->dsd->stateStep++;
         break;
     default:
-        d->stateStep = 0;
+        dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
@@ -837,10 +837,10 @@ enum BosDsdEnergyHomingStep {
 };
 
 void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* q = &d->body[1];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_ENERGY_HOMING_STEP_APPEAR:
         work->dsd->bgFrame = 36;
         work->baseFrame = 36;
@@ -848,8 +848,8 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         work->moveSteps = 30;
         work->spriteVisible = 0;
         BosDsdSetBgMap(work->dsd->bgFrame);
-        q->x = 0xDC00;
-        q->z = -0x6000;
+        head->x = 0xDC00;
+        head->z = -0x6000;
         work->dsd->stateStep++;
         break;
     case BOS_DSD_ENERGY_HOMING_STEP_END_TRANSITION:
@@ -920,11 +920,11 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         break;
     case BOS_DSD_ENERGY_HOMING_STEP_END_ACTION:
         BosDsdMainLoopMapFrames(work);
-        ClearBtlObjActionFlags(q);
+        ClearBtlObjActionFlags(head);
         work->dsd->stateStep++;
         break;
     default:
-        d->stateStep = 0;
+        dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
@@ -940,10 +940,10 @@ enum BosDsdEnergyRainStep {
 };
 
 void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* q = &d->body[1];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_ENERGY_RAIN_STEP_APPEAR:
         work->dsd->bgFrame = 41;
         work->baseFrame = 41;
@@ -952,8 +952,8 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         work->spriteVisible = 0;
         BosDsdSetBgMap(work->dsd->bgFrame);
         work->stepTimer = 0;
-        q->x = 0xE400;
-        q->z = -0x5C00;
+        head->x = 0xE400;
+        head->z = -0x5C00;
         work->dsd->stateStep++;
         break;
     case BOS_DSD_ENERGY_RAIN_STEP_END_TRANSITION:
@@ -982,11 +982,11 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         break;
     case BOS_DSD_ENERGY_RAIN_STEP_END_ACTION:
         BosDsdMainLoopMapFrames(work);
-        ClearBtlObjActionFlags(q);
+        ClearBtlObjActionFlags(head);
         work->dsd->stateStep++;
         break;
     default:
-        d->stateStep = 0;
+        dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
         break;
     }
@@ -996,24 +996,24 @@ void BosDsdMainUpdateState10(DsdMainWork* work) {
 }
 
 void BosDsdMainUpdateBreak(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* a = &d->body[1];
-    BtlObj* b = &d->body[2];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
+    BtlObj* hand = &dsd->body[2];
 
-    if (d->lastState == BOS_DSD_STATE_ATTACK_START || d->lastState == BOS_DSD_STATE_APPROACH) {
-        ClearBtlObjActionFlags(a);
-        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
-        ColliderSetDisabled(&b->collider, 1);
+    if (dsd->lastState == BOS_DSD_STATE_ATTACK_START || dsd->lastState == BOS_DSD_STATE_APPROACH) {
+        ClearBtlObjActionFlags(head);
+        hand->flags |= BTLOBJ_FLAG_UNHITTABLE;
+        ColliderSetDisabled(&hand->collider, 1);
         work->dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
-    } else if (d->stateStep > 60) {
-        ClearBtlObjActionFlags(a);
-        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
-        ColliderSetDisabled(&b->collider, 1);
+    } else if (dsd->stateStep > 60) {
+        ClearBtlObjActionFlags(head);
+        hand->flags |= BTLOBJ_FLAG_UNHITTABLE;
+        ColliderSetDisabled(&hand->collider, 1);
         work->dsd->stateStep = 0;
         work->dsd->state = BOS_DSD_STATE_RETURN;
     } else {
-        d->stateStep++;
+        dsd->stateStep++;
     }
 }
 
@@ -1030,44 +1030,44 @@ enum BosDsdDefeatStep {
 };
 
 void BosDsdMainUpdateDefeat(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* a = &d->body[1];
-    BtlObj* b = &d->body[2];
-    BtlObj* c = &work->body;
-    BtlObj* e;
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
+    BtlObj* hand = &dsd->body[2];
+    BtlObj* body = &work->body;
+    BtlObj* obj;
     CharaObjParam param;
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_DEFEAT_STEP_WARP_SHADOWS:
-        e = ListPoolFirst(&gBtlWork->pool);
+        obj = ListPoolFirst(&gBtlWork->pool);
 
-        while (e != NULL) {
-            if (e->kind == 0) {
-                e->flags |= BTLOBJ_FLAG_WARP_PENDING;
+        while (obj != NULL) {
+            if (obj->kind == 0) {
+                obj->flags |= BTLOBJ_FLAG_WARP_PENDING;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
             }
 
-            e = ListPoolNext(&e->node);
+            obj = ListPoolNext(&obj->node);
         }
 
         work->dsd->stateStep++;
         break;
     case BOS_DSD_DEFEAT_STEP_BEGIN_DEFEAT:
-        BeginBossDefeat(a);
-        ColliderSetDisabled(&a->collider, 1);
-        ColliderSetDisabled(&b->collider, 1);
-        ColliderSetDisabled(&c->collider, 1);
+        BeginBossDefeat(head);
+        ColliderSetDisabled(&head->collider, 1);
+        ColliderSetDisabled(&hand->collider, 1);
+        ColliderSetDisabled(&body->collider, 1);
         FadeSetPaletteExcluded(0, 0);
         FadeSetPaletteExcluded(19, 0);
         FadeToAmount(FADE_MODE_BLACK, 20, 8);
-        BgFxStartDsdTransition(a->x - 0x1400, a->y, a->z - 0xA00, 0x100);
+        BgFxStartDsdTransition(head->x - 0x1400, head->y, head->z - 0xA00, 0x100);
         m4aSongNumStart(SONG_SND_721);
         work->stepTimer = 0;
         work->dsd->stateStep++;
-        BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
+        BtlMapSetCameraTarget(dsd->body[0].x - 0x1400, dsd->body[0].y + dsd->body[0].z + 0x3000);
         break;
     case BOS_DSD_DEFEAT_STEP_HIDE:
-        BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
+        BtlMapSetCameraTarget(dsd->body[0].x - 0x1400, dsd->body[0].y + dsd->body[0].z + 0x3000);
         work->stepTimer++;
 
         if (work->stepTimer > 11) {
@@ -1080,11 +1080,11 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
     case BOS_DSD_DEFEAT_STEP_LOAD_FRAME:
         BosDsdSetBgFrame(36, 0xE0);
         EnableBg(1);
-        BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
+        BtlMapSetCameraTarget(dsd->body[0].x - 0x1400, dsd->body[0].y + dsd->body[0].z + 0x3000);
         work->dsd->stateStep++;
         break;
     case BOS_DSD_DEFEAT_STEP_END_TRANSITION:
-        BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
+        BtlMapSetCameraTarget(dsd->body[0].x - 0x1400, dsd->body[0].y + dsd->body[0].z + 0x3000);
 
         if (BgFxIsActive()) {
             break;
@@ -1096,11 +1096,11 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         work->dsd->stateStep++;
         break;
     case BOS_DSD_DEFEAT_STEP_DELAY:
-        BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
+        BtlMapSetCameraTarget(dsd->body[0].x - 0x1400, dsd->body[0].y + dsd->body[0].z + 0x3000);
         work->dsd->stateStep++;
         break;
     case BOS_DSD_DEFEAT_STEP_START_DISSOLVE:
-        BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
+        BtlMapSetCameraTarget(dsd->body[0].x - 0x1400, dsd->body[0].y + dsd->body[0].z + 0x3000);
         param.tilesAddr = 0;
         param.tileCount = 0;
         param.tilesAddr2 = 0;
@@ -1113,30 +1113,30 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         param.tileCount4 = 0xE0;
         param.paletteAddr2 = PLTT;
         param.paletteSize2 = 32;
-        param.x = d->body[0].x - 0x1400;
-        param.y = d->body[0].y;
-        param.z = d->body[0].z + 0x3000;
+        param.x = dsd->body[0].x - 0x1400;
+        param.y = dsd->body[0].y;
+        param.z = dsd->body[0].z + 0x3000;
         param.callback = NULL;
-        param.prizeObj = a;
+        param.prizeObj = head;
         param.flags = 1;
         CharaObjInitDefeat(&param);
         work->dsd->stateStep++;
         break;
     case BOS_DSD_DEFEAT_STEP_DISSOLVE:
         if (!CharaObjUpdateDefeat()) {
-            d->body[0].x = 300;
-            d->body[0].y = 0;
-            d->body[0].z = 0;
+            dsd->body[0].x = 300;
+            dsd->body[0].y = 0;
+            dsd->body[0].z = 0;
             ScrollBgMapTo(1, ((gBtlWork->viewX - 300) >> 8) + 100, (gBtlWork->viewY >> 8) + 280);
             EndBossDefeat();
             work->dsd->stateStep++;
         } else {
-            BtlMapSetCameraTarget(d->body[0].x - 0x1800, d->body[0].y + d->body[0].z + 0x3000);
+            BtlMapSetCameraTarget(dsd->body[0].x - 0x1800, dsd->body[0].y + dsd->body[0].z + 0x3000);
         }
 
         break;
     default:
-        d->flags |= DSD_FLAG_DEFEAT_DONE;
+        dsd->flags |= DSD_FLAG_DEFEAT_DONE;
         break;
     }
 }
@@ -1146,11 +1146,11 @@ void BosDsdMainUpdateEventIdle(DsdMainWork* work) {
 }
 
 void BosDsdMainChooseAttack(DsdMainWork* work) {
-    DsdWork* d = work->dsd;
-    BtlObj* a = &d->body[1];
+    DsdWork* dsd = work->dsd;
+    BtlObj* head = &dsd->body[1];
 
-    if (a->hp < a->maxHp / 3) {
-        d->hpPhase = BOS_DSD_HP_PHASE_LOW;
+    if (head->hp < head->maxHp / 3) {
+        dsd->hpPhase = BOS_DSD_HP_PHASE_LOW;
 
         if (GetRandom() % 100 <= 9) {
             RequestBossCardValue(1);
@@ -1159,8 +1159,8 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
         } else {
             RequestBossCardValue(GetRandom() % 3 + 5);
         }
-    } else if (a->hp < a->maxHp / 3 * 2) {
-        d->hpPhase = BOS_DSD_HP_PHASE_MID;
+    } else if (head->hp < head->maxHp / 3 * 2) {
+        dsd->hpPhase = BOS_DSD_HP_PHASE_MID;
 
         if (GetRandom() % 100 <= 29) {
             RequestBossCardValue(GetRandom() % 2 + 8);
@@ -1168,7 +1168,7 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
             RequestBossCardValue(GetRandom() % 3 + 4);
         }
     } else {
-        d->hpPhase = BOS_DSD_HP_PHASE_HIGH;
+        dsd->hpPhase = BOS_DSD_HP_PHASE_HIGH;
 
         if (GetRandom() % 100 <= 59) {
             RequestBossCardValue(GetRandom() % 3 + 7);
@@ -1201,7 +1201,7 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
         work->dsd->attackCycle = 0;
     }
 
-    RequestEnemyCardUse(a);
+    RequestEnemyCardUse(head);
 }
 
 void task_bos_dsd_map_0() {

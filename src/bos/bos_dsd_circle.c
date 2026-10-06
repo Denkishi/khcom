@@ -38,9 +38,9 @@ void task_bos_dsd_circle_0(DsdCircleWork* work, void* arg) {
 }
 
 u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
-    DsdWork* d = work->dsd;
+    DsdWork* dsd = work->dsd;
 
-    if (d->state == BOS_DSD_STATE_CARD_BROKEN || d->state == BOS_DSD_STATE_RETURN) {
+    if (dsd->state == BOS_DSD_STATE_CARD_BROKEN || dsd->state == BOS_DSD_STATE_RETURN) {
         if (work->endTimer > 66) {
             return 0;
         }
@@ -49,7 +49,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
         return 1;
     }
 
-    switch (d->stateStep) {
+    switch (dsd->stateStep) {
     case BOS_DSD_SUMMON_STEP_OPEN:
         work->frame = work->dsd->bgFrame - 21;
         work->gfx = gBosDsdCircleFrames[work->frame];
@@ -216,7 +216,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
 void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
     ObjAffine* affine;
     s32 scale;
-    s32 flag;
+    s32 doubleSize;
     s16 x;
     s16 y;
 
@@ -230,13 +230,13 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
                 scale = 0x80;
             }
 
-            flag = 0;
+            doubleSize = 0;
 
             if (scale > 0x100) {
-                flag = 1;
+                doubleSize = 1;
             }
 
-            affine = AllocObjAffine(0, scale, scale, flag);
+            affine = AllocObjAffine(0, scale, scale, doubleSize);
         }
 
         WorldToScreen(&x, &y, work->x, work->y, 0);
@@ -265,27 +265,27 @@ void BosDsdEnergy1UpdateArc(DsdEnergy1Work* work) {
 }
 
 void BosDsdEnergy1UpdateHoming(DsdEnergy1Work* work) {
-    s16 d;
+    s16 turn;
 
     if (work->retargetTimer > 0) {
         work->retargetTimer = 0;
         work->targetAngle = GetAngle(work->x, work->z, gBtlWork->targetX, gBtlWork->targetZ);
 
         if (work->targetAngle >= work->angle) {
-            d = work->targetAngle - work->angle;
+            turn = work->targetAngle - work->angle;
 
-            if (d > 10) {
-                d = 10;
+            if (turn > 10) {
+                turn = 10;
             }
         } else {
-            d = work->targetAngle - work->angle;
+            turn = work->targetAngle - work->angle;
 
-            if (d < -10) {
-                d = -10;
+            if (turn < -10) {
+                turn = -10;
             }
         }
 
-        work->angle += d;
+        work->angle += turn;
         work->vx = gSineTable[work->angle] * work->speed >> 8;
         work->vy = 0;
         work->vz = -gSineTable[work->angle + 0x40] * work->speed >> 8;
@@ -346,7 +346,7 @@ void task_bos_dsd_energy2_0(DsdEnergy2Work* work, void* arg) {
 }
 
 u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
-    BtlObj* p;
+    BtlObj* actor;
 
     switch (work->state) {
     case BOS_DSD_ENERGY2_STATE_CHARGE:
@@ -393,10 +393,10 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         work->state++;
         break;
     case BOS_DSD_ENERGY2_STATE_SPAWN_DROP:
-        work->x = (p = gBtlWork->actor)->x + (-0x4000 + GetRandom() % 0x8001);
+        work->x = (actor = gBtlWork->actor)->x + (-0x4000 + GetRandom() % 0x8001);
 
         if (work->x < -0xFFF || work->x > 0x10FFF) {
-            work->x = p->x;
+            work->x = actor->x;
         }
 
         work->y = gBtlWork->actor->y - 0x2400 + GetRandom() % 0x4001;
@@ -467,7 +467,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
 void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
     ObjAffine* affine;
     s32 scale;
-    s32 flag;
+    s32 doubleSize;
     s16 x;
     s16 y;
 
@@ -481,13 +481,13 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
                 scale = 0x80;
             }
 
-            flag = 0;
+            doubleSize = 0;
 
             if (scale > 0x100) {
-                flag = 1;
+                doubleSize = 1;
             }
 
-            affine = AllocObjAffine(0, scale, scale, flag);
+            affine = AllocObjAffine(0, scale, scale, doubleSize);
         }
 
         WorldToScreen(&x, &y, work->x + 0x100, work->y, 0);

@@ -1434,10 +1434,10 @@ s32 MapGmkIsPaletteUnused(void* palette) {
     return 1;
 }
 
-s32 MapGmkNeedsTiles(u8 flag, const void* tiles) {
+s32 MapGmkNeedsTiles(u8 ownTiles, const void* tiles) {
     s32 i;
 
-    if (flag) {
+    if (ownTiles) {
         return 1;
     }
 

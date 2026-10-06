@@ -50,7 +50,7 @@ void Task_MapEnm03_2(MapEnmWork* work);
 void Task_MapEnm03_3(MapEnmWork* work);
 void MapEnm04CheckOffscreen(MapEnm01Work* work);
 void MapEnm04UpdateHover(MapEnmWork* work, u8 moving);
-void MapEnm04PickTarget(MapEnmWork* work, u8 flag);
+void MapEnm04PickTarget(MapEnmWork* work, u8 atPlayer);
 void MapEnm04Idle(MapEnmWork* work);
 void MapEnm04Fly(MapEnmWork* work);
 void MapEnm04Hit(MapEnmWork* work);

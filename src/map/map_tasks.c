@@ -1318,8 +1318,8 @@ void MapEnm04UpdateHover(MapEnmWork* work, u8 moving) {
     }
 }
 
-void MapEnm04PickTarget(MapEnmWork* work, u8 flag) {
-    if (flag) {
+void MapEnm04PickTarget(MapEnmWork* work, u8 atPlayer) {
+    if (atPlayer) {
         work->targetX = gFieldState->actor.fieldPosition.x;
         work->targetY = gFieldState->actor.fieldPosition.y;
         work->targetZ = gFieldState->actor.fieldPosition.z - 0x1000;

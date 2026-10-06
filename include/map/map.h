@@ -1016,7 +1016,7 @@ void NewGameSlotMenuSelectSlot(u8 slot);
 u8 GetRandomMapGmkIndex(u8 slot);
 u8 MapGmkFindSpot(FldPos* pos, u8 spotFinder);
 s32 MapGmkIsPaletteUnused(void* palette);
-s32 MapGmkNeedsTiles(u8 flag, const void* tiles);
+s32 MapGmkNeedsTiles(u8 ownTiles, const void* tiles);
 void MapGmkReserveJump();
 void MapGmkPlaceGmk01();
 void MapGmkPlaceGmk04();

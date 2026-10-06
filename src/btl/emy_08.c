@@ -55,6 +55,15 @@ void task_emy_08_0(Emy08Work* work, void* obj) {
     work->flags = 0;
 }
 
+enum Emy08State {
+    EMY08_STATE_LUNGE = 18,
+    EMY08_STATE_GAS,
+    EMY08_STATE_LUNGE_HIT,
+    EMY08_STATE_LUNGE_MISS,
+    EMY08_STATE_HARDEN,
+    EMY08_STATE_SOFTEN
+};
+
 u8 task_emy_08_1(Emy08Work* work) {
     Emy08Work* w;
     BtlObj* act;
@@ -70,28 +79,28 @@ u8 task_emy_08_1(Emy08Work* work) {
 
         switch (r & 1) {
         case 0:
-            work->base.state = 0x12;
+            work->base.state = EMY08_STATE_LUNGE;
             break;
         case 1:
-            work->base.state = 0x13;
+            work->base.state = EMY08_STATE_GAS;
             break;
         }
     }
 
     switch (work->base.state) {
-    case 0:
+    case EMY_STATE_IDLE:
         if (GetRandom() % 100 == 0) {
             if (w->flags & EMY08_FLAG_HARDENED) {
-                work->base.state = 23;
+                work->base.state = EMY08_STATE_SOFTEN;
             } else {
-                work->base.state = 22;
+                work->base.state = EMY08_STATE_HARDEN;
             }
 
             work->base.stateTimer = 0;
         }
 
         break;
-    case 22:
+    case EMY08_STATE_HARDEN:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 6) {
@@ -105,7 +114,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
 
         break;
-    case 23:
+    case EMY08_STATE_SOFTEN:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 4) {
@@ -119,7 +128,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
 
         break;
-    case 18:
+    case EMY08_STATE_LUNGE:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -127,9 +136,9 @@ u8 task_emy_08_1(Emy08Work* work) {
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
 
             if (w->flags & EMY08_FLAG_ATTACK_HIT) {
-                work->base.state = 20;
+                work->base.state = EMY08_STATE_LUNGE_HIT;
             } else {
-                work->base.state = 21;
+                work->base.state = EMY08_STATE_LUNGE_MISS;
             }
         } else if (work->base.anim.timer == 0) {
             dx = 0;
@@ -185,7 +194,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
 
         break;
-    case 20:
+    case EMY08_STATE_LUNGE_HIT:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -197,7 +206,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
 
         break;
-    case 21:
+    case EMY08_STATE_LUNGE_MISS:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -209,7 +218,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
 
         break;
-    case 19:
+    case EMY08_STATE_GAS:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (work->base.anim.timer == 0

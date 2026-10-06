@@ -41,8 +41,13 @@ TaskDesc gTaskDescEmy02 = {
 
 void task_emy_02_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy02Def, obj);
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy02State {
+    EMY02_STATE_BLIZZARD = 18,
+    EMY02_STATE_BLIZZARA
+};
 
 u8 task_emy_02_1(EmyWork* work) {
     EmyWork* w;
@@ -58,16 +63,16 @@ u8 task_emy_02_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 0x12;
+            work->state = EMY02_STATE_BLIZZARD;
             break;
         case 1:
-            work->state = 0x13;
+            work->state = EMY02_STATE_BLIZZARA;
             break;
         }
     }
 
     switch (work->state) {
-    case 0x12: {
+    case EMY02_STATE_BLIZZARD: {
         s32 y;
 
         AnimChangeWithDef(sEmy02AnimDefs, &w->anim, 0, 0, w->tiles);
@@ -96,7 +101,7 @@ u8 task_emy_02_1(EmyWork* work) {
 
         break;
     }
-    case 0x13: {
+    case EMY02_STATE_BLIZZARA: {
         s32 y;
 
         AnimChangeWithDef(sEmy02AnimDefs, &w->anim, 1, 0, w->tiles);

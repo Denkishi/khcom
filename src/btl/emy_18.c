@@ -46,8 +46,16 @@ TaskDesc gTaskDescEmy18 = {
 void task_emy_18_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy18Def, obj);
     work->actor.z = (GetRandom() % 0x1001) - 0x3000;
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy18State {
+    EMY18_STATE_DIVE_LUNGE = 18,
+    EMY18_STATE_RISING_LUNGE,
+    EMY18_STATE_FLY_START,
+    EMY18_STATE_FLY_STOP,
+    EMY18_STATE_FLY
+};
 
 u8 task_emy_18_1(Emy18Work* work) {
     Emy18Work* w;
@@ -62,23 +70,23 @@ u8 task_emy_18_1(Emy18Work* work) {
 
         switch (r & 1) {
         case 0:
-            work->base.state = 18;
+            work->base.state = EMY18_STATE_DIVE_LUNGE;
             break;
         case 1:
-            work->base.state = 19;
+            work->base.state = EMY18_STATE_RISING_LUNGE;
             break;
         }
 
         w->hitFrame = 0xEFFF;
     }
 
-    if (work->base.state == 8) {
-        work->base.state = 20;
+    if (work->base.state == EMY_STATE_HOVER_MOVE) {
+        work->base.state = EMY18_STATE_FLY_START;
         work->base.stateTimer = 0;
     }
 
     switch (work->base.state) {
-    case 20:
+    case EMY18_STATE_FLY_START:
         AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         work->base.vz = 0;
 
@@ -93,11 +101,11 @@ u8 task_emy_18_1(Emy18Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 22;
+            work->base.state = EMY18_STATE_FLY;
         }
 
         break;
-    case 22:
+    case EMY18_STATE_FLY:
         work->base.vz = 0;
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
@@ -124,7 +132,7 @@ u8 task_emy_18_1(Emy18Work* work) {
                     (act->y - work->base.y >= 0
                         ? act->y - work->base.y <= 0xFFF
                         : work->base.y - act->y <= 0xFFF))) {
-                work->base.state = 21;
+                work->base.state = EMY18_STATE_FLY_STOP;
                 work->base.stateTimer = 0;
                 break;
             }
@@ -133,7 +141,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         }
 
         break;
-    case 21:
+    case EMY18_STATE_FLY_STOP:
         AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         work->base.vz = 0;
         act->x += gSineTable[work->base.angle] * work->base.speed >> 8;
@@ -146,11 +154,11 @@ u8 task_emy_18_1(Emy18Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 7;
+            work->base.state = EMY_STATE_HOVER;
         }
 
         break;
-    case 18:
+    case EMY18_STATE_DIVE_LUNGE:
         AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer <= 29) {
@@ -166,7 +174,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         }
 
         break;
-    case 19:
+    case EMY18_STATE_RISING_LUNGE:
         AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (work->base.anim.timer == 0) {

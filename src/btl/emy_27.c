@@ -47,6 +47,11 @@ void task_emy_27_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy27Def, obj);
 }
 
+enum Emy27State {
+    EMY27_STATE_LUNGE = 18,
+    EMY27_STATE_CHASE_SLASH
+};
+
 u8 task_emy_27_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
@@ -64,14 +69,14 @@ u8 task_emy_27_1(EmyWork* work) {
         d = act->y - y;
 
         if (d >= 0 ? d <= 0xFFF : y - act->y <= 0xFFF) {
-            work->state = 0x12;
+            work->state = EMY27_STATE_LUNGE;
         } else {
-            work->state = 0x13;
+            work->state = EMY27_STATE_CHASE_SLASH;
         }
     }
 
     switch (work->state) {
-    case 0x12:
+    case EMY27_STATE_LUNGE:
         AnimChangeWithDef(sEmy27AnimDefs, &w->anim, 0, 0, w->tiles);
 
         if (AnimGetFrame(&work->anim) == 1 && work->anim.timer == 0) {
@@ -86,7 +91,7 @@ u8 task_emy_27_1(EmyWork* work) {
 
         EmyLungeAttack(work, 0x3D, 6, 0x14, 0xC8, 0x20, SONG_BTL_MON_SWORD04, 0x28, 0, 0x14);
         break;
-    case 0x13:
+    case EMY27_STATE_CHASE_SLASH:
         AnimChangeWithDef(sEmy27AnimDefs, &w->anim, 1, ANIM_FLAG_LOOP, w->tiles);
         GetEnemyTargetPosition(act, &tx, &ty, NULL);
 

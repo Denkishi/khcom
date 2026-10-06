@@ -46,8 +46,13 @@ TaskDesc gTaskDescEmy06 = {
 
 void task_emy_06_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy06Def, obj);
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy06State {
+    EMY06_STATE_HOMING_CHARGE = 18,
+    EMY06_STATE_STRAIGHT_DASH
+};
 
 u8 task_emy_06_1(Emy06Work* work) {
     Emy06Work* w;
@@ -71,16 +76,16 @@ u8 task_emy_06_1(Emy06Work* work) {
         d = act->y - pos;
 
         if (d >= 0 ? d <= 0xFFF : pos - act->y <= 0xFFF) {
-            work->base.state = 0x13;
+            work->base.state = EMY06_STATE_STRAIGHT_DASH;
         } else {
-            work->base.state = 0x12;
+            work->base.state = EMY06_STATE_HOMING_CHARGE;
         }
 
         w->speed = 0;
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY06_STATE_HOMING_CHARGE:
         AnimChangeWithDef(sEmy06AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
         p = &gBtlWork->targetZ;
@@ -113,7 +118,7 @@ u8 task_emy_06_1(Emy06Work* work) {
         }
 
         break;
-    case 0x13:
+    case EMY06_STATE_STRAIGHT_DASH:
         AnimChangeWithDef(sEmy06AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         work->base.vz = 0;
         p = &gBtlWork->targetZ;

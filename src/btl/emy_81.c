@@ -54,6 +54,14 @@ static inline s32 EmyFacingX(BtlObj* actor, s32 offset) {
     return actor->flags & BTLOBJ_FLAG_FACING_LEFT ? actor->x - offset : actor->x + offset;
 }
 
+enum Emy81State {
+    EMY81_STATE_LEAP_ATTACK = 18,
+    EMY81_STATE_DASH_ATTACK,
+    EMY81_STATE_TAKEOFF,
+    EMY81_STATE_FLY_OVER,
+    EMY81_STATE_LAND
+};
+
 u8 task_emy_81_1(Emy81Work* work) {
     Emy81Work* w;
     BtlObj* act;
@@ -74,17 +82,17 @@ u8 task_emy_81_1(Emy81Work* work) {
 
         switch (r & 1) {
         case 0:
-            work->base.state = 18;
+            work->base.state = EMY81_STATE_LEAP_ATTACK;
             break;
         case 1:
-            work->base.state = 19;
+            work->base.state = EMY81_STATE_DASH_ATTACK;
             break;
         }
     }
 
     switch (work->base.state) {
-    case 0:
-    case 4:
+    case EMY_STATE_IDLE:
+    case EMY_STATE_WALK:
         idleFrame = AnimGetGfxIndex(&work->base.anim);
 
         if ((idleFrame == 2 || idleFrame == 6) && work->base.anim.timer == 0) {
@@ -92,13 +100,13 @@ u8 task_emy_81_1(Emy81Work* work) {
         }
 
         if (GetRandom() % 200 == 0) {
-            work->base.state = 20;
+            work->base.state = EMY81_STATE_TAKEOFF;
             work->base.stateTimer = 0;
             w->speedX = 0;
         }
 
         break;
-    case 20:
+    case EMY81_STATE_TAKEOFF:
         AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
 
         d = (-0x2800 - act->z) >> 4;
@@ -113,13 +121,13 @@ u8 task_emy_81_1(Emy81Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 21;
+            work->base.state = EMY81_STATE_FLY_OVER;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 21:
+    case EMY81_STATE_FLY_OVER:
         if (work->base.stateTimer == 0) {
             GetEnemyTargetPosition(act, &a, &b, NULL);
             AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 3, ANIM_FLAG_LOOP, w->base.tiles);
@@ -173,14 +181,14 @@ u8 task_emy_81_1(Emy81Work* work) {
                     && (w->targetY - act->y < 0
                         ? act->y - w->targetY
                         : w->targetY - act->y) <= 0x7FF)) {
-            work->base.state = 22;
+            work->base.state = EMY81_STATE_LAND;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case EMY81_STATE_LAND:
         AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
         work->base.vz -= 25;
 
@@ -190,7 +198,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         }
 
         break;
-    case 18:
+    case EMY81_STATE_LEAP_ATTACK:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         }
@@ -247,7 +255,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         }
 
         break;
-    case 19:
+    case EMY81_STATE_DASH_ATTACK:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         }

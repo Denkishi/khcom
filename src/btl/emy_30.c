@@ -52,8 +52,20 @@ TaskDesc gTaskDescEmy30 = {
 void task_emy_30_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy30Def, obj);
     work->actor.z = (GetRandom() % 0x1001) - 0x3000;
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy30State {
+    EMY30_STATE_BITE_APPROACH = 18,
+    EMY30_STATE_BITE,
+    EMY30_STATE_BITE_END,
+    EMY30_STATE_CHARGE_WINDUP,
+    EMY30_STATE_CHARGE,
+    EMY30_STATE_CHARGE_END,
+    EMY30_STATE_FLY_START,
+    EMY30_STATE_FLY_STOP,
+    EMY30_STATE_FLY
+};
 
 u8 task_emy_30_1(EmyWork* work) {
     EmyWork* w;
@@ -72,21 +84,21 @@ u8 task_emy_30_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 18;
+            work->state = EMY30_STATE_BITE_APPROACH;
             break;
         case 1:
-            work->state = 21;
+            work->state = EMY30_STATE_CHARGE_WINDUP;
             break;
         }
     }
 
-    if (work->state == 8) {
-        work->state = 24;
+    if (work->state == EMY_STATE_HOVER_MOVE) {
+        work->state = EMY30_STATE_FLY_START;
         work->stateTimer = 0;
     }
 
     switch (work->state) {
-    case 24:
+    case EMY30_STATE_FLY_START:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 0, 0, w->tiles);
         work->vz = 0;
 
@@ -99,11 +111,11 @@ u8 task_emy_30_1(EmyWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            work->state = 26;
+            work->state = EMY30_STATE_FLY;
         }
 
         break;
-    case 26:
+    case EMY30_STATE_FLY:
         work->vz = 0;
         AnimChangeWithDef(w->def->animDef, &w->anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->tiles);
 
@@ -127,7 +139,7 @@ u8 task_emy_30_1(EmyWork* work) {
                     && (act->y - work->y >= 0
                         ? act->y - work->y
                         : work->y - act->y) <= 0xFFF)) {
-                work->state = 25;
+                work->state = EMY30_STATE_FLY_STOP;
                 work->stateTimer = 0;
             } else {
                 work->stateTimer++;
@@ -135,7 +147,7 @@ u8 task_emy_30_1(EmyWork* work) {
         }
 
         break;
-    case 25:
+    case EMY30_STATE_FLY_STOP:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 1, 0, w->tiles);
         work->vz = 0;
         act->x += gSineTable[work->angle] * work->speed >> 8;
@@ -148,11 +160,11 @@ u8 task_emy_30_1(EmyWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
-            work->state = 7;
+            work->state = EMY_STATE_HOVER;
         }
 
         break;
-    case 18: {
+    case EMY30_STATE_BITE_APPROACH: {
     s32 currentX;
     s32 targetX;
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 2, 0, w->tiles);
@@ -174,13 +186,13 @@ u8 task_emy_30_1(EmyWork* work) {
         act->x = currentX + ((targetX - d) >> 3);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 19;
+            work->state = EMY30_STATE_BITE;
             work->stateTimer = 0;
         }
 
         break;
     }
-    case 19: {
+    case EMY30_STATE_BITE: {
     s32 currentX;
     s32 targetX;
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 3, ANIM_FLAG_LOOP, w->tiles);
@@ -217,14 +229,14 @@ u8 task_emy_30_1(EmyWork* work) {
 
         if (work->stateTimer > 100) {
             work->stateTimer = 0;
-            work->state = 20;
+            work->state = EMY30_STATE_BITE_END;
         } else {
             work->stateTimer++;
         }
 
         break;
     }
-    case 20:
+    case EMY30_STATE_BITE_END:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 4, 0, w->tiles);
         work->vz = 0;
 
@@ -233,7 +245,7 @@ u8 task_emy_30_1(EmyWork* work) {
         }
 
         break;
-    case 21:
+    case EMY30_STATE_CHARGE_WINDUP:
         work->vz = 0;
 
         if (work->stateTimer == 0) {
@@ -254,14 +266,14 @@ u8 task_emy_30_1(EmyWork* work) {
 
         if (AnimIsFinished(&work->anim) && (work->flags & EMY_FLAG_AT_FIELD_EDGE)) {
             work->stateTimer = 0;
-            work->state = 22;
+            work->state = EMY30_STATE_CHARGE;
             work->speed = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 22:
+    case EMY30_STATE_CHARGE:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 6, ANIM_FLAG_LOOP, w->tiles);
         work->vz = 0;
         work->speed += 38;
@@ -276,7 +288,7 @@ u8 task_emy_30_1(EmyWork* work) {
             act->x -= work->speed;
 
             if (act->x < (gBtlWork->xMin + 32) * 256) {
-                work->state = 23;
+                work->state = EMY30_STATE_CHARGE_END;
                 work->stateTimer = 0;
             }
         } else {
@@ -287,13 +299,13 @@ u8 task_emy_30_1(EmyWork* work) {
             act->x += work->speed;
 
             if (act->x > (gBtlWork->xMax - 32) * 256) {
-                work->state = 23;
+                work->state = EMY30_STATE_CHARGE_END;
                 work->stateTimer = 0;
             }
         }
 
         break;
-    case 23:
+    case EMY30_STATE_CHARGE_END:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 7, 0, w->tiles);
         work->vz = 0;
         work->speed -= 128;

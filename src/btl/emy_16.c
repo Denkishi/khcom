@@ -71,6 +71,11 @@ void task_emy_16_0(Emy16Work* work, void* obj) {
     TaskPoolInit(&work->tasks, 2);
 }
 
+enum Emy16State {
+    EMY16_STATE_SHOOT = 18,
+    EMY16_STATE_THROW_TRAP
+};
+
 u8 task_emy_16_1(Emy16Work* work) {
     Emy16Work* w;
     BtlObj* act;
@@ -82,16 +87,16 @@ u8 task_emy_16_1(Emy16Work* work) {
 
     if (EmyUpdateReaction(&work->base)) {
         if (IsTaskActiveNamed(work->bTask, sTaskDescEmy16B.name)) {
-            work->base.state = 0x12;
+            work->base.state = EMY16_STATE_SHOOT;
         } else {
             r = GetRandom();
 
             switch (r & 1) {
             case 0:
-                work->base.state = 0x12;
+                work->base.state = EMY16_STATE_SHOOT;
                 break;
             case 1:
-                work->base.state = 0x13;
+                work->base.state = EMY16_STATE_THROW_TRAP;
                 break;
             }
         }
@@ -100,7 +105,7 @@ u8 task_emy_16_1(Emy16Work* work) {
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY16_STATE_SHOOT:
         AnimChangeWithDef(sEmy16AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 3 && work->base.anim.timer == 0) {
@@ -127,7 +132,7 @@ u8 task_emy_16_1(Emy16Work* work) {
         }
 
         break;
-    case 0x13:
+    case EMY16_STATE_THROW_TRAP:
         AnimChangeWithDef(sEmy16AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 0x0A && work->base.anim.timer == 0) {
@@ -167,6 +172,13 @@ void task_emy_16_3(Emy16Work* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum Emy16bState {
+    EMY16B_STATE_THROWN,
+    EMY16B_STATE_LANDED,
+    EMY16B_STATE_TRIGGERED,
+    EMY16B_STATE_FADE_OUT
+};
+
 void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
     if (spawn->facingLeft) {
         work->facingLeft = 1;
@@ -178,7 +190,7 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
     work->tiles = AllocObjTiles(0x80, gEmy1611bTiles);
     AnimInit(&work->anim, gEmy1611bAnims, gEmy1611bFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    work->state = 0;
+    work->state = EMY16B_STATE_THROWN;
     work->x = spawn->x;
     work->y = spawn->y;
     work->z = spawn->z;
@@ -193,7 +205,7 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
 
 u8 task_emy_16_b_1(Emy16bWork* work) {
     switch (work->state) {
-    case 0:
+    case EMY16B_STATE_THROWN:
         if (work->facingLeft) {
             work->x -= work->vx;
         } else {
@@ -211,12 +223,12 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
         }
 
         if (work->z >= 0) {
-            work->state = 1;
+            work->state = EMY16B_STATE_LANDED;
             work->timer = 0;
         }
 
         break;
-    case 1:
+    case EMY16B_STATE_LANDED:
         if (work->timer == 0) {
             ColliderSetDisabled(&work->collider, 0);
             AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
@@ -224,21 +236,21 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
 
         if (work->collider.colliding) {
             work->timer = 0;
-            work->state = 2;
+            work->state = EMY16B_STATE_TRIGGERED;
             ColliderSetDisabled(&work->collider, 1);
         } else if (work->timer > 0x64) {
             work->timer = 0;
-            work->state = 3;
+            work->state = EMY16B_STATE_FADE_OUT;
         } else {
             work->timer++;
         }
 
         break;
-    case 2:
+    case EMY16B_STATE_TRIGGERED:
         if (work->timer != 0) {
             if (work->z >= 0) {
                 work->timer = 0;
-                work->state = 3;
+                work->state = EMY16B_STATE_FADE_OUT;
                 break;
             }
         } else {
@@ -248,14 +260,14 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
 
         work->timer++;
         break;
-    case 3:
+    case EMY16B_STATE_FADE_OUT:
         if ((work->timer & 3) == 0) {
             work->visible = work->visible == 0;
         }
 
         if (work->collider.colliding) {
             work->timer = 0;
-            work->state = 2;
+            work->state = EMY16B_STATE_TRIGGERED;
             ColliderSetDisabled(&work->collider, 1);
             work->visible = 1;
         } else if (work->timer > 0x3C) {

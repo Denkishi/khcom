@@ -41,8 +41,13 @@ TaskDesc gTaskDescEmy01 = {
 
 void task_emy_01_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy01Def, obj);
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy01State {
+    EMY01_STATE_FIRE = 18,
+    EMY01_STATE_FIRA
+};
 
 u8 task_emy_01_1(EmyWork* work) {
     EmyWork* w;
@@ -58,16 +63,16 @@ u8 task_emy_01_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 0x12;
+            work->state = EMY01_STATE_FIRE;
             break;
         case 1:
-            work->state = 0x13;
+            work->state = EMY01_STATE_FIRA;
             break;
         }
     }
 
     switch (work->state) {
-    case 0x12: {
+    case EMY01_STATE_FIRE: {
         s32 z;
         AnimChangeWithDef(sEmy01AnimDefs, &w->anim, 0, 0, w->tiles);
         work->vz = 0;
@@ -96,7 +101,7 @@ u8 task_emy_01_1(EmyWork* work) {
 
         break;
     }
-    case 0x13: {
+    case EMY01_STATE_FIRA: {
         s32 z;
         AnimChangeWithDef(sEmy01AnimDefs, &w->anim, 1, 0, w->tiles);
         work->vz = 0;

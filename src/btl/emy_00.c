@@ -50,11 +50,21 @@ TaskDesc gTaskDescEmy00 = {
     sizeof(EmyWork),
 };
 
+enum Emy00State {
+    EMY00_STATE_IDLE = 18,
+    EMY00_STATE_SINK,
+    EMY00_STATE_SUNK_MOVE,
+    EMY00_STATE_RISE,
+    EMY00_STATE_SPAWN,
+    EMY00_STATE_LUNGE = 24,
+    EMY00_STATE_JUMP_LUNGE
+};
+
 void task_emy_00_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy00Def, obj);
     work->flags |= EMY_FLAG_DARK_DEATH;
-    work->idleState = 0x12;
-    work->state = 0x16;
+    work->idleState = EMY00_STATE_IDLE;
+    work->state = EMY00_STATE_SPAWN;
 }
 
 u8 task_emy_00_1(EmyWork* work) {
@@ -73,20 +83,20 @@ u8 task_emy_00_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 24;
+            work->state = EMY00_STATE_LUNGE;
             break;
         case 1:
-            work->state = 25;
+            work->state = EMY00_STATE_JUMP_LUNGE;
             break;
         }
     }
 
     switch (w->state) {
-    case 24:
+    case EMY00_STATE_LUNGE:
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 5, 0, work->tiles);
         EmyLungeAttack(w, 31, 18, 11, 165, 40, SONG_BTL_MON_HIT00, 0, 0, 24);
         break;
-    case 25:
+    case EMY00_STATE_JUMP_LUNGE:
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 6, 0, work->tiles);
 
         if (w->stateTimer == 10) {
@@ -95,18 +105,18 @@ u8 task_emy_00_1(EmyWork* work) {
 
         EmyLungeAttack(w, 14, 35, 10, 166, 96, SONG_BTL_MON_HIT00, 0, 0, 24);
         break;
-    case 19:
+    case EMY00_STATE_SINK:
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 0, 0, work->tiles);
 
         if (AnimIsFinished(&w->anim)) {
-            w->state = 20;
+            w->state = EMY00_STATE_SUNK_MOVE;
             ColliderSetDisabled(&act->collider, 1);
             act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
 
         break;
-    case 20:
+    case EMY00_STATE_SUNK_MOVE:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             GetEnemyTargetPosition(act, &pos, NULL, NULL);
             AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
@@ -114,7 +124,7 @@ u8 task_emy_00_1(EmyWork* work) {
             act->y += -gSineTable[w->angle + 64] * w->speed >> 8;
 
             if (w->stateTimer > 100) {
-                w->state = 21;
+                w->state = EMY00_STATE_RISE;
                 ColliderSetDisabled(&act->collider, 0);
                 act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
                 act->centerHeight = 16;
@@ -131,7 +141,7 @@ u8 task_emy_00_1(EmyWork* work) {
         }
 
         break;
-    case 22:
+    case EMY00_STATE_SPAWN:
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 3, 0, work->tiles);
 
         if (w->stateTimer == 20) {
@@ -150,7 +160,7 @@ u8 task_emy_00_1(EmyWork* work) {
 
         w->stateTimer++;
         break;
-    case 21:
+    case EMY00_STATE_RISE:
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 2, 0, work->tiles);
 
         if (w->stateTimer == 30) {
@@ -159,7 +169,7 @@ u8 task_emy_00_1(EmyWork* work) {
 
         if (AnimIsFinished(&w->anim)) {
             act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
-            w->state = 18;
+            w->state = EMY00_STATE_IDLE;
 #ifdef VERSION_EU
             w->stateTimer = 0;
 #endif
@@ -168,7 +178,7 @@ u8 task_emy_00_1(EmyWork* work) {
         }
 
         break;
-    case 18:
+    case EMY00_STATE_IDLE:
         if (w->stateTimer == 0) {
             ColliderSetDisabled(&act->collider, 0);
             act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
@@ -179,7 +189,7 @@ u8 task_emy_00_1(EmyWork* work) {
         TryEnemyCardUse(act);
 
         if (GetRandom() % 120 == 0) {
-            w->state = 4;
+            w->state = EMY_STATE_WALK;
 
             if (GetRandom() % 2 == 0) {
                 w->x = -((act->attackOffset
@@ -193,7 +203,7 @@ u8 task_emy_00_1(EmyWork* work) {
                     << 8;
             }
         } else if (GetRandom() % 200 == 0) {
-            w->state = 19;
+            w->state = EMY00_STATE_SINK;
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             w->angle = GetRandom();
             w->stateTimer = 0;
@@ -216,7 +226,7 @@ u8 task_emy_00_1(EmyWork* work) {
 
     ret = EmyUpdateCommonStates(w);
 
-    if (w->state == 14) {
+    if (w->state == EMY_STATE_FLEE) {
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
     }
 
@@ -274,7 +284,7 @@ void task_emy_00_2(EmyWork* work) {
         if (StepHitFlash(act)) {
             DrawSprite(x, y, work->gfx, work->tiles, work->palette2, affine, pri,
                 -0x1004 - (act->y >> 8) * 4);
-        } else if (work->state == 0x14) {
+        } else if (work->state == EMY00_STATE_SUNK_MOVE) {
             DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, pri, 0xFFFF);
         } else {
             DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, pri,

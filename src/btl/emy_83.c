@@ -66,10 +66,18 @@ static TaskDesc sTaskDescEmy83S = {
     sizeof(Emy83sWork),
 };
 
+enum Emy83State {
+    EMY83_STATE_GROUND_STRIKE = 18,
+    EMY83_STATE_SHOOT_WINDUP,
+    EMY83_STATE_SHOOT,
+    EMY83_STATE_SHOOT_END,
+    EMY83_STATE_IDLE
+};
+
 void task_emy_83_0(Emy83Work* work, void* obj) {
     EmyInit(&work->base, &sEmy83Def, obj);
     work->task = NULL;
-    work->base.idleState = 0x16;
+    work->base.idleState = EMY83_STATE_IDLE;
     TaskPoolInit(&work->tasks, 4);
 }
 
@@ -93,18 +101,18 @@ u8 task_emy_83_1(Emy83Work* work) {
 
         switch (r & 1) {
         case 0:
-            work->base.state = 0x12;
+            work->base.state = EMY83_STATE_GROUND_STRIKE;
             w->task = NULL;
             break;
         case 1:
-            work->base.state = 0x13;
+            work->base.state = EMY83_STATE_SHOOT_WINDUP;
             w->shotCount = 0;
             break;
         }
     }
 
     switch (work->base.state) {
-    case 0x16:
+    case EMY83_STATE_IDLE:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         TryEnemyCardUse(act);
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
@@ -116,7 +124,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         }
 
         break;
-    case 0x12:
+    case EMY83_STATE_GROUND_STRIKE:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         c = work->base.anim.timer;
 
@@ -139,15 +147,15 @@ u8 task_emy_83_1(Emy83Work* work) {
         }
 
         break;
-    case 0x13:
+    case EMY83_STATE_SHOOT_WINDUP:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 0x14;
+            work->base.state = EMY83_STATE_SHOOT;
         }
 
         break;
-    case 0x14:
+    case EMY83_STATE_SHOOT:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (AnimGetGfxIndex(&work->base.anim) == 6 && work->base.anim.timer == 0) {
@@ -171,14 +179,14 @@ u8 task_emy_83_1(Emy83Work* work) {
         }
 
         if (w->shotCount > 2 && AnimIsFinished(&work->base.anim)) {
-            work->base.state = 0x15;
+            work->base.state = EMY83_STATE_SHOOT_END;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 0x15:
+    case EMY83_STATE_SHOOT_END:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
 
         if (work->base.stateTimer > 0x28) {
@@ -196,7 +204,7 @@ u8 task_emy_83_1(Emy83Work* work) {
     z = act->z;
     ret = EmyUpdateCommonStates(&work->base);
 
-    if (work->base.state != 0x0B) {
+    if (work->base.state != EMY_STATE_SPAWN) {
         act->x = x;
         act->y = y;
         act->z = z;
@@ -215,8 +223,14 @@ void task_emy_83_3(Emy83Work* work) {
     EmyReleaseResources(&work->base);
 }
 
+enum Emy83bState {
+    EMY83B_STATE_EMERGE,
+    EMY83B_STATE_STRIKE,
+    EMY83B_STATE_RETRACT
+};
+
 void task_emy_83_b_0(Emy83bWork* work, EmySpawn* spawn) {
-    work->state = 0;
+    work->state = EMY83B_STATE_EMERGE;
     work->palette = LoadObjPalette(gEmy83Palette, 0x20);
     work->tiles = AllocObjTiles(0x80, gEmy8310bTiles);
     AnimInit(&work->anim, gEmy8310bAnims, gEmy8310bFrames);
@@ -234,16 +248,16 @@ u8 task_emy_83_b_1(Emy83bWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case EMY83B_STATE_EMERGE:
         if (work->timer > 0x0F) {
-            work->state = 1;
+            work->state = EMY83B_STATE_STRIKE;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 1:
+    case EMY83B_STATE_STRIKE:
         if (work->timer == 0) {
             AnimStart(&work->anim, 1, 0);
         }
@@ -255,14 +269,14 @@ u8 task_emy_83_b_1(Emy83bWork* work) {
         }
 
         if (work->timer > 0x1D) {
-            work->state = 2;
+            work->state = EMY83B_STATE_RETRACT;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 2:
+    case EMY83B_STATE_RETRACT:
     default:
         if (work->timer == 0) {
             AnimStart(&work->anim, 2, 0);

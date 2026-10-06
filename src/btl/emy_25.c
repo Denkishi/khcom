@@ -45,6 +45,11 @@ void task_emy_25_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy25Def, obj);
 }
 
+enum Emy25State {
+    EMY25_STATE_SWIPE = 18,
+    EMY25_STATE_SPIN_ATTACK
+};
+
 u8 task_emy_25_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
@@ -62,16 +67,16 @@ u8 task_emy_25_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 0x12;
+            work->state = EMY25_STATE_SWIPE;
             break;
         case 1:
-            work->state = 0x13;
+            work->state = EMY25_STATE_SPIN_ATTACK;
             break;
         }
     }
 
     switch (work->state) {
-    case 0x12:
+    case EMY25_STATE_SWIPE:
         AnimChangeWithDef(sEmy25AnimDefs, &w->anim, 0, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {
@@ -126,7 +131,7 @@ u8 task_emy_25_1(EmyWork* work) {
         }
 
         break;
-    case 0x13:
+    case EMY25_STATE_SPIN_ATTACK:
         AnimChangeWithDef(sEmy25AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {

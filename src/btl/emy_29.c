@@ -46,7 +46,7 @@ TaskDesc gTaskDescEmy29 = {
 void task_emy_29_0(Emy29Work* work, void* obj) {
     EmyInit(&work->base, &sEmy29Def, obj);
     work->base.fxScale = 0x180;
-    work->base.idleState = 7;
+    work->base.idleState = EMY_STATE_HOVER;
     work->base.flags |= EMY_FLAG_DARK_DEATH;
     work->state = 0;
     work->steps = 0;
@@ -65,6 +65,11 @@ void Emy29MoveToPose(Emy29Work* work, s16 anim, s16 dx, s16 dy, s16 dz) {
     }
 }
 
+enum Emy29State {
+    EMY29_STATE_BITE = 18,
+    EMY29_STATE_BOUNCE
+};
+
 u8 task_emy_29_1(Emy29Work* work) {
     Emy29Work* w;
     BtlObj* act;
@@ -82,14 +87,14 @@ u8 task_emy_29_1(Emy29Work* work) {
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x27FF : pos - act->x <= 0x27FF) {
-            work->base.state = 0x13;
+            work->base.state = EMY29_STATE_BOUNCE;
         } else {
-            work->base.state = 0x12;
+            work->base.state = EMY29_STATE_BITE;
         }
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY29_STATE_BITE:
         AnimChangeWithDef(sEmy29AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
         a = -COS((u16)work->base.stateTimer * 2) << 4;
@@ -101,7 +106,7 @@ u8 task_emy_29_1(Emy29Work* work) {
         }
 
         break;
-    case 0x13:
+    case EMY29_STATE_BOUNCE:
         c = work->base.stateTimer;
 
         if (c == 0) {

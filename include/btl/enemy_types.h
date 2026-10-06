@@ -32,6 +32,27 @@ typedef struct EmyDef {
     EmyKind kind;
 } EmyDef;
 
+enum EmyState {
+    EMY_STATE_IDLE,
+    EMY_STATE_HURT,
+    EMY_STATE_HURT_RECOVER,
+    EMY_STATE_DEFEATED,
+    EMY_STATE_WALK,
+    EMY_STATE_CARD_BROKEN,
+    EMY_STATE_HEALED,
+    EMY_STATE_HOVER,
+    EMY_STATE_HOVER_MOVE,
+    EMY_STATE_STUNNED,
+    EMY_STATE_WARPED,
+    EMY_STATE_SPAWN,
+    EMY_STATE_STOPPED,
+    EMY_STATE_TERRIFIED,
+    EMY_STATE_FLEE,
+    EMY_STATE_GRAVITY_SQUASH,
+    EMY_STATE_GRAVITY_HOLD,
+    EMY_STATE_GRAVITY_RECOVER
+};
+
 typedef struct EmyWork {
     void* tiles;
     void* palette;

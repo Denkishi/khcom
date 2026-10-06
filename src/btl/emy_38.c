@@ -47,6 +47,11 @@ void task_emy_38_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy38Def, obj);
 }
 
+enum Emy38State {
+    EMY38_STATE_LUNGE = 18,
+    EMY38_STATE_STOMP
+};
+
 u8 task_emy_38_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
@@ -61,16 +66,16 @@ u8 task_emy_38_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 0x12;
+            work->state = EMY38_STATE_LUNGE;
             break;
         case 1:
-            work->state = 0x13;
+            work->state = EMY38_STATE_STOMP;
             break;
         }
     }
 
     switch (work->state) {
-    case 0x12:
+    case EMY38_STATE_LUNGE:
         AnimChangeWithDef(sEmy38AnimDefs, &w->anim, 0, 0, w->tiles);
         EmyLungeAttack(work, 0x1E, 0x14, 0x2D, 0xD4, 0x32, SONG_BTL_MON_HIT01, 0, 0, 0x18);
 
@@ -79,7 +84,7 @@ u8 task_emy_38_1(EmyWork* work) {
         }
 
         break;
-    case 0x13:
+    case EMY38_STATE_STOMP:
         AnimChangeWithDef(sEmy38AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (work->stateTimer == 0x3F) {

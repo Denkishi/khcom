@@ -49,6 +49,15 @@ void task_emy_19_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy19Def, obj);
 }
 
+enum Emy19State {
+    EMY19_STATE_LEAP_WINDUP = 18,
+    EMY19_STATE_LEAP,
+    EMY19_STATE_BOUNCE_ATTACK,
+    EMY19_STATE_FALL,
+    EMY19_STATE_LAND,
+    EMY19_STATE_SLASH
+};
+
 u8 task_emy_19_1(Emy19Work* work) {
     Emy19Work* w;
     BtlObj* act;
@@ -63,25 +72,25 @@ u8 task_emy_19_1(Emy19Work* work) {
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x3BFF : pos - act->x <= 0x3BFF) {
-            work->base.state = 0x17;
+            work->base.state = EMY19_STATE_SLASH;
         } else {
-            work->base.state = 0x12;
+            work->base.state = EMY19_STATE_LEAP_WINDUP;
         }
 
         w->dashSpeed = 0;
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY19_STATE_LEAP_WINDUP:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 0x13;
+            work->base.state = EMY19_STATE_LEAP;
             work->base.stateTimer = 0;
         }
 
         break;
-    case 0x13:
+    case EMY19_STATE_LEAP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             work->base.vz = -0x500;
@@ -92,14 +101,14 @@ u8 task_emy_19_1(Emy19Work* work) {
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 0x14;
+            work->base.state = EMY19_STATE_BOUNCE_ATTACK;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 0x14:
+    case EMY19_STATE_BOUNCE_ATTACK:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
         act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
@@ -115,25 +124,25 @@ u8 task_emy_19_1(Emy19Work* work) {
         }
 
         if (work->base.stateTimer > 55) {
-            work->base.state = 0x15;
+            work->base.state = EMY19_STATE_FALL;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 0x15:
+    case EMY19_STATE_FALL:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
         if (act->z >= act->groundZ) {
-            work->base.state = 0x16;
+            work->base.state = EMY19_STATE_LAND;
             work->base.stateTimer = 0;
         }
 
         break;
-    case 0x16:
+    case EMY19_STATE_LAND:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -141,7 +150,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         }
 
         break;
-    case 0x17:
+    case EMY19_STATE_SLASH:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
 
         switch (AnimGetFrame(&work->base.anim)) {

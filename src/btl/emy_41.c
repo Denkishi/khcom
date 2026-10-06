@@ -44,8 +44,13 @@ TaskDesc gTaskDescEmy41 = {
 
 void task_emy_41_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy41Def, obj);
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy41State {
+    EMY41_STATE_LUNGE = 18,
+    EMY41_STATE_THUNDER
+};
 
 u8 task_emy_41_1(Emy41Work* work) {
     Emy41Work* w;
@@ -62,16 +67,16 @@ u8 task_emy_41_1(Emy41Work* work) {
 
         switch (r & 1) {
         case 0:
-            work->base.state = 0x12;
+            work->base.state = EMY41_STATE_LUNGE;
             break;
         case 1:
-            work->base.state = 0x13;
+            work->base.state = EMY41_STATE_THUNDER;
             break;
         }
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY41_STATE_LUNGE:
         AnimChangeWithDef(sEmy41AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
         a = SIN((u16)work->base.stateTimer * 4) << 4;
@@ -79,7 +84,7 @@ u8 task_emy_41_1(Emy41Work* work) {
         act->z += (a - t) >> 2;
         EmyLungeAttack(&work->base, 0x14, 0x63, 0x1E, 0xD8, 0x40, SONG_BTL_MON_HIT02, 0, -0x10, 0x2C);
         break;
-    case 0x13:
+    case EMY41_STATE_THUNDER:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy41AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             GetEnemyTargetPosition(act, &w->targetX, &w->targetY, NULL);

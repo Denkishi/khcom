@@ -51,11 +51,22 @@ TaskDesc gTaskDescEmy07 = {
     sizeof(Emy07Work),
 };
 
+enum Emy07State {
+    EMY07_STATE_IDLE = 18,
+    EMY07_STATE_FAILED,
+    EMY07_STATE_SATISFIED,
+    EMY07_STATE_REQUEST_FIRE,
+    EMY07_STATE_REQUEST_BLIZZARD,
+    EMY07_STATE_REQUEST_THUNDER,
+    EMY07_STATE_VANISH = 25,
+    EMY07_STATE_WRONG_HIT
+};
+
 void task_emy_07_0(Emy07Work* work, void* obj) {
     EmyInit(&work->base, &sEmy07Def, obj);
     work->successCount = 0;
     work->thunderRequested = 0;
-    work->base.idleState = 0x12;
+    work->base.idleState = EMY07_STATE_IDLE;
     work->base.actor.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
     work->rewarded = 0;
 }
@@ -83,38 +94,38 @@ u8 task_emy_07_1(Emy07Work* work) {
 #endif
 
     switch (work->base.state) {
-    case 1:
-    case 3:
-    case 15:
-        work->base.state = 26;
+    case EMY_STATE_HURT:
+    case EMY_STATE_DEFEATED:
+    case EMY_STATE_GRAVITY_SQUASH:
+        work->base.state = EMY07_STATE_WRONG_HIT;
 
         switch (state) {
-        case 21:
+        case EMY07_STATE_REQUEST_FIRE:
             w->thunderRequested = 0;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_FIRE) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 20;
+                work->base.state = EMY07_STATE_SATISFIED;
                 work->base.stateTimer = 0;
             }
 
             break;
-        case 22:
+        case EMY07_STATE_REQUEST_BLIZZARD:
             w->thunderRequested = 0;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 20;
+                work->base.state = EMY07_STATE_SATISFIED;
                 work->base.stateTimer = 0;
             }
 
             break;
-        case 23:
+        case EMY07_STATE_REQUEST_THUNDER:
             w->thunderRequested = 1;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_THUNDER) {
                 ClearBtlObjActionFlags(act);
-                work->base.state = 20;
+                work->base.state = EMY07_STATE_SATISFIED;
                 work->base.stateTimer = 0;
             }
 
@@ -127,7 +138,7 @@ u8 task_emy_07_1(Emy07Work* work) {
     }
 
     switch (work->base.state) {
-    case 18:
+    case EMY07_STATE_IDLE:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
@@ -143,14 +154,14 @@ u8 task_emy_07_1(Emy07Work* work) {
 
             switch (GetRandom() % 3) {
             case 1:
-                work->base.state = 22;
+                work->base.state = EMY07_STATE_REQUEST_BLIZZARD;
                 break;
             case 2:
-                work->base.state = 23;
+                work->base.state = EMY07_STATE_REQUEST_THUNDER;
                 break;
             case 0:
             default:
-                work->base.state = 21;
+                work->base.state = EMY07_STATE_REQUEST_FIRE;
                 break;
             }
         } else {
@@ -158,40 +169,40 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
 
         break;
-    case 21:
+    case EMY07_STATE_REQUEST_FIRE:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 3, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
-            work->base.state = 18;
+            work->base.state = EMY07_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 22:
+    case EMY07_STATE_REQUEST_BLIZZARD:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 4, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
-            work->base.state = 18;
+            work->base.state = EMY07_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 23:
+    case EMY07_STATE_REQUEST_THUNDER:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
-            work->base.state = 18;
+            work->base.state = EMY07_STATE_IDLE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 20:
+    case EMY07_STATE_SATISFIED:
         if (w->thunderRequested != 0) {
             AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         } else {
@@ -219,18 +230,18 @@ u8 task_emy_07_1(Emy07Work* work) {
 
             if (w->successCount > 2) {
                 work->base.stateTimer = 0;
-                work->base.state = 25;
+                work->base.state = EMY07_STATE_VANISH;
                 w->rewarded = 1;
                 SetJiminyFlag(110);
             } else {
                 work->base.stateTimer = 0;
-                work->base.state = 18;
+                work->base.state = EMY07_STATE_IDLE;
                 act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             }
         }
 
         break;
-    case 26:
+    case EMY07_STATE_WRONG_HIT:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 1, 0,
                 w->base.tiles);
@@ -248,13 +259,13 @@ u8 task_emy_07_1(Emy07Work* work) {
             ClearBtlObjActionFlags(act);
             act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             work->base.stateTimer = 0;
-            work->base.state = 19;
+            work->base.state = EMY07_STATE_FAILED;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 19:
+    case EMY07_STATE_FAILED:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer == 0) {
@@ -264,11 +275,11 @@ u8 task_emy_07_1(Emy07Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 25;
+            work->base.state = EMY07_STATE_VANISH;
         }
 
         break;
-    case 25:
+    case EMY07_STATE_VANISH:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {

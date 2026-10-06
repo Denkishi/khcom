@@ -46,8 +46,13 @@ TaskDesc gTaskDescEmy03 = {
 
 void task_emy_03_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy03Def, obj);
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy03State {
+    EMY03_STATE_THUNDER_LUNGE = 18,
+    EMY03_STATE_THUNDER
+};
 
 u8 task_emy_03_1(Emy03Work* work) {
     Emy03Work* w;
@@ -62,16 +67,16 @@ u8 task_emy_03_1(Emy03Work* work) {
 
         switch (r & 1) {
         case 0:
-            work->base.state = 0x12;
+            work->base.state = EMY03_STATE_THUNDER_LUNGE;
             break;
         case 1:
-            work->base.state = 0x13;
+            work->base.state = EMY03_STATE_THUNDER;
             break;
         }
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY03_STATE_THUNDER_LUNGE:
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x480;
             AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
@@ -85,7 +90,7 @@ u8 task_emy_03_1(Emy03Work* work) {
         }
 
         break;
-    case 0x13:
+    case EMY03_STATE_THUNDER:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         } else if (work->base.stateTimer == 1) {

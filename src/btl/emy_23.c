@@ -44,8 +44,13 @@ TaskDesc gTaskDescEmy23 = {
 
 void task_emy_23_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy23Def, obj);
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy23State {
+    EMY23_STATE_DIVE = 18,
+    EMY23_STATE_STAB
+};
 
 u8 task_emy_23_1(Emy23Work* work) {
     Emy23Work* w;
@@ -62,14 +67,14 @@ u8 task_emy_23_1(Emy23Work* work) {
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x31FF : pos - act->x <= 0x31FF) {
-            work->base.state = 0x13;
+            work->base.state = EMY23_STATE_STAB;
         } else {
-            work->base.state = 0x12;
+            work->base.state = EMY23_STATE_DIVE;
         }
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY23_STATE_DIVE:
         AnimChangeWithDef(sEmy23AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         switch (AnimGetFrame(&work->base.anim)) {
@@ -106,7 +111,7 @@ u8 task_emy_23_1(Emy23Work* work) {
         }
 
         break;
-    case 0x13:
+    case EMY23_STATE_STAB:
         AnimChangeWithDef(sEmy23AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         act->z += -act->z >> 2;
 

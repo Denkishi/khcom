@@ -44,8 +44,13 @@ TaskDesc gTaskDescEmy26 = {
 void task_emy_26_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy26Def, obj);
     work->actor.z = (GetRandom() % 0x1001) - 0x3000;
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy26State {
+    EMY26_STATE_DIVE_LUNGE = 18,
+    EMY26_STATE_FIRE
+};
 
 u8 task_emy_26_1(EmyWork* work) {
     EmyWork* w;
@@ -64,16 +69,16 @@ u8 task_emy_26_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 0x12;
+            work->state = EMY26_STATE_DIVE_LUNGE;
             break;
         case 1:
-            work->state = 0x13;
+            work->state = EMY26_STATE_FIRE;
             break;
         }
     }
 
     switch (work->state) {
-    case 0x12:
+    case EMY26_STATE_DIVE_LUNGE:
         AnimChangeWithDef(sEmy26AnimDefs, &w->anim, 0, 0, w->tiles);
 
         switch (AnimGetFrame(&work->anim)) {
@@ -95,7 +100,7 @@ u8 task_emy_26_1(EmyWork* work) {
 
         EmyLungeAttack(work, 0x20, 0x0C, 0x14, 0xC5, 0x28, SONG_BTL_HANE_HIT, 0x14, 0x0A, 0x0A);
         break;
-    case 0x13:
+    case EMY26_STATE_FIRE:
         work->vz = 0;
 
         switch (work->stateTimer) {

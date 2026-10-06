@@ -43,6 +43,11 @@ void task_emy_14_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy14Def, obj);
 }
 
+enum Emy14State {
+    EMY14_STATE_SHORT_LUNGE = 18,
+    EMY14_STATE_LONG_LUNGE
+};
+
 u8 task_emy_14_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
@@ -57,18 +62,18 @@ u8 task_emy_14_1(EmyWork* work) {
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x31FF : pos - act->x <= 0x31FF) {
-            work->state = 0x12;
+            work->state = EMY14_STATE_SHORT_LUNGE;
         } else {
-            work->state = 0x13;
+            work->state = EMY14_STATE_LONG_LUNGE;
         }
     }
 
     switch (work->state) {
-    case 0x12:
+    case EMY14_STATE_SHORT_LUNGE:
         AnimChangeWithDef(sEmy14AnimDefs, &w->anim, 0, 0, w->tiles);
         EmyLungeAttack(work, 0x0F, 0x0E, 0x14, 0xB3, 0x18, SONG_BTL_HANE_HIT, 0, 0, 0x16);
         break;
-    case 0x13:
+    case EMY14_STATE_LONG_LUNGE:
         AnimChangeWithDef(sEmy14AnimDefs, &w->anim, 1, 0, w->tiles);
         EmyLungeAttack(work, 0x14, 0x25, 0x06, 0xB4, 0x64, SONG_BTL_MON_HIT02, 0, 0, 0x14);
         break;

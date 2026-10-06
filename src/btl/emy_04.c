@@ -41,10 +41,14 @@ TaskDesc gTaskDescEmy04 = {
 
 void task_emy_04_0(Emy04Work* work, void* obj) {
     EmyInit(&work->base, &sEmy04Def, obj);
-    work->base.idleState = 7;
+    work->base.idleState = EMY_STATE_HOVER;
     work->unk_184 = 0;
     work->healCount = 0;
 }
+
+enum Emy04State {
+    EMY04_STATE_CURE = 18
+};
 
 u8 task_emy_04_1(Emy04Work* work) {
     Emy04Work* w;
@@ -57,11 +61,11 @@ u8 task_emy_04_1(Emy04Work* work) {
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        work->base.state = 0x12;
+        work->base.state = EMY04_STATE_CURE;
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY04_STATE_CURE:
         AnimChangeWithDef(&sEmy04AnimDef, &work->base.anim, 0, 0, work->base.tiles);
         work->base.vz = 0;
 

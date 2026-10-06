@@ -55,8 +55,8 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     work->tiles = AllocObjTiles(t * 32, NULL);
     work->palette = LoadObjPalette(def->palette, 32);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
-    work->idleState = 0;
-    work->state = 11;
+    work->idleState = EMY_STATE_IDLE;
+    work->state = EMY_STATE_SPAWN;
     work->stateTimer = 0;
     work->steps = 0;
     work->flags = 0;
@@ -172,52 +172,52 @@ u8 EmyUpdateReaction(EmyWork* work) {
     actor->prevX = actor->x;
     actor->prevY = actor->y;
 
-    if (work->state == 3) {
+    if (work->state == EMY_STATE_DEFEATED) {
         return 0;
     }
 
-    if (work->state == 10) {
+    if (work->state == EMY_STATE_WARPED) {
         return 0;
     }
 
     switch (UpdateBtlObjReaction(actor)) {
     case BTL_REACTION_STUNNED:
         EmyStartKnockback(work);
-        work->state = 9;
+        work->state = EMY_STATE_STUNNED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_GRAVITY:
-        work->state = 15;
+        work->state = EMY_STATE_GRAVITY_SQUASH;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_GRAVITY_DEFEATED:
         SetBtlObjUnhittable(actor, 1);
-        work->state = 15;
+        work->state = EMY_STATE_GRAVITY_SQUASH;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_HURT:
         EmyStartKnockback(work);
-        work->state = 1;
+        work->state = EMY_STATE_HURT;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_WARPED:
         SetBtlObjUnhittable(actor, 1);
-        work->state = 10;
+        work->state = EMY_STATE_WARPED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_DEFEATED:
         SetBtlObjUnhittable(actor, 1);
         EmyStartKnockback(work);
-        work->state = 3;
+        work->state = EMY_STATE_DEFEATED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_TERRIFIED:
-        work->state = 13;
+        work->state = EMY_STATE_TERRIFIED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_HEALED:
-        if (work->state != 12) {
-            work->state = 6;
+        if (work->state != EMY_STATE_STOPPED) {
+            work->state = EMY_STATE_HEALED;
             work->stateTimer = 0;
         }
 
@@ -226,13 +226,13 @@ u8 EmyUpdateReaction(EmyWork* work) {
         work->stateTimer = 0;
         return 1;
     case BTL_REACTION_CARD_BROKEN:
-        work->state = 5;
+        work->state = EMY_STATE_CARD_BROKEN;
         work->stateTimer = 0;
         work->visible = 1;
         break;
     case BTL_REACTION_STOPPED:
-        if (work->state != 12) {
-            work->state = 12;
+        if (work->state != EMY_STATE_STOPPED) {
+            work->state = EMY_STATE_STOPPED;
             work->stateTimer = 0;
             actor->vx = actor->vy = 0;
         }
@@ -279,7 +279,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
     }
 
     switch (work->state) {
-    case 11:
+    case EMY_STATE_SPAWN:
         if (work->stateTimer == 0) {
             work->steps = 18;
         }
@@ -295,7 +295,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 8:
+    case EMY_STATE_HOVER_MOVE:
         work->vz = 0;
         AnimChangeWithDef(work->def->animDef, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
@@ -344,7 +344,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 7:
+    case EMY_STATE_HOVER:
         work->vz = 0;
         AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
@@ -360,7 +360,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
 
         if (GetRandom() % work->def->moveInterval == 0) {
             work->speed = 0;
-            work->state = 8;
+            work->state = EMY_STATE_HOVER_MOVE;
 
             if (GetRandom() % 2 == 0) {
                 s32 lo;
@@ -380,7 +380,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 13:
+    case EMY_STATE_TERRIFIED:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
@@ -409,14 +409,14 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(actor);
-            work->state = 14;
+            work->state = EMY_STATE_FLEE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 14:
+    case EMY_STATE_FLEE:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 tx;
             s32 ty;
@@ -456,7 +456,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 4:
+    case EMY_STATE_WALK:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 px;
             s32 tx;
@@ -506,12 +506,12 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 0:
+    case EMY_STATE_IDLE:
         AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
 
         if (GetRandom() % work->def->moveInterval == 0) {
-            work->state = 4;
+            work->state = EMY_STATE_WALK;
 
             if (GetRandom() % 2 == 0) {
                 s32 lo;
@@ -533,14 +533,14 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 12:
+    case EMY_STATE_STOPPED:
         if (actor->badStatus != BAD_STATUS_STOP) {
             work->state = work->idleState;
             ClearBtlObjActionFlags(actor);
         }
 
         break;
-    case 9:
+    case EMY_STATE_STUNNED:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
@@ -563,7 +563,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 1:
+    case EMY_STATE_HURT:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
@@ -573,7 +573,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
             s32 ok = 0;
 
             ClearBtlObjActionFlags(actor);
-            work->state = 2;
+            work->state = EMY_STATE_HURT_RECOVER;
             work->stateTimer = 0;
 
             if (actor->x < x) {
@@ -608,14 +608,14 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 2:
+    case EMY_STATE_HURT_RECOVER:
         if (AnimIsFinished(&work->anim)) {
             work->state = work->idleState;
             work->stateTimer = 0;
         }
 
         break;
-    case 15:
+    case EMY_STATE_GRAVITY_SQUASH:
         if (work->stateTimer == 0) {
             ColliderSetDisabled(&actor->collider, 1);
             actor->flags |= BTLOBJ_FLAG_INTANGIBLE;
@@ -632,18 +632,18 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
 
         if (work->steps <= 0) {
             work->stateTimer = 0;
-            work->state = 16;
+            work->state = EMY_STATE_GRAVITY_HOLD;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 16:
+    case EMY_STATE_GRAVITY_HOLD:
         if (work->stateTimer > 44) {
             if (actor->hp <= 0) {
-                work->state = 3;
+                work->state = EMY_STATE_DEFEATED;
             } else {
-                work->state = 17;
+                work->state = EMY_STATE_GRAVITY_RECOVER;
             }
 
             work->stateTimer = 0;
@@ -652,7 +652,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 17:
+    case EMY_STATE_GRAVITY_RECOVER:
         if (work->stateTimer == 0) {
             ColliderSetDisabled(&actor->collider, 0);
             work->steps = 10;
@@ -670,7 +670,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 6:
+    case EMY_STATE_HEALED:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
             work->scaleX = 0x100;
@@ -697,7 +697,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 10:
+    case EMY_STATE_WARPED:
         if (work->stateTimer == 0) {
             work->steps = 16;
         }
@@ -731,7 +731,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 3:
+    case EMY_STATE_DEFEATED:
         if (work->stateTimer == 0) {
             s32 t;
 
@@ -791,7 +791,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         break;
-    case 5:
+    case EMY_STATE_CARD_BROKEN:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
         }

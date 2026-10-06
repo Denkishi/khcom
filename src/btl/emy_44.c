@@ -47,6 +47,11 @@ void task_emy_44_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy44Def, obj);
 }
 
+enum Emy44State {
+    EMY44_STATE_BASH = 18,
+    EMY44_STATE_FIRE
+};
+
 u8 task_emy_44_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
@@ -62,14 +67,14 @@ u8 task_emy_44_1(EmyWork* work) {
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x4FFF : pos - act->x <= 0x4FFF) {
-            work->state = 0x12;
+            work->state = EMY44_STATE_BASH;
         } else {
-            work->state = 0x13;
+            work->state = EMY44_STATE_FIRE;
         }
     }
 
     switch (work->state) {
-    case 0x12:
+    case EMY44_STATE_BASH:
         AnimChangeWithDef(sEmy44AnimDefs, &w->anim, 0, 0, w->tiles);
 
         switch (AnimGetFrame(&work->anim)) {
@@ -93,7 +98,7 @@ u8 task_emy_44_1(EmyWork* work) {
         }
 
         break;
-    case 0x13:
+    case EMY44_STATE_FIRE:
         AnimChangeWithDef(sEmy44AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (AnimGetFrame(&work->anim) == 7 && work->anim.timer == 0) {

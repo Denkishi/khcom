@@ -45,9 +45,16 @@ TaskDesc gTaskDescEmy22 = {
 
 void task_emy_22_0(Emy22Work* work, void* obj) {
     EmyInit(&work->base, &sEmy22Def, obj);
-    work->base.idleState = 7;
+    work->base.idleState = EMY_STATE_HOVER;
     work->counterPending = 0;
 }
+
+enum Emy22State {
+    EMY22_STATE_WARP_OUT = 18,
+    EMY22_STATE_WARP_IN,
+    EMY22_STATE_DRAIN_LUNGE,
+    EMY22_STATE_LUNGE
+};
 
 u8 task_emy_22_1(Emy22Work* work) {
     Emy22Work* w;
@@ -61,28 +68,28 @@ u8 task_emy_22_1(Emy22Work* work) {
 
     if (EmyUpdateReaction(&work->base)) {
         if (act->hp < act->maxHp) {
-            work->base.state = 20;
+            work->base.state = EMY22_STATE_DRAIN_LUNGE;
         } else {
-            work->base.state = 21;
+            work->base.state = EMY22_STATE_LUNGE;
         }
     }
 
     switch (work->base.state) {
-    case 1:
+    case EMY_STATE_HURT:
         if (work->base.stateTimer == 0) {
             w->counterPending = 1;
         }
 
         break;
-    case 7:
+    case EMY_STATE_HOVER:
         if (w->counterPending && work->base.stateTimer == 0) {
-            work->base.state = 18;
+            work->base.state = EMY22_STATE_WARP_OUT;
             work->base.stateTimer = 0;
             w->counterPending = 0;
         }
 
         break;
-    case 18:
+    case EMY22_STATE_WARP_OUT:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                 w->base.tiles);
@@ -101,10 +108,10 @@ u8 task_emy_22_1(Emy22Work* work) {
             }
         }
 
-        work->base.state = 19;
+        work->base.state = EMY22_STATE_WARP_IN;
         work->base.stateTimer = 0;
         break;
-    case 19:
+    case EMY22_STATE_WARP_IN:
         if (work->base.stateTimer == 0) {
             GetEnemyTargetPosition(act, &pos, NULL, NULL);
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
@@ -143,7 +150,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         work->base.state = work->base.idleState;
         work->base.stateTimer = 0;
         break;
-    case 20:
+    case EMY22_STATE_DRAIN_LUNGE:
         if (work->base.stateTimer == 0) {
             GetEnemyTargetPosition(act, &pos2, NULL, NULL);
 
@@ -169,7 +176,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         }
 
         break;
-    case 21:
+    case EMY22_STATE_LUNGE:
         if (work->base.stateTimer == 0) {
             GetEnemyTargetPosition(act, &pos3, NULL, NULL);
 

@@ -61,25 +61,30 @@ void task_emy_trump_h_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmyTrumpHDef, obj);
 }
 
+enum EmyTrumpState {
+    EMY_TRUMP_STATE_CARD_DEATH = 18,
+    EMY_TRUMP_STATE_LUNGE
+};
+
 u8 task_emy_trump_h_1(EmyWork* work) {
     BtlObj* act;
 
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        work->state = 0x13;
+        work->state = EMY_TRUMP_STATE_LUNGE;
     }
 
-    if (work->state == 3) {
-        work->state = 0x12;
+    if (work->state == EMY_STATE_DEFEATED) {
+        work->state = EMY_TRUMP_STATE_CARD_DEATH;
     }
 
     switch (work->state) {
-    case 0x13:
+    case EMY_TRUMP_STATE_LUNGE:
         AnimChangeWithDef(&sEmyTrumpHAnimDef, &work->anim, 0, 0, work->tiles);
         EmyLungeAttack(work, 0x19, 8, 0x0A, 0x12B, 0x30, SONG_BTL_MON_SWORD00, 0x50, 0, 0x18);
         break;
-    case 0x12:
+    case EMY_TRUMP_STATE_CARD_DEATH:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(work->def->animDef, &work->anim, 0, 0, work->tiles);
             m4aSongNumStart(SONG_BTL_CARDDEATH);
@@ -118,15 +123,15 @@ u8 task_emy_trump_s_1(EmyWork* work) {
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        work->state = 0x13;
+        work->state = EMY_TRUMP_STATE_LUNGE;
     }
 
-    if (work->state == 3) {
-        work->state = 0x12;
+    if (work->state == EMY_STATE_DEFEATED) {
+        work->state = EMY_TRUMP_STATE_CARD_DEATH;
     }
 
     switch (work->state) {
-    case 0x13:
+    case EMY_TRUMP_STATE_LUNGE:
         AnimChangeWithDef(&sEmyTrumpSAnimDef, &work->anim, 0, 0, work->tiles);
         EmyLungeAttack(work, 0x14, 0x1E, 0x0A, 0x12A, 0x46, SONG_BTL_MON_SWORD01, 0x10, 0, 0x18);
 
@@ -135,7 +140,7 @@ u8 task_emy_trump_s_1(EmyWork* work) {
         }
 
         break;
-    case 0x12:
+    case EMY_TRUMP_STATE_CARD_DEATH:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(work->def->animDef, &work->anim, 0, 0, work->tiles);
             m4aSongNumStart(SONG_BTL_CARDDEATH);

@@ -49,6 +49,11 @@ void task_emy_39_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy39Def, obj);
 }
 
+enum Emy39State {
+    EMY39_STATE_FIRE = 18,
+    EMY39_STATE_BUMP
+};
+
 u8 task_emy_39_1(Emy39Work* work) {
     Emy39Work* w;
     BtlObj* act;
@@ -68,16 +73,16 @@ u8 task_emy_39_1(Emy39Work* work) {
 
         switch (r & 1) {
         case 0:
-            work->base.state = 0x12;
+            work->base.state = EMY39_STATE_FIRE;
             break;
         case 1:
-            work->base.state = 0x13;
+            work->base.state = EMY39_STATE_BUMP;
             break;
         }
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY39_STATE_FIRE:
         AnimChangeWithDef(sEmy39AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer == 0x30) {
@@ -101,7 +106,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         }
 
         break;
-    case 0x13:
+    case EMY39_STATE_BUMP:
         c = work->base.stateTimer;
 
         if (c == 0) {

@@ -50,6 +50,14 @@ void task_emy_21_0(Emy21Work* work, void* obj) {
     work->dashSpeed = 0;
 }
 
+enum Emy21State {
+    EMY21_STATE_FUSE = 18,
+    EMY21_STATE_EXPLODE,
+    EMY21_STATE_CHARGE_WINDUP,
+    EMY21_STATE_CHARGE,
+    EMY21_STATE_CHARGE_MISS
+};
+
 u8 task_emy_21_1(Emy21Work* work) {
     Emy21Work* w;
     BtlObj* act;
@@ -64,29 +72,29 @@ u8 task_emy_21_1(Emy21Work* work) {
         d = pos - act->x;
 
         if (d >= 0 ? d <= 0x3FFF : act->x - pos <= 0x3FFF) {
-            work->base.state = 0x12;
+            work->base.state = EMY21_STATE_FUSE;
         } else {
-            work->base.state = 0x14;
+            work->base.state = EMY21_STATE_CHARGE_WINDUP;
         }
-    } else if (work->base.state == 5 && work->base.stateTimer == 0) {
+    } else if (work->base.state == EMY_STATE_CARD_BROKEN && work->base.stateTimer == 0) {
         m4aSongNumStop(SONG_EF_TARU_BOMB);
     }
 
     switch (work->base.state) {
-    case 0x12:
+    case EMY21_STATE_FUSE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         }
 
         if (work->base.stateTimer > 29) {
             work->base.stateTimer = 0;
-            work->base.state = 0x13;
+            work->base.state = EMY21_STATE_EXPLODE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 0x13: {
+    case EMY21_STATE_EXPLODE: {
         u16 t;
 
         t = work->base.stateTimer;
@@ -113,16 +121,16 @@ u8 task_emy_21_1(Emy21Work* work) {
         work->base.stateTimer++;
         break;
     }
-    case 0x14:
+    case EMY21_STATE_CHARGE_WINDUP:
         AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 0x15;
+            work->base.state = EMY21_STATE_CHARGE;
         }
 
         break;
-    case 0x15:
+    case EMY21_STATE_CHARGE:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
             w->dashSpeed = 0;
@@ -135,21 +143,21 @@ u8 task_emy_21_1(Emy21Work* work) {
             ? ApplyAttackBox(0xBE, act->x, act->y, act->z, 20, 32, 32)
             : ApplyAttackBox(0xBE, act->x, act->y, act->z, 20, 32, 32)) {
             work->base.stateTimer = 0;
-            work->base.state = 0x13;
+            work->base.state = EMY21_STATE_EXPLODE;
         } else if (work->base.stateTimer > 28) {
             work->base.stateTimer = 0;
-            work->base.state = 0x16;
+            work->base.state = EMY21_STATE_CHARGE_MISS;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 0x16:
+    case EMY21_STATE_CHARGE_MISS:
         AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 0x13;
+            work->base.state = EMY21_STATE_EXPLODE;
             break;
         }
 

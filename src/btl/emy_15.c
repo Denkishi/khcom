@@ -48,6 +48,14 @@ void task_emy_15_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy15Def, obj);
 }
 
+enum Emy15State {
+    EMY15_STATE_DASH_WINDUP = 18,
+    EMY15_STATE_DASH,
+    EMY15_STATE_DASH_END,
+    EMY15_STATE_JUMP,
+    EMY15_STATE_JUMP_LUNGE
+};
+
 u8 task_emy_15_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
@@ -61,25 +69,25 @@ u8 task_emy_15_1(EmyWork* work) {
 
         switch (r & 1) {
         case 0:
-            work->state = 0x12;
+            work->state = EMY15_STATE_DASH_WINDUP;
             break;
         case 1:
-            work->state = 0x15;
+            work->state = EMY15_STATE_JUMP;
             break;
         }
     }
 
     switch (work->state) {
-    case 0x12:
+    case EMY15_STATE_DASH_WINDUP:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 0, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {
-            work->state = 0x13;
+            work->state = EMY15_STATE_DASH;
             work->stateTimer = 0x1E;
         }
 
         break;
-    case 0x13:
+    case EMY15_STATE_DASH:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -97,12 +105,12 @@ u8 task_emy_15_1(EmyWork* work) {
         }
 
         if (work->stateTimer <= 0) {
-            work->state = 0x14;
+            work->state = EMY15_STATE_DASH_END;
             work->stateTimer = 0;
         }
 
         break;
-    case 0x14:
+    case EMY15_STATE_DASH_END:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 2, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {
@@ -110,21 +118,21 @@ u8 task_emy_15_1(EmyWork* work) {
         }
 
         break;
-    case 0x15:
+    case EMY15_STATE_JUMP:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 3, 0, w->tiles);
             work->vz = -0x533;
         }
 
         if (work->stateTimer > 5) {
-            work->state = 0x16;
+            work->state = EMY15_STATE_JUMP_LUNGE;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
 
         break;
-    case 0x16:
+    case EMY15_STATE_JUMP_LUNGE:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 4, 0, w->tiles);
         EmyLungeAttack(work, 0x16, 0x16, 0x3C, 0xB6, 0x40, SONG_BTL_MON_HIT02, 0x10, -0x0C, 0x0C);
         break;

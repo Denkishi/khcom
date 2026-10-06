@@ -49,9 +49,20 @@ TaskDesc gTaskDescEmy82 = {
     sizeof(Emy82Work),
 };
 
+enum Emy82State {
+    EMY82_STATE_JUMP_ATTACK = 18,
+    EMY82_STATE_HEAL,
+    EMY82_STATE_SUMMON,
+    EMY82_STATE_IDLE,
+    EMY82_STATE_HOP,
+    EMY82_STATE_FALL_START,
+    EMY82_STATE_FALL,
+    EMY82_STATE_LAND
+};
+
 void task_emy_82_0(Emy82Work* work, void* obj) {
     EmyInit(&work->base, &sEmy82Def, obj);
-    work->base.idleState = 0x15;
+    work->base.idleState = EMY82_STATE_IDLE;
     work->spawnCount = 0;
 }
 
@@ -100,30 +111,30 @@ u8 task_emy_82_1(Emy82Work* work) {
     if (EmyUpdateReaction(&work->base)) {
         switch ((u16)(GetRandom() % 3U)) {
         case 0:
-            work->base.state = 18;
+            work->base.state = EMY82_STATE_JUMP_ATTACK;
             break;
         case 1:
             if (gBtlWork->enemyCount > 1) {
-                work->base.state = 19;
+                work->base.state = EMY82_STATE_HEAL;
             } else {
-                work->base.state = 18;
+                work->base.state = EMY82_STATE_JUMP_ATTACK;
             }
 
             break;
         case 2:
-            work->base.state = 20;
+            work->base.state = EMY82_STATE_SUMMON;
             break;
         }
     }
 
     switch (work->base.state) {
-    case 5:
+    case EMY_STATE_CARD_BROKEN:
         if (work->base.stateTimer == 0) {
             m4aSongNumStop(SONG_EF_RAPPA_CALL);
         }
 
         break;
-    case 22:
+    case EMY82_STATE_HOP:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (act->z < act->groundZ && (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED)) {
@@ -160,7 +171,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         }
 
         break;
-    case 21:
+    case EMY82_STATE_IDLE:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
 
         if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
@@ -177,7 +188,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         switch (AnimGetGfxIndex(&work->base.anim)) {
         case 0:
             if (work->base.anim.timer == 5 && (u16)((u32)GetRandom() % work->base.def->moveInterval) == 0) {
-                work->base.state = 22;
+                work->base.state = EMY82_STATE_HOP;
                 work->base.angle = GetEmyApproachAngle(&work->base);
             }
 
@@ -192,7 +203,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         }
 
         break;
-    case 18:
+    case EMY82_STATE_JUMP_ATTACK:
         {
             s32 d;
             s32 currentX;
@@ -249,14 +260,14 @@ u8 task_emy_82_1(Emy82Work* work) {
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                work->base.state = 23;
+                work->base.state = EMY82_STATE_FALL_START;
             } else {
                 work->base.stateTimer++;
             }
         }
 
         break;
-    case 19:
+    case EMY82_STATE_HEAL:
         {
             u32 frame;
 
@@ -306,14 +317,14 @@ u8 task_emy_82_1(Emy82Work* work) {
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                work->base.state = 23;
+                work->base.state = EMY82_STATE_FALL_START;
             } else {
                 work->base.stateTimer++;
             }
         }
 
         break;
-    case 20:
+    case EMY82_STATE_SUMMON:
         {
             u32 frame;
 
@@ -367,31 +378,31 @@ u8 task_emy_82_1(Emy82Work* work) {
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                work->base.state = 23;
+                work->base.state = EMY82_STATE_FALL_START;
             } else {
                 work->base.stateTimer++;
             }
         }
 
         break;
-    case 23:
+    case EMY82_STATE_FALL_START:
         AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 24;
+            work->base.state = EMY82_STATE_FALL;
         }
 
         break;
-    case 24:
+    case EMY82_STATE_FALL:
         AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (act->z >= act->groundZ) {
-            work->base.state = 25;
+            work->base.state = EMY82_STATE_LAND;
         }
 
         break;
-    case 25:
+    case EMY82_STATE_LAND:
         AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 1 && work->base.anim.timer == 0) {

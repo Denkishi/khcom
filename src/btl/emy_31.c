@@ -43,8 +43,21 @@ TaskDesc gTaskDescEmy31 = {
 
 void task_emy_31_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy31Def, obj);
-    work->idleState = 7;
+    work->idleState = EMY_STATE_HOVER;
 }
+
+enum Emy31State {
+    EMY31_STATE_FIRE = 18,
+    EMY31_STATE_BLIZZARD,
+    EMY31_STATE_THUNDER
+};
+
+enum Emy31CastPhase {
+    EMY31_CAST_PHASE_WINDUP,
+    EMY31_CAST_PHASE_CAST,
+    EMY31_CAST_PHASE_END,
+    EMY31_CAST_PHASE_FIRE_END
+};
 
 u8 task_emy_31_1(Emy31Work* work) {
     Emy31Work* w;
@@ -56,41 +69,41 @@ u8 task_emy_31_1(Emy31Work* work) {
     if (EmyUpdateReaction(&work->base)) {
         switch ((u16)(GetRandom() % 3)) {
         case 0:
-            work->base.state = 18;
+            work->base.state = EMY31_STATE_FIRE;
             break;
         case 1:
-            work->base.state = 19;
+            work->base.state = EMY31_STATE_BLIZZARD;
             break;
         case 2:
-            work->base.state = 20;
+            work->base.state = EMY31_STATE_THUNDER;
             break;
         }
 
-        w->state = 0;
+        w->state = EMY31_CAST_PHASE_WINDUP;
     }
 
     switch (work->base.state) {
-    case 18: {
+    case EMY31_STATE_FIRE: {
         s32 x;
         s32 y;
         work->base.vz = 0;
 
         switch (w->state) {
-        case 0:
+        case EMY31_CAST_PHASE_WINDUP:
             if (work->base.stateTimer == 0) {
                 AnimChangeWithDef(sEmy31AnimDefs, &w->base.anim, 0, 0,
                     w->base.tiles);
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                w->state = 1;
+                w->state = EMY31_CAST_PHASE_CAST;
                 work->base.stateTimer = 0;
             } else {
                 work->base.stateTimer++;
             }
 
             break;
-        case 1:
+        case EMY31_CAST_PHASE_CAST:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 1, 0);
 
@@ -108,14 +121,14 @@ u8 task_emy_31_1(Emy31Work* work) {
             }
 
             if (work->base.stateTimer > 30) {
-                w->state = 3;
+                w->state = EMY31_CAST_PHASE_FIRE_END;
                 work->base.stateTimer = 0;
             } else {
                 work->base.stateTimer++;
             }
 
             break;
-        case 3:
+        case EMY31_CAST_PHASE_FIRE_END:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 2, 0);
             }
@@ -128,7 +141,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             if (BgFxIsActive()) {
                 work->base.stateTimer++;
             } else {
-                w->state = 0;
+                w->state = EMY31_CAST_PHASE_WINDUP;
                 EmyReturnToIdle(&work->base);
             }
 
@@ -137,27 +150,27 @@ u8 task_emy_31_1(Emy31Work* work) {
 
         break;
     }
-    case 19: {
+    case EMY31_STATE_BLIZZARD: {
         s32 x;
         s32 y;
         work->base.vz = 0;
 
         switch (w->state) {
-        case 0:
+        case EMY31_CAST_PHASE_WINDUP:
             if (work->base.stateTimer == 0) {
                 AnimChangeWithDef(sEmy31AnimDefs, &w->base.anim, 1, 0,
                     w->base.tiles);
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                w->state = 1;
+                w->state = EMY31_CAST_PHASE_CAST;
                 work->base.stateTimer = 0;
             } else {
                 work->base.stateTimer++;
             }
 
             break;
-        case 1:
+        case EMY31_CAST_PHASE_CAST:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 1, ANIM_FLAG_LOOP);
 
@@ -175,14 +188,14 @@ u8 task_emy_31_1(Emy31Work* work) {
             }
 
             if (work->base.stateTimer > 60) {
-                w->state = 2;
+                w->state = EMY31_CAST_PHASE_END;
                 work->base.stateTimer = 0;
             } else {
                 work->base.stateTimer++;
             }
 
             break;
-        case 2:
+        case EMY31_CAST_PHASE_END:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 2, 0);
             }
@@ -195,7 +208,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             if (BgFxIsActive()) {
                 work->base.stateTimer++;
             } else {
-                w->state = 0;
+                w->state = EMY31_CAST_PHASE_WINDUP;
                 EmyReturnToIdle(&work->base);
             }
 
@@ -204,11 +217,11 @@ u8 task_emy_31_1(Emy31Work* work) {
 
         break;
     }
-    case 20:
+    case EMY31_STATE_THUNDER:
         work->base.vz = 0;
 
         switch (w->state) {
-        case 0:
+        case EMY31_CAST_PHASE_WINDUP:
             if (work->base.stateTimer == 0) {
                 AnimChangeWithDef(sEmy31AnimDefs, &w->base.anim, 2, 0,
                     w->base.tiles);
@@ -216,14 +229,14 @@ u8 task_emy_31_1(Emy31Work* work) {
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                w->state = 1;
+                w->state = EMY31_CAST_PHASE_CAST;
                 work->base.stateTimer = 0;
             } else {
                 work->base.stateTimer++;
             }
 
             break;
-        case 1:
+        case EMY31_CAST_PHASE_CAST:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 1, 0);
                 work->base.steps = 0;
@@ -245,7 +258,7 @@ u8 task_emy_31_1(Emy31Work* work) {
                 }
 
                 if (!BgFxIsActive()) {
-                    w->state = 2;
+                    w->state = EMY31_CAST_PHASE_END;
                     work->base.stateTimer = 0;
                     break;
                 }
@@ -253,13 +266,13 @@ u8 task_emy_31_1(Emy31Work* work) {
 
             work->base.stateTimer++;
             break;
-        case 2:
+        case EMY31_CAST_PHASE_END:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 2, 0);
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                w->state = 0;
+                w->state = EMY31_CAST_PHASE_WINDUP;
                 EmyReturnToIdle(&work->base);
             } else {
                 work->base.stateTimer++;

@@ -55,11 +55,25 @@ TaskDesc gTaskDescEmy37 = {
     sizeof(Emy37Work),
 };
 
+enum Emy37State {
+    EMY37_STATE_IDLE = 18,
+    EMY37_STATE_SINK,
+    EMY37_STATE_SUNK_MOVE,
+    EMY37_STATE_RISE,
+    EMY37_STATE_LUNGE = 24,
+    EMY37_STATE_AMBUSH_RISE,
+    EMY37_STATE_RISE_JUMP,
+    EMY37_STATE_RISE_FALL,
+    EMY37_STATE_SPAWN,
+    EMY37_STATE_AMBUSH_LEAP,
+    EMY37_STATE_AMBUSH_GLIDE
+};
+
 void task_emy_37_0(Emy37Work* work, void* obj) {
     EmyInit(&work->base, &sEmy37Def, obj);
     work->base.flags |= EMY_FLAG_DARK_DEATH;
-    work->base.idleState = 0x12;
-    work->base.state = 0x1C;
+    work->base.idleState = EMY37_STATE_IDLE;
+    work->base.state = EMY37_STATE_SPAWN;
     work->rotation = 0;
 }
 
@@ -71,33 +85,33 @@ u8 task_emy_37_1(Emy37Work* work) {
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        if (work->base.state == 20) {
+        if (work->base.state == EMY37_STATE_SUNK_MOVE) {
             work->rotation = 0;
             act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
-            work->base.state = 25;
+            work->base.state = EMY37_STATE_AMBUSH_RISE;
             work->base.actor.centerHeight = 20;
         } else {
-            work->base.state = 24;
+            work->base.state = EMY37_STATE_LUNGE;
         }
     }
 
     switch (work->base.state) {
-    case 24:
+    case EMY37_STATE_LUNGE:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         EmyLungeAttack(&work->base, 30, 14, 20, 0xD2, 70, SONG_BTL_MON_HIT00, 0, 0, 24);
         break;
-    case 25:
+    case EMY37_STATE_AMBUSH_RISE:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 29;
+            work->base.state = EMY37_STATE_AMBUSH_LEAP;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 29:
+    case EMY37_STATE_AMBUSH_LEAP:
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x399;
             AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -113,13 +127,13 @@ u8 task_emy_37_1(Emy37Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
-            work->base.state = 30;
+            work->base.state = EMY37_STATE_AMBUSH_GLIDE;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 30:
+    case EMY37_STATE_AMBUSH_GLIDE:
         if (work->base.stateTimer == 0) {
             s32 x;
             s32 y;
@@ -158,7 +172,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         }
 
         break;
-    case 28:
+    case EMY37_STATE_SPAWN:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 10, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -169,18 +183,18 @@ u8 task_emy_37_1(Emy37Work* work) {
         }
 
         break;
-    case 19:
+    case EMY37_STATE_SINK:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 9, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.state = 20;
+            work->base.state = EMY37_STATE_SUNK_MOVE;
             ColliderSetDisabled(&act->collider, 1);
             act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
 
         break;
-    case 20:
+    case EMY37_STATE_SUNK_MOVE:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 x;
             s32 y;
@@ -232,7 +246,7 @@ u8 task_emy_37_1(Emy37Work* work) {
 
             if (work->base.stateTimer > 160) {
                 w->rotation = 0;
-                work->base.state = 21;
+                work->base.state = EMY37_STATE_RISE;
                 ColliderSetDisabled(&act->collider, 0);
                 act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
                 act->centerHeight = 20;
@@ -244,7 +258,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         }
 
         break;
-    case 21:
+    case EMY37_STATE_RISE:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
 
         if (work->base.stateTimer == 30) {
@@ -253,41 +267,41 @@ u8 task_emy_37_1(Emy37Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
-            work->base.state = 26;
+            work->base.state = EMY37_STATE_RISE_JUMP;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 26:
+    case EMY37_STATE_RISE_JUMP:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 7, 0, w->base.tiles);
             work->base.vz = -0x433;
         }
 
         if (work->base.vz > 0) {
-            work->base.state = 27;
+            work->base.state = EMY37_STATE_RISE_FALL;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 27:
+    case EMY37_STATE_RISE_FALL:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 8, 0, w->base.tiles);
         }
 
         if (act->z >= act->groundZ) {
-            work->base.state = 18;
+            work->base.state = EMY37_STATE_IDLE;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
 
         break;
-    case 18:
+    case EMY37_STATE_IDLE:
         if (work->base.stateTimer == 0) {
             act->centerHeight = 20;
             ColliderSetDisabled(&act->collider, 0);
@@ -298,7 +312,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         TryEnemyCardUse(act);
 
         if ((u16)(GetRandom() % 200U) == 0) {
-            work->base.state = 4;
+            work->base.state = EMY_STATE_WALK;
 
             if (GetRandom() % 2 == 0) {
                 work->base.x = -((act->attackOffset
@@ -310,7 +324,7 @@ u8 task_emy_37_1(Emy37Work* work) {
 
             break;
         } else if ((u16)(GetRandom() % 100U) == 0) {
-            work->base.state = 19;
+            work->base.state = EMY37_STATE_SINK;
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->base.angle = GetRandom();
             work->base.stateTimer = 0;
@@ -393,7 +407,7 @@ void task_emy_37_2(Emy37Work* work) {
         if (StepHitFlash(act)) {
             DrawSprite(x, y, work->base.gfx, work->base.tiles, work->base.palette2, affine,
                 pri, -0x1004 - (act->y >> 8) * 4);
-        } else if (work->base.state == 0x14) {
+        } else if (work->base.state == EMY37_STATE_SUNK_MOVE) {
             DrawSprite(x, y, work->base.gfx, work->base.tiles, work->base.palette, affine,
                 pri, 0xFFFF);
         } else {

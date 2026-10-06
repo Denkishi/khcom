@@ -63,7 +63,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
             work->premium = 1;
         }
 
-        work->cardDef = &gCardDefs[work->args.cardId & 0xFFF];
+        work->cardDef = &gCardDefs[work->args.cardId & CARD_ID_MASK];
 
         if (work->cardDef->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
             work->cardBack = &gCardBacks[3];

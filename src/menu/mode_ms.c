@@ -446,7 +446,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
         }
 
         sMooglePackCards[i].revealed = 0;
-        id &= 0xFFF;
+        id &= CARD_ID_MASK;
         sMooglePackCards[i].palette = LoadObjPalette(gCardDefs[id].palette, 0x20);
         FadeSetPaletteExcluded(sMooglePackCards[i].palette->index + 0x10, 1);
         sMooglePackCards[i].tiles = LoadObjTiles(gCardDefs[id].tiles, 0x200);
@@ -556,10 +556,10 @@ void DrawMooglePackOpening() {
                 DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, sMooglePackCards[i].gfx, sMooglePackCards[i].tiles, sMooglePackCards[i].palette, affine, 0, 0x58);
 
                 if (sMooglePackCards[i].premium) {
-                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gCardPremiumValueDigitFrames[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackPremiumValueTiles, sMooglePackPremiumValuePalette, affine, 0, 0x48);
+                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gCardPremiumValueDigitFrames[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].value], sMooglePackPremiumValueTiles, sMooglePackPremiumValuePalette, affine, 0, 0x48);
                     DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, anim, sMooglePackPremiumTiles, sMooglePackCard00Palette, affine, 0, 0x40);
                 } else {
-                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gCardValueDigitFrames[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackValueTiles, sMooglePackCard00Palette, affine, 0, 0x48);
+                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gCardValueDigitFrames[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].value], sMooglePackValueTiles, sMooglePackCard00Palette, affine, 0, 0x48);
                 }
             }
         }
@@ -641,8 +641,8 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     ReleaseObjTiles(sMooglePackCards[i].tiles2);
                     sMooglePackCards[i].palette2 = LoadObjPalette(gCard00Palette, 0x20);
                     FadeSetPaletteExcluded(sMooglePackCards[i].palette2->index + 0x10, 1);
-                    sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].tiles, 0x300);
-                    sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].gfx;
+                    sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].tiles, 0x300);
+                    sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].gfx;
                     sMooglePackCards[i].flipAngle = 0x40;
                     sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_FLIP;
                     sMooglePackCards[i].revealed = 1;
@@ -696,8 +696,8 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     ReleaseObjTiles(sMooglePackCards[i].tiles2);
                     sMooglePackCards[i].palette2 = LoadObjPalette(gCard00Palette, 0x20);
                     FadeSetPaletteExcluded(sMooglePackCards[i].palette2->index + 0x10, 1);
-                    sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].tiles, 0x300);
-                    sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & 0xFFF].category].gfx;
+                    sMooglePackCards[i].tiles2 = LoadObjTiles(gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].tiles, 0x300);
+                    sMooglePackCards[i].backSprite = gCardBacks[gCardDefs[sMooglePackCardIds[i] & CARD_ID_MASK].category].gfx;
                     sMooglePackCards[i].flipAngle = 0x40;
                     sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_FLIP_PREMIUM;
                     sMooglePackCards[i].revealed = 1;
@@ -780,10 +780,10 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     sMooglePackCardCursor = 0;
                     sMooglePackCursorX = sMooglePackCards[0].x - 0x1000;
                     sMooglePackCursorY = sMooglePackCards[0].y - 0x2000;
-                    LoadPalette(gMooglePackCardInfoPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
-                    sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
-                    sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                    LoadObjPaletteBank(sMooglePackCategoryPalette->index, gMooglePackCategoryPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16);
+                    LoadPalette(gMooglePackCardInfoPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].category * 16, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
+                    sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].name), sMooglePackNameText);
+                    sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].kind]), sMooglePackDescText);
+                    LoadObjPaletteBank(sMooglePackCategoryPalette->index, gMooglePackCategoryPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].category * 16);
                     EnableBg(3);
                     sMooglePackCards[i].state = MOOGLE_PACK_CARD_STATE_BROWSE;
                 }
@@ -825,10 +825,10 @@ u8 UpdateMooglePackOpening(u16 freePack) {
             }
 
             if (sMooglePackCardCursor != old) {
-                LoadPalette(gMooglePackCardInfoPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
-                sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
-                sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                LoadObjPaletteBank(sMooglePackCategoryPalette->index, gMooglePackCategoryPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16);
+                LoadPalette(gMooglePackCardInfoPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].category * 16, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
+                sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].name), sMooglePackNameText);
+                sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].kind]), sMooglePackDescText);
+                LoadObjPaletteBank(sMooglePackCategoryPalette->index, gMooglePackCategoryPalettes + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & CARD_ID_MASK].category * 16);
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
 

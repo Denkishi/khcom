@@ -7566,11 +7566,11 @@ u16 GetCardCpCost(u16 cardId) {
     CardStat* stat;
 
     if (cardId & CARD_FLAG_PREMIUM) {
-        return gCardDefs[cardId & 0x0FFF].cpCost;
+        return gCardDefs[cardId & CARD_ID_MASK].cpCost;
     }
 
-    if ((cardId & 0x0FFF) <= 0x1C1) {
-        stat = (CardStat*)&gCardDefs[cardId & 0x0FFF].kind;
+    if ((cardId & CARD_ID_MASK) <= 0x1C1) {
+        stat = (CardStat*)&gCardDefs[cardId & CARD_ID_MASK].kind;
         n = stat->value;
 
         if (n == 0) {
@@ -7583,7 +7583,7 @@ u16 GetCardCpCost(u16 cardId) {
         return cpCost;
     }
 
-    return gCardDefs[cardId & 0x0FFF].cpCost;
+    return gCardDefs[cardId & CARD_ID_MASK].cpCost;
 }
 
 u16 GetCardMooglePointValue(u16 cardId) {
@@ -7592,7 +7592,7 @@ u16 GetCardMooglePointValue(u16 cardId) {
     if ((cardId & CARD_FLAG_PREMIUM) == 0) {
         points = GetCardCpCost(cardId) / 5 * 2;
     } else {
-        points = GetCardCpCost(cardId & 0x0FFF) / 5 * 2 + 10;
+        points = GetCardCpCost(cardId & CARD_ID_MASK) / 5 * 2 + 10;
     }
 
     return points;

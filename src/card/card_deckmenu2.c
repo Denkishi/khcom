@@ -958,7 +958,7 @@ void CopyActiveDeckCards(s32 cardSet, u16* out) {
     case DECK_CARD_SET_MAIN:
         for (i = 0; i < 99; i++) {
             if (cards[i] != CARD_NONE) {
-                if (gCardDefs[gCardCollection[cards[i]] & 0xFFF].category <= 2) {
+                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category <= 2) {
                     *out++ = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 }
             }
@@ -968,7 +968,7 @@ void CopyActiveDeckCards(s32 cardSet, u16* out) {
     case DECK_CARD_SET_ENEMY:
         for (i = 0; i < 99; i++) {
             if (cards[i] != CARD_NONE) {
-                if (gCardDefs[gCardCollection[cards[i]] & 0xFFF].category == 3) {
+                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == 3) {
                     *out++ = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 }
             }
@@ -4448,7 +4448,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
                     args.panel = 0;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
-                } else if (gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
+                } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
@@ -4476,7 +4476,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
         }
     } else {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
+            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -4531,7 +4531,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) 
                 args.cardId = GetCardIdForKindEntry(
                     work->entries[i].kind);
 
-                if (gCardDefs[args.cardId & 0xFFF].category == kind - 1) {
+                if (gCardDefs[args.cardId & CARD_ID_MASK].category == kind - 1) {
                     args.col = x;
                     args.row = y;
                     args.panel = 1;
@@ -4570,7 +4570,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) 
                 args.cardId = GetCardIdForKindEntry(
                     work->entries[i].kind);
 
-                if (gCardDefs[args.cardId & 0xFFF].category == kind - 1) {
+                if (gCardDefs[args.cardId & CARD_ID_MASK].category == kind - 1) {
                     if ((u16)(work->entries[i].kind - 78) >
                         64) {
                         args.col = x;
@@ -5219,7 +5219,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
             work->gfx3 = AnimGetGfx(&work->anim);
         }
 
-        def = &gCardDefs[id & 0xFFF];
+        def = &gCardDefs[id & CARD_ID_MASK];
         work->tiles7 = LoadObjTiles(gCardBacks[def->category].tiles, 0x300);
         work->tiles8 = LoadObjTiles(def->tiles, 0x200);
         work->palette6 = LoadObjPalette(def->palette, 32);
@@ -5249,7 +5249,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
             DrawValueCount(work->entries[i].valueCounts[j], j);
         }
 
-        defIndex = id & 0xFFF;
+        defIndex = id & CARD_ID_MASK;
         LoadCardNameText(work, defIndex);
         LoadCardDescriptionText(work, defIndex);
 
@@ -5662,7 +5662,7 @@ s32 AddSelectedValueCardToDeck(DeckMenuWork* work) {
         raw = gCardCollection[card];
 
         if (!(mask & raw)) {
-            id = raw & 0xFFF;
+            id = raw & CARD_ID_MASK;
             def = &gCardDefs[id];
 
             if (id > 0x1C1) {
@@ -6034,7 +6034,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
                     args.panel = 0;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
-                } else if (gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
+                } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
@@ -6062,7 +6062,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
         }
     } else {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
+            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;

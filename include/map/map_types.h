@@ -5,6 +5,14 @@
 #include "fld_types.h"
 #include "taskpool.h"
 
+enum EventKeyRule {
+    EVENT_KEY_RULE_NONE,
+    EVENT_KEY_RULE_AT_LEAST,
+    EVENT_KEY_RULE_AT_MOST,
+    EVENT_KEY_RULE_EXACT,
+    EVENT_KEY_RULE_TOTAL
+};
+
 typedef struct EventKey {
     u8 kind;
     u8 color;

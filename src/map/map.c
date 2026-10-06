@@ -2147,7 +2147,7 @@ EventKey* GetEventKey(u8 index) {
 
     sEventKey = *key;
 
-    if (index == 0 && key->rule == 4 && sEventKeyProgress->remaining != 0) {
+    if (index == 0 && key->rule == EVENT_KEY_RULE_TOTAL && sEventKeyProgress->remaining != 0) {
         sEventKey.value = sEventKeyProgress->remaining;
     }
 
@@ -2187,13 +2187,13 @@ u8 DoorAcceptsMapCard(MapCardAttributes* card) {
     }
 
     switch (key->rule) {
-    case 1:
+    case EVENT_KEY_RULE_AT_LEAST:
         return card->value >= key->value;
-    case 2:
+    case EVENT_KEY_RULE_AT_MOST:
         return card->value <= key->value;
-    case 3:
+    case EVENT_KEY_RULE_EXACT:
         return card->value == key->value;
-    case 4:
+    case EVENT_KEY_RULE_TOTAL:
         return card->value != 0;
     }
 
@@ -2201,7 +2201,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* card) {
 }
 
 s32 PayEventKey(MapCardAttributes* card) {
-    if (GetEventKey(0)->rule == 4) {
+    if (GetEventKey(0)->rule == EVENT_KEY_RULE_TOTAL) {
         if (sEventKey.value > card->value) {
             sEventKey.value -= card->value;
             sEventKeyProgress->remaining = sEventKey.value;

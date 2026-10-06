@@ -1045,7 +1045,7 @@ entries:
   fields:
     tiles: gBosPcBgTiles
     tiles2: 0
-    palette: gBosPcBgPalette
+    palette: gBosPcBgPalettes
     maps: gEventBgUnusedParasiteCageBattleBg3MapBlocks
     maps2: 0
     maps3: 0

@@ -2235,7 +2235,7 @@ const CardDef gCardDefs[950] = {
         CARD_KIND_GUARD_ARMOR, 0x0, 1, HC_EFFECT_WIDE_ATTACK_2, 575, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gEnemyNameParasiteCage), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gEnemyNameParasiteCage), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 1, HC_EFFECT_DISPEL, 605, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
@@ -2487,43 +2487,43 @@ const CardDef gCardDefs[950] = {
         CARD_KIND_TRICKMASTER, 0x0, 9, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 0, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 1, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 2, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 3, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 4, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 5, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 6, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 7, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 8, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
+        gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalettes, LOCALIZED(gCharacterNameCardOfSpades), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
         CARD_KIND_PARASITE_CAGE, 0x0, 9, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {

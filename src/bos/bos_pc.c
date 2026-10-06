@@ -152,7 +152,7 @@ static const PcAnimStep* sBosPcAnims[14] = {
 static const EmyKind sBosPcEmyKind = { ENEMY_PARASITE_CAGE, 256, 16, 8, 0, 128, 0 };
 
 static const PcBattleBackgroundDef sBosPcBattleBackgroundDef = {
-    gBosPcBgTiles, 0x3340, gBosPcBgPalette, 0x100,
+    gBosPcBgTiles, sizeof(gBosPcBgTiles), gBosPcBgPalettes, sizeof(gBosPcBgPalettes),
     { gBosPcBgLeftMap, gBosPcBgRightMap, gBosPcBgLeftMap, gBosPcBgRightMap, gBosPcBgFillMap, gBosPcBgFillMap }
 };
 
@@ -5275,7 +5275,7 @@ void BosPcDraw(PcWork* work) {
 
     if (work->flash != work->prevFlash) {
         if (work->flash == 0) {
-            LoadPalette(gBosPcBgPalette, (void*)PLTT, sizeof(gBosPcBgPalette));
+            LoadPalette(gBosPcBgPalettes[0], (void*)PLTT, sizeof(gBosPcBgPalettes[0]));
         } else {
             LoadPalette(gHitFlashPalette, (void*)PLTT, sizeof(gHitFlashPalette));
         }

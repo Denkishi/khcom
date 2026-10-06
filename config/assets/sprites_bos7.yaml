@@ -21,7 +21,7 @@ objects:
     data_end: 0x09EFAF60
   - name: sprites_bos7_frames_2.s
     start: 0x09C913F4
-    end: 0x09C91E54
+    end: 0x09C94A94
     data_start: 0x09EFBEC4
     data_end: 0x09EFBFDC
   - name: sprites_bos7_tiles.s
@@ -41,7 +41,7 @@ objects:
     data_end: 0x09ED246C
   - name: sprites_bos7_frames_2.s
     start: 0x09C6A900
-    end: 0x09C6B360
+    end: 0x09C6DFA0
     data_start: 0x09ED343C
     data_end: 0x09ED3554
   - name: sprites_bos7_tiles.s
@@ -61,7 +61,7 @@ objects:
     data_end: 0x09F86CAC
   - name: sprites_bos7_frames_2.s
     start: 0x09D01720
-    end: 0x09D02180
+    end: 0x09D04DC0
     data_start: 0x09F886D8
     data_end: 0x09F887F0
   - name: sprites_bos7_tiles.s
@@ -579,16 +579,15 @@ entries:
     size: 372
 - name: gBosPcBgTiles
   format: tiles4
-  width: 8
   us:
     address: 0x09C91754
-    size: 1792
+    size: 13120
   jp:
     address: 0x09C6AC60
-    size: 1792
+    size: 13120
   eu:
     address: 0x09D01A80
-    size: 1792
+    size: 13120
 - name: gBosLstBitTiles
   format: tiles4
   width: 8

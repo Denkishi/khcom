@@ -52,7 +52,7 @@ objects:
     end: 0x09A3DE9C
   - name: sprite_palettes_17.s
     start: 0x09D69274
-    end: 0x09D69294
+    end: 0x09D69374
   - name: sprite_palettes_18.s
     start: 0x09D6CF34
     end: 0x09D6D134
@@ -110,7 +110,7 @@ objects:
     end: 0x099F2924
   - name: sprite_palettes_17.s
     start: 0x09D42780
-    end: 0x09D427A0
+    end: 0x09D42880
   - name: sprite_palettes_18.s
     start: 0x09D46440
     end: 0x09D46640
@@ -171,7 +171,7 @@ objects:
     end: 0x09A9B960
   - name: sprite_palettes_18.s
     start: 0x09DD91A0
-    end: 0x09DD91C0
+    end: 0x09DD92A0
   - name: sprite_palettes_19.s
     start: 0x09DDCE60
     end: 0x09DDD060
@@ -6691,16 +6691,17 @@ entries:
     size: 32
 - name: bos_pc_bg
   format: palette
-  symbol: gBosPcBgPalette
+  symbol: gBosPcBgPalettes
+  shape: [8, 16]
   us:
     address: 0x09D69274
-    size: 32
+    size: 256
   jp:
     address: 0x09D42780
-    size: 32
+    size: 256
   eu:
     address: 0x09DD91A0
-    size: 32
+    size: 256
 - name: gSrollSecnThemeSongPalette
   format: palette
   us:

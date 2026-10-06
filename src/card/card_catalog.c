@@ -2239,7 +2239,7 @@ const CardDef gCardDefs[950] = {
         CARD_KIND_PARASITE_CAGE, 0x0, 1, HC_EFFECT_DISPEL, 605, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gEnemyNameTrickmaster), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gEnemyNameTrickmaster), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 1, HC_EFFECT_VALUE_BREAK, 595, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
@@ -2447,43 +2447,43 @@ const CardDef gCardDefs[950] = {
         CARD_KIND_OOGIE_BOOGIE, 0x0, 9, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 0, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 1, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 2, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 3, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 4, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 5, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 6, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 7, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 8, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
-        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
+        gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalettes, LOCALIZED(gCharacterNameCardOfSpades), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
         CARD_KIND_TRICKMASTER, 0x0, 9, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {

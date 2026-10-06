@@ -25,7 +25,7 @@ objects:
     end: 0x096FAC84
   - name: sprite_palettes_8.s
     start: 0x096FB2A4
-    end: 0x096FB2C4
+    end: 0x096FB304
   - name: sprite_palettes_9.s
     start: 0x096FB864
     end: 0x096FBF24
@@ -83,7 +83,7 @@ objects:
     end: 0x096B3460
   - name: sprite_palettes_8.s
     start: 0x096B3A80
-    end: 0x096B3AA0
+    end: 0x096B3AE0
   - name: sprite_palettes_9.s
     start: 0x096B4040
     end: 0x096B4700
@@ -144,7 +144,7 @@ objects:
     end: 0x096C81AC
   - name: sprite_palettes_9.s
     start: 0x096C87CC
-    end: 0x096C87EC
+    end: 0x096C882C
   - name: sprite_palettes_10.s
     start: 0x096C8D8C
     end: 0x096C934C
@@ -5069,16 +5069,17 @@ entries:
     size: 32
 - name: boss03obj
   format: palette
-  symbol: gBoss03objPalette
+  symbol: gBoss03objPalettes
+  shape: [3, 16]
   us:
     address: 0x096FB2A4
-    size: 32
+    size: 96
   jp:
     address: 0x096B3A80
-    size: 32
+    size: 96
   eu:
     address: 0x096C87CC
-    size: 32
+    size: 96
 - name: gBosDsdItaPalette
   format: palette
   us:

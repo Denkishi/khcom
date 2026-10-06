@@ -1060,7 +1060,7 @@ static ObjDef sChkObjCardDefs[] = {
     { gCardBos00Frames, gCardBos00Anims, gCardBos00Tiles, ARRAY_COUNT(gCardBos00Anims), gBoss00ObjPalette, "card_bos00.aob", "boss00_obj.acl", sizeof(gBoss00ObjPalette) },
     { gCardBos01Frames, gCardBos01Anims, gCardBos01Tiles, ARRAY_COUNT(gCardBos01Anims), gBoss01objPalette, "card_bos01.aob", "boss01obj.acl", sizeof(gBoss01objPalette) },
     { gCardBos02Frames, gCardBos02Anims, gCardBos02Tiles, ARRAY_COUNT(gCardBos02Anims), gBoss02objPalette, "card_bos02.aob", "boss02obj.acl", sizeof(gBoss02objPalette) },
-    { gCardBos03Frames, gCardBos03Anims, gCardBos03Tiles, ARRAY_COUNT(gCardBos03Anims), gBoss03objPalette, "card_bos03.aob", "boss03obj.acl", 96 },
+    { gCardBos03Frames, gCardBos03Anims, gCardBos03Tiles, ARRAY_COUNT(gCardBos03Anims), gBoss03objPalettes, "card_bos03.aob", "boss03obj.acl", sizeof(gBoss03objPalettes) },
     { gCardBos04Frames, gCardBos04Anims, gCardBos04Tiles, ARRAY_COUNT(gCardBos04Anims), gBosPcBgPalette, "card_bos04.aob", "bos_pc_bg.acl", 256 },
     { gCardBos05Frames, gCardBos05Anims, gCardBos05Tiles, ARRAY_COUNT(gCardBos05Anims), gCardBos05Palette, "card_bos_05.aob", "card_bos_05.acl", sizeof(gCardBos05Palette) },
     { gCardBos06Frames, gCardBos06Anims, gCardBos06Tiles, ARRAY_COUNT(gCardBos06Anims), gCardBos06Palette, "card_bos_06.aob", "card_bos_06.acl", sizeof(gCardBos06Palette) },

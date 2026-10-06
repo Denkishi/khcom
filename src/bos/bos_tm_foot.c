@@ -523,7 +523,7 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     work->tiles = LoadObjTiles(gBosTmObjTiles, sizeof(gBosTmObjTiles));
     work->tiles2 = AllocObjTiles(0x440, gBosTmFootTiles);
     work->tiles3 = AllocObjTiles(0x440, gBosTmFootTiles);
-    work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
+    work->palette = LoadObjPalette(gBoss03objPalettes, sizeof(gBoss03objPalettes));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     work->gfx = gBosTmFootFrames[2];
     work->gfx2 = gBosTmFootFrames[2];
@@ -845,7 +845,7 @@ void task_bos_tm_clb_0(TmClbWork* work, TmClbArg* arg) {
     TmArmPos* tip;
 
     work->tiles = LoadObjTiles(gBosTmObjTiles, sizeof(gBosTmObjTiles));
-    work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
+    work->palette = LoadObjPalette(gBoss03objPalettes, sizeof(gBoss03objPalettes));
     work->arg = arg;
     tip = arg->src;
     work->angle = tip->angle;
@@ -1039,7 +1039,7 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
 
     work->src = arg;
     work->tiles = LoadObjTiles(gBosTmObjTiles, sizeof(gBosTmObjTiles));
-    work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
+    work->palette = LoadObjPalette(gBoss03objPalettes, sizeof(gBoss03objPalettes));
     work->palette2 = LoadObjPalette(gHitFlashPalette, sizeof(gHitFlashPalette));
     work->timer = 0;
     work->timer2 = 0;

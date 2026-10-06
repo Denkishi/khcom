@@ -23,7 +23,7 @@ objects:
     start: 0x09652E84
     end: 0x0965DC04
   - name: sprites_boss_tm_palettes.s
-    start: 0x096FB2C4
+    start: 0x096FB304
     end: 0x096FB404
   jp:
   - name: sprites_boss_tm_frames.s
@@ -35,7 +35,7 @@ objects:
     start: 0x0960B660
     end: 0x096163E0
   - name: sprites_boss_tm_palettes.s
-    start: 0x096B3AA0
+    start: 0x096B3AE0
     end: 0x096B3BE0
   eu:
   - name: sprites_boss_tm_frames.s
@@ -47,7 +47,7 @@ objects:
     start: 0x0961CE0C
     end: 0x09627B8C
   - name: sprites_boss_tm_palettes.s
-    start: 0x096C87EC
+    start: 0x096C882C
     end: 0x096C892C
 entries:
 - name: gSioBattleLinkFrames
@@ -2139,17 +2139,6 @@ entries:
   eu:
     address: 0x09622B8C
     size: 20480
-- name: gUnk_096FB2C4
-  format: palette
-  us:
-    address: 0x096FB2C4
-    size: 64
-  jp:
-    address: 0x096B3AA0
-    size: 64
-  eu:
-    address: 0x096C87EC
-    size: 64
 - name: gBosTmClubPalettes
   format: palette
   us:

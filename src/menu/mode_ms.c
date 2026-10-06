@@ -774,7 +774,7 @@ u8 UpdateMooglePackOpening(u16 freePack) {
                     if (freePack & 1) {
                         SetupBg(3, 0, 31, 0);
                         SetBgScroll(3, 0, 0);
-                        RequestDma3Copy(gMooglePackCardInfoTiles, (u8*)GetBgCharBase(3) + 0x5800, 0x1400);
+                        RequestDma3Copy(gMoogleShopBgTiles + 0x5800, (u8*)GetBgCharBase(3) + 0x5800, 0x1400);
                         LoadBgMap(3, gMooglePackCardInfoMap, sizeof(gMooglePackCardInfoMap));
                     }
 
@@ -1170,7 +1170,7 @@ void mode_ms_shop_0() {
     sMoogleShopPackCursor = 0;
     sMoogleShopHasPacks = BuildMooglePackList(gGameState.floor);
     LoadBgPalette(0, gMoogleShopBgPalette, sizeof(gMoogleShopBgPalette));
-    LoadBgTiles(0, gMoogleShopBgTiles, 0x6860);
+    LoadBgTiles(0, gMoogleShopBgTiles, sizeof(gMoogleShopBgTiles));
     LoadDecimalDigitTiles(GetMooglePoints(), gMoogleShopPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
 #ifdef VERSION_EU
     LoadBgMap(0, sMoogleShopBgMapsByLanguage[gLanguage], size);

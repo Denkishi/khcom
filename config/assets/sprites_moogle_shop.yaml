@@ -1210,27 +1210,15 @@ entries:
     size: 320
 - name: gMoogleShopBgTiles
   format: tiles4
-  width: 32
   us:
     address: 0x09A1251C
-    size: 22528
+    size: 26720
   jp:
     address: 0x099C6FA4
-    size: 22528
+    size: 26720
   eu:
     address: 0x09A62980
-    size: 22528
-- name: gMooglePackCardInfoTiles
-  format: tiles4
-  us:
-    address: 0x09A17D1C
-    size: 4192
-  jp:
-    address: 0x099CC7A4
-    size: 4192
-  eu:
-    address: 0x09A68180
-    size: 4192
+    size: 26720
 - name: gMoogleShopPointsDigitTiles
   format: tiles4
   width: 2

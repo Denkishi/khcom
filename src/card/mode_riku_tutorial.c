@@ -967,7 +967,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
         return STOCK_ICE_NEEDLES;
     }
 
-    if ((u8)IsTwoSummonsThenKind(cards, count, 43) || (u8)IsSimbaMushuItem(cards, count)) {
+    if ((u8)IsTwoSummonsThenKind(cards, count, CARD_KIND_JACK) || (u8)IsSimbaMushuItem(cards, count)) {
         if (IsStockLearned(LEARNED_STOCK_TERROR)) {
             return STOCK_TERROR;
         }
@@ -977,31 +977,31 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
         return STOCK_CONFUSE;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 23, count) && IsStockLearned(LEARNED_STOCK_STOP_RAID)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_STOP, count) && IsStockLearned(LEARNED_STOCK_STOP_RAID)) {
         return STOCK_STOP_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 24, count) && IsStockLearned(LEARNED_STOCK_JUDGMENT)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_AERO, count) && IsStockLearned(LEARNED_STOCK_JUDGMENT)) {
         return STOCK_JUDGMENT;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 31, count) && IsStockLearned(LEARNED_STOCK_REFLECT_RAID)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_CLOUD, count) && IsStockLearned(LEARNED_STOCK_REFLECT_RAID)) {
         return STOCK_REFLECT_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 18, count) && IsStockLearned(LEARNED_STOCK_FIRE_RAID)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_FIRE, count) && IsStockLearned(LEARNED_STOCK_FIRE_RAID)) {
         return STOCK_FIRE_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 19, count) && IsStockLearned(LEARNED_STOCK_BLIZZARD_RAID)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_BLIZZARD, count) && IsStockLearned(LEARNED_STOCK_BLIZZARD_RAID)) {
         return STOCK_BLIZZARD_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 20, count) && IsStockLearned(LEARNED_STOCK_THUNDER_RAID)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_THUNDER, count) && IsStockLearned(LEARNED_STOCK_THUNDER_RAID)) {
         return STOCK_THUNDER_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 22, count) && IsStockLearned(LEARNED_STOCK_GRAVITY_RAID)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_GRAVITY, count) && IsStockLearned(LEARNED_STOCK_GRAVITY_RAID)) {
         return STOCK_GRAVITY_RAID;
     }
 
@@ -1021,11 +1021,11 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
         return STOCK_FIRAGA_BREAK;
     }
 
-    if ((u8)IsKindThenTwoOfCategory(cards, 25, 0, count) && IsStockLearned(LEARNED_STOCK_SHOCK_IMPACT)) {
+    if ((u8)IsKindThenTwoOfCategory(cards, CARD_KIND_SIMBA, 0, count) && IsStockLearned(LEARNED_STOCK_SHOCK_IMPACT)) {
         return STOCK_SHOCK_IMPACT;
     }
 
-    if ((u8)IsKindThenTwoOfCategory(cards, 27, 0, count) && IsStockLearned(LEARNED_STOCK_IDYLL_ROMP)) {
+    if ((u8)IsKindThenTwoOfCategory(cards, CARD_KIND_BAMBI, 0, count) && IsStockLearned(LEARNED_STOCK_IDYLL_ROMP)) {
         return STOCK_IDYLL_ROMP;
     }
 
@@ -1041,15 +1041,15 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
         return STOCK_HOMING_BLIZZARA;
     }
 
-    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 23, 1) && IsStockLearned(LEARNED_STOCK_BIND)) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, CARD_KIND_GRAVITY, CARD_KIND_STOP, 1) && IsStockLearned(LEARNED_STOCK_BIND)) {
         return STOCK_BIND;
     }
 
-    if ((u8)IsKindPairThenSummon(cards, count, 24, 22) && IsStockLearned(LEARNED_STOCK_TORNADO)) {
+    if ((u8)IsKindPairThenSummon(cards, count, CARD_KIND_AERO, CARD_KIND_GRAVITY) && IsStockLearned(LEARNED_STOCK_TORNADO)) {
         return STOCK_TORNADO;
     }
 
-    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 25, 1) && IsStockLearned(LEARNED_STOCK_QUAKE)) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, CARD_KIND_GRAVITY, CARD_KIND_SIMBA, 1) && IsStockLearned(LEARNED_STOCK_QUAKE)) {
         return STOCK_QUAKE;
     }
 
@@ -1340,7 +1340,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
         return STOCK_ICE_NEEDLES;
     }
 
-    if ((u8)IsTwoSummonsThenKind(cards, count, 43) || (u8)IsSimbaMushuItem(cards, count)) {
+    if ((u8)IsTwoSummonsThenKind(cards, count, CARD_KIND_JACK) || (u8)IsSimbaMushuItem(cards, count)) {
         if (IsLinkSideStockLearned(LEARNED_STOCK_TERROR, side)) {
             return STOCK_TERROR;
         }
@@ -1350,31 +1350,31 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
         return STOCK_CONFUSE;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 23, count) && IsLinkSideStockLearned(LEARNED_STOCK_STOP_RAID, side)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_STOP, count) && IsLinkSideStockLearned(LEARNED_STOCK_STOP_RAID, side)) {
         return STOCK_STOP_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 24, count) && IsLinkSideStockLearned(LEARNED_STOCK_JUDGMENT, side)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_AERO, count) && IsLinkSideStockLearned(LEARNED_STOCK_JUDGMENT, side)) {
         return STOCK_JUDGMENT;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 31, count) && IsLinkSideStockLearned(LEARNED_STOCK_REFLECT_RAID, side)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_CLOUD, count) && IsLinkSideStockLearned(LEARNED_STOCK_REFLECT_RAID, side)) {
         return STOCK_REFLECT_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 18, count) && IsLinkSideStockLearned(LEARNED_STOCK_FIRE_RAID, side)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_FIRE, count) && IsLinkSideStockLearned(LEARNED_STOCK_FIRE_RAID, side)) {
         return STOCK_FIRE_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 19, count) && IsLinkSideStockLearned(LEARNED_STOCK_BLIZZARD_RAID, side)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_BLIZZARD, count) && IsLinkSideStockLearned(LEARNED_STOCK_BLIZZARD_RAID, side)) {
         return STOCK_BLIZZARD_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 20, count) && IsLinkSideStockLearned(LEARNED_STOCK_THUNDER_RAID, side)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_THUNDER, count) && IsLinkSideStockLearned(LEARNED_STOCK_THUNDER_RAID, side)) {
         return STOCK_THUNDER_RAID;
     }
 
-    if ((u8)IsKindThenTwoAttackCards(cards, 22, count) && IsLinkSideStockLearned(LEARNED_STOCK_GRAVITY_RAID, side)) {
+    if ((u8)IsKindThenTwoAttackCards(cards, CARD_KIND_GRAVITY, count) && IsLinkSideStockLearned(LEARNED_STOCK_GRAVITY_RAID, side)) {
         return STOCK_GRAVITY_RAID;
     }
 
@@ -1394,11 +1394,11 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
         return STOCK_FIRAGA_BREAK;
     }
 
-    if ((u8)IsKindThenTwoOfCategory(cards, 25, 0, count) && IsLinkSideStockLearned(LEARNED_STOCK_SHOCK_IMPACT, side)) {
+    if ((u8)IsKindThenTwoOfCategory(cards, CARD_KIND_SIMBA, 0, count) && IsLinkSideStockLearned(LEARNED_STOCK_SHOCK_IMPACT, side)) {
         return STOCK_SHOCK_IMPACT;
     }
 
-    if ((u8)IsKindThenTwoOfCategory(cards, 27, 0, count) && IsLinkSideStockLearned(LEARNED_STOCK_IDYLL_ROMP, side)) {
+    if ((u8)IsKindThenTwoOfCategory(cards, CARD_KIND_BAMBI, 0, count) && IsLinkSideStockLearned(LEARNED_STOCK_IDYLL_ROMP, side)) {
         return STOCK_IDYLL_ROMP;
     }
 
@@ -1414,15 +1414,15 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
         return STOCK_HOMING_BLIZZARA;
     }
 
-    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 23, 1) && IsLinkSideStockLearned(LEARNED_STOCK_BIND, side)) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, CARD_KIND_GRAVITY, CARD_KIND_STOP, 1) && IsLinkSideStockLearned(LEARNED_STOCK_BIND, side)) {
         return STOCK_BIND;
     }
 
-    if ((u8)IsKindPairThenSummon(cards, count, 24, 22) && IsLinkSideStockLearned(LEARNED_STOCK_TORNADO, side)) {
+    if ((u8)IsKindPairThenSummon(cards, count, CARD_KIND_AERO, CARD_KIND_GRAVITY) && IsLinkSideStockLearned(LEARNED_STOCK_TORNADO, side)) {
         return STOCK_TORNADO;
     }
 
-    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 25, 1) && IsLinkSideStockLearned(LEARNED_STOCK_QUAKE, side)) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, CARD_KIND_GRAVITY, CARD_KIND_SIMBA, 1) && IsLinkSideStockLearned(LEARNED_STOCK_QUAKE, side)) {
         return STOCK_QUAKE;
     }
 
@@ -1542,31 +1542,31 @@ s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** cards, u8 count) {
 
         if (firstKind != secondKind && secondKind != thirdKind && thirdKind != firstKind) {
             if (firstDef->category == 0) {
-                if (secondKind == 39 && thirdKind == 40) {
+                if (secondKind == CARD_KIND_DONALD_DUCK && thirdKind == CARD_KIND_GOOFY) {
                     return 1;
                 }
 
-                if (secondKind == 40 && thirdKind == 39) {
+                if (secondKind == CARD_KIND_GOOFY && thirdKind == CARD_KIND_DONALD_DUCK) {
                     return 1;
                 }
             }
 
             if (cards[1]->cardDef->category == 0) {
-                if (firstKind == 39 && thirdKind == 40) {
+                if (firstKind == CARD_KIND_DONALD_DUCK && thirdKind == CARD_KIND_GOOFY) {
                     return 1;
                 }
 
-                if (firstKind == 40 && thirdKind == 39) {
+                if (firstKind == CARD_KIND_GOOFY && thirdKind == CARD_KIND_DONALD_DUCK) {
                     return 1;
                 }
             }
 
             if (cards[2]->cardDef->category == 0) {
-                if (secondKind == 39 && firstKind == 40) {
+                if (secondKind == CARD_KIND_DONALD_DUCK && firstKind == CARD_KIND_GOOFY) {
                     return 1;
                 }
 
-                if (secondKind == 40 && firstKind == 39) {
+                if (secondKind == CARD_KIND_GOOFY && firstKind == CARD_KIND_DONALD_DUCK) {
                     return 1;
                 }
             }
@@ -1659,7 +1659,7 @@ s32 IsAnyThenTwoGenie(CardDisplayWork** cards, u8 count) {
         secondKind = cards[1]->cardDef->kind;
         thirdKind = cards[2]->cardDef->kind;
 
-        if (secondKind == thirdKind && secondKind == 26 && firstKind != 26) {
+        if (secondKind == thirdKind && secondKind == CARD_KIND_GENIE && firstKind != CARD_KIND_GENIE) {
             return 1;
         }
     }
@@ -1676,7 +1676,7 @@ s32 IsFireMushuAttack(CardDisplayWork** cards, u8 count) {
         firstKind = cards[0]->cardDef->kind;
         secondKind = cards[1]->cardDef->kind;
 
-        if (firstKind == 18 && secondKind == 30 && cards[2]->cardDef->category == 0) {
+        if (firstKind == CARD_KIND_FIRE && secondKind == CARD_KIND_MUSHU && cards[2]->cardDef->category == 0) {
             return 1;
         }
     }
@@ -1709,7 +1709,7 @@ s32 IsSimbaMushuItem(CardDisplayWork** cards, u8 count) {
         firstKind = cards[0]->cardDef->kind;
         secondKind = cards[1]->cardDef->kind;
 
-        if (firstKind == 25 && secondKind == 30) {
+        if (firstKind == CARD_KIND_SIMBA && secondKind == CARD_KIND_MUSHU) {
             thirdDef = cards[2]->cardDef;
 
             if (thirdDef->category == 2 && !(thirdDef->flags & CARD_DEF_FLAG_FRIEND)) {
@@ -1755,7 +1755,7 @@ s32 IsGenieTinkerBellSummon(CardDisplayWork** cards, u8 count) {
         secondKind = cards[1]->cardDef->kind;
         thirdFlags = cards[2]->cardDef->flags;
 
-        if (firstKind == 26 && secondKind == 29 && (thirdFlags & 4)) {
+        if (firstKind == CARD_KIND_GENIE && secondKind == CARD_KIND_TINKER_BELL && (thirdFlags & 4)) {
             return 1;
         }
     }
@@ -1775,7 +1775,7 @@ s32 IsMegaEtherMegalixirItem(CardDisplayWork** cards, u8 count) {
         thirdDef = cards[2]->cardDef;
         thirdCategory = thirdDef->category;
 
-        if (firstKind == 36 && secondKind == 38 && thirdCategory == 2 && !(thirdDef->flags & CARD_DEF_FLAG_FRIEND)) {
+        if (firstKind == CARD_KIND_MEGA_ETHER && secondKind == CARD_KIND_MEGALIXIR && thirdCategory == 2 && !(thirdDef->flags & CARD_DEF_FLAG_FRIEND)) {
             return 1;
         }
     }
@@ -1795,7 +1795,7 @@ s32 IsFireDonaldMagic(CardDisplayWork** cards, u8 count) {
         thirdDef = cards[2]->cardDef;
         thirdCategory = thirdDef->category;
 
-        if (firstKind == 18 && secondKind == 39 && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
+        if (firstKind == CARD_KIND_FIRE && secondKind == CARD_KIND_DONALD_DUCK && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
             return 1;
         }
     }
@@ -1813,7 +1813,7 @@ s32 IsCloudStopAttack(CardDisplayWork** cards, u8 count) {
         secondKind = cards[1]->cardDef->kind;
         thirdCategory = cards[2]->cardDef->category;
 
-        if (firstKind == 31 && secondKind == 23 && thirdCategory == 0) {
+        if (firstKind == CARD_KIND_CLOUD && secondKind == CARD_KIND_STOP && thirdCategory == 0) {
             return 1;
         }
     }
@@ -1833,7 +1833,7 @@ s32 IsAeroFireMagic(CardDisplayWork** cards, u8 count) {
         thirdDef = cards[2]->cardDef;
         thirdCategory = thirdDef->category;
 
-        if (firstKind == 24 && secondKind == 18 && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
+        if (firstKind == CARD_KIND_AERO && secondKind == CARD_KIND_FIRE && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
             return 1;
         }
     }
@@ -1853,7 +1853,7 @@ s32 IsAeroBlizzardMagic(CardDisplayWork** cards, u8 count) {
         thirdDef = cards[2]->cardDef;
         thirdCategory = thirdDef->category;
 
-        if (firstKind == 24 && secondKind == 19 && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
+        if (firstKind == CARD_KIND_AERO && secondKind == CARD_KIND_BLIZZARD && thirdCategory == 1 && !(thirdDef->flags & CARD_DEF_FLAG_SUMMON)) {
             return 1;
         }
     }
@@ -1884,11 +1884,11 @@ s32 IsTwoMagicThenPeterPan(CardDisplayWork** cards, u8 count) {
         thirdCategory = thirdDef->category;
 
         if (firstCategory == 1 && !(firstDef->flags & CARD_DEF_FLAG_SUMMON) && secondCategory == 1 && !(secondDef->flags & CARD_DEF_FLAG_SUMMON) &&
-            thirdKind == 44) {
+            thirdKind == CARD_KIND_PETER_PAN) {
             return 1;
         }
 
-        if (firstKind == 23 && secondKind == 24 && thirdCategory == 2 && !(cards[2]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
+        if (firstKind == CARD_KIND_STOP && secondKind == CARD_KIND_AERO && thirdCategory == 2 && !(cards[2]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
             return 1;
         }
     }

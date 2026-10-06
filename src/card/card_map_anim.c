@@ -334,266 +334,266 @@ void ExpandCardCollectionForNewCard(u16 cardId) {
     }
 
     switch (kind) {
-    case 0:
+    case CARD_KIND_KINGDOM_KEY:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_KINGDOM_KEY;
         break;
-    case 8:
+    case CARD_KIND_OLYMPIA:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_OLYMPIA;
         break;
-    case 1:
+    case CARD_KIND_THREE_WISHES:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_THREE_WISHES;
         break;
-    case 2:
+    case CARD_KIND_CRABCLAW:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_CRABCLAW;
         break;
-    case 3:
+    case CARD_KIND_PUMPKINHEAD:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_PUMPKINHEAD;
         break;
-    case 4:
+    case CARD_KIND_FAIRY_HARP:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_FAIRY_HARP;
         break;
-    case 5:
+    case CARD_KIND_WISHING_STAR:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_WISHING_STAR;
         break;
-    case 6:
+    case CARD_KIND_SPELLBINDER:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_SPELLBINDER;
         break;
-    case 7:
+    case CARD_KIND_METAL_CHOCOBO:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_METAL_CHOCOBO;
         break;
-    case 9:
+    case CARD_KIND_LIONHEART:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_LIONHEART;
         break;
-    case 10:
+    case CARD_KIND_LADY_LUCK:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_LADY_LUCK;
         break;
-    case 11:
+    case CARD_KIND_DIVINE_ROSE:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_DIVINE_ROSE;
         break;
-    case 12:
+    case CARD_KIND_OATHKEEPER:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_OATHKEEPER;
         break;
-    case 13:
+    case CARD_KIND_OBLIVION:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_OBLIVION;
         break;
-    case 16:
+    case CARD_KIND_ULTIMA_WEAPON:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_ULTIMA_WEAPON;
         break;
-    case 14:
+    case CARD_KIND_DIAMOND_DUST:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_DIAMOND_DUST;
         break;
-    case 15:
+    case CARD_KIND_ONE_WINGED_ANGEL:
         jiminyFlag = JIMINY_RECORD_ATTACK_CARD_ONE_WINGED_ANGEL;
         break;
-    case 18:
+    case CARD_KIND_FIRE:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_FIRE;
         break;
-    case 19:
+    case CARD_KIND_BLIZZARD:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_BLIZZARD;
         break;
-    case 20:
+    case CARD_KIND_THUNDER:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_THUNDER;
         break;
-    case 21:
+    case CARD_KIND_CURE:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_CURE;
         break;
-    case 22:
+    case CARD_KIND_GRAVITY:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_GRAVITY;
         break;
-    case 23:
+    case CARD_KIND_STOP:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_STOP;
         break;
-    case 24:
+    case CARD_KIND_AERO:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_AERO;
         break;
-    case 25:
+    case CARD_KIND_SIMBA:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_SIMBA;
         break;
-    case 26:
+    case CARD_KIND_GENIE:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_GENIE;
         break;
-    case 27:
+    case CARD_KIND_BAMBI:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_BAMBI;
         break;
-    case 28:
+    case CARD_KIND_DUMBO:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_DUMBO;
         break;
-    case 29:
+    case CARD_KIND_TINKER_BELL:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_TINKER_BELL;
         break;
-    case 30:
+    case CARD_KIND_MUSHU:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_MUSHU;
         break;
-    case 31:
+    case CARD_KIND_CLOUD:
         jiminyFlag = JIMINY_RECORD_MAGIC_CARD_CLOUD;
         break;
-    case 32:
+    case CARD_KIND_POTION:
         jiminyFlag = JIMINY_RECORD_ITEM_CARD_POTION;
         break;
-    case 33:
+    case CARD_KIND_HI_POTION:
         jiminyFlag = JIMINY_RECORD_ITEM_CARD_HI_POTION;
         break;
-    case 34:
+    case CARD_KIND_MEGA_POTION:
         jiminyFlag = JIMINY_RECORD_ITEM_CARD_MEGA_POTION;
         break;
-    case 35:
+    case CARD_KIND_ETHER:
         jiminyFlag = JIMINY_RECORD_ITEM_CARD_ETHER;
         break;
-    case 36:
+    case CARD_KIND_MEGA_ETHER:
         jiminyFlag = JIMINY_RECORD_ITEM_CARD_MEGA_ETHER;
         break;
-    case 37:
+    case CARD_KIND_ELIXIR:
         jiminyFlag = JIMINY_RECORD_ITEM_CARD_ELIXIR;
         break;
-    case 38:
+    case CARD_KIND_MEGALIXIR:
         jiminyFlag = JIMINY_RECORD_ITEM_CARD_MEGALIXIR;
         break;
-    case 47:
+    case CARD_KIND_SHADOW:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SHADOW;
         break;
-    case 50:
+    case CARD_KIND_RED_NOCTURNE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_RED_NOCTURNE;
         break;
-    case 51:
+    case CARD_KIND_BLUE_RHAPSODY:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BLUE_RHAPSODY;
         break;
-    case 52:
+    case CARD_KIND_YELLOW_OPERA:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_YELLOW_OPERA;
         break;
-    case 53:
+    case CARD_KIND_GREEN_REQUIEM:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_GREEN_REQUIEM;
         break;
-    case 61:
+    case CARD_KIND_SEA_NEON:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SEA_NEON;
         break;
-    case 73:
+    case CARD_KIND_WHITE_MUSHROOM:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WHITE_MUSHROOM;
         break;
-    case 74:
+    case CARD_KIND_BLACK_FUNGUS:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BLACK_FUNGUS;
         break;
-    case 48:
+    case CARD_KIND_SOLDIER:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SOLDIER;
         break;
-    case 54:
+    case CARD_KIND_POWERWILD:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_POWERWILD;
         break;
-    case 55:
+    case CARD_KIND_BOUNCYWILD:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BOUNCYWILD;
         break;
-    case 56:
+    case CARD_KIND_AIR_SOLDIER:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AIR_SOLDIER;
         break;
-    case 57:
+    case CARD_KIND_BANDIT:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BANDIT;
         break;
-    case 59:
+    case CARD_KIND_BARREL_SPIDER:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_BARREL_SPIDER;
         break;
-    case 60:
+    case CARD_KIND_SEARCH_GHOST:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SEARCH_GHOST;
         break;
-    case 62:
+    case CARD_KIND_SCREWDIVER:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_SCREWDIVER;
         break;
-    case 64:
+    case CARD_KIND_WIGHT_KNIGHT:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WIGHT_KNIGHT;
         break;
-    case 65:
+    case CARD_KIND_GARGOYLE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_GARGOYLE;
         break;
-    case 66:
+    case CARD_KIND_PIRATE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_PIRATE;
         break;
-    case 67:
+    case CARD_KIND_AIR_PIRATE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AIR_PIRATE;
         break;
-    case 68:
+    case CARD_KIND_DARKBALL:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DARKBALL;
         break;
-    case 70:
+    case CARD_KIND_WYVERN:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WYVERN;
         break;
-    case 71:
+    case CARD_KIND_WIZARD:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_WIZARD;
         break;
-    case 72:
+    case CARD_KIND_NEOSHADOW:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_NEOSHADOW;
         break;
-    case 49:
+    case CARD_KIND_LARGE_BODY:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_LARGE_BODY;
         break;
-    case 58:
+    case CARD_KIND_FAT_BANDIT:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_FAT_BANDIT;
         break;
-    case 63:
+    case CARD_KIND_AQUATANK:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AQUATANK;
         break;
-    case 69:
+    case CARD_KIND_DEFENDER:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DEFENDER;
         break;
-    case 76:
+    case CARD_KIND_TORNADO_STEP:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_TORNADO_STEP;
         break;
-    case 77:
+    case CARD_KIND_CRESCENDO:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_CRESCENDO;
         break;
-    case 75:
+    case CARD_KIND_CREEPER_PLANT:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_CREEPER_PLANT;
         break;
-    case 81:
+    case CARD_KIND_DARKSIDE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DARKSIDE;
         break;
-    case 78:
+    case CARD_KIND_GUARD_ARMOR:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_GUARD_ARMOR;
         break;
-    case 86:
+    case CARD_KIND_OOGIE_BOOGIE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_OOGIE_BOOGIE;
         break;
-    case 80:
+    case CARD_KIND_TRICKMASTER:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_TRICKMASTER;
         break;
-    case 79:
+    case CARD_KIND_PARASITE_CAGE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_PARASITE_CAGE;
         break;
-    case 85:
+    case CARD_KIND_JAFAR:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_JAFAR;
         break;
-    case 87:
+    case CARD_KIND_URSULA:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_URSULA;
         break;
-    case 89:
+    case CARD_KIND_DRAGON_MALEFICENT:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_DRAGON_MALEFICENT;
         break;
-    case 88:
+    case CARD_KIND_HOOK:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_HOOK;
         break;
-    case 84:
+    case CARD_KIND_HADES:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_HADES;
         break;
-    case 90:
+    case CARD_KIND_RIKU:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_RIKU;
         break;
-    case 91:
+    case CARD_KIND_AXEL:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_AXEL;
         break;
-    case 92:
+    case CARD_KIND_LARXENE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_LARXENE;
         break;
-    case 93:
+    case CARD_KIND_VEXEN:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_VEXEN;
         break;
-    case 94:
+    case CARD_KIND_MARLUXIA:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_MARLUXIA;
         break;
-    case 82:
-    case 83:
+    case CARD_KIND_CARD_SOLDIER_HEART:
+    case CARD_KIND_CARD_SOLDIER_SPADE:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_CARD_SOLDIER;
         break;
-    case 96:
+    case CARD_KIND_LEXAEUS:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_LEXAEUS;
         break;
-    case 97:
+    case CARD_KIND_ANSEM:
         jiminyFlag = JIMINY_RECORD_ENEMY_CARD_ANSEM;
         break;
     default:

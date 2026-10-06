@@ -465,7 +465,7 @@ void task_wlogo_won_2(WlogoWonWork* work) {
 
     if (work->state == WLOGO_WON_STATE_CARDS) {
         for (i = 0; i < 10; i++) {
-            affine = AllocObjAffine(work->angle, gWlogoFlipScales[work->scaleIndex[i]], Q_8_8(1), 0);
+            affine = AllocObjAffine(work->angle, gWlogoFlipScales[work->scaleIndex[i]], Q_8_8(1), FALSE);
             DrawSprite(work->x[i] >> 8, work->y[i] >> 8, work->gfx[i], work->tiles, work->palette, affine, 0, gWlogoWonCardsAlt[i].priority);
         }
     }
@@ -2047,7 +2047,7 @@ void task_wlogo_tt_2(WlogoTtWork* work) {
     }
 
     if (work->visible[0] == 1) {
-        affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
+        affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), FALSE);
         DrawSprite(78, 72, work->gfx, work->tiles2, work->palette, affine, 0, 24);
     }
 
@@ -2056,7 +2056,7 @@ void task_wlogo_tt_2(WlogoTtWork* work) {
     }
 
     if (work->visible[1] == 1) {
-        affine = AllocObjAffine(0, work->scaleX2, Q_8_8(1), 0);
+        affine = AllocObjAffine(0, work->scaleX2, Q_8_8(1), FALSE);
         DrawSprite(108, 94, work->gfx2, work->tiles3, work->palette, affine, 0, 26);
     }
 
@@ -2446,7 +2446,7 @@ u8 task_wlogo_bks_obj_1(WlogoBksObjWork* work) {
 void task_wlogo_bks_obj_2(WlogoBksObjWork* work) {
     ObjAffine* affine;
 
-    affine = AllocObjAffine(0, work->scaleX, work->scaleY, 1);
+    affine = AllocObjAffine(0, work->scaleX, work->scaleY, TRUE);
     DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, affine, 0, work->priority);
 }
 

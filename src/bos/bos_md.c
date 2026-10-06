@@ -1556,10 +1556,10 @@ void task_bos_md_fire_2(MdFireWork* work) {
 
     if (work->state == BOS_MD_FIRE_STATE_APPEAR) {
         ApproachValue(&work->scale, Q_8_8(1), work->scaleSteps);
-        affine = AllocObjAffine(0, work->scale, work->scale, 0);
+        affine = AllocObjAffine(0, work->scale, work->scale, FALSE);
     } else if (work->state == BOS_MD_FIRE_STATE_VANISH) {
         ApproachValue(&work->scale, Q_8_8(0.1), work->scaleSteps);
-        affine = AllocObjAffine(0, work->scale, work->scale, 0);
+        affine = AllocObjAffine(0, work->scale, work->scale, FALSE);
     } else {
         affine = NULL;
     }

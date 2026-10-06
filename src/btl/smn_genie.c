@@ -57,8 +57,8 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->mainSide != 0) {
-        work->mainSide = 1;
+    if (args->mainSide) {
+        work->mainSide = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
@@ -116,7 +116,7 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
     s16 count;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             obj = gRikuBtlWork->actor;
         } else {
             obj = gBtlWork->actor;
@@ -222,7 +222,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
     s32 y;
     s32 z;
 
-    if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) {
+    if ((work->mainSide ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -498,9 +498,9 @@ void task_smn_genie_2(SmnGenieWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (sclX <= Q_8_8(1) && sclY <= Q_8_8(1)) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
@@ -512,7 +512,7 @@ void task_smn_genie_2(SmnGenieWork* work) {
 void task_smn_genie_3(SmnGenieWork* work) {
     gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
 
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         gBtlWork->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     } else {
         gRikuBtlWork->flags &= ~BTL_FLAG_SUMMON_ACTIVE;

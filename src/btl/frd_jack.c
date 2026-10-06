@@ -80,8 +80,8 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     body = &work->body;
     m4aSongNumStart(SONG_VO_SR_SUMMON07);
 
-    if (args->mainSide != 0) {
-        work->mainSide = 1;
+    if (args->mainSide) {
+        work->mainSide = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
@@ -140,7 +140,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
     if (gGameState.world != WORLD_HALLOWEEN_TOWN) return 0;
 
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         owner = gBtlWork;
         target = owner->actor2;
     } else {
@@ -596,13 +596,13 @@ void task_frd_jack_2(FrdJackWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (angle != 0) {
-        affine = AllocObjAffine(angle, sclX, sclY, 1);
+        affine = AllocObjAffine(angle, sclX, sclY, TRUE);
     } else if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -620,7 +620,7 @@ void task_frd_jack_2(FrdJackWork* work) {
 void task_frd_jack_3(FrdJackWork* work) {
     BtlWork* owner;
 
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
     owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

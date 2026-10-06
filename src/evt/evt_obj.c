@@ -139,7 +139,7 @@ void task_evt_obj_2(EvtObjWork* work) {
     y = (obj->y >> 8) + (obj->z >> 8) - (gEventState->y >> 8);
     gfx = AnimGetGfx(&work->anim);
     DrawSprite(x, y, gfx, work->tiles, work->palette,
-        AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, 1), obj->drawFlags,
+        AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, TRUE), obj->drawFlags,
         -0x1002 - (obj->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
@@ -197,7 +197,7 @@ void task_evt_shadow_2(EvtShadowWork* work) {
             size = Q_8_8(0.1);
         }
 
-        sprite = AllocObjAffine(0, size, size, 0);
+        sprite = AllocObjAffine(0, size, size, FALSE);
     }
 
     x = (obj->x >> 8) - (gEventState->x >> 8);

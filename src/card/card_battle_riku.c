@@ -2911,7 +2911,7 @@ static void card_2(CardDisplayWork* work) {
             return;
         }
 
-        affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, 0);
+        affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, FALSE);
         flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
         DrawSprite(work->x >> 8, y, gCardBacks[work->cardDef->category].gfx, gCardBattleState->tiles[work->cardDef->category], gCardBattleState->palette, affine, flags, work->priority - 1);
         DrawSprite(work->x >> 8, y, gfx, work->tiles, work->palette, affine, flags, work->priority);
@@ -2940,7 +2940,7 @@ static void card_2(CardDisplayWork* work) {
         return;
     }
 
-    affine = AllocObjAffine(0, work->scaleX, work->scaleY, 0);
+    affine = AllocObjAffine(0, work->scaleX, work->scaleY, FALSE);
     flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
     sy = y;
     DrawSprite(work->x >> 8, sy, work->cardDef->gfx2, work->tiles, work->palette, affine, flags, work->priority);
@@ -3858,7 +3858,7 @@ void Reload_Card_2(CardDisplayWork* work) {
     u16 attr;
 
     attr = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
-    affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
+    affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), FALSE);
 
     if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {
         gauge = work->reloadGauge;
@@ -3880,7 +3880,7 @@ void Reload_Card_2(CardDisplayWork* work) {
             }
 
             if ((s32)gCardBattleState->rikuReloadGauge > 0) {
-                affine2 = AllocObjAffine(0, work->scaleX, gCardBattleState->rikuReloadGauge, 0);
+                affine2 = AllocObjAffine(0, work->scaleX, gCardBattleState->rikuReloadGauge, FALSE);
 
                 if (gauge->gfx != NULL) {
                     DrawSprite(work->x >> 8, y + 17, gauge->gfx,
@@ -4033,7 +4033,7 @@ u8 Bosscard_1(BossCardWork* work, void* task) {
 
     work->bobAngle += 4;
 
-    if (gCardBattleState->enemyCardUsed == 1) {
+    if (gCardBattleState->enemyCardUsed == TRUE) {
         z = 0;
         work->x = 0x100;
         work->slideSteps = 8;

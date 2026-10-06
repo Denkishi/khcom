@@ -145,10 +145,10 @@ void task_bos_dsd_ita_2(DsdItaWork* work) {
             scale = Q_8_8(0.5);
         }
 
-        doubleSize = 0;
+        doubleSize = FALSE;
 
         if (scale > Q_8_8(1)) {
-            doubleSize = 1;
+            doubleSize = TRUE;
         }
 
         affine = AllocObjAffine(0, scale, scale, doubleSize);
@@ -304,7 +304,7 @@ void task_bos_dsd_rock_2(DsdRockWork* work) {
         priority = 10;
         flags = SPRITE_PRIORITY(1);
     } else {
-        affine = AllocObjAffine(0, Q_8_8(0.35), Q_8_8(0.35), 0);
+        affine = AllocObjAffine(0, Q_8_8(0.35), Q_8_8(0.35), FALSE);
         priority = 0xFFF5;
         flags = SPRITE_PRIORITY(3);
     }

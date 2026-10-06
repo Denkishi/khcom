@@ -725,7 +725,7 @@ void task_hum_hades_2(HadesWork* work) {
             }
         }
 
-        affine = AllocObjAffine(0, sx, work->scale, 0);
+        affine = AllocObjAffine(0, sx, work->scale, FALSE);
         gfx = AnimGetGfx(&work->anim);
         WorldToScreen(&x, &y, flame->x, flame->y, flame->z);
         DrawSprite(x, y, gfx, work->tiles, work->palette, affine, attr,

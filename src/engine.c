@@ -759,7 +759,7 @@ void UpdateSpriteOam() {
     u32 flags;
     s16 yMask = 255;
 
-    if (gSpriteWork->oamUpdatesPaused != 0) {
+    if (gSpriteWork->oamUpdatesPaused) {
         return;
     }
 
@@ -837,14 +837,14 @@ void UpdateSpriteOam() {
                 x -= width >> 1;
                 y -= height >> 1;
 
-                if (affine->doubleSize != 0) {
+                if (affine->doubleSize) {
                     x -= width >> 1;
                     y -= height >> 1;
                     width <<= 1;
                     height <<= 1;
                 }
 
-                if (affine->doubleSize != 0) {
+                if (affine->doubleSize) {
                     attr0 |= OAM_AFFINE | OAM_DOUBLE_SIZE;
                 } else {
                     attr0 |= OAM_AFFINE;

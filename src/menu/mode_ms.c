@@ -542,11 +542,11 @@ void DrawMooglePackOpening() {
     for (i = 0; i < 5; i++) {
         if (!sMooglePackCards[i].revealed) {
             scaleX = sMooglePackCards[i].scale;
-            affine = AllocObjAffine(0, scaleX, scaleX, 0);
+            affine = AllocObjAffine(0, scaleX, scaleX, FALSE);
             obj = AnimUpdate(&sMooglePackCards[i].anim);
         } else {
             scaleX = sMooglePackCards[i].scale * -COS(sMooglePackCards[i].flipAngle) >> 8;
-            affine = AllocObjAffine(0, scaleX, sMooglePackCards[i].scale, 0);
+            affine = AllocObjAffine(0, scaleX, sMooglePackCards[i].scale, FALSE);
             obj = sMooglePackCards[i].backSprite;
         }
 

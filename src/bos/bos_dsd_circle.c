@@ -231,10 +231,10 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
                 scale = Q_8_8(0.5);
             }
 
-            doubleSize = 0;
+            doubleSize = FALSE;
 
             if (scale > Q_8_8(1)) {
-                doubleSize = 1;
+                doubleSize = TRUE;
             }
 
             affine = AllocObjAffine(0, scale, scale, doubleSize);
@@ -482,10 +482,10 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
                 scale = Q_8_8(0.5);
             }
 
-            doubleSize = 0;
+            doubleSize = FALSE;
 
             if (scale > Q_8_8(1)) {
-                doubleSize = 1;
+                doubleSize = TRUE;
             }
 
             affine = AllocObjAffine(0, scale, scale, doubleSize);

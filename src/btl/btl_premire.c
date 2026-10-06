@@ -45,7 +45,7 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     work->gfx2 = gBPuraizuFrame0;
     work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW);
 
-    if (src->noTimeout != 0) {
+    if (src->noTimeout) {
         work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW | BTL_PRIZE_FLAG_NO_TIMEOUT);
     }
 
@@ -236,7 +236,7 @@ void task_btl_premire_2(BtlPremireWork* work) {
         u16 flags = GetBattleSpritePriorityFlags(work->y);
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
-        affine = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
+        affine = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, TRUE);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags,
                    -4100 - (work->y >> 8) * 4);
 

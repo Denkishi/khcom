@@ -753,7 +753,7 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
             scale = Q_8_8(0.3);
         }
 
-        affine = AllocObjAffine(0, scale, scale, 0);
+        affine = AllocObjAffine(0, scale, scale, FALSE);
     }
 
     WorldToScreen(&x, &y, work->x, work->y, 0);
@@ -827,7 +827,7 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
         }
     }
 
-    affine = AllocObjAffine(0, sx, Q_8_8(1), 0);
+    affine = AllocObjAffine(0, sx, Q_8_8(1), FALSE);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, affine, attr,
         -0x100C - (work->y >> 8) * 4);

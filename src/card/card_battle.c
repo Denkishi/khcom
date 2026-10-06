@@ -228,10 +228,10 @@ void CreateCardBattleState() {
     gCardBattleState->unk_0D8 = 0;
     gCardBattleState->unk_0D9 = 0;
     gCardBattleState->gimmickCardCount = 0;
-    gCardBattleState->enemyCardUsed = 0;
+    gCardBattleState->enemyCardUsed = FALSE;
     gCardBattleState->soraStockActive = FALSE;
     gCardBattleState->rikuStockActive = FALSE;
-    gCardBattleState->enemyCardUsed = 0;
+    gCardBattleState->enemyCardUsed = FALSE;
     gCardBattleState->soraStockNameShown = FALSE;
     gCardBattleState->rikuStockNameShown = FALSE;
     gCardBattleState->unk_0E5 = 0;
@@ -4180,7 +4180,7 @@ static void card_2(CardDisplayWork* work) {
     }
 
     if (!(work->flags & CARD_DISP_FLAG_STOCKED)) {
-        affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, 0);
+        affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, FALSE);
         DrawSprite(work->x >> 8, y, gCardBacks[work->cardDef->category].gfx, gCardBattleState->tiles[work->cardDef->category], gCardBattleState->palette, affine, attr, work->priority - 1);
         DrawSprite(work->x >> 8, y, gfx, work->tiles, work->palette, affine, attr, work->priority);
         j = work->value;
@@ -4204,7 +4204,7 @@ static void card_2(CardDisplayWork* work) {
         return;
     }
 
-    affine = AllocObjAffine(0, work->scaleX, work->scaleY, 0);
+    affine = AllocObjAffine(0, work->scaleX, work->scaleY, FALSE);
     DrawSprite(work->x >> 8, y, work->cardDef->gfx2, work->tiles, work->palette, affine, attr, work->priority);
     k = work->value;
 
@@ -5333,7 +5333,7 @@ void card_reload_2(CardDisplayWork* work) {
         }
 
         if ((s32)gCardBattleState->soraReloadGauge > 0) {
-            affine = AllocObjAffine(0, work->scaleX, gCardBattleState->soraReloadGauge, 0);
+            affine = AllocObjAffine(0, work->scaleX, gCardBattleState->soraReloadGauge, FALSE);
 
             if (gauge->gfx != NULL) {
                 DrawSprite(work->x >> 8, y + 17, gauge->gfx, work->tiles3,

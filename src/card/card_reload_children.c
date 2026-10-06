@@ -182,7 +182,7 @@ void RELOAD_CHILDREN_2(ReloadChildWork* work) {
     if ((s8)work->args.index < 0) {
         x = (work->offsetX + *work->args.parentX) >> 8;
         y = (work->offsetY + *work->args.parentY) >> 8;
-        affine = AllocObjAffine(0, work->scale, work->scale, 0);
+        affine = AllocObjAffine(0, work->scale, work->scale, FALSE);
         DrawSprite(x, y + (gSineTable[work->angle] >> 8), gCardBacks[work->args.listIndex].gfx2, work->tiles2, work->palette, affine, 0, 49);
     }
 }
@@ -636,7 +636,7 @@ void PrizeBoss_2(BossPrizeWork* work) {
     s16 shadowScale;
 
     pal = !work->collected ? GetBattleSpritePriorityFlags(work->posY) : 0;
-    affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
+    affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, TRUE);
     def = &gCardDefs[work->cardId];
     DrawSprite(work->x, (u16)work->y - 8, def->gfx, work->tiles, work->palette, affine, pal,
                work->priority + 1);
@@ -658,7 +658,7 @@ void PrizeBoss_2(BossPrizeWork* work) {
         }
 
         DrawSprite(work->x2, work->y2, gBtlShadowFrames[0], work->tiles5, work->palette3,
-                   AllocObjAffine(0, shadowScale, shadowScale, 0), pal, work->priority + 2);
+                   AllocObjAffine(0, shadowScale, shadowScale, FALSE), pal, work->priority + 2);
     }
 
     TaskPoolDraw(&work->tasks);

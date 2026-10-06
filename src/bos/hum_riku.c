@@ -206,9 +206,9 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* spawn) {
     if (sy == Q_8_8(1) && sx == sy) {
         affine = NULL;
     } else if (sy <= 255) {
-        affine = AllocObjAffine(0, sx, sy, 0);
+        affine = AllocObjAffine(0, sx, sy, FALSE);
     } else {
-        affine = AllocObjAffine(0, sx, sy, 1);
+        affine = AllocObjAffine(0, sx, sy, TRUE);
     }
 
     pri = 0xFFF0;

@@ -82,8 +82,8 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     m4aSongNumStart(SONG_VO_SR_SUMMON03);
 #endif
 
-    if (args->mainSide != 0) {
-        work->mainSide = 1;
+    if (args->mainSide) {
+        work->mainSide = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
@@ -126,7 +126,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
     s32 t;
 
     body = &work->body;
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
 
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
@@ -325,9 +325,9 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
     if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
@@ -339,7 +339,7 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
 void task_frd_goofy_3(FrdGoofyWork* work) {
     BtlWork* owner;
 
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
     owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

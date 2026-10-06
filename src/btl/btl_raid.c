@@ -98,13 +98,13 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
 
     work->variant = args->variant;
 
-    if (args->facingLeft != 0) {
+    if (args->facingLeft) {
         work->facingLeft = TRUE;
     } else {
         work->facingLeft = FALSE;
     }
 
-    if (args->mainSide != 0) {
+    if (args->mainSide) {
         work->mainSide = TRUE;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gBtlWork->actor;
@@ -453,9 +453,9 @@ void task_btl_raid_2(BtlRaidWork* work) {
             }
         } else {
             if (!work->facingLeft) {
-                affine = AllocObjAffine(0, -scale, scale, 1);
+                affine = AllocObjAffine(0, -scale, scale, TRUE);
             } else {
-                affine = AllocObjAffine(0, scale, scale, 1);
+                affine = AllocObjAffine(0, scale, scale, TRUE);
             }
         }
 

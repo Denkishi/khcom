@@ -139,7 +139,7 @@ void PremireChanceCard_2(PremireChanceCardWork* work) {
     }
 
     if (work->gfxLoaded) {
-        affine = AllocObjAffine(0, work->scaleX, work->scaleY, 1);
+        affine = AllocObjAffine(0, work->scaleX, work->scaleY, TRUE);
         DrawSprite(work->x + work->x2, work->y + work->y2, work->cardDef->gfx, work->tiles, work->palette2, affine, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[work->position] + 70);
         DrawSprite(work->x + work->x2, work->y + work->y2, work->cardBack->gfx, work->tiles2, work->palette3, affine, SPRITE_PRIORITY(1),

@@ -1301,7 +1301,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
     if (work->scaleX == Q_8_8(1) && work->rotation == 0) {
         affine = NULL;
     } else {
-        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
+        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, TRUE);
     }
 
     DrawSprite(work->x, (u16)work->y - 8,
@@ -1335,7 +1335,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
 
         DrawSprite(work->shadowX, work->shadowY, gBtlShadowFrames[0],
                    work->tiles5, work->palette3,
-                   AllocObjAffine(0, shadowScale, shadowScale, 0), pal,
+                   AllocObjAffine(0, shadowScale, shadowScale, FALSE), pal,
                    work->priority + 2);
     }
 
@@ -1846,7 +1846,7 @@ void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* sprite) {
 void DrawLayeredCardSpriteScaled(LayeredCardSprite* sprite, u16 flags, s16 dy, s16 scale) {
     ObjAffine* affine;
 
-    affine = AllocObjAffine(0, scale, scale, 1);
+    affine = AllocObjAffine(0, scale, scale, TRUE);
 
     if (sprite->tiles != NULL) {
         DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx, sprite->tiles, sprite->palette, affine, flags, 10);

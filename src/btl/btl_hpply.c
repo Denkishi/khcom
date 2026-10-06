@@ -399,9 +399,9 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
         }
 
         if (scale > Q_8_8(1)) {
-            affine = AllocObjAffine(0, scale, Q_8_8(1), 1);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), TRUE);
         } else {
-            affine = AllocObjAffine(0, scale, Q_8_8(1), 0);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), FALSE);
         }
 
         if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_EXTRA_BAR) {

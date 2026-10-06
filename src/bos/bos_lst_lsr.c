@@ -234,7 +234,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
         depth = -0x1004 - (work->pos2.y >> 8) * 4;
         WorldToScreen(&x2, &y2, work->pos.x, work->pos.y, work->pos.z);
-        affine = AllocObjAffineAngle(work->angle, 1);
+        affine = AllocObjAffineAngle(work->angle, TRUE);
         x = x2 + (x1 - x2) * work->timer / work->duration;
         y = y2 + (y1 - y2) * work->timer / work->duration;
         DrawSprite(x, y, gBosLstBitFrames[13], work->tiles, work->palette,
@@ -244,7 +244,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
         depth = -0x1004 - (work->pos2.y >> 8) * 4;
-        affine = AllocObjAffine(0, Q_8_8(1) - work->timer * 8, work->timer * 16 + Q_8_8(1), 1);
+        affine = AllocObjAffine(0, Q_8_8(1) - work->timer * 8, work->timer * 16 + Q_8_8(1), TRUE);
         gfx = AnimGetGfx(&work->anim);
         DrawSprite(x1, y1, gfx, work->tiles, work->palette,
                    affine, prio | 4, depth);

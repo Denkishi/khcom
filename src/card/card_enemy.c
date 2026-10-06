@@ -122,9 +122,9 @@ void EnemyCardDraw(CardDisplayWork* work) {
         if (!(work->flags & CARD_DISP_FLAG_FACE_DOWN)) {
             if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {
                 if ((work->flags & CARD_DISP_FLAG_DOUBLE_SIZE) == 0) {
-                    affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, 0);
+                    affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, FALSE);
                 } else {
-                    affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, 1);
+                    affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, TRUE);
                 }
 
                 flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
@@ -672,7 +672,7 @@ void UseEnemyCard(u16 arg) {
     args.listIndex = 0;
     card = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecard, &args)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
-    gCardBattleState->enemyCardUsed = 1;
+    gCardBattleState->enemyCardUsed = TRUE;
 
     if ((gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) == 0) {
         card->flags |= CARD_DISP_FLAG_IN_PLAY;

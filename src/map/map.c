@@ -1714,7 +1714,7 @@ void DropMapGmkPrize(FldPos* pos) {
     u16 roll = GetRandom() % 10000;
 
     if (roll <= 0x5DB) {
-        if (TryCreateRandomPrzCard(0, pos->x, pos->y, pos->z) != TRUE) {
+        if (TryCreateRandomPrzCard(FALSE, pos->x, pos->y, pos->z) != TRUE) {
             CreateRandomMapPrizes(pos->x, pos->y, pos->z);
         }
     } else if (roll <= 0x1D4B) {
@@ -2217,7 +2217,7 @@ const PrizeEntry* PickRandomPrzCard(u8 worldPrize) {
 
     while (chance->cardIndex != 41) {
         const PrizeEntry* prize = &gPrzCardKinds[chance->cardIndex];
-        u16 weight = worldPrize != 0 ? chance->weight2 : chance->weight;
+        u16 weight = worldPrize ? chance->weight2 : chance->weight;
 
         if (roll < weight) {
             if (IsCardKindObtained(prize->unk_00[0])) {
@@ -2419,7 +2419,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
         }
     }
 
-    prize = PickRandomPrzCard(1);
+    prize = PickRandomPrzCard(TRUE);
 
     if (prize != NULL) {
         CreateMapPrzCardTask(prize, TRUE, x, y, z);

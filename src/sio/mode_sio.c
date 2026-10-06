@@ -3383,7 +3383,7 @@ void SioChgCardDraw() {
 
     for (i = 0; i < 10; i++) {
         if (sSioChgCardWork->cardVisible[i] == 1) {
-            affine = AllocObjAffine(sSioChgCardWork->angle[i], sSioChgCardWork->scaleX[i], sSioChgCardWork->scaleY[i], 1);
+            affine = AllocObjAffine(sSioChgCardWork->angle[i], sSioChgCardWork->scaleX[i], sSioChgCardWork->scaleY[i], TRUE);
             DrawSprite((sSioChgCardWork->x2[i] >> 8) + 16, (sSioChgCardWork->y2[i] >> 8) + 20, sSioChgCardWork->gfx4[i], sSioChgCardWork->tiles3[i], sSioChgCardWork->palette3[i], affine, SPRITE_PRIORITY(1), 0xFFF0);
 
             if (gCardDefs[gSioChgCardSlots[i]].category != 3) {

@@ -84,7 +84,7 @@ void HeapInit(void* addr, u32 size, Heap* heap) {
     first->next = tail;
     first->name = name;
     first->self = first;
-    heap->allocFlag = 0;
+    heap->allocFlag = FALSE;
 }
 
 void EwramHeapInit(void* addr, u32 size) {
@@ -131,7 +131,7 @@ void* HeapAlloc(u32 size, Heap* heap) {
     block->prevFree = NULL;
     block->nextFree = NULL;
 
-    if (heap->allocFlag != 0) {
+    if (heap->allocFlag) {
         block->allocFlag = TRUE;
     } else {
         block->allocFlag = FALSE;

@@ -953,12 +953,12 @@ void task_bos_tm_body_2(TmBodyWork* work) {
     s16 y;
 
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
-        affine = AllocObjAffine(work->angle, Q_8_8(1), Q_8_8(1), 1);
-        affine2 = AllocObjAffine(work->angle2, Q_8_8(1), Q_8_8(1), 1);
+        affine = AllocObjAffine(work->angle, Q_8_8(1), Q_8_8(1), TRUE);
+        affine2 = AllocObjAffine(work->angle2, Q_8_8(1), Q_8_8(1), TRUE);
         flags = SPRITE_PRIORITY(2);
     } else {
-        affine = AllocObjAffine(work->angle, Q_8_8(-1), Q_8_8(1), 1);
-        affine2 = AllocObjAffine(work->angle2, Q_8_8(-1), Q_8_8(1), 1);
+        affine = AllocObjAffine(work->angle, Q_8_8(-1), Q_8_8(1), TRUE);
+        affine2 = AllocObjAffine(work->angle2, Q_8_8(-1), Q_8_8(1), TRUE);
         flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
     }
 

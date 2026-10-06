@@ -44,7 +44,7 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     work->gfx2 = gBPuraizuFrame0;
     work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW);
 
-    if (src->noTimeout != 0) {
+    if (src->noTimeout) {
         work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW | BTL_PRIZE_FLAG_NO_TIMEOUT);
     }
 
@@ -340,7 +340,7 @@ void task_btl_prize_2(BtlPrizeWork* work) {
         s32 flags = SPRITE_PRIORITY(2);
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
-        affine = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
+        affine = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, TRUE);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags,
                    -4100 - (work->y >> 8) * 4);
 

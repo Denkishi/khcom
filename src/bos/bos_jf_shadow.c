@@ -63,10 +63,10 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
             scale = Q_8_8(0.5);
         }
 
-        doubleSize = 0;
+        doubleSize = FALSE;
 
         if (scale > Q_8_8(1)) {
-            doubleSize = 1;
+            doubleSize = TRUE;
         }
 
         affine = AllocObjAffine(0, scale, scale, doubleSize);

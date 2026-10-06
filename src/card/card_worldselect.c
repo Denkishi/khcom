@@ -2151,7 +2151,7 @@ void Mapcard_2(MapcardWork* work) {
             affine = NULL;
 
             if (work->flags & MAPCARD_FLAG_CHOSEN) {
-                affine = AllocObjAffine(work->angle, (s16)work->scale, (s16)work->scale, 1);
+                affine = AllocObjAffine(work->angle, (s16)work->scale, (s16)work->scale, TRUE);
             }
 
             if (gMapCardDefs[work->args.baseCardId].backIndex == 4) {
@@ -2593,7 +2593,7 @@ void Reload_Gage_2(CardDisplayWork* work) {
                gCardBattleState->palette, NULL, SPRITE_PRIORITY(1), 50);
 
     if (work->scaleY > 0) {
-        affine = AllocObjAffine(0, Q_8_8(1), work->scaleY, 0);
+        affine = AllocObjAffine(0, Q_8_8(1), work->scaleY, FALSE);
         DrawSprite((work->x >> 8) + (gauge->offsetX >> 8),
                    (work->y >> 8) + (offsetY = (gSineTable[work->bobAngle] >> 8) + 17),
                    gauge->gfx, work->tiles3, gCardBattleState->palette, affine,

@@ -397,9 +397,9 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
         }
 
         if (scale > Q_8_8(1)) {
-            affine = AllocObjAffine(0, scale, Q_8_8(1), 1);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), TRUE);
         } else {
-            affine = AllocObjAffine(0, scale, Q_8_8(1), 0);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), FALSE);
         }
 
         DrawSprite(217, 6, bar, work->tiles2, work->palette, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);

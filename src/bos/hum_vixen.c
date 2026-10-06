@@ -155,7 +155,7 @@ void VixenPlaceGroundIce(VixenWork* work) {
     ice = work->sub;
 
     for (i = 0; i < 3; i++) {
-        ice[i].pending = ice[i].active = 1;
+        ice[i].pending = ice[i].active = TRUE;
         ice[i].x = (gBtlWork->xMin + 32 +
             GetRandom() % (gBtlWork->xMax - gBtlWork->xMin - 0x3F)) << 8;
         ice[i].y = (gBtlWork->yMin + 16 +
@@ -863,19 +863,19 @@ void task_hum_vixen_ice_0(VixenIceWork* work, VixenSub* args) {
 }
 
 u8 task_hum_vixen_ice_1(VixenIceWork* work) {
-    if (work->sub->active == 0) {
-        if (work->sub->pending != 0) {
+    if (!work->sub->active) {
+        if (work->sub->pending) {
             FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
-            work->sub->pending = 0;
+            work->sub->pending = FALSE;
             ColliderSetDisabled(&work->collider, TRUE);
         }
 
         return 1;
     }
 
-    if (work->sub->pending != 0) {
+    if (work->sub->pending) {
         FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
-        work->sub->pending = 0;
+        work->sub->pending = FALSE;
         work->state = HUM_VIXEN_ICE_STATE_GROW;
         work->stateTimer = 0;
         work->scale = 10;
@@ -944,8 +944,8 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
         work->lifetime--;
 
         if ((s16)work->lifetime <= 0) {
-            work->sub->active = 0;
-            work->sub->pending = 1;
+            work->sub->active = FALSE;
+            work->sub->pending = TRUE;
         }
 
         ColliderSetRadius(&work->collider, work->scale * 27 >> 8);
@@ -964,15 +964,15 @@ void task_hum_vixen_ice_2(VixenIceWork* work) {
     s32 scale;
     ObjAffine* affine;
 
-    if (work->sub->active != 0) {
+    if (work->sub->active) {
         gfx = AnimGetGfx(&work->anim);
         WorldToScreen(&x, &y, work->sub->x, work->sub->y, 0);
         scale = work->scale * gBtlWork->scale >> 8;
 
         if (gBtlWork->rotation != 0 || scale > Q_8_8(1)) {
-            affine = AllocObjAffine(gBtlWork->rotation, scale, scale, 1);
+            affine = AllocObjAffine(gBtlWork->rotation, scale, scale, TRUE);
         } else {
-            affine = AllocObjAffine(gBtlWork->rotation, scale, scale, 0);
+            affine = AllocObjAffine(gBtlWork->rotation, scale, scale, FALSE);
         }
 
         DrawSprite(x, y, gfx, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFF);

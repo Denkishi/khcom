@@ -128,7 +128,7 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->bottomBarX = 0;
     work->bottomBarY = 0xA000;
     work->bannerX = -0x8000;
-    work->holding = 0;
+    work->holding = FALSE;
     work->descriptionX = 8;
     work->descriptionY = 113;
     work->textSlotCount5 = 0;
@@ -885,7 +885,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 
     switch (work->view) {
     case DECK_MENU_VIEW_DECK_GRID:
-        if (work->holding != 0) {
+        if (work->holding) {
             DrawSprite((work->heldX >> 8) - 16, (work->heldY >> 8) - 20, work->gfx2, work->tiles2, work->palette4, NULL, 0, 8);
         }
 
@@ -1180,7 +1180,7 @@ void ScrollDeckExchangeGridDown(DeckExchangeWork* work) {
         work->thumbY = 0x7C00;
     }
 
-    if (work->holding != 0) {
+    if (work->holding) {
         work->heldRow--;
     }
 }

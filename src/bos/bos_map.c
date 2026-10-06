@@ -103,7 +103,7 @@ void task_bos_shadow_2(BosShadowWork* work) {
     void* gfx;
 
     obj = work->actor;
-    doubleSize = 0;
+    doubleSize = FALSE;
     gfx = gBtlShadowFrame0;
     flags = GetBattleSpritePriorityFlags(obj->y);
     size = Q_8_8(1) - ((obj->groundZ - obj->z) >> 7);
@@ -114,7 +114,7 @@ void task_bos_shadow_2(BosShadowWork* work) {
 
     if (work->actor->flags & BTLOBJ_FLAG_LARGE_SHADOW) {
         size += Q_8_8(1);
-        doubleSize = 1;
+        doubleSize = TRUE;
     }
 
     affine = AllocObjAffine(0, size, size, doubleSize);

@@ -410,7 +410,7 @@ s32 BosLstFldSquare2(s32 x) {
 }
 
 void BosLstFldResetShake() {
-    sBosLstFldShakeActive = 0;
+    sBosLstFldShakeActive = FALSE;
     sBosLstFldShakePattern = 0;
     sBosLstFldShakeStep = 0;
     sBosLstFldShakeOffset = 0;
@@ -425,13 +425,13 @@ void BosLstFldSetShake(s16 pattern) {
 void BosLstFldUpdateShake() {
     const s8* pattern;
 
-    if (sBosLstFldShakeActive != 0) {
+    if (sBosLstFldShakeActive) {
         pattern = sBosLstFldShakePatterns[sBosLstFldShakePattern];
         sBosLstFldShakeOffset += ((pattern[sBosLstFldShakeStep] << 12) - sBosLstFldShakeOffset) >> 3;
         sBosLstFldShakeStep++;
 
         if (pattern[sBosLstFldShakeStep] == 0) {
-            sBosLstFldShakeActive = 0;
+            sBosLstFldShakeActive = FALSE;
             sBosLstFldShakeOffset = 0;
         }
     }

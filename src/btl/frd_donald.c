@@ -124,8 +124,8 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
 
     body = &work->body;
 
-    if (args->mainSide != 0) {
-        work->mainSide = 1;
+    if (args->mainSide) {
+        work->mainSide = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
@@ -216,7 +216,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     BtlObj* target;
     s32 angle;
 
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         owner = gBtlWork;
         target = owner->actor2;
     } else {
@@ -559,7 +559,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         break;
     case FRD_DONALD_STATE_CAST_CURE:
         {
-            BtlObj* ally=work->mainSide != 0 ? gBtlWork->actor : gRikuBtlWork->actor;
+            BtlObj* ally=work->mainSide ? gBtlWork->actor : gRikuBtlWork->actor;
 
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs,&work->anim,1,0,work->tiles);
@@ -667,9 +667,9 @@ void task_frd_donald_2(FrdDonaldWork* work) {
     if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
@@ -681,7 +681,7 @@ void task_frd_donald_2(FrdDonaldWork* work) {
 void task_frd_donald_3(FrdDonaldWork* work) {
     BtlWork* owner;
 
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
     owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

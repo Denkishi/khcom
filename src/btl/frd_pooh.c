@@ -74,8 +74,8 @@ void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
     FrdPoohBody* body;
     body = &work->body;
 
-    if (args->side != 0) {
-        work->side = 1;
+    if (args->side) {
+        work->side = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
@@ -116,7 +116,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
     FrdPoohBody* body;
     BtlWork* owner;
     body = &work->body;
-    owner = work->side != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->side ? gBtlWork : gRikuBtlWork;
 
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
@@ -333,9 +333,9 @@ void task_frd_pooh_2(FrdPoohWork* work) {
     if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
@@ -347,7 +347,7 @@ void task_frd_pooh_2(FrdPoohWork* work) {
 void task_frd_pooh_3(FrdPoohWork* work) {
     BtlWork* owner;
     ColliderUnregister(&work->body.collider);
-    owner = work->side != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->side ? gBtlWork : gRikuBtlWork;
     owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

@@ -298,7 +298,7 @@ static void PrizeCard_2(PrizeCardWork* work) {
     if (work->scaleX == Q_8_8(1) && work->rotation == 0) {
         affine = NULL;
     } else {
-        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
+        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, TRUE);
     }
 
     def = &gCardDefs[work->cardId];
@@ -319,7 +319,7 @@ static void PrizeCard_2(PrizeCardWork* work) {
         }
 
         DrawSprite(work->x2, work->y, gBtlShadowFrames[0],
-                   work->tiles5, work->palette3, AllocObjAffine(0, shadowScale, shadowScale, 0), pal,
+                   work->tiles5, work->palette3, AllocObjAffine(0, shadowScale, shadowScale, FALSE), pal,
                    work->priority + 2);
     }
 

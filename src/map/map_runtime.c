@@ -700,7 +700,7 @@ void LoadMapRoomState(MapRoomState* state, u8 room) {
     gMapRoomState->nameId = floorRoom->nameId;
     gMapRoomState->roomType = floorRoom->roomType;
 
-    if (gMapChkUseParams == 0) {
+    if (!gMapChkUseParams) {
         row = gMapRoomShapes[floorRoom->roomType];
         gGameState.roomEffect = row[5];
         LoadMapForm(row[0]);

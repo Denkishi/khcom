@@ -1070,7 +1070,7 @@ void SrollTextDrawNextGlyph(SrollWork* work, u8 flush) {
         drawn = SrollTextProcessNextChar(work);
     }
 
-    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+    if (flush == TRUE && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(work);
     }
 }
@@ -1080,7 +1080,7 @@ void SrollTextDrawQueued(SrollWork* work, u8 flush) {
         SrollTextProcessNextChar(work);
     }
 
-    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+    if (flush == TRUE && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(work);
     }
 }
@@ -1109,22 +1109,22 @@ void SrollTextFlushTilemap(SrollWork* work) {
 }
 
 void SrollTextDrawString(SrollWork* work, u8* str, u8 flush) {
-    SrollTextDrawQueued(work, 0);
+    SrollTextDrawQueued(work, FALSE);
     SrollTextEnqueueString(work, str);
-    SrollTextDrawQueued(work, 0);
+    SrollTextDrawQueued(work, FALSE);
 
-    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+    if (flush == TRUE && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(work);
     }
 }
 
 void SrollTextDrawStringAtTile(SrollWork* work, u16 x, u16 y, u8* str, u8 flush) {
-    SrollTextDrawQueued(work, 0);
+    SrollTextDrawQueued(work, FALSE);
     SrollTextSetCursorTile(work, x, y);
     SrollTextEnqueueString(work, str);
-    SrollTextDrawQueued(work, 0);
+    SrollTextDrawQueued(work, FALSE);
 
-    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+    if (flush == TRUE && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(work);
     }
 }
@@ -1134,7 +1134,7 @@ void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* str, u8 flus
     u8* glyph;
     s32 padWidth;
 
-    SrollTextDrawQueued(work, 0);
+    SrollTextDrawQueued(work, FALSE);
     SrollTextSetCursorTile(work, x >> 3, y);
     padWidth = x & 7;
 
@@ -1146,7 +1146,7 @@ void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* str, u8 flus
 
     SrollTextSetCursorPixelX(work, x);
     SrollTextEnqueueString(work, str);
-    SrollTextDrawQueued(work, 0);
+    SrollTextDrawQueued(work, FALSE);
 
     if ((work->x & 7) != 0) {
         off = (work->y * work->textWidth + (work->x >> 3)) * 32;

@@ -121,9 +121,9 @@ void task_btl_escape_2(BtlEscapeWork* work) {
         scale = work->progressRatio * 2;
 
         if (scale > Q_8_8(1)) {
-            affine = AllocObjAffine(0, scale, Q_8_8(1), 1);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), TRUE);
         } else {
-            affine = AllocObjAffine(0, scale, Q_8_8(1), 0);
+            affine = AllocObjAffine(0, scale, Q_8_8(1), FALSE);
         }
 
         DrawSprite(x, y, work->gfx3, work->tiles, work->palette, affine, 0, 1);

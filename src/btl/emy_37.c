@@ -396,13 +396,13 @@ void task_emy_37_2(Emy37Work* work) {
         }
 
         if (w->rotation) {
-            affine = AllocObjAffine(w->rotation, sx, sy, 1);
+            affine = AllocObjAffine(w->rotation, sx, sy, TRUE);
         } else if (sy == Q_8_8(1) && sx == sy) {
             affine = NULL;
         } else if (sy <= 0xFF) {
-            affine = AllocObjAffine(0, sx, sy, 0);
+            affine = AllocObjAffine(0, sx, sy, FALSE);
         } else {
-            affine = AllocObjAffine(0, sx, sy, 1);
+            affine = AllocObjAffine(0, sx, sy, TRUE);
         }
 
         if (StepHitFlash(act)) {

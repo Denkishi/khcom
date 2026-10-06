@@ -147,7 +147,7 @@ void SpriteReset() {
     gSpriteWork->affineCount = 0;
     gSpriteWork->sortLo = 0;
     SetObjMosaicSize(0, 0);
-    gSpriteWork->oamUpdatesPaused = 0;
+    gSpriteWork->oamUpdatesPaused = FALSE;
     gSpriteWork->mosaicEnabled = FALSE;
     SetObjTileRange(0, 0x400);
     SetObjPaletteRange(0, 0x10);

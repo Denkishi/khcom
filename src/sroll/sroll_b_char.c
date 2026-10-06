@@ -124,7 +124,7 @@ void task_sroll_b_char_2(SrollBCharWork* work) {
         y = (obj->y + obj->z) >> 8;
         gfx = AnimGetGfx(&work->anim);
         DrawSprite(x, y, gfx, work->tiles, work->palette,
-                   AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, 1), obj->drawFlags, 0xFF0);
+                   AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, TRUE), obj->drawFlags, 0xFF0);
         TaskPoolDraw(&work->tasks);
     }
 }

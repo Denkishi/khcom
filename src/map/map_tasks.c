@@ -3594,7 +3594,7 @@ u8 MapGmkBarrelWaitHit(MapGmkBarrelWork* work) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, pos);
 
         if (roll <= 5999) {
-            if (TryCreateRandomPrzCard(0, pos->x, pos->y, pos->z) != TRUE) {
+            if (TryCreateRandomPrzCard(FALSE, pos->x, pos->y, pos->z) != TRUE) {
                 MapGmkBarrelDropPrizes(pos);
             }
         } else if (roll <= 9999) {
@@ -4166,7 +4166,7 @@ void Task_MapPrize_2(MapPrizeWork* work) {
         y = (work->y >> 8) + (work->z >> 8) - (gFieldState->y >> 8);
 
         if (work->scale != Q_8_8(1)) {
-            aff = AllocObjAffine(0, work->scale, work->scale, 0);
+            aff = AllocObjAffine(0, work->scale, work->scale, FALSE);
         } else {
             aff = NULL;
         }
@@ -4445,7 +4445,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
     if (work->scaleX == Q_8_8(1) && work->scaleY == Q_8_8(1) && work->rotation == 0) {
         affine = NULL;
     } else {
-        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
+        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, TRUE);
     }
 
     def = &gCardDefs[work->cardId];
@@ -4471,7 +4471,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
         }
 
         DrawSprite(x, y, gBtlShadowFrames[0], work->tiles4, work->palette3,
-            AllocObjAffine(0, shadowScale, shadowScale, 0), SPRITE_PRIORITY(2), work->priority + 2);
+            AllocObjAffine(0, shadowScale, shadowScale, FALSE), SPRITE_PRIORITY(2), work->priority + 2);
     }
 
     TaskPoolDraw(&work->tasks);

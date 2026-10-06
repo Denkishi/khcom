@@ -57,8 +57,8 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     body = &work->body;
     m4aSongNumStart(SONG_VO_SR_SUMMON08);
 
-    if (args->mainSide != 0) {
-        work->mainSide = 1;
+    if (args->mainSide) {
+        work->mainSide = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
@@ -172,7 +172,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         return 0;
     }
 
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
     target = owner->actor2;
 
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
@@ -273,7 +273,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         SelectLockonTarget();
 
         if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-            BtlObj* other = work->mainSide != 0 ? gRikuBtlWork->actor : gBtlWork->actor;
+            BtlObj* other = work->mainSide ? gRikuBtlWork->actor : gBtlWork->actor;
             y = other->y;
             z = other->z;
         } else if (target != NULL) {
@@ -380,9 +380,9 @@ void task_frd_pan_2(FrdPanWork* work) {
     if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
@@ -394,7 +394,7 @@ void task_frd_pan_2(FrdPanWork* work) {
 void task_frd_pan_3(FrdPanWork* work) {
     BtlWork* owner;
 
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
     owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

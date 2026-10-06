@@ -937,9 +937,9 @@ void EmyDraw(EmyWork* work) {
         if (sy == Q_8_8(1) && sx == sy) {
             affine = NULL;
         } else if (sy < Q_8_8(1)) {
-            affine = AllocObjAffine(0, sx, sy, 0);
+            affine = AllocObjAffine(0, sx, sy, FALSE);
         } else {
-            affine = AllocObjAffine(0, sx, sy, 1);
+            affine = AllocObjAffine(0, sx, sy, TRUE);
         }
 
         if (StepHitFlash(actor)) {

@@ -3037,7 +3037,7 @@ void task_poo_shadowdodai_2(PooShadowWork* work) {
             }
         }
 
-        affine = AllocObjAffine(0, scale, scale, 0);
+        affine = AllocObjAffine(0, scale, scale, FALSE);
         x = (work->x >> 8) - gPooScrollX;
         y = (work->y >> 8) + (groundZ >> 8) - gPooScrollY;
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), work->shadowInfo->priority);
@@ -3083,7 +3083,7 @@ void task_poo_shadowscale_2(PooScaleWork* work) {
         }
     }
 
-    affine = AllocObjAffine(0, scale, scale, 0);
+    affine = AllocObjAffine(0, scale, scale, FALSE);
     x = (work->x >> 8) - gPooScrollX;
     y = (work->y >> 8) - gPooScrollY;
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFF0);
@@ -5007,12 +5007,12 @@ void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
         work->pos.y = 0x4EE00;
         work->pos.z = 0;
         AnimStart(&work->anim, 0, 0);
-        work->flipped = 0;
+        work->flipped = FALSE;
         work->state = POO_ROO_STATE_HOME;
     } else {
         work->pos = *work->srcPos;
         AnimStart(&work->anim, 4, 0);
-        work->flipped = 0;
+        work->flipped = FALSE;
         work->state = POO_ROO_STATE_TRAPPED;
     }
 
@@ -5096,7 +5096,7 @@ void task_poo_roo_2(PooRooWork* work) {
     x = (work->pos.x >> 8) - gPooScrollX;
     baseY = work->pos.y >> 8;
     y = baseY + (work->pos.z >> 8) - gPooScrollY;
-    flags = work->flipped != 0 ? 0x801 : 0x800;
+    flags = work->flipped ? 0x801 : 0x800;
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, -0x1006 - baseY * 4);
 
     if (work->state != POO_ROO_STATE_TRAPPED) {
@@ -6082,7 +6082,7 @@ void task_poo_wagonwheel_0(PooWheelWork* work) {
     AnimInit(&work->anim, gRaWagonAnims, gRaWagonFrames);
     AnimStart(&work->anim, work->animId, ANIM_FLAG_LOOP);
     work->speed = 0;
-    work->removeWhenOffscreen = 0;
+    work->removeWhenOffscreen = FALSE;
 }
 
 u8 task_poo_wagonwheel_1(PooWheelWork* work) {
@@ -6106,7 +6106,7 @@ u8 task_poo_wagonwheel_1(PooWheelWork* work) {
         }
     }
 
-    if (work->removeWhenOffscreen != 0 && work->palette == NULL) {
+    if (work->removeWhenOffscreen && work->palette == NULL) {
         return 0;
     }
 
@@ -6966,7 +6966,7 @@ void task_poo_prize_2(PooPrizeWork* work) {
     scale = work->scale;
 
     if (scale != Q_8_8(1)) {
-        affine = AllocObjAffine(0, scale, scale, 0);
+        affine = AllocObjAffine(0, scale, scale, FALSE);
     } else {
         affine = NULL;
     }

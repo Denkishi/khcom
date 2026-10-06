@@ -165,7 +165,7 @@ void task_title_logo_2(TitleLogoWork* work) {
                 continue;
             }
 
-            affine = AllocObjAffine(0, Q_8_8(1), work->scale, 0);
+            affine = AllocObjAffine(0, Q_8_8(1), work->scale, FALSE);
 
             if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
                 y = 86;

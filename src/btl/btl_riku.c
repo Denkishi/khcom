@@ -261,9 +261,9 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     if (sy == Q_8_8(1) && sx == sy) {
         affine = NULL;
     } else if (sy <= 255) {
-        affine = AllocObjAffine(0, sx, sy, 0);
+        affine = AllocObjAffine(0, sx, sy, FALSE);
     } else {
-        affine = AllocObjAffine(0, sx, sy, 1);
+        affine = AllocObjAffine(0, sx, sy, TRUE);
     }
 
     priority = 0xFFF0;
@@ -572,7 +572,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
             work->sioKeysA = FALSE;
         }
 
-        if (arg->mainSide != 0) {
+        if (arg->mainSide) {
             work->mainSide = TRUE;
             act->btl = gBtlWork;
         } else {
@@ -632,7 +632,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     act->vx = act->vy = 0;
 
     // @bug arg is NULL in normal battles (NULL read).
-    if (arg->mainSide != 0) {
+    if (arg->mainSide) {
         ColliderInit(&act->collider, 1, act->radiusX, act->height);
     } else {
         ColliderInit(&act->collider, 2, act->radiusX, act->height);
@@ -4726,9 +4726,9 @@ void task_btl_riku_2(BtlRikuWork* work) {
     if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 255) {
-        affine = AllocObjAffine(0, sx, sy, 0);
+        affine = AllocObjAffine(0, sx, sy, FALSE);
     } else {
-        affine = AllocObjAffine(0, sx, sy, 1);
+        affine = AllocObjAffine(0, sx, sy, TRUE);
     }
 
     if (work->flags & BTL_RIKU_FLAG_OVER_PLATFORM) {

@@ -410,7 +410,7 @@ void BosGaEntryDraw(GaWork* work, GaEntryWork* entry) {
         return;
     }
 
-    affine = AllocObjAffineAngle(entry->rotation, 1);
+    affine = AllocObjAffineAngle(entry->rotation, TRUE);
     q = entry;
     flags = GetBattleSpritePriorityFlags(entry->actor.y);
 

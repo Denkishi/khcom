@@ -726,7 +726,7 @@ void task_bos_lst_bit_2(LstState* work) {
                   work->z + work->orbitZ + work->bobZ);
     prio = GetBattleSpritePriorityFlags(work->y);
     depth = -0x1004 - (work->y >> 8) * 4;
-    affine = AllocObjAffine(work->aimAngle, work->scaleX, work->scaleY, 0);
+    affine = AllocObjAffine(work->aimAngle, work->scaleX, work->scaleY, FALSE);
     gfx = AnimGetGfx(&work->anim);
     DrawSprite(x, y, gfx, work->tiles, pal, affine, prio, depth);
     TaskPoolDraw(&work->tasks);

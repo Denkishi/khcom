@@ -75,8 +75,8 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     body = &work->body;
     m4aSongNumStart(SONG_VO_SR_SUMMON11);
 
-    if (args->mainSide != 0) {
-        work->mainSide = 1;
+    if (args->mainSide) {
+        work->mainSide = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
@@ -292,9 +292,9 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
     if (gBtlWork->scale == Q_8_8(1)) {
         affine = NULL;
     } else if (gBtlWork->scale <= 255) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
@@ -306,7 +306,7 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
 void task_frd_aladdin_3(FrdAladdinWork* work) {
     BtlWork* owner;
 
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
     owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

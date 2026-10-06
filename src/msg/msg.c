@@ -890,7 +890,7 @@ void DrawSpriteTextSlots() {
             continue;
         }
 
-        if (sSpriteTextLines[i].useAlternatePalette == 0) {
+        if (!sSpriteTextLines[i].useAlternatePalette) {
             palette = sSpriteTextLines[i].palette;
         } else {
             palette = sSpriteTextLines[i].alternatePalette;

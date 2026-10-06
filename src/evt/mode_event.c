@@ -57,7 +57,7 @@ void Event_0(s32 arg) {
     gBldCnt = 0;
     gBldAlpha = 0;
     sEventId = arg;
-    sEventPaused = 0;
+    sEventPaused = FALSE;
 
     if (bg != NULL) {
         if (bg->isAffine != 0) {
@@ -124,7 +124,7 @@ void EventDebugUpdate() {
         ModeRequest(&gModeEventselect, 0);
     }
 
-    if (sEventPaused == 0) {
+    if (!sEventPaused) {
         TaskPoolUpdate(&sEventTaskPool);
     } else if (GetKeysRepeat() & SELECT_BUTTON) {
         TaskPoolUpdate(&sEventTaskPool);
@@ -146,7 +146,7 @@ void EventDebugUpdate() {
     }
 
     if (GetKeysPressed() & START_BUTTON) {
-        sEventPaused = 0;
+        sEventPaused = FALSE;
     }
 }
 

@@ -659,9 +659,9 @@ void HumDrawSub(HumWork* work, HumSub* sub) {
     if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 0xFF) {
-        affine = AllocObjAffine(0, sx, sy, 0);
+        affine = AllocObjAffine(0, sx, sy, FALSE);
     } else {
-        affine = AllocObjAffine(0, sx, sy, 1);
+        affine = AllocObjAffine(0, sx, sy, TRUE);
     }
 
     if (sub->flags & HUM_SUB_FLAG_OWN_DEPTH) {
@@ -724,9 +724,9 @@ void HumDraw(HumWork* work) {
     if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 0xFF) {
-        affine = AllocObjAffine(0, sx, sy, 0);
+        affine = AllocObjAffine(0, sx, sy, FALSE);
     } else {
-        affine = AllocObjAffine(0, sx, sy, 1);
+        affine = AllocObjAffine(0, sx, sy, TRUE);
     }
 
     if (work->state == HUM_STATE_RELOAD) {

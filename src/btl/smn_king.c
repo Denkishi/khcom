@@ -46,8 +46,8 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->mainSide != 0) {
-        work->mainSide = 1;
+    if (args->mainSide) {
+        work->mainSide = TRUE;
         gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
@@ -98,7 +98,7 @@ u8 SmnKingApplyGravity(SmnKingWork* work) {
 u8 task_smn_king_1(SmnKingWork* work) {
     BtlObj* body = &work->body;
     BtlWork* owner;
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
 
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
@@ -249,9 +249,9 @@ void task_smn_king_2(SmnKingWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (sclX <= Q_8_8(1) && sclY <= Q_8_8(1)) {
-        affine = AllocObjAffine(0, sclX, sclY, 0);
+        affine = AllocObjAffine(0, sclX, sclY, FALSE);
     } else {
-        affine = AllocObjAffine(0, sclX, sclY, 1);
+        affine = AllocObjAffine(0, sclX, sclY, TRUE);
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
@@ -263,7 +263,7 @@ void task_smn_king_2(SmnKingWork* work) {
 void task_smn_king_3(SmnKingWork* work) {
     BtlWork* owner;
 
-    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide ? gBtlWork : gRikuBtlWork;
     owner->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

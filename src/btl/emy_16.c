@@ -315,9 +315,9 @@ void task_emy_16_b_2(Emy16bWork* work) {
                 flags |= 1;
             }
         } else if (!work->facingLeft) {
-            affine = AllocObjAffine(0, -scale, scale, 1);
+            affine = AllocObjAffine(0, -scale, scale, TRUE);
         } else {
-            affine = AllocObjAffine(0, scale, scale, 1);
+            affine = AllocObjAffine(0, scale, scale, TRUE);
         }
 
         DrawSprite(x, y, gfx, work->tiles, work->palette, affine, flags,

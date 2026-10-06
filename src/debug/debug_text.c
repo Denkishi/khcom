@@ -499,7 +499,7 @@ void DebugTextDraw(u8 bg) {
                     } else {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32);
                     }
-                } else if (i != 0 || sDebugTextMergeFirstGlyph == 1) {
+                } else if (i != 0 || sDebugTextMergeFirstGlyph == TRUE) {
                     pixels = ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0];
 
                     if (sDebugTextLines[n].font != 2) {

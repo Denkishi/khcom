@@ -145,7 +145,7 @@ void MapChkSetParamToggle(u8* work, u8 on) {
     if (work[5] != on) {
         work[5] = on;
 
-        if (on != 0) {
+        if (on) {
             DebugTextPrint(80, 68, 2, sMapChkOnText);
         } else {
             DebugTextPrint(80, 68, 2, sMapChkOffText);
@@ -394,7 +394,7 @@ void MapChkEditForm(MapChkWork* work) {
         DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
         DebugTextPrintNumber(80, 128, 2, sMapChkForm->minDepth);
         DebugTextPrintNumber(80, 140, 2, sMapChkForm->maxDepth);
-        MapChkSetParamToggle((u8*)work, 1);
+        MapChkSetParamToggle((u8*)work, TRUE);
     }
 }
 
@@ -413,13 +413,13 @@ void MapChkEditWidth(MapChkWork* work) {
         sMapChkForm->maxWidth = width;
         sMapChkForm->minWidth = width;
         DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
-        MapChkSetParamToggle((u8*)work, 1);
+        MapChkSetParamToggle((u8*)work, TRUE);
     }
 }
 
 void MapChkFlipParamToggle(MapChkWork* work) {
     if ((GetKeysRepeat() & (DPAD_RIGHT | DPAD_LEFT)) != 0) {
-        MapChkSetParamToggle((u8*)work, work->useParams == 0 ? 1 : 0);
+        MapChkSetParamToggle((u8*)work, !work->useParams ? TRUE : FALSE);
     }
 }
 
@@ -443,7 +443,7 @@ void MapChkEditMinHeight(MapChkWork* work) {
             DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
         }
 
-        MapChkSetParamToggle((u8*)work, 1);
+        MapChkSetParamToggle((u8*)work, TRUE);
     }
 }
 
@@ -467,7 +467,7 @@ void MapChkEditMaxHeight(MapChkWork* work) {
             DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
         }
 
-        MapChkSetParamToggle((u8*)work, 1);
+        MapChkSetParamToggle((u8*)work, TRUE);
     }
 }
 
@@ -491,7 +491,7 @@ void MapChkEditMinDepth(MapChkWork* work) {
             DebugTextPrintNumber(80, 140, 2, sMapChkForm->maxDepth);
         }
 
-        MapChkSetParamToggle((u8*)work, 1);
+        MapChkSetParamToggle((u8*)work, TRUE);
     }
 }
 
@@ -515,7 +515,7 @@ void MapChkEditMaxDepth(MapChkWork* work) {
             DebugTextPrintNumber(80, 128, 2, sMapChkForm->minDepth);
         }
 
-        MapChkSetParamToggle((u8*)work, 1);
+        MapChkSetParamToggle((u8*)work, TRUE);
     }
 }
 
@@ -525,13 +525,13 @@ void Mode_MapChk_0() {
 
     sMapChkWork = EwramAlloc(sizeof(MapChkWork));
     SaveLoadHeader();
-    gMapChkUseParams = 0;
+    gMapChkUseParams = FALSE;
     sMapChkWork->cursor = 0;
     sMapChkWork->mode = 0;
     sMapChkWork->world = 0;
     sMapChkWork->floor = 1;
     sMapChkWork->form = 0;
-    sMapChkWork->useParams = 0;
+    sMapChkWork->useParams = FALSE;
     gGameState.roomEffect = 0;
     LoadMapForm(sMapChkWork->form);
     sMapChkForm = &gMapForm;

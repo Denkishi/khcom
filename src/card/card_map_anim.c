@@ -1058,7 +1058,7 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 thisDeckOnly, u16* out) {
     present = EwramAlloc(0x11E * sizeof(u16));
     CpuFill32(0, present, 0x11E * sizeof(u16));
 
-    if (thisDeckOnly == 1) {
+    if (thisDeckOnly == TRUE) {
         switch (deck) {
         case 0:
             mask = CARD_FLAG_IN_DECK_1;

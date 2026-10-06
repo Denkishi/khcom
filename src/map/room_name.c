@@ -146,7 +146,7 @@ void task_room_name_2(RoomNameWork* work) {
     ObjAffine* affine;
 
     if (work->state != ROOM_NAME_STATE_DELAY) {
-        affine = AllocObjAffine(0, Q_8_8(1), work->scaleY, 0);
+        affine = AllocObjAffine(0, Q_8_8(1), work->scaleY, FALSE);
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, affine, 0, 0x3C);
         DrawTextSlots(work->x2 >> 8, work->y2 >> 8, work->textSlots, work->palette2, 0x32, work->textSlotCount);
     }

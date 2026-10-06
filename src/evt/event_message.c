@@ -3007,7 +3007,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
     work->tiles = NULL;
     work->palette = NULL;
     work->gfx = NULL;
-    work->spriteFlipX = 0;
+    work->spriteFlipX = FALSE;
     work->callbackActive = FALSE;
     work->usesBtlWork = FALSE;
     work->finished = FALSE;
@@ -3356,7 +3356,7 @@ void event_chara_2(EventCharaWork* work) {
     if (work->tiles != NULL) {
         flags = work->obj.drawFlags;
 
-        if (work->spriteFlipX == 0) {
+        if (!work->spriteFlipX) {
             flags &= ~SPRITE_FLAG_HFLIP;
         } else {
             flags |= SPRITE_FLAG_HFLIP;
@@ -6736,7 +6736,7 @@ void msgface_2(MsgFaceWork* work) {
     u8 flipX;
 
     if (work->visible) {
-        affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
+        affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), FALSE);
 
         if (affine != NULL) {
             DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, affine, 0, 50);

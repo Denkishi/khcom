@@ -135,7 +135,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->bottomBarX = 0xA400;
     work->bottomBarY = 0xA000;
     work->bannerX = -0x8000;
-    work->holding = 0;
+    work->holding = FALSE;
 #ifdef VERSION_EU
     work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTilesByLanguage[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
@@ -368,7 +368,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* task) {
         } else {
             ScrollRikuGridDown(work);
 
-            if (work->holding != 0) {
+            if (work->holding) {
                 if ((u16)work->heldRow <= 3) {
                     work->heldY = gDeckGridRowY[work->heldRow] << 8;
                 } else {
@@ -651,7 +651,7 @@ void ScrollRikuGridDown(RikuDeckMenuWork* work) {
         work->thumbY = 0x7C00;
     }
 
-    if (work->holding != 0) {
+    if (work->holding) {
         work->heldRow--;
     }
 }

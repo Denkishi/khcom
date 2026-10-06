@@ -521,7 +521,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
             work->sioKeysA = FALSE;
         }
 
-        if (arg->mainSide != 0) {
+        if (arg->mainSide) {
             work->mainSide = TRUE;
             act->btl = gBtlWork;
             act->maxHp = gGameState.linkMaxHp;
@@ -583,7 +583,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     act->vx = act->vy = 0;
 
     // @bug arg is NULL in normal battles (NULL read).
-    if (arg->mainSide != 0) {
+    if (arg->mainSide) {
         ColliderInit(&act->collider, 1, act->radiusX, act->height);
     } else {
         ColliderInit(&act->collider, 2, act->radiusX, act->height);
@@ -6209,9 +6209,9 @@ void task_btl_sora_2(BtlSoraWork* work) {
     if (sy == Q_8_8(1) && sx == Q_8_8(1)) {
         affine = NULL;
     } else if (sy <= 255) {
-        affine = AllocObjAffine(0, sx, sy, 0);
+        affine = AllocObjAffine(0, sx, sy, FALSE);
     } else {
-        affine = AllocObjAffine(0, sx, sy, 1);
+        affine = AllocObjAffine(0, sx, sy, TRUE);
     }
 
     if (work->flags & BTL_SORA_FLAG_OVER_PLATFORM) {

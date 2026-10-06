@@ -207,9 +207,9 @@ void task_monsgage_2(MonsgageWork* work) {
         if (work->visible) {
             if (work->shownValue * 2 > 4) {
                 if (work->shownValue * 2 > Q_8_8(1)) {
-                    affine = AllocObjAffine(0, work->shownValue * 2, Q_8_8(1), 1);
+                    affine = AllocObjAffine(0, work->shownValue * 2, Q_8_8(1), TRUE);
                 } else {
-                    affine = AllocObjAffine(0, work->shownValue * 2, Q_8_8(1), 0);
+                    affine = AllocObjAffine(0, work->shownValue * 2, Q_8_8(1), FALSE);
                 }
 
                 DrawSprite(174, 16, work->gfx2, work->tiles2, work->palette, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);

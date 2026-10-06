@@ -61,7 +61,7 @@ void task_fld_shadow_2(FldShadowWork* work) {
             size = Q_8_8(0.1);
         }
 
-        sprite = AllocObjAffine(0, size, size, 0);
+        sprite = AllocObjAffine(0, size, size, FALSE);
     }
 
     x = (work->x >> 8) - (gFieldState->x >> 8);

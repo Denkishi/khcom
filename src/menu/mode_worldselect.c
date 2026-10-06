@@ -602,7 +602,7 @@ void WorldselectDraw() {
                 pal = sWorldselectCardPalettes[1];
                 anim = gWorldselectCardFlipFrames[(facing - 194) / 13];
             } else {
-                sprite = AllocObjAffine(0, scaleX, scale, 0);
+                sprite = AllocObjAffine(0, scaleX, scale, FALSE);
                 tiles = sWorldselectCardTiles[0];
                 pal = sWorldselectCardPalettes[0];
                 anim = gWorldselectCardFrame0;

@@ -101,7 +101,7 @@ void Task_MapStair_0(MapStairWork* work, FldObj* arg) {
     work->obj.fieldPosition.y = y;
     work->palette = LoadObjPalette(gCommonObjPalette, sizeof(gCommonObjPalette));
     work->tiles = LoadObjTiles(gBtlAreaTiles, sizeof(gBtlAreaTiles));
-    work->visible = 0;
+    work->visible = FALSE;
 
     switch (work->obj.angle) {
     case 0x2D:
@@ -136,7 +136,7 @@ void Task_MapStair_2(MapStairWork* work) {
 
     TaskPoolDraw(&work->tasks);
 
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         x = (work->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         y = (work->obj.fieldPosition.y >> 8) + (work->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
         DrawSprite(x, y, gBtlAreaFrame5, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);

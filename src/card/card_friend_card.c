@@ -654,7 +654,7 @@ void PickupCardDraw(PickupCardWork* work) {
         }
 
         affine = AllocObjAffine(work->angle, work->scaleX,
-                                work->scaleY, 0);
+                                work->scaleY, FALSE);
         DrawSprite(x, y - 8,
                    gCardBacks[work->cardDef->category].gfx,
                    gCardBattleState->tiles[work->cardDef->category],
@@ -679,7 +679,7 @@ void PickupCardDraw(PickupCardWork* work) {
                           work->floor);
             DrawSprite(work->x, work->y,
                        gBtlShadowFrames[0], work->tiles4,
-                       work->palette3, AllocObjAffine(0, shadowScale, shadowScale, 0),
+                       work->palette3, AllocObjAffine(0, shadowScale, shadowScale, FALSE),
                        work->spriteFlags, work->priority + 2);
         }
 
@@ -705,7 +705,7 @@ void Heartless_card_2(PickupCardWork* work) {
         }
 
         affine = AllocObjAffine(work->angle, work->scaleX,
-                                work->scaleY, 0);
+                                work->scaleY, FALSE);
         DrawSprite(x, y - 8,
                    gCardBacks[work->cardDef->category].gfx,
                    work->tiles, work->palette, affine,
@@ -725,7 +725,7 @@ void Heartless_card_2(PickupCardWork* work) {
                           work->floor);
             DrawSprite(work->x, work->y,
                        gBtlShadowFrames[0], work->tiles4,
-                       work->palette3, AllocObjAffine(0, shadowScale, shadowScale, 0),
+                       work->palette3, AllocObjAffine(0, shadowScale, shadowScale, FALSE),
                        work->spriteFlags, work->priority + 2);
         }
 
@@ -1129,7 +1129,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
     work->spinDelay = 10;
     work->advanced = FALSE;
     work->stopped = FALSE;
-    work->inputEnabled = 1;
+    work->inputEnabled = TRUE;
     work->resultPending = TRUE;
     work->cursorHidden = 0;
     work->stopTimer = 0;
@@ -1145,7 +1145,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
     s32 steps;
     s32 z;
 
-    if (work->inputEnabled != 0) {
+    if (work->inputEnabled) {
         if ((GetKeysPressed() & A_BUTTON) && !work->stopped) {
             work->stopped = TRUE;
             m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -1200,9 +1200,9 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
     }
 
     if (work->spinDelay == 4 || work->spinDelay == 10) {
-        work->inputEnabled = 1;
+        work->inputEnabled = TRUE;
     } else {
-        work->inputEnabled = 0;
+        work->inputEnabled = FALSE;
     }
 
     if (work->advanced) {
@@ -1255,7 +1255,7 @@ void Premire_Chance_2(PremireChanceWork* work) {
         DrawSprite(53, 64, work->gfx2, work->tiles3, work->palette3, NULL, 0, 0);
     }
 
-    if (work->inputEnabled != 0) {
+    if (work->inputEnabled) {
         DrawSprite(88, 70, gAButtonIconFrames[0], work->tiles4, work->palette4, NULL, 0, 0);
     }
 
@@ -1312,7 +1312,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
     work->gfx2 = AnimUpdate(&work->anim2);
     work->spinDelay = 0;
     work->stopTimer++;
-    work->inputEnabled = 0;
+    work->inputEnabled = FALSE;
 
     if (work->resultPending) {
         while (card != NULL) {

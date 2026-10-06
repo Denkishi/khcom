@@ -102,7 +102,7 @@ void MapTutorialWaitBarrelHit(MapTutorialWork* work) {
         m4aSongNumStart(SONG_SYS_OBJ_BREAK);
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &work->obj);
         gMapRoomState->flags &= ~ROOM_FLAG_NO_RANDOM_PRIZE;
-        TryCreateRandomPrzCard(0, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
+        TryCreateRandomPrzCard(FALSE, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
         AnimStart(&work->anim, 1, 0);
         work->update = MapTutorialBarrelBreak;
         ColliderUnregister(&work->collider);

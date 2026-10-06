@@ -558,7 +558,7 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
         scaleY = Q_8_8(1);
     }
 
-    affine = AllocObjAffine(0, scaleX, scaleY, 0);
+    affine = AllocObjAffine(0, scaleX, scaleY, FALSE);
     WorldToScreen(&x, &y, obj->x, obj->y, obj->z);
     DrawSprite(x, (work->y >> 8) + y, AnimGetGfx(&work->anim), work->tiles, pal,
         affine, flags, -0x1004 - (obj->y >> 8) * 4);
@@ -1073,7 +1073,7 @@ void task_bos_boogie_disk_2(BoogieDiskWork* work) {
     s16 y;
     u16 flags = GetBattleSpritePriorityFlags(obj->y);
     void* pal = work->palette;
-    ObjAffine* affine = AllocObjAffineAngle(work->angle, 1);
+    ObjAffine* affine = AllocObjAffineAngle(work->angle, TRUE);
 
     WorldToScreen(&x, &y, obj->x, obj->y, obj->z);
     DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, affine, flags,
@@ -1232,7 +1232,7 @@ void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
         pal = work->palette;
     }
 
-    affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
+    affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), FALSE);
     DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, affine, flags,
         -0x1004 - (obj->y >> 8) * 4);
 }

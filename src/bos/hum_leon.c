@@ -87,14 +87,14 @@ u8 task_hum_leon_1(LeonWork* work) {
         break;
     case HUM_STATE_IDLE:
         if (gBtlWork->flags & 0x20000000000) {
-            if (w->gunbladeRaised == FALSE) {
+            if (!w->gunbladeRaised) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
                 w->gunbladeRaised = TRUE;
             } else if (AnimIsFinished(&work->base.anim)) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             }
         } else {
-            if (w->gunbladeRaised != FALSE) {
+            if (w->gunbladeRaised) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
                 w->gunbladeRaised = FALSE;
             } else if (AnimIsFinished(&work->base.anim)) {

@@ -319,7 +319,7 @@ void sysmsgwin_2(SysMsgWinWork* work) {
     case CARD_MESSAGE_MODE_SPRITE_WINDOW:
     case CARD_MESSAGE_MODE_SPRITE_WINDOW_PERSISTENT:
         if (work->tiles2 != NULL) {
-            if (work->fallbackFrame != FALSE) {
+            if (work->fallbackFrame) {
                 DrawSprite(work->frameX >> 8, work->frameY >> 8, gSysMsgWinFallbackFrames[0],
                            work->tiles2, work->palette4, NULL, 0, 10);
             } else {
@@ -406,7 +406,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* task) {
     TextChar** nextText;
 #endif
 
-    if (work->keepOpen == FALSE) {
+    if (!work->keepOpen) {
         return 0;
     }
 

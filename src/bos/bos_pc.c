@@ -5600,7 +5600,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
         if (x <= 0x109) {
             sel = (y >= 0x144 && y <= 0x162 && x > 175 && (GetRandom() & 0x300)) ? 8 : 7;
         } else {
-            if ((GetRandom() & 3) == 3 && work->shared.fltShrunk == FALSE && work->shared.gimmickTimer <= 0) {
+            if ((GetRandom() & 3) == 3 && !work->shared.fltShrunk && work->shared.gimmickTimer <= 0) {
                 sel = 6;
             } else if (y > 0x161) {
                 sel = 10;

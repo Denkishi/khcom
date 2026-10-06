@@ -205,7 +205,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
         break;
     case EMY07_STATE_SATISFIED:
-        if (w->thunderRequested != FALSE) {
+        if (w->thunderRequested) {
             AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         } else {
             AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 1, 0, w->base.tiles);

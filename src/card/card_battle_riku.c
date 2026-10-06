@@ -1334,7 +1334,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
         }
     }
 
-    if (work->stockNameChecked == FALSE && AreCardsSettled(work->stock, work->stockCount)) {
+    if (!work->stockNameChecked && AreCardsSettled(work->stock, work->stockCount)) {
         stockKeys = sRikuEmptyKeys;
 
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {

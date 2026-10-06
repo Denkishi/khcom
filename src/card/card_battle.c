@@ -1135,12 +1135,12 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             break;
         }
 
-        if (gCardBattleState->pickedFriendCardId != 950 && work->actionTaken == FALSE && work->reloadPending[work->listIndex] == 0) {
+        if (gCardBattleState->pickedFriendCardId != 950 && !work->actionTaken && work->reloadPending[work->listIndex] == 0) {
             gBtlWork->flags |= 0x20000000000LL;
             AddPickedCardToSoraDeck(work);
         }
 
-        if (gCardBattleState->pickedGimmickCardId != 950 && work->actionTaken == FALSE && work->reloadPending[work->listIndex] == 0) {
+        if (gCardBattleState->pickedGimmickCardId != 950 && !work->actionTaken && work->reloadPending[work->listIndex] == 0) {
             AddPickedCardToSoraDeck(work);
         }
 
@@ -1192,7 +1192,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             }
         }
 
-        if (work->stockNameChecked == FALSE && AreCardsSettled(work->stock, work->stockCount)) {
+        if (!work->stockNameChecked && AreCardsSettled(work->stock, work->stockCount)) {
             data = gSoraEmptyKeys;
 
             if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {

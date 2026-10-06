@@ -266,13 +266,13 @@ void EventUpdate() {
         return;
     }
 
-    if (seqDef->toTitle != FALSE) {
+    if (seqDef->toTitle) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         ModeRequest(&gModeTitle, 0);
         return;
     }
 
-    if (seqDef->toCopyright != FALSE) {
+    if (seqDef->toCopyright) {
         ModeRequest(&gModeCopyright1, 0);
         return;
     }

@@ -38,26 +38,26 @@ s32 BosLstLsrSquare2(s32 x) {
 
 s32 BosLstLsrSqrt(s32 n) {
     s32 x;
-    s32 g;
+    s32 root;
 
     if (n <= 0) {
         return 0;
     }
 
     x = 1;
-    g = n;
+    root = n;
 
-    while (x < g) {
+    while (x < root) {
         x <<= 1;
-        g >>= 1;
+        root >>= 1;
     }
 
     do {
-        g = x;
-        x = (n / g + g) >> 1;
-    } while (x < g);
+        root = x;
+        x = (n / root + root) >> 1;
+    } while (x < root);
 
-    return g;
+    return root;
 }
 
 enum BosLstLsrState {
@@ -68,60 +68,60 @@ enum BosLstLsrState {
 };
 
 u8 BosLstLsrIsFiring(Task* task) {
-    LstLsrWork* s;
-    u8 result;
+    LstLsrWork* work;
+    u8 firing;
 
-    s = task->work;
-    result = 0;
+    work = task->work;
+    firing = 0;
 
-    switch (s->state) {
+    switch (work->state) {
     case BOS_LST_LSR_STATE_TRAVEL:
     case BOS_LST_LSR_STATE_IMPACT:
-        result = 1;
+        firing = 1;
         break;
     }
 
-    return result;
+    return firing;
 }
 
 void BosLstLsrFire(Task* task, Vec3* origin, Vec3* target, s32 angle, u16 delay) {
-    LstLsrWork* s;
+    LstLsrWork* work;
     s16 x1;
     s16 y1;
     s16 x2;
     s16 y2;
 
-    s = task->work;
-    s->state = BOS_LST_LSR_STATE_DELAY;
-    s->angle = angle;
-    s->delay = delay;
-    s->pos = *origin;
-    s->pos2 = *target;
-    WorldToScreen(&x1, &y1, s->pos.x, s->pos.y, s->pos.z);
-    WorldToScreen(&x2, &y2, s->pos2.x, s->pos2.y, s->pos2.z);
-    s->duration = (s16)BosLstLsrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 16;
+    work = task->work;
+    work->state = BOS_LST_LSR_STATE_DELAY;
+    work->angle = angle;
+    work->delay = delay;
+    work->pos = *origin;
+    work->pos2 = *target;
+    WorldToScreen(&x1, &y1, work->pos.x, work->pos.y, work->pos.z);
+    WorldToScreen(&x2, &y2, work->pos2.x, work->pos2.y, work->pos2.z);
+    work->duration = (s16)BosLstLsrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 16;
 
-    if (s->duration <= 1) {
-        s->duration = 2;
+    if (work->duration <= 1) {
+        work->duration = 2;
     }
 
-    s->timer = 0;
+    work->timer = 0;
 }
 
 void BosLstLsrStop(Task* task) {
-    LstLsrWork* w;
+    LstLsrWork* work;
 
-    w = task->work;
-    w->state = BOS_LST_LSR_STATE_IDLE;
-    w->timer = 0;
-    AnimStart(&w->anim, 4, 0);
+    work = task->work;
+    work->state = BOS_LST_LSR_STATE_IDLE;
+    work->timer = 0;
+    AnimStart(&work->anim, 4, 0);
 }
 
 u8 BosLstLsrSpawnFal(LstLsrWork* work) {
     LstFalArg arg;
-    u8 result;
+    u8 spawned;
 
-    result = 0;
+    spawned = 0;
 
     if (work->kind != 0) {
         return 0;
@@ -135,10 +135,10 @@ u8 BosLstLsrSpawnFal(LstLsrWork* work) {
         arg.facing = *work->facing;
         arg.falCount = work->falCount;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFal, &arg);
-        result = 1;
+        spawned = 1;
     }
 
-    return result;
+    return spawned;
 }
 
 void task_bos_lst_lsr_0(LstLsrWork* work, LstLsrArg* arg) {
@@ -220,33 +220,33 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
     s16 y1;
     s16 x2;
     s16 y2;
-    u16 z;
+    u16 depth;
     u16 x;
     u16 y;
     u16 prio;
     void* gfx;
-    ObjAffine* oam;
+    ObjAffine* affine;
 
     switch (work->state) {
     case BOS_LST_LSR_STATE_TRAVEL:
         WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
-        z = -0x1004 - (work->pos2.y >> 8) * 4;
+        depth = -0x1004 - (work->pos2.y >> 8) * 4;
         WorldToScreen(&x2, &y2, work->pos.x, work->pos.y, work->pos.z);
-        oam = AllocObjAffineAngle(work->angle, 1);
+        affine = AllocObjAffineAngle(work->angle, 1);
         x = x2 + (x1 - x2) * work->timer / work->duration;
         y = y2 + (y1 - y2) * work->timer / work->duration;
         DrawSprite(x, y, gBosLstBitFrames[13], work->tiles, work->palette,
-                   oam, prio, z);
+                   affine, prio, depth);
         break;
     case BOS_LST_LSR_STATE_IMPACT:
         WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
-        z = -0x1004 - (work->pos2.y >> 8) * 4;
-        oam = AllocObjAffine(0, 0x100 - work->timer * 8, work->timer * 16 + 0x100, 1);
+        depth = -0x1004 - (work->pos2.y >> 8) * 4;
+        affine = AllocObjAffine(0, 0x100 - work->timer * 8, work->timer * 16 + 0x100, 1);
         gfx = AnimGetGfx(&work->anim);
         DrawSprite(x1, y1, gfx, work->tiles, work->palette,
-                   oam, prio | 4, z);
+                   affine, prio | 4, depth);
         break;
     }
 }

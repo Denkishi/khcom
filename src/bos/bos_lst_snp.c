@@ -51,9 +51,9 @@ void task_bos_lst_snp_0(LstSnpWork* work, LstSnpArg* arg) {
 u8 task_bos_lst_snp_1(LstSnpWork* work) {
     s16 x;
     s16 y;
-    u8 result;
+    u8 alive;
 
-    result = 1;
+    alive = 1;
     work->angle += 8;
     work->x += work->vx;
     work->z += work->vz;
@@ -61,26 +61,26 @@ u8 task_bos_lst_snp_1(LstSnpWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
 
     if (y > 192) {
-        result = 0;
+        alive = 0;
     }
 
     AnimUpdate(&work->anim);
 
-    return result;
+    return alive;
 }
 
 void task_bos_lst_snp_2(LstSnpWork* work) {
     s16 x;
     s16 y;
-    ObjAffine* oam;
+    ObjAffine* affine;
     void* gfx;
     u16 prio;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    oam = AllocObjAffineAngle(work->angle, 1);
+    affine = AllocObjAffineAngle(work->angle, 1);
     gfx = AnimGetGfx(&work->anim);
     prio = GetBattleSpritePriorityFlags(work->y) | 4;
-    DrawSprite(x, y, gfx, work->tiles, work->palette, oam, prio,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, affine, prio,
                -0x1004 - (work->y >> 8) * 4);
 }
 

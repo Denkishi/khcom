@@ -58,34 +58,34 @@ enum BosLstCtrState {
 };
 
 u8 BosLstCtrIsActive(Task* task) {
-    LstCtrWork* s;
+    LstCtrWork* work;
 
-    s = task->work;
-    return s->state != BOS_LST_CTR_STATE_DONE;
+    work = task->work;
+    return work->state != BOS_LST_CTR_STATE_DONE;
 }
 
 s32 BosLstCtrSqrt(s32 n) {
     s32 x;
-    s32 g;
+    s32 root;
 
     if (n <= 0) {
         return 0;
     }
 
     x = 1;
-    g = n;
+    root = n;
 
-    while (x < g) {
+    while (x < root) {
         x <<= 1;
-        g >>= 1;
+        root >>= 1;
     }
 
     do {
-        g = x;
-        x = (n / g + g) >> 1;
-    } while (x < g);
+        root = x;
+        x = (n / root + root) >> 1;
+    } while (x < root);
 
-    return g;
+    return root;
 }
 
 void task_bos_lst_ctr_0(LstCtrWork* work, LstCtrArg* arg) {
@@ -116,8 +116,8 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
     s16 y1;
     s16 x2;
     s16 y2;
-    BtlObj* p;
-    s32 c;
+    BtlObj* actor;
+    s32 timer;
 
     work->offsetX /= 2;
     work->offsetY /= 2;
@@ -125,14 +125,14 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 
     switch (work->state) {
     case BOS_LST_CTR_STATE_ORBIT:
-        c = (u16)work->timer + 1;
-        work->timer = c;
+        timer = (u16)work->timer + 1;
+        work->timer = timer;
         work->delay--;
 
         if (work->delay <= 0) {
-            p = gBtlWork->actor;
-            work->x2 = work->curX - (work->curX - p->x) / 4;
-            work->y2 = p->y;
+            actor = gBtlWork->actor;
+            work->x2 = work->curX - (work->curX - actor->x) / 4;
+            work->y2 = actor->y;
             work->z2 = -0x1000;
             work->state = BOS_LST_CTR_STATE_DROP;
             work->step = 0;
@@ -144,9 +144,9 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->duration = (s16)BosLstCtrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 9;
         } else {
             work->offsetX =
-                (-COS(sBosLstCtrAngles[work->count][work->index] + c) * 5 >> 6) << 8;
+                (-COS(sBosLstCtrAngles[work->count][work->index] + timer) * 5 >> 6) << 8;
             work->offsetZ =
-                ((SIN(sBosLstCtrAngles[work->count][work->index] + c) * 3 >> 5) - 4) << 8;
+                ((SIN(sBosLstCtrAngles[work->count][work->index] + timer) * 3 >> 5) - 4) << 8;
         }
 
         break;
@@ -230,26 +230,26 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
     s16 y;
     ObjAffine* affine;
     u16 prio;
-    u16 z;
+    u16 depth;
     void* gfx;
-    s32 d;
+    s32 elapsed;
 
     WorldToScreen(&x, &y, work->curX + work->offsetX, work->curY + work->offsetY,
                   work->curZ + work->offsetZ);
     affine = NULL;
     prio = GetBattleSpritePriorityFlags(work->curY + work->offsetY) | 4;
-    z = -0x1004 - ((work->curY + work->offsetY) >> 8) * 4;
+    depth = -0x1004 - ((work->curY + work->offsetY) >> 8) * 4;
 
     switch (work->state) {
     case BOS_LST_CTR_STATE_ORBIT:
-        d = work->timer - work->index * 8;
+        elapsed = work->timer - work->index * 8;
 
-        if (d <= 0) {
+        if (elapsed <= 0) {
             return;
         }
 
-        if (d <= 15) {
-            affine = AllocObjAffine(0, 0x100, d * 16, 0);
+        if (elapsed <= 15) {
+            affine = AllocObjAffine(0, 0x100, elapsed * 16, 0);
         }
 
         break;
@@ -269,7 +269,7 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
     }
 
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, affine, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, affine, prio, depth);
 }
 
 void task_bos_lst_ctr_3(LstCtrWork* work) {

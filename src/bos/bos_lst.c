@@ -134,96 +134,96 @@ void BosLstDestroyTasks(BosLstWork* work) {
 }
 
 u8 BosLstSpawnFal(BosLstWork* work, s32 kind) {
-    LstFalArg s;
-    u8 r;
+    LstFalArg arg;
+    u8 spawned;
     TaskPool* pool;
     s32 range;
-    s32 d1;
-    s32 d2;
-    s32 d3;
-    s32 d4;
-    s32 d5;
-    s32 d6;
-    s32 d7;
+    s32 jitterY;
+    s32 jitterZ;
+    s32 spiralX;
+    s32 spiralZ;
+    s32 burstX;
+    s32 burstY;
+    s32 burstZ;
 
-    r = 0;
+    spawned = 0;
 
     if (!work->hidden) {
-        s.kind = kind;
-        s.facing = work->facing;
-        s.falCount = &work->falCount;
-        s.x = work->x;
-        s.y = work->y + 0x400;
-        s.z = work->z - 0x1400;
+        arg.kind = kind;
+        arg.facing = work->facing;
+        arg.falCount = &work->falCount;
+        arg.x = work->x;
+        arg.y = work->y + 0x400;
+        arg.z = work->z - 0x1400;
 
         switch (kind) {
         default:
-            s.x += work->facing << 12;
-            d1 = (GetRandom() % 21 << 8) + 0x800;
-            s.y -= d1;
-            d2 = (GetRandom() % 17 << 8) - 0x800;
-            s.z += d2;
+            arg.x += work->facing << 12;
+            jitterY = (GetRandom() % 21 << 8) + 0x800;
+            arg.y -= jitterY;
+            jitterZ = (GetRandom() % 17 << 8) - 0x800;
+            arg.z += jitterZ;
             pool = &gBtlWork->taskPools[1];
             break;
         case 4:
             range = 0x800;
-            d3 = (GetRandom() % 17 << 8) - range;
-            s.x += d3;
-            d4 = (GetRandom() % 17 << 8) - range;
-            s.z += d4;
-            s.angle = work->defeatTimer * 4;
+            spiralX = (GetRandom() % 17 << 8) - range;
+            arg.x += spiralX;
+            spiralZ = (GetRandom() % 17 << 8) - range;
+            arg.z += spiralZ;
+            arg.angle = work->defeatTimer * 4;
             pool = &work->tasks;
             break;
         case 5:
-            d5 = (GetRandom() % 33 << 8) - 0x1000;
-            s.x += d5;
-            d6 = (GetRandom() % 21 << 8) + 0x800;
-            s.y -= d6;
-            d7 = (GetRandom() % 65 << 8) - 0x2000;
-            s.z += d7;
+            burstX = (GetRandom() % 33 << 8) - 0x1000;
+            arg.x += burstX;
+            burstY = (GetRandom() % 21 << 8) + 0x800;
+            arg.y -= burstY;
+            burstZ = (GetRandom() % 65 << 8) - 0x2000;
+            arg.z += burstZ;
             pool = &work->tasks;
             break;
         }
 
-        TaskCreate(pool, &gTaskDescBosLstFal, &s);
-        r = 1;
+        TaskCreate(pool, &gTaskDescBosLstFal, &arg);
+        spawned = 1;
     }
 
-    return r;
+    return spawned;
 }
 
 void BosLstSetAnim(BosLstWork* work, u16 animId, u16 flags, u8 change) {
     u16 id;
-    u16 v;
+    u16 sheetAnim;
 
     id = animId;
-    v = id * 2;
+    sheetAnim = id * 2;
 
     if (work->facing < 0) {
-        v ^= 1;
+        sheetAnim ^= 1;
     }
 
     if (work->turned == 1) {
-        v ^= 1;
+        sheetAnim ^= 1;
     }
 
     switch (sBosLstAnimSheets[animId]) {
     case 0:
         SetObjTileSource(work->tiles, gBosLstMarluxiaTiles);
-        AnimChangeWithTables(&work->anim, v, flags, gBosLstMarluxiaAnims, gBosLstMarluxiaFrames);
+        AnimChangeWithTables(&work->anim, sheetAnim, flags, gBosLstMarluxiaAnims, gBosLstMarluxiaFrames);
         break;
     case 1:
-        v -= 14;
+        sheetAnim -= 14;
         SetObjTileSource(work->tiles, gBosLstMarluxiaDashTiles);
-        AnimChangeWithTables(&work->anim, v, flags, gBosLstMarluxiaDashAnims, gBosLstMarluxiaDashFrames);
+        AnimChangeWithTables(&work->anim, sheetAnim, flags, gBosLstMarluxiaDashAnims, gBosLstMarluxiaDashFrames);
         break;
     }
 
     if (change == 1) {
-        AnimChange(&work->anim, v, flags);
+        AnimChange(&work->anim, sheetAnim, flags);
     } else {
         AnimReset(&work->anim);
-        AnimStart(&work->anim, v, flags);
+        AnimStart(&work->anim, sheetAnim, flags);
     }
 
     work->animId = id;
@@ -232,20 +232,20 @@ void BosLstSetAnim(BosLstWork* work, u16 animId, u16 flags, u8 change) {
 }
 
 void BosLstSetFacing(BosLstWork* work, s16 facing) {
-    u8 f;
+    u8 faceLeft;
 
     if (work->facing != facing) {
         work->facing = facing;
         BosLstSetAnim(work, work->animId, work->animFlags, 1);
-        f = 1;
+        faceLeft = 1;
 
         if (work->facing > 0) {
-            f = (work->turned ^ f) != 0;
+            faceLeft = (work->turned ^ faceLeft) != 0;
         } else if (work->turned == 0) {
-            f = 0;
+            faceLeft = 0;
         }
 
-        if (f == 1) {
+        if (faceLeft == 1) {
             work->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
             work->sub[0].body.flags |= BTLOBJ_FLAG_FACING_LEFT;
             work->sub[1].body.flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -258,24 +258,24 @@ void BosLstSetFacing(BosLstWork* work, s16 facing) {
 }
 
 s16 BosLstFindActiveSub(BosLstWork* work) {
-    s16 r;
+    s16 index;
 
-    r = -1;
+    index = -1;
 
     if (!work->sub[0].defeated) {
-        r = 0;
+        index = 0;
     } else if (!work->sub[1].defeated) {
-        r = 1;
+        index = 1;
     }
 
-    return r;
+    return index;
 }
 
 u8 BosLstSetSubAnim(BosLstWork* work, u16 animId) {
     s16 i;
-    u8 r;
+    u8 changed;
 
-    r = 0;
+    changed = 0;
 
     if (work->subsDefeated == 1) {
         work->sub[0].animId = 2;
@@ -314,33 +314,33 @@ u8 BosLstSetSubAnim(BosLstWork* work, u16 animId) {
             work->sub[i].restartAnim = 1;
         }
 
-        r = 1;
+        changed = 1;
     }
 
-    return r;
+    return changed;
 }
 
 void BosLstTickCardDelay(BosLstWork* work) {
-    s32 t;
-    BtlObj* pos;
+    s32 delay;
+    BtlObj* actor;
 
-    t = work->cardDelay;
-    work->cardDelay = t - 0x100;
+    delay = work->cardDelay;
+    work->cardDelay = delay - 0x100;
 
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-        work->cardDelay = t - 0x200;
+        work->cardDelay = delay - 0x200;
     }
 
     if (work->facing > 0) {
-        pos = gBtlWork->actor;
+        actor = gBtlWork->actor;
 
-        if (pos->x > work->x + 0x1000) {
+        if (actor->x > work->x + 0x1000) {
             work->cardDelay -= 0x80;
         }
     } else {
-        pos = gBtlWork->actor;
+        actor = gBtlWork->actor;
 
-        if (pos->x < work->x - 0x1000) {
+        if (actor->x < work->x - 0x1000) {
             work->cardDelay -= 0x80;
         }
     }
@@ -401,12 +401,12 @@ enum BosLstSubState {
 };
 
 void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
-    BtlObj* pos;
+    BtlObj* actor;
     void* obj;
     void* anim;
-    const void* tbl;
-    void* p;
-    BtlWork* g;
+    const void* kind;
+    void* collider;
+    BtlWork* btl;
     u32 i;
 
     if (pool == NULL) {
@@ -437,10 +437,10 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->offsetX = 0;
     work->offsetY = 0;
     work->offsetZ = 0;
-    pos = gBtlWork->actor;
-    work->actorX = pos->x;
-    work->actorY = pos->y;
-    work->actorZ = pos->z;
+    actor = gBtlWork->actor;
+    work->actorX = actor->x;
+    work->actorY = actor->y;
+    work->actorZ = actor->z;
 #ifdef VERSION_EU
     work->unk_004 = 0;
 #endif
@@ -488,22 +488,22 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
         work->lstTasks[i] = NULL;
     }
 
-    tbl = &sBosLstEmyKind;
-    InitEnemyBtlObj(obj, tbl, work->x, work->y, work->z);
+    kind = &sBosLstEmyKind;
+    InitEnemyBtlObj(obj, kind, work->x, work->y, work->z);
     work->body.flags |= 0x200000000400;
     SetBtlObjUnhittable(obj, 1);
     obj = &work->sub[0].body;
-    InitEnemyBtlObj(obj, tbl, work->x, work->y, work->z);
+    InitEnemyBtlObj(obj, kind, work->x, work->y, work->z);
 
     work->sub[0].body.flags |= 0x400;
     SetEnemyHpFromStats(obj, 40, 0x100);
-    InitEnemyBtlObj(&work->sub[1].body, tbl, work->x, work->y, work->z);
+    InitEnemyBtlObj(&work->sub[1].body, kind, work->x, work->y, work->z);
     work->sub[1].body.flags |= 0x400;
     SetEnemyHpFromStats(&work->sub[1].body, 40, 0x100);
     ColliderInit(&work->collider, 8, 20, 20);
-    p = &work->collider2;
-    ColliderInit(p, 8, 28, 64);
-    ColliderSetDisabled(p, 1);
+    collider = &work->collider2;
+    ColliderInit(collider, 8, 28, 64);
+    ColliderSetDisabled(collider, 1);
 
     for (i = 0; (s32)i < 8; i++) {
         ColliderInit(&work->colliders[i], 7, 24, 4);
@@ -529,11 +529,11 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     LoadBgMap(1, gBosBlankMap, 0x1000);
     LoadBgMap(1, gBosLstAnim0BgMap, 0x800);
     LoadBgMap(0, gBosLstBgMap, 0x800);
-    g = gBtlWork;
-    g->bossX = work->x;
-    g->bossY = work->y;
-    g->bossZ = work->z;
-    g->bossPriorityOffset = -16;
+    btl = gBtlWork;
+    btl->bossX = work->x;
+    btl->bossY = work->y;
+    btl->bossZ = work->z;
+    btl->bossPriorityOffset = -16;
 }
 
 s32 BosLstApproachValue(s32 value, s32 target, s32 speed, s32 minSpeed, s32 maxSpeed) {
@@ -584,7 +584,7 @@ void BosLstMoveMode0(BosLstWork* work) {
 }
 
 void BosLstMoveMode1(BosLstWork* work) {
-    BtlWork** pp;
+    BtlWork** btl;
     s32 y;
 
     if (!work->subsDefeated) {
@@ -592,15 +592,15 @@ void BosLstMoveMode1(BosLstWork* work) {
         work->kamaCount = 0;
     }
 
-    pp = &gBtlWork;
+    btl = &gBtlWork;
     BosLstTickCardDelay(work);
 
     if (work->cardDelay < 0) {
         work->cardDelay = 0x400;
 
-        if (((*pp)->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
+        if (((*btl)->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
             work->groundVz = -0x1200;
-            work->groundTargetX = (*pp)->actor->x - ((work->facing * 5) << 10);
+            work->groundTargetX = (*btl)->actor->x - ((work->facing * 5) << 10);
 
             if (work->groundTargetX > 0x14000) {
                 work->groundTargetX = 0x14000;
@@ -663,7 +663,7 @@ enum BosLstDashStep {
 };
 
 void BosLstMoveDash(BosLstWork* work) {
-    s16 v;
+    s16 height;
     s16 n;
     s32 target;
     s32 dir;
@@ -723,15 +723,15 @@ void BosLstMoveDash(BosLstWork* work) {
             work->dashStep = BOS_LST_DASH_STEP_ENTER;
             work->timer = 0;
             work->dashSpeed = 0;
-            v = 27 - (work->hpRatio >> 4);
+            height = 27 - (work->hpRatio >> 4);
 
             if (work->sub[0].defeated == 1) {
-                v += 8;
+                height += 8;
                 work->dashSpeed = 0x100;
             }
 
             if (work->sub[1].defeated == 1) {
-                v += 8;
+                height += 8;
                 work->dashSpeed += 0x100;
             }
 
@@ -742,7 +742,7 @@ void BosLstMoveDash(BosLstWork* work) {
             }
 
             work->y = 0x1F000;
-            work->z = (-64 - v) << 8;
+            work->z = (-64 - height) << 8;
             work->dashVz = 0xA0;
         } else {
             work->dashSpeed += 64;
@@ -788,19 +788,19 @@ void BosLstMoveDash(BosLstWork* work) {
         break;
     case BOS_LST_DASH_STEP_HOLD:
     case BOS_LST_DASH_STEP_PASSED:
-        v = 39 - (work->hpRatio >> 4);
+        height = 39 - (work->hpRatio >> 4);
 
         if (work->sub[0].defeated == 1) {
-            v += 8;
+            height += 8;
             work->dashSpeed += 0x100;
         }
 
         if (work->sub[1].defeated == 1) {
-            v += 8;
+            height += 8;
             work->dashSpeed += 0x100;
         }
 
-        work->z = (-64 - v) << 8;
+        work->z = (-64 - height) << 8;
         work->dashVz = 12;
         work->timer += 1;
 
@@ -860,60 +860,60 @@ void BosLstMoveDash(BosLstWork* work) {
 
 u8 BosLstAnyBitFiring(BosLstWork* work, s32 idx) {
     s32 i;
-    u8 r;
+    u8 firing;
 
-    r = 0;
+    firing = 0;
 
     if (idx < 0) {
         for (i = 0; i < work->lstTaskCount; i++) {
             if (BosLstBitHasShots(work->lstTasks[i]) == 1) {
-                r = 1;
+                firing = 1;
                 break;
             }
         }
     } else if (idx < work->lstTaskCount) {
         if (BosLstBitHasShots(work->lstTasks[idx]) == 1) {
-            r = 1;
+            firing = 1;
         }
     }
 
-    return r;
+    return firing;
 }
 
 #ifdef VERSION_EU
 u8 BosLstAnyBitScaling(BosLstWork* work, s32 idx) {
     s32 i;
-    u8 r;
-    r = 0;
+    u8 scaling;
+    scaling = 0;
 
     if (idx < 0) {
         for (i = 0; i < work->lstTaskCount; i++) {
             if (BosLstBitIsScaling(work->lstTasks[i]) == 1) {
-                r = 1;
+                scaling = 1;
                 break;
             }
         }
     } else if (idx < work->lstTaskCount) {
         if (BosLstBitIsScaling(work->lstTasks[idx]) == 1) {
-            r = 1;
+            scaling = 1;
         }
     }
 
-    return r;
+    return scaling;
 }
 #endif
 
 u8 BosLstAnyBitAlive(BosLstWork* work) {
-    s16 v;
+    s16 found;
     s32 i;
 
-    v = 0;
+    found = 0;
 
     for (i = 0; i < work->lstTaskCount; i++) {
-        v = BosLstBitMarkFirstAlive(work->lstTasks[i], v);
+        found = BosLstBitMarkFirstAlive(work->lstTasks[i], found);
     }
 
-    return v != 0;
+    return found != 0;
 }
 
 void BosLstHoverBits(BosLstWork* work) {
@@ -928,25 +928,25 @@ void BosLstHoverBits(BosLstWork* work) {
 
 u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 shots) {
     s32 i;
-    u8 r;
+    u8 fired;
 
-    r = 0;
+    fired = 0;
 
     if (idx < 0) {
         for (i = 0; i < work->lstTaskCount; i++) {
             if (BosLstBitIsAlive(work->lstTasks[i]) == 1) {
                 BosLstBitStartFiring(work->lstTasks[i], shots);
-                r = 1;
+                fired = 1;
             }
         }
     } else if (idx < work->lstTaskCount) {
         if (BosLstBitIsAlive(work->lstTasks[idx]) == 1) {
             BosLstBitStartFiring(work->lstTasks[idx], shots);
-            r = 1;
+            fired = 1;
         }
     }
 
-    return r;
+    return fired;
 }
 
 void BosLstReturnBits(BosLstWork* work) {
@@ -961,14 +961,14 @@ void BosLstReturnBits(BosLstWork* work) {
 
 void BosLstInterruptBits(BosLstWork* work) {
     s32 i;
-    u8 flag;
+    u8 destroy;
 
-    flag = 1;
+    destroy = 1;
 
     for (i = 0; i < work->lstTaskCount; i++) {
         if (BosLstBitIsAlive(work->lstTasks[i]) == 1) {
-            if (BosLstBitInterrupt(work->lstTasks[i], flag) == 1) {
-                flag = 0;
+            if (BosLstBitInterrupt(work->lstTasks[i], destroy) == 1) {
+                destroy = 0;
             }
         }
     }
@@ -982,12 +982,12 @@ enum BosLstBitStep {
 };
 
 void BosLstMoveBits(BosLstWork* work) {
-    LstBitArg s;
+    LstBitArg arg;
     BtlObj* obj;
     s32 i;
-    s16* pBC;
-    s16* pBE;
-    s32 v;
+    s16* bitStep;
+    s16* bitRound;
+    s32 round;
 
     obj = &work->body;
 
@@ -999,30 +999,30 @@ void BosLstMoveBits(BosLstWork* work) {
 
     work->y = BosLstApproachValue(work->y, 0x1F000, 0, 0x100, 0x400);
     work->z = BosLstApproachValue(work->z, -0x5400, 0, 0x100, 0x400);
-    v = work->bitRound;
-    pBE = &work->bitRound;
-    pBC = &work->bitStep;
+    round = work->bitRound;
+    bitRound = &work->bitRound;
+    bitStep = &work->bitStep;
 
-    if (v == 0) {
+    if (round == 0) {
         work->lstTaskCount = 3;
-        s.x = obj->x;
-        s.y = obj->y - 0x1100;
-        s.z = obj->z + 0x800;
+        arg.x = obj->x;
+        arg.y = obj->y - 0x1100;
+        arg.z = obj->z + 0x800;
 
         for (i = 0; i < work->lstTaskCount; i++) {
-            s.kind = 0;
-            s.index = i;
-            s.facing = &work->facing;
-            s.falCount = &work->falCount;
-            s.unk_10 = &work->unk_004;
-            s.x2 = s.x + (i << 11);
-            s.y2 = obj->y + 0x1400;
-            s.z2 = s.z + ((i << 2) << 8);
-            work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstBit, &s);
+            arg.kind = 0;
+            arg.index = i;
+            arg.facing = &work->facing;
+            arg.falCount = &work->falCount;
+            arg.unk_10 = &work->unk_004;
+            arg.x2 = arg.x + (i << 11);
+            arg.y2 = obj->y + 0x1400;
+            arg.z2 = arg.z + ((i << 2) << 8);
+            work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstBit, &arg);
         }
 
-        *pBC = BOS_LST_BIT_STEP_HOVER;
-        *pBE += 1;
+        *bitStep = BOS_LST_BIT_STEP_HOVER;
+        *bitRound += 1;
         work->timer = 0;
         work->cardDelay = 0xC000;
         BosLstSetAnim(work, 5, 0, 1);
@@ -1032,18 +1032,18 @@ void BosLstMoveBits(BosLstWork* work) {
     if (!BosLstAnyBitAlive(work)) {
         BosLstDestroyTasks(work);
         work->timer = 0;
-        *pBC = BOS_LST_BIT_STEP_HOVER;
-        *pBE = 0;
+        *bitStep = BOS_LST_BIT_STEP_HOVER;
+        *bitRound = 0;
         BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_HANABIRA);
         BosLstSetAnim(work, 0, 1, 0);
     } else {
-        switch (*pBC) {
+        switch (*bitStep) {
         case BOS_LST_BIT_STEP_HOVER:
             work->timer += 1;
 
             if (work->timer > 30) {
                 work->timer = 0;
-                *pBC += 1;
+                *bitStep += 1;
             }
 
             break;
@@ -1081,81 +1081,81 @@ void BosLstMoveBits(BosLstWork* work) {
 
 s32 BosLstGetPlatformY(BosLstWork* work) {
     s32 base;
-    s16 d;
-    s32 r;
+    s16 dist;
+    s32 y;
 
     base = work->y + work->offsetZ;
-    r = base + 0x1A00;
-    d = abs((gBtlWork->actor->x - work->x) >> 8);
+    y = base + 0x1A00;
+    dist = abs((gBtlWork->actor->x - work->x) >> 8);
 
-    if (d > 23) {
-        if (d <= 83) {
-            r -= (d / 3) << 8;
-        } else if (d <= 143) {
-            r = base - 0x400;
+    if (dist > 23) {
+        if (dist <= 83) {
+            y -= (dist / 3) << 8;
+        } else if (dist <= 143) {
+            y = base - 0x400;
         } else {
             base -= 0x400;
-            r = base + (((d - 144) / 4) << 8);
+            y = base + (((dist - 144) / 4) << 8);
         }
     }
 
-    return r;
+    return y;
 }
 
 void BosLstMovePlatform(BosLstWork* work) {
-    LstBitArg s;
+    LstBitArg arg;
     BtlObj* obj;
     s32 i;
-    s32 st;
+    s32 step;
     s32 target;
-    s32 k;
+    s32 minSpeed;
     u8 found;
     s32* pDC;
-    s32* p4C;
-    u16 v;
+    s32* posZ;
+    u16 timer;
     s32 z;
 
     work->hittableTimer = 30;
-    st = work->platformStep;
+    step = work->platformStep;
 
-    switch (st) {
+    switch (step) {
     case BOS_LST_PLATFORM_STEP_DESCEND:
-        work->z = BosLstApproachValue(work->z, target = -0x2000, 0x400, k = 0x100, 0x400);
+        work->z = BosLstApproachValue(work->z, target = -0x2000, 0x400, minSpeed = 0x100, 0x400);
 
         if (work->z != target) {
             break;
         }
 
         work->platformStep += 1;
-        work->platformTimer = st;
+        work->platformTimer = step;
         work->playerOnPlatform = 0;
-        work->platformSpeed = k;
-        work->bitRound = st;
+        work->platformSpeed = minSpeed;
+        work->bitRound = step;
 
         for (i = 0; i < 8; i++) {
             ColliderSetDisabled(&work->colliders[i], 0);
         }
     case BOS_LST_PLATFORM_STEP_RIDE:
         obj = &work->body;
-        v = work->platformTimer;
+        timer = work->platformTimer;
 
         if (work->platformTimer == 0) {
-            work->platformTimer = v + 1;
+            work->platformTimer = timer + 1;
             work->lstTaskCount = 3;
-            s.x = obj->x;
-            s.y = obj->y - 0x1100;
-            s.z = obj->z + 0x800;
+            arg.x = obj->x;
+            arg.y = obj->y - 0x1100;
+            arg.z = obj->z + 0x800;
 
             for (i = 0; i < work->lstTaskCount; i++) {
-                s.kind = 1;
-                s.index = i;
-                s.facing = &work->facing;
-                s.falCount = &work->falCount;
-                s.unk_10 = &work->unk_004;
-                s.x2 = s.x + (i << 11);
-                s.y2 = obj->y + 0x1400;
-                s.z2 = s.z + ((i << 2) << 8);
-                work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstBit, &s);
+                arg.kind = 1;
+                arg.index = i;
+                arg.facing = &work->facing;
+                arg.falCount = &work->falCount;
+                arg.unk_10 = &work->unk_004;
+                arg.x2 = arg.x + (i << 11);
+                arg.y2 = obj->y + 0x1400;
+                arg.z2 = arg.z + ((i << 2) << 8);
+                work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstBit, &arg);
             }
         }
 
@@ -1219,13 +1219,13 @@ void BosLstMovePlatform(BosLstWork* work) {
         work->y = BosLstApproachValue(work->y, 0x1F000, 0x100, 0x100, 0x400);
         break;
     case BOS_LST_PLATFORM_STEP_LEAVE:
-        p4C = &work->z;
+        posZ = &work->z;
 
         for (i = 0; i < 8; i++) {
             ColliderSetDisabled(&work->colliders[i], 1);
         }
 
-        ApproachValueHalfSteps(p4C, -0x16800, 48);
+        ApproachValueHalfSteps(posZ, -0x16800, 48);
 
         if (work->facing < 0) {
             if (work->x < 0x26000) {
@@ -1304,11 +1304,11 @@ enum BosLstGroundStep {
 };
 
 u8 BosLstAttackGround(BosLstWork* work) {
-    s32 v;
-    u8 r;
+    s32 hpRatio;
+    u8 running;
 
-    r = 1;
-    v = work->hpRatio;
+    running = 1;
+    hpRatio = work->hpRatio;
 
     if (work->step == 0) {
         work->step += 1;
@@ -1349,13 +1349,13 @@ u8 BosLstAttackGround(BosLstWork* work) {
         if (work->timer <= 19) {
             if (ApplyAttackBox(268, gBtlWork->actor->x,
                               gBtlWork->actor->y, 0,
-                              32, 32, ((v * 8) >> 8) + 8) != 0) {
+                              32, 32, ((hpRatio * 8) >> 8) + 8) != 0) {
                 m4aSongNumStart(SONG_BTL_MARL_GROUNDHIT);
             }
         }
 
         if (!BgFxIsActive()) {
-            if (work->timer >= ((v * 30) >> 8) + 31) {
+            if (work->timer >= ((hpRatio * 30) >> 8) + 31) {
                 work->groundStep = BOS_LST_GROUND_STEP_RETURN;
                 work->timer = 0;
 
@@ -1367,7 +1367,7 @@ u8 BosLstAttackGround(BosLstWork* work) {
                     }
 
                     work->groundCount = 0;
-                    r = 0;
+                    running = 0;
                 }
             }
         }
@@ -1379,13 +1379,13 @@ u8 BosLstAttackGround(BosLstWork* work) {
         if (work->z == -0x5400) {
             work->groundStep = BOS_LST_GROUND_STEP_DONE;
             work->timer = 0;
-            r = 0;
+            running = 0;
         }
 
         break;
     }
 
-    return r;
+    return running;
 }
 
 enum BosLstKamaStep {
@@ -1399,27 +1399,27 @@ enum BosLstKamaStep {
 
 u8 BosLstAttackKama(BosLstWork* work) {
     BtlObj* sub;
-    s16* p8C;
-    s32 st;
-    u16 v;
-    s16 z;
-    u8 r;
+    s16* kamaStep;
+    s32 step;
+    u16 attackStep;
+    s16 zero;
+    u8 running;
 
-    r = 1;
+    running = 1;
     sub = &work->sub[BosLstFindActiveSub(work)].body;
-    v = work->step;
+    attackStep = work->step;
 
     if (work->step == 0) {
-        work->step = v + 1;
+        work->step = attackStep + 1;
         work->kamaCount += 1;
         work->kamaStep = BOS_LST_KAMA_STEP_WINDUP;
         work->timer = 0;
     }
 
-    st = work->kamaStep;
-    p8C = &work->kamaStep;
+    step = work->kamaStep;
+    kamaStep = &work->kamaStep;
 
-    switch (st) {
+    switch (step) {
     case BOS_LST_KAMA_STEP_WINDUP:
         if (work->timer == 0) {
             m4aSongNumStart(SONG_SND_712);
@@ -1429,7 +1429,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
         work->timer += 1;
 
         if (work->timer > 30) {
-            *p8C = BOS_LST_KAMA_STEP_ASCEND;
+            *kamaStep = BOS_LST_KAMA_STEP_ASCEND;
             work->timer = 0;
             m4aSongNumStart(SONG_VO_MARL_ATTACK00);
         }
@@ -1441,7 +1441,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
         work->z -= work->timer << 8;
 
         if (work->z < -0x1E000) {
-            *p8C = BOS_LST_KAMA_STEP_DIVE;
+            *kamaStep = BOS_LST_KAMA_STEP_DIVE;
             work->timer = 0;
             work->kamaStartY = work->y;
             work->kamaStartZ = work->z;
@@ -1463,9 +1463,9 @@ u8 BosLstAttackKama(BosLstWork* work) {
 
         break;
     case BOS_LST_KAMA_STEP_AIM:
-        z = 0;
-        *p8C = BOS_LST_KAMA_STEP_DIVE;
-        work->timer = z;
+        zero = 0;
+        *kamaStep = BOS_LST_KAMA_STEP_DIVE;
+        work->timer = zero;
         work->kamaTargetX = gBtlWork->actor->x;
         work->kamaTargetY = 0x1F000;
         work->kamaTargetZ = -0x5400;
@@ -1487,7 +1487,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
             work->timer += 1;
 
             if (work->timer > 16) {
-                *p8C = BOS_LST_KAMA_STEP_SLASH;
+                *kamaStep = BOS_LST_KAMA_STEP_SLASH;
                 work->timer = 0;
                 work->unk_078 = 0;
                 BosLstSetSubAnim(work, 4);
@@ -1534,7 +1534,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
         work->timer += 1;
 
         if (!BgFxIsActive()) {
-            *p8C = BOS_LST_KAMA_STEP_END;
+            *kamaStep = BOS_LST_KAMA_STEP_END;
             work->timer = 0;
             BosLstSetSubAnim(work, 0);
         }
@@ -1544,24 +1544,24 @@ u8 BosLstAttackKama(BosLstWork* work) {
         if (work->kamaCount > 2) {
             BosLstSetMode(work, BOS_LST_MOVE_MODE_DASH, BOS_LST_ATTACK_KIND_DASH);
             work->kamaCount = 0;
-            r = 0;
+            running = 0;
         } else {
-            z = 0;
-            *p8C = z;
-            work->timer = z;
-            r = z;
+            zero = 0;
+            *kamaStep = zero;
+            work->timer = zero;
+            running = zero;
         }
 
         break;
     }
 
-    return r;
+    return running;
 }
 
 u8 BosLstAttackDash(BosLstWork* work) {
-    u8 r;
+    u8 running;
 
-    r = 1;
+    running = 1;
 
     if (work->step == 0) {
         BosLstSetAnim(work, 7, 0, 1);
@@ -1587,10 +1587,10 @@ u8 BosLstAttackDash(BosLstWork* work) {
 
         if (work->facing > 0) {
             if (work->x <= -0x8000) {
-                r = 0;
+                running = 0;
             }
         } else if (work->x >= 0x27000) {
-            r = 0;
+            running = 0;
         }
 
         if (work->dashVz > 0) {
@@ -1605,7 +1605,7 @@ u8 BosLstAttackDash(BosLstWork* work) {
             m4aSongNumStart(SONG_BTL_MON_HIT06);
         }
 
-        if (r == 0) {
+        if (running == 0) {
             work->dashStep = BOS_LST_DASH_STEP_PASSED;
             work->timer = 0;
             BosLstSetAnim(work, 0, 1, 1);
@@ -1614,7 +1614,7 @@ u8 BosLstAttackDash(BosLstWork* work) {
         work->timer += 1;
     }
 
-    return r;
+    return running;
 }
 
 enum BosLstCtrAttackStep {
@@ -1625,14 +1625,14 @@ enum BosLstCtrAttackStep {
 };
 
 u8 BosLstAttackCtr(BosLstWork* work) {
-    LstCtrArg s;
+    LstCtrArg arg;
     BtlObj* obj;
-    s16 ang;
+    s16 interval;
     s32 i;
-    u8 r;
+    u8 running;
 
     obj = &work->body;
-    r = 1;
+    running = 1;
 
     switch (work->step) {
     case BOS_LST_CTR_ATTACK_STEP_START:
@@ -1670,22 +1670,22 @@ u8 BosLstAttackCtr(BosLstWork* work) {
                 work->ctrCount += 1;
             }
 
-            ang = ((work->hpRatio * 30) / 256) + 30;
+            interval = ((work->hpRatio * 30) / 256) + 30;
 
-            if (ang <= 44) {
-                ang = 45;
+            if (interval <= 44) {
+                interval = 45;
             }
 
-            s.x = obj->x;
-            s.y = obj->y + 0x800;
-            s.z = obj->z - 0x1000;
+            arg.x = obj->x;
+            arg.y = obj->y + 0x800;
+            arg.z = obj->z - 0x1000;
 
             for (i = 0; i < work->ctrCount; i++) {
-                s.unk_00 = &work->unk_004;
-                s.count = work->ctrCount;
-                s.index = i;
-                s.delay = i * ang + 90;
-                work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstCtr, &s);
+                arg.unk_00 = &work->unk_004;
+                arg.count = work->ctrCount;
+                arg.index = i;
+                arg.delay = i * interval + 90;
+                work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstCtr, &arg);
             }
 
             work->unk_004 = 0;
@@ -1695,16 +1695,16 @@ u8 BosLstAttackCtr(BosLstWork* work) {
 
         break;
     default:
-        r = 0;
+        running = 0;
 
         for (i = 0; i < work->ctrCount; i++) {
             if (BosLstCtrIsActive(work->lstTasks[i]) == 1) {
-                r = 1;
+                running = 1;
                 break;
             }
         }
 
-        if (r == 0) {
+        if (running == 0) {
             BosLstDestroyTasks(work);
             BosLstSetMode(work, BOS_LST_MOVE_MODE_BITS, BOS_LST_ATTACK_KIND_BITS);
             BosLstSetAnim(work, 0, 1, 0);
@@ -1714,14 +1714,14 @@ u8 BosLstAttackCtr(BosLstWork* work) {
     }
 
     BosLstUpdateBob(work);
-    return r;
+    return running;
 }
 
 u8 BosLstAttackBits(BosLstWork* work) {
-    s16 f;
-    u8 r;
+    s16 shots;
+    u8 running;
 
-    r = 1;
+    running = 1;
 
     if (work->bitAttackStarted == 0) {
         work->bitAttackStarted += 1;
@@ -1758,14 +1758,14 @@ u8 BosLstAttackBits(BosLstWork* work) {
 
         break;
     case BOS_LST_BIT_STEP_FIRE:
-        f = 1;
+        shots = 1;
 
         if (work->sub[0].defeated == 1) {
-            f = 2;
+            shots = 2;
         }
 
         if (work->sub[1].defeated == 1) {
-            f++;
+            shots++;
         }
 
         switch (work->timer) {
@@ -1776,19 +1776,19 @@ u8 BosLstAttackBits(BosLstWork* work) {
             }
 
             if (!BosLstAnyBitFiring(work, 1)) {
-                if (BosLstFireBits(work, 1, f) == 1) {
+                if (BosLstFireBits(work, 1, shots) == 1) {
                     break;
                 }
             }
         case 12:
             if (!BosLstAnyBitFiring(work, 0)) {
-                if (BosLstFireBits(work, 0, f) == 1) {
+                if (BosLstFireBits(work, 0, shots) == 1) {
                     break;
                 }
             }
         case 24:
             if (!BosLstAnyBitFiring(work, 2)) {
-                BosLstFireBits(work, 2, f);
+                BosLstFireBits(work, 2, shots);
             }
 
             break;
@@ -1806,7 +1806,7 @@ u8 BosLstAttackBits(BosLstWork* work) {
                     work->bitRound += 1;
                 }
 
-                r = 0;
+                running = 0;
             }
         }
 
@@ -1828,12 +1828,12 @@ u8 BosLstAttackBits(BosLstWork* work) {
         BosLstDestroyTasks(work);
         BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_HANABIRA);
         work->bitRound = 0;
-        r = 0;
+        running = 0;
         break;
     }
 
     BosLstUpdateBob(work);
-    return r;
+    return running;
 }
 
 enum BosLstHanabiraStep {
@@ -1844,13 +1844,13 @@ enum BosLstHanabiraStep {
 };
 
 u8 BosLstAttackHanabira(BosLstWork* work) {
-    s16 s;
-    u8 r;
+    s16 step;
+    u8 running;
 
-    r = 1;
-    s = work->step;
+    running = 1;
+    step = work->step;
 
-    switch (s) {
+    switch (step) {
     case BOS_LST_HANABIRA_STEP_START:
         BosLstSetAnim(work, 4, 0, 1);
         m4aSongNumStart(SONG_VO_MARL_ATTACK03);
@@ -1878,10 +1878,10 @@ u8 BosLstAttackHanabira(BosLstWork* work) {
     case BOS_LST_HANABIRA_STEP_WAIT:
         if (!BgFxIsActive()) {
             BosLstSetAnim(work, 0, 1, 0);
-            r = 0;
+            running = 0;
         }
 
-        if (r == 0) {
+        if (running == 0) {
             if (work->subsDefeated == 1) {
                 BosLstSetMode(work, BOS_LST_MOVE_MODE_GROUND, BOS_LST_ATTACK_KIND_GROUND);
             } else {
@@ -1897,100 +1897,100 @@ u8 BosLstAttackHanabira(BosLstWork* work) {
     }
 
     BosLstUpdateBob(work);
-    return r;
+    return running;
 }
 
 u8 BosLstUpdateAttack(BosLstWork* work) {
-    void* p;
-    s16 t;
-    u8 d;
+    void* obj;
+    s16 hpRatio;
+    u8 running;
 
-    p = &work->body;
-    t = work->hpRatio;
+    obj = &work->body;
+    hpRatio = work->hpRatio;
 
-    if (t <= 63) {
-        t = 64;
+    if (hpRatio <= 63) {
+        hpRatio = 64;
     }
 
     switch (work->attackKind) {
     case BOS_LST_ATTACK_KIND_GROUND:
-        d = BosLstAttackGround(work);
+        running = BosLstAttackGround(work);
 
-        if (d != 0) {
+        if (running != 0) {
             return 1;
         }
 
-        ClearBtlObjActionFlags(p);
-        work->state = d;
-        work->step = d;
-        work->cardDelay = ((t * 15) >> 4) << 8;
+        ClearBtlObjActionFlags(obj);
+        work->state = running;
+        work->step = running;
+        work->cardDelay = ((hpRatio * 15) >> 4) << 8;
         return 1;
     case BOS_LST_ATTACK_KIND_KAMA:
-        d = BosLstAttackKama(work);
+        running = BosLstAttackKama(work);
 
-        if (d != 0) {
+        if (running != 0) {
             return 1;
         }
 
-        ClearBtlObjActionFlags(p);
-        work->state = d;
-        work->step = d;
-        work->cardDelay = ((t * 15) >> 4) << 8;
+        ClearBtlObjActionFlags(obj);
+        work->state = running;
+        work->step = running;
+        work->cardDelay = ((hpRatio * 15) >> 4) << 8;
         return 1;
     case BOS_LST_ATTACK_KIND_DASH:
-        d = BosLstAttackDash(work);
+        running = BosLstAttackDash(work);
 
-        if (d != 0) {
+        if (running != 0) {
             return 1;
         }
 
-        ClearBtlObjActionFlags(p);
-        work->state = d;
-        work->step = d;
-        work->cardDelay = ((t * 15) >> 4) << 8;
+        ClearBtlObjActionFlags(obj);
+        work->state = running;
+        work->step = running;
+        work->cardDelay = ((hpRatio * 15) >> 4) << 8;
         return 1;
     case BOS_LST_ATTACK_KIND_CTR:
-        d = BosLstAttackCtr(work);
+        running = BosLstAttackCtr(work);
 
-        if (d != 0) {
+        if (running != 0) {
             return 1;
         }
 
-        ClearBtlObjActionFlags(p);
-        work->state = d;
-        work->step = d;
-        work->cardDelay = ((t * 15) >> 4) << 8;
+        ClearBtlObjActionFlags(obj);
+        work->state = running;
+        work->step = running;
+        work->cardDelay = ((hpRatio * 15) >> 4) << 8;
         return 1;
     case BOS_LST_ATTACK_KIND_BITS:
     case BOS_LST_ATTACK_KIND_PLATFORM_BITS:
-        d = BosLstAttackBits(work);
+        running = BosLstAttackBits(work);
 
-        if (d != 0) {
+        if (running != 0) {
             return 1;
         }
 
-        ClearBtlObjActionFlags(p);
-        work->state = d;
-        work->step = d;
+        ClearBtlObjActionFlags(obj);
+        work->state = running;
+        work->step = running;
         work->cardDelay = 0x5A00;
         return 1;
     case BOS_LST_ATTACK_KIND_HANABIRA:
-        d = BosLstAttackHanabira(work);
+        running = BosLstAttackHanabira(work);
 
-        if (d != 0) {
+        if (running != 0) {
             return 1;
         }
 
-        ClearBtlObjActionFlags(p);
-        work->state = d;
-        work->step = d;
-        work->cardDelay = ((t * 15) >> 4) << 8;
+        ClearBtlObjActionFlags(obj);
+        work->state = running;
+        work->step = running;
+        work->cardDelay = ((hpRatio * 15) >> 4) << 8;
         return 1;
     default:
-        ClearBtlObjActionFlags(p);
+        ClearBtlObjActionFlags(obj);
         work->state = BOS_LST_STATE_MOVE;
         work->step = 0;
-        work->cardDelay = ((t * 15) >> 4) << 8;
+        work->cardDelay = ((hpRatio * 15) >> 4) << 8;
         return 1;
     }
 
@@ -1998,12 +1998,12 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
 }
 
 u8 BosLstUpdateHurt(BosLstWork* work) {
-    void* p;
+    void* obj;
 
-    p = &work->body;
+    obj = &work->body;
 
     if (AnimIsFinished(&work->anim) == 1) {
-        ClearBtlObjActionFlags(p);
+        ClearBtlObjActionFlags(obj);
         BosLstSetAnim(work, 0, 1, 1);
         work->state = BOS_LST_STATE_MOVE;
     }
@@ -2019,7 +2019,7 @@ u8 BosLstUpdateState5(BosLstWork* work) {
 }
 
 u8 BosLstUpdateBreak(BosLstWork* work) {
-    LstSpawn3 s;
+    LstSpawn3 arg;
     BtlObj* obj;
 
     obj = &work->body;
@@ -2108,11 +2108,11 @@ u8 BosLstUpdateBreak(BosLstWork* work) {
 
     work->state = BOS_LST_STATE_MOVE;
     work->step = 0;
-    s.x = work->x + work->offsetX;
-    s.y = work->y + work->offsetY;
-    s.z = (work->z + work->offsetZ) - ((obj->height >> 1) << 8);
-    s.kind = 9;
-    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlPop, &s);
+    arg.x = work->x + work->offsetX;
+    arg.y = work->y + work->offsetY;
+    arg.z = (work->z + work->offsetZ) - ((obj->height >> 1) << 8);
+    arg.kind = 9;
+    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlPop, &arg);
     return 1;
 }
 
@@ -2127,13 +2127,13 @@ enum BosLstDefeatStep {
 };
 
 u8 BosLstUpdateDefeat(BosLstWork* work) {
-    u8 r;
+    u8 alive;
     s32 i;
-    s32 d1;
-    s32 d2;
+    s32 offsetX;
+    s32 offsetZ;
     s32 range;
 
-    r = 1;
+    alive = 1;
     SetBtlObjUnhittable(&work->body, 1);
     work->platformSpeed = 0;
     BosLstDestroyTasks(work);
@@ -2169,10 +2169,10 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
 
         if (work->timer & 0x20) {
             range = 0x200;
-            d1 = (GetRandom() % 5 << 8) - range;
-            work->offsetX = d1;
-            d2 = (GetRandom() % 5 << 8) - range;
-            work->offsetZ = d2;
+            offsetX = (GetRandom() % 5 << 8) - range;
+            work->offsetX = offsetX;
+            offsetZ = (GetRandom() % 5 << 8) - range;
+            work->offsetZ = offsetZ;
         } else {
             work->offsetX = 0;
             work->offsetZ = 0;
@@ -2196,10 +2196,10 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
 
         if (work->timer & 0x10) {
             range = 0x400;
-            d1 = (GetRandom() % 9 << 8) - range;
-            work->offsetX = d1;
-            d2 = (GetRandom() % 9 << 8) - range;
-            work->offsetZ = d2;
+            offsetX = (GetRandom() % 9 << 8) - range;
+            work->offsetX = offsetX;
+            offsetZ = (GetRandom() % 9 << 8) - range;
+            work->offsetZ = offsetZ;
         } else {
             work->offsetX = 0;
             work->offsetZ = 0;
@@ -2224,10 +2224,10 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
 
         if (work->timer <= 39) {
             range = 0x600;
-            d1 = (GetRandom() % 13 << 8) - range;
-            work->offsetX = d1;
-            d2 = (GetRandom() % 13 << 8) - range;
-            work->offsetZ = d2;
+            offsetX = (GetRandom() % 13 << 8) - range;
+            work->offsetX = offsetX;
+            offsetZ = (GetRandom() % 13 << 8) - range;
+            work->offsetZ = offsetZ;
         } else {
             work->offsetX = 0;
             work->offsetZ = 0;
@@ -2292,13 +2292,13 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
 
         if (work->timer > 210) {
             EndBossDefeat();
-            r = 0;
+            alive = 0;
         }
 
         break;
     }
 
-    return r;
+    return alive;
 }
 
 u8 BosLstUpdateEvent(BosLstWork* work) {
@@ -2322,9 +2322,9 @@ u8 BosLstUpdateEvent(BosLstWork* work) {
 }
 
 void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
-    LstSnpArg s;
+    LstSnpArg arg;
     BtlObj* obj;
-    u8 f;
+    u8 flags;
 
     obj = &sub->body;
 
@@ -2352,28 +2352,28 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
         }
     }
 
-    f = 1;
+    flags = 1;
 
     switch (sub->animId) {
     case 1:
     case 3:
     case 4:
     case 6:
-        f = 0;
+        flags = 0;
         break;
     }
 
     if (work->facing > 0) {
         if (sub->unk_001 == 1) {
-            AnimChangeWithTables(&sub->anim, sub->animId * 2, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
+            AnimChangeWithTables(&sub->anim, sub->animId * 2, flags, gBosLstScythe0Anims, gBosLstScythe0Frames);
         } else {
-            AnimChangeWithTables(&sub->anim, sub->animId * 2, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
+            AnimChangeWithTables(&sub->anim, sub->animId * 2, flags, gBosLstScythe1Anims, gBosLstScythe1Frames);
         }
     } else {
         if (sub->unk_001 == 1) {
-            AnimChangeWithTables(&sub->anim, sub->animId * 2 + 1, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
+            AnimChangeWithTables(&sub->anim, sub->animId * 2 + 1, flags, gBosLstScythe1Anims, gBosLstScythe1Frames);
         } else {
-            AnimChangeWithTables(&sub->anim, sub->animId * 2 + 1, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
+            AnimChangeWithTables(&sub->anim, sub->animId * 2 + 1, flags, gBosLstScythe0Anims, gBosLstScythe0Frames);
         }
     }
 
@@ -2418,11 +2418,11 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
         sub->timer = 0;
         sub->restartAnim = 1;
         sub->animId = 6;
-        s.x = sub->body.x;
-        s.y = sub->body.y;
-        s.z = sub->body.z;
-        s.facing = work->facing;
-        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstSnp, &s);
+        arg.x = sub->body.x;
+        arg.y = sub->body.y;
+        arg.z = sub->body.z;
+        arg.facing = work->facing;
+        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstSnp, &arg);
         break;
     case BTL_REACTION_CARD_BROKEN:
         sub->state = BOS_LST_SUB_STATE_CARD_BROKEN;
@@ -2460,53 +2460,53 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
 u8 task_bos_lst_1(BosLstWork* work) {
     s16 sx;
     s16 sy;
-    u8 r;
+    u8 alive;
     BtlObj* obj;
-    BtlObj* pos;
-    BtlObj* sub;
-    LstSub* s;
-    BtlWork** gp;
-    s32 v;
-    BtlObj* p2;
-    s32 t;
+    BtlObj* actor;
+    BtlObj* body;
+    LstSub* sub;
+    BtlWork** btl;
+    s32 x;
+    BtlObj* rider;
+    s32 speed;
     s32 y;
     s32 lim;
     s16 anim;
     s16 idx;
     s32 i;
-    s32 k;
-    s32 j;
+    s32 front;
+    s32 back;
 
     obj = &work->body;
-    r = 1;
+    alive = 1;
     work->offsetX = work->offsetX / 512;
     work->hpRatio = (work->body.hp * 255) / work->body.maxHp;
-    gp = &gBtlWork;
-    pos = (*gp)->actor;
-    pos->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
-    (*gp)->bossPriorityOffset = -16;
+    btl = &gBtlWork;
+    actor = (*btl)->actor;
+    actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
+    (*btl)->bossPriorityOffset = -16;
 
     if (work->playerOnPlatform == 1) {
         y = BosLstGetPlatformY(work);
-        p2 = (*gp)->actor;
-        p2->y = y;
+        rider = (*btl)->actor;
+        rider->y = y;
 
-        if (((*gp)->flags & BTL_FLAG_PLAYER_OFFSCREEN) == 0) {
-            t = (work->platformSpeed * 70) >> 8;
-            v = p2->x + t * work->facing;
-            p2->x = v;
+        if (((*btl)->flags & BTL_FLAG_PLAYER_OFFSCREEN) == 0) {
+            speed = (work->platformSpeed * 70) >> 8;
+            x = rider->x + speed * work->facing;
+            rider->x = x;
 
             if (work->facing < 0) {
                 lim = work->x - 0x2000;
 
-                if (v > lim) {
-                    p2->x = lim;
+                if (x > lim) {
+                    rider->x = lim;
                 }
             } else {
                 lim = work->x + 0x2000;
 
-                if (v < lim) {
-                    p2->x = lim;
+                if (x < lim) {
+                    rider->x = lim;
                 }
             }
         }
@@ -2596,7 +2596,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
         BosLstUpdateBreak(work);
         break;
     case BOS_LST_STATE_DEFEATED:
-        r = BosLstUpdateDefeat(work);
+        alive = BosLstUpdateDefeat(work);
         break;
     case BOS_LST_STATE_EVENT:
         BosLstUpdateEvent(work);
@@ -2611,23 +2611,23 @@ u8 task_bos_lst_1(BosLstWork* work) {
     obj->x = work->x + work->offsetX;
     obj->y = work->y + work->offsetY;
     obj->z = work->z + work->offsetZ;
-    k = idx;
+    front = idx;
 
-    if (!work->sub[k].defeated) {
-        sub = &work->sub[k].body;
-        sub->x = work->x + work->offsetX + (sLstAnimDefs[anim].subX << 8);
-        sub->y = work->y + work->offsetY + (sLstAnimDefs[anim].subY << 8);
-        sub->z = work->z + work->offsetZ + (sLstAnimDefs[anim].subZ << 8);
+    if (!work->sub[front].defeated) {
+        body = &work->sub[front].body;
+        body->x = work->x + work->offsetX + (sLstAnimDefs[anim].subX << 8);
+        body->y = work->y + work->offsetY + (sLstAnimDefs[anim].subY << 8);
+        body->z = work->z + work->offsetZ + (sLstAnimDefs[anim].subZ << 8);
     }
 
-    j = idx ^ 1;
+    back = idx ^ 1;
 
-    if (!work->sub[j].defeated) {
-        s = &work->sub[j];
-        sub = &s->body;
-        sub->x = work->x + work->offsetX + (sLstAnimDefs[anim].sub2X << 8);
-        sub->y = work->y + work->offsetY + (sLstAnimDefs[anim].sub2Y << 8);
-        sub->z = work->z + work->offsetZ + (sLstAnimDefs[anim].sub2Z << 8);
+    if (!work->sub[back].defeated) {
+        sub = &work->sub[back];
+        body = &sub->body;
+        body->x = work->x + work->offsetX + (sLstAnimDefs[anim].sub2X << 8);
+        body->y = work->y + work->offsetY + (sLstAnimDefs[anim].sub2Y << 8);
+        body->z = work->z + work->offsetZ + (sLstAnimDefs[anim].sub2Z << 8);
     }
 
     ColliderSetPosition(&obj->collider, obj->x + (work->facing << 10), obj->y, obj->z);
@@ -2675,7 +2675,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
 
     work->frameCount += 1;
     TaskPoolUpdate(&work->tasks);
-    return r;
+    return alive;
 }
 
 void task_bos_lst_2(BosLstWork* work) {
@@ -2685,11 +2685,11 @@ void task_bos_lst_2(BosLstWork* work) {
     u32* src;
     LstSub* sub;
     s16 anim;
-    s16 n;
-    s32 k;
-    s32 j;
-    u16 v;
-    u16 w;
+    s16 bgFrame;
+    s32 front;
+    s32 back;
+    u16 frontTimer;
+    u16 backTimer;
 
     TaskPoolDraw(&work->tasks);
     anim = sBosLstBodyFrames[work->bodyCycle] << 1;
@@ -2739,51 +2739,51 @@ void task_bos_lst_2(BosLstWork* work) {
         DisableBg(1);
     } else {
         if (work->turned == 1) {
-            n = 8;
+            bgFrame = 8;
         } else {
             switch (AnimGetGfxIndex(&work->anim)) {
             case 58:
-                n = 1;
+                bgFrame = 1;
                 break;
             case 59:
-                n = 2;
+                bgFrame = 2;
                 break;
             case 60:
-                n = 3;
+                bgFrame = 3;
                 break;
             case 61:
-                n = 4;
+                bgFrame = 4;
                 break;
             case 62:
-                n = 5;
+                bgFrame = 5;
                 break;
             case 63:
-                n = 6;
+                bgFrame = 6;
                 break;
             case 64:
-                n = 7;
+                bgFrame = 7;
                 break;
             case 28:
             case 29:
-                n = 8;
+                bgFrame = 8;
                 break;
             default:
-                n = 0;
+                bgFrame = 0;
                 break;
             }
         }
 
-        if ((s16)work->bgFrame != n) {
-            LoadBgTiles(1, sBosLstBgFrames[n][0], 0xC00);
-            work->bgFrame = n;
+        if ((s16)work->bgFrame != bgFrame) {
+            LoadBgTiles(1, sBosLstBgFrames[bgFrame][0], 0xC00);
+            work->bgFrame = bgFrame;
         }
 
         if (work->facing < 0) {
-            n += 9;
+            bgFrame += 9;
         }
 
         DmaCopy16(3, sLstAnimDefs[anim].bgMap, work->bgMap, 0x800);
-        src = sBosLstBgFrames[n][1];
+        src = sBosLstBgFrames[bgFrame][1];
         DmaCopy16(3, src, work->bgMap, 0x280);
 
         if (work->facing > 0) {
@@ -2806,25 +2806,25 @@ void task_bos_lst_2(BosLstWork* work) {
                GetBattleSpritePriorityFlags(work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)),
                -0x1004 - (((work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)) >> 8) << 2));
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
-    k = idx;
-    v = work->sub[k].hurtTimer;
+    front = idx;
+    frontTimer = work->sub[front].hurtTimer;
 
-    if (work->sub[k].hurtTimer > 0) {
-        work->sub[k].hurtTimer = v - 1;
+    if (work->sub[front].hurtTimer > 0) {
+        work->sub[front].hurtTimer = frontTimer - 1;
     }
 
-    sub = &work->sub[k];
+    sub = &work->sub[front];
     DrawSprite(sx + sLstAnimDefs[anim].subSpriteX, sy + sLstAnimDefs[anim].subSpriteY, AnimGetGfx(&sub->anim), work->sub[0].tiles, work->palette, NULL,
                GetBattleSpritePriorityFlags(work->y + work->offsetY),
                -0x1004 - (((work->y + work->offsetY) >> 8) << 2));
-    j = idx ^ 1;
-    w = work->sub[j].hurtTimer;
+    back = idx ^ 1;
+    backTimer = work->sub[back].hurtTimer;
 
-    if (work->sub[j].hurtTimer > 0) {
-        work->sub[j].hurtTimer = w - 1;
+    if (work->sub[back].hurtTimer > 0) {
+        work->sub[back].hurtTimer = backTimer - 1;
     }
 
-    sub = &work->sub[j];
+    sub = &work->sub[back];
     DrawSprite(sx + sLstAnimDefs[anim].sub2SpriteX, sy + sLstAnimDefs[anim].sub2SpriteY, AnimGetGfx(&sub->anim), work->sub[1].tiles, work->palette, NULL,
                GetBattleSpritePriorityFlags(work->y + work->offsetY - 0x1100),
                -0x1004 - (((work->y + work->offsetY - 0x1100) >> 8) << 2));

@@ -5228,14 +5228,14 @@ void BosPcDraw(PcWork* work) {
     const PcSpriteCmd* cmds;
     PcSpriteDef* def;
     PcOam* oam;
-    void* gfx;
+    void* palette;
     s16 sx;
     s16 sy;
-    s16 ox;
-    s16 oy;
+    s16 shakeX;
+    s16 shakeY;
     s32 i;
     s32 j;
-    s16 t;
+    s16 oamY;
     u16 mask;
     s16 y;
     s32 layer;
@@ -5251,19 +5251,19 @@ void BosPcDraw(PcWork* work) {
         return;
     }
 
-    ox = 0;
-    oy = 0;
+    shakeX = 0;
+    shakeY = 0;
 
     if (work->shared.inEvent == 1) {
-        ox = gEventState->shakeX;
-        oy = gEventState->shakeY;
+        shakeX = gEventState->shakeX;
+        shakeY = gEventState->shakeY;
     }
 
-    gfx = work->palette;
+    palette = work->palette;
 
     if (!work->defeated) {
         if (StepHitFlash(&work->body)) {
-            gfx = work->palette2;
+            palette = work->palette2;
             work->flash = 1;
         } else {
             work->flash = 0;
@@ -5282,7 +5282,7 @@ void BosPcDraw(PcWork* work) {
         work->prevFlash = work->flash;
     }
 
-    WorldToScreen(&sx, &sy, work->x - ox * 256, work->y - oy * 256, work->z);
+    WorldToScreen(&sx, &sy, work->x - shakeX * 256, work->y - shakeY * 256, work->z);
     cmds = sBosPcSpriteCmdLists[step->cmdList];
 
     for (j = 0; j < 24; j++) {
@@ -5294,20 +5294,20 @@ void BosPcDraw(PcWork* work) {
 
         if (cmd->flags & PC_SPRITE_CMD_STANDALONE) {
             DrawSprite(sx + cmd->x, sy + cmd->y, gBosPcStandaloneFrames[cmd->gfxIndex],
-                work->tiles2[j], gfx, NULL,
+                work->tiles2[j], palette, NULL,
                 BosPcGetSpritePriority(work, work->y + PcLayerDepth(cmd->layer)),
                 BosPcGetSpriteDepth(work, work->y + PcLayerDepth(cmd->layer), 1));
         } else {
             def = gBosPcLayerFrames[cmd->gfxIndex];
             oam = &work->oam[cmd->layer];
             mask = 0xFF;
-            t = (u8)def->attr0;
+            oamY = (u8)def->attr0;
 
-            if (t & 0x80) {
-                t |= -256;
+            if (oamY & 0x80) {
+                oamY |= -256;
             }
 
-            y = t;
+            y = oamY;
             y = y + cmd->y;
             y = y + sy;
 
@@ -5324,7 +5324,7 @@ void BosPcDraw(PcWork* work) {
         if (work->oam[i].count != 0) {
             layer = i * 0x400 - 0x3400;
             attributes = PcOamGfx(&work->oam[i]);
-            DrawSprite(sx, sy - 0x40, attributes, work->tiles, gfx, NULL,
+            DrawSprite(sx, sy - 0x40, attributes, work->tiles, palette, NULL,
                 BosPcGetSpritePriority(work, work->y + layer),
                 BosPcGetSpriteDepth(work, work->y + layer, 1));
         }
@@ -5336,7 +5336,7 @@ void BosPcDraw(PcWork* work) {
         gBtlWork->bossPriorityOffset = 0xFFF6;
     }
 
-    WorldToScreen(&sx, &sy, work->x + ((-0x70 - ox) * 256), work->y + ((-0x64 - oy) * 256), work->z);
+    WorldToScreen(&sx, &sy, work->x + ((-0x70 - shakeX) * 256), work->y + ((-0x64 - shakeY) * 256), work->z);
 
     if (work->animFrame != work->bgFrame) {
         LoadBgTiles(1, sPcGfxSets[step->gfxSet].tiles, sPcGfxSets[step->gfxSet].tilesSize);
@@ -5426,9 +5426,9 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     s32 x;
     s32 y;
     s32 z;
-    BtlObj* p;
-    BtlObj* q;
-    BtlWork* g;
+    BtlObj* body;
+    BtlObj* body2;
+    BtlWork* btl;
     u16 zero;
 
     work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&sBosPcBattleBackgroundDef);
@@ -5457,14 +5457,14 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     BosPcUpdateAnim(work);
     BosPcStartPaletteCycle(work);
     BosPcUpdatePaletteCycle(work);
-    p = &work->body;
-    InitEnemyBtlObj(p, &sBosPcEmyKind, work->x, work->y, work->z);
+    body = &work->body;
+    InitEnemyBtlObj(body, &sBosPcEmyKind, work->x, work->y, work->z);
     work->body.flags |= 0x400;
     work->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
-    q = &work->body2;
-    InitEnemyBtlObj(q, &sBosPcEmyKind, work->x, work->y, work->z - 0x1000);
+    body2 = &work->body2;
+    InitEnemyBtlObj(body2, &sBosPcEmyKind, work->x, work->y, work->z - 0x1000);
     work->body2.flags |= BTLOBJ_FLAG_FACING_LEFT;
-    SetBtlObjParent(q, p);
+    SetBtlObjParent(body2, body);
     ColliderInit(&work->collider, 8, 32, 56);
     LoadBgMap(1, gBosBlankMap, 0x1000);
     work->tiles = LoadObjTiles(gBosPcLayerTiles, 0xAA0);
@@ -5500,59 +5500,59 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     BosPcFltGetPosition(work->flt[0], &x, &y, &z);
     SetBattleActorPosition(x, y, z - 0x400);
     CreateBosPcAcdTask(work, pool);
-    g = gBtlWork;
-    g->bossX = work->body.x;
-    g->bossY = work->body.y;
-    g->bossZ = work->body.z;
-    g->bossPriorityOffset = -10;
+    btl = gBtlWork;
+    btl->bossX = work->body.x;
+    btl->bossY = work->body.y;
+    btl->bossZ = work->body.z;
+    btl->bossPriorityOffset = -10;
 }
 
 void BosPcPlaceBodies(PcWork* work) {
-    const PcSpriteCmd* step;
+    const PcSpriteCmd* cmd;
     const PcAnimStep* anim;
-    BtlObj* p;
-    BtlObj* q;
+    BtlObj* body;
+    BtlObj* body2;
     s16 x;
     s16 y;
 
-    p = &work->body;
-    q = &work->body2;
-    step = BosPcGetSpriteCmds(work);
+    body = &work->body;
+    body2 = &work->body2;
+    cmd = BosPcGetSpriteCmds(work);
     x = 0;
     y = 6;
 
-    if ((step->flags & PC_SPRITE_CMD_END) == 0) {
+    if ((cmd->flags & PC_SPRITE_CMD_END) == 0) {
         do {
-            if (step->flags & 0xC) {
-                x += step->x;
-                y += step->y;
+            if (cmd->flags & 0xC) {
+                x += cmd->x;
+                y += cmd->y;
             }
 
-            step++;
-        } while ((step->flags & PC_SPRITE_CMD_END) == 0);
+            cmd++;
+        } while ((cmd->flags & PC_SPRITE_CMD_END) == 0);
     }
 
     x /= 2;
     y /= 2;
-    p->x = work->x + (x << 8);
-    p->y = work->y;
-    p->z = work->z + (y << 8);
+    body->x = work->x + (x << 8);
+    body->y = work->y;
+    body->z = work->z + (y << 8);
     anim = BosPcGetAnimStep(work);
 
     if ((anim->body2X | anim->body2Y | anim->body2Z) != 0) {
-        q->x = work->x + (anim->body2X << 8);
-        q->y = work->y + (anim->body2Y << 8);
-        q->z = work->z + (anim->body2Z << 8);
+        body2->x = work->x + (anim->body2X << 8);
+        body2->y = work->y + (anim->body2Y << 8);
+        body2->z = work->z + (anim->body2Z << 8);
     } else {
-        q->x = work->x;
-        q->y = work->y;
-        q->z = work->z - 0xC00;
+        body2->x = work->x;
+        body2->y = work->y;
+        body2->z = work->z - 0xC00;
     }
 }
 
 u8 BosPcUpdateIdle(PcWork* work, Task* task) {
-    s32 u;
-    s16 t;
+    s32 hpRatio;
+    s16 threshold;
 
     BosPcSetAnim(work, 0);
     work->cardDelay -= 1;
@@ -5560,16 +5560,16 @@ u8 BosPcUpdateIdle(PcWork* work, Task* task) {
     if (work->cardDelay < 0) {
         if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
             RequestEnemyCardUse(&work->body);
-            u = work->shared.hpRatio;
-            work->cardDelay = ((u >> 6) + 6) * 60;
+            hpRatio = work->shared.hpRatio;
+            work->cardDelay = ((hpRatio >> 6) + 6) * 60;
         } else {
             work->cardDelay = 4;
         }
     } else if (work->cardDelay % (work->shared.hpRatio >> 4) == 0) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-            t = ((work->shared.hpRatio * 5) >> 3) + 96;
+            threshold = ((work->shared.hpRatio * 5) >> 3) + 96;
 
-            if (GetRandom() >> 7 > t) {
+            if (GetRandom() >> 7 > threshold) {
                 RequestEnemyCardUse(&work->body);
             }
         }
@@ -5579,18 +5579,18 @@ u8 BosPcUpdateIdle(PcWork* work, Task* task) {
 }
 
 u8 BosPcUpdateAttack(PcWork* work, Task* task) {
-    BtlObj* p;
+    BtlObj* body;
     const PcAnimStep* anim;
-    const PcSpriteCmd* steps;
+    const PcSpriteCmd* cmds;
     s32 x;
     s32 y;
     s32 sel;
-    s32 k;
-    u16 idx;
+    s32 anchor;
+    u16 shot;
     s32 dx;
     s32 dy;
 
-    p = &work->body;
+    body = &work->body;
 
     if (work->step == 0) {
         x = gBtlWork->actor->x >> 8;
@@ -5611,7 +5611,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
         BosPcSetAnim(work, sel);
         work->step += 1;
     } else if (BosPcIsAnimDone(work)) {
-        ClearBtlObjActionFlags(p);
+        ClearBtlObjActionFlags(body);
         work->state = BOS_PC_STATE_IDLE;
         work->step = 0;
         BosPcUpdateIdle(work, task);
@@ -5619,11 +5619,11 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
         anim = BosPcGetAnimStep(work);
 
         if ((anim->hitHalfX | anim->hitHalfY | anim->hitHalfZ) != 0) {
-            k = anim->anchorCmd;
-            steps = BosPcGetSpriteCmds(work);
-            ApplyAttackBox(0xF6, work->x + ((anim->hitX + steps[k].x) << 8),
-                          work->y + ((anim->hitY + steps[k].y + steps[k].height) << 8),
-                          (anim->hitZ - steps[k].height) << 8, anim->hitHalfX, anim->hitHalfY, anim->hitHalfZ);
+            anchor = anim->anchorCmd;
+            cmds = BosPcGetSpriteCmds(work);
+            ApplyAttackBox(0xF6, work->x + ((anim->hitX + cmds[anchor].x) << 8),
+                          work->y + ((anim->hitY + cmds[anchor].y + cmds[anchor].height) << 8),
+                          (anim->hitZ - cmds[anchor].height) << 8, anim->hitHalfX, anim->hitHalfY, anim->hitHalfZ);
         }
 
         switch (anim->event) {
@@ -5631,10 +5631,10 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
             if (BosPcFldGetShake() == 0) {
                 m4aSongNumStart(SONG_BTL_LB_RUMB);
                 BosPcFldStartShake(1);
-                k = anim->anchorCmd;
-                steps = BosPcGetSpriteCmds(work);
-                BgFxStartGroundImpact(work->x + ((anim->hitX + steps[k].x) << 8),
-                              work->y + ((anim->hitY + steps[k].y + steps[k].height - 24) << 8));
+                anchor = anim->anchorCmd;
+                cmds = BosPcGetSpriteCmds(work);
+                BgFxStartGroundImpact(work->x + ((anim->hitX + cmds[anchor].x) << 8),
+                              work->y + ((anim->hitY + cmds[anchor].y + cmds[anchor].height - 24) << 8));
             }
 
             break;
@@ -5642,10 +5642,10 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
             if (BosPcFldGetShake() == 0) {
                 m4aSongNumStart(SONG_BTL_LB_RUMB);
                 BosPcFldStartShake(0);
-                k = anim->anchorCmd;
-                steps = BosPcGetSpriteCmds(work);
-                BgFxStartGroundImpact(work->x + ((anim->hitX + steps[k].x) << 8),
-                              work->y + ((anim->hitY + steps[k].y + steps[k].height - 24) << 8));
+                anchor = anim->anchorCmd;
+                cmds = BosPcGetSpriteCmds(work);
+                BgFxStartGroundImpact(work->x + ((anim->hitX + cmds[anchor].x) << 8),
+                              work->y + ((anim->hitY + cmds[anchor].y + cmds[anchor].height - 24) << 8));
             }
 
             break;
@@ -5657,13 +5657,13 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
             break;
         case 4:
             dx = (gBtlWork->actor->x >> 8) - 128;
-            idx = 0;
+            shot = 0;
 
             if (dx > 68) {
                 if (dx <= 137) {
-                    idx = 1;
+                    shot = 1;
                 } else {
-                    idx = 2;
+                    shot = 2;
                 }
             }
 
@@ -5671,15 +5671,15 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
 
             if (dy > 29) {
                 if (dy <= 59) {
-                    idx += 3;
+                    shot += 3;
                 } else {
-                    idx += 6;
+                    shot += 6;
                 }
             }
 
-            BgFxStartPcShot(p->x - 0xC00, p->y, p->z, sPcShots[idx].targetX,
-                          sPcShots[idx].targetY, -0x1000, 0xF7, sPcShots[idx].steps,
-                          sPcShots[idx].targetScale);
+            BgFxStartPcShot(body->x - 0xC00, body->y, body->z, sPcShots[shot].targetX,
+                          sPcShots[shot].targetY, -0x1000, 0xF7, sPcShots[shot].steps,
+                          sPcShots[shot].targetScale);
             m4aSongNumStart(SONG_BTL_PK_BEEM);
             break;
         case 5:
@@ -5700,19 +5700,19 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
 }
 
 u8 BosPcUpdateHurt(PcWork* work, Task* task) {
-    BtlObj* p;
+    BtlObj* body;
 
-    p = &work->body;
+    body = &work->body;
 
     if (work->step == 0) {
-        work->hitAttack = p->hitAttack;
-        work->hitFlags = p->hitFlags;
+        work->hitAttack = body->hitAttack;
+        work->hitFlags = body->hitFlags;
     }
 
     work->step += 1;
 
     if (work->step > 15) {
-        ClearBtlObjActionFlags(p);
+        ClearBtlObjActionFlags(body);
 
         if (work->hitFlags & ATTACK_FLAG_ELEMENT_FIRE) {
             switch (work->hitAttack) {
@@ -5774,16 +5774,16 @@ u8 BosPcUpdateHurt(PcWork* work, Task* task) {
 }
 
 u8 BosPcUpdateReaction(PcWork* work, Task* task) {
-    BtlObj* p;
+    BtlObj* body;
 
-    p = &work->body;
+    body = &work->body;
     BosPcSetAnim(work, work->reactionAnim);
 
     if (BosPcIsAnimDone(work)) {
         work->cardDelay = 180;
 
         if (work->hurtTimer > 0) {
-            ClearBtlObjActionFlags(p);
+            ClearBtlObjActionFlags(body);
             work->hurtTimer = 0;
         }
 
@@ -5791,7 +5791,7 @@ u8 BosPcUpdateReaction(PcWork* work, Task* task) {
         work->step = 0;
     } else {
         if (work->hurtTimer == 1) {
-            ClearBtlObjActionFlags(p);
+            ClearBtlObjActionFlags(body);
         }
 
         if (work->hurtTimer > 0) {
@@ -5803,9 +5803,9 @@ u8 BosPcUpdateReaction(PcWork* work, Task* task) {
 }
 
 u8 BosPcUpdateBreak(PcWork* work, Task* task) {
-    BtlObj* p;
+    BtlObj* body;
 
-    p = &work->body;
+    body = &work->body;
     work->shared.fltStopTimer = 240;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5817,7 +5817,7 @@ u8 BosPcUpdateBreak(PcWork* work, Task* task) {
     }
 
     work->step += 1;
-    ClearBtlObjActionFlags(p);
+    ClearBtlObjActionFlags(body);
     work->state = BOS_PC_STATE_IDLE;
     work->step = 0;
     return 1;
@@ -5832,20 +5832,20 @@ enum BosPcDefeatStep {
 
 u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
     PrizeCardArg args;
-    BtlObj* p;
-    s16 s;
+    BtlObj* body;
+    s16 step;
     s32 n;
     s32 i;
 
-    p = &work->body;
-    s = work->step;
+    body = &work->body;
+    step = work->step;
 
-    switch (s) {
+    switch (step) {
     case BOS_PC_DEFEAT_STEP_BEGIN:
-        BeginBossDefeat(p);
+        BeginBossDefeat(body);
         ReleaseObjPalette(work->palette2);
         work->palette2 = NULL;
-        SetBtlObjUnhittable(p, 1);
+        SetBtlObjUnhittable(body, 1);
         SetBtlObjUnhittable(&work->body2, 1);
         gBtlWork->flags |= 0x100000;
         work->shared.unk_03 = 255;
@@ -5872,7 +5872,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
             args.y = 0x15300;
             args.z = -0x5C00;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &args);
-            DropBossPrizes(p);
+            DropBossPrizes(body);
             BosPcFldEnableObject(work->fld, 1);
             work->step += 1;
         }
@@ -5891,13 +5891,13 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
 }
 
 u8 task_bos_pc_1(PcWork* work, Task* task) {
-    BtlObj* p;
-    BtlObj* pos;
-    BtlWork* g;
-    u8 r;
+    BtlObj* body;
+    BtlObj* actor;
+    BtlWork* btl;
+    u8 alive;
 
-    p = &work->body;
-    r = 1;
+    body = &work->body;
+    alive = 1;
     BosPcUpdateAnim(work);
     BosPcUpdatePaletteCycle(work);
 
@@ -5922,15 +5922,15 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
         gBtlWork->flags &= ~0x100000;
     }
 
-    pos = gBtlWork->actor;
+    actor = gBtlWork->actor;
 
-    if ((pos->flags & BTLOBJ_FLAG_IGNORE_BOUNDS) == 0) {
-        if (pos->x > work->actorMaxX) {
-            pos->x = work->actorMaxX;
+    if ((actor->flags & BTLOBJ_FLAG_IGNORE_BOUNDS) == 0) {
+        if (actor->x > work->actorMaxX) {
+            actor->x = work->actorMaxX;
         }
     }
 
-    switch (UpdateBtlObjReaction(p)) {
+    switch (UpdateBtlObjReaction(body)) {
     case BTL_REACTION_CARD_ACTION:
         work->state = BOS_PC_STATE_ATTACK;
         work->step = 0;
@@ -5964,22 +5964,22 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
 
     switch (work->state) {
     case BOS_PC_STATE_IDLE:
-        r = BosPcUpdateIdle(work, task);
+        alive = BosPcUpdateIdle(work, task);
         break;
     case BOS_PC_STATE_ATTACK:
-        r = BosPcUpdateAttack(work, task);
+        alive = BosPcUpdateAttack(work, task);
         break;
     case BOS_PC_STATE_HURT:
-        r = BosPcUpdateHurt(work, task);
+        alive = BosPcUpdateHurt(work, task);
         break;
     case BOS_PC_STATE_REACTION:
-        r = BosPcUpdateReaction(work, task);
+        alive = BosPcUpdateReaction(work, task);
         break;
     case BOS_PC_STATE_BREAK:
-        r = BosPcUpdateBreak(work, task);
+        alive = BosPcUpdateBreak(work, task);
         break;
     case BOS_PC_STATE_DEFEATED:
-        r = BosPcUpdateDefeat(work, task);
+        alive = BosPcUpdateDefeat(work, task);
         break;
     case BOS_PC_STATE_INACTIVE:
     case BOS_PC_STATE_EVENT:
@@ -5988,14 +5988,14 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
     }
 
     BosPcPlaceBodies(work);
-    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
+    ColliderSetPosition(&body->collider, body->x, body->y, body->z);
     ColliderSetPosition(&work->collider, work->body2.x, work->body2.y, work->z + 0x800);
-    g = gBtlWork;
-    g->bossX = p->x;
-    g->bossY = p->y;
-    g->bossZ = p->z;
+    btl = gBtlWork;
+    btl->bossX = body->x;
+    btl->bossY = body->y;
+    btl->bossZ = body->z;
     work->shared.hpRatio = (work->body.hp << 8) / work->body.maxHp;
-    return r;
+    return alive;
 }
 
 void task_bos_pc_2(PcWork* work) {

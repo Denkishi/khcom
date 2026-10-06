@@ -422,14 +422,14 @@ void BosLstFldSetShake(s16 pattern) {
 }
 
 void BosLstFldUpdateShake() {
-    const s8* p;
+    const s8* pattern;
 
     if (sBosLstFldShakeActive != 0) {
-        p = sBosLstFldShakePatterns[sBosLstFldShakePattern];
-        sBosLstFldShakeOffset += ((p[sBosLstFldShakeStep] << 12) - sBosLstFldShakeOffset) >> 3;
+        pattern = sBosLstFldShakePatterns[sBosLstFldShakePattern];
+        sBosLstFldShakeOffset += ((pattern[sBosLstFldShakeStep] << 12) - sBosLstFldShakeOffset) >> 3;
         sBosLstFldShakeStep++;
 
-        if (p[sBosLstFldShakeStep] == 0) {
+        if (pattern[sBosLstFldShakeStep] == 0) {
             sBosLstFldShakeActive = 0;
             sBosLstFldShakeOffset = 0;
         }
@@ -441,25 +441,25 @@ s32 BosLstFldGetShake() {
 }
 
 void BosLstFldSetBgMode(Task* task, s32 mode, s32 scrollDir) {
-    LstFldWork* w = task->work;
+    LstFldWork* work = task->work;
 
-    if (mode != w->nextBgMode) {
-        w->nextBgMode = mode;
-        w->fadeStep = 0;
-        w->nextScrollDir = scrollDir;
+    if (mode != work->nextBgMode) {
+        work->nextBgMode = mode;
+        work->fadeStep = 0;
+        work->nextScrollDir = scrollDir;
     }
 }
 
 void BosLstFldSetCameraMode(Task* task, s32 mode) {
-    LstFldWork* w = task->work;
+    LstFldWork* work = task->work;
 
-    w->cameraMode = mode;
+    work->cameraMode = mode;
 }
 
 void BosLstFldSetScrollSpeed(Task* task, s32 speed) {
-    LstFldWork* w = task->work;
+    LstFldWork* work = task->work;
 
-    w->scrollSpeed = ((speed >> 8) * 5 >> 2) + 2;
+    work->scrollSpeed = ((speed >> 8) * 5 >> 2) + 2;
 }
 
 void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
@@ -501,80 +501,80 @@ void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
 }
 
 void BosLstFldDarkenPalette(u16* dst, u16* src, s32 count, s32 level) {
-    s32 c;
-    s32 m;
-    s32 v;
+    s32 dark;
+    s32 mask;
+    s32 color;
 
     level = level <= 31 ? 31 & ~level : 0;
     count--;
 
     while (count != -1) {
-        v = src[count];
-        m = 0x1F;
-        c = (v & m) * level >> 5 & m;
-        m <<= 5;
-        c |= (v & m) * level >> 5 & m;
-        m <<= 5;
-        c |= (v & m) * level >> 5 & m;
-        dst[count] = c;
+        color = src[count];
+        mask = 0x1F;
+        dark = (color & mask) * level >> 5 & mask;
+        mask <<= 5;
+        dark |= (color & mask) * level >> 5 & mask;
+        mask <<= 5;
+        dark |= (color & mask) * level >> 5 & mask;
+        dst[count] = dark;
         count--;
     }
 }
 
 u8 task_bos_lst_fld_1(LstFldWork* work) {
-    s32 a;
-    s32 b;
+    s32 dx;
+    s32 dy;
     s32 i;
 
     BtlMapUpdateShake();
 
     switch (work->cameraMode) {
     case BOS_LST_FLD_CAMERA_MODE_FOLLOW_BOSS:
-        a = ((gBtlWork->bossX >> 8) - gBtlWork->x) >> 3;
-        b = (gBtlWork->bossY + gBtlWork->bossZ - gBtlWork->y) >> 3;
+        dx = ((gBtlWork->bossX >> 8) - gBtlWork->x) >> 3;
+        dy = (gBtlWork->bossY + gBtlWork->bossZ - gBtlWork->y) >> 3;
         break;
     case BOS_LST_FLD_CAMERA_MODE_FOLLOW_PLAYER_SLOW:
-        a = (gBtlWork->x2 - gBtlWork->x) >> 3;
-        b = (gBtlWork->actor->y + gBtlWork->actor->z -
+        dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
+        dy = (gBtlWork->actor->y + gBtlWork->actor->z -
               gBtlWork->y) >> 3;
 
-        if (b > 256) {
-            b = 256;
+        if (dy > 256) {
+            dy = 256;
         }
 
-        if (b < -256) {
-            b = -256;
+        if (dy < -256) {
+            dy = -256;
         }
 
         break;
     default:
-        a = (gBtlWork->x2 - gBtlWork->x) >> 3;
+        dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
 
         if (gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN) {
-            b = (gBtlWork->y2 - gBtlWork->y) >> 3;
+            dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
         } else if (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) {
             if (gBtlWork->actor->z < -0xA000) {
-                b = (gBtlWork->actor->y + gBtlWork->actor->z -
+                dy = (gBtlWork->actor->y + gBtlWork->actor->z -
                       gBtlWork->y) >> 3;
             } else {
-                b = 0;
+                dy = 0;
             }
         } else {
-            b = (gBtlWork->actor->y + gBtlWork->actor->z -
+            dy = (gBtlWork->actor->y + gBtlWork->actor->z -
                   gBtlWork->y) >> 3;
         }
 
         break;
     }
 
-    if (a > 0x500) {
-        a += 0x500;
-    } else if (a < -0x500) {
-        a += -0x500;
+    if (dx > 0x500) {
+        dx += 0x500;
+    } else if (dx < -0x500) {
+        dx += -0x500;
     }
 
-    gBtlWork->x += a;
-    gBtlWork->y += b;
+    gBtlWork->x += dx;
+    gBtlWork->y += dy;
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
     BosLstFldUpdateShake();
@@ -654,8 +654,8 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
         }
 
         for (; i <= 159; i++) {
-            a = ~(i * 2 - 256);
-            work->scanlineBuf[work->frameCount & 1][i] = (work->scrollY + a) & 0x1FF;
+            dx = ~(i * 2 - 256);
+            work->scanlineBuf[work->frameCount & 1][i] = (work->scrollY + dx) & 0x1FF;
         }
 
         ScanlineDmaQueueBuffer(work->scanlineBuf[work->frameCount & 1]);

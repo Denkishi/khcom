@@ -38,10 +38,10 @@ enum BosLstPtlState {
 };
 
 u8 BosLstPtlIsActive(Task* task) {
-    LstPtlWork* s;
+    LstPtlWork* work;
 
-    s = task->work;
-    return s->state != BOS_LST_PTL_STATE_DONE;
+    work = task->work;
+    return work->state != BOS_LST_PTL_STATE_DONE;
 }
 
 void task_bos_lst_ptl_0(LstPtlWork* work, LstPtlArg* arg) {
@@ -60,9 +60,9 @@ void task_bos_lst_ptl_0(LstPtlWork* work, LstPtlArg* arg) {
 }
 
 u8 task_bos_lst_ptl_1(LstPtlWork* work) {
-    u8 result;
+    u8 alive;
 
-    result = 1;
+    alive = 1;
 
     switch (work->state) {
     case BOS_LST_PTL_STATE_WAIT:
@@ -101,7 +101,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
 
     AnimUpdate(&work->anim);
 
-    return result;
+    return alive;
 }
 
 void task_bos_lst_ptl_2(LstPtlWork* work) {
@@ -109,14 +109,14 @@ void task_bos_lst_ptl_2(LstPtlWork* work) {
     u16 y;
     u16 prio;
     void* gfx;
-    u16 z;
+    u16 depth;
 
     x = (work->x >> 8) + (work->wobbleX * 12 >> 8);
     y = (work->y >> 8) + (work->wobbleY * 6 >> 8);
     prio = GetBattleSpritePriorityFlags(0x20100);
-    z = 0xE7F8;
+    depth = 0xE7F8;
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio, depth);
 }
 
 void task_bos_lst_ptl_3(LstPtlWork* work) {

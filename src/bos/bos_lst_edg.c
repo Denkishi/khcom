@@ -43,10 +43,10 @@ enum BosLstEdgState {
 };
 
 u8 BosLstEdgIsActive(Task* task) {
-    LstEdgWork* s;
+    LstEdgWork* work;
 
-    s = task->work;
-    return s->state != BOS_LST_EDG_STATE_DONE;
+    work = task->work;
+    return work->state != BOS_LST_EDG_STATE_DONE;
 }
 
 void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
@@ -67,7 +67,7 @@ void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
 }
 
 u8 task_bos_lst_edg_1(LstEdgWork* work) {
-    BtlObj* p;
+    BtlObj* actor;
 
     switch (work->state) {
     case BOS_LST_EDG_STATE_WAIT:
@@ -78,9 +78,9 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
-            p = gBtlWork->actor;
-            work->targetX = p->x;
-            work->targetY = p->y;
+            actor = gBtlWork->actor;
+            work->targetX = actor->x;
+            work->targetY = actor->y;
             work->targetZ = -0x1000;
         }
 
@@ -136,14 +136,14 @@ void task_bos_lst_edg_2(LstEdgWork* work) {
     s16 x;
     s16 y;
     u16 prio;
-    u16 z;
+    u16 depth;
     void* gfx;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     prio = GetBattleSpritePriorityFlags(work->y);
-    z = -0x1004 - (work->y >> 8) * 4;
+    depth = -0x1004 - (work->y >> 8) * 4;
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio, depth);
 }
 
 void task_bos_lst_edg_3(LstEdgWork* work) {

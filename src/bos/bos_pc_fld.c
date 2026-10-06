@@ -103,14 +103,14 @@ void BosPcFldStartShake(s16 pattern) {
 }
 
 void BosPcFldUpdateShake() {
-    const s8* p;
+    const s8* pattern;
 
     if (sBosPcFldShakeActive) {
-        p = sBosPcFldShakePatterns[sBosPcFldShakePattern];
-        sBosPcFldShakeOffset += ((p[sBosPcFldShakeStep] << 12) - sBosPcFldShakeOffset) >> 3;
+        pattern = sBosPcFldShakePatterns[sBosPcFldShakePattern];
+        sBosPcFldShakeOffset += ((pattern[sBosPcFldShakeStep] << 12) - sBosPcFldShakeOffset) >> 3;
         sBosPcFldShakeStep += 1;
 
-        if (p[sBosPcFldShakeStep] == 0) {
+        if (pattern[sBosPcFldShakeStep] == 0) {
             sBosPcFldShakeActive = 0;
             sBosPcFldShakeOffset = 0;
         }
@@ -131,14 +131,14 @@ void BosPcFldResetPaletteCycle(PcFldWork* work) {
 }
 
 void BosPcFldUpdatePaletteCycle(PcFldWork* work) {
-    u16 t;
+    u16 next;
     u16 zero;
 
     if (work->paletteCycle != 0) {
         if (work->paletteTimer > sBosPcFldPaletteCycleFrames[work->paletteIndex]) {
-            t = sBosPcFldPaletteCycleNext[work->paletteIndex];
+            next = sBosPcFldPaletteCycleNext[work->paletteIndex];
             zero = 0;
-            work->paletteIndex = t;
+            work->paletteIndex = next;
             work->paletteTimer = zero;
         }
 
@@ -157,7 +157,7 @@ void BosPcFldStopPaletteCycle(PcFldWork* work) {
 }
 
 void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
-    Collider* p;
+    Collider* collider;
 
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
@@ -181,30 +181,30 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
     BosPcFldUpdatePaletteCycle(work);
     work->tiles = NULL;
     work->palette = NULL;
-    p = &work->collider;
-    ColliderInit(p, 6, 40, 8);
-    ColliderSetPosition(p, 0x17400, 0x15400, 0);
-    ColliderSetDisabled(p, 1);
+    collider = &work->collider;
+    ColliderInit(collider, 6, 40, 8);
+    ColliderSetPosition(collider, 0x17400, 0x15400, 0);
+    ColliderSetDisabled(collider, 1);
 }
 
 u8 task_bos_pc_fld_1(PcFldWork* work) {
-    s32 t;
-    s32 u;
+    s32 screenX;
+    s32 viewLeft;
     s32 dx;
     s32 dy;
-    BtlObj* pos;
+    BtlObj* actor;
 
     BtlMapUpdateShake();
     BosPcFldUpdateShake();
-    pos = gBtlWork->actor;
-    u = gBtlWork->viewX - 0x7800;
-    t = pos->x - u;
+    actor = gBtlWork->actor;
+    viewLeft = gBtlWork->viewX - 0x7800;
+    screenX = actor->x - viewLeft;
 
-    if (t < 0) {
-        t = 0;
+    if (screenX < 0) {
+        screenX = 0;
     }
 
-    gBtlWork->x2 = t / 2 + 0xF000;
+    gBtlWork->x2 = screenX / 2 + 0xF000;
     dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
     dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
 
@@ -241,16 +241,16 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
 void task_bos_pc_fld_2(PcFldWork* work) {
     s16 sx;
     s16 sy;
-    BtlObj* pos;
+    BtlObj* actor;
     u32 x;
     u32 y;
     s32 z;
 
     BosPcFldLoadPaletteCycle(work);
-    pos = gBtlWork->actor;
+    actor = gBtlWork->actor;
 
-    if (pos->z >= -0x100) {
-        if ((pos->flags & BTLOBJ_FLAG_HIT_LOCKED) == 0) {
+    if (actor->z >= -0x100) {
+        if ((actor->flags & BTLOBJ_FLAG_HIT_LOCKED) == 0) {
             if (work->tiles != NULL) {
                 if (work->palette != NULL) {
                     x = 0x17000;

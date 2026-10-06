@@ -91,22 +91,22 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
 u8 task_bos_lst_fal_1(LstFalWork* work) {
     u16 x;
     s16 y;
-    u8 result;
-    s32 d;
+    u8 alive;
+    s32 rise;
 
-    result = 1;
+    alive = 1;
     work->x += work->vx;
     work->z += work->vz;
 
     if (work->kind != 4) {
         if (work->lift > 0) {
-            d = 512;
+            rise = 512;
 
             if (work->lift <= 512) {
-                d = work->lift;
+                rise = work->lift;
             }
 
-            work->z -= d;
+            work->z -= rise;
             work->lift = work->lift - 25;
         } else {
             work->lift = GetRandom() % 0x41 + 0x40;
@@ -116,12 +116,12 @@ u8 task_bos_lst_fal_1(LstFalWork* work) {
     WorldToScreen((s16*)&x, &y, work->x, work->y, work->z);
 
     if ((u16)(x + 16) > 272 || y < -64 || y > 224) {
-        result = 0;
+        alive = 0;
     }
 
     AnimUpdate(&work->anim);
 
-    return result;
+    return alive;
 }
 
 void task_bos_lst_fal_2(LstFalWork* work) {

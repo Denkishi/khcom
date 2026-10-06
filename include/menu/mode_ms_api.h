@@ -2,8 +2,8 @@
 #define GUARD_MODE_MS_API_H
 
 void MoogleShopClearFlags();
-void MoogleShopSaveFlags(void* a);
-void MoogleShopLoadFlags(void* a);
+void MoogleShopSaveFlags(void* dst);
+void MoogleShopLoadFlags(void* src);
 void DrawMooglePackOpening();
 
 #endif

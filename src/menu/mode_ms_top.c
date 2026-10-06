@@ -137,30 +137,30 @@ u32 GetMooglePoints() {
     return gGameState.progression.mooglePoints;
 }
 
-void SetMooglePoints(u32 a) {
-    gGameState.progression.mooglePoints = a;
+void SetMooglePoints(u32 points) {
+    gGameState.progression.mooglePoints = points;
 }
 
-u8 SpendMooglePoints(u32 a) {
+u8 SpendMooglePoints(u32 points) {
     u8 ok = 0;
 
-    if (GetMooglePoints() >= a) {
-        SetMooglePoints(GetMooglePoints() - a);
+    if (GetMooglePoints() >= points) {
+        SetMooglePoints(GetMooglePoints() - points);
         ok = 1;
     }
 
     return ok;
 }
 
-u8 AddMooglePoints(u32 a) {
-    a += GetMooglePoints();
+u8 AddMooglePoints(u32 points) {
+    points += GetMooglePoints();
 
-    if (a > 99999) {
+    if (points > 99999) {
         SetMooglePoints(99999);
         return 0;
     }
 
-    SetMooglePoints(a);
+    SetMooglePoints(points);
     return 1;
 }
 
@@ -226,8 +226,8 @@ void UpdateMsTopWarpGfx() {
     }
 }
 
-void SetMsTopWarpAnim(s16 a) {
-    AnimStart(&sMsTopArrowAnim, sWarpDefs[a].animId, ANIM_FLAG_LOOP);
+void SetMsTopWarpAnim(s16 cursor) {
+    AnimStart(&sMsTopArrowAnim, sWarpDefs[cursor].animId, ANIM_FLAG_LOOP);
 }
 
 void QueueMsTopIntroMessage() {
@@ -362,7 +362,7 @@ void MsTopDraw() {
     SetBgScroll(1, (u16)(sMsTopBg1ScrollX >> 8), 0);
 }
 
-void mode_ms_top_0(u32 a) {
+void mode_ms_top_0(u32 flags) {
     s32 i;
 
     SpriteReset();
@@ -379,11 +379,11 @@ void mode_ms_top_0(u32 a) {
     SetBgPriority(2, 1);
     SetBgPriority(3, 0);
 
-    if (a & 1) {
+    if (flags & 1) {
         ClearMoogleRoomFlags();
     }
 
-    if (a & 2) {
+    if (flags & 2) {
         sMsTopBarVisible = 0;
         sMsTopState = 7;
     } else {

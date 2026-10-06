@@ -228,8 +228,8 @@ void MoogleShopClearFlags() {
     }
 }
 
-void MoogleShopSaveFlags(void* a) {
-    u16* p = a;
+void MoogleShopSaveFlags(void* dst) {
+    u16* p = dst;
     s32 i;
 
     for (i = 0; i < 32; i++) {
@@ -241,8 +241,8 @@ void MoogleShopSaveFlags(void* a) {
     }
 }
 
-void MoogleShopLoadFlags(void* a) {
-    u16* p = a;
+void MoogleShopLoadFlags(void* src) {
+    u16* p = src;
     s32 i;
 
     for (i = 0; i < 32; i++) {
@@ -254,27 +254,27 @@ void MoogleShopLoadFlags(void* a) {
     }
 }
 
-void SetMooglePackBought(u16 a, u16 b, u16 c) {
+void SetMooglePackBought(u16 room, u16 category, u16 pack) {
     u16 v;
-    v = a * 16 + b * 4 + c;
+    v = room * 16 + category * 4 + pack;
 
     if (v <= 0x1FF) {
         sMooglePackBoughtFlags[v >> 4] |= 1 << (v & 15);
     }
 }
 
-void ClearMooglePackBought(u16 a, u16 b, u16 c) {
+void ClearMooglePackBought(u16 room, u16 category, u16 pack) {
     u16 v;
-    v = a * 16 + b * 4 + c;
+    v = room * 16 + category * 4 + pack;
 
     if (v <= 0x1FF) {
         sMooglePackBoughtFlags[v >> 4] &= ~(1 << (v & 15));
     }
 }
 
-u8 IsMooglePackBought(u16 a, u16 b, u16 c) {
+u8 IsMooglePackBought(u16 room, u16 category, u16 pack) {
     u16 v;
-    v = a * 16 + b * 4 + c;
+    v = room * 16 + category * 4 + pack;
 
     if (v <= 0x1FF) {
         return sMooglePackBoughtFlags[v >> 4] >> (v & 15) & 1;
@@ -283,21 +283,21 @@ u8 IsMooglePackBought(u16 a, u16 b, u16 c) {
     return 0;
 }
 
-void SetMoogleFreePackFlag(u16 a) {
-    if (a <= 31) {
-        sMoogleFreePackFlags[a >> 4] |= 1 << (a & 15);
+void SetMoogleFreePackFlag(u16 room) {
+    if (room <= 31) {
+        sMoogleFreePackFlags[room >> 4] |= 1 << (room & 15);
     }
 }
 
-void ClearMoogleFreePackFlag(u16 a) {
-    if (a <= 31) {
-        sMoogleFreePackFlags[a >> 4] &= ~(1 << (a & 15));
+void ClearMoogleFreePackFlag(u16 room) {
+    if (room <= 31) {
+        sMoogleFreePackFlags[room >> 4] &= ~(1 << (room & 15));
     }
 }
 
-u8 GetMoogleFreePackFlag(u16 a) {
-    if (a <= 31) {
-        return sMoogleFreePackFlags[a >> 4] >> (a & 15) & 1;
+u8 GetMoogleFreePackFlag(u16 room) {
+    if (room <= 31) {
+        return sMoogleFreePackFlags[room >> 4] >> (room & 15) & 1;
     }
 
     return 0;
@@ -316,7 +316,7 @@ void ClearMoogleRoomFlags() {
     ClearMoogleFreePackFlag(gMapFloorState.room);
 }
 
-u8 BuildMooglePackList(s16 a) {
+u8 BuildMooglePackList(s16 floor) {
     s16 i;
     s16 k;
     s16 m;
@@ -338,7 +338,7 @@ u8 BuildMooglePackList(s16 a) {
         m = 0;
 
         for (k = 0; k < 4; k++) {
-            v = sMooglePackTiers[a][i][k];
+            v = sMooglePackTiers[floor][i][k];
 
             if (IsMooglePackBought(gMapFloorState.room, i, k) == 0) {
                 if (v >= 0) {
@@ -383,18 +383,18 @@ void MoogleShopCopyTilemapRect(u16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst,
     }
 }
 
-void DrawMoogleShopPacks(s16 a) {
+void DrawMoogleShopPacks(s16 row) {
     s32 j;
 
     DmaFill16(3, 0, sMoogleShopTilemap, 0x500);
 
     for (j = 0; j < 4; j++) {
-        if (sMoogleShopPacks[a][j][0] >= 0) {
-            LoadDecimalDigitTiles(sMooglePackPrices[sMoogleShopRowCategory[a]][sMoogleShopPacks[a][j][1]], gMooglePackPriceDigitTiles,
+        if (sMoogleShopPacks[row][j][0] >= 0) {
+            LoadDecimalDigitTiles(sMooglePackPrices[sMoogleShopRowCategory[row]][sMoogleShopPacks[row][j][1]], gMooglePackPriceDigitTiles,
                 (u8*)GetBgCharBase(2) + (j * 0xC0 + 0xC0), 0x40, 3);
-            MoogleShopCopyTilemapRect(12, 8, LANGSTR(sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].tilemap),
-                sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].srcX,
-                sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].srcY, sMoogleShopTilemap,
+            MoogleShopCopyTilemapRect(12, 8, LANGSTR(sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[row]].tilemap),
+                sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[row]].srcX,
+                sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[row]].srcY, sMoogleShopTilemap,
                 sMooglePackMenuEntries[j].tilemapX, sMooglePackMenuEntries[j].tilemapY);
         }
     }
@@ -556,7 +556,7 @@ void DrawMooglePackOpening() {
     }
 }
 
-u8 UpdateMooglePackOpening(u16 a) {
+u8 UpdateMooglePackOpening(u16 freePack) {
     MsShopHosiArg arg0;
     MsShopHosiArg arg1;
     MsShopHosiArg arg2;
@@ -748,7 +748,7 @@ u8 UpdateMooglePackOpening(u16 a) {
 
             if (sMooglePackCards[i].timer != 0) {
                 if (--sMooglePackCards[i].timer == 0) {
-                    if (a & 1) {
+                    if (freePack & 1) {
                         SetupBg(3, 0, 31, 0);
                         SetBgScroll(3, 0, 0);
                         RequestDma3Copy(gMooglePackCardInfoTiles, (u8*)GetBgCharBase(3) + 0x5800, 0x1400);
@@ -821,18 +821,18 @@ u8 UpdateMooglePackOpening(u16 a) {
     return result;
 }
 
-void DrawMoogleShopCategoryLabels(s16 a) {
+void DrawMoogleShopCategoryLabels(s16 row) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
         if (sMoogleShopRowCategory[i] >= 0) {
-            RequestTilemapRectCopy(gMoogleShopCategoryLabelsMap, GetBgScreenBase(0), sMoogleShopRowCategory[i] * 6, i == a ? 0 : 3, 0, i * 3 + 3, 6, 3);
+            RequestTilemapRectCopy(gMoogleShopCategoryLabelsMap, GetBgScreenBase(0), sMoogleShopRowCategory[i] * 6, i == row ? 0 : 3, 0, i * 3 + 3, 6, 3);
         }
     }
 }
 
-void LoadMooglePackSelectionTilemap(s16 a) {
-    LoadBgMap(1, sMooglePackMenuEntries[a].selectionTilemap, sMooglePackMenuEntries[a].selectionTilemapSize);
+void LoadMooglePackSelectionTilemap(s16 pack) {
+    LoadBgMap(1, sMooglePackMenuEntries[pack].selectionTilemap, sMooglePackMenuEntries[pack].selectionTilemapSize);
 }
 
 void MoogleShopHandleSoldOutInput() {
@@ -942,7 +942,7 @@ u16 RollMoogleCardValue() {
     return i % 10;
 }
 
-void RollMooglePackCards(s16 a, s16 b) {
+void RollMooglePackCards(s16 category, s16 tier) {
     s16 lo;
     s16 hi;
     s16 j;
@@ -959,9 +959,9 @@ void RollMooglePackCards(s16 a, s16 b) {
 
     id = 0;
 
-    if (a <= 2) {
-        lo = a;
-        hi = a + 1;
+    if (category <= 2) {
+        lo = category;
+        hi = category + 1;
     } else {
         lo = 0;
         hi = 3;
@@ -982,8 +982,8 @@ void RollMooglePackCards(s16 a, s16 b) {
         n = sMooglePackCardTables[j].count;
 
         for (m = 0; m < n; m++) {
-            if (e[m].weights[b] != 0) {
-                total += e[m].weights[b];
+            if (e[m].weights[tier] != 0) {
+                total += e[m].weights[tier];
                 list[k] = &e[m];
                 k++;
             }
@@ -995,7 +995,7 @@ void RollMooglePackCards(s16 a, s16 b) {
         acc = 0;
 
         for (m = 0; m < k; m++) {
-            acc += list[m]->weights[b];
+            acc += list[m]->weights[tier];
 
             if (rnd < acc) {
                 if (IsCardKindObtained(list[m]->unlockFlag)) {

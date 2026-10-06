@@ -148,32 +148,32 @@ void WorldWarpCopyTilemapRect(s16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst, 
     }
 }
 
-u8 WorldWarpLoadCurrentName(s16 a) {
-    if (a <= 0) {
+u8 WorldWarpLoadCurrentName(s16 world) {
+    if (world <= 0) {
         return 0;
     }
 
 #ifdef VERSION_EU
-    return LoadTextSlots(GetLocalizedString(sWorldSelectDefs[a].name), sWorldWarpCurrentName);
+    return LoadTextSlots(GetLocalizedString(sWorldSelectDefs[world].name), sWorldWarpCurrentName);
 #else
-    return LoadTextSlots(sWorldSelectDefs[a].name, sWorldWarpCurrentName);
+    return LoadTextSlots(sWorldSelectDefs[world].name, sWorldWarpCurrentName);
 #endif
 }
 
-u8 WorldWarpLoadSelectedName(s16 a) {
-    if (a <= 0) {
+u8 WorldWarpLoadSelectedName(s16 world) {
+    if (world <= 0) {
         return 0;
     }
 
 #ifdef VERSION_EU
-    return LoadTextSlots(GetLocalizedString(sWorldSelectDefs[a].name), sWorldWarpSelectedName);
+    return LoadTextSlots(GetLocalizedString(sWorldSelectDefs[world].name), sWorldWarpSelectedName);
 #else
-    return LoadTextSlots(sWorldSelectDefs[a].name, sWorldWarpSelectedName);
+    return LoadTextSlots(sWorldSelectDefs[world].name, sWorldWarpSelectedName);
 #endif
 }
 
-void WorldWarpLoadFloorTiles(s16 a, u8* b, void* c) {
-    RequestDma3Copy(b + a * 256, c, 0x100);
+void WorldWarpLoadFloorTiles(s16 floor, u8* tiles, void* dst) {
+    RequestDma3Copy(tiles + floor * 256, dst, 0x100);
 }
 
 u16 WorldWarpReadMenuKeys() {

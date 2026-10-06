@@ -840,7 +840,7 @@ void StatusStocklistScrollUp() {
     sStatusStocklistWork->tiles2[0] = LoadStockNameTiles(GetStatusItemStockIndex(sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[sStatusStocklistWork->scroll]));
 }
 
-void StatusStocklistLoadRows(u16 a) {
+void StatusStocklistLoadRows(u16 scroll) {
     s32 i;
 
     for (i = 0; i <= 7; i++) {
@@ -850,43 +850,43 @@ void StatusStocklistLoadRows(u16 a) {
         }
     }
 
-    sStatusStocklistWork->scroll = a;
+    sStatusStocklistWork->scroll = scroll;
 
-    for (i = 0; i < sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count - a && i <= 7; i++) {
-        sStatusStocklistWork->tiles2[i] = LoadStockNameTiles(GetStatusItemStockIndex(sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[a + i]));
+    for (i = 0; i < sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count - scroll && i <= 7; i++) {
+        sStatusStocklistWork->tiles2[i] = LoadStockNameTiles(GetStatusItemStockIndex(sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[scroll + i]));
     }
 }
 
-s32 GetStatusListItem(s16 a) {
-    return sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[a];
+s32 GetStatusListItem(s16 index) {
+    return sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[index];
 }
 
-void StatusEntryClear(StatusEntry* e) {
-    e->count = 0;
+void StatusEntryClear(StatusEntry* entry) {
+    entry->count = 0;
 }
 
-void StatusEntryAppend(StatusEntry* e, s32 v) {
-    e->items[e->count] = v;
-    e->count++;
+void StatusEntryAppend(StatusEntry* entry, s32 v) {
+    entry->items[entry->count] = v;
+    entry->count++;
 }
 
-s32 GetStatusItemTab(u32 a) {
-    if (a <= 8) {
+s32 GetStatusItemTab(u32 item) {
+    if (item <= 8) {
         return 1;
     }
 
-    if (a >= 9 && a <= 46) {
+    if (item >= 9 && item <= 46) {
         return 2;
     }
 
     return 3;
 }
 
-void* LoadStockNameTiles(u16 a) {
+void* LoadStockNameTiles(u16 stock) {
     const SpriteFrameResourceDef* d;
     void* t;
 
-    d = &gStockNameSprites[a];
+    d = &gStockNameSprites[stock];
     t = AllocSpriteFrameTiles(d->tilesSize);
 #ifdef VERSION_EU
     UpdateSpriteFrameTiles(t, d->sprites[gLanguage][d->spriteIndex],
@@ -897,8 +897,8 @@ void* LoadStockNameTiles(u16 a) {
     return t;
 }
 
-s32 GetStatusItemStockIndex(s32 a) {
-    switch (a) {
+s32 GetStatusItemStockIndex(s32 item) {
+    switch (item) {
     case 1:
         return 46;
     case 5:
@@ -1150,12 +1150,12 @@ void task_status_message_3(StatusMessageWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-Task* CreateStatusMessageTask(void* pool, s16 x, s16 y, void* p) {
+Task* CreateStatusMessageTask(void* pool, s16 x, s16 y, void* text) {
     StatusMessageParam param;
 
     param.x = x;
     param.y = y;
-    param.text = p;
+    param.text = text;
     return TaskCreate(pool, &sTaskDescStatusMessage, &param);
 }
 
@@ -1188,7 +1188,7 @@ void task_status_friend_3(StatusFriendWork* work) {
     }
 }
 
-u16 LoadFriendCardSprites(void** a, void** b, void** c) {
+u16 LoadFriendCardSprites(void** tiles, void** palettes, void** gfx) {
     StatusFriendTable table;
     const CardDef* card;
     const void* data;
@@ -1216,9 +1216,9 @@ u16 LoadFriendCardSprites(void** a, void** b, void** c) {
 
         if (*(const u16*)source & ((const StatusFriendEntry*)data)->flag) {
             card = &gCardDefs[((const StatusFriendEntry*)data)->cardId];
-            a[count] = LoadObjTiles(card->tiles2, 0x100);
-            b[count] = LoadObjPalette(card->palette2, 0x20);
-            c[count] = card->gfx2;
+            tiles[count] = LoadObjTiles(card->tiles2, 0x100);
+            palettes[count] = LoadObjPalette(card->palette2, 0x20);
+            gfx[count] = card->gfx2;
             count++;
 
             if (count >= limit) {
@@ -1303,17 +1303,17 @@ void stock_mes_disp_3(StockMesDispWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void* CreateStockMesDispTask(void* pool, u16 b, u8 c, u16 d, s32 e) {
+void* CreateStockMesDispTask(void* pool, u16 helpIndex, u8 textIndex, u16 x, s32 y) {
     StatusMesParam p;
 
-    p.helpIndex = b;
-    p.textIndex = c;
-    p.x = d;
-    p.y = e;
+    p.helpIndex = helpIndex;
+    p.textIndex = textIndex;
+    p.x = x;
+    p.y = y;
     return TaskCreate(pool, &gTaskDescStockMesDisp, &p);
 }
 
-u8 GetStockMesDispTextIndex(void* a) {
+u8 GetStockMesDispTextIndex(void* task) {
     return ((StockMesDispWork*)gStockMesDispWork)->textIndex;
 }
 

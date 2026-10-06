@@ -70,31 +70,31 @@ typedef struct MooglePackCardWork {
     u8 revealed;
 } MooglePackCardWork;
 
-void ClearMooglePackBought(u16 a, u16 b, u16 c);
-u8 IsMooglePackBought(u16 a, u16 b, u16 c);
-void SetMoogleFreePackFlag(u16 a);
-void ClearMoogleFreePackFlag(u16 a);
-u8 GetMoogleFreePackFlag(u16 a);
+void ClearMooglePackBought(u16 room, u16 category, u16 pack);
+u8 IsMooglePackBought(u16 room, u16 category, u16 pack);
+void SetMoogleFreePackFlag(u16 room);
+void ClearMoogleFreePackFlag(u16 room);
+u8 GetMoogleFreePackFlag(u16 room);
 void ClearMoogleRoomFlags();
-u8 BuildMooglePackList(s16 a);
+u8 BuildMooglePackList(s16 floor);
 s32 MoogleShopReadMenuKeys();
 u16 RollMoogleCardValue();
-void DrawMoogleShopPacks(s16 a);
-void DrawMoogleShopCategoryLabels(s16 a);
+void DrawMoogleShopPacks(s16 row);
+void DrawMoogleShopCategoryLabels(s16 row);
 void ReleaseMooglePackOpening();
 void mode_ms_shop_1();
 void MoogleShopDraw();
 void mode_ms_shop_0();
 void MoogleShopHandlePackInput();
 void mode_ms_shop_2();
-void LoadMooglePackSelectionTilemap(s16 a);
+void LoadMooglePackSelectionTilemap(s16 pack);
 void MoogleShopHandleSoldOutInput();
 void MoogleShopHandleRowInput();
 
-void SetMooglePackBought(u16 a, u16 b, u16 c);
-u8 UpdateMooglePackOpening(u16 a);
+void SetMooglePackBought(u16 room, u16 category, u16 pack);
+u8 UpdateMooglePackOpening(u16 freePack);
 void InitMooglePackOpening(s16 x, s16 y);
-void RollMooglePackCards(s16 a, s16 b);
+void RollMooglePackCards(s16 category, s16 tier);
 void MoogleShopCopyTilemapRect(u16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst, s16 dx, s16 dy);
 
 #endif /* GUARD_MODE_MS_H */

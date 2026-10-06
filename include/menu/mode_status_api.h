@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-void SetStatusReturnToMenu(u8 a);
+void SetStatusReturnToMenu(u8 returnToMenu);
 
 #endif

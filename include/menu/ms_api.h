@@ -2,7 +2,7 @@
 #define GUARD_MS_API_H
 
 void ClearMoogleShopFlags();
-void SaveMoogleShopFlags(void* a);
-void LoadMoogleShopFlags(void* a);
+void SaveMoogleShopFlags(void* dst);
+void LoadMoogleShopFlags(void* src);
 
 #endif

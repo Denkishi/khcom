@@ -58,12 +58,12 @@ void ClearMoogleShopFlags() {
     MoogleShopClearFlags();
 }
 
-void SaveMoogleShopFlags(void* a) {
-    MoogleShopSaveFlags(a);
+void SaveMoogleShopFlags(void* dst) {
+    MoogleShopSaveFlags(dst);
 }
 
-void LoadMoogleShopFlags(void* a) {
-    MoogleShopLoadFlags(a);
+void LoadMoogleShopFlags(void* src) {
+    MoogleShopLoadFlags(src);
 }
 
 TaskDesc gTaskDescMsShopHosi = {

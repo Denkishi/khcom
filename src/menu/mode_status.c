@@ -146,8 +146,8 @@ void mode_status_2() {
     TaskPoolDestroy(&sStatusTaskPool);
 }
 
-void SetStatusReturnToMenu(u8 a) {
-    sStatusReturnToMenu = a;
+void SetStatusReturnToMenu(u8 returnToMenu) {
+    sStatusReturnToMenu = returnToMenu;
 }
 
 Mode gModeStatus = {

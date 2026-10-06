@@ -165,9 +165,9 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     }
 
     if (!work->asSprite && work->room == gMapFloorState.room) {
-        pal = gAllmapCurrentRoomPalettes;
+        pal = gAllmapRoomPalettes[2];
     } else {
-        pal = gAllmapRoomPalettes + GetAllmapRoomPaletteOffset(work->room);
+        pal = (u8*)gAllmapRoomPalettes + GetAllmapRoomPaletteOffset(work->room);
     }
 
     work->palette = LoadObjPalette(pal, 32);
@@ -674,7 +674,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
         FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         work->tiles2 = LoadObjTiles(gAllmapRoomTiles, sizeof(gAllmapRoomTiles));
         work->gfx = gAllmapRoomFrames[0];
-        InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, sizeof(gAllmapRoomPalettes));
+        InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes[0], sizeof(gAllmapRoomPalettes[0]));
         FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
     }
 }
@@ -731,10 +731,10 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
 
     if (GetEventRoomKind(work->room) == EVENT_DOOR_EVENT_ROOM || GetEventRoomKind(work->room) == EVENT_DOOR_BOSS_ROOM) {
         work->gfx = gAllmapRoomFrames[1];
-        InitObjPaletteAtSlot(work->palette2, 15, gAllmapEventRoomPalette, sizeof(gAllmapEventRoomPalette));
+        InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes[1], sizeof(gAllmapRoomPalettes[0]));
     } else {
         work->gfx = gAllmapRoomFrames[0];
-        InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, sizeof(gAllmapRoomPalettes));
+        InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes[0], sizeof(gAllmapRoomPalettes[0]));
     }
 
     FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);

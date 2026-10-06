@@ -5773,38 +5773,16 @@ entries:
     size: 128
 - name: gAllmapRoomPalettes
   format: palette
-  ctype: u8
+  shape: [7, 16]
   us:
     address: 0x0984A0F8
-    size: 32
+    size: 224
   jp:
     address: 0x097FEDCC
-    size: 32
+    size: 224
   eu:
     address: 0x0981E7A0
-    size: 32
-- name: gAllmapEventRoomPalette
-  format: palette
-  us:
-    address: 0x0984A118
-    size: 32
-  jp:
-    address: 0x097FEDEC
-    size: 32
-  eu:
-    address: 0x0981E7C0
-    size: 32
-- name: gAllmapCurrentRoomPalettes
-  format: palette
-  us:
-    address: 0x0984A138
-    size: 160
-  jp:
-    address: 0x097FEE0C
-    size: 160
-  eu:
-    address: 0x0981E7E0
-    size: 160
+    size: 224
 - name: gAllmapObjPalette
   format: palette
   us:

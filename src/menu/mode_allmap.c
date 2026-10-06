@@ -175,7 +175,7 @@ void AllmapCyclePalette() {
         sAllmapPalStep = 0;
     }
 
-    LoadPalette(&gAllmapCurrentRoomPalettes[steps[sAllmapPalStep].palette * 0x10], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 0x20);
+    LoadPalette(gAllmapRoomPalettes[2 + steps[sAllmapPalStep].palette], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), sizeof(gAllmapRoomPalettes[0]));
 }
 
 void AllmapLoadWorldBg() {
@@ -240,7 +240,7 @@ void mode_allmap_0(s32 lowerBgm) {
     SetupBg(0, 0, 26, 0);
     SetBgPriority(0, 2);
     LoadBgTiles(0, gAllmapRoomTiles, sizeof(gAllmapRoomTiles));
-    LoadBgPalette(0, gAllmapRoomPalettes, 0xE0);
+    LoadBgPalette(0, gAllmapRoomPalettes, sizeof(gAllmapRoomPalettes));
     AllmapAllocBgMaps();
     SetBgMapBlocks(0, gAllmapBg0MapBlocks, 2, 4);
     SetupBg(1, 0, 27, 0);

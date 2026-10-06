@@ -121,7 +121,12 @@ static const u16 sAllmapDirDeltas[4][2] = {
     {0xFFFF, 0xFFFF},
 };
 
-static const u32 sAllmapReverseDoors[4] = {0, 3, 1, 2};
+static const u32 sAllmapReverseDoors[4] = {
+    MAP_DOOR_SIDE_UP_RIGHT,
+    MAP_DOOR_SIDE_UP_LEFT,
+    MAP_DOOR_SIDE_DOWN_LEFT,
+    MAP_DOOR_SIDE_DOWN_RIGHT,
+};
 
 static const s16 sAllmapKeyCardX[4][4] = {
     {120, 0, 0, 0},
@@ -1282,25 +1287,25 @@ void AllmapAddRoom(u8 id, u16 x, u16 y) {
     arg.asSprite = FALSE;
     sAllmapState->roomTasks[id] = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoom, &arg);
 
-    room = links[0];
+    room = links[MAP_DOOR_SIDE_UP_RIGHT];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x + 1, y - 1);
     }
 
-    room = links[1];
+    room = links[MAP_DOOR_SIDE_DOWN_LEFT];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x - 1, y + 1);
     }
 
-    room = links[2];
+    room = links[MAP_DOOR_SIDE_DOWN_RIGHT];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x + 1, y + 1);
     }
 
-    room = links[3];
+    room = links[MAP_DOOR_SIDE_UP_LEFT];
 
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, x - 1, y - 1);

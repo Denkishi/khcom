@@ -611,7 +611,7 @@ void Mode_MapChk_1() {
             MapChkSetFloorProgress(sMapChkWork->floor, FALSE);
             GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_ENTRANCE_HALL;
-            gMapFloorState.entrySide = 5;
+            gMapFloorState.entrySide = MAP_DOOR_SIDE_NONE;
             RequestMapMode();
             break;
         case 3:
@@ -619,7 +619,7 @@ void Mode_MapChk_1() {
             MapChkSetFloorProgress(sMapChkWork->floor, TRUE);
             GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_EXIT_HALL;
-            gMapFloorState.entrySide = 5;
+            gMapFloorState.entrySide = MAP_DOOR_SIDE_NONE;
             RequestMapMode();
             break;
         case 4:
@@ -627,7 +627,7 @@ void Mode_MapChk_1() {
             GoToFloor(0);
             SetFloorWorld(WORLD_TRAVERSE_TOWN);
             gMapFloorState.room = MAP_ROOM_TUTORIAL;
-            gMapFloorState.entrySide = 5;
+            gMapFloorState.entrySide = MAP_DOOR_SIDE_NONE;
             RequestMapMode();
             break;
         default:

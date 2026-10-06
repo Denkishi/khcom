@@ -71,17 +71,17 @@ static const u8 sRikuWorldExitEvents[13] = {
 
 u8 GetOppositeDoorSide(u8 side) {
     switch (side) {
-    case 0:
-        side = 1;
+    case MAP_DOOR_SIDE_UP_RIGHT:
+        side = MAP_DOOR_SIDE_DOWN_LEFT;
         break;
-    case 1:
-        side = 0;
+    case MAP_DOOR_SIDE_DOWN_LEFT:
+        side = MAP_DOOR_SIDE_UP_RIGHT;
         break;
-    case 2:
-        side = 3;
+    case MAP_DOOR_SIDE_DOWN_RIGHT:
+        side = MAP_DOOR_SIDE_UP_LEFT;
         break;
-    case 3:
-        side = 2;
+    case MAP_DOOR_SIDE_UP_LEFT:
+        side = MAP_DOOR_SIDE_DOWN_RIGHT;
         break;
     }
 
@@ -109,12 +109,12 @@ void SetHallDefaultSpawn() {
         case 9:
         case 10:
         case 11:
-            gMapFloorState.entrySide = 5;
+            gMapFloorState.entrySide = MAP_DOOR_SIDE_NONE;
             break;
         }
     } else {
         if (gGameState.floor != 12) {
-            gMapFloorState.entrySide = 5;
+            gMapFloorState.entrySide = MAP_DOOR_SIDE_NONE;
         }
     }
 }
@@ -512,7 +512,7 @@ void AdvanceFloorStory() {
         } else {
             if (gGameState.floor == 0) {
                 gMapFloorState.room = MAP_ROOM_TUTORIAL;
-                gMapFloorState.entrySide = 5;
+                gMapFloorState.entrySide = MAP_DOOR_SIDE_NONE;
                 return;
             }
 
@@ -534,7 +534,7 @@ void AdvanceFloorStory() {
         exitEventFlags = gMapFloorState.flags | FLOOR_FLAG_EXIT_EVENT_DONE;
         gMapFloorState.flags = exitEventFlags;
         gMapFloorState.progress++;
-        SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 5);
+        SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, MAP_DOOR_SIDE_NONE);
     } else {
         flags = gMapFloorState.flags & ~FLOOR_FLAG_EVENT_ROOM_OPEN;
         gMapFloorState.flags = flags;
@@ -556,7 +556,7 @@ void AdvanceFloorStory() {
 
 void AdvanceToExitHall() {
     gMapFloorState.progress++;
-    SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 5);
+    SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, MAP_DOOR_SIDE_NONE);
 }
 
 u8 GetEventStepKeyKind() {
@@ -822,7 +822,7 @@ void* GetMapWorldName(u8 index) {
 }
 
 void EnterEntranceHall() {
-    SetCurrentMapRoom(MAP_ROOM_ENTRANCE_HALL, 1);
+    SetCurrentMapRoom(MAP_ROOM_ENTRANCE_HALL, MAP_DOOR_SIDE_DOWN_LEFT);
     RequestMapMode();
 }
 
@@ -857,7 +857,7 @@ void EnterExitHall() {
             gMapFloorState.progress++;
         }
 
-        SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 0);
+        SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, MAP_DOOR_SIDE_UP_RIGHT);
         RequestMapMode();
     }
 }
@@ -901,17 +901,17 @@ void MarkPastEventRoomsDone() {
 
 void GoToFloor(u8 floor) {
     gGameState.floor = floor;
-    InitMapFloorState(MAP_ROOM_ENTRANCE_HALL, 0);
+    InitMapFloorState(MAP_ROOM_ENTRANCE_HALL, MAP_DOOR_SIDE_UP_RIGHT);
 }
 
 void GoToNextFloor() {
     gGameState.floor++;
-    InitMapFloorState(MAP_ROOM_ENTRANCE_HALL, 1);
+    InitMapFloorState(MAP_ROOM_ENTRANCE_HALL, MAP_DOOR_SIDE_DOWN_LEFT);
 }
 
 void GoToPreviousFloor() {
     gGameState.floor--;
-    InitMapFloorState(MAP_ROOM_EXIT_HALL, 0);
+    InitMapFloorState(MAP_ROOM_EXIT_HALL, MAP_DOOR_SIDE_UP_RIGHT);
 }
 
 void WarpToFloor(u8 floor) {
@@ -921,7 +921,7 @@ void WarpToFloor(u8 floor) {
     StoreMapFloorState();
     GoToFloor(floor);
     gMapFloorState.room = MAP_ROOM_ENTRANCE_HALL;
-    gMapFloorState.entrySide = 5;
+    gMapFloorState.entrySide = MAP_DOOR_SIDE_NONE;
     flags = gMapFloorState.flags | FLOOR_FLAG_WARP_IN;
     gMapFloorState.flags = flags;
     RequestMapMode();
@@ -942,9 +942,9 @@ void EnterFloorWorld() {
     }
 
     if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
-        SetCurrentMapRoom(floorDef->exitRoom, 1);
+        SetCurrentMapRoom(floorDef->exitRoom, MAP_DOOR_SIDE_DOWN_LEFT);
     } else {
-        SetCurrentMapRoom(floorDef->entryRoom, 0);
+        SetCurrentMapRoom(floorDef->entryRoom, MAP_DOOR_SIDE_UP_RIGHT);
     }
 
     MarkPastEventRoomsDone();

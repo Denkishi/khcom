@@ -428,28 +428,28 @@ void SpawnMapPlayer() {
     s32 x;
     s32 y;
 
-    if (gMapFloorState.entrySide <= 3) {
+    if (gMapFloorState.entrySide <= MAP_DOOR_SIDE_UP_LEFT) {
         door = GetMapDoor(gMapFloorState.entrySide);
         x = (door->cellX << 5) + 16;
         y = (door->cellY << 4) + 10;
 
         switch (gMapFloorState.entrySide) {
-        case 0:
+        case MAP_DOOR_SIDE_UP_RIGHT:
             gFieldState->spawnX = (x << 8) - 0xC00;
             gFieldState->spawnY = (y << 8) + 0x800;
             gFieldState->spawnAngle = FLD_ANGLE_DOWN_LEFT;
             break;
-        case 1:
+        case MAP_DOOR_SIDE_DOWN_LEFT:
             gFieldState->spawnX = (x << 8) + 0xC00;
             gFieldState->spawnY = (y << 8) - 0x800;
             gFieldState->spawnAngle = FLD_ANGLE_UP_RIGHT;
             break;
-        case 2:
+        case MAP_DOOR_SIDE_DOWN_RIGHT:
             gFieldState->spawnX = (x << 8) - 0xC00;
             gFieldState->spawnY = (y << 8) - 0x800;
             gFieldState->spawnAngle = FLD_ANGLE_UP_LEFT;
             break;
-        case 3:
+        case MAP_DOOR_SIDE_UP_LEFT:
             gFieldState->spawnX = (x << 8) + 0xC00;
             gFieldState->spawnY = (y << 8) + 0x800;
             gFieldState->spawnAngle = FLD_ANGLE_DOWN_RIGHT;
@@ -1688,7 +1688,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
 
     width = platform->right - platform->left;
 
-    if (doorSide == 0) {
+    if (doorSide == MAP_DOOR_SIDE_UP_RIGHT) {
         x = platform->left + width * 5 / 8 + GetRandom() % (width >> 2);
 
         for (i = 0; i < width; i++) {
@@ -1714,7 +1714,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
         }
     }
 
-    if (doorSide == 2) {
+    if (doorSide == MAP_DOOR_SIDE_DOWN_RIGHT) {
         x = platform->left + width * 5 / 8 + GetRandom() % (width >> 2);
 
         for (i = 0; i < width; i++) {
@@ -1736,7 +1736,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
         }
     }
 
-    if (doorSide == 1) {
+    if (doorSide == MAP_DOOR_SIDE_DOWN_LEFT) {
         x = platform->left + width * 3 / 8 - GetRandom() % (width >> 2);
 
         for (i = 0; i < width; i++) {
@@ -1758,7 +1758,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
         }
     }
 
-    if (doorSide == 3) {
+    if (doorSide == MAP_DOOR_SIDE_UP_LEFT) {
         x = platform->left + width * 3 / 8 - GetRandom() % (width >> 2);
 
         for (i = 0; i < width; i++) {
@@ -1786,27 +1786,27 @@ void MapPlaceDoorOnPlatform(MapPlatform* platform, s32 side) {
 }
 
 s32 MapPlaceLastPlatformDoor() {
-    s32 side = 5;
+    s32 side = MAP_DOOR_SIDE_NONE;
     MapPlatform* platform = &sMapPlatforms[11];
 
     while (platform->z == 0x100000) {
         platform--;
     }
 
-    switch (gMapRoomState->flags & (ROOM_FLAG_DOOR(1) | ROOM_FLAG_DOOR(2))) {
-    case 0x2000000:
-        side = 1;
+    switch (gMapRoomState->flags & (ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_LEFT) | ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_RIGHT))) {
+    case ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_LEFT):
+        side = MAP_DOOR_SIDE_DOWN_LEFT;
         break;
-    case 0x4000000:
-        side = 2;
+    case ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_RIGHT):
+        side = MAP_DOOR_SIDE_DOWN_RIGHT;
         break;
-    case 0x6000000:
+    case ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_LEFT) | ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_RIGHT):
         if (platform->right == sMapCols) {
-            side = 2;
+            side = MAP_DOOR_SIDE_DOWN_RIGHT;
         } else if (platform->left == 0) {
-            side = 1;
+            side = MAP_DOOR_SIDE_DOWN_LEFT;
         } else {
-            s32 randomSide = GetRandom() % 2 ? 2 : 1;
+            s32 randomSide = GetRandom() % 2 ? MAP_DOOR_SIDE_DOWN_RIGHT : MAP_DOOR_SIDE_DOWN_LEFT;
 
             side = randomSide;
         }
@@ -1814,7 +1814,7 @@ s32 MapPlaceLastPlatformDoor() {
         break;
     }
 
-    if (side != 5) {
+    if (side != MAP_DOOR_SIDE_NONE) {
         MapPlaceDoorOnPlatform(platform, side);
     }
 
@@ -1824,21 +1824,21 @@ s32 MapPlaceLastPlatformDoor() {
 u8 MapPlaceFirstPlatformDoor(u8 side) {
     MapPlatform* platform = sMapPlatforms;
 
-    switch (gMapRoomState->flags & (ROOM_FLAG_DOOR(0) | ROOM_FLAG_DOOR(3))) {
-    case 0x1000000:
-        side = 0;
+    switch (gMapRoomState->flags & (ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_RIGHT) | ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_LEFT))) {
+    case ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_RIGHT):
+        side = MAP_DOOR_SIDE_UP_RIGHT;
         break;
-    case 0x8000000:
-        side = 3;
+    case ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_LEFT):
+        side = MAP_DOOR_SIDE_UP_LEFT;
         break;
-    case 0x9000000:
+    case ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_RIGHT) | ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_LEFT):
         break;
     default:
-        side = 5;
+        side = MAP_DOOR_SIDE_NONE;
         break;
     }
 
-    if (side != 5) {
+    if (side != MAP_DOOR_SIDE_NONE) {
         MapPlaceDoorOnPlatform(platform, side);
     }
 
@@ -1872,10 +1872,10 @@ void MapPlaceDoorsOnLastPlatform() {
         platform--;
     }
 
-    MapPlaceDoorOnPlatform(platform, 0);
-    MapPlaceDoorOnPlatform(platform, 1);
-    MapPlaceDoorOnPlatform(platform, 2);
-    MapPlaceDoorOnPlatform(platform, 3);
+    MapPlaceDoorOnPlatform(platform, MAP_DOOR_SIDE_UP_RIGHT);
+    MapPlaceDoorOnPlatform(platform, MAP_DOOR_SIDE_DOWN_LEFT);
+    MapPlaceDoorOnPlatform(platform, MAP_DOOR_SIDE_DOWN_RIGHT);
+    MapPlaceDoorOnPlatform(platform, MAP_DOOR_SIDE_UP_LEFT);
 }
 
 void MapPlaceDoors() {
@@ -1890,34 +1890,34 @@ void MapPlaceDoors() {
 
         if (door->room != MAP_ROOM_NONE) {
             switch (i) {
-            case 0:
-                gMapRoomState->flags |= ROOM_FLAG_DOOR(0);
+            case MAP_DOOR_SIDE_UP_RIGHT:
+                gMapRoomState->flags |= ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_RIGHT);
                 break;
-            case 1:
-                gMapRoomState->flags |= ROOM_FLAG_DOOR(1);
+            case MAP_DOOR_SIDE_DOWN_LEFT:
+                gMapRoomState->flags |= ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_LEFT);
                 break;
-            case 2:
-                gMapRoomState->flags |= ROOM_FLAG_DOOR(2);
+            case MAP_DOOR_SIDE_DOWN_RIGHT:
+                gMapRoomState->flags |= ROOM_FLAG_DOOR(MAP_DOOR_SIDE_DOWN_RIGHT);
                 break;
-            case 3:
-                gMapRoomState->flags |= ROOM_FLAG_DOOR(3);
+            case MAP_DOOR_SIDE_UP_LEFT:
+                gMapRoomState->flags |= ROOM_FLAG_DOOR(MAP_DOOR_SIDE_UP_LEFT);
                 break;
             }
         }
     }
 
     if (gMapRoomState->roomType != ROOM_TYPE_GUARDED_TROVE) {
-        if ((u8)MapPlaceLastPlatformDoor() != 2) {
-            MapPlaceRightPlatformDoor(2);
+        if ((u8)MapPlaceLastPlatformDoor() != MAP_DOOR_SIDE_DOWN_RIGHT) {
+            MapPlaceRightPlatformDoor(MAP_DOOR_SIDE_DOWN_RIGHT);
 
-            if (MapPlaceFirstPlatformDoor(0) != 3) {
-                MapPlaceLeftPlatformDoor(3);
+            if (MapPlaceFirstPlatformDoor(MAP_DOOR_SIDE_UP_RIGHT) != MAP_DOOR_SIDE_UP_LEFT) {
+                MapPlaceLeftPlatformDoor(MAP_DOOR_SIDE_UP_LEFT);
             }
         } else {
-            MapPlaceLeftPlatformDoor(1);
+            MapPlaceLeftPlatformDoor(MAP_DOOR_SIDE_DOWN_LEFT);
 
-            if (MapPlaceFirstPlatformDoor(3) != 0) {
-                MapPlaceRightPlatformDoor(0);
+            if (MapPlaceFirstPlatformDoor(MAP_DOOR_SIDE_UP_LEFT) != MAP_DOOR_SIDE_UP_RIGHT) {
+                MapPlaceRightPlatformDoor(MAP_DOOR_SIDE_UP_RIGHT);
             }
         }
     } else {

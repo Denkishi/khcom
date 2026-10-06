@@ -114,6 +114,14 @@ enum RoomEffect {
     ROOM_EFFECT_ENEMY_CARD_DROPS
 };
 
+enum MapDoorSide {
+    MAP_DOOR_SIDE_UP_RIGHT,
+    MAP_DOOR_SIDE_DOWN_LEFT,
+    MAP_DOOR_SIDE_DOWN_RIGHT,
+    MAP_DOOR_SIDE_UP_LEFT,
+    MAP_DOOR_SIDE_NONE = 5
+};
+
 typedef struct MapDoor {
     u16 flags;
     u16 cellX;

@@ -3016,16 +3016,16 @@ void Mode_MapFld_0() {
 
     if ((gMapFloorState.flags & FLOOR_FLAG_LOGO_SHOWN) && !gGameState.fieldResume) {
         switch (gMapFloorState.entrySide) {
-        case 0:
+        case MAP_DOOR_SIDE_UP_RIGHT:
             gGameState.fieldAngle = FLD_ANGLE_DOWN_LEFT;
             break;
-        case 1:
+        case MAP_DOOR_SIDE_DOWN_LEFT:
             gGameState.fieldAngle = FLD_ANGLE_UP_RIGHT;
             break;
-        case 2:
+        case MAP_DOOR_SIDE_DOWN_RIGHT:
             gGameState.fieldAngle = FLD_ANGLE_UP_LEFT;
             break;
-        case 3:
+        case MAP_DOOR_SIDE_UP_LEFT:
             gGameState.fieldAngle = FLD_ANGLE_DOWN_RIGHT;
             break;
         }
@@ -3306,7 +3306,7 @@ void MapFixLeaveEntranceHall() {
         }
 
         if (gMapFloorState.world == 0) {
-            gMapFloorState.entrySide = 0;
+            gMapFloorState.entrySide = MAP_DOOR_SIDE_UP_RIGHT;
             ModeRequest(&gModeWorldselect, 0);
         } else if (gMapFloorState.world == WORLD_100_ACRE_WOOD) {
             RequestEventMode(EVENT_135_100ACREWOOD_START_RETRY);
@@ -3339,7 +3339,7 @@ void MapFixLeaveExitHall() {
             EnterFloorWorld();
             ModeRequest(&gModeMapFld, 0);
         } else {
-            gMapFloorState.entrySide = 1;
+            gMapFloorState.entrySide = MAP_DOOR_SIDE_DOWN_LEFT;
             ModeRequest(&gModePooh, 2);
         }
 
@@ -4733,12 +4733,12 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
     FldObj stair;
 
     switch (gMapFloorState.entrySide) {
-    case 0:
+    case MAP_DOOR_SIDE_UP_RIGHT:
         gFieldState->spawnAngle = FLD_ANGLE_DOWN_LEFT;
         gFieldState->spawnX = def->stairX - 0xC00;
         gFieldState->spawnY = def->stairY + 0x800;
         break;
-    case 1:
+    case MAP_DOOR_SIDE_DOWN_LEFT:
         gFieldState->spawnAngle = FLD_ANGLE_UP_RIGHT;
         gFieldState->spawnX = def->stair2X + 0xC00;
         gFieldState->spawnY = def->stair2Y - 0x800;
@@ -4987,7 +4987,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
     work->visible = TRUE;
 
     switch (door->side) {
-    case 0:
+    case MAP_DOOR_SIDE_UP_RIGHT:
         work->sprite = gMapDoorSide0Frame0;
         work->openSrc = doorGfx->side0Open;
         work->closedSrc = doorGfx->side0Closed;
@@ -4995,7 +4995,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
         obj->fieldPosition.y = (door->cellY << 4) + 10;
         break;
-    case 1:
+    case MAP_DOOR_SIDE_DOWN_LEFT:
         work->sprite = gMapDoorSide1Frame0;
         work->openSrc = doorGfx->side1Open;
         work->closedSrc = doorGfx->side1Closed;
@@ -5003,7 +5003,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
         obj->fieldPosition.y = (door->cellY << 4) + 6;
         break;
-    case 2:
+    case MAP_DOOR_SIDE_DOWN_RIGHT:
         work->sprite = gMapDoorSide2Frame0;
         work->openSrc = doorGfx->side2Open;
         work->closedSrc = doorGfx->side2Closed;
@@ -5011,7 +5011,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
         work->obj.fieldPosition.x = (door->cellX << 5) + 16;
         obj->fieldPosition.y = (door->cellY << 4) + 6;
         break;
-    case 3:
+    case MAP_DOOR_SIDE_UP_LEFT:
         work->sprite = gMapDoorSide3Frame0;
         work->openSrc = doorGfx->side3Open;
         work->closedSrc = doorGfx->side3Closed;
@@ -5034,14 +5034,14 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
     work->tiles2 = AllocSpriteFrameTiles(0x100);
 
     switch (door->side) {
-    case 0:
-    case 1:
+    case MAP_DOOR_SIDE_UP_RIGHT:
+    case MAP_DOOR_SIDE_DOWN_LEFT:
         work->sprite2 = gMapDoorEmblemSide01Frame0;
         work->openSrc2 = gMapDoorEmblemTiles[0][1];
         work->closedSrc2 = gMapDoorEmblemTiles[1][1];
         break;
-    case 2:
-    case 3:
+    case MAP_DOOR_SIDE_DOWN_RIGHT:
+    case MAP_DOOR_SIDE_UP_LEFT:
         work->sprite2 = gMapDoorEmblemSide23Frame0;
         work->openSrc2 = gMapDoorEmblemTiles[0][0];
         work->closedSrc2 = gMapDoorEmblemTiles[1][0];
@@ -5093,12 +5093,12 @@ void Task_MapDoor_2(MapDoorWork* work) {
         sy = pixelY + (work->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
         switch (door->side) {
-        case 0:
-        case 3:
+        case MAP_DOOR_SIDE_UP_RIGHT:
+        case MAP_DOOR_SIDE_UP_LEFT:
             priority = -0xFE4 - (work->obj.fieldPosition.y >> 8) * 4;
             break;
-        case 1:
-        case 2:
+        case MAP_DOOR_SIDE_DOWN_LEFT:
+        case MAP_DOOR_SIDE_DOWN_RIGHT:
             priority = -0x1024 - pixelY * 4;
             break;
         default:
@@ -5111,12 +5111,12 @@ void Task_MapDoor_2(MapDoorWork* work) {
 
         if (door->flags & DOOR_FLAG_EVENT) {
             switch (door->side) {
-            case 0:
-            case 2:
+            case MAP_DOOR_SIDE_UP_RIGHT:
+            case MAP_DOOR_SIDE_DOWN_RIGHT:
                 DrawSprite(sx, sy, NULL, work->tiles2, work->palette2, NULL, drawFlags, priority - 1);
                 break;
-            case 1:
-            case 3:
+            case MAP_DOOR_SIDE_DOWN_LEFT:
+            case MAP_DOOR_SIDE_UP_LEFT:
                 DrawSprite(sx, sy, NULL, work->tiles2, work->palette2, NULL, drawFlags, priority - 1);
                 break;
             }

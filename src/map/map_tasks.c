@@ -2172,7 +2172,7 @@ u8 MapGmkTutorialWaitHit(MapGmkTutorialWork* work) {
             gMapRoomState->door = &work->obj;
             work->update = MapGmkTutorialWaitCard;
             gMapRoomState->doorRoom = 0;
-            gMapRoomState->doorSide = 0;
+            gMapRoomState->doorSide = MAP_DOOR_SIDE_UP_RIGHT;
             FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
             TaskCreate(pool, &gTaskDescRoomcreate, NULL);
         }

@@ -412,19 +412,19 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
-                    else BgFxStartFire(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
+                    else BgFxStartFire(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
 
                     break;
                 case 1:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
-                    else BgFxStartFire(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
+                    else BgFxStartFire(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
 
                     break;
                 case 2:
                 default:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
-                    else BgFxStartFire(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
+                    else BgFxStartFire(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
 
                     break;
                 }
@@ -475,19 +475,19 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
-                    else BgFxStartBlizzard(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
+                    else BgFxStartBlizzard(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
 
                     break;
                 case 1:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
-                    else BgFxStartBlizzard(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
+                    else BgFxStartBlizzard(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
 
                     break;
                 case 2:
                 default:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
-                    else BgFxStartBlizzard(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
+                    else BgFxStartBlizzard(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
 
                     break;
                 }
@@ -539,11 +539,11 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     break;
                 }
             case 1:
-                BgFxStartWideThunder(1,body->x,body->y,body->z-0x4000,body->groundZ,130);
+                BgFxStartWideThunder(SPELL_TIER_RA,body->x,body->y,body->z-0x4000,body->groundZ,130);
                 break;
             case 2:
             default:
-                BgFxStartWideThunder(2,body->x,body->y,body->z-0x4000,body->groundZ,131);
+                BgFxStartWideThunder(SPELL_TIER_GA,body->x,body->y,body->z-0x4000,body->groundZ,131);
                 break;
             }
         }
@@ -572,16 +572,16 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             if (work->stateTimer == 40) {
                 switch (work->variant) {
                 case 0:
-                    BgFxStartCure(0,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(SPELL_TIER_BASE,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 case 1:
-                    BgFxStartCure(1,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(SPELL_TIER_RA,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 case 2:
-                    BgFxStartCure(2,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(SPELL_TIER_GA,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 default:
-                    BgFxStartCure(0,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(SPELL_TIER_BASE,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 }
             }

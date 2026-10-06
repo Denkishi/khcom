@@ -104,10 +104,10 @@ u8 task_emy_44_1(EmyWork* work) {
 
         if (AnimGetFrame(&work->anim) == 7 && work->anim.timer == 0) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartFire(1, act->x - 0x4000, act->y, act->z - 0x400,
+                BgFxStartFire(SPELL_TIER_RA, act->x - 0x4000, act->y, act->z - 0x400,
                     act->x - 0xB400, act->y, act->z - 0x400, 1, 0xDB);
             } else {
-                BgFxStartFire(1, act->x + 0x4000, act->y, act->z - 0x400,
+                BgFxStartFire(SPELL_TIER_RA, act->x + 0x4000, act->y, act->z - 0x400,
                     act->x + 0xB400, act->y, act->z - 0x400, 0, 0xDB);
             }
         }

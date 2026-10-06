@@ -85,11 +85,11 @@ u8 task_emy_02_1(EmyWork* work) {
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = act->x - 0x3C00;
-                BgFxStartBlizzard(0, act->x - 0x2800, y, act->z - 0x800, targetX, y, 0, 1,
+                BgFxStartBlizzard(SPELL_TIER_BASE, act->x - 0x2800, y, act->z - 0x800, targetX, y, 0, 1,
                     0xA9);
             } else {
                 targetX = act->x + 0x3C00;
-                BgFxStartBlizzard(0, act->x + 0x2800, y, act->z - 0x800, targetX, y, 0, 0,
+                BgFxStartBlizzard(SPELL_TIER_BASE, act->x + 0x2800, y, act->z - 0x800, targetX, y, 0, 0,
                     0xA9);
             }
         }
@@ -114,11 +114,11 @@ u8 task_emy_02_1(EmyWork* work) {
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = act->x - 0x3C00;
-                BgFxStartBlizzard(1, act->x - 0x2800, y, act->z - 0x800, targetX, y, 0, 1,
+                BgFxStartBlizzard(SPELL_TIER_RA, act->x - 0x2800, y, act->z - 0x800, targetX, y, 0, 1,
                     0xAA);
             } else {
                 targetX = act->x + 0x3C00;
-                BgFxStartBlizzard(1, act->x + 0x2800, y, act->z - 0x800, targetX, y, 0, 0,
+                BgFxStartBlizzard(SPELL_TIER_RA, act->x + 0x2800, y, act->z - 0x800, targetX, y, 0, 0,
                     0xAA);
             }
         }

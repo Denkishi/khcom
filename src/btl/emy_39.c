@@ -91,11 +91,11 @@ u8 task_emy_39_1(Emy39Work* work) {
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = act->x - 0x6400;
-                BgFxStartFire(0, act->x - 0x4000, y, act->z - 0x2000, targetX, y, 0, 1,
+                BgFxStartFire(SPELL_TIER_BASE, act->x - 0x4000, y, act->z - 0x2000, targetX, y, 0, 1,
                     0xD6);
             } else {
                 targetX = act->x + 0x6400;
-                BgFxStartFire(0, act->x + 0x4000, y, act->z - 0x2000, targetX, y, 0, 0,
+                BgFxStartFire(SPELL_TIER_BASE, act->x + 0x4000, y, act->z - 0x2000, targetX, y, 0, 0,
                     0xD6);
             }
         }

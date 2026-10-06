@@ -112,11 +112,11 @@ u8 task_emy_31_1(Emy31Work* work) {
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     targetX = act->x - 0xC800;
-                    BgFxStartFire(1, act->x - 0x4000, y, act->z,
+                    BgFxStartFire(SPELL_TIER_RA, act->x - 0x4000, y, act->z,
                         targetX, y, 0, 1, 0xCF);
                 } else {
                     targetX = act->x + 0xC800;
-                    BgFxStartFire(1, act->x + 0x4000, y, act->z,
+                    BgFxStartFire(SPELL_TIER_RA, act->x + 0x4000, y, act->z,
                         targetX, y, 0, 0, 0xCF);
                 }
             }
@@ -179,11 +179,11 @@ u8 task_emy_31_1(Emy31Work* work) {
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     targetX = act->x - 0x6400;
-                    BgFxStartBlizzard(1, act->x - 0x4600, y, act->z,
+                    BgFxStartBlizzard(SPELL_TIER_RA, act->x - 0x4600, y, act->z,
                         targetX, y, 0, 1, 0xD0);
                 } else {
                     targetX = act->x + 0x6400;
-                    BgFxStartBlizzard(1, act->x + 0x4600, y, act->z,
+                    BgFxStartBlizzard(SPELL_TIER_RA, act->x + 0x4600, y, act->z,
                         targetX, y, 0, 0, 0xD0);
                 }
             }

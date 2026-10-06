@@ -1253,105 +1253,105 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
         case 0x8002ACAB:
             work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
         case 0xCAB2ACAB:
             work->state = BTL_SORA_STATE_FIRE;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
         case 20:
             work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
         case 0x8002D4B5:
             work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
         case 0xCB52D4B5:
             work->state = BTL_SORA_STATE_BLIZZARD;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
         case 21:
             work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
         case 0x8002FCBF:
             work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
         case 0xCBF2FCBF:
             work->state = BTL_SORA_STATE_THUNDER;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
         case 22:
             work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 0;
             break;
         case 0x800324C9:
             work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 0;
             break;
         case 0xCC9324C9:
             work->state = BTL_SORA_STATE_CURE;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 0;
             break;
         case 24:
             work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 0;
+            work->variant[0] = SPELL_TIER_BASE;
             work->breakAnim = 1;
             break;
         case 0x800374DD:
             work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 1;
+            work->variant[0] = SPELL_TIER_RA;
             work->breakAnim = 2;
             break;
         case 0xCDD374DD:
             work->state = BTL_SORA_STATE_STOP;
             work->steps = 0;
             work->stateTimer = 0;
-            work->variant[0] = 2;
+            work->variant[0] = SPELL_TIER_GA;
             work->breakAnim = 3;
             break;
         case 23:
@@ -2598,13 +2598,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->stateTimer == 27) {
             switch (work->variant[0]) {
             case 0:
-                BgFxStartCure(0, act->x, act->y, act->z - 11264);
+                BgFxStartCure(SPELL_TIER_BASE, act->x, act->y, act->z - 11264);
                 break;
             case 1:
-                BgFxStartCure(1, act->x, act->y, act->z - 11264);
+                BgFxStartCure(SPELL_TIER_RA, act->x, act->y, act->z - 11264);
                 break;
             case 2:
-                BgFxStartCure(2, act->x, act->y, act->z - 11264);
+                BgFxStartCure(SPELL_TIER_GA, act->x, act->y, act->z - 11264);
                 break;
             }
         }
@@ -2705,10 +2705,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             switch (work->variant[0]) {
             case 0:
-                BgFxStartStop(0, x, y, z, 78);
+                BgFxStartStop(SPELL_TIER_BASE, x, y, z, 78);
                 break;
             case 1:
-                BgFxStartStop(1, x, y, z, 79);
+                BgFxStartStop(SPELL_TIER_RA, x, y, z, 79);
                 break;
             case 2:
             default:
@@ -3537,11 +3537,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 BgFxStartThunder(0, act->x, act->y, act->z - 16384, targetX, targetY, hit, 72);
                 break;
             case 1:
-                BgFxStartWideThunder(1, act->x, act->y, act->z - 16384, act->groundZ, 73);
+                BgFxStartWideThunder(SPELL_TIER_RA, act->x, act->y, act->z - 16384, act->groundZ, 73);
                 break;
             case 2:
             default:
-                BgFxStartWideThunder(2, act->x, act->y, act->z - 16384, act->groundZ, 74);
+                BgFxStartWideThunder(SPELL_TIER_GA, act->x, act->y, act->z - 16384, act->groundZ, 74);
                 break;
             }
         } else if (work->variant[0] != 0 && (s16)work->stateTimer == 47) {
@@ -3638,9 +3638,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             z = act->z - 4096;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartBlizzard(1, act->x - 18432, y, z, targetX, y, z, 1, attack);
+                BgFxStartBlizzard(SPELL_TIER_RA, act->x - 18432, y, z, targetX, y, z, 1, attack);
             } else {
-                BgFxStartBlizzard(1, act->x + 18432, y, z, targetX, y, z, 0, attack);
+                BgFxStartBlizzard(SPELL_TIER_RA, act->x + 18432, y, z, targetX, y, z, 0, attack);
             }
         } else if ((s16)work->stateTimer > 27) {
             enemy = work->target;
@@ -3711,9 +3711,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             z = act->z - 3584;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartFire(1, act->x - 18432, y, z, targetX, y, z, 1, attack);
+                BgFxStartFire(SPELL_TIER_RA, act->x - 18432, y, z, targetX, y, z, 1, attack);
             } else {
-                BgFxStartFire(1, act->x + 18432, y, z, targetX, y, z, 0, attack);
+                BgFxStartFire(SPELL_TIER_RA, act->x + 18432, y, z, targetX, y, z, 0, attack);
             }
         } else if ((s16)work->stateTimer > 27) {
             enemy = work->target;

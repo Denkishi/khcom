@@ -469,10 +469,10 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
         if (AnimGetFrame(&w->base.anim) == 3 && w->base.anim.timer == 0) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartBlizzard(1, act->x - 0x3700, act->y, act->z - 0x4000,
+                BgFxStartBlizzard(SPELL_TIER_RA, act->x - 0x3700, act->y, act->z - 0x4000,
                     act->x - 0x6E00, act->y, -0x1400, 1, 0x139);
             } else {
-                BgFxStartBlizzard(1, act->x + 0x3700, act->y, act->z - 0x4000,
+                BgFxStartBlizzard(SPELL_TIER_RA, act->x + 0x3700, act->y, act->z - 0x4000,
                     act->x + 0x6E00, act->y, -0x1400, 0, 0x139);
             }
         }

@@ -726,10 +726,10 @@ u8 task_hum_riku_1(RikuWork* work) {
                 w->flags |= RIKU_FLAG_FIRE_LAUNCHED;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    BgFxStartFire(3, act->x - 0x4A00, act->y, act->z - 0x1800,
+                    BgFxStartFire(SPELL_TIER_DARK, act->x - 0x4A00, act->y, act->z - 0x1800,
                         act->originX - 0xC800, act->originY, act->z - 0x1800, 1, 296);
                 } else {
-                    BgFxStartFire(3, act->x + 0x4A00, act->y, act->z - 0x1800,
+                    BgFxStartFire(SPELL_TIER_DARK, act->x + 0x4A00, act->y, act->z - 0x1800,
                         act->originX + 0xC800, act->originY, act->z - 0x1800, 0, 296);
                 }
             }

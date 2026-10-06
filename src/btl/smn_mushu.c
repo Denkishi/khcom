@@ -221,10 +221,10 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             m4aSongNumStart(SONG_EF_MU_FIRE);
 
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartFire(0, body->x - 0x3800, body->y, body->z - 0x800,
+                BgFxStartFire(SPELL_TIER_BASE, body->x - 0x3800, body->y, body->z - 0x800,
                               x, y, z, 1, attack);
             } else {
-                BgFxStartFire(0, body->x + 0x3800, body->y, body->z - 0x800,
+                BgFxStartFire(SPELL_TIER_BASE, body->x + 0x3800, body->y, body->z - 0x800,
                               x, y, z, 0, attack);
             }
         }

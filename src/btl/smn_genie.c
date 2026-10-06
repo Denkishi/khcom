@@ -441,7 +441,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     z = -0x1000;
                 }
 
-                BgFxStartStop(1, x, y, z, 147);
+                BgFxStartStop(SPELL_TIER_RA, x, y, z, 147);
                 work->fired = 1;
             }
         }

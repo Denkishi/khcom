@@ -1872,9 +1872,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->flags |= BTL_RIKU_FLAG_FIRE_LAUNCHED;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    BgFxStartFire(3, act->x - 18944, act->y, act->z - 6144, act->originX - 51200, act->originY, act->z - 6144, 1, 10);
+                    BgFxStartFire(SPELL_TIER_DARK, act->x - 18944, act->y, act->z - 6144, act->originX - 51200, act->originY, act->z - 6144, 1, 10);
                 } else {
-                    BgFxStartFire(3, act->x + 18944, act->y, act->z - 6144, act->originX + 51200, act->originY, act->z - 6144, 0, 10);
+                    BgFxStartFire(SPELL_TIER_DARK, act->x + 18944, act->y, act->z - 6144, act->originX + 51200, act->originY, act->z - 6144, 0, 10);
                 }
             }
         }

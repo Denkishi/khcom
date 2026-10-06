@@ -102,7 +102,7 @@ u8 task_emy_04_1(Emy04Work* work) {
 
             best->flags |= BTLOBJ_FLAG_HEAL_PENDING;
             best->damage = -0x1E;
-            BgFxStartCure(0, best->x, best->y, best->z);
+            BgFxStartCure(SPELL_TIER_BASE, best->x, best->y, best->z);
             w->healCount++;
         }
 

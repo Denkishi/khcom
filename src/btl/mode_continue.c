@@ -34,10 +34,10 @@ void ContinueModeUpdate() {
 
     if (work->state == CONTINUE_STATE_DONE) {
         switch (work->cursor) {
-        case 0:
+        case CONTINUE_OPTION_CONTINUE:
             RequestMapMode();
             break;
-        case 1:
+        case CONTINUE_OPTION_RETURN_TO_TITLE:
 #ifdef VERSION_EU
             DoSoftReset();
 #else

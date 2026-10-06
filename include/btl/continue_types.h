@@ -13,6 +13,11 @@ enum ContinueState {
     CONTINUE_STATE_DONE
 };
 
+enum ContinueOption {
+    CONTINUE_OPTION_CONTINUE,
+    CONTINUE_OPTION_RETURN_TO_TITLE
+};
+
 typedef struct ContinueWork {
     void* tiles;
     struct ObjPalette* palette;

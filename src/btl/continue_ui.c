@@ -41,10 +41,10 @@ static void* sContinueLanguageBgTiles[5] = {
 
 void LoadContinueCursorPalette(s32 cursor) {
     switch (cursor) {
-    case 0:
+    case CONTINUE_OPTION_CONTINUE:
         LoadBgPalette(0, gContinueCursor0BgPalettes, sizeof(gContinueCursor0BgPalettes));
         break;
-    case 1:
+    case CONTINUE_OPTION_RETURN_TO_TITLE:
         LoadBgPalette(0, gContinueCursor1BgPalettes, sizeof(gContinueCursor1BgPalettes));
         break;
     }
@@ -61,7 +61,7 @@ void ContinueSora_0(ContinueWork* work) {
     u8 i;
 
     SetBgMode1();
-    work->cursor = 0;
+    work->cursor = CONTINUE_OPTION_CONTINUE;
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 0, 31, 0);
     SetupBg(2, 2, 28, 10);
@@ -131,7 +131,7 @@ void ContinueRiku_0(ContinueWork* work) {
     u8 i;
 
     SetBgMode1();
-    work->cursor = 0;
+    work->cursor = CONTINUE_OPTION_CONTINUE;
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 0, 31, 0);
     SetupBg(2, 2, 28, 10);
@@ -226,25 +226,25 @@ static s32 Continue_1(ContinueWork* work) {
         }
 
         if ((GetKeysPressed() & DPAD_UP) != 0) {
-            if (work->cursor == 1) {
-                work->cursor = 0;
+            if (work->cursor == CONTINUE_OPTION_RETURN_TO_TITLE) {
+                work->cursor = CONTINUE_OPTION_CONTINUE;
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
 
         if ((GetKeysPressed() & DPAD_DOWN) != 0) {
-            if (work->cursor == 0) {
-                work->cursor = 1;
+            if (work->cursor == CONTINUE_OPTION_CONTINUE) {
+                work->cursor = CONTINUE_OPTION_RETURN_TO_TITLE;
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
 
         if ((GetKeysHeld() & A_BUTTON) != 0) {
             switch (work->cursor) {
-            case 0:
+            case CONTINUE_OPTION_CONTINUE:
                 FadeStartOut(FADE_MODE_BLACK, 96);
                 break;
-            case 1:
+            case CONTINUE_OPTION_RETURN_TO_TITLE:
                 FadeStartOut(FADE_MODE_BLACK, 96);
                 break;
             }

@@ -669,25 +669,25 @@ s32 task_tutorial_1(TutorialWork* work) {
 }
 
 void task_tutorial_2(TutorialWork* work) {
-    void* spr;
+    void* gfx;
     u16 x;
     u16 y;
-    s32 s;
+    s32 wave;
 
     if (work->flags & TUTORIAL_FLAG_SHOW_ARROW) {
-        spr = AnimUpdate(&work->anim);
+        gfx = AnimUpdate(&work->anim);
 
         if (work->anim.animId == 0) {
             x = work->arrowX;
-            s = SIN(gFrameCounter << 3);
-            y = (s >> 7) + work->arrowY;
+            wave = SIN(gFrameCounter << 3);
+            y = (wave >> 7) + work->arrowY;
         } else {
-            s = SIN(gFrameCounter << 3);
-            x = (s >> 7) + work->arrowX;
+            wave = SIN(gFrameCounter << 3);
+            x = (wave >> 7) + work->arrowX;
             y = work->arrowY;
         }
 
-        DrawSprite(x, y, spr, work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 0);
+        DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 0);
     }
 }
 

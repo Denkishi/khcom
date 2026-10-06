@@ -37,19 +37,19 @@ void task_btl_badstatus_0(BtlBadStatusWork* work, BtlObj* obj) {
 
 u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
     BtlObj* obj;
-    u32 state;
+    u32 status;
 
     obj = work->actor;
-    state = obj->badStatus;
+    status = obj->badStatus;
 
-    if (state == BAD_STATUS_NONE) {
+    if (status == BAD_STATUS_NONE) {
         return 1;
     }
 
-    if (state != work->status) {
-        work->status = state;
+    if (status != work->status) {
+        work->status = status;
 
-        switch (state) {
+        switch (status) {
         case BAD_STATUS_STOP:
             AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette;

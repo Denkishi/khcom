@@ -336,9 +336,9 @@ void MapChkEditMode(MapChkWork* work) {
 }
 
 void MapChkEditWorld(MapChkWork* work) {
-    u8 v = work->world;
-    const u8* t;
-    s32 n;
+    u8 prevWorld = work->world;
+    const u8* names;
+    s32 offset;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
         work->world = work->world == 0 ? 12 : work->world - 1;
@@ -348,11 +348,11 @@ void MapChkEditWorld(MapChkWork* work) {
         work->world = work->world > 11 ? 0 : work->world + 1;
     }
 
-    if (v != work->world) {
-        t = gMapChkWorldNames[0];
-        n = work->world * 8;
-        t += 4;
-        DebugTextPrint(80, 44, 2, *(const char**)(t + n));
+    if (prevWorld != work->world) {
+        names = gMapChkWorldNames[0];
+        offset = work->world * 8;
+        names += 4;
+        DebugTextPrint(80, 44, 2, *(const char**)(names + offset));
     }
 }
 
@@ -376,7 +376,7 @@ void MapChkEditFloor(MapChkWork* work) {
 }
 
 void MapChkEditForm(MapChkWork* work) {
-    u8 v = work->form;
+    u8 prevForm = work->form;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
         work->form = work->form == 0 ? 12 : work->form - 1;
@@ -386,7 +386,7 @@ void MapChkEditForm(MapChkWork* work) {
         work->form = work->form > 11 ? 0 : work->form + 1;
     }
 
-    if (v != work->form) {
+    if (prevForm != work->form) {
         LoadMapForm(work->form + 15);
         DebugTextPrint(80, 80, 2, sMapChkFormNames[work->form]);
         DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
@@ -399,19 +399,19 @@ void MapChkEditForm(MapChkWork* work) {
 }
 
 void MapChkEditWidth(MapChkWork* work) {
-    u8 v = sMapChkForm->maxWidth;
+    u8 width = sMapChkForm->maxWidth;
 
-    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 8) {
-        v--;
+    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && width > 8) {
+        width--;
     }
 
-    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && v <= 47) {
-        v++;
+    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && width <= 47) {
+        width++;
     }
 
-    if (sMapChkForm->maxWidth != v) {
-        sMapChkForm->maxWidth = v;
-        sMapChkForm->minWidth = v;
+    if (sMapChkForm->maxWidth != width) {
+        sMapChkForm->maxWidth = width;
+        sMapChkForm->minWidth = width;
         DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
         MapChkSetParamToggle((u8*)work, 1);
     }
@@ -424,22 +424,22 @@ void MapChkFlipParamToggle(MapChkWork* work) {
 }
 
 void MapChkEditMinHeight(MapChkWork* work) {
-    u8 v = sMapChkForm->minHeight;
+    u8 minHeight = sMapChkForm->minHeight;
 
-    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 2) {
-        v--;
+    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && minHeight > 2) {
+        minHeight--;
     }
 
-    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && v <= 9) {
-        v++;
+    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && minHeight <= 9) {
+        minHeight++;
     }
 
-    if (sMapChkForm->minHeight != v) {
-        sMapChkForm->minHeight = v;
+    if (sMapChkForm->minHeight != minHeight) {
+        sMapChkForm->minHeight = minHeight;
         DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
 
-        if (sMapChkForm->maxHeight < v) {
-            sMapChkForm->maxHeight = v;
+        if (sMapChkForm->maxHeight < minHeight) {
+            sMapChkForm->maxHeight = minHeight;
             DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
         }
 
@@ -448,22 +448,22 @@ void MapChkEditMinHeight(MapChkWork* work) {
 }
 
 void MapChkEditMaxHeight(MapChkWork* work) {
-    u8 v = sMapChkForm->maxHeight;
+    u8 maxHeight = sMapChkForm->maxHeight;
 
-    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 2) {
-        v--;
+    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && maxHeight > 2) {
+        maxHeight--;
     }
 
-    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && v <= 9) {
-        v++;
+    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && maxHeight <= 9) {
+        maxHeight++;
     }
 
-    if (sMapChkForm->maxHeight != v) {
-        sMapChkForm->maxHeight = v;
+    if (sMapChkForm->maxHeight != maxHeight) {
+        sMapChkForm->maxHeight = maxHeight;
         DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
 
-        if (sMapChkForm->minHeight > v) {
-            sMapChkForm->minHeight = v;
+        if (sMapChkForm->minHeight > maxHeight) {
+            sMapChkForm->minHeight = maxHeight;
             DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
         }
 
@@ -472,22 +472,22 @@ void MapChkEditMaxHeight(MapChkWork* work) {
 }
 
 void MapChkEditMinDepth(MapChkWork* work) {
-    u8 v = sMapChkForm->minDepth;
+    u8 minDepth = sMapChkForm->minDepth;
 
-    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 3) {
-        v--;
+    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && minDepth > 3) {
+        minDepth--;
     }
 
-    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && v <= 47) {
-        v++;
+    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && minDepth <= 47) {
+        minDepth++;
     }
 
-    if (sMapChkForm->minDepth != v) {
-        sMapChkForm->minDepth = v;
+    if (sMapChkForm->minDepth != minDepth) {
+        sMapChkForm->minDepth = minDepth;
         DebugTextPrintNumber(80, 128, 2, sMapChkForm->minDepth);
 
-        if (sMapChkForm->maxDepth < v) {
-            sMapChkForm->maxDepth = v;
+        if (sMapChkForm->maxDepth < minDepth) {
+            sMapChkForm->maxDepth = minDepth;
             DebugTextPrintNumber(80, 140, 2, sMapChkForm->maxDepth);
         }
 
@@ -496,22 +496,22 @@ void MapChkEditMinDepth(MapChkWork* work) {
 }
 
 void MapChkEditMaxDepth(MapChkWork* work) {
-    u8 v = sMapChkForm->maxDepth;
+    u8 maxDepth = sMapChkForm->maxDepth;
 
-    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 3) {
-        v--;
+    if ((GetKeysRepeat() & DPAD_LEFT) != 0 && maxDepth > 3) {
+        maxDepth--;
     }
 
-    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && v <= 47) {
-        v++;
+    if ((GetKeysRepeat() & DPAD_RIGHT) != 0 && maxDepth <= 47) {
+        maxDepth++;
     }
 
-    if (sMapChkForm->maxDepth != v) {
-        sMapChkForm->maxDepth = v;
+    if (sMapChkForm->maxDepth != maxDepth) {
+        sMapChkForm->maxDepth = maxDepth;
         DebugTextPrintNumber(80, 140, 2, sMapChkForm->maxDepth);
 
-        if (sMapChkForm->minDepth > v) {
-            sMapChkForm->minDepth = v;
+        if (sMapChkForm->minDepth > maxDepth) {
+            sMapChkForm->minDepth = maxDepth;
             DebugTextPrintNumber(80, 128, 2, sMapChkForm->minDepth);
         }
 
@@ -520,8 +520,8 @@ void MapChkEditMaxDepth(MapChkWork* work) {
 }
 
 void Mode_MapChk_0() {
-    const u8* t;
-    s32 n;
+    const u8* names;
+    s32 offset;
 
     sMapChkWork = EwramAlloc(8);
     SaveLoadHeader();
@@ -551,10 +551,10 @@ void Mode_MapChk_0() {
     DebugTextPrint(24, 128, 2, sMapChkDeepLabel);
     DebugTextPrint(80, 68, 2, sMapChkOffText);
     DebugTextPrint(80, 32, 2, sMapChkModeNames[sMapChkWork->mode]);
-    t = gMapChkWorldNames[0];
-    n = sMapChkWork->world * 8;
-    t += 4;
-    DebugTextPrint(80, 44, 2, *(const char**)(t + n));
+    names = gMapChkWorldNames[0];
+    offset = sMapChkWork->world * 8;
+    names += 4;
+    DebugTextPrint(80, 44, 2, *(const char**)(names + offset));
     DebugTextPrintNumber(80, 56, 2, sMapChkWork->floor + 1);
     DebugTextPrint(80, 80, 2, sMapChkFormNames[sMapChkWork->form]);
     DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
@@ -567,7 +567,7 @@ void Mode_MapChk_0() {
 }
 
 void Mode_MapChk_1() {
-    MapChkWork* e;
+    MapChkWork* work;
 
     DebugTextPrint(12, sMapChkWork->cursor * 12 + 32, 2, sMapChkCursorBlankText);
 
@@ -594,11 +594,11 @@ void Mode_MapChk_1() {
         gGameState.progression.friendFlags |= FRIEND_FLAG_DONALD_DUCK;
         gGameState.progression.friendFlags |= FRIEND_FLAG_GOOFY;
         gGameState.progression.tutorialFlags |= 0x778;
-        e = sMapChkWork;
+        work = sMapChkWork;
 
-        switch (e->mode) {
+        switch (work->mode) {
         case 1:
-            gGameState.floors[e->floor].world = gMapChkWorldNames[e->world][0];
+            gGameState.floors[work->floor].world = gMapChkWorldNames[work->world][0];
             MapChkSetFloorProgress(sMapChkWork->floor, 0);
             GoToFloor(sMapChkWork->floor);
             SetFloorWorld(gMapChkWorldNames[sMapChkWork->world][0]);
@@ -607,7 +607,7 @@ void Mode_MapChk_1() {
             RequestMapMode();
             break;
         case 2:
-            gGameState.floors[e->floor].world = 0;
+            gGameState.floors[work->floor].world = 0;
             MapChkSetFloorProgress(sMapChkWork->floor, 0);
             GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_ENTRANCE_HALL;

@@ -21,7 +21,7 @@
 
 void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     u8 angle;
-    s32 spd;
+    s32 speed;
 
     work->x = src->x;
     work->y = src->y;
@@ -49,12 +49,12 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     }
 
     work->bounceSpeed = 0x400;
-    spd = 384;
+    speed = 384;
     work->collected = 0;
     work->orbitRadius = 0x100;
     gBtlWork->prizeCount++;
-    work->vx = (gSineTable[angle] * spd) >> 8;
-    work->vy = (-gSineTable[angle + 64] * spd) >> 8;
+    work->vx = (gSineTable[angle] * speed) >> 8;
+    work->vy = (-gSineTable[angle + 64] * speed) >> 8;
     work->actor = gBtlWork->actor;
 }
 
@@ -66,7 +66,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
     s32 tx;
     s32 ty;
     s32 tz;
-    u64 f;
+    u64 flags;
 
     if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
@@ -107,10 +107,10 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 
         if (work->flags & BTL_PRIZE_FLAG_CAN_COLLECT) {
             hit = 0;
-            f = gBtlWork->flags;
+            flags = gBtlWork->flags;
 
-            if (f & BTL_FLAG_VS_BATTLE) {
-                if (f & BTL_FLAG_VS_LINK_PARENT) {
+            if (flags & BTL_FLAG_VS_BATTLE) {
+                if (flags & BTL_FLAG_VS_LINK_PARENT) {
                     if (gRikuBtlWork->hcEffect == 6) {
                         range = 0x10000;
                     } else {
@@ -229,19 +229,19 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 void task_btl_premire_2(BtlPremireWork* work) {
     s16 x;
     s16 y;
-    ObjAffine* aff;
+    ObjAffine* affine;
 
     if (work->flags & BTL_PRIZE_FLAG_SPRITE_VISIBLE) {
-        u16 anim = GetBattleSpritePriorityFlags(work->y);
+        u16 flags = GetBattleSpritePriorityFlags(work->y);
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
-        aff = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
-        DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, anim,
+        affine = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags,
                    -4100 - (work->y >> 8) * 4);
 
         if (work->flags & BTL_PRIZE_FLAG_DRAW_SHADOW) {
             WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
-            DrawSprite(x, y, work->gfx2, work->tiles, work->palette, aff, anim, 0xFFFF);
+            DrawSprite(x, y, work->gfx2, work->tiles, work->palette, affine, flags, 0xFFFF);
         }
     }
 }

@@ -23,7 +23,7 @@
 
 void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     u8 angle;
-    s32 spd;
+    s32 speed;
 
     work->x = src->x;
     work->y = src->y;
@@ -53,56 +53,56 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
         work->healAmount = 0;
         work->exp = 1400;
         work->bounceSpeed = 1280;
-        spd = 384;
+        speed = 384;
         break;
     case 1:
         work->gfx = gBPuraizuFrame2;
         work->healAmount = 3;
         work->exp = 0;
         work->bounceSpeed = 0x300;
-        spd = 76;
+        speed = 76;
         break;
     case 2:
         work->gfx = gBPuraizuFrame3;
         work->healAmount = 10;
         work->exp = 0;
         work->bounceSpeed = 0x300;
-        spd = 76;
+        speed = 76;
         break;
     case 3:
         work->gfx = gBPuraizuFrame4;
         work->healAmount = 0;
         work->exp = 1;
         work->bounceSpeed = 0x400;
-        spd = 128;
+        speed = 128;
         break;
     case 4:
         work->gfx = gBPuraizuFrame5;
         work->healAmount = 0;
         work->exp = 10;
         work->bounceSpeed = 0x400;
-        spd = 128;
+        speed = 128;
         break;
     case 5:
         work->gfx = gBPuraizuFrame6;
         work->healAmount = 0;
         work->exp = 60;
         work->bounceSpeed = 0x400;
-        spd = 128;
+        speed = 128;
         break;
     case 6:
         work->gfx = gBPuraizuFrame7;
         work->healAmount = 0;
         work->exp = 5;
         work->bounceSpeed = 0x400;
-        spd = 179;
+        speed = 179;
         break;
     case 7:
         work->gfx = gBPuraizuFrame8;
         work->healAmount = 0;
         work->exp = 30;
         work->bounceSpeed = 0x400;
-        spd = 179;
+        speed = 179;
         break;
     case 8:
     default:
@@ -110,15 +110,15 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
         work->healAmount = 0;
         work->exp = 199;
         work->bounceSpeed = 0x400;
-        spd = 179;
+        speed = 179;
         break;
     }
 
     work->collected = 0;
     work->orbitRadius = 0x100;
     gBtlWork->prizeCount++;
-    work->vx = (gSineTable[angle] * spd) >> 8;
-    work->vy = (-gSineTable[angle + 64] * spd) >> 8;
+    work->vx = (gSineTable[angle] * speed) >> 8;
+    work->vy = (-gSineTable[angle + 64] * speed) >> 8;
 
     if (abs(work->vx) <= 50) {
         if (work->vx < 0) {
@@ -134,16 +134,16 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
 #define DIST(a, b) ((a) - (b) >= 0 ? (a) - (b) : (b) - (a))
 s32 task_btl_prize_1(BtlPrizeWork* work) {
     s32 hit;
-    s32 near;
+    s32 rikuNearer;
     s32 range;
-    s32 d1;
-    s32 d2;
+    s32 mainDist;
+    s32 rikuDist;
     s32 vz;
     s32 tx;
     s32 ty;
     s32 tz;
-    u64 f;
-    u64 bit;
+    u64 flags;
+    u64 linkParent;
 
     if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
@@ -184,24 +184,24 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
 
         if (work->flags & BTL_PRIZE_FLAG_CAN_COLLECT) {
             hit = 0;
-            f = gBtlWork->flags;
+            flags = gBtlWork->flags;
 
-            if (f & BTL_FLAG_VS_BATTLE) {
-                d1 = DIST(work->x, gBtlWork->actor->x);
-                d2 = DIST(work->x, gRikuBtlWork->actor->x);
+            if (flags & BTL_FLAG_VS_BATTLE) {
+                mainDist = DIST(work->x, gBtlWork->actor->x);
+                rikuDist = DIST(work->x, gRikuBtlWork->actor->x);
 
-                if (d1 == d2) {
-                    bit = f & BTL_FLAG_VS_LINK_PARENT;
-                    near = bit != 0;
+                if (mainDist == rikuDist) {
+                    linkParent = flags & BTL_FLAG_VS_LINK_PARENT;
+                    rikuNearer = linkParent != 0;
                 } else {
-                    near = 1;
+                    rikuNearer = 1;
 
-                    if (d1 < d2) {
-                        near = 0;
+                    if (mainDist < rikuDist) {
+                        rikuNearer = 0;
                     }
                 }
 
-                if (near) {
+                if (rikuNearer) {
                     if (gRikuBtlWork->hcEffect == 6) {
                         range = 0x10000;
                     } else {
@@ -333,19 +333,19 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
 void task_btl_prize_2(BtlPrizeWork* work) {
     s16 x;
     s16 y;
-    ObjAffine* aff;
+    ObjAffine* affine;
 
     if (work->flags & BTL_PRIZE_FLAG_SPRITE_VISIBLE) {
-        s32 pri = 0x800;
+        s32 flags = 0x800;
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
-        aff = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
-        DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, pri,
+        affine = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags,
                    -4100 - (work->y >> 8) * 4);
 
         if (work->flags & BTL_PRIZE_FLAG_DRAW_SHADOW) {
             WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
-            DrawSprite(x, y, work->gfx2, work->tiles, work->palette, aff, pri, 0xFFFF);
+            DrawSprite(x, y, work->gfx2, work->tiles, work->palette, affine, flags, 0xFFFF);
         }
     }
 }

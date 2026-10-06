@@ -40,28 +40,28 @@ void task_btl_shadow_2(BtlShadowWork* work) {
     BtlObj* actor = work->actor;
     s16 x;
     s16 y;
-    u16 anim;
-    ObjAffine* aff;
+    u16 flags;
+    ObjAffine* affine;
 
     if (actor->shadowPriority != 0) {
         if (!(actor->flags & 0x0000000402000000)) {
-            anim = GetBattleSpritePriorityFlags(actor->y);
+            flags = GetBattleSpritePriorityFlags(actor->y);
 
             if (actor->z >= 0 && gBtlWork->scale == 0x100) {
-                aff = NULL;
+                affine = NULL;
             } else {
-                s32 sc = 0x100 - (actor->groundZ - actor->z) / 128;
-                sc = (gBtlWork->scale * sc) >> 8;
+                s32 scale = 0x100 - (actor->groundZ - actor->z) / 128;
+                scale = (gBtlWork->scale * scale) >> 8;
 
-                if (sc <= 127) {
-                    sc = 128;
+                if (scale <= 127) {
+                    scale = 128;
                 }
 
-                aff = AllocObjAffine(0, sc, sc, sc > 0x100);
+                affine = AllocObjAffine(0, scale, scale, scale > 0x100);
             }
 
             WorldToScreen(&x, &y, actor->x, actor->y, actor->groundZ);
-            DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, anim, actor->shadowPriority);
+            DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags, actor->shadowPriority);
         }
     }
 }

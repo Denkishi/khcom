@@ -26,14 +26,14 @@ static void Continue_0() {
 }
 
 void ContinueModeUpdate() {
-    ContinueWork* w;
+    ContinueWork* work;
 
     TaskPoolUpdate(&sContinueTaskPool);
     TaskPoolDraw(&sContinueTaskPool);
-    w = sContinueTask->work;
+    work = sContinueTask->work;
 
-    if (w->state == CONTINUE_STATE_DONE) {
-        switch (w->cursor) {
+    if (work->state == CONTINUE_STATE_DONE) {
+        switch (work->cursor) {
         case 0:
             RequestMapMode();
             break;

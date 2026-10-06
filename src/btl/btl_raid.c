@@ -220,7 +220,7 @@ BtlObj* BtlRaidGetTarget(BtlRaidWork* work) {
 
 u8 task_btl_raid_1(BtlRaidWork* work) {
     BtlObj* obj;
-    u16 hit;
+    u16 edge;
     s32 x;
     s32 y;
     s32 z;
@@ -274,9 +274,9 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     case BTL_RAID_STATE_RICOCHET:
         work->x += gSineTable[(u8)work->angle] * 8;
         work->y -= gSineTable[(u8)work->angle + 64] * 4;
-        hit = ClampBattlePosition(&work->x, &work->y, 0, 0);
+        edge = ClampBattlePosition(&work->x, &work->y, 0, 0);
 
-        switch (hit) {
+        switch (edge) {
         case 1:
             work->angle = GetRandom() % 65 + 32;
             break;
@@ -295,7 +295,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             m4aSongNumStart(work->song);
         }
 
-        if (hit != 0) {
+        if (edge != 0) {
             if (work->timer > 180) {
                 work->state = BTL_RAID_STATE_RETURN;
                 work->timer = 0;

@@ -198,7 +198,7 @@ void ContinueRiku_0(ContinueWork* work) {
 }
 
 static s32 Continue_1(ContinueWork* work) {
-    const s32* t;
+    const s32* cursorY;
 
     BgAnimUpdate();
     work->gfx = AnimUpdate(&work->anim);
@@ -278,8 +278,8 @@ static s32 Continue_1(ContinueWork* work) {
     }
 
     LoadContinueCursorPalette(work->cursor);
-    t = sContinueCursorY;
-    work->y += (t[work->cursor] - work->y) >> 3;
+    cursorY = sContinueCursorY;
+    work->y += (cursorY[work->cursor] - work->y) >> 3;
     work->unk_64 += 4;
 }
 

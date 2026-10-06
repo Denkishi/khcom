@@ -88,39 +88,39 @@ void* GetExpDigitGfx(s32 digit, u8 leading) {
 }
 
 void BtlExpSetNumber(BtlExpWork* work, u32 value) {
-    void* d0;
-    void* d1;
-    void* d2;
-    void* d3;
-    u8 flag;
+    void* tenThousands;
+    void* thousands;
+    void* hundreds;
+    void* tens;
+    u8 leading;
 
-    d0 = GetExpDigitGfx(value / 10000, 0);
-    work->gfx2[0] = d0;
+    tenThousands = GetExpDigitGfx(value / 10000, 0);
+    work->gfx2[0] = tenThousands;
     value %= 10000;
-    flag = d0 != NULL;
+    leading = tenThousands != NULL;
 
-    d1 = GetExpDigitGfx(value / 1000, flag);
-    work->gfx2[1] = d1;
+    thousands = GetExpDigitGfx(value / 1000, leading);
+    work->gfx2[1] = thousands;
     value %= 1000;
 
-    if (d1 != NULL) {
-        flag = 1;
+    if (thousands != NULL) {
+        leading = 1;
     }
 
-    d2 = GetExpDigitGfx(value / 100, flag);
-    work->gfx2[2] = d2;
+    hundreds = GetExpDigitGfx(value / 100, leading);
+    work->gfx2[2] = hundreds;
     value %= 100;
 
-    if (d2 != NULL) {
-        flag = 1;
+    if (hundreds != NULL) {
+        leading = 1;
     }
 
-    d3 = GetExpDigitGfx(value / 10, flag);
-    work->gfx2[3] = d3;
+    tens = GetExpDigitGfx(value / 10, leading);
+    work->gfx2[3] = tens;
     value %= 10;
 
-    if (d3 != NULL) {
-        flag = 1;
+    if (tens != NULL) {
+        leading = 1;
     }
 
 #ifdef VERSION_JP

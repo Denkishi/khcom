@@ -49,79 +49,79 @@ void task_btl_lockon_0(BtlLockonWork* work) {
 }
 
 void SelectLockonTarget() {
-    BtlObj* p;
-    BtlObj* e;
-    s32 min;
+    BtlObj* player;
+    BtlObj* enemy;
+    s32 minDist;
 
-    p = gBtlWork->actor;
-    min = 0x40000;
+    player = gBtlWork->actor;
+    minDist = 0x40000;
     gBtlWork->actor2 = NULL;
-    e = ListPoolFirst(&gBtlWork->pool);
+    enemy = ListPoolFirst(&gBtlWork->pool);
 
-    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        for (; e != NULL; e = ListPoolNext(&e->node)) {
-            if (p->x < e->x || p->x - e->x > 0x9600 ||
-                (p->y - e->y >= 0 ? p->y - e->y > 0x1800
-                                              : e->y - p->y > 0x1800) ||
-                (p->z - e->z >= 0 ? p->z - e->z > 0x6400
-                                              : e->z - p->z > 0x6400) ||
-                (e->flags & BTLOBJ_FLAG_UNHITTABLE) || p->x - e->x >= min) {
+    if (player->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        for (; enemy != NULL; enemy = ListPoolNext(&enemy->node)) {
+            if (player->x < enemy->x || player->x - enemy->x > 0x9600 ||
+                (player->y - enemy->y >= 0 ? player->y - enemy->y > 0x1800
+                                              : enemy->y - player->y > 0x1800) ||
+                (player->z - enemy->z >= 0 ? player->z - enemy->z > 0x6400
+                                              : enemy->z - player->z > 0x6400) ||
+                (enemy->flags & BTLOBJ_FLAG_UNHITTABLE) || player->x - enemy->x >= minDist) {
                 continue;
             }
 
-            gBtlWork->actor2 = e;
-            min = p->x - e->x;
+            gBtlWork->actor2 = enemy;
+            minDist = player->x - enemy->x;
         }
 
         if (gBtlWork->actor2 == NULL) {
-            min = 0x40000;
-            e = ListPoolFirst(&gBtlWork->pool);
+            minDist = 0x40000;
+            enemy = ListPoolFirst(&gBtlWork->pool);
 
-            for (; e != NULL; e = ListPoolNext(&e->node)) {
-                if (p->x > e->x || e->x - p->x > 0x5A00 ||
-                    (p->y - e->y >= 0 ? p->y - e->y > 0x1800
-                                                  : e->y - p->y > 0x1800) ||
-                    (p->z - e->z >= 0 ? p->z - e->z > 0x6400
-                                                  : e->z - p->z > 0x6400) ||
-                    (e->flags & BTLOBJ_FLAG_UNHITTABLE) || e->x - p->x >= min) {
+            for (; enemy != NULL; enemy = ListPoolNext(&enemy->node)) {
+                if (player->x > enemy->x || enemy->x - player->x > 0x5A00 ||
+                    (player->y - enemy->y >= 0 ? player->y - enemy->y > 0x1800
+                                                  : enemy->y - player->y > 0x1800) ||
+                    (player->z - enemy->z >= 0 ? player->z - enemy->z > 0x6400
+                                                  : enemy->z - player->z > 0x6400) ||
+                    (enemy->flags & BTLOBJ_FLAG_UNHITTABLE) || enemy->x - player->x >= minDist) {
                     continue;
                 }
 
-                gBtlWork->actor2 = e;
-                min = e->x - p->x;
+                gBtlWork->actor2 = enemy;
+                minDist = enemy->x - player->x;
             }
         }
     } else {
-        for (; e != NULL; e = ListPoolNext(&e->node)) {
-            if (p->x > e->x || e->x - p->x > 0x9600 ||
-                (p->y - e->y >= 0 ? p->y - e->y > 0x1800
-                                              : e->y - p->y > 0x1800) ||
-                (p->z - e->z >= 0 ? p->z - e->z > 0x6400
-                                              : e->z - p->z > 0x6400) ||
-                (e->flags & BTLOBJ_FLAG_UNHITTABLE) || e->x - p->x >= min) {
+        for (; enemy != NULL; enemy = ListPoolNext(&enemy->node)) {
+            if (player->x > enemy->x || enemy->x - player->x > 0x9600 ||
+                (player->y - enemy->y >= 0 ? player->y - enemy->y > 0x1800
+                                              : enemy->y - player->y > 0x1800) ||
+                (player->z - enemy->z >= 0 ? player->z - enemy->z > 0x6400
+                                              : enemy->z - player->z > 0x6400) ||
+                (enemy->flags & BTLOBJ_FLAG_UNHITTABLE) || enemy->x - player->x >= minDist) {
                 continue;
             }
 
-            gBtlWork->actor2 = e;
-            min = e->x - p->x;
+            gBtlWork->actor2 = enemy;
+            minDist = enemy->x - player->x;
         }
 
         if (gBtlWork->actor2 == NULL) {
-            min = 0x40000;
-            e = ListPoolFirst(&gBtlWork->pool);
+            minDist = 0x40000;
+            enemy = ListPoolFirst(&gBtlWork->pool);
 
-            for (; e != NULL; e = ListPoolNext(&e->node)) {
-                if (p->x < e->x || p->x - e->x > 0x5A00 ||
-                    (p->y - e->y >= 0 ? p->y - e->y > 0x1800
-                                                  : e->y - p->y > 0x1800) ||
-                    (p->z - e->z >= 0 ? p->z - e->z > 0x6400
-                                                  : e->z - p->z > 0x6400) ||
-                    (e->flags & BTLOBJ_FLAG_UNHITTABLE) || p->x - e->x >= min) {
+            for (; enemy != NULL; enemy = ListPoolNext(&enemy->node)) {
+                if (player->x < enemy->x || player->x - enemy->x > 0x5A00 ||
+                    (player->y - enemy->y >= 0 ? player->y - enemy->y > 0x1800
+                                                  : enemy->y - player->y > 0x1800) ||
+                    (player->z - enemy->z >= 0 ? player->z - enemy->z > 0x6400
+                                                  : enemy->z - player->z > 0x6400) ||
+                    (enemy->flags & BTLOBJ_FLAG_UNHITTABLE) || player->x - enemy->x >= minDist) {
                     continue;
                 }
 
-                gBtlWork->actor2 = e;
-                min = p->x - e->x;
+                gBtlWork->actor2 = enemy;
+                minDist = player->x - enemy->x;
             }
         }
     }
@@ -148,15 +148,15 @@ u8 task_btl_lockon_1(BtlLockonWork* work) {
 }
 
 void task_btl_lockon_2(BtlLockonWork* work) {
-    BtlObj* e;
+    BtlObj* target;
     s16 x;
     s16 y;
 
-    e = gBtlWork->actor2;
+    target = gBtlWork->actor2;
 
-    if (e != NULL) {
-        WorldToScreen(&x, &y, e->x + (e->centerOffsetX << 8), e->y,
-                      e->z - (e->centerHeight << 8));
+    if (target != NULL) {
+        WorldToScreen(&x, &y, target->x + (target->centerOffsetX << 8), target->y,
+                      target->z - (target->centerHeight << 8));
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 16);
     }
 }
@@ -199,7 +199,7 @@ u8 task_btl_area_1(BtlAreaWork* work) {
 }
 
 void task_btl_area_2(BtlAreaWork* work) {
-    BtlObj* e;
+    BtlObj* obj;
     s16 x;
     s16 y;
 
@@ -229,46 +229,46 @@ void task_btl_area_2(BtlAreaWork* work) {
     DrawSprite(x, y, gBtlAreaFrame4, work->tiles, work->palette, NULL, SPRITE_FLAG_VFLIP, 0x101);
 
     if (gBtlWork->soraOwnsPlay) {
-        e = ListPoolFirst(&gBtlWork->pool);
+        obj = ListPoolFirst(&gBtlWork->pool);
 
-        while (e != NULL) {
-            WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
-                          e->y - (e->radiusY << 8), e->z);
+        while (obj != NULL) {
+            WorldToScreen(&x, &y, obj->x - (obj->radiusX << 8),
+                          obj->y - (obj->radiusY << 8), obj->z);
             DrawSprite(x, y, gBtlAreaFrame0, work->tiles, work->palette, NULL, 0, 0x101);
-            WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
-                          e->y - (e->radiusY << 8), e->z);
+            WorldToScreen(&x, &y, obj->x + (obj->radiusX << 8),
+                          obj->y - (obj->radiusY << 8), obj->z);
             DrawSprite(x, y, gBtlAreaFrame1, work->tiles, work->palette, NULL, 0, 0x101);
-            WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
-                          e->y + (e->radiusY << 8), e->z);
+            WorldToScreen(&x, &y, obj->x - (obj->radiusX << 8),
+                          obj->y + (obj->radiusY << 8), obj->z);
             DrawSprite(x, y, gBtlAreaFrame3, work->tiles, work->palette, NULL, 0, 0x101);
-            WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
-                          e->y + (e->radiusY << 8), e->z);
+            WorldToScreen(&x, &y, obj->x + (obj->radiusX << 8),
+                          obj->y + (obj->radiusY << 8), obj->z);
             DrawSprite(x, y, gBtlAreaFrame2, work->tiles, work->palette, NULL, 0, 0x101);
-            WorldToScreen(&x, &y, e->x, e->y, e->z);
+            WorldToScreen(&x, &y, obj->x, obj->y, obj->z);
             DrawSprite(x, y, gBtlAreaFrame5, work->tiles, work->palette, NULL, 0, 0x101);
-            WorldToScreen(&x, &y, e->x, e->y,
-                          e->z - (e->height << 8));
+            WorldToScreen(&x, &y, obj->x, obj->y,
+                          obj->z - (obj->height << 8));
             DrawSprite(x, y, gBtlAreaFrame4, work->tiles, work->palette, NULL, 0, 0x101);
-            e = ListPoolNext(&e->node);
+            obj = ListPoolNext(&obj->node);
         }
     } else {
-        e = gBtlWork->actor;
-        WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
-                      e->y - (e->radiusY << 8), e->z);
+        obj = gBtlWork->actor;
+        WorldToScreen(&x, &y, obj->x - (obj->radiusX << 8),
+                      obj->y - (obj->radiusY << 8), obj->z);
         DrawSprite(x, y, gBtlAreaFrame0, work->tiles, work->palette, NULL, 0, 0x101);
-        WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
-                      e->y - (e->radiusY << 8), e->z);
+        WorldToScreen(&x, &y, obj->x + (obj->radiusX << 8),
+                      obj->y - (obj->radiusY << 8), obj->z);
         DrawSprite(x, y, gBtlAreaFrame1, work->tiles, work->palette, NULL, 0, 0x101);
-        WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
-                      e->y + (e->radiusY << 8), e->z);
+        WorldToScreen(&x, &y, obj->x - (obj->radiusX << 8),
+                      obj->y + (obj->radiusY << 8), obj->z);
         DrawSprite(x, y, gBtlAreaFrame3, work->tiles, work->palette, NULL, 0, 0x101);
-        WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
-                      e->y + (e->radiusY << 8), e->z);
+        WorldToScreen(&x, &y, obj->x + (obj->radiusX << 8),
+                      obj->y + (obj->radiusY << 8), obj->z);
         DrawSprite(x, y, gBtlAreaFrame2, work->tiles, work->palette, NULL, 0, 0x101);
-        WorldToScreen(&x, &y, e->x, e->y, e->z);
+        WorldToScreen(&x, &y, obj->x, obj->y, obj->z);
         DrawSprite(x, y, gBtlAreaFrame5, work->tiles, work->palette, NULL, 0, 0x101);
-        WorldToScreen(&x, &y, e->x, e->y,
-                      e->z - (e->height << 8));
+        WorldToScreen(&x, &y, obj->x, obj->y,
+                      obj->z - (obj->height << 8));
         DrawSprite(x, y, gBtlAreaFrame4, work->tiles, work->palette, NULL, 0, 0x101);
     }
 }

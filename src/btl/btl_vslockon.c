@@ -45,12 +45,12 @@ s32 task_btl_vslockon_1(BtlVslockonWork* work) {
 void task_btl_vslockon_2(BtlVslockonWork* work) {
     s16 x;
     s16 y;
-    BtlObj* p;
+    BtlObj* target;
 
-    p = gBtlWork->actor2;
+    target = gBtlWork->actor2;
 
-    if (p != NULL) {
-        WorldToScreen(&x, &y, p->x, p->y, p->z - (p->centerHeight << 8));
+    if (target != NULL) {
+        WorldToScreen(&x, &y, target->x, target->y, target->z - (target->centerHeight << 8));
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, 0, 0x100);
     }
 }

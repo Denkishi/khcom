@@ -77,10 +77,10 @@ void mode_chkeff_0() {
 
 void mode_chkeff_1() {
     ChkEffWork** wp;
-    void* obj;
+    void* def;
     s16 prev;
-    u16 a;
-    u16 b;
+    u16 frame;
+    u16 timer;
 
     if (GetKeysPressed() & B_BUTTON) {
         ModeRequest(&gModeDebug, 0);
@@ -107,11 +107,11 @@ void mode_chkeff_1() {
             sChkEffWork->effectIndex = 0;
         }
 
-        obj = gChkEffBgAnimations[sChkEffWork->effectIndex];
+        def = gChkEffBgAnimations[sChkEffWork->effectIndex];
 
         if (prev != sChkEffWork->effectIndex) {
             sChkEffWork->paused = 0;
-            BgAnimStart(obj, 120, 80);
+            BgAnimStart(def, 120, 80);
         }
 
         if (GetKeysRepeat() & DPAD_UP) {
@@ -144,7 +144,7 @@ void mode_chkeff_1() {
         }
 
         if (BgAnimIsStopped() && (GetKeysHeld() & A_BUTTON)) {
-            BgAnimStart(obj, 120, 80);
+            BgAnimStart(def, 120, 80);
         }
 
         if (sChkEffWork->paused) {
@@ -160,7 +160,7 @@ void mode_chkeff_1() {
         PrintString(0, 17, 0, sChkEffBlankLineText);
         PrintString(0, 18, 0, sChkEffBlankLineText);
         PrintString(0, 19, 0, sChkEffBlankLineText);
-        BgAnimGetFrameState(&a, &b);
+        BgAnimGetFrameState(&frame, &timer);
         PrintString(0, 14, 0, sChkEffAlphaALabel);
         PrintNumber(6, 14, 0, (*wp)->alphaA);
         PrintString(0, 15, 0, sChkEffAlphaBLabel);
@@ -170,9 +170,9 @@ void mode_chkeff_1() {
         PrintString(0, 17, 0, sChkEffNumLabel);
         PrintNumber(6, 17, 0, (*wp)->effectIndex);
         PrintString(0, 18, 0, sChkEffPicLabel);
-        PrintNumber(6, 18, 0, a);
+        PrintNumber(6, 18, 0, frame);
         PrintString(0, 19, 0, sChkEffFrameLabel);
-        PrintNumber(6, 19, 0, b);
+        PrintNumber(6, 19, 0, timer);
         TaskPoolUpdate(&(*wp)->pool);
         TaskPoolDraw(&(*wp)->pool);
         BgAnimSetTransform((*wp)->rotation, (*wp)->scale, (*wp)->scale);

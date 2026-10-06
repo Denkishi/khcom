@@ -95,24 +95,24 @@ void mode_debug_0() {
 }
 
 void mode_debug_1() {
-    s16 v;
-    s8 old;
+    s16 effect;
+    s8 prevPage;
     void* gfx;
 
-    v = GetPaletteEffect();
+    effect = GetPaletteEffect();
 
     switch (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
     case R_BUTTON:
-        if (v <= 23) {
-            SetPaletteEffect(v + 1);
+        if (effect <= 23) {
+            SetPaletteEffect(effect + 1);
             ModeRequest(&gModeDebug, 0);
             return;
         }
 
         break;
     case L_BUTTON:
-        if (v > -24) {
-            SetPaletteEffect(v - 1);
+        if (effect > -24) {
+            SetPaletteEffect(effect - 1);
             ModeRequest(&gModeDebug, 0);
             return;
         }
@@ -326,7 +326,7 @@ void mode_debug_1() {
 #endif
     }
 
-    old = sDebugWork->page;
+    prevPage = sDebugWork->page;
     sDebugWork->page = sDebugWork->cursor / 9;
 
     if (GetKeysRepeat() & DPAD_LEFT) {
@@ -347,7 +347,7 @@ void mode_debug_1() {
         sDebugWork->cursor = sDebugWork->page * 9;
     }
 
-    if (old != sDebugWork->page) {
+    if (prevPage != sDebugWork->page) {
         switch (sDebugWork->page) {
         case 0:
             DebugTextPrint(24, 12, 2, "\x82\x6c\x82\x60\x82\x68\x82\x6d\x81\x40\x81\x40\x81\x40\x81\x40");

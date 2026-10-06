@@ -19,7 +19,7 @@
 #include "sprite_palettes.h"
 
 void task_btl_escape_0(BtlEscapeWork* work) {
-    void** p;
+    void** frames;
 
     work->progressMax = 0x5A00;
 #ifdef VERSION_EU
@@ -28,34 +28,34 @@ void task_btl_escape_0(BtlEscapeWork* work) {
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         work->tiles = LoadObjTiles(gBtlEscapeTiles, 0x240);
-        p = gBtlEscapeFrames;
+        frames = gBtlEscapeFrames;
         break;
     case LANGUAGE_FRENCH:
         work->tiles = LoadObjTiles(gBtlEscapeFrenchTiles, 0x240);
-        p = gBtlEscapeFrenchFrames;
+        frames = gBtlEscapeFrenchFrames;
         break;
     case LANGUAGE_SPANISH:
         work->tiles = LoadObjTiles(gBtlEscapeSpanishTiles, 0x240);
-        p = gBtlEscapeSpanishFrames;
+        frames = gBtlEscapeSpanishFrames;
         break;
     case LANGUAGE_ITALIAN:
         work->tiles = LoadObjTiles(gBtlEscapeItalianTiles, 0x240);
-        p = gBtlEscapeItalianFrames;
+        frames = gBtlEscapeItalianFrames;
         break;
     case LANGUAGE_GERMAN:
     default:
         work->tiles = LoadObjTiles(gBtlEscapeGermanTiles, 0x240);
-        p = gBtlEscapeGermanFrames;
+        frames = gBtlEscapeGermanFrames;
         break;
     }
 #else
     work->tiles = LoadObjTiles(gBtlEscapeTiles, 0x240);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    p = gBtlEscapeFrames;
+    frames = gBtlEscapeFrames;
 #endif
-    work->gfx = p[0];
-    work->gfx2 = p[2];
-    work->gfx3 = p[1];
+    work->gfx = frames[0];
+    work->gfx2 = frames[2];
+    work->gfx3 = frames[1];
     work->progressRatio = 0;
     work->progress = 0;
     work->visible = 0;
@@ -99,8 +99,8 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     BtlObj* actor;
     s16 x;
     s16 y;
-    s32 v;
-    ObjAffine* aff;
+    s32 scale;
+    ObjAffine* affine;
 
     if (!work->visible) {
         return;
@@ -117,15 +117,15 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     }
 
     if (work->progressRatio > 0) {
-        v = work->progressRatio * 2;
+        scale = work->progressRatio * 2;
 
-        if (v > 256) {
-            aff = AllocObjAffine(0, v, 256, 1);
+        if (scale > 256) {
+            affine = AllocObjAffine(0, scale, 256, 1);
         } else {
-            aff = AllocObjAffine(0, v, 256, 0);
+            affine = AllocObjAffine(0, scale, 256, 0);
         }
 
-        DrawSprite(x, y, work->gfx3, work->tiles, work->palette, aff, 0, 1);
+        DrawSprite(x, y, work->gfx3, work->tiles, work->palette, affine, 0, 1);
     }
 }
 

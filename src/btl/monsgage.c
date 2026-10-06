@@ -16,56 +16,56 @@
 
 #ifdef VERSION_EU
 void* GetLocalizedString(const void* strings) {
-    void* const* s = strings;
+    void* const* byLanguage = strings;
 
     switch (gLanguage) {
     case LANGUAGE_ITALIAN:
-        return s[3];
+        return byLanguage[3];
     case LANGUAGE_FRENCH:
-        return s[1];
+        return byLanguage[1];
     case LANGUAGE_SPANISH:
-        return s[4];
+        return byLanguage[4];
     case LANGUAGE_GERMAN:
-        return s[2];
+        return byLanguage[2];
     case LANGUAGE_ENGLISH:
     default:
-        return s[0];
+        return byLanguage[0];
     }
 }
 
 void* GetLocalizedLines(const void* text) {
-    void* const* s = text;
+    void* const* byLanguage = text;
 
     switch (gLanguage) {
     case LANGUAGE_ITALIAN:
-        return s[3];
+        return byLanguage[3];
     case LANGUAGE_FRENCH:
-        return s[1];
+        return byLanguage[1];
     case LANGUAGE_SPANISH:
-        return s[4];
+        return byLanguage[4];
     case LANGUAGE_GERMAN:
-        return s[2];
+        return byLanguage[2];
     case LANGUAGE_ENGLISH:
     default:
-        return s[0];
+        return byLanguage[0];
     }
 }
 
 s32 GetLocalizedLineCount(const void* text) {
-    const u16* s = text;
+    const u16* halfwords = text;
 
     switch (gLanguage) {
     case LANGUAGE_ITALIAN:
-        return s[13];
+        return halfwords[13];
     case LANGUAGE_FRENCH:
-        return s[11];
+        return halfwords[11];
     case LANGUAGE_SPANISH:
-        return s[14];
+        return halfwords[14];
     case LANGUAGE_GERMAN:
-        return s[12];
+        return halfwords[12];
     case LANGUAGE_ENGLISH:
     default:
-        return s[10];
+        return halfwords[10];
     }
 }
 #endif

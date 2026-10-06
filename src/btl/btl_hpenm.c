@@ -133,8 +133,8 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
 void task_btl_hpenm_2(BtlHpenmWork* work) {
     void* gfx;
     void* bar;
-    s32 v;
-    ObjAffine* aff;
+    s32 scale;
+    ObjAffine* affine;
 
     if (!work->visible) {
         return;
@@ -366,42 +366,42 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     switch (work->gaugeSize) {
     case 0:
     case 1:
-        v = (work->hpRatio * 72) >> 8;
+        scale = (work->hpRatio * 72) >> 8;
         break;
     case 2:
-        v = (work->hpRatio * 109) >> 8;
+        scale = (work->hpRatio * 109) >> 8;
         break;
     case 3:
-        v = (work->hpRatio * 146) >> 8;
+        scale = (work->hpRatio * 146) >> 8;
         break;
     case 4:
-        v = (work->hpRatio * 182) >> 8;
+        scale = (work->hpRatio * 182) >> 8;
         break;
     case 5:
-        v = (work->hpRatio * 219) >> 8;
+        scale = (work->hpRatio * 219) >> 8;
         break;
     case 6:
-        v = work->hpRatio;
+        scale = work->hpRatio;
         break;
     default:
-        v = work->hpRatio;
+        scale = work->hpRatio;
         break;
     }
 
-    v *= 2;
+    scale *= 2;
 
     if (work->displayHp > 0) {
-        if (v <= 9) {
-            v = 10;
+        if (scale <= 9) {
+            scale = 10;
         }
 
-        if (v > 0x100) {
-            aff = AllocObjAffine(0, v, 0x100, 1);
+        if (scale > 0x100) {
+            affine = AllocObjAffine(0, scale, 0x100, 1);
         } else {
-            aff = AllocObjAffine(0, v, 0x100, 0);
+            affine = AllocObjAffine(0, scale, 0x100, 0);
         }
 
-        DrawSprite(217, 6, bar, work->tiles2, work->palette, aff, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
+        DrawSprite(217, 6, bar, work->tiles2, work->palette, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
     }
 }
 

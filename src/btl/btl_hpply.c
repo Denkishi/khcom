@@ -161,7 +161,7 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
 
 s32 task_btl_hpply_1(BtlHpplyWork* work) {
     BtlObj* actor;
-    s32 flag;
+    s32 lowHp;
 
     actor = gBtlWork->actor;
 
@@ -174,9 +174,9 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     }
 
     if (work->gaugeMode != BTL_HPPLY_GAUGE_MODE_EXTRA_BAR && work->hpRatio <= 63) {
-        flag = 1;
+        lowHp = 1;
     } else {
-        flag = 0;
+        lowHp = 0;
     }
 
     if (actor->hp < work->prevHp) {
@@ -186,7 +186,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     if (work->timer != 0) {
         AnimChange(&work->anim, 1, ANIM_FLAG_LOOP);
         work->timer--;
-    } else if (flag) {
+    } else if (lowHp) {
         AnimChange(&work->anim, 2, ANIM_FLAG_LOOP);
     } else {
         AnimChange(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -231,7 +231,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         break;
     }
 
-    if (flag) {
+    if (lowHp) {
         if (!work->alarmPlaying) {
             work->alarmPlaying = 1;
             m4aSongNumStart(SONG_SYS_ALART);
@@ -308,8 +308,8 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
 }
 
 void task_btl_hpply_2(BtlHpplyWork* work) {
-    s32 v;
-    ObjAffine* aff;
+    s32 scale;
+    ObjAffine* affine;
 
     DrawSprite(4, 2, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 1);
 
@@ -329,31 +329,31 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
 
     switch (work->gaugeMode) {
     case BTL_HPPLY_GAUGE_MODE_MAIN_BAR:
-        v = work->hpRatio;
+        scale = work->hpRatio;
         break;
     case BTL_HPPLY_GAUGE_MODE_SINGLE:
         switch (work->gaugeSize) {
         case 0:
         case 1:
-            v = (work->hpRatio * 72) >> 8;
+            scale = (work->hpRatio * 72) >> 8;
             break;
         case 2:
-            v = (work->hpRatio * 109) >> 8;
+            scale = (work->hpRatio * 109) >> 8;
             break;
         case 3:
-            v = (work->hpRatio * 146) >> 8;
+            scale = (work->hpRatio * 146) >> 8;
             break;
         case 4:
-            v = (work->hpRatio * 182) >> 8;
+            scale = (work->hpRatio * 182) >> 8;
             break;
         case 5:
-            v = (work->hpRatio * 219) >> 8;
+            scale = (work->hpRatio * 219) >> 8;
             break;
         case 6:
-            v = work->hpRatio;
+            scale = work->hpRatio;
             break;
         default:
-            v = work->hpRatio;
+            scale = work->hpRatio;
             break;
         }
 
@@ -362,51 +362,51 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
     default:
         switch (work->gaugeSize) {
         case 0:
-            v = (work->hpRatio * 36) >> 8;
+            scale = (work->hpRatio * 36) >> 8;
             break;
         case 1:
-            v = (work->hpRatio * 72) >> 8;
+            scale = (work->hpRatio * 72) >> 8;
             break;
         case 2:
-            v = (work->hpRatio * 109) >> 8;
+            scale = (work->hpRatio * 109) >> 8;
             break;
         case 3:
-            v = (work->hpRatio * 146) >> 8;
+            scale = (work->hpRatio * 146) >> 8;
             break;
         case 4:
-            v = (work->hpRatio * 182) >> 8;
+            scale = (work->hpRatio * 182) >> 8;
             break;
         case 5:
-            v = (work->hpRatio * 219) >> 8;
+            scale = (work->hpRatio * 219) >> 8;
             break;
         case 6:
-            v = work->hpRatio;
+            scale = work->hpRatio;
             break;
         default:
-            v = work->hpRatio;
+            scale = work->hpRatio;
             break;
         }
 
         break;
     }
 
-    v *= 2;
+    scale *= 2;
 
     if (work->displayHp > 0) {
-        if (v <= 9) {
-            v = 10;
+        if (scale <= 9) {
+            scale = 10;
         }
 
-        if (v > 0x100) {
-            aff = AllocObjAffine(0, v, 0x100, 1);
+        if (scale > 0x100) {
+            affine = AllocObjAffine(0, scale, 0x100, 1);
         } else {
-            aff = AllocObjAffine(0, v, 0x100, 0);
+            affine = AllocObjAffine(0, scale, 0x100, 0);
         }
 
         if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_EXTRA_BAR) {
-            DrawSprite(31, 9, gBHpgagFrame26, work->tiles4, work->palette2, aff, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
+            DrawSprite(31, 9, gBHpgagFrame26, work->tiles4, work->palette2, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
         } else {
-            DrawSprite(31, 6, gBHpgagFrame0, work->tiles4, work->palette2, aff, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
+            DrawSprite(31, 6, gBHpgagFrame0, work->tiles4, work->palette2, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
         }
     }
 }

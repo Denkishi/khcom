@@ -147,8 +147,8 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
 
 s32 task_btl_hpoth_1(BtlHpothWork* work) {
     BtlObj* actor;
-    s32 flag;
-    u32 state;
+    s32 lowHp;
+    u32 gaugeMode;
 
     actor = gRikuBtlWork->actor;
 
@@ -161,9 +161,9 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
     }
 
     if (work->gaugeMode != BTL_HPOTH_GAUGE_MODE_EXTRA_BAR && work->hpRatio < 64) {
-        flag = 1;
+        lowHp = 1;
     } else {
-        flag = 0;
+        lowHp = 0;
     }
 
     if (actor->hp < work->prevHp) {
@@ -173,7 +173,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
     if (work->timer != 0) {
         AnimChange(&work->anim, 1, ANIM_FLAG_LOOP);
         work->timer--;
-    } else if (flag) {
+    } else if (lowHp) {
         AnimChange(&work->anim, 2, ANIM_FLAG_LOOP);
     } else {
         AnimChange(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -206,9 +206,9 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         }
     }
 
-    state = work->gaugeMode;
+    gaugeMode = work->gaugeMode;
 
-    switch (state) {
+    switch (gaugeMode) {
     case BTL_HPOTH_GAUGE_MODE_SINGLE:
         work->hpRatio = (work->displayHp << 8) / actor->maxHp;
         break;
@@ -220,8 +220,8 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         break;
     }
 
-    if (flag) {
-        if (state == BTL_HPOTH_GAUGE_MODE_SINGLE) {
+    if (lowHp) {
+        if (gaugeMode == BTL_HPOTH_GAUGE_MODE_SINGLE) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -250,7 +250,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
             AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
         }
     } else {
-        if (state == BTL_HPOTH_GAUGE_MODE_SINGLE) {
+        if (gaugeMode == BTL_HPOTH_GAUGE_MODE_SINGLE) {
             switch (work->gaugeSize) {
             case 0:
             case 1:

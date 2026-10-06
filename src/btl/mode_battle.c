@@ -26,7 +26,7 @@
 #include "types.h"
 
 void mode_battle_0(u32 mode) {
-    BtlWork** p;
+    BtlWork** dest;
 
     gBtlWork = EwramAlloc(sizeof(BtlWork));
     gRikuBtlWork = NULL;
@@ -43,8 +43,8 @@ void mode_battle_0(u32 mode) {
         gBtlWork->flags |= BTL_FLAG_TUTORIAL;
     case 0x9D ... 0xB1:
         gBtlWork->flags |= BTL_FLAG_HUM_BATTLE;
-        p = &gRikuBtlWork;
-        *p = EwramAlloc(sizeof(BtlWork));
+        dest = &gRikuBtlWork;
+        *dest = EwramAlloc(sizeof(BtlWork));
         CpuFill32(0, gRikuBtlWork, sizeof(BtlWork));
         break;
     }

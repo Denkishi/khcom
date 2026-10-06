@@ -1366,7 +1366,7 @@ void mode_chkobj_0() {
 void mode_chkobj_1() {
     ObjDef* def;
     u16 keys;
-    s16 v;
+    s16 tileCount;
 
     if (GetKeysPressed() & B_BUTTON) {
         ModeRequest(&gModeDebug, 0);
@@ -1514,12 +1514,12 @@ void mode_chkobj_1() {
         PrintNumber(6, 16, 0, sChkObjWork->anim.frame);
         PrintString(0, 17, 0, "frame");
         PrintNumber(6, 17, 0, sChkObjWork->anim.timer);
-        v = GetSpriteTileBytes(sChkObjWork->gfx) >> 5;
+        tileCount = GetSpriteTileBytes(sChkObjWork->gfx) >> 5;
         PrintString(0, 18, 0, "chara");
-        PrintNumber(6, 18, 0, v);
+        PrintNumber(6, 18, 0, tileCount);
 
-        if (sChkObjWork->maxTiles < v) {
-            sChkObjWork->maxTiles = v;
+        if (sChkObjWork->maxTiles < tileCount) {
+            sChkObjWork->maxTiles = tileCount;
         }
 
         PrintString(0, 19, 0, "maxChr");

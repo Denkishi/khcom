@@ -43,18 +43,18 @@ void func_0805F7C8(u8 block) {
 
 void DebugTextPrintFont2(u8 x, u8 y, u16* text) {
     u8 i;
-    u16 c;
+    u16 character;
 
     for (i = 0; i <= 59 && (u8)*text != 0; i++, text++) {
-        c = *text;
-        c = (u8)(c >> 8) | (c << 8);
+        character = *text;
+        character = (u8)(character >> 8) | (character << 8);
 
-        switch (c & 0xFF00) {
+        switch (character & 0xFF00) {
         case 0x8100:
-            sDebugTextLines[sDebugTextLineCount].glyphs[i] = c + 0x7EC0;
+            sDebugTextLines[sDebugTextLineCount].glyphs[i] = character + 0x7EC0;
             break;
         case 0x8200:
-            sDebugTextLines[sDebugTextLineCount].glyphs[i] = (c + 0x7DC0) | 0x400;
+            sDebugTextLines[sDebugTextLineCount].glyphs[i] = (character + 0x7DC0) | 0x400;
             break;
         }
     }
@@ -83,15 +83,15 @@ void DebugTextClearLines() {
 s32 DebugTextScrollUp(u8 bg, u8 x, u8 y, u8 width, u8 height) {
     u8 i;
     u8 j;
-    u8 r;
-    u8 k;
+    u8 row;
+    u8 pixelRow;
     u16 col;
-    u8* p;
+    u8* tile;
     u32* dst;
     u32* src;
-    u32 t;
-    u32 ko;
-    u32 ko4;
+    u32 nextOffset;
+    u32 rowOffset;
+    u32 nextRowOffset;
     u32 co;
     s32 n;
 
@@ -101,22 +101,22 @@ s32 DebugTextScrollUp(u8 bg, u8 x, u8 y, u8 width, u8 height) {
     n = (s8)width + x;
     width = n;
     height += (y + height) >> 3;
-    k = y & 7;
+    pixelRow = y & 7;
     col = (y >> 3) << 3;
 
     for (; j < height; j++) {
         for (i = 0; i < width; i++) {
-            ko = k * 4;
+            rowOffset = pixelRow * 4;
             co = col * 4;
-            ko4 = ko + 4;
-            p = sDebugTextTileDest + i * 32 + j * 1024;
-            dst = (u32*)(p + ko + co);
-            src = (u32*)(p + ko4 + co);
+            nextRowOffset = rowOffset + 4;
+            tile = sDebugTextTileDest + i * 32 + j * 1024;
+            dst = (u32*)(tile + rowOffset + co);
+            src = (u32*)(tile + nextRowOffset + co);
 
-            for (r = 0; r < 9; r++) {
-                t = ((u32)dst & 0xFF) + 4;
+            for (row = 0; row < 9; row++) {
+                nextOffset = ((u32)dst & 0xFF) + 4;
 
-                if (t == ((t >> 5) << 5)) {
+                if (nextOffset == ((nextOffset >> 5) << 5)) {
                     *dst++ = *(u32*)((u8*)src + 0x3E0);
                     dst += 248;
                     src += 249;
@@ -126,11 +126,11 @@ s32 DebugTextScrollUp(u8 bg, u8 x, u8 y, u8 width, u8 height) {
             }
         }
 
-        k++;
+        pixelRow++;
 
-        if (k == 8) {
+        if (pixelRow == 8) {
             col += 0x100;
-            k = 0;
+            pixelRow = 0;
         }
     }
 
@@ -447,7 +447,7 @@ void DebugTextClear() {
 
 void DebugTextDraw(u8 bg) {
     void* charBase;
-    u32 v;
+    u32 pixels;
     u32 mapRow;
     u8* screen;
     u8* font = NULL;
@@ -499,13 +499,13 @@ void DebugTextDraw(u8 bg) {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32);
                     }
                 } else if (i != 0 || sDebugTextMergeFirstGlyph == 1) {
-                    v = ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0];
+                    pixels = ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0];
 
                     if (sDebugTextLines[n].font != 2) {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) << (offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = pixels | *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) << (offsetX * 4);
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) >> (32 - offsetX * 4);
                     } else {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = pixels | *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
                     }
                 } else {

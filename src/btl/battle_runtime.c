@@ -149,7 +149,7 @@ void BtlWorkInit() {
     u8* d;
     u8* p;
     CpuFill32(0, gBtlWork, sizeof(BtlWork));
-    gBtlWork->phase = 0;
+    gBtlWork->phase = BTL_PHASE_START;
     gBtlWork->fadeExcludedPalettes = 0xFFFF0000;
     gBtlWork->gravity = 0x42;
     gBtlWork->fadeAmount = 10;
@@ -638,7 +638,7 @@ void DropFriendCard(s32 x, s32 y, s32 z) {
 }
 
 void EndCardPlay() {
-    gBtlWork->phase = 1;
+    gBtlWork->phase = BTL_PHASE_IDLE;
 
     if (!(gBtlWork->flags & BTL_FLAG_CARD_BREAK)) {
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
@@ -647,6 +647,15 @@ void EndCardPlay() {
     gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
     gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
 }
+
+enum BtlEndStep {
+    BTL_END_STEP_REWARD_SCREEN = -1,
+    BTL_END_STEP_CLOSE_CARDS,
+    BTL_END_STEP_WAIT_FRAME,
+    BTL_END_STEP_REWARDS,
+    BTL_END_STEP_FADE_OUT,
+    BTL_END_STEP_EXIT
+};
 
 void UpdateBattleState() {
     BtlObj* player;
@@ -679,8 +688,8 @@ void UpdateBattleState() {
     gBtlWork->flags &= ~BTL_FLAG_ENEMY_FRAME_CHANGED;
 
     switch ((u32)gBtlWork->phase) {
-    case 1:
-    case 2:
+    case BTL_PHASE_IDLE:
+    case BTL_PHASE_CARD_PLAY:
         if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
             HandleTutorialCardInput();
 #ifdef VERSION_EU
@@ -710,7 +719,7 @@ void UpdateBattleState() {
             gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
         }
 
-        gBtlWork->phase = 1;
+        gBtlWork->phase = BTL_PHASE_IDLE;
 
         if (gBtlWork->soraOwnsPlay) {
             BtlObj* obj;
@@ -750,21 +759,21 @@ void UpdateBattleState() {
             }
         }
 
-        gBtlWork->phase = 2;
+        gBtlWork->phase = BTL_PHASE_CARD_PLAY;
         gBtlWork->phaseStep = 0;
     } else {
         changed = 0;
     }
 
     if (gBtlWork->flags & BTL_FLAG_PLAYER_DEFEATED) {
-        if (gBtlWork->phase != 3) {
-            gBtlWork->phase = 3;
+        if (gBtlWork->phase != BTL_PHASE_GAME_OVER) {
+            gBtlWork->phase = BTL_PHASE_GAME_OVER;
             gBtlWork->phaseStep = 0;
         }
     } else if (gBtlWork->flags & BTL_FLAG_BATTLE_OVER) {
-        if (gBtlWork->phase != 4) {
-            gBtlWork->phase = 4;
-            gBtlWork->phaseStep = 0;
+        if (gBtlWork->phase != BTL_PHASE_END) {
+            gBtlWork->phase = BTL_PHASE_END;
+            gBtlWork->phaseStep = BTL_END_STEP_CLOSE_CARDS;
 
             switch (gBtlWork->battleId) {
             case 120:
@@ -788,34 +797,34 @@ void UpdateBattleState() {
     }
 
     switch ((u32)gBtlWork->phase) {
-    case 0:
-        if (gBtlWork->phaseStep == 0) {
+    case BTL_PHASE_START:
+        if (gBtlWork->phaseStep == BTL_START_STEP_INTRO) {
             if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL)) {
                 gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlStart, NULL);
             }
 
-            gBtlWork->phaseStep = 1;
+            gBtlWork->phaseStep = BTL_START_STEP_EXCLUDE_PALETTES;
         }
 
         if (FadeIsActive()) {
             break;
         }
 
-        if (gBtlWork->phaseStep == 1) {
+        if (gBtlWork->phaseStep == BTL_START_STEP_EXCLUDE_PALETTES) {
             for (i = 0; i < 32; i++) {
                 if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) {
                     FadeSetPaletteExcluded(i, 1);
                 }
             }
 
-            gBtlWork->phaseStep = 2;
+            gBtlWork->phaseStep = BTL_START_STEP_CREATE_TASKS;
         }
 
         if (IsTaskActiveNamed(gBtlWork->task, gTaskDescBtlStart.name)) {
             break;
         }
 
-        if (gBtlWork->phaseStep == 2) {
+        if (gBtlWork->phaseStep == BTL_START_STEP_CREATE_TASKS) {
             gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
             gBtlWork->flags &= ~BTL_FLAG_PAUSE_DISABLED;
             TaskCreate(gBtlWork->taskPools, &gTaskDescBtlLockon, NULL);
@@ -864,9 +873,9 @@ void UpdateBattleState() {
 
             RequestOpenCards();
             RequestBossCardOpen();
-            gBtlWork->phaseStep = 3;
-        } else if (gBtlWork->phaseStep == 3) {
-            gBtlWork->phase = 1;
+            gBtlWork->phaseStep = BTL_START_STEP_FINISH;
+        } else if (gBtlWork->phaseStep == BTL_START_STEP_FINISH) {
+            gBtlWork->phase = BTL_PHASE_IDLE;
             gBtlWork->phaseStep = 0;
 
             if (gGameState.roomEffect == 5) {
@@ -875,10 +884,10 @@ void UpdateBattleState() {
         }
 
         break;
-    case 1:
+    case BTL_PHASE_IDLE:
         break;
-    case 4:
-        if (gBtlWork->phaseStep == 0) {
+    case BTL_PHASE_END:
+        if (gBtlWork->phaseStep == BTL_END_STEP_CLOSE_CARDS) {
             RequestCloseCards();
             RequestBossCardClose();
             gBtlWork->flags &= ~BTL_FLAG_ENEMY_MOVE_ENABLED;
@@ -891,11 +900,11 @@ void UpdateBattleState() {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
             gBtlWork->actor2 = NULL;
-            gBtlWork->phaseStep = 1;
+            gBtlWork->phaseStep = BTL_END_STEP_WAIT_FRAME;
             gBtlWork->hcEffect = 0;
             gBtlWork->flags |= BTL_FLAG_STOP_SPAWNING;
-        } else if (gBtlWork->phaseStep == 1) {
-            gBtlWork->phaseStep = 2;
+        } else if (gBtlWork->phaseStep == BTL_END_STEP_WAIT_FRAME) {
+            gBtlWork->phaseStep = BTL_END_STEP_REWARDS;
         } else {
             if (BgFxIsActive()) {
                 break;
@@ -910,40 +919,40 @@ void UpdateBattleState() {
             }
 
             if (gBtlWork->flags & BTL_FLAG_PREMIRE_COLLECTED) {
-                if (gBtlWork->phaseStep == 2) {
+                if (gBtlWork->phaseStep == BTL_END_STEP_REWARDS) {
                     ReleaseBattleTiles();
                     gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescPremireChance, NULL);
                     gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
                     gBtlWork->flags |= BTL_FLAG_FIELD_HIDDEN;
-                    gBtlWork->phaseStep = -1;
+                    gBtlWork->phaseStep = BTL_END_STEP_REWARD_SCREEN;
                 } else {
                     if (IsTaskActiveNamed(gBtlWork->task, gTaskDescPremireChance.name)) {
                         break;
                     }
 
                     gBtlWork->flags &= ~BTL_FLAG_PREMIRE_COLLECTED;
-                    gBtlWork->phaseStep = 2;
+                    gBtlWork->phaseStep = BTL_END_STEP_REWARDS;
                 }
 
                 break;
             }
 
             if (gBtlWork->pendingLevelUps != 0) {
-                if (gBtlWork->phaseStep == 2) {
+                if (gBtlWork->phaseStep == BTL_END_STEP_REWARDS) {
                     ReleaseBattleTiles();
                     gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescLevelUp, NULL);
                     gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
                     gBtlWork->flags |= BTL_FLAG_FIELD_HIDDEN;
-                    gBtlWork->phaseStep = -1;
+                    gBtlWork->phaseStep = BTL_END_STEP_REWARD_SCREEN;
                 }
 
                 break;
             }
 
-            if (gBtlWork->phaseStep == -1) {
+            if (gBtlWork->phaseStep == BTL_END_STEP_REWARD_SCREEN) {
                 if (!IsTaskActive(gBtlWork->task)) {
                     BtlObj* healed;
-                    gBtlWork->phaseStep = 2;
+                    gBtlWork->phaseStep = BTL_END_STEP_REWARDS;
                     healed = gBtlWork->actor;
                     healed->hp = gGameState.progression.maxHp;
                     healed->maxHp = gGameState.progression.maxHp;
@@ -952,22 +961,22 @@ void UpdateBattleState() {
                 break;
             }
 
-            if (gBtlWork->phaseStep == 2 && !FadeIsActive()) {
+            if (gBtlWork->phaseStep == BTL_END_STEP_REWARDS && !FadeIsActive()) {
                 gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
                 gBtlWork->hitStop = 99;
-                gBtlWork->phaseStep = 3;
-            } else if (gBtlWork->phaseStep == 3) {
+                gBtlWork->phaseStep = BTL_END_STEP_FADE_OUT;
+            } else if (gBtlWork->phaseStep == BTL_END_STEP_FADE_OUT) {
                 SetBackdropColor(0, 0, 0);
                 FadeStartOut(FADE_MODE_BLACK, 15);
                 FadeLock();
-                gBtlWork->phaseStep = 4;
+                gBtlWork->phaseStep = BTL_END_STEP_EXIT;
             } else if (!FadeIsActive()) {
                 ExitBattle();
             }
         }
 
         break;
-    case 3:
+    case BTL_PHASE_GAME_OVER:
         if (gBtlWork->phaseStep == 0) {
             RequestCloseCards();
             RequestBossCardClose();
@@ -1015,7 +1024,7 @@ void UpdateBattleState() {
 
         gBtlWork->phaseStep++;
         break;
-    case 2: {
+    case BTL_PHASE_CARD_PLAY: {
         BtlObj* obj;
 
         if (changed) {

@@ -71,6 +71,21 @@ enum RikuKey {
     RIKU_KEY_USE_CARD = 0x20
 };
 
+enum BtlPhase {
+    BTL_PHASE_START,
+    BTL_PHASE_IDLE,
+    BTL_PHASE_CARD_PLAY,
+    BTL_PHASE_GAME_OVER,
+    BTL_PHASE_END
+};
+
+enum BtlStartStep {
+    BTL_START_STEP_INTRO,
+    BTL_START_STEP_EXCLUDE_PALETTES,
+    BTL_START_STEP_CREATE_TASKS,
+    BTL_START_STEP_FINISH
+};
+
 typedef struct BtlWork {
     s32 viewX;
     s32 viewY;

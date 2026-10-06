@@ -351,6 +351,15 @@ static const MdFirePoint sMdFirePoints1[4] = { { 128, 304, 0, 0 }, { 104, 324, 0
 
 static const MdFirePoint sMdFirePoints2[4] = { { 128, 288, 0, 0 }, { 156, 312, 0, 0 }, { 172, 336, 0, 0 }, { 144, 360, 0, 0 } };
 
+enum BosMdFirePattern {
+    BOS_MD_FIRE_PATTERN_POINTS_0,
+    BOS_MD_FIRE_PATTERN_POINTS_1,
+    BOS_MD_FIRE_PATTERN_POINTS_2,
+    BOS_MD_FIRE_PATTERN_RING,
+    BOS_MD_FIRE_PATTERN_ROWS,
+    BOS_MD_FIRE_PATTERN_COLUMN
+};
+
 static const MdFireDef sMdFireDefs[6] = {
     { sMdFirePoints0, ARRAY_COUNT(sMdFirePoints0) },
     { sMdFirePoints1, ARRAY_COUNT(sMdFirePoints1) },
@@ -781,25 +790,25 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
                         if (work->sub[0].hp * 10 / work->sub[0].maxHp > 4) {
                             switch (GetRandom() % 3) {
                             case 0:
-                                fireArg.pattern = 0;
+                                fireArg.pattern = BOS_MD_FIRE_PATTERN_POINTS_0;
                                 break;
                             case 1:
-                                fireArg.pattern = 1;
+                                fireArg.pattern = BOS_MD_FIRE_PATTERN_POINTS_1;
                                 break;
                             case 2:
-                                fireArg.pattern = 2;
+                                fireArg.pattern = BOS_MD_FIRE_PATTERN_POINTS_2;
                                 break;
                             }
                         } else {
                             switch (GetRandom() % 3) {
                             case 0:
-                                fireArg.pattern = 3;
+                                fireArg.pattern = BOS_MD_FIRE_PATTERN_RING;
                                 break;
                             case 1:
-                                fireArg.pattern = 4;
+                                fireArg.pattern = BOS_MD_FIRE_PATTERN_ROWS;
                                 break;
                             case 2:
-                                fireArg.pattern = 5;
+                                fireArg.pattern = BOS_MD_FIRE_PATTERN_COLUMN;
                                 break;
                             }
                         }
@@ -1356,10 +1365,10 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
 
                         if (work->timer <= 0) {
                             switch (work->pattern) {
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 4:
+                            case BOS_MD_FIRE_PATTERN_POINTS_0:
+                            case BOS_MD_FIRE_PATTERN_POINTS_1:
+                            case BOS_MD_FIRE_PATTERN_POINTS_2:
+                            case BOS_MD_FIRE_PATTERN_ROWS:
                                 angle = BosGaGetAngle(work->x, work->y,
                                                   gBtlWork->actor->x,
                                                   gBtlWork->actor->y);
@@ -1368,10 +1377,10 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
                                 work->timer = 90;
                                 work->motion = BOS_MD_FIRE_MOTION_SHOOT;
                                 break;
-                            case 3:
+                            case BOS_MD_FIRE_PATTERN_RING:
                                 work->motion = BOS_MD_FIRE_MOTION_CIRCLE;
                                 break;
-                            case 5:
+                            case BOS_MD_FIRE_PATTERN_COLUMN:
                                 work->motion = BOS_MD_FIRE_MOTION_SWAY;
                                 break;
                             }
@@ -1441,16 +1450,16 @@ void BosMdFirePlace(MdFireWork* work) {
     const MdFirePoint* point;
 
     switch (work->pattern) {
-    case 0:
-    case 1:
-    case 2:
+    case BOS_MD_FIRE_PATTERN_POINTS_0:
+    case BOS_MD_FIRE_PATTERN_POINTS_1:
+    case BOS_MD_FIRE_PATTERN_POINTS_2:
         point = sMdFireDefs[work->pattern].points + work->index;
         work->x = point->x * 256;
         work->y = point->y * 256;
         work->timer = point->delay;
         work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
-    case 3:
+    case BOS_MD_FIRE_PATTERN_RING:
         work->angle = work->index * 256 / 6;
         work->centerX = 0x8000;
         work->centerY = 0x14800;
@@ -1459,13 +1468,13 @@ void BosMdFirePlace(MdFireWork* work) {
         work->timer = 60;
         work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
-    case 4:
+    case BOS_MD_FIRE_PATTERN_ROWS:
         work->x = GetRandom() % 96 * 256 + 0x9800;
         work->y = work->index * 4096 + 0x11800;
         work->timer = work->index * 60 + 240;
         work->motion = BOS_MD_FIRE_MOTION_WAIT;
         break;
-    case 5:
+    case BOS_MD_FIRE_PATTERN_COLUMN:
         work->angle = 0;
         work->centerX = 0x9800;
         work->x = gSineTable[work->angle] * 32 + work->centerX;
@@ -1509,7 +1518,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     fireArg.flags = arg->flags;
 
     if (arg->pool != NULL) {
-        if (work->pattern <= 2) {
+        if (work->pattern <= BOS_MD_FIRE_PATTERN_POINTS_2) {
             n = sMdFireDefs[work->pattern].count;
         } else {
             n = 6;

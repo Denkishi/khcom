@@ -363,14 +363,14 @@ static u16 sUnk_02034AB2;
 
 CardUiSpriteState gCardUiSpriteState EWRAM_COMMON(16);
 
-void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCount, void* p) {
+void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 entryCount, void* p) {
     u16 mask;
     u16 i;
     s32 x;
 
     mask = 0;
 
-    if (mode == 1) {
+    if (thisDeckOnly == 1) {
         switch (deck) {
         case 0:
             mask = CARD_FLAG_IN_DECK_1;
@@ -407,7 +407,7 @@ void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCo
     }
 }
 
-u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCount, void* p) {
+u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 entryCount, void* p) {
     u16 mask;
     u16 i;
     u16 count;
@@ -416,7 +416,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCoun
 
     mask = 0;
 
-    if (mode == 1) {
+    if (thisDeckOnly == 1) {
         switch (deck) {
         case 0:
             mask = CARD_FLAG_IN_DECK_1;
@@ -500,7 +500,7 @@ u16 CountCollectionCardsOfCategory(u8 category) {
     return count;
 }
 
-void CountCardsNotInDeckByCategory(u8 mode, u16* out) {
+void CountCardsNotInDeckByCategory(u8 deck, u16* out) {
     u16 mask;
     u16 i;
 
@@ -510,7 +510,7 @@ void CountCardsNotInDeckByCategory(u8 mode, u16* out) {
     out[2] = 0;
     out[3] = 0;
 
-    switch (mode) {
+    switch (deck) {
     case 0:
         mask = CARD_FLAG_IN_DECK_1;
         break;
@@ -520,7 +520,7 @@ void CountCardsNotInDeckByCategory(u8 mode, u16* out) {
     case 2:
         mask = CARD_FLAG_IN_DECK_3;
         break;
-    case 3:
+    case DECK_ANY:
         mask = CARD_FLAG_IN_ANY_DECK;
         break;
     }
@@ -1307,7 +1307,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->gfx8 = gDeckButtonLabelFrames[1];
 #endif
     work->tiles2 = AllocObjTiles(0x280, NULL);
-    SetDeckMenuFrameCursor(work, 0);
+    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
     gCardUiSpriteState.tiles = AllocObjTiles(0x100, NULL);
     gCardUiSpriteState.palette = LoadObjPalette(gCard00Palette, 32);
@@ -1996,7 +1996,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* task) {
         work->timer = 1;
         DeleteSelectedValueCard(work);
         DrawCardTotals();
-        CountCardsNotInDeckByCategory(3, work->collectionCategoryCounts);
+        CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[1], 1);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
@@ -2006,7 +2006,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* task) {
             RemoveEmptyCollectionEntry(work, 1);
 
             if (work->gridEntryCount != 0) {
-                SetDeckMenuFrameCursor(work, 0);
+                SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
                 work->cursorCol = work->savedCol;
                 work->cursorRow = work->savedRow;
 
@@ -2035,7 +2035,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* task) {
                 TaskPoolUpdate(&work->cardpool);
                 return 1;
             } else {
-                SetDeckMenuFrameCursor(work, 0);
+                SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
                 work->cursorCol = work->categoryFilter;
                 work->timer = 1;
                 work->view = DECK_MENU_VIEW_DELETE_FILTER;
@@ -2173,7 +2173,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
 
     switch (GetKeysPressed()) {
     case B_BUTTON:
-        SetDeckMenuFrameCursor(work, 0);
+        SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
         saved = work->savedCol;
         work->cursorCol = saved;
         saved = work->savedRow;
@@ -2225,7 +2225,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* task) {
     return 1;
 }
 
-void RemoveEmptyCollectionEntry(DeckMenuWork* work, u8 mode) {
+void RemoveEmptyCollectionEntry(DeckMenuWork* work, u8 excludeBossCards) {
     DeckCard2Work* node;
     DeckCard2Work* next;
     CardKindEntry* entry;
@@ -2374,7 +2374,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
 
     switch (GetKeysPressed()) {
     case B_BUTTON:
-        SetDeckMenuFrameCursor(work, 0);
+        SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
         n = work->savedCol;
         work->cursorCol = n;
         n = work->savedRow;
@@ -2413,7 +2413,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
 
                 if (work->gridEntryCount != 0) {
                     u8 ready;
-                    SetDeckMenuFrameCursor(work, 0);
+                    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
                     work->cursorCol = work->savedCol;
                     work->cursorRow = work->savedRow;
 
@@ -2435,7 +2435,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
                     SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuAddGrid);
                     return 1;
                 } else {
-                    SetDeckMenuFrameCursor(work, 0);
+                    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
                     work->cursorCol = work->categoryFilter;
                     work->timer = 1;
                     work->view = DECK_MENU_VIEW_ADD_FILTER;
@@ -2873,7 +2873,7 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* task) {
     work->tiles3 = LoadObjTiles(gDeckCommandMenuTiles, 0x1800);
 #endif
     work->palette2 = LoadObjPalette(gDeckCommandMenuPalette, 32);
-    SetDeckMenuFrameCursor(work, 1);
+    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_ROW);
     view = &work->view;
     z = 0;
     *view = 3;
@@ -2924,7 +2924,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
         if (work->prevView == 0) {
             work->view = DECK_MENU_VIEW_DECK_GRID;
             SetDeckMenuHandAnim(work);
-            SetDeckMenuFrameCursor(work, 0);
+            SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
             m4aSongNumStart(SONG_SYS_CLOSE);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
             ReleaseCommandMenuGfx(work);
@@ -2943,7 +2943,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* task) {
         if (work->prevView == 0) {
             work->view = DECK_MENU_VIEW_DECK_GRID;
             SetDeckMenuHandAnim(work);
-            SetDeckMenuFrameCursor(work, 0);
+            SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
             m4aSongNumStart(SONG_SYS_CLOSE);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuDeckGrid);
             ReleaseCommandMenuGfx(work);
@@ -3031,7 +3031,7 @@ u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim2);
     work->gfx2 = AnimUpdate(&work->anim3);
     ReleaseCommandMenuGfx(work);
-    SetDeckMenuFrameCursor(work, 0);
+    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
 
     switch (work->commandCursor) {
     case 0:
@@ -3166,7 +3166,7 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* task) {
         work->descriptionX = 7;
         work->descriptionY = 130;
         ReleaseCommandMenuGfx(work);
-        SetDeckMenuFrameCursor(work, 0);
+        SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
         ClearCardGrid(work);
         LoadBgMap(3, gDeckAddGridMap, 0x800);
         count = &work->entryCount;
@@ -3344,7 +3344,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* task) {
                 if ((u8)MoveValueCursor(work, 0)) {
                     m4aSongNumStart(SONG_SYS_KETTEI);
                     DrawSelectedValueCpCost(work);
-                    SetDeckMenuFrameCursor(work, 1);
+                    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_ROW);
                     work->view = DECK_MENU_VIEW_ADD_VALUE_SELECT;
                     work->handX = sValueGridX[work->cursorCol] << 8;
                     work->handY = sValueGridY[work->cursorRow] << 8;
@@ -3544,7 +3544,7 @@ u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* task) {
     work->descriptionY = 130;
     work->view = DECK_MENU_VIEW_REMOVE_GRID;
     ReleaseCommandMenuGfx(work);
-    SetDeckMenuFrameCursor(work, 0);
+    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     SetDeckMenuHandAnim(work);
     LoadBgMap(3, gDeckRemoveGridMap, 0x800);
     ClearCardGrid(work);
@@ -3773,7 +3773,7 @@ u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* work, void* task) {
     LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
     LoadBgMap(1, gDeckCardsInUseMap, 0x800);
     DisableBg(0);
-    CountCardsNotInDeckByCategory(3, work->collectionCategoryCounts);
+    CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[1], 1);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
@@ -3782,7 +3782,7 @@ u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* work, void* task) {
     z = 0;
     *view = DECK_MENU_VIEW_DELETE_GRID;
     ReleaseCommandMenuGfx(work);
-    SetDeckMenuFrameCursor(work, 0);
+    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     ClearCardGrid(work);
     work->step = z;
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckMenuBuildDeleteList);
@@ -3959,7 +3959,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* task) {
             work->savedRow = work->cursorRow;
             work->cursorCol = 0;
             work->cursorRow = 0;
-            SetDeckMenuFrameCursor(work, 1);
+            SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_ROW);
 
             if ((u8)MoveValueCursor(work, 0)) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
@@ -3972,7 +3972,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* task) {
             } else {
                 work->cursorCol = work->savedCol;
                 work->cursorRow = work->savedRow;
-                SetDeckMenuFrameCursor(work, 0);
+                SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
                 work->view = DECK_MENU_VIEW_DELETE_GRID;
                 m4aSongNumStart(SONG_SYS_BEEP);
                 return 1;
@@ -4426,7 +4426,7 @@ void DeckMenuDestroy(DeckMenuWork* work) {
     ReleaseObjPalette(gCardUiSpriteState.palette);
 }
 
-void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
+void CreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
     DeckCard2Args args;
     u16* deck;
     u8 i;
@@ -4437,10 +4437,10 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
     x = 0;
     y = 0;
 
-    if (kind == 0) {
+    if (categoryFilter == 0) {
         for (i = 0; i < 99; i++) {
             if (deck[i] != CARD_NONE) {
-                if (kind == 0) {
+                if (categoryFilter == 0) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
@@ -4448,7 +4448,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
                     args.panel = 0;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
-                } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
+                } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
@@ -4476,7 +4476,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
         }
     } else {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
+            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -4500,7 +4500,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
     SetGridRowCount(work, 99);
 }
 
-s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) {
+s32 CreateCollectionGridCards(DeckMenuWork* work, u8 categoryFilter, u8 excludeBossCards) {
     DeckCard2Args args;
     u16 i;
     u16 count;
@@ -4513,7 +4513,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) 
 
     if (!excludeBossCards) {
         for (i = 0; i < work->entryCount; i++) {
-            if (kind == 5) {
+            if (categoryFilter == 5) {
                 if (work->entries[i].count != 0) {
                     args.pool = &work->pool;
                     args.cardId = GetCardIdForKindEntry(
@@ -4531,7 +4531,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) 
                 args.cardId = GetCardIdForKindEntry(
                     work->entries[i].kind);
 
-                if (gCardDefs[args.cardId & CARD_ID_MASK].category == kind - 1) {
+                if (gCardDefs[args.cardId & CARD_ID_MASK].category == categoryFilter - 1) {
                     args.col = x;
                     args.row = y;
                     args.panel = 1;
@@ -4549,7 +4549,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) 
         }
     } else {
         for (i = 0; i < work->entryCount; i++) {
-            if (kind == 5) {
+            if (categoryFilter == 5) {
                 if (work->entries[i].count != 0) {
                     if ((u16)(work->entries[i].kind - 78) >
                         64) {
@@ -4570,7 +4570,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 excludeBossCards) 
                 args.cardId = GetCardIdForKindEntry(
                     work->entries[i].kind);
 
-                if (gCardDefs[args.cardId & CARD_ID_MASK].category == kind - 1) {
+                if (gCardDefs[args.cardId & CARD_ID_MASK].category == categoryFilter - 1) {
                     if ((u16)(work->entries[i].kind - 78) >
                         64) {
                         args.col = x;
@@ -5708,15 +5708,15 @@ void ReleaseCommandMenuGfx(DeckMenuWork* work) {
     }
 }
 
-void SetDeckMenuFrameCursor(DeckMenuWork* work, u8 kind) {
-    switch (kind) {
-    case 0:
+void SetDeckMenuFrameCursor(DeckMenuWork* work, u8 frameCursor) {
+    switch (frameCursor) {
+    case DECK_FRAME_CURSOR_CARD:
         SetObjTileSource(work->tiles2, gDeckCardCursorTiles);
         AnimInit(&work->anim3, gDeckCardCursorAnims, gDeckCardCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim3);
         break;
-    case 1:
+    case DECK_FRAME_CURSOR_ROW:
         SetObjTileSource(work->tiles2, gDeckRowCursorTiles);
         AnimInit(&work->anim3, gDeckRowCursorAnims, gDeckRowCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
@@ -6012,7 +6012,7 @@ u8 FindCardInDirection(DeckMenuWork* work, s16 x, s16 y, u16 dir) {
     return 0;
 }
 
-void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
+void RecreateDeckGridCards(DeckMenuWork* work, u8 categoryFilter) {
     DeckCard2Args args;
     u16* deck;
     u8 i;
@@ -6023,10 +6023,10 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
     x = 0;
     y = 4 - work->scrollRowEnd;
 
-    if (kind == 0) {
+    if (categoryFilter == 0) {
         for (i = 0; i < 99; i++) {
             if (deck[i] != CARD_NONE) {
-                if (kind == 0) {
+                if (categoryFilter == 0) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
@@ -6034,7 +6034,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
                     args.panel = 0;
                     args.slot = &deck[i];
                     TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
-                } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
+                } else if (gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                     args.col = x;
@@ -6062,7 +6062,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
         }
     } else {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == kind - 1) {
+            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[deck[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -7346,7 +7346,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* task) {
 u8 UpdateDeckMenuCloseKeyboard(DeckMenuWork* work, void* task) {
     FadeStartIn(FADE_MODE_BLACK, 16);
     work->view = DECK_MENU_VIEW_DECK_GRID;
-    SetDeckMenuFrameCursor(work, 0);
+    SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     SetDeckMenuHandAnim(work);
     FreeTextSlots(work->textSlots6, 8);
     ReleaseObjTiles(work->tiles11);

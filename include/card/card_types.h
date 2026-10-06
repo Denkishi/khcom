@@ -4,6 +4,7 @@
 #include "types.h"
 
 #define DECK_SIZE 99
+#define DECK_ANY 3
 #define CARD_ID_MASK 0xFFF
 #define CARD_COLLECTION_EMPTY 0xFFF
 #define CARD_NONE 0xFFFF

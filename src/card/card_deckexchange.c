@@ -102,7 +102,7 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->tiles3 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles2 = AllocObjTiles(0x280, NULL);
-    SetDeckExchangeFrameCursor(work, 0);
+    SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
     work->step = 0;
     work->cursorCol = 0;
@@ -408,7 +408,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
 
     switch (GetKeysPressed()) {
     case B_BUTTON:
-        SetDeckExchangeFrameCursor(work, 0);
+        SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_CARD);
         saved = (s8)work->savedCol;
         work->cursorCol = saved;
         saved = (s8)work->savedRow;
@@ -425,7 +425,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         }
 
         DrawDeckExchangeCardTotals();
-        CountCardsNotInDeckByCategory(3, work->collectionCategoryCounts);
+        CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[1], 1);
         DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
@@ -562,13 +562,13 @@ u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* task) {
     LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
     LoadBgMap(1, gDeckCardsInUseMap, 0x800);
     DisableBg(0);
-    CountCardsNotInDeckByCategory(3, work->collectionCategoryCounts);
+    CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[1], 1);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[3], 3);
     work->view = DECK_MENU_VIEW_DELETE_GRID;
-    SetDeckExchangeFrameCursor(work, 0);
+    SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     ClearDeckExchangeCardGrid(work);
     work->step = 0;
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeBuildList);
@@ -758,7 +758,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
             work->savedRow = work->cursorRow;
             work->cursorCol = 0;
             work->cursorRow = 0;
-            SetDeckExchangeFrameCursor(work, 1);
+            SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_ROW);
             work->view = DECK_MENU_VIEW_DELETE_VALUE_SELECT;
             m4aSongNumStart(SONG_SYS_KETTEI);
 
@@ -772,7 +772,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
 
             work->cursorCol = (s8)work->savedCol;
             work->cursorRow = (s8)work->savedRow;
-            SetDeckExchangeFrameCursor(work, 0);
+            SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_CARD);
             work->view = DECK_MENU_VIEW_DELETE_GRID;
             m4aSongNumStart(SONG_SYS_BEEP);
             return 1;
@@ -1036,7 +1036,7 @@ void deckexchange_3(DeckExchangeWork* work) {
     *work->resultOut = DECK_MENU_RESULT_CLOSED;
 }
 
-void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
+void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 categoryFilter) {
     DeckCard2Args args;
     u16* cards;
     u8 i;
@@ -1049,7 +1049,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != CARD_NONE) {
-            if (kind == 0) {
+            if (categoryFilter == 0) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -1058,7 +1058,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
                 args.slot = &cards[i];
                 TaskCreate(&work->tasks, &gTaskDescDeckCard2, &args);
                 x++;
-            } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == kind - 1) {
+            } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -1082,7 +1082,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
     SetDeckExchangeGridRowCount(work, y * 3 + x);
 }
 
-s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 excludeBossCards) {
+s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 categoryFilter, u8 excludeBossCards) {
     DeckCard2Args args;
     u16 i;
     s8 x;
@@ -1092,7 +1092,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 ex
     y = 0;
 
     for (i = 0; i < work->entryCount; i++) {
-        if (kind == 5) {
+        if (categoryFilter == 5) {
             if (work->entries[i].kind <= CARD_KIND_CRESCENDO) {
                 args.pool = &work->pool;
                 args.cardId = GetCardIdForKind(work->entries[i].kind);
@@ -1107,7 +1107,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 ex
             args.pool = &work->pool;
             args.cardId = GetCardIdForKind(work->entries[i].kind);
 
-            if (gCardDefs[args.cardId].category == kind - 1 && work->entries[i].kind <= CARD_KIND_CRESCENDO) {
+            if (gCardDefs[args.cardId].category == categoryFilter - 1 && work->entries[i].kind <= CARD_KIND_CRESCENDO) {
                 args.col = x;
                 args.row = y;
                 args.panel = 1;
@@ -1839,15 +1839,15 @@ void FreeDeckExchangeCollectionEntries(DeckExchangeWork* work) {
     }
 }
 
-void SetDeckExchangeFrameCursor(DeckExchangeWork* work, u8 kind) {
-    switch (kind) {
-    case 0:
+void SetDeckExchangeFrameCursor(DeckExchangeWork* work, u8 frameCursor) {
+    switch (frameCursor) {
+    case DECK_FRAME_CURSOR_CARD:
         SetObjTileSource(work->tiles2, gDeckCardCursorTiles);
         AnimInit(&work->anim2, gDeckCardCursorAnims, gDeckCardCursorFrames);
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim2);
         break;
-    case 1:
+    case DECK_FRAME_CURSOR_ROW:
         SetObjTileSource(work->tiles2, gDeckRowCursorTiles);
         AnimInit(&work->anim2, gDeckRowCursorAnims, gDeckRowCursorFrames);
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);

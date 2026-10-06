@@ -462,6 +462,11 @@ enum DeckMenuSlideInStep {
     DECK_MENU_SLIDE_IN_STEP_HORIZONTAL
 };
 
+enum DeckFrameCursor {
+    DECK_FRAME_CURSOR_CARD,
+    DECK_FRAME_CURSOR_ROW
+};
+
 typedef struct DeckExchangeWork {
     ObjTiles* tiles;
     ObjTiles* tiles2;
@@ -1721,7 +1726,7 @@ u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* task);
 void LoadRikuDeckNameTexts(RikuDeckMenuWork* work);
 void LoadDeckExchangeDeckNameTexts(DeckExchangeWork* work);
 void CopyLinkPartnerDeckCards(u8 listIndex, u16* out);
-void SetDeckMenuFrameCursor(DeckMenuWork* work, u8 kind);
+void SetDeckMenuFrameCursor(DeckMenuWork* work, u8 frameCursor);
 void UpdateFieldPrizeCardScale(PrizeCardWork* work);
 void UpdatePrizeMapCardScale(PrizeMapCardWork* work);
 void UpdateBossPrizeScale(BossPrizeWork* work);
@@ -1730,7 +1735,7 @@ u8 PrizeBoss_1(BossPrizeWork* work, void* task);
 void PrizeBoss_2(BossPrizeWork* work);
 void PrizeBoss_3(BossPrizeWork* work);
 u8 PremireChanceCard_1(PremireChanceCardWork* work, void* task);
-void SetDeckExchangeFrameCursor(DeckExchangeWork* work, u8 kind);
+void SetDeckExchangeFrameCursor(DeckExchangeWork* work, u8 frameCursor);
 u8 UpdateDeckMenuCloseKeyboard(DeckMenuWork* work, void* task);
 void OpenRikuCards(CardBattleWork* work);
 void InitDecks();
@@ -1818,7 +1823,7 @@ u8 SoraCardWaitPlayEnd(CardDisplayWork* work, void* task);
 u8 FindCardInDirection(DeckMenuWork* work, s16 x, s16 y, u16 dir);
 void Mapcard_0(MapcardWork* work, MapcardArgs* args);
 u8 AddCardToDeck(u16 card, u8 deck);
-void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCount, void* p);
+void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 entryCount, void* p);
 void FillDebugCardCollection();
 u16 CountOwnedMapCardKinds();
 void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* arg);
@@ -2419,7 +2424,7 @@ u8 CollectionHasCard(u16 id);
 void ConvertActiveDeckCardToPremium(u16 index);
 u16 CountActiveDeckCardsOfCategory(u8 category);
 u16 CountAvailableCards(CardBattleWork* work, u8 listIndex);
-void CountCardsNotInDeckByCategory(u8 mode, u16* out);
+void CountCardsNotInDeckByCategory(u8 deck, u16* out);
 u16 CountMapCardsOfKind(u16 baseCardId);
 u16 CountRemainingAttackCards(CardBattleWork* work, u8 listIndex);
 u16 CountZeroValueMapCards();
@@ -2439,7 +2444,7 @@ void InitSoraCardList(CardBattleWork* work, s32 cardSet);
 void InitSoraTutorialCardList(CardBattleWork* work, s32 cardSet);
 u8 IsCardDisplayOffScreen(CardDisplayWork* work);
 u8 IsLevelUpStockUnlocked();
-u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCount, void* p);
+u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 entryCount, void* p);
 void LoadCardDisplayGfx(CardDisplayWork* work);
 void ObtainStarterCards();
 u16 PickPrizeMapCardForWorld(u16 world, s32 b);

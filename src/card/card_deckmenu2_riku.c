@@ -98,7 +98,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->handVisible = 0;
     work->tiles2 = AllocObjTiles(0x280, NULL);
-    SetRikuDeckMenuFrameCursor(work, 0);
+    SetRikuDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
     work->tiles10 = NULL;
     work->tiles7 = NULL;
@@ -564,7 +564,7 @@ static void Deckmenu2_3(RikuDeckMenuWork* work) {
     *work->resultOut = work->result;
 }
 
-void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind) {
+void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 categoryFilter) {
     DeckCard2Args args;
     u16* cards;
     u8 i;
@@ -577,7 +577,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind) {
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != CARD_NONE) {
-            if (kind == 0) {
+            if (categoryFilter == 0) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -586,7 +586,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind) {
                 args.slot = &cards[i];
                 TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
-            } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == kind - 1) {
+            } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == categoryFilter - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -981,15 +981,15 @@ void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* work) {
     }
 }
 
-void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* work, u8 mode) {
-    switch (mode) {
-    case 0:
+void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* work, u8 frameCursor) {
+    switch (frameCursor) {
+    case DECK_FRAME_CURSOR_CARD:
         SetObjTileSource(work->tiles2, gDeckCardCursorTiles);
         AnimInit(&work->anim3, gDeckCardCursorAnims, gDeckCardCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim3);
         break;
-    case 1:
+    case DECK_FRAME_CURSOR_ROW:
         SetObjTileSource(work->tiles2, gDeckRowCursorTiles);
         AnimInit(&work->anim3, gDeckRowCursorAnims, gDeckRowCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);

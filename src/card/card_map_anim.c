@@ -1047,7 +1047,7 @@ u16 CountCardsInDecks() {
     return count;
 }
 
-u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
+u16 ListCardKindsNotInDeck(u8 deck, u8 thisDeckOnly, u16* out) {
     u16 count;
     u16 total;
     u16 mask;
@@ -1058,7 +1058,7 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
     present = EwramAlloc(0x23C);
     CpuFill32(0, present, 0x23C);
 
-    if (mode == 1) {
+    if (thisDeckOnly == 1) {
         switch (deck) {
         case 0:
             mask = CARD_FLAG_IN_DECK_1;

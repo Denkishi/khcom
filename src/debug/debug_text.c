@@ -41,12 +41,12 @@ void func_0805F7C8(u8 block) {
     sUnk_02034A2C = (u8*)GetBgCharBase(0) + (block << 12);
 }
 
-void DebugTextPrintFont2(u8 x, u8 y, u16* s) {
+void DebugTextPrintFont2(u8 x, u8 y, u16* text) {
     u8 i;
     u16 c;
 
-    for (i = 0; i <= 59 && (u8)*s != 0; i++, s++) {
-        c = *s;
+    for (i = 0; i <= 59 && (u8)*text != 0; i++, text++) {
+        c = *text;
         c = (u8)(c >> 8) | (c << 8);
 
         switch (c & 0xFF00) {
@@ -178,11 +178,11 @@ void DebugTextSetMergeFirstGlyph(s32 on) {
     sDebugTextMergeFirstGlyph = on;
 }
 
-void DebugTextPrintXNumber(u8 x, u8 y, u32 font, u8 v) {
+void DebugTextPrintXNumber(u8 x, u8 y, u32 font, u8 value) {
     u8 buf[8];
 
-    buf[3] = v / 10;
-    buf[5] = v - buf[3] * 10;
+    buf[3] = value / 10;
+    buf[5] = value - buf[3] * 10;
     buf[0] = 0x82;
     buf[1] = 0x98;
     buf[2] = 0x82;
@@ -193,12 +193,12 @@ void DebugTextPrintXNumber(u8 x, u8 y, u32 font, u8 v) {
     DebugTextPrint(x, y, font, buf);
 }
 
-void DebugTextPrintNumber(u8 x, u8 y, u32 font, u16 v) {
+void DebugTextPrintNumber(u8 x, u8 y, u32 font, u16 value) {
     u8 buf[8];
 
-    buf[1] = v / 100;
-    buf[3] = v / 10 - buf[1] * 10;
-    buf[5] = v - (buf[1] * 100 + buf[3] * 10);
+    buf[1] = value / 100;
+    buf[3] = value / 10 - buf[1] * 10;
+    buf[5] = value - (buf[1] * 100 + buf[3] * 10);
     buf[0] = 0x82;
     buf[1] += 0x4F;
     buf[2] = 0x82;
@@ -209,7 +209,7 @@ void DebugTextPrintNumber(u8 x, u8 y, u32 font, u16 v) {
     DebugTextPrint(x, y, font, buf);
 }
 
-void DebugTextPrint(u8 x, u8 y, u32 font, const char* s) {
+void DebugTextPrint(u8 x, u8 y, u32 font, const char* text) {
     u8 i = 0;
     s32 shift = 0;
     u16 character;
@@ -223,7 +223,7 @@ void DebugTextPrint(u8 x, u8 y, u32 font, const char* s) {
         break;
     case 2:
         sDebugTextLines[sDebugTextLineCount].font = font;
-        DebugTextPrintFont2(x, y, (u16*)s);
+        DebugTextPrintFont2(x, y, (u16*)text);
         return;
     }
 
@@ -231,8 +231,8 @@ void DebugTextPrint(u8 x, u8 y, u32 font, const char* s) {
         return;
     }
 
-    while (*s != 0) {
-        character = *(const u16*)s;
+    while (*text != 0) {
+        character = *(const u16*)text;
         character = (character >> 8) | (character << 8);
 
         switch (character & 0xFF00) {
@@ -394,7 +394,7 @@ void DebugTextPrint(u8 x, u8 y, u32 font, const char* s) {
         }
 
         i++;
-        s += 2;
+        text += 2;
 
         if (i > 59) {
             break;

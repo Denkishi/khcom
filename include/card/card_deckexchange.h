@@ -14,7 +14,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind);
 s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 kind, u8 excludeBossCards);
 s32 GetCardIdForKind(s32 kind);
 void ClearDeckExchangeCardGrid(DeckExchangeWork* work);
-void DrawDeckExchangeEquipMarker(u8 a);
+void DrawDeckExchangeEquipMarker(u8 deck);
 void DrawDeckExchangeCardTotals();
 void ShowDeckExchangeCardPreview(DeckExchangeWork* work);
 void ReleaseDeckExchangeCardPreview(DeckExchangeWork* work);

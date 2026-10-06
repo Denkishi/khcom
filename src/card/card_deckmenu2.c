@@ -483,7 +483,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 entryCoun
 void func_08084FA8() {
 }
 
-u16 CountCollectionCardsOfCategory(u8 slot) {
+u16 CountCollectionCardsOfCategory(u8 category) {
     u16 count;
     u16 i;
 
@@ -491,7 +491,7 @@ u16 CountCollectionCardsOfCategory(u8 slot) {
 
     for (i = 0; i < gCardCount; i++) {
         if (gCardCollection[i] != CARD_ID_MASK) {
-            if (gCardDefs[gCardCollection[i] & CARD_ID_MASK].category == slot) {
+            if (gCardDefs[gCardCollection[i] & CARD_ID_MASK].category == category) {
                 count++;
             }
         }
@@ -848,7 +848,7 @@ u8* GetDeckName(u8 index) {
     return gDecks[index].name;
 }
 
-u16 CountActiveDeckCardsOfCategory(u8 slot) {
+u16 CountActiveDeckCardsOfCategory(u8 category) {
     u16* cards;
     u16 count;
     u16 i;
@@ -858,7 +858,7 @@ u16 CountActiveDeckCardsOfCategory(u8 slot) {
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != 0xFFFF) {
-            if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == slot) {
+            if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == category) {
                 count++;
             }
         }
@@ -867,7 +867,7 @@ u16 CountActiveDeckCardsOfCategory(u8 slot) {
     return count;
 }
 
-u16 CountDeckCardsOfCategory(u8 slot, u8 deckIndex) {
+u16 CountDeckCardsOfCategory(u8 category, u8 deckIndex) {
     u16* cards;
     u16 count;
     u16 i;
@@ -877,7 +877,7 @@ u16 CountDeckCardsOfCategory(u8 slot, u8 deckIndex) {
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != 0xFFFF) {
-            if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == slot) {
+            if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == category) {
                 count++;
             }
         }
@@ -4931,7 +4931,7 @@ void DrawDeckCardCount(u8 deck) {
     RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[1] + 1) * 32], base + 0x80, 32);
 }
 
-void DrawDeckEquipMarker(u8 mode) {
+void DrawDeckEquipMarker(u8 deck) {
     u8* base0;
     u8* base1;
     u8* base2;
@@ -4943,7 +4943,7 @@ void DrawDeckEquipMarker(u8 mode) {
     base2 = (u8*)GetBgCharBase(2) + 0x3440;
     src = gDeckEquipMarkerTilesByLanguage[gLanguage];
 
-    switch (mode) {
+    switch (deck) {
     case 0:
         RequestDma3Copy(src + 0x20, base0, 0x1E0);
         RequestDma3Copy(src + 0x420, base1, 0x1E0);
@@ -4965,7 +4965,7 @@ void DrawDeckEquipMarker(u8 mode) {
     base1 = GetBgCharBase(1);
     base2 = GetBgCharBase(2);
 
-    switch (mode) {
+    switch (deck) {
     case 0:
         RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base0 + 0x1A0, 0x1E0);
         RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base1 + 0x1A0, 0x1E0);
@@ -4985,7 +4985,7 @@ void DrawDeckEquipMarker(u8 mode) {
 #endif
 }
 
-void DrawDeckCpCost(u8 mode) {
+void DrawDeckCpCost(u8 deck) {
     u8 costDigits[4];
     u8 cpDigits[4];
     u16 cpCost;
@@ -4993,7 +4993,7 @@ void DrawDeckCpCost(u8 mode) {
     u8* base;
 
     base = NULL;
-    cpCost = GetDeckCpCost(mode);
+    cpCost = GetDeckCpCost(deck);
 
     costDigits[0] = cpCost / 1000;
     costDigits[1] = cpCost / 100 - costDigits[0] * 10;
@@ -5004,7 +5004,7 @@ void DrawDeckCpCost(u8 mode) {
     cpDigits[2] = gGameState.progression.cp / 10 - cpDigits[0] * 100 - cpDigits[1] * 10;
     cpDigits[3] = gGameState.progression.cp - cpDigits[0] * 1000 - cpDigits[1] * 100 - cpDigits[2] * 10;
 
-    switch (mode) {
+    switch (deck) {
     case 0:
 #ifdef VERSION_EU
         base = (u8*)GetBgCharBase(0) + 0x2BE0;

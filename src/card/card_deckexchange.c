@@ -1351,7 +1351,7 @@ void DrawDeckExchangeDeckCardCount(u8 deck) {
     RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[1] + 1) * 32], base + 0x80, 32);
 }
 
-void DrawDeckExchangeEquipMarker(u8 mode) {
+void DrawDeckExchangeEquipMarker(u8 deck) {
     u8* base0;
     u8* base1;
     u8* base2;
@@ -1360,7 +1360,7 @@ void DrawDeckExchangeEquipMarker(u8 mode) {
     base1 = GetBgCharBase(1);
     base2 = GetBgCharBase(2);
 
-    switch (mode) {
+    switch (deck) {
     case 0:
         RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base0 + 0x1A0, 0x1E0);
         RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base1 + 0x1A0, 0x1E0);
@@ -1379,7 +1379,7 @@ void DrawDeckExchangeEquipMarker(u8 mode) {
     }
 }
 
-void DrawDeckExchangeDeckCpCost(u8 kind) {
+void DrawDeckExchangeDeckCpCost(u8 deck) {
     u8 costDigits[3];
     u8 cpDigits[3];
     u8* base;
@@ -1387,7 +1387,7 @@ void DrawDeckExchangeDeckCpCost(u8 kind) {
     u8* out;
 
     base = NULL;
-    n = GetDeckCpCost(kind);
+    n = GetDeckCpCost(deck);
     costDigits[0] = n / 100;
     costDigits[1] = n / 10 - costDigits[0] * 10;
     costDigits[2] = n - costDigits[0] * 100 - costDigits[1] * 10;
@@ -1396,7 +1396,7 @@ void DrawDeckExchangeDeckCpCost(u8 kind) {
     out[1] = gGameState.progression.cp / 10 - out[0] * 10;
     out[2] = gGameState.progression.cp - out[0] * 100 - out[1] * 10;
 
-    switch (kind) {
+    switch (deck) {
     case 0:
         base = GetBgCharBase(0);
         break;

@@ -150,7 +150,7 @@ u16 GetLinkPartnerDeckCardCount() {
     return gLinkPartnerDeck->cardCount;
 }
 
-u16 CountLinkPartnerDeckCardsOfCategory(u8 slot) {
+u16 CountLinkPartnerDeckCardsOfCategory(u8 category) {
     u16* cards;
     u16 count;
     u16 i;
@@ -160,7 +160,7 @@ u16 CountLinkPartnerDeckCardsOfCategory(u8 slot) {
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != 0xFFFF) {
-            if (gCardDefs[cards[i] & CARD_ID_MASK].category == slot) {
+            if (gCardDefs[cards[i] & CARD_ID_MASK].category == category) {
                 count++;
             }
         }

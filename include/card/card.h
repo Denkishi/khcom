@@ -2418,7 +2418,7 @@ void ClearStockedCardSlots(CardBattleWork* work);
 void ClearUsedCardSlots(CardBattleWork* work, u8 listIndex);
 u8 CollectionHasCard(u16 id);
 void ConvertActiveDeckCardToPremium(u16 index);
-u16 CountActiveDeckCardsOfCategory(u8 slot);
+u16 CountActiveDeckCardsOfCategory(u8 category);
 u16 CountAvailableCards(CardBattleWork* work, u8 listIndex);
 void CountCardsNotInDeckByCategory(u8 mode, u16* out);
 u16 CountMapCardsOfKind(u16 baseCardId);

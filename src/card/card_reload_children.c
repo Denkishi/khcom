@@ -318,7 +318,7 @@ u8 REV_COUNT_1(RevCountWork* work, void* task) {
         return fn(work, task);
     }
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         work->steps = 8;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateRevCountHidden);
     }
@@ -489,7 +489,7 @@ u8 RELOAD_1(ReloadWork* work, void* task) {
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateReloadSlideOut);
     }
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         work->steps = 8;
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateReloadSlideOut);
     }

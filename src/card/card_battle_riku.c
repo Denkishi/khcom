@@ -858,7 +858,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
     u8 i;
     u8 slot;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
             gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
         }
@@ -1486,7 +1486,7 @@ u8 UpdateRikuReloadDeal(CardBattleWork* work, void* task) {
     CardSlot* slot;
     u16 index;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
             gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
         }

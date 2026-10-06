@@ -101,7 +101,7 @@ s32 ReadVsKeyChord(u16 held, u16 pressed, s32 side) {
 void VsBtlWorkInit() {
     CpuFill32(0, gBtlWork, sizeof(BtlWork));
     CpuFill32(0, gRikuBtlWork, sizeof(BtlWork));
-    gBtlWork->phase = 0;
+    gBtlWork->phase = BTL_PHASE_START;
     gBtlWork->fadeExcludedPalettes = -0x10000;
     gBtlWork->gravity = 66;
     gBtlWork->fadeAmount = 10;
@@ -381,7 +381,7 @@ void HandleVsSoraCardInput() {
 }
 
 void VsEndCardPlay() {
-    gBtlWork->phase = 1;
+    gBtlWork->phase = BTL_PHASE_IDLE;
 
     if (!(gBtlWork->flags & BTL_FLAG_CARD_BREAK)) {
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
@@ -406,8 +406,8 @@ void VsBattleUpdate() {
     }
 
     switch ((u32)gBtlWork->phase) {
-    case 1:
-    case 2:
+    case BTL_PHASE_IDLE:
+    case BTL_PHASE_CARD_PLAY:
         if (gBtlWork->flags & BTL_FLAG_VS_LINK_PARENT) {
             HandleVsSoraCardInput();
             HandleVsRikuCardInput();
@@ -425,7 +425,7 @@ void VsBattleUpdate() {
         gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
         gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
         gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
-        gBtlWork->phase = 1;
+        gBtlWork->phase = BTL_PHASE_IDLE;
 
         if (gBtlWork->soraOwnsPlay) {
             gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
@@ -454,39 +454,39 @@ void VsBattleUpdate() {
             other->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
         }
 
-        gBtlWork->phase = 2;
+        gBtlWork->phase = BTL_PHASE_CARD_PLAY;
         gBtlWork->phaseStep = 0;
     } else {
         entered = 0;
     }
 
-    if ((gBtlWork->flags & BTL_FLAG_PLAYER_DEFEATED) && gBtlWork->phase != 4) {
-        gBtlWork->phase = 4;
+    if ((gBtlWork->flags & BTL_FLAG_PLAYER_DEFEATED) && gBtlWork->phase != BTL_PHASE_END) {
+        gBtlWork->phase = BTL_PHASE_END;
         gBtlWork->phaseStep = 0;
     }
 
     switch ((u32)gBtlWork->phase) {
-    case 1:
+    case BTL_PHASE_IDLE:
         break;
-    case 0:
-        if (gBtlWork->phaseStep == 0) {
+    case BTL_PHASE_START:
+        if (gBtlWork->phaseStep == BTL_START_STEP_INTRO) {
             gBtlWork->task = NULL;
-            gBtlWork->phaseStep = 1;
+            gBtlWork->phaseStep = BTL_START_STEP_EXCLUDE_PALETTES;
         }
 
         if (FadeIsActive()) return;
 
-        if (gBtlWork->phaseStep == 1) {
+        if (gBtlWork->phaseStep == BTL_START_STEP_EXCLUDE_PALETTES) {
             for (i = 0; i < 32; i++) {
                 if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) FadeSetPaletteExcluded(i, 1);
             }
 
-            gBtlWork->phaseStep = 2;
+            gBtlWork->phaseStep = BTL_START_STEP_CREATE_TASKS;
         }
 
         if (IsTaskActive(gBtlWork->task)) return;
 
-        if (gBtlWork->phaseStep == 2) {
+        if (gBtlWork->phaseStep == BTL_START_STEP_CREATE_TASKS) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlVslockon, NULL);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, NULL);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpoth, NULL);
@@ -501,14 +501,14 @@ void VsBattleUpdate() {
 
             RequestOpenCards();
             RequestBossCardOpen();
-            gBtlWork->phaseStep = 3;
-        } else if (gBtlWork->phaseStep == 3) {
-            gBtlWork->phase = 1;
+            gBtlWork->phaseStep = BTL_START_STEP_FINISH;
+        } else if (gBtlWork->phaseStep == BTL_START_STEP_FINISH) {
+            gBtlWork->phase = BTL_PHASE_IDLE;
             gBtlWork->phaseStep = 0;
         }
 
         break;
-    case 4:
+    case BTL_PHASE_END:
         if (gBtlWork->phaseStep == 0) {
             RequestCloseCards();
             RequestBossCardClose();
@@ -536,7 +536,7 @@ void VsBattleUpdate() {
 
         gBtlWork->phaseStep++;
         break;
-    case 2:
+    case BTL_PHASE_CARD_PLAY:
         if (entered) return;
 
         busy = 0;

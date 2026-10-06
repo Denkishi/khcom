@@ -213,7 +213,7 @@ s32 Friend_card_1(PickupCardWork* work, void* task) {
     u16 timer;
     s16 sy;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         return 0;
     }
 
@@ -321,7 +321,7 @@ s32 Gimmick_card_1(PickupCardWork* work, void* task) {
     u16 timer;
     s16 sy;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         return 0;
     }
 
@@ -425,7 +425,7 @@ u8 FlyPickupCardToDeck(PickupCardWork* work) {
     s32 dy;
     u16 scale;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         return 0;
     }
 

@@ -615,7 +615,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
     ReloadArgs args;
     BtlObj* actor;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         if (gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
             gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
         }
@@ -1354,7 +1354,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* work, Task* task) {
     selectedIndex = 255;
     nextIndex = 255;
 
-    if (gBtlWork->phase == 4) {
+    if (gBtlWork->phase == BTL_PHASE_END) {
         if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
             gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
         }

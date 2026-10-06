@@ -184,6 +184,8 @@ typedef struct BtlObjPos {
     s32 z;
 } BtlObjPos;
 
+#define BTLOBJ_KIND_PLAYER 55
+
 typedef struct BtlObj {
     s32 kind;
     s32 x;

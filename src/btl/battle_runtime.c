@@ -1192,7 +1192,7 @@ s32 ApplyBtlObjHit(BtlObj* obj) {
             return BTL_REACTION_DEFEATED;
         }
 
-        if (obj->kind != 55 && GetRandom() % 8 == 0) {
+        if (obj->kind != BTLOBJ_KIND_PLAYER && GetRandom() % 8 == 0) {
             DropFriendCard(obj->x, obj->y, obj->z - 0x7800);
         }
 

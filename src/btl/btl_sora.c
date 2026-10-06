@@ -578,7 +578,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     act->radiusX = 12;
     act->radiusY = 6;
     act->centerHeight = 12;
-    act->kind = 55;
+    act->kind = BTLOBJ_KIND_PLAYER;
     act->badStatusTimer = 0;
     act->floorZ = 0;
     act->parent = NULL;

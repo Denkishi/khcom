@@ -23,7 +23,7 @@ const u8 gUnk_0902FC64[8] = {
 };
 
 static const EventCameraKeyframe sEvent196Camera[1] = {
-    { -64537, 65280, 71680, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -64537, 65280, 71680, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent196Track0[1] = {
@@ -48,11 +48,11 @@ const EventSequenceDef gEvent196 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

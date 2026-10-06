@@ -23,7 +23,7 @@ static const MessageScriptEntry sEvent187Script[13] = {
 #endif
 
 static const EvSoundCue sEvent187SoundCues[7] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_BGM_EVENT_UNREST, 550, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_BGM_EVENT_UNREST, 1065, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_SND_377, 1130, 0, 0 },
@@ -33,9 +33,9 @@ static const EvSoundCue sEvent187SoundCues[7] = {
 };
 
 static const EventCameraKeyframe sEvent187Camera[3] = {
-    { -65416, 65024, 42496, 0, 255, 0, 0, NULL },
-    { -64436, 65024, 88576, 0, 255, CAMERA_MODE_APPROACH, 260, NULL },
-    { -63536, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
+    { -65416, 65024, 42496, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64436, 65024, 88576, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 260, NULL },
+    { -63536, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
 
 static const EventBgEffectEntry sEvent187BgEffects[5] = {
@@ -94,11 +94,11 @@ const EventSequenceDef gEvent187 = {
     0,
     0,
     BATTLE_RIKU_6,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

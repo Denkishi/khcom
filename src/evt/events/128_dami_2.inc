@@ -20,7 +20,7 @@ static const MessageScriptEntry sEvent128Script[4] = {
 #include "event_128_text.inc"
 #endif
 static const EventCameraKeyframe sEvent128Camera[1] = {
-    { -55537, 80384, 58368, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -55537, 80384, 58368, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EvSoundCue sEvent128SoundCues[1] = {
@@ -74,12 +74,12 @@ const EventSequenceDef gEvent128 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };
 #endif

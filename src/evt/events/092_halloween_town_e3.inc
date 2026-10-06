@@ -11,7 +11,7 @@ static const MessageScriptEntry sEvent092Script[1] = {
 #endif
 
 static const EventCameraKeyframe sEvent092Camera[1] = {
-    { -65485, 94208, 153600, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -65485, 94208, 153600, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EvSoundCue sEvent092SoundCues[1] = {
@@ -45,11 +45,11 @@ const EventSequenceDef gEvent092 = {
     0,
     0,
     BATTLE_OOGIE_BOOGIE,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

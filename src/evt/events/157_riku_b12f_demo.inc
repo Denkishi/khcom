@@ -35,9 +35,9 @@ static const EvSoundCue sEvent157SoundCues[4] = {
 };
 
 static const EventCameraKeyframe sEvent157Camera[3] = {
-    { -65406, 65536, 48640, 0, 255, 0, 0, NULL },
-    { -65116, 58368, 52480, 0, 255, CAMERA_MODE_APPROACH, 50, NULL },
-    { -64537, 65536, 54784, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
+    { -65406, 65536, 48640, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -65116, 58368, 52480, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 50, NULL },
+    { -64537, 65536, 54784, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
 };
 
 static const EventCharaKeyframe sEvent157Track0[9] = {
@@ -100,8 +100,8 @@ const EventSequenceDef gEvent157 = {
     EVENT_158_RIKU_B11F_ENTRANCE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

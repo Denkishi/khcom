@@ -87,8 +87,8 @@ static const EvSoundCue sEvent156SoundCues[5] = {
 };
 
 static const EventCameraKeyframe sEvent156Camera[2] = {
-    { -64496, 193024, 61184, 0, 255, 0, 0, NULL },
-    { -62536, 182016, 66560, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
+    { -64496, 193024, 61184, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -62536, 182016, 66560, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
 };
 
 static const EventBgEffectEntry sEvent156BgEffects[5] = {
@@ -164,8 +164,8 @@ const EventSequenceDef gEvent156 = {
     EVENT_157_RIKU_B12F_DEMO,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

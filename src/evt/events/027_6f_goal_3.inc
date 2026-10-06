@@ -20,9 +20,9 @@ static const MessageScriptEntry sEvent027Script[10] = {
 #endif
 
 static const EventCameraKeyframe sEvent027Camera[3] = {
-    { -65223, 196352, 58880, 0, 255, 0, 0, NULL },
-    { -65066, 206080, 53248, 0, 255, CAMERA_MODE_APPROACH, 40, NULL },
-    { -64537, 199936, 60928, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 30, NULL },
+    { -65223, 196352, 58880, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -65066, 206080, 53248, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 40, NULL },
+    { -64537, 199936, 60928, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 30, NULL },
 };
 
 static const EvSoundCue sEvent027SoundCues[4] = {
@@ -126,11 +126,11 @@ const EventSequenceDef gEvent027 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 194, 4 },
     6,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

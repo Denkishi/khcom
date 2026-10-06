@@ -15,7 +15,7 @@ static const EvSoundCue sEvent105SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent105Camera[1] = {
-    { -64626, 81920, 102400, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -64626, 81920, 102400, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent105Track0[1] = {
@@ -45,11 +45,11 @@ const EventSequenceDef gEvent105 = {
     0,
     0,
     BATTLE_URSULA,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

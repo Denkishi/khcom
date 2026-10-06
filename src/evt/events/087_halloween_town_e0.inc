@@ -71,7 +71,7 @@ static const MessageScriptEntry sEvent087Script[18] = {
 #endif
 
 static const EvSoundCue sEvent087SoundCues[6] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_EV_DL_JUMP, 313, 0, 0 },
     { SONG_SND_347, 490, 0, 0 },
     { SONG_EV_DL_JUMP, 649, 0, 0 },
@@ -80,9 +80,9 @@ static const EvSoundCue sEvent087SoundCues[6] = {
 };
 
 static const EventCameraKeyframe sEvent087Camera[3] = {
-    { -65536, 30720, 20480, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -65205, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, NULL },
-    { -64537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
+    { -65536, 30720, 20480, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -65205, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, NULL },
+    { -64537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
 
 static const EventBgEffectEntry sEvent087BgEffects[6] = {
@@ -261,11 +261,11 @@ const EventSequenceDef gEvent087 = {
     0,
     0,
     BATTLE_EVENT_HALLOWEEN_TOWN,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

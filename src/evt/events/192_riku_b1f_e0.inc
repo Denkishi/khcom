@@ -19,8 +19,8 @@ static const EvSoundCue sEvent192SoundCues[3] = {
 };
 
 static const EventCameraKeyframe sEvent192Camera[2] = {
-    { -65536, 35072, 32512, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -64537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
+    { -65536, 35072, 32512, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -64537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
 };
 
 static const EventCharaKeyframe sEvent192Track0[9] = {
@@ -53,11 +53,11 @@ const EventSequenceDef gEvent192 = {
     0,
     1,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

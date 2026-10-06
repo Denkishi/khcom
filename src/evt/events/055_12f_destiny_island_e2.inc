@@ -11,7 +11,7 @@ static const MessageScriptEntry sEvent055Script[1] = {
 #endif
 
 static const EventCameraKeyframe sEvent055Camera[1] = {
-    { -60536, 60928, 26880, 0, 255, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -60536, 60928, 26880, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EvSoundCue sEvent055SoundCues[3] = {
@@ -46,11 +46,11 @@ const EventSequenceDef gEvent055 = {
     0,
     0,
     BATTLE_DARKSIDE,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

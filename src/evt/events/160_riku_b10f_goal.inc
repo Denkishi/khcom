@@ -23,7 +23,7 @@ static const MessageScriptEntry sEvent160Script[13] = {
 #endif
 
 static const EvSoundCue sEvent160SoundCues[7] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_EV_WARPOUT, 130, 0, 0 },
     { SONG_BGM_EVENT_XIII, 160, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_SND_359, 260, 0, 0 },
@@ -33,7 +33,7 @@ static const EvSoundCue sEvent160SoundCues[7] = {
 };
 
 static const EventCameraKeyframe sEvent160Camera[1] = {
-    { -64537, 188160, 61184, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -64537, 188160, 61184, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent160Track0[13] = {
@@ -78,11 +78,11 @@ const EventSequenceDef gEvent160 = {
     0,
     0,
     BATTLE_VEXEN_3,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

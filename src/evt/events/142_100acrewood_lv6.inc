@@ -38,10 +38,10 @@ static const EvSoundCue sEvent142SoundCues[4] = {
 };
 
 static const EventCameraKeyframe sEvent142Camera[4] = {
-    { -65146, 680192, 359424, 0, 255, 0, 0, NULL },
-    { -64916, 675840, 353280, 0, 255, CAMERA_MODE_APPROACH, 80, NULL },
-    { -64796, 683264, 353280, 0, 255, CAMERA_MODE_APPROACH, 50, NULL },
-    { -63536, 681728, 356352, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
+    { -65146, 680192, 359424, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64916, 675840, 353280, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 80, NULL },
+    { -64796, 683264, 353280, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 50, NULL },
+    { -63536, 681728, 356352, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
 };
 
 static const EventCharaKeyframe sEvent142Track0[25] = {
@@ -123,11 +123,11 @@ const EventSequenceDef gEvent142 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
+    WORLD_NONE,
     6,
 };

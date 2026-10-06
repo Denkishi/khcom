@@ -22,12 +22,12 @@ static const MessageScriptEntry sEvent040Script[12] = {
 #endif
 
 static const EventCameraKeyframe sEvent040Camera[2] = {
-    { -65296, 165376, 73728, 0, 255, 0, 0, NULL },
-    { -62536, 190208, 60672, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
+    { -65296, 165376, 73728, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -62536, 190208, 60672, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
 };
 
 static const EvSoundCue sEvent040SoundCues[4] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_BGM_EVENT_XIII, 360, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_BGM_EVENT_XIII, 700, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_BGM_EVENT2, 825, EV_SOUND_FLAG_END, 0 },
@@ -114,11 +114,11 @@ const EventSequenceDef gEvent040 = {
     0,
     0,
     BATTLE_VEXEN_1,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

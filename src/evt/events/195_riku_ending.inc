@@ -25,13 +25,13 @@ static const MessageScriptEntry sEvent195Script[15] = {
 #endif
 
 static const EvSoundCue sEvent195SoundCues[2] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_SND_358, 836, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent195Camera[2] = {
-    { -65536, 106752, 103168, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -64537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
+    { -65536, 106752, 103168, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -64537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
 };
 
 static const EventCharaKeyframe sEvent195Track0[10] = {
@@ -73,11 +73,11 @@ const EventSequenceDef gEvent195 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
     13,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

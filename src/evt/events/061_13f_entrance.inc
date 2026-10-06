@@ -28,8 +28,8 @@ static const MessageScriptEntry sEvent061Script[18] = {
 #endif
 
 static const EventCameraKeyframe sEvent061Camera[2] = {
-    { -65536, 34304, 34560, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -55537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
+    { -65536, 34304, 34560, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -55537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
 };
 
 static const EvSoundCue sEvent061SoundCues[5] = {
@@ -138,11 +138,11 @@ const EventSequenceDef gEvent061 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
     WORLD_CASTLE_OBLIVION,
-    255,
+    POOH_LEVEL_NONE,
 };

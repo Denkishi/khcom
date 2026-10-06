@@ -18,7 +18,7 @@ static const EvSoundCue sEvent174SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent174Camera[1] = {
-    { -64537, 194816, 62720, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -64537, 194816, 62720, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent174Track0[15] = {
@@ -60,8 +60,8 @@ const EventSequenceDef gEvent174 = {
     EVENT_175_RIKU_B4F_DEMO,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

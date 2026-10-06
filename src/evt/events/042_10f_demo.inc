@@ -17,7 +17,7 @@ static const MessageScriptEntry sEvent042Script[7] = {
 #endif
 
 static const EventCameraKeyframe sEvent042Camera[1] = {
-    { -65485, 68864, 59904, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -65485, 68864, 59904, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EvSoundCue sEvent042SoundCues[2] = {
@@ -71,8 +71,8 @@ const EventSequenceDef gEvent042 = {
     EVENT_043_11F_ENTRANCE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

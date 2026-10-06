@@ -19,8 +19,8 @@ static const MessageScriptEntry sEvent135Script[1] = {
 #endif
 
 static const EventCameraKeyframe sEvent135Camera[2] = {
-    { -65536, 105216, 67328, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -64636, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
+    { -65536, 105216, 67328, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -64636, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
 };
 
 static const EvSoundCue sEvent135SoundCues[2] = {
@@ -67,11 +67,11 @@ const EventSequenceDef gEvent135 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
+    WORLD_NONE,
     0,
 };

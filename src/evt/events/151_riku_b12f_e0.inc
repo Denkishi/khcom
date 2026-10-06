@@ -29,8 +29,8 @@ static const EvSoundCue sEvent151SoundCues[2] = {
 };
 
 static const EventCameraKeyframe sEvent151Camera[2] = {
-    { -65536, 55552, 75264, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -64537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
+    { -65536, 55552, 75264, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -64537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
 };
 
 static const EventCharaKeyframe sEvent151Track0[23] = {
@@ -77,11 +77,11 @@ const EventSequenceDef gEvent151 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     1,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

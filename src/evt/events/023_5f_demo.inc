@@ -24,8 +24,8 @@ static const MessageScriptEntry sEvent023Script[14] = {
 #endif
 
 static const EventCameraKeyframe sEvent023Camera[2] = {
-    { -64676, 68608, 60672, 0, 255, 0, 0, NULL },
-    { -64537, 76544, 66816, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 130, NULL },
+    { -64676, 68608, 60672, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64537, 76544, 66816, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 130, NULL },
 };
 
 static const EvSoundCue sEvent023SoundCues[4] = {
@@ -98,8 +98,8 @@ const EventSequenceDef gEvent023 = {
     EVENT_024_6F_ENTRANCE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

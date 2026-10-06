@@ -22,7 +22,7 @@ static const MessageScriptEntry sEvent129Script[12] = {
 #endif
 
 static const EvSoundCue sEvent129SoundCues[6] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_EV_WOMAN2_DIRTL, 376, 0, 0 },
     { SONG_BGM_EVENT_SILENCE, 400, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_SND_351, 639, 0, 0 },
@@ -31,11 +31,11 @@ static const EvSoundCue sEvent129SoundCues[6] = {
 };
 
 static const EventCameraKeyframe sEvent129Camera[5] = {
-    { -65536, 31488, 63744, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -65306, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, NULL },
-    { -64536, 81152, 67072, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
-    { -64036, 49408, 76800, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
-    { -55537, 43264, 77568, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
+    { -65536, 31488, 63744, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -65306, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, NULL },
+    { -64536, 81152, 67072, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 100, NULL },
+    { -64036, 49408, 76800, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 100, NULL },
+    { -55537, 43264, 77568, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
 };
 
 static const EventCharaKeyframe sEvent129Track0[7] = {
@@ -149,11 +149,11 @@ const EventSequenceDef gEvent129 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     1,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

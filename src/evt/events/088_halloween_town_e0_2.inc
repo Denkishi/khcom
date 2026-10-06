@@ -22,7 +22,7 @@ static const MessageScriptEntry sEvent088Script[12] = {
 #endif
 
 static const EventCameraKeyframe sEvent088Camera[1] = {
-    { -65485, 30720, 20480, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -65485, 30720, 20480, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventBgEffectEntry sEvent088BgEffects[5] = {
@@ -126,11 +126,11 @@ const EventSequenceDef gEvent088 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     1,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

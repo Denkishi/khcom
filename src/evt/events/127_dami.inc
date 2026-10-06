@@ -26,7 +26,7 @@ static const MessageScriptEntry sEvent127Script[7] = {
 #include "event_127_text.inc"
 #endif
 static const EventCameraKeyframe sEvent127Camera[1] = {
-    { -55537, 66304, 66560, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -55537, 66304, 66560, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EvSoundCue sEvent127SoundCues[1] = {
@@ -76,12 +76,12 @@ const EventSequenceDef gEvent127 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };
 #endif

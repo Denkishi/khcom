@@ -12,13 +12,13 @@ static const MessageScriptEntry sEvent068Script[2] = {
 #endif
 
 static const EventCameraKeyframe sEvent068Camera[3] = {
-    { -65206, 216576, 51968, 0, 255, 0, 0, NULL },
-    { -65166, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 60, NULL },
-    { -55537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
+    { -65206, 216576, 51968, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -65166, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 60, NULL },
+    { -55537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
 
 static const EvSoundCue sEvent068SoundCues[2] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_EV_WHITEOUT, 330, EV_SOUND_FLAG_END, 0 },
 };
 
@@ -72,11 +72,11 @@ const EventSequenceDef gEvent068 = {
     0,
     0,
     BATTLE_MARLUXIA_2,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

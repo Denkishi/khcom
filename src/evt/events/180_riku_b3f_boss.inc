@@ -15,7 +15,7 @@ static const EvSoundCue sEvent180SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent180Camera[1] = {
-    { -64537, 61440, 92160, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -64537, 61440, 92160, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent180Track0[2] = {
@@ -46,11 +46,11 @@ const EventSequenceDef gEvent180 = {
     0,
     0,
     BATTLE_DARKSIDE,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

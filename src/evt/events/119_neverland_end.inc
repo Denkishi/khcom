@@ -40,12 +40,12 @@ static const MessageScriptEntry sEvent119Script[30] = {
 #endif
 
 static const EventCameraKeyframe sEvent119Camera[2] = {
-    { -64316, 41984, 62464, 0, 255, CAMERA_KEYFRAME_FLAG_SWAY, 0, NULL },
-    { -64236, 47104, 67584, 0, 255, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 60, NULL },
+    { -64316, 41984, 62464, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_SWAY, 0, NULL },
+    { -64236, 47104, 67584, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 60, NULL },
 };
 
 static const EvSoundCue sEvent119SoundCues[13] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_SND_387, 1, 0, 0 },
     { SONG_BGM_EVENT4, 500, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_EV_HUKUROUJUMP, 850, 0, 0 },
@@ -183,11 +183,11 @@ const EventSequenceDef gEvent119 = {
     0,
     1,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

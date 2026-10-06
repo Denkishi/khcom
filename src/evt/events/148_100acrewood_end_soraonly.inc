@@ -11,11 +11,11 @@ static const MessageScriptEntry sEvent148Script[1] = {
 #endif
 
 static const EvSoundCue sEvent148SoundCues[1] = {
-    { 65535, 0, EV_SOUND_FLAG_END, 0 },
+    { SONG_NONE, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent148Camera[1] = {
-    { -64537, 790528, 416512, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -64537, 790528, 416512, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent148Track0[6] = {
@@ -45,11 +45,11 @@ const EventSequenceDef gEvent148 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
+    WORLD_NONE,
     7,
 };

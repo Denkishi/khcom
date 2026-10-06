@@ -37,9 +37,9 @@ static const EvSoundCue sEvent126SoundCues[3] = {
 };
 
 static const EventCameraKeyframe sEvent126Camera[3] = {
-    { -64916, 43264, 67072, 0, 255, 0, 0, NULL },
-    { -64686, 72192, 48384, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
-    { -55537, 81152, 43520, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
+    { -64916, 43264, 67072, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64686, 72192, 48384, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 100, NULL },
+    { -55537, 81152, 43520, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
 };
 
 static const EventCharaKeyframe sEvent126Track0[18] = {
@@ -160,11 +160,11 @@ const EventSequenceDef gEvent126 = {
     0,
     1,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

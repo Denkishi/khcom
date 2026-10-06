@@ -15,7 +15,7 @@ static const EvSoundCue sEvent125SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent125Camera[1] = {
-    { -55537, 65536, 103168, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -55537, 65536, 103168, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent125Track0[2] = {
@@ -47,11 +47,11 @@ const EventSequenceDef gEvent125 = {
     0,
     0,
     BATTLE_HADES,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

@@ -24,7 +24,7 @@ static const MessageScriptEntry sEvent176Script[14] = {
 #endif
 
 static const EvSoundCue sEvent176SoundCues[8] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_EV_RUMBLE, 120, 0, 0 },
     { SONG_EV_RUMBLE, 150, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_EV_WARPOUT, 250, 0, 0 },
@@ -35,11 +35,11 @@ static const EvSoundCue sEvent176SoundCues[8] = {
 };
 
 static const EventCameraKeyframe sEvent176Camera[5] = {
-    { -65416, 174080, 72960, 0, 255, 0, 0, NULL },
-    { -65336, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, NULL },
-    { -65326, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, NULL },
-    { -65206, 0, 0, 0, 255, CAMERA_MODE_KEEP, 0, NULL },
-    { -62536, 183552, 65280, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
+    { -65416, 174080, 72960, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -65336, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, NULL },
+    { -65326, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, NULL },
+    { -65206, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_MODE_KEEP, 0, NULL },
+    { -62536, 183552, 65280, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
 };
 
 static const EventCharaKeyframe sEvent176Track0[15] = {
@@ -100,11 +100,11 @@ const EventSequenceDef gEvent176 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

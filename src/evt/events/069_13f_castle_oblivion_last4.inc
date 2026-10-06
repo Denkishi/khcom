@@ -19,13 +19,13 @@ static const MessageScriptEntry sEvent069Script[1] = {
 #endif
 
 static const EventCameraKeyframe sEvent069Camera[3] = {
-    { -65536, 216576, 51968, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -65286, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 150, NULL },
-    { -55537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
+    { -65536, 216576, 51968, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -65286, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 150, NULL },
+    { -55537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
 
 static const EvSoundCue sEvent069SoundCues[2] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_BGM_TOWN_FIELD, 2000, EV_SOUND_FLAG_END, 0 },
 };
 
@@ -84,8 +84,8 @@ const EventSequenceDef gEvent069 = {
     EVENT_070_13F_CASTLE_OBLIVION_LAST5,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

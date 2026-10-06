@@ -11,15 +11,15 @@ static const MessageScriptEntry sEvent150Script[1] = {
 #endif
 
 static const EvSoundCue sEvent150SoundCues[2] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_BGM_TOWN_FIELD, 5000, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent150Camera[4] = {
-    { -65536, 196352, 58112, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -65416, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 110, NULL },
-    { -65306, 0, 0, 0, 255, CAMERA_MODE_KEEP, 0, NULL },
-    { -64537, 205056, 51200, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
+    { -65536, 196352, 58112, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -65416, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 110, NULL },
+    { -65306, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_MODE_KEEP, 0, NULL },
+    { -64537, 205056, 51200, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
 };
 
 static const EventCharaKeyframe sEvent150Track0[8] = {
@@ -51,11 +51,11 @@ const EventSequenceDef gEvent150 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

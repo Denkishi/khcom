@@ -40,12 +40,12 @@ static const MessageScriptEntry sEvent095Script[30] = {
 #endif
 
 static const EventCameraKeyframe sEvent095Camera[6] = {
-    { -65436, 30720, 81920, 0, 255, 0, 0, NULL },
-    { -64996, 87040, 51200, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
-    { -64876, 48640, 79872, 0, 255, CAMERA_MODE_APPROACH, 60, NULL },
+    { -65436, 30720, 81920, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64996, 87040, 51200, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 100, NULL },
+    { -64876, 48640, 79872, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 60, NULL },
     { -64776, 0, 0, 0, EVENT_CHARA_SORA, 0, 0, NULL },
-    { -64636, 87040, 51200, 0, 255, CAMERA_MODE_APPROACH, 50, NULL },
-    { -64537, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
+    { -64636, 87040, 51200, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 50, NULL },
+    { -64537, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
 
 static const EvSoundCue sEvent095SoundCues[4] = {
@@ -171,11 +171,11 @@ const EventSequenceDef gEvent095 = {
     0,
     0,
     BATTLE_CARD_SOLDIERS,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

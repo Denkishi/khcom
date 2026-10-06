@@ -32,9 +32,9 @@ static const EvSoundCue sEvent122SoundCues[3] = {
 };
 
 static const EventCameraKeyframe sEvent122Camera[3] = {
-    { -65326, 46592, 31232, 0, 255, 0, 0, NULL },
-    { -64986, 52224, 31232, 0, 255, CAMERA_MODE_APPROACH, 80, NULL },
-    { -60536, 73216, 38656, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 210, NULL },
+    { -65326, 46592, 31232, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64986, 52224, 31232, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 80, NULL },
+    { -60536, 73216, 38656, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 210, NULL },
 };
 
 static const EventCharaKeyframe sEvent122Track0[21] = {
@@ -152,11 +152,11 @@ const EventSequenceDef gEvent122 = {
     0,
     0,
     BATTLE_CLOUD,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

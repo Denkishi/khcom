@@ -30,9 +30,9 @@ static const MessageScriptEntry sEvent074Script[20] = {
 #endif
 
 static const EventCameraKeyframe sEvent074Camera[3] = {
-    { -65536, 30720, 20480, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
-    { -65436, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, NULL },
-    { -65286, 30720, 20480, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 150, NULL },
+    { -65536, 30720, 20480, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -65436, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, NULL },
+    { -65286, 30720, 20480, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 150, NULL },
 };
 
 static const EvSoundCue sEvent074SoundCues[3] = {
@@ -157,11 +157,11 @@ const EventSequenceDef gEvent074 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     1,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

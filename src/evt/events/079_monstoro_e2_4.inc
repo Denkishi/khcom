@@ -33,12 +33,12 @@ static const MessageScriptEntry sEvent079Script[6] = {
 #endif
 
 static const EventCameraKeyframe sEvent079Camera[2] = {
-    { -65535, 34304, 30720, 0, 255, 0, 0, NULL },
-    { -63536, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
+    { -65535, 34304, 30720, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -63536, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
 
 static const EvSoundCue sEvent079SoundCues[1] = {
-    { 65535, 0, EV_SOUND_FLAG_END, 0 },
+    { SONG_NONE, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent079Track0[21] = {
@@ -86,8 +86,8 @@ const EventSequenceDef gEvent079 = {
     EVENT_080_MONSTORO_E2_5,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

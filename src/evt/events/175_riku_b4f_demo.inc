@@ -28,8 +28,8 @@ static const EvSoundCue sEvent175SoundCues[2] = {
 };
 
 static const EventCameraKeyframe sEvent175Camera[2] = {
-    { -65396, 56320, 53248, 0, 255, 0, 0, NULL },
-    { -64537, 62976, 55808, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
+    { -65396, 56320, 53248, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64537, 62976, 55808, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, NULL },
 };
 
 static const EventCharaKeyframe sEvent175Track0[4] = {
@@ -68,8 +68,8 @@ const EventSequenceDef gEvent175 = {
     EVENT_176_RIKU_B3F_ENTRANCE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

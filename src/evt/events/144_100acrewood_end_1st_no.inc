@@ -17,7 +17,7 @@ static const EvSoundCue sEvent144SoundCues[4] = {
 };
 
 static const EventCameraKeyframe sEvent144Camera[1] = {
-    { -64537, 790528, 416512, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
+    { -64537, 790528, 416512, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent144Track0[13] = {
@@ -64,11 +64,11 @@ const EventSequenceDef gEvent144 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
+    WORLD_NONE,
     7,
 };

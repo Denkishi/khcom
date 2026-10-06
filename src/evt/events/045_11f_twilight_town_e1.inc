@@ -36,14 +36,14 @@ static const MessageScriptEntry sEvent045Script[26] = {
 #endif
 
 static const EventCameraKeyframe sEvent045Camera[4] = {
-    { -65416, 65024, 42496, 0, 255, 0, 0, NULL },
-    { -64436, 65024, 96256, 0, 255, CAMERA_MODE_APPROACH, 280, NULL },
-    { -64336, 65024, 88320, 0, 255, CAMERA_MODE_APPROACH, 100, NULL },
-    { -60536, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
+    { -65416, 65024, 42496, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -64436, 65024, 96256, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 280, NULL },
+    { -64336, 65024, 88320, 0, EVENT_CHARA_NONE, CAMERA_MODE_APPROACH, 100, NULL },
+    { -60536, 0, 0, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, NULL },
 };
 
 static const EvSoundCue sEvent045SoundCues[5] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_BGM_EVENT1, 720, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_BGM_EVENT1, 1045, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_BGM_EVENT_XIII, 1055, EV_SOUND_FLAG_FADE_IN, 0 },
@@ -148,11 +148,11 @@ const EventSequenceDef gEvent045 = {
     0,
     0,
     BATTLE_VEXEN_2,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

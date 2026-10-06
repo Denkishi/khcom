@@ -24,7 +24,7 @@ static const MessageScriptEntry sEvent166Script[14] = {
 #endif
 
 static const EvSoundCue sEvent166SoundCues[5] = {
-    { 65535, 0, 0, 0 },
+    { SONG_NONE, 0, 0, 0 },
     { SONG_SND_379, 410, 0, 0 },
     { SONG_BGM_EVENT_UNREST, 411, 0, 0 },
     { SONG_EV_CARDTHR, 989, 0, 0 },
@@ -32,8 +32,8 @@ static const EvSoundCue sEvent166SoundCues[5] = {
 };
 
 static const EventCameraKeyframe sEvent166Camera[2] = {
-    { -65146, 175872, 68352, 0, 255, 0, 0, NULL },
-    { -62536, 188416, 61696, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
+    { -65146, 175872, 68352, 0, EVENT_CHARA_NONE, 0, 0, NULL },
+    { -62536, 188416, 61696, 0, EVENT_CHARA_NONE, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, NULL },
 };
 
 static const EventCharaKeyframe sEvent166Track0[24] = {
@@ -106,11 +106,11 @@ const EventSequenceDef gEvent166 = {
     0,
     0,
     0,
-    65535,
+    EVENT_NONE,
     0,
     { 0, 0 },
-    65535,
+    EVENT_EXIT_NONE,
     0,
-    255,
-    255,
+    WORLD_NONE,
+    POOH_LEVEL_NONE,
 };

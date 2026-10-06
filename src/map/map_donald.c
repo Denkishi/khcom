@@ -75,7 +75,7 @@ void Task_MapDonald_0(MapDonaldWork* work) {
     obj->angle = 0x80;
     obj->height = 0x20;
     obj->kind = 2;
-    work->visible = 1;
+    work->visible = TRUE;
     work->update = MapDonaldCheckTalk;
     work->tiles = AllocObjTiles(0x400, gDonaFl00Tiles);
     work->palette = LoadObjPalette(gDonaldPalette, 32);
@@ -86,16 +86,16 @@ void Task_MapDonald_0(MapDonaldWork* work) {
     FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
-    work->targeted = 0;
+    work->targeted = FALSE;
     TaskPoolInit(&work->tasks2, 1);
     TaskCreate(&work->tasks2, &gTaskDescMapTalk, &work->obj);
 }
 
 s32 Task_MapDonald_1(MapDonaldWork* work) {
     if ((u8)IsMapInterrupted()) {
-        work->visible = 0;
+        work->visible = FALSE;
     } else {
-        work->visible = 1;
+        work->visible = TRUE;
         work->targeted = IsFldObjTalkTarget(&work->obj);
         TaskPoolUpdate(&work->tasks);
         TaskPoolUpdate(&work->tasks2);

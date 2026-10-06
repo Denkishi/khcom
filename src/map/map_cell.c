@@ -252,7 +252,7 @@ void MapMoveCameraTarget(s32 dx, s32 dy) {
 }
 
 void SetMapAttackBox(s32 x, s32 y, s32 z) {
-    gMapRoomState->attackActive = 1;
+    gMapRoomState->attackActive = TRUE;
     gMapRoomState->attackX = x;
     gMapRoomState->attackY = y;
     gMapRoomState->attackZ = z;
@@ -260,42 +260,42 @@ void SetMapAttackBox(s32 x, s32 y, s32 z) {
 
 u8 IsHitByMapAttack(FldPos* pos, s16 radius, s16 height) {
     if (!gMapRoomState->attackActive) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->flags & ROOM_FLAG_ATTACK_HIT) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->attackX - 0x1400 > pos->x + (radius << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->attackX + 0x1400 < pos->x - (radius << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->attackY - 0x1400 > pos->y + (radius << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->attackY + 0x1400 < pos->y - (radius << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->attackZ - 0x2000 > pos->z) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->attackZ + 0x800 < pos->z - (height << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->attackZ <= pos->ground) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 GetCurrentRoomCardValue() {
@@ -304,27 +304,27 @@ u8 GetCurrentRoomCardValue() {
 
 s32 IsMapInterrupted() {
     if ((gFieldState->flags & (FIELD_FLAG_MENU_OPEN | FIELD_FLAG_ROOM_CREATE)) || (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 IsFldObjTalkTarget(FldObj* obj) {
     if (IsMessageWindowOpen()) {
-        return 0;
+        return FALSE;
     }
 
     if (gFieldState->flags & (FIELD_FLAG_FREEZE_PLAYER | FIELD_FLAG_ROOM_CREATE | FIELD_FLAG_PLAYER_JUMPING)) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->flags & (ROOM_FLAG_ENEMY_STRUCK | ROOM_FLAG_ATTACK_HIT)) {
-        return 0;
+        return FALSE;
     }
 
     if (gFieldState->actor.fieldPosition.z != gFieldState->actor.fieldPosition.ground) {
-        return 0;
+        return FALSE;
     }
 
     return gFieldState->lockonTarget == obj;
@@ -381,7 +381,7 @@ void RequestMapMode() {
 }
 
 void ReturnToMap(u8 returnToMenu) {
-    if (returnToMenu != 1) {
+    if (returnToMenu != TRUE) {
         gGameState.mapMenuCursor = 0xFF;
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
     }
@@ -409,7 +409,7 @@ void InitFieldState() {
     gMapRoomState->flags = 0;
     gMapRoomState->jumpGmkAngle = 0;
     gMapRoomState->jumpGmkHeight = 0;
-    gMapRoomState->attackActive = 0;
+    gMapRoomState->attackActive = FALSE;
     TaskPoolInit(&gMapRoomState->tasks, 1);
 }
 
@@ -477,7 +477,7 @@ void UpdateMapField() {
 
     gMapRoomState->jumpGmkHeight = 0;
     TaskPoolUpdate(&gFieldState->tasks);
-    gMapRoomState->attackActive = 0;
+    gMapRoomState->attackActive = FALSE;
 
     if ((gFieldState->flags & FIELD_FLAG_FREEZE_PLAYER) == 0 && (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) == 0) {
         TaskPoolUpdate(&gFieldState->tasks2);
@@ -703,7 +703,7 @@ void MapBuildStairs(u16 x, u16 y) {
     u8 variant;
     s32 go;
 
-    go = 1;
+    go = TRUE;
 
     while (go) {
         cell = MapGetCell(x, y);
@@ -751,7 +751,7 @@ void MapBuildStairs(u16 x, u16 y) {
             cell = MapGetCell(x, y - 1);
             cell->flags |= MAP_CELL_FLAG_STAIRS;
             MapCellSetBg2PieceVariant(cell, 41, variant);
-            go = 0;
+            go = FALSE;
             break;
         case 6:
             MapGetCell(x, y + 1)->flags |= MAP_CELL_FLAG_KEEP_CLEAR;
@@ -763,7 +763,7 @@ void MapBuildStairs(u16 x, u16 y) {
             cell = MapGetCell(x, y - 1);
             cell->flags |= MAP_CELL_FLAG_STAIRS;
             MapCellSetBg2PieceVariant(cell, 46, variant);
-            go = 0;
+            go = FALSE;
             break;
         }
 
@@ -772,7 +772,7 @@ void MapBuildStairs(u16 x, u16 y) {
 }
 
 void MapMarkJumpSpot(MapPlatform* platform) {
-    s32 go = 1;
+    s32 go = TRUE;
     u16 x = platform->x;
     u16 y = platform->y;
 
@@ -788,7 +788,7 @@ void MapMarkJumpSpot(MapPlatform* platform) {
             cell->flags |= MAP_CELL_FLAG_JUMP_PAD;
             platform->x = x + 1;
             platform->y = y + 1;
-            go = 0;
+            go = FALSE;
             break;
         case 6:
             MapGetCell(x, y + 1)->flags |= MAP_CELL_FLAG_JUMP_PAD;
@@ -797,7 +797,7 @@ void MapMarkJumpSpot(MapPlatform* platform) {
             cell->flags |= MAP_CELL_FLAG_JUMP_PAD;
             platform->x = x;
             platform->y = y + 1;
-            go = 0;
+            go = FALSE;
             break;
         default:
             break;
@@ -834,7 +834,7 @@ void MapFindPlatformStairs(MapPlatform* platform) {
                                 (platform->spotUpperZ <= top->upperZ &&
                                  (platform->spotUpperZ < top->upperZ ||
                                   platform->left + GetRandom() % (platform->right - platform->left + 1) > x))) {
-                                platform->hasStairs = 1;
+                                platform->hasStairs = TRUE;
                                 platform->x = x;
                                 platform->y = y - rise;
                                 platform->spotType = top->type;
@@ -1050,12 +1050,12 @@ void MapMarkFloorVariants() {
                 continue;
             }
 
-            ok = 1;
+            ok = TRUE;
 
             for (k = 11; k >= 0; k--) {
                 if (sMapPlatforms[k].z != floorZ) {
                     if (sMapPlatforms[k].z != 0x100000) {
-                        ok = 0;
+                        ok = FALSE;
                     }
                 } else {
                     if (!ok) {
@@ -1083,44 +1083,44 @@ void MapMarkCellEdges() {
         for (x = 0; x < sMapCols - 1; x++) {
             MapCell* left = MapGetCell(x, y);
             MapCell* right = MapGetCell(x + 1, y);
-            s32 flag = 0;
+            s32 flag = FALSE;
 
             switch (left->type) {
             case 0:
                 if (right->type != 0 && right->type != 3 && right->type != 4 && right->type != 5 &&
                     right->type != 6) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 
                 break;
             case 6:
                 if (right->type != 9) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 
                 break;
             case 3:
                 if (right->type != 8) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 
                 break;
             case 4:
             case 5:
                 if (right->type != 0) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 
                 break;
             case 8:
                 if (right->type != 8 && right->type != 4) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 
                 break;
             case 9:
                 if (right->type != 9 && right->type != 5) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 
                 break;
@@ -1128,7 +1128,7 @@ void MapMarkCellEdges() {
             case 2:
             case 7:
                 if (left->type != right->type) {
-                    flag = 1;
+                    flag = TRUE;
                 }
 
                 break;
@@ -1362,20 +1362,20 @@ u8 MapCellIsUnbounded(s16 x, s16 y) {
     MapCell* cell = MapGetCell(x, y);
 
     if (cell == NULL || cell->upperZ == -0x100000 || cell->lowerZ == 0x100000) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 MapCellHasType(s16 x, s16 y, u8 type) {
     MapCell* cell = MapGetCell(x, y);
 
     if (cell != NULL && cell->type == type) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MapAssignWallTopPieces(s16 x, s16 y) {
@@ -2107,9 +2107,9 @@ void MapTracePlatformLeftToRight(u8 index, s16 left, s16 right, s16 startY, u8 e
                 type = 6;
             } else if (index == 0) {
                 if (edgeMode == 2) {
-                    type = PickEdgeTypeByHalf(left, right, x, 1);
+                    type = PickEdgeTypeByHalf(left, right, x, TRUE);
                 } else if (edgeMode == 3) {
-                    type = PickEdgeTypeByThird(left, right, x, 1);
+                    type = PickEdgeTypeByThird(left, right, x, TRUE);
                 } else {
                     type = PickRandomTopEdgeType(left, right, x);
                 }
@@ -2153,9 +2153,9 @@ void MapTracePlatformLeftToRight(u8 index, s16 left, s16 right, s16 startY, u8 e
         } else if (nextY - topRows[1] == gMapForm.minDepth || nextY - topRows[1] == gMapForm.maxDepth) {
             type = GetMatchingBottomEdgeType(x, topRows[0]);
         } else if (edgeMode == 2) {
-            type = PickEdgeTypeByHalf(left, right, x, 0);
+            type = PickEdgeTypeByHalf(left, right, x, FALSE);
         } else if (edgeMode == 3) {
-            type = PickEdgeTypeByThird(left, right, x, 0);
+            type = PickEdgeTypeByThird(left, right, x, FALSE);
         } else {
             type = PickRandomBottomEdgeType(left, right, x);
         }
@@ -2211,9 +2211,9 @@ void MapTracePlatformRightToLeft(u8 index, s16 left, s16 right, s16 startY, u8 e
                 type = 4;
             } else if (index == 0) {
                 if (edgeMode == 2) {
-                    type = PickEdgeTypeByHalf(left, right, x, 1);
+                    type = PickEdgeTypeByHalf(left, right, x, TRUE);
                 } else if (edgeMode == 3) {
-                    type = PickEdgeTypeByThird(left, right, x, 1);
+                    type = PickEdgeTypeByThird(left, right, x, TRUE);
                 } else {
                     type = PickRandomTopEdgeType(left, right, x);
                 }
@@ -2257,9 +2257,9 @@ void MapTracePlatformRightToLeft(u8 index, s16 left, s16 right, s16 startY, u8 e
         } else if (nextY - topRows[1] == gMapForm.minDepth || nextY - topRows[1] == gMapForm.maxDepth) {
             type = GetMatchingBottomEdgeType(x, topRows[0]);
         } else if (edgeMode == 2) {
-            type = PickEdgeTypeByHalf(left, right, x, 0);
+            type = PickEdgeTypeByHalf(left, right, x, FALSE);
         } else if (edgeMode == 3) {
-            type = PickEdgeTypeByThird(left, right, x, 0);
+            type = PickEdgeTypeByThird(left, right, x, FALSE);
         } else {
             type = PickRandomBottomEdgeType(left, right, x);
         }
@@ -2315,9 +2315,9 @@ void MapTracePlatformOutward(u8 index, s16 left, s16 right, s16 startX, s16 star
                 type = 6;
             } else if (index == 0) {
                 if (edgeMode == 2) {
-                    type = (u8)PickEdgeTypeByHalf(left, right, x, 1);
+                    type = (u8)PickEdgeTypeByHalf(left, right, x, TRUE);
                 } else if (edgeMode == 3) {
-                    type = (u8)PickEdgeTypeByThird(left, right, x, 1);
+                    type = (u8)PickEdgeTypeByThird(left, right, x, TRUE);
                 } else {
                     type = (u8)PickRandomTopEdgeType(left, right, x);
                 }
@@ -2352,9 +2352,9 @@ void MapTracePlatformOutward(u8 index, s16 left, s16 right, s16 startX, s16 star
                 type = 4;
             } else if (index == 0) {
                 if (edgeMode == 2) {
-                    type = (u8)PickEdgeTypeByHalf(left, right, x, 1);
+                    type = (u8)PickEdgeTypeByHalf(left, right, x, TRUE);
                 } else if (edgeMode == 3) {
-                    type = (u8)PickEdgeTypeByThird(left, right, x, 1);
+                    type = (u8)PickEdgeTypeByThird(left, right, x, TRUE);
                 } else {
                     type = (u8)PickRandomTopEdgeType(left, right, x);
                 }
@@ -2398,9 +2398,9 @@ void MapTracePlatformOutward(u8 index, s16 left, s16 right, s16 startX, s16 star
         } else if (nextY - topRows[1] == gMapForm.minDepth || nextY - topRows[1] == gMapForm.maxDepth) {
             type = GetMatchingBottomEdgeType(x, topRows[0]);
         } else if (edgeMode == 2) {
-            type = PickEdgeTypeByHalf(left, right, x, 0);
+            type = PickEdgeTypeByHalf(left, right, x, FALSE);
         } else if (edgeMode == 3) {
-            type = PickEdgeTypeByThird(left, right, x, 0);
+            type = PickEdgeTypeByThird(left, right, x, FALSE);
         } else {
             type = PickRandomBottomEdgeType(left, right, x);
         }
@@ -2491,7 +2491,7 @@ u8 MapFindSpanBelowPlatforms(s16* left, s16* right, s16* row, s16* z) {
     u16 y2 = 0;
     s32 z1 = 0;
     s32 z2 = 0;
-    s32 found = 0;
+    s32 found = FALSE;
     s32 x;
     s32 y;
     MapCell* cell;
@@ -2504,7 +2504,7 @@ u8 MapFindSpanBelowPlatforms(s16* left, s16* right, s16* row, s16* z) {
                 x1 = x;
                 y1 = y;
                 z1 = cell->upperZ;
-                found = 1;
+                found = TRUE;
                 break;
             }
 
@@ -2518,7 +2518,7 @@ u8 MapFindSpanBelowPlatforms(s16* left, s16* right, s16* row, s16* z) {
         }
     }
 
-    found = 0;
+    found = FALSE;
 
     for (x = sMapCols - 1; x >= 0; x--) {
         for (y = sMapRows - 1; y >= 0; y--) {
@@ -2528,7 +2528,7 @@ u8 MapFindSpanBelowPlatforms(s16* left, s16* right, s16* row, s16* z) {
                 x2 = x + 1;
                 y2 = y;
                 z2 = cell->upperZ;
-                found = 1;
+                found = TRUE;
                 break;
             }
 
@@ -2805,7 +2805,7 @@ void MapGenerateRoom(u16 cols, u16 rows) {
             sMapPlatforms[i].left = 0;
             sMapPlatforms[i].right = 0;
             sMapPlatforms[i].z = 0x100000;
-            sMapPlatforms[i].hasStairs = 0;
+            sMapPlatforms[i].hasStairs = FALSE;
             sMapPlatforms[i].x = 0;
             sMapPlatforms[i].y = 0;
             sMapPlatforms[i].spotType = 11;
@@ -3018,9 +3018,9 @@ void MapDrawBgColumn(void* buf, s16 x, s16 y) {
     void* bg1Buf = (u8*)buf + 0x80;
 
     MapBuildBgColumn(buf, bg2Buf, bg1Buf, x, y);
-    RequestTilemapStripCopy(buf, GetBgScreenBase(3), x, y, 1);
-    RequestTilemapStripCopy(bg2Buf, GetBgScreenBase(2), x, y, 1);
-    RequestTilemapStripCopy(bg1Buf, GetBgScreenBase(1), x, y, 1);
+    RequestTilemapStripCopy(buf, GetBgScreenBase(3), x, y, TRUE);
+    RequestTilemapStripCopy(bg2Buf, GetBgScreenBase(2), x, y, TRUE);
+    RequestTilemapStripCopy(bg1Buf, GetBgScreenBase(1), x, y, TRUE);
 }
 
 void MapBuildBgRow(u16* bg3Map, u16* bg2Map, u16* bg1Map, s16 x, s16 y) {
@@ -3073,9 +3073,9 @@ void MapDrawBgRow(void* buf, s16 x, s16 y) {
     void* bg1Buf = (u8*)buf + 0x80;
 
     MapBuildBgRow(buf, bg2Buf, bg1Buf, x, y);
-    RequestTilemapStripCopy(buf, GetBgScreenBase(3), x, y, 0);
-    RequestTilemapStripCopy(bg2Buf, GetBgScreenBase(2), x, y, 0);
-    RequestTilemapStripCopy(bg1Buf, GetBgScreenBase(1), x, y, 0);
+    RequestTilemapStripCopy(buf, GetBgScreenBase(3), x, y, FALSE);
+    RequestTilemapStripCopy(bg2Buf, GetBgScreenBase(2), x, y, FALSE);
+    RequestTilemapStripCopy(bg1Buf, GetBgScreenBase(1), x, y, FALSE);
 }
 
 u8 MapPickFreeFloorPos(FldPos* pos, s32* py) {
@@ -3096,7 +3096,7 @@ u8 MapPickFreeFloorPos(FldPos* pos, s32* py) {
             if ((*(u32*)MapGetCell(x, yy) & 0xFF0340) == 0) {
                 pos->x = (x << 13) + 0x1000;
                 *py = (yy << 12) + 0x800;
-                return 1;
+                return TRUE;
             }
 
             x++;
@@ -3109,7 +3109,7 @@ u8 MapPickFreeFloorPos(FldPos* pos, s32* py) {
 
     pos->x = gFieldState->actor.fieldPosition.x;
     *py = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.ground;
-    return 0;
+    return FALSE;
 }
 
 u8 MapPickFreeFloorPosInView(FldPos* pos, s32* py) {
@@ -3143,7 +3143,7 @@ u8 MapPickFreeFloorPosInView(FldPos* pos, s32* py) {
             if (cell != NULL && (*(u32*)cell & 0xFF0340) == 0) {
                 pos->x = (xx << 13) + 0x1000;
                 *py = (yy << 12) + 0x800;
-                return 1;
+                return TRUE;
             }
 
             x++;
@@ -3155,7 +3155,7 @@ u8 MapPickFreeFloorPosInView(FldPos* pos, s32* py) {
     }
 
     MapPickFreeFloorPos(pos, py);
-    return 0;
+    return FALSE;
 }
 
 MapCell* MapCellAt(s16 x, s16 y) {

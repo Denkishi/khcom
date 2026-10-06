@@ -221,7 +221,7 @@ void BackdropFadeReset() {
     sBackdropFadeLastAmount = 0;
     sBackdropFadeTimer = 0;
     sBackdropFadeMode = FADE_MODE_BLACK;
-    sBackdropFadeActive = 0;
+    sBackdropFadeActive = FALSE;
 }
 
 void BackdropFadeSetColor(u16 r, u16 g, u16 b) {
@@ -356,12 +356,12 @@ void BackdropFadeUpdate() {
         ApproachValue(&sBackdropFadeAmount, sBackdropFadeTarget, sBackdropFadeTimer);
         sBackdropFadeTimer--;
     } else {
-        sBackdropFadeActive = 0;
+        sBackdropFadeActive = FALSE;
     }
 }
 
 void BackdropFadeStartIn(u32 mode, u16 frames) {
-    sBackdropFadeActive = 1;
+    sBackdropFadeActive = TRUE;
     sBackdropFadeTimer = frames;
     sBackdropFadeAmount = 0x1F00;
     sBackdropFadeTarget = 0;
@@ -370,7 +370,7 @@ void BackdropFadeStartIn(u32 mode, u16 frames) {
 }
 
 void BackdropFadeStartOut(u32 mode, u16 frames) {
-    sBackdropFadeActive = 1;
+    sBackdropFadeActive = TRUE;
     sBackdropFadeTimer = frames;
     sBackdropFadeAmount = 0;
     sBackdropFadeTarget = 0x1F00;
@@ -379,14 +379,14 @@ void BackdropFadeStartOut(u32 mode, u16 frames) {
 }
 
 void BackdropFadeToOriginal(u32 mode, u16 frames) {
-    sBackdropFadeActive = 1;
+    sBackdropFadeActive = TRUE;
     sBackdropFadeTimer = frames;
     sBackdropFadeTarget = 0;
     sBackdropFadeMode = mode;
 }
 
 void BackdropFadeToAmount(u32 mode, u16 amount, u16 frames) {
-    sBackdropFadeActive = 1;
+    sBackdropFadeActive = TRUE;
     sBackdropFadeTimer = frames;
     sBackdropFadeTarget = amount << 8;
     sBackdropFadeMode = mode;
@@ -397,7 +397,7 @@ u8 BackdropFadeIsActive() {
 }
 
 void BackdropFadeFromAmount(u32 mode, u16 amount, u16 frames) {
-    sBackdropFadeActive = 1;
+    sBackdropFadeActive = TRUE;
     sBackdropFadeTimer = frames;
     sBackdropFadeAmount = amount << 8;
     sBackdropFadeLastAmount = 0;
@@ -406,7 +406,7 @@ void BackdropFadeFromAmount(u32 mode, u16 amount, u16 frames) {
 }
 
 void SetPooAttackPoint(s32 x, s32 y, s32 z) {
-    gPooAttackActive = 1;
+    gPooAttackActive = TRUE;
     sPooAttackX = x;
     sPooAttackY = y * 2;
     sPooAttackZ = z;
@@ -434,10 +434,10 @@ u8 PooAttackHitsCollider(Collider* collider) {
     dz = sPooAttackZ - collider->z;
 
     if (dx < lim && dy < lim && dz <= 0x1FFF && -dz < collider->height) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void SetPooStartPositions() {
@@ -557,13 +557,13 @@ void mode_pooh_0(s32 arg) {
     BackdropFadeSetColor(6, 31, 31);
     FadeStartIn(FADE_MODE_BLACK, 16);
     BackdropFadeStartIn(0, 16);
-    sModePoohExiting = 0;
+    sModePoohExiting = FALSE;
     sModePoohMessage = CARD_MSG_COUNT;
 }
 
 void mode_pooh_1() {
     UpdatePlayTime();
-    SetPooMapBeeVisible(0);
+    SetPooMapBeeVisible(FALSE);
 
     if (sModePoohExiting && !FadeIsActive()) {
         if (sModePoohExitEvent == EVENT_COUNT) {
@@ -576,7 +576,7 @@ void mode_pooh_1() {
     }
 
     if (!FadeIsActive()) {
-        gPooAttackActive = 0;
+        gPooAttackActive = FALSE;
 
         if (IsTaskActive(sWLogoTask)) {
             TaskPoolUpdate(&sModePoohWLogoTasks);
@@ -623,12 +623,12 @@ void ExitPoohMode(u32 event) {
         sModePoohExitEvent = event;
 
         for (i = 0; i <= 31; i++) {
-            FadeSetPaletteExcluded(i, 0);
+            FadeSetPaletteExcluded(i, FALSE);
         }
 
         FadeStartOut(FADE_MODE_BLACK, 16);
         BackdropFadeStartOut(0, 16);
-        sModePoohExiting = 1;
+        sModePoohExiting = TRUE;
     }
 }
 
@@ -920,12 +920,12 @@ void SetPoohAnimation(PoohWork* work, u32 action) {
         def = &sPooh03AnimDefs[work->dirIndex];
         break;
     case POOH_ACTION_STUMP_CLIMB:
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         SetPoohDir2(work);
         def = &sPooh07Anim0Defs[work->dirIndex];
         break;
     case POOH_ACTION_WAGON_CLIMB:
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         SetPoohDir2(work);
 
         if (IsPooEventDone(POO_EVENT_WAGON) || work->leavingWagon || (work->dirIndex == 5 && work->flipped == 0)) {
@@ -946,12 +946,12 @@ void SetPoohAnimation(PoohWork* work, u32 action) {
     case POOH_ACTION_SIT_DOWN:
         work->flipped = IsAngleFacingRight(work->angle);
         def = &sPoohFl05Anim0Def;
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         break;
     case POOH_ACTION_SIT_FOR_HONEY:
         work->flipped = 0;
         def = &sPoohFl05Anim9Def;
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         break;
     case POOH_ACTION_EAT_HONEY_1:
         work->flipped = 0;
@@ -968,29 +968,29 @@ void SetPoohAnimation(PoohWork* work, u32 action) {
     case POOH_ACTION_SIT:
         work->flipped = IsAngleFacingRight(work->angle);
         def = &sPoohFl05Anim1Def;
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         break;
     case POOH_ACTION_LIE_DOWN:
         work->flipped = IsAngleFacingRight(work->angle);
         def = &sPoohFl05Anim2Def;
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         break;
     case POOH_ACTION_SLEEP:
         ColliderSetRadius(&work->collider, 14);
         flags |= ANIM_FLAG_LOOP;
         work->flipped = IsAngleFacingRight(work->angle);
         def = &sPoohFl05Anim3Def;
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         break;
     case POOH_ACTION_WAKE_UP:
         work->flipped = IsAngleFacingRight(work->angle);
         def = &sPoohFl05Anim4Def;
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         break;
     case POOH_ACTION_STAND_UP:
         work->flipped = IsAngleFacingRight(work->angle);
         def = &sPoohFl05Anim5Def;
-        work->hideShadow = 1;
+        work->hideShadow = TRUE;
         break;
     case POOH_ACTION_THINK_START:
         work->flipped = IsAngleFacingRight(work->angle);
@@ -1046,8 +1046,8 @@ void SetPoohAnimation(PoohWork* work, u32 action) {
 u8 IsWithinPoohRadius(u16 x, u16 y, u16 px, u16 py) {
     if (x - gPoohHitBox.radius < px && px < x + gPoohHitBox.radius &&
         y - gPoohHitBox.radius < py && py < y + gPoohHitBox.radius) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }

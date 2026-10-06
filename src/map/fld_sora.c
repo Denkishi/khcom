@@ -129,15 +129,15 @@ u8 FldSoraCheckBlocked(FldPos* pos) {
     }
 
     if (IsFldPosBlocked(&up) != 0) {
-        return 1;
+        return TRUE;
     }
 
     if (IsFldPosBlocked(&down) != 0) {
-        return 1;
+        return TRUE;
     }
 
     pos->ground = hi > lo ? lo : hi;
-    return 0;
+    return FALSE;
 }
 
 s32 FldSoraProbeGround(FldPos* pos) {
@@ -197,10 +197,10 @@ u8 FldSoraCheckDoorAhead(FldActor* act) {
     ahead.y -= gSineTable[act->angle + 64] * 8;
 
     if (MapFindOpenDoor(&ahead)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 FldSoraGetGround(FldWork* work) {
@@ -216,9 +216,9 @@ s32 FldSoraGetGround(FldWork* work) {
             ground = work->collider.platformZ;
         }
 
-        work->onCollider = 1;
+        work->onCollider = TRUE;
     } else {
-        work->onCollider = 0;
+        work->onCollider = FALSE;
         ground = act->fieldPosition.ground;
     }
 
@@ -302,7 +302,7 @@ void task_fld_sora_0(FldWork* work) {
     work->tiles = AllocObjTiles(0x500, NULL);
     work->palette = LoadObjPalette(gSoraPalette, 32);
     act->height = 16;
-    work->onCollider = 0;
+    work->onCollider = FALSE;
     work->unk_9C = 0;
     work->unk_9D = 0;
     work->unk_9E = 0;
@@ -390,7 +390,7 @@ u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
     }
 
     if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
-        FadeSetPaletteExcluded(work->palette->index + 16, 0);
+        FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
         work->state = FLD_STATE_GROUND;
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
@@ -399,9 +399,9 @@ u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
         timer = &work->timer;
 
         if (*timer == 0) {
-            FadeSetPaletteExcluded(work->palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
             act->speed = 0;
-            work->onCollider = 0;
+            work->onCollider = FALSE;
         }
 
         TaskPoolUpdate(&work->tasks);
@@ -932,7 +932,7 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
         act->angle += 0x80;
         gFieldState->lockonTarget = NULL;
         SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
-        return 1;
+        return TRUE;
     }
 
     if ((GetKeysHeld() & DPAD_UP) ||
@@ -945,10 +945,10 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
         work->flags |= FLD_FLAG_NO_AIR_TURN;
         m4aSongNumStart(SONG_SYS_SR_CATJP);
         gFieldState->lockonTarget = NULL;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 FldSoraHangLedge(FldWork* work, void* task) {
@@ -959,7 +959,7 @@ u8 FldSoraHangLedge(FldWork* work, void* task) {
     s32 y;
 
     act = &gFieldState->actor;
-    handled = 0;
+    handled = FALSE;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
     gFieldState->lockonTarget = NULL;
@@ -1150,7 +1150,7 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
     case FLD_STATE_WORLD_SELECT_POSE:
         if (work->timer == 0) {
             FldSoraSetAnim(work, 12, 0);
-            FadeSetPaletteExcluded(work->palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         }
 
         if (work->timer == 40) {
@@ -1586,7 +1586,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                 }
             } else {
                 if (FldSoraCheckDoorAhead(act)) {
-                    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+                    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
                     gFieldState->flags |= FIELD_FLAG_EXIT_ROOM;
                     return 1;
                 }

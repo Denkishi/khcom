@@ -122,7 +122,7 @@ u8 FldRikuCheckBlocked(FldPos* pos) {
     }
 
     if (IsFldPosBlocked(&up) != 0 || IsFldPosBlocked(&down) != 0) {
-        return 1;
+        return TRUE;
     }
 
     ground = hi;
@@ -132,7 +132,7 @@ u8 FldRikuCheckBlocked(FldPos* pos) {
     }
 
     pos->ground = ground;
-    return 0;
+    return FALSE;
 }
 
 s32 FldRikuProbeGround(FldPos* pos) {
@@ -193,10 +193,10 @@ u8 FldRikuCheckDoorAhead(FldActor* act) {
     ahead.y -= gSineTable[act->angle + 64] * 8;
 
     if (MapFindOpenDoor(&ahead)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 FldRikuGetGround(FldWork* work) {
@@ -212,9 +212,9 @@ s32 FldRikuGetGround(FldWork* work) {
             ground = work->collider.platformZ;
         }
 
-        work->onCollider = 1;
+        work->onCollider = TRUE;
     } else {
-        work->onCollider = 0;
+        work->onCollider = FALSE;
         ground = act->fieldPosition.ground;
     }
 
@@ -300,7 +300,7 @@ void task_fld_riku_0(FldWork* work) {
     work->tiles = AllocObjTiles(0xA00, NULL);
     work->palette = LoadObjPalette(gRikuPalette, 32);
     act->height = 16;
-    work->onCollider = 0;
+    work->onCollider = FALSE;
     work->unk_9C = 0;
     work->unk_9D = 0;
     work->unk_9E = 0;
@@ -388,7 +388,7 @@ u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
     }
 
     if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
-        FadeSetPaletteExcluded(work->palette->index + 16, 0);
+        FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
         work->state = FLD_STATE_GROUND;
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)task_fld_riku_1);
@@ -397,9 +397,9 @@ u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
         timer = &work->timer;
 
         if (*timer == 0) {
-            FadeSetPaletteExcluded(work->palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
             act->speed = 0;
-            work->onCollider = 0;
+            work->onCollider = FALSE;
         }
 
         TaskPoolUpdate(&work->tasks);
@@ -929,7 +929,7 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
         act->angle += 0x80;
         gFieldState->lockonTarget = NULL;
         SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
-        return 1;
+        return TRUE;
     }
 
     if ((GetKeysHeld() & DPAD_UP) ||
@@ -942,10 +942,10 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
         work->flags |= FLD_FLAG_NO_AIR_TURN;
         m4aSongNumStart(SONG_SYS_SR_CATJP);
         gFieldState->lockonTarget = NULL;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 FldRikuHangLedge(FldWork* work, void* task) {
@@ -956,7 +956,7 @@ u8 FldRikuHangLedge(FldWork* work, void* task) {
     s32 y;
 
     act = &gFieldState->actor;
-    handled = 0;
+    handled = FALSE;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
     gFieldState->lockonTarget = NULL;
@@ -1142,7 +1142,7 @@ u8 FldRikuWalkOut(FldWork* work, void* task) {
     case FLD_STATE_WORLD_SELECT_POSE:
         if (work->timer == 0) {
             FldRikuSetAnim(work, 12, 0);
-            FadeSetPaletteExcluded(work->palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
         }
 
         if (work->timer == 40) {
@@ -1578,7 +1578,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                 }
             } else {
                 if (FldRikuCheckDoorAhead(act)) {
-                    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+                    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
                     gFieldState->flags |= FIELD_FLAG_EXIT_ROOM;
                     return 1;
                 }

@@ -67,7 +67,7 @@ void task_wlogo_mons_0(WlogoMonsWork* work) {
     work->paletteStep = 0;
     work->timer = 0;
     work->state = WLOGO_MONS_STATE_WAIT;
-    work->visible = 0;
+    work->visible = FALSE;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
     AnimInit(&work->anim, gWlogoMonsEyeAnims, gWlogoMonsEyeFrames);
@@ -107,7 +107,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
 
         if (work->timer > 29) {
             work->timer = 0;
-            work->visible = 1;
+            work->visible = TRUE;
             work->state++;
         }
 
@@ -130,7 +130,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
                     LoadObjPaletteBank(work->palette->index, &gWlogoMonsPalettes[(15 - work->paletteStep) * 16]);
                     LoadPaletteWithEffect(&gWlogoMonsPalettes[(15 - work->paletteStep) * 16], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
                 } else if (work->paletteStep == 20) {
-                    work->visible = 0;
+                    work->visible = FALSE;
                     RequestDma3Copy(gWlogoMonsMap, GetBgScreenBase(0), 0x800);
                     work->state++;
                 }
@@ -173,7 +173,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
 }
 
 void task_wlogo_mons_2(WlogoMonsWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
@@ -328,7 +328,7 @@ u8 task_wlogo_hwt_obj_1(WlogoHwtObjWork* work) {
     if (++work->stepTimer >= gWlogoHwtObjSteps[work->id][work->step].duration) {
         work->stepTimer = 0;
 
-        if (gWlogoHwtObjSteps[work->id][work->step].isLast == 1) {
+        if (gWlogoHwtObjSteps[work->id][work->step].isLast == TRUE) {
             return 0;
         }
 
@@ -727,7 +727,7 @@ void task_wlogo_nvl_mov_0(WlogoNvlMovWork* work) {
     work->frameCount = 0;
     work->trailAnimId = 1;
     work->done = 0;
-    work->visible = 1;
+    work->visible = TRUE;
     work->tiles = LoadObjTiles(gWlogoNvlSparkleTiles, 0x600);
     work->palette = LoadObjPalette(gWlogoNvlPalette, 0x20);
     work->animId = 3;
@@ -749,8 +749,8 @@ u8 task_wlogo_nvl_mov_1(WlogoNvlMovWork* work) {
         if (++work->stepTimer >= gWlogoNvlMovSteps[work->step].duration) {
             work->stepTimer = 0;
 
-            if (gWlogoNvlMovSteps[work->step].isLast == 1) {
-                work->visible = 0;
+            if (gWlogoNvlMovSteps[work->step].isLast == TRUE) {
+                work->visible = FALSE;
                 work->done++;
             }
 
@@ -798,7 +798,7 @@ u8 task_wlogo_nvl_mov_1(WlogoNvlMovWork* work) {
 }
 
 void task_wlogo_nvl_mov_2(WlogoNvlMovWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
@@ -858,7 +858,7 @@ void task_wlogo_col_0(WlogoColWork* work) {
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     SetBgBlend(0, 16 - work->blend, work->blend);
     AnimInit(&work->anim, gWlogoColSparkleAnims, gWlogoColSparkleFrames);
     AnimStart(&work->anim, 0, 0);
@@ -872,14 +872,14 @@ u8 task_wlogo_col_1(WlogoColWork* work) {
 
         if (work->timer > 9) {
             work->timer = 0;
-            work->visible = 1;
+            work->visible = TRUE;
             work->state++;
         }
 
         break;
     case WLOGO_COL_STATE_SPARKLE:
         if (AnimIsFinished(&work->anim)) {
-            work->visible = 0;
+            work->visible = FALSE;
             work->state++;
         } else {
             work->gfx = AnimUpdate(&work->anim);
@@ -944,7 +944,7 @@ u8 task_wlogo_col_1(WlogoColWork* work) {
 }
 
 void task_wlogo_col_2(WlogoColWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
@@ -1047,7 +1047,7 @@ void task_wlogo_dil_0(WlogoDilWork* work) {
     work->gfx = gWlogoDilIslandObjFrames[0];
     work->x = 64;
     work->y = 64;
-    work->visible = 0;
+    work->visible = FALSE;
     work->timer = 0;
     work->state = WLOGO_DIL_STATE_WAIT;
     work->blend = 0;
@@ -1074,7 +1074,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
 
             if (work->blend > 15) {
                 work->blend = 16;
-                work->visible = 1;
+                work->visible = TRUE;
                 work->state++;
             }
 
@@ -1098,7 +1098,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
             if (work->blend > 15) {
                 work->blend = 16;
                 LoadBgMap(0, gWlogoDilMap, 0x800);
-                work->visible = 0;
+                work->visible = FALSE;
                 work->state++;
             }
 
@@ -1139,7 +1139,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
 }
 
 void task_wlogo_dil_2(WlogoDilWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 0);
     }
 }
@@ -1168,7 +1168,7 @@ void task_wlogo_agr_0(WlogoAgrWork* work, s32 arg) {
     work->gfx = gWlogoAgrObjFrames[11];
     work->x = 64;
     work->y = 64;
-    work->visible = 0;
+    work->visible = FALSE;
     work->timer = 0;
     work->state = WLOGO_AGR_STATE_WAIT;
     work->entryIndex = 0;
@@ -1201,7 +1201,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
 
             if (work->blend > 15) {
                 work->blend = 16;
-                work->visible = 1;
+                work->visible = TRUE;
                 work->state++;
             }
 
@@ -1235,7 +1235,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
             if (work->entryIndex > 18) {
                 work->timer = 0;
                 work->entryIndex = 5;
-                work->visible = 0;
+                work->visible = FALSE;
                 work->state++;
             }
         }
@@ -1337,7 +1337,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
 }
 
 void task_wlogo_agr_2(WlogoAgrWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 3);
     }
 }
@@ -1462,7 +1462,7 @@ void task_wlogo_tvt_0(WlogoTvtWork* work) {
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     SetBgBlend(0, 16 - work->blend, work->blend);
     AnimInit(&work->anim, gWlogoTvtNameAnims, gWlogoTvtNameFrames);
     AnimStart(&work->anim, 0, 0);
@@ -1507,7 +1507,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
 
         if (++work->timer > 89) {
             work->timer = 0;
-            work->visible = 1;
+            work->visible = TRUE;
             work->state++;
         }
 
@@ -1523,7 +1523,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
             LoadBgTiles(0, gWlogoTvtTiles, 0xC00);
             work->tileFrame += 2;
             RequestDma3Copy(&gWlogoTvtLightTiles[work->tileFrame * 1024], (u8*)GetBgCharBase(0) + 32, 0x320);
-            work->visible = 0;
+            work->visible = FALSE;
             work->state++;
         } else {
             work->gfx = AnimUpdate(&work->anim);
@@ -1572,7 +1572,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
 }
 
 void task_wlogo_tvt_2(WlogoTvtWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
@@ -1680,7 +1680,7 @@ void task_wlogo_poo_obj_0(WlogoPooObjWork* work, s32 id) {
     work->step = 0;
     work->stepTimer = 0;
     work->done = 0;
-    work->visible = 1;
+    work->visible = TRUE;
     work->animId = gWlogoPooObjAnimIds[work->id];
     AnimInit(&work->anim, gWlogoPooBeeAnims, gWlogoPooBeeFrames);
     AnimStart(&work->anim, work->animId, ANIM_FLAG_LOOP);
@@ -1716,7 +1716,7 @@ u8 task_wlogo_poo_obj_1(WlogoPooObjWork* work) {
 }
 
 void task_wlogo_poo_obj_2(WlogoPooObjWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
@@ -2212,7 +2212,7 @@ void task_wlogo_bks_0(WlogoBksWork* work) {
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
     work->frameCount = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     SetBgBlend(0, 16 - work->blend, work->blend);
     TaskPoolInit(&work->tasks, 15);
     work->tiles = AllocObjTiles(0x580, gWlogoBksNameTiles);
@@ -2307,7 +2307,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
         work->frameCount++;
         break;
     case WLOGO_BKS_STATE_SHOW_NAME:
-        work->visible = 1;
+        work->visible = TRUE;
         StopBgWave(0);
         work->paletteStep = 1;
         work->timer = 0;
@@ -2325,7 +2325,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
         if (AnimIsFinished(&work->anim)) {
             StopBgWave(0);
             work->timer = 0;
-            work->visible = 0;
+            work->visible = FALSE;
             LoadPalette(gWlogoBksPalettes, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
             LoadBgMap(0, gWlogoBksMap, 0x800);
             work->state++;
@@ -2368,7 +2368,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
 }
 
 void task_wlogo_bks_2(WlogoBksWork* work) {
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         DrawSprite(64, 64, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 
@@ -2484,52 +2484,52 @@ const WlogoHwtObjA gWlogoHwtObjStarts[6] = {
 
 const WlogoHwtObjB gWlogoHwtObjSteps[6][6] = {
     {
-        { 40, 102, -1536, -2, 51, 0 },
-        { 40, 51, 128, 2, 0, 0 },
-        { 30, 102, -768, -2, -25, 1 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
+        { 40, 102, -1536, -2, 51, FALSE },
+        { 40, 51, 128, 2, 0, FALSE },
+        { 30, 102, -768, -2, -25, TRUE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
     },
     {
-        { 30, -102, -1536, 2, 76, 0 },
-        { 40, -51, 128, -2, 0, 0 },
-        { 40, -102, -768, 2, -25, 1 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
+        { 30, -102, -1536, 2, 76, FALSE },
+        { 40, -51, 128, -2, 0, FALSE },
+        { 40, -102, -768, 2, -25, TRUE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
     },
     {
-        { 30, 102, -1536, 0, 51, 0 },
-        { 40, 25, 128, 2, 0, 0 },
-        { 40, 102, -768, 25, -51, 1 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
+        { 30, 102, -1536, 0, 51, FALSE },
+        { 40, 25, 128, 2, 0, FALSE },
+        { 40, 102, -768, 25, -51, TRUE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
     },
     {
-        { 40, -102, -1484, 0, 38, 0 },
-        { 40, -25, 128, -2, 0, 0 },
-        { 30, -102, -768, -25, -51, 1 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
+        { 40, -102, -1484, 0, 38, FALSE },
+        { 40, -25, 128, -2, 0, FALSE },
+        { 30, -102, -768, -25, -51, TRUE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
     },
     {
-        { 30, 51, -512, 0, 25, 0 },
-        { 40, 25, 76, 2, 0, 0 },
-        { 30, 51, -384, 5, -51, 1 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
+        { 30, 51, -512, 0, 25, FALSE },
+        { 40, 25, 76, 2, 0, FALSE },
+        { 30, 51, -384, 5, -51, TRUE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
     },
     {
-        { 120, 0, -384, 0, -25, 1 },
-        { 40, -25, 128, -2, 0, 0 },
-        { 40, -51, -358, -25, -51, 1 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
+        { 120, 0, -384, 0, -25, TRUE },
+        { 40, -25, 128, -2, 0, FALSE },
+        { 40, -51, -358, -25, -51, TRUE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
+        { 0, 0, 0, 0, 0, FALSE },
     },
 };
 
@@ -2619,10 +2619,10 @@ TaskDesc gTaskDescWlogoNvl = {
 };
 
 const WlogoHwtObjB gWlogoNvlMovSteps[4] = {
-    { 20, 768, 256, -5, -12, 0 },
-    { 20, 921, -51, -46, -25, 0 },
-    { 20, 0, -512, -46, 23, 0 },
-    { 20, -921, -115, 19, -5, 1 },
+    { 20, 768, 256, -5, -12, FALSE },
+    { 20, 921, -51, -46, -25, FALSE },
+    { 20, 0, -512, -46, 23, FALSE },
+    { 20, -921, -115, 19, -5, TRUE },
 };
 
 TaskDesc gTaskDescWlogoNvlMov = {

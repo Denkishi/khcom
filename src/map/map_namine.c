@@ -77,7 +77,7 @@ void Task_MapNamine_0(MapNamineWork* work) {
     obj->height = 48;
     obj->kind = 2;
     work->registered = gMapFloorState.progress != 23;
-    work->visible = 1;
+    work->visible = TRUE;
     work->update = MapNamineCheckTalk;
     work->tiles = AllocObjTiles(0x300, gNamiF00Tiles);
     work->palette = LoadObjPalette(gNaminePalette, 32);
@@ -92,16 +92,16 @@ void Task_MapNamine_0(MapNamineWork* work) {
 
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
-    work->targeted = 0;
+    work->targeted = FALSE;
     TaskPoolInit(&work->tasks2, 1);
     TaskCreate(&work->tasks2, &gTaskDescMapTalk, &work->obj);
 }
 
 s32 Task_MapNamine_1(MapNamineWork* work) {
     if ((u8)IsMapInterrupted()) {
-        work->visible = 0;
+        work->visible = FALSE;
     } else {
-        work->visible = 1;
+        work->visible = TRUE;
         work->targeted = IsFldObjTalkTarget(&work->obj);
         TaskPoolUpdate(&work->tasks);
         TaskPoolUpdate(&work->tasks2);

@@ -424,11 +424,11 @@ s32 MapEnm00CheckOffscreen(MapEnmWork* work) {
     if (work->obj.fieldPosition.x < gFieldState->x - 0x1800 || work->obj.fieldPosition.x > gFieldState->x + 0x10800 ||
         pos->y + pos->z < gFieldState->y - 0x800 || pos->y + pos->z > gFieldState->y + 0xC000) {
         work->update = NULL;
-        ColliderSetDisabled(&work->collider, 1);
-        return 1;
+        ColliderSetDisabled(&work->collider, TRUE);
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MapEnm00Move(MapEnmWork* work, s32 accel, s32 maxSpeed) {
@@ -455,7 +455,7 @@ void MapEnm00CheckBlocked(MapEnmWork* work, s32 x, s32 y) {
         work->obj.fieldPosition.x = x;
         pos->y = y;
         work->update = MapEnm00Vanish;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     }
 }
 
@@ -464,17 +464,17 @@ s32 MapEnm00SpotPlayer(MapEnmWork* work) {
     u8 ang;
 
     if (gFieldState->actor.fieldPosition.ground != obj->fieldPosition.ground) {
-        return 0;
+        return FALSE;
     }
 
     ang = GetAngle(work->obj.fieldPosition.x, obj->fieldPosition.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
 
     if (abs(GetAngleDiff(ang, obj->angle)) > 0x18) {
-        return 0;
+        return FALSE;
     }
 
     obj->angle = ang;
-    return 1;
+    return TRUE;
 }
 
 void MapEnm00Appear(MapEnmWork* work) {
@@ -489,7 +489,7 @@ void MapEnm00Appear(MapEnmWork* work) {
         }
 
         work->timer = 0;
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     } else {
         MapEnmUpdateAnim(work);
 
@@ -497,7 +497,7 @@ void MapEnm00Appear(MapEnmWork* work) {
             work->colliderDelay--;
 
             if (work->colliderDelay <= 0) {
-                ColliderSetDisabled(&work->collider, 0);
+                ColliderSetDisabled(&work->collider, FALSE);
             }
         }
     }
@@ -681,15 +681,15 @@ void Task_MapEnm00_0(MapEnmWork* work, MapEnmArgs* arg) {
             work->update = MapEnm00Stand;
             MapEnmSetAnim(work, 1, 0);
             work->gfx = AnimGetGfx(&work->anim);
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
         } else {
             work->update = MapEnm00Appear;
             MapEnmSetAnim(work, 0, 0);
             work->gfx = AnimGetGfx(&work->anim);
-            ColliderSetDisabled(&work->collider, 1);
+            ColliderSetDisabled(&work->collider, TRUE);
         }
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     work->timer = 0;
@@ -733,7 +733,7 @@ void MapEnm01CheckOffscreen(MapEnm01Work* work) {
             work->enm.update = NULL;
         }
     } else if (!work->wasOnScreen) {
-        work->wasOnScreen = 1;
+        work->wasOnScreen = TRUE;
     }
 }
 
@@ -812,15 +812,15 @@ void MapEnm01Idle(MapEnmWork* work) {
     }
 
     if (obj->fieldPosition.z < gFieldState->actor.fieldPosition.z - 0x4000) {
-        MapEnm01PickTarget(work, 0);
+        MapEnm01PickTarget(work, FALSE);
         work->timer = 0;
         obj->speed = 0;
         work->update = MapEnm01Fly;
     } else if (GetRandom() % 130 == 0) {
         if (GetRandom() % 2 != 0) {
-            MapEnm01PickTarget(work, 0);
+            MapEnm01PickTarget(work, FALSE);
         } else {
-            MapEnm01PickTarget(work, 1);
+            MapEnm01PickTarget(work, TRUE);
         }
 
         enm->timer = 0;
@@ -951,16 +951,16 @@ void Task_MapEnm01_0(MapEnmWork* work, MapEnmArgs* arg) {
         work->update = MapEnm01Stand;
         MapEnmSetAnim(work, 0, 0);
         work->gfx = AnimGetGfx(&work->anim);
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     } else {
         work->update = MapEnm01Idle;
         MapEnmSetAnim(work, 0, 1);
         work->gfx = AnimGetGfx(&work->anim);
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     enm01->enm.timer = 0;
-    ((MapEnm01Work*)work)->wasOnScreen = 0;
+    ((MapEnm01Work*)work)->wasOnScreen = FALSE;
 }
 
 s32 Task_MapEnm01_1(MapEnmWork* work) {
@@ -1016,7 +1016,7 @@ void Task_MapEnm02_0(MapEnmWork* work, MapEnmArgs* arg) {
     work->update = MapEnm02Idle;
     MapEnmSetAnim(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderSetDisabled(&work->collider, 0);
+    ColliderSetDisabled(&work->collider, FALSE);
 }
 
 s32 Task_MapEnm02_1(MapEnmWork* work) {
@@ -1109,11 +1109,11 @@ s32 MapEnm03MoveToTarget(MapEnmWork* work) {
     fields[1] += dy;
 
     if (work->timer > 64) {
-        return 1;
+        return TRUE;
     }
 
     work->timer++;
-    return 0;
+    return FALSE;
 }
 
 s32 MapEnm03IsPlayerNearHome(MapEnm03Work* work, s32 lim) {
@@ -1133,10 +1133,10 @@ s32 MapEnm03IsPlayerNearHome(MapEnm03Work* work, s32 lim) {
     }
 
     if (dx > 0x8000 || dy > 0x8000) {
-        return 0;
+        return FALSE;
     }
 
-    return Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < lim ? 1 : 0;
+    return Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < lim ? TRUE : FALSE;
 }
 
 void MapEnm03Guard(MapEnmWork* work) {
@@ -1249,7 +1249,7 @@ void Task_MapEnm03_0(MapEnmWork* work, MapEnmArgs* arg) {
     work->update = MapEnm03Guard;
     MapEnmSetAnim(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
-    ColliderSetDisabled(&work->collider, 0);
+    ColliderSetDisabled(&work->collider, FALSE);
     work->timer = 0;
     ((MapEnm03Work*)work)->home = work->obj.fieldPosition;
 }
@@ -1289,7 +1289,7 @@ void MapEnm04CheckOffscreen(MapEnm01Work* work) {
             work->enm.update = NULL;
         }
     } else if (!work->wasOnScreen) {
-        work->wasOnScreen = 1;
+        work->wasOnScreen = TRUE;
     }
 }
 
@@ -1370,15 +1370,15 @@ void MapEnm04Idle(MapEnmWork* work) {
     }
 
     if (obj->fieldPosition.z < gFieldState->actor.fieldPosition.z - 0x4000) {
-        MapEnm04PickTarget(work, 0);
+        MapEnm04PickTarget(work, FALSE);
         work->timer = 0;
         obj->speed = 0;
         work->update = MapEnm04Fly;
     } else if (GetRandom() % 130 == 0) {
         if (GetRandom() % 2) {
-            MapEnm04PickTarget(work, 0);
+            MapEnm04PickTarget(work, FALSE);
         } else {
-            MapEnm04PickTarget(work, 1);
+            MapEnm04PickTarget(work, TRUE);
         }
 
         enm->timer = 0;
@@ -1509,16 +1509,16 @@ void Task_MapEnm04_0(MapEnmWork* work, MapEnmArgs* arg) {
         work->update = MapEnm04Stand;
         MapEnmSetAnim(work, 0, 0);
         work->gfx = AnimGetGfx(&work->anim);
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     } else {
         work->update = MapEnm04Idle;
         MapEnmSetAnim(work, 0, 1);
         work->gfx = AnimGetGfx(&work->anim);
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     enm01->enm.timer = 0;
-    ((MapEnm01Work*)work)->wasOnScreen = 0;
+    ((MapEnm01Work*)work)->wasOnScreen = FALSE;
 }
 
 s32 Task_MapEnm04_1(MapEnmWork* work) {
@@ -1561,7 +1561,7 @@ void MapEnm05Appear(MapEnmWork* work) {
     TaskPoolUpdate(&work->tasks);
 
     if (AnimIsFinished(&work->anim)) {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
         work->timer = GetRandom() % 121 + 60;
         work->update = MapEnm05Idle;
     } else {
@@ -1571,7 +1571,7 @@ void MapEnm05Appear(MapEnmWork* work) {
             enm->colliderDelay--;
 
             if (enm->colliderDelay <= 0) {
-                ColliderSetDisabled(&enm->collider, 0);
+                ColliderSetDisabled(&enm->collider, FALSE);
             }
         }
     }
@@ -1597,7 +1597,7 @@ void MapEnm05Idle(MapEnmWork* work) {
         if (work->timer != 0) {
             work->timer--;
         } else {
-            ColliderSetDisabled(&enm->collider, 1);
+            ColliderSetDisabled(&enm->collider, TRUE);
             enm->update = MapEnm05Vanish;
         }
     }
@@ -1633,9 +1633,9 @@ void Task_MapEnm05_0(MapEnmWork* work, MapEnmArgs* arg) {
         work->update = MapEnm05Appear;
         MapEnmSetAnim(work, 0, 0);
         work->gfx = AnimGetGfx(&work->anim);
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     work->timer = 0;
@@ -1681,7 +1681,7 @@ void MapEnm06Appear(MapEnmWork* work) {
     TaskPoolUpdate(&work->tasks);
 
     if (AnimIsFinished(&work->anim)) {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
         work->timer = GetRandom() % 121 + 60;
         work->update = MapEnm06Idle;
     } else {
@@ -1691,7 +1691,7 @@ void MapEnm06Appear(MapEnmWork* work) {
             enm->colliderDelay--;
 
             if (enm->colliderDelay <= 0) {
-                ColliderSetDisabled(&enm->collider, 0);
+                ColliderSetDisabled(&enm->collider, FALSE);
             }
         }
     }
@@ -1717,7 +1717,7 @@ void MapEnm06Idle(MapEnmWork* work) {
         if (work->timer != 0) {
             work->timer--;
         } else {
-            ColliderSetDisabled(&enm->collider, 1);
+            ColliderSetDisabled(&enm->collider, TRUE);
             enm->update = MapEnm06Vanish;
         }
     }
@@ -1753,9 +1753,9 @@ void Task_MapEnm06_0(MapEnmWork* work, MapEnmArgs* arg) {
         work->update = MapEnm06Appear;
         MapEnmSetAnim(work, 0, 0);
         work->gfx = AnimGetGfx(&work->anim);
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     work->timer = 0;
@@ -1808,7 +1808,7 @@ void MapDbgWaitInput(MapDbgWork* work) {
 
 #ifndef VERSION_EU
         if (GetKeysPressed() & START_BUTTON) {
-            work->visible = 1;
+            work->visible = TRUE;
             *work->editing = 1;
             work->update = MapDbgEditSeed;
         }
@@ -1890,7 +1890,7 @@ void Task_MapDbg_0(MapDbgWork* work, u8* editing) {
 #ifndef VERSION_EU
     MapFloorRoom* floorRoom;
 #endif
-    work->visible = 0;
+    work->visible = FALSE;
     work->editing = editing;
     *editing = 0;
     work->update = MapDbgWaitInput;
@@ -2020,9 +2020,9 @@ s32 Task_MapGmk_Jump_1(MapGmkJumpWork* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -2100,10 +2100,10 @@ void Task_MapGmk_Enm_0(MapGmkEnmWork* work, FldPos* arg) {
 
     work->gfx = AnimGetGfx(an);
     work->update = MapGmkEnmRise;
-    flip = 0;
+    flip = FALSE;
 
     if (gFieldState->actor.fieldPosition.x >= pos->x) {
-        flip = 1;
+        flip = TRUE;
     }
 
     work->flipX = flip;
@@ -2182,7 +2182,7 @@ u8 MapGmkTutorialWaitHit(MapGmkTutorialWork* work) {
             work->update = MapGmkTutorialWaitCard;
             gMapRoomState->doorRoom = 0;
             gMapRoomState->doorSide = 0;
-            FadeSetPaletteExcluded(work->palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
             TaskCreate(pool, &gTaskDescRoomcreate, NULL);
         }
     }
@@ -2200,7 +2200,7 @@ u8 MapGmkTutorialWaitCard(MapGmkTutorialWork* work) {
 
     if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
-        FadeSetPaletteExcluded(work->palette->index + 16, 0);
+        FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
         work->update = MapGmkTutorialWaitHit;
     }
 
@@ -2210,7 +2210,7 @@ u8 MapGmkTutorialWaitCard(MapGmkTutorialWork* work) {
 u8 MapGmkTutorialWaitOpen(MapGmkTutorialWork* work) {
     if (gFieldState->flags & FIELD_FLAG_DOOR_OPENED) {
         UpdateSpriteFrameTiles(work->tiles, gMapDoorSide0Frame0, gMapDoorTraverseTownSide0OpenTiles);
-        work->opened = 1;
+        work->opened = TRUE;
         work->update = MapGmkTutorialIdle;
     }
 
@@ -2235,7 +2235,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
     UpdateSpriteFrameTiles(work->tiles, gMapDoorSide0Frame0, gMapDoorTraverseTownSide0ClosedTiles);
     ColliderInit(&work->collider, 6, 16, 0);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
-    work->opened = 0;
+    work->opened = FALSE;
     work->update = MapGmkTutorialWaitHit;
     TaskPoolInit(&work->tasks, 2);
 }
@@ -2303,10 +2303,10 @@ void Task_MapGmk_Spider_0(MapGmkSpiderWork* work, MapGmkPlacement* arg) {
     work->gfx = AnimGetGfx(&work->anim);
     SetObjTileSource(work->tiles, gEmy2103Tiles);
     work->update = MapGmkSpiderStartBattle;
-    flip = 0;
+    flip = FALSE;
 
     if (gFieldState->actor.fieldPosition.x >= work->obj.fieldPosition.x) {
-        flip = 1;
+        flip = TRUE;
     }
 
     work->flipX = flip;
@@ -2410,9 +2410,9 @@ u8 Task_MapGmk_GP00_1(MapGmkGpWork* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -2445,9 +2445,9 @@ u8 MapGmkGp01WaitHit(MapGmkGp1Work* work) {
     FldPos* pos = &work->obj.fieldPosition;
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (!IsHitByMapAttack(pos, 8, 8)) {
@@ -2458,7 +2458,7 @@ u8 MapGmkGp01WaitHit(MapGmkGp1Work* work) {
         DropMapGmkPrize(&work->obj.fieldPosition);
         gMapRoomState->flags |= ROOM_FLAG_ATTACK_HIT;
         work->placement->flags |= GMK_FLAG_DESTROYED;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         AnimStart(&work->anim, 1, 0);
         work->update = MapGmkGp01Break;
     }
@@ -2473,7 +2473,7 @@ u8 MapGmkGp01Break(MapGmkGp1Work* work) {
         work->gfx = AnimUpdate(anim);
     } else {
         gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
-        work->visible = 0;
+        work->visible = FALSE;
         work->update = NULL;
     }
 
@@ -2501,7 +2501,7 @@ void Task_MapGmk_GP01_0(MapGmkGp1Work* work, MapGmkPlacement* arg) {
     ColliderInit(&work->collider, 6, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
-    work->visible = 1;
+    work->visible = TRUE;
     work->update = MapGmkGp01WaitHit;
 }
 
@@ -2604,9 +2604,9 @@ u8 Task_MapGmk_GP02_1(MapGmkGpWork* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -2712,9 +2712,9 @@ u8 Task_MapGmk_GP03_1(MapGmkGpWork* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -2810,9 +2810,9 @@ u8 Task_MapGmk_GP04_1(MapGmkGpWork* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -2906,9 +2906,9 @@ u8 Task_MapGmk_GP05_1(MapGmkGpWork* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -3016,9 +3016,9 @@ u8 Task_MapGmk_GP06_1(MapGmkGpWork* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -3120,9 +3120,9 @@ u8 Task_MapGmk_GP07_1(MapGmkGp07Work* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -3168,7 +3168,7 @@ s32 MapGmkGp08WaitHit(MapGmkGp08Work* work) {
         anim = &work->anim;
         AnimStart(anim, 1, 0);
         work->gfx2 = AnimGetGfx(anim);
-        work->overlayVisible = 1;
+        work->overlayVisible = TRUE;
         work->update = MapGmkGp08HitAnim;
     }
 
@@ -3182,7 +3182,7 @@ s32 MapGmkGp08HitAnim(MapGmkGp08Work* work) {
         work->gfx2 = AnimUpdate(anim);
     } else {
         gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
-        work->overlayVisible = 0;
+        work->overlayVisible = FALSE;
         work->update = MapGmkGp08WaitHit;
     }
 
@@ -3207,7 +3207,7 @@ void Task_MapGmk_GP08_0(MapGmkGp08Work* work, MapGmkPlacement* arg) {
     ColliderInit(&work->collider, 6, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
     work->hitSong = def->hitSong;
-    work->overlayVisible = 0;
+    work->overlayVisible = FALSE;
     work->update = MapGmkGp08WaitHit;
 }
 
@@ -3217,9 +3217,9 @@ u8 Task_MapGmk_GP08_1(MapGmkGp08Work* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -3266,7 +3266,7 @@ s32 MapGmkGp09WaitStep(MapGmkGp09Work* work) {
 
             AnimStart(anim, 1, 0);
             work->gfx2 = AnimGetGfx(anim);
-            work->overlayVisible = 1;
+            work->overlayVisible = TRUE;
             work->update = MapGmkGp09StepAnim;
         }
     }
@@ -3276,7 +3276,7 @@ s32 MapGmkGp09WaitStep(MapGmkGp09Work* work) {
 
 s32 MapGmkGp09StepAnim(MapGmkGp09Work* work) {
     if (AnimIsFinished(&work->anim)) {
-        work->overlayVisible = 0;
+        work->overlayVisible = FALSE;
         work->update = MapGmkGp09WaitStepOff;
     } else {
         work->gfx2 = AnimUpdate(&work->anim);
@@ -3310,7 +3310,7 @@ void Task_MapGmk_GP09_0(MapGmkGp09Work* work, MapGmkPlacement* arg) {
     work->gfx = AnimGetGfx(&work->anim);
     ColliderInit(&work->collider, 6, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
-    work->overlayVisible = 0;
+    work->overlayVisible = FALSE;
     work->update = MapGmkGp09WaitStep;
 }
 
@@ -3320,9 +3320,9 @@ u8 Task_MapGmk_GP09_1(MapGmkGp09Work* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (work->update != NULL) {
@@ -3376,12 +3376,12 @@ void Task_MapGmk00_0(MapGmk00Work* work, MapGmkPlacement* arg) {
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
 
     if (FldObjIsOutOfView(obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     }
 
     work->radius = def->radius;
-    work->stoodOn = 0;
-    work->visible = 1;
+    work->stoodOn = FALSE;
+    work->visible = TRUE;
     work->unk_0C6 = 0;
 }
 
@@ -3394,22 +3394,22 @@ u8 Task_MapGmk00_1(MapGmk00Work* work) {
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     if (!(work->placement->flags & GMK_FLAG_USED)) {
         standing = work->collider.standFlags & COLLIDER_STAND_STOOD_ON;
 
         if (standing != 0) {
-            if (work->stoodOn != 1) {
-                work->stoodOn = 1;
+            if (work->stoodOn != TRUE) {
+                work->stoodOn = TRUE;
                 work->placement->flags |= GMK_FLAG_USED;
                 DropMapGmkPrize(pos);
             }
         } else {
-            work->stoodOn = 0;
+            work->stoodOn = FALSE;
         }
     }
 
@@ -3593,7 +3593,7 @@ u8 MapGmkBarrelWaitHit(MapGmkBarrelWork* work) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, pos);
 
         if (roll <= 5999) {
-            if (TryCreateRandomPrzCard(0, pos->x, pos->y, pos->z) != 1) {
+            if (TryCreateRandomPrzCard(0, pos->x, pos->y, pos->z) != TRUE) {
                 MapGmkBarrelDropPrizes(pos);
             }
         } else if (roll <= 9999) {
@@ -3602,16 +3602,16 @@ u8 MapGmkBarrelWaitHit(MapGmkBarrelWork* work) {
 
         gMapRoomState->flags |= ROOM_FLAG_ATTACK_HIT;
         work->placement->flags |= GMK_FLAG_DESTROYED;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         AnimStart(&work->anim, 1, 0);
         work->update = MapGmkBarrelBreak;
         return 1;
     }
 
     if (FldObjIsOutOfView(&work->obj)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     }
 
     return 1;
@@ -3624,7 +3624,7 @@ u8 MapGmkBarrelBreak(MapGmkBarrelWork* work) {
         work->gfx = AnimUpdate(anim);
     } else {
         gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
-        work->visible = 0;
+        work->visible = FALSE;
         work->update = NULL;
     }
 
@@ -3651,7 +3651,7 @@ void Task_MapGmk_Barrel_0(MapGmkBarrelWork* work, MapGmkPlacement* arg) {
     SetObjTileSource(work->tiles, def->tiles);
     ColliderInit(&work->collider, 6, def->radius, def->height);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
-    work->visible = 1;
+    work->visible = TRUE;
     work->update = MapGmkBarrelWaitHit;
 }
 
@@ -3846,7 +3846,7 @@ void Task_MapGmk05_0(MapGmk05Work* work, MapGmkPlacement* arg) {
     FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, obj);
-    work->targeted = 0;
+    work->targeted = FALSE;
     TaskPoolInit(&work->tasks2, 1);
     TaskCreate(&work->tasks2, &gTaskDescMapTalk, obj);
 }
@@ -4046,19 +4046,19 @@ void MapPrizeBounce(MapPrizeWork* work) {
         work->update = MapPrizeCollect;
         work->timer = 0;
         work->angle = GetAngle(gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y, work->x, work->y);
-        work->collected = 1;
-        work->visible = 1;
+        work->collected = TRUE;
+        work->visible = TRUE;
         work->angleStep = GetRandom() % 6 + 5;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     } else {
         ColliderSetPosition(&work->collider, work->x, work->y, work->z);
 
         if (work->timer == 20) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
         }
 
         if (work->timer > 420) {
-                work->visible = !work->visible ? 1 : 0;
+                work->visible = !work->visible ? TRUE : FALSE;
         }
 
         if (work->timer++ > 480) {
@@ -4127,14 +4127,14 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     }
 
     work->gfx2 = gMapPrizeFrame4;
-    work->collected = 0;
-    work->visible = 1;
+    work->collected = FALSE;
+    work->visible = TRUE;
     work->timer = 0;
     work->update = MapPrizeBounce;
     work->scale = Q_8_8(1);
     ColliderInit(&work->collider, 5, 16, 50);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-    ColliderSetDisabled(&work->collider, 1);
+    ColliderSetDisabled(&work->collider, TRUE);
 }
 
 s32 Task_MapPrize_1(MapPrizeWork* work) {
@@ -4240,7 +4240,7 @@ void MapPrzCardBounce(MapPrzCardWork* work) {
     }
 
     if (work->collider.colliding) {
-        work->collected = 1;
+        work->collected = TRUE;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         ObtainCard(work->cardId);
 
@@ -4256,7 +4256,7 @@ void MapPrzCardBounce(MapPrzCardWork* work) {
         ny = (work->posY >> 8) + (work->posZ >> 8) - (gFieldState->y >> 8);
         work->posX = (s16)nx << 8;
         work->posY = (s16)ny << 8;
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         work->priority = 50;
         MapPrzCardAimAtCenter(work);
         work->spriteFlags = 0;
@@ -4270,7 +4270,7 @@ void MapPrzCardBounce(MapPrzCardWork* work) {
         ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
 
         if (work->timer == 20) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
         }
 
         if (work->timer <= 59) {
@@ -4402,15 +4402,15 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* arg) {
     ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
 
     if (work->worldPrize) {
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
     } else {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
     }
 
     work->spriteFlags = SPRITE_PRIORITY(2);
     work->timer = 0;
     work->update = MapPrzCardBounce;
-    work->collected = 0;
+    work->collected = FALSE;
     TaskPoolInit(&work->tasks, 1);
 }
 
@@ -4477,8 +4477,8 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
 }
 
 void Task_MapPrzCard_3(MapPrzCardWork* work) {
-    FadeSetPaletteExcluded(work->palette2->index + 0x10, 0);
-    FadeSetPaletteExcluded(work->palette->index + 0x10, 0);
+    FadeSetPaletteExcluded(work->palette2->index + 0x10, FALSE);
+    FadeSetPaletteExcluded(work->palette->index + 0x10, FALSE);
     ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
     ReleaseObjTiles(work->tiles2);
@@ -4542,7 +4542,7 @@ void MapMsgInit(MapMsgWork* work, void* text) {
     InitTextSlots(work->textSlots, 48);
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
     work->palette = LoadTextPalette(1);
-    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     work->textX = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->timer = 0;
 }
@@ -4560,7 +4560,7 @@ void MapMsgDestroy(MapMsgWork* work) {
         DisableBg(0);
     }
 
-    FadeSetPaletteExcluded(work->palette->index + 0x10, 0);
+    FadeSetPaletteExcluded(work->palette->index + 0x10, FALSE);
     ReleaseObjPalette(work->palette);
     FreeTextSlots(work->textSlots, 0x30);
 }
@@ -4629,7 +4629,7 @@ void Task_MapTalk_0(MapTalkWork* work, FldObj* obj) {
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     AnimInit(&work->anim, gMapTalkAnims, gMapTalkFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    work->playerOnRight = 0;
+    work->playerOnRight = FALSE;
 }
 
 s32 Task_MapTalk_1(MapTalkWork* work) {
@@ -4639,10 +4639,10 @@ s32 Task_MapTalk_1(MapTalkWork* work) {
     AnimUpdate(anim);
 
     if (gFieldState->actor.fieldPosition.x < obj->fieldPosition.x) {
-        work->playerOnRight = 0;
+        work->playerOnRight = FALSE;
         AnimStart(anim, 0, ANIM_FLAG_LOOP);
     } else {
-        work->playerOnRight = 1;
+        work->playerOnRight = TRUE;
         AnimStart(anim, 1, ANIM_FLAG_LOOP);
     }
 
@@ -4671,7 +4671,7 @@ void Task_MapTalk_3(MapTalkWork* work) {
 
 const MapGmkDef gMapGmk01Def = {
     gMapGmk01Palette, gMapGmk01Tiles, 0x200, gMapGmk01Frames, gMapGmk01Anims,
-    1, 13, 0, 0, 0, 16, 16, SONG_SYS_TRESURE, &gTaskDescMapGmk01,
+    TRUE, 13, 0, 0, 0, 16, 16, SONG_SYS_TRESURE, &gTaskDescMapGmk01,
 };
 
 TaskDesc gTaskDescMapGmk01 = {
@@ -4685,7 +4685,7 @@ TaskDesc gTaskDescMapGmk01 = {
 
 const MapGmkDef gMapGmkBarrelDef = {
     gMapGmkBarrelPalette, gMapGmkBarrelTiles, 0x400, gMapGmkBarrelFrames, gMapGmkBarrelAnims,
-    1, 0, 0, 0, 0, 12, 24, SONG_SYS_OBJ_BREAK, &gTaskDescMapGmkBarrel,
+    TRUE, 0, 0, 0, 0, 12, 24, SONG_SYS_OBJ_BREAK, &gTaskDescMapGmkBarrel,
 };
 
 TaskDesc gTaskDescMapGmkBarrel = {
@@ -4699,7 +4699,7 @@ TaskDesc gTaskDescMapGmkBarrel = {
 
 const MapGmkDef gMapGmk04Def = {
     gMapGmk04Palette, gMapGmk04Tiles, 0x400, gMapGmk04Frames, gMapGmk04Anims,
-    1, 13, 0, 0, 0, 24, 62, SONG_SYS_KETTEI, &gTaskDescMapGmk04,
+    TRUE, 13, 0, 0, 0, 24, 62, SONG_SYS_KETTEI, &gTaskDescMapGmk04,
 };
 
 TaskDesc gTaskDescMapGmk04 = {
@@ -4713,7 +4713,7 @@ TaskDesc gTaskDescMapGmk04 = {
 
 const MapGmkDef gMapGmk05Def = {
     gMoguPalette, gMoguFl00Tiles, 0x100, gMoguFl00Frames, gMoguFl00Anims,
-    1, 13, 0, 0, 0, 16, 24, SONG_SYS_MOUGURI, &gTaskDescMapGmk05,
+    TRUE, 13, 0, 0, 0, 16, 24, SONG_SYS_MOUGURI, &gTaskDescMapGmk05,
 };
 
 TaskDesc gTaskDescMapGmk05 = {
@@ -4727,7 +4727,7 @@ TaskDesc gTaskDescMapGmk05 = {
 
 const MapGmkDef gMapGmk06Def = {
     gMapGmk06Palette, gMapGmk06Tiles, 0x400, gMapGmk06Frames, gMapGmk06Anims,
-    1, 13, 0, 0, 0, 24, 54, SONG_SYS_KETTEI, &gTaskDescMapGmk06,
+    TRUE, 13, 0, 0, 0, 24, 54, SONG_SYS_KETTEI, &gTaskDescMapGmk06,
 };
 
 TaskDesc gTaskDescMapGmk06 = {

@@ -278,16 +278,16 @@ u8 LockonIsInFront(u16 angle, s32 px, s32 py, FldObj* target) {
 
         if (target->kind == 3) {
             if (dot > 99) {
-                return 1;
+                return TRUE;
             }
         } else {
             if (dot > 19) {
-                return 1;
+                return TRUE;
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void LockonGetDoorScreenPos(s32* x, s32* y) {

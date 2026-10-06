@@ -124,7 +124,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             work->timer++;
         } else if (work->timer == 1) {
             for (i = 0; i <= 31; i++) {
-                FadeSetPaletteExcluded(i, 0);
+                FadeSetPaletteExcluded(i, FALSE);
             }
 
             work->timer++;

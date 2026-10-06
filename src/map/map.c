@@ -142,14 +142,14 @@ s32 MapEnmPlaceInRoom(MapEnmArgs* arg) {
 
         for (i = 0; i < sMapEnmCount; i++) {
             if (sMapEnmSpawnPositions[i].x >> 8 == pos->x >> 8 && sMapEnmSpawnPositions[i].y >> 8 == pos->y >> 8) {
-                return 0;
+                return FALSE;
             }
         }
 
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
@@ -189,12 +189,12 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
                 pos->ground = ground;
                 pos->z = ground;
                 pos->y -= ground;
-                return 1;
+                return TRUE;
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 MapEnmPlaceAboveGmk01(MapEnmArgs* arg) {
@@ -221,12 +221,12 @@ u8 MapEnmPlaceAboveGmk01(MapEnmArgs* arg) {
                 pos->ground = ground;
                 pos->y -= ground;
                 pos->z = ground - 0x2000;
-                return 1;
+                return TRUE;
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MapEnmSetupArgs(MapEnmArgs* arg, const MapEnmDef* def) {
@@ -374,7 +374,7 @@ u8 GetRandomBattleId() {
 
 void MapEnmStartBattle(MapEnmWork* work) {
     gGameState.flags |= GAME_FLAG_MAP_ENEMY_BATTLE;
-    ColliderSetDisabled(&work->collider, 1);
+    ColliderSetDisabled(&work->collider, TRUE);
     gMapRoomState->flags |= ROOM_FLAG_START_BATTLE;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     work->flags |= MAP_ENM_FLAG_REMOVED;
@@ -418,10 +418,10 @@ s32 MapEnmCheckAttacked(MapEnmWork* work) {
             m4aSongNumStart(SONG_SYS_FIELD_ATT00);
         }
 
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void MapEnmSaveToCache(MapEnmWork* work) {
@@ -635,7 +635,7 @@ void MapEnmInit(MapEnmWork* work, MapEnmArgs* arg) {
     }
 
     ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
-    ColliderSetDisabled(&work->collider, 1);
+    ColliderSetDisabled(&work->collider, TRUE);
     MapEnmApplyRoomFlags(work);
 }
 
@@ -781,22 +781,22 @@ s32 MapGmkIsAreaSparse(s16 x, s16 y) {
             n++;
 
             if (n > 2) {
-                return 0;
+                return FALSE;
             }
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 MapCellIsFreeOfType(s16 x, s16 y, u8 type) {
     MapCell* cell = MapCellAt(x, y);
 
     if (cell != NULL && cell->lowerZ != 0x100000 && cell->type == type && (cell->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 type) {
@@ -806,12 +806,12 @@ s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 type) {
     for (i = 0; i < w; i++) {
         for (j = 0; j < h; j++) {
             if (!MapCellIsFreeOfType(x + i, y + j, type)) {
-                return 0;
+                return FALSE;
             }
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 s32 MapCellHeightExceeds(s16 x, s16 y, u8 limit) {
@@ -865,7 +865,7 @@ s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 width) {
             cell = MapCellAt(x + j, y - i);
 
             if (cell->flags & MAP_CELL_FLAG_GMK_RESERVED) {
-                return 0;
+                return FALSE;
             }
 
             if (cell->type < 7 || cell->type > 9) {
@@ -874,7 +874,7 @@ s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 width) {
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 MapGmkFindFloor2x2(FldPos* pos) {
@@ -1432,27 +1432,27 @@ s32 MapGmkIsPaletteUnused(void* palette) {
 
     for (i = 0; i < sMapGmkCount; i++) {
         if (gMapGmkPlacements[i].def->palette == palette) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 s32 MapGmkNeedsTiles(u8 ownTiles, const void* tiles) {
     s32 i;
 
     if (ownTiles) {
-        return 1;
+        return TRUE;
     }
 
     for (i = 0; i < sMapGmkCount; i++) {
         if (gMapGmkPlacements[i].def->tiles == tiles) {
-            return 0;
+            return FALSE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void MapGmkReserveJump() {
@@ -1664,10 +1664,10 @@ u8 FldObjIsOutOfView(FldObj* obj) {
 
     if (obj->fieldPosition.x < gFieldState->x || obj->fieldPosition.x > gFieldState->x + 0xF000 ||
         obj->fieldPosition.y + obj->fieldPosition.z < gFieldState->y || obj->fieldPosition.y + obj->fieldPosition.z > lim) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u16 MapGmkGetFreeTiles() {
@@ -1712,7 +1712,7 @@ void DropMapGmkPrize(FldPos* pos) {
     u16 roll = GetRandom() % 10000;
 
     if (roll <= 0x5DB) {
-        if (TryCreateRandomPrzCard(0, pos->x, pos->y, pos->z) != 1) {
+        if (TryCreateRandomPrzCard(0, pos->x, pos->y, pos->z) != TRUE) {
             CreateRandomMapPrizes(pos->x, pos->y, pos->z);
         }
     } else if (roll <= 0x1D4B) {
@@ -1868,34 +1868,34 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* pattern) {
         cell = MapCellAt(x + pattern->dx, y + pattern->dy);
 
         if (cell->lowerZ == 0x100000) {
-            return 0;
+            return FALSE;
         }
 
         if (pattern->bg3Piece != 7 && cell->bg3Piece != pattern->bg3Piece) {
-            return 0;
+            return FALSE;
         }
 
         if (cell->bg2Piece != pattern->bg2Piece) {
-            return 0;
+            return FALSE;
         }
 
         flags = 0x520;
 
         if ((cell->flags & flags) != 0) {
-            return 0;
+            return FALSE;
         }
 
         flags = cell->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT);
         flags = flags & ~pattern->edgeIgnoreMask;
 
         if (flags != pattern->edgeFlags) {
-            return 0;
+            return FALSE;
         }
 
         pattern++;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void MapApplyLayer1DecorRule(MapDecorRule* rule) {
@@ -1954,13 +1954,13 @@ void MapPlaceLayer2DecorPiece(s16 x, s16 y, const u8* pieces, u16* base) {
 u8 MapDecorCheckFits(s16 x, s16 y, const u8* pattern) {
     while (pattern[0] != MAP_PATTERN_END) {
         if (MapCellAt(pattern[0] + x, pattern[1] + y)->bg1Piece != pattern[2]) {
-            return 0;
+            return FALSE;
         }
 
         pattern += 4;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void MapApplyLayer2DecorRule(MapDecorRule* rule) {
@@ -2089,20 +2089,20 @@ u8 IsEventDoor(u8 room, u8 side) {
     MapEventDoor* door;
 
     if ((s32)gMapRoomState->flags < 0) {
-        return 0;
+        return FALSE;
     }
 
     door = GetMapEventDoor(0);
 
     while (door->kind != EVENT_DOOR_END) {
         if (door->keyList != EVENT_KEY_LIST_NONE && door->room == room && door->side == side) {
-            return 1;
+            return TRUE;
         }
 
         door++;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 SelectEventDoor(u8 room, u8 side) {
@@ -2110,7 +2110,7 @@ u8 SelectEventDoor(u8 room, u8 side) {
     u8 i;
 
     if ((s32)gMapRoomState->flags < 0) {
-        return 0;
+        return FALSE;
     }
 
     i = 0;
@@ -2120,14 +2120,14 @@ u8 SelectEventDoor(u8 room, u8 side) {
         if (door->keyList != EVENT_KEY_LIST_NONE && door->room == room && door->side == side) {
             sEventKeyList = &gEventKeyLists[door->keyList];
             sEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
-            return 1;
+            return TRUE;
         }
 
         i++;
         door++;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 CountRemainingEventKeys() {
@@ -2198,14 +2198,14 @@ s32 PayEventKey(MapCardAttributes* card) {
         if (sEventKey.value > card->value) {
             sEventKey.value -= card->value;
             sEventKeyProgress->remaining = sEventKey.value;
-            return 0;
+            return FALSE;
         }
 
         sEventKeyProgress->remaining = 0;
     }
 
     sEventKeyProgress->paid++;
-    return 1;
+    return TRUE;
 }
 
 const PrizeEntry* PickRandomPrzCard(u8 worldPrize) {
@@ -2272,42 +2272,42 @@ s32 CreateMapPrzCardTask(const PrizeEntry* prize, u8 worldPrize, s32 x, s32 y, s
 
     if (CountCardsById(args.id) <= 0x62) {
         TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzCard, &args);
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 TryCreateRandomPrzCard(u8 worldPrize, s32 x, s32 y, s32 z) {
     const PrizeEntry* prize;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return 0;
+        return FALSE;
     }
 
     if (IsCardCollectionFull()) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->flags & ROOM_FLAG_NO_RANDOM_PRIZE) {
-        return 0;
+        return FALSE;
     }
 
     if (gMapRoomState->flags & ROOM_FLAG_PRIZE_CARD_ACTIVE) {
-        return 0;
+        return FALSE;
     }
 
     if (GetMapFloorRoom(gMapFloorState.room)->przCardsLeft == 0) {
-        return 0;
+        return FALSE;
     }
 
     prize = PickRandomPrzCard(worldPrize);
 
     if (prize == NULL) {
-        return 0;
+        return FALSE;
     }
 
-    return CreateMapPrzCardTask(prize, 0, x, y, z);
+    return CreateMapPrzCardTask(prize, FALSE, x, y, z);
 }
 
 void CreateMapPrizeTasks(u8 id, u8 count, s32 x, s32 y, s32 z) {
@@ -2337,12 +2337,12 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
 
             prize = &gPrzCardKinds[entry->unk_00[1]];
 
-            if (IsCardKindObtained(prize->unk_00[0]) == 1) {
+            if (IsCardKindObtained(prize->unk_00[0]) == TRUE) {
                 break;
             }
 
             SetCardKindObtained(prize->unk_00[0]);
-            CreateMapPrzCardTask(prize, 1, x, y, z);
+            CreateMapPrzCardTask(prize, TRUE, x, y, z);
             return;
         case 1:
             if (gMapRoomState->roomType == 22) {
@@ -2351,7 +2351,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
 
             prize = &gPrzStocks[entry->unk_00[1]];
 
-            if (IsStockLearned(prize->unk_00[0]) == 1) {
+            if (IsStockLearned(prize->unk_00[0]) == TRUE) {
                 break;
             }
 
@@ -2365,12 +2365,12 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
 
             prize = &gPrzCardKinds[entry->unk_00[1]];
 
-            if (IsCardKindObtained(prize->unk_00[0]) == 1) {
+            if (IsCardKindObtained(prize->unk_00[0]) == TRUE) {
                 break;
             }
 
             SetCardKindObtained(prize->unk_00[0]);
-            CreateMapPrzCardTask(prize, 1, x, y, z);
+            CreateMapPrzCardTask(prize, TRUE, x, y, z);
             gMapFloorState.flags |= FLOOR_FLAG_CHAMBER_PRIZE_TAKEN;
             return;
         case 3:
@@ -2380,7 +2380,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
 
             prize = &gPrzStocks[entry->unk_00[1]];
 
-            if (IsStockLearned(prize->unk_00[0]) != 1) {
+            if (IsStockLearned(prize->unk_00[0]) != TRUE) {
                 LearnStock(prize->unk_00[0]);
                 TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, prize);
                 gMapFloorState.flags |= FLOOR_FLAG_CHAMBER_PRIZE_TAKEN;
@@ -2394,25 +2394,25 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
     if ((gGameState.flags & GAME_FLAG_RIKU_CLEAR) && gGameState.world == WORLD_CASTLE_OBLIVION && IsCardKindObtained(OBTAINED_CARD_ONE_WINGED_ANGEL)) {
         prize = &gPrzCardKinds[14];
 
-        if (IsCardKindObtained(prize->unk_00[0]) != 1) {
+        if (IsCardKindObtained(prize->unk_00[0]) != TRUE) {
             SetCardKindObtained(prize->unk_00[0]);
-            CreateMapPrzCardTask(prize, 1, x, y, z);
+            CreateMapPrzCardTask(prize, TRUE, x, y, z);
             return;
         }
 
         prize += 24;
 
-        if (IsCardKindObtained(prize->unk_00[0]) != 1) {
+        if (IsCardKindObtained(prize->unk_00[0]) != TRUE) {
             SetCardKindObtained(prize->unk_00[0]);
-            CreateMapPrzCardTask(prize, 1, x, y, z);
+            CreateMapPrzCardTask(prize, TRUE, x, y, z);
             return;
         }
 
         prize++;
 
-        if (IsCardKindObtained(prize->unk_00[0]) != 1) {
+        if (IsCardKindObtained(prize->unk_00[0]) != TRUE) {
             SetCardKindObtained(prize->unk_00[0]);
-            CreateMapPrzCardTask(prize, 1, x, y, z);
+            CreateMapPrzCardTask(prize, TRUE, x, y, z);
             return;
         }
     }
@@ -2420,7 +2420,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
     prize = PickRandomPrzCard(1);
 
     if (prize != NULL) {
-        CreateMapPrzCardTask(prize, 1, x, y, z);
+        CreateMapPrzCardTask(prize, TRUE, x, y, z);
     }
 }
 
@@ -2436,14 +2436,14 @@ u8 AreWorldPrizesCollected() {
         while (entry[0] != 4) {
             switch (entry[0]) {
             case 2:
-                if (IsCardKindObtained((gPrzCardKinds + entry[1])->unk_00[0]) != 1) {
-                    return 0;
+                if (IsCardKindObtained((gPrzCardKinds + entry[1])->unk_00[0]) != TRUE) {
+                    return FALSE;
                 }
 
                 break;
             case 3:
-                if (IsStockLearned((gPrzStocks + entry[1])->unk_00[0]) != 1) {
-                    return 0;
+                if (IsStockLearned((gPrzStocks + entry[1])->unk_00[0]) != TRUE) {
+                    return FALSE;
                 }
 
                 break;
@@ -2453,7 +2453,7 @@ u8 AreWorldPrizesCollected() {
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void CopyMapProgress(MapProgress* progress) {
@@ -3669,12 +3669,12 @@ s32 NewGameSlotMenuShowSummary(u8 slot) {
     if (summary->level != 0) {
         NewGameSlotMenuLoadLevelTiles(slot, summary->level);
         NewGameSlotMenuLoadTimeTiles(slot, summary->playTime);
-        NewGameSlotMenuLoadFloorTiles(slot, 0, summary->floor);
-        return 1;
+        NewGameSlotMenuLoadFloorTiles(slot, FALSE, summary->floor);
+        return TRUE;
     }
 
-    NewGameSlotMenuLoadFloorTiles(slot, 0, 13);
-    return 0;
+    NewGameSlotMenuLoadFloorTiles(slot, FALSE, 13);
+    return FALSE;
 }
 
 void NewGameSlotMenuSelectSlot(u8 slot) {
@@ -3683,7 +3683,7 @@ void NewGameSlotMenuSelectSlot(u8 slot) {
     summary = &gGameState.fileSummaries[fileIndex];
 
     if (summary->level != 0) {
-        NewGameSlotMenuLoadFloorTiles(fileIndex, 1, summary->floor);
+        NewGameSlotMenuLoadFloorTiles(fileIndex, TRUE, summary->floor);
         sNewGameSlotMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(summary->world), sNewGameSlotMenuWork->textSlots);
 
         if (sNewGameSlotMenuWork->isRiku == 0) {
@@ -3692,7 +3692,7 @@ void NewGameSlotMenuSelectSlot(u8 slot) {
             LoadObjPaletteBank(sNewGameSlotMenuWork->palette8->index, gSaveFloorRikuPalette);
         }
     } else {
-        NewGameSlotMenuLoadFloorTiles(fileIndex, 1, 13);
+        NewGameSlotMenuLoadFloorTiles(fileIndex, TRUE, 13);
         sNewGameSlotMenuWork->textSlotCount = 0;
     }
 
@@ -3720,9 +3720,9 @@ void NewGameSlotMenuDeselectSlot(u8 slot) {
     SaveFileSummary* summary = &gGameState.fileSummaries[fileIndex];
 
     if (summary->level != 0) {
-        NewGameSlotMenuLoadFloorTiles(fileIndex, 0, summary->floor);
+        NewGameSlotMenuLoadFloorTiles(fileIndex, FALSE, summary->floor);
     } else {
-        NewGameSlotMenuLoadFloorTiles(fileIndex, 0, 13);
+        NewGameSlotMenuLoadFloorTiles(fileIndex, FALSE, 13);
     }
 
     sNewGameSlotMenuWork->textSlotCount = 0;
@@ -3811,7 +3811,7 @@ void NewGameSlotMenuInput(NewGameSlotMenuWork* work) {
         }
 
         m4aSongNumStart(SONG_SYS_SAVELOAD);
-        work->confirmed = 1;
+        work->confirmed = TRUE;
     }
 
     work->timer = 16;
@@ -3852,7 +3852,7 @@ void Mode_MenuNew_0() {
     u8 secondUsed;
 
     sNewGameSlotMenuWork = EwramAlloc(sizeof(NewGameSlotMenuWork));
-    sNewGameSlotMenuWork->confirmed = 0;
+    sNewGameSlotMenuWork->confirmed = FALSE;
     sNewGameSlotMenuWork->isRiku = (gGameState.flags >> 3) & 1;
     sNewGameSlotMenuWork->slotBaseY = 33;
     sNewGameSlotMenuWork->timer = 16;
@@ -3975,14 +3975,14 @@ s32 LoadGameMenuLoadFile(u8 slot) {
     case 0:
         if (SaveRepairFileLarge(0) == SAVE_OK) {
             SaveLoadFileLarge(0);
-            return 1;
+            return TRUE;
         }
 
         break;
     case 1:
         if (SaveRepairFileLarge(1) == SAVE_OK) {
             SaveLoadFileLarge(1);
-            return 1;
+            return TRUE;
         }
 
         break;
@@ -3990,7 +3990,7 @@ s32 LoadGameMenuLoadFile(u8 slot) {
         if (SaveRepairFileSmall(0) == SAVE_OK) {
             SaveLoadFileSmall(0);
             InitRikuDeckForWorld(gGameState.world);
-            return 1;
+            return TRUE;
         }
 
         break;
@@ -3998,13 +3998,13 @@ s32 LoadGameMenuLoadFile(u8 slot) {
         if (SaveRepairFileSmall(1) == SAVE_OK) {
             SaveLoadFileSmall(1);
             InitRikuDeckForWorld(gGameState.world);
-            return 1;
+            return TRUE;
         }
 
         break;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void LoadGameMenuLoadFloorTiles(u8 slot, u8 selected, u8 floor) {
@@ -4167,9 +4167,9 @@ void LoadGameMenuShowSummary(u8 slot) {
     if (summary->level != 0) {
         LoadGameMenuLoadLevelTiles(slot, summary->level);
         LoadGameMenuLoadTimeTiles(slot, summary->playTime);
-        LoadGameMenuLoadFloorTiles(slot, 0, summary->floor);
+        LoadGameMenuLoadFloorTiles(slot, FALSE, summary->floor);
     } else {
-        LoadGameMenuLoadFloorTiles(slot, 0, 13);
+        LoadGameMenuLoadFloorTiles(slot, FALSE, 13);
     }
 }
 
@@ -4177,7 +4177,7 @@ void LoadGameMenuSelectSlot(u8 slot) {
     SaveFileSummary* summary = &gGameState.fileSummaries[slot];
 
     if (summary->level != 0) {
-        LoadGameMenuLoadFloorTiles(slot, 1, summary->floor);
+        LoadGameMenuLoadFloorTiles(slot, TRUE, summary->floor);
         sLoadGameMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(summary->world), sLoadGameMenuWork->textSlots);
 
         if (slot <= 1) {
@@ -4186,7 +4186,7 @@ void LoadGameMenuSelectSlot(u8 slot) {
             LoadObjPaletteBank(sLoadGameMenuWork->palette7->index, gSaveFloorRikuPalette);
         }
     } else {
-        LoadGameMenuLoadFloorTiles(slot, 1, 13);
+        LoadGameMenuLoadFloorTiles(slot, TRUE, 13);
         sLoadGameMenuWork->textSlotCount = 0;
     }
 }
@@ -4195,9 +4195,9 @@ void LoadGameMenuDeselectSlot(u8 slot) {
     SaveFileSummary* summary = &gGameState.fileSummaries[slot];
 
     if (summary->level != 0) {
-        LoadGameMenuLoadFloorTiles(slot, 0, summary->floor);
+        LoadGameMenuLoadFloorTiles(slot, FALSE, summary->floor);
     } else {
-        LoadGameMenuLoadFloorTiles(slot, 0, 13);
+        LoadGameMenuLoadFloorTiles(slot, FALSE, 13);
     }
 
     sLoadGameMenuWork->textSlotCount = 0;
@@ -4385,7 +4385,7 @@ void LoadGameMenuInput(LoadGameMenuWork* work) {
             }
 
             m4aSongNumStart(SONG_SYS_SAVELOAD);
-            work->loaded = 1;
+            work->loaded = TRUE;
             work->timer = 16;
             work->update = LoadGameMenuSlideOutX;
         } else {
@@ -4457,7 +4457,7 @@ void Mode_MenuLoad_0(s32 arg) {
         sLoadGameMenuWork->showRikuSlots = (gGameState.flags >> 5) & 1;
     }
 
-    sLoadGameMenuWork->loaded = 0;
+    sLoadGameMenuWork->loaded = FALSE;
     sLoadGameMenuWork->selectedSlot = 0;
 
     if (sLoadGameMenuWork->showRikuSlots != 0) {
@@ -4744,9 +4744,9 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
     }
 
 #ifdef VERSION_EU
-    work->bg1MapLoaded = 0;
-    work->bg2MapLoaded = 0;
-    work->bg3MapLoaded = 0;
+    work->bg1MapLoaded = FALSE;
+    work->bg2MapLoaded = FALSE;
+    work->bg3MapLoaded = FALSE;
 
     if (def->rawTiles == 0) {
         LoadBgTilesLz77(3, def->tiles);
@@ -4759,7 +4759,7 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
     LoadBgPalette(3, def->palette, def->paletteSize);
 #ifdef VERSION_EU
     SetBgMapBlocksLz77(3, def->map3, def->mapWidth, def->mapHeight);
-    work->bg3MapLoaded = 1;
+    work->bg3MapLoaded = TRUE;
 #else
     SetBgMapBlocks(3, def->map3, def->mapWidth, def->mapHeight);
 #endif
@@ -4777,7 +4777,7 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
         LoadBgPalette(2, def->palette, def->paletteSize);
 #ifdef VERSION_EU
         SetBgMapBlocksLz77(2, def->map2, def->mapWidth, def->mapHeight);
-        work->bg2MapLoaded = 1;
+        work->bg2MapLoaded = TRUE;
 #else
         SetBgMapBlocks(2, def->map2, def->mapWidth, def->mapHeight);
 #endif
@@ -4798,7 +4798,7 @@ void Task_MapFix_0(MapFixWork* work, MapFixedDef* def) {
         LoadBgPalette(1, def->palette, def->paletteSize);
 #ifdef VERSION_EU
         SetBgMapBlocksLz77(1, def->map, def->mapWidth, def->mapHeight);
-        work->bg1MapLoaded = 1;
+        work->bg1MapLoaded = TRUE;
 #else
         SetBgMapBlocks(1, def->map, def->mapWidth, def->mapHeight);
 #endif
@@ -4916,12 +4916,12 @@ u8 MapDoorWaitHit(MapDoorWork* work) {
         gMapRoomState->flags |= ROOM_FLAG_ATTACK_HIT;
         gFieldState->lockonTarget = obj;
         gMapRoomState->door = obj;
-        work->triggered = 1;
+        work->triggered = TRUE;
         work->update = MapDoorWaitCard;
         gMapRoomState->doorRoom = door->room;
         gMapRoomState->doorSide = door->side;
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
-        FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
+        FadeSetPaletteExcluded(work->palette2->index + 16, TRUE);
         TaskCreate(pool, &gTaskDescRoomcreate, NULL);
     }
 
@@ -4944,8 +4944,8 @@ u8 MapDoorWaitCard(MapDoorWork* work) {
 
     if (!(gFieldState->flags & FIELD_FLAG_ROOM_CREATE)) {
         gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
-        FadeSetPaletteExcluded(work->palette->index + 16, 0);
-        FadeSetPaletteExcluded(work->palette2->index + 16, 0);
+        FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
+        FadeSetPaletteExcluded(work->palette2->index + 16, FALSE);
         work->update = MapDoorWaitHit;
     }
 
@@ -4976,8 +4976,8 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
     const MapDoorGfx* doorGfx = &gWorldMapDoorGfx[gMapFloorState.world];
 
     work->door = door;
-    work->triggered = 0;
-    work->visible = 1;
+    work->triggered = FALSE;
+    work->visible = TRUE;
 
     switch (door->side) {
     case 0:
@@ -5055,11 +5055,11 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* door) {
 s32 Task_MapDoor_1(MapDoorWork* work) {
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         if (!work->triggered) {
-            work->visible = 0;
+            work->visible = FALSE;
         }
     } else {
-        work->triggered = 0;
-        work->visible = 1;
+        work->triggered = FALSE;
+        work->visible = TRUE;
     }
 
     if (work->update != NULL) {
@@ -5080,7 +5080,7 @@ void Task_MapDoor_2(MapDoorWork* work) {
     u16 drawFlags;
     s32 pixelY;
 
-    if (work->visible == 1) {
+    if (work->visible == TRUE) {
         sx = (work->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         pixelY = work->obj.fieldPosition.y >> 8;
         sy = pixelY + (work->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
@@ -5189,7 +5189,7 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     LoadBgTiles(0, gConfirmWinTiles, 0x140);
     LoadBgMap(0, gConfirmWinMap, 0x800);
     LoadPalette(gCard00Palette, (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 0x20);
-    FadeSetPaletteExcluded(15, 1);
+    FadeSetPaletteExcluded(15, TRUE);
     SetBgScroll(0, 0, 0);
     work->confirmPalette = LoadTextPalette(1);
     promptSlots = work->textSlots2;
@@ -5215,7 +5215,7 @@ void MapMenuInitConfirm(MapMenuWork* work) {
 }
 
 void MapMenuFreeConfirm(MapMenuWork* work) {
-    FadeSetPaletteExcluded(15, 0);
+    FadeSetPaletteExcluded(15, FALSE);
     DisableBg(0);
     ReleaseObjPalette(work->confirmPalette);
 #ifdef VERSION_EU
@@ -5247,11 +5247,11 @@ s32 MapMenuOpen(MapMenuWork* work) {
     work->y4 = work->playerStartY;
     work->cursor = gGameState.mapMenuCursor;
     work->confirmCursor = 0;
-    work->cursorVisible = 0;
-    work->panelsVisible = 0;
+    work->cursorVisible = FALSE;
+    work->panelsVisible = FALSE;
     work->steps = work->reopened ? 1 : 16;
     work->update = MapMenuSlideInY;
-    MapMenuSetCharaPalettesExcluded(work, 1);
+    MapMenuSetCharaPalettesExcluded(work, TRUE);
 
     if (!work->reopened) {
         FadeToAmount(FADE_MODE_BLACK, 16, 16);
@@ -5404,8 +5404,8 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
         work->x = -0x8000;
         work->tiles4 = LoadObjTiles(gMapMenuCharaWinTiles, 0x300);
         work->x2 = 0xF800;
-        MapMenuSetPanelPalettesExcluded(work, 1);
-        work->panelsVisible = 1;
+        MapMenuSetPanelPalettesExcluded(work, TRUE);
+        work->panelsVisible = TRUE;
         work->steps = work->reopened ? 1 : 16;
         work->update = MapMenuSlideInX;
     }
@@ -5425,11 +5425,11 @@ s32 MapMenuSlideInX(MapMenuWork* work) {
         ApproachValue(&work->y4, 0x6000, work->steps);
         work->steps--;
     } else {
-        work->cursorVisible = 1;
+        work->cursorVisible = TRUE;
         work->y3 = (work->cursor * 19 + 16) << 8;
 
         if (work->reopened) {
-            work->reopened = 0;
+            work->reopened = FALSE;
             FadeToAmount(FADE_MODE_BLACK, 16, 1);
             work->update = MapMenuResume;
         } else {
@@ -5452,7 +5452,7 @@ s32 MapMenuSoraInput(MapMenuWork* work) {
     }
 
     if (GetKeysPressed() & (B_BUTTON | START_BUTTON)) {
-        work->cursorVisible = 0;
+        work->cursorVisible = FALSE;
         work->steps = 16;
         work->update = MapMenuSlideOutX;
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -5502,7 +5502,7 @@ s32 MapMenuRikuInput(MapMenuWork* work) {
     }
 
     if (GetKeysPressed() & (B_BUTTON | START_BUTTON)) {
-        work->cursorVisible = 0;
+        work->cursorVisible = FALSE;
         work->steps = 16;
         work->update = MapMenuSlideOutX;
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -5597,7 +5597,7 @@ s32 MapMenuSlideOutX(MapMenuWork* work) {
     } else {
         gMapRoomState->flags &= ~ROOM_FLAG_HIDE_PLAYER;
         gFieldState->flags &= ~FIELD_FLAG_HIDE_ENEMIES;
-        MapMenuSetPanelPalettesExcluded(work, 0);
+        MapMenuSetPanelPalettesExcluded(work, FALSE);
         FadeToOriginal(FADE_MODE_BLACK, 16);
         work->steps = 16;
         work->update = MapMenuSlideOutY;
@@ -5668,14 +5668,14 @@ void Task_MapMenu_0(MapMenuWork* work) {
         work->palette6 = LoadObjPalette(gSoraPalette, 32);
     }
 
-    FadeSetPaletteExcluded(work->palette6->index + 0x10, 1);
+    FadeSetPaletteExcluded(work->palette6->index + 0x10, TRUE);
     cursor = gGameState.mapMenuCursor;
 
     if (cursor != -1) {
-        work->reopened = 1;
+        work->reopened = TRUE;
     } else {
         gGameState.mapMenuCursor = 0;
-        work->reopened = 0;
+        work->reopened = FALSE;
         m4aSongNumStart(SONG_SYS_CANSEL);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
     }
@@ -5990,8 +5990,8 @@ void Task_MapMenu_2(MapMenuWork* work) {
 void Task_MapMenu_3(MapMenuWork* work) {
     s32 i;
 
-    MapMenuSetCharaPalettesExcluded(work, 0);
-    MapMenuSetPanelPalettesExcluded(work, 0);
+    MapMenuSetCharaPalettesExcluded(work, FALSE);
+    MapMenuSetPanelPalettesExcluded(work, FALSE);
     ReleaseObjPalette(work->palette2);
     ReleaseObjTiles(work->tiles2);
     ReleaseObjTiles(work->tiles3);
@@ -6279,8 +6279,8 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gMapSaveConfirmText), promptSlots);
         work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), yesSlots);
         work->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), noSlots);
-        MapSaveSetPanelPalettesExcluded(work, 1);
-        work->dialogVisible = 1;
+        MapSaveSetPanelPalettesExcluded(work, TRUE);
+        work->dialogVisible = TRUE;
         work->confirmCursor = 2;
         work->x2 = 0xB000;
         work->update = MapSaveInput;
@@ -6307,7 +6307,7 @@ s32 MapSaveInput(MapSaveWork* work) {
     if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && work->confirmCursor != 1)) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         work->confirmCursor = 0;
-        work->dialogVisible = 0;
+        work->dialogVisible = FALSE;
         work->steps = 16;
         work->update = MapSaveSlideOutX;
         DisableBg(0);
@@ -6344,7 +6344,7 @@ s32 MapSaveInput(MapSaveWork* work) {
 
 s32 MapSaveWaitClose(MapSaveWork* work) {
     if (GetKeysPressed() & (A_BUTTON | B_BUTTON)) {
-        work->dialogVisible = 0;
+        work->dialogVisible = FALSE;
         DisableBg(0);
         work->steps = 16;
         work->update = MapSaveSlideOutX;
@@ -6362,7 +6362,7 @@ s32 MapSaveSlideOutX(MapSaveWork* work) {
     } else {
         gMapRoomState->flags &= ~ROOM_FLAG_HIDE_PLAYER;
         gFieldState->flags &= ~FIELD_FLAG_HIDE_ENEMIES;
-        MapSaveSetPanelPalettesExcluded(work, 0);
+        MapSaveSetPanelPalettesExcluded(work, FALSE);
         FadeToOriginal(FADE_MODE_BLACK, 16);
         work->steps = 16;
         work->update = MapSaveSlideOutY;
@@ -6432,11 +6432,11 @@ void Task_MapSave_0(MapSaveWork* work) {
     work->x3 = work->playerStartX;
     work->y3 = work->playerStartY;
     work->confirmCursor = 0;
-    work->dialogVisible = 0;
+    work->dialogVisible = FALSE;
     work->steps = 16;
     work->update = MapSaveSlideInY;
     TaskPoolInit(&work->tasks, 1);
-    MapSaveSetCharaPalettesExcluded(work, 1);
+    MapSaveSetCharaPalettesExcluded(work, TRUE);
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
@@ -6552,7 +6552,7 @@ void Task_MapSave_2(MapSaveWork* work) {
 void Task_MapSave_3(MapSaveWork* work) {
     u32 roomFlags;
 
-    MapSaveSetCharaPalettesExcluded(work, 0);
+    MapSaveSetCharaPalettesExcluded(work, FALSE);
     ReleaseObjPalette(work->palette2);
     ReleaseObjTiles(work->tiles2);
     ReleaseObjPalette(work->palette3);

@@ -1049,7 +1049,7 @@ u8 FldPosRevertIfBlocked(FldPos* pos, s32 x, s32 y) {
     if (IsFldPosBlocked(pos) != 0) {
         pos->x = x;
         pos->y = y;
-        return 1;
+        return TRUE;
     }
 
     old = pos->ground;
@@ -1060,11 +1060,11 @@ u8 FldPosRevertIfBlocked(FldPos* pos, s32 x, s32 y) {
             pos->x = x;
             pos->y = y;
             pos->ground = old;
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 MapFindOpenDoor(FldPos* pos) {
@@ -1072,18 +1072,18 @@ u8 MapFindOpenDoor(FldPos* pos) {
     u16 cellX;
     u16 cellY;
     MapDoor* door;
-    u8 found = 0;
+    u8 found = FALSE;
 
     if ((s32)gMapRoomState->flags < 0) {
-        return 0;
+        return FALSE;
     }
 
     if ((gGameState.progression.tutorialFlags & 0x200) == 0) {
-        return 0;
+        return FALSE;
     }
 
     if (pos->z != pos->ground) {
-        return 0;
+        return FALSE;
     }
 
     cellX = (pos->x >> 8) / 32;
@@ -1095,7 +1095,7 @@ u8 MapFindOpenDoor(FldPos* pos) {
         if ((door->flags & DOOR_FLAG_PRESENT) != 0 && (door->flags & (DOOR_FLAG_OPEN | DOOR_FLAG_SEALED)) == DOOR_FLAG_OPEN && door->cellX == cellX && door->cellY == cellY) {
             gMapRoomState->doorRoom = door->room;
             gMapRoomState->doorSide = door->side;
-            found = 1;
+            found = TRUE;
             break;
         }
     }

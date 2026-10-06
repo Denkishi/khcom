@@ -106,16 +106,16 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
     obj->height = 48;
     obj->kind = 2;
 
-    registered = 0;
+    registered = FALSE;
 
     if (gMapFloorState.progress == 27) {
-        registered = 1;
+        registered = TRUE;
     }
 
     work->registered = registered;
 
-    work->visible = 1;
-    work->targeted = 0;
+    work->visible = TRUE;
+    work->targeted = FALSE;
     TaskPoolInit(&work->tasks2, 1);
     TaskCreate(&work->tasks2, &gTaskDescMapTalk, &work->obj);
     TaskPoolInit(&work->tasks, 2);
@@ -162,9 +162,9 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
 
 s32 Task_MapNiseriku_1(MapNiserikuWork* work) {
     if ((u8)IsMapInterrupted()) {
-        work->visible = 0;
+        work->visible = FALSE;
     } else {
-        work->visible = 1;
+        work->visible = TRUE;
         work->targeted = IsFldObjTalkTarget(&work->obj);
         TaskPoolUpdate(&work->tasks);
         TaskPoolUpdate(&work->tasks2);

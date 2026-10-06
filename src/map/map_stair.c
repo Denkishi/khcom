@@ -40,10 +40,10 @@ s32 IsPlayerWithin(FldPos* pos, s32 lim) {
     }
 
     if (dx > 0x8000 || dy > 0x8000) {
-        return 0;
+        return FALSE;
     }
 
-    return Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < lim ? 1 : 0;
+    return Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < lim ? TRUE : FALSE;
 }
 
 void MapStairWaitStepOn(MapStairWork* work) {

@@ -66,7 +66,7 @@ void Task_MapMickey_0(MapMickeyWork* work) {
     obj->angle = 0xAD;
     obj->height = 0x30;
     obj->kind = 2;
-    work->visible = 1;
+    work->visible = TRUE;
     work->update = MapMickeyCheckTalk;
     work->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);
     work->palette = LoadObjPalette(gMickeyPalette, 32);
@@ -77,16 +77,16 @@ void Task_MapMickey_0(MapMickeyWork* work) {
     FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
-    work->targeted = 0;
+    work->targeted = FALSE;
     TaskPoolInit(&work->tasks2, 1);
     TaskCreate(&work->tasks2, &gTaskDescMapTalk, &work->obj);
 }
 
 s32 Task_MapMickey_1(MapMickeyWork* work) {
     if ((u8)IsMapInterrupted()) {
-        work->visible = 0;
+        work->visible = FALSE;
     } else {
-        work->visible = 1;
+        work->visible = TRUE;
         work->targeted = IsFldObjTalkTarget(&work->obj);
         TaskPoolUpdate(&work->tasks);
         TaskPoolUpdate(&work->tasks2);

@@ -72,9 +72,9 @@ void MapTutorialDropBarrel(MapTutorialWork* work) {
         work->gfx = AnimGetGfx(anim);
         ColliderInit(&work->collider, 6, 12, 24);
         ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
-        work->shadowVisible = 1;
+        work->shadowVisible = TRUE;
         TaskCreate(&work->tasks2, &gTaskDescFldShadow, &work->obj);
-        work->visible = 1;
+        work->visible = TRUE;
         work->update = MapTutorialBarrelFall;
     }
 }
@@ -90,7 +90,7 @@ void MapTutorialBarrelFall(MapTutorialWork* work) {
         m4aSongNumStart(SONG_SND_215);
         work->obj.fieldPosition.z = work->obj.fieldPosition.ground;
         work->obj.speed = 0;
-        work->shadowVisible = 0;
+        work->shadowVisible = FALSE;
         work->update = MapTutorialWaitBarrelHit;
     }
 
@@ -137,10 +137,10 @@ void MapTutorialSpawnEnemy(MapTutorialWork* work) {
         work->obj.fieldPosition.y -= work->obj.fieldPosition.ground;
         work->obj.fieldPosition.z = work->obj.fieldPosition.ground;
         work->obj.height = 16;
-        flip = 0;
+        flip = FALSE;
 
         if (gFieldState->actor.fieldPosition.x > work->obj.fieldPosition.x) {
-            flip = 1;
+            flip = TRUE;
         }
 
         work->flip = flip;
@@ -152,7 +152,7 @@ void MapTutorialSpawnEnemy(MapTutorialWork* work) {
         work->gfx = AnimGetGfx(anim);
         ColliderInit(&work->collider, 3, 8, 16);
         ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         work->update = MapTutorialEnemyAppear;
     }
 }
@@ -175,7 +175,7 @@ void MapTutorialWaitEnemyMessage(MapTutorialWork* work) {
 
     if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
-        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetDisabled(&work->collider, FALSE);
         work->update = MapTutorialEnemyUpdate;
     }
 }
@@ -195,7 +195,7 @@ void MapTutorialEnemyUpdate(MapTutorialWork* work) {
         work->update = MapTutorialEnemyHit;
     } else if (work->collider.colliding) {
         if (!(gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) && work->collider.otherType == 1) {
-            ColliderSetDisabled(&work->collider, 1);
+            ColliderSetDisabled(&work->collider, TRUE);
             MapTutorialStartBattle();
         } else {
             work->obj.fieldPosition.x += work->collider.pushX;
@@ -208,7 +208,7 @@ void MapTutorialEnemyHit(MapTutorialWork* work) {
     AnimState* anim = &work->anim;
 
     if (AnimIsFinished(anim)) {
-        ColliderSetDisabled(&work->collider, 1);
+        ColliderSetDisabled(&work->collider, TRUE);
         gGameState.flags |= GAME_FLAG_FIRST_STRIKE;
         MapTutorialStartBattle();
     } else {
@@ -224,18 +224,18 @@ void Task_MapTutorial_0(MapTutorialWork* work) {
     gMapRoomState->flags |= ROOM_FLAG_NO_RANDOM_PRIZE;
     work->tiles = NULL;
     work->palette = NULL;
-    work->flip = 0;
+    work->flip = FALSE;
     barrelDone = gGameState.progression.tutorialFlags & 0x2000;
 
     if (barrelDone == 0) {
-        work->shadowVisible = 0;
-        work->visible = 0;
+        work->shadowVisible = FALSE;
+        work->visible = FALSE;
         work->update = MapTutorialWaitStart;
     } else {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         TaskCreate(&work->tasks2, &gTaskDescFldShadow, &work->obj);
-        work->visible = 1;
-        work->shadowVisible = 1;
+        work->visible = TRUE;
+        work->shadowVisible = TRUE;
         work->update = MapTutorialSpawnEnemy;
     }
 }

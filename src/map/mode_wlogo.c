@@ -230,11 +230,11 @@ void WLogoStartLogo(u8 world) {
     SetBgMode1();
     SetupBg(0, 0, 7, 14);
     SetBgPriority(0, 0);
-    SetBgOverflow(0, 1);
+    SetBgOverflow(0, TRUE);
     SetBgSize(0, BGCNT_TXT256x256);
     SetupBg(2, 2, 24, 0);
     SetBgPriority(2, 2);
-    SetBgOverflow(2, 1);
+    SetBgOverflow(2, TRUE);
     SetBgSize(2, BGCNT_AFF512x512);
     TaskPoolInit(&sModeWLogoTasks, 2);
 

@@ -24,7 +24,7 @@ void Task_MapDmg_0(MapDmgWork* work) {
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     work->tiles = LoadObjTiles(gBtlAreaTiles, 224);
     work->timer = zero;
-    work->enabled = 1;
+    work->enabled = TRUE;
 }
 
 s32 Task_MapDmg_1(MapDmgWork* work) {

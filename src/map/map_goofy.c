@@ -75,7 +75,7 @@ void Task_MapGoofy_0(MapGoofyWork* work) {
     obj->angle = 0x80;
     obj->height = 0x30;
     obj->kind = 2;
-    work->visible = 1;
+    work->visible = TRUE;
     work->update = MapGoofyCheckTalk;
     work->tiles = AllocObjTiles(0x400, gGoofyFl00Tiles);
     work->palette = LoadObjPalette(gGoofyPalette, 32);
@@ -86,16 +86,16 @@ void Task_MapGoofy_0(MapGoofyWork* work) {
     FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
-    work->targeted = 0;
+    work->targeted = FALSE;
     TaskPoolInit(&work->tasks2, 1);
     TaskCreate(&work->tasks2, &gTaskDescMapTalk, &work->obj);
 }
 
 s32 Task_MapGoofy_1(MapGoofyWork* work) {
     if ((u8)IsMapInterrupted()) {
-        work->visible = 0;
+        work->visible = FALSE;
     } else {
-        work->visible = 1;
+        work->visible = TRUE;
         work->targeted = IsFldObjTalkTarget(&work->obj);
         TaskPoolUpdate(&work->tasks);
         TaskPoolUpdate(&work->tasks2);

@@ -506,7 +506,7 @@ void mode_pooh_0(s32 arg) {
     TaskCreate(&sModePoohTasks, &gTaskDescPooSora, NULL);
     TaskCreate(&sModePoohTasks, &gTaskDescPooPiglet, NULL);
 
-    if (!IsPooEventDone(2)) {
+    if (!IsPooEventDone(POO_EVENT_EEYORE)) {
         TaskCreate(&sModePoohTasks, &gTaskDescPooEeyoretail, NULL);
         TaskCreate(&sModePoohTasks, &gTaskDescPooBee, NULL);
     } else {
@@ -519,7 +519,7 @@ void mode_pooh_0(s32 arg) {
     TaskCreate(&sModePoohTasks, &gTaskDescPooWagon, NULL);
     TaskCreate(&sModePoohTasks, &gTaskDescPooWagonwheel, NULL);
 
-    if (!IsPooEventDone(4)) {
+    if (!IsPooEventDone(POO_EVENT_RABBIT)) {
         TaskCreate(&sModePoohTasks, &gTaskDescPooRabbit, NULL);
         TaskCreate(&sModePoohTasks, &gTaskDescPooCabbageborn, NULL);
     } else {
@@ -531,8 +531,8 @@ void mode_pooh_0(s32 arg) {
     TaskCreate(&sModePoohTasks, &gTaskDescPooTigger, NULL);
     TaskCreate(&sModePoohTasks, &gTaskDescPooRooFootmark, NULL);
 
-    if (IsPooEventDone(5)) {
-        if (!IsPooEventDone(1)) {
+    if (IsPooEventDone(POO_EVENT_ROO)) {
+        if (!IsPooEventDone(POO_EVENT_TIGGER)) {
             TaskCreate(&sModePoohTasks, &gTaskDescPooRoo, NULL);
         } else {
             TaskCreate(&sModePoohTasks, &gTaskDescPooTiggerroo, NULL);
@@ -928,7 +928,7 @@ void SetPoohAnimation(PoohWork* work, u32 action) {
         work->hideShadow = 1;
         SetPoohDir2(work);
 
-        if (IsPooEventDone(6) || work->leavingWagon || (work->dirIndex == 5 && work->flipped == 0)) {
+        if (IsPooEventDone(POO_EVENT_WAGON) || work->leavingWagon || (work->dirIndex == 5 && work->flipped == 0)) {
             def = &sPooh07Anim0Defs[work->dirIndex];
         } else {
             def = &sPooh07Anim1Defs[work->dirIndex];

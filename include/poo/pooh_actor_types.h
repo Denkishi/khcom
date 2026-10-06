@@ -31,6 +31,16 @@ typedef struct PooActor {
     s32 shadowZ;
 } PooActor;
 
+enum PooEventId {
+    POO_EVENT_PIGLET,
+    POO_EVENT_TIGGER,
+    POO_EVENT_EEYORE,
+    POO_EVENT_OWL,
+    POO_EVENT_RABBIT,
+    POO_EVENT_ROO,
+    POO_EVENT_WAGON
+};
+
 typedef struct PooState {
     PooPos pos;
     PooPos pos2;

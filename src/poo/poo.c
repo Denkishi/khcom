@@ -573,9 +573,9 @@ void UpdatePoohStumpCircle(PoohWork* work) {
         work->stumpCount++;
 
         if (work->stumpCount > 3) {
-            if (!IsPooEventDone(1)) {
+            if (!IsPooEventDone(POO_EVENT_TIGGER)) {
                 ExitPoohMode(EVENT_141_100ACREWOOD_LV5);
-                SetPooEventDone(1);
+                SetPooEventDone(POO_EVENT_TIGGER);
                 SetJiminyFlag(JIMINY_RECORD_CHARACTER_TIGGER);
             }
         }
@@ -826,7 +826,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
             break;
         }
 
-        if (work->pos.x == 0x4A700 && work->pos.y == 0x28E00 && !IsPooEventDone(5)) {
+        if (work->pos.x == 0x4A700 && work->pos.y == 0x28E00 && !IsPooEventDone(POO_EVENT_ROO)) {
             SetPoohAction(work, POOH_ACTION_TRAPPED_WITH_ROO);
             TaskCreate(&work->tasks, &gTaskDescPooRoo, &work->pos);
             break;
@@ -909,9 +909,9 @@ void UpdatePoohAction(PoohWork* work, PooNode* node) {
             break;
         }
 
-        if (!IsPooEventDone(3)) {
+        if (!IsPooEventDone(POO_EVENT_OWL)) {
             ExitPoohMode(EVENT_137_100ACREWOOD_LV2);
-            SetPooEventDone(3);
+            SetPooEventDone(POO_EVENT_OWL);
             SetJiminyFlag(JIMINY_RECORD_CHARACTER_OWL);
         } else {
             ExitPoohMode(EVENT_138_100ACREWOOD_LV2_RETRY);
@@ -4071,7 +4071,7 @@ void task_poo_piglet_0(PooPigletWork* work) {
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescPooShadow, &work->x);
 
-    if (IsPooEventDone(0)) {
+    if (IsPooEventDone(POO_EVENT_PIGLET)) {
         work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_PIGLET_TALK);
         SetPoohInteractionEnabled(work->interactionId, 0);
     }
@@ -4083,7 +4083,7 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
             return 1;
         }
 
-        if (IsPooEventDone(0)) {
+        if (IsPooEventDone(POO_EVENT_PIGLET)) {
             return 1;
         }
 
@@ -4091,7 +4091,7 @@ u8 task_poo_piglet_1(PooPigletWork* work) {
         gPoohRequestY = work->y;
         gPoohRequest = POOH_REQUEST_PIGLET;
         ExitPoohMode(EVENT_136_100ACREWOOD_LV1);
-        SetPooEventDone(0);
+        SetPooEventDone(POO_EVENT_PIGLET);
         SetJiminyFlag(JIMINY_RECORD_CHARACTER_PIGLET);
     }
 
@@ -4223,7 +4223,7 @@ void task_poo_piglet_2(PooPigletWork* work) {
         if (work->palette == NULL) {
             work->palette = LoadObjPalette(gPigletPalette, 0x20);
 
-            if (IsPooEventDone(0)) {
+            if (IsPooEventDone(POO_EVENT_PIGLET)) {
                 ColliderInit(&work->collider, 10, 4, 16);
             } else {
                 ColliderInit(&work->collider, 10, 16, 16);
@@ -4259,7 +4259,7 @@ void task_poo_eeyore_0(PooEeyoreWork* work) {
     work->tiles = NULL;
     work->palette = NULL;
 
-    if (IsPooEventDone(2)) {
+    if (IsPooEventDone(POO_EVENT_EEYORE)) {
         work->animId = 0;
     } else {
         work->animId = 4;
@@ -4274,7 +4274,7 @@ void task_poo_eeyore_0(PooEeyoreWork* work) {
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->colliderActive = 1;
 
-    if (!IsPooEventDone(2)) {
+    if (!IsPooEventDone(POO_EVENT_EEYORE)) {
         work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_EEYORE_TALK_0);
     } else {
         work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_EEYORE_TALK_1);
@@ -4305,7 +4305,7 @@ u8 task_poo_eeyore_1(PooEeyoreWork* work) {
 
         if (work->moveTimer == 0) {
             ExitPoohMode(EVENT_140_100ACREWOOD_LV4);
-            SetPooEventDone(2);
+            SetPooEventDone(POO_EVENT_EEYORE);
             SetJiminyFlag(JIMINY_RECORD_CHARACTER_EEYORE);
             work->animId = 1;
             AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
@@ -5001,7 +5001,7 @@ void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
     work->palette = LoadObjPalette(gRooPalette, 0x20);
     AnimInit(&work->anim, gRooFl00Anims, gRooFl00Frames);
 
-    if (IsPooEventDone(5)) {
+    if (IsPooEventDone(POO_EVENT_ROO)) {
         work->pos.x = 0x95F00;
         work->pos.y = 0x4EE00;
         work->pos.z = 0;
@@ -5021,7 +5021,7 @@ void task_poo_roo_0(PooRooWork* work, PooPos* pos) {
     ColliderInit(&work->collider, 10, 4, 32);
     ColliderSetPosition(&work->collider, work->pos.x, work->pos.y, work->pos.z);
 
-    if (IsPooEventDone(5)) {
+    if (IsPooEventDone(POO_EVENT_ROO)) {
         work->interactionId = AddPoohInteraction(&work->collider, CARD_MSG_ROO_TALK);
     }
 }
@@ -5067,7 +5067,7 @@ u8 task_poo_roo_1(PooRooWork* work) {
 
         if (work->srcPos->z >= 0) {
             ExitPoohMode(EVENT_139_100ACREWOOD_LV3);
-            SetPooEventDone(5);
+            SetPooEventDone(POO_EVENT_ROO);
             SetJiminyFlag(JIMINY_RECORD_CHARACTER_ROO);
         }
 
@@ -5125,7 +5125,7 @@ void task_poo_roo_footmark_0(PooFootmarkWork* work) {
     work->tiles = LoadObjTiles(gRoFootmarkTiles, 0x500);
     work->palette = NULL;
 
-    if (!IsPooEventDone(5)) {
+    if (!IsPooEventDone(POO_EVENT_ROO)) {
         work->gfx = gRoFootmarkFrame0;
     } else {
         work->gfx = gRoFootmarkFrame1;
@@ -5156,7 +5156,7 @@ void task_poo_roo_footmark_2(PooFootmarkWork* work) {
             node = &work->node;
             AddPooNode(node, 0x240, &work->x);
 
-            if (IsPooEventDone(5)) {
+            if (IsPooEventDone(POO_EVENT_ROO)) {
                 SetPooNodeWeight(node, 0);
             }
         }
@@ -5500,7 +5500,7 @@ u8 task_poo_honeycomb_1(PooHoneycombWork* work) {
             break;
         case POO_HONEYCOMB_STATE_IDLE:
             if (ColliderIsTouchingType(&work->collider, 9)) {
-                eventDone = IsPooEventDone(2);
+                eventDone = IsPooEventDone(POO_EVENT_EEYORE);
 
                 if (!eventDone) {
                     gPoohRequest = POOH_REQUEST_HONEYCOMB;
@@ -5651,7 +5651,7 @@ s32 IsInPooWagonArea(PooPos* pos) {
 
     depth = 0x2500;
 
-    if (IsPooEventDone(6)) {
+    if (IsPooEventDone(POO_EVENT_WAGON)) {
         depth = 0x2100;
     }
 
@@ -5684,7 +5684,7 @@ s32 IsInPooWagonAreaForPooh(PooPos* pos) {
 
     depth = 0x2500;
 
-    if (IsPooEventDone(6)) {
+    if (IsPooEventDone(POO_EVENT_WAGON)) {
         depth = 0x2100;
     }
 
@@ -5886,7 +5886,7 @@ void task_poo_wagon_0(PooWagonWork* work) {
     work->pos.ground = 0;
     work->pos2 = work->pos;
 
-    if (IsPooEventDone(6)) {
+    if (IsPooEventDone(POO_EVENT_WAGON)) {
         work->pos.y += 0xC00;
     }
 
@@ -5913,7 +5913,7 @@ u8 task_poo_wagon_1(PooWagonWork* work) {
                 gPoohPos->y += 0x100;
             }
         }
-    } else if (!IsPooEventDone(6)) {
+    } else if (!IsPooEventDone(POO_EVENT_WAGON)) {
         if (work->pos.y != work->pos2.y) {
             work->pos.y -= 0x100;
             gPooActor.pos.y -= 0x100;
@@ -5937,7 +5937,7 @@ u8 task_poo_wagon_1(PooWagonWork* work) {
         work->poohAboard = 0;
     }
 
-    if (IsPooSoraOnWagon() && IsPoohWaitingOnWagon() && !IsPooEventDone(6)) {
+    if (IsPooSoraOnWagon() && IsPoohWaitingOnWagon() && !IsPooEventDone(POO_EVENT_WAGON)) {
         work->timer++;
 
         if (work->timer > 100) {
@@ -5947,7 +5947,7 @@ u8 task_poo_wagon_1(PooWagonWork* work) {
                 work->pos.y += delta;
                 gPooActor.pos.y += delta;
                 gPoohPos->y += delta;
-                SetPooEventDone(6);
+                SetPooEventDone(POO_EVENT_WAGON);
                 m4aSongNumStart(SONG_SYS_OBJ_BREAK);
                 work->timer = 0;
             }
@@ -6060,7 +6060,7 @@ void task_poo_wagonwheel_0(PooWheelWork* work) {
     s16 x;
     s16 y;
 
-    if (!IsPooEventDone(6)) {
+    if (!IsPooEventDone(POO_EVENT_WAGON)) {
         work->x = 0x2A800;
         work->y = 0x18D00;
         work->animId = 2;
@@ -6085,7 +6085,7 @@ void task_poo_wagonwheel_0(PooWheelWork* work) {
 }
 
 u8 task_poo_wagonwheel_1(PooWheelWork* work) {
-    if (work->animId == 2 && IsPooEventDone(6)) {
+    if (work->animId == 2 && IsPooEventDone(POO_EVENT_WAGON)) {
         work->animId = 3;
         AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
     }
@@ -6137,7 +6137,7 @@ void task_poo_wagonwheel_2(PooWheelWork* work) {
             work->palette = LoadObjPalette(gRaWagonPalette, 0x20);
         }
 
-        if (!IsPooEventDone(6)) {
+        if (!IsPooEventDone(POO_EVENT_WAGON)) {
             priority = &sPooWagonWheelPriority;
             *priority = GetPooWagonPriority2() - 1;
         } else {
@@ -6149,7 +6149,7 @@ void task_poo_wagonwheel_2(PooWheelWork* work) {
 }
 
 void task_poo_wagonwheel_3(PooWheelWork* work) {
-    if (IsPooEventDone(6)) {
+    if (IsPooEventDone(POO_EVENT_WAGON)) {
         SetPooStateWheelPos(work->x >> 8, work->y >> 8);
     }
 
@@ -6387,7 +6387,7 @@ void task_poo_beeAfterEvent_3(PooBeeAfterEventWork* work) {
 }
 
 u8 IsPooBeeAfterEventVisible() {
-    if (IsPooEventDone(2)) {
+    if (IsPooEventDone(POO_EVENT_EEYORE)) {
         if (sPooBeeAfterEventWork->palette != NULL) {
             return 1;
         }
@@ -6521,9 +6521,9 @@ u8 task_poo_cabbage_1(PooCabbageWork* work) {
 
         break;
     case POO_CABBAGE_STATE_LAND:
-        if (!IsPooEventDone(4) && work->stackIndex == 13) {
+        if (!IsPooEventDone(POO_EVENT_RABBIT) && work->stackIndex == 13) {
             ExitPoohMode(EVENT_142_100ACREWOOD_LV6);
-            SetPooEventDone(4);
+            SetPooEventDone(POO_EVENT_RABBIT);
             SetJiminyFlag(JIMINY_RECORD_CHARACTER_RABBIT);
         }
 
@@ -6629,7 +6629,7 @@ void task_poo_cabbageborn_0(PooCabbageBornWork* work) {
 }
 
 u8 CanSpawnPooCabbage() {
-    if (IsPooEventDone(6) && !IsPoohOffScreen() && gPooScrollX > 0x9EB && gPooScrollX <= 0xA8A && gPooScrollY <= 0x548 && gPooScrollY > 0x4F9) {
+    if (IsPooEventDone(POO_EVENT_WAGON) && !IsPoohOffScreen() && gPooScrollX > 0x9EB && gPooScrollX <= 0xA8A && gPooScrollY <= 0x548 && gPooScrollY > 0x4F9) {
         return 1;
     }
 
@@ -6677,8 +6677,8 @@ u16 GetPooCabbageLandedCount() {
 }
 
 u8 IsPooCabbageGameActive() {
-    if (!IsPooEventDone(4)) {
-        if (IsPooEventDone(6)) {
+    if (!IsPooEventDone(POO_EVENT_RABBIT)) {
+        if (IsPooEventDone(POO_EVENT_WAGON)) {
             if (gPooScrollY > 0x4F9) {
                 return 1;
             }
@@ -9012,5 +9012,12 @@ TaskDesc gTaskDescPooCabbageAfterEvent = {
     sizeof(PooCabbageAfterEventWork),
 };
 
-const s32 gPooMainEventIds[6] = { 0, 1, 2, 3, 4, 5 };
+const s32 gPooMainEventIds[6] = {
+    POO_EVENT_PIGLET,
+    POO_EVENT_TIGGER,
+    POO_EVENT_EEYORE,
+    POO_EVENT_OWL,
+    POO_EVENT_RABBIT,
+    POO_EVENT_ROO,
+};
 

@@ -29,8 +29,8 @@ enum SrollBCharMotion {
     SROLL_B_CHAR_MOTION_SWAY
 };
 
-void SrollBCharSetMotion(Task* task, s32 v) {
-    ((SrollBCharWork*)task->work)->motion = v;
+void SrollBCharSetMotion(Task* task, s32 motion) {
+    ((SrollBCharWork*)task->work)->motion = motion;
 }
 
 void SrollBCharChangeAnim(SrollBCharWork* work) {

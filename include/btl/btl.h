@@ -59,6 +59,14 @@ enum ComboFlag {
     COMBO_FLAG_ZOOM_ON_HIT = 0x2
 };
 
+enum ComboType {
+    COMBO_TYPE_NORMAL,
+    COMBO_TYPE_TARGET_FAR_X,
+    COMBO_TYPE_TARGET_ABOVE,
+    COMBO_TYPE_AIRBORNE,
+    COMBO_TYPE_TARGET_FAR_Y
+};
+
 typedef struct SoraAttackDef {
     s32 animId;
     const s32* attackIds;

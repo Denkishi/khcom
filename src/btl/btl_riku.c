@@ -146,30 +146,30 @@ u16 GetBtlRikuComboType(BtlRikuWork* work) {
     target = work->actor.btl->actor2;
 
     if (work->actor.btl->flags & BTL_FLAG_PLAYER_AIRBORNE) {
-        return 3;
+        return COMBO_TYPE_AIRBORNE;
     }
 
     if (target == NULL) {
-        return 0;
+        return COMBO_TYPE_NORMAL;
     }
 
     if (act->z - target->z > 0x2000) {
-        return 2;
+        return COMBO_TYPE_TARGET_ABOVE;
     }
 
     delta = target->x - act->x;
 
     if (delta >= 0 ? delta > 0x2800 : act->x - target->x > 0x2800) {
-        return 1;
+        return COMBO_TYPE_TARGET_FAR_X;
     }
 
     delta = target->y - act->y;
 
     if (delta >= 0 ? delta > 0xC00 : act->y - target->y > 0xC00) {
-        return 4;
+        return COMBO_TYPE_TARGET_FAR_Y;
     }
 
-    return 0;
+    return COMBO_TYPE_NORMAL;
 }
 
 void FocusBtlRikuCameraOnTarget(BtlRikuWork* work) {
@@ -741,27 +741,27 @@ void StartBtlRikuCombo(BtlRikuWork* work) {
         work->steps = 0;
     } else {
         switch (GetBtlRikuComboType(work)) {
-        case 0:
+        case COMBO_TYPE_NORMAL:
             work->attacks[0] = &sBtlRikuSwing1;
             work->attacks[1] = &sBtlRikuSwing2;
             work->attacks[2] = &sBtlRikuSwing3;
             break;
-        case 1:
+        case COMBO_TYPE_TARGET_FAR_X:
             work->attacks[0] = &sBtlRikuSwing2;
             work->attacks[1] = &sBtlRikuSwing1;
             work->attacks[2] = &sBtlRikuSwing3;
             break;
-        case 2:
+        case COMBO_TYPE_TARGET_ABOVE:
             work->attacks[0] = &sBtlRikuAirSwing1;
             work->attacks[1] = &sBtlRikuAirSwing2;
             work->attacks[2] = &sBtlRikuAirSwing3;
             break;
-        case 3:
+        case COMBO_TYPE_AIRBORNE:
             work->attacks[0] = &sBtlRikuAirSwing1Hop;
             work->attacks[1] = &sBtlRikuAirSwing1;
             work->attacks[2] = &sBtlRikuAirSwing3;
             break;
-        case 4:
+        case COMBO_TYPE_TARGET_FAR_Y:
         default:
             work->attacks[0] = &sBtlRikuSwing1Wide;
             work->attacks[1] = &sBtlRikuSwing2;

@@ -207,30 +207,30 @@ u16 GetBtlSoraComboType(BtlSoraWork* work) {
     target = work->actor.btl->actor2;
 
     if (work->actor.btl->flags & BTL_FLAG_PLAYER_AIRBORNE) {
-        return 3;
+        return COMBO_TYPE_AIRBORNE;
     }
 
     if (target == NULL) {
-        return 0;
+        return COMBO_TYPE_NORMAL;
     }
 
     if (act->z - target->z > 0x2000) {
-        return 2;
+        return COMBO_TYPE_TARGET_ABOVE;
     }
 
     delta = target->x - act->x;
 
     if (delta >= 0 ? delta > 0x2800 : act->x - target->x > 0x2800) {
-        return 1;
+        return COMBO_TYPE_TARGET_FAR_X;
     }
 
     delta = target->y - act->y;
 
     if (delta >= 0 ? delta > 0xC00 : act->y - target->y > 0xC00) {
-        return 4;
+        return COMBO_TYPE_TARGET_FAR_Y;
     }
 
-    return 0;
+    return COMBO_TYPE_NORMAL;
 }
 
 void FocusBtlSoraCameraOnTarget(BtlSoraWork* work) {
@@ -691,27 +691,27 @@ void StartBtlSoraCombo(BtlSoraWork* work) {
         work->steps = 0;
     } else {
         switch (GetBtlSoraComboType(work)) {
-        case 0:
+        case COMBO_TYPE_NORMAL:
             work->attacks[0] = &sBtlSoraSwing1;
             work->attacks[1] = &sBtlSoraSwing2;
             work->attacks[2] = &sBtlSoraSwing3;
             break;
-        case 1:
+        case COMBO_TYPE_TARGET_FAR_X:
             work->attacks[0] = &sBtlSoraSwing2;
             work->attacks[1] = &sBtlSoraSwing1;
             work->attacks[2] = &sBtlSoraSwing3;
             break;
-        case 2:
+        case COMBO_TYPE_TARGET_ABOVE:
             work->attacks[0] = &sBtlSoraAirSwing1;
             work->attacks[1] = &sBtlSoraAirSwing2;
             work->attacks[2] = &sBtlSoraAirSwing3;
             break;
-        case 3:
+        case COMBO_TYPE_AIRBORNE:
             work->attacks[0] = &sBtlSoraAirSwing1Hop;
             work->attacks[1] = &sBtlSoraAirSwing1;
             work->attacks[2] = &sBtlSoraAirSwing3;
             break;
-        case 4:
+        case COMBO_TYPE_TARGET_FAR_Y:
         default:
             work->attacks[0] = &sBtlSoraSwing1Wide;
             work->attacks[1] = &sBtlSoraSwing2;

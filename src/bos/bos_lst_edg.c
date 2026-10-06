@@ -34,15 +34,23 @@ s32 BosLstEdgSquare2(s32 x) {
     return x * x;
 }
 
+enum BosLstEdgState {
+    BOS_LST_EDG_STATE_WAIT,
+    BOS_LST_EDG_STATE_THROW,
+    BOS_LST_EDG_STATE_RETURN,
+    BOS_LST_EDG_STATE_FINISH,
+    BOS_LST_EDG_STATE_DONE
+};
+
 u8 BosLstEdgIsActive(Task* task) {
     LstEdgWork* s;
 
     s = task->work;
-    return s->state != 4;
+    return s->state != BOS_LST_EDG_STATE_DONE;
 }
 
 void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
-    work->state = 0;
+    work->state = BOS_LST_EDG_STATE_WAIT;
     work->step = 0;
     work->timer = 0;
     work->delay = arg->delay;
@@ -62,11 +70,11 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
     BtlObj* p;
 
     switch (work->state) {
-    case 0:
+    case BOS_LST_EDG_STATE_WAIT:
         work->delay--;
 
         if (work->delay <= 0) {
-            work->state = 1;
+            work->state = BOS_LST_EDG_STATE_THROW;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -77,7 +85,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
         }
 
         break;
-    case 1:
+    case BOS_LST_EDG_STATE_THROW:
         work->targetX = gBtlWork->actor->x;
         ApproachValueHalfSteps(&work->x, work->targetX, 30);
         ApproachValueHalfSteps(&work->y, work->targetY, 30);
@@ -85,7 +93,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
         work->timer++;
 
         if (work->timer > 49) {
-            work->state = 2;
+            work->state = BOS_LST_EDG_STATE_RETURN;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -93,14 +101,14 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
 
         ApplyAttackBox(0x10C, work->x, work->y, work->z, 8, 8, 1);
         break;
-    case 2:
+    case BOS_LST_EDG_STATE_RETURN:
         ApproachValueHalfSteps(&work->x, work->homeX, 30);
         ApproachValueHalfSteps(&work->y, work->homeY, 30);
         ApproachValueHalfSteps(&work->z, work->homeZ, 30);
         work->timer++;
 
         if (work->timer > 49) {
-            work->state = 3;
+            work->state = BOS_LST_EDG_STATE_FINISH;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -108,13 +116,13 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
 
         ApplyAttackBox(0x10C, work->x, work->y, work->z, 8, 8, 1);
         break;
-    case 3:
-        work->state = 4;
+    case BOS_LST_EDG_STATE_FINISH:
+        work->state = BOS_LST_EDG_STATE_DONE;
         work->step = 0;
         work->timer = 0;
         work->delay = 0;
         break;
-    case 4:
+    case BOS_LST_EDG_STATE_DONE:
         AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         break;
     }

@@ -31,15 +31,21 @@ s32 BosLstPtlSquare2(s32 x) {
     return x * x;
 }
 
+enum BosLstPtlState {
+    BOS_LST_PTL_STATE_WAIT,
+    BOS_LST_PTL_STATE_FALL,
+    BOS_LST_PTL_STATE_DONE
+};
+
 u8 BosLstPtlIsActive(Task* task) {
     LstPtlWork* s;
 
     s = task->work;
-    return s->state != 2;
+    return s->state != BOS_LST_PTL_STATE_DONE;
 }
 
 void task_bos_lst_ptl_0(LstPtlWork* work, LstPtlArg* arg) {
-    work->state = 0;
+    work->state = BOS_LST_PTL_STATE_WAIT;
     work->step = 0;
     work->timer = 0;
     work->delay = arg->delay;
@@ -59,11 +65,11 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
     result = 1;
 
     switch (work->state) {
-    case 0:
+    case BOS_LST_PTL_STATE_WAIT:
         work->delay--;
 
         if (work->delay <= 0) {
-            work->state = 1;
+            work->state = BOS_LST_PTL_STATE_FALL;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -72,7 +78,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
         }
 
         break;
-    case 1:
+    case BOS_LST_PTL_STATE_FALL:
         work->x -= 0x80;
         work->y += 0x100;
         work->wobbleX = -COS(work->timer * 8);
@@ -80,14 +86,14 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
         work->timer++;
 
         if ((work->y >> 8) > 0xA8) {
-            work->state = 2;
+            work->state = BOS_LST_PTL_STATE_DONE;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
         }
 
         break;
-    case 2:
+    case BOS_LST_PTL_STATE_DONE:
         AnimReset(&work->anim);
         AnimChange(&work->anim, 0, ANIM_FLAG_LOOP);
         break;

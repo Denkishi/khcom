@@ -49,11 +49,19 @@ s32 BosLstCtrSquare2(s32 x) {
     return x * x;
 }
 
+enum BosLstCtrState {
+    BOS_LST_CTR_STATE_ORBIT,
+    BOS_LST_CTR_STATE_DROP,
+    BOS_LST_CTR_STATE_LAND,
+    BOS_LST_CTR_STATE_SLIDE,
+    BOS_LST_CTR_STATE_DONE
+};
+
 u8 BosLstCtrIsActive(Task* task) {
     LstCtrWork* s;
 
     s = task->work;
-    return s->state != 4;
+    return s->state != BOS_LST_CTR_STATE_DONE;
 }
 
 s32 BosLstCtrSqrt(s32 n) {
@@ -84,7 +92,7 @@ void task_bos_lst_ctr_0(LstCtrWork* work, LstCtrArg* arg) {
     work->unk_000 = arg->unk_00;
     work->count = arg->count;
     work->index = arg->index;
-    work->state = 0;
+    work->state = BOS_LST_CTR_STATE_ORBIT;
     work->step = 0;
     work->timer = 0;
     work->delay = arg->delay;
@@ -116,7 +124,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
     work->offsetZ /= 2;
 
     switch (work->state) {
-    case 0:
+    case BOS_LST_CTR_STATE_ORBIT:
         c = (u16)work->timer + 1;
         work->timer = c;
         work->delay--;
@@ -126,7 +134,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->x2 = work->curX - (work->curX - p->x) / 4;
             work->y2 = p->y;
             work->z2 = -0x1000;
-            work->state = 1;
+            work->state = BOS_LST_CTR_STATE_DROP;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -142,14 +150,14 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
         }
 
         break;
-    case 1:
+    case BOS_LST_CTR_STATE_DROP:
         work->curX = work->x - (work->x - work->x2) * work->timer / work->duration;
         work->curY = work->y + (work->y2 - work->y) * work->timer / work->duration;
         work->curZ = work->z + (work->z2 - work->z) * work->timer / work->duration;
         work->timer++;
 
         if (work->timer >= work->duration) {
-            work->state = 2;
+            work->state = BOS_LST_CTR_STATE_LAND;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -160,11 +168,11 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_LST_CTR_STATE_LAND:
         work->timer++;
 
         if (work->timer > 2) {
-            work->state = 3;
+            work->state = BOS_LST_CTR_STATE_SLIDE;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -176,13 +184,13 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_LST_CTR_STATE_SLIDE:
         if (work->x > work->x2) {
             work->unk_010 = 0;
             work->curX = work->curX - 0x600;
 
             if (work->curX < 0x6000) {
-                work->state = 4;
+                work->state = BOS_LST_CTR_STATE_DONE;
                 work->step = 0;
                 work->timer = 0;
                 work->delay = 0;
@@ -192,7 +200,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->curX = work->curX + 0x600;
 
             if (work->curX > 0x19000) {
-                work->state = 4;
+                work->state = BOS_LST_CTR_STATE_DONE;
                 work->step = 0;
                 work->timer = 0;
                 work->delay = 0;
@@ -207,7 +215,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 
         work->timer++;
         break;
-    case 4:
+    case BOS_LST_CTR_STATE_DONE:
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         break;
     }
@@ -233,7 +241,7 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
     z = -0x1004 - ((work->curY + work->offsetY) >> 8) * 4;
 
     switch (work->state) {
-    case 0:
+    case BOS_LST_CTR_STATE_ORBIT:
         d = work->timer - work->index * 8;
 
         if (d <= 0) {
@@ -245,10 +253,10 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
         }
 
         break;
-    case 1:
+    case BOS_LST_CTR_STATE_DROP:
         affine = AllocObjAffine(0, 0x100 - work->timer * 4, 0x100 - work->timer * 4, 1);
         break;
-    case 2:
+    case BOS_LST_CTR_STATE_LAND:
         affine = AllocObjAffine(0, 0x100 - (work->duration - work->timer) * 4,
                                 0x100 - work->duration * 4, 1);
         break;

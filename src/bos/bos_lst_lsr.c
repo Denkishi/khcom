@@ -60,6 +60,13 @@ s32 BosLstLsrSqrt(s32 n) {
     return g;
 }
 
+enum BosLstLsrState {
+    BOS_LST_LSR_STATE_IDLE,
+    BOS_LST_LSR_STATE_DELAY,
+    BOS_LST_LSR_STATE_TRAVEL,
+    BOS_LST_LSR_STATE_IMPACT
+};
+
 u8 BosLstLsrIsFiring(Task* task) {
     LstLsrWork* s;
     u8 result;
@@ -68,8 +75,8 @@ u8 BosLstLsrIsFiring(Task* task) {
     result = 0;
 
     switch (s->state) {
-    case 2:
-    case 3:
+    case BOS_LST_LSR_STATE_TRAVEL:
+    case BOS_LST_LSR_STATE_IMPACT:
         result = 1;
         break;
     }
@@ -85,7 +92,7 @@ void BosLstLsrFire(Task* task, Vec3* origin, Vec3* target, s32 angle, u16 delay)
     s16 y2;
 
     s = task->work;
-    s->state = 1;
+    s->state = BOS_LST_LSR_STATE_DELAY;
     s->angle = angle;
     s->delay = delay;
     s->pos = *origin;
@@ -105,7 +112,7 @@ void BosLstLsrStop(Task* task) {
     LstLsrWork* w;
 
     w = task->work;
-    w->state = 0;
+    w->state = BOS_LST_LSR_STATE_IDLE;
     w->timer = 0;
     AnimStart(&w->anim, 4, 0);
 }
@@ -138,7 +145,7 @@ void task_bos_lst_lsr_0(LstLsrWork* work, LstLsrArg* arg) {
     work->kind = arg->kind;
     work->facing = arg->facing;
     work->falCount = arg->falCount;
-    work->state = 0;
+    work->state = BOS_LST_LSR_STATE_IDLE;
     work->tiles = LoadObjTiles(gBosLstBitTiles, 0x900);
     work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
     AnimInit(&work->anim, gBosLstBitAnims, gBosLstBitFrames);
@@ -147,31 +154,31 @@ void task_bos_lst_lsr_0(LstLsrWork* work, LstLsrArg* arg) {
 
 u8 task_bos_lst_lsr_1(LstLsrWork* work) {
     switch (work->state) {
-    case 0:
+    case BOS_LST_LSR_STATE_IDLE:
         break;
-    case 1:
+    case BOS_LST_LSR_STATE_DELAY:
         work->delay--;
 
         if (work->delay > 0) {
             break;
         }
 
-        work->state = 2;
+        work->state = BOS_LST_LSR_STATE_TRAVEL;
         work->delay = 0;
-    case 2:
+    case BOS_LST_LSR_STATE_TRAVEL:
         work->timer++;
 
         if (work->timer >= work->duration) {
-            work->state = 3;
+            work->state = BOS_LST_LSR_STATE_IMPACT;
             work->timer = 0;
             AnimReset(&work->anim);
             AnimChange(&work->anim, 6, ANIM_FLAG_LOOP);
         }
 
         break;
-    case 3:
+    case BOS_LST_LSR_STATE_IMPACT:
         if (work->timer > 15) {
-            work->state = 0;
+            work->state = BOS_LST_LSR_STATE_IDLE;
             work->timer = 0;
             AnimChange(&work->anim, 4, 0);
         } else {
@@ -221,7 +228,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
     ObjAffine* oam;
 
     switch (work->state) {
-    case 2:
+    case BOS_LST_LSR_STATE_TRAVEL:
         WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
         z = -0x1004 - (work->pos2.y >> 8) * 4;
@@ -232,7 +239,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         DrawSprite(x, y, gBosLstBitFrames[13], work->tiles, work->palette,
                    oam, prio, z);
         break;
-    case 3:
+    case BOS_LST_LSR_STATE_IMPACT:
         WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
         z = -0x1004 - (work->pos2.y >> 8) * 4;

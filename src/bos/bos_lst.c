@@ -95,10 +95,15 @@ s32 BosLstSquare2(s32 x) {
     return x * x;
 }
 
+enum BosLstEventStep {
+    BOS_LST_EVENT_STEP_WAIT,
+    BOS_LST_EVENT_STEP_APPROACH
+};
+
 void BosLstAdvanceEventStep(Task* task) {
     BosLstWork* work = task->work;
 
-    work->eventStep = 1;
+    work->eventStep = BOS_LST_EVENT_STEP_APPROACH;
 }
 
 void BosLstSetMode(BosLstWork* work, u16 moveMode, u16 attackKind) {
@@ -350,6 +355,51 @@ void BosLstUpdateBob(BosLstWork* work) {
     }
 }
 
+enum BosLstState {
+    BOS_LST_STATE_MOVE,
+    BOS_LST_STATE_ATTACK,
+    BOS_LST_STATE_BREAK,
+    BOS_LST_STATE_HURT,
+    BOS_LST_STATE_DEFEATED,
+    BOS_LST_STATE_RECOVER,
+    BOS_LST_STATE_INACTIVE,
+    BOS_LST_STATE_EVENT
+};
+
+enum BosLstMoveMode {
+    BOS_LST_MOVE_MODE_HOVER,
+    BOS_LST_MOVE_MODE_GROUND,
+    BOS_LST_MOVE_MODE_KAMA,
+    BOS_LST_MOVE_MODE_DASH,
+    BOS_LST_MOVE_MODE_BITS,
+    BOS_LST_MOVE_MODE_PLATFORM
+};
+
+enum BosLstAttackKind {
+    BOS_LST_ATTACK_KIND_GROUND,
+    BOS_LST_ATTACK_KIND_KAMA,
+    BOS_LST_ATTACK_KIND_DASH,
+    BOS_LST_ATTACK_KIND_CTR,
+    BOS_LST_ATTACK_KIND_BITS,
+    BOS_LST_ATTACK_KIND_HANABIRA,
+    BOS_LST_ATTACK_KIND_PLATFORM_BITS
+};
+
+enum BosLstPlatformStep {
+    BOS_LST_PLATFORM_STEP_DESCEND,
+    BOS_LST_PLATFORM_STEP_RIDE,
+    BOS_LST_PLATFORM_STEP_LEAVE
+};
+
+enum BosLstSubState {
+    BOS_LST_SUB_STATE_IDLE,
+    BOS_LST_SUB_STATE_CARD_ACTION,
+    BOS_LST_SUB_STATE_CARD_BROKEN,
+    BOS_LST_SUB_STATE_HURT,
+    BOS_LST_SUB_STATE_DEFEATED,
+    BOS_LST_SUB_STATE_RECOVER
+};
+
 void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     BtlObj* pos;
     void* obj;
@@ -361,16 +411,16 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
 
     if (pool == NULL) {
         work->inEvent = 0;
-        work->eventStep = 0;
+        work->eventStep = BOS_LST_EVENT_STEP_WAIT;
         work->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFld, (void*)&sBosLstBattleBackgroundDef);
-        work->state = 0;
+        work->state = BOS_LST_STATE_MOVE;
         work->x = 0x14000;
         work->z = -0x5400;
     } else {
         work->inEvent = 1;
-        work->eventStep = 0;
+        work->eventStep = BOS_LST_EVENT_STEP_WAIT;
         work->task = TaskCreate(pool, &gTaskDescBosLstFld, (void*)&sBosLstBattleBackgroundDef);
-        work->state = 7;
+        work->state = BOS_LST_STATE_EVENT;
         work->x = 0x1D000;
         work->z = -0x14400;
     }
@@ -378,7 +428,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->hidden = 0;
     work->subsDefeated = 0;
     work->step = 0;
-    BosLstSetMode(work, 2, 1);
+    BosLstSetMode(work, BOS_LST_MOVE_MODE_KAMA, BOS_LST_ATTACK_KIND_KAMA);
     work->bodyCycle = 0;
     work->facing = 1;
     work->flash = 0;
@@ -409,11 +459,11 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->dashCount = 0;
     work->bitRound = 0;
     work->playerOnPlatform = 0;
-    work->platformStep = 0;
+    work->platformStep = BOS_LST_PLATFORM_STEP_DESCEND;
     work->sub[0].defeated = 0;
     work->sub[0].unk_001 = 1;
     work->sub[0].restartAnim = 1;
-    work->sub[0].state = 0;
+    work->sub[0].state = BOS_LST_SUB_STATE_IDLE;
     work->sub[0].timer = 0;
     work->sub[0].hurtTimer = 0;
     work->sub[0].animId = 0;
@@ -421,7 +471,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->sub[1].defeated = 0;
     work->sub[1].unk_001 = 0;
     work->sub[1].restartAnim = 1;
-    work->sub[1].state = 0;
+    work->sub[1].state = BOS_LST_SUB_STATE_IDLE;
     work->sub[1].timer = 0;
     work->sub[1].hurtTimer = 0;
     work->sub[1].animId = 0;
@@ -538,7 +588,7 @@ void BosLstMoveMode1(BosLstWork* work) {
     s32 y;
 
     if (!work->subsDefeated) {
-        BosLstSetMode(work, 2, 1);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_KAMA, BOS_LST_ATTACK_KIND_KAMA);
         work->kamaCount = 0;
     }
 
@@ -580,7 +630,7 @@ void BosLstMoveMode1(BosLstWork* work) {
 
 void BosLstMoveMode2(BosLstWork* work) {
     if (work->subsDefeated == 1) {
-        BosLstSetMode(work, 3, 2);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_DASH, BOS_LST_ATTACK_KIND_DASH);
         work->kamaCount = 0;
     }
 
@@ -603,6 +653,15 @@ void BosLstMoveMode2(BosLstWork* work) {
     }
 }
 
+enum BosLstDashStep {
+    BOS_LST_DASH_STEP_FLY_OFF,
+    BOS_LST_DASH_STEP_ENTER,
+    BOS_LST_DASH_STEP_REQUEST,
+    BOS_LST_DASH_STEP_HOLD,
+    BOS_LST_DASH_STEP_PASSED,
+    BOS_LST_DASH_STEP_RETURN
+};
+
 void BosLstMoveDash(BosLstWork* work) {
     s16 v;
     s16 n;
@@ -611,7 +670,7 @@ void BosLstMoveDash(BosLstWork* work) {
     s32 dir2;
 
     if (!work->subsDefeated) {
-        BosLstSetMode(work, 0, 3);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_CTR);
         return;
     }
 
@@ -637,7 +696,7 @@ void BosLstMoveDash(BosLstWork* work) {
             if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
                 work->step += 1;
                 work->dashCount += 1;
-                work->dashStep = 0;
+                work->dashStep = BOS_LST_DASH_STEP_FLY_OFF;
                 work->dashSpeed = 0;
                 work->unk_0AC = 0;
                 work->timer = 0;
@@ -650,8 +709,8 @@ void BosLstMoveDash(BosLstWork* work) {
     }
 
     switch (work->dashStep) {
-    case 0:
-        if (work->state != 4) {
+    case BOS_LST_DASH_STEP_FLY_OFF:
+        if (work->state != BOS_LST_STATE_DEFEATED) {
             if ((((s16)work->frameCount + 4) & 7) == 0) {
                 BosLstSpawnFal(work, 0);
             }
@@ -661,7 +720,7 @@ void BosLstMoveDash(BosLstWork* work) {
             (work->facing < 0 && work->x > 0x26000)) {
             dir = work->facing;
             BosLstSetFacing(work, -dir);
-            work->dashStep = 1;
+            work->dashStep = BOS_LST_DASH_STEP_ENTER;
             work->timer = 0;
             work->dashSpeed = 0;
             v = 27 - (work->hpRatio >> 4);
@@ -697,7 +756,7 @@ void BosLstMoveDash(BosLstWork* work) {
         }
 
         break;
-    case 1:
+    case BOS_LST_DASH_STEP_ENTER:
         if (work->facing > 0) {
             work->x = BosLstApproachValue(work->x, 0x15800, 0, 0x100, 0x400);
         } else {
@@ -708,12 +767,12 @@ void BosLstMoveDash(BosLstWork* work) {
         work->timer += 1;
 
         if (work->timer == ((work->hpRatio * 60) >> 8) + 90) {
-            work->dashStep = 2;
+            work->dashStep = BOS_LST_DASH_STEP_REQUEST;
             work->timer = 0;
         }
 
         break;
-    case 2:
+    case BOS_LST_DASH_STEP_REQUEST:
         BosLstRequestCardUse(work);
         work->timer = 0;
         work->dashSpeed = (work->dashCount + 1) << 8;
@@ -727,8 +786,8 @@ void BosLstMoveDash(BosLstWork* work) {
         }
 
         break;
-    case 3:
-    case 4:
+    case BOS_LST_DASH_STEP_HOLD:
+    case BOS_LST_DASH_STEP_PASSED:
         v = 39 - (work->hpRatio >> 4);
 
         if (work->sub[0].defeated == 1) {
@@ -759,7 +818,7 @@ void BosLstMoveDash(BosLstWork* work) {
             work->dashCount += 1;
 
             if (work->dashCount >= n) {
-                work->dashStep = 5;
+                work->dashStep = BOS_LST_DASH_STEP_RETURN;
                 work->timer = 0;
 
                 if (gBtlWork->actor->x < 0xF800) {
@@ -774,9 +833,9 @@ void BosLstMoveDash(BosLstWork* work) {
                 work->z = -0x25400;
             } else {
                 if (work->subsDefeated == 1) {
-                    work->dashStep = 2;
+                    work->dashStep = BOS_LST_DASH_STEP_REQUEST;
                 } else {
-                    work->dashStep = 1;
+                    work->dashStep = BOS_LST_DASH_STEP_ENTER;
                 }
 
                 work->timer = 0;
@@ -786,11 +845,11 @@ void BosLstMoveDash(BosLstWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_LST_DASH_STEP_RETURN:
         work->z = BosLstApproachValue(work->z, target = -0x5400, 0, 0x200, 0x800);
 
         if (work->z == target) {
-            BosLstSetMode(work, 0, 3);
+            BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_CTR);
             work->timer = 0;
             work->dashCount = 0;
         }
@@ -915,6 +974,13 @@ void BosLstInterruptBits(BosLstWork* work) {
     }
 }
 
+enum BosLstBitStep {
+    BOS_LST_BIT_STEP_HOVER,
+    BOS_LST_BIT_STEP_FIRE,
+    BOS_LST_BIT_STEP_RETURN,
+    BOS_LST_BIT_STEP_END
+};
+
 void BosLstMoveBits(BosLstWork* work) {
     LstBitArg s;
     BtlObj* obj;
@@ -955,7 +1021,7 @@ void BosLstMoveBits(BosLstWork* work) {
             work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstBit, &s);
         }
 
-        *pBC = 0;
+        *pBC = BOS_LST_BIT_STEP_HOVER;
         *pBE += 1;
         work->timer = 0;
         work->cardDelay = 0xC000;
@@ -966,13 +1032,13 @@ void BosLstMoveBits(BosLstWork* work) {
     if (!BosLstAnyBitAlive(work)) {
         BosLstDestroyTasks(work);
         work->timer = 0;
-        *pBC = 0;
+        *pBC = BOS_LST_BIT_STEP_HOVER;
         *pBE = 0;
-        BosLstSetMode(work, 0, 5);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_HANABIRA);
         BosLstSetAnim(work, 0, 1, 0);
     } else {
         switch (*pBC) {
-        case 0:
+        case BOS_LST_BIT_STEP_HOVER:
             work->timer += 1;
 
             if (work->timer > 30) {
@@ -981,7 +1047,7 @@ void BosLstMoveBits(BosLstWork* work) {
             }
 
             break;
-        case 1:
+        case BOS_LST_BIT_STEP_FIRE:
             if (work->unk_004 <= 0) {
                 work->cardDelay -= 0x100;
             }
@@ -1053,7 +1119,7 @@ void BosLstMovePlatform(BosLstWork* work) {
     st = work->platformStep;
 
     switch (st) {
-    case 0:
+    case BOS_LST_PLATFORM_STEP_DESCEND:
         work->z = BosLstApproachValue(work->z, target = -0x2000, 0x400, k = 0x100, 0x400);
 
         if (work->z != target) {
@@ -1069,7 +1135,7 @@ void BosLstMovePlatform(BosLstWork* work) {
         for (i = 0; i < 8; i++) {
             ColliderSetDisabled(&work->colliders[i], 0);
         }
-    case 1:
+    case BOS_LST_PLATFORM_STEP_RIDE:
         obj = &work->body;
         v = work->platformTimer;
 
@@ -1152,7 +1218,7 @@ void BosLstMovePlatform(BosLstWork* work) {
 
         work->y = BosLstApproachValue(work->y, 0x1F000, 0x100, 0x100, 0x400);
         break;
-    case 2:
+    case BOS_LST_PLATFORM_STEP_LEAVE:
         p4C = &work->z;
 
         for (i = 0; i < 8; i++) {
@@ -1186,9 +1252,9 @@ void BosLstMovePlatform(BosLstWork* work) {
 
         work->y = 0x1F000;
         work->z = -0x26800;
-        BosLstSetMode(work, 0, 3);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_CTR);
         work->playerOnPlatform = 0;
-        work->platformStep = 0;
+        work->platformStep = BOS_LST_PLATFORM_STEP_DESCEND;
         work->platformTimer = 0;
         work->turned = 0;
         BosLstSetAnim(work, 0, 1, 0);
@@ -1198,28 +1264,28 @@ void BosLstMovePlatform(BosLstWork* work) {
 
 u8 BosLstUpdateMove(BosLstWork* work) {
     switch (work->moveMode) {
-    case 0:
-        BosLstFldSetBgMode(work->task, 2, work->facing);
+    case BOS_LST_MOVE_MODE_HOVER:
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_STAR_DRIFT, work->facing);
         BosLstMoveMode0(work);
         break;
-    case 1:
-        BosLstFldSetBgMode(work->task, 1, work->facing);
+    case BOS_LST_MOVE_MODE_GROUND:
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_TUNNEL, work->facing);
         BosLstMoveMode1(work);
         break;
-    case 2:
-        BosLstFldSetBgMode(work->task, 1, work->facing);
+    case BOS_LST_MOVE_MODE_KAMA:
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_TUNNEL, work->facing);
         BosLstMoveMode2(work);
         break;
-    case 3:
-        BosLstFldSetBgMode(work->task, 0, work->facing);
+    case BOS_LST_MOVE_MODE_DASH:
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_HORIZON, work->facing);
         BosLstMoveDash(work);
         break;
-    case 4:
-        BosLstFldSetBgMode(work->task, 2, work->facing);
+    case BOS_LST_MOVE_MODE_BITS:
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_STAR_DRIFT, work->facing);
         BosLstMoveBits(work);
         break;
-    case 5:
-        BosLstFldSetBgMode(work->task, 3, work->facing);
+    case BOS_LST_MOVE_MODE_PLATFORM:
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_STAR_STREAM, work->facing);
         BosLstMovePlatform(work);
         break;
     }
@@ -1227,6 +1293,15 @@ u8 BosLstUpdateMove(BosLstWork* work) {
     BosLstUpdateBob(work);
     return 1;
 }
+
+enum BosLstGroundStep {
+    BOS_LST_GROUND_STEP_LEAP,
+    BOS_LST_GROUND_STEP_DONE,
+    BOS_LST_GROUND_STEP_IDLE,
+    BOS_LST_GROUND_STEP_IMPACT,
+    BOS_LST_GROUND_STEP_SHOCKWAVE,
+    BOS_LST_GROUND_STEP_RETURN
+};
 
 u8 BosLstAttackGround(BosLstWork* work) {
     s32 v;
@@ -1238,12 +1313,12 @@ u8 BosLstAttackGround(BosLstWork* work) {
     if (work->step == 0) {
         work->step += 1;
         work->groundCount += 1;
-        work->groundStep = 0;
+        work->groundStep = BOS_LST_GROUND_STEP_LEAP;
         work->timer = 0;
     }
 
     switch (work->groundStep) {
-    case 0:
+    case BOS_LST_GROUND_STEP_LEAP:
         if (work->timer == 0) {
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
             work->timer += 1;
@@ -1255,20 +1330,20 @@ u8 BosLstAttackGround(BosLstWork* work) {
 
         if (work->z > -0x5400) {
             work->z = -0x5400;
-            work->groundStep = 3;
+            work->groundStep = BOS_LST_GROUND_STEP_IMPACT;
             work->timer = 0;
         }
 
         break;
-    case 1:
-    case 2:
+    case BOS_LST_GROUND_STEP_DONE:
+    case BOS_LST_GROUND_STEP_IDLE:
         break;
-    case 3:
+    case BOS_LST_GROUND_STEP_IMPACT:
         BgFxStartMahluxiaGround(work->x + (work->facing << 12), work->y, 0, 268);
         m4aSongNumStart(SONG_EF_MARL_GROUND);
-        work->groundStep = 4;
+        work->groundStep = BOS_LST_GROUND_STEP_SHOCKWAVE;
         work->timer = 0;
-    case 4:
+    case BOS_LST_GROUND_STEP_SHOCKWAVE:
         work->timer += 1;
 
         if (work->timer <= 19) {
@@ -1281,14 +1356,14 @@ u8 BosLstAttackGround(BosLstWork* work) {
 
         if (!BgFxIsActive()) {
             if (work->timer >= ((v * 30) >> 8) + 31) {
-                work->groundStep = 5;
+                work->groundStep = BOS_LST_GROUND_STEP_RETURN;
                 work->timer = 0;
 
                 if (work->groundCount > 2) {
                     if (!work->subsDefeated) {
-                        BosLstSetMode(work, 2, 1);
+                        BosLstSetMode(work, BOS_LST_MOVE_MODE_KAMA, BOS_LST_ATTACK_KIND_KAMA);
                     } else {
-                        BosLstSetMode(work, 3, 2);
+                        BosLstSetMode(work, BOS_LST_MOVE_MODE_DASH, BOS_LST_ATTACK_KIND_DASH);
                     }
 
                     work->groundCount = 0;
@@ -1298,11 +1373,11 @@ u8 BosLstAttackGround(BosLstWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_LST_GROUND_STEP_RETURN:
         work->z = BosLstApproachValue(work->z, -0x5400, 0, 256, 1024);
 
         if (work->z == -0x5400) {
-            work->groundStep = 1;
+            work->groundStep = BOS_LST_GROUND_STEP_DONE;
             work->timer = 0;
             r = 0;
         }
@@ -1312,6 +1387,15 @@ u8 BosLstAttackGround(BosLstWork* work) {
 
     return r;
 }
+
+enum BosLstKamaStep {
+    BOS_LST_KAMA_STEP_WINDUP,
+    BOS_LST_KAMA_STEP_ASCEND,
+    BOS_LST_KAMA_STEP_AIM,
+    BOS_LST_KAMA_STEP_DIVE,
+    BOS_LST_KAMA_STEP_SLASH,
+    BOS_LST_KAMA_STEP_END
+};
 
 u8 BosLstAttackKama(BosLstWork* work) {
     BtlObj* sub;
@@ -1328,7 +1412,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
     if (work->step == 0) {
         work->step = v + 1;
         work->kamaCount += 1;
-        work->kamaStep = 0;
+        work->kamaStep = BOS_LST_KAMA_STEP_WINDUP;
         work->timer = 0;
     }
 
@@ -1336,7 +1420,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
     p8C = &work->kamaStep;
 
     switch (st) {
-    case 0:
+    case BOS_LST_KAMA_STEP_WINDUP:
         if (work->timer == 0) {
             m4aSongNumStart(SONG_SND_712);
             BosLstSetSubAnim(work, 3);
@@ -1345,19 +1429,19 @@ u8 BosLstAttackKama(BosLstWork* work) {
         work->timer += 1;
 
         if (work->timer > 30) {
-            *p8C = 1;
+            *p8C = BOS_LST_KAMA_STEP_ASCEND;
             work->timer = 0;
             m4aSongNumStart(SONG_VO_MARL_ATTACK00);
         }
 
         break;
-    case 1:
+    case BOS_LST_KAMA_STEP_ASCEND:
         work->timer += 1;
         work->x += work->facing * 0x600;
         work->z -= work->timer << 8;
 
         if (work->z < -0x1E000) {
-            *p8C = 3;
+            *p8C = BOS_LST_KAMA_STEP_DIVE;
             work->timer = 0;
             work->kamaStartY = work->y;
             work->kamaStartZ = work->z;
@@ -1378,15 +1462,15 @@ u8 BosLstAttackKama(BosLstWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_LST_KAMA_STEP_AIM:
         z = 0;
-        *p8C = 3;
+        *p8C = BOS_LST_KAMA_STEP_DIVE;
         work->timer = z;
         work->kamaTargetX = gBtlWork->actor->x;
         work->kamaTargetY = 0x1F000;
         work->kamaTargetZ = -0x5400;
         break;
-    case 3:
+    case BOS_LST_KAMA_STEP_DIVE:
         if (work->timer <= 7) {
             ApproachValueHalfSteps(&work->kamaTargetX, gBtlWork->actor->x + work->facing * 0x3000, 8);
         }
@@ -1403,7 +1487,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
             work->timer += 1;
 
             if (work->timer > 16) {
-                *p8C = 4;
+                *p8C = BOS_LST_KAMA_STEP_SLASH;
                 work->timer = 0;
                 work->unk_078 = 0;
                 BosLstSetSubAnim(work, 4);
@@ -1413,7 +1497,7 @@ u8 BosLstAttackKama(BosLstWork* work) {
         }
 
         break;
-    case 4:
+    case BOS_LST_KAMA_STEP_SLASH:
         switch (work->timer) {
         case 0:
             if (ApplyAttackBox(0x10A, sub->x - (work->facing << 13), work->kamaTargetY, sub->z, 48, 12, 64) != 0) {
@@ -1450,15 +1534,15 @@ u8 BosLstAttackKama(BosLstWork* work) {
         work->timer += 1;
 
         if (!BgFxIsActive()) {
-            *p8C = 5;
+            *p8C = BOS_LST_KAMA_STEP_END;
             work->timer = 0;
             BosLstSetSubAnim(work, 0);
         }
 
         break;
-    case 5:
+    case BOS_LST_KAMA_STEP_END:
         if (work->kamaCount > 2) {
-            BosLstSetMode(work, 3, 2);
+            BosLstSetMode(work, BOS_LST_MOVE_MODE_DASH, BOS_LST_ATTACK_KIND_DASH);
             work->kamaCount = 0;
             r = 0;
         } else {
@@ -1522,7 +1606,7 @@ u8 BosLstAttackDash(BosLstWork* work) {
         }
 
         if (r == 0) {
-            work->dashStep = 4;
+            work->dashStep = BOS_LST_DASH_STEP_PASSED;
             work->timer = 0;
             BosLstSetAnim(work, 0, 1, 1);
         }
@@ -1532,6 +1616,13 @@ u8 BosLstAttackDash(BosLstWork* work) {
 
     return r;
 }
+
+enum BosLstCtrAttackStep {
+    BOS_LST_CTR_ATTACK_STEP_START,
+    BOS_LST_CTR_ATTACK_STEP_POSE,
+    BOS_LST_CTR_ATTACK_STEP_SPAWN,
+    BOS_LST_CTR_ATTACK_STEP_WAIT
+};
 
 u8 BosLstAttackCtr(BosLstWork* work) {
     LstCtrArg s;
@@ -1544,7 +1635,7 @@ u8 BosLstAttackCtr(BosLstWork* work) {
     r = 1;
 
     switch (work->step) {
-    case 0:
+    case BOS_LST_CTR_ATTACK_STEP_START:
         m4aSongNumStart(SONG_SND_709);
 
         if (work->facing > 0) {
@@ -1556,12 +1647,12 @@ u8 BosLstAttackCtr(BosLstWork* work) {
         work->timer = 0;
         work->step += 1;
         break;
-    case 1:
+    case BOS_LST_CTR_ATTACK_STEP_POSE:
         BosLstSetAnim(work, 6, 0, 1);
         m4aSongNumStart(SONG_VO_MARL_ATTACK01);
         work->step += 1;
         break;
-    case 2:
+    case BOS_LST_CTR_ATTACK_STEP_SPAWN:
         work->timer += 1;
 
         if (work->timer == 32) {
@@ -1615,7 +1706,7 @@ u8 BosLstAttackCtr(BosLstWork* work) {
 
         if (r == 0) {
             BosLstDestroyTasks(work);
-            BosLstSetMode(work, 4, 4);
+            BosLstSetMode(work, BOS_LST_MOVE_MODE_BITS, BOS_LST_ATTACK_KIND_BITS);
             BosLstSetAnim(work, 0, 1, 0);
         }
 
@@ -1636,9 +1727,9 @@ u8 BosLstAttackBits(BosLstWork* work) {
         work->bitAttackStarted += 1;
 
         if (work->bitRound <= 1) {
-            work->bitStep = 1;
+            work->bitStep = BOS_LST_BIT_STEP_FIRE;
         } else {
-            work->bitStep = 0;
+            work->bitStep = BOS_LST_BIT_STEP_HOVER;
         }
 
         work->timer = 0;
@@ -1646,14 +1737,14 @@ u8 BosLstAttackBits(BosLstWork* work) {
 
     if (!BosLstAnyBitAlive(work)) {
         BosLstDestroyTasks(work);
-        BosLstSetMode(work, 0, 5);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_HANABIRA);
         work->bitRound = 0;
-        work->bitStep = 3;
+        work->bitStep = BOS_LST_BIT_STEP_END;
         work->timer = 0;
     }
 
     switch (work->bitStep) {
-    case 0:
+    case BOS_LST_BIT_STEP_HOVER:
         if (work->timer == 0) {
             BosLstHoverBits(work);
         }
@@ -1661,12 +1752,12 @@ u8 BosLstAttackBits(BosLstWork* work) {
         work->timer += 1;
 
         if (work->timer > 59) {
-            work->bitStep = 1;
+            work->bitStep = BOS_LST_BIT_STEP_FIRE;
             work->timer = 0;
         }
 
         break;
-    case 1:
+    case BOS_LST_BIT_STEP_FIRE:
         f = 1;
 
         if (work->sub[0].defeated == 1) {
@@ -1679,7 +1770,7 @@ u8 BosLstAttackBits(BosLstWork* work) {
 
         switch (work->timer) {
         case 0:
-            if (work->attackKind == 6) {
+            if (work->attackKind == BOS_LST_ATTACK_KIND_PLATFORM_BITS) {
                 BosLstFireBits(work, -1, 1);
                 break;
             }
@@ -1709,9 +1800,9 @@ u8 BosLstAttackBits(BosLstWork* work) {
             work->timer = 0;
 
             if (work->bitRound > 6) {
-                work->bitStep = 2;
+                work->bitStep = BOS_LST_BIT_STEP_RETURN;
             } else {
-                if (work->moveMode != 5) {
+                if (work->moveMode != BOS_LST_MOVE_MODE_PLATFORM) {
                     work->bitRound += 1;
                 }
 
@@ -1720,7 +1811,7 @@ u8 BosLstAttackBits(BosLstWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_LST_BIT_STEP_RETURN:
         if (work->timer == 30) {
             BosLstReturnBits(work);
         }
@@ -1728,14 +1819,14 @@ u8 BosLstAttackBits(BosLstWork* work) {
         work->timer += 1;
 
         if (work->timer > 74) {
-            work->bitStep = 3;
+            work->bitStep = BOS_LST_BIT_STEP_END;
             work->timer = 0;
         }
 
         break;
-    case 3:
+    case BOS_LST_BIT_STEP_END:
         BosLstDestroyTasks(work);
-        BosLstSetMode(work, 0, 5);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_HOVER, BOS_LST_ATTACK_KIND_HANABIRA);
         work->bitRound = 0;
         r = 0;
         break;
@@ -1745,6 +1836,13 @@ u8 BosLstAttackBits(BosLstWork* work) {
     return r;
 }
 
+enum BosLstHanabiraStep {
+    BOS_LST_HANABIRA_STEP_START,
+    BOS_LST_HANABIRA_STEP_CHARGE,
+    BOS_LST_HANABIRA_STEP_RELEASE,
+    BOS_LST_HANABIRA_STEP_WAIT
+};
+
 u8 BosLstAttackHanabira(BosLstWork* work) {
     s16 s;
     u8 r;
@@ -1753,13 +1851,13 @@ u8 BosLstAttackHanabira(BosLstWork* work) {
     s = work->step;
 
     switch (s) {
-    case 0:
+    case BOS_LST_HANABIRA_STEP_START:
         BosLstSetAnim(work, 4, 0, 1);
         m4aSongNumStart(SONG_VO_MARL_ATTACK03);
         work->step += 1;
         work->timer = 0;
         break;
-    case 1:
+    case BOS_LST_HANABIRA_STEP_CHARGE:
         work->timer += 1;
 
         if (work->timer > 120) {
@@ -1768,7 +1866,7 @@ u8 BosLstAttackHanabira(BosLstWork* work) {
         }
 
         break;
-    case 2:
+    case BOS_LST_HANABIRA_STEP_RELEASE:
         if (AnimIsFinished(&work->anim) == 1) {
             BgFxStartHanabira(work->x, work->y, work->z - 0x2000, 270);
             m4aSongNumStart(SONG_EF_MARL_HANABIRA);
@@ -1777,7 +1875,7 @@ u8 BosLstAttackHanabira(BosLstWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_LST_HANABIRA_STEP_WAIT:
         if (!BgFxIsActive()) {
             BosLstSetAnim(work, 0, 1, 0);
             r = 0;
@@ -1785,9 +1883,9 @@ u8 BosLstAttackHanabira(BosLstWork* work) {
 
         if (r == 0) {
             if (work->subsDefeated == 1) {
-                BosLstSetMode(work, 1, 0);
+                BosLstSetMode(work, BOS_LST_MOVE_MODE_GROUND, BOS_LST_ATTACK_KIND_GROUND);
             } else {
-                BosLstSetMode(work, 2, 1);
+                BosLstSetMode(work, BOS_LST_MOVE_MODE_KAMA, BOS_LST_ATTACK_KIND_KAMA);
             }
         }
 
@@ -1815,7 +1913,7 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
     }
 
     switch (work->attackKind) {
-    case 0:
+    case BOS_LST_ATTACK_KIND_GROUND:
         d = BosLstAttackGround(work);
 
         if (d != 0) {
@@ -1827,7 +1925,7 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
         work->step = d;
         work->cardDelay = ((t * 15) >> 4) << 8;
         return 1;
-    case 1:
+    case BOS_LST_ATTACK_KIND_KAMA:
         d = BosLstAttackKama(work);
 
         if (d != 0) {
@@ -1839,7 +1937,7 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
         work->step = d;
         work->cardDelay = ((t * 15) >> 4) << 8;
         return 1;
-    case 2:
+    case BOS_LST_ATTACK_KIND_DASH:
         d = BosLstAttackDash(work);
 
         if (d != 0) {
@@ -1851,7 +1949,7 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
         work->step = d;
         work->cardDelay = ((t * 15) >> 4) << 8;
         return 1;
-    case 3:
+    case BOS_LST_ATTACK_KIND_CTR:
         d = BosLstAttackCtr(work);
 
         if (d != 0) {
@@ -1863,8 +1961,8 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
         work->step = d;
         work->cardDelay = ((t * 15) >> 4) << 8;
         return 1;
-    case 4:
-    case 6:
+    case BOS_LST_ATTACK_KIND_BITS:
+    case BOS_LST_ATTACK_KIND_PLATFORM_BITS:
         d = BosLstAttackBits(work);
 
         if (d != 0) {
@@ -1876,7 +1974,7 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
         work->step = d;
         work->cardDelay = 0x5A00;
         return 1;
-    case 5:
+    case BOS_LST_ATTACK_KIND_HANABIRA:
         d = BosLstAttackHanabira(work);
 
         if (d != 0) {
@@ -1890,7 +1988,7 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
         return 1;
     default:
         ClearBtlObjActionFlags(p);
-        work->state = 0;
+        work->state = BOS_LST_STATE_MOVE;
         work->step = 0;
         work->cardDelay = ((t * 15) >> 4) << 8;
         return 1;
@@ -1907,7 +2005,7 @@ u8 BosLstUpdateHurt(BosLstWork* work) {
     if (AnimIsFinished(&work->anim) == 1) {
         ClearBtlObjActionFlags(p);
         BosLstSetAnim(work, 0, 1, 1);
-        work->state = 0;
+        work->state = BOS_LST_STATE_MOVE;
     }
 
     return 1;
@@ -1915,7 +2013,7 @@ u8 BosLstUpdateHurt(BosLstWork* work) {
 
 u8 BosLstUpdateState5(BosLstWork* work) {
     ClearBtlObjActionFlags(&work->body);
-    work->state = 0;
+    work->state = BOS_LST_STATE_MOVE;
     work->step = 0;
     return 1;
 }
@@ -1940,52 +2038,52 @@ u8 BosLstUpdateBreak(BosLstWork* work) {
         work->hittableTimer = 120;
     }
 
-    if (work->moveMode < 4 || work->moveMode > 5) {
+    if (work->moveMode < BOS_LST_MOVE_MODE_BITS || work->moveMode > BOS_LST_MOVE_MODE_PLATFORM) {
         BosLstDestroyTasks(work);
     }
 
     switch (work->moveMode) {
-    case 0:
+    case BOS_LST_MOVE_MODE_HOVER:
         switch (work->attackKind) {
-        case 3:
+        case BOS_LST_ATTACK_KIND_CTR:
             if (work->breakCount > 2) {
-                BosLstSetMode(work, 4, 4);
+                BosLstSetMode(work, BOS_LST_MOVE_MODE_BITS, BOS_LST_ATTACK_KIND_BITS);
             }
 
             break;
-        case 5:
+        case BOS_LST_ATTACK_KIND_HANABIRA:
             if (!work->subsDefeated) {
-                BosLstSetMode(work, 2, 1);
+                BosLstSetMode(work, BOS_LST_MOVE_MODE_KAMA, BOS_LST_ATTACK_KIND_KAMA);
             } else {
-                BosLstSetMode(work, 1, 0);
+                BosLstSetMode(work, BOS_LST_MOVE_MODE_GROUND, BOS_LST_ATTACK_KIND_GROUND);
             }
 
             break;
         }
 
         break;
-    case 1:
+    case BOS_LST_MOVE_MODE_GROUND:
         if (work->groundCount + work->breakCount > 3) {
             work->groundCount = 0;
-            BosLstSetMode(work, 3, 2);
+            BosLstSetMode(work, BOS_LST_MOVE_MODE_DASH, BOS_LST_ATTACK_KIND_DASH);
             work->y = 0x1F000;
             work->z = -0x5400;
         }
 
         break;
-    case 2:
+    case BOS_LST_MOVE_MODE_KAMA:
         work->y = 0x1F000;
         work->z = -0x5400;
 
         if (work->kamaCount + work->breakCount > 3) {
             work->kamaCount = 0;
-            BosLstSetMode(work, 3, 2);
+            BosLstSetMode(work, BOS_LST_MOVE_MODE_DASH, BOS_LST_ATTACK_KIND_DASH);
         }
 
         break;
-    case 3:
+    case BOS_LST_MOVE_MODE_DASH:
         work->dashCount = 0;
-        BosLstSetMode(work, 5, 6);
+        BosLstSetMode(work, BOS_LST_MOVE_MODE_PLATFORM, BOS_LST_ATTACK_KIND_PLATFORM_BITS);
         work->platformTimer = 0;
 
         if (gBtlWork->actor->x < 0xF800) {
@@ -1999,16 +2097,16 @@ u8 BosLstUpdateBreak(BosLstWork* work) {
         work->y = 0x1F000;
         work->z = -0x5400;
         break;
-    case 4:
+    case BOS_LST_MOVE_MODE_BITS:
         BosLstInterruptBits(work);
         break;
-    case 5:
+    case BOS_LST_MOVE_MODE_PLATFORM:
         work->hittableTimer = 0;
         BosLstInterruptBits(work);
         break;
     }
 
-    work->state = 0;
+    work->state = BOS_LST_STATE_MOVE;
     work->step = 0;
     s.x = work->x + work->offsetX;
     s.y = work->y + work->offsetY;
@@ -2017,6 +2115,16 @@ u8 BosLstUpdateBreak(BosLstWork* work) {
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlPop, &s);
     return 1;
 }
+
+enum BosLstDefeatStep {
+    BOS_LST_DEFEAT_STEP_BEGIN,
+    BOS_LST_DEFEAT_STEP_SHAKE_LIGHT,
+    BOS_LST_DEFEAT_STEP_SHAKE_HEAVY,
+    BOS_LST_DEFEAT_STEP_DARKEN,
+    BOS_LST_DEFEAT_STEP_FLASHES,
+    BOS_LST_DEFEAT_STEP_WAIT,
+    BOS_LST_DEFEAT_STEP_END
+};
 
 u8 BosLstUpdateDefeat(BosLstWork* work) {
     u8 r;
@@ -2042,21 +2150,21 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
 
     work->defeatTimer += 1;
 
-    if (work->z >= -0x5500 || work->step > 4) {
-        BosLstFldSetCameraMode(work->task, 2);
+    if (work->z >= -0x5500 || work->step > BOS_LST_DEFEAT_STEP_FLASHES) {
+        BosLstFldSetCameraMode(work->task, BOS_LST_FLD_CAMERA_MODE_FOLLOW_PLAYER_SLOW);
     } else {
-        BosLstFldSetCameraMode(work->task, 1);
+        BosLstFldSetCameraMode(work->task, BOS_LST_FLD_CAMERA_MODE_FOLLOW_BOSS);
     }
 
     switch (work->step) {
-    case 0:
+    case BOS_LST_DEFEAT_STEP_BEGIN:
         work->timer = 0;
         BeginBossDefeat(&work->body);
         m4aSongNumStart(SONG_SND_713);
         m4aSongNumStart(SONG_EV_FLASH00);
         BosLstSetAnim(work, 3, 0, 0);
         work->step += 1;
-    case 1:
+    case BOS_LST_DEFEAT_STEP_SHAKE_LIGHT:
         work->z = BosLstApproachValue(work->z, -0x5400, 0x80, 0x100, 0x140);
 
         if (work->timer & 0x20) {
@@ -2083,7 +2191,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
         work->playerOnPlatform = 0;
         work->step += 1;
         work->timer = 0;
-    case 2:
+    case BOS_LST_DEFEAT_STEP_SHAKE_HEAVY:
         work->z = BosLstApproachValue(work->z, -0x5400, 0x80, 0x100, 0x140);
 
         if (work->timer & 0x10) {
@@ -2105,13 +2213,13 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
         }
 
         break;
-    case 3:
+    case BOS_LST_DEFEAT_STEP_DARKEN:
         BgFxStartHumDefeat(work->x, -0x800 + work->y + work->z);
         m4aSongNumStart(SONG_SND_718);
         FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         work->step += 1;
         work->timer = 0;
-    case 4:
+    case BOS_LST_DEFEAT_STEP_FLASHES:
         work->timer += 1;
 
         if (work->timer <= 39) {
@@ -2169,7 +2277,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
         }
 
         break;
-    case 5:
+    case BOS_LST_DEFEAT_STEP_WAIT:
         work->timer += 1;
 
         if (work->timer > 90) {
@@ -2178,7 +2286,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
         }
 
         break;
-    case 6:
+    case BOS_LST_DEFEAT_STEP_END:
     default:
         work->timer += 1;
 
@@ -2195,17 +2303,17 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
 
 u8 BosLstUpdateEvent(BosLstWork* work) {
     switch (work->eventStep) {
-    case 0:
+    case BOS_LST_EVENT_STEP_WAIT:
         work->x = BosLstApproachValue(work->x, 0x1D000, 0, 0x80, 0x200);
         work->y = BosLstApproachValue(work->y, 0x1F000, 0, 0x80, 0x200);
         work->z = BosLstApproachValue(work->z, -0x14400, 0, 0x80, 0x400);
-        BosLstFldSetBgMode(work->task, 4, work->facing);
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_BLANK, work->facing);
         break;
-    case 1:
+    case BOS_LST_EVENT_STEP_APPROACH:
         work->x = BosLstApproachValue(work->x, 0x15500, 0, 0x80, 0x200);
         work->y = BosLstApproachValue(work->y, 0x1F000, 0, 0x80, 0x200);
         work->z = BosLstApproachValue(work->z, -0x8400, 0, 0x80, 0x400);
-        BosLstFldSetBgMode(work->task, 0, work->facing);
+        BosLstFldSetBgMode(work->task, BOS_LST_FLD_BG_MODE_HORIZON, work->facing);
         break;
     }
 
@@ -2286,7 +2394,7 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
 
     switch (UpdateBtlObjReaction(obj)) {
     case BTL_REACTION_CARD_ACTION:
-        sub->state = 1;
+        sub->state = BOS_LST_SUB_STATE_CARD_ACTION;
         sub->timer = 0;
         break;
     case BTL_REACTION_HURT:
@@ -2297,16 +2405,16 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
         sub->hurtTimer = 20;
         work->hurtTimer = 20;
 
-        if (sub->state == 5) {
+        if (sub->state == BOS_LST_SUB_STATE_RECOVER) {
             ClearBtlObjActionFlags(obj);
         } else {
-            sub->state = 3;
+            sub->state = BOS_LST_SUB_STATE_HURT;
             sub->timer = 0;
         }
 
         break;
     case BTL_REACTION_DEFEATED:
-        sub->state = 4;
+        sub->state = BOS_LST_SUB_STATE_DEFEATED;
         sub->timer = 0;
         sub->restartAnim = 1;
         sub->animId = 6;
@@ -2317,32 +2425,32 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* sub) {
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstSnp, &s);
         break;
     case BTL_REACTION_CARD_BROKEN:
-        sub->state = 2;
+        sub->state = BOS_LST_SUB_STATE_CARD_BROKEN;
         sub->timer = 0;
         break;
     }
 
     switch (sub->state) {
-    case 0:
+    case BOS_LST_SUB_STATE_IDLE:
         break;
-    case 3:
+    case BOS_LST_SUB_STATE_HURT:
         sub->timer += 1;
 
         if (sub->timer > 20) {
             ClearBtlObjActionFlags(obj);
-            sub->state = 0;
+            sub->state = BOS_LST_SUB_STATE_IDLE;
             sub->timer = 0;
         }
 
         break;
-    case 1:
-    case 2:
-    case 5:
+    case BOS_LST_SUB_STATE_CARD_ACTION:
+    case BOS_LST_SUB_STATE_CARD_BROKEN:
+    case BOS_LST_SUB_STATE_RECOVER:
         ClearBtlObjActionFlags(obj);
-        sub->state = 0;
+        sub->state = BOS_LST_SUB_STATE_IDLE;
         sub->timer = 0;
         break;
-    case 4:
+    case BOS_LST_SUB_STATE_DEFEATED:
         sub->defeated = 1;
         sub->hurtTimer = 0;
         break;
@@ -2424,7 +2532,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
     if (work->sub[0].defeated == 1 && work->sub[1].defeated == 1) {
         work->subsDefeated = 1;
 
-        if (work->moveMode == 5) {
+        if (work->moveMode == BOS_LST_MOVE_MODE_PLATFORM) {
             if (work->turned == 1) {
                 SetBtlObjUnhittable(&work->body, 0);
             }
@@ -2437,7 +2545,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
 
     switch (UpdateBtlObjReaction(obj)) {
     case BTL_REACTION_CARD_ACTION:
-        work->state = 1;
+        work->state = BOS_LST_STATE_ATTACK;
         work->step = 0;
         break;
     case BTL_REACTION_HURT:
@@ -2453,47 +2561,47 @@ u8 task_bos_lst_1(BosLstWork* work) {
         work->platformSpeed += 0x80;
         BosLstSetAnim(work, 1, 0, 0);
 
-        if (work->state == 5) {
+        if (work->state == BOS_LST_STATE_RECOVER) {
             ClearBtlObjActionFlags(obj);
         } else {
-            work->state = 3;
+            work->state = BOS_LST_STATE_HURT;
         }
 
         break;
     case BTL_REACTION_DEFEATED:
-        work->state = 4;
-        work->step = 0;
+        work->state = BOS_LST_STATE_DEFEATED;
+        work->step = BOS_LST_DEFEAT_STEP_BEGIN;
         work->defeatTimer = 0;
         break;
     case BTL_REACTION_CARD_BROKEN:
-        work->state = 2;
+        work->state = BOS_LST_STATE_BREAK;
         work->step = 0;
         break;
     }
 
     switch (work->state) {
-    case 0:
+    case BOS_LST_STATE_MOVE:
         BosLstUpdateMove(work);
         break;
-    case 1:
+    case BOS_LST_STATE_ATTACK:
         BosLstUpdateAttack(work);
         break;
-    case 3:
+    case BOS_LST_STATE_HURT:
         BosLstUpdateHurt(work);
         break;
-    case 5:
+    case BOS_LST_STATE_RECOVER:
         BosLstUpdateState5(work);
         break;
-    case 2:
+    case BOS_LST_STATE_BREAK:
         BosLstUpdateBreak(work);
         break;
-    case 4:
+    case BOS_LST_STATE_DEFEATED:
         r = BosLstUpdateDefeat(work);
         break;
-    case 7:
+    case BOS_LST_STATE_EVENT:
         BosLstUpdateEvent(work);
         break;
-    case 6:
+    case BOS_LST_STATE_INACTIVE:
     default:
         break;
     }
@@ -2553,7 +2661,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
     gBtlWork->bossY = work->y;
     gBtlWork->bossZ = work->z;
 
-    if (work->state != 4 && (work->frameCount & 0xF) == 0) {
+    if (work->state != BOS_LST_STATE_DEFEATED && (work->frameCount & 0xF) == 0) {
         WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
 
         if (sy < -16) {

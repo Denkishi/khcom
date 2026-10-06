@@ -488,15 +488,15 @@ void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
         work->vofsTable[i] = (SIN(i + 64) >> 1) & 0x1FF;
     }
 
-    work->cameraMode = 0;
+    work->cameraMode = BOS_LST_FLD_CAMERA_MODE_FOLLOW_PLAYER;
     work->scrollSpeed = 0;
-    work->bgMode = 0;
+    work->bgMode = BOS_LST_FLD_BG_MODE_HORIZON;
     work->fadeStep = 0;
     work->scrollDir = 0;
     work->frameCount = 0;
     work->scrollX = 0;
     work->scrollY = 0;
-    work->nextBgMode = 0;
+    work->nextBgMode = BOS_LST_FLD_BG_MODE_HORIZON;
     work->nextScrollDir = 0;
 }
 
@@ -529,11 +529,11 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     BtlMapUpdateShake();
 
     switch (work->cameraMode) {
-    case 1:
+    case BOS_LST_FLD_CAMERA_MODE_FOLLOW_BOSS:
         a = ((gBtlWork->bossX >> 8) - gBtlWork->x) >> 3;
         b = (gBtlWork->bossY + gBtlWork->bossZ - gBtlWork->y) >> 3;
         break;
-    case 2:
+    case BOS_LST_FLD_CAMERA_MODE_FOLLOW_PLAYER_SLOW:
         a = (gBtlWork->x2 - gBtlWork->x) >> 3;
         b = (gBtlWork->actor->y + gBtlWork->actor->z -
               gBtlWork->y) >> 3;
@@ -593,7 +593,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     ScanlineDmaDisable();
 
     switch (work->bgMode) {
-    case 0:
+    case BOS_LST_FLD_BG_MODE_HORIZON:
         work->scrollX -= work->scrollDir * 4;
 
         for (i = 0; i <= 23; i++) {
@@ -635,17 +635,17 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
         ScanlineDmaQueueBuffer(work->scanlineBuf[work->frameCount & 1]);
         ScanlineDmaEnable();
         break;
-    case 1:
+    case BOS_LST_FLD_BG_MODE_TUNNEL:
         work->scrollY -= work->scrollDir * 4;
         ScanlineDmaQueueBuffer(&work->hofsTable[work->frameCount & 0x3FF]);
         ScanlineDmaEnable();
         break;
-    case 3:
+    case BOS_LST_FLD_BG_MODE_STAR_STREAM:
         work->scrollX -= work->scrollSpeed * work->scrollDir;
         ScanlineDmaQueueBuffer(&work->vofsTable[(u8)work->frameCount]);
         ScanlineDmaEnable();
         break;
-    case 2:
+    case BOS_LST_FLD_BG_MODE_STAR_DRIFT:
         work->scrollX -= work->scrollDir * 3;
         work->scrollY += 3;
 
@@ -672,15 +672,15 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
         work->scrollY = 0;
 
         switch (work->nextBgMode) {
-        case 0:
+        case BOS_LST_FLD_BG_MODE_HORIZON:
             LoadBgMap(0, gBosLstBgMap, 0x800);
             ScanlineDmaInit(&REG_BG0HOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
-        case 1:
+        case BOS_LST_FLD_BG_MODE_TUNNEL:
             LoadBgMap(0, gBosLstFldMode1Map, 0x800);
             ScanlineDmaInit(&REG_BG0HOFS, work->hofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
-        case 2:
+        case BOS_LST_FLD_BG_MODE_STAR_DRIFT:
             work->scrollX = -(work->nextScrollDir * 120);
 
             if (work->nextScrollDir > 0) {
@@ -691,7 +691,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
 
             ScanlineDmaInit(&REG_BG0VOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
-        case 3:
+        case BOS_LST_FLD_BG_MODE_STAR_STREAM:
             work->scrollSpeed = 0;
             LoadBgMap(0, gBosLstFldMode2Map, 0x800);
             ScanlineDmaInit(&REG_BG0VOFS, work->vofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);

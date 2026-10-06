@@ -106,6 +106,20 @@ typedef struct LstCtrWork {
     u8 unk_064[0x124];
 } LstCtrWork;
 
+enum BosLstFldCameraMode {
+    BOS_LST_FLD_CAMERA_MODE_FOLLOW_PLAYER,
+    BOS_LST_FLD_CAMERA_MODE_FOLLOW_BOSS,
+    BOS_LST_FLD_CAMERA_MODE_FOLLOW_PLAYER_SLOW
+};
+
+enum BosLstFldBgMode {
+    BOS_LST_FLD_BG_MODE_HORIZON,
+    BOS_LST_FLD_BG_MODE_TUNNEL,
+    BOS_LST_FLD_BG_MODE_STAR_DRIFT,
+    BOS_LST_FLD_BG_MODE_STAR_STREAM,
+    BOS_LST_FLD_BG_MODE_BLANK
+};
+
 typedef struct LstFldWork {
     s32 cameraMode;
     s32 bgMode;

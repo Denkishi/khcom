@@ -5411,6 +5411,17 @@ void CreateBosPcAcdTask(PcWork* work, TaskPool* pool) {
     }
 }
 
+enum BosPcState {
+    BOS_PC_STATE_IDLE,
+    BOS_PC_STATE_ATTACK,
+    BOS_PC_STATE_BREAK,
+    BOS_PC_STATE_HURT,
+    BOS_PC_STATE_DEFEATED,
+    BOS_PC_STATE_REACTION,
+    BOS_PC_STATE_INACTIVE,
+    BOS_PC_STATE_EVENT
+};
+
 void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     s32 x;
     s32 y;
@@ -5421,7 +5432,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     u16 zero;
 
     work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&sBosPcBattleBackgroundDef);
-    work->state = 0;
+    work->state = BOS_PC_STATE_IDLE;
     work->step = 0;
     work->cardDelay = 600;
     work->hurtTimer = 0;
@@ -5471,7 +5482,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     if (pool == NULL) {
         work->shared.inEvent = 0;
     } else {
-        work->state = 7;
+        work->state = BOS_PC_STATE_EVENT;
         work->shared.gimmickTimer = 0x34BC0;
         work->shared.forceRipple = 1;
         work->shared.inEvent = 1;
@@ -5601,7 +5612,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
         work->step += 1;
     } else if (BosPcIsAnimDone(work)) {
         ClearBtlObjActionFlags(p);
-        work->state = 0;
+        work->state = BOS_PC_STATE_IDLE;
         work->step = 0;
         BosPcUpdateIdle(work, task);
     } else {
@@ -5707,17 +5718,17 @@ u8 BosPcUpdateHurt(PcWork* work, Task* task) {
             switch (work->hitAttack) {
             case 67:
                 work->reactionAnim = 2;
-                work->state = 5;
+                work->state = BOS_PC_STATE_REACTION;
                 work->step = 0;
                 return 1;
             case 68:
                 work->reactionAnim = 3;
-                work->state = 5;
+                work->state = BOS_PC_STATE_REACTION;
                 work->step = 0;
                 return 1;
             default:
                 work->reactionAnim = 1;
-                work->state = 5;
+                work->state = BOS_PC_STATE_REACTION;
                 work->step = 0;
                 return 1;
             }
@@ -5745,14 +5756,14 @@ u8 BosPcUpdateHurt(PcWork* work, Task* task) {
                 if (work->shared.gimmickTimer <= 0) {
                     if ((GetRandom() & 0x300) == 0x300) {
                         work->reactionAnim = 1;
-                        work->state = 5;
+                        work->state = BOS_PC_STATE_REACTION;
                         work->step = 0;
                         break;
                     }
                 }
             default:
                 work->cardDelay = work->cardDelay / 4;
-                work->state = 0;
+                work->state = BOS_PC_STATE_IDLE;
                 work->step = 0;
                 break;
             }
@@ -5776,7 +5787,7 @@ u8 BosPcUpdateReaction(PcWork* work, Task* task) {
             work->hurtTimer = 0;
         }
 
-        work->state = 0;
+        work->state = BOS_PC_STATE_IDLE;
         work->step = 0;
     } else {
         if (work->hurtTimer == 1) {
@@ -5807,10 +5818,17 @@ u8 BosPcUpdateBreak(PcWork* work, Task* task) {
 
     work->step += 1;
     ClearBtlObjActionFlags(p);
-    work->state = 0;
+    work->state = BOS_PC_STATE_IDLE;
     work->step = 0;
     return 1;
 }
+
+enum BosPcDefeatStep {
+    BOS_PC_DEFEAT_STEP_BEGIN,
+    BOS_PC_DEFEAT_STEP_CLEAR_FLOATS,
+    BOS_PC_DEFEAT_STEP_SET_DEFEATED,
+    BOS_PC_DEFEAT_STEP_END
+};
 
 u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
     PrizeCardArg args;
@@ -5823,7 +5841,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
     s = work->step;
 
     switch (s) {
-    case 0:
+    case BOS_PC_DEFEAT_STEP_BEGIN:
         BeginBossDefeat(p);
         ReleaseObjPalette(work->palette2);
         work->palette2 = NULL;
@@ -5837,7 +5855,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
         m4aSongNumStart(SONG_SND_717);
         work->step += 1;
         break;
-    case 1:
+    case BOS_PC_DEFEAT_STEP_CLEAR_FLOATS:
         n = 0;
 
         for (i = 0; i <= 3; i++) {
@@ -5860,7 +5878,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
         }
 
         break;
-    case 2:
+    case BOS_PC_DEFEAT_STEP_SET_DEFEATED:
         work->defeated = 1;
         work->step += 1;
         break;
@@ -5914,13 +5932,13 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
 
     switch (UpdateBtlObjReaction(p)) {
     case BTL_REACTION_CARD_ACTION:
-        work->state = 1;
+        work->state = BOS_PC_STATE_ATTACK;
         work->step = 0;
         break;
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
-        if (work->state == 5) {
+        if (work->state == BOS_PC_STATE_REACTION) {
             work->hurtTimer = 16;
 
             if (work->shared.gimmickTimer <= 0) {
@@ -5929,42 +5947,42 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
                 }
             }
         } else {
-            work->state = 3;
+            work->state = BOS_PC_STATE_HURT;
             work->step = 0;
         }
 
         break;
     case BTL_REACTION_DEFEATED:
-        work->state = 4;
-        work->step = 0;
+        work->state = BOS_PC_STATE_DEFEATED;
+        work->step = BOS_PC_DEFEAT_STEP_BEGIN;
         break;
     case BTL_REACTION_CARD_BROKEN:
-        work->state = 2;
+        work->state = BOS_PC_STATE_BREAK;
         work->step = 0;
         break;
     }
 
     switch (work->state) {
-    case 0:
+    case BOS_PC_STATE_IDLE:
         r = BosPcUpdateIdle(work, task);
         break;
-    case 1:
+    case BOS_PC_STATE_ATTACK:
         r = BosPcUpdateAttack(work, task);
         break;
-    case 3:
+    case BOS_PC_STATE_HURT:
         r = BosPcUpdateHurt(work, task);
         break;
-    case 5:
+    case BOS_PC_STATE_REACTION:
         r = BosPcUpdateReaction(work, task);
         break;
-    case 2:
+    case BOS_PC_STATE_BREAK:
         r = BosPcUpdateBreak(work, task);
         break;
-    case 4:
+    case BOS_PC_STATE_DEFEATED:
         r = BosPcUpdateDefeat(work, task);
         break;
-    case 6:
-    case 7:
+    case BOS_PC_STATE_INACTIVE:
+    case BOS_PC_STATE_EVENT:
     default:
         break;
     }

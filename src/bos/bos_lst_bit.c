@@ -91,6 +91,17 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
     return result;
 }
 
+enum BosLstBitState {
+    BOS_LST_BIT_STATE_ENTER,
+    BOS_LST_BIT_STATE_HOVER,
+    BOS_LST_BIT_STATE_CHARGE,
+    BOS_LST_BIT_STATE_FIRE,
+    BOS_LST_BIT_STATE_IMPACT,
+    BOS_LST_BIT_STATE_RETURN,
+    BOS_LST_BIT_STATE_HIDDEN,
+    BOS_LST_BIT_STATE_INTERRUPTED
+};
+
 u8 BosLstBitIsAlive(Task* task) {
     LstState* s;
     u8 result;
@@ -98,7 +109,7 @@ u8 BosLstBitIsAlive(Task* task) {
     s = task->work;
     result = 1;
 
-    if (s->obj.hp <= 0 || s->state == 6) {
+    if (s->obj.hp <= 0 || s->state == BOS_LST_BIT_STATE_HIDDEN) {
         result = 0;
     }
 
@@ -153,7 +164,7 @@ void BosLstBitStartHover(Task* task) {
 
     s = task->work;
     zero = 0;
-    s->state = 1;
+    s->state = BOS_LST_BIT_STATE_HOVER;
     s->step = zero;
     s->timer = zero;
     s->delay = zero;
@@ -165,7 +176,7 @@ void BosLstBitStartFiring(Task* task, s16 shots) {
 
     s = task->work;
     zero = 0;
-    s->state = 2;
+    s->state = BOS_LST_BIT_STATE_CHARGE;
     s->step = zero;
     s->timer = zero;
     s->delay = zero;
@@ -179,10 +190,10 @@ void BosLstBitStartReturn(Task* task) {
     s = task->work;
 
 #ifdef VERSION_EU
-    if ((u16)(s->state - 5) > 1) {
+    if ((u16)(s->state - BOS_LST_BIT_STATE_RETURN) > 1) {
 #endif
         zero = 0;
-        s->state = 5;
+        s->state = BOS_LST_BIT_STATE_RETURN;
         s->step = zero;
         s->timer = zero;
         s->delay = zero;
@@ -202,7 +213,7 @@ u8 BosLstBitInterrupt(Task* task, u8 destroy) {
     BosLstLsrStop(s->lsrTask3);
     s->shots = 0;
 
-    if (s->state >= 5 && s->state <= 6) {
+    if (s->state >= BOS_LST_BIT_STATE_RETURN && s->state <= BOS_LST_BIT_STATE_HIDDEN) {
         return 0;
     }
 
@@ -218,8 +229,8 @@ u8 BosLstBitInterrupt(Task* task, u8 destroy) {
     AnimReset(&s->anim);
     AnimChange(&s->anim, sLstAnimSets[s->animSet].idleAnim, ANIM_FLAG_LOOP);
 
-    if (s->state != 0 && s->state != 5) {
-        s->state = 7;
+    if (s->state != BOS_LST_BIT_STATE_ENTER && s->state != BOS_LST_BIT_STATE_RETURN) {
+        s->state = BOS_LST_BIT_STATE_INTERRUPTED;
         s->step = 0;
         s->timer = 0;
         s->delay = 0;
@@ -231,7 +242,7 @@ u8 BosLstBitInterrupt(Task* task, u8 destroy) {
         }
     }
 #else
-    s->state = 7;
+    s->state = BOS_LST_BIT_STATE_INTERRUPTED;
     s->step = 0;
     s->timer = 0;
     s->delay = 0;
@@ -331,7 +342,7 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     TaskPool* pool;
 
     work->animSet = 0;
-    work->state = 0;
+    work->state = BOS_LST_BIT_STATE_ENTER;
     work->step = 0;
     work->timer = 0;
     work->delay = 0;
@@ -429,7 +440,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
     BosLstBitHandleHit(work);
 
     switch (work->state) {
-    case 0:
+    case BOS_LST_BIT_STATE_ENTER:
         ApproachValueHalfSteps(&work->x, work->targetX, 20);
         ApproachValueHalfSteps(&work->y, work->targetY, 20);
         ApproachValueHalfSteps(&work->z, work->targetZ, 20);
@@ -438,7 +449,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         work->timer++;
 
         if (work->timer > 29) {
-            work->state = 1;
+            work->state = BOS_LST_BIT_STATE_HOVER;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
@@ -447,7 +458,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         }
 
         break;
-    case 1:
+    case BOS_LST_BIT_STATE_HOVER:
         if (work->timer == 0) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN) {
                 work->targetX = (GetRandom() % 113 << 8) + 0xC000;
@@ -484,7 +495,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         ApproachValueHalfSteps(&work->y, work->targetY, 20);
         ApproachValueHalfSteps(&work->z, work->targetZ, 20);
         break;
-    case 2:
+    case BOS_LST_BIT_STATE_CHARGE:
         if (work->timer == 0) {
             work->targetX = gBtlWork->actor->x;
             work->targetY = gBtlWork->actor->y;
@@ -502,7 +513,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         work->timer++;
 
         if (AnimGetId(&work->anim) == (s16)sLstAnimSets[work->animSet].chargeAnim && AnimIsFinished(&work->anim) == 1) {
-            work->state = 3;
+            work->state = BOS_LST_BIT_STATE_FIRE;
             work->timer = 0;
             work->unk_018 = 1;
             work->fireAngle = work->aimAngle;
@@ -515,7 +526,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         }
 
         break;
-    case 3:
+    case BOS_LST_BIT_STATE_FIRE:
         if (work->timer == 0) {
             if (!BosLstLsrIsFiring(work->lsrTask)) {
                 a.x = work->fireX;
@@ -540,7 +551,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
             if (!BosLstLsrIsFiring(work->lsrTask)) {
                 if (work->shots > 1) {
-                    work->state = 2;
+                    work->state = BOS_LST_BIT_STATE_CHARGE;
                     work->timer = 0;
                     work->shots--;
                 } else {
@@ -550,7 +561,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         }
 
         break;
-    case 4:
+    case BOS_LST_BIT_STATE_IMPACT:
         if (work->timer > 14) {
             break;
         }
@@ -579,7 +590,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
         work->timer++;
         break;
-    case 5:
+    case BOS_LST_BIT_STATE_RETURN:
         work->targetX = gBtlWork->bossX;
         work->targetY = gBtlWork->bossY - 0x1400;
         work->targetZ = gBtlWork->bossZ;
@@ -591,20 +602,20 @@ u8 task_bos_lst_bit_1(LstState* work) {
         work->timer++;
 
         if (work->timer > 59) {
-            work->state = 6;
+            work->state = BOS_LST_BIT_STATE_HIDDEN;
             work->step = 0;
             work->timer = 0;
             work->delay = 0;
         }
 
         break;
-    case 6:
+    case BOS_LST_BIT_STATE_HIDDEN:
         work->scaleX = 0x100;
         work->scaleY = 0x100;
         AnimReset(&work->anim);
         AnimChange(&work->anim, 4, ANIM_FLAG_LOOP);
         break;
-    case 7:
+    case BOS_LST_BIT_STATE_INTERRUPTED:
         AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
         break;
     }
@@ -618,8 +629,8 @@ u8 task_bos_lst_bit_1(LstState* work) {
     } else {
         if (work->kind == 0) {
             switch (work->state) {
-            case 2:
-            case 3:
+            case BOS_LST_BIT_STATE_CHARGE:
+            case BOS_LST_BIT_STATE_FIRE:
                 work->angle += 2;
                 WorldToScreen(&x2, &y2, work->targetX, work->targetY, work->targetZ);
                 break;
@@ -631,9 +642,9 @@ u8 task_bos_lst_bit_1(LstState* work) {
             }
         } else {
             switch (work->state) {
-            case 2:
-            case 3:
-            case 4:
+            case BOS_LST_BIT_STATE_CHARGE:
+            case BOS_LST_BIT_STATE_FIRE:
+            case BOS_LST_BIT_STATE_IMPACT:
                 work->angle += 6;
                 WorldToScreen(&x2, &y2, work->targetX, work->targetY, work->targetZ);
                 break;

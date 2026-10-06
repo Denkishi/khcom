@@ -1934,12 +1934,18 @@ void Task_MapDbg_3(MapDbgWork* work) {
 #endif
 }
 
+enum MapGmkJumpState {
+    MAP_GMK_JUMP_STATE_WAIT_STEP,
+    MAP_GMK_JUMP_STATE_WAIT_JUMP,
+    MAP_GMK_JUMP_STATE_LAUNCH
+};
+
 void MapGmkJumpWaitStep(MapGmkJumpWork* work) {
     if (ColliderIsTouchingType(&work->collider, 1) && (work->collider.standFlags & COLLIDER_STAND_STOOD_ON)) {
         gMapRoomState->jumpGmkHeight = work->jumpHeight;
         gMapRoomState->jumpGmkAngle = work->obj.angle;
         work->update = MapGmkJumpWaitJump;
-        work->state = 1;
+        work->state = MAP_GMK_JUMP_STATE_WAIT_JUMP;
         AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
     } else {
         AnimUpdate(&work->anim);
@@ -1952,11 +1958,11 @@ void MapGmkJumpWaitJump(MapGmkJumpWork* work) {
         gMapRoomState->jumpGmkAngle = work->obj.angle;
     } else if (gFieldState->actor.fieldPosition.z != gFieldState->actor.fieldPosition.ground) {
         work->update = MapGmkJumpLaunch;
-        work->state = 2;
+        work->state = MAP_GMK_JUMP_STATE_LAUNCH;
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
     } else {
         work->update = MapGmkJumpWaitStep;
-        work->state = 0;
+        work->state = MAP_GMK_JUMP_STATE_WAIT_STEP;
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     }
 }
@@ -1964,7 +1970,7 @@ void MapGmkJumpWaitJump(MapGmkJumpWork* work) {
 void MapGmkJumpLaunch(MapGmkJumpWork* work) {
     if (AnimIsFinished(&work->anim)) {
         work->update = MapGmkJumpWaitStep;
-        work->state = 0;
+        work->state = MAP_GMK_JUMP_STATE_WAIT_STEP;
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     } else {
         AnimUpdate(&work->anim);
@@ -1999,7 +2005,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
     work->tiles = LoadObjTiles(gMapGmkJumpTiles, 0x980);
     a = &work->anim;
     AnimInit(a, gMapGmkJumpAnims, gMapGmkJumpFrames);
-    work->state = 0;
+    work->state = MAP_GMK_JUMP_STATE_WAIT_STEP;
     AnimStart(a, 0, ANIM_FLAG_LOOP);
     work->update = MapGmkJumpWaitStep;
     ColliderInit(&work->collider, 6, 16, 0);

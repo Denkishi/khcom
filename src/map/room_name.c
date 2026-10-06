@@ -50,6 +50,13 @@ const MapNameText* gRoomNames[28] = {
     LOCALIZED(gRoomNameHiddenChamber),
 };
 
+enum RoomNameState {
+    ROOM_NAME_STATE_DELAY,
+    ROOM_NAME_STATE_OPEN,
+    ROOM_NAME_STATE_HOLD,
+    ROOM_NAME_STATE_CLOSE
+};
+
 void task_room_name_0(RoomNameWork* work, s32 arg) {
     work->tiles = LoadObjTiles(gMapNameBarTiles, 0x800);
     work->palette = LoadObjPalette(gMapFloorNamePalette, 0x20);
@@ -63,7 +70,7 @@ void task_room_name_0(RoomNameWork* work, s32 arg) {
     work->unk_24 = 0x19;
     work->timer = 0;
     work->unk_2C = 0;
-    work->state = 0;
+    work->state = ROOM_NAME_STATE_DELAY;
     work->scaleY = 0x19;
     InitTextSlots(work->textSlots, 0x24);
     work->palette2 = LoadTextPalette(1);
@@ -80,7 +87,7 @@ u8 task_room_name_1(RoomNameWork* work) {
     }
 
     switch (work->state) {
-    case 0:
+    case ROOM_NAME_STATE_DELAY:
         work->timer++;
 
         if (work->timer > 0x27) {
@@ -89,7 +96,7 @@ u8 task_room_name_1(RoomNameWork* work) {
         }
 
         break;
-    case 1:
+    case ROOM_NAME_STATE_OPEN:
         work->timer++;
 
         if (work->timer > 1) {
@@ -104,7 +111,7 @@ u8 task_room_name_1(RoomNameWork* work) {
         }
 
         break;
-    case 2:
+    case ROOM_NAME_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 0xB3) {
@@ -113,7 +120,7 @@ u8 task_room_name_1(RoomNameWork* work) {
         }
 
         break;
-    case 3:
+    case ROOM_NAME_STATE_CLOSE:
         work->timer++;
 
         if (work->timer > 1) {
@@ -136,7 +143,7 @@ u8 task_room_name_1(RoomNameWork* work) {
 void task_room_name_2(RoomNameWork* work) {
     ObjAffine* affine;
 
-    if (work->state != 0) {
+    if (work->state != ROOM_NAME_STATE_DELAY) {
         affine = AllocObjAffine(0, 0x100, work->scaleY, 0);
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, affine, 0, 0x3C);
         DrawTextSlots(work->x2 >> 8, work->y2 >> 8, work->textSlots, work->palette2, 0x32, work->textSlotCount);

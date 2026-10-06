@@ -89,6 +89,13 @@ static u8 sWLogoWorldIds[13] = {
     12,
 };
 
+enum WLogoModeState {
+    WLOGO_MODE_STATE_SELECT,
+    WLOGO_MODE_STATE_START,
+    WLOGO_MODE_STATE_PLAY,
+    WLOGO_MODE_STATE_RESTART
+};
+
 static u8 sWLogoState;
 static s8 sWLogoWorld;
 static u8 sWLogoTimer;
@@ -113,7 +120,7 @@ void mode_wLogo_1() {
     u8* p;
 
     switch (sWLogoState) {
-    case 0:
+    case WLOGO_MODE_STATE_SELECT:
         DrawTextSlots(35, 75, sWLogoNameSlots, sWLogoNamePalette, 20, sWLogoNameLength);
 
         if (GetKeysPressed() & DPAD_LEFT) {
@@ -157,11 +164,11 @@ void mode_wLogo_1() {
         }
 
         break;
-    case 1:
+    case WLOGO_MODE_STATE_START:
         WLogoStartLogo(sWLogoWorldIds[sWLogoWorld]);
         sWLogoState++;
         break;
-    case 2:
+    case WLOGO_MODE_STATE_PLAY:
         if (IsTaskActive(sModeWLogoTask)) {
             TaskPoolUpdate(&sModeWLogoTasks);
             TaskPoolDraw(&sModeWLogoTasks);
@@ -170,7 +177,7 @@ void mode_wLogo_1() {
         }
 
         break;
-    case 3:
+    case WLOGO_MODE_STATE_RESTART:
         sWLogoTimer++;
 
         if (sWLogoTimer > 10) {
@@ -185,8 +192,8 @@ void mode_wLogo_2() {
     FreeTextSlots(sWLogoNameSlots, 20);
     ReleaseObjPalette(sWLogoNamePalette);
 
-    if (sWLogoState != 0) {
-        if (sWLogoState == 3) {
+    if (sWLogoState != WLOGO_MODE_STATE_SELECT) {
+        if (sWLogoState == WLOGO_MODE_STATE_RESTART) {
             TaskPoolDestroy(&sModeWLogoTasks);
         }
     }
@@ -203,7 +210,7 @@ void WLogoInitWorldSelect() {
     LoadBgMap(1, gSioBattleBgMap, 0x800);
     DisableBg(0);
     EnableBg(1);
-    sWLogoState = 0;
+    sWLogoState = WLOGO_MODE_STATE_SELECT;
     sWLogoTimer = 0;
     InitTextSlots(sWLogoNameSlots, 20);
     p = &sWLogoNameLength;

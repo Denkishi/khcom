@@ -330,7 +330,7 @@ void task_fld_sora_0(FldWork* work) {
         act->fieldPosition.z = act->fieldPosition.ground;
         act->fieldPosition.y -= act->fieldPosition.ground;
         act->speed = 0;
-        work->state = 0;
+        work->state = FLD_STATE_GROUND;
         work->vz = 0;
     }
 
@@ -391,7 +391,7 @@ u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
 
     if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         FadeSetPaletteExcluded(work->palette->index + 16, 0);
-        work->state = 0;
+        work->state = FLD_STATE_GROUND;
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
         TaskPoolUpdate(&work->tasks);
@@ -425,15 +425,15 @@ u8 FldSoraGmkJump(FldWork* work, void* task) {
     gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
-    case 13:
+    case FLD_STATE_GMK_JUMP_START:
         m4aSongNumStart(SONG_SYS_GIMICJP);
-        work->state = 14;
+        work->state = FLD_STATE_GMK_JUMP;
         work->vz = -0x800;
         work->timer = 0;
         act->speed = 0;
         work->targetX = work->collider.platformX;
         work->targetY = work->collider.platformY;
-    case 14:
+    case FLD_STATE_GMK_JUMP:
         if (work->vz > -0x300) {
             FldSoraSetAnim(work, 11, 0);
             act->speed = 0x180;
@@ -451,7 +451,7 @@ u8 FldSoraGmkJump(FldWork* work, void* task) {
 
         if (work->vz >= 0) {
             work->timer = 0;
-            work->state = 4;
+            work->state = FLD_STATE_FALL;
             work->flags |= FLD_FLAG_NO_AIR_TURN;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         } else {
@@ -494,7 +494,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
     }
 
     switch (work->state) {
-    case 12:
+    case FLD_STATE_AIR_ATTACK:
         if (work->timer == 0) {
             gFieldState->lockonTarget = NULL;
             FldSoraSetAnim(work, 14, 0);
@@ -551,16 +551,16 @@ u8 FldSoraJump(FldWork* work, void* task) {
 
         if (AnimIsFinished(&work->anim)) {
             if (work->vz < 0) {
-                work->state = 3;
+                work->state = FLD_STATE_JUMP_RISE;
             } else {
-                work->state = 4;
+                work->state = FLD_STATE_FALL;
             }
         } else {
             work->timer++;
         }
 
         break;
-    case 2:
+    case FLD_STATE_JUMP_START:
         if (work->timer == 0) {
             FldSoraSetAnim(work, 3, 0);
             act->speed >>= 1;
@@ -579,7 +579,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
                     m4aSongNumStart(SONG_SYS_SR_I_VO01);
                 }
 
-                work->state = 3;
+                work->state = FLD_STATE_JUMP_RISE;
                 work->vz = -1331;
                 act->speed <<= 1;
                 work->timer = 0;
@@ -588,7 +588,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
             } else {
                 act->angle = gMapRoomState->jumpGmkAngle;
                 work->targetZ = act->fieldPosition.z - work->targetZ;
-                work->state = 13;
+                work->state = FLD_STATE_GMK_JUMP_START;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldSoraGmkJump);
                 work->timer = 0;
             }
@@ -597,7 +597,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
         }
 
         break;
-    case 3:
+    case FLD_STATE_JUMP_RISE:
         if ((GetKeysHeld() & DPAD_ANY) != 0) {
             act->speed += 17;
 
@@ -631,16 +631,16 @@ u8 FldSoraJump(FldWork* work, void* task) {
 
         if ((GetKeysPressed() & A_BUTTON) != 0) {
             work->timer = 0;
-            work->state = 12;
+            work->state = FLD_STATE_AIR_ATTACK;
         } else if (work->vz > 0) {
             work->timer = 0;
-            work->state = 4;
+            work->state = FLD_STATE_FALL;
         } else {
             work->timer++;
         }
 
         break;
-    case 4:
+    case FLD_STATE_FALL:
         if ((GetKeysHeld() & DPAD_ANY) != 0) {
             act->speed += 17;
 
@@ -668,19 +668,19 @@ u8 FldSoraJump(FldWork* work, void* task) {
 
         if ((GetKeysPressed() & A_BUTTON) != 0) {
             work->timer = 0;
-            work->state = 12;
+            work->state = FLD_STATE_AIR_ATTACK;
         } else if (act->fieldPosition.z > z) {
             act->fieldPosition.z = z;
             work->vz = 0;
 
-            if (work->state != 5) {
-                work->state = 5;
+            if (work->state != FLD_STATE_LAND) {
+                work->state = FLD_STATE_LAND;
                 work->timer = 0;
             }
         }
 
         break;
-    case 5:
+    case FLD_STATE_LAND:
         if (work->timer == 0) {
             FldSoraSetAnim(work, 7, 0);
             m4aSongNumStart(work->sounds[3]);
@@ -691,11 +691,11 @@ u8 FldSoraJump(FldWork* work, void* task) {
         if ((GetKeysPressed() & B_BUTTON) != 0) {
             work->flags &= ~FLD_FLAG_NO_AIR_TURN;
             work->timer = 0;
-            work->state = 2;
+            work->state = FLD_STATE_JUMP_START;
         } else if (work->timer > 6) {
             gFieldState->flags &= ~FIELD_FLAG_PLAYER_JUMPING;
             work->flags &= ~FLD_FLAG_NO_AIR_TURN;
-            work->state = 0;
+            work->state = FLD_STATE_GROUND;
             work->timer = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
         } else {
@@ -729,18 +729,18 @@ u8 FldSoraJump(FldWork* work, void* task) {
         switch (FldSoraCheckClimb(&act->fieldPosition, work)) {
         case 2:
             work->timer = 0;
-            work->state = 6;
+            work->state = FLD_STATE_CLIMB;
             act->angle = 211;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
             break;
         case 1:
             work->timer = 0;
-            work->state = 6;
+            work->state = FLD_STATE_CLIMB;
             act->angle = 45;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
             break;
         default:
-            if (work->state == 4 && act->fieldPosition.ground - act->fieldPosition.z > 0xFFF) {
+            if (work->state == FLD_STATE_FALL && act->fieldPosition.ground - act->fieldPosition.z > 0xFFF) {
                 p1 = act->fieldPosition;
                 p1.y -= 0x400;
                 p1.z = act->fieldPosition.z - 0x3000;
@@ -749,7 +749,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
 
                 if (!FldSoraCheckBlocked(&p1) && FldSoraCheckBlocked(&p2)) {
                     work->timer = 0;
-                    work->state = 8;
+                    work->state = FLD_STATE_LEDGE_CATCH;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraHangLedge);
                 }
@@ -794,7 +794,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
     gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
-    case 6:
+    case FLD_STATE_CLIMB:
         if (work->timer == 0) {
             work->targetZ = (act->fieldPosition.z >> 12) << 12;
             work->timer++;
@@ -847,7 +847,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
                 act->speed = 204;
                 work->vz = -0x580;
                 work->flags |= FLD_FLAG_NO_AIR_TURN;
-                work->state = 7;
+                work->state = FLD_STATE_CLIMB_OVER;
                 work->timer = 0;
                 m4aSongNumStart(work->sounds[6]);
             }
@@ -859,7 +859,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
                 act->fieldPosition.y += -gSineTable[act->angle + 64] * 10;
                 FldSoraSetAnim(work, 0, 1);
                 work->gfx = AnimGetGfx(&work->anim);
-                work->state = 0;
+                work->state = FLD_STATE_GROUND;
                 work->timer = 0;
                 SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
             }
@@ -876,7 +876,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
         if (GetKeysPressed() & B_BUTTON) {
             work->vz = 0;
             work->timer = 0;
-            work->state = 4;
+            work->state = FLD_STATE_FALL;
             act->angle += 0x80;
             act->speed = 0x80;
             work->flags |= FLD_FLAG_NO_AIR_TURN;
@@ -888,7 +888,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
         }
 
         break;
-    case 7:
+    case FLD_STATE_CLIMB_OVER:
         FldSoraSetAnim(work, 11, 0);
         act->fieldPosition.x += gSineTable[act->angle] * act->speed >> 8;
         act->fieldPosition.y += -gSineTable[act->angle + 64] * act->speed >> 8;
@@ -897,7 +897,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
 
         if (work->vz > 0) {
             work->timer = 0;
-            work->state = 4;
+            work->state = FLD_STATE_FALL;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         } else {
             work->timer++;
@@ -927,7 +927,7 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
         (act->angle == 0xD3 && (GetKeysPressed() & DPAD_RIGHT)) ||
         (act->angle == 0x2D && (GetKeysPressed() & DPAD_LEFT))) {
         work->timer = 0;
-        work->state = 4;
+        work->state = FLD_STATE_FALL;
         work->vz = 0;
         act->angle += 0x80;
         gFieldState->lockonTarget = NULL;
@@ -939,7 +939,7 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
         (act->angle == 0xD3 && (GetKeysHeld() & DPAD_LEFT)) ||
         (act->angle == 0x2D && (GetKeysHeld() & DPAD_RIGHT))) {
         work->timer = 0;
-        work->state = 10;
+        work->state = FLD_STATE_LEDGE_CLIMB;
         act->speed = 0x133;
         work->vz = -0x5C0;
         work->flags |= FLD_FLAG_NO_AIR_TURN;
@@ -965,7 +965,7 @@ u8 FldSoraHangLedge(FldWork* work, void* task) {
     gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
-    case 8:
+    case FLD_STATE_LEDGE_CATCH:
         if (work->timer == 0) {
             p = act->fieldPosition;
             p.y -= 0xA00;
@@ -983,17 +983,17 @@ u8 FldSoraHangLedge(FldWork* work, void* task) {
         act->fieldPosition.y -= gSineTable[act->angle + 64];
 
         if (AnimIsFinished(&work->anim) && !ret) {
-            work->state = 9;
+            work->state = FLD_STATE_LEDGE_HANG;
         } else {
             work->timer++;
         }
 
         break;
-    case 9:
+    case FLD_STATE_LEDGE_HANG:
         FldSoraSetAnim(work, 10, 0);
         FldSoraLedgeInput(work, task);
         break;
-    case 10:
+    case FLD_STATE_LEDGE_CLIMB:
         FldSoraSetAnim(work, 11, 0);
         act->fieldPosition.x += gSineTable[act->angle] * act->speed >> 8;
         act->fieldPosition.y += -gSineTable[act->angle + 64] * act->speed >> 8;
@@ -1002,7 +1002,7 @@ u8 FldSoraHangLedge(FldWork* work, void* task) {
 
         if (work->vz > 0) {
             work->timer = 0;
-            work->state = 4;
+            work->state = FLD_STATE_FALL;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         } else {
             work->timer++;
@@ -1030,7 +1030,7 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
     act = &gFieldState->actor;
 
     switch (work->state) {
-    case 15:
+    case FLD_STATE_WALK_OUT:
         if (work->timer == 0) {
             work->flags |= FLD_FLAG_WALK_OUT;
             act->angle = 45;
@@ -1074,16 +1074,16 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
             work->timer = 0;
 
             if (work->flags & FLD_FLAG_TO_WORLD_SELECT) {
-                work->state = 16;
+                work->state = FLD_STATE_WALK_OUT_TO_WORLD_SELECT;
             } else {
-                work->state = 17;
+                work->state = FLD_STATE_WALK_OUT_TO_EXIT;
             }
         } else {
             work->timer++;
         }
 
         break;
-    case 16:
+    case FLD_STATE_WALK_OUT_TO_WORLD_SELECT:
         if (work->timer == 0) {
             work->steps = 25;
             work->targetX = act->fieldPosition.x + 0x2000;
@@ -1109,13 +1109,13 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
 
         if (work->steps <= 0) {
             work->timer = 0;
-            work->state = 18;
+            work->state = FLD_STATE_WORLD_SELECT_POSE;
         } else {
             work->timer++;
         }
 
         break;
-    case 17:
+    case FLD_STATE_WALK_OUT_TO_EXIT:
         if (work->timer == 0) {
             work->steps = 25;
             work->targetX = act->fieldPosition.x + 0x2000;
@@ -1141,13 +1141,13 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
 
         if (work->steps <= 0) {
             work->timer = 0;
-            work->state = 19;
+            work->state = FLD_STATE_WALK_OUT_END;
         } else {
             work->timer++;
         }
 
         break;
-    case 18:
+    case FLD_STATE_WORLD_SELECT_POSE:
         if (work->timer == 0) {
             FldSoraSetAnim(work, 12, 0);
             FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -1159,13 +1159,13 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
 
         if (work->timer > 140) {
             work->timer = 0;
-            work->state = 19;
+            work->state = FLD_STATE_WALK_OUT_END;
         } else {
             work->timer++;
         }
 
         break;
-    case 19:
+    case FLD_STATE_WALK_OUT_END:
         EndMapWalkOut();
         break;
     }
@@ -1188,7 +1188,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
 
-    if (work->state == 11) {
+    if (work->state == FLD_STATE_ATTACK) {
         if (work->timer == 0) {
             FldSoraSetAnim(work, 13, 0);
             act->speed = 0;
@@ -1377,7 +1377,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
             }
 
             FldSoraSetAnim(work, 0, 0);
-            work->state = 0;
+            work->state = FLD_STATE_GROUND;
             SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
         } else {
             work->timer++;
@@ -1441,30 +1441,30 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
         work->flags &= ~FLD_FLAG_RESTORE_STATE;
 
         switch (work->state) {
-        case 12:
-            work->state = 3;
-        case 2:
-        case 3:
-        case 4:
+        case FLD_STATE_AIR_ATTACK:
+            work->state = FLD_STATE_JUMP_RISE;
+        case FLD_STATE_JUMP_START:
+        case FLD_STATE_JUMP_RISE:
+        case FLD_STATE_FALL:
             gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
-        case 5:
+        case FLD_STATE_LAND:
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
             gFieldState->lockonTarget = NULL;
             break;
-        case 6:
-        case 7:
+        case FLD_STATE_CLIMB:
+        case FLD_STATE_CLIMB_OVER:
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
             gFieldState->lockonTarget = NULL;
             work->timer = 1;
             break;
-        case 8:
-        case 9:
-        case 10:
+        case FLD_STATE_LEDGE_CATCH:
+        case FLD_STATE_LEDGE_HANG:
+        case FLD_STATE_LEDGE_CLIMB:
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraHangLedge);
             gFieldState->lockonTarget = NULL;
             break;
         default:
-            work->state = 0;
+            work->state = FLD_STATE_GROUND;
             break;
         }
 
@@ -1477,7 +1477,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)FldSoraWalkOut);
         TaskPoolUpdate(&work->tasks);
-        work->state = 15;
+        work->state = FLD_STATE_WALK_OUT;
 
         if (GetMapWalkOutMode() == 1) {
             work->flags |= FLD_FLAG_TO_WORLD_SELECT;
@@ -1493,7 +1493,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
         sx = act->fieldPosition.x;
         sy = act->fieldPosition.y;
 
-        if (work->state <= 1) {
+        if (work->state <= FLD_STATE_GROUND_UNUSED) {
             if ((gFieldState->flags & 0x4000) == 0) {
                 FldSoraTurn(act);
             }
@@ -1532,17 +1532,17 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                 gFieldState->lockonTarget = NULL;
                 gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
                 work->timer = 0;
-                work->state = 2;
+                work->state = FLD_STATE_JUMP_START;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
                 m4aSongNumStart(work->sounds[2]);
             } else if ((GetKeysPressed() & A_BUTTON) != 0) {
                 work->timer = 0;
                 gFieldState->lockonTarget = NULL;
-                work->state = 11;
+                work->state = FLD_STATE_ATTACK;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldSoraAttack);
             }
         } else if (AnimIsFinished(&work->anim)) {
-            work->state = 0;
+            work->state = FLD_STATE_GROUND;
         }
 
         if (work->collider.colliding) {
@@ -1571,14 +1571,14 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                 switch (r) {
                 case 2:
                     work->timer = 0;
-                    work->state = 6;
+                    work->state = FLD_STATE_CLIMB;
                     act->angle = 211;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
                     break;
                 case 1:
                     work->timer = 0;
-                    work->state = 6;
+                    work->state = FLD_STATE_CLIMB;
                     act->angle = 45;
                     gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
@@ -1693,7 +1693,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             work->timer = 0;
             gFieldState->lockonTarget = NULL;
             gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
-            work->state = 4;
+            work->state = FLD_STATE_FALL;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         } else if (z != act->fieldPosition.ground) {
             gFieldState->lockonTarget = NULL;

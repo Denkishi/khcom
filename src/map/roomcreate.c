@@ -22,6 +22,17 @@
 #include "card_worldselect.h"
 #include "map.h"
 
+enum RoomCreateState {
+    ROOM_CREATE_STATE_APPROACH,
+    ROOM_CREATE_STATE_SELECT_CARD,
+    ROOM_CREATE_STATE_WALK_BACK,
+    ROOM_CREATE_STATE_CARD_POSE,
+    ROOM_CREATE_STATE_OPEN_DOOR,
+    ROOM_CREATE_STATE_WAIT,
+    ROOM_CREATE_STATE_ENTER,
+    ROOM_CREATE_STATE_IDLE
+};
+
 void task_roomcreate_0(RoomCreateWork* work) {
     FldObj* obj;
 
@@ -31,7 +42,7 @@ void task_roomcreate_0(RoomCreateWork* work) {
     work->mapSelectStatus = 0;
     work->spotLightEnd = 0;
     work->timer = 0;
-    work->state = 0;
+    work->state = ROOM_CREATE_STATE_APPROACH;
     SetBgPriority(0, 2);
     SetBgPriority(1, 2);
     TaskPoolInit(&work->tasks, 3);
@@ -54,7 +65,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
     s32 i;
 
     switch (work->state) {
-    case 0:
+    case ROOM_CREATE_STATE_APPROACH:
         if (work->timer == 0) {
             gFieldState->actor.angle = work->angle + 0x80;
             TaskCreate(&work->tasks, &gTaskDescSpotLight, &work->spotLightEnd);
@@ -68,7 +79,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
 
         if (steps <= 1) {
             MapFreezeBg1();
-            work->state = 1;
+            work->state = ROOM_CREATE_STATE_SELECT_CARD;
             gFieldState->flags &= ~FIELD_FLAG_AUTO_WALK;
             work->timer = 8;
         } else {
@@ -78,7 +89,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         }
 
         break;
-    case 1:
+    case ROOM_CREATE_STATE_SELECT_CARD:
         if (work->timer > 0) {
             ApproachValue(&gFieldState->x, gFieldState->x2 - 0x7800, work->timer);
             ApproachValue(&gFieldState->y, gFieldState->y2 - 0x6000, work->timer);
@@ -92,19 +103,19 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
 
         switch (work->mapSelectStatus) {
         case 1:
-            work->state = 2;
+            work->state = ROOM_CREATE_STATE_WALK_BACK;
             work->timer = 0;
             MapRestoreBg1();
             SetBgPriority(1, 2);
             break;
         case 2:
-            work->state = 3;
+            work->state = ROOM_CREATE_STATE_CARD_POSE;
             work->timer = 0;
             break;
         }
 
         break;
-    case 3:
+    case ROOM_CREATE_STATE_CARD_POSE:
         if (work->timer == 0) {
             gFieldState->flags |= FIELD_FLAG_CARD_POSE;
             DisableBg(2);
@@ -127,11 +138,11 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
 
         if (work->mapSelectStatus == 1) {
             work->timer = 0;
-            work->state = 4;
+            work->state = ROOM_CREATE_STATE_OPEN_DOOR;
         }
 
         break;
-    case 4:
+    case ROOM_CREATE_STATE_OPEN_DOOR:
         if (work->timer == 16) {
             TaskCreate(&work->tasks, &gTaskDescRomcriEff, (void*)(u32)work->angle);
         }
@@ -142,23 +153,23 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
 
         if (work->timer > 60) {
             work->timer = 0;
-            work->state = 6;
+            work->state = ROOM_CREATE_STATE_ENTER;
             gFieldState->flags &= ~FIELD_FLAG_CARD_POSE;
         } else {
             work->timer++;
         }
 
         break;
-    case 5:
+    case ROOM_CREATE_STATE_WAIT:
         if (work->timer > 60) {
             work->timer = 0;
-            work->state = 6;
+            work->state = ROOM_CREATE_STATE_ENTER;
         } else {
             work->timer++;
         }
 
         break;
-    case 2:
+    case ROOM_CREATE_STATE_WALK_BACK:
         if (work->timer == 0) {
             work->spotLightEnd = 1;
             gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
@@ -182,7 +193,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         MapSetCameraTarget((gFieldState->actor.fieldPosition.x + work->x2) / 2,
                       (gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + work->y2 + work->z2) / 2);
         break;
-    case 6:
+    case ROOM_CREATE_STATE_ENTER:
         if (work->timer == 0) {
             gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
         }
@@ -197,7 +208,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         }
 
         break;
-    case 7:
+    case ROOM_CREATE_STATE_IDLE:
         break;
     }
 

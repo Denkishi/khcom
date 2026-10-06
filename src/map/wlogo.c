@@ -47,6 +47,15 @@ static TaskPool sWlogoAgrTaskPool;
 static TaskPool sWlogoPooTaskPool;
 s32 gWlogoTtSkew EWRAM_COMMON(4);
 
+enum WlogoMonsState {
+    WLOGO_MONS_STATE_WAIT,
+    WLOGO_MONS_STATE_FADE_IN,
+    WLOGO_MONS_STATE_WAIT_EYE,
+    WLOGO_MONS_STATE_EYE,
+    WLOGO_MONS_STATE_HOLD,
+    WLOGO_MONS_STATE_FADE_OUT
+};
+
 void task_wlogo_mons_0(WlogoMonsWork* work) {
     LoadBgPalette(0, gWlogoMonsPalette, 0x20);
     LoadBgTiles(0, gWlogoMonsTiles, 0xC80);
@@ -57,7 +66,7 @@ void task_wlogo_mons_0(WlogoMonsWork* work) {
     work->y = 64;
     work->paletteStep = 0;
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_MONS_STATE_WAIT;
     work->visible = 0;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
@@ -68,7 +77,7 @@ void task_wlogo_mons_0(WlogoMonsWork* work) {
 
 u8 task_wlogo_mons_1(WlogoMonsWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_MONS_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -77,7 +86,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_MONS_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 4) {
@@ -93,7 +102,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_MONS_STATE_WAIT_EYE:
         work->timer++;
 
         if (work->timer > 29) {
@@ -103,7 +112,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_MONS_STATE_EYE:
         if (!AnimIsFinished(&work->anim)) {
             work->gfx = AnimUpdate(&work->anim);
         }
@@ -131,7 +140,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
         }
 
         break;
-    case 4:
+    case WLOGO_MONS_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 49) {
@@ -140,7 +149,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
         }
 
         break;
-    case 5:
+    case WLOGO_MONS_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -174,13 +183,21 @@ void task_wlogo_mons_3(WlogoMonsWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoHwtState {
+    WLOGO_HWT_STATE_GHOSTS,
+    WLOGO_HWT_STATE_FADE_IN,
+    WLOGO_HWT_STATE_HOLD,
+    WLOGO_HWT_STATE_FADE_OUT,
+    WLOGO_HWT_STATE_END_WAIT
+};
+
 void task_wlogo_hwt_0(WlogoHwtWork* work) {
     LoadBgPalette(0, gWlogoHwtPalette, 0x20);
     LoadBgTiles(0, gWlogoHwtTiles, 0xC20);
     LoadBgMap(0, gWlogoHwtMap, 0x800);
     work->paletteStep = 0;
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_HWT_STATE_GHOSTS;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
     TaskPoolInit(&sWlogoHwtTaskPool, 4);
@@ -188,7 +205,7 @@ void task_wlogo_hwt_0(WlogoHwtWork* work) {
 
 u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_HWT_STATE_GHOSTS:
         work->timer++;
 
         if (work->timer == 20) {
@@ -207,7 +224,7 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_HWT_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 4) {
@@ -223,7 +240,7 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_HWT_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 119) {
@@ -232,7 +249,7 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_HWT_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -260,7 +277,7 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
         }
 
         break;
-    case 4:
+    case WLOGO_HWT_STATE_END_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -335,6 +352,12 @@ void task_wlogo_hwt_obj_3(WlogoHwtObjWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoWonState {
+    WLOGO_WON_STATE_WAIT,
+    WLOGO_WON_STATE_CARDS,
+    WLOGO_WON_STATE_FADE_OUT
+};
+
 void task_wlogo_won_0(WlogoWonWork* work) {
     s32 i;
 
@@ -357,7 +380,7 @@ void task_wlogo_won_0(WlogoWonWork* work) {
 
     work->timer = 0;
     work->angle = 0;
-    work->state = 0;
+    work->state = WLOGO_WON_STATE_WAIT;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
 }
@@ -366,7 +389,7 @@ u8 task_wlogo_won_1(WlogoWonWork* work) {
     s32 i;
 
     switch (work->state) {
-    case 0:
+    case WLOGO_WON_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 9) {
@@ -375,7 +398,7 @@ u8 task_wlogo_won_1(WlogoWonWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_WON_STATE_CARDS:
         for (i = 0; i < 10; i++) {
             if (work->cardPhases[i] == 0) {
                 if (work->cardTimers[i] > gWlogoWonCards[i].delay) {
@@ -414,7 +437,7 @@ u8 task_wlogo_won_1(WlogoWonWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_WON_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -440,7 +463,7 @@ void task_wlogo_won_2(WlogoWonWork* work) {
     s32 i;
     ObjAffine* affine;
 
-    if (work->state == 1) {
+    if (work->state == WLOGO_WON_STATE_CARDS) {
         for (i = 0; i < 10; i++) {
             affine = AllocObjAffine(work->angle, gWlogoFlipScales[work->scaleIndex[i]], 0x100, 0);
             DrawSprite(work->x[i] >> 8, work->y[i] >> 8, work->gfx[i], work->tiles, work->palette, affine, 0, gWlogoWonCardsAlt[i].priority);
@@ -453,13 +476,20 @@ void task_wlogo_won_3(WlogoWonWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoState {
+    WLOGO_STATE_WAIT,
+    WLOGO_STATE_FADE_IN,
+    WLOGO_STATE_HOLD,
+    WLOGO_STATE_FADE_OUT
+};
+
 void task_wlogo_atl_0(WlogoAtlWork* work) {
     LoadBgPalette(0, gWlogoAtlPalette, 0x20);
     LoadBgTiles(0, gWlogoAtlTiles, 0x900);
     LoadBgMap(0, gWlogoAtlMap, 0x800);
     RequestDma3Copy(gWlogoAtlFishTiles, (u8*)GetBgCharBase(0) + 32, 0x360);
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_STATE_WAIT;
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
@@ -472,7 +502,7 @@ void task_wlogo_atl_0(WlogoAtlWork* work) {
 
 u8 task_wlogo_atl_1(WlogoAtlWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -482,7 +512,7 @@ u8 task_wlogo_atl_1(WlogoAtlWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_STATE_FADE_IN:
         work->waveTimer++;
 
         if (work->waveTimer > 39) {
@@ -512,7 +542,7 @@ u8 task_wlogo_atl_1(WlogoAtlWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 113) {
@@ -522,7 +552,7 @@ u8 task_wlogo_atl_1(WlogoAtlWork* work) {
 
         work->tileFrameTimer++;
         break;
-    case 3:
+    case WLOGO_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -575,7 +605,7 @@ void task_wlogo_nvl_0(WlogoNvlWork* work) {
     LoadBgMap(0, gWlogoNvlMap, 0x800);
     RequestDma3Copy(gWlogoNvlShineTiles, GetBgCharBase(0), 0x340);
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_STATE_WAIT;
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
@@ -586,7 +616,7 @@ void task_wlogo_nvl_0(WlogoNvlWork* work) {
 
 u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -595,7 +625,7 @@ u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 5) {
@@ -611,7 +641,7 @@ u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 113) {
@@ -624,7 +654,7 @@ u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -806,6 +836,14 @@ void task_wlogo_nvl_obj_3(WlogoNvlObjWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoColState {
+    WLOGO_COL_STATE_WAIT,
+    WLOGO_COL_STATE_SPARKLE,
+    WLOGO_COL_STATE_FADE_IN,
+    WLOGO_COL_STATE_HOLD,
+    WLOGO_COL_STATE_FADE_OUT
+};
+
 void task_wlogo_col_0(WlogoColWork* work) {
     LoadBgPalette(0, gWlogoColPalette, 0x20);
     LoadBgTiles(0, gWlogoColBlankTiles, 0x1060);
@@ -816,7 +854,7 @@ void task_wlogo_col_0(WlogoColWork* work) {
     work->x = gWlogoColSparkleAnim0.originX;
     work->y = gWlogoColSparkleAnim0.originY;
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_COL_STATE_WAIT;
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
@@ -829,7 +867,7 @@ void task_wlogo_col_0(WlogoColWork* work) {
 
 u8 task_wlogo_col_1(WlogoColWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_COL_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 9) {
@@ -839,7 +877,7 @@ u8 task_wlogo_col_1(WlogoColWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_COL_STATE_SPARKLE:
         if (AnimIsFinished(&work->anim)) {
             work->visible = 0;
             work->state++;
@@ -848,7 +886,7 @@ u8 task_wlogo_col_1(WlogoColWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_COL_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 1) {
@@ -864,7 +902,7 @@ u8 task_wlogo_col_1(WlogoColWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_COL_STATE_HOLD:
         if (++work->timer > 120) {
             work->timer = 0;
             work->state++;
@@ -882,7 +920,7 @@ u8 task_wlogo_col_1(WlogoColWork* work) {
         }
 
         break;
-    case 4:
+    case WLOGO_COL_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -921,14 +959,14 @@ void task_wlogo_hlw_0(WlogoHlwWork* work) {
     LoadBgTiles(0, gWlogoHlwTiles, 0xC00);
     LoadBgMap(0, gWlogoHlwMap, 0x800);
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_STATE_WAIT;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
 }
 
 u8 task_wlogo_hlw_1(WlogoHlwWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -937,7 +975,7 @@ u8 task_wlogo_hlw_1(WlogoHlwWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 5) {
@@ -953,7 +991,7 @@ u8 task_wlogo_hlw_1(WlogoHlwWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 113) {
@@ -962,7 +1000,7 @@ u8 task_wlogo_hlw_1(WlogoHlwWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -991,6 +1029,15 @@ void task_wlogo_hlw_2(WlogoHlwWork* work) {
 void task_wlogo_hlw_3(WlogoHlwWork* work) {
 }
 
+enum WlogoDilState {
+    WLOGO_DIL_STATE_WAIT,
+    WLOGO_DIL_STATE_FADE_IN,
+    WLOGO_DIL_STATE_LOAD_NAME,
+    WLOGO_DIL_STATE_FADE_IN_NAME,
+    WLOGO_DIL_STATE_HOLD,
+    WLOGO_DIL_STATE_FADE_OUT
+};
+
 void task_wlogo_dil_0(WlogoDilWork* work) {
     LoadBgPalette(0, gWlogoDilPalette, 0x20);
     LoadBgTiles(0, gWlogoDilTiles, 0x17A0);
@@ -1002,14 +1049,14 @@ void task_wlogo_dil_0(WlogoDilWork* work) {
     work->y = 64;
     work->visible = 0;
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_DIL_STATE_WAIT;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
 }
 
 u8 task_wlogo_dil_1(WlogoDilWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_DIL_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -1018,7 +1065,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_DIL_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 2) {
@@ -1035,13 +1082,13 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_DIL_STATE_LOAD_NAME:
         LoadBgMap(0, gWlogoDilNameMap, 0x800);
         work->blend = 0;
         SetBgBlend(0, 16, 0);
         work->state++;
         break;
-    case 3:
+    case WLOGO_DIL_STATE_FADE_IN_NAME:
         work->timer++;
 
         if (work->timer > 2) {
@@ -1059,7 +1106,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
         }
 
         break;
-    case 4:
+    case WLOGO_DIL_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 113) {
@@ -1068,7 +1115,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
         }
 
         break;
-    case 5:
+    case WLOGO_DIL_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -1102,6 +1149,15 @@ void task_wlogo_dil_3(WlogoDilWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoAgrState {
+    WLOGO_AGR_STATE_WAIT,
+    WLOGO_AGR_STATE_FADE_IN_LAMP,
+    WLOGO_AGR_STATE_LOAD_MAP,
+    WLOGO_AGR_STATE_SMOKE,
+    WLOGO_AGR_STATE_FLASHES,
+    WLOGO_AGR_STATE_FADE_OUT
+};
+
 void task_wlogo_agr_0(WlogoAgrWork* work, s32 arg) {
     work->unk_017 = arg;
     LoadBgPalette(0, gWlogoAgrPalette, 0x20);
@@ -1114,7 +1170,7 @@ void task_wlogo_agr_0(WlogoAgrWork* work, s32 arg) {
     work->y = 64;
     work->visible = 0;
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_AGR_STATE_WAIT;
     work->entryIndex = 0;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
@@ -1126,7 +1182,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
     WlogoAgrEntry b;
 
     switch (work->state) {
-    case 0:
+    case WLOGO_AGR_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -1136,7 +1192,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_AGR_STATE_FADE_IN_LAMP:
         work->timer++;
 
         if (work->timer > 1) {
@@ -1153,13 +1209,13 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_AGR_STATE_LOAD_MAP:
         LoadBgMap(0, gWlogoAgrMap, 0x800);
         work->blend = 0;
         SetBgBlend(0, 16, 0);
         work->state++;
         break;
-    case 3:
+    case WLOGO_AGR_STATE_SMOKE:
         if (work->timer == gWlogoAgrEntries[work->entryIndex].time) {
             a.smokeX = gWlogoAgrEntries[work->entryIndex].smokeX;
             a.smokeY = gWlogoAgrEntries[work->entryIndex].smokeY;
@@ -1198,7 +1254,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
 
         work->timer++;
         break;
-    case 4:
+    case WLOGO_AGR_STATE_FLASHES:
         if (work->timer <= 59) {
             if (work->timer % 20 == 0) {
                 b.flashX = gWlogoAgrEntries[work->entryIndex].flashX;
@@ -1255,7 +1311,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         }
 
         break;
-    case 5:
+    case WLOGO_AGR_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -1383,6 +1439,15 @@ void task_wlogo_agr_flash1_3(WlogoAgrFlashWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoTvtState {
+    WLOGO_TVT_STATE_WAIT,
+    WLOGO_TVT_STATE_FADE_IN,
+    WLOGO_TVT_STATE_LIGHTS,
+    WLOGO_TVT_STATE_NAME,
+    WLOGO_TVT_STATE_HOLD,
+    WLOGO_TVT_STATE_FADE_OUT
+};
+
 void task_wlogo_tvt_0(WlogoTvtWork* work) {
     LoadBgPalette(0, gWlogoTvtPalette, 0x20);
     LoadBgTiles(0, gWlogoTvtSignTiles, 0xC00);
@@ -1393,7 +1458,7 @@ void task_wlogo_tvt_0(WlogoTvtWork* work) {
     work->x = 64;
     work->y = 64;
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_TVT_STATE_WAIT;
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
@@ -1406,14 +1471,14 @@ void task_wlogo_tvt_0(WlogoTvtWork* work) {
 
 u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_TVT_STATE_WAIT:
         if (++work->timer > 29) {
             work->timer = 0;
             work->state++;
         }
 
         break;
-    case 1:
+    case WLOGO_TVT_STATE_FADE_IN:
         if (++work->tileFrameTimer > 44) {
             work->tileFrameTimer = 0;
             work->tileFrame = 1 - work->tileFrame;
@@ -1433,7 +1498,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_TVT_STATE_LIGHTS:
         if (++work->tileFrameTimer > 44) {
             work->tileFrameTimer = 0;
             work->tileFrame = 1 - work->tileFrame;
@@ -1447,7 +1512,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_TVT_STATE_NAME:
         if (++work->tileFrameTimer > 44) {
             work->tileFrameTimer = 0;
             work->tileFrame = 1 - work->tileFrame;
@@ -1465,7 +1530,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
         }
 
         break;
-    case 4:
+    case WLOGO_TVT_STATE_HOLD:
         if (++work->tileFrameTimer > 44) {
             work->tileFrameTimer = 0;
             work->tileFrame = 5 - work->tileFrame;
@@ -1479,7 +1544,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
         }
 
         break;
-    case 5:
+    case WLOGO_TVT_STATE_FADE_OUT:
         if (++work->tileFrameTimer > 44) {
             work->tileFrameTimer = 0;
             work->tileFrame = 5 - work->tileFrame;
@@ -1522,7 +1587,7 @@ void task_wlogo_poo_0(WlogoPooWork* work) {
     LoadBgTiles(0, gWlogoPooTiles, 0xA20);
     LoadBgMap(0, gWlogoPooMap, 0x800);
     work->timer = 0;
-    work->state = 0;
+    work->state = WLOGO_STATE_WAIT;
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
@@ -1532,7 +1597,7 @@ void task_wlogo_poo_0(WlogoPooWork* work) {
 
 u8 task_wlogo_poo_1(WlogoPooWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -1541,7 +1606,7 @@ u8 task_wlogo_poo_1(WlogoPooWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 5) {
@@ -1561,7 +1626,7 @@ u8 task_wlogo_poo_1(WlogoPooWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 113) {
@@ -1570,7 +1635,7 @@ u8 task_wlogo_poo_1(WlogoPooWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -1661,6 +1726,23 @@ void task_wlogo_poo_obj_3(WlogoPooObjWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoTtState {
+    WLOGO_TT_STATE_WAIT,
+    WLOGO_TT_STATE_FADE_IN,
+    WLOGO_TT_STATE_SKEW,
+    WLOGO_TT_STATE_FIRST_GLOW,
+    WLOGO_TT_STATE_FIRST_STRETCH,
+    WLOGO_TT_STATE_SECOND_GLOW,
+    WLOGO_TT_STATE_SECOND_STRETCH,
+    WLOGO_TT_STATE_BG_OUT,
+    WLOGO_TT_STATE_PALETTE_UP,
+    WLOGO_TT_STATE_LOAD_NAME,
+    WLOGO_TT_STATE_GLOW_END,
+    WLOGO_TT_STATE_PALETTE_DOWN,
+    WLOGO_TT_STATE_HOLD,
+    WLOGO_TT_STATE_FADE_OUT
+};
+
 void task_wlogo_tt_0(WlogoTtWork* work) {
     s32 i;
 
@@ -1670,7 +1752,7 @@ void task_wlogo_tt_0(WlogoTtWork* work) {
     LoadPalette(gWlogoTtPalettes[15], (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 0x20);
     work->timer = 0;
     work->subStep = 0;
-    work->state = 0;
+    work->state = WLOGO_TT_STATE_WAIT;
     work->blend = 0;
     work->paletteStep = 0;
     work->scaleX = 51;
@@ -1715,7 +1797,7 @@ void task_wlogo_tt_0(WlogoTtWork* work) {
 
 u8 task_wlogo_tt_1(WlogoTtWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_TT_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -1724,7 +1806,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_TT_STATE_FADE_IN:
         work->timer++;
 
         if (work->timer > 3) {
@@ -1740,7 +1822,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 2:
+    case WLOGO_TT_STATE_SKEW:
         gWlogoTtSkew += work->scrollSpeed;
         work->scrollSpeed = work->scrollSpeed;
 
@@ -1751,7 +1833,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 3:
+    case WLOGO_TT_STATE_FIRST_GLOW:
         work->gfx3 = AnimUpdate(&work->anim[2]);
 
         if (work->timer > 13) {
@@ -1765,7 +1847,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 4:
+    case WLOGO_TT_STATE_FIRST_STRETCH:
         if (work->timer > 10) {
             work->timer = 0;
             work->subStep++;
@@ -1790,7 +1872,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 5:
+    case WLOGO_TT_STATE_SECOND_GLOW:
         work->gfx4 = AnimUpdate(&work->anim[3]);
 
         if (work->timer > 13) {
@@ -1804,7 +1886,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 6:
+    case WLOGO_TT_STATE_SECOND_STRETCH:
         if (work->timer > 13) {
             work->timer = 0;
             work->subStep++;
@@ -1833,7 +1915,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 7:
+    case WLOGO_TT_STATE_BG_OUT:
         if (work->blend != 0) {
             work->blend--;
 
@@ -1861,7 +1943,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         work->gfx5 = AnimUpdate(&work->anim[4]);
         work->gfx6 = AnimUpdate(&work->anim[5]);
         break;
-    case 8:
+    case WLOGO_TT_STATE_PALETTE_UP:
         if (work->subStep > 1) {
             work->subStep = 0;
             work->paletteStep++;
@@ -1878,7 +1960,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         work->gfx5 = AnimUpdate(&work->anim[4]);
         work->gfx6 = AnimUpdate(&work->anim[5]);
         break;
-    case 9:
+    case WLOGO_TT_STATE_LOAD_NAME:
         work->visible[6] = 0;
         LoadBgMap(0, gWlogoTtMap, 0x800);
         LoadPalette(gWlogoTtPalettes[8], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
@@ -1891,7 +1973,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         work->gfx6 = AnimUpdate(&work->anim[5]);
         work->state++;
         break;
-    case 10:
+    case WLOGO_TT_STATE_GLOW_END:
         if (AnimIsFinished(&work->anim[4])) {
             work->visible[4] = 0;
             work->visible[5] = 0;
@@ -1905,7 +1987,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 11:
+    case WLOGO_TT_STATE_PALETTE_DOWN:
         if (work->paletteStep == 4) {
             work->timer = 0;
             work->state++;
@@ -1918,7 +2000,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 12:
+    case WLOGO_TT_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 113) {
@@ -1927,7 +2009,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         }
 
         break;
-    case 13:
+    case WLOGO_TT_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -2055,10 +2137,15 @@ void task_wlogo_tt_obj_3(WlogoTtObjWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
+enum WlogoTtLineState {
+    WLOGO_TT_LINE_STATE_SPAWN,
+    WLOGO_TT_LINE_STATE_WAIT
+};
+
 void task_wlogo_tt_line_0(WlogoTtLineWork* work) {
     work->timer = 0;
     work->index = 0;
-    work->state = 0;
+    work->state = WLOGO_TT_LINE_STATE_SPAWN;
     TaskPoolInit(&work->tasks, 33);
 }
 
@@ -2066,7 +2153,7 @@ u8 task_wlogo_tt_line_1(WlogoTtLineWork* work) {
     WlogoTtObjArg arg;
 
     switch (work->state) {
-    case 0:
+    case WLOGO_TT_LINE_STATE_SPAWN:
         if (work->timer == gWlogoTtLinePoints[work->index][2]) {
             work->timer = 0;
             arg.x = gWlogoTtLinePoints[work->index][0] << 8;
@@ -2082,7 +2169,7 @@ u8 task_wlogo_tt_line_1(WlogoTtLineWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_TT_LINE_STATE_WAIT:
         if (work->timer > 29) {
             work->state++;
         }
@@ -2105,13 +2192,22 @@ void task_wlogo_tt_line_3(WlogoTtLineWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum WlogoBksState {
+    WLOGO_BKS_STATE_WAIT,
+    WLOGO_BKS_STATE_LETTERS,
+    WLOGO_BKS_STATE_SHOW_NAME,
+    WLOGO_BKS_STATE_NAME,
+    WLOGO_BKS_STATE_HOLD,
+    WLOGO_BKS_STATE_FADE_OUT
+};
+
 void task_wlogo_bks_0(WlogoBksWork* work) {
     LoadBgPalette(0, gWlogoBksPalette, 0x20);
     LoadBgTiles(0, gWlogoBksTiles, 0xD80);
     LoadBgMap(0, gWlogoBksCastleMap, 0x800);
     work->timer = 0;
     work->paletteStep = 0;
-    work->state = 0;
+    work->state = WLOGO_BKS_STATE_WAIT;
     work->blend = 0;
     work->tileFrame = 0;
     work->tileFrameTimer = 0;
@@ -2134,7 +2230,7 @@ void task_wlogo_bks_0(WlogoBksWork* work) {
 
 u8 task_wlogo_bks_1(WlogoBksWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_BKS_STATE_WAIT:
         work->timer++;
 
         if (work->timer > 29) {
@@ -2144,7 +2240,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_BKS_STATE_LETTERS:
         work->timer++;
 
         if (work->timer > 5) {
@@ -2210,14 +2306,14 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
 
         work->frameCount++;
         break;
-    case 2:
+    case WLOGO_BKS_STATE_SHOW_NAME:
         work->visible = 1;
         StopBgWave(0);
         work->paletteStep = 1;
         work->timer = 0;
         work->state++;
         break;
-    case 3:
+    case WLOGO_BKS_STATE_NAME:
         if (work->paletteStep <= 6) {
             if (++work->timer >= gWlogoBksPaletteDurations[work->paletteStep]) {
                 work->timer = 0;
@@ -2238,7 +2334,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
         }
 
         break;
-    case 4:
+    case WLOGO_BKS_STATE_HOLD:
         work->timer++;
 
         if (work->timer > 113) {
@@ -2247,7 +2343,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
         }
 
         break;
-    case 5:
+    case WLOGO_BKS_STATE_FADE_OUT:
         work->timer++;
 
         if (work->timer > 4) {
@@ -2291,6 +2387,11 @@ void WlogoBksHBlankIntr() {
     HBlankIntrBgWave1(0);
 }
 
+enum WlogoBksObjState {
+    WLOGO_BKS_OBJ_STATE_MOVE,
+    WLOGO_BKS_OBJ_STATE_HOLD
+};
+
 void task_wlogo_bks_obj_0(WlogoBksObjWork* work, s32 arg) {
     work->id = arg;
     work->x = gWlogoBksObjStarts[work->id][0] << 8;
@@ -2301,7 +2402,7 @@ void task_wlogo_bks_obj_0(WlogoBksObjWork* work, s32 arg) {
     work->scaleY = 0x100;
     work->holdTimer = 0;
     work->moveTimer = 30;
-    work->state = 0;
+    work->state = WLOGO_BKS_OBJ_STATE_MOVE;
     work->scaleIndex = 10;
     work->tiles = LoadObjTiles(gWlogoBksNameTiles, 0x800);
     work->palette = LoadObjPalette(gWlogoBksPalette, 0x20);
@@ -2312,7 +2413,7 @@ void task_wlogo_bks_obj_0(WlogoBksObjWork* work, s32 arg) {
 
 u8 task_wlogo_bks_obj_1(WlogoBksObjWork* work) {
     switch (work->state) {
-    case 0:
+    case WLOGO_BKS_OBJ_STATE_MOVE:
         if (work->moveTimer > 0) {
             ApproachValue(&work->x, work->targetX, work->moveTimer);
             ApproachValue(&work->y, work->targetY, work->moveTimer);
@@ -2330,7 +2431,7 @@ u8 task_wlogo_bks_obj_1(WlogoBksObjWork* work) {
         }
 
         break;
-    case 1:
+    case WLOGO_BKS_OBJ_STATE_HOLD:
         if (work->holdTimer >= gWlogoBksObjHoldTimes[work->id]) {
             return 0;
         }

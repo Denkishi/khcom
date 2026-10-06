@@ -1818,14 +1818,14 @@ void task_bos_jf_rock_2(JfRockWork* work) {
                 flags = GetBattleSpritePriorityFlags(work->body.y);
                 prio = 0xFD00;
             } else {
-                flags = 0x400;
+                flags = SPRITE_PRIORITY(1);
                 prio = 0xFFF5;
             }
         } else if (work->body.x > 0x1B200) {
             flags = GetBattleSpritePriorityFlags(work->body.y);
             prio = 0xFD00;
         } else {
-            flags = 0x400;
+            flags = SPRITE_PRIORITY(1);
             prio = 0xFFF5;
         }
 
@@ -1835,9 +1835,9 @@ void task_bos_jf_rock_2(JfRockWork* work) {
 
     if (work->visible2 == TRUE) {
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
-            flags = 0x400;
+            flags = SPRITE_PRIORITY(1);
         } else {
-            flags = 0x400;
+            flags = SPRITE_PRIORITY(1);
             flags |= 1;
         }
 

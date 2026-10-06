@@ -179,7 +179,7 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* spawn) {
     if (!BgFxIsActive()) {
         gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         SetBlendAlpha(4, 14);
-        attr = 0x804;
+        attr = SPRITE_PRIORITY(2) | SPRITE_FLAG_BLEND;
     } else {
         attr = GetBattleSpritePriorityFlags(act->y);
     }

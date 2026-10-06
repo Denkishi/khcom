@@ -361,7 +361,7 @@ void HCEffectName_2(HcEffectNameWork* work) {
     s32 pri;
 
     if (work->visible == 1) {
-        pri = 0x410;
+        pri = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
         DrawSprite(work->x, 0x90, NULL, work->tiles2, work->palette, NULL, pri, 10);
         DrawSprite(work->x, 0x8A, gBtlExpNextFrames[15], work->tiles, work->palette, NULL, pri, 10);
         DrawSprite(work->x + 8, 0x8A, gBtlExpNextFrames[work->countTens + 4], work->tiles, work->palette, NULL, pri, 10);

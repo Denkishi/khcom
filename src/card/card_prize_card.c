@@ -292,7 +292,7 @@ static void PrizeCard_2(PrizeCardWork* work) {
     pal = 0;
 
     if (collected == 0) {
-        pal = 0x800;
+        pal = SPRITE_PRIORITY(2);
     }
 
     if (work->scaleX == Q_8_8(1) && work->rotation == 0) {

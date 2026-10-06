@@ -126,7 +126,7 @@ void task_bos_dsd_ita_2(DsdItaWork* work) {
     s16 y;
 
     if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
-        flags = 0x800;
+        flags = SPRITE_PRIORITY(2);
         prio = -4100 - ((work->y - 0x4000) >> 8) * 4;
     } else {
         flags = GetBattleSpritePriorityFlags(work->y);
@@ -302,11 +302,11 @@ void task_bos_dsd_rock_2(DsdRockWork* work) {
     if (work->front != 0) {
         affine = NULL;
         priority = 10;
-        flags = 0x400;
+        flags = SPRITE_PRIORITY(1);
     } else {
         affine = AllocObjAffine(0, Q_8_8(0.35), Q_8_8(0.35), 0);
         priority = 0xFFF5;
-        flags = 0xC00;
+        flags = SPRITE_PRIORITY(3);
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);

@@ -688,7 +688,7 @@ void HumDraw(HumWork* work) {
     s16 idx;
 
     if (work->flags & HUM_FLAG_BEHIND_BG_FX) {
-        attr = 0x800;
+        attr = SPRITE_PRIORITY(2);
     } else {
         attr = GetBattleSpritePriorityFlags(actor->y);
     }

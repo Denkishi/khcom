@@ -595,7 +595,7 @@ void WorldInspectDraw() {
                       SPRITE_PRIORITY(3), 3001);
     }
 
-    prio = 0x400;
+    prio = SPRITE_PRIORITY(1);
 
     if (sWorldInspectDetailOpen == 1) {
         prio |= 4;

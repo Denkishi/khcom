@@ -187,7 +187,7 @@ void task_allmap_room_2(AllmapRoomWork* work) {
     if (!work->asSprite) {
         x = work->x * 24 - gAllmapCameraX;
         y = work->y * 24 - gAllmapCameraY;
-        flags = 0x800;
+        flags = SPRITE_PRIORITY(2);
         priority = -4100 - work->y * 4;
     } else {
         if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {

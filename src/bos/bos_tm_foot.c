@@ -745,10 +745,10 @@ void task_bos_tm_foot_2(TmFootWork* work) {
     u16 flags;
 
     facingLeft = work->tm->flags & TM_FLAG_FACING_LEFT;
-    flags = 0x801;
+    flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
 
     if (facingLeft != 0) {
-        flags = 0x800;
+        flags = SPRITE_PRIORITY(2);
     }
 
     if (gBtlWork->paused) {

@@ -5439,10 +5439,10 @@ void task_poo_eeyoretail_2(PooEeyoreTailWork* work) {
         }
 
         if (IsPooEeyoreTailLanded()) {
-            flags = 0x800;
+            flags = SPRITE_PRIORITY(2);
             z = 0xFFEF;
         } else {
-            flags = 0x400;
+            flags = SPRITE_PRIORITY(1);
             z = 10;
         }
 
@@ -6762,7 +6762,7 @@ void task_poo_mapobjhit_2(PooMapObjHitWork* work) {
             work->palette = LoadObjPalette(work->desc->palette, 0x20);
         }
 
-        flags = 0x800;
+        flags = SPRITE_PRIORITY(2);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, 0xFFF1);
         SetPooRabbitTalkBlocked(TRUE);
     }

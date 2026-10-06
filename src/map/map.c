@@ -5101,7 +5101,7 @@ void Task_MapDoor_2(MapDoorWork* work) {
             break;
         }
 
-        drawFlags = 0x800;
+        drawFlags = SPRITE_PRIORITY(2);
         DrawSprite(sx, sy, NULL, work->tiles, work->palette, NULL, drawFlags, priority);
 
         if (door->flags & DOOR_FLAG_EVENT) {

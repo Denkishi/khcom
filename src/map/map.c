@@ -6101,24 +6101,16 @@ void MapSaveLoadFloorTiles(u8 floor) {
 void MapSaveLoadLevelTiles(u16 level) {
     u16 digits[4];
     s32 off;
-    u16* digit;
     s32 i;
 
     digits[0] = level / 100;
     digits[1] = level / 10 - digits[0] * 10;
     digits[2] = level - digits[0] * 100 - digits[1] * 10;
     off = 0x40;
-    digit = &digits[1];
 
-    for (i = 0; i < 2; i++) {
-        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*digit * 32], (u8*)GetBgCharBase(0) + off, 0x20);
-
-        // fakematch
-        do {
-            off += 0x20;
-        } while (0);
-
-        digit++;
+    for (i = 1; i < 3; i++) {
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[digits[i] * 32], (u8*)GetBgCharBase(0) + off, 0x20);
+        off += 0x20;
     }
 }
 

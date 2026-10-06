@@ -98,56 +98,56 @@ void FldRikuSetAngleFromDpad(FldActor* act) {
 }
 
 u8 FldRikuCheckBlocked(FldPos* pos) {
-    FldPos a;
-    FldPos b;
+    FldPos up;
+    FldPos down;
     s32 lo;
     s32 hi;
-    s32 v;
+    s32 ground;
 
-    a = *pos;
-    b = *pos;
-    a.y -= 0x600;
-    b.y += 0x600;
+    up = *pos;
+    down = *pos;
+    up.y -= 0x600;
+    down.y += 0x600;
 
-    lo = GetFldPosGround(&a);
+    lo = GetFldPosGround(&up);
 
-    if (lo > a.ground) {
-        a.ground = lo;
+    if (lo > up.ground) {
+        up.ground = lo;
     }
 
-    hi = GetFldPosGround(&b);
+    hi = GetFldPosGround(&down);
 
-    if (hi > b.ground) {
-        b.ground = hi;
+    if (hi > down.ground) {
+        down.ground = hi;
     }
 
-    if (IsFldPosBlocked(&a) != 0 || IsFldPosBlocked(&b) != 0) {
+    if (IsFldPosBlocked(&up) != 0 || IsFldPosBlocked(&down) != 0) {
         return 1;
     }
 
-    v = hi;
+    ground = hi;
 
-    if (v > lo) {
-        v = lo;
+    if (ground > lo) {
+        ground = lo;
     }
 
-    pos->ground = v;
+    pos->ground = ground;
     return 0;
 }
 
 s32 FldRikuProbeGround(FldPos* pos) {
-    FldPos a;
-    FldPos b;
+    FldPos up;
+    FldPos down;
     s32 lo;
     s32 hi;
 
-    a = *pos;
-    b = *pos;
-    a.y -= 0x600;
-    b.y += 0x600;
+    up = *pos;
+    down = *pos;
+    up.y -= 0x600;
+    down.y += 0x600;
 
-    lo = GetFldPosGround(&a);
-    hi = GetFldPosGround(&b);
+    lo = GetFldPosGround(&up);
+    hi = GetFldPosGround(&down);
 
     if (hi > lo) {
         hi = lo;
@@ -157,28 +157,28 @@ s32 FldRikuProbeGround(FldPos* pos) {
 }
 
 u8 FldRikuCheckClimb(FldPos* pos, FldWork* work) {
-    FldPos a;
-    FldPos b;
+    FldPos up;
+    FldPos down;
     u8 hit;
 
-    a = *pos;
-    b = *pos;
-    a.y -= 0x600;
-    b.y += 0x600;
+    up = *pos;
+    down = *pos;
+    up.y -= 0x600;
+    down.y += 0x600;
 
-    hit = GetFldPosClimbDir(&a);
+    hit = GetFldPosClimbDir(&up);
 
     if (hit != 0) {
-        work->targetX = a.x;
-        work->targetY = a.y;
+        work->targetX = up.x;
+        work->targetY = up.y;
         return hit;
     }
 
-    hit = GetFldPosClimbDir(&b);
+    hit = GetFldPosClimbDir(&down);
 
     if (hit != 0) {
-        work->targetX = b.x;
-        work->targetY = b.y;
+        work->targetX = down.x;
+        work->targetY = down.y;
         return hit;
     }
 
@@ -186,13 +186,13 @@ u8 FldRikuCheckClimb(FldPos* pos, FldWork* work) {
 }
 
 u8 FldRikuCheckDoorAhead(FldActor* act) {
-    FldPos v;
+    FldPos ahead;
 
-    v = act->fieldPosition;
-    v.x += gSineTable[act->angle] * 8;
-    v.y -= gSineTable[act->angle + 64] * 8;
+    ahead = act->fieldPosition;
+    ahead.x += gSineTable[act->angle] * 8;
+    ahead.y -= gSineTable[act->angle + 64] * 8;
 
-    if (MapFindOpenDoor(&v)) {
+    if (MapFindOpenDoor(&ahead)) {
         return 1;
     }
 
@@ -201,24 +201,24 @@ u8 FldRikuCheckDoorAhead(FldActor* act) {
 
 s32 FldRikuGetGround(FldWork* work) {
     FldActor* act;
-    s32 v;
+    s32 ground;
 
     act = &gFieldState->actor;
 
     if (work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
         if (act->fieldPosition.ground < work->collider.platformZ) {
-            v = act->fieldPosition.ground;
+            ground = act->fieldPosition.ground;
         } else {
-            v = work->collider.platformZ;
+            ground = work->collider.platformZ;
         }
 
         work->onCollider = 1;
     } else {
         work->onCollider = 0;
-        v = act->fieldPosition.ground;
+        ground = act->fieldPosition.ground;
     }
 
-    return v;
+    return ground;
 }
 
 void FldRikuTurn(FldActor* act) {
@@ -373,7 +373,7 @@ void task_fld_riku_0(FldWork* work) {
 
 u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
     FldActor* act;
-    s16* p;
+    s16* timer;
     s32 flags;
 
     act = &gFieldState->actor;
@@ -394,9 +394,9 @@ u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
         SetTaskUpdate(task, (TaskUpdateFunc)task_fld_riku_1);
         TaskPoolUpdate(&work->tasks);
     } else {
-        p = &work->timer;
+        timer = &work->timer;
 
-        if (*p == 0) {
+        if (*timer == 0) {
             FadeSetPaletteExcluded(work->palette->index + 16, 1);
             act->speed = 0;
             work->onCollider = 0;
@@ -405,7 +405,7 @@ u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
         TaskPoolUpdate(&work->tasks);
         work->gfx = AnimUpdate(&work->anim);
         ColliderSetPosition(&work->collider, act->fieldPosition.x, act->fieldPosition.y, act->fieldPosition.z);
-        (*p)++;
+        (*timer)++;
     }
 
     return 1;
@@ -473,17 +473,17 @@ u8 FldRikuGmkJump(FldWork* work, void* task) {
 }
 
 u8 FldRikuJump(FldWork* work, void* task) {
-    FldPos p1;
-    FldPos p2;
+    FldPos overLedge;
+    FldPos underLedge;
     s32 sx;
     s32 sy;
     s32 nx;
     s32 ny;
-    s32 z;
+    s32 ground;
     FldActor* act;
 
     act = &gFieldState->actor;
-    z = FldRikuGetGround(work);
+    ground = FldRikuGetGround(work);
     sx = act->fieldPosition.x;
     sy = act->fieldPosition.y;
     gFieldState->lockonTarget = NULL;
@@ -506,8 +506,8 @@ u8 FldRikuJump(FldWork* work, void* task) {
             act->fieldPosition.z += work->vz;
             work->vz += 66;
 
-            if (act->fieldPosition.z > z) {
-                act->fieldPosition.z = z;
+            if (act->fieldPosition.z > ground) {
+                act->fieldPosition.z = ground;
                 work->vz = 0;
             }
         } else {
@@ -667,8 +667,8 @@ u8 FldRikuJump(FldWork* work, void* task) {
         if ((GetKeysPressed() & A_BUTTON) != 0) {
             work->timer = 0;
             work->state = FLD_STATE_AIR_ATTACK;
-        } else if (act->fieldPosition.z > z) {
-            act->fieldPosition.z = z;
+        } else if (act->fieldPosition.z > ground) {
+            act->fieldPosition.z = ground;
             work->vz = 0;
 
             if (work->state != FLD_STATE_LAND) {
@@ -739,13 +739,13 @@ u8 FldRikuJump(FldWork* work, void* task) {
             break;
         default:
             if (work->state == FLD_STATE_FALL && act->fieldPosition.ground - act->fieldPosition.z > 0xFFF) {
-                p1 = act->fieldPosition;
-                p1.y -= 0x400;
-                p1.z = act->fieldPosition.z - 0x3000;
-                p2 = p1;
-                p2.z += 768;
+                overLedge = act->fieldPosition;
+                overLedge.y -= 0x400;
+                overLedge.z = act->fieldPosition.z - 0x3000;
+                underLedge = overLedge;
+                underLedge.z += 768;
 
-                if (!FldRikuCheckBlocked(&p1) && FldRikuCheckBlocked(&p2)) {
+                if (!FldRikuCheckBlocked(&overLedge) && FldRikuCheckBlocked(&underLedge)) {
                     work->timer = 0;
                     work->state = FLD_STATE_LEDGE_CATCH;
                     gFieldState->lockonTarget = NULL;
@@ -774,11 +774,11 @@ u8 FldRikuJump(FldWork* work, void* task) {
 
 u8 FldRikuClimb(FldWork* work, void* task) {
     FldActor* act;
-    FldPos p;
+    FldPos probe;
     s32 x;
     s32 y;
     s32 limit;
-    s32 d;
+    s32 dz;
     s32 ny;
     s32 nx;
     s32 tx;
@@ -822,25 +822,25 @@ u8 FldRikuClimb(FldWork* work, void* task) {
             }
         }
 
-        d = (((work->targetZ >> 12) << 12) - act->fieldPosition.z) >> 1;
+        dz = (((work->targetZ >> 12) << 12) - act->fieldPosition.z) >> 1;
 
-        if (abs(d) <= 24) {
-            d = 0;
-        } else if (d > 384) {
-            d = 384;
-        } else if (d < -384) {
-            d = -384;
+        if (abs(dz) <= 24) {
+            dz = 0;
+        } else if (dz > 384) {
+            dz = 384;
+        } else if (dz < -384) {
+            dz = -384;
         }
 
-        act->fieldPosition.z += d;
+        act->fieldPosition.z += dz;
 
-        if (d < 0) {
+        if (dz < 0) {
             act->fieldPosition.x += gSineTable[act->angle];
             act->fieldPosition.y -= gSineTable[act->angle + 64];
-            p = act->fieldPosition;
-            p.z = work->targetZ - 0x2800;
+            probe = act->fieldPosition;
+            probe.z = work->targetZ - 0x2800;
 
-            if (!FldRikuCheckBlocked(&p)) {
+            if (!FldRikuCheckBlocked(&probe)) {
                 act->speed = 204;
                 work->vz = -0x580;
                 work->flags |= FLD_FLAG_NO_AIR_TURN;
@@ -848,7 +848,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
                 work->timer = 0;
                 m4aSongNumStart(work->sounds[6]);
             }
-        } else if (d > 0) {
+        } else if (dz > 0) {
             if (act->fieldPosition.z >= limit) {
                 act->fieldPosition.z = limit;
                 act->angle += 0x80;
@@ -860,7 +860,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
                 work->timer = 0;
                 SetTaskUpdate(task, (TaskUpdateFunc)task_fld_riku_1);
             }
-        } else if (d == 0) {
+        } else if (dz == 0) {
             if ((GetKeysHeld() & DPAD_UP) || ((GetKeysHeld() & DPAD_LEFT) && act->angle == 0xD3) ||
                 ((GetKeysHeld() & DPAD_RIGHT) && act->angle == 0x2D)) {
                 work->targetZ = ((work->targetZ >> 12) - 1) << 12;
@@ -950,13 +950,13 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
 
 u8 FldRikuHangLedge(FldWork* work, void* task) {
     FldActor* act;
-    FldPos p;
-    u8 ret;
+    FldPos probe;
+    u8 handled;
     s32 x;
     s32 y;
 
     act = &gFieldState->actor;
-    ret = 0;
+    handled = 0;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
     gFieldState->lockonTarget = NULL;
@@ -964,22 +964,22 @@ u8 FldRikuHangLedge(FldWork* work, void* task) {
     switch (work->state) {
     case FLD_STATE_LEDGE_CATCH:
         if (work->timer == 0) {
-            p = act->fieldPosition;
-            p.y -= 0xA00;
-            act->fieldPosition.z = GetFldPosGround(&p) + 0x2B00;
+            probe = act->fieldPosition;
+            probe.y -= 0xA00;
+            act->fieldPosition.z = GetFldPosGround(&probe) + 0x2B00;
             m4aSongNumStart(SONG_SYS_SR_CATCH);
             act->angle = GetLedgeAngleAt(act->fieldPosition.x, act->fieldPosition.y, act->fieldPosition.z);
             FldRikuSetAnim(work, 9, 0);
         }
 
         if (work->timer > 15) {
-            ret = FldRikuLedgeInput(work, task);
+            handled = FldRikuLedgeInput(work, task);
         }
 
         act->fieldPosition.x += gSineTable[act->angle];
         act->fieldPosition.y -= gSineTable[act->angle + 64];
 
-        if (AnimIsFinished(&work->anim) && !ret) {
+        if (AnimIsFinished(&work->anim) && !handled) {
             work->state = FLD_STATE_LEDGE_HANG;
         } else {
             work->timer++;
@@ -1412,20 +1412,20 @@ u8 FldRikuAttack(FldWork* work, void* task) {
 }
 
 u8 task_fld_riku_1(FldWork* work, void* task) {
-    FldPos p1;
-    FldPos p2;
-    FldPos p3;
-    FldPos p4;
+    FldPos probeA;
+    FldPos probeB;
+    FldPos slideB;
+    FldPos slideA;
     s32 sx;
     s32 sy;
     s32 dx;
     s32 dy;
     s32 dz;
     s32 dw;
-    s32 z;
-    s32 r;
-    u8 a;
-    u8 b;
+    s32 ground;
+    s32 climbDir;
+    u8 blockedA;
+    u8 blockedB;
     FldActor* act;
 
     act = &gFieldState->actor;
@@ -1557,10 +1557,10 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
         if (FldRikuCheckBlocked(&act->fieldPosition)) {
             act->fieldPosition.x = sx;
             act->fieldPosition.y = sy;
-            r = FldRikuCheckClimb(&act->fieldPosition, work);
+            climbDir = FldRikuCheckClimb(&act->fieldPosition, work);
 
-            if (r != 0) {
-                switch (r) {
+            if (climbDir != 0) {
+                switch (climbDir) {
                 case 2:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
@@ -1640,34 +1640,34 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                     break;
                 }
 
-                p2 = act->fieldPosition;
-                p1 = p2;
-                p1.x += dx;
-                p1.y += dy;
-                p2.x += dz;
-                p2.y += dw;
-                a = FldRikuCheckBlocked(&p1);
-                b = FldRikuCheckBlocked(&p2);
+                probeB = act->fieldPosition;
+                probeA = probeB;
+                probeA.x += dx;
+                probeA.y += dy;
+                probeB.x += dz;
+                probeB.y += dw;
+                blockedA = FldRikuCheckBlocked(&probeA);
+                blockedB = FldRikuCheckBlocked(&probeB);
 
-                if (a) {
-                    if (!b) {
-                        p3 = act->fieldPosition;
-                        p3.x += dz;
-                        p3.y += dw;
-                        p3.ground = FldRikuProbeGround(&p3);
+                if (blockedA) {
+                    if (!blockedB) {
+                        slideB = act->fieldPosition;
+                        slideB.x += dz;
+                        slideB.y += dw;
+                        slideB.ground = FldRikuProbeGround(&slideB);
 
-                        if (p3.ground >= p3.z) {
-                            act->fieldPosition = p3;
+                        if (slideB.ground >= slideB.z) {
+                            act->fieldPosition = slideB;
                         }
                     }
-                } else if (b) {
-                    p4 = act->fieldPosition;
-                    p4.x += dx;
-                    p4.y += dy;
-                    p4.ground = FldRikuProbeGround(&p4);
+                } else if (blockedB) {
+                    slideA = act->fieldPosition;
+                    slideA.x += dx;
+                    slideA.y += dy;
+                    slideA.ground = FldRikuProbeGround(&slideA);
 
-                    if (p4.ground >= p4.z) {
-                        act->fieldPosition = p4;
+                    if (slideA.ground >= slideA.z) {
+                        act->fieldPosition = slideA;
                     }
                 }
 
@@ -1675,11 +1675,11 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             }
         }
 
-        z = FldRikuGetGround(work);
+        ground = FldRikuGetGround(work);
 
         if (act->fieldPosition.ground == 0x100000) {
             act->fieldPosition.ground = act->fieldPosition.z;
-        } else if (z != act->fieldPosition.z) {
+        } else if (ground != act->fieldPosition.z) {
             act->speed >>= 2;
             work->vz = 0;
             work->timer = 0;
@@ -1687,7 +1687,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
             work->state = FLD_STATE_FALL;
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
-        } else if (z != act->fieldPosition.ground) {
+        } else if (ground != act->fieldPosition.ground) {
             gFieldState->lockonTarget = NULL;
         }
     }

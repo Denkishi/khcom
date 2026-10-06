@@ -18,12 +18,12 @@
 #include <stddef.h>
 
 void Task_MapDmg_0(MapDmgWork* work) {
-    s32 z = 0;
+    s32 zero = 0;
 
-    work->visible = z;
+    work->visible = zero;
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     work->tiles = LoadObjTiles(gBtlAreaTiles, 224);
-    work->timer = z;
+    work->timer = zero;
     work->enabled = 1;
 }
 

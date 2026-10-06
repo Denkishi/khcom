@@ -46,7 +46,7 @@ void MapNamineWaitMessage(MapNamineWork* work) {
 }
 
 void Task_MapNamine_0(MapNamineWork* work) {
-    FldObj* p = &work->obj;
+    FldObj* obj = &work->obj;
 
     switch (gMapFloorState.progress) {
     case 27:
@@ -63,18 +63,18 @@ void Task_MapNamine_0(MapNamineWork* work) {
     case 25:
     case 26:
     default:
-        p->fieldPosition.x = 0x15200;
-        p->fieldPosition.y = 0xF800;
+        obj->fieldPosition.x = 0x15200;
+        obj->fieldPosition.y = 0xF800;
         work->spriteFlags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
         break;
     }
 
-    p->fieldPosition.z = 0;
-    p->fieldPosition.z = p->fieldPosition.ground = GetFldPosFloor(&p->fieldPosition);
-    p->fieldPosition.y -= p->fieldPosition.ground;
-    p->angle = 173;
-    p->height = 48;
-    p->kind = 2;
+    obj->fieldPosition.z = 0;
+    obj->fieldPosition.z = obj->fieldPosition.ground = GetFldPosFloor(&obj->fieldPosition);
+    obj->fieldPosition.y -= obj->fieldPosition.ground;
+    obj->angle = 173;
+    obj->height = 48;
+    obj->kind = 2;
     work->registered = gMapFloorState.progress != 23;
     work->visible = 1;
     work->update = MapNamineCheckTalk;
@@ -83,10 +83,10 @@ void Task_MapNamine_0(MapNamineWork* work) {
     AnimInit(&work->anim, gNamiF00Anims, gNamiF00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&work->collider, 4, 16, 48);
-    ColliderSetPosition(&work->collider, p->fieldPosition.x, p->fieldPosition.y, p->fieldPosition.z);
+    ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
 
     if (work->registered) {
-        FldObjRegister(p);
+        FldObjRegister(obj);
     }
 
     TaskPoolInit(&work->tasks, 2);

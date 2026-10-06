@@ -31,13 +31,13 @@ s32 Task_MapFaint_1(MapFaintWork* work) {
 }
 
 void Task_MapFaint_2(MapFaintWork* work) {
-    FldObj* e = work->obj;
+    FldObj* obj = work->obj;
     u16 x;
     u16 y;
 
-    x = (e->fieldPosition.x >> 8) - (gFieldState->x >> 8);
-    y = (e->fieldPosition.y >> 8) + ((e->fieldPosition.z - (e->height + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1005 - (e->fieldPosition.y >> 8) * 4);
+    x = (obj->fieldPosition.x >> 8) - (gFieldState->x >> 8);
+    y = (obj->fieldPosition.y >> 8) + ((obj->fieldPosition.z - (obj->height + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1005 - (obj->fieldPosition.y >> 8) * 4);
 }
 
 void Task_MapFaint_3(MapFaintWork* work) {

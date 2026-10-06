@@ -47,7 +47,7 @@ void MapDonaldWaitMessage(MapDonaldWork* work) {
 }
 
 void Task_MapDonald_0(MapDonaldWork* work) {
-    FldObj* e = &work->obj;
+    FldObj* obj = &work->obj;
 
     if (gMapFloorState.room != MAP_ROOM_ENTRANCE_HALL) {
         if (gGameState.floor == 12) {
@@ -67,13 +67,13 @@ void Task_MapDonald_0(MapDonaldWork* work) {
         }
     }
 
-    e->fieldPosition.z = 0;
-    e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
-    e->fieldPosition.z = e->fieldPosition.ground;
-    e->fieldPosition.y -= e->fieldPosition.ground;
-    e->angle = 0x80;
-    e->height = 0x20;
-    e->kind = 2;
+    obj->fieldPosition.z = 0;
+    obj->fieldPosition.ground = GetFldPosFloor(&obj->fieldPosition);
+    obj->fieldPosition.z = obj->fieldPosition.ground;
+    obj->fieldPosition.y -= obj->fieldPosition.ground;
+    obj->angle = 0x80;
+    obj->height = 0x20;
+    obj->kind = 2;
     work->visible = 1;
     work->update = MapDonaldCheckTalk;
     work->tiles = AllocObjTiles(0x400, gDonaFl00Tiles);
@@ -81,8 +81,8 @@ void Task_MapDonald_0(MapDonaldWork* work) {
     AnimInit(&work->anim, gDonaFl00Anims, gDonaFl00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&work->collider, 4, 16, 48);
-    ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
-    FldObjRegister(e);
+    ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
+    FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
     work->targeted = 0;
@@ -109,20 +109,20 @@ s32 Task_MapDonald_1(MapDonaldWork* work) {
 }
 
 void Task_MapDonald_2(MapDonaldWork* work) {
-    FldPos* p = &work->obj.fieldPosition;
-    u16 v;
-    s32 k;
+    FldPos* pos = &work->obj.fieldPosition;
+    u16 priority;
+    s32 pixelY;
     s16 x;
     s16 y;
 
     if (work->visible) {
-        x = (p->x >> 8) - (gFieldState->x >> 8);
-        k = p->y >> 8;
-        y = k + (p->z >> 8) - (gFieldState->y >> 8);
-        v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), v);
-        work->obj.shadowZ = p->ground;
-        work->obj.shadowPriority = v + 1;
+        x = (pos->x >> 8) - (gFieldState->x >> 8);
+        pixelY = pos->y >> 8;
+        y = pixelY + (pos->z >> 8) - (gFieldState->y >> 8);
+        priority = -0x1004 - pixelY * 4;
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), priority);
+        work->obj.shadowZ = pos->ground;
+        work->obj.shadowPriority = priority + 1;
         TaskPoolDraw(&work->tasks);
 
         if (work->targeted) {

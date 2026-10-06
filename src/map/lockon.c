@@ -42,7 +42,7 @@ void task_lockon_0(LockonWork* work) {
 }
 
 u8 task_lockon_1(LockonWork* work) {
-    FldObj* o;
+    FldObj* obj;
     s8 count;
     s8 i;
     s8 nsel;
@@ -55,7 +55,7 @@ u8 task_lockon_1(LockonWork* work) {
     s32 oy;
 
     i = 0;
-    o = ListPoolFirst(&gFieldState->actor.pool);
+    obj = ListPoolFirst(&gFieldState->actor.pool);
 
     if (gFieldState->flags & FIELD_FLAG_NO_LOCKON) {
         gFieldState->lockonTarget = NULL;
@@ -73,21 +73,21 @@ u8 task_lockon_1(LockonWork* work) {
     count = 0;
 
     if ((gFieldState->flags & FIELD_FLAG_HOLD_LOCKON) == 0) {
-        while (o != NULL) {
-            ox = o->fieldPosition.x;
-            oy = o->fieldPosition.y;
+        while (obj != NULL) {
+            ox = obj->fieldPosition.x;
+            oy = obj->fieldPosition.y;
             dx = px - ox;
             dy = py - oy;
 
-            if (VectorLength2D(dx, dy) <= 0x3000 && (dx > -0x8000 && dx < 0x8000) && (dy > -0x8000 && dy < 0x8000) && o->fieldPosition.ground == gFieldState->actor.fieldPosition.ground) {
-                if (o->kind == 3) {
-                    gLockonDoorPosition[0] = o->fieldPosition.x;
-                    gLockonDoorPosition[1] = o->fieldPosition.y;
-                    gLockonDoorPosition[2] = o->fieldPosition.z;
-                    work->targets[count++] = o;
+            if (VectorLength2D(dx, dy) <= 0x3000 && (dx > -0x8000 && dx < 0x8000) && (dy > -0x8000 && dy < 0x8000) && obj->fieldPosition.ground == gFieldState->actor.fieldPosition.ground) {
+                if (obj->kind == 3) {
+                    gLockonDoorPosition[0] = obj->fieldPosition.x;
+                    gLockonDoorPosition[1] = obj->fieldPosition.y;
+                    gLockonDoorPosition[2] = obj->fieldPosition.z;
+                    work->targets[count++] = obj;
                     work->targetCount++;
                 } else {
-                    work->targets[count++] = o;
+                    work->targets[count++] = obj;
                     work->targetCount++;
                 }
             }
@@ -96,7 +96,7 @@ u8 task_lockon_1(LockonWork* work) {
                 break;
             }
 
-            o = ListPoolNext(&o->node);
+            obj = ListPoolNext(&obj->node);
         }
 
         if (work->targetCount != 0) {
@@ -202,21 +202,21 @@ s32 VectorLength2D(s32 x, s32 y) {
 }
 
 s32 NormalizeVector2D8(s32* x, s32* y) {
-    s32 d = VectorLength2D(*x, *y);
+    s32 length = VectorLength2D(*x, *y);
 
-    if (d > 0) {
-        *x = (*x << 8) / d;
-        *y = (*y << 8) / d;
+    if (length > 0) {
+        *x = (*x << 8) / length;
+        *y = (*y << 8) / length;
     }
 
-    return d;
+    return length;
 }
 
 s8 LockonPickNearest(s32 px, s32 py, LockonWork* work, s8 n, s8* list) {
     s8 i;
     s8 best;
     s32 bestDist;
-    FldObj* o;
+    FldObj* target;
     s32 dist;
     s32 dx;
     s32 dy;
@@ -225,11 +225,11 @@ s8 LockonPickNearest(s32 px, s32 py, LockonWork* work, s8 n, s8* list) {
     bestDist = 0x10000;
 
     for (i = 0; i < n; i++) {
-        o = work->targets[list[i]];
+        target = work->targets[list[i]];
 
-        if (o != NULL) {
-            dx = o->fieldPosition.x;
-            dy = o->fieldPosition.y;
+        if (target != NULL) {
+            dx = target->fieldPosition.x;
+            dy = target->fieldPosition.y;
             dist = VectorLength2D(dx - px, dy - py);
 
             if (bestDist > dist) {

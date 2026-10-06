@@ -58,10 +58,10 @@ void Task_MapFloor_0(MapFloorWork* work) {
 }
 
 s32 Task_MapFloor_1(MapFloorWork* work) {
-    u16* p = &work->timer;
+    u16* timer = &work->timer;
 
-    if (*p != 0) {
-        (*p)--;
+    if (*timer != 0) {
+        (*timer)--;
         return 1;
     }
 

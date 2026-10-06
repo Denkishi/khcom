@@ -76,41 +76,41 @@ void MapNiserikuStartEvent(MapNiserikuWork* work) {
 }
 
 void Task_MapNiseriku_0(MapNiserikuWork* work) {
-    FldObj* e = &work->obj;
-    s32 c;
+    FldObj* obj = &work->obj;
+    s32 registered;
 
     switch (gMapFloorState.progress) {
     case 27:
-        e->fieldPosition.x = 0x27C00;
-        e->fieldPosition.y = 0x10700;
+        obj->fieldPosition.x = 0x27C00;
+        obj->fieldPosition.y = 0x10700;
         break;
     case 23:
-        e->fieldPosition.x = 0x24900;
-        e->fieldPosition.y = 0xD500;
+        obj->fieldPosition.x = 0x24900;
+        obj->fieldPosition.y = 0xD500;
         break;
     case 24:
     case 25:
     case 26:
     default:
-        e->fieldPosition.x = 0x17A00;
-        e->fieldPosition.y = 0x11000;
+        obj->fieldPosition.x = 0x17A00;
+        obj->fieldPosition.y = 0x11000;
         break;
     }
 
-    e->fieldPosition.z = 0;
-    e->fieldPosition.z = e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
-    e->fieldPosition.y -= e->fieldPosition.z;
-    e->angle = 173;
-    e->height = 48;
-    e->kind = 2;
+    obj->fieldPosition.z = 0;
+    obj->fieldPosition.z = obj->fieldPosition.ground = GetFldPosFloor(&obj->fieldPosition);
+    obj->fieldPosition.y -= obj->fieldPosition.z;
+    obj->angle = 173;
+    obj->height = 48;
+    obj->kind = 2;
 
-    c = 0;
+    registered = 0;
 
     if (gMapFloorState.progress == 27) {
-        c = 1;
+        registered = 1;
     }
 
-    work->registered = c;
+    work->registered = registered;
 
     work->visible = 1;
     work->targeted = 0;
@@ -126,7 +126,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
         AnimInit(&work->anim, gNiseFl00Anims, gNiseFl00Frames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         ColliderInit(&work->collider, 4, 16, 48);
-        ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
         TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
         break;
     case 23:
@@ -136,7 +136,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
         AnimInit(&work->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         ColliderInit(&work->collider, 4, 16, 48);
-        ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
         TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
         break;
     case 24:
@@ -149,12 +149,12 @@ void Task_MapNiseriku_0(MapNiserikuWork* work) {
         AnimInit(&work->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
         AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         ColliderInit(&work->collider, 4, 36, 48);
-        ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
         break;
     }
 
     if (work->registered) {
-        FldObjRegister(e);
+        FldObjRegister(obj);
     }
 }
 
@@ -177,20 +177,20 @@ s32 Task_MapNiseriku_1(MapNiserikuWork* work) {
 }
 
 void Task_MapNiseriku_2(MapNiserikuWork* work) {
-    FldPos* p = &work->obj.fieldPosition;
-    u16 v;
-    s32 k;
+    FldPos* pos = &work->obj.fieldPosition;
+    u16 priority;
+    s32 pixelY;
     s16 x;
     s16 y;
 
     if (work->visible) {
-        x = (p->x >> 8) - (gFieldState->x >> 8);
-        k = p->y >> 8;
-        y = k + (p->z >> 8) - (gFieldState->y >> 8);
-        v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), v);
-        work->obj.shadowZ = p->ground;
-        work->obj.shadowPriority = v + 1;
+        x = (pos->x >> 8) - (gFieldState->x >> 8);
+        pixelY = pos->y >> 8;
+        y = pixelY + (pos->z >> 8) - (gFieldState->y >> 8);
+        priority = -0x1004 - pixelY * 4;
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), priority);
+        work->obj.shadowZ = pos->ground;
+        work->obj.shadowPriority = priority + 1;
         TaskPoolDraw(&work->tasks);
 
         if (work->targeted) {

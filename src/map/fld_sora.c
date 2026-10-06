@@ -106,97 +106,97 @@ void FldSoraSetAngleFromDpad(FldActor* act) {
 }
 
 u8 FldSoraCheckBlocked(FldPos* pos) {
-    FldPos a;
-    FldPos b;
-    s32 v1;
-    s32 v2;
+    FldPos up;
+    FldPos down;
+    s32 lo;
+    s32 hi;
 
-    a = *pos;
-    b = *pos;
-    a.y -= 1536;
-    b.y += 1536;
+    up = *pos;
+    down = *pos;
+    up.y -= 1536;
+    down.y += 1536;
 
-    v1 = GetFldPosGround(&a);
+    lo = GetFldPosGround(&up);
 
-    if (v1 > a.ground) {
-        a.ground = v1;
+    if (lo > up.ground) {
+        up.ground = lo;
     }
 
-    v2 = GetFldPosGround(&b);
+    hi = GetFldPosGround(&down);
 
-    if (v2 > b.ground) {
-        b.ground = v2;
+    if (hi > down.ground) {
+        down.ground = hi;
     }
 
-    if (IsFldPosBlocked(&a) != 0) {
+    if (IsFldPosBlocked(&up) != 0) {
         return 1;
     }
 
-    if (IsFldPosBlocked(&b) != 0) {
+    if (IsFldPosBlocked(&down) != 0) {
         return 1;
     }
 
-    pos->ground = v2 > v1 ? v1 : v2;
+    pos->ground = hi > lo ? lo : hi;
     return 0;
 }
 
 s32 FldSoraProbeGround(FldPos* pos) {
-    FldPos a;
-    FldPos b;
-    s32 v1;
-    s32 v2;
+    FldPos up;
+    FldPos down;
+    s32 lo;
+    s32 hi;
 
-    a = *pos;
-    b = *pos;
-    a.y -= 1536;
-    b.y += 1536;
-    v1 = GetFldPosGround(&a);
-    v2 = GetFldPosGround(&b);
+    up = *pos;
+    down = *pos;
+    up.y -= 1536;
+    down.y += 1536;
+    lo = GetFldPosGround(&up);
+    hi = GetFldPosGround(&down);
 
-    if (v2 > v1) {
-        v2 = v1;
+    if (hi > lo) {
+        hi = lo;
     }
 
-    return v2;
+    return hi;
 }
 
 u8 FldSoraCheckClimb(FldPos* pos, FldWork* work) {
-    FldPos a;
-    FldPos b;
-    u8 r;
+    FldPos up;
+    FldPos down;
+    u8 dir;
 
-    a = *pos;
-    b = *pos;
-    a.y -= 1536;
-    b.y += 1536;
+    up = *pos;
+    down = *pos;
+    up.y -= 1536;
+    down.y += 1536;
 
-    r = GetFldPosClimbDir(&a);
+    dir = GetFldPosClimbDir(&up);
 
-    if (r != 0) {
-        work->targetX = a.x;
-        work->targetY = a.y;
-        return r;
+    if (dir != 0) {
+        work->targetX = up.x;
+        work->targetY = up.y;
+        return dir;
     }
 
-    r = GetFldPosClimbDir(&b);
+    dir = GetFldPosClimbDir(&down);
 
-    if (r != 0) {
-        work->targetX = b.x;
-        work->targetY = b.y;
-        return r;
+    if (dir != 0) {
+        work->targetX = down.x;
+        work->targetY = down.y;
+        return dir;
     }
 
     return 0;
 }
 
 u8 FldSoraCheckDoorAhead(FldActor* act) {
-    FldPos a;
+    FldPos ahead;
 
-    a = act->fieldPosition;
-    a.x += gSineTable[act->angle] * 8;
-    a.y -= gSineTable[act->angle + 64] * 8;
+    ahead = act->fieldPosition;
+    ahead.x += gSineTable[act->angle] * 8;
+    ahead.y -= gSineTable[act->angle + 64] * 8;
 
-    if (MapFindOpenDoor(&a)) {
+    if (MapFindOpenDoor(&ahead)) {
         return 1;
     }
 
@@ -205,24 +205,24 @@ u8 FldSoraCheckDoorAhead(FldActor* act) {
 
 s32 FldSoraGetGround(FldWork* work) {
     FldActor* act;
-    s32 v;
+    s32 ground;
 
     act = &gFieldState->actor;
 
     if (work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
         if (act->fieldPosition.ground < work->collider.platformZ) {
-            v = act->fieldPosition.ground;
+            ground = act->fieldPosition.ground;
         } else {
-            v = work->collider.platformZ;
+            ground = work->collider.platformZ;
         }
 
         work->onCollider = 1;
     } else {
         work->onCollider = 0;
-        v = act->fieldPosition.ground;
+        ground = act->fieldPosition.ground;
     }
 
-    return v;
+    return ground;
 }
 
 void FldSoraTurn(FldActor* act) {
@@ -231,20 +231,20 @@ void FldSoraTurn(FldActor* act) {
     FldSoraSetAngleFromDpad(act);
 
     if (old != act->angle) {
-        s32 v;
+        s32 speed;
 
         if (abs((s8)GetAngleDiff(old, act->angle)) > 100) {
-            v = 0;
+            speed = 0;
         } else {
-            v = act->speed >> 1;
+            speed = act->speed >> 1;
         }
 
-        act->speed = v;
+        act->speed = speed;
     }
 }
 
 void FldSoraSetAnim(FldWork* work, s32 index, s32 animFlags) {
-    const FldAnimDef* e;
+    const FldAnimDef* def;
     u16 flags = animFlags;
     s32 idx;
 
@@ -290,9 +290,9 @@ void FldSoraSetAnim(FldWork* work, s32 index, s32 animFlags) {
 
     work->animAction = index;
 
-    e = &sFldSoraAnimDefs[index][idx];
-    AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
-    SetObjTileSource(work->tiles, e->tiles);
+    def = &sFldSoraAnimDefs[index][idx];
+    AnimChangeWithTables(&work->anim, def->animId, flags, def->anims, def->gfxTable);
+    SetObjTileSource(work->tiles, def->tiles);
 }
 
 void task_fld_sora_0(FldWork* work) {
@@ -375,7 +375,7 @@ void task_fld_sora_0(FldWork* work) {
 
 u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
     FldActor* act;
-    s16* p;
+    s16* timer;
     s32 flags;
 
     act = &gFieldState->actor;
@@ -396,9 +396,9 @@ u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
         SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
         TaskPoolUpdate(&work->tasks);
     } else {
-        p = &work->timer;
+        timer = &work->timer;
 
-        if (*p == 0) {
+        if (*timer == 0) {
             FadeSetPaletteExcluded(work->palette->index + 16, 1);
             act->speed = 0;
             work->onCollider = 0;
@@ -407,7 +407,7 @@ u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
         TaskPoolUpdate(&work->tasks);
         work->gfx = AnimUpdate(&work->anim);
         ColliderSetPosition(&work->collider, act->fieldPosition.x, act->fieldPosition.y, act->fieldPosition.z);
-        (*p)++;
+        (*timer)++;
     }
 
     return 1;
@@ -474,17 +474,17 @@ u8 FldSoraGmkJump(FldWork* work, void* task) {
 }
 
 u8 FldSoraJump(FldWork* work, void* task) {
-    FldPos p1;
-    FldPos p2;
+    FldPos overLedge;
+    FldPos underLedge;
     s32 sx;
     s32 sy;
     s32 nx;
     s32 ny;
-    s32 z;
+    s32 ground;
     FldActor* act;
 
     act = &gFieldState->actor;
-    z = FldSoraGetGround(work);
+    ground = FldSoraGetGround(work);
     sx = act->fieldPosition.x;
     sy = act->fieldPosition.y;
     gFieldState->lockonTarget = NULL;
@@ -507,8 +507,8 @@ u8 FldSoraJump(FldWork* work, void* task) {
             act->fieldPosition.z += work->vz;
             work->vz += 66;
 
-            if (act->fieldPosition.z > z) {
-                act->fieldPosition.z = z;
+            if (act->fieldPosition.z > ground) {
+                act->fieldPosition.z = ground;
                 work->vz = 0;
             }
         } else {
@@ -669,8 +669,8 @@ u8 FldSoraJump(FldWork* work, void* task) {
         if ((GetKeysPressed() & A_BUTTON) != 0) {
             work->timer = 0;
             work->state = FLD_STATE_AIR_ATTACK;
-        } else if (act->fieldPosition.z > z) {
-            act->fieldPosition.z = z;
+        } else if (act->fieldPosition.z > ground) {
+            act->fieldPosition.z = ground;
             work->vz = 0;
 
             if (work->state != FLD_STATE_LAND) {
@@ -741,13 +741,13 @@ u8 FldSoraJump(FldWork* work, void* task) {
             break;
         default:
             if (work->state == FLD_STATE_FALL && act->fieldPosition.ground - act->fieldPosition.z > 0xFFF) {
-                p1 = act->fieldPosition;
-                p1.y -= 0x400;
-                p1.z = act->fieldPosition.z - 0x3000;
-                p2 = p1;
-                p2.z += 768;
+                overLedge = act->fieldPosition;
+                overLedge.y -= 0x400;
+                overLedge.z = act->fieldPosition.z - 0x3000;
+                underLedge = overLedge;
+                underLedge.z += 768;
 
-                if (!FldSoraCheckBlocked(&p1) && FldSoraCheckBlocked(&p2)) {
+                if (!FldSoraCheckBlocked(&overLedge) && FldSoraCheckBlocked(&underLedge)) {
                     work->timer = 0;
                     work->state = FLD_STATE_LEDGE_CATCH;
                     gFieldState->lockonTarget = NULL;
@@ -777,11 +777,11 @@ u8 FldSoraJump(FldWork* work, void* task) {
 
 u8 FldSoraClimb(FldWork* work, void* task) {
     FldActor* act;
-    FldPos p;
+    FldPos probe;
     s32 x;
     s32 y;
     s32 limit;
-    s32 d;
+    s32 dz;
     s32 ny;
     s32 nx;
     s32 tx;
@@ -825,25 +825,25 @@ u8 FldSoraClimb(FldWork* work, void* task) {
             }
         }
 
-        d = (((work->targetZ >> 12) << 12) - act->fieldPosition.z) >> 1;
+        dz = (((work->targetZ >> 12) << 12) - act->fieldPosition.z) >> 1;
 
-        if (abs(d) <= 24) {
-            d = 0;
-        } else if (d > 384) {
-            d = 384;
-        } else if (d < -384) {
-            d = -384;
+        if (abs(dz) <= 24) {
+            dz = 0;
+        } else if (dz > 384) {
+            dz = 384;
+        } else if (dz < -384) {
+            dz = -384;
         }
 
-        act->fieldPosition.z += d;
+        act->fieldPosition.z += dz;
 
-        if (d < 0) {
+        if (dz < 0) {
             act->fieldPosition.x += gSineTable[act->angle];
             act->fieldPosition.y -= gSineTable[act->angle + 64];
-            p = act->fieldPosition;
-            p.z = work->targetZ - 0x2800;
+            probe = act->fieldPosition;
+            probe.z = work->targetZ - 0x2800;
 
-            if (!FldSoraCheckBlocked(&p)) {
+            if (!FldSoraCheckBlocked(&probe)) {
                 act->speed = 204;
                 work->vz = -0x580;
                 work->flags |= FLD_FLAG_NO_AIR_TURN;
@@ -851,7 +851,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
                 work->timer = 0;
                 m4aSongNumStart(work->sounds[6]);
             }
-        } else if (d > 0) {
+        } else if (dz > 0) {
             if (act->fieldPosition.z >= limit) {
                 act->fieldPosition.z = limit;
                 act->angle += 0x80;
@@ -863,7 +863,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
                 work->timer = 0;
                 SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
             }
-        } else if (d == 0) {
+        } else if (dz == 0) {
             if ((GetKeysHeld() & DPAD_UP) || ((GetKeysHeld() & DPAD_LEFT) && act->angle == 0xD3) ||
                 ((GetKeysHeld() & DPAD_RIGHT) && act->angle == 0x2D)) {
                 work->targetZ = ((work->targetZ >> 12) - 1) << 12;
@@ -953,13 +953,13 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
 
 u8 FldSoraHangLedge(FldWork* work, void* task) {
     FldActor* act;
-    FldPos p;
-    u8 ret;
+    FldPos probe;
+    u8 handled;
     s32 x;
     s32 y;
 
     act = &gFieldState->actor;
-    ret = 0;
+    handled = 0;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
     gFieldState->lockonTarget = NULL;
@@ -967,22 +967,22 @@ u8 FldSoraHangLedge(FldWork* work, void* task) {
     switch (work->state) {
     case FLD_STATE_LEDGE_CATCH:
         if (work->timer == 0) {
-            p = act->fieldPosition;
-            p.y -= 0xA00;
-            act->fieldPosition.z = GetFldPosGround(&p) + 0x2B00;
+            probe = act->fieldPosition;
+            probe.y -= 0xA00;
+            act->fieldPosition.z = GetFldPosGround(&probe) + 0x2B00;
             m4aSongNumStart(SONG_SYS_SR_CATCH);
             act->angle = GetLedgeAngleAt(act->fieldPosition.x, act->fieldPosition.y, act->fieldPosition.z);
             FldSoraSetAnim(work, 9, 0);
         }
 
         if (work->timer > 15) {
-            ret = FldSoraLedgeInput(work, task);
+            handled = FldSoraLedgeInput(work, task);
         }
 
         act->fieldPosition.x += gSineTable[act->angle];
         act->fieldPosition.y -= gSineTable[act->angle + 64];
 
-        if (AnimIsFinished(&work->anim) && !ret) {
+        if (AnimIsFinished(&work->anim) && !handled) {
             work->state = FLD_STATE_LEDGE_HANG;
         } else {
             work->timer++;
@@ -1419,20 +1419,20 @@ u8 FldSoraAttack(FldWork* work, void* task) {
 }
 
 u8 task_fld_sora_1(FldWork* work, void* task) {
-    FldPos p1;
-    FldPos p2;
-    FldPos p3;
-    FldPos p4;
+    FldPos probeA;
+    FldPos probeB;
+    FldPos slideB;
+    FldPos slideA;
     s32 sx;
     s32 sy;
     s32 dx;
     s32 dy;
     s32 dz;
     s32 dw;
-    s32 z;
-    s32 r;
-    u8 a;
-    u8 b;
+    s32 ground;
+    s32 climbDir;
+    u8 blockedA;
+    u8 blockedB;
     FldActor* act;
 
     act = &gFieldState->actor;
@@ -1565,10 +1565,10 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
         if (FldSoraCheckBlocked(&act->fieldPosition)) {
             act->fieldPosition.x = sx;
             act->fieldPosition.y = sy;
-            r = FldSoraCheckClimb(&act->fieldPosition, work);
+            climbDir = FldSoraCheckClimb(&act->fieldPosition, work);
 
-            if (r != 0) {
-                switch (r) {
+            if (climbDir != 0) {
+                switch (climbDir) {
                 case 2:
                     work->timer = 0;
                     work->state = FLD_STATE_CLIMB;
@@ -1648,34 +1648,34 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                     break;
                 }
 
-                p2 = act->fieldPosition;
-                p1 = p2;
-                p1.x += dx;
-                p1.y += dy;
-                p2.x += dz;
-                p2.y += dw;
-                a = FldSoraCheckBlocked(&p1);
-                b = FldSoraCheckBlocked(&p2);
+                probeB = act->fieldPosition;
+                probeA = probeB;
+                probeA.x += dx;
+                probeA.y += dy;
+                probeB.x += dz;
+                probeB.y += dw;
+                blockedA = FldSoraCheckBlocked(&probeA);
+                blockedB = FldSoraCheckBlocked(&probeB);
 
-                if (a) {
-                    if (!b) {
-                        p3 = act->fieldPosition;
-                        p3.x += dz;
-                        p3.y += dw;
-                        p3.ground = FldSoraProbeGround(&p3);
+                if (blockedA) {
+                    if (!blockedB) {
+                        slideB = act->fieldPosition;
+                        slideB.x += dz;
+                        slideB.y += dw;
+                        slideB.ground = FldSoraProbeGround(&slideB);
 
-                        if (p3.ground >= p3.z) {
-                            act->fieldPosition = p3;
+                        if (slideB.ground >= slideB.z) {
+                            act->fieldPosition = slideB;
                         }
                     }
-                } else if (b) {
-                    p4 = act->fieldPosition;
-                    p4.x += dx;
-                    p4.y += dy;
-                    p4.ground = FldSoraProbeGround(&p4);
+                } else if (blockedB) {
+                    slideA = act->fieldPosition;
+                    slideA.x += dx;
+                    slideA.y += dy;
+                    slideA.ground = FldSoraProbeGround(&slideA);
 
-                    if (p4.ground >= p4.z) {
-                        act->fieldPosition = p4;
+                    if (slideA.ground >= slideA.z) {
+                        act->fieldPosition = slideA;
                     }
                 }
 
@@ -1683,11 +1683,11 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             }
         }
 
-        z = FldSoraGetGround(work);
+        ground = FldSoraGetGround(work);
 
         if (act->fieldPosition.ground == 0x100000) {
             act->fieldPosition.ground = act->fieldPosition.z;
-        } else if (z != act->fieldPosition.z) {
+        } else if (ground != act->fieldPosition.z) {
             act->speed >>= 2;
             work->vz = 0;
             work->timer = 0;
@@ -1695,7 +1695,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
             work->state = FLD_STATE_FALL;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
-        } else if (z != act->fieldPosition.ground) {
+        } else if (ground != act->fieldPosition.ground) {
             gFieldState->lockonTarget = NULL;
         }
     }

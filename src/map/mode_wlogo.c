@@ -117,7 +117,7 @@ void mode_wLogo_0(s32 arg) {
 }
 
 void mode_wLogo_1() {
-    u8* p;
+    u8* lengthPtr;
 
     switch (sWLogoState) {
     case WLOGO_MODE_STATE_SELECT:
@@ -144,11 +144,11 @@ void mode_wLogo_1() {
                 sWLogoWorld = 0;
             }
 
-            p = &sWLogoNameLength;
+            lengthPtr = &sWLogoNameLength;
 #ifdef VERSION_EU
-            *p = LoadTextSlots(GetLocalizedString(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
+            *lengthPtr = LoadTextSlots(GetLocalizedString(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-            *p = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
+            *lengthPtr = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
         }
 
@@ -200,7 +200,7 @@ void mode_wLogo_2() {
 }
 
 void WLogoInitWorldSelect() {
-    u8* p;
+    u8* lengthPtr;
     FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(1, 2, 31, 0);
@@ -213,11 +213,11 @@ void WLogoInitWorldSelect() {
     sWLogoState = WLOGO_MODE_STATE_SELECT;
     sWLogoTimer = 0;
     InitTextSlots(sWLogoNameSlots, 20);
-    p = &sWLogoNameLength;
+    lengthPtr = &sWLogoNameLength;
 #ifdef VERSION_EU
-    *p = LoadTextSlots(GetLocalizedString(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
+    *lengthPtr = LoadTextSlots(GetLocalizedString(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-    *p = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
+    *lengthPtr = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
     sWLogoNamePalette = LoadObjPalette(gNameTextPalettes[0], 32);
 }

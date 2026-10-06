@@ -53,18 +53,18 @@ void MapMickeyWaitMessage(MapMickeyWork* work) {
 }
 
 void Task_MapMickey_0(MapMickeyWork* work) {
-    FldObj* e = &work->obj;
+    FldObj* obj = &work->obj;
 
-    e->fieldPosition.x = 0x1C800;
-    e->fieldPosition.y = 0xE000;
+    obj->fieldPosition.x = 0x1C800;
+    obj->fieldPosition.y = 0xE000;
     work->spriteFlags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
-    e->fieldPosition.z = 0;
-    e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
-    e->fieldPosition.z = e->fieldPosition.ground;
-    e->fieldPosition.y -= e->fieldPosition.ground;
-    e->angle = 0xAD;
-    e->height = 0x30;
-    e->kind = 2;
+    obj->fieldPosition.z = 0;
+    obj->fieldPosition.ground = GetFldPosFloor(&obj->fieldPosition);
+    obj->fieldPosition.z = obj->fieldPosition.ground;
+    obj->fieldPosition.y -= obj->fieldPosition.ground;
+    obj->angle = 0xAD;
+    obj->height = 0x30;
+    obj->kind = 2;
     work->visible = 1;
     work->update = MapMickeyCheckTalk;
     work->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);
@@ -72,8 +72,8 @@ void Task_MapMickey_0(MapMickeyWork* work) {
     AnimInit(&work->anim, gMickeyFl00Anims, gMickeyFl00Frames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&work->collider, 4, 16, 48);
-    ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
-    FldObjRegister(e);
+    ColliderSetPosition(&work->collider, obj->fieldPosition.x, obj->fieldPosition.y, obj->fieldPosition.z);
+    FldObjRegister(obj);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
     work->targeted = 0;
@@ -100,20 +100,20 @@ s32 Task_MapMickey_1(MapMickeyWork* work) {
 }
 
 void Task_MapMickey_2(MapMickeyWork* work) {
-    FldPos* p = &work->obj.fieldPosition;
-    u16 v;
-    s32 k;
+    FldPos* pos = &work->obj.fieldPosition;
+    u16 priority;
+    s32 pixelY;
     s16 x;
     s16 y;
 
     if (work->visible) {
-        x = (p->x >> 8) - (gFieldState->x >> 8);
-        k = p->y >> 8;
-        y = k + (p->z >> 8) - (gFieldState->y >> 8);
-        v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, work->spriteFlags, v);
-        work->obj.shadowZ = p->ground;
-        work->obj.shadowPriority = v + 1;
+        x = (pos->x >> 8) - (gFieldState->x >> 8);
+        pixelY = pos->y >> 8;
+        y = pixelY + (pos->z >> 8) - (gFieldState->y >> 8);
+        priority = -0x1004 - pixelY * 4;
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, work->spriteFlags, priority);
+        work->obj.shadowZ = pos->ground;
+        work->obj.shadowPriority = priority + 1;
         TaskPoolDraw(&work->tasks);
 
         if (work->targeted) {

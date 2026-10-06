@@ -1178,8 +1178,8 @@ void task_wlogo_agr_0(WlogoAgrWork* work, s32 arg) {
 }
 
 u8 task_wlogo_agr_1(WlogoAgrWork* work) {
-    WlogoAgrEntry a;
-    WlogoAgrEntry b;
+    WlogoAgrEntry smoke;
+    WlogoAgrEntry flash;
 
     switch (work->state) {
     case WLOGO_AGR_STATE_WAIT:
@@ -1217,19 +1217,19 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         break;
     case WLOGO_AGR_STATE_SMOKE:
         if (work->timer == gWlogoAgrEntries[work->entryIndex].time) {
-            a.smokeX = gWlogoAgrEntries[work->entryIndex].smokeX;
-            a.smokeY = gWlogoAgrEntries[work->entryIndex].smokeY;
-            a.smokeAnimId = gWlogoAgrEntries[work->entryIndex].smokeAnimId;
-            a.unk_07 = gWlogoAgrEntries[work->entryIndex].unk_07;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrSmoke, &a);
-            b.flashX = gWlogoAgrEntries[work->entryIndex].flashX;
-            b.flashY = gWlogoAgrEntries[work->entryIndex].flashY;
-            b.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
-            b.flashX = gWlogoAgrEntries[work->entryIndex].flashX + 20;
-            b.flashY = gWlogoAgrEntries[work->entryIndex].flashY + 20;
-            b.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId + 1;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            smoke.smokeX = gWlogoAgrEntries[work->entryIndex].smokeX;
+            smoke.smokeY = gWlogoAgrEntries[work->entryIndex].smokeY;
+            smoke.smokeAnimId = gWlogoAgrEntries[work->entryIndex].smokeAnimId;
+            smoke.unk_07 = gWlogoAgrEntries[work->entryIndex].unk_07;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrSmoke, &smoke);
+            flash.flashX = gWlogoAgrEntries[work->entryIndex].flashX;
+            flash.flashY = gWlogoAgrEntries[work->entryIndex].flashY;
+            flash.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
+            flash.flashX = gWlogoAgrEntries[work->entryIndex].flashX + 20;
+            flash.flashY = gWlogoAgrEntries[work->entryIndex].flashY + 20;
+            flash.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId + 1;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
             work->entryIndex++;
 
             if (work->entryIndex > 18) {
@@ -1257,10 +1257,10 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
     case WLOGO_AGR_STATE_FLASHES:
         if (work->timer <= 59) {
             if (work->timer % 20 == 0) {
-                b.flashX = gWlogoAgrEntries[work->entryIndex].flashX;
-                b.flashY = gWlogoAgrEntries[work->entryIndex].flashY;
-                b.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId;
-                TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+                flash.flashX = gWlogoAgrEntries[work->entryIndex].flashX;
+                flash.flashY = gWlogoAgrEntries[work->entryIndex].flashY;
+                flash.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId;
+                TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
             }
 
             work->entryIndex++;
@@ -1271,36 +1271,36 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         }
 
         if (work->timer == 60) {
-            b.flashX = 115;
-            b.flashY = 80;
-            b.flashAnimId = 6;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
-            b.flashX = 110;
-            b.flashY = 60;
-            b.flashAnimId = 8;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            flash.flashX = 115;
+            flash.flashY = 80;
+            flash.flashAnimId = 6;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
+            flash.flashX = 110;
+            flash.flashY = 60;
+            flash.flashAnimId = 8;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
         }
 
         if (work->timer == 70) {
-            b.flashX = 95;
-            b.flashY = 65;
-            b.flashAnimId = 7;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
-            b.flashX = 100;
-            b.flashY = 80;
-            b.flashAnimId = 6;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            flash.flashX = 95;
+            flash.flashY = 65;
+            flash.flashAnimId = 7;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
+            flash.flashX = 100;
+            flash.flashY = 80;
+            flash.flashAnimId = 6;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
         }
 
         if (work->timer == 80) {
-            b.flashX = 134;
-            b.flashY = 42;
-            b.flashAnimId = 8;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
-            b.flashX = 126;
-            b.flashY = 50;
-            b.flashAnimId = 7;
-            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            flash.flashX = 134;
+            flash.flashY = 42;
+            flash.flashAnimId = 8;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
+            flash.flashX = 126;
+            flash.flashY = 50;
+            flash.flashAnimId = 7;
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &flash);
         }
 
         work->timer++;

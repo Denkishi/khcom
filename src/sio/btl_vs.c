@@ -31,66 +31,66 @@ static u16 sVsKeyChordLatch[2];
 static u16 sVsSoraReloadTimer;
 static u16 sVsRikuReloadTimer;
 
-void UpdateVsKeyHoldTimes(u16 keys, s32 i) {
+void UpdateVsKeyHoldTimes(u16 keys, s32 side) {
     if (keys & L_BUTTON) {
-        sVsKeyHoldL[i]++;
-        sVsKeyReleaseL[i] = 0;
+        sVsKeyHoldL[side]++;
+        sVsKeyReleaseL[side] = 0;
 
-        if (sVsKeyHoldL[i] > 32) {
-            sVsKeyHoldL[i] = 29;
+        if (sVsKeyHoldL[side] > 32) {
+            sVsKeyHoldL[side] = 29;
         }
     } else {
-        sVsKeyHoldL[i] = 0;
+        sVsKeyHoldL[side] = 0;
 
-        if (sVsKeyReleaseL[i] < 255) {
-            sVsKeyReleaseL[i]++;
+        if (sVsKeyReleaseL[side] < 255) {
+            sVsKeyReleaseL[side]++;
         }
     }
 
     if (keys & R_BUTTON) {
-        sVsKeyHoldR[i]++;
-        sVsKeyReleaseR[i] = 0;
+        sVsKeyHoldR[side]++;
+        sVsKeyReleaseR[side] = 0;
 
-        if (sVsKeyHoldR[i] > 32) {
-            sVsKeyHoldR[i] = 29;
+        if (sVsKeyHoldR[side] > 32) {
+            sVsKeyHoldR[side] = 29;
         }
     } else {
-        sVsKeyHoldR[i] = 0;
+        sVsKeyHoldR[side] = 0;
 
-        if (sVsKeyReleaseR[i] < 255) {
-            sVsKeyReleaseR[i]++;
+        if (sVsKeyReleaseR[side] < 255) {
+            sVsKeyReleaseR[side]++;
         }
     }
 }
 
-s32 ReadVsKeyChord(u16 held, u16 pressed, s32 i) {
+s32 ReadVsKeyChord(u16 held, u16 pressed, s32 side) {
     s32 ret = 0;
 
-    UpdateVsKeyHoldTimes(held, i);
+    UpdateVsKeyHoldTimes(held, side);
 
-    if (sVsKeyReleaseL[i] == 2) {
-        sVsKeyChordLatch[i] &= ~L_BUTTON;
+    if (sVsKeyReleaseL[side] == 2) {
+        sVsKeyChordLatch[side] &= ~L_BUTTON;
     }
 
-    if (sVsKeyReleaseR[i] == 2) {
-        sVsKeyChordLatch[i] &= ~R_BUTTON;
+    if (sVsKeyReleaseR[side] == 2) {
+        sVsKeyChordLatch[side] &= ~R_BUTTON;
     }
 
     if (((pressed & L_BUTTON) && (held & R_BUTTON)) || ((pressed & R_BUTTON) && (held & L_BUTTON))) {
-        sVsKeyChordLatch[i] |= (L_BUTTON | R_BUTTON);
+        sVsKeyChordLatch[side] |= (L_BUTTON | R_BUTTON);
         ret = L_BUTTON | R_BUTTON;
     }
 
-    if (!(sVsKeyChordLatch[i] & L_BUTTON)) {
-        if (sVsKeyHoldL[i] == 5 || sVsKeyReleaseL[i] == 1) {
-            sVsKeyChordLatch[i] |= L_BUTTON;
+    if (!(sVsKeyChordLatch[side] & L_BUTTON)) {
+        if (sVsKeyHoldL[side] == 5 || sVsKeyReleaseL[side] == 1) {
+            sVsKeyChordLatch[side] |= L_BUTTON;
             ret = L_BUTTON;
         }
     }
 
-    if (!(sVsKeyChordLatch[i] & R_BUTTON)) {
-        if (sVsKeyHoldR[i] == 5 || sVsKeyReleaseR[i] == 1) {
-            sVsKeyChordLatch[i] |= R_BUTTON;
+    if (!(sVsKeyChordLatch[side] & R_BUTTON)) {
+        if (sVsKeyHoldR[side] == 5 || sVsKeyReleaseR[side] == 1) {
+            sVsKeyChordLatch[side] |= R_BUTTON;
             ret = R_BUTTON;
         }
     }

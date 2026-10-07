@@ -57,7 +57,7 @@ void RogueDebugBattle(void) {
         }
         break;
     case ROGUE_DEBUG_RELIC:
-        gRogue.relics |= 1 << gRogueDebug.arg;
+        RogueGiveRelic(gRogueDebug.arg);
         break;
     case ROGUE_DEBUG_CARD:
         RogueCardAction(&gCardDefs[CARD_ID(ROGUE_FIRST_CARD_KIND + gRogueDebug.arg, 5)]);
@@ -148,6 +148,10 @@ void RogueOnDamage(BtlObj* p) {
         p->unk_020 += p->unk_020 / 2;
     }
 
+    if (RogueHasRelic(ROGUE_RELIC_HALF_DECK)) {
+        p->unk_020 *= 2;
+    }
+
     if (RogueHasRelic(ROGUE_RELIC_BERSERK) && sora->unk_02C * 4 <= sora->unk_02E) {
         p->unk_020 += p->unk_020 / 2;
     }
@@ -194,6 +198,8 @@ void RogueOnDamage(BtlObj* p) {
 // Called once the knockback of one of Sora's hits is set: a combo finisher
 // sends the enemy up, so that the combo can go on in the air.
 void RogueOnKnockback(BtlObj* target) {
+    RogueAfterHit(target);
+
     if (gRogue.finisher && target->unk_0AC < ROGUE_LAUNCH) {
         target->unk_0AC = ROGUE_LAUNCH;
     }
@@ -207,6 +213,10 @@ u8 RogueReloadRate(u8 slowed) {
     }
 
     rate += rate * RogueUpgradeLevel(ROGUE_UPGRADE_RELOAD) / 10;
+
+    if (RogueHasRelic(ROGUE_RELIC_INSTANT_RELOAD)) {
+        rate = 255;
+    }
 
     return rate;
 }
@@ -530,6 +540,12 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.moveEcho = 0;
     gRogue.moveEchoTimer = 0;
     gRogue.thorns = 0;
+    gRogue.airDashUsed = 0;
+    RogueAfterReset();
+    gRogueDebug.afterHits = 0;
+    gRogue.freeCard = 1;
+    gRogue.sleightReady = 1;
+    gRogue.lastHp = 0;
     gRogueDebug.pulled = 0;
     gRogueDebug.echoes = 0;
     sNextNumber = 0;

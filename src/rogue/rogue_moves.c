@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_actor.h"
 #include "btl.h"
+#include "gba/keys.h"
 #include "listpool.h"
 #include "btl_collision.h"
 #include "fade.h"
@@ -222,7 +223,24 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
 
     switch (def->motion) {
     case MOTION_THROWN:
-        RogueMoveHit(w);
+        if (RogueMoveHit(w) && !RogueHasRelic(ROGUE_RELIC_PIERCE)) {
+            // It stops at what it hits, or with the bounce turns back once.
+            if (!RogueHasRelic(ROGUE_RELIC_BOUNCE) || w->hits != 0) {
+                return 0;
+            }
+
+            w->hits = 1;
+            w->args.left ^= 1;
+            w->timer = 0;
+        }
+
+        // At the end of its flight the bounce sends it back too.
+        if (w->timer + 1 >= def->frames_ && RogueHasRelic(ROGUE_RELIC_BOUNCE) && w->hits == 0) {
+            w->hits = 1;
+            w->args.left ^= 1;
+            w->timer = 0;
+        }
+
         w->args.x += w->args.left ? -ROGUE_MOVE_SPEED : ROGUE_MOVE_SPEED;
         w->args.y += w->args.vy;
         target = gBtlWork->actor2;
@@ -288,6 +306,8 @@ static TaskDesc sTaskDescRogueMove = {
     (TaskDestroyFunc)RogueMove_Destroy,
     sizeof(RogueMoveWork),
 };
+
+static void RogueAfterTick(void);
 
 // Sora's casting pose, for a move made while he is free: in the middle of a
 // swing or a spell he is already moving. The states are standing, running and
@@ -373,9 +393,22 @@ void RogueDoMove(u8 move, BtlObj* sora) {
 
 // Called once a frame in battle: what the relics owe from earlier frames.
 void RogueMovesTick(void) {
+    RogueAfterTick();
+
     if (gRogue.moveEchoTimer != 0 && --gRogue.moveEchoTimer == 0 && gRogue.moveEcho != 0) {
         RogueMoveCast(gRogue.moveEcho - 1, gBtlWork->actor, 1);
         gRogue.moveEcho = 0;
+    }
+
+    // The fast: whatever HP Sora gains in battle is taken back.
+    if (RogueHasRelic(ROGUE_RELIC_NO_HEAL) && gBtlWork->actor != 0) {
+        BtlObj* sora = gBtlWork->actor;
+
+        if (gRogue.lastHp > 0 && sora->unk_02C > gRogue.lastHp) {
+            sora->unk_02C = gRogue.lastHp;
+        }
+
+        gRogue.lastHp = sora->unk_02C;
     }
 
     if (gRogue.thorns) {
@@ -407,4 +440,230 @@ void RogueShockwave(BtlObj* sora, u8 element, u16 scale) {
     gRogue.projectile = 0;
     gBtlWork->unk_124 = old;
     gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
+}
+
+// The movement relics.
+
+// Called every frame Sora is in the air.
+void RogueAirControl(BtlSoraWork* work, u16 held, u16 pressed) {
+    BtlObj* sora = &work->actor;
+
+    // The glide: holding the jump button, he comes down slowly. Gravity is
+    // added after this, so the speed is set short of it.
+    if (RogueHasRelic(ROGUE_RELIC_GLIDE) && (held & B_BUTTON) && work->unk_150 > ROGUE_GLIDE_SPEED - gBtlWork->unk_12C) {
+        work->unk_150 = ROGUE_GLIDE_SPEED - gBtlWork->unk_12C;
+    }
+
+    // The air dash: a second tap of left or right, as the dodge on the
+    // ground, once until he lands. It goes through the knockback speed, which
+    // nothing in the air overwrites.
+    if (RogueHasRelic(ROGUE_RELIC_AIR_DASH) && !gRogue.airDashUsed) {
+        if ((pressed & DPAD_LEFT) && work->unk_170[0] != 0) {
+            sora->vx = -ROGUE_AIR_DASH_SPEED;
+            sora->flags |= 4;
+        } else if ((pressed & DPAD_RIGHT) && work->unk_170[1] != 0) {
+            sora->vx = ROGUE_AIR_DASH_SPEED;
+            sora->flags &= ~4;
+        } else {
+            return;
+        }
+
+        gRogue.airDashUsed = 1;
+        work->unk_150 = -200;
+        m4aSongNumStart(SONG_EF_RAC_3TR);
+        gRogueDebug.airDashes++;
+    }
+}
+
+// Called as a dodge takes off: with the shadow step and an enemy locked on,
+// Sora comes out of it behind that enemy, facing it.
+void RogueOnDodge(BtlObj* sora) {
+    BtlObj* target = gBtlWork->actor2;
+
+    if (!RogueHasRelic(ROGUE_RELIC_TELEPORT) || target == 0) {
+        return;
+    }
+
+    if (sora->x < target->x) {
+        sora->x = target->x + 0x2400;
+        sora->flags |= 4;
+    } else {
+        sora->x = target->x - 0x2400;
+        sora->flags &= ~4;
+    }
+
+    sora->y = target->y;
+    sora->unk_014 = sora->x;
+    gRogueDebug.teleports++;
+}
+
+// Called every frame of a dodge's slide: with the trail it cuts what it
+// passes through.
+void RogueDodgeTrail(BtlObj* sora) {
+    u64 flags;
+    s32 scale;
+
+    if (!RogueHasRelic(ROGUE_RELIC_TRAIL)) {
+        return;
+    }
+
+    flags = gBtlWork->flags;
+    scale = gBtlWork->unk_124;
+    gBtlWork->flags |= 0x20000000;
+    gBtlWork->unk_124 = 160;
+    gRogue.echoing = 1;
+
+    if (func_08011F78(14, sora->x, sora->y, sora->z, 20, 14, 32)) {
+        gRogueDebug.moveHits++;
+    }
+
+    gRogue.echoing = 0;
+    gBtlWork->unk_124 = scale;
+    gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
+}
+
+// What the elements leave behind. A hit is still being worked out when its
+// relic sees it, so the effect is noted and done on a later frame.
+enum { AFTER_NONE, AFTER_BURN, AFTER_FREEZE, AFTER_SHOCK };
+
+typedef struct RogueAfterEffect {
+    BtlObj* target;
+    s16 amount;
+    u8 kind;
+    u8 timer; // frames until it acts
+    u8 ticks; // times it still acts
+} RogueAfterEffect;
+
+static RogueAfterEffect sAfter[ROGUE_AFTER_EFFECTS];
+
+static void RogueAfterAdd(BtlObj* target, u8 kind, s16 amount, u8 timer, u8 ticks) {
+    s32 i;
+
+    for (i = 0; i < ROGUE_AFTER_EFFECTS; i++) {
+        // One of a kind on an enemy: a new burn renews the old.
+        if (sAfter[i].kind == kind && sAfter[i].target == target) {
+            break;
+        }
+    }
+
+    if (i == ROGUE_AFTER_EFFECTS) {
+        for (i = 0; i < ROGUE_AFTER_EFFECTS && sAfter[i].kind != AFTER_NONE; i++) {
+        }
+    }
+
+    if (i < ROGUE_AFTER_EFFECTS) {
+        sAfter[i].target = target;
+        sAfter[i].kind = kind;
+        sAfter[i].amount = amount;
+        sAfter[i].timer = timer;
+        sAfter[i].ticks = ticks;
+    }
+}
+
+// Called for each enemy one of Sora's hits has just been worked out on.
+void RogueAfterHit(BtlObj* target) {
+    u32 element = target->unk_024;
+    s32 damage = target->unk_020;
+
+    if (damage <= 0) {
+        return;
+    }
+
+    if ((element & 0x10000000) && RogueHasRelic(ROGUE_RELIC_BURN)) {
+        RogueAfterAdd(target, AFTER_BURN, damage / 4 + 1, 30, ROGUE_BURN_TICKS);
+    }
+
+    if ((element & 0x20000000) && RogueHasRelic(ROGUE_RELIC_FREEZE) && !(target->flags & 0x80000000)) {
+        RogueAfterAdd(target, AFTER_FREEZE, 0, 20, 1);
+    }
+
+    if ((element & 0x40000000) && RogueHasRelic(ROGUE_RELIC_SHOCK)) {
+        RogueAfterAdd(target, AFTER_SHOCK, damage / 2 + 1, 4, 1);
+    }
+}
+
+// Damage that comes from no hitbox: the enemy takes it when it next looks.
+static void RogueDirectDamage(BtlObj* target, s16 amount) {
+    if (target->unk_0D8 != 0) {
+        target = target->unk_0D8;
+    }
+
+    if (target->unk_02C <= 0 || (target->flags & 2)) {
+        return;
+    }
+
+    target->unk_020 = amount;
+    target->unk_024 = 0;
+    target->unk_0A8 = 0;
+    target->unk_0AC = 0;
+    gBtlWork->unk_076 = 0;
+    target->flags |= 2;
+    gRogueDebug.afterHits++;
+}
+
+static void RogueAfterTick(void) {
+    BtlObj* sora = gBtlWork->actor;
+    BtlObj* actor;
+    RogueAfterEffect* effect;
+    s32 i;
+    s32 alive;
+
+    for (i = 0; i < ROGUE_AFTER_EFFECTS; i++) {
+        effect = &sAfter[i];
+
+        if (effect->kind == AFTER_NONE) {
+            continue;
+        }
+
+        if (effect->timer != 0) {
+            effect->timer--;
+            continue;
+        }
+
+        // The enemy may be gone since: only one still in the battle is touched.
+        alive = 0;
+
+        for (actor = (BtlObj*)ListPoolFirst(&gBtlWork->pool); actor != 0; actor = (BtlObj*)ListPoolNext(&actor->node)) {
+            if (actor == effect->target && actor != sora && actor->unk_02C > 0) {
+                alive = 1;
+            }
+        }
+
+        if (!alive && effect->kind != AFTER_SHOCK) {
+            effect->kind = AFTER_NONE;
+            continue;
+        }
+
+        switch (effect->kind) {
+        case AFTER_BURN:
+            RogueDirectDamage(effect->target, effect->amount);
+            effect->timer = 30;
+            break;
+        case AFTER_FREEZE:
+            // The game's own Stop, asked for as its spell asks.
+            effect->target->unk_020 = ROGUE_FREEZE_FRAMES;
+            effect->target->flags |= 0x800;
+            gRogueDebug.afterHits++;
+            break;
+        case AFTER_SHOCK:
+            for (actor = (BtlObj*)ListPoolFirst(&gBtlWork->pool); actor != 0; actor = (BtlObj*)ListPoolNext(&actor->node)) {
+                if (actor != effect->target && actor != sora) {
+                    RogueDirectDamage(actor, effect->amount);
+                }
+            }
+            break;
+        }
+
+        if (--effect->ticks == 0) {
+            effect->kind = AFTER_NONE;
+        }
+    }
+}
+
+void RogueAfterReset(void) {
+    s32 i;
+
+    for (i = 0; i < ROGUE_AFTER_EFFECTS; i++) {
+        sAfter[i].kind = AFTER_NONE;
+    }
 }

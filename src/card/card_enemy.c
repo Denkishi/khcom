@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -709,7 +710,7 @@ void func_08091234(u16 arg) {
         gBtlWork->flags |= 0x80;
     } else if ((gBtlWork->flags & 0x20) == 0) {
 #ifdef VERSION_EU
-        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
+        if (((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) && !RogueBlocksBreak(p->unk_A5)) {
 #else
         if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
 #endif
@@ -816,7 +817,7 @@ void func_08091234(u16 arg) {
         }
     } else {
 #ifdef VERSION_EU
-        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
+        if (((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) && !RogueBlocksBreak(p->unk_A5)) {
 #else
         if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
 #endif

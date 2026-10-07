@@ -1,4 +1,7 @@
 #include "rogue.h"
+#include "card.h"
+#include "card_deck.h"
+#include "card_types.h"
 #include "registration_data.h"
 #include "battle.h"
 #include "display.h"
@@ -58,7 +61,7 @@ static const u8 sTextKnives[] = "Il finisher lancia\x1Ftre coltelli";
 static const u8 sTextFire[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Fuoco";
 static const u8 sTextIce[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Gelo";
 static const u8 sTextThunder[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Tuono";
-static const u8 sTextEcho[] = "Ogni magia a segno\x1Fcolpisce due volte";
+static const u8 sTextEcho[] = "Ogni magia a segno\x1F" "colpisce due volte";
 static const u8 sTextPillar[] = "Il finisher alza un\x1F" "blocco di ghiaccio";
 static const u8 sTextChakram[] = "Il finisher lancia\x1Fun chakram di fuoco";
 static const u8 sTextNeedles[] = "Il finisher lancia\x1Ftre aghi di ghiaccio";
@@ -81,16 +84,57 @@ static const u8 sTextAirMaster[] = "In aria fai il\x1F" "30% di danno in pi\xF9"
 static const u8 sTextTagTeam[] = "Evocazioni e nemici\x1F" "chiamati: 50% in pi\xF9";
 static const u8 sTextTreasurer[] = "Ogni stanza d\xE0 il\x1F" "50% di frammenti in pi\xF9";
 
+static const u8 sNameZeroShield[] = "Zero infrangibile";
+static const u8 sTextZeroShield[] = "Le tue carte 0 non\x1Fpossono essere rotte";
+static const u8 sNameTieWin[] = "Pari e patta";
+static const u8 sTextTieWin[] = "A parit\xE0 di valore\x1Fvince la tua carta";
+static const u8 sNamePlusOne[] = "Carta truccata";
+static const u8 sTextPlusOne[] = "Le tue carte valgono\x1F" "1 in pi\xF9";
+static const u8 sNameInstantReload[] = "Ricarica lampo";
+static const u8 sTextInstantReload[] = "Il mazzo si ricarica\x1Fin un istante";
+static const u8 sNameFreeFirst[] = "Prima mano";
+static const u8 sTextFreeFirst[] = "La prima carta dopo la\x1Fricarica non si consuma";
+static const u8 sNameRandomSleight[] = "Estro";
+static const u8 sTextRandomSleight[] = "Dopo ogni ricarica una\x1Ftecnica a caso";
+static const u8 sNameForesight[] = "Preveggenza";
+static const u8 sTextForesight[] = "Vedi il valore della\x1Fprossima carta nemica";
+static const u8 sNameHalfDeck[] = "Patto del poco";
+static const u8 sTextHalfDeck[] = "Perdi met\xE0 mazzo\x1Fma il danno raddoppia";
+static const u8 sNameNoHeal[] = "Digiuno";
+static const u8 sTextNoHeal[] = "Niente cure in lotta\x1Fma esperienza doppia";
+static const u8 sNameTripleJump[] = "Triplo salto";
+static const u8 sTextTripleJump[] = "Un salto in aria\x1Fin pi\xF9";
+static const u8 sNameAirDash[] = "Scatto aereo";
+static const u8 sTextAirDash[] = "In aria, doppio tocco\x1Fper scattare";
+static const u8 sNameGlide[] = "Planata";
+static const u8 sTextGlide[] = "Tieni B in aria\x1Fper scendere piano";
+static const u8 sNameTrail[] = "Scia tagliente";
+static const u8 sTextTrail[] = "La schivata ferisce\x1F" "chi attraversa";
+static const u8 sNameTeleport[] = "Passo d'ombra";
+static const u8 sTextTeleport[] = "La schivata ti porta\x1F" "alle spalle del bersaglio";
+static const u8 sNameBounce[] = "Rimbalzo";
+static const u8 sTextBounce[] = "I colpi lanciati\x1Ftornano indietro";
+static const u8 sNamePierce[] = "Perforazione";
+static const u8 sTextPierce[] = "I colpi lanciati\x1Ftrapassano i nemici";
+static const u8 sNameBurn[] = "Ustione";
+static const u8 sTextBurn[] = "Il fuoco brucia\x1Fnel tempo";
+static const u8 sNameFreeze[] = "Congelamento";
+static const u8 sTextFreeze[] = "Il ghiaccio blocca\x1Fil nemico";
+static const u8 sNameShock[] = "Scarica";
+static const u8 sTextShock[] = "Il tuono salta sugli\x1F" "altri nemici";
+
 static const u8* const sNames[ROGUE_RELICS] = {
     sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho, sNamePillar, sNameChakram, sNameNeedles, sNamePetals, sNameShards,
     sNameFireball, sNameFireBurst, sNameRock, sNameBomb, sNameMulti, sNameFan, sNameHoming, sNameMoveEcho, sNameGiant, sNamePrism,
     sNameBerserk, sNameThorns, sNameComboHeal, sNameAirMaster, sNameTagTeam, sNameTreasurer,
+    sNameZeroShield, sNameTieWin, sNamePlusOne, sNameInstantReload, sNameFreeFirst, sNameRandomSleight, sNameForesight, sNameHalfDeck, sNameNoHeal, sNameTripleJump, sNameAirDash, sNameGlide, sNameTrail, sNameTeleport, sNameBounce, sNamePierce, sNameBurn, sNameFreeze, sNameShock,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
     sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho, sTextPillar, sTextChakram, sTextNeedles, sTextPetals, sTextShards,
     sTextFireball, sTextFireBurst, sTextRock, sTextBomb, sTextMulti, sTextFan, sTextHoming, sTextMoveEcho, sTextGiant, sTextPrism,
     sTextBerserk, sTextThorns, sTextComboHeal, sTextAirMaster, sTextTagTeam, sTextTreasurer,
+    sTextZeroShield, sTextTieWin, sTextPlusOne, sTextInstantReload, sTextFreeFirst, sTextRandomSleight, sTextForesight, sTextHalfDeck, sTextNoHeal, sTextTripleJump, sTextAirDash, sTextGlide, sTextTrail, sTextTeleport, sTextBounce, sTextPierce, sTextBurn, sTextFreeze, sTextShock,
 };
 
 const u8* RogueRelicName(u8 relic) {
@@ -102,7 +146,32 @@ const u8* RogueRelicText(u8 relic) {
 }
 
 u8 RogueHasRelic(u8 relic) {
+    if (relic >= 32) {
+        return (gRogue.relics2 >> (relic - 32)) & 1;
+    }
+
     return (gRogue.relics >> relic) & 1;
+}
+
+void RogueGiveRelic(u8 relic) {
+    s32 count;
+
+    if (relic >= ROGUE_RELICS || RogueHasRelic(relic)) {
+        return;
+    }
+
+    if (relic >= 32) {
+        gRogue.relics2 |= 1 << (relic - 32);
+    } else {
+        gRogue.relics |= 1 << relic;
+    }
+
+    // The pact: every other card of the deck is given up on the spot.
+    if (relic == ROGUE_RELIC_HALF_DECK) {
+        for (count = GetActiveDeck()->unk_DC / 2; count > 0; count--) {
+            RogueRemoveDeckCard(count * 2 - 1);
+        }
+    }
 }
 
 static u8 RogueRelicUnlocked(u8 relic) {
@@ -116,6 +185,12 @@ static u8 RogueRelicUnlocked(u8 relic) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN;
     }
 
+    // The later relics: the card ones and the cursed from the second chapter,
+    // the rest from the first.
+    if (relic >= ROGUE_FIRST_CARD_RELIC) {
+        return relic >= ROGUE_RELIC_TRIPLE_JUMP || gRogueMeta.chapters >= 2;
+    }
+
     // The synergy relics come two for each chapter unlocked.
     if (relic >= ROGUE_FIRST_SYNERGY) {
         return relic - ROGUE_FIRST_SYNERGY < gRogueMeta.chapters * 2;
@@ -123,7 +198,7 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     // A modifier is of use to a run that has a move, a blade or the echo.
     if (relic >= ROGUE_FIRST_MOD) {
-        return gRogueMeta.bossMoves != 0 && (gRogue.relics >> ROGUE_RELIC_KNIVES) != 0;
+        return gRogueMeta.bossMoves != 0 && ((gRogue.relics >> ROGUE_RELIC_KNIVES) != 0 || gRogue.relics2 != 0);
     }
 
     if (relic >= ROGUE_RELIC_CHAKRAM) {

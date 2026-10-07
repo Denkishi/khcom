@@ -35,3 +35,5 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `profile_battle.txt` | frame load and missed frames in a crowded battle |
 | `skill_tree.txt` | the ability tree and the starting cards bought from Axel in the hub |
 | `more_moves.txt` | the later moves, the three new spells and the move modifiers |
+| `effect_cards.txt` | the cards with an effect of their own |
+| `relics_more.txt` | burn, freeze, shock, the shadow step and the air dash |

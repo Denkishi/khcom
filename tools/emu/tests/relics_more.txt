@@ -1,0 +1,48 @@
+# The later relics that can be told from counters: what the elements leave
+# (48 burn, 49 freeze, 50 shock), the dodge's shadow step and trail (45, 44)
+# and the air dash (42).
+# Expect: after_fire is 2 or more (burn ticks), after_all higher (freeze and
+# shock added), teleports 1, air_dashes 1, and the frame counter runs.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 70
+wait 445
+debug relic 48
+wait 2
+debug relic 49
+wait 2
+debug relic 50
+wait 2
+debug move 4
+wait 150
+peek16 @gRogueDebug.afterHits after_fire
+debug move 1
+wait 60
+shot /tmp/relics_more_freeze.ppm
+debug card 46
+wait 60
+peek16 @gRogueDebug.afterHits after_all
+debug relic 45
+wait 2
+debug relic 44
+wait 2
+debug relic 42
+wait 2
+press RIGHT 2
+press RIGHT 2
+wait 12
+shot /tmp/relics_more_step.ppm
+wait 50
+peek16 @gRogueDebug.teleports teleports
+hold B 4
+wait 12
+hold LEFT 2
+wait 3
+hold LEFT 2
+wait 4
+shot /tmp/relics_more_dash.ppm
+wait 60
+peek16 @gRogueDebug.airDashes air_dashes
+peek32 @gFrameCounter frames
+wait 20
+peek32 @gFrameCounter frames_later

@@ -275,7 +275,7 @@ void RogueGainCardXp(void) {
         slot = deck->cards[i];
 
         if (slot < ROGUE_CARD_SLOTS && gRogue.cardXp[slot] < ROGUE_CARD_XP_LEVEL_3) {
-            gRogue.cardXp[slot] += 1 + RogueUpgradeLevel(ROGUE_UPGRADE_XP);
+            gRogue.cardXp[slot] += (1 + RogueUpgradeLevel(ROGUE_UPGRADE_XP)) * (RogueHasRelic(ROGUE_RELIC_NO_HEAL) ? 2 : 1);
         }
     }
 }

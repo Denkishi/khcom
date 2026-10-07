@@ -37,7 +37,7 @@ void RogueDebugField(void) {
         RogueLeaveRoomFor(&gModeRogueReward, arg);
         break;
     case ROGUE_DEBUG_RELIC:
-        gRogue.relics |= 1 << arg;
+        RogueGiveRelic(arg);
         break;
     case ROGUE_DEBUG_FLOOR:
         gRogue.floor = arg;

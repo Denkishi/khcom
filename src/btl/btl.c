@@ -2478,6 +2478,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_150 += 64;
         }
 
+        RogueAirControl(work, held, pressed);
+
         if (((s16)held & (DPAD_RIGHT | DPAD_UP)) == (DPAD_RIGHT | DPAD_UP)) {
             if (work->angle != 32) {
                 work->angle = 32;
@@ -2700,7 +2702,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             work->unk_150 = -460;
             m4aSongNumStart(SONG_VO_SR_ATTACK09);
+            RogueOnDodge(p);
         } else if ((s16)work->unk_154 > 4 && (s16)work->unk_156 != 0) {
+            RogueDodgeTrail(p);
+
             if (p->flags & 4) {
                 p->x -= work->unk_194;
             } else {

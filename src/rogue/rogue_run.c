@@ -286,6 +286,7 @@ void RogueStartRun(void) {
     gRogue.kind = ROGUE_ROOM_START;
     gRogue.comboPlus = 0;
     gRogue.relics = 0;
+    gRogue.relics2 = 0;
     gRogue.airJumps = 0;
     gRogue.airJumpsUsed = 0;
     gRogue.world = sFloors[0].world;
@@ -404,7 +405,7 @@ u8 RogueDoorsOpen(void) {
 }
 
 u8 RogueTryAirJump(void) {
-    if (gRogue.airJumpsUsed >= gRogue.airJumps) {
+    if (gRogue.airJumpsUsed >= gRogue.airJumps + RogueHasRelic(ROGUE_RELIC_TRIPLE_JUMP)) {
         return 0;
     }
 
@@ -415,6 +416,7 @@ u8 RogueTryAirJump(void) {
 
 void RogueResetAirJumps(void) {
     gRogue.airJumpsUsed = 0;
+    gRogue.airDashUsed = 0;
     gRogue.jumpBuffer = 0;
 }
 

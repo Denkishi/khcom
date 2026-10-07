@@ -634,7 +634,7 @@ static void RogueGiveReward(RogueReward* reward) {
         gGameState.progression.ap++;
         break;
     case REWARD_RELIC:
-        gRogue.relics |= 1 << reward->card;
+        RogueGiveRelic(reward->card);
         break;
     case REWARD_ART:
         gRogue.arts[reward->card] = reward->result;
@@ -683,7 +683,7 @@ static void RogueGiveReward(RogueReward* reward) {
             slot = RogueRollRelic();
 
             if (slot != ROGUE_RELICS) {
-                gRogue.relics |= 1 << slot;
+                RogueGiveRelic(slot);
             } else if (gGameState.progression.ap < ROGUE_AP_MAX) {
                 gGameState.progression.ap++;
             }
@@ -711,7 +711,7 @@ static void RogueGiveReward(RogueReward* reward) {
         RogueLoseHp(20);
         break;
     case REWARD_RELIC_FOR_HP:
-        gRogue.relics |= 1 << reward->card;
+        RogueGiveRelic(reward->card);
         RogueLoseMaxHp(25);
         break;
     }

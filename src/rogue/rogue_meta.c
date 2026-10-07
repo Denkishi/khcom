@@ -173,7 +173,7 @@ static void RogueApplyUpgrade(u8 upgrade) {
         u8 relic = RogueRollRelic();
 
         if (relic != ROGUE_RELICS) {
-            gRogue.relics |= 1 << relic;
+            RogueGiveRelic(relic);
         }
         break;
     }
@@ -277,7 +277,7 @@ void RogueApplyBoon(void) {
             relic = RogueRollRelic();
 
             if (relic != ROGUE_RELICS) {
-                gRogue.relics |= 1 << relic;
+                RogueGiveRelic(relic);
             }
         }
         break;

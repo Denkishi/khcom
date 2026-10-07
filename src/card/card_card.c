@@ -887,7 +887,7 @@ void func_080792F4(CardBattleWork* w) {
 
     gBtlWork->flags |= 0x800000;
 
-    if ((s16)gCardBattleState->unk_0C2 != n) {
+    if ((s16)gCardBattleState->unk_0C2 != n || RogueTieWins()) {
         if (n == 0) {
             if ((s16)gCardBattleState->unk_0C2 > 9) {
                 gBtlWork->unk_1CA = 9;
@@ -1007,6 +1007,13 @@ s32 func_08079600(CardBattleWork* w) {
     gSoraSelectedCard->unk_A1 = 5;
     gSoraSelectedCard->unk_A0 = 50;
     gSoraSelectedCard->args.slot->unk_08 = 1;
+
+    // The relic that keeps the first card after a reload: it is not used up.
+    if (RogueKeepCard()) {
+        gSoraSelectedCard->args.slot->unk_08 = 0;
+        w->unk_B0[w->unk_B8]++;
+    }
+
     gSoraSelectedCard->unk_78 &= ~0x40;
     func_0807BC08();
     if (gBtlWork->unk_0F4 == 37) {
@@ -1670,7 +1677,7 @@ void func_0807A80C(CardBattleWork* w) {
 
     gBtlWork->flags |= 0x800000;
 
-    if ((s16)gCardBattleState->unk_0C2 != n) {
+    if ((s16)gCardBattleState->unk_0C2 != n || RogueTieWins()) {
         if (n == 0) {
             if ((s16)gCardBattleState->unk_0C2 > 9) {
                 gBtlWork->unk_1CA = 9;
@@ -4003,6 +4010,8 @@ void UpdateSoraCardValue(CardDisplayWork* w) {
             break;
         }
     }
+
+    w->unk_A5 = RoguePlayerCardValue(w->unk_A5);
 }
 void func_0807E158(void) {
     BtlWork* p;

@@ -446,6 +446,31 @@ s32 RogueCardAction(const CardDef* def) {
         return ROGUE_ACTION_SWING;
     }
 
+    // The whim: after each reload the first attack or spell played alone
+    // does a sleight picked at random.
+    if (RogueHasRelic(ROGUE_RELIC_RANDOM_SLEIGHT) && gRogue.sleightReady && def->unk_2A != 3 && kind <= CARD_AERO) {
+        u8 art = RogueRollArt(kind);
+
+        gRogue.sleightReady = 0;
+
+        if (art >= ROGUE_ART_MOVES) {
+            RogueDoMove(art - ROGUE_ART_MOVES, gBtlWork->actor);
+            return def->unk_24;
+        }
+
+        if (art == ROGUE_ART_KNIVES) {
+            RogueThrowKnives(gBtlWork->actor);
+            return def->unk_24;
+        }
+
+        if (art == ROGUE_ART_PILLAR) {
+            RogueRaisePillar(gBtlWork->actor);
+            return def->unk_24;
+        }
+
+        return art;
+    }
+
     // The cards with an effect of their own, cast with a swing.
     if (kind >= ROGUE_FIRST_EFFECT_KIND && kind < ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS) {
         const RogueCardEffect* effect = &gRogueCardEffects[kind - ROGUE_FIRST_CARD_KIND];
@@ -523,4 +548,47 @@ void RogueOnStockPlayed(void) {
 
 void RogueOnReload(void) {
     gRogue.artsUsed = 0;
+    gRogue.freeCard = 1;
+    gRogue.sleightReady = 1;
+}
+
+// The relics of the card game.
+
+// Whether an enemy card of this value fails to break the player's card on
+// the table: a zero that cannot be broken, or a tie the player wins.
+u8 RogueBlocksBreak(s32 value) {
+    s32 mine = (s16)gCardBattleState->unk_0C2;
+
+    if (gBtlWork->unk_0A4 != 1) {
+        return 0;
+    }
+
+    if (RogueHasRelic(ROGUE_RELIC_ZERO_SHIELD) && mine == 0) {
+        return 1;
+    }
+
+    return RogueHasRelic(ROGUE_RELIC_TIE_WIN) && mine == value && value != 0;
+}
+
+u8 RogueTieWins(void) {
+    return RogueHasRelic(ROGUE_RELIC_TIE_WIN);
+}
+
+// The value one of the player's cards plays at. A zero stays a zero: it is
+// worth more as one.
+u8 RoguePlayerCardValue(u8 value) {
+    if (RogueHasRelic(ROGUE_RELIC_PLUS_ONE) && value != 0 && value < 9) {
+        value++;
+    }
+
+    return value;
+}
+
+u8 RogueKeepCard(void) {
+    if (RogueHasRelic(ROGUE_RELIC_FREE_FIRST) && gRogue.freeCard) {
+        gRogue.freeCard = 0;
+        return 1;
+    }
+
+    return 0;
 }

@@ -212,8 +212,33 @@ enum RogueRelic {
     ROGUE_RELIC_AIR_MASTER,
     ROGUE_RELIC_TAG_TEAM,
     ROGUE_RELIC_TREASURER,
+    // The card game.
+    ROGUE_RELIC_ZERO_SHIELD,
+    ROGUE_RELIC_TIE_WIN,
+    ROGUE_RELIC_PLUS_ONE,
+    ROGUE_RELIC_INSTANT_RELOAD,
+    ROGUE_RELIC_FREE_FIRST,
+    ROGUE_RELIC_RANDOM_SLEIGHT,
+    ROGUE_RELIC_FORESIGHT,
+    // Cursed: strong, at a price.
+    ROGUE_RELIC_HALF_DECK,
+    ROGUE_RELIC_NO_HEAL,
+    // Movement.
+    ROGUE_RELIC_TRIPLE_JUMP,
+    ROGUE_RELIC_AIR_DASH,
+    ROGUE_RELIC_GLIDE,
+    ROGUE_RELIC_TRAIL,
+    ROGUE_RELIC_TELEPORT,
+    // Thrown moves.
+    ROGUE_RELIC_BOUNCE,
+    ROGUE_RELIC_PIERCE,
+    // What the elements leave on an enemy.
+    ROGUE_RELIC_BURN,
+    ROGUE_RELIC_FREEZE,
+    ROGUE_RELIC_SHOCK,
     ROGUE_RELICS
 };
+#define ROGUE_FIRST_CARD_RELIC ROGUE_RELIC_ZERO_SHIELD
 #define ROGUE_FIRST_MOD ROGUE_RELIC_MOD_MULTI
 #define ROGUE_FIRST_SYNERGY ROGUE_RELIC_BERSERK
 
@@ -315,6 +340,11 @@ enum RogueMove {
 #define ROGUE_DAMAGE_NUMBERS 6 // shown at once
 #define ROGUE_DAMAGE_NUMBER_TIME 36 // frames each stays
 #define ROGUE_MOVE_SPEED 0xA00
+#define ROGUE_GLIDE_SPEED 96 // fall speed while gliding
+#define ROGUE_AIR_DASH_SPEED 0x700
+#define ROGUE_BURN_TICKS 4 // times a burn hurts, half a second apart
+#define ROGUE_FREEZE_FRAMES 90
+#define ROGUE_AFTER_EFFECTS 8 // burns, freezes and shocks waiting at once
 #define ROGUE_MOVE_ECHO_DELAY 18 // frames before a move is done again
 #define ROGUE_MAGNET_FRAMES 24 // frames enemies are pulled for
 #define ROGUE_MOVE_POSE 22 // frames Sora holds his casting pose for a move
@@ -412,7 +442,12 @@ typedef struct RogueRun {
     u8 chapters; // chapters this run goes through
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
     u16 shards; // earned this run, banked when it ends
-    u32 relics; // one bit for each RogueRelic the run has
+    u32 relics; // one bit for each of the first 32 RogueRelic the run has; ask RogueHasRelic
+    u32 relics2; // and for the rest
+    u8 airDashUsed; // the air dash was done since Sora last left the ground
+    u8 freeCard; // the first card played since the reload is not used up
+    u8 sleightReady; // the next card played alone does a random sleight
+    s16 lastHp; // Sora's HP on the last frame, for the relic that forbids healing
     u8 secondWindUsed; // this battle
     u16 combo; // hits landed without being hit
     u8 comboTimer; // frames until the hit count lapses
@@ -474,6 +509,9 @@ typedef struct RogueDebug {
     u16 echoes; // added magic hits that connected this battle
     u16 pillars; // ice blocks the Vexen relic raised this battle
     u16 tagHits; // tag attacks that connected this battle
+    u16 airDashes;
+    u16 teleports;
+    u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet
     u16 enemyTags; // enemies and bosses called in by their cards
     u8 slow; // the original routines run in place of the mod's faster ones, to compare
@@ -544,11 +582,22 @@ u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);
 void RogueProfileFrame(void);
 void RogueMovesTick(void);
+struct BtlSoraWork;
+void RogueAirControl(struct BtlSoraWork* work, u16 held, u16 pressed);
+void RogueOnDodge(struct BtlObj* sora);
+void RogueDodgeTrail(struct BtlObj* sora);
+void RogueAfterHit(struct BtlObj* target);
+void RogueAfterReset(void);
 void RogueShockwave(struct BtlObj* sora, u8 element, u16 scale);
 void RogueBuildOam(void);
 s32 RogueSqrt8(s32 a);
 extern const u16 gRogueMickeyPalette[16];
 u8 RogueHasRelic(u8 relic);
+void RogueGiveRelic(u8 relic);
+u8 RogueBlocksBreak(s32 value);
+u8 RogueTieWins(void);
+u8 RoguePlayerCardValue(u8 value);
+u8 RogueKeepCard(void);
 u8 RogueCardElement(u16 id);
 void RogueCountBuild(void);
 u8 RogueBuildElement(void);

@@ -14,12 +14,13 @@ import sys
 from pathlib import Path
 
 import imageio_ffmpeg
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / "build/trailer"
 OUT = ROOT / "mod_assets/trailer.mp4"
-FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+# The words, in the order the game has them in rogue_hub.c: it writes them itself, see captions().
+WORDS = ['KINGDOM HEARTS', 'CHAIN OF MEMORIES', 'ROGUELITE', 'Ogni run è diversa', 'Un hub da esplorare', 'Ogni porta, una carta', 'Tu scegli la stanza', 'Battaglie in 2D', 'Nuove mosse', 'Salta. Taglia. Tuffati.', 'Ogni mossa è una carta', 'Le mosse dei boss sono tue', 'Più di 180 reliquie', 'Nuovi eroi', 'Nuovi boss', 'Riuscirai a batterli?', 'CoM ROGUELITE', 'github.com/Denkishi/khcom']
 WIDE, HIGH = 288, 160
 SIZE = (1280, 720)
 
@@ -75,7 +76,7 @@ SCENES.update({
 # scene in which most moves on the screen, found by busiest().
 CUTS = [
     (None, 80, "KINGDOM HEARTS", "CHAIN OF MEMORIES"),
-    (None, 45, "ROGUELITE", "ogni run è diversa"),
+    (None, 45, "ROGUELITE", "Ogni run è diversa"),
     ("hub", 20, 120, "Un hub da esplorare", False, 1),
     ("door", 150, 60, "Ogni porta, una carta", False, 1),
     ("door", 330, 80, "Tu scegli la stanza", False, 1),
@@ -120,12 +121,33 @@ def record():
         print(name, (WORK / f"{name}.rgb").stat().st_size // (WIDE * HIGH * 4), "frames")
 
 
-def text(draw, where, words, size, colour=(255, 255, 255)):
-    font = ImageFont.truetype(FONT, size)
-    width = draw.textlength(words, font=font)
-    x, y = (SIZE[0] - width) // 2, where
-    draw.text((x + 3, y + 3), words, font=font, fill=(0, 0, 0))
-    draw.text((x, y), words, font=font, fill=colour)
+def captions():
+    """Has the game write each line in its own letters on an empty screen, and keeps a picture of each."""
+    lines = ["wait 600", "press START", "wait 120"]
+    for n in range(len(WORDS)):
+        lines += [f"poke8 @gRogueDebug.caption {n + 1}", "wait 4", f"shot {WORK}/caption{n}.ppm"]
+    script = WORK / "captions.txt"
+    script.write_text("\n".join(lines) + "\n")
+    subprocess.run([sys.executable, ROOT / "tools/emu/play.py", script], check=True, stdout=subprocess.DEVNULL)
+    for n in range(len(WORDS)):
+        picture = Image.open(WORK / f"caption{n}.ppm").convert("RGB")
+        box = picture.point(lambda v: 255 if v > 8 else 0).getbbox()
+        picture = picture.crop(box).convert("RGBA")
+        picture.putdata([(r, g, b, 0 if r + g + b < 24 else 255) for r, g, b, _ in picture.getdata()])
+        picture.save(WORK / f"caption{n}.png")
+
+
+def text(image, where, words, scale):
+    """A line of the game's own writing, enlarged a whole number of times, centred at a height."""
+    picture = Image.open(WORK / f"caption{WORDS.index(words)}.png")
+    picture = picture.resize((picture.width * scale, picture.height * scale), Image.NEAREST)
+    x = (SIZE[0] - picture.width) // 2
+    # A dark edge of one of its own pixels all round, so that it reads over anything.
+    edge = Image.new("RGBA", picture.size, (8, 8, 24, 255))
+    for dx in (-scale, 0, scale):
+        for dy in (-scale, 0, scale):
+            image.paste(edge, (x + dx, where + dy), picture)
+    image.paste(picture, (x, where), picture)
 
 
 def frames():
@@ -135,11 +157,11 @@ def frames():
             _, count, big, small = cut
             for i in range(count):
                 image = Image.new("RGB", SIZE, (4, 6, 20))
-                draw = ImageDraw.Draw(image)
+                text(image, 250, big, 7)
+                text(image, 400, small, 4)
                 # The words come up out of the dark.
-                shade = min(255, i * 16)
-                text(draw, 250, big, 96, (shade, shade, shade))
-                text(draw, 380, small, 40, (shade * 230 // 255, shade * 190 // 255, shade * 60 // 255))
+                if i < 16:
+                    image = Image.blend(Image.new("RGB", SIZE, (4, 6, 20)), image, i / 16)
                 yield image.tobytes()
             continue
         scene, first, count, words, wide, slow = cut
@@ -163,10 +185,7 @@ def frames():
                     # A cut comes in from black over three frames.
                     image = Image.blend(Image.new("RGB", SIZE, (0, 0, 0)), image, (i + 1) / 4)
                 if words:
-                    # On a dark band, so that it reads over the game's own text.
-                    band = Image.new("RGB", (SIZE[0], 84), (0, 0, 0))
-                    image.paste(Image.blend(image.crop((0, 596, SIZE[0], 680)), band, 0.72), (0, 596))
-                    text(ImageDraw.Draw(image), 612, words, 44, (255, 232, 120))
+                    text(image, 612, words, 5)
                 for _ in range(slow):
                     yield image.tobytes()
 
@@ -194,4 +213,5 @@ def compose():
 if __name__ == "__main__":
     if "compose" not in sys.argv:
         record()
+    captions()
     compose()

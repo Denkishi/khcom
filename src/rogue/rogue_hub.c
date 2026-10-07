@@ -460,10 +460,50 @@ static void RogueHubWalk(void) {
     RogueHubShowNear();
 }
 
+// For the trailer (tools/trailer.py): its lines of text are written by the
+// game, in its own letters on an empty screen, to be photographed.
+static const u8 sCaption0[] = "\x1D" "KINGDOM HEARTS\x1E";
+static const u8 sCaption1[] = "\x1D" "CHAIN OF MEMORIES\x1E";
+static const u8 sCaption2[] = "\x1D" "ROGUELITE\x1E";
+static const u8 sCaption3[] = "\x1D" "Ogni run \xE8 diversa\x1E";
+static const u8 sCaption4[] = "\x1D" "Un hub da esplorare\x1E";
+static const u8 sCaption5[] = "\x1D" "Ogni porta, una carta\x1E";
+static const u8 sCaption6[] = "\x1D" "Tu scegli la stanza\x1E";
+static const u8 sCaption7[] = "\x1D" "Battaglie in 2D\x1E";
+static const u8 sCaption8[] = "\x1D" "Nuove mosse\x1E";
+static const u8 sCaption9[] = "\x1D" "Salta. Taglia. Tuffati.\x1E";
+static const u8 sCaption10[] = "\x1D" "Ogni mossa \xE8 una carta\x1E";
+static const u8 sCaption11[] = "\x1D" "Le mosse dei boss sono tue\x1E";
+static const u8 sCaption12[] = "\x1D" "Pi\xF9 di 180 reliquie\x1E";
+static const u8 sCaption13[] = "\x1D" "Nuovi eroi\x1E";
+static const u8 sCaption14[] = "\x1D" "Nuovi boss\x1E";
+static const u8 sCaption15[] = "\x1D" "Riuscirai a batterli?\x1E";
+static const u8 sCaption16[] = "\x1D" "CoM ROGUELITE\x1E";
+static const u8 sCaption17[] = "\x1D" "github.com/Denkishi/khcom\x1E";
+static const u8* const sCaptions[] = { sCaption0, sCaption1, sCaption2, sCaption3, sCaption4, sCaption5, sCaption6, sCaption7, sCaption8, sCaption9, sCaption10, sCaption11, sCaption12, sCaption13, sCaption14, sCaption15, sCaption16, sCaption17 };
+
+static void RogueHubCaption(void) {
+    static u8 shown;
+
+    if (shown != gRogueDebug.caption) {
+        shown = gRogueDebug.caption;
+        DisableBg(3);
+        FreeTextSlots(sWork->line, LINE_SLOTS);
+        sWork->lineCount = LoadTextSlots((u16*)sCaptions[shown - 1], sWork->line);
+    }
+
+    DrawTextSlots(8, 72, sWork->line, sWork->textPalette, 50, sWork->lineCount);
+}
+
 static void RogueHub_Update(void) {
     u32 near;
     u32 i;
     u16 attr;
+
+    if (gRogueDebug.caption != 0) {
+        RogueHubCaption();
+        return;
+    }
 
     switch (sWork->state) {
     case 0:

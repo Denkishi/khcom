@@ -245,6 +245,28 @@ s32 RogueBuildDamage(s32 damage, u16 attack, u32 attackFlags) {
 
     if (!gRogue.projectile && gRogue.playedKind != ROGUE_NO_KIND && RogueKindBuild(gRogue.playedKind) == ROGUE_BUILD_SPELL) {
         bonus += 10 * RogueUpgradeLevel(ROGUE_UPGRADE_MAGIC);
+
+        // An enchanted spell: what a keyblade gets on each swing, the spell
+        // gets on each hit, where the enemy locked on stands.
+        target = gBtlWork->actor2;
+
+        if (!gRogue.echoing && target != 0) {
+            switch (gRogue.playedMod) {
+            case ROGUE_MOD_FIRE:
+            case ROGUE_MOD_ICE:
+            case ROGUE_MOD_THUNDER:
+                RogueEcho(target->x, target->y, target->z, sElementAttacks[gRogue.playedMod - ROGUE_MOD_FIRE], 96);
+                break;
+            case ROGUE_MOD_DOUBLE:
+                RogueEcho(target->x, target->y, target->z, attack, 128);
+                break;
+            case ROGUE_MOD_LIFESTEAL:
+                if (gBtlWork->actor->unk_02C > 0 && gBtlWork->actor->unk_02C < gBtlWork->actor->unk_02E) {
+                    gBtlWork->actor->unk_02C++;
+                }
+                break;
+            }
+        }
     }
 
     if (gRogue.playedMod == ROGUE_MOD_HEAVY && !gRogue.projectile && !gRogue.echoing) {

@@ -27,10 +27,14 @@
 // stand there, more of them as the game is played, each offer a boon for the
 // next run: talking to one picks theirs. Start begins the run.
 
-extern const u8 gRogueStationTiles[];
-extern const u16 gRogueStationMap[640];
+// The picture of the station's top, larger than the screen: WORLD_COLUMNS by
+// WORLD_ROWS tiles stored as they lie, see tools/rogue_backgrounds.py.
+extern const u8 gRogueStationWorld[];
 extern const u16 gRogueStationPalette[256];
-extern const u32 gRogueStationTilesSize;
+#define WORLD_COLUMNS 58
+#define WORLD_ROWS 36
+#define WORLD_WIDTH (WORLD_COLUMNS * 8)
+#define WORLD_HEIGHT (WORLD_ROWS * 8)
 // Sora's field sprites: [action][direction], directions back, front,
 // front-left, left and back-left, mirrored for the right-hand ones.
 extern const AnimDef gUnk_0813C89C[15][5];
@@ -47,12 +51,14 @@ enum {
 #define ACTION_WALK 1
 
 // Where Sora can walk, in screen pixels: the picture above the text.
-#define WALK_LEFT 12
-#define WALK_RIGHT 228
-#define WALK_TOP 42
-#define WALK_BOTTOM 126
-#define START_X 120
-#define START_Y 84
+// Where Sora can walk, in the picture's pixels: on the glass, an ellipse.
+#define GLASS_X 232
+#define GLASS_Y 142
+#define GLASS_RX 206
+#define GLASS_RY 112
+#define START_X 232
+#define START_Y 150
+#define NPC_RADIUS 13 // how near a character Sora's feet can come
 #define TALK_RANGE 26
 #define WALK_SPEED 0x180
 
@@ -65,34 +71,33 @@ typedef struct RogueHubNpc {
     s16 x;
     s16 y;
     u8 boon; // the boon they offer, ROGUE_BOON_NONE for Axel
-    u8 side; // which side of the station they stand on: the screen has not the palettes for them all at once
 } RogueHubNpc;
 
 #define NPC(name, palette, x, y, boon) \
-    { g##name##Fl00Tiles, sizeof(g##name##Fl00Tiles), palette, g##name##Fl00Anims, g##name##Fl00Frames, x, y, boon, 0 }
+    { g##name##Fl00Tiles, sizeof(g##name##Fl00Tiles), palette, g##name##Fl00Anims, g##name##Fl00Frames, x, y, boon }
 
 #define DRAWN(name, x, y, boon) \
     { (void*)gRogueNpc##name##Tiles, sizeof(gRogueNpc##name##Tiles), (void*)gRogueNpc##name##Palette, (void*)gRogueNpc##name##Anims, \
-      (void*)gRogueNpc##name##Frames, x, y, boon, 1 }
+      (void*)gRogueNpc##name##Frames, x, y, boon }
 
-// They stand around the edge, leaving the middle to walk in.
+// They stand round the rim of the glass, far enough apart that the screen
+// never shows more of them than it has palettes for.
 static const RogueHubNpc sNpcs[] = {
-    NPC(Accele, gAccelePalette, 120, 46, ROGUE_BOON_NONE),
-    NPC(Bell, gBellPalette, 66, 50, ROGUE_BOON_BELLE),
-    NPC(Mogu, gMoguPalette, 174, 50, ROGUE_BOON_MOOGLE),
-    NPC(Reon, gReonPalette, 26, 84, ROGUE_BOON_LEON),
-    NPC(Yuffie, gYuffiePalette, 214, 84, ROGUE_BOON_YUFFIE),
-    NPC(Heracles, gHeraclesPalette, 62, 122, ROGUE_BOON_HERCULES),
-    NPC(Tigger, gTiggerPalette, 178, 122, ROGUE_BOON_TIGGER),
-    NPC(Jack, gJackPalette, 120, 124, ROGUE_BOON_JACK),
+    NPC(Accele, gAccelePalette, 232, 62, ROGUE_BOON_NONE),
+    NPC(Bell, gBellPalette, 156, 70, ROGUE_BOON_BELLE),
+    NPC(Mogu, gMoguPalette, 308, 70, ROGUE_BOON_MOOGLE),
+    NPC(Reon, gReonPalette, 60, 127, ROGUE_BOON_LEON),
+    NPC(Yuffie, gYuffiePalette, 404, 127, ROGUE_BOON_YUFFIE),
+    NPC(Heracles, gHeraclesPalette, 94, 198, ROGUE_BOON_HERCULES),
+    NPC(Tigger, gTiggerPalette, 370, 198, ROGUE_BOON_TIGGER),
+    NPC(Jack, gJackPalette, 232, 230, ROGUE_BOON_JACK),
     // Those drawn from sheets of standing sprites, see tools/rogue_npcs.py: they have the one pose.
-    // They stand on the far side, which Sora reaches by walking off the right edge.
-    DRAWN(Kairi, 64, 66, ROGUE_BOON_KAIRI),
-    DRAWN(Namine, 102, 56, ROGUE_BOON_NAMINE),
-    DRAWN(Aqua, 142, 56, ROGUE_BOON_AQUA),
-    DRAWN(Terra, 186, 66, ROGUE_BOON_TERRA),
-    DRAWN(Ventus, 84, 126, ROGUE_BOON_VENTUS),
-    DRAWN(Vanitas, 160, 126, ROGUE_BOON_VANITAS),
+    DRAWN(Kairi, 156, 222, ROGUE_BOON_KAIRI),
+    DRAWN(Namine, 308, 222, ROGUE_BOON_NAMINE),
+    DRAWN(Aqua, 60, 165, ROGUE_BOON_AQUA),
+    DRAWN(Terra, 404, 165, ROGUE_BOON_TERRA),
+    DRAWN(Ventus, 94, 94, ROGUE_BOON_VENTUS),
+    DRAWN(Vanitas, 370, 94, ROGUE_BOON_VANITAS),
 };
 
 #define HUB_NPCS (sizeof(sNpcs) / sizeof(sNpcs[0]))
@@ -128,10 +133,11 @@ typedef struct RogueHubWork {
     u8 state;
     u8 next; // what the hub leads to once it has faded out
     u8 talking;
-    u8 side; // which side of the station is shown
-    u8 sides; // 2 once somebody stands on the far side
-    TextSlot arrow[4];
-    u8 arrowCount;
+    s16 camX; // the corner of the picture the screen shows
+    s16 camY;
+    s16 tileX; // the tile at that corner when the picture was last loaded
+    s16 tileY;
+    u8 greeting; // the character Sora is being greeted by, whose boon follows
 } RogueHubWork;
 
 enum {
@@ -141,7 +147,9 @@ enum {
 
 static RogueHubWork* sWork;
 
-static void RogueHubLoadSide(void);
+static void RogueHubCamera(void);
+static void RogueHubLoadPicture(u8 all);
+static void RogueHubShowNear(void);
 
 static const u8 sHint[] = "START: parti";
 static const u8 sBoon[] = "Dono: ";
@@ -197,7 +205,6 @@ static void RogueHubShowBoon(void) {
     // The oblivion level, once there is one to pick with L and R, and the
     // hero, once there is another: a plate each.
     FreeTextSlots(sWork->level, 14);
-    FreeTextSlots(sWork->arrow, 4);
     FreeTextSlots(sWork->hero, 26);
     sWork->levelCount = 0;
     sWork->heroCount = 0;
@@ -246,9 +253,7 @@ static void RogueHub_Init(s32 arg) {
     SetBgPriority(3, 3);
     // The picture is the mod's only 256-colour background.
     gBg3Cnt |= BGCNT_256COLOR;
-    LoadBgTiles(3, (void*)gRogueStationTiles, gRogueStationTilesSize);
     LoadBgPalette(3, (void*)gRogueStationPalette, 224 * 2);
-    LoadBgMap(3, (void*)gRogueStationMap, sizeof(gRogueStationMap));
     // The dialogue window goes on the first background, set up as in a room.
     SetupBg(0, 3, 31, 14);
     SetBgPriority(0, 0);
@@ -270,50 +275,110 @@ static void RogueHub_Init(s32 arg) {
     AnimInit(&sWork->soraAnim, 0, 0);
     RogueHubSoraAnim(ACTION_STAND, DIR_FRONT);
 
-    sWork->side = 0;
-    sWork->sides = 1;
-
     for (i = 0; i < HUB_NPCS; i++) {
         sWork->present[i] = 0;
-
-        if (sNpcs[i].side != 0 && RogueBoonUnlocked(sNpcs[i].boon)) {
-            sWork->sides = 2;
-        }
     }
 
-    InitTextSlots(sWork->arrow, 4);
-    RogueHubLoadSide();
+    sWork->greeting = HUB_NPCS;
+    RogueHubCamera();
+    RogueHubLoadPicture(1);
+    RogueHubShowNear();
 
     m4aSongNumStartOrContinue(SONG_BGM_TITLE);
     FadeStartIn(0, 16);
 }
 
-static const u8 sArrow[] = ">>";
-static const u8 sArrowBack[] = "<<";
+// The screen's corner follows Sora, as far as the picture goes.
+static void RogueHubCamera(void) {
+    s32 x = (sWork->x >> 8) - 120;
+    s32 y = (sWork->y >> 8) - 88;
 
-// Puts on the screen those who stand on the side shown, in place of the others.
-static void RogueHubLoadSide(void) {
-    u32 i;
+    sWork->camX = x < 0 ? 0 : x > WORLD_WIDTH - 240 ? WORLD_WIDTH - 240 : x;
+    sWork->camY = y < 0 ? 0 : y > WORLD_HEIGHT - 160 ? WORLD_HEIGHT - 160 : y;
+}
 
-    sWork->arrowCount = LoadTextSlots((u16*)(sWork->side ? sArrowBack : sArrow), sWork->arrow);
+// One tile of the picture into the video memory. There is room for 32 by 24
+// tiles of it at a time, more than the screen shows, so a tile's place there
+// is its column and row wrapped to that; the map, 32 by 32, is told where.
+static void RogueHubLoadTile(s32 tx, s32 ty) {
+    const u32* from = (const u32*)&gRogueStationWorld[(ty * WORLD_COLUMNS + tx) * 64];
+    u16 slot = (ty % 24) * 32 + (tx & 31);
+    u32* to = (u32*)(0x06000000 + slot * 64);
+    s32 i;
 
-    for (i = 0; i < HUB_NPCS; i++) {
-        if (sWork->present[i]) {
-            ReleaseObjTiles(sWork->npcTiles[i]);
-            ReleaseObjPalette(sWork->npcPalettes[i]);
-            sWork->present[i] = 0;
+    for (i = 0; i < 16; i++) {
+        to[i] = from[i];
+    }
+
+    ((u16*)0x0600E800)[(ty & 31) * 32 + (tx & 31)] = slot;
+}
+
+// Loads what the screen has come to show: all of it, or the column and the
+// row that have just come in at an edge.
+static void RogueHubLoadPicture(u8 all) {
+    s32 tileX = sWork->camX >> 3;
+    s32 tileY = sWork->camY >> 3;
+    s32 x;
+    s32 y;
+
+    for (y = tileY; y <= tileY + 20 && y < WORLD_ROWS; y++) {
+        for (x = tileX; x <= tileX + 30 && x < WORLD_COLUMNS; x++) {
+            if (all || x < sWork->tileX || x > sWork->tileX + 30 || y < sWork->tileY || y > sWork->tileY + 20) {
+                RogueHubLoadTile(x, y);
+            }
         }
     }
 
+    sWork->tileX = tileX;
+    sWork->tileY = tileY;
+    SetBgScroll(3, sWork->camX, sWork->camY);
+}
+
+// Puts on the screen the characters near enough to be seen and takes off
+// those left behind: there are not the palettes for all of them at once.
+static void RogueHubShowNear(void) {
+    u32 i;
+
     for (i = 0; i < HUB_NPCS; i++) {
-        if (sNpcs[i].side == sWork->side && RogueBoonUnlocked(sNpcs[i].boon)) {
+        s32 dx = sNpcs[i].x - (sWork->camX + 120);
+        s32 dy = sNpcs[i].y - (sWork->camY + 80);
+        // On the screen, or about to be: they are drawn from the feet up, and are tall.
+        u8 near = RogueBoonUnlocked(sNpcs[i].boon) && dx > -150 && dx < 150 && dy > -92 && dy < 164;
+
+        if (near && !sWork->present[i] && CanAllocObjPalette(3)) {
             sWork->present[i] = 1;
             sWork->npcTiles[i] = AllocObjTiles(sNpcs[i].tilesSize, sNpcs[i].tiles);
             sWork->npcPalettes[i] = LoadObjPalette(sNpcs[i].palette, 32);
             AnimInit(&sWork->npcAnims[i], sNpcs[i].anims, sNpcs[i].frames);
             AnimStart(&sWork->npcAnims[i], 0, 1);
+        } else if (!near && sWork->present[i]) {
+            ReleaseObjTiles(sWork->npcTiles[i]);
+            ReleaseObjPalette(sWork->npcPalettes[i]);
+            sWork->present[i] = 0;
         }
     }
+}
+
+// Whether Sora's feet can be there: on the glass and not inside a character.
+static u8 RogueHubFree(s32 x, s32 y) {
+    s32 ex = (x - GLASS_X) * GLASS_RY;
+    s32 ey = (y - GLASS_Y) * GLASS_RX;
+    u32 i;
+
+    if (ex * ex + ey * ey > GLASS_RX * GLASS_RX * GLASS_RY * GLASS_RY) {
+        return 0;
+    }
+
+    for (i = 0; i < HUB_NPCS; i++) {
+        s32 dx = x - sNpcs[i].x;
+        s32 dy = (y - sNpcs[i].y) * 2;
+
+        if (sWork->present[i] && dx * dx + dy * dy < NPC_RADIUS * NPC_RADIUS) {
+            return 0;
+        }
+    }
+
+    return 1;
 }
 
 // The character Sora stands next to, HUB_NPCS if none.
@@ -381,19 +446,18 @@ static void RogueHubWalk(void) {
     x = (sWork->x + dx) >> 8;
     y = (sWork->y + dy) >> 8;
 
-    if (x >= WALK_LEFT && x <= WALK_RIGHT) {
+    // Each way by itself, so that he slides along what stops him.
+    if (RogueHubFree(x, sWork->y >> 8)) {
         sWork->x += dx;
-    } else if (sWork->sides == 2 && ((x > WALK_RIGHT && sWork->side == 0) || (x < WALK_LEFT && sWork->side == 1))) {
-        // Off the edge: he comes onto the other side of the station from where he left this one.
-        sWork->side ^= 1;
-        sWork->x = (sWork->side ? WALK_LEFT + 2 : WALK_RIGHT - 2) << 8;
-        m4aSongNumStart(SONG_SYS_CLICK);
-        RogueHubLoadSide();
     }
 
-    if (y >= WALK_TOP && y <= WALK_BOTTOM) {
+    if (RogueHubFree(sWork->x >> 8, y)) {
         sWork->y += dy;
     }
+
+    RogueHubCamera();
+    RogueHubLoadPicture(0);
+    RogueHubShowNear();
 }
 
 static void RogueHub_Update(void) {
@@ -409,11 +473,24 @@ static void RogueHub_Update(void) {
         break;
     case 1:
         if (sWork->talking) {
-            // The boon is picked once the character has said what it is.
-            if (func_080A42C8() == 0) {
-                sWork->talking = 0;
-                RogueHubShowBoon();
+            if (func_080A42C8() != 0) {
+                break;
             }
+
+            // After the greeting, what the character offers; the boon is
+            // picked once they have said what it is.
+            if (sWork->greeting != HUB_NPCS) {
+                u8 boon = sNpcs[sWork->greeting].boon;
+
+                sWork->greeting = HUB_NPCS;
+                gRogueMeta.boon = boon;
+                RogueMetaSave();
+                CreateCardMessageTask(&sWork->tasks, 0, ROGUE_MSG_BOON_FIRST + boon - 1);
+                break;
+            }
+
+            sWork->talking = 0;
+            RogueHubShowBoon();
             break;
         }
 
@@ -451,10 +528,9 @@ static void RogueHub_Update(void) {
                 FadeStartOut(0, 16);
                 sWork->state = 2;
             } else {
-                gRogueMeta.boon = sNpcs[near].boon;
-                RogueMetaSave();
                 RogueHubSoraAnim(ACTION_STAND, sWork->direction);
-                CreateCardMessageTask(&sWork->tasks, 0, ROGUE_MSG_BOON_FIRST + sNpcs[near].boon - 1);
+                CreateCardMessageTask(&sWork->tasks, 0, ROGUE_MSG_GREET_FIRST + sNpcs[near].boon - 1);
+                sWork->greeting = near;
                 sWork->talking = 1;
             }
         }
@@ -484,14 +560,9 @@ static void RogueHub_Update(void) {
     for (i = 0; i < HUB_NPCS; i++) {
         if (sWork->present[i]) {
             AnimUpdate(&sWork->npcAnims[i]);
-            DrawSprite(sNpcs[i].x, sNpcs[i].y, AnimGetGfx(&sWork->npcAnims[i]), sWork->npcTiles[i], sWork->npcPalettes[i], 0, 0x800,
-                       -0x1000 - sNpcs[i].y * 4);
+            DrawSprite(sNpcs[i].x - sWork->camX, sNpcs[i].y - sWork->camY, AnimGetGfx(&sWork->npcAnims[i]), sWork->npcTiles[i],
+                       sWork->npcPalettes[i], 0, 0x800, -0x1000 - sNpcs[i].y * 4);
         }
-    }
-
-    // Which edge leads to the other side.
-    if (sWork->sides == 2 && sWork->talking == 0) {
-        DrawTextSlots(sWork->side ? 4 : 220, 84, sWork->arrow, sWork->textPalette, 50, sWork->arrowCount);
     }
 
     attr = 0x800;
@@ -500,7 +571,7 @@ static void RogueHub_Update(void) {
         attr |= 1;
     }
 
-    DrawSprite(sWork->x >> 8, sWork->y >> 8, AnimGetGfx(&sWork->soraAnim), sWork->soraTiles, sWork->soraPalette, 0, attr,
+    DrawSprite((sWork->x >> 8) - sWork->camX, (sWork->y >> 8) - sWork->camY, AnimGetGfx(&sWork->soraAnim), sWork->soraTiles, sWork->soraPalette, 0, attr,
                -0x1000 - (sWork->y >> 8) * 4);
 
     if (!sWork->talking) {

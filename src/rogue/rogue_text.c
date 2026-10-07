@@ -97,6 +97,21 @@ ROGUE_TEXT(sFlat3, "\x1D" "B\x1E usa la carta per una\x1F\x1Dtecnica\x1E: cambia
 ROGUE_TEXT(sFlat4, "\x1D" "B+GI\xD9\x1E para e risponde.\x1FOgni mossa \x1Dspende\x1E la\x1F" "carta in mano.");
 ROGUE_TEXT(sFlat5, "In \x1DMemoria, Opzioni\x1E scegli\x1Fla tecnica di ogni tasto,\x1F" "anche dalle reliquie.");
 
+// What each character of the hub says first, in the order of RogueBoon.
+ROGUE_TEXT(sGreetBelle, "Sora! Che gioia vederti.\x1FQuesta vetrata \xE8 un posto\x1Fstrano per leggere.");
+ROGUE_TEXT(sGreetMoogle, "Kup\xF2! Si viaggia, si\x1Fvende, si compra. Tu che\x1F" "fai, kup\xF2?");
+ROGUE_TEXT(sGreetLeon, "Non abbassare la guardia.\x1FQui dentro niente \xE8\x1F" "come sembra.");
+ROGUE_TEXT(sGreetYuffie, "Ehi, Sora! La pi\xF9 grande\x1Fninja \xE8 qui per te.");
+ROGUE_TEXT(sGreetHercules, "Pronto ad allenarti?\x1FUn eroe non si ferma mai.");
+ROGUE_TEXT(sGreetTigger, "Uh-uh-uh! Che bel posto\x1Fper saltare, vero?");
+ROGUE_TEXT(sGreetJack, "Che scenario spettrale!\x1FMi viene voglia di\x1Fspaventare qualcuno.");
+ROGUE_TEXT(sGreetKairi, "Kairi: Sei tu, Sora.\x1FNon ti perdo di vista.");
+ROGUE_TEXT(sGreetNamine, "Namin\xE9: Ogni run \xE8 un\x1Fricordo nuovo. Disegno\x1F" "anche questo.");
+ROGUE_TEXT(sGreetAqua, "Aqua: Ho camminato tanto\x1Fnel buio. Tu non sei solo.");
+ROGUE_TEXT(sGreetTerra, "Terra: Guardami bene, e\x1Fnon fare i miei errori.");
+ROGUE_TEXT(sGreetVentus, "Ventus: Ti somiglio, eh?\x1F" "Corriamo insieme!");
+ROGUE_TEXT(sGreetVanitas, "Vanitas: Che faccia. Hai\x1Fpaura di quello che sei?");
+
 static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel0, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel1, 0, 0 },
@@ -160,6 +175,19 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat3, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat4, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat5, 0, 0 },
+    { 53, 3, 0, 3, 0, &sGreetBelle, 0, 0 },
+    { 7, 3, 0, 3, 0, &sGreetMoogle, 0, 0 },
+    { 31, 3, 0, 3, 0, &sGreetLeon, 0, 0 },
+    { 37, 3, 0, 3, 0, &sGreetYuffie, 0, 0 },
+    { 46, 3, 0, 3, 0, &sGreetHercules, 0, 0 },
+    { 59, 3, 0, 3, 0, &sGreetTigger, 0, 0 },
+    { 11, 3, 0, 3, 0, &sGreetJack, 0, 0 },
+    { ROGUE_FACE_FIRST + 4, 3, 0, 3, 0, &sGreetKairi, 0, 0 },
+    { ROGUE_FACE_FIRST + 5, 3, 0, 3, 0, &sGreetNamine, 0, 0 },
+    { ROGUE_FACE_FIRST + 0, 3, 0, 3, 0, &sGreetAqua, 0, 0 },
+    { ROGUE_FACE_FIRST + 1, 3, 0, 3, 0, &sGreetTerra, 0, 0 },
+    { ROGUE_FACE_FIRST + 2, 3, 0, 3, 0, &sGreetVentus, 0, 0 },
+    { ROGUE_FACE_FIRST + 3, 3, 0, 3, 0, &sGreetVanitas, 0, 0 },
 };
 
 const CardMessageDef* RogueCardMessageDef(u16 id) {

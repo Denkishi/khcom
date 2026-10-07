@@ -81,6 +81,13 @@ CARDS = [
     ("MoveKnives", "Coltelli", "rom", 559, 17, 5, "KNIVES", 0, 0, 1),
     ("MovePillar", "Blocco di gelo", "rom", 560, 17, 10, "PILLAR", 0, 0, 2),
     ("MoveQuake", "Onda d'urto", "rom", 541, 17, 15, "SHOCK", 0, 250, 0),
+    ("MoveFirewall", "Muro di fuoco", "rom", 558, 17, 10, "MOVE", 11, 0, 4),
+    ("MoveScythe", "Falce di petali", "rom", 561, 17, 5, "MOVE", 12, 0, 8),
+    ("MoveDark", "Aura oscura", "rom", 557, 17, 10, "SHOCK", 0, 220, 128),
+    ("MoveJafar", "Fiamma del genio", "rom", 552, 17, 10, "SHOCK", 1, 70, 0),
+    ("MoveUrsula", "Onda di Ursula", "rom", 554, 17, 10, "SHOCK", 3, 70, 0),
+    ("MoveDragon", "Soffio del drago", "rom", 556, 17, 10, "MOVE", 5, 0, 0),
+    ("MoveOogie", "Dadi di Oogie", "rom", 553, 17, 5, "SHOCK", 0, 160, 0),
 ]
 
 

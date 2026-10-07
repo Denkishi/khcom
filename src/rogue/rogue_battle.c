@@ -408,7 +408,10 @@ static s32 RoguePillar_Update(RoguePillarWork* w) {
         gBtlWork->unk_124 = ROGUE_PILLAR_SCALE;
         gRogue.projectile = 1;
         gRogue.echoing = 1;
+        // Vexen's block freezes what it closes on.
+        gRogue.freezing = 1;
         func_08011F78(PILLAR_ATTACK, w->x, w->y, 0, 28, 20, 48);
+        gRogue.freezing = 0;
         gRogue.echoing = 0;
         gRogue.projectile = 0;
         gBtlWork->unk_124 = scale;

@@ -272,6 +272,10 @@ void RogueOnBossBeaten(u16 battle) {
         gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_VEXEN;
     }
 
+    if (battle == 0xA1 || (battle >= 0xA8 && battle <= 0xAA)) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_RIKU;
+    }
+
     if (battle == 0xA0) {
         gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_HADES;
     }

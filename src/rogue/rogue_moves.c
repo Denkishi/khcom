@@ -88,6 +88,13 @@ static const RogueMoveDef sMoves[ROGUE_MOVE_DEFS] = {
     // Magnet: draws every enemy to a point in front of Sora, then hits there.
     { SHEET(gMaruxhaBtEff1), gMaruxhaBtEffPalette, gMaruxhaBtEff1Anims, gMaruxhaBtEff1Frames, 0, MOTION_PULL, 1, ROGUE_MAGNET_FRAMES + 12,
       ROGUE_MAGNET_FRAMES, 0, 14, 256, 48, 32, 48, SONG_EF_SUMMON_UP },
+    // Axel's wall of fire: it stands in front of Sora and burns four times.
+    // (His own wall is drawn on the background: Hades's flames stand in for it.)
+    { BLOCK(gHadesFigaballBall, 75 * 32), gBStatesPalette, gHadesFigaballBallAnims, gHadesFigaballBallFrames, 0, MOTION_AHEAD, 4, 44, 4, 0, 303,
+      110, 40, 28, 48, SONG_EF_RAC_3TR },
+    // Marluxia's scythe of petals: two thrown ahead.
+    { SHEET(gMaruxhaBtEff2), gMaruxhaBtEffPalette, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames, 0, MOTION_THROWN, 2, 36, 0, 0, 14, 220,
+      14, 12, 14, SONG_EF_RAC_3TR },
 };
 
 typedef struct RogueMoveArgs {
@@ -573,7 +580,9 @@ void RogueAfterHit(BtlObj* target) {
         RogueAfterAdd(target, AFTER_BURN, damage / 4 + 1, 30, ROGUE_BURN_TICKS);
     }
 
-    if ((element & 0x20000000) && RogueHasRelic(ROGUE_RELIC_FREEZE) && !(target->flags & 0x80000000)) {
+    if (gRogue.freezing) {
+        RogueApplyFreeze(target);
+    } else if ((element & 0x20000000) && RogueHasRelic(ROGUE_RELIC_FREEZE) && !(target->flags & 0x80000000)) {
         RogueAfterAdd(target, AFTER_FREEZE, 0, 20, 1);
     }
 

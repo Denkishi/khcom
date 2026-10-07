@@ -125,6 +125,7 @@ enum RogueBoon {
 #define ROGUE_BOSS_MOVE_HADES 16
 #define ROGUE_BOSS_MOVE_LEXAEUS 32
 #define ROGUE_BOSS_MOVE_HOOK 64
+#define ROGUE_BOSS_MOVE_RIKU 128
 #define ROGUE_BASE_RELICS ROGUE_RELIC_KNIVES
 #define ROGUE_META_ALL_CLEARED 2 // a run through every chapter was completed
 
@@ -273,7 +274,7 @@ enum RogueBuild {
 // The mod's cards come after the original 950; ten ids are skipped, see
 // rogue_cards.c. Each new keyblade kind has ten ids, one for each value.
 #define ROGUE_FIRST_CARD_KIND 96
-#define ROGUE_CARD_KINDS 49
+#define ROGUE_CARD_KINDS 56
 #define ROGUE_FIRST_EFFECT_KIND (ROGUE_FIRST_CARD_KIND + 16) // the first card with an effect of its own
 
 // What a card can be enchanted with: it stays on that one card for the run.
@@ -361,6 +362,9 @@ enum RogueMove {
     ROGUE_MOVE_WATER = ROGUE_MOVES,
     ROGUE_MOVE_WIND,
     ROGUE_MOVE_MAGNET,
+    // Boss moves that come as cards only.
+    ROGUE_MOVE_FIREWALL, // Axel
+    ROGUE_MOVE_SCYTHE, // Marluxia
     ROGUE_MOVE_DEFS
 };
 
@@ -473,6 +477,7 @@ typedef struct RogueRun {
     u32 relics; // one bit for each of the first 32 RogueRelic the run has; ask RogueHasRelic
     u32 relics2; // and for the rest
     u8 airDashUsed; // the air dash was done since Sora last left the ground
+    u8 freezing; // set while a hit that freezes whatever it lands on is tested
     u8 freeCard; // the first card played since the reload is not used up
     u8 sleightReady; // the next card played alone does a random sleight
     s16 lastHp; // Sora's HP on the last frame, for the relic that forbids healing

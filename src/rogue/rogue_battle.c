@@ -555,6 +555,8 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.moveEcho = 0;
     gRogue.moveEchoTimer = 0;
     gRogue.thorns = 0;
+    RogueBossAiReset();
+    gRogueDebug.bossSwings = 0;
     gRogue.airDashUsed = 0;
     RogueAfterReset();
     gRogueDebug.afterHits = 0;

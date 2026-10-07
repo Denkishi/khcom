@@ -1,0 +1,16 @@
+# The bosses that had no fight of their own now have one: Leon walks up to
+# Sora and swings.
+# Expect: boss_swings above 2, hp_after below hp_before, and the pictures
+# show Leon next to Sora.
+include start.txt
+debug battle 157
+wait 330
+peek16 @gRogueDebug.soraHp hp_before
+shot /tmp/boss_ai_1.ppm
+wait 240
+shot /tmp/boss_ai_2.ppm
+wait 240
+shot /tmp/boss_ai_3.ppm
+peek16 @gRogueDebug.soraHp hp_after
+peek16 @gRogueDebug.bossSwings boss_swings
+peek32 @gFrameCounter frames

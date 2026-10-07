@@ -374,6 +374,15 @@ enum RogueMove {
 #define ROGUE_DAMAGE_NUMBERS 6 // shown at once
 #define ROGUE_DAMAGE_NUMBER_TIME 36 // frames each stays
 #define ROGUE_MOVE_SPEED 0xA00
+// The fight of the bosses that had none of their own: Leon and whoever
+// stands in for him.
+#define ROGUE_BOSS_AI_SPEED 0x180 // a frame, towards Sora
+#define ROGUE_BOSS_AI_REACH 0x2600 // how near he comes before he strikes
+#define ROGUE_BOSS_AI_WINDUP 18 // frames from the start of the swing to the hit
+#define ROGUE_BOSS_AI_SWING 44 // frames the swing lasts
+#define ROGUE_BOSS_AI_REST 80 // frames between swings on the first floor
+#define ROGUE_BOSS_AI_REST_MIN 28
+#define ROGUE_BOSS_AI_ATTACK 165 // the attack definition of his hit: the Shadow's claw
 #define ROGUE_PITY_MAX 3 // losses in a row that count
 #define ROGUE_PITY_HP 12 // max HP a run starts with for each
 #define ROGUE_GLIDE_SPEED 96 // fall speed while gliding
@@ -563,6 +572,7 @@ typedef struct RogueDebug {
     u16 seenCp;
     u16 seenDeckCards;
     u8 lastMod; // what the last card played alone was enchanted with
+    u16 bossSwings; // swings of the bosses that fight with the mod's AI
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet
@@ -629,6 +639,10 @@ struct AnimDef;
 struct HumDef;
 const struct AnimDef* RogueLeonAnim(u16 slot);
 const struct HumDef* RogueLeonDef(void);
+struct AnimState;
+u8 RogueBossAi(struct BtlObj* boss, struct AnimState* anim, void* tiles);
+u8 RogueBossAiMoves(void);
+void RogueBossAiReset(void);
 const struct AnimDef* RogueHeroAnim(u16 anim);
 const struct AnimDef* RogueHeroDirection(u16 action, u16 direction);
 const struct AnimDef* RogueHeroField(u16 action, u16 direction);

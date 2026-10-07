@@ -41,3 +41,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `sleight_card.txt` | a sleight played from a single card |
 | `riku_hero.txt` | Riku played with the game's own Riku mode |
 | `friend_bosses.txt` | the six friends who fight with Leon's moves |
+| `boss_ai.txt` | Leon, and whoever stands in for him, walking up and swinging |

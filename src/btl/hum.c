@@ -8550,6 +8550,11 @@ u8 task_hum_leon_1(LeonWork* work) {
         AnimChangeWithDef(RogueLeonAnim(0), &w->base.anim, 0, 1, w->base.tiles);
         break;
     case 0:
+        // In the mod he fights: his own code only ever stood and watched.
+        if (RogueBossAi(act, &w->base.anim, w->base.tiles)) {
+            break;
+        }
+
         if (gBtlWork->flags & 0x20000000000) {
             if (w->unk_18A == 0) {
                 AnimChangeWithDef(RogueLeonAnim(1), &w->base.anim, 0, 0, w->base.tiles);
@@ -8622,8 +8627,13 @@ u8 task_hum_leon_1(LeonWork* work) {
     y = act->y;
     z = act->z;
     r = func_0800E5F0(&work->base);
-    act->x = x;
-    act->y = y;
+
+    // He was kept where he stood; now he goes where he walks.
+    if (!RogueBossAiMoves()) {
+        act->x = x;
+        act->y = y;
+    }
+
     act->z = z;
     return r;
 }

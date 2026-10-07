@@ -1,4 +1,7 @@
 #include "rogue.h"
+#include "btl_collision.h"
+#include "battle_actor.h"
+#include "battle.h"
 #include "game_state.h"
 #include "anim.h"
 #include "hum.h"
@@ -65,6 +68,99 @@ const HumDef* RogueLeonDef(void) {
     }
 
     return &gHumLeonDef;
+}
+
+// The fight itself. Leon's own code is the card tutorial's: he stands where
+// he is put and only changes pose. Here he, or whoever stands in for him,
+// walks up to Sora, swings, and rests before the next swing; the rest gets
+// shorter floor by floor.
+static s16 sAiTimer;
+static u8 sAiSwinging;
+static u8 sAiMoved;
+
+void RogueBossAiReset(void) {
+    sAiTimer = ROGUE_BOSS_AI_REST;
+    sAiSwinging = 0;
+    sAiMoved = 0;
+}
+
+u8 RogueBossAiMoves(void) {
+    return sAiMoved;
+}
+
+// Called every frame he is free to act. Returns 1: the pose is the AI's.
+u8 RogueBossAi(BtlObj* boss, AnimState* anim, void* tiles) {
+    BtlObj* sora = gBtlWork->actor;
+    BtlObj* source;
+    u64 flags;
+    s32 dx;
+    s32 dy;
+    s32 rest;
+
+    sAiMoved = 1;
+
+    if (sora == 0 || sora->unk_02C <= 0) {
+        AnimChangeWithDef(RogueLeonAnim(0), anim, 0, 1, tiles);
+        return 1;
+    }
+
+    dx = sora->x - boss->x;
+    dy = sora->y - boss->y;
+
+    if (sAiSwinging) {
+        sAiTimer++;
+
+        if (sAiTimer == ROGUE_BOSS_AI_WINDUP) {
+            // His hit, not Sora's, whoever's card is on the table.
+            flags = gBtlWork->flags;
+            source = gBtlWork->actor3;
+            gBtlWork->flags &= ~0x20000000ULL;
+            gBtlWork->actor3 = boss;
+            func_08011F78(ROGUE_BOSS_AI_ATTACK, (boss->flags & 4) ? boss->x - 0x1800 : boss->x + 0x1800, boss->y, boss->z, 28, 16, 40);
+            gBtlWork->actor3 = source;
+            gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
+            gRogueDebug.bossSwings++;
+        }
+
+        if (sAiTimer >= ROGUE_BOSS_AI_SWING) {
+            rest = ROGUE_BOSS_AI_REST - gRogue.floor * 5;
+            sAiTimer = rest < ROGUE_BOSS_AI_REST_MIN ? ROGUE_BOSS_AI_REST_MIN : rest;
+            sAiSwinging = 0;
+        }
+
+        return 1;
+    }
+
+    // He faces Sora and closes in while he rests.
+    if (dx < 0) {
+        boss->flags |= 4;
+    } else {
+        boss->flags &= ~4;
+    }
+
+    AnimChangeWithDef(RogueLeonAnim(0), anim, 0, 1, tiles);
+
+    if (dx > ROGUE_BOSS_AI_REACH) {
+        boss->x += ROGUE_BOSS_AI_SPEED;
+    } else if (dx < -ROGUE_BOSS_AI_REACH) {
+        boss->x -= ROGUE_BOSS_AI_SPEED;
+    }
+
+    if (dy > 0x600) {
+        boss->y += ROGUE_BOSS_AI_SPEED / 2;
+    } else if (dy < -0x600) {
+        boss->y -= ROGUE_BOSS_AI_SPEED / 2;
+    }
+
+    if (sAiTimer > 0) {
+        sAiTimer--;
+    } else if (dx <= ROGUE_BOSS_AI_REACH && dx >= -ROGUE_BOSS_AI_REACH && dy <= 0xA00 && dy >= -0xA00) {
+        sAiSwinging = 1;
+        sAiTimer = 0;
+        AnimChangeWithDef(RogueLeonAnim(1), anim, 0, 0, tiles);
+    }
+
+    return 1;
 }
 
 // The heroes. Each plays exactly as Sora does: for every animation of his

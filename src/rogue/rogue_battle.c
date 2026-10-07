@@ -18,6 +18,45 @@
 // What the mod adds on top of a battle: the hit counter and its damage
 // bonus, hitstop, and the jump buffer.
 
+// Runs a pending test command and refreshes what the tests read back.
+void RogueDebugBattle(void) {
+    BtlObj* sora = gBtlWork->actor;
+    BtlObj* target = gBtlWork->actor2;
+
+    if (sora != 0) {
+        gRogueDebug.soraHp = sora->unk_02C;
+        gRogueDebug.soraZ = sora->z;
+    }
+
+    gRogueDebug.targetHp = target != 0 ? target->unk_02C : -1;
+    gRogueDebug.targetZ = target != 0 ? target->z : 0;
+
+    switch (gRogueDebug.command) {
+    case ROGUE_DEBUG_WIN:
+        gBtlWork->flags |= 0x200000000ULL;
+        break;
+    case ROGUE_DEBUG_HURT:
+        if (sora != 0) {
+            sora->unk_020 = gRogueDebug.arg;
+            sora->flags |= 2;
+        }
+        break;
+    case ROGUE_DEBUG_HIT:
+        if (target != 0) {
+            target->unk_020 = gRogueDebug.arg;
+            target->flags |= 2;
+        }
+        break;
+    case ROGUE_DEBUG_RELIC:
+        gRogue.relics |= 1 << gRogueDebug.arg;
+        break;
+    default:
+        return;
+    }
+
+    gRogueDebug.command = ROGUE_DEBUG_NONE;
+}
+
 // Called when an actor is about to take the damage in unk_020.
 void RogueOnDamage(BtlObj* p) {
     BtlObj* sora = gBtlWork->actor;
@@ -25,6 +64,10 @@ void RogueOnDamage(BtlObj* p) {
     s32 cap;
 
     if (p == sora) {
+        if (gRogueDebug.god) {
+            p->unk_020 = 0;
+        }
+
         if (RogueHasRelic(ROGUE_RELIC_GLASS_CANNON)) {
             p->unk_020 += p->unk_020 / 2;
         }
@@ -61,6 +104,8 @@ void RogueOnDamage(BtlObj* p) {
     }
 
     gRogue.comboTimer = ROGUE_COMBO_TIME;
+    gRogueDebug.lastDamage = p->unk_020;
+    gRogueDebug.hits++;
 }
 
 u8 RogueReloadRate(u8 slowed) {
@@ -218,6 +263,7 @@ void RogueOnFinisher(BtlObj* sora) {
         args.y = sora->y + (i - 1) * 0x0A00;
         args.z = sora->z - 0x1400;
         TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueKnife, &args);
+        gRogueDebug.knives++;
     }
 }
 
@@ -236,9 +282,14 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.jumpBuffer = 0;
     gRogue.secondWindUsed = 0;
     RogueCountBuild();
+    gRogueDebug.hits = 0;
+    gRogueDebug.knives = 0;
+    gRogueDebug.echoes = 0;
 }
 
 static s32 RogueHud_Update(RogueHudWork* w) {
+    RogueDebugBattle();
+
     if (gRogue.comboTimer != 0) {
         gRogue.comboTimer--;
 

@@ -243,6 +243,39 @@ typedef struct RogueRun {
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
+// Test hooks, see rogue_debug.c.
+enum RogueDebugCommand {
+    ROGUE_DEBUG_NONE,
+    ROGUE_DEBUG_ROOM, // arg: room kind to walk into
+    ROGUE_DEBUG_BATTLE, // arg: battle id to start
+    ROGUE_DEBUG_REWARD, // arg: reward screen source
+    ROGUE_DEBUG_RELIC, // arg: relic to give
+    ROGUE_DEBUG_FLOOR, // arg: floor the run is on
+    ROGUE_DEBUG_WIN, // win the battle
+    ROGUE_DEBUG_HURT, // arg: damage Sora takes
+    ROGUE_DEBUG_HIT // arg: damage the locked-on enemy takes
+};
+
+typedef struct RogueDebug {
+    u8 command;
+    u8 arg;
+    u8 god; // Sora takes no damage
+    u8 event; // event the next event room holds, plus one
+    // Read back by the tests, refreshed every battle frame.
+    s16 soraHp;
+    s16 targetHp;
+    s32 soraZ;
+    s32 targetZ;
+    u16 lastDamage; // the last damage an enemy took
+    u16 hits; // times an enemy took damage this battle
+    u16 knives; // projectiles the knife relic threw this battle
+    u16 echoes; // added magic hits that connected this battle
+} RogueDebug;
+
+extern RogueDebug gRogueDebug;
+void RogueDebugField(void);
+void RogueDebugBattle(void);
+
 extern RogueRun gRogue;
 extern RogueMeta gRogueMeta;
 extern Mode gModeRogueShop;

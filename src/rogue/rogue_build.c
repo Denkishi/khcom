@@ -200,7 +200,11 @@ static s32 RogueEcho_Update(RogueEchoWork* w) {
     scale = gBtlWork->unk_124;
     gBtlWork->flags |= 0x20000000;
     gBtlWork->unk_124 = sElementScales[w->args.element];
-    func_08011F78(sElementAttacks[w->args.element], w->args.x, w->args.y, w->args.z, 24, 16, 32);
+
+    if (func_08011F78(sElementAttacks[w->args.element], w->args.x, w->args.y, w->args.z, 24, 16, 32)) {
+        gRogueDebug.echoes++;
+    }
+
     gBtlWork->unk_124 = scale;
     gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
     return 0;

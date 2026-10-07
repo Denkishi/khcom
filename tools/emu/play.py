@@ -2,7 +2,9 @@
 """Run a test script on the built ROM: play.py SCRIPT [SHEET.png [SAVE]]
 
 Wraps the headless runner: @symbol in the script becomes the symbol's address
-from the link map (@symbol+N adds a hex offset), `include FILE` pulls in another
+from the link map (@symbol+N adds a hex offset, @symbol.field the offset of a
+field of the mod's structs), `debug COMMAND [ARG]` queues one of the test
+commands of rogue_debug.c, `include FILE` pulls in another
 script, and the screenshots the script takes are tiled into SHEET.png. With
 SAVE the cartridge save is kept in that file, otherwise it is not kept at all.
 """
@@ -12,6 +14,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from fields import offsets
+
 ROOT = Path(__file__).resolve().parents[2]
 MAP = ROOT / "build/eu/com_eu.map"
 ROM = ROOT / "build/eu/com_eu.gba"
@@ -19,7 +23,13 @@ ROM = ROOT / "build/eu/com_eu.gba"
 symbols = {name: int(addr, 16) for addr, name in re.findall(r"^\s+0x([0-9a-f]{8})\s+(\w+)$", MAP.read_text(), re.M)}
 
 
+fields = offsets()
+DEBUG = ["none", "room", "battle", "reward", "relic", "floor", "win", "hurt", "hit"]
+
+
 def resolve(match):
+    if match.group(3):
+        return f"{symbols[match.group(1)] + fields[match.group(1) + '.' + match.group(3)]:08x}"
     return f"{symbols[match.group(1)] + int(match.group(2) or '0', 16):08x}"
 
 
@@ -28,8 +38,13 @@ def load(path):
     for line in Path(path).read_text().splitlines():
         if line.startswith("include "):
             lines += load(Path(path).parent / line.split()[1])
+        elif line.startswith("debug "):
+            words = line.split()
+            base = symbols["gRogueDebug"]
+            lines.append(f"poke8 {base + 1:08x} {words[2] if len(words) > 2 else 0}")
+            lines.append(f"poke8 {base:08x} {DEBUG.index(words[1])}")
         else:
-            lines.append(re.sub(r"@(\w+)(?:\+(\w+))?", resolve, line))
+            lines.append(re.sub(r"@(\w+)(?:\+(\w+)|\.(\w+))?", resolve, line))
     return lines
 
 

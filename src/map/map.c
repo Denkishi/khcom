@@ -2689,6 +2689,8 @@ void func_080E9AF0(void) {
 }
 
 void func_080E9B7C(void) {
+    RogueDebugField();
+
     if (gUnk_0203C7AC->flags & 2) {
         FadeStartOut(0, 16);
         FadeLock();

@@ -228,6 +228,10 @@ static void RogueEnterRoom(u8 firstOfFloor) {
     if (gRogue.kind == ROGUE_ROOM_EVENT) {
         gRogue.event = RogueRandBelow(ROGUE_EVENTS);
         gRogue.eventDone = 0;
+
+        if (gRogueDebug.event != 0) {
+            gRogue.event = gRogueDebug.event - 1;
+        }
     }
 
     if (gRogue.kind == ROGUE_ROOM_REST) {

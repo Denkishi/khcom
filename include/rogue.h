@@ -21,6 +21,8 @@
 #define ROGUE_SHARDS_BOSS 25
 #define ROGUE_SHARDS_NEW_CHAPTER 50
 #define ROGUE_SHARDS_DUEL 15
+// Moogle points a won battle gives.
+#define ROGUE_MOOGLE_POINTS 30
 
 enum RogueUpgrade {
     ROGUE_UPGRADE_HP,
@@ -107,9 +109,9 @@ enum RogueRoomKind {
 // Card message ids from here up are the mod's, see RogueCardMessageDef.
 #define ROGUE_MSG_BASE 0x400
 #define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
-#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 13)
-#define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + 14)
-#define ROGUE_MSG_COUNT (14 + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
+#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 15)
+#define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + 16)
+#define ROGUE_MSG_COUNT (16 + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
 
 enum RogueRelic {
     ROGUE_RELIC_VAMPIRE,

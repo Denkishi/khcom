@@ -325,6 +325,11 @@ u8 RogueOnBattleEnd(u16 battle) {
 
     RogueGainCardXp();
 
+    // Moogle points, to spend in the moogle rooms' shop.
+    if (gGameState.progression.mooglePoints < 9999 - ROGUE_MOOGLE_POINTS) {
+        gGameState.progression.mooglePoints += ROGUE_MOOGLE_POINTS;
+    }
+
     // A duel picked in an event pays like a boss and leaves the room as it was.
     if (gRogue.duel) {
         gRogue.duel = 0;

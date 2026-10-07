@@ -8,6 +8,7 @@ new rogue_deck.c
 new rogue_balance.c
 new rogue_battle.c
 new rogue_relic.c
+new rogue_build.c
 new rogue_reward.c
 new rogue_over.c
 new rogue_meta.c
@@ -25,3 +26,4 @@ moved card_deckmenu2.c
 moved battle_runtime.c
 moved map_tasks.c
 moved mode_battle.c
+moved btl_collision.c

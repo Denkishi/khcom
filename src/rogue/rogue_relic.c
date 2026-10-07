@@ -22,6 +22,9 @@ static const u8 sNameGlass[] = "Cannone vetro";
 static const u8 sNameMomentum[] = "Slancio";
 static const u8 sNameReload[] = "Mano lesta";
 static const u8 sNameKnives[] = "Lame di Larxene";
+static const u8 sNameFire[] = "Lama ardente";
+static const u8 sNameIce[] = "Lama gelida";
+static const u8 sNameThunder[] = "Lama tonante";
 
 static const u8 sTextVampire[] = "Ogni colpo a segno\x1Fti cura di 1 PV";
 static const u8 sTextCritical[] = "Un colpo su sette\x1F" "fa danno doppio";
@@ -30,13 +33,16 @@ static const u8 sTextGlass[] = "Dai e subisci il\x1F" "50% di danno in pi\xF9";
 static const u8 sTextMomentum[] = "Il bonus combo\x1F" "arriva al 60%";
 static const u8 sTextReload[] = "Il mazzo si ricarica\x1Fmolto pi\xF9 in fretta";
 static const u8 sTextKnives[] = "Il finisher lancia\x1Ftre coltelli";
+static const u8 sTextFire[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Fuoco";
+static const u8 sTextIce[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Gelo";
+static const u8 sTextThunder[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Tuono";
 
 static const u8* const sNames[ROGUE_RELICS] = {
-    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives,
+    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
-    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives,
+    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder,
 };
 
 const u8* RogueRelicName(u8 relic) {
@@ -56,6 +62,13 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     if (relic == ROGUE_RELIC_KNIVES) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_LARXENE;
+    }
+
+    // The infused blades come with the second chapter, and only one of them
+    // to a run.
+    if (relic >= ROGUE_RELIC_FIRE_BLADE) {
+        return gRogueMeta.chapters >= 2 && !RogueHasRelic(ROGUE_RELIC_FIRE_BLADE) &&
+               !RogueHasRelic(ROGUE_RELIC_ICE_BLADE) && !RogueHasRelic(ROGUE_RELIC_THUNDER_BLADE);
     }
 
     // Two relics are in the pool from the start and each chapter adds two.
@@ -90,7 +103,7 @@ void RogueOnBossBeaten(u16 battle) {
 // The run's page in the pause menu: where the run is and the relics it has.
 
 #define LINE_SLOTS 26
-#define RELIC_LINES (3 + ROGUE_RELICS)
+#define RELIC_LINES (4 + ROGUE_RELICS)
 
 typedef struct RogueRelicsWork {
     TextSlot lines[RELIC_LINES][LINE_SLOTS];
@@ -111,6 +124,11 @@ static const u8 sJumps[] = "  Salti ";
 static const u8 sNone[] = "Nessuna reliquia";
 static const u8 sCards[] = "Carte Lv2: ";
 static const u8 sCards3[] = "  Lv3: ";
+static const u8 sBuild[] = "Build: ";
+static const u8 sBuildFire[] = "Fuoco";
+static const u8 sBuildIce[] = "Gelo";
+static const u8 sBuildThunder[] = "Tuono";
+static const u8* const sBuildNames[ROGUE_ELEMENTS] = { sBuildFire, sBuildIce, sBuildThunder };
 
 static u8* RogueRelicsAppend(u8* out, const u8* text) {
     while (*text != 0) {
@@ -130,6 +148,7 @@ static void RogueRelicsLine(const u8* text) {
 static void RogueRelics_Init(s32 arg) {
     u8* out;
     u8 relic;
+    u8 relics;
 
     sWork = EwramAlloc(sizeof(RogueRelicsWork));
     sWork->state = 0;
@@ -161,13 +180,29 @@ static void RogueRelics_Init(s32 arg) {
     *out = 0;
     RogueRelicsLine(sWork->text);
 
+    RogueCountBuild();
+
+    if (RogueBuildElement() != ROGUE_ELEMENT_NONE) {
+        out = RogueRelicsAppend(sWork->text, sBuild);
+        out = RogueRelicsAppend(out, sBuildNames[RogueBuildElement()]);
+        *out++ = ' ';
+        *out++ = '+';
+        *out++ = '0' + RogueBuildBonus() / 10;
+        *out++ = '0' + RogueBuildBonus() % 10;
+        *out++ = '%';
+        *out = 0;
+        RogueRelicsLine(sWork->text);
+    }
+
+    relics = sWork->lineCount;
+
     for (relic = 0; relic < ROGUE_RELICS; relic++) {
         if (RogueHasRelic(relic)) {
             RogueRelicsLine(sNames[relic]);
         }
     }
 
-    if (sWork->lineCount == 3) {
+    if (sWork->lineCount == relics) {
         RogueRelicsLine(sNone);
     }
 
@@ -199,7 +234,7 @@ static void RogueRelics_Update(void) {
     }
 
     for (i = 0; i < sWork->lineCount; i++) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 10 : 16 + i * 14,
+        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 8 : 12 + i * 13,
                       sWork->lines[i], i == 0 ? sWork->titlePalette : sWork->palette, 50, sWork->counts[i]);
     }
 }

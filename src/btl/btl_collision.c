@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "engine_math.h"
 #include "listpool.h"
 #include "battle.h"
@@ -687,6 +688,10 @@ s32 func_08011398(BtlObj* hit, s32 index) {
             target->btl->unk_0F8--;
         }
     }
+    if (source == gBtlWork->actor) {
+        target->unk_020 = RogueElementDamage(target->unk_020, attack->flags);
+    }
+
     target->flags |= 2;
     gBtlWork->unk_076 = (u8)attack->unk_0C;
     target->unk_0A8 = attack->unk_04;

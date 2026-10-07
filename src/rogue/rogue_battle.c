@@ -235,6 +235,7 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.comboTimer = 0;
     gRogue.jumpBuffer = 0;
     gRogue.secondWindUsed = 0;
+    RogueCountBuild();
 }
 
 static s32 RogueHud_Update(RogueHudWork* w) {

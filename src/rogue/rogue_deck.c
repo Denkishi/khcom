@@ -82,7 +82,14 @@ static u16 RogueRollCard(u8 pool) {
     case POOL_ATTACK:
         return CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(CARD_ULTIMA_WEAPON + 1), RogueRandBelow(RogueMaxCardValue() + 1));
     case POOL_MAGIC:
-        return CARD_ID(CARD_FIRE + RogueRandBelow(CARD_AERO - CARD_FIRE + 1), RogueRandBelow(RogueMaxCardValue() + 1));
+        // A deck built around an element finds its spell more often.
+        id = RogueBuildSpell();
+
+        if (id == 0xFFFF) {
+            id = CARD_FIRE + RogueRandBelow(CARD_AERO - CARD_FIRE + 1);
+        }
+
+        return CARD_ID(id, RogueRandBelow(RogueMaxCardValue() + 1));
     case POOL_SUMMON:
         return CARD_ID(CARD_SIMBA + RogueRandBelow(CARD_THE_BEAST - CARD_SIMBA + 1), RogueRandBelow(RogueMaxCardValue() + 1));
     case POOL_ITEM:

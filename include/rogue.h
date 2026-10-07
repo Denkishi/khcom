@@ -120,8 +120,28 @@ enum RogueRelic {
     ROGUE_RELIC_RELOAD,
     // Boss moves: each enters the pool once its boss has been beaten.
     ROGUE_RELIC_KNIVES,
+    // Infused blades, in the order of RogueElement.
+    ROGUE_RELIC_FIRE_BLADE,
+    ROGUE_RELIC_ICE_BLADE,
+    ROGUE_RELIC_THUNDER_BLADE,
     ROGUE_RELICS
 };
+
+enum RogueElement {
+    ROGUE_ELEMENT_FIRE,
+    ROGUE_ELEMENT_ICE,
+    ROGUE_ELEMENT_THUNDER,
+    ROGUE_ELEMENTS,
+    ROGUE_ELEMENT_NONE = ROGUE_ELEMENTS
+};
+
+// A build needs three cards of its element and counts up to ten of them.
+#define ROGUE_BUILD_MIN 3
+#define ROGUE_BUILD_MAX 10
+// Frames between a keyblade hit and the magic hit of an infused blade.
+#define ROGUE_INFUSION_DELAY 7
+// Frames it then waits for the enemy to be hittable again.
+#define ROGUE_INFUSION_WAIT 50
 
 // Event rooms.
 enum RogueEvent {
@@ -211,6 +231,7 @@ typedef struct RogueRun {
     u8 event; // who is in this event room
     u8 eventDone; // set once they have made their offer
     u8 duel; // set while the battle is a duel picked in an event
+    u8 build[3]; // cards of each RogueElement in the deck, see RogueCountBuild
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
@@ -243,6 +264,13 @@ u8 RogueUpgradeMax(u8 upgrade);
 u16 RogueUpgradeCost(u8 upgrade);
 void RogueLeaveRoomFor(Mode* mode, s32 arg);
 u8 RogueHasRelic(u8 relic);
+u8 RogueCardElement(u16 id);
+void RogueCountBuild(void);
+u8 RogueBuildElement(void);
+u8 RogueBuildBonus(void);
+s32 RogueElementDamage(s32 damage, u32 attackFlags);
+u16 RogueBuildSpell(void);
+void RogueOnKeybladeHit(s32 x, s32 y, s32 z);
 u8 RogueRollRelic(void);
 const u8* RogueRelicName(u8 relic);
 const u8* RogueRelicText(u8 relic);

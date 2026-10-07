@@ -3104,6 +3104,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (d == 1) {
                 m4aSongNumStart(a->hitSound);
 
+                RogueOnKeybladeHit((p->flags & 4) ? p->x - 9216 : p->x + 9216, p->y, p->z);
+
                 // A hit in mid-air lifts Sora a little, so air combos stay up.
                 if (p->btl->flags & 0x8000) {
                     work->unk_150 = ROGUE_AIR_HIT_LIFT;

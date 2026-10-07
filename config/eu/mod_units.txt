@@ -9,3 +9,6 @@ moved map_runtime.c
 moved roomcreate.c
 moved map.c
 moved card_msgwin.c
+moved card_card.c
+moved card_battle_riku.c
+moved btl.c

@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "task_descriptors.h"
 #include "card_battle.h"
 #include "engine_math.h"
@@ -880,7 +881,7 @@ void func_0801E508(BtlSoraWork* work, u32 a) {
 void func_0801E518(BtlSoraWork* work) {
     u16 t;
 
-    if (work->unk_038 == 16 && work->unk_161 <= 1) {
+    if (work->unk_038 == 16 && work->unk_161 < RogueComboHits() - 1) {
         work->unk_161++;
         work->unk_154 = 0;
         work->unk_156 = 0;
@@ -2974,21 +2975,21 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (p->btl->unk_0F4 == 3) {
             if ((work->unk_15A & 0x40) == 0) {
-                if (work->unk_161 == 2) {
-                    work->unk_161 = 1;
+                if (RogueComboSlot(work->unk_161) == 2) {
+                    work->unk_161--;
                     work->unk_15A |= 0x40;
                     a = work->attacks[0];
                 } else {
-                    a = work->attacks[work->unk_161];
+                    a = work->attacks[RogueComboSlot(work->unk_161)];
                 }
             } else {
-                a = work->attacks[work->unk_161];
+                a = work->attacks[RogueComboSlot(work->unk_161)];
             }
         } else if (p->btl->unk_0F4 == 5) {
-            work->unk_161 = 2;
+            work->unk_161 = RogueComboHits() - 1;
             a = work->attacks[2];
         } else {
-            a = work->attacks[work->unk_161];
+            a = work->attacks[RogueComboSlot(work->unk_161)];
         }
 
         if (work->unk_161 != 0) {
@@ -3051,7 +3052,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     break;
                 }
             } else {
-                if (p->btl->unk_0F4 == 49 && work->unk_161 == 2) {
+                if (p->btl->unk_0F4 == 49 && RogueComboSlot(work->unk_161) == 2) {
                     if (GetRandom() % 3 != 0) {
                         t = 164;
                     } else {
@@ -3107,11 +3108,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 func_08019050(15, 256, gBtlWork->x2, gBtlWork->y2);
             }
 
-            if (work->unk_161 <= 1) {
-                if (work->unk_15A & 2) {
-                    p->flags &= ~16;
-                }
+            // Recovery: every hit but the finisher frees the next card here,
+            // whether or not it connected.
+            if (RogueComboSlot(work->unk_161) != 2) {
+                p->flags &= ~16;
             }
+        } else if ((s16)work->unk_154 == buf[work->unk_190] + ROGUE_FINISHER_RECOVERY) {
+            p->flags &= ~16;
         }
 
         if (d == 2) {

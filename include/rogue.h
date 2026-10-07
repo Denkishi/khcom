@@ -10,6 +10,11 @@
 #define ROGUE_NO_DOOR 0xFF
 #define ROGUE_FLOOR_ROOMS 7
 
+#define ROGUE_COMBO_BASE 3
+#define ROGUE_COMBO_PLUS_MAX 4
+// Frames after a finisher's hit frame until the next card can be played.
+#define ROGUE_FINISHER_RECOVERY 8
+
 enum RogueRoomKind {
     ROGUE_ROOM_START,
     ROGUE_ROOM_BATTLE,
@@ -36,6 +41,7 @@ typedef struct RogueRun {
     u8 world;
     u8 kind;
     u8 doors[4]; // room kind behind each door, ROGUE_NO_DOOR if none
+    u8 comboPlus; // extra hits in the attack combo
 } RogueRun;
 
 extern RogueRun gRogue;
@@ -49,6 +55,8 @@ void RogueLeaveRoom(u8 door);
 u8* RogueRoomLinks(void);
 u16 RogueDoorFlags(u8 door);
 void RogueSpawnRoomActors(void);
+u8 RogueComboHits(void);
+u8 RogueComboSlot(u8 step);
 const struct CardMessageDef* RogueCardMessageDef(u16 id);
 
 #endif

@@ -1828,10 +1828,9 @@ void func_0807ABC8(CardBattleWork* w) {
     for (i = 0; i < w->unk_B9; i++) {
         w->unk_28[i]->args.slot->unk_07 = 0;
 
+        // A sleight no longer costs its first card for the rest of the battle.
         if (w->unk_28[i]->cardDef->flags & 2) {
             w->unk_28[i]->args.slot->unk_0A = 1;
-        } else if (i == 0 && gBtlWork->unk_0F4 != 15) {
-            w->unk_28[0]->args.slot->unk_0A = 1;
         }
     }
 

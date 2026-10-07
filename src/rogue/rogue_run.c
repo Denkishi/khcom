@@ -190,6 +190,7 @@ void RogueStartRun(void) {
     gRogue.floor = 0;
     gRogue.room = 0;
     gRogue.kind = ROGUE_ROOM_START;
+    gRogue.comboPlus = 0;
     gRogue.world = sWorlds[RogueRandBelow((sizeof(sWorlds) / sizeof(sWorlds[0])))];
     func_0801CD20();
     gGameState.progression.unk_82 = 0xFFFF;
@@ -211,4 +212,19 @@ void RogueLeaveRoom(u8 door) {
     }
 
     RogueEnterRoom(firstOfFloor);
+}
+
+// Hits in the attack combo, the last of which is the finisher.
+u8 RogueComboHits(void) {
+    return ROGUE_COMBO_BASE + gRogue.comboPlus;
+}
+
+// Which of the three attacks of a chain a combo step uses: the two openers
+// alternate and the last step is the finisher.
+u8 RogueComboSlot(u8 step) {
+    if (step >= RogueComboHits() - 1) {
+        return 2;
+    }
+
+    return step & 1;
 }

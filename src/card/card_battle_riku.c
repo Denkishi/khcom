@@ -2357,8 +2357,6 @@ void func_08081210(CardBattleWork* w) {
 
         if (w->unk_28[i]->cardDef->flags & 2) {
             w->unk_28[i]->args.slot->unk_0A = 1;
-        } else if (i == 0 && gRikuBtlWork->unk_0F4 != 15) {
-            w->unk_28[0]->args.slot->unk_0A = 1;
         }
     }
 

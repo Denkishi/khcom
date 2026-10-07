@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_actor.h"
 #include "btl_collision.h"
+#include "card_def_data.h"
 #include "engine_math.h"
 #include "hum.h"
 #include "m4a_song.h"
@@ -54,6 +55,9 @@ void RogueDebugBattle(void) {
         break;
     case ROGUE_DEBUG_RELIC:
         gRogue.relics |= 1 << gRogueDebug.arg;
+        break;
+    case ROGUE_DEBUG_ENEMY_TAG:
+        RogueOnEnemyCard(&gCardDefs[450 + gRogueDebug.arg]);
         break;
     case ROGUE_DEBUG_TAG:
         RogueTagIn(gRogueDebug.arg);

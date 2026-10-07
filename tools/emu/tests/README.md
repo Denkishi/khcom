@@ -31,3 +31,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `hub_progress.txt` | meeting a character, its boon in the hub, the records page |
 | `mickey_boss.txt` | Mickey fighting with Leon's moves |
 | `mickey_hero.txt` | Mickey played in place of Sora, hub and battle |
+| `enemy_tags.txt` | enemy cards calling their enemy or boss in for its attack |

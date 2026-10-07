@@ -376,6 +376,7 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_ATTACK, // arg: attack definition Sora lands on the locked-on enemy
     ROGUE_DEBUG_FINISHER, // what a combo finisher sets off, without the swing
     ROGUE_DEBUG_TAG, // arg: card kind whose tag character comes in
+    ROGUE_DEBUG_ENEMY_TAG, // arg: enemy card id, counted from the first, whose enemy comes in
     ROGUE_DEBUG_MOVE // arg: effect move Sora does
 };
 
@@ -395,6 +396,7 @@ typedef struct RogueDebug {
     u16 echoes; // added magic hits that connected this battle
     u16 pillars; // ice blocks the Vexen relic raised this battle
     u16 tagHits; // tag attacks that connected this battle
+    u16 enemyTags; // enemies and bosses called in by their cards
     u16 moves; // effect moves started this battle
     u16 moveHits; // hit tests of theirs that connected
     u8 tagAnim; // animation a tag attack plays instead of its own, plus one
@@ -458,6 +460,10 @@ u16 RogueBuildSpell(void);
 void RogueOnKeybladeHit(s32 x, s32 y, s32 z, u8 finisher);
 void RogueOnStockPlayed(void);
 u8 RogueTagIn(u16 kind);
+struct CardDef;
+void RogueOnEnemyCard(const struct CardDef* def);
+struct BtlObj;
+void RogueSoraPose(struct BtlObj* sora);
 void RogueOnReload(void);
 void RogueOnKnockback(struct BtlObj* target);
 u8 RogueRollArt(u16 kind);

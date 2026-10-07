@@ -1,0 +1,55 @@
+# Enemy cards calling their enemy or boss in for its attack, as a tag
+# character: a few heartless, the bosses with a body of their own and a giant,
+# whose card hits all around Sora with nobody drawn.
+# Expect: each screenshot shows the enemy or boss where Sora stood (Sora
+# himself, casting, for the giant); enemy_tags is 10 and tag_hits above 0.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 445
+debug enemytag 0
+wait 12
+shot /tmp/enemytag_shadow.ppm
+wait 60
+debug enemytag 6
+wait 12
+shot /tmp/enemytag_largebody.ppm
+wait 60
+debug enemytag 9
+wait 12
+shot /tmp/enemytag_rednocturne.ppm
+wait 60
+debug enemytag 66
+wait 12
+shot /tmp/enemytag_defender.ppm
+wait 60
+debug enemytag 101
+wait 12
+shot /tmp/enemytag_hades.ppm
+wait 60
+debug enemytag 107
+wait 12
+shot /tmp/enemytag_riku.ppm
+wait 60
+debug enemytag 108
+wait 12
+shot /tmp/enemytag_axel.ppm
+wait 60
+debug enemytag 109
+wait 12
+shot /tmp/enemytag_larxene.ppm
+wait 60
+debug enemytag 113
+wait 12
+shot /tmp/enemytag_lexaeus.ppm
+wait 60
+debug enemytag 91
+wait 12
+shot /tmp/enemytag_guardarmor.ppm
+wait 60
+peek16 @gRogueDebug.enemyTags enemy_tags
+peek16 @gRogueDebug.tagHits tag_hits
+peek8 @gRogue.tagTimer tag_timer
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

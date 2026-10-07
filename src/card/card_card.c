@@ -1124,6 +1124,7 @@ s32 func_08079B3C(CardBattleWork* w) {
     }
 
     m4aSongNumStart(SONG_SYS_CLICKI04);
+    RogueOnEnemyCard(gSoraSelectedCard->cardDef);
 
     if (gCardBattleState->unk_0CC == 0) {
         gCardBattleState->unk_0CC = gSoraSelectedCard->cardDef->unk_24;

@@ -154,7 +154,7 @@ static TaskDesc sTaskDescRogueMove = {
 // Sora's casting pose, for a move made while he is free: in the middle of a
 // swing or a spell he is already moving. The states are standing, running and
 // the parts of a jump, each with its twin for when cards are locked.
-static void RogueMovePose(BtlObj* sora) {
+void RogueSoraPose(BtlObj* sora) {
     BtlSoraWork* work = (BtlSoraWork*)((u8*)sora - (u32) & ((BtlSoraWork*)0)->actor);
     u32 state = work->unk_038;
 
@@ -177,7 +177,7 @@ void RogueDoMove(u8 move, BtlObj* sora) {
         count += 2;
     }
 
-    RogueMovePose(sora);
+    RogueSoraPose(sora);
     m4aSongNumStart(def->sound);
     args.def = def;
     args.left = (sora->flags & 4) != 0;

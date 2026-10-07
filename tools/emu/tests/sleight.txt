@@ -1,0 +1,22 @@
+# A sleight: three cards stocked with L+R, then played with A.
+# Expect: the screenshots show the stock filling and the sleight going off,
+# and the frame counter keeps running.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 440
+press L+R
+wait 12
+press L+R
+wait 12
+press L+R
+wait 12
+shot /tmp/sleight_1.ppm
+press A
+wait 40
+shot /tmp/sleight_2.ppm
+wait 120
+shot /tmp/sleight_3.ppm
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

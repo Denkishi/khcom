@@ -457,7 +457,7 @@ void func_080197AC(void) {
     }
 
     if (!(gBtlWork->flags & 0x2000000000)) {
-        if (pressed & A_BUTTON) {
+        if (RogueBufferCard(pressed) & A_BUTTON) {
             func_08076330();
         }
     }

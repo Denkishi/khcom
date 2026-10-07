@@ -1,0 +1,10 @@
+# The survival relic: the first lethal hit of a battle leaves 1 HP.
+# Expect: hp_first 1, then the battle ends in the run summary.
+include battle.txt
+poke8 @gRogueDebug.god 0
+debug relic 2
+wait 2
+debug hurt 250
+wait 40
+peek16 @gRogueDebug.soraHp hp_first
+peek8 @gRogue.secondWindUsed used

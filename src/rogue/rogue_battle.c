@@ -400,6 +400,20 @@ void RogueOnFinisher(BtlObj* sora) {
     }
 }
 
+// The same for the card button: the request to play a card is repeated for a
+// few frames, so that one made just before Sora is free still counts. It
+// stops as soon as a card is played, see RogueOnStockPlayed.
+u16 RogueBufferCard(u16 pressed) {
+    if (pressed & A_BUTTON) {
+        gRogue.cardBuffer = ROGUE_CARD_BUFFER;
+    } else if (gRogue.cardBuffer != 0) {
+        gRogue.cardBuffer--;
+        pressed |= A_BUTTON;
+    }
+
+    return pressed;
+}
+
 typedef struct RogueHudWork {
     void* tiles;
     void* palette;
@@ -413,6 +427,7 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.combo = 0;
     gRogue.comboTimer = 0;
     gRogue.jumpBuffer = 0;
+    gRogue.cardBuffer = 0;
     gRogue.secondWindUsed = 0;
     gRogue.playedKind = ROGUE_NO_KIND;
     gRogue.projectile = 0;

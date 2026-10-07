@@ -1,0 +1,83 @@
+# The air jump: a second press of B in the air sends Sora up again.
+# Prints Sora's height every 4 frames, first for a plain jump with a second
+# press that does nothing, then for the same two presses with the relic. It
+# runs while the enemies are still coming in, so that nothing interrupts.
+# Expect: the lowest z of the second series is well below the first's (more
+# negative is higher).
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 440
+press B
+wait 14
+press B
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+peek32 @gFrameCounter with_air_jump_from_here
+wait 30
+poke8 @gRogue.airJumps 1
+press B
+wait 14
+press B
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z
+wait 4
+peek32 @gRogueDebug.soraZ z

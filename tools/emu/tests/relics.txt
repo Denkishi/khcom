@@ -1,0 +1,38 @@
+# The relics that change damage. Sora starts each check at 80 HP.
+# Expect: hp_after_hurt 50; second wind leaves hp_second_wind at 1 and the
+# next lethal hit at 0... checked in its own run below this one, see
+# second_wind.txt. Here: glass_swing 15 (10 without), glass_hurt 20 (a hit
+# of 20 takes 30), vampire_hp one above before_vampire, momentum_swing 16
+# (13 without the relic, the bonus stops at 15 hits).
+include battle.txt
+poke8 @gRogueDebug.god 0
+debug hurt 30
+wait 40
+peek16 @gRogueDebug.soraHp hp_after_hurt
+debug relic 3
+wait 2
+debug attack 12
+wait 50
+peek16 @gRogueDebug.lastDamage glass_swing
+wait 80
+debug hurt 20
+wait 40
+peek16 @gRogueDebug.soraHp glass_hurt
+wait 120
+poke16 @gRogue.relics 1
+poke16 @gRogue.combo 0
+poke8 @gRogueDebug.god 1
+peek16 @gRogueDebug.soraHp before_vampire
+peek16 @gRogueDebug.hits hits_before_vampire
+debug attack 12
+wait 50
+peek16 @gRogueDebug.hits hits_after_vampire
+peek16 @gRogueDebug.soraHp vampire_hp
+wait 120
+poke16 @gRogue.relics 0x10
+poke16 @gRogue.combo 30
+poke8 @gRogue.comboTimer 100
+debug attack 12
+wait 50
+peek16 @gRogueDebug.hits hits_after_momentum
+peek16 @gRogueDebug.lastDamage momentum_swing

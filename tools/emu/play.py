@@ -54,4 +54,7 @@ with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
 subprocess.run([ROOT / "build/emu_run", ROM, f.name] + sys.argv[3:4], check=True)
 shots = [line.split()[1] for line in lines if line.startswith("shot ")]
 if len(sys.argv) > 2 and shots:
-    subprocess.run([sys.executable, Path(__file__).with_name("sheet.py"), sys.argv[2]] + shots, check=True)
+    # The contact sheet needs Pillow, which lives in the build's virtualenv.
+    venv = ROOT / "build/venv/bin/python"
+    python = venv if venv.exists() else sys.executable
+    subprocess.run([python, Path(__file__).with_name("sheet.py"), sys.argv[2]] + shots, check=True)

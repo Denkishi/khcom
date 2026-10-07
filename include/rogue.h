@@ -66,6 +66,8 @@ typedef struct RogueMeta {
 // Frames the battle freezes on a hit, and a jump press stays valid.
 #define ROGUE_HITSTOP 2
 #define ROGUE_JUMP_BUFFER 6
+// Frames a press of the card button stays valid while Sora is busy.
+#define ROGUE_CARD_BUFFER 6
 // The hit counter: frames it lasts without a new hit, and hits that count
 // towards its damage bonus of 2% each.
 #define ROGUE_COMBO_TIME 150
@@ -253,6 +255,7 @@ typedef struct RogueRun {
     u16 combo; // hits landed without being hit
     u8 comboTimer; // frames until the hit count lapses
     u8 jumpBuffer;
+    u8 cardBuffer;
     u8 event; // who is in this event room
     u8 eventDone; // set once they have made their offer
     u8 duel; // set while the battle is a duel picked in an event
@@ -381,6 +384,7 @@ void RogueResetAirJumps(void);
 struct BtlObj;
 void RogueOnDamage(struct BtlObj* p);
 u16 RogueBufferJump(u16 pressed);
+u16 RogueBufferCard(u16 pressed);
 void RogueOnFinisher(struct BtlObj* sora);
 void RogueOnBossBeaten(u16 battle);
 extern struct TaskDesc gTaskDescRogueHud;

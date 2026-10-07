@@ -408,6 +408,7 @@ s32 RogueCardAction(const CardDef* def) {
 // that follow belong to no single kind.
 void RogueOnStockPlayed(void) {
     gRogue.playedKind = ROGUE_NO_KIND;
+    gRogue.cardBuffer = 0;
 }
 
 void RogueOnReload(void) {

@@ -19,6 +19,7 @@
  */
 #include <mgba/core/config.h>
 #include <mgba/core/core.h>
+#include <mgba/core/blip_buf.h>
 #include <mgba/core/log.h>
 #include <mgba/internal/arm/arm.h>
 #include <mgba-util/vfs.h>
@@ -53,10 +54,31 @@ static unsigned parse_keys(char* text) {
     return keys;
 }
 
+// Recording, for the trailer: while it is on, every frame run is written to
+// PATH.rgb as the core gives it (4 bytes a pixel) and its sound to PATH.pcm
+// (16 bits, two channels, 48000 a second). `rec PATH` starts it, `rec off` ends it.
+static uint32_t* sVideo;
+static unsigned sWidth, sHeight;
+static FILE* sRecVideo;
+static FILE* sRecAudio;
+
 static void run(struct mCore* core, unsigned keys, int frames) {
     while (frames-- > 0) {
         core->setKeys(core, keys);
         core->runFrame(core);
+        if (sRecVideo) {
+            static int16_t samples[4096 * 2];
+            struct blip_t* left = core->getAudioChannel(core, 0);
+            struct blip_t* right = core->getAudioChannel(core, 1);
+            int count = blip_samples_avail(left);
+            if (count > 4096) {
+                count = 4096;
+            }
+            blip_read_samples(left, samples, count, 1);
+            blip_read_samples(right, samples + 1, count, 1);
+            fwrite(samples, 4, count, sRecAudio);
+            fwrite(sVideo, 4, sWidth * sHeight, sRecVideo);
+        }
     }
 }
 
@@ -82,6 +104,9 @@ int main(int argc, char** argv) {
     core->desiredVideoDimensions(core, &width, &height);
     video = malloc(width * height * sizeof(*video));
     core->setVideoBuffer(core, (color_t*)video, width);
+    sVideo = video;
+    sWidth = width;
+    sHeight = height;
     if (!mCoreLoadFile(core, argv[1])) {
         fprintf(stderr, "cannot load %s\n", argv[1]);
         return 1;
@@ -102,7 +127,24 @@ int main(int argc, char** argv) {
         if (count < 1 || command[0] == '#') {
             continue;
         }
-        if (!strcmp(command, "wait")) {
+        if (!strcmp(command, "rec")) {
+            if (sRecVideo) {
+                fclose(sRecVideo);
+                fclose(sRecAudio);
+                sRecVideo = NULL;
+            }
+            if (strcmp(a, "off")) {
+                char path[160];
+                snprintf(path, sizeof(path), "%s.rgb", a);
+                sRecVideo = fopen(path, "wb");
+                snprintf(path, sizeof(path), "%s.pcm", a);
+                sRecAudio = fopen(path, "wb");
+                blip_set_rates(core->getAudioChannel(core, 0), core->frequency(core), 48000);
+                blip_set_rates(core->getAudioChannel(core, 1), core->frequency(core), 48000);
+                blip_clear(core->getAudioChannel(core, 0));
+                blip_clear(core->getAudioChannel(core, 1));
+            }
+        } else if (!strcmp(command, "wait")) {
             run(core, 0, atoi(a));
         } else if (!strcmp(command, "press")) {
             run(core, parse_keys(a), count > 2 ? atoi(b) : 2);

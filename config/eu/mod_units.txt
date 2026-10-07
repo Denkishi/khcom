@@ -17,6 +17,7 @@ new rogue_gadget.c
 new rogue_ui.c
 new rogue_menu_art.c
 new rogue_mickey_art.c
+new rogue_roxas_art.c
 new rogue_cards.c
 new rogue_hub.c
 new rogue_bg_station.c

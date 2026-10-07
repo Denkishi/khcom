@@ -125,8 +125,6 @@ static RogueHubWork* sWork;
 static const u8 sHint[] = "START: parti";
 static const u8 sBoon[] = "Dono: ";
 static const u8 sBoonNone[] = "nessuno";
-extern const AnimDef gRogueMickeyHubDefs[2];
-
 static const u8 sStrong[] = " +";
 static const u8 sHero[] = "SELECT: eroe";
 static const u8 sOblivion[] = "L/R: Oblio ";
@@ -189,9 +187,9 @@ static void RogueHubShowBoon(void) {
 }
 
 static void RogueHubSoraAnim(u8 action, u8 direction) {
-    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+    if (RogueHeroHub(0) != 0) {
         // He has one way of standing and one of walking, turned as he goes.
-        AnimChangeWithDef(gRogueMickeyHubDefs, &sWork->soraAnim, action, 1, sWork->soraTiles);
+        AnimChangeWithDef(RogueHeroHub(0), &sWork->soraAnim, action, 1, sWork->soraTiles);
     } else {
         AnimChangeWithDef(gUnk_0813C89C[action], &sWork->soraAnim, direction, 1, sWork->soraTiles);
     }

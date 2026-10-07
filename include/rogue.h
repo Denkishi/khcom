@@ -129,7 +129,8 @@ typedef struct RogueMeta {
 #define ROGUE_META_MICKEY 4 // Mickey was beaten as a boss: he can be played
 
 // Who the player fights as. All of them play as Sora does, drawn as themselves.
-enum RogueHero { ROGUE_HERO_SORA, ROGUE_HERO_MICKEY, ROGUE_HERO_SORA_KH2, ROGUE_HERO_RIKU, ROGUE_HEROES };
+enum RogueHero { ROGUE_HERO_SORA, ROGUE_HERO_MICKEY, ROGUE_HERO_SORA_KH2, ROGUE_HERO_RIKU, ROGUE_HERO_ROXAS, ROGUE_HEROES };
+const struct AnimDef* RogueHeroHub(u8 action);
 void RogueApplyHero(void);
 
 // What the characters in the hub offer for the next run; one at a time.
@@ -781,7 +782,6 @@ void RogueApplyFreeze(struct BtlObj* target);
 void RogueShockwave(struct BtlObj* sora, u8 element, u16 scale);
 void RogueBuildOam(void);
 s32 RogueSqrt8(s32 a);
-extern const u16 gRogueMickeyPalette[16];
 extern const u8 gRogueMenuLabelTiles[], gRogueMenuLabelRikuTiles[];
 u8 RogueHasRelic(u8 relic);
 void RogueGiveRelic(u8 relic);

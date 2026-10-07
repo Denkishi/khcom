@@ -1,0 +1,39 @@
+# Roxas as the hero, from the sheet in the game's own style: picked in the
+# hub (he comes with the third chapter), he walks a room and fights a battle.
+# Expect: Roxas stands in the hub, in the room and in the battle with his
+# face by the HP bar, runs, swings and jumps; hero reads 4 and the frame
+# counter keeps running.
+wait 600
+press START
+wait 120
+poke8 @gRogueMeta.chapters 3
+poke8 @gRogueMeta.hero 3
+press SELECT
+wait 30
+shot /tmp/roxas_hub.ppm
+press START
+wait 200
+hold B 100
+wait 20
+peek8 @gRogueMeta.hero hero
+shot /tmp/roxas_room.ppm
+hold RIGHT 20
+shot /tmp/roxas_room_walk.ppm
+debug battle 0
+wait 330
+shot /tmp/roxas_idle.ppm
+hold RIGHT 14
+shot /tmp/roxas_run.ppm
+press A
+wait 8
+shot /tmp/roxas_swing1.ppm
+wait 8
+shot /tmp/roxas_swing2.ppm
+wait 40
+press B
+wait 12
+shot /tmp/roxas_jump.ppm
+wait 60
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

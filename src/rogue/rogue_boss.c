@@ -163,67 +163,108 @@ u8 RogueBossAi(BtlObj* boss, AnimState* anim, void* tiles) {
     return 1;
 }
 
-// The heroes. Each plays exactly as Sora does: for every animation of his
-// there is one of theirs with the same frames, so only the pictures change.
+// The heroes. Those drawn from a sheet of their own play exactly as Sora
+// does: for every animation of his there is one of theirs with the same
+// frames, so only the pictures change. tools/rogue_sprites.py makes the sets.
 
 extern const AnimDef gBtlSoraAnimDefs[77];
-extern const AnimDef gRogueMickeyAnimDefs[77];
-extern const AnimDef gRogueMickeyDirectionDefs[30];
-extern const AnimDef gRogueMickeyFieldDefs[75];
-extern const AnimDef gUnk_0813C89C[15][5];
 extern const AnimDef gUnk_0813BEFC[6][5];
+extern const AnimDef gUnk_0813C89C[15][5];
+
+#define HERO_SET(name) \
+    extern const AnimDef gRogue##name##AnimDefs[77], gRogue##name##DirectionDefs[30], gRogue##name##FieldDefs[75], gRogue##name##HubDefs[2]; \
+    extern const u16 gRogue##name##Palette[16], gRogue##name##FacePalette[16]; \
+    extern const u8 gRogue##name##FaceTiles[];
+
+HERO_SET(Mickey)
+HERO_SET(Roxas)
+
+typedef struct RogueHeroSet {
+    const AnimDef* battle; // one for each entry of gBtlSoraAnimDefs
+    const AnimDef* direction; // of gUnk_0813BEFC, running and jumping
+    const AnimDef* field; // of gUnk_0813C89C, the rooms of the map
+    const AnimDef* hub; // standing and walking in the hub
+    const u16* palette;
+    const u8* faceTiles; // the portrait by the HP bar
+    const u16* facePalette;
+} RogueHeroSet;
+
+#define HERO(name) \
+    { gRogue##name##AnimDefs, gRogue##name##DirectionDefs, gRogue##name##FieldDefs, gRogue##name##HubDefs, gRogue##name##Palette, \
+      gRogue##name##FaceTiles, gRogue##name##FacePalette }
+
+static const RogueHeroSet sMickeySet = HERO(Mickey);
+static const RogueHeroSet sRoxasSet = HERO(Roxas);
+
+// The set of the hero picked, 0 for one who uses Sora's sprites.
+static const RogueHeroSet* RogueHeroSprites(void) {
+    switch (gRogueMeta.hero) {
+    case ROGUE_HERO_MICKEY:
+        return &sMickeySet;
+    case ROGUE_HERO_ROXAS:
+        return &sRoxasSet;
+    }
+
+    return 0;
+}
 
 // Sora in the black clothes of his second journey: his own sprites with
 // the reds turned to black and the blue to red. Worn after a first win.
 static const u16 sSoraKh2Palette[16] = { 0x4208, 0x20E3, 0x49CB, 0x6ED4, 0x1063, 0x20C6, 0x3DAD, 0x167A, 0x37DF, 0x0029, 0x00D0, 0x11B5, 0x32BE, 0x5B7F, 0x1099, 0x7FFF };
 
 u8 RogueHeroUnlocked(u8 hero) {
-    if (hero == ROGUE_HERO_MICKEY) {
+    switch (hero) {
+    case ROGUE_HERO_SORA:
+        return 1;
+    case ROGUE_HERO_MICKEY:
+        // Beaten as a boss.
         return (gRogueMeta.flags & ROGUE_META_MICKEY) != 0;
-    }
-
-    if (hero == ROGUE_HERO_SORA_KH2) {
+    case ROGUE_HERO_SORA_KH2:
         return gRogueMeta.wins != 0;
-    }
-
-    if (hero == ROGUE_HERO_RIKU) {
+    case ROGUE_HERO_RIKU:
         return (gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_RIKU) != 0;
+    case ROGUE_HERO_ROXAS:
+        // With the third chapter.
+        return gRogueMeta.chapters >= 3;
     }
 
-    return hero == ROGUE_HERO_SORA;
+    return 0;
 }
 
 // One of the hero's battle animations, numbered as Sora's are.
 const AnimDef* RogueHeroAnim(u16 anim) {
-    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
-        return &gRogueMickeyAnimDefs[anim];
-    }
+    const RogueHeroSet* set = RogueHeroSprites();
 
-    return &gBtlSoraAnimDefs[anim];
+    return set != 0 ? &set->battle[anim] : &gBtlSoraAnimDefs[anim];
 }
 
 // The same for running and jumping, which Sora has in five directions.
 const AnimDef* RogueHeroDirection(u16 action, u16 direction) {
-    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
-        return &gRogueMickeyDirectionDefs[action * 5 + direction];
-    }
+    const RogueHeroSet* set = RogueHeroSprites();
 
-    return &gUnk_0813BEFC[action][direction];
+    return set != 0 ? &set->direction[action * 5 + direction] : &gUnk_0813BEFC[action][direction];
 }
 
 // And for walking the rooms of the map.
 const AnimDef* RogueHeroField(u16 action, u16 direction) {
-    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
-        return &gRogueMickeyFieldDefs[action * 5 + direction];
-    }
+    const RogueHeroSet* set = RogueHeroSprites();
 
-    return &gUnk_0813C89C[action][direction];
+    return set != 0 ? &set->field[action * 5 + direction] : &gUnk_0813C89C[action][direction];
+}
+
+// Standing (0) or walking (1) in the hub, for a hero with a set; 0 for Sora's.
+const AnimDef* RogueHeroHub(u8 action) {
+    const RogueHeroSet* set = RogueHeroSprites();
+
+    return set != 0 ? &set->hub[action] : 0;
 }
 
 // The hero's palette, given the one Sora would have.
 void* RogueHeroPalette(void* sora) {
-    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
-        return (void*)gRogueMickeyPalette;
+    const RogueHeroSet* set = RogueHeroSprites();
+
+    if (set != 0) {
+        return (void*)set->palette;
     }
 
     if (gRogueMeta.hero == ROGUE_HERO_SORA_KH2) {
@@ -231,6 +272,19 @@ void* RogueHeroPalette(void* sora) {
     }
 
     return sora;
+}
+
+// The face by the HP bar and its palette, given Sora's.
+void* RogueHeroFace(void* sora) {
+    const RogueHeroSet* set = RogueHeroSprites();
+
+    return set != 0 ? (void*)set->faceTiles : sora;
+}
+
+void* RogueHeroFacePalette(void* sora) {
+    const RogueHeroSet* set = RogueHeroSprites();
+
+    return set != 0 ? (void*)set->facePalette : RogueHeroPalette(sora);
 }
 
 // The next hero unlocked after the one picked, for the hub's SELECT.
@@ -253,24 +307,4 @@ void RogueApplyHero(void) {
     } else {
         gGameState.flags &= ~8;
     }
-}
-
-// The face by the HP bar and its palette, given Sora's.
-extern const u8 gRogueMickeyFaceTiles[];
-extern const u16 gRogueMickeyFacePalette[16];
-
-void* RogueHeroFace(void* sora) {
-    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
-        return (void*)gRogueMickeyFaceTiles;
-    }
-
-    return sora;
-}
-
-void* RogueHeroFacePalette(void* sora) {
-    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
-        return (void*)gRogueMickeyFacePalette;
-    }
-
-    return RogueHeroPalette(sora);
 }

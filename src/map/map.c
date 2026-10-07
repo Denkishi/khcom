@@ -1813,6 +1813,11 @@ void func_080E8864(UnkStruct_080E8864* p) {
     s16 y0 = gUnk_0203C7AC->unk_08 - 7;
     s32 i;
 
+    // Same guard as func_080E8A24: a pattern wider than the room cannot fit.
+    if (gUnk_0203C7AC->unk_04 < p->unk_04) {
+        return;
+    }
+
     for (i = 0; i < h; i++) {
         s16 y = y0 + i;
         s16 j;
@@ -1872,6 +1877,12 @@ void func_080E8A24(UnkStruct_080E8864* p) {
     s16 j;
     u16 w;
     u16 h;
+
+    // A decoration wider or taller than the room has nowhere to go; without
+    // this the sizes below wrap around and the scan never ends.
+    if (gUnk_0203C7AC->unk_04 < p->unk_04 || gUnk_0203C7AC->unk_06 < p->unk_05) {
+        return;
+    }
 
     w = gUnk_0203C7AC->unk_04 - p->unk_04 + 1;
     h = gUnk_0203C7AC->unk_06 - p->unk_05 + 1;

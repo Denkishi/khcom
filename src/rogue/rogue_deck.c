@@ -128,6 +128,13 @@ void RogueBuildStartDeck(void) {
     u8 pool;
     s32 tries;
 
+    // The game also resets the deck when the title loads; only a run's start
+    // needs one built.
+    if (!gRogue.deckWanted) {
+        return;
+    }
+
+    gRogue.deckWanted = 0;
     sDeckCp = 0;
     sDeckCards = 0;
     sDeckEnemyCards = 0;
@@ -140,7 +147,8 @@ void RogueBuildStartDeck(void) {
     RogueAddCard(CARD_ID(CARD_CURE, 3 + RogueRandBelow(3)), budget);
     RogueAddCard(CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(3), 0), budget);
 
-    for (tries = 0; tries < 400 && sDeckCards < DECK_MAX; tries++) {
+    // No card costs less than 10 CP, so stop once that little is left.
+    for (tries = 0; tries < 400 && sDeckCards < DECK_MAX && budget - sDeckCp >= 10; tries++) {
         pool = RogueRollPool();
 
         if (pool == POOL_ENEMY && sDeckEnemyCards >= DECK_ENEMY_CARDS_MAX) {

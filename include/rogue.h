@@ -31,6 +31,13 @@
 #define ROGUE_RUN_SPEED 768
 #define ROGUE_DODGE_SPEED 2048
 #define ROGUE_DODGE_FRAMES 24
+// Deck reload: charge per tick, vanilla 25, or 12 under the enemy card that
+// slows it, and how many extra charges a reload can come to cost, vanilla 2.
+#define ROGUE_RELOAD_RATE 40
+#define ROGUE_RELOAD_RATE_SLOWED 20
+#define ROGUE_RELOAD_STEPS_MAX 1
+// Share of max HP a rest room gives back, in 1/256.
+#define ROGUE_REST_HEAL 90
 
 enum RogueRoomKind {
     ROGUE_ROOM_START,
@@ -61,12 +68,14 @@ typedef struct RogueRun {
     u8 comboPlus; // extra hits in the attack combo
     u8 airJumps; // jumps allowed in mid-air
     u8 airJumpsUsed;
+    u8 deckWanted; // set while a run is starting, see RogueBuildStartDeck
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
 extern RogueRun gRogue;
 extern Mode gModeRogueBoot;
 extern Mode gModeRogueReward;
+extern Mode gModeRogueOver;
 
 u32 RogueRand(void);
 u32 RogueRandBelow(u32 n);

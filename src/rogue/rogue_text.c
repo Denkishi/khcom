@@ -11,8 +11,8 @@ ROGUE_TEXT(sAxel0, "Ehi, Sora. Qui la storia\x1Fnon esiste: solo stanze,\x1Fport
 ROGUE_TEXT(sAxel1, "Colpisci una porta col\x1F\x1DKeyblade\x1E: si apre da sola.\x1FLe carte mappa non servono.");
 ROGUE_TEXT(sAxel2, "Ogni porta d\xE0 su una stanza\x1F" "diversa. In fondo al piano\x1Fti aspetta un \x1D" "boss\x1E.");
 ROGUE_TEXT(sAxel3, "Le porte restano chiuse\x1F" "finch\xE9 non vinci. Poi scegli\x1Funa \x1Dricompensa\x1E su tre.");
-ROGUE_TEXT(sAxel4, "Il tuo \x1Dmazzo\x1E \xE8 pescato a\x1F" "caso a ogni run. Guardalo\x1F" "dal menu prima di partire.");
-ROGUE_TEXT(sAxel5, "Le \x1Dtecniche\x1E le conosci gi\xE0\x1Ftutte, e non ti tolgono pi\xF9\x1Fla prima carta.");
+ROGUE_TEXT(sAxel4, "Il \x1Dmazzo\x1E \xE8 pescato a caso.\x1F" "Carte pi\xF9 forti si sbloccano\x1Fpiano dopo piano.");
+ROGUE_TEXT(sAxel5, "Le \x1Dtecniche\x1E non ti tolgono\x1Fpi\xF9 la prima carta. Ne impari\x1F" "di nuove salendo di livello.");
 ROGUE_TEXT(sAxel6, "I colpi sono pi\xF9 rapidi e\x1F" "dopo ognuno puoi saltare,\x1Fschivare o muoverti subito.");
 ROGUE_TEXT(sAxel7, "In aria i colpi ti tengono\x1Fsu. Con \x1D" "Combo+\x1E la combo\x1Fsi allunga.");
 ROGUE_TEXT(sAxel8, "Le carte nel mazzo salgono\x1F" "di livello vincendo. Due\x1F" "carte Lv3 si \x1D" "fondono\x1E.");

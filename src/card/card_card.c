@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -2079,8 +2080,8 @@ void func_0807B378(CardBattleWork* w) {
     c = &w->unk_9C[0];
     c += w->unk_B8;
 
-    if (*c > 2) {
-        *c = 2;
+    if (*c > ROGUE_RELOAD_STEPS_MAX) {
+        *c = ROGUE_RELOAD_STEPS_MAX;
     }
 }
 
@@ -3886,9 +3887,9 @@ void func_0807DE10(CardDisplayWork* p) {
 
                 if (gCardBattleState->unk_108[0] == 0) {
                     if (gBtlWork->unk_0F4 == 43) {
-                        gCardBattleState->unk_0F4 += 12;
+                        gCardBattleState->unk_0F4 += ROGUE_RELOAD_RATE_SLOWED;
                     } else {
-                        gCardBattleState->unk_0F4 += 25;
+                        gCardBattleState->unk_0F4 += ROGUE_RELOAD_RATE;
                     }
 
                     if ((s32)gCardBattleState->unk_0F4 > 0x100) {

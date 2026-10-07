@@ -194,6 +194,14 @@ static void RogueEnterRoom(u8 firstOfFloor) {
         room->unk_0A = 0;
     }
 
+    if (gRogue.kind == ROGUE_ROOM_REST) {
+        gGameState.hp += (gGameState.progression.maxHp * ROGUE_REST_HEAL) >> 8;
+
+        if (gGameState.hp > gGameState.progression.maxHp) {
+            gGameState.hp = gGameState.progression.maxHp;
+        }
+    }
+
     if (gRogue.kind == ROGUE_ROOM_BOSS) {
         func_080DEF20();
         func_0801CB00();
@@ -226,6 +234,7 @@ void RogueStartRun(void) {
     gRogue.airJumps = 0;
     gRogue.airJumpsUsed = 0;
     gRogue.world = RogueRollWorld();
+    gRogue.deckWanted = 1;
     func_0801CD20();
     gGameState.progression.unk_82 = 0xFFFF;
     RogueEnterRoom(1);
@@ -259,8 +268,14 @@ void RogueNextFloor(void) {
 }
 
 // A won battle leads to the reward screen, which then goes back to the room
-// or, after a boss, on to the next floor.
+// or, after a boss, on to the next floor. Returns 0 to go straight back to
+// the room.
 u8 RogueOnBattleEnd(void) {
+    // Running away wins nothing: back to the room, which still has its battle.
+    if (gGameState.flags & 0x40) {
+        return 0;
+    }
+
     RogueGainCardXp();
     ModeRequest(&gModeRogueReward, gRogue.kind == ROGUE_ROOM_BOSS);
     return 1;
@@ -268,7 +283,7 @@ u8 RogueOnBattleEnd(void) {
 
 // A lost battle ends the run.
 void RogueOnDefeat(void) {
-    ModeRequest(&gModeTitle, 0);
+    ModeRequest(&gModeRogueOver, 0);
 }
 
 // Doors stay shut until the room's battles are won.

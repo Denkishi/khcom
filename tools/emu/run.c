@@ -8,6 +8,7 @@
  *   hold KEYS N       hold KEYS for N frames without the release
  *   shot FILE.ppm     write the current frame
  *   peek8|peek16|peek32 ADDR [LABEL]
+ *   pc N              print the program counter and link register on each of the next N frames
  *   poke8|poke16|poke32 ADDR VALUE
  *   pokeat8|pokeat32 PTR OFFSET VALUE    write VALUE at OFFSET from the pointer stored at PTR
  *   peekat32 PTR OFFSET [LABEL]  read at OFFSET from the pointer stored at PTR
@@ -15,6 +16,7 @@
 #include <mgba/core/config.h>
 #include <mgba/core/core.h>
 #include <mgba/core/log.h>
+#include <mgba/internal/arm/arm.h>
 #include <mgba-util/vfs.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -117,6 +119,13 @@ int main(int argc, char** argv) {
             int bits = atoi(command + 4);
             uint32_t value = bits == 8 ? core->busRead8(core, addr) : bits == 16 ? core->busRead16(core, addr) : core->busRead32(core, addr);
             printf("%s %08x = %x\n", count > 2 ? b : "peek", addr, value);
+        } else if (!strcmp(command, "pc")) {
+            int n = atoi(a);
+            while (n-- > 0) {
+                struct ARMCore* cpu = core->cpu;
+                run(core, 0, 1);
+                printf("pc %08x lr %08x\n", cpu->gprs[15], cpu->gprs[14]);
+            }
         } else if (!strcmp(command, "peekat32")) {
             uint32_t base = core->busRead32(core, strtoul(a, NULL, 16));
             uint32_t addr = base + strtoul(b, NULL, 16);

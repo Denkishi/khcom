@@ -28,6 +28,7 @@ SOURCE = ROOT / "src/btl/btl.c"
 FIELD_SOURCE = ROOT / "src/map/fld.c"
 SHEET = ROOT / "mod_assets/mickey_kh2.png"
 OUT = ROOT / "src/rogue/rogue_mickey_art.c"
+FACE_BOX = (6, 6, 56, 56)  # the first portrait at the top of the sheet
 SPRITES_TOP = 385  # the sheet's portraits and credits are above this row
 BLOCK_TILES = 100  # Sora's tile block, 0xC80 bytes
 SHAPES = [(4, 4), (4, 2), (2, 4), (2, 2), (4, 1), (1, 4), (2, 1), (1, 2), (1, 1)]
@@ -350,6 +351,25 @@ def main():
     for index, number in enumerate(hub):
         out.append(f"    {{ (void*)sSet{number}Frames, (void*)sHubAnims, (void*)sTiles{number}, {index}, {{ 0, 0, 0 }} }},")
     out.append("};")
+    # The face in the corner of the battle screen: the first of the sheet's
+    # portraits, shrunk into the 32x32 piece of Sora's (his second, small piece
+    # is left empty). It has a palette of its own.
+    sheet = Image.open(SHEET).convert("RGB")
+    face = sheet.crop(FACE_BOX).resize((32, 32), Image.LANCZOS)
+    quantized = face.quantize(15, method=Image.MEDIANCUT, dither=Image.NONE)
+    flat = quantized.getpalette()[:45]
+    face_palette = [(0, 0, 0)] + [tuple(flat[i * 3:i * 3 + 3]) for i in range(15)]
+    data = quantized.load()
+    white = sheet.getpixel((0, 0))
+    rows = [[0 if sum(abs(a - b) for a, b in zip(face.getpixel((x, y)), white)) < 24 else data[x, y] + 1 for x in range(32)]
+            for y in range(32)]
+    tiles = sprite_sheet.rows_tiles([bytes(row) for row in rows], 32, 32) + bytes(4 * 32)
+    out.append("// The portrait by the HP bar.")
+    out.append(f"const u8 gRogueMickeyFaceTiles[{len(tiles)}] __attribute__((aligned(4))) = {{")
+    out.append("\n".join("    " + ", ".join(f"0x{b:02X}" for b in tiles[i:i + 16]) + "," for i in range(0, len(tiles), 16)))
+    out.append("};")
+    colours = [(r >> 3) | ((g >> 3) << 5) | ((b >> 3) << 10) for r, g, b in face_palette]
+    out += ["const u16 gRogueMickeyFacePalette[16] = {", words(colours, 8), "};", ""]
     OUT.write_text("\n".join(out) + "\n")
     worst = max(len(poses.pieces(name)) for name in poses.pixels)
     print(f"{len(sets)} sprite sets, {total // 1024} KiB of tiles, at most {worst} OBJs a pose")

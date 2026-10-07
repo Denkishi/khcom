@@ -136,8 +136,8 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
         work->gfx = gUnk_08B213F0;
         AnimInit(&work->anim, gUnk_09EE12C8, gUnk_09EE12BC);
     } else {
-        work->palette = LoadObjPalette(gSoraPalette, 0x20);
-        work->tiles = AllocObjTiles(0x280, gUnk_08B20D6E);
+        work->palette = LoadObjPalette(RogueHeroFacePalette(gSoraPalette), 0x20);
+        work->tiles = AllocObjTiles(0x280, RogueHeroFace(gUnk_08B20D6E));
         work->gfx = gUnk_08B20D20;
         AnimInit(&work->anim, gUnk_09EE12B0, gUnk_09EE12A4);
     }

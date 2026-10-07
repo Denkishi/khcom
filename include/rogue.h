@@ -633,6 +633,8 @@ const struct AnimDef* RogueHeroAnim(u16 anim);
 const struct AnimDef* RogueHeroDirection(u16 action, u16 direction);
 const struct AnimDef* RogueHeroField(u16 action, u16 direction);
 void* RogueHeroPalette(void* sora);
+void* RogueHeroFace(void* sora);
+void* RogueHeroFacePalette(void* sora);
 u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);
 void RogueProfileFrame(void);

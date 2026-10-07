@@ -158,3 +158,23 @@ void RogueApplyHero(void) {
         gGameState.flags &= ~8;
     }
 }
+
+// The face by the HP bar and its palette, given Sora's.
+extern const u8 gRogueMickeyFaceTiles[];
+extern const u16 gRogueMickeyFacePalette[16];
+
+void* RogueHeroFace(void* sora) {
+    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+        return (void*)gRogueMickeyFaceTiles;
+    }
+
+    return sora;
+}
+
+void* RogueHeroFacePalette(void* sora) {
+    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+        return (void*)gRogueMickeyFacePalette;
+    }
+
+    return RogueHeroPalette(sora);
+}

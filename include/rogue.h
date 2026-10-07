@@ -397,6 +397,13 @@ typedef struct RogueDebug {
     u16 pillars; // ice blocks the Vexen relic raised this battle
     u16 tagHits; // tag attacks that connected this battle
     u16 enemyTags; // enemies and bosses called in by their cards
+    u8 slow; // the original routines run in place of the mod's faster ones, to compare
+    u16 loadMax; // the longest frame since it was cleared, in scanlines of the 228 there are
+    u16 loadLast;
+    u32 loadSum; // of every frame since it was cleared
+    u16 loadFrames;
+    u16 dropped; // video frames missed since it was cleared
+    u32 lastVBlank;
     u16 moves; // effect moves started this battle
     u16 moveHits; // hit tests of theirs that connected
     u8 tagAnim; // animation a tag attack plays instead of its own, plus one
@@ -449,6 +456,9 @@ const struct AnimDef* RogueHeroDirection(u16 action, u16 direction);
 void* RogueHeroPalette(void* sora);
 u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);
+void RogueProfileFrame(void);
+void RogueBuildOam(void);
+s32 RogueSqrt8(s32 a);
 extern const u16 gRogueMickeyPalette[16];
 u8 RogueHasRelic(u8 relic);
 u8 RogueCardElement(u16 id);

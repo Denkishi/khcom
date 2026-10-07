@@ -5,6 +5,9 @@
 #include "mode_battle_data.h"
 #include "system_state.h"
 #include "world_types.h"
+#include "gba/io_reg.h"
+
+extern vu32 gVBlankCounter;
 
 // Test hooks. Nothing in the game sets gRogueDebug: the emulator test scripts
 // poke a command into it, so that a test can jump straight to what it checks.
@@ -45,4 +48,26 @@ void RogueDebugField(void) {
     }
 
     gRogueDebug.command = ROGUE_DEBUG_NONE;
+}
+
+// Called at the end of each frame's work, before the wait for the vertical
+// blank: how far down the screen the frame got, and whether it ran over. The
+// work starts at line 160, where the blank begins.
+void RogueProfileFrame(void) {
+    u16 lines = (REG_VCOUNT + 228 - 160) % 228;
+    u32 blanks = gVBlankCounter;
+
+    if (gRogueDebug.lastVBlank != 0 && blanks - gRogueDebug.lastVBlank > 1) {
+        gRogueDebug.dropped += blanks - gRogueDebug.lastVBlank - 1;
+        lines += 228;
+    }
+
+    gRogueDebug.lastVBlank = blanks;
+    gRogueDebug.loadLast = lines;
+    gRogueDebug.loadSum += lines;
+    gRogueDebug.loadFrames++;
+
+    if (lines > gRogueDebug.loadMax) {
+        gRogueDebug.loadMax = lines;
+    }
 }

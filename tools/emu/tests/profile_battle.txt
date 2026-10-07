@@ -1,0 +1,21 @@
+# How much of each frame a crowded battle takes, and how many frames it
+# misses. Set slow to 1 to run the original routines in place of the mod's
+# faster ones (src/rogue/rogue_fast.c) and compare.
+# Expect: load_sum / load_frames around 160 of the 228 scanlines a frame has
+# (175 with slow), and dropped in single digits.
+# For where the time goes: replace the lines after the reset with
+# "profile 240" and pipe the output through ../profile.py.
+include start.txt
+poke8 @gRogueDebug.god 1
+poke8 @gRogueDebug.slow 0
+debug battle 70
+wait 445
+include profile_reset.txt
+hold RIGHT 20
+press A
+wait 20
+press A
+wait 20
+press A
+wait 400
+include profile_report.txt

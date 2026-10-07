@@ -38,3 +38,6 @@ moved mode_battle.c
 moved btl_collision.c
 moved card_riku_tutorial.c
 moved hum.c
+moved main.c
+new rogue_fast.c
+moved engine.c

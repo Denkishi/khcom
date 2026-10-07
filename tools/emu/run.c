@@ -12,6 +12,10 @@
  *   poke8|poke16|poke32 ADDR VALUE
  *   pokeat8|pokeat32 PTR OFFSET VALUE    write VALUE at OFFSET from the pointer stored at PTR
  *   peekat32 PTR OFFSET [LABEL]  read at OFFSET from the pointer stored at PTR
+ *   callers N LO HI  run N frames and print, as "prof ADDR SAMPLES", the return addresses seen while the
+ *                     program counter was in LO..HI: who calls the functions there
+ *   profile N [KEYS]  run N frames an instruction at a time and print where the program counter was:
+ *                     "prof ADDR SAMPLES" for each word of ROM, and the totals for RAM and for the BIOS, where it idles
  */
 #include <mgba/core/config.h>
 #include <mgba/core/core.h>
@@ -126,6 +130,65 @@ int main(int argc, char** argv) {
                 run(core, 0, 1);
                 printf("pc %08x lr %08x\n", cpu->gprs[15], cpu->gprs[14]);
             }
+        } else if (!strcmp(command, "callers")) {
+            static unsigned rom[0x2000000 / 4];
+            struct ARMCore* cpu = core->cpu;
+            uint32_t lo = strtoul(b, NULL, 16), hi = strtoul(c, NULL, 16);
+            unsigned i;
+            int n = atoi(a);
+            memset(rom, 0, sizeof(rom));
+            while (n-- > 0) {
+                uint32_t frame = core->frameCounter(core);
+                while (core->frameCounter(core) == frame) {
+                    uint32_t pc = cpu->gprs[15], lr = cpu->gprs[14];
+                    core->step(core);
+                    if (pc >= lo && pc < hi && lr >= 0x08000000 && lr < 0x0A000000) {
+                        rom[(lr - 0x08000000) / 4]++;
+                    }
+                }
+            }
+            for (i = 0; i < 0x2000000 / 4; i++) {
+                if (rom[i]) {
+                    printf("prof %08x %u\n", 0x08000000 + i * 4, rom[i]);
+                }
+            }
+        } else if (!strcmp(command, "profile")) {
+            static unsigned rom[0x2000000 / 4];
+            static unsigned iwram[0x8000 / 64];
+            unsigned ram = 0, bios = 0, i;
+            struct ARMCore* cpu = core->cpu;
+            int n = atoi(a);
+            core->setKeys(core, count > 2 ? parse_keys(b) : 0);
+            memset(rom, 0, sizeof(rom));
+            memset(iwram, 0, sizeof(iwram));
+            while (n-- > 0) {
+                uint32_t frame = core->frameCounter(core);
+                while (core->frameCounter(core) == frame) {
+                    uint32_t pc = cpu->gprs[15];
+                    core->step(core);
+                    if (pc >= 0x08000000 && pc < 0x0A000000) {
+                        rom[(pc - 0x08000000) / 4]++;
+                    } else if (pc >> 24 == 3) {
+                        iwram[(pc & 0x7FFF) / 64]++;
+                        ram++;
+                    } else if (pc < 0x4000) {
+                        bios++;
+                    } else {
+                        ram++;
+                    }
+                }
+            }
+            for (i = 0; i < 0x2000000 / 4; i++) {
+                if (rom[i]) {
+                    printf("prof %08x %u\n", 0x08000000 + i * 4, rom[i]);
+                }
+            }
+            for (i = 0; i < 0x8000 / 64; i++) {
+                if (iwram[i]) {
+                    printf("iwram %08x %u\n", 0x03000000 + i * 64, iwram[i]);
+                }
+            }
+            printf("prof ram %u\nprof bios %u\n", ram, bios);
         } else if (!strcmp(command, "peekat32")) {
             uint32_t base = core->busRead32(core, strtoul(a, NULL, 16));
             uint32_t addr = base + strtoul(b, NULL, 16);

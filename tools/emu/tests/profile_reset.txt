@@ -1,0 +1,5 @@
+# Included by the profiling scripts: clears the frame load counters.
+poke16 @gRogueDebug.loadMax 0
+poke32 @gRogueDebug.loadSum 0
+poke16 @gRogueDebug.loadFrames 0
+poke16 @gRogueDebug.dropped 0

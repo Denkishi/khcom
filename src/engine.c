@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "engine_math.h"
 #include "fade.h"
@@ -677,6 +678,12 @@ void func_08002F50(void) {
     u32 flags;
     s16 yMask = 255;
 
+    // The mod's version does the same, faster.
+    if (!gRogueDebug.slow) {
+        RogueBuildOam();
+        return;
+    }
+
     if (gSpriteWork->unk_2BAE != 0) {
         return;
     }
@@ -1250,6 +1257,12 @@ void GetObjSize(u16 a, u16 b, u16* w, u16* h) {
 s32 Sqrt8(s32 a) {
     s32 x;
     s32 prev;
+
+    // The mod's version does the same without dividing; this one is kept for
+    // numbers so large that the original overflows.
+    if (a > 0 && a < 0x400000 && !gRogueDebug.slow) {
+        return RogueSqrt8(a);
+    }
 
     if (a > 0) {
         x = 0x100;

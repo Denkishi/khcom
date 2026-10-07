@@ -1,0 +1,6 @@
+# Included by the profiling scripts: prints the frame load counters. A frame
+# has 228 scanlines; load_sum / load_frames is the average a frame took.
+peek16 @gRogueDebug.loadMax load_max
+peek32 @gRogueDebug.loadSum load_sum
+peek16 @gRogueDebug.loadFrames load_frames
+peek16 @gRogueDebug.dropped dropped

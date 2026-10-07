@@ -260,6 +260,10 @@ void RogueApplyBoon(void) {
     u8 relic;
     u8 i;
 
+    // Pity: some more HP after each run lost in a row.
+    gGameState.progression.maxHp += ROGUE_PITY_HP * gRogueMeta.losses;
+    gGameState.hp += ROGUE_PITY_HP * gRogueMeta.losses;
+
     gRogue.boon = gRogueMeta.boon;
 
     switch (gRogueMeta.boon) {
@@ -338,7 +342,13 @@ void RogueMetaEndRun(u8 completed) {
         gRogueMeta.bestDepth = gRogue.depth;
     }
 
+    // Losses in a row are counted, to go easier on the next run.
+    if (!completed && gRogueMeta.losses < ROGUE_PITY_MAX) {
+        gRogueMeta.losses++;
+    }
+
     if (completed) {
+        gRogueMeta.losses = 0;
         gRogueMeta.wins++;
         gRogueMeta.boonsWon |= 1 << gRogue.boon;
 

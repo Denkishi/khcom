@@ -91,7 +91,7 @@ typedef struct RogueMeta {
     u8 hero; // the RogueHero picked in the hub
     u8 seals; // won from bosses, spent on starting cards
     u8 starters; // one bit for each starting card unlocked, see ROGUE_STARTERS
-    u8 unused[1];
+    u8 losses; // runs lost in a row: each softens the next one, see ROGUE_PITY_
     // Added after the first saves: a save without them is read as having none.
     u8 upgrades2[ROGUE_UPGRADE_PAGE]; // levels of the second page's
     u8 unused2[2];
@@ -374,6 +374,8 @@ enum RogueMove {
 #define ROGUE_DAMAGE_NUMBERS 6 // shown at once
 #define ROGUE_DAMAGE_NUMBER_TIME 36 // frames each stays
 #define ROGUE_MOVE_SPEED 0xA00
+#define ROGUE_PITY_MAX 3 // losses in a row that count
+#define ROGUE_PITY_HP 12 // max HP a run starts with for each
 #define ROGUE_GLIDE_SPEED 96 // fall speed while gliding
 #define ROGUE_AIR_DASH_SPEED 0x700
 #define ROGUE_BURN_TICKS 4 // times a burn hurts, half a second apart

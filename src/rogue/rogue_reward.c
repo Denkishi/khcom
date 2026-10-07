@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "rogue_ui.h"
 #include "registration_data.h"
 #include "mode_battle_data.h"
 #include "card.h"
@@ -81,6 +82,7 @@ typedef struct RogueRewardWork {
     u8 text[REWARD_TEXT_MAX + 8];
     void* palette;
     void* cursorPalette;
+    RogueUi ui;
     void* cardTiles;
     void* cardPalette;
     void* cardGfx;
@@ -97,8 +99,8 @@ typedef struct RogueRewardWork {
 
 static RogueRewardWork* sWork;
 
-static const u8 sTitle[] = "Scegli una ricompensa";
-static const u8 sTitleReroll[] = "Scegli (B: rilancia)";
+static const u8 sTitle[] = "Ricompensa";
+static const u8 sTitleReroll[] = "B: rilancia";
 static const u8 sLabelCard[] = "Carta";
 static const u8 sLabelUpgrade[] = "Potenzia";
 static const u8 sLabelHeal[] = "Cura";
@@ -839,12 +841,11 @@ static void RogueReward_Init(s32 source) {
     LoadBgPalette(3, gUnk_0984B118, 0xA0);
     LoadBgMap(3, gUnk_09848198, 0x500);
 
-    // Only the list panel on the left of the status screen's frame layer is kept.
-    for (i = 0; i < 0x500 / 2; i++) {
-        sWork->map[i] = (i & 31) < PANEL_COLUMNS ? map[i] : map[0];
-    }
-
+    // The status screen's frame layer whole: its list on the left holds the
+    // choices, its window the card or the icon, its panel what the choice does.
+    RogueUiFrameMap(sWork->map);
     LoadBgMap(2, sWork->map, 0x500);
+    RogueUiInit(&sWork->ui);
     sWork->palette = _08066468(1);
     sWork->cursorPalette = _08066468(0);
     InitTextSlots(sWork->title, TITLE_SLOTS);
@@ -933,19 +934,23 @@ static void RogueReward_Update(void) {
         break;
     }
 
-    DrawTextSlots((240 - GetTextSlotsWidth(sWork->title, sWork->titleCount)) / 2, 8, sWork->title, sWork->palette, 50,
-                  sWork->titleCount);
+    DrawTextSlots(236 - GetTextSlotsWidth(sWork->title, sWork->titleCount), 1, sWork->title, sWork->palette, 50, sWork->titleCount);
 
+    // The choices: a plate each, the one under the cursor chosen.
     for (i = 0; i < REWARD_CHOICES; i++) {
-        DrawTextSlots(14, 46 + i * 26, sWork->labels[i], i == sWork->cursor ? sWork->cursorPalette : sWork->palette, 50,
-                      sWork->labelCounts[i]);
+        s16 x = RogueUiPlate(&sWork->ui, 12, 40 + i * 24, i == sWork->cursor);
+
+        DrawTextSlots(x, 40 + i * 24 + 2, sWork->labels[i], sWork->palette, 50, sWork->labelCounts[i]);
     }
 
+    RogueUiGlove(&sWork->ui, 16, 40 + sWork->cursor * 24 + 8);
+
+    // The card or the icon in the window, what it does on the panel below.
     if (sWork->cardTiles != 0) {
-        DrawSprite(172, 70, sWork->cardGfx, sWork->cardTiles, sWork->cardPalette, 0, 0, 50);
+        DrawSprite(172, 42, sWork->cardGfx, sWork->cardTiles, sWork->cardPalette, 0, 0, 50);
     }
 
-    DrawTextSlots(112, 106, sWork->detail, sWork->palette, 50, sWork->detailCount);
+    DrawTextSlots(110, 74, sWork->detail, sWork->palette, 50, sWork->detailCount);
 }
 
 static void RogueReward_Exit(void) {
@@ -959,6 +964,7 @@ static void RogueReward_Exit(void) {
     }
 
     RogueFreeCard();
+    RogueUiExit(&sWork->ui);
     ReleaseObjPalette(sWork->palette);
     ReleaseObjPalette(sWork->cursorPalette);
     EwramFree(sWork);

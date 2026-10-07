@@ -638,6 +638,7 @@ void* RogueHeroFacePalette(void* sora);
 u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);
 void RogueProfileFrame(void);
+
 void RogueMovesTick(void);
 struct BtlSoraWork;
 void RogueAirControl(struct BtlSoraWork* work, u16 held, u16 pressed);

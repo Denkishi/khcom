@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "rogue_ui.h"
 #include "monsgage.h"
 #include "card_types.h"
 #include "card_ids.h"
@@ -29,9 +30,9 @@
 #define SHOP_TEXT_MAX 110
 #define TREE_NODES (ROGUE_TREE_BRANCHES * ROGUE_TREE_DEPTH)
 #define TREE_X 30 // of the first column's icons
-#define TREE_Y 36
+#define TREE_Y 30
 #define TREE_STEP_X 36
-#define TREE_STEP_Y 30
+#define TREE_STEP_Y 24
 
 enum { PAGE_TREE, PAGE_CARDS, PAGES };
 
@@ -52,6 +53,7 @@ typedef struct RogueShopWork {
     void* iconPalette; // a node that can be bought
     void* lockedPalette; // one whose branch has not reached it
     void* fullPalette; // one with every level
+    RogueUi ui;
     u8 titleCount;
     u8 labelCounts[ROGUE_STARTERS];
     u8 detailCount;
@@ -65,13 +67,13 @@ typedef struct RogueShopWork {
 static RogueShopWork* sWork;
 
 static const u8 sShards[] = "Abilit\xE0   Frammenti: ";
-static const u8 sSeals[] = "Carte iniziali   Sigilli: ";
+static const u8 sSeals[] = "Carte   Sigilli: ";
 static const u8 sLevel[] = "  Liv. ";
 static const u8 sCost[] = "\x1F" "Costo: ";
 static const u8 sMaxed[] = "\x1F" "Al massimo";
 static const u8 sNeeds[] = "\x1F" "Richiede ";
 static const u8 sNeedsLevel[] = " liv. ";
-static const u8 sStarterDetail[] = "Ogni run parte con\x1Fquesta carta nel mazzo";
+static const u8 sStarterDetail[] = "Parti sempre con\x1Fquesta carta";
 static const u8 sOwned[] = "\x1F" "Sbloccata";
 static const u8 sPages[] = "\x1FL/R: cambia pagina";
 
@@ -194,7 +196,6 @@ static void RogueShopRefresh(void) {
             out = RogueShopNumber(out, RogueStarterCost(sWork->cursor));
         }
 
-        RogueShopAppend(out, sPages);
         sWork->detailCount = LoadTextSlots((u16*)sWork->text, sWork->detail);
         return;
     }
@@ -228,11 +229,14 @@ static void RogueShopRefresh(void) {
 // The panel on the left holds the list of cards; the tree has the whole
 // screen.
 static void RogueShopPanel(void) {
-    const u16* map = (const u16*)gUnk_09847798;
-    s32 i;
-
-    for (i = 0; i < 0x500 / 2; i++) {
-        sWork->map[i] = sWork->page == PAGE_CARDS && (i & 31) < PANEL_COLUMNS ? map[i] : map[0];
+    if (sWork->page == PAGE_CARDS) {
+        // The cards: the list, the window and the panel, as the rewards.
+        RogueUiFrameMap(sWork->map);
+        SetBgScroll(2, 0, 0);
+    } else {
+        // The tree fills the screen: only the panel, low and centred.
+        RogueUiPanelMap(sWork->map);
+        SetBgScroll(2, ROGUE_UI_PANEL_SCROLL_X, ROGUE_UI_PANEL_SCROLL_Y);
     }
 
     LoadBgMap(2, sWork->map, 0x500);
@@ -256,6 +260,7 @@ static void RogueShop_Init(s32 from) {
     LoadBgPalette(3, gUnk_0984B118, 0xA0);
     LoadBgMap(3, gUnk_09848198, 0x500);
     RogueShopPanel();
+    RogueUiInit(&sWork->ui);
     sWork->palette = _08066468(1);
     sWork->cursorPalette = _08066468(0);
     sWork->iconPalette = LoadObjPalette((void*)gRogueTreePalette, 32);
@@ -346,16 +351,17 @@ static void RogueShop_Update(void) {
         break;
     }
 
-    DrawTextSlots((240 - GetTextSlotsWidth(sWork->title, sWork->titleCount)) / 2, 8, sWork->title, sWork->palette, 50,
-                  sWork->titleCount);
+    DrawTextSlots(236 - GetTextSlotsWidth(sWork->title, sWork->titleCount), 1, sWork->title, sWork->palette, 50, sWork->titleCount);
 
     if (sWork->page == PAGE_CARDS) {
         for (i = 0; i < ROGUE_STARTERS; i++) {
-            DrawTextSlots(14, 40 + i * 16, sWork->labels[i], i == (s32)sWork->cursor ? sWork->cursorPalette : sWork->palette, 50,
-                          sWork->labelCounts[i]);
+            s16 x = RogueUiPlate(&sWork->ui, 12, 34 + i * 18, i == (s32)sWork->cursor);
+
+            DrawTextSlots(x, 34 + i * 18 + 2, sWork->labels[i], sWork->palette, 50, sWork->labelCounts[i]);
         }
 
-        DrawTextSlots(112, 60, sWork->detail, sWork->palette, 50, sWork->detailCount);
+        RogueUiGlove(&sWork->ui, 16, 34 + sWork->cursor * 18 + 8);
+        DrawTextSlots(110, 74, sWork->detail, sWork->palette, 50, sWork->detailCount);
         return;
     }
 
@@ -378,7 +384,7 @@ static void RogueShop_Update(void) {
         DrawSprite(TREE_X + (i % ROGUE_TREE_DEPTH) * TREE_STEP_X, y, gCardDefs[0].gfx, sWork->iconTiles[i], palette, 0, 0, 50);
     }
 
-    DrawTextSlots(12, 112, sWork->detail, sWork->palette, 50, sWork->detailCount);
+    DrawTextSlots(62, 102, sWork->detail, sWork->palette, 50, sWork->detailCount);
 }
 
 static void RogueShop_Exit(void) {
@@ -395,6 +401,7 @@ static void RogueShop_Exit(void) {
         ReleaseObjTiles(sWork->iconTiles[i]);
     }
 
+    RogueUiExit(&sWork->ui);
     ReleaseObjPalette(sWork->iconPalette);
     ReleaseObjPalette(sWork->lockedPalette);
     ReleaseObjPalette(sWork->fullPalette);

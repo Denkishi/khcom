@@ -40,6 +40,24 @@ static const u8 sWorlds[] = {
     WORLD_CASTLE_OBLIVION,
 };
 
+// Boss battle of each world, indexed by WorldId. Worlds without a giant boss
+// of their own get an Organization member.
+static const u8 sWorldBosses[] = {
+    0x94, // unused
+    0x95, // Agrabah
+    0x97, // Atlantica
+    0xA0, // Olympus Coliseum
+    0x96, // Wonderland
+    0x98, // Monstro
+    0x9B, // Halloween Town
+    0x9E, // Never Land
+    0xA2, // Hollow Bastion
+    0xA2, // Destiny Islands
+    0x94, // Traverse Town
+    0xA2, // Twilight Town
+    0xA2, // Castle Oblivion
+};
+
 // The run has its own generator so that battles, which reseed the game's, do
 // not change what the run rolls next.
 u32 RogueRand(void) {
@@ -155,7 +173,6 @@ static void RogueEnterRoom(u8 firstOfFloor) {
     const u8* row;
     s32 i;
 
-    RogueRollDoors();
     gGameState.floor = 1;
     gGameState.floors[1].world = gRogue.world;
     gGameState.unk_00F = 0xFF;
@@ -174,6 +191,14 @@ static void RogueEnterRoom(u8 firstOfFloor) {
         room->unk_0A = 0;
     }
 
+    if (gRogue.kind == ROGUE_ROOM_BOSS) {
+        func_080DEF20();
+        func_0801CB00();
+        ModeRequest(&gModeBattle, sWorldBosses[gRogue.world]);
+        return;
+    }
+
+    RogueRollDoors();
     room = func_080DEE18(ROGUE_ROOM_ID);
     row = gUnk_0984D134[sRoomTypes[gRogue.kind]];
     room->unk_00 = 1;
@@ -203,20 +228,26 @@ void RogueStartRun(void) {
 }
 
 void RogueLeaveRoom(u8 door) {
-    u8 firstOfFloor = 0;
-
     gRogue.kind = gRogue.doors[door];
     gRogue.depth++;
     gRogue.room++;
+    RogueEnterRoom(0);
+}
 
-    if (gRogue.room >= ROGUE_FLOOR_ROOMS + 1) {
-        gRogue.room = 1;
-        gRogue.floor++;
-        gRogue.world = sWorlds[RogueRandBelow((sizeof(sWorlds) / sizeof(sWorlds[0])))];
-        firstOfFloor = 1;
+// Decides where a won battle leads. Returns 0 for a battle fought inside a
+// room, which goes back to that room.
+u8 RogueOnBattleEnd(void) {
+    if (gRogue.kind != ROGUE_ROOM_BOSS) {
+        return 0;
     }
 
-    RogueEnterRoom(firstOfFloor);
+    gRogue.floor++;
+    gRogue.depth++;
+    gRogue.room = 0;
+    gRogue.kind = ROGUE_ROOM_BATTLE;
+    gRogue.world = sWorlds[RogueRandBelow(sizeof(sWorlds) / sizeof(sWorlds[0]))];
+    RogueEnterRoom(1);
+    return 1;
 }
 
 // Hits in the attack combo, the last of which is the finisher.

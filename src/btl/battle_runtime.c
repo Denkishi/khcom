@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "mode_continue.h"
 #include "registration_data.h"
@@ -2062,6 +2063,11 @@ void func_0801C2DC(BtlObj* p, u8 f) {
 
 void func_0801C314(void) {
     m4aMPlayAllStop();
+
+    if (RogueOnBattleEnd()) {
+        return;
+    }
+
     if (gUnk_03006C10 & 1) {
         ModeRequest(&gModeChkbtl, 0);
         return;

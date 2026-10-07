@@ -52,6 +52,7 @@ u32 RogueRandBelow(u32 n);
 
 void RogueStartRun(void);
 void RogueLeaveRoom(u8 door);
+u8 RogueOnBattleEnd(void);
 u8* RogueRoomLinks(void);
 u16 RogueDoorFlags(u8 door);
 void RogueSpawnRoomActors(void);

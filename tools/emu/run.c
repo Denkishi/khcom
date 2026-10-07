@@ -9,7 +9,7 @@
  *   shot FILE.ppm     write the current frame
  *   peek8|peek16|peek32 ADDR [LABEL]
  *   poke8|poke16|poke32 ADDR VALUE
- *   pokeat32 PTR OFFSET VALUE    write VALUE at OFFSET from the pointer stored at PTR
+ *   pokeat8|pokeat32 PTR OFFSET VALUE    write VALUE at OFFSET from the pointer stored at PTR
  *   peekat32 PTR OFFSET [LABEL]  read at OFFSET from the pointer stored at PTR
  */
 #include <mgba/core/config.h>
@@ -124,6 +124,9 @@ int main(int argc, char** argv) {
         } else if (!strcmp(command, "pokeat32")) {
             uint32_t base = core->busRead32(core, strtoul(a, NULL, 16));
             core->busWrite32(core, base + strtoul(b, NULL, 16), strtoul(c, NULL, 0));
+        } else if (!strcmp(command, "pokeat8")) {
+            uint32_t base = core->busRead32(core, strtoul(a, NULL, 16));
+            core->busWrite8(core, base + strtoul(b, NULL, 16), strtoul(c, NULL, 0));
         } else if (!strncmp(command, "poke", 4)) {
             uint32_t addr = strtoul(a, NULL, 16);
             uint32_t value = strtoul(b, NULL, 0);

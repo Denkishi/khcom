@@ -14,3 +14,4 @@ moved card_card.c
 moved card_battle_riku.c
 moved btl.c
 moved card_deckmenu2.c
+moved battle_runtime.c

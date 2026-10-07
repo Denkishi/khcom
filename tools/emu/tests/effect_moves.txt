@@ -1,0 +1,36 @@
+# The moves made from other characters' effects: Axel's chakram (0), Vexen's
+# needles (1), Marluxia's petals (2) and Vexen's shards (3). Each is done once
+# as the battle starts, for the screenshots, and once when the enemies can be
+# hit.
+# Expect: moves 8 with a projectile build, fewer without, and move_hits well
+# above 0.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 445
+debug move 0
+wait 10
+shot /tmp/effect_chakram.ppm
+wait 50
+debug move 1
+wait 10
+shot /tmp/effect_needles.ppm
+wait 50
+debug move 2
+wait 10
+shot /tmp/effect_petals.ppm
+wait 50
+debug move 3
+wait 6
+shot /tmp/effect_shards.ppm
+wait 200
+debug move 0
+wait 60
+debug move 1
+wait 60
+debug move 2
+wait 60
+debug move 3
+wait 60
+peek16 @gRogueDebug.moves moves
+peek16 @gRogueDebug.moveHits move_hits

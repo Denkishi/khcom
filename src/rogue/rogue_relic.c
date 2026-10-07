@@ -27,6 +27,10 @@ static const u8 sNameIce[] = "Lama gelida";
 static const u8 sNameThunder[] = "Lama tonante";
 static const u8 sNameEcho[] = "Eco arcano";
 static const u8 sNamePillar[] = "Gelo di Vexen";
+static const u8 sNameChakram[] = "Chakram di Axel";
+static const u8 sNameNeedles[] = "Aghi di Vexen";
+static const u8 sNamePetals[] = "Petali di Marluxia";
+static const u8 sNameShards[] = "Schegge di Vexen";
 
 static const u8 sTextVampire[] = "Ogni colpo a segno\x1Fti cura di 1 PV";
 static const u8 sTextCritical[] = "Un colpo su sette\x1F" "fa danno doppio";
@@ -40,13 +44,17 @@ static const u8 sTextIce[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Gelo"
 static const u8 sTextThunder[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Tuono";
 static const u8 sTextEcho[] = "Ogni magia a segno\x1Fcolpisce due volte";
 static const u8 sTextPillar[] = "Il finisher alza un\x1F" "blocco di ghiaccio";
+static const u8 sTextChakram[] = "Il finisher lancia\x1Fun chakram di fuoco";
+static const u8 sTextNeedles[] = "Il finisher lancia\x1Ftre aghi di ghiaccio";
+static const u8 sTextPetals[] = "Il finisher scatena\x1Fpetali tutt'intorno";
+static const u8 sTextShards[] = "Il finisher fa\x1F" "esplodere ghiaccio";
 
 static const u8* const sNames[ROGUE_RELICS] = {
-    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho, sNamePillar,
+    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho, sNamePillar, sNameChakram, sNameNeedles, sNamePetals, sNameShards,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
-    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho, sTextPillar,
+    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho, sTextPillar, sTextChakram, sTextNeedles, sTextPetals, sTextShards,
 };
 
 const u8* RogueRelicName(u8 relic) {
@@ -70,6 +78,10 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     if (relic == ROGUE_RELIC_ICE_PILLAR) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN;
+    }
+
+    if (relic >= ROGUE_RELIC_CHAKRAM) {
+        return RogueMoveUnlocked(relic - ROGUE_RELIC_CHAKRAM);
     }
 
     if (relic == ROGUE_RELIC_ARCANE_ECHO) {
@@ -105,6 +117,15 @@ u8 RogueRollRelic(void) {
     return ROGUE_RELICS;
 }
 
+// A move is unlocked by beating the character it comes from.
+u8 RogueMoveUnlocked(u8 move) {
+    static const u8 bosses[ROGUE_MOVES] = {
+        ROGUE_BOSS_MOVE_AXEL, ROGUE_BOSS_MOVE_VEXEN, ROGUE_BOSS_MOVE_MARLUXIA, ROGUE_BOSS_MOVE_VEXEN,
+    };
+
+    return (gRogueMeta.bossMoves & bosses[move]) != 0;
+}
+
 // Beating a boss can unlock its move for later runs.
 void RogueOnBossBeaten(u16 battle) {
     if (battle == 0xA3 || battle == 0xAE) {
@@ -113,6 +134,14 @@ void RogueOnBossBeaten(u16 battle) {
 
     if (battle == 0xA4 || battle == 0xAF || battle == 0xB0) {
         gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_VEXEN;
+    }
+
+    if (battle == 0xA2 || battle == 0xAD) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_AXEL;
+    }
+
+    if (battle == 0xA5) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_MARLUXIA;
     }
 }
 

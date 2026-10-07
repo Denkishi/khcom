@@ -58,6 +58,11 @@ void RogueDebugBattle(void) {
     case ROGUE_DEBUG_TAG:
         RogueTagIn(gRogueDebug.arg);
         break;
+    case ROGUE_DEBUG_MOVE:
+        if (sora != 0) {
+            RogueDoMove(gRogueDebug.arg, sora);
+        }
+        break;
     case ROGUE_DEBUG_FINISHER:
         if (sora != 0) {
             RogueOnFinisher(sora);
@@ -395,12 +400,20 @@ void RogueThrowKnives(BtlObj* sora) {
 
 // Called on the hit frame of a combo finisher.
 void RogueOnFinisher(BtlObj* sora) {
+    u8 move;
+
     if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR)) {
         RogueRaisePillar(sora);
     }
 
     if (RogueHasRelic(ROGUE_RELIC_KNIVES)) {
         RogueThrowKnives(sora);
+    }
+
+    for (move = 0; move < ROGUE_MOVES; move++) {
+        if (RogueHasRelic(ROGUE_RELIC_CHAKRAM + move)) {
+            RogueDoMove(move, sora);
+        }
     }
 }
 
@@ -444,6 +457,8 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogueDebug.knives = 0;
     gRogueDebug.pillars = 0;
     gRogueDebug.tagHits = 0;
+    gRogueDebug.moves = 0;
+    gRogueDebug.moveHits = 0;
     gRogue.tagTimer = 0;
     gRogueDebug.echoes = 0;
 }

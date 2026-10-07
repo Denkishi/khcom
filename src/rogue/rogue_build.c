@@ -376,8 +376,20 @@ static const u8 sFireArts[] = { 114, 126 };
 
 // An art that suits a kind of card, 0 if the kind takes none.
 u8 RogueRollArt(u16 kind) {
+    u8 move;
+
+    // One of the moves made from other characters' effects, if any is unlocked,
+    // one time in four.
+    if (RogueRandBelow(4) == 0) {
+        move = RogueRandBelow(ROGUE_MOVES);
+
+        if (RogueMoveUnlocked(move)) {
+            return ROGUE_ART_MOVES + move;
+        }
+    }
+
     // A boss move, once its boss has been beaten, about one time in three.
-    if (gRogueMeta.bossMoves != 0 && RogueRandBelow(3) == 0) {
+    if ((gRogueMeta.bossMoves & (ROGUE_BOSS_MOVE_LARXENE | ROGUE_BOSS_MOVE_VEXEN)) != 0 && RogueRandBelow(3) == 0) {
         if ((gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN) &&
             (!(gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_LARXENE) || RogueRandBelow(2) == 0)) {
             return ROGUE_ART_PILLAR;
@@ -428,6 +440,11 @@ s32 RogueCardAction(const CardDef* def) {
             return def->unk_24;
         case ROGUE_ART_PILLAR:
             RogueRaisePillar(gBtlWork->actor);
+            return def->unk_24;
+        }
+
+        if (gRogue.arts[kind] >= ROGUE_ART_MOVES) {
+            RogueDoMove(gRogue.arts[kind] - ROGUE_ART_MOVES, gBtlWork->actor);
             return def->unk_24;
         }
 

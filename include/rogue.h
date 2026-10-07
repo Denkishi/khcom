@@ -60,6 +60,8 @@ typedef struct RogueMeta {
 #define ROGUE_META_TUTORIAL_SEEN 1
 #define ROGUE_BOSS_MOVE_LARXENE 1
 #define ROGUE_BOSS_MOVE_VEXEN 2
+#define ROGUE_BOSS_MOVE_AXEL 4
+#define ROGUE_BOSS_MOVE_MARLUXIA 8
 #define ROGUE_BASE_RELICS ROGUE_RELIC_KNIVES
 #define ROGUE_META_ALL_CLEARED 2 // a run through every chapter was completed
 
@@ -135,6 +137,11 @@ enum RogueRelic {
     ROGUE_RELIC_THUNDER_BLADE,
     ROGUE_RELIC_ARCANE_ECHO,
     ROGUE_RELIC_ICE_PILLAR, // Vexen's move
+    // The moves of rogue_moves.c, in the order of RogueMove.
+    ROGUE_RELIC_CHAKRAM,
+    ROGUE_RELIC_NEEDLES,
+    ROGUE_RELIC_PETALS,
+    ROGUE_RELIC_SHARDS,
     ROGUE_RELICS
 };
 
@@ -183,12 +190,26 @@ enum RogueBuild {
 // the move goes off with it.
 #define ROGUE_ART_KNIVES 200
 #define ROGUE_ART_PILLAR 201
+// The moves of rogue_moves.c follow, in the order of RogueMove.
+#define ROGUE_ART_MOVES 202
 #define ROGUE_ART_MIN_VALUE 5
 
 // Frames between a keyblade hit and the magic hit of an infused blade.
 #define ROGUE_INFUSION_DELAY 7
 // Frames it then waits for the enemy to be hittable again.
 #define ROGUE_INFUSION_WAIT 50
+
+// Moves made from other characters' effects, see rogue_moves.c.
+enum RogueMove {
+    ROGUE_MOVE_CHAKRAM, // Axel
+    ROGUE_MOVE_NEEDLES, // Vexen
+    ROGUE_MOVE_PETALS, // Marluxia
+    ROGUE_MOVE_SHARDS, // Vexen
+    ROGUE_MOVES
+};
+
+// How far a thrown move flies each frame.
+#define ROGUE_MOVE_SPEED 0xA00
 
 // Event rooms.
 enum RogueEvent {
@@ -309,7 +330,8 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_HIT, // arg: damage the locked-on enemy takes
     ROGUE_DEBUG_ATTACK, // arg: attack definition Sora lands on the locked-on enemy
     ROGUE_DEBUG_FINISHER, // what a combo finisher sets off, without the swing
-    ROGUE_DEBUG_TAG // arg: card kind whose tag character comes in
+    ROGUE_DEBUG_TAG, // arg: card kind whose tag character comes in
+    ROGUE_DEBUG_MOVE // arg: effect move Sora does
 };
 
 typedef struct RogueDebug {
@@ -328,6 +350,8 @@ typedef struct RogueDebug {
     u16 echoes; // added magic hits that connected this battle
     u16 pillars; // ice blocks the Vexen relic raised this battle
     u16 tagHits; // tag attacks that connected this battle
+    u16 moves; // effect moves started this battle
+    u16 moveHits; // hit tests of theirs that connected
     u8 tagAnim; // animation a tag attack plays instead of its own, plus one
 } RogueDebug;
 
@@ -420,6 +444,8 @@ u16 RogueBufferCard(u16 pressed);
 void RogueOnFinisher(struct BtlObj* sora);
 void RogueThrowKnives(struct BtlObj* sora);
 void RogueRaisePillar(struct BtlObj* sora);
+void RogueDoMove(u8 move, struct BtlObj* sora);
+u8 RogueMoveUnlocked(u8 move);
 void RogueOnBossBeaten(u16 battle);
 extern struct TaskDesc gTaskDescRogueHud;
 u8* RogueRoomLinks(void);

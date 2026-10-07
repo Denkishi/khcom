@@ -147,6 +147,7 @@ static const u8 sFlee[] = "Scappi, ma perdi\x1F" "20 PV";
 static const u8 sDarkness[] = "Una reliquia, ma\x1FPV massimi -25";
 static const u8 sArt[] = " dal 5 in su\x1Flancia una tecnica\x1F" "da sola";
 static const u8 sArtKnives[] = " dal 5 in su\x1Flancia anche le\x1Flame di Larxene";
+static const u8 sArtMove[] = " dal 5 in su\x1Flancia anche:\x1F";
 static const u8 sArtPillar[] = " dal 5 in su\x1F" "alza anche il\x1Fgelo di Vexen";
 static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
@@ -499,7 +500,13 @@ static void RogueRewardDetail(RogueReward* reward) {
         break;
     case REWARD_ART:
         out = RogueAppend(out, eu_0805E924(gCardDefs[CARD_ID(reward->card, 1)].name));
-        RogueAppend(out, reward->result == ROGUE_ART_KNIVES ? sArtKnives : reward->result == ROGUE_ART_PILLAR ? sArtPillar : sArt);
+
+        if (reward->result >= ROGUE_ART_MOVES) {
+            out = RogueAppend(out, sArtMove);
+            RogueAppend(out, RogueRelicName(ROGUE_RELIC_CHAKRAM + reward->result - ROGUE_ART_MOVES));
+        } else {
+            RogueAppend(out, reward->result == ROGUE_ART_KNIVES ? sArtKnives : reward->result == ROGUE_ART_PILLAR ? sArtPillar : sArt);
+        }
         break;
     case REWARD_SHARDS:
         *out++ = '+';

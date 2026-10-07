@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "rogue_ui.h"
 #include "card.h"
 #include "card_deck.h"
 #include "card_types.h"
@@ -302,7 +303,8 @@ void RogueOnBossBeaten(u16 battle) {
 // B closes.
 
 #define LINE_SLOTS 26
-#define PAGE_LINES 9
+#define PAGE_LINES 6 // a title and what the panel holds
+#define TAB_SLOTS 10
 
 typedef struct RogueRelicsWork {
     TextSlot lines[PAGE_LINES][LINE_SLOTS];
@@ -310,6 +312,10 @@ typedef struct RogueRelicsWork {
     u8 text[40];
     void* palette;
     void* titlePalette;
+    RogueUi ui;
+    TextSlot tabs[3][TAB_SLOTS];
+    u8 tabCounts[3];
+    u16 map[0x500 / 2];
     u8 lineCount;
     u8 page;
     u8 state;
@@ -327,7 +333,9 @@ static const u8 sWins[] = "Run completate: ";
 static const u8 sBest[] = "Stanze in una run: ";
 static const u8 sChaptersLine[] = "Capitoli: ";
 static const u8 sAbandon[] = "SELECT: abbandona";
-static const u8 sAbandonSure[] = "SELECT ancora: conferma";
+static const u8 sAbandonSure[] = "Ancora SELECT: s\xEC";
+static const u8 sTabRun[] = "Run";
+static const u8* const sTabs[3] = { sTabRun, sTitleRelics, sTitleRecords };
 static const u8 sFloor[] = "Piano ";
 static const u8 sCombo[] = "  Combo+";
 static const u8 sJumps[] = "  Salti ";
@@ -481,11 +489,21 @@ static void RogueRelics_Init(s32 arg) {
     LoadBgTiles(3, gUnk_097FFB98, 0x2060);
     LoadBgPalette(3, gUnk_0984B118, 0xA0);
     LoadBgMap(3, gUnk_09848198, 0x500);
+    SetupBg(2, 0, 0x1E, 0);
+    SetBgPriority(2, 2);
+    RogueUiFrameMap(sWork->map);
+    LoadBgMap(2, sWork->map, 0x500);
+    RogueUiInit(&sWork->ui);
     sWork->palette = _08066468(1);
     sWork->titlePalette = _08066468(0);
 
     for (i = 0; i < PAGE_LINES; i++) {
         InitTextSlots(sWork->lines[i], LINE_SLOTS);
+    }
+
+    for (i = 0; i < 3; i++) {
+        InitTextSlots(sWork->tabs[i], TAB_SLOTS);
+        sWork->tabCounts[i] = LoadTextSlots((u16*)sTabs[i], sWork->tabs[i]);
     }
 
     RogueCountBuild();
@@ -539,9 +557,27 @@ static void RogueRelics_Update(void) {
         break;
     }
 
+    // The three pages as plates on the left; the pages that go on with the
+    // list of relics keep the glove on theirs.
+    for (i = 0; i < 3; i++) {
+        s32 tab = sWork->page > 2 ? 1 : sWork->page;
+        s16 x = RogueUiPlate(&sWork->ui, 12, 40 + i * 24, i == tab);
+
+        DrawTextSlots(x, 40 + i * 24 + 2, sWork->tabs[i], sWork->palette, 50, sWork->tabCounts[i]);
+
+        if (i == tab) {
+            RogueUiGlove(&sWork->ui, 16, 40 + i * 24 + 8);
+        }
+    }
+
+    // The page's title in the window, its lines on the panel.
     for (i = 0; i < sWork->lineCount; i++) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 8 : 14 + i * 15,
-                      sWork->lines[i], i == 0 ? sWork->titlePalette : sWork->palette, 50, sWork->counts[i]);
+        if (i == 0) {
+            DrawTextSlots(172 - GetTextSlotsWidth(sWork->lines[0], sWork->counts[0]) / 2, 34, sWork->lines[0], sWork->titlePalette, 50,
+                          sWork->counts[0]);
+        } else {
+            DrawTextSlots(110, 60 + i * 13, sWork->lines[i], sWork->palette, 50, sWork->counts[i]);
+        }
     }
 }
 
@@ -552,6 +588,11 @@ static void RogueRelics_Exit(void) {
         FreeTextSlots(sWork->lines[i], LINE_SLOTS);
     }
 
+    for (i = 0; i < 3; i++) {
+        FreeTextSlots(sWork->tabs[i], TAB_SLOTS);
+    }
+
+    RogueUiExit(&sWork->ui);
     ReleaseObjPalette(sWork->palette);
     ReleaseObjPalette(sWork->titlePalette);
     EwramFree(sWork);

@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "rogue_ui.h"
 #include "registration_data.h"
 #include "battle.h"
 #include "display.h"
@@ -23,11 +24,16 @@ typedef struct RogueOverWork {
     u8 text[32];
     void* palette;
     void* titlePalette;
+    RogueUi ui;
+    TextSlot back[12];
+    u8 backCount;
+    u16 map[0x500 / 2];
     u8 state;
 } RogueOverWork;
 
 static RogueOverWork* sWork;
 
+static const u8 sBack[] = "All'hub";
 static const u8 sTitle[] = "Run finita";
 static const u8 sTitleWon[] = "Run completata!";
 static const u8 sShards[] = "Frammenti: +";
@@ -70,6 +76,13 @@ static void RogueOver_Init(s32 completed) {
     LoadBgTiles(3, gUnk_097FFB98, 0x2060);
     LoadBgPalette(3, gUnk_0984B118, 0xA0);
     LoadBgMap(3, gUnk_09848198, 0x500);
+    SetupBg(2, 0, 0x1E, 0);
+    SetBgPriority(2, 2);
+    RogueUiFrameMap(sWork->map);
+    LoadBgMap(2, sWork->map, 0x500);
+    RogueUiInit(&sWork->ui);
+    InitTextSlots(sWork->back, 12);
+    sWork->backCount = LoadTextSlots((u16*)sBack, sWork->back);
     sWork->palette = _08066468(1);
     sWork->titlePalette = _08066468(0);
     RogueOverLine(0, completed ? sTitleWon : sTitle, -1);
@@ -105,9 +118,17 @@ static void RogueOver_Update(void) {
         break;
     }
 
+    // One way on, as a plate; the outcome in the window, the run on the panel.
+    DrawTextSlots(RogueUiPlate(&sWork->ui, 12, 40, 1), 42, sWork->back, sWork->palette, 50, sWork->backCount);
+    RogueUiGlove(&sWork->ui, 16, 48);
+
     for (i = 0; i < OVER_LINES; i++) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 24 : 36 + i * 16,
-                      sWork->lines[i], i == 0 ? sWork->titlePalette : sWork->palette, 50, sWork->counts[i]);
+        if (i == 0) {
+            DrawTextSlots(172 - GetTextSlotsWidth(sWork->lines[0], sWork->counts[0]) / 2, 34, sWork->lines[0], sWork->titlePalette, 50,
+                          sWork->counts[0]);
+        } else {
+            DrawTextSlots(110, 60 + i * 13, sWork->lines[i], sWork->palette, 50, sWork->counts[i]);
+        }
     }
 }
 
@@ -118,6 +139,8 @@ static void RogueOver_Exit(void) {
         FreeTextSlots(sWork->lines[i], OVER_SLOTS);
     }
 
+    FreeTextSlots(sWork->back, 12);
+    RogueUiExit(&sWork->ui);
     ReleaseObjPalette(sWork->palette);
     ReleaseObjPalette(sWork->titlePalette);
     EwramFree(sWork);

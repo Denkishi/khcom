@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "game_state.h"
 #include "anim.h"
 #include "hum.h"
 #include "sprite_palettes.h"
@@ -59,6 +60,10 @@ u8 RogueHeroUnlocked(u8 hero) {
         return gRogueMeta.wins != 0;
     }
 
+    if (hero == ROGUE_HERO_RIKU) {
+        return (gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_RIKU) != 0;
+    }
+
     return hero == ROGUE_HERO_SORA;
 }
 
@@ -102,4 +107,15 @@ u8 RogueNextHero(void) {
     } while (!RogueHeroUnlocked(hero));
 
     return hero;
+}
+
+// Riku is not a reskin: the game has his own way of fighting, with its combos
+// and the dark mode, behind one flag of the game state. Called when a run
+// starts, after the game state is reset.
+void RogueApplyHero(void) {
+    if (gRogueMeta.hero == ROGUE_HERO_RIKU) {
+        gGameState.flags |= 8;
+    } else {
+        gGameState.flags &= ~8;
+    }
 }

@@ -306,6 +306,7 @@ void RogueStartRun(void) {
     RogueApplyBoon();
     gRogue.deckWanted = 1;
     func_0801CD20();
+    RogueApplyHero();
     gGameState.progression.unk_82 = 0xFFFF;
     RogueEnterRoom(1);
 }

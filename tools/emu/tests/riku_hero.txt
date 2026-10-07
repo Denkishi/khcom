@@ -1,0 +1,30 @@
+# Riku as the hero: the game's own Riku, picked in the hub once he has been
+# beaten as a boss. He walks the rooms, fights with his own moves and wins a
+# battle like anyone.
+# Expect: Riku stands in the room and in the battle, hero reads 3, and after
+# the battle is won the reward screen shows.
+wait 600
+press START
+wait 120
+poke8 @gRogueMeta.bossMoves 128
+poke8 @gRogueMeta.hero 3
+press START
+wait 200
+hold B 100
+wait 20
+peek8 @gRogueMeta.hero hero
+shot /tmp/riku_room.ppm
+hold RIGHT 30
+shot /tmp/riku_walk.ppm
+debug battle 0
+wait 460
+shot /tmp/riku_battle.ppm
+press A
+wait 30
+shot /tmp/riku_swing.ppm
+debug win
+wait 300
+shot /tmp/riku_reward.ppm
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

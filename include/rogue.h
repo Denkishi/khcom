@@ -104,7 +104,8 @@ typedef struct RogueMeta {
 #define ROGUE_META_MICKEY 4 // Mickey was beaten as a boss: he can be played
 
 // Who the player fights as. All of them play as Sora does, drawn as themselves.
-enum RogueHero { ROGUE_HERO_SORA, ROGUE_HERO_MICKEY, ROGUE_HERO_SORA_KH2, ROGUE_HEROES };
+enum RogueHero { ROGUE_HERO_SORA, ROGUE_HERO_MICKEY, ROGUE_HERO_SORA_KH2, ROGUE_HERO_RIKU, ROGUE_HEROES };
+void RogueApplyHero(void);
 
 // What the characters in the hub offer for the next run; one at a time.
 enum RogueBoon {

@@ -49,6 +49,11 @@ CHARACTERS = {
     # animation of his has its frames here.
     "Roxas": dict(
         sheet="roxas_sheet.png", area=(100, 2150, 1000, 0), min_pixels=80, min_height=20, row_overlap=10, face="0.8",
+        # Picked by hand: left to itself the count of pixels spends the colours
+        # on the greys and loses the red of the collar and the blue of the eyes.
+        palette=[(6, 4, 6), (22, 32, 40), (97, 50, 11), (164, 109, 35), (216, 168, 65), (255, 216, 100), (240, 208, 170),
+                 (234, 138, 113), (248, 248, 248), (216, 207, 185), (150, 138, 132), (85, 77, 69), (224, 20, 0), (66, 90, 124),
+                 (150, 166, 214)],
         idle=["0.0", "0.2", "0.4", "0.6"], run=["2.0", "2.2", "2.4", "2.6"], rise=["4.1"], fall=["6.0"], land=["6.3"],
         cast=["27.0", "27.2", "27.3", "27.5"], hurt=["25.1"], down=["25.3", "25.6"], rise_up=["25.8", "0.0"], dodge=["7.0", "7.2"],
         hub_stand=["0.8"], hub_walk=["3.0", "3.4"], field_jump=["4.1"], field_swing=["9.2"],
@@ -60,13 +65,14 @@ CHARACTERS = {
 
 def use(name):
     """Makes one character the one the rest of the tool works on."""
-    global PREFIX, SHEET, OUT, AREA, MIN_PIXELS, MIN_HEIGHT, ROW_OVERLAP, FACE
+    global PREFIX, SHEET, OUT, AREA, MIN_PIXELS, MIN_HEIGHT, ROW_OVERLAP, FACE, PALETTE
     global IDLE, RUN, RISE, FALL, LAND, CAST, HURT, DOWN, RISE_UP, DODGE, HUB_STAND, HUB_WALK, FIELD_JUMP, FIELD_SWING, SWINGS
     c = CHARACTERS[name]
     PREFIX = name
     SHEET = ROOT / "mod_assets" / c["sheet"]
     OUT = ROOT / f"src/rogue/rogue_{name.lower()}_art.c"
     AREA, MIN_PIXELS, MIN_HEIGHT, ROW_OVERLAP, FACE = c["area"], c["min_pixels"], c["min_height"], c["row_overlap"], c["face"]
+    PALETTE = c.get("palette")
     IDLE, RUN, RISE, FALL, LAND, CAST = c["idle"], c["run"], c["rise"], c["fall"], c["land"], c["cast"]
     HURT, DOWN, RISE_UP, DODGE = c["hurt"], c["down"], c["rise_up"], c["dodge"]
     HUB_STAND, HUB_WALK, FIELD_JUMP, FIELD_SWING, SWINGS = c["hub_stand"], c["hub_walk"], c["field_jump"], c["field_swing"], c["swings"]
@@ -138,8 +144,9 @@ def segment(image):
                         if 0 <= nx < right and top <= ny < bottom and (nx, ny) not in seen and px[nx, ny] != background:
                             seen.add((nx, ny))
                             stack.append((nx, ny))
-            if count > MIN_PIXELS and y1 - y0 >= MIN_HEIGHT:
-                boxes.append((x0, y0, x1 + 1, y1 + 1))
+            if count > MIN_PIXELS and y1 - y0 >= MIN_HEIGHT and not (MAX_HEIGHT and y1 - y0 > MAX_HEIGHT):
+                if not MIN_COLOURS or len(image.crop((x0, y0, x1 + 1, y1 + 1)).getcolors(1 << 20)) >= MIN_COLOURS:
+                    boxes.append((x0, y0, x1 + 1, y1 + 1))
     rows = []
     sides = ([b for b in boxes if b[0] < split], [b for b in boxes if b[0] >= split]) if split else (boxes,)
     for side in sides:
@@ -155,47 +162,72 @@ def segment(image):
     return rows, background
 
 
+def nearest(colour, palette):
+    """The entry of the palette nearest a colour, as the eye weighs them."""
+    r, g, b = colour
+    return min(range(len(palette)), key=lambda i: 3 * (palette[i][0] - r) ** 2 + 4 * (palette[i][1] - g) ** 2 + 2 * (palette[i][2] - b) ** 2)
+
+
+def pick_palette(colours, size=15):
+    """The colours a sprite is drawn with, from a count of those its pixels have."""
+    strip = Image.new("RGB", (sum(colours.values()), 1))
+    strip.putdata([colour for colour, count in colours.items() for _ in range(count)])
+    quantized = strip.quantize(size, method=Image.MEDIANCUT, dither=Image.NONE)
+    flat = quantized.getpalette()[:size * 3]
+    return [tuple(flat[i * 3:i * 3 + 3]) for i in range(size)]
+
+
+MAX_HEIGHT = 0  # a sheet may have artwork among its sprites: taller than this, a piece is left out
+MIN_COLOURS = 0  # and captions, which have fewer colours than this
+PALETTE = None
+FLIP = True
+
+
 class Poses:
-    def __init__(self):
-        image = Image.open(SHEET).convert("RGB")
-        self.rows, background = segment(image)
-        crops = {}
-        for r, row in enumerate(self.rows):
-            for c, box in enumerate(row):
-                crops[f"{r}.{c}"] = image.crop(box).transpose(Image.FLIP_LEFT_RIGHT)  # Sora's sprites face left
-        used = sorted({name for poses in [IDLE, RUN, RISE, FALL, LAND, CAST, HURT, DOWN, RISE_UP, DODGE, HUB_STAND, HUB_WALK,
-                                          FIELD_JUMP, FIELD_SWING] + SWINGS for name in poses})
+    def __init__(self, used=None, crops=None, background=None):
+        """The poses named, from the sheet; or pictures cut by the caller, with the colour that is clear in them."""
+        self.anchors = {}
+        if crops is None:
+            image = Image.open(SHEET).convert("RGB")
+            self.rows, background = segment(image)
+            crops = {}
+            for r, row in enumerate(self.rows):
+                for c, box in enumerate(row):
+                    crop = image.crop(box)
+                    crops[f"{r}.{c}"] = crop.transpose(Image.FLIP_LEFT_RIGHT) if FLIP else crop  # Sora's sprites face left
+        if used is None:
+            used = sorted({name for poses in [IDLE, RUN, RISE, FALL, LAND, CAST, HURT, DOWN, RISE_UP, DODGE, HUB_STAND, HUB_WALK,
+                                              FIELD_JUMP, FIELD_SWING] + SWINGS for name in poses})
         self.crops = crops
-        strip = Image.new("RGB", (sum(crops[n].width for n in used), max(crops[n].height for n in used)), background)
-        x = 0
+        self.background = background
+        # Fifteen colours, picked from the sprite's own pixels alone: with the
+        # background among them, a colour of the sprite near it (the white of
+        # Mickey's eyes on a white sheet) was taken for it.
+        counts = {}
         for name in used:
-            strip.paste(crops[name], (x, 0))
-            x += crops[name].width
-        # Fifteen colours and the transparent one, which the background takes.
-        quantized = strip.quantize(16, method=Image.MEDIANCUT, dither=Image.NONE)
-        palette = quantized.getpalette()[:48]
-        colours = [tuple(palette[i * 3:i * 3 + 3]) for i in range(16)]
-        clear = min(range(16), key=lambda i: sum((a - b) ** 2 for a, b in zip(colours[i], background)))
-        order = [clear] + [i for i in range(16) if i != clear]
-        self.palette = [colours[i] for i in order]
-        remap = {old: new for new, old in enumerate(order)}
+            for count, colour in crops[name].getcolors(1 << 20):
+                if colour != background:
+                    counts[colour] = counts.get(colour, 0) + count
+        self.palette = [background] + (list(PALETTE) if PALETTE else pick_palette(counts))
+        index = {colour: 1 + nearest(colour, self.palette[1:]) for colour in counts}
+        index[background] = 0
         self.pixels = {}
-        x = 0
-        data = quantized.load()
         for name in used:
             crop = crops[name]
-            rows = [[0 if crop.getpixel((cx, cy)) == background else remap[data[x + cx, cy]] or self.darkest() for cx in range(crop.width)]
-                    for cy in range(crop.height)]
-            self.pixels[name] = rows
-            x += crop.width
+            data = crop.load()
+            self.pixels[name] = [[index[data[cx, cy]] for cx in range(crop.width)] for cy in range(crop.height)]
 
     def darkest(self):
         return min(range(1, 16), key=lambda i: sum(self.palette[i]))
 
     def anchor(self, name):
         """Where the pose stands: under its feet, which are black as nothing else low in it is."""
+        if name in self.anchors:
+            return self.anchors[name]
         rows = self.pixels[name]
         black = self.darkest()
+        if not any(black in row for row in rows):
+            return len(rows[0]) // 2, len(rows)
         low = max(y for y, row in enumerate(rows) if black in row)
         xs = [x for row in rows[max(0, low - 7):low + 1] for x, v in enumerate(row) if v == black]
         return sum(xs) // len(xs), low + 1

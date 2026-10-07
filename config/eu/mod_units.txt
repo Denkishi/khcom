@@ -52,3 +52,5 @@ moved btl3.c
 moved card_prize_card_init.c
 moved card_friend_card.c
 moved card_deckcard2.c
+new rogue_actor.c
+new rogue_sephiroth_actor.c

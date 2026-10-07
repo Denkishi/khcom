@@ -1,0 +1,39 @@
+# Sephiroth as a boss with a fight of his own, drawn from his sheet (skin 8).
+# Expect: he stands, walks up to Sora and makes his moves; boss_clips and
+# boss_swings above 2, boss_hits above 0, hp_after below hp_before, and the
+# frame counter runs. The last pictures are of moves forced one by one:
+# the wave (8), the flare (7), the plunge (6), the wing below half HP.
+include start.txt
+poke8 @gRogue.bossSkin 8
+debug battle 157
+wait 330
+peek16 @gRogueDebug.soraHp hp_before
+shot /tmp/seph_1.ppm
+wait 120
+shot /tmp/seph_2.ppm
+wait 120
+shot /tmp/seph_3.ppm
+wait 120
+shot /tmp/seph_4.ppm
+wait 240
+peek16 @gRogueDebug.soraHp hp_after
+peek16 @gRogueDebug.bossSwings boss_swings
+peek16 @gRogueDebug.bossHits boss_hits
+peek16 @gRogueDebug.bossClips boss_clips
+poke8 @gRogueDebug.god 1
+poke8 @gRogueDebug.bossForce 9
+wait 100
+shot /tmp/seph_wave.ppm
+wait 60
+poke8 @gRogueDebug.bossForce 8
+wait 110
+shot /tmp/seph_flare.ppm
+wait 60
+poke8 @gRogueDebug.bossForce 7
+wait 80
+shot /tmp/seph_plunge.ppm
+wait 100
+peek8 @gRogueDebug.bossClip last_clip
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

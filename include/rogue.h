@@ -296,6 +296,26 @@ enum RogueMoveMode {
     ROGUE_MOVE_SHARD // it hangs over Sora for `phase` frames, then flies at an enemy
 };
 
+// One step of a clip, the way the bosses drawn from a sheet are animated: a
+// pose, the frames it stays, how far the boss goes forward and up in each of
+// them (in pixels), and what happens as it starts.
+typedef struct RogueClipStep {
+    u8 pose;
+    u8 frames; // 0 ends the clip
+    s8 move;
+    s8 lift;
+    u8 event; // a RogueClipEvent
+    u8 arg;
+} RogueClipStep;
+
+enum RogueClipEvent {
+    ROGUE_CLIP_NOTHING,
+    ROGUE_CLIP_HIT, // a hit in front of the boss; arg: how far it reaches, in pixels
+    ROGUE_CLIP_SPECIAL, // arg: which of the boss's own
+    ROGUE_CLIP_HEAVY, // as a hit, half as strong again
+    ROGUE_CLIP_BLINK // as a hit, made from beside Sora: the boss is there at once, on one side and then the other
+};
+
 struct BtlObj;
 void RogueMoveSpawn(u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, u8 delay, u8 freeze);
 void RogueThunderBolt(struct BtlObj* target);
@@ -469,7 +489,10 @@ enum RogueMove {
     // Boss moves that come as cards only.
     ROGUE_MOVE_FIREWALL, // Axel
     ROGUE_MOVE_SCYTHE, // Marluxia
-    ROGUE_MOVE_DEFS
+    ROGUE_MOVE_DEFS,
+    // Effects drawn from the sheets of the new characters, see tools/rogue_actors.py.
+    ROGUE_MOVE_WAVE = ROGUE_MOVE_DEFS, // Sephiroth's cut that flies
+    ROGUE_MOVE_ALL
 };
 
 // How far a thrown move flies each frame.
@@ -511,7 +534,10 @@ enum RogueBossSkin {
     ROGUE_SKIN_GOOFY,
     ROGUE_SKIN_DONALD,
     ROGUE_SKIN_ALADDIN,
-    ROGUE_SKINS
+    ROGUE_SKINS,
+    // Those with a fight of their own, drawn from their own sheets: see rogue_actor.c.
+    ROGUE_SKIN_SEPHIROTH = ROGUE_SKINS,
+    ROGUE_SKIN_ACTORS_END
 };
 
 // Event rooms.
@@ -687,6 +713,10 @@ typedef struct RogueDebug {
     u16 airFrames; // and in the air
     u16 styleHits; // times a style set its element off
     u16 bossSwings; // swings of the bosses that fight with the mod's AI
+    u16 bossHits; // of those, the ones that landed
+    u16 bossClips; // moves the bosses drawn from a sheet have started
+    u8 bossClip; // the last of them
+    u8 bossForce; // set from outside: the move such a boss makes next, plus one
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet
@@ -756,6 +786,13 @@ const struct HumDef* RogueLeonDef(void);
 struct AnimState;
 u8 RogueBossAi(struct BtlObj* boss, struct AnimState* anim, void* tiles);
 u8 RogueBossAiMoves(void);
+u8 RogueActorIs(void);
+const struct AnimDef* RogueActorAnim(u16 slot);
+const struct HumDef* RogueActorDef(void);
+void RogueActorReset(void);
+u8 RogueActorTick(struct BtlObj* boss, struct AnimState* anim, void* tiles);
+void RogueFoeMove(struct BtlObj* foe, u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, u8 delay, u8 left);
+s32 RogueFoeHit(struct BtlObj* foe, s32 x, s32 y, s32 z, s16 width, s16 depth, s16 height, u16 scale);
 void RogueBossAiReset(void);
 const struct AnimDef* RogueHeroAnim(u16 anim);
 const struct AnimDef* RogueHeroDirection(u16 action, u16 direction);

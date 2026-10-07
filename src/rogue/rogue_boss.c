@@ -45,6 +45,10 @@ static const RogueSkin sSkins[ROGUE_SKINS - ROGUE_SKIN_BEAST] = {
 // The animation table and the slot in it for one of Leon's animations: his
 // own, or those of whoever stands in for him.
 const AnimDef* RogueLeonAnim(u16 slot) {
+    if (RogueActorIs()) {
+        return RogueActorAnim(slot);
+    }
+
     if (gRogue.bossSkin == ROGUE_SKIN_MICKEY) {
         return sMickeySlots[slot];
     }
@@ -59,6 +63,10 @@ const AnimDef* RogueLeonAnim(u16 slot) {
 }
 
 const HumDef* RogueLeonDef(void) {
+    if (RogueActorIs()) {
+        return RogueActorDef();
+    }
+
     if (gRogue.bossSkin == ROGUE_SKIN_MICKEY) {
         return &sMickeyDef;
     }
@@ -82,6 +90,7 @@ void RogueBossAiReset(void) {
     sAiTimer = ROGUE_BOSS_AI_REST;
     sAiSwinging = 0;
     sAiMoved = 0;
+    RogueActorReset();
 }
 
 u8 RogueBossAiMoves(void) {
@@ -98,6 +107,11 @@ u8 RogueBossAi(BtlObj* boss, AnimState* anim, void* tiles) {
     s32 rest;
 
     sAiMoved = 1;
+
+    // One with a fight of its own.
+    if (RogueActorIs()) {
+        return RogueActorTick(boss, anim, tiles);
+    }
 
     if (sora == 0 || sora->unk_02C <= 0) {
         AnimChangeWithDef(RogueLeonAnim(0), anim, 0, 1, tiles);

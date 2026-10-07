@@ -15,6 +15,7 @@
 #include "sprites_hum.h"
 #include "system_state.h"
 #include "taskpool.h"
+#include "rogue_actor_art.h"
 
 // Moves built from the effect sprites of other characters. The effects are
 // already in the game and only their owners use them; here each becomes
@@ -56,7 +57,7 @@ typedef struct RogueMoveDef {
 // The attacks used: 14 is a keyblade finisher (256 a swing), 303 one of
 // Axel's fire attacks (512), 313 one of Vexen's ice ones (256) and 0x133
 // Larxene's thunder knife.
-static const RogueMoveDef sMoves[ROGUE_MOVE_DEFS] = {
+static const RogueMoveDef sMoves[ROGUE_MOVE_ALL] = {
     // Axel's chakram: thrown ahead, burning what it crosses.
     { SHEET(gAcceleBtWep), gAccelePalette, gAcceleBtWepAnims, gAcceleBtWepFrames, 0, MOTION_THROWN, 1, 40, 0, 0, 303, 128, 12, 12, 12,
       SONG_EF_RAC_3TR },
@@ -96,6 +97,9 @@ static const RogueMoveDef sMoves[ROGUE_MOVE_DEFS] = {
     // Marluxia's scythe of petals: two thrown ahead.
     { SHEET(gMaruxhaBtEff2), gMaruxhaBtEffPalette, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames, 0, MOTION_THROWN, 2, 36, 0, 0, 14, 220,
       14, 12, 14, SONG_EF_RAC_3TR },
+    // Sephiroth's cut that flies along the ground.
+    { (void*)gRogueFxWaveTiles, sizeof(gRogueFxWaveTiles), 0, (void*)gRogueFxWavePalette, (void*)gRogueFxWaveAnims, (void*)gRogueFxWaveFrames, 0, MOTION_THROWN, 1, 50, 0, 0,
+      14, 320, 10, 14, 28, SONG_EF_RAC_3TR },
 };
 
 typedef struct RogueMoveArgs {
@@ -109,6 +113,7 @@ typedef struct RogueMoveArgs {
     u8 mode; // a RogueMoveMode
     u8 phase; // see RogueMoveMode
     u8 freeze; // its hits freeze
+    BtlObj* foe; // the boss who made it, when it is one of theirs: then it is Sora it hits
 } RogueMoveArgs;
 
 typedef struct RogueMoveWork {
@@ -180,6 +185,10 @@ static s32 RogueMoveHit(RogueMoveWork* w) {
     s32 depth = def->depth;
     s32 height = def->height;
     s32 hit;
+
+    if (w->args.foe != 0) {
+        return RogueFoeHit(w->args.foe, w->args.x, w->args.y, w->args.z, width, depth, height, 256);
+    }
 
     damage += damage * RogueUpgradeLevel(ROGUE_UPGRADE_MOVES) * 15 / 100;
 
@@ -265,16 +274,23 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
         AnimUpdate(&w->anim);
 
         if (w->timer < w->args.phase) {
-            // It forms over Sora's head and waits there.
-            w->args.x = sora->x;
-            w->args.y = sora->y;
-            w->args.z = sora->z - 0x3000;
+            // It forms over Sora's head and waits there; a boss's waits where it was set.
+            if (w->args.foe == 0) {
+                w->args.x = sora->x;
+                w->args.y = sora->y;
+                w->args.z = sora->z - 0x3000;
+            }
+
             w->timer++;
             return 1;
         }
 
-        // Then it goes for the enemy locked on, or any.
-        target = gBtlWork->actor2 != 0 ? gBtlWork->actor2 : RogueGaugeTarget();
+        // Then it goes for the enemy locked on, or any; a boss's goes for Sora.
+        if (w->args.foe != 0) {
+            target = sora;
+        } else {
+            target = gBtlWork->actor2 != 0 ? gBtlWork->actor2 : RogueGaugeTarget();
+        }
 
         if (target == 0 || ++w->timer > w->args.phase + 90) {
             return 0;
@@ -289,9 +305,9 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
 
     switch (def->motion) {
     case MOTION_THROWN:
-        if (RogueMoveHit(w) && !RogueHasRelic(ROGUE_RELIC_PIERCE)) {
+        if (RogueMoveHit(w) && (w->args.foe != 0 || !RogueHasRelic(ROGUE_RELIC_PIERCE))) {
             // It stops at what it hits, or with the bounce turns back once.
-            if (!RogueHasRelic(ROGUE_RELIC_BOUNCE) || w->hits != 0) {
+            if (w->args.foe != 0 || !RogueHasRelic(ROGUE_RELIC_BOUNCE) || w->hits != 0) {
                 return 0;
             }
 
@@ -301,7 +317,7 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
         }
 
         // At the end of its flight the bounce sends it back too.
-        if (w->timer + 1 >= def->frames_ && RogueHasRelic(ROGUE_RELIC_BOUNCE) && w->hits == 0) {
+        if (w->timer + 1 >= def->frames_ && w->args.foe == 0 && RogueHasRelic(ROGUE_RELIC_BOUNCE) && w->hits == 0) {
             w->hits = 1;
             w->args.left ^= 1;
             w->timer = 0;
@@ -312,7 +328,7 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
         target = gBtlWork->actor2;
 
         // The hound: it drifts across to the enemy locked on.
-        if (RogueHasRelic(ROGUE_RELIC_MOD_HOMING) && target != 0) {
+        if (w->args.foe == 0 && RogueHasRelic(ROGUE_RELIC_MOD_HOMING) && target != 0) {
             if (target->y > w->args.y + 0x200) {
                 w->args.y += 0x200;
             } else if (target->y < w->args.y - 0x200) {
@@ -417,6 +433,7 @@ static void RogueMoveCast(u8 move, BtlObj* sora, u8 again) {
     m4aSongNumStart(def->sound);
     args.def = def;
     args.left = (sora->flags & 4) != 0;
+    args.foe = 0;
 
     for (i = 0; i < count; i++) {
         args.x = sora->x;
@@ -780,6 +797,7 @@ void RogueMoveSpawn(u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, u8 delay, u
     args.mode = mode;
     args.phase = phase;
     args.freeze = freeze;
+    args.foe = 0;
 
     if (delay == 0 && mode == ROGUE_MOVE_PLAIN) {
         m4aSongNumStart(args.def->sound);
@@ -787,6 +805,29 @@ void RogueMoveSpawn(u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, u8 delay, u
 
     TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueMove, &args);
     gRogueDebug.moves++;
+}
+
+// One of the moves made by a boss: it is Sora it hits. left: the way a thrown one flies.
+void RogueFoeMove(BtlObj* foe, u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, u8 delay, u8 left) {
+    RogueMoveArgs args;
+
+    args.def = &sMoves[move];
+    args.left = left;
+    args.x = x;
+    args.y = y;
+    args.z = z;
+    args.vy = 0;
+    args.delay = delay;
+    args.mode = mode;
+    args.phase = phase;
+    args.freeze = 0;
+    args.foe = foe;
+
+    if (delay == 0) {
+        m4aSongNumStart(args.def->sound);
+    }
+
+    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueMove, &args);
 }
 
 // The bolt of Sora's own Thunder, from above him onto an enemy. The game

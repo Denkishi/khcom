@@ -149,6 +149,7 @@ static void RogueEvent_Idle(RogueEventWork* w) {
     if (w->inRange != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
         w->page = 0;
+        RogueMeetBoon(gRogue.event);
         CreateCardMessageTask(&w->tasks, 0, ROGUE_MSG_EVENT_FIRST + gRogue.event * ROGUE_EVENT_PAGES);
         w->update = RogueEvent_Talk;
     }

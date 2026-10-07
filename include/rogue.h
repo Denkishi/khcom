@@ -25,6 +25,12 @@
 #define ROGUE_SHARDS_BOSS 25
 #define ROGUE_SHARDS_NEW_CHAPTER 50
 #define ROGUE_SHARDS_DUEL 15
+// Oblivion levels, the difficulty past the last chapter: each adds this many
+// enemy levels and a quarter more shards.
+#define ROGUE_OBLIVION_MAX 5
+#define ROGUE_OBLIVION_LEVELS 3
+// Enemy levels a challenge room adds.
+#define ROGUE_CHALLENGE_LEVELS 4
 // Moogle points a won battle gives.
 #define ROGUE_MOOGLE_POINTS 30
 
@@ -55,7 +61,11 @@ typedef struct RogueMeta {
     u8 upgrades[ROGUE_UPGRADES];
     u8 bossMoves; // one bit for each boss move unlocked, see ROGUE_BOSS_MOVE_
     u8 boon; // the RogueBoon picked in the hub for the next run
-    u8 unused[8];
+    u8 boonsMet; // one bit for each boon whose character was met in a run
+    u8 boonsWon; // one bit for each boon a run was completed with: it is stronger
+    u8 oblivion; // difficulty level picked in the hub
+    u8 oblivionMax; // highest level unlocked
+    u8 unused[4];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
@@ -126,6 +136,7 @@ enum RogueRoomKind {
     ROGUE_ROOM_REST,
     ROGUE_ROOM_BOSS,
     ROGUE_ROOM_EVENT,
+    ROGUE_ROOM_CHALLENGE, // tougher enemies, a boss's reward
     ROGUE_ROOM_KINDS
 };
 
@@ -322,6 +333,8 @@ typedef struct RogueRun {
     u8 event; // who is in this event room
     u8 eventDone; // set once they have made their offer
     u8 duel; // set while the battle is a duel picked in an event
+    u8 boon; // the boon the run started with
+    u8 oblivion; // the oblivion level the run is played at
     u8 build[ROGUE_BUILDS]; // points of each build, see RogueCountBuild
     u8 playedKind; // kind of the card played alone, ROGUE_NO_KIND otherwise
     u8 projectile; // set while a thrown thing or an added hit tests its hitbox
@@ -401,6 +414,9 @@ void RogueMetaSave(void);
 void RogueMetaEndRun(u8 completed);
 void RogueApplyUpgrades(void);
 u8 RogueBoonUnlocked(u8 boon);
+u8 RogueBoonLevel(u8 boon);
+void RogueMeetBoon(u8 event);
+void RogueAbandonRun(void);
 void RogueApplyBoon(void);
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun);
 u8 RogueUpgradeMax(u8 upgrade);

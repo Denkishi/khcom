@@ -117,6 +117,7 @@ void RogueCountBuild(void) {
     Deck* deck = GetActiveDeck();
     u16 id;
     u8 build;
+    u8 moves;
     s32 i;
 
     for (build = 0; build < ROGUE_BUILDS; build++) {
@@ -154,6 +155,23 @@ void RogueCountBuild(void) {
         if (RogueHasRelic(ROGUE_RELIC_FIRE_BLADE + build)) {
             RogueBuildAdd(build, 2);
         }
+    }
+
+    // Relic sets. Vexen's three, the ice block, the needles and the shards,
+    // are worth four ice points together; any three boss moves, three
+    // projectile points.
+    if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR) && RogueHasRelic(ROGUE_RELIC_NEEDLES) && RogueHasRelic(ROGUE_RELIC_SHARDS)) {
+        RogueBuildAdd(ROGUE_ELEMENT_ICE, 4);
+    }
+
+    moves = RogueHasRelic(ROGUE_RELIC_KNIVES) + RogueHasRelic(ROGUE_RELIC_ICE_PILLAR);
+
+    for (build = 0; build < ROGUE_MOVES; build++) {
+        moves += RogueHasRelic(ROGUE_RELIC_CHAKRAM + build);
+    }
+
+    if (moves >= 3) {
+        RogueBuildAdd(ROGUE_BUILD_PROJECTILE, 3);
     }
 }
 

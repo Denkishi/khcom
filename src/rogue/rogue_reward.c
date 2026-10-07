@@ -43,6 +43,7 @@ enum {
     REWARD_ATTACK,
     REWARD_RELIC,
     REWARD_ART,
+    REWARD_REMOVE,
     REWARD_FUSION,
     // Offered by events only.
     REWARD_SHARDS,
@@ -106,6 +107,7 @@ static const u8 sLabelAirJump[] = "Reliquia";
 static const u8 sLabelAttack[] = "Forza";
 static const u8 sLabelRelic[] = "Reliquia";
 static const u8 sLabelArt[] = "Tecnica";
+static const u8 sLabelRemove[] = "Scarta";
 static const u8 sLabelFusion[] = "Fusione";
 static const u8 sLabelShards[] = "Frammenti";
 static const u8 sLabelReroll[] = "Rilancio";
@@ -121,7 +123,7 @@ static const u8 sLabelMutate[] = "Muta";
 static const u8 sLabelFlee[] = "Fuggi";
 static const u8 sLabelDarkness[] = "Oscurit\xE0";
 static const u8* const sLabels[REWARD_KINDS] = {
-    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelArt, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
+    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelArt, sLabelRemove, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
     sLabelDuel, sLabelLeave, sLabelDarkPact, sLabelBarter, sLabelDice, sLabelCopy, sLabelMutate, sLabelFlee, sLabelDarkness,
 };
 
@@ -149,6 +151,8 @@ static const u8 sArt[] = " dal 5 in su\x1Flancia una tecnica\x1F" "da sola";
 static const u8 sArtKnives[] = " dal 5 in su\x1Flancia anche le\x1Flame di Larxene";
 static const u8 sArtMove[] = " dal 5 in su\x1Flancia anche:\x1F";
 static const u8 sArtPillar[] = " dal 5 in su\x1F" "alza anche il\x1Fgelo di Vexen";
+static const u8 sRemove[] = "Togli dal mazzo:\x1F";
+static const u8 sOtherCard[] = "\x1F< > altra carta";
 static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
 
@@ -175,6 +179,7 @@ static const RogueIcon sIcons[REWARD_KINDS] = {
     { gRogueIconAttackTiles, gRogueIconAttackPalette },
     { gRogueIconRelicTiles, gRogueIconRelicPalette },
     { 0, 0 }, // art: shows its card
+    { 0, 0 }, // remove: shows its card
     { 0, 0 }, // fusion
     { gRogueIconShardsTiles, gRogueIconShardsPalette },
     { gRogueIconRerollTiles, gRogueIconRerollPalette },
@@ -275,6 +280,12 @@ static u8 RogueRewardAvailable(RogueReward* reward) {
     case REWARD_RELIC:
         reward->card = RogueRollRelic();
         return reward->card != ROGUE_RELICS;
+    case REWARD_REMOVE:
+        // A thin deck is a strong one: a card to take out, with a deck big
+        // enough to spare it.
+        pos = RogueRollDeckCard();
+        reward->card = pos;
+        return pos != 0xFF && GetActiveDeck()->unk_DC > 8;
     case REWARD_ART:
         // A kind of card in the deck that has no art yet gets one.
         pos = RogueRollDeckCard();
@@ -368,7 +379,7 @@ static void RogueEventRewards(void) {
 }
 
 static void RogueRollRewards(void) {
-    static const u8 weights[REWARD_FUSION] = { 25, 16, 11, 10, 9, 6, 4, 8, 6, 5 };
+    static const u8 weights[REWARD_FUSION] = { 24, 15, 10, 10, 9, 6, 4, 8, 6, 4, 4 };
     RogueReward* reward;
     u32 roll;
     s32 count = 0;
@@ -435,6 +446,8 @@ static u16 RogueRewardCard(RogueReward* reward) {
         return gCardCollection[reward->card] & CARD_ID_MASK;
     case REWARD_ART:
         return CARD_ID(reward->card, ROGUE_ART_MIN_VALUE);
+    case REWARD_REMOVE:
+        return gCardCollection[GetActiveDeck()->cards[reward->card]] & CARD_ID_MASK;
     case REWARD_TRANSFORM:
         return reward->result;
     }
@@ -497,6 +510,11 @@ static void RogueRewardDetail(RogueReward* reward) {
         out = RogueAppend(out, RogueRelicName(reward->card));
         *out++ = 0x1F;
         RogueAppend(out, RogueRelicText(reward->card));
+        break;
+    case REWARD_REMOVE:
+        out = RogueAppend(out, sRemove);
+        out = RogueAppendCard(out, gCardCollection[deck->cards[reward->card]] & CARD_ID_MASK);
+        RogueAppend(out, sOtherCard);
         break;
     case REWARD_ART:
         out = RogueAppend(out, eu_0805E924(gCardDefs[CARD_ID(reward->card, 1)].name));
@@ -620,6 +638,9 @@ static void RogueGiveReward(RogueReward* reward) {
         break;
     case REWARD_ART:
         gRogue.arts[reward->card] = reward->result;
+        break;
+    case REWARD_REMOVE:
+        RogueRemoveDeckCard(reward->card);
         break;
     case REWARD_SHARDS:
         gRogue.shards += reward->card;
@@ -807,6 +828,15 @@ static void RogueReward_Update(void) {
             RogueReward* fusion = &sWork->rewards[sWork->cursor];
 
             if (RogueRollFusion(&fusion->fuseA, &fusion->fuseB, &fusion->card)) {
+                m4aSongNumStart(SONG_SYS_CLICK);
+                RogueShowChoice();
+            }
+        } else if ((GetKeysRepeat() & (DPAD_LEFT | DPAD_RIGHT)) && sWork->rewards[sWork->cursor].kind == REWARD_REMOVE) {
+            // And for the card to take out of the deck.
+            u8 pos = RogueRollDeckCard();
+
+            if (pos != 0xFF) {
+                sWork->rewards[sWork->cursor].card = pos;
                 m4aSongNumStart(SONG_SYS_CLICK);
                 RogueShowChoice();
             }

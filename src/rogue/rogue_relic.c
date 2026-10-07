@@ -145,8 +145,9 @@ void RogueOnBossBeaten(u16 battle) {
     }
 }
 
-// The run's pages in the pause menu: where the run is and its builds, then
-// its relics. A turns the page, B closes.
+// The run's pages in the pause menu: where the run is and its builds, its
+// relics, and the records with the way to give the run up. A turns the page,
+// B closes.
 
 #define LINE_SLOTS 26
 #define PAGE_LINES 9
@@ -160,12 +161,21 @@ typedef struct RogueRelicsWork {
     u8 lineCount;
     u8 page;
     u8 state;
+    u8 abandon; // set by a first press of select on the records page
+    u8 leave; // the run was given up
 } RogueRelicsWork;
 
 static RogueRelicsWork* sWork;
 
 static const u8 sTitle[] = "La tua run";
 static const u8 sTitleRelics[] = "Reliquie";
+static const u8 sTitleRecords[] = "Record";
+static const u8 sRuns[] = "Run giocate: ";
+static const u8 sWins[] = "Run completate: ";
+static const u8 sBest[] = "Stanze in una run: ";
+static const u8 sChaptersLine[] = "Capitoli: ";
+static const u8 sAbandon[] = "SELECT: abbandona";
+static const u8 sAbandonSure[] = "SELECT ancora: conferma";
 static const u8 sFloor[] = "Piano ";
 static const u8 sCombo[] = "  Combo+";
 static const u8 sJumps[] = "  Salti ";
@@ -205,6 +215,17 @@ static void RogueRelicsLine(const u8* text) {
         sWork->counts[sWork->lineCount] = LoadTextSlots((u16*)text, sWork->lines[sWork->lineCount]);
         sWork->lineCount++;
     }
+}
+
+static void RogueRelicsRecord(const u8* label, u16 value) {
+    u8* out = RogueRelicsAppend(sWork->text, label);
+
+    if (value >= 100) {
+        *out++ = '0' + value / 100 % 10;
+    }
+
+    RogueRelicsNumber(out, value % 100);
+    RogueRelicsLine(sWork->text);
 }
 
 static void RogueRelicsShowPage(void) {
@@ -250,6 +271,13 @@ static void RogueRelicsShowPage(void) {
         if (sWork->lineCount == first) {
             RogueRelicsLine(sNoBuild);
         }
+    } else if (sWork->page == 2) {
+        RogueRelicsLine(sTitleRecords);
+        RogueRelicsRecord(sRuns, gRogueMeta.runs);
+        RogueRelicsRecord(sWins, gRogueMeta.wins);
+        RogueRelicsRecord(sBest, gRogueMeta.bestDepth);
+        RogueRelicsRecord(sChaptersLine, gRogueMeta.chapters);
+        RogueRelicsLine(sWork->abandon ? sAbandonSure : sAbandon);
     } else {
         RogueRelicsLine(sTitleRelics);
         first = sWork->lineCount;
@@ -272,6 +300,8 @@ static void RogueRelics_Init(s32 arg) {
     sWork = EwramAlloc(sizeof(RogueRelicsWork));
     sWork->state = 0;
     sWork->page = 0;
+    sWork->abandon = 0;
+    sWork->leave = 0;
     SetBgMode0();
     SetupBg(3, 0, 0x1D, 0);
     SetBgPriority(3, 3);
@@ -302,8 +332,21 @@ static void RogueRelics_Update(void) {
     case 1:
         if (GetKeysPressed() & A_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLICK);
-            sWork->page ^= 1;
+            sWork->page = (sWork->page + 1) % 3;
+            sWork->abandon = 0;
             RogueRelicsShowPage();
+        } else if ((GetKeysPressed() & SELECT_BUTTON) && sWork->page == 2) {
+            // Giving the run up takes two presses on the records page.
+            if (sWork->abandon) {
+                sWork->leave = 1;
+                FadeStartOut(0, 16);
+                sWork->state = 2;
+            } else {
+                sWork->abandon = 1;
+                RogueRelicsShowPage();
+            }
+
+            m4aSongNumStart(SONG_SYS_KETTEI);
         } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             FadeStartOut(0, 16);
@@ -312,7 +355,12 @@ static void RogueRelics_Update(void) {
         break;
     case 2:
         if (!FadeIsActive()) {
-            func_080E04EC();
+            if (sWork->leave) {
+                RogueAbandonRun();
+            } else {
+                func_080E04EC();
+            }
+
             sWork->state = 3;
         }
         break;

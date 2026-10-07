@@ -1,0 +1,58 @@
+# Meeting a character in a run brings them to the hub, and the pause menu's
+# records page can give the run up.
+# Expect: boons_met has Jack's bit (0x80) after talking to him, the records
+# page shows, the run ends in the summary, and Jack stands in the hub.
+include start.txt
+shot /tmp/hub_progress_hub_before.ppm
+poke8 @gRogueDebug.event 5
+debug room 7
+wait 260
+hold LEFT 14
+wait 6
+press A
+wait 70
+peek8 @gRogueMeta.boonsMet boons_met
+press A
+wait 20
+press A
+wait 70
+press A
+wait 20
+press A
+wait 120
+press DOWN
+wait 10
+press DOWN
+wait 10
+press A
+wait 200
+press START
+wait 60
+press DOWN
+wait 8
+press DOWN
+wait 8
+press DOWN
+wait 8
+press DOWN
+wait 8
+press DOWN
+wait 8
+press A
+wait 80
+press A
+wait 20
+press A
+wait 20
+shot /tmp/hub_progress_records.ppm
+press SELECT
+wait 20
+press SELECT
+wait 200
+shot /tmp/hub_progress_summary.ppm
+press A
+wait 500
+press START
+wait 200
+shot /tmp/hub_progress_hub_after.ppm
+peek16 @gRogueMeta.runs runs

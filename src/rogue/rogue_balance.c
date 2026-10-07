@@ -24,6 +24,11 @@ u8 RogueEnemyLevel(void) {
     }
 
     level += lead;
+    level += gRogue.oblivion * ROGUE_OBLIVION_LEVELS;
+
+    if (gRogue.kind == ROGUE_ROOM_CHALLENGE) {
+        level += ROGUE_CHALLENGE_LEVELS;
+    }
 
     if (level < 0) {
         level = 0;

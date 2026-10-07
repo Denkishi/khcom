@@ -118,6 +118,8 @@ static RogueHubWork* sWork;
 static const u8 sHint[] = "START: inizia la run";
 static const u8 sBoon[] = "Dono: ";
 static const u8 sBoonNone[] = "nessuno";
+static const u8 sStrong[] = " +";
+static const u8 sOblivion[] = "  Oblio ";
 static const u8 sBoonBelle[] = "PV +30";
 static const u8 sBoonMoogle[] = "due rilanci";
 static const u8 sBoonLeon[] = "mazzo di lame";
@@ -139,6 +141,21 @@ static void RogueHubShowBoon(void) {
 
     for (text = sBoonNames[gRogueMeta.boon]; *text != 0; text++) {
         *out++ = *text;
+    }
+
+    if (gRogueMeta.boon != ROGUE_BOON_NONE && RogueBoonLevel(gRogueMeta.boon) == 2) {
+        for (text = sStrong; *text != 0; text++) {
+            *out++ = *text;
+        }
+    }
+
+    // The oblivion level, once there is one to pick with L and R.
+    if (gRogueMeta.oblivionMax != 0) {
+        for (text = sOblivion; *text != 0; text++) {
+            *out++ = *text;
+        }
+
+        *out++ = '0' + gRogueMeta.oblivion;
     }
 
     *out = 0;
@@ -298,7 +315,18 @@ static void RogueHub_Update(void) {
         RogueHubWalk();
         near = RogueHubNearest();
 
-        if (GetKeysPressed() & START_BUTTON) {
+        if ((GetKeysPressed() & (L_BUTTON | R_BUTTON)) && gRogueMeta.oblivionMax != 0) {
+            // L and R pick the oblivion level among the ones unlocked.
+            if (GetKeysPressed() & R_BUTTON) {
+                gRogueMeta.oblivion = gRogueMeta.oblivion < gRogueMeta.oblivionMax ? gRogueMeta.oblivion + 1 : 0;
+            } else {
+                gRogueMeta.oblivion = gRogueMeta.oblivion > 0 ? gRogueMeta.oblivion - 1 : gRogueMeta.oblivionMax;
+            }
+
+            m4aSongNumStart(SONG_SYS_CLICK);
+            RogueMetaSave();
+            RogueHubShowBoon();
+        } else if (GetKeysPressed() & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_START);
             sWork->next = HUB_NEXT_RUN;
             FadeStartOut(0, 16);

@@ -108,60 +108,93 @@ void RogueApplyUpgrades(void) {
     }
 }
 
-// Whether the character who offers a boon has come to the hub yet. Axel, who
-// offers none, is always there; the others come as runs are played and
-// chapters completed.
+// The characters of the hub. Axel is always there. Each of the others comes
+// to stay once Sora has met them in an event room of a run, and from then on
+// offers a boon for the next run. Completing a run with a boon makes it
+// stronger for good.
+
+// The event each boon's character is met in, by boon.
+static const u8 sBoonEvents[ROGUE_BOONS] = {
+    0xFF, ROGUE_EVENT_BELLE, ROGUE_EVENT_MOOGLE, ROGUE_EVENT_LEON, ROGUE_EVENT_YUFFIE, ROGUE_EVENT_HERCULES,
+    ROGUE_EVENT_TIGGER, ROGUE_EVENT_JACK,
+};
+
 u8 RogueBoonUnlocked(u8 boon) {
-    switch (boon) {
-    case ROGUE_BOON_BELLE:
-        return gRogueMeta.runs >= 1;
-    case ROGUE_BOON_MOOGLE:
-        return gRogueMeta.runs >= 2;
-    case ROGUE_BOON_LEON:
-    case ROGUE_BOON_YUFFIE:
-        return gRogueMeta.chapters >= 2;
-    case ROGUE_BOON_TIGGER:
-        return gRogueMeta.runs >= 5;
-    case ROGUE_BOON_HERCULES:
-    case ROGUE_BOON_JACK:
-        return gRogueMeta.chapters >= 3;
+    if (boon == ROGUE_BOON_NONE) {
+        return 1;
     }
 
-    return 1;
+    return (gRogueMeta.boonsMet >> boon) & 1;
+}
+
+// 2 once a run has been completed with the boon, 1 before.
+u8 RogueBoonLevel(u8 boon) {
+    return ((gRogueMeta.boonsWon >> boon) & 1) + 1;
+}
+
+// Called when Sora talks to the character of an event room.
+void RogueMeetBoon(u8 event) {
+    u8 boon;
+
+    for (boon = 1; boon < ROGUE_BOONS; boon++) {
+        if (sBoonEvents[boon] == event && !RogueBoonUnlocked(boon)) {
+            gRogueMeta.boonsMet |= 1 << boon;
+            RogueMetaSave();
+        }
+    }
 }
 
 // Gives the run the boon picked in the hub. Called when a run starts, before
-// its deck is built.
+// its deck is built. The second figure is the boon at level 2.
 void RogueApplyBoon(void) {
+    u8 strong = RogueBoonLevel(gRogueMeta.boon) == 2;
     u8 relic;
+    u8 i;
+
+    gRogue.boon = gRogueMeta.boon;
 
     switch (gRogueMeta.boon) {
     case ROGUE_BOON_BELLE:
-        gGameState.progression.maxHp += 30;
-        gGameState.hp += 30;
+        // 30 or 50 more max HP.
+        gGameState.progression.maxHp += strong ? 50 : 30;
+        gGameState.hp += strong ? 50 : 30;
         break;
     case ROGUE_BOON_MOOGLE:
-        gRogue.rerolls += 2;
+        // Two or three rerolls.
+        gRogue.rerolls += strong ? 3 : 2;
         break;
     case ROGUE_BOON_LEON:
+        // A deck of keyblades, and strength +1.
         gRogue.deckBias = 1;
-        break;
-    case ROGUE_BOON_YUFFIE:
-        gRogue.deckBias = 2;
-        break;
-    case ROGUE_BOON_HERCULES:
-        gGameState.progression.ap += 2;
-        break;
-    case ROGUE_BOON_TIGGER:
-        if (gRogue.airJumps < ROGUE_AIR_JUMPS_MAX) {
-            gRogue.airJumps++;
+
+        if (strong) {
+            gGameState.progression.ap++;
         }
         break;
-    case ROGUE_BOON_JACK:
-        relic = RogueRollRelic();
+    case ROGUE_BOON_YUFFIE:
+        // A deck of spells, and 20 more CP for it.
+        gRogue.deckBias = 2;
 
-        if (relic != ROGUE_RELICS) {
-            gRogue.relics |= 1 << relic;
+        if (strong) {
+            gGameState.progression.cp += 20;
+        }
+        break;
+    case ROGUE_BOON_HERCULES:
+        // Strength +2 or +3.
+        gGameState.progression.ap += strong ? 3 : 2;
+        break;
+    case ROGUE_BOON_TIGGER:
+        // One air jump, or both.
+        gRogue.airJumps = strong ? ROGUE_AIR_JUMPS_MAX : 1;
+        break;
+    case ROGUE_BOON_JACK:
+        // One random relic, or two.
+        for (i = 0; i < (strong ? 2 : 1); i++) {
+            relic = RogueRollRelic();
+
+            if (relic != ROGUE_RELICS) {
+                gRogue.relics |= 1 << relic;
+            }
         }
         break;
     }
@@ -198,6 +231,13 @@ void RogueMetaEndRun(u8 completed) {
 
     if (completed) {
         gRogueMeta.wins++;
+        gRogueMeta.boonsWon |= 1 << gRogue.boon;
+
+        // Completing every chapter at the highest oblivion level opens the next.
+        if (gRogue.chapters == ROGUE_CHAPTERS && gRogue.oblivion == gRogueMeta.oblivionMax &&
+            gRogueMeta.oblivionMax < ROGUE_OBLIVION_MAX && (gRogueMeta.flags & ROGUE_META_ALL_CLEARED)) {
+            gRogueMeta.oblivionMax++;
+        }
 
         if (gRogue.chapters == ROGUE_CHAPTERS) {
             gRogueMeta.flags |= ROGUE_META_ALL_CLEARED;
@@ -209,6 +249,9 @@ void RogueMetaEndRun(u8 completed) {
             gRogue.newChapter = 1;
         }
     }
+
+    // Each oblivion level is worth a quarter more shards.
+    gRogue.shards += gRogue.shards * gRogue.oblivion / 4;
 
     if (gRogueMeta.shards + gRogue.shards > 9999) {
         gRogueMeta.shards = 9999;
@@ -255,3 +298,9 @@ u8 RogueResumeRun(void) {
     return 1;
 }
 
+
+// Gives the run up from the pause menu: it ends as a lost one, shards kept.
+void RogueAbandonRun(void) {
+    RogueMetaEndRun(0);
+    ModeRequest(&gModeRogueOver, 0);
+}

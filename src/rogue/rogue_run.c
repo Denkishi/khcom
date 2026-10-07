@@ -23,13 +23,14 @@ static const u8 sRoomTypes[ROGUE_ROOM_KINDS] = {
     6, // rest: Moment's Reprieve
     1, // boss
     6, // event: Moment's Reprieve
+    4, // challenge: Looming Darkness
 };
 
 // Battles to win before the room's doors open, by room kind.
-static const u8 sRoomBattles[ROGUE_ROOM_KINDS] = { 0, 1, 2, 1, 0, 0, 0, 0 };
+static const u8 sRoomBattles[ROGUE_ROOM_KINDS] = { 0, 1, 2, 1, 0, 0, 0, 0, 1 };
 
 // Map card whose art the room's door shows, by room kind.
-static const u8 sRoomCards[ROGUE_ROOM_KINDS] = { 5, 1, 0, 2, 10, 5, 0, 14 };
+static const u8 sRoomCards[ROGUE_ROOM_KINDS] = { 5, 1, 0, 2, 10, 5, 0, 14, 3 };
 
 // The floors of a run in order: each has a world and the battle that ends it.
 // The last floor of a chapter is its boss, the others are minibosses. Once a
@@ -149,8 +150,12 @@ static u8 RogueRollKind(void) {
         return ROGUE_ROOM_REST;
     }
 
-    if (roll < 94) {
+    if (roll < 92) {
         return ROGUE_ROOM_EVENT;
+    }
+
+    if (roll < 97) {
+        return ROGUE_ROOM_CHALLENGE;
     }
 
     return ROGUE_ROOM_SHOP;
@@ -287,6 +292,7 @@ void RogueStartRun(void) {
     gRogue.shards = 0;
     gRogue.newChapter = 0;
     gRogue.chapters = gRogueMeta.chapters;
+    gRogue.oblivion = gRogueMeta.oblivion;
     gRogue.deckBias = 0;
     RogueApplyUpgrades();
     RogueApplyBoon();
@@ -357,8 +363,8 @@ u8 RogueOnBattleEnd(u16 battle) {
 
     if (gRogue.kind == ROGUE_ROOM_BOSS) {
         ModeRequest(&gModeRogueReward, ROGUE_REWARD_BOSS);
-    } else if (gRogue.kind == ROGUE_ROOM_TREASURE) {
-        // A treasure room pays like a boss.
+    } else if (gRogue.kind == ROGUE_ROOM_TREASURE || gRogue.kind == ROGUE_ROOM_CHALLENGE) {
+        // Treasure and challenge rooms pay like a boss.
         ModeRequest(&gModeRogueReward, ROGUE_REWARD_DUEL);
     } else {
         ModeRequest(&gModeRogueReward, ROGUE_REWARD_BATTLE);

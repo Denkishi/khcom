@@ -14,9 +14,9 @@
 #include "system_state.h"
 #include "text.h"
 
-// Room cards. A door leads to the room the run rolled for it, unless Sora
-// spends a room card on it: any card opens any door, and the room behind is
-// the card's. There is a card for each kind of room, one for each character
+// Room cards. A door opens with a room card: any card opens any door, and
+// the room behind is the card's. Without one there is always the plain
+// battle, which costs nothing. There is a card for each kind of room, one for each character
 // met in an event room, who is then sure to be there, and one for each boss
 // and miniboss, fought there and then for a boss's reward. Cards drop from
 // battles, are sold at every door for the run's shards, and in the hub,
@@ -82,7 +82,7 @@ static const u8 sB12[] = "Riku, boss";
 static const u8 sB13[] = "Larxene";
 static const u8 sB14[] = "Cloud";
 static const u8 sB15[] = "Vexen";
-static const u8 sB16[] = "Lexaeus, boss";
+static const u8 sB16[] = "Lexaeus boss";
 static const u8 sB17[] = "Axel";
 static const u8 sB18[] = "Topolino";
 static const u8 sB19[] = "Bestia, boss";
@@ -94,8 +94,8 @@ static const u8 sB24[] = "Aladdin";
 static const u8 sB25[] = "Sephiroth";
 static const u8 sB26[] = "Sora II";
 static const u8 sB27[] = "Roxas";
-static const u8 sB28[] = "Roxas, cappotto";
-static const u8 sB29[] = "Roxas, cappuccio";
+static const u8 sB28[] = "Roxas II";
+static const u8 sB29[] = "Roxas III";
 
 static const RogueMapCard sCards[ROGUE_MAP_CARD_KINDS] = {
     { CARD_KIND, ROGUE_ROOM_BATTLE, 0, sK0 },
@@ -223,7 +223,8 @@ u8 RogueMapMenuWanted(u8 hub) {
         }
     }
 
-    return (hub ? gRogueMeta.shards : gRogue.shards) >= COST_KIND;
+    // A door always asks which room; the hub only when there is something to buy or to see.
+    return !hub || gRogueMeta.shards >= COST_KIND;
 }
 
 // One of the cards, by what it is: a kind of room half the time, a
@@ -254,14 +255,21 @@ void RogueMapStartRun(void) {
     }
 
     gRogue.cardEvent = 0;
+
+    // And two to begin with, of the kinds of room.
+    RogueMapGive(0, RogueRandBelow(FIRST_EVENT_CARD));
+    RogueMapGive(0, RogueRandBelow(FIRST_EVENT_CARD));
 }
 
 // Called after a battle won: a card may drop, more often from the harder rooms.
 void RogueMapDrop(void) {
-    u32 chance = gRogue.kind == ROGUE_ROOM_BATTLE ? 35 : 60;
+    // One from every battle, and a second from the harder rooms.
+    u32 count = gRogue.kind == ROGUE_ROOM_BATTLE ? 1 : 2;
 
-    if (RogueRandBelow(100) < chance && RogueMapGive(0, RogueMapRoll(RogueRand()))) {
-        gRogueDebug.mapDrops++;
+    while (count-- != 0) {
+        if (RogueMapGive(0, RogueMapRoll(RogueRand()))) {
+            gRogueDebug.mapDrops++;
+        }
     }
 }
 
@@ -299,10 +307,12 @@ static u16 RogueMapUse(u8 slot, u8 door) {
 
 typedef struct RogueDoorWork {
     TextSlot title[LINE_SLOTS];
+    TextSlot about[LINE_SLOTS + 8];
+    u8 aboutCount;
     TextSlot lines[LINES][LINE_SLOTS];
     u8 titleCount;
     u8 counts[LINES];
-    u8 text[40];
+    u8 text[48];
     void* palette;
     void* titlePalette;
     RogueUi ui;
@@ -320,12 +330,26 @@ typedef struct RogueDoorWork {
 
 static RogueDoorWork* sWork;
 
-static const u8 sTitleDoor[] = "Frammenti: ";
-static const u8 sGo[] = "Prosegui";
+static const u8 sTitleDoor[] = "Apri la porta con:";
+static const u8 sTitleHub[] = "Carte per la run";
+static const u8 sGo[] = "Battaglia";
 static const u8 sGoHub[] = "Parti";
-static const u8 sUse[] = "Usa ";
-static const u8 sKeep[] = "Hai ";
-static const u8 sBuy[] = "+ ";
+static const u8 sBuy[] = "Compra ";
+// What the row under the glove means, on the line below the plates.
+static const u8 sAboutGo[] = "Gratis: nemici normali";
+static const u8 sAboutGoHub[] = "Comincia la run";
+static const u8 sAboutCost[] = "Costa ";
+static const u8 sAboutHave[] = " frammenti, ne hai ";
+static const u8 sAboutKeep[] = "La porti nella run";
+static const u8 sAbout0[] = "Nemici normali";
+static const u8 sAbout1[] = "Nemici forti, pi\xF9 premi";
+static const u8 sAbout2[] = "Battaglia e premio ricco";
+static const u8 sAbout3[] = "Il negozio dei Moguri";
+static const u8 sAbout4[] = "Recuperi PV";
+static const u8 sAbout5[] = "Dura: premio da boss";
+static const u8 sAboutEvent[] = "Lo incontri di sicuro";
+static const u8 sAboutBoss[] = "Lo sfidi subito";
+static const u8* const sAboutKinds[6] = { sAbout0, sAbout1, sAbout2, sAbout3, sAbout4, sAbout5 };
 
 static u8* RogueDoorAppend(u8* out, const u8* text) {
     while (*text != 0) {
@@ -389,9 +413,31 @@ static void RogueDoorRefresh(void) {
     }
 
     FreeTextSlots(sWork->title, LINE_SLOTS);
-    out = RogueDoorAppend(sWork->text, sTitleDoor);
-    RogueDoorNumber(out, RogueDoorShards());
-    sWork->titleCount = LoadTextSlots((u16*)sWork->text, sWork->title);
+    sWork->titleCount = LoadTextSlots((u16*)(sWork->hub ? sTitleHub : sTitleDoor), sWork->title);
+
+    // What the row under the glove means.
+    {
+        u8 row = sWork->rows[sWork->cursor];
+        const RogueMapCard* card = 0;
+
+        FreeTextSlots(sWork->about, LINE_SLOTS + 8);
+
+        if (row == 0) {
+            RogueDoorAppend(sWork->text, sWork->hub ? sAboutGoHub : sAboutGo);
+        } else if (row >= 16) {
+            out = RogueDoorAppend(sWork->text, sAboutCost);
+            out = RogueDoorNumber(out, RogueMapCardCost(sWork->offers[row - 16] - 1));
+            out = RogueDoorAppend(out, sAboutHave);
+            RogueDoorNumber(out, RogueDoorShards());
+        } else if (sWork->hub) {
+            RogueDoorAppend(sWork->text, sAboutKeep);
+        } else {
+            card = &sCards[*RogueMapSlot(0, row - 1) - 1];
+            RogueDoorAppend(sWork->text, card->type == CARD_KIND ? sAboutKinds[card - sCards] : card->type == CARD_EVENT ? sAboutEvent : sAboutBoss);
+        }
+
+        sWork->aboutCount = LoadTextSlots((u16*)sWork->text, sWork->about);
+    }
 
     for (i = 0; i < LINES; i++) {
         u8 row;
@@ -408,13 +454,10 @@ static void RogueDoorRefresh(void) {
         if (row == 0) {
             RogueDoorAppend(sWork->text, sWork->hub ? sGoHub : sGo);
         } else if (row < 16) {
-            out = RogueDoorAppend(sWork->text, sWork->hub ? sKeep : sUse);
-            RogueDoorAppend(out, sCards[*RogueMapSlot(sWork->hub, row - 1) - 1].name);
+            RogueDoorAppend(sWork->text, sCards[*RogueMapSlot(sWork->hub, row - 1) - 1].name);
         } else {
             out = RogueDoorAppend(sWork->text, sBuy);
-            out = RogueDoorAppend(out, sCards[sWork->offers[row - 16] - 1].name);
-            *out++ = ' ';
-            RogueDoorNumber(out, RogueMapCardCost(sWork->offers[row - 16] - 1));
+            RogueDoorAppend(out, sCards[sWork->offers[row - 16] - 1].name);
         }
 
         sWork->counts[i] = LoadTextSlots((u16*)sWork->text, sWork->lines[i]);
@@ -446,6 +489,7 @@ static void RogueDoor_Init(s32 arg) {
     sWork->palette = _08066468(1);
     sWork->titlePalette = _08066468(0);
     InitTextSlots(sWork->title, LINE_SLOTS);
+    InitTextSlots(sWork->about, LINE_SLOTS + 8);
 
     for (i = 0; i < LINES; i++) {
         InitTextSlots(sWork->lines[i], LINE_SLOTS);
@@ -471,6 +515,11 @@ static u8 RogueDoorPick(void) {
     u8 card;
 
     if (row == 0) {
+        // The plain battle, which needs no card.
+        if (!sWork->hub) {
+            gRogue.doors[sWork->door] = ROGUE_ROOM_BATTLE;
+        }
+
         return 1;
     }
 
@@ -552,6 +601,7 @@ static void RogueDoor_Update(void) {
     }
 
     DrawTextSlots(172 - GetTextSlotsWidth(sWork->title, sWork->titleCount) / 2, 34, sWork->title, sWork->titlePalette, 50, sWork->titleCount);
+    DrawTextSlots(120 - GetTextSlotsWidth(sWork->about, sWork->aboutCount) / 2, 144, sWork->about, sWork->palette, 50, sWork->aboutCount);
 
     for (i = 0; i < LINES; i++) {
         if (sWork->counts[i] != 0) {
@@ -570,6 +620,7 @@ static void RogueDoor_Exit(void) {
     s32 i;
 
     FreeTextSlots(sWork->title, LINE_SLOTS);
+    FreeTextSlots(sWork->about, LINE_SLOTS + 8);
 
     for (i = 0; i < LINES; i++) {
         FreeTextSlots(sWork->lines[i], LINE_SLOTS);

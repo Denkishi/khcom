@@ -1,12 +1,14 @@
-# Room cards. Starting a run from the hub goes through their menu, where
-# they are bought for the next run; at a door any card held can be spent to
-# make the room behind it the card's. Here Jack's card (10) is given and
-# spent on the first room's door: the next room is his event room.
+# Room cards. A door opens with a room card: its menu lists the plain battle,
+# which is free, the cards held and three on sale, with a line under them
+# that says what the row under the glove means. Starting a run from the hub
+# goes through the same menu when there are shards to spend, and what is
+# bought there goes into the run. Here a card is bought in the hub, then
+# Jack's card (10) is given and spent on the first room's door.
 # Expect: the first picture shows the hub's menu with "Parti" and three cards
-# on sale; the second the door's menu with "Prosegui", "Usa: Jack" and the
-# cards on sale; the third a room with Jack in it. kind reads 7 (an event
-# room), event reads 4 (Jack), map_used reads 1, bought reads 1 and the
-# second picture shows the card bought among those held.
+# to buy; the second the card bought among them; the third the door's menu
+# with "Battaglia", "Jack" and the cards the run starts with; the fourth a
+# room. kind reads 7 (an event room), event reads 4 (Jack), map_used reads 1
+# and bought reads 1.
 wait 600
 poke16 @gRogueMeta.shards 100
 press START

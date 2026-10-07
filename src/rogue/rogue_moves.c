@@ -434,6 +434,7 @@ static TaskDesc sTaskDescRogueMove = {
 };
 
 static void RogueAfterTick(void);
+static void RogueCardBreakTick(void);
 static void RogueStyleTick(void);
 
 // Sora's casting pose, for a move made while he is free: in the middle of a
@@ -529,6 +530,7 @@ void RogueMovesTick(void) {
     RogueGadgetTick();
     RogueHeroTick();
     Rogue2dTick();
+    RogueCardBreakTick();
 
     if (gRogue.moveEchoTimer != 0 && --gRogue.moveEchoTimer == 0 && gRogue.moveEcho != 0) {
         RogueMoveCast(gRogue.moveEcho - 1, gBtlWork->actor, 1);
@@ -897,15 +899,95 @@ void RogueFoeMove(BtlObj* foe, u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, 
 }
 
 // A card is broken. The game flashed the whole screen and broke it into
-// squares for a moment, which at the mod's pace was hard on the eyes: now a
-// small light shows over whoever lost the card, with a sound, and nothing
-// stops. The game's own word for it still rises over them.
+// squares for a moment, which at the mod's pace was hard on the eyes: now
+// whoever lost the card goes white for a few frames, with a sound, and
+// nothing stops. The game's own word for it still rises over them.
+//
+// The loser may be Sora or any enemy, each with its palette kept in a place
+// of its own; what they share is the screen. So the sprites drawn where the
+// loser stands are looked up in the video memory, and the palette most of
+// them use is turned white there and put back after.
+
+#define BREAK_FLASH 6 // frames
+
+static u16 sBreakSaved[16];
+static u8 sBreakBank;
+static u8 sBreakTime;
+
 void RogueCardBreakShown(BtlObj* loser) {
+    const u16* oam = (const u16*)0x07000000;
+    u8 votes[16];
+    s16 x;
+    s16 y;
+    s32 i;
+    s32 best = 0;
+
     gRogueDebug.breaks++;
     m4aSongNumStart(SONG_SYS_KETTEI);
 
-    if (loser != 0) {
-        RogueMoveSpawn(ROGUE_MOVE_PEARL, loser->x, loser->y + 0x100, loser->z - 0x2C00, ROGUE_MOVE_SPARK, 0, 0, 0);
+    if (loser == 0 || sBreakTime != 0) {
+        return;
+    }
+
+    for (i = 0; i < 16; i++) {
+        votes[i] = 0;
+    }
+
+    WorldToScreen(&x, &y, loser->x, loser->y, loser->z);
+
+    for (i = 0; i < 128; i++) {
+        s32 oy = oam[i * 4] & 0xFF;
+        s32 ox = oam[i * 4 + 1] & 0x1FF;
+
+        // Shown, of sixteen colours, and within a body's reach of the loser's feet.
+        if ((oam[i * 4] & 0x2300) == 0x0200 || (oam[i * 4] & 0x2000)) {
+            continue;
+        }
+
+        if (ox >= 256) {
+            ox -= 512;
+        }
+
+        if (oy >= 192) {
+            oy -= 256;
+        }
+
+        if (ox > x - 40 && ox < x + 24 && oy > y - 72 && oy < y + 4) {
+            votes[oam[i * 4 + 2] >> 12]++;
+        }
+    }
+
+    for (i = 0; i < 16; i++) {
+        if (votes[i] > votes[best]) {
+            best = i;
+        }
+    }
+
+    if (votes[best] == 0) {
+        return;
+    }
+
+    sBreakBank = best;
+    sBreakTime = BREAK_FLASH;
+
+    for (i = 0; i < 16; i++) {
+        sBreakSaved[i] = ((u16*)0x05000200)[best * 16 + i];
+    }
+}
+
+// Called once a frame in battle.
+static void RogueCardBreakTick(void) {
+    u16* palette = &((u16*)0x05000200)[sBreakBank * 16];
+    s32 i;
+
+    if (sBreakTime == 0) {
+        return;
+    }
+
+    sBreakTime--;
+
+    for (i = 1; i < 16; i++) {
+        palette[i] = sBreakTime != 0 ? 0x7FFF : sBreakSaved[i];
     }
 }
 

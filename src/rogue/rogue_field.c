@@ -86,10 +86,17 @@ u8 RogueFieldAim(u8 angle) {
 }
 
 static void RogueRing_Init(RogueRingWork* w) {
-    w->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
-    w->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    AnimInit(&w->anim, gUnk_09EE10F8, gUnk_09EE10EC);
-    AnimStart(&w->anim, 0, 1);
+    // Only if the room leaves room for it: a room full of characters has no
+    // palette to spare, and the game does not check before it uses one.
+    w->tiles = 0;
+
+    if (CanAllocObjTiles(12) && CanAllocObjPalette(3)) {
+        w->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
+        w->palette = LoadObjPalette(gBStatesPalette, 0x20);
+        AnimInit(&w->anim, gUnk_09EE10F8, gUnk_09EE10EC);
+        AnimStart(&w->anim, 0, 1);
+    }
+
     sSeenAny = 0;
     sTargetAny = 0;
 }
@@ -99,7 +106,11 @@ static s32 RogueRing_Update(RogueRingWork* w) {
     sTarget = sSeen;
     sTargetFar = sSeenFar;
     sSeenAny = 0;
-    AnimUpdate(&w->anim);
+
+    if (w->tiles != 0) {
+        AnimUpdate(&w->anim);
+    }
+
     return 1;
 }
 
@@ -107,7 +118,7 @@ static void RogueRing_Draw(RogueRingWork* w) {
     s16 x;
     s16 y;
 
-    if (!sTargetAny) {
+    if (!sTargetAny || w->tiles == 0) {
         return;
     }
 
@@ -118,8 +129,10 @@ static void RogueRing_Draw(RogueRingWork* w) {
 }
 
 static void RogueRing_Destroy(RogueRingWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+    if (w->tiles != 0) {
+        ReleaseObjTiles(w->tiles);
+        ReleaseObjPalette(w->palette);
+    }
 }
 
 TaskDesc gTaskDescRogueRing = {

@@ -2741,9 +2741,9 @@ void func_080E9CBC(void) {
     func_080E0820();
 
     if (FadeIsActive() == 0) {
-        // The door's menu of room cards comes first, when Sora has a card or
-        // the shards for one; from it the run goes on.
-        if (RogueMapMenuWanted(0)) {
+        // A door opens with a room card, chosen in its menu; only the door of
+        // the floor's boss opens by itself.
+        if (gRogue.doors[gUnk_0203C7AC->unk_10] != ROGUE_ROOM_BOSS) {
             func_0801CB0C();
             ModeRequest(&gModeRogueDoor, gUnk_0203C7AC->unk_10);
         } else {

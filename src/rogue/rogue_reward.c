@@ -172,7 +172,8 @@ static u8 RogueRewardAvailable(RogueReward* reward) {
     case REWARD_COMBO:
         return gRogue.comboPlus < ROGUE_COMBO_PLUS_MAX;
     case REWARD_AIR_JUMP:
-        return gRogue.airJumps < ROGUE_AIR_JUMPS_MAX;
+        // The relic enters the rewards with the second chapter.
+        return gRogueMeta.chapters >= 2 && gRogue.airJumps < ROGUE_AIR_JUMPS_MAX;
     case REWARD_ATTACK:
         return gGameState.progression.ap < ROGUE_AP_MAX;
     }

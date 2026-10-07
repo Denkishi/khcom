@@ -289,6 +289,28 @@ static u16 RogueFusionResult(u16 a, u16 b) {
     return CARD_ID(kind, value);
 }
 
+// Fusions unlock with the chapters: keyblades with keyblades and anything
+// with an item from the start, spells into summons from the second chapter,
+// a keyblade with a spell from the third.
+static u8 RogueFusionUnlocked(u16 a, u16 b) {
+    u8 classA = RogueFuseClass(a);
+    u8 classB = RogueFuseClass(b);
+
+    if (classA == FUSE_ITEM || classB == FUSE_ITEM) {
+        return 1;
+    }
+
+    if (classA == FUSE_ATTACK && classB == FUSE_ATTACK) {
+        return 1;
+    }
+
+    if (classA == FUSE_MAGIC && classB == FUSE_MAGIC) {
+        return gRogueMeta.chapters >= 2;
+    }
+
+    return gRogueMeta.chapters >= 3;
+}
+
 // Looks for two level 3 cards in the deck to fuse. Fills in their deck
 // positions and the card they make.
 u8 RogueRollFusion(u8* posA, u8* posB, u16* result) {
@@ -319,11 +341,23 @@ u8 RogueRollFusion(u8* posA, u8* posB, u16* result) {
         return 0;
     }
 
-    a = RogueRandBelow(count);
-    b = RogueRandBelow(count - 1);
+    // Pairs whose kind of fusion is still locked are passed over.
+    for (i = 0; i < 12; i++) {
+        a = RogueRandBelow(count);
+        b = RogueRandBelow(count - 1);
 
-    if (b >= a) {
-        b++;
+        if (b >= a) {
+            b++;
+        }
+
+        if (RogueFusionUnlocked(gCardCollection[deck->cards[ready[a]]] & CARD_ID_MASK,
+                                gCardCollection[deck->cards[ready[b]]] & CARD_ID_MASK)) {
+            break;
+        }
+    }
+
+    if (i == 12) {
+        return 0;
     }
 
     *posA = ready[a];

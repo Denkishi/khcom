@@ -159,8 +159,6 @@ enum RogueBuild {
     ((kind) <= CARD_ULTIMA_WEAPON || ((kind) >= ROGUE_FIRST_CARD_KIND && (kind) < ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS))
 // Tier of the new keyblades, see RogueCardTier: they come from fusions.
 #define ROGUE_NEW_CARD_TIER 5
-// Which of Cloud's animations his tag attack plays, an index of gSmnCloudAnimDefs.
-#define ROGUE_TAG_CLOUD_ANIM 0
 // The action id of a Kingdom Key swing, which a tag card is played as.
 #define ROGUE_ACTION_SWING 0
 // Upward speed a combo finisher gives the enemy it hits; a keyblade's own is 384.

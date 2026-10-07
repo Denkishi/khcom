@@ -1,5 +1,6 @@
 #include "task_descriptors.h"
 #include "system_state.h"
+#include "rogue.h"
 #include "map_api.h"
 #include "ms_api.h"
 #include "fade.h"
@@ -8803,7 +8804,7 @@ void ApplySaveHeaderData(SaveHeaderData* data) {
         }
 
 #ifdef VERSION_EU
-        gLanguage = data->unk_02;
+        gLanguage = ROGUE_LANGUAGE;
 #endif
     }
 

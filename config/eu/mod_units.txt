@@ -1,0 +1,3 @@
+# Units the mod adds ("new") or whose code it changes ("moved").
+new rogue.c
+moved taskpool.c

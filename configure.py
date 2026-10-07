@@ -213,6 +213,51 @@ for line in units_file.read_text().splitlines():
     linked.add(obj)
     units.append((src, obj, flags))
 
+# The mod links on top of the vanilla layout. A "new" unit is the mod's own; a
+# "moved" unit is a vanilla one whose code changed size, so its old .text slot is
+# left as a gap. Both link where the opening movie was: Thumb calls reach 4 MiB,
+# and that is the only free space this close to the vanilla code.
+MOD_REGION_UNIT = "asset_movie_opening.o"
+MOD_CALL_RANGE = 0x08400000
+mod_file = Path(f"config/{version}/mod_units.txt")
+layout_file = Path(f"config/{version}/vanilla_layout.txt")
+mod_new = []
+mod_moved = []
+if mod_file.exists():
+    for line in mod_file.read_text().splitlines():
+        line = line.split("#")[0].strip()
+        if not line:
+            continue
+        kind, name = line.split()
+        if kind == "new":
+            src = sources.get(name)
+            if src is None:
+                sys.exit(f"error: mod unit {name} listed in {mod_file} does not exist")
+            obj = f"{build_dir}/src/{src.stem}.o"
+            if obj in linked:
+                sys.exit(f"error: mod unit {name} is already in {units_file}")
+            linked.add(obj)
+            units.append((src, obj, None))
+            mod_new.append(obj)
+        elif kind == "moved":
+            obj = f"{build_dir}/src/{Path(name).stem}.o"
+            if obj not in linked:
+                sys.exit(f"error: moved unit {name} is not in {units_file}")
+            mod_moved.append(obj)
+        else:
+            sys.exit(f"error: {mod_file}: unknown unit kind {kind}")
+vanilla_text = {}
+mod_region = None
+if mod_new or mod_moved:
+    for line in layout_file.read_text().splitlines():
+        section, obj, addr, size = line.split()
+        if section == ".text":
+            vanilla_text[obj] = (int(addr, 16), int(size, 16))
+        if section == ".rodata" and obj.endswith("/" + MOD_REGION_UNIT):
+            mod_region = (obj, int(addr, 16), int(size, 16))
+    if mod_region is None:
+        sys.exit(f"error: {layout_file} has no {MOD_REGION_UNIT} to link the mod into")
+
 asset_gfx_build = f"{build_dir}/assets/asset_gfx.bin"
 asset_gfx_asm = f"{build_dir}/asm/asset_gfx.s"
 asset_gfx_unit = "asset_gfx.s"
@@ -319,6 +364,8 @@ if pending_uncovered:
     )
 
 objs_linked = [obj for _src, obj, _flags in units]
+if mod_region:
+    objs_linked = [obj for obj in objs_linked if obj != mod_region[0]]
 Path(build_dir).mkdir(parents=True, exist_ok=True)
 with open(ldscript, "w") as f:
     f.write("ENTRY(_start);\n\n")
@@ -328,8 +375,32 @@ with open(ldscript, "w") as f:
         f.write("\n")
     f.write("SECTIONS\n{\n    . = 0x8000000;\n\n    .text :\n    {\n")
     for obj in objs_linked:
+        if obj in mod_new:
+            continue
+        if obj in mod_moved:
+            addr, size = vanilla_text[obj]
+            f.write(f"        . = {addr + size - 0x8000000:#x};\n")
+            continue
         f.write(f"        {obj}(.text);\n")
-    f.write("        *(.rodata);\n        *(.data);\n    }\n")
+    if mod_region:
+        region_obj, region_addr, region_size = mod_region
+        for _src, obj, _flags in units:
+            if obj in mod_new:
+                continue
+            if obj != region_obj:
+                f.write(f"        {obj}(.rodata);\n")
+                continue
+            for mod_obj in mod_moved + mod_new:
+                f.write(f"        {mod_obj}(.text);\n")
+            for mod_obj in mod_new:
+                f.write(f"        {mod_obj}(.rodata);\n        {mod_obj}(.data);\n")
+            f.write(f"        . = {region_addr + region_size - 0x8000000:#x};\n")
+        for _src, obj, _flags in units:
+            if obj not in mod_new and obj != region_obj:
+                f.write(f"        {obj}(.data);\n")
+        f.write("    }\n")
+    else:
+        f.write("        *(.rodata);\n        *(.data);\n    }\n")
     f.write("\n    .iwram 0x03000000 (NOLOAD) :\n    {\n")
     for obj, section in IWRAM_BEFORE_HEAP:
         f.write(f"        {build_dir}/{obj}({section});\n")
@@ -376,6 +447,15 @@ with out.open("w") as f:
         "cc",
         command="$cpp $cppflags -o $out.i $in && $agbcc $cflags -o $out.s $out.i && $legacy_as $legacy_asflags -o $out $out.s",
         description="CC $out",
+    )
+    n.rule(
+        "layout",
+        command=f"python3 tools/check_layout.py check {mapfile} {layout_file}"
+                + (" --moved " + " ".join(mod_moved) if mod_moved else "")
+                + (" --new " + " ".join(mod_new) if mod_new else "")
+                + (f" --region {mod_region[0]} --call-range {MOD_CALL_RANGE:#x}" if mod_region else "")
+                + " && touch $out",
+        description=f"LAYOUT {mapfile}",
     )
     n.rule(
         "ld",
@@ -496,7 +576,10 @@ with out.open("w") as f:
     n.build("progress", "progress", report, implicit=["tools/progress.py"])
     n.newline()
     n.build("all", "phony", f"{build_dir}/ok")
-    n.default("all")
+    n.build(f"{build_dir}/layout_ok", "layout", rom,
+            implicit=["tools/check_layout.py", str(layout_file)])
+    n.build("mod", "phony", f"{build_dir}/layout_ok")
+    n.default("mod" if mod_new or mod_moved else "all")
 
 objdiff_config = {
     "min_version": "2.0.0",

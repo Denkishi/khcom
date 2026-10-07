@@ -17,6 +17,7 @@
 #include "sroll_api.h"
 #include "gba/io_reg.h"
 #include "system_state.h"
+#include "rogue.h"
 
 Mode* gCurrentMode;
 void (*gCurrentModeUpdate)(void);
@@ -261,11 +262,7 @@ void ModeInit(void) {
     gDebugModeIndex = 0;
 #ifdef VERSION_EU
 
-    if (a) {
-        ModeStart(&gModeCopyright1, 0);
-    } else {
-        ModeStart(&gModeLang, 0);
-    }
+    ModeStart(&gModeRogueBoot, 0);
 #else
     ModeStart(&gModeCopyright1, 0);
 #endif

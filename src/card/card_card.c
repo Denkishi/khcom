@@ -888,6 +888,7 @@ void func_080792F4(CardBattleWork* w) {
     gBtlWork->flags |= 0x800000;
 
     if ((s16)gCardBattleState->unk_0C2 != n || RogueTieWins()) {
+        RogueOnCardBreak();
         if (n == 0) {
             if ((s16)gCardBattleState->unk_0C2 > 9) {
                 gBtlWork->unk_1CA = 9;
@@ -1679,6 +1680,7 @@ void func_0807A80C(CardBattleWork* w) {
     gBtlWork->flags |= 0x800000;
 
     if ((s16)gCardBattleState->unk_0C2 != n || RogueTieWins()) {
+        RogueOnCardBreak();
         if (n == 0) {
             if ((s16)gCardBattleState->unk_0C2 > 9) {
                 gBtlWork->unk_1CA = 9;

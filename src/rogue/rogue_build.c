@@ -574,6 +574,11 @@ s32 RogueCardAction(const CardDef* def) {
     u16 kind = id / 10;
 
     gRogue.playedKind = def->unk_2A != 3 ? kind : ROGUE_NO_KIND;
+    RogueGadgetFire(GADGET_ON_CARD_N, gBtlWork->actor2);
+
+    if (def->unk_20 == 0 && def->unk_2A != 3) {
+        RogueGadgetFire(GADGET_ON_ZERO, gBtlWork->actor2);
+    }
 
     // The new spells: each is a move of its own, cast with a swing.
     if (ROGUE_IS_NEW_SPELL(kind)) {
@@ -685,6 +690,7 @@ void RogueOnStockPlayed(void) {
 }
 
 void RogueOnReload(void) {
+    RogueGadgetFire(GADGET_ON_RELOAD, 0);
     gRogue.artsUsed = 0;
     gRogue.freeCard = 1;
     gRogue.sleightReady = 1;
@@ -715,6 +721,11 @@ u8 RogueBlocksBreak(s32 value) {
 
 u8 RogueTieWins(void) {
     return RogueHasRelic(ROGUE_RELIC_TIE_WIN);
+}
+
+// Called when a card or a stock of Sora's breaks the enemy's card.
+void RogueOnCardBreak(void) {
+    RogueGadgetFire(GADGET_ON_BREAK, gBtlWork->actor2);
 }
 
 // The value one of the player's cards plays at. A zero stays a zero: it is

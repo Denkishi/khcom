@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_actor.h"
 #include "btl.h"
+#include "engine_math.h"
 #include "gba/keys.h"
 #include "listpool.h"
 #include "btl_collision.h"
@@ -105,6 +106,9 @@ typedef struct RogueMoveArgs {
     s32 vy; // sideways speed of a thrown one, for the fan
     u8 left;
     u8 delay; // frames before it appears
+    u8 mode; // a RogueMoveMode
+    u8 phase; // see RogueMoveMode
+    u8 freeze; // its hits freeze
 } RogueMoveArgs;
 
 typedef struct RogueMoveWork {
@@ -115,6 +119,8 @@ typedef struct RogueMoveWork {
     u8 timer;
     u8 hits; // made so far, for the ones that hit more than once
     u8 shown;
+    u8 rest; // frames until an orbiting one can hit again
+    u16 turn; // how far round Sora an orbiting one is, in 1/65536
 } RogueMoveWork;
 
 static void RogueMove_Init(RogueMoveWork* w, RogueMoveArgs* args) {
@@ -122,6 +128,8 @@ static void RogueMove_Init(RogueMoveWork* w, RogueMoveArgs* args) {
     w->timer = 0;
     w->hits = 0;
     w->shown = 0;
+    w->rest = 0;
+    w->turn = args->phase << 8;
     w->tiles = 0;
     w->palette = 0;
 }
@@ -139,7 +147,7 @@ static s32 RogueMoveShow(RogueMoveWork* w) {
     w->palette = LoadObjPalette(def->palette, 0x20);
     w->tiles = def->block != 0 ? (void*)AllocObjTiles(def->block, def->tiles) : (void*)LoadObjTiles(def->tiles, def->tilesSize);
     AnimInit(&w->anim, def->anims, def->frames);
-    AnimStart(&w->anim, def->anim, def->motion == MOTION_THROWN);
+    AnimStart(&w->anim, def->anim, def->motion == MOTION_THROWN || w->args.mode != ROGUE_MOVE_PLAIN);
     w->shown = 1;
     return 1;
 }
@@ -187,7 +195,9 @@ static s32 RogueMoveHit(RogueMoveWork* w) {
     gRogue.projectile = 1;
     gRogue.echoing = 1;
     gRogue.finisher = def->launch;
+    gRogue.freezing = w->args.freeze;
     hit = func_08011F78(RogueMoveAttack(def), w->args.x, w->args.y, w->args.z, width, depth, height);
+    gRogue.freezing = 0;
     gRogue.finisher = 0;
     gRogue.echoing = 0;
     gRogue.projectile = 0;
@@ -226,6 +236,55 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
 
     if (!w->shown && !RogueMoveShow(w)) {
         return 0;
+    }
+
+    if (w->args.mode == ROGUE_MOVE_ORBIT) {
+        // Round Sora for as long as the battle lasts; what it touches is hit,
+        // and then left alone for a moment.
+        BtlObj* sora = gBtlWork->actor;
+
+        w->turn += 0x380;
+        w->args.x = sora->x + gSineTable[w->turn >> 8] * 0x28;
+        w->args.y = sora->y - gSineTable[(w->turn >> 8) + 64] * 0x12;
+        w->args.z = sora->z - 0x1000;
+        w->args.left = (w->turn >> 8) >= 128;
+
+        if (w->rest != 0) {
+            w->rest--;
+        } else if (RogueMoveHit(w)) {
+            w->rest = 30;
+        }
+
+        AnimUpdate(&w->anim);
+        return 1;
+    }
+
+    if (w->args.mode == ROGUE_MOVE_SHARD) {
+        BtlObj* sora = gBtlWork->actor;
+
+        AnimUpdate(&w->anim);
+
+        if (w->timer < w->args.phase) {
+            // It forms over Sora's head and waits there.
+            w->args.x = sora->x;
+            w->args.y = sora->y;
+            w->args.z = sora->z - 0x3000;
+            w->timer++;
+            return 1;
+        }
+
+        // Then it goes for the enemy locked on, or any.
+        target = gBtlWork->actor2 != 0 ? gBtlWork->actor2 : RogueGaugeTarget();
+
+        if (target == 0 || ++w->timer > w->args.phase + 90) {
+            return 0;
+        }
+
+        w->args.left = target->x < w->args.x;
+        w->args.x += (target->x - w->args.x) / 6;
+        w->args.y += (target->y - w->args.y) / 6;
+        w->args.z += (target->z - 0x1000 - w->args.z) / 6;
+        return !RogueMoveHit(w);
     }
 
     switch (def->motion) {
@@ -365,6 +424,9 @@ static void RogueMoveCast(u8 move, BtlObj* sora, u8 again) {
         args.z = sora->z;
         args.vy = 0;
         args.delay = 0;
+        args.mode = ROGUE_MOVE_PLAIN;
+        args.phase = 0;
+        args.freeze = 0;
 
         if (def->motion != MOTION_AROUND) {
             args.x += args.left ? -0x2000 : 0x2000;
@@ -403,6 +465,7 @@ void RogueDoMove(u8 move, BtlObj* sora) {
 void RogueMovesTick(void) {
     RogueAfterTick();
     RogueStyleTick();
+    RogueGadgetTick();
 
     if (gRogue.moveEchoTimer != 0 && --gRogue.moveEchoTimer == 0 && gRogue.moveEcho != 0) {
         RogueMoveCast(gRogue.moveEcho - 1, gBtlWork->actor, 1);
@@ -489,6 +552,8 @@ void RogueAirControl(BtlSoraWork* work, u16 held, u16 pressed) {
 void RogueOnDodge(BtlObj* sora) {
     BtlObj* target = gBtlWork->actor2;
 
+    RogueGadgetFire(GADGET_ON_DODGE, target);
+
     if (!RogueHasRelic(ROGUE_RELIC_TELEPORT) || target == 0) {
         return;
     }
@@ -511,6 +576,8 @@ void RogueOnDodge(BtlObj* sora) {
 void RogueDodgeTrail(BtlObj* sora) {
     u64 flags;
     s32 scale;
+
+    RogueGadgetFire(GADGET_ON_DODGE_STEP, 0);
 
     if (!RogueHasRelic(ROGUE_RELIC_TRAIL)) {
         return;
@@ -697,39 +764,57 @@ void RogueAfterReset(void) {
 void func_08015834(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s);
 
 static BtlObj* sStyleTarget;
-static u8 sStyle; // the element to set off, plus one
+static u8 sStyleDelay[ROGUE_ELEMENTS]; // frames until each element's burst, 0 when none is owed
 
-// One of the moves where an enemy stands rather than by Sora.
-static void RogueMoveAt(u8 move, BtlObj* target) {
+// One of the moves somewhere of the caller's choosing, in one of the modes.
+void RogueMoveSpawn(u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, u8 delay, u8 freeze) {
     RogueMoveArgs args;
 
     args.def = &sMoves[move];
     args.left = (gBtlWork->actor->flags & 4) != 0;
-    args.x = target->x;
-    args.y = target->y;
-    args.z = target->z;
+    args.x = x;
+    args.y = y;
+    args.z = z;
     args.vy = 0;
-    args.delay = 0;
-    m4aSongNumStart(args.def->sound);
+    args.delay = delay;
+    args.mode = mode;
+    args.phase = phase;
+    args.freeze = freeze;
+
+    if (delay == 0 && mode == ROGUE_MOVE_PLAIN) {
+        m4aSongNumStart(args.def->sound);
+    }
+
     TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueMove, &args);
     gRogueDebug.moves++;
 }
 
+// The bolt of Sora's own Thunder, from above him onto an enemy. The game
+// draws one at a time: a second asked for meanwhile does not come.
+void RogueThunderBolt(BtlObj* target) {
+    BtlObj* sora = gBtlWork->actor;
+
+    func_08015834(0, sora->x, sora->y, sora->z - 16384, target->x, target->y, 0, 72);
+}
+
 // Called for each plain hit of Sora's, with the string's count already on it.
+// Every style whose turn it is goes off, one after the other.
 void RogueStyleOnHit(BtlObj* target) {
     static const u8 every[ROGUE_ELEMENTS] = { ROGUE_STYLE_FIRE_EVERY, ROGUE_STYLE_ICE_EVERY, ROGUE_STYLE_THUNDER_EVERY };
     u8 build = RogueBuildElement();
     u8 element;
+    u8 delay = 1;
 
-    if (sStyle != 0 || gRogue.combo == 0) {
+    if (gRogue.combo == 0) {
         return;
     }
 
     for (element = 0; element < ROGUE_ELEMENTS; element++) {
-        if ((build == element || RogueHasRelic(ROGUE_RELIC_STYLE_FIRE + element)) && gRogue.combo % every[element] == 0) {
-            sStyle = element + 1;
+        if ((build == element || RogueHasRelic(ROGUE_RELIC_STYLE_FIRE + element)) && gRogue.combo % every[element] == 0 &&
+            sStyleDelay[element] == 0) {
+            sStyleDelay[element] = delay;
             sStyleTarget = target;
-            return;
+            delay += 14;
         }
     }
 }
@@ -738,40 +823,45 @@ static void RogueStyleTick(void) {
     BtlObj* sora = gBtlWork->actor;
     BtlObj* actor;
     BtlObj* target = 0;
+    u8 element;
 
-    if (sStyle == 0) {
-        return;
-    }
-
-    // The enemy may be gone since the hit.
-    for (actor = (BtlObj*)ListPoolFirst(&gBtlWork->pool); actor != 0; actor = (BtlObj*)ListPoolNext(&actor->node)) {
-        if (actor == sStyleTarget && actor != sora) {
-            target = actor;
+    for (element = 0; element < ROGUE_ELEMENTS; element++) {
+        if (sStyleDelay[element] == 0 || --sStyleDelay[element] != 0) {
+            continue;
         }
-    }
 
-    if (target != 0) {
-        switch (sStyle - 1) {
+        // The enemy may be gone since the hit.
+        for (actor = (BtlObj*)ListPoolFirst(&gBtlWork->pool); actor != 0; actor = (BtlObj*)ListPoolNext(&actor->node)) {
+            if (actor == sStyleTarget && actor != sora) {
+                target = actor;
+            }
+        }
+
+        if (target == 0) {
+            continue;
+        }
+
+        switch (element) {
         case ROGUE_ELEMENT_FIRE:
-            RogueMoveAt(ROGUE_MOVE_FIRE_BURST, target);
+            RogueMoveSpawn(ROGUE_MOVE_FIRE_BURST, target->x, target->y, target->z, ROGUE_MOVE_PLAIN, 0, 0, 0);
             RogueApplyBurn(target, 2 + gRogue.floor);
             break;
         case ROGUE_ELEMENT_ICE:
-            RogueMoveAt(ROGUE_MOVE_SHARDS, target);
-            RogueApplyFreeze(target);
+            RogueMoveSpawn(ROGUE_MOVE_SHARDS, target->x, target->y, target->z, ROGUE_MOVE_PLAIN, 0, 0, 1);
             break;
         case ROGUE_ELEMENT_THUNDER:
-            // The spell's own bolt, from above Sora onto the enemy.
-            func_08015834(0, sora->x, sora->y, sora->z - 16384, target->x, target->y, 0, 72);
+            RogueThunderBolt(target);
             break;
         }
 
         gRogueDebug.styleHits++;
     }
-
-    sStyle = 0;
 }
 
 void RogueStyleReset(void) {
-    sStyle = 0;
+    u8 element;
+
+    for (element = 0; element < ROGUE_ELEMENTS; element++) {
+        sStyleDelay[element] = 0;
+    }
 }

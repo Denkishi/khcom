@@ -294,6 +294,8 @@ void RogueStartRun(void) {
     gRogue.comboPlus = 0;
     gRogue.relics = 0;
     gRogue.relics2 = 0;
+    gRogue.relics3 = 0;
+    gRogue.relics4 = 0;
     gRogue.airJumps = 0;
     gRogue.airJumpsUsed = 0;
     gRogue.world = sFloors[0].world;
@@ -443,10 +445,13 @@ u8 RogueTryAirJump(void) {
 
     gRogue.airJumpsUsed++;
     gRogue.jumpBuffer = 0;
+    RogueGadgetFire(GADGET_ON_AIR_JUMP, 0);
     return 1;
 }
 
 void RogueResetAirJumps(void) {
+    // Called as a jump leaves the ground.
+    RogueGadgetFire(GADGET_ON_JUMP, 0);
     gRogue.airJumpsUsed = 0;
     gRogue.airDashUsed = 0;
     gRogue.jumpBuffer = 0;

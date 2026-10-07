@@ -281,7 +281,46 @@ enum RogueRelic {
     ROGUE_RELIC_STYLE_FIRE,
     ROGUE_RELIC_STYLE_ICE,
     ROGUE_RELIC_STYLE_THUNDER,
-    ROGUE_RELICS
+    // The gadgets of rogue_gadget.c, fifty of them, in the order of its table.
+    ROGUE_RELIC_FIRST_GADGET,
+    ROGUE_RELICS = ROGUE_RELIC_FIRST_GADGET + 50
+};
+#define ROGUE_GADGETS (ROGUE_RELICS - ROGUE_RELIC_FIRST_GADGET)
+
+// How one of the moves of rogue_moves.c is set going by RogueMoveSpawn.
+enum RogueMoveMode {
+    ROGUE_MOVE_PLAIN, // as the move is made
+    ROGUE_MOVE_ORBIT, // it circles Sora for the whole battle, hitting what it touches. phase: where on the circle, in 1/256
+    ROGUE_MOVE_SHARD // it hangs over Sora for `phase` frames, then flies at an enemy
+};
+
+struct BtlObj;
+void RogueMoveSpawn(u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, u8 delay, u8 freeze);
+void RogueThunderBolt(struct BtlObj* target);
+void RogueGadgetFire(u8 trigger, struct BtlObj* target);
+void RogueGadgetTick(void);
+void RogueGadgetReset(void);
+const u8* RogueGadgetName(u8 gadget);
+const u8* RogueGadgetText(u8 gadget);
+
+// When a gadget goes off.
+enum RogueGadgetTrigger {
+    GADGET_ON_START, // as the battle starts
+    GADGET_ON_TIMER, // every `number` tenths of a second
+    GADGET_ON_DODGE, // as a dodge takes off
+    GADGET_ON_DODGE_STEP, // every `number` frames of a dodge's slide
+    GADGET_ON_JUMP,
+    GADGET_ON_AIR_JUMP,
+    GADGET_ON_LAND,
+    GADGET_ON_HIT_N, // on every `number`th hit of a string
+    GADGET_ON_FINISHER,
+    GADGET_ON_HURT,
+    GADGET_ON_KILL,
+    GADGET_ON_RELOAD,
+    GADGET_ON_ZERO, // a card worth 0 is played
+    GADGET_ON_CARD_N, // on every `number`th card played
+    GADGET_ON_BREAK, // Sora breaks an enemy's card
+    GADGET_ON_LOW_HP // every `number` tenths of a second under a quarter of the HP
 };
 #define ROGUE_FIRST_CARD_RELIC ROGUE_RELIC_ZERO_SHIELD
 #define ROGUE_FIRST_MOD ROGUE_RELIC_MOD_MULTI
@@ -533,7 +572,9 @@ typedef struct RogueRun {
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
     u16 shards; // earned this run, banked when it ends
     u32 relics; // one bit for each of the first 32 RogueRelic the run has; ask RogueHasRelic
-    u32 relics2; // and for the rest
+    u32 relics2; // and for the next 32
+    u32 relics3; // and so on
+    u32 relics4;
     u8 airDashUsed; // the air dash was done since Sora last left the ground
     u8 loops; // times the run went past its last floor and on, each an oblivion level higher
     u8 freezing; // set while a hit that freezes whatever it lands on is tested
@@ -612,6 +653,7 @@ typedef struct RogueDebug {
     u8 lastMod; // what the last card played alone was enchanted with
     u16 countCard; // a card id the tests poke...
     u16 seenCount; // ...and how many of it Sora has
+    u16 gadgets; // times a gadget relic went off
     u16 styleHits; // times a style set its element off
     u16 bossSwings; // swings of the bosses that fight with the mod's AI
     u16 keybladeEffects; // swings of the mod's keyblades that landed
@@ -714,6 +756,7 @@ u8 RogueHasRelic(u8 relic);
 void RogueGiveRelic(u8 relic);
 u8 RogueBlocksBreak(s32 value);
 u8 RogueTieWins(void);
+void RogueOnCardBreak(void);
 u8 RoguePlayerCardValue(u8 value);
 u8 RogueKeepCard(void);
 u8 RogueCardElement(u16 id);

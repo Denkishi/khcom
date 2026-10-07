@@ -1,0 +1,59 @@
+# Gadget relics, numbered from 54 in the order of tools/rogue_gadgets.py.
+# First the ones that work on their own: two chakrams and three needles
+# circling Sora (54, 55), the patient shard (59) and the storm (60). Then, in
+# a second battle, the ones Sora sets off: the trail of fire of the dodge
+# (67), the shockwave of landing (73) and the flame of jumping (74).
+# Expect: the pictures show the things circling Sora, the shard over his head
+# and then gone, flames behind a dodge; gadgets_own 4 or more, gadgets_moves
+# 4 or more, move_hits above 0 and the frame counter running.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug relic 54
+wait 3
+debug relic 55
+wait 3
+debug relic 59
+wait 3
+debug relic 60
+wait 3
+debug battle 70
+wait 300
+shot /tmp/gadget_orbit_1.ppm
+wait 20
+shot /tmp/gadget_orbit_2.ppm
+wait 320
+shot /tmp/gadget_shard_1.ppm
+wait 100
+shot /tmp/gadget_shard_2.ppm
+wait 200
+peek16 @gRogueDebug.gadgets gadgets_own
+peek16 @gRogueDebug.moveHits move_hits
+debug win
+wait 300
+press A
+wait 200
+debug relic 67
+wait 3
+debug relic 73
+wait 3
+debug relic 74
+wait 3
+debug battle 157
+wait 460
+hold RIGHT 2
+wait 3
+hold RIGHT 2
+wait 16
+shot /tmp/gadget_trail_1.ppm
+wait 14
+shot /tmp/gadget_trail_2.ppm
+wait 60
+hold B 4
+wait 8
+shot /tmp/gadget_jump.ppm
+wait 60
+shot /tmp/gadget_land.ppm
+peek16 @gRogueDebug.gadgets gadgets_moves
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

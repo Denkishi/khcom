@@ -131,7 +131,7 @@ static const u8 sTextStyleIce[] = "Ogni 5 colpi di fila\x1Fgelo che blocca";
 static const u8 sNameStyleThunder[] = "Stile tonante";
 static const u8 sTextStyleThunder[] = "Ogni 4 colpi di fila\x1Fun fulmine sul nemico";
 
-static const u8* const sNames[ROGUE_RELICS] = {
+static const u8* const sNames[ROGUE_RELIC_FIRST_GADGET] = {
     sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho, sNamePillar, sNameChakram, sNameNeedles, sNamePetals, sNameShards,
     sNameFireball, sNameFireBurst, sNameRock, sNameBomb, sNameMulti, sNameFan, sNameHoming, sNameMoveEcho, sNameGiant, sNamePrism,
     sNameBerserk, sNameThorns, sNameComboHeal, sNameAirMaster, sNameTagTeam, sNameTreasurer,
@@ -139,7 +139,7 @@ static const u8* const sNames[ROGUE_RELICS] = {
     sNameStyleFire, sNameStyleIce, sNameStyleThunder,
 };
 
-static const u8* const sTexts[ROGUE_RELICS] = {
+static const u8* const sTexts[ROGUE_RELIC_FIRST_GADGET] = {
     sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho, sTextPillar, sTextChakram, sTextNeedles, sTextPetals, sTextShards,
     sTextFireball, sTextFireBurst, sTextRock, sTextBomb, sTextMulti, sTextFan, sTextHoming, sTextMoveEcho, sTextGiant, sTextPrism,
     sTextBerserk, sTextThorns, sTextComboHeal, sTextAirMaster, sTextTagTeam, sTextTreasurer,
@@ -148,19 +148,37 @@ static const u8* const sTexts[ROGUE_RELICS] = {
 };
 
 const u8* RogueRelicName(u8 relic) {
+    if (relic >= ROGUE_RELIC_FIRST_GADGET) {
+        return RogueGadgetName(relic - ROGUE_RELIC_FIRST_GADGET);
+    }
+
     return sNames[relic];
 }
 
 const u8* RogueRelicText(u8 relic) {
+    if (relic >= ROGUE_RELIC_FIRST_GADGET) {
+        return RogueGadgetText(relic - ROGUE_RELIC_FIRST_GADGET);
+    }
+
     return sTexts[relic];
 }
 
-u8 RogueHasRelic(u8 relic) {
-    if (relic >= 32) {
-        return (gRogue.relics2 >> (relic - 32)) & 1;
+// The word of the run's relic bits a relic is in.
+static u32* RogueRelicWord(u8 relic) {
+    switch (relic >> 5) {
+    case 0:
+        return &gRogue.relics;
+    case 1:
+        return &gRogue.relics2;
+    case 2:
+        return &gRogue.relics3;
     }
 
-    return (gRogue.relics >> relic) & 1;
+    return &gRogue.relics4;
+}
+
+u8 RogueHasRelic(u8 relic) {
+    return (*RogueRelicWord(relic) >> (relic & 31)) & 1;
 }
 
 void RogueGiveRelic(u8 relic) {
@@ -170,11 +188,7 @@ void RogueGiveRelic(u8 relic) {
         return;
     }
 
-    if (relic >= 32) {
-        gRogue.relics2 |= 1 << (relic - 32);
-    } else {
-        gRogue.relics |= 1 << relic;
-    }
+    *RogueRelicWord(relic) |= 1 << (relic & 31);
 
     // The pact: every other card of the deck is given up on the spot.
     if (relic == ROGUE_RELIC_HALF_DECK) {
@@ -193,6 +207,11 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     if (relic == ROGUE_RELIC_ICE_PILLAR) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN;
+    }
+
+    // The gadgets: twenty from the start, ten more with each chapter.
+    if (relic >= ROGUE_RELIC_FIRST_GADGET) {
+        return relic - ROGUE_RELIC_FIRST_GADGET < 10 + gRogueMeta.chapters * 10;
     }
 
     // The later relics: the card ones and the cursed from the second chapter,
@@ -477,7 +496,7 @@ static void RogueRelicsShowPage(void) {
                 if (skip != 0) {
                     skip--;
                 } else {
-                    RogueRelicsLine(sNames[i]);
+                    RogueRelicsLine(RogueRelicName(i));
                 }
             }
         }

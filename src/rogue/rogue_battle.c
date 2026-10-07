@@ -137,6 +137,10 @@ void RogueOnDamage(BtlObj* p) {
             gRogue.thorns = 1;
         }
 
+        if (p->unk_020 > 0) {
+            RogueGadgetFire(GADGET_ON_HURT, gBtlWork->actor3);
+        }
+
         gRogue.combo = 0;
         gRogue.comboTimer = 0;
         return;
@@ -197,6 +201,12 @@ void RogueOnDamage(BtlObj* p) {
     // A style counts the plain hits of the string; what it sets off is not one.
     if (!gRogue.echoing && !gRogue.projectile) {
         RogueStyleOnHit(p);
+        RogueGadgetFire(GADGET_ON_HIT_N, p);
+    }
+
+    // The hit that fells it.
+    if (p->unk_02C > 0 && p->unk_02C - p->unk_020 <= 0) {
+        RogueGadgetFire(GADGET_ON_KILL, p);
     }
 
     gRogue.comboTimer = ROGUE_COMBO_TIME;
@@ -501,6 +511,8 @@ void RogueThrowKnives(BtlObj* sora) {
 void RogueOnFinisher(BtlObj* sora) {
     u8 move;
 
+    RogueGadgetFire(GADGET_ON_FINISHER, gBtlWork->actor2);
+
     if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR)) {
         RogueRaisePillar(sora);
     }
@@ -566,7 +578,9 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.moveEchoTimer = 0;
     gRogue.thorns = 0;
     gRogueDebug.styleHits = 0;
+    gRogueDebug.gadgets = 0;
     RogueStyleReset();
+    RogueGadgetReset();
     RogueBossAiReset();
     gRogueDebug.bossSwings = 0;
     gRogue.airDashUsed = 0;

@@ -1,0 +1,63 @@
+# The moves added after the first four, the three new spells, and the
+# modifiers that change every move.
+# Expect: a picture of each move; pulled well above 0 after the magnet; with
+# the multiplier, fan, hound, double throw and giant on, the needles come as
+# five spread out and twice (moves_mods 10), and move_hits is above 0.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 445
+debug move 4
+wait 12
+shot /tmp/move_fireball.ppm
+wait 50
+debug move 5
+wait 12
+shot /tmp/move_fireburst.ppm
+wait 50
+debug move 6
+wait 12
+shot /tmp/move_rock.ppm
+wait 50
+debug move 7
+wait 12
+shot /tmp/move_bomb.ppm
+wait 50
+debug move 8
+wait 12
+shot /tmp/move_water.ppm
+wait 50
+debug move 9
+wait 12
+shot /tmp/move_wind.ppm
+wait 50
+debug move 10
+wait 12
+shot /tmp/move_magnet.ppm
+wait 50
+peek16 @gRogueDebug.pulled pulled
+peek16 @gRogueDebug.moveHits move_hits
+debug relic 20
+wait 2
+debug relic 21
+wait 2
+debug relic 22
+wait 2
+debug relic 23
+wait 2
+debug relic 24
+wait 2
+poke16 @gRogueDebug.moves 0
+debug move 1
+wait 10
+shot /tmp/move_mods_1.ppm
+wait 20
+shot /tmp/move_mods_2.ppm
+wait 40
+peek16 @gRogueDebug.moves moves_mods
+debug move 6
+wait 16
+shot /tmp/move_mods_rock.ppm
+wait 60
+peek16 @gRogueDebug.moveHits move_hits_end
+peek32 @gFrameCounter frames

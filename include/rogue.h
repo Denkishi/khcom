@@ -99,6 +99,9 @@ enum RogueBoon {
 #define ROGUE_BOSS_MOVE_VEXEN 2
 #define ROGUE_BOSS_MOVE_AXEL 4
 #define ROGUE_BOSS_MOVE_MARLUXIA 8
+#define ROGUE_BOSS_MOVE_HADES 16
+#define ROGUE_BOSS_MOVE_LEXAEUS 32
+#define ROGUE_BOSS_MOVE_HOOK 64
 #define ROGUE_BASE_RELICS ROGUE_RELIC_KNIVES
 #define ROGUE_META_ALL_CLEARED 2 // a run through every chapter was completed
 
@@ -181,8 +184,27 @@ enum RogueRelic {
     ROGUE_RELIC_NEEDLES,
     ROGUE_RELIC_PETALS,
     ROGUE_RELIC_SHARDS,
+    ROGUE_RELIC_FIREBALL,
+    ROGUE_RELIC_FIRE_BURST,
+    ROGUE_RELIC_ROCK,
+    ROGUE_RELIC_BOMB,
+    // Modifiers: each changes every move the run has, and they add up.
+    ROGUE_RELIC_MOD_MULTI,
+    ROGUE_RELIC_MOD_FAN,
+    ROGUE_RELIC_MOD_HOMING,
+    ROGUE_RELIC_MOD_ECHO,
+    ROGUE_RELIC_MOD_GIANT,
+    ROGUE_RELIC_MOD_PRISM,
+    ROGUE_RELIC_BERSERK,
+    ROGUE_RELIC_THORNS,
+    ROGUE_RELIC_COMBO_HEAL,
+    ROGUE_RELIC_AIR_MASTER,
+    ROGUE_RELIC_TAG_TEAM,
+    ROGUE_RELIC_TREASURER,
     ROGUE_RELICS
 };
+#define ROGUE_FIRST_MOD ROGUE_RELIC_MOD_MULTI
+#define ROGUE_FIRST_SYNERGY ROGUE_RELIC_BERSERK
 
 // Builds, see rogue_build.c. The first three are the elements.
 enum RogueBuild {
@@ -244,13 +266,24 @@ enum RogueMove {
     ROGUE_MOVE_NEEDLES, // Vexen
     ROGUE_MOVE_PETALS, // Marluxia
     ROGUE_MOVE_SHARDS, // Vexen
-    ROGUE_MOVES
+    ROGUE_MOVE_FIREBALL, // Hades
+    ROGUE_MOVE_FIRE_BURST, // Hades
+    ROGUE_MOVE_ROCK, // Lexaeus
+    ROGUE_MOVE_BOMB, // Hook
+    ROGUE_MOVES,
+    // The new spells, which are moves no relic gives.
+    ROGUE_MOVE_WATER = ROGUE_MOVES,
+    ROGUE_MOVE_WIND,
+    ROGUE_MOVE_MAGNET,
+    ROGUE_MOVE_DEFS
 };
 
 // How far a thrown move flies each frame.
 #define ROGUE_DAMAGE_NUMBERS 6 // shown at once
 #define ROGUE_DAMAGE_NUMBER_TIME 36 // frames each stays
 #define ROGUE_MOVE_SPEED 0xA00
+#define ROGUE_MOVE_ECHO_DELAY 18 // frames before a move is done again
+#define ROGUE_MAGNET_FRAMES 24 // frames enemies are pulled for
 #define ROGUE_MOVE_POSE 22 // frames Sora holds his casting pose for a move
 
 // A character drawn in place of a boss whose fight they borrow.
@@ -346,7 +379,7 @@ typedef struct RogueRun {
     u8 chapters; // chapters this run goes through
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
     u16 shards; // earned this run, banked when it ends
-    u16 relics; // one bit for each RogueRelic the run has
+    u32 relics; // one bit for each RogueRelic the run has
     u8 secondWindUsed; // this battle
     u16 combo; // hits landed without being hit
     u8 comboTimer; // frames until the hit count lapses
@@ -364,6 +397,9 @@ typedef struct RogueRun {
     u8 echoing; // set while an added hit lands, so that it adds none itself
     u8 finisher; // set while a combo finisher tests its hitbox
     u32 artsUsed; // one bit for each card kind whose art was used this reload
+    u8 moveEcho; // the move to do again, plus one, when moveEchoTimer runs out
+    u8 moveEchoTimer;
+    u8 thorns; // Sora was hurt: the thorns relic answers on the next frame
     u8 pose; // frames Sora still holds the pose of a move
     u8 tagTimer; // frames a tag character still stands in for Sora
     u8 arts[ROGUE_ART_KINDS]; // sleight bound to each card kind, 0 for none
@@ -404,6 +440,7 @@ typedef struct RogueDebug {
     u16 echoes; // added magic hits that connected this battle
     u16 pillars; // ice blocks the Vexen relic raised this battle
     u16 tagHits; // tag attacks that connected this battle
+    u16 pulled; // enemy steps towards a magnet
     u16 enemyTags; // enemies and bosses called in by their cards
     u8 slow; // the original routines run in place of the mod's faster ones, to compare
     u16 loadMax; // the longest frame since it was cleared, in scanlines of the 228 there are
@@ -471,6 +508,7 @@ void* RogueHeroPalette(void* sora);
 u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);
 void RogueProfileFrame(void);
+void RogueMovesTick(void);
 void RogueBuildOam(void);
 s32 RogueSqrt8(s32 a);
 extern const u16 gRogueMickeyPalette[16];

@@ -31,6 +31,22 @@ static const u8 sNameChakram[] = "Chakram di Axel";
 static const u8 sNameNeedles[] = "Aghi di Vexen";
 static const u8 sNamePetals[] = "Petali di Marluxia";
 static const u8 sNameShards[] = "Schegge di Vexen";
+static const u8 sNameFireball[] = "Globo di Ade";
+static const u8 sNameFireBurst[] = "Vampa di Ade";
+static const u8 sNameRock[] = "Roccia di Lexaeus";
+static const u8 sNameBomb[] = "Bomba di Uncino";
+static const u8 sNameMulti[] = "Moltiplicatore";
+static const u8 sNameFan[] = "Ventaglio";
+static const u8 sNameHoming[] = "Segugio";
+static const u8 sNameMoveEcho[] = "Doppio lancio";
+static const u8 sNameGiant[] = "Gigante";
+static const u8 sNamePrism[] = "Prisma";
+static const u8 sNameBerserk[] = "Furia";
+static const u8 sNameThorns[] = "Spine";
+static const u8 sNameComboHeal[] = "Ritmo vitale";
+static const u8 sNameAirMaster[] = "Asso dei cieli";
+static const u8 sNameTagTeam[] = "Gioco di squadra";
+static const u8 sNameTreasurer[] = "Tesoriere";
 
 static const u8 sTextVampire[] = "Ogni colpo a segno\x1Fti cura di 1 PV";
 static const u8 sTextCritical[] = "Un colpo su sette\x1F" "fa danno doppio";
@@ -48,13 +64,33 @@ static const u8 sTextChakram[] = "Il finisher lancia\x1Fun chakram di fuoco";
 static const u8 sTextNeedles[] = "Il finisher lancia\x1Ftre aghi di ghiaccio";
 static const u8 sTextPetals[] = "Il finisher scatena\x1Fpetali tutt'intorno";
 static const u8 sTextShards[] = "Il finisher fa\x1F" "esplodere ghiaccio";
+static const u8 sTextFireball[] = "Il finisher lancia\x1Fun globo di fuoco";
+static const u8 sTextFireBurst[] = "Il finisher scatena\x1Funa vampa davanti";
+static const u8 sTextRock[] = "Il finisher alza\x1Funa roccia davanti";
+static const u8 sTextBomb[] = "Il finisher lancia\x1Funa bomba";
+static const u8 sTextMulti[] = "Ogni mossa lanciata\x1F" "ha due colpi in pi\xF9";
+static const u8 sTextFan[] = "I colpi lanciati\x1Fsi aprono a ventaglio";
+static const u8 sTextHoming[] = "I colpi lanciati\x1Finseguono il bersaglio";
+static const u8 sTextMoveEcho[] = "Ogni mossa si ripete\x1F" "dopo un istante";
+static const u8 sTextGiant[] = "Le mosse colpiscono\x1Fpi\xF9 largo e pi\xF9 forte";
+static const u8 sTextPrism[] = "Le mosse prendono\x1Fl'elemento del mazzo";
+static const u8 sTextBerserk[] = "Sotto un quarto dei PV\x1F" "fai il 50% in pi\xF9";
+static const u8 sTextThorns[] = "Quando vieni colpito\x1Fpetali tutt'intorno";
+static const u8 sTextComboHeal[] = "Ogni 10 colpi di fila\x1Fti curi di 3 PV";
+static const u8 sTextAirMaster[] = "In aria fai il\x1F" "30% di danno in pi\xF9";
+static const u8 sTextTagTeam[] = "Evocazioni e nemici\x1F" "chiamati: 50% in pi\xF9";
+static const u8 sTextTreasurer[] = "Ogni stanza d\xE0 il\x1F" "50% di frammenti in pi\xF9";
 
 static const u8* const sNames[ROGUE_RELICS] = {
     sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho, sNamePillar, sNameChakram, sNameNeedles, sNamePetals, sNameShards,
+    sNameFireball, sNameFireBurst, sNameRock, sNameBomb, sNameMulti, sNameFan, sNameHoming, sNameMoveEcho, sNameGiant, sNamePrism,
+    sNameBerserk, sNameThorns, sNameComboHeal, sNameAirMaster, sNameTagTeam, sNameTreasurer,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
     sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho, sTextPillar, sTextChakram, sTextNeedles, sTextPetals, sTextShards,
+    sTextFireball, sTextFireBurst, sTextRock, sTextBomb, sTextMulti, sTextFan, sTextHoming, sTextMoveEcho, sTextGiant, sTextPrism,
+    sTextBerserk, sTextThorns, sTextComboHeal, sTextAirMaster, sTextTagTeam, sTextTreasurer,
 };
 
 const u8* RogueRelicName(u8 relic) {
@@ -78,6 +114,16 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     if (relic == ROGUE_RELIC_ICE_PILLAR) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN;
+    }
+
+    // The synergy relics come two for each chapter unlocked.
+    if (relic >= ROGUE_FIRST_SYNERGY) {
+        return relic - ROGUE_FIRST_SYNERGY < gRogueMeta.chapters * 2;
+    }
+
+    // A modifier is of use to a run that has a move, a blade or the echo.
+    if (relic >= ROGUE_FIRST_MOD) {
+        return gRogueMeta.bossMoves != 0 && (gRogue.relics >> ROGUE_RELIC_KNIVES) != 0;
     }
 
     if (relic >= ROGUE_RELIC_CHAKRAM) {
@@ -106,7 +152,7 @@ u8 RogueRollRelic(void) {
     u8 relic;
     s32 tries;
 
-    for (tries = 0; tries < 16; tries++) {
+    for (tries = 0; tries < 64; tries++) {
         relic = RogueRandBelow(ROGUE_RELICS);
 
         if (RogueRelicUnlocked(relic) && !RogueHasRelic(relic)) {
@@ -121,6 +167,7 @@ u8 RogueRollRelic(void) {
 u8 RogueMoveUnlocked(u8 move) {
     static const u8 bosses[ROGUE_MOVES] = {
         ROGUE_BOSS_MOVE_AXEL, ROGUE_BOSS_MOVE_VEXEN, ROGUE_BOSS_MOVE_MARLUXIA, ROGUE_BOSS_MOVE_VEXEN,
+        ROGUE_BOSS_MOVE_HADES, ROGUE_BOSS_MOVE_HADES, ROGUE_BOSS_MOVE_LEXAEUS, ROGUE_BOSS_MOVE_HOOK,
     };
 
     return (gRogueMeta.bossMoves & bosses[move]) != 0;
@@ -144,6 +191,18 @@ void RogueOnBossBeaten(u16 battle) {
 
     if (battle == 0xA4 || battle == 0xAF || battle == 0xB0) {
         gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_VEXEN;
+    }
+
+    if (battle == 0xA0) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_HADES;
+    }
+
+    if (battle == 0xA7) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_LEXAEUS;
+    }
+
+    if (battle == 0x9E) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_HOOK;
     }
 
     if (battle == 0xA2 || battle == 0xAD) {

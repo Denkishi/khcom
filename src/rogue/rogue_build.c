@@ -440,6 +440,12 @@ s32 RogueCardAction(const CardDef* def) {
 
     gRogue.playedKind = def->unk_2A != 3 ? kind : ROGUE_NO_KIND;
 
+    // The new spells: each is a move of its own, cast with a swing.
+    if (ROGUE_IS_NEW_SPELL(kind)) {
+        RogueDoMove(ROGUE_MOVE_WATER + kind - ROGUE_CARD_WATER, gBtlWork->actor);
+        return ROGUE_ACTION_SWING;
+    }
+
     // A tag card: the character does the move and the card counts as a swing,
     // so that it chains with the cards around it.
     if (def->unk_2A != 3 && RogueTagIn(kind)) {

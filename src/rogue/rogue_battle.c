@@ -120,6 +120,10 @@ void RogueOnDamage(BtlObj* p) {
             gRogue.secondWindUsed = 1;
         }
 
+        if (RogueHasRelic(ROGUE_RELIC_THORNS) && p->unk_020 > 0) {
+            gRogue.thorns = 1;
+        }
+
         gRogue.combo = 0;
         gRogue.comboTimer = 0;
         return;
@@ -136,6 +140,23 @@ void RogueOnDamage(BtlObj* p) {
 
     if (RogueHasRelic(ROGUE_RELIC_GLASS_CANNON)) {
         p->unk_020 += p->unk_020 / 2;
+    }
+
+    if (RogueHasRelic(ROGUE_RELIC_BERSERK) && sora->unk_02C * 4 <= sora->unk_02E) {
+        p->unk_020 += p->unk_020 / 2;
+    }
+
+    // In the air: above the ground he stands on.
+    if (RogueHasRelic(ROGUE_RELIC_AIR_MASTER) && sora->z < sora->unk_010) {
+        p->unk_020 += p->unk_020 * 3 / 10;
+    }
+
+    if (RogueHasRelic(ROGUE_RELIC_COMBO_HEAL) && gRogue.combo % 10 == 9 && sora->unk_02C > 0) {
+        sora->unk_02C += 3;
+
+        if (sora->unk_02C > sora->unk_02E) {
+            sora->unk_02C = sora->unk_02E;
+        }
     }
 
     if (RogueHasRelic(ROGUE_RELIC_VAMPIRE) && sora->unk_02C > 0 && sora->unk_02C < sora->unk_02E) {
@@ -189,6 +210,8 @@ u16 RogueBufferJump(u16 pressed) {
     if (gRogue.pose != 0) {
         gRogue.pose--;
     }
+
+    RogueMovesTick();
 
     if (pressed & B_BUTTON) {
         gRogue.jumpBuffer = ROGUE_JUMP_BUFFER;
@@ -496,6 +519,10 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogueDebug.moveHits = 0;
     gRogue.tagTimer = 0;
     gRogue.pose = 0;
+    gRogue.moveEcho = 0;
+    gRogue.moveEchoTimer = 0;
+    gRogue.thorns = 0;
+    gRogueDebug.pulled = 0;
     gRogueDebug.echoes = 0;
     sNextNumber = 0;
 

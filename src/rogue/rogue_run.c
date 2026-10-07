@@ -267,6 +267,7 @@ void RogueStartRun(void) {
     gRogue.room = 0;
     gRogue.kind = ROGUE_ROOM_START;
     gRogue.comboPlus = 0;
+    gRogue.relics = 0;
     gRogue.airJumps = 0;
     gRogue.airJumpsUsed = 0;
     gRogue.world = sFloors[0].world;

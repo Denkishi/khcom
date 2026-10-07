@@ -1,6 +1,7 @@
 #include "rogue.h"
 #include "agb_sram.h"
 #include "battle.h"
+#include "map_api.h"
 #include "save.h"
 #include "system_state.h"
 
@@ -10,6 +11,19 @@
 
 #define META_SRAM ((u8*)0x0E007000)
 #define META_MAGIC 0x314D4752 /* "RGM1" */
+#define SUSPEND_SRAM (META_SRAM + 0x40)
+#define SUSPEND_MAGIC 0x31534752 /* "RGS1" */
+
+// The run in progress, written by the pause menu's quick save next to the
+// game's own suspend save and consumed when the run is resumed.
+typedef struct RogueSuspend {
+    u32 magic;
+    u16 checksum;
+    u16 unused;
+    RogueRun run;
+} RogueSuspend;
+
+static RogueSuspend sSuspend;
 
 RogueMeta gRogueMeta;
 
@@ -140,3 +154,40 @@ void RogueMetaEndRun(u8 completed) {
 
     RogueMetaSave();
 }
+
+void RogueSuspendSave(void) {
+    sSuspend.magic = SUSPEND_MAGIC;
+    sSuspend.unused = 0;
+    sSuspend.run = gRogue;
+    sSuspend.checksum = SaveChecksum((u16*)&sSuspend.run, sizeof(sSuspend.run));
+    WriteSramFast((u8*)&sSuspend, SUSPEND_SRAM, sizeof(sSuspend));
+}
+
+// Takes the saved run back, if there is one. It can be resumed only once.
+u8 RogueSuspendLoad(void) {
+    ReadSramFast(SUSPEND_SRAM, (u8*)&sSuspend, sizeof(sSuspend));
+
+    if (sSuspend.magic != SUSPEND_MAGIC ||
+        sSuspend.checksum != SaveChecksum((u16*)&sSuspend.run, sizeof(sSuspend.run))) {
+        return 0;
+    }
+
+    gRogue = sSuspend.run;
+    sSuspend.magic = 0;
+    WriteSramFast((u8*)&sSuspend, SUSPEND_SRAM, 8);
+    return 1;
+}
+
+// Picks up a run left with the pause menu's quick save. Returns 0 if there
+// is none.
+u8 RogueResumeRun(void) {
+    if (SaveRepairSystem() != 2 || !RogueSuspendLoad()) {
+        return 0;
+    }
+
+    SaveLoadSystem();
+    SaveClearSystem();
+    func_080E04EC();
+    return 1;
+}
+

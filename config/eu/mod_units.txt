@@ -7,6 +7,7 @@ new rogue_event.c
 new rogue_deck.c
 new rogue_balance.c
 new rogue_battle.c
+new rogue_relic.c
 new rogue_reward.c
 new rogue_over.c
 new rogue_meta.c

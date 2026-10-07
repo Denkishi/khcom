@@ -5345,7 +5345,8 @@ s32 func_080EDA90(MapMenuWork* w) {
         ModeRequest(&gModeWorldinspect, 0);
         break;
     case 5:
-        ModeRequest(&gModeJiminy, 0);
+        // Jiminy's journal has nothing to tell here: its place shows the run.
+        ModeRequest(&gModeRogueRelics, 0);
         break;
     case 6:
         ModeRequest(&gModeMenuMsg, 1);
@@ -5412,6 +5413,7 @@ s32 func_080EDC94(MapMenuWork* w) {
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & A_BUTTON) {
         SaveWriteSystem();
+        RogueSuspendSave();
         w->update = func_080EDA90;
         m4aSongNumStart(SONG_SYS_KETTEI);
     }

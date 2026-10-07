@@ -107,6 +107,16 @@ enum RogueRoomKind {
 #define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + 13)
 #define ROGUE_MSG_COUNT (13 + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
 
+enum RogueRelic {
+    ROGUE_RELIC_VAMPIRE,
+    ROGUE_RELIC_CRITICAL,
+    ROGUE_RELIC_SECOND_WIND,
+    ROGUE_RELIC_GLASS_CANNON,
+    ROGUE_RELIC_MOMENTUM,
+    ROGUE_RELIC_RELOAD,
+    ROGUE_RELICS
+};
+
 // Event rooms.
 enum RogueEvent {
     ROGUE_EVENT_BELLE,
@@ -169,6 +179,8 @@ typedef struct RogueRun {
     u8 chapters; // chapters this run goes through
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
     u16 shards; // earned this run, banked when it ends
+    u16 relics; // one bit for each RogueRelic the run has
+    u8 secondWindUsed; // this battle
     u16 combo; // hits landed without being hit
     u8 comboTimer; // frames until the hit count lapses
     u8 jumpBuffer;
@@ -180,6 +192,7 @@ typedef struct RogueRun {
 extern RogueRun gRogue;
 extern RogueMeta gRogueMeta;
 extern Mode gModeRogueShop;
+extern Mode gModeRogueRelics;
 extern Mode* gRogueLeaveMode;
 extern s32 gRogueLeaveArg;
 extern struct TaskDesc gTaskDescRogueEvent;
@@ -204,6 +217,14 @@ u8 RogueBuyUpgrade(u8 upgrade);
 u8 RogueUpgradeMax(u8 upgrade);
 u16 RogueUpgradeCost(u8 upgrade);
 void RogueLeaveRoomFor(Mode* mode, s32 arg);
+u8 RogueHasRelic(u8 relic);
+u8 RogueRollRelic(void);
+const u8* RogueRelicName(u8 relic);
+const u8* RogueRelicText(u8 relic);
+u8 RogueReloadRate(u8 slowed);
+void RogueSuspendSave(void);
+u8 RogueSuspendLoad(void);
+u8 RogueResumeRun(void);
 const RogueEventOffer* RogueEventOffers(void);
 u8 RogueDoorsOpen(void);
 u8 RogueEnemyLevel(void);

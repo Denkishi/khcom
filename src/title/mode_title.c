@@ -39,7 +39,9 @@ void func_080D5998(void) {
 }
 
 void func_080D59B4(void) {
-    RogueStartRun();
+    if (!RogueResumeRun()) {
+        RogueStartRun();
+    }
 }
 
 void func_080D5A4C(u16 a) {

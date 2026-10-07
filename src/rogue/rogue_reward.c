@@ -25,10 +25,10 @@
 // description show on the right.
 
 #define REWARD_CHOICES 3
-#define REWARD_TEXT_MAX 60
+#define REWARD_TEXT_MAX 72
 #define TITLE_SLOTS 32
 #define LABEL_SLOTS 12
-#define DETAIL_SLOTS 64
+#define DETAIL_SLOTS 80
 #define PANEL_COLUMNS 13
 
 enum {
@@ -40,6 +40,7 @@ enum {
     REWARD_COMBO,
     REWARD_AIR_JUMP,
     REWARD_ATTACK,
+    REWARD_RELIC,
     REWARD_FUSION,
     // Offered by events only.
     REWARD_SHARDS,
@@ -89,13 +90,14 @@ static const u8 sLabelCp[] = "PC";
 static const u8 sLabelCombo[] = "Combo+";
 static const u8 sLabelAirJump[] = "Reliquia";
 static const u8 sLabelAttack[] = "Forza";
+static const u8 sLabelRelic[] = "Reliquia";
 static const u8 sLabelFusion[] = "Fusione";
 static const u8 sLabelShards[] = "Frammenti";
 static const u8 sLabelReroll[] = "Rilancio";
 static const u8 sLabelPact[] = "Patto";
 static const u8 sLabelGamble[] = "Azzardo";
 static const u8* const sLabels[REWARD_KINDS] = {
-    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
+    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
 };
 
 static const u8 sCost[] = "\x1FPC ";
@@ -190,6 +192,9 @@ static u8 RogueRewardAvailable(RogueReward* reward) {
         return gRogueMeta.chapters >= 2 && gRogue.airJumps < ROGUE_AIR_JUMPS_MAX;
     case REWARD_ATTACK:
         return gGameState.progression.ap < ROGUE_AP_MAX;
+    case REWARD_RELIC:
+        reward->card = RogueRollRelic();
+        return reward->card != ROGUE_RELICS;
     }
 
     return 1;
@@ -238,7 +243,7 @@ static void RogueEventRewards(void) {
 }
 
 static void RogueRollRewards(void) {
-    static const u8 weights[REWARD_FUSION] = { 28, 18, 13, 11, 10, 6, 4, 10 };
+    static const u8 weights[REWARD_FUSION] = { 26, 17, 12, 10, 10, 6, 4, 9, 6 };
     RogueReward* reward;
     u32 roll;
     s32 count = 0;
@@ -270,7 +275,8 @@ static void RogueRollRewards(void) {
         }
 
         // Relics and combo hits are rarer in ordinary rooms than after a boss.
-        if (!sWork->afterBoss && (kind == REWARD_COMBO || kind == REWARD_AIR_JUMP) && RogueRandBelow(2) == 0) {
+        if (!sWork->afterBoss && (kind == REWARD_COMBO || kind == REWARD_AIR_JUMP || kind == REWARD_RELIC) &&
+            RogueRandBelow(2) == 0) {
             continue;
         }
 
@@ -356,6 +362,11 @@ static void RogueRewardDetail(RogueReward* reward) {
     case REWARD_ATTACK:
         RogueAppend(out, sAttack);
         break;
+    case REWARD_RELIC:
+        out = RogueAppend(out, RogueRelicName(reward->card));
+        *out++ = 0x1F;
+        RogueAppend(out, RogueRelicText(reward->card));
+        break;
     case REWARD_SHARDS:
         *out++ = '+';
         out = RogueAppendNumber(out, reward->card);
@@ -412,6 +423,9 @@ static void RogueGiveReward(RogueReward* reward) {
         break;
     case REWARD_ATTACK:
         gGameState.progression.ap++;
+        break;
+    case REWARD_RELIC:
+        gRogue.relics |= 1 << reward->card;
         break;
     case REWARD_SHARDS:
         gRogue.shards += reward->card;

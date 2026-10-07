@@ -3887,9 +3887,9 @@ void func_0807DE10(CardDisplayWork* p) {
 
                 if (gCardBattleState->unk_108[0] == 0) {
                     if (gBtlWork->unk_0F4 == 43) {
-                        gCardBattleState->unk_0F4 += ROGUE_RELOAD_RATE_SLOWED;
+                        gCardBattleState->unk_0F4 += RogueReloadRate(1);
                     } else {
-                        gCardBattleState->unk_0F4 += ROGUE_RELOAD_RATE;
+                        gCardBattleState->unk_0F4 += RogueReloadRate(0);
                     }
 
                     if ((s32)gCardBattleState->unk_0F4 > 0x100) {

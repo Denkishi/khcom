@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "rogue_ui.h"
 #include "registration_data.h"
 #include "anim.h"
 #include "battle_actor.h"
@@ -86,8 +87,14 @@ typedef struct RogueHubWork {
     TaskPool tasks;
     TextSlot line[LINE_SLOTS];
     TextSlot hint[LINE_SLOTS];
+    TextSlot level[14]; // the oblivion level's plate
+    TextSlot hero[14]; // the hero hint's plate
+    u8 levelText[14];
     u8 lineCount;
     u8 hintCount;
+    u8 levelCount;
+    u8 heroCount;
+    RogueUi ui;
     u8 text[72];
     void* textPalette;
     void* hintPalette;
@@ -115,14 +122,14 @@ enum {
 
 static RogueHubWork* sWork;
 
-static const u8 sHint[] = "START: inizia la run";
+static const u8 sHint[] = "START: parti";
 static const u8 sBoon[] = "Dono: ";
 static const u8 sBoonNone[] = "nessuno";
 extern const AnimDef gRogueMickeyHubDefs[2];
 
 static const u8 sStrong[] = " +";
-static const u8 sHero[] = "  SELECT: eroe";
-static const u8 sOblivion[] = "  Oblio ";
+static const u8 sHero[] = "SELECT: eroe";
+static const u8 sOblivion[] = "L/R: Oblio ";
 static const u8 sBoonBelle[] = "PV +30";
 static const u8 sBoonMoogle[] = "due rilanci";
 static const u8 sBoonLeon[] = "mazzo di lame";
@@ -152,24 +159,33 @@ static void RogueHubShowBoon(void) {
         }
     }
 
-    // The oblivion level, once there is one to pick with L and R.
+    *out = 0;
+    FreeTextSlots(sWork->line, LINE_SLOTS);
+    sWork->lineCount = LoadTextSlots((u16*)sWork->text, sWork->line);
+
+    // The oblivion level, once there is one to pick with L and R, and the
+    // hero, once there is another: a plate each.
+    FreeTextSlots(sWork->level, 14);
+    FreeTextSlots(sWork->hero, 14);
+    sWork->levelCount = 0;
+    sWork->heroCount = 0;
+
     if (gRogueMeta.oblivionMax != 0) {
+        out = sWork->levelText;
+
         for (text = sOblivion; *text != 0; text++) {
             *out++ = *text;
         }
 
         *out++ = '0' + gRogueMeta.oblivion;
+        *out = 0;
+        sWork->levelCount = LoadTextSlots((u16*)sWork->levelText, sWork->level);
     }
 
     if (RogueNextHero() != gRogueMeta.hero) {
-        for (text = sHero; *text != 0; text++) {
-            *out++ = *text;
-        }
+        sWork->heroCount = LoadTextSlots((u16*)sHero, sWork->hero);
     }
 
-    *out = 0;
-    FreeTextSlots(sWork->line, LINE_SLOTS);
-    sWork->lineCount = LoadTextSlots((u16*)sWork->text, sWork->line);
 }
 
 static void RogueHubSoraAnim(u8 action, u8 direction) {
@@ -209,6 +225,11 @@ static void RogueHub_Init(s32 arg) {
     sWork->hintPalette = _08066468(0);
     InitTextSlots(sWork->line, LINE_SLOTS);
     InitTextSlots(sWork->hint, LINE_SLOTS);
+    InitTextSlots(sWork->level, 14);
+    InitTextSlots(sWork->hero, 14);
+    sWork->levelCount = 0;
+    sWork->heroCount = 0;
+    RogueUiInit(&sWork->ui);
     sWork->hintCount = LoadTextSlots((u16*)sHint, sWork->hint);
     RogueHubShowBoon();
 
@@ -403,10 +424,18 @@ static void RogueHub_Update(void) {
                -0x1000 - (sWork->y >> 8) * 4);
 
     if (!sWork->talking) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->line, sWork->lineCount)) / 2, 132, sWork->line, sWork->textPalette, 50,
-                      sWork->lineCount);
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->hint, sWork->hintCount)) / 2, 146, sWork->hint, sWork->hintPalette, 50,
-                      sWork->hintCount);
+        // Four plates at the bottom: the boon and the oblivion level, and
+        // under them how to start and how to change hero.
+        DrawTextSlots(RogueUiPlate(&sWork->ui, 20, 124, 0), 126, sWork->line, sWork->textPalette, 50, sWork->lineCount);
+        DrawTextSlots(RogueUiPlate(&sWork->ui, 12, 142, 1), 144, sWork->hint, sWork->textPalette, 50, sWork->hintCount);
+
+        if (sWork->levelCount != 0) {
+            DrawTextSlots(RogueUiPlate(&sWork->ui, 124, 124, 0), 126, sWork->level, sWork->textPalette, 50, sWork->levelCount);
+        }
+
+        if (sWork->heroCount != 0) {
+            DrawTextSlots(RogueUiPlate(&sWork->ui, 124, 142, 0), 144, sWork->hero, sWork->textPalette, 50, sWork->heroCount);
+        }
     }
 
     TaskPoolDraw(&sWork->tasks);
@@ -418,6 +447,9 @@ static void RogueHub_Exit(void) {
     TaskPoolDestroy(&sWork->tasks);
     FreeTextSlots(sWork->line, LINE_SLOTS);
     FreeTextSlots(sWork->hint, LINE_SLOTS);
+    FreeTextSlots(sWork->level, 14);
+    FreeTextSlots(sWork->hero, 14);
+    RogueUiExit(&sWork->ui);
     ReleaseObjPalette(sWork->textPalette);
     ReleaseObjPalette(sWork->hintPalette);
     ReleaseObjTiles(sWork->soraTiles);

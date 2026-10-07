@@ -54,6 +54,9 @@ typedef struct RogueShopWork {
     void* lockedPalette; // one whose branch has not reached it
     void* fullPalette; // one with every level
     RogueUi ui;
+    void* cardTiles; // the picture of the starting card under the cursor, 0 on the tree
+    void* cardPalette;
+    void* cardGfx;
     u8 titleCount;
     u8 labelCounts[ROGUE_STARTERS];
     u8 detailCount;
@@ -173,6 +176,20 @@ static void RogueShopRefresh(void) {
         sWork->labelCounts[i] = 0;
     }
 
+    if (sWork->cardTiles != 0) {
+        ReleaseObjTiles(sWork->cardTiles);
+        ReleaseObjPalette(sWork->cardPalette);
+        sWork->cardTiles = 0;
+    }
+
+    if (sWork->page == PAGE_CARDS) {
+        const CardDef* card = &gCardDefs[CARD_ID(RogueStarterKind(sWork->cursor), ROGUE_STARTER_VALUE)];
+
+        sWork->cardTiles = LoadObjTiles(card->tiles, 0x200);
+        sWork->cardPalette = LoadObjPalette(card->palette, 32);
+        sWork->cardGfx = card->gfx;
+    }
+
     if (sWork->page == PAGE_CARDS) {
         for (i = 0; i < ROGUE_STARTERS; i++) {
             // The card's name, cut to what a label holds.
@@ -250,6 +267,7 @@ static void RogueShop_Init(s32 from) {
     sWork->page = PAGE_TREE;
     sWork->state = 0;
     sWork->frame = 0;
+    sWork->cardTiles = 0;
     sWork->fromHub = from == ROGUE_SHOP_FROM_HUB;
     SetBgMode0();
     SetupBg(3, 0, 0x1D, 0);
@@ -361,6 +379,11 @@ static void RogueShop_Update(void) {
         }
 
         RogueUiGlove(&sWork->ui, 16, 34 + sWork->cursor * 18 + 8);
+
+        if (sWork->cardTiles != 0) {
+            DrawSprite(172, 42, sWork->cardGfx, sWork->cardTiles, sWork->cardPalette, 0, 0, 50);
+        }
+
         DrawTextSlots(110, 74, sWork->detail, sWork->palette, 50, sWork->detailCount);
         return;
     }
@@ -399,6 +422,11 @@ static void RogueShop_Exit(void) {
 
     for (i = 0; i < TREE_NODES; i++) {
         ReleaseObjTiles(sWork->iconTiles[i]);
+    }
+
+    if (sWork->cardTiles != 0) {
+        ReleaseObjTiles(sWork->cardTiles);
+        ReleaseObjPalette(sWork->cardPalette);
     }
 
     RogueUiExit(&sWork->ui);

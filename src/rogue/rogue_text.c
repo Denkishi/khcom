@@ -22,7 +22,14 @@ ROGUE_TEXT(sAxel11, "Riparlami per spendere i\x1F" "Frammenti in potenziamenti.\
 ROGUE_TEXT(sAxel12, "Nel menu, Grillario mostra\x1Fla tua run e Salvarapido\x1Fla mette in pausa.");
 ROGUE_TEXT(sAxel13, "Ci\xF2 di cui hai tanto fa una\x1F\x1D" "build\x1E: elementi, lame, magie,\x1Fproiettili. E si sommano.");
 ROGUE_TEXT(sAxel14, "Nelle stanze evento trovi\x1F" "amici e nemici: doni, patti,\x1F" "duelli. Scegli bene.");
-ROGUE_TEXT(sAxel15, "Got it memorized?");
+ROGUE_TEXT(sAxel15, "Le \x1Dreliquie\x1E durano la run.\x1F" "Alcune cambiano ogni mossa:\x1F" "pi\xF9 colpi, ventaglio, eco...");
+ROGUE_TEXT(sAxel16, "Le carte \x1Dnemico\x1E chiamano il\x1Floro mostro o boss a colpire\x1F" "al posto tuo, come un amico.");
+ROGUE_TEXT(sAxel17, "Fuoco, gelo e tuono possono\x1Flasciare \x1Dustione\x1E, blocco\x1F" "e scarica sui nemici.");
+ROGUE_TEXT(sAxel18, "Una carta si pu\xF2 \x1Dincantare\x1E:\x1Fl'effetto resta su di lei\x1F" "per tutta la run.");
+ROGUE_TEXT(sAxel19, "Da me trovi l'\x1D" "albero\x1E delle\x1F" "abilit\xE0: tre rami, ogni nodo\x1F" "apre il successivo.");
+ROGUE_TEXT(sAxel20, "I boss lasciano \x1DSigilli\x1E:\x1Fspendili da me in carte con\x1F" "cui partire sempre.");
+ROGUE_TEXT(sAxel21, "Qui nell'hub, SELECT cambia\x1F" "\x1D" "eroe\x1E e L/R il livello\x1F" "di Oblio, se li hai.");
+ROGUE_TEXT(sAxel22, "Got it memorized?");
 
 // Two pages for each event, in the order of the ROGUE_EVENT_ ids.
 ROGUE_TEXT(sBelle0, "Sora! Hai l'aria di chi ne\x1Fha passate tante. Siediti,\x1Flascia che mi occupi di te.");
@@ -93,6 +100,13 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel13, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel14, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel15, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel16, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel17, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel18, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel19, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel20, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel21, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel22, 0, 0 },
     EVENT_PAGES(53, sBelle0, sBelle1),
     EVENT_PAGES(31, sLeon0, sLeon1),
     EVENT_PAGES(37, sYuffie0, sYuffie1),

@@ -404,6 +404,13 @@ s32 RogueCardAction(const CardDef* def) {
 
     gRogue.playedKind = def->unk_2A != 3 ? kind : ROGUE_NO_KIND;
 
+    // A tag card: the character does the move and the card counts as a swing,
+    // so that it chains with the cards around it.
+    if (def->unk_2A != 3 && RogueTagIn(kind)) {
+        gRogue.playedKind = CARD_KINGDOM_KEY;
+        return ROGUE_ACTION_SWING;
+    }
+
     // An art works once for each reload of the deck.
     if (kind < ROGUE_ART_KINDS && gRogue.arts[kind] != 0 && def->unk_2A != 3 && def->unk_20 >= ROGUE_ART_MIN_VALUE &&
         !(gRogue.artsUsed & (1 << kind))) {

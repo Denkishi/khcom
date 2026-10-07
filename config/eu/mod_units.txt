@@ -10,6 +10,7 @@ new rogue_battle.c
 new rogue_relic.c
 new rogue_build.c
 new rogue_debug.c
+new rogue_tag.c
 new rogue_reward.c
 new rogue_over.c
 new rogue_meta.c

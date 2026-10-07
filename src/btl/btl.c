@@ -6315,6 +6315,11 @@ void task_btl_sora_2(BtlSoraWork* work) {
 
     p = &work->actor;
 
+    // A tag character stands in for Sora.
+    if (gRogue.tagTimer != 0) {
+        return;
+    }
+
     if (work->unk_15A & 4) {
         return;
     }

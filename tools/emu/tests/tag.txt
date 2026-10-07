@@ -1,0 +1,23 @@
+# A tag card played from the deck: the first three cards are made Cloud 5
+# before the battle, then two are played in a row.
+# Expect: tag_hits 2 (each slash connects), and the screenshots show Cloud
+# where Sora stands, then Sora again.
+include start.txt
+poke8 @gRogueDebug.god 1
+poke16 @gCardCollection 0x1145
+poke16 @gCardCollection+2 0x1145
+poke16 @gCardCollection+4 0x1145
+debug battle 0
+wait 720
+press A
+wait 6
+shot /tmp/tag_1.ppm
+wait 34
+shot /tmp/tag_2.ppm
+press A
+wait 6
+shot /tmp/tag_3.ppm
+wait 60
+peek16 @gRogueDebug.tagHits tag_hits
+peek16 @gRogueDebug.hits hits
+peek8 @gRogue.tagTimer tag_timer

@@ -55,6 +55,9 @@ void RogueDebugBattle(void) {
     case ROGUE_DEBUG_RELIC:
         gRogue.relics |= 1 << gRogueDebug.arg;
         break;
+    case ROGUE_DEBUG_TAG:
+        RogueTagIn(gRogueDebug.arg);
+        break;
     case ROGUE_DEBUG_FINISHER:
         if (sora != 0) {
             RogueOnFinisher(sora);
@@ -440,6 +443,8 @@ static void RogueHud_Init(RogueHudWork* w) {
     sLastHit = 0;
     gRogueDebug.knives = 0;
     gRogueDebug.pillars = 0;
+    gRogueDebug.tagHits = 0;
+    gRogue.tagTimer = 0;
     gRogueDebug.echoes = 0;
 }
 

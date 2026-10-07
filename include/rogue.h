@@ -149,6 +149,10 @@ enum RogueBuild {
 };
 
 #define ROGUE_NO_KIND 0xFF
+// Which of Cloud's animations his tag attack plays, an index of gSmnCloudAnimDefs.
+#define ROGUE_TAG_CLOUD_ANIM 0
+// The action id of a Kingdom Key swing, which a tag card is played as.
+#define ROGUE_ACTION_SWING 0
 // Upward speed a combo finisher gives the enemy it hits; a keyblade's own is 384.
 #define ROGUE_LAUNCH 560
 // 8.8 damage scale of the ice block of the Vexen relic: a swing and a half.
@@ -269,6 +273,7 @@ typedef struct RogueRun {
     u8 echoing; // set while an added hit lands, so that it adds none itself
     u8 finisher; // set while a combo finisher tests its hitbox
     u32 artsUsed; // one bit for each card kind whose art was used this reload
+    u8 tagTimer; // frames a tag character still stands in for Sora
     u8 arts[ROGUE_ART_KINDS]; // sleight bound to each card kind, 0 for none
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
@@ -285,7 +290,8 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_HURT, // arg: damage Sora takes
     ROGUE_DEBUG_HIT, // arg: damage the locked-on enemy takes
     ROGUE_DEBUG_ATTACK, // arg: attack definition Sora lands on the locked-on enemy
-    ROGUE_DEBUG_FINISHER // what a combo finisher sets off, without the swing
+    ROGUE_DEBUG_FINISHER, // what a combo finisher sets off, without the swing
+    ROGUE_DEBUG_TAG // arg: card kind whose tag character comes in
 };
 
 typedef struct RogueDebug {
@@ -303,6 +309,8 @@ typedef struct RogueDebug {
     u16 knives; // projectiles the knife relic threw this battle
     u16 echoes; // added magic hits that connected this battle
     u16 pillars; // ice blocks the Vexen relic raised this battle
+    u16 tagHits; // tag attacks that connected this battle
+    u8 tagAnim; // animation a tag attack plays instead of its own, plus one
 } RogueDebug;
 
 extern RogueDebug gRogueDebug;
@@ -347,6 +355,7 @@ u8 RogueBuildPoolBias(u8 pool);
 u16 RogueBuildSpell(void);
 void RogueOnKeybladeHit(s32 x, s32 y, s32 z, u8 finisher);
 void RogueOnStockPlayed(void);
+u8 RogueTagIn(u16 kind);
 void RogueOnReload(void);
 void RogueOnKnockback(struct BtlObj* target);
 u8 RogueRollArt(u16 kind);

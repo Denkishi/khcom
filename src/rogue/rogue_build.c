@@ -370,6 +370,8 @@ static void RogueEcho(s32 x, s32 y, s32 z, u16 attack, u16 scale) {
 // whether it is the combo's finisher. An infused blade follows every swing
 // with its element; an element build follows the finisher with a stronger
 // one of its own.
+static void RogueKeybladeEffect(s32 x, s32 y, s32 z, u8 finisher);
+
 void RogueOnKeybladeHit(s32 x, s32 y, s32 z, u8 finisher) {
     u8 element;
 
@@ -383,6 +385,92 @@ void RogueOnKeybladeHit(s32 x, s32 y, s32 z, u8 finisher) {
 
     if (finisher && element != ROGUE_ELEMENT_NONE) {
         RogueEcho(x, y, z, sElementAttacks[element], sElementScales[element] * 2);
+    }
+
+    RogueKeybladeEffect(x, y, z, finisher);
+}
+
+// What each of the mod's keyblades does of its own when a swing of it lands,
+// on every hit or on the finisher.
+static void RogueKeybladeEffect(s32 x, s32 y, s32 z, u8 finisher) {
+    BtlObj* sora = gBtlWork->actor;
+    BtlObj* target = gBtlWork->actor2;
+
+    if (gRogue.playedKind < ROGUE_FIRST_CARD_KIND || gRogue.echoing) {
+        return;
+    }
+
+    gRogueDebug.keybladeEffects++;
+
+    switch (gRogue.playedKind - ROGUE_FIRST_CARD_KIND) {
+    case 0: // Bond of Flame: fire follows every hit
+        RogueEcho(x, y, z, sElementAttacks[ROGUE_ELEMENT_FIRE], 96);
+        break;
+    case 1: // Two Become One: every hit lands twice
+        RogueEcho(x, y, z, 14, 128);
+        break;
+    case 2: // Hidden Dragon: the finisher throws a fireball
+        if (finisher) {
+            RogueDoMove(ROGUE_MOVE_FIREBALL, sora);
+        }
+        break;
+    case 3: // Follow the Wind: the finisher raises a whirl
+        if (finisher) {
+            RogueDoMove(ROGUE_MOVE_WIND, sora);
+        }
+        break;
+    case 4: // Monochrome: every hit heals a little
+        if (sora->unk_02C > 0 && sora->unk_02C < sora->unk_02E) {
+            sora->unk_02C++;
+        }
+        break;
+    case 5: // Midnight Roar: the finisher shakes everything around
+        if (finisher) {
+            RogueShockwave(sora, 0, 120);
+        }
+        break;
+    case 6: // Total Eclipse: thunder follows every hit
+        RogueEcho(x, y, z, sElementAttacks[ROGUE_ELEMENT_THUNDER], 96);
+        break;
+    case 7: // Glimpse of Darkness: a second, heavier hit paid in HP
+        RogueEcho(x, y, z, 14, 224);
+
+        if (sora->unk_02C > 1) {
+            sora->unk_02C--;
+        }
+        break;
+    case 8: // Maverick Flare: the finisher bursts into flame
+        if (finisher) {
+            RogueDoMove(ROGUE_MOVE_FIRE_BURST, sora);
+        }
+        break;
+    case 9: // Ominous Blight: every hit leaves a burn
+        if (target != 0) {
+            RogueApplyBurn(target, 2 + gRogue.floor);
+        }
+        break;
+    case 10: // Lunar Eclipse: ice follows every hit
+        RogueEcho(x, y, z, sElementAttacks[ROGUE_ELEMENT_ICE], 96);
+        break;
+    case 11: // Silent Dirge: the finisher freezes its target
+        if (finisher && target != 0) {
+            RogueApplyFreeze(target);
+        }
+        break;
+    case 12: // Dream Sword: the first hit of a string lands twice as hard
+        if (gRogue.combo <= 1) {
+            RogueEcho(x, y, z, 14, 256);
+        }
+        break;
+    case 16: // Hero's Key: the finisher heals
+        if (finisher) {
+            sora->unk_02C += 3;
+
+            if (sora->unk_02C > sora->unk_02E) {
+                sora->unk_02C = sora->unk_02E;
+            }
+        }
+        break;
     }
 }
 

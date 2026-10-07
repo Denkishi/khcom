@@ -511,6 +511,7 @@ typedef struct RogueDebug {
     u16 tagHits; // tag attacks that connected this battle
     u16 airDashes;
     u16 teleports;
+    u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet
     u16 enemyTags; // enemies and bosses called in by their cards
@@ -588,6 +589,8 @@ void RogueOnDodge(struct BtlObj* sora);
 void RogueDodgeTrail(struct BtlObj* sora);
 void RogueAfterHit(struct BtlObj* target);
 void RogueAfterReset(void);
+void RogueApplyBurn(struct BtlObj* target, s16 amount);
+void RogueApplyFreeze(struct BtlObj* target);
 void RogueShockwave(struct BtlObj* sora, u8 element, u16 scale);
 void RogueBuildOam(void);
 s32 RogueSqrt8(s32 a);

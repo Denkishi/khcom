@@ -660,6 +660,17 @@ static void RogueAfterTick(void) {
     }
 }
 
+// For what burns or freezes without a relic.
+void RogueApplyBurn(BtlObj* target, s16 amount) {
+    RogueAfterAdd(target, AFTER_BURN, amount, 30, ROGUE_BURN_TICKS);
+}
+
+void RogueApplyFreeze(BtlObj* target) {
+    if (!(target->flags & 0x80000000)) {
+        RogueAfterAdd(target, AFTER_FREEZE, 0, 20, 1);
+    }
+}
+
 void RogueAfterReset(void) {
     s32 i;
 

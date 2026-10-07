@@ -3,6 +3,8 @@
 #include "battle_actor.h"
 #include "btl_collision.h"
 #include "listpool.h"
+#include "boss_card_data.h"
+#include "card_battle.h"
 #include "card_def_data.h"
 #include "card_ids.h"
 #include "card_types.h"
@@ -598,6 +600,23 @@ static void RogueHud_Draw(RogueHudWork* w) {
 
         if (y >= 8 && x >= digits * 4 && x <= 240 - digits * 4) {
             DrawSmallFontString(x - digits * 4, y, text, w->tiles, w->palette, 0, digits);
+        }
+    }
+
+    // Foresight: the value of the card the enemy watched will play next,
+    // under its gauge.
+    if (RogueHasRelic(ROGUE_RELIC_FORESIGHT)) {
+        BtlObj* enemy = gBtlWork->actor2 != 0 ? gBtlWork->actor2 : RogueGaugeTarget();
+
+        if (enemy != 0 && (u32)enemy->unk_000 < 54 && gUnk_08F7DAC4[enemy->unk_000] != 0) {
+            u32 next = gCardBattleState->unk_0D7;
+
+            if (next >= (u32)gUnk_08F7DAC4[enemy->unk_000]) {
+                next = gUnk_08F7DAC4[enemy->unk_000] - 1;
+            }
+
+            digits = FormatSmallFontDecimal(gCardDefs[gUnk_09EE275C[enemy->unk_000][next]].unk_20, text);
+            DrawSmallFontString(224, 14, text, w->tiles, w->palette, 0, digits);
         }
     }
 

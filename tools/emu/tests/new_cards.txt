@@ -2,7 +2,8 @@
 # Dream Sword 7 and Total Eclipse 4, shown in the deck menu and then played.
 # Expect: the deck screenshot shows the four new pictures with their values,
 # the battle ones their small cards in the hand and the spells going off, and
-# the frame counter keeps running.
+# the frame counter keeps running; keyblade_effects is above 0 once a swing
+# of the Dream Sword or of Total Eclipse lands.
 include start.txt
 poke16 @gCardCollection 0x1447
 poke16 @gCardCollection+2 0x1459
@@ -33,7 +34,13 @@ press A
 wait 30
 press A
 wait 40
+hold RIGHT 40
+press A
+wait 30
+press A
+wait 40
 peek16 @gRogueDebug.hits hits
+peek16 @gRogueDebug.keybladeEffects keyblade_effects
 peek32 @gFrameCounter frames
 wait 30
 peek32 @gFrameCounter frames_later

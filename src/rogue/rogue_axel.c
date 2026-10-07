@@ -29,6 +29,11 @@ static void RogueAxel_Gesture(RogueAxelWork* w) {
         AnimStart(&w->anim, AXEL_ANIM_IDLE, 1);
         gFieldState->flags &= ~0x1000;
         w->update = RogueAxel_Idle;
+
+        if (!(gRogueMeta.flags & ROGUE_META_TUTORIAL_SEEN)) {
+            gRogueMeta.flags |= ROGUE_META_TUTORIAL_SEEN;
+            RogueMetaSave();
+        }
     }
 }
 
@@ -50,6 +55,13 @@ static void RogueAxel_Talk(RogueAxelWork* w) {
 
 static void RogueAxel_Idle(RogueAxelWork* w) {
     if (w->inRange != 0 && (GetKeysPressed() & A_BUTTON)) {
+        // Once the explanation has been heard, talking to him opens the shop.
+        // Holding L asks for the explanation again.
+        if ((gRogueMeta.flags & ROGUE_META_TUTORIAL_SEEN) && !(GetKeysHeld() & L_BUTTON)) {
+            RogueOpenShop();
+            return;
+        }
+
         gFieldState->flags |= 0x1000;
         w->page = 0;
         CreateCardMessageTask(&w->tasks, 0, ROGUE_MSG_AXEL_FIRST);

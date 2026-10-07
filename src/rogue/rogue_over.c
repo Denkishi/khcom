@@ -14,7 +14,7 @@
 
 // The summary shown when a run ends, before going back to the title.
 
-#define OVER_LINES 4
+#define OVER_LINES 6
 #define OVER_SLOTS 28
 
 typedef struct RogueOverWork {
@@ -29,6 +29,10 @@ typedef struct RogueOverWork {
 static RogueOverWork* sWork;
 
 static const u8 sTitle[] = "Run finita";
+static const u8 sTitleWon[] = "Run completata!";
+static const u8 sShards[] = "Frammenti: +";
+static const u8 sNewChapter[] = "Nuovo capitolo sbloccato";
+static const u8 sNothing[] = "";
 static const u8 sFloor[] = "Piano raggiunto: ";
 static const u8 sRooms[] = "Stanze superate: ";
 static const u8 sLevel[] = "Livello di Sora: ";
@@ -57,7 +61,7 @@ static void RogueOverLine(u8 line, const u8* label, s32 value) {
     sWork->counts[line] = LoadTextSlots((u16*)sWork->text, sWork->lines[line]);
 }
 
-static void RogueOver_Init(s32 arg) {
+static void RogueOver_Init(s32 completed) {
     sWork = EwramAlloc(sizeof(RogueOverWork));
     sWork->state = 0;
     SetBgMode0();
@@ -68,10 +72,12 @@ static void RogueOver_Init(s32 arg) {
     LoadBgMap(3, gUnk_09848198, 0x500);
     sWork->palette = _08066468(1);
     sWork->titlePalette = _08066468(0);
-    RogueOverLine(0, sTitle, -1);
+    RogueOverLine(0, completed ? sTitleWon : sTitle, -1);
     RogueOverLine(1, sFloor, gRogue.floor + 1);
     RogueOverLine(2, sRooms, gRogue.depth);
     RogueOverLine(3, sLevel, gGameState.progression.level);
+    RogueOverLine(4, sShards, gRogue.shards);
+    RogueOverLine(5, gRogue.newChapter ? sNewChapter : sNothing, -1);
     m4aSongNumStart(0);
     FadeStartIn(0, 30);
 }
@@ -100,7 +106,7 @@ static void RogueOver_Update(void) {
     }
 
     for (i = 0; i < OVER_LINES; i++) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 36 : 54 + i * 18,
+        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 24 : 36 + i * 16,
                       sWork->lines[i], i == 0 ? sWork->titlePalette : sWork->palette, 50, sWork->counts[i]);
     }
 }

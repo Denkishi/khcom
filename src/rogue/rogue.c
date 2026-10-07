@@ -36,6 +36,7 @@ static void RogueBoot_Init(s32 arg) {
     }
 
     gLanguage = ROGUE_LANGUAGE;
+    RogueMetaLoad();
 }
 
 static void RogueBoot_Update(void) {

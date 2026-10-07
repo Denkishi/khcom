@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Run a test script on the built ROM: play.py SCRIPT [SHEET.png]
+"""Run a test script on the built ROM: play.py SCRIPT [SHEET.png [SAVE]]
 
 Wraps the headless runner: @symbol in the script becomes the symbol's address
 from the link map (@symbol+N adds a hex offset), `include FILE` pulls in another
-script, and the screenshots the script takes are tiled into SHEET.png.
+script, and the screenshots the script takes are tiled into SHEET.png. With
+SAVE the cartridge save is kept in that file, otherwise it is not kept at all.
 """
 import re
 import subprocess
@@ -35,7 +36,7 @@ def load(path):
 lines = load(sys.argv[1])
 with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
     f.write("\n".join(lines) + "\n")
-subprocess.run([ROOT / "build/emu_run", ROM, f.name], check=True)
+subprocess.run([ROOT / "build/emu_run", ROM, f.name] + sys.argv[3:4], check=True)
 shots = [line.split()[1] for line in lines if line.startswith("shot ")]
 if len(sys.argv) > 2 and shots:
     subprocess.run([sys.executable, Path(__file__).with_name("sheet.py"), sys.argv[2]] + shots, check=True)

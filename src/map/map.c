@@ -2757,6 +2757,23 @@ void func_080E9D94(void) {
     }
 }
 
+static void RogueShopWait(void) {
+    func_080E0820();
+
+    if (FadeIsActive() == 0) {
+        func_0801CB0C();
+        ModeRequest(&gModeRogueShop, 0);
+    }
+}
+
+// Leaves the room for Axel's shop the way the pause menu's screens are left,
+// so that coming back finds the room as it was.
+void RogueOpenShop(void) {
+    FadeStartOut(0, 16);
+    FadeLock();
+    func_080E988C(RogueShopWait);
+}
+
 void func_080E9E04(void) {
     func_080E0820();
     if (FadeIsActive() == 0) {

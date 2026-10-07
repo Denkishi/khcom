@@ -74,6 +74,7 @@ typedef struct RogueRewardWork {
 static RogueRewardWork* sWork;
 
 static const u8 sTitle[] = "Scegli una ricompensa";
+static const u8 sTitleReroll[] = "Scegli (B: rilancia)";
 static const u8 sLabelCard[] = "Carta";
 static const u8 sLabelUpgrade[] = "Potenzia";
 static const u8 sLabelHeal[] = "Cura";
@@ -364,6 +365,22 @@ static void RogueShowChoice(void) {
     }
 }
 
+// Rolls three rewards and loads their lines.
+static void RogueOfferRewards(void) {
+    s32 i;
+
+    RogueRollRewards();
+
+    for (i = 0; i < REWARD_CHOICES; i++) {
+        FreeTextSlots(sWork->labels[i], LABEL_SLOTS);
+        sWork->labelCounts[i] = LoadTextSlots((u16*)sLabels[sWork->rewards[i].kind], sWork->labels[i]);
+    }
+
+    FreeTextSlots(sWork->title, TITLE_SLOTS);
+    sWork->titleCount = LoadTextSlots((u16*)(gRogue.rerolls != 0 ? sTitleReroll : sTitle), sWork->title);
+    RogueShowChoice();
+}
+
 static void RogueReward_Init(s32 afterBoss) {
     const u16* map = (const u16*)gUnk_09847798;
     s32 i;
@@ -392,15 +409,12 @@ static void RogueReward_Init(s32 afterBoss) {
     sWork->cursorPalette = _08066468(0);
     InitTextSlots(sWork->title, TITLE_SLOTS);
     InitTextSlots(sWork->detail, DETAIL_SLOTS);
-    sWork->titleCount = LoadTextSlots((u16*)sTitle, sWork->title);
-    RogueRollRewards();
 
     for (i = 0; i < REWARD_CHOICES; i++) {
         InitTextSlots(sWork->labels[i], LABEL_SLOTS);
-        sWork->labelCounts[i] = LoadTextSlots((u16*)sLabels[sWork->rewards[i].kind], sWork->labels[i]);
     }
 
-    RogueShowChoice();
+    RogueOfferRewards();
     FadeStartIn(0, 16);
 }
 
@@ -422,6 +436,10 @@ static void RogueReward_Update(void) {
             sWork->cursor = (sWork->cursor + 1) % REWARD_CHOICES;
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueShowChoice();
+        } else if ((GetKeysPressed() & B_BUTTON) && gRogue.rerolls != 0) {
+            gRogue.rerolls--;
+            m4aSongNumStart(SONG_SYS_CLICK);
+            RogueOfferRewards();
         } else if (GetKeysPressed() & A_BUTTON) {
             m4aSongNumStart(SONG_SYS_KETTEI);
             RogueGiveReward(&sWork->rewards[sWork->cursor]);

@@ -28,38 +28,45 @@ static const u8 sRoomBattles[ROGUE_ROOM_KINDS] = { 0, 1, 2, 1, 0, 0, 0 };
 // Map card whose art the room's door shows, by room kind.
 static const u8 sRoomCards[ROGUE_ROOM_KINDS] = { 5, 1, 0, 2, 10, 5, 0 };
 
-static const u8 sWorlds[] = {
-    WORLD_TRAVERSE_TOWN,
-    WORLD_AGRABAH,
-    WORLD_OLYMPUS_COLISEUM,
-    WORLD_WONDERLAND,
-    WORLD_MONSTRO,
-    WORLD_HALLOWEEN_TOWN,
-    WORLD_ATLANTICA,
-    WORLD_NEVER_LAND,
-    WORLD_HOLLOW_BASTION,
-    WORLD_TWILIGHT_TOWN,
-    WORLD_DESTINY_ISLANDS,
-    WORLD_CASTLE_OBLIVION,
+// The floors of a run in order: each has a world and the battle that ends it.
+// The last floor of a chapter is its boss, the others are minibosses.
+typedef struct RogueFloor {
+    u8 world;
+    u8 boss;
+} RogueFloor;
+
+static const RogueFloor sFloors[ROGUE_FLOORS] = {
+    { WORLD_TRAVERSE_TOWN, 0x94 }, // Guard Armor
+    { WORLD_AGRABAH, 0x95 }, // Jafar
+    { WORLD_WONDERLAND, 0x96 }, // Trickmaster
+    { WORLD_OLYMPUS_COLISEUM, 0xA0 }, // Hades
+    { WORLD_MONSTRO, 0x98 }, // Parasite Cage
+    { WORLD_HALLOWEEN_TOWN, 0x9B }, // Oogie Boogie
+    { WORLD_ATLANTICA, 0x97 }, // Ursula
+    { WORLD_NEVER_LAND, 0x9E }, // Hook
+    { WORLD_HOLLOW_BASTION, 0x99 }, // Dragon Maleficent
+    { WORLD_DESTINY_ISLANDS, 0x9A }, // Darkside
+    { WORLD_CASTLE_OBLIVION, 0xA2 }, // Axel
 };
 
-// Boss battle of each world, indexed by WorldId. Worlds without a giant boss
-// of their own get an Organization member.
-static const u8 sWorldBosses[] = {
-    0x94, // unused
-    0x95, // Agrabah
-    0x97, // Atlantica
-    0xA0, // Olympus Coliseum
-    0x96, // Wonderland
-    0x98, // Monstro
-    0x9B, // Halloween Town
-    0x9E, // Never Land
-    0xA2, // Hollow Bastion
-    0xA2, // Destiny Islands
-    0x94, // Traverse Town
-    0xA2, // Twilight Town
-    0xA2, // Castle Oblivion
-};
+// Floors in a run of 1 to ROGUE_CHAPTERS chapters.
+static const u8 sChapterFloors[ROGUE_CHAPTERS + 1] = { 0, 2, 5, 8, 11 };
+
+u8 RogueFloorCount(void) {
+    return sChapterFloors[gRogue.chapters];
+}
+
+static u8 RogueFloorIsChapterEnd(void) {
+    u8 chapter;
+
+    for (chapter = 1; chapter <= ROGUE_CHAPTERS; chapter++) {
+        if (gRogue.floor + 1 == sChapterFloors[chapter]) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
 
 // The run has its own generator so that battles, which reseed the game's, do
 // not change what the run rolls next.
@@ -205,7 +212,7 @@ static void RogueEnterRoom(u8 firstOfFloor) {
     if (gRogue.kind == ROGUE_ROOM_BOSS) {
         func_080DEF20();
         func_0801CB00();
-        ModeRequest(&gModeBattle, sWorldBosses[gRogue.world]);
+        ModeRequest(&gModeBattle, sFloors[gRogue.floor].boss);
         return;
     }
 
@@ -233,7 +240,12 @@ void RogueStartRun(void) {
     gRogue.comboPlus = 0;
     gRogue.airJumps = 0;
     gRogue.airJumpsUsed = 0;
-    gRogue.world = RogueRollWorld();
+    gRogue.world = sFloors[0].world;
+    gRogue.rerolls = 0;
+    gRogue.shards = 0;
+    gRogue.newChapter = 0;
+    gRogue.chapters = gRogueMeta.chapters;
+    RogueApplyUpgrades();
     gRogue.deckWanted = 1;
     func_0801CD20();
     gGameState.progression.unk_82 = 0xFFFF;
@@ -247,23 +259,19 @@ void RogueLeaveRoom(u8 door) {
     RogueEnterRoom(0);
 }
 
-// Rolls the next floor's world: later floors reach later worlds.
-static u8 RogueRollWorld(void) {
-    u32 index = gRogue.floor + RogueRandBelow(3);
-
-    if (index >= sizeof(sWorlds) / sizeof(sWorlds[0])) {
-        index = sizeof(sWorlds) / sizeof(sWorlds[0]) - 1 - RogueRandBelow(4);
+// After a boss: the next floor, or the end of the run if that was the last.
+void RogueNextFloor(void) {
+    if (gRogue.floor + 1 >= RogueFloorCount()) {
+        RogueMetaEndRun(1);
+        ModeRequest(&gModeRogueOver, 1);
+        return;
     }
 
-    return sWorlds[index];
-}
-
-void RogueNextFloor(void) {
     gRogue.floor++;
     gRogue.depth++;
     gRogue.room = 0;
     gRogue.kind = ROGUE_ROOM_BATTLE;
-    gRogue.world = RogueRollWorld();
+    gRogue.world = sFloors[gRogue.floor].world;
     RogueEnterRoom(1);
 }
 
@@ -277,12 +285,22 @@ u8 RogueOnBattleEnd(void) {
     }
 
     RogueGainCardXp();
+
+    if (gRogue.kind != ROGUE_ROOM_BOSS) {
+        gRogue.shards += ROGUE_SHARDS_ROOM;
+    } else if (RogueFloorIsChapterEnd()) {
+        gRogue.shards += ROGUE_SHARDS_BOSS;
+    } else {
+        gRogue.shards += ROGUE_SHARDS_MINIBOSS;
+    }
+
     ModeRequest(&gModeRogueReward, gRogue.kind == ROGUE_ROOM_BOSS);
     return 1;
 }
 
 // A lost battle ends the run.
 void RogueOnDefeat(void) {
+    RogueMetaEndRun(0);
     ModeRequest(&gModeRogueOver, 0);
 }
 

@@ -64,21 +64,23 @@ u16 RogueEnemyExp(u16 base) {
     return (RogueCurve(102, 51) * base) >> 8;
 }
 
-// The floor a world's boss is tuned for in the original game.
+// The floor each world's boss is tuned for. The seven world bosses of the
+// original game can be met in any order there and are all tuned alike, so
+// the run's fixed order makes the first of them easier and the last harder.
 static const u8 sWorldFloors[] = {
     0, // unused
-    1, // Agrabah
-    6, // Atlantica
-    2, // Olympus Coliseum
+    3, // Agrabah
+    3, // Atlantica
+    3, // Olympus Coliseum
     3, // Wonderland
-    4, // Monstro
-    5, // Halloween Town
+    3, // Monstro
+    3, // Halloween Town
     7, // Never Land
-    8, // Hollow Bastion
-    10, // Destiny Islands
+    7, // Hollow Bastion
+    9, // Destiny Islands
     0, // Traverse Town
     9, // Twilight Town
-    11, // Castle Oblivion
+    10, // Castle Oblivion
 };
 
 // Bosses keep their own stats, moved 15% a floor towards the floor the run

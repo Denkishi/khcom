@@ -8,7 +8,48 @@
 
 #define ROGUE_ROOM_ID 0
 #define ROGUE_NO_DOOR 0xFF
-#define ROGUE_FLOOR_ROOMS 7
+#define ROGUE_FLOOR_ROOMS 5
+
+// A run goes through the chapters unlocked so far; beating the last boss of
+// the deepest one completes it and unlocks the next.
+#define ROGUE_CHAPTERS 4
+#define ROGUE_FLOORS 11
+
+// Memory shards, the currency kept between runs.
+#define ROGUE_SHARDS_ROOM 2
+#define ROGUE_SHARDS_MINIBOSS 10
+#define ROGUE_SHARDS_BOSS 25
+#define ROGUE_SHARDS_NEW_CHAPTER 50
+
+enum RogueUpgrade {
+    ROGUE_UPGRADE_HP,
+    ROGUE_UPGRADE_CP,
+    ROGUE_UPGRADE_ATTACK,
+    ROGUE_UPGRADE_COMBO,
+    ROGUE_UPGRADE_AIR_JUMP,
+    ROGUE_UPGRADE_REROLL,
+    ROGUE_UPGRADES
+};
+
+typedef struct RogueUpgradeDef {
+    u8 levels;
+    u8 cost; // of the first level
+} RogueUpgradeDef;
+
+typedef struct RogueMeta {
+    u32 magic;
+    u16 checksum; // of everything from shards on
+    u16 shards;
+    u16 runs;
+    u16 wins;
+    u16 bestDepth;
+    u8 chapters; // chapters unlocked, at least 1
+    u8 flags;
+    u8 upgrades[ROGUE_UPGRADES];
+    u8 unused[10];
+} RogueMeta;
+
+#define ROGUE_META_TUTORIAL_SEEN 1
 
 #define ROGUE_COMBO_BASE 3
 #define ROGUE_COMBO_PLUS_MAX 4
@@ -53,8 +94,8 @@ enum RogueRoomKind {
 // Card message ids from here up are the mod's, see RogueCardMessageDef.
 #define ROGUE_MSG_BASE 0x400
 #define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
-#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 10)
-#define ROGUE_MSG_COUNT 11
+#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 12)
+#define ROGUE_MSG_COUNT 13
 
 typedef struct RogueRun {
     u32 seed;
@@ -69,10 +110,16 @@ typedef struct RogueRun {
     u8 airJumps; // jumps allowed in mid-air
     u8 airJumpsUsed;
     u8 deckWanted; // set while a run is starting, see RogueBuildStartDeck
+    u8 rerolls; // reward rerolls left this run
+    u8 chapters; // chapters this run goes through
+    u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
+    u16 shards; // earned this run, banked when it ends
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
 extern RogueRun gRogue;
+extern RogueMeta gRogueMeta;
+extern Mode gModeRogueShop;
 extern Mode gModeRogueBoot;
 extern Mode gModeRogueReward;
 extern Mode gModeRogueOver;
@@ -85,6 +132,15 @@ void RogueLeaveRoom(u8 door);
 u8 RogueOnBattleEnd(void);
 void RogueOnDefeat(void);
 void RogueNextFloor(void);
+u8 RogueFloorCount(void);
+void RogueMetaLoad(void);
+void RogueMetaSave(void);
+void RogueMetaEndRun(u8 completed);
+void RogueApplyUpgrades(void);
+u8 RogueBuyUpgrade(u8 upgrade);
+u8 RogueUpgradeMax(u8 upgrade);
+u16 RogueUpgradeCost(u8 upgrade);
+void RogueOpenShop(void);
 u8 RogueDoorsOpen(void);
 u8 RogueEnemyLevel(void);
 u16 RogueEnemyHp(u16 base);

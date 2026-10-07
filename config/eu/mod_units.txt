@@ -27,3 +27,4 @@ moved battle_runtime.c
 moved map_tasks.c
 moved mode_battle.c
 moved btl_collision.c
+moved card_riku_tutorial.c

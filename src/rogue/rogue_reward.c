@@ -42,6 +42,7 @@ enum {
     REWARD_AIR_JUMP,
     REWARD_ATTACK,
     REWARD_RELIC,
+    REWARD_ART,
     REWARD_FUSION,
     // Offered by events only.
     REWARD_SHARDS,
@@ -104,6 +105,7 @@ static const u8 sLabelCombo[] = "Combo+";
 static const u8 sLabelAirJump[] = "Reliquia";
 static const u8 sLabelAttack[] = "Forza";
 static const u8 sLabelRelic[] = "Reliquia";
+static const u8 sLabelArt[] = "Tecnica";
 static const u8 sLabelFusion[] = "Fusione";
 static const u8 sLabelShards[] = "Frammenti";
 static const u8 sLabelReroll[] = "Rilancio";
@@ -119,7 +121,7 @@ static const u8 sLabelMutate[] = "Muta";
 static const u8 sLabelFlee[] = "Fuggi";
 static const u8 sLabelDarkness[] = "Oscurit\xE0";
 static const u8* const sLabels[REWARD_KINDS] = {
-    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
+    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelArt, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
     sLabelDuel, sLabelLeave, sLabelDarkPact, sLabelBarter, sLabelDice, sLabelCopy, sLabelMutate, sLabelFlee, sLabelDarkness,
 };
 
@@ -143,6 +145,7 @@ static const u8 sCopy[] = "Una copia di:\x1F";
 static const u8 sMutate[] = "\x1F" "diventa\x1F";
 static const u8 sFlee[] = "Scappi, ma perdi\x1F" "20 PV";
 static const u8 sDarkness[] = "Una reliquia, ma\x1FPV massimi -25";
+static const u8 sArt[] = " dal 5 in su\x1Flancia una tecnica\x1F" "da sola";
 static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
 
@@ -209,6 +212,8 @@ static u16 RogueRollUpgrade(void) {
 }
 
 static u8 RogueRewardAvailable(RogueReward* reward) {
+    u8 pos;
+
     switch (reward->kind) {
     case REWARD_CARD:
         reward->card = RogueRollRewardCard();
@@ -228,6 +233,22 @@ static u8 RogueRewardAvailable(RogueReward* reward) {
     case REWARD_RELIC:
         reward->card = RogueRollRelic();
         return reward->card != ROGUE_RELICS;
+    case REWARD_ART:
+        // A kind of card in the deck that has no art yet gets one.
+        pos = RogueRollDeckCard();
+
+        if (pos == 0xFF) {
+            return 0;
+        }
+
+        reward->card = (gCardCollection[GetActiveDeck()->cards[pos]] & CARD_ID_MASK) / 10;
+
+        if (reward->card >= ROGUE_ART_KINDS || gRogue.arts[reward->card] != 0) {
+            return 0;
+        }
+
+        reward->result = RogueRollArt(reward->card);
+        return reward->result != 0;
     }
 
     return 1;
@@ -305,7 +326,7 @@ static void RogueEventRewards(void) {
 }
 
 static void RogueRollRewards(void) {
-    static const u8 weights[REWARD_FUSION] = { 26, 17, 12, 10, 10, 6, 4, 9, 6 };
+    static const u8 weights[REWARD_FUSION] = { 25, 16, 11, 10, 9, 6, 4, 8, 6, 5 };
     RogueReward* reward;
     u32 roll;
     s32 count = 0;
@@ -337,7 +358,7 @@ static void RogueRollRewards(void) {
         }
 
         // Relics and combo hits are rarer in ordinary rooms than after a boss.
-        if (!sWork->rich && (kind == REWARD_COMBO || kind == REWARD_AIR_JUMP || kind == REWARD_RELIC) &&
+        if (!sWork->rich && (kind == REWARD_COMBO || kind == REWARD_AIR_JUMP || kind == REWARD_RELIC || kind == REWARD_ART) &&
             RogueRandBelow(2) == 0) {
             continue;
         }
@@ -370,6 +391,8 @@ static u16 RogueRewardCard(RogueReward* reward) {
     case REWARD_UPGRADE:
     case REWARD_DUPLICATE:
         return gCardCollection[reward->card] & CARD_ID_MASK;
+    case REWARD_ART:
+        return CARD_ID(reward->card, ROGUE_ART_MIN_VALUE);
     case REWARD_TRANSFORM:
         return reward->result;
     }
@@ -432,6 +455,10 @@ static void RogueRewardDetail(RogueReward* reward) {
         out = RogueAppend(out, RogueRelicName(reward->card));
         *out++ = 0x1F;
         RogueAppend(out, RogueRelicText(reward->card));
+        break;
+    case REWARD_ART:
+        out = RogueAppend(out, eu_0805E924(gCardDefs[CARD_ID(reward->card, 1)].name));
+        RogueAppend(out, sArt);
         break;
     case REWARD_SHARDS:
         *out++ = '+';
@@ -542,6 +569,9 @@ static void RogueGiveReward(RogueReward* reward) {
         break;
     case REWARD_RELIC:
         gRogue.relics |= 1 << reward->card;
+        break;
+    case REWARD_ART:
+        gRogue.arts[reward->card] = reward->result;
         break;
     case REWARD_SHARDS:
         gRogue.shards += reward->card;

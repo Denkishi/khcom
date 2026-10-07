@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -167,7 +168,7 @@ s32 func_080ABA80(s32* out) {
             }
         }
 
-        return gCardBattleState->unk_000[0]->cardDef->unk_24;
+        return RogueCardAction(gCardBattleState->unk_000[0]->cardDef);
 #ifdef VERSION_EU
     } else if (gCardBattleState->unk_0D0 == 1 && (p = gBtlWork)->unk_0A4 == 1) {
         if (p->unk_0F4 == 47) {

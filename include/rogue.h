@@ -135,6 +135,11 @@ enum RogueElement {
     ROGUE_ELEMENT_NONE = ROGUE_ELEMENTS
 };
 
+// Arts: card kinds that can have a sleight bound, and the value a card needs
+// to perform it alone.
+#define ROGUE_ART_KINDS 24
+#define ROGUE_ART_MIN_VALUE 5
+
 // A build needs three cards of its element and counts up to ten of them.
 #define ROGUE_BUILD_MIN 3
 #define ROGUE_BUILD_MAX 10
@@ -232,6 +237,7 @@ typedef struct RogueRun {
     u8 eventDone; // set once they have made their offer
     u8 duel; // set while the battle is a duel picked in an event
     u8 build[3]; // cards of each RogueElement in the deck, see RogueCountBuild
+    u8 arts[ROGUE_ART_KINDS]; // sleight bound to each card kind, 0 for none
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
@@ -271,6 +277,9 @@ u8 RogueBuildBonus(void);
 s32 RogueElementDamage(s32 damage, u32 attackFlags);
 u16 RogueBuildSpell(void);
 void RogueOnKeybladeHit(s32 x, s32 y, s32 z);
+u8 RogueRollArt(u16 kind);
+struct CardDef;
+s32 RogueCardAction(const struct CardDef* def);
 u8 RogueRollRelic(void);
 const u8* RogueRelicName(u8 relic);
 const u8* RogueRelicText(u8 relic);

@@ -233,3 +233,40 @@ void RogueOnKeybladeHit(s32 x, s32 y, s32 z) {
         }
     }
 }
+
+// Arts: a sleight bound to a kind of card, so that one high card of that kind
+// performs it alone. The numbers are the action ids Sora's battle task gives
+// the sleights; these were picked by trying each from a single card.
+static const u8 sAttackArts[] = { 107, 111, 127, 129 };
+static const u8 sFireArts[] = { 114, 126 };
+
+// An art that suits a kind of card, 0 if the kind takes none.
+u8 RogueRollArt(u16 kind) {
+    if (kind <= CARD_ULTIMA_WEAPON) {
+        return sAttackArts[RogueRandBelow(sizeof(sAttackArts))];
+    }
+
+    switch (kind) {
+    case CARD_FIRE:
+        return sFireArts[RogueRandBelow(sizeof(sFireArts))];
+    case CARD_BLIZZARD:
+        return 124;
+    case CARD_THUNDER:
+        return 118;
+    }
+
+    return 0;
+}
+
+// What a card played alone does: its own action, or its kind's art if the
+// card is high enough.
+s32 RogueCardAction(const CardDef* def) {
+    u16 id = def - gCardDefs;
+    u16 kind = id / 10;
+
+    if (kind < ROGUE_ART_KINDS && gRogue.arts[kind] != 0 && def->unk_2A != 3 && def->unk_20 >= ROGUE_ART_MIN_VALUE) {
+        return gRogue.arts[kind];
+    }
+
+    return def->unk_24;
+}

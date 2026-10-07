@@ -260,6 +260,8 @@ static void RogueEnterRoom(u8 firstOfFloor) {
 }
 
 void RogueStartRun(void) {
+    s32 i;
+
     gRogue.seed = gFrameCounter * 0x9E3779B1 + GetRandom();
     gRogue.rng = gRogue.seed | 1;
     gRogue.depth = 0;
@@ -273,6 +275,11 @@ void RogueStartRun(void) {
     gRogue.world = sFloors[0].world;
     gRogue.rerolls = 0;
     gRogue.duel = 0;
+
+    for (i = 0; i < ROGUE_ART_KINDS; i++) {
+        gRogue.arts[i] = 0;
+    }
+
     gRogue.shards = 0;
     gRogue.newChapter = 0;
     gRogue.chapters = gRogueMeta.chapters;

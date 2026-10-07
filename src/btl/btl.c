@@ -581,6 +581,11 @@ void func_0801DDC4(BtlSoraWork* work) {
 void SetBtlSoraAnimation(BtlSoraWork* work, u16 a, u16 b) {
     const FldAnimDef* e;
 
+    // The pose of a move holds against standing still.
+    if (a == 1 && gRogue.pose != 0) {
+        return;
+    }
+
     e = &gBtlSoraAnimDefs[a];
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
@@ -589,6 +594,11 @@ void SetBtlSoraAnimation(BtlSoraWork* work, u16 a, u16 b) {
 void func_0801DE1C(BtlSoraWork* work, u16 a, u16 b) {
     const FldAnimDef* e;
     s32 idx;
+
+    // And against running and jumping.
+    if (gRogue.pose != 0) {
+        return;
+    }
 
     idx = 0;
 

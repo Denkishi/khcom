@@ -157,6 +157,11 @@ u8 RogueReloadRate(u8 slowed) {
 // A press of the jump button counts for a few frames, so that one made just
 // before Sora can jump still does.
 u16 RogueBufferJump(u16 pressed) {
+    // Once a frame, before Sora acts: the pose of a move runs out.
+    if (gRogue.pose != 0) {
+        gRogue.pose--;
+    }
+
     if (pressed & B_BUTTON) {
         gRogue.jumpBuffer = ROGUE_JUMP_BUFFER;
     } else if (gRogue.jumpBuffer != 0) {
@@ -460,6 +465,7 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogueDebug.moves = 0;
     gRogueDebug.moveHits = 0;
     gRogue.tagTimer = 0;
+    gRogue.pose = 0;
     gRogueDebug.echoes = 0;
 }
 

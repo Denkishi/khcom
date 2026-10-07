@@ -236,6 +236,7 @@ enum RogueMove {
 
 // How far a thrown move flies each frame.
 #define ROGUE_MOVE_SPEED 0xA00
+#define ROGUE_MOVE_POSE 22 // frames Sora holds his casting pose for a move
 
 // A character drawn in place of a boss whose fight they borrow.
 enum RogueBossSkin {
@@ -348,6 +349,7 @@ typedef struct RogueRun {
     u8 echoing; // set while an added hit lands, so that it adds none itself
     u8 finisher; // set while a combo finisher tests its hitbox
     u32 artsUsed; // one bit for each card kind whose art was used this reload
+    u8 pose; // frames Sora still holds the pose of a move
     u8 tagTimer; // frames a tag character still stands in for Sora
     u8 arts[ROGUE_ART_KINDS]; // sleight bound to each card kind, 0 for none
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck

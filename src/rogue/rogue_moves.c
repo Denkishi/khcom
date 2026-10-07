@@ -2,6 +2,7 @@
 #include "anim.h"
 #include "battle.h"
 #include "battle_actor.h"
+#include "btl.h"
 #include "btl_collision.h"
 #include "m4a_song.h"
 #include "obj_api.h"
@@ -150,6 +151,20 @@ static TaskDesc sTaskDescRogueMove = {
     sizeof(RogueMoveWork),
 };
 
+// Sora's casting pose, for a move made while he is free: in the middle of a
+// swing or a spell he is already moving. The states are standing, running and
+// the parts of a jump, each with its twin for when cards are locked.
+static void RogueMovePose(BtlObj* sora) {
+    BtlSoraWork* work = (BtlSoraWork*)((u8*)sora - (u32) & ((BtlSoraWork*)0)->actor);
+    u32 state = work->unk_038;
+
+    if ((state >= 1 && state <= 4) || (state >= 18 && state <= 21)) {
+        gRogue.pose = 0;
+        SetBtlSoraAnimation(work, 42, 0);
+        gRogue.pose = ROGUE_MOVE_POSE;
+    }
+}
+
 // Sora does one of the moves.
 void RogueDoMove(u8 move, BtlObj* sora) {
     const RogueMoveDef* def = &sMoves[move];
@@ -162,6 +177,7 @@ void RogueDoMove(u8 move, BtlObj* sora) {
         count += 2;
     }
 
+    RogueMovePose(sora);
     m4aSongNumStart(def->sound);
     args.def = def;
     args.left = (sora->flags & 4) != 0;

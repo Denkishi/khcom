@@ -207,6 +207,7 @@ extern u8 gUnk_096FAC64[];
 extern u8 gRikuPalette[];
 extern u8 gBStatesPalette[];
 
+void SetBtlSoraAnimation(BtlSoraWork* work, u16 a, u16 b);
 void func_0801DEB8(BtlSoraWork* work);
 void func_0801DC5C(BtlSoraWork* work);
 void func_080137C8(s32 x, s32 y, s32 z, u8 f);

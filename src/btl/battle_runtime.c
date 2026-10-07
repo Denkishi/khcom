@@ -1456,8 +1456,8 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
 
         // Every other case is a boss with stats of its own.
         if (a != 0) {
-            p->unk_02E = RogueBossStat(p->unk_02E);
-            p->unk_030 = RogueBossStat(p->unk_030);
+            p->unk_02E = RogueBossHp();
+            p->unk_030 = RogueBossAttack();
         }
     } else {
         p->unk_02E = d->unk_04;

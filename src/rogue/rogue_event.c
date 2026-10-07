@@ -1,6 +1,7 @@
 #include "rogue.h"
 #include "card_ids.h"
 #include "map.h"
+#include "map_runtime.h"
 #include "map_tasks.h"
 #include "sprites_evt.h"
 #include "sprite_palettes.h"
@@ -44,6 +45,44 @@ static const RogueEventDef sEvents[ROGUE_EVENTS] = {
 
 const RogueEventOffer* RogueEventOffers(void) {
     return sEvents[gRogue.event].offers;
+}
+
+// Stands a character next to where Sora enters the room: on the first spot
+// around it that is floor at Sora's own height, so that he can be reached.
+void RoguePlaceNpc(FldObj* obj) {
+    static const s16 offsets[][2] = {
+        { -0x2800, 0 }, { 0x2800, 0 }, { -0x2000, -0x1400 }, { 0x2000, -0x1400 },
+        { -0x2000, 0x1400 }, { 0x2000, 0x1400 }, { 0, -0x2000 }, { 0, 0x2000 },
+    };
+    FldPos spawn;
+    FldPos* p = &obj->fieldPosition;
+    s32 height;
+    u32 i;
+
+    spawn.x = gFieldState->unk_DC;
+    spawn.y = gFieldState->unk_E0;
+    spawn.z = 0;
+    height = func_080DFF30(&spawn);
+
+    for (i = 0; i < sizeof(offsets) / sizeof(offsets[0]); i++) {
+        p->x = spawn.x + offsets[i][0];
+        p->y = spawn.y + offsets[i][1];
+        p->z = 0;
+
+        if (func_080DFB8C(p->x, p->y)->unk_0C != 0x100000 && func_080DFF30(p) == height) {
+            break;
+        }
+    }
+
+    if (i == sizeof(offsets) / sizeof(offsets[0])) {
+        p->x = spawn.x + offsets[0][0];
+        p->y = spawn.y;
+    }
+
+    p->z = 0;
+    p->unk_0C = func_080DFF30(p);
+    p->z = p->unk_0C;
+    p->y -= p->unk_0C;
 }
 
 typedef struct RogueEventWork {
@@ -94,12 +133,7 @@ static void RogueEvent_Init(RogueEventWork* w) {
     const RogueEventNpc* npc = &sEvents[gRogue.event].npc;
     FldObj* e = &w->obj;
 
-    e->fieldPosition.x = gFieldState->unk_DC - 0x3800;
-    e->fieldPosition.y = gFieldState->unk_E0 - 0x800;
-    e->fieldPosition.z = 0;
-    e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
-    e->fieldPosition.z = e->fieldPosition.unk_0C;
-    e->fieldPosition.y -= e->fieldPosition.unk_0C;
+    RoguePlaceNpc(e);
     e->angle = 0x80;
     e->unk_1A = 0x30;
     e->unk_30 = 2;

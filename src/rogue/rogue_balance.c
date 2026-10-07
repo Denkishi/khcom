@@ -64,39 +64,29 @@ u16 RogueEnemyExp(u16 base) {
     return (RogueCurve(102, 51) * base) >> 8;
 }
 
-// The floor each world's boss is tuned for. The seven world bosses of the
-// original game can be met in any order there and are all tuned alike, so
-// the run's fixed order makes the first of them easier and the last harder.
-static const u8 sWorldFloors[] = {
-    0, // unused
-    3, // Agrabah
-    3, // Atlantica
-    3, // Olympus Coliseum
-    3, // Wonderland
-    3, // Monstro
-    3, // Halloween Town
-    7, // Never Land
-    7, // Hollow Bastion
-    9, // Destiny Islands
-    0, // Traverse Town
-    9, // Twilight Town
-    10, // Castle Oblivion
-};
+// The bosses fought as characters (Leon, Riku, the Organization...) have flat
+// stats in the original game, set for wherever the story put them. Here any
+// of them can end any floor, so their HP and attack come from the floor:
+// 300 HP and 2 attack on the first, 180 HP and 2 attack more on each one
+// after, and a quarter more HP for the boss that ends a chapter.
+u16 RogueBossHp(void) {
+    s32 hp = 300 + gRogue.floor * 180;
 
-// Bosses keep their own stats, moved 15% a floor towards the floor the run
-// meets them on and never below 70%.
-u16 RogueBossStat(u16 base) {
-    s32 scale = 256 + (gRogue.floor - sWorldFloors[gRogue.world]) * 38;
-
-    if (scale < 180) {
-        scale = 180;
+    if (RogueFloorIsChapterEnd()) {
+        hp += hp / 4;
     }
 
-    if (scale > 1024) {
-        scale = 1024;
+    return hp;
+}
+
+u16 RogueBossAttack(void) {
+    s32 attack = 2 + gRogue.floor * 2;
+
+    if (attack > 25) {
+        attack = 25;
     }
 
-    return (scale * base) >> 8;
+    return attack;
 }
 
 // Card kinds unlock by tier as the run goes down: floor 0 offers tiers 0 and

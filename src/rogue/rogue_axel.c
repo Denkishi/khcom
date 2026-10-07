@@ -72,12 +72,7 @@ static void RogueAxel_Idle(RogueAxelWork* w) {
 static void RogueAxel_Init(RogueAxelWork* w) {
     FldObj* e = &w->obj;
 
-    e->fieldPosition.x = gFieldState->unk_DC - 0x3800;
-    e->fieldPosition.y = gFieldState->unk_E0 - 0x800;
-    e->fieldPosition.z = 0;
-    e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
-    e->fieldPosition.z = e->fieldPosition.unk_0C;
-    e->fieldPosition.y -= e->fieldPosition.unk_0C;
+    RoguePlaceNpc(e);
     e->angle = 0x80;
     e->unk_1A = 0x30;
     e->unk_30 = 2;

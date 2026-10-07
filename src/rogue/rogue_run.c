@@ -76,7 +76,7 @@ static u8 RogueRollBoss(void) {
     return floor->boss;
 }
 
-static u8 RogueFloorIsChapterEnd(void) {
+u8 RogueFloorIsChapterEnd(void) {
     u8 chapter;
 
     for (chapter = 1; chapter <= ROGUE_CHAPTERS; chapter++) {

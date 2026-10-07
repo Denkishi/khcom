@@ -143,6 +143,8 @@ enum {
     ROGUE_REWARD_EVENT
 };
 
+struct FldObj;
+
 typedef struct RogueRun {
     u32 seed;
     u32 rng;
@@ -198,7 +200,10 @@ u8 RogueEnemyLevel(void);
 u16 RogueEnemyHp(u16 base);
 u16 RogueEnemyAttack(u16 base);
 u16 RogueEnemyExp(u16 base);
-u16 RogueBossStat(u16 base);
+u16 RogueBossHp(void);
+u16 RogueBossAttack(void);
+u8 RogueFloorIsChapterEnd(void);
+void RoguePlaceNpc(struct FldObj* obj);
 u8 RogueCardTier(u16 id);
 u8 RogueMaxCardTier(void);
 u8 RogueMaxCardValue(void);

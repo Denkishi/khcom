@@ -9,6 +9,8 @@
  *   shot FILE.ppm     write the current frame
  *   peek8|peek16|peek32 ADDR [LABEL]
  *   poke8|poke16|poke32 ADDR VALUE
+ *   pokeat32 PTR OFFSET VALUE    write VALUE at OFFSET from the pointer stored at PTR
+ *   peekat32 PTR OFFSET [LABEL]  read at OFFSET from the pointer stored at PTR
  */
 #include <mgba/core/config.h>
 #include <mgba/core/core.h>
@@ -89,8 +91,8 @@ int main(int argc, char** argv) {
         return 1;
     }
     while (fgets(line, sizeof(line), script)) {
-        char command[32], a[128], b[64];
-        int count = sscanf(line, "%31s %127s %63s", command, a, b);
+        char command[32], a[128], b[64], c[64];
+        int count = sscanf(line, "%31s %127s %63s %63s", command, a, b, c);
         if (count < 1 || command[0] == '#') {
             continue;
         }
@@ -110,11 +112,18 @@ int main(int argc, char** argv) {
                 fwrite(rgb, 1, 3, out);
             }
             fclose(out);
-        } else if (!strncmp(command, "peek", 4)) {
+        } else if (!strncmp(command, "peek", 4) && command[4] != 'a') {
             uint32_t addr = strtoul(a, NULL, 16);
             int bits = atoi(command + 4);
             uint32_t value = bits == 8 ? core->busRead8(core, addr) : bits == 16 ? core->busRead16(core, addr) : core->busRead32(core, addr);
             printf("%s %08x = %x\n", count > 2 ? b : "peek", addr, value);
+        } else if (!strcmp(command, "peekat32")) {
+            uint32_t base = core->busRead32(core, strtoul(a, NULL, 16));
+            uint32_t addr = base + strtoul(b, NULL, 16);
+            printf("%s %08x = %x\n", count > 3 ? c : "peek", addr, core->busRead32(core, addr));
+        } else if (!strcmp(command, "pokeat32")) {
+            uint32_t base = core->busRead32(core, strtoul(a, NULL, 16));
+            core->busWrite32(core, base + strtoul(b, NULL, 16), strtoul(c, NULL, 0));
         } else if (!strncmp(command, "poke", 4)) {
             uint32_t addr = strtoul(a, NULL, 16);
             uint32_t value = strtoul(b, NULL, 0);

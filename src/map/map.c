@@ -2654,8 +2654,14 @@ void func_080E9A28(void) {
 
 void func_080E9AF0(void) {
     u8 r = IsTaskActive(gUnk_02034FB4);
+    s32 i;
 
     if (r != 0) {
+        // Holding any key runs the world name banner eight times as fast.
+        for (i = GetKeysHeld() != 0 ? 7 : 0; i > 0 && IsTaskActive(gUnk_02034FB4); i--) {
+            TaskPoolUpdate(&gUnk_0203C7AC->tasks);
+        }
+
         TaskPoolUpdate(&gUnk_0203C7AC->tasks);
         TaskPoolDraw(&gUnk_0203C7AC->tasks);
         TaskPoolUpdate(&gFieldState->tasks);

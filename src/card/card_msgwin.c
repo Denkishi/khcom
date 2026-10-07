@@ -320,7 +320,8 @@ u8 func_080A3A98(CardMsgWinWork* w, void* a) {
     w->unk_142++;
     sel = w->messageDef;
 
-    if (w->unk_142 >= sel->unk_0A) {
+    // Text types one character a frame whatever the message asks for.
+    if (w->unk_142 >= 1) {
         if (w->unk_141 < w->unk_143) {
             w->unk_141++;
             m4aSongNumStart(SONG_SYS_MESSAGE);

@@ -237,6 +237,12 @@ enum RogueMove {
 // How far a thrown move flies each frame.
 #define ROGUE_MOVE_SPEED 0xA00
 
+// A character drawn in place of a boss whose fight they borrow.
+enum RogueBossSkin {
+    ROGUE_SKIN_NONE,
+    ROGUE_SKIN_MICKEY // in place of Leon
+};
+
 // Event rooms.
 enum RogueEvent {
     ROGUE_EVENT_BELLE,
@@ -334,6 +340,7 @@ typedef struct RogueRun {
     u8 eventDone; // set once they have made their offer
     u8 duel; // set while the battle is a duel picked in an event
     u8 boon; // the boon the run started with
+    u8 bossSkin; // who stands in for the boss of the battle, see RogueBossSkin
     u8 oblivion; // the oblivion level the run is played at
     u8 build[ROGUE_BUILDS]; // points of each build, see RogueCountBuild
     u8 playedKind; // kind of the card played alone, ROGUE_NO_KIND otherwise
@@ -422,6 +429,10 @@ u8 RogueBuyUpgrade(u8 upgrade, u8 inRun);
 u8 RogueUpgradeMax(u8 upgrade);
 u16 RogueUpgradeCost(u8 upgrade);
 void RogueLeaveRoomFor(Mode* mode, s32 arg);
+struct AnimDef;
+struct HumDef;
+const struct AnimDef* RogueLeonAnim(u16 slot);
+const struct HumDef* RogueLeonDef(void);
 u8 RogueHasRelic(u8 relic);
 u8 RogueCardElement(u16 id);
 void RogueCountBuild(void);

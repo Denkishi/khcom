@@ -70,7 +70,14 @@ static u8 RogueRollBoss(void) {
         chapter++;
     }
 
+    gRogue.bossSkin = ROGUE_SKIN_NONE;
+
     if ((gRogueMeta.chapters > chapter + 1 || (gRogueMeta.flags & ROGUE_META_ALL_CLEARED)) && RogueRandBelow(2) == 0) {
+        // Leon's fight is Mickey's too, half the time.
+        if (floor->otherBoss == 0x9D && RogueRandBelow(2) == 0) {
+            gRogue.bossSkin = ROGUE_SKIN_MICKEY;
+        }
+
         return floor->otherBoss;
     }
 

@@ -1,0 +1,18 @@
+# Mickey standing in for Leon's boss fight.
+# Expect: the screenshots show Mickey where Leon would be, moving and
+# attacking, and the frame counter keeps running.
+include start.txt
+poke8 @gRogue.bossSkin 1
+debug battle 157
+wait 460
+shot /tmp/mickey_1.ppm
+wait 120
+shot /tmp/mickey_2.ppm
+wait 120
+shot /tmp/mickey_3.ppm
+press A
+wait 60
+shot /tmp/mickey_4.ppm
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

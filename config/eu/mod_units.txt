@@ -12,6 +12,7 @@ new rogue_build.c
 new rogue_debug.c
 new rogue_tag.c
 new rogue_moves.c
+new rogue_boss.c
 new rogue_cards.c
 new rogue_hub.c
 new rogue_bg_station.c
@@ -35,3 +36,4 @@ moved map_tasks.c
 moved mode_battle.c
 moved btl_collision.c
 moved card_riku_tutorial.c
+moved hum.c

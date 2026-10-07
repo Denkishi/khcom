@@ -8510,10 +8510,10 @@ void task_hum_riku_3(HumWork* work) {
 }
 
 void task_hum_leon_0(LeonWork* work) {
-    HumInit(&work->base, &gHumLeonDef);
+    HumInit(&work->base, RogueLeonDef());
     work->unk_188 = 0;
     work->unk_18A = 0;
-    AnimChangeWithDef(gHumLeonAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+    AnimChangeWithDef(RogueLeonAnim(0), &work->base.anim, 0, 1, work->base.tiles);
     work->unk_18C = gGameState.progression.unk_14;
     work->unk_194 = gGameState.progression.unk_1C;
     gGameState.progression.unk_14 = 0;
@@ -8547,22 +8547,22 @@ u8 task_hum_leon_1(LeonWork* work) {
 
     switch (work->base.unk_170) {
     case 12:
-        AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(RogueLeonAnim(0), &w->base.anim, 0, 1, w->base.tiles);
         break;
     case 0:
         if (gBtlWork->flags & 0x20000000000) {
             if (w->unk_18A == 0) {
-                AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+                AnimChangeWithDef(RogueLeonAnim(1), &w->base.anim, 0, 0, w->base.tiles);
                 w->unk_18A = 1;
             } else if (AnimIsFinished(&work->base.anim)) {
-                AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+                AnimChangeWithDef(RogueLeonAnim(3), &w->base.anim, 0, 0, w->base.tiles);
             }
         } else {
             if (w->unk_18A != 0) {
-                AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+                AnimChangeWithDef(RogueLeonAnim(2), &w->base.anim, 0, 0, w->base.tiles);
                 w->unk_18A = 0;
             } else if (AnimIsFinished(&work->base.anim)) {
-                AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+                AnimChangeWithDef(RogueLeonAnim(0), &w->base.anim, 0, 1, w->base.tiles);
             }
         }
 
@@ -8576,7 +8576,7 @@ u8 task_hum_leon_1(LeonWork* work) {
     case 1:
         if ((s16)work->base.unk_150 == 0) {
             func_0801AF08(act);
-            AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
+            AnimChangeWithDef(RogueLeonAnim(4), &w->base.anim, 0, 0, w->base.tiles);
             work->base.unk_150 = 8;
         }
         break;
@@ -8607,7 +8607,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         }
         break;
     default:
-        AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+        AnimChangeWithDef(RogueLeonAnim(3), &w->base.anim, 0, 0, w->base.tiles);
         func_0800F368(&work->base, 1);
         break;
     }

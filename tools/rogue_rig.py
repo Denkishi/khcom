@@ -1,183 +1,45 @@
 #!/usr/bin/env python3
-"""Draw a character in pieces, pose the pieces on a skeleton and write the frames.
+"""Pose a sprite that comes in pieces on a skeleton and write its frames.
 
     build/venv/bin/python tools/rogue_rig.py
 
-A trial of making a sprite the game does not have, here Roxas, without an
-artist: each piece of the body is a small grid of palette letters, a bone
-holds each piece by a pivot, and an animation is a few poses (an angle for
-each bone) with the frames between them worked out. Writes, in
-mod_assets/roxas/: parts.png (the pieces), sheet.png (every frame, one
-animation a row) and a GIF of each animation, enlarged, to look at.
+The sheet in mod_assets/sephiroth_ffrk.png is a figure cut into pieces, with
+the whole figure under them. The pieces are found on the sheet, each is
+looked for on the whole figure to learn where it goes, and they are grouped
+into bones that turn on pivots. An animation is a few poses, an angle and a
+shift for each bone, with the frames between them worked out. Writes, in
+mod_assets/sephiroth/: rest.png (the figure put back together, to compare
+with the sheet's), sheet.png (every frame, an animation a row) and a GIF of
+each animation, enlarged.
 """
 import math
 from pathlib import Path
 
+import numpy as np
 from PIL import Image
 
-OUT = Path(__file__).resolve().parents[1] / "mod_assets/roxas"
-CELL = (64, 64)
-ORIGIN = (36, 50)  # where the hips are in a cell
-BACKGROUND = (64, 128, 128)  # the teal the game's sheets use
+ROOT = Path(__file__).resolve().parents[1]
+SHEET = ROOT / "mod_assets/sephiroth_ffrk.png"
+OUT = ROOT / "mod_assets/sephiroth"
+CELL = (176, 128)
+ORIGIN = (60, 34)  # where the whole figure's top left corner goes in a cell
+BACKGROUND = (64, 128, 128)
 
-# Fifteen colours and the transparent one, as a sprite of the game has. The
-# outline is a dark blue rather than black, and each material has two or
-# three tones, as on Sora's sheets.
-PALETTE = {
-    ".": None,
-    "o": (28, 36, 60),      # outline
-    "h": (152, 96, 24),     # hair, dark
-    "H": (232, 172, 48),    # hair
-    "Y": (255, 236, 128),   # hair, light
-    "s": (216, 136, 96),    # skin, shadow
-    "S": (255, 212, 168),   # skin
-    "W": (248, 248, 248),   # white cloth
-    "g": (176, 184, 204),   # white cloth, shadow
-    "G": (104, 112, 140),   # grey
-    "k": (44, 44, 60),      # black cloth
-    "r": (208, 44, 44),     # red
-    "b": (48, 96, 216),     # eyes
-    "y": (240, 196, 56),    # keyblade guard
-    "L": (208, 220, 244),   # keyblade blade
-    "c": (204, 192, 164),   # trousers
+# The bones: the pieces each carries, by their number on the sheet read in
+# rows, and the pivot it turns on, in the whole figure's own coordinates.
+BONES = {
+    "wing": ([1, 12, 11, 48, 20, 8, 2, 4, 13], (27, 22)),
+    "tail": ([31, 15, 45, 40, 37, 38, 10, 41, 26, 39, 6, 36, 47, 5, 18, 3, 23, 25], (30, 44)),
+    "skirt": ([14, 27, 7, 9, 51, 42, 53, 32, 46, 52], (40, 44)),
+    "legs": ([43, 29, 19], (36, 60)),
+    "body": ([16, 34, 49, 35, 33, 44, 30, 22, 21, 50, 17, 24], (36, 44)),
+    "head": ([28], (38, 17)),
+    "sword": ([0], (41, 40)),
 }
+# What turns with what: a bone not listed turns with the whole figure only.
+PARENT = {"head": "body", "wing": "body", "sword": "body"}
 
-# The pieces, facing left as the game's sprites do. Each is its grid and the
-# pivot it turns on, as (x, y) in the grid.
-PARTS = {
-    "head": ([
-        "......o.....oo......",
-        ".....oHo...oHHo.oo..",
-        "..oo.oHHo.oHYHooHHo.",
-        ".oHHooHYHoHYYHHHYHo.",
-        ".oHYHHHYYHHYYHHYYHo.",
-        "..oHYYHYYYHYYHHYHHo.",
-        ".ooHYYYYYYYYHHHHHho.",
-        "oHHHYYYHHYYHHHHHHho.",
-        "oHHHHHHHHHHHHHhhHho.",
-        ".oHHhHHhhHHHhhhhhho.",
-        ".ohhSShSShhhhhhhho..",
-        "..oSSSSSSSshhhhho...",
-        "..oSboSSSSSshhho....",
-        "..oSboSSSSSssho.....",
-        "..osSSSSSSSsso......",
-        "...osSSSSSsso.......",
-        "....oosssooo........",
-        "......ooo...........",
-    ], (8, 16)),
-    "torso": ([
-        "...ookkoo...",
-        "..oWkkkkWo..",
-        ".oWWWkrkWWo.",
-        ".oWWWWrWWgo.",
-        "oWWWWWWWWggo",
-        "oWWgWWWWWggo",
-        "oWWgWWWWgggo",
-        ".oWgWWWWggo.",
-        ".okWkWkWkWo.",
-        ".oWkWkWkWko.",
-        "..occcccco..",
-        "...oooooo...",
-    ], (6, 10)),
-    "upper_arm": ([
-        ".ooo.",
-        "oWWWo",
-        "oWWgo",
-        "oWggo",
-        ".oSso",
-        ".oSso",
-        "..oo.",
-    ], (2, 1)),
-    "forearm": ([
-        ".oo..",
-        "oSso.",
-        "oSso.",
-        "okWko",
-        "oWkWo",
-        "oSSso",
-        "oSSso",
-        ".ooo.",
-    ], (2, 0)),
-    "thigh": ([
-        ".ooooo.",
-        "occccko",
-        "occcGko",
-        "occcGko",
-        "occGGko",
-        ".ocGkko",
-        "..oooo.",
-    ], (3, 1)),
-    "shin": ([
-        ".oooo.",
-        "ocGkko",
-        "ocGkko",
-        "ocGkko",
-        ".oGkko",
-        ".okkko",
-        "..ooo.",
-    ], (3, 0)),
-    "foot": ([
-        "....oooo..",
-        ".oorrkkko.",
-        "okrrrkkkko",
-        "okkkkkkGGo",
-        ".oooooooo.",
-    ], (6, 0)),
-    # The Kingdom Key, pointing up from the hand that holds it.
-    "keyblade": ([
-        ".ooooo.",
-        "oLLoLLo",
-        "oLooLLo",
-        ".ooLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        "..oLLo.",
-        ".ooLLoo",
-        "oyyyyyo",
-        "oyoooyo",
-        "oyoGoyo",
-        "oyoGoyo",
-        "oyyyyyo",
-        ".ooooo.",
-    ], (3, 20)),
-}
-
-# The skeleton: each bone is the piece it carries, its parent, and where on
-# the parent's piece its pivot sits. Listed in the order they are drawn, far
-# side first.
-BONES = [
-    ("far_arm", "upper_arm", "torso", (9, 2)),
-    ("far_forearm", "forearm", "far_arm", (2, 5)),
-    ("far_thigh", "thigh", "hips", (2, 0)),
-    ("far_shin", "shin", "far_thigh", (3, 5)),
-    ("far_foot", "foot", "far_shin", (3, 5)),
-    ("torso", "torso", "hips", (0, 0)),
-    ("near_thigh", "thigh", "hips", (-2, 0)),
-    ("near_shin", "shin", "near_thigh", (3, 5)),
-    ("near_foot", "foot", "near_shin", (3, 5)),
-    ("head", "head", "torso", (5, 1)),
-    ("near_arm", "upper_arm", "torso", (2, 2)),
-    ("keyblade", "keyblade", "near_forearm", (2, 6)),
-    ("near_forearm", "forearm", "near_arm", (2, 5)),
-]
-# Bones whose parent is drawn after them need the parent's place first.
-ORDER = ["torso", "head", "far_arm", "far_forearm", "near_arm", "near_forearm", "keyblade", "far_thigh", "far_shin", "far_foot",
-         "near_thigh", "near_shin", "near_foot"]
-
-# Poses: degrees for each bone, clockwise on the screen, relative to its
-# parent; "hips" is the whole body's (x, y) shift. A bone left out is at 0.
-REST = {"near_arm": 20, "near_forearm": 40, "keyblade": -100, "far_arm": -15, "far_forearm": 20, "near_thigh": 12, "near_shin": -10,
-        "far_thigh": -14, "far_shin": 6}
+REST = {}
 
 
 def pose(**changes):
@@ -186,117 +48,170 @@ def pose(**changes):
     return out
 
 
-# Each animation: a list of (pose, frames to reach the next pose); it loops.
+# Each animation: (pose, sixtieths of a second to the next pose); it loops.
+# A pose gives a bone degrees, clockwise, or (degrees, x, y) to shift it too.
 ANIMATIONS = {
+    # Standing: he breathes, the wing opens and closes, the coat stirs.
     "idle": [
-        (pose(), 5),
-        (pose(hips=(0, 1), torso=2, head=-2, near_arm=24, near_forearm=44, near_thigh=16, near_shin=-18, far_thigh=-18, far_shin=14), 5),
+        (pose(), 24),
+        (pose(wing=-9, tail=4, skirt=-3, body=(0, 0, 1), sword=2), 24),
     ],
-    "run": [
-        (pose(torso=10, head=-6, near_thigh=55, near_shin=-20, far_thigh=-45, far_shin=-60, near_arm=-40, near_forearm=60, far_arm=45,
-              far_forearm=50, keyblade=-70), 4),
-        (pose(hips=(0, -2), torso=10, head=-6, near_thigh=5, near_shin=-50, far_thigh=5, far_shin=-10, near_arm=0, near_forearm=60,
-              far_arm=0, far_forearm=50, keyblade=-80), 4),
-        (pose(torso=10, head=-6, near_thigh=-45, near_shin=-60, far_thigh=55, far_shin=-20, near_arm=40, near_forearm=50, far_arm=-40,
-              far_forearm=60, keyblade=-90), 4),
-        (pose(hips=(0, -2), torso=10, head=-6, near_thigh=5, near_shin=-10, far_thigh=5, far_shin=-50, near_arm=0, near_forearm=60,
-              far_arm=0, far_forearm=50, keyblade=-80), 4),
+    # The swing: the blade goes up and back, comes down across, and holds.
+    "slash": [
+        (pose(sword=-95, body=(-4, 0, 0), wing=-14, head=-3), 10),
+        (pose(sword=-120, body=(-6, 0, 0), wing=-18, head=-4, tail=5), 6),
+        (pose(sword=35, body=(8, 2, 1), wing=10, head=4, tail=-8, skirt=6), 4),
+        (pose(sword=28, body=(6, 2, 1), wing=6, head=3, tail=-5, skirt=4), 12),
+        (pose(), 10),
     ],
-    # The swing: the blade goes up behind the head, comes down in front and
-    # stays low for a moment. In the hand it lies along the arm (180) here,
-    # where at rest it is held across.
-    "swing": [
-        (pose(torso=-10, head=6, near_arm=-200, near_forearm=-20, keyblade=170, far_arm=-40, near_thigh=20, far_thigh=-25), 3),
-        (pose(torso=12, head=-8, near_arm=95, near_forearm=5, keyblade=185, far_arm=30, near_thigh=40, near_shin=-30, far_thigh=-35,
-              far_shin=10, hips=(-2, 1)), 2),
-        (pose(torso=18, head=-10, near_arm=55, near_forearm=10, keyblade=195, far_arm=40, near_thigh=44, near_shin=-36, far_thigh=-38,
-              far_shin=12, hips=(-3, 2)), 4),
-        (pose(), 3),
-    ],
+    # Hit: he rocks back.
     "hurt": [
-        (pose(torso=-18, head=14, near_arm=-60, near_forearm=-30, far_arm=-70, far_forearm=-20, near_thigh=-10, far_thigh=-30,
-              hips=(3, 0), keyblade=-100), 4),
-        (pose(torso=-10, head=8, near_arm=-30, far_arm=-40, hips=(2, 0), keyblade=-100), 4),
+        (pose(body=(-9, -3, 0), head=-8, wing=14, sword=-14, tail=-9, skirt=-9), 8),
+        (pose(body=(-4, -1, 0), head=-3, wing=6, sword=-6, tail=-4, skirt=-4), 10),
     ],
 }
 
 
-def image_of(rows):
-    image = Image.new("RGBA", (len(rows[0]), len(rows)), (0, 0, 0, 0))
-    for y, row in enumerate(rows):
-        if len(row) != len(rows[0]):
-            raise SystemExit(f"a row of a piece is {len(row)} wide, the first is {len(rows[0])}: {row}")
-        for x, letter in enumerate(row):
-            if PALETTE[letter] is not None:
-                image.putpixel((x, y), PALETTE[letter] + (255,))
-    return image
+def find_pieces(indices, opaque):
+    """The boxes of the sheet's pieces, read in rows; the last is the whole figure."""
+    height, width = indices.shape
+    seen = np.zeros((height, width), bool)
+    boxes = []
+    for y in range(height):
+        for x in range(width):
+            if seen[y, x] or not opaque[y, x]:
+                continue
+            stack = [(x, y)]
+            seen[y, x] = True
+            x0 = x1 = x
+            y0 = y1 = y
+            count = 0
+            while stack:
+                cx, cy = stack.pop()
+                count += 1
+                x0, x1, y0, y1 = min(x0, cx), max(x1, cx), min(y0, cy), max(y1, cy)
+                for dx in (-1, 0, 1):
+                    for dy in (-1, 0, 1):
+                        nx, ny = cx + dx, cy + dy
+                        if 0 <= nx < width and 0 <= ny < height and not seen[ny, nx] and opaque[ny, nx]:
+                            seen[ny, nx] = True
+                            stack.append((nx, ny))
+            if count > 6:
+                boxes.append((x0, y0, x1 + 1, y1 + 1))
+    boxes.sort(key=lambda b: (b[1] // 12, b[0]))
+    return boxes[:-1], boxes[-1]
 
 
-IMAGES = {name: image_of(rows) for name, (rows, _pivot) in PARTS.items()}
+def fit(indices, opaque, pieces, whole):
+    """Where each piece goes on the whole figure, and how much of it shows there."""
+    pad = 12
+    x0, y0, x1, y1 = whole
+    ref = np.full((y1 - y0 + 2 * pad, x1 - x0 + 2 * pad), -1, int)
+    ref[pad:-pad, pad:-pad] = np.where(opaque[y0:y1, x0:x1], indices[y0:y1, x0:x1], -1)
+    placed = []
+    for box in pieces:
+        piece = indices[box[1]:box[3], box[0]:box[2]].astype(int)
+        mask = opaque[box[1]:box[3], box[0]:box[2]]
+        score = np.zeros((ref.shape[0] - piece.shape[0] + 1, ref.shape[1] - piece.shape[1] + 1))
+        ys, xs = np.nonzero(mask)
+        for yy, xx in zip(ys, xs):
+            score += ref[yy:yy + score.shape[0], xx:xx + score.shape[1]] == piece[yy, xx]
+        score /= len(ys)
+        at = np.unravel_index(score.argmax(), score.shape)
+        placed.append((int(at[1]) - pad, int(at[0]) - pad, float(score[at])))
+    return placed
 
 
-def place(pose_):
-    """Where each bone's pivot is and how far it is turned, from the pose."""
-    piece = {name: part for name, part, _parent, _at in BONES}
-    parent = {name: parent_ for name, _part, parent_, _at in BONES}
-    at = {name: at_ for name, _part, _parent, at_ in BONES}
-    shift = pose_.get("hips", (0, 0))
-    world = {"hips": (ORIGIN[0] + shift[0], ORIGIN[1] + shift[1], 0.0)}
-    for name in ORDER:
-        px, py, angle = world[parent[name]]
-        ax, ay = at[name]
-        if parent[name] != "hips":
-            pivot = PARTS[piece[parent[name]]][1]
-            ax, ay = ax - pivot[0], ay - pivot[1]
-        cos, sin = math.cos(math.radians(angle)), math.sin(math.radians(angle))
-        world[name] = (px + ax * cos - ay * sin, py + ax * sin + ay * cos, angle + pose_.get(name, 0))
-    return world, piece
+class Rig:
+    def __init__(self):
+        sheet = Image.open(SHEET)
+        indices = np.array(sheet).astype(int)
+        self.rgba = sheet.convert("RGBA")
+        opaque = np.array(self.rgba)[:, :, 3] > 0
+        self.pieces, self.whole = find_pieces(indices, opaque)
+        self.placed = fit(indices, opaque, self.pieces, self.whole)
+        self.images = [self.rgba.crop(box) for box in self.pieces]
+        self.bone_of = {}
+        for bone, (numbers, _pivot) in BONES.items():
+            for number in numbers:
+                self.bone_of[number] = bone
+        missing = [n for n in range(len(self.pieces)) if n not in self.bone_of]
+        if missing:
+            raise SystemExit(f"pieces in no bone: {missing}")
+        # The less of a piece shows on the whole figure, the further back it is.
+        self.order = sorted(range(len(self.pieces)), key=lambda n: self.placed[n][2])
 
+    def transform(self, bone, pose_):
+        """The bone's turn and shift, with its parent's: a point's place on the cell."""
+        chain = []
+        while bone is not None:
+            chain.append(bone)
+            bone = PARENT.get(bone)
 
-def draw(pose_):
-    """One frame: every piece turned on its pivot and laid down, far side first."""
-    world, piece = place(pose_)
-    frame = Image.new("RGBA", CELL, (0, 0, 0, 0))
-    for name, _part, _parent, _at in BONES:
-        image = IMAGES[piece[name]]
-        pivot = PARTS[piece[name]][1]
-        x0, y0, angle = world[name]
-        cos, sin = math.cos(math.radians(angle)), math.sin(math.radians(angle))
-        # Each pixel of the frame asks the piece what is there: no holes.
-        reach = max(image.size) + 2
-        for y in range(int(y0) - reach, int(y0) + reach + 1):
-            for x in range(int(x0) - reach, int(x0) + reach + 1):
-                if not (0 <= x < CELL[0] and 0 <= y < CELL[1]):
-                    continue
-                dx, dy = x + 0.5 - x0, y + 0.5 - y0
-                sx = dx * cos + dy * sin + pivot[0] + 0.5
-                sy = -dx * sin + dy * cos + pivot[1] + 0.5
-                if 0 <= sx < image.width and 0 <= sy < image.height:
-                    pixel = image.getpixel((int(sx), int(sy)))
-                    if pixel[3]:
-                        frame.putpixel((x, y), pixel)
-    return frame
+        def apply(x, y):
+            for name in chain:
+                value = pose_.get(name, 0)
+                angle, sx, sy = value if isinstance(value, tuple) else (value, 0, 0)
+                px, py = BONES[name][1]
+                cos, sin = math.cos(math.radians(angle)), math.sin(math.radians(angle))
+                dx, dy = x - px, y - py
+                x, y = px + dx * cos - dy * sin + sx, py + dx * sin + dy * cos + sy
+            return x, y
+
+        return apply
+
+    def draw(self, pose_):
+        frame = Image.new("RGBA", CELL, (0, 0, 0, 0))
+        for number in self.order:
+            image = self.images[number]
+            px, py, _score = self.placed[number]
+            apply = self.transform(self.bone_of[number], pose_)
+            # Where the piece's corners and its x and y steps land: the turn
+            # is the same all over it, so each pixel of the cell can ask the
+            # piece what is there, and no holes open.
+            ox, oy = apply(px, py)
+            ax, ay = apply(px + 1, py)
+            bx, by = apply(px, py + 1)
+            ux, uy, vx, vy = ax - ox, ay - oy, bx - ox, by - oy
+            corners = [apply(px + cx, py + cy) for cx in (0, image.width) for cy in (0, image.height)]
+            x0 = int(min(c[0] for c in corners)) - 1
+            x1 = int(max(c[0] for c in corners)) + 2
+            y0 = int(min(c[1] for c in corners)) - 1
+            y1 = int(max(c[1] for c in corners)) + 2
+            for y in range(y0, y1):
+                for x in range(x0, x1):
+                    cx, cy = x + ORIGIN[0], y + ORIGIN[1]
+                    if not (0 <= cx < CELL[0] and 0 <= cy < CELL[1]):
+                        continue
+                    dx, dy = x + 0.5 - ox, y + 0.5 - oy
+                    sx = dx * ux + dy * uy
+                    sy = dx * vx + dy * vy
+                    if 0 <= sx < image.width and 0 <= sy < image.height:
+                        pixel = image.getpixel((int(sx), int(sy)))
+                        if pixel[3]:
+                            frame.putpixel((cx, cy), pixel)
+        return frame
 
 
 def between(a, b, t):
     out = {}
     for key in set(a) | set(b):
-        if key == "hips":
-            ha, hb = a.get("hips", (0, 0)), b.get("hips", (0, 0))
-            out["hips"] = (round(ha[0] + (hb[0] - ha[0]) * t), round(ha[1] + (hb[1] - ha[1]) * t))
-        else:
-            out[key] = a.get(key, 0) + (b.get(key, 0) - a.get(key, 0)) * t
+        va, vb = a.get(key, 0), b.get(key, 0)
+        va = va if isinstance(va, tuple) else (va, 0, 0)
+        vb = vb if isinstance(vb, tuple) else (vb, 0, 0)
+        # Eased, so that a pose is left and reached gently.
+        s = t * t * (3 - 2 * t)
+        out[key] = tuple(x + (y - x) * s for x, y in zip(va, vb))
     return out
 
 
-def frames_of(name, step=2):
-    """The animation's frames, one every `step` sixtieths of a second."""
+def frames_of(rig, name, step=4):
     keys = ANIMATIONS[name]
     out = []
     for index, (pose_, length) in enumerate(keys):
         following = keys[(index + 1) % len(keys)][0]
-        for i in range(0, length * 2, step):
-            out.append(draw(between(pose_, following, i / (length * 2))))
+        for i in range(0, length, step):
+            out.append(rig.draw(between(pose_, following, i / length)))
     return out
 
 
@@ -308,20 +223,21 @@ def flat(frame):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    parts = Image.new("RGB", (sum(i.width + 2 for i in IMAGES.values()) + 2, max(i.height for i in IMAGES.values()) + 4), BACKGROUND)
-    x = 2
-    for image in IMAGES.values():
-        parts.paste(image, (x, 2), image)
-        x += image.width + 2
-    parts.resize((parts.width * 6, parts.height * 6), Image.NEAREST).save(OUT / "parts.png")
-    rows = {name: frames_of(name) for name in ANIMATIONS}
+    rig = Rig()
+    rest = rig.draw({})
+    whole = rig.rgba.crop(rig.whole)
+    compare = Image.new("RGB", (CELL[0] * 2, CELL[1]), BACKGROUND)
+    compare.paste(whole, ORIGIN, whole)
+    compare.paste(rest, (CELL[0], 0), rest)
+    compare.resize((compare.width * 3, compare.height * 3), Image.NEAREST).save(OUT / "rest.png")
+    rows = {name: frames_of(rig, name) for name in ANIMATIONS}
     sheet = Image.new("RGB", (CELL[0] * max(len(r) for r in rows.values()), CELL[1] * len(rows)), BACKGROUND)
     for row, frames in enumerate(rows.values()):
         for column, frame in enumerate(frames):
             sheet.paste(flat(frame), (column * CELL[0], row * CELL[1]))
     sheet.save(OUT / "sheet.png")
     for name, frames in rows.items():
-        big = [flat(f).resize((CELL[0] * 4, CELL[1] * 4), Image.NEAREST) for f in frames]
+        big = [flat(f).resize((CELL[0] * 3, CELL[1] * 3), Image.NEAREST) for f in frames]
         big[0].save(OUT / f"{name}.gif", save_all=True, append_images=big[1:], duration=66, loop=0)
     print(f"wrote {OUT}: {', '.join(f'{name} {len(frames)}' for name, frames in rows.items())} frames")
 

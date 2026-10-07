@@ -311,6 +311,8 @@ enum RogueCardMod {
     ROGUE_MOD_DOUBLE, // each hit lands twice
     ROGUE_MOD_LIFESTEAL, // each hit heals 1 HP
     ROGUE_MOD_HEAVY, // a quarter more damage
+    ROGUE_MOD_PIERCE, // an enemy card must beat it by two to break it
+    ROGUE_MOD_LIGHT, // it frees a third of its CP cost
     ROGUE_CARD_MODS
 };
 
@@ -523,6 +525,7 @@ typedef struct RogueRun {
     u32 relics; // one bit for each of the first 32 RogueRelic the run has; ask RogueHasRelic
     u32 relics2; // and for the rest
     u8 airDashUsed; // the air dash was done since Sora last left the ground
+    u8 loops; // times the run went past its last floor and on, each an oblivion level higher
     u8 freezing; // set while a hit that freezes whatever it lands on is tested
     u8 freeCard; // the first card played since the reload is not used up
     u8 sleightReady; // the next card played alone does a random sleight
@@ -597,6 +600,8 @@ typedef struct RogueDebug {
     u16 seenCp;
     u16 seenDeckCards;
     u8 lastMod; // what the last card played alone was enchanted with
+    u16 countCard; // a card id the tests poke...
+    u16 seenCount; // ...and how many of it Sora has
     u16 bossSwings; // swings of the bosses that fight with the mod's AI
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt

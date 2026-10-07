@@ -15,6 +15,7 @@ extern vu32 gVBlankCounter;
 RogueDebug gRogueDebug;
 
 Deck* GetActiveDeck(void);
+u16 CountCardsById(u16 cardId);
 
 // Runs a pending command while Sora walks around a room.
 void RogueDebugField(void) {
@@ -25,6 +26,7 @@ void RogueDebugField(void) {
     gRogueDebug.seenAp = gGameState.progression.ap;
     gRogueDebug.seenCp = gGameState.progression.cp;
     gRogueDebug.seenDeckCards = GetActiveDeck()->unk_DC;
+    gRogueDebug.seenCount = CountCardsById(gRogueDebug.countCard);
 
     if (command == ROGUE_DEBUG_NONE) {
         return;

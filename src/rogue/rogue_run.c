@@ -328,9 +328,25 @@ void RogueLeaveRoom(u8 door) {
 // After a boss: the next floor, or the end of the run if that was the last.
 void RogueNextFloor(void) {
     if (gRogue.floor + 1 >= RogueFloorCount()) {
+        if (gRogue.chapters < ROGUE_CHAPTERS) {
+            RogueMetaEndRun(1);
+            ModeRequest(&gModeRogueOver, 1);
+            return;
+        }
+
+        // A run through every chapter does not end: what it earned is banked
+        // as a win, and it starts over from the first floor an oblivion
+        // level higher, deck and relics as they are, until Sora falls.
         RogueMetaEndRun(1);
-        ModeRequest(&gModeRogueOver, 1);
-        return;
+        gRogue.shards = 0;
+        gRogue.newChapter = 0;
+        gRogue.loops++;
+
+        if (gRogue.oblivion < 250) {
+            gRogue.oblivion++;
+        }
+
+        gRogue.floor = -1;
     }
 
     gRogue.floor++;

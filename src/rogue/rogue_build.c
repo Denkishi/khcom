@@ -705,6 +705,11 @@ u8 RogueBlocksBreak(s32 value) {
         return 1;
     }
 
+    // A piercing card: only a card two above it breaks it.
+    if (gRogue.playedMod == ROGUE_MOD_PIERCE && mine != 0 && value != 0 && value <= mine + 1) {
+        return 1;
+    }
+
     return RogueHasRelic(ROGUE_RELIC_TIE_WIN) && mine == value && value != 0;
 }
 
@@ -746,9 +751,11 @@ static const u8 sModThunder[] = "Tuono a ogni colpo";
 static const u8 sModDouble[] = "Ogni colpo vale doppio";
 static const u8 sModLifesteal[] = "Ogni colpo cura 1 PV";
 static const u8 sModHeavy[] = "Un quarto di danno in pi\xF9";
+static const u8 sModPierce[] = "Dura da spezzare";
+static const u8 sModLight[] = "Libera un terzo dei PC";
 
 const u8* RogueCardModName(u8 mod) {
-    static const u8* const names[ROGUE_CARD_MODS] = { sModFire, sModFire, sModIce, sModThunder, sModDouble, sModLifesteal, sModHeavy };
+    static const u8* const names[ROGUE_CARD_MODS] = { sModFire, sModFire, sModIce, sModThunder, sModDouble, sModLifesteal, sModHeavy, sModPierce, sModLight };
 
     return names[mod];
 }

@@ -1,0 +1,37 @@
+# What follows a won boss: a seal, the starting card bought in the hub being
+# in the deck, and a run through every chapter going on past its last floor.
+# Expect: fire_cards 1 or more (the starting card), seals_after one above
+# seals_before, and after the last boss floor 0, loops 1, oblivion 1 with the
+# frame counter still running.
+wait 600
+press START
+wait 120
+poke8 @gRogueMeta.starters 1
+poke8 @gRogueMeta.chapters 4
+press START
+wait 200
+hold B 100
+wait 20
+poke16 @gRogueDebug.countCard 176
+wait 4
+peek16 @gRogueDebug.seenCount fire_cards
+peek8 @gRogueMeta.seals seals_before
+poke8 @gRogue.chapters 4
+debug floor 10
+wait 4
+poke8 @gRogue.kind 6
+poke8 @gRogueDebug.god 1
+debug battle 165
+wait 400
+debug win
+wait 400
+peek8 @gRogueMeta.seals seals_after
+press A
+wait 400
+peek8 @gRogue.floor floor
+peek8 @gRogue.loops loops
+peek8 @gRogue.oblivion oblivion
+shot /tmp/endless.ppm
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

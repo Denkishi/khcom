@@ -694,6 +694,11 @@ static void RogueGiveReward(RogueReward* reward) {
         break;
     case REWARD_ENCHANT:
         gRogue.cardMod[GetActiveDeck()->cards[reward->card]] = reward->result;
+
+        // A light card gives back a third of what it costs, as CP to spend.
+        if (reward->result == ROGUE_MOD_LIGHT) {
+            gGameState.progression.cp += GetCardCpCost(gCardCollection[GetActiveDeck()->cards[reward->card]]) / 3;
+        }
         break;
     case REWARD_PREMIUM:
         deck = GetActiveDeck();

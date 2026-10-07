@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -1128,11 +1129,8 @@ static u8 PrizeCard_1(UnkStruct_08096F94* w, void* a) {
         w->unk_DC += GetRandom() % 57 + 100;
     }
 
-    if (gBtlWork->unk_0F4 == 6) {
-        ColliderSetRadius(&w->collider, 50);
-    } else {
-        ColliderSetRadius(&w->collider, 10);
-    }
+    // Card drops are picked up from further away.
+    ColliderSetRadius(&w->collider, 50);
 
     if (w->unk_A8 - 8 > w->unk_AC) {
         w->unk_A8 = w->unk_AC - 8;

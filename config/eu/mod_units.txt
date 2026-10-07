@@ -44,3 +44,7 @@ moved engine.c
 moved btl2.c
 moved card_enemy.c
 moved fld.c
+moved btl3.c
+moved card_prize_card_init.c
+moved card_friend_card.c
+moved card_deckcard2.c

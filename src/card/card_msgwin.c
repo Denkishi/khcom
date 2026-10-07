@@ -323,7 +323,8 @@ u8 func_080A3A98(CardMsgWinWork* w, void* a) {
     // Text types one character a frame whatever the message asks for.
     if (w->unk_142 >= 1) {
         if (w->unk_141 < w->unk_143) {
-            w->unk_141++;
+            // The whole page at once.
+            w->unk_141 = w->unk_143;
             m4aSongNumStart(SONG_SYS_MESSAGE);
         } else {
             e = gMsgFaceAnims[sel->portraitId];

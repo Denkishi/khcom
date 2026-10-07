@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "task_descriptors.h"
 #include "display.h"
 #include "obj_api.h"
@@ -51,7 +52,8 @@ void task_btl_form_0(BtlFormWork* work, const BtlFormList* list) {
     work->flags = 0;
     work->list = list;
     work->entry = list->entries[0];
-    work->timer = work->entry->delay;
+    // Enemies come in sooner.
+    work->timer = work->entry->delay / 3;
     work->unk_10 = 1;
     work->unk_02 = 0;
     work->unk_04 = 0;

@@ -2288,7 +2288,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 SetBtlSoraAnimation(work, 0, 0);
             }
 
-            if ((s16)work->unk_156 <= 29) {
+            if ((s16)work->unk_156 <= 8) {
                 AnimReset(&work->anim);
             }
 

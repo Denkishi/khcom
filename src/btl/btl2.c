@@ -1544,11 +1544,8 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         work->actor = gRikuBtlWork->actor;
                         hit = 1;
                     } else {
-                        if (gBtlWork->unk_0F4 == 6) {
+                        // Prizes come to Sora from anywhere.
                             range = 0x10000;
-                        } else {
-                            range = 0x2800;
-                        }
 
                         if (DIST(gBtlWork->actor->x, work->x) < range &&
                             DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
@@ -1557,11 +1554,8 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         }
                     }
                 } else {
-                    if (gBtlWork->unk_0F4 == 6) {
+                    // Prizes come to Sora from anywhere.
                         range = 0x10000;
-                    } else {
-                        range = 0x2800;
-                    }
 
                     if (DIST(gBtlWork->actor->x, work->x) < range &&
                         DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
@@ -1583,11 +1577,8 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     }
                 }
             } else {
-                if (gBtlWork->unk_0F4 == 6) {
+                // Prizes come to Sora from anywhere.
                     range = 0x10000;
-                } else {
-                    range = 0x2800;
-                }
 
                 if (DIST(gBtlWork->actor->x, work->x) < range &&
                     DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
@@ -1935,10 +1926,11 @@ s32 task_btl_start_1(BtlStartWork* work) {
     case 34:
         func_08019050(35, 0x100, gBtlWork->x2, gBtlWork->y2);
         break;
+    // The mod's intro is shorter: the flash fades faster and the task ends sooner.
     case 43:
-        FadeStartIn(2, 30);
+        FadeStartIn(2, 12);
         break;
-    case 74:
+    case 57:
         return 0;
     }
 

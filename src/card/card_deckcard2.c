@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -149,6 +150,11 @@ void DeckCard2_2(DeckCard2Work* n) {
 
     if (n->args.unk_0A == 0 && n->cardDef->unk_2A != 3) {
         DrawSprite((n->x >> 8) - 3, (n->y >> 8) - 4, gUnk_09EE981C[n->cardDef->unk_20], n->tiles2, n->palette2, 0, 0, 0x31);
+    }
+
+    // The mod's card level, from 2 up, in the top corner of the cards of the deck.
+    if (n->args.unk_0A == 0 && n->args.slot != 0 && *n->args.slot != 0xFFFF && n->tiles2 != 0 && RogueCardLevel(*n->args.slot) > 1) {
+        DrawSprite((n->x >> 8) - 3, (n->y >> 8) - 17, gUnk_09EE981C[RogueCardLevel(*n->args.slot)], n->tiles2, n->palette2, 0, 0, 0x31);
     }
 }
 

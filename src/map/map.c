@@ -2698,7 +2698,7 @@ void func_080E9B7C(void) {
         return;
     }
     if (gFieldState->flags & 0x10) {
-        FadeStartOut(0, 16);
+        FadeStartOut(0, 8);
         FadeLock();
         func_080E9898(func_080E9CBC);
         return;
@@ -2803,7 +2803,7 @@ void func_080E9E94(void) {
     u16 t;
 
     if (gFieldState->flags & 0x10) {
-        FadeStartOut(0, 16);
+        FadeStartOut(0, 8);
         FadeLock();
         func_080E9898(func_080E9CBC);
         if ((gGameState.progression.unk_82 & 0x200) == 0) {
@@ -2911,7 +2911,7 @@ void Mode_MapFld_0(void) {
     func_0801CB00();
     SeedRandom(gFrameCounter);
     m4aSongNumStartOrContinue(p->song);
-    FadeStartIn(0, 16);
+    FadeStartIn(0, 8);
 }
 
 void Mode_MapFld_1(void) {

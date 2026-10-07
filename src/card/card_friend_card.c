@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -264,11 +265,8 @@ s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
         }
     }
 
-    if (gBtlWork->unk_0F4 == 6) {
-        ColliderSetRadius(&w->collider, 50);
-    } else {
-        ColliderSetRadius(&w->collider, 10);
-    }
+    // Card drops are picked up from further away.
+    ColliderSetRadius(&w->collider, 50);
 
     if ((u8)func_0801C6D4(&w->unk_38, &w->unk_3C, &w->unk_40,
                           &w->unk_44) != 0) {

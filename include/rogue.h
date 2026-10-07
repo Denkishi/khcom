@@ -777,6 +777,7 @@ typedef struct RogueDebug {
     u16 techs; // moves of the flat battle made
     u16 flatPrizes; // frames a prize was kept on the flat battle's line
     u8 mapDrops; // room cards dropped by battles
+    u8 strike; // set from outside: the next door looked at is struck, as if by Sora's Keyblade
     u8 fieldAims; // swings in a room turned to the enemy
     u8 fieldRing; // the ring was drawn on an enemy of a room
     u8 breaks; // card breaks shown
@@ -882,6 +883,9 @@ const u8* RogueMapCardName(u8 card);
 u8 RogueMapCardCost(u8 card);
 u8 RogueMapCardCount(void);
 u8 RogueMapMenuWanted(u8 hub);
+void RogueDoorStruck(void);
+u8 RogueDebugStrike(void);
+void RogueOnMapCard(u16 card);
 u8 RogueDoorChosen(u8 door);
 u8 RogueDoorAsks(u8 door);
 void RogueDoorClear(void);

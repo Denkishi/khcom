@@ -2057,6 +2057,11 @@ u8 DoorAcceptsMapCard(UnkStruct_080E8D64* p) {
     EventKey* q;
     u8 n;
 
+    // In the mod any card opens any door, whatever its colour and number.
+    if (p != 0) {
+        return 1;
+    }
+
     if (IsEventDoor(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10) == 0) {
         if (p->unk_00 > 21) {
             return 0;
@@ -4699,30 +4704,14 @@ void func_080ECAA8(MapDoorWork* p) {
 u8 func_080ECAC8(MapDoorWork* p) {
     UnkStruct_080DFB7C* flags = p->unk_00;
     FldObj* e = &p->obj;
-    // A door struck asks for a room card in its menu, which is left as the
-    // pause menu's screens are; back in the room with the card chosen, Sora
-    // goes through the door at once.
-    if (RogueDoorChosen(flags->unk_06)) {
-        if (!(gFieldState->flags & 0x2000)) {
-            RogueDoorClear();
-            gUnk_0203C7AC->unk_10 = flags->unk_06;
-            gFieldState->flags |= 0x10;
-        }
-
-        return 1;
-    }
-
     if (!(gFieldState->flags & 0x2000) && !(gUnk_0203C7AC->flags & 0x4004) &&
         RogueDoorsOpen() && (u8)(flags->unk_07 + 3) > 1 && (flags->unk_00 & 0x12) != 0x12 &&
-        func_080E02E0(&e->fieldPosition, 0, 8) != 0 && !(gFieldState->flags & 0x800000) &&
+        (func_080E02E0(&e->fieldPosition, 0, 8) != 0 || RogueDebugStrike()) && !(gFieldState->flags & 0x800000) &&
         gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.unk_0C) {
         TaskPool* pool;
 
-        if (RogueDoorAsks(flags->unk_06)) {
-            gUnk_0203C7AC->flags |= 0x80;
-            RogueLeaveRoomFor(&gModeRogueDoor, flags->unk_06);
-            return 1;
-        }
+        // The door asks for a map card: Sora always has one to give.
+        RogueDoorStruck();
 
         m4aSongNumStart(SONG_SND_220);
         pool = &p->tasks;

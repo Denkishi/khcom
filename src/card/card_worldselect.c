@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -574,6 +575,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
 
                 w->card->unk_74 = sel;
                 w->card->unk_6C |= 0x40;
+                RogueOnMapCard(w->card->args.unk_00 + sel);
                 RemoveMapCard(w->card->args.unk_00 + sel);
                 *w->unk_294 = 2;
                 w->unk_28F = 16;

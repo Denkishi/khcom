@@ -66,3 +66,4 @@ new rogue_door.c
 new rogue_techs.c
 new rogue_field.c
 moved map_cell.c
+moved card_worldselect.c

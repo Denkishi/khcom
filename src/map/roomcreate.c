@@ -63,8 +63,12 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             ApproachValue(&gFieldState->y, gFieldState->y2 - 0x6000, work->unk_26);
             work->unk_26--;
         } else if (work->unk_26 == 0) {
-            // Doors open by themselves: there are no map cards to play.
-            work->unk_29 = 2;
+            // The game's own choice of a map card: any card opens any door,
+            // and the room behind is the card's, see RogueOnMapCard.
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
+            CreateMapCardSelection(&work->tasks, &work->unk_29);
+            SetBgPriority(1, 1);
+            work->unk_26--;
         }
 
         switch (work->unk_29) {
@@ -100,7 +104,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             work->unk_26++;
         }
 
-        if (work->unk_26 > 20) {
+        if (work->unk_29 == 1) {
             work->unk_26 = 0;
             work->state = 4;
         }

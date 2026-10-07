@@ -160,6 +160,11 @@ static const RogueMapCard sCards[ROGUE_MAP_CARD_KINDS] = {
 #define FIRST_EVENT_CARD 6
 #define FIRST_BOSS_CARD 25
 
+s32 AddMapCard(u16 a);
+u16 func_08093B38(void);
+void ClearMapCardInventory(void);
+static void RogueGiveGameCard(u8 kind);
+
 const u8* RogueMapCardName(u8 card) {
     return sCards[card].name;
 }
@@ -238,38 +243,47 @@ static u8 RogueMapRoll(u32 roll) {
         return roll % FIRST_EVENT_CARD;
     }
 
-    if (pick < 84) {
-        return FIRST_EVENT_CARD + roll % (FIRST_BOSS_CARD - FIRST_EVENT_CARD);
-    }
-
-    return FIRST_BOSS_CARD + roll % (ROGUE_MAP_CARD_KINDS - FIRST_BOSS_CARD);
+    // The characters' and the bosses' cards are not sold while doors are
+    // opened with the game's own cards, which have no card for each of them.
+    return roll % FIRST_EVENT_CARD;
 }
 
-// Called when a run starts: the cards bought in the hub go with Sora.
+// Called when a run starts: Sora gets two map cards to begin with, and the
+// cards bought in the hub, as the game's cards for their kinds of room.
 void RogueMapStartRun(void) {
     u8 slot;
 
-    for (slot = 0; slot < ROGUE_MAP_CARDS; slot++) {
-        gRogue.mapCards[slot] = *RogueMapKept(slot);
-        *RogueMapKept(slot) = 0;
-    }
-
+    ClearMapCardInventory();
     gRogue.cardEvent = 0;
 
-    // And two to begin with, of the kinds of room.
-    RogueMapGive(0, RogueRandBelow(FIRST_EVENT_CARD));
-    RogueMapGive(0, RogueRandBelow(FIRST_EVENT_CARD));
+    for (slot = 0; slot < ROGUE_MAP_CARDS; slot++) {
+        u8 kept = *RogueMapKept(slot);
+
+        gRogue.mapCards[slot] = 0;
+        *RogueMapKept(slot) = 0;
+
+        if (kept != 0) {
+            const RogueMapCard* card = &sCards[kept - 1];
+
+            RogueGiveGameCard(card->type == CARD_KIND ? card->arg : card->type == CARD_EVENT ? ROGUE_ROOM_EVENT : ROGUE_ROOM_ELITE);
+        }
+    }
+
+    RogueGiveGameCard(ROGUE_ROOM_BATTLE);
+    RogueGiveGameCard(ROGUE_ROOM_REST);
 }
 
 // Called after a battle won: a card may drop, more often from the harder rooms.
 void RogueMapDrop(void) {
-    // One from every battle, and a second from the harder rooms.
+    // One of the game's map cards from every battle, and a second from the
+    // harder rooms: battles most often, the rest now and then.
+    static const u8 kinds[] = { ROGUE_ROOM_BATTLE, ROGUE_ROOM_BATTLE, ROGUE_ROOM_BATTLE, ROGUE_ROOM_ELITE, ROGUE_ROOM_TREASURE, ROGUE_ROOM_REST,
+                                ROGUE_ROOM_REST, ROGUE_ROOM_SHOP, ROGUE_ROOM_EVENT, ROGUE_ROOM_EVENT, ROGUE_ROOM_CHALLENGE };
     u32 count = gRogue.kind == ROGUE_ROOM_BATTLE ? 1 : 2;
 
     while (count-- != 0) {
-        if (RogueMapGive(0, RogueMapRoll(RogueRand()))) {
-            gRogueDebug.mapDrops++;
-        }
+        RogueGiveGameCard(kinds[RogueRandBelow(sizeof(kinds))]);
+        gRogueDebug.mapDrops++;
     }
 }
 
@@ -296,6 +310,98 @@ static u16 RogueMapUse(u8 slot, u8 door) {
     }
 
     return 0;
+}
+
+// At a door the game's own map cards are played, on its own screen. Of its
+// kinds of card the mod uses those whose pictures its doors already show,
+// each for one kind of room; the number on a card does not matter.
+
+// The game's kinds of map card the mod uses, by their place in its table of
+// them: Tranquil Darkness, Teeming Darkness, Looming Darkness, Guarded
+// Trove, Moment's Reprieve, Moogle Room, and a blue one for the event rooms.
+#define GAME_CARD_BATTLE 0
+#define GAME_CARD_ELITE 1
+#define GAME_CARD_CHALLENGE 5
+#define GAME_CARD_TREASURE 17
+#define GAME_CARD_EVENT 18
+#define GAME_CARD_REST 19
+#define GAME_CARD_SHOP 21
+
+static u8 RogueGameCard(u8 kind) {
+    switch (kind) {
+    case ROGUE_ROOM_ELITE:
+        return GAME_CARD_ELITE;
+    case ROGUE_ROOM_TREASURE:
+        return GAME_CARD_TREASURE;
+    case ROGUE_ROOM_CHALLENGE:
+        return GAME_CARD_CHALLENGE;
+    case ROGUE_ROOM_REST:
+        return GAME_CARD_REST;
+    case ROGUE_ROOM_SHOP:
+        return GAME_CARD_SHOP;
+    case ROGUE_ROOM_EVENT:
+        return GAME_CARD_EVENT;
+    }
+
+    return GAME_CARD_BATTLE;
+}
+
+// One of the game's map cards for a kind of room, with a number of its own.
+static void RogueGiveGameCard(u8 kind) {
+    AddMapCard(RogueGameCard(kind) * 10 + RogueRandBelow(10));
+}
+
+// Called when a door is struck, before the game asks for a card: with none
+// left Sora is given a plain battle's, so that a door can always be opened.
+void RogueDoorStruck(void) {
+    if (func_08093B38() == 0) {
+        AddMapCard(GAME_CARD_BATTLE * 10);
+    }
+}
+
+// For the tests: a door struck without Sora walking up to it.
+u8 RogueDebugStrike(void) {
+    u8 strike = gRogueDebug.strike;
+
+    gRogueDebug.strike = 0;
+    return strike;
+}
+
+// Called when a map card is played on a door: the room behind is the card's.
+// The door of the floor's boss stays the boss's, whatever opens it.
+void RogueOnMapCard(u16 card) {
+    u8 door = gUnk_0203C7AC->unk_10;
+    u8 kind = card / 10;
+
+    gRogueDebug.mapUsed++;
+
+    if (door >= 4 || gRogue.doors[door] == ROGUE_ROOM_BOSS) {
+        return;
+    }
+
+    switch (kind) {
+    case GAME_CARD_ELITE:
+        gRogue.doors[door] = ROGUE_ROOM_ELITE;
+        break;
+    case GAME_CARD_CHALLENGE:
+        gRogue.doors[door] = ROGUE_ROOM_CHALLENGE;
+        break;
+    case GAME_CARD_TREASURE:
+        gRogue.doors[door] = ROGUE_ROOM_TREASURE;
+        break;
+    case GAME_CARD_EVENT:
+        gRogue.doors[door] = ROGUE_ROOM_EVENT;
+        break;
+    case GAME_CARD_REST:
+        gRogue.doors[door] = ROGUE_ROOM_REST;
+        break;
+    case GAME_CARD_SHOP:
+        gRogue.doors[door] = ROGUE_ROOM_SHOP;
+        break;
+    default:
+        gRogue.doors[door] = ROGUE_ROOM_BATTLE;
+        break;
+    }
 }
 
 // The door whose card has been chosen, plus one: back in the room it opens by itself.

@@ -1,46 +1,32 @@
-# Room cards. A door opens with a room card: its menu lists the plain battle,
-# which is free, the cards held and three on sale, with a line under them
-# that says what the row under the glove means. Starting a run from the hub
-# goes through the same menu when there are shards to spend, and what is
-# bought there goes into the run. Here a card is bought in the hub, then
-# Jack's card (10) is given and spent on the first room's door.
-# Expect: the first picture shows the hub's menu with "Parti" and three cards
-# to buy; the second the card bought among them; the third the door's menu
-# with "Battaglia", "Jack" and the cards the run starts with; the fourth a
-# room. kind reads 7 (an event room), event reads 4 (Jack), map_used reads 1
-# and bought reads 1; the frame counter runs on after the new room is entered.
-wait 600
-poke16 @gRogueMeta.shards 100
-press START
-wait 120
-press START
-wait 90
-shot /tmp/cards_hub.ppm
-press DOWN
-wait 10
-press A
-wait 20
-shot /tmp/cards_bought.ppm
-press B
+# Doors open with the game's own map cards, on its own screen ("Sintesi
+# della stanza"): any card opens any door, whatever its number, and the room
+# behind is the card's. A run starts with a plain battle's card and a rest's,
+# every battle leaves another, and a door struck with none in hand gives a
+# plain battle's. Here the first room's door is struck (by a test switch)
+# and the second card, the rest's, is played on it.
+# Expect: the first picture shows the game's card screen with the two cards
+# and the second the rest's card ("Tregua Sospirata") under the glove; the
+# third Sora holding the card up to the door; the fourth the next room.
+# kind reads 5 (a rest room), used reads 1, room reads 1, the counter runs.
+include start.txt
+poke8 @gRogueDebug.strike 1
 wait 200
-hold B 100
+shot /tmp/cards_0.ppm
+press RIGHT
 wait 20
-debug door 10
-wait 90
-shot /tmp/cards_door.ppm
-press DOWN
-wait 10
+shot /tmp/cards_1.ppm
 press A
-wait 500
-hold B 100
-wait 200
-hold B 100
+wait 40
+press A
 wait 60
-shot /tmp/cards_room.ppm
+shot /tmp/cards_2.ppm
+wait 300
+hold B 100
+wait 100
+shot /tmp/cards_3.ppm
 peek8 @gRogue.kind kind
-peek8 @gRogue.event event
-peek8 @gRogueDebug.mapUsed map_used
-peek8 @gRogueDebug.mapBought bought
-peek32 @gFrameCounter frames
+peek8 @gRogueDebug.mapUsed used
+peek8 @gRogue.room room
+peek32 @gFrameCounter f1
 wait 30
-peek32 @gFrameCounter frames_later
+peek32 @gFrameCounter f2

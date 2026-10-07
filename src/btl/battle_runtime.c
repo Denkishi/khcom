@@ -1341,6 +1341,7 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
 
     if (e != 0) {
         v = d->unk_00;
+        a = 1;
 
         switch (v) {
         case EMY_ID_45:
@@ -1446,21 +1447,17 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
                 break;
             }
         default:
-            if (gGameState.floor <= 9) {
-                a = 25;
-                b = 102;
-                c = 384;
-            } else {
-                a = 51;
-                b = 76;
-                c = 640;
-            }
-            // Enemy stats follow the run's depth: about 8% more HP, 10% more
-            // attack and 40% more EXP per level.
-            p->unk_02E = ((RogueEnemyLevel() * 20 + 256) * e->hp) >> 8;
-            p->unk_030 = ((RogueEnemyLevel() * 26 + 256) * e->attack) >> 8;
-            p->unk_0B4 = ((RogueEnemyLevel() * 102 + 256) * (u16)e->exp) >> 8;
+            a = 0;
+            p->unk_02E = RogueEnemyHp(e->hp);
+            p->unk_030 = RogueEnemyAttack(e->attack);
+            p->unk_0B4 = RogueEnemyExp(e->exp);
             break;
+        }
+
+        // Every other case is a boss with stats of its own.
+        if (a != 0) {
+            p->unk_02E = RogueBossStat(p->unk_02E);
+            p->unk_030 = RogueBossStat(p->unk_030);
         }
     } else {
         p->unk_02E = d->unk_04;

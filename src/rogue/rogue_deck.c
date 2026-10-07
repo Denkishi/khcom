@@ -80,13 +80,13 @@ static u16 RogueRollCard(u8 pool) {
 
     switch (pool) {
     case POOL_ATTACK:
-        return CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(CARD_ULTIMA_WEAPON + 1), RogueRandBelow(10));
+        return CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(CARD_ULTIMA_WEAPON + 1), RogueRandBelow(RogueMaxCardValue() + 1));
     case POOL_MAGIC:
-        return CARD_ID(CARD_FIRE + RogueRandBelow(CARD_AERO - CARD_FIRE + 1), RogueRandBelow(10));
+        return CARD_ID(CARD_FIRE + RogueRandBelow(CARD_AERO - CARD_FIRE + 1), RogueRandBelow(RogueMaxCardValue() + 1));
     case POOL_SUMMON:
-        return CARD_ID(CARD_SIMBA + RogueRandBelow(CARD_THE_BEAST - CARD_SIMBA + 1), RogueRandBelow(10));
+        return CARD_ID(CARD_SIMBA + RogueRandBelow(CARD_THE_BEAST - CARD_SIMBA + 1), RogueRandBelow(RogueMaxCardValue() + 1));
     case POOL_ITEM:
-        return CARD_ID(CARD_POTION + RogueRandBelow(CARD_MEGALIXIR - CARD_POTION + 1), RogueRandBelow(10));
+        return CARD_ID(CARD_POTION + RogueRandBelow(CARD_MEGALIXIR - CARD_POTION + 1), RogueRandBelow(RogueMaxCardValue() + 1));
     default:
         id = CARD_SOLDIER_1 + RogueRandBelow(CARD_ANSEM_9 + 1 - CARD_SOLDIER_1);
 
@@ -98,15 +98,26 @@ static u16 RogueRollCard(u8 pool) {
     }
 }
 
-// A random card to offer as a reward, 0 if the roll found none.
-u16 RogueRollRewardCard(void) {
-    u16 id = RogueRollCard(RogueRollPool());
+// Rolls cards of the pool until one is unlocked at this point of the run, so
+// that the pools keep their share whatever is locked. Returns 0 if none came up.
+static u16 RogueRollUnlockedCard(u8 pool) {
+    u16 id;
+    s32 tries;
 
-    if (id == 0 || GetCardCpCost(id) == 0 || (gCardDefs[id].flags & 8)) {
-        return 0;
+    for (tries = 0; tries < 24; tries++) {
+        id = RogueRollCard(pool);
+
+        if (id != 0 && GetCardCpCost(id) != 0 && !(gCardDefs[id].flags & 8) && RogueCardUnlocked(id)) {
+            return id;
+        }
     }
 
-    return id;
+    return 0;
+}
+
+// A random card to offer as a reward, 0 if the roll found none.
+u16 RogueRollRewardCard(void) {
+    return RogueRollUnlockedCard(RogueRollPool());
 }
 
 // Builds the run's first deck: random cards from the whole game within the CP
@@ -126,8 +137,8 @@ void RogueBuildStartDeck(void) {
     }
 
     // A cure and a zero come first, so the budget cannot run out before them.
-    RogueAddCard(CARD_ID(CARD_CURE, 3 + RogueRandBelow(6)), budget);
-    RogueAddCard(CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(4), 0), budget);
+    RogueAddCard(CARD_ID(CARD_CURE, 3 + RogueRandBelow(3)), budget);
+    RogueAddCard(CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(3), 0), budget);
 
     for (tries = 0; tries < 400 && sDeckCards < DECK_MAX; tries++) {
         pool = RogueRollPool();
@@ -136,7 +147,7 @@ void RogueBuildStartDeck(void) {
             continue;
         }
 
-        id = RogueRollCard(pool);
+        id = RogueRollUnlockedCard(pool);
 
         if (id == 0) {
             continue;
@@ -150,14 +161,6 @@ void RogueBuildStartDeck(void) {
     }
 }
 
-// Every sleight is known from the start: a random deck decides which are usable.
-void RogueLearnSleights(void) {
-    u32 i;
-
-    for (i = FIRST_SLEIGHT; i < SLEIGHT_COUNT; i++) {
-        func_0800FB2C(i);
-    }
-}
 
 // Adds a card won during the run. It joins the deck if it fits the CP limit,
 // otherwise it waits in the collection.
@@ -260,10 +263,19 @@ static u16 RogueFusionResult(u16 a, u16 b) {
         if (kind > CARD_ULTIMA_WEAPON) {
             kind = CARD_ULTIMA_WEAPON;
         }
+
+        // A fusion may reach two tiers past what the floor offers, no further.
+        while (kind > kindA && kind > kindB && RogueCardTier(CARD_ID(kind, 0)) > RogueMaxCardTier() + 2) {
+            kind--;
+        }
     } else if (classA == FUSE_MAGIC && classB == FUSE_MAGIC) {
         kind = CARD_SIMBA + RogueRandBelow(CARD_THE_BEAST - CARD_SIMBA + 1);
     } else {
         kind = CARD_OATHKEEPER + RogueRandBelow(CARD_ULTIMA_WEAPON - CARD_OATHKEEPER + 1);
+
+        while (kind > CARD_SPELLBINDER && RogueCardTier(CARD_ID(kind, 0)) > RogueMaxCardTier() + 2) {
+            kind--;
+        }
     }
 
     return CARD_ID(kind, value);

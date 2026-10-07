@@ -13,6 +13,7 @@
 #define ROGUE_COMBO_BASE 3
 #define ROGUE_COMBO_PLUS_MAX 4
 #define ROGUE_AIR_JUMPS_MAX 2
+#define ROGUE_AP_MAX 20
 
 // Cards level up by winning battles in the deck; two level 3 cards can fuse.
 #define ROGUE_CARD_SLOTS 160
@@ -77,6 +78,14 @@ void RogueOnDefeat(void);
 void RogueNextFloor(void);
 u8 RogueDoorsOpen(void);
 u8 RogueEnemyLevel(void);
+u16 RogueEnemyHp(u16 base);
+u16 RogueEnemyAttack(u16 base);
+u16 RogueEnemyExp(u16 base);
+u16 RogueBossStat(u16 base);
+u8 RogueCardTier(u16 id);
+u8 RogueMaxCardTier(void);
+u8 RogueMaxCardValue(void);
+u8 RogueCardUnlocked(u16 id);
 u16 RogueRollRewardCard(void);
 void RogueGiveCard(u16 id);
 u8 RogueCardLevel(u16 slot);
@@ -89,7 +98,6 @@ u8* RogueRoomLinks(void);
 u16 RogueDoorFlags(u8 door);
 void RogueSpawnRoomActors(void);
 void RogueBuildStartDeck(void);
-void RogueLearnSleights(void);
 u8 RogueComboHits(void);
 u8 RogueComboSlot(u8 step);
 const struct CardMessageDef* RogueCardMessageDef(u16 id);

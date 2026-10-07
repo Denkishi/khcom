@@ -228,7 +228,6 @@ void RogueStartRun(void) {
     gRogue.world = RogueRollWorld();
     func_0801CD20();
     gGameState.progression.unk_82 = 0xFFFF;
-    RogueLearnSleights();
     RogueEnterRoom(1);
 }
 
@@ -275,12 +274,6 @@ void RogueOnDefeat(void) {
 // Doors stay shut until the room's battles are won.
 u8 RogueDoorsOpen(void) {
     return func_080DEE18(ROGUE_ROOM_ID)->unk_0B == 0;
-}
-
-// How far the run has gone, for enemy stats: three levels a floor plus up to
-// three more across its rooms.
-u8 RogueEnemyLevel(void) {
-    return gRogue.floor * 3 + gRogue.room / 2;
 }
 
 u8 RogueTryAirJump(void) {

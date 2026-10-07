@@ -4,27 +4,27 @@
 
 #include "types.h"
 
-extern const u8 gRogueNpcAquaTiles[800];
+extern const u8 gRogueNpcAquaTiles[2656];
 extern const u16 gRogueNpcAquaPalette[16];
 extern const void* const gRogueNpcAquaFrames[];
 extern const void* const gRogueNpcAquaAnims[];
-extern const u8 gRogueNpcTerraTiles[1120];
+extern const u8 gRogueNpcTerraTiles[3200];
 extern const u16 gRogueNpcTerraPalette[16];
 extern const void* const gRogueNpcTerraFrames[];
 extern const void* const gRogueNpcTerraAnims[];
-extern const u8 gRogueNpcVentusTiles[960];
+extern const u8 gRogueNpcVentusTiles[2784];
 extern const u16 gRogueNpcVentusPalette[16];
 extern const void* const gRogueNpcVentusFrames[];
 extern const void* const gRogueNpcVentusAnims[];
-extern const u8 gRogueNpcVanitasTiles[896];
+extern const u8 gRogueNpcVanitasTiles[2368];
 extern const u16 gRogueNpcVanitasPalette[16];
 extern const void* const gRogueNpcVanitasFrames[];
 extern const void* const gRogueNpcVanitasAnims[];
-extern const u8 gRogueNpcKairiTiles[640];
+extern const u8 gRogueNpcKairiTiles[1920];
 extern const u16 gRogueNpcKairiPalette[16];
 extern const void* const gRogueNpcKairiFrames[];
 extern const void* const gRogueNpcKairiAnims[];
-extern const u8 gRogueNpcNamineTiles[640];
+extern const u8 gRogueNpcNamineTiles[2016];
 extern const u16 gRogueNpcNaminePalette[16];
 extern const void* const gRogueNpcNamineFrames[];
 extern const void* const gRogueNpcNamineAnims[];

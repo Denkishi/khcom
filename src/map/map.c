@@ -2836,6 +2836,7 @@ void Mode_MapFld_0(void) {
     func_080E6178();
     func_080E8AE8();
     func_080E062C();
+    RogueSpawnRoomActors();
 
     p = gUnk_09EF70D0[gUnk_0203C590.unk_04];
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, 0);

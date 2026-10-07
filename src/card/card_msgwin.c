@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -71,7 +72,7 @@ static void msgwin_0(CardMsgWinWork* w, CardMessageArgs* a) {
     CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardMsgWinWork) / 4);
     w->unk_13C = func_0806BA74(0, 0);
     w->args = *a;
-    w->messageDef = &gCardMessageDefs[w->args.messageId];
+    w->messageDef = (CardMessageDef*)RogueCardMessageDef(w->args.messageId);
     w->tiles3 = 0;
     w->palette = 0;
     w->tiles4 = 0;
@@ -502,7 +503,7 @@ u8 func_080A4010(CardMsgWinWork* w, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_080A3DD0);
     } else if (w->unk_14E == 1) {
         w->unk_14E = 0;
-        w->messageDef = &gCardMessageDefs[w->args.messageId];
+        w->messageDef = (CardMessageDef*)RogueCardMessageDef(w->args.messageId);
 #ifdef VERSION_JP
         w->unk_143 = func_0806BDB8(gUnk_09033CA8[w->messageDef->positionIndex],
                                    gUnk_09033CB8[w->messageDef->positionIndex],
@@ -544,8 +545,8 @@ void CreateCardMessageTask(void* pool, u32 a, u16 b) {
     args.messageId = b;
     args.unk_07 = 0;
 
-    if (gCardMessageDefs[b].portraitId == 62) {
-        if (gCardMessageDefs[b].flags & 2) {
+    if (RogueCardMessageDef(b)->portraitId == 62) {
+        if (RogueCardMessageDef(b)->flags & 2) {
             TaskCreate(pool, &gUnk_09EE8E48, &args);
         } else {
             TaskCreate(pool, &gUnk_09EE8E30, &args);
@@ -562,7 +563,7 @@ void CreateSysmsgwinTask(void* pool, u16 b) {
     args.messageId = b;
     args.unk_07 = 2;
 
-    if (gCardMessageDefs[b].flags & 2) {
+    if (RogueCardMessageDef(b)->flags & 2) {
         TaskCreate(pool, &gUnk_09EE8E48, &args);
     } else {
         TaskCreate(pool, &gUnk_09EE8E30, &args);
@@ -590,7 +591,7 @@ void func_080A4234(void* pool, u32 a, u16 b) {
         if ((u8)func_080A40EC(&args) == 0) {
             func_080A4D7C(&args);
         }
-    } else if (gCardMessageDefs[b].portraitId == 62) {
+    } else if (RogueCardMessageDef(b)->portraitId == 62) {
         TaskCreate(pool, &gUnk_09EE8E30, &args);
     } else {
         TaskCreate(pool, &gUnk_09EE8E18, &args);

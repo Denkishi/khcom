@@ -21,6 +21,12 @@ enum RogueRoomKind {
     ROGUE_ROOM_KINDS
 };
 
+// Card message ids from here up are the mod's, see RogueCardMessageDef.
+#define ROGUE_MSG_BASE 0x400
+#define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
+#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 4)
+#define ROGUE_MSG_COUNT 5
+
 typedef struct RogueRun {
     u32 seed;
     u32 rng;
@@ -42,5 +48,7 @@ void RogueStartRun(void);
 void RogueLeaveRoom(u8 door);
 u8* RogueRoomLinks(void);
 u16 RogueDoorFlags(u8 door);
+void RogueSpawnRoomActors(void);
+const struct CardMessageDef* RogueCardMessageDef(u16 id);
 
 #endif

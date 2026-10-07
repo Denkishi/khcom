@@ -1,8 +1,11 @@
 # Units the mod adds ("new") or whose code it changes ("moved").
 new rogue.c
 new rogue_run.c
+new rogue_text.c
+new rogue_axel.c
 moved taskpool.c
 moved mode_title.c
 moved map_runtime.c
 moved roomcreate.c
 moved map.c
+moved card_msgwin.c

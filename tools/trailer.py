@@ -49,35 +49,65 @@ SCENES = {
     "roxas": ["wait 600", "press START", "wait 120", "poke8 @gRogueMeta.chapters 3", "poke8 @gRogueMeta.hero 3", "press SELECT", "wait 30",
               "press START", "wait 200", "hold B 100", "wait 20", "debug battle 0", "wait 330", "poke8 @gRogueDebug.god 1", "rec {rec}",
               "press A", "wait 18", "press A", "wait 18", "debug finisher", "wait 60", "press A", "wait 18", "debug finisher", "wait 70", "rec off"],
-    "sephiroth": START + ["poke8 @gRogueDebug.god 1", "poke8 @gRogue.bossSkin 8", "debug battle 157", "wait 300", "rec {rec}", "wait 120",
-                          "poke8 @gRogueDebug.bossForce 16", "wait 170", "poke8 @gRogueDebug.bossForce 15", "wait 220",
-                          "poke8 @gRogueDebug.bossForce 12", "wait 170", "poke8 @gRogueDebug.bossForce 11", "wait 170", "wait 900", "rec off"],
-    "hood": START + ["poke8 @gRogueDebug.god 1", "poke8 @gRogue.bossSkin 12", "debug battle 157", "wait 300", "rec {rec}", "wait 420", "rec off"],
+    # The music: a boss fight left to run.
+    "music": START + ["poke8 @gRogueDebug.god 1", "poke8 @gRogue.bossSkin 8", "debug battle 157", "wait 300", "rec {rec}", "wait 2200", "rec off"],
+    "mickey": ["wait 600", "press START", "wait 120", "poke8 @gRogueMeta.flags 7", "press SELECT", "wait 30", "press START", "wait 200",
+               "hold B 100", "wait 20", "debug battle 0", "wait 330", "poke8 @gRogueDebug.god 1", "rec {rec}", "hold RIGHT 12", "press A",
+               "wait 18", "press A", "wait 18", "debug finisher", "wait 60", "press A", "wait 18", "debug finisher", "wait 70", "rec off"],
 }
+
+
+def boss(skin, force=0, frames=320):
+    """A boss fight recorded from the moment one of its moves is asked for (0: whatever it does)."""
+    return START + ["poke8 @gRogueDebug.god 1", f"poke8 @gRogue.bossSkin {skin}", "debug battle 157", "wait 330", "rec {rec}",
+                    f"poke8 @gRogueDebug.bossForce {force}", f"wait {frames}", "rec off"]
+
+
+SCENES.update({
+    "seph_wing": boss(8, 16), "seph_octa": boss(8, 15), "seph_flare": boss(8, 12), "seph_plunge": boss(8, 11), "seph_wave": boss(8, 13),
+    "sora2": boss(9, 0, 420), "coat": boss(11, 0, 420), "hood": boss(12, 0, 420),
+})
 
 # The cuts: a card of text (None, frames, big line, small line) or a piece of a
 # scene (scene, first frame, frames, text over it, whether it is a battle and
-# so shown at its full width).
+# so shown at its full width, and how many times each frame is shown: 2 is
+# slow motion). With None for the first frame the piece is the stretch of the
+# scene in which most moves on the screen, found by busiest().
 CUTS = [
     (None, 80, "KINGDOM HEARTS", "CHAIN OF MEMORIES"),
-    (None, 50, "ROGUELITE", "ogni run è diversa"),
-    ("hub", 20, 150, "Un hub da esplorare", False),
-    ("door", 150, 70, "Ogni porta, una carta", False),
-    ("door", 330, 90, "Tu scegli la stanza", False),
-    ("combo", 14, 70, "Battaglie in 2D", True),
-    ("combo", 100, 70, "Nuove mosse", True),
-    ("combo", 190, 80, "Salta. Taglia. Tuffati.", True),
-    ("combo", 300, 80, "Ogni mossa è una carta", True),
-    ("moves", 10, 70, "Le mosse dei boss sono tue", True),
-    ("moves", 120, 70, "Più di 180 reliquie", True),
-    ("roxas", 30, 110, "Nuovi eroi", True),
-    ("sephiroth", 130, 120, "Nuovi boss", True),
-    ("sephiroth", 300, 120, "", True),
-    ("sephiroth", 520, 90, "", True),
-    ("sephiroth", 690, 90, "", True),
-    ("hood", 120, 110, "Riuscirai a batterli?", True),
+    (None, 45, "ROGUELITE", "ogni run è diversa"),
+    ("hub", 20, 120, "Un hub da esplorare", False, 1),
+    ("door", 150, 60, "Ogni porta, una carta", False, 1),
+    ("door", 330, 80, "Tu scegli la stanza", False, 1),
+    ("combo", 14, 60, "Battaglie in 2D", True, 1),
+    ("combo", 100, 60, "Nuove mosse", True, 1),
+    ("combo", 190, 70, "Salta. Taglia. Tuffati.", True, 1),
+    ("combo", 300, 60, "Ogni mossa è una carta", True, 1),
+    ("moves", None, 60, "Le mosse dei boss sono tue", True, 1),
+    ("moves", 150, 60, "Più di 180 reliquie", True, 1),
+    ("roxas", None, 70, "Nuovi eroi", True, 1),
+    ("mickey", None, 60, "", True, 1),
+    ("seph_wing", None, 60, "Nuovi boss", True, 2),
+    ("seph_octa", None, 90, "", True, 1),
+    ("seph_flare", None, 70, "", True, 1),
+    ("seph_plunge", None, 70, "", True, 1),
+    ("seph_wave", None, 50, "", True, 1),
+    ("sora2", None, 60, "", True, 1),
+    ("coat", None, 60, "", True, 1),
+    ("hood", None, 70, "Riuscirai a batterli?", True, 1),
     (None, 130, "CoM ROGUELITE", "github.com/Denkishi/khcom"),
 ]
+
+
+def busiest(scene, count):
+    """The first frame of the stretch of `count` frames of a scene in which the picture changes most."""
+    import numpy
+    data = numpy.fromfile(WORK / f"{scene}.rgb", dtype=numpy.uint8).reshape(-1, HIGH, WIDE, 4)[:, ::4, ::4, :3].astype(numpy.int16)
+    change = numpy.abs(numpy.diff(data, axis=0)).sum(axis=(1, 2, 3)).astype(numpy.float64)
+    # A flash of the whole screen is not action: no frame counts for more than three times the usual.
+    change = numpy.minimum(change, 3 * numpy.median(change) + 1)
+    sums = numpy.convolve(change, numpy.ones(count), "valid")
+    return int(sums.argmax())
 
 
 def record():
@@ -112,8 +142,10 @@ def frames():
                 text(draw, 380, small, 40, (shade * 230 // 255, shade * 190 // 255, shade * 60 // 255))
                 yield image.tobytes()
             continue
-        scene, first, count, words, wide = cut
+        scene, first, count, words, wide, slow = cut
         size = WIDE * HIGH * 4
+        if first is None:
+            first = busiest(scene, count)
         with open(WORK / f"{scene}.rgb", "rb") as f:
             f.seek(first * size)
             for i in range(count):
@@ -135,14 +167,15 @@ def frames():
                     band = Image.new("RGB", (SIZE[0], 84), (0, 0, 0))
                     image.paste(Image.blend(image.crop((0, 596, SIZE[0], 680)), band, 0.72), (0, 596))
                     text(ImageDraw.Draw(image), 612, words, 44, (255, 232, 120))
-                yield image.tobytes()
+                for _ in range(slow):
+                    yield image.tobytes()
 
 
 def compose():
-    total = sum(cut[1] if cut[0] is None else cut[2] for cut in CUTS)
+    total = sum(cut[1] if cut[0] is None else cut[2] * cut[5] for cut in CUTS)
     # The music: the boss fight's, from a little way in, for as long as the trailer lasts.
-    music = WORK / "music.pcm"
-    with open(WORK / "sephiroth.pcm", "rb") as f:
+    music = WORK / "bed.pcm"
+    with open(WORK / "music.pcm", "rb") as f:
         f.seek(48000 * 4 * 2)
         music.write_bytes(f.read(total * 48000 // 60 * 4))
     ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()

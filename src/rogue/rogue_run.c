@@ -81,6 +81,13 @@ static u8 RogueRollBoss(void) {
         return floor->otherBoss;
     }
 
+    // A friend turned against Sora may hold a floor that does not end a
+    // chapter, one time in four once the first chapter is done.
+    if (gRogueMeta.chapters > 1 && !RogueFloorIsChapterEnd() && RogueRandBelow(4) == 0) {
+        gRogue.bossSkin = ROGUE_SKIN_BEAST + RogueRandBelow(ROGUE_SKINS - ROGUE_SKIN_BEAST);
+        return 0x9D;
+    }
+
     return floor->boss;
 }
 

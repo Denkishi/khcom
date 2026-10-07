@@ -21,11 +21,35 @@ static const AnimDef* const sMickeySlots[5] = {
 // Leon's definition with Mickey's palette.
 static const HumDef sMickeyDef = { 128, 0, gMickeyPalette, 0, { 41, 99, 64, 14, 40, 99, 0 } };
 
+extern const AnimDef gFrdBeastAnimDefs[2], gFrdJackAnimDefs[5], gFrdPanAnimDefs[4], gFrdGoofyAnimDefs[5], gFrdDonaldAnimDefs[6],
+    gFrdAladdinAnimDefs[3];
+
+// The friends who fight in Leon's place: where each one's animations are,
+// which of them is the attack, and the palette. They stand with the first.
+typedef struct RogueSkin {
+    const AnimDef* anims;
+    u8 attack;
+    HumDef def;
+} RogueSkin;
+
+#define SKIN(anims, attack, palette) { anims, attack, { 128, 0, palette, 0, { 41, 99, 64, 14, 40, 99, 0 } } }
+
+static const RogueSkin sSkins[ROGUE_SKINS - ROGUE_SKIN_BEAST] = {
+    SKIN(gFrdBeastAnimDefs, 1, gBeastPalette), SKIN(gFrdJackAnimDefs, 3, gJackPalette), SKIN(gFrdPanAnimDefs, 2, gPeterPalette),
+    SKIN(gFrdGoofyAnimDefs, 4, gGoofyPalette), SKIN(gFrdDonaldAnimDefs, 2, gDonaldPalette), SKIN(gFrdAladdinAnimDefs, 2, gAladdinPalette),
+};
+
 // The animation table and the slot in it for one of Leon's animations: his
-// own, or Mickey's when Mickey stands in for him.
+// own, or those of whoever stands in for him.
 const AnimDef* RogueLeonAnim(u16 slot) {
     if (gRogue.bossSkin == ROGUE_SKIN_MICKEY) {
         return sMickeySlots[slot];
+    }
+
+    if (gRogue.bossSkin >= ROGUE_SKIN_BEAST && gRogue.bossSkin < ROGUE_SKINS) {
+        const RogueSkin* skin = &sSkins[gRogue.bossSkin - ROGUE_SKIN_BEAST];
+
+        return &skin->anims[slot == 0 ? 0 : skin->attack];
     }
 
     return &gHumLeonAnimDefs[slot];
@@ -34,6 +58,10 @@ const AnimDef* RogueLeonAnim(u16 slot) {
 const HumDef* RogueLeonDef(void) {
     if (gRogue.bossSkin == ROGUE_SKIN_MICKEY) {
         return &sMickeyDef;
+    }
+
+    if (gRogue.bossSkin >= ROGUE_SKIN_BEAST && gRogue.bossSkin < ROGUE_SKINS) {
+        return &sSkins[gRogue.bossSkin - ROGUE_SKIN_BEAST].def;
     }
 
     return &gHumLeonDef;

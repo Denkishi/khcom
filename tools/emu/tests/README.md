@@ -38,3 +38,6 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `effect_cards.txt` | the cards with an effect of their own |
 | `relics_more.txt` | burn, freeze, shock, the shadow step and the air dash |
 | `card_mods.txt` | a card played alone finding its enchantment |
+| `sleight_card.txt` | a sleight played from a single card |
+| `riku_hero.txt` | Riku played with the game's own Riku mode |
+| `friend_bosses.txt` | the six friends who fight with Leon's moves |

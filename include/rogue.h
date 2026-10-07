@@ -386,7 +386,15 @@ enum RogueMove {
 // A character drawn in place of a boss whose fight they borrow.
 enum RogueBossSkin {
     ROGUE_SKIN_NONE,
-    ROGUE_SKIN_MICKEY // in place of Leon
+    ROGUE_SKIN_MICKEY, // in place of Leon
+    // The friends, as minibosses of any floor.
+    ROGUE_SKIN_BEAST,
+    ROGUE_SKIN_JACK,
+    ROGUE_SKIN_PETER_PAN,
+    ROGUE_SKIN_GOOFY,
+    ROGUE_SKIN_DONALD,
+    ROGUE_SKIN_ALADDIN,
+    ROGUE_SKINS
 };
 
 // Event rooms.

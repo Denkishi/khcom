@@ -1,0 +1,55 @@
+# The friends who fight with Leon's moves, one after the other: Beast, Jack,
+# Peter Pan, Goofy, Donald, Aladdin (skins 2 to 7).
+# Expect: each picture shows that friend in Leon's place, and the frame
+# counter runs.
+include start.txt
+poke8 @gRogueDebug.god 1
+poke8 @gRogue.bossSkin 2
+debug battle 157
+wait 560
+shot /tmp/friend_boss_2.ppm
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 3
+debug battle 157
+wait 560
+shot /tmp/friend_boss_3.ppm
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 4
+debug battle 157
+wait 560
+shot /tmp/friend_boss_4.ppm
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 5
+debug battle 157
+wait 560
+shot /tmp/friend_boss_5.ppm
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 6
+debug battle 157
+wait 560
+shot /tmp/friend_boss_6.ppm
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 7
+debug battle 157
+wait 560
+shot /tmp/friend_boss_7.ppm
+debug win
+wait 420
+press A
+wait 200
+peek32 @gFrameCounter frames

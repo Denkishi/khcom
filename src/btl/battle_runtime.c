@@ -2069,7 +2069,7 @@ void func_0801C2DC(BtlObj* p, u8 f) {
 void func_0801C314(void) {
     m4aMPlayAllStop();
 
-    if (RogueOnBattleEnd()) {
+    if (RogueOnBattleEnd(gBtlWork->unk_10C)) {
         return;
     }
 

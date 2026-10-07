@@ -3030,6 +3030,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->unk_154 == buf[work->unk_190]) {
             func_08019A30();
 
+            if (RogueComboSlot(work->unk_161) == 2) {
+                RogueOnFinisher(p);
+            }
+
             if (p->btl->unk_0F4 == 34) {
                 switch (a->animId) {
                 case 22:

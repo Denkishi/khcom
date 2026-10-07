@@ -308,7 +308,7 @@ void RogueNextFloor(void) {
 // A won battle leads to the reward screen, which then goes back to the room
 // or, after a boss, on to the next floor. Returns 0 to go straight back to
 // the room.
-u8 RogueOnBattleEnd(void) {
+u8 RogueOnBattleEnd(u16 battle) {
     // Running away wins nothing: back to the room, which still has its battle.
     if (gGameState.flags & 0x40) {
         return 0;
@@ -319,8 +319,10 @@ u8 RogueOnBattleEnd(void) {
     if (gRogue.kind != ROGUE_ROOM_BOSS) {
         gRogue.shards += ROGUE_SHARDS_ROOM;
     } else if (RogueFloorIsChapterEnd()) {
+        RogueOnBossBeaten(battle);
         gRogue.shards += ROGUE_SHARDS_BOSS;
     } else {
+        RogueOnBossBeaten(battle);
         gRogue.shards += ROGUE_SHARDS_MINIBOSS;
     }
 

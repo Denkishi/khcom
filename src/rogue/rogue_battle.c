@@ -1,5 +1,12 @@
 #include "rogue.h"
 #include "battle.h"
+#include "battle_actor.h"
+#include "btl_collision.h"
+#include "engine_math.h"
+#include "hum.h"
+#include "m4a_song.h"
+#include "sprite_palettes.h"
+#include "sprites_hum.h"
 #include "gba/keys.h"
 #include "msg_api.h"
 #include "obj_api.h"
@@ -77,6 +84,141 @@ u16 RogueBufferJump(u16 pressed) {
     }
 
     return pressed;
+}
+
+// Larxene's knife thrown by Sora: her projectile with the sides swapped. The
+// game decides whom a hitbox hurts from whose card is in play, so the knife
+// claims the player's turn for the instant of its own hit test.
+
+#define KNIFE_ATTACK 0x133
+#define KNIFE_COUNT 3
+#define KNIFE_TILES 0x2C0
+
+typedef struct RogueKnifeArgs {
+    s32 x;
+    s32 y;
+    s32 z;
+    u8 left;
+} RogueKnifeArgs;
+
+typedef struct RogueKnifeWork {
+    void* tiles;
+    void* palette;
+    AnimState anim;
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 vx;
+    u8 left;
+    u8 onScreen;
+    u8 stuck;
+    u8 timer;
+} RogueKnifeWork;
+
+static void RogueKnife_Init(RogueKnifeWork* w, RogueKnifeArgs* args) {
+    w->palette = LoadObjPalette(gLaxinePalette, 0x20);
+    w->tiles = LoadObjTiles(gLaxineKnifeTiles, KNIFE_TILES);
+    AnimInit(&w->anim, gLaxineKnifeAnims, gLaxineKnifeFrames);
+    AnimStart(&w->anim, 0, 0);
+    w->x = args->x;
+    w->y = args->y;
+    w->z = args->z;
+    w->left = args->left;
+    w->vx = GetRandom() % 897 + 0x800;
+    w->onScreen = 1;
+    w->stuck = 0;
+    w->timer = 0;
+}
+
+static s32 RogueKnife_Update(RogueKnifeWork* w) {
+    u64 flags;
+    s32 hit;
+
+    if (!w->onScreen) {
+        return 0;
+    }
+
+    if (w->stuck) {
+        if (++w->timer > 30) {
+            return 0;
+        }
+    } else {
+        flags = gBtlWork->flags;
+        gBtlWork->flags |= 0x20000000;
+        hit = func_08011F78(KNIFE_ATTACK, w->x, w->y, w->z, 1, 6, 2);
+        gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
+
+        if (hit) {
+            m4aSongNumStart(SONG_BTL_RAC_HIT);
+            AnimStart(&w->anim, 1, 0);
+            w->stuck = 1;
+        } else if (w->left) {
+            w->x -= w->vx;
+        } else {
+            w->x += w->vx;
+        }
+    }
+
+    AnimUpdate(&w->anim);
+    return 1;
+}
+
+static void RogueKnife_Draw(RogueKnifeWork* w) {
+    u16 attr = GetBattleSpritePriorityFlags(w->y);
+    s16 x;
+    s16 y;
+
+    // Her sprite faces left; Sora's knives fly the way he faces.
+    if (w->left) {
+        attr |= 1;
+    }
+
+    WorldToScreen(&x, &y, w->x, w->y, w->z);
+    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, attr, -0x1004 - (w->y >> 8) * 4);
+
+    if (IsRectOutsideScreen(x, y, 2, 2, 32, 32)) {
+        w->onScreen = 0;
+    }
+}
+
+static void RogueKnife_Destroy(RogueKnifeWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
+}
+
+static TaskDesc sTaskDescRogueKnife = {
+    "task_rogue_knife",
+    (TaskInitFunc)RogueKnife_Init,
+    (TaskUpdateFunc)RogueKnife_Update,
+    (TaskDrawFunc)RogueKnife_Draw,
+    (TaskDestroyFunc)RogueKnife_Destroy,
+    sizeof(RogueKnifeWork),
+};
+
+// Called on the hit frame of a combo finisher.
+
+void RogueOnFinisher(BtlObj* sora) {
+    RogueKnifeArgs args;
+    s32 i;
+
+    if (!RogueHasRelic(ROGUE_RELIC_KNIVES)) {
+        return;
+    }
+
+    m4aSongNumStart(SONG_EF_RAC_3TR);
+
+    for (i = 0; i < KNIFE_COUNT; i++) {
+        // The check counts 8x8 tiles, the size above is in bytes.
+        if (!CanAllocObjTiles(KNIFE_TILES / 32)) {
+            return;
+        }
+
+        args.left = (sora->flags & 4) != 0;
+        args.x = sora->x + (args.left ? -0x1800 : 0x1800);
+        args.y = sora->y + (i - 1) * 0x0A00;
+        args.z = sora->z - 0x1400;
+        TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueKnife, &args);
+    }
 }
 
 typedef struct RogueHudWork {

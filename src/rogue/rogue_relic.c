@@ -21,6 +21,7 @@ static const u8 sNameSecondWind[] = "Ultimo respiro";
 static const u8 sNameGlass[] = "Cannone vetro";
 static const u8 sNameMomentum[] = "Slancio";
 static const u8 sNameReload[] = "Mano lesta";
+static const u8 sNameKnives[] = "Lame di Larxene";
 
 static const u8 sTextVampire[] = "Ogni colpo a segno\x1Fti cura di 1 PV";
 static const u8 sTextCritical[] = "Un colpo su sette\x1F" "fa danno doppio";
@@ -28,13 +29,14 @@ static const u8 sTextSecondWind[] = "Una volta a battaglia\x1Fresti a 1 PV";
 static const u8 sTextGlass[] = "Dai e subisci il\x1F" "50% di danno in pi\xF9";
 static const u8 sTextMomentum[] = "Il bonus combo\x1F" "arriva al 60%";
 static const u8 sTextReload[] = "Il mazzo si ricarica\x1Fmolto pi\xF9 in fretta";
+static const u8 sTextKnives[] = "Il finisher lancia\x1Ftre coltelli";
 
 static const u8* const sNames[ROGUE_RELICS] = {
-    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload,
+    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
-    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload,
+    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives,
 };
 
 const u8* RogueRelicName(u8 relic) {
@@ -49,26 +51,40 @@ u8 RogueHasRelic(u8 relic) {
     return (gRogue.relics >> relic) & 1;
 }
 
-// Two relics are in the pool from the start and each chapter unlocked adds
-// two more. Returns one the run does not have yet, or ROGUE_RELICS.
+static u8 RogueRelicUnlocked(u8 relic) {
+    u8 pool;
+
+    if (relic == ROGUE_RELIC_KNIVES) {
+        return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_LARXENE;
+    }
+
+    // Two relics are in the pool from the start and each chapter adds two.
+    pool = gRogueMeta.chapters * 2;
+    return relic < pool;
+}
+
+// Returns a relic that is unlocked and that the run does not have yet, or
+// ROGUE_RELICS.
 u8 RogueRollRelic(void) {
-    u8 pool = gRogueMeta.chapters * 2;
     u8 relic;
     s32 tries;
 
-    if (pool > ROGUE_RELICS) {
-        pool = ROGUE_RELICS;
-    }
+    for (tries = 0; tries < 16; tries++) {
+        relic = RogueRandBelow(ROGUE_RELICS);
 
-    for (tries = 0; tries < 12; tries++) {
-        relic = RogueRandBelow(pool);
-
-        if (!RogueHasRelic(relic)) {
+        if (RogueRelicUnlocked(relic) && !RogueHasRelic(relic)) {
             return relic;
         }
     }
 
     return ROGUE_RELICS;
+}
+
+// Beating a boss can unlock its move for later runs.
+void RogueOnBossBeaten(u16 battle) {
+    if (battle == 0xA3 || battle == 0xAE) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_LARXENE;
+    }
 }
 
 // The run's page in the pause menu: where the run is and the relics it has.

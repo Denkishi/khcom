@@ -46,10 +46,13 @@ typedef struct RogueMeta {
     u8 chapters; // chapters unlocked, at least 1
     u8 flags;
     u8 upgrades[ROGUE_UPGRADES];
-    u8 unused[10];
+    u8 bossMoves; // one bit for each boss move unlocked, see ROGUE_BOSS_MOVE_
+    u8 unused[9];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
+#define ROGUE_BOSS_MOVE_LARXENE 1
+#define ROGUE_BASE_RELICS ROGUE_RELIC_KNIVES
 #define ROGUE_META_ALL_CLEARED 2 // a run through every chapter was completed
 
 #define ROGUE_COMBO_BASE 3
@@ -114,6 +117,8 @@ enum RogueRelic {
     ROGUE_RELIC_GLASS_CANNON,
     ROGUE_RELIC_MOMENTUM,
     ROGUE_RELIC_RELOAD,
+    // Boss moves: each enters the pool once its boss has been beaten.
+    ROGUE_RELIC_KNIVES,
     ROGUE_RELICS
 };
 
@@ -205,7 +210,7 @@ u32 RogueRandBelow(u32 n);
 
 void RogueStartRun(void);
 void RogueLeaveRoom(u8 door);
-u8 RogueOnBattleEnd(void);
+u8 RogueOnBattleEnd(u16 battle);
 void RogueOnDefeat(void);
 void RogueNextFloor(void);
 u8 RogueFloorCount(void);
@@ -250,6 +255,8 @@ void RogueResetAirJumps(void);
 struct BtlObj;
 void RogueOnDamage(struct BtlObj* p);
 u16 RogueBufferJump(u16 pressed);
+void RogueOnFinisher(struct BtlObj* sora);
+void RogueOnBossBeaten(u16 battle);
 extern struct TaskDesc gTaskDescRogueHud;
 u8* RogueRoomLinks(void);
 u16 RogueDoorFlags(u8 door);

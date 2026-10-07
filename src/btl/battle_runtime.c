@@ -177,14 +177,25 @@ void func_08019350(void) {
     }
     a = ReadKeyChord(L_BUTTON, R_BUTTON);
 
+    // The option that swaps the two: L does what R did and R what L did.
     switch (a) {
     case L_BUTTON:
         RogueGadgetFire(GADGET_ON_ROTATE, 0);
-        func_08076318();
+
+        if (RogueSwapLR()) {
+            func_08076324();
+        } else {
+            func_08076318();
+        }
         break;
     case R_BUTTON:
         RogueGadgetFire(GADGET_ON_ROTATE, 0);
-        func_08076324();
+
+        if (RogueSwapLR()) {
+            func_08076318();
+        } else {
+            func_08076324();
+        }
         break;
     }
 
@@ -214,12 +225,21 @@ void func_08019350(void) {
         }
     }
 
+    // Held, they keep turning; swapped as the presses are.
     if (gBtlWork->unk_0E2 > 32) {
-        func_08076318();
+        if (RogueSwapLR()) {
+            func_08076324();
+        } else {
+            func_08076318();
+        }
     }
 
     if (gBtlWork->unk_0E3 > 32) {
-        func_08076324();
+        if (RogueSwapLR()) {
+            func_08076318();
+        } else {
+            func_08076324();
+        }
     }
     p = gBtlWork->actor;
 

@@ -1,0 +1,24 @@
+# The options page of Memoria in the pause menu: left or right swaps the way
+# L and R turn the hand of cards, and the choice is kept with the save.
+# Expect: the first picture shows the page saying "normale", the second
+# "invertito"; flags has bit 8 set after the swap.
+include start.txt
+press START
+wait 60
+press UP
+wait 12
+press UP
+wait 12
+press A
+wait 90
+press A
+wait 20
+press A
+wait 20
+press A
+wait 20
+shot /tmp/options_1.ppm
+press RIGHT
+wait 20
+shot /tmp/options_2.ppm
+peek8 @gRogueMeta.flags flags

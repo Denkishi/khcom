@@ -328,6 +328,8 @@ void RogueOnBossBeaten(u16 battle) {
 #define LINE_SLOTS 26
 #define PAGE_LINES 6 // a title and what the panel holds
 #define TAB_SLOTS 10
+#define PAGE_TABS 4 // the run, the relics, the records, the options
+#define PAGE_OPTIONS 3 // the pages past it go on with the list of relics
 
 typedef struct RogueRelicsWork {
     TextSlot lines[PAGE_LINES][LINE_SLOTS];
@@ -336,8 +338,8 @@ typedef struct RogueRelicsWork {
     void* palette;
     void* titlePalette;
     RogueUi ui;
-    TextSlot tabs[3][TAB_SLOTS];
-    u8 tabCounts[3];
+    TextSlot tabs[PAGE_TABS][TAB_SLOTS];
+    u8 tabCounts[PAGE_TABS];
     u16 map[0x500 / 2];
     u8 lineCount;
     u8 page;
@@ -358,7 +360,17 @@ static const u8 sChaptersLine[] = "Capitoli: ";
 static const u8 sAbandon[] = "SELECT: abbandona";
 static const u8 sAbandonSure[] = "Ancora SELECT: s\xEC";
 static const u8 sTabRun[] = "Run";
-static const u8* const sTabs[3] = { sTabRun, sTitleRelics, sTitleRecords };
+static const u8 sTitleOptions[] = "Opzioni";
+static const u8 sOptionScroll[] = "Giro delle carte con L/R:";
+static const u8 sOptionNormal[] = "\x1Dnormale\x1E";
+static const u8 sOptionSwapped[] = "\x1Dinvertito\x1E";
+static const u8 sOptionHow[] = "Sinistra/destra: cambia";
+static const u8* const sTabs[PAGE_TABS] = { sTabRun, sTitleRelics, sTitleRecords, sTitleOptions };
+
+// The option, kept with the save: L and R turn the hand the other way.
+u8 RogueSwapLR(void) {
+    return (gRogueMeta.flags & ROGUE_META_SWAP_LR) != 0;
+}
 static const u8 sFloor[] = "Piano ";
 static const u8 sCombo[] = "  Combo+";
 static const u8 sJumps[] = "  Salti ";
@@ -421,7 +433,7 @@ static u8 RogueRelicsPages(void) {
         owned += RogueHasRelic(i);
     }
 
-    return 3 + (owned > PAGE_LINES - 1 ? (owned - 1) / (PAGE_LINES - 1) : 0);
+    return PAGE_TABS + (owned > PAGE_LINES - 1 ? (owned - 1) / (PAGE_LINES - 1) : 0);
 }
 
 static void RogueRelicsShowPage(void) {
@@ -468,6 +480,11 @@ static void RogueRelicsShowPage(void) {
         if (sWork->lineCount == first) {
             RogueRelicsLine(sNoBuild);
         }
+    } else if (sWork->page == PAGE_OPTIONS) {
+        RogueRelicsLine(sTitleOptions);
+        RogueRelicsLine(sOptionScroll);
+        RogueRelicsLine(RogueSwapLR() ? sOptionSwapped : sOptionNormal);
+        RogueRelicsLine(sOptionHow);
     } else if (sWork->page == 2) {
         RogueRelicsLine(sTitleRecords);
         RogueRelicsRecord(sRuns, gRogueMeta.runs);
@@ -480,7 +497,7 @@ static void RogueRelicsShowPage(void) {
         first = sWork->lineCount;
 
         // Eight to a page: the pages after the records go on with the list.
-        skip = sWork->page == 1 ? 0 : (sWork->page - 2) * (PAGE_LINES - 1);
+        skip = sWork->page == 1 ? 0 : (sWork->page - PAGE_OPTIONS) * (PAGE_LINES - 1);
 
         for (i = 0; i < ROGUE_RELICS; i++) {
             if (RogueHasRelic(i)) {
@@ -524,7 +541,7 @@ static void RogueRelics_Init(s32 arg) {
         InitTextSlots(sWork->lines[i], LINE_SLOTS);
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < PAGE_TABS; i++) {
         InitTextSlots(sWork->tabs[i], TAB_SLOTS);
         sWork->tabCounts[i] = LoadTextSlots((u16*)sTabs[i], sWork->tabs[i]);
     }
@@ -561,6 +578,12 @@ static void RogueRelics_Update(void) {
             }
 
             m4aSongNumStart(SONG_SYS_KETTEI);
+        } else if ((GetKeysPressed() & (DPAD_LEFT | DPAD_RIGHT)) && sWork->page == PAGE_OPTIONS) {
+            // The one option there is, turned over and saved.
+            gRogueMeta.flags ^= ROGUE_META_SWAP_LR;
+            RogueMetaSave();
+            m4aSongNumStart(SONG_SYS_KETTEI);
+            RogueRelicsShowPage();
         } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             FadeStartOut(0, 16);
@@ -582,14 +605,14 @@ static void RogueRelics_Update(void) {
 
     // The three pages as plates on the left; the pages that go on with the
     // list of relics keep the glove on theirs.
-    for (i = 0; i < 3; i++) {
-        s32 tab = sWork->page > 2 ? 1 : sWork->page;
-        s16 x = RogueUiPlate(&sWork->ui, 12, 40 + i * 24, i == tab);
+    for (i = 0; i < PAGE_TABS; i++) {
+        s32 tab = sWork->page > PAGE_OPTIONS ? 1 : sWork->page;
+        s16 x = RogueUiPlate(&sWork->ui, 12, 36 + i * 20, i == tab);
 
-        DrawTextSlots(x, 40 + i * 24 + 2, sWork->tabs[i], sWork->palette, 50, sWork->tabCounts[i]);
+        DrawTextSlots(x, 36 + i * 20 + 2, sWork->tabs[i], sWork->palette, 50, sWork->tabCounts[i]);
 
         if (i == tab) {
-            RogueUiGlove(&sWork->ui, 16, 40 + i * 24 + 8);
+            RogueUiGlove(&sWork->ui, 16, 36 + i * 20 + 8);
         }
     }
 
@@ -611,7 +634,7 @@ static void RogueRelics_Exit(void) {
         FreeTextSlots(sWork->lines[i], LINE_SLOTS);
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < PAGE_TABS; i++) {
         FreeTextSlots(sWork->tabs[i], TAB_SLOTS);
     }
 

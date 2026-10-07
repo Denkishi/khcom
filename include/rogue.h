@@ -125,6 +125,7 @@ typedef struct RogueMeta {
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
+#define ROGUE_META_SWAP_LR 8 // an option: L and R turn the hand of cards the other way
 #define ROGUE_META_MICKEY 4 // Mickey was beaten as a boss: he can be played
 
 // Who the player fights as. All of them play as Sora does, drawn as themselves.
@@ -764,6 +765,7 @@ void* RogueHeroFacePalette(void* sora);
 u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);
 void RogueProfileFrame(void);
+u8 RogueSwapLR(void);
 
 void RogueMovesTick(void);
 struct BtlSoraWork;

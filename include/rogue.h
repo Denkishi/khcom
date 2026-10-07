@@ -54,10 +54,24 @@ typedef struct RogueMeta {
     u8 flags;
     u8 upgrades[ROGUE_UPGRADES];
     u8 bossMoves; // one bit for each boss move unlocked, see ROGUE_BOSS_MOVE_
-    u8 unused[9];
+    u8 boon; // the RogueBoon picked in the hub for the next run
+    u8 unused[8];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
+
+// What the characters in the hub offer for the next run; one at a time.
+enum RogueBoon {
+    ROGUE_BOON_NONE,
+    ROGUE_BOON_BELLE, // 30 more max HP
+    ROGUE_BOON_MOOGLE, // two reward rerolls
+    ROGUE_BOON_LEON, // a starting deck of keyblades
+    ROGUE_BOON_YUFFIE, // a starting deck of spells
+    ROGUE_BOON_HERCULES, // strength +2
+    ROGUE_BOON_TIGGER, // an air jump
+    ROGUE_BOON_JACK, // a random relic
+    ROGUE_BOONS
+};
 #define ROGUE_BOSS_MOVE_LARXENE 1
 #define ROGUE_BOSS_MOVE_VEXEN 2
 #define ROGUE_BOSS_MOVE_AXEL 4
@@ -120,7 +134,8 @@ enum RogueRoomKind {
 #define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
 #define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 15)
 #define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + 16)
-#define ROGUE_MSG_COUNT (16 + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
+#define ROGUE_MSG_BOON_FIRST (ROGUE_MSG_EVENT_FIRST + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
+#define ROGUE_MSG_COUNT (16 + ROGUE_EVENTS * ROGUE_EVENT_PAGES + ROGUE_BOONS - 1)
 
 enum RogueRelic {
     ROGUE_RELIC_VAMPIRE,
@@ -293,6 +308,7 @@ typedef struct RogueRun {
     u8 airJumps; // jumps allowed in mid-air
     u8 airJumpsUsed;
     u8 deckWanted; // set while a run is starting, see RogueBuildStartDeck
+    u8 deckBias; // the starting deck leans to keyblades (1) or spells (2)
     u8 rerolls; // reward rerolls left this run
     u8 chapters; // chapters this run goes through
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
@@ -384,6 +400,8 @@ void RogueMetaLoad(void);
 void RogueMetaSave(void);
 void RogueMetaEndRun(u8 completed);
 void RogueApplyUpgrades(void);
+u8 RogueBoonUnlocked(u8 boon);
+void RogueApplyBoon(void);
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun);
 u8 RogueUpgradeMax(u8 upgrade);
 u16 RogueUpgradeCost(u8 upgrade);

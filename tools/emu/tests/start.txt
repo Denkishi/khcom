@@ -3,7 +3,7 @@
 wait 600
 press START
 wait 120
-press A
+press START
 wait 200
 hold B 100
 wait 20

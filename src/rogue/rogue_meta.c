@@ -108,6 +108,65 @@ void RogueApplyUpgrades(void) {
     }
 }
 
+// Whether the character who offers a boon has come to the hub yet. Axel, who
+// offers none, is always there; the others come as runs are played and
+// chapters completed.
+u8 RogueBoonUnlocked(u8 boon) {
+    switch (boon) {
+    case ROGUE_BOON_BELLE:
+        return gRogueMeta.runs >= 1;
+    case ROGUE_BOON_MOOGLE:
+        return gRogueMeta.runs >= 2;
+    case ROGUE_BOON_LEON:
+    case ROGUE_BOON_YUFFIE:
+        return gRogueMeta.chapters >= 2;
+    case ROGUE_BOON_TIGGER:
+        return gRogueMeta.runs >= 5;
+    case ROGUE_BOON_HERCULES:
+    case ROGUE_BOON_JACK:
+        return gRogueMeta.chapters >= 3;
+    }
+
+    return 1;
+}
+
+// Gives the run the boon picked in the hub. Called when a run starts, before
+// its deck is built.
+void RogueApplyBoon(void) {
+    u8 relic;
+
+    switch (gRogueMeta.boon) {
+    case ROGUE_BOON_BELLE:
+        gGameState.progression.maxHp += 30;
+        gGameState.hp += 30;
+        break;
+    case ROGUE_BOON_MOOGLE:
+        gRogue.rerolls += 2;
+        break;
+    case ROGUE_BOON_LEON:
+        gRogue.deckBias = 1;
+        break;
+    case ROGUE_BOON_YUFFIE:
+        gRogue.deckBias = 2;
+        break;
+    case ROGUE_BOON_HERCULES:
+        gGameState.progression.ap += 2;
+        break;
+    case ROGUE_BOON_TIGGER:
+        if (gRogue.airJumps < ROGUE_AIR_JUMPS_MAX) {
+            gRogue.airJumps++;
+        }
+        break;
+    case ROGUE_BOON_JACK:
+        relic = RogueRollRelic();
+
+        if (relic != ROGUE_RELICS) {
+            gRogue.relics |= 1 << relic;
+        }
+        break;
+    }
+}
+
 // Buys the next level. Bought during a run it counts for that run too; bought
 // in the hub it is applied with the others when the run starts.
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun) {

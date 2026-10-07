@@ -57,6 +57,19 @@ static u8 RogueRollPool(void) {
     u32 roll = RogueRandBelow(100);
     u8 pool;
 
+    // A boon from the hub: a starting deck of keyblades or of spells.
+    if (gRogue.deckWanted) {
+        if (gRogue.deckBias == 1 && roll < 80) {
+            return POOL_ATTACK;
+        }
+
+        if (gRogue.deckBias == 2 && roll < 60) {
+            return POOL_MAGIC;
+        }
+
+        roll = RogueRandBelow(100);
+    }
+
     for (pool = POOL_ATTACK; pool <= POOL_SUMMON; pool++) {
         if (roll < RogueBuildPoolBias(pool)) {
             return pool;
@@ -152,7 +165,6 @@ void RogueBuildStartDeck(void) {
         return;
     }
 
-    gRogue.deckWanted = 0;
     sDeckCp = 0;
     sDeckCards = 0;
     sDeckEnemyCards = 0;
@@ -185,6 +197,8 @@ void RogueBuildStartDeck(void) {
             sDeckEnemyCards++;
         }
     }
+
+    gRogue.deckWanted = 0;
 }
 
 

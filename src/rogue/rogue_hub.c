@@ -1,5 +1,9 @@
 #include "rogue.h"
 #include "registration_data.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "card_api.h"
+#include "card_message_data.h"
 #include "display.h"
 #include "fade.h"
 #include "gba/io_reg.h"
@@ -8,103 +12,272 @@
 #include "m4a_song.h"
 #include "malloc.h"
 #include "obj_api.h"
+#include "sprite.h"
+#include "sprite_palettes.h"
+#include "sprites_evt.h"
 #include "system_state.h"
+#include "taskpool.h"
 #include "text.h"
 
-// The hub: the Station of Calling, where every run starts from. It shows what
-// has been unlocked and leads to a new run or to the permanent upgrades.
+// The hub: the Station of Calling, where every run starts from. Sora walks
+// on the stained glass, seen from above at its own size. Axel sells the permanent upgrades, and the others who
+// stand there, more of them as the game is played, each offer a boon for the
+// next run: talking to one picks theirs. Start begins the run.
 
-extern const u8 gRogueStationTiles[31424];
+extern const u8 gRogueStationTiles[];
 extern const u16 gRogueStationMap[640];
 extern const u16 gRogueStationPalette[256];
+extern const u32 gRogueStationTilesSize;
+// Sora's field sprites: [action][direction], directions back, front,
+// front-left, left and back-left, mirrored for the right-hand ones.
+extern const AnimDef gUnk_0813C89C[15][5];
 
-#define HUB_OPTIONS 2
-#define HUB_LINES (2 + HUB_OPTIONS)
-#define LINE_SLOTS 28
+enum {
+    DIR_BACK,
+    DIR_FRONT,
+    DIR_FRONT_LEFT,
+    DIR_LEFT,
+    DIR_BACK_LEFT
+};
+
+#define ACTION_STAND 0
+#define ACTION_WALK 1
+
+// Where Sora can walk, in screen pixels: the picture above the text.
+#define WALK_LEFT 12
+#define WALK_RIGHT 228
+#define WALK_TOP 42
+#define WALK_BOTTOM 126
+#define START_X 120
+#define START_Y 84
+#define TALK_RANGE 26
+#define WALK_SPEED 0x180
+
+typedef struct RogueHubNpc {
+    void* tiles;
+    u16 tilesSize;
+    void* palette;
+    void* anims;
+    void* frames;
+    s16 x;
+    s16 y;
+    u8 boon; // the boon they offer, ROGUE_BOON_NONE for Axel
+} RogueHubNpc;
+
+#define NPC(name, palette, x, y, boon) \
+    { g##name##Fl00Tiles, sizeof(g##name##Fl00Tiles), palette, g##name##Fl00Anims, g##name##Fl00Frames, x, y, boon }
+
+// They stand around the edge, leaving the middle to walk in.
+static const RogueHubNpc sNpcs[] = {
+    NPC(Accele, gAccelePalette, 120, 46, ROGUE_BOON_NONE),
+    NPC(Bell, gBellPalette, 66, 50, ROGUE_BOON_BELLE),
+    NPC(Mogu, gMoguPalette, 174, 50, ROGUE_BOON_MOOGLE),
+    NPC(Reon, gReonPalette, 26, 84, ROGUE_BOON_LEON),
+    NPC(Yuffie, gYuffiePalette, 214, 84, ROGUE_BOON_YUFFIE),
+    NPC(Heracles, gHeraclesPalette, 62, 122, ROGUE_BOON_HERCULES),
+    NPC(Tigger, gTiggerPalette, 178, 122, ROGUE_BOON_TIGGER),
+    NPC(Jack, gJackPalette, 120, 124, ROGUE_BOON_JACK),
+};
+
+#define HUB_NPCS (sizeof(sNpcs) / sizeof(sNpcs[0]))
+#define LINE_SLOTS 30
 
 typedef struct RogueHubWork {
-    TextSlot lines[HUB_LINES][LINE_SLOTS];
-    u8 counts[HUB_LINES];
-    u8 text[40];
-    void* palette;
-    void* cursorPalette;
-    u8 cursor;
+    TaskPool tasks;
+    TextSlot line[LINE_SLOTS];
+    TextSlot hint[LINE_SLOTS];
+    u8 lineCount;
+    u8 hintCount;
+    u8 text[48];
+    void* textPalette;
+    void* hintPalette;
+    void* soraTiles;
+    void* soraPalette;
+    AnimState soraAnim;
+    void* npcTiles[HUB_NPCS];
+    void* npcPalettes[HUB_NPCS];
+    AnimState npcAnims[HUB_NPCS];
+    u8 present[HUB_NPCS];
+    s32 x; // Sora's feet, 24.8
+    s32 y;
+    u8 direction;
+    u8 mirrored;
+    u8 walking;
     u8 state;
+    u8 next; // what the hub leads to once it has faded out
+    u8 talking;
 } RogueHubWork;
+
+enum {
+    HUB_NEXT_RUN,
+    HUB_NEXT_SHOP
+};
 
 static RogueHubWork* sWork;
 
-static const u8 sTitle[] = "Stazione del Risveglio";
-static const u8 sShards[] = "Frammenti ";
-static const u8 sChapters[] = "   Capitoli ";
-static const u8 sStart[] = "Inizia una run";
-static const u8 sUpgrades[] = "Potenziamenti";
+static const u8 sHint[] = "START: inizia la run";
+static const u8 sBoon[] = "Dono: ";
+static const u8 sBoonNone[] = "nessuno";
+static const u8 sBoonBelle[] = "PV +30";
+static const u8 sBoonMoogle[] = "due rilanci";
+static const u8 sBoonLeon[] = "mazzo di lame";
+static const u8 sBoonYuffie[] = "mazzo di magie";
+static const u8 sBoonHercules[] = "Forza +2";
+static const u8 sBoonTigger[] = "salto in aria";
+static const u8 sBoonJack[] = "una reliquia";
+static const u8* const sBoonNames[ROGUE_BOONS] = {
+    sBoonNone, sBoonBelle, sBoonMoogle, sBoonLeon, sBoonYuffie, sBoonHercules, sBoonTigger, sBoonJack,
+};
 
-static u8* RogueHubAppend(u8* out, const u8* text) {
-    while (*text != 0) {
-        *out++ = *text++;
+static void RogueHubShowBoon(void) {
+    u8* out = sWork->text;
+    const u8* text;
+
+    for (text = sBoon; *text != 0; text++) {
+        *out++ = *text;
+    }
+
+    for (text = sBoonNames[gRogueMeta.boon]; *text != 0; text++) {
+        *out++ = *text;
     }
 
     *out = 0;
-    return out;
+    FreeTextSlots(sWork->line, LINE_SLOTS);
+    sWork->lineCount = LoadTextSlots((u16*)sWork->text, sWork->line);
 }
 
-static u8* RogueHubNumber(u8* out, u16 value) {
-    if (value >= 1000) {
-        *out++ = '0' + value / 1000;
-    }
-
-    if (value >= 100) {
-        *out++ = '0' + value / 100 % 10;
-    }
-
-    if (value >= 10) {
-        *out++ = '0' + value / 10 % 10;
-    }
-
-    *out++ = '0' + value % 10;
-    *out = 0;
-    return out;
-}
-
-static void RogueHubLine(u8 line, const u8* text) {
-    InitTextSlots(sWork->lines[line], LINE_SLOTS);
-    sWork->counts[line] = LoadTextSlots((u16*)text, sWork->lines[line]);
+static void RogueHubSoraAnim(u8 action, u8 direction) {
+    AnimChangeWithDef(gUnk_0813C89C[action], &sWork->soraAnim, direction, 1, sWork->soraTiles);
+    sWork->walking = action;
+    sWork->direction = direction;
 }
 
 static void RogueHub_Init(s32 arg) {
-    u8* out;
+    u32 i;
 
     sWork = EwramAlloc(sizeof(RogueHubWork));
-    sWork->cursor = arg;
     sWork->state = 0;
+    sWork->talking = 0;
+    sWork->x = START_X << 8;
+    sWork->y = START_Y << 8;
+    sWork->mirrored = 0;
     SetBgMode0();
     SetupBg(3, 0, 0x1D, 0);
     SetBgPriority(3, 3);
     // The picture is the mod's only 256-colour background.
     gBg3Cnt |= BGCNT_256COLOR;
-    LoadBgTiles(3, (void*)gRogueStationTiles, sizeof(gRogueStationTiles));
-    LoadBgPalette(3, (void*)gRogueStationPalette, sizeof(gRogueStationPalette));
+    LoadBgTiles(3, (void*)gRogueStationTiles, gRogueStationTilesSize);
+    LoadBgPalette(3, (void*)gRogueStationPalette, 224 * 2);
     LoadBgMap(3, (void*)gRogueStationMap, sizeof(gRogueStationMap));
-    sWork->palette = _08066468(1);
-    sWork->cursorPalette = _08066468(0);
-    RogueHubLine(0, sTitle);
-    out = RogueHubAppend(sWork->text, sShards);
-    out = RogueHubNumber(out, gRogueMeta.shards);
-    out = RogueHubAppend(out, sChapters);
-    *out++ = '0' + gRogueMeta.chapters;
-    *out++ = '/';
-    *out++ = '0' + ROGUE_CHAPTERS;
-    *out = 0;
-    RogueHubLine(1, sWork->text);
-    RogueHubLine(2, sStart);
-    RogueHubLine(3, sUpgrades);
+    // The dialogue window goes on the first background, set up as in a room.
+    SetupBg(0, 3, 31, 14);
+    SetBgPriority(0, 0);
+    TaskPoolInit(&sWork->tasks, 2);
+    sWork->textPalette = _08066468(1);
+    sWork->hintPalette = _08066468(0);
+    InitTextSlots(sWork->line, LINE_SLOTS);
+    InitTextSlots(sWork->hint, LINE_SLOTS);
+    sWork->hintCount = LoadTextSlots((u16*)sHint, sWork->hint);
+    RogueHubShowBoon();
+
+    sWork->soraTiles = AllocObjTiles(0x500, 0);
+    sWork->soraPalette = LoadObjPalette(gSoraPalette, 32);
+    AnimInit(&sWork->soraAnim, 0, 0);
+    RogueHubSoraAnim(ACTION_STAND, DIR_FRONT);
+
+    for (i = 0; i < HUB_NPCS; i++) {
+        sWork->present[i] = RogueBoonUnlocked(sNpcs[i].boon);
+
+        if (sWork->present[i]) {
+            sWork->npcTiles[i] = AllocObjTiles(sNpcs[i].tilesSize, sNpcs[i].tiles);
+            sWork->npcPalettes[i] = LoadObjPalette(sNpcs[i].palette, 32);
+            AnimInit(&sWork->npcAnims[i], sNpcs[i].anims, sNpcs[i].frames);
+            AnimStart(&sWork->npcAnims[i], 0, 1);
+        }
+    }
+
     m4aSongNumStartOrContinue(SONG_BGM_TITLE);
     FadeStartIn(0, 16);
 }
 
+// The character Sora stands next to, HUB_NPCS if none.
+static u32 RogueHubNearest(void) {
+    s32 x = sWork->x >> 8;
+    s32 y = sWork->y >> 8;
+    s32 dx;
+    s32 dy;
+    u32 i;
+
+    for (i = 0; i < HUB_NPCS; i++) {
+        dx = x - sNpcs[i].x;
+        dy = y - sNpcs[i].y;
+
+        if (sWork->present[i] && dx * dx + dy * dy * 2 < TALK_RANGE * TALK_RANGE) {
+            return i;
+        }
+    }
+
+    return HUB_NPCS;
+}
+
+static void RogueHubWalk(void) {
+    u16 held = GetKeysHeld();
+    s32 dx = 0;
+    s32 dy = 0;
+    s32 x;
+    s32 y;
+    u8 direction = sWork->direction;
+    u8 mirrored = sWork->mirrored;
+
+    if (held & DPAD_LEFT) {
+        dx = -WALK_SPEED;
+    } else if (held & DPAD_RIGHT) {
+        dx = WALK_SPEED;
+    }
+
+    if (held & DPAD_UP) {
+        dy = -WALK_SPEED * 2 / 3;
+    } else if (held & DPAD_DOWN) {
+        dy = WALK_SPEED * 2 / 3;
+    }
+
+    if (dx == 0 && dy == 0) {
+        if (sWork->walking != ACTION_STAND) {
+            RogueHubSoraAnim(ACTION_STAND, sWork->direction);
+        }
+
+        return;
+    }
+
+    if (dx != 0) {
+        mirrored = dx > 0;
+        direction = dy < 0 ? DIR_BACK_LEFT : dy > 0 ? DIR_FRONT_LEFT : DIR_LEFT;
+    } else {
+        direction = dy < 0 ? DIR_BACK : DIR_FRONT;
+    }
+
+    if (sWork->walking != ACTION_WALK || direction != sWork->direction) {
+        RogueHubSoraAnim(ACTION_WALK, direction);
+    }
+
+    sWork->mirrored = mirrored;
+
+    x = (sWork->x + dx) >> 8;
+    y = (sWork->y + dy) >> 8;
+
+    if (x >= WALK_LEFT && x <= WALK_RIGHT) {
+        sWork->x += dx;
+    }
+
+    if (y >= WALK_TOP && y <= WALK_BOTTOM) {
+        sWork->y += dy;
+    }
+}
+
 static void RogueHub_Update(void) {
-    s32 i;
+    u32 near;
+    u32 i;
+    u16 attr;
 
     switch (sWork->state) {
     case 0:
@@ -113,18 +286,41 @@ static void RogueHub_Update(void) {
         }
         break;
     case 1:
-        if (GetKeysRepeat() & (DPAD_UP | DPAD_DOWN)) {
-            sWork->cursor ^= 1;
-            m4aSongNumStart(SONG_SYS_CLICK);
-        } else if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            m4aSongNumStart(sWork->cursor == 0 ? SONG_SYS_START : SONG_SYS_KETTEI);
+        if (sWork->talking) {
+            // The boon is picked once the character has said what it is.
+            if (func_080A42C8() == 0) {
+                sWork->talking = 0;
+                RogueHubShowBoon();
+            }
+            break;
+        }
+
+        RogueHubWalk();
+        near = RogueHubNearest();
+
+        if (GetKeysPressed() & START_BUTTON) {
+            m4aSongNumStart(SONG_SYS_START);
+            sWork->next = HUB_NEXT_RUN;
             FadeStartOut(0, 16);
             sWork->state = 2;
+        } else if ((GetKeysPressed() & A_BUTTON) && near != HUB_NPCS) {
+            if (sNpcs[near].boon == ROGUE_BOON_NONE) {
+                m4aSongNumStart(SONG_SYS_KETTEI);
+                sWork->next = HUB_NEXT_SHOP;
+                FadeStartOut(0, 16);
+                sWork->state = 2;
+            } else {
+                gRogueMeta.boon = sNpcs[near].boon;
+                RogueMetaSave();
+                RogueHubSoraAnim(ACTION_STAND, sWork->direction);
+                CreateCardMessageTask(&sWork->tasks, 0, ROGUE_MSG_BOON_FIRST + sNpcs[near].boon - 1);
+                sWork->talking = 1;
+            }
         }
         break;
     case 2:
         if (!FadeIsActive()) {
-            if (sWork->cursor == 0) {
+            if (sWork->next == HUB_NEXT_RUN) {
                 RogueStartRun();
             } else {
                 ModeRequest(&gModeRogueShop, ROGUE_SHOP_FROM_HUB);
@@ -135,26 +331,55 @@ static void RogueHub_Update(void) {
         break;
     }
 
-    DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[0], sWork->counts[0])) / 2, 4, sWork->lines[0], sWork->cursorPalette, 50,
-                  sWork->counts[0]);
-    DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[1], sWork->counts[1])) / 2, 110, sWork->lines[1], sWork->palette, 50,
-                  sWork->counts[1]);
+    TaskPoolUpdate(&sWork->tasks);
+    AnimUpdate(&sWork->soraAnim);
 
-    for (i = 0; i < HUB_OPTIONS; i++) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[2 + i], sWork->counts[2 + i])) / 2, 126 + i * 15, sWork->lines[2 + i],
-                      i == sWork->cursor ? sWork->cursorPalette : sWork->palette, 50, sWork->counts[2 + i]);
+    // Lower on the screen is nearer: the priority follows the feet.
+    for (i = 0; i < HUB_NPCS; i++) {
+        if (sWork->present[i]) {
+            AnimUpdate(&sWork->npcAnims[i]);
+            DrawSprite(sNpcs[i].x, sNpcs[i].y, AnimGetGfx(&sWork->npcAnims[i]), sWork->npcTiles[i], sWork->npcPalettes[i], 0, 0x800,
+                       -0x1000 - sNpcs[i].y * 4);
+        }
     }
+
+    attr = 0x800;
+
+    if (sWork->mirrored) {
+        attr |= 1;
+    }
+
+    DrawSprite(sWork->x >> 8, sWork->y >> 8, AnimGetGfx(&sWork->soraAnim), sWork->soraTiles, sWork->soraPalette, 0, attr,
+               -0x1000 - (sWork->y >> 8) * 4);
+
+    if (!sWork->talking) {
+        DrawTextSlots((240 - GetTextSlotsWidth(sWork->line, sWork->lineCount)) / 2, 132, sWork->line, sWork->textPalette, 50,
+                      sWork->lineCount);
+        DrawTextSlots((240 - GetTextSlotsWidth(sWork->hint, sWork->hintCount)) / 2, 146, sWork->hint, sWork->hintPalette, 50,
+                      sWork->hintCount);
+    }
+
+    TaskPoolDraw(&sWork->tasks);
 }
 
 static void RogueHub_Exit(void) {
-    s32 i;
+    u32 i;
 
-    for (i = 0; i < HUB_LINES; i++) {
-        FreeTextSlots(sWork->lines[i], LINE_SLOTS);
+    TaskPoolDestroy(&sWork->tasks);
+    FreeTextSlots(sWork->line, LINE_SLOTS);
+    FreeTextSlots(sWork->hint, LINE_SLOTS);
+    ReleaseObjPalette(sWork->textPalette);
+    ReleaseObjPalette(sWork->hintPalette);
+    ReleaseObjTiles(sWork->soraTiles);
+    ReleaseObjPalette(sWork->soraPalette);
+
+    for (i = 0; i < HUB_NPCS; i++) {
+        if (sWork->present[i]) {
+            ReleaseObjTiles(sWork->npcTiles[i]);
+            ReleaseObjPalette(sWork->npcPalettes[i]);
+        }
     }
 
-    ReleaseObjPalette(sWork->palette);
-    ReleaseObjPalette(sWork->cursorPalette);
     EwramFree(sWork);
 }
 

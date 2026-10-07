@@ -287,7 +287,9 @@ void RogueStartRun(void) {
     gRogue.shards = 0;
     gRogue.newChapter = 0;
     gRogue.chapters = gRogueMeta.chapters;
+    gRogue.deckBias = 0;
     RogueApplyUpgrades();
+    RogueApplyBoon();
     gRogue.deckWanted = 1;
     func_0801CD20();
     gGameState.progression.unk_82 = 0xFFFF;

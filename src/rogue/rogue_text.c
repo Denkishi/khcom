@@ -63,6 +63,15 @@ ROGUE_TEXT(sTidus0, "Ehi, Sora! Scommetto che\x1Fnon mi batti ancora.\x1FGuarda 
 ROGUE_TEXT(sTidus1, "Te la insegno, se vuoi.\x1FO preferisci altro?");
 ROGUE_TEXT(sSelphie0, "Sora! Facciamo cambio\x1F" "di carte? Dai, sar\xE0\x1F" "divertente!");
 ROGUE_TEXT(sSelphie1, "Scegli tu come.\x1FNiente imbrogli, eh!");
+// What each character in the hub says when their boon is picked, in the
+// order of RogueBoon.
+ROGUE_TEXT(sBoonBelle, "Abbi cura di te, Sora.\x1FPartirai con \x1D" "30 PV\x1E in pi\xF9.");
+ROGUE_TEXT(sBoonMoogle, "Kup\xF2! Per la prossima run\x1Fti do \x1D" "due rilanci\x1E delle\x1Fricompense, kup\xF2!");
+ROGUE_TEXT(sBoonLeon, "Affidati alla spada.\x1FIl tuo mazzo sar\xE0 quasi\x1Ftutto di \x1DKeyblade\x1E.");
+ROGUE_TEXT(sBoonYuffie, "Roba da ninja! Il tuo\x1Fmazzo sar\xE0 pieno di\x1F\x1Dmagie\x1E. Fidati!");
+ROGUE_TEXT(sBoonHercules, "Ti ho preparato a dovere.\x1FPartirai con \x1D" "Forza +2\x1E.");
+ROGUE_TEXT(sBoonTigger, "Uh-uh-uh! Stavolta salti\x1F" "con me: parti col \x1Dsalto\x1F" "in aria\x1E!");
+ROGUE_TEXT(sBoonJack, "Un regalo spaventoso!\x1FPartirai con una\x1F\x1Dreliquia\x1E a sorpresa.");
 
 #define AXEL_PORTRAIT 20
 #define EVENT_PAGES(portrait, a, b) { portrait, 3, 0, 3, 0, &a, 0, 0 }, { portrait, 3, 0, 3, 0, &b, 0, 0 }
@@ -103,6 +112,13 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     EVENT_PAGES(43, sBeast0, sBeast1),
     EVENT_PAGES(39, sTidus0, sTidus1),
     EVENT_PAGES(40, sSelphie0, sSelphie1),
+    { 53, 3, 0, 3, 0, &sBoonBelle, 0, 0 },
+    { 7, 3, 0, 3, 0, &sBoonMoogle, 0, 0 },
+    { 31, 3, 0, 3, 0, &sBoonLeon, 0, 0 },
+    { 37, 3, 0, 3, 0, &sBoonYuffie, 0, 0 },
+    { 46, 3, 0, 3, 0, &sBoonHercules, 0, 0 },
+    { 59, 3, 0, 3, 0, &sBoonTigger, 0, 0 },
+    { 11, 3, 0, 3, 0, &sBoonJack, 0, 0 },
 };
 
 const CardMessageDef* RogueCardMessageDef(u16 id) {

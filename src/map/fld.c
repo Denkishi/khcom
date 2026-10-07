@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "task_descriptors.h"
 #include "map_api.h"
 #include "fld.h"
@@ -285,7 +286,7 @@ void func_08031F98(FldWork* work, s32 a, s32 b) {
     }
     work->unk_A8 = a;
 
-    e = &gUnk_0813C89C[a][idx];
+    e = RogueHeroField(a, idx);
     AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
@@ -295,7 +296,7 @@ void task_fld_sora_0(FldWork* work) {
 
     act = &gFieldState->actor;
     work->tiles = AllocObjTiles(0x500, 0);
-    work->palette = LoadObjPalette(gSoraPalette, 32);
+    work->palette = LoadObjPalette(RogueHeroPalette(gSoraPalette), 32);
     act->unk_1A = 16;
     work->unk_BC = 0;
     work->unk_9C = 0;

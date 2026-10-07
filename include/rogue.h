@@ -629,6 +629,7 @@ const struct AnimDef* RogueLeonAnim(u16 slot);
 const struct HumDef* RogueLeonDef(void);
 const struct AnimDef* RogueHeroAnim(u16 anim);
 const struct AnimDef* RogueHeroDirection(u16 action, u16 direction);
+const struct AnimDef* RogueHeroField(u16 action, u16 direction);
 void* RogueHeroPalette(void* sora);
 u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);

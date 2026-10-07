@@ -73,6 +73,8 @@ const HumDef* RogueLeonDef(void) {
 extern const AnimDef gBtlSoraAnimDefs[77];
 extern const AnimDef gRogueMickeyAnimDefs[77];
 extern const AnimDef gRogueMickeyDirectionDefs[30];
+extern const AnimDef gRogueMickeyFieldDefs[75];
+extern const AnimDef gUnk_0813C89C[15][5];
 extern const AnimDef gUnk_0813BEFC[6][5];
 
 // Sora in the black clothes of his second journey: his own sprites with
@@ -111,6 +113,15 @@ const AnimDef* RogueHeroDirection(u16 action, u16 direction) {
     }
 
     return &gUnk_0813BEFC[action][direction];
+}
+
+// And for walking the rooms of the map.
+const AnimDef* RogueHeroField(u16 action, u16 direction) {
+    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+        return &gRogueMickeyFieldDefs[action * 5 + direction];
+    }
+
+    return &gUnk_0813C89C[action][direction];
 }
 
 // The hero's palette, given the one Sora would have.

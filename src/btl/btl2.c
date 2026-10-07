@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "task_descriptors.h"
 #include "battle_localized_data.h"
 #include "system_state.h"
@@ -542,14 +543,16 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
         actor = gRikuBtlWork->actor;
         work->unk_14 = 1;
     } else {
-        if (gBtlWork->actor2 == 0) {
+        // With no enemy locked on, the gauge stays on the last one hit.
+        actor = gBtlWork->actor2 != 0 ? gBtlWork->actor2 : RogueGaugeTarget();
+
+        if (actor == 0) {
             if (work->unk_14 != 0) {
                 work->unk_14 = 0;
             }
             return 1;
         }
         work->unk_14 = 1;
-        actor = gBtlWork->actor2;
     }
 
     if (actor->unk_0D8 != 0) {

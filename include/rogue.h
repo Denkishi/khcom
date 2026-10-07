@@ -539,6 +539,7 @@ struct CardDef;
 void RogueOnEnemyCard(const struct CardDef* def);
 struct BtlObj;
 void RogueSoraPose(struct BtlObj* sora);
+struct BtlObj* RogueGaugeTarget(void);
 void RogueOnReload(void);
 void RogueOnKnockback(struct BtlObj* target);
 u8 RogueRollArt(u16 kind);

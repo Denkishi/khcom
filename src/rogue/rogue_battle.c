@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_actor.h"
 #include "btl_collision.h"
+#include "listpool.h"
 #include "card_def_data.h"
 #include "engine_math.h"
 #include "hum.h"
@@ -603,3 +604,27 @@ TaskDesc gTaskDescRogueHud = {
     (TaskDestroyFunc)RogueHud_Destroy,
     sizeof(RogueHudWork),
 };
+
+// The enemy whose HP the gauge shows while none is locked on: the last one
+// Sora hit if it still stands, or else any that does.
+BtlObj* RogueGaugeTarget(void) {
+    BtlObj* sora = gBtlWork->actor;
+    BtlObj* actor;
+    BtlObj* any = 0;
+
+    for (actor = (BtlObj*)ListPoolFirst(&gBtlWork->pool); actor != 0; actor = (BtlObj*)ListPoolNext(&actor->node)) {
+        if (actor == sora || actor->unk_02C <= 0) {
+            continue;
+        }
+
+        if (actor == sLastHit) {
+            return actor;
+        }
+
+        if (any == 0) {
+            any = actor;
+        }
+    }
+
+    return any;
+}

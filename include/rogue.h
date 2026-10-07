@@ -156,11 +156,17 @@ enum RogueBuild {
 // The mod's cards come after the original 950; ten ids are skipped, see
 // rogue_cards.c. Each new keyblade kind has ten ids, one for each value.
 #define ROGUE_FIRST_CARD_KIND 96
-#define ROGUE_CARD_KINDS 5
+#define ROGUE_CARD_KINDS 16
+// The first of them are keyblades, then come the spells Water, Wind and Magnet.
+#define ROGUE_NEW_KEYBLADES 13
+#define ROGUE_CARD_WATER (ROGUE_FIRST_CARD_KIND + 13)
+#define ROGUE_CARD_WIND (ROGUE_FIRST_CARD_KIND + 14)
+#define ROGUE_CARD_MAGNET (ROGUE_FIRST_CARD_KIND + 15)
 #define ROGUE_CARD_DEFS ((ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS) * 10)
 // Whether a card kind is a keyblade, original or new. Needs card_ids.h.
 #define ROGUE_IS_KEYBLADE(kind) \
-    ((kind) <= CARD_ULTIMA_WEAPON || ((kind) >= ROGUE_FIRST_CARD_KIND && (kind) < ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS))
+    ((kind) <= CARD_ULTIMA_WEAPON || ((kind) >= ROGUE_FIRST_CARD_KIND && (kind) < ROGUE_FIRST_CARD_KIND + ROGUE_NEW_KEYBLADES))
+#define ROGUE_IS_NEW_SPELL(kind) ((kind) >= ROGUE_CARD_WATER && (kind) <= ROGUE_CARD_MAGNET)
 // Tier of the new keyblades, see RogueCardTier: they come from fusions.
 #define ROGUE_NEW_CARD_TIER 5
 // The action id of a Kingdom Key swing, which a tag card is played as.

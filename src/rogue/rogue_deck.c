@@ -261,6 +261,10 @@ static u8 RogueFuseClass(u16 id) {
         return FUSE_ATTACK;
     }
 
+    if (ROGUE_IS_NEW_SPELL(kind)) {
+        return FUSE_MAGIC;
+    }
+
     if (kind >= CARD_POTION) {
         return FUSE_ITEM;
     }
@@ -269,29 +273,45 @@ static u8 RogueFuseClass(u16 id) {
 }
 
 // The new keyblades come from fusions only, from the second chapter: two
-// cards of the same original keyblade always make its evolution, and that
-// keyblade with any other makes it half the time.
+// cards of the same original keyblade always make one of its evolutions, and
+// that keyblade with any other makes one half the time.
 static u16 RogueEvolution(u16 kindA, u16 kindB) {
+    // Original keyblade, new keyblade as an offset from ROGUE_FIRST_CARD_KIND.
     static const u8 evolutions[][2] = {
-        { CARD_LIONHEART, ROGUE_FIRST_CARD_KIND }, // Bond of Flame
-        { CARD_OBLIVION, ROGUE_FIRST_CARD_KIND + 1 }, // Two Become One
-        { CARD_DIVINE_ROSE, ROGUE_FIRST_CARD_KIND + 2 }, // Hidden Dragon
-        { CARD_METAL_CHOCOBO, ROGUE_FIRST_CARD_KIND + 3 }, // Follow the Wind
-        { CARD_OATHKEEPER, ROGUE_FIRST_CARD_KIND + 4 }, // Monochrome
+        { CARD_LIONHEART, 0 }, // Bond of Flame
+        { CARD_OBLIVION, 1 }, // Two Become One
+        { CARD_DIVINE_ROSE, 2 }, // Hidden Dragon
+        { CARD_METAL_CHOCOBO, 3 }, // Follow the Wind
+        { CARD_OATHKEEPER, 4 }, // Monochrome
+        { CARD_PUMPKINHEAD, 5 }, // Midnight Roar
+        { CARD_ONE_WINGED_ANGEL, 6 }, // Total Eclipse
+        { CARD_OBLIVION, 7 }, // Glimpse of Darkness
+        { CARD_LIONHEART, 8 }, // Maverick Flare
+        { CARD_DIAMOND_DUST, 9 }, // Ominous Blight
+        { CARD_SPELLBINDER, 10 }, // Lunar Eclipse
+        { CARD_FAIRY_HARP, 11 }, // Silent Dirge
+        { CARD_KINGDOM_KEY, 12 }, // Dream Sword
     };
+    u32 count = sizeof(evolutions) / sizeof(evolutions[0]);
+    u32 first = RogueRandBelow(count);
     u32 i;
+    u32 n;
 
     if (gRogueMeta.chapters < 2) {
         return 0;
     }
 
-    for (i = 0; i < sizeof(evolutions) / sizeof(evolutions[0]); i++) {
+    // Starts from a random entry, so that a keyblade with two evolutions
+    // gives either.
+    for (n = 0; n < count; n++) {
+        i = (first + n) % count;
+
         if (kindA == evolutions[i][0] && kindB == evolutions[i][0]) {
-            return evolutions[i][1];
+            return ROGUE_FIRST_CARD_KIND + evolutions[i][1];
         }
 
         if ((kindA == evolutions[i][0] || kindB == evolutions[i][0]) && RogueRandBelow(2) == 0) {
-            return evolutions[i][1];
+            return ROGUE_FIRST_CARD_KIND + evolutions[i][1];
         }
     }
 
@@ -344,8 +364,12 @@ static u16 RogueFusionResult(u16 a, u16 b) {
         while (kind > kindA && kind > kindB && RogueCardTier(CARD_ID(kind, 0)) > RogueMaxCardTier() + 2) {
             kind--;
         }
+    } else if (classA == FUSE_MAGIC && classB == FUSE_MAGIC && RogueRandBelow(5) < 2) {
+        // Two spells make one of the new ones two times in five...
+        kind = ROGUE_CARD_WATER + RogueRandBelow(3);
     } else if (classA == FUSE_MAGIC && classB == FUSE_MAGIC) {
-        kind = CARD_SIMBA + RogueRandBelow(CARD_THE_BEAST - CARD_SIMBA + 1);
+        // ...and a summon otherwise.
+        kind = CARD_SIMBA + RogueRandBelow(CARD_CLOUD - CARD_SIMBA + 1);
     } else {
         kind = CARD_OATHKEEPER + RogueRandBelow(CARD_ULTIMA_WEAPON - CARD_OATHKEEPER + 1);
 

@@ -72,6 +72,11 @@ u8 RogueCardElement(u16 id) {
         return ROGUE_ELEMENT_FIRE;
     }
 
+    // Water is Blizzard underneath.
+    if (kind == ROGUE_CARD_WATER) {
+        return ROGUE_ELEMENT_ICE;
+    }
+
     // A keyblade's swings are the three attacks from 12 + 3 * its action id.
     if (ROGUE_IS_KEYBLADE(kind)) {
         return RogueFlagsElement(gBattleAttackDefs[12 + gCardDefs[id].unk_24 * 3].flags);
@@ -86,7 +91,7 @@ static u8 RogueKindBuild(u16 kind) {
         return ROGUE_BUILD_BLADE;
     }
 
-    if (kind >= CARD_FIRE && kind <= CARD_AERO) {
+    if ((kind >= CARD_FIRE && kind <= CARD_AERO) || ROGUE_IS_NEW_SPELL(kind)) {
         return ROGUE_BUILD_SPELL;
     }
 
@@ -132,7 +137,7 @@ void RogueCountBuild(void) {
         RogueBuildAdd(RogueCardElement(id), 1);
         RogueBuildAdd(RogueKindBuild(id / 10), 1);
 
-        if (id / 10 == CARD_FIRE || id / 10 == CARD_BLIZZARD) {
+        if (id / 10 == CARD_FIRE || id / 10 == CARD_BLIZZARD || id / 10 == ROGUE_CARD_WATER) {
             RogueBuildAdd(ROGUE_BUILD_PROJECTILE, 1);
         }
     }

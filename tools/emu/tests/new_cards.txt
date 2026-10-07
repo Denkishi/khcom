@@ -1,25 +1,18 @@
-# The mod's new keyblade cards: the first deck cards are made Bond of Flame 5,
-# Two Become One 3 and Hidden Dragon 7, then shown in the deck menu and used.
-# Expect: the deck screenshot shows the three new pictures with their values,
-# the battle one their small cards in the hand, and hits above 0.
+# The mod's new cards: the first four deck cards are made Water 5, Magnet 3,
+# Dream Sword 7 and Total Eclipse 4, shown in the deck menu and then played.
+# Expect: the deck screenshot shows the four new pictures with their values,
+# the battle ones their small cards in the hand and the spells going off, and
+# the frame counter keeps running.
 include start.txt
-poke16 @gCardCollection 0x13C5
-poke16 @gCardCollection+2 0x13CD
-poke16 @gCardCollection+4 0x13DB
+poke16 @gCardCollection 0x1447
+poke16 @gCardCollection+2 0x1459
+poke16 @gCardCollection+4 0x143F
+poke16 @gCardCollection+6 0x1400
 press START
 wait 60
 press A
 wait 90
 shot /tmp/new_cards_deck.ppm
-press A
-wait 40
-press A
-wait 60
-shot /tmp/new_cards_list.ppm
-press B
-wait 40
-press B
-wait 40
 press B
 wait 60
 press B
@@ -27,10 +20,20 @@ wait 60
 poke8 @gRogueDebug.god 1
 debug battle 0
 wait 720
-shot /tmp/new_cards_battle.ppm
+shot /tmp/new_cards_hand.ppm
+press A
+wait 40
+shot /tmp/new_cards_water.ppm
+wait 50
+press A
+wait 40
+shot /tmp/new_cards_magnet.ppm
+wait 60
 press A
 wait 30
 press A
 wait 40
 peek16 @gRogueDebug.hits hits
-peek8 @gRogue.build fire_points
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

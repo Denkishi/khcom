@@ -46,9 +46,17 @@ extern const AnimDef gRogueMickeyAnimDefs[77];
 extern const AnimDef gRogueMickeyDirectionDefs[30];
 extern const AnimDef gUnk_0813BEFC[6][5];
 
+// Sora in the black clothes of his second journey: his own sprites with
+// the reds turned to black and the blue to red. Worn after a first win.
+static const u16 sSoraKh2Palette[16] = { 0x4208, 0x20E3, 0x49CB, 0x6ED4, 0x1063, 0x20C6, 0x3DAD, 0x167A, 0x37DF, 0x0029, 0x00D0, 0x11B5, 0x32BE, 0x5B7F, 0x1099, 0x7FFF };
+
 u8 RogueHeroUnlocked(u8 hero) {
     if (hero == ROGUE_HERO_MICKEY) {
         return (gRogueMeta.flags & ROGUE_META_MICKEY) != 0;
+    }
+
+    if (hero == ROGUE_HERO_SORA_KH2) {
+        return gRogueMeta.wins != 0;
     }
 
     return hero == ROGUE_HERO_SORA;
@@ -78,5 +86,20 @@ void* RogueHeroPalette(void* sora) {
         return (void*)gRogueMickeyPalette;
     }
 
+    if (gRogueMeta.hero == ROGUE_HERO_SORA_KH2) {
+        return (void*)sSoraKh2Palette;
+    }
+
     return sora;
+}
+
+// The next hero unlocked after the one picked, for the hub's SELECT.
+u8 RogueNextHero(void) {
+    u8 hero = gRogueMeta.hero;
+
+    do {
+        hero = (hero + 1) % ROGUE_HEROES;
+    } while (!RogueHeroUnlocked(hero));
+
+    return hero;
 }

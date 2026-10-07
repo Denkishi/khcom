@@ -161,7 +161,7 @@ static void RogueHubShowBoon(void) {
         *out++ = '0' + gRogueMeta.oblivion;
     }
 
-    if (RogueHeroUnlocked(ROGUE_HERO_MICKEY)) {
+    if (RogueNextHero() != gRogueMeta.hero) {
         for (text = sHero; *text != 0; text++) {
             *out++ = *text;
         }
@@ -341,9 +341,9 @@ static void RogueHub_Update(void) {
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueMetaSave();
             RogueHubShowBoon();
-        } else if ((GetKeysPressed() & SELECT_BUTTON) && RogueHeroUnlocked(ROGUE_HERO_MICKEY)) {
-            // SELECT changes who fights.
-            gRogueMeta.hero = gRogueMeta.hero == ROGUE_HERO_SORA ? ROGUE_HERO_MICKEY : ROGUE_HERO_SORA;
+        } else if ((GetKeysPressed() & SELECT_BUTTON) && RogueNextHero() != gRogueMeta.hero) {
+            // SELECT changes who fights, among the heroes unlocked.
+            gRogueMeta.hero = RogueNextHero();
             m4aSongNumStart(SONG_SYS_KETTEI);
             RogueMetaSave();
             LoadObjPaletteBank(((ObjPalette*)sWork->soraPalette)->index, RogueHeroPalette(gSoraPalette));

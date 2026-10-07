@@ -260,6 +260,10 @@ void RogueOnBossBeaten(u16 battle) {
         gRogueMeta.seals++;
     }
 
+    if (RogueUpgradeLevel(ROGUE_UPGRADE_SEAL2) != 0 && gRogueMeta.seals < ROGUE_SEALS_MAX) {
+        gRogueMeta.seals++;
+    }
+
     // Mickey, beaten, can be played: picked in the hub.
     if (battle == 0x9D && gRogue.bossSkin == ROGUE_SKIN_MICKEY) {
         gRogueMeta.flags |= ROGUE_META_MICKEY;

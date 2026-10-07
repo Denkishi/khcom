@@ -1,5 +1,5 @@
-# Axel's two pages in the hub: the ability tree, three branches of six icons
-# bought with shards, and the starting cards, bought with the seals bosses
+# Axel's three pages in the hub: the two of the ability tree, each three
+# branches of six icons bought with shards, and the starting cards, bought with the seals bosses
 # leave.
 # Expect: the first screenshot shows the tree with only the three roots lit;
 # CP, the second node of the first branch, says it needs HP at level 2 and
@@ -40,6 +40,9 @@ wait 10
 press DOWN
 wait 10
 shot /tmp/tree_4.ppm
+press R
+wait 10
+shot /tmp/tree_page2.ppm
 press R
 wait 10
 press A

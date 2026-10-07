@@ -131,12 +131,12 @@ static const u8 sStrong[] = " +";
 static const u8 sHero[] = "SELECT: eroe";
 static const u8 sOblivion[] = "L/R: Oblio ";
 static const u8 sBoonBelle[] = "PV +30";
-static const u8 sBoonMoogle[] = "due rilanci";
-static const u8 sBoonLeon[] = "mazzo di lame";
-static const u8 sBoonYuffie[] = "mazzo di magie";
+static const u8 sBoonMoogle[] = "2 rilanci";
+static const u8 sBoonLeon[] = "lame";
+static const u8 sBoonYuffie[] = "magie";
 static const u8 sBoonHercules[] = "Forza +2";
-static const u8 sBoonTigger[] = "salto in aria";
-static const u8 sBoonJack[] = "una reliquia";
+static const u8 sBoonTigger[] = "salto";
+static const u8 sBoonJack[] = "reliquia";
 static const u8* const sBoonNames[ROGUE_BOONS] = {
     sBoonNone, sBoonBelle, sBoonMoogle, sBoonLeon, sBoonYuffie, sBoonHercules, sBoonTigger, sBoonJack,
 };

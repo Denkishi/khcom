@@ -336,6 +336,14 @@ void RogueNextFloor(void) {
     gRogue.floor++;
     gRogue.depth++;
     gRogue.room = 0;
+
+    // The tree's rest between floors.
+    gGameState.hp += gGameState.progression.maxHp * 15 * RogueUpgradeLevel(ROGUE_UPGRADE_FLOOR_HEAL) / 100;
+
+    if (gGameState.hp > gGameState.progression.maxHp) {
+        gGameState.hp = gGameState.progression.maxHp;
+    }
+
     gRogue.kind = ROGUE_ROOM_BATTLE;
     gRogue.world = sFloors[gRogue.floor].world;
     RogueEnterRoom(1);

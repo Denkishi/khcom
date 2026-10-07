@@ -173,11 +173,9 @@ u8 RogueMaxCardTier(void) {
 
 // Highest card value on offer: 5 on the first floor, one more each floor.
 u8 RogueMaxCardValue(void) {
-    if (gRogue.floor >= 4) {
-        return 9;
-    }
+    u8 value = 5 + gRogue.floor + RogueUpgradeLevel(ROGUE_UPGRADE_VALUE);
 
-    return 5 + gRogue.floor;
+    return value > 9 ? 9 : value;
 }
 
 // Whether a card may be offered at this point of the run.

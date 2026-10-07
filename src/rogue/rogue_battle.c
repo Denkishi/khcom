@@ -123,6 +123,11 @@ void RogueOnDamage(BtlObj* p) {
             p->unk_020 += p->unk_020 / 2;
         }
 
+        // The tree's toughness: 4% less for each level, never less than 1.
+        if (p->unk_020 > 1) {
+            p->unk_020 -= p->unk_020 * 4 * RogueUpgradeLevel(ROGUE_UPGRADE_TOUGH) / 100;
+        }
+
         if (RogueHasRelic(ROGUE_RELIC_SECOND_WIND) && !gRogue.secondWindUsed && p->unk_020 >= p->unk_02C && p->unk_02C > 1) {
             p->unk_020 = p->unk_02C - 1;
             gRogue.secondWindUsed = 1;
@@ -156,7 +161,7 @@ void RogueOnDamage(BtlObj* p) {
 
     // The tree's critical hits, four in a hundred for each level, and its
     // stronger finishers.
-    if (RogueRandBelow(100) < 4 * RogueUpgradeLevel(ROGUE_UPGRADE_CRIT)) {
+    if (RogueRandBelow(100) < 4 * (RogueUpgradeLevel(ROGUE_UPGRADE_CRIT) + RogueUpgradeLevel(ROGUE_UPGRADE_CRIT2))) {
         p->unk_020 *= 2;
     }
 

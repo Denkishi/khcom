@@ -126,6 +126,13 @@ TREE_ICONS = [
     (624, 342, 638, 356), (465, 393, 479, 407), (184, 546, 198, 560), (657, 548, 671, 562), (622, 485, 636, 499), (438, 582, 452, 596),
 ]
 
+# The second page of the tree: the plain upgrades.
+TREE_ICONS_2 = [
+    (119, 84, 133, 98), (120, 110, 134, 124), (120, 137, 134, 151), (120, 163, 134, 177), (286, 87, 300, 101), (286, 112, 300, 126),
+    (38, 208, 52, 222), (38, 230, 52, 244), (38, 253, 52, 267), (38, 275, 52, 289), (318, 208, 332, 222), (318, 230, 332, 244),
+    (427, 88, 441, 102), (427, 113, 441, 127), (427, 139, 441, 153), (427, 160, 441, 174), (598, 88, 612, 102), (598, 113, 612, 127),
+]
+
 
 def symbol_offsets():
     text = MAP.read_text()
@@ -290,25 +297,26 @@ def main():
         indices, palette = quantize(big)
         art += [c_array(f"gRogueIcon{name}Tiles", gba_tiles(indices, 32, 32)),
                 c_array(f"gRogueIcon{name}Palette", gba_palette(palette)), ""]
-    # The tree icons: all on one strip, quantized together.
+    # The tree icons: each page's on one strip, quantized together.
     sheet = Image.open(ROOT / "mod_assets" / TREE_SHEET).convert("RGB")
-    strip = Image.new("RGB", (32 * len(TREE_ICONS), 32), TRANSPARENT)
-    for index, box in enumerate(TREE_ICONS):
-        icon = sheet.crop(box)
-        icon = icon.resize((icon.width * 2, icon.height * 2), Image.Resampling.NEAREST)
-        for y in range(icon.height):
-            for x in range(icon.width):
-                if sum(icon.getpixel((x, y))) >= 60:
-                    strip.putpixel((index * 32 + 2 + x, 2 + y), icon.getpixel((x, y)))
-    indices, palette = quantize(strip)
-    tiles = bytearray()
-    for index in range(len(TREE_ICONS)):
-        one = [indices[y * strip.width + index * 32 + x] for y in range(32) for x in range(32)]
-        tiles += gba_tiles(one, 32, 32)
-    locked = [tuple((r + g + b) // 9 + 12 for _ in range(3)) for r, g, b in palette]
-    full = [(min(255, r + 70), min(255, g + 60), min(255, b // 2 + 20)) for r, g, b in palette]
-    art += [c_array("gRogueTreeIconTiles", bytes(tiles)), c_array("gRogueTreePalette", gba_palette(palette)),
-            c_array("gRogueTreeLockedPalette", gba_palette(locked)), c_array("gRogueTreeFullPalette", gba_palette(full)), ""]
+    for suffix, boxes in (("", TREE_ICONS), ("2", TREE_ICONS_2)):
+        strip = Image.new("RGB", (32 * len(boxes), 32), TRANSPARENT)
+        for index, box in enumerate(boxes):
+            icon = sheet.crop(box)
+            icon = icon.resize((icon.width * 2, icon.height * 2), Image.Resampling.NEAREST)
+            for y in range(icon.height):
+                for x in range(icon.width):
+                    if sum(icon.getpixel((x, y))) >= 60:
+                        strip.putpixel((index * 32 + 2 + x, 2 + y), icon.getpixel((x, y)))
+        indices, palette = quantize(strip)
+        tiles = bytearray()
+        for index in range(len(boxes)):
+            one = [indices[y * strip.width + index * 32 + x] for y in range(32) for x in range(32)]
+            tiles += gba_tiles(one, 32, 32)
+        locked = [tuple((r + g + b) // 9 + 12 for _ in range(3)) for r, g, b in palette]
+        full = [(min(255, r + 70), min(255, g + 60), min(255, b // 2 + 20)) for r, g, b in palette]
+        art += [c_array(f"gRogueTreeIcon{suffix}Tiles", bytes(tiles)), c_array(f"gRogueTree{suffix}Palette", gba_palette(palette)),
+                c_array(f"gRogueTree{suffix}LockedPalette", gba_palette(locked)), c_array(f"gRogueTree{suffix}FullPalette", gba_palette(full)), ""]
     OUT.write_text("\n".join(art))
     OUT_TABLE.write_text("\n".join(table))
     print(f"wrote {OUT.relative_to(ROOT)} and {OUT_TABLE.relative_to(ROOT)}: {len(CARDS)} cards")

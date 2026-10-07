@@ -55,9 +55,30 @@ enum RogueUpgrade {
     ROGUE_UPGRADE_MAGIC,
     ROGUE_UPGRADE_SUMMON,
     ROGUE_UPGRADE_SEAL,
+    // The second page of the tree: plain numbers, in the order of its grid.
+    ROGUE_UPGRADE_HP2,
+    ROGUE_UPGRADE_HP3,
+    ROGUE_UPGRADE_TOUGH,
+    ROGUE_UPGRADE_FLOOR_HEAL,
+    ROGUE_UPGRADE_CP2,
+    ROGUE_UPGRADE_CP3,
+    ROGUE_UPGRADE_ATTACK2,
+    ROGUE_UPGRADE_ATTACK3,
+    ROGUE_UPGRADE_COMBO2,
+    ROGUE_UPGRADE_COMBO3,
+    ROGUE_UPGRADE_AIR_JUMP2,
+    ROGUE_UPGRADE_MOMENTUM,
+    ROGUE_UPGRADE_SHARDS,
+    ROGUE_UPGRADE_REROLL2,
+    ROGUE_UPGRADE_SEAL2,
+    ROGUE_UPGRADE_RELIC2,
+    ROGUE_UPGRADE_VALUE,
+    ROGUE_UPGRADE_CRIT2,
     ROGUE_UPGRADES
 };
-#define ROGUE_TREE_BRANCHES 3
+#define ROGUE_FIRST_PLAIN_UPGRADE ROGUE_UPGRADE_HP2
+#define ROGUE_TREE_BRANCHES 3 // to a page
+#define ROGUE_TREE_PAGES 2
 #define ROGUE_TREE_DEPTH 6
 #define ROGUE_UPGRADE_PAGE 6 // upgrades to a page of the tree, and levels kept in each of the save's two arrays
 
@@ -98,6 +119,9 @@ typedef struct RogueMeta {
     // Added later still.
     u8 upgrades3[ROGUE_UPGRADE_PAGE];
     u8 unused3[2];
+    // And the second page of the tree.
+    u8 upgrades4[18];
+    u8 unused4[2];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1

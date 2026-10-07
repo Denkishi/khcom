@@ -34,9 +34,10 @@
 #define TREE_STEP_X 36
 #define TREE_STEP_Y 24
 
-enum { PAGE_TREE, PAGE_CARDS, PAGES };
+enum { PAGE_TREE, PAGE_TREE2, PAGE_CARDS, PAGES };
 
 extern const u8 gRogueTreeIconTiles[], gRogueTreePalette[], gRogueTreeLockedPalette[], gRogueTreeFullPalette[];
+extern const u8 gRogueTreeIcon2Tiles[], gRogueTree2Palette[], gRogueTree2LockedPalette[], gRogueTree2FullPalette[];
 
 typedef struct RogueShopWork {
     TextSlot title[TITLE_SLOTS];
@@ -98,33 +99,66 @@ static const u8 sLabelFinisher[] = "Colpo finale";
 static const u8 sLabelMagic[] = "Magia";
 static const u8 sLabelSummon[] = "Alleati";
 static const u8 sLabelSeal[] = "Sigillo";
+static const u8 sLabelHp2[] = "PV II";
+static const u8 sLabelHp3[] = "PV III";
+static const u8 sLabelTough[] = "Tempra";
+static const u8 sLabelFloorHeal[] = "Sosta";
+static const u8 sLabelCp2[] = "PC II";
+static const u8 sLabelCp3[] = "PC III";
+static const u8 sLabelAttack2[] = "Forza II";
+static const u8 sLabelAttack3[] = "Forza III";
+static const u8 sLabelCombo2[] = "Combo+ II";
+static const u8 sLabelCombo3[] = "Combo+ III";
+static const u8 sLabelAirJump2[] = "Salto II";
+static const u8 sLabelMomentum[] = "Slancio";
+static const u8 sLabelShards[] = "Gruzzolo";
+static const u8 sLabelReroll2[] = "Rilanci II";
+static const u8 sLabelSeal2[] = "Sigillo II";
+static const u8 sLabelRelic2[] = "Reliquia II";
+static const u8 sLabelValue[] = "Pregio";
+static const u8 sLabelCrit2[] = "Critico II";
 static const u8* const sLabels[ROGUE_UPGRADES] = {
-    sLabelHp, sLabelCp, sLabelAttack, sLabelCombo, sLabelAirJump, sLabelReroll, sLabelRelic, sLabelGreed, sLabelXp,
-    sLabelReload, sLabelMoves, sLabelHeal, sLabelSecondLife, sLabelCrit, sLabelFinisher, sLabelMagic, sLabelSummon, sLabelSeal,
+    sLabelHp, sLabelCp, sLabelAttack, sLabelCombo, sLabelAirJump, sLabelReroll, sLabelRelic, sLabelGreed, sLabelXp, sLabelReload, sLabelMoves, sLabelHeal, sLabelSecondLife, sLabelCrit, sLabelFinisher, sLabelMagic, sLabelSummon, sLabelSeal, sLabelHp2, sLabelHp3, sLabelTough, sLabelFloorHeal, sLabelCp2, sLabelCp3, sLabelAttack2, sLabelAttack3, sLabelCombo2, sLabelCombo3, sLabelAirJump2, sLabelMomentum, sLabelShards, sLabelReroll2, sLabelSeal2, sLabelRelic2, sLabelValue, sLabelCrit2,
 };
 
 static const u8 sDetailHp[] = "Parti con +10 PV";
 static const u8 sDetailCp[] = "Parti con +15 PC";
 static const u8 sDetailAttack[] = "Parti con Forza +1";
-static const u8 sDetailCombo[] = "Parti con Combo+";
+static const u8 sDetailCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sDetailAirJump[] = "Parti col salto in aria";
 static const u8 sDetailReroll[] = "Un rilancio a run";
 static const u8 sDetailRelic[] = "Parti con una reliquia";
-static const u8 sDetailGreed[] = "Tieni il 20% in pi\xF9 dei frammenti";
-static const u8 sDetailXp[] = "Le carte salgono prima di livello";
-static const u8 sDetailReload[] = "Ricarica pi\xF9 rapida del 10%";
-static const u8 sDetailMoves[] = "Le mosse fanno il 15% in pi\xF9";
-static const u8 sDetailHeal[] = "+2 PV dopo ogni battaglia";
-static const u8 sDetailSecondLife[] = "Parti con Ultimo respiro";
-static const u8 sDetailCrit[] = "4% di colpi critici in pi\xF9";
-static const u8 sDetailFinisher[] = "Il colpo finale fa il 15% in pi\xF9";
-static const u8 sDetailMagic[] = "Le magie fanno il 10% in pi\xF9";
-static const u8 sDetailSummon[] = "Gli alleati fanno il 15% in pi\xF9";
-static const u8 sDetailSeal[] = "Un sigillo in pi\xF9 da ogni boss";
+static const u8 sDetailGreed[] = "Tieni il 20% in pi\xF9\x1F" "dei frammenti";
+static const u8 sDetailXp[] = "Le carte salgono\x1Fprima di livello";
+static const u8 sDetailReload[] = "Ricarica pi\xF9 rapida\x1F" "del 10%";
+static const u8 sDetailMoves[] = "Mosse: danno +15%";
+static const u8 sDetailHeal[] = "+2 PV dopo ogni\x1F" "battaglia";
+static const u8 sDetailSecondLife[] = "Parti con\x1FUltimo respiro";
+static const u8 sDetailCrit[] = "Critici +4%";
+static const u8 sDetailFinisher[] = "Colpo finale: +15%";
+static const u8 sDetailMagic[] = "Magie: danno +10%";
+static const u8 sDetailSummon[] = "Alleati: danno +15%";
+static const u8 sDetailSeal[] = "Un sigillo in pi\xF9\x1F" "da ogni boss";
+static const u8 sDetailHp2[] = "Parti con +10 PV";
+static const u8 sDetailHp3[] = "Parti con +15 PV";
+static const u8 sDetailTough[] = "Subisci il 4% in meno";
+static const u8 sDetailFloorHeal[] = "A ogni piano recuperi\x1Fil 15% dei PV";
+static const u8 sDetailCp2[] = "Parti con +15 PC";
+static const u8 sDetailCp3[] = "Parti con +20 PC";
+static const u8 sDetailAttack2[] = "Parti con Forza +1";
+static const u8 sDetailAttack3[] = "Parti con Forza +1";
+static const u8 sDetailCombo2[] = "Un altro colpo\x1Fnella combo";
+static const u8 sDetailCombo3[] = "Un altro colpo\x1Fnella combo";
+static const u8 sDetailAirJump2[] = "Parti con due\x1Fsalti in aria";
+static const u8 sDetailMomentum[] = "Parti con Slancio";
+static const u8 sDetailShards[] = "Parti con 10\x1F" "frammenti";
+static const u8 sDetailReroll2[] = "Un rilancio in pi\xF9";
+static const u8 sDetailSeal2[] = "Un altro sigillo\x1F" "da ogni boss";
+static const u8 sDetailRelic2[] = "Parti con un'altra\x1Freliquia";
+static const u8 sDetailValue[] = "Carte iniziali di\x1Fvalore pi\xF9 alto";
+static const u8 sDetailCrit2[] = "Critici +4%";
 static const u8* const sDetails[ROGUE_UPGRADES] = {
-    sDetailHp, sDetailCp, sDetailAttack, sDetailCombo, sDetailAirJump, sDetailReroll, sDetailRelic, sDetailGreed, sDetailXp,
-    sDetailReload, sDetailMoves, sDetailHeal, sDetailSecondLife, sDetailCrit, sDetailFinisher, sDetailMagic, sDetailSummon,
-    sDetailSeal,
+    sDetailHp, sDetailCp, sDetailAttack, sDetailCombo, sDetailAirJump, sDetailReroll, sDetailRelic, sDetailGreed, sDetailXp, sDetailReload, sDetailMoves, sDetailHeal, sDetailSecondLife, sDetailCrit, sDetailFinisher, sDetailMagic, sDetailSummon, sDetailSeal, sDetailHp2, sDetailHp3, sDetailTough, sDetailFloorHeal, sDetailCp2, sDetailCp3, sDetailAttack2, sDetailAttack3, sDetailCombo2, sDetailCombo3, sDetailAirJump2, sDetailMomentum, sDetailShards, sDetailReroll2, sDetailSeal2, sDetailRelic2, sDetailValue, sDetailCrit2,
 };
 
 static u8* RogueShopAppend(u8* out, const u8* text) {
@@ -156,7 +190,7 @@ static u8* RogueShopNumber(u8* out, u16 value) {
 
 // The upgrade the cursor is on, on the tree.
 static u8 RogueShopUpgrade(void) {
-    return RogueTreeNode(sWork->cursor / ROGUE_TREE_DEPTH, sWork->cursor % ROGUE_TREE_DEPTH);
+    return RogueTreeNode(sWork->page * ROGUE_TREE_BRANCHES + sWork->cursor / ROGUE_TREE_DEPTH, sWork->cursor % ROGUE_TREE_DEPTH);
 }
 
 // Reloads the title and the description of what is under the cursor.
@@ -166,8 +200,8 @@ static void RogueShopRefresh(void) {
     s32 i;
 
     FreeTextSlots(sWork->title, TITLE_SLOTS);
-    out = RogueShopAppend(sWork->titleText, sWork->page == PAGE_TREE ? sShards : sSeals);
-    RogueShopNumber(out, sWork->page == PAGE_TREE ? gRogueMeta.shards : gRogueMeta.seals);
+    out = RogueShopAppend(sWork->titleText, sWork->page != PAGE_CARDS ? sShards : sSeals);
+    RogueShopNumber(out, sWork->page != PAGE_CARDS ? gRogueMeta.shards : gRogueMeta.seals);
     sWork->titleCount = LoadTextSlots((u16*)sWork->titleText, sWork->title);
     FreeTextSlots(sWork->detail, DETAIL_SLOTS);
 
@@ -243,6 +277,36 @@ static void RogueShopRefresh(void) {
     sWork->detailCount = LoadTextSlots((u16*)sWork->text, sWork->detail);
 }
 
+// Loads the icons and the palettes of the page of the tree shown, none for
+// the cards.
+static void RogueShopIcons(void) {
+    const u8* tiles = sWork->page == PAGE_TREE2 ? gRogueTreeIcon2Tiles : gRogueTreeIconTiles;
+    s32 i;
+
+    if (sWork->iconPalette != 0) {
+        for (i = 0; i < TREE_NODES; i++) {
+            ReleaseObjTiles(sWork->iconTiles[i]);
+        }
+
+        ReleaseObjPalette(sWork->iconPalette);
+        ReleaseObjPalette(sWork->lockedPalette);
+        ReleaseObjPalette(sWork->fullPalette);
+        sWork->iconPalette = 0;
+    }
+
+    if (sWork->page == PAGE_CARDS) {
+        return;
+    }
+
+    sWork->iconPalette = LoadObjPalette((void*)(sWork->page == PAGE_TREE2 ? gRogueTree2Palette : gRogueTreePalette), 32);
+    sWork->lockedPalette = LoadObjPalette((void*)(sWork->page == PAGE_TREE2 ? gRogueTree2LockedPalette : gRogueTreeLockedPalette), 32);
+    sWork->fullPalette = LoadObjPalette((void*)(sWork->page == PAGE_TREE2 ? gRogueTree2FullPalette : gRogueTreeFullPalette), 32);
+
+    for (i = 0; i < TREE_NODES; i++) {
+        sWork->iconTiles[i] = LoadObjTiles((void*)(tiles + i * 0x200), 0x200);
+    }
+}
+
 // The panel on the left holds the list of cards; the tree has the whole
 // screen.
 static void RogueShopPanel(void) {
@@ -255,6 +319,8 @@ static void RogueShopPanel(void) {
         RogueUiPanelMap(sWork->map);
         SetBgScroll(2, ROGUE_UI_PANEL_SCROLL_X, ROGUE_UI_PANEL_SCROLL_Y);
     }
+
+    RogueShopIcons();
 
     LoadBgMap(2, sWork->map, 0x500);
 }
@@ -277,17 +343,11 @@ static void RogueShop_Init(s32 from) {
     LoadBgTiles(3, gUnk_097FFB98, 0x2060);
     LoadBgPalette(3, gUnk_0984B118, 0xA0);
     LoadBgMap(3, gUnk_09848198, 0x500);
+    sWork->iconPalette = 0;
     RogueShopPanel();
     RogueUiInit(&sWork->ui);
     sWork->palette = _08066468(1);
     sWork->cursorPalette = _08066468(0);
-    sWork->iconPalette = LoadObjPalette((void*)gRogueTreePalette, 32);
-    sWork->lockedPalette = LoadObjPalette((void*)gRogueTreeLockedPalette, 32);
-    sWork->fullPalette = LoadObjPalette((void*)gRogueTreeFullPalette, 32);
-
-    for (i = 0; i < TREE_NODES; i++) {
-        sWork->iconTiles[i] = LoadObjTiles((void*)(gRogueTreeIconTiles + i * 0x200), 0x200);
-    }
 
     InitTextSlots(sWork->title, TITLE_SLOTS);
     InitTextSlots(sWork->detail, DETAIL_SLOTS);
@@ -333,12 +393,12 @@ static void RogueShop_Update(void) {
             RogueShopMove(0, -1);
         } else if (repeat & DPAD_DOWN) {
             RogueShopMove(0, 1);
-        } else if ((repeat & DPAD_LEFT) && sWork->page == PAGE_TREE) {
+        } else if ((repeat & DPAD_LEFT) && sWork->page != PAGE_CARDS) {
             RogueShopMove(-1, 0);
-        } else if ((repeat & DPAD_RIGHT) && sWork->page == PAGE_TREE) {
+        } else if ((repeat & DPAD_RIGHT) && sWork->page != PAGE_CARDS) {
             RogueShopMove(1, 0);
         } else if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
-            sWork->page = (sWork->page + 1) % PAGES;
+            sWork->page = (GetKeysPressed() & R_BUTTON) ? (sWork->page + 1) % PAGES : (sWork->page + PAGES - 1) % PAGES;
             sWork->cursor = 0;
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueShopPanel();
@@ -390,7 +450,7 @@ static void RogueShop_Update(void) {
 
     // The tree: a branch a row. The node under the cursor bobs.
     for (i = 0; i < TREE_NODES; i++) {
-        u8 upgrade = RogueTreeNode(i / ROGUE_TREE_DEPTH, i % ROGUE_TREE_DEPTH);
+        u8 upgrade = RogueTreeNode(sWork->page * ROGUE_TREE_BRANCHES + i / ROGUE_TREE_DEPTH, i % ROGUE_TREE_DEPTH);
         void* palette = sWork->iconPalette;
         s32 y = TREE_Y + (i / ROGUE_TREE_DEPTH) * TREE_STEP_Y;
 
@@ -407,7 +467,7 @@ static void RogueShop_Update(void) {
         DrawSprite(TREE_X + (i % ROGUE_TREE_DEPTH) * TREE_STEP_X, y, gCardDefs[0].gfx, sWork->iconTiles[i], palette, 0, 0, 50);
     }
 
-    DrawTextSlots(62, 102, sWork->detail, sWork->palette, 50, sWork->detailCount);
+    DrawTextSlots(58, 102, sWork->detail, sWork->palette, 50, sWork->detailCount);
 }
 
 static void RogueShop_Exit(void) {
@@ -420,9 +480,8 @@ static void RogueShop_Exit(void) {
         FreeTextSlots(sWork->labels[i], LABEL_SLOTS);
     }
 
-    for (i = 0; i < TREE_NODES; i++) {
-        ReleaseObjTiles(sWork->iconTiles[i]);
-    }
+    sWork->page = PAGE_CARDS;
+    RogueShopIcons();
 
     if (sWork->cardTiles != 0) {
         ReleaseObjTiles(sWork->cardTiles);
@@ -430,9 +489,6 @@ static void RogueShop_Exit(void) {
     }
 
     RogueUiExit(&sWork->ui);
-    ReleaseObjPalette(sWork->iconPalette);
-    ReleaseObjPalette(sWork->lockedPalette);
-    ReleaseObjPalette(sWork->fullPalette);
     ReleaseObjPalette(sWork->palette);
     ReleaseObjPalette(sWork->cursorPalette);
     EwramFree(sWork);

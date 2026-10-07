@@ -41,8 +41,16 @@ enum RogueUpgrade {
     ROGUE_UPGRADE_COMBO,
     ROGUE_UPGRADE_AIR_JUMP,
     ROGUE_UPGRADE_REROLL,
+    // The second page.
+    ROGUE_UPGRADE_RELIC,
+    ROGUE_UPGRADE_GREED,
+    ROGUE_UPGRADE_XP,
+    ROGUE_UPGRADE_RELOAD,
+    ROGUE_UPGRADE_MOVES,
+    ROGUE_UPGRADE_HEAL,
     ROGUE_UPGRADES
 };
+#define ROGUE_UPGRADE_PAGE 6 // upgrades to a page of the tree, and levels kept in each of the save's two arrays
 
 #define ROGUE_STARTERS 6 // cards that can be unlocked to start every run with
 #define ROGUE_STARTER_VALUE 6
@@ -64,7 +72,7 @@ typedef struct RogueMeta {
     u16 bestDepth;
     u8 chapters; // chapters unlocked, at least 1
     u8 flags;
-    u8 upgrades[ROGUE_UPGRADES];
+    u8 upgrades[ROGUE_UPGRADE_PAGE]; // levels of the first page's upgrades; read them with RogueUpgradeLevel
     u8 bossMoves; // one bit for each boss move unlocked, see ROGUE_BOSS_MOVE_
     u8 boon; // the RogueBoon picked in the hub for the next run
     u8 boonsMet; // one bit for each boon whose character was met in a run
@@ -75,6 +83,9 @@ typedef struct RogueMeta {
     u8 seals; // won from bosses, spent on starting cards
     u8 starters; // one bit for each starting card unlocked, see ROGUE_STARTERS
     u8 unused[1];
+    // Added after the first saves: a save without them is read as having none.
+    u8 upgrades2[ROGUE_UPGRADE_PAGE]; // levels of the second page's
+    u8 unused2[2];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
@@ -490,6 +501,7 @@ void RogueAbandonRun(void);
 void RogueApplyBoon(void);
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun);
 u8 RogueUpgradeMax(u8 upgrade);
+u8 RogueUpgradeLevel(u8 upgrade);
 u8 RogueUpgradeNeeds(u8 upgrade);
 u8 RogueUpgradeNeedsLevel(u8 upgrade);
 u8 RogueUpgradeOpen(u8 upgrade);

@@ -1,4 +1,4 @@
-# Axel's two pages in the hub: the ability tree, bought with shards, and the
+# Axel's three pages in the hub: the two of the ability tree, bought with shards, and the
 # starting cards, bought with the seals bosses leave.
 # Expect: CP is closed until HP is at level 2 (the second screenshot says what
 # it needs, the third its cost); hp reads 2; the card page lists six
@@ -33,6 +33,9 @@ shot /tmp/tree_3.ppm
 press A
 wait 10
 peek8 @gRogueMeta.upgrades hp
+press R
+wait 10
+shot /tmp/tree_page2.ppm
 press R
 wait 10
 shot /tmp/tree_4.ppm

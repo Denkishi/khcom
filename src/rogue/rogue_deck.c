@@ -264,7 +264,7 @@ void RogueGainCardXp(void) {
         slot = deck->cards[i];
 
         if (slot < ROGUE_CARD_SLOTS && gRogue.cardXp[slot] < ROGUE_CARD_XP_LEVEL_3) {
-            gRogue.cardXp[slot]++;
+            gRogue.cardXp[slot] += 1 + RogueUpgradeLevel(ROGUE_UPGRADE_XP);
         }
     }
 }

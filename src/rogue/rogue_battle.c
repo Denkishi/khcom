@@ -200,6 +200,8 @@ u8 RogueReloadRate(u8 slowed) {
         rate += rate / 2;
     }
 
+    rate += rate * RogueUpgradeLevel(ROGUE_UPGRADE_RELOAD) / 10;
+
     return rate;
 }
 

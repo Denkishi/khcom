@@ -346,6 +346,13 @@ u8 RogueOnBattleEnd(u16 battle) {
 
     RogueGainCardXp();
 
+    // The healing upgrade: a little back after every battle won.
+    gGameState.hp += 2 * RogueUpgradeLevel(ROGUE_UPGRADE_HEAL);
+
+    if (gGameState.hp > gGameState.progression.maxHp) {
+        gGameState.hp = gGameState.progression.maxHp;
+    }
+
     // Moogle points, to spend in the moogle rooms' shop.
     if (gGameState.progression.mooglePoints < 9999 - ROGUE_MOOGLE_POINTS) {
         gGameState.progression.mooglePoints += ROGUE_MOOGLE_POINTS;

@@ -164,6 +164,8 @@ static s32 RogueMoveHit(RogueMoveWork* w) {
     s32 height = def->height;
     s32 hit;
 
+    damage += damage * RogueUpgradeLevel(ROGUE_UPGRADE_MOVES) * 15 / 100;
+
     if (RogueHasRelic(ROGUE_RELIC_MOD_GIANT)) {
         damage += damage / 2;
         width += width / 2;

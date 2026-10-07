@@ -37,7 +37,26 @@ static const RogueUpgradeDef sUpgrades[ROGUE_UPGRADES] = {
     { 1, 40, ROGUE_UPGRADE_ATTACK, 2 }, // combo plus
     { 1, 30, ROGUE_UPGRADE_COMBO, 1 }, // air jump
     { 3, 12, ROGUE_UPGRADE_CP, 2 }, // rerolls
+    // And four more that grow out of them.
+    { 1, 60, ROGUE_UPGRADE_REROLL, 1 }, // a relic to start with
+    { 3, 20, ROGUE_UPGRADES, 0 }, // more shards kept
+    { 1, 35, ROGUE_UPGRADE_GREED, 1 }, // cards learn faster
+    { 3, 15, ROGUE_UPGRADE_ATTACK, 1 }, // faster reload
+    { 3, 20, ROGUE_UPGRADE_COMBO, 1 }, // stronger moves
+    { 3, 15, ROGUE_UPGRADE_HP, 3 }, // healing after battles
 };
+
+static u8* RogueUpgradeSlot(u8 upgrade) {
+    if (upgrade < ROGUE_UPGRADE_PAGE) {
+        return &gRogueMeta.upgrades[upgrade];
+    }
+
+    return &gRogueMeta.upgrades2[upgrade - ROGUE_UPGRADE_PAGE];
+}
+
+u8 RogueUpgradeLevel(u8 upgrade) {
+    return *RogueUpgradeSlot(upgrade);
+}
 
 // The cards that can be unlocked to start every run with, and their cost in
 // seals.
@@ -76,7 +95,7 @@ u8 RogueUpgradeNeedsLevel(u8 upgrade) {
 u8 RogueUpgradeOpen(u8 upgrade) {
     u8 needs = sUpgrades[upgrade].needs;
 
-    return needs == ROGUE_UPGRADES || gRogueMeta.upgrades[needs] >= sUpgrades[upgrade].needsLevel;
+    return needs == ROGUE_UPGRADES || RogueUpgradeLevel(needs) >= sUpgrades[upgrade].needsLevel;
 }
 
 static void RogueMetaReset(void) {
@@ -92,7 +111,21 @@ static void RogueMetaReset(void) {
 }
 
 void RogueMetaLoad(void) {
+    u32 i;
+
     ReadSramFast(META_SRAM, (u8*)&gRogueMeta, sizeof(gRogueMeta));
+
+    if (gRogueMeta.magic == META_MAGIC &&
+        gRogueMeta.checksum == SaveChecksum((u16*)&gRogueMeta.shards, offsetof(RogueMeta, upgrades2) - offsetof(RogueMeta, shards))) {
+        // A save from before the second page of upgrades: it has none of them.
+        for (i = 0; i < ROGUE_UPGRADE_PAGE; i++) {
+            gRogueMeta.upgrades2[i] = 0;
+        }
+
+        gRogueMeta.unused2[0] = 0;
+        gRogueMeta.unused2[1] = 0;
+        return;
+    }
 
     if (gRogueMeta.magic != META_MAGIC ||
         gRogueMeta.checksum != SaveChecksum((u16*)&gRogueMeta.shards, sizeof(gRogueMeta) - offsetof(RogueMeta, shards))) {
@@ -111,7 +144,7 @@ u8 RogueUpgradeMax(u8 upgrade) {
 
 // Each level costs as much again as the first.
 u16 RogueUpgradeCost(u8 upgrade) {
-    return sUpgrades[upgrade].cost * (gRogueMeta.upgrades[upgrade] + 1);
+    return sUpgrades[upgrade].cost * (RogueUpgradeLevel(upgrade) + 1);
 }
 
 // Gives one level of an upgrade to the run in progress.
@@ -136,6 +169,14 @@ static void RogueApplyUpgrade(u8 upgrade) {
     case ROGUE_UPGRADE_REROLL:
         gRogue.rerolls++;
         break;
+    case ROGUE_UPGRADE_RELIC: {
+        u8 relic = RogueRollRelic();
+
+        if (relic != ROGUE_RELICS) {
+            gRogue.relics |= 1 << relic;
+        }
+        break;
+    }
     }
 }
 
@@ -145,7 +186,7 @@ void RogueApplyUpgrades(void) {
     u8 level;
 
     for (upgrade = 0; upgrade < ROGUE_UPGRADES; upgrade++) {
-        for (level = 0; level < gRogueMeta.upgrades[upgrade]; level++) {
+        for (level = 0; level < RogueUpgradeLevel(upgrade); level++) {
             RogueApplyUpgrade(upgrade);
         }
     }
@@ -248,12 +289,12 @@ void RogueApplyBoon(void) {
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun) {
     u16 cost = RogueUpgradeCost(upgrade);
 
-    if (gRogueMeta.upgrades[upgrade] >= sUpgrades[upgrade].levels || gRogueMeta.shards < cost || !RogueUpgradeOpen(upgrade)) {
+    if (RogueUpgradeLevel(upgrade) >= sUpgrades[upgrade].levels || gRogueMeta.shards < cost || !RogueUpgradeOpen(upgrade)) {
         return 0;
     }
 
     gRogueMeta.shards -= cost;
-    gRogueMeta.upgrades[upgrade]++;
+    (*RogueUpgradeSlot(upgrade))++;
 
     if (inRun) {
         RogueApplyUpgrade(upgrade);
@@ -295,6 +336,9 @@ void RogueMetaEndRun(u8 completed) {
 
     // Each oblivion level is worth a quarter more shards.
     gRogue.shards += gRogue.shards * gRogue.oblivion / 4;
+
+    // Greed: a fifth more of the run's shards are kept for each level.
+    gRogue.shards += gRogue.shards * RogueUpgradeLevel(ROGUE_UPGRADE_GREED) / 5;
 
     if (gRogueMeta.shards + gRogue.shards > 9999) {
         gRogueMeta.shards = 9999;

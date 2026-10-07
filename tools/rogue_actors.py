@@ -23,21 +23,34 @@ import rogue_sprites as rs  # noqa: E402
 import sprite_sheet  # noqa: E402
 
 HEADER = ROOT / "include/rogue_actor_art.h"
-EVENTS = {"hit": 1, "special": 2, "heavy": 3, "blink": 4}
+EVENTS = ["nothing", "hit", "special", "heavy", "blink", "throw", "seek", "cast", "behind", "over", "land", "flash", "heal"]
 
 
 def P(pose, frames, move=0, lift=0, **event):
     """One step of a clip: a pose, the frames it stays, the pixels a frame the
     boss goes forward and up meanwhile, and what happens as it starts:
-    hit=reach in pixels, heavy=reach for a stronger hit, blink=reach for a
-    hit made from beside Sora, wherever the boss was, or special=number,
-    which the boss's own code answers."""
-    kind, arg = next(iter(event.items())) if event else (None, 0)
-    return (pose, frames, move, lift, EVENTS.get(kind, 0), arg)
+      hit=reach     a hit in front, reaching so many pixels
+      heavy=reach   the same, half as strong again
+      blink=reach   a hit made from beside Sora, wherever the boss was
+      throw=MOVE    one of the moves of rogue_moves.c, thrown ahead
+      seek=MOVE     the same set round Sora, closing on him one after the other
+      cast=MOVE     the same made in front of the boss
+      behind=1      the boss is on the far side of Sora, looking back
+      over=1        for the next frames the boss is carried over where Sora stands
+      land=reach    the boss is on the ground again, and hits all around
+      flash=1       the screen flashes
+      heal=1        the boss gets a sixth of its HP back
+      special=n     what the boss's own code makes of it"""
+    kind, arg = next(iter(event.items())) if event else ("nothing", 0)
+    return (pose, frames, move, lift, EVENTS.index(kind), f"ROGUE_MOVE_{arg}" if isinstance(arg, str) else arg)
 
 
 def loop(poses, frames):
     return [P(p, frames) for p in poses]
+
+
+def row(r, columns, frames):
+    return [P(f"{r}.{c}", frames) for c in columns]
 
 
 SEPHIROTH = dict(
@@ -59,11 +72,11 @@ SEPHIROTH = dict(
         # The whole length of the sword, after a step that covers the ground.
         thrust=[P("5.0", 4, move=7), P("5.1", 5, move=7), P("13.0", 5, move=3), P("13.1", 10, heavy=100), P("17.0", 8)],
         # He stands with the sword sheathed; then he is past Sora, who is cut on the way.
-        flash=[P("26.0", 26), P("26.1", 3, special=1), P("26.2", 6, heavy=90), P("26.2", 16)],
+        flash=[P("26.0", 26), P("26.1", 3, behind=1), P("26.2", 6, heavy=90), P("26.2", 16)],
         # Up, and down on the point of the sword where Sora stood.
-        plunge=[P("6.0", 12, lift=5, special=2), P("27.0", 6, lift=-10), P("27.1", 6, special=3), P("27.2", 8), P("27.3", 12)],
+        plunge=[P("6.0", 12, lift=5, over=1), P("27.0", 6, lift=-10), P("27.1", 2, land=44), P("27.1", 4, special=3), P("27.2", 8), P("27.3", 12)],
         # Shadow Flare: the dark gathers round Sora and closes on him.
-        flare=[P("28.0", 5), P("28.1", 5), P("28.2", 6), P("29.0", 6), P("29.1", 24, special=4), P("28.0", 8)],
+        flare=[P("28.0", 5), P("28.1", 5), P("28.2", 6), P("29.0", 6), P("29.1", 24, seek="FIREBALL"), P("28.0", 8)],
         # A cut from above that sends a wave along the ground.
         wave=[P("19.0", 12), P("19.1", 4), P("19.2", 12, special=5), P("19.3", 10)],
         # Heartless Angel: he rises and calls it down. Left to finish, it takes all Sora has but one.
@@ -75,14 +88,121 @@ SEPHIROTH = dict(
            P("9.6", 3), P("11.3", 4, blink=60), P("13.1", 3), P("12.0", 4, blink=70), P("10.3", 3),
            P("12.4", 4, blink=70), P("21.1", 3), P("9.1", 4, blink=70), P("11.5", 8, blink=80), P("11.6", 16)],
         # The one wing, at half his HP.
-        wing=[P("38.4", 6), P("38.5", 6), P("38.6", 6), P("38.7", 8), P("38.8", 8), P("38.9", 14, special=9), P("38.10", 8), P("38.11", 8),
+        wing=[P("38.4", 6), P("38.5", 6), P("38.6", 6), P("38.7", 8), P("38.8", 8), P("38.9", 14, flash=1), P("38.10", 8), P("38.11", 8),
               P("38.12", 8), P("38.13", 12)],
     ),
     # Effects cut from the sheet by hand: box, scale, frames as (turns of 90 degrees, duration).
     fx=dict(Wave=dict(box=(627, 7148, 709, 7409), scale=0.2, frames=[(0, 60)])),
 )
 
-ACTORS = {"Sephiroth": SEPHIROTH}
+# Sora as he is on his second journey, from the sheet the hero of
+# rogue_sprites.py is made from too. He throws the Keyblade.
+SORA = dict(
+    sheet="sora_kh2_ultimate.png", area=(100, 0, 1000, 0), min_pixels=80, min_height=20, row_overlap=10, max_height=200, min_colours=5,
+    clips=dict(
+        idle=row(0, range(8), 6),
+        run=row(1, range(8), 4),
+        hurt=[P("25.0", 6), P("25.1", 12)],
+        combo=[P("5.0", 6), P("5.1", 4, move=2, hit=50), P("5.2", 4), P("5.3", 4, hit=50), P("5.4", 5), P("6.1", 4),
+               P("6.2", 5, move=3, heavy=55), P("6.4", 8)],
+        arcs=[P("7.0", 6), P("7.1", 4, move=3, hit=55), P("7.2", 5, hit=55), P("7.3", 4), P("8.3", 5, move=3, heavy=65), P("8.4", 5),
+              P("8.5", 8)],
+        rising=[P("10.0", 6), P("10.1", 4, move=2, hit=50), P("10.2", 5, heavy=55), P("10.3", 5), P("10.4", 8)],
+        # Strike Raid: the Keyblade thrown, which comes back to his hand.
+        raid=[P("14.0", 8), P("14.1", 5), P("14.2", 6, throw="RAID"), P("15.0", 30), P("15.2", 6), P("15.3", 8)],
+        fire=[P("32.0", 6), P("32.1", 6), P("32.2", 8, seek="FIREBALL"), P("28.4", 16), P("28.0", 6)],
+        ice=[P("28.0", 5), P("28.2", 5), P("28.4", 8, throw="NEEDLES"), P("28.5", 10), P("28.6", 6)],
+        # Sonic Blade: he is through Sora before the cut shows.
+        sonic=[P("24.0", 12), P("24.1", 3, behind=1), P("24.3", 6, heavy=60), P("24.5", 10)],
+        # Cure, once, at half his HP.
+        cure=[P("28.0", 6), P("28.2", 6), P("28.4", 10, heal=1), P("28.5", 12, flash=1), P("28.6", 8)],
+        # The finisher, after that: cuts from every side.
+        ars=[P("23.0", 5), P("23.1", 4), P("23.2", 4, blink=55), P("23.3", 4), P("23.4", 4, blink=60), P("23.5", 4), P("23.6", 5, blink=60),
+             P("23.9", 4), P("23.10", 5, heavy=60), P("23.14", 10)],
+    ),
+    fx=dict(
+        # The Keyblade as it flies, turning.
+        Raid=dict(poses=["14.3", "14.4", "14.5", "14.6", "14.7", "14.8", "14.9", "14.10"], duration=2),
+        # A ball of light, for Mickey's pearls and the lights the last Roxas calls.
+        Pearl=dict(poses=["16.2"], duration=60),
+    ),
+)
+
+ROXAS_SHEET = dict(sheet="roxas_sheet.png", area=(100, 0, 1000, 0), min_pixels=80, min_height=20, row_overlap=10, max_height=200,
+                   min_colours=5)
+
+# Roxas three times over, as the sheet has him. First as in Twilight Town:
+# one Keyblade, and at half his HP the second.
+ROXAS = dict(
+    ROXAS_SHEET,
+    clips=dict(
+        idle=row(0, range(8), 6),
+        run=row(2, range(8), 4),
+        hurt=[P("19.0", 6), P("19.1", 12)],
+        slash=[P("7.0", 6), P("7.1", 4, hit=50), P("7.2", 4), P("7.3", 5, hit=50), P("8.1", 4, move=3), P("8.2", 5, heavy=55), P("8.3", 8)],
+        spin=[P("9.0", 6), P("9.1", 4, move=2, hit=55), P("9.2", 4), P("9.3", 4, hit=55), P("9.4", 5), P("9.5", 8)],
+        upper=[P("10.0", 6), P("10.1", 4), P("10.2", 5, move=3, hit=45), P("10.3", 5, heavy=50), P("10.4", 6), P("10.5", 8)],
+        raid=[P("6.0", 8), P("6.2", 5), P("6.3", 6, throw="RAID"), P("6.4", 30), P("6.5", 8)],
+        dash=[P("5.0", 4, move=6), P("5.2", 4, move=6), P("5.4", 4, move=6), P("11.2", 4, hit=50), P("11.3", 8)],
+        # The second Keyblade comes to his hand.
+        dual=[P("42.0", 8), P("42.1", 8), P("42.2", 8), P("42.3", 10, flash=1), P("31.0", 8)],
+        flurry=[P("36.0", 4, blink=50), P("36.1", 4), P("36.2", 4, blink=50), P("37.0", 4), P("37.1", 4, blink=50), P("38.1", 4),
+                P("38.2", 4, blink=50), P("39.1", 6, heavy=55), P("39.3", 10)],
+    ),
+)
+
+# In the coat of the Organization, with both Keyblades.
+ROXAS_COAT = dict(
+    ROXAS_SHEET,
+    clips=dict(
+        idle=row(53, range(4), 7),
+        run=row(57, range(3), 4),
+        hurt=[P("48.0", 6), P("48.1", 12)],
+        combo=[P("54.3", 5), P("54.5", 4, hit=50), P("54.7", 4), P("54.8", 4, hit=55), P("54.9", 4), P("54.10", 4, hit=60), P("54.11", 4),
+               P("54.12", 4, heavy=55), P("54.13", 6), P("54.14", 8)],
+        wide=[P("58.3", 6), P("58.4", 4, move=3, hit=60), P("58.5", 5, hit=70), P("58.6", 5), P("58.7", 4, hit=60), P("58.8", 5, heavy=60),
+              P("58.9", 8)],
+        light=[P("59.0", 8), P("59.1", 4), P("59.2", 5, move=4, heavy=70), P("59.3", 5), P("59.4", 8)],
+        dark=[P("59.4", 6), P("59.5", 4, move=3, hit=70), P("59.6", 4), P("59.7", 4, hit=60), P("59.8", 5, heavy=75), P("59.9", 5),
+              P("59.10", 8)],
+        raid=[P("49.0", 6), P("49.2", 5), P("49.3", 5, throw="RAID"), P("49.4", 30), P("49.7", 8)],
+        step=[P("57.0", 12), P("57.1", 3, behind=1), P("58.5", 6, heavy=70), P("58.9", 10)],
+        lights=[P("51.0", 6), P("51.1", 8), P("51.2", 20, seek="PEARL"), P("51.0", 8)],
+        rage=[P("52.0", 6), P("52.2", 6), P("52.4", 6), P("52.6", 8, flash=1), P("52.8", 10)],
+        flurry=[P("58.4", 4, blink=60), P("58.5", 3), P("59.2", 4, blink=70), P("59.3", 3), P("58.7", 4, blink=60), P("58.8", 3),
+                P("59.5", 4, blink=70), P("59.6", 3), P("59.8", 6, blink=75), P("59.10", 12)],
+    ),
+)
+
+# And with the hood up, as he fights at the end.
+ROXAS_HOOD = dict(
+    ROXAS_SHEET,
+    clips=dict(
+        idle=row(64, range(4), 7),
+        run=row(66, range(8), 3),
+        hurt=[P("60.0", 6), P("62.1", 12)],
+        combo=[P("65.3", 5), P("65.5", 4, hit=50), P("65.7", 4), P("65.8", 4, hit=55), P("65.9", 4), P("65.10", 4, hit=60), P("65.11", 4),
+               P("65.12", 4, heavy=55), P("65.13", 8)],
+        arcs=[P("67.0", 6), P("67.1", 4, move=3, hit=70), P("67.2", 4), P("67.3", 4, hit=60), P("67.4", 5, heavy=70), P("67.5", 5),
+              P("67.6", 6), P("67.7", 5, heavy=75), P("67.8", 8)],
+        # He gathers himself, then goes through Sora turning.
+        cyclone=row(73, range(4), 6)
+        + [P("68.0", 4, move=4, hit=60), P("68.1", 4, move=4), P("68.2", 4, move=4, hit=60), P("68.3", 4, move=4), P("68.0", 4, move=4, hit=60),
+           P("68.1", 4, move=4), P("68.2", 4, move=4, hit=60), P("68.3", 4, heavy=60), P("68.4", 12)],
+        wide=[P("70.4", 6), P("70.5", 4, move=3, hit=70), P("70.6", 5), P("70.7", 4, hit=65), P("70.8", 5, heavy=70), P("70.9", 5),
+              P("70.12", 4, hit=50), P("70.15", 8)],
+        # Pillars of light all around him.
+        pillars=[P("75.5", 8), P("75.6", 12), P("76.1", 4, land=60), P("76.1", 8, land=60), P("76.1", 14), P("76.0", 10)],
+        lights=[P("75.0", 6), P("75.2", 6), P("75.4", 20, seek="PEARL"), P("75.0", 8)],
+        step=[P("66.0", 10), P("66.3", 3, behind=1), P("70.5", 6, heavy=70), P("70.9", 10)],
+        rage=row(73, range(4), 6) + [P("73.0", 6, flash=1)] + row(73, range(1, 4), 6),
+        flurry=[P("72.1", 4, blink=50), P("72.3", 3), P("72.4", 4, blink=60), P("72.6", 3), P("72.8", 4, blink=55), P("72.10", 3),
+                P("72.12", 4, blink=55), P("72.13", 3), P("68.0", 4, blink=60), P("68.2", 4), P("68.3", 6, heavy=60), P("68.4", 12)],
+    ),
+    fx=dict(Pillar=dict(box=(63, 6778, 95, 6882), scale=0.75, frames=[(0, 40)])),
+)
+
+ACTORS = {"Sephiroth": SEPHIROTH, "SoraKh2": SORA, "Roxas": ROXAS, "RoxasCoat": ROXAS_COAT, "RoxasHood": ROXAS_HOOD}
 
 
 def use(actor):
@@ -128,8 +248,14 @@ def c_palette(name, palette):
     return f"const u16 {name}[16] = {{\n{rs.words(colours, 8)}\n}};"
 
 
-def effect(name, sheet, spec):
+def effect(name, sheet, spec, sprites=None):
     """An effect as a sprite the moves of rogue_moves.c can throw: tiles, palette, frames, one animation."""
+    if "poses" in spec:
+        # Sprites of the sheet in turn, as the poses of a clip are.
+        key = sprites.background
+        crops = {str(i): sprites.crops[pose] for i, pose in enumerate(spec["poses"])}
+        spec = dict(spec, frames=[(0, spec["duration"])] * len(crops))
+        return effect_code(name, crops, key, spec)
     crop = sheet.crop(spec["box"])
     background = sheet.getpixel((0, 0))
     mask = Image.new("L", crop.size)
@@ -143,9 +269,24 @@ def effect(name, sheet, spec):
     crops = {}
     for index, (turns, _) in enumerate(spec["frames"]):
         crops[str(index)] = small.rotate(90 * turns, expand=True) if turns else small
+    return effect_code(name, crops, key, spec)
+
+
+def effect_code(name, crops, key, spec):
     names = list(crops)
     rs.PALETTE = None
     poses = rs.Poses(names, crops, key)
+    strip = Image.new("RGB", (sum(c.width + 2 for c in crops.values()), max(c.height for c in crops.values())), (64, 128, 128))
+    x = 0
+    for n in names:
+        for py, line in enumerate(poses.pixels[n]):
+            for px, value in enumerate(line):
+                if value:
+                    strip.putpixel((x + px, py), poses.palette[value])
+        x += crops[n].width + 2
+    folder = ROOT / "mod_assets" / "fx_preview"
+    folder.mkdir(exist_ok=True)
+    strip.resize((strip.width * 3, strip.height * 3), Image.NEAREST).save(folder / f"{name}.png")
     for n in names:
         poses.anchors[n] = (crops[n].width // 2, crops[n].height // 2)
     oam, block = poses.encode(names)
@@ -192,7 +333,7 @@ def build(name):
         out.append(f"    {{ (void*)sFrames{index}, (void*)sPoseAnims, (void*)sTiles{index}, 0, {{ 0, 0, 0 }} }},")
     out.append("};")
     out.append("")
-    upper = name.upper()
+    upper = "".join("_" + ch if ch.isupper() and i else ch for i, ch in enumerate(name)).upper()
     declare = [f"// {name}", f"#define ROGUE_{upper}_TILES {most}", "enum {"]
     for clip, steps in clips.items():
         declare.append(f"    ROGUE_{upper}_CLIP_{clip.upper()},")
@@ -210,7 +351,7 @@ def build(name):
                 f"extern const RogueClipStep* const gRogue{name}Clips[ROGUE_{upper}_CLIPS];"]
     sheet = Image.open(rs.SHEET).convert("RGB")
     for fx, spec in actor.get("fx", {}).items():
-        text, extra = effect(fx, sheet, spec)
+        text, extra = effect(fx, sheet, spec, poses)
         out += text
         declare += extra
     (ROOT / f"src/rogue/rogue_{name.lower()}_actor.c").write_text("\n".join(out) + "\n")

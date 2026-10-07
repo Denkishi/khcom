@@ -81,10 +81,35 @@ static u8 RogueRollBoss(void) {
         return floor->otherBoss;
     }
 
-    // A friend turned against Sora may hold a floor that does not end a
-    // chapter, one time in four once the first chapter is done.
-    if (gRogueMeta.chapters > 1 && !RogueFloorIsChapterEnd() && RogueRandBelow(4) == 0) {
-        gRogue.bossSkin = ROGUE_SKIN_BEAST + RogueRandBelow(ROGUE_SKINS - ROGUE_SKIN_BEAST);
+    // Those with a fight of their own, drawn from their own sheets. Where a
+    // chapter ends, one time in four: Sephiroth once the third chapter is
+    // open, Roxas in the coat from the second, hooded in the later chapters.
+    if (RogueFloorIsChapterEnd()) {
+        if (gRogueMeta.chapters >= 2 && RogueRandBelow(4) == 0) {
+            if ((gRogueMeta.chapters >= 3 || (gRogueMeta.flags & ROGUE_META_ALL_CLEARED)) && RogueRandBelow(2) == 0) {
+                gRogue.bossSkin = ROGUE_SKIN_SEPHIROTH;
+            } else {
+                gRogue.bossSkin = chapter >= 2 ? ROGUE_SKIN_ROXAS_HOOD : ROGUE_SKIN_ROXAS_COAT;
+            }
+
+            return 0x9D;
+        }
+    } else if (gRogueMeta.chapters > 1 && RogueRandBelow(3) == 0) {
+        // On the other floors, one time in three once the first chapter is
+        // done: a friend turned against Sora, or Roxas as he was in Twilight
+        // Town, or Sora himself from his second journey.
+        switch (RogueRandBelow(4)) {
+        case 0:
+            gRogue.bossSkin = ROGUE_SKIN_ROXAS;
+            break;
+        case 1:
+            gRogue.bossSkin = ROGUE_SKIN_SORA_KH2;
+            break;
+        default:
+            gRogue.bossSkin = ROGUE_SKIN_BEAST + RogueRandBelow(ROGUE_SKINS - ROGUE_SKIN_BEAST);
+            break;
+        }
+
         return 0x9D;
     }
 

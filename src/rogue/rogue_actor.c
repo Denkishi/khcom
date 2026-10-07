@@ -60,46 +60,20 @@ static s32 sDriftX; // carried this far a frame, for sDrift frames
 static s32 sDriftY;
 static u8 sDrift;
 
-#define ACTOR_DEF(tiles, palette) { tiles, 0, (void*)palette, 0, { 41, 99, 64, 14, 40, 99, 0 } }
+// tall: one of the numbers of Leon's own definition, kept as he has it.
+#define ACTOR_DEF(tiles, palette, tall) { tiles, 0, (void*)palette, 0, { 41, 99, tall, 14, 40, 99, 0 } }
 
 // Sephiroth.
 
 static void SephirothSpecial(BtlObj* boss, u8 which) {
     BtlObj* sora = gBtlWork->actor;
     s32 left = (boss->flags & 4) != 0;
-    s32 i;
 
     switch (which) {
-    case 1:
-        // The flash: he is on the far side of Sora, looking back.
-        boss->x = sora->x + (left ? -0x2800 : 0x2800);
-        boss->y = sora->y;
-        boss->flags ^= 4;
-        m4aSongNumStart(SONG_EF_RAC_3TR);
-        break;
-    case 2:
-        // The plunge: while he rises he is carried over where Sora stands.
-        sDrift = 18;
-        sDriftX = (sora->x - boss->x) / 18;
-        sDriftY = (sora->y - boss->y) / 18;
-        break;
     case 3:
-        // He lands: the ground bursts around him.
-        boss->z = boss->unk_010;
-        FadeFromAmount(2, 10, 16);
-        m4aSongNumStart(SONG_EF_SUMMON_UP);
-        RogueFoeHit(boss, boss->x, boss->y, boss->z, 44, 26, 48, 384);
+        // He has landed: the ground bursts on both sides of him.
         RogueFoeMove(boss, ROGUE_MOVE_FIRE_BURST, boss->x - 0x3000, boss->y, boss->z, ROGUE_MOVE_PLAIN, 0, 4, 1);
         RogueFoeMove(boss, ROGUE_MOVE_FIRE_BURST, boss->x + 0x3000, boss->y, boss->z, ROGUE_MOVE_PLAIN, 0, 4, 0);
-        break;
-    case 4:
-        // Shadow Flare: four fires set round Sora, closing on him one after the other.
-        for (i = 0; i < (sEnraged ? 6 : 4); i++) {
-            static const s8 where[6][2] = { { -48, -14 }, { 48, -14 }, { -48, 14 }, { 48, 14 }, { 0, -24 }, { 0, 24 } };
-
-            RogueFoeMove(boss, ROGUE_MOVE_FIREBALL, sora->x + where[i][0] * 0x100, sora->y + where[i][1] * 0x100, sora->z - 0x2800,
-                         ROGUE_MOVE_SHARD, 40 + i * 9, i * 3, where[i][0] > 0);
-        }
         break;
     case 5:
         // The wave; with the wing out, three abreast.
@@ -124,10 +98,6 @@ static void SephirothSpecial(BtlObj* boss, u8 which) {
         FadeFromAmount(2, 16, 16);
         m4aSongNumStart(SONG_EF_SUMMON_UP);
         break;
-    case 9:
-        FadeFromAmount(2, 16, 16);
-        m4aSongNumStart(SONG_EF_SUMMON_UP);
-        break;
     }
 }
 
@@ -147,7 +117,7 @@ static const RogueActorMove sSephirothMoves[] = {
 static const RogueActor sSephiroth = {
     gRogueSephirothPoses,
     gRogueSephirothClips,
-    ACTOR_DEF(ROGUE_SEPHIROTH_TILES + 1, gRogueSephirothActorPalette),
+    ACTOR_DEF(ROGUE_SEPHIROTH_TILES + 1, gRogueSephirothActorPalette, 64),
     ROGUE_SEPHIROTH_CLIP_IDLE,
     ROGUE_SEPHIROTH_CLIP_RUN,
     ROGUE_SEPHIROTH_CLIP_HURT,
@@ -161,8 +131,123 @@ static const RogueActor sSephiroth = {
     SephirothSpecial,
 };
 
+// Sora as he is on his second journey: quick, with the Keyblade thrown and
+// two spells, and a Cure at half his HP.
+
+static const RogueActorMove sSoraKh2Moves[] = {
+    { ROGUE_SORA_KH2_CLIP_COMBO, 0, 56, 3, MOVE_ALIGNED },
+    { ROGUE_SORA_KH2_CLIP_ARCS, 0, 60, 3, MOVE_ALIGNED },
+    { ROGUE_SORA_KH2_CLIP_RISING, 0, 52, 2, MOVE_ALIGNED },
+    { ROGUE_SORA_KH2_CLIP_RAID, 50, 255, 4, MOVE_ALIGNED },
+    { ROGUE_SORA_KH2_CLIP_FIRE, 60, 255, 2, 0 },
+    { ROGUE_SORA_KH2_CLIP_ICE, 60, 255, 2, MOVE_ALIGNED },
+    { ROGUE_SORA_KH2_CLIP_SONIC, 60, 255, 2, 0 },
+    { ROGUE_SORA_KH2_CLIP_ARS, 0, 255, 2, MOVE_ENRAGED },
+};
+
+static const RogueActor sSoraKh2 = {
+    gRogueSoraKh2Poses,
+    gRogueSoraKh2Clips,
+    ACTOR_DEF(ROGUE_SORA_KH2_TILES + 1, gRogueSoraKh2ActorPalette, 64),
+    ROGUE_SORA_KH2_CLIP_IDLE,
+    ROGUE_SORA_KH2_CLIP_RUN,
+    ROGUE_SORA_KH2_CLIP_HURT,
+    ROGUE_SORA_KH2_CLIP_CURE,
+    ROGUE_SORA_KH2_CLIP_SONIC,
+    sizeof(sSoraKh2Moves) / sizeof(sSoraKh2Moves[0]),
+    sSoraKh2Moves,
+    0x200,
+    40,
+    44,
+    0,
+};
+
+// Roxas, three times over.
+
+static const RogueActorMove sRoxasMoves[] = {
+    { ROGUE_ROXAS_CLIP_SLASH, 0, 54, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_CLIP_SPIN, 0, 58, 2, MOVE_ALIGNED },
+    { ROGUE_ROXAS_CLIP_UPPER, 0, 50, 2, MOVE_ALIGNED },
+    { ROGUE_ROXAS_CLIP_RAID, 50, 255, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_CLIP_DASH, 50, 130, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_CLIP_FLURRY, 0, 255, 3, MOVE_ENRAGED },
+};
+
+static const RogueActor sRoxas = {
+    gRogueRoxasPoses,
+    gRogueRoxasClips,
+    ACTOR_DEF(ROGUE_ROXAS_TILES + 1, gRogueRoxasActorPalette, 64),
+    ROGUE_ROXAS_CLIP_IDLE,
+    ROGUE_ROXAS_CLIP_RUN,
+    ROGUE_ROXAS_CLIP_HURT,
+    ROGUE_ROXAS_CLIP_DUAL,
+    ROGUE_ROXAS_CLIP_DASH,
+    sizeof(sRoxasMoves) / sizeof(sRoxasMoves[0]),
+    sRoxasMoves,
+    0x1E0,
+    44,
+    44,
+    0,
+};
+
+static const RogueActorMove sRoxasCoatMoves[] = {
+    { ROGUE_ROXAS_COAT_CLIP_COMBO, 0, 58, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_COAT_CLIP_WIDE, 0, 68, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_COAT_CLIP_LIGHT, 30, 80, 2, MOVE_ALIGNED },
+    { ROGUE_ROXAS_COAT_CLIP_DARK, 0, 74, 2, MOVE_ALIGNED },
+    { ROGUE_ROXAS_COAT_CLIP_RAID, 60, 255, 2, MOVE_ALIGNED },
+    { ROGUE_ROXAS_COAT_CLIP_STEP, 60, 255, 3, 0 },
+    { ROGUE_ROXAS_COAT_CLIP_LIGHTS, 70, 255, 2, 0 },
+    { ROGUE_ROXAS_COAT_CLIP_FLURRY, 0, 255, 3, MOVE_ENRAGED },
+};
+
+static const RogueActor sRoxasCoat = {
+    gRogueRoxasCoatPoses,
+    gRogueRoxasCoatClips,
+    ACTOR_DEF(ROGUE_ROXAS_COAT_TILES + 1, gRogueRoxasCoatActorPalette, 64),
+    ROGUE_ROXAS_COAT_CLIP_IDLE,
+    ROGUE_ROXAS_COAT_CLIP_RUN,
+    ROGUE_ROXAS_COAT_CLIP_HURT,
+    ROGUE_ROXAS_COAT_CLIP_RAGE,
+    ROGUE_ROXAS_COAT_CLIP_STEP,
+    sizeof(sRoxasCoatMoves) / sizeof(sRoxasCoatMoves[0]),
+    sRoxasCoatMoves,
+    0x200,
+    38,
+    46,
+    0,
+};
+
+static const RogueActorMove sRoxasHoodMoves[] = {
+    { ROGUE_ROXAS_HOOD_CLIP_COMBO, 0, 58, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_HOOD_CLIP_ARCS, 0, 72, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_HOOD_CLIP_WIDE, 0, 68, 2, MOVE_ALIGNED },
+    { ROGUE_ROXAS_HOOD_CLIP_CYCLONE, 40, 160, 3, MOVE_ALIGNED },
+    { ROGUE_ROXAS_HOOD_CLIP_PILLARS, 0, 70, 2, 0 },
+    { ROGUE_ROXAS_HOOD_CLIP_LIGHTS, 70, 255, 2, 0 },
+    { ROGUE_ROXAS_HOOD_CLIP_STEP, 60, 255, 3, 0 },
+    { ROGUE_ROXAS_HOOD_CLIP_FLURRY, 0, 255, 3, MOVE_ENRAGED },
+};
+
+static const RogueActor sRoxasHood = {
+    gRogueRoxasHoodPoses,
+    gRogueRoxasHoodClips,
+    ACTOR_DEF(ROGUE_ROXAS_HOOD_TILES + 1, gRogueRoxasHoodActorPalette, 64),
+    ROGUE_ROXAS_HOOD_CLIP_IDLE,
+    ROGUE_ROXAS_HOOD_CLIP_RUN,
+    ROGUE_ROXAS_HOOD_CLIP_HURT,
+    ROGUE_ROXAS_HOOD_CLIP_RAGE,
+    ROGUE_ROXAS_HOOD_CLIP_STEP,
+    sizeof(sRoxasHoodMoves) / sizeof(sRoxasHoodMoves[0]),
+    sRoxasHoodMoves,
+    0x220,
+    34,
+    46,
+    0,
+};
+
 static const RogueActor* const sActors[ROGUE_SKIN_ACTORS_END - ROGUE_SKINS] = {
-    &sSephiroth,
+    &sSephiroth, &sSoraKh2, &sRoxas, &sRoxasCoat, &sRoxasHood,
 };
 
 static const RogueActor* RogueActorNow(void) {
@@ -242,7 +327,9 @@ static void RogueActorEvent(const RogueActor* actor, BtlObj* boss) {
     const RogueClipStep* step = &actor->clips[sClip][sStep];
     BtlObj* sora = gBtlWork->actor;
     s32 reach = step->arg;
+    s32 left = (boss->flags & 4) != 0;
     s32 dir;
+    s32 i;
 
     switch (step->event) {
     case ROGUE_CLIP_BLINK:
@@ -258,7 +345,53 @@ static void RogueActorEvent(const RogueActor* actor, BtlObj* boss) {
         gRogueDebug.bossSwings++;
         break;
     case ROGUE_CLIP_SPECIAL:
-        actor->special(boss, step->arg);
+        if (actor->special != 0) {
+            actor->special(boss, step->arg);
+        }
+        break;
+    case ROGUE_CLIP_THROW:
+        RogueFoeMove(boss, step->arg, boss->x + (left ? -0x2000 : 0x2000), boss->y, boss->z - 0x1400, ROGUE_MOVE_PLAIN, 0, 0, left);
+        break;
+    case ROGUE_CLIP_SEEK:
+        // Four, or with the boss enraged six, each a moment after the other.
+        for (i = 0; i < (sEnraged ? 6 : 4); i++) {
+            static const s8 where[6][2] = { { -48, -14 }, { 48, -14 }, { -48, 14 }, { 48, 14 }, { 0, -24 }, { 0, 24 } };
+
+            RogueFoeMove(boss, step->arg, sora->x + where[i][0] * 0x100, sora->y + where[i][1] * 0x100, sora->z - 0x2800, ROGUE_MOVE_SHARD,
+                         40 + i * 9, i * 3, where[i][0] > 0);
+        }
+        break;
+    case ROGUE_CLIP_CAST:
+        RogueFoeMove(boss, step->arg, boss->x + (left ? -0x2800 : 0x2800), boss->y, boss->z, ROGUE_MOVE_PLAIN, 0, 0, left);
+        break;
+    case ROGUE_CLIP_BEHIND:
+        boss->x = sora->x + (left ? -0x2800 : 0x2800);
+        boss->y = sora->y;
+        boss->flags ^= 4;
+        m4aSongNumStart(SONG_EF_RAC_3TR);
+        break;
+    case ROGUE_CLIP_OVER:
+        sDrift = 18;
+        sDriftX = (sora->x - boss->x) / 18;
+        sDriftY = (sora->y - boss->y) / 18;
+        break;
+    case ROGUE_CLIP_LAND:
+        boss->z = boss->unk_010;
+        FadeFromAmount(2, 10, 16);
+        m4aSongNumStart(SONG_EF_SUMMON_UP);
+        RogueFoeHit(boss, boss->x, boss->y, boss->z, reach, 26, 48, 384);
+        gRogueDebug.bossSwings++;
+        break;
+    case ROGUE_CLIP_FLASH:
+        FadeFromAmount(2, 16, 16);
+        m4aSongNumStart(SONG_EF_SUMMON_UP);
+        break;
+    case ROGUE_CLIP_HEAL:
+        boss->unk_02C += boss->unk_02E / 6;
+
+        if (boss->unk_02C > boss->unk_02E) {
+            boss->unk_02C = boss->unk_02E;
+        }
         break;
     }
 }

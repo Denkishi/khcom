@@ -313,7 +313,15 @@ enum RogueClipEvent {
     ROGUE_CLIP_HIT, // a hit in front of the boss; arg: how far it reaches, in pixels
     ROGUE_CLIP_SPECIAL, // arg: which of the boss's own
     ROGUE_CLIP_HEAVY, // as a hit, half as strong again
-    ROGUE_CLIP_BLINK // as a hit, made from beside Sora: the boss is there at once, on one side and then the other
+    ROGUE_CLIP_BLINK, // as a hit, made from beside Sora: the boss is there at once, on one side and then the other
+    ROGUE_CLIP_THROW, // one of the moves of rogue_moves.c, thrown ahead; arg: the move
+    ROGUE_CLIP_SEEK, // the same set round Sora, closing on him one after the other
+    ROGUE_CLIP_CAST, // the same made in front of the boss
+    ROGUE_CLIP_BEHIND, // the boss is on the far side of Sora, looking back
+    ROGUE_CLIP_OVER, // for the next frames the boss is carried over where Sora stands
+    ROGUE_CLIP_LAND, // the boss is on the ground again and hits all around; arg: how far
+    ROGUE_CLIP_FLASH, // the screen flashes
+    ROGUE_CLIP_HEAL // the boss gets a sixth of its HP back
 };
 
 struct BtlObj;
@@ -492,6 +500,9 @@ enum RogueMove {
     ROGUE_MOVE_DEFS,
     // Effects drawn from the sheets of the new characters, see tools/rogue_actors.py.
     ROGUE_MOVE_WAVE = ROGUE_MOVE_DEFS, // Sephiroth's cut that flies
+    ROGUE_MOVE_RAID, // the Keyblade thrown, which comes back
+    ROGUE_MOVE_PEARL, // a ball of light
+    ROGUE_MOVE_PILLAR, // Roxas's pillar of light
     ROGUE_MOVE_ALL
 };
 
@@ -537,6 +548,10 @@ enum RogueBossSkin {
     ROGUE_SKINS,
     // Those with a fight of their own, drawn from their own sheets: see rogue_actor.c.
     ROGUE_SKIN_SEPHIROTH = ROGUE_SKINS,
+    ROGUE_SKIN_SORA_KH2,
+    ROGUE_SKIN_ROXAS, // as in Twilight Town
+    ROGUE_SKIN_ROXAS_COAT, // in the coat of the Organization
+    ROGUE_SKIN_ROXAS_HOOD, // with the hood up
     ROGUE_SKIN_ACTORS_END
 };
 

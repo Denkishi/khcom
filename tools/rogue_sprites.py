@@ -116,7 +116,21 @@ def direction_poses(index):
 
 
 def segment(image):
-    """The sprites of the sheet as rows of boxes; in a sheet of two columns, the left column first."""
+    """The sprites of the sheet as rows of boxes; in a sheet of two columns, the left column first.
+    Finding them is slow on a big sheet, so what is found is kept in build/ for the next time."""
+    import pickle
+    sheet = Path(SHEET)
+    key = (sheet.name, sheet.stat().st_mtime_ns, tuple(AREA), MIN_PIXELS, MIN_HEIGHT, ROW_OVERLAP, MAX_HEIGHT, MIN_COLOURS)
+    cache = ROOT / "build" / "sprite_rows.pickle"
+    known = pickle.loads(cache.read_bytes()) if cache.exists() else {}
+    if key not in known:
+        known[key] = find_sprites(image)
+        cache.parent.mkdir(exist_ok=True)
+        cache.write_bytes(pickle.dumps(known))
+    return known[key]
+
+
+def find_sprites(image):
     width, height = image.size
     px = image.load()
     background = px[0, 0]
@@ -173,7 +187,7 @@ def pick_palette(colours, size=15):
     strip = Image.new("RGB", (sum(colours.values()), 1))
     strip.putdata([colour for colour, count in colours.items() for _ in range(count)])
     quantized = strip.quantize(size, method=Image.MEDIANCUT, dither=Image.NONE)
-    flat = quantized.getpalette()[:size * 3]
+    flat = (quantized.getpalette() + [0] * size * 3)[:size * 3]
     return [tuple(flat[i * 3:i * 3 + 3]) for i in range(size)]
 
 

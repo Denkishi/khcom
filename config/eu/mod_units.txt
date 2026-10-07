@@ -54,3 +54,7 @@ moved card_friend_card.c
 moved card_deckcard2.c
 new rogue_actor.c
 new rogue_sephiroth_actor.c
+new rogue_sorakh2_actor.c
+new rogue_roxas_actor.c
+new rogue_roxascoat_actor.c
+new rogue_roxashood_actor.c

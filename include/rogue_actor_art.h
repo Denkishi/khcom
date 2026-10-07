@@ -35,4 +35,98 @@ extern const u16 gRogueFxWavePalette[16];
 extern const void* const gRogueFxWaveFrames[];
 extern const void* const gRogueFxWaveAnims[];
 
+// SoraKh2
+#define ROGUE_SORA_KH2_TILES 47
+enum {
+    ROGUE_SORA_KH2_CLIP_IDLE,
+    ROGUE_SORA_KH2_CLIP_RUN,
+    ROGUE_SORA_KH2_CLIP_HURT,
+    ROGUE_SORA_KH2_CLIP_COMBO,
+    ROGUE_SORA_KH2_CLIP_ARCS,
+    ROGUE_SORA_KH2_CLIP_RISING,
+    ROGUE_SORA_KH2_CLIP_RAID,
+    ROGUE_SORA_KH2_CLIP_FIRE,
+    ROGUE_SORA_KH2_CLIP_ICE,
+    ROGUE_SORA_KH2_CLIP_SONIC,
+    ROGUE_SORA_KH2_CLIP_CURE,
+    ROGUE_SORA_KH2_CLIP_ARS,
+    ROGUE_SORA_KH2_CLIPS
+};
+extern const u16 gRogueSoraKh2ActorPalette[16];
+extern const struct AnimDef gRogueSoraKh2Poses[66];
+extern const RogueClipStep* const gRogueSoraKh2Clips[ROGUE_SORA_KH2_CLIPS];
+extern const u8 gRogueFxRaidTiles[2208];
+extern const u16 gRogueFxRaidPalette[16];
+extern const void* const gRogueFxRaidFrames[];
+extern const void* const gRogueFxRaidAnims[];
+extern const u8 gRogueFxPearlTiles[608];
+extern const u16 gRogueFxPearlPalette[16];
+extern const void* const gRogueFxPearlFrames[];
+extern const void* const gRogueFxPearlAnims[];
+
+// Roxas
+#define ROGUE_ROXAS_TILES 42
+enum {
+    ROGUE_ROXAS_CLIP_IDLE,
+    ROGUE_ROXAS_CLIP_RUN,
+    ROGUE_ROXAS_CLIP_HURT,
+    ROGUE_ROXAS_CLIP_SLASH,
+    ROGUE_ROXAS_CLIP_SPIN,
+    ROGUE_ROXAS_CLIP_UPPER,
+    ROGUE_ROXAS_CLIP_RAID,
+    ROGUE_ROXAS_CLIP_DASH,
+    ROGUE_ROXAS_CLIP_DUAL,
+    ROGUE_ROXAS_CLIP_FLURRY,
+    ROGUE_ROXAS_CLIPS
+};
+extern const u16 gRogueRoxasActorPalette[16];
+extern const struct AnimDef gRogueRoxasPoses[61];
+extern const RogueClipStep* const gRogueRoxasClips[ROGUE_ROXAS_CLIPS];
+
+// RoxasCoat
+#define ROGUE_ROXAS_COAT_TILES 50
+enum {
+    ROGUE_ROXAS_COAT_CLIP_IDLE,
+    ROGUE_ROXAS_COAT_CLIP_RUN,
+    ROGUE_ROXAS_COAT_CLIP_HURT,
+    ROGUE_ROXAS_COAT_CLIP_COMBO,
+    ROGUE_ROXAS_COAT_CLIP_WIDE,
+    ROGUE_ROXAS_COAT_CLIP_LIGHT,
+    ROGUE_ROXAS_COAT_CLIP_DARK,
+    ROGUE_ROXAS_COAT_CLIP_RAID,
+    ROGUE_ROXAS_COAT_CLIP_STEP,
+    ROGUE_ROXAS_COAT_CLIP_LIGHTS,
+    ROGUE_ROXAS_COAT_CLIP_RAGE,
+    ROGUE_ROXAS_COAT_CLIP_FLURRY,
+    ROGUE_ROXAS_COAT_CLIPS
+};
+extern const u16 gRogueRoxasCoatActorPalette[16];
+extern const struct AnimDef gRogueRoxasCoatPoses[50];
+extern const RogueClipStep* const gRogueRoxasCoatClips[ROGUE_ROXAS_COAT_CLIPS];
+
+// RoxasHood
+#define ROGUE_ROXAS_HOOD_TILES 147
+enum {
+    ROGUE_ROXAS_HOOD_CLIP_IDLE,
+    ROGUE_ROXAS_HOOD_CLIP_RUN,
+    ROGUE_ROXAS_HOOD_CLIP_HURT,
+    ROGUE_ROXAS_HOOD_CLIP_COMBO,
+    ROGUE_ROXAS_HOOD_CLIP_ARCS,
+    ROGUE_ROXAS_HOOD_CLIP_CYCLONE,
+    ROGUE_ROXAS_HOOD_CLIP_WIDE,
+    ROGUE_ROXAS_HOOD_CLIP_PILLARS,
+    ROGUE_ROXAS_HOOD_CLIP_LIGHTS,
+    ROGUE_ROXAS_HOOD_CLIP_STEP,
+    ROGUE_ROXAS_HOOD_CLIP_RAGE,
+    ROGUE_ROXAS_HOOD_CLIP_FLURRY,
+    ROGUE_ROXAS_HOOD_CLIPS
+};
+extern const u16 gRogueRoxasHoodActorPalette[16];
+extern const struct AnimDef gRogueRoxasHoodPoses[64];
+extern const RogueClipStep* const gRogueRoxasHoodClips[ROGUE_ROXAS_HOOD_CLIPS];
+extern const u8 gRogueFxPillarTiles[736];
+extern const u16 gRogueFxPillarPalette[16];
+extern const void* const gRogueFxPillarFrames[];
+extern const void* const gRogueFxPillarAnims[];
+
 #endif

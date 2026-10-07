@@ -1,0 +1,43 @@
+# The other bosses drawn from their own sheets, one after the other: Sora
+# from his second journey (skin 9), Roxas as in Twilight Town (10), in the
+# coat (11) and hooded (12).
+# Expect: each picture shows that boss fighting Sora; boss_clips grows with
+# every battle and boss_hits is above 0 at the end; the frame counter runs.
+include start.txt
+poke8 @gRogueDebug.god 1
+poke8 @gRogue.bossSkin 9
+debug battle 157
+wait 560
+shot /tmp/sheet_boss_9.ppm
+peek16 @gRogueDebug.bossClips boss_clips
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 10
+debug battle 157
+wait 560
+shot /tmp/sheet_boss_10.ppm
+peek16 @gRogueDebug.bossClips boss_clips
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 11
+debug battle 157
+wait 560
+shot /tmp/sheet_boss_11.ppm
+peek16 @gRogueDebug.bossClips boss_clips
+debug win
+wait 420
+press A
+wait 200
+poke8 @gRogue.bossSkin 12
+debug battle 157
+wait 560
+shot /tmp/sheet_boss_12.ppm
+peek16 @gRogueDebug.bossClips boss_clips
+peek16 @gRogueDebug.bossHits boss_hits
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

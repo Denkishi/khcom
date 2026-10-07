@@ -49,6 +49,7 @@ typedef struct RogueMoveDef {
     u8 depth;
     u8 height;
     u16 sound;
+    u8 back; // a thrown one goes through what it hits and, at the end of its flight, comes back
 } RogueMoveDef;
 
 #define SHEET(name) name##Tiles, sizeof(name##Tiles), 0
@@ -100,6 +101,15 @@ static const RogueMoveDef sMoves[ROGUE_MOVE_ALL] = {
     // Sephiroth's cut that flies along the ground.
     { (void*)gRogueFxWaveTiles, sizeof(gRogueFxWaveTiles), 0, (void*)gRogueFxWavePalette, (void*)gRogueFxWaveAnims, (void*)gRogueFxWaveFrames, 0, MOTION_THROWN, 1, 50, 0, 0,
       14, 320, 10, 14, 28, SONG_EF_RAC_3TR },
+    // The Keyblade thrown: it goes through what it meets and comes back.
+    { (void*)gRogueFxRaidTiles, sizeof(gRogueFxRaidTiles), 0, (void*)gRogueFxRaidPalette, (void*)gRogueFxRaidAnims, (void*)gRogueFxRaidFrames,
+      0, MOTION_THROWN, 1, 22, 0, 0, 14, 300, 14, 14, 16, SONG_EF_RAC_3TR, 1 },
+    // A ball of light.
+    { (void*)gRogueFxPearlTiles, sizeof(gRogueFxPearlTiles), 0, (void*)gRogueFxPearlPalette, (void*)gRogueFxPearlAnims,
+      (void*)gRogueFxPearlFrames, 0, MOTION_THROWN, 1, 40, 0, 0, 14, 200, 10, 10, 12, SONG_EF_RAC_3TR },
+    // Roxas's pillar of light: it rises under what is in front and sends it up.
+    { (void*)gRogueFxPillarTiles, sizeof(gRogueFxPillarTiles), 0, (void*)gRogueFxPillarPalette, (void*)gRogueFxPillarAnims,
+      (void*)gRogueFxPillarFrames, 0, MOTION_AHEAD, 1, 30, 4, 1, 14, 300, 18, 16, 60, SONG_EF_SUMMON_UP },
 };
 
 typedef struct RogueMoveArgs {
@@ -305,7 +315,14 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
 
     switch (def->motion) {
     case MOTION_THROWN:
-        if (RogueMoveHit(w) && (w->args.foe != 0 || !RogueHasRelic(ROGUE_RELIC_PIERCE))) {
+        if (def->back) {
+            // It goes through, hitting again only after a moment.
+            if (w->rest != 0) {
+                w->rest--;
+            } else if (RogueMoveHit(w)) {
+                w->rest = 14;
+            }
+        } else if (RogueMoveHit(w) && (w->args.foe != 0 || !RogueHasRelic(ROGUE_RELIC_PIERCE))) {
             // It stops at what it hits, or with the bounce turns back once.
             if (w->args.foe != 0 || !RogueHasRelic(ROGUE_RELIC_BOUNCE) || w->hits != 0) {
                 return 0;
@@ -317,7 +334,7 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
         }
 
         // At the end of its flight the bounce sends it back too.
-        if (w->timer + 1 >= def->frames_ && w->args.foe == 0 && RogueHasRelic(ROGUE_RELIC_BOUNCE) && w->hits == 0) {
+        if (w->timer + 1 >= def->frames_ && w->hits == 0 && (def->back || (w->args.foe == 0 && RogueHasRelic(ROGUE_RELIC_BOUNCE)))) {
             w->hits = 1;
             w->args.left ^= 1;
             w->timer = 0;

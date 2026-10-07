@@ -101,6 +101,7 @@ static const u8* const sLabels[REWARD_KINDS] = {
 };
 
 static const u8 sCost[] = "\x1FPC ";
+static const u8 sOtherPair[] = "\x1F< > altra coppia";
 static const u8 sLevel[] = "\x1FLivello ";
 static const u8 sHeal[] = "Recuperi tutti\x1Fi PV";
 static const u8 sMaxHp[] = "PV massimi +20";
@@ -342,7 +343,8 @@ static void RogueRewardDetail(RogueReward* reward) {
         *out++ = 0x1F;
         *out++ = '>';
         *out++ = ' ';
-        RogueAppendCard(out, reward->card);
+        out = RogueAppendCard(out, reward->card);
+        RogueAppend(out, sOtherPair);
         break;
     case REWARD_HEAL:
         RogueAppend(out, sHeal);
@@ -551,6 +553,14 @@ static void RogueReward_Update(void) {
             sWork->cursor = (sWork->cursor + 1) % REWARD_CHOICES;
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueShowChoice();
+        } else if ((GetKeysRepeat() & (DPAD_LEFT | DPAD_RIGHT)) && sWork->rewards[sWork->cursor].kind == REWARD_FUSION) {
+            // Left and right look for another pair of cards to fuse.
+            RogueReward* fusion = &sWork->rewards[sWork->cursor];
+
+            if (RogueRollFusion(&fusion->fuseA, &fusion->fuseB, &fusion->card)) {
+                m4aSongNumStart(SONG_SYS_CLICK);
+                RogueShowChoice();
+            }
         } else if ((GetKeysPressed() & B_BUTTON) && gRogue.rerolls != 0 && sWork->source != ROGUE_REWARD_EVENT) {
             gRogue.rerolls--;
             m4aSongNumStart(SONG_SYS_CLICK);

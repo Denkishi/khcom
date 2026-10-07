@@ -90,7 +90,7 @@ void RogueOnBossBeaten(u16 battle) {
 // The run's page in the pause menu: where the run is and the relics it has.
 
 #define LINE_SLOTS 26
-#define RELIC_LINES (2 + ROGUE_RELICS)
+#define RELIC_LINES (3 + ROGUE_RELICS)
 
 typedef struct RogueRelicsWork {
     TextSlot lines[RELIC_LINES][LINE_SLOTS];
@@ -109,6 +109,8 @@ static const u8 sFloor[] = "Piano ";
 static const u8 sCombo[] = "  Combo+";
 static const u8 sJumps[] = "  Salti ";
 static const u8 sNone[] = "Nessuna reliquia";
+static const u8 sCards[] = "Carte Lv2: ";
+static const u8 sCards3[] = "  Lv3: ";
 
 static u8* RogueRelicsAppend(u8* out, const u8* text) {
     while (*text != 0) {
@@ -150,6 +152,14 @@ static void RogueRelics_Init(s32 arg) {
     *out++ = '0' + gRogue.airJumps;
     *out = 0;
     RogueRelicsLine(sWork->text);
+    out = RogueRelicsAppend(sWork->text, sCards);
+    *out++ = '0' + RogueCountCards(2) / 10;
+    *out++ = '0' + RogueCountCards(2) % 10;
+    out = RogueRelicsAppend(out, sCards3);
+    *out++ = '0' + RogueCountCards(3) / 10;
+    *out++ = '0' + RogueCountCards(3) % 10;
+    *out = 0;
+    RogueRelicsLine(sWork->text);
 
     for (relic = 0; relic < ROGUE_RELICS; relic++) {
         if (RogueHasRelic(relic)) {
@@ -157,7 +167,7 @@ static void RogueRelics_Init(s32 arg) {
         }
     }
 
-    if (sWork->lineCount == 2) {
+    if (sWork->lineCount == 3) {
         RogueRelicsLine(sNone);
     }
 
@@ -189,7 +199,7 @@ static void RogueRelics_Update(void) {
     }
 
     for (i = 0; i < sWork->lineCount; i++) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 12 : 20 + i * 16,
+        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 10 : 16 + i * 14,
                       sWork->lines[i], i == 0 ? sWork->titlePalette : sWork->palette, 50, sWork->counts[i]);
     }
 }

@@ -200,6 +200,21 @@ u8 RogueCardLevel(u16 slot) {
     return ROGUE_CARD_LEVEL_MAX;
 }
 
+// How many cards of the deck are at a level.
+u8 RogueCountCards(u8 level) {
+    Deck* deck = GetActiveDeck();
+    u8 count = 0;
+    s32 i;
+
+    for (i = 0; i < DECK_SIZE; i++) {
+        if (deck->cards[i] != 0xFFFF && RogueCardLevel(deck->cards[i]) == level) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 // Every card in the deck gains experience from a won battle.
 void RogueGainCardXp(void) {
     Deck* deck = GetActiveDeck();

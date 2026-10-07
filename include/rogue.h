@@ -106,9 +106,9 @@ enum RogueRoomKind {
 // Card message ids from here up are the mod's, see RogueCardMessageDef.
 #define ROGUE_MSG_BASE 0x400
 #define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
-#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 12)
-#define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + 13)
-#define ROGUE_MSG_COUNT (13 + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
+#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 13)
+#define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + 14)
+#define ROGUE_MSG_COUNT (14 + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
 
 enum RogueRelic {
     ROGUE_RELIC_VAMPIRE,
@@ -248,6 +248,7 @@ u16 RogueRollRewardCard(void);
 void RogueGiveCard(u16 id);
 u8 RogueCardLevel(u16 slot);
 void RogueGainCardXp(void);
+u8 RogueCountCards(u8 level);
 u8 RogueRollFusion(u8* posA, u8* posB, u16* result);
 void RogueFuse(u8 posA, u8 posB, u16 result);
 u8 RogueTryAirJump(void);

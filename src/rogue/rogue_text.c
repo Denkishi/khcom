@@ -19,7 +19,8 @@ ROGUE_TEXT(sAxel8, "Le carte nel mazzo salgono\x1F" "di livello vincendo. Due\x1
 ROGUE_TEXT(sAxel9, "Pi\xF9 vai avanti, pi\xF9 picchiano.\x1FSe cadi la run finisce, ma i\x1F\x1D" "Frammenti\x1E raccolti restano.");
 ROGUE_TEXT(sAxel10, "Batti l'ultimo boss e si apre\x1Fun \x1D" "capitolo\x1E nuovo: altri\x1Fmondi, nemici e carte.");
 ROGUE_TEXT(sAxel11, "Riparlami per spendere i\x1F" "Frammenti in potenziamenti.\x1FTieni L per riascoltarmi.");
-ROGUE_TEXT(sAxel12, "Got it memorized?");
+ROGUE_TEXT(sAxel12, "Nel menu, Grillario mostra\x1Fla tua run e Salvarapido\x1Fla mette in pausa.");
+ROGUE_TEXT(sAxel13, "Got it memorized?");
 
 // Two pages for each event, in the order of the ROGUE_EVENT_ ids.
 ROGUE_TEXT(sBelle0, "Sora! Hai l'aria di chi ne\x1Fha passate tante. Siediti,\x1Flascia che mi occupi di te.");
@@ -54,6 +55,7 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel10, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel11, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel12, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel13, 0, 0 },
     EVENT_PAGES(53, sBelle0, sBelle1),
     EVENT_PAGES(31, sLeon0, sLeon1),
     EVENT_PAGES(37, sYuffie0, sYuffie1),

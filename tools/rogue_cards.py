@@ -46,6 +46,23 @@ CARDS = [
 ]
 
 
+# Icons for the rewards that are not cards, from the prizes sheet: (C name, box).
+# They are drawn at twice their size in a card picture's 32x32.
+ICON_SHEET = "prizes.png"
+ICONS = [
+    ("Shards", (76, 192, 88, 204)),  # munny
+    ("Heal", (268, 18, 280, 30)),  # hunny orb
+    ("MaxHp", (267, 68, 279, 80)),  # struggle orb
+    ("Cp", (36, 267, 50, 281)),  # D-Link prize
+    ("Combo", (44, 229, 56, 241)),  # drive orb
+    ("Attack", (8, 403, 20, 415)),  # attack prize
+    ("Relic", (519, 470, 534, 485)),  # keyblade medal
+    ("Art", (521, 418, 538, 431)),  # command
+    ("Reroll", (43, 148, 55, 160)),  # MP prize
+    ("Item", (524, 57, 541, 74)),  # item box
+]
+
+
 def symbol_offsets():
     text = MAP.read_text()
     return {name: int(addr, 16) - 0x08000000 for addr, name in re.findall(r"^\s+0x(0[89][0-9a-f]{6})\s+(\w+)$", text, re.M)}
@@ -177,6 +194,19 @@ def main():
         table.append("    " + ", ".join(f"ROGUE_CARD_{name.upper()}({v})" for v in range(10)) + ", \\")
     table[-1] = table[-1].rstrip(" \\").rstrip(",")
     table += ["", f"#define ROGUE_CARD_TABLE_KINDS {len(CARDS)}", ""]
+    sheet = Image.open(ROOT / "mod_assets" / ICON_SHEET).convert("RGBA")
+    for name, box in ICONS:
+        icon = sheet.crop(box)
+        icon = icon.resize((icon.width * 2, icon.height * 2), Image.Resampling.NEAREST)
+        big = Image.new("RGB", (32, 32), TRANSPARENT)
+        # The sheet's background is black, drawn or not: it is left out.
+        solid = Image.new("RGB", icon.size, TRANSPARENT)
+        mask = Image.eval(icon.convert("L"), lambda v: 255 if v > 0 else 0)
+        solid.paste(icon.convert("RGB"), mask=mask)
+        big.paste(solid, ((32 - icon.width) // 2, (32 - icon.height) // 2))
+        indices, palette = quantize(big)
+        art += [c_array(f"gRogueIcon{name}Tiles", gba_tiles(indices, 32, 32)),
+                c_array(f"gRogueIcon{name}Palette", gba_palette(palette)), ""]
     OUT.write_text("\n".join(art))
     OUT_TABLE.write_text("\n".join(table))
     print(f"wrote {OUT.relative_to(ROOT)} and {OUT_TABLE.relative_to(ROOT)}: {len(CARDS)} cards")

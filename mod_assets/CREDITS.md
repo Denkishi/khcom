@@ -10,6 +10,10 @@ authors ask to be credited wherever the sprites are used or edited.
 - `station_of_calling.png`: "Station of Calling", 100% custom by Windlord
   (credit asked on the sheet), from the same section.
 
-The hub's background is made from it by `tools/rogue_backgrounds.py`. The
+- `prizes.png`: "Kingdom Hearts Chain of Memories Prizes Sprites" (Prizes &
+  Drops), from the same section. The author is not named on the sheet.
+
+The reward icons are cut from it by `tools/rogue_cards.py`. The hub's
+background is made from the Station of Calling sheet by `tools/rogue_backgrounds.py`. The
 card pictures the mod adds are cut from these sheets by
 `tools/rogue_cards.py`.

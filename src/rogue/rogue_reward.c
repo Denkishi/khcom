@@ -151,6 +151,45 @@ static const u8 sArtPillar[] = " dal 5 in su\x1F" "alza anche il\x1Fgelo di Vexe
 static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
 
+extern const u8 gRogueIconShardsTiles[], gRogueIconShardsPalette[], gRogueIconHealTiles[], gRogueIconHealPalette[],
+    gRogueIconMaxHpTiles[], gRogueIconMaxHpPalette[], gRogueIconCpTiles[], gRogueIconCpPalette[], gRogueIconComboTiles[],
+    gRogueIconComboPalette[], gRogueIconAttackTiles[], gRogueIconAttackPalette[], gRogueIconRelicTiles[], gRogueIconRelicPalette[],
+    gRogueIconArtTiles[], gRogueIconArtPalette[], gRogueIconRerollTiles[], gRogueIconRerollPalette[], gRogueIconItemTiles[],
+    gRogueIconItemPalette[];
+
+typedef struct RogueIcon {
+    const u8* tiles;
+    const u8* palette;
+} RogueIcon;
+
+// The prize icon of each kind of reward that shows no card.
+static const RogueIcon sIcons[REWARD_KINDS] = {
+    { 0, 0 }, // card
+    { 0, 0 }, // upgrade
+    { gRogueIconHealTiles, gRogueIconHealPalette },
+    { gRogueIconMaxHpTiles, gRogueIconMaxHpPalette },
+    { gRogueIconCpTiles, gRogueIconCpPalette },
+    { gRogueIconComboTiles, gRogueIconComboPalette },
+    { gRogueIconRelicTiles, gRogueIconRelicPalette }, // air jump
+    { gRogueIconAttackTiles, gRogueIconAttackPalette },
+    { gRogueIconRelicTiles, gRogueIconRelicPalette },
+    { 0, 0 }, // art: shows its card
+    { 0, 0 }, // fusion
+    { gRogueIconShardsTiles, gRogueIconShardsPalette },
+    { gRogueIconRerollTiles, gRogueIconRerollPalette },
+    { gRogueIconAttackTiles, gRogueIconAttackPalette }, // strength for max HP
+    { gRogueIconItemTiles, gRogueIconItemPalette }, // gamble
+    { gRogueIconArtTiles, gRogueIconArtPalette }, // duel
+    { 0, 0 }, // leave
+    { gRogueIconAttackTiles, gRogueIconAttackPalette }, // strength +2 for max HP
+    { gRogueIconShardsTiles, gRogueIconShardsPalette }, // shards for a card
+    { gRogueIconItemTiles, gRogueIconItemPalette }, // dice
+    { 0, 0 }, // duplicate
+    { 0, 0 }, // transform
+    { 0, 0 }, // pay HP
+    { gRogueIconRelicTiles, gRogueIconRelicPalette }, // relic for max HP
+};
+
 static u8* RogueAppend(u8* out, const u8* text) {
     u8* end = sWork->text + REWARD_TEXT_MAX;
 
@@ -669,9 +708,14 @@ static void RogueShowChoice(void) {
     RogueFreeCard();
 
     if (id != 0) {
-        sWork->cardTiles = LoadObjTiles(gCardDefs[id].tiles, 0x300);
+        sWork->cardTiles = LoadObjTiles(gCardDefs[id].tiles, 0x200);
         sWork->cardPalette = LoadObjPalette(gCardDefs[id].palette, 32);
         sWork->cardGfx = gCardDefs[id].gfx;
+    } else if (sIcons[reward->kind].tiles != 0) {
+        // A reward that is not a card shows its prize icon, laid out as a card picture.
+        sWork->cardTiles = LoadObjTiles((void*)sIcons[reward->kind].tiles, 0x200);
+        sWork->cardPalette = LoadObjPalette((void*)sIcons[reward->kind].palette, 32);
+        sWork->cardGfx = gCardDefs[0].gfx;
     }
 }
 

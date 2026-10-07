@@ -150,6 +150,20 @@ u8 Rogue2dTechOwned(u8 tech) {
     return sTechs[tech].relic == ROGUE_RELICS || RogueHasRelic(sTechs[tech].relic);
 }
 
+// Called for each prize a beaten enemy leaves, every frame: in the flat
+// battle it is kept on the line, where Sora can walk over it.
+void Rogue2dPrize(s32* y, s32* vy) {
+    BtlObj* sora = gBtlWork->actor;
+
+    if (!Rogue2d() || sora == 0) {
+        return;
+    }
+
+    *y = sLaneSet ? sLane : sora->y;
+    *vy = 0;
+    gRogueDebug.flatPrizes++;
+}
+
 // A relic set on a button no longer goes off by itself on a finisher.
 u8 Rogue2dRelicBound(u8 relic) {
     u8 slot;

@@ -775,6 +775,7 @@ typedef struct RogueDebug {
     u8 bossForce; // set from outside: the move such a boss makes next, plus one
     u16 heroMoves; // things a hero other than Sora has done that Sora does not
     u16 techs; // moves of the flat battle made
+    u16 flatPrizes; // frames a prize was kept on the flat battle's line
     u8 mapDrops; // room cards dropped by battles
     u8 fieldAims; // swings in a room turned to the enemy
     u8 fieldRing; // the ring was drawn on an enemy of a room
@@ -891,6 +892,7 @@ void RogueFieldSeeEnemy(struct FldPos* p);
 u8 RogueFieldAim(u8 angle);
 extern struct TaskDesc gTaskDescRogueRing;
 #define ROGUE_FIELD_REACH 0x1C00 // how far round its point a swing in a room hits; the game's was 0x1400
+void Rogue2dPrize(s32* y, s32* vy);
 u8 Rogue2d(void);
 void Rogue2dReset(void);
 void Rogue2dDebug(u8 arg);

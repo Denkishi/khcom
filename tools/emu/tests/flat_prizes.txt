@@ -1,0 +1,18 @@
+# In the flat battle what a beaten enemy leaves lies on the line Sora walks.
+# Expect: flat_prizes above 0 after an enemy is felled, the picture shows
+# the prizes level with Sora, and the frame counter runs.
+wait 600
+poke8 @gRogueMeta.flags 23
+press START
+wait 120
+press START
+wait 200
+hold B 100
+wait 20
+debug battle 0
+wait 330
+debug hit 250
+wait 50
+shot /tmp/flat_prizes.ppm
+peek16 @gRogueDebug.flatPrizes flat_prizes
+peek32 @gFrameCounter frames

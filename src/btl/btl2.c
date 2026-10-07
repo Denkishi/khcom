@@ -1475,6 +1475,9 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
     u64 f;
     u64 bit;
 
+    // In the flat battle a prize lies on the line Sora walks, or he could not reach it.
+    Rogue2dPrize(&work->y, &work->vy);
+
     if (gBtlWork->flags & 0x2000) {
         return 0;
     }

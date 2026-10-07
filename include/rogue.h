@@ -235,7 +235,29 @@ enum RogueBuild {
 // The mod's cards come after the original 950; ten ids are skipped, see
 // rogue_cards.c. Each new keyblade kind has ten ids, one for each value.
 #define ROGUE_FIRST_CARD_KIND 96
-#define ROGUE_CARD_KINDS 16
+#define ROGUE_CARD_KINDS 49
+#define ROGUE_FIRST_EFFECT_KIND (ROGUE_FIRST_CARD_KIND + 16) // the first card with an effect of its own
+
+// What a card of the mod does beyond its base card.
+enum RogueCardEffectKind {
+    ROGUE_EFFECT_NONE,
+    ROGUE_EFFECT_MOVE, // a: the RogueMove Sora does
+    ROGUE_EFFECT_SHOCK, // a blast all around Sora. a: 0 plain, 1 fire, 2 ice, 3 thunder; b: its damage, in 1/64 of a swing
+    ROGUE_EFFECT_HEAL, // a: the share of max HP healed, in 1/256
+    ROGUE_EFFECT_PLUTO, // heals as above and digs up shards
+    ROGUE_EFFECT_KNIVES,
+    ROGUE_EFFECT_PILLAR
+};
+
+typedef struct RogueCardEffect {
+    u8 effect;
+    u8 a;
+    u8 b;
+    u8 unlock; // bit of gRogueMeta.bossMoves that puts the card in the pools, 0 if it is there from the start
+} RogueCardEffect;
+
+extern const RogueCardEffect gRogueCardEffects[ROGUE_CARD_KINDS];
+#define ROGUE_PLUTO_SHARDS 4
 // The first of them are keyblades, then come the spells Water, Wind and Magnet.
 #define ROGUE_NEW_KEYBLADES 13
 #define ROGUE_CARD_WATER (ROGUE_FIRST_CARD_KIND + 13)
@@ -432,7 +454,8 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_FINISHER, // what a combo finisher sets off, without the swing
     ROGUE_DEBUG_TAG, // arg: card kind whose tag character comes in
     ROGUE_DEBUG_ENEMY_TAG, // arg: enemy card id, counted from the first, whose enemy comes in
-    ROGUE_DEBUG_MOVE // arg: effect move Sora does
+    ROGUE_DEBUG_MOVE, // arg: effect move Sora does
+    ROGUE_DEBUG_CARD // arg: one of the mod's card kinds, counted from the first, played alone
 };
 
 typedef struct RogueDebug {
@@ -521,6 +544,7 @@ u8 RogueHeroUnlocked(u8 hero);
 u8 RogueNextHero(void);
 void RogueProfileFrame(void);
 void RogueMovesTick(void);
+void RogueShockwave(struct BtlObj* sora, u8 element, u16 scale);
 void RogueBuildOam(void);
 s32 RogueSqrt8(s32 a);
 extern const u16 gRogueMickeyPalette[16];

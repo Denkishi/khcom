@@ -1,0 +1,51 @@
+# The cards with an effect of their own, played one after the other: 17 Pluto,
+# 18 Hunny, 19 Stitch, 21 Stealth Sneak, 24 Kurt Zisa, 25 Violet Waltz, 39
+# the chakram card, 46 the knives card, 48 the quake.
+# Expect: each picture shows its effect, hp_after is above hp_before and
+# shards rise by 4 with Pluto; move_hits is above 0.
+include start.txt
+debug battle 157
+wait 445
+debug hurt 20
+wait 30
+peekat32 @gBtlWork 0 actor
+debug card 17
+wait 12
+shot /tmp/effect_card_17.ppm
+wait 50
+debug card 18
+wait 12
+shot /tmp/effect_card_18.ppm
+wait 50
+debug card 19
+wait 12
+shot /tmp/effect_card_19.ppm
+wait 50
+debug card 21
+wait 12
+shot /tmp/effect_card_21.ppm
+wait 50
+debug card 24
+wait 12
+shot /tmp/effect_card_24.ppm
+wait 50
+debug card 25
+wait 12
+shot /tmp/effect_card_25.ppm
+wait 50
+debug card 39
+wait 12
+shot /tmp/effect_card_39.ppm
+wait 50
+debug card 46
+wait 12
+shot /tmp/effect_card_46.ppm
+wait 50
+debug card 48
+wait 12
+shot /tmp/effect_card_48.ppm
+wait 50
+peek16 @gRogue.shards shards
+peek16 @gRogueDebug.moveHits move_hits
+peek16 @gRogueDebug.moves moves
+peek32 @gFrameCounter frames

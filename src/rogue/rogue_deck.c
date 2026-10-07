@@ -106,6 +106,17 @@ static u16 RogueRollCard(u8 pool) {
     case POOL_ATTACK:
         return CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(CARD_ULTIMA_WEAPON + 1), RogueRandBelow(RogueMaxCardValue() + 1));
     case POOL_MAGIC:
+        // One time in four, one of the cards with an effect of their own, if
+        // what unlocks it has been done.
+        if (RogueRandBelow(4) == 0) {
+            id = ROGUE_FIRST_EFFECT_KIND + RogueRandBelow(ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS - ROGUE_FIRST_EFFECT_KIND);
+
+            if (gRogueCardEffects[id - ROGUE_FIRST_CARD_KIND].unlock == 0 ||
+                (gRogueMeta.bossMoves & gRogueCardEffects[id - ROGUE_FIRST_CARD_KIND].unlock)) {
+                return CARD_ID(id, RogueRandBelow(RogueMaxCardValue() + 1));
+            }
+        }
+
         // A deck built around an element finds its spell more often.
         id = RogueBuildSpell();
 

@@ -160,6 +160,336 @@ extern const u8 gRogueCardMagnetTiles[], gRogueCardMagnetPalette[], gRogueCardMa
       22, 0x0, value, { 0, 0, 0 }, 0x17, 211, 1, 0, \
       25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
 
+// Chiave eroica: behaves as original card kind 0.
+static const u8 sNameHeroKey_It[] = "Chiave eroica";
+static const LocalizedText sNameHeroKey = { { (u8*)sNameHeroKey_It, (u8*)sNameHeroKey_It, (u8*)sNameHeroKey_It, (u8*)sNameHeroKey_It, (u8*)sNameHeroKey_It } };
+extern const u8 gRogueCardHeroKeyTiles[], gRogueCardHeroKeyPalette[], gRogueCardHeroKeySmallTiles[], gRogueCardHeroKeySmallPalette[];
+#define ROGUE_CARD_HEROKEY(value) \
+    { gCardWep01Frame0, (void*)gRogueCardHeroKeyTiles, (void*)gRogueCardHeroKeyPalette, (void*)&sNameHeroKey, gUnk_0905F0BC, \
+      (void*)gRogueCardHeroKeySmallTiles, (void*)gRogueCardHeroKeySmallPalette, \
+      0, 0x0, value, { 0, 0, 0 }, 0x0, 1, 0, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 2, 0, 0, 0, 0, 0 } }
+
+// Pluto: behaves as original card kind 17.
+static const u8 sNamePluto_It[] = "Pluto";
+static const LocalizedText sNamePluto = { { (u8*)sNamePluto_It, (u8*)sNamePluto_It, (u8*)sNamePluto_It, (u8*)sNamePluto_It, (u8*)sNamePluto_It } };
+extern const u8 gRogueCardPlutoTiles[], gRogueCardPlutoPalette[], gRogueCardPlutoSmallTiles[], gRogueCardPlutoSmallPalette[];
+#define ROGUE_CARD_PLUTO(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardPlutoTiles, (void*)gRogueCardPlutoPalette, (void*)&sNamePluto, gUnk_09060424, \
+      (void*)gRogueCardPlutoSmallTiles, (void*)gRogueCardPlutoSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      15 + 1 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Miele: behaves as original card kind 17.
+static const u8 sNameHunny_It[] = "Miele";
+static const LocalizedText sNameHunny = { { (u8*)sNameHunny_It, (u8*)sNameHunny_It, (u8*)sNameHunny_It, (u8*)sNameHunny_It, (u8*)sNameHunny_It } };
+extern const u8 gRogueCardHunnyTiles[], gRogueCardHunnyPalette[], gRogueCardHunnySmallTiles[], gRogueCardHunnySmallPalette[];
+#define ROGUE_CARD_HUNNY(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardHunnyTiles, (void*)gRogueCardHunnyPalette, (void*)&sNameHunny, gUnk_09060424, \
+      (void*)gRogueCardHunnySmallTiles, (void*)gRogueCardHunnySmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      15 + 1 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Stitch: behaves as original card kind 17.
+static const u8 sNameStitch_It[] = "Stitch";
+static const LocalizedText sNameStitch = { { (u8*)sNameStitch_It, (u8*)sNameStitch_It, (u8*)sNameStitch_It, (u8*)sNameStitch_It, (u8*)sNameStitch_It } };
+extern const u8 gRogueCardStitchTiles[], gRogueCardStitchPalette[], gRogueCardStitchSmallTiles[], gRogueCardStitchSmallPalette[];
+#define ROGUE_CARD_STITCH(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardStitchTiles, (void*)gRogueCardStitchPalette, (void*)&sNameStitch, gUnk_09060424, \
+      (void*)gRogueCardStitchSmallTiles, (void*)gRogueCardStitchSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Ape del miele: behaves as original card kind 17.
+static const u8 sNameHunnyBee_It[] = "Ape del miele";
+static const LocalizedText sNameHunnyBee = { { (u8*)sNameHunnyBee_It, (u8*)sNameHunnyBee_It, (u8*)sNameHunnyBee_It, (u8*)sNameHunnyBee_It, (u8*)sNameHunnyBee_It } };
+extern const u8 gRogueCardHunnyBeeTiles[], gRogueCardHunnyBeePalette[], gRogueCardHunnyBeeSmallTiles[], gRogueCardHunnyBeeSmallPalette[];
+#define ROGUE_CARD_HUNNYBEE(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardHunnyBeeTiles, (void*)gRogueCardHunnyBeePalette, (void*)&sNameHunnyBee, gUnk_09060424, \
+      (void*)gRogueCardHunnyBeeSmallTiles, (void*)gRogueCardHunnyBeeSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      15 + 1 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Furtilucertola: behaves as original card kind 17.
+static const u8 sNameStealthSneak_It[] = "Furtilucertola";
+static const LocalizedText sNameStealthSneak = { { (u8*)sNameStealthSneak_It, (u8*)sNameStealthSneak_It, (u8*)sNameStealthSneak_It, (u8*)sNameStealthSneak_It, (u8*)sNameStealthSneak_It } };
+extern const u8 gRogueCardStealthSneakTiles[], gRogueCardStealthSneakPalette[], gRogueCardStealthSneakSmallTiles[], gRogueCardStealthSneakSmallPalette[];
+#define ROGUE_CARD_STEALTHSNEAK(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardStealthSneakTiles, (void*)gRogueCardStealthSneakPalette, (void*)&sNameStealthSneak, gUnk_09060424, \
+      (void*)gRogueCardStealthSneakSmallTiles, (void*)gRogueCardStealthSneakSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Sgattaiolante: behaves as original card kind 17.
+static const u8 sNameSneakArmy_It[] = "Sgattaiolante";
+static const LocalizedText sNameSneakArmy = { { (u8*)sNameSneakArmy_It, (u8*)sNameSneakArmy_It, (u8*)sNameSneakArmy_It, (u8*)sNameSneakArmy_It, (u8*)sNameSneakArmy_It } };
+extern const u8 gRogueCardSneakArmyTiles[], gRogueCardSneakArmyPalette[], gRogueCardSneakArmySmallTiles[], gRogueCardSneakArmySmallPalette[];
+#define ROGUE_CARD_SNEAKARMY(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardSneakArmyTiles, (void*)gRogueCardSneakArmyPalette, (void*)&sNameSneakArmy, gUnk_09060424, \
+      (void*)gRogueCardSneakArmySmallTiles, (void*)gRogueCardSneakArmySmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      15 + 1 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Sub missile: behaves as original card kind 17.
+static const u8 sNameMissileDiver_It[] = "Sub missile";
+static const LocalizedText sNameMissileDiver = { { (u8*)sNameMissileDiver_It, (u8*)sNameMissileDiver_It, (u8*)sNameMissileDiver_It, (u8*)sNameMissileDiver_It, (u8*)sNameMissileDiver_It } };
+extern const u8 gRogueCardMissileDiverTiles[], gRogueCardMissileDiverPalette[], gRogueCardMissileDiverSmallTiles[], gRogueCardMissileDiverSmallPalette[];
+#define ROGUE_CARD_MISSILEDIVER(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMissileDiverTiles, (void*)gRogueCardMissileDiverPalette, (void*)&sNameMissileDiver, gUnk_09060424, \
+      (void*)gRogueCardMissileDiverSmallTiles, (void*)gRogueCardMissileDiverSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      15 + 1 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Kurt Zisa: behaves as original card kind 17.
+static const u8 sNameKurtZisa_It[] = "Kurt Zisa";
+static const LocalizedText sNameKurtZisa = { { (u8*)sNameKurtZisa_It, (u8*)sNameKurtZisa_It, (u8*)sNameKurtZisa_It, (u8*)sNameKurtZisa_It, (u8*)sNameKurtZisa_It } };
+extern const u8 gRogueCardKurtZisaTiles[], gRogueCardKurtZisaPalette[], gRogueCardKurtZisaSmallTiles[], gRogueCardKurtZisaSmallPalette[];
+#define ROGUE_CARD_KURTZISA(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardKurtZisaTiles, (void*)gRogueCardKurtZisaPalette, (void*)&sNameKurtZisa, gUnk_09060424, \
+      (void*)gRogueCardKurtZisaSmallTiles, (void*)gRogueCardKurtZisaSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      30 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Valzer viola: behaves as original card kind 17.
+static const u8 sNameVioletWaltz_It[] = "Valzer viola";
+static const LocalizedText sNameVioletWaltz = { { (u8*)sNameVioletWaltz_It, (u8*)sNameVioletWaltz_It, (u8*)sNameVioletWaltz_It, (u8*)sNameVioletWaltz_It, (u8*)sNameVioletWaltz_It } };
+extern const u8 gRogueCardVioletWaltzTiles[], gRogueCardVioletWaltzPalette[], gRogueCardVioletWaltzSmallTiles[], gRogueCardVioletWaltzSmallPalette[];
+#define ROGUE_CARD_VIOLETWALTZ(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardVioletWaltzTiles, (void*)gRogueCardVioletWaltzPalette, (void*)&sNameVioletWaltz, gUnk_09060424, \
+      (void*)gRogueCardVioletWaltzSmallTiles, (void*)gRogueCardVioletWaltzSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Coda tridente: behaves as original card kind 17.
+static const u8 sNameTridentTail_It[] = "Coda tridente";
+static const LocalizedText sNameTridentTail = { { (u8*)sNameTridentTail_It, (u8*)sNameTridentTail_It, (u8*)sNameTridentTail_It, (u8*)sNameTridentTail_It, (u8*)sNameTridentTail_It } };
+extern const u8 gRogueCardTridentTailTiles[], gRogueCardTridentTailPalette[], gRogueCardTridentTailSmallTiles[], gRogueCardTridentTailSmallPalette[];
+#define ROGUE_CARD_TRIDENTTAIL(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardTridentTailTiles, (void*)gRogueCardTridentTailPalette, (void*)&sNameTridentTail, gUnk_09060424, \
+      (void*)gRogueCardTridentTailSmallTiles, (void*)gRogueCardTridentTailSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Roxas: behaves as original card kind 17.
+static const u8 sNameRoxas_It[] = "Roxas";
+static const LocalizedText sNameRoxas = { { (u8*)sNameRoxas_It, (u8*)sNameRoxas_It, (u8*)sNameRoxas_It, (u8*)sNameRoxas_It, (u8*)sNameRoxas_It } };
+extern const u8 gRogueCardRoxasTiles[], gRogueCardRoxasPalette[], gRogueCardRoxasSmallTiles[], gRogueCardRoxasSmallPalette[];
+#define ROGUE_CARD_ROXAS(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardRoxasTiles, (void*)gRogueCardRoxasPalette, (void*)&sNameRoxas, gUnk_09060424, \
+      (void*)gRogueCardRoxasSmallTiles, (void*)gRogueCardRoxasSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      35 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Invisibile: behaves as original card kind 17.
+static const u8 sNameInvisible_It[] = "Invisibile";
+static const LocalizedText sNameInvisible = { { (u8*)sNameInvisible_It, (u8*)sNameInvisible_It, (u8*)sNameInvisible_It, (u8*)sNameInvisible_It, (u8*)sNameInvisible_It } };
+extern const u8 gRogueCardInvisibleTiles[], gRogueCardInvisiblePalette[], gRogueCardInvisibleSmallTiles[], gRogueCardInvisibleSmallPalette[];
+#define ROGUE_CARD_INVISIBLE(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardInvisibleTiles, (void*)gRogueCardInvisiblePalette, (void*)&sNameInvisible, gUnk_09060424, \
+      (void*)gRogueCardInvisibleSmallTiles, (void*)gRogueCardInvisibleSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Orcus: behaves as original card kind 17.
+static const u8 sNameOrcus_It[] = "Orcus";
+static const LocalizedText sNameOrcus = { { (u8*)sNameOrcus_It, (u8*)sNameOrcus_It, (u8*)sNameOrcus_It, (u8*)sNameOrcus_It, (u8*)sNameOrcus_It } };
+extern const u8 gRogueCardOrcusTiles[], gRogueCardOrcusPalette[], gRogueCardOrcusSmallTiles[], gRogueCardOrcusSmallPalette[];
+#define ROGUE_CARD_ORCUS(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardOrcusTiles, (void*)gRogueCardOrcusPalette, (void*)&sNameOrcus, gUnk_09060424, \
+      (void*)gRogueCardOrcusSmallTiles, (void*)gRogueCardOrcusSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Stella angelica: behaves as original card kind 17.
+static const u8 sNameAngelStar_It[] = "Stella angelica";
+static const LocalizedText sNameAngelStar = { { (u8*)sNameAngelStar_It, (u8*)sNameAngelStar_It, (u8*)sNameAngelStar_It, (u8*)sNameAngelStar_It, (u8*)sNameAngelStar_It } };
+extern const u8 gRogueCardAngelStarTiles[], gRogueCardAngelStarPalette[], gRogueCardAngelStarSmallTiles[], gRogueCardAngelStarSmallPalette[];
+#define ROGUE_CARD_ANGELSTAR(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardAngelStarTiles, (void*)gRogueCardAngelStarPalette, (void*)&sNameAngelStar, gUnk_09060424, \
+      (void*)gRogueCardAngelStarSmallTiles, (void*)gRogueCardAngelStarSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Pallone jet: behaves as original card kind 17.
+static const u8 sNameJetBalloon_It[] = "Pallone jet";
+static const LocalizedText sNameJetBalloon = { { (u8*)sNameJetBalloon_It, (u8*)sNameJetBalloon_It, (u8*)sNameJetBalloon_It, (u8*)sNameJetBalloon_It, (u8*)sNameJetBalloon_It } };
+extern const u8 gRogueCardJetBalloonTiles[], gRogueCardJetBalloonPalette[], gRogueCardJetBalloonSmallTiles[], gRogueCardJetBalloonSmallPalette[];
+#define ROGUE_CARD_JETBALLOON(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardJetBalloonTiles, (void*)gRogueCardJetBalloonPalette, (void*)&sNameJetBalloon, gUnk_09060424, \
+      (void*)gRogueCardJetBalloonSmallTiles, (void*)gRogueCardJetBalloonSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      15 + 1 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Soldato furtivo: behaves as original card kind 17.
+static const u8 sNameStealthSoldier_It[] = "Soldato furtivo";
+static const LocalizedText sNameStealthSoldier = { { (u8*)sNameStealthSoldier_It, (u8*)sNameStealthSoldier_It, (u8*)sNameStealthSoldier_It, (u8*)sNameStealthSoldier_It, (u8*)sNameStealthSoldier_It } };
+extern const u8 gRogueCardStealthSoldierTiles[], gRogueCardStealthSoldierPalette[], gRogueCardStealthSoldierSmallTiles[], gRogueCardStealthSoldierSmallPalette[];
+#define ROGUE_CARD_STEALTHSOLDIER(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardStealthSoldierTiles, (void*)gRogueCardStealthSoldierPalette, (void*)&sNameStealthSoldier, gUnk_09060424, \
+      (void*)gRogueCardStealthSoldierSmallTiles, (void*)gRogueCardStealthSoldierSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Armatura opposta: behaves as original card kind 17.
+static const u8 sNameOppositeArmor_It[] = "Armatura opposta";
+static const LocalizedText sNameOppositeArmor = { { (u8*)sNameOppositeArmor_It, (u8*)sNameOppositeArmor_It, (u8*)sNameOppositeArmor_It, (u8*)sNameOppositeArmor_It, (u8*)sNameOppositeArmor_It } };
+extern const u8 gRogueCardOppositeArmorTiles[], gRogueCardOppositeArmorPalette[], gRogueCardOppositeArmorSmallTiles[], gRogueCardOppositeArmorSmallPalette[];
+#define ROGUE_CARD_OPPOSITEARMOR(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardOppositeArmorTiles, (void*)gRogueCardOppositeArmorPalette, (void*)&sNameOppositeArmor, gUnk_09060424, \
+      (void*)gRogueCardOppositeArmorSmallTiles, (void*)gRogueCardOppositeArmorSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      30 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Torso corazzato: behaves as original card kind 17.
+static const u8 sNameArmoredTorso_It[] = "Torso corazzato";
+static const LocalizedText sNameArmoredTorso = { { (u8*)sNameArmoredTorso_It, (u8*)sNameArmoredTorso_It, (u8*)sNameArmoredTorso_It, (u8*)sNameArmoredTorso_It, (u8*)sNameArmoredTorso_It } };
+extern const u8 gRogueCardArmoredTorsoTiles[], gRogueCardArmoredTorsoPalette[], gRogueCardArmoredTorsoSmallTiles[], gRogueCardArmoredTorsoSmallPalette[];
+#define ROGUE_CARD_ARMOREDTORSO(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardArmoredTorsoTiles, (void*)gRogueCardArmoredTorsoPalette, (void*)&sNameArmoredTorso, gUnk_09060424, \
+      (void*)gRogueCardArmoredTorsoSmallTiles, (void*)gRogueCardArmoredTorsoSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Guanti: behaves as original card kind 17.
+static const u8 sNameGauntlets_It[] = "Guanti";
+static const LocalizedText sNameGauntlets = { { (u8*)sNameGauntlets_It, (u8*)sNameGauntlets_It, (u8*)sNameGauntlets_It, (u8*)sNameGauntlets_It, (u8*)sNameGauntlets_It } };
+extern const u8 gRogueCardGauntletsTiles[], gRogueCardGauntletsPalette[], gRogueCardGauntletsSmallTiles[], gRogueCardGauntletsSmallPalette[];
+#define ROGUE_CARD_GAUNTLETS(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardGauntletsTiles, (void*)gRogueCardGauntletsPalette, (void*)&sNameGauntlets, gUnk_09060424, \
+      (void*)gRogueCardGauntletsSmallTiles, (void*)gRogueCardGauntletsSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Gambe martello: behaves as original card kind 17.
+static const u8 sNameHammerlegs_It[] = "Gambe martello";
+static const LocalizedText sNameHammerlegs = { { (u8*)sNameHammerlegs_It, (u8*)sNameHammerlegs_It, (u8*)sNameHammerlegs_It, (u8*)sNameHammerlegs_It, (u8*)sNameHammerlegs_It } };
+extern const u8 gRogueCardHammerlegsTiles[], gRogueCardHammerlegsPalette[], gRogueCardHammerlegsSmallTiles[], gRogueCardHammerlegsSmallPalette[];
+#define ROGUE_CARD_HAMMERLEGS(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardHammerlegsTiles, (void*)gRogueCardHammerlegsPalette, (void*)&sNameHammerlegs, gUnk_09060424, \
+      (void*)gRogueCardHammerlegsSmallTiles, (void*)gRogueCardHammerlegsSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Armatura potenziata: behaves as original card kind 17.
+static const u8 sNamePoweredArmor_It[] = "Armatura potenziata";
+static const LocalizedText sNamePoweredArmor = { { (u8*)sNamePoweredArmor_It, (u8*)sNamePoweredArmor_It, (u8*)sNamePoweredArmor_It, (u8*)sNamePoweredArmor_It, (u8*)sNamePoweredArmor_It } };
+extern const u8 gRogueCardPoweredArmorTiles[], gRogueCardPoweredArmorPalette[], gRogueCardPoweredArmorSmallTiles[], gRogueCardPoweredArmorSmallPalette[];
+#define ROGUE_CARD_POWEREDARMOR(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardPoweredArmorTiles, (void*)gRogueCardPoweredArmorPalette, (void*)&sNamePoweredArmor, gUnk_09060424, \
+      (void*)gRogueCardPoweredArmorSmallTiles, (void*)gRogueCardPoweredArmorSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Guardia Omega: behaves as original card kind 17.
+static const u8 sNameGuardArmorO_It[] = "Guardia Omega";
+static const LocalizedText sNameGuardArmorO = { { (u8*)sNameGuardArmorO_It, (u8*)sNameGuardArmorO_It, (u8*)sNameGuardArmorO_It, (u8*)sNameGuardArmorO_It, (u8*)sNameGuardArmorO_It } };
+extern const u8 gRogueCardGuardArmorOTiles[], gRogueCardGuardArmorOPalette[], gRogueCardGuardArmorOSmallTiles[], gRogueCardGuardArmorOSmallPalette[];
+#define ROGUE_CARD_GUARDARMORO(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardGuardArmorOTiles, (void*)gRogueCardGuardArmorOPalette, (void*)&sNameGuardArmorO, gUnk_09060424, \
+      (void*)gRogueCardGuardArmorOSmallTiles, (void*)gRogueCardGuardArmorOSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      35 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Chakram: behaves as original card kind 17.
+static const u8 sNameMoveChakram_It[] = "Chakram";
+static const LocalizedText sNameMoveChakram = { { (u8*)sNameMoveChakram_It, (u8*)sNameMoveChakram_It, (u8*)sNameMoveChakram_It, (u8*)sNameMoveChakram_It, (u8*)sNameMoveChakram_It } };
+extern const u8 gRogueCardMoveChakramTiles[], gRogueCardMoveChakramPalette[], gRogueCardMoveChakramSmallTiles[], gRogueCardMoveChakramSmallPalette[];
+#define ROGUE_CARD_MOVECHAKRAM(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveChakramTiles, (void*)gRogueCardMoveChakramPalette, (void*)&sNameMoveChakram, gUnk_09060424, \
+      (void*)gRogueCardMoveChakramSmallTiles, (void*)gRogueCardMoveChakramSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Aghi di ghiaccio: behaves as original card kind 17.
+static const u8 sNameMoveNeedles_It[] = "Aghi di ghiaccio";
+static const LocalizedText sNameMoveNeedles = { { (u8*)sNameMoveNeedles_It, (u8*)sNameMoveNeedles_It, (u8*)sNameMoveNeedles_It, (u8*)sNameMoveNeedles_It, (u8*)sNameMoveNeedles_It } };
+extern const u8 gRogueCardMoveNeedlesTiles[], gRogueCardMoveNeedlesPalette[], gRogueCardMoveNeedlesSmallTiles[], gRogueCardMoveNeedlesSmallPalette[];
+#define ROGUE_CARD_MOVENEEDLES(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveNeedlesTiles, (void*)gRogueCardMoveNeedlesPalette, (void*)&sNameMoveNeedles, gUnk_09060424, \
+      (void*)gRogueCardMoveNeedlesSmallTiles, (void*)gRogueCardMoveNeedlesSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Petali: behaves as original card kind 17.
+static const u8 sNameMovePetals_It[] = "Petali";
+static const LocalizedText sNameMovePetals = { { (u8*)sNameMovePetals_It, (u8*)sNameMovePetals_It, (u8*)sNameMovePetals_It, (u8*)sNameMovePetals_It, (u8*)sNameMovePetals_It } };
+extern const u8 gRogueCardMovePetalsTiles[], gRogueCardMovePetalsPalette[], gRogueCardMovePetalsSmallTiles[], gRogueCardMovePetalsSmallPalette[];
+#define ROGUE_CARD_MOVEPETALS(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMovePetalsTiles, (void*)gRogueCardMovePetalsPalette, (void*)&sNameMovePetals, gUnk_09060424, \
+      (void*)gRogueCardMovePetalsSmallTiles, (void*)gRogueCardMovePetalsSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Schegge: behaves as original card kind 17.
+static const u8 sNameMoveShards_It[] = "Schegge";
+static const LocalizedText sNameMoveShards = { { (u8*)sNameMoveShards_It, (u8*)sNameMoveShards_It, (u8*)sNameMoveShards_It, (u8*)sNameMoveShards_It, (u8*)sNameMoveShards_It } };
+extern const u8 gRogueCardMoveShardsTiles[], gRogueCardMoveShardsPalette[], gRogueCardMoveShardsSmallTiles[], gRogueCardMoveShardsSmallPalette[];
+#define ROGUE_CARD_MOVESHARDS(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveShardsTiles, (void*)gRogueCardMoveShardsPalette, (void*)&sNameMoveShards, gUnk_09060424, \
+      (void*)gRogueCardMoveShardsSmallTiles, (void*)gRogueCardMoveShardsSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Globo di fuoco: behaves as original card kind 17.
+static const u8 sNameMoveFireball_It[] = "Globo di fuoco";
+static const LocalizedText sNameMoveFireball = { { (u8*)sNameMoveFireball_It, (u8*)sNameMoveFireball_It, (u8*)sNameMoveFireball_It, (u8*)sNameMoveFireball_It, (u8*)sNameMoveFireball_It } };
+extern const u8 gRogueCardMoveFireballTiles[], gRogueCardMoveFireballPalette[], gRogueCardMoveFireballSmallTiles[], gRogueCardMoveFireballSmallPalette[];
+#define ROGUE_CARD_MOVEFIREBALL(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveFireballTiles, (void*)gRogueCardMoveFireballPalette, (void*)&sNameMoveFireball, gUnk_09060424, \
+      (void*)gRogueCardMoveFireballSmallTiles, (void*)gRogueCardMoveFireballSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Roccia: behaves as original card kind 17.
+static const u8 sNameMoveRock_It[] = "Roccia";
+static const LocalizedText sNameMoveRock = { { (u8*)sNameMoveRock_It, (u8*)sNameMoveRock_It, (u8*)sNameMoveRock_It, (u8*)sNameMoveRock_It, (u8*)sNameMoveRock_It } };
+extern const u8 gRogueCardMoveRockTiles[], gRogueCardMoveRockPalette[], gRogueCardMoveRockSmallTiles[], gRogueCardMoveRockSmallPalette[];
+#define ROGUE_CARD_MOVEROCK(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveRockTiles, (void*)gRogueCardMoveRockPalette, (void*)&sNameMoveRock, gUnk_09060424, \
+      (void*)gRogueCardMoveRockSmallTiles, (void*)gRogueCardMoveRockSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Bomba: behaves as original card kind 17.
+static const u8 sNameMoveBomb_It[] = "Bomba";
+static const LocalizedText sNameMoveBomb = { { (u8*)sNameMoveBomb_It, (u8*)sNameMoveBomb_It, (u8*)sNameMoveBomb_It, (u8*)sNameMoveBomb_It, (u8*)sNameMoveBomb_It } };
+extern const u8 gRogueCardMoveBombTiles[], gRogueCardMoveBombPalette[], gRogueCardMoveBombSmallTiles[], gRogueCardMoveBombSmallPalette[];
+#define ROGUE_CARD_MOVEBOMB(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveBombTiles, (void*)gRogueCardMoveBombPalette, (void*)&sNameMoveBomb, gUnk_09060424, \
+      (void*)gRogueCardMoveBombSmallTiles, (void*)gRogueCardMoveBombSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Coltelli: behaves as original card kind 17.
+static const u8 sNameMoveKnives_It[] = "Coltelli";
+static const LocalizedText sNameMoveKnives = { { (u8*)sNameMoveKnives_It, (u8*)sNameMoveKnives_It, (u8*)sNameMoveKnives_It, (u8*)sNameMoveKnives_It, (u8*)sNameMoveKnives_It } };
+extern const u8 gRogueCardMoveKnivesTiles[], gRogueCardMoveKnivesPalette[], gRogueCardMoveKnivesSmallTiles[], gRogueCardMoveKnivesSmallPalette[];
+#define ROGUE_CARD_MOVEKNIVES(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveKnivesTiles, (void*)gRogueCardMoveKnivesPalette, (void*)&sNameMoveKnives, gUnk_09060424, \
+      (void*)gRogueCardMoveKnivesSmallTiles, (void*)gRogueCardMoveKnivesSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Blocco di gelo: behaves as original card kind 17.
+static const u8 sNameMovePillar_It[] = "Blocco di gelo";
+static const LocalizedText sNameMovePillar = { { (u8*)sNameMovePillar_It, (u8*)sNameMovePillar_It, (u8*)sNameMovePillar_It, (u8*)sNameMovePillar_It, (u8*)sNameMovePillar_It } };
+extern const u8 gRogueCardMovePillarTiles[], gRogueCardMovePillarPalette[], gRogueCardMovePillarSmallTiles[], gRogueCardMovePillarSmallPalette[];
+#define ROGUE_CARD_MOVEPILLAR(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMovePillarTiles, (void*)gRogueCardMovePillarPalette, (void*)&sNameMovePillar, gUnk_09060424, \
+      (void*)gRogueCardMovePillarSmallTiles, (void*)gRogueCardMovePillarSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      25 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Onda d'urto: behaves as original card kind 17.
+static const u8 sNameMoveQuake_It[] = "Onda d'urto";
+static const LocalizedText sNameMoveQuake = { { (u8*)sNameMoveQuake_It, (u8*)sNameMoveQuake_It, (u8*)sNameMoveQuake_It, (u8*)sNameMoveQuake_It, (u8*)sNameMoveQuake_It } };
+extern const u8 gRogueCardMoveQuakeTiles[], gRogueCardMoveQuakePalette[], gRogueCardMoveQuakeSmallTiles[], gRogueCardMoveQuakeSmallPalette[];
+#define ROGUE_CARD_MOVEQUAKE(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardMoveQuakeTiles, (void*)gRogueCardMoveQuakePalette, (void*)&sNameMoveQuake, gUnk_09060424, \
+      (void*)gRogueCardMoveQuakeSmallTiles, (void*)gRogueCardMoveQuakeSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      30 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
 // The table entries, ten for each card.
 #define ROGUE_CARD_TABLE \
     ROGUE_CARD_BONDOFFLAME(0), ROGUE_CARD_BONDOFFLAME(1), ROGUE_CARD_BONDOFFLAME(2), ROGUE_CARD_BONDOFFLAME(3), ROGUE_CARD_BONDOFFLAME(4), ROGUE_CARD_BONDOFFLAME(5), ROGUE_CARD_BONDOFFLAME(6), ROGUE_CARD_BONDOFFLAME(7), ROGUE_CARD_BONDOFFLAME(8), ROGUE_CARD_BONDOFFLAME(9), \
@@ -177,6 +507,91 @@ extern const u8 gRogueCardMagnetTiles[], gRogueCardMagnetPalette[], gRogueCardMa
     ROGUE_CARD_DREAMSWORD(0), ROGUE_CARD_DREAMSWORD(1), ROGUE_CARD_DREAMSWORD(2), ROGUE_CARD_DREAMSWORD(3), ROGUE_CARD_DREAMSWORD(4), ROGUE_CARD_DREAMSWORD(5), ROGUE_CARD_DREAMSWORD(6), ROGUE_CARD_DREAMSWORD(7), ROGUE_CARD_DREAMSWORD(8), ROGUE_CARD_DREAMSWORD(9), \
     ROGUE_CARD_WATER(0), ROGUE_CARD_WATER(1), ROGUE_CARD_WATER(2), ROGUE_CARD_WATER(3), ROGUE_CARD_WATER(4), ROGUE_CARD_WATER(5), ROGUE_CARD_WATER(6), ROGUE_CARD_WATER(7), ROGUE_CARD_WATER(8), ROGUE_CARD_WATER(9), \
     ROGUE_CARD_WIND(0), ROGUE_CARD_WIND(1), ROGUE_CARD_WIND(2), ROGUE_CARD_WIND(3), ROGUE_CARD_WIND(4), ROGUE_CARD_WIND(5), ROGUE_CARD_WIND(6), ROGUE_CARD_WIND(7), ROGUE_CARD_WIND(8), ROGUE_CARD_WIND(9), \
-    ROGUE_CARD_MAGNET(0), ROGUE_CARD_MAGNET(1), ROGUE_CARD_MAGNET(2), ROGUE_CARD_MAGNET(3), ROGUE_CARD_MAGNET(4), ROGUE_CARD_MAGNET(5), ROGUE_CARD_MAGNET(6), ROGUE_CARD_MAGNET(7), ROGUE_CARD_MAGNET(8), ROGUE_CARD_MAGNET(9)
+    ROGUE_CARD_MAGNET(0), ROGUE_CARD_MAGNET(1), ROGUE_CARD_MAGNET(2), ROGUE_CARD_MAGNET(3), ROGUE_CARD_MAGNET(4), ROGUE_CARD_MAGNET(5), ROGUE_CARD_MAGNET(6), ROGUE_CARD_MAGNET(7), ROGUE_CARD_MAGNET(8), ROGUE_CARD_MAGNET(9), \
+    ROGUE_CARD_HEROKEY(0), ROGUE_CARD_HEROKEY(1), ROGUE_CARD_HEROKEY(2), ROGUE_CARD_HEROKEY(3), ROGUE_CARD_HEROKEY(4), ROGUE_CARD_HEROKEY(5), ROGUE_CARD_HEROKEY(6), ROGUE_CARD_HEROKEY(7), ROGUE_CARD_HEROKEY(8), ROGUE_CARD_HEROKEY(9), \
+    ROGUE_CARD_PLUTO(0), ROGUE_CARD_PLUTO(1), ROGUE_CARD_PLUTO(2), ROGUE_CARD_PLUTO(3), ROGUE_CARD_PLUTO(4), ROGUE_CARD_PLUTO(5), ROGUE_CARD_PLUTO(6), ROGUE_CARD_PLUTO(7), ROGUE_CARD_PLUTO(8), ROGUE_CARD_PLUTO(9), \
+    ROGUE_CARD_HUNNY(0), ROGUE_CARD_HUNNY(1), ROGUE_CARD_HUNNY(2), ROGUE_CARD_HUNNY(3), ROGUE_CARD_HUNNY(4), ROGUE_CARD_HUNNY(5), ROGUE_CARD_HUNNY(6), ROGUE_CARD_HUNNY(7), ROGUE_CARD_HUNNY(8), ROGUE_CARD_HUNNY(9), \
+    ROGUE_CARD_STITCH(0), ROGUE_CARD_STITCH(1), ROGUE_CARD_STITCH(2), ROGUE_CARD_STITCH(3), ROGUE_CARD_STITCH(4), ROGUE_CARD_STITCH(5), ROGUE_CARD_STITCH(6), ROGUE_CARD_STITCH(7), ROGUE_CARD_STITCH(8), ROGUE_CARD_STITCH(9), \
+    ROGUE_CARD_HUNNYBEE(0), ROGUE_CARD_HUNNYBEE(1), ROGUE_CARD_HUNNYBEE(2), ROGUE_CARD_HUNNYBEE(3), ROGUE_CARD_HUNNYBEE(4), ROGUE_CARD_HUNNYBEE(5), ROGUE_CARD_HUNNYBEE(6), ROGUE_CARD_HUNNYBEE(7), ROGUE_CARD_HUNNYBEE(8), ROGUE_CARD_HUNNYBEE(9), \
+    ROGUE_CARD_STEALTHSNEAK(0), ROGUE_CARD_STEALTHSNEAK(1), ROGUE_CARD_STEALTHSNEAK(2), ROGUE_CARD_STEALTHSNEAK(3), ROGUE_CARD_STEALTHSNEAK(4), ROGUE_CARD_STEALTHSNEAK(5), ROGUE_CARD_STEALTHSNEAK(6), ROGUE_CARD_STEALTHSNEAK(7), ROGUE_CARD_STEALTHSNEAK(8), ROGUE_CARD_STEALTHSNEAK(9), \
+    ROGUE_CARD_SNEAKARMY(0), ROGUE_CARD_SNEAKARMY(1), ROGUE_CARD_SNEAKARMY(2), ROGUE_CARD_SNEAKARMY(3), ROGUE_CARD_SNEAKARMY(4), ROGUE_CARD_SNEAKARMY(5), ROGUE_CARD_SNEAKARMY(6), ROGUE_CARD_SNEAKARMY(7), ROGUE_CARD_SNEAKARMY(8), ROGUE_CARD_SNEAKARMY(9), \
+    ROGUE_CARD_MISSILEDIVER(0), ROGUE_CARD_MISSILEDIVER(1), ROGUE_CARD_MISSILEDIVER(2), ROGUE_CARD_MISSILEDIVER(3), ROGUE_CARD_MISSILEDIVER(4), ROGUE_CARD_MISSILEDIVER(5), ROGUE_CARD_MISSILEDIVER(6), ROGUE_CARD_MISSILEDIVER(7), ROGUE_CARD_MISSILEDIVER(8), ROGUE_CARD_MISSILEDIVER(9), \
+    ROGUE_CARD_KURTZISA(0), ROGUE_CARD_KURTZISA(1), ROGUE_CARD_KURTZISA(2), ROGUE_CARD_KURTZISA(3), ROGUE_CARD_KURTZISA(4), ROGUE_CARD_KURTZISA(5), ROGUE_CARD_KURTZISA(6), ROGUE_CARD_KURTZISA(7), ROGUE_CARD_KURTZISA(8), ROGUE_CARD_KURTZISA(9), \
+    ROGUE_CARD_VIOLETWALTZ(0), ROGUE_CARD_VIOLETWALTZ(1), ROGUE_CARD_VIOLETWALTZ(2), ROGUE_CARD_VIOLETWALTZ(3), ROGUE_CARD_VIOLETWALTZ(4), ROGUE_CARD_VIOLETWALTZ(5), ROGUE_CARD_VIOLETWALTZ(6), ROGUE_CARD_VIOLETWALTZ(7), ROGUE_CARD_VIOLETWALTZ(8), ROGUE_CARD_VIOLETWALTZ(9), \
+    ROGUE_CARD_TRIDENTTAIL(0), ROGUE_CARD_TRIDENTTAIL(1), ROGUE_CARD_TRIDENTTAIL(2), ROGUE_CARD_TRIDENTTAIL(3), ROGUE_CARD_TRIDENTTAIL(4), ROGUE_CARD_TRIDENTTAIL(5), ROGUE_CARD_TRIDENTTAIL(6), ROGUE_CARD_TRIDENTTAIL(7), ROGUE_CARD_TRIDENTTAIL(8), ROGUE_CARD_TRIDENTTAIL(9), \
+    ROGUE_CARD_ROXAS(0), ROGUE_CARD_ROXAS(1), ROGUE_CARD_ROXAS(2), ROGUE_CARD_ROXAS(3), ROGUE_CARD_ROXAS(4), ROGUE_CARD_ROXAS(5), ROGUE_CARD_ROXAS(6), ROGUE_CARD_ROXAS(7), ROGUE_CARD_ROXAS(8), ROGUE_CARD_ROXAS(9), \
+    ROGUE_CARD_INVISIBLE(0), ROGUE_CARD_INVISIBLE(1), ROGUE_CARD_INVISIBLE(2), ROGUE_CARD_INVISIBLE(3), ROGUE_CARD_INVISIBLE(4), ROGUE_CARD_INVISIBLE(5), ROGUE_CARD_INVISIBLE(6), ROGUE_CARD_INVISIBLE(7), ROGUE_CARD_INVISIBLE(8), ROGUE_CARD_INVISIBLE(9), \
+    ROGUE_CARD_ORCUS(0), ROGUE_CARD_ORCUS(1), ROGUE_CARD_ORCUS(2), ROGUE_CARD_ORCUS(3), ROGUE_CARD_ORCUS(4), ROGUE_CARD_ORCUS(5), ROGUE_CARD_ORCUS(6), ROGUE_CARD_ORCUS(7), ROGUE_CARD_ORCUS(8), ROGUE_CARD_ORCUS(9), \
+    ROGUE_CARD_ANGELSTAR(0), ROGUE_CARD_ANGELSTAR(1), ROGUE_CARD_ANGELSTAR(2), ROGUE_CARD_ANGELSTAR(3), ROGUE_CARD_ANGELSTAR(4), ROGUE_CARD_ANGELSTAR(5), ROGUE_CARD_ANGELSTAR(6), ROGUE_CARD_ANGELSTAR(7), ROGUE_CARD_ANGELSTAR(8), ROGUE_CARD_ANGELSTAR(9), \
+    ROGUE_CARD_JETBALLOON(0), ROGUE_CARD_JETBALLOON(1), ROGUE_CARD_JETBALLOON(2), ROGUE_CARD_JETBALLOON(3), ROGUE_CARD_JETBALLOON(4), ROGUE_CARD_JETBALLOON(5), ROGUE_CARD_JETBALLOON(6), ROGUE_CARD_JETBALLOON(7), ROGUE_CARD_JETBALLOON(8), ROGUE_CARD_JETBALLOON(9), \
+    ROGUE_CARD_STEALTHSOLDIER(0), ROGUE_CARD_STEALTHSOLDIER(1), ROGUE_CARD_STEALTHSOLDIER(2), ROGUE_CARD_STEALTHSOLDIER(3), ROGUE_CARD_STEALTHSOLDIER(4), ROGUE_CARD_STEALTHSOLDIER(5), ROGUE_CARD_STEALTHSOLDIER(6), ROGUE_CARD_STEALTHSOLDIER(7), ROGUE_CARD_STEALTHSOLDIER(8), ROGUE_CARD_STEALTHSOLDIER(9), \
+    ROGUE_CARD_OPPOSITEARMOR(0), ROGUE_CARD_OPPOSITEARMOR(1), ROGUE_CARD_OPPOSITEARMOR(2), ROGUE_CARD_OPPOSITEARMOR(3), ROGUE_CARD_OPPOSITEARMOR(4), ROGUE_CARD_OPPOSITEARMOR(5), ROGUE_CARD_OPPOSITEARMOR(6), ROGUE_CARD_OPPOSITEARMOR(7), ROGUE_CARD_OPPOSITEARMOR(8), ROGUE_CARD_OPPOSITEARMOR(9), \
+    ROGUE_CARD_ARMOREDTORSO(0), ROGUE_CARD_ARMOREDTORSO(1), ROGUE_CARD_ARMOREDTORSO(2), ROGUE_CARD_ARMOREDTORSO(3), ROGUE_CARD_ARMOREDTORSO(4), ROGUE_CARD_ARMOREDTORSO(5), ROGUE_CARD_ARMOREDTORSO(6), ROGUE_CARD_ARMOREDTORSO(7), ROGUE_CARD_ARMOREDTORSO(8), ROGUE_CARD_ARMOREDTORSO(9), \
+    ROGUE_CARD_GAUNTLETS(0), ROGUE_CARD_GAUNTLETS(1), ROGUE_CARD_GAUNTLETS(2), ROGUE_CARD_GAUNTLETS(3), ROGUE_CARD_GAUNTLETS(4), ROGUE_CARD_GAUNTLETS(5), ROGUE_CARD_GAUNTLETS(6), ROGUE_CARD_GAUNTLETS(7), ROGUE_CARD_GAUNTLETS(8), ROGUE_CARD_GAUNTLETS(9), \
+    ROGUE_CARD_HAMMERLEGS(0), ROGUE_CARD_HAMMERLEGS(1), ROGUE_CARD_HAMMERLEGS(2), ROGUE_CARD_HAMMERLEGS(3), ROGUE_CARD_HAMMERLEGS(4), ROGUE_CARD_HAMMERLEGS(5), ROGUE_CARD_HAMMERLEGS(6), ROGUE_CARD_HAMMERLEGS(7), ROGUE_CARD_HAMMERLEGS(8), ROGUE_CARD_HAMMERLEGS(9), \
+    ROGUE_CARD_POWEREDARMOR(0), ROGUE_CARD_POWEREDARMOR(1), ROGUE_CARD_POWEREDARMOR(2), ROGUE_CARD_POWEREDARMOR(3), ROGUE_CARD_POWEREDARMOR(4), ROGUE_CARD_POWEREDARMOR(5), ROGUE_CARD_POWEREDARMOR(6), ROGUE_CARD_POWEREDARMOR(7), ROGUE_CARD_POWEREDARMOR(8), ROGUE_CARD_POWEREDARMOR(9), \
+    ROGUE_CARD_GUARDARMORO(0), ROGUE_CARD_GUARDARMORO(1), ROGUE_CARD_GUARDARMORO(2), ROGUE_CARD_GUARDARMORO(3), ROGUE_CARD_GUARDARMORO(4), ROGUE_CARD_GUARDARMORO(5), ROGUE_CARD_GUARDARMORO(6), ROGUE_CARD_GUARDARMORO(7), ROGUE_CARD_GUARDARMORO(8), ROGUE_CARD_GUARDARMORO(9), \
+    ROGUE_CARD_MOVECHAKRAM(0), ROGUE_CARD_MOVECHAKRAM(1), ROGUE_CARD_MOVECHAKRAM(2), ROGUE_CARD_MOVECHAKRAM(3), ROGUE_CARD_MOVECHAKRAM(4), ROGUE_CARD_MOVECHAKRAM(5), ROGUE_CARD_MOVECHAKRAM(6), ROGUE_CARD_MOVECHAKRAM(7), ROGUE_CARD_MOVECHAKRAM(8), ROGUE_CARD_MOVECHAKRAM(9), \
+    ROGUE_CARD_MOVENEEDLES(0), ROGUE_CARD_MOVENEEDLES(1), ROGUE_CARD_MOVENEEDLES(2), ROGUE_CARD_MOVENEEDLES(3), ROGUE_CARD_MOVENEEDLES(4), ROGUE_CARD_MOVENEEDLES(5), ROGUE_CARD_MOVENEEDLES(6), ROGUE_CARD_MOVENEEDLES(7), ROGUE_CARD_MOVENEEDLES(8), ROGUE_CARD_MOVENEEDLES(9), \
+    ROGUE_CARD_MOVEPETALS(0), ROGUE_CARD_MOVEPETALS(1), ROGUE_CARD_MOVEPETALS(2), ROGUE_CARD_MOVEPETALS(3), ROGUE_CARD_MOVEPETALS(4), ROGUE_CARD_MOVEPETALS(5), ROGUE_CARD_MOVEPETALS(6), ROGUE_CARD_MOVEPETALS(7), ROGUE_CARD_MOVEPETALS(8), ROGUE_CARD_MOVEPETALS(9), \
+    ROGUE_CARD_MOVESHARDS(0), ROGUE_CARD_MOVESHARDS(1), ROGUE_CARD_MOVESHARDS(2), ROGUE_CARD_MOVESHARDS(3), ROGUE_CARD_MOVESHARDS(4), ROGUE_CARD_MOVESHARDS(5), ROGUE_CARD_MOVESHARDS(6), ROGUE_CARD_MOVESHARDS(7), ROGUE_CARD_MOVESHARDS(8), ROGUE_CARD_MOVESHARDS(9), \
+    ROGUE_CARD_MOVEFIREBALL(0), ROGUE_CARD_MOVEFIREBALL(1), ROGUE_CARD_MOVEFIREBALL(2), ROGUE_CARD_MOVEFIREBALL(3), ROGUE_CARD_MOVEFIREBALL(4), ROGUE_CARD_MOVEFIREBALL(5), ROGUE_CARD_MOVEFIREBALL(6), ROGUE_CARD_MOVEFIREBALL(7), ROGUE_CARD_MOVEFIREBALL(8), ROGUE_CARD_MOVEFIREBALL(9), \
+    ROGUE_CARD_MOVEROCK(0), ROGUE_CARD_MOVEROCK(1), ROGUE_CARD_MOVEROCK(2), ROGUE_CARD_MOVEROCK(3), ROGUE_CARD_MOVEROCK(4), ROGUE_CARD_MOVEROCK(5), ROGUE_CARD_MOVEROCK(6), ROGUE_CARD_MOVEROCK(7), ROGUE_CARD_MOVEROCK(8), ROGUE_CARD_MOVEROCK(9), \
+    ROGUE_CARD_MOVEBOMB(0), ROGUE_CARD_MOVEBOMB(1), ROGUE_CARD_MOVEBOMB(2), ROGUE_CARD_MOVEBOMB(3), ROGUE_CARD_MOVEBOMB(4), ROGUE_CARD_MOVEBOMB(5), ROGUE_CARD_MOVEBOMB(6), ROGUE_CARD_MOVEBOMB(7), ROGUE_CARD_MOVEBOMB(8), ROGUE_CARD_MOVEBOMB(9), \
+    ROGUE_CARD_MOVEKNIVES(0), ROGUE_CARD_MOVEKNIVES(1), ROGUE_CARD_MOVEKNIVES(2), ROGUE_CARD_MOVEKNIVES(3), ROGUE_CARD_MOVEKNIVES(4), ROGUE_CARD_MOVEKNIVES(5), ROGUE_CARD_MOVEKNIVES(6), ROGUE_CARD_MOVEKNIVES(7), ROGUE_CARD_MOVEKNIVES(8), ROGUE_CARD_MOVEKNIVES(9), \
+    ROGUE_CARD_MOVEPILLAR(0), ROGUE_CARD_MOVEPILLAR(1), ROGUE_CARD_MOVEPILLAR(2), ROGUE_CARD_MOVEPILLAR(3), ROGUE_CARD_MOVEPILLAR(4), ROGUE_CARD_MOVEPILLAR(5), ROGUE_CARD_MOVEPILLAR(6), ROGUE_CARD_MOVEPILLAR(7), ROGUE_CARD_MOVEPILLAR(8), ROGUE_CARD_MOVEPILLAR(9), \
+    ROGUE_CARD_MOVEQUAKE(0), ROGUE_CARD_MOVEQUAKE(1), ROGUE_CARD_MOVEQUAKE(2), ROGUE_CARD_MOVEQUAKE(3), ROGUE_CARD_MOVEQUAKE(4), ROGUE_CARD_MOVEQUAKE(5), ROGUE_CARD_MOVEQUAKE(6), ROGUE_CARD_MOVEQUAKE(7), ROGUE_CARD_MOVEQUAKE(8), ROGUE_CARD_MOVEQUAKE(9)
 
-#define ROGUE_CARD_TABLE_KINDS 16
+#define ROGUE_CARD_TABLE_KINDS 49
+
+// What each card does beyond its base card: effect, two numbers, unlocking boss bit.
+#define ROGUE_CARD_EFFECTS \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_NONE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_PLUTO, 38, 0, 0 }, \
+    { ROGUE_EFFECT_HEAL, 77, 0, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 3, 60, 0 }, \
+    { ROGUE_EFFECT_MOVE, 1, 0, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 0, 175, 0 }, \
+    { ROGUE_EFFECT_MOVE, 0, 0, 0 }, \
+    { ROGUE_EFFECT_MOVE, 7, 0, 0 }, \
+    { ROGUE_EFFECT_MOVE, 9, 0, 0 }, \
+    { ROGUE_EFFECT_MOVE, 10, 0, 0 }, \
+    { ROGUE_EFFECT_MOVE, 4, 0, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 0, 225, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 0, 200, 0 }, \
+    { ROGUE_EFFECT_MOVE, 5, 0, 0 }, \
+    { ROGUE_EFFECT_MOVE, 9, 0, 0 }, \
+    { ROGUE_EFFECT_MOVE, 7, 0, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 2, 60, 0 }, \
+    { ROGUE_EFFECT_MOVE, 6, 0, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 0, 150, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 1, 60, 0 }, \
+    { ROGUE_EFFECT_MOVE, 6, 0, 0 }, \
+    { ROGUE_EFFECT_MOVE, 5, 0, 0 }, \
+    { ROGUE_EFFECT_SHOCK, 0, 250, 0 }, \
+    { ROGUE_EFFECT_MOVE, 0, 0, 4 }, \
+    { ROGUE_EFFECT_MOVE, 1, 0, 2 }, \
+    { ROGUE_EFFECT_MOVE, 2, 0, 8 }, \
+    { ROGUE_EFFECT_MOVE, 3, 0, 2 }, \
+    { ROGUE_EFFECT_MOVE, 4, 0, 16 }, \
+    { ROGUE_EFFECT_MOVE, 6, 0, 32 }, \
+    { ROGUE_EFFECT_MOVE, 7, 0, 64 }, \
+    { ROGUE_EFFECT_KNIVES, 0, 0, 1 }, \
+    { ROGUE_EFFECT_PILLAR, 0, 0, 2 }, \
+    { ROGUE_EFFECT_SHOCK, 0, 250, 0 }

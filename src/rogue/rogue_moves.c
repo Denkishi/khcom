@@ -5,6 +5,7 @@
 #include "btl.h"
 #include "listpool.h"
 #include "btl_collision.h"
+#include "fade.h"
 #include "m4a_song.h"
 #include "obj_api.h"
 #include "sprite.h"
@@ -381,4 +382,29 @@ void RogueMovesTick(void) {
         gRogue.thorns = 0;
         RogueMoveCast(ROGUE_MOVE_PETALS, gBtlWork->actor, 1);
     }
+}
+
+// A blast all around Sora, with nothing drawn but a flash: what a creature
+// too big to stand in for him does.
+void RogueShockwave(BtlObj* sora, u8 element, u16 scale) {
+    static const u16 attacks[4] = { 14, 303, 313, 0x133 };
+    u64 flags = gBtlWork->flags;
+    s32 old = gBtlWork->unk_124;
+
+    RogueSoraPose(sora);
+    m4aSongNumStart(SONG_EF_SUMMON_UP);
+    FadeFromAmount(2, 12, 16);
+    gBtlWork->flags |= 0x20000000;
+    gBtlWork->unk_124 = scale;
+    gRogue.projectile = 1;
+    gRogue.echoing = 1;
+
+    if (func_08011F78(attacks[element], sora->x, sora->y, sora->z, 120, 60, 80)) {
+        gRogueDebug.moveHits++;
+    }
+
+    gRogue.echoing = 0;
+    gRogue.projectile = 0;
+    gBtlWork->unk_124 = old;
+    gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
 }

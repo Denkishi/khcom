@@ -446,6 +446,42 @@ s32 RogueCardAction(const CardDef* def) {
         return ROGUE_ACTION_SWING;
     }
 
+    // The cards with an effect of their own, cast with a swing.
+    if (kind >= ROGUE_FIRST_EFFECT_KIND && kind < ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS) {
+        const RogueCardEffect* effect = &gRogueCardEffects[kind - ROGUE_FIRST_CARD_KIND];
+        BtlObj* sora = gBtlWork->actor;
+
+        switch (effect->effect) {
+        case ROGUE_EFFECT_MOVE:
+            RogueDoMove(effect->a, sora);
+            return ROGUE_ACTION_SWING;
+        case ROGUE_EFFECT_SHOCK:
+            RogueShockwave(sora, effect->a, effect->b * 4);
+            return ROGUE_ACTION_SWING;
+        case ROGUE_EFFECT_PLUTO:
+            if (gRogue.shards < 9999 - ROGUE_PLUTO_SHARDS) {
+                gRogue.shards += ROGUE_PLUTO_SHARDS;
+            }
+            // And heals.
+        case ROGUE_EFFECT_HEAL:
+            sora->unk_02C += (sora->unk_02E * effect->a) >> 8;
+
+            if (sora->unk_02C > sora->unk_02E) {
+                sora->unk_02C = sora->unk_02E;
+            }
+
+            RogueSoraPose(sora);
+            m4aSongNumStart(SONG_EF_SUMMON_UP);
+            return ROGUE_ACTION_SWING;
+        case ROGUE_EFFECT_KNIVES:
+            RogueThrowKnives(sora);
+            return ROGUE_ACTION_SWING;
+        case ROGUE_EFFECT_PILLAR:
+            RogueRaisePillar(sora);
+            return ROGUE_ACTION_SWING;
+        }
+    }
+
     // A tag card: the character does the move and the card counts as a swing,
     // so that it chains with the cards around it.
     if (def->unk_2A != 3 && RogueTagIn(kind)) {

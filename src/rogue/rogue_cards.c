@@ -25,5 +25,9 @@ const CardDef gCardDefs[ROGUE_CARD_DEFS] = {
     ROGUE_CARD_TABLE
 };
 
+const RogueCardEffect gRogueCardEffects[ROGUE_CARD_KINDS] = {
+    ROGUE_CARD_EFFECTS
+};
+
 // The table and the header must agree on how many cards there are.
 typedef char RogueCardKinds_check[(ROGUE_CARD_TABLE_KINDS == ROGUE_CARD_KINDS) ? 1 : -1];

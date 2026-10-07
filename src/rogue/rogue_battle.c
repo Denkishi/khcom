@@ -4,6 +4,8 @@
 #include "btl_collision.h"
 #include "listpool.h"
 #include "card_def_data.h"
+#include "card_ids.h"
+#include "card_types.h"
 #include "engine_math.h"
 #include "hum.h"
 #include "m4a_song.h"
@@ -56,6 +58,9 @@ void RogueDebugBattle(void) {
         break;
     case ROGUE_DEBUG_RELIC:
         gRogue.relics |= 1 << gRogueDebug.arg;
+        break;
+    case ROGUE_DEBUG_CARD:
+        RogueCardAction(&gCardDefs[CARD_ID(ROGUE_FIRST_CARD_KIND + gRogueDebug.arg, 5)]);
         break;
     case ROGUE_DEBUG_ENEMY_TAG:
         RogueOnEnemyCard(&gCardDefs[450 + gRogueDebug.arg]);

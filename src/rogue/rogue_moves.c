@@ -500,6 +500,7 @@ void RogueMovesTick(void) {
     RogueAfterTick();
     RogueStyleTick();
     RogueGadgetTick();
+    RogueHeroTick();
 
     if (gRogue.moveEchoTimer != 0 && --gRogue.moveEchoTimer == 0 && gRogue.moveEcho != 0) {
         RogueMoveCast(gRogue.moveEcho - 1, gBtlWork->actor, 1);
@@ -695,7 +696,7 @@ void RogueAfterHit(BtlObj* target) {
 }
 
 // Damage that comes from no hitbox: the enemy takes it when it next looks.
-static void RogueDirectDamage(BtlObj* target, s16 amount) {
+void RogueDirectDamage(BtlObj* target, s16 amount) {
     if (target->unk_0D8 != 0) {
         target = target->unk_0D8;
     }

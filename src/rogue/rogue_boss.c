@@ -91,6 +91,7 @@ void RogueBossAiReset(void) {
     sAiSwinging = 0;
     sAiMoved = 0;
     RogueActorReset();
+    RogueHeroReset();
 }
 
 u8 RogueBossAiMoves(void) {
@@ -192,6 +193,7 @@ extern const AnimDef gUnk_0813C89C[15][5];
 
 HERO_SET(Mickey)
 HERO_SET(Roxas)
+HERO_SET(SoraKh2)
 
 typedef struct RogueHeroSet {
     const AnimDef* battle; // one for each entry of gBtlSoraAnimDefs
@@ -209,6 +211,7 @@ typedef struct RogueHeroSet {
 
 static const RogueHeroSet sMickeySet = HERO(Mickey);
 static const RogueHeroSet sRoxasSet = HERO(Roxas);
+static const RogueHeroSet sSoraKh2Set = HERO(SoraKh2);
 
 // The set of the hero picked, 0 for one who uses Sora's sprites.
 static const RogueHeroSet* RogueHeroSprites(void) {
@@ -217,14 +220,12 @@ static const RogueHeroSet* RogueHeroSprites(void) {
         return &sMickeySet;
     case ROGUE_HERO_ROXAS:
         return &sRoxasSet;
+    case ROGUE_HERO_SORA_KH2:
+        return &sSoraKh2Set;
     }
 
     return 0;
 }
-
-// Sora in the black clothes of his second journey: his own sprites with
-// the reds turned to black and the blue to red. Worn after a first win.
-static const u16 sSoraKh2Palette[16] = { 0x4208, 0x20E3, 0x49CB, 0x6ED4, 0x1063, 0x20C6, 0x3DAD, 0x167A, 0x37DF, 0x0029, 0x00D0, 0x11B5, 0x32BE, 0x5B7F, 0x1099, 0x7FFF };
 
 u8 RogueHeroUnlocked(u8 hero) {
     switch (hero) {
@@ -279,10 +280,6 @@ void* RogueHeroPalette(void* sora) {
 
     if (set != 0) {
         return (void*)set->palette;
-    }
-
-    if (gRogueMeta.hero == ROGUE_HERO_SORA_KH2) {
-        return (void*)sSoraKh2Palette;
     }
 
     return sora;

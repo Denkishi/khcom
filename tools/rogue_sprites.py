@@ -48,7 +48,7 @@ CHARACTERS = {
     # A whole set in the game's own style, made from Sora's: nearly every
     # animation of his has its frames here.
     "Roxas": dict(
-        sheet="roxas_sheet.png", area=(100, 2150, 1000, 0), min_pixels=80, min_height=20, row_overlap=10, face="0.8",
+        sheet="roxas_sheet.png", area=(100, 2150, 1000, 0), min_pixels=80, min_height=20, row_overlap=10, face=(3, 3916, 72, 3985),
         # Picked by hand: left to itself the count of pixels spends the colours
         # on the greys and loses the red of the collar and the blue of the eyes.
         palette=[(6, 4, 6), (22, 32, 40), (97, 50, 11), (164, 109, 35), (216, 168, 65), (255, 216, 100), (240, 208, 170),
@@ -59,6 +59,16 @@ CHARACTERS = {
         hub_stand=["0.8"], hub_walk=["3.0", "3.4"], field_jump=["4.1"], field_swing=["9.2"],
         swings=[["9.0", "9.2", "9.4", "9.5"], ["10.0", "10.2", "10.3"], ["11.0", "11.2", "11.4", "11.6"], ["19.0", "19.1", "19.3"],
                 ["12.0", "12.2", "12.4", "12.5"], ["13.0", "13.2", "13.4", "13.5"], ["14.0", "14.2", "14.4", "14.6"]],
+    ),
+    # Sora as he is on his second journey, with the arcs his swings leave.
+    "SoraKh2": dict(
+        sheet="sora_kh2_ultimate.png", area=(100, 0, 1000, 0), min_pixels=80, min_height=20, row_overlap=10, max_height=200,
+        min_colours=5, face=(1215, 35, 1425, 245),
+        idle=["0.0", "0.2", "0.4", "0.6"], run=["1.0", "1.2", "1.4", "1.6"], rise=["2.2"], fall=["2.5"], land=["3.0"],
+        cast=["28.0", "28.2", "28.4", "28.6"], hurt=["25.0"], down=["25.2", "25.4"], rise_up=["25.5", "0.0"], dodge=["4.2", "4.4"],
+        hub_stand=["0.0"], hub_walk=["1.0", "1.4"], field_jump=["2.2"], field_swing=["6.2"],
+        swings=[["5.0", "5.1", "5.2", "5.4"], ["6.0", "6.2", "6.4"], ["7.0", "7.1", "7.2", "7.4"], ["9.0", "9.2", "9.4"],
+                ["10.0", "10.1", "10.2", "10.4"], ["8.2", "8.3", "8.4", "8.6"], ["11.3", "11.4", "11.5", "11.7"]],
     ),
 }
 
@@ -73,6 +83,8 @@ def use(name):
     OUT = ROOT / f"src/rogue/rogue_{name.lower()}_art.c"
     AREA, MIN_PIXELS, MIN_HEIGHT, ROW_OVERLAP, FACE = c["area"], c["min_pixels"], c["min_height"], c["row_overlap"], c["face"]
     PALETTE = c.get("palette")
+    global MAX_HEIGHT, MIN_COLOURS
+    MAX_HEIGHT, MIN_COLOURS = c.get("max_height", 0), c.get("min_colours", 0)
     IDLE, RUN, RISE, FALL, LAND, CAST = c["idle"], c["run"], c["rise"], c["fall"], c["land"], c["cast"]
     HURT, DOWN, RISE_UP, DODGE = c["hurt"], c["down"], c["rise_up"], c["dodge"]
     HUB_STAND, HUB_WALK, FIELD_JUMP, FIELD_SWING, SWINGS = c["hub_stand"], c["hub_walk"], c["field_jump"], c["field_swing"], c["swings"]
@@ -477,7 +489,7 @@ def preview(poses):
 
 
 def main():
-    for name in CHARACTERS:
+    for name in sys.argv[1:] or CHARACTERS:
         use(name)
         build()
 

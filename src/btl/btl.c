@@ -3044,6 +3044,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if ((s16)work->unk_154 == buf[work->unk_190]) {
             func_08019A30();
+            RogueHeroOnSwing(p, RogueComboSlot(work->unk_161) == 2);
 
             if (RogueComboSlot(work->unk_161) == 2) {
                 RogueOnFinisher(p);

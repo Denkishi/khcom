@@ -417,6 +417,8 @@ s32 RogueGadgetDamage(s32 damage) {
 }
 
 s32 RogueGadgetRunSpeed(s32 speed) {
+    speed = RogueHeroRunSpeed(speed);
+
     if (sHasteTime != 0) {
         speed += speed * sHaste / 100;
     }

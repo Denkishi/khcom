@@ -732,6 +732,7 @@ typedef struct RogueDebug {
     u16 bossClips; // moves the bosses drawn from a sheet have started
     u8 bossClip; // the last of them
     u8 bossForce; // set from outside: the move such a boss makes next, plus one
+    u16 heroMoves; // things a hero other than Sora has done that Sora does not
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet
@@ -801,6 +802,15 @@ const struct HumDef* RogueLeonDef(void);
 struct AnimState;
 u8 RogueBossAi(struct BtlObj* boss, struct AnimState* anim, void* tiles);
 u8 RogueBossAiMoves(void);
+s32 RogueHeroRunSpeed(s32 speed);
+u8 RogueHeroAirJumps(void);
+s16 RogueHeroDamage(s16 amount);
+s16 RogueHeroHurt(s16 amount);
+void RogueHeroOnHit(struct BtlObj* target);
+void RogueHeroOnSwing(struct BtlObj* sora, u8 finisher);
+void RogueHeroTick(void);
+void RogueHeroReset(void);
+void RogueDirectDamage(struct BtlObj* target, s16 amount);
 u8 RogueActorIs(void);
 const struct AnimDef* RogueActorAnim(u16 slot);
 const struct HumDef* RogueActorDef(void);

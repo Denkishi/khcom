@@ -1,0 +1,38 @@
+# Each hero that is not Sora does what Sora does not: Mickey's finisher lets
+# pearls of light go, Roxas's raises pillars and his hits land twice. Here
+# Roxas (hero 4; poke 0 before SELECT for Mickey, 1 for Sora II).
+# Expect: hero reads 4, hero_moves above 1, move_hits above 0, the pictures
+# show Roxas, then his pillars under the enemy.
+wait 600
+press START
+wait 120
+poke8 @gRogueMeta.flags 7
+poke8 @gRogueMeta.chapters 3
+poke8 @gRogueMeta.wins 1
+poke8 @gRogueMeta.hero 3
+press SELECT
+wait 30
+shot /tmp/h4_hub.ppm
+press START
+wait 200
+hold B 100
+wait 20
+peek8 @gRogueMeta.hero hero
+debug battle 0
+wait 330
+shot /tmp/h4_idle.ppm
+press A
+wait 9
+shot /tmp/h4_swing.ppm
+wait 50
+debug finisher
+wait 10
+shot /tmp/h4_fin1.ppm
+wait 12
+shot /tmp/h4_fin2.ppm
+wait 40
+debug attack
+wait 30
+peek16 @gRogueDebug.heroMoves hero_moves
+peek16 @gRogueDebug.moveHits move_hits
+peek32 @gFrameCounter frames

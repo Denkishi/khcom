@@ -77,6 +77,7 @@ void RogueDebugBattle(void) {
         break;
     case ROGUE_DEBUG_FINISHER:
         if (sora != 0) {
+            RogueHeroOnSwing(sora, 1);
             RogueOnFinisher(sora);
         }
         break;
@@ -123,6 +124,8 @@ void RogueOnDamage(BtlObj* p) {
             p->unk_020 += p->unk_020 / 2;
         }
 
+        p->unk_020 = RogueHeroHurt(p->unk_020);
+
         // The tree's toughness: 4% less for each level, never less than 1.
         if (p->unk_020 > 1) {
             p->unk_020 -= p->unk_020 * 4 * RogueUpgradeLevel(ROGUE_UPGRADE_TOUGH) / 100;
@@ -166,6 +169,10 @@ void RogueOnDamage(BtlObj* p) {
     // What the gadgets have on for a while.
     p->unk_020 = RogueGadgetDamage(p->unk_020);
 
+    if (!gRogue.projectile) {
+        p->unk_020 = RogueHeroDamage(p->unk_020);
+    }
+
     // The tree's critical hits, four in a hundred for each level, and its
     // stronger finishers.
     if (RogueRandBelow(100) < 4 * (RogueUpgradeLevel(ROGUE_UPGRADE_CRIT) + RogueUpgradeLevel(ROGUE_UPGRADE_CRIT2))) {
@@ -205,6 +212,7 @@ void RogueOnDamage(BtlObj* p) {
     if (!gRogue.echoing && !gRogue.projectile) {
         RogueStyleOnHit(p);
         RogueGadgetFire(GADGET_ON_HIT_N, p);
+        RogueHeroOnHit(p);
     }
 
     if (!gRogue.echoing && !gRogue.projectile) {

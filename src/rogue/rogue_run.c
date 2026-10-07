@@ -464,7 +464,7 @@ u8 RogueDoorsOpen(void) {
 }
 
 u8 RogueTryAirJump(void) {
-    if (gRogue.airJumpsUsed >= gRogue.airJumps + RogueHasRelic(ROGUE_RELIC_TRIPLE_JUMP)) {
+    if (gRogue.airJumpsUsed >= gRogue.airJumps + RogueHasRelic(ROGUE_RELIC_TRIPLE_JUMP) + RogueHeroAirJumps()) {
         return 0;
     }
 

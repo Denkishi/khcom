@@ -88,7 +88,7 @@ typedef struct RogueHubWork {
     TextSlot line[LINE_SLOTS];
     TextSlot hint[LINE_SLOTS];
     TextSlot level[14]; // the oblivion level's plate
-    TextSlot hero[14]; // the hero hint's plate
+    TextSlot hero[26]; // the hero hint's plate
     u8 levelText[14];
     u8 lineCount;
     u8 hintCount;
@@ -126,7 +126,12 @@ static const u8 sHint[] = "START: parti";
 static const u8 sBoon[] = "Dono: ";
 static const u8 sBoonNone[] = "nessuno";
 static const u8 sStrong[] = " +";
-static const u8 sHero[] = "SELECT: eroe";
+static const u8 sHero0[] = "SELECT: Sora";
+static const u8 sHero1[] = "SELECT: Topolino";
+static const u8 sHero2[] = "SELECT: Sora II";
+static const u8 sHero3[] = "SELECT: Riku";
+static const u8 sHero4[] = "SELECT: Roxas";
+static const u8* const sHero[ROGUE_HEROES] = { sHero0, sHero1, sHero2, sHero3, sHero4 };
 static const u8 sOblivion[] = "L/R: Oblio ";
 static const u8 sBoonBelle[] = "PV +30";
 static const u8 sBoonMoogle[] = "2 rilanci";
@@ -181,7 +186,7 @@ static void RogueHubShowBoon(void) {
     }
 
     if (RogueNextHero() != gRogueMeta.hero) {
-        sWork->heroCount = LoadTextSlots((u16*)sHero, sWork->hero);
+        sWork->heroCount = LoadTextSlots((u16*)sHero[gRogueMeta.hero], sWork->hero);
     }
 
 }
@@ -367,6 +372,7 @@ static void RogueHub_Update(void) {
             RogueMetaSave();
             LoadObjPaletteBank(((ObjPalette*)sWork->soraPalette)->index, RogueHeroPalette(gSoraPalette));
             RogueHubSoraAnim(ACTION_STAND, DIR_FRONT);
+            RogueHubShowBoon();
         } else if (GetKeysPressed() & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_START);
             sWork->next = HUB_NEXT_RUN;

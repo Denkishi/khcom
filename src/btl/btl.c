@@ -3032,6 +3032,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             if (RogueComboSlot(work->unk_161) == 2) {
                 RogueOnFinisher(p);
+                gRogue.finisher = 1;
             }
 
             if (p->btl->unk_0F4 == 34) {
@@ -3101,10 +3102,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
             }
 
+            gRogue.finisher = 0;
+
             if (d == 1) {
                 m4aSongNumStart(a->hitSound);
 
-                RogueOnKeybladeHit((p->flags & 4) ? p->x - 9216 : p->x + 9216, p->y, p->z);
+                RogueOnKeybladeHit((p->flags & 4) ? p->x - 9216 : p->x + 9216, p->y, p->z, RogueComboSlot(work->unk_161) == 2);
 
                 // A hit in mid-air lifts Sora a little, so air combos stay up.
                 if (p->btl->flags & 0x8000) {

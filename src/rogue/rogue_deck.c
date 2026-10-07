@@ -51,8 +51,19 @@ static u8 RogueAddCard(u16 id, u16 costLimit) {
     return 1;
 }
 
+// Rolls which pool a card comes from: keyblades 62%, spells 18%, summons 7%,
+// items 8%, enemy cards 5%, with the pools the deck is built on getting more.
 static u8 RogueRollPool(void) {
     u32 roll = RogueRandBelow(100);
+    u8 pool;
+
+    for (pool = POOL_ATTACK; pool <= POOL_SUMMON; pool++) {
+        if (roll < RogueBuildPoolBias(pool)) {
+            return pool;
+        }
+
+        roll = RogueRandBelow(100);
+    }
 
     if (roll < 62) {
         return POOL_ATTACK;

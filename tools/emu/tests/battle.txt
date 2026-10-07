@@ -1,0 +1,7 @@
+# From the first room into a normal battle of the first floor, Sora unhurtable.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 420
+# Enemies cannot be hit while they are still coming in.
+wait 300

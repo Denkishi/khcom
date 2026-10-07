@@ -11,10 +11,29 @@
 
 extern const BattleAttackDef gBattleAttackDefs[];
 
-// Builds: the deck's cards of one element make that element stronger and
-// come up more often, and an infused blade adds the element to keyblade hits.
+// Builds: what the deck and the relics have a lot of gets stronger and comes
+// up more often. Several builds can be active at once and their bonuses add
+// up on an attack that belongs to more than one, which is how a run breaks
+// the game: a deck of Fire spells with the knives is a fire, spell and
+// projectile build all together.
 
-// The element bit of a BattleAttackDef's flags, by RogueElement.
+typedef struct RogueBuildDef {
+    u8 min; // points needed for the build to count
+    u8 max; // points past which it stops growing
+    u8 bonus; // percent of damage for each point
+} RogueBuildDef;
+
+static const RogueBuildDef sBuilds[ROGUE_BUILDS] = {
+    { 3, 10, 4 }, // fire
+    { 3, 10, 4 }, // ice
+    { 3, 10, 4 }, // thunder
+    { 10, 16, 2 }, // blade: keyblade cards
+    { 5, 10, 4 }, // spell: magic cards
+    { 2, 5, 8 }, // summon
+    { 3, 8, 6 }, // projectile: thrown things, see RogueCountBuild
+};
+
+// The element bit of a BattleAttackDef's flags, by element build.
 static const u32 sElementFlags[ROGUE_ELEMENTS] = { 0x10000000, 0x20000000, 0x40000000 };
 
 // Sora's own spells, used for the hit an infused blade adds.
@@ -60,15 +79,42 @@ u8 RogueCardElement(u16 id) {
     return ROGUE_ELEMENT_NONE;
 }
 
-// Counts the deck's cards of each element; called when a battle starts and
-// when the run page opens.
+// The class build a kind of card belongs to, ROGUE_BUILDS for none.
+static u8 RogueKindBuild(u16 kind) {
+    if (kind <= CARD_ULTIMA_WEAPON) {
+        return ROGUE_BUILD_BLADE;
+    }
+
+    if (kind >= CARD_FIRE && kind <= CARD_AERO) {
+        return ROGUE_BUILD_SPELL;
+    }
+
+    if (kind >= CARD_SIMBA && kind <= CARD_CLOUD) {
+        return ROGUE_BUILD_SUMMON;
+    }
+
+    return ROGUE_BUILDS;
+}
+
+static void RogueBuildAdd(u8 build, u8 points) {
+    if (build < ROGUE_BUILDS && gRogue.build[build] < 99) {
+        gRogue.build[build] += points;
+    }
+}
+
+// Counts the points of every build; called when a battle starts, when the
+// run page opens and before a reward is rolled. A card gives a point to its
+// element and one to its class; Fire and Blizzard, which are thrown, give one
+// to projectiles too. The knives are worth three projectile points and an
+// infused blade two of its element.
 void RogueCountBuild(void) {
     Deck* deck = GetActiveDeck();
-    u8 element;
+    u16 id;
+    u8 build;
     s32 i;
 
-    for (element = 0; element < ROGUE_ELEMENTS; element++) {
-        gRogue.build[element] = 0;
+    for (build = 0; build < ROGUE_BUILDS; build++) {
+        gRogue.build[build] = 0;
     }
 
     for (i = 0; i < DECK_SIZE; i++) {
@@ -76,24 +122,56 @@ void RogueCountBuild(void) {
             continue;
         }
 
-        element = RogueCardElement(gCardCollection[deck->cards[i]] & CARD_ID_MASK);
+        id = gCardCollection[deck->cards[i]] & CARD_ID_MASK;
 
-        if (element != ROGUE_ELEMENT_NONE && gRogue.build[element] < 99) {
-            gRogue.build[element]++;
+        if (gCardDefs[id].unk_2A == 3) {
+            continue;
+        }
+
+        RogueBuildAdd(RogueCardElement(id), 1);
+        RogueBuildAdd(RogueKindBuild(id / 10), 1);
+
+        if (id / 10 == CARD_FIRE || id / 10 == CARD_BLIZZARD) {
+            RogueBuildAdd(ROGUE_BUILD_PROJECTILE, 1);
+        }
+    }
+
+    if (RogueHasRelic(ROGUE_RELIC_KNIVES)) {
+        RogueBuildAdd(ROGUE_BUILD_PROJECTILE, 3);
+    }
+
+    for (build = 0; build < ROGUE_ELEMENTS; build++) {
+        if (RogueHasRelic(ROGUE_RELIC_FIRE_BLADE + build)) {
+            RogueBuildAdd(build, 2);
         }
     }
 }
 
-// The element the deck is built around: the one with the most cards, from
-// three up. ROGUE_ELEMENT_NONE if there is none.
+// Damage bonus of a build in percent, 0 while it has too few points.
+u8 RogueBuildBonus(u8 build) {
+    u8 points = gRogue.build[build];
+
+    if (points < sBuilds[build].min) {
+        return 0;
+    }
+
+    if (points > sBuilds[build].max) {
+        points = sBuilds[build].max;
+    }
+
+    return points * sBuilds[build].bonus;
+}
+
+// The element with the most points among the active element builds, or
+// ROGUE_ELEMENT_NONE.
 u8 RogueBuildElement(void) {
     u8 best = ROGUE_ELEMENT_NONE;
-    u8 count = ROGUE_BUILD_MIN - 1;
+    u8 points = 0;
     u8 element;
 
     for (element = 0; element < ROGUE_ELEMENTS; element++) {
-        if (gRogue.build[element] > count) {
-            count = gRogue.build[element];
+        if (RogueBuildBonus(element) != 0 && gRogue.build[element] > points) {
+            points = gRogue.build[element];
             best = element;
         }
     }
@@ -101,43 +179,66 @@ u8 RogueBuildElement(void) {
     return best;
 }
 
-// Damage bonus of the build in percent: 4 for each card of its element, up
-// to 40.
-u8 RogueBuildBonus(void) {
-    u8 element = RogueBuildElement();
-    u8 count;
+static void RogueEcho(s32 x, s32 y, s32 z, u16 attack, u16 scale);
 
-    if (element == ROGUE_ELEMENT_NONE) {
-        return 0;
+// Called for the damage of every attack Sora lands, with the attack's
+// definition index and flags. Adds up the bonuses of every build the attack
+// belongs to, up to double damage.
+s32 RogueBuildDamage(s32 damage, u16 attack, u32 attackFlags) {
+    s32 bonus = 0;
+    u8 element = RogueFlagsElement(attackFlags);
+    BtlObj* target;
+
+    if (element != ROGUE_ELEMENT_NONE) {
+        bonus += RogueBuildBonus(element);
     }
 
-    count = gRogue.build[element];
+    if (gRogue.projectile) {
+        bonus += RogueBuildBonus(ROGUE_BUILD_PROJECTILE);
+    } else if (gRogue.playedKind != ROGUE_NO_KIND) {
+        if (RogueKindBuild(gRogue.playedKind) != ROGUE_BUILDS) {
+            bonus += RogueBuildBonus(RogueKindBuild(gRogue.playedKind));
+        }
 
-    if (count > ROGUE_BUILD_MAX) {
-        count = ROGUE_BUILD_MAX;
+        if (gRogue.playedKind == CARD_FIRE || gRogue.playedKind == CARD_BLIZZARD) {
+            bonus += RogueBuildBonus(ROGUE_BUILD_PROJECTILE);
+        }
+
+        // Arcane echo: a spell that lands is cast again at half strength.
+        if (RogueHasRelic(ROGUE_RELIC_ARCANE_ECHO) && RogueKindBuild(gRogue.playedKind) == ROGUE_BUILD_SPELL &&
+            !gRogue.echoing) {
+            target = gBtlWork->actor2;
+
+            if (target != 0) {
+                RogueEcho(target->x, target->y, target->z, attack, 128);
+            }
+        }
     }
 
-    return count * 4;
+    if (bonus > 100) {
+        bonus = 100;
+    }
+
+    return damage + damage * bonus / 100;
 }
 
-// Called for the damage of every attack Sora lands.
-s32 RogueElementDamage(s32 damage, u32 attackFlags) {
-    u8 element = RogueBuildElement();
+// Reward rolls lean towards what the deck is built on. Returns how much of
+// 100 goes to a card pool on top of its share: 0 to 2 for keyblades, spells
+// and summons.
+u8 RogueBuildPoolBias(u8 pool) {
+    static const u8 builds[] = { ROGUE_BUILD_BLADE, ROGUE_BUILD_SPELL, ROGUE_BUILD_SUMMON };
 
-    if (element != ROGUE_ELEMENT_NONE && (attackFlags & sElementFlags[element])) {
-        damage += damage * RogueBuildBonus() / 100;
+    if (pool < 3 && RogueBuildBonus(builds[pool]) != 0) {
+        return 15;
     }
 
-    return damage;
+    return 0;
 }
 
-// A card kind to offer instead of a random one, so that a build keeps finding
-// its element: its spell, about half the time. 0xFFFF for no preference.
+// A card kind to offer instead of a random spell, so that an element build
+// keeps finding its spell: about half the time. 0xFFFF for no preference.
 u16 RogueBuildSpell(void) {
-    u8 element;
-
-    RogueCountBuild();
-    element = RogueBuildElement();
+    u8 element = RogueBuildElement();
 
     if (element == ROGUE_ELEMENT_NONE || RogueRandBelow(2) == 0) {
         return 0xFFFF;
@@ -146,14 +247,16 @@ u16 RogueBuildSpell(void) {
     return sElementSpells[element];
 }
 
-// The magic hit an infused blade adds to a keyblade hit: one of Sora's own
-// spells landing on the same spot a few frames later.
+// An added hit: an attack landing on the locked-on enemy a little after the
+// one that caused it. Infused blades, the arcane echo and build finishers all
+// use it.
 
 typedef struct RogueEchoArgs {
     s32 x;
     s32 y;
     s32 z;
-    u8 element;
+    u16 attack;
+    u16 scale; // 8.8, of the attack's own damage
 } RogueEchoArgs;
 
 typedef struct RogueEchoWork {
@@ -178,7 +281,7 @@ static s32 RogueEcho_Update(RogueEchoWork* w) {
         return 1;
     }
 
-    // An enemy cannot be hit again while it reels from the keyblade, and by
+    // An enemy cannot be hit again while it reels from the first hit, and by
     // then it has been knocked away: wait for the locked-on target to
     // recover, for a while, and strike it where it is.
     if (target != 0) {
@@ -194,17 +297,19 @@ static s32 RogueEcho_Update(RogueEchoWork* w) {
 
     // Whom a hitbox hurts follows whose card is in play: claim the player's
     // turn for this one test, as the thrown knives do.
-    // The spells hit three to five times as hard as a swing; scaled down
-    // here the added hit is worth about three quarters of one.
     flags = gBtlWork->flags;
     scale = gBtlWork->unk_124;
     gBtlWork->flags |= 0x20000000;
-    gBtlWork->unk_124 = sElementScales[w->args.element];
+    gBtlWork->unk_124 = w->args.scale;
+    gRogue.echoing = 1;
+    gRogue.projectile = 1;
 
-    if (func_08011F78(sElementAttacks[w->args.element], w->args.x, w->args.y, w->args.z, 24, 16, 32)) {
+    if (func_08011F78(w->args.attack, w->args.x, w->args.y, w->args.z, 24, 16, 32)) {
         gRogueDebug.echoes++;
     }
 
+    gRogue.projectile = 0;
+    gRogue.echoing = 0;
     gBtlWork->unk_124 = scale;
     gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
     return 0;
@@ -222,19 +327,34 @@ static TaskDesc sTaskDescRogueEcho = {
     sizeof(RogueEchoWork),
 };
 
-// Called when a keyblade swing connects, with the centre of its hitbox.
-void RogueOnKeybladeHit(s32 x, s32 y, s32 z) {
+static void RogueEcho(s32 x, s32 y, s32 z, u16 attack, u16 scale) {
     RogueEchoArgs args;
+
+    args.x = x;
+    args.y = y;
+    args.z = z;
+    args.attack = attack;
+    args.scale = scale;
+    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueEcho, &args);
+}
+
+// Called when a keyblade swing connects, with the centre of its hitbox and
+// whether it is the combo's finisher. An infused blade follows every swing
+// with its element; an element build follows the finisher with a stronger
+// one of its own.
+void RogueOnKeybladeHit(s32 x, s32 y, s32 z, u8 finisher) {
     u8 element;
 
     for (element = 0; element < ROGUE_ELEMENTS; element++) {
         if (RogueHasRelic(ROGUE_RELIC_FIRE_BLADE + element)) {
-            args.x = x;
-            args.y = y;
-            args.z = z;
-            args.element = element;
-            TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueEcho, &args);
+            RogueEcho(x, y, z, sElementAttacks[element], sElementScales[element]);
         }
+    }
+
+    element = RogueBuildElement();
+
+    if (finisher && element != ROGUE_ELEMENT_NONE) {
+        RogueEcho(x, y, z, sElementAttacks[element], sElementScales[element] * 2);
     }
 }
 
@@ -263,14 +383,29 @@ u8 RogueRollArt(u16 kind) {
 }
 
 // What a card played alone does: its own action, or its kind's art if the
-// card is high enough.
+// card is high enough. Also notes the kind played, for the builds.
 s32 RogueCardAction(const CardDef* def) {
     u16 id = def - gCardDefs;
     u16 kind = id / 10;
 
-    if (kind < ROGUE_ART_KINDS && gRogue.arts[kind] != 0 && def->unk_2A != 3 && def->unk_20 >= ROGUE_ART_MIN_VALUE) {
+    gRogue.playedKind = def->unk_2A != 3 ? kind : ROGUE_NO_KIND;
+
+    // An art works once for each reload of the deck.
+    if (kind < ROGUE_ART_KINDS && gRogue.arts[kind] != 0 && def->unk_2A != 3 && def->unk_20 >= ROGUE_ART_MIN_VALUE &&
+        !(gRogue.artsUsed & (1 << kind))) {
+        gRogue.artsUsed |= 1 << kind;
         return gRogue.arts[kind];
     }
 
     return def->unk_24;
+}
+
+// Called when cards are played together, as a sleight or a stock: the hits
+// that follow belong to no single kind.
+void RogueOnStockPlayed(void) {
+    gRogue.playedKind = ROGUE_NO_KIND;
+}
+
+void RogueOnReload(void) {
+    gRogue.artsUsed = 0;
 }

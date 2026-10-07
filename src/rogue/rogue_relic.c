@@ -25,6 +25,7 @@ static const u8 sNameKnives[] = "Lame di Larxene";
 static const u8 sNameFire[] = "Lama ardente";
 static const u8 sNameIce[] = "Lama gelida";
 static const u8 sNameThunder[] = "Lama tonante";
+static const u8 sNameEcho[] = "Eco arcano";
 
 static const u8 sTextVampire[] = "Ogni colpo a segno\x1Fti cura di 1 PV";
 static const u8 sTextCritical[] = "Un colpo su sette\x1F" "fa danno doppio";
@@ -36,13 +37,14 @@ static const u8 sTextKnives[] = "Il finisher lancia\x1Ftre coltelli";
 static const u8 sTextFire[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Fuoco";
 static const u8 sTextIce[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Gelo";
 static const u8 sTextThunder[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Tuono";
+static const u8 sTextEcho[] = "Ogni magia a segno\x1Fcolpisce due volte";
 
 static const u8* const sNames[ROGUE_RELICS] = {
-    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder,
+    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
-    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder,
+    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho,
 };
 
 const u8* RogueRelicName(u8 relic) {
@@ -62,6 +64,10 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     if (relic == ROGUE_RELIC_KNIVES) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_LARXENE;
+    }
+
+    if (relic == ROGUE_RELIC_ARCANE_ECHO) {
+        return gRogueMeta.chapters >= 2;
     }
 
     // The infused blades come with the second chapter, and only one of them
@@ -100,35 +106,44 @@ void RogueOnBossBeaten(u16 battle) {
     }
 }
 
-// The run's page in the pause menu: where the run is and the relics it has.
+// The run's pages in the pause menu: where the run is and its builds, then
+// its relics. A turns the page, B closes.
 
 #define LINE_SLOTS 26
-#define RELIC_LINES (4 + ROGUE_RELICS)
+#define PAGE_LINES 9
 
 typedef struct RogueRelicsWork {
-    TextSlot lines[RELIC_LINES][LINE_SLOTS];
-    u8 counts[RELIC_LINES];
+    TextSlot lines[PAGE_LINES][LINE_SLOTS];
+    u8 counts[PAGE_LINES];
     u8 text[40];
     void* palette;
     void* titlePalette;
     u8 lineCount;
+    u8 page;
     u8 state;
 } RogueRelicsWork;
 
 static RogueRelicsWork* sWork;
 
 static const u8 sTitle[] = "La tua run";
+static const u8 sTitleRelics[] = "Reliquie";
 static const u8 sFloor[] = "Piano ";
 static const u8 sCombo[] = "  Combo+";
 static const u8 sJumps[] = "  Salti ";
-static const u8 sNone[] = "Nessuna reliquia";
+static const u8 sNone[] = "Nessuna";
+static const u8 sNoBuild[] = "Nessuna build attiva";
 static const u8 sCards[] = "Carte Lv2: ";
 static const u8 sCards3[] = "  Lv3: ";
-static const u8 sBuild[] = "Build: ";
-static const u8 sBuildFire[] = "Fuoco";
-static const u8 sBuildIce[] = "Gelo";
-static const u8 sBuildThunder[] = "Tuono";
-static const u8* const sBuildNames[ROGUE_ELEMENTS] = { sBuildFire, sBuildIce, sBuildThunder };
+static const u8 sBuildFire[] = "Build Fuoco";
+static const u8 sBuildIce[] = "Build Gelo";
+static const u8 sBuildThunder[] = "Build Tuono";
+static const u8 sBuildBlade[] = "Build Lame";
+static const u8 sBuildSpell[] = "Build Magie";
+static const u8 sBuildSummon[] = "Build Evocazioni";
+static const u8 sBuildProjectile[] = "Build Proiettili";
+static const u8* const sBuildNames[ROGUE_BUILDS] = {
+    sBuildFire, sBuildIce, sBuildThunder, sBuildBlade, sBuildSpell, sBuildSummon, sBuildProjectile,
+};
 
 static u8* RogueRelicsAppend(u8* out, const u8* text) {
     while (*text != 0) {
@@ -139,20 +154,85 @@ static u8* RogueRelicsAppend(u8* out, const u8* text) {
     return out;
 }
 
+static u8* RogueRelicsNumber(u8* out, u8 value) {
+    *out++ = '0' + value / 10;
+    *out++ = '0' + value % 10;
+    *out = 0;
+    return out;
+}
+
 static void RogueRelicsLine(const u8* text) {
-    InitTextSlots(sWork->lines[sWork->lineCount], LINE_SLOTS);
-    sWork->counts[sWork->lineCount] = LoadTextSlots((u16*)text, sWork->lines[sWork->lineCount]);
-    sWork->lineCount++;
+    if (sWork->lineCount < PAGE_LINES) {
+        sWork->counts[sWork->lineCount] = LoadTextSlots((u16*)text, sWork->lines[sWork->lineCount]);
+        sWork->lineCount++;
+    }
+}
+
+static void RogueRelicsShowPage(void) {
+    u8* out;
+    u8 first;
+    u8 i;
+
+    for (i = 0; i < PAGE_LINES; i++) {
+        FreeTextSlots(sWork->lines[i], LINE_SLOTS);
+    }
+
+    sWork->lineCount = 0;
+
+    if (sWork->page == 0) {
+        RogueRelicsLine(sTitle);
+        out = RogueRelicsAppend(sWork->text, sFloor);
+        out = RogueRelicsNumber(out, gRogue.floor + 1);
+        out = RogueRelicsAppend(out, sCombo);
+        *out++ = '0' + gRogue.comboPlus;
+        out = RogueRelicsAppend(out, sJumps);
+        *out++ = '0' + gRogue.airJumps;
+        *out = 0;
+        RogueRelicsLine(sWork->text);
+        out = RogueRelicsAppend(sWork->text, sCards);
+        out = RogueRelicsNumber(out, RogueCountCards(2));
+        out = RogueRelicsAppend(out, sCards3);
+        RogueRelicsNumber(out, RogueCountCards(3));
+        RogueRelicsLine(sWork->text);
+        first = sWork->lineCount;
+
+        for (i = 0; i < ROGUE_BUILDS; i++) {
+            if (RogueBuildBonus(i) != 0) {
+                out = RogueRelicsAppend(sWork->text, sBuildNames[i]);
+                *out++ = ' ';
+                *out++ = '+';
+                out = RogueRelicsNumber(out, RogueBuildBonus(i));
+                *out++ = '%';
+                *out = 0;
+                RogueRelicsLine(sWork->text);
+            }
+        }
+
+        if (sWork->lineCount == first) {
+            RogueRelicsLine(sNoBuild);
+        }
+    } else {
+        RogueRelicsLine(sTitleRelics);
+        first = sWork->lineCount;
+
+        for (i = 0; i < ROGUE_RELICS; i++) {
+            if (RogueHasRelic(i)) {
+                RogueRelicsLine(sNames[i]);
+            }
+        }
+
+        if (sWork->lineCount == first) {
+            RogueRelicsLine(sNone);
+        }
+    }
 }
 
 static void RogueRelics_Init(s32 arg) {
-    u8* out;
-    u8 relic;
-    u8 relics;
+    s32 i;
 
     sWork = EwramAlloc(sizeof(RogueRelicsWork));
     sWork->state = 0;
-    sWork->lineCount = 0;
+    sWork->page = 0;
     SetBgMode0();
     SetupBg(3, 0, 0x1D, 0);
     SetBgPriority(3, 3);
@@ -161,51 +241,13 @@ static void RogueRelics_Init(s32 arg) {
     LoadBgMap(3, gUnk_09848198, 0x500);
     sWork->palette = _08066468(1);
     sWork->titlePalette = _08066468(0);
-    RogueRelicsLine(sTitle);
-    out = RogueRelicsAppend(sWork->text, sFloor);
-    *out++ = '0' + (gRogue.floor + 1) / 10;
-    *out++ = '0' + (gRogue.floor + 1) % 10;
-    out = RogueRelicsAppend(out, sCombo);
-    *out++ = '0' + gRogue.comboPlus;
-    out = RogueRelicsAppend(out, sJumps);
-    *out++ = '0' + gRogue.airJumps;
-    *out = 0;
-    RogueRelicsLine(sWork->text);
-    out = RogueRelicsAppend(sWork->text, sCards);
-    *out++ = '0' + RogueCountCards(2) / 10;
-    *out++ = '0' + RogueCountCards(2) % 10;
-    out = RogueRelicsAppend(out, sCards3);
-    *out++ = '0' + RogueCountCards(3) / 10;
-    *out++ = '0' + RogueCountCards(3) % 10;
-    *out = 0;
-    RogueRelicsLine(sWork->text);
+
+    for (i = 0; i < PAGE_LINES; i++) {
+        InitTextSlots(sWork->lines[i], LINE_SLOTS);
+    }
 
     RogueCountBuild();
-
-    if (RogueBuildElement() != ROGUE_ELEMENT_NONE) {
-        out = RogueRelicsAppend(sWork->text, sBuild);
-        out = RogueRelicsAppend(out, sBuildNames[RogueBuildElement()]);
-        *out++ = ' ';
-        *out++ = '+';
-        *out++ = '0' + RogueBuildBonus() / 10;
-        *out++ = '0' + RogueBuildBonus() % 10;
-        *out++ = '%';
-        *out = 0;
-        RogueRelicsLine(sWork->text);
-    }
-
-    relics = sWork->lineCount;
-
-    for (relic = 0; relic < ROGUE_RELICS; relic++) {
-        if (RogueHasRelic(relic)) {
-            RogueRelicsLine(sNames[relic]);
-        }
-    }
-
-    if (sWork->lineCount == relics) {
-        RogueRelicsLine(sNone);
-    }
-
+    RogueRelicsShowPage();
     FadeStartIn(0, 16);
 }
 
@@ -219,7 +261,11 @@ static void RogueRelics_Update(void) {
         }
         break;
     case 1:
-        if (GetKeysPressed() & (A_BUTTON | B_BUTTON)) {
+        if (GetKeysPressed() & A_BUTTON) {
+            m4aSongNumStart(SONG_SYS_CLICK);
+            sWork->page ^= 1;
+            RogueRelicsShowPage();
+        } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             FadeStartOut(0, 16);
             sWork->state = 2;
@@ -234,7 +280,7 @@ static void RogueRelics_Update(void) {
     }
 
     for (i = 0; i < sWork->lineCount; i++) {
-        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 8 : 12 + i * 13,
+        DrawTextSlots((240 - GetTextSlotsWidth(sWork->lines[i], sWork->counts[i])) / 2, i == 0 ? 8 : 14 + i * 15,
                       sWork->lines[i], i == 0 ? sWork->titlePalette : sWork->palette, 50, sWork->counts[i]);
     }
 }
@@ -242,7 +288,7 @@ static void RogueRelics_Update(void) {
 static void RogueRelics_Exit(void) {
     s32 i;
 
-    for (i = 0; i < sWork->lineCount; i++) {
+    for (i = 0; i < PAGE_LINES; i++) {
         FreeTextSlots(sWork->lines[i], LINE_SLOTS);
     }
 

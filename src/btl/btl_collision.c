@@ -689,13 +689,18 @@ s32 func_08011398(BtlObj* hit, s32 index) {
         }
     }
     if (source == gBtlWork->actor) {
-        target->unk_020 = RogueElementDamage(target->unk_020, attack->flags);
+        target->unk_020 = RogueBuildDamage(target->unk_020, index, attack->flags);
     }
 
     target->flags |= 2;
     gBtlWork->unk_076 = (u8)attack->unk_0C;
     target->unk_0A8 = attack->unk_04;
     target->unk_0AC = attack->unk_08;
+
+    if (source == gBtlWork->actor) {
+        RogueOnKnockback(target);
+    }
+
     if (attack->flags & 0x800000) {
         if (source->flags & 4) target->angle = 192;
         else target->angle = 64;

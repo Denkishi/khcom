@@ -2083,6 +2083,8 @@ void func_0807B378(CardBattleWork* w) {
     if (*c > ROGUE_RELOAD_STEPS_MAX) {
         *c = ROGUE_RELOAD_STEPS_MAX;
     }
+
+    RogueOnReload();
 }
 
 void func_0807B3C4(void) {

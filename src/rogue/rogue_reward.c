@@ -677,6 +677,7 @@ static void RogueShowChoice(void) {
 static void RogueOfferRewards(void) {
     s32 i;
 
+    RogueCountBuild();
     RogueRollRewards();
 
     for (i = 0; i < REWARD_CHOICES; i++) {

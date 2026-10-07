@@ -1,0 +1,14 @@
+# A combo finisher launches the enemy it hits. Reads the height of the enemy
+# for a second and a half after a plain swing made a finisher.
+# Expect: the lowest z printed is far below 0 (about -22000); without the
+# poke it stays 0.
+include battle.txt
+poke8 @gRogue.finisher 1
+debug attack 12
+wait 20
+peek32 @gRogueDebug.targetZ z_after_20
+wait 20
+peek32 @gRogueDebug.targetZ z_after_40
+wait 20
+peek32 @gRogueDebug.targetZ z_after_60
+peek16 @gRogueDebug.hits hits

@@ -129,6 +129,7 @@ s32 func_080ABA80(s32* out) {
     s32 j;
 #endif
 
+    RogueOnStockPlayed();
     arr = gUnk_09045188;
     flag = 0;
     memset(buf, 0, 6);

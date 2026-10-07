@@ -126,25 +126,33 @@ enum RogueRelic {
     ROGUE_RELIC_FIRE_BLADE,
     ROGUE_RELIC_ICE_BLADE,
     ROGUE_RELIC_THUNDER_BLADE,
+    ROGUE_RELIC_ARCANE_ECHO,
     ROGUE_RELICS
 };
 
-enum RogueElement {
+// Builds, see rogue_build.c. The first three are the elements.
+enum RogueBuild {
     ROGUE_ELEMENT_FIRE,
     ROGUE_ELEMENT_ICE,
     ROGUE_ELEMENT_THUNDER,
     ROGUE_ELEMENTS,
-    ROGUE_ELEMENT_NONE = ROGUE_ELEMENTS
+    ROGUE_ELEMENT_NONE = ROGUE_ELEMENTS,
+    ROGUE_BUILD_BLADE = ROGUE_ELEMENTS,
+    ROGUE_BUILD_SPELL,
+    ROGUE_BUILD_SUMMON,
+    ROGUE_BUILD_PROJECTILE,
+    ROGUE_BUILDS
 };
+
+#define ROGUE_NO_KIND 0xFF
+// Upward speed a combo finisher gives the enemy it hits; a keyblade's own is 384.
+#define ROGUE_LAUNCH 560
 
 // Arts: card kinds that can have a sleight bound, and the value a card needs
 // to perform it alone.
 #define ROGUE_ART_KINDS 24
 #define ROGUE_ART_MIN_VALUE 5
 
-// A build needs three cards of its element and counts up to ten of them.
-#define ROGUE_BUILD_MIN 3
-#define ROGUE_BUILD_MAX 10
 // Frames between a keyblade hit and the magic hit of an infused blade.
 #define ROGUE_INFUSION_DELAY 7
 // Frames it then waits for the enemy to be hittable again.
@@ -212,6 +220,8 @@ enum {
 };
 
 struct FldObj;
+struct BtlObj;
+struct CardDef;
 
 typedef struct RogueRun {
     u32 seed;
@@ -238,7 +248,12 @@ typedef struct RogueRun {
     u8 event; // who is in this event room
     u8 eventDone; // set once they have made their offer
     u8 duel; // set while the battle is a duel picked in an event
-    u8 build[3]; // cards of each RogueElement in the deck, see RogueCountBuild
+    u8 build[ROGUE_BUILDS]; // points of each build, see RogueCountBuild
+    u8 playedKind; // kind of the card played alone, ROGUE_NO_KIND otherwise
+    u8 projectile; // set while a thrown thing or an added hit tests its hitbox
+    u8 echoing; // set while an added hit lands, so that it adds none itself
+    u8 finisher; // set while a combo finisher tests its hitbox
+    u32 artsUsed; // one bit for each card kind whose art was used this reload
     u8 arts[ROGUE_ART_KINDS]; // sleight bound to each card kind, 0 for none
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
@@ -253,7 +268,8 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_FLOOR, // arg: floor the run is on
     ROGUE_DEBUG_WIN, // win the battle
     ROGUE_DEBUG_HURT, // arg: damage Sora takes
-    ROGUE_DEBUG_HIT // arg: damage the locked-on enemy takes
+    ROGUE_DEBUG_HIT, // arg: damage the locked-on enemy takes
+    ROGUE_DEBUG_ATTACK // arg: attack definition Sora lands on the locked-on enemy
 };
 
 typedef struct RogueDebug {
@@ -265,7 +281,7 @@ typedef struct RogueDebug {
     s16 soraHp;
     s16 targetHp;
     s32 soraZ;
-    s32 targetZ;
+    s32 targetZ; // height of the enemy Sora hit last
     u16 lastDamage; // the last damage an enemy took
     u16 hits; // times an enemy took damage this battle
     u16 knives; // projectiles the knife relic threw this battle
@@ -308,10 +324,14 @@ u8 RogueHasRelic(u8 relic);
 u8 RogueCardElement(u16 id);
 void RogueCountBuild(void);
 u8 RogueBuildElement(void);
-u8 RogueBuildBonus(void);
-s32 RogueElementDamage(s32 damage, u32 attackFlags);
+u8 RogueBuildBonus(u8 build);
+s32 RogueBuildDamage(s32 damage, u16 attack, u32 attackFlags);
+u8 RogueBuildPoolBias(u8 pool);
 u16 RogueBuildSpell(void);
-void RogueOnKeybladeHit(s32 x, s32 y, s32 z);
+void RogueOnKeybladeHit(s32 x, s32 y, s32 z, u8 finisher);
+void RogueOnStockPlayed(void);
+void RogueOnReload(void);
+void RogueOnKnockback(struct BtlObj* target);
 u8 RogueRollArt(u16 kind);
 struct CardDef;
 s32 RogueCardAction(const struct CardDef* def);

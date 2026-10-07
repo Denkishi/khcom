@@ -1,0 +1,27 @@
+# Build bonuses on one of Sora's keyblade swings (attack 12) and on Fire (66).
+# Expect: base_swing 10; blade build of 16 points adds 32% (13); a finisher
+# launches the enemy (finisher_min_z well below the plain swing's); Fire with
+# a fire build of 10 does 40% more than without.
+include battle.txt
+debug attack 12
+wait 50
+peek16 @gRogueDebug.lastDamage base_swing
+poke16 @gRogue.combo 0
+wait 80
+poke8 @gRogue.build+3 16
+poke8 @gRogue.playedKind 0
+debug attack 12
+wait 50
+peek16 @gRogueDebug.lastDamage blade_build_swing
+poke8 @gRogue.build+3 0
+poke16 @gRogue.combo 0
+wait 80
+debug attack 66
+wait 50
+peek16 @gRogueDebug.lastDamage fire_plain
+poke16 @gRogue.combo 0
+wait 80
+poke8 @gRogue.build 10
+debug attack 66
+wait 50
+peek16 @gRogueDebug.lastDamage fire_build

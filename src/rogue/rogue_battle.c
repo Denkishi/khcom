@@ -18,10 +18,14 @@
 // What the mod adds on top of a battle: the hit counter and its damage
 // bonus, hitstop, and the jump buffer.
 
+// The enemy Sora hit last, for the tests to follow after the lock-on drops it.
+static BtlObj* sLastHit;
+
 // Runs a pending test command and refreshes what the tests read back.
 void RogueDebugBattle(void) {
     BtlObj* sora = gBtlWork->actor;
     BtlObj* target = gBtlWork->actor2;
+    u64 flags;
 
     if (sora != 0) {
         gRogueDebug.soraHp = sora->unk_02C;
@@ -29,7 +33,7 @@ void RogueDebugBattle(void) {
     }
 
     gRogueDebug.targetHp = target != 0 ? target->unk_02C : -1;
-    gRogueDebug.targetZ = target != 0 ? target->z : 0;
+    gRogueDebug.targetZ = sLastHit != 0 ? sLastHit->z : 0;
 
     switch (gRogueDebug.command) {
     case ROGUE_DEBUG_WIN:
@@ -49,6 +53,15 @@ void RogueDebugBattle(void) {
         break;
     case ROGUE_DEBUG_RELIC:
         gRogue.relics |= 1 << gRogueDebug.arg;
+        break;
+    case ROGUE_DEBUG_ATTACK:
+        // Goes through the whole damage calculation, as a hit of Sora's.
+        if (target != 0) {
+            flags = gBtlWork->flags;
+            gBtlWork->flags |= 0x20000000;
+            func_08011F78(gRogueDebug.arg, target->x, target->y, target->z, 24, 16, 32);
+            gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
+        }
         break;
     default:
         return;
@@ -106,6 +119,15 @@ void RogueOnDamage(BtlObj* p) {
     gRogue.comboTimer = ROGUE_COMBO_TIME;
     gRogueDebug.lastDamage = p->unk_020;
     gRogueDebug.hits++;
+    sLastHit = p;
+}
+
+// Called once the knockback of one of Sora's hits is set: a combo finisher
+// sends the enemy up, so that the combo can go on in the air.
+void RogueOnKnockback(BtlObj* target) {
+    if (gRogue.finisher && target->unk_0AC < ROGUE_LAUNCH) {
+        target->unk_0AC = ROGUE_LAUNCH;
+    }
 }
 
 u8 RogueReloadRate(u8 slowed) {
@@ -190,7 +212,9 @@ static s32 RogueKnife_Update(RogueKnifeWork* w) {
     } else {
         flags = gBtlWork->flags;
         gBtlWork->flags |= 0x20000000;
+        gRogue.projectile = 1;
         hit = func_08011F78(KNIFE_ATTACK, w->x, w->y, w->z, 1, 6, 2);
+        gRogue.projectile = 0;
         gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
 
         if (hit) {
@@ -244,6 +268,7 @@ static TaskDesc sTaskDescRogueKnife = {
 
 void RogueOnFinisher(BtlObj* sora) {
     RogueKnifeArgs args;
+    s32 count;
     s32 i;
 
     if (!RogueHasRelic(ROGUE_RELIC_KNIVES)) {
@@ -252,7 +277,10 @@ void RogueOnFinisher(BtlObj* sora) {
 
     m4aSongNumStart(SONG_EF_RAC_3TR);
 
-    for (i = 0; i < KNIFE_COUNT; i++) {
+    // A projectile build throws five knives instead of three.
+    count = RogueBuildBonus(ROGUE_BUILD_PROJECTILE) != 0 ? KNIFE_COUNT + 2 : KNIFE_COUNT;
+
+    for (i = 0; i < count; i++) {
         // The check counts 8x8 tiles, the size above is in bytes.
         if (!CanAllocObjTiles(KNIFE_TILES / 32)) {
             return;
@@ -260,7 +288,7 @@ void RogueOnFinisher(BtlObj* sora) {
 
         args.left = (sora->flags & 4) != 0;
         args.x = sora->x + (args.left ? -0x1800 : 0x1800);
-        args.y = sora->y + (i - 1) * 0x0A00;
+        args.y = sora->y + (i - count / 2) * 0x0A00;
         args.z = sora->z - 0x1400;
         TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueKnife, &args);
         gRogueDebug.knives++;
@@ -281,8 +309,14 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.comboTimer = 0;
     gRogue.jumpBuffer = 0;
     gRogue.secondWindUsed = 0;
+    gRogue.playedKind = ROGUE_NO_KIND;
+    gRogue.projectile = 0;
+    gRogue.echoing = 0;
+    gRogue.finisher = 0;
+    gRogue.artsUsed = 0;
     RogueCountBuild();
     gRogueDebug.hits = 0;
+    sLastHit = 0;
     gRogueDebug.knives = 0;
     gRogueDebug.echoes = 0;
 }

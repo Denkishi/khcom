@@ -45,6 +45,10 @@ static const u8 sWorlds[] = {
 u32 RogueRand(void) {
     u32 x = gRogue.rng;
 
+    if (x == 0) {
+        x = 0x2545F491;
+    }
+
     x ^= x << 13;
     x ^= x >> 17;
     x ^= x << 5;
@@ -194,6 +198,7 @@ void RogueStartRun(void) {
     gRogue.world = sWorlds[RogueRandBelow((sizeof(sWorlds) / sizeof(sWorlds[0])))];
     func_0801CD20();
     gGameState.progression.unk_82 = 0xFFFF;
+    RogueLearnSleights();
     RogueEnterRoom(1);
 }
 

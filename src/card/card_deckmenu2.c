@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"
@@ -816,8 +817,7 @@ void func_08085C3C(void) {
         func_080AB334(1);
         func_080AB4AC(0);
     } else {
-        func_080AB880();
-        func_080AB8E4();
+        RogueBuildStartDeck();
         func_080AB964();
         func_080AB968();
     }

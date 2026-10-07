@@ -25,3 +25,9 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `second_wind.txt` | the survival relic |
 | `air_jump.txt` | the air jump |
 | `sleight.txt` | stocking three cards and playing them |
+| `tag.txt` | a tag character standing in for one move |
+| `new_cards.txt` | the cards from the custom sheets |
+| `effect_moves.txt` | the moves made from other characters' effects |
+| `hub_progress.txt` | meeting a character, its boon in the hub, the records page |
+| `mickey_boss.txt` | Mickey fighting with Leon's moves |
+| `mickey_hero.txt` | Mickey played in place of Sora, hub and battle |

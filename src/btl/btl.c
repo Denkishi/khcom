@@ -586,7 +586,7 @@ void SetBtlSoraAnimation(BtlSoraWork* work, u16 a, u16 b) {
         return;
     }
 
-    e = &gBtlSoraAnimDefs[a];
+    e = RogueHeroAnim(a);
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
@@ -622,7 +622,7 @@ void func_0801DE1C(BtlSoraWork* work, u16 a, u16 b) {
         idx = 4;
         break;
     }
-    e = &gUnk_0813BEFC[a][idx];
+    e = RogueHeroDirection(a, idx);
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
@@ -631,9 +631,9 @@ void func_0801DEB8(BtlSoraWork* work) {
     work->tiles = work->actor.btl->tiles;
 
     if (work->unk_172 != 0) {
-        work->palette = LoadObjPalette(gSoraPalette, 0x20);
+        work->palette = LoadObjPalette(RogueHeroPalette(gSoraPalette), 0x20);
     } else {
-        work->palette = LoadObjPalette(gUnk_096FAC64, 0x20);
+        work->palette = LoadObjPalette(RogueHeroPalette(gUnk_096FAC64), 0x20);
     }
 }
 
@@ -6409,9 +6409,9 @@ void task_btl_sora_2(BtlSoraWork* work) {
         work->unk_15A = t;
 
         if (work->unk_172 != 0) {
-            LoadObjPaletteBank(work->palette->index, gSoraPalette);
+            LoadObjPaletteBank(work->palette->index, RogueHeroPalette(gSoraPalette));
         } else {
-            LoadObjPaletteBank(work->palette->index, gUnk_096FAC64);
+            LoadObjPaletteBank(work->palette->index, RogueHeroPalette(gUnk_096FAC64));
         }
     }
 #ifdef VERSION_EU
@@ -10941,7 +10941,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
         if (work->unk_178 != 0) {
             LoadObjPaletteBank(work->palette->index, work->unk_1AC);
         } else {
-            LoadObjPaletteBank(work->palette->index, gUnk_096FAC64);
+            LoadObjPaletteBank(work->palette->index, RogueHeroPalette(gUnk_096FAC64));
         }
     }
     DrawSprite(x, y, work->gfx, work->tiles2, work->palette, affine, attr, attr2);

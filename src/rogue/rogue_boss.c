@@ -37,3 +37,46 @@ const HumDef* RogueLeonDef(void) {
 
     return &gHumLeonDef;
 }
+
+// The heroes. Each plays exactly as Sora does: for every animation of his
+// there is one of theirs with the same frames, so only the pictures change.
+
+extern const AnimDef gBtlSoraAnimDefs[77];
+extern const AnimDef gRogueMickeyAnimDefs[77];
+extern const AnimDef gRogueMickeyDirectionDefs[30];
+extern const AnimDef gUnk_0813BEFC[6][5];
+
+u8 RogueHeroUnlocked(u8 hero) {
+    if (hero == ROGUE_HERO_MICKEY) {
+        return (gRogueMeta.flags & ROGUE_META_MICKEY) != 0;
+    }
+
+    return hero == ROGUE_HERO_SORA;
+}
+
+// One of the hero's battle animations, numbered as Sora's are.
+const AnimDef* RogueHeroAnim(u16 anim) {
+    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+        return &gRogueMickeyAnimDefs[anim];
+    }
+
+    return &gBtlSoraAnimDefs[anim];
+}
+
+// The same for running and jumping, which Sora has in five directions.
+const AnimDef* RogueHeroDirection(u16 action, u16 direction) {
+    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+        return &gRogueMickeyDirectionDefs[action * 5 + direction];
+    }
+
+    return &gUnk_0813BEFC[action][direction];
+}
+
+// The hero's palette, given the one Sora would have.
+void* RogueHeroPalette(void* sora) {
+    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+        return (void*)gRogueMickeyPalette;
+    }
+
+    return sora;
+}

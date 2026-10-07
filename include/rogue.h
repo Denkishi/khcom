@@ -65,10 +65,15 @@ typedef struct RogueMeta {
     u8 boonsWon; // one bit for each boon a run was completed with: it is stronger
     u8 oblivion; // difficulty level picked in the hub
     u8 oblivionMax; // highest level unlocked
-    u8 unused[4];
+    u8 hero; // the RogueHero picked in the hub
+    u8 unused[3];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
+#define ROGUE_META_MICKEY 4 // Mickey was beaten as a boss: he can be played
+
+// Who the player fights as. All of them play as Sora does, drawn as themselves.
+enum RogueHero { ROGUE_HERO_SORA, ROGUE_HERO_MICKEY, ROGUE_HEROES };
 
 // What the characters in the hub offer for the next run; one at a time.
 enum RogueBoon {
@@ -235,6 +240,8 @@ enum RogueMove {
 };
 
 // How far a thrown move flies each frame.
+#define ROGUE_DAMAGE_NUMBERS 6 // shown at once
+#define ROGUE_DAMAGE_NUMBER_TIME 36 // frames each stays
 #define ROGUE_MOVE_SPEED 0xA00
 #define ROGUE_MOVE_POSE 22 // frames Sora holds his casting pose for a move
 
@@ -435,6 +442,11 @@ struct AnimDef;
 struct HumDef;
 const struct AnimDef* RogueLeonAnim(u16 slot);
 const struct HumDef* RogueLeonDef(void);
+const struct AnimDef* RogueHeroAnim(u16 anim);
+const struct AnimDef* RogueHeroDirection(u16 action, u16 direction);
+void* RogueHeroPalette(void* sora);
+u8 RogueHeroUnlocked(u8 hero);
+extern const u16 gRogueMickeyPalette[16];
 u8 RogueHasRelic(u8 relic);
 u8 RogueCardElement(u16 id);
 void RogueCountBuild(void);

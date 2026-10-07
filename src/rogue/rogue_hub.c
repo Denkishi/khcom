@@ -88,7 +88,7 @@ typedef struct RogueHubWork {
     TextSlot hint[LINE_SLOTS];
     u8 lineCount;
     u8 hintCount;
-    u8 text[48];
+    u8 text[72];
     void* textPalette;
     void* hintPalette;
     void* soraTiles;
@@ -118,7 +118,10 @@ static RogueHubWork* sWork;
 static const u8 sHint[] = "START: inizia la run";
 static const u8 sBoon[] = "Dono: ";
 static const u8 sBoonNone[] = "nessuno";
+extern const AnimDef gRogueMickeyHubDefs[2];
+
 static const u8 sStrong[] = " +";
+static const u8 sHero[] = "  SELECT: eroe";
 static const u8 sOblivion[] = "  Oblio ";
 static const u8 sBoonBelle[] = "PV +30";
 static const u8 sBoonMoogle[] = "due rilanci";
@@ -158,13 +161,25 @@ static void RogueHubShowBoon(void) {
         *out++ = '0' + gRogueMeta.oblivion;
     }
 
+    if (RogueHeroUnlocked(ROGUE_HERO_MICKEY)) {
+        for (text = sHero; *text != 0; text++) {
+            *out++ = *text;
+        }
+    }
+
     *out = 0;
     FreeTextSlots(sWork->line, LINE_SLOTS);
     sWork->lineCount = LoadTextSlots((u16*)sWork->text, sWork->line);
 }
 
 static void RogueHubSoraAnim(u8 action, u8 direction) {
-    AnimChangeWithDef(gUnk_0813C89C[action], &sWork->soraAnim, direction, 1, sWork->soraTiles);
+    if (gRogueMeta.hero == ROGUE_HERO_MICKEY) {
+        // He has one way of standing and one of walking, turned as he goes.
+        AnimChangeWithDef(gRogueMickeyHubDefs, &sWork->soraAnim, action, 1, sWork->soraTiles);
+    } else {
+        AnimChangeWithDef(gUnk_0813C89C[action], &sWork->soraAnim, direction, 1, sWork->soraTiles);
+    }
+
     sWork->walking = action;
     sWork->direction = direction;
 }
@@ -198,7 +213,7 @@ static void RogueHub_Init(s32 arg) {
     RogueHubShowBoon();
 
     sWork->soraTiles = AllocObjTiles(0x500, 0);
-    sWork->soraPalette = LoadObjPalette(gSoraPalette, 32);
+    sWork->soraPalette = LoadObjPalette(RogueHeroPalette(gSoraPalette), 32);
     AnimInit(&sWork->soraAnim, 0, 0);
     RogueHubSoraAnim(ACTION_STAND, DIR_FRONT);
 
@@ -326,6 +341,13 @@ static void RogueHub_Update(void) {
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueMetaSave();
             RogueHubShowBoon();
+        } else if ((GetKeysPressed() & SELECT_BUTTON) && RogueHeroUnlocked(ROGUE_HERO_MICKEY)) {
+            // SELECT changes who fights.
+            gRogueMeta.hero = gRogueMeta.hero == ROGUE_HERO_SORA ? ROGUE_HERO_MICKEY : ROGUE_HERO_SORA;
+            m4aSongNumStart(SONG_SYS_KETTEI);
+            RogueMetaSave();
+            LoadObjPaletteBank(((ObjPalette*)sWork->soraPalette)->index, RogueHeroPalette(gSoraPalette));
+            RogueHubSoraAnim(ACTION_STAND, DIR_FRONT);
         } else if (GetKeysPressed() & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_START);
             sWork->next = HUB_NEXT_RUN;

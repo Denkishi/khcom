@@ -128,6 +128,11 @@ u8 RogueMoveUnlocked(u8 move) {
 
 // Beating a boss can unlock its move for later runs.
 void RogueOnBossBeaten(u16 battle) {
+    // Mickey, beaten, can be played: picked in the hub.
+    if (battle == 0x9D && gRogue.bossSkin == ROGUE_SKIN_MICKEY) {
+        gRogueMeta.flags |= ROGUE_META_MICKEY;
+    }
+
     if (battle == 0xA3 || battle == 0xAE) {
         gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_LARXENE;
     }

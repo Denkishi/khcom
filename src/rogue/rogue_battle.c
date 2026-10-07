@@ -84,6 +84,18 @@ void RogueDebugBattle(void) {
     gRogueDebug.command = ROGUE_DEBUG_NONE;
 }
 
+// The damage of Sora's last hits, shown where they landed.
+typedef struct RogueDamageNumber {
+    s32 x;
+    s32 y;
+    s32 z;
+    u16 value;
+    u8 timer; // frames left on the screen, 0 when not shown
+} RogueDamageNumber;
+
+static RogueDamageNumber sNumbers[ROGUE_DAMAGE_NUMBERS];
+static u8 sNextNumber;
+
 // Called when an actor is about to take the damage in unk_020.
 void RogueOnDamage(BtlObj* p) {
     BtlObj* sora = gBtlWork->actor;
@@ -134,6 +146,18 @@ void RogueOnDamage(BtlObj* p) {
     gRogueDebug.lastDamage = p->unk_020;
     gRogueDebug.hits++;
     sLastHit = p;
+
+    // The damage rises from the enemy as a number; the oldest makes room.
+    if (p->unk_020 > 0) {
+        RogueDamageNumber* number = &sNumbers[sNextNumber];
+
+        sNextNumber = (sNextNumber + 1) % ROGUE_DAMAGE_NUMBERS;
+        number->x = p->x;
+        number->y = p->y;
+        number->z = p->z;
+        number->value = p->unk_020 > 9999 ? 9999 : p->unk_020;
+        number->timer = ROGUE_DAMAGE_NUMBER_TIME;
+    }
 }
 
 // Called once the knockback of one of Sora's hits is set: a combo finisher
@@ -444,6 +468,8 @@ typedef struct RogueHudWork {
 static const u8 sHits[] = "HIT";
 
 static void RogueHud_Init(RogueHudWork* w) {
+    u32 i;
+
     w->tiles = LoadSmallFontTiles();
     w->palette = LoadSmallFontPalette();
     gRogue.combo = 0;
@@ -467,10 +493,23 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.tagTimer = 0;
     gRogue.pose = 0;
     gRogueDebug.echoes = 0;
+    sNextNumber = 0;
+
+    for (i = 0; i < ROGUE_DAMAGE_NUMBERS; i++) {
+        sNumbers[i].timer = 0;
+    }
 }
 
 static s32 RogueHud_Update(RogueHudWork* w) {
+    u32 i;
+
     RogueDebugBattle();
+
+    for (i = 0; i < ROGUE_DAMAGE_NUMBERS; i++) {
+        if (sNumbers[i].timer != 0) {
+            sNumbers[i].timer--;
+        }
+    }
 
     if (gRogue.comboTimer != 0) {
         gRogue.comboTimer--;
@@ -487,6 +526,25 @@ static void RogueHud_Draw(RogueHudWork* w) {
     u16 text[8];
     u16 digits;
     s16 x;
+    s16 y;
+    u32 i;
+
+    // The numbers rise as they age, from above the enemy's head.
+    for (i = 0; i < ROGUE_DAMAGE_NUMBERS; i++) {
+        const RogueDamageNumber* number = &sNumbers[i];
+
+        if (number->timer == 0) {
+            continue;
+        }
+
+        WorldToScreen(&x, &y, number->x, number->y, number->z);
+        digits = FormatSmallFontDecimal(number->value, text);
+        y -= 40 + (ROGUE_DAMAGE_NUMBER_TIME - number->timer) / 2;
+
+        if (y >= 8 && x >= digits * 4 && x <= 240 - digits * 4) {
+            DrawSmallFontString(x - digits * 4, y, text, w->tiles, w->palette, 0, digits);
+        }
+    }
 
     if (gRogue.combo < 2) {
         return;

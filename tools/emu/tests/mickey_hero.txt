@@ -1,0 +1,39 @@
+# Mickey as the hero: picked with SELECT in the hub once he is unlocked, then
+# a battle played as him.
+# Expect: Mickey stands in the hub and in the battle, runs, swings his
+# keyblade and casts; hero reads 1 and the frame counter keeps running.
+wait 600
+press START
+wait 120
+poke8 @gRogueMeta.flags 7
+press SELECT
+wait 30
+shot /tmp/mickey_hub.ppm
+hold LEFT 20
+shot /tmp/mickey_hub_walk.ppm
+press START
+wait 200
+hold B 100
+wait 20
+peek8 @gRogueMeta.hero hero
+debug battle 0
+wait 400
+shot /tmp/mickey_idle.ppm
+hold RIGHT 14
+shot /tmp/mickey_run.ppm
+press A
+wait 8
+shot /tmp/mickey_swing1.ppm
+wait 8
+shot /tmp/mickey_swing2.ppm
+wait 40
+press B
+wait 12
+shot /tmp/mickey_jump.ppm
+wait 60
+debug move 0
+wait 10
+shot /tmp/mickey_cast.ppm
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

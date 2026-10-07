@@ -56,6 +56,13 @@ typedef struct RogueMeta {
 #define ROGUE_COMBO_PLUS_MAX 4
 #define ROGUE_AIR_JUMPS_MAX 2
 #define ROGUE_AP_MAX 20
+// Frames the battle freezes on a hit, and a jump press stays valid.
+#define ROGUE_HITSTOP 2
+#define ROGUE_JUMP_BUFFER 6
+// The hit counter: frames it lasts without a new hit, and hits that count
+// towards its damage bonus of 2% each.
+#define ROGUE_COMBO_TIME 150
+#define ROGUE_COMBO_BONUS_HITS 15
 
 // Cards level up by winning battles in the deck; two level 3 cards can fuse.
 #define ROGUE_CARD_SLOTS 160
@@ -162,6 +169,9 @@ typedef struct RogueRun {
     u8 chapters; // chapters this run goes through
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
     u16 shards; // earned this run, banked when it ends
+    u16 combo; // hits landed without being hit
+    u8 comboTimer; // frames until the hit count lapses
+    u8 jumpBuffer;
     u8 event; // who is in this event room
     u8 eventDone; // set once they have made their offer
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
@@ -216,6 +226,10 @@ u8 RogueRollFusion(u8* posA, u8* posB, u16* result);
 void RogueFuse(u8 posA, u8 posB, u16 result);
 u8 RogueTryAirJump(void);
 void RogueResetAirJumps(void);
+struct BtlObj;
+void RogueOnDamage(struct BtlObj* p);
+u16 RogueBufferJump(u16 pressed);
+extern struct TaskDesc gTaskDescRogueHud;
 u8* RogueRoomLinks(void);
 u16 RogueDoorFlags(u8 door);
 void RogueSpawnRoomActors(void);

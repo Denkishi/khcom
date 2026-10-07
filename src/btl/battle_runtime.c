@@ -1006,6 +1006,7 @@ s32 func_0801A978(BtlObj* p) {
 
     if (p->flags & 2) {
         p->flags &= ~3;
+        RogueOnDamage(p);
         p->unk_02C -= p->unk_020;
 
         if (p->unk_02C < 0) {
@@ -1013,6 +1014,11 @@ s32 func_0801A978(BtlObj* p) {
         }
         p->flags &= ~1;
         gBtlWork->unk_072 = gBtlWork->unk_076;
+
+        // Every hit freezes the action for a moment.
+        if (gBtlWork->unk_072 < ROGUE_HITSTOP) {
+            gBtlWork->unk_072 = ROGUE_HITSTOP;
+        }
         p->flags |= 0x2280;
         p->unk_106 = 0;
 

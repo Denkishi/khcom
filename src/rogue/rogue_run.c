@@ -344,11 +344,13 @@ u8 RogueTryAirJump(void) {
     }
 
     gRogue.airJumpsUsed++;
+    gRogue.jumpBuffer = 0;
     return 1;
 }
 
 void RogueResetAirJumps(void) {
     gRogue.airJumpsUsed = 0;
+    gRogue.jumpBuffer = 0;
 }
 
 // Hits in the attack combo, the last of which is the finisher.

@@ -6,6 +6,7 @@ new rogue_axel.c
 new rogue_event.c
 new rogue_deck.c
 new rogue_balance.c
+new rogue_battle.c
 new rogue_reward.c
 new rogue_over.c
 new rogue_meta.c
@@ -22,3 +23,4 @@ moved btl.c
 moved card_deckmenu2.c
 moved battle_runtime.c
 moved map_tasks.c
+moved mode_battle.c

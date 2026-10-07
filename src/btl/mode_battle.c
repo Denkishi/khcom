@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "mode_battle_api.h"
 #include "mode_battle_data.h"
 #include "mode_battle.h"
@@ -350,7 +351,7 @@ void mode_battle_0(u32 mode) {
 
     TaskPoolInit(&gBtlWork->taskPools[0], 40);
     TaskPoolInit(&gBtlWork->taskPools[1], 32);
-    TaskPoolInit(&gBtlWork->taskPools[2], 1);
+    TaskPoolInit(&gBtlWork->taskPools[2], 2);
     BgFxInit(0x80, gBtlWork->bg);
     ColliderPoolsInit();
 
@@ -506,6 +507,7 @@ void mode_battle_0(u32 mode) {
 
     if (!(gBtlWork->flags & 0x800000000)) {
         TaskCreate(&gBtlWork->taskPools[2], &gTaskDescBtlPause, 0);
+        TaskCreate(&gBtlWork->taskPools[2], &gTaskDescRogueHud, 0);
     }
 
     FadeStartIn(0, 60);

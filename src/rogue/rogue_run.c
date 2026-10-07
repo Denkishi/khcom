@@ -262,6 +262,7 @@ void RogueNextFloor(void) {
 // A won battle leads to the reward screen, which then goes back to the room
 // or, after a boss, on to the next floor.
 u8 RogueOnBattleEnd(void) {
+    RogueGainCardXp();
     ModeRequest(&gModeRogueReward, gRogue.kind == ROGUE_ROOM_BOSS);
     return 1;
 }

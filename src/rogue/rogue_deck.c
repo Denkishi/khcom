@@ -1,5 +1,6 @@
 #include "rogue.h"
 #include "card.h"
+#include "card_deck.h"
 #include "card_def_data.h"
 #include "card_ids.h"
 #include "card_types.h"
@@ -120,6 +121,10 @@ void RogueBuildStartDeck(void) {
     sDeckCards = 0;
     sDeckEnemyCards = 0;
 
+    for (tries = 0; tries < ROGUE_CARD_SLOTS; tries++) {
+        gRogue.cardXp[tries] = 0;
+    }
+
     // A cure and a zero come first, so the budget cannot run out before them.
     RogueAddCard(CARD_ID(CARD_CURE, 3 + RogueRandBelow(6)), budget);
     RogueAddCard(CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(4), 0), budget);
@@ -152,4 +157,192 @@ void RogueLearnSleights(void) {
     for (i = FIRST_SLEIGHT; i < SLEIGHT_COUNT; i++) {
         func_0800FB2C(i);
     }
+}
+
+// Adds a card won during the run. It joins the deck if it fits the CP limit,
+// otherwise it waits in the collection.
+void RogueGiveCard(u16 id) {
+    s16 slot = AddCardToCollection(id);
+
+    if (slot == -1) {
+        return;
+    }
+
+    if (slot < ROGUE_CARD_SLOTS) {
+        gRogue.cardXp[slot] = 0;
+    }
+
+    if (GetDeckCpCost(GetActiveDeckIndex()) + GetCardCpCost(id) <= gGameState.progression.cp) {
+        AddCardToActiveDeck(slot);
+    }
+}
+
+u8 RogueCardLevel(u16 slot) {
+    if (slot >= ROGUE_CARD_SLOTS || gRogue.cardXp[slot] < ROGUE_CARD_XP_LEVEL_2) {
+        return 1;
+    }
+
+    if (gRogue.cardXp[slot] < ROGUE_CARD_XP_LEVEL_3) {
+        return 2;
+    }
+
+    return ROGUE_CARD_LEVEL_MAX;
+}
+
+// Every card in the deck gains experience from a won battle.
+void RogueGainCardXp(void) {
+    Deck* deck = GetActiveDeck();
+    u16 slot;
+    s32 i;
+
+    for (i = 0; i < DECK_SIZE; i++) {
+        slot = deck->cards[i];
+
+        if (slot < ROGUE_CARD_SLOTS && gRogue.cardXp[slot] < ROGUE_CARD_XP_LEVEL_3) {
+            gRogue.cardXp[slot]++;
+        }
+    }
+}
+
+enum {
+    FUSE_ATTACK,
+    FUSE_MAGIC,
+    FUSE_ITEM,
+};
+
+static u8 RogueFuseClass(u16 id) {
+    u16 kind = id / 10;
+
+    if (kind <= CARD_ULTIMA_WEAPON) {
+        return FUSE_ATTACK;
+    }
+
+    if (kind >= CARD_POTION) {
+        return FUSE_ITEM;
+    }
+
+    return FUSE_MAGIC;
+}
+
+// What two cards fuse into: always a stronger kind, one value above the
+// better of the two. Two keyblades make a later keyblade, two spells a
+// summon, an item with anything a better item, and a keyblade with a spell
+// one of the last five keyblades.
+static u16 RogueFusionResult(u16 a, u16 b) {
+    u8 classA = RogueFuseClass(a);
+    u8 classB = RogueFuseClass(b);
+    u16 kindA = a / 10;
+    u16 kindB = b / 10;
+    u16 kind;
+    u16 value = a % 10 > b % 10 ? a % 10 : b % 10;
+
+    if (value < 9) {
+        value++;
+    }
+
+    if (classA == FUSE_ITEM || classB == FUSE_ITEM) {
+        kind = CARD_POTION + 2;
+
+        if (classA == FUSE_ITEM && kindA + 2 > kind) {
+            kind = kindA + 2;
+        }
+
+        if (classB == FUSE_ITEM && kindB + 2 > kind) {
+            kind = kindB + 2;
+        }
+
+        if (kind > CARD_MEGALIXIR) {
+            kind = CARD_MEGALIXIR;
+        }
+    } else if (classA == FUSE_ATTACK && classB == FUSE_ATTACK) {
+        kind = (kindA > kindB ? kindA : kindB) + 1 + RogueRandBelow(3);
+
+        if (kind > CARD_ULTIMA_WEAPON) {
+            kind = CARD_ULTIMA_WEAPON;
+        }
+    } else if (classA == FUSE_MAGIC && classB == FUSE_MAGIC) {
+        kind = CARD_SIMBA + RogueRandBelow(CARD_THE_BEAST - CARD_SIMBA + 1);
+    } else {
+        kind = CARD_OATHKEEPER + RogueRandBelow(CARD_ULTIMA_WEAPON - CARD_OATHKEEPER + 1);
+    }
+
+    return CARD_ID(kind, value);
+}
+
+// Looks for two level 3 cards in the deck to fuse. Fills in their deck
+// positions and the card they make.
+u8 RogueRollFusion(u8* posA, u8* posB, u16* result) {
+    Deck* deck = GetActiveDeck();
+    u8 ready[DECK_SIZE];
+    u16 slot;
+    u16 id;
+    s32 count = 0;
+    s32 i;
+    s32 a;
+    s32 b;
+
+    for (i = 0; i < DECK_SIZE; i++) {
+        slot = deck->cards[i];
+
+        if (slot == 0xFFFF || RogueCardLevel(slot) < ROGUE_CARD_LEVEL_MAX) {
+            continue;
+        }
+
+        id = gCardCollection[slot] & CARD_ID_MASK;
+
+        if (gCardDefs[id].unk_2A != 3 && id < CARD_ID(CARD_MEGALIXIR + 1, 0)) {
+            ready[count++] = i;
+        }
+    }
+
+    if (count < 2) {
+        return 0;
+    }
+
+    a = RogueRandBelow(count);
+    b = RogueRandBelow(count - 1);
+
+    if (b >= a) {
+        b++;
+    }
+
+    *posA = ready[a];
+    *posB = ready[b];
+    *result = RogueFusionResult(gCardCollection[deck->cards[ready[a]]] & CARD_ID_MASK,
+                                gCardCollection[deck->cards[ready[b]]] & CARD_ID_MASK);
+    return 1;
+}
+
+// Consumes the two cards and adds what they make. The CP limit grows if the
+// new card costs more than the two did, so the fusion always fits.
+void RogueFuse(u8 posA, u8 posB, u16 result) {
+    Deck* deck = GetActiveDeck();
+    u16 slotA = deck->cards[posA];
+    u16 slotB = deck->cards[posB];
+    u16 freed = GetCardCpCost(gCardCollection[slotA]) + GetCardCpCost(gCardCollection[slotB]);
+    u16 cost = GetCardCpCost(result);
+    s32 count;
+    s32 i;
+
+    RemoveCardFromActiveDeck(posA);
+    RemoveCardFromActiveDeck(posB);
+    gCardCollection[slotA] = CARD_ID_MASK;
+    gCardCollection[slotB] = CARD_ID_MASK;
+
+    // The deck is read up to its first empty position, so close the gaps.
+    for (i = 0, count = 0; i < DECK_SIZE; i++) {
+        if (deck->cards[i] != 0xFFFF) {
+            deck->cards[count++] = deck->cards[i];
+        }
+    }
+
+    while (count < DECK_SIZE) {
+        deck->cards[count++] = 0xFFFF;
+    }
+
+    if (cost > freed) {
+        gGameState.progression.cp += cost - freed;
+    }
+
+    RogueGiveCard(result);
 }

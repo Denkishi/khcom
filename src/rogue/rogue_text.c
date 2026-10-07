@@ -13,9 +13,11 @@ ROGUE_TEXT(sAxel2, "Ogni porta d\xE0 su una stanza\x1F" "diversa. In fondo al pi
 ROGUE_TEXT(sAxel3, "Le porte restano chiuse\x1F" "finch\xE9 non vinci. Poi scegli\x1Funa \x1Dricompensa\x1E su tre.");
 ROGUE_TEXT(sAxel4, "Il tuo \x1Dmazzo\x1E \xE8 pescato a\x1F" "caso a ogni run. Guardalo\x1F" "dal menu prima di partire.");
 ROGUE_TEXT(sAxel5, "Le \x1Dtecniche\x1E le conosci gi\xE0\x1Ftutte, e non ti tolgono pi\xF9\x1Fla prima carta.");
-ROGUE_TEXT(sAxel6, "I colpi si concatenano pi\xF9\x1Fin fretta. Con \x1D" "Combo+\x1E la\x1F" "combo si allunga.");
-ROGUE_TEXT(sAxel7, "Pi\xF9 vai avanti, pi\xF9 picchiano.\x1FSe cadi, la run finisce e\x1Fsi ricomincia da capo.");
-ROGUE_TEXT(sAxel8, "Got it memorized?");
+ROGUE_TEXT(sAxel6, "I colpi sono pi\xF9 rapidi e\x1F" "dopo ognuno puoi saltare,\x1Fschivare o muoverti subito.");
+ROGUE_TEXT(sAxel7, "In aria i colpi ti tengono\x1Fsu. Con \x1D" "Combo+\x1E la combo\x1Fsi allunga.");
+ROGUE_TEXT(sAxel8, "Le carte nel mazzo salgono\x1F" "di livello vincendo. Due\x1F" "carte Lv3 si \x1D" "fondono\x1E.");
+ROGUE_TEXT(sAxel9, "Pi\xF9 vai avanti, pi\xF9 picchiano.\x1FSe cadi, la run finisce e\x1Fsi ricomincia da capo.");
+ROGUE_TEXT(sAxel10, "Got it memorized?");
 
 #define AXEL_PORTRAIT 20
 
@@ -29,6 +31,8 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel6, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel7, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel8, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel9, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel10, 0, 0 },
 };
 
 const CardMessageDef* RogueCardMessageDef(u16 id) {

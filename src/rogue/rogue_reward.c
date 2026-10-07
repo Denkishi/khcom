@@ -16,15 +16,20 @@
 #include "mode_test_api.h"
 #include "monsgage.h"
 #include "obj_api.h"
+#include "sprites_status.h"
 #include "system_state.h"
 #include "text.h"
 
-// The "pick one of three" screen shown after a won battle.
+// The "pick one of three" screen shown after a won battle. It borrows the
+// status screen's backdrop and list panel; the picked line's card and a short
+// description show on the right.
 
 #define REWARD_CHOICES 3
-#define REWARD_TEXT_MAX 28
+#define REWARD_TEXT_MAX 60
 #define TITLE_SLOTS 32
-#define CHOICE_SLOTS 32
+#define LABEL_SLOTS 12
+#define DETAIL_SLOTS 64
+#define PANEL_COLUMNS 13
 
 enum {
     REWARD_CARD,
@@ -34,23 +39,32 @@ enum {
     REWARD_CP,
     REWARD_COMBO,
     REWARD_AIR_JUMP,
+    REWARD_FUSION,
     REWARD_KINDS
 };
 
 typedef struct RogueReward {
     u8 kind;
+    u8 fuseA; // deck positions of the two cards a fusion consumes
+    u8 fuseB;
     u16 card; // card id, or the collection slot to upgrade
 } RogueReward;
 
 typedef struct RogueRewardWork {
     RogueReward rewards[REWARD_CHOICES];
     TextSlot title[TITLE_SLOTS];
-    TextSlot choices[REWARD_CHOICES][CHOICE_SLOTS];
-    u8 text[REWARD_TEXT_MAX + 4];
+    TextSlot labels[REWARD_CHOICES][LABEL_SLOTS];
+    TextSlot detail[DETAIL_SLOTS];
+    u16 map[0x500 / 2];
+    u8 text[REWARD_TEXT_MAX + 8];
     void* palette;
     void* cursorPalette;
+    void* cardTiles;
+    void* cardPalette;
+    void* cardGfx;
     u8 titleCount;
-    u8 choiceCounts[REWARD_CHOICES];
+    u8 labelCounts[REWARD_CHOICES];
+    u8 detailCount;
     u8 cursor;
     u8 state;
     u8 afterBoss;
@@ -59,13 +73,25 @@ typedef struct RogueRewardWork {
 static RogueRewardWork* sWork;
 
 static const u8 sTitle[] = "Scegli una ricompensa";
-static const u8 sCard[] = "Carta: ";
-static const u8 sUpgrade[] = "Potenzia: ";
-static const u8 sHeal[] = "Cura completa";
+static const u8 sLabelCard[] = "Carta";
+static const u8 sLabelUpgrade[] = "Potenzia";
+static const u8 sLabelHeal[] = "Cura";
+static const u8 sLabelMaxHp[] = "PV max";
+static const u8 sLabelCp[] = "PC";
+static const u8 sLabelCombo[] = "Combo+";
+static const u8 sLabelAirJump[] = "Reliquia";
+static const u8 sLabelFusion[] = "Fusione";
+static const u8* const sLabels[REWARD_KINDS] = {
+    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelFusion,
+};
+
+static const u8 sCost[] = "\x1FPC ";
+static const u8 sLevel[] = "\x1FLivello ";
+static const u8 sHeal[] = "Recuperi tutti\x1Fi PV";
 static const u8 sMaxHp[] = "PV massimi +20";
-static const u8 sCp[] = "PC +30";
-static const u8 sCombo[] = "Combo+: un colpo in pi\xF9";
-static const u8 sAirJump[] = "Reliquia: salto in aria";
+static const u8 sCp[] = "PC del mazzo +30";
+static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
+static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
 
 static u8* RogueAppend(u8* out, const u8* text) {
     u8* end = sWork->text + REWARD_TEXT_MAX;
@@ -78,13 +104,26 @@ static u8* RogueAppend(u8* out, const u8* text) {
     return out;
 }
 
+static u8* RogueAppendNumber(u8* out, u16 value) {
+    if (value >= 100) {
+        *out++ = '0' + value / 100;
+    }
+
+    if (value >= 10) {
+        *out++ = '0' + value / 10 % 10;
+    }
+
+    *out++ = '0' + value % 10;
+    *out = 0;
+    return out;
+}
+
 static u8* RogueAppendCard(u8* out, u16 id) {
     out = RogueAppend(out, eu_0805E924(gCardDefs[id].name));
 
     if (gCardDefs[id].unk_2A != 3) {
         *out++ = ' ';
-        *out++ = '0' + gCardDefs[id].unk_20;
-        *out = 0;
+        out = RogueAppendNumber(out, gCardDefs[id].unk_20);
     }
 
     return out;
@@ -98,18 +137,14 @@ static u16 RogueRollUpgrade(void) {
     u16 id;
     s32 tries;
 
-    if (deck->unk_DC == 0) {
-        return 0xFFFF;
-    }
-
-    for (tries = 0; tries < 30; tries++) {
-        slot = deck->cards[RogueRandBelow(deck->unk_DC)];
+    for (tries = 0; tries < 40; tries++) {
+        slot = deck->cards[RogueRandBelow(DECK_SIZE)];
 
         if (slot == 0xFFFF) {
             continue;
         }
 
-        id = gCardCollection[slot] & 0x0FFF;
+        id = gCardCollection[slot] & CARD_ID_MASK;
 
         if (gCardDefs[id].unk_2A != 3 && gCardDefs[id].unk_20 >= 1 && gCardDefs[id].unk_20 <= 8) {
             return slot;
@@ -139,17 +174,25 @@ static u8 RogueRewardAvailable(RogueReward* reward) {
 }
 
 static void RogueRollRewards(void) {
-    static const u8 weights[REWARD_KINDS] = { 30, 20, 14, 12, 12, 7, 5 };
+    static const u8 weights[REWARD_FUSION] = { 30, 20, 14, 12, 12, 7, 5 };
     RogueReward* reward;
     u32 roll;
     s32 count = 0;
     s32 i;
     u8 kind;
 
+    // A fusion is always on offer when two cards are ready for one.
+    reward = &sWork->rewards[0];
+
+    if (RogueRollFusion(&reward->fuseA, &reward->fuseB, &reward->card)) {
+        reward->kind = REWARD_FUSION;
+        count = 1;
+    }
+
     while (count < REWARD_CHOICES) {
         roll = RogueRandBelow(100);
 
-        for (kind = 0; kind < REWARD_KINDS - 1; kind++) {
+        for (kind = 0; kind < REWARD_FUSION - 1; kind++) {
             if (roll < weights[kind]) {
                 break;
             }
@@ -181,22 +224,50 @@ static void RogueRollRewards(void) {
     }
 }
 
-static void RogueRewardText(RogueReward* reward) {
+// The card a reward shows on the right, 0 for none.
+static u16 RogueRewardCard(RogueReward* reward) {
+    switch (reward->kind) {
+    case REWARD_CARD:
+    case REWARD_FUSION:
+        return reward->card;
+    case REWARD_UPGRADE:
+        return gCardCollection[reward->card] & CARD_ID_MASK;
+    }
+
+    return 0;
+}
+
+static void RogueRewardDetail(RogueReward* reward) {
+    Deck* deck = GetActiveDeck();
     u8* out = sWork->text;
     u16 id;
 
     switch (reward->kind) {
     case REWARD_CARD:
-        out = RogueAppend(out, sCard);
-        RogueAppendCard(out, reward->card);
+        out = RogueAppendCard(out, reward->card);
+        out = RogueAppend(out, sCost);
+        RogueAppendNumber(out, GetCardCpCost(reward->card));
         break;
     case REWARD_UPGRADE:
-        id = gCardCollection[reward->card] & 0x0FFF;
-        out = RogueAppend(out, sUpgrade);
+        id = gCardCollection[reward->card] & CARD_ID_MASK;
         out = RogueAppendCard(out, id);
+        *out++ = ' ';
         *out++ = '>';
-        *out++ = '0' + gCardDefs[id].unk_20 + 1;
-        *out = 0;
+        *out++ = ' ';
+        out = RogueAppendNumber(out, gCardDefs[id].unk_20 + 1);
+        out = RogueAppend(out, sLevel);
+        RogueAppendNumber(out, RogueCardLevel(reward->card));
+        break;
+    case REWARD_FUSION:
+        out = RogueAppendCard(out, gCardCollection[deck->cards[reward->fuseA]] & CARD_ID_MASK);
+        *out++ = ' ';
+        *out++ = '+';
+        *out++ = 0x1F;
+        out = RogueAppendCard(out, gCardCollection[deck->cards[reward->fuseB]] & CARD_ID_MASK);
+        *out++ = 0x1F;
+        *out++ = '>';
+        *out++ = ' ';
+        RogueAppendCard(out, reward->card);
         break;
     case REWARD_HEAL:
         RogueAppend(out, sHeal);
@@ -220,16 +291,10 @@ static void RogueGiveReward(RogueReward* reward) {
     Deck* deck;
     u16 before;
     u16 after;
-    s16 slot;
 
     switch (reward->kind) {
     case REWARD_CARD:
-        slot = AddCardToCollection(reward->card);
-
-        // The card joins the deck if it fits, otherwise it waits in the collection.
-        if (slot != -1 && GetDeckCpCost(GetActiveDeckIndex()) + GetCardCpCost(reward->card) <= gGameState.progression.cp) {
-            AddCardToActiveDeck(slot);
-        }
+        RogueGiveCard(reward->card);
         break;
     case REWARD_UPGRADE:
         // An upgrade brings the CP it costs with it, so the deck stays legal.
@@ -239,6 +304,9 @@ static void RogueGiveReward(RogueReward* reward) {
         after = GetCardCpCost(gCardCollection[reward->card]);
         deck->unk_DA += after - before;
         gGameState.progression.cp += after - before;
+        break;
+    case REWARD_FUSION:
+        RogueFuse(reward->fuseA, reward->fuseB, reward->card);
         break;
     case REWARD_HEAL:
         gGameState.hp = gGameState.progression.maxHp;
@@ -259,27 +327,68 @@ static void RogueGiveReward(RogueReward* reward) {
     }
 }
 
+static void RogueFreeCard(void) {
+    if (sWork->cardTiles != 0) {
+        ReleaseObjTiles(sWork->cardTiles);
+        ReleaseObjPalette(sWork->cardPalette);
+        sWork->cardTiles = 0;
+    }
+}
+
+// Loads the description and the card picture of the line under the cursor.
+static void RogueShowChoice(void) {
+    RogueReward* reward = &sWork->rewards[sWork->cursor];
+    u16 id = RogueRewardCard(reward);
+
+    FreeTextSlots(sWork->detail, DETAIL_SLOTS);
+    RogueRewardDetail(reward);
+    sWork->detailCount = LoadTextSlots((u16*)sWork->text, sWork->detail);
+    RogueFreeCard();
+
+    if (id != 0) {
+        sWork->cardTiles = LoadObjTiles(gCardDefs[id].tiles, 0x300);
+        sWork->cardPalette = LoadObjPalette(gCardDefs[id].palette, 32);
+        sWork->cardGfx = gCardDefs[id].gfx;
+    }
+}
+
 static void RogueReward_Init(s32 afterBoss) {
+    const u16* map = (const u16*)gUnk_09847798;
     s32 i;
 
     sWork = EwramAlloc(sizeof(RogueRewardWork));
     sWork->afterBoss = afterBoss;
     sWork->cursor = 0;
     sWork->state = 0;
+    sWork->cardTiles = 0;
     SetBgMode0();
-    SetBackdropColor(2, 3, 9);
+    SetupBg(3, 0, 0x1D, 0);
+    SetupBg(2, 0, 0x1E, 0);
+    SetBgPriority(3, 3);
+    SetBgPriority(2, 2);
+    LoadBgTiles(3, gUnk_097FFB98, 0x2060);
+    LoadBgPalette(3, gUnk_0984B118, 0xA0);
+    LoadBgMap(3, gUnk_09848198, 0x500);
+
+    // Only the list panel on the left of the status screen's frame layer is kept.
+    for (i = 0; i < 0x500 / 2; i++) {
+        sWork->map[i] = (i & 31) < PANEL_COLUMNS ? map[i] : map[0];
+    }
+
+    LoadBgMap(2, sWork->map, 0x500);
     sWork->palette = _08066468(1);
     sWork->cursorPalette = _08066468(0);
     InitTextSlots(sWork->title, TITLE_SLOTS);
+    InitTextSlots(sWork->detail, DETAIL_SLOTS);
     sWork->titleCount = LoadTextSlots((u16*)sTitle, sWork->title);
     RogueRollRewards();
 
     for (i = 0; i < REWARD_CHOICES; i++) {
-        RogueRewardText(&sWork->rewards[i]);
-        InitTextSlots(sWork->choices[i], CHOICE_SLOTS);
-        sWork->choiceCounts[i] = LoadTextSlots((u16*)sWork->text, sWork->choices[i]);
+        InitTextSlots(sWork->labels[i], LABEL_SLOTS);
+        sWork->labelCounts[i] = LoadTextSlots((u16*)sLabels[sWork->rewards[i].kind], sWork->labels[i]);
     }
 
+    RogueShowChoice();
     FadeStartIn(0, 16);
 }
 
@@ -296,9 +405,11 @@ static void RogueReward_Update(void) {
         if (GetKeysRepeat() & DPAD_UP) {
             sWork->cursor = (sWork->cursor + REWARD_CHOICES - 1) % REWARD_CHOICES;
             m4aSongNumStart(SONG_SYS_CLICK);
+            RogueShowChoice();
         } else if (GetKeysRepeat() & DPAD_DOWN) {
             sWork->cursor = (sWork->cursor + 1) % REWARD_CHOICES;
             m4aSongNumStart(SONG_SYS_CLICK);
+            RogueShowChoice();
         } else if (GetKeysPressed() & A_BUTTON) {
             m4aSongNumStart(SONG_SYS_KETTEI);
             RogueGiveReward(&sWork->rewards[sWork->cursor]);
@@ -319,24 +430,32 @@ static void RogueReward_Update(void) {
         break;
     }
 
-    DrawTextSlots((240 - GetTextSlotsWidth(sWork->title, sWork->titleCount)) / 2, 24, sWork->title, sWork->palette, 50,
+    DrawTextSlots((240 - GetTextSlotsWidth(sWork->title, sWork->titleCount)) / 2, 8, sWork->title, sWork->palette, 50,
                   sWork->titleCount);
 
     for (i = 0; i < REWARD_CHOICES; i++) {
-        DrawTextSlots(i == sWork->cursor ? 36 : 28, 60 + i * 24, sWork->choices[i],
-                      i == sWork->cursor ? sWork->cursorPalette : sWork->palette, 50, sWork->choiceCounts[i]);
+        DrawTextSlots(14, 46 + i * 26, sWork->labels[i], i == sWork->cursor ? sWork->cursorPalette : sWork->palette, 50,
+                      sWork->labelCounts[i]);
     }
+
+    if (sWork->cardTiles != 0) {
+        DrawSprite(172, 70, sWork->cardGfx, sWork->cardTiles, sWork->cardPalette, 0, 0, 50);
+    }
+
+    DrawTextSlots(112, 106, sWork->detail, sWork->palette, 50, sWork->detailCount);
 }
 
 static void RogueReward_Exit(void) {
     s32 i;
 
     FreeTextSlots(sWork->title, TITLE_SLOTS);
+    FreeTextSlots(sWork->detail, DETAIL_SLOTS);
 
     for (i = 0; i < REWARD_CHOICES; i++) {
-        FreeTextSlots(sWork->choices[i], CHOICE_SLOTS);
+        FreeTextSlots(sWork->labels[i], LABEL_SLOTS);
     }
 
+    RogueFreeCard();
     ReleaseObjPalette(sWork->palette);
     ReleaseObjPalette(sWork->cursorPalette);
     EwramFree(sWork);

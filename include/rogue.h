@@ -13,6 +13,12 @@
 #define ROGUE_COMBO_BASE 3
 #define ROGUE_COMBO_PLUS_MAX 4
 #define ROGUE_AIR_JUMPS_MAX 2
+
+// Cards level up by winning battles in the deck; two level 3 cards can fuse.
+#define ROGUE_CARD_SLOTS 160
+#define ROGUE_CARD_XP_LEVEL_2 2
+#define ROGUE_CARD_XP_LEVEL_3 4
+#define ROGUE_CARD_LEVEL_MAX 3
 // Frames after a finisher's hit frame until the next card can be played.
 #define ROGUE_FINISHER_RECOVERY 8
 // Frames after a hit frame until holding a direction walks out of the swing.
@@ -39,8 +45,8 @@ enum RogueRoomKind {
 // Card message ids from here up are the mod's, see RogueCardMessageDef.
 #define ROGUE_MSG_BASE 0x400
 #define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
-#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 8)
-#define ROGUE_MSG_COUNT 9
+#define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 10)
+#define ROGUE_MSG_COUNT 11
 
 typedef struct RogueRun {
     u32 seed;
@@ -54,6 +60,7 @@ typedef struct RogueRun {
     u8 comboPlus; // extra hits in the attack combo
     u8 airJumps; // jumps allowed in mid-air
     u8 airJumpsUsed;
+    u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
 extern RogueRun gRogue;
@@ -71,6 +78,11 @@ void RogueNextFloor(void);
 u8 RogueDoorsOpen(void);
 u8 RogueEnemyLevel(void);
 u16 RogueRollRewardCard(void);
+void RogueGiveCard(u16 id);
+u8 RogueCardLevel(u16 slot);
+void RogueGainCardXp(void);
+u8 RogueRollFusion(u8* posA, u8* posB, u16* result);
+void RogueFuse(u8 posA, u8 posB, u16 result);
 u8 RogueTryAirJump(void);
 void RogueResetAirJumps(void);
 u8* RogueRoomLinks(void);

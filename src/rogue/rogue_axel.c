@@ -15,6 +15,8 @@ typedef struct RogueAxelWork {
     u8 inRange;
     u8 visible;
     u8 page;
+    u8 flat; // pages on the flat battle still to say, before the rest
+    u8 rest; // the pages on everything else follow
     TaskPool tasks;
     TaskPool talkTasks;
 } RogueAxelWork;
@@ -42,6 +44,29 @@ static void RogueAxel_Talk(RogueAxelWork* w) {
         return;
     }
 
+    // The flat battle first, when it is on.
+    if (w->flat != 0) {
+        w->flat--;
+
+        if (w->flat != 0) {
+            CreateCardMessageTask(&w->tasks, 0, ROGUE_MSG_FLAT_FIRST + ROGUE_FLAT_PAGES - w->flat);
+            return;
+        }
+
+        if (!(gRogueMeta.flags & ROGUE_META_2D_SEEN)) {
+            gRogueMeta.flags |= ROGUE_META_2D_SEEN;
+            RogueMetaSave();
+        }
+
+        if (w->rest) {
+            w->page = 0;
+            CreateCardMessageTask(&w->tasks, 0, ROGUE_MSG_AXEL_FIRST);
+            return;
+        }
+
+        w->page = ROGUE_MSG_AXEL_LAST - ROGUE_MSG_AXEL_FIRST;
+    }
+
     w->page++;
 
     if (w->page <= ROGUE_MSG_AXEL_LAST - ROGUE_MSG_AXEL_FIRST) {
@@ -57,14 +82,20 @@ static void RogueAxel_Idle(RogueAxelWork* w) {
     if (w->inRange != 0 && (GetKeysPressed() & A_BUTTON)) {
         // Once the explanation has been heard, talking to him opens the shop.
         // Holding L asks for the explanation again.
-        if ((gRogueMeta.flags & ROGUE_META_TUTORIAL_SEEN) && !(GetKeysHeld() & L_BUTTON)) {
+        // With the flat battle on he explains it once, and again whenever L is held.
+        u8 flat = (gRogueMeta.flags & ROGUE_META_2D) && (!(gRogueMeta.flags & ROGUE_META_2D_SEEN) || (GetKeysHeld() & L_BUTTON));
+        u8 rest = !(gRogueMeta.flags & ROGUE_META_TUTORIAL_SEEN) || (GetKeysHeld() & L_BUTTON);
+
+        if (!flat && !rest) {
             RogueLeaveRoomFor(&gModeRogueShop, ROGUE_SHOP_FROM_ROOM);
             return;
         }
 
         gFieldState->flags |= 0x1000;
         w->page = 0;
-        CreateCardMessageTask(&w->tasks, 0, ROGUE_MSG_AXEL_FIRST);
+        w->flat = flat ? ROGUE_FLAT_PAGES : 0;
+        w->rest = rest;
+        CreateCardMessageTask(&w->tasks, 0, flat ? ROGUE_MSG_FLAT_FIRST : ROGUE_MSG_AXEL_FIRST);
         w->update = RogueAxel_Talk;
     }
 }

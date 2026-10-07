@@ -24,8 +24,9 @@
 // them spends the card in hand, the counter too.
 
 #define JUMP_WINDOW 9 // frames after a jump starts in which Up still counts as "as the jump starts"
-#define PENDING_TIME 30 // frames the direction held at a press is remembered for the card it plays
-#define COUNTER_TIME 18 // frames a counter turns a hit away for
+#define PENDING_TIME 60 // frames the direction held at a press is remembered for the card it plays
+#define GUARD_ANIM 50 // the animation of Sora's a counter holds: he stands with the Keyblade raised in front of him
+#define COUNTER_TIME 20 // frames a counter turns a hit away for
 #define LAUNCH_TIME 24 // frames an uppercut's hits send the enemy up for
 #define DIVE_SPEED 1700
 #define RISE_SPEED -1500
@@ -103,6 +104,8 @@ static u8 sDive; // 1: falling to hit, 2: falling to make the ground burst
 static u8 sDash; // frames left of the dash through the air
 static u8 sPower; // the value of the card a technique was made with, plus one; 0 when none is going
 static u8 sPowerTime;
+static u8 sPressed;
+static u32 sPressFrame;
 
 u8 Rogue2d(void) {
     return (gRogueMeta.flags & ROGUE_META_2D) != 0 && gRogueMeta.hero != ROGUE_HERO_RIKU;
@@ -118,6 +121,7 @@ void Rogue2dReset(void) {
     sDive = 0;
     sDash = 0;
     sPower = 0;
+    sPressed = 0;
 }
 
 static BtlSoraWork* Rogue2dWork(BtlObj* sora) {
@@ -306,8 +310,18 @@ s32 Rogue2dAction(const CardDef* def) {
     case KIND_SLEIGHT:
         return tech->arg;
     case KIND_COUNTER:
+        // He does not swing: he stands with the Keyblade up, a shell of light
+        // round him, for as long as the counter lasts.
         sCounter = COUNTER_TIME;
-        break;
+        gRogue.pose = 0;
+        SetBtlSoraAnimation(work, gRogueDebug.guardAnim != 0 ? gRogueDebug.guardAnim : GUARD_ANIM, 0);
+        gRogue.pose = COUNTER_TIME;
+        m4aSongNumStart(SONG_EF_RAC_3TR);
+
+        RogueMoveSpawn(ROGUE_MOVE_WAVE, sora->x, sora->y, sora->z, ROGUE_MOVE_GUARD, 0, 0, 0);
+        RogueMoveSpawn(ROGUE_MOVE_WAVE, sora->x, sora->y, sora->z, ROGUE_MOVE_GUARD, 1, 0, 0);
+
+        return ROGUE_ACTION_NONE;
     case KIND_CIRCLE:
         for (i = 0; i < 3; i++) {
             RogueMoveSpawn(ROGUE_MOVE_FIREBALL, sora->x, sora->y, sora->z, ROGUE_MOVE_CIRCLE, i * 85, 0, 0);
@@ -484,4 +498,33 @@ const u8* Rogue2dTechName(u8 tech) {
 
 const u8* Rogue2dSlotName(u8 slot) {
     return sSlotNames[slot];
+}
+
+// The card button, kept. The hand of cards reads it only while Sora can play
+// one; a press made a moment too soon is remembered and played as soon as he
+// can. In the flat battle B counts as well, with what was held.
+
+void RogueNoteCardPress(void) {
+    if (Rogue2dCardKeys(GetKeysPressed()) & A_BUTTON) {
+        sPressed = 1;
+        sPressFrame = gFrameCounter;
+    }
+}
+
+u8 RogueTakeCardPress(void) {
+    if (!sPressed) {
+        return 0;
+    }
+
+    sPressed = 0;
+
+    if (gFrameCounter - sPressFrame > ROGUE_PRESS_BUFFER) {
+        return 0;
+    }
+
+    if (gFrameCounter != sPressFrame) {
+        gRogueDebug.presses++;
+    }
+
+    return 1;
 }

@@ -262,6 +262,23 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
         return 0;
     }
 
+    if (w->args.mode == ROGUE_MOVE_GUARD) {
+        // What a counter looks like: a shell of light round Sora, hitting nothing.
+        BtlObj* sora = gBtlWork->actor;
+
+        if (++w->timer > 22) {
+            return 0;
+        }
+
+        // Two halves of a shell, one before him and one behind (phase 1).
+        w->args.left = ((sora->flags & 4) != 0) ^ (w->args.phase != 0);
+        w->args.x = sora->x + (w->args.left ? -0x1200 : 0x1200);
+        w->args.y = sora->y + 0x100;
+        w->args.z = sora->z - 0x1600;
+        AnimUpdate(&w->anim);
+        return 1;
+    }
+
     if (w->args.mode == ROGUE_MOVE_ORBIT || w->args.mode == ROGUE_MOVE_CIRCLE) {
         // Round Sora for as long as the battle lasts; what it touches is hit,
         // and then left alone for a moment.

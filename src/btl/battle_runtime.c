@@ -148,6 +148,9 @@ void func_08019350(void) {
     u16 t;
     u16 a;
 
+    // A press made while Sora cannot play a card is kept for a moment.
+    RogueNoteCardPress();
+
     if (gBtlWork->flags & 0x20000000000000) {
         return;
     }
@@ -268,7 +271,7 @@ void func_08019350(void) {
         }
     }
 
-    if (Rogue2dCardKeys(GetKeysPressed()) & A_BUTTON) {
+    if (RogueTakeCardPress()) {
         func_08076330();
 
         if (func_0807B3C8() == 3) {

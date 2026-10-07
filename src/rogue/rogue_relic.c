@@ -630,7 +630,9 @@ static void RogueRelics_Update(void) {
                 RogueMetaSave();
                 break;
             case 1:
+                // Turned on, Axel will explain it at the start of the next run.
                 gRogueMeta.flags ^= ROGUE_META_2D;
+                gRogueMeta.flags &= ~ROGUE_META_2D_SEEN;
                 RogueMetaSave();
                 break;
             case 2:

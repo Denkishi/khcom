@@ -4,7 +4,9 @@
 # Up; the pictures after show, in turn, the thrown Keyblade, the wave, the
 # pillar of light, the pearls, the circle of fire, the hop that turns, the
 # cut that rises (Sora high up) and the slide. techs reads 12 (hex c) or
-# more, move_hits is above 3, counters reads 1, slide_action reads 64 (100).
+# more, move_hits is above 3, counters reads 1, slide_action reads 64 (100),
+# late_presses is 1 or more (a press made while a spell was being cast, played after it),
+# and the last picture shows Sora standing in a shell of light: the counter.
 wait 600
 poke8 @gRogueMeta.flags 23
 press START
@@ -70,6 +72,17 @@ wait 14
 shot /tmp/flat_slide.ppm
 poke8 @gRogueDebug.techForce 0
 wait 60
+press A
+wait 50
+press A
+wait 4
+press A
+wait 120
+peek8 @gRogueDebug.presses late_presses
+debug tech 131
+wait 8
+shot /tmp/flat_guard.ppm
+wait 40
 peek16 @gRogueDebug.techs techs
 peek16 @gRogueDebug.moveHits move_hits
 peek32 @gFrameCounter frames

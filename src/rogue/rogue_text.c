@@ -89,6 +89,14 @@ ROGUE_TEXT(sBoonVanitas, "Vanitas: Prendi l'oscurit\xE0.\x1F\x1D" "Forza +3\x1E,
 #define AXEL_PORTRAIT 20
 #define EVENT_PAGES(portrait, a, b) { portrait, 3, 0, 3, 0, &a, 0, 0 }, { portrait, 3, 0, 3, 0, &b, 0, 0 }
 
+// Axel on the flat battle, when it is on.
+ROGUE_TEXT(sFlat0, "Battaglia \x1D" "2D\x1E: niente pi\xF9\x1Fprofondit\xE0. \x1DSU\x1E salta,\x1Ftutti su una linea.");
+ROGUE_TEXT(sFlat1, "\x1DGI\xD9+A\x1E scivola. \x1DSU+A\x1E col\x1Fsalto: attacco rotante.\x1FSolo con le Keyblade.");
+ROGUE_TEXT(sFlat2, "In aria \x1DSU+A\x1E sale col\x1Fnemico, \x1DGI\xD9+A\x1E si tuffa.");
+ROGUE_TEXT(sFlat3, "\x1D" "B\x1E usa la carta per una\x1F\x1Dtecnica\x1E: cambia con\x1F" "avanti, SU, GI\xD9 e in aria.");
+ROGUE_TEXT(sFlat4, "\x1D" "B+GI\xD9\x1E para e risponde.\x1FOgni mossa \x1Dspende\x1E la\x1F" "carta in mano.");
+ROGUE_TEXT(sFlat5, "In \x1DMemoria, Opzioni\x1E scegli\x1Fla tecnica di ogni tasto,\x1F" "anche dalle reliquie.");
+
 static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel0, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel1, 0, 0 },
@@ -146,6 +154,12 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { ROGUE_FACE_FIRST + 1, 3, 0, 3, 0, &sBoonTerra, 0, 0 },
     { ROGUE_FACE_FIRST + 2, 3, 0, 3, 0, &sBoonVentus, 0, 0 },
     { ROGUE_FACE_FIRST + 3, 3, 0, 3, 0, &sBoonVanitas, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat0, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat1, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat2, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat3, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat4, 0, 0 },
+    { AXEL_PORTRAIT, 3, 0, 3, 0, &sFlat5, 0, 0 },
 };
 
 const CardMessageDef* RogueCardMessageDef(u16 id) {

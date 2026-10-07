@@ -170,7 +170,7 @@ enum RogueBoon {
 #define ROGUE_AP_MAX 20
 // Frames the battle freezes on a hit, and a jump press stays valid.
 #define ROGUE_HITSTOP 2
-#define ROGUE_JUMP_BUFFER 6
+#define ROGUE_JUMP_BUFFER 10
 // Frames a press of the card button stays valid while Sora is busy.
 #define ROGUE_CARD_BUFFER 6
 // The hit counter: frames it lasts without a new hit, and hits that count
@@ -219,10 +219,12 @@ enum RogueRoomKind {
 #define ROGUE_MSG_BASE 0x400
 #define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
 #define ROGUE_AXEL_PAGES 23
+#define ROGUE_FLAT_PAGES 6 // Axel on the flat battle
 #define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + ROGUE_AXEL_PAGES - 1)
 #define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + ROGUE_AXEL_PAGES)
 #define ROGUE_MSG_BOON_FIRST (ROGUE_MSG_EVENT_FIRST + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
-#define ROGUE_MSG_COUNT (ROGUE_AXEL_PAGES + ROGUE_EVENTS * ROGUE_EVENT_PAGES + ROGUE_BOONS - 1)
+#define ROGUE_MSG_FLAT_FIRST (ROGUE_MSG_BOON_FIRST + ROGUE_BOONS - 1)
+#define ROGUE_MSG_COUNT (ROGUE_AXEL_PAGES + ROGUE_EVENTS * ROGUE_EVENT_PAGES + ROGUE_BOONS - 1 + ROGUE_FLAT_PAGES)
 
 enum RogueRelic {
     ROGUE_RELIC_VAMPIRE,
@@ -302,7 +304,8 @@ enum RogueMoveMode {
     ROGUE_MOVE_PLAIN, // as the move is made
     ROGUE_MOVE_ORBIT, // it circles Sora for the whole battle, hitting what it touches. phase: where on the circle, in 1/256
     ROGUE_MOVE_SHARD, // it hangs over Sora for `phase` frames, then flies at an enemy
-    ROGUE_MOVE_CIRCLE // as ROGUE_MOVE_ORBIT, for a few seconds
+    ROGUE_MOVE_CIRCLE, // as ROGUE_MOVE_ORBIT, for a few seconds
+    ROGUE_MOVE_GUARD // a half shell before Sora, or with phase 1 behind him, for a moment, hitting nothing: what a counter looks like
 };
 
 // One step of a clip, the way the bosses drawn from a sheet are animated: a
@@ -766,6 +769,8 @@ typedef struct RogueDebug {
     u8 tech; // the last technique made with B
     u8 techForce; // set from outside: the action every card played does
     s16 techAction; // what the last move asked for by a test came to
+    u8 guardAnim; // set from outside: the animation of Sora's a counter shows, 0 for its own
+    u8 presses; // card presses that waited and were played late
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet
@@ -847,6 +852,11 @@ void RogueDirectDamage(struct BtlObj* target, s16 amount);
 struct MsgFaceAnim;
 #define ROGUE_FACE_FIRST 64 // the portraits of the characters drawn from sheets, after the game's 62
 const struct MsgFaceAnim* RogueFaceAnims(s32 portrait);
+void RogueNoteCardPress(void);
+u8 RogueTakeCardPress(void);
+#define ROGUE_PRESS_BUFFER 30 // frames a press of the card button waits for Sora to be free
+#define ROGUE_ACTION_NONE 99 // a card action Sora's battle task has nothing for: the card is spent and he does not swing
+#define ROGUE_META_2D_SEEN 32 // Axel has explained the flat battle
 u8 Rogue2d(void);
 void Rogue2dReset(void);
 void Rogue2dDebug(u8 arg);

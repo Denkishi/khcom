@@ -1,0 +1,34 @@
+# Axel on the flat battle: with it on and not yet explained, talking to him in
+# the first room goes through its six pages before anything else.
+# Expect: the pictures show the six pages in turn, and flags has bit 32 set.
+wait 600
+poke8 @gRogueMeta.flags 17
+press START
+wait 120
+press START
+wait 200
+hold B 100
+wait 20
+hold LEFT 5
+wait 6
+press A
+wait 60
+shot /tmp/a_0.ppm
+press A
+wait 40
+shot /tmp/a_1.ppm
+press A
+wait 40
+shot /tmp/a_2.ppm
+press A
+wait 40
+shot /tmp/a_3.ppm
+press A
+wait 40
+shot /tmp/a_4.ppm
+press A
+wait 40
+shot /tmp/a_5.ppm
+press A
+wait 120
+peek8 @gRogueMeta.flags flags

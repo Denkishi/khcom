@@ -2433,6 +2433,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->unk_150 = -1344;
         p->btl->flags |= 0x8000;
         work->unk_15C <<= 1;
+        RogueResetAirJumps();
     }
         break;
     case 20:
@@ -2442,6 +2443,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     case 3:
         func_0801DD08(work);
         p->btl->flags |= 0x8000;
+
+        if ((pressed & B_BUTTON) && RogueTryAirJump()) {
+            work->unk_150 = -1344;
+        }
 
         if (work->unk_150 < 0) {
             if (work->unk_150 <= -512) {

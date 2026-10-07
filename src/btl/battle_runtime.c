@@ -888,7 +888,7 @@ void _08019CB4(void) {
                     break;
 #endif
                 }
-                ModeRequest(&gModeContinue, 0);
+                RogueOnDefeat();
             }
             break;
         }
@@ -1455,9 +1455,11 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
                 b = 76;
                 c = 640;
             }
-            p->unk_02E = ((gGameState.floor * a + 256) * e->hp) >> 8;
-            p->unk_030 = ((gGameState.floor * b + 256) * e->attack) >> 8;
-            p->unk_0B4 = ((c * gGameState.floor + 256) * (u16)e->exp) >> 8;
+            // Enemy stats follow the run's depth: about 8% more HP, 10% more
+            // attack and 40% more EXP per level.
+            p->unk_02E = ((RogueEnemyLevel() * 20 + 256) * e->hp) >> 8;
+            p->unk_030 = ((RogueEnemyLevel() * 26 + 256) * e->attack) >> 8;
+            p->unk_0B4 = ((RogueEnemyLevel() * 102 + 256) * (u16)e->exp) >> 8;
             break;
         }
     } else {

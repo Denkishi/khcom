@@ -97,6 +97,17 @@ static u16 RogueRollCard(u8 pool) {
     }
 }
 
+// A random card to offer as a reward, 0 if the roll found none.
+u16 RogueRollRewardCard(void) {
+    u16 id = RogueRollCard(RogueRollPool());
+
+    if (id == 0 || GetCardCpCost(id) == 0 || (gCardDefs[id].flags & 8)) {
+        return 0;
+    }
+
+    return id;
+}
+
 // Builds the run's first deck: random cards from the whole game within the CP
 // limit, with the pieces every deck needs to be playable.
 void RogueBuildStartDeck(void) {

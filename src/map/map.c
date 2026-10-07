@@ -4661,7 +4661,7 @@ u8 func_080ECAC8(MapDoorWork* p) {
     FldObj* e = &p->obj;
 
     if (!(gFieldState->flags & 0x2000) && !(gUnk_0203C7AC->flags & 0x4004) &&
-        (u8)(flags->unk_07 + 3) > 1 && (flags->unk_00 & 0x12) != 0x12 &&
+        RogueDoorsOpen() && (u8)(flags->unk_07 + 3) > 1 && (flags->unk_00 & 0x12) != 0x12 &&
         func_080E02E0(&e->fieldPosition, 0, 8) != 0 && !(gFieldState->flags & 0x800000) &&
         gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.unk_0C) {
         TaskPool* pool;

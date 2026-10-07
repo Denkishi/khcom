@@ -22,6 +22,9 @@ static const u8 sRoomTypes[ROGUE_ROOM_KINDS] = {
     1, // boss
 };
 
+// Battles to win before the room's doors open, by room kind.
+static const u8 sRoomBattles[ROGUE_ROOM_KINDS] = { 0, 1, 2, 1, 0, 0, 0 };
+
 // Map card whose art the room's door shows, by room kind.
 static const u8 sRoomCards[ROGUE_ROOM_KINDS] = { 5, 1, 0, 2, 10, 5, 0 };
 
@@ -206,7 +209,7 @@ static void RogueEnterRoom(u8 firstOfFloor) {
     room->unk_08 = sRoomCards[gRogue.kind];
     room->unk_09 = sRoomTypes[gRogue.kind];
     room->unk_0A = 1;
-    room->unk_0B = row[2];
+    room->unk_0B = sRoomBattles[gRogue.kind];
     room->unk_0C = row[6];
     func_0801CB00();
     ModeRequest(&gModeMapFld, 0);
@@ -220,7 +223,9 @@ void RogueStartRun(void) {
     gRogue.room = 0;
     gRogue.kind = ROGUE_ROOM_START;
     gRogue.comboPlus = 0;
-    gRogue.world = sWorlds[RogueRandBelow((sizeof(sWorlds) / sizeof(sWorlds[0])))];
+    gRogue.airJumps = 0;
+    gRogue.airJumpsUsed = 0;
+    gRogue.world = RogueRollWorld();
     func_0801CD20();
     gGameState.progression.unk_82 = 0xFFFF;
     RogueLearnSleights();
@@ -234,20 +239,60 @@ void RogueLeaveRoom(u8 door) {
     RogueEnterRoom(0);
 }
 
-// Decides where a won battle leads. Returns 0 for a battle fought inside a
-// room, which goes back to that room.
-u8 RogueOnBattleEnd(void) {
-    if (gRogue.kind != ROGUE_ROOM_BOSS) {
-        return 0;
+// Rolls the next floor's world: later floors reach later worlds.
+static u8 RogueRollWorld(void) {
+    u32 index = gRogue.floor + RogueRandBelow(3);
+
+    if (index >= sizeof(sWorlds) / sizeof(sWorlds[0])) {
+        index = sizeof(sWorlds) / sizeof(sWorlds[0]) - 1 - RogueRandBelow(4);
     }
 
+    return sWorlds[index];
+}
+
+void RogueNextFloor(void) {
     gRogue.floor++;
     gRogue.depth++;
     gRogue.room = 0;
     gRogue.kind = ROGUE_ROOM_BATTLE;
-    gRogue.world = sWorlds[RogueRandBelow(sizeof(sWorlds) / sizeof(sWorlds[0]))];
+    gRogue.world = RogueRollWorld();
     RogueEnterRoom(1);
+}
+
+// A won battle leads to the reward screen, which then goes back to the room
+// or, after a boss, on to the next floor.
+u8 RogueOnBattleEnd(void) {
+    ModeRequest(&gModeRogueReward, gRogue.kind == ROGUE_ROOM_BOSS);
     return 1;
+}
+
+// A lost battle ends the run.
+void RogueOnDefeat(void) {
+    ModeRequest(&gModeTitle, 0);
+}
+
+// Doors stay shut until the room's battles are won.
+u8 RogueDoorsOpen(void) {
+    return func_080DEE18(ROGUE_ROOM_ID)->unk_0B == 0;
+}
+
+// How far the run has gone, for enemy stats: three levels a floor plus up to
+// three more across its rooms.
+u8 RogueEnemyLevel(void) {
+    return gRogue.floor * 3 + gRogue.room / 2;
+}
+
+u8 RogueTryAirJump(void) {
+    if (gRogue.airJumpsUsed >= gRogue.airJumps) {
+        return 0;
+    }
+
+    gRogue.airJumpsUsed++;
+    return 1;
+}
+
+void RogueResetAirJumps(void) {
+    gRogue.airJumpsUsed = 0;
 }
 
 // Hits in the attack combo, the last of which is the finisher.

@@ -4,6 +4,7 @@ new rogue_run.c
 new rogue_text.c
 new rogue_axel.c
 new rogue_deck.c
+new rogue_reward.c
 moved taskpool.c
 moved mode_title.c
 moved map_runtime.c

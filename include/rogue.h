@@ -15,6 +15,15 @@
 #define ROGUE_AIR_JUMPS_MAX 2
 // Frames after a finisher's hit frame until the next card can be played.
 #define ROGUE_FINISHER_RECOVERY 8
+// Frames after a hit frame until holding a direction walks out of the swing.
+#define ROGUE_MOVE_CANCEL 10
+// Vertical speed a mid-air hit gives Sora (negative is up).
+#define ROGUE_AIR_HIT_LIFT -384
+// Ground movement and dodge roll, vanilla 128 / 614 and 1664 / 32.
+#define ROGUE_RUN_ACCEL 192
+#define ROGUE_RUN_SPEED 768
+#define ROGUE_DODGE_SPEED 2048
+#define ROGUE_DODGE_FRAMES 24
 
 enum RogueRoomKind {
     ROGUE_ROOM_START,

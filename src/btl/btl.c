@@ -688,9 +688,9 @@ void func_0801DF10(BtlSoraWork* work, u16 a) {
                 work->unk_15C = 1024;
             }
         } else {
-            work->unk_15C += 128;
-            if (work->unk_15C > 614) {
-                work->unk_15C = 614;
+            work->unk_15C += ROGUE_RUN_ACCEL;
+            if (work->unk_15C > ROGUE_RUN_SPEED) {
+                work->unk_15C = ROGUE_RUN_SPEED;
             }
         }
     } else {
@@ -924,6 +924,9 @@ void func_0801E518(BtlSoraWork* work) {
 
     if (work->actor.btl->unk_0F4 == 44) {
         work->unk_190 = 0;
+    } else if (work->unk_190 > 0) {
+        // Every keyblade swings one speed class faster.
+        work->unk_190--;
     }
 }
 
@@ -2668,9 +2671,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->unk_154 == 0) {
             work->unk_15C = 0;
-            work->unk_194 = 1664;
+            work->unk_194 = ROGUE_DODGE_SPEED;
             SetBtlSoraAnimation(work, 53, 0);
-            work->unk_156 = 32;
+            work->unk_156 = ROGUE_DODGE_FRAMES;
 
             if (work->unk_038 != 22) {
                 p->flags |= 0x200;
@@ -3096,6 +3099,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (d == 1) {
                 m4aSongNumStart(a->hitSound);
 
+                // A hit in mid-air lifts Sora a little, so air combos stay up.
+                if (p->btl->flags & 0x8000) {
+                    work->unk_150 = ROGUE_AIR_HIT_LIFT;
+                }
+
                 if (a->flags & 2) {
                     if (p->flags & 4) {
                         func_08019050(8, 384, p->x - 5120, (p->y - 5120) + p->z);
@@ -3127,6 +3135,45 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             func_0801E4E4(work, 33);
             p->flags |= 0x200;
             break;
+        }
+
+        // Once the hit is out the rest of the swing can be cancelled into a
+        // jump or a dodge roll, and a little later into plain movement.
+        if ((s16)work->unk_154 >= buf[work->unk_190] + (RogueComboSlot(work->unk_161) != 2 ? 2 : ROGUE_FINISHER_RECOVERY)) {
+            if (pressed & B_BUTTON) {
+                if ((p->btl->flags & 0x8000) == 0) {
+                    m4aSongNumStart(work->unk_184[2]);
+                    func_0801E4E4(work, 2);
+                    break;
+                }
+
+                if (RogueTryAirJump()) {
+                    work->unk_150 = -1344;
+                    func_0801E4E4(work, 3);
+                    break;
+                }
+            }
+
+            if ((p->btl->flags & 0x8000) == 0) {
+                if ((pressed & DPAD_LEFT) && work->unk_170[0] != 0) {
+                    p->flags |= 4;
+                    p->unk_014 = p->x;
+                    func_0801E4E4(work, 30);
+                    break;
+                }
+
+                if ((pressed & DPAD_RIGHT) && work->unk_170[1] != 0) {
+                    p->flags &= ~4;
+                    p->unk_014 = p->x;
+                    func_0801E4E4(work, 30);
+                    break;
+                }
+
+                if ((held & DPAD_ANY) && (s16)work->unk_154 >= buf[work->unk_190] + ROGUE_MOVE_CANCEL) {
+                    func_0801E4E4(work, 1);
+                    break;
+                }
+            }
         }
 
         if (AnimIsFinished(&work->anim) != 0 && (p->btl->flags & 0x8000) == 0) {

@@ -298,6 +298,22 @@ static u16 RogueMapUse(u8 slot, u8 door) {
     return 0;
 }
 
+// The door whose card has been chosen, plus one: back in the room it opens by itself.
+static u8 sChosen;
+
+u8 RogueDoorChosen(u8 door) {
+    return sChosen == door + 1;
+}
+
+void RogueDoorClear(void) {
+    sChosen = 0;
+}
+
+// Every door asks for a card but the one of the floor's boss.
+u8 RogueDoorAsks(u8 door) {
+    return gRogue.doors[door] != ROGUE_ROOM_BOSS;
+}
+
 // The menu: at a door, or in the hub before the run.
 
 #define LINE_SLOTS 26
@@ -592,7 +608,9 @@ static void RogueDoor_Update(void) {
             } else if (sWork->battle != 0) {
                 ModeRequest(&gModeBattle, sWork->battle);
             } else {
-                RogueLeaveRoom(sWork->door);
+                // Back to the room, where the door now opens.
+                sChosen = sWork->door + 1;
+                func_080E04EC();
             }
 
             sWork->state = 3;

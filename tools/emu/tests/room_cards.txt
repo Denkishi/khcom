@@ -8,7 +8,7 @@
 # to buy; the second the card bought among them; the third the door's menu
 # with "Battaglia", "Jack" and the cards the run starts with; the fourth a
 # room. kind reads 7 (an event room), event reads 4 (Jack), map_used reads 1
-# and bought reads 1.
+# and bought reads 1; the frame counter runs on after the new room is entered.
 wait 600
 poke16 @gRogueMeta.shards 100
 press START
@@ -31,12 +31,16 @@ shot /tmp/cards_door.ppm
 press DOWN
 wait 10
 press A
+wait 500
+hold B 100
 wait 200
 hold B 100
-wait 30
+wait 60
 shot /tmp/cards_room.ppm
 peek8 @gRogue.kind kind
 peek8 @gRogue.event event
 peek8 @gRogueDebug.mapUsed map_used
 peek8 @gRogueDebug.mapBought bought
 peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

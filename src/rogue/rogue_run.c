@@ -299,6 +299,7 @@ static void RogueEnterRoom(u8 firstOfFloor) {
     }
 
     gRogue.cardEvent = 0;
+    RogueDoorClear();
     RogueRollDoors();
     room = func_080DEE18(ROGUE_ROOM_ID);
     row = gUnk_0984D134[sRoomTypes[gRogue.kind]];

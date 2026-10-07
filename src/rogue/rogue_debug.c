@@ -38,6 +38,7 @@ void RogueDebugField(void) {
         gRogue.doors[0] = arg;
         gUnk_0203C7AC->unk_10 = 0;
         gFieldState->flags |= 0x10;
+        RogueDoorClear();
         break;
     case ROGUE_DEBUG_BATTLE:
         func_0801CB0C();

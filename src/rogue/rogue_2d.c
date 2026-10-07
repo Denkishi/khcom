@@ -89,6 +89,8 @@ static const u8 sDefaults[ROGUE_2D_SLOTS] = {
     ROGUE_TECH_PEARLS, ROGUE_TECH_DASH, ROGUE_TECH_CIRCLE, ROGUE_TECH_QUAKE,
 };
 
+u8 gRogueWide;
+
 static s32 sLane; // the line everyone stands on
 static u8 sLaneSet;
 static u8 sJumpAge; // frames since the last jump started, 0xFF when long ago

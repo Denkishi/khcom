@@ -171,6 +171,8 @@ void mode_battle_0(u32 mode) {
     BtlWork** p;
     vu32 zero;
 
+    gRogueWide = 1; // the battle is drawn for a wide screen, see tools/pc
+
     gBtlWork = EwramAlloc(sizeof(BtlWork));
     gRikuBtlWork = 0;
     BtlWorkInit();
@@ -553,6 +555,7 @@ void mode_battle_1(void) {
 }
 
 void mode_battle_2(void) {
+    gRogueWide = 0;
     gGameState.flags &= ~4;
     BgFxFree();
     TaskPoolDestroy(&gBtlWork->taskPools[2]);

@@ -8,6 +8,7 @@ commands of rogue_debug.c, `include FILE` pulls in another
 script, and the screenshots the script takes are tiled into SHEET.png. With
 SAVE the cartridge save is kept in that file, otherwise it is not kept at all.
 """
+import os
 import re
 import subprocess
 import sys
@@ -52,7 +53,7 @@ def load(path):
 lines = load(sys.argv[1])
 with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
     f.write("\n".join(lines) + "\n")
-subprocess.run([ROOT / "build/emu_run", ROM, f.name] + sys.argv[3:4], check=True)
+subprocess.run([os.environ.get("EMU_RUN", ROOT / "build/emu_run"), ROM, f.name] + sys.argv[3:4], check=True)
 shots = [line.split()[1] for line in lines if line.startswith("shot ")]
 if len(sys.argv) > 2 and shots:
     # The contact sheet needs Pillow, which lives in the build's virtualenv.

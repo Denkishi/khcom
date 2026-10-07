@@ -857,6 +857,9 @@ u8 RogueTakeCardPress(void);
 #define ROGUE_PRESS_BUFFER 30 // frames a press of the card button waits for Sora to be free
 #define ROGUE_ACTION_NONE 99 // a card action Sora's battle task has nothing for: the card is spent and he does not swing
 #define ROGUE_META_2D_SEEN 32 // Axel has explained the flat battle
+// 1 while a battle is on. Nothing in the game reads it: the Windows program
+// of tools/pc does, to show the wider picture only where the game fills it.
+extern u8 gRogueWide;
 u8 Rogue2d(void);
 void Rogue2dReset(void);
 void Rogue2dDebug(u8 arg);

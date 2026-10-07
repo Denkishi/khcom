@@ -19,7 +19,7 @@ ROGUE_TEXT(sAxel8, "Le carte nel mazzo salgono\x1F" "di livello vincendo. Due\x1
 ROGUE_TEXT(sAxel9, "Pi\xF9 vai avanti, pi\xF9 picchiano.\x1FSe cadi la run finisce, ma i\x1F\x1D" "Frammenti\x1E raccolti restano.");
 ROGUE_TEXT(sAxel10, "Batti l'ultimo boss e si apre\x1Fun \x1D" "capitolo\x1E nuovo: altri\x1Fmondi, nemici e carte.");
 ROGUE_TEXT(sAxel11, "Riparlami per spendere i\x1F" "Frammenti in potenziamenti.\x1FTieni L per riascoltarmi.");
-ROGUE_TEXT(sAxel12, "Nel menu, Grillario mostra\x1Fla tua run e Salvarapido\x1Fla mette in pausa.");
+ROGUE_TEXT(sAxel12, "Nel menu, \x1DMemoria\x1E mostra\x1Fla tua run e \x1DSalva e via\x1E\x1Fla mette in pausa.");
 ROGUE_TEXT(sAxel13, "Ci\xF2 di cui hai tanto fa una\x1F\x1D" "build\x1E: elementi, lame, magie,\x1Fproiettili. E si sommano.");
 ROGUE_TEXT(sAxel14, "Nelle stanze evento trovi\x1F" "amici e nemici: doni, patti,\x1F" "duelli. Scegli bene.");
 ROGUE_TEXT(sAxel15, "Le \x1Dreliquie\x1E durano la run.\x1F" "Alcune cambiano ogni mossa:\x1F" "pi\xF9 colpi, ventaglio, eco...");

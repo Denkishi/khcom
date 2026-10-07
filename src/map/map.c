@@ -5117,9 +5117,9 @@ s32 func_080ED498(MapMenuWork* w) {
             break;
         case 3:
             if (gGameState.flags & 8) {
-                w->tiles6 = LoadObjTiles(gUnkEu_09947CB0, 0x1500);
+                w->tiles6 = LoadObjTiles((void*)gRogueMenuLabelRikuTiles, 0x1500);
             } else {
-                w->tiles6 = LoadObjTiles(gUnkEu_099413B0, 0x1500);
+                w->tiles6 = LoadObjTiles((void*)gRogueMenuLabelTiles, 0x1500);
             }
             break;
         case 2:

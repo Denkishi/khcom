@@ -13,6 +13,7 @@ new rogue_debug.c
 new rogue_tag.c
 new rogue_moves.c
 new rogue_boss.c
+new rogue_menu_art.c
 new rogue_mickey_art.c
 new rogue_cards.c
 new rogue_hub.c

@@ -651,6 +651,7 @@ void RogueShockwave(struct BtlObj* sora, u8 element, u16 scale);
 void RogueBuildOam(void);
 s32 RogueSqrt8(s32 a);
 extern const u16 gRogueMickeyPalette[16];
+extern const u8 gRogueMenuLabelTiles[], gRogueMenuLabelRikuTiles[];
 u8 RogueHasRelic(u8 relic);
 void RogueGiveRelic(u8 relic);
 u8 RogueBlocksBreak(s32 value);

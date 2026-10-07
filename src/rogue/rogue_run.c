@@ -353,7 +353,14 @@ u8 RogueOnBattleEnd(u16 battle) {
         gRogue.shards += ROGUE_SHARDS_MINIBOSS;
     }
 
-    ModeRequest(&gModeRogueReward, gRogue.kind == ROGUE_ROOM_BOSS ? ROGUE_REWARD_BOSS : ROGUE_REWARD_BATTLE);
+    if (gRogue.kind == ROGUE_ROOM_BOSS) {
+        ModeRequest(&gModeRogueReward, ROGUE_REWARD_BOSS);
+    } else if (gRogue.kind == ROGUE_ROOM_TREASURE) {
+        // A treasure room pays like a boss.
+        ModeRequest(&gModeRogueReward, ROGUE_REWARD_DUEL);
+    } else {
+        ModeRequest(&gModeRogueReward, ROGUE_REWARD_BATTLE);
+    }
     return 1;
 }
 

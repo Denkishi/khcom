@@ -58,6 +58,14 @@ static const RogueEventDef sEvents[ROGUE_EVENTS] = {
     { NPC(Sari), { { ROGUE_OFFER_DUPLICATE, 0 }, { ROGUE_OFFER_TRANSFORM, 0 }, { ROGUE_OFFER_HEAL, 0 } } },
     // Jiminy has advice.
     { NPC2(Jim, gJiminyPalette), { { ROGUE_OFFER_REROLL, 0 }, { ROGUE_OFFER_SHARDS, 10 }, { ROGUE_OFFER_UPGRADE, 0 } } },
+    // Wendy's stories.
+    { NPC(Wendy), { { ROGUE_OFFER_REROLL, 0 }, { ROGUE_OFFER_RANDOM_CARD, 0 }, { ROGUE_OFFER_HEAL, 0 } } },
+    // The Beast's rage.
+    { NPC(Beast), { { ROGUE_OFFER_ATTACK_FOR_HP, 0 }, { ROGUE_OFFER_COMBO, 0 }, { ROGUE_OFFER_LEAVE, 0 } } },
+    // Tidus shows a move.
+    { NPC(Tidus), { { ROGUE_OFFER_AIR_JUMP, 0 }, { ROGUE_OFFER_CP, 0 }, { ROGUE_OFFER_SHARDS, 10 } } },
+    // Selphie trades cards.
+    { NPC(Selphie), { { ROGUE_OFFER_TRANSFORM, 0 }, { ROGUE_OFFER_DUPLICATE, 0 }, { ROGUE_OFFER_RANDOM_CARD, 0 } } },
 };
 
 const RogueEventOffer* RogueEventOffers(void) {

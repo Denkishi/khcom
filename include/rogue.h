@@ -175,6 +175,10 @@ enum RogueEvent {
     ROGUE_EVENT_ANSEM,
     ROGUE_EVENT_SALLY,
     ROGUE_EVENT_JIMINY,
+    ROGUE_EVENT_WENDY,
+    ROGUE_EVENT_BEAST,
+    ROGUE_EVENT_TIDUS,
+    ROGUE_EVENT_SELPHIE,
     ROGUE_EVENTS
 };
 
@@ -216,7 +220,7 @@ enum {
     ROGUE_REWARD_BATTLE,
     ROGUE_REWARD_BOSS,
     ROGUE_REWARD_EVENT,
-    ROGUE_REWARD_DUEL // a won duel: a boss's rewards, then back to the room
+    ROGUE_REWARD_DUEL // a won duel or a treasure room: a boss's rewards, then back to the room
 };
 
 struct FldObj;

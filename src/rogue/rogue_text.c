@@ -55,6 +55,14 @@ ROGUE_TEXT(sSally0, "Oh, Sora. Ho preparato\x1F" "delle pozioni nuove. Non\x1Fso
 ROGUE_TEXT(sSally1, "Vuoi provarne una\x1Fsulle tue carte?");
 ROGUE_TEXT(sJiminy0, "Sora! Ho annotato tutto\x1Fnel diario. Lascia che\x1Fti dia un consiglio.");
 ROGUE_TEXT(sJiminy1, "Che cosa ti sarebbe\x1Fpi\xF9 utile?");
+ROGUE_TEXT(sWendy0, "Oh, Sora! Arrivi giusto\x1Fin tempo per una storia.\x1FNe conosco tante.");
+ROGUE_TEXT(sWendy1, "Quale vuoi sentire\x1Fstavolta?");
+ROGUE_TEXT(sBeast0, "Tu. Conosco quello\x1Fsguardo. Anche tu hai\x1Fqualcuno da proteggere.");
+ROGUE_TEXT(sBeast1, "La rabbia d\xE0 forza.\x1FMa lascia il segno.");
+ROGUE_TEXT(sTidus0, "Ehi, Sora! Scommetto che\x1Fnon mi batti ancora.\x1FGuarda che mossa!");
+ROGUE_TEXT(sTidus1, "Te la insegno, se vuoi.\x1FO preferisci altro?");
+ROGUE_TEXT(sSelphie0, "Sora! Facciamo cambio\x1F" "di carte? Dai, sar\xE0\x1F" "divertente!");
+ROGUE_TEXT(sSelphie1, "Scegli tu come.\x1FNiente imbrogli, eh!");
 
 #define AXEL_PORTRAIT 20
 #define EVENT_PAGES(portrait, a, b) { portrait, 3, 0, 3, 0, &a, 0, 0 }, { portrait, 3, 0, 3, 0, &b, 0, 0 }
@@ -91,6 +99,10 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     EVENT_PAGES(56, sAnsem0, sAnsem1),
     EVENT_PAGES(18, sSally0, sSally1),
     EVENT_PAGES(6, sJiminy0, sJiminy1),
+    EVENT_PAGES(42, sWendy0, sWendy1),
+    EVENT_PAGES(43, sBeast0, sBeast1),
+    EVENT_PAGES(39, sTidus0, sTidus1),
+    EVENT_PAGES(40, sSelphie0, sSelphie1),
 };
 
 const CardMessageDef* RogueCardMessageDef(u16 id) {

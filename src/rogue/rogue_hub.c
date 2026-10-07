@@ -462,7 +462,12 @@ static void RogueHub_Update(void) {
     case 2:
         if (!FadeIsActive()) {
             if (sWork->next == HUB_NEXT_RUN) {
-                RogueStartRun();
+                // The room cards first: bought here, they go into the run.
+                if (RogueMapMenuWanted(1)) {
+                    ModeRequest(&gModeRogueDoor, ROGUE_DOOR_HUB);
+                } else {
+                    RogueStartRun();
+                }
             } else {
                 ModeRequest(&gModeRogueShop, ROGUE_SHOP_FROM_HUB);
             }

@@ -1,10 +1,10 @@
-# The options page with the flat battle: down to its line and right turns it
-# on, which adds two lines, a place for a technique and the technique on it;
-# right on the first goes to the next place, right on the second sets the
-# next technique there.
-# Expect: the pictures show "Battaglia: 3D", then "2D" with the two lines
-# under it, then another place with another technique; flags has bit 16 set
-# and tech reads 4: the pillar of light, one past the wave the place had, plus one.
+# The flat battle in the options page: down to its line and right turns it
+# on, which adds a line that opens the screen of its techniques. There all
+# eight places show at once, four on the ground and four in the air; the pad
+# moves between them and A sets the next technique on the one under the glove.
+# Expect: the pictures show "Battaglia: 2D" with the line under it, then the
+# eight plates, then the first plate changed; flags has bit 16 set and tech
+# reads 3 (the wave, one past the throw the place had, plus one).
 include start.txt
 press START
 wait 60
@@ -20,20 +20,18 @@ press A
 wait 20
 press A
 wait 20
+press DOWN
+wait 10
+press RIGHT
+wait 20
+press DOWN
+wait 10
 shot /tmp/options_flat_1.ppm
-press DOWN
-wait 10
-press RIGHT
-wait 20
+press A
+wait 90
 shot /tmp/options_flat_2.ppm
-press DOWN
+press A
 wait 10
-press RIGHT
-wait 10
-press DOWN
-wait 10
-press RIGHT
-wait 20
 shot /tmp/options_flat_3.ppm
 peek8 @gRogueMeta.flags flags
-peek8 @gRogue.techs+1 tech
+peek8 @gRogue.techs+0 tech

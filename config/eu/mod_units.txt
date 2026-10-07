@@ -62,3 +62,5 @@ new rogue_hero.c
 new rogue_sorakh2_art.c
 new rogue_npc_art.c
 new rogue_2d.c
+new rogue_door.c
+new rogue_techs.c

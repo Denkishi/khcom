@@ -46,6 +46,16 @@ void RogueDebugField(void) {
     case ROGUE_DEBUG_REWARD:
         RogueLeaveRoomFor(&gModeRogueReward, arg);
         break;
+    case ROGUE_DEBUG_DOOR: {
+        u8 door;
+
+        for (door = 0; door < 3 && gRogue.doors[door] == ROGUE_NO_DOOR; door++) {
+        }
+
+        gRogue.mapCards[0] = arg + 1;
+        RogueLeaveRoomFor(&gModeRogueDoor, door);
+        break;
+    }
     case ROGUE_DEBUG_RELIC:
         RogueGiveRelic(arg);
         break;

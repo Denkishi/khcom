@@ -494,6 +494,36 @@ static const u8 sSlot6[] = "B + SU in aria";
 static const u8 sSlot7[] = "B + GI\xD9 in aria";
 static const u8* const sSlotNames[ROGUE_2D_SLOTS] = { sSlot0, sSlot1, sSlot2, sSlot3, sSlot4, sSlot5, sSlot6, sSlot7 };
 
+// The same in a word, for the screen that shows all the places at once.
+static const u8 sShort0[] = "Colpo";
+static const u8 sShort1[] = "Lancio";
+static const u8 sShort2[] = "Onda";
+static const u8 sShort3[] = "Pilastro";
+static const u8 sShort4[] = "Parata";
+static const u8 sShort5[] = "Cerchio";
+static const u8 sShort6[] = "Perle";
+static const u8 sShort7[] = "Sisma";
+static const u8 sShort8[] = "Scatto";
+static const u8 sShort9[] = "Scivola";
+static const u8 sShort10[] = "Chakram";
+static const u8 sShort11[] = "Aghi";
+static const u8 sShort12[] = "Petali";
+static const u8 sShort13[] = "Schegge";
+static const u8 sShort14[] = "Globo";
+static const u8 sShort15[] = "Vampa";
+static const u8 sShort16[] = "Roccia";
+static const u8 sShort17[] = "Bomba";
+static const u8 sShort18[] = "Coltelli";
+static const u8 sShort19[] = "Blocco";
+static const u8* const sShortNames[ROGUE_2D_TECHS] = {
+    sShort0, sShort1, sShort2, sShort3, sShort4, sShort5, sShort6, sShort7, sShort8, sShort9,
+    sShort10, sShort11, sShort12, sShort13, sShort14, sShort15, sShort16, sShort17, sShort18, sShort19,
+};
+
+const u8* Rogue2dTechShort(u8 tech) {
+    return sShortNames[tech];
+}
+
 const u8* Rogue2dTechName(u8 tech) {
     return sTechNames[tech];
 }

@@ -273,6 +273,11 @@ static void RogueEnterRoom(u8 firstOfFloor) {
         gRogue.event = RogueRandBelow(ROGUE_EVENTS);
         gRogue.eventDone = 0;
 
+        // A room card names who is there.
+        if (gRogue.cardEvent != 0) {
+            gRogue.event = gRogue.cardEvent - 1;
+        }
+
         if (gRogueDebug.event != 0) {
             gRogue.event = gRogueDebug.event - 1;
         }
@@ -293,6 +298,7 @@ static void RogueEnterRoom(u8 firstOfFloor) {
         return;
     }
 
+    gRogue.cardEvent = 0;
     RogueRollDoors();
     room = func_080DEE18(ROGUE_ROOM_ID);
     row = gUnk_0984D134[sRoomTypes[gRogue.kind]];
@@ -338,6 +344,7 @@ void RogueStartRun(void) {
     gRogue.deckBias = 0;
     RogueApplyUpgrades();
     RogueApplyBoon();
+    RogueMapStartRun();
     gRogue.deckWanted = 1;
     func_0801CD20();
     RogueApplyHero();
@@ -426,6 +433,8 @@ u8 RogueOnBattleEnd(u16 battle) {
         ModeRequest(&gModeRogueReward, ROGUE_REWARD_DUEL);
         return 1;
     }
+
+    RogueMapDrop();
 
     if (gRogue.kind != ROGUE_ROOM_BOSS) {
         gRogue.shards += ROGUE_SHARDS_ROOM;

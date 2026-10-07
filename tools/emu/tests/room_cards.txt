@@ -1,0 +1,40 @@
+# Room cards. Starting a run from the hub goes through their menu, where
+# they are bought for the next run; at a door any card held can be spent to
+# make the room behind it the card's. Here Jack's card (10) is given and
+# spent on the first room's door: the next room is his event room.
+# Expect: the first picture shows the hub's menu with "Parti" and three cards
+# on sale; the second the door's menu with "Prosegui", "Usa: Jack" and the
+# cards on sale; the third a room with Jack in it. kind reads 7 (an event
+# room), event reads 4 (Jack), map_used reads 1, bought reads 1 and the
+# second picture shows the card bought among those held.
+wait 600
+poke16 @gRogueMeta.shards 100
+press START
+wait 120
+press START
+wait 90
+shot /tmp/cards_hub.ppm
+press DOWN
+wait 10
+press A
+wait 20
+shot /tmp/cards_bought.ppm
+press B
+wait 200
+hold B 100
+wait 20
+debug door 10
+wait 90
+shot /tmp/cards_door.ppm
+press DOWN
+wait 10
+press A
+wait 200
+hold B 100
+wait 30
+shot /tmp/cards_room.ppm
+peek8 @gRogue.kind kind
+peek8 @gRogue.event event
+peek8 @gRogueDebug.mapUsed map_used
+peek8 @gRogueDebug.mapBought bought
+peek32 @gFrameCounter frames

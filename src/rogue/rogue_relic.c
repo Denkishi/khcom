@@ -347,7 +347,7 @@ typedef struct RogueRelicsWork {
     u8 abandon; // set by a first press of select on the records page
     u8 leave; // the run was given up
     u8 option; // the line of the options page the keys change
-    u8 slot; // the place of the flat battle whose technique is shown there
+    u8 techs; // leaving for the screen of the flat battle's techniques
 } RogueRelicsWork;
 
 static RogueRelicsWork* sWork;
@@ -369,9 +369,8 @@ static const u8 sOptionSwapped[] = "invertito";
 static const u8 sOptionBattle[] = "Battaglia: ";
 static const u8 sOptionDeep[] = "3D";
 static const u8 sOptionFlat[] = "2D";
-static const u8 sOptionSlot[] = "Tasto: ";
-static const u8 sOptionTech[] = "Fa: ";
-#define OPTION_LINES 4 // the last two only with the flat battle on
+static const u8 sOptionTechs[] = "Tecniche dei tasti: A";
+#define OPTION_LINES 3 // the last only with the flat battle on
 static const u8* const sTabs[PAGE_TABS] = { sTabRun, sTitleRelics, sTitleRecords, sTitleOptions };
 
 // The option, kept with the save: L and R turn the hand the other way.
@@ -506,12 +505,7 @@ static void RogueRelicsShowPage(void) {
                 RogueRelicsAppend(out, (gRogueMeta.flags & ROGUE_META_2D) ? sOptionFlat : sOptionDeep);
                 break;
             case 2:
-                out = RogueRelicsAppend(out, sOptionSlot);
-                RogueRelicsAppend(out, Rogue2dSlotName(sWork->slot));
-                break;
-            case 3:
-                out = RogueRelicsAppend(out, sOptionTech);
-                RogueRelicsAppend(out, Rogue2dTechName(Rogue2dTechAt(sWork->slot)));
+                RogueRelicsAppend(out, sOptionTechs);
                 break;
             }
 
@@ -556,7 +550,7 @@ static void RogueRelics_Init(s32 arg) {
     sWork->abandon = 0;
     sWork->leave = 0;
     sWork->option = 0;
-    sWork->slot = 0;
+    sWork->techs = 0;
     SetBgMode0();
     SetupBg(3, 0, 0x1D, 0);
     SetBgPriority(3, 3);
@@ -595,7 +589,13 @@ static void RogueRelics_Update(void) {
         }
         break;
     case 1:
-        if (GetKeysPressed() & A_BUTTON) {
+        if ((GetKeysPressed() & A_BUTTON) && sWork->page == PAGE_OPTIONS && sWork->option == 2) {
+            // The screen of the flat battle's techniques.
+            m4aSongNumStart(SONG_SYS_KETTEI);
+            sWork->techs = 1;
+            FadeStartOut(0, 16);
+            sWork->state = 2;
+        } else if (GetKeysPressed() & A_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLICK);
             sWork->page = (sWork->page + 1) % RogueRelicsPages();
             sWork->abandon = 0;
@@ -622,8 +622,6 @@ static void RogueRelics_Update(void) {
         } else if ((GetKeysPressed() & (DPAD_LEFT | DPAD_RIGHT)) && sWork->page == PAGE_OPTIONS) {
             // Left and right change it.
             u8 back = (GetKeysPressed() & DPAD_LEFT) != 0;
-            u8 tech;
-
             switch (sWork->option) {
             case 0:
                 gRogueMeta.flags ^= ROGUE_META_SWAP_LR;
@@ -634,19 +632,6 @@ static void RogueRelics_Update(void) {
                 gRogueMeta.flags ^= ROGUE_META_2D;
                 gRogueMeta.flags &= ~ROGUE_META_2D_SEEN;
                 RogueMetaSave();
-                break;
-            case 2:
-                sWork->slot = (sWork->slot + (back ? ROGUE_2D_SLOTS - 1 : 1)) % ROGUE_2D_SLOTS;
-                break;
-            case 3:
-                // The next technique the run has: those of relics only with the relic.
-                tech = Rogue2dTechAt(sWork->slot);
-
-                do {
-                    tech = (tech + (back ? ROGUE_2D_TECHS - 1 : 1)) % ROGUE_2D_TECHS;
-                } while (!Rogue2dTechOwned(tech));
-
-                Rogue2dSetTech(sWork->slot, tech);
                 break;
             }
 
@@ -660,7 +645,9 @@ static void RogueRelics_Update(void) {
         break;
     case 2:
         if (!FadeIsActive()) {
-            if (sWork->leave) {
+            if (sWork->techs) {
+                ModeRequest(&gModeRogueTechs, 0);
+            } else if (sWork->leave) {
                 RogueAbandonRun();
             } else {
                 func_080E04EC();

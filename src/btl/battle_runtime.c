@@ -661,13 +661,12 @@ void _08019CB4(void) {
             if (obj != 0) {
                 obj->flags |= 0x10000ULL;
             }
-            FadeFromAmount(2, 10, 4);
+            RogueCardBreakShown(obj);
         } else {
             gBtlWork->flags &= ~0x20000000ULL;
             player->flags |= 0x10000ULL;
-            FadeFromAmount(3, 10, 4);
+            RogueCardBreakShown(player);
         }
-        MosaicStartIn(16, 15);
         func_08019050(1, 256, gBtlWork->x2, gBtlWork->y2);
         gBtlWork->unk_0E4 = 0;
     }

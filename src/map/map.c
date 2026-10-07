@@ -2739,7 +2739,14 @@ void func_080E9CBC(void) {
     func_080E0820();
 
     if (FadeIsActive() == 0) {
-        RogueLeaveRoom(gUnk_0203C7AC->unk_10);
+        // The door's menu of room cards comes first, when Sora has a card or
+        // the shards for one; from it the run goes on.
+        if (RogueMapMenuWanted(0)) {
+            func_0801CB0C();
+            ModeRequest(&gModeRogueDoor, gUnk_0203C7AC->unk_10);
+        } else {
+            RogueLeaveRoom(gUnk_0203C7AC->unk_10);
+        }
     }
 }
 

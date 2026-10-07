@@ -305,6 +305,7 @@ enum RogueMoveMode {
     ROGUE_MOVE_ORBIT, // it circles Sora for the whole battle, hitting what it touches. phase: where on the circle, in 1/256
     ROGUE_MOVE_SHARD, // it hangs over Sora for `phase` frames, then flies at an enemy
     ROGUE_MOVE_CIRCLE, // as ROGUE_MOVE_ORBIT, for a few seconds
+    ROGUE_MOVE_SPARK, // it shows where it is set for a moment, hitting nothing
     ROGUE_MOVE_GUARD // a half shell before Sora, or with phase 1 behind him, for a moment, hitting nothing: what a counter looks like
 };
 
@@ -653,6 +654,11 @@ enum Rogue2dTech {
     ROGUE_2D_TECHS = ROGUE_TECH_FIRST_RELIC + 10
 };
 
+// Room cards, see rogue_door.c.
+#define ROGUE_MAP_CARDS 6 // held at once
+#define ROGUE_MAP_CARD_KINDS 55
+#define ROGUE_DOOR_HUB 0x100 // the menu's argument in the hub; at a door it is the door
+
 typedef struct RogueRun {
     u32 seed;
     u32 rng;
@@ -662,6 +668,8 @@ typedef struct RogueRun {
     u8 world;
     u8 kind;
     u8 doors[4]; // room kind behind each door, ROGUE_NO_DOOR if none
+    u8 mapCards[ROGUE_MAP_CARDS]; // the room cards held, each plus one; 0 for none
+    u8 cardEvent; // who a room card puts in the next event room, plus one
     u8 comboPlus; // extra hits in the attack combo
     u8 airJumps; // jumps allowed in mid-air
     u8 airJumpsUsed;
@@ -724,7 +732,8 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_ENEMY_TAG, // arg: enemy card id, counted from the first, whose enemy comes in
     ROGUE_DEBUG_MOVE, // arg: effect move Sora does
     ROGUE_DEBUG_CARD, // arg: one of the mod's card kinds, counted from the first, played alone
-    ROGUE_DEBUG_TECH // arg: a move of the flat battle, as if a Keyblade 5 were played: 128 for B, 64 in the air, and the direction (0 none, 1 forward, 2 Up, 3 Down)
+    ROGUE_DEBUG_TECH, // arg: a move of the flat battle, as if a Keyblade 5 were played: 128 for B, 64 in the air, and the direction (0 none, 1 forward, 2 Up, 3 Down)
+    ROGUE_DEBUG_DOOR // arg: a room card, given to Sora; then the menu of the room's first door opens
 };
 
 typedef struct RogueDebug {
@@ -765,6 +774,10 @@ typedef struct RogueDebug {
     u8 bossForce; // set from outside: the move such a boss makes next, plus one
     u16 heroMoves; // things a hero other than Sora has done that Sora does not
     u16 techs; // moves of the flat battle made
+    u8 mapDrops; // room cards dropped by battles
+    u8 breaks; // card breaks shown
+    u8 mapUsed; // spent on doors
+    u8 mapBought;
     u16 counters; // hits its counter has turned away
     u8 tech; // the last technique made with B
     u8 techForce; // set from outside: the action every card played does
@@ -860,6 +873,16 @@ u8 RogueTakeCardPress(void);
 // 1 while a battle is on. Nothing in the game reads it: the Windows program
 // of tools/pc does, to show the wider picture only where the game fills it.
 extern u8 gRogueWide;
+extern Mode gModeRogueDoor;
+const u8* RogueMapCardName(u8 card);
+u8 RogueMapCardCost(u8 card);
+u8 RogueMapCardCount(void);
+u8 RogueMapMenuWanted(u8 hub);
+void RogueMapStartRun(void);
+void RogueMapDrop(void);
+void RogueLeaveRoom(u8 door);
+void RogueStartRun(void);
+void RogueCardBreakShown(struct BtlObj* loser);
 u8 Rogue2d(void);
 void Rogue2dReset(void);
 void Rogue2dDebug(u8 arg);
@@ -876,6 +899,8 @@ u8 Rogue2dCounterHit(struct BtlObj* sora);
 u8 Rogue2dLaunching(void);
 void Rogue2dTick(void);
 const u8* Rogue2dTechName(u8 tech);
+const u8* Rogue2dTechShort(u8 tech);
+extern Mode gModeRogueTechs;
 const u8* Rogue2dSlotName(u8 slot);
 void RogueShockwaveSmall(struct BtlObj* sora, u16 scale);
 u8 RogueActorIs(void);

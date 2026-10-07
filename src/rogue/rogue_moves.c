@@ -262,6 +262,11 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
         return 0;
     }
 
+    if (w->args.mode == ROGUE_MOVE_SPARK) {
+        AnimUpdate(&w->anim);
+        return ++w->timer <= 12;
+    }
+
     if (w->args.mode == ROGUE_MOVE_GUARD) {
         // What a counter looks like: a shell of light round Sora, hitting nothing.
         BtlObj* sora = gBtlWork->actor;
@@ -889,6 +894,19 @@ void RogueFoeMove(BtlObj* foe, u8 move, s32 x, s32 y, s32 z, u8 mode, u8 phase, 
     }
 
     TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueMove, &args);
+}
+
+// A card is broken. The game flashed the whole screen and broke it into
+// squares for a moment, which at the mod's pace was hard on the eyes: now a
+// small light shows over whoever lost the card, with a sound, and nothing
+// stops. The game's own word for it still rises over them.
+void RogueCardBreakShown(BtlObj* loser) {
+    gRogueDebug.breaks++;
+    m4aSongNumStart(SONG_SYS_KETTEI);
+
+    if (loser != 0) {
+        RogueMoveSpawn(ROGUE_MOVE_PEARL, loser->x, loser->y + 0x100, loser->z - 0x2C00, ROGUE_MOVE_SPARK, 0, 0, 0);
+    }
 }
 
 // The bolt of Sora's own Thunder, from above him onto an enemy. The game

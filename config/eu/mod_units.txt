@@ -12,6 +12,8 @@ new rogue_build.c
 new rogue_debug.c
 new rogue_tag.c
 new rogue_cards.c
+new rogue_hub.c
+new rogue_bg_station.c
 new rogue_card_art.c
 new rogue_reward.c
 new rogue_over.c

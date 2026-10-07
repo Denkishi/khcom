@@ -108,8 +108,9 @@ void RogueApplyUpgrades(void) {
     }
 }
 
-// Buys the next level; it counts for the run in progress too.
-u8 RogueBuyUpgrade(u8 upgrade) {
+// Buys the next level. Bought during a run it counts for that run too; bought
+// in the hub it is applied with the others when the run starts.
+u8 RogueBuyUpgrade(u8 upgrade, u8 inRun) {
     u16 cost = RogueUpgradeCost(upgrade);
 
     if (gRogueMeta.upgrades[upgrade] >= sUpgrades[upgrade].levels || gRogueMeta.shards < cost) {
@@ -118,7 +119,11 @@ u8 RogueBuyUpgrade(u8 upgrade) {
 
     gRogueMeta.shards -= cost;
     gRogueMeta.upgrades[upgrade]++;
-    RogueApplyUpgrade(upgrade);
+
+    if (inRun) {
+        RogueApplyUpgrade(upgrade);
+    }
+
     RogueMetaSave();
     return 1;
 }

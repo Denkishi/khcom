@@ -35,6 +35,7 @@ typedef struct RogueShopWork {
     u8 detailCount;
     u8 cursor;
     u8 state;
+    u8 fromHub;
 } RogueShopWork;
 
 static RogueShopWork* sWork;
@@ -117,13 +118,14 @@ static void RogueShopRefresh(void) {
     sWork->detailCount = LoadTextSlots((u16*)sWork->text, sWork->detail);
 }
 
-static void RogueShop_Init(s32 arg) {
+static void RogueShop_Init(s32 from) {
     const u16* map = (const u16*)gUnk_09847798;
     s32 i;
 
     sWork = EwramAlloc(sizeof(RogueShopWork));
     sWork->cursor = 0;
     sWork->state = 0;
+    sWork->fromHub = from == ROGUE_SHOP_FROM_HUB;
     SetBgMode0();
     SetupBg(3, 0, 0x1D, 0);
     SetupBg(2, 0, 0x1E, 0);
@@ -171,7 +173,7 @@ static void RogueShop_Update(void) {
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueShopRefresh();
         } else if (GetKeysPressed() & A_BUTTON) {
-            if (RogueBuyUpgrade(sWork->cursor)) {
+            if (RogueBuyUpgrade(sWork->cursor, !sWork->fromHub)) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 RogueShopRefresh();
             } else {
@@ -185,7 +187,12 @@ static void RogueShop_Update(void) {
         break;
     case 2:
         if (!FadeIsActive()) {
-            func_080E04EC();
+            if (sWork->fromHub) {
+                ModeRequest(&gModeRogueHub, 1);
+            } else {
+                func_080E04EC();
+            }
+
             sWork->state = 3;
         }
         break;

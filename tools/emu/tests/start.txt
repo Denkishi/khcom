@@ -1,6 +1,9 @@
-# Boots, starts a run and skips the world banner: Sora stands in the first room.
+# Boots, goes through the hub, starts a run and skips the world banner: Sora
+# stands in the first room.
 wait 600
 press START
+wait 120
+press A
 wait 200
 hold B 100
 wait 20

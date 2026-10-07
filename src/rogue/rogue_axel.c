@@ -58,7 +58,7 @@ static void RogueAxel_Idle(RogueAxelWork* w) {
         // Once the explanation has been heard, talking to him opens the shop.
         // Holding L asks for the explanation again.
         if ((gRogueMeta.flags & ROGUE_META_TUTORIAL_SEEN) && !(GetKeysHeld() & L_BUTTON)) {
-            RogueLeaveRoomFor(&gModeRogueShop, 0);
+            RogueLeaveRoomFor(&gModeRogueShop, ROGUE_SHOP_FROM_ROOM);
             return;
         }
 

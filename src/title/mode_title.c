@@ -40,7 +40,7 @@ void func_080D5998(void) {
 
 void func_080D59B4(void) {
     if (!RogueResumeRun()) {
-        RogueStartRun();
+        ModeRequest(&gModeRogueHub, 0);
     }
 }
 

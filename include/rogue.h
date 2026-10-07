@@ -16,6 +16,10 @@
 #define ROGUE_FLOORS 11
 
 // Memory shards, the currency kept between runs.
+// Argument of gModeRogueShop: where it was opened from and goes back to.
+#define ROGUE_SHOP_FROM_ROOM 0
+#define ROGUE_SHOP_FROM_HUB 1
+
 #define ROGUE_SHARDS_ROOM 2
 #define ROGUE_SHARDS_MINIBOSS 10
 #define ROGUE_SHARDS_BOSS 25
@@ -328,6 +332,7 @@ void RogueDebugBattle(void);
 extern RogueRun gRogue;
 extern RogueMeta gRogueMeta;
 extern Mode gModeRogueShop;
+extern Mode gModeRogueHub;
 extern Mode gModeRogueRelics;
 extern Mode* gRogueLeaveMode;
 extern s32 gRogueLeaveArg;
@@ -349,7 +354,7 @@ void RogueMetaLoad(void);
 void RogueMetaSave(void);
 void RogueMetaEndRun(u8 completed);
 void RogueApplyUpgrades(void);
-u8 RogueBuyUpgrade(u8 upgrade);
+u8 RogueBuyUpgrade(u8 upgrade, u8 inRun);
 u8 RogueUpgradeMax(u8 upgrade);
 u16 RogueUpgradeCost(u8 upgrade);
 void RogueLeaveRoomFor(Mode* mode, s32 arg);

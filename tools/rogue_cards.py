@@ -101,6 +101,17 @@ ICONS = [
 ]
 
 
+# The ability tree's node icons, from the material icons sheet, in the order
+# of the tree's grid: three branches of six. They share one palette, so that
+# a node can be shown reached, locked or full by changing palette alone.
+TREE_SHEET = "materials_1.png"
+TREE_ICONS = [
+    (465, 320, 479, 334), (465, 342, 479, 356), (465, 367, 479, 381), (624, 371, 638, 385), (624, 399, 638, 413), (624, 313, 638, 327),
+    (19, 546, 33, 560), (106, 580, 120, 594), (512, 548, 526, 562), (331, 546, 345, 560), (430, 488, 444, 502), (430, 513, 444, 527),
+    (624, 342, 638, 356), (465, 393, 479, 407), (184, 546, 198, 560), (657, 548, 671, 562), (622, 485, 636, 499), (438, 582, 452, 596),
+]
+
+
 def symbol_offsets():
     text = MAP.read_text()
     return {name: int(addr, 16) - 0x08000000 for addr, name in re.findall(r"^\s+0x(0[89][0-9a-f]{6})\s+(\w+)$", text, re.M)}
@@ -264,6 +275,25 @@ def main():
         indices, palette = quantize(big)
         art += [c_array(f"gRogueIcon{name}Tiles", gba_tiles(indices, 32, 32)),
                 c_array(f"gRogueIcon{name}Palette", gba_palette(palette)), ""]
+    # The tree icons: all on one strip, quantized together.
+    sheet = Image.open(ROOT / "mod_assets" / TREE_SHEET).convert("RGB")
+    strip = Image.new("RGB", (32 * len(TREE_ICONS), 32), TRANSPARENT)
+    for index, box in enumerate(TREE_ICONS):
+        icon = sheet.crop(box)
+        icon = icon.resize((icon.width * 2, icon.height * 2), Image.Resampling.NEAREST)
+        for y in range(icon.height):
+            for x in range(icon.width):
+                if sum(icon.getpixel((x, y))) >= 60:
+                    strip.putpixel((index * 32 + 2 + x, 2 + y), icon.getpixel((x, y)))
+    indices, palette = quantize(strip)
+    tiles = bytearray()
+    for index in range(len(TREE_ICONS)):
+        one = [indices[y * strip.width + index * 32 + x] for y in range(32) for x in range(32)]
+        tiles += gba_tiles(one, 32, 32)
+    locked = [tuple((r + g + b) // 9 + 12 for _ in range(3)) for r, g, b in palette]
+    full = [(min(255, r + 70), min(255, g + 60), min(255, b // 2 + 20)) for r, g, b in palette]
+    art += [c_array("gRogueTreeIconTiles", bytes(tiles)), c_array("gRogueTreePalette", gba_palette(palette)),
+            c_array("gRogueTreeLockedPalette", gba_palette(locked)), c_array("gRogueTreeFullPalette", gba_palette(full)), ""]
     OUT.write_text("\n".join(art))
     OUT_TABLE.write_text("\n".join(table))
     print(f"wrote {OUT.relative_to(ROOT)} and {OUT_TABLE.relative_to(ROOT)}: {len(CARDS)} cards")

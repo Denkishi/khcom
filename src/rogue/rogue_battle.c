@@ -154,6 +154,16 @@ void RogueOnDamage(BtlObj* p) {
         p->unk_020 *= 2;
     }
 
+    // The tree's critical hits, four in a hundred for each level, and its
+    // stronger finishers.
+    if (RogueRandBelow(100) < 4 * RogueUpgradeLevel(ROGUE_UPGRADE_CRIT)) {
+        p->unk_020 *= 2;
+    }
+
+    if (gRogue.finisher) {
+        p->unk_020 += p->unk_020 * 15 * RogueUpgradeLevel(ROGUE_UPGRADE_FINISHER) / 100;
+    }
+
     if (RogueHasRelic(ROGUE_RELIC_BERSERK) && sora->unk_02C * 4 <= sora->unk_02E) {
         p->unk_020 += p->unk_020 / 2;
     }

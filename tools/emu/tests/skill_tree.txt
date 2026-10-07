@@ -1,10 +1,10 @@
-# Axel's three pages in the hub: the two of the ability tree, bought with shards, and the
-# starting cards, bought with the seals bosses leave.
-# Expect: CP is closed until HP is at level 2 (the second screenshot says what
-# it needs, the third its cost); hp reads 2; the card page lists six
-# cards; starters reads 1 and seals 7 after buying the first. (The two
-# upgrade levels are read from the screenshots: the script cannot address the
-# second element of the array.)
+# Axel's two pages in the hub: the ability tree, three branches of six icons
+# bought with shards, and the starting cards, bought with the seals bosses
+# leave.
+# Expect: the first screenshot shows the tree with only the three roots lit;
+# CP, the second node of the first branch, says it needs HP at level 2 and
+# then, after two levels of HP, its cost; hp reads 2 and cp 1; the card page
+# lists six cards; starters reads 1 and seals 7 after buying the first.
 wait 600
 press START
 wait 120
@@ -12,34 +12,35 @@ poke16 @gRogueMeta.shards 200
 poke8 @gRogueMeta.seals 9
 poke8 @gRogueMeta.starters 0
 poke8 @gRogueMeta.upgrades 0
+poke8 @gRogueMeta.upgrades+1 0
 hold UP 30
 press A
 wait 60
 shot /tmp/tree_1.ppm
-press DOWN
+press RIGHT
 wait 10
 shot /tmp/tree_2.ppm
 press A
 wait 10
-press UP
+press LEFT
 wait 10
 press A
 wait 10
 press A
 wait 10
-press DOWN
+press RIGHT
 wait 10
 shot /tmp/tree_3.ppm
 press A
 wait 10
 peek8 @gRogueMeta.upgrades hp
-press R
+peek8 @gRogueMeta.upgrades+1 cp
+press DOWN
 wait 10
-shot /tmp/tree_page2.ppm
-press R
+press DOWN
 wait 10
 shot /tmp/tree_4.ppm
-press UP
+press R
 wait 10
 press A
 wait 10

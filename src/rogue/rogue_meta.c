@@ -28,30 +28,50 @@ static RogueSuspend sSuspend;
 
 RogueMeta gRogueMeta;
 
+// The tree: three branches, each upgrade open once the one before it on its
+// branch has a level (two, after the first of a branch).
 static const RogueUpgradeDef sUpgrades[ROGUE_UPGRADES] = {
-    // Two branches: HP, then CP, then rerolls; strength, then combo plus,
-    // then the air jump.
     { 5, 8, ROGUE_UPGRADES, 0 }, // max HP
     { 5, 8, ROGUE_UPGRADE_HP, 2 }, // CP
     { 3, 15, ROGUE_UPGRADES, 0 }, // strength
     { 1, 40, ROGUE_UPGRADE_ATTACK, 2 }, // combo plus
     { 1, 30, ROGUE_UPGRADE_COMBO, 1 }, // air jump
-    { 3, 12, ROGUE_UPGRADE_CP, 2 }, // rerolls
-    // And four more that grow out of them.
+    { 3, 12, ROGUE_UPGRADE_HEAL, 1 }, // rerolls
     { 1, 60, ROGUE_UPGRADE_REROLL, 1 }, // a relic to start with
     { 3, 20, ROGUE_UPGRADES, 0 }, // more shards kept
     { 1, 35, ROGUE_UPGRADE_GREED, 1 }, // cards learn faster
-    { 3, 15, ROGUE_UPGRADE_ATTACK, 1 }, // faster reload
-    { 3, 20, ROGUE_UPGRADE_COMBO, 1 }, // stronger moves
-    { 3, 15, ROGUE_UPGRADE_HP, 3 }, // healing after battles
+    { 3, 15, ROGUE_UPGRADE_AIR_JUMP, 1 }, // faster reload
+    { 3, 20, ROGUE_UPGRADE_XP, 1 }, // stronger moves
+    { 3, 15, ROGUE_UPGRADE_CP, 1 }, // healing after battles
+    { 1, 80, ROGUE_UPGRADE_RELIC, 1 }, // the second wind relic to start with
+    { 3, 25, ROGUE_UPGRADE_RELOAD, 1 }, // critical hits
+    { 3, 25, ROGUE_UPGRADE_CRIT, 1 }, // stronger finishers
+    { 3, 20, ROGUE_UPGRADE_MOVES, 1 }, // stronger spells
+    { 3, 20, ROGUE_UPGRADE_MAGIC, 1 }, // stronger summons and called enemies
+    { 1, 50, ROGUE_UPGRADE_SUMMON, 1 }, // a seal more from each boss
 };
+
+// The upgrade at each place of the tree, a branch a row.
+static const u8 sTree[ROGUE_TREE_BRANCHES][ROGUE_TREE_DEPTH] = {
+    { ROGUE_UPGRADE_HP, ROGUE_UPGRADE_CP, ROGUE_UPGRADE_HEAL, ROGUE_UPGRADE_REROLL, ROGUE_UPGRADE_RELIC, ROGUE_UPGRADE_SECOND_LIFE },
+    { ROGUE_UPGRADE_ATTACK, ROGUE_UPGRADE_COMBO, ROGUE_UPGRADE_AIR_JUMP, ROGUE_UPGRADE_RELOAD, ROGUE_UPGRADE_CRIT, ROGUE_UPGRADE_FINISHER },
+    { ROGUE_UPGRADE_GREED, ROGUE_UPGRADE_XP, ROGUE_UPGRADE_MOVES, ROGUE_UPGRADE_MAGIC, ROGUE_UPGRADE_SUMMON, ROGUE_UPGRADE_SEAL },
+};
+
+u8 RogueTreeNode(u8 branch, u8 depth) {
+    return sTree[branch][depth];
+}
 
 static u8* RogueUpgradeSlot(u8 upgrade) {
     if (upgrade < ROGUE_UPGRADE_PAGE) {
         return &gRogueMeta.upgrades[upgrade];
     }
 
-    return &gRogueMeta.upgrades2[upgrade - ROGUE_UPGRADE_PAGE];
+    if (upgrade < ROGUE_UPGRADE_PAGE * 2) {
+        return &gRogueMeta.upgrades2[upgrade - ROGUE_UPGRADE_PAGE];
+    }
+
+    return &gRogueMeta.upgrades3[upgrade - ROGUE_UPGRADE_PAGE * 2];
 }
 
 u8 RogueUpgradeLevel(u8 upgrade) {
@@ -111,26 +131,28 @@ static void RogueMetaReset(void) {
 }
 
 void RogueMetaLoad(void) {
+    // The save has grown twice: one of an earlier size is read as it was,
+    // with nothing in what was added since.
+    static const u8 sizes[] = { sizeof(RogueMeta), offsetof(RogueMeta, upgrades3), offsetof(RogueMeta, upgrades2) };
+    u8* bytes = (u8*)&gRogueMeta;
     u32 i;
+    u32 j;
 
-    ReadSramFast(META_SRAM, (u8*)&gRogueMeta, sizeof(gRogueMeta));
+    ReadSramFast(META_SRAM, bytes, sizeof(gRogueMeta));
 
-    if (gRogueMeta.magic == META_MAGIC &&
-        gRogueMeta.checksum == SaveChecksum((u16*)&gRogueMeta.shards, offsetof(RogueMeta, upgrades2) - offsetof(RogueMeta, shards))) {
-        // A save from before the second page of upgrades: it has none of them.
-        for (i = 0; i < ROGUE_UPGRADE_PAGE; i++) {
-            gRogueMeta.upgrades2[i] = 0;
+    if (gRogueMeta.magic == META_MAGIC) {
+        for (i = 0; i < sizeof(sizes); i++) {
+            if (gRogueMeta.checksum == SaveChecksum((u16*)&gRogueMeta.shards, sizes[i] - offsetof(RogueMeta, shards))) {
+                for (j = sizes[i]; j < sizeof(gRogueMeta); j++) {
+                    bytes[j] = 0;
+                }
+
+                return;
+            }
         }
-
-        gRogueMeta.unused2[0] = 0;
-        gRogueMeta.unused2[1] = 0;
-        return;
     }
 
-    if (gRogueMeta.magic != META_MAGIC ||
-        gRogueMeta.checksum != SaveChecksum((u16*)&gRogueMeta.shards, sizeof(gRogueMeta) - offsetof(RogueMeta, shards))) {
-        RogueMetaReset();
-    }
+    RogueMetaReset();
 }
 
 void RogueMetaSave(void) {
@@ -168,6 +190,9 @@ static void RogueApplyUpgrade(u8 upgrade) {
         break;
     case ROGUE_UPGRADE_REROLL:
         gRogue.rerolls++;
+        break;
+    case ROGUE_UPGRADE_SECOND_LIFE:
+        RogueGiveRelic(ROGUE_RELIC_SECOND_WIND);
         break;
     case ROGUE_UPGRADE_RELIC: {
         u8 relic = RogueRollRelic();

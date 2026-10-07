@@ -243,6 +243,10 @@ s32 RogueBuildDamage(s32 damage, u16 attack, u32 attackFlags) {
         }
     }
 
+    if (!gRogue.projectile && gRogue.playedKind != ROGUE_NO_KIND && RogueKindBuild(gRogue.playedKind) == ROGUE_BUILD_SPELL) {
+        bonus += 10 * RogueUpgradeLevel(ROGUE_UPGRADE_MAGIC);
+    }
+
     if (gRogue.playedMod == ROGUE_MOD_HEAVY && !gRogue.projectile && !gRogue.echoing) {
         bonus += 25;
     }

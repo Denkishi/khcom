@@ -48,8 +48,17 @@ enum RogueUpgrade {
     ROGUE_UPGRADE_RELOAD,
     ROGUE_UPGRADE_MOVES,
     ROGUE_UPGRADE_HEAL,
+    // The third.
+    ROGUE_UPGRADE_SECOND_LIFE,
+    ROGUE_UPGRADE_CRIT,
+    ROGUE_UPGRADE_FINISHER,
+    ROGUE_UPGRADE_MAGIC,
+    ROGUE_UPGRADE_SUMMON,
+    ROGUE_UPGRADE_SEAL,
     ROGUE_UPGRADES
 };
+#define ROGUE_TREE_BRANCHES 3
+#define ROGUE_TREE_DEPTH 6
 #define ROGUE_UPGRADE_PAGE 6 // upgrades to a page of the tree, and levels kept in each of the save's two arrays
 
 #define ROGUE_STARTERS 6 // cards that can be unlocked to start every run with
@@ -86,6 +95,9 @@ typedef struct RogueMeta {
     // Added after the first saves: a save without them is read as having none.
     u8 upgrades2[ROGUE_UPGRADE_PAGE]; // levels of the second page's
     u8 unused2[2];
+    // Added later still.
+    u8 upgrades3[ROGUE_UPGRADE_PAGE];
+    u8 unused3[2];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
@@ -582,6 +594,7 @@ void RogueApplyBoon(void);
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun);
 u8 RogueUpgradeMax(u8 upgrade);
 u8 RogueUpgradeLevel(u8 upgrade);
+u8 RogueTreeNode(u8 branch, u8 depth);
 u8 RogueUpgradeNeeds(u8 upgrade);
 u8 RogueUpgradeNeedsLevel(u8 upgrade);
 u8 RogueUpgradeOpen(u8 upgrade);

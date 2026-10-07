@@ -148,6 +148,7 @@ static s32 RogueTag_Update(RogueTagWork* w) {
         scale = gBtlWork->unk_124;
         gBtlWork->flags |= 0x20000000;
         gBtlWork->unk_124 = RogueHasRelic(ROGUE_RELIC_TAG_TEAM) ? w->def->scale + w->def->scale / 2 : w->def->scale;
+        gBtlWork->unk_124 += gBtlWork->unk_124 * 15 * RogueUpgradeLevel(ROGUE_UPGRADE_SUMMON) / 100;
         gRogue.finisher = 1;
         gRogue.echoing = 1;
 

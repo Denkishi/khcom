@@ -1,0 +1,61 @@
+# Styles: every few plain hits of a combo the element goes off on the enemy.
+# The thunder style (relic 53) is given and eight hits landed on Leon; then
+# the fire style (51) and eight more.
+# Expect: style_thunder 1 or more (not every debug hit lands: the boss cannot
+# be hit while it reels), style_all above it, burns above 0, and the frame
+# counter runs. The pictures show the bolt or the flame when one went off.
+include start.txt
+poke8 @gRogueDebug.god 1
+debug battle 157
+wait 460
+debug relic 53
+wait 3
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+shot /tmp/style_thunder_1.ppm
+wait 14
+shot /tmp/style_thunder_2.ppm
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+wait 40
+peek16 @gRogueDebug.styleHits style_thunder
+peek16 @gRogue.combo combo
+wait 200
+debug relic 51
+wait 3
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+shot /tmp/style_fire_1.ppm
+wait 14
+shot /tmp/style_fire_2.ppm
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+debug attack 12
+wait 40
+peek16 @gRogueDebug.styleHits style_all
+peek16 @gRogueDebug.afterHits burns
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

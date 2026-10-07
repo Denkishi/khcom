@@ -194,6 +194,11 @@ void RogueOnDamage(BtlObj* p) {
         gRogue.combo++;
     }
 
+    // A style counts the plain hits of the string; what it sets off is not one.
+    if (!gRogue.echoing && !gRogue.projectile) {
+        RogueStyleOnHit(p);
+    }
+
     gRogue.comboTimer = ROGUE_COMBO_TIME;
     gRogueDebug.lastDamage = p->unk_020;
     gRogueDebug.hits++;
@@ -560,6 +565,8 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogue.moveEcho = 0;
     gRogue.moveEchoTimer = 0;
     gRogue.thorns = 0;
+    gRogueDebug.styleHits = 0;
+    RogueStyleReset();
     RogueBossAiReset();
     gRogueDebug.bossSwings = 0;
     gRogue.airDashUsed = 0;

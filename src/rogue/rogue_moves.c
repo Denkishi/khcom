@@ -315,6 +315,7 @@ static TaskDesc sTaskDescRogueMove = {
 };
 
 static void RogueAfterTick(void);
+static void RogueStyleTick(void);
 
 // Sora's casting pose, for a move made while he is free: in the middle of a
 // swing or a spell he is already moving. The states are standing, running and
@@ -401,6 +402,7 @@ void RogueDoMove(u8 move, BtlObj* sora) {
 // Called once a frame in battle: what the relics owe from earlier frames.
 void RogueMovesTick(void) {
     RogueAfterTick();
+    RogueStyleTick();
 
     if (gRogue.moveEchoTimer != 0 && --gRogue.moveEchoTimer == 0 && gRogue.moveEcho != 0) {
         RogueMoveCast(gRogue.moveEcho - 1, gBtlWork->actor, 1);
@@ -686,4 +688,90 @@ void RogueAfterReset(void) {
     for (i = 0; i < ROGUE_AFTER_EFFECTS; i++) {
         sAfter[i].kind = AFTER_NONE;
     }
+}
+
+// Styles. A string of plain hits sets its element off on the enemy every few
+// hits: a burst of flame that burns, ice that freezes, or the bolt of Sora's
+// own Thunder. The burst is done on the frame after the hit that earned it.
+
+void func_08015834(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s);
+
+static BtlObj* sStyleTarget;
+static u8 sStyle; // the element to set off, plus one
+
+// One of the moves where an enemy stands rather than by Sora.
+static void RogueMoveAt(u8 move, BtlObj* target) {
+    RogueMoveArgs args;
+
+    args.def = &sMoves[move];
+    args.left = (gBtlWork->actor->flags & 4) != 0;
+    args.x = target->x;
+    args.y = target->y;
+    args.z = target->z;
+    args.vy = 0;
+    args.delay = 0;
+    m4aSongNumStart(args.def->sound);
+    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueMove, &args);
+    gRogueDebug.moves++;
+}
+
+// Called for each plain hit of Sora's, with the string's count already on it.
+void RogueStyleOnHit(BtlObj* target) {
+    static const u8 every[ROGUE_ELEMENTS] = { ROGUE_STYLE_FIRE_EVERY, ROGUE_STYLE_ICE_EVERY, ROGUE_STYLE_THUNDER_EVERY };
+    u8 build = RogueBuildElement();
+    u8 element;
+
+    if (sStyle != 0 || gRogue.combo == 0) {
+        return;
+    }
+
+    for (element = 0; element < ROGUE_ELEMENTS; element++) {
+        if ((build == element || RogueHasRelic(ROGUE_RELIC_STYLE_FIRE + element)) && gRogue.combo % every[element] == 0) {
+            sStyle = element + 1;
+            sStyleTarget = target;
+            return;
+        }
+    }
+}
+
+static void RogueStyleTick(void) {
+    BtlObj* sora = gBtlWork->actor;
+    BtlObj* actor;
+    BtlObj* target = 0;
+
+    if (sStyle == 0) {
+        return;
+    }
+
+    // The enemy may be gone since the hit.
+    for (actor = (BtlObj*)ListPoolFirst(&gBtlWork->pool); actor != 0; actor = (BtlObj*)ListPoolNext(&actor->node)) {
+        if (actor == sStyleTarget && actor != sora) {
+            target = actor;
+        }
+    }
+
+    if (target != 0) {
+        switch (sStyle - 1) {
+        case ROGUE_ELEMENT_FIRE:
+            RogueMoveAt(ROGUE_MOVE_FIRE_BURST, target);
+            RogueApplyBurn(target, 2 + gRogue.floor);
+            break;
+        case ROGUE_ELEMENT_ICE:
+            RogueMoveAt(ROGUE_MOVE_SHARDS, target);
+            RogueApplyFreeze(target);
+            break;
+        case ROGUE_ELEMENT_THUNDER:
+            // The spell's own bolt, from above Sora onto the enemy.
+            func_08015834(0, sora->x, sora->y, sora->z - 16384, target->x, target->y, 0, 72);
+            break;
+        }
+
+        gRogueDebug.styleHits++;
+    }
+
+    sStyle = 0;
+}
+
+void RogueStyleReset(void) {
+    sStyle = 0;
 }

@@ -124,11 +124,19 @@ static const u8 sTextFreeze[] = "Il ghiaccio blocca\x1Fil nemico";
 static const u8 sNameShock[] = "Scarica";
 static const u8 sTextShock[] = "Il tuono salta sugli\x1F" "altri nemici";
 
+static const u8 sNameStyleFire[] = "Stile ardente";
+static const u8 sTextStyleFire[] = "Ogni 3 colpi di fila\x1Funa vampa che ustiona";
+static const u8 sNameStyleIce[] = "Stile gelido";
+static const u8 sTextStyleIce[] = "Ogni 5 colpi di fila\x1Fgelo che blocca";
+static const u8 sNameStyleThunder[] = "Stile tonante";
+static const u8 sTextStyleThunder[] = "Ogni 4 colpi di fila\x1Fun fulmine sul nemico";
+
 static const u8* const sNames[ROGUE_RELICS] = {
     sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho, sNamePillar, sNameChakram, sNameNeedles, sNamePetals, sNameShards,
     sNameFireball, sNameFireBurst, sNameRock, sNameBomb, sNameMulti, sNameFan, sNameHoming, sNameMoveEcho, sNameGiant, sNamePrism,
     sNameBerserk, sNameThorns, sNameComboHeal, sNameAirMaster, sNameTagTeam, sNameTreasurer,
     sNameZeroShield, sNameTieWin, sNamePlusOne, sNameInstantReload, sNameFreeFirst, sNameRandomSleight, sNameForesight, sNameHalfDeck, sNameNoHeal, sNameTripleJump, sNameAirDash, sNameGlide, sNameTrail, sNameTeleport, sNameBounce, sNamePierce, sNameBurn, sNameFreeze, sNameShock,
+    sNameStyleFire, sNameStyleIce, sNameStyleThunder,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
@@ -136,6 +144,7 @@ static const u8* const sTexts[ROGUE_RELICS] = {
     sTextFireball, sTextFireBurst, sTextRock, sTextBomb, sTextMulti, sTextFan, sTextHoming, sTextMoveEcho, sTextGiant, sTextPrism,
     sTextBerserk, sTextThorns, sTextComboHeal, sTextAirMaster, sTextTagTeam, sTextTreasurer,
     sTextZeroShield, sTextTieWin, sTextPlusOne, sTextInstantReload, sTextFreeFirst, sTextRandomSleight, sTextForesight, sTextHalfDeck, sTextNoHeal, sTextTripleJump, sTextAirDash, sTextGlide, sTextTrail, sTextTeleport, sTextBounce, sTextPierce, sTextBurn, sTextFreeze, sTextShock,
+    sTextStyleFire, sTextStyleIce, sTextStyleThunder,
 };
 
 const u8* RogueRelicName(u8 relic) {

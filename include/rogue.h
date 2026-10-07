@@ -275,6 +275,12 @@ enum RogueRelic {
     ROGUE_RELIC_BURN,
     ROGUE_RELIC_FREEZE,
     ROGUE_RELIC_SHOCK,
+    // Styles: a combo of plain hits sets off its element every few of them,
+    // on the enemy hit. In the order of RogueElement. A deck built on an
+    // element fights in its style without the relic.
+    ROGUE_RELIC_STYLE_FIRE,
+    ROGUE_RELIC_STYLE_ICE,
+    ROGUE_RELIC_STYLE_THUNDER,
     ROGUE_RELICS
 };
 #define ROGUE_FIRST_CARD_RELIC ROGUE_RELIC_ZERO_SHIELD
@@ -401,6 +407,10 @@ enum RogueMove {
 #define ROGUE_DAMAGE_NUMBERS 6 // shown at once
 #define ROGUE_DAMAGE_NUMBER_TIME 36 // frames each stays
 #define ROGUE_MOVE_SPEED 0xA00
+// Hits of a combo between one burst of a style and the next: fire, ice, thunder.
+#define ROGUE_STYLE_FIRE_EVERY 3
+#define ROGUE_STYLE_ICE_EVERY 5
+#define ROGUE_STYLE_THUNDER_EVERY 4
 // The fight of the bosses that had none of their own: Leon and whoever
 // stands in for him.
 #define ROGUE_BOSS_AI_SPEED 0x180 // a frame, towards Sora
@@ -602,6 +612,7 @@ typedef struct RogueDebug {
     u8 lastMod; // what the last card played alone was enchanted with
     u16 countCard; // a card id the tests poke...
     u16 seenCount; // ...and how many of it Sora has
+    u16 styleHits; // times a style set its element off
     u16 bossSwings; // swings of the bosses that fight with the mod's AI
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
@@ -689,6 +700,8 @@ void RogueAirControl(struct BtlSoraWork* work, u16 held, u16 pressed);
 void RogueOnDodge(struct BtlObj* sora);
 void RogueDodgeTrail(struct BtlObj* sora);
 void RogueAfterHit(struct BtlObj* target);
+void RogueStyleOnHit(struct BtlObj* target);
+void RogueStyleReset(void);
 void RogueAfterReset(void);
 void RogueApplyBurn(struct BtlObj* target, s16 amount);
 void RogueApplyFreeze(struct BtlObj* target);

@@ -1,0 +1,23 @@
+# In a room, before the battle: the nearest enemy in sight wears the ring of
+# the battle's lock-on, and a swing made near it turns Sora to face it.
+# Expect: ring reads 1 once an enemy is in sight and one of the pictures
+# shows the ring over an enemy of the room; the frame counter runs. (Whether
+# a swing is turned depends on where the room puts its enemies: aims counts
+# those that were.)
+include start.txt
+debug room 1
+wait 150
+shot /tmp/target_1.ppm
+wait 60
+shot /tmp/target_2.ppm
+peek8 @gRogueDebug.fieldRing ring
+wait 60
+shot /tmp/target_3.ppm
+press A
+wait 14
+shot /tmp/target_4.ppm
+peek8 @gRogueDebug.fieldRing ring_later
+peek8 @gRogueDebug.fieldAims aims
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

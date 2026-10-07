@@ -621,6 +621,8 @@ void func_080E64D4(MapEnmWork* p) {
     t = flags;
     y = k + (q->fieldPosition.z >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, p->gfx, p->tiles, p->palette, 0, t, v);
+    // Every enemy drawn is one the ring may mark.
+    RogueFieldSeeEnemy(&p->obj.fieldPosition);
     TaskPoolDraw(&p->tasks);
 }
 

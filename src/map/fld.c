@@ -1176,6 +1176,7 @@ u8 func_0803366C(FldWork* work, void* task) {
 
     if (work->unk_94 == 11) {
         if (work->unk_98 == 0) {
+            act->angle = RogueFieldAim(act->angle);
             func_08031F98(work, 13, 0);
             act->unk_10 = 0;
             gFieldState->unk_68 = 0;

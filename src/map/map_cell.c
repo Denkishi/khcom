@@ -1,3 +1,4 @@
+#include "rogue.h"
 #include "macros.h"
 #include "map.h"
 
@@ -232,19 +233,19 @@ u8 func_080E02E0(FldPos* p, s16 a, s16 b) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_24 - 0x1400 > p->x + (a << 8)) {
+    if (gUnk_0203C7AC->unk_24 - ROGUE_FIELD_REACH > p->x + (a << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_24 + 0x1400 < p->x - (a << 8)) {
+    if (gUnk_0203C7AC->unk_24 + ROGUE_FIELD_REACH < p->x - (a << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_28 - 0x1400 > p->y + (a << 8)) {
+    if (gUnk_0203C7AC->unk_28 - ROGUE_FIELD_REACH > p->y + (a << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_28 + 0x1400 < p->y - (a << 8)) {
+    if (gUnk_0203C7AC->unk_28 + ROGUE_FIELD_REACH < p->y - (a << 8)) {
         return 0;
     }
 

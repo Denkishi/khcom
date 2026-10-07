@@ -776,6 +776,8 @@ typedef struct RogueDebug {
     u16 heroMoves; // things a hero other than Sora has done that Sora does not
     u16 techs; // moves of the flat battle made
     u8 mapDrops; // room cards dropped by battles
+    u8 fieldAims; // swings in a room turned to the enemy
+    u8 fieldRing; // the ring was drawn on an enemy of a room
     u8 breaks; // card breaks shown
     u8 mapUsed; // spent on doors
     u8 mapBought;
@@ -884,6 +886,11 @@ void RogueMapDrop(void);
 void RogueLeaveRoom(u8 door);
 void RogueStartRun(void);
 void RogueCardBreakShown(struct BtlObj* loser);
+struct FldPos;
+void RogueFieldSeeEnemy(struct FldPos* p);
+u8 RogueFieldAim(u8 angle);
+extern struct TaskDesc gTaskDescRogueRing;
+#define ROGUE_FIELD_REACH 0x1C00 // how far round its point a swing in a room hits; the game's was 0x1400
 u8 Rogue2d(void);
 void Rogue2dReset(void);
 void Rogue2dDebug(u8 arg);

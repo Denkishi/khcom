@@ -56,3 +56,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `options_flat.txt` | the options page turning the flat battle on and setting a technique on a place |
 | `flat_axel.txt` | Axel explaining the flat battle in the first room when it is on |
 | `room_cards.txt` | room cards: bought in the hub before a run, and one spent on a door for the room it names |
+| `room_target.txt` | the ring on the nearest enemy of a room before the battle |

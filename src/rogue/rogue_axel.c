@@ -181,6 +181,9 @@ TaskDesc gTaskDescRogueAxel = {
 
 // Called once the room and the player exist.
 void RogueSpawnRoomActors(void) {
+    // The ring that marks the nearest enemy, in every room.
+    TaskCreate(&gFieldState->tasks, &gTaskDescRogueRing, 0);
+
     if (gRogue.kind == ROGUE_ROOM_START) {
         TaskCreate(&gFieldState->tasks, &gTaskDescRogueAxel, 0);
     }

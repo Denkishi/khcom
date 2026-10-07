@@ -169,6 +169,7 @@ s32 func_080ABA80(s32* out) {
             }
         }
 
+        RogueOnCardSlot(gCardBattleState->unk_000[0]->args.slot->unk_04);
         return RogueCardAction(gCardBattleState->unk_000[0]->cardDef);
 #ifdef VERSION_EU
     } else if (gCardBattleState->unk_0D0 == 1 && (p = gBtlWork)->unk_0A4 == 1) {

@@ -997,7 +997,8 @@ s32 func_08079600(CardBattleWork* w) {
     if (gSoraSelectedCard->cardDef->flags & 8) {
         gSoraSelectedCard->args.slot->unk_0A = 1;
     }
-    if (gSoraSelectedCard->unk_A6 == 1) {
+    // A premium card is no longer lost for the battle when played.
+    if (gSoraSelectedCard->unk_A6 == 1 && 0) {
         gSoraSelectedCard->args.slot->unk_0A = 1;
         if ((u16)func_0807885C(w, 0) == 0) {
             gSoraSelectedCard->args.slot->unk_0A = 0;

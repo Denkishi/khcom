@@ -37,3 +37,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `more_moves.txt` | the later moves, the three new spells and the move modifiers |
 | `effect_cards.txt` | the cards with an effect of their own |
 | `relics_more.txt` | burn, freeze, shock, the shadow step and the air dash |
+| `card_mods.txt` | a card played alone finding its enchantment |

@@ -44,6 +44,8 @@ enum {
     REWARD_RELIC,
     REWARD_ART,
     REWARD_REMOVE,
+    REWARD_ENCHANT,
+    REWARD_PREMIUM,
     REWARD_FUSION,
     // Offered by events only.
     REWARD_SHARDS,
@@ -109,6 +111,8 @@ static const u8 sLabelRelic[] = "Reliquia";
 static const u8 sLabelArt[] = "Tecnica";
 static const u8 sLabelRemove[] = "Scarta";
 static const u8 sLabelFusion[] = "Fusione";
+static const u8 sLabelEnchant[] = "Incanta";
+static const u8 sLabelPremium[] = "Premium";
 static const u8 sLabelShards[] = "Frammenti";
 static const u8 sLabelReroll[] = "Rilancio";
 static const u8 sLabelPact[] = "Patto";
@@ -123,7 +127,7 @@ static const u8 sLabelMutate[] = "Muta";
 static const u8 sLabelFlee[] = "Fuggi";
 static const u8 sLabelDarkness[] = "Oscurit\xE0";
 static const u8* const sLabels[REWARD_KINDS] = {
-    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelArt, sLabelRemove, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
+    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelArt, sLabelRemove, sLabelEnchant, sLabelPremium, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
     sLabelDuel, sLabelLeave, sLabelDarkPact, sLabelBarter, sLabelDice, sLabelCopy, sLabelMutate, sLabelFlee, sLabelDarkness,
 };
 
@@ -152,6 +156,7 @@ static const u8 sArtKnives[] = " dal 5 in su\x1Flancia anche le\x1Flame di Larxe
 static const u8 sArtMove[] = " dal 5 in su\x1Flancia anche:\x1F";
 static const u8 sArtPillar[] = " dal 5 in su\x1F" "alza anche il\x1Fgelo di Vexen";
 static const u8 sRemove[] = "Togli dal mazzo:\x1F";
+static const u8 sPremium[] = "Costa meno PC:\x1F";
 static const u8 sOtherCard[] = "\x1F< > altra carta";
 static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
@@ -180,6 +185,8 @@ static const RogueIcon sIcons[REWARD_KINDS] = {
     { gRogueIconRelicTiles, gRogueIconRelicPalette },
     { 0, 0 }, // art: shows its card
     { 0, 0 }, // remove: shows its card
+    { 0, 0 }, // enchant: shows its card
+    { 0, 0 }, // premium: shows its card
     { 0, 0 }, // fusion
     { gRogueIconShardsTiles, gRogueIconShardsPalette },
     { gRogueIconRerollTiles, gRogueIconRerollPalette },
@@ -286,6 +293,28 @@ static u8 RogueRewardAvailable(RogueReward* reward) {
         pos = RogueRollDeckCard();
         reward->card = pos;
         return pos != 0xFF && GetActiveDeck()->unk_DC > 8;
+    case REWARD_ENCHANT:
+        // A keyblade or a spell of the deck that is not enchanted yet.
+        pos = RogueRollDeckCard();
+
+        if (pos == 0xFF || GetActiveDeck()->cards[pos] >= ROGUE_CARD_SLOTS || gRogue.cardMod[GetActiveDeck()->cards[pos]] != ROGUE_MOD_NONE) {
+            return 0;
+        }
+
+        reward->card = pos;
+        reward->result = 1 + RogueRandBelow(ROGUE_CARD_MODS - 1);
+        pos = (gCardCollection[GetActiveDeck()->cards[pos]] & CARD_ID_MASK) / 10;
+        return pos <= CARD_AERO || pos >= ROGUE_FIRST_CARD_KIND;
+    case REWARD_PREMIUM:
+        // An original card of the deck that is not premium yet: it costs less.
+        pos = RogueRollDeckCard();
+
+        if (pos == 0xFF || (gCardCollection[GetActiveDeck()->cards[pos]] & 0x8000)) {
+            return 0;
+        }
+
+        reward->card = pos;
+        return (gCardCollection[GetActiveDeck()->cards[pos]] & CARD_ID_MASK) < 450;
     case REWARD_ART:
         // A kind of card in the deck that has no art yet gets one.
         pos = RogueRollDeckCard();
@@ -379,7 +408,7 @@ static void RogueEventRewards(void) {
 }
 
 static void RogueRollRewards(void) {
-    static const u8 weights[REWARD_FUSION] = { 24, 15, 10, 10, 9, 6, 4, 8, 6, 4, 4 };
+    static const u8 weights[REWARD_FUSION] = { 22, 13, 9, 9, 8, 6, 4, 7, 6, 4, 4, 5, 3 };
     RogueReward* reward;
     u32 roll;
     s32 count = 0;
@@ -447,6 +476,8 @@ static u16 RogueRewardCard(RogueReward* reward) {
     case REWARD_ART:
         return CARD_ID(reward->card, ROGUE_ART_MIN_VALUE);
     case REWARD_REMOVE:
+    case REWARD_ENCHANT:
+    case REWARD_PREMIUM:
         return gCardCollection[GetActiveDeck()->cards[reward->card]] & CARD_ID_MASK;
     case REWARD_TRANSFORM:
         return reward->result;
@@ -510,6 +541,17 @@ static void RogueRewardDetail(RogueReward* reward) {
         out = RogueAppend(out, RogueRelicName(reward->card));
         *out++ = 0x1F;
         RogueAppend(out, RogueRelicText(reward->card));
+        break;
+    case REWARD_ENCHANT:
+        out = RogueAppendCard(out, gCardCollection[deck->cards[reward->card]] & CARD_ID_MASK);
+        *out++ = 0x1F;
+        out = RogueAppend(out, RogueCardModName(reward->result));
+        RogueAppend(out, sOtherCard);
+        break;
+    case REWARD_PREMIUM:
+        out = RogueAppend(out, sPremium);
+        out = RogueAppendCard(out, gCardCollection[deck->cards[reward->card]] & CARD_ID_MASK);
+        RogueAppend(out, sOtherCard);
         break;
     case REWARD_REMOVE:
         out = RogueAppend(out, sRemove);
@@ -641,6 +683,17 @@ static void RogueGiveReward(RogueReward* reward) {
         break;
     case REWARD_REMOVE:
         RogueRemoveDeckCard(reward->card);
+        break;
+    case REWARD_ENCHANT:
+        gRogue.cardMod[GetActiveDeck()->cards[reward->card]] = reward->result;
+        break;
+    case REWARD_PREMIUM:
+        deck = GetActiveDeck();
+        slot = reward->card;
+        before = GetCardCpCost(gCardCollection[deck->cards[slot]]);
+        gCardCollection[deck->cards[slot]] |= 0x8000;
+        after = GetCardCpCost(gCardCollection[deck->cards[slot]]);
+        deck->unk_DA -= before - after;
         break;
     case REWARD_SHARDS:
         gRogue.shards += reward->card;
@@ -830,6 +883,20 @@ static void RogueReward_Update(void) {
             if (RogueRollFusion(&fusion->fuseA, &fusion->fuseB, &fusion->card)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
                 RogueShowChoice();
+            }
+        } else if ((GetKeysRepeat() & (DPAD_LEFT | DPAD_RIGHT)) &&
+                   (sWork->rewards[sWork->cursor].kind == REWARD_ENCHANT || sWork->rewards[sWork->cursor].kind == REWARD_PREMIUM)) {
+            // And for the card to enchant or to make premium: another that can be.
+            RogueReward other = sWork->rewards[sWork->cursor];
+            s32 tries;
+
+            for (tries = 0; tries < 8; tries++) {
+                if (RogueRewardAvailable(&other)) {
+                    sWork->rewards[sWork->cursor] = other;
+                    m4aSongNumStart(SONG_SYS_CLICK);
+                    RogueShowChoice();
+                    break;
+                }
             }
         } else if ((GetKeysRepeat() & (DPAD_LEFT | DPAD_RIGHT)) && sWork->rewards[sWork->cursor].kind == REWARD_REMOVE) {
             // And for the card to take out of the deck.

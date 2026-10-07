@@ -243,6 +243,10 @@ s32 RogueBuildDamage(s32 damage, u16 attack, u32 attackFlags) {
         }
     }
 
+    if (gRogue.playedMod == ROGUE_MOD_HEAVY && !gRogue.projectile && !gRogue.echoing) {
+        bonus += 25;
+    }
+
     if (bonus > 100) {
         bonus = 100;
     }
@@ -388,6 +392,23 @@ void RogueOnKeybladeHit(s32 x, s32 y, s32 z, u8 finisher) {
     }
 
     RogueKeybladeEffect(x, y, z, finisher);
+
+    // What the card played is enchanted with.
+    switch (gRogue.playedMod) {
+    case ROGUE_MOD_FIRE:
+    case ROGUE_MOD_ICE:
+    case ROGUE_MOD_THUNDER:
+        RogueEcho(x, y, z, sElementAttacks[gRogue.playedMod - ROGUE_MOD_FIRE], 96);
+        break;
+    case ROGUE_MOD_DOUBLE:
+        RogueEcho(x, y, z, 14, 128);
+        break;
+    case ROGUE_MOD_LIFESTEAL:
+        if (gBtlWork->actor->unk_02C > 0 && gBtlWork->actor->unk_02C < gBtlWork->actor->unk_02E) {
+            gBtlWork->actor->unk_02C++;
+        }
+        break;
+    }
 }
 
 // What each of the mod's keyblades does of its own when a swing of it lands,
@@ -631,6 +652,7 @@ s32 RogueCardAction(const CardDef* def) {
 // that follow belong to no single kind.
 void RogueOnStockPlayed(void) {
     gRogue.playedKind = ROGUE_NO_KIND;
+    gRogue.playedMod = ROGUE_MOD_NONE;
     gRogue.cardBuffer = 0;
 }
 
@@ -679,4 +701,26 @@ u8 RogueKeepCard(void) {
     }
 
     return 0;
+}
+
+// Called with the place in the deck of a card played alone, before its
+// action is asked for: what that card is enchanted with counts for its hits.
+void RogueOnCardSlot(u16 deckIndex) {
+    u16 slot = deckIndex < DECK_SIZE ? GetActiveDeck()->cards[deckIndex] : 0xFFFF;
+
+    gRogue.playedMod = slot < ROGUE_CARD_SLOTS ? gRogue.cardMod[slot] : ROGUE_MOD_NONE;
+    gRogueDebug.lastMod = gRogue.playedMod;
+}
+
+static const u8 sModFire[] = "Fuoco a ogni colpo";
+static const u8 sModIce[] = "Gelo a ogni colpo";
+static const u8 sModThunder[] = "Tuono a ogni colpo";
+static const u8 sModDouble[] = "Ogni colpo vale doppio";
+static const u8 sModLifesteal[] = "Ogni colpo cura 1 PV";
+static const u8 sModHeavy[] = "Un quarto di danno in pi\xF9";
+
+const u8* RogueCardModName(u8 mod) {
+    static const u8* const names[ROGUE_CARD_MODS] = { sModFire, sModFire, sModIce, sModThunder, sModDouble, sModLifesteal, sModHeavy };
+
+    return names[mod];
 }

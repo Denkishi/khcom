@@ -263,6 +263,21 @@ enum RogueBuild {
 #define ROGUE_CARD_KINDS 49
 #define ROGUE_FIRST_EFFECT_KIND (ROGUE_FIRST_CARD_KIND + 16) // the first card with an effect of its own
 
+// What a card can be enchanted with: it stays on that one card for the run.
+enum RogueCardMod {
+    ROGUE_MOD_NONE,
+    ROGUE_MOD_FIRE, // a hit of the element follows each of its hits; in the order of RogueElement
+    ROGUE_MOD_ICE,
+    ROGUE_MOD_THUNDER,
+    ROGUE_MOD_DOUBLE, // each hit lands twice
+    ROGUE_MOD_LIFESTEAL, // each hit heals 1 HP
+    ROGUE_MOD_HEAVY, // a quarter more damage
+    ROGUE_CARD_MODS
+};
+
+void RogueOnCardSlot(u16 deckIndex);
+const u8* RogueCardModName(u8 mod);
+
 // What a card of the mod does beyond its base card.
 enum RogueCardEffectKind {
     ROGUE_EFFECT_NONE,
@@ -471,6 +486,8 @@ typedef struct RogueRun {
     u8 pose; // frames Sora still holds the pose of a move
     u8 tagTimer; // frames a tag character still stands in for Sora
     u8 arts[ROGUE_ART_KINDS]; // sleight bound to each card kind, 0 for none
+    u8 cardMod[ROGUE_CARD_SLOTS]; // the RogueCardMod each collection slot's card is enchanted with
+    u8 playedMod; // the one on the card played last
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
@@ -511,6 +528,7 @@ typedef struct RogueDebug {
     u16 tagHits; // tag attacks that connected this battle
     u16 airDashes;
     u16 teleports;
+    u8 lastMod; // what the last card played alone was enchanted with
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet

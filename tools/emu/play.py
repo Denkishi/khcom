@@ -2,7 +2,7 @@
 """Run a test script on the built ROM: play.py SCRIPT [SHEET.png [SAVE]]
 
 Wraps the headless runner: @symbol in the script becomes the symbol's address
-from the link map (@symbol+N adds a hex offset, @symbol.field the offset of a
+from the link map (@symbol+N adds a hex offset, also after a field; @symbol.field the offset of a
 field of the mod's structs), `debug COMMAND [ARG]` queues one of the test
 commands of rogue_debug.c, `include FILE` pulls in another
 script, and the screenshots the script takes are tiled into SHEET.png. With
@@ -28,9 +28,10 @@ DEBUG = ["none", "room", "battle", "reward", "relic", "floor", "win", "hurt", "h
 
 
 def resolve(match):
-    if match.group(3):
-        return f"{symbols[match.group(1)] + fields[match.group(1) + '.' + match.group(3)]:08x}"
-    return f"{symbols[match.group(1)] + int(match.group(2) or '0', 16):08x}"
+    address = symbols[match.group(1)] + int(match.group(3) or '0', 16)
+    if match.group(2):
+        address += fields[match.group(1) + '.' + match.group(2)]
+    return f"{address:08x}"
 
 
 def load(path):
@@ -44,7 +45,7 @@ def load(path):
             lines.append(f"poke8 {base + 1:08x} {words[2] if len(words) > 2 else 0}")
             lines.append(f"poke8 {base:08x} {DEBUG.index(words[1])}")
         else:
-            lines.append(re.sub(r"@(\w+)(?:\+(\w+)|\.(\w+))?", resolve, line))
+            lines.append(re.sub(r"@(\w+)(?:\.(\w+))?(?:\+(\w+))?", resolve, line))
     return lines
 
 

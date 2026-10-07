@@ -1,0 +1,15 @@
+# A card's enchantment is found when the card is played: the first card of
+# the deck is left plain and the second given the double hit (4); both are
+# played.
+# Expect: last_mod reads 0 and last_mod_second_card 4.
+include start.txt
+poke8 @gRogue.cardMod+1 4
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 720
+press A
+wait 100
+peek8 @gRogueDebug.lastMod last_mod
+press A
+wait 100
+peek8 @gRogueDebug.lastMod last_mod_second_card

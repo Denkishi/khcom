@@ -181,6 +181,7 @@ void RogueBuildStartDeck(void) {
     sDeckEnemyCards = 0;
 
     for (tries = 0; tries < ROGUE_CARD_SLOTS; tries++) {
+        gRogue.cardMod[tries] = ROGUE_MOD_NONE;
         gRogue.cardXp[tries] = 0;
     }
 
@@ -230,6 +231,7 @@ void RogueGiveCard(u16 id) {
     }
 
     if (slot < ROGUE_CARD_SLOTS) {
+        gRogue.cardMod[slot] = ROGUE_MOD_NONE;
         gRogue.cardXp[slot] = 0;
     }
 

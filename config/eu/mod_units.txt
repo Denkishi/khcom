@@ -3,6 +3,7 @@ new rogue.c
 new rogue_run.c
 new rogue_text.c
 new rogue_axel.c
+new rogue_event.c
 new rogue_deck.c
 new rogue_balance.c
 new rogue_reward.c
@@ -20,3 +21,4 @@ moved card_battle_riku.c
 moved btl.c
 moved card_deckmenu2.c
 moved battle_runtime.c
+moved map_tasks.c

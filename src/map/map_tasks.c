@@ -3627,6 +3627,11 @@ void Task_MapGmk04_0(MapGmk04Work* w, UnkStruct_0203C7B8* arg) {
 }
 
 s32 Task_MapGmk04_1(MapGmk04Work* w) {
+    // Save points have nothing to save in a run: they remove themselves.
+    if (w != 0) {
+        return 0;
+    }
+
     TaskPoolUpdate(&w->tasks);
 
     if ((u8)func_080E0390() != 0) {

@@ -58,7 +58,7 @@ static void RogueAxel_Idle(RogueAxelWork* w) {
         // Once the explanation has been heard, talking to him opens the shop.
         // Holding L asks for the explanation again.
         if ((gRogueMeta.flags & ROGUE_META_TUTORIAL_SEEN) && !(GetKeysHeld() & L_BUTTON)) {
-            RogueOpenShop();
+            RogueLeaveRoomFor(&gModeRogueShop, 0);
             return;
         }
 
@@ -157,5 +157,9 @@ TaskDesc gTaskDescRogueAxel = {
 void RogueSpawnRoomActors(void) {
     if (gRogue.kind == ROGUE_ROOM_START) {
         TaskCreate(&gFieldState->tasks, &gTaskDescRogueAxel, 0);
+    }
+
+    if (gRogue.kind == ROGUE_ROOM_EVENT) {
+        TaskCreate(&gFieldState->tasks, &gTaskDescRogueEvent, 0);
     }
 }

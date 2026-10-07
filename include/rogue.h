@@ -88,6 +88,7 @@ enum RogueRoomKind {
     ROGUE_ROOM_SHOP,
     ROGUE_ROOM_REST,
     ROGUE_ROOM_BOSS,
+    ROGUE_ROOM_EVENT,
     ROGUE_ROOM_KINDS
 };
 
@@ -95,7 +96,51 @@ enum RogueRoomKind {
 #define ROGUE_MSG_BASE 0x400
 #define ROGUE_MSG_AXEL_FIRST ROGUE_MSG_BASE
 #define ROGUE_MSG_AXEL_LAST (ROGUE_MSG_BASE + 12)
-#define ROGUE_MSG_COUNT 13
+#define ROGUE_MSG_EVENT_FIRST (ROGUE_MSG_BASE + 13)
+#define ROGUE_MSG_COUNT (13 + ROGUE_EVENTS * ROGUE_EVENT_PAGES)
+
+// Event rooms.
+enum RogueEvent {
+    ROGUE_EVENT_BELLE,
+    ROGUE_EVENT_LEON,
+    ROGUE_EVENT_YUFFIE,
+    ROGUE_EVENT_MOOGLE,
+    ROGUE_EVENT_JACK,
+    ROGUE_EVENT_HERCULES,
+    ROGUE_EVENT_TIGGER,
+    ROGUE_EVENTS
+};
+
+#define ROGUE_EVENT_PAGES 2
+#define ROGUE_EVENT_OFFERS 3
+
+// What an event can offer; the reward screen turns each into a reward.
+enum RogueOffer {
+    ROGUE_OFFER_HEAL,
+    ROGUE_OFFER_MAX_HP,
+    ROGUE_OFFER_CP,
+    ROGUE_OFFER_COMBO,
+    ROGUE_OFFER_AIR_JUMP,
+    ROGUE_OFFER_UPGRADE,
+    ROGUE_OFFER_RANDOM_CARD,
+    ROGUE_OFFER_CARD, // param: card id
+    ROGUE_OFFER_SHARDS, // param: how many
+    ROGUE_OFFER_REROLL,
+    ROGUE_OFFER_ATTACK_FOR_HP,
+    ROGUE_OFFER_GAMBLE
+};
+
+typedef struct RogueEventOffer {
+    u8 offer;
+    u16 param;
+} RogueEventOffer;
+
+// Argument of gModeRogueReward.
+enum {
+    ROGUE_REWARD_BATTLE,
+    ROGUE_REWARD_BOSS,
+    ROGUE_REWARD_EVENT
+};
 
 typedef struct RogueRun {
     u32 seed;
@@ -114,12 +159,17 @@ typedef struct RogueRun {
     u8 chapters; // chapters this run goes through
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
     u16 shards; // earned this run, banked when it ends
+    u8 event; // who is in this event room
+    u8 eventDone; // set once they have made their offer
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
 extern RogueRun gRogue;
 extern RogueMeta gRogueMeta;
 extern Mode gModeRogueShop;
+extern Mode* gRogueLeaveMode;
+extern s32 gRogueLeaveArg;
+extern struct TaskDesc gTaskDescRogueEvent;
 extern Mode gModeRogueBoot;
 extern Mode gModeRogueReward;
 extern Mode gModeRogueOver;
@@ -140,7 +190,8 @@ void RogueApplyUpgrades(void);
 u8 RogueBuyUpgrade(u8 upgrade);
 u8 RogueUpgradeMax(u8 upgrade);
 u16 RogueUpgradeCost(u8 upgrade);
-void RogueOpenShop(void);
+void RogueLeaveRoomFor(Mode* mode, s32 arg);
+const RogueEventOffer* RogueEventOffers(void);
 u8 RogueDoorsOpen(void);
 u8 RogueEnemyLevel(void);
 u16 RogueEnemyHp(u16 base);

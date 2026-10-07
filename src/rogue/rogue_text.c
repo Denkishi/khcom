@@ -21,7 +21,24 @@ ROGUE_TEXT(sAxel10, "Batti l'ultimo boss e si apre\x1Fun \x1D" "capitolo\x1E nuo
 ROGUE_TEXT(sAxel11, "Riparlami per spendere i\x1F" "Frammenti in potenziamenti.\x1FTieni L per riascoltarmi.");
 ROGUE_TEXT(sAxel12, "Got it memorized?");
 
+// Two pages for each event, in the order of the ROGUE_EVENT_ ids.
+ROGUE_TEXT(sBelle0, "Sora! Hai l'aria di chi ne\x1Fha passate tante. Siediti,\x1Flascia che mi occupi di te.");
+ROGUE_TEXT(sBelle1, "Dimmi tu di cosa hai\x1Fpi\xF9 bisogno.");
+ROGUE_TEXT(sLeon0, "Sei ancora in piedi. Bene.\x1FMa la forza vera ha\x1Fsempre un prezzo.");
+ROGUE_TEXT(sLeon1, "Decidi tu quanto sei\x1F" "disposto a pagare.");
+ROGUE_TEXT(sYuffie0, "Ehi, Sora! Guarda cos'ha\x1F\"trovato\" la grande ninja\x1FYuffie!");
+ROGUE_TEXT(sYuffie1, "Te ne lascio una. Ma una\x1Fsola, e scegli in fretta!");
+ROGUE_TEXT(sMoogle0, "Kup\xF2! Bottega di sintesi\x1F" "aperta, kup\xF2!");
+ROGUE_TEXT(sMoogle1, "Per te, un lavoretto\x1Fgratis. Quale, kup\xF2?");
+ROGUE_TEXT(sJack0, "Sora! Arrivi a proposito\x1Fper il mio nuovo, terrificante\x1F" "esperimento!");
+ROGUE_TEXT(sJack1, "Pu\xF2 andare benissimo...\x1Fo malissimo. Non \xE8\x1Fmeraviglioso?");
+ROGUE_TEXT(sHercules0, "Un eroe non smette mai\x1F" "di allenarsi. Fil me lo\x1Fripete ogni giorno.");
+ROGUE_TEXT(sHercules1, "Dai, ti mostro qualcosa.\x1F" "Cosa vuoi imparare?");
+ROGUE_TEXT(sTigger0, "Uh-uh-uh! Saltare \xE8 ci\xF2\x1F" "che i Tigri sanno fare\x1Fmeglio!");
+ROGUE_TEXT(sTigger1, "Vuoi che te lo insegni?\x1FO preferisci altro?");
+
 #define AXEL_PORTRAIT 20
+#define EVENT_PAGES(portrait, a, b) { portrait, 3, 0, 3, 0, &a, 0, 0 }, { portrait, 3, 0, 3, 0, &b, 0, 0 }
 
 static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel0, 0, 0 },
@@ -37,6 +54,13 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel10, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel11, 0, 0 },
     { AXEL_PORTRAIT, 3, 0, 3, 0, &sAxel12, 0, 0 },
+    EVENT_PAGES(53, sBelle0, sBelle1),
+    EVENT_PAGES(31, sLeon0, sLeon1),
+    EVENT_PAGES(37, sYuffie0, sYuffie1),
+    EVENT_PAGES(7, sMoogle0, sMoogle1),
+    EVENT_PAGES(11, sJack0, sJack1),
+    EVENT_PAGES(46, sHercules0, sHercules1),
+    EVENT_PAGES(59, sTigger0, sTigger1),
 };
 
 const CardMessageDef* RogueCardMessageDef(u16 id) {

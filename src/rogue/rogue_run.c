@@ -9,6 +9,8 @@
 #include "world_types.h"
 
 RogueRun gRogue;
+Mode* gRogueLeaveMode;
+s32 gRogueLeaveArg;
 u8 gRogueLinks[4];
 
 // Map room type of each room kind, a row of gUnk_0984D134.
@@ -20,13 +22,14 @@ static const u8 sRoomTypes[ROGUE_ROOM_KINDS] = {
     11, // shop: Moogle Room
     6, // rest: Moment's Reprieve
     1, // boss
+    6, // event: Moment's Reprieve
 };
 
 // Battles to win before the room's doors open, by room kind.
-static const u8 sRoomBattles[ROGUE_ROOM_KINDS] = { 0, 1, 2, 1, 0, 0, 0 };
+static const u8 sRoomBattles[ROGUE_ROOM_KINDS] = { 0, 1, 2, 1, 0, 0, 0, 0 };
 
 // Map card whose art the room's door shows, by room kind.
-static const u8 sRoomCards[ROGUE_ROOM_KINDS] = { 5, 1, 0, 2, 10, 5, 0 };
+static const u8 sRoomCards[ROGUE_ROOM_KINDS] = { 5, 1, 0, 2, 10, 5, 0, 14 };
 
 // The floors of a run in order: each has a world and the battle that ends it.
 // The last floor of a chapter is its boss, the others are minibosses.
@@ -113,20 +116,24 @@ u16 RogueDoorFlags(u8 door) {
 static u8 RogueRollKind(void) {
     u32 roll = RogueRandBelow(100);
 
-    if (roll < 55) {
+    if (roll < 48) {
         return ROGUE_ROOM_BATTLE;
     }
 
-    if (roll < 70) {
+    if (roll < 62) {
         return ROGUE_ROOM_ELITE;
     }
 
-    if (roll < 82) {
+    if (roll < 72) {
         return ROGUE_ROOM_TREASURE;
     }
 
-    if (roll < 91) {
+    if (roll < 80) {
         return ROGUE_ROOM_REST;
+    }
+
+    if (roll < 94) {
+        return ROGUE_ROOM_EVENT;
     }
 
     return ROGUE_ROOM_SHOP;
@@ -199,6 +206,11 @@ static void RogueEnterRoom(u8 firstOfFloor) {
         room->unk_08 = 0;
         room->unk_09 = 0;
         room->unk_0A = 0;
+    }
+
+    if (gRogue.kind == ROGUE_ROOM_EVENT) {
+        gRogue.event = RogueRandBelow(ROGUE_EVENTS);
+        gRogue.eventDone = 0;
     }
 
     if (gRogue.kind == ROGUE_ROOM_REST) {
@@ -294,7 +306,7 @@ u8 RogueOnBattleEnd(void) {
         gRogue.shards += ROGUE_SHARDS_MINIBOSS;
     }
 
-    ModeRequest(&gModeRogueReward, gRogue.kind == ROGUE_ROOM_BOSS);
+    ModeRequest(&gModeRogueReward, gRogue.kind == ROGUE_ROOM_BOSS ? ROGUE_REWARD_BOSS : ROGUE_REWARD_BATTLE);
     return 1;
 }
 

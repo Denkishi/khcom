@@ -41,6 +41,11 @@ enum {
     REWARD_AIR_JUMP,
     REWARD_ATTACK,
     REWARD_FUSION,
+    // Offered by events only.
+    REWARD_SHARDS,
+    REWARD_REROLL,
+    REWARD_ATTACK_FOR_HP,
+    REWARD_GAMBLE,
     REWARD_KINDS
 };
 
@@ -48,7 +53,7 @@ typedef struct RogueReward {
     u8 kind;
     u8 fuseA; // deck positions of the two cards a fusion consumes
     u8 fuseB;
-    u16 card; // card id, or the collection slot to upgrade
+    u16 card; // card id, the collection slot to upgrade, or how many shards
 } RogueReward;
 
 typedef struct RogueRewardWork {
@@ -68,6 +73,7 @@ typedef struct RogueRewardWork {
     u8 detailCount;
     u8 cursor;
     u8 state;
+    u8 source; // ROGUE_REWARD_BATTLE, _BOSS or _EVENT
     u8 afterBoss;
 } RogueRewardWork;
 
@@ -84,8 +90,12 @@ static const u8 sLabelCombo[] = "Combo+";
 static const u8 sLabelAirJump[] = "Reliquia";
 static const u8 sLabelAttack[] = "Forza";
 static const u8 sLabelFusion[] = "Fusione";
+static const u8 sLabelShards[] = "Frammenti";
+static const u8 sLabelReroll[] = "Rilancio";
+static const u8 sLabelPact[] = "Patto";
+static const u8 sLabelGamble[] = "Azzardo";
 static const u8* const sLabels[REWARD_KINDS] = {
-    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelFusion,
+    sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
 };
 
 static const u8 sCost[] = "\x1FPC ";
@@ -94,6 +104,10 @@ static const u8 sHeal[] = "Recuperi tutti\x1Fi PV";
 static const u8 sMaxHp[] = "PV massimi +20";
 static const u8 sCp[] = "PC del mazzo +30";
 static const u8 sAttack[] = "Forza +1: tutti i\x1F" "colpi fanno pi\xF9\x1F" "danno";
+static const u8 sShards[] = " Frammenti";
+static const u8 sReroll[] = "Un rilancio delle\x1Fricompense";
+static const u8 sPact[] = "Forza +1, ma\x1FPV massimi -15";
+static const u8 sGamble[] = "Una volta su due\x1F" "Forza +1, altrimenti\x1Fperdi 20 PV";
 static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
 
@@ -181,6 +195,48 @@ static u8 RogueRewardAvailable(RogueReward* reward) {
     return 1;
 }
 
+// Turns what the room's event offers into the three rewards. An offer that
+// cannot be given right now becomes a few shards.
+static void RogueEventRewards(void) {
+    static const u8 kinds[] = {
+        REWARD_HEAL, REWARD_MAX_HP, REWARD_CP, REWARD_COMBO, REWARD_AIR_JUMP, REWARD_UPGRADE,
+        REWARD_CARD, REWARD_CARD, REWARD_SHARDS, REWARD_REROLL, REWARD_ATTACK_FOR_HP, REWARD_GAMBLE,
+    };
+    const RogueEventOffer* offers = RogueEventOffers();
+    RogueReward* reward;
+    u8 available;
+    s32 i;
+
+    for (i = 0; i < REWARD_CHOICES; i++) {
+        reward = &sWork->rewards[i];
+        reward->kind = kinds[offers[i].offer];
+        reward->card = offers[i].param;
+
+        switch (offers[i].offer) {
+        case ROGUE_OFFER_CARD:
+        case ROGUE_OFFER_SHARDS:
+        case ROGUE_OFFER_REROLL:
+        case ROGUE_OFFER_GAMBLE:
+            available = 1;
+            break;
+        case ROGUE_OFFER_AIR_JUMP:
+            available = gRogue.airJumps < ROGUE_AIR_JUMPS_MAX;
+            break;
+        case ROGUE_OFFER_ATTACK_FOR_HP:
+            available = gGameState.progression.ap < ROGUE_AP_MAX && gGameState.progression.maxHp > 40;
+            break;
+        default:
+            available = RogueRewardAvailable(reward);
+            break;
+        }
+
+        if (!available) {
+            reward->kind = REWARD_SHARDS;
+            reward->card = 10;
+        }
+    }
+}
+
 static void RogueRollRewards(void) {
     static const u8 weights[REWARD_FUSION] = { 28, 18, 13, 11, 10, 6, 4, 10 };
     RogueReward* reward;
@@ -188,6 +244,11 @@ static void RogueRollRewards(void) {
     s32 count = 0;
     s32 i;
     u8 kind;
+
+    if (sWork->source == ROGUE_REWARD_EVENT) {
+        RogueEventRewards();
+        return;
+    }
 
     // A fusion is always on offer when two cards are ready for one.
     reward = &sWork->rewards[0];
@@ -295,6 +356,20 @@ static void RogueRewardDetail(RogueReward* reward) {
     case REWARD_ATTACK:
         RogueAppend(out, sAttack);
         break;
+    case REWARD_SHARDS:
+        *out++ = '+';
+        out = RogueAppendNumber(out, reward->card);
+        RogueAppend(out, sShards);
+        break;
+    case REWARD_REROLL:
+        RogueAppend(out, sReroll);
+        break;
+    case REWARD_ATTACK_FOR_HP:
+        RogueAppend(out, sPact);
+        break;
+    case REWARD_GAMBLE:
+        RogueAppend(out, sGamble);
+        break;
     }
 }
 
@@ -338,6 +413,29 @@ static void RogueGiveReward(RogueReward* reward) {
     case REWARD_ATTACK:
         gGameState.progression.ap++;
         break;
+    case REWARD_SHARDS:
+        gRogue.shards += reward->card;
+        break;
+    case REWARD_REROLL:
+        gRogue.rerolls++;
+        break;
+    case REWARD_ATTACK_FOR_HP:
+        gGameState.progression.ap++;
+        gGameState.progression.maxHp -= 15;
+
+        if (gGameState.hp > gGameState.progression.maxHp) {
+            gGameState.hp = gGameState.progression.maxHp;
+        }
+        break;
+    case REWARD_GAMBLE:
+        if (RogueRandBelow(2) == 0 && gGameState.progression.ap < ROGUE_AP_MAX) {
+            gGameState.progression.ap++;
+        } else if (gGameState.hp > 20) {
+            gGameState.hp -= 20;
+        } else {
+            gGameState.hp = 1;
+        }
+        break;
     }
 }
 
@@ -378,16 +476,18 @@ static void RogueOfferRewards(void) {
     }
 
     FreeTextSlots(sWork->title, TITLE_SLOTS);
-    sWork->titleCount = LoadTextSlots((u16*)(gRogue.rerolls != 0 ? sTitleReroll : sTitle), sWork->title);
+    sWork->titleCount =
+        LoadTextSlots((u16*)(gRogue.rerolls != 0 && sWork->source != ROGUE_REWARD_EVENT ? sTitleReroll : sTitle), sWork->title);
     RogueShowChoice();
 }
 
-static void RogueReward_Init(s32 afterBoss) {
+static void RogueReward_Init(s32 source) {
     const u16* map = (const u16*)gUnk_09847798;
     s32 i;
 
     sWork = EwramAlloc(sizeof(RogueRewardWork));
-    sWork->afterBoss = afterBoss;
+    sWork->source = source;
+    sWork->afterBoss = source == ROGUE_REWARD_BOSS;
     sWork->cursor = 0;
     sWork->state = 0;
     sWork->cardTiles = 0;
@@ -437,7 +537,7 @@ static void RogueReward_Update(void) {
             sWork->cursor = (sWork->cursor + 1) % REWARD_CHOICES;
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueShowChoice();
-        } else if ((GetKeysPressed() & B_BUTTON) && gRogue.rerolls != 0) {
+        } else if ((GetKeysPressed() & B_BUTTON) && gRogue.rerolls != 0 && sWork->source != ROGUE_REWARD_EVENT) {
             gRogue.rerolls--;
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueOfferRewards();

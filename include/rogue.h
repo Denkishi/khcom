@@ -149,6 +149,16 @@ enum RogueBuild {
 };
 
 #define ROGUE_NO_KIND 0xFF
+// The mod's cards come after the original 950; ten ids are skipped, see
+// rogue_cards.c. Each new keyblade kind has ten ids, one for each value.
+#define ROGUE_FIRST_CARD_KIND 96
+#define ROGUE_CARD_KINDS 5
+#define ROGUE_CARD_DEFS ((ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS) * 10)
+// Whether a card kind is a keyblade, original or new. Needs card_ids.h.
+#define ROGUE_IS_KEYBLADE(kind) \
+    ((kind) <= CARD_ULTIMA_WEAPON || ((kind) >= ROGUE_FIRST_CARD_KIND && (kind) < ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS))
+// Tier of the new keyblades, see RogueCardTier: they come from fusions.
+#define ROGUE_NEW_CARD_TIER 5
 // Which of Cloud's animations his tag attack plays, an index of gSmnCloudAnimDefs.
 #define ROGUE_TAG_CLOUD_ANIM 0
 // The action id of a Kingdom Key swing, which a tag card is played as.

@@ -72,8 +72,9 @@ u8 RogueCardElement(u16 id) {
         return ROGUE_ELEMENT_FIRE;
     }
 
-    if (kind <= CARD_ULTIMA_WEAPON) {
-        return RogueFlagsElement(gBattleAttackDefs[12 + kind * 3].flags);
+    // A keyblade's swings are the three attacks from 12 + 3 * its action id.
+    if (ROGUE_IS_KEYBLADE(kind)) {
+        return RogueFlagsElement(gBattleAttackDefs[12 + gCardDefs[id].unk_24 * 3].flags);
     }
 
     return ROGUE_ELEMENT_NONE;
@@ -81,7 +82,7 @@ u8 RogueCardElement(u16 id) {
 
 // The class build a kind of card belongs to, ROGUE_BUILDS for none.
 static u8 RogueKindBuild(u16 kind) {
-    if (kind <= CARD_ULTIMA_WEAPON) {
+    if (ROGUE_IS_KEYBLADE(kind)) {
         return ROGUE_BUILD_BLADE;
     }
 

@@ -143,6 +143,10 @@ static const u8 sKindTiers[] = {
 #define BOSS_CARD_TIER 4
 
 u8 RogueCardTier(u16 id) {
+    if (id >= ROGUE_FIRST_CARD_KIND * 10) {
+        return ROGUE_NEW_CARD_TIER;
+    }
+
     if (id >= CARD_GUARD_ARMOR_1) {
         return BOSS_CARD_TIER;
     }

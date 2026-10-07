@@ -1,0 +1,36 @@
+# The mod's new keyblade cards: the first deck cards are made Bond of Flame 5,
+# Two Become One 3 and Hidden Dragon 7, then shown in the deck menu and used.
+# Expect: the deck screenshot shows the three new pictures with their values,
+# the battle one their small cards in the hand, and hits above 0.
+include start.txt
+poke16 @gCardCollection 0x13C5
+poke16 @gCardCollection+2 0x13CD
+poke16 @gCardCollection+4 0x13DB
+press START
+wait 60
+press A
+wait 90
+shot /tmp/new_cards_deck.ppm
+press A
+wait 40
+press A
+wait 60
+shot /tmp/new_cards_list.ppm
+press B
+wait 40
+press B
+wait 40
+press B
+wait 60
+press B
+wait 60
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 720
+shot /tmp/new_cards_battle.ppm
+press A
+wait 30
+press A
+wait 40
+peek16 @gRogueDebug.hits hits
+peek8 @gRogue.build fire_points

@@ -257,7 +257,7 @@ enum {
 static u8 RogueFuseClass(u16 id) {
     u16 kind = id / 10;
 
-    if (kind <= CARD_ULTIMA_WEAPON) {
+    if (ROGUE_IS_KEYBLADE(kind)) {
         return FUSE_ATTACK;
     }
 
@@ -266,6 +266,36 @@ static u8 RogueFuseClass(u16 id) {
     }
 
     return FUSE_MAGIC;
+}
+
+// The new keyblades come from fusions only, from the second chapter: two
+// cards of the same original keyblade always make its evolution, and that
+// keyblade with any other makes it half the time.
+static u16 RogueEvolution(u16 kindA, u16 kindB) {
+    static const u8 evolutions[][2] = {
+        { CARD_LIONHEART, ROGUE_FIRST_CARD_KIND }, // Bond of Flame
+        { CARD_OBLIVION, ROGUE_FIRST_CARD_KIND + 1 }, // Two Become One
+        { CARD_DIVINE_ROSE, ROGUE_FIRST_CARD_KIND + 2 }, // Hidden Dragon
+        { CARD_METAL_CHOCOBO, ROGUE_FIRST_CARD_KIND + 3 }, // Follow the Wind
+        { CARD_OATHKEEPER, ROGUE_FIRST_CARD_KIND + 4 }, // Monochrome
+    };
+    u32 i;
+
+    if (gRogueMeta.chapters < 2) {
+        return 0;
+    }
+
+    for (i = 0; i < sizeof(evolutions) / sizeof(evolutions[0]); i++) {
+        if (kindA == evolutions[i][0] && kindB == evolutions[i][0]) {
+            return evolutions[i][1];
+        }
+
+        if ((kindA == evolutions[i][0] || kindB == evolutions[i][0]) && RogueRandBelow(2) == 0) {
+            return evolutions[i][1];
+        }
+    }
+
+    return 0;
 }
 
 // What two cards fuse into: always a stronger kind, one value above the
@@ -298,6 +328,11 @@ static u16 RogueFusionResult(u16 a, u16 b) {
         if (kind > CARD_MEGALIXIR) {
             kind = CARD_MEGALIXIR;
         }
+    } else if (classA == FUSE_ATTACK && classB == FUSE_ATTACK && RogueEvolution(kindA, kindB) != 0) {
+        kind = RogueEvolution(kindA, kindB);
+    } else if (classA == FUSE_ATTACK && classB == FUSE_ATTACK && (kindA > CARD_ULTIMA_WEAPON || kindB > CARD_ULTIMA_WEAPON)) {
+        // A new keyblade fused with another keyblade stays what it is.
+        kind = kindA > kindB ? kindA : kindB;
     } else if (classA == FUSE_ATTACK && classB == FUSE_ATTACK) {
         kind = (kindA > kindB ? kindA : kindB) + 1 + RogueRandBelow(3);
 

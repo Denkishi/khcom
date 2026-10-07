@@ -26,6 +26,7 @@ static const u8 sNameFire[] = "Lama ardente";
 static const u8 sNameIce[] = "Lama gelida";
 static const u8 sNameThunder[] = "Lama tonante";
 static const u8 sNameEcho[] = "Eco arcano";
+static const u8 sNamePillar[] = "Gelo di Vexen";
 
 static const u8 sTextVampire[] = "Ogni colpo a segno\x1Fti cura di 1 PV";
 static const u8 sTextCritical[] = "Un colpo su sette\x1F" "fa danno doppio";
@@ -38,13 +39,14 @@ static const u8 sTextFire[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Fuoc
 static const u8 sTextIce[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Gelo";
 static const u8 sTextThunder[] = "Ogni colpo di Keyblade\x1F\xE8 seguito da un Tuono";
 static const u8 sTextEcho[] = "Ogni magia a segno\x1Fcolpisce due volte";
+static const u8 sTextPillar[] = "Il finisher alza un\x1F" "blocco di ghiaccio";
 
 static const u8* const sNames[ROGUE_RELICS] = {
-    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho,
+    sNameVampire, sNameCritical, sNameSecondWind, sNameGlass, sNameMomentum, sNameReload, sNameKnives, sNameFire, sNameIce, sNameThunder, sNameEcho, sNamePillar,
 };
 
 static const u8* const sTexts[ROGUE_RELICS] = {
-    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho,
+    sTextVampire, sTextCritical, sTextSecondWind, sTextGlass, sTextMomentum, sTextReload, sTextKnives, sTextFire, sTextIce, sTextThunder, sTextEcho, sTextPillar,
 };
 
 const u8* RogueRelicName(u8 relic) {
@@ -64,6 +66,10 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     if (relic == ROGUE_RELIC_KNIVES) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_LARXENE;
+    }
+
+    if (relic == ROGUE_RELIC_ICE_PILLAR) {
+        return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN;
     }
 
     if (relic == ROGUE_RELIC_ARCANE_ECHO) {
@@ -103,6 +109,10 @@ u8 RogueRollRelic(void) {
 void RogueOnBossBeaten(u16 battle) {
     if (battle == 0xA3 || battle == 0xAE) {
         gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_LARXENE;
+    }
+
+    if (battle == 0xA4 || battle == 0xAF || battle == 0xB0) {
+        gRogueMeta.bossMoves |= ROGUE_BOSS_MOVE_VEXEN;
     }
 }
 

@@ -19,6 +19,7 @@
 // bonus, hitstop, and the jump buffer.
 
 // The enemy Sora hit last, for the tests to follow after the lock-on drops it.
+
 static BtlObj* sLastHit;
 
 // Runs a pending test command and refreshes what the tests read back.
@@ -53,6 +54,11 @@ void RogueDebugBattle(void) {
         break;
     case ROGUE_DEBUG_RELIC:
         gRogue.relics |= 1 << gRogueDebug.arg;
+        break;
+    case ROGUE_DEBUG_FINISHER:
+        if (sora != 0) {
+            RogueOnFinisher(sora);
+        }
         break;
     case ROGUE_DEBUG_ATTACK:
         // Goes through the whole damage calculation, as a hit of Sora's.
@@ -264,12 +270,111 @@ static TaskDesc sTaskDescRogueKnife = {
     sizeof(RogueKnifeWork),
 };
 
+// Vexen's ice, raised by Sora: a block of it comes up where the finisher
+// lands and hits what stands there, as one of his own ice attacks cut down
+// to about a swing and a half.
+
+#define PILLAR_ATTACK 313
+#define PILLAR_TILES 0x800
+#define PILLAR_HIT_FRAME 6
+#define PILLAR_FRAMES 44
+
+typedef struct RoguePillarArgs {
+    s32 x;
+    s32 y;
+} RoguePillarArgs;
+
+typedef struct RoguePillarWork {
+    void* tiles;
+    void* palette;
+    AnimState anim;
+    s32 x;
+    s32 y;
+    u8 timer;
+} RoguePillarWork;
+
+static void RoguePillar_Init(RoguePillarWork* w, RoguePillarArgs* args) {
+    w->palette = LoadObjPalette(gVixEPalette, 0x20);
+    w->tiles = LoadObjTiles(gVixenE2Tiles, PILLAR_TILES);
+    AnimInit(&w->anim, gVixenE2Anims, gVixenE2Frames);
+    AnimStart(&w->anim, 0, 0);
+    w->x = args->x;
+    w->y = args->y;
+    w->timer = 0;
+}
+
+static s32 RoguePillar_Update(RoguePillarWork* w) {
+    u64 flags;
+    s32 scale;
+
+    if (w->timer == PILLAR_HIT_FRAME) {
+        flags = gBtlWork->flags;
+        scale = gBtlWork->unk_124;
+        gBtlWork->flags |= 0x20000000;
+        gBtlWork->unk_124 = ROGUE_PILLAR_SCALE;
+        gRogue.projectile = 1;
+        gRogue.echoing = 1;
+        func_08011F78(PILLAR_ATTACK, w->x, w->y, 0, 28, 20, 48);
+        gRogue.echoing = 0;
+        gRogue.projectile = 0;
+        gBtlWork->unk_124 = scale;
+        gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
+    }
+
+    if (w->timer == PILLAR_FRAMES / 2) {
+        AnimStart(&w->anim, 1, 0);
+    }
+
+    AnimUpdate(&w->anim);
+    return ++w->timer < PILLAR_FRAMES;
+}
+
+static void RoguePillar_Draw(RoguePillarWork* w) {
+    s16 x;
+    s16 y;
+
+    WorldToScreen(&x, &y, w->x, w->y, 0);
+    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, GetBattleSpritePriorityFlags(w->y),
+               -0x1004 - (w->y >> 8) * 4);
+}
+
+static void RoguePillar_Destroy(RoguePillarWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
+}
+
+static TaskDesc sTaskDescRoguePillar = {
+    "task_rogue_pillar",
+    (TaskInitFunc)RoguePillar_Init,
+    (TaskUpdateFunc)RoguePillar_Update,
+    (TaskDrawFunc)RoguePillar_Draw,
+    (TaskDestroyFunc)RoguePillar_Destroy,
+    sizeof(RoguePillarWork),
+};
+
+static void RogueRaisePillar(BtlObj* sora) {
+    RoguePillarArgs args;
+
+    if (!CanAllocObjTiles(PILLAR_TILES / 32)) {
+        return;
+    }
+
+    args.x = sora->x + ((sora->flags & 4) ? -0x2400 : 0x2400);
+    args.y = sora->y;
+    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRoguePillar, &args);
+    gRogueDebug.pillars++;
+}
+
 // Called on the hit frame of a combo finisher.
 
 void RogueOnFinisher(BtlObj* sora) {
     RogueKnifeArgs args;
     s32 count;
     s32 i;
+
+    if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR)) {
+        RogueRaisePillar(sora);
+    }
 
     if (!RogueHasRelic(ROGUE_RELIC_KNIVES)) {
         return;
@@ -318,6 +423,7 @@ static void RogueHud_Init(RogueHudWork* w) {
     gRogueDebug.hits = 0;
     sLastHit = 0;
     gRogueDebug.knives = 0;
+    gRogueDebug.pillars = 0;
     gRogueDebug.echoes = 0;
 }
 

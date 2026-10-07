@@ -1,0 +1,17 @@
+# The boss-move relics: Larxene's knives (relic 6) and Vexen's ice block
+# (relic 11) go off on a combo finisher.
+# Expect: knives 3 and pillars 1, and hits above 0 once they land.
+include battle.txt
+debug relic 6
+wait 2
+debug relic 11
+wait 2
+debug finisher
+wait 8
+shot /tmp/boss_moves_1.ppm
+wait 20
+shot /tmp/boss_moves_2.ppm
+wait 40
+peek16 @gRogueDebug.knives knives
+peek16 @gRogueDebug.pillars pillars
+peek16 @gRogueDebug.hits hits

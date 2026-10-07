@@ -55,6 +55,7 @@ typedef struct RogueMeta {
 
 #define ROGUE_META_TUTORIAL_SEEN 1
 #define ROGUE_BOSS_MOVE_LARXENE 1
+#define ROGUE_BOSS_MOVE_VEXEN 2
 #define ROGUE_BASE_RELICS ROGUE_RELIC_KNIVES
 #define ROGUE_META_ALL_CLEARED 2 // a run through every chapter was completed
 
@@ -127,6 +128,7 @@ enum RogueRelic {
     ROGUE_RELIC_ICE_BLADE,
     ROGUE_RELIC_THUNDER_BLADE,
     ROGUE_RELIC_ARCANE_ECHO,
+    ROGUE_RELIC_ICE_PILLAR, // Vexen's move
     ROGUE_RELICS
 };
 
@@ -147,6 +149,8 @@ enum RogueBuild {
 #define ROGUE_NO_KIND 0xFF
 // Upward speed a combo finisher gives the enemy it hits; a keyblade's own is 384.
 #define ROGUE_LAUNCH 560
+// 8.8 damage scale of the ice block of the Vexen relic: a swing and a half.
+#define ROGUE_PILLAR_SCALE 384
 
 // Arts: card kinds that can have a sleight bound, and the value a card needs
 // to perform it alone.
@@ -273,7 +277,8 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_WIN, // win the battle
     ROGUE_DEBUG_HURT, // arg: damage Sora takes
     ROGUE_DEBUG_HIT, // arg: damage the locked-on enemy takes
-    ROGUE_DEBUG_ATTACK // arg: attack definition Sora lands on the locked-on enemy
+    ROGUE_DEBUG_ATTACK, // arg: attack definition Sora lands on the locked-on enemy
+    ROGUE_DEBUG_FINISHER // what a combo finisher sets off, without the swing
 };
 
 typedef struct RogueDebug {
@@ -290,6 +295,7 @@ typedef struct RogueDebug {
     u16 hits; // times an enemy took damage this battle
     u16 knives; // projectiles the knife relic threw this battle
     u16 echoes; // added magic hits that connected this battle
+    u16 pillars; // ice blocks the Vexen relic raised this battle
 } RogueDebug;
 
 extern RogueDebug gRogueDebug;

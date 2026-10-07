@@ -140,6 +140,10 @@ void RogueCountBuild(void) {
         RogueBuildAdd(ROGUE_BUILD_PROJECTILE, 3);
     }
 
+    if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR)) {
+        RogueBuildAdd(ROGUE_ELEMENT_ICE, 2);
+    }
+
     for (build = 0; build < ROGUE_ELEMENTS; build++) {
         if (RogueHasRelic(ROGUE_RELIC_FIRE_BLADE + build)) {
             RogueBuildAdd(build, 2);

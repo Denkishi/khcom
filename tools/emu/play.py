@@ -24,7 +24,7 @@ symbols = {name: int(addr, 16) for addr, name in re.findall(r"^\s+0x([0-9a-f]{8}
 
 
 fields = offsets()
-DEBUG = ["none", "room", "battle", "reward", "relic", "floor", "win", "hurt", "hit", "attack"]
+DEBUG = ["none", "room", "battle", "reward", "relic", "floor", "win", "hurt", "hit", "attack", "finisher"]
 
 
 def resolve(match):

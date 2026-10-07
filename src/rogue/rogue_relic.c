@@ -380,10 +380,24 @@ static void RogueRelicsRecord(const u8* label, u16 value) {
     RogueRelicsLine(sWork->text);
 }
 
+// The run's page, the relics, the records, and a page more for every eight
+// relics past the first eight.
+static u8 RogueRelicsPages(void) {
+    u8 owned = 0;
+    u8 i;
+
+    for (i = 0; i < ROGUE_RELICS; i++) {
+        owned += RogueHasRelic(i);
+    }
+
+    return 3 + (owned > PAGE_LINES - 1 ? (owned - 1) / (PAGE_LINES - 1) : 0);
+}
+
 static void RogueRelicsShowPage(void) {
     u8* out;
     u8 first;
     u8 i;
+    u8 skip;
 
     for (i = 0; i < PAGE_LINES; i++) {
         FreeTextSlots(sWork->lines[i], LINE_SLOTS);
@@ -434,9 +448,16 @@ static void RogueRelicsShowPage(void) {
         RogueRelicsLine(sTitleRelics);
         first = sWork->lineCount;
 
+        // Eight to a page: the pages after the records go on with the list.
+        skip = sWork->page == 1 ? 0 : (sWork->page - 2) * (PAGE_LINES - 1);
+
         for (i = 0; i < ROGUE_RELICS; i++) {
             if (RogueHasRelic(i)) {
-                RogueRelicsLine(sNames[i]);
+                if (skip != 0) {
+                    skip--;
+                } else {
+                    RogueRelicsLine(sNames[i]);
+                }
             }
         }
 
@@ -484,7 +505,7 @@ static void RogueRelics_Update(void) {
     case 1:
         if (GetKeysPressed() & A_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLICK);
-            sWork->page = (sWork->page + 1) % 3;
+            sWork->page = (sWork->page + 1) % RogueRelicsPages();
             sWork->abandon = 0;
             RogueRelicsShowPage();
         } else if ((GetKeysPressed() & SELECT_BUTTON) && sWork->page == 2) {

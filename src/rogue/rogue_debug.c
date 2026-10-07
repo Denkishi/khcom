@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "card_types.h"
 #include "registration_data.h"
 #include "battle_actor.h"
 #include "map.h"
@@ -13,10 +14,17 @@ extern vu32 gVBlankCounter;
 // poke a command into it, so that a test can jump straight to what it checks.
 RogueDebug gRogueDebug;
 
+Deck* GetActiveDeck(void);
+
 // Runs a pending command while Sora walks around a room.
 void RogueDebugField(void) {
     u8 command = gRogueDebug.command;
     u8 arg = gRogueDebug.arg;
+
+    gRogueDebug.seenMaxHp = gGameState.progression.maxHp;
+    gRogueDebug.seenAp = gGameState.progression.ap;
+    gRogueDebug.seenCp = gGameState.progression.cp;
+    gRogueDebug.seenDeckCards = GetActiveDeck()->unk_DC;
 
     if (command == ROGUE_DEBUG_NONE) {
         return;

@@ -547,6 +547,10 @@ typedef struct RogueDebug {
     u16 tagHits; // tag attacks that connected this battle
     u16 airDashes;
     u16 teleports;
+    u16 seenMaxHp; // the game's own numbers, copied here each frame in a room for the tests to read
+    u16 seenAp;
+    u16 seenCp;
+    u16 seenDeckCards;
     u8 lastMod; // what the last card played alone was enchanted with
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt

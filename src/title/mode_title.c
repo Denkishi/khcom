@@ -4,6 +4,7 @@
 #include "map_api.h"
 #include "task.h"
 #include "system_state.h"
+#include "rogue.h"
 #include "mode_title.h"
 #include "sprites_title.h"
 
@@ -38,37 +39,7 @@ void func_080D5998(void) {
 }
 
 void func_080D59B4(void) {
-    if (gUnk_02034ECA != 0) {
-        ModeRequest(&gModeTitle, 0);
-        return;
-    }
-
-    switch (gUnk_02034EC2) {
-    case 3:
-        SaveLoadSystem();
-        SaveClearSystem();
-        func_080E04EC();
-        return;
-    case 1:
-        ModeRequest(&gModeMenuLoad, 0);
-        return;
-    case 2:
-        func_080AEB94();
-        ModeRequest(&gModeSioBattle, 0);
-        return;
-    case 4:
-        func_0801CD20();
-        ModeRequest(&gModeMenuNew, 0);
-        return;
-    case 5:
-        func_0801CCB4();
-        ModeRequest(&gModeMenuNew, 0);
-        return;
-    case 0:
-    default:
-        ModeRequest(&gModeMenuNew, 0);
-        return;
-    }
+    RogueStartRun();
 }
 
 void func_080D5A4C(u16 a) {
@@ -281,78 +252,8 @@ void mode_title_1(void) {
         if (!(GetKeysPressed() & START_BUTTON) && !(GetKeysPressed() & A_BUTTON)) {
             break;
         }
-        m4aSongNumStart(SONG_SYS_KETTEI);
-
-        if (SaveRepairSystem() == 2) {
-            gUnk_02034EC2 = 3;
-        } else if (SaveRepairFileLarge(0) == 2 || SaveRepairFileLarge(1) == 2) {
-            gUnk_02034EC2 = 1;
-        } else if ((gGameState.flags & 0x20) &&
-                   (SaveRepairFileSmall(0) == 2 || SaveRepairFileSmall(1) == 2)) {
-            gUnk_02034EC2 = 1;
-        } else {
-            gUnk_02034EC2 = 0;
-        }
-        func_08000DE8(&gTitleTaskPool, gTitleLogoTask);
-        func_08000DE8(&gTitleTaskPool, gTitleObjTask);
-        gTitleMenuTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleMenu, &gUnk_02034EC2);
-        DisableBg(0);
-        gUnk_02034E98 = 6;
-        gUnk_02034EC8 = 0;
-        gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1);
-        gBldAlpha = ((16 - gUnk_02034EC8) << 8) | gUnk_02034EC8;
-        gUnk_02034EC0 = 4;
-        break;
-    case 6:
-        if (gUnk_02034EC0 != 0) {
-            gUnk_02034EC0--;
-            break;
-        }
-        gUnk_02034EC0 = 4;
-        gUnk_02034EC8++;
-        gBldAlpha = ((16 - gUnk_02034EC8) << 8) | gUnk_02034EC8;
-
-        if (gUnk_02034EC8 > 15) {
-            gBldCnt = 0;
-            gUnk_02034E98 = 8;
-        }
-        break;
-    case 7:
-        if (gUnk_02034EC0 != 0) {
-            gUnk_02034EC0--;
-            break;
-        }
-        gUnk_02034EC0 = 1;
-        gUnk_02034EC8--;
-        gBldAlpha = ((16 - gUnk_02034EC8) << 8) | gUnk_02034EC8;
-
-        if (gUnk_02034EC8 > 15) {
-            gBldCnt = 0;
-            func_08000DE8(&gTitleTaskPool, gTitleMenuTask);
-            gTitleLogoTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleLogo, 0);
-            gTitleObjTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleObj, 0);
-            EnableBg(0);
-            gUnk_02034E98 = 5;
-        }
-        break;
-    case 8:
-        if ((GetKeysPressed() & START_BUTTON) || (GetKeysPressed() & A_BUTTON)) {
-            switch (gUnk_02034EC2) {
-            case 0:
-            case 4:
-            case 5:
-                m4aSongNumStart(SONG_SYS_START);
-                break;
-            default:
-                m4aSongNumStart(SONG_SYS_KETTEI);
-                break;
-            }
-            func_080D5B30();
-        } else if (GetKeysPressed() & B_BUTTON) {
-            m4aSongNumStart(SONG_SYS_CLOSE);
-            gUnk_02034ECA = 1;
-            func_080D5B30();
-        }
+        m4aSongNumStart(SONG_SYS_START);
+        func_080D5B30();
         break;
     case 9:
         if (!FadeIsActive()) {

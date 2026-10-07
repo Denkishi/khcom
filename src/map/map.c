@@ -7,6 +7,7 @@
 #include "sprites_map.h"
 #include "sprites_sora.h"
 #include "world_types.h"
+#include "rogue.h"
 
 extern u8 gUnk_09EF6A34[];
 extern u8 gUnk_09EF6A42[];
@@ -2716,56 +2717,10 @@ void func_080E9B7C(void) {
 }
 
 void func_080E9CBC(void) {
-    u8 r;
-    u8* e;
-    UnkStruct_080DEDD8* d;
-
     func_080E0820();
-    r = FadeIsActive();
-    if (r != 0) {
-        return;
-    }
-    if (gUnk_0203C7AC->unk_0F == 0xFE) {
-        func_080DF814();
-        return;
-    }
-    if (gUnk_0203C7AC->unk_0F == 0xFD) {
-        func_080DF828();
-        return;
-    }
 
-    e = func_080E54B8(gUnk_0203C590.unk_05);
-    if (e[0] == 0xFF) {
-        func_080DF730(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
-        ModeRequest(&gModeMapFld, 0);
-        return;
-    }
-
-    d = func_080DEDD8(e[0]);
-    if (d->unk_02 != gUnk_0203C7AC->unk_0F || d->unk_03 != gUnk_0203C7AC->unk_10) {
-        func_080DF730(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
-        ModeRequest(&gModeMapFld, 0);
-        return;
-    }
-
-    gGameState.unk_1B8 = r;
-
-    switch (d->unk_00) {
-    case 1:
-    case 3:
-        if (e[1] == 0x51 && (gGameState.flags & 0x400)) {
-            func_0806180C(0x55);
-        } else {
-            func_0806180C(e[1]);
-        }
-        break;
-    case 2:
-        func_080DF730(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
-        ModeRequest(&gModeMapFld, 0);
-        break;
-    case 4:
-        func_080E9A28();
-        break;
+    if (FadeIsActive() == 0) {
+        RogueLeaveRoom(gUnk_0203C7AC->unk_10);
     }
 }
 
@@ -4729,16 +4684,8 @@ u8 func_080ECAC8(MapDoorWork* p) {
 
 u8 func_080ECBC8(MapDoorWork* p) {
     UnkStruct_080DFB7C* flags = p->unk_00;
-    void* t = func_08093BF8();
 
-    if (t != 0) {
-        if (flags->unk_00 & 0x10) {
-            func_080DF640(flags->unk_07, 0);
-        } else {
-            func_080DF640(flags->unk_07, t);
-        }
-        p->update = func_080ECC54;
-    }
+    p->update = func_080ECC54;
 
     if (!(gFieldState->flags & 0x40000)) {
         gUnk_0203C7AC->flags &= ~0x80;

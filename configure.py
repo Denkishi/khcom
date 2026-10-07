@@ -412,6 +412,10 @@ with open(ldscript, "w") as f:
         f.write(f"    {name} = {addr:#010x};\n")
     f.write("\n    .ewram 0x02000000 (NOLOAD) :\n    {\n")
     f.write(f"        gEwramHeapStart = .;\n        . += {EWRAM_HEAP_SIZE:#x};\n")
+    if mod_region:
+        for _src, obj, _flags in units:
+            if obj not in mod_new:
+                f.write(f"        {obj}(.bss);\n")
     f.write("        *(.bss);\n        *(.ewram_common.*);\n    }\n")
     f.write("\n    /DISCARD/ : { *(*); }\n}\n")
 

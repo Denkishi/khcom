@@ -12,6 +12,7 @@
 #include "map_text_data.h"
 #include "world_types.h"
 #include "system_state.h"
+#include "rogue.h"
 
 extern UnkStruct_0984C868 gUnk_0984C868[];
 extern UnkStruct_0984C868 gUnk_0984CBD0[];
@@ -145,11 +146,7 @@ UnkStruct_0984C868* func_080DED64(u8 a) {
 }
 
 u8* func_080DED98(u8 a) {
-    if (gGameState.flags & 8) {
-        return gUnk_0984CBD0[(s8)gGameState.floor].unk_04 + a * 4;
-    }
-
-    return gUnk_0984C868[(s8)gGameState.floor].unk_04 + a * 4;
+    return RogueRoomLinks();
 }
 
 UnkStruct_080DEDD8* func_080DEDD8(u8 a) {
@@ -169,66 +166,9 @@ u8 func_080DEE28(u8 a, u8 b) {
 }
 
 u16 func_080DEE44(u8 a, u8 b) {
-    UnkStruct_080DEE18* e;
-    UnkStruct_080DEDD8* p;
-    u16 r;
-    u8 c;
-    u8 d;
-
-    c = func_080DEE28(a, b);
-
-    if (c == 0xFF) {
-        return 0;
-    }
-
-    if (c >= 0xFD && c <= 0xFE) {
-        return 3;
-    }
-
-    e = func_080DEE18(c);
-    r = 1;
-
-    if ((e->unk_00 & 1) != 0) {
-        r = 3;
-    }
-
-    if ((e->unk_00 & 8) != 0) {
-        r |= 8;
-    }
-
-    if ((e->unk_00 & 4) != 0) {
-        r |= 8;
-    }
-
-    d = func_080DF51C(c);
-
-    if (d == 1 || d == 4 || d == 2) {
-        r |= 0x10;
-        p = func_080DEDD8(0);
-
-        while (p->unk_00 != 5) {
-            if (p->unk_02 == c) {
-                if (p->unk_03 != b) {
-                    r |= 8;
-                }
-
-                break;
-            }
-
-            p++;
-        }
-    }
-
-    if ((gUnk_0203C590.unk_02 & 8) != 0) {
-        p = func_080DEDD8(*func_080E54B8(gUnk_0203C590.unk_05));
-
-        if (p->unk_02 == c && p->unk_03 == b) {
-            r |= 2;
-        }
-    }
-
-    return r;
+    return RogueDoorFlags(b);
 }
+
 void func_080DEF20(void) {
     u16 t;
 

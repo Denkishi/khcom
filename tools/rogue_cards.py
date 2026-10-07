@@ -88,6 +88,14 @@ CARDS = [
     ("MoveUrsula", "Onda di Ursula", "rom", 554, 17, 10, "SHOCK", 3, 70, 0),
     ("MoveDragon", "Soffio del drago", "rom", 556, 17, 10, "MOVE", 5, 0, 0),
     ("MoveOogie", "Dadi di Oogie", "rom", 553, 17, 5, "SHOCK", 0, 160, 0),
+    # Sleights as single cards: the number is the action Sora's battle task
+    # gives the sleight.
+    ("SleightRaid", "Lancio raid", "extra_cards_1.png", (118, 109, 149, 138), 17, 15, "SLEIGHT", 107, 0, 0),
+    ("SleightStop", "Fermoraid", "extra_cards_1.png", (475, 673, 509, 709), 17, 20, "SLEIGHT", 127, 0, 0),
+    ("SleightCloud", "Omnislash", "extra_cards_1.png", (477, 731, 511, 767), 17, 30, "SLEIGHT", 129, 0, 0),
+    ("SleightFire", "Mega vampa", "extra_cards_1.png", (136, 807, 170, 842), 17, 20, "SLEIGHT", 126, 0, 0),
+    ("SleightIce", "Tormenta", "extra_cards_2.png", (130, 745, 163, 779), 17, 20, "SLEIGHT", 124, 0, 0),
+    ("SleightThunder", "Saetta", "rom", 559, 17, 20, "SLEIGHT", 118, 0, 0),
 ]
 
 

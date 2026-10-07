@@ -275,7 +275,7 @@ enum RogueBuild {
 // The mod's cards come after the original 950; ten ids are skipped, see
 // rogue_cards.c. Each new keyblade kind has ten ids, one for each value.
 #define ROGUE_FIRST_CARD_KIND 96
-#define ROGUE_CARD_KINDS 56
+#define ROGUE_CARD_KINDS 62
 #define ROGUE_FIRST_EFFECT_KIND (ROGUE_FIRST_CARD_KIND + 16) // the first card with an effect of its own
 
 // What a card can be enchanted with: it stays on that one card for the run.
@@ -301,7 +301,8 @@ enum RogueCardEffectKind {
     ROGUE_EFFECT_HEAL, // a: the share of max HP healed, in 1/256
     ROGUE_EFFECT_PLUTO, // heals as above and digs up shards
     ROGUE_EFFECT_KNIVES,
-    ROGUE_EFFECT_PILLAR
+    ROGUE_EFFECT_PILLAR,
+    ROGUE_EFFECT_SLEIGHT // a: the action of the sleight the card does alone
 };
 
 typedef struct RogueCardEffect {

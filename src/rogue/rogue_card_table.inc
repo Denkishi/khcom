@@ -560,6 +560,66 @@ extern const u8 gRogueCardMoveOogieTiles[], gRogueCardMoveOogiePalette[], gRogue
       18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
       20 + 2 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
 
+// Lancio raid: behaves as original card kind 17.
+static const u8 sNameSleightRaid_It[] = "Lancio raid";
+static const LocalizedText sNameSleightRaid = { { (u8*)sNameSleightRaid_It, (u8*)sNameSleightRaid_It, (u8*)sNameSleightRaid_It, (u8*)sNameSleightRaid_It, (u8*)sNameSleightRaid_It } };
+extern const u8 gRogueCardSleightRaidTiles[], gRogueCardSleightRaidPalette[], gRogueCardSleightRaidSmallTiles[], gRogueCardSleightRaidSmallPalette[];
+#define ROGUE_CARD_SLEIGHTRAID(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardSleightRaidTiles, (void*)gRogueCardSleightRaidPalette, (void*)&sNameSleightRaid, gUnk_09060424, \
+      (void*)gRogueCardSleightRaidSmallTiles, (void*)gRogueCardSleightRaidSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      30 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Fermoraid: behaves as original card kind 17.
+static const u8 sNameSleightStop_It[] = "Fermoraid";
+static const LocalizedText sNameSleightStop = { { (u8*)sNameSleightStop_It, (u8*)sNameSleightStop_It, (u8*)sNameSleightStop_It, (u8*)sNameSleightStop_It, (u8*)sNameSleightStop_It } };
+extern const u8 gRogueCardSleightStopTiles[], gRogueCardSleightStopPalette[], gRogueCardSleightStopSmallTiles[], gRogueCardSleightStopSmallPalette[];
+#define ROGUE_CARD_SLEIGHTSTOP(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardSleightStopTiles, (void*)gRogueCardSleightStopPalette, (void*)&sNameSleightStop, gUnk_09060424, \
+      (void*)gRogueCardSleightStopSmallTiles, (void*)gRogueCardSleightStopSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      35 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Omnislash: behaves as original card kind 17.
+static const u8 sNameSleightCloud_It[] = "Omnislash";
+static const LocalizedText sNameSleightCloud = { { (u8*)sNameSleightCloud_It, (u8*)sNameSleightCloud_It, (u8*)sNameSleightCloud_It, (u8*)sNameSleightCloud_It, (u8*)sNameSleightCloud_It } };
+extern const u8 gRogueCardSleightCloudTiles[], gRogueCardSleightCloudPalette[], gRogueCardSleightCloudSmallTiles[], gRogueCardSleightCloudSmallPalette[];
+#define ROGUE_CARD_SLEIGHTCLOUD(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardSleightCloudTiles, (void*)gRogueCardSleightCloudPalette, (void*)&sNameSleightCloud, gUnk_09060424, \
+      (void*)gRogueCardSleightCloudSmallTiles, (void*)gRogueCardSleightCloudSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      45 + 4 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Mega vampa: behaves as original card kind 17.
+static const u8 sNameSleightFire_It[] = "Mega vampa";
+static const LocalizedText sNameSleightFire = { { (u8*)sNameSleightFire_It, (u8*)sNameSleightFire_It, (u8*)sNameSleightFire_It, (u8*)sNameSleightFire_It, (u8*)sNameSleightFire_It } };
+extern const u8 gRogueCardSleightFireTiles[], gRogueCardSleightFirePalette[], gRogueCardSleightFireSmallTiles[], gRogueCardSleightFireSmallPalette[];
+#define ROGUE_CARD_SLEIGHTFIRE(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardSleightFireTiles, (void*)gRogueCardSleightFirePalette, (void*)&sNameSleightFire, gUnk_09060424, \
+      (void*)gRogueCardSleightFireSmallTiles, (void*)gRogueCardSleightFireSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      35 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Tormenta: behaves as original card kind 17.
+static const u8 sNameSleightIce_It[] = "Tormenta";
+static const LocalizedText sNameSleightIce = { { (u8*)sNameSleightIce_It, (u8*)sNameSleightIce_It, (u8*)sNameSleightIce_It, (u8*)sNameSleightIce_It, (u8*)sNameSleightIce_It } };
+extern const u8 gRogueCardSleightIceTiles[], gRogueCardSleightIcePalette[], gRogueCardSleightIceSmallTiles[], gRogueCardSleightIceSmallPalette[];
+#define ROGUE_CARD_SLEIGHTICE(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardSleightIceTiles, (void*)gRogueCardSleightIcePalette, (void*)&sNameSleightIce, gUnk_09060424, \
+      (void*)gRogueCardSleightIceSmallTiles, (void*)gRogueCardSleightIceSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      35 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
+// Saetta: behaves as original card kind 17.
+static const u8 sNameSleightThunder_It[] = "Saetta";
+static const LocalizedText sNameSleightThunder = { { (u8*)sNameSleightThunder_It, (u8*)sNameSleightThunder_It, (u8*)sNameSleightThunder_It, (u8*)sNameSleightThunder_It, (u8*)sNameSleightThunder_It } };
+extern const u8 gRogueCardSleightThunderTiles[], gRogueCardSleightThunderPalette[], gRogueCardSleightThunderSmallTiles[], gRogueCardSleightThunderSmallPalette[];
+#define ROGUE_CARD_SLEIGHTTHUNDER(value) \
+    { gCardMgc01Frame0, (void*)gRogueCardSleightThunderTiles, (void*)gRogueCardSleightThunderPalette, (void*)&sNameSleightThunder, gUnk_09060424, \
+      (void*)gRogueCardSleightThunderSmallTiles, (void*)gRogueCardSleightThunderSmallPalette, \
+      18, 0x0, value, { 0, 0, 0 }, 0x13, 171, 1, 0, \
+      35 + 3 * ((value) == 0 ? 9 : (value) - 1), { 3, 0, 0, 0, 0, 0 } }
+
 // The table entries, ten for each card.
 #define ROGUE_CARD_TABLE \
     ROGUE_CARD_BONDOFFLAME(0), ROGUE_CARD_BONDOFFLAME(1), ROGUE_CARD_BONDOFFLAME(2), ROGUE_CARD_BONDOFFLAME(3), ROGUE_CARD_BONDOFFLAME(4), ROGUE_CARD_BONDOFFLAME(5), ROGUE_CARD_BONDOFFLAME(6), ROGUE_CARD_BONDOFFLAME(7), ROGUE_CARD_BONDOFFLAME(8), ROGUE_CARD_BONDOFFLAME(9), \
@@ -617,9 +677,15 @@ extern const u8 gRogueCardMoveOogieTiles[], gRogueCardMoveOogiePalette[], gRogue
     ROGUE_CARD_MOVEJAFAR(0), ROGUE_CARD_MOVEJAFAR(1), ROGUE_CARD_MOVEJAFAR(2), ROGUE_CARD_MOVEJAFAR(3), ROGUE_CARD_MOVEJAFAR(4), ROGUE_CARD_MOVEJAFAR(5), ROGUE_CARD_MOVEJAFAR(6), ROGUE_CARD_MOVEJAFAR(7), ROGUE_CARD_MOVEJAFAR(8), ROGUE_CARD_MOVEJAFAR(9), \
     ROGUE_CARD_MOVEURSULA(0), ROGUE_CARD_MOVEURSULA(1), ROGUE_CARD_MOVEURSULA(2), ROGUE_CARD_MOVEURSULA(3), ROGUE_CARD_MOVEURSULA(4), ROGUE_CARD_MOVEURSULA(5), ROGUE_CARD_MOVEURSULA(6), ROGUE_CARD_MOVEURSULA(7), ROGUE_CARD_MOVEURSULA(8), ROGUE_CARD_MOVEURSULA(9), \
     ROGUE_CARD_MOVEDRAGON(0), ROGUE_CARD_MOVEDRAGON(1), ROGUE_CARD_MOVEDRAGON(2), ROGUE_CARD_MOVEDRAGON(3), ROGUE_CARD_MOVEDRAGON(4), ROGUE_CARD_MOVEDRAGON(5), ROGUE_CARD_MOVEDRAGON(6), ROGUE_CARD_MOVEDRAGON(7), ROGUE_CARD_MOVEDRAGON(8), ROGUE_CARD_MOVEDRAGON(9), \
-    ROGUE_CARD_MOVEOOGIE(0), ROGUE_CARD_MOVEOOGIE(1), ROGUE_CARD_MOVEOOGIE(2), ROGUE_CARD_MOVEOOGIE(3), ROGUE_CARD_MOVEOOGIE(4), ROGUE_CARD_MOVEOOGIE(5), ROGUE_CARD_MOVEOOGIE(6), ROGUE_CARD_MOVEOOGIE(7), ROGUE_CARD_MOVEOOGIE(8), ROGUE_CARD_MOVEOOGIE(9)
+    ROGUE_CARD_MOVEOOGIE(0), ROGUE_CARD_MOVEOOGIE(1), ROGUE_CARD_MOVEOOGIE(2), ROGUE_CARD_MOVEOOGIE(3), ROGUE_CARD_MOVEOOGIE(4), ROGUE_CARD_MOVEOOGIE(5), ROGUE_CARD_MOVEOOGIE(6), ROGUE_CARD_MOVEOOGIE(7), ROGUE_CARD_MOVEOOGIE(8), ROGUE_CARD_MOVEOOGIE(9), \
+    ROGUE_CARD_SLEIGHTRAID(0), ROGUE_CARD_SLEIGHTRAID(1), ROGUE_CARD_SLEIGHTRAID(2), ROGUE_CARD_SLEIGHTRAID(3), ROGUE_CARD_SLEIGHTRAID(4), ROGUE_CARD_SLEIGHTRAID(5), ROGUE_CARD_SLEIGHTRAID(6), ROGUE_CARD_SLEIGHTRAID(7), ROGUE_CARD_SLEIGHTRAID(8), ROGUE_CARD_SLEIGHTRAID(9), \
+    ROGUE_CARD_SLEIGHTSTOP(0), ROGUE_CARD_SLEIGHTSTOP(1), ROGUE_CARD_SLEIGHTSTOP(2), ROGUE_CARD_SLEIGHTSTOP(3), ROGUE_CARD_SLEIGHTSTOP(4), ROGUE_CARD_SLEIGHTSTOP(5), ROGUE_CARD_SLEIGHTSTOP(6), ROGUE_CARD_SLEIGHTSTOP(7), ROGUE_CARD_SLEIGHTSTOP(8), ROGUE_CARD_SLEIGHTSTOP(9), \
+    ROGUE_CARD_SLEIGHTCLOUD(0), ROGUE_CARD_SLEIGHTCLOUD(1), ROGUE_CARD_SLEIGHTCLOUD(2), ROGUE_CARD_SLEIGHTCLOUD(3), ROGUE_CARD_SLEIGHTCLOUD(4), ROGUE_CARD_SLEIGHTCLOUD(5), ROGUE_CARD_SLEIGHTCLOUD(6), ROGUE_CARD_SLEIGHTCLOUD(7), ROGUE_CARD_SLEIGHTCLOUD(8), ROGUE_CARD_SLEIGHTCLOUD(9), \
+    ROGUE_CARD_SLEIGHTFIRE(0), ROGUE_CARD_SLEIGHTFIRE(1), ROGUE_CARD_SLEIGHTFIRE(2), ROGUE_CARD_SLEIGHTFIRE(3), ROGUE_CARD_SLEIGHTFIRE(4), ROGUE_CARD_SLEIGHTFIRE(5), ROGUE_CARD_SLEIGHTFIRE(6), ROGUE_CARD_SLEIGHTFIRE(7), ROGUE_CARD_SLEIGHTFIRE(8), ROGUE_CARD_SLEIGHTFIRE(9), \
+    ROGUE_CARD_SLEIGHTICE(0), ROGUE_CARD_SLEIGHTICE(1), ROGUE_CARD_SLEIGHTICE(2), ROGUE_CARD_SLEIGHTICE(3), ROGUE_CARD_SLEIGHTICE(4), ROGUE_CARD_SLEIGHTICE(5), ROGUE_CARD_SLEIGHTICE(6), ROGUE_CARD_SLEIGHTICE(7), ROGUE_CARD_SLEIGHTICE(8), ROGUE_CARD_SLEIGHTICE(9), \
+    ROGUE_CARD_SLEIGHTTHUNDER(0), ROGUE_CARD_SLEIGHTTHUNDER(1), ROGUE_CARD_SLEIGHTTHUNDER(2), ROGUE_CARD_SLEIGHTTHUNDER(3), ROGUE_CARD_SLEIGHTTHUNDER(4), ROGUE_CARD_SLEIGHTTHUNDER(5), ROGUE_CARD_SLEIGHTTHUNDER(6), ROGUE_CARD_SLEIGHTTHUNDER(7), ROGUE_CARD_SLEIGHTTHUNDER(8), ROGUE_CARD_SLEIGHTTHUNDER(9)
 
-#define ROGUE_CARD_TABLE_KINDS 56
+#define ROGUE_CARD_TABLE_KINDS 62
 
 // What each card does beyond its base card: effect, two numbers, unlocking boss bit.
 #define ROGUE_CARD_EFFECTS \
@@ -678,4 +744,10 @@ extern const u8 gRogueCardMoveOogieTiles[], gRogueCardMoveOogiePalette[], gRogue
     { ROGUE_EFFECT_SHOCK, 1, 70, 0 }, \
     { ROGUE_EFFECT_SHOCK, 3, 70, 0 }, \
     { ROGUE_EFFECT_MOVE, 5, 0, 0 }, \
-    { ROGUE_EFFECT_SHOCK, 0, 160, 0 }
+    { ROGUE_EFFECT_SHOCK, 0, 160, 0 }, \
+    { ROGUE_EFFECT_SLEIGHT, 107, 0, 0 }, \
+    { ROGUE_EFFECT_SLEIGHT, 127, 0, 0 }, \
+    { ROGUE_EFFECT_SLEIGHT, 129, 0, 0 }, \
+    { ROGUE_EFFECT_SLEIGHT, 126, 0, 0 }, \
+    { ROGUE_EFFECT_SLEIGHT, 124, 0, 0 }, \
+    { ROGUE_EFFECT_SLEIGHT, 118, 0, 0 }

@@ -1,0 +1,13 @@
+# A sleight as a single card: the first card of the deck is made Lancio raid 5
+# (the sleight thrown keyblade) and played.
+# Expect: the picture shows Sora throwing the keyblade in a beam of light.
+include start.txt
+poke16 @gCardCollection 0x15F5
+poke8 @gRogueDebug.god 1
+debug battle 157
+wait 720
+shot /tmp/sleight_card_hand.ppm
+press A
+wait 22
+shot /tmp/sleight_card.ppm
+peek32 @gFrameCounter frames

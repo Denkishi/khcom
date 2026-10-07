@@ -617,6 +617,8 @@ s32 RogueCardAction(const CardDef* def) {
         case ROGUE_EFFECT_PILLAR:
             RogueRaisePillar(sora);
             return ROGUE_ACTION_SWING;
+        case ROGUE_EFFECT_SLEIGHT:
+            return effect->a;
         }
     }
 

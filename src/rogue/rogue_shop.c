@@ -1,4 +1,8 @@
 #include "rogue.h"
+#include "monsgage.h"
+#include "card_types.h"
+#include "card_ids.h"
+#include "card_def_data.h"
 #include "registration_data.h"
 #include "battle.h"
 #include "display.h"
@@ -16,10 +20,10 @@
 // Axel's shop: permanent upgrades bought with memory shards. It shares the
 // reward screen's look.
 
-#define SHOP_TEXT_MAX 60
-#define TITLE_SLOTS 24
-#define LABEL_SLOTS 10
-#define DETAIL_SLOTS 64
+#define SHOP_TEXT_MAX 110
+#define TITLE_SLOTS 36
+#define LABEL_SLOTS 14
+#define DETAIL_SLOTS 80
 #define PANEL_COLUMNS 13
 
 typedef struct RogueShopWork {
@@ -28,6 +32,9 @@ typedef struct RogueShopWork {
     TextSlot detail[DETAIL_SLOTS];
     u16 map[0x500 / 2];
     u8 text[SHOP_TEXT_MAX + 8];
+    // The text slots keep reading their string: each has a buffer of its own.
+    u8 titleText[40];
+    u8 labelText[ROGUE_UPGRADES][LABEL_SLOTS + 2];
     void* palette;
     void* cursorPalette;
     u8 titleCount;
@@ -36,11 +43,18 @@ typedef struct RogueShopWork {
     u8 cursor;
     u8 state;
     u8 fromHub;
+    u8 page; // 0 the abilities, 1 the starting cards
 } RogueShopWork;
 
 static RogueShopWork* sWork;
 
-static const u8 sShards[] = "Frammenti: ";
+static const u8 sShards[] = "Abilit\xE0  Frammenti: ";
+static const u8 sSeals[] = "Carte iniziali   Sigilli: ";
+static const u8 sNeeds[] = "\x1F" "Richiede ";
+static const u8 sNeedsLevel[] = " liv. ";
+static const u8 sStarterDetail[] = "Ogni run parte con\x1Fquesta carta nel mazzo";
+static const u8 sOwned[] = "\x1F" "Sbloccata";
+static const u8 sPages[] = "\x1FL/R: cambia pagina";
 static const u8 sLevel[] = "\x1FLivello ";
 static const u8 sCost[] = "\x1F" "Costo: ";
 static const u8 sMaxed[] = "\x1F" "Al massimo";
@@ -96,24 +110,69 @@ static u8* RogueShopNumber(u8* out, u16 value) {
 static void RogueShopRefresh(void) {
     u8* out;
 
+    s32 i;
+
     FreeTextSlots(sWork->title, TITLE_SLOTS);
-    out = RogueShopAppend(sWork->text, sShards);
-    RogueShopNumber(out, gRogueMeta.shards);
-    sWork->titleCount = LoadTextSlots((u16*)sWork->text, sWork->title);
+    out = RogueShopAppend(sWork->titleText, sWork->page == 0 ? sShards : sSeals);
+    RogueShopNumber(out, sWork->page == 0 ? gRogueMeta.shards : gRogueMeta.seals);
+    sWork->titleCount = LoadTextSlots((u16*)sWork->titleText, sWork->title);
+
+    for (i = 0; i < ROGUE_UPGRADES; i++) {
+        FreeTextSlots(sWork->labels[i], LABEL_SLOTS);
+
+        if (sWork->page == 0) {
+            sWork->labelCounts[i] = LoadTextSlots((u16*)sLabels[i], sWork->labels[i]);
+        } else {
+            // The card's name, cut to what a label holds.
+            const u8* name = eu_0805E924(gCardDefs[CARD_ID(RogueStarterKind(i), ROGUE_STARTER_VALUE)].name);
+            s32 n;
+
+            for (n = 0; n < LABEL_SLOTS - 1 && name[n] != 0; n++) {
+                sWork->labelText[i][n] = name[n];
+            }
+
+            sWork->labelText[i][n] = 0;
+            sWork->labelCounts[i] = LoadTextSlots((u16*)sWork->labelText[i], sWork->labels[i]);
+        }
+    }
 
     FreeTextSlots(sWork->detail, DETAIL_SLOTS);
+
+    if (sWork->page == 1) {
+        out = RogueShopAppend(sWork->text, sStarterDetail);
+
+        if (gRogueMeta.starters & (1 << sWork->cursor)) {
+            out = RogueShopAppend(out, sOwned);
+        } else {
+            out = RogueShopAppend(out, sCost);
+            out = RogueShopNumber(out, RogueStarterCost(sWork->cursor));
+        }
+
+        RogueShopAppend(out, sPages);
+        sWork->detailCount = LoadTextSlots((u16*)sWork->text, sWork->detail);
+        return;
+    }
+
     out = RogueShopAppend(sWork->text, sDetails[sWork->cursor]);
     out = RogueShopAppend(out, sLevel);
     out = RogueShopNumber(out, gRogueMeta.upgrades[sWork->cursor]);
     *out++ = '/';
     out = RogueShopNumber(out, RogueUpgradeMax(sWork->cursor));
 
-    if (gRogueMeta.upgrades[sWork->cursor] < RogueUpgradeMax(sWork->cursor)) {
+    if (!RogueUpgradeOpen(sWork->cursor)) {
+        // A branch not reached yet: what it grows from.
+        out = RogueShopAppend(out, sNeeds);
+        out = RogueShopAppend(out, sLabels[RogueUpgradeNeeds(sWork->cursor)]);
+        out = RogueShopAppend(out, sNeedsLevel);
+        out = RogueShopNumber(out, RogueUpgradeNeedsLevel(sWork->cursor));
+    } else if (gRogueMeta.upgrades[sWork->cursor] < RogueUpgradeMax(sWork->cursor)) {
         out = RogueShopAppend(out, sCost);
-        RogueShopNumber(out, RogueUpgradeCost(sWork->cursor));
+        out = RogueShopNumber(out, RogueUpgradeCost(sWork->cursor));
     } else {
-        RogueShopAppend(out, sMaxed);
+        out = RogueShopAppend(out, sMaxed);
     }
+
+    RogueShopAppend(out, sPages);
 
     sWork->detailCount = LoadTextSlots((u16*)sWork->text, sWork->detail);
 }
@@ -124,6 +183,7 @@ static void RogueShop_Init(s32 from) {
 
     sWork = EwramAlloc(sizeof(RogueShopWork));
     sWork->cursor = 0;
+    sWork->page = 0;
     sWork->state = 0;
     sWork->fromHub = from == ROGUE_SHOP_FROM_HUB;
     SetBgMode0();
@@ -147,7 +207,6 @@ static void RogueShop_Init(s32 from) {
 
     for (i = 0; i < ROGUE_UPGRADES; i++) {
         InitTextSlots(sWork->labels[i], LABEL_SLOTS);
-        sWork->labelCounts[i] = LoadTextSlots((u16*)sLabels[i], sWork->labels[i]);
     }
 
     RogueShopRefresh();
@@ -172,8 +231,12 @@ static void RogueShop_Update(void) {
             sWork->cursor = (sWork->cursor + 1) % ROGUE_UPGRADES;
             m4aSongNumStart(SONG_SYS_CLICK);
             RogueShopRefresh();
+        } else if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
+            sWork->page ^= 1;
+            m4aSongNumStart(SONG_SYS_CLICK);
+            RogueShopRefresh();
         } else if (GetKeysPressed() & A_BUTTON) {
-            if (RogueBuyUpgrade(sWork->cursor, !sWork->fromHub)) {
+            if (sWork->page == 1 ? RogueBuyStarter(sWork->cursor) : RogueBuyUpgrade(sWork->cursor, !sWork->fromHub)) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 RogueShopRefresh();
             } else {

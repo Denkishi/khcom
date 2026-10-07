@@ -44,9 +44,15 @@ enum RogueUpgrade {
     ROGUE_UPGRADES
 };
 
+#define ROGUE_STARTERS 6 // cards that can be unlocked to start every run with
+#define ROGUE_STARTER_VALUE 6
+#define ROGUE_SEALS_MAX 99
+
 typedef struct RogueUpgradeDef {
     u8 levels;
     u8 cost; // of the first level
+    u8 needs; // the upgrade it branches from, ROGUE_UPGRADES for a root
+    u8 needsLevel; // the level that one must have
 } RogueUpgradeDef;
 
 typedef struct RogueMeta {
@@ -66,7 +72,9 @@ typedef struct RogueMeta {
     u8 oblivion; // difficulty level picked in the hub
     u8 oblivionMax; // highest level unlocked
     u8 hero; // the RogueHero picked in the hub
-    u8 unused[3];
+    u8 seals; // won from bosses, spent on starting cards
+    u8 starters; // one bit for each starting card unlocked, see ROGUE_STARTERS
+    u8 unused[1];
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
@@ -445,6 +453,12 @@ void RogueAbandonRun(void);
 void RogueApplyBoon(void);
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun);
 u8 RogueUpgradeMax(u8 upgrade);
+u8 RogueUpgradeNeeds(u8 upgrade);
+u8 RogueUpgradeNeedsLevel(u8 upgrade);
+u8 RogueUpgradeOpen(u8 upgrade);
+u8 RogueStarterKind(u8 starter);
+u8 RogueStarterCost(u8 starter);
+u8 RogueBuyStarter(u8 starter);
 u16 RogueUpgradeCost(u8 upgrade);
 void RogueLeaveRoomFor(Mode* mode, s32 arg);
 struct AnimDef;

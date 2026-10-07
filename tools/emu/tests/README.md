@@ -33,3 +33,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `mickey_hero.txt` | Mickey played in place of Sora, hub and battle |
 | `enemy_tags.txt` | enemy cards calling their enemy or boss in for its attack |
 | `profile_battle.txt` | frame load and missed frames in a crowded battle |
+| `skill_tree.txt` | the ability tree and the starting cards bought from Axel in the hub |

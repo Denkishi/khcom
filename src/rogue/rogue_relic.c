@@ -128,6 +128,11 @@ u8 RogueMoveUnlocked(u8 move) {
 
 // Beating a boss can unlock its move for later runs.
 void RogueOnBossBeaten(u16 battle) {
+    // Every boss and miniboss leaves a seal, for the starting cards.
+    if (gRogueMeta.seals < ROGUE_SEALS_MAX) {
+        gRogueMeta.seals++;
+    }
+
     // Mickey, beaten, can be played: picked in the hub.
     if (battle == 0x9D && gRogue.bossSkin == ROGUE_SKIN_MICKEY) {
         gRogueMeta.flags |= ROGUE_META_MICKEY;

@@ -1,4 +1,5 @@
 #include "rogue.h"
+#include "card_ids.h"
 #include "agb_sram.h"
 #include "battle.h"
 #include "map_api.h"
@@ -28,13 +29,55 @@ static RogueSuspend sSuspend;
 RogueMeta gRogueMeta;
 
 static const RogueUpgradeDef sUpgrades[ROGUE_UPGRADES] = {
-    { 5, 8 }, // max HP
-    { 5, 8 }, // CP
-    { 3, 15 }, // strength
-    { 1, 40 }, // combo plus
-    { 1, 30 }, // air jump
-    { 3, 12 }, // rerolls
+    // Two branches: HP, then CP, then rerolls; strength, then combo plus,
+    // then the air jump.
+    { 5, 8, ROGUE_UPGRADES, 0 }, // max HP
+    { 5, 8, ROGUE_UPGRADE_HP, 2 }, // CP
+    { 3, 15, ROGUE_UPGRADES, 0 }, // strength
+    { 1, 40, ROGUE_UPGRADE_ATTACK, 2 }, // combo plus
+    { 1, 30, ROGUE_UPGRADE_COMBO, 1 }, // air jump
+    { 3, 12, ROGUE_UPGRADE_CP, 2 }, // rerolls
 };
+
+// The cards that can be unlocked to start every run with, and their cost in
+// seals.
+static const u8 sStarters[ROGUE_STARTERS][2] = {
+    { CARD_FIRE, 2 }, { CARD_BLIZZARD, 2 }, { CARD_THUNDER, 2 }, { CARD_SIMBA, 3 }, { CARD_CLOUD, 4 }, { CARD_LIONHEART, 4 },
+};
+
+u8 RogueStarterKind(u8 starter) {
+    return sStarters[starter][0];
+}
+
+u8 RogueStarterCost(u8 starter) {
+    return sStarters[starter][1];
+}
+
+u8 RogueBuyStarter(u8 starter) {
+    if ((gRogueMeta.starters & (1 << starter)) || gRogueMeta.seals < sStarters[starter][1]) {
+        return 0;
+    }
+
+    gRogueMeta.seals -= sStarters[starter][1];
+    gRogueMeta.starters |= 1 << starter;
+    RogueMetaSave();
+    return 1;
+}
+
+u8 RogueUpgradeNeeds(u8 upgrade) {
+    return sUpgrades[upgrade].needs;
+}
+
+u8 RogueUpgradeNeedsLevel(u8 upgrade) {
+    return sUpgrades[upgrade].needsLevel;
+}
+
+// Whether the upgrade's place in the tree has been reached.
+u8 RogueUpgradeOpen(u8 upgrade) {
+    u8 needs = sUpgrades[upgrade].needs;
+
+    return needs == ROGUE_UPGRADES || gRogueMeta.upgrades[needs] >= sUpgrades[upgrade].needsLevel;
+}
 
 static void RogueMetaReset(void) {
     u8* p = (u8*)&gRogueMeta;
@@ -205,7 +248,7 @@ void RogueApplyBoon(void) {
 u8 RogueBuyUpgrade(u8 upgrade, u8 inRun) {
     u16 cost = RogueUpgradeCost(upgrade);
 
-    if (gRogueMeta.upgrades[upgrade] >= sUpgrades[upgrade].levels || gRogueMeta.shards < cost) {
+    if (gRogueMeta.upgrades[upgrade] >= sUpgrades[upgrade].levels || gRogueMeta.shards < cost || !RogueUpgradeOpen(upgrade)) {
         return 0;
     }
 

@@ -173,6 +173,13 @@ void RogueBuildStartDeck(void) {
         gRogue.cardXp[tries] = 0;
     }
 
+    // The starting cards unlocked in the hub come before anything random.
+    for (tries = 0; tries < ROGUE_STARTERS; tries++) {
+        if (gRogueMeta.starters & (1 << tries)) {
+            RogueAddCard(CARD_ID(RogueStarterKind(tries), ROGUE_STARTER_VALUE), budget);
+        }
+    }
+
     // A cure and a zero come first, so the budget cannot run out before them.
     RogueAddCard(CARD_ID(CARD_CURE, 3 + RogueRandBelow(3)), budget);
     RogueAddCard(CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(3), 0), budget);

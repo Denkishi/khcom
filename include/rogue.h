@@ -157,6 +157,10 @@ enum RogueBuild {
 // Arts: card kinds that can have a sleight bound, and the value a card needs
 // to perform it alone.
 #define ROGUE_ART_KINDS 24
+// Arts from this number up are boss moves: the card keeps its own action and
+// the move goes off with it.
+#define ROGUE_ART_KNIVES 200
+#define ROGUE_ART_PILLAR 201
 #define ROGUE_ART_MIN_VALUE 5
 
 // Frames between a keyblade hit and the magic hit of an infused blade.
@@ -386,6 +390,8 @@ void RogueOnDamage(struct BtlObj* p);
 u16 RogueBufferJump(u16 pressed);
 u16 RogueBufferCard(u16 pressed);
 void RogueOnFinisher(struct BtlObj* sora);
+void RogueThrowKnives(struct BtlObj* sora);
+void RogueRaisePillar(struct BtlObj* sora);
 void RogueOnBossBeaten(u16 battle);
 extern struct TaskDesc gTaskDescRogueHud;
 u8* RogueRoomLinks(void);

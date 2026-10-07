@@ -352,7 +352,7 @@ static TaskDesc sTaskDescRoguePillar = {
     sizeof(RoguePillarWork),
 };
 
-static void RogueRaisePillar(BtlObj* sora) {
+void RogueRaisePillar(BtlObj* sora) {
     RoguePillarArgs args;
 
     if (!CanAllocObjTiles(PILLAR_TILES / 32)) {
@@ -365,20 +365,10 @@ static void RogueRaisePillar(BtlObj* sora) {
     gRogueDebug.pillars++;
 }
 
-// Called on the hit frame of a combo finisher.
-
-void RogueOnFinisher(BtlObj* sora) {
+void RogueThrowKnives(BtlObj* sora) {
     RogueKnifeArgs args;
     s32 count;
     s32 i;
-
-    if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR)) {
-        RogueRaisePillar(sora);
-    }
-
-    if (!RogueHasRelic(ROGUE_RELIC_KNIVES)) {
-        return;
-    }
 
     m4aSongNumStart(SONG_EF_RAC_3TR);
 
@@ -397,6 +387,17 @@ void RogueOnFinisher(BtlObj* sora) {
         args.z = sora->z - 0x1400;
         TaskCreate(&gBtlWork->taskPools[0], &sTaskDescRogueKnife, &args);
         gRogueDebug.knives++;
+    }
+}
+
+// Called on the hit frame of a combo finisher.
+void RogueOnFinisher(BtlObj* sora) {
+    if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR)) {
+        RogueRaisePillar(sora);
+    }
+
+    if (RogueHasRelic(ROGUE_RELIC_KNIVES)) {
+        RogueThrowKnives(sora);
     }
 }
 

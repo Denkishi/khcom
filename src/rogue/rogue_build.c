@@ -370,6 +370,16 @@ static const u8 sFireArts[] = { 114, 126 };
 
 // An art that suits a kind of card, 0 if the kind takes none.
 u8 RogueRollArt(u16 kind) {
+    // A boss move, once its boss has been beaten, about one time in three.
+    if (gRogueMeta.bossMoves != 0 && RogueRandBelow(3) == 0) {
+        if ((gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN) &&
+            (!(gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_LARXENE) || RogueRandBelow(2) == 0)) {
+            return ROGUE_ART_PILLAR;
+        }
+
+        return ROGUE_ART_KNIVES;
+    }
+
     if (kind <= CARD_ULTIMA_WEAPON) {
         return sAttackArts[RogueRandBelow(sizeof(sAttackArts))];
     }
@@ -398,6 +408,16 @@ s32 RogueCardAction(const CardDef* def) {
     if (kind < ROGUE_ART_KINDS && gRogue.arts[kind] != 0 && def->unk_2A != 3 && def->unk_20 >= ROGUE_ART_MIN_VALUE &&
         !(gRogue.artsUsed & (1 << kind))) {
         gRogue.artsUsed |= 1 << kind;
+
+        switch (gRogue.arts[kind]) {
+        case ROGUE_ART_KNIVES:
+            RogueThrowKnives(gBtlWork->actor);
+            return def->unk_24;
+        case ROGUE_ART_PILLAR:
+            RogueRaisePillar(gBtlWork->actor);
+            return def->unk_24;
+        }
+
         return gRogue.arts[kind];
     }
 

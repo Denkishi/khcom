@@ -489,7 +489,14 @@ static void RogueHubCaption(void) {
         shown = gRogueDebug.caption;
         DisableBg(3);
         FreeTextSlots(sWork->line, LINE_SLOTS);
-        sWork->lineCount = LoadTextSlots((u16*)sCaptions[shown - 1], sWork->line);
+        sWork->lineCount = shown == 255 ? 0 : LoadTextSlots((u16*)sCaptions[shown - 1], sWork->line);
+    }
+
+    // 255: the two plates of the menus, plain and chosen, with nothing written on them.
+    if (shown == 255) {
+        RogueUiPlate(&sWork->ui, 20, 40, 0);
+        RogueUiPlate(&sWork->ui, 20, 80, 1);
+        return;
     }
 
     DrawTextSlots(8, 72, sWork->line, sWork->textPalette, 50, sWork->lineCount);

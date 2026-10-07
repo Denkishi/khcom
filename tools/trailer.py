@@ -65,6 +65,9 @@ def boss(skin, force=0, frames=320):
 
 
 SCENES.update({
+    "title": ["wait 400", "rec {rec}", "wait 190", "rec off"],
+    "axel": ["wait 600", "press START", "wait 120", "press START", "wait 200", "hold B 100", "wait 20", "hold LEFT 5", "wait 6", "press A"]
+    + ["wait 55", "press A"] * 22 + ["wait 40", "rec {rec}", "wait 200", "rec off"],
     "seph_wing": boss(8, 16), "seph_octa": boss(8, 15), "seph_flare": boss(8, 12), "seph_plunge": boss(8, 11), "seph_wave": boss(8, 13),
     "sora2": boss(9, 0, 420), "coat": boss(11, 0, 420), "hood": boss(12, 0, 420),
 })
@@ -75,8 +78,8 @@ SCENES.update({
 # slow motion). With None for the first frame the piece is the stretch of the
 # scene in which most moves on the screen, found by busiest().
 CUTS = [
-    (None, 80, "KINGDOM HEARTS", "CHAIN OF MEMORIES"),
-    (None, 45, "ROGUELITE", "Ogni run è diversa"),
+    ("title", 0, 70, "", False, 1),
+    ("title", 70, 80, "ROGUELITE", False, 1),
     ("hub", 20, 120, "Un hub da esplorare", False, 1),
     ("door", 150, 60, "Ogni porta, una carta", False, 1),
     ("door", 330, 80, "Tu scegli la stanza", False, 1),
@@ -96,7 +99,7 @@ CUTS = [
     ("sora2", None, 60, "", True, 1),
     ("coat", None, 60, "", True, 1),
     ("hood", None, 70, "Riuscirai a batterli?", True, 1),
-    (None, 130, "CoM ROGUELITE", "github.com/Denkishi/khcom"),
+    ("axel", 20, 150, "github.com/Denkishi/khcom", False, 1),
 ]
 
 
@@ -126,6 +129,7 @@ def captions():
     lines = ["wait 600", "press START", "wait 120"]
     for n in range(len(WORDS)):
         lines += [f"poke8 @gRogueDebug.caption {n + 1}", "wait 4", f"shot {WORK}/caption{n}.ppm"]
+    lines += ["poke8 @gRogueDebug.caption 255", "wait 4", f"shot {WORK}/plates.ppm"]
     script = WORK / "captions.txt"
     script.write_text("\n".join(lines) + "\n")
     subprocess.run([sys.executable, ROOT / "tools/emu/play.py", script], check=True, stdout=subprocess.DEVNULL)
@@ -137,17 +141,22 @@ def captions():
         picture.save(WORK / f"caption{n}.png")
 
 
-def text(image, where, words, scale):
-    """A line of the game's own writing, enlarged a whole number of times, centred at a height."""
+def text(image, where, words, scale, chosen=False):
+    """A line of the game's own writing on one of the plates of its menus,
+    blue or (chosen) orange, made as wide as the line; enlarged a whole number
+    of times and centred at a height."""
     picture = Image.open(WORK / f"caption{WORDS.index(words)}.png")
-    picture = picture.resize((picture.width * scale, picture.height * scale), Image.NEAREST)
-    x = (SIZE[0] - picture.width) // 2
-    # A dark edge of one of its own pixels all round, so that it reads over anything.
-    edge = Image.new("RGBA", picture.size, (8, 8, 24, 255))
-    for dx in (-scale, 0, scale):
-        for dy in (-scale, 0, scale):
-            image.paste(edge, (x + dx, where + dy), picture)
-    image.paste(picture, (x, where), picture)
+    plates = Image.open(WORK / "plates.ppm").convert("RGB")
+    plate = plates.crop((28, 80, 124, 96) if chosen else (20, 40, 116, 56))
+    # The ends of the plate as they are, its middle drawn out to the width of the words.
+    wide = Image.new("RGBA", (picture.width + 28, 16))
+    wide.paste(plate.crop((0, 0, 16, 16)), (0, 0))
+    wide.paste(plate.crop((16, 0, 80, 16)).resize((wide.width - 32, 16), Image.NEAREST), (16, 0))
+    wide.paste(plate.crop((80, 0, 96, 16)), (wide.width - 16, 0))
+    wide.putdata([(r, g, b, 0 if r + g + b < 24 else 255) for r, g, b, _ in wide.getdata()])
+    wide.paste(picture, (14, (16 - picture.height) // 2 + 1), picture)
+    wide = wide.resize((wide.width * scale, wide.height * scale), Image.NEAREST)
+    image.paste(wide, ((SIZE[0] - wide.width) // 2, where), wide)
 
 
 def frames():
@@ -185,7 +194,9 @@ def frames():
                     # A cut comes in from black over three frames.
                     image = Image.blend(Image.new("RGB", SIZE, (0, 0, 0)), image, (i + 1) / 4)
                 if words:
-                    text(image, 612, words, 5)
+                    # The trailer's own name and address on the orange plate, the rest on the blue;
+                    # at the top where the game has its own plates at the bottom.
+                    text(image, 628 if wide else 44, words, 5, words in ("ROGUELITE", "github.com/Denkishi/khcom"))
                 for _ in range(slow):
                     yield image.tobytes()
 

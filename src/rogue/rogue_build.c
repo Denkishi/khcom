@@ -752,3 +752,83 @@ const u8* RogueCardModName(u8 mod) {
 
     return names[mod];
 }
+
+// What each of the mod's cards does, in a line: for the deck menu and the
+// reward screen. 0 for a card that has nothing of its own to say.
+static const u8 sCardText0[] = "Fuoco a ogni colpo";
+static const u8 sCardText1[] = "Ogni colpo vale doppio";
+static const u8 sCardText2[] = "Finale: globo di fuoco";
+static const u8 sCardText3[] = "Finale: turbine";
+static const u8 sCardText4[] = "Ogni colpo cura 1 PV";
+static const u8 sCardText5[] = "Finale: onda d'urto";
+static const u8 sCardText6[] = "Tuono a ogni colpo";
+static const u8 sCardText7[] = "Colpo extra, costa PV";
+static const u8 sCardText8[] = "Finale: vampa";
+static const u8 sCardText9[] = "Ogni colpo ustiona";
+static const u8 sCardText10[] = "Gelo a ogni colpo";
+static const u8 sCardText11[] = "Finale: congela";
+static const u8 sCardText12[] = "Primo colpo doppio";
+static const u8 sCardText13[] = "Onda: tre colpi";
+static const u8 sCardText14[] = "Turbine che solleva";
+static const u8 sCardText15[] = "Attira i nemici";
+static const u8 sCardText16[] = "Finale: cura 3 PV";
+static const u8 sMoveText0[] = "Chakram di fuoco";
+static const u8 sMoveText1[] = "Tre aghi di gelo";
+static const u8 sMoveText2[] = "Petali tutt'intorno";
+static const u8 sMoveText3[] = "Scoppio di gelo";
+static const u8 sMoveText4[] = "Globo di fuoco";
+static const u8 sMoveText5[] = "Vampa: due colpi";
+static const u8 sMoveText6[] = "Roccia che lancia";
+static const u8 sMoveText7[] = "Bomba";
+static const u8 sMoveText8[] = "Onda: tre colpi";
+static const u8 sMoveText9[] = "Turbine che solleva";
+static const u8 sMoveText10[] = "Attira i nemici";
+static const u8 sMoveText11[] = "Muro: quattro colpi";
+static const u8 sMoveText12[] = "Due falci di petali";
+static const u8 sShockText0[] = "Onda d'urto";
+static const u8 sShockText1[] = "Onda di fuoco";
+static const u8 sShockText2[] = "Onda di gelo";
+static const u8 sShockText3[] = "Onda di tuono";
+static const u8 sHealText[] = "Cura i PV";
+static const u8 sPlutoText[] = "Cura e frammenti";
+static const u8 sKnivesText[] = "Tre coltelli di tuono";
+static const u8 sPillarText[] = "Blocco che congela";
+static const u8 sSleightText[] = "Tecnica da sola";
+
+const u8* RogueCardEffectText(u16 kind) {
+    static const u8* const own[] = { sCardText0, sCardText1, sCardText2, sCardText3, sCardText4, sCardText5, sCardText6, sCardText7, sCardText8, sCardText9, sCardText10, sCardText11, sCardText12, sCardText13, sCardText14, sCardText15, sCardText16 };
+    static const u8* const moves[ROGUE_MOVE_DEFS] = { sMoveText0, sMoveText1, sMoveText2, sMoveText3, sMoveText4, sMoveText5, sMoveText6, sMoveText7, sMoveText8, sMoveText9, sMoveText10, sMoveText11, sMoveText12 };
+    static const u8* const shocks[] = { sShockText0, sShockText1, sShockText2, sShockText3 };
+    const RogueCardEffect* effect;
+
+    if (kind < ROGUE_FIRST_CARD_KIND || kind >= ROGUE_FIRST_CARD_KIND + ROGUE_CARD_KINDS) {
+        return 0;
+    }
+
+    kind -= ROGUE_FIRST_CARD_KIND;
+
+    if (kind < sizeof(own) / sizeof(own[0])) {
+        return own[kind];
+    }
+
+    effect = &gRogueCardEffects[kind];
+
+    switch (effect->effect) {
+    case ROGUE_EFFECT_MOVE:
+        return moves[effect->a];
+    case ROGUE_EFFECT_SHOCK:
+        return shocks[effect->a];
+    case ROGUE_EFFECT_HEAL:
+        return sHealText;
+    case ROGUE_EFFECT_PLUTO:
+        return sPlutoText;
+    case ROGUE_EFFECT_KNIVES:
+        return sKnivesText;
+    case ROGUE_EFFECT_PILLAR:
+        return sPillarText;
+    case ROGUE_EFFECT_SLEIGHT:
+        return sSleightText;
+    }
+
+    return 0;
+}

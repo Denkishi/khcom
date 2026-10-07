@@ -316,6 +316,7 @@ enum RogueCardMod {
 
 void RogueOnCardSlot(u16 deckIndex);
 const u8* RogueCardModName(u8 mod);
+const u8* RogueCardEffectText(u16 kind);
 
 // What a card of the mod does beyond its base card.
 enum RogueCardEffectKind {

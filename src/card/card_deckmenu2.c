@@ -4791,6 +4791,14 @@ void func_0808D7EC(DeckMenuWork* w, u16 index) {
 
     d = &gCardDefs[index];
     s = gUnk_09EE8F48[d->unk_1C];
+
+    // One of the mod's cards says what it does where the others say what
+    // kind of card they are.
+    if (RogueCardEffectText(index / 10) != 0) {
+        w->textSlotCount5 = LoadTextSlots((void*)RogueCardEffectText(index / 10), w->textSlots5);
+        return;
+    }
+
     w->textSlotCount5 = LoadTextSlots(LANGSTR(s), w->textSlots5);
 }
 

@@ -497,7 +497,13 @@ static void RogueRewardDetail(RogueReward* reward) {
     case REWARD_CARD:
         out = RogueAppendCard(out, reward->card);
         out = RogueAppend(out, sCost);
-        RogueAppendNumber(out, GetCardCpCost(reward->card));
+        out = RogueAppendNumber(out, GetCardCpCost(reward->card));
+
+        // One of the mod's cards: what it does.
+        if (RogueCardEffectText(reward->card / 10) != 0) {
+            *out++ = 0x1F;
+            RogueAppend(out, RogueCardEffectText(reward->card / 10));
+        }
         break;
     case REWARD_UPGRADE:
         id = gCardCollection[reward->card] & CARD_ID_MASK;

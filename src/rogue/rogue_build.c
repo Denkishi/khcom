@@ -575,6 +575,19 @@ s32 RogueCardAction(const CardDef* def) {
 
     gRogue.playedKind = def->unk_2A != 3 ? kind : ROGUE_NO_KIND;
     RogueGadgetFire(GADGET_ON_CARD_N, gBtlWork->actor2);
+    RogueGadgetCardPlayed();
+
+    if (def->unk_20 == 9 && def->unk_2A != 3) {
+        RogueGadgetFire(GADGET_ON_NINE, gBtlWork->actor2);
+    }
+
+    if (def->unk_2A != 3 && RogueKindBuild(kind) == ROGUE_BUILD_SPELL) {
+        RogueGadgetFire(GADGET_ON_SPELL, gBtlWork->actor2);
+    }
+
+    if (def->unk_2A != 3 && ROGUE_IS_KEYBLADE(kind)) {
+        RogueGadgetFire(GADGET_ON_ATTACK_CARD, gBtlWork->actor2);
+    }
 
     if (def->unk_20 == 0 && def->unk_2A != 3) {
         RogueGadgetFire(GADGET_ON_ZERO, gBtlWork->actor2);
@@ -734,6 +747,8 @@ u8 RoguePlayerCardValue(u8 value) {
     if (RogueHasRelic(ROGUE_RELIC_PLUS_ONE) && value != 0 && value < 9) {
         value++;
     }
+
+    value = RogueGadgetCardValue(value);
 
     return value;
 }

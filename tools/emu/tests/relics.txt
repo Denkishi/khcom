@@ -19,7 +19,7 @@ debug hurt 20
 wait 40
 peek16 @gRogueDebug.soraHp glass_hurt
 wait 120
-poke16 @gRogue.relics 1
+poke16 @gRogue.relicBits 1
 poke16 @gRogue.combo 0
 poke8 @gRogueDebug.god 1
 peek16 @gRogueDebug.soraHp before_vampire
@@ -29,7 +29,7 @@ wait 50
 peek16 @gRogueDebug.hits hits_after_vampire
 peek16 @gRogueDebug.soraHp vampire_hp
 wait 120
-poke16 @gRogue.relics 0x10
+poke16 @gRogue.relicBits 0x10
 poke16 @gRogue.combo 30
 poke8 @gRogue.comboTimer 100
 debug attack 12

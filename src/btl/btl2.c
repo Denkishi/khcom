@@ -1605,6 +1605,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     gGameState.progression.exp += work->unk_38;
                 }
 
+                RogueGadgetFire(GADGET_ON_PRIZE, 0);
                 work->unk_30 = 1;
                 work->unk_28 = 0;
                 work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);

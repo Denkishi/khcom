@@ -115,7 +115,7 @@ void RogueOnDamage(BtlObj* p) {
     s32 cap;
 
     if (p == sora) {
-        if (gRogueDebug.god) {
+        if (gRogueDebug.god || RogueGadgetShielded()) {
             p->unk_020 = 0;
         }
 
@@ -163,6 +163,9 @@ void RogueOnDamage(BtlObj* p) {
         p->unk_020 *= 2;
     }
 
+    // What the gadgets have on for a while.
+    p->unk_020 = RogueGadgetDamage(p->unk_020);
+
     // The tree's critical hits, four in a hundred for each level, and its
     // stronger finishers.
     if (RogueRandBelow(100) < 4 * (RogueUpgradeLevel(ROGUE_UPGRADE_CRIT) + RogueUpgradeLevel(ROGUE_UPGRADE_CRIT2))) {
@@ -202,6 +205,14 @@ void RogueOnDamage(BtlObj* p) {
     if (!gRogue.echoing && !gRogue.projectile) {
         RogueStyleOnHit(p);
         RogueGadgetFire(GADGET_ON_HIT_N, p);
+    }
+
+    if (!gRogue.echoing && !gRogue.projectile) {
+        RogueGadgetFire(GADGET_ON_FIRST_HIT + (gRogueDebug.hits != 0 ? GADGET_TRIGGERS : 0), p);
+
+        if (p->z < p->unk_010) {
+            RogueGadgetFire(GADGET_ON_AIR_HIT, p);
+        }
     }
 
     // The hit that fells it.
@@ -245,6 +256,8 @@ u8 RogueReloadRate(u8 slowed) {
     }
 
     rate += rate * RogueUpgradeLevel(ROGUE_UPGRADE_RELOAD) / 10;
+
+    rate = RogueGadgetReloadRate(rate);
 
     if (RogueHasRelic(ROGUE_RELIC_INSTANT_RELOAD)) {
         rate = 255;
@@ -613,6 +626,7 @@ static s32 RogueHud_Update(RogueHudWork* w) {
         gRogue.comboTimer--;
 
         if (gRogue.comboTimer == 0) {
+            RogueGadgetComboEnd(gRogue.combo);
             gRogue.combo = 0;
         }
     }

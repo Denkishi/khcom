@@ -165,16 +165,7 @@ const u8* RogueRelicText(u8 relic) {
 
 // The word of the run's relic bits a relic is in.
 static u32* RogueRelicWord(u8 relic) {
-    switch (relic >> 5) {
-    case 0:
-        return &gRogue.relics;
-    case 1:
-        return &gRogue.relics2;
-    case 2:
-        return &gRogue.relics3;
-    }
-
-    return &gRogue.relics4;
+    return &gRogue.relicBits[relic >> 5];
 }
 
 u8 RogueHasRelic(u8 relic) {
@@ -209,9 +200,9 @@ static u8 RogueRelicUnlocked(u8 relic) {
         return gRogueMeta.bossMoves & ROGUE_BOSS_MOVE_VEXEN;
     }
 
-    // The gadgets: twenty from the start, ten more with each chapter.
+    // The gadgets: forty from the start, thirty more with each chapter.
     if (relic >= ROGUE_RELIC_FIRST_GADGET) {
-        return relic - ROGUE_RELIC_FIRST_GADGET < 10 + gRogueMeta.chapters * 10;
+        return relic - ROGUE_RELIC_FIRST_GADGET < 10 + gRogueMeta.chapters * 30;
     }
 
     // The later relics: the card ones and the cursed from the second chapter,
@@ -227,7 +218,7 @@ static u8 RogueRelicUnlocked(u8 relic) {
 
     // A modifier is of use to a run that has a move, a blade or the echo.
     if (relic >= ROGUE_FIRST_MOD) {
-        return gRogueMeta.bossMoves != 0 && ((gRogue.relics >> ROGUE_RELIC_KNIVES) != 0 || gRogue.relics2 != 0);
+        return gRogueMeta.bossMoves != 0;
     }
 
     if (relic >= ROGUE_RELIC_CHAKRAM) {

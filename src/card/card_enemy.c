@@ -700,6 +700,8 @@ void func_08091234(u16 arg) {
     gBtlWork->flags |= 0x10000000;
     gCardBattleState->unk_0E0 = 1;
 
+    RogueGadgetFire(GADGET_ON_ENEMY_CARD, gBtlWork->actor3);
+
     if ((gBtlWork->flags & 0x80) == 0) {
         p->unk_78 |= 0x2000;
         gCardBattleState->unk_000[0] = p;
@@ -711,6 +713,10 @@ void func_08091234(u16 arg) {
     } else if ((gBtlWork->flags & 0x20) == 0) {
 #ifdef VERSION_EU
         if (((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) && !RogueBlocksBreak(p->unk_A5)) {
+            if (gBtlWork->unk_0A4 == 1 && (s16)gCardBattleState->unk_0C2 != p->unk_A5) {
+                RogueGadgetFire(GADGET_ON_BROKEN, 0);
+            }
+
 #else
         if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
 #endif
@@ -818,6 +824,10 @@ void func_08091234(u16 arg) {
     } else {
 #ifdef VERSION_EU
         if (((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) && !RogueBlocksBreak(p->unk_A5)) {
+            if (gBtlWork->unk_0A4 == 1 && (s16)gCardBattleState->unk_0C2 != p->unk_A5) {
+                RogueGadgetFire(GADGET_ON_BROKEN, 0);
+            }
+
 #else
         if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
 #endif

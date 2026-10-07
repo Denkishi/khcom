@@ -281,9 +281,9 @@ enum RogueRelic {
     ROGUE_RELIC_STYLE_FIRE,
     ROGUE_RELIC_STYLE_ICE,
     ROGUE_RELIC_STYLE_THUNDER,
-    // The gadgets of rogue_gadget.c, fifty of them, in the order of its table.
+    // The gadgets of rogue_gadget.c, a hundred and thirty of them, in the order of its table.
     ROGUE_RELIC_FIRST_GADGET,
-    ROGUE_RELICS = ROGUE_RELIC_FIRST_GADGET + 50
+    ROGUE_RELICS = ROGUE_RELIC_FIRST_GADGET + 130
 };
 #define ROGUE_GADGETS (ROGUE_RELICS - ROGUE_RELIC_FIRST_GADGET)
 
@@ -320,8 +320,36 @@ enum RogueGadgetTrigger {
     GADGET_ON_ZERO, // a card worth 0 is played
     GADGET_ON_CARD_N, // on every `number`th card played
     GADGET_ON_BREAK, // Sora breaks an enemy's card
-    GADGET_ON_LOW_HP // every `number` tenths of a second under a quarter of the HP
+    GADGET_ON_LOW_HP, // every `number` tenths of a second under a quarter of the HP
+    GADGET_ON_ROTATE, // on every `number`th turn of the hand with L or R
+    GADGET_ON_STOCK, // L and R together: a card goes to the stock
+    GADGET_ON_SELECT,
+    GADGET_ON_LOCK, // on every `number`th enemy newly locked on
+    GADGET_ON_IDLE, // every `number` tenths of a second standing still
+    GADGET_ON_RUN, // every `number` tenths of a second on the move
+    GADGET_ON_AIRTIME, // every `number` tenths of a second in the air
+    GADGET_ON_COMBO_END, // a string of `number` hits or more runs out
+    GADGET_ON_AIR_HIT, // on every `number`th hit on an enemy in the air
+    GADGET_ON_FIRST_HIT, // the first hit of the battle
+    GADGET_ON_ENEMY_CARD, // on every `number`th card an enemy plays
+    GADGET_ON_BROKEN, // an enemy breaks Sora's card
+    GADGET_ON_NINE, // a card worth 9 is played
+    GADGET_ON_SPELL, // on every `number`th spell played
+    GADGET_ON_ATTACK_CARD, // on every `number`th keyblade card played
+    GADGET_ON_SUMMON, // a friend, a summon or an enemy is called in
+    GADGET_ON_PRIZE, // on every `number`th prize picked up
+    GADGET_ON_UNHURT, // every `number` tenths of a second without being hit
+    GADGET_ON_FULL_HP, // every `number` tenths of a second at full HP
+    GADGET_TRIGGERS
 };
+
+s32 RogueGadgetDamage(s32 damage);
+s32 RogueGadgetRunSpeed(s32 speed);
+u8 RogueGadgetReloadRate(u8 rate);
+u8 RogueGadgetCardValue(u8 value);
+u8 RogueGadgetShielded(void);
+void RogueGadgetComboEnd(u16 hits);
+void RogueGadgetCardPlayed(void);
 #define ROGUE_FIRST_CARD_RELIC ROGUE_RELIC_ZERO_SHIELD
 #define ROGUE_FIRST_MOD ROGUE_RELIC_MOD_MULTI
 #define ROGUE_FIRST_SYNERGY ROGUE_RELIC_BERSERK
@@ -571,10 +599,7 @@ typedef struct RogueRun {
     u8 chapters; // chapters this run goes through
     u8 newChapter; // set by RogueMetaEndRun when the run unlocked one
     u16 shards; // earned this run, banked when it ends
-    u32 relics; // one bit for each of the first 32 RogueRelic the run has; ask RogueHasRelic
-    u32 relics2; // and for the next 32
-    u32 relics3; // and so on
-    u32 relics4;
+    u32 relicBits[8]; // one bit for each RogueRelic the run has; ask RogueHasRelic
     u8 airDashUsed; // the air dash was done since Sora last left the ground
     u8 loops; // times the run went past its last floor and on, each an oblivion level higher
     u8 freezing; // set while a hit that freezes whatever it lands on is tested
@@ -654,6 +679,10 @@ typedef struct RogueDebug {
     u16 countCard; // a card id the tests poke...
     u16 seenCount; // ...and how many of it Sora has
     u16 gadgets; // times a gadget relic went off
+    u16 gadgetTriggers[GADGET_TRIGGERS]; // times each trigger was met this battle
+    u16 gadgetOwed; // effects noted as owed
+    u16 stillFrames; // frames this battle Sora stood still on the ground
+    u16 airFrames; // and in the air
     u16 styleHits; // times a style set its element off
     u16 bossSwings; // swings of the bosses that fight with the mod's AI
     u16 keybladeEffects; // swings of the mod's keyblades that landed

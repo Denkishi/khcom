@@ -126,6 +126,7 @@ static void RogueTag_Init(RogueTagWork* w, const RogueTagDef* def) {
     w->sheet = w->tiles->src;
     m4aSongNumStart(SONG_EF_SUMMON_UP);
     gRogue.tagTimer = def->frames;
+    RogueGadgetFire(GADGET_ON_SUMMON, gBtlWork->actor2);
 }
 
 static s32 RogueTag_Update(RogueTagWork* w) {

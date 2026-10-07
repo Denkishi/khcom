@@ -45,3 +45,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `endless.txt` | the starting card in the deck, the seal of a boss, and a full run going on past its last floor |
 | `styles.txt` | the elemental styles going off every few hits of a combo |
 | `gadgets.txt` | gadget relics: things circling Sora, the timed ones, the dodge's trail, jumping and landing |
+| `gadgets_more.txt` | a fusion of two gadgets, and the ones set off by turning the hand and by standing still |

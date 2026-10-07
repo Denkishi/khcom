@@ -1,0 +1,43 @@
+# The later gadgets and the fusions. Two relics that fuse, the burning moons
+# and the crown of ice (54, 55), give two fireballs circling Sora in place of
+# two chakrams and three needles. Turning the hand with L or R sets off the
+# sharpened shuffle (104) every third turn. Standing still for three seconds
+# sets off meditation (119).
+# Expect: the picture shows two fireballs round Sora and nothing else
+# circling; turns 6; done_after_turns 2 or more above done_before (the two
+# shuffles, and meditation if Sora was left alone for three seconds); still
+# well above 0; the frame counter runs.
+include start.txt
+debug relic 54
+wait 3
+debug relic 55
+wait 3
+debug relic 104
+wait 3
+debug relic 119
+wait 3
+poke8 @gRogueDebug.god 1
+debug battle 0
+wait 460
+shot /tmp/gadget_fusion.ppm
+peek16 @gRogueDebug.gadgets done_before
+hold L 6
+wait 12
+hold L 6
+wait 12
+hold L 6
+wait 12
+hold R 6
+wait 12
+hold R 6
+wait 12
+hold R 6
+wait 40
+peek16 @gRogueDebug.gadgetTriggers+20 turns
+peek16 @gRogueDebug.gadgets done_after_turns
+wait 300
+peek16 @gRogueDebug.stillFrames still
+peek16 @gRogueDebug.gadgets done_end
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

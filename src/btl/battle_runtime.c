@@ -179,14 +179,17 @@ void func_08019350(void) {
 
     switch (a) {
     case L_BUTTON:
+        RogueGadgetFire(GADGET_ON_ROTATE, 0);
         func_08076318();
         break;
     case R_BUTTON:
+        RogueGadgetFire(GADGET_ON_ROTATE, 0);
         func_08076324();
         break;
     }
 
     if (GetKeysPressed() & SELECT_BUTTON) {
+        RogueGadgetFire(GADGET_ON_SELECT, 0);
         func_08076394();
     }
 
@@ -240,6 +243,7 @@ void func_08019350(void) {
         if (func_0807B3E0() > 2) {
             func_08076348();
         } else {
+            RogueGadgetFire(GADGET_ON_STOCK, 0);
             func_0807633C();
         }
     }
@@ -382,9 +386,11 @@ void func_080197AC(void) {
     if (!(gBtlWork->flags & 0x4000000000)) {
         switch (a) {
         case L_BUTTON:
+            RogueGadgetFire(GADGET_ON_ROTATE, 0);
             func_08076318();
             break;
         case R_BUTTON:
+            RogueGadgetFire(GADGET_ON_ROTATE, 0);
             func_08076324();
             break;
         }
@@ -392,6 +398,7 @@ void func_080197AC(void) {
 
     if (!(gBtlWork->flags & 0x10000000000)) {
         if (pressed & SELECT_BUTTON) {
+            RogueGadgetFire(GADGET_ON_SELECT, 0);
             func_08076394();
         }
     }

@@ -699,8 +699,8 @@ void func_0801DF10(BtlSoraWork* work, u16 a) {
             }
         } else {
             work->unk_15C += ROGUE_RUN_ACCEL;
-            if (work->unk_15C > ROGUE_RUN_SPEED) {
-                work->unk_15C = ROGUE_RUN_SPEED;
+            if (work->unk_15C > RogueGadgetRunSpeed(ROGUE_RUN_SPEED)) {
+                work->unk_15C = RogueGadgetRunSpeed(ROGUE_RUN_SPEED);
             }
         }
     } else {

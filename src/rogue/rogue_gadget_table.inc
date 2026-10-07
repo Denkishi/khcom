@@ -100,6 +100,166 @@ static const u8 sGadgetName48[] = "Apertura";
 static const u8 sGadgetText48[] = "A inizio battaglia\x1F" "un turbine attorno a te";
 static const u8 sGadgetName49[] = "Ultimo sangue";
 static const u8 sGadgetText49[] = "Sotto un quarto dei PV\x1F" "onde di fuoco continue";
+static const u8 sGadgetName50[] = "Mescolata affilata";
+static const u8 sGadgetText50[] = "Ogni 3 giri di mano\x1F" "parte una falce";
+static const u8 sGadgetName51[] = "Dita svelte";
+static const u8 sGadgetText51[] = "Girare la mano ti\x1F" "rende pi\xF9" " veloce";
+static const u8 sGadgetName52[] = "Mano pesante";
+static const u8 sGadgetText52[] = "Girare la mano ti\x1F" "costa 1 PV, +40% danno";
+static const u8 sGadgetName53[] = "Dazio";
+static const u8 sGadgetText53[] = "Girare la mano ti\x1F" "costa 1 PV";
+static const u8 sGadgetName54[] = "Cartomante";
+static const u8 sGadgetText54[] = "Ogni 4 giri di mano la\x1F" "prossima carta vale +2";
+static const u8 sGadgetName55[] = "Giro di fulmini";
+static const u8 sGadgetText55[] = "Ogni 6 giri di mano\x1F" "un fulmine";
+static const u8 sGadgetName56[] = "Prestigiatore";
+static const u8 sGadgetText56[] = "Ogni 5 giri di mano\x1F" "qualche frammento";
+static const u8 sGadgetName57[] = "Riserva carica";
+static const u8 sGadgetText57[] = "Mettere in riserva\x1F" "una carta: +25% danno";
+static const u8 sGadgetName58[] = "Riserva gelida";
+static const u8 sGadgetText58[] = "Mettere in riserva\x1F" "una carta: gelo attorno";
+static const u8 sGadgetName59[] = "Riserva tesa";
+static const u8 sGadgetText59[] = "Mettere in riserva una\x1F" "carta: ricarica rapida";
+static const u8 sGadgetName60[] = "Cambio mazzo";
+static const u8 sGadgetText60[] = "SELECT scatena\x1F" "un'onda d'urto";
+static const u8 sGadgetName61[] = "Segnale";
+static const u8 sGadgetText61[] = "SELECT attira\x1F" "i nemici";
+static const u8 sGadgetName62[] = "Mirino";
+static const u8 sGadgetText62[] = "Agganciando un nemico\x1F" "gli parte un ago";
+static const u8 sGadgetName63[] = "Marchio";
+static const u8 sGadgetText63[] = "Agganciando un nemico\x1F" "+20% danno per poco";
+static const u8 sGadgetName64[] = "Occhio del tuono";
+static const u8 sGadgetText64[] = "Ogni 3 agganci\x1F" "un fulmine";
+static const u8 sGadgetName65[] = "Meditazione";
+static const u8 sGadgetText65[] = "Stando fermo 3 secondi\x1F" "recuperi 2 PV";
+static const u8 sGadgetName66[] = "Concentrazione";
+static const u8 sGadgetText66[] = "Stando fermo 2 secondi\x1F" "+50% danno per poco";
+static const u8 sGadgetName67[] = "Torretta";
+static const u8 sGadgetText67[] = "Stando fermo 2 secondi\x1F" "lanci tre aghi";
+static const u8 sGadgetName68[] = "Radici";
+static const u8 sGadgetText68[] = "Stando fermo 4 secondi\x1F" "ghiacci attorno a te";
+static const u8 sGadgetName69[] = "Pigrizia";
+static const u8 sGadgetText69[] = "Stando fermo 3 secondi\x1F" "perdi 1 PV, +80% danno";
+static const u8 sGadgetName70[] = "Corsa ardente";
+static const u8 sGadgetText70[] = "Correndo lasci\x1F" "fiamme dietro di te";
+static const u8 sGadgetName71[] = "Rincorsa";
+static const u8 sGadgetText71[] = "Correndo 2 secondi\x1F" "+30% danno per poco";
+static const u8 sGadgetName72[] = "Maratoneta";
+static const u8 sGadgetText72[] = "Correndo 5 secondi\x1F" "recuperi 1 PV";
+static const u8 sGadgetName73[] = "Vento in poppa";
+static const u8 sGadgetText73[] = "Correndo 1 secondo\x1F" "vai pi\xF9" " veloce";
+static const u8 sGadgetName74[] = "Semina";
+static const u8 sGadgetText74[] = "Correndo 3 secondi\x1F" "lasci una bomba";
+static const u8 sGadgetName75[] = "Bombardiere";
+static const u8 sGadgetText75[] = "In aria, ogni secondo\x1F" "sganci una bomba";
+static const u8 sGadgetName76[] = "Falco";
+static const u8 sGadgetText76[] = "In aria, ogni secondo\x1F" "lanci tre aghi";
+static const u8 sGadgetName77[] = "Nuvola";
+static const u8 sGadgetText77[] = "In aria, ogni 2 secondi\x1F" "un fulmine";
+static const u8 sGadgetName78[] = "Leggerezza";
+static const u8 sGadgetText78[] = "In aria fai il\x1F" "30% di danno in pi\xF9" "";
+static const u8 sGadgetName79[] = "Chiusura";
+static const u8 sGadgetText79[] = "Una combo da 5 o pi\xF9" "\x1F" "finisce con un'onda";
+static const u8 sGadgetName80[] = "Dividendo";
+static const u8 sGadgetText80[] = "Una combo da 8 o pi\xF9" "\x1F" "ti cura di 3 PV";
+static const u8 sGadgetName81[] = "Incasso";
+static const u8 sGadgetText81[] = "Una combo da 10 o pi\xF9" "\x1F" "lascia frammenti";
+static const u8 sGadgetName82[] = "Strascico";
+static const u8 sGadgetText82[] = "Una combo da 6 o pi\xF9" "\x1F" "finisce con un fulmine";
+static const u8 sGadgetName83[] = "Giocoliere";
+static const u8 sGadgetText83[] = "Colpire un nemico in aria\x1F" "lancia una falce";
+static const u8 sGadgetName84[] = "Contraerea";
+static const u8 sGadgetText84[] = "Ogni 3 colpi a un nemico\x1F" "in aria, un fulmine";
+static const u8 sGadgetName85[] = "Pallavolo";
+static const u8 sGadgetText85[] = "Ogni 4 colpi a un nemico\x1F" "in aria, ghiaccio sotto";
+static const u8 sGadgetName86[] = "Primo sangue";
+static const u8 sGadgetText86[] = "Il primo colpo della\x1F" "battaglia: +60% danno";
+static const u8 sGadgetName87[] = "Biglietto da visita";
+static const u8 sGadgetText87[] = "Il primo colpo della\x1F" "battaglia chiama un fulmine";
+static const u8 sGadgetName88[] = "Rompighiaccio";
+static const u8 sGadgetText88[] = "Il primo colpo della\x1F" "battaglia blocca tutti";
+static const u8 sGadgetName89[] = "Contromossa";
+static const u8 sGadgetText89[] = "Quando il nemico gioca\x1F" "una carta, un ago parte";
+static const u8 sGadgetName90[] = "Lettura";
+static const u8 sGadgetText90[] = "Ogni 3 carte nemiche la\x1F" "tua prossima vale +1";
+static const u8 sGadgetName91[] = "Nervi saldi";
+static const u8 sGadgetText91[] = "Ogni 4 carte nemiche\x1F" "recuperi 1 PV";
+static const u8 sGadgetName92[] = "Rivalsa";
+static const u8 sGadgetText92[] = "Se ti spezzano una carta\x1F" "un'onda d'urto";
+static const u8 sGadgetName93[] = "Orgoglio ferito";
+static const u8 sGadgetText93[] = "Se ti spezzano una carta\x1F" "+50% danno per poco";
+static const u8 sGadgetName94[] = "Carta gelida";
+static const u8 sGadgetText94[] = "Se ti spezzano una carta\x1F" "ghiacci attorno";
+static const u8 sGadgetName95[] = "Colpo di grazia";
+static const u8 sGadgetText95[] = "Spezzare una carta d\xE0" "\x1F" "+40% danno per poco";
+static const u8 sGadgetName96[] = "Bottino";
+static const u8 sGadgetText96[] = "Spezzare una carta\x1F" "lascia frammenti";
+static const u8 sGadgetName97[] = "Spezzacatene";
+static const u8 sGadgetText97[] = "Spezzare una carta\x1F" "blocca tutti i nemici";
+static const u8 sGadgetName98[] = "Nove";
+static const u8 sGadgetText98[] = "Giocare un 9\x1F" "scatena un'onda di fuoco";
+static const u8 sGadgetName99[] = "Asso";
+static const u8 sGadgetText99[] = "Giocare un 9: la\x1F" "prossima carta vale +3";
+static const u8 sGadgetName100[] = "Zero termico";
+static const u8 sGadgetText100[] = "Giocare uno 0\x1F" "blocca tutti i nemici";
+static const u8 sGadgetName101[] = "Zero carico";
+static const u8 sGadgetText101[] = "Giocare uno 0: +50%\x1F" "danno per poco";
+static const u8 sGadgetName102[] = "Arcanista";
+static const u8 sGadgetText102[] = "Ogni magia giocata\x1F" "lascia un ghiaccio";
+static const u8 sGadgetName103[] = "Risonanza";
+static const u8 sGadgetText103[] = "Ogni 2 magie giocate\x1F" "un fulmine";
+static const u8 sGadgetName104[] = "Catalizzatore";
+static const u8 sGadgetText104[] = "Ogni 3 magie giocate la\x1F" "prossima carta vale +2";
+static const u8 sGadgetName105[] = "Spadaccino";
+static const u8 sGadgetText105[] = "Ogni 6 Keyblade giocate\x1F" "una falce doppia";
+static const u8 sGadgetName106[] = "Maestro d'armi";
+static const u8 sGadgetText106[] = "Ogni 8 Keyblade giocate\x1F" "+40% danno per poco";
+static const u8 sGadgetName107[] = "Fanfara";
+static const u8 sGadgetText107[] = "Chiamare un alleato\x1F" "scatena un'onda d'urto";
+static const u8 sGadgetName108[] = "Scorta";
+static const u8 sGadgetText108[] = "Chiamare un alleato\x1F" "ti cura di 3 PV";
+static const u8 sGadgetName109[] = "Ingresso tonante";
+static const u8 sGadgetText109[] = "Chiamare un alleato\x1F" "chiama anche un fulmine";
+static const u8 sGadgetName110[] = "Ricarica curativa";
+static const u8 sGadgetText110[] = "Finita la ricarica\x1F" "recuperi 2 PV";
+static const u8 sGadgetName111[] = "Ricarica furiosa";
+static const u8 sGadgetText111[] = "Finita la ricarica\x1F" "+40% danno per poco";
+static const u8 sGadgetName112[] = "Ricarica in fuga";
+static const u8 sGadgetText112[] = "Finita la ricarica\x1F" "vai pi\xF9" " veloce";
+static const u8 sGadgetName113[] = "Carta veloce";
+static const u8 sGadgetText113[] = "Ogni 4 carte giocate\x1F" "vai pi\xF9" " veloce";
+static const u8 sGadgetName114[] = "Carta pesante";
+static const u8 sGadgetText114[] = "Ogni carta ti rallenta\x1F" "ma d\xE0" " +15% danno";
+static const u8 sGadgetName115[] = "Avaro";
+static const u8 sGadgetText115[] = "Ogni 3 premi raccolti\x1F" "+30% danno per poco";
+static const u8 sGadgetName116[] = "Goloso";
+static const u8 sGadgetText116[] = "Ogni 5 premi raccolti\x1F" "recuperi 1 PV";
+static const u8 sGadgetName117[] = "Calamita di premi";
+static const u8 sGadgetText117[] = "Ogni 4 premi raccolti\x1F" "una scheggia parte";
+static const u8 sGadgetName118[] = "Intoccabile";
+static const u8 sGadgetText118[] = "5 secondi senza subire\x1F" "colpi: +40% danno";
+static const u8 sGadgetName119[] = "Calma";
+static const u8 sGadgetText119[] = "8 secondi senza subire\x1F" "colpi: recuperi 2 PV";
+static const u8 sGadgetName120[] = "Guardia alta";
+static const u8 sGadgetText120[] = "6 secondi senza subire\x1F" "colpi: uno scudo breve";
+static const u8 sGadgetName121[] = "Salute di ferro";
+static const u8 sGadgetText121[] = "Coi PV al massimo\x1F" "+25% danno";
+static const u8 sGadgetName122[] = "Esuberanza";
+static const u8 sGadgetText122[] = "Coi PV al massimo, ogni\x1F" "4 secondi un'onda d'urto";
+static const u8 sGadgetName123[] = "Adrenalina";
+static const u8 sGadgetText123[] = "Quando vieni colpito\x1F" "vai pi\xF9" " veloce";
+static const u8 sGadgetName124[] = "Riflesso";
+static const u8 sGadgetText124[] = "Quando vieni colpito\x1F" "uno scudo breve";
+static const u8 sGadgetName125[] = "Sete di sangue";
+static const u8 sGadgetText125[] = "Ogni nemico sconfitto\x1F" "+30% danno per poco";
+static const u8 sGadgetName126[] = "Bottino di guerra";
+static const u8 sGadgetText126[] = "Ogni nemico sconfitto\x1F" "lascia frammenti";
+static const u8 sGadgetName127[] = "Slancio di caccia";
+static const u8 sGadgetText127[] = "Ogni nemico sconfitto\x1F" "ti rende pi\xF9" " veloce";
+static const u8 sGadgetName128[] = "Finale rapido";
+static const u8 sGadgetText128[] = "Il colpo finale ti\x1F" "rende pi\xF9" " veloce";
+static const u8 sGadgetName129[] = "Finale in riserva";
+static const u8 sGadgetText129[] = "Il colpo finale: la\x1F" "prossima carta vale +1";
 
 static const RogueGadgetDef sGadgets[ROGUE_GADGETS] = {
     { sGadgetName0, sGadgetText0, GADGET_ON_START, 0, GADGET_DO_ORBIT, 0, 2, 0 }, // Lune ardenti
@@ -152,6 +312,111 @@ static const RogueGadgetDef sGadgets[ROGUE_GADGETS] = {
     { sGadgetName47, sGadgetText47, GADGET_ON_BREAK, 0, GADGET_DO_BOLT, 0, 0, 0 }, // Carta rotta
     { sGadgetName48, sGadgetText48, GADGET_ON_START, 0, GADGET_DO_AT_SORA, 9, 0, 200 }, // Apertura
     { sGadgetName49, sGadgetText49, GADGET_ON_LOW_HP, 12, GADGET_DO_SHOCK, 1, 25, 0 }, // Ultimo sangue
+    { sGadgetName50, sGadgetText50, GADGET_ON_ROTATE, 3, GADGET_DO_CAST, 12, 0, 0 }, // Mescolata affilata
+    { sGadgetName51, sGadgetText51, GADGET_ON_ROTATE, 1, GADGET_DO_HASTE, 30, 15, 0 }, // Dita svelte
+    { sGadgetName52, sGadgetText52, GADGET_ON_ROTATE, 1, GADGET_DO_PACT, 40, 20, 0 }, // Mano pesante
+    { sGadgetName53, sGadgetText53, GADGET_ON_ROTATE, 1, GADGET_DO_HURT, 1, 0, 0 }, // Dazio
+    { sGadgetName54, sGadgetText54, GADGET_ON_ROTATE, 4, GADGET_DO_VALUE, 2, 0, 0 }, // Cartomante
+    { sGadgetName55, sGadgetText55, GADGET_ON_ROTATE, 6, GADGET_DO_BOLT, 0, 0, 0 }, // Giro di fulmini
+    { sGadgetName56, sGadgetText56, GADGET_ON_ROTATE, 5, GADGET_DO_SHARDS, 1, 0, 0 }, // Prestigiatore
+    { sGadgetName57, sGadgetText57, GADGET_ON_STOCK, 0, GADGET_DO_BUFF, 25, 40, 0 }, // Riserva carica
+    { sGadgetName58, sGadgetText58, GADGET_ON_STOCK, 0, GADGET_DO_AT_SORA, 3, 1, 0 }, // Riserva gelida
+    { sGadgetName59, sGadgetText59, GADGET_ON_STOCK, 0, GADGET_DO_RELOAD, 100, 60, 0 }, // Riserva tesa
+    { sGadgetName60, sGadgetText60, GADGET_ON_SELECT, 0, GADGET_DO_SHOCK, 0, 30, 0 }, // Cambio mazzo
+    { sGadgetName61, sGadgetText61, GADGET_ON_SELECT, 0, GADGET_DO_CAST, 10, 0, 0 }, // Segnale
+    { sGadgetName62, sGadgetText62, GADGET_ON_LOCK, 0, GADGET_DO_SHARD, 1, 4, 0 }, // Mirino
+    { sGadgetName63, sGadgetText63, GADGET_ON_LOCK, 0, GADGET_DO_BUFF, 20, 30, 0 }, // Marchio
+    { sGadgetName64, sGadgetText64, GADGET_ON_LOCK, 3, GADGET_DO_BOLT, 0, 0, 0 }, // Occhio del tuono
+    { sGadgetName65, sGadgetText65, GADGET_ON_IDLE, 30, GADGET_DO_HEAL, 2, 0, 0 }, // Meditazione
+    { sGadgetName66, sGadgetText66, GADGET_ON_IDLE, 20, GADGET_DO_BUFF, 50, 30, 0 }, // Concentrazione
+    { sGadgetName67, sGadgetText67, GADGET_ON_IDLE, 20, GADGET_DO_CAST, 1, 0, 0 }, // Torretta
+    { sGadgetName68, sGadgetText68, GADGET_ON_IDLE, 40, GADGET_DO_AT_SORA, 6, 0, 0 }, // Radici
+    { sGadgetName69, sGadgetText69, GADGET_ON_IDLE, 30, GADGET_DO_PACT, 80, 40, 0 }, // Pigrizia
+    { sGadgetName70, sGadgetText70, GADGET_ON_RUN, 8, GADGET_DO_AT_SORA, 5, 0, 0 }, // Corsa ardente
+    { sGadgetName71, sGadgetText71, GADGET_ON_RUN, 20, GADGET_DO_BUFF, 30, 30, 0 }, // Rincorsa
+    { sGadgetName72, sGadgetText72, GADGET_ON_RUN, 50, GADGET_DO_HEAL, 1, 0, 0 }, // Maratoneta
+    { sGadgetName73, sGadgetText73, GADGET_ON_RUN, 10, GADGET_DO_HASTE, 25, 20, 0 }, // Vento in poppa
+    { sGadgetName74, sGadgetText74, GADGET_ON_RUN, 30, GADGET_DO_AT_SORA, 7, 0, 0 }, // Semina
+    { sGadgetName75, sGadgetText75, GADGET_ON_AIRTIME, 10, GADGET_DO_AT_SORA, 7, 0, 0 }, // Bombardiere
+    { sGadgetName76, sGadgetText76, GADGET_ON_AIRTIME, 10, GADGET_DO_CAST, 1, 0, 0 }, // Falco
+    { sGadgetName77, sGadgetText77, GADGET_ON_AIRTIME, 20, GADGET_DO_BOLT, 0, 0, 0 }, // Nuvola
+    { sGadgetName78, sGadgetText78, GADGET_ON_AIRTIME, 3, GADGET_DO_BUFF, 30, 6, 0 }, // Leggerezza
+    { sGadgetName79, sGadgetText79, GADGET_ON_COMBO_END, 5, GADGET_DO_SHOCK, 0, 45, 0 }, // Chiusura
+    { sGadgetName80, sGadgetText80, GADGET_ON_COMBO_END, 8, GADGET_DO_HEAL, 3, 0, 0 }, // Dividendo
+    { sGadgetName81, sGadgetText81, GADGET_ON_COMBO_END, 10, GADGET_DO_SHARDS, 2, 0, 0 }, // Incasso
+    { sGadgetName82, sGadgetText82, GADGET_ON_COMBO_END, 6, GADGET_DO_BOLT, 0, 0, 0 }, // Strascico
+    { sGadgetName83, sGadgetText83, GADGET_ON_AIR_HIT, 2, GADGET_DO_CAST, 12, 0, 0 }, // Giocoliere
+    { sGadgetName84, sGadgetText84, GADGET_ON_AIR_HIT, 3, GADGET_DO_BOLT, 0, 0, 0 }, // Contraerea
+    { sGadgetName85, sGadgetText85, GADGET_ON_AIR_HIT, 4, GADGET_DO_AT_TARGET, 6, 0, 0 }, // Pallavolo
+    { sGadgetName86, sGadgetText86, GADGET_ON_FIRST_HIT, 0, GADGET_DO_BUFF, 60, 60, 0 }, // Primo sangue
+    { sGadgetName87, sGadgetText87, GADGET_ON_FIRST_HIT, 0, GADGET_DO_BOLT, 0, 0, 4 }, // Biglietto da visita
+    { sGadgetName88, sGadgetText88, GADGET_ON_FIRST_HIT, 0, GADGET_DO_STOP_ALL, 0, 0, 0 }, // Rompighiaccio
+    { sGadgetName89, sGadgetText89, GADGET_ON_ENEMY_CARD, 1, GADGET_DO_SHARD, 1, 4, 0 }, // Contromossa
+    { sGadgetName90, sGadgetText90, GADGET_ON_ENEMY_CARD, 3, GADGET_DO_VALUE, 1, 0, 0 }, // Lettura
+    { sGadgetName91, sGadgetText91, GADGET_ON_ENEMY_CARD, 4, GADGET_DO_HEAL, 1, 0, 0 }, // Nervi saldi
+    { sGadgetName92, sGadgetText92, GADGET_ON_BROKEN, 0, GADGET_DO_SHOCK, 0, 50, 0 }, // Rivalsa
+    { sGadgetName93, sGadgetText93, GADGET_ON_BROKEN, 0, GADGET_DO_BUFF, 50, 40, 0 }, // Orgoglio ferito
+    { sGadgetName94, sGadgetText94, GADGET_ON_BROKEN, 0, GADGET_DO_AT_SORA, 3, 1, 0 }, // Carta gelida
+    { sGadgetName95, sGadgetText95, GADGET_ON_BREAK, 0, GADGET_DO_BUFF, 40, 30, 0 }, // Colpo di grazia
+    { sGadgetName96, sGadgetText96, GADGET_ON_BREAK, 0, GADGET_DO_SHARDS, 1, 0, 0 }, // Bottino
+    { sGadgetName97, sGadgetText97, GADGET_ON_BREAK, 0, GADGET_DO_STOP_ALL, 0, 0, 0 }, // Spezzacatene
+    { sGadgetName98, sGadgetText98, GADGET_ON_NINE, 0, GADGET_DO_SHOCK, 1, 60, 0 }, // Nove
+    { sGadgetName99, sGadgetText99, GADGET_ON_NINE, 0, GADGET_DO_VALUE, 3, 0, 0 }, // Asso
+    { sGadgetName100, sGadgetText100, GADGET_ON_ZERO, 0, GADGET_DO_STOP_ALL, 0, 0, 0 }, // Zero termico
+    { sGadgetName101, sGadgetText101, GADGET_ON_ZERO, 0, GADGET_DO_BUFF, 50, 30, 0 }, // Zero carico
+    { sGadgetName102, sGadgetText102, GADGET_ON_SPELL, 1, GADGET_DO_AT_TARGET, 3, 0, 8 }, // Arcanista
+    { sGadgetName103, sGadgetText103, GADGET_ON_SPELL, 2, GADGET_DO_BOLT, 0, 0, 8 }, // Risonanza
+    { sGadgetName104, sGadgetText104, GADGET_ON_SPELL, 3, GADGET_DO_VALUE, 2, 0, 0 }, // Catalizzatore
+    { sGadgetName105, sGadgetText105, GADGET_ON_ATTACK_CARD, 6, GADGET_DO_CAST, 12, 0, 0 }, // Spadaccino
+    { sGadgetName106, sGadgetText106, GADGET_ON_ATTACK_CARD, 8, GADGET_DO_BUFF, 40, 40, 0 }, // Maestro d'armi
+    { sGadgetName107, sGadgetText107, GADGET_ON_SUMMON, 0, GADGET_DO_SHOCK, 0, 50, 14 }, // Fanfara
+    { sGadgetName108, sGadgetText108, GADGET_ON_SUMMON, 0, GADGET_DO_HEAL, 3, 0, 0 }, // Scorta
+    { sGadgetName109, sGadgetText109, GADGET_ON_SUMMON, 0, GADGET_DO_BOLT, 0, 0, 14 }, // Ingresso tonante
+    { sGadgetName110, sGadgetText110, GADGET_ON_RELOAD, 0, GADGET_DO_HEAL, 2, 0, 0 }, // Ricarica curativa
+    { sGadgetName111, sGadgetText111, GADGET_ON_RELOAD, 0, GADGET_DO_BUFF, 40, 40, 0 }, // Ricarica furiosa
+    { sGadgetName112, sGadgetText112, GADGET_ON_RELOAD, 0, GADGET_DO_HASTE, 40, 40, 0 }, // Ricarica in fuga
+    { sGadgetName113, sGadgetText113, GADGET_ON_CARD_N, 4, GADGET_DO_HASTE, 30, 20, 0 }, // Carta veloce
+    { sGadgetName114, sGadgetText114, GADGET_ON_CARD_N, 1, GADGET_DO_WEIGHT, 15, 20, 0 }, // Carta pesante
+    { sGadgetName115, sGadgetText115, GADGET_ON_PRIZE, 3, GADGET_DO_BUFF, 30, 30, 0 }, // Avaro
+    { sGadgetName116, sGadgetText116, GADGET_ON_PRIZE, 5, GADGET_DO_HEAL, 1, 0, 0 }, // Goloso
+    { sGadgetName117, sGadgetText117, GADGET_ON_PRIZE, 4, GADGET_DO_SHARD, 1, 10, 0 }, // Calamita di premi
+    { sGadgetName118, sGadgetText118, GADGET_ON_UNHURT, 50, GADGET_DO_BUFF, 40, 50, 0 }, // Intoccabile
+    { sGadgetName119, sGadgetText119, GADGET_ON_UNHURT, 80, GADGET_DO_HEAL, 2, 0, 0 }, // Calma
+    { sGadgetName120, sGadgetText120, GADGET_ON_UNHURT, 60, GADGET_DO_SHIELD, 20, 0, 0 }, // Guardia alta
+    { sGadgetName121, sGadgetText121, GADGET_ON_FULL_HP, 5, GADGET_DO_BUFF, 25, 6, 0 }, // Salute di ferro
+    { sGadgetName122, sGadgetText122, GADGET_ON_FULL_HP, 40, GADGET_DO_SHOCK, 0, 30, 0 }, // Esuberanza
+    { sGadgetName123, sGadgetText123, GADGET_ON_HURT, 0, GADGET_DO_HASTE, 40, 30, 0 }, // Adrenalina
+    { sGadgetName124, sGadgetText124, GADGET_ON_HURT, 0, GADGET_DO_SHIELD, 12, 0, 0 }, // Riflesso
+    { sGadgetName125, sGadgetText125, GADGET_ON_KILL, 0, GADGET_DO_BUFF, 30, 40, 0 }, // Sete di sangue
+    { sGadgetName126, sGadgetText126, GADGET_ON_KILL, 0, GADGET_DO_SHARDS, 1, 0, 0 }, // Bottino di guerra
+    { sGadgetName127, sGadgetText127, GADGET_ON_KILL, 0, GADGET_DO_HASTE, 30, 30, 0 }, // Slancio di caccia
+    { sGadgetName128, sGadgetText128, GADGET_ON_FINISHER, 0, GADGET_DO_HASTE, 30, 20, 0 }, // Finale rapido
+    { sGadgetName129, sGadgetText129, GADGET_ON_FINISHER, 0, GADGET_DO_VALUE, 1, 0, 0 }, // Finale in riserva
 };
 
-typedef char RogueGadgets_check[(50 == ROGUE_GADGETS) ? 1 : -1];
+typedef char RogueGadgets_check[(130 == ROGUE_GADGETS) ? 1 : -1];
+
+#define ROGUE_FUSIONS 20
+
+static const RogueFusionDef sFusions[ROGUE_FUSIONS] = {
+    { 0, 1, { 0, 0, GADGET_ON_START, 0, GADGET_DO_ORBIT, 4, 130, 0 } }, // Lune ardenti + Corona di gelo
+    { 2, 4, { 0, 0, GADGET_ON_START, 0, GADGET_DO_ORBIT, 12, 6, 0 } }, // Falci custodi + Sciame
+    { 5, 12, { 0, 0, GADGET_ON_TIMER, 30, GADGET_DO_VOLLEY, 1, 3, 0 } }, // Scheggia paziente + Raffica
+    { 6, 7, { 0, 0, GADGET_ON_TIMER, 50, GADGET_DO_RAIN, 4, 4, 0 } }, // Temporale + Pioggia di braci
+    { 13, 14, { 0, 0, GADGET_ON_DODGE_STEP, 5, GADGET_DO_AT_SORA, 8, 0, 0 } }, // Scia di fuoco + Scatto gelido
+    { 19, 21, { 0, 0, GADGET_ON_LAND, 0, GADGET_DO_AT_SORA, 6, 1, 0 } }, // Atterraggio sismico + Caduta gelida
+    { 25, 30, { 0, 0, GADGET_ON_HIT_N, 4, GADGET_DO_AT_TARGET, 8, 0, 0 } }, // Spuntoni + Petardo
+    { 32, 31, { 0, 0, GADGET_ON_FINISHER, 0, GADGET_DO_RAIN, 6, 3, 0 } }, // Finale tonante + Finale glaciale
+    { 35, 36, { 0, 0, GADGET_ON_HURT, 0, GADGET_DO_SHOCK, 2, 70, 0 } }, // Contraccolpo + Pelle di ghiaccio
+    { 39, 42, { 0, 0, GADGET_ON_KILL, 0, GADGET_DO_AT_SPOT, 9, 0, 4 } }, // Reazione a catena + Tuono vendicatore
+    { 43, 44, { 0, 0, GADGET_ON_RELOAD, 0, GADGET_DO_SHOCK, 3, 60, 0 } }, // Ricarica esplosiva + Ricarica gelida
+    { 8, 11, { 0, 0, GADGET_ON_TIMER, 45, GADGET_DO_AT_SORA, 10, 0, 0 } }, // Battito + Polo magnetico
+    { 9, 16, { 0, 0, GADGET_ON_DODGE, 0, GADGET_DO_RAIN, 7, 3, 0 } }, // Mina + Schivata esplosiva
+    { 29, 27, { 0, 0, GADGET_ON_HIT_N, 4, GADGET_DO_AT_TARGET, 2, 0, 0 } }, // Chakram di ritorno + Eco di lama
+    { 20, 23, { 0, 0, GADGET_ON_AIR_JUMP, 0, GADGET_DO_AT_SORA, 11, 0, 0 } }, // Salto di fiamma + Ali di petali
+    { 70, 74, { 0, 0, GADGET_ON_RUN, 12, GADGET_DO_AT_SORA, 11, 0, 0 } }, // Corsa ardente + Semina
+    { 75, 76, { 0, 0, GADGET_ON_AIRTIME, 8, GADGET_DO_RAIN, 1, 3, 0 } }, // Bombardiere + Falco
+    { 67, 68, { 0, 0, GADGET_ON_IDLE, 20, GADGET_DO_VOLLEY, 1, 4, 0 } }, // Torretta + Radici
+    { 50, 55, { 0, 0, GADGET_ON_ROTATE, 4, GADGET_DO_AT_TARGET, 12, 0, 0 } }, // Mescolata affilata + Giro di fulmini
+    { 89, 62, { 0, 0, GADGET_ON_ENEMY_CARD, 1, GADGET_DO_VOLLEY, 1, 2, 0 } }, // Contromossa + Mirino
+};

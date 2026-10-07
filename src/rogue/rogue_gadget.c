@@ -18,7 +18,18 @@ enum {
     GADGET_DO_CAST, // a: move, done by Sora as any other, modifiers and all
     GADGET_DO_RAIN, // a: move, b: how many come down around the enemy
     GADGET_DO_SHOCK, // a: element (0 plain), b: damage in 1/64 of a swing
-    GADGET_DO_HEAL // a: HP
+    GADGET_DO_HEAL, // a: HP
+    GADGET_DO_VOLLEY, // a: move, b: how many form over Sora and fly one after the other
+    GADGET_DO_BUFF, // a: percent more damage, b: for how many tenths of a second
+    GADGET_DO_PACT, // the same, at the cost of 1 HP
+    GADGET_DO_WEIGHT, // the same, and slower on his feet meanwhile
+    GADGET_DO_HASTE, // a: percent faster on his feet, b: for how many tenths of a second
+    GADGET_DO_RELOAD, // a: percent faster reload, b: for how many tenths of a second
+    GADGET_DO_VALUE, // a: what the next card played is worth more
+    GADGET_DO_HURT, // a: HP Sora loses, never the last
+    GADGET_DO_SHARDS, // a: shards
+    GADGET_DO_STOP_ALL, // every enemy is frozen for a moment
+    GADGET_DO_SHIELD // a: tenths of a second no hit hurts
 };
 
 typedef struct RogueGadgetDef {
@@ -31,6 +42,14 @@ typedef struct RogueGadgetDef {
     u8 b;
     u8 delay; // frames from the trigger to the effect
 } RogueGadgetDef;
+
+// A pair of gadgets that, owned together, do one thing between them in place
+// of what each does.
+typedef struct RogueFusionDef {
+    u8 first;
+    u8 second;
+    RogueGadgetDef def;
+} RogueFusionDef;
 
 #include "rogue_gadget_table.inc"
 
@@ -57,11 +76,27 @@ typedef struct RogueGadgetOwed {
 } RogueGadgetOwed;
 
 static RogueGadgetOwed sOwed[GADGET_QUEUE];
-static u16 sTimers[ROGUE_GADGETS];
-static u16 sCards; // cards played this battle
-static u16 sDodgeSteps;
+static u16 sTimers[ROGUE_GADGETS + ROGUE_FUSIONS];
+static u16 sCounts[GADGET_TRIGGERS]; // times each trigger was met this battle
 static u8 sStarted;
 static u8 sWasAirborne;
+static u8 sFirstHit;
+static u8 sOrbiters; // things circling Sora
+static BtlObj* sLocked;
+static s32 sLastX;
+static s32 sLastY;
+// What is on for a while, each with the frames it still lasts.
+static u16 sBuffTime;
+static u8 sBuff; // percent more damage
+static u16 sHasteTime;
+static s8 sHaste; // percent faster, or slower
+static u16 sReloadTime;
+static u8 sReload; // percent faster reload
+static u16 sShieldTime;
+static u8 sValue; // what the next card is worth more
+static u16 sHurtSeen; // hits taken as of last frame
+
+#define GADGET_ORBITERS_MAX 6
 
 void RogueGadgetReset(void) {
     s32 i;
@@ -70,18 +105,60 @@ void RogueGadgetReset(void) {
         sOwed[i].gadget = 0;
     }
 
-    for (i = 0; i < ROGUE_GADGETS; i++) {
+    for (i = 0; i < ROGUE_GADGETS + ROGUE_FUSIONS; i++) {
         sTimers[i] = 0;
     }
 
-    sCards = 0;
-    sDodgeSteps = 0;
+    for (i = 0; i < GADGET_TRIGGERS; i++) {
+        sCounts[i] = 0;
+    }
+
     sStarted = 0;
     sWasAirborne = 0;
+    sFirstHit = 0;
+    sOrbiters = 0;
+    sLocked = 0;
+    sBuffTime = 0;
+    sHasteTime = 0;
+    sReloadTime = 0;
+    sShieldTime = 0;
+    sValue = 0;
+    sHurtSeen = 0;
+    sLastX = 0;
+    sLastY = 0;
 }
 
-static u8 RogueGadgetOwned(u8 gadget) {
-    return RogueHasRelic(ROGUE_RELIC_FIRST_GADGET + gadget);
+// The table entry of a gadget or, past the gadgets, of a fusion.
+static const RogueGadgetDef* RogueGadgetEntry(u8 index) {
+    if (index >= ROGUE_GADGETS) {
+        return &sFusions[index - ROGUE_GADGETS].def;
+    }
+
+    return &sGadgets[index];
+}
+
+// Whether an entry is at work: a fusion when the run has both its relics, a
+// gadget when the run has its relic and no fusion has taken it.
+static u8 RogueGadgetOwned(u8 index) {
+    const RogueFusionDef* fusion;
+    u8 i;
+
+    if (index >= ROGUE_GADGETS) {
+        fusion = &sFusions[index - ROGUE_GADGETS];
+        return RogueHasRelic(ROGUE_RELIC_FIRST_GADGET + fusion->first) && RogueHasRelic(ROGUE_RELIC_FIRST_GADGET + fusion->second);
+    }
+
+    if (!RogueHasRelic(ROGUE_RELIC_FIRST_GADGET + index)) {
+        return 0;
+    }
+
+    for (i = 0; i < ROGUE_FUSIONS; i++) {
+        if ((sFusions[i].first == index || sFusions[i].second == index) && RogueGadgetOwned(ROGUE_GADGETS + i)) {
+            return 0;
+        }
+    }
+
+    return 1;
 }
 
 // An enemy still in the battle: the one asked for if it is, or the one locked
@@ -115,12 +192,74 @@ static void RogueGadgetDo(const RogueGadgetDef* def, RogueGadgetOwed* owed) {
 
     switch (def->effect) {
     case GADGET_DO_ORBIT:
-        for (i = 0; i < def->b; i++) {
-            RogueMoveSpawn(def->a, sora->x, sora->y, sora->z, ROGUE_MOVE_ORBIT, i * 256 / def->b, 0, 0);
+        // b: how many, with the top bit for ones that freeze. However many
+        // relics ask for them, only so many things circle Sora at once.
+        for (i = 0; i < (def->b & 0x7F) && sOrbiters < GADGET_ORBITERS_MAX; i++) {
+            RogueMoveSpawn(def->a, sora->x, sora->y, sora->z, ROGUE_MOVE_ORBIT, i * 256 / (def->b & 0x7F) + sOrbiters * 20, 0, def->b >> 7);
+            sOrbiters++;
         }
         break;
     case GADGET_DO_SHARD:
         RogueMoveSpawn(def->a, sora->x, sora->y, sora->z - 0x3000, ROGUE_MOVE_SHARD, def->b, 0, 1);
+        break;
+    case GADGET_DO_VOLLEY:
+        for (i = 0; i < def->b; i++) {
+            RogueMoveSpawn(def->a, sora->x, sora->y, sora->z - 0x3000, ROGUE_MOVE_SHARD, 40 + i * 12, 0, 1);
+        }
+        break;
+    case GADGET_DO_PACT:
+        if (sora->unk_02C > 1) {
+            sora->unk_02C--;
+        }
+        // And the buff.
+    case GADGET_DO_WEIGHT:
+        if (def->effect == GADGET_DO_WEIGHT) {
+            sHaste = -20;
+            sHasteTime = def->b * 6;
+        }
+        // And the buff.
+    case GADGET_DO_BUFF:
+        // The stronger of what is on and what comes stays, for the longer time.
+        if (sBuffTime == 0 || def->a >= sBuff) {
+            sBuff = def->a;
+        }
+
+        if (sBuffTime < def->b * 6) {
+            sBuffTime = def->b * 6;
+        }
+        break;
+    case GADGET_DO_HASTE:
+        sHaste = def->a;
+        sHasteTime = def->b * 6;
+        break;
+    case GADGET_DO_RELOAD:
+        sReload = def->a;
+        sReloadTime = def->b * 6;
+        break;
+    case GADGET_DO_VALUE:
+        if (sValue < def->a) {
+            sValue = def->a;
+        }
+        break;
+    case GADGET_DO_HURT:
+        if (sora->unk_02C > def->a) {
+            sora->unk_02C -= def->a;
+        }
+        break;
+    case GADGET_DO_SHARDS:
+        if (gRogue.shards < 9999 - def->a) {
+            gRogue.shards += def->a;
+        }
+        break;
+    case GADGET_DO_STOP_ALL:
+        for (enemy = (BtlObj*)ListPoolFirst(&gBtlWork->pool); enemy != 0; enemy = (BtlObj*)ListPoolNext(&enemy->node)) {
+            if (enemy != sora && enemy->unk_02C > 0) {
+                RogueApplyFreeze(enemy);
+            }
+        }
+        break;
+    case GADGET_DO_SHIELD:
+        sShieldTime = def->a * 6;
         break;
     case GADGET_DO_BOLT:
         enemy = RogueGadgetEnemy(owed->target, def->a);
@@ -177,7 +316,7 @@ static void RogueGadgetOwe(u8 gadget, BtlObj* target) {
     BtlObj* sora = gBtlWork->actor;
     s32 i;
     s32 free = -1;
-    u8 delay = sGadgets[gadget].delay + 1;
+    u8 delay = RogueGadgetEntry(gadget)->delay + 1;
 
     for (i = 0; i < GADGET_QUEUE; i++) {
         if (sOwed[i].gadget == 0) {
@@ -197,6 +336,7 @@ static void RogueGadgetOwe(u8 gadget, BtlObj* target) {
         return;
     }
 
+    gRogueDebug.gadgetOwed++;
     sOwed[free].gadget = gadget + 1;
     sOwed[free].delay = delay;
     sOwed[free].target = target;
@@ -210,26 +350,19 @@ static void RogueGadgetOwe(u8 gadget, BtlObj* target) {
 void RogueGadgetFire(u8 trigger, BtlObj* target) {
     u8 gadget;
 
-    if (gBtlWork == 0 || gBtlWork->actor == 0) {
+    if (gBtlWork == 0 || gBtlWork->actor == 0 || trigger >= GADGET_TRIGGERS) {
         return;
     }
 
-    if (trigger == GADGET_ON_ZERO || trigger == GADGET_ON_CARD_N) {
-        if (trigger == GADGET_ON_CARD_N) {
-            sCards++;
-        }
-    }
-
     if (trigger == GADGET_ON_DODGE) {
-        sDodgeSteps = 0;
+        sCounts[GADGET_ON_DODGE_STEP] = 0;
     }
 
-    if (trigger == GADGET_ON_DODGE_STEP) {
-        sDodgeSteps++;
-    }
+    sCounts[trigger]++;
+    gRogueDebug.gadgetTriggers[trigger] = sCounts[trigger];
 
-    for (gadget = 0; gadget < ROGUE_GADGETS; gadget++) {
-        const RogueGadgetDef* def = &sGadgets[gadget];
+    for (gadget = 0; gadget < ROGUE_GADGETS + ROGUE_FUSIONS; gadget++) {
+        const RogueGadgetDef* def = RogueGadgetEntry(gadget);
 
         if (def->trigger != trigger || !RogueGadgetOwned(gadget)) {
             continue;
@@ -242,12 +375,16 @@ void RogueGadgetFire(u8 trigger, BtlObj* target) {
             }
             break;
         case GADGET_ON_CARD_N:
-            if (sCards % def->number != 0) {
-                continue;
-            }
-            break;
         case GADGET_ON_DODGE_STEP:
-            if (sDodgeSteps % def->number != 0) {
+        case GADGET_ON_ROTATE:
+        case GADGET_ON_LOCK:
+        case GADGET_ON_AIR_HIT:
+        case GADGET_ON_ENEMY_CARD:
+        case GADGET_ON_SPELL:
+        case GADGET_ON_ATTACK_CARD:
+        case GADGET_ON_PRIZE:
+            // Every so many times.
+            if (def->number > 1 && sCounts[trigger] % def->number != 0) {
                 continue;
             }
             break;
@@ -257,11 +394,74 @@ void RogueGadgetFire(u8 trigger, BtlObj* target) {
     }
 }
 
+// A string of hits ran out.
+void RogueGadgetComboEnd(u16 hits) {
+    u8 gadget;
+
+    for (gadget = 0; gadget < ROGUE_GADGETS + ROGUE_FUSIONS; gadget++) {
+        const RogueGadgetDef* def = RogueGadgetEntry(gadget);
+
+        if (def->trigger == GADGET_ON_COMBO_END && hits >= def->number && RogueGadgetOwned(gadget)) {
+            RogueGadgetOwe(gadget, 0);
+        }
+    }
+}
+
+// What is on for a while, asked by the battle code.
+s32 RogueGadgetDamage(s32 damage) {
+    if (sBuffTime != 0) {
+        damage += damage * sBuff / 100;
+    }
+
+    return damage;
+}
+
+s32 RogueGadgetRunSpeed(s32 speed) {
+    if (sHasteTime != 0) {
+        speed += speed * sHaste / 100;
+    }
+
+    return speed;
+}
+
+u8 RogueGadgetReloadRate(u8 rate) {
+    s32 faster = rate;
+
+    if (sReloadTime != 0) {
+        faster += faster * sReload / 100;
+    }
+
+    return faster > 255 ? 255 : faster;
+}
+
+// Called as a card is played: the worth lent to it is spent.
+void RogueGadgetCardPlayed(void) {
+    sValue = 0;
+}
+
+// The next card played is worth more, once.
+u8 RogueGadgetCardValue(u8 value) {
+    if (sValue != 0 && value != 0) {
+        value += sValue;
+
+        if (value > 9) {
+            value = 9;
+        }
+    }
+
+    return value;
+}
+
+u8 RogueGadgetShielded(void) {
+    return sShieldTime != 0;
+}
+
 // Called once a frame in battle.
 void RogueGadgetTick(void) {
     BtlObj* sora = gBtlWork->actor;
     u8 gadget;
     u8 airborne;
+    u8 moving;
     s32 i;
 
     if (sora == 0) {
@@ -273,15 +473,78 @@ void RogueGadgetTick(void) {
         RogueGadgetFire(GADGET_ON_START, 0);
     }
 
-    // The ones on a clock, and the ones that run while Sora is nearly out.
-    for (gadget = 0; gadget < ROGUE_GADGETS; gadget++) {
-        const RogueGadgetDef* def = &sGadgets[gadget];
+    if (sBuffTime != 0) {
+        sBuffTime--;
+    }
 
-        if ((def->trigger != GADGET_ON_TIMER && def->trigger != GADGET_ON_LOW_HP) || !RogueGadgetOwned(gadget)) {
+    if (sHasteTime != 0) {
+        sHasteTime--;
+    }
+
+    if (sReloadTime != 0) {
+        sReloadTime--;
+    }
+
+    if (sShieldTime != 0) {
+        sShieldTime--;
+    }
+
+    airborne = sora->z < sora->unk_010;
+    // On the move: more than a nudge since the last frame.
+    moving = sora->x - sLastX > 0x60 || sLastX - sora->x > 0x60 || sora->y - sLastY > 0x60 || sLastY - sora->y > 0x60;
+    sLastX = sora->x;
+    sLastY = sora->y;
+
+    if (airborne) {
+        gRogueDebug.airFrames++;
+    } else if (!moving) {
+        gRogueDebug.stillFrames++;
+    }
+
+    // A new enemy locked on.
+    if (gBtlWork->actor2 != 0 && gBtlWork->actor2 != sLocked) {
+        RogueGadgetFire(GADGET_ON_LOCK, gBtlWork->actor2);
+    }
+
+    sLocked = gBtlWork->actor2;
+
+    // The ones on a clock: each runs while its condition holds and starts
+    // over when it does not.
+    for (gadget = 0; gadget < ROGUE_GADGETS + ROGUE_FUSIONS; gadget++) {
+        const RogueGadgetDef* def = RogueGadgetEntry(gadget);
+        u8 holds;
+
+        switch (def->trigger) {
+        case GADGET_ON_TIMER:
+            holds = 1;
+            break;
+        case GADGET_ON_LOW_HP:
+            holds = sora->unk_02C * 4 <= sora->unk_02E;
+            break;
+        case GADGET_ON_IDLE:
+            holds = !moving && !airborne;
+            break;
+        case GADGET_ON_RUN:
+            holds = moving && !airborne;
+            break;
+        case GADGET_ON_AIRTIME:
+            holds = airborne;
+            break;
+        case GADGET_ON_UNHURT:
+            holds = 1; // started over by a hit, see RogueGadgetFire's callers
+            break;
+        case GADGET_ON_FULL_HP:
+            holds = sora->unk_02C >= sora->unk_02E;
+            break;
+        default:
             continue;
         }
 
-        if (def->trigger == GADGET_ON_LOW_HP && sora->unk_02C * 4 > sora->unk_02E) {
+        if (!RogueGadgetOwned(gadget)) {
+            continue;
+        }
+
+        if (!holds || (def->trigger == GADGET_ON_UNHURT && sCounts[GADGET_ON_HURT] != sHurtSeen)) {
             sTimers[gadget] = 0;
             continue;
         }
@@ -290,14 +553,15 @@ void RogueGadgetTick(void) {
             sTimers[gadget] = 0;
 
             // Nothing is thrown at an empty room.
-            if (RogueGadgetEnemy(0, 0) != 0 || def->effect == GADGET_DO_HEAL) {
+            if (RogueGadgetEnemy(0, 0) != 0 || def->effect >= GADGET_DO_HEAL) {
                 RogueGadgetOwe(gadget, 0);
             }
         }
     }
 
+    sHurtSeen = sCounts[GADGET_ON_HURT];
+
     // Landing: he was in the air and now stands.
-    airborne = sora->z < sora->unk_010;
 
     if (sWasAirborne && !airborne) {
         RogueGadgetFire(GADGET_ON_LAND, 0);
@@ -307,7 +571,7 @@ void RogueGadgetTick(void) {
 
     for (i = 0; i < GADGET_QUEUE; i++) {
         if (sOwed[i].gadget != 0 && --sOwed[i].delay == 0) {
-            RogueGadgetDo(&sGadgets[sOwed[i].gadget - 1], &sOwed[i]);
+            RogueGadgetDo(RogueGadgetEntry(sOwed[i].gadget - 1), &sOwed[i]);
             sOwed[i].gadget = 0;
         }
     }

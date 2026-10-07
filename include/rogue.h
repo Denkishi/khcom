@@ -20,6 +20,7 @@
 #define ROGUE_SHARDS_MINIBOSS 10
 #define ROGUE_SHARDS_BOSS 25
 #define ROGUE_SHARDS_NEW_CHAPTER 50
+#define ROGUE_SHARDS_DUEL 15
 
 enum RogueUpgrade {
     ROGUE_UPGRADE_HP,
@@ -131,6 +132,14 @@ enum RogueEvent {
     ROGUE_EVENT_JACK,
     ROGUE_EVENT_HERCULES,
     ROGUE_EVENT_TIGGER,
+    ROGUE_EVENT_RIKU,
+    ROGUE_EVENT_LEXAEUS,
+    ROGUE_EVENT_REPLICA,
+    ROGUE_EVENT_JAFAR,
+    ROGUE_EVENT_OOGIE,
+    ROGUE_EVENT_ANSEM,
+    ROGUE_EVENT_SALLY,
+    ROGUE_EVENT_JIMINY,
     ROGUE_EVENTS
 };
 
@@ -150,7 +159,16 @@ enum RogueOffer {
     ROGUE_OFFER_SHARDS, // param: how many
     ROGUE_OFFER_REROLL,
     ROGUE_OFFER_ATTACK_FOR_HP,
-    ROGUE_OFFER_GAMBLE
+    ROGUE_OFFER_GAMBLE,
+    ROGUE_OFFER_DUEL, // param: battle id
+    ROGUE_OFFER_LEAVE,
+    ROGUE_OFFER_ATTACK2_FOR_HP,
+    ROGUE_OFFER_SHARDS_FOR_CARD,
+    ROGUE_OFFER_BIG_GAMBLE,
+    ROGUE_OFFER_DUPLICATE,
+    ROGUE_OFFER_TRANSFORM,
+    ROGUE_OFFER_PAY_HP,
+    ROGUE_OFFER_RELIC_FOR_HP
 };
 
 typedef struct RogueEventOffer {
@@ -162,7 +180,8 @@ typedef struct RogueEventOffer {
 enum {
     ROGUE_REWARD_BATTLE,
     ROGUE_REWARD_BOSS,
-    ROGUE_REWARD_EVENT
+    ROGUE_REWARD_EVENT,
+    ROGUE_REWARD_DUEL // a won duel: a boss's rewards, then back to the room
 };
 
 struct FldObj;
@@ -191,6 +210,7 @@ typedef struct RogueRun {
     u8 jumpBuffer;
     u8 event; // who is in this event room
     u8 eventDone; // set once they have made their offer
+    u8 duel; // set while the battle is a duel picked in an event
     u8 cardXp[ROGUE_CARD_SLOTS]; // battles won with each collection slot in the deck
 } RogueRun;
 
@@ -251,6 +271,9 @@ void RogueGainCardXp(void);
 u8 RogueCountCards(u8 level);
 u8 RogueRollFusion(u8* posA, u8* posB, u16* result);
 void RogueFuse(u8 posA, u8 posB, u16 result);
+void RogueRemoveDeckCard(u8 pos);
+u8 RogueRollDeckCard(void);
+u16 RogueRollTransform(u16 id);
 u8 RogueTryAirJump(void);
 void RogueResetAirJumps(void);
 struct BtlObj;

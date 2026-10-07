@@ -382,23 +382,17 @@ u8 RogueRollFusion(u8* posA, u8* posB, u16* result) {
     return 1;
 }
 
-// Consumes the two cards and adds what they make. The CP limit grows if the
-// new card costs more than the two did, so the fusion always fits.
-void RogueFuse(u8 posA, u8 posB, u16 result) {
+// Takes a card out of the deck and of the collection. The deck is read up to
+// its first empty position, so the gap is closed.
+void RogueRemoveDeckCard(u8 pos) {
     Deck* deck = GetActiveDeck();
-    u16 slotA = deck->cards[posA];
-    u16 slotB = deck->cards[posB];
-    u16 freed = GetCardCpCost(gCardCollection[slotA]) + GetCardCpCost(gCardCollection[slotB]);
-    u16 cost = GetCardCpCost(result);
+    u16 slot = deck->cards[pos];
     s32 count;
     s32 i;
 
-    RemoveCardFromActiveDeck(posA);
-    RemoveCardFromActiveDeck(posB);
-    gCardCollection[slotA] = CARD_ID_MASK;
-    gCardCollection[slotB] = CARD_ID_MASK;
+    RemoveCardFromActiveDeck(pos);
+    gCardCollection[slot] = CARD_ID_MASK;
 
-    // The deck is read up to its first empty position, so close the gaps.
     for (i = 0, count = 0; i < DECK_SIZE; i++) {
         if (deck->cards[i] != 0xFFFF) {
             deck->cards[count++] = deck->cards[i];
@@ -408,6 +402,60 @@ void RogueFuse(u8 posA, u8 posB, u16 result) {
     while (count < DECK_SIZE) {
         deck->cards[count++] = 0xFFFF;
     }
+}
+
+// A random position of the deck that holds a keyblade, spell, summon or item
+// card, or 0xFF if it has none.
+u8 RogueRollDeckCard(void) {
+    Deck* deck = GetActiveDeck();
+    u16 id;
+    u8 pos;
+    s32 tries;
+
+    for (tries = 0; tries < 40; tries++) {
+        pos = RogueRandBelow(DECK_SIZE);
+
+        if (deck->cards[pos] == 0xFFFF) {
+            continue;
+        }
+
+        id = gCardCollection[deck->cards[pos]] & CARD_ID_MASK;
+
+        if (gCardDefs[id].unk_2A != 3) {
+            return pos;
+        }
+    }
+
+    return 0xFF;
+}
+
+// Another card of the same kind of pool to turn a card into, 0 if none came up.
+u16 RogueRollTransform(u16 id) {
+    u8 pool = POOL_ATTACK;
+    u16 result;
+
+    if (RogueFuseClass(id) == FUSE_MAGIC) {
+        pool = id / 10 >= CARD_SIMBA ? POOL_SUMMON : POOL_MAGIC;
+    } else if (RogueFuseClass(id) == FUSE_ITEM) {
+        pool = POOL_ITEM;
+    }
+
+    result = RogueRollUnlockedCard(pool);
+    return result != id ? result : 0;
+}
+
+// Consumes the two cards and adds what they make. The CP limit grows if the
+// new card costs more than the two did, so the fusion always fits.
+void RogueFuse(u8 posA, u8 posB, u16 result) {
+    Deck* deck = GetActiveDeck();
+    u16 slotA = deck->cards[posA];
+    u16 slotB = deck->cards[posB];
+    u16 freed = GetCardCpCost(gCardCollection[slotA]) + GetCardCpCost(gCardCollection[slotB]);
+    u16 cost = GetCardCpCost(result);
+
+    // The higher position goes first, so the lower one is still where it was.
+    RogueRemoveDeckCard(posA > posB ? posA : posB);
+    RogueRemoveDeckCard(posA > posB ? posB : posA);
 
     if (cost > freed) {
         gGameState.progression.cp += cost - freed;

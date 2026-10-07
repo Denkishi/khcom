@@ -1,5 +1,6 @@
 #include "rogue.h"
 #include "registration_data.h"
+#include "mode_battle_data.h"
 #include "card.h"
 #include "card_deck.h"
 #include "card_def_data.h"
@@ -47,6 +48,15 @@ enum {
     REWARD_REROLL,
     REWARD_ATTACK_FOR_HP,
     REWARD_GAMBLE,
+    REWARD_DUEL,
+    REWARD_LEAVE,
+    REWARD_ATTACK2_FOR_HP,
+    REWARD_SHARDS_FOR_CARD,
+    REWARD_BIG_GAMBLE,
+    REWARD_DUPLICATE,
+    REWARD_TRANSFORM,
+    REWARD_PAY_HP,
+    REWARD_RELIC_FOR_HP,
     REWARD_KINDS
 };
 
@@ -54,7 +64,8 @@ typedef struct RogueReward {
     u8 kind;
     u8 fuseA; // deck positions of the two cards a fusion consumes
     u8 fuseB;
-    u16 card; // card id, the collection slot to upgrade, or how many shards
+    u16 card; // card id, collection slot, deck position, shards or battle id, by kind
+    u16 result; // what a transformed card becomes
 } RogueReward;
 
 typedef struct RogueRewardWork {
@@ -74,8 +85,10 @@ typedef struct RogueRewardWork {
     u8 detailCount;
     u8 cursor;
     u8 state;
-    u8 source; // ROGUE_REWARD_BATTLE, _BOSS or _EVENT
+    u8 source; // ROGUE_REWARD_BATTLE, _BOSS, _EVENT or _DUEL
     u8 afterBoss;
+    u8 rich; // boss and duel rewards: relics and combo hits come up more
+    u8 duel; // battle to start when the screen closes, 0 for none
 } RogueRewardWork;
 
 static RogueRewardWork* sWork;
@@ -96,8 +109,18 @@ static const u8 sLabelShards[] = "Frammenti";
 static const u8 sLabelReroll[] = "Rilancio";
 static const u8 sLabelPact[] = "Patto";
 static const u8 sLabelGamble[] = "Azzardo";
+static const u8 sLabelDuel[] = "Duello";
+static const u8 sLabelLeave[] = "Rifiuta";
+static const u8 sLabelDarkPact[] = "Patto nero";
+static const u8 sLabelBarter[] = "Baratto";
+static const u8 sLabelDice[] = "Dadi";
+static const u8 sLabelCopy[] = "Copia";
+static const u8 sLabelMutate[] = "Muta";
+static const u8 sLabelFlee[] = "Fuggi";
+static const u8 sLabelDarkness[] = "Oscurit\xE0";
 static const u8* const sLabels[REWARD_KINDS] = {
     sLabelCard, sLabelUpgrade, sLabelHeal, sLabelMaxHp, sLabelCp, sLabelCombo, sLabelAirJump, sLabelAttack, sLabelRelic, sLabelFusion, sLabelShards, sLabelReroll, sLabelPact, sLabelGamble,
+    sLabelDuel, sLabelLeave, sLabelDarkPact, sLabelBarter, sLabelDice, sLabelCopy, sLabelMutate, sLabelFlee, sLabelDarkness,
 };
 
 static const u8 sCost[] = "\x1FPC ";
@@ -111,6 +134,15 @@ static const u8 sShards[] = " Frammenti";
 static const u8 sReroll[] = "Un rilancio delle\x1Fricompense";
 static const u8 sPact[] = "Forza +1, ma\x1FPV massimi -15";
 static const u8 sGamble[] = "Una volta su due\x1F" "Forza +1, altrimenti\x1Fperdi 20 PV";
+static const u8 sDuel[] = "Combatti. Se vinci:\x1Fricompensa da boss\x1F" "e 15 Frammenti";
+static const u8 sLeave[] = "Te ne vai senza\x1Fprendere nulla";
+static const u8 sDarkPact[] = "Forza +2, ma\x1FPV massimi -30";
+static const u8 sBarter[] = "+30 Frammenti, ma\x1Fperdi una carta\x1F" "a caso";
+static const u8 sDice[] = "Una volta su due una\x1Freliquia, altrimenti\x1Fperdi met\xE0 dei PV";
+static const u8 sCopy[] = "Una copia di:\x1F";
+static const u8 sMutate[] = "\x1F" "diventa\x1F";
+static const u8 sFlee[] = "Scappi, ma perdi\x1F" "20 PV";
+static const u8 sDarkness[] = "Una reliquia, ma\x1FPV massimi -25";
 static const u8 sCombo[] = "Un colpo in pi\xF9\x1Fnella combo";
 static const u8 sAirJump[] = "Salto in aria:\x1Fun salto in pi\xF9\x1F" "a mezz'aria";
 
@@ -207,7 +239,11 @@ static void RogueEventRewards(void) {
     static const u8 kinds[] = {
         REWARD_HEAL, REWARD_MAX_HP, REWARD_CP, REWARD_COMBO, REWARD_AIR_JUMP, REWARD_UPGRADE,
         REWARD_CARD, REWARD_CARD, REWARD_SHARDS, REWARD_REROLL, REWARD_ATTACK_FOR_HP, REWARD_GAMBLE,
+        REWARD_DUEL, REWARD_LEAVE, REWARD_ATTACK2_FOR_HP, REWARD_SHARDS_FOR_CARD, REWARD_BIG_GAMBLE,
+        REWARD_DUPLICATE, REWARD_TRANSFORM, REWARD_PAY_HP, REWARD_RELIC_FOR_HP,
     };
+    Deck* deck = GetActiveDeck();
+    u8 pos;
     const RogueEventOffer* offers = RogueEventOffers();
     RogueReward* reward;
     u8 available;
@@ -223,7 +259,32 @@ static void RogueEventRewards(void) {
         case ROGUE_OFFER_SHARDS:
         case ROGUE_OFFER_REROLL:
         case ROGUE_OFFER_GAMBLE:
+        case ROGUE_OFFER_DUEL:
+        case ROGUE_OFFER_LEAVE:
+        case ROGUE_OFFER_BIG_GAMBLE:
+        case ROGUE_OFFER_PAY_HP:
             available = 1;
+            break;
+        case ROGUE_OFFER_ATTACK2_FOR_HP:
+            available = gGameState.progression.ap + 1 < ROGUE_AP_MAX && gGameState.progression.maxHp > 60;
+            break;
+        case ROGUE_OFFER_RELIC_FOR_HP:
+            reward->card = RogueRollRelic();
+            available = reward->card != ROGUE_RELICS && gGameState.progression.maxHp > 50;
+            break;
+        case ROGUE_OFFER_SHARDS_FOR_CARD:
+            available = deck->unk_DC > 6 && RogueRollDeckCard() != 0xFF;
+            break;
+        case ROGUE_OFFER_DUPLICATE:
+        case ROGUE_OFFER_TRANSFORM:
+            pos = RogueRollDeckCard();
+            available = pos != 0xFF;
+
+            if (available) {
+                reward->card = deck->cards[pos];
+                reward->result = RogueRollTransform(gCardCollection[reward->card] & CARD_ID_MASK);
+                available = offers[i].offer == ROGUE_OFFER_DUPLICATE || reward->result != 0;
+            }
             break;
         case ROGUE_OFFER_AIR_JUMP:
             available = gRogue.airJumps < ROGUE_AIR_JUMPS_MAX;
@@ -276,7 +337,7 @@ static void RogueRollRewards(void) {
         }
 
         // Relics and combo hits are rarer in ordinary rooms than after a boss.
-        if (!sWork->afterBoss && (kind == REWARD_COMBO || kind == REWARD_AIR_JUMP || kind == REWARD_RELIC) &&
+        if (!sWork->rich && (kind == REWARD_COMBO || kind == REWARD_AIR_JUMP || kind == REWARD_RELIC) &&
             RogueRandBelow(2) == 0) {
             continue;
         }
@@ -307,7 +368,10 @@ static u16 RogueRewardCard(RogueReward* reward) {
     case REWARD_FUSION:
         return reward->card;
     case REWARD_UPGRADE:
+    case REWARD_DUPLICATE:
         return gCardCollection[reward->card] & CARD_ID_MASK;
+    case REWARD_TRANSFORM:
+        return reward->result;
     }
 
     return 0;
@@ -383,6 +447,55 @@ static void RogueRewardDetail(RogueReward* reward) {
     case REWARD_GAMBLE:
         RogueAppend(out, sGamble);
         break;
+    case REWARD_DUEL:
+        RogueAppend(out, sDuel);
+        break;
+    case REWARD_LEAVE:
+        RogueAppend(out, sLeave);
+        break;
+    case REWARD_ATTACK2_FOR_HP:
+        RogueAppend(out, sDarkPact);
+        break;
+    case REWARD_SHARDS_FOR_CARD:
+        RogueAppend(out, sBarter);
+        break;
+    case REWARD_BIG_GAMBLE:
+        RogueAppend(out, sDice);
+        break;
+    case REWARD_DUPLICATE:
+        out = RogueAppend(out, sCopy);
+        RogueAppendCard(out, gCardCollection[reward->card] & CARD_ID_MASK);
+        break;
+    case REWARD_TRANSFORM:
+        out = RogueAppendCard(out, gCardCollection[reward->card] & CARD_ID_MASK);
+        out = RogueAppend(out, sMutate);
+        RogueAppendCard(out, reward->result);
+        break;
+    case REWARD_PAY_HP:
+        RogueAppend(out, sFlee);
+        break;
+    case REWARD_RELIC_FOR_HP:
+        out = RogueAppend(out, RogueRelicName(reward->card));
+        *out++ = 0x1F;
+        RogueAppend(out, sDarkness);
+        break;
+    }
+}
+
+// Costs never kill: they leave at least 1 HP.
+static void RogueLoseHp(s32 amount) {
+    if (gGameState.hp > amount) {
+        gGameState.hp -= amount;
+    } else {
+        gGameState.hp = 1;
+    }
+}
+
+static void RogueLoseMaxHp(s32 amount) {
+    gGameState.progression.maxHp -= amount;
+
+    if (gGameState.hp > gGameState.progression.maxHp) {
+        gGameState.hp = gGameState.progression.maxHp;
     }
 }
 
@@ -390,6 +503,7 @@ static void RogueGiveReward(RogueReward* reward) {
     Deck* deck;
     u16 before;
     u16 after;
+    u8 slot;
 
     switch (reward->kind) {
     case REWARD_CARD:
@@ -437,20 +551,69 @@ static void RogueGiveReward(RogueReward* reward) {
         break;
     case REWARD_ATTACK_FOR_HP:
         gGameState.progression.ap++;
-        gGameState.progression.maxHp -= 15;
-
-        if (gGameState.hp > gGameState.progression.maxHp) {
-            gGameState.hp = gGameState.progression.maxHp;
-        }
+        RogueLoseMaxHp(15);
         break;
     case REWARD_GAMBLE:
         if (RogueRandBelow(2) == 0 && gGameState.progression.ap < ROGUE_AP_MAX) {
             gGameState.progression.ap++;
-        } else if (gGameState.hp > 20) {
-            gGameState.hp -= 20;
         } else {
-            gGameState.hp = 1;
+            RogueLoseHp(20);
         }
+        break;
+    case REWARD_DUEL:
+        gRogue.duel = 1;
+        sWork->duel = reward->card;
+        break;
+    case REWARD_LEAVE:
+        break;
+    case REWARD_ATTACK2_FOR_HP:
+        gGameState.progression.ap += 2;
+        RogueLoseMaxHp(30);
+        break;
+    case REWARD_SHARDS_FOR_CARD:
+        slot = RogueRollDeckCard();
+
+        if (slot != 0xFF) {
+            RogueRemoveDeckCard(slot);
+        }
+
+        gRogue.shards += 30;
+        break;
+    case REWARD_BIG_GAMBLE:
+        if (RogueRandBelow(2) == 0) {
+            slot = RogueRollRelic();
+
+            if (slot != ROGUE_RELICS) {
+                gRogue.relics |= 1 << slot;
+            } else if (gGameState.progression.ap < ROGUE_AP_MAX) {
+                gGameState.progression.ap++;
+            }
+        } else {
+            RogueLoseHp(gGameState.hp / 2);
+        }
+        break;
+    case REWARD_DUPLICATE:
+        // The copy brings its CP with it, so it always fits the deck.
+        gGameState.progression.cp += GetCardCpCost(gCardCollection[reward->card]);
+        RogueGiveCard(gCardCollection[reward->card] & CARD_ID_MASK);
+        break;
+    case REWARD_TRANSFORM:
+        deck = GetActiveDeck();
+        before = GetCardCpCost(gCardCollection[reward->card]);
+        gCardCollection[reward->card] = (gCardCollection[reward->card] & ~CARD_ID_MASK) | reward->result;
+        after = GetCardCpCost(gCardCollection[reward->card]);
+        deck->unk_DA += after - before;
+
+        if (after > before) {
+            gGameState.progression.cp += after - before;
+        }
+        break;
+    case REWARD_PAY_HP:
+        RogueLoseHp(20);
+        break;
+    case REWARD_RELIC_FOR_HP:
+        gRogue.relics |= 1 << reward->card;
+        RogueLoseMaxHp(25);
         break;
     }
 }
@@ -504,6 +667,8 @@ static void RogueReward_Init(s32 source) {
     sWork = EwramAlloc(sizeof(RogueRewardWork));
     sWork->source = source;
     sWork->afterBoss = source == ROGUE_REWARD_BOSS;
+    sWork->rich = source == ROGUE_REWARD_BOSS || source == ROGUE_REWARD_DUEL;
+    sWork->duel = 0;
     sWork->cursor = 0;
     sWork->state = 0;
     sWork->cardTiles = 0;
@@ -574,7 +739,9 @@ static void RogueReward_Update(void) {
         break;
     case 2:
         if (!FadeIsActive()) {
-            if (sWork->afterBoss) {
+            if (sWork->duel != 0) {
+                ModeRequest(&gModeBattle, sWork->duel);
+            } else if (sWork->afterBoss) {
                 RogueNextFloor();
             } else {
                 func_080E04EC();

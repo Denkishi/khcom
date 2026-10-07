@@ -272,6 +272,7 @@ void RogueStartRun(void) {
     gRogue.airJumpsUsed = 0;
     gRogue.world = sFloors[0].world;
     gRogue.rerolls = 0;
+    gRogue.duel = 0;
     gRogue.shards = 0;
     gRogue.newChapter = 0;
     gRogue.chapters = gRogueMeta.chapters;
@@ -311,10 +312,20 @@ void RogueNextFloor(void) {
 u8 RogueOnBattleEnd(u16 battle) {
     // Running away wins nothing: back to the room, which still has its battle.
     if (gGameState.flags & 0x40) {
+        gRogue.duel = 0;
         return 0;
     }
 
     RogueGainCardXp();
+
+    // A duel picked in an event pays like a boss and leaves the room as it was.
+    if (gRogue.duel) {
+        gRogue.duel = 0;
+        gRogue.shards += ROGUE_SHARDS_DUEL;
+        RogueOnBossBeaten(battle);
+        ModeRequest(&gModeRogueReward, ROGUE_REWARD_DUEL);
+        return 1;
+    }
 
     if (gRogue.kind != ROGUE_ROOM_BOSS) {
         gRogue.shards += ROGUE_SHARDS_ROOM;

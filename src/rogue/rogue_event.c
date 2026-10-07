@@ -22,7 +22,8 @@ typedef struct RogueEventDef {
     RogueEventOffer offers[ROGUE_EVENT_OFFERS];
 } RogueEventDef;
 
-#define NPC(name) { g##name##Fl00Tiles, sizeof(g##name##Fl00Tiles), g##name##Palette, g##name##Fl00Anims, g##name##Fl00Frames }
+#define NPC2(name, palette) { g##name##Fl00Tiles, sizeof(g##name##Fl00Tiles), palette, g##name##Fl00Anims, g##name##Fl00Frames }
+#define NPC(name) NPC2(name, g##name##Palette)
 
 // In the order of the ROGUE_EVENT_ ids, which is also the order of their
 // messages in rogue_text.c.
@@ -41,6 +42,22 @@ static const RogueEventDef sEvents[ROGUE_EVENTS] = {
     { NPC(Heracles), { { ROGUE_OFFER_COMBO, 0 }, { ROGUE_OFFER_MAX_HP, 0 }, { ROGUE_OFFER_HEAL, 0 } } },
     // Tigger teaches bouncing.
     { NPC(Tigger), { { ROGUE_OFFER_AIR_JUMP, 0 }, { ROGUE_OFFER_SHARDS, 10 }, { ROGUE_OFFER_HEAL, 0 } } },
+    // Riku wants to see how strong Sora got: an optional duel.
+    { NPC(Riku), { { ROGUE_OFFER_DUEL, 0xA1 }, { ROGUE_OFFER_SHARDS, 5 }, { ROGUE_OFFER_LEAVE, 0 } } },
+    // Lexaeus tests him, and respects a refusal.
+    { NPC(Rexeus), { { ROGUE_OFFER_DUEL, 0xA7 }, { ROGUE_OFFER_MAX_HP, 0 }, { ROGUE_OFFER_LEAVE, 0 } } },
+    // The Riku replica ambushes him: nothing here is free.
+    { NPC2(Nise, gNiserikuPalette), { { ROGUE_OFFER_DUEL, 0xA8 }, { ROGUE_OFFER_PAY_HP, 0 }, { ROGUE_OFFER_SHARDS_FOR_CARD, 0 } } },
+    // Jafar's bargains.
+    { NPC(Jaffer), { { ROGUE_OFFER_ATTACK2_FOR_HP, 0 }, { ROGUE_OFFER_SHARDS_FOR_CARD, 0 }, { ROGUE_OFFER_LEAVE, 0 } } },
+    // Oogie Boogie's dice.
+    { NPC(Bugi), { { ROGUE_OFFER_BIG_GAMBLE, 0 }, { ROGUE_OFFER_GAMBLE, 0 }, { ROGUE_OFFER_LEAVE, 0 } } },
+    // Ansem offers the darkness.
+    { NPC(Ansem), { { ROGUE_OFFER_RELIC_FOR_HP, 0 }, { ROGUE_OFFER_BIG_GAMBLE, 0 }, { ROGUE_OFFER_LEAVE, 0 } } },
+    // Sally's potions change cards.
+    { NPC(Sari), { { ROGUE_OFFER_DUPLICATE, 0 }, { ROGUE_OFFER_TRANSFORM, 0 }, { ROGUE_OFFER_HEAL, 0 } } },
+    // Jiminy has advice.
+    { NPC2(Jim, gJiminyPalette), { { ROGUE_OFFER_REROLL, 0 }, { ROGUE_OFFER_SHARDS, 10 }, { ROGUE_OFFER_UPGRADE, 0 } } },
 };
 
 const RogueEventOffer* RogueEventOffers(void) {

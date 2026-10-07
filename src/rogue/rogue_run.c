@@ -32,24 +32,26 @@ static const u8 sRoomBattles[ROGUE_ROOM_KINDS] = { 0, 1, 2, 1, 0, 0, 0, 0 };
 static const u8 sRoomCards[ROGUE_ROOM_KINDS] = { 5, 1, 0, 2, 10, 5, 0, 14 };
 
 // The floors of a run in order: each has a world and the battle that ends it.
-// The last floor of a chapter is its boss, the others are minibosses.
+// The last floor of a chapter is its boss, the others are minibosses. Once a
+// floor's chapter has been completed, its second boss shows up half the time.
 typedef struct RogueFloor {
     u8 world;
     u8 boss;
+    u8 otherBoss;
 } RogueFloor;
 
 static const RogueFloor sFloors[ROGUE_FLOORS] = {
-    { WORLD_TRAVERSE_TOWN, 0x94 }, // Guard Armor
-    { WORLD_AGRABAH, 0x95 }, // Jafar
-    { WORLD_WONDERLAND, 0x96 }, // Trickmaster
-    { WORLD_OLYMPUS_COLISEUM, 0xA0 }, // Hades
-    { WORLD_MONSTRO, 0x98 }, // Parasite Cage
-    { WORLD_HALLOWEEN_TOWN, 0x9B }, // Oogie Boogie
-    { WORLD_ATLANTICA, 0x97 }, // Ursula
-    { WORLD_NEVER_LAND, 0x9E }, // Hook
-    { WORLD_HOLLOW_BASTION, 0x99 }, // Dragon Maleficent
-    { WORLD_DESTINY_ISLANDS, 0x9A }, // Darkside
-    { WORLD_CASTLE_OBLIVION, 0xA2 }, // Axel
+    { WORLD_TRAVERSE_TOWN, 0x94, 0x9D }, // Guard Armor, Leon
+    { WORLD_AGRABAH, 0x95, 0xA1 }, // Jafar, Riku
+    { WORLD_WONDERLAND, 0x96, 0xA3 }, // Trickmaster, Larxene
+    { WORLD_OLYMPUS_COLISEUM, 0xA0, 0x9F }, // Hades, Cloud
+    { WORLD_MONSTRO, 0x98, 0xA8 }, // Parasite Cage, Riku
+    { WORLD_HALLOWEEN_TOWN, 0x9B, 0xA4 }, // Oogie Boogie, Vexen
+    { WORLD_ATLANTICA, 0x97, 0xA9 }, // Ursula, Riku
+    { WORLD_NEVER_LAND, 0x9E, 0xA7 }, // Hook, Lexaeus
+    { WORLD_HOLLOW_BASTION, 0x99, 0xAA }, // Dragon Maleficent, Riku
+    { WORLD_DESTINY_ISLANDS, 0x9A, 0xAF }, // Darkside, Vexen
+    { WORLD_CASTLE_OBLIVION, 0xA5, 0xA2 }, // Marluxia, Axel
 };
 
 // Floors in a run of 1 to ROGUE_CHAPTERS chapters.
@@ -57,6 +59,21 @@ static const u8 sChapterFloors[ROGUE_CHAPTERS + 1] = { 0, 2, 5, 8, 11 };
 
 u8 RogueFloorCount(void) {
     return sChapterFloors[gRogue.chapters];
+}
+
+static u8 RogueRollBoss(void) {
+    const RogueFloor* floor = &sFloors[gRogue.floor];
+    u8 chapter = 0;
+
+    while (gRogue.floor >= sChapterFloors[chapter + 1]) {
+        chapter++;
+    }
+
+    if ((gRogueMeta.chapters > chapter + 1 || (gRogueMeta.flags & ROGUE_META_ALL_CLEARED)) && RogueRandBelow(2) == 0) {
+        return floor->otherBoss;
+    }
+
+    return floor->boss;
 }
 
 static u8 RogueFloorIsChapterEnd(void) {
@@ -224,7 +241,7 @@ static void RogueEnterRoom(u8 firstOfFloor) {
     if (gRogue.kind == ROGUE_ROOM_BOSS) {
         func_080DEF20();
         func_0801CB00();
-        ModeRequest(&gModeBattle, sFloors[gRogue.floor].boss);
+        ModeRequest(&gModeBattle, RogueRollBoss());
         return;
     }
 

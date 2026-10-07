@@ -121,6 +121,10 @@ void RogueMetaEndRun(u8 completed) {
     if (completed) {
         gRogueMeta.wins++;
 
+        if (gRogue.chapters == ROGUE_CHAPTERS) {
+            gRogueMeta.flags |= ROGUE_META_ALL_CLEARED;
+        }
+
         if (gRogueMeta.chapters < ROGUE_CHAPTERS && gRogue.chapters == gRogueMeta.chapters) {
             gRogueMeta.chapters++;
             gRogue.shards += ROGUE_SHARDS_NEW_CHAPTER;

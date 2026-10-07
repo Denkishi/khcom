@@ -50,6 +50,7 @@ typedef struct RogueMeta {
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
+#define ROGUE_META_ALL_CLEARED 2 // a run through every chapter was completed
 
 #define ROGUE_COMBO_BASE 3
 #define ROGUE_COMBO_PLUS_MAX 4

@@ -1,0 +1,77 @@
+# The flat battle, an option: no depth, Up jumps, and the direction held as
+# a card is played picks the move. Here the moves are asked for one by one.
+# Expect: in the first picture everyone stands on one line; Sora jumps with
+# Up; the pictures after show, in turn, the thrown Keyblade, the wave, the
+# pillar of light, the pearls, the circle of fire, the hop that turns, the
+# cut that rises (Sora high up) and the slide. techs reads 12 (hex c) or
+# more, move_hits is above 3, counters reads 1, slide_action reads 64 (100).
+wait 600
+poke8 @gRogueMeta.flags 23
+press START
+wait 120
+press START
+wait 200
+hold B 100
+wait 20
+debug battle 0
+wait 330
+shot /tmp/flat_0.ppm
+hold UP 3
+wait 12
+shot /tmp/flat_jump.ppm
+wait 60
+debug tech 128
+wait 10
+shot /tmp/flat_raid.ppm
+wait 50
+debug tech 129
+wait 10
+shot /tmp/flat_wave.ppm
+wait 50
+debug tech 130
+wait 10
+shot /tmp/flat_pillar.ppm
+wait 50
+debug tech 192
+wait 24
+shot /tmp/flat_pearls.ppm
+wait 50
+debug tech 194
+wait 40
+shot /tmp/flat_circle.ppm
+wait 30
+debug tech 2
+wait 8
+shot /tmp/flat_spin.ppm
+wait 60
+hold UP 3
+wait 16
+debug tech 66
+wait 14
+shot /tmp/flat_rise.ppm
+wait 20
+debug tech 67
+wait 60
+debug tech 195
+wait 60
+debug tech 193
+wait 30
+debug tech 131
+wait 4
+debug hurt 5
+wait 30
+peek16 @gRogueDebug.counters counters
+debug tech 3
+wait 4
+peek16 @gRogueDebug.techAction slide_action
+poke8 @gRogueDebug.techForce 100
+press A
+wait 14
+shot /tmp/flat_slide.ppm
+poke8 @gRogueDebug.techForce 0
+wait 60
+peek16 @gRogueDebug.techs techs
+peek16 @gRogueDebug.moveHits move_hits
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later

@@ -346,6 +346,8 @@ typedef struct RogueRelicsWork {
     u8 state;
     u8 abandon; // set by a first press of select on the records page
     u8 leave; // the run was given up
+    u8 option; // the line of the options page the keys change
+    u8 slot; // the place of the flat battle whose technique is shown there
 } RogueRelicsWork;
 
 static RogueRelicsWork* sWork;
@@ -361,10 +363,15 @@ static const u8 sAbandon[] = "SELECT: abbandona";
 static const u8 sAbandonSure[] = "Ancora SELECT: s\xEC";
 static const u8 sTabRun[] = "Run";
 static const u8 sTitleOptions[] = "Opzioni";
-static const u8 sOptionScroll[] = "Giro delle carte con L/R:";
-static const u8 sOptionNormal[] = "\x1Dnormale\x1E";
-static const u8 sOptionSwapped[] = "\x1Dinvertito\x1E";
-static const u8 sOptionHow[] = "Sinistra/destra: cambia";
+static const u8 sOptionScroll[] = "Giro L/R: ";
+static const u8 sOptionNormal[] = "normale";
+static const u8 sOptionSwapped[] = "invertito";
+static const u8 sOptionBattle[] = "Battaglia: ";
+static const u8 sOptionDeep[] = "3D";
+static const u8 sOptionFlat[] = "2D";
+static const u8 sOptionSlot[] = "Tasto: ";
+static const u8 sOptionTech[] = "Fa: ";
+#define OPTION_LINES 4 // the last two only with the flat battle on
 static const u8* const sTabs[PAGE_TABS] = { sTabRun, sTitleRelics, sTitleRecords, sTitleOptions };
 
 // The option, kept with the save: L and R turn the hand the other way.
@@ -481,10 +488,35 @@ static void RogueRelicsShowPage(void) {
             RogueRelicsLine(sNoBuild);
         }
     } else if (sWork->page == PAGE_OPTIONS) {
+        // One line for each option, the one the keys change marked. With the
+        // flat battle on, the last two show a place and the technique set on it.
         RogueRelicsLine(sTitleOptions);
-        RogueRelicsLine(sOptionScroll);
-        RogueRelicsLine(RogueSwapLR() ? sOptionSwapped : sOptionNormal);
-        RogueRelicsLine(sOptionHow);
+
+        for (i = 0; i < ((gRogueMeta.flags & ROGUE_META_2D) ? OPTION_LINES : 2); i++) {
+            out = sWork->text;
+            *out++ = i == sWork->option ? '>' : ' ';
+
+            switch (i) {
+            case 0:
+                out = RogueRelicsAppend(out, sOptionScroll);
+                RogueRelicsAppend(out, RogueSwapLR() ? sOptionSwapped : sOptionNormal);
+                break;
+            case 1:
+                out = RogueRelicsAppend(out, sOptionBattle);
+                RogueRelicsAppend(out, (gRogueMeta.flags & ROGUE_META_2D) ? sOptionFlat : sOptionDeep);
+                break;
+            case 2:
+                out = RogueRelicsAppend(out, sOptionSlot);
+                RogueRelicsAppend(out, Rogue2dSlotName(sWork->slot));
+                break;
+            case 3:
+                out = RogueRelicsAppend(out, sOptionTech);
+                RogueRelicsAppend(out, Rogue2dTechName(Rogue2dTechAt(sWork->slot)));
+                break;
+            }
+
+            RogueRelicsLine(sWork->text);
+        }
     } else if (sWork->page == 2) {
         RogueRelicsLine(sTitleRecords);
         RogueRelicsRecord(sRuns, gRogueMeta.runs);
@@ -523,6 +555,8 @@ static void RogueRelics_Init(s32 arg) {
     sWork->page = 0;
     sWork->abandon = 0;
     sWork->leave = 0;
+    sWork->option = 0;
+    sWork->slot = 0;
     SetBgMode0();
     SetupBg(3, 0, 0x1D, 0);
     SetBgPriority(3, 3);
@@ -578,10 +612,42 @@ static void RogueRelics_Update(void) {
             }
 
             m4aSongNumStart(SONG_SYS_KETTEI);
+        } else if ((GetKeysPressed() & (DPAD_UP | DPAD_DOWN)) && sWork->page == PAGE_OPTIONS) {
+            // Up and down pick the option.
+            u8 lines = (gRogueMeta.flags & ROGUE_META_2D) ? OPTION_LINES : 2;
+
+            sWork->option = (sWork->option + ((GetKeysPressed() & DPAD_DOWN) ? 1 : lines - 1)) % lines;
+            m4aSongNumStart(SONG_SYS_CLICK);
+            RogueRelicsShowPage();
         } else if ((GetKeysPressed() & (DPAD_LEFT | DPAD_RIGHT)) && sWork->page == PAGE_OPTIONS) {
-            // The one option there is, turned over and saved.
-            gRogueMeta.flags ^= ROGUE_META_SWAP_LR;
-            RogueMetaSave();
+            // Left and right change it.
+            u8 back = (GetKeysPressed() & DPAD_LEFT) != 0;
+            u8 tech;
+
+            switch (sWork->option) {
+            case 0:
+                gRogueMeta.flags ^= ROGUE_META_SWAP_LR;
+                RogueMetaSave();
+                break;
+            case 1:
+                gRogueMeta.flags ^= ROGUE_META_2D;
+                RogueMetaSave();
+                break;
+            case 2:
+                sWork->slot = (sWork->slot + (back ? ROGUE_2D_SLOTS - 1 : 1)) % ROGUE_2D_SLOTS;
+                break;
+            case 3:
+                // The next technique the run has: those of relics only with the relic.
+                tech = Rogue2dTechAt(sWork->slot);
+
+                do {
+                    tech = (tech + (back ? ROGUE_2D_TECHS - 1 : 1)) % ROGUE_2D_TECHS;
+                } while (!Rogue2dTechOwned(tech));
+
+                Rogue2dSetTech(sWork->slot, tech);
+                break;
+            }
+
             m4aSongNumStart(SONG_SYS_KETTEI);
             RogueRelicsShowPage();
         } else if (GetKeysPressed() & B_BUTTON) {

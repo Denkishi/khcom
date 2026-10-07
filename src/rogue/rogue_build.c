@@ -593,6 +593,15 @@ s32 RogueCardAction(const CardDef* def) {
         RogueGadgetFire(GADGET_ON_ZERO, gBtlWork->actor2);
     }
 
+    // The flat battle: what was held as the card was played may make it something else.
+    if (def->unk_2A != 3) {
+        s32 action = Rogue2dAction(def);
+
+        if (action >= 0) {
+            return action;
+        }
+    }
+
     // The new spells: each is a move of its own, cast with a swing.
     if (ROGUE_IS_NEW_SPELL(kind)) {
         RogueDoMove(ROGUE_MOVE_WATER + kind - ROGUE_CARD_WATER, gBtlWork->actor);

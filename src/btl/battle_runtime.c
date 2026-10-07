@@ -268,7 +268,7 @@ void func_08019350(void) {
         }
     }
 
-    if (GetKeysPressed() & A_BUTTON) {
+    if (Rogue2dCardKeys(GetKeysPressed()) & A_BUTTON) {
         func_08076330();
 
         if (func_0807B3C8() == 3) {
@@ -484,7 +484,7 @@ void func_080197AC(void) {
     }
 
     if (!(gBtlWork->flags & 0x2000000000)) {
-        if (RogueBufferCard(pressed) & A_BUTTON) {
+        if (RogueBufferCard(Rogue2dCardKeys(pressed)) & A_BUTTON) {
             func_08076330();
         }
     }

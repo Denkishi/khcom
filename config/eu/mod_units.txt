@@ -61,3 +61,4 @@ new rogue_roxashood_actor.c
 new rogue_hero.c
 new rogue_sorakh2_art.c
 new rogue_npc_art.c
+new rogue_2d.c

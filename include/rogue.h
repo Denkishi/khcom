@@ -125,6 +125,7 @@ typedef struct RogueMeta {
 } RogueMeta;
 
 #define ROGUE_META_TUTORIAL_SEEN 1
+#define ROGUE_META_2D 16 // an option: battles without depth, see rogue_2d.c
 #define ROGUE_META_SWAP_LR 8 // an option: L and R turn the hand of cards the other way
 #define ROGUE_META_MICKEY 4 // Mickey was beaten as a boss: he can be played
 
@@ -300,7 +301,8 @@ enum RogueRelic {
 enum RogueMoveMode {
     ROGUE_MOVE_PLAIN, // as the move is made
     ROGUE_MOVE_ORBIT, // it circles Sora for the whole battle, hitting what it touches. phase: where on the circle, in 1/256
-    ROGUE_MOVE_SHARD // it hangs over Sora for `phase` frames, then flies at an enemy
+    ROGUE_MOVE_SHARD, // it hangs over Sora for `phase` frames, then flies at an enemy
+    ROGUE_MOVE_CIRCLE // as ROGUE_MOVE_ORBIT, for a few seconds
 };
 
 // One step of a clip, the way the bosses drawn from a sheet are animated: a
@@ -631,6 +633,23 @@ struct FldObj;
 struct BtlObj;
 struct CardDef;
 
+// The flat battle: the places a technique can be set on, and the techniques.
+#define ROGUE_2D_SLOTS 8
+enum Rogue2dTech {
+    ROGUE_TECH_SWING,
+    ROGUE_TECH_RAID,
+    ROGUE_TECH_WAVE,
+    ROGUE_TECH_PILLAR,
+    ROGUE_TECH_COUNTER,
+    ROGUE_TECH_CIRCLE,
+    ROGUE_TECH_PEARLS,
+    ROGUE_TECH_QUAKE,
+    ROGUE_TECH_DASH,
+    ROGUE_TECH_SLIDE,
+    ROGUE_TECH_FIRST_RELIC, // from here on they come with a relic
+    ROGUE_2D_TECHS = ROGUE_TECH_FIRST_RELIC + 10
+};
+
 typedef struct RogueRun {
     u32 seed;
     u32 rng;
@@ -677,6 +696,7 @@ typedef struct RogueRun {
     u8 moveEchoTimer;
     u8 thorns; // Sora was hurt: the thorns relic answers on the next frame
     u8 pose; // frames Sora still holds the pose of a move
+    u8 techs[ROGUE_2D_SLOTS]; // the technique set on each place of the flat battle, plus one; 0 for the place's own
     u8 tagTimer; // frames a tag character still stands in for Sora
     u8 arts[ROGUE_ART_KINDS]; // sleight bound to each card kind, 0 for none
     u8 cardMod[ROGUE_CARD_SLOTS]; // the RogueCardMod each collection slot's card is enchanted with
@@ -700,7 +720,8 @@ enum RogueDebugCommand {
     ROGUE_DEBUG_TAG, // arg: card kind whose tag character comes in
     ROGUE_DEBUG_ENEMY_TAG, // arg: enemy card id, counted from the first, whose enemy comes in
     ROGUE_DEBUG_MOVE, // arg: effect move Sora does
-    ROGUE_DEBUG_CARD // arg: one of the mod's card kinds, counted from the first, played alone
+    ROGUE_DEBUG_CARD, // arg: one of the mod's card kinds, counted from the first, played alone
+    ROGUE_DEBUG_TECH // arg: a move of the flat battle, as if a Keyblade 5 were played: 128 for B, 64 in the air, and the direction (0 none, 1 forward, 2 Up, 3 Down)
 };
 
 typedef struct RogueDebug {
@@ -740,6 +761,11 @@ typedef struct RogueDebug {
     u8 bossClip; // the last of them
     u8 bossForce; // set from outside: the move such a boss makes next, plus one
     u16 heroMoves; // things a hero other than Sora has done that Sora does not
+    u16 techs; // moves of the flat battle made
+    u16 counters; // hits its counter has turned away
+    u8 tech; // the last technique made with B
+    u8 techForce; // set from outside: the action every card played does
+    s16 techAction; // what the last move asked for by a test came to
     u16 keybladeEffects; // swings of the mod's keyblades that landed
     u16 afterHits; // burns, freezes and shocks dealt
     u16 pulled; // enemy steps towards a magnet
@@ -821,6 +847,24 @@ void RogueDirectDamage(struct BtlObj* target, s16 amount);
 struct MsgFaceAnim;
 #define ROGUE_FACE_FIRST 64 // the portraits of the characters drawn from sheets, after the game's 62
 const struct MsgFaceAnim* RogueFaceAnims(s32 portrait);
+u8 Rogue2d(void);
+void Rogue2dReset(void);
+void Rogue2dDebug(u8 arg);
+u8 Rogue2dTechAt(u8 slot);
+u8 Rogue2dTechOwned(u8 tech);
+u8 Rogue2dRelicBound(u8 relic);
+void Rogue2dSetTech(u8 slot, u8 tech);
+u16 Rogue2dMoveKeys(u16* held, u16 pressed);
+u16 Rogue2dCardKeys(u16 pressed);
+s32 Rogue2dScale(s32 damage);
+struct CardDef;
+s32 Rogue2dAction(const struct CardDef* def);
+u8 Rogue2dCounterHit(struct BtlObj* sora);
+u8 Rogue2dLaunching(void);
+void Rogue2dTick(void);
+const u8* Rogue2dTechName(u8 tech);
+const u8* Rogue2dSlotName(u8 slot);
+void RogueShockwaveSmall(struct BtlObj* sora, u16 scale);
 u8 RogueActorIs(void);
 const struct AnimDef* RogueActorAnim(u16 slot);
 const struct HumDef* RogueActorDef(void);

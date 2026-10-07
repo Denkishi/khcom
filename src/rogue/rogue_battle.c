@@ -64,6 +64,9 @@ void RogueDebugBattle(void) {
     case ROGUE_DEBUG_CARD:
         RogueCardAction(&gCardDefs[CARD_ID(ROGUE_FIRST_CARD_KIND + gRogueDebug.arg, 5)]);
         break;
+    case ROGUE_DEBUG_TECH:
+        Rogue2dDebug(gRogueDebug.arg);
+        break;
     case ROGUE_DEBUG_ENEMY_TAG:
         RogueOnEnemyCard(&gCardDefs[450 + gRogueDebug.arg]);
         break;
@@ -117,6 +120,10 @@ void RogueOnDamage(BtlObj* p) {
 
     if (p == sora) {
         if (gRogueDebug.god || RogueGadgetShielded()) {
+            p->unk_020 = 0;
+        }
+
+        if (p->unk_020 > 0 && Rogue2dCounterHit(sora)) {
             p->unk_020 = 0;
         }
 
@@ -253,6 +260,11 @@ void RogueOnKnockback(BtlObj* target) {
 
     if (gRogue.finisher && target->unk_0AC < ROGUE_LAUNCH) {
         target->unk_0AC = ROGUE_LAUNCH;
+    }
+
+    // The cut that rises takes the enemy up with Sora, higher than a finisher does.
+    if (Rogue2dLaunching() && target->unk_0AC < ROGUE_LAUNCH * 3 / 2) {
+        target->unk_0AC = ROGUE_LAUNCH * 3 / 2;
     }
 }
 
@@ -534,16 +546,17 @@ void RogueOnFinisher(BtlObj* sora) {
 
     RogueGadgetFire(GADGET_ON_FINISHER, gBtlWork->actor2);
 
-    if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR)) {
+    // In the flat battle a relic set on a button waits for the button.
+    if (RogueHasRelic(ROGUE_RELIC_ICE_PILLAR) && !Rogue2dRelicBound(ROGUE_RELIC_ICE_PILLAR)) {
         RogueRaisePillar(sora);
     }
 
-    if (RogueHasRelic(ROGUE_RELIC_KNIVES)) {
+    if (RogueHasRelic(ROGUE_RELIC_KNIVES) && !Rogue2dRelicBound(ROGUE_RELIC_KNIVES)) {
         RogueThrowKnives(sora);
     }
 
     for (move = 0; move < ROGUE_MOVES; move++) {
-        if (RogueHasRelic(ROGUE_RELIC_CHAKRAM + move)) {
+        if (RogueHasRelic(ROGUE_RELIC_CHAKRAM + move) && !Rogue2dRelicBound(ROGUE_RELIC_CHAKRAM + move)) {
             RogueDoMove(move, sora);
         }
     }

@@ -201,6 +201,7 @@ static s32 RogueMoveHit(RogueMoveWork* w) {
     }
 
     damage += damage * RogueUpgradeLevel(ROGUE_UPGRADE_MOVES) * 15 / 100;
+    damage = Rogue2dScale(damage);
 
     if (RogueHasRelic(ROGUE_RELIC_MOD_GIANT)) {
         damage += damage / 2;
@@ -257,7 +258,11 @@ static s32 RogueMove_Update(RogueMoveWork* w) {
         return 0;
     }
 
-    if (w->args.mode == ROGUE_MOVE_ORBIT) {
+    if (w->args.mode == ROGUE_MOVE_CIRCLE && ++w->timer > 240) {
+        return 0;
+    }
+
+    if (w->args.mode == ROGUE_MOVE_ORBIT || w->args.mode == ROGUE_MOVE_CIRCLE) {
         // Round Sora for as long as the battle lasts; what it touches is hit,
         // and then left alone for a moment.
         BtlObj* sora = gBtlWork->actor;
@@ -501,6 +506,7 @@ void RogueMovesTick(void) {
     RogueStyleTick();
     RogueGadgetTick();
     RogueHeroTick();
+    Rogue2dTick();
 
     if (gRogue.moveEchoTimer != 0 && --gRogue.moveEchoTimer == 0 && gRogue.moveEcho != 0) {
         RogueMoveCast(gRogue.moveEcho - 1, gBtlWork->actor, 1);
@@ -540,6 +546,26 @@ void RogueShockwave(BtlObj* sora, u8 element, u16 scale) {
     gRogue.echoing = 1;
 
     if (func_08011F78(attacks[element], sora->x, sora->y, sora->z, 120, 60, 80)) {
+        gRogueDebug.moveHits++;
+    }
+
+    gRogue.echoing = 0;
+    gRogue.projectile = 0;
+    gBtlWork->unk_124 = old;
+    gBtlWork->flags = (gBtlWork->flags & ~0x20000000ULL) | (flags & 0x20000000);
+}
+
+// A small blast around Sora, with nothing drawn: one hit of a move that hits all round him.
+void RogueShockwaveSmall(BtlObj* sora, u16 scale) {
+    u64 flags = gBtlWork->flags;
+    s32 old = gBtlWork->unk_124;
+
+    gBtlWork->flags |= 0x20000000;
+    gBtlWork->unk_124 = scale;
+    gRogue.projectile = 1;
+    gRogue.echoing = 1;
+
+    if (func_08011F78(14, sora->x, sora->y, sora->z - 0x1000, 34, 20, 36)) {
         gRogueDebug.moveHits++;
     }
 

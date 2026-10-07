@@ -1222,7 +1222,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         pressed = GetKeysPressed();
     }
 
-    pressed = RogueBufferJump(pressed);
+    pressed = RogueBufferJump(Rogue2dMoveKeys(&held, pressed));
     f = gBtlWork->flags;
 
     if (f & 0x800000000LL) {

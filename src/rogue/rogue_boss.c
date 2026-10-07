@@ -92,6 +92,7 @@ void RogueBossAiReset(void) {
     sAiMoved = 0;
     RogueActorReset();
     RogueHeroReset();
+    Rogue2dReset();
 }
 
 u8 RogueBossAiMoves(void) {

@@ -48,3 +48,7 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `gadgets_more.txt` | a fusion of two gadgets, and the ones set off by turning the hand and by standing still |
 | `options.txt` | the options page: swapping the way L and R turn the hand |
 | `roxas_hero.txt` | Roxas played from the sheet in the game's own style: hub, room and battle |
+| `sephiroth_boss.txt` | Sephiroth, a boss drawn from his own sheet with moves of his own |
+| `sheet_bosses.txt` | the other bosses made the same way: Sora of his second journey and Roxas three times over |
+| `hero_movesets.txt` | what each hero does that Sora does not: pearls, the thrown Keyblade, pillars and the double hit |
+| `hub_drawn.txt` | the characters drawn from standing sprites, on the far side of the hub, and the boon of one |

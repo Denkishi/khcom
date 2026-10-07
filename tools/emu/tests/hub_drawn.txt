@@ -1,0 +1,28 @@
+# The characters drawn from sheets of standing sprites: Kairi, Naminé, Aqua,
+# Terra, Ventus, Vanitas. They come as the game is played and stand on the
+# far side of the hub, which Sora reaches by walking off the right edge.
+# He goes there, takes Aqua's boon and starts a run.
+# Expect: the first picture shows the near side with ">>" at the right edge;
+# the second the six of them; the third Aqua's words; boon reads 10 (hex a).
+wait 600
+poke8 @gRogueMeta.boonsMet 254
+poke8 @gRogueMeta.wins 3
+poke8 @gRogueMeta.chapters 3
+press START
+wait 120
+shot /tmp/hub_drawn_1.ppm
+hold RIGHT 80
+wait 10
+shot /tmp/hub_drawn_2.ppm
+hold RIGHT 76
+hold UP 12
+press A
+wait 60
+shot /tmp/hub_drawn_3.ppm
+press A
+wait 30
+press A
+wait 30
+peek8 @gRogueMeta.boon boon
+shot /tmp/hub_drawn_4.ppm
+peek32 @gFrameCounter frames

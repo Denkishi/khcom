@@ -300,7 +300,7 @@ void RogueApplyUpgrades(void) {
 // The event each boon's character is met in, by boon.
 static const u8 sBoonEvents[ROGUE_BOONS] = {
     0xFF, ROGUE_EVENT_BELLE, ROGUE_EVENT_MOOGLE, ROGUE_EVENT_LEON, ROGUE_EVENT_YUFFIE, ROGUE_EVENT_HERCULES,
-    ROGUE_EVENT_TIGGER, ROGUE_EVENT_JACK,
+    ROGUE_EVENT_TIGGER, ROGUE_EVENT_JACK, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 };
 
 u8 RogueBoonUnlocked(u8 boon) {
@@ -308,11 +308,31 @@ u8 RogueBoonUnlocked(u8 boon) {
         return 1;
     }
 
+    // Those met in no run come as the game is played.
+    switch (boon) {
+    case ROGUE_BOON_KAIRI:
+        return gRogueMeta.wins >= 1;
+    case ROGUE_BOON_NAMINE:
+    case ROGUE_BOON_VENTUS:
+        return gRogueMeta.chapters >= 2;
+    case ROGUE_BOON_AQUA:
+        return gRogueMeta.wins >= 2;
+    case ROGUE_BOON_TERRA:
+        return gRogueMeta.chapters >= 3;
+    case ROGUE_BOON_VANITAS:
+        return gRogueMeta.wins >= 3;
+    }
+
     return (gRogueMeta.boonsMet >> boon) & 1;
 }
 
 // 2 once a run has been completed with the boon, 1 before.
 u8 RogueBoonLevel(u8 boon) {
+    // The later ones have one level only.
+    if (boon >= ROGUE_BOON_KAIRI) {
+        return 1;
+    }
+
     return ((gRogueMeta.boonsWon >> boon) & 1) + 1;
 }
 
@@ -374,6 +394,32 @@ void RogueApplyBoon(void) {
     case ROGUE_BOON_TIGGER:
         // One air jump, or both.
         gRogue.airJumps = strong ? ROGUE_AIR_JUMPS_MAX : 1;
+        break;
+    case ROGUE_BOON_KAIRI:
+        gGameState.progression.maxHp += 20;
+        gGameState.hp += 20;
+        gRogue.rerolls++;
+        break;
+    case ROGUE_BOON_NAMINE:
+        gGameState.progression.cp += 30;
+        break;
+    case ROGUE_BOON_AQUA:
+        RogueGiveRelic(ROGUE_RELIC_SECOND_WIND);
+        break;
+    case ROGUE_BOON_TERRA:
+        gGameState.progression.ap++;
+        RogueGiveRelic(ROGUE_RELIC_CRITICAL);
+        break;
+    case ROGUE_BOON_VENTUS:
+        if (gRogue.airJumps < 1) {
+            gRogue.airJumps = 1;
+        }
+
+        RogueGiveRelic(ROGUE_RELIC_AIR_MASTER);
+        break;
+    case ROGUE_BOON_VANITAS:
+        gGameState.progression.ap += 3;
+        RogueGiveRelic(ROGUE_RELIC_GLASS_CANNON);
         break;
     case ROGUE_BOON_JACK:
         // One random relic, or two.

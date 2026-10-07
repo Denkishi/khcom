@@ -19,6 +19,8 @@
 #include "system_state.h"
 #include "taskpool.h"
 #include "text.h"
+#include "rogue_npc_art.h"
+#include "msg_portrait_data.h"
 
 // The hub: the Station of Calling, where every run starts from. Sora walks
 // on the stained glass, seen from above at its own size. Axel sells the permanent upgrades, and the others who
@@ -63,10 +65,15 @@ typedef struct RogueHubNpc {
     s16 x;
     s16 y;
     u8 boon; // the boon they offer, ROGUE_BOON_NONE for Axel
+    u8 side; // which side of the station they stand on: the screen has not the palettes for them all at once
 } RogueHubNpc;
 
 #define NPC(name, palette, x, y, boon) \
-    { g##name##Fl00Tiles, sizeof(g##name##Fl00Tiles), palette, g##name##Fl00Anims, g##name##Fl00Frames, x, y, boon }
+    { g##name##Fl00Tiles, sizeof(g##name##Fl00Tiles), palette, g##name##Fl00Anims, g##name##Fl00Frames, x, y, boon, 0 }
+
+#define DRAWN(name, x, y, boon) \
+    { (void*)gRogueNpc##name##Tiles, sizeof(gRogueNpc##name##Tiles), (void*)gRogueNpc##name##Palette, (void*)gRogueNpc##name##Anims, \
+      (void*)gRogueNpc##name##Frames, x, y, boon, 1 }
 
 // They stand around the edge, leaving the middle to walk in.
 static const RogueHubNpc sNpcs[] = {
@@ -78,6 +85,14 @@ static const RogueHubNpc sNpcs[] = {
     NPC(Heracles, gHeraclesPalette, 62, 122, ROGUE_BOON_HERCULES),
     NPC(Tigger, gTiggerPalette, 178, 122, ROGUE_BOON_TIGGER),
     NPC(Jack, gJackPalette, 120, 124, ROGUE_BOON_JACK),
+    // Those drawn from sheets of standing sprites, see tools/rogue_npcs.py: they have the one pose.
+    // They stand on the far side, which Sora reaches by walking off the right edge.
+    DRAWN(Kairi, 64, 66, ROGUE_BOON_KAIRI),
+    DRAWN(Namine, 102, 56, ROGUE_BOON_NAMINE),
+    DRAWN(Aqua, 142, 56, ROGUE_BOON_AQUA),
+    DRAWN(Terra, 186, 66, ROGUE_BOON_TERRA),
+    DRAWN(Ventus, 84, 126, ROGUE_BOON_VENTUS),
+    DRAWN(Vanitas, 160, 126, ROGUE_BOON_VANITAS),
 };
 
 #define HUB_NPCS (sizeof(sNpcs) / sizeof(sNpcs[0]))
@@ -113,6 +128,10 @@ typedef struct RogueHubWork {
     u8 state;
     u8 next; // what the hub leads to once it has faded out
     u8 talking;
+    u8 side; // which side of the station is shown
+    u8 sides; // 2 once somebody stands on the far side
+    TextSlot arrow[4];
+    u8 arrowCount;
 } RogueHubWork;
 
 enum {
@@ -121,6 +140,8 @@ enum {
 };
 
 static RogueHubWork* sWork;
+
+static void RogueHubLoadSide(void);
 
 static const u8 sHint[] = "START: parti";
 static const u8 sBoon[] = "Dono: ";
@@ -140,8 +161,15 @@ static const u8 sBoonYuffie[] = "magie";
 static const u8 sBoonHercules[] = "Forza +2";
 static const u8 sBoonTigger[] = "salto";
 static const u8 sBoonJack[] = "reliquia";
+static const u8 sBoonKairi[] = "PV e rilancio";
+static const u8 sBoonNamine[] = "PC +30";
+static const u8 sBoonAqua[] = "barriera";
+static const u8 sBoonTerra[] = "critici";
+static const u8 sBoonVentus[] = "aria";
+static const u8 sBoonVanitas[] = "vetro";
 static const u8* const sBoonNames[ROGUE_BOONS] = {
     sBoonNone, sBoonBelle, sBoonMoogle, sBoonLeon, sBoonYuffie, sBoonHercules, sBoonTigger, sBoonJack,
+    sBoonKairi, sBoonNamine, sBoonAqua, sBoonTerra, sBoonVentus, sBoonVanitas,
 };
 
 static void RogueHubShowBoon(void) {
@@ -169,7 +197,8 @@ static void RogueHubShowBoon(void) {
     // The oblivion level, once there is one to pick with L and R, and the
     // hero, once there is another: a plate each.
     FreeTextSlots(sWork->level, 14);
-    FreeTextSlots(sWork->hero, 14);
+    FreeTextSlots(sWork->arrow, 4);
+    FreeTextSlots(sWork->hero, 26);
     sWork->levelCount = 0;
     sWork->heroCount = 0;
 
@@ -229,7 +258,7 @@ static void RogueHub_Init(s32 arg) {
     InitTextSlots(sWork->line, LINE_SLOTS);
     InitTextSlots(sWork->hint, LINE_SLOTS);
     InitTextSlots(sWork->level, 14);
-    InitTextSlots(sWork->hero, 14);
+    InitTextSlots(sWork->hero, 26);
     sWork->levelCount = 0;
     sWork->heroCount = 0;
     RogueUiInit(&sWork->ui);
@@ -241,19 +270,50 @@ static void RogueHub_Init(s32 arg) {
     AnimInit(&sWork->soraAnim, 0, 0);
     RogueHubSoraAnim(ACTION_STAND, DIR_FRONT);
 
-    for (i = 0; i < HUB_NPCS; i++) {
-        sWork->present[i] = RogueBoonUnlocked(sNpcs[i].boon);
+    sWork->side = 0;
+    sWork->sides = 1;
 
+    for (i = 0; i < HUB_NPCS; i++) {
+        sWork->present[i] = 0;
+
+        if (sNpcs[i].side != 0 && RogueBoonUnlocked(sNpcs[i].boon)) {
+            sWork->sides = 2;
+        }
+    }
+
+    InitTextSlots(sWork->arrow, 4);
+    RogueHubLoadSide();
+
+    m4aSongNumStartOrContinue(SONG_BGM_TITLE);
+    FadeStartIn(0, 16);
+}
+
+static const u8 sArrow[] = ">>";
+static const u8 sArrowBack[] = "<<";
+
+// Puts on the screen those who stand on the side shown, in place of the others.
+static void RogueHubLoadSide(void) {
+    u32 i;
+
+    sWork->arrowCount = LoadTextSlots((u16*)(sWork->side ? sArrowBack : sArrow), sWork->arrow);
+
+    for (i = 0; i < HUB_NPCS; i++) {
         if (sWork->present[i]) {
+            ReleaseObjTiles(sWork->npcTiles[i]);
+            ReleaseObjPalette(sWork->npcPalettes[i]);
+            sWork->present[i] = 0;
+        }
+    }
+
+    for (i = 0; i < HUB_NPCS; i++) {
+        if (sNpcs[i].side == sWork->side && RogueBoonUnlocked(sNpcs[i].boon)) {
+            sWork->present[i] = 1;
             sWork->npcTiles[i] = AllocObjTiles(sNpcs[i].tilesSize, sNpcs[i].tiles);
             sWork->npcPalettes[i] = LoadObjPalette(sNpcs[i].palette, 32);
             AnimInit(&sWork->npcAnims[i], sNpcs[i].anims, sNpcs[i].frames);
             AnimStart(&sWork->npcAnims[i], 0, 1);
         }
     }
-
-    m4aSongNumStartOrContinue(SONG_BGM_TITLE);
-    FadeStartIn(0, 16);
 }
 
 // The character Sora stands next to, HUB_NPCS if none.
@@ -323,6 +383,12 @@ static void RogueHubWalk(void) {
 
     if (x >= WALK_LEFT && x <= WALK_RIGHT) {
         sWork->x += dx;
+    } else if (sWork->sides == 2 && ((x > WALK_RIGHT && sWork->side == 0) || (x < WALK_LEFT && sWork->side == 1))) {
+        // Off the edge: he comes onto the other side of the station from where he left this one.
+        sWork->side ^= 1;
+        sWork->x = (sWork->side ? WALK_LEFT + 2 : WALK_RIGHT - 2) << 8;
+        m4aSongNumStart(SONG_SYS_CLICK);
+        RogueHubLoadSide();
     }
 
     if (y >= WALK_TOP && y <= WALK_BOTTOM) {
@@ -418,6 +484,11 @@ static void RogueHub_Update(void) {
         }
     }
 
+    // Which edge leads to the other side.
+    if (sWork->sides == 2 && sWork->talking == 0) {
+        DrawTextSlots(sWork->side ? 4 : 220, 84, sWork->arrow, sWork->textPalette, 50, sWork->arrowCount);
+    }
+
     attr = 0x800;
 
     if (sWork->mirrored) {
@@ -452,7 +523,7 @@ static void RogueHub_Exit(void) {
     FreeTextSlots(sWork->line, LINE_SLOTS);
     FreeTextSlots(sWork->hint, LINE_SLOTS);
     FreeTextSlots(sWork->level, 14);
-    FreeTextSlots(sWork->hero, 14);
+    FreeTextSlots(sWork->hero, 26);
     RogueUiExit(&sWork->ui);
     ReleaseObjPalette(sWork->textPalette);
     ReleaseObjPalette(sWork->hintPalette);
@@ -475,3 +546,12 @@ Mode gModeRogueHub = {
     RogueHub_Update,
     RogueHub_Exit,
 };
+
+// The faces shown in a message: the game's, or those of the characters the mod draws.
+const MsgFaceAnim* RogueFaceAnims(s32 portrait) {
+    if (portrait >= ROGUE_FACE_FIRST) {
+        return &gRogueNpcFaces[portrait - ROGUE_FACE_FIRST];
+    }
+
+    return gMsgFaceAnims[portrait];
+}

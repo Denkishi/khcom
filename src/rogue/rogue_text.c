@@ -79,6 +79,12 @@ ROGUE_TEXT(sBoonYuffie, "Roba da ninja! Il tuo\x1Fmazzo sar\xE0 pieno di\x1F\x1D
 ROGUE_TEXT(sBoonHercules, "Ti ho preparato a dovere.\x1FPartirai con \x1D" "Forza +2\x1E.");
 ROGUE_TEXT(sBoonTigger, "Uh-uh-uh! Stavolta salti\x1F" "con me: parti col \x1Dsalto\x1F" "in aria\x1E!");
 ROGUE_TEXT(sBoonJack, "Un regalo spaventoso!\x1FPartirai con una\x1F\x1Dreliquia\x1E a sorpresa.");
+ROGUE_TEXT(sBoonKairi, "Kairi: Torna da me, Sora.\x1FPartirai con \x1D" "20 PV\x1E in pi\xF9\x1F" "e un \x1Drilancio\x1E.");
+ROGUE_TEXT(sBoonNamine, "Namin\xE9: Riordino i tuoi\x1Fricordi. Avrai \x1D" "30 PC\x1E in\x1Fpi\xF9 per il mazzo.");
+ROGUE_TEXT(sBoonAqua, "Aqua: La mia barriera ti\x1Fsalver\xE0 una volta da\x1Fun \x1D" "colpo fatale\x1E.");
+ROGUE_TEXT(sBoonTerra, "Terra: La forza \xE8 tutto.\x1F\x1D" "Forza +1\x1E e \x1D" "colpi critici\x1E.");
+ROGUE_TEXT(sBoonVentus, "Ventus: Pi\xF9 veloce del\x1Fvento! Un \x1Dsalto in aria\x1E\x1F" "e pi\xF9 danno lass\xF9.");
+ROGUE_TEXT(sBoonVanitas, "Vanitas: Prendi l'oscurit\xE0.\x1F\x1D" "Forza +3\x1E, ma ogni colpo\x1Fti far\xE0 pi\xF9 male.");
 
 #define AXEL_PORTRAIT 20
 #define EVENT_PAGES(portrait, a, b) { portrait, 3, 0, 3, 0, &a, 0, 0 }, { portrait, 3, 0, 3, 0, &b, 0, 0 }
@@ -133,6 +139,13 @@ static const CardMessageDef sMessages[ROGUE_MSG_COUNT] = {
     { 46, 3, 0, 3, 0, &sBoonHercules, 0, 0 },
     { 59, 3, 0, 3, 0, &sBoonTigger, 0, 0 },
     { 11, 3, 0, 3, 0, &sBoonJack, 0, 0 },
+    // Their faces are the mod's, in the order tools/rogue_npcs.py has them.
+    { ROGUE_FACE_FIRST + 4, 3, 0, 3, 0, &sBoonKairi, 0, 0 },
+    { ROGUE_FACE_FIRST + 5, 3, 0, 3, 0, &sBoonNamine, 0, 0 },
+    { ROGUE_FACE_FIRST + 0, 3, 0, 3, 0, &sBoonAqua, 0, 0 },
+    { ROGUE_FACE_FIRST + 1, 3, 0, 3, 0, &sBoonTerra, 0, 0 },
+    { ROGUE_FACE_FIRST + 2, 3, 0, 3, 0, &sBoonVentus, 0, 0 },
+    { ROGUE_FACE_FIRST + 3, 3, 0, 3, 0, &sBoonVanitas, 0, 0 },
 };
 
 const CardMessageDef* RogueCardMessageDef(u16 id) {

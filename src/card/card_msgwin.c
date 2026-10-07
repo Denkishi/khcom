@@ -149,7 +149,7 @@ u8 func_080A3558(CardMsgWinWork* w, void* a) {
     if (w->unk_140 != 0) {
         w->unk_140--;
     } else {
-        tbl = gMsgFaceAnims[w->messageDef->portraitId];
+        tbl = RogueFaceAnims(w->messageDef->portraitId);
 
         if (tbl[w->messageDef->expressionId].unk_10 > 1) {
             AnimStart(&w->anim, 1, tbl[w->messageDef->expressionId].unk_11);
@@ -213,7 +213,7 @@ u8 func_080A3754(CardMsgWinWork* w, void* a) {
     sel = w->messageDef;
 
     if (sel->portraitId != 62) {
-        e = gMsgFaceAnims[sel->portraitId];
+        e = RogueFaceAnims(sel->portraitId);
         w->tiles3 = AllocObjTiles(0xD80, 0);
         w->palette = LoadObjPalette(e[w->messageDef->expressionId].palette, 32);
         SetObjTileSource(w->tiles3, e[w->messageDef->expressionId].tiles);
@@ -327,7 +327,7 @@ u8 func_080A3A98(CardMsgWinWork* w, void* a) {
             w->unk_141 = w->unk_143;
             m4aSongNumStart(SONG_SYS_MESSAGE);
         } else {
-            e = gMsgFaceAnims[sel->portraitId];
+            e = RogueFaceAnims(sel->portraitId);
             AnimStart(&w->anim, 0, e[sel->expressionId].unk_11);
 
             if (w->tiles4 == 0) {
@@ -368,7 +368,7 @@ u8 func_080A3BB0(CardMsgWinWork* w, void* a) {
 #endif
             w->unk_142 = 0;
             w->unk_141 = 0;
-            e = gMsgFaceAnims[w->messageDef->portraitId];
+            e = RogueFaceAnims(w->messageDef->portraitId);
             if (e[w->messageDef->expressionId].unk_10 > 1) {
                 AnimStart(&w->anim, 1, e[w->messageDef->expressionId].unk_11);
             }
@@ -484,7 +484,7 @@ u8 func_080A3F5C(CardMsgWinWork* w, void* a) {
             w->unk_141++;
             m4aSongNumStart(SONG_SYS_MESSAGE);
         } else {
-            e = gMsgFaceAnims[w->messageDef->portraitId];
+            e = RogueFaceAnims(w->messageDef->portraitId);
             AnimStart(&w->anim, 0, e[w->messageDef->expressionId].unk_11);
             SetTaskUpdate(a, (TaskUpdateFunc)func_080A4010);
         }

@@ -143,6 +143,13 @@ enum RogueBoon {
     ROGUE_BOON_HERCULES, // strength +2
     ROGUE_BOON_TIGGER, // an air jump
     ROGUE_BOON_JACK, // a random relic
+    // Those who come to the hub as the game is played, not met in a run.
+    ROGUE_BOON_KAIRI, // 20 more max HP and a reward reroll
+    ROGUE_BOON_NAMINE, // 30 more CP: a bigger deck
+    ROGUE_BOON_AQUA, // the relic that lets Sora survive a blow once
+    ROGUE_BOON_TERRA, // strength +1 and the relic of critical hits
+    ROGUE_BOON_VENTUS, // an air jump and the relic of hits in the air
+    ROGUE_BOON_VANITAS, // strength +3 and the cursed glass cannon
     ROGUE_BOONS
 };
 #define ROGUE_BOSS_MOVE_LARXENE 1
@@ -811,6 +818,9 @@ void RogueHeroOnSwing(struct BtlObj* sora, u8 finisher);
 void RogueHeroTick(void);
 void RogueHeroReset(void);
 void RogueDirectDamage(struct BtlObj* target, s16 amount);
+struct MsgFaceAnim;
+#define ROGUE_FACE_FIRST 64 // the portraits of the characters drawn from sheets, after the game's 62
+const struct MsgFaceAnim* RogueFaceAnims(s32 portrait);
 u8 RogueActorIs(void);
 const struct AnimDef* RogueActorAnim(u16 slot);
 const struct HumDef* RogueActorDef(void);

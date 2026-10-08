@@ -1,0 +1,18 @@
+# The deck a run starts with grows with what the player has done. A new save
+# draws from a few plain cards numbered 1 to 4; with three chapters open and
+# three runs won the pool is wide, and the collection gets a spread of spare
+# cards to make the deck over with from the pause menu.
+# Expect, for the new save: stage 0, high 4 or less, spare 0. Poke chapters
+# and wins to 3 before the first START for the other: stage 3, high 6 or
+# less, spare above 20.
+wait 600
+press START
+wait 120
+press START
+wait 200
+hold B 100
+wait 20
+peek8 @gRogueDebug.startStage stage
+peek8 @gRogueDebug.startHigh high
+peek8 @gRogueDebug.startSpare spare
+peek32 @gFrameCounter frames

@@ -777,6 +777,9 @@ typedef struct RogueDebug {
     u16 techs; // moves of the flat battle made
     u16 flatPrizes; // frames a prize was kept on the flat battle's line
     u8 mapDrops; // room cards dropped by battles
+    u8 startStage; // how far the pool of starting cards had opened when the deck was built
+    u8 startSpare; // cards given to the collection to make the deck over with
+    u8 startHigh; // the highest number among the cards of the starting deck
     u8 caption; // set from outside: the hub shows only this line of the trailer's text, counted from 1
     u8 strike; // set from outside: the next door looked at is struck, as if by Sora's Keyblade
     u8 fieldAims; // swings in a room turned to the enemy
@@ -901,6 +904,7 @@ u8 RogueFieldAim(u8 angle);
 extern struct TaskDesc gTaskDescRogueRing;
 #define ROGUE_FIELD_REACH 0x1C00 // how far round its point a swing in a room hits; the game's was 0x1400
 void Rogue2dPrize(s32* y, s32* vy);
+u8 RogueStartStage(void);
 u8 Rogue2d(void);
 void Rogue2dReset(void);
 void Rogue2dDebug(u8 arg);

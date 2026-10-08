@@ -48,6 +48,11 @@ static u8 RogueAddCard(u16 id, u16 costLimit) {
     AddCardToActiveDeck(slot);
     sDeckCp += cost;
     sDeckCards++;
+
+    if (gCardDefs[id].unk_2A != 3 && gCardDefs[id].unk_20 > gRogueDebug.startHigh) {
+        gRogueDebug.startHigh = gCardDefs[id].unk_20;
+    }
+
     return 1;
 }
 
@@ -140,6 +145,71 @@ static u16 RogueRollCard(u8 pool) {
     }
 }
 
+// The starting deck grows with what the player has done. A new save starts
+// from a small pool of plain cards; clearing chapters widens it; and from the
+// middle of the game the deck can be made over at will, see RogueStartStage.
+
+// How far the pool of starting cards has opened, 0 to 3.
+u8 RogueStartStage(void) {
+    u8 stage = gRogueMeta.chapters > 2 ? 2 : gRogueMeta.chapters > 1 ? 1 : 0;
+
+    if (stage == 0 && gRogueMeta.wins >= 1) {
+        stage = 1;
+    }
+
+    if (gRogueMeta.chapters >= 3 && gRogueMeta.wins >= 3) {
+        stage = 3;
+    }
+
+    return stage;
+}
+
+// Whether a card may be in the deck a run starts with.
+static u8 RogueStartAllows(u16 id) {
+    u8 stage = RogueStartStage();
+    u16 kind = id / 10;
+    u8 value = gCardDefs[id].unk_20;
+
+    if (stage == 0) {
+        // The three first Keyblades, Fire, Blizzard, Cure and Potion, from 1 to 4.
+        if (value < 1 || value > 4) {
+            return 0;
+        }
+
+        return kind <= CARD_CRABCLAW || kind == CARD_FIRE || kind == CARD_BLIZZARD || kind == CARD_CURE || kind == CARD_POTION;
+    }
+
+    // No enemy cards and none of the mod's own until the third stage, and
+    // nothing above 5, then 6.
+    if (stage == 1) {
+        return gCardDefs[id].unk_2A != 3 && kind < ROGUE_FIRST_CARD_KIND && value <= 5 && RogueCardTier(id) <= 1;
+    }
+
+    return (gCardDefs[id].unk_2A == 3 || value <= 6) && RogueCardTier(id) <= 2;
+}
+
+// From the last stage on the deck is the player's to make: the collection
+// starts with a spread of the cards of the pool, one of each kind at a low
+// and at a middling number, to swap in from the pause menu's deck screen.
+static void RogueStartCollection(void) {
+    static const u8 values[2] = { 3, 6 };
+    u16 kind;
+    u8 i;
+    u8 given = 0;
+
+    for (kind = CARD_KINGDOM_KEY; kind <= CARD_MEGALIXIR && given < 64; kind++) {
+        for (i = 0; i < 2 && given < 64; i++) {
+            u16 id = CARD_ID(kind, values[i]);
+
+            if (GetCardCpCost(id) != 0 && !(gCardDefs[id].flags & 8) && RogueStartAllows(id) && AddCardToCollection(id) != -1) {
+                given++;
+            }
+        }
+    }
+
+    gRogueDebug.startSpare = given;
+}
+
 // Rolls cards of the pool until one is unlocked at this point of the run, so
 // that the pools keep their share whatever is locked. Returns 0 if none came up.
 static u16 RogueRollUnlockedCard(u8 pool) {
@@ -149,7 +219,8 @@ static u16 RogueRollUnlockedCard(u8 pool) {
     for (tries = 0; tries < 24; tries++) {
         id = RogueRollCard(pool);
 
-        if (id != 0 && GetCardCpCost(id) != 0 && !(gCardDefs[id].flags & 8) && RogueCardUnlocked(id)) {
+        if (id != 0 && GetCardCpCost(id) != 0 && !(gCardDefs[id].flags & 8) && RogueCardUnlocked(id) &&
+            (!gRogue.deckWanted || RogueStartAllows(id))) {
             return id;
         }
     }
@@ -192,8 +263,12 @@ void RogueBuildStartDeck(void) {
         }
     }
 
+    gRogueDebug.startStage = RogueStartStage();
+    gRogueDebug.startHigh = 0;
+    gRogueDebug.startSpare = 0;
+
     // A cure and a zero come first, so the budget cannot run out before them.
-    RogueAddCard(CARD_ID(CARD_CURE, 3 + RogueRandBelow(3)), budget);
+    RogueAddCard(CARD_ID(CARD_CURE, 3 + RogueRandBelow(RogueStartStage() == 0 ? 2 : 3)), budget);
     RogueAddCard(CARD_ID(CARD_KINGDOM_KEY + RogueRandBelow(3), 0), budget);
 
     // No card costs less than 10 CP, so stop once that little is left.
@@ -215,6 +290,10 @@ void RogueBuildStartDeck(void) {
         if (RogueAddCard(id, sDeckCards < DECK_TARGET ? budget / 10 : budget) && pool == POOL_ENEMY) {
             sDeckEnemyCards++;
         }
+    }
+
+    if (RogueStartStage() == 3) {
+        RogueStartCollection();
     }
 
     gRogue.deckWanted = 0;

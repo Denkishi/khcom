@@ -58,3 +58,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `room_cards.txt` | a door opened with one of the game's map cards on its own screen, and the room that card makes |
 | `room_target.txt` | the ring on the nearest enemy of a room before the battle |
 | `flat_prizes.txt` | the prizes of a beaten enemy kept on the flat battle's line |
+| `start_pools.txt` | the pool of cards a run's deck starts from, by how far the game has been played |

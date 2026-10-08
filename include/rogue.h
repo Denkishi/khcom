@@ -923,6 +923,7 @@ void Rogue2dTick(void);
 const u8* Rogue2dTechName(u8 tech);
 const u8* Rogue2dTechShort(u8 tech);
 extern Mode gModeRogueTechs;
+extern Mode gModeRogueRelicList;
 const u8* Rogue2dSlotName(u8 slot);
 void RogueShockwaveSmall(struct BtlObj* sora, u16 scale);
 u8 RogueActorIs(void);

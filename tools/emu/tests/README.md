@@ -59,3 +59,4 @@ on. `@gRogue.field` is the address of a field of the mod's structs.
 | `room_target.txt` | the ring on the nearest enemy of a room before the battle |
 | `flat_prizes.txt` | the prizes of a beaten enemy kept on the flat battle's line |
 | `start_pools.txt` | the pool of cards a run's deck starts from, by how far the game has been played |
+| `relic_list.txt` | the list of the run's relics with what each does, from the relics page of Memoria |

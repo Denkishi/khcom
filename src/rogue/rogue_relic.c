@@ -381,6 +381,7 @@ static const u8 sFloor[] = "Piano ";
 static const u8 sCombo[] = "  Combo+";
 static const u8 sJumps[] = "  Salti ";
 static const u8 sNone[] = "Nessuna";
+static const u8 sRelicsHow[] = "\x1DGI\xD9\x1E: cosa fanno";
 static const u8 sNoBuild[] = "Nessuna build attiva";
 static const u8 sCards[] = "Carte Lv2: ";
 static const u8 sCards3[] = "  Lv3: ";
@@ -520,6 +521,11 @@ static void RogueRelicsShowPage(void) {
         RogueRelicsLine(sWork->abandon ? sAbandonSure : sAbandon);
     } else {
         RogueRelicsLine(sTitleRelics);
+
+        if (sWork->page == 1) {
+            RogueRelicsLine(sRelicsHow);
+        }
+
         first = sWork->lineCount;
 
         // Eight to a page: the pages after the records go on with the list.
@@ -612,6 +618,12 @@ static void RogueRelics_Update(void) {
             }
 
             m4aSongNumStart(SONG_SYS_KETTEI);
+        } else if ((GetKeysPressed() & (DPAD_UP | DPAD_DOWN | DPAD_RIGHT)) && sWork->page == 1) {
+            // From the relics page: the list with what each one does.
+            m4aSongNumStart(SONG_SYS_KETTEI);
+            sWork->techs = 2;
+            FadeStartOut(0, 16);
+            sWork->state = 2;
         } else if ((GetKeysPressed() & (DPAD_UP | DPAD_DOWN)) && sWork->page == PAGE_OPTIONS) {
             // Up and down pick the option.
             u8 lines = (gRogueMeta.flags & ROGUE_META_2D) ? OPTION_LINES : 2;
@@ -645,7 +657,9 @@ static void RogueRelics_Update(void) {
         break;
     case 2:
         if (!FadeIsActive()) {
-            if (sWork->techs) {
+            if (sWork->techs == 2) {
+                ModeRequest(&gModeRogueRelicList, 0);
+            } else if (sWork->techs) {
                 ModeRequest(&gModeRogueTechs, 0);
             } else if (sWork->leave) {
                 RogueAbandonRun();

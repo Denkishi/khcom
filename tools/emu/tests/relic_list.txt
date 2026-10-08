@@ -1,0 +1,43 @@
+# The list of the run's relics, from the relics page of Memoria: four names
+# at a time, the one under the glove on a plate, and under them what it does.
+# Expect: the first picture shows the relics page with "GIÙ: cosa fanno";
+# the second the list with the first relic chosen and its two lines of text;
+# the third the list moved on by two; the last the room again.
+include start.txt
+debug relic 0
+wait 4
+debug relic 2
+wait 4
+debug relic 29
+wait 4
+debug relic 41
+wait 4
+debug relic 54
+wait 4
+debug relic 60
+wait 4
+press START
+wait 60
+press UP
+wait 12
+press UP
+wait 12
+press A
+wait 90
+press A
+wait 20
+shot /tmp/relics_1.ppm
+press DOWN
+wait 90
+shot /tmp/relics_2.ppm
+press DOWN
+wait 10
+press DOWN
+wait 10
+shot /tmp/relics_3.ppm
+press B
+wait 90
+shot /tmp/relics_4.ppm
+peek32 @gFrameCounter frames
+wait 30
+peek32 @gFrameCounter frames_later
